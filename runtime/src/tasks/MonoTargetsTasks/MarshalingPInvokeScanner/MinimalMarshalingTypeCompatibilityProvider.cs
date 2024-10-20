@@ -3,16 +3,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection.Metadata;
-using System.Reflection.Metadata.Ecma335;
 using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Reflection;
+using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
+using System.Runtime.CompilerServices;
+using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -27,7 +27,7 @@ namespace MonoTargetsTasks
     {
         Compatible,
         Incompatible,
-        Inconclusive
+        Inconclusive,
     }
 
     internal sealed class InconclusiveCompatibilityCollection
@@ -40,7 +40,7 @@ namespace MonoTargetsTasks
         {
             HashSet<string>? incAssyTypes;
 
-            if(!_data.TryGetValue(assyName, out incAssyTypes))
+            if (!_data.TryGetValue(assyName, out incAssyTypes))
             {
                 incAssyTypes = new();
                 _data.Add(assyName, incAssyTypes);
@@ -51,18 +51,19 @@ namespace MonoTargetsTasks
 
         public HashSet<string> EnumerateForAssembly(string assyName)
         {
-            if(_data.TryGetValue(assyName, out HashSet<string>? incAssyTypes))
+            if (_data.TryGetValue(assyName, out HashSet<string>? incAssyTypes))
                 return incAssyTypes!;
 
             return new HashSet<string>();
         }
     }
 
-    internal sealed class MinimalMarshalingTypeCompatibilityProvider : ISignatureTypeProvider<Compatibility, object>
+    internal sealed class MinimalMarshalingTypeCompatibilityProvider
+        : ISignatureTypeProvider<Compatibility, object>
     {
         internal MinimalMarshalingTypeCompatibilityProvider(TaskLoggingHelper log)
         {
-          _log = log;
+            _log = log;
         }
 
         private readonly TaskLoggingHelper _log;
@@ -71,35 +72,65 @@ namespace MonoTargetsTasks
         private readonly InconclusiveCompatibilityCollection _inconclusive = new();
 
         public bool IsSecondPassNeeded => !_inconclusive.IsEmpty;
-        public HashSet<string> GetInconclusiveTypesForAssembly(string assyName) => _inconclusive.EnumerateForAssembly(assyName);
 
-        public Compatibility GetArrayType(Compatibility elementType, ArrayShape shape) => Compatibility.Incompatible;
-        public Compatibility GetByReferenceType(Compatibility elementType) => Compatibility.Incompatible;
-        public Compatibility GetFunctionPointerType(MethodSignature<Compatibility> signature) => Compatibility.Compatible;
-        public Compatibility GetGenericInstantiation(Compatibility genericType, ImmutableArray<Compatibility> typeArguments) => genericType;
-        public Compatibility GetGenericMethodParameter(object genericContext, int index) => Compatibility.Incompatible;
-        public Compatibility GetGenericTypeParameter(object genericContext, int index) => Compatibility.Incompatible;
-        public Compatibility GetModifiedType(Compatibility modifier, Compatibility unmodifiedType, bool isRequired) => Compatibility.Incompatible;
+        public HashSet<string> GetInconclusiveTypesForAssembly(string assyName) =>
+            _inconclusive.EnumerateForAssembly(assyName);
+
+        public Compatibility GetArrayType(Compatibility elementType, ArrayShape shape) =>
+            Compatibility.Incompatible;
+
+        public Compatibility GetByReferenceType(Compatibility elementType) =>
+            Compatibility.Incompatible;
+
+        public Compatibility GetFunctionPointerType(MethodSignature<Compatibility> signature) =>
+            Compatibility.Compatible;
+
+        public Compatibility GetGenericInstantiation(
+            Compatibility genericType,
+            ImmutableArray<Compatibility> typeArguments
+        ) => genericType;
+
+        public Compatibility GetGenericMethodParameter(object genericContext, int index) =>
+            Compatibility.Incompatible;
+
+        public Compatibility GetGenericTypeParameter(object genericContext, int index) =>
+            Compatibility.Incompatible;
+
+        public Compatibility GetModifiedType(
+            Compatibility modifier,
+            Compatibility unmodifiedType,
+            bool isRequired
+        ) => Compatibility.Incompatible;
+
         public Compatibility GetPinnedType(Compatibility elementType) => Compatibility.Compatible;
+
         public Compatibility GetPointerType(Compatibility elementType) => Compatibility.Compatible;
+
         public Compatibility GetPrimitiveType(PrimitiveTypeCode typeCode)
         {
             return typeCode switch
             {
-            PrimitiveTypeCode.Object => Compatibility.Incompatible,
-            PrimitiveTypeCode.String => Compatibility.Incompatible,
-            PrimitiveTypeCode.TypedReference => Compatibility.Incompatible,
-            _ => Compatibility.Compatible
+                PrimitiveTypeCode.Object => Compatibility.Incompatible,
+                PrimitiveTypeCode.String => Compatibility.Incompatible,
+                PrimitiveTypeCode.TypedReference => Compatibility.Incompatible,
+                _ => Compatibility.Compatible,
             };
         }
 
-        public Compatibility GetSZArrayType(Compatibility elementType) => Compatibility.Incompatible;
+        public Compatibility GetSZArrayType(Compatibility elementType) =>
+            Compatibility.Incompatible;
 
-        public Compatibility GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte rawTypeKind)
+        public Compatibility GetTypeFromDefinition(
+            MetadataReader reader,
+            TypeDefinitionHandle handle,
+            byte rawTypeKind
+        )
         {
             TypeDefinition typeDef = reader.GetTypeDefinition(handle);
-            if (reader.GetString(typeDef.Namespace) == "System" &&
-                reader.GetString(typeDef.Name) == "Enum")
+            if (
+                reader.GetString(typeDef.Namespace) == "System"
+                && reader.GetString(typeDef.Name) == "Enum"
+            )
                 return Compatibility.Compatible;
 
             try
@@ -107,14 +138,20 @@ namespace MonoTargetsTasks
                 EntityHandle baseTypeHandle = typeDef.BaseType;
                 if (baseTypeHandle.Kind == HandleKind.TypeReference)
                 {
-                    TypeReference baseType = reader.GetTypeReference((TypeReferenceHandle)baseTypeHandle);
-                    if (reader.GetString(typeDef.Namespace) == "System" &&
-                        reader.GetString(baseType.Name) == "Enum")
+                    TypeReference baseType = reader.GetTypeReference(
+                        (TypeReferenceHandle)baseTypeHandle
+                    );
+                    if (
+                        reader.GetString(typeDef.Namespace) == "System"
+                        && reader.GetString(baseType.Name) == "Enum"
+                    )
                         return Compatibility.Compatible;
                 }
                 else if (baseTypeHandle.Kind == HandleKind.TypeSpecification)
                 {
-                    TypeSpecification specInner = reader.GetTypeSpecification((TypeSpecificationHandle)baseTypeHandle);
+                    TypeSpecification specInner = reader.GetTypeSpecification(
+                        (TypeSpecificationHandle)baseTypeHandle
+                    );
                     return specInner.DecodeSignature<Compatibility, object>(this, new object());
                 }
                 else if (baseTypeHandle.Kind == HandleKind.TypeDefinition)
@@ -124,7 +161,7 @@ namespace MonoTargetsTasks
                         return GetTypeFromDefinition(reader, handleInner, rawTypeKind);
                 }
             }
-            catch(BadImageFormatException ex)
+            catch (BadImageFormatException ex)
             {
                 _log.LogMessage(MessageImportance.Low, ex.Message);
             }
@@ -132,33 +169,54 @@ namespace MonoTargetsTasks
             return Compatibility.Incompatible;
         }
 
-        public Compatibility GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte rawTypeKind)
+        public Compatibility GetTypeFromReference(
+            MetadataReader reader,
+            TypeReferenceHandle handle,
+            byte rawTypeKind
+        )
         {
-            if (rawTypeKind == 0x11 /*ELEMENT_TYPE_VALUETYPE*/)
+            if (
+                rawTypeKind == 0x11 /*ELEMENT_TYPE_VALUETYPE*/
+            )
             {
                 TypeReference typeRef = reader.GetTypeReference(handle);
                 EntityHandle scope = typeRef.ResolutionScope;
 
                 if (scope.Kind == HandleKind.AssemblyReference)
                 {
-                    AssemblyReferenceHandle assyRefHandle = (AssemblyReferenceHandle)typeRef.ResolutionScope;
+                    AssemblyReferenceHandle assyRefHandle = (AssemblyReferenceHandle)
+                        typeRef.ResolutionScope;
                     AssemblyReference assyRef = reader.GetAssemblyReference(assyRefHandle);
 
-                    _inconclusive.Add(assyName: reader.GetString(assyRef.Name),
-                        namespaceName: reader.GetString(typeRef.Namespace), typeName: reader.GetString(typeRef.Name));
+                    _inconclusive.Add(
+                        assyName: reader.GetString(assyRef.Name),
+                        namespaceName: reader.GetString(typeRef.Namespace),
+                        typeName: reader.GetString(typeRef.Name)
+                    );
                     return Compatibility.Inconclusive;
                 }
                 else
                 {
-                    throw new NotImplementedException(string.Format("Unsupported ResolutionScope kind '{0}' used in type {1}:{2}.",
-                        scope.Kind.ToString(), reader.GetString(typeRef.Namespace), reader.GetString(typeRef.Name)));
+                    throw new NotImplementedException(
+                        string.Format(
+                            "Unsupported ResolutionScope kind '{0}' used in type {1}:{2}.",
+                            scope.Kind.ToString(),
+                            reader.GetString(typeRef.Namespace),
+                            reader.GetString(typeRef.Name)
+                        )
+                    );
                 }
             }
 
             return Compatibility.Incompatible;
         }
 
-        public Compatibility GetTypeFromSpecification(MetadataReader reader, object genericContext, TypeSpecificationHandle handle, byte rawTypeKind)
+        public Compatibility GetTypeFromSpecification(
+            MetadataReader reader,
+            object genericContext,
+            TypeSpecificationHandle handle,
+            byte rawTypeKind
+        )
         {
             TypeSpecification spec = reader.GetTypeSpecification((TypeSpecificationHandle)handle);
             return spec.DecodeSignature<Compatibility, object>(this, genericContext);

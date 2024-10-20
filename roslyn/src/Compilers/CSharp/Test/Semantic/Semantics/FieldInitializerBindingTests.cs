@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NoInitializers()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static int s1;
@@ -32,13 +33,18 @@ class C
             IEnumerable<ExpectedInitializer> expectedStaticInitializers = null;
             IEnumerable<ExpectedInitializer> expectedInstanceInitializers = null;
 
-            CompileAndCheckInitializers(source, expectedInstanceInitializers, expectedStaticInitializers);
+            CompileAndCheckInitializers(
+                source,
+                expectedInstanceInitializers,
+                expectedStaticInitializers
+            );
         }
 
         [Fact]
         public void ConstantInstanceInitializer()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static int s1;
@@ -47,18 +53,21 @@ class C
 
             IEnumerable<ExpectedInitializer> expectedStaticInitializers = null;
 
-            IEnumerable<ExpectedInitializer> expectedInstanceInitializers = new ExpectedInitializer[]
-            {
-                new ExpectedInitializer("i1", "1", lineNumber: 4),
-            };
+            IEnumerable<ExpectedInitializer> expectedInstanceInitializers =
+                new ExpectedInitializer[] { new ExpectedInitializer("i1", "1", lineNumber: 4) };
 
-            CompileAndCheckInitializers(source, expectedInstanceInitializers, expectedStaticInitializers);
+            CompileAndCheckInitializers(
+                source,
+                expectedInstanceInitializers,
+                expectedStaticInitializers
+            );
         }
 
         [Fact]
         public void ConstantStaticInitializer()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static int s1 = 1;
@@ -72,13 +81,18 @@ class C
 
             IEnumerable<ExpectedInitializer> expectedInstanceInitializers = null;
 
-            CompileAndCheckInitializers(source, expectedInstanceInitializers, expectedStaticInitializers);
+            CompileAndCheckInitializers(
+                source,
+                expectedInstanceInitializers,
+                expectedStaticInitializers
+            );
         }
 
         [Fact]
         public void ExpressionInstanceInitializer()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static int s1;
@@ -89,18 +103,24 @@ class C
 
             IEnumerable<ExpectedInitializer> expectedStaticInitializers = null;
 
-            IEnumerable<ExpectedInitializer> expectedInstanceInitializers = new ExpectedInitializer[]
-            {
-                new ExpectedInitializer("i1", "1 + Goo()", lineNumber: 4),
-            };
+            IEnumerable<ExpectedInitializer> expectedInstanceInitializers =
+                new ExpectedInitializer[]
+                {
+                    new ExpectedInitializer("i1", "1 + Goo()", lineNumber: 4),
+                };
 
-            CompileAndCheckInitializers(source, expectedInstanceInitializers, expectedStaticInitializers);
+            CompileAndCheckInitializers(
+                source,
+                expectedInstanceInitializers,
+                expectedStaticInitializers
+            );
         }
 
         [Fact]
         public void ExpressionStaticInitializer()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static int s1 = 1 + Goo();
@@ -116,13 +136,18 @@ class C
 
             IEnumerable<ExpectedInitializer> expectedInstanceInitializers = null;
 
-            CompileAndCheckInitializers(source, expectedInstanceInitializers, expectedStaticInitializers);
+            CompileAndCheckInitializers(
+                source,
+                expectedInstanceInitializers,
+                expectedStaticInitializers
+            );
         }
 
         [Fact]
         public void InitializerOrder()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static int s1 = 1;
@@ -140,20 +165,26 @@ class C
                 new ExpectedInitializer("s3", "3", lineNumber: 5),
             };
 
-            IEnumerable<ExpectedInitializer> expectedInstanceInitializers = new ExpectedInitializer[]
-            {
-                new ExpectedInitializer("i1", "1", lineNumber: 6),
-                new ExpectedInitializer("i2", "2", lineNumber: 7),
-                new ExpectedInitializer("i3", "3", lineNumber: 8),
-            };
+            IEnumerable<ExpectedInitializer> expectedInstanceInitializers =
+                new ExpectedInitializer[]
+                {
+                    new ExpectedInitializer("i1", "1", lineNumber: 6),
+                    new ExpectedInitializer("i2", "2", lineNumber: 7),
+                    new ExpectedInitializer("i3", "3", lineNumber: 8),
+                };
 
-            CompileAndCheckInitializers(source, expectedInstanceInitializers, expectedStaticInitializers);
+            CompileAndCheckInitializers(
+                source,
+                expectedInstanceInitializers,
+                expectedStaticInitializers
+            );
         }
 
         [Fact]
         public void AllPartialClasses()
         {
-            var source = @"
+            var source =
+                @"
 partial class C
 {
     static int s1 = 1;
@@ -171,19 +202,25 @@ partial class C
                 new ExpectedInitializer("s2", "2", lineNumber: 8),
             };
 
-            IEnumerable<ExpectedInitializer> expectedInstanceInitializers = new ExpectedInitializer[]
-            {
-                new ExpectedInitializer("i1", "1", lineNumber: 4),
-                new ExpectedInitializer("i2", "2", lineNumber: 9),
-            };
+            IEnumerable<ExpectedInitializer> expectedInstanceInitializers =
+                new ExpectedInitializer[]
+                {
+                    new ExpectedInitializer("i1", "1", lineNumber: 4),
+                    new ExpectedInitializer("i2", "2", lineNumber: 9),
+                };
 
-            CompileAndCheckInitializers(source, expectedInstanceInitializers, expectedStaticInitializers);
+            CompileAndCheckInitializers(
+                source,
+                expectedInstanceInitializers,
+                expectedStaticInitializers
+            );
         }
 
         [Fact]
         public void SomePartialClasses()
         {
-            var source = @"
+            var source =
+                @"
 partial class C
 {
     static int s1 = 1;
@@ -206,19 +243,25 @@ partial class C
                 new ExpectedInitializer("s2", "2", lineNumber: 8),
             };
 
-            IEnumerable<ExpectedInitializer> expectedInstanceInitializers = new ExpectedInitializer[]
-            {
-                new ExpectedInitializer("i1", "1", lineNumber: 4),
-                new ExpectedInitializer("i2", "2", lineNumber: 9),
-            };
+            IEnumerable<ExpectedInitializer> expectedInstanceInitializers =
+                new ExpectedInitializer[]
+                {
+                    new ExpectedInitializer("i1", "1", lineNumber: 4),
+                    new ExpectedInitializer("i2", "2", lineNumber: 9),
+                };
 
-            CompileAndCheckInitializers(source, expectedInstanceInitializers, expectedStaticInitializers);
+            CompileAndCheckInitializers(
+                source,
+                expectedInstanceInitializers,
+                expectedStaticInitializers
+            );
         }
 
         [Fact]
         public void Events()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static event System.Action e = MakeAction(1);
@@ -232,28 +275,59 @@ class C
                 new ExpectedInitializer("e", "MakeAction(1)", lineNumber: 3),
             };
 
-            IEnumerable<ExpectedInitializer> expectedInstanceInitializers = new ExpectedInitializer[]
-            {
-                new ExpectedInitializer("f", "MakeAction(2)", lineNumber: 4),
-            };
+            IEnumerable<ExpectedInitializer> expectedInstanceInitializers =
+                new ExpectedInitializer[]
+                {
+                    new ExpectedInitializer("f", "MakeAction(2)", lineNumber: 4),
+                };
 
-            CompileAndCheckInitializers(source, expectedInstanceInitializers, expectedStaticInitializers);
+            CompileAndCheckInitializers(
+                source,
+                expectedInstanceInitializers,
+                expectedStaticInitializers
+            );
         }
 
-        private static void CompileAndCheckInitializers(string source, IEnumerable<ExpectedInitializer> expectedInstanceInitializers, IEnumerable<ExpectedInitializer> expectedStaticInitializers)
+        private static void CompileAndCheckInitializers(
+            string source,
+            IEnumerable<ExpectedInitializer> expectedInstanceInitializers,
+            IEnumerable<ExpectedInitializer> expectedStaticInitializers
+        )
         {
             var compilation = CreateCompilation(source);
             var syntaxTree = compilation.SyntaxTrees.First();
-            var typeSymbol = (SourceNamedTypeSymbol)compilation.GlobalNamespace.GetMembers("C").Single();
+            var typeSymbol = (SourceNamedTypeSymbol)
+                compilation.GlobalNamespace.GetMembers("C").Single();
 
-            var boundInstanceInitializers = BindInitializersWithoutDiagnostics(typeSymbol, typeSymbol.InstanceInitializers);
-            CheckBoundInitializers(expectedInstanceInitializers, syntaxTree, boundInstanceInitializers, isStatic: false);
+            var boundInstanceInitializers = BindInitializersWithoutDiagnostics(
+                typeSymbol,
+                typeSymbol.InstanceInitializers
+            );
+            CheckBoundInitializers(
+                expectedInstanceInitializers,
+                syntaxTree,
+                boundInstanceInitializers,
+                isStatic: false
+            );
 
-            var boundStaticInitializers = BindInitializersWithoutDiagnostics(typeSymbol, typeSymbol.StaticInitializers);
-            CheckBoundInitializers(expectedStaticInitializers, syntaxTree, boundStaticInitializers, isStatic: true);
+            var boundStaticInitializers = BindInitializersWithoutDiagnostics(
+                typeSymbol,
+                typeSymbol.StaticInitializers
+            );
+            CheckBoundInitializers(
+                expectedStaticInitializers,
+                syntaxTree,
+                boundStaticInitializers,
+                isStatic: true
+            );
         }
 
-        private static void CheckBoundInitializers(IEnumerable<ExpectedInitializer> expectedInitializers, SyntaxTree syntaxTree, ImmutableArray<BoundInitializer> boundInitializers, bool isStatic)
+        private static void CheckBoundInitializers(
+            IEnumerable<ExpectedInitializer> expectedInitializers,
+            SyntaxTree syntaxTree,
+            ImmutableArray<BoundInitializer> boundInitializers,
+            bool isStatic
+        )
         {
             if (expectedInitializers == null)
             {
@@ -261,7 +335,10 @@ class C
             }
             else
             {
-                Assert.True(!boundInitializers.IsEmpty, "Expected non-null non-empty bound initializers");
+                Assert.True(
+                    !boundInitializers.IsEmpty,
+                    "Expected non-null non-empty bound initializers"
+                );
 
                 int numInitializers = expectedInitializers.Count();
 
@@ -279,7 +356,9 @@ class C
                     Assert.Same(initValueSyntax.Parent, boundInit.Syntax);
                     Assert.Equal(expectedInitializer.InitialValue, initValueSyntax.ToFullString());
 
-                    var initValueLineNumber = syntaxTree.GetLineSpan(initValueSyntax.Span).StartLinePosition.Line;
+                    var initValueLineNumber = syntaxTree
+                        .GetLineSpan(initValueSyntax.Span)
+                        .StartLinePosition.Line;
                     Assert.Equal(expectedInitializer.LineNumber, initValueLineNumber);
 
                     Assert.Equal(expectedInitializer.FieldName, boundFieldInit.Field.Name);
@@ -287,9 +366,15 @@ class C
             }
         }
 
-        private static ImmutableArray<BoundInitializer> BindInitializersWithoutDiagnostics(SourceNamedTypeSymbol typeSymbol, ImmutableArray<ImmutableArray<FieldOrPropertyInitializer>> initializers)
+        private static ImmutableArray<BoundInitializer> BindInitializersWithoutDiagnostics(
+            SourceNamedTypeSymbol typeSymbol,
+            ImmutableArray<ImmutableArray<FieldOrPropertyInitializer>> initializers
+        )
         {
-            var diagnostics = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
+            var diagnostics = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
             ImportChain unused;
             var boundInitializers = ArrayBuilder<BoundInitializer>.GetInstance();
             Binder.BindRegularCSharpFieldInitializers(
@@ -297,7 +382,8 @@ class C
                 initializers,
                 boundInitializers,
                 diagnostics,
-                firstDebugImports: out unused);
+                firstDebugImports: out unused
+            );
             diagnostics.DiagnosticBag.Verify();
             diagnostics.Free();
             return boundInitializers.ToImmutableAndFree();

@@ -7,8 +7,8 @@ using System.Net.WebSockets;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Hosting;
 
 namespace Interop.FunctionalTests;
@@ -24,20 +24,93 @@ public class Http2WebSocketInteropTests : LoggedTest
         get
         {
             var list = new List<object[]>()
+            {
+                new object[]
                 {
-                    new object[] { "http", "1.1", HttpVersionPolicy.RequestVersionExact, HttpProtocols.Http1, "HTTP/1.1" },
-                    new object[] { "http", "2.0", HttpVersionPolicy.RequestVersionExact, HttpProtocols.Http2, "HTTP/2" },
-                    new object[] { "http", "1.1", HttpVersionPolicy.RequestVersionOrHigher, HttpProtocols.Http1AndHttp2, "HTTP/1.1" }, // No TLS/APLN, Can't upgrade
-                    new object[] { "http", "2.0", HttpVersionPolicy.RequestVersionOrLower, HttpProtocols.Http1AndHttp2, "HTTP/1.1" }, // No TLS/APLN, Downgrade
-                };
+                    "http",
+                    "1.1",
+                    HttpVersionPolicy.RequestVersionExact,
+                    HttpProtocols.Http1,
+                    "HTTP/1.1",
+                },
+                new object[]
+                {
+                    "http",
+                    "2.0",
+                    HttpVersionPolicy.RequestVersionExact,
+                    HttpProtocols.Http2,
+                    "HTTP/2",
+                },
+                new object[]
+                {
+                    "http",
+                    "1.1",
+                    HttpVersionPolicy.RequestVersionOrHigher,
+                    HttpProtocols.Http1AndHttp2,
+                    "HTTP/1.1",
+                }, // No TLS/APLN, Can't upgrade
+                new object[]
+                {
+                    "http",
+                    "2.0",
+                    HttpVersionPolicy.RequestVersionOrLower,
+                    HttpProtocols.Http1AndHttp2,
+                    "HTTP/1.1",
+                }, // No TLS/APLN, Downgrade
+            };
 
             if (Utilities.CurrentPlatformSupportsHTTP2OverTls())
             {
-                list.Add(new object[] { "https", "1.1", HttpVersionPolicy.RequestVersionExact, HttpProtocols.Http1, "HTTP/1.1" });
-                list.Add(new object[] { "https", "2.0", HttpVersionPolicy.RequestVersionExact, HttpProtocols.Http2, "HTTP/2" });
-                list.Add(new object[] { "https", "1.1", HttpVersionPolicy.RequestVersionOrHigher, HttpProtocols.Http1AndHttp2, "HTTP/2" }); // Upgrade
-                list.Add(new object[] { "https", "2.0", HttpVersionPolicy.RequestVersionOrLower, HttpProtocols.Http1AndHttp2, "HTTP/2" });
-                list.Add(new object[] { "https", "2.0", HttpVersionPolicy.RequestVersionOrLower, HttpProtocols.Http1, "HTTP/1.1" }); // Downgrade
+                list.Add(
+                    new object[]
+                    {
+                        "https",
+                        "1.1",
+                        HttpVersionPolicy.RequestVersionExact,
+                        HttpProtocols.Http1,
+                        "HTTP/1.1",
+                    }
+                );
+                list.Add(
+                    new object[]
+                    {
+                        "https",
+                        "2.0",
+                        HttpVersionPolicy.RequestVersionExact,
+                        HttpProtocols.Http2,
+                        "HTTP/2",
+                    }
+                );
+                list.Add(
+                    new object[]
+                    {
+                        "https",
+                        "1.1",
+                        HttpVersionPolicy.RequestVersionOrHigher,
+                        HttpProtocols.Http1AndHttp2,
+                        "HTTP/2",
+                    }
+                ); // Upgrade
+                list.Add(
+                    new object[]
+                    {
+                        "https",
+                        "2.0",
+                        HttpVersionPolicy.RequestVersionOrLower,
+                        HttpProtocols.Http1AndHttp2,
+                        "HTTP/2",
+                    }
+                );
+                list.Add(
+                    new object[]
+                    {
+                        "https",
+                        "2.0",
+                        HttpVersionPolicy.RequestVersionOrLower,
+                        HttpProtocols.Http1,
+                        "HTTP/1.1",
+                    }
+                ); // Downgrade
             }
 
             return list;
@@ -46,13 +119,19 @@ public class Http2WebSocketInteropTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(NegotiationScenarios))]
-    public async Task HttpVersionNegotationWorks(string scheme, string clientVersion, HttpVersionPolicy clientPolicy, HttpProtocols serverProtocols, string expectedVersion)
+    public async Task HttpVersionNegotationWorks(
+        string scheme,
+        string clientVersion,
+        HttpVersionPolicy clientPolicy,
+        HttpProtocols serverProtocols,
+        string expectedVersion
+    )
     {
-        var hostBuilder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                ConfigureKestrel(webHostBuilder, scheme, serverProtocols);
-                webHostBuilder.ConfigureServices(AddTestLogging)
+        var hostBuilder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            ConfigureKestrel(webHostBuilder, scheme, serverProtocols);
+            webHostBuilder
+                .ConfigureServices(AddTestLogging)
                 .Configure(app =>
                 {
                     app.UseWebSockets();
@@ -67,11 +146,20 @@ public class Http2WebSocketInteropTests : LoggedTest
                         Assert.Equal(WebSocketMessageType.Text, result.MessageType);
                         Assert.Equal("Hello", Encoding.UTF8.GetString(bytes, 0, result.Count));
 
-                        await ws.SendAsync(Encoding.UTF8.GetBytes("Hi there"), WebSocketMessageType.Text, endOfMessage: true, default);
-                        await ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Server closed", default);
+                        await ws.SendAsync(
+                            Encoding.UTF8.GetBytes("Hi there"),
+                            WebSocketMessageType.Text,
+                            endOfMessage: true,
+                            default
+                        );
+                        await ws.CloseAsync(
+                            WebSocketCloseStatus.NormalClosure,
+                            "Server closed",
+                            default
+                        );
                     });
                 });
-            });
+        });
         using var host = await hostBuilder.StartAsync().DefaultTimeout();
 
         var url = host.MakeUrl(scheme == "http" ? "ws" : "wss");
@@ -81,9 +169,17 @@ public class Http2WebSocketInteropTests : LoggedTest
         wsClient.Options.HttpVersionPolicy = clientPolicy;
         wsClient.Options.CollectHttpResponseDetails = true;
         await wsClient.ConnectAsync(new Uri(url), client, default);
-        Assert.Equal(expectedVersion == "HTTP/2" ? HttpStatusCode.OK : HttpStatusCode.SwitchingProtocols, wsClient.HttpStatusCode);
+        Assert.Equal(
+            expectedVersion == "HTTP/2" ? HttpStatusCode.OK : HttpStatusCode.SwitchingProtocols,
+            wsClient.HttpStatusCode
+        );
 
-        await wsClient.SendAsync(Encoding.UTF8.GetBytes("Hello"), WebSocketMessageType.Text, endOfMessage: true, default);
+        await wsClient.SendAsync(
+            Encoding.UTF8.GetBytes("Hello"),
+            WebSocketMessageType.Text,
+            endOfMessage: true,
+            default
+        );
 
         var bytes = new byte[1024];
         var result = await wsClient.ReceiveAsync(bytes, default);
@@ -97,23 +193,32 @@ public class Http2WebSocketInteropTests : LoggedTest
     private static HttpClient CreateClient()
     {
         var handler = new HttpClientHandler();
-        handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+        handler.ServerCertificateCustomValidationCallback =
+            HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
         var client = new HttpClient(handler);
         return client;
     }
 
-    private static void ConfigureKestrel(IWebHostBuilder webHostBuilder, string scheme, HttpProtocols protocols)
+    private static void ConfigureKestrel(
+        IWebHostBuilder webHostBuilder,
+        string scheme,
+        HttpProtocols protocols
+    )
     {
         webHostBuilder.UseKestrel(options =>
         {
-            options.Listen(IPAddress.Loopback, 0, listenOptions =>
-            {
-                listenOptions.Protocols = protocols;
-                if (scheme == "https")
+            options.Listen(
+                IPAddress.Loopback,
+                0,
+                listenOptions =>
                 {
-                    listenOptions.UseHttps(TestResources.GetTestCertificate());
+                    listenOptions.Protocols = protocols;
+                    if (scheme == "https")
+                    {
+                        listenOptions.UseHttps(TestResources.GetTestCertificate());
+                    }
                 }
-            });
+            );
         });
     }
 }

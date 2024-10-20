@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,27 +28,32 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
+using System.Reflection;
 using System.Windows.Forms;
 using System.Windows.Forms.Layout;
-using System.Reflection;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Windows.Forms.Layout
 {
-	[TestFixture]
-	public class ArrangedElementCollectionTest : TestHelper
-	{
-		
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void IList_InsertTest ()
-		{
-			ArrangedElementCollection c = (ArrangedElementCollection) typeof (ArrangedElementCollection).GetConstructor (BindingFlags.NonPublic | BindingFlags.Instance, null, Type.EmptyTypes, null).Invoke (null);
-			IList list = c;
-			
-			list.Insert (0, new object ());
-		}
-	}
+    [TestFixture]
+    public class ArrangedElementCollectionTest : TestHelper
+    {
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void IList_InsertTest()
+        {
+            ArrangedElementCollection c = (ArrangedElementCollection)
+                typeof(ArrangedElementCollection)
+                    .GetConstructor(
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        null,
+                        Type.EmptyTypes,
+                        null
+                    )
+                    .Invoke(null);
+            IList list = c;
+
+            list.Insert(0, new object());
+        }
+    }
 }
-	

@@ -16,7 +16,10 @@ public class JwtStore
     public JwtStore(string userSecretsId, Program program = null)
     {
         _userSecretsId = userSecretsId;
-        _filePath = Path.Combine(Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(userSecretsId)), FileName);
+        _filePath = Path.Combine(
+            Path.GetDirectoryName(PathHelper.GetSecretsPathFromSecretsId(userSecretsId)),
+            FileName
+        );
         Load();
 
         // For testing.
@@ -35,7 +38,9 @@ public class JwtStore
             using var fileStream = new FileStream(_filePath, FileMode.Open, FileAccess.Read);
             if (fileStream.Length > 0)
             {
-                Jwts = JsonSerializer.Deserialize<IDictionary<string, Jwt>>(fileStream) ?? new Dictionary<string, Jwt>();
+                Jwts =
+                    JsonSerializer.Deserialize<IDictionary<string, Jwt>>(fileStream)
+                    ?? new Dictionary<string, Jwt>();
             }
         }
     }

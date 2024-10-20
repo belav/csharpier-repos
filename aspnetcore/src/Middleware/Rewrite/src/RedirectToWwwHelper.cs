@@ -49,7 +49,8 @@ internal static class RedirectToWwwHelper
             newHost,
             request.PathBase,
             request.Path,
-            request.QueryString);
+            request.QueryString
+        );
 
         response.StatusCode = statusCode;
         response.Headers.Location = newUrl;

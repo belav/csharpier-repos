@@ -21,11 +21,14 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
     public RelationalQueryTranslationPostprocessor(
         QueryTranslationPostprocessorDependencies dependencies,
         RelationalQueryTranslationPostprocessorDependencies relationalDependencies,
-        QueryCompilationContext queryCompilationContext)
+        QueryCompilationContext queryCompilationContext
+    )
         : base(dependencies, queryCompilationContext)
     {
         RelationalDependencies = relationalDependencies;
-        _useRelationalNulls = RelationalOptionsExtension.Extract(queryCompilationContext.ContextOptions).UseRelationalNulls;
+        _useRelationalNulls = RelationalOptionsExtension
+            .Extract(queryCompilationContext.ContextOptions)
+            .UseRelationalNulls;
     }
 
     /// <summary>
@@ -38,7 +41,8 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
     {
         query = base.Process(query);
         query = new SelectExpressionProjectionApplyingExpressionVisitor(
-            ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior).Visit(query);
+            ((RelationalQueryCompilationContext)QueryCompilationContext).QuerySplittingBehavior
+        ).Visit(query);
         query = new SelectExpressionPruningExpressionVisitor().Visit(query);
 
 #if DEBUG
@@ -49,9 +53,13 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
         new TableAliasVerifyingExpressionVisitor().Visit(query);
 #endif
 
-        query = new SqlExpressionSimplifyingExpressionVisitor(RelationalDependencies.SqlExpressionFactory, _useRelationalNulls)
-            .Visit(query);
-        query = new RelationalValueConverterCompensatingExpressionVisitor(RelationalDependencies.SqlExpressionFactory).Visit(query);
+        query = new SqlExpressionSimplifyingExpressionVisitor(
+            RelationalDependencies.SqlExpressionFactory,
+            _useRelationalNulls
+        ).Visit(query);
+        query = new RelationalValueConverterCompensatingExpressionVisitor(
+            RelationalDependencies.SqlExpressionFactory
+        ).Visit(query);
 
         return query;
     }
@@ -95,7 +103,9 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
                     return shapedQueryExpression;
 
                 case RelationalSplitCollectionShaperExpression relationalSplitCollectionShaperExpression:
-                    VerifyUniqueAliasInExpression(relationalSplitCollectionShaperExpression.SelectExpression);
+                    VerifyUniqueAliasInExpression(
+                        relationalSplitCollectionShaperExpression.SelectExpression
+                    );
                     Visit(relationalSplitCollectionShaperExpression.InnerShaper);
                     return relationalSplitCollectionShaperExpression;
 
@@ -108,13 +118,14 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
             }
         }
 
-        private void VerifyUniqueAliasInExpression(Expression expression)
-            => _scopedVisitor.EntryPoint(expression);
+        private void VerifyUniqueAliasInExpression(Expression expression) =>
+            _scopedVisitor.EntryPoint(expression);
 
         private sealed class ScopedVisitor : ExpressionVisitor
         {
             private readonly HashSet<string> _usedAliases = new(StringComparer.OrdinalIgnoreCase);
-            private readonly HashSet<TableExpressionBase> _visitedTableExpressionBases = new(ReferenceEqualityComparer.Instance);
+            private readonly HashSet<TableExpressionBase> _visitedTableExpressionBases =
+                new(ReferenceEqualityComparer.Instance);
 
             public Expression EntryPoint(Expression expression)
             {
@@ -138,10 +149,17 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
                         continue;
                     }
 
-                    var numbers = group.OrderBy(e => e).Skip(1).Select(e => int.Parse(e[1..])).OrderBy(e => e).ToList();
+                    var numbers = group
+                        .OrderBy(e => e)
+                        .Skip(1)
+                        .Select(e => int.Parse(e[1..]))
+                        .OrderBy(e => e)
+                        .ToList();
                     if (numbers.Count - 1 != numbers[^1])
                     {
-                        throw new InvalidOperationException($"Missing alias in the list: {string.Join(",", group.Select(e => e))}");
+                        throw new InvalidOperationException(
+                            $"Missing alias in the list: {string.Join(",", group.Select(e => e))}"
+                        );
                     }
                 }
 
@@ -152,13 +170,17 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
             public override Expression? Visit(Expression? expression)
             {
                 var visitedExpression = base.Visit(expression);
-                if (visitedExpression is TableExpressionBase tableExpressionBase
+                if (
+                    visitedExpression is TableExpressionBase tableExpressionBase
                     && !_visitedTableExpressionBases.Contains(tableExpressionBase)
-                    && tableExpressionBase.Alias != null)
+                    && tableExpressionBase.Alias != null
+                )
                 {
                     if (_usedAliases.Contains(tableExpressionBase.Alias))
                     {
-                        throw new InvalidOperationException($"Duplicate alias: {tableExpressionBase.Alias}");
+                        throw new InvalidOperationException(
+                            $"Duplicate alias: {tableExpressionBase.Alias}"
+                        );
                     }
 
                     _usedAliases.Add(tableExpressionBase.Alias);

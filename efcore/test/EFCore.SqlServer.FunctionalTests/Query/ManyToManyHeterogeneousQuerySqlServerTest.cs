@@ -5,10 +5,10 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class ManyToManyHeterogeneousQuerySqlServerTest : ManyToManyHeterogeneousQueryRelationalTestBase
+public class ManyToManyHeterogeneousQuerySqlServerTest
+    : ManyToManyHeterogeneousQueryRelationalTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     public override async Task Many_to_many_load_works_when_join_entity_has_custom_key(bool async)
     {
@@ -69,6 +69,7 @@ LEFT JOIN (
 ) AS [t0] ON [t].[Id] = [t0].[ManyM_Id]
 WHERE [m].[Id] = @__p_0
 ORDER BY [m].[Id], [t].[Id0], [t].[Id], [t0].[Id]
-""");
+"""
+        );
     }
 }

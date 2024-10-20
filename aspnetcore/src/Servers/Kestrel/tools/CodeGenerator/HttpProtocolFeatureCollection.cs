@@ -42,7 +42,7 @@ public class HttpProtocolFeatureCollection
             "IHttpWebSocketFeature",
             "IHttpWebTransportFeature",
             "IBadRequestExceptionFeature",
-            "IHttpRequestTimeoutFeature"
+            "IHttpRequestTimeoutFeature",
         };
         var maybeFeatures = new[]
         {
@@ -54,7 +54,7 @@ public class HttpProtocolFeatureCollection
             "IHttpBodyControlFeature",
             "IHttpRequestBodyDetectionFeature",
             "IHttpResetFeature",
-            "IPersistentStateFeature"
+            "IPersistentStateFeature",
         };
 
         var allFeatures = alwaysFeatures
@@ -83,10 +83,11 @@ public class HttpProtocolFeatureCollection
             "IHttpMaxRequestBodySizeFeature",
             "IHttpRequestBodyDetectionFeature",
             "IHttpWebTransportFeature",
-            "IBadRequestExceptionFeature"
+            "IBadRequestExceptionFeature",
         };
 
-        var usings = $@"
+        var usings =
+            $@"
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Features.Authentication;
@@ -101,6 +102,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
             allFeatures: allFeatures,
             implementedFeatures: implementedFeatures,
             extraUsings: usings,
-            fallbackFeatures: "ConnectionFeatures");
+            fallbackFeatures: "ConnectionFeatures"
+        );
     }
 }

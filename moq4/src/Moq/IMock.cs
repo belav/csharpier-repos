@@ -7,7 +7,8 @@ namespace Moq
     /// Covariant interface for <see cref="Mock{T}"/> such that casts between IMock&lt;Employee&gt; to IMock&lt;Person&gt;
     /// are possible. Only covers the covariant members of <see cref="Mock{T}"/>.
     /// </summary>
-    public interface IMock<out T> where T : class
+    public interface IMock<out T>
+        where T : class
     {
         /// <summary>
         ///   Exposes the mocked object instance.

@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class X<K> 
+public class X<K>
 {
     public X(K k1)
     {
@@ -28,7 +28,7 @@ public class B
     {
         X<int> a = null;
         bool result = false;
-        try 
+        try
         {
             X<int>.Test(a);
         }

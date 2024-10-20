@@ -23,10 +23,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
-using System.ComponentModel;
 using System.Collections;
-
+using System.ComponentModel;
+using Xunit;
 
 namespace System.Data.Tests
 {
@@ -61,8 +60,16 @@ namespace System.Data.Tests
             DataSet ds = GetDataSet();
             DataRelation[] relArray = new DataRelation[2];
 
-            relArray[0] = new DataRelation("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            relArray[1] = new DataRelation("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
+            relArray[0] = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
+            relArray[1] = new DataRelation(
+                "rel2",
+                ds.Tables[0].Columns["String1"],
+                ds.Tables[1].Columns["String1"]
+            );
 
             ds.Relations.AddRange(relArray);
 
@@ -92,7 +99,11 @@ namespace System.Data.Tests
         public void Add_ByNameDataColumns()
         {
             DataSet ds = GetDataSet();
-            ds.Relations.Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
+            ds.Relations.Add(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
 
             Assert.Equal(1, ds.Relations.Count);
 
@@ -111,7 +122,12 @@ namespace System.Data.Tests
         public void Add_ByNameDataColumnsWithConstraint()
         {
             DataSet ds = GetDataSet();
-            ds.Relations.Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"], true);
+            ds.Relations.Add(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"],
+                true
+            );
 
             Assert.Equal(1, ds.Relations.Count);
 
@@ -125,11 +141,17 @@ namespace System.Data.Tests
             Assert.Equal("rel1", ds.Tables[0].ChildRelations[0].RelationName);
             Assert.Equal("rel1", ds.Tables[1].ParentRelations[0].RelationName);
         }
+
         [Fact]
         public void Add_ByNameDataColumnsWithOutConstraint()
         {
             DataSet ds = GetDataSet();
-            ds.Relations.Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"], false);
+            ds.Relations.Add(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"],
+                false
+            );
 
             Assert.Equal(1, ds.Relations.Count);
 
@@ -154,14 +176,18 @@ namespace System.Data.Tests
             Assert.True(ds.Tables[1].ParentRelations.CanRemove(ds.Tables[1].ParentRelations[0]));
             Assert.False(ds.Relations.CanRemove(null));
         }
+
         [Fact]
         public void CanRemove_DataRelation()
         {
             DataSet ds = GetDataSet();
             DataSet ds1 = GetDataSet();
 
-            DataRelation rel = new DataRelation("rel1",
-                ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
+            DataRelation rel = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
 
             Assert.False(ds1.Relations.CanRemove(rel));
         }
@@ -172,7 +198,9 @@ namespace System.Data.Tests
             DataSet ds = GetDataSet();
 
             ds.Relations.Add(ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(Relations_CollectionChanged);
+            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
+                Relations_CollectionChanged
+            );
             ds.Relations.Clear();
             Assert.Equal(0, ds.Relations.Count);
             Assert.Equal(1, _changesCounter);
@@ -186,10 +214,15 @@ namespace System.Data.Tests
         {
             DataSet ds = GetDataSet();
 
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(Relations_CollectionChanged);
+            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
+                Relations_CollectionChanged
+            );
 
-            DataRelation rel = new DataRelation("rel1", ds.Tables[0].Columns["ParentId"]
-                , ds.Tables[1].Columns["ParentId"]);
+            DataRelation rel = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
 
             ds.Relations.Add(rel);
 
@@ -202,7 +235,11 @@ namespace System.Data.Tests
         public void Contains()
         {
             DataSet ds = GetDataSet();
-            ds.Relations.Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
+            ds.Relations.Add(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
 
             Assert.True(ds.Relations.Contains("rel1"));
             Assert.False(ds.Relations.Contains("RelL"));
@@ -216,7 +253,13 @@ namespace System.Data.Tests
 
             DataRelation[] dataRelArray = new DataRelation[2];
 
-            ds.Relations.Add(new DataRelation("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]));
+            ds.Relations.Add(
+                new DataRelation(
+                    "rel1",
+                    ds.Tables[0].Columns["ParentId"],
+                    ds.Tables[1].Columns["ParentId"]
+                )
+            );
 
             ds.Relations.CopyTo(dataRelArray, 1);
 
@@ -232,9 +275,17 @@ namespace System.Data.Tests
         {
             DataSet ds = GetDataSet();
             Assert.Equal(0, ds.Relations.Count);
-            ds.Relations.Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
+            ds.Relations.Add(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
             Assert.Equal(1, ds.Relations.Count);
-            ds.Relations.Add("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
+            ds.Relations.Add(
+                "rel2",
+                ds.Tables[0].Columns["String1"],
+                ds.Tables[1].Columns["String1"]
+            );
             Assert.Equal(2, ds.Relations.Count);
             ds.Relations.Remove("rel2");
             Assert.Equal(1, ds.Relations.Count);
@@ -247,15 +298,26 @@ namespace System.Data.Tests
         {
             DataSet ds = GetDataSet();
             int counter = 0;
-            ds.Relations.Add("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            ds.Relations.Add("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
+            ds.Relations.Add(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
+            ds.Relations.Add(
+                "rel2",
+                ds.Tables[0].Columns["String1"],
+                ds.Tables[1].Columns["String1"]
+            );
 
             IEnumerator myEnumerator = ds.Relations.GetEnumerator();
 
             while (myEnumerator.MoveNext())
             {
                 counter++;
-                Assert.Equal("rel", ((DataRelation)myEnumerator.Current).RelationName.Substring(0, 3));
+                Assert.Equal(
+                    "rel",
+                    ((DataRelation)myEnumerator.Current).RelationName.Substring(0, 3)
+                );
             }
             Assert.Equal(2, counter);
         }
@@ -266,9 +328,21 @@ namespace System.Data.Tests
             DataSet ds = GetDataSet();
             DataSet ds1 = GetDataSet();
 
-            DataRelation rel1 = new DataRelation("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            DataRelation rel2 = new DataRelation("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
-            DataRelation rel3 = new DataRelation("rel3", ds1.Tables[0].Columns["ParentId"], ds1.Tables[1].Columns["ParentId"]);
+            DataRelation rel1 = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
+            DataRelation rel2 = new DataRelation(
+                "rel2",
+                ds.Tables[0].Columns["String1"],
+                ds.Tables[1].Columns["String1"]
+            );
+            DataRelation rel3 = new DataRelation(
+                "rel3",
+                ds1.Tables[0].Columns["ParentId"],
+                ds1.Tables[1].Columns["ParentId"]
+            );
 
             ds.Relations.Add(rel1);
             ds.Relations.Add(rel2);
@@ -285,9 +359,21 @@ namespace System.Data.Tests
             DataSet ds = GetDataSet();
             DataSet ds1 = GetDataSet();
 
-            DataRelation rel1 = new DataRelation("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            DataRelation rel2 = new DataRelation("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
-            DataRelation rel3 = new DataRelation("rel3", ds1.Tables[0].Columns["ParentId"], ds1.Tables[1].Columns["ParentId"]);
+            DataRelation rel1 = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
+            DataRelation rel2 = new DataRelation(
+                "rel2",
+                ds.Tables[0].Columns["String1"],
+                ds.Tables[1].Columns["String1"]
+            );
+            DataRelation rel3 = new DataRelation(
+                "rel3",
+                ds1.Tables[0].Columns["ParentId"],
+                ds1.Tables[1].Columns["ParentId"]
+            );
 
             ds.Relations.Add(rel1);
             ds.Relations.Add(rel2);
@@ -302,8 +388,16 @@ namespace System.Data.Tests
         public void Item()
         {
             DataSet ds = GetDataSet();
-            DataRelation rel1 = new DataRelation("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            DataRelation rel2 = new DataRelation("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
+            DataRelation rel1 = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
+            DataRelation rel2 = new DataRelation(
+                "rel2",
+                ds.Tables[0].Columns["String1"],
+                ds.Tables[1].Columns["String1"]
+            );
 
             ds.Relations.Add(rel1);
             ds.Relations.Add(rel2);
@@ -320,8 +414,11 @@ namespace System.Data.Tests
             DataSet ds = DataProvider.CreateForeignConstraint();
             int originalRelationsCount = ds.Relations.Count;
 
-            DataRelation rel = new DataRelation("rel1", ds.Tables[0].Columns["ParentId"]
-                , ds.Tables[1].Columns["ParentId"]);
+            DataRelation rel = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
 
             ds.Relations.Add(rel);
 
@@ -333,10 +430,13 @@ namespace System.Data.Tests
             Assert.Equal(typeof(UniqueConstraint), ds.Tables[0].Constraints[0].GetType());
             Assert.Equal(typeof(ForeignKeyConstraint), ds.Tables[1].Constraints[0].GetType());
 
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                ds.Relations.Add(rel);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    ds.Relations.Add(rel);
+                }
+            );
 
             ds.Relations.Add(null);
         }
@@ -348,7 +448,9 @@ namespace System.Data.Tests
             DataTable dt1 = ds.Tables[0];
             DataTable dt2 = ds.Tables[1];
 
-            dt1.ChildRelations.Add(new DataRelation("rel1", dt1.Columns["ParentId"], dt2.Columns["ParentId"]));
+            dt1.ChildRelations.Add(
+                new DataRelation("rel1", dt1.Columns["ParentId"], dt2.Columns["ParentId"])
+            );
 
             Assert.Equal(1, dt1.ChildRelations.Count);
             Assert.Equal(1, dt2.ParentRelations.Count);
@@ -360,7 +462,14 @@ namespace System.Data.Tests
         {
             DataSet ds = GetDataSet();
 
-            ds.Tables[1].ParentRelations.Add(new DataRelation("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]));
+            ds.Tables[1]
+                .ParentRelations.Add(
+                    new DataRelation(
+                        "rel1",
+                        ds.Tables[0].Columns["ParentId"],
+                        ds.Tables[1].Columns["ParentId"]
+                    )
+                );
 
             Assert.Equal(1, ds.Tables[0].ChildRelations.Count);
             Assert.Equal(1, ds.Tables[1].ParentRelations.Count);
@@ -384,15 +493,25 @@ namespace System.Data.Tests
         {
             DataSet ds = GetDataSet();
             DataSet ds1 = GetDataSet();
-            DataRelation rel1 = new DataRelation("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            DataRelation rel2 = new DataRelation("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
+            DataRelation rel1 = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
+            DataRelation rel2 = new DataRelation(
+                "rel2",
+                ds.Tables[0].Columns["String1"],
+                ds.Tables[1].Columns["String1"]
+            );
 
             ds.Relations.Add(rel1);
             ds.Relations.Add(rel2);
 
             Assert.Equal(2, ds.Relations.Count);
 
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(Relations_CollectionChanged);
+            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
+                Relations_CollectionChanged
+            );
             //Perform remove
 
             ds.Relations.Remove(rel1);
@@ -403,11 +522,18 @@ namespace System.Data.Tests
             Assert.Equal(2, _changesCounter);
             ds.Relations.Remove((DataRelation)null);
 
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataRelation rel3 = new DataRelation("rel3", ds1.Tables[0].Columns["ParentId"], ds1.Tables[1].Columns["ParentId"]);
-                ds.Relations.Remove(rel3);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataRelation rel3 = new DataRelation(
+                        "rel3",
+                        ds1.Tables[0].Columns["ParentId"],
+                        ds1.Tables[1].Columns["ParentId"]
+                    );
+                    ds.Relations.Remove(rel3);
+                }
+            );
         }
 
         [Fact]
@@ -415,15 +541,25 @@ namespace System.Data.Tests
         {
             DataSet ds = GetDataSet();
             DataSet ds1 = GetDataSet();
-            DataRelation rel1 = new DataRelation("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            DataRelation rel2 = new DataRelation("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
+            DataRelation rel1 = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
+            DataRelation rel2 = new DataRelation(
+                "rel2",
+                ds.Tables[0].Columns["String1"],
+                ds.Tables[1].Columns["String1"]
+            );
 
             ds.Relations.Add(rel1);
             ds.Relations.Add(rel2);
 
             Assert.Equal(2, ds.Relations.Count);
 
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(Relations_CollectionChanged);
+            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
+                Relations_CollectionChanged
+            );
             //Perform remove
 
             ds.Relations.Remove("rel1");
@@ -433,15 +569,21 @@ namespace System.Data.Tests
             Assert.Equal(0, ds.Relations.Count);
             Assert.Equal(2, _changesCounter);
 
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                ds.Relations.Remove((string)null);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    ds.Relations.Remove((string)null);
+                }
+            );
 
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                ds.Relations.Remove("rel3");
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    ds.Relations.Remove("rel3");
+                }
+            );
         }
 
         [Fact]
@@ -449,15 +591,25 @@ namespace System.Data.Tests
         {
             DataSet ds = GetDataSet();
             DataSet ds1 = GetDataSet();
-            DataRelation rel1 = new DataRelation("rel1", ds.Tables[0].Columns["ParentId"], ds.Tables[1].Columns["ParentId"]);
-            DataRelation rel2 = new DataRelation("rel2", ds.Tables[0].Columns["String1"], ds.Tables[1].Columns["String1"]);
+            DataRelation rel1 = new DataRelation(
+                "rel1",
+                ds.Tables[0].Columns["ParentId"],
+                ds.Tables[1].Columns["ParentId"]
+            );
+            DataRelation rel2 = new DataRelation(
+                "rel2",
+                ds.Tables[0].Columns["String1"],
+                ds.Tables[1].Columns["String1"]
+            );
 
             ds.Relations.Add(rel1);
             ds.Relations.Add(rel2);
 
             Assert.Equal(2, ds.Relations.Count);
 
-            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(Relations_CollectionChanged);
+            ds.Relations.CollectionChanged += new CollectionChangeEventHandler(
+                Relations_CollectionChanged
+            );
             //Perform remove
 
             ds.Relations.RemoveAt(0);
@@ -466,7 +618,6 @@ namespace System.Data.Tests
             ds.Relations.RemoveAt(0);
             Assert.Equal(0, ds.Relations.Count);
             Assert.Equal(2, _changesCounter);
-
 
             Assert.Throws<IndexOutOfRangeException>(() =>
             {

@@ -39,7 +39,11 @@ internal abstract class BaseCommand : CommandLineApplication
         Error = parent.Error ?? Error;
         _httpClient = httpClient;
 
-        ProjectFileOption = Option("-p|--updateProject", "The project file update.", CommandOptionType.SingleValue);
+        ProjectFileOption = Option(
+            "-p|--updateProject",
+            "The project file update.",
+            CommandOptionType.SingleValue
+        );
 
         if (Parent is Application application)
         {
@@ -106,14 +110,22 @@ internal abstract class BaseCommand : CommandLineApplication
         }
         else
         {
-            var projects = Directory.GetFiles(WorkingDirectory, "*.csproj", SearchOption.TopDirectoryOnly);
+            var projects = Directory.GetFiles(
+                WorkingDirectory,
+                "*.csproj",
+                SearchOption.TopDirectoryOnly
+            );
             if (projects.Length == 0)
             {
-                throw new ArgumentException("No project files were found in the current directory. Either move to a new directory or provide the project explicitly");
+                throw new ArgumentException(
+                    "No project files were found in the current directory. Either move to a new directory or provide the project explicitly"
+                );
             }
             if (projects.Length > 1)
             {
-                throw new ArgumentException("More than one project was found in this directory, either remove a duplicate or explicitly provide the project.");
+                throw new ArgumentException(
+                    "More than one project was found in this directory, either remove a duplicate or explicitly provide the project."
+                );
             }
 
             project = projects[0];
@@ -127,19 +139,22 @@ internal abstract class BaseCommand : CommandLineApplication
         var project = ProjectCollection.GlobalProjectCollection.LoadProject(
             projectFile.FullName,
             globalProperties: null,
-            toolsVersion: null);
+            toolsVersion: null
+        );
         project.ReevaluateIfNecessary();
         return project;
     }
 
     internal static bool IsProjectFile(string file)
     {
-        return File.Exists(Path.GetFullPath(file)) && file.EndsWith(".csproj", StringComparison.Ordinal);
+        return File.Exists(Path.GetFullPath(file))
+            && file.EndsWith(".csproj", StringComparison.Ordinal);
     }
 
     internal static bool IsUrl(string file)
     {
-        return Uri.TryCreate(file, UriKind.Absolute, out var _) && file.StartsWith("http", StringComparison.Ordinal);
+        return Uri.TryCreate(file, UriKind.Absolute, out var _)
+            && file.StartsWith("http", StringComparison.Ordinal);
     }
 
     internal async Task AddOpenAPIReference(
@@ -147,26 +162,44 @@ internal abstract class BaseCommand : CommandLineApplication
         FileInfo projectFile,
         string sourceFile,
         CodeGenerator? codeGenerator,
-        string sourceUrl = null)
+        string sourceUrl = null
+    )
     {
         // EnsurePackagesInProjectAsync MUST happen before LoadProject, because otherwise the global state set by ProjectCollection doesn't pick up the nuget edits, and we end up losing them.
         await EnsurePackagesInProjectAsync(projectFile, codeGenerator);
         var project = LoadProject(projectFile);
         var items = project.GetItems(tagName);
-        var fileItems = items.Where(i => string.Equals(GetFullPath(i.EvaluatedInclude), GetFullPath(sourceFile), StringComparison.Ordinal));
+        var fileItems = items.Where(i =>
+            string.Equals(
+                GetFullPath(i.EvaluatedInclude),
+                GetFullPath(sourceFile),
+                StringComparison.Ordinal
+            )
+        );
 
         if (fileItems.Any())
         {
-            Warning.Write($"One or more references to {sourceFile} already exist in '{project.FullPath}'. Duplicate references could lead to unexpected behavior.");
+            Warning.Write(
+                $"One or more references to {sourceFile} already exist in '{project.FullPath}'. Duplicate references could lead to unexpected behavior."
+            );
             return;
         }
 
         if (sourceUrl != null)
         {
-            if (items.Any(
-                i => string.Equals(i.GetMetadataValue(SourceUrlAttrName), sourceUrl, StringComparison.Ordinal)))
+            if (
+                items.Any(i =>
+                    string.Equals(
+                        i.GetMetadataValue(SourceUrlAttrName),
+                        sourceUrl,
+                        StringComparison.Ordinal
+                    )
+                )
+            )
             {
-                Warning.Write($"A reference to '{sourceUrl}' already exists in '{project.FullPath}'.");
+                Warning.Write(
+                    $"A reference to '{sourceUrl}' already exists in '{project.FullPath}'."
+                );
                 return;
             }
         }
@@ -187,7 +220,10 @@ internal abstract class BaseCommand : CommandLineApplication
         project.Save();
     }
 
-    private async Task EnsurePackagesInProjectAsync(FileInfo projectFile, CodeGenerator? codeGenerator)
+    private async Task EnsurePackagesInProjectAsync(
+        FileInfo projectFile,
+        CodeGenerator? codeGenerator
+    )
     {
         var urlPackages = await LoadPackageVersionsFromURLAsync();
         var attributePackages = GetServicePackages(codeGenerator);
@@ -195,7 +231,10 @@ internal abstract class BaseCommand : CommandLineApplication
         foreach (var kvp in attributePackages)
         {
             var packageId = kvp.Key;
-            var version = urlPackages != null && urlPackages.TryGetValue(packageId, out var urlPackageVersion) ? urlPackageVersion : kvp.Value;
+            var version =
+                urlPackages != null && urlPackages.TryGetValue(packageId, out var urlPackageVersion)
+                    ? urlPackageVersion
+                    : kvp.Value;
 
             await TryAddPackage(packageId, version, projectFile);
         }
@@ -203,14 +242,15 @@ internal abstract class BaseCommand : CommandLineApplication
 
     private async Task TryAddPackage(string packageId, string packageVersion, FileInfo projectFile)
     {
-        var args = new[] {
-                "add",
-                "package",
-                packageId,
-                "--version",
-                packageVersion,
-                "--no-restore"
-            };
+        var args = new[]
+        {
+            "add",
+            "package",
+            packageId,
+            "--version",
+            packageVersion,
+            "--no-restore",
+        };
 
         var muxer = DotNetMuxer.MuxerPathOrDefault();
         if (string.IsNullOrEmpty(muxer))
@@ -232,7 +272,9 @@ internal abstract class BaseCommand : CommandLineApplication
         var timeout = 20;
         if (!process.WaitForExit(timeout * 1000))
         {
-            throw new ArgumentException($"Adding package `{packageId}` to `{projectFile.Directory}` took longer than {timeout} seconds.");
+            throw new ArgumentException(
+                $"Adding package `{packageId}` to `{projectFile.Directory}` took longer than {timeout} seconds."
+            );
         }
 
         if (process.ExitCode != 0)
@@ -241,14 +283,20 @@ internal abstract class BaseCommand : CommandLineApplication
             using var csprojReader = new StreamReader(csprojStream);
             var csprojContent = await csprojReader.ReadToEndAsync();
             // We suspect that sometimes dotnet add package is giving a non-zero exit code when it has actually succeeded.
-            if (!csprojContent.Contains($"<PackageReference Include=\"{packageId}\" Version=\"{packageVersion}\""))
+            if (
+                !csprojContent.Contains(
+                    $"<PackageReference Include=\"{packageId}\" Version=\"{packageVersion}\""
+                )
+            )
             {
                 var output = await process.StandardOutput.ReadToEndAsync();
                 var error = await process.StandardError.ReadToEndAsync();
                 await Out.WriteAsync(output);
                 await Error.WriteAsync(error);
 
-                throw new ArgumentException($"Adding package `{packageId}` to `{projectFile.Directory}` returned ExitCode `{process.ExitCode}` and gave error `{error}` and output `{output}`");
+                throw new ArgumentException(
+                    $"Adding package `{packageId}` to `{projectFile.Directory}` returned ExitCode `{process.ExitCode}` and gave error `{error}` and output `{output}`"
+                );
             }
         }
     }
@@ -275,15 +323,25 @@ internal abstract class BaseCommand : CommandLineApplication
                 var fileName = GetFileNameFromResponse(response, url);
                 var fullPath = GetFullPath(fileName);
                 var directory = Path.GetDirectoryName(fullPath);
-                destinationPath = GetUniqueFileName(directory, Path.GetFileNameWithoutExtension(fileName), Path.GetExtension(fileName));
+                destinationPath = GetUniqueFileName(
+                    directory,
+                    Path.GetFileNameWithoutExtension(fileName),
+                    Path.GetExtension(fileName)
+                );
             }
-            await WriteToFileAsync(await response.Stream, GetFullPath(destinationPath), overwrite: false);
+            await WriteToFileAsync(
+                await response.Stream,
+                GetFullPath(destinationPath),
+                overwrite: false
+            );
 
             return destinationPath;
         }
         else
         {
-            throw new ArgumentException($"The given url returned '{response.StatusCode}', indicating failure. The url might be wrong, or there might be a networking issue.");
+            throw new ArgumentException(
+                $"The given url returned '{response.StatusCode}', indicating failure. The url might be wrong, or there might be a networking issue."
+            );
         }
     }
 
@@ -297,13 +355,17 @@ internal abstract class BaseCommand : CommandLineApplication
     private static async Task<IHttpResponseMessageWrapper> RetryRequest(
         Func<Task<IHttpResponseMessageWrapper>> retryBlock,
         int retryCount = 60,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         for (var retry = 0; retry < retryCount; retry++)
         {
             if (cancellationToken.IsCancellationRequested)
             {
-                throw new OperationCanceledException("Failed to connect, retry canceled.", cancellationToken);
+                throw new OperationCanceledException(
+                    "Failed to connect, retry canceled.",
+                    cancellationToken
+                );
             }
 
             try
@@ -357,8 +419,7 @@ internal abstract class BaseCommand : CommandLineApplication
                 uniqueName = fileName + count;
                 filePath = Path.Combine(directory, uniqueName + extension);
             }
-        }
-        while (exists);
+        } while (exists);
 
         return uniqueName + extension;
     }
@@ -396,8 +457,10 @@ internal abstract class BaseCommand : CommandLineApplication
                 var domain = parts.Length switch
                 {
                     1 or 2 => parts.First(), // It's localhost or somewhere in an Intranet if 1; no www if 2.
-                    3 => parts[1],           // Grab XYZ in www.XYZ.domain.com or similar.
-                    _ => throw new NotImplementedException("We don't handle the case that the Host has more than three segments"),
+                    3 => parts[1], // Grab XYZ in www.XYZ.domain.com or similar.
+                    _ => throw new NotImplementedException(
+                        "We don't handle the case that the Host has more than three segments"
+                    ),
                 };
 
                 result = domain + DefaultExtension;
@@ -436,9 +499,7 @@ internal abstract class BaseCommand : CommandLineApplication
 
     internal string GetFullPath(string path)
     {
-        return Path.IsPathFullyQualified(path)
-            ? path
-            : Path.GetFullPath(path, WorkingDirectory);
+        return Path.IsPathFullyQualified(path) ? path : Path.GetFullPath(path, WorkingDirectory);
     }
 
     private async Task<IDictionary<string, string>> LoadPackageVersionsFromURLAsync()
@@ -459,10 +520,14 @@ internal abstract class BaseCommand : CommandLineApplication
         }*/
         try
         {
-            using var packageVersionStream = await (await _httpClient.GetResponseAsync(PackageVersionUrl)).Stream;
+            using var packageVersionStream = await (
+                await _httpClient.GetResponseAsync(PackageVersionUrl)
+            ).Stream;
             using var packageVersionDocument = await JsonDocument.ParseAsync(packageVersionStream);
             var packageVersionsElement = packageVersionDocument.RootElement.GetProperty("Packages");
-            var packageVersionsDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var packageVersionsDictionary = new Dictionary<string, string>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             foreach (var packageVersion in packageVersionsElement.EnumerateObject())
             {
@@ -515,7 +580,9 @@ internal abstract class BaseCommand : CommandLineApplication
         var destinationExists = File.Exists(destinationPath);
         if (destinationExists && !overwrite)
         {
-            throw new ArgumentException($"File '{destinationPath}' already exists. Aborting to avoid conflicts. Provide the '--output-file' argument with an unused file to resolve.");
+            throw new ArgumentException(
+                $"File '{destinationPath}' already exists. Aborting to avoid conflicts. Provide the '--output-file' argument with an unused file to resolve."
+            );
         }
 
         await Out.WriteLineAsync($"Downloading to '{destinationPath}'.");
@@ -541,7 +608,9 @@ internal abstract class BaseCommand : CommandLineApplication
 
                 if (sameHashes)
                 {
-                    await Out.WriteLineAsync($"Not overwriting existing and matching file '{destinationPath}'.");
+                    await Out.WriteLineAsync(
+                        $"Not overwriting existing and matching file '{destinationPath}'."
+                    );
                     return;
                 }
             }
@@ -549,7 +618,10 @@ internal abstract class BaseCommand : CommandLineApplication
             {
                 // May need to create directory to hold the file.
                 var destinationDirectory = Path.GetDirectoryName(destinationPath);
-                if (!string.IsNullOrEmpty(destinationDirectory) && !Directory.Exists(destinationDirectory))
+                if (
+                    !string.IsNullOrEmpty(destinationDirectory)
+                    && !Directory.Exists(destinationDirectory)
+                )
                 {
                     Directory.CreateDirectory(destinationDirectory);
                 }
@@ -557,7 +629,11 @@ internal abstract class BaseCommand : CommandLineApplication
 
             // Create or overwrite the destination file.
             reachedCopy = true;
-            using var fileStream = new FileStream(destinationPath, FileMode.Create, FileAccess.Write);
+            using var fileStream = new FileStream(
+                destinationPath,
+                FileMode.Create,
+                FileAccess.Write
+            );
             fileStream.Seek(0, SeekOrigin.Begin);
             if (content.CanSeek)
             {

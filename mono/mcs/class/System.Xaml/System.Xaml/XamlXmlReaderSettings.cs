@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,27 +29,25 @@ using System.Xaml.Schema;
 
 namespace System.Xaml
 {
-	public class XamlXmlReaderSettings : XamlReaderSettings
-	{
-		public XamlXmlReaderSettings ()
-		{
-		}
+    public class XamlXmlReaderSettings : XamlReaderSettings
+    {
+        public XamlXmlReaderSettings() { }
 
-		public XamlXmlReaderSettings (XamlXmlReaderSettings settings)
-			: base (settings)
-		{
-			var s = settings;
-			if (s == null)
-				return;
-			CloseInput = s.CloseInput;
-			SkipXmlCompatibilityProcessing = s.SkipXmlCompatibilityProcessing;
-			XmlLang = s.XmlLang;
-			XmlSpacePreserve = s.XmlSpacePreserve;
-		}
+        public XamlXmlReaderSettings(XamlXmlReaderSettings settings)
+            : base(settings)
+        {
+            var s = settings;
+            if (s == null)
+                return;
+            CloseInput = s.CloseInput;
+            SkipXmlCompatibilityProcessing = s.SkipXmlCompatibilityProcessing;
+            XmlLang = s.XmlLang;
+            XmlSpacePreserve = s.XmlSpacePreserve;
+        }
 
-		public bool CloseInput { get; set; }
-		public bool SkipXmlCompatibilityProcessing { get; set; }
-		public string XmlLang { get; set; }
-		public bool XmlSpacePreserve { get; set; }
-	}
+        public bool CloseInput { get; set; }
+        public bool SkipXmlCompatibilityProcessing { get; set; }
+        public string XmlLang { get; set; }
+        public bool XmlSpacePreserve { get; set; }
+    }
 }

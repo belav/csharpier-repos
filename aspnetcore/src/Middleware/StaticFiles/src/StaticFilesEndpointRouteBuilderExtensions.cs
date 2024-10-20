@@ -17,7 +17,11 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     // we limit the types of situations where the fallback to file is matched
     // after an endpoint is discarded, for example, due to a mismatched content type.
     // See: https://github.com/dotnet/aspnetcore/issues/41060
-    private static readonly string[] _supportedHttpMethods = new[] { HttpMethods.Get, HttpMethods.Head };
+    private static readonly string[] _supportedHttpMethods = new[]
+    {
+        HttpMethods.Get,
+        HttpMethods.Head,
+    };
 
     /// <summary>
     /// Adds a specialized <see cref="RouteEndpoint"/> to the <see cref="IEndpointRouteBuilder"/> that will match
@@ -42,11 +46,15 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     /// <c>{*path:nonfile}</c>. The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// </remarks>
-    [UnconditionalSuppressMessage("Trimmer", "IL2026",
-        Justification = "MapFallbackToFile RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case here.")]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2026",
+        Justification = "MapFallbackToFile RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case here."
+    )]
     public static IEndpointConventionBuilder MapFallbackToFile(
         this IEndpointRouteBuilder endpoints,
-        string filePath)
+        string filePath
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(filePath);
@@ -77,12 +85,16 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     /// <c>{*path:nonfile}</c>. The order of the registered endpoint will be <c>int.MaxValue</c>.
     /// </para>
     /// </remarks>
-    [UnconditionalSuppressMessage("Trimmer", "IL2026",
-        Justification = "MapFallbackToFile RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case here.")]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2026",
+        Justification = "MapFallbackToFile RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case here."
+    )]
     public static IEndpointConventionBuilder MapFallbackToFile(
         this IEndpointRouteBuilder endpoints,
         string filePath,
-        StaticFileOptions options)
+        StaticFileOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(filePath);
@@ -119,12 +131,16 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     /// to exclude requests for static files.
     /// </para>
     /// </remarks>
-    [UnconditionalSuppressMessage("Trimmer", "IL2026",
-        Justification = "MapFallbackToFile RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case here.")]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2026",
+        Justification = "MapFallbackToFile RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case here."
+    )]
     public static IEndpointConventionBuilder MapFallbackToFile(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
-        string filePath)
+        string filePath
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(pattern);
@@ -160,13 +176,17 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     /// to exclude requests for static files.
     /// </para>
     /// </remarks>
-    [UnconditionalSuppressMessage("Trimmer", "IL2026",
-        Justification = "MapFallbackToFile RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case.")]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2026",
+        Justification = "MapFallbackToFile RequireUnreferencedCode if the RequestDelegate has a Task<T> return type which is not the case."
+    )]
     public static IEndpointConventionBuilder MapFallbackToFile(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
         string filePath,
-        StaticFileOptions options)
+        StaticFileOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(pattern);
@@ -180,18 +200,21 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     private static RequestDelegate CreateRequestDelegate(
         IEndpointRouteBuilder endpoints,
         string filePath,
-        StaticFileOptions? options = null)
+        StaticFileOptions? options = null
+    )
     {
         var app = endpoints.CreateApplicationBuilder();
-        app.Use(next => context =>
-        {
-            context.Request.Path = "/" + filePath;
+        app.Use(next =>
+            context =>
+            {
+                context.Request.Path = "/" + filePath;
 
-            // Set endpoint to null so the static files middleware will handle the request.
-            context.SetEndpoint(null);
+                // Set endpoint to null so the static files middleware will handle the request.
+                context.SetEndpoint(null);
 
-            return next(context);
-        });
+                return next(context);
+            }
+        );
 
         if (options == null)
         {

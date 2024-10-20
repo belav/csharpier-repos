@@ -9,10 +9,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Common;
 using System.Data.Objects.DataClasses;
 using System.Data.Objects.Internal;
 using System.Diagnostics;
-using System.Data.Common;
 
 namespace System.Data.Objects
 {
@@ -30,7 +30,8 @@ namespace System.Data.Objects
     /// and is synchronized with changes made to the EntityCollection membership.
     /// This class always allows additions and removals from the binding list.
     /// </remarks>
-    internal sealed class ObjectViewEntityCollectionData<TViewElement, TItemElement> : IObjectViewData<TViewElement>
+    internal sealed class ObjectViewEntityCollectionData<TViewElement, TItemElement>
+        : IObjectViewData<TViewElement>
         where TItemElement : class
         where TViewElement : TItemElement
     {
@@ -142,7 +143,6 @@ namespace System.Data.Objects
             {
                 _itemCommitPending = false;
             }
-
         }
 
         public void Clear()
@@ -179,7 +179,11 @@ namespace System.Data.Objects
             return removed;
         }
 
-        public ListChangedEventArgs OnCollectionChanged(object sender, CollectionChangeEventArgs e, ObjectViewListener listener)
+        public ListChangedEventArgs OnCollectionChanged(
+            object sender,
+            CollectionChangeEventArgs e,
+            ObjectViewListener listener
+        )
         {
             ListChangedEventArgs changeArgs = null;
 
@@ -199,7 +203,12 @@ namespace System.Data.Objects
                             // Unhook from events of removed entity.
                             listener.UnregisterEntityEvents(removedItem);
 
-                            changeArgs = new ListChangedEventArgs(ListChangedType.ItemDeleted, oldIndex /* newIndex*/, -1 /* oldIndex*/);
+                            changeArgs = new ListChangedEventArgs(
+                                ListChangedType.ItemDeleted,
+                                oldIndex /* newIndex*/
+                                ,
+                                -1 /* oldIndex*/
+                            );
                         }
                     }
                     break;
@@ -218,7 +227,13 @@ namespace System.Data.Objects
                             // Register to its events.
                             listener.RegisterEntityEvents(addedItem);
 
-                            changeArgs = new ListChangedEventArgs(ListChangedType.ItemAdded, _bindingList.Count - 1 /* newIndex*/, -1 /* oldIndex*/);
+                            changeArgs = new ListChangedEventArgs(
+                                ListChangedType.ItemAdded,
+                                _bindingList.Count
+                                    - 1 /* newIndex*/
+                                ,
+                                -1 /* oldIndex*/
+                            );
                         }
                     }
                     break;
@@ -231,14 +246,19 @@ namespace System.Data.Objects
 
                     _bindingList.Clear();
 
-                    foreach(TViewElement entity in _entityCollection.GetInternalEnumerable())
+                    foreach (TViewElement entity in _entityCollection.GetInternalEnumerable())
                     {
                         _bindingList.Add(entity);
 
                         listener.RegisterEntityEvents(entity);
                     }
 
-                    changeArgs = new ListChangedEventArgs(ListChangedType.Reset, -1 /*newIndex*/, -1/*oldIndex*/);
+                    changeArgs = new ListChangedEventArgs(
+                        ListChangedType.Reset,
+                        -1 /*newIndex*/
+                        ,
+                        -1 /*oldIndex*/
+                    );
                     break;
             }
 

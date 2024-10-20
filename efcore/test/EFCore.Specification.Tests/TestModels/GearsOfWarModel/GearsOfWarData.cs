@@ -33,7 +33,18 @@ public class GearsOfWarData : ISetSource
         Factions = CreateFactions();
         LocustHighCommands = CreateHighCommands();
 
-        WireUp(Squads, Missions, SquadMissions, Cities, Weapons, Tags, Gears, LocustLeaders, Factions, LocustHighCommands);
+        WireUp(
+            Squads,
+            Missions,
+            SquadMissions,
+            Cities,
+            Weapons,
+            Tags,
+            Gears,
+            LocustLeaders,
+            Factions,
+            LocustHighCommands
+        );
         WireUp2(LocustLeaders, Factions);
     }
 
@@ -103,27 +114,27 @@ public class GearsOfWarData : ISetSource
         throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity));
     }
 
-    public static IReadOnlyList<Squad> CreateSquads()
-        => new List<Squad>
+    public static IReadOnlyList<Squad> CreateSquads() =>
+        new List<Squad>
         {
             new()
             {
                 Id = 1,
                 Name = "Delta",
                 Banner = new byte[] { 0x00, 0x01 },
-                Banner5 = new byte[] { 0x04, 0x05, 0x06, 0x07, 0x08 }
+                Banner5 = new byte[] { 0x04, 0x05, 0x06, 0x07, 0x08 },
             },
             new()
             {
                 Id = 2,
                 Name = "Kilo",
                 Banner = new byte[] { 0x02, 0x03 },
-                Banner5 = new byte[] { 0x04, 0x05, 0x06, 0x07, 0x08 }
-            }
+                Banner5 = new byte[] { 0x04, 0x05, 0x06, 0x07, 0x08 },
+            },
         };
 
-    public static IReadOnlyList<Mission> CreateMissions()
-        => new List<Mission>
+    public static IReadOnlyList<Mission> CreateMissions() =>
+        new List<Mission>
         {
             new()
             {
@@ -133,7 +144,7 @@ public class GearsOfWarData : ISetSource
                 Timeline = new DateTimeOffset(599898024001234567, new TimeSpan(1, 30, 0)),
                 Duration = new TimeSpan(1, 2, 3),
                 Date = new DateOnly(2020, 1, 1),
-                Time = new TimeOnly(15, 30, 10)
+                Time = new TimeOnly(15, 30, 10),
             },
             new()
             {
@@ -143,7 +154,7 @@ public class GearsOfWarData : ISetSource
                 Timeline = new DateTimeOffset(2, 3, 1, 8, 0, 0, new TimeSpan(-5, 0, 0)),
                 Duration = new TimeSpan(0, 1, 2, 3, 456),
                 Date = new DateOnly(1990, 11, 10),
-                Time = new TimeOnly(10, 15, 50, 500)
+                Time = new TimeOnly(10, 15, 50, 500),
             },
             new()
             {
@@ -153,17 +164,12 @@ public class GearsOfWarData : ISetSource
                 Timeline = new DateTimeOffset(10, 5, 3, 12, 0, 0, new TimeSpan()),
                 Duration = new TimeSpan(0, 1, 0, 15, 456),
                 Date = new DateOnly(1, 1, 1),
-                Time = new TimeOnly(0, 0, 0)
-            }
+                Time = new TimeOnly(0, 0, 0),
+            },
         };
 
-    public static IReadOnlyList<SquadMission> CreateSquadMissions()
-        => new List<SquadMission>
-        {
-            new(),
-            new(),
-            new()
-        };
+    public static IReadOnlyList<SquadMission> CreateSquadMissions() =>
+        new List<SquadMission> { new(), new(), new() };
 
     public static IReadOnlyList<City> CreateCities()
     {
@@ -171,147 +177,141 @@ public class GearsOfWarData : ISetSource
         {
             Location = "Jacinto's location",
             Name = "Jacinto",
-            Nation = "Tyrus"
+            Nation = "Tyrus",
         };
 
         var ephyra = new City
         {
             Location = "Ephyra's location",
             Name = "Ephyra",
-            Nation = "Tyrus"
+            Nation = "Tyrus",
         };
 
         var hanover = new City { Location = "Hanover's location", Name = "Hanover" };
 
         var unknown = new City { Location = "Unknown", Name = "Unknown" };
 
-        var cities = new List<City>
-        {
-            jacinto,
-            ephyra,
-            hanover,
-            unknown
-        };
+        var cities = new List<City> { jacinto, ephyra, hanover, unknown };
         return cities;
     }
 
-    public static IReadOnlyList<Weapon> CreateWeapons()
-        => new List<Weapon>
+    public static IReadOnlyList<Weapon> CreateWeapons() =>
+        new List<Weapon>
         {
             new()
             {
                 Id = 1,
                 Name = "Marcus' Lancer",
                 AmmunitionType = AmmunitionType.Cartridge,
-                IsAutomatic = true
+                IsAutomatic = true,
             },
             new()
             {
                 Id = 2,
                 Name = "Marcus' Gnasher",
                 AmmunitionType = AmmunitionType.Shell,
-                IsAutomatic = false
+                IsAutomatic = false,
             },
             new()
             {
                 Id = 3,
                 Name = "Dom's Hammerburst",
                 AmmunitionType = AmmunitionType.Cartridge,
-                IsAutomatic = false
+                IsAutomatic = false,
             },
             new()
             {
                 Id = 4,
                 Name = "Dom's Gnasher",
                 AmmunitionType = AmmunitionType.Shell,
-                IsAutomatic = false
+                IsAutomatic = false,
             },
             new()
             {
                 Id = 5,
                 Name = "Cole's Gnasher",
                 AmmunitionType = AmmunitionType.Shell,
-                IsAutomatic = false
+                IsAutomatic = false,
             },
             new()
             {
                 Id = 6,
                 Name = "Cole's Mulcher",
                 AmmunitionType = AmmunitionType.Cartridge,
-                IsAutomatic = true
+                IsAutomatic = true,
             },
             new()
             {
                 Id = 7,
                 Name = "Baird's Lancer",
                 AmmunitionType = AmmunitionType.Cartridge,
-                IsAutomatic = true
+                IsAutomatic = true,
             },
             new()
             {
                 Id = 8,
                 Name = "Baird's Gnasher",
                 AmmunitionType = AmmunitionType.Shell,
-                IsAutomatic = false
+                IsAutomatic = false,
             },
             new()
             {
                 Id = 9,
                 Name = "Paduk's Markza",
                 AmmunitionType = AmmunitionType.Cartridge,
-                IsAutomatic = false
+                IsAutomatic = false,
             },
             new()
             {
                 Id = 10,
                 Name = "Mauler's Flail",
-                IsAutomatic = false
-            }
+                IsAutomatic = false,
+            },
         };
 
-    public static IReadOnlyList<CogTag> CreateTags()
-        => new List<CogTag>
+    public static IReadOnlyList<CogTag> CreateTags() =>
+        new List<CogTag>
         {
             new()
             {
                 Id = Guid.Parse("DF36F493-463F-4123-83F9-6B135DEEB7BA"),
                 Note = "Dom's Tag",
-                IssueDate = new DateTime(3, 2, 2)
+                IssueDate = new DateTime(3, 2, 2),
             },
             new()
             {
                 Id = Guid.Parse("A8AD98F9-E023-4E2A-9A70-C2728455BD34"),
                 Note = "Cole's Tag",
-                IssueDate = new DateTime(2, 10, 11)
+                IssueDate = new DateTime(2, 10, 11),
             },
             new()
             {
                 Id = Guid.Parse("A7BE028A-0CF2-448F-AB55-CE8BC5D8CF69"),
                 Note = "Paduk's Tag",
-                IssueDate = new DateTime(15, 3, 7)
+                IssueDate = new DateTime(15, 3, 7),
             },
             new()
             {
                 Id = Guid.Parse("70534E05-782C-4052-8720-C2C54481CE5F"),
                 Note = "Baird's Tag",
-                IssueDate = new DateTime(7, 5, 3)
+                IssueDate = new DateTime(7, 5, 3),
             },
             new()
             {
                 Id = Guid.Parse("34C8D86E-A4AC-4BE5-827F-584DDA348A07"),
                 Note = "Marcus' Tag",
-                IssueDate = new DateTime(1, 9, 25)
+                IssueDate = new DateTime(1, 9, 25),
             },
             new()
             {
                 Id = Guid.Parse("B39A6FBA-9026-4D69-828E-FD7068673E57"),
                 Note = "K.I.A.",
-                IssueDate = new DateTime(21, 7, 7)
-            }
+                IssueDate = new DateTime(21, 7, 7),
+            },
         };
 
-    public static IReadOnlyList<Gear> CreateGears()
-        => new List<Gear>
+    public static IReadOnlyList<Gear> CreateGears() =>
+        new List<Gear>
         {
             new()
             {
@@ -322,7 +322,7 @@ public class GearsOfWarData : ISetSource
                 Rank = MilitaryRank.Corporal,
                 CityOfBirthName = "Ephyra",
                 LeaderNickname = "Marcus",
-                LeaderSquadId = 1
+                LeaderSquadId = 1,
             },
             new()
             {
@@ -333,7 +333,7 @@ public class GearsOfWarData : ISetSource
                 Rank = MilitaryRank.Private,
                 CityOfBirthName = "Hanover",
                 LeaderNickname = "Marcus",
-                LeaderSquadId = 1
+                LeaderSquadId = 1,
             },
             new()
             {
@@ -344,7 +344,7 @@ public class GearsOfWarData : ISetSource
                 Rank = MilitaryRank.Private,
                 CityOfBirthName = "Unknown",
                 LeaderNickname = "Baird",
-                LeaderSquadId = 1
+                LeaderSquadId = 1,
             },
             new Officer
             {
@@ -355,7 +355,7 @@ public class GearsOfWarData : ISetSource
                 Rank = MilitaryRank.Corporal,
                 CityOfBirthName = "Unknown",
                 LeaderNickname = "Marcus",
-                LeaderSquadId = 1
+                LeaderSquadId = 1,
             },
             new Officer
             {
@@ -364,59 +364,59 @@ public class GearsOfWarData : ISetSource
                 HasSoulPatch = true,
                 SquadId = 1,
                 Rank = MilitaryRank.Sergeant,
-                CityOfBirthName = "Jacinto"
-            }
+                CityOfBirthName = "Jacinto",
+            },
         };
 
-    public static IReadOnlyList<LocustLeader> CreateLocustLeaders()
-        => new List<LocustLeader>
+    public static IReadOnlyList<LocustLeader> CreateLocustLeaders() =>
+        new List<LocustLeader>
         {
             new()
             {
                 Name = "General Karn",
                 ThreatLevel = 3,
                 ThreatLevelByte = 3,
-                ThreatLevelNullableByte = 3
+                ThreatLevelNullableByte = 3,
             },
             new()
             {
                 Name = "General RAAM",
                 ThreatLevel = 4,
                 ThreatLevelByte = 4,
-                ThreatLevelNullableByte = 4
+                ThreatLevelNullableByte = 4,
             },
             new()
             {
                 Name = "High Priest Skorge",
                 ThreatLevel = 1,
                 ThreatLevelByte = 1,
-                ThreatLevelNullableByte = 1
+                ThreatLevelNullableByte = 1,
             },
             new LocustCommander
             {
                 Name = "Queen Myrrah",
                 ThreatLevel = 5,
                 ThreatLevelByte = 5,
-                ThreatLevelNullableByte = 5
+                ThreatLevelNullableByte = 5,
             },
             new()
             {
                 Name = "The Speaker",
                 ThreatLevel = 3,
                 ThreatLevelByte = 3,
-                ThreatLevelNullableByte = 3
+                ThreatLevelNullableByte = 3,
             },
             new LocustCommander
             {
                 Name = "Unknown",
                 ThreatLevel = 0,
                 ThreatLevelByte = 0,
-                ThreatLevelNullableByte = null
-            }
+                ThreatLevelNullableByte = null,
+            },
         };
 
-    public static IReadOnlyList<Faction> CreateFactions()
-        => new List<Faction>
+    public static IReadOnlyList<Faction> CreateFactions() =>
+        new List<Faction>
         {
             new LocustHorde
             {
@@ -424,26 +424,26 @@ public class GearsOfWarData : ISetSource
                 Name = "Locust",
                 Eradicated = true,
                 CommanderName = "Queen Myrrah",
-                ServerAddress = IPAddress.Loopback
+                ServerAddress = IPAddress.Loopback,
             },
             new LocustHorde
             {
                 Id = 2,
                 Name = "Swarm",
                 Eradicated = false,
-                CommanderName = "Unknown"
-            }
+                CommanderName = "Unknown",
+            },
         };
 
-    public static IReadOnlyList<LocustHighCommand> CreateHighCommands()
-        => new List<LocustHighCommand>
+    public static IReadOnlyList<LocustHighCommand> CreateHighCommands() =>
+        new List<LocustHighCommand>
         {
             new()
             {
                 Id = 1,
                 Name = "Locust Main Command",
-                IsOperational = true
-            }
+                IsOperational = true,
+            },
         };
 
     public static void WireUp(
@@ -456,7 +456,8 @@ public class GearsOfWarData : ISetSource
         IReadOnlyList<Gear> gears,
         IReadOnlyList<LocustLeader> locustLeaders,
         IReadOnlyList<Faction> factions,
-        IReadOnlyList<LocustHighCommand> locustHighCommands)
+        IReadOnlyList<LocustHighCommand> locustHighCommands
+    )
     {
         squadMissions[0].Mission = missions[0];
         squadMissions[0].MissionId = missions[0].Id;
@@ -477,13 +478,7 @@ public class GearsOfWarData : ISetSource
         squads[0].Missions = new List<SquadMission> { squadMissions[0], squadMissions[1] };
         squads[1].Missions = new List<SquadMission> { squadMissions[2] };
 
-        squads[0].Members = new List<Gear>
-        {
-            gears[0],
-            gears[1],
-            gears[3],
-            gears[4]
-        };
+        squads[0].Members = new List<Gear> { gears[0], gears[1], gears[3], gears[4] };
         squads[1].Members = new List<Gear> { gears[2] };
 
         weapons[1].SynergyWith = weapons[0];
@@ -528,12 +523,7 @@ public class GearsOfWarData : ISetSource
         gears[4].Squad = squads[0];
         gears[4].Tag = tags[4];
         gears[4].Weapons = new List<Weapon> { weapons[0], weapons[1] };
-        ((Officer)gears[4]).Reports = new List<Gear>
-        {
-            gears[0],
-            gears[1],
-            gears[3]
-        };
+        ((Officer)gears[4]).Reports = new List<Gear> { gears[0], gears[1], gears[3] };
 
         cities[0].BornGears = new List<Gear> { gears[4] };
         cities[1].BornGears = new List<Gear> { gears[0] };
@@ -591,7 +581,8 @@ public class GearsOfWarData : ISetSource
 
         locustHighCommands[0].Commanders = new List<LocustCommander>
         {
-            (LocustCommander)locustLeaders[3], (LocustCommander)locustLeaders[5]
+            (LocustCommander)locustLeaders[3],
+            (LocustCommander)locustLeaders[5],
         };
 
         ((LocustCommander)locustLeaders[3]).HighCommand = locustHighCommands[0];
@@ -603,15 +594,20 @@ public class GearsOfWarData : ISetSource
 
     public static void WireUp2(
         IReadOnlyList<LocustLeader> locustLeaders,
-        IReadOnlyList<Faction> factions)
+        IReadOnlyList<Faction> factions
+    )
     {
         ((LocustHorde)factions[0]).Leaders = new List<LocustLeader>
         {
             locustLeaders[0],
             locustLeaders[1],
             locustLeaders[2],
-            locustLeaders[3]
+            locustLeaders[3],
         };
-        ((LocustHorde)factions[1]).Leaders = new List<LocustLeader> { locustLeaders[4], locustLeaders[5] };
+        ((LocustHorde)factions[1]).Leaders = new List<LocustLeader>
+        {
+            locustLeaders[4],
+            locustLeaders[5],
+        };
     }
 }

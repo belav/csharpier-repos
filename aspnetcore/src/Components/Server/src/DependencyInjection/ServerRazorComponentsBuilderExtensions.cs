@@ -24,13 +24,21 @@ public static class ServerRazorComponentsBuilderExtensions
     /// <param name="builder">The <see cref="IRazorComponentsBuilder"/>.</param>
     /// <param name="configure">A callback to configure <see cref="CircuitOptions"/>.</param>
     /// <returns>An <see cref="IRazorComponentsBuilder"/> that can be used to further customize the configuration.</returns>
-    [RequiresUnreferencedCode("Server-side Blazor does not currently support native AOT.", Url = "https://aka.ms/aspnet/nativeaot")]
-    public static IServerSideBlazorBuilder AddInteractiveServerComponents(this IRazorComponentsBuilder builder, Action<CircuitOptions>? configure = null)
+    [RequiresUnreferencedCode(
+        "Server-side Blazor does not currently support native AOT.",
+        Url = "https://aka.ms/aspnet/nativeaot"
+    )]
+    public static IServerSideBlazorBuilder AddInteractiveServerComponents(
+        this IRazorComponentsBuilder builder,
+        Action<CircuitOptions>? configure = null
+    )
     {
         ArgumentNullException.ThrowIfNull(builder, nameof(builder));
 
         builder.Services.AddServerSideBlazor(configure);
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<RenderModeEndpointProvider, CircuitEndpointProvider>());
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<RenderModeEndpointProvider, CircuitEndpointProvider>()
+        );
 
         return new DefaultServerSideBlazorBuilder(builder.Services);
     }
@@ -51,13 +59,16 @@ public static class ServerRazorComponentsBuilderExtensions
 
         public override IEnumerable<RouteEndpointBuilder> GetEndpointBuilders(
             IComponentRenderMode renderMode,
-            IApplicationBuilder applicationBuilder)
+            IApplicationBuilder applicationBuilder
+        )
         {
             if (renderMode is not InternalServerRenderMode)
             {
                 if (renderMode is InteractiveServerRenderMode)
                 {
-                    throw new InvalidOperationException("Invalid render mode. Use AddInteractiveServerRenderMode() to configure the Server render mode.");
+                    throw new InvalidOperationException(
+                        "Invalid render mode. Use AddInteractiveServerRenderMode() to configure the Server render mode."
+                    );
                 }
 
                 return Array.Empty<RouteEndpointBuilder>();
@@ -82,7 +93,10 @@ public static class ServerRazorComponentsBuilderExtensions
         {
             private readonly IApplicationBuilder _applicationBuilder;
 
-            public EndpointRouteBuilder(IServiceProvider serviceProvider, IApplicationBuilder applicationBuilder)
+            public EndpointRouteBuilder(
+                IServiceProvider serviceProvider,
+                IApplicationBuilder applicationBuilder
+            )
             {
                 ServiceProvider = serviceProvider;
                 _applicationBuilder = applicationBuilder;
@@ -90,7 +104,8 @@ public static class ServerRazorComponentsBuilderExtensions
 
             public IServiceProvider ServiceProvider { get; }
 
-            public ICollection<EndpointDataSource> DataSources { get; } = new List<EndpointDataSource>() { };
+            public ICollection<EndpointDataSource> DataSources { get; } =
+                new List<EndpointDataSource>() { };
 
             public IApplicationBuilder CreateApplicationBuilder()
             {
@@ -104,7 +119,11 @@ public static class ServerRazorComponentsBuilderExtensions
                     foreach (var endpoint in ds.Endpoints)
                     {
                         var routeEndpoint = (RouteEndpoint)endpoint;
-                        var builder = new RouteEndpointBuilder(endpoint.RequestDelegate, routeEndpoint.RoutePattern, routeEndpoint.Order);
+                        var builder = new RouteEndpointBuilder(
+                            endpoint.RequestDelegate,
+                            routeEndpoint.RoutePattern,
+                            routeEndpoint.Order
+                        );
                         for (var i = 0; i < routeEndpoint.Metadata.Count; i++)
                         {
                             var metadata = routeEndpoint.Metadata[i];

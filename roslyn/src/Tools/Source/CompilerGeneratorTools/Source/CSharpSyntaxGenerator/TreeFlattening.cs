@@ -26,7 +26,10 @@ namespace CSharpSyntaxGenerator
         }
 
         private static void FlattenChildren(
-            List<TreeTypeChild> fieldsAndChoices, List<Field> fields, bool makeOptional)
+            List<TreeTypeChild> fieldsAndChoices,
+            List<Field> fields,
+            bool makeOptional
+        )
         {
             foreach (var fieldOrChoice in fieldsAndChoices)
             {

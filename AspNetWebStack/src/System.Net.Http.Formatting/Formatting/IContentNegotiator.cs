@@ -7,7 +7,7 @@ using System.Net.Http.Headers;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// Performs content negotiation. 
+    /// Performs content negotiation.
     /// This is the process of selecting a response writer (formatter) in compliance with header values in the request.
     /// </summary>
     public interface IContentNegotiator
@@ -26,6 +26,10 @@ namespace System.Net.Http.Formatting
         /// <param name="formatters">The set of <see cref="MediaTypeFormatter"/> objects from which to choose.</param>
         /// <returns>The result of the negotiation containing the most appropriate <see cref="MediaTypeFormatter"/> instance,
         /// or <c>null</c> if there is no appropriate formatter.</returns>
-        ContentNegotiationResult Negotiate(Type type, HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters);
+        ContentNegotiationResult Negotiate(
+            Type type,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        );
     }
 }

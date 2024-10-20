@@ -1,11 +1,11 @@
-// Copyright (c) Microsoft Corporation. All rights reserved. 
-//  
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
-// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
-// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
-// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE 
-// AND INFORMATION REMAINS WITH THE USER. 
-//  
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE
+// AND INFORMATION REMAINS WITH THE USER.
+//
 
 /*********************************************************************
  * NOTE: A copy of this file exists at: WF\Common\Shared
@@ -15,14 +15,14 @@
 namespace System.Workflow.Activities.Common
 {
     using System;
+    using System.CodeDom;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
-    using System.CodeDom;
     using System.Text.RegularExpressions;
-    using System.Diagnostics.CodeAnalysis;
     using System.Workflow.ComponentModel.Compiler;
 
     internal static class ParseHelpers
@@ -32,19 +32,92 @@ namespace System.Workflow.Activities.Common
         private const string CultureTag = "culture";
         private const string PublicKeyTokenTag = "publickeytoken";
 
-        private static readonly ArrayList VBKeywords = new ArrayList(new string[] { "Integer", "String", "Boolean", "Object", "Void", "Single", "Double", "Char", "DateTime", "Long", "Byte", "Short", "Single", "Double", "Decimal", "UInteger", "ULong", "SByte", "UShort" });
-        private static readonly ArrayList CSKeywords = new ArrayList(new string[] { "int", "string", "bool", "object", "void", "float", "double", "char", "Date", "long", "byte", "short", "Single", "double", "decimal", "uint", "ulong", "sbyte", "ushort" });
-        private static readonly string[] DotNetKeywords = new string[] { "System.Int32", "System.String", "System.Boolean", "System.Object", "System.Void", "System.Single", "System.Double", "System.Char", "System.DateTime", "System.Int64", "System.Byte", "System.Int16", "System.Single", "System.Double", "System.Decimal", "System.UInt32", "System.UInt64", "System.SByte", "System.UInt16" };
+        private static readonly ArrayList VBKeywords = new ArrayList(
+            new string[]
+            {
+                "Integer",
+                "String",
+                "Boolean",
+                "Object",
+                "Void",
+                "Single",
+                "Double",
+                "Char",
+                "DateTime",
+                "Long",
+                "Byte",
+                "Short",
+                "Single",
+                "Double",
+                "Decimal",
+                "UInteger",
+                "ULong",
+                "SByte",
+                "UShort",
+            }
+        );
+        private static readonly ArrayList CSKeywords = new ArrayList(
+            new string[]
+            {
+                "int",
+                "string",
+                "bool",
+                "object",
+                "void",
+                "float",
+                "double",
+                "char",
+                "Date",
+                "long",
+                "byte",
+                "short",
+                "Single",
+                "double",
+                "decimal",
+                "uint",
+                "ulong",
+                "sbyte",
+                "ushort",
+            }
+        );
+        private static readonly string[] DotNetKeywords = new string[]
+        {
+            "System.Int32",
+            "System.String",
+            "System.Boolean",
+            "System.Object",
+            "System.Void",
+            "System.Single",
+            "System.Double",
+            "System.Char",
+            "System.DateTime",
+            "System.Int64",
+            "System.Byte",
+            "System.Int16",
+            "System.Single",
+            "System.Double",
+            "System.Decimal",
+            "System.UInt32",
+            "System.UInt64",
+            "System.SByte",
+            "System.UInt16",
+        };
 
         internal enum ParseTypeNameLanguage
         {
             VB,
             CSharp,
-            NetFramework
+            NetFramework,
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal static bool ParseTypeName(string inputTypeName, ParseTypeNameLanguage parseTypeNameLanguage, out string typeName, out string[] parameters, out string elemantDecorator)
+        internal static bool ParseTypeName(
+            string inputTypeName,
+            ParseTypeNameLanguage parseTypeNameLanguage,
+            out string typeName,
+            out string[] parameters,
+            out string elemantDecorator
+        )
         {
             typeName = string.Empty;
             parameters = null;
@@ -77,9 +150,12 @@ namespace System.Workflow.Activities.Common
                 if (nestLevel != 0)
                     return false;
 
-                typeName = inputTypeName.Substring(0, startIndex) + inputTypeName.Substring(endIndex + 1);
+                typeName =
+                    inputTypeName.Substring(0, startIndex) + inputTypeName.Substring(endIndex + 1);
 
-                string bracketContent = inputTypeName.Substring(startIndex + 1, endIndex - startIndex - 1).Trim();
+                string bracketContent = inputTypeName
+                    .Substring(startIndex + 1, endIndex - startIndex - 1)
+                    .Trim();
                 if ((bracketContent == String.Empty) || (bracketContent.TrimStart()[0] == ','))
                 {
                     // array
@@ -110,25 +186,38 @@ namespace System.Workflow.Activities.Common
 
                         // remove extra brackects if exist
                         if (parameters[loop][0] == '[')
-                            parameters[loop] = parameters[loop].Substring(1, parameters[loop].Length - 2);
+                            parameters[loop] = parameters[loop]
+                                .Substring(1, parameters[loop].Length - 2);
 
                         // remove the "Of " keyword form VB parameters
-                        if ((parseTypeNameLanguage == ParseTypeNameLanguage.VB) && (parameters[loop].StartsWith("Of ", StringComparison.OrdinalIgnoreCase)))
+                        if (
+                            (parseTypeNameLanguage == ParseTypeNameLanguage.VB)
+                            && (
+                                parameters[loop]
+                                    .StartsWith("Of ", StringComparison.OrdinalIgnoreCase)
+                            )
+                        )
                             parameters[loop] = parameters[loop].Substring(3).TrimStart();
                     }
                 }
             }
             else // byref, pointer
             {
-                typeName = inputTypeName.Substring(0, endIndex) + inputTypeName.Substring(endIndex + 1);
+                typeName =
+                    inputTypeName.Substring(0, endIndex) + inputTypeName.Substring(endIndex + 1);
                 elemantDecorator = inputTypeName.Substring(endIndex, 1);
             }
 
             //Work around: we need to account for these langugue keywords and provide the correct type for them.
             //      A tighter way to achieve this should be found.
-            if ((parseTypeNameLanguage == ParseTypeNameLanguage.CSharp) && CSKeywords.Contains(typeName))
+            if (
+                (parseTypeNameLanguage == ParseTypeNameLanguage.CSharp)
+                && CSKeywords.Contains(typeName)
+            )
                 typeName = DotNetKeywords[CSKeywords.IndexOf(typeName)];
-            else if ((parseTypeNameLanguage == ParseTypeNameLanguage.VB) && VBKeywords.Contains(typeName))
+            else if (
+                (parseTypeNameLanguage == ParseTypeNameLanguage.VB) && VBKeywords.Contains(typeName)
+            )
                 typeName = DotNetKeywords[VBKeywords.IndexOf(typeName)];
 
             return true;
@@ -146,7 +235,11 @@ namespace System.Workflow.Activities.Common
             // Next, version checks.  We are comparing AGAINST thatName,
             // so if thatName has a version defined, we must match.
             Version thatVersion = thatName.Version;
-            if (thatVersion != null && thatVersion != emptyVersion && thatVersion != thisName.Version)
+            if (
+                thatVersion != null
+                && thatVersion != emptyVersion
+                && thatVersion != thisName.Version
+            )
                 return false;
 
             // Same story for culture
@@ -214,8 +307,14 @@ namespace System.Workflow.Activities.Common
                 int indexOfEquals = parts[index].IndexOf('=');
                 if (indexOfEquals != -1)
                 {
-                    string partName = parts[index].Substring(0, indexOfEquals).Trim().ToLowerInvariant();
-                    string partValue = parts[index].Substring(indexOfEquals + 1).Trim().ToLowerInvariant();
+                    string partName = parts[index]
+                        .Substring(0, indexOfEquals)
+                        .Trim()
+                        .ToLowerInvariant();
+                    string partValue = parts[index]
+                        .Substring(indexOfEquals + 1)
+                        .Trim()
+                        .ToLowerInvariant();
                     if (string.IsNullOrEmpty(partValue))
                         continue;
 
@@ -225,15 +324,31 @@ namespace System.Workflow.Activities.Common
                             thatVersion = new Version(partValue);
                             break;
                         case ParseHelpers.CultureTag:
-                            if (!string.Equals(partValue, "neutral", StringComparison.OrdinalIgnoreCase))
+                            if (
+                                !string.Equals(
+                                    partValue,
+                                    "neutral",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                                 thatCulture = new CultureInfo(partValue);
                             break;
                         case ParseHelpers.PublicKeyTokenTag:
-                            if (!string.Equals(partValue, "null", StringComparison.OrdinalIgnoreCase))
+                            if (
+                                !string.Equals(
+                                    partValue,
+                                    "null",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                             {
                                 thatToken = new byte[partValue.Length / 2];
                                 for (int i = 0; i < thatToken.Length; i++)
-                                    thatToken[i] = Byte.Parse(partValue.Substring(i * 2, 2), NumberStyles.HexNumber, CultureInfo.InvariantCulture);
+                                    thatToken[i] = Byte.Parse(
+                                        partValue.Substring(i * 2, 2),
+                                        NumberStyles.HexNumber,
+                                        CultureInfo.InvariantCulture
+                                    );
                             }
                             break;
                         default:
@@ -242,7 +357,11 @@ namespace System.Workflow.Activities.Common
                 }
             }
 
-            if (thatVersion != null && thatVersion != emptyVersion && thatVersion != thisName.Version)
+            if (
+                thatVersion != null
+                && thatVersion != emptyVersion
+                && thatVersion != thisName.Version
+            )
                 return false;
 
             if (thatCulture != null && !thatCulture.Equals(CultureInfo.InvariantCulture))
@@ -345,7 +464,15 @@ namespace System.Workflow.Activities.Common
             string[] genericParamTypeNames = null;
             string baseTypeName = string.Empty;
             string elementDecorators = string.Empty;
-            if (ParseHelpers.ParseTypeName(type, ParseHelpers.ParseTypeNameLanguage.NetFramework, out baseTypeName, out genericParamTypeNames, out elementDecorators))
+            if (
+                ParseHelpers.ParseTypeName(
+                    type,
+                    ParseHelpers.ParseTypeNameLanguage.NetFramework,
+                    out baseTypeName,
+                    out genericParamTypeNames,
+                    out elementDecorators
+                )
+            )
             {
                 if (elementDecorators.Length > 0)
                 {
@@ -398,7 +525,6 @@ namespace System.Workflow.Activities.Common
                     indexOfSpecialChar = formattedType.IndexOf(',');
                     if (indexOfSpecialChar != -1)
                         formattedType = formattedType.Substring(0, indexOfSpecialChar);
-
                 }
             }
 
@@ -406,7 +532,11 @@ namespace System.Workflow.Activities.Common
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal static Type ParseTypeName(ITypeProvider typeProvider, SupportedLanguages language, string typeName)
+        internal static Type ParseTypeName(
+            ITypeProvider typeProvider,
+            SupportedLanguages language,
+            string typeName
+        )
         {
             Type returnType = null;
 
@@ -416,7 +546,17 @@ namespace System.Workflow.Activities.Common
                 string simpleTypeName = String.Empty;
                 string decoratorString = String.Empty;
                 string[] parameters = null;
-                if (ParseTypeName(typeName, language == SupportedLanguages.CSharp ? ParseTypeNameLanguage.CSharp : ParseTypeNameLanguage.VB, out simpleTypeName, out parameters, out decoratorString))
+                if (
+                    ParseTypeName(
+                        typeName,
+                        language == SupportedLanguages.CSharp
+                            ? ParseTypeNameLanguage.CSharp
+                            : ParseTypeNameLanguage.VB,
+                        out simpleTypeName,
+                        out parameters,
+                        out decoratorString
+                    )
+                )
                 {
                     returnType = typeProvider.GetType(simpleTypeName + decoratorString, false);
                 }

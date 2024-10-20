@@ -19,7 +19,11 @@ namespace System.Web.Mvc.Routing
             Subsegments = subsegments;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "Not changing original algorithm.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "Not changing original algorithm."
+        )]
         public bool IsCatchAll
         {
             get

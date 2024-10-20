@@ -7,17 +7,17 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class InMemoryTestHelpers : TestHelpers
 {
-    protected InMemoryTestHelpers()
-    {
-    }
+    protected InMemoryTestHelpers() { }
 
     public static InMemoryTestHelpers Instance { get; } = new();
 
-    public override IServiceCollection AddProviderServices(IServiceCollection services)
-        => services.AddEntityFrameworkInMemoryDatabase();
+    public override IServiceCollection AddProviderServices(IServiceCollection services) =>
+        services.AddEntityFrameworkInMemoryDatabase();
 
-    public override DbContextOptionsBuilder UseProviderOptions(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseInMemoryDatabase(nameof(InMemoryTestHelpers));
+    public override DbContextOptionsBuilder UseProviderOptions(
+        DbContextOptionsBuilder optionsBuilder
+    ) => optionsBuilder.UseInMemoryDatabase(nameof(InMemoryTestHelpers));
 
-    public override LoggingDefinitions LoggingDefinitions { get; } = new InMemoryLoggingDefinitions();
+    public override LoggingDefinitions LoggingDefinitions { get; } =
+        new InMemoryLoggingDefinitions();
 }

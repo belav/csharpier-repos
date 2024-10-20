@@ -11,7 +11,11 @@ namespace Microsoft.CodeAnalysis
 {
     public readonly partial struct SyntaxList<TNode>
     {
-        [SuppressMessage("Performance", "CA1067", Justification = "Equality not actually implemented")]
+        [SuppressMessage(
+            "Performance",
+            "CA1067",
+            Justification = "Equality not actually implemented"
+        )]
         public struct Enumerator
         {
             private readonly SyntaxList<TNode> _list;
@@ -37,10 +41,7 @@ namespace Microsoft.CodeAnalysis
 
             public TNode Current
             {
-                get
-                {
-                    return (TNode)_list.ItemInternal(_index)!;
-                }
+                get { return (TNode)_list.ItemInternal(_index)!; }
             }
 
             public void Reset()
@@ -75,22 +76,14 @@ namespace Microsoft.CodeAnalysis
 
             public TNode Current
             {
-                get
-                {
-                    return _e.Current;
-                }
+                get { return _e.Current; }
             }
 
-            void IDisposable.Dispose()
-            {
-            }
+            void IDisposable.Dispose() { }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    return _e.Current;
-                }
+                get { return _e.Current; }
             }
 
             void IEnumerator.Reset()

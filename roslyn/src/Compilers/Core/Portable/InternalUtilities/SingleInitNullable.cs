@@ -44,11 +44,10 @@ internal struct SingleInitNullable<T>
     /// resilient to failure paths (including cancellation), ensuring that the type reset itself <em>safely</em> to the
     /// initial state so that other threads were not perpetually stuck in the busy state.
     /// </remarks>
-    public T Initialize<TArg>(Func<TArg, T> valueFactory, TArg arg)
-        => ReadIfInitialized() ?? GetOrStore(valueFactory(arg));
+    public T Initialize<TArg>(Func<TArg, T> valueFactory, TArg arg) =>
+        ReadIfInitialized() ?? GetOrStore(valueFactory(arg));
 
-    private T? ReadIfInitialized()
-        => Volatile.Read(ref _initialized) == 2 ? _value : null;
+    private T? ReadIfInitialized() => Volatile.Read(ref _initialized) == 2 ? _value : null;
 
     private T GetOrStore(T value)
     {

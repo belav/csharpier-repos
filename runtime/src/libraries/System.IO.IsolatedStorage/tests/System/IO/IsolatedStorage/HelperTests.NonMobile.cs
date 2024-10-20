@@ -6,11 +6,8 @@ using Xunit;
 namespace System.IO.IsolatedStorage
 {
     public partial class HelperTests
-    {        
-        [Theory,
-            InlineData(IsolatedStorageScope.User),
-            InlineData(IsolatedStorageScope.Machine),
-            ]
+    {
+        [Theory, InlineData(IsolatedStorageScope.User), InlineData(IsolatedStorageScope.Machine)]
         public void GetRandomDirectory(IsolatedStorageScope scope)
         {
             using (var temp = new TempDirectory())
@@ -18,6 +15,6 @@ namespace System.IO.IsolatedStorage
                 string randomDir = Helper.GetRandomDirectory(temp.Path, scope);
                 Assert.True(Directory.Exists(randomDir));
             }
-        }       
+        }
     }
 }

@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -48,40 +48,49 @@ namespace System.Windows.Forms
 
         #region Properties
 
-        public Color BackColor {
+        public Color BackColor
+        {
             get { return backColor; }
         }
 
-        public Rectangle Bounds {
+        public Rectangle Bounds
+        {
             get { return bounds; }
         }
 
-        public int ColumnIndex {
+        public int ColumnIndex
+        {
             get { return columnIndex; }
         }
 
-        public bool DrawDefault {
+        public bool DrawDefault
+        {
             get { return drawDefault; }
             set { drawDefault = value; }
         }
 
-        public Font Font {
+        public Font Font
+        {
             get { return font; }
         }
 
-        public Color ForeColor {
+        public Color ForeColor
+        {
             get { return foreColor; }
         }
 
-        public Graphics Graphics {
+        public Graphics Graphics
+        {
             get { return graphics; }
         }
 
-        public ColumnHeader Header {
+        public ColumnHeader Header
+        {
             get { return header; }
         }
 
-        public ListViewItemStates State {
+        public ListViewItemStates State
+        {
             get { return state; }
         }
 
@@ -90,9 +99,16 @@ namespace System.Windows.Forms
 
         #region Constructors
 
-        public DrawListViewColumnHeaderEventArgs(Graphics graphics, Rectangle bounds, int columnIndex,
-                                        ColumnHeader header, ListViewItemStates state, Color foreColor,
-                                        Color backColor, Font font)
+        public DrawListViewColumnHeaderEventArgs(
+            Graphics graphics,
+            Rectangle bounds,
+            int columnIndex,
+            ColumnHeader header,
+            ListViewItemStates state,
+            Color foreColor,
+            Color backColor,
+            Font font
+        )
         {
             this.backColor = backColor;
             this.bounds = bounds;
@@ -109,22 +125,27 @@ namespace System.Windows.Forms
 
         #region Methods
 
-        public void DrawBackground ()
+        public void DrawBackground()
         {
-		// Always draw a non-pushed button
-		ThemeEngine.Current.CPDrawButton (graphics, bounds, ButtonState.Normal);
+            // Always draw a non-pushed button
+            ThemeEngine.Current.CPDrawButton(graphics, bounds, ButtonState.Normal);
         }
 
-        public void DrawText ()
+        public void DrawText()
         {
-		DrawText (TextFormatFlags.EndEllipsis | TextFormatFlags.SingleLine);
+            DrawText(TextFormatFlags.EndEllipsis | TextFormatFlags.SingleLine);
         }
 
-        public void DrawText (TextFormatFlags flags)
+        public void DrawText(TextFormatFlags flags)
         {
-		// Text adjustments
-		Rectangle text_bounds = new Rectangle (bounds.X + 8, bounds.Y, bounds.Width - 13, bounds.Height);
-		TextRenderer.DrawText (graphics, header.Text, font, text_bounds, foreColor, flags);
+            // Text adjustments
+            Rectangle text_bounds = new Rectangle(
+                bounds.X + 8,
+                bounds.Y,
+                bounds.Width - 13,
+                bounds.Height
+            );
+            TextRenderer.DrawText(graphics, header.Text, font, text_bounds, foreColor, flags);
         }
 
         #endregion Methods

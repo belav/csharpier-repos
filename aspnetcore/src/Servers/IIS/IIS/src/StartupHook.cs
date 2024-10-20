@@ -26,14 +26,19 @@ internal sealed class StartupHook
         }
 
         var detailedErrors = Environment.GetEnvironmentVariable("ASPNETCORE_DETAILEDERRORS");
-        var enableStartupErrorPage = detailedErrors?.Equals("1", StringComparison.OrdinalIgnoreCase) ?? false;
-        enableStartupErrorPage |= detailedErrors?.Equals("true", StringComparison.OrdinalIgnoreCase) ?? false;
+        var enableStartupErrorPage =
+            detailedErrors?.Equals("1", StringComparison.OrdinalIgnoreCase) ?? false;
+        enableStartupErrorPage |=
+            detailedErrors?.Equals("true", StringComparison.OrdinalIgnoreCase) ?? false;
 
         var aspnetCoreEnvironment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-        enableStartupErrorPage |= aspnetCoreEnvironment?.Equals("Development", StringComparison.OrdinalIgnoreCase) ?? false;
+        enableStartupErrorPage |=
+            aspnetCoreEnvironment?.Equals("Development", StringComparison.OrdinalIgnoreCase)
+            ?? false;
 
         var dotnetEnvironment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
-        enableStartupErrorPage |= dotnetEnvironment?.Equals("Development", StringComparison.OrdinalIgnoreCase) ?? false;
+        enableStartupErrorPage |=
+            dotnetEnvironment?.Equals("Development", StringComparison.OrdinalIgnoreCase) ?? false;
 
         if (!enableStartupErrorPage)
         {
@@ -47,13 +52,16 @@ internal sealed class StartupHook
 
             // Get the content root from IIS.
             var iisConfigData = NativeMethods.HttpGetApplicationProperties();
-            var contentRoot = iisConfigData.pwzFullApplicationPath.TrimEnd(Path.DirectorySeparatorChar);
+            var contentRoot = iisConfigData.pwzFullApplicationPath.TrimEnd(
+                Path.DirectorySeparatorChar
+            );
 
             var model = ErrorPageModelBuilder.CreateErrorPageModel(
                 new PhysicalFileProvider(contentRoot),
                 logger: null,
                 showDetailedErrors: true,
-                exception);
+                exception
+            );
 
             var errorPage = new ErrorPage(model);
 

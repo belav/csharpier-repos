@@ -34,7 +34,11 @@ namespace Microsoft.Extensions.Logging.Console
 
         internal ConsoleFormatterOptions FormatterOptions { get; set; }
 
-        public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider? scopeProvider, TextWriter textWriter)
+        public override void Write<TState>(
+            in LogEntry<TState> logEntry,
+            IExternalScopeProvider? scopeProvider,
+            TextWriter textWriter
+        )
         {
             string message = logEntry.Formatter(logEntry.State, logEntry.Exception);
             if (logEntry.Exception == null && message == null)
@@ -109,24 +113,30 @@ namespace Microsoft.Extensions.Logging.Console
             return logLevel switch
             {
                 LogLevel.Trace => "<7>",
-                LogLevel.Debug => "<7>",        // debug-level messages
-                LogLevel.Information => "<6>",  // informational messages
-                LogLevel.Warning => "<4>",     // warning conditions
-                LogLevel.Error => "<3>",       // error conditions
-                LogLevel.Critical => "<2>",    // critical conditions
-                _ => throw new ArgumentOutOfRangeException(nameof(logLevel))
+                LogLevel.Debug => "<7>", // debug-level messages
+                LogLevel.Information => "<6>", // informational messages
+                LogLevel.Warning => "<4>", // warning conditions
+                LogLevel.Error => "<3>", // error conditions
+                LogLevel.Critical => "<2>", // critical conditions
+                _ => throw new ArgumentOutOfRangeException(nameof(logLevel)),
             };
         }
 
-        private void WriteScopeInformation(TextWriter textWriter, IExternalScopeProvider? scopeProvider)
+        private void WriteScopeInformation(
+            TextWriter textWriter,
+            IExternalScopeProvider? scopeProvider
+        )
         {
             if (FormatterOptions.IncludeScopes && scopeProvider != null)
             {
-                scopeProvider.ForEachScope((scope, state) =>
-                {
-                    state.Write(" => ");
-                    state.Write(scope);
-                }, textWriter);
+                scopeProvider.ForEachScope(
+                    (scope, state) =>
+                    {
+                        state.Write(" => ");
+                        state.Write(scope);
+                    },
+                    textWriter
+                );
             }
         }
     }

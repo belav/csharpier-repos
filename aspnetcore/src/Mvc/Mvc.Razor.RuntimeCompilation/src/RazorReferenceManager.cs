@@ -21,7 +21,8 @@ internal class RazorReferenceManager
 
     public RazorReferenceManager(
         ApplicationPartManager partManager,
-        IOptions<MvcRazorRuntimeCompilationOptions> options)
+        IOptions<MvcRazorRuntimeCompilationOptions> options
+    )
     {
         _partManager = partManager;
         _options = options.Value;
@@ -35,7 +36,8 @@ internal class RazorReferenceManager
                 ref _compilationReferences,
                 ref _compilationReferencesInitialized,
                 ref _compilationReferencesLock,
-                GetCompilationReferences)!;
+                GetCompilationReferences
+            )!;
         }
     }
 
@@ -43,9 +45,7 @@ internal class RazorReferenceManager
     {
         var referencePaths = GetReferencePaths();
 
-        return referencePaths
-            .Select(CreateMetadataReference)
-            .ToList();
+        return referencePaths.Select(CreateMetadataReference).ToList();
     }
 
     // For unit testing
@@ -74,7 +74,10 @@ internal class RazorReferenceManager
     {
         using (var stream = File.OpenRead(path))
         {
-            var moduleMetadata = ModuleMetadata.CreateFromStream(stream, PEStreamOptions.PrefetchMetadata);
+            var moduleMetadata = ModuleMetadata.CreateFromStream(
+                stream,
+                PEStreamOptions.PrefetchMetadata
+            );
             var assemblyMetadata = AssemblyMetadata.Create(moduleMetadata);
 
             return assemblyMetadata.GetReference(filePath: path);

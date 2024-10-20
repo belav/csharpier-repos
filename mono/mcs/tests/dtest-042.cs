@@ -1,26 +1,31 @@
 class A
 {
-	protected virtual object Prop { get { return null; } set { } }
+    protected virtual object Prop
+    {
+        get { return null; }
+        set { }
+    }
 }
 
 class B : A
 {
-	public void Foo ()
-	{
-	}
+    public void Foo() { }
 
-	protected override dynamic Prop { get { return new B (); } }
+    protected override dynamic Prop
+    {
+        get { return new B(); }
+    }
 }
 
 class Program : B
 {
-	void Test ()
-	{
-		base.Prop.Foo ();
-	}
+    void Test()
+    {
+        base.Prop.Foo();
+    }
 
-	public static void Main ()
-	{
-		new Program ().Test ();
-	}
+    public static void Main()
+    {
+        new Program().Test();
+    }
 }

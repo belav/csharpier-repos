@@ -29,32 +29,32 @@ using System;
 using Microsoft.Build.BuildEngine;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
-	[TestFixture]
-	public class InternalLoggerExceptionTest {
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
+    [TestFixture]
+    public class InternalLoggerExceptionTest
+    {
+        // An InternalLoggerException can only be thrown by the MSBuild engine.
+        // The public constructors of this class cannot be used to create an instance of the exception.
+        [Test]
+        [ExpectedException(typeof(System.InvalidOperationException))]
+        public void TestCtorMessage()
+        {
+            string message = "message";
 
+            new InternalLoggerException(message);
+        }
 
-		// An InternalLoggerException can only be thrown by the MSBuild engine.
-		// The public constructors of this class cannot be used to create an instance of the exception.
-		[Test]
-		[ExpectedException (typeof (System.InvalidOperationException))]
-		public void TestCtorMessage ()
-		{
-			string message = "message";
-			
-			new InternalLoggerException (message);
-		}
-		
-		// An InternalLoggerException can only be thrown by the MSBuild engine.
-		// The public constructors of this class cannot be used to create an instance of the exception.
-		[Test]
-		[ExpectedException (typeof (System.InvalidOperationException))]
-		public void TestCtorMessageException ()
-		{
-			string message = "message";
-			Exception e = new Exception ("Inner exception message.");
-			
-			new InternalLoggerException (message, e);
-		}
-	}
+        // An InternalLoggerException can only be thrown by the MSBuild engine.
+        // The public constructors of this class cannot be used to create an instance of the exception.
+        [Test]
+        [ExpectedException(typeof(System.InvalidOperationException))]
+        public void TestCtorMessageException()
+        {
+            string message = "message";
+            Exception e = new Exception("Inner exception message.");
+
+            new InternalLoggerException(message, e);
+        }
+    }
 }

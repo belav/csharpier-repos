@@ -5,28 +5,29 @@
 
 using System;
 
-public interface A {
- 	int Add (int a, int b);
+public interface A
+{
+    int Add(int a, int b);
 }
 
-public class X {
-	public int Add (int a, int b)
-	{
-		return a + b;
-	}
+public class X
+{
+    public int Add(int a, int b)
+    {
+        return a + b;
+    }
 }
 
-class Y : X, A {
+class Y : X, A
+{
+    public static int Main()
+    {
+        Y y = new Y();
 
-	public static int Main ()
-	{
-		Y y = new Y ();
-		
-		if (y.Add (1, 1) != 2)
-			return 1;
+        if (y.Add(1, 1) != 2)
+            return 1;
 
-		Console.WriteLine ("parent interface implementation test passes");
-		return 0;
-	}
-	
+        Console.WriteLine("parent interface implementation test passes");
+        return 0;
+    }
 }

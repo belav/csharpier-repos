@@ -23,14 +23,22 @@ namespace System.Net.Sockets
 
         partial void CompleteCore();
 
-        private void AcceptCompletionCallback(IntPtr acceptedFileDescriptor, Memory<byte> socketAddress, SocketError socketError)
+        private void AcceptCompletionCallback(
+            IntPtr acceptedFileDescriptor,
+            Memory<byte> socketAddress,
+            SocketError socketError
+        )
         {
             CompleteAcceptOperation(acceptedFileDescriptor, socketAddress, socketError);
 
             CompletionCallback(0, SocketFlags.None, socketError);
         }
 
-        private void CompleteAcceptOperation(IntPtr acceptedFileDescriptor, Memory<byte> socketAddress, SocketError socketError)
+        private void CompleteAcceptOperation(
+            IntPtr acceptedFileDescriptor,
+            Memory<byte> socketAddress,
+            SocketError socketError
+        )
         {
             _acceptedFileDescriptor = acceptedFileDescriptor;
             if (socketError == SocketError.Success)
@@ -44,7 +52,13 @@ namespace System.Net.Sockets
             }
         }
 
-        internal unsafe SocketError DoOperationAccept(Socket _ /*socket*/, SafeSocketHandle handle, SafeSocketHandle? acceptHandle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationAccept(
+            Socket _ /*socket*/
+            ,
+            SafeSocketHandle handle,
+            SafeSocketHandle? acceptHandle,
+            CancellationToken cancellationToken
+        )
         {
             if (!_buffer.Equals(default))
             {
@@ -56,11 +70,21 @@ namespace System.Net.Sockets
             Debug.Assert(acceptHandle == null, $"Unexpected acceptHandle: {acceptHandle}");
 
             IntPtr acceptedFd;
-            SocketError socketError = handle.AsyncContext.AcceptAsync(_acceptBuffer!, out int socketAddressLen, out acceptedFd, AcceptCompletionCallback, cancellationToken);
+            SocketError socketError = handle.AsyncContext.AcceptAsync(
+                _acceptBuffer!,
+                out int socketAddressLen,
+                out acceptedFd,
+                AcceptCompletionCallback,
+                cancellationToken
+            );
 
             if (socketError != SocketError.IOPending)
             {
-                CompleteAcceptOperation(acceptedFd, new Memory<byte>(_acceptBuffer, 0, socketAddressLen), socketError);
+                CompleteAcceptOperation(
+                    acceptedFd,
+                    new Memory<byte>(_acceptBuffer, 0, socketAddressLen),
+                    socketError
+                );
                 FinishOperationSync(socketError, 0, SocketFlags.None);
             }
 
@@ -72,12 +96,18 @@ namespace System.Net.Sockets
             CompletionCallback(0, SocketFlags.None, socketError);
         }
 
-        internal unsafe SocketError DoOperationConnectEx(Socket _ /*socket*/, SafeSocketHandle handle)
-            => DoOperationConnect(handle);
+        internal unsafe SocketError DoOperationConnectEx(
+            Socket _ /*socket*/
+            ,
+            SafeSocketHandle handle
+        ) => DoOperationConnect(handle);
 
         internal unsafe SocketError DoOperationConnect(SafeSocketHandle handle)
         {
-            SocketError socketError = handle.AsyncContext.ConnectAsync(_socketAddress!.Buffer, ConnectCompletionCallback);
+            SocketError socketError = handle.AsyncContext.ConnectAsync(
+                _socketAddress!.Buffer,
+                ConnectCompletionCallback
+            );
             if (socketError != SocketError.IOPending)
             {
                 FinishOperationSync(socketError, 0, SocketFlags.None);
@@ -85,7 +115,11 @@ namespace System.Net.Sockets
             return socketError;
         }
 
-        internal SocketError DoOperationDisconnect(Socket socket, SafeSocketHandle handle, CancellationToken _ /*cancellationToken*/)
+        internal SocketError DoOperationDisconnect(
+            Socket socket,
+            SafeSocketHandle handle,
+            CancellationToken _ /*cancellationToken*/
+        )
         {
             SocketError socketError = SocketPal.Disconnect(socket, handle, _disconnectReuseSocket);
             FinishOperationSync(socketError, 0, SocketFlags.None);
@@ -95,20 +129,32 @@ namespace System.Net.Sockets
         private Action<int, Memory<byte>, SocketFlags, SocketError> TransferCompletionCallback =>
             _transferCompletionCallback ??= TransferCompletionCallbackCore;
 
-        private void TransferCompletionCallbackCore(int bytesTransferred, Memory<byte> socketAddress, SocketFlags receivedFlags, SocketError socketError)
+        private void TransferCompletionCallbackCore(
+            int bytesTransferred,
+            Memory<byte> socketAddress,
+            SocketFlags receivedFlags,
+            SocketError socketError
+        )
         {
             CompleteTransferOperation(socketAddress, socketAddress.Length, receivedFlags);
 
             CompletionCallback(bytesTransferred, receivedFlags, socketError);
         }
 
-        private void CompleteTransferOperation(Memory<byte> _, int socketAddressSize, SocketFlags receivedFlags)
+        private void CompleteTransferOperation(
+            Memory<byte> _,
+            int socketAddressSize,
+            SocketFlags receivedFlags
+        )
         {
             _socketAddressSize = socketAddressSize;
             _receivedFlags = receivedFlags;
         }
 
-        internal unsafe SocketError DoOperationReceive(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationReceive(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
@@ -122,17 +168,36 @@ namespace System.Net.Sockets
                 bool noReceivedFlags = _currentSocket!.ProtocolType == ProtocolType.Tcp;
                 if (noReceivedFlags)
                 {
-                    errorCode = handle.AsyncContext.ReceiveAsync(_buffer.Slice(_offset, _count), _socketFlags, out bytesReceived, TransferCompletionCallback, cancellationToken);
+                    errorCode = handle.AsyncContext.ReceiveAsync(
+                        _buffer.Slice(_offset, _count),
+                        _socketFlags,
+                        out bytesReceived,
+                        TransferCompletionCallback,
+                        cancellationToken
+                    );
                     flags = SocketFlags.None;
                 }
                 else
                 {
-                    errorCode = handle.AsyncContext.ReceiveAsync(_buffer.Slice(_offset, _count), _socketFlags, out bytesReceived, out flags, TransferCompletionCallback, cancellationToken);
+                    errorCode = handle.AsyncContext.ReceiveAsync(
+                        _buffer.Slice(_offset, _count),
+                        _socketFlags,
+                        out bytesReceived,
+                        out flags,
+                        TransferCompletionCallback,
+                        cancellationToken
+                    );
                 }
             }
             else
             {
-                errorCode = handle.AsyncContext.ReceiveAsync(_bufferListInternal!, _socketFlags, out bytesReceived, out flags, TransferCompletionCallback);
+                errorCode = handle.AsyncContext.ReceiveAsync(
+                    _bufferListInternal!,
+                    _socketFlags,
+                    out bytesReceived,
+                    out flags,
+                    TransferCompletionCallback
+                );
             }
 
             if (errorCode != SocketError.IOPending)
@@ -144,7 +209,10 @@ namespace System.Net.Sockets
             return errorCode;
         }
 
-        internal unsafe SocketError DoOperationReceiveFrom(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationReceiveFrom(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
@@ -155,11 +223,28 @@ namespace System.Net.Sockets
             int socketAddressLen;
             if (_bufferList == null)
             {
-                errorCode = handle.AsyncContext.ReceiveFromAsync(_buffer.Slice(_offset, _count), _socketFlags, _socketAddress!.Buffer, out socketAddressLen, out bytesReceived, out flags, TransferCompletionCallback, cancellationToken);
+                errorCode = handle.AsyncContext.ReceiveFromAsync(
+                    _buffer.Slice(_offset, _count),
+                    _socketFlags,
+                    _socketAddress!.Buffer,
+                    out socketAddressLen,
+                    out bytesReceived,
+                    out flags,
+                    TransferCompletionCallback,
+                    cancellationToken
+                );
             }
             else
             {
-                errorCode = handle.AsyncContext.ReceiveFromAsync(_bufferListInternal!, _socketFlags, _socketAddress!.Buffer, out socketAddressLen, out bytesReceived, out flags, TransferCompletionCallback);
+                errorCode = handle.AsyncContext.ReceiveFromAsync(
+                    _bufferListInternal!,
+                    _socketFlags,
+                    _socketAddress!.Buffer,
+                    out socketAddressLen,
+                    out bytesReceived,
+                    out flags,
+                    TransferCompletionCallback
+                );
             }
 
             if (errorCode != SocketError.IOPending)
@@ -171,14 +256,30 @@ namespace System.Net.Sockets
             return errorCode;
         }
 
-        private void ReceiveMessageFromCompletionCallback(int bytesTransferred, Memory<byte> socketAddress, SocketFlags receivedFlags, IPPacketInformation ipPacketInformation, SocketError errorCode)
+        private void ReceiveMessageFromCompletionCallback(
+            int bytesTransferred,
+            Memory<byte> socketAddress,
+            SocketFlags receivedFlags,
+            IPPacketInformation ipPacketInformation,
+            SocketError errorCode
+        )
         {
-            CompleteReceiveMessageFromOperation(socketAddress, socketAddress.Length, receivedFlags, ipPacketInformation);
+            CompleteReceiveMessageFromOperation(
+                socketAddress,
+                socketAddress.Length,
+                receivedFlags,
+                ipPacketInformation
+            );
 
             CompletionCallback(bytesTransferred, receivedFlags, errorCode);
         }
 
-        private void CompleteReceiveMessageFromOperation(Memory<byte> socketAddress, int socketAddressSize, SocketFlags receivedFlags, IPPacketInformation ipPacketInformation)
+        private void CompleteReceiveMessageFromOperation(
+            Memory<byte> socketAddress,
+            int socketAddressSize,
+            SocketFlags receivedFlags,
+            IPPacketInformation ipPacketInformation
+        )
         {
             Debug.Assert(socketAddress.Length == socketAddressSize);
 
@@ -187,30 +288,61 @@ namespace System.Net.Sockets
             _receiveMessageFromPacketInfo = ipPacketInformation;
         }
 
-        internal unsafe SocketError DoOperationReceiveMessageFrom(Socket socket, SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationReceiveMessageFrom(
+            Socket socket,
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
             _receiveMessageFromPacketInfo = default(IPPacketInformation);
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
 
-            bool isIPv4, isIPv6;
-            Socket.GetIPProtocolInformation(socket.AddressFamily, _socketAddress!, out isIPv4, out isIPv6);
+            bool isIPv4,
+                isIPv6;
+            Socket.GetIPProtocolInformation(
+                socket.AddressFamily,
+                _socketAddress!,
+                out isIPv4,
+                out isIPv6
+            );
 
             int socketAddressSize = _socketAddress!.Buffer.Length;
             int bytesReceived;
             SocketFlags receivedFlags;
             IPPacketInformation ipPacketInformation;
-            SocketError socketError = handle.AsyncContext.ReceiveMessageFromAsync(_buffer.Slice(_offset, _count), _bufferListInternal, _socketFlags, _socketAddress.Buffer, out socketAddressSize, isIPv4, isIPv6, out bytesReceived, out receivedFlags, out ipPacketInformation, ReceiveMessageFromCompletionCallback, cancellationToken);
+            SocketError socketError = handle.AsyncContext.ReceiveMessageFromAsync(
+                _buffer.Slice(_offset, _count),
+                _bufferListInternal,
+                _socketFlags,
+                _socketAddress.Buffer,
+                out socketAddressSize,
+                isIPv4,
+                isIPv6,
+                out bytesReceived,
+                out receivedFlags,
+                out ipPacketInformation,
+                ReceiveMessageFromCompletionCallback,
+                cancellationToken
+            );
             if (socketError != SocketError.IOPending)
             {
                 _socketAddress.Size = socketAddressSize;
-                CompleteReceiveMessageFromOperation(_socketAddress.Buffer, socketAddressSize, receivedFlags, ipPacketInformation);
+                CompleteReceiveMessageFromOperation(
+                    _socketAddress.Buffer,
+                    socketAddressSize,
+                    receivedFlags,
+                    ipPacketInformation
+                );
                 FinishOperationSync(socketError, bytesReceived, receivedFlags);
             }
             return socketError;
         }
 
-        internal unsafe SocketError DoOperationSend(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal unsafe SocketError DoOperationSend(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
@@ -219,11 +351,24 @@ namespace System.Net.Sockets
             SocketError errorCode;
             if (_bufferList == null)
             {
-                errorCode = handle.AsyncContext.SendAsync(_buffer, _offset, _count, _socketFlags, out bytesSent, TransferCompletionCallback, cancellationToken);
+                errorCode = handle.AsyncContext.SendAsync(
+                    _buffer,
+                    _offset,
+                    _count,
+                    _socketFlags,
+                    out bytesSent,
+                    TransferCompletionCallback,
+                    cancellationToken
+                );
             }
             else
             {
-                errorCode = handle.AsyncContext.SendAsync(_bufferListInternal!, _socketFlags, out bytesSent, TransferCompletionCallback);
+                errorCode = handle.AsyncContext.SendAsync(
+                    _bufferListInternal!,
+                    _socketFlags,
+                    out bytesSent,
+                    TransferCompletionCallback
+                );
             }
 
             if (errorCode != SocketError.IOPending)
@@ -235,7 +380,12 @@ namespace System.Net.Sockets
             return errorCode;
         }
 
-        internal SocketError DoOperationSendPackets(Socket socket, SafeSocketHandle _1 /*handle*/, CancellationToken cancellationToken)
+        internal SocketError DoOperationSendPackets(
+            Socket socket,
+            SafeSocketHandle _1 /*handle*/
+            ,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(_sendPacketsElements != null);
             SendPacketsElement[] elements = (SendPacketsElement[])_sendPacketsElements.Clone();
@@ -250,7 +400,13 @@ namespace System.Net.Sockets
                     string? path = elements[i]?.FilePath;
                     if (path != null)
                     {
-                        fileHandles[i] = File.OpenHandle(path, FileMode.Open, FileAccess.Read, FileShare.Read, FileOptions.Asynchronous);
+                        fileHandles[i] = File.OpenHandle(
+                            path,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read,
+                            FileOptions.Asynchronous
+                        );
                     }
                 }
             }
@@ -279,22 +435,32 @@ namespace System.Net.Sockets
                 throw;
             }
 
-            _ = SocketPal.SendPacketsAsync(socket, SendPacketsFlags, elements, fileHandles, cancellationToken, (bytesTransferred, error) =>
-            {
-                if (error == SocketError.Success)
+            _ = SocketPal.SendPacketsAsync(
+                socket,
+                SendPacketsFlags,
+                elements,
+                fileHandles,
+                cancellationToken,
+                (bytesTransferred, error) =>
                 {
-                    FinishOperationAsyncSuccess((int)bytesTransferred, SocketFlags.None);
+                    if (error == SocketError.Success)
+                    {
+                        FinishOperationAsyncSuccess((int)bytesTransferred, SocketFlags.None);
+                    }
+                    else
+                    {
+                        FinishOperationAsyncFailure(error, (int)bytesTransferred, SocketFlags.None);
+                    }
                 }
-                else
-                {
-                    FinishOperationAsyncFailure(error, (int)bytesTransferred, SocketFlags.None);
-                }
-            });
+            );
 
             return SocketError.IOPending;
         }
 
-        internal SocketError DoOperationSendTo(SafeSocketHandle handle, CancellationToken cancellationToken)
+        internal SocketError DoOperationSendTo(
+            SafeSocketHandle handle,
+            CancellationToken cancellationToken
+        )
         {
             _receivedFlags = System.Net.Sockets.SocketFlags.None;
             _socketAddressSize = 0;
@@ -303,16 +469,35 @@ namespace System.Net.Sockets
             SocketError errorCode;
             if (_bufferList == null)
             {
-                errorCode = handle.AsyncContext.SendToAsync(_buffer, _offset, _count, _socketFlags, _socketAddress!.Buffer, out bytesSent, TransferCompletionCallback, cancellationToken);
+                errorCode = handle.AsyncContext.SendToAsync(
+                    _buffer,
+                    _offset,
+                    _count,
+                    _socketFlags,
+                    _socketAddress!.Buffer,
+                    out bytesSent,
+                    TransferCompletionCallback,
+                    cancellationToken
+                );
             }
             else
             {
-                errorCode = handle.AsyncContext.SendToAsync(_bufferListInternal!, _socketFlags, _socketAddress!.Buffer, out bytesSent, TransferCompletionCallback);
+                errorCode = handle.AsyncContext.SendToAsync(
+                    _bufferListInternal!,
+                    _socketFlags,
+                    _socketAddress!.Buffer,
+                    out bytesSent,
+                    TransferCompletionCallback
+                );
             }
 
             if (errorCode != SocketError.IOPending)
             {
-                CompleteTransferOperation(_socketAddress.Buffer, _socketAddress.Size, SocketFlags.None);
+                CompleteTransferOperation(
+                    _socketAddress.Buffer,
+                    _socketAddress.Size,
+                    SocketFlags.None
+                );
                 FinishOperationSync(errorCode, bytesSent, SocketFlags.None);
             }
 
@@ -338,12 +523,15 @@ namespace System.Net.Sockets
 
         private SocketError FinishOperationAccept(SocketAddress remoteSocketAddress)
         {
-            new ReadOnlySpan<byte>(_acceptBuffer, 0, _acceptAddressBufferCount).CopyTo(remoteSocketAddress.Buffer.Span);
+            new ReadOnlySpan<byte>(_acceptBuffer, 0, _acceptAddressBufferCount).CopyTo(
+                remoteSocketAddress.Buffer.Span
+            );
             remoteSocketAddress.Size = _acceptAddressBufferCount;
 
             Socket acceptedSocket = _currentSocket!.CreateAcceptSocket(
                 SocketPal.CreateSocket(_acceptedFileDescriptor),
-                _currentSocket._rightEndPoint!.Create(remoteSocketAddress));
+                _currentSocket._rightEndPoint!.Create(remoteSocketAddress)
+            );
             if (_acceptSocket is null)
             {
                 // Store the accepted socket
@@ -375,7 +563,11 @@ namespace System.Net.Sockets
 
         partial void FinishOperationSendPackets();
 
-        private void CompletionCallback(int bytesTransferred, SocketFlags flags, SocketError socketError)
+        private void CompletionCallback(
+            int bytesTransferred,
+            SocketFlags flags,
+            SocketError socketError
+        )
         {
             if (socketError == SocketError.Success)
             {

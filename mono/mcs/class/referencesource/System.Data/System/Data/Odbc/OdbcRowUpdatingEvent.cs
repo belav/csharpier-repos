@@ -7,9 +7,9 @@
 //------------------------------------------------------------------------------
 
 using System;
+using System.ComponentModel; //Component
 using System.Data;
-using System.Data.Common;       //DbDataAdapter
-using System.ComponentModel;    //Component
+using System.Data.Common; //DbDataAdapter
 
 namespace System.Data.Odbc
 {
@@ -27,18 +27,22 @@ namespace System.Data.Odbc
     /////////////////////////////////////////////////////////////////////////
     public sealed class OdbcRowUpdatingEventArgs : RowUpdatingEventArgs
     {
-        public OdbcRowUpdatingEventArgs(DataRow row, IDbCommand command, StatementType statementType, DataTableMapping tableMapping)
-        : base(row, command, statementType, tableMapping)
-        {
-            }
+        public OdbcRowUpdatingEventArgs(
+            DataRow row,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+            : base(row, command, statementType, tableMapping) { }
 
-        new public OdbcCommand Command {
+        public new OdbcCommand Command
+        {
             get { return (base.Command as OdbcCommand); }
-            set {
-                base.Command = value; }
+            set { base.Command = value; }
         }
 
-        override protected IDbCommand BaseCommand {
+        protected override IDbCommand BaseCommand
+        {
             get { return base.BaseCommand; }
             set { base.BaseCommand = (value as OdbcCommand); }
         }
@@ -50,13 +54,17 @@ namespace System.Data.Odbc
     /////////////////////////////////////////////////////////////////////////
     public sealed class OdbcRowUpdatedEventArgs : RowUpdatedEventArgs
     {
-        public OdbcRowUpdatedEventArgs(DataRow row, IDbCommand command, StatementType statementType, DataTableMapping tableMapping)
-        : base(row, command, statementType, tableMapping)
-        {
-        }
+        public OdbcRowUpdatedEventArgs(
+            DataRow row,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+            : base(row, command, statementType, tableMapping) { }
 
-        new public OdbcCommand Command {
-            get {   return(OdbcCommand) base.Command;   }
+        public new OdbcCommand Command
+        {
+            get { return (OdbcCommand)base.Command; }
         }
     }
 }

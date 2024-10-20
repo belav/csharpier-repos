@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,70 +38,76 @@ using XmlNode = System.Object;
 
 namespace System.Net.Configuration
 {
-	class NetAuthenticationModuleHandler : IConfigurationSectionHandler
-	{
-		public virtual object Create (object parent, object configContext, XmlNode section)
-		{
-#if (XML_DEP)			
-			if (section.Attributes != null && section.Attributes.Count != 0)
-				HandlersUtil.ThrowException ("Unrecognized attribute", section);
+    class NetAuthenticationModuleHandler : IConfigurationSectionHandler
+    {
+        public virtual object Create(object parent, object configContext, XmlNode section)
+        {
+#if (XML_DEP)
+            if (section.Attributes != null && section.Attributes.Count != 0)
+                HandlersUtil.ThrowException("Unrecognized attribute", section);
 
-			XmlNodeList httpHandlers = section.ChildNodes;
-			foreach (XmlNode child in httpHandlers) {
-				XmlNodeType ntype = child.NodeType;
-				if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
-					continue;
+            XmlNodeList httpHandlers = section.ChildNodes;
+            foreach (XmlNode child in httpHandlers)
+            {
+                XmlNodeType ntype = child.NodeType;
+                if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
+                    continue;
 
-				if (ntype != XmlNodeType.Element)
-					HandlersUtil.ThrowException ("Only elements allowed", child);
-				
-				string name = child.Name;
-				if (name == "clear") {
-					if (child.Attributes != null && child.Attributes.Count != 0)
-						HandlersUtil.ThrowException ("Unrecognized attribute", child);
+                if (ntype != XmlNodeType.Element)
+                    HandlersUtil.ThrowException("Only elements allowed", child);
 
-					AuthenticationManager.Clear ();
-					continue;
-				}
+                string name = child.Name;
+                if (name == "clear")
+                {
+                    if (child.Attributes != null && child.Attributes.Count != 0)
+                        HandlersUtil.ThrowException("Unrecognized attribute", child);
 
-				string type = HandlersUtil.ExtractAttributeValue ("type", child);
-				if (child.Attributes != null && child.Attributes.Count != 0)
-					HandlersUtil.ThrowException ("Unrecognized attribute", child);
+                    AuthenticationManager.Clear();
+                    continue;
+                }
 
-				if (name == "add") {
-					AuthenticationManager.Register (CreateInstance (type, child));
-					continue;
-				}
+                string type = HandlersUtil.ExtractAttributeValue("type", child);
+                if (child.Attributes != null && child.Attributes.Count != 0)
+                    HandlersUtil.ThrowException("Unrecognized attribute", child);
 
-				if (name == "remove") {
-					AuthenticationManager.Unregister (CreateInstance (type, child));
-					continue;
-				}
+                if (name == "add")
+                {
+                    AuthenticationManager.Register(CreateInstance(type, child));
+                    continue;
+                }
 
-				HandlersUtil.ThrowException ("Unexpected element", child);
-			}
+                if (name == "remove")
+                {
+                    AuthenticationManager.Unregister(CreateInstance(type, child));
+                    continue;
+                }
 
-			return AuthenticationManager.RegisteredModules;
+                HandlersUtil.ThrowException("Unexpected element", child);
+            }
+
+            return AuthenticationManager.RegisteredModules;
 #else
-			return null;
-#endif			
-		}
+            return null;
+#endif
+        }
 
-#if (XML_DEP)			
-		static IAuthenticationModule CreateInstance (string typeName, XmlNode node)
-		{
-			IAuthenticationModule module = null;
-			
-			try {
-				Type type = Type.GetType (typeName, true);
-				module = (IAuthenticationModule) Activator.CreateInstance (type);
-			} catch (Exception e) {
-				HandlersUtil.ThrowException (e.Message, node);
-			}
+#if (XML_DEP)
+        static IAuthenticationModule CreateInstance(string typeName, XmlNode node)
+        {
+            IAuthenticationModule module = null;
 
-			return module;
-		}
-#endif		
-	}
+            try
+            {
+                Type type = Type.GetType(typeName, true);
+                module = (IAuthenticationModule)Activator.CreateInstance(type);
+            }
+            catch (Exception e)
+            {
+                HandlersUtil.ThrowException(e.Message, node);
+            }
+
+            return module;
+        }
+#endif
+    }
 }
-

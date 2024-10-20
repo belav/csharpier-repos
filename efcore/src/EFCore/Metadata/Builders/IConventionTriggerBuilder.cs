@@ -26,7 +26,11 @@ public interface IConventionTriggerBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     An <see cref="IConventionTriggerBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionTriggerBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionTriggerBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -43,7 +47,8 @@ public interface IConventionTriggerBuilder : IConventionAnnotatableBuilder
     new IConventionTriggerBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.

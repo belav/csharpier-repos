@@ -13,7 +13,8 @@ public class ApiResponseType
     /// <summary>
     /// Gets or sets the response formats supported by this type.
     /// </summary>
-    public IList<ApiResponseFormat> ApiResponseFormats { get; set; } = new List<ApiResponseFormat>();
+    public IList<ApiResponseFormat> ApiResponseFormats { get; set; } =
+        new List<ApiResponseFormat>();
 
     /// <summary>
     /// Gets or sets <see cref="ModelBinding.ModelMetadata"/> for the <see cref="Type"/> or null.

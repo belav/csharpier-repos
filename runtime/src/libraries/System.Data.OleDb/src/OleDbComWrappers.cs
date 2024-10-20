@@ -22,13 +22,29 @@ namespace System.Data.OleDb
     internal sealed unsafe class OleDbComWrappers : ComWrappers
     {
         private const int S_OK = (int)OleDbHResult.S_OK;
-        private static readonly Guid IID_IErrorInfo = new Guid(0x1CF2B120, 0x547D, 0x101B, 0x8E, 0x65, 0x08, 0x00, 0x2B, 0x2B, 0xD1, 0x19);
+        private static readonly Guid IID_IErrorInfo = new Guid(
+            0x1CF2B120,
+            0x547D,
+            0x101B,
+            0x8E,
+            0x65,
+            0x08,
+            0x00,
+            0x2B,
+            0x2B,
+            0xD1,
+            0x19
+        );
 
         internal static OleDbComWrappers Instance { get; } = new OleDbComWrappers();
 
         private OleDbComWrappers() { }
 
-        protected override unsafe ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+        protected override unsafe ComInterfaceEntry* ComputeVtables(
+            object obj,
+            CreateComInterfaceFlags flags,
+            out int count
+        )
         {
             throw new NotImplementedException();
         }
@@ -38,7 +54,11 @@ namespace System.Data.OleDb
             Debug.Assert(flags == CreateObjectFlags.UniqueInstance);
 
             Guid errorInfoIID = IID_IErrorInfo;
-            int hr = Marshal.QueryInterface(externalComObject, ref errorInfoIID, out IntPtr comObject);
+            int hr = Marshal.QueryInterface(
+                externalComObject,
+                ref errorInfoIID,
+                out IntPtr comObject
+            );
             if (hr == S_OK)
             {
                 return new ErrorInfoWrapper(comObject);
@@ -68,7 +88,8 @@ namespace System.Data.OleDb
             }
 
             [Obsolete("not used", true)]
-            void UnsafeNativeMethods.IErrorInfo.GetGUID(/*deleted parameter signature*/)
+            void UnsafeNativeMethods.IErrorInfo.GetGUID( /*deleted parameter signature*/
+            )
             {
                 throw new NotImplementedException();
             }
@@ -76,8 +97,13 @@ namespace System.Data.OleDb
             public unsafe System.Data.OleDb.OleDbHResult GetSource(out string? source)
             {
                 IntPtr pSource = IntPtr.Zero;
-                int errorCode = ((delegate* unmanaged<IntPtr, IntPtr*, int>)(*(*(void***)_wrappedInstance + 4 /* IErrorInfo.GetSource slot */)))
-                    (_wrappedInstance, &pSource);
+                int errorCode = (
+                    (delegate* unmanaged<IntPtr, IntPtr*, int>)(
+                        *(
+                            *(void***)_wrappedInstance + 4 /* IErrorInfo.GetSource slot */
+                        )
+                    )
+                )(_wrappedInstance, &pSource);
                 if (pSource == IntPtr.Zero || errorCode < 0)
                 {
                     source = null;
@@ -98,8 +124,13 @@ namespace System.Data.OleDb
             public unsafe System.Data.OleDb.OleDbHResult GetDescription(out string? description)
             {
                 IntPtr pDescription = IntPtr.Zero;
-                int errorCode = ((delegate* unmanaged<IntPtr, IntPtr*, int>)(*(*(void***)_wrappedInstance + 5 /* IErrorInfo.GetDescription slot */)))
-                    (_wrappedInstance, &pDescription);
+                int errorCode = (
+                    (delegate* unmanaged<IntPtr, IntPtr*, int>)(
+                        *(
+                            *(void***)_wrappedInstance + 5 /* IErrorInfo.GetDescription slot */
+                        )
+                    )
+                )(_wrappedInstance, &pDescription);
                 if (pDescription == IntPtr.Zero || errorCode < 0)
                 {
                     description = null;
@@ -117,6 +148,5 @@ namespace System.Data.OleDb
                 return (System.Data.OleDb.OleDbHResult)errorCode;
             }
         }
-
     }
 }

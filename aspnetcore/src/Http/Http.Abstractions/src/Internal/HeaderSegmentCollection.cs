@@ -6,7 +6,9 @@ using Microsoft.Extensions.Primitives;
 
 namespace Microsoft.AspNetCore.Http;
 
-internal readonly struct HeaderSegmentCollection : IEnumerable<HeaderSegment>, IEquatable<HeaderSegmentCollection>
+internal readonly struct HeaderSegmentCollection
+    : IEnumerable<HeaderSegment>,
+        IEquatable<HeaderSegmentCollection>
 {
     private readonly StringValues _headers;
 
@@ -106,7 +108,7 @@ internal readonly struct HeaderSegmentCollection : IEnumerable<HeaderSegment>, I
             Value,
             Quote,
             Delimiter,
-            Whitespace
+            Whitespace,
         }
 
         public HeaderSegment Current
@@ -115,7 +117,8 @@ internal readonly struct HeaderSegmentCollection : IEnumerable<HeaderSegment>, I
             {
                 return new HeaderSegment(
                     new StringSegment(_header, _leadingStart, _leadingEnd - _leadingStart),
-                    new StringSegment(_header, _valueStart, _valueEnd - _valueStart));
+                    new StringSegment(_header, _valueStart, _valueEnd - _valueStart)
+                );
             }
         }
 
@@ -124,9 +127,7 @@ internal readonly struct HeaderSegmentCollection : IEnumerable<HeaderSegment>, I
             get { return Current; }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public bool MoveNext()
         {
@@ -140,9 +141,7 @@ internal readonly struct HeaderSegmentCollection : IEnumerable<HeaderSegment>, I
                     _valueEnd = -1;
                     _trailingStart = -1;
 
-                    if (_offset == _headerLength &&
-                        _leadingStart != -1 &&
-                        _leadingStart != _offset)
+                    if (_offset == _headerLength && _leadingStart != -1 && _leadingStart != _offset)
                     {
                         // Also produce trailing whitespace
                         _leadingEnd = _offset;
@@ -178,7 +177,11 @@ internal readonly struct HeaderSegmentCollection : IEnumerable<HeaderSegment>, I
                     ++_offset;
                     char ch = _offset == _headerLength ? (char)0 : _header[_offset];
                     // todo - array of attrs
-                    Attr attr = char.IsWhiteSpace(ch) ? Attr.Whitespace : ch == '\"' ? Attr.Quote : (ch == ',' || ch == (char)0) ? Attr.Delimiter : Attr.Value;
+                    Attr attr =
+                        char.IsWhiteSpace(ch) ? Attr.Whitespace
+                        : ch == '\"' ? Attr.Quote
+                        : (ch == ',' || ch == (char)0) ? Attr.Delimiter
+                        : Attr.Value;
 
                     switch (_mode)
                     {
@@ -188,7 +191,8 @@ internal readonly struct HeaderSegmentCollection : IEnumerable<HeaderSegment>, I
                                 case Attr.Delimiter:
                                     _valueStart = _valueStart == -1 ? _offset : _valueStart;
                                     _valueEnd = _valueEnd == -1 ? _offset : _valueEnd;
-                                    _trailingStart = _trailingStart == -1 ? _offset : _trailingStart;
+                                    _trailingStart =
+                                        _trailingStart == -1 ? _offset : _trailingStart;
                                     _leadingEnd = _offset;
                                     _mode = Mode.Produce;
                                     break;

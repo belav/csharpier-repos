@@ -10,26 +10,26 @@ public class Test_FastTailCallInlining
     [Theory]
     [InlineData(2)]
     public static void A(int i)
-   {
-       if (i > 0)
-       {
-           B(--i);
-       }
-   }  
+    {
+        if (i > 0)
+        {
+            B(--i);
+        }
+    }
 
-   [MethodImpl(MethodImplOptions.AggressiveInlining)]
-   internal static void B(int i)
-   {
-       C(i);
-       A(--i);
-   }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal static void B(int i)
+    {
+        C(i);
+        A(--i);
+    }
 
     internal static void C(int i)
-   {
-       Console.WriteLine("In C");
-       if (i==0)
-       {
-           Console.WriteLine("In C");
-       }
-   }
+    {
+        Console.WriteLine("In C");
+        if (i == 0)
+        {
+            Console.WriteLine("In C");
+        }
+    }
 }

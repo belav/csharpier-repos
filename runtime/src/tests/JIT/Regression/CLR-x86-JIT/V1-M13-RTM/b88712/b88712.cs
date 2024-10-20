@@ -12,6 +12,7 @@ public struct AA
         float a = 125.0f;
         a += (a *= 60.0f);
     }
+
     [Fact]
     public static void TestEntryPoint()
     {

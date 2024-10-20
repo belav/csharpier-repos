@@ -12,7 +12,10 @@ namespace System.Linq
     /// <seealso cref="ImmutableArrayExtensions"/>
     internal static class ImmutableSegmentedListExtensions
     {
-        public static bool All<T>(this ImmutableSegmentedList<T> immutableList, Func<T, bool> predicate)
+        public static bool All<T>(
+            this ImmutableSegmentedList<T> immutableList,
+            Func<T, bool> predicate
+        )
         {
             if (immutableList.IsDefault)
                 throw new ArgumentNullException(nameof(immutableList));
@@ -44,7 +47,10 @@ namespace System.Linq
             return builder.Count > 0;
         }
 
-        public static bool Any<T>(this ImmutableSegmentedList<T> immutableList, Func<T, bool> predicate)
+        public static bool Any<T>(
+            this ImmutableSegmentedList<T> immutableList,
+            Func<T, bool> predicate
+        )
         {
             if (immutableList.IsDefault)
                 throw new ArgumentNullException(nameof(immutableList));
@@ -76,12 +82,13 @@ namespace System.Linq
 
             // In the event of an empty list, generate the same exception
             // that the linq extension method would.
-            return builder.Count > 0
-                ? builder[builder.Count - 1]
-                : Enumerable.Last(builder);
+            return builder.Count > 0 ? builder[builder.Count - 1] : Enumerable.Last(builder);
         }
 
-        public static T Last<T>(this ImmutableSegmentedList<T> immutableList, Func<T, bool> predicate)
+        public static T Last<T>(
+            this ImmutableSegmentedList<T> immutableList,
+            Func<T, bool> predicate
+        )
         {
             if (immutableList.IsDefault)
                 throw new ArgumentNullException(nameof(immutableList));
@@ -98,7 +105,10 @@ namespace System.Linq
             return Enumerable.Empty<T>().Last();
         }
 
-        public static IEnumerable<TResult> Select<T, TResult>(this ImmutableSegmentedList<T> immutableList, Func<T, TResult> selector)
+        public static IEnumerable<TResult> Select<T, TResult>(
+            this ImmutableSegmentedList<T> immutableList,
+            Func<T, TResult> selector
+        )
         {
             if (immutableList.IsDefault)
                 throw new ArgumentNullException(nameof(immutableList));

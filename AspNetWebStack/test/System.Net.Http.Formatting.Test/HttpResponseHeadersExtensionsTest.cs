@@ -16,8 +16,14 @@ namespace System.Net.Http
             HttpResponseHeaders headers = CreateHttpResponseHeaders();
             List<CookieHeaderValue> cookies = new List<CookieHeaderValue>();
 
-            Assert.ThrowsArgumentNull(() => HttpResponseHeadersExtensions.AddCookies(null, cookies), "headers");
-            Assert.ThrowsArgumentNull(() => HttpResponseHeadersExtensions.AddCookies(headers, null), "cookies");
+            Assert.ThrowsArgumentNull(
+                () => HttpResponseHeadersExtensions.AddCookies(null, cookies),
+                "headers"
+            );
+            Assert.ThrowsArgumentNull(
+                () => HttpResponseHeadersExtensions.AddCookies(headers, null),
+                "cookies"
+            );
         }
 
         [Fact]
@@ -27,11 +33,16 @@ namespace System.Net.Http
             List<CookieHeaderValue> cookies = new List<CookieHeaderValue>();
             cookies.Add(null);
 
-            Assert.ThrowsArgument(() => HttpResponseHeadersExtensions.AddCookies(headers, cookies), "cookies");
+            Assert.ThrowsArgument(
+                () => HttpResponseHeadersExtensions.AddCookies(headers, cookies),
+                "cookies"
+            );
         }
 
         [Theory]
-        [InlineData("name1=n1=v1&n2=v2&n3=v3; expires=Sun, 06 Nov 1994 08:49:37 GMT; max-age=86400; domain=domain1; path=path1; secure; httponly")]
+        [InlineData(
+            "name1=n1=v1&n2=v2&n3=v3; expires=Sun, 06 Nov 1994 08:49:37 GMT; max-age=86400; domain=domain1; path=path1; secure; httponly"
+        )]
         public void AddCookies_AddsCookies(string expectedCookie)
         {
             // Arrange

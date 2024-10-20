@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides validation services for user classes.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public class UserValidator<TUser> : IUserValidator<TUser> where TUser : class
+public class UserValidator<TUser> : IUserValidator<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Creates a new instance of <see cref="UserValidator{TUser}"/>.
@@ -49,7 +50,10 @@ public class UserValidator<TUser> : IUserValidator<TUser> where TUser : class
         return errors?.Count > 0 ? IdentityResult.Failed(errors) : IdentityResult.Success;
     }
 
-    private async Task<List<IdentityError>?> ValidateUserName(UserManager<TUser> manager, TUser user)
+    private async Task<List<IdentityError>?> ValidateUserName(
+        UserManager<TUser> manager,
+        TUser user
+    )
     {
         List<IdentityError>? errors = null;
         var userName = await manager.GetUserNameAsync(user).ConfigureAwait(false);
@@ -58,8 +62,10 @@ public class UserValidator<TUser> : IUserValidator<TUser> where TUser : class
             errors ??= new List<IdentityError>();
             errors.Add(Describer.InvalidUserName(userName));
         }
-        else if (!string.IsNullOrEmpty(manager.Options.User.AllowedUserNameCharacters) &&
-            userName.Any(c => !manager.Options.User.AllowedUserNameCharacters.Contains(c)))
+        else if (
+            !string.IsNullOrEmpty(manager.Options.User.AllowedUserNameCharacters)
+            && userName.Any(c => !manager.Options.User.AllowedUserNameCharacters.Contains(c))
+        )
         {
             errors ??= new List<IdentityError>();
             errors.Add(Describer.InvalidUserName(userName));
@@ -67,8 +73,13 @@ public class UserValidator<TUser> : IUserValidator<TUser> where TUser : class
         else
         {
             var owner = await manager.FindByNameAsync(userName).ConfigureAwait(false);
-            if (owner != null &&
-                !string.Equals(await manager.GetUserIdAsync(owner).ConfigureAwait(false), await manager.GetUserIdAsync(user).ConfigureAwait(false)))
+            if (
+                owner != null
+                && !string.Equals(
+                    await manager.GetUserIdAsync(owner).ConfigureAwait(false),
+                    await manager.GetUserIdAsync(user).ConfigureAwait(false)
+                )
+            )
             {
                 errors ??= new List<IdentityError>();
                 errors.Add(Describer.DuplicateUserName(userName));
@@ -79,7 +90,11 @@ public class UserValidator<TUser> : IUserValidator<TUser> where TUser : class
     }
 
     // make sure email is not empty, valid, and unique
-    private async Task<List<IdentityError>?> ValidateEmail(UserManager<TUser> manager, TUser user, List<IdentityError>? errors)
+    private async Task<List<IdentityError>?> ValidateEmail(
+        UserManager<TUser> manager,
+        TUser user,
+        List<IdentityError>? errors
+    )
     {
         var email = await manager.GetEmailAsync(user).ConfigureAwait(false);
         if (string.IsNullOrWhiteSpace(email))
@@ -95,8 +110,13 @@ public class UserValidator<TUser> : IUserValidator<TUser> where TUser : class
             return errors;
         }
         var owner = await manager.FindByEmailAsync(email).ConfigureAwait(false);
-        if (owner != null &&
-            !string.Equals(await manager.GetUserIdAsync(owner).ConfigureAwait(false), await manager.GetUserIdAsync(user).ConfigureAwait(false)))
+        if (
+            owner != null
+            && !string.Equals(
+                await manager.GetUserIdAsync(owner).ConfigureAwait(false),
+                await manager.GetUserIdAsync(user).ConfigureAwait(false)
+            )
+        )
         {
             errors ??= new List<IdentityError>();
             errors.Add(Describer.DuplicateEmail(email));

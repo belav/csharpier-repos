@@ -22,7 +22,11 @@ namespace Microsoft.AspNetCore.Builder;
 /// </summary>
 [DebuggerDisplay("{DebuggerToString(),nq}")]
 [DebuggerTypeProxy(typeof(WebApplicationDebugView))]
-public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteBuilder, IAsyncDisposable
+public sealed class WebApplication
+    : IHost,
+        IApplicationBuilder,
+        IEndpointRouteBuilder,
+        IAsyncDisposable
 {
     internal const string GlobalEndpointRouteBuilderKey = "__GlobalEndpointRouteBuilder";
 
@@ -33,7 +37,9 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     {
         _host = host;
         ApplicationBuilder = new ApplicationBuilder(host.Services, ServerFeatures);
-        Logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger(Environment.ApplicationName ?? nameof(WebApplication));
+        Logger = host
+            .Services.GetRequiredService<ILoggerFactory>()
+            .CreateLogger(Environment.ApplicationName ?? nameof(WebApplication));
 
         Properties[GlobalEndpointRouteBuilderKey] = this;
     }
@@ -51,12 +57,14 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     /// <summary>
     /// The application's configured <see cref="IWebHostEnvironment"/>.
     /// </summary>
-    public IWebHostEnvironment Environment => _host.Services.GetRequiredService<IWebHostEnvironment>();
+    public IWebHostEnvironment Environment =>
+        _host.Services.GetRequiredService<IWebHostEnvironment>();
 
     /// <summary>
     /// Allows consumers to be notified of application lifetime events.
     /// </summary>
-    public IHostApplicationLifetime Lifetime => _host.Services.GetRequiredService<IHostApplicationLifetime>();
+    public IHostApplicationLifetime Lifetime =>
+        _host.Services.GetRequiredService<IHostApplicationLifetime>();
 
     /// <summary>
     /// The default logger for the application.
@@ -66,7 +74,8 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     /// <summary>
     /// The list of URLs that the HTTP server is bound to.
     /// </summary>
-    public ICollection<string> Urls => ServerFeatures.GetRequiredFeature<IServerAddressesFeature>().Addresses;
+    public ICollection<string> Urls =>
+        ServerFeatures.GetRequiredFeature<IServerAddressesFeature>().Addresses;
 
     IServiceProvider IApplicationBuilder.ApplicationServices
     {
@@ -74,7 +83,8 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
         set => ApplicationBuilder.ApplicationServices = value;
     }
 
-    internal IFeatureCollection ServerFeatures => _host.Services.GetRequiredService<IServer>().Features;
+    internal IFeatureCollection ServerFeatures =>
+        _host.Services.GetRequiredService<IServer>().Features;
     IFeatureCollection IApplicationBuilder.ServerFeatures => ServerFeatures;
 
     internal IDictionary<string, object?> Properties => ApplicationBuilder.Properties;
@@ -99,23 +109,20 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     /// Initializes a new instance of the <see cref="WebApplicationBuilder"/> class with preconfigured defaults.
     /// </summary>
     /// <returns>The <see cref="WebApplicationBuilder"/>.</returns>
-    public static WebApplicationBuilder CreateBuilder() =>
-        new(new());
+    public static WebApplicationBuilder CreateBuilder() => new(new());
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebApplicationBuilder"/> class with minimal defaults.
     /// </summary>
     /// <returns>The <see cref="WebApplicationBuilder"/>.</returns>
-    public static WebApplicationBuilder CreateSlimBuilder() =>
-        new(new(), slim: true);
+    public static WebApplicationBuilder CreateSlimBuilder() => new(new(), slim: true);
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebApplicationBuilder"/> class with preconfigured defaults.
     /// </summary>
     /// <param name="args">The command line arguments.</param>
     /// <returns>The <see cref="WebApplicationBuilder"/>.</returns>
-    public static WebApplicationBuilder CreateBuilder(string[] args) =>
-        new(new() { Args = args });
+    public static WebApplicationBuilder CreateBuilder(string[] args) => new(new() { Args = args });
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebApplicationBuilder"/> class with minimal defaults.
@@ -205,6 +212,7 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     public ValueTask DisposeAsync() => ((IAsyncDisposable)_host).DisposeAsync();
 
     internal RequestDelegate BuildRequestDelegate() => ApplicationBuilder.Build();
+
     RequestDelegate IApplicationBuilder.Build() => BuildRequestDelegate();
 
     // REVIEW: Should this be wrapping another type?
@@ -227,7 +235,8 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
         return this;
     }
 
-    IApplicationBuilder IEndpointRouteBuilder.CreateApplicationBuilder() => ((IApplicationBuilder)this).New();
+    IApplicationBuilder IEndpointRouteBuilder.CreateApplicationBuilder() =>
+        ((IApplicationBuilder)this).New();
 
     private void Listen(string? url)
     {
@@ -239,11 +248,15 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
         var addresses = ServerFeatures.Get<IServerAddressesFeature>()?.Addresses;
         if (addresses is null)
         {
-            throw new InvalidOperationException($"Changing the URL is not supported because no valid {nameof(IServerAddressesFeature)} was found.");
+            throw new InvalidOperationException(
+                $"Changing the URL is not supported because no valid {nameof(IServerAddressesFeature)} was found."
+            );
         }
         if (addresses.IsReadOnly)
         {
-            throw new InvalidOperationException($"Changing the URL is not supported because {nameof(IServerAddressesFeature.Addresses)} {nameof(ICollection<string>.IsReadOnly)}.");
+            throw new InvalidOperationException(
+                $"Changing the URL is not supported because {nameof(IServerAddressesFeature.Addresses)} {nameof(ICollection<string>.IsReadOnly)}."
+            );
         }
 
         addresses.Clear();
@@ -256,7 +269,9 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
     }
 
     // Web app is running if the app has been started and hasn't been stopped.
-    private bool IsRunning => Lifetime.ApplicationStarted.IsCancellationRequested && !Lifetime.ApplicationStopped.IsCancellationRequested;
+    private bool IsRunning =>
+        Lifetime.ApplicationStarted.IsCancellationRequested
+        && !Lifetime.ApplicationStopped.IsCancellationRequested;
 
     internal sealed class WebApplicationDebugView(WebApplication webApplication)
     {
@@ -277,7 +292,11 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
                 {
                     // The web app's data sources aren't registered until the routing middleware is. That often happens when the app is run.
                     // We want endpoints to be available in the debug view before the app starts. Test if all the web app's the data sources are registered.
-                    if (compositeEndpointDataSource.DataSources.Intersect(_webApplication.DataSources).Count() == _webApplication.DataSources.Count)
+                    if (
+                        compositeEndpointDataSource
+                            .DataSources.Intersect(_webApplication.DataSources)
+                            .Count() == _webApplication.DataSources.Count
+                    )
                     {
                         // Data sources are centrally registered.
                         return dataSource.Endpoints;
@@ -285,7 +304,9 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
                     else
                     {
                         // Fallback to just the web app's data sources to support debugging before the web app starts.
-                        return new CompositeEndpointDataSource(_webApplication.DataSources).Endpoints;
+                        return new CompositeEndpointDataSource(
+                            _webApplication.DataSources
+                        ).Endpoints;
                     }
                 }
 
@@ -297,8 +318,12 @@ public sealed class WebApplication : IHost, IApplicationBuilder, IEndpointRouteB
         {
             get
             {
-                if (_webApplication.Properties.TryGetValue("__MiddlewareDescriptions", out var value) &&
-                    value is IList<string> descriptions)
+                if (
+                    _webApplication.Properties.TryGetValue(
+                        "__MiddlewareDescriptions",
+                        out var value
+                    ) && value is IList<string> descriptions
+                )
                 {
                     return descriptions;
                 }

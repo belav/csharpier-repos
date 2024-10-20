@@ -12,15 +12,15 @@ namespace System.ServiceModel.Syndication
         private Collection<ResourceCollectionInfo> _collections;
         private ExtensibleSyndicationObject _extensions;
 
-        public Workspace()
-        {
-        }
+        public Workspace() { }
 
-        public Workspace(string title, IEnumerable<ResourceCollectionInfo> collections) : this((title != null) ? new TextSyndicationContent(title) : null, collections)
-        {
-        }
+        public Workspace(string title, IEnumerable<ResourceCollectionInfo> collections)
+            : this((title != null) ? new TextSyndicationContent(title) : null, collections) { }
 
-        public Workspace(TextSyndicationContent title, IEnumerable<ResourceCollectionInfo> collections)
+        public Workspace(
+            TextSyndicationContent title,
+            IEnumerable<ResourceCollectionInfo> collections
+        )
         {
             Title = title;
             if (collections != null)
@@ -33,7 +33,8 @@ namespace System.ServiceModel.Syndication
             }
         }
 
-        public Dictionary<XmlQualifiedName, string> AttributeExtensions => _extensions.AttributeExtensions;
+        public Dictionary<XmlQualifiedName, string> AttributeExtensions =>
+            _extensions.AttributeExtensions;
 
         public Uri BaseUri { get; set; }
 
@@ -42,7 +43,8 @@ namespace System.ServiceModel.Syndication
             get => _collections ??= new NullNotAllowedCollection<ResourceCollectionInfo>();
         }
 
-        public SyndicationElementExtensionCollection ElementExtensions => _extensions.ElementExtensions;
+        public SyndicationElementExtensionCollection ElementExtensions =>
+            _extensions.ElementExtensions;
 
         public TextSyndicationContent Title { get; set; }
 
@@ -51,7 +53,12 @@ namespace System.ServiceModel.Syndication
             return new ResourceCollectionInfo();
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -71,7 +78,10 @@ namespace System.ServiceModel.Syndication
             _extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

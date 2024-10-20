@@ -42,8 +42,7 @@ public interface IForeignKeyConstraint : IAnnotatable
     /// <summary>
     ///     Gets the columns that are referenced by the foreign key constraint.
     /// </summary>
-    IReadOnlyList<IColumn> PrincipalColumns
-        => PrincipalUniqueConstraint.Columns;
+    IReadOnlyList<IColumn> PrincipalColumns => PrincipalUniqueConstraint.Columns;
 
     /// <summary>
     ///     Gets the unique constraint on the columns referenced by the foreign key constraint.
@@ -67,7 +66,10 @@ public interface IForeignKeyConstraint : IAnnotatable
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
@@ -92,9 +94,7 @@ public interface IForeignKeyConstraint : IAnnotatable
 
         if (OnDeleteAction != ReferentialAction.NoAction)
         {
-            builder
-                .Append(' ')
-                .Append(OnDeleteAction);
+            builder.Append(' ').Append(OnDeleteAction);
         }
 
         if (!singleLine && (options & MetadataDebugStringOptions.IncludeAnnotations) != 0)

@@ -13,11 +13,17 @@ namespace Microsoft.AspNetCore.DataProtection.XmlEncryption;
 /// </summary>
 internal sealed class XmlKeyDecryptionOptions
 {
-    private readonly Dictionary<string, List<X509Certificate2>> _certs = new Dictionary<string, List<X509Certificate2>>(StringComparer.Ordinal);
+    private readonly Dictionary<string, List<X509Certificate2>> _certs = new Dictionary<
+        string,
+        List<X509Certificate2>
+    >(StringComparer.Ordinal);
 
     public int KeyDecryptionCertificateCount => _certs.Count;
 
-    public bool TryGetKeyDecryptionCertificates(X509Certificate2 certInfo, [NotNullWhen(true)] out IReadOnlyList<X509Certificate2>? keyDecryptionCerts)
+    public bool TryGetKeyDecryptionCertificates(
+        X509Certificate2 certInfo,
+        [NotNullWhen(true)] out IReadOnlyList<X509Certificate2>? keyDecryptionCerts
+    )
     {
         var key = GetKey(certInfo);
         var retVal = _certs.TryGetValue(key, out var keyDecryptionCertsRetVal);

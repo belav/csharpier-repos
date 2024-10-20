@@ -12,13 +12,15 @@ using NuGet.Runtime;
 namespace System.Web.WebPages.Administration.PackageManager
 {
     // We need to make changes to NuGet.Core once we ship Beta so that this type is removed.
-    internal class RemoteAssembly : MarshalByRefObject, IAssembly, IEquatable<RemoteAssembly>, IComparable<RemoteAssembly>
+    internal class RemoteAssembly
+        : MarshalByRefObject,
+            IAssembly,
+            IEquatable<RemoteAssembly>,
+            IComparable<RemoteAssembly>
     {
         private readonly List<IAssembly> _referencedAssemblies = new List<IAssembly>();
 
-        internal RemoteAssembly()
-        {
-        }
+        internal RemoteAssembly() { }
 
         internal RemoteAssembly(string name, Version version, string publicKeyToken, string culture)
         {
@@ -62,11 +64,16 @@ namespace System.Web.WebPages.Administration.PackageManager
             {
                 // Copy the properties to the referenced assembly
                 var referencedAssembly = new RemoteAssembly();
-                _referencedAssemblies.Add(CopyAssemblyProperties(referencedAssemblyName, referencedAssembly));
+                _referencedAssemblies.Add(
+                    CopyAssemblyProperties(referencedAssemblyName, referencedAssembly)
+                );
             }
         }
 
-        private static RemoteAssembly CopyAssemblyProperties(AssemblyName assemblyName, RemoteAssembly assembly)
+        private static RemoteAssembly CopyAssemblyProperties(
+            AssemblyName assemblyName,
+            RemoteAssembly assembly
+        )
         {
             assembly.Name = assemblyName.Name;
             assembly.Version = assemblyName.Version;
@@ -100,26 +107,35 @@ namespace System.Web.WebPages.Administration.PackageManager
             return assembly;
         }
 
-        public static IEnumerable<IAssembly> GetAssembliesForBindingRedirect(AppDomain appDomain, string binDirectoryPath)
+        public static IEnumerable<IAssembly> GetAssembliesForBindingRedirect(
+            AppDomain appDomain,
+            string binDirectoryPath
+        )
         {
             return GetAssembliesForBindingRedirect(appDomain, binDirectoryPath, GetBinAssemblies);
         }
 
-        internal static IEnumerable<IAssembly> GetAssembliesForBindingRedirect(AppDomain appDomain, string binDirectoryPath, Func<AppDomain, string, IEnumerable<IAssembly>> getBinAssemblies)
+        internal static IEnumerable<IAssembly> GetAssembliesForBindingRedirect(
+            AppDomain appDomain,
+            string binDirectoryPath,
+            Func<AppDomain, string, IEnumerable<IAssembly>> getBinAssemblies
+        )
         {
             var binAssemblies = getBinAssemblies(appDomain, binDirectoryPath).ToList();
             if (!binAssemblies.Any())
             {
                 return binAssemblies;
             }
-            var webPagesAssemblies = from asm in WebPagesDeployment.GetWebPagesAssemblies()
-                                     select LoadAssembly(asm.FullName, appDomain, isPath: false);
-            return webPagesAssemblies.Concat(binAssemblies)
-                .Distinct()
-                .ToList();
+            var webPagesAssemblies =
+                from asm in WebPagesDeployment.GetWebPagesAssemblies()
+                select LoadAssembly(asm.FullName, appDomain, isPath: false);
+            return webPagesAssemblies.Concat(binAssemblies).Distinct().ToList();
         }
 
-        private static IEnumerable<IAssembly> GetBinAssemblies(AppDomain appDomain, string binDirectoryPath)
+        private static IEnumerable<IAssembly> GetBinAssemblies(
+            AppDomain appDomain,
+            string binDirectoryPath
+        )
         {
             if (!Directory.Exists(binDirectoryPath))
             {
@@ -139,7 +155,11 @@ namespace System.Web.WebPages.Administration.PackageManager
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We're loading arbitrary binaries from the bin and some of them might not be native. Catch all to prevent this from throwing.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We're loading arbitrary binaries from the bin and some of them might not be native. Catch all to prevent this from throwing."
+        )]
         private static IAssembly LoadAssemblyFromSafe(AppDomain appDomain, string path)
         {
             try
@@ -190,7 +210,10 @@ namespace System.Web.WebPages.Administration.PackageManager
             {
                 return versionDiff;
             }
-            var publicKeyDiff = StringComparer.OrdinalIgnoreCase.Compare(a.PublicKeyToken, b.PublicKeyToken);
+            var publicKeyDiff = StringComparer.OrdinalIgnoreCase.Compare(
+                a.PublicKeyToken,
+                b.PublicKeyToken
+            );
             if (publicKeyDiff != 0)
             {
                 return publicKeyDiff;

@@ -14,23 +14,15 @@ namespace System.IdentityModel.Selectors
     public class StsCommunicationException : System.Exception
     {
         public StsCommunicationException()
-        : base()
-        {
-        }
+            : base() { }
 
-        public StsCommunicationException( string message )
-        : base( message )
-        {
-        }
+        public StsCommunicationException(string message)
+            : base(message) { }
 
-        public StsCommunicationException( string message, Exception innerException )
-        : base( message, innerException )
-        {
-        }
+        public StsCommunicationException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        protected StsCommunicationException( SerializationInfo info, StreamingContext context )
-        : base( info, context )
-        {
-        }
+        protected StsCommunicationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

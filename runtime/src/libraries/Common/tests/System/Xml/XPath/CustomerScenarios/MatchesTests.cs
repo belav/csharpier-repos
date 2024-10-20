@@ -26,7 +26,13 @@ namespace XPathTests.FunctionalTests.CustomerScenarios
             var testExpression = @"Chapter[last()]/Section[1]/Line[last()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -44,7 +50,13 @@ namespace XPathTests.FunctionalTests.CustomerScenarios
             var testExpression = @"/Book/Chapter[last()]/Section[1]/Line[last()]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -62,7 +74,13 @@ namespace XPathTests.FunctionalTests.CustomerScenarios
             var testExpression = @"Chapter[2][@name='Entrees']";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -80,7 +98,13 @@ namespace XPathTests.FunctionalTests.CustomerScenarios
             var testExpression = @"Chapter[position() >= 2 and position() <= 4]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

@@ -8,7 +8,8 @@ using BasicWebSite.Models;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class HttpActionResultTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSystemTextJson>>
+public class HttpActionResultTests
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithSystemTextJson>>
 {
     public HttpActionResultTests(MvcTestFixture<BasicWebSite.StartupWithSystemTextJson> fixture)
     {
@@ -22,7 +23,8 @@ public class HttpActionResultTests : IClassFixture<MvcTestFixture<BasicWebSite.S
     {
         // Arrange
         var id = 1;
-        var url = $"/contact/{nameof(BasicWebSite.ContactApiController.ActionReturningObjectIResult)}/{id}";
+        var url =
+            $"/contact/{nameof(BasicWebSite.ContactApiController.ActionReturningObjectIResult)}/{id}";
         var response = await Client.GetAsync(url);
 
         // Assert
@@ -36,7 +38,8 @@ public class HttpActionResultTests : IClassFixture<MvcTestFixture<BasicWebSite.S
     public async Task ActionCanReturnIResultWithStatusCodeOnly()
     {
         // Arrange
-        var url = $"/contact/{nameof(BasicWebSite.ContactApiController.ActionReturningStatusCodeIResult)}";
+        var url =
+            $"/contact/{nameof(BasicWebSite.ContactApiController.ActionReturningStatusCodeIResult)}";
         var response = await Client.GetAsync(url);
 
         // Assert

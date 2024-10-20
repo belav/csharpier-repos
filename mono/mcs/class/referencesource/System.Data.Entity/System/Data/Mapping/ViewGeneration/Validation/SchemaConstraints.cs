@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 
 
-using System.Data.Common.Utils;
 using System.Collections.Generic;
+using System.Data.Common.Utils;
 using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Validation
@@ -19,9 +19,8 @@ namespace System.Data.Mapping.ViewGeneration.Validation
     /// so that we can get strong typing and avoid downcasts
     /// </summary>
     internal class SchemaConstraints<TKeyConstraint> : InternalBase
-    where TKeyConstraint : InternalBase
+        where TKeyConstraint : InternalBase
     {
-
         #region Constructor
         // effects: Creates an empty set of constraints
         internal SchemaConstraints()
@@ -51,7 +50,10 @@ namespace System.Data.Mapping.ViewGeneration.Validation
         }
 
         // effects: Converts constraints to human-readable strings and adds them to builder
-        private static void ConstraintsToBuilder<Constraint>(IEnumerable<Constraint> constraints, StringBuilder builder)
+        private static void ConstraintsToBuilder<Constraint>(
+            IEnumerable<Constraint> constraints,
+            StringBuilder builder
+        )
             where Constraint : InternalBase
         {
             foreach (Constraint constraint in constraints)

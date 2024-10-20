@@ -1,45 +1,51 @@
 #region Imports
 
 using System;
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
-using System.Text;
-using System.IO;
 using System.ComponentModel.Design;
 using System.ComponentModel.Design.Serialization;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.ComponentModel.Serialization;
 using System.Workflow.ComponentModel.Design;
+using System.Workflow.ComponentModel.Serialization;
 using System.Workflow.Runtime;
+using System.Xml;
 
 #endregion
 
 
 namespace System.Workflow.Runtime.Hosting
 {
-
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class DefaultWorkflowLoaderService : WorkflowLoaderService
     {
         protected internal override Activity CreateInstance(Type workflowType)
         {
             if (workflowType == null)
                 throw new ArgumentNullException("workflowType");
-            
+
             if (!typeof(Activity).IsAssignableFrom(workflowType))
                 throw new ArgumentException(ExecutionStringManager.TypeMustImplementRootActivity);
 
             if (workflowType.GetConstructor(System.Type.EmptyTypes) == null)
-                throw new ArgumentException(ExecutionStringManager.TypeMustHavePublicDefaultConstructor);
+                throw new ArgumentException(
+                    ExecutionStringManager.TypeMustHavePublicDefaultConstructor
+                );
 
             return Activator.CreateInstance(workflowType) as Activity;
         }
-        
+
         // This function will create a new root activity definition tree by deserializing the xoml and the rules file.
-        protected internal override Activity CreateInstance(XmlReader workflowDefinitionReader, XmlReader rulesReader)
+        protected internal override Activity CreateInstance(
+            XmlReader workflowDefinitionReader,
+            XmlReader rulesReader
+        )
         {
             if (workflowDefinitionReader == null)
                 throw new ArgumentNullException("workflowDefinitionReader");
@@ -51,25 +57,48 @@ namespace System.Workflow.Runtime.Hosting
             if (typeProvider != null)
                 serviceContainer.AddService(typeof(ITypeProvider), typeProvider);
 
-            DesignerSerializationManager manager = new DesignerSerializationManager(serviceContainer);
+            DesignerSerializationManager manager = new DesignerSerializationManager(
+                serviceContainer
+            );
             try
             {
                 using (manager.CreateSession())
                 {
-                    WorkflowMarkupSerializationManager xomlSerializationManager = new WorkflowMarkupSerializationManager(manager);
-                    root = new WorkflowMarkupSerializer().Deserialize(xomlSerializationManager, workflowDefinitionReader) as Activity;
+                    WorkflowMarkupSerializationManager xomlSerializationManager =
+                        new WorkflowMarkupSerializationManager(manager);
+                    root =
+                        new WorkflowMarkupSerializer().Deserialize(
+                            xomlSerializationManager,
+                            workflowDefinitionReader
+                        ) as Activity;
                     if (root != null && rulesReader != null)
                     {
-                        object rules = new WorkflowMarkupSerializer().Deserialize(xomlSerializationManager, rulesReader);
-                        root.SetValue(ConditionTypeConverter.DeclarativeConditionDynamicProp, rules);
+                        object rules = new WorkflowMarkupSerializer().Deserialize(
+                            xomlSerializationManager,
+                            rulesReader
+                        );
+                        root.SetValue(
+                            ConditionTypeConverter.DeclarativeConditionDynamicProp,
+                            rules
+                        );
                     }
 
                     foreach (object error in manager.Errors)
                     {
                         if (error is WorkflowMarkupSerializationException)
-                            errors.Add(new ValidationError(((WorkflowMarkupSerializationException)error).Message, ErrorNumbers.Error_SerializationError));
+                            errors.Add(
+                                new ValidationError(
+                                    ((WorkflowMarkupSerializationException)error).Message,
+                                    ErrorNumbers.Error_SerializationError
+                                )
+                            );
                         else
-                            errors.Add(new ValidationError(error.ToString(), ErrorNumbers.Error_SerializationError));
+                            errors.Add(
+                                new ValidationError(
+                                    error.ToString(),
+                                    ErrorNumbers.Error_SerializationError
+                                )
+                            );
                     }
                 }
             }
@@ -79,7 +108,10 @@ namespace System.Workflow.Runtime.Hosting
             }
 
             if (errors.HasErrors)
-                throw new WorkflowValidationFailedException(ExecutionStringManager.WorkflowValidationFailure, errors);
+                throw new WorkflowValidationFailedException(
+                    ExecutionStringManager.WorkflowValidationFailure,
+                    errors
+                );
 
             return root;
         }

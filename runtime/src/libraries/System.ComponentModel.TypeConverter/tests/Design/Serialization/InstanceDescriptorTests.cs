@@ -30,9 +30,9 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
+using Xunit;
 
 namespace System.ComponentModel.Design.Serialization.Tests
 {
@@ -72,14 +72,26 @@ namespace System.ComponentModel.Design.Serialization.Tests
         public void Ctor_ConstructorInfoArgumentMismatch_ThrowsArgumentException(object[] arguments)
         {
             ConstructorInfo ci = typeof(Uri).GetConstructor(new Type[] { typeof(string) });
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(ci, arguments));
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(ci, arguments, false));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(ci, arguments)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(ci, arguments, false)
+            );
         }
+
         [Fact]
         public void Ctor_StaticConstructor_ThrowsArgumentException()
         {
-            ConstructorInfo constructor = typeof(StaticConstructor).GetConstructors(BindingFlags.Static | BindingFlags.NonPublic).Single();
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(constructor, null));
+            ConstructorInfo constructor = typeof(StaticConstructor)
+                .GetConstructors(BindingFlags.Static | BindingFlags.NonPublic)
+                .Single();
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(constructor, null)
+            );
         }
 
         [Theory]
@@ -100,15 +112,24 @@ namespace System.ComponentModel.Design.Serialization.Tests
         public void Ctor_FieldInfoArgumentMismatch_ThrowsArgumentException()
         {
             FieldInfo fi = typeof(StaticField).GetField(nameof(StaticField.Field));
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(fi, new object[] { Url }));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(fi, new object[] { Url })
+            );
         }
 
         [Fact]
         public void Ctor_NonStaticFieldInfo_ThrowsArgumentException()
         {
             FieldInfo fi = typeof(InstanceField).GetField(nameof(InstanceField.Name));
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(fi, null));
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(fi, null, false));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(fi, null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(fi, null, false)
+            );
         }
 
         [Theory]
@@ -144,16 +165,27 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Ctor_NonStaticPropertyInfo_ThrowsArgumentException()
         {
-            PropertyInfo pi = typeof(InstanceProperty).GetProperty(nameof(InstanceProperty.Property));
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(pi, null));
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(pi, null, false));
+            PropertyInfo pi = typeof(InstanceProperty).GetProperty(
+                nameof(InstanceProperty.Property)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(pi, null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(pi, null, false)
+            );
         }
 
         [Fact]
         public void Ctor_WriteOnlyPropertyInfo_ThrowsArgumentException()
         {
             PropertyInfo pi = typeof(WriteOnlyProperty).GetProperty(nameof(WriteOnlyProperty.Name));
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(pi, null));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(pi, null)
+            );
         }
 
         [Fact]
@@ -175,7 +207,10 @@ namespace System.ComponentModel.Design.Serialization.Tests
         public void Ctor_NonStaticMethod_ThrowsArgumentException()
         {
             MethodInfo method = typeof(MethodClass).GetMethod(nameof(MethodClass.Method));
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(method, new object[] { 1 }));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(method, new object[] { 1 })
+            );
         }
 
         [Theory]
@@ -184,7 +219,10 @@ namespace System.ComponentModel.Design.Serialization.Tests
         public void Ctor_IncorrectMethodArgumentCount_ThrowsArgumentException(int count)
         {
             MethodInfo method = typeof(MethodClass).GetMethod(nameof(MethodClass.StaticMethod));
-            AssertExtensions.Throws<ArgumentException>(null, () => new InstanceDescriptor(method, new object[count]));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new InstanceDescriptor(method, new object[count])
+            );
         }
 
         [Fact]
@@ -205,11 +243,16 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Invoke_ArgumentInstanceDescriptor_InvokesArgument()
         {
-            MethodInfo argumentMethod = typeof(MethodClass).GetMethod(nameof(MethodClass.IntMethod));
+            MethodInfo argumentMethod = typeof(MethodClass).GetMethod(
+                nameof(MethodClass.IntMethod)
+            );
             var argumentInstanceDescriptor = new InstanceDescriptor(argumentMethod, null);
 
             MethodInfo method = typeof(MethodClass).GetMethod(nameof(MethodClass.StaticMethod));
-            var instanceDescriptor = new InstanceDescriptor(method, new object[] { argumentInstanceDescriptor });
+            var instanceDescriptor = new InstanceDescriptor(
+                method,
+                new object[] { argumentInstanceDescriptor }
+            );
 
             Assert.Equal("1", instanceDescriptor.Invoke());
         }
@@ -223,7 +266,11 @@ namespace System.ComponentModel.Design.Serialization.Tests
 
         private class EventClass
         {
-            public event EventHandler Event { add { } remove { } }
+            public event EventHandler Event
+            {
+                add { }
+                remove { }
+            }
         }
 
         private class StaticConstructor
@@ -236,6 +283,7 @@ namespace System.ComponentModel.Design.Serialization.Tests
             public void Method(int i) { }
 
             public static int IntMethod() => 1;
+
             public static string StaticMethod(int i) => i.ToString();
         }
 

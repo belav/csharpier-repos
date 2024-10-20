@@ -21,36 +21,66 @@ internal abstract class AbstractCSharpUseCollectionExpressionDiagnosticAnalyzer
     protected new readonly DiagnosticDescriptor Descriptor;
     protected readonly DiagnosticDescriptor UnnecessaryCodeDescriptor;
 
-    protected AbstractCSharpUseCollectionExpressionDiagnosticAnalyzer(string diagnosticId, EnforceOnBuild enforceOnBuild)
-        : base(ImmutableDictionary<DiagnosticDescriptor, IOption2>.Empty
-            // Ugly hack.  We need to create a descriptor to pass to our base *and* assign to one of our fields.
-            // The conditional pattern form lets us do that.
-            .Add(CreateDescriptor(diagnosticId, enforceOnBuild, isUnnecessary: false) is var descriptor ? descriptor : null, CodeStyleOptions2.PreferCollectionExpression)
-            .Add(CreateDescriptor(diagnosticId, enforceOnBuild, isUnnecessary: true) is var unnecessaryCodeDescriptor ? unnecessaryCodeDescriptor : null, CodeStyleOptions2.PreferCollectionExpression))
+    protected AbstractCSharpUseCollectionExpressionDiagnosticAnalyzer(
+        string diagnosticId,
+        EnforceOnBuild enforceOnBuild
+    )
+        : base(
+            ImmutableDictionary<DiagnosticDescriptor, IOption2>
+                .Empty
+                // Ugly hack.  We need to create a descriptor to pass to our base *and* assign to one of our fields.
+                // The conditional pattern form lets us do that.
+                .Add(
+                    CreateDescriptor(diagnosticId, enforceOnBuild, isUnnecessary: false)
+                        is var descriptor
+                        ? descriptor
+                        : null,
+                    CodeStyleOptions2.PreferCollectionExpression
+                )
+                .Add(
+                    CreateDescriptor(diagnosticId, enforceOnBuild, isUnnecessary: true)
+                        is var unnecessaryCodeDescriptor
+                        ? unnecessaryCodeDescriptor
+                        : null,
+                    CodeStyleOptions2.PreferCollectionExpression
+                )
+        )
     {
         Descriptor = descriptor;
         UnnecessaryCodeDescriptor = unnecessaryCodeDescriptor;
     }
 
-    private static DiagnosticDescriptor CreateDescriptor(string diagnosticId, EnforceOnBuild enforceOnBuild, bool isUnnecessary)
-        => CreateDescriptorWithId(
+    private static DiagnosticDescriptor CreateDescriptor(
+        string diagnosticId,
+        EnforceOnBuild enforceOnBuild,
+        bool isUnnecessary
+    ) =>
+        CreateDescriptorWithId(
             diagnosticId,
             enforceOnBuild,
             hasAnyCodeStyleOption: true,
-            new LocalizableResourceString(nameof(AnalyzersResources.Simplify_collection_initialization), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-            new LocalizableResourceString(nameof(AnalyzersResources.Collection_initialization_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-            isUnnecessary: isUnnecessary);
+            new LocalizableResourceString(
+                nameof(AnalyzersResources.Simplify_collection_initialization),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            ),
+            new LocalizableResourceString(
+                nameof(AnalyzersResources.Collection_initialization_can_be_simplified),
+                AnalyzersResources.ResourceManager,
+                typeof(AnalyzersResources)
+            ),
+            isUnnecessary: isUnnecessary
+        );
 
     protected abstract void InitializeWorker(CodeBlockStartAnalysisContext<SyntaxKind> context);
 
-    protected virtual bool IsSupported(Compilation compilation)
-        => true;
+    protected virtual bool IsSupported(Compilation compilation) => true;
 
-    public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-        => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+    public sealed override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+        DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-    protected sealed override void InitializeWorker(AnalysisContext context)
-        => context.RegisterCompilationStartAction(context =>
+    protected sealed override void InitializeWorker(AnalysisContext context) =>
+        context.RegisterCompilationStartAction(context =>
         {
             var compilation = context.Compilation;
             if (!compilation.LanguageVersion().SupportsCollectionExpressions())

@@ -12,12 +12,18 @@ namespace System.Runtime.DurableInstancing
     public sealed class InstanceOwner
     {
         // These collections are synchronized by the HandlesLock.
-        readonly Dictionary<Guid, InstanceHandle> boundHandles = new Dictionary<Guid, InstanceHandle>();
-        readonly Queue<InstanceHandleReference> inProgressHandles = new Queue<InstanceHandleReference>();
-        readonly Dictionary<Guid, Queue<InstanceHandleReference>> inProgressHandlesPerInstance = new Dictionary<Guid, Queue<InstanceHandleReference>>();
+        readonly Dictionary<Guid, InstanceHandle> boundHandles =
+            new Dictionary<Guid, InstanceHandle>();
+        readonly Queue<InstanceHandleReference> inProgressHandles =
+            new Queue<InstanceHandleReference>();
+        readonly Dictionary<Guid, Queue<InstanceHandleReference>> inProgressHandlesPerInstance =
+            new Dictionary<Guid, Queue<InstanceHandleReference>>();
 
         // This is synchronized by the InstanceStore.
-        readonly Dictionary<XName, InstanceNormalEvent> events = new Dictionary<XName, InstanceNormalEvent>(1);
+        readonly Dictionary<XName, InstanceNormalEvent> events = new Dictionary<
+            XName,
+            InstanceNormalEvent
+        >(1);
 
         internal InstanceOwner(Guid ownerId, Guid lockToken)
         {
@@ -31,55 +37,49 @@ namespace System.Runtime.DurableInstancing
 
         internal Dictionary<XName, InstanceNormalEvent> Events
         {
-            get
-            {
-                return this.events;
-            }
+            get { return this.events; }
         }
 
         object HandlesLock
         {
-            get
-            {
-                return this.boundHandles;
-            }
+            get { return this.boundHandles; }
         }
 
         Dictionary<Guid, InstanceHandle> BoundHandles
         {
-            get
-            {
-                return this.boundHandles;
-            }
+            get { return this.boundHandles; }
         }
 
         Queue<InstanceHandleReference> InProgressHandles
         {
-            get
-            {
-                return this.inProgressHandles;
-            }
+            get { return this.inProgressHandles; }
         }
 
         Dictionary<Guid, Queue<InstanceHandleReference>> InProgressHandlesPerInstance
         {
-            get
-            {
-                return this.inProgressHandlesPerInstance;
-            }
+            get { return this.inProgressHandlesPerInstance; }
         }
 
         // This can be called to remove a handle from the BoundHandles table.  It should be called only after no more commands are in progress or could be made on the handle.
         internal void Unbind(InstanceHandle handle)
         {
-            Fx.Assert(object.ReferenceEquals(this, handle.Owner), "Unbind called on the wrong owner for a handle.");
-            Fx.Assert(handle.Id != Guid.Empty, "Unbind called on a handle not even bound to an instance.");
+            Fx.Assert(
+                object.ReferenceEquals(this, handle.Owner),
+                "Unbind called on the wrong owner for a handle."
+            );
+            Fx.Assert(
+                handle.Id != Guid.Empty,
+                "Unbind called on a handle not even bound to an instance."
+            );
 
             lock (HandlesLock)
             {
                 // The handle may have already been bumped - only remove it if it's still it.
                 InstanceHandle existingHandle;
-                if (BoundHandles.TryGetValue(handle.Id, out existingHandle) && object.ReferenceEquals(handle, existingHandle))
+                if (
+                    BoundHandles.TryGetValue(handle.Id, out existingHandle)
+                    && object.ReferenceEquals(handle, existingHandle)
+                )
                 {
                     BoundHandles.Remove(handle.Id);
                 }
@@ -89,7 +89,10 @@ namespace System.Runtime.DurableInstancing
         // This doesn't check the bound handles, since one of the scenarios is to re-bind to an instance and kick out the stale handle.
         internal void StartBind(InstanceHandle handle, ref InstanceHandleReference reference)
         {
-            Fx.Assert(object.ReferenceEquals(this, handle.Owner), "StartBind called on the wrong owner for a handle.");
+            Fx.Assert(
+                object.ReferenceEquals(this, handle.Owner),
+                "StartBind called on the wrong owner for a handle."
+            );
 
             lock (HandlesLock)
             {
@@ -101,13 +104,27 @@ namespace System.Runtime.DurableInstancing
         }
 
         // This happens only when the transaction under which the handle was bound is committed.
-        internal bool TryCompleteBind(ref InstanceHandleReference reference, ref List<InstanceHandleReference> handlesPendingResolution, out InstanceHandle handleToFree)
+        internal bool TryCompleteBind(
+            ref InstanceHandleReference reference,
+            ref List<InstanceHandleReference> handlesPendingResolution,
+            out InstanceHandle handleToFree
+        )
         {
-            Fx.Assert(reference != null, "Bind wasn't registered - RegisterStartBind must be called.");
+            Fx.Assert(
+                reference != null,
+                "Bind wasn't registered - RegisterStartBind must be called."
+            );
             Fx.Assert(reference.InstanceHandle != null, "Cannot cancel and complete a bind.");
             Fx.Assert(reference.InstanceHandle.Version != -1, "Handle state must be set first.");
-            Fx.Assert(object.ReferenceEquals(this, reference.InstanceHandle.Owner), "TryCompleteBind called on the wrong owner for a handle.");
-            Fx.Assert(!(reference is LockResolutionMarker) || ((LockResolutionMarker)reference).NonConflicting, "How did a Version get set if we're still resolving.");
+            Fx.Assert(
+                object.ReferenceEquals(this, reference.InstanceHandle.Owner),
+                "TryCompleteBind called on the wrong owner for a handle."
+            );
+            Fx.Assert(
+                !(reference is LockResolutionMarker)
+                    || ((LockResolutionMarker)reference).NonConflicting,
+                "How did a Version get set if we're still resolving."
+            );
 
             handleToFree = null;
             lock (HandlesLock)
@@ -117,12 +134,20 @@ namespace System.Runtime.DurableInstancing
                     InstanceHandle existingHandle;
                     if (BoundHandles.TryGetValue(reference.InstanceHandle.Id, out existingHandle))
                     {
-                        Fx.AssertAndFailFast(!object.ReferenceEquals(existingHandle, reference.InstanceHandle), "InstanceStore lock state is not correct.");
+                        Fx.AssertAndFailFast(
+                            !object.ReferenceEquals(existingHandle, reference.InstanceHandle),
+                            "InstanceStore lock state is not correct."
+                        );
                         if (existingHandle.Version <= 0 || reference.InstanceHandle.Version <= 0)
                         {
-                            if (existingHandle.Version != 0 || reference.InstanceHandle.Version != 0)
+                            if (
+                                existingHandle.Version != 0
+                                || reference.InstanceHandle.Version != 0
+                            )
                             {
-                                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.InvalidLockToken));
+                                throw Fx.Exception.AsError(
+                                    new InvalidOperationException(SRCore.InvalidLockToken)
+                                );
                             }
 
                             reference.InstanceHandle.ConflictingHandle = existingHandle;
@@ -146,7 +171,11 @@ namespace System.Runtime.DurableInstancing
                         if (existingHandle.Version == reference.InstanceHandle.Version)
                         {
                             // This could be a case of amnesia (backup / restore).
-                            throw Fx.Exception.AsError(new InvalidOperationException(SRCore.InstanceStoreBoundSameVersionTwice));
+                            throw Fx.Exception.AsError(
+                                new InvalidOperationException(
+                                    SRCore.InstanceStoreBoundSameVersionTwice
+                                )
+                            );
                         }
 
                         throw Fx.AssertAndThrow("All cases covered above.");
@@ -171,13 +200,26 @@ namespace System.Runtime.DurableInstancing
         // The instanceVersion reported here was read under the transaction, but not changed.  Either it was already committed, or it was written under
         // this transaction in a prior command on a different handle.  Due to the latter case, we treat it as dirty - we do not publish it or take
         // any visible action (such as dooming handles) based on its value.
-        internal AsyncWaitHandle InitiateLockResolution(long instanceVersion, ref InstanceHandleReference reference, ref List<InstanceHandleReference> handlesPendingResolution)
+        internal AsyncWaitHandle InitiateLockResolution(
+            long instanceVersion,
+            ref InstanceHandleReference reference,
+            ref List<InstanceHandleReference> handlesPendingResolution
+        )
         {
-            Fx.Assert(reference != null, "Bind wasn't registered - RegisterStartBind must be called.");
+            Fx.Assert(
+                reference != null,
+                "Bind wasn't registered - RegisterStartBind must be called."
+            );
             Fx.Assert(reference.InstanceHandle != null, "Cannot cancel and complete a bind.");
-            Fx.Assert(reference.InstanceHandle.Id != Guid.Empty, "Must be bound to an instance already.");
+            Fx.Assert(
+                reference.InstanceHandle.Id != Guid.Empty,
+                "Must be bound to an instance already."
+            );
 
-            Fx.AssertAndThrow(!(reference is LockResolutionMarker), "InitiateLockResolution already called.");
+            Fx.AssertAndThrow(
+                !(reference is LockResolutionMarker),
+                "InitiateLockResolution already called."
+            );
 
             lock (HandlesLock)
             {
@@ -188,12 +230,17 @@ namespace System.Runtime.DurableInstancing
                     InstanceHandle existingHandle;
                     if (BoundHandles.TryGetValue(reference.InstanceHandle.Id, out existingHandle))
                     {
-                        Fx.AssertAndFailFast(!object.ReferenceEquals(existingHandle, reference.InstanceHandle), "InstanceStore lock state is not correct in InitiateLockResolution.");
+                        Fx.AssertAndFailFast(
+                            !object.ReferenceEquals(existingHandle, reference.InstanceHandle),
+                            "InstanceStore lock state is not correct in InitiateLockResolution."
+                        );
                         if (existingHandle.Version <= 0 || instanceVersion <= 0)
                         {
                             if (existingHandle.Version != 0 || instanceVersion != 0)
                             {
-                                throw Fx.Exception.AsError(new InvalidOperationException(SRCore.InvalidLockToken));
+                                throw Fx.Exception.AsError(
+                                    new InvalidOperationException(SRCore.InvalidLockToken)
+                                );
                             }
 
                             reference.InstanceHandle.ConflictingHandle = existingHandle;
@@ -210,7 +257,10 @@ namespace System.Runtime.DurableInstancing
                     // Put a marker in the InProgressHandles.  If it makes it through, and there's still no conflicting handle,
                     // then the lock can be claimed at this version.  Only currently in-progress bindings have a chance of
                     // staking a stronger claim to the lock version (if the store actually acquired the lock for the handle).
-                    markerReference = new LockResolutionMarker(reference.InstanceHandle, instanceVersion);
+                    markerReference = new LockResolutionMarker(
+                        reference.InstanceHandle,
+                        instanceVersion
+                    );
                     EnqueueReference(markerReference);
                     reference = markerReference;
                     Fx.Assert(markerReference.MarkerWaitHandle != null, "Null MarkerWaitHandle?");
@@ -237,12 +287,21 @@ namespace System.Runtime.DurableInstancing
 
         // Called when a handle is bound to an instance while the handle is in-progress for a lock.  This can progress the queue-states since
         // this once can move from the general queue to the per-instance queue.
-        internal void InstanceBound(ref InstanceHandleReference reference, ref List<InstanceHandleReference> handlesPendingResolution)
+        internal void InstanceBound(
+            ref InstanceHandleReference reference,
+            ref List<InstanceHandleReference> handlesPendingResolution
+        )
         {
             Fx.Assert(reference != null, "InstanceBound called when no operation is in progress.");
             Fx.Assert(reference.InstanceHandle != null, "InstanceBound called after cancelling.");
-            Fx.Assert(reference.InstanceHandle.Id != Guid.Empty, "InstanceBound called, but the handle isn't bound.");
-            Fx.AssertAndThrow(!(reference is LockResolutionMarker), "InstanceBound called after trying to bind the lock version, which alredy required an instance.");
+            Fx.Assert(
+                reference.InstanceHandle.Id != Guid.Empty,
+                "InstanceBound called, but the handle isn't bound."
+            );
+            Fx.AssertAndThrow(
+                !(reference is LockResolutionMarker),
+                "InstanceBound called after trying to bind the lock version, which alredy required an instance."
+            );
 
             lock (HandlesLock)
             {
@@ -250,11 +309,20 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        internal void CancelBind(ref InstanceHandleReference reference, ref List<InstanceHandleReference> handlesPendingResolution)
+        internal void CancelBind(
+            ref InstanceHandleReference reference,
+            ref List<InstanceHandleReference> handlesPendingResolution
+        )
         {
             Fx.Assert(reference != null, "Bind not in progress.");
-            Fx.Assert(reference.InstanceHandle != null, "Reference already canceled in CancelBind.");
-            Fx.Assert(object.ReferenceEquals(this, reference.InstanceHandle.Owner), "CancelBind called on the wrong owner for a handle.");
+            Fx.Assert(
+                reference.InstanceHandle != null,
+                "Reference already canceled in CancelBind."
+            );
+            Fx.Assert(
+                object.ReferenceEquals(this, reference.InstanceHandle.Owner),
+                "CancelBind called on the wrong owner for a handle."
+            );
 
             lock (HandlesLock)
             {
@@ -262,11 +330,18 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        internal void FaultBind(ref InstanceHandleReference reference, ref List<InstanceHandleReference> handlesPendingResolution, Exception reason)
+        internal void FaultBind(
+            ref InstanceHandleReference reference,
+            ref List<InstanceHandleReference> handlesPendingResolution,
+            Exception reason
+        )
         {
             Fx.Assert(reference != null, "Bind not in progress in FaultBind.");
             Fx.Assert(reference.InstanceHandle != null, "Reference already canceled in FaultBind.");
-            Fx.Assert(object.ReferenceEquals(this, reference.InstanceHandle.Owner), "FaultBind called on the wrong owner for a handle.");
+            Fx.Assert(
+                object.ReferenceEquals(this, reference.InstanceHandle.Owner),
+                "FaultBind called on the wrong owner for a handle."
+            );
 
             lock (HandlesLock)
             {
@@ -279,7 +354,8 @@ namespace System.Runtime.DurableInstancing
                     }
                     finally
                     {
-                        marker.Reason = reason ?? new OperationCanceledException(SRCore.HandleFreed);
+                        marker.Reason =
+                            reason ?? new OperationCanceledException(SRCore.HandleFreed);
                         marker.NotifyMarkerComplete(false);
 
                         if (handlesPendingResolution == null)
@@ -292,12 +368,25 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        internal bool FinishBind(ref InstanceHandleReference reference, ref long instanceVersion, ref List<InstanceHandleReference> handlesPendingResolution)
+        internal bool FinishBind(
+            ref InstanceHandleReference reference,
+            ref long instanceVersion,
+            ref List<InstanceHandleReference> handlesPendingResolution
+        )
         {
             Fx.Assert(reference != null, "Bind not in progress in FinishBind.");
-            Fx.Assert(reference.InstanceHandle != null, "Reference already canceled in FinishBind.");
-            Fx.Assert(object.ReferenceEquals(this, reference.InstanceHandle.Owner), "FinishBind called on the wrong owner for a handle.");
-            Fx.Assert(reference is LockResolutionMarker, "Must have started reclaim in order to finish it.");
+            Fx.Assert(
+                reference.InstanceHandle != null,
+                "Reference already canceled in FinishBind."
+            );
+            Fx.Assert(
+                object.ReferenceEquals(this, reference.InstanceHandle.Owner),
+                "FinishBind called on the wrong owner for a handle."
+            );
+            Fx.Assert(
+                reference is LockResolutionMarker,
+                "Must have started reclaim in order to finish it."
+            );
 
             lock (HandlesLock)
             {
@@ -315,7 +404,10 @@ namespace System.Runtime.DurableInstancing
                     {
                         throw Fx.Exception.AsError(marker.Reason);
                     }
-                    Fx.Assert(marker.ConflictingHandle != null, "Should either have a conflicting handle or a reason in the conflicting case.");
+                    Fx.Assert(
+                        marker.ConflictingHandle != null,
+                        "Should either have a conflicting handle or a reason in the conflicting case."
+                    );
                     marker.InstanceHandle.ConflictingHandle = marker.ConflictingHandle;
                     return false;
                 }
@@ -327,7 +419,10 @@ namespace System.Runtime.DurableInstancing
         }
 
         // Must be called with HandlesLock held.
-        void CancelReference(ref InstanceHandleReference reference, ref List<InstanceHandleReference> handlesPendingResolution)
+        void CancelReference(
+            ref InstanceHandleReference reference,
+            ref List<InstanceHandleReference> handlesPendingResolution
+        )
         {
             Guid wasBoundToInstanceId = reference.InstanceHandle.Id;
 
@@ -354,7 +449,12 @@ namespace System.Runtime.DurableInstancing
             if (wasBoundToInstanceId != Guid.Empty)
             {
                 Queue<InstanceHandleReference> instanceQueue;
-                if (InProgressHandlesPerInstance.TryGetValue(wasBoundToInstanceId, out instanceQueue))
+                if (
+                    InProgressHandlesPerInstance.TryGetValue(
+                        wasBoundToInstanceId,
+                        out instanceQueue
+                    )
+                )
                 {
                     while (instanceQueue.Count > 0)
                     {
@@ -392,13 +492,21 @@ namespace System.Runtime.DurableInstancing
                     }
 
                     Queue<InstanceHandleReference> acceptingQueue;
-                    if (!InProgressHandlesPerInstance.TryGetValue(handleRef.InstanceHandle.Id, out acceptingQueue))
+                    if (
+                        !InProgressHandlesPerInstance.TryGetValue(
+                            handleRef.InstanceHandle.Id,
+                            out acceptingQueue
+                        )
+                    )
                     {
                         if (CheckOldestReference(handleRef, ref handlesPendingResolution))
                         {
                             acceptingQueue = new Queue<InstanceHandleReference>(2);
                             acceptingQueue.Enqueue(handleRef);
-                            InProgressHandlesPerInstance.Add(handleRef.InstanceHandle.Id, acceptingQueue);
+                            InProgressHandlesPerInstance.Add(
+                                handleRef.InstanceHandle.Id,
+                                acceptingQueue
+                            );
                         }
                     }
                     else
@@ -421,7 +529,12 @@ namespace System.Runtime.DurableInstancing
             else if (handleRef.InstanceHandle.Id != Guid.Empty)
             {
                 Queue<InstanceHandleReference> queue;
-                if (!InProgressHandlesPerInstance.TryGetValue(handleRef.InstanceHandle.Id, out queue))
+                if (
+                    !InProgressHandlesPerInstance.TryGetValue(
+                        handleRef.InstanceHandle.Id,
+                        out queue
+                    )
+                )
                 {
                     queue = new Queue<InstanceHandleReference>(2);
                     InProgressHandlesPerInstance.Add(handleRef.InstanceHandle.Id, queue);
@@ -437,7 +550,10 @@ namespace System.Runtime.DurableInstancing
         // Must be called with HandlesLock held.
         // This is called when a reference becomes the oldest in-progress reference for an instance.  This triggers the end of resolution for markers.
         // Returns false if the resolution failed, meaning that the marker can be removed.
-        bool CheckOldestReference(InstanceHandleReference handleRef, ref List<InstanceHandleReference> handlesPendingResolution)
+        bool CheckOldestReference(
+            InstanceHandleReference handleRef,
+            ref List<InstanceHandleReference> handlesPendingResolution
+        )
         {
             LockResolutionMarker marker = handleRef as LockResolutionMarker;
             if (marker == null || marker.IsComplete)
@@ -451,7 +567,10 @@ namespace System.Runtime.DurableInstancing
                 InstanceHandle existingHandle;
                 if (BoundHandles.TryGetValue(marker.InstanceHandle.Id, out existingHandle))
                 {
-                    Fx.AssertAndFailFast(!object.ReferenceEquals(existingHandle, marker.InstanceHandle), "InstanceStore lock state is not correct in CheckOldestReference.");
+                    Fx.AssertAndFailFast(
+                        !object.ReferenceEquals(existingHandle, marker.InstanceHandle),
+                        "InstanceStore lock state is not correct in CheckOldestReference."
+                    );
                     if (existingHandle.Version <= 0 || marker.InstanceVersion <= 0)
                     {
                         if (existingHandle.Version != 0 || marker.InstanceVersion != 0)
@@ -514,10 +633,7 @@ namespace System.Runtime.DurableInstancing
             // This is signalled when the marker reaches the end of the queue.
             internal AsyncWaitHandle MarkerWaitHandle
             {
-                get
-                {
-                    return this.waitHandle;
-                }
+                get { return this.waitHandle; }
             }
 
             // The initial state of the attempt.
@@ -533,7 +649,10 @@ namespace System.Runtime.DurableInstancing
 
             internal void NotifyMarkerComplete(bool success)
             {
-                Fx.Assert(InstanceHandle != null, "NotifyNonConflicting called on a cancelled LockResolutionMarker.");
+                Fx.Assert(
+                    InstanceHandle != null,
+                    "NotifyNonConflicting called on a cancelled LockResolutionMarker."
+                );
                 NonConflicting = success;
                 IsComplete = true;
             }

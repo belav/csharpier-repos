@@ -3,11 +3,11 @@
 
 #nullable disable
 
+using System.Data;
 using System.Linq;
 using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.Extensions.Logging;
-using System.Data;
 #if !COMPONENTS
 using Microsoft.Extensions.ObjectPool;
 #else
@@ -48,7 +48,8 @@ internal class TreeRouteBuilder
 #if !COMPONENTS
         ObjectPool<UriBuildingContext> objectPool,
 #endif
-        IInlineConstraintResolver constraintResolver)
+        IInlineConstraintResolver constraintResolver
+    )
     {
         ArgumentNullException.ThrowIfNull(loggerFactory);
 #if !COMPONENTS
@@ -81,11 +82,13 @@ internal class TreeRouteBuilder
         IRouter handler,
         RouteTemplate routeTemplate,
         string routeName,
-        int order)
+        int order
+    )
 #else
         [DynamicallyAccessedMembers(Component)] Type handler,
         RoutePattern routeTemplate,
-        List<string> unusedParameterNames)
+        List<string> unusedParameterNames
+    )
 #endif
     {
         ArgumentNullException.ThrowIfNull(handler);
@@ -108,9 +111,15 @@ internal class TreeRouteBuilder
         };
 
 #if !COMPONENTS
-        var constraintBuilder = new RouteConstraintBuilder(_constraintResolver, routeTemplate.TemplateText);
+        var constraintBuilder = new RouteConstraintBuilder(
+            _constraintResolver,
+            routeTemplate.TemplateText
+        );
 #else
-        var constraintBuilder = new RouteConstraintBuilder(_constraintResolver, routeTemplate.RawText);
+        var constraintBuilder = new RouteConstraintBuilder(
+            _constraintResolver,
+            routeTemplate.RawText
+        );
 #endif
         foreach (var parameter in routeTemplate.Parameters)
         {
@@ -181,7 +190,8 @@ internal class TreeRouteBuilder
         RouteTemplate routeTemplate,
         RouteValueDictionary requiredLinkValues,
         string routeName,
-        int order)
+        int order
+    )
     {
         ArgumentNullException.ThrowIfNull(handler);
         ArgumentNullException.ThrowIfNull(routeTemplate);
@@ -197,7 +207,10 @@ internal class TreeRouteBuilder
             RouteTemplate = routeTemplate,
         };
 
-        var constraintBuilder = new RouteConstraintBuilder(_constraintResolver, routeTemplate.TemplateText);
+        var constraintBuilder = new RouteConstraintBuilder(
+            _constraintResolver,
+            routeTemplate.TemplateText
+        );
         foreach (var parameter in routeTemplate.Parameters)
         {
             if (parameter.InlineConstraints != null)
@@ -228,11 +241,11 @@ internal class TreeRouteBuilder
         OutboundEntries.Add(entry);
         return entry;
     }
-
     /// <summary>
     /// Gets the list of <see cref="InboundRouteEntry"/>.
     /// </summary>
 #endif
+
     public IList<InboundRouteEntry> InboundEntries { get; } = new List<InboundRouteEntry>();
 
 #if !COMPONENTS
@@ -240,13 +253,13 @@ internal class TreeRouteBuilder
     /// Gets the list of <see cref="OutboundRouteEntry"/>.
     /// </summary>
     public IList<OutboundRouteEntry> OutboundEntries { get; } = new List<OutboundRouteEntry>();
-
     /// <summary>
     /// Builds a <see cref="TreeRouter"/> with the <see cref="InboundEntries"/>
     /// and <see cref="OutboundEntries"/> defined in this <see cref="TreeRouteBuilder"/>.
     /// </summary>
     /// <returns>The <see cref="TreeRouter"/>.</returns>
 #endif
+
     public TreeRouter Build()
     {
         return Build(version: 0);
@@ -286,13 +299,15 @@ internal class TreeRouteBuilder
             _objectPool,
             _logger,
             _constraintLogger,
-            version);
+            version
+        );
 #else
         return new TreeRouter(
             trees.Values.OrderBy(tree => tree.Order).ToArray(),
             _urlEncoder,
             _logger,
-            version);
+            version
+        );
 #endif
     }
 

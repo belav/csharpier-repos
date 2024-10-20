@@ -20,12 +20,20 @@ namespace System.Security.Cryptography.X509Certificates
             return OpenSslX509CertificateReader.FromOtherCert(copyFrom);
         }
 
-        internal static partial ICertificatePal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal static partial ICertificatePal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             return OpenSslX509CertificateReader.FromBlob(rawData, password, keyStorageFlags);
         }
 
-        internal static partial ICertificatePal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal static partial ICertificatePal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             return OpenSslX509CertificateReader.FromFile(fileName, password, keyStorageFlags);
         }

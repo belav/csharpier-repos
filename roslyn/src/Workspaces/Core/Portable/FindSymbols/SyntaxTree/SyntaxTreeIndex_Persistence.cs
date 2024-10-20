@@ -14,9 +14,21 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     internal sealed partial class SyntaxTreeIndex
     {
         public static Task<SyntaxTreeIndex?> LoadAsync(
-            IChecksummedPersistentStorageService storageService, DocumentKey documentKey, Checksum? checksum, StringTable stringTable, CancellationToken cancellationToken)
+            IChecksummedPersistentStorageService storageService,
+            DocumentKey documentKey,
+            Checksum? checksum,
+            StringTable stringTable,
+            CancellationToken cancellationToken
+        )
         {
-            return LoadAsync(storageService, documentKey, checksum, stringTable, ReadIndex, cancellationToken);
+            return LoadAsync(
+                storageService,
+                documentKey,
+                checksum,
+                stringTable,
+                ReadIndex,
+                cancellationToken
+            );
         }
 
         public override void WriteTo(ObjectWriter writer)
@@ -42,7 +54,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         private static SyntaxTreeIndex? ReadIndex(
-            StringTable stringTable, ObjectReader reader, Checksum? checksum)
+            StringTable stringTable,
+            ObjectReader reader,
+            Checksum? checksum
+        )
         {
             var literalInfo = LiteralInfo.TryReadFrom(reader);
             var identifierInfo = IdentifierInfo.TryReadFrom(reader);
@@ -72,7 +87,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 literalInfo.Value,
                 identifierInfo.Value,
                 contextInfo.Value,
-                globalAliasInfo);
+                globalAliasInfo
+            );
         }
     }
 }

@@ -19,12 +19,12 @@ public class child
         int divResult = 0;
         try
         {
-            divResult = div2(0, -1);                  // Should not throw an exception
+            divResult = div2(0, -1); // Should not throw an exception
             if (divResult != 0)
             {
-                testResult += 0x1000;                 // Wrong result
+                testResult += 0x1000; // Wrong result
             }
-            divResult = div2(Int32.MinValue, -1);     // Should throw ArithmeticException
+            divResult = div2(Int32.MinValue, -1); // Should throw ArithmeticException
             Console.WriteLine(divResult);
             testResult += 0x10;
         }
@@ -40,12 +40,12 @@ public class child
 
         try
         {
-            divResult = div2(80442, 654);             // Should not throw an exception
+            divResult = div2(80442, 654); // Should not throw an exception
             if (divResult != 123)
             {
-                testResult += 0x2000;                 // Wrong result
+                testResult += 0x2000; // Wrong result
             }
-            divResult = div2(1, 0);                   // Should throw DivideByZeroException
+            divResult = div2(1, 0); // Should throw DivideByZeroException
             Console.WriteLine(divResult);
             testResult += 0x20;
         }
@@ -80,9 +80,6 @@ public class child
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public static int div2(int a, int b)
     {
-
         return a / b;
     }
-
 }
-

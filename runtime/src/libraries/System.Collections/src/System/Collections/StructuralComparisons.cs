@@ -10,9 +10,11 @@ namespace System.Collections
         private static volatile IComparer? s_StructuralComparer;
         private static volatile IEqualityComparer? s_StructuralEqualityComparer;
 
-        public static IComparer StructuralComparer => s_StructuralComparer ??= new StructuralComparer();
+        public static IComparer StructuralComparer =>
+            s_StructuralComparer ??= new StructuralComparer();
 
-        public static IEqualityComparer StructuralEqualityComparer => s_StructuralEqualityComparer ??= new StructuralEqualityComparer();
+        public static IEqualityComparer StructuralEqualityComparer =>
+            s_StructuralEqualityComparer ??= new StructuralEqualityComparer();
     }
 
     internal sealed class StructuralEqualityComparer : IEqualityComparer
@@ -37,13 +39,15 @@ namespace System.Collections
                     return false;
                 }
             }
-            if (y != null) return false;
+            if (y != null)
+                return false;
             return true;
         }
 
         public int GetHashCode(object obj)
         {
-            if (obj == null) return 0;
+            if (obj == null)
+                return 0;
 
             IStructuralEquatable? seObj = obj as IStructuralEquatable;
 
@@ -60,8 +64,10 @@ namespace System.Collections
     {
         public int Compare(object? x, object? y)
         {
-            if (x == null) return y == null ? 0 : -1;
-            if (y == null) return 1;
+            if (x == null)
+                return y == null ? 0 : -1;
+            if (y == null)
+                return 1;
 
             IStructuralComparable? scX = x as IStructuralComparable;
 

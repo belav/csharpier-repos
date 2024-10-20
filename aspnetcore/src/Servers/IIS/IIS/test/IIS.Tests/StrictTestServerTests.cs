@@ -17,7 +17,10 @@ public class StrictTestServerTests : LoggedTest
     {
         base.Dispose();
 
-        if (TestSink.Writes.FirstOrDefault(w => w.LogLevel > LogLevel.Information) is WriteContext writeContext)
+        if (
+            TestSink.Writes.FirstOrDefault(w => w.LogLevel > LogLevel.Information)
+            is WriteContext writeContext
+        )
         {
             throw new XunitException($"Unexpected log: {writeContext}");
         }

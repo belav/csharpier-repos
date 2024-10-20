@@ -7,7 +7,8 @@ using System.IO;
 
 internal sealed class CodeWriter : IndentedTextWriter
 {
-    public CodeWriter(StringWriter stringWriter, int baseIndent) : base(stringWriter)
+    public CodeWriter(StringWriter stringWriter, int baseIndent)
+        : base(stringWriter)
     {
         Indent = baseIndent;
     }

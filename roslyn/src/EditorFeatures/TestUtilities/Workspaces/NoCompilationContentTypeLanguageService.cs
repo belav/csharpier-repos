@@ -12,17 +12,26 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 {
-    [ExportLanguageService(typeof(IContentTypeLanguageService), NoCompilationConstants.LanguageName, ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportLanguageService(
+            typeof(IContentTypeLanguageService),
+            NoCompilationConstants.LanguageName,
+            ServiceLayer.Test
+        ),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal class NoCompilationContentTypeLanguageService : IContentTypeLanguageService
     {
         private readonly IContentTypeRegistryService _contentTypeRegistry;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NoCompilationContentTypeLanguageService(IContentTypeRegistryService contentTypeRegistry)
-            => _contentTypeRegistry = contentTypeRegistry;
+        public NoCompilationContentTypeLanguageService(
+            IContentTypeRegistryService contentTypeRegistry
+        ) => _contentTypeRegistry = contentTypeRegistry;
 
-        public IContentType GetDefaultContentType()
-            => _contentTypeRegistry.GetContentType(NoCompilationConstants.LanguageName);
+        public IContentType GetDefaultContentType() =>
+            _contentTypeRegistry.GetContentType(NoCompilationConstants.LanguageName);
     }
 }

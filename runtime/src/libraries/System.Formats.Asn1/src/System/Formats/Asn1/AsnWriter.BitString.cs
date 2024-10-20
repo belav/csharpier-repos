@@ -33,7 +33,11 @@ namespace System.Formats.Asn1
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="unusedBitCount"/> is not in the range [0,7].
         /// </exception>
-        public void WriteBitString(ReadOnlySpan<byte> value, int unusedBitCount = 0, Asn1Tag? tag = null)
+        public void WriteBitString(
+            ReadOnlySpan<byte> value,
+            int unusedBitCount = 0,
+            Asn1Tag? tag = null
+        )
         {
             CheckUniversalTag(tag, UniversalTagNumber.BitString);
 
@@ -42,7 +46,11 @@ namespace System.Formats.Asn1
         }
 
         // T-REC-X.690-201508 sec 8.6
-        private void WriteBitStringCore(Asn1Tag tag, ReadOnlySpan<byte> bitString, int unusedBitCount)
+        private void WriteBitStringCore(
+            Asn1Tag tag,
+            ReadOnlySpan<byte> bitString,
+            int unusedBitCount
+        )
         {
             // T-REC-X.690-201508 sec 8.6.2.2
             if (unusedBitCount < 0 || unusedBitCount > 7)
@@ -50,13 +58,17 @@ namespace System.Formats.Asn1
                 throw new ArgumentOutOfRangeException(
                     nameof(unusedBitCount),
                     unusedBitCount,
-                    SR.Argument_UnusedBitCountRange);
+                    SR.Argument_UnusedBitCountRange
+                );
             }
 
             // T-REC-X.690-201508 sec 8.6.2.3
             if (bitString.Length == 0 && unusedBitCount != 0)
             {
-                throw new ArgumentException(SR.Argument_UnusedBitCountMustBeZero, nameof(unusedBitCount));
+                throw new ArgumentException(
+                    SR.Argument_UnusedBitCountMustBeZero,
+                    nameof(unusedBitCount)
+                );
             }
 
             byte lastByte = bitString.IsEmpty ? (byte)0 : bitString[bitString.Length - 1];
@@ -110,14 +122,23 @@ namespace System.Formats.Asn1
             const int MaxCERContentSize = MaxCERSegmentSize - 1;
             Debug.Assert(contentLength > MaxCERContentSize);
 
-            int fullSegments = Math.DivRem(contentLength, MaxCERContentSize, out int lastContentSize);
+            int fullSegments = Math.DivRem(
+                contentLength,
+                MaxCERContentSize,
+                out int lastContentSize
+            );
 
             // The tag size is 1 byte.
             // The length will always be encoded as 82 03 E8 (3 bytes)
             // And 1000 content octets (by T-REC-X.690-201508 sec 9.2)
             const int FullSegmentEncodedSize = 1004;
             Debug.Assert(
-                FullSegmentEncodedSize == 1 + 1 + MaxCERSegmentSize + GetEncodedLengthSubsequentByteCount(MaxCERSegmentSize));
+                FullSegmentEncodedSize
+                    == 1
+                        + 1
+                        + MaxCERSegmentSize
+                        + GetEncodedLengthSubsequentByteCount(MaxCERSegmentSize)
+            );
 
             int remainingEncodedSize;
 
@@ -128,18 +149,26 @@ namespace System.Formats.Asn1
             else
             {
                 // One byte of tag, minimum one byte of length, and one byte of unused bit count.
-                remainingEncodedSize = 3 + lastContentSize + GetEncodedLengthSubsequentByteCount(lastContentSize);
+                remainingEncodedSize =
+                    3 + lastContentSize + GetEncodedLengthSubsequentByteCount(lastContentSize);
             }
 
             // Reduce the number of copies by pre-calculating the size.
             // +2 for End-Of-Contents
             // +1 for 0x80 indefinite length
             // +tag length
-            return fullSegments * FullSegmentEncodedSize + remainingEncodedSize + 3 + tag.CalculateEncodedSize();
+            return fullSegments * FullSegmentEncodedSize
+                + remainingEncodedSize
+                + 3
+                + tag.CalculateEncodedSize();
         }
 
         // T-REC-X.690-201508 sec 9.2, 8.6
-        private void WriteConstructedCerBitString(Asn1Tag tag, ReadOnlySpan<byte> payload, int unusedBitCount)
+        private void WriteConstructedCerBitString(
+            Asn1Tag tag,
+            ReadOnlySpan<byte> payload,
+            int unusedBitCount
+        )
         {
             const int MaxCERSegmentSize = AsnReader.MaxCERSegmentSize;
             // Every segment has an "unused bit count" byte.
@@ -189,8 +218,14 @@ namespace System.Formats.Asn1
 
             WriteEndOfContents();
 
-            Debug.Assert(_offset - savedOffset == expectedSize, $"expected size was {expectedSize}, actual was {_offset - savedOffset}");
-            Debug.Assert(_buffer == ensureNoExtraCopy, $"_buffer was replaced during {nameof(WriteConstructedCerBitString)}");
+            Debug.Assert(
+                _offset - savedOffset == expectedSize,
+                $"expected size was {expectedSize}, actual was {_offset - savedOffset}"
+            );
+            Debug.Assert(
+                _buffer == ensureNoExtraCopy,
+                $"_buffer was replaced during {nameof(WriteConstructedCerBitString)}"
+            );
         }
     }
 }

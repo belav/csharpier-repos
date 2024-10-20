@@ -16,20 +16,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     {
         private static void AssertIncompleteSubmission(string code)
         {
-            Assert.False(SyntaxFactory.IsCompleteSubmission(SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script)));
+            Assert.False(
+                SyntaxFactory.IsCompleteSubmission(
+                    SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script)
+                )
+            );
         }
 
         private static void AssertCompleteSubmission(string code)
         {
-            Assert.True(SyntaxFactory.IsCompleteSubmission(SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script)));
+            Assert.True(
+                SyntaxFactory.IsCompleteSubmission(
+                    SyntaxFactory.ParseSyntaxTree(code, options: TestOptions.Script)
+                )
+            );
         }
 
         [Fact]
         public void TextIsCompleteSubmission()
         {
             Assert.Throws<ArgumentNullException>(() => SyntaxFactory.IsCompleteSubmission(null));
-            Assert.Throws<ArgumentException>(() =>
-                SyntaxFactory.IsCompleteSubmission(SyntaxFactory.ParseSyntaxTree("", options: TestOptions.Regular)));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    SyntaxFactory.IsCompleteSubmission(
+                        SyntaxFactory.ParseSyntaxTree("", options: TestOptions.Regular)
+                    )
+            );
 
             AssertCompleteSubmission("");
             AssertCompleteSubmission("//hello");
@@ -47,19 +59,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             AssertIncompleteSubmission("using X; /*");
 
-            AssertIncompleteSubmission(@"
+            AssertIncompleteSubmission(
+                @"
 void goo() 
 {
 #if F
 }
-");
+"
+            );
 
-            AssertIncompleteSubmission(@"
+            AssertIncompleteSubmission(
+                @"
 void goo() 
 {
 #region R
 }
-");
+"
+            );
 
             AssertCompleteSubmission("1");
             AssertCompleteSubmission("1;");
@@ -267,11 +283,17 @@ void goo()
                     case SyntaxKind.ReturnKeyword:
                     case SyntaxKind.TypeKeyword:
                     case SyntaxKind.TypeVarKeyword:
-                        Assert.True(SyntaxFacts.IsAttributeTargetSpecifier(kind), $$"""IsAttributeTargetSpecific({{kind}}) should be true""");
+                        Assert.True(
+                            SyntaxFacts.IsAttributeTargetSpecifier(kind),
+                            $$"""IsAttributeTargetSpecific({{kind}}) should be true"""
+                        );
                         break;
 
                     default:
-                        Assert.False(SyntaxFacts.IsAttributeTargetSpecifier(kind), $$"""IsAttributeTargetSpecific({{kind}}) should be false""");
+                        Assert.False(
+                            SyntaxFacts.IsAttributeTargetSpecifier(kind),
+                            $$"""IsAttributeTargetSpecific({{kind}}) should be false"""
+                        );
                         break;
                 }
             }

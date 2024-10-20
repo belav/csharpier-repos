@@ -11,18 +11,27 @@ namespace Microsoft.AspNetCore.SignalR.Internal;
 // True-internal because this is a weird and tricky class to use :)
 internal static class AsyncEnumerableAdapters
 {
-    public static IAsyncEnumerator<object?> MakeCancelableAsyncEnumerator<T>(IAsyncEnumerable<T> asyncEnumerable, CancellationToken cancellationToken = default)
+    public static IAsyncEnumerator<object?> MakeCancelableAsyncEnumerator<T>(
+        IAsyncEnumerable<T> asyncEnumerable,
+        CancellationToken cancellationToken = default
+    )
     {
         var enumerator = asyncEnumerable.GetAsyncEnumerator(cancellationToken);
         return enumerator as IAsyncEnumerator<object?> ?? new BoxedAsyncEnumerator<T>(enumerator);
     }
 
-    public static IAsyncEnumerable<T> MakeCancelableTypedAsyncEnumerable<T>(IAsyncEnumerable<T> asyncEnumerable, CancellationTokenSource cts)
+    public static IAsyncEnumerable<T> MakeCancelableTypedAsyncEnumerable<T>(
+        IAsyncEnumerable<T> asyncEnumerable,
+        CancellationTokenSource cts
+    )
     {
         return new CancelableTypedAsyncEnumerable<T>(asyncEnumerable, cts);
     }
 
-    public static IAsyncEnumerator<object?> MakeAsyncEnumeratorFromChannel<T>(ChannelReader<T> channel, CancellationToken cancellationToken = default)
+    public static IAsyncEnumerator<object?> MakeAsyncEnumeratorFromChannel<T>(
+        ChannelReader<T> channel,
+        CancellationToken cancellationToken = default
+    )
     {
         return new ChannelAsyncEnumerator<T>(channel, cancellationToken);
     }
@@ -31,6 +40,7 @@ internal static class AsyncEnumerableAdapters
     {
         private readonly ChannelReader<T> _channel;
         private readonly CancellationToken _cancellationToken;
+
         public ChannelAsyncEnumerator(ChannelReader<T> channel, CancellationToken cancellationToken)
         {
             _channel = channel;
@@ -52,7 +62,10 @@ internal static class AsyncEnumerableAdapters
 
         private async Task<bool> MoveNextAsyncAwaited()
         {
-            if (await _channel.WaitToReadAsync(_cancellationToken).ConfigureAwait(false) && _channel.TryRead(out var item))
+            if (
+                await _channel.WaitToReadAsync(_cancellationToken).ConfigureAwait(false)
+                && _channel.TryRead(out var item)
+            )
             {
                 Current = item;
                 return true;
@@ -68,21 +81,29 @@ internal static class AsyncEnumerableAdapters
         private readonly IAsyncEnumerable<TResult> _asyncEnumerable;
         private readonly CancellationTokenSource _cts;
 
-        public CancelableTypedAsyncEnumerable(IAsyncEnumerable<TResult> asyncEnumerable, CancellationTokenSource cts)
+        public CancelableTypedAsyncEnumerable(
+            IAsyncEnumerable<TResult> asyncEnumerable,
+            CancellationTokenSource cts
+        )
         {
             _asyncEnumerable = asyncEnumerable;
             _cts = cts;
         }
 
-        public IAsyncEnumerator<TResult> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+        public IAsyncEnumerator<TResult> GetAsyncEnumerator(
+            CancellationToken cancellationToken = default
+        )
         {
             var enumerator = _asyncEnumerable.GetAsyncEnumerator(_cts.Token);
             if (cancellationToken.CanBeCanceled)
             {
-                var registration = cancellationToken.Register((ctsState) =>
-                {
-                    ((CancellationTokenSource)ctsState!).Cancel();
-                }, _cts);
+                var registration = cancellationToken.Register(
+                    (ctsState) =>
+                    {
+                        ((CancellationTokenSource)ctsState!).Cancel();
+                    },
+                    _cts
+                );
 
                 return new CancelableEnumerator<TResult>(enumerator, registration);
             }
@@ -97,7 +118,10 @@ internal static class AsyncEnumerableAdapters
 
             public T Current => (T)_asyncEnumerator.Current;
 
-            public CancelableEnumerator(IAsyncEnumerator<T> asyncEnumerator, CancellationTokenRegistration registration)
+            public CancelableEnumerator(
+                IAsyncEnumerator<T> asyncEnumerator,
+                CancellationTokenRegistration registration
+            )
             {
                 _asyncEnumerator = asyncEnumerator;
                 _cancellationTokenRegistration = registration;

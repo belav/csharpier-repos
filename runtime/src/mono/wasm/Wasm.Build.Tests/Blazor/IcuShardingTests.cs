@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 #nullable enable
 
@@ -17,11 +17,11 @@ namespace Wasm.Build.Tests.Blazor;
 public class IcuShardingTests : BlazorWasmTestBase
 {
     public IcuShardingTests(ITestOutputHelper output, SharedBuildPerTestClassFixture buildContext)
-        : base(output, buildContext) {}
+        : base(output, buildContext) { }
 
     [Theory]
     [InlineData("Debug", "icudt.dat")]
-    [InlineData("Release", "icudt.dat")]    
+    [InlineData("Release", "icudt.dat")]
     [InlineData("Debug", "icudt_CJK.dat")]
     [InlineData("Release", "icudt_CJK.dat")]
     public async Task CustomIcuFileFromRuntimePack(string config, string fileName)
@@ -29,16 +29,16 @@ public class IcuShardingTests : BlazorWasmTestBase
         string id = $"blz_customFromRuntimePack_{config}_{GetRandomId()}";
         string projectFile = CreateBlazorWasmTemplateProject(id);
         var buildOptions = new BlazorBuildOptions(
-                id,
-                config,
-                WarnAsError: true,
-                GlobalizationMode: GlobalizationMode.PredefinedIcu,
-                PredefinedIcudt: fileName
-            );
+            id,
+            config,
+            WarnAsError: true,
+            GlobalizationMode: GlobalizationMode.PredefinedIcu,
+            PredefinedIcudt: fileName
+        );
         AddItemsPropertiesToProject(
             projectFile,
-            extraProperties: 
-                $"<BlazorIcuDataFileName>{fileName}</BlazorIcuDataFileName>");
+            extraProperties: $"<BlazorIcuDataFileName>{fileName}</BlazorIcuDataFileName>"
+        );
 
         (CommandResult res, string logPath) = BlazorBuild(buildOptions);
         await BlazorRunForBuildWithDotnetRun(new BlazorRunOptions() { Config = config });
@@ -49,14 +49,18 @@ public class IcuShardingTests : BlazorWasmTestBase
     [InlineData("Release", "incorrectName.dat", false)]
     [InlineData("Debug", "icudtNonExisting.dat", true)]
     [InlineData("Release", "icudtNonExisting.dat", true)]
-    public void NonExistingCustomFileAssertError(string config, string fileName, bool isFilenameCorrect)
+    public void NonExistingCustomFileAssertError(
+        string config,
+        string fileName,
+        bool isFilenameCorrect
+    )
     {
         string id = $"blz_invalidCustomIcu_{config}_{GetRandomId()}";
         string projectFile = CreateBlazorWasmTemplateProject(id);
         AddItemsPropertiesToProject(
             projectFile,
-            extraProperties: 
-                $"<BlazorIcuDataFileName>{fileName}</BlazorIcuDataFileName>");
+            extraProperties: $"<BlazorIcuDataFileName>{fileName}</BlazorIcuDataFileName>"
+        );
 
         try
         {
@@ -67,17 +71,24 @@ public class IcuShardingTests : BlazorWasmTestBase
                     WarnAsError: false,
                     GlobalizationMode: GlobalizationMode.PredefinedIcu,
                     PredefinedIcudt: fileName
-                ));
+                )
+            );
         }
         catch (XunitException ex)
         {
             if (isFilenameCorrect)
             {
-                Assert.Contains($"Could not find $(BlazorIcuDataFileName)={fileName}, or when used as a path relative to the runtime pack", ex.Message);
+                Assert.Contains(
+                    $"Could not find $(BlazorIcuDataFileName)={fileName}, or when used as a path relative to the runtime pack",
+                    ex.Message
+                );
             }
             else
             {
-                Assert.Contains("File name in $(BlazorIcuDataFileName) has to start with 'icudt'", ex.Message);
+                Assert.Contains(
+                    "File name in $(BlazorIcuDataFileName) has to start with 'icudt'",
+                    ex.Message
+                );
             }
         }
         catch (Exception)
@@ -96,8 +107,8 @@ public class IcuShardingTests : BlazorWasmTestBase
         string projectFile = CreateBlazorWasmTemplateProject(id);
         AddItemsPropertiesToProject(
             projectFile,
-            extraProperties: 
-                $"<BlazorIcuDataFileName>{IcuTestsBase.CustomIcuPath}</BlazorIcuDataFileName>");
+            extraProperties: $"<BlazorIcuDataFileName>{IcuTestsBase.CustomIcuPath}</BlazorIcuDataFileName>"
+        );
 
         (CommandResult res, string logPath) = BlazorBuild(
             new BlazorBuildOptions(
@@ -106,7 +117,8 @@ public class IcuShardingTests : BlazorWasmTestBase
                 WarnAsError: false,
                 GlobalizationMode: GlobalizationMode.PredefinedIcu,
                 PredefinedIcudt: IcuTestsBase.CustomIcuPath
-            ));
+            )
+        );
         await BlazorRunForBuildWithDotnetRun(new BlazorRunOptions() { Config = config });
     }
 }

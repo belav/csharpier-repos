@@ -11,12 +11,18 @@ namespace System.Text.Encodings.Tests
     public class EncodingVirtualTests
     {
         [Theory]
-        [MemberData(nameof(UTF8EncodingEncode.Encode_TestData), MemberType = typeof(UTF8EncodingEncode))]
+        [MemberData(
+            nameof(UTF8EncodingEncode.Encode_TestData),
+            MemberType = typeof(UTF8EncodingEncode)
+        )]
         public void Encode(string chars, int index, int count, byte[] expected) =>
             EncodingHelpers.Encode(new CustomEncoding(), chars, index, count, expected);
 
         [Theory]
-        [MemberData(nameof(UTF8EncodingDecode.Decode_TestData), MemberType = typeof(UTF8EncodingDecode))]
+        [MemberData(
+            nameof(UTF8EncodingDecode.Decode_TestData),
+            MemberType = typeof(UTF8EncodingDecode)
+        )]
         public void Decode(byte[] bytes, int index, int count, string expected) =>
             EncodingHelpers.Decode(new CustomEncoding(), bytes, index, count, expected);
 
@@ -28,18 +34,30 @@ namespace System.Text.Encodings.Tests
             public override int GetByteCount(char[] chars, int index, int count) =>
                 _encoding.GetByteCount(chars, index, count);
 
-            public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex) =>
-                _encoding.GetBytes(chars, charIndex, charCount, bytes, byteIndex);
+            public override int GetBytes(
+                char[] chars,
+                int charIndex,
+                int charCount,
+                byte[] bytes,
+                int byteIndex
+            ) => _encoding.GetBytes(chars, charIndex, charCount, bytes, byteIndex);
 
             public override int GetCharCount(byte[] bytes, int index, int count) =>
                 _encoding.GetCharCount(bytes, index, count);
 
-            public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex) =>
-                _encoding.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
+            public override int GetChars(
+                byte[] bytes,
+                int byteIndex,
+                int byteCount,
+                char[] chars,
+                int charIndex
+            ) => _encoding.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
 
-            public override int GetMaxByteCount(int charCount) => throw new System.NotImplementedException();
+            public override int GetMaxByteCount(int charCount) =>
+                throw new System.NotImplementedException();
 
-            public override int GetMaxCharCount(int byteCount) => throw new System.NotImplementedException();
+            public override int GetMaxCharCount(int byteCount) =>
+                throw new System.NotImplementedException();
         }
     }
 }

@@ -15,6 +15,7 @@ namespace N
 
         public static WrappedInt Twenty = new WrappedInt() { Value = 20 };
     }
+
     public static class C
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -25,7 +26,7 @@ namespace N
         {
             for (int i = 0; i < n; ++i)
             {
-                s += unwrap(WrappedInt.Twenty);  // Loading WrappedInt.Twenty must happen after calling the cctor
+                s += unwrap(WrappedInt.Twenty); // Loading WrappedInt.Twenty must happen after calling the cctor
             }
 
             return s;

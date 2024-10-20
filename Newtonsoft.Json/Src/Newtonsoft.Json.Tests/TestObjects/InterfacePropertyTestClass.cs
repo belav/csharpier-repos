@@ -44,8 +44,6 @@ namespace Newtonsoft.Json.Tests.TestObjects
     {
         public ICo co { get; set; }
 
-        public InterfacePropertyTestClass()
-        {
-        }
+        public InterfacePropertyTestClass() { }
     }
 }

@@ -11,14 +11,21 @@ namespace System.Globalization.Tests
         public static IEnumerable<object[]> ReadOnly_TestData()
         {
             yield return new object[] { DateTimeFormatInfo.InvariantInfo, true };
-            yield return new object[] { DateTimeFormatInfo.ReadOnly(new DateTimeFormatInfo()), true };
+            yield return new object[]
+            {
+                DateTimeFormatInfo.ReadOnly(new DateTimeFormatInfo()),
+                true,
+            };
             yield return new object[] { new DateTimeFormatInfo(), false };
             yield return new object[] { new CultureInfo("en-US").DateTimeFormat, false };
         }
 
         [Theory]
         [MemberData(nameof(ReadOnly_TestData))]
-        public void ReadOnly_Invoke_ReturnsExpected(DateTimeFormatInfo format, bool originalFormatIsReadOnly)
+        public void ReadOnly_Invoke_ReturnsExpected(
+            DateTimeFormatInfo format,
+            bool originalFormatIsReadOnly
+        )
         {
             Assert.Equal(originalFormatIsReadOnly, format.IsReadOnly);
 
@@ -37,7 +44,10 @@ namespace System.Globalization.Tests
         [Fact]
         public void ReadOnly_NullDtfi_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("dtfi", () => DateTimeFormatInfo.ReadOnly(null)); // Dtfi is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dtfi",
+                () => DateTimeFormatInfo.ReadOnly(null)
+            ); // Dtfi is null
         }
     }
 }

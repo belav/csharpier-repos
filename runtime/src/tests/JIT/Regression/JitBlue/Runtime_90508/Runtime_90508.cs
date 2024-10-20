@@ -28,9 +28,11 @@ public class Runtime_90508
             return 100;
         }
 
-        if (Test1(Vector128.Create(42.0), 1).ToString().Equals("<43, 43>") &&
-            Test2(Vector128.Create(42.0)).ToString().Equals("<43, 43>") &&
-            Test3(Vector128.Create(42.0)).ToString().Equals("<43, 43>"))
+        if (
+            Test1(Vector128.Create(42.0), 1).ToString().Equals("<43, 43>")
+            && Test2(Vector128.Create(42.0)).ToString().Equals("<43, 43>")
+            && Test3(Vector128.Create(42.0)).ToString().Equals("<43, 43>")
+        )
         {
             return 100;
         }

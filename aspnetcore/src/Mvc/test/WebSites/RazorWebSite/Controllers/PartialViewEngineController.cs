@@ -38,7 +38,7 @@ public class PartialViewEngineController : Controller
         var model = new Person
         {
             Name = "my name is judge",
-            Address = new Address { ZipCode = "98052" }
+            Address = new Address { ZipCode = "98052" },
         };
         return PartialView(model);
     }

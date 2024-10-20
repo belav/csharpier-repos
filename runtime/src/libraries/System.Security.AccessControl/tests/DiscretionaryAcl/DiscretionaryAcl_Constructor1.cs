@@ -40,12 +40,15 @@ namespace System.Security.AccessControl.Tests
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, capacity);
             rawAcl = new RawAcl(isDS ? GenericAcl.AclRevisionDS : GenericAcl.AclRevision, capacity);
 
-            if (isContainer == discretionaryAcl.IsContainer &&
-                isDS == discretionaryAcl.IsDS &&
-                (isDS ? GenericAcl.AclRevisionDS : GenericAcl.AclRevision) == discretionaryAcl.Revision &&
-                0 == discretionaryAcl.Count &&
-                8 == discretionaryAcl.BinaryLength &&
-                true == discretionaryAcl.IsCanonical)
+            if (
+                isContainer == discretionaryAcl.IsContainer
+                && isDS == discretionaryAcl.IsDS
+                && (isDS ? GenericAcl.AclRevisionDS : GenericAcl.AclRevision)
+                    == discretionaryAcl.Revision
+                && 0 == discretionaryAcl.Count
+                && 8 == discretionaryAcl.BinaryLength
+                && true == discretionaryAcl.IsCanonical
+            )
             {
                 dAclBinaryForm = new byte[discretionaryAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];
@@ -72,11 +75,12 @@ namespace System.Security.AccessControl.Tests
             Assert.True(result);
         }
 
-
         [Fact]
         public static void Constructor1_NegativeCapacity()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new DiscretionaryAcl(false, false, -1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new DiscretionaryAcl(false, false, -1)
+            );
         }
     }
 }

@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
-    using System.ServiceModel;
     using System.Diagnostics;
+    using System.ServiceModel;
+    using System.Xml;
 
     public abstract class MessageHeaderInfo
     {

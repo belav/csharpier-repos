@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// <summary>
 /// Constrains a route parameter to be an integer with a maximum value.
 /// </summary>
-public class MaxRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class MaxRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class MaxRouteConstraint : IRouteConstraint
 #endif
@@ -41,10 +44,10 @@ internal class MaxRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
 #if !COMPONENTS
@@ -63,7 +66,14 @@ internal class MaxRouteConstraint : IRouteConstraint
 
     private bool CheckConstraintCore(string? valueString)
     {
-        if (long.TryParse(valueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var longValue))
+        if (
+            long.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out var longValue
+            )
+        )
         {
             return longValue <= Max;
         }

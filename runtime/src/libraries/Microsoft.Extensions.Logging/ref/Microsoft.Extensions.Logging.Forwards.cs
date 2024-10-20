@@ -4,4 +4,6 @@
 // Changes to this file must follow the https://aka.ms/api-review process.
 // ------------------------------------------------------------------------------
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(Microsoft.Extensions.Logging.ILoggingBuilder))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(Microsoft.Extensions.Logging.ILoggingBuilder)
+)]

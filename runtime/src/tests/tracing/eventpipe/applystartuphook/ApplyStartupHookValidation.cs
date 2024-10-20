@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Tracing;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -28,9 +28,9 @@ namespace Tracing.Tests.ApplyStartupHookValidation
             Logger.logger.Log($"Server name is '{serverName}'");
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> 
+                environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, serverName }
+                    { Utils.DiagnosticPortsEnvKey, serverName },
                 },
                 duringExecution: async (_) =>
                 {
@@ -44,7 +44,9 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         Logger.logger.Log($"IpcAdvertise: {advertise}");
 
                         string startupHookPath = Hook.Basic.AssemblyPath;
-                        Logger.logger.Log($"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}");
+                        Logger.logger.Log(
+                            $"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}"
+                        );
                         IpcMessage message = CreateApplyStartupHookMessage(startupHookPath);
                         Logger.logger.Log($"Sent: {message.ToString()}");
                         IpcMessage response = IpcClient.SendMessage(stream, message);
@@ -62,7 +64,7 @@ namespace Tracing.Tests.ApplyStartupHookValidation
 
                         Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                         // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                        IpcMessage message = new(0x04,0x01);
+                        IpcMessage message = new(0x04, 0x01);
                         Logger.logger.Log($"Sent: {message.ToString()}");
                         IpcMessage response = IpcClient.SendMessage(stream, message);
                         Logger.logger.Log($"Received: {response.ToString()}");
@@ -83,9 +85,9 @@ namespace Tracing.Tests.ApplyStartupHookValidation
             Logger.logger.Log($"Server name is '{serverName}'");
             Task<bool> subprocessTask = Utils.RunSubprocess(
                 currentAssembly: Assembly.GetExecutingAssembly(),
-                environment: new Dictionary<string,string> 
+                environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, serverName }
+                    { Utils.DiagnosticPortsEnvKey, serverName },
                 },
                 duringExecution: async (pid) =>
                 {
@@ -98,23 +100,36 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                         Logger.logger.Log($"IpcAdvertise: {advertise}");
 
-                        SessionConfiguration config = new(
-                            circularBufferSizeMB: 1000,
-                            format: EventPipeSerializationFormat.NetTrace,
-                            providers: new List<Provider> { 
-                                new Provider(AppEventSource.SourceName, 0, EventLevel.Verbose)
-                            });
+                        SessionConfiguration config =
+                            new(
+                                circularBufferSizeMB: 1000,
+                                format: EventPipeSerializationFormat.NetTrace,
+                                providers: new List<Provider>
+                                {
+                                    new Provider(AppEventSource.SourceName, 0, EventLevel.Verbose),
+                                }
+                            );
 
                         Logger.logger.Log("Starting EventPipeSession over standard connection");
-                        using Stream eventStream = EventPipeClient.CollectTracing(pid, config, out ulong sessionId);
-                        Logger.logger.Log($"Started EventPipeSession over standard connection with session id: 0x{sessionId:X}");
+                        using Stream eventStream = EventPipeClient.CollectTracing(
+                            pid,
+                            config,
+                            out ulong sessionId
+                        );
+                        Logger.logger.Log(
+                            $"Started EventPipeSession over standard connection with session id: 0x{sessionId:X}"
+                        );
 
                         using EventPipeEventSource source = new(eventStream);
-                        TaskCompletionSource completionSource = new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource completionSource =
+                            new(TaskCreationOptions.RunContinuationsAsynchronously);
 
                         source.Dynamic.All += (TraceEvent traceEvent) =>
                         {
-                            if (AppEventSource.SourceName.Equals(traceEvent.ProviderName) && nameof(AppEventSource.Running).Equals(traceEvent.EventName))
+                            if (
+                                AppEventSource.SourceName.Equals(traceEvent.ProviderName)
+                                && nameof(AppEventSource.Running).Equals(traceEvent.EventName)
+                            )
                                 completionSource.TrySetResult();
                         };
 
@@ -122,13 +137,15 @@ namespace Tracing.Tests.ApplyStartupHookValidation
 
                         Logger.logger.Log($"Send ResumeRuntime Diagnostics IPC Command");
                         // send ResumeRuntime command (0x04=ProcessCommandSet, 0x01=ResumeRuntime commandid)
-                        var message = new IpcMessage(0x04,0x01);
+                        var message = new IpcMessage(0x04, 0x01);
                         Logger.logger.Log($"Sent: {message.ToString()}");
                         IpcMessage response = IpcClient.SendMessage(stream, message);
                         Logger.logger.Log($"received: {response.ToString()}");
                         fSuccess &= CheckResponse(response);
-                        
-                        Logger.logger.Log("Start waiting for any event that indicates managed code is running.");
+
+                        Logger.logger.Log(
+                            "Start waiting for any event that indicates managed code is running."
+                        );
                         await completionSource.Task.ConfigureAwait(false);
 
                         Logger.logger.Log("Stopping trace.");
@@ -144,7 +161,9 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         Logger.logger.Log($"IpcAdvertise: {advertise}");
 
                         string startupHookPath = Hook.Basic.AssemblyPath;
-                        Logger.logger.Log($"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}");
+                        Logger.logger.Log(
+                            $"Send ApplyStartupHook Diagnostic IPC: {startupHookPath}"
+                        );
                         IpcMessage message = CreateApplyStartupHookMessage(startupHookPath);
                         Logger.logger.Log($"Sent: {message.ToString()}");
                         IpcMessage response = IpcClient.SendMessage(stream, message);
@@ -194,14 +213,16 @@ namespace Tracing.Tests.ApplyStartupHookValidation
             bool fSuccess = true;
             if (!IpcTraceTest.EnsureCleanEnvironment())
                 return -1;
-            IEnumerable<MethodInfo> tests = typeof(ApplyStartupHookValidation).GetMethods().Where(mi => mi.Name.StartsWith("TEST_"));
+            IEnumerable<MethodInfo> tests = typeof(ApplyStartupHookValidation)
+                .GetMethods()
+                .Where(mi => mi.Name.StartsWith("TEST_"));
             foreach (var test in tests)
             {
                 Logger.logger.Log($"::== Running test: {test.Name}");
                 bool result = true;
                 try
                 {
-                    result = await (Task<bool>)test.Invoke(null, new object[] {});
+                    result = await (Task<bool>)test.Invoke(null, new object[] { });
                 }
                 catch (Exception e)
                 {
@@ -211,7 +232,6 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                 fSuccess &= result;
                 Logger.logger.Log($"Test passed: {result}");
                 Logger.logger.Log($"");
-
             }
             return fSuccess ? 100 : -1;
         }
@@ -222,7 +242,8 @@ namespace Tracing.Tests.ApplyStartupHookValidation
             public const string SourceName = nameof(AppEventSource);
             public const int RunningEventId = 1;
 
-            public AppEventSource() : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
+            public AppEventSource()
+                : base(EventSourceSettings.EtwSelfDescribingEventFormat) { }
 
             [Event(RunningEventId)]
             public void Running()

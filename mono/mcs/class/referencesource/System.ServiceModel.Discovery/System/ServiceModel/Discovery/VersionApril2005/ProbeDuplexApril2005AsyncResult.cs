@@ -6,16 +6,18 @@ namespace System.ServiceModel.Discovery.VersionApril2005
 {
     using System.Runtime;
 
-    sealed class ProbeDuplexApril2005AsyncResult : ProbeDuplexAsyncResult<ProbeMessageApril2005, IDiscoveryResponseContractApril2005>
+    sealed class ProbeDuplexApril2005AsyncResult
+        : ProbeDuplexAsyncResult<ProbeMessageApril2005, IDiscoveryResponseContractApril2005>
     {
-        internal ProbeDuplexApril2005AsyncResult(ProbeMessageApril2005 probeMessage,
+        internal ProbeDuplexApril2005AsyncResult(
+            ProbeMessageApril2005 probeMessage,
             IDiscoveryServiceImplementation discoveryServiceImpl,
             IMulticastSuppressionImplementation multicastSuppressionImpl,
             AsyncCallback callback,
-            object state)
+            object state
+        )
             : base(probeMessage, discoveryServiceImpl, multicastSuppressionImpl, callback, state)
-        {
-        }
+        { }
 
         public static void End(IAsyncResult result)
         {
@@ -28,7 +30,10 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             {
                 if (TD.DiscoveryMessageWithNoContentIsEnabled())
                 {
-                    TD.DiscoveryMessageWithNoContent(this.Context.EventTraceActivity, ProtocolStrings.TracingStrings.Probe);
+                    TD.DiscoveryMessageWithNoContent(
+                        this.Context.EventTraceActivity,
+                        ProtocolStrings.TracingStrings.Probe
+                    );
                 }
 
                 return false;
@@ -42,43 +47,52 @@ namespace System.ServiceModel.Discovery.VersionApril2005
         }
 
         protected override IAsyncResult BeginSendFindResponse(
-            IDiscoveryResponseContractApril2005 responseChannel, 
-            DiscoveryMessageSequence discoveryMessageSequence, 
-            EndpointDiscoveryMetadata matchingEndpoint, 
-            AsyncCallback callback, 
-            object state)
+            IDiscoveryResponseContractApril2005 responseChannel,
+            DiscoveryMessageSequence discoveryMessageSequence,
+            EndpointDiscoveryMetadata matchingEndpoint,
+            AsyncCallback callback,
+            object state
+        )
         {
             return responseChannel.BeginProbeMatchOperation(
-                ProbeMatchesMessageApril2005.Create(
-                discoveryMessageSequence,
-                matchingEndpoint),
-                callback, 
-                state);
+                ProbeMatchesMessageApril2005.Create(discoveryMessageSequence, matchingEndpoint),
+                callback,
+                state
+            );
         }
 
-        protected override void EndSendFindResponse(IDiscoveryResponseContractApril2005 responseChannel, IAsyncResult result)
+        protected override void EndSendFindResponse(
+            IDiscoveryResponseContractApril2005 responseChannel,
+            IAsyncResult result
+        )
         {
             responseChannel.EndProbeMatchOperation(result);
         }
 
         protected override IAsyncResult BeginSendProxyAnnouncement(
-            IDiscoveryResponseContractApril2005 responseChannel, 
-            DiscoveryMessageSequence discoveryMessageSequence, 
-            EndpointDiscoveryMetadata proxyEndpointDiscoveryMetadata, 
-            AsyncCallback callback, 
-            object state)
+            IDiscoveryResponseContractApril2005 responseChannel,
+            DiscoveryMessageSequence discoveryMessageSequence,
+            EndpointDiscoveryMetadata proxyEndpointDiscoveryMetadata,
+            AsyncCallback callback,
+            object state
+        )
         {
             return responseChannel.BeginHelloOperation(
                 HelloMessageApril2005.Create(
-                discoveryMessageSequence,
-                proxyEndpointDiscoveryMetadata),
-                callback, 
-                state);
+                    discoveryMessageSequence,
+                    proxyEndpointDiscoveryMetadata
+                ),
+                callback,
+                state
+            );
         }
 
-        protected override void EndSendProxyAnnouncement(IDiscoveryResponseContractApril2005 responseChannel, IAsyncResult result)
+        protected override void EndSendProxyAnnouncement(
+            IDiscoveryResponseContractApril2005 responseChannel,
+            IAsyncResult result
+        )
         {
-            responseChannel.EndHelloOperation(result);   
+            responseChannel.EndHelloOperation(result);
         }
     }
 }

@@ -3,83 +3,108 @@
 //#########################################################################
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 //using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
+using System.Text;
 using DbLinq.Data.Linq;
 using DbLinq.PostgreSql;
 
 namespace AndrusDB
 {
-
     /// <summary>
     /// This class represents PostgreSQL database Andrus.
     /// </summary>
     public partial class Andrus : DataContext
     {
         public Andrus(string connStr)
-            : base(new Npgsql.NpgsqlConnection( connStr), new PgsqlVendor())
-        {
-        }
+            : base(new Npgsql.NpgsqlConnection(connStr), new PgsqlVendor()) { }
+
         public Andrus(System.Data.IDbConnection connection)
-            : base(connection, new PgsqlVendor())
-        {
-        }
+            : base(connection, new PgsqlVendor()) { }
 
         //these fields represent tables in database and are
         //ordered - parent tables first, child tables next. Do not change the order.
-        public Table<T3> T3s { get { return base.GetTable<T3>("T3s"); } }
-        public Table<Tcompositepk> Tcompositepks { get { return base.GetTable<Tcompositepk>("Tcompositepks"); } }
-        public Table<Employee> Employees { get { return base.GetTable<Employee>("Employees"); } }
-        public Table<Char_Pk> Char_Pks { get { return base.GetTable<Char_Pk>("Char_Pks"); } }
-        public Table<T5> T5s { get { return base.GetTable<T5>("T5s"); } }
-        public Table<T4> T4s { get { return base.GetTable<T4>("T4s"); } }
-        public Table<T1> T1s { get { return base.GetTable<T1>("T1s"); } }
-        public Table<T2> T2s { get { return base.GetTable<T2>("T2s"); } }
-
-
+        public Table<T3> T3s
+        {
+            get { return base.GetTable<T3>("T3s"); }
+        }
+        public Table<Tcompositepk> Tcompositepks
+        {
+            get { return base.GetTable<Tcompositepk>("Tcompositepks"); }
+        }
+        public Table<Employee> Employees
+        {
+            get { return base.GetTable<Employee>("Employees"); }
+        }
+        public Table<Char_Pk> Char_Pks
+        {
+            get { return base.GetTable<Char_Pk>("Char_Pks"); }
+        }
+        public Table<T5> T5s
+        {
+            get { return base.GetTable<T5>("T5s"); }
+        }
+        public Table<T4> T4s
+        {
+            get { return base.GetTable<T4>("T4s"); }
+        }
+        public Table<T1> T1s
+        {
+            get { return base.GetTable<T1>("T1s"); }
+        }
+        public Table<T2> T2s
+        {
+            get { return base.GetTable<T2>("T2s"); }
+        }
     }
-
-
 
     [Table(Name = "public.t3")]
     public partial class T3
     {
-        
         protected int _id1;
         protected int? _f1;
 
-
-        public T3()
-        {
-        }
-
+        public T3() { }
 
         #region properties - accessors
 
-        [Column(Storage = "_id1", Name = "id1", DbType = "integer(32,0)", IsDbGenerated = true, CanBeNull = false, Expression = "nextval('t3_id1_seq')")]
+        [Column(
+            Storage = "_id1",
+            Name = "id1",
+            DbType = "integer(32,0)",
+            IsDbGenerated = true,
+            CanBeNull = false,
+            Expression = "nextval('t3_id1_seq')"
+        )]
         [DebuggerNonUserCode]
         public int Id1
         {
             get { return _id1; }
-            set { _id1 = value; IsModified = true; }
+            set
+            {
+                _id1 = value;
+                IsModified = true;
+            }
         }
-
 
         [Column(Storage = "_f1", Name = "f1", DbType = "integer(32,0)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? F1
         {
             get { return _f1; }
-            set { _f1 = value; IsModified = true; }
+            set
+            {
+                _f1 = value;
+                IsModified = true;
+            }
         }
 
         #endregion
-//#warning L189 table public.t3 has no primary key. Multiple c# objects will refer to the same row.
+        //#warning L189 table public.t3 has no primary key. Multiple c# objects will refer to the same row.
 
         #region childtables
         #endregion
@@ -89,21 +114,14 @@ namespace AndrusDB
         public bool IsModified { get; set; }
     }
 
-
-
     [Table(Name = "public.tcompositepk")]
     public partial class Tcompositepk
     {
-
         protected int _f1;
         protected string _f2;
         protected int? _f3;
 
-
-        public Tcompositepk()
-        {
-        }
-
+        public Tcompositepk() { }
 
         #region properties - accessors
 
@@ -112,25 +130,35 @@ namespace AndrusDB
         public int F1
         {
             get { return _f1; }
-            set { _f1 = value; IsModified = true; }
+            set
+            {
+                _f1 = value;
+                IsModified = true;
+            }
         }
-
 
         [Column(Storage = "_f2", Name = "f2", DbType = "character varying(5)", IsPrimaryKey = true)]
         [DebuggerNonUserCode]
         public string F2
         {
             get { return _f2; }
-            set { _f2 = value; IsModified = true; }
+            set
+            {
+                _f2 = value;
+                IsModified = true;
+            }
         }
-
 
         [Column(Storage = "_f3", Name = "f3", DbType = "integer(32,0)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? F3
         {
             get { return _f3; }
-            set { _f3 = value; IsModified = true; }
+            set
+            {
+                _f3 = value;
+                IsModified = true;
+            }
         }
 
         #endregion
@@ -141,6 +169,7 @@ namespace AndrusDB
         {
             return _f1.GetHashCode() ^ (_f2 == null ? 0 : _f2.GetHashCode());
         }
+
         public override bool Equals(object obj)
         {
             Tcompositepk o2 = obj as Tcompositepk;
@@ -158,54 +187,72 @@ namespace AndrusDB
         public bool IsModified { get; set; }
     }
 
-
-
     [Table(Name = "public.employee")]
-    [InheritanceMapping(Code = 0,
-        Type = typeof(HourlyEmployee), IsDefault = true)]
-    [InheritanceMapping(Code = 1,
-        Type = typeof(SalariedEmployee))]
-    [InheritanceMapping(Code = 2,
-        Type = typeof(CommissionedEmployee))]
+    [InheritanceMapping(Code = 0, Type = typeof(HourlyEmployee), IsDefault = true)]
+    [InheritanceMapping(Code = 1, Type = typeof(SalariedEmployee))]
+    [InheritanceMapping(Code = 2, Type = typeof(CommissionedEmployee))]
     public partial class Employee
     {
-        
         protected int _employeeid;
         protected int _employeetype;
         protected string _employeename;
 
-
-        public Employee()
-        {
-        }
-
+        public Employee() { }
 
         #region properties - accessors
 
-        [Column(Storage = "_employeeid", Name = "employeeid", DbType = "integer(32,0)", IsPrimaryKey = true, IsDbGenerated = true, Expression = "nextval('employee_employeeid_seq')")]
+        [Column(
+            Storage = "_employeeid",
+            Name = "employeeid",
+            DbType = "integer(32,0)",
+            IsPrimaryKey = true,
+            IsDbGenerated = true,
+            Expression = "nextval('employee_employeeid_seq')"
+        )]
         [DebuggerNonUserCode]
         public int EmployeeID
         {
             get { return _employeeid; }
-            set { _employeeid = value; IsModified = true; }
+            set
+            {
+                _employeeid = value;
+                IsModified = true;
+            }
         }
 
-
-        [Column(Storage = "_employeetype", Name = "employeetype", DbType = "integer(32,0)", CanBeNull = false, IsDiscriminator = true)]
+        [Column(
+            Storage = "_employeetype",
+            Name = "employeetype",
+            DbType = "integer(32,0)",
+            CanBeNull = false,
+            IsDiscriminator = true
+        )]
         [DebuggerNonUserCode]
         public int Employeetype
         {
             get { return _employeetype; }
-            set { _employeetype = value; IsModified = true; }
+            set
+            {
+                _employeetype = value;
+                IsModified = true;
+            }
         }
 
-
-        [Column(Storage = "_employeename", Name = "employeename", DbType = "character varying(99)", CanBeNull = true)]
+        [Column(
+            Storage = "_employeename",
+            Name = "employeename",
+            DbType = "character varying(99)",
+            CanBeNull = true
+        )]
         [DebuggerNonUserCode]
         public string Employeename
         {
             get { return _employeename; }
-            set { _employeename = value; IsModified = true; }
+            set
+            {
+                _employeename = value;
+                IsModified = true;
+            }
         }
 
         #endregion
@@ -216,6 +263,7 @@ namespace AndrusDB
         {
             return _employeeid.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Employee o2 = obj as Employee;
@@ -233,20 +281,13 @@ namespace AndrusDB
         public bool IsModified { get; set; }
     }
 
-
-
     [Table(Name = "public.char_pk")]
     public partial class Char_Pk
     {
-
         protected string _col1;
         protected int? _val1;
 
-
-        public Char_Pk()
-        {
-        }
-
+        public Char_Pk() { }
 
         #region properties - accessors
 
@@ -255,16 +296,23 @@ namespace AndrusDB
         public string Col1
         {
             get { return _col1; }
-            set { _col1 = value; IsModified = true; }
+            set
+            {
+                _col1 = value;
+                IsModified = true;
+            }
         }
-
 
         [Column(Storage = "_val1", Name = "val1", DbType = "integer(32,0)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? Val1
         {
             get { return _val1; }
-            set { _val1 = value; IsModified = true; }
+            set
+            {
+                _val1 = value;
+                IsModified = true;
+            }
         }
 
         #endregion
@@ -275,6 +323,7 @@ namespace AndrusDB
         {
             return (_col1 == null ? 0 : _col1.GetHashCode());
         }
+
         public override bool Equals(object obj)
         {
             Char_Pk o2 = obj as Char_Pk;
@@ -292,42 +341,49 @@ namespace AndrusDB
         public bool IsModified { get; set; }
     }
 
-
-
     [Table(Name = "public.t5")]
     public partial class T5
     {
-        
         protected int _myid;
         protected int? _myval;
 
-
-        public T5()
-        {
-        }
-
+        public T5() { }
 
         #region properties - accessors
 
-        [Column(Storage = "_myid", Name = "myid", DbType = "integer(32,0)", IsDbGenerated = true, CanBeNull = false, Expression = "nextval('t5_myid_seq')")]
+        [Column(
+            Storage = "_myid",
+            Name = "myid",
+            DbType = "integer(32,0)",
+            IsDbGenerated = true,
+            CanBeNull = false,
+            Expression = "nextval('t5_myid_seq')"
+        )]
         [DebuggerNonUserCode]
         public int MyID
         {
             get { return _myid; }
-            set { _myid = value; IsModified = true; }
+            set
+            {
+                _myid = value;
+                IsModified = true;
+            }
         }
-
 
         [Column(Storage = "_myval", Name = "myval", DbType = "integer(32,0)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? Myval
         {
             get { return _myval; }
-            set { _myval = value; IsModified = true; }
+            set
+            {
+                _myval = value;
+                IsModified = true;
+            }
         }
 
         #endregion
-//#warning L189 table public.t5 has no primary key. Multiple c# objects will refer to the same row.
+        //#warning L189 table public.t5 has no primary key. Multiple c# objects will refer to the same row.
 
         #region childtables
         #endregion
@@ -337,20 +393,13 @@ namespace AndrusDB
         public bool IsModified { get; set; }
     }
 
-
-
     [Table(Name = "public.t4")]
     public partial class T4
     {
-
         protected decimal? _mydec;
         protected string _mychar;
 
-
-        public T4()
-        {
-        }
-
+        public T4() { }
 
         #region properties - accessors
 
@@ -359,20 +408,32 @@ namespace AndrusDB
         public decimal? Mydec
         {
             get { return _mydec; }
-            set { _mydec = value; IsModified = true; }
+            set
+            {
+                _mydec = value;
+                IsModified = true;
+            }
         }
 
-
-        [Column(Storage = "_mychar", Name = "mychar", DbType = "character varying(30)", CanBeNull = true)]
+        [Column(
+            Storage = "_mychar",
+            Name = "mychar",
+            DbType = "character varying(30)",
+            CanBeNull = true
+        )]
         [DebuggerNonUserCode]
         public string Mychar
         {
             get { return _mychar; }
-            set { _mychar = value; IsModified = true; }
+            set
+            {
+                _mychar = value;
+                IsModified = true;
+            }
         }
 
         #endregion
-//#warning L189 table public.t4 has no primary key. Multiple c# objects will refer to the same row.
+        //#warning L189 table public.t4 has no primary key. Multiple c# objects will refer to the same row.
 
         #region childtables
         #endregion
@@ -382,28 +443,30 @@ namespace AndrusDB
         public bool IsModified { get; set; }
     }
 
-
-
     [Table(Name = "public.t1")]
     public partial class T1
     {
-
         protected int _private;
 
-
-        public T1()
-        {
-        }
-
+        public T1() { }
 
         #region properties - accessors
 
-        [Column(Storage = "_private", Name = "private", DbType = "integer(32,0)", IsPrimaryKey = true)]
+        [Column(
+            Storage = "_private",
+            Name = "private",
+            DbType = "integer(32,0)",
+            IsPrimaryKey = true
+        )]
         [DebuggerNonUserCode]
         public int Private
         {
             get { return _private; }
-            set { _private = value; IsModified = true; }
+            set
+            {
+                _private = value;
+                IsModified = true;
+            }
         }
 
         #endregion
@@ -414,6 +477,7 @@ namespace AndrusDB
         {
             return _private.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             T1 o2 = obj as T1;
@@ -443,20 +507,13 @@ namespace AndrusDB
         public bool IsModified { get; set; }
     }
 
-
-
     [Table(Name = "public.t2")]
     public partial class T2
     {
-
         protected int? _f1;
         protected int? _f2;
 
-
-        public T2()
-        {
-        }
-
+        public T2() { }
 
         #region properties - accessors
 
@@ -465,20 +522,27 @@ namespace AndrusDB
         public int? F1
         {
             get { return _f1; }
-            set { _f1 = value; IsModified = true; }
+            set
+            {
+                _f1 = value;
+                IsModified = true;
+            }
         }
-
 
         [Column(Storage = "_f2", Name = "f2", DbType = "integer(32,0)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? F2
         {
             get { return _f2; }
-            set { _f2 = value; IsModified = true; }
+            set
+            {
+                _f2 = value;
+                IsModified = true;
+            }
         }
 
         #endregion
-//#warning L189 table public.t2 has no primary key. Multiple c# objects will refer to the same row.
+        //#warning L189 table public.t2 has no primary key. Multiple c# objects will refer to the same row.
 
         #region childtables
         #endregion

@@ -8,7 +8,7 @@ using System;
                   [Microsoft.Scripting]Microsoft.Scripting.Runtime.IExpressionSerializable
 {
   .field public static initonly !TSelf Instance
-  .method family hidebysig specialname rtspecialname 
+  .method family hidebysig specialname rtspecialname
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -19,12 +19,12 @@ using System;
   } // end of method ProtocolConversionAction`1::.ctor
 
 
-.class public abstract auto ansi beforefieldinit 
+.class public abstract auto ansi beforefieldinit
 IronRuby.Runtime.Calls.ConvertToReferenceTypeAction`2<.ctor (class IronRuby.Runtime.Calls.ConvertToReferenceTypeAction`2<!TSelf,!TTargetType>) TSelf,class TTargetType>
        extends class IronRuby.Runtime.Calls.ProtocolConversionAction`1<!TSelf>
 {
   
-  .method family hidebysig specialname rtspecialname 
+  .method family hidebysig specialname rtspecialname
           instance void  .ctor() cil managed
   {
     // Code size       7 (0x7)
@@ -36,34 +36,28 @@ IronRuby.Runtime.Calls.ConvertToReferenceTypeAction`2<.ctor (class IronRuby.Runt
 
 */
 
-namespace IronRuby.Runtime.Calls {
-
-public abstract class ProtocolConversionAction<TSelf>
-	where TSelf : ProtocolConversionAction<TSelf>, new ()
+namespace IronRuby.Runtime.Calls
 {
+    public abstract class ProtocolConversionAction<TSelf>
+        where TSelf : ProtocolConversionAction<TSelf>, new() { }
 
+    public abstract class ConvertToReferenceTypeAction<TSelf, TTargetType>
+        : ProtocolConversionAction<TSelf>
+        where TSelf : ConvertToReferenceTypeAction<TSelf, TTargetType>, new()
+        where TTargetType : class { }
 }
 
-public abstract class ConvertToReferenceTypeAction<TSelf, TTargetType> : ProtocolConversionAction <TSelf>
- 	where TSelf : ConvertToReferenceTypeAction<TSelf, TTargetType>, new ()
-	where TTargetType : class
-{
-	
-}
-}
+public class Foo { }
 
-public class Foo {}
-public class Bar {}
+public class Bar { }
 
-public class BarToFoo : IronRuby.Runtime.Calls.ConvertToReferenceTypeAction <BarToFoo, Foo>
-{
-	
-}
+public class BarToFoo : IronRuby.Runtime.Calls.ConvertToReferenceTypeAction<BarToFoo, Foo> { }
 
 public class Driver
 {
-	static void Main () {
-		//new Bar<Inst> ().Tst ();
-		var x = new BarToFoo ();
-	}
+    static void Main()
+    {
+        //new Bar<Inst> ().Tst ();
+        var x = new BarToFoo();
+    }
 }

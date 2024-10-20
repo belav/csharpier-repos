@@ -33,11 +33,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <param name="compilation">The <see cref="Compilation"/> to consider for analysis.</param>
         /// <param name="fullyQualifiedMetadataName">The fully-qualified metadata type name to find.</param>
         /// <returns>The symbol to use for code analysis; otherwise, <see langword="null"/>.</returns>
-        public static INamedTypeSymbol? GetBestTypeByMetadataName(this Compilation compilation, string fullyQualifiedMetadataName)
+        public static INamedTypeSymbol? GetBestTypeByMetadataName(
+            this Compilation compilation,
+            string fullyQualifiedMetadataName
+        )
         {
             INamedTypeSymbol? type = null;
 
-            foreach (var currentType in compilation.GetTypesByMetadataName(fullyQualifiedMetadataName))
+            foreach (
+                var currentType in compilation.GetTypesByMetadataName(fullyQualifiedMetadataName)
+            )
             {
                 if (ReferenceEquals(currentType.ContainingAssembly, compilation.Assembly))
                 {
@@ -48,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 switch (currentType.GetResultantVisibility())
                 {
                     case Utilities.SymbolVisibility.Public:
-                    case Utilities.SymbolVisibility.Internal when currentType.ContainingAssembly.GivesAccessTo(compilation.Assembly):
+                    case Utilities.SymbolVisibility.Internal
+                        when currentType.ContainingAssembly.GivesAccessTo(compilation.Assembly):
                         break;
 
                     default:
@@ -72,9 +78,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// </summary>
         public static IMethodSymbol? GetTopLevelStatementsMethod(this Compilation compilation)
         {
-            foreach (var candidateTopLevelType in compilation.SourceModule.GlobalNamespace.GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName, arity: 0))
+            foreach (
+                var candidateTopLevelType in compilation.SourceModule.GlobalNamespace.GetTypeMembers(
+                    WellKnownMemberNames.TopLevelStatementsEntryPointTypeName,
+                    arity: 0
+                )
+            )
             {
-                foreach (var candidateMember in candidateTopLevelType.GetMembers(WellKnownMemberNames.TopLevelStatementsEntryPointMethodName))
+                foreach (
+                    var candidateMember in candidateTopLevelType.GetMembers(
+                        WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
+                    )
+                )
                 {
                     if (candidateMember is IMethodSymbol method)
                         return method;
@@ -84,7 +99,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return null;
         }
 
-        public static INamedTypeSymbol? TryGetCallingConventionSymbol(this Compilation compilation, string callingConvention)
-            => compilation.GetBestTypeByMetadataName($"System.Runtime.CompilerServices.CallConv{callingConvention}");
+        public static INamedTypeSymbol? TryGetCallingConventionSymbol(
+            this Compilation compilation,
+            string callingConvention
+        ) =>
+            compilation.GetBestTypeByMetadataName(
+                $"System.Runtime.CompilerServices.CallConv{callingConvention}"
+            );
     }
 }

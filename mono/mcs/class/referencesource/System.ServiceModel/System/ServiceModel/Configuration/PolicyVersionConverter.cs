@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel.Description;
     using System.ComponentModel;
     using System.ComponentModel.Design.Serialization;
-    using System.ServiceModel;
     using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
 
     class PolicyVersionConverter : TypeConverter
     {
@@ -31,7 +31,11 @@ namespace System.ServiceModel.Configuration
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value
+        )
         {
             if (value is string)
             {
@@ -49,15 +53,28 @@ namespace System.ServiceModel.Configuration
                         retval = PolicyVersion.Default;
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                            SR.GetString(SR.ConfigInvalidClassFactoryValue, policyVersion, typeof(PolicyVersion).FullName)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "value",
+                                SR.GetString(
+                                    SR.ConfigInvalidClassFactoryValue,
+                                    policyVersion,
+                                    typeof(PolicyVersion).FullName
+                                )
+                            )
+                        );
                 }
                 return retval;
             }
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            System.Globalization.CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (typeof(string) == destinationType && value is PolicyVersion)
             {
@@ -77,8 +94,15 @@ namespace System.ServiceModel.Configuration
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value",
-                        SR.GetString(SR.ConfigInvalidClassInstanceValue, typeof(PolicyVersion).FullName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(
+                                SR.ConfigInvalidClassInstanceValue,
+                                typeof(PolicyVersion).FullName
+                            )
+                        )
+                    );
                 }
                 return retval;
             }
@@ -86,4 +110,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

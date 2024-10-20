@@ -35,9 +35,7 @@ namespace System.ComponentModel.Composition.Primitives
         ///         properties.
         ///     </note>
         /// </remarks>
-        protected ImportDefinition()
-        {
-        }
+        protected ImportDefinition() { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ImportDefinition"/> class
@@ -78,15 +76,34 @@ namespace System.ComponentModel.Composition.Primitives
         ///     <paramref name="cardinality"/> is not one of the <see cref="ImportCardinality"/>
         ///     values.
         /// </exception>
-        public ImportDefinition(Expression<Func<ExportDefinition, bool>> constraint, string? contractName, ImportCardinality cardinality, bool isRecomposable, bool isPrerequisite)
-            : this(contractName, cardinality, isRecomposable, isPrerequisite, MetadataServices.EmptyMetadata)
+        public ImportDefinition(
+            Expression<Func<ExportDefinition, bool>> constraint,
+            string? contractName,
+            ImportCardinality cardinality,
+            bool isRecomposable,
+            bool isPrerequisite
+        )
+            : this(
+                contractName,
+                cardinality,
+                isRecomposable,
+                isPrerequisite,
+                MetadataServices.EmptyMetadata
+            )
         {
             Requires.NotNull(constraint, nameof(constraint));
 
             _constraint = constraint;
         }
 
-        public ImportDefinition(Expression<Func<ExportDefinition, bool>> constraint, string? contractName, ImportCardinality cardinality, bool isRecomposable, bool isPrerequisite, IDictionary<string, object?>? metadata)
+        public ImportDefinition(
+            Expression<Func<ExportDefinition, bool>> constraint,
+            string? contractName,
+            ImportCardinality cardinality,
+            bool isRecomposable,
+            bool isPrerequisite,
+            IDictionary<string, object?>? metadata
+        )
             : this(contractName, cardinality, isRecomposable, isPrerequisite, metadata)
         {
             Requires.NotNull(constraint, nameof(constraint));
@@ -94,15 +111,29 @@ namespace System.ComponentModel.Composition.Primitives
             _constraint = constraint;
         }
 
-        internal ImportDefinition(string? contractName, ImportCardinality cardinality, bool isRecomposable, bool isPrerequisite, IDictionary<string, object?>? metadata)
+        internal ImportDefinition(
+            string? contractName,
+            ImportCardinality cardinality,
+            bool isRecomposable,
+            bool isPrerequisite,
+            IDictionary<string, object?>? metadata
+        )
         {
             if (
-                (cardinality != ImportCardinality.ExactlyOne) &&
-                (cardinality != ImportCardinality.ZeroOrMore) &&
-                (cardinality != ImportCardinality.ZeroOrOne)
-                )
+                (cardinality != ImportCardinality.ExactlyOne)
+                && (cardinality != ImportCardinality.ZeroOrMore)
+                && (cardinality != ImportCardinality.ZeroOrOne)
+            )
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentOutOfRange_InvalidEnum, nameof(cardinality), cardinality, nameof(ImportCardinality)), nameof(cardinality));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.ArgumentOutOfRange_InvalidEnum,
+                        nameof(cardinality),
+                        cardinality,
+                        nameof(ImportCardinality)
+                    ),
+                    nameof(cardinality)
+                );
             }
 
             _contractName = contractName ?? EmptyContractName;

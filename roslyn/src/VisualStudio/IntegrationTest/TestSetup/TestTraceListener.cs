@@ -122,7 +122,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 
         public void AddException(Exception exception)
         {
-            ImmutableInterlocked.Update(ref _failures, static (failures, exception) => failures.Add(exception), exception);
+            ImmutableInterlocked.Update(
+                ref _failures,
+                static (failures, exception) => failures.Add(exception),
+                exception
+            );
         }
 
         public void VerifyNoErrorsAndReset()

@@ -22,7 +22,8 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
         Solution newSolution,
         string fixAllPreviewChangesTitle,
         string fixAllTopLevelHeader,
-        Glyph glyph);
+        Glyph glyph
+    );
 
     public async Task<Solution?> GetFixAllChangedSolutionAsync(IFixAllContext fixAllContext)
     {
@@ -33,11 +34,19 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
         }
 
         fixAllContext.CancellationToken.ThrowIfCancellationRequested();
-        return await codeAction.GetChangedSolutionInternalAsync(fixAllContext.Solution, fixAllContext.Progress, cancellationToken: fixAllContext.CancellationToken).ConfigureAwait(false);
+        return await codeAction
+            .GetChangedSolutionInternalAsync(
+                fixAllContext.Solution,
+                fixAllContext.Progress,
+                cancellationToken: fixAllContext.CancellationToken
+            )
+            .ConfigureAwait(false);
     }
 
     public async Task<ImmutableArray<CodeActionOperation>> GetFixAllOperationsAsync(
-        IFixAllContext fixAllContext, bool showPreviewChangesDialog)
+        IFixAllContext fixAllContext,
+        bool showPreviewChangesDialog
+    )
     {
         var codeAction = await GetFixAllCodeActionAsync(fixAllContext).ConfigureAwait(false);
         if (codeAction == null)
@@ -46,7 +55,13 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
         }
 
         return await GetFixAllOperationsAsync(
-            codeAction, showPreviewChangesDialog, fixAllContext.Progress, fixAllContext.State, fixAllContext.CancellationToken).ConfigureAwait(false);
+                codeAction,
+                showPreviewChangesDialog,
+                fixAllContext.Progress,
+                fixAllContext.State,
+                fixAllContext.CancellationToken
+            )
+            .ConfigureAwait(false);
     }
 
     protected async Task<ImmutableArray<CodeActionOperation>> GetFixAllOperationsAsync(
@@ -54,7 +69,8 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
         bool showPreviewChangesDialog,
         IProgress<CodeAnalysisProgress> progressTracker,
         IFixAllState fixAllState,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // We have computed the fix all occurrences code fix.
         // Now fetch the new solution with applied fix and bring up the Preview changes dialog.
@@ -62,16 +78,22 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
         var workspace = fixAllState.Project.Solution.Workspace;
 
         cancellationToken.ThrowIfCancellationRequested();
-        var operations = await codeAction.GetOperationsAsync(
-            fixAllState.Solution, progressTracker, cancellationToken).ConfigureAwait(false);
+        var operations = await codeAction
+            .GetOperationsAsync(fixAllState.Solution, progressTracker, cancellationToken)
+            .ConfigureAwait(false);
         if (operations == null)
         {
             return ImmutableArray<CodeActionOperation>.Empty;
         }
 
         cancellationToken.ThrowIfCancellationRequested();
-        var newSolution = await codeAction.GetChangedSolutionInternalAsync(
-            fixAllState.Solution, progressTracker, cancellationToken: cancellationToken).ConfigureAwait(false);
+        var newSolution = await codeAction
+            .GetChangedSolutionInternalAsync(
+                fixAllState.Solution,
+                progressTracker,
+                cancellationToken: cancellationToken
+            )
+            .ConfigureAwait(false);
 
         if (newSolution is null)
         {
@@ -90,7 +112,8 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
                 codeAction.Title,
                 fixAllState.Project.Language,
                 fixAllState.CorrelationId,
-                cancellationToken);
+                cancellationToken
+            );
             if (newSolution == null)
             {
                 return ImmutableArray<CodeActionOperation>.Empty;
@@ -110,7 +133,8 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
         string topLevelHeader,
         string? language,
         int? correlationId,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -118,30 +142,41 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
         {
             FixAllKind.CodeFix => FunctionId.CodeFixes_FixAllOccurrencesPreviewChanges,
             FixAllKind.Refactoring => FunctionId.Refactoring_FixAllOccurrencesPreviewChanges,
-            _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind)
+            _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
         };
 
-        using (Logger.LogBlock(
-            functionId,
-            KeyValueLogMessage.Create(LogType.UserAction, m =>
-            {
-                // only set when correlation id is given
-                // we might not have this info for suppression
-                if (correlationId.HasValue)
-                {
-                    m[FixAllLogger.CorrelationId] = correlationId;
-                }
-            }),
-            cancellationToken))
+        using (
+            Logger.LogBlock(
+                functionId,
+                KeyValueLogMessage.Create(
+                    LogType.UserAction,
+                    m =>
+                    {
+                        // only set when correlation id is given
+                        // we might not have this info for suppression
+                        if (correlationId.HasValue)
+                        {
+                            m[FixAllLogger.CorrelationId] = correlationId;
+                        }
+                    }
+                ),
+                cancellationToken
+            )
+        )
         {
-            var glyph = language == null
-                ? Glyph.Assembly
-                : language == LanguageNames.CSharp
-                    ? Glyph.CSharpProject
-                    : Glyph.BasicProject;
+            var glyph =
+                language == null ? Glyph.Assembly
+                : language == LanguageNames.CSharp ? Glyph.CSharpProject
+                : Glyph.BasicProject;
 
             var changedSolution = GetChangedSolution(
-                workspace, currentSolution, newSolution, previewChangesTitle, topLevelHeader, glyph);
+                workspace,
+                currentSolution,
+                newSolution,
+                previewChangesTitle,
+                topLevelHeader,
+                glyph
+            );
 
             if (changedSolution == null)
             {
@@ -150,7 +185,12 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
                 return null;
             }
 
-            FixAllLogger.LogPreviewChangesResult(fixAllKind, correlationId, applied: true, allChangesApplied: changedSolution == newSolution);
+            FixAllLogger.LogPreviewChangesResult(
+                fixAllKind,
+                correlationId,
+                applied: true,
+                allChangesApplied: changedSolution == newSolution
+            );
             return changedSolution;
         }
     }
@@ -162,36 +202,57 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
         {
             FixAllKind.CodeFix => FunctionId.CodeFixes_FixAllOccurrencesComputation,
             FixAllKind.Refactoring => FunctionId.Refactoring_FixAllOccurrencesComputation,
-            _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind)
+            _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
         };
 
-        using (Logger.LogBlock(
-            functionId,
-            KeyValueLogMessage.Create(LogType.UserAction, m =>
-            {
-                m[FixAllLogger.CorrelationId] = fixAllContext.State.CorrelationId;
-                m[FixAllLogger.FixAllScope] = fixAllContext.State.Scope.ToString();
-            }),
-            fixAllContext.CancellationToken))
+        using (
+            Logger.LogBlock(
+                functionId,
+                KeyValueLogMessage.Create(
+                    LogType.UserAction,
+                    m =>
+                    {
+                        m[FixAllLogger.CorrelationId] = fixAllContext.State.CorrelationId;
+                        m[FixAllLogger.FixAllScope] = fixAllContext.State.Scope.ToString();
+                    }
+                ),
+                fixAllContext.CancellationToken
+            )
+        )
         {
             CodeAction? action = null;
             try
             {
-                action = await fixAllContext.FixAllProvider.GetFixAsync(fixAllContext).ConfigureAwait(false);
+                action = await fixAllContext
+                    .FixAllProvider.GetFixAsync(fixAllContext)
+                    .ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
-                FixAllLogger.LogComputationResult(fixAllKind, fixAllContext.State.CorrelationId, completed: false);
+                FixAllLogger.LogComputationResult(
+                    fixAllKind,
+                    fixAllContext.State.CorrelationId,
+                    completed: false
+                );
             }
             finally
             {
                 if (action != null)
                 {
-                    FixAllLogger.LogComputationResult(fixAllKind, fixAllContext.State.CorrelationId, completed: true);
+                    FixAllLogger.LogComputationResult(
+                        fixAllKind,
+                        fixAllContext.State.CorrelationId,
+                        completed: true
+                    );
                 }
                 else
                 {
-                    FixAllLogger.LogComputationResult(fixAllKind, fixAllContext.State.CorrelationId, completed: false, timedOut: true);
+                    FixAllLogger.LogComputationResult(
+                        fixAllKind,
+                        fixAllContext.State.CorrelationId,
+                        completed: false,
+                        timedOut: true
+                    );
                 }
             }
 
@@ -199,9 +260,16 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
         }
     }
 
-    protected static ImmutableArray<CodeActionOperation> GetNewFixAllOperations(ImmutableArray<CodeActionOperation> operations, Solution newSolution, CancellationToken cancellationToken)
+    protected static ImmutableArray<CodeActionOperation> GetNewFixAllOperations(
+        ImmutableArray<CodeActionOperation> operations,
+        Solution newSolution,
+        CancellationToken cancellationToken
+    )
     {
-        using var _ = ArrayBuilder<CodeActionOperation>.GetInstance(operations.Length, out var result);
+        using var _ = ArrayBuilder<CodeActionOperation>.GetInstance(
+            operations.Length,
+            out var result
+        );
         var foundApplyChanges = false;
         foreach (var operation in operations)
         {

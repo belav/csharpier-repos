@@ -7,7 +7,12 @@ namespace ILCompiler.DependencyAnalysisFramework
 {
     public interface IDependencyAnalyzerLogNodeVisitor<DependencyContextType>
     {
-        void VisitCombinedNode(Tuple<DependencyNodeCore<DependencyContextType>, DependencyNodeCore<DependencyContextType>> node);
+        void VisitCombinedNode(
+            Tuple<
+                DependencyNodeCore<DependencyContextType>,
+                DependencyNodeCore<DependencyContextType>
+            > node
+        );
         void VisitNode(DependencyNodeCore<DependencyContextType> node);
         void VisitRootNode(string rootName);
     }

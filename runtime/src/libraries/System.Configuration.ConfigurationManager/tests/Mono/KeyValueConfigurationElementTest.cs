@@ -29,8 +29,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 using Xunit;
 
 namespace MonoTests.System.Configuration
@@ -40,9 +40,7 @@ namespace MonoTests.System.Configuration
         class Poker : KeyValueConfigurationElement
         {
             public Poker(string name, string value)
-                : base(name, value)
-            {
-            }
+                : base(name, value) { }
 
             protected override void Init()
             {

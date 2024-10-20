@@ -5,7 +5,11 @@ namespace System.Runtime.Serialization
 {
     public interface ISerializable
     {
-        [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         void GetObjectData(SerializationInfo info, StreamingContext context);
     }
 }

@@ -37,9 +37,9 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
     public NewtonsoftJsonOutputFormatter(
         JsonSerializerSettings serializerSettings,
         ArrayPool<char> charPool,
-        MvcOptions mvcOptions) : this(serializerSettings, charPool, mvcOptions, jsonOptions: null)
-    {
-    }
+        MvcOptions mvcOptions
+    )
+        : this(serializerSettings, charPool, mvcOptions, jsonOptions: null) { }
 
     /// <summary>
     /// Initializes a new <see cref="NewtonsoftJsonOutputFormatter"/> instance.
@@ -56,7 +56,8 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         JsonSerializerSettings serializerSettings,
         ArrayPool<char> charPool,
         MvcOptions mvcOptions,
-        MvcNewtonsoftJsonOptions? jsonOptions)
+        MvcNewtonsoftJsonOptions? jsonOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(serializerSettings);
         ArgumentNullException.ThrowIfNull(charPool);
@@ -97,7 +98,7 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         {
             ArrayPool = _charPool,
             CloseOutput = false,
-            AutoCompleteOnClose = false
+            AutoCompleteOnClose = false,
         };
 
         return jsonWriter;
@@ -131,13 +132,18 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
     }
 
     /// <inheritdoc />
-    public override async Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+    public override async Task WriteResponseBodyAsync(
+        OutputFormatterWriteContext context,
+        Encoding selectedEncoding
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(selectedEncoding);
 
         // Compat mode for derived options
-        _jsonOptions ??= context.HttpContext.RequestServices.GetRequiredService<IOptions<MvcNewtonsoftJsonOptions>>().Value;
+        _jsonOptions ??= context
+            .HttpContext.RequestServices.GetRequiredService<IOptions<MvcNewtonsoftJsonOptions>>()
+            .Value;
 
         var response = context.HttpContext.Response;
 
@@ -145,20 +151,28 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
         FileBufferingWriteStream? fileBufferingWriteStream = null;
         if (!_mvcOptions.SuppressOutputFormatterBuffering)
         {
-            fileBufferingWriteStream = new FileBufferingWriteStream(_jsonOptions.OutputFormatterMemoryBufferThreshold);
+            fileBufferingWriteStream = new FileBufferingWriteStream(
+                _jsonOptions.OutputFormatterMemoryBufferThreshold
+            );
             responseStream = fileBufferingWriteStream;
         }
 
         var value = context.Object;
-        if (value is not null && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader))
+        if (
+            value is not null
+            && _asyncEnumerableReaderFactory.TryGetReader(value.GetType(), out var reader)
+        )
         {
-            var logger = context.HttpContext.RequestServices.GetRequiredService<ILogger<NewtonsoftJsonOutputFormatter>>();
+            var logger = context.HttpContext.RequestServices.GetRequiredService<
+                ILogger<NewtonsoftJsonOutputFormatter>
+            >();
             Log.BufferingAsyncEnumerable(logger, value);
             try
             {
                 value = await reader(value, context.HttpContext.RequestAborted);
             }
-            catch (OperationCanceledException) when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
+            catch (OperationCanceledException)
+                when (context.HttpContext.RequestAborted.IsCancellationRequested) { }
 
             if (context.HttpContext.RequestAborted.IsCancellationRequested)
             {
@@ -230,7 +244,13 @@ public partial class NewtonsoftJsonOutputFormatter : TextOutputFormatter
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Buffering IAsyncEnumerable instance of type '{Type}'.", EventName = "BufferingAsyncEnumerable", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Buffering IAsyncEnumerable instance of type '{Type}'.",
+            EventName = "BufferingAsyncEnumerable",
+            SkipEnabledCheck = true
+        )]
         private static partial void BufferingAsyncEnumerable(ILogger logger, string? type);
 
         public static void BufferingAsyncEnumerable(ILogger logger, object asyncEnumerable)

@@ -13,7 +13,7 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
@@ -27,33 +27,43 @@
 //
 
 
-using Microsoft.Build.Framework;
 using System;
 using System.Collections.Generic;
+using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Construction
 {
-	[Serializable]
-	public
-	abstract class ElementLocation
-	{
-		public abstract int Column { get; }
-		public abstract string File { get; }
-		public abstract int Line { get; }
+    [Serializable]
+    public abstract class ElementLocation
+    {
+        public abstract int Column { get; }
+        public abstract string File { get; }
+        public abstract int Line { get; }
 
-		public string LocationString {
-			get { return Line == 0 ? File : String.Format ("{0} ({1}{2})", File, Line, Column != 0 ? "," + Column : String.Empty); }
-		}
+        public string LocationString
+        {
+            get
+            {
+                return Line == 0
+                    ? File
+                    : String.Format(
+                        "{0} ({1}{2})",
+                        File,
+                        Line,
+                        Column != 0 ? "," + Column : String.Empty
+                    );
+            }
+        }
 
-		public override bool Equals (object obj)
-		{
-			var o = obj as ElementLocation;
-			return (object) o != null && o.File == File && o.Line == Line && o.Column == Column;
-		}
+        public override bool Equals(object obj)
+        {
+            var o = obj as ElementLocation;
+            return (object)o != null && o.File == File && o.Line == Line && o.Column == Column;
+        }
 
-		public override int GetHashCode ()
-		{
-			return (File.GetHashCode () << 16) + (Line << 8) + Column;
-		}
-	}
+        public override int GetHashCode()
+        {
+            return (File.GetHashCode() << 16) + (Line << 8) + Column;
+        }
+    }
 }

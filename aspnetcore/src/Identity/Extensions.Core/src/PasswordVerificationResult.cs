@@ -22,5 +22,5 @@ public enum PasswordVerificationResult
     /// Indicates password verification was successful however the password was encoded using a deprecated algorithm
     /// and should be rehashed and updated.
     /// </summary>
-    SuccessRehashNeeded = 2
+    SuccessRehashNeeded = 2,
 }

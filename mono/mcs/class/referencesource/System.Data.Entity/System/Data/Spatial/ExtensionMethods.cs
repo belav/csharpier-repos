@@ -13,7 +13,8 @@ namespace System.Data.Spatial
 {
     internal static class ExtensionMethods
     {
-        internal static void CheckNull<T>(this T value, string argumentName) where T : class
+        internal static void CheckNull<T>(this T value, string argumentName)
+            where T : class
         {
             if (value == null)
             {

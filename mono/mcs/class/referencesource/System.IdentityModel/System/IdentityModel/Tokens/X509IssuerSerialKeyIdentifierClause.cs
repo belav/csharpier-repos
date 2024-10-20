@@ -20,7 +20,9 @@ namespace System.IdentityModel.Tokens
             if (string.IsNullOrEmpty(issuerName))
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuerName");
             if (string.IsNullOrEmpty(issuerSerialNumber))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuerSerialNumber");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "issuerSerialNumber"
+                );
 
             this.issuerName = issuerName;
             this.issuerSerialNumber = issuerSerialNumber;
@@ -33,7 +35,9 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("certificate");
 
             this.issuerName = certificate.Issuer;
-            this.issuerSerialNumber = Asn1IntegerConverter.Asn1IntegerToDecimalString(certificate.GetSerialNumber());
+            this.issuerSerialNumber = Asn1IntegerConverter.Asn1IntegerToDecimalString(
+                certificate.GetSerialNumber()
+            );
         }
 
         public string IssuerName
@@ -48,11 +52,13 @@ namespace System.IdentityModel.Tokens
 
         public override bool Matches(SecurityKeyIdentifierClause keyIdentifierClause)
         {
-            X509IssuerSerialKeyIdentifierClause that = keyIdentifierClause as X509IssuerSerialKeyIdentifierClause;
+            X509IssuerSerialKeyIdentifierClause that =
+                keyIdentifierClause as X509IssuerSerialKeyIdentifierClause;
 
             // PreSharp Bug: Parameter 'that' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506
-            return ReferenceEquals(this, that) || (that != null && that.Matches(this.issuerName, this.issuerSerialNumber));
+            return ReferenceEquals(this, that)
+                || (that != null && that.Matches(this.issuerName, this.issuerSerialNumber));
         }
 
         public bool Matches(X509Certificate2 certificate)
@@ -60,7 +66,10 @@ namespace System.IdentityModel.Tokens
             if (certificate == null)
                 return false;
 
-            return Matches(certificate.Issuer, Asn1IntegerConverter.Asn1IntegerToDecimalString(certificate.GetSerialNumber()));
+            return Matches(
+                certificate.Issuer,
+                Asn1IntegerConverter.Asn1IntegerToDecimalString(certificate.GetSerialNumber())
+            );
         }
 
         public bool Matches(string issuerName, string issuerSerialNumber)
@@ -83,13 +92,17 @@ namespace System.IdentityModel.Tokens
             }
 
             // String equality comparison for issuer names failed
-            // Do a byte-level comparison of the X500 distinguished names corresponding to the issuer names. 
+            // Do a byte-level comparison of the X500 distinguished names corresponding to the issuer names.
             // X500DistinguishedName constructor can throw for malformed inputs
             bool x500IssuerNameMatch = false;
             try
             {
-                if (CryptoHelper.IsEqual(new X500DistinguishedName(this.issuerName).RawData,
-                                         new X500DistinguishedName(issuerName).RawData))
+                if (
+                    CryptoHelper.IsEqual(
+                        new X500DistinguishedName(this.issuerName).RawData,
+                        new X500DistinguishedName(issuerName).RawData
+                    )
+                )
                 {
                     x500IssuerNameMatch = true;
                 }
@@ -105,8 +118,12 @@ namespace System.IdentityModel.Tokens
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "X509IssuerSerialKeyIdentifierClause(Issuer = '{0}', Serial = '{1}')",
-                this.IssuerName, this.IssuerSerialNumber);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "X509IssuerSerialKeyIdentifierClause(Issuer = '{0}', Serial = '{1}')",
+                this.IssuerName,
+                this.IssuerSerialNumber
+            );
         }
     }
 }

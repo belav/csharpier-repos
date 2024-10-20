@@ -62,8 +62,12 @@ namespace System
     internal sealed class TIntLog
     {
         public void Add(int x, int y) => _log.Add(Tuple.Create(x, y));
+
         public int Count => _log.Count;
-        public int CountCompares(int x, int y) => _log.Where(t => (t.Item1 == x && t.Item2 == y) || (t.Item1 == y && t.Item2 == x)).Count();
+
+        public int CountCompares(int x, int y) =>
+            _log.Where(t => (t.Item1 == x && t.Item2 == y) || (t.Item1 == y && t.Item2 == x))
+                .Count();
 
         private List<Tuple<int, int>> _log = new List<Tuple<int, int>>();
     }

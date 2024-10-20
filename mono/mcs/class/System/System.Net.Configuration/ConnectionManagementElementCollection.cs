@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,81 +34,84 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	[ConfigurationCollection (typeof (ConnectionManagementElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class ConnectionManagementElementCollection : ConfigurationElementCollection
-	{
-		#region Constructors
+    [ConfigurationCollection(
+        typeof(ConnectionManagementElement),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class ConnectionManagementElementCollection : ConfigurationElementCollection
+    {
+        #region Constructors
 
-		public ConnectionManagementElementCollection ()
-		{
-		}
+        public ConnectionManagementElementCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[MonoTODO]
-		public ConnectionManagementElement this [int index] {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public ConnectionManagementElement this[int index]
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public new ConnectionManagementElement this [string name] {
-			get { return (ConnectionManagementElement) base [name]; }
-			set { base [name] = value; }
-		}
+        public new ConnectionManagementElement this[string name]
+        {
+            get { return (ConnectionManagementElement)base[name]; }
+            set { base[name] = value; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public void Add (ConnectionManagementElement element)
-		{
-			BaseAdd (element);
-		}
+        public void Add(ConnectionManagementElement element)
+        {
+            BaseAdd(element);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new ConnectionManagementElement ();
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new ConnectionManagementElement();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			if (!(element is ConnectionManagementElement))
-				throw new ArgumentException ("element");
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            if (!(element is ConnectionManagementElement))
+                throw new ArgumentException("element");
 
-			return ((ConnectionManagementElement)element).Address;
-		}
+            return ((ConnectionManagementElement)element).Address;
+        }
 
-		public int IndexOf (ConnectionManagementElement element)
-		{
-			return BaseIndexOf (element);
-		}
+        public int IndexOf(ConnectionManagementElement element)
+        {
+            return BaseIndexOf(element);
+        }
 
-		public void Remove (ConnectionManagementElement element)
-		{
-			BaseRemove (element);
-		}
+        public void Remove(ConnectionManagementElement element)
+        {
+            BaseRemove(element);
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        public void Remove(string name)
+        {
+            BaseRemove(name);
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 
 #endif

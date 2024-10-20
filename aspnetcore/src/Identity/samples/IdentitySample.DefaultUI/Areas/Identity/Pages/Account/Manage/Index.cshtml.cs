@@ -16,7 +16,8 @@ public class IndexModel : PageModel
 
     public IndexModel(
         UserManager<ApplicationUser> userManager,
-        SignInManager<ApplicationUser> signInManager)
+        SignInManager<ApplicationUser> signInManager
+    )
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -60,7 +61,7 @@ public class IndexModel : PageModel
         {
             Name = user.Name,
             Age = user.Age,
-            PhoneNumber = user.PhoneNumber
+            PhoneNumber = user.PhoneNumber,
         };
 
         return Page();
@@ -92,7 +93,9 @@ public class IndexModel : PageModel
         var updateProfileResult = await _userManager.UpdateAsync(user);
         if (!updateProfileResult.Succeeded)
         {
-            throw new InvalidOperationException($"Unexpected error ocurred updating the profile for user with ID '{user.Id}'");
+            throw new InvalidOperationException(
+                $"Unexpected error ocurred updating the profile for user with ID '{user.Id}'"
+            );
         }
 
         if (Input.PhoneNumber != user.PhoneNumber)
@@ -100,7 +103,9 @@ public class IndexModel : PageModel
             var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
             if (!setPhoneResult.Succeeded)
             {
-                throw new InvalidOperationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                throw new InvalidOperationException(
+                    $"Unexpected error occurred setting phone number for user with ID '{user.Id}'."
+                );
             }
         }
 

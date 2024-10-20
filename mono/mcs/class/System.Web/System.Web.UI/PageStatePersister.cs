@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,46 +28,50 @@
 
 namespace System.Web.UI
 {
-	public abstract class PageStatePersister
-	{
-		object control_state;
-		object view_state;
-		Page page;
-		IStateFormatter state_formatter;
-		
-		protected PageStatePersister (Page page)
-		{
-			if (page == null)
-				throw new ArgumentNullException ("page");
-			this.page = page;
-		}
+    public abstract class PageStatePersister
+    {
+        object control_state;
+        object view_state;
+        Page page;
+        IStateFormatter state_formatter;
 
-		public object ControlState  {
-			get { return control_state; }
-			set { control_state = value; }
-		}
+        protected PageStatePersister(Page page)
+        {
+            if (page == null)
+                throw new ArgumentNullException("page");
+            this.page = page;
+        }
 
-		public object ViewState  {
-			get { return view_state; }
-			set { view_state = value; }
-		}
+        public object ControlState
+        {
+            get { return control_state; }
+            set { control_state = value; }
+        }
 
-		protected Page Page {
-			get { return page; }
-			set { page = value; }
-		}
+        public object ViewState
+        {
+            get { return view_state; }
+            set { view_state = value; }
+        }
 
-		protected IStateFormatter StateFormatter 
-		{
-			get {
-				if (state_formatter == null)
-					state_formatter = page.GetFormatter ();
-				return state_formatter;
-			}
-		}
+        protected Page Page
+        {
+            get { return page; }
+            set { page = value; }
+        }
 
-		public abstract void Load ();
+        protected IStateFormatter StateFormatter
+        {
+            get
+            {
+                if (state_formatter == null)
+                    state_formatter = page.GetFormatter();
+                return state_formatter;
+            }
+        }
 
-		public abstract void Save ();
-	}
+        public abstract void Load();
+
+        public abstract void Save();
+    }
 }

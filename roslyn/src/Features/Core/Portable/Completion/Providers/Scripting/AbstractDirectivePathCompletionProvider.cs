@@ -4,26 +4,31 @@
 
 using System;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.Completion;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.CodeAnalysis.Scripting;
-using Roslyn.Utilities;
 using Microsoft.CodeAnalysis.ErrorReporting;
-using System.Diagnostics;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.CodeAnalysis.Scripting.Hosting;
 using Microsoft.CodeAnalysis.Shared.Extensions;
+using Microsoft.CodeAnalysis.Text;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal abstract class AbstractDirectivePathCompletionProvider : CompletionProvider
     {
-        protected static bool IsDirectorySeparator(char ch)
-             => ch == '/' || (ch == '\\' && !PathUtilities.IsUnixLikePlatform);
+        protected static bool IsDirectorySeparator(char ch) =>
+            ch == '/' || (ch == '\\' && !PathUtilities.IsUnixLikePlatform);
 
-        protected abstract bool TryGetStringLiteralToken(SyntaxTree tree, int position, out SyntaxToken stringLiteral, CancellationToken cancellationToken);
+        protected abstract bool TryGetStringLiteralToken(
+            SyntaxTree tree,
+            int position,
+            out SyntaxToken stringLiteral,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// <code>r</code> for metadata reference directive, <code>load</code> for source file directive.
@@ -38,9 +43,18 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 var position = context.Position;
                 var cancellationToken = context.CancellationToken;
 
-                var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                var tree = await document
+                    .GetRequiredSyntaxTreeAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                if (!TryGetStringLiteralToken(tree, position, out var stringLiteral, cancellationToken))
+                if (
+                    !TryGetStringLiteralToken(
+                        tree,
+                        position,
+                        out var stringLiteral,
+                        cancellationToken
+                    )
+                )
                 {
                     return;
                 }
@@ -50,22 +64,30 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 context.CompletionListSpan = GetTextChangeSpan(
                     quotedPath: literalValue,
                     quotedPathStart: stringLiteral.SpanStart,
-                    position: position);
+                    position: position
+                );
 
                 var pathThroughLastSlash = GetPathThroughLastSlash(
                     quotedPath: literalValue,
                     quotedPathStart: stringLiteral.SpanStart,
-                    position: position);
+                    position: position
+                );
 
                 await ProvideCompletionsAsync(context, pathThroughLastSlash).ConfigureAwait(false);
             }
-            catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, ErrorSeverity.General))
+            catch (Exception e)
+                when (FatalError.ReportAndCatchUnlessCanceled(e, ErrorSeverity.General))
             {
                 // nop
             }
         }
 
-        public sealed override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger, OptionSet options)
+        public sealed override bool ShouldTriggerCompletion(
+            SourceText text,
+            int caretPosition,
+            CompletionTrigger trigger,
+            OptionSet options
+        )
         {
             var lineStart = text.Lines.GetLineFromPosition(caretPosition).Start;
 
@@ -77,14 +99,23 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 return false;
             }
 
-            var directiveNameStartIndex = text.IndexOfNonWhiteSpace(poundIndex + 1, caretPosition - poundIndex - 1);
-            if (directiveNameStartIndex == -1 || !text.ContentEquals(directiveNameStartIndex, DirectiveName))
+            var directiveNameStartIndex = text.IndexOfNonWhiteSpace(
+                poundIndex + 1,
+                caretPosition - poundIndex - 1
+            );
+            if (
+                directiveNameStartIndex == -1
+                || !text.ContentEquals(directiveNameStartIndex, DirectiveName)
+            )
             {
                 return false;
             }
 
             var directiveNameEndIndex = directiveNameStartIndex + DirectiveName.Length;
-            var quoteIndex = text.IndexOfNonWhiteSpace(directiveNameEndIndex, caretPosition - directiveNameEndIndex);
+            var quoteIndex = text.IndexOfNonWhiteSpace(
+                directiveNameEndIndex,
+                caretPosition - directiveNameEndIndex
+            );
             if (quoteIndex == -1 || text[quoteIndex] != '"')
             {
                 return false;
@@ -93,7 +124,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return true;
         }
 
-        private static string GetPathThroughLastSlash(string quotedPath, int quotedPathStart, int position)
+        private static string GetPathThroughLastSlash(
+            string quotedPath,
+            int quotedPathStart,
+            int position
+        )
         {
             Contract.ThrowIfTrue(quotedPath[0] != '"');
 
@@ -109,7 +144,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return afterLastSlashIndex >= 0 ? path[..afterLastSlashIndex] : path;
         }
 
-        private static TextSpan GetTextChangeSpan(string quotedPath, int quotedPathStart, int position)
+        private static TextSpan GetTextChangeSpan(
+            string quotedPath,
+            int quotedPathStart,
+            int position
+        )
         {
             // We want the text change to be from after the last slash to the end of the quoted
             // path. If there is no last slash, then we want it from right after the start quote
@@ -133,8 +172,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return TextSpan.FromBounds(startIndex + quotedPathStart, endIndex + quotedPathStart);
         }
 
-        private static bool EndsWithQuote(string quotedPath)
-            => quotedPath is [.., _, '"'];
+        private static bool EndsWithQuote(string quotedPath) => quotedPath is [.., _, '"'];
 
         /// <summary>
         /// Returns the index right after the last slash that precedes 'position'.  If there is no
@@ -147,8 +185,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             position = Math.Min(position, text.Length - 1);
 
             int index;
-            if ((index = text.LastIndexOf('/', position)) >= 0 ||
-                !PathUtilities.IsUnixLikePlatform && (index = text.LastIndexOf('\\', position)) >= 0)
+            if (
+                (index = text.LastIndexOf('/', position)) >= 0
+                || !PathUtilities.IsUnixLikePlatform
+                    && (index = text.LastIndexOf('\\', position)) >= 0
+            )
             {
                 return index + 1;
             }
@@ -156,17 +197,24 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return -1;
         }
 
-        protected abstract Task ProvideCompletionsAsync(CompletionContext context, string pathThroughLastSlash);
+        protected abstract Task ProvideCompletionsAsync(
+            CompletionContext context,
+            string pathThroughLastSlash
+        );
 
         protected static FileSystemCompletionHelper GetFileSystemCompletionHelper(
             Document document,
             Glyph itemGlyph,
             ImmutableArray<string> extensions,
-            CompletionItemRules completionRules)
+            CompletionItemRules completionRules
+        )
         {
             ImmutableArray<string> referenceSearchPaths;
             string? baseDirectory;
-            if (document.Project.CompilationOptions?.MetadataReferenceResolver is RuntimeMetadataReferenceResolver resolver)
+            if (
+                document.Project.CompilationOptions?.MetadataReferenceResolver
+                is RuntimeMetadataReferenceResolver resolver
+            )
             {
                 referenceSearchPaths = resolver.PathResolver.SearchPaths;
                 baseDirectory = resolver.PathResolver.BaseDirectory;
@@ -183,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 referenceSearchPaths,
                 GetBaseDirectory(document, baseDirectory),
                 extensions,
-                completionRules);
+                completionRules
+            );
         }
 
         private static string? GetBaseDirectory(Document document, string? baseDirectory)

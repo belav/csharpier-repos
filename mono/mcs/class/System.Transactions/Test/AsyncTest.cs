@@ -8,225 +8,238 @@
 //
 
 using System;
+using System.Threading;
 using System.Transactions;
 using NUnit.Framework;
-using System.Threading;
 
-namespace  MonoTests.System.Transactions {
+namespace MonoTests.System.Transactions
+{
+    [TestFixture]
+    // https://bugzilla.novell.com/show_bug.cgi?id=463999
+    [Category("NotWorking")]
+    public class AsyncTest
+    {
+        [SetUp]
+        public void Setup()
+        {
+            delayedException = null;
+            called = false;
+            mr.Reset();
+            state = 0;
+            Transaction.Current = null;
+        }
 
-	[TestFixture]
-	// https://bugzilla.novell.com/show_bug.cgi?id=463999
-	[Category ("NotWorking")]
-	public class AsyncTest {
+        [TearDown]
+        public void TearDown()
+        {
+            Transaction.Current = null;
+        }
 
-		[SetUp]
-		public void Setup ()
-		{
-			delayedException = null;
-			called = false;
-			mr.Reset ();
-			state = 0;
-			Transaction.Current = null;
-		}
+        [Test]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void AsyncFail1()
+        {
+            IntResourceManager irm = new IntResourceManager(1);
 
-		[TearDown]
-		public void TearDown ()
-		{
-			Transaction.Current = null;
-		}
+            CommittableTransaction ct = new CommittableTransaction();
+            /* Set ambient Tx */
+            Transaction.Current = ct;
 
-		[Test]
-		[ExpectedException ( typeof ( InvalidOperationException ) )]
-		public void AsyncFail1 ()
-		{
-			IntResourceManager irm = new IntResourceManager ( 1 );
+            /* Enlist */
+            irm.Value = 2;
 
-			CommittableTransaction ct = new CommittableTransaction ();
-			/* Set ambient Tx */
-			Transaction.Current = ct;
+            IAsyncResult ar = ct.BeginCommit(null, null);
+            IAsyncResult ar2 = ct.BeginCommit(null, null);
+        }
 
-			/* Enlist */
-			irm.Value = 2;
+        [Test]
+        [ExpectedException(typeof(TransactionAbortedException))]
+        public void AsyncFail2()
+        {
+            IntResourceManager irm = new IntResourceManager(1);
 
-			IAsyncResult ar = ct.BeginCommit ( null, null );
-			IAsyncResult ar2 = ct.BeginCommit ( null, null );
-		}
+            CommittableTransaction ct = new CommittableTransaction();
+            /* Set ambient Tx */
+            Transaction.Current = ct;
 
+            /* Enlist */
+            irm.Value = 2;
+            irm.FailPrepare = true;
 
-		[Test]
-		[ExpectedException (typeof (TransactionAbortedException))]
-		public void AsyncFail2 ()
-		{
-			IntResourceManager irm = new IntResourceManager ( 1 );
+            IAsyncResult ar = ct.BeginCommit(null, null);
 
-			CommittableTransaction ct = new CommittableTransaction ();
-			/* Set ambient Tx */
-			Transaction.Current = ct;
+            ct.EndCommit(ar);
+        }
 
-			/* Enlist */
-			irm.Value = 2;
-			irm.FailPrepare = true;
+        AsyncCallback callback = null;
+        static int state = 0;
 
-			IAsyncResult ar = ct.BeginCommit ( null, null );
+        /* Callback called ? */
+        static bool called = false;
+        static ManualResetEvent mr = new ManualResetEvent(false);
+        static Exception delayedException;
 
-			ct.EndCommit ( ar );
-		}
+        static void CommitCallback(IAsyncResult ar)
+        {
+            called = true;
+            CommittableTransaction ct = ar as CommittableTransaction;
+            try
+            {
+                state = (int)ar.AsyncState;
+                ct.EndCommit(ar);
+            }
+            catch (Exception e)
+            {
+                delayedException = e;
+            }
+            finally
+            {
+                mr.Set();
+            }
+        }
 
-		AsyncCallback callback = null;
-		static int state = 0;
-		/* Callback called ? */
-		static bool called = false;
-		static ManualResetEvent mr = new ManualResetEvent ( false );
-		static Exception delayedException;
+        [Test]
+        public void AsyncFail3()
+        {
+            delayedException = null;
+            IntResourceManager irm = new IntResourceManager(1);
 
-		static void CommitCallback (IAsyncResult ar)
-		{
-			called = true;
-			CommittableTransaction ct = ar as CommittableTransaction;
-			try {
-				state = ( int ) ar.AsyncState;
-				ct.EndCommit ( ar );
-			} catch ( Exception e ) {
-				delayedException = e;
-			} finally {
-				mr.Set ();
-			}
-		}
+            CommittableTransaction ct = new CommittableTransaction();
+            /* Set ambient Tx */
+            Transaction.Current = ct;
 
-		[Test]
-		public void AsyncFail3 ()
-		{
-			delayedException = null;
-			IntResourceManager irm = new IntResourceManager ( 1 );
+            /* Enlist */
+            irm.Value = 2;
+            irm.FailPrepare = true;
 
-			CommittableTransaction ct = new CommittableTransaction ();
-			/* Set ambient Tx */
-			Transaction.Current = ct;
-			
-			/* Enlist */
-			irm.Value = 2;
-			irm.FailPrepare = true;
+            callback = new AsyncCallback(CommitCallback);
+            IAsyncResult ar = ct.BeginCommit(callback, 5);
+            mr.WaitOne(new TimeSpan(0, 0, 60), true);
 
-			callback = new AsyncCallback (CommitCallback);
-			IAsyncResult ar = ct.BeginCommit ( callback, 5 );
-			mr.WaitOne (new TimeSpan (0, 0, 60), true);
+            Assert.IsTrue(called, "callback not called");
+            Assert.AreEqual(5, state, "state not preserved");
 
-			Assert.IsTrue ( called, "callback not called" );
-			Assert.AreEqual ( 5, state, "state not preserved" );
+            if (delayedException.GetType() != typeof(TransactionAbortedException))
+                Assert.Fail(
+                    "Expected TransactionAbortedException, got {0}",
+                    delayedException.GetType()
+                );
+        }
 
-			if ( delayedException.GetType () != typeof ( TransactionAbortedException ) )
-				Assert.Fail ( "Expected TransactionAbortedException, got {0}", delayedException.GetType () );
-		}
+        [Test]
+        public void Async1()
+        {
+            IntResourceManager irm = new IntResourceManager(1);
 
-		[Test]
-		public void Async1 ()
-		{
-			IntResourceManager irm = new IntResourceManager ( 1 );
+            CommittableTransaction ct = new CommittableTransaction();
+            /* Set ambient Tx */
+            Transaction.Current = ct;
+            /* Enlist */
+            irm.Value = 2;
 
-			CommittableTransaction ct = new CommittableTransaction ();
-			/* Set ambient Tx */
-			Transaction.Current = ct;
-			/* Enlist */
-			irm.Value = 2;
+            callback = new AsyncCallback(CommitCallback);
+            IAsyncResult ar = ct.BeginCommit(callback, 5);
+            mr.WaitOne(new TimeSpan(0, 2, 0), true);
 
-			callback = new AsyncCallback (CommitCallback);
-			IAsyncResult ar = ct.BeginCommit ( callback, 5);
-			mr.WaitOne (new TimeSpan (0, 2, 0), true);
+            Assert.IsTrue(called, "callback not called");
+            Assert.AreEqual(5, state, "State not received back");
 
-			Assert.IsTrue (called, "callback not called" );
-			Assert.AreEqual ( 5, state, "State not received back");
+            if (delayedException != null)
+                throw new Exception("", delayedException);
+        }
 
-			if ( delayedException != null )
-				throw new Exception ("", delayedException );
-		}
+        [Test]
+        public void Async2()
+        {
+            IntResourceManager irm = new IntResourceManager(1);
 
-		[Test]
-		public void Async2 ()
-		{
-			IntResourceManager irm = new IntResourceManager ( 1 );
+            CommittableTransaction ct = new CommittableTransaction();
 
-			CommittableTransaction ct = new CommittableTransaction ();
+            using (TransactionScope scope = new TransactionScope(ct))
+            {
+                irm.Value = 2;
 
-			using ( TransactionScope scope = new TransactionScope (ct) ) {
-				irm.Value = 2;
+                //scope.Complete ();
 
-				//scope.Complete ();
+                IAsyncResult ar = ct.BeginCommit(null, null);
+                try
+                {
+                    ct.EndCommit(ar);
+                }
+                catch (TransactionAbortedException)
+                {
+                    irm.Check(0, 0, 1, 0, "irm");
+                    return;
+                }
+            }
+            Assert.Fail("EndCommit should've thrown an exception");
+        }
 
-				IAsyncResult ar = ct.BeginCommit ( null, null);
-				try {
-					ct.EndCommit ( ar );
-				}
-				catch ( TransactionAbortedException) {
-					irm.Check ( 0, 0, 1, 0, "irm" );
-					return;
-				}
-			}
-			Assert.Fail ( "EndCommit should've thrown an exception" );
-		}
+        [Test]
+        public void Async3()
+        {
+            IntResourceManager irm = new IntResourceManager(1);
 
-		[Test]
-		public void Async3 ()
-		{
-			IntResourceManager irm = new IntResourceManager ( 1 );
+            CommittableTransaction ct = new CommittableTransaction();
+            /* Set ambient Tx */
+            Transaction.Current = ct;
 
-			CommittableTransaction ct = new CommittableTransaction ();
-			/* Set ambient Tx */
-			Transaction.Current = ct;
+            /* Enlist */
+            irm.Value = 2;
 
-			/* Enlist */
-			irm.Value = 2;
+            IAsyncResult ar = ct.BeginCommit(null, null);
+            ct.EndCommit(ar);
 
-			IAsyncResult ar = ct.BeginCommit ( null, null );
-			ct.EndCommit ( ar );
+            irm.Check(1, 1, 0, 0, "irm");
+        }
 
-			irm.Check ( 1, 1, 0, 0, "irm" );
-		}
+        [Test]
+        public void Async4()
+        {
+            IntResourceManager irm = new IntResourceManager(1);
 
-		[Test]
-		public void Async4 ()
-		{
-			IntResourceManager irm = new IntResourceManager ( 1 );
+            CommittableTransaction ct = new CommittableTransaction();
+            /* Set ambient Tx */
+            Transaction.Current = ct;
 
-			CommittableTransaction ct = new CommittableTransaction ();
-			/* Set ambient Tx */
-			Transaction.Current = ct;
+            /* Enlist */
+            irm.Value = 2;
 
-			/* Enlist */
-			irm.Value = 2;
+            IAsyncResult ar = ct.BeginCommit(null, null);
+            ar.AsyncWaitHandle.WaitOne();
+            Assert.IsTrue(ar.IsCompleted);
 
-			IAsyncResult ar = ct.BeginCommit ( null, null );
-			ar.AsyncWaitHandle.WaitOne ();
-			Assert.IsTrue ( ar.IsCompleted );
+            irm.Check(1, 1, 0, 0, "irm");
+        }
 
-			irm.Check ( 1, 1, 0, 0, "irm" );
-		}
+        [Test]
+        public void Async5()
+        {
+            IntResourceManager irm = new IntResourceManager(1);
 
-		[Test]
-		public void Async5 ()
-		{
-			IntResourceManager irm = new IntResourceManager ( 1 );
+            CommittableTransaction ct = new CommittableTransaction();
+            /* Set ambient Tx */
+            Transaction.Current = ct;
 
-			CommittableTransaction ct = new CommittableTransaction ();
-			/* Set ambient Tx */
-			Transaction.Current = ct;
+            /* Enlist */
+            irm.Value = 2;
+            irm.FailPrepare = true;
 
-			/* Enlist */
-			irm.Value = 2;
-			irm.FailPrepare = true;
+            IAsyncResult ar = ct.BeginCommit(null, null);
+            ar.AsyncWaitHandle.WaitOne();
+            Assert.IsTrue(ar.IsCompleted);
+            try
+            {
+                CommittableTransaction ctx = ar as CommittableTransaction;
+                ctx.EndCommit(ar);
+            }
+            catch (TransactionAbortedException)
+            {
+                irm.Check(1, 0, 0, 0, "irm");
+                return;
+            }
 
-			IAsyncResult ar = ct.BeginCommit ( null, null );
-			ar.AsyncWaitHandle.WaitOne ();
-			Assert.IsTrue ( ar.IsCompleted );
-			try {
-				CommittableTransaction ctx = ar as CommittableTransaction;
-				ctx.EndCommit ( ar );
-			} catch ( TransactionAbortedException ) {
-				irm.Check ( 1, 0, 0, 0, "irm" );
-				return;
-			}
-
-			Assert.Fail ("EndCommit should've failed");
-		}
-	}
+            Assert.Fail("EndCommit should've failed");
+        }
+    }
 }
-

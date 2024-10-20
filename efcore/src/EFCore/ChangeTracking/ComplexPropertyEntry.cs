@@ -29,9 +29,7 @@ public class ComplexPropertyEntry : MemberEntry
     /// </summary>
     [EntityFrameworkInternal]
     public ComplexPropertyEntry(InternalEntityEntry internalEntry, IComplexProperty complexProperty)
-        : base(internalEntry, complexProperty)
-    {
-    }
+        : base(internalEntry, complexProperty) { }
 
     /// <summary>
     ///     Gets or sets a value indicating whether any of the properties of the complex type have been modified
@@ -48,7 +46,10 @@ public class ComplexPropertyEntry : MemberEntry
     /// </remarks>
     public override bool IsModified
     {
-        get => Metadata.ComplexType.GetFlattenedProperties().Any(property => InternalEntry.IsModified(property));
+        get =>
+            Metadata
+                .ComplexType.GetFlattenedProperties()
+                .Any(property => InternalEntry.IsModified(property));
         set
         {
             foreach (var property in Metadata.ComplexType.GetFlattenedProperties())
@@ -61,8 +62,7 @@ public class ComplexPropertyEntry : MemberEntry
     /// <summary>
     ///     Gets the metadata that describes the facets of this property and how it maps to the database.
     /// </summary>
-    public new virtual IComplexProperty Metadata
-        => (IComplexProperty)base.Metadata;
+    public new virtual IComplexProperty Metadata => (IComplexProperty)base.Metadata;
 
     /// <summary>
     ///     Provides access to change tracking information and operations for a given property of this complex type.
@@ -103,8 +103,10 @@ public class ComplexPropertyEntry : MemberEntry
     ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
     ///     examples.
     /// </remarks>
-    public virtual IEnumerable<PropertyEntry> Properties
-        => Metadata.ComplexType.GetProperties().Select(property => new PropertyEntry(InternalEntry, property));
+    public virtual IEnumerable<PropertyEntry> Properties =>
+        Metadata
+            .ComplexType.GetProperties()
+            .Select(property => new PropertyEntry(InternalEntry, property));
 
     /// <summary>
     ///     Provides access to change tracking information and operations for a given property of a nested complex type on this
@@ -137,7 +139,10 @@ public class ComplexPropertyEntry : MemberEntry
     {
         Check.NotEmpty(propertyName, nameof(propertyName));
 
-        return new ComplexPropertyEntry(InternalEntry, Metadata.ComplexType.GetComplexProperty(propertyName));
+        return new ComplexPropertyEntry(
+            InternalEntry,
+            Metadata.ComplexType.GetComplexProperty(propertyName)
+        );
     }
 
     /// <summary>
@@ -147,6 +152,8 @@ public class ComplexPropertyEntry : MemberEntry
     ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
     ///     examples.
     /// </remarks>
-    public virtual IEnumerable<ComplexPropertyEntry> ComplexProperties
-        => Metadata.ComplexType.GetComplexProperties().Select(property => new ComplexPropertyEntry(InternalEntry, property));
+    public virtual IEnumerable<ComplexPropertyEntry> ComplexProperties =>
+        Metadata
+            .ComplexType.GetComplexProperties()
+            .Select(property => new ComplexPropertyEntry(InternalEntry, property));
 }

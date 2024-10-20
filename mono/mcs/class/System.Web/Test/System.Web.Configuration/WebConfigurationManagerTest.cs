@@ -1,5 +1,5 @@
 //
-// WebConfigurationManagerTest.cs 
+// WebConfigurationManagerTest.cs
 //	- unit tests for System.Web.Configuration.WebConfigurationManager
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,203 +28,240 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Configuration;
-using _Configuration = System.Configuration.Configuration;
 using System.IO;
-using System.Web.Configuration;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Security;
-using MonoTests.SystemWeb.Framework;
 using System.Web.UI;
+using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
+using _Configuration = System.Configuration.Configuration;
 
-namespace MonoTests.System.Web.Configuration {
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class WebConfigurationManagerTest
+    {
+        [TestFixtureTearDown]
+        public void Unload()
+        {
+            WebTest.Unload();
+        }
 
-	[TestFixture]
-	public class WebConfigurationManagerTest  {
+        [SetUp]
+        public void TestSetUp()
+        {
+            WebTest.CopyResource(
+                GetType(),
+                "CustomSectionEmptyCollection.aspx",
+                "CustomSectionEmptyCollection.aspx"
+            );
+        }
 
-		[TestFixtureTearDown]
-		public void Unload ()
-		{
-			WebTest.Unload ();
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void OpenMachineConfiguration_1()
+        {
+            _Configuration c1 = WebConfigurationManager.OpenMachineConfiguration();
+            _Configuration c2 = ConfigurationManager.OpenMachineConfiguration();
 
-		[SetUp]
-		public void TestSetUp ()
-		{
-			WebTest.CopyResource (GetType (), "CustomSectionEmptyCollection.aspx", "CustomSectionEmptyCollection.aspx");
-		}
-		
-		[Test]
-		[Category ("NotWorking")]
-		public void OpenMachineConfiguration_1 ()
-		{
-			_Configuration c1 = WebConfigurationManager.OpenMachineConfiguration ();
-			_Configuration c2 = ConfigurationManager.OpenMachineConfiguration ();
+            Assert.AreEqual(c1.FilePath, c2.FilePath, "A1");
+        }
 
-			Assert.AreEqual (c1.FilePath, c2.FilePath, "A1");
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void OpenMachineConfiguration_2()
+        {
+            _Configuration c1 = WebConfigurationManager.OpenMachineConfiguration("configTest");
+            _Configuration c2 = ConfigurationManager.OpenMachineConfiguration();
 
-		[Test]
-		[Category ("NotWorking")]
-		public void OpenMachineConfiguration_2 ()
-		{
-			_Configuration c1 = WebConfigurationManager.OpenMachineConfiguration ("configTest");
-			_Configuration c2 = ConfigurationManager.OpenMachineConfiguration ();
+            Assert.AreEqual(c1.FilePath, c2.FilePath, "A1");
+        }
 
-			Assert.AreEqual (c1.FilePath, c2.FilePath, "A1");
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void OpenMachineConfiguration_serverNull()
+        {
+            _Configuration c1 = WebConfigurationManager.OpenMachineConfiguration(
+                "configTest",
+                null
+            );
+            _Configuration c2 = ConfigurationManager.OpenMachineConfiguration();
 
-		[Test]
-		[Category ("NotWorking")]
-		public void OpenMachineConfiguration_serverNull ()
-		{
-			_Configuration c1 = WebConfigurationManager.OpenMachineConfiguration ("configTest", null);
-			_Configuration c2 = ConfigurationManager.OpenMachineConfiguration ();
+            Assert.AreEqual(c1.FilePath, c2.FilePath, "A1");
+        }
 
-			Assert.AreEqual (c1.FilePath, c2.FilePath, "A1");
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void OpenWebConfiguration_null()
+        {
+            _Configuration web = WebConfigurationManager.OpenWebConfiguration(null);
+            _Configuration machine = ConfigurationManager.OpenMachineConfiguration();
 
-		[Test]
-		[Category ("NotWorking")]
-		public void OpenWebConfiguration_null ()
-		{
-			_Configuration web = WebConfigurationManager.OpenWebConfiguration (null);
-			_Configuration machine = ConfigurationManager.OpenMachineConfiguration ();
+            Assert.AreEqual("web.config", Path.GetFileName(web.FilePath), "A1");
+            Assert.AreEqual(
+                Path.GetDirectoryName(web.FilePath),
+                Path.GetDirectoryName(machine.FilePath),
+                "A2"
+            );
+        }
 
-			Assert.AreEqual ("web.config", Path.GetFileName (web.FilePath), "A1");
-			Assert.AreEqual (Path.GetDirectoryName (web.FilePath), Path.GetDirectoryName (machine.FilePath), "A2");
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void OpenWebConfiguration_empty()
+        {
+            _Configuration web1 = WebConfigurationManager.OpenWebConfiguration(null);
+            _Configuration web2 = WebConfigurationManager.OpenWebConfiguration("");
+            _Configuration machine = ConfigurationManager.OpenMachineConfiguration();
 
-		[Test]
-		[Category ("NotWorking")]
-		public void OpenWebConfiguration_empty ()
-		{
-			_Configuration web1 = WebConfigurationManager.OpenWebConfiguration (null);
-			_Configuration web2 = WebConfigurationManager.OpenWebConfiguration ("");
-			_Configuration machine = ConfigurationManager.OpenMachineConfiguration ();
+            Assert.AreEqual(web1.FilePath, web2.FilePath, "A1");
+            Assert.AreEqual(
+                Path.GetDirectoryName(web2.FilePath),
+                Path.GetDirectoryName(machine.FilePath),
+                "A2"
+            );
+        }
 
-			Assert.AreEqual (web1.FilePath, web2.FilePath, "A1");
-			Assert.AreEqual (Path.GetDirectoryName (web2.FilePath), Path.GetDirectoryName (machine.FilePath), "A2");
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void OpenWebConfiguration_siteNull()
+        {
+            _Configuration web = WebConfigurationManager.OpenWebConfiguration("", null);
+            _Configuration machine = ConfigurationManager.OpenMachineConfiguration();
 
-		[Test]
-		[Category ("NotWorking")]
-		public void OpenWebConfiguration_siteNull ()
-		{
-			_Configuration web = WebConfigurationManager.OpenWebConfiguration ("", null);
-			_Configuration machine = ConfigurationManager.OpenMachineConfiguration ();
+            Assert.AreEqual("web.config", Path.GetFileName(web.FilePath), "A1");
+            Assert.AreEqual(
+                Path.GetDirectoryName(web.FilePath),
+                Path.GetDirectoryName(machine.FilePath),
+                "A2"
+            );
+        }
 
-			Assert.AreEqual ("web.config", Path.GetFileName (web.FilePath), "A1");
-			Assert.AreEqual (Path.GetDirectoryName (web.FilePath), Path.GetDirectoryName (machine.FilePath), "A2");
-		}
+        [Test]
+        [Category("NotWorking")]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void OpenWebConfiguration_siteNull2_absolutePath()
+        {
+            WebConfigurationManager.OpenWebConfiguration("", null, "/clientTest");
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void OpenWebConfiguration_siteNull2_absolutePath ()
-		{
-			WebConfigurationManager.OpenWebConfiguration ("", null, "/clientTest");
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void OpenWebConfiguration_siteNull2()
+        {
+            _Configuration web = WebConfigurationManager.OpenWebConfiguration(
+                "",
+                null,
+                "clientTest"
+            );
+            _Configuration machine = ConfigurationManager.OpenMachineConfiguration();
 
-		[Test]
-		[Category ("NotWorking")]
-		public void OpenWebConfiguration_siteNull2 ()
-		{
-			_Configuration web = WebConfigurationManager.OpenWebConfiguration ("", null, "clientTest");
-			_Configuration machine = ConfigurationManager.OpenMachineConfiguration ();
+            Assert.AreEqual("web.config", Path.GetFileName(web.FilePath), "A1");
+            Assert.AreEqual(
+                Path.GetDirectoryName(web.FilePath),
+                Path.GetDirectoryName(machine.FilePath),
+                "A2"
+            );
+        }
 
-			Assert.AreEqual ("web.config", Path.GetFileName (web.FilePath), "A1");
-			Assert.AreEqual (Path.GetDirectoryName (web.FilePath), Path.GetDirectoryName (machine.FilePath), "A2");
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void GetWebApplicationSection_1()
+        {
+            Assert.IsNotNull(
+                WebConfigurationManager.GetWebApplicationSection("system.web/clientTarget"),
+                "A1"
+            );
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		public void GetWebApplicationSection_1 ()
-		{
-			Assert.IsNotNull (WebConfigurationManager.GetWebApplicationSection ("system.web/clientTarget"), "A1");
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void GetSection_1()
+        {
+            object sect1 = WebConfigurationManager.GetSection("system.web/clientTarget");
+            object sect2 = WebConfigurationManager.GetSection("system.web/clientTarget");
+            Assert.AreEqual(sect1, sect2, "A1");
 
-		[Test]
-		[Category ("NotWorking")]
-		public void GetSection_1 ()
-		{
-			object sect1 = WebConfigurationManager.GetSection ("system.web/clientTarget");
-			object sect2 = WebConfigurationManager.GetSection ("system.web/clientTarget");
-			Assert.AreEqual (sect1, sect2, "A1");
+            sect1 = WebConfigurationManager.GetSection("foo");
+            Assert.IsNull(sect1);
 
-			sect1 = WebConfigurationManager.GetSection ("foo");
-			Assert.IsNull (sect1);
+            sect1 = WebConfigurationManager.GetSection("appSettings");
+            Assert.IsNotNull(sect1, "A2");
 
-			sect1 = WebConfigurationManager.GetSection ("appSettings");
-			Assert.IsNotNull (sect1, "A2");
+            sect1 = WebConfigurationManager.GetSection("connectionStrings");
+            Assert.IsNotNull(sect1, "A3");
+        }
 
-			sect1 = WebConfigurationManager.GetSection ("connectionStrings");
-			Assert.IsNotNull (sect1, "A3");
-		}
+        [Test]
+        [Category("NotWorking")]
+        [ExpectedException(typeof(InvalidOperationException))]
+        // InvalidOperationException (WebConfigurationManager.GetSection(sectionName,path) can only be called from within a web application.)
+        // thrown from WebConfigurationManager.GetSection
+        public void GetSection_2()
+        {
+            object sect1 = WebConfigurationManager.GetSection(
+                "system.web/clientTarget",
+                "/clientTest"
+            );
+            Assert.IsNull(sect1, "A1");
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		[ExpectedException (typeof (InvalidOperationException))]
-		// InvalidOperationException (WebConfigurationManager.GetSection(sectionName,path) can only be called from within a web application.)
-		// thrown from WebConfigurationManager.GetSection
-		public void GetSection_2 ()
-		{
-			object sect1 = WebConfigurationManager.GetSection ("system.web/clientTarget", "/clientTest");
-			Assert.IsNull (sect1, "A1");
-		}
+        [Test]
+        [Category("NunitWeb")]
+        public void ClientTarget()
+        {
+            new WebTest(PageInvoker.CreateOnLoad(ClientTarget_load)).Run();
+        }
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void ClientTarget () {
-			new WebTest (PageInvoker.CreateOnLoad (ClientTarget_load)).Run ();
-		}
+        public static void ClientTarget_load(Page p)
+        {
+            ClientTargetSection sec = (ClientTargetSection)
+                WebConfigurationManager.GetSection("system.web/clientTarget");
+            ClientTarget clientTarget = sec.ClientTargets["downlevel"];
+            if (clientTarget == null)
+                Assert.Fail("ClientTarget Section: downlevel");
+        }
 
-		public static void ClientTarget_load (Page p) {
-			ClientTargetSection sec = (ClientTargetSection) WebConfigurationManager.GetSection ("system.web/clientTarget");
-			ClientTarget clientTarget = sec.ClientTargets ["downlevel"];
-			if (clientTarget == null)
-				Assert.Fail ("ClientTarget Section: downlevel");
-		}
+        [Test]
+        [Category("NotWorking")]
+        public void OpenMappedMachineConfiguration()
+        {
+            ConfigurationFileMap map = new ConfigurationFileMap();
 
-		[Test]
-		[Category ("NotWorking")]
-		public void OpenMappedMachineConfiguration ()
-		{
-			ConfigurationFileMap map = new ConfigurationFileMap ();
+            _Configuration c1 = WebConfigurationManager.OpenMappedMachineConfiguration(
+                map,
+                "clientTest"
+            );
+            _Configuration c2 = ConfigurationManager.OpenMappedMachineConfiguration(map);
 
-			_Configuration c1 = WebConfigurationManager.OpenMappedMachineConfiguration (map, "clientTest");
-			_Configuration c2 = ConfigurationManager.OpenMappedMachineConfiguration (map);
+            Assert.AreEqual(c1.FilePath, c2.FilePath, "A1");
+        }
 
-			Assert.AreEqual (c1.FilePath, c2.FilePath, "A1");
-		}
+        [Test]
+        [Category("NotWorking")]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        // same stack trace for OpenWebConfiguration_siteNull2_absolutePath.
+        public void OpenMappedMachineConfiguration_absolute()
+        {
+            ConfigurationFileMap map = new ConfigurationFileMap();
 
-		[Test]
-		[Category ("NotWorking")]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		// same stack trace for OpenWebConfiguration_siteNull2_absolutePath.
-		public void OpenMappedMachineConfiguration_absolute ()
-		{
-			ConfigurationFileMap map = new ConfigurationFileMap ();
+            WebConfigurationManager.OpenMappedMachineConfiguration(map, "/clientTest");
+        }
 
-			WebConfigurationManager.OpenMappedMachineConfiguration (map, "/clientTest");
-		}
+        [Test]
+        public void StaticProps()
+        {
+            Assert.IsNotNull(WebConfigurationManager.AppSettings, "A1");
+            Assert.IsNotNull(WebConfigurationManager.ConnectionStrings, "A2");
+        }
 
-		[Test]
-		public void StaticProps ()
-		{
-			Assert.IsNotNull (WebConfigurationManager.AppSettings, "A1");
-			Assert.IsNotNull (WebConfigurationManager.ConnectionStrings, "A2");
-		}
-
-		[Test]
-		public void CustomSectionEmptyCollection ()
-		{
-			WebTest t = new WebTest ("CustomSectionEmptyCollection.aspx");
-			t.Run ();
-		}
-	}
+        [Test]
+        public void CustomSectionEmptyCollection()
+        {
+            WebTest t = new WebTest("CustomSectionEmptyCollection.aspx");
+            t.Run();
+        }
+    }
 }
-

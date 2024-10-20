@@ -36,199 +36,215 @@
 using System;
 using System.Collections;
 
-namespace Cairo {
+namespace Cairo
+{
+    public class Surface : IDisposable
+    {
+        [Obsolete]
+        protected static Hashtable surfaces = new Hashtable();
 
-	public class Surface : IDisposable
-	{
-		[Obsolete]
-		protected static Hashtable surfaces = new Hashtable ();
+        IntPtr handle = IntPtr.Zero;
 
-		IntPtr handle = IntPtr.Zero;
+        [Obsolete]
+        protected Surface() { }
 
-		[Obsolete]
-		protected Surface()
-		{
-		}
+        [Obsolete]
+        protected Surface(IntPtr ptr)
+            : this(ptr, true) { }
 
-		[Obsolete]
-		protected Surface (IntPtr ptr) : this (ptr, true)
-		{
-		}
+        protected Surface(IntPtr handle, bool owner)
+        {
+            this.handle = handle;
+            if (!owner)
+                NativeMethods.cairo_surface_reference(handle);
+            if (CairoDebug.Enabled)
+                CairoDebug.OnAllocated(handle);
+        }
 
-		protected Surface (IntPtr handle, bool owner)
-		{
-			this.handle = handle;
-			if (!owner)
-				NativeMethods.cairo_surface_reference (handle);
-			if (CairoDebug.Enabled)
-				CairoDebug.OnAllocated (handle);
-		}
+        public static Surface Lookup(IntPtr surface, bool owned)
+        {
+            SurfaceType st = NativeMethods.cairo_surface_get_type(surface);
+            switch (st)
+            {
+                case SurfaceType.Image:
+                    return new ImageSurface(surface, owned);
+                case SurfaceType.Xlib:
+                    return new XlibSurface(surface, owned);
+                case SurfaceType.Xcb:
+                    return new XcbSurface(surface, owned);
+                case SurfaceType.Glitz:
+                    return new GlitzSurface(surface, owned);
+                case SurfaceType.Win32:
+                    return new Win32Surface(surface, owned);
+                case SurfaceType.Pdf:
+                    return new PdfSurface(surface, owned);
+                case SurfaceType.PS:
+                    return new PSSurface(surface, owned);
+                case SurfaceType.DirectFB:
+                    return new DirectFBSurface(surface, owned);
+                case SurfaceType.Svg:
+                    return new SvgSurface(surface, owned);
+                case SurfaceType.GL:
+                    return new GLSurface(surface, owned);
+                default:
+                    return new Surface(surface, owned);
+            }
+        }
 
-		public static Surface Lookup (IntPtr surface, bool owned)
-		{
-			SurfaceType st = NativeMethods.cairo_surface_get_type (surface);
-			switch (st) {
-			case SurfaceType.Image:
-				return new ImageSurface (surface, owned);
-			case SurfaceType.Xlib:
-				return new XlibSurface (surface, owned);
-			case SurfaceType.Xcb:
-				return new XcbSurface (surface, owned);
-			case SurfaceType.Glitz:
-				return new GlitzSurface (surface, owned);
-			case SurfaceType.Win32:
-				return new Win32Surface (surface, owned);
-			case SurfaceType.Pdf:
-				return new PdfSurface (surface, owned);
-			case SurfaceType.PS:
-				return new PSSurface (surface, owned);
-			case SurfaceType.DirectFB:
-				return new DirectFBSurface (surface, owned);
-			case SurfaceType.Svg:
-				return new SvgSurface (surface, owned);
-			case SurfaceType.GL:
-				return new GLSurface (surface, owned);
-			default:
-				return new Surface (surface, owned);
-			}
-		}
+        [Obsolete("Use an ImageSurface constructor instead.")]
+        public static Cairo.Surface CreateForImage(
+            ref byte[] data,
+            Cairo.Format format,
+            int width,
+            int height,
+            int stride
+        )
+        {
+            IntPtr p = NativeMethods.cairo_image_surface_create_for_data(
+                data,
+                format,
+                width,
+                height,
+                stride
+            );
 
-		[Obsolete ("Use an ImageSurface constructor instead.")]
-		public static Cairo.Surface CreateForImage (
-			ref byte[] data, Cairo.Format format, int width, int height, int stride)
-		{
-			IntPtr p = NativeMethods.cairo_image_surface_create_for_data (
-				data, format, width, height, stride);
+            return new Cairo.Surface(p, true);
+        }
 
-			return new Cairo.Surface (p, true);
-		}
+        [Obsolete("Use an ImageSurface constructor instead.")]
+        public static Cairo.Surface CreateForImage(Cairo.Format format, int width, int height)
+        {
+            IntPtr p = NativeMethods.cairo_image_surface_create(format, width, height);
 
-		[Obsolete ("Use an ImageSurface constructor instead.")]
-		public static Cairo.Surface CreateForImage (
-			Cairo.Format format, int width, int height)
-		{
-			IntPtr p = NativeMethods.cairo_image_surface_create (
-				format, width, height);
+            return new Cairo.Surface(p, true);
+        }
 
-			return new Cairo.Surface (p, true);
-		}
+        public Cairo.Surface CreateSimilar(Cairo.Content content, int width, int height)
+        {
+            IntPtr p = NativeMethods.cairo_surface_create_similar(
+                this.Handle,
+                content,
+                width,
+                height
+            );
 
+            return new Cairo.Surface(p, true);
+        }
 
-		public Cairo.Surface CreateSimilar (
-			Cairo.Content content, int width, int height)
-		{
-			IntPtr p = NativeMethods.cairo_surface_create_similar (
-				this.Handle, content, width, height);
+        ~Surface()
+        {
+            Dispose(false);
+        }
 
-			return new Cairo.Surface (p, true);
-		}
+        //[Obsolete ("Use Context.SetSource() followed by Context.Paint()")]
+        public void Show(Context gr, double x, double y)
+        {
+            NativeMethods.cairo_set_source_surface(gr.Handle, handle, x, y);
+            NativeMethods.cairo_paint(gr.Handle);
+        }
 
-		~Surface ()
-		{
-			Dispose (false);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		//[Obsolete ("Use Context.SetSource() followed by Context.Paint()")]
-		public void Show (Context gr, double x, double y)
-		{
-			NativeMethods.cairo_set_source_surface (gr.Handle, handle, x, y);
-			NativeMethods.cairo_paint (gr.Handle);
-		}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing || CairoDebug.Enabled)
+                CairoDebug.OnDisposed<Surface>(handle, disposing);
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+            if (!disposing || handle == IntPtr.Zero)
+                return;
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (!disposing || CairoDebug.Enabled)
-				CairoDebug.OnDisposed<Surface> (handle, disposing);
+            NativeMethods.cairo_surface_destroy(handle);
+            handle = IntPtr.Zero;
+        }
 
-			if (!disposing|| handle == IntPtr.Zero)
-				return;
+        public Status Finish()
+        {
+            NativeMethods.cairo_surface_finish(handle);
+            return Status;
+        }
 
-			NativeMethods.cairo_surface_destroy (handle);
-			handle = IntPtr.Zero;
-		}
+        public void Flush()
+        {
+            NativeMethods.cairo_surface_flush(handle);
+        }
 
-		public Status Finish ()
-		{
-			NativeMethods.cairo_surface_finish (handle);
-			return Status;
-		}
+        public void MarkDirty()
+        {
+            NativeMethods.cairo_surface_mark_dirty(Handle);
+        }
 
-		public void Flush ()
-		{
-			NativeMethods.cairo_surface_flush (handle);
-		}
+        public void MarkDirty(Rectangle rectangle)
+        {
+            NativeMethods.cairo_surface_mark_dirty_rectangle(
+                Handle,
+                (int)rectangle.X,
+                (int)rectangle.Y,
+                (int)rectangle.Width,
+                (int)rectangle.Height
+            );
+        }
 
-		public void MarkDirty ()
-		{
-			NativeMethods.cairo_surface_mark_dirty (Handle);
-		}
+        public IntPtr Handle
+        {
+            get { return handle; }
+        }
 
-		public void MarkDirty (Rectangle rectangle)
-		{
-			NativeMethods.cairo_surface_mark_dirty_rectangle (Handle, (int)rectangle.X, (int)rectangle.Y, (int)rectangle.Width, (int)rectangle.Height);
-		}
+        public PointD DeviceOffset
+        {
+            get
+            {
+                double x,
+                    y;
+                NativeMethods.cairo_surface_get_device_offset(handle, out x, out y);
+                return new PointD(x, y);
+            }
+            set { NativeMethods.cairo_surface_set_device_offset(handle, value.X, value.Y); }
+        }
 
-		public IntPtr Handle {
-			get {
-				return handle;
-			}
-		}
+        [Obsolete("Use Dispose()")]
+        public void Destroy()
+        {
+            Dispose();
+        }
 
-		public PointD DeviceOffset {
-			get {
-				double x, y;
-				NativeMethods.cairo_surface_get_device_offset (handle, out x, out y);
-				return new PointD (x, y);
-			}
+        public void SetFallbackResolution(double x, double y)
+        {
+            NativeMethods.cairo_surface_set_fallback_resolution(handle, x, y);
+        }
 
-			set {
-				NativeMethods.cairo_surface_set_device_offset (handle, value.X, value.Y);
-			}
-		}
+        public void WriteToPng(string filename)
+        {
+            NativeMethods.cairo_surface_write_to_png(handle, filename);
+        }
 
-		[Obsolete ("Use Dispose()")]
-		public void Destroy()
-		{
-			Dispose ();
-		}
+        [Obsolete("Use Handle instead.")]
+        public IntPtr Pointer
+        {
+            get { return handle; }
+        }
 
-		public void SetFallbackResolution (double x, double y)
-		{
-			NativeMethods.cairo_surface_set_fallback_resolution (handle, x, y);
-		}
+        public Status Status
+        {
+            get { return NativeMethods.cairo_surface_status(handle); }
+        }
 
-		public void WriteToPng (string filename)
-		{
-			NativeMethods.cairo_surface_write_to_png (handle, filename);
-		}
+        public Content Content
+        {
+            get { return NativeMethods.cairo_surface_get_content(handle); }
+        }
 
-		[Obsolete ("Use Handle instead.")]
-		public IntPtr Pointer {
-			get {
-				return handle;
-			}
-		}
+        public SurfaceType SurfaceType
+        {
+            get { return NativeMethods.cairo_surface_get_type(handle); }
+        }
 
-		public Status Status {
-			get { return NativeMethods.cairo_surface_status (handle); }
-		}
-
-		public Content Content {
-			get { return NativeMethods.cairo_surface_get_content (handle); }
-		}
-
-		public SurfaceType SurfaceType {
-			get { return NativeMethods.cairo_surface_get_type (handle); }
-		}
-
-		public uint ReferenceCount {
-			get { return NativeMethods.cairo_surface_get_reference_count (handle); }
-		}
-	}
+        public uint ReferenceCount
+        {
+            get { return NativeMethods.cairo_surface_get_reference_count(handle); }
+        }
+    }
 }

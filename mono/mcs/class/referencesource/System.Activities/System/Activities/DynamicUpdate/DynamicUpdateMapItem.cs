@@ -8,7 +8,7 @@ namespace System.Activities.DynamicUpdate
     using System.Activities.XamlIntegration;
     using System.ComponentModel;
     using System.Runtime.Serialization;
-    
+
     [TypeConverter(typeof(DynamicUpdateMapItemConverter))]
     [DataContract]
     public class DynamicUpdateMapItem
@@ -25,26 +25,14 @@ namespace System.Activities.DynamicUpdate
         }
 
         [DataMember]
-        internal int OriginalId
-        {
-            get;
-            set;
-        }
+        internal int OriginalId { get; set; }
 
         [DataMember]
-        internal int OriginalVariableOwnerId
-        {
-            get;
-            set;
-        }
+        internal int OriginalVariableOwnerId { get; set; }
 
         internal bool IsVariableMapItem
         {
-            get
-            {
-                return this.OriginalVariableOwnerId > 0;
-            }
+            get { return this.OriginalVariableOwnerId > 0; }
         }
     }
 }
-

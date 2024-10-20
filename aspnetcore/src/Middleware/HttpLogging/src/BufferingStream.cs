@@ -70,7 +70,14 @@ internal abstract class BufferingStream : Stream, IBufferWriter<byte>
             // flush: false is required as we don't want to write invalid characters that
             // are spliced due to truncation. If we set flush: true, if effectively means
             // we expect EOF in this array, meaning it will try to write any bytes at the end of it.
-            EncodingExtensions.Convert(decoder, ros, bufferWriter, flush: false, out var charUsed, out var completed);
+            EncodingExtensions.Convert(
+                decoder,
+                ros,
+                bufferWriter,
+                flush: false,
+                out var charUsed,
+                out var completed
+            );
 
             // Afterwards, we need to call convert in a loop until complete is true.
             // The first call to convert many return true, but if it doesn't, we call
@@ -86,11 +93,20 @@ internal abstract class BufferingStream : Stream, IBufferWriter<byte>
                 }
                 else
                 {
-                    EncodingExtensions.Convert(decoder, ReadOnlySequence<byte>.Empty, bufferWriter, flush: true, out charUsed, out completed);
+                    EncodingExtensions.Convert(
+                        decoder,
+                        ReadOnlySequence<byte>.Empty,
+                        bufferWriter,
+                        flush: true,
+                        out charUsed,
+                        out completed
+                    );
                 }
             }
 
-            throw new DecoderFallbackException("Failed to decode after 10 calls to Decoder.Convert");
+            throw new DecoderFallbackException(
+                "Failed to decode after 10 calls to Decoder.Convert"
+            );
         }
         catch (DecoderFallbackException ex)
         {
@@ -214,9 +230,16 @@ internal abstract class BufferingStream : Stream, IBufferWriter<byte>
     }
 
     // Copied from https://github.com/dotnet/corefx/blob/de3902bb56f1254ec1af4bf7d092fc2c048734cc/src/System.Memory/src/System/ThrowHelper.cs
-    private static void ThrowArgumentOutOfRangeException(string argumentName) { throw CreateArgumentOutOfRangeException(argumentName); }
+    private static void ThrowArgumentOutOfRangeException(string argumentName)
+    {
+        throw CreateArgumentOutOfRangeException(argumentName);
+    }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static Exception CreateArgumentOutOfRangeException(string argumentName) { return new ArgumentOutOfRangeException(argumentName); }
+    private static Exception CreateArgumentOutOfRangeException(string argumentName)
+    {
+        return new ArgumentOutOfRangeException(argumentName);
+    }
 
     public override void Flush()
     {
@@ -233,7 +256,12 @@ internal abstract class BufferingStream : Stream, IBufferWriter<byte>
         return _innerStream.Read(buffer, offset, count);
     }
 
-    public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task<int> ReadAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _innerStream.ReadAsync(buffer, offset, count, cancellationToken);
     }
@@ -253,12 +281,20 @@ internal abstract class BufferingStream : Stream, IBufferWriter<byte>
         _innerStream.Write(buffer, offset, count);
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return _innerStream.WriteAsync(buffer, offset, count, cancellationToken);
     }
 
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         return _innerStream.WriteAsync(buffer, cancellationToken);
     }
@@ -268,12 +304,24 @@ internal abstract class BufferingStream : Stream, IBufferWriter<byte>
         _innerStream.Write(buffer);
     }
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return _innerStream.BeginRead(buffer, offset, count, callback, state);
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return _innerStream.BeginWrite(buffer, offset, count, callback, state);
     }
@@ -290,7 +338,10 @@ internal abstract class BufferingStream : Stream, IBufferWriter<byte>
 
     // Do not override CopyTo/Async, they call Read/Async internally.
 
-    public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+    public override ValueTask<int> ReadAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         return _innerStream.ReadAsync(buffer, cancellationToken);
     }

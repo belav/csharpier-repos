@@ -9,10 +9,10 @@ namespace System.Net.Mime
     using System;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.IO;
-    using System.Text;
     using System.Globalization;
+    using System.IO;
     using System.Net.Mail;
+    using System.Text;
 
     /// <summary>
     /// Typed Content-Type header
@@ -44,9 +44,8 @@ namespace System.Net.Mime
         /// </summary>
         internal readonly static string Default = "application/octet-stream";
 
-        public ContentType() : this(Default)
-        {
-        }
+        public ContentType()
+            : this(Default) { }
 
         /// <summary>
         /// ctor.
@@ -54,12 +53,17 @@ namespace System.Net.Mime
         /// <param name="fieldValue">Unparsed value of the Content-Type header.</param>
         public ContentType(string contentType)
         {
-            if (contentType == null) {
+            if (contentType == null)
+            {
                 throw new ArgumentNullException("contentType");
             }
-            if (contentType == String.Empty) {
-                throw new ArgumentException(SR.GetString(SR.net_emptystringcall,"contentType"), "contentType");
-            }                
+            if (contentType == String.Empty)
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.net_emptystringcall, "contentType"),
+                    "contentType"
+                );
+            }
             isChanged = true;
             type = contentType;
             ParseValue();
@@ -67,16 +71,15 @@ namespace System.Net.Mime
 
         public string Boundary
         {
-            get
-            {
-                return Parameters["boundary"];
-            }
+            get { return Parameters["boundary"]; }
             set
             {
-                if (value == null || value == string.Empty) {
+                if (value == null || value == string.Empty)
+                {
                     Parameters.Remove("boundary");
                 }
-                else{
+                else
+                {
                     Parameters["boundary"] = value;
                 }
             }
@@ -84,16 +87,15 @@ namespace System.Net.Mime
 
         public string CharSet
         {
-            get
-            {
-                return Parameters["charset"];
-            }
+            get { return Parameters["charset"]; }
             set
             {
-                if (value == null || value == string.Empty) {
+                if (value == null || value == string.Empty)
+                {
                     Parameters.Remove("charset");
                 }
-                else{
+                else
+                {
                     Parameters["charset"] = value;
                 }
             }
@@ -104,17 +106,16 @@ namespace System.Net.Mime
         /// </summary>
         public string MediaType
         {
-            get
-            {
-                return mediaType + "/" + subType;
-            }
+            get { return mediaType + "/" + subType; }
             set
             {
-                if (value == null) {
+                if (value == null)
+                {
                     throw new ArgumentNullException("value");
                 }
-                
-                if (value == string.Empty) {
+
+                if (value == string.Empty)
+                {
                     throw new ArgumentException(SR.GetString(SR.net_emptystringset), "value");
                 }
 
@@ -124,7 +125,8 @@ namespace System.Net.Mime
                     throw new FormatException(SR.GetString(SR.MediaTypeInvalid));
 
                 subType = MailBnfHelper.ReadToken(value, ref offset, null);
-                if(subType.Length == 0 || offset < value.Length){
+                if (subType.Length == 0 || offset < value.Length)
+                {
                     throw new FormatException(SR.GetString(SR.MediaTypeInvalid));
                 }
 
@@ -133,25 +135,28 @@ namespace System.Net.Mime
             }
         }
 
-
-        public string Name {
-            get {
+        public string Name
+        {
+            get
+            {
                 string value = Parameters["name"];
                 Encoding nameEncoding = MimeBasePart.DecodeEncoding(value);
-                if(nameEncoding != null)
+                if (nameEncoding != null)
                     value = MimeBasePart.DecodeHeaderValue(value);
                 return value;
             }
-            set {
-                if (value == null || value == string.Empty) {
+            set
+            {
+                if (value == null || value == string.Empty)
+                {
                     Parameters.Remove("name");
                 }
-                else{
+                else
+                {
                     Parameters["name"] = value;
                 }
             }
         }
-        
 
         public StringDictionary Parameters
         {
@@ -159,7 +164,8 @@ namespace System.Net.Mime
             {
                 if (parameters == null)
                 {
-                    if (type == null) {
+                    if (type == null)
+                    {
                         parameters = new TrackingStringDictionary();
                     }
                 }
@@ -167,30 +173,30 @@ namespace System.Net.Mime
             }
         }
 
-
-        
-        internal void Set(string contentType, HeaderCollection headers) {
+        internal void Set(string contentType, HeaderCollection headers)
+        {
             type = contentType;
             ParseValue();
             headers.InternalSet(MailHeaderInfo.GetString(MailHeaderID.ContentType), ToString());
             isPersisted = true;
         }
-        
-        
-        internal void PersistIfNeeded(HeaderCollection headers, bool forcePersist) {
-            if (IsChanged || !isPersisted || forcePersist) {
+
+        internal void PersistIfNeeded(HeaderCollection headers, bool forcePersist)
+        {
+            if (IsChanged || !isPersisted || forcePersist)
+            {
                 headers.InternalSet(MailHeaderInfo.GetString(MailHeaderID.ContentType), ToString());
                 isPersisted = true;
             }
         }
 
-        internal bool IsChanged {
-            get {
-                return (isChanged || parameters != null && parameters.IsChanged);
-            }
+        internal bool IsChanged
+        {
+            get { return (isChanged || parameters != null && parameters.IsChanged); }
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             if (type == null || IsChanged)
             {
                 type = Encode(false); // Legacy wire-safe format
@@ -206,7 +212,7 @@ namespace System.Net.Mime
             StringBuilder builder = new StringBuilder();
             builder.Append(mediaType); // Must not have unicode, already validated
             builder.Append('/');
-            builder.Append(subType);  // Must not have unicode, already validated
+            builder.Append(subType); // Must not have unicode, already validated
             // Validate and encode unicode where required
             foreach (string key in Parameters.Keys)
             {
@@ -224,30 +230,45 @@ namespace System.Net.Mime
             if (encoding != null) // Manually encoded elsewhere, pass through
             {
                 builder.Append("\"" + value + "\"");
-            } 
-            else if ((allowUnicode && !MailBnfHelper.HasCROrLF(value)) // Unicode without CL or LF's
-                || MimeBasePart.IsAscii(value, false)) // Ascii
+            }
+            else if (
+                (allowUnicode && !MailBnfHelper.HasCROrLF(value)) // Unicode without CL or LF's
+                || MimeBasePart.IsAscii(value, false)
+            ) // Ascii
             {
                 MailBnfHelper.GetTokenOrQuotedString(value, builder, allowUnicode);
             }
             else
             {
                 // MIME Encoding required
-                encoding =Encoding.GetEncoding(MimeBasePart.defaultCharSet);
-                builder.Append("\"" + MimeBasePart.EncodeHeaderValue(value, encoding,
-                    MimeBasePart.ShouldUseBase64Encoding(encoding)) + "\"");
+                encoding = Encoding.GetEncoding(MimeBasePart.defaultCharSet);
+                builder.Append(
+                    "\""
+                        + MimeBasePart.EncodeHeaderValue(
+                            value,
+                            encoding,
+                            MimeBasePart.ShouldUseBase64Encoding(encoding)
+                        )
+                        + "\""
+                );
             }
         }
 
-        public override bool Equals(object rparam) {
-            if (rparam == null) {
+        public override bool Equals(object rparam)
+        {
+            if (rparam == null)
+            {
                 return false;
             }
-            
-            return (String.Compare(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase ) == 0);
+
+            return (
+                String.Compare(ToString(), rparam.ToString(), StringComparison.OrdinalIgnoreCase)
+                == 0
+            );
         }
 
-        public override int GetHashCode(){
+        public override int GetHashCode()
+        {
             return ToString().ToLowerInvariant().GetHashCode();
         }
 
@@ -258,69 +279,90 @@ namespace System.Net.Mime
             int offset = 0;
             Exception exception = null;
             parameters = new TrackingStringDictionary();
-            
-            try{
+
+            try
+            {
                 mediaType = MailBnfHelper.ReadToken(type, ref offset, null);
-                if (mediaType == null || mediaType.Length == 0 ||  offset >= type.Length || type[offset++] != '/'){
+                if (
+                    mediaType == null
+                    || mediaType.Length == 0
+                    || offset >= type.Length
+                    || type[offset++] != '/'
+                )
+                {
                     exception = new FormatException(SR.GetString(SR.ContentTypeInvalid));
                 }
 
-                if (exception == null) {
+                if (exception == null)
+                {
                     subType = MailBnfHelper.ReadToken(type, ref offset, null);
-                    if (subType == null || subType.Length == 0){
+                    if (subType == null || subType.Length == 0)
+                    {
                         exception = new FormatException(SR.GetString(SR.ContentTypeInvalid));
                     }
                 }
-                
-                if (exception == null) {
+
+                if (exception == null)
+                {
                     while (MailBnfHelper.SkipCFWS(type, ref offset))
                     {
-                        if (type[offset++] != ';'){
+                        if (type[offset++] != ';')
+                        {
                             exception = new FormatException(SR.GetString(SR.ContentTypeInvalid));
                             break;
                         }
-        
+
                         if (!MailBnfHelper.SkipCFWS(type, ref offset))
                             break;
-        
-                        string paramAttribute = MailBnfHelper.ReadParameterAttribute(type, ref offset, null);
-                        
-                        if(paramAttribute == null || paramAttribute.Length == 0){
+
+                        string paramAttribute = MailBnfHelper.ReadParameterAttribute(
+                            type,
+                            ref offset,
+                            null
+                        );
+
+                        if (paramAttribute == null || paramAttribute.Length == 0)
+                        {
                             exception = new FormatException(SR.GetString(SR.ContentTypeInvalid));
                             break;
                         }
-                        
+
                         string paramValue;
-                        if ( offset >= type.Length || type[offset++] != '='){
+                        if (offset >= type.Length || type[offset++] != '=')
+                        {
                             exception = new FormatException(SR.GetString(SR.ContentTypeInvalid));
                             break;
                         }
-                        
-                        if (!MailBnfHelper.SkipCFWS(type, ref offset)){
+
+                        if (!MailBnfHelper.SkipCFWS(type, ref offset))
+                        {
                             exception = new FormatException(SR.GetString(SR.ContentTypeInvalid));
                             break;
                         }
-        
+
                         if (type[offset] == '"')
                             paramValue = MailBnfHelper.ReadQuotedString(type, ref offset, null);
                         else
                             paramValue = MailBnfHelper.ReadToken(type, ref offset, null);
-                        
-                        if(paramValue == null){
+
+                        if (paramValue == null)
+                        {
                             exception = new FormatException(SR.GetString(SR.ContentTypeInvalid));
                             break;
                         }
-        
+
                         parameters.Add(paramAttribute, paramValue);
                     }
                 }
                 parameters.IsChanged = false;
             }
-            catch(FormatException){
+            catch (FormatException)
+            {
                 throw new FormatException(SR.GetString(SR.ContentTypeInvalid));
             }
 
-            if(exception != null){
+            if (exception != null)
+            {
                 throw new FormatException(SR.GetString(SR.ContentTypeInvalid));
             }
         }

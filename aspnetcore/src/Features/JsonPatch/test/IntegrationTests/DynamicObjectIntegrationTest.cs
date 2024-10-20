@@ -17,17 +17,25 @@ public class DynamicObjectIntegrationTest
         dynamicTestObject.Nested = new NestedObject();
         dynamicTestObject.Nested.DynamicProperty = new DynamicTestObject();
         dynamicTestObject.Nested.DynamicProperty.InBetweenFirst = new DynamicTestObject();
-        dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond = new DynamicTestObject();
-        dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond.StringProperty = "A";
+        dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond =
+            new DynamicTestObject();
+        dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond.StringProperty =
+            "A";
 
         var patchDocument = new JsonPatchDocument();
-        patchDocument.Add("/Nested/DynamicProperty/InBetweenFirst/InBetweenSecond/StringProperty", "B");
+        patchDocument.Add(
+            "/Nested/DynamicProperty/InBetweenFirst/InBetweenSecond/StringProperty",
+            "B"
+        );
 
         // Act
         patchDocument.ApplyTo(dynamicTestObject);
 
         // Assert
-        Assert.Equal("B", dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond.StringProperty);
+        Assert.Equal(
+            "B",
+            dynamicTestObject.Nested.DynamicProperty.InBetweenFirst.InBetweenSecond.StringProperty
+        );
     }
 
     [Fact]
@@ -48,10 +56,7 @@ public class DynamicObjectIntegrationTest
         //   member of an existing array.
 
         // Arrange
-        var nestedObject = new NestedObject()
-        {
-            DynamicProperty = new DynamicTestObject()
-        };
+        var nestedObject = new NestedObject() { DynamicProperty = new DynamicTestObject() };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Add("DynamicProperty/OtherProperty/IntProperty", 1);
@@ -63,7 +68,10 @@ public class DynamicObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The target location specified by path segment 'OtherProperty' was not found.", exception.Message);
+        Assert.Equal(
+            "The target location specified by path segment 'OtherProperty' was not found.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -76,7 +84,10 @@ public class DynamicObjectIntegrationTest
         dynamicTestObject.NestedDynamicObject.AnotherStringProperty = "B";
 
         var patchDocument = new JsonPatchDocument();
-        patchDocument.Copy("NestedDynamicObject/StringProperty", "NestedDynamicObject/AnotherStringProperty");
+        patchDocument.Copy(
+            "NestedDynamicObject/StringProperty",
+            "NestedDynamicObject/AnotherStringProperty"
+        );
 
         // Act
         patchDocument.ApplyTo(dynamicTestObject);
@@ -148,10 +159,7 @@ public class DynamicObjectIntegrationTest
     {
         // Arrange
         dynamic dynamicTestObject = new DynamicTestObject();
-        dynamicTestObject.SimpleObject = new SimpleObject()
-        {
-            StringProperty = "A"
-        };
+        dynamicTestObject.SimpleObject = new SimpleObject() { StringProperty = "A" };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Remove("Simpleobject/stringProperty");
@@ -163,7 +171,10 @@ public class DynamicObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The target location specified by path segment 'Simpleobject' was not found.", exception.Message);
+        Assert.Equal(
+            "The target location specified by path segment 'Simpleobject' was not found.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -174,13 +185,10 @@ public class DynamicObjectIntegrationTest
         dynamicTestObject.SimpleObject = new SimpleObject()
         {
             IntegerValue = 5,
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>() { 1, 2, 3 },
         };
 
-        var newObject = new SimpleObject()
-        {
-            DoubleValue = 1
-        };
+        var newObject = new SimpleObject() { DoubleValue = 1 };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Replace("SimpleObject", newObject);
@@ -215,7 +223,7 @@ public class DynamicObjectIntegrationTest
         dynamic dynamicTestObject = new DynamicTestObject();
         dynamicTestObject.Nested = new SimpleObject()
         {
-            IntegerList = new List<int>() { 1, 2, 3 }
+            IntegerList = new List<int>() { 1, 2, 3 },
         };
 
         var patchDocument = new JsonPatchDocument();
@@ -228,6 +236,9 @@ public class DynamicObjectIntegrationTest
         });
 
         // Assert
-        Assert.Equal("The current value '1' at position '0' is not equal to the test value '2'.", exception.Message);
+        Assert.Equal(
+            "The current value '1' at position '0' is not equal to the test value '2'.",
+            exception.Message
+        );
     }
 }

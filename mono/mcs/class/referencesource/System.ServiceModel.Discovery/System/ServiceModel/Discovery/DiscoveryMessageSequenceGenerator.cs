@@ -14,20 +14,25 @@ namespace System.ServiceModel.Discovery
         long instanceId;
         Uri sequenceId;
 
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         long messageNumber;
 
         public DiscoveryMessageSequenceGenerator()
-            : this(CreateInstanceId(), null)
-        {
-        }
+            : this(CreateInstanceId(), null) { }
 
         [Fx.Tag.Throws(typeof(ArgumentOutOfRangeException), "instanceId")]
         public DiscoveryMessageSequenceGenerator(long instanceId, Uri sequenceId)
         {
             if (instanceId < 0 || instanceId > UInt32.MaxValue)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("instanceId", instanceId, SR2.DiscoveryAppSequenceInstanceIdOutOfRange);
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "instanceId",
+                    instanceId,
+                    SR2.DiscoveryAppSequenceInstanceIdOutOfRange
+                );
             }
             this.instanceId = instanceId;
             this.sequenceId = sequenceId;
@@ -38,10 +43,17 @@ namespace System.ServiceModel.Discovery
             return (long)DateTime.Now.Subtract(DT1970).TotalSeconds;
         }
 
-        [Fx.Tag.InheritThrows(From = "DiscoveryMessageSequenceGenerator", FromDeclaringType = typeof(DiscoveryMessageSequenceGenerator))]
+        [Fx.Tag.InheritThrows(
+            From = "DiscoveryMessageSequenceGenerator",
+            FromDeclaringType = typeof(DiscoveryMessageSequenceGenerator)
+        )]
         public DiscoveryMessageSequence Next()
         {
-            return new DiscoveryMessageSequence(this.instanceId, this.sequenceId, Threading.Interlocked.Increment(ref this.messageNumber));
+            return new DiscoveryMessageSequence(
+                this.instanceId,
+                this.sequenceId,
+                Threading.Interlocked.Increment(ref this.messageNumber)
+            );
         }
     }
 }

@@ -101,11 +101,16 @@ public abstract class RoutePrecedenceTestsBase
         var ex = Assert.Throws<InvalidOperationException>(() =>
         {
             // Arrange & Act
-            ComputeGenerated("{a}/{b}/{c}/{d}/{e}/{f}/{g}/{h}/{i}/{j}/{k}/{l}/{m}/{n}/{o}/{p}/{q}/{r}/{s}/{t}/{u}/{v}/{w}/{x}/{y}/{z}/{a2}/{b2}/{b3}");
+            ComputeGenerated(
+                "{a}/{b}/{c}/{d}/{e}/{f}/{g}/{h}/{i}/{j}/{k}/{l}/{m}/{n}/{o}/{p}/{q}/{r}/{s}/{t}/{u}/{v}/{w}/{x}/{y}/{z}/{a2}/{b2}/{b3}"
+            );
         });
 
         // Assert
-        Assert.Equal("Route exceeds the maximum number of allowed segments of 28 and is unable to be processed.", ex.Message);
+        Assert.Equal(
+            "Route exceeds the maximum number of allowed segments of 28 and is unable to be processed.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -114,11 +119,16 @@ public abstract class RoutePrecedenceTestsBase
         var ex = Assert.Throws<InvalidOperationException>(() =>
         {
             // Arrange & Act
-            ComputeMatched("{a}/{b}/{c}/{d}/{e}/{f}/{g}/{h}/{i}/{j}/{k}/{l}/{m}/{n}/{o}/{p}/{q}/{r}/{s}/{t}/{u}/{v}/{w}/{x}/{y}/{z}/{a2}/{b2}/{b3}");
+            ComputeMatched(
+                "{a}/{b}/{c}/{d}/{e}/{f}/{g}/{h}/{i}/{j}/{k}/{l}/{m}/{n}/{o}/{p}/{q}/{r}/{s}/{t}/{u}/{v}/{w}/{x}/{y}/{z}/{a2}/{b2}/{b3}"
+            );
         });
 
         // Assert
-        Assert.Equal("Route exceeds the maximum number of allowed segments of 28 and is unable to be processed.", ex.Message);
+        Assert.Equal(
+            "Route exceeds the maximum number of allowed segments of 28 and is unable to be processed.",
+            ex.Message
+        );
     }
 
     protected abstract decimal ComputeMatched(string template);

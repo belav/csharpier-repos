@@ -16,24 +16,26 @@ public class ModelDescriptorTests
     {
         var descriptor = ModelDescriptor.FromType<ClassWithMultiLetterSetters>();
 
-        descriptor.PropertyDescriptors
-                  .Select(p => p.ValueName)
-                  .Should()
-                  .BeEquivalentTo(
-                      nameof(ClassWithMultiLetterSetters.BoolOption),
-                      nameof(ClassWithMultiLetterSetters.IntOption),
-                      nameof(ClassWithMultiLetterSetters.StringOption));
+        descriptor
+            .PropertyDescriptors.Select(p => p.ValueName)
+            .Should()
+            .BeEquivalentTo(
+                nameof(ClassWithMultiLetterSetters.BoolOption),
+                nameof(ClassWithMultiLetterSetters.IntOption),
+                nameof(ClassWithMultiLetterSetters.StringOption)
+            );
     }
 
     [Fact]
     public void Model_descriptor_describes_the_constructor_parameters_of_the_model_type()
     {
-        var descriptor = ModelDescriptor.FromType<ClassWithSettersAndCtorParametersWithDifferentNames>();
+        var descriptor =
+            ModelDescriptor.FromType<ClassWithSettersAndCtorParametersWithDifferentNames>();
 
-        descriptor.ConstructorDescriptors
-                  .SelectMany(p => p.ParameterDescriptors)
-                  .Select(p => p.ValueName)
-                  .Should()
-                  .BeEquivalentSequenceTo("i", "s", "b");
+        descriptor
+            .ConstructorDescriptors.SelectMany(p => p.ParameterDescriptors)
+            .Select(p => p.ValueName)
+            .Should()
+            .BeEquivalentSequenceTo("i", "s", "b");
     }
 }

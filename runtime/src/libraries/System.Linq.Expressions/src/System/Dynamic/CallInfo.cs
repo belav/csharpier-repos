@@ -36,9 +36,7 @@ namespace System.Dynamic
         /// <param name="argNames">The argument names.</param>
         /// <returns>The new <see cref="CallInfo"/> instance.</returns>
         public CallInfo(int argCount, params string[] argNames)
-            : this(argCount, (IEnumerable<string>)argNames)
-        {
-        }
+            : this(argCount, (IEnumerable<string>)argNames) { }
 
         /// <summary>
         /// Creates a new <see cref="CallInfo"/> that represents arguments in the dynamic binding process.
@@ -52,7 +50,8 @@ namespace System.Dynamic
 
             var argNameCol = argNames.ToReadOnly();
 
-            if (argCount < argNameCol.Count) throw System.Linq.Expressions.Error.ArgCntMustBeGreaterThanNameCnt();
+            if (argCount < argNameCol.Count)
+                throw System.Linq.Expressions.Error.ArgCntMustBeGreaterThanNameCnt();
             ContractUtils.RequiresNotNullItems(argNameCol, nameof(argNames));
 
             ArgumentCount = argCount;
@@ -85,7 +84,9 @@ namespace System.Dynamic
         /// <returns>true if the specified instance is equal to the current one otherwise, false.</returns>
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
-            return obj is CallInfo other && ArgumentCount == other.ArgumentCount && ArgumentNames.ListEquals(other.ArgumentNames);
+            return obj is CallInfo other
+                && ArgumentCount == other.ArgumentCount
+                && ArgumentNames.ListEquals(other.ArgumentNames);
         }
     }
 }

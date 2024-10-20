@@ -11,7 +11,6 @@ public class ForbiddenActionTests
     [Fact]
     public void Forbidden_Verify403IsInStatusCode()
     {
-
         var context = new RewriteContext { HttpContext = new DefaultHttpContext() };
         var action = new ForbiddenAction();
 

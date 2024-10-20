@@ -14,19 +14,14 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     // Note: GetInnerXml is protected in XmlDsigEnvelopedSignatureTransform making it
     // difficult to test properly. This class "open it up" :-)
     public class UnprotectedXmlDsigEnvelopedSignatureTransform : XmlDsigEnvelopedSignatureTransform
     {
-        public UnprotectedXmlDsigEnvelopedSignatureTransform()
-        {
-        }
+        public UnprotectedXmlDsigEnvelopedSignatureTransform() { }
 
         public UnprotectedXmlDsigEnvelopedSignatureTransform(bool includeComments)
-            : base(includeComments)
-        {
-        }
+            : base(includeComments) { }
 
         public XmlNodeList UnprotectedGetInnerXml()
         {
@@ -60,8 +55,10 @@ namespace System.Security.Cryptography.Xml.Tests
 
         void CheckProperties(XmlDsigEnvelopedSignatureTransform transform)
         {
-            Assert.Equal("http://www.w3.org/2000/09/xmldsig#enveloped-signature",
-                transform.Algorithm);
+            Assert.Equal(
+                "http://www.w3.org/2000/09/xmldsig#enveloped-signature",
+                transform.Algorithm
+            );
 
             Type[] input = transform.InputTypes;
             Assert.Equal(3, input.Length);
@@ -115,7 +112,8 @@ namespace System.Security.Cryptography.Xml.Tests
 
         private XmlDocument GetDoc()
         {
-            string dsig = "<Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\" /><SignatureMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#dsa-sha1\" /><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\" /></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#sha1\" /><DigestValue>fdy6S2NLpnT4fMdokUHSHsmpcvo=</DigestValue></Reference></Signature>";
+            string dsig =
+                "<Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\" /><SignatureMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#dsa-sha1\" /><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\" /></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#sha1\" /><DigestValue>fdy6S2NLpnT4fMdokUHSHsmpcvo=</DigestValue></Reference></Signature>";
             string test = "<Envelope> " + dsig + " </Envelope>";
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(test);

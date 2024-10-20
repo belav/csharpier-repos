@@ -1,57 +1,51 @@
 using System;
-using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 public class C
 {
-	public static void TestA ([Optional][DefaultParameterValue (1)] int u)
-	{
-	}
+    public static void TestA([Optional] [DefaultParameterValue(1)] int u) { }
 
-	public static void TestB (long u = 12)
-	{
-	}
-	
-	public static void TestC (decimal d = decimal.MaxValue)
-	{
-	}
+    public static void TestB(long u = 12) { }
 
-	public static int Main ()
-	{
-		ParameterInfo[] info = typeof (C).GetMethod ("TestA").GetParameters ();
+    public static void TestC(decimal d = decimal.MaxValue) { }
 
-		if (info[0].DefaultValue.GetType () != typeof (int))
-			return 1;
+    public static int Main()
+    {
+        ParameterInfo[] info = typeof(C).GetMethod("TestA").GetParameters();
 
-		if ((int) info[0].DefaultValue != 1)
-			return 2;
+        if (info[0].DefaultValue.GetType() != typeof(int))
+            return 1;
 
-		if (!info[0].IsOptional)
-			return 3;
+        if ((int)info[0].DefaultValue != 1)
+            return 2;
 
-		info = typeof (C).GetMethod ("TestB").GetParameters ();
+        if (!info[0].IsOptional)
+            return 3;
 
-		if (info[0].DefaultValue.GetType () != typeof (long))
-			return 11;
+        info = typeof(C).GetMethod("TestB").GetParameters();
 
-		if ((long) info[0].DefaultValue != 12)
-			return 12;
+        if (info[0].DefaultValue.GetType() != typeof(long))
+            return 11;
 
-		if (!info[0].IsOptional)
-			return 13;
+        if ((long)info[0].DefaultValue != 12)
+            return 12;
 
-		info = typeof (C).GetMethod ("TestC").GetParameters ();
+        if (!info[0].IsOptional)
+            return 13;
 
-		if (info[0].DefaultValue.GetType () != typeof (decimal))
-			return 21;
+        info = typeof(C).GetMethod("TestC").GetParameters();
 
-		if ((decimal) info[0].DefaultValue != decimal.MaxValue)
-			return 22;
+        if (info[0].DefaultValue.GetType() != typeof(decimal))
+            return 21;
 
-		if (!info[0].IsOptional)
-			return 23;
+        if ((decimal)info[0].DefaultValue != decimal.MaxValue)
+            return 22;
 
-		Console.WriteLine ("ok");
-		return 0;
-	}
+        if (!info[0].IsOptional)
+            return 23;
+
+        Console.WriteLine("ok");
+        return 0;
+    }
 }

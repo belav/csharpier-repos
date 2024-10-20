@@ -19,7 +19,10 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_PropertyDescriptor_ListSortDirection_TestData))]
-        public void Ctor_PropertyDescriptor_ListSortDirection(PropertyDescriptor property, ListSortDirection direction)
+        public void Ctor_PropertyDescriptor_ListSortDirection(
+            PropertyDescriptor property,
+            ListSortDirection direction
+        )
         {
             var sortDescription = new ListSortDescription(property, direction);
             Assert.Same(property, sortDescription.PropertyDescriptor);

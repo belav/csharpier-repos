@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// that must be emitted in the compiler generated
     /// PrivateImplementationDetails class
     /// </summary>
-    internal abstract class SynthesizedGlobalMethodSymbol : MethodSymbol, ISynthesizedGlobalMethodSymbol
+    internal abstract class SynthesizedGlobalMethodSymbol
+        : MethodSymbol,
+            ISynthesizedGlobalMethodSymbol
     {
         private readonly SynthesizedPrivateImplementationDetailsType _privateImplType;
         private TypeSymbol _returnType;
@@ -26,7 +28,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private ImmutableArray<TypeParameterSymbol> _typeParameters;
         private readonly string _name;
 
-        internal SynthesizedGlobalMethodSymbol(SynthesizedPrivateImplementationDetailsType privateImplType, string name)
+        internal SynthesizedGlobalMethodSymbol(
+            SynthesizedPrivateImplementationDetailsType privateImplType,
+            string name
+        )
         {
             Debug.Assert(privateImplType is not null);
             Debug.Assert(name != null);
@@ -35,7 +40,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _name = name;
         }
 
-        internal SynthesizedGlobalMethodSymbol(SynthesizedPrivateImplementationDetailsType privateImplType, TypeSymbol returnType, string name)
+        internal SynthesizedGlobalMethodSymbol(
+            SynthesizedPrivateImplementationDetailsType privateImplType,
+            TypeSymbol returnType,
+            string name
+        )
             : this(privateImplType, name)
         {
             Debug.Assert((object)returnType != null);
@@ -81,10 +90,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override NamedTypeSymbol ContainingType
         {
-            get
-            {
-                return _privateImplType;
-            }
+            get { return _privateImplType; }
         }
 
         public PrivateImplementationDetails ContainingPrivateImplementationDetailsType
@@ -117,9 +123,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return null;
         }
 
-        public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         public sealed override bool AreLocalsZeroed => ContainingModule.AreLocalsZeroed;
 
@@ -143,7 +151,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return null; }
         }
 
-        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(bool forceComplete) => null;
+        internal sealed override UnmanagedCallersOnlyAttributeData GetUnmanagedCallersOnlyAttributeData(
+            bool forceComplete
+        ) => null;
 
         internal sealed override ImmutableArray<string> GetAppliedConditionalSymbols()
         {
@@ -159,7 +169,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                Debug.Assert(!_typeParameters.IsDefault, $"Expected {nameof(SetTypeParameters)} prior to accessing this property.");
+                Debug.Assert(
+                    !_typeParameters.IsDefault,
+                    $"Expected {nameof(SetTypeParameters)} prior to accessing this property."
+                );
                 if (_typeParameters.IsDefault)
                 {
                     return ImmutableArray<TypeParameterSymbol>.Empty;
@@ -173,7 +186,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                Debug.Assert(!_parameters.IsDefault, $"Expected {nameof(SetParameters)} prior to accessing this property.");
+                Debug.Assert(
+                    !_parameters.IsDefault,
+                    $"Expected {nameof(SetParameters)} prior to accessing this property."
+                );
                 if (_parameters.IsDefault)
                 {
                     return ImmutableArray<ParameterSymbol>.Empty;
@@ -195,10 +211,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         public override RefKind RefKind
@@ -286,22 +299,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return false; }
         }
 
-        internal sealed override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
+        internal sealed override bool IsMetadataNewSlot(
+            bool ignoreInterfaceImplementationChanges = false
+        )
         {
             return false;
         }
 
-        internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
+        internal sealed override bool IsMetadataVirtual(
+            bool ignoreInterfaceImplementationChanges = false
+        )
         {
             return false;
         }
 
         internal override bool IsMetadataFinal
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsExtensionMethod
@@ -341,7 +355,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return true; }
         }
 
-        internal abstract override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics);
+        internal abstract override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        );
 
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
         {
@@ -350,11 +367,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal sealed override bool IsNullableAnalysisEnabled() => false;
 
-        protected sealed override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable();
+        protected sealed override bool HasSetsRequiredMembersImpl =>
+            throw ExceptionUtilities.Unreachable();
 
         internal sealed override bool HasUnscopedRefAttribute => false;
 
-        internal sealed override bool UseUpdatedEscapeRules => ContainingModule.UseUpdatedEscapeRules;
+        internal sealed override bool UseUpdatedEscapeRules =>
+            ContainingModule.UseUpdatedEscapeRules;
 
         internal sealed override bool HasAsyncMethodBuilderAttribute(out TypeSymbol builderArgument)
         {

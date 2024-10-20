@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,35 +30,42 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Dispatcher
 {
-	internal class SingletonInstanceContextProvider : IInstanceContextProvider
-	{
-		InstanceContext ctx;
+    internal class SingletonInstanceContextProvider : IInstanceContextProvider
+    {
+        InstanceContext ctx;
 
-		public SingletonInstanceContextProvider (InstanceContext context)
-		{
-			this.ctx = context;
-		}
+        public SingletonInstanceContextProvider(InstanceContext context)
+        {
+            this.ctx = context;
+        }
 
-		public InstanceContext GetExistingInstanceContext (Message message, IContextChannel channel)
-		{
-			return ctx;
-		}
+        public InstanceContext GetExistingInstanceContext(Message message, IContextChannel channel)
+        {
+            return ctx;
+        }
 
-		public void InitializeInstanceContext (InstanceContext instanceContext, Message message, IContextChannel channel)
-		{
-			// FIXME: what to do here?
-		}
+        public void InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        )
+        {
+            // FIXME: what to do here?
+        }
 
-		public bool IsIdle (InstanceContext instanceContext)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        public bool IsIdle(InstanceContext instanceContext)
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		public void NotifyIdle (InstanceContextIdleCallback callback, InstanceContext instanceContext)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
-	}
+        public void NotifyIdle(
+            InstanceContextIdleCallback callback,
+            InstanceContext instanceContext
+        )
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
+    }
 }

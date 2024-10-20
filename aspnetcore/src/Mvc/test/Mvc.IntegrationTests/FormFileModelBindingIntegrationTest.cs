@@ -32,16 +32,15 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address.Zip", "12345");
-                UpdateRequest(request, data, "Address.File");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address.Zip", "12345");
+            UpdateRequest(request, data, "Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -80,15 +79,14 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data, "Address.File");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data, "Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -119,7 +117,8 @@ public class FormFileModelBindingIntegrationTest
                 Assert.Null(value.RawValue);
                 Assert.Empty(value.Errors);
                 Assert.Equal(ModelValidationState.Valid, value.ValidationState);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -131,15 +130,14 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data, "Parameter1.Address.File");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data, "Parameter1.Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -155,7 +153,10 @@ public class FormFileModelBindingIntegrationTest
         var boundPerson = Assert.IsType<Person>(modelBindingResult.Model);
         Assert.NotNull(boundPerson.Address);
         var file = Assert.IsAssignableFrom<IFormFile>(boundPerson.Address.File);
-        Assert.Equal("form-data; name=Parameter1.Address.File; filename=text.txt", file.ContentDisposition);
+        Assert.Equal(
+            "form-data; name=Parameter1.Address.File; filename=text.txt",
+            file.ContentDisposition
+        );
         using var reader = new StreamReader(boundPerson.Address.File.OpenReadStream());
         Assert.Equal(data, reader.ReadToEnd());
 
@@ -170,7 +171,8 @@ public class FormFileModelBindingIntegrationTest
                 Assert.Null(value.RawValue);
                 Assert.Empty(value.Errors);
                 Assert.Equal(ModelValidationState.Valid, value.ValidationState);
-            });
+            }
+        );
     }
 
     private class Group
@@ -189,16 +191,15 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Group)
+            ParameterType = typeof(Group),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Person.Address.Zip", "98056");
-                UpdateRequest(request, data, "Person.Address.File");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Person.Address.Zip", "98056");
+            UpdateRequest(request, data, "Person.Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -217,7 +218,10 @@ public class FormFileModelBindingIntegrationTest
         Assert.NotNull(boundPerson);
         Assert.NotNull(boundPerson.Address);
         var file = Assert.IsAssignableFrom<IFormFile>(boundPerson.Address.File);
-        Assert.Equal("form-data; name=Person.Address.File; filename=text.txt", file.ContentDisposition);
+        Assert.Equal(
+            "form-data; name=Person.Address.File; filename=text.txt",
+            file.ContentDisposition
+        );
         using var reader = new StreamReader(boundPerson.Address.File.OpenReadStream());
         Assert.Equal(data, reader.ReadToEnd());
         Assert.Equal(98056, boundPerson.Address.Zip);
@@ -241,7 +245,8 @@ public class FormFileModelBindingIntegrationTest
                 Assert.Equal("98056", value.RawValue);
                 Assert.Empty(value.Errors);
                 Assert.Equal(ModelValidationState.Valid, value.ValidationState);
-            });
+            }
+        );
     }
 
     private class Fleet
@@ -276,16 +281,15 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "fleet",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Fleet)
+            ParameterType = typeof(Fleet),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("fleet.Garage.Name", "WestEnd");
-                UpdateRequest(request, data, "fleet.Garage.Vehicles[0].Spec");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("fleet.Garage.Name", "WestEnd");
+            UpdateRequest(request, data, "fleet.Garage.Vehicles[0].Spec");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -329,7 +333,8 @@ public class FormFileModelBindingIntegrationTest
                 var (key, value) = kvp;
                 Assert.Equal("fleet.Garage.Vehicles[0].Spec", kvp.Key);
                 Assert.Equal(ModelValidationState.Valid, value.ValidationState);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -341,16 +346,15 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "fleet",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Fleet)
+            ParameterType = typeof(Fleet),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("fleet.Garage.Name", "WestEnd");
-                UpdateRequest(request, data, "fleet.Garage.Vehicles[0].BackupVehicle.Spec");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("fleet.Garage.Name", "WestEnd");
+            UpdateRequest(request, data, "fleet.Garage.Vehicles[0].BackupVehicle.Spec");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -395,7 +399,8 @@ public class FormFileModelBindingIntegrationTest
                 var (key, value) = kvp;
                 Assert.Equal("fleet.Garage.Vehicles[0].BackupVehicle.Spec", kvp.Key);
                 Assert.Equal(ModelValidationState.Valid, value.ValidationState);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -407,16 +412,15 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Group)
+            ParameterType = typeof(Group),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("GroupName", "TestGroup");
-                UpdateRequest(request, data, "Person.Address.File");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("GroupName", "TestGroup");
+            UpdateRequest(request, data, "Person.Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -435,7 +439,10 @@ public class FormFileModelBindingIntegrationTest
         Assert.NotNull(boundPerson);
         Assert.NotNull(boundPerson.Address);
         var file = Assert.IsAssignableFrom<IFormFile>(boundPerson.Address.File);
-        Assert.Equal("form-data; name=Person.Address.File; filename=text.txt", file.ContentDisposition);
+        Assert.Equal(
+            "form-data; name=Person.Address.File; filename=text.txt",
+            file.ContentDisposition
+        );
         using var reader = new StreamReader(boundPerson.Address.File.OpenReadStream());
         Assert.Equal(data, reader.ReadToEnd());
         Assert.Equal(0, boundPerson.Address.Zip);
@@ -459,7 +466,8 @@ public class FormFileModelBindingIntegrationTest
                 Assert.Null(value.RawValue);
                 Assert.Empty(value.Errors);
                 Assert.Equal(ModelValidationState.Valid, value.ValidationState);
-            });
+            }
+        );
     }
 
     private class ListContainer1
@@ -481,8 +489,9 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "some data";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request => UpdateRequest(request, data, "files"));
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            UpdateRequest(request, data, "files")
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -526,8 +535,9 @@ public class FormFileModelBindingIntegrationTest
             ParameterType = typeof(ListContainer1),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request => UpdateRequest(request, data: null, name: null));
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            UpdateRequest(request, data: null, name: null)
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -549,11 +559,30 @@ public class FormFileModelBindingIntegrationTest
     private class ListContainer2
     {
         [ModelBinder(Name = "files")]
-        public List<IFormFile> ListProperty { get; } = new List<IFormFile>
+        public List<IFormFile> ListProperty { get; } =
+            new List<IFormFile>
             {
-                new FormFile(new MemoryStream(), baseStreamOffset: 0, length: 0, name: "file", fileName: "file1"),
-                new FormFile(new MemoryStream(), baseStreamOffset: 0, length: 0, name: "file", fileName: "file2"),
-                new FormFile(new MemoryStream(), baseStreamOffset: 0, length: 0, name: "file", fileName: "file3"),
+                new FormFile(
+                    new MemoryStream(),
+                    baseStreamOffset: 0,
+                    length: 0,
+                    name: "file",
+                    fileName: "file1"
+                ),
+                new FormFile(
+                    new MemoryStream(),
+                    baseStreamOffset: 0,
+                    length: 0,
+                    name: "file",
+                    fileName: "file2"
+                ),
+                new FormFile(
+                    new MemoryStream(),
+                    baseStreamOffset: 0,
+                    length: 0,
+                    name: "file",
+                    fileName: "file3"
+                ),
             };
     }
 
@@ -570,8 +599,9 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "some data";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request => UpdateRequest(request, data, "files"));
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            UpdateRequest(request, data, "files")
+        );
         var modelState = testContext.ModelState;
 
         // Act
@@ -616,15 +646,14 @@ public class FormFileModelBindingIntegrationTest
                 // Setting a custom parameter prevents it from falling back to an empty prefix.
                 BinderModelName = "CustomParameter",
             },
-            ParameterType = typeof(IFormFile)
+            ParameterType = typeof(IFormFile),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data, "CustomParameter");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data, "CustomParameter");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -660,17 +689,15 @@ public class FormFileModelBindingIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "CustomParameter",
-            },
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
 
-            ParameterType = typeof(IFormFile)
+            ParameterType = typeof(IFormFile),
         };
 
         // No data is passed.
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request => UpdateRequest(request, data: null, name: null));
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+            UpdateRequest(request, data: null, name: null)
+        );
 
         var modelState = testContext.ModelState;
 
@@ -701,16 +728,15 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "p",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Car1)
+            ParameterType = typeof(Car1),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("p.Name", "Accord");
-                UpdateRequest(request, data, "p.Specs");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("p.Name", "Accord");
+            UpdateRequest(request, data, "p.Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -760,17 +786,16 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "house",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(House)
+            ParameterType = typeof(House),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("house.Garage.Cars[0].Name", "Accord");
-                UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
-                AddFormFile(request, data + 2, "house.Garage.Cars[1].Specs");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("house.Garage.Cars[0].Name", "Accord");
+            UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
+            AddFormFile(request, data + 2, "house.Garage.Cars[1].Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -803,7 +828,8 @@ public class FormFileModelBindingIntegrationTest
                 var file = Assert.Single(car.Specs);
                 using var reader = new StreamReader(file.OpenReadStream());
                 Assert.Equal(data + 2, reader.ReadToEnd());
-            });
+            }
+        );
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -826,16 +852,15 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "house",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(House)
+            ParameterType = typeof(House),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
-                AddFormFile(request, data + 2, "house.Garage.Cars[1].Specs");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
+            AddFormFile(request, data + 2, "house.Garage.Cars[1].Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -868,7 +893,8 @@ public class FormFileModelBindingIntegrationTest
                 var file = Assert.Single(car.Specs);
                 using var reader = new StreamReader(file.OpenReadStream());
                 Assert.Equal(data + 2, reader.ReadToEnd());
-            });
+            }
+        );
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -887,15 +913,14 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "house",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(House)
+            ParameterType = typeof(House),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "house.Garage.Cars[800].Specs");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "house.Garage.Cars[800].Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -926,16 +951,15 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "house",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(House)
+            ParameterType = typeof(House),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
-                AddFormFile(request, data + 2, "house.Garage.Cars[0].Specs");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
+            AddFormFile(request, data + 2, "house.Garage.Cars[0].Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -962,15 +986,15 @@ public class FormFileModelBindingIntegrationTest
                     {
                         using var reader = new StreamReader(file.OpenReadStream());
                         Assert.Equal(data + 1, reader.ReadToEnd());
-
                     },
                     file =>
                     {
                         using var reader = new StreamReader(file.OpenReadStream());
                         Assert.Equal(data + 2, reader.ReadToEnd());
-
-                    });
-            });
+                    }
+                );
+            }
+        );
 
         // ModelState
         Assert.True(modelState.IsValid);
@@ -988,16 +1012,15 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "p",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Car1)
+            ParameterType = typeof(Car1),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("p.Name", "Accord");
-                UpdateRequest(request, data, "p.Specs");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("p.Name", "Accord");
+            UpdateRequest(request, data, "p.Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1042,17 +1065,16 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "p",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(MultiDimensionalFormFileContainer)
+            ParameterType = typeof(MultiDimensionalFormFileContainer),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "FormFiles[0]");
-                AddFormFile(request, data + 2, "FormFiles[1]");
-                AddFormFile(request, data + 3, "FormFiles[1]");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "FormFiles[0]");
+            AddFormFile(request, data + 2, "FormFiles[1]");
+            AddFormFile(request, data + 3, "FormFiles[1]");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1071,17 +1093,17 @@ public class FormFileModelBindingIntegrationTest
             container.FormFiles,
             item =>
             {
-                Assert.Collection(
-                    item,
-                    file => Assert.Equal(data + 1, ReadFormFile(file)));
+                Assert.Collection(item, file => Assert.Equal(data + 1, ReadFormFile(file)));
             },
             item =>
             {
                 Assert.Collection(
                     item,
                     file => Assert.Equal(data + 2, ReadFormFile(file)),
-                    file => Assert.Equal(data + 3, ReadFormFile(file)));
-            });
+                    file => Assert.Equal(data + 3, ReadFormFile(file))
+                );
+            }
+        );
     }
 
     [Fact]
@@ -1093,17 +1115,16 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "p",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(MultiDimensionalFormFileContainer)
+            ParameterType = typeof(MultiDimensionalFormFileContainer),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "FormFiles[0][0]");
-                AddFormFile(request, data + 2, "FormFiles[1][0]");
-                AddFormFile(request, data + 3, "FormFiles[1][0]");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "FormFiles[0][0]");
+            AddFormFile(request, data + 2, "FormFiles[1][0]");
+            AddFormFile(request, data + 3, "FormFiles[1][0]");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1138,17 +1159,16 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "p",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(MultiDimensionalFormFileContainerLevel2)
+            ParameterType = typeof(MultiDimensionalFormFileContainerLevel2),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "p.Level1.Container.FormFiles[0]");
-                AddFormFile(request, data + 2, "p.Level1.Container.FormFiles[1]");
-                AddFormFile(request, data + 3, "p.Level1.Container.FormFiles[1]");
-            });
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "p.Level1.Container.FormFiles[0]");
+            AddFormFile(request, data + 2, "p.Level1.Container.FormFiles[1]");
+            AddFormFile(request, data + 3, "p.Level1.Container.FormFiles[1]");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1161,7 +1181,9 @@ public class FormFileModelBindingIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         // Model
-        var level2 = Assert.IsType<MultiDimensionalFormFileContainerLevel2>(modelBindingResult.Model);
+        var level2 = Assert.IsType<MultiDimensionalFormFileContainerLevel2>(
+            modelBindingResult.Model
+        );
         Assert.NotNull(level2.Level1);
         var container = level2.Level1.Container;
         Assert.NotNull(container);
@@ -1170,17 +1192,17 @@ public class FormFileModelBindingIntegrationTest
             container.FormFiles,
             item =>
             {
-                Assert.Collection(
-                    item,
-                    file => Assert.Equal(data + 1, ReadFormFile(file)));
+                Assert.Collection(item, file => Assert.Equal(data + 1, ReadFormFile(file)));
             },
             item =>
             {
                 Assert.Collection(
                     item,
                     file => Assert.Equal(data + 2, ReadFormFile(file)),
-                    file => Assert.Equal(data + 3, ReadFormFile(file)));
-            });
+                    file => Assert.Equal(data + 3, ReadFormFile(file))
+                );
+            }
+        );
     }
 
     public class DictionaryContainer
@@ -1197,22 +1219,23 @@ public class FormFileModelBindingIntegrationTest
         {
             Name = "p",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(DictionaryContainer)
+            ParameterType = typeof(DictionaryContainer),
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create(new Dictionary<string, string>
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create(
+                new Dictionary<string, string>
                 {
-                        { "p.Dictionary[0].Key", "key0" },
-                        { "p.Dictionary[1].Key", "key1" },
-                        { "p.Dictionary[4000].Key", "key1" },
-                });
-                UpdateRequest(request, data + 1, "p.Dictionary[0].Value");
-                AddFormFile(request, data + 2, "p.Dictionary[1].Value");
-            });
+                    { "p.Dictionary[0].Key", "key0" },
+                    { "p.Dictionary[1].Key", "key1" },
+                    { "p.Dictionary[4000].Key", "key1" },
+                }
+            );
+            UpdateRequest(request, data + 1, "p.Dictionary[0].Value");
+            AddFormFile(request, data + 2, "p.Dictionary[1].Value");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1238,7 +1261,8 @@ public class FormFileModelBindingIntegrationTest
             {
                 Assert.Equal("key1", kvp.Key);
                 Assert.Equal(data + 2, ReadFormFile(kvp.Value));
-            });
+            }
+        );
     }
 
     private static string ReadFormFile(IFormFile file)
@@ -1249,10 +1273,14 @@ public class FormFileModelBindingIntegrationTest
 
     private void UpdateRequest(HttpRequest request, string data, string name)
     {
-        var formCollection = new FormCollection(new Dictionary<string, StringValues>(), new FormFileCollection());
+        var formCollection = new FormCollection(
+            new Dictionary<string, StringValues>(),
+            new FormFileCollection()
+        );
         request.Form = formCollection;
 
-        request.ContentType = "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
+        request.ContentType =
+            "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
 
         AddFormFile(request, data, name);
     }
@@ -1271,9 +1299,8 @@ public class FormFileModelBindingIntegrationTest
 
         var fileCollection = (FormFileCollection)request.Form.Files;
         var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(data));
-        fileCollection.Add(new FormFile(memoryStream, 0, data.Length, name, fileName)
-        {
-            Headers = request.Headers
-        });
+        fileCollection.Add(
+            new FormFile(memoryStream, 0, data.Length, name, fileName) { Headers = request.Headers }
+        );
     }
 }

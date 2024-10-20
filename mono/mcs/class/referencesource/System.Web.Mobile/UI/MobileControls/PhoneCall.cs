@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="PhoneCall.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -10,16 +10,15 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Drawing;
+using System.Security.Permissions;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile PhoneCall class.
      * The PhoneCall control is for initiating a voice call on a cell phone.
@@ -28,16 +27,26 @@ namespace System.Web.UI.MobileControls
      */
     /// <include file='doc\PhoneCall.uex' path='docs/doc[@for="PhoneCall"]/*' />
     [
-        DataBindingHandler("System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign),
+        DataBindingHandler(
+            "System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign
+        ),
         DefaultProperty("Text"),
         Designer(typeof(System.Web.UI.Design.MobileControls.PhoneCallDesigner)),
         DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerLabelAdapter)),
         ToolboxData("<{0}:PhoneCall runat=\"server\">PhoneCall</{0}:PhoneCall>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class PhoneCall : TextControl, IPostBackEventHandler
     {
         /// <include file='doc\PhoneCall.uex' path='docs/doc[@for="PhoneCall.PhoneNumber"]/*' />
@@ -51,8 +60,8 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["PhoneNumber"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["PhoneNumber"];
+                return ((s != null) ? s : String.Empty);
             }
             set
             {
@@ -60,17 +69,21 @@ namespace System.Web.UI.MobileControls
 
                 // Empty string is the default value, no need to check
                 // (same as null)
-                if (!String.IsNullOrEmpty(value)) {
+                if (!String.IsNullOrEmpty(value))
+                {
                     // phone number format checking using RegularExpression
                     Match match = Regex.Match(value, PhoneNumberFormat);
 
                     // we are looking for an exact match, not just a search hit
-                    if (!match.Success || match.Index != 0 ||
-                        match.Length != value.Length)
+                    if (!match.Success || match.Index != 0 || match.Length != value.Length)
                     {
                         throw new ArgumentException(
-                            SR.GetString(SR.PhoneCall_InvalidPhoneNumberFormat,
-                                         "PhoneNumber", value));
+                            SR.GetString(
+                                SR.PhoneCall_InvalidPhoneNumberFormat,
+                                "PhoneNumber",
+                                value
+                            )
+                        );
                     }
                 }
 
@@ -89,13 +102,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["AlternateFormat"];
-                return((s != null) ? s : "{0} {1}");
+                String s = (String)ViewState["AlternateFormat"];
+                return ((s != null) ? s : "{0} {1}");
             }
-            set
-            {
-                ViewState["AlternateFormat"] = value;
-            }
+            set { ViewState["AlternateFormat"] = value; }
         }
 
         /// <include file='doc\PhoneCall.uex' path='docs/doc[@for="PhoneCall.AlternateUrl"]/*' />
@@ -104,19 +114,18 @@ namespace System.Web.UI.MobileControls
             DefaultValue(""),
             MobileCategory(SR.Category_Navigation),
             MobileSysDescription(SR.PhoneCall_AlternateUrl),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.NavigateUrlConverter)),
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.NavigateUrlConverter)
+            ),
         ]
         public String AlternateUrl
         {
             get
             {
-                String s = (String) ViewState["AlternateUrl"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["AlternateUrl"];
+                return ((s != null) ? s : String.Empty);
             }
-            set
-            {
-                ViewState["AlternateUrl"] = value;
-            }
+            set { ViewState["AlternateUrl"] = value; }
         }
 
         /// <include file='doc\PhoneCall.uex' path='docs/doc[@for="PhoneCall.SoftkeyLabel"]/*' />
@@ -130,13 +139,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["Softkeylabel"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["Softkeylabel"];
+                return ((s != null) ? s : String.Empty);
             }
-            set
-            {
-                ViewState["Softkeylabel"] = value;
-            }
+            set { ViewState["Softkeylabel"] = value; }
         }
 
         /// <internalonly/>
@@ -153,8 +159,7 @@ namespace System.Web.UI.MobileControls
             Debug.Assert(PhoneNumber != null);
             if (PhoneNumber.Length == 0)
             {
-                throw new ArgumentException(
-                            SR.GetString(SR.PhoneCall_EmptyPhoneNumber, ID));
+                throw new ArgumentException(SR.GetString(SR.PhoneCall_EmptyPhoneNumber, ID));
             }
         }
 
@@ -175,9 +180,10 @@ namespace System.Web.UI.MobileControls
         }
 
         #region IPostBackEventHandler implementation
-        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
-        #endregion 
+        #endregion
     }
 }

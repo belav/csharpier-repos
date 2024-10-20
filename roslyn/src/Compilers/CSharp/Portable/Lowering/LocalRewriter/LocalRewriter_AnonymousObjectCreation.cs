@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class LocalRewriter
     {
-        public override BoundNode VisitAnonymousObjectCreationExpression(BoundAnonymousObjectCreationExpression node)
+        public override BoundNode VisitAnonymousObjectCreationExpression(
+            BoundAnonymousObjectCreationExpression node
+        )
         {
             // We should never encounter an interpolated string handler conversion that was implicitly inferred, because
             // there are no target types for an anonymous object creation.
@@ -31,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 defaultArguments: default(BitVector),
                 constantValueOpt: null,
                 initializerExpressionOpt: null,
-                type: node.Type);
+                type: node.Type
+            );
         }
     }
 }

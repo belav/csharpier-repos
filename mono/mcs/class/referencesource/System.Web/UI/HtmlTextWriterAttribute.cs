@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
 
     //NOTE:  do not add within the v1 region, go to the bottom of the enum and add new items in the v2 region
@@ -13,8 +14,8 @@ namespace System.Web.UI {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public enum HtmlTextWriterAttribute {
-
+    public enum HtmlTextWriterAttribute
+    {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

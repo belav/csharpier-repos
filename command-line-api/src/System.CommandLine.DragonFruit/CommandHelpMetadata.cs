@@ -11,6 +11,7 @@ namespace System.CommandLine.DragonFruit
 
         public string Name { get; set; }
 
-        public Dictionary<string, string> ParameterDescriptions { get; } = new Dictionary<string, string>();
+        public Dictionary<string, string> ParameterDescriptions { get; } =
+            new Dictionary<string, string>();
     }
 }

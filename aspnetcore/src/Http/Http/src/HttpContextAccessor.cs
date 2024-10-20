@@ -11,15 +11,13 @@ namespace Microsoft.AspNetCore.Http;
 [DebuggerDisplay("HttpContext = {HttpContext}")]
 public class HttpContextAccessor : IHttpContextAccessor
 {
-    private static readonly AsyncLocal<HttpContextHolder> _httpContextCurrent = new AsyncLocal<HttpContextHolder>();
+    private static readonly AsyncLocal<HttpContextHolder> _httpContextCurrent =
+        new AsyncLocal<HttpContextHolder>();
 
     /// <inheritdoc/>
     public HttpContext? HttpContext
     {
-        get
-        {
-            return _httpContextCurrent.Value?.Context;
-        }
+        get { return _httpContextCurrent.Value?.Context; }
         set
         {
             var holder = _httpContextCurrent.Value;

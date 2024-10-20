@@ -17,11 +17,13 @@ namespace System.Xml.Schema
             Compositor = Compositor.Redefine;
         }
 
-        [XmlElement("annotation", typeof(XmlSchemaAnnotation)),
-         XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroup)),
-         XmlElement("complexType", typeof(XmlSchemaComplexType)),
-         XmlElement("group", typeof(XmlSchemaGroup)),
-         XmlElement("simpleType", typeof(XmlSchemaSimpleType))]
+        [
+            XmlElement("annotation", typeof(XmlSchemaAnnotation)),
+            XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroup)),
+            XmlElement("complexType", typeof(XmlSchemaComplexType)),
+            XmlElement("group", typeof(XmlSchemaGroup)),
+            XmlElement("simpleType", typeof(XmlSchemaSimpleType))
+        ]
         public XmlSchemaObjectCollection Items
         {
             get { return _items; }

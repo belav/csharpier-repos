@@ -24,7 +24,8 @@ public class NullableClassCurrentProviderValueComparer<TModel, TProvider> : ICom
     /// </summary>
     public NullableClassCurrentProviderValueComparer(
         IPropertyBase property,
-        ValueConverter<TModel, TProvider> converter)
+        ValueConverter<TModel, TProvider> converter
+    )
     {
         _property = property;
         _converter = converter.ConvertToProviderExpression.Compile();
@@ -57,13 +58,9 @@ public class NullableClassCurrentProviderValueComparer<TModel, TProvider> : ICom
         var xValue = x.GetCurrentValue<TModel>(_property);
         var yValue = y.GetCurrentValue<TModel>(_property);
 
-        return xValue == null
-            && yValue == null
-                ? 0
-                : xValue == null
-                    ? -1
-                    : yValue == null
-                        ? 1
-                        : _underlyingComparer.Compare(_converter(xValue), _converter(yValue));
+        return xValue == null && yValue == null ? 0
+            : xValue == null ? -1
+            : yValue == null ? 1
+            : _underlyingComparer.Compare(_converter(xValue), _converter(yValue));
     }
 }

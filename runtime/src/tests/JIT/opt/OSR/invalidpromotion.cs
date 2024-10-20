@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Xunit;
 
-interface IFoo 
+interface IFoo
 {
     public Span<object> AsSpan();
 }
@@ -14,7 +14,7 @@ interface IFoo
 public struct ObjectSequence1 : IFoo
 {
     public object Value1;
-    
+
     public Span<object> AsSpan()
     {
         return MemoryMarshal.CreateSpan(ref Value1, 1);
@@ -39,7 +39,8 @@ public struct ObjectSequenceMany : IFoo
 public class InvalidPromotion
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static bool G<T>(int n) where T : IFoo
+    static bool G<T>(int n)
+        where T : IFoo
     {
         // OSR cannot safely promote values
         T values = default;
@@ -61,7 +62,7 @@ public class InvalidPromotion
         {
             return (indexedValues[0] == ((ObjectSequence1)(object)values).Value1);
         }
-        
+
         return false;
     }
 
@@ -71,5 +72,3 @@ public class InvalidPromotion
         return G<ObjectSequence1>(1) ? 100 : -1;
     }
 }
-
-    

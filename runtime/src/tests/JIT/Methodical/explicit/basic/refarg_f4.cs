@@ -36,8 +36,10 @@ namespace Test_refarg_f4_cs
         ~AA()
         {
             CheckFields();
-            if (self1 != null) self1.CheckFields();
-            if (self2 != null) self2.CheckFields();
+            if (self1 != null)
+                self1.CheckFields();
+            if (self2 != null)
+                self2.CheckFields();
         }
     }
 

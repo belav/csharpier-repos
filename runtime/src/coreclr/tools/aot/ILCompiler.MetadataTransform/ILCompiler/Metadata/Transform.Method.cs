@@ -3,13 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-
 using Internal.Metadata.NativeFormat.Writer;
-
 using Cts = Internal.TypeSystem;
-using Ecma = System.Reflection.Metadata;
-
 using Debug = System.Diagnostics.Debug;
+using Ecma = System.Reflection.Metadata;
 using MethodAttributes = System.Reflection.MethodAttributes;
 using MethodImplAttributes = System.Reflection.MethodImplAttributes;
 using SignatureCallingConvention = Internal.Metadata.NativeFormat.SignatureCallingConvention;
@@ -18,8 +15,10 @@ namespace ILCompiler.Metadata
 {
     internal partial class Transform<TPolicy>
     {
-        internal EntityMap<Cts.MethodDesc, MetadataRecord> _methods
-            = new EntityMap<Cts.MethodDesc, MetadataRecord>(EqualityComparer<Cts.MethodDesc>.Default);
+        internal EntityMap<Cts.MethodDesc, MetadataRecord> _methods = new EntityMap<
+            Cts.MethodDesc,
+            MetadataRecord
+        >(EqualityComparer<Cts.MethodDesc>.Default);
 
         private Action<Cts.MethodDesc, Method> _initMethodDef;
         private Action<Cts.MethodDesc, MemberReference> _initMethodRef;
@@ -46,7 +45,9 @@ namespace ILCompiler.Metadata
                 rec = HandleMethodReference(method);
             }
 
-            Debug.Assert(rec is QualifiedMethod || rec is MemberReference || rec is MethodInstantiation);
+            Debug.Assert(
+                rec is QualifiedMethod || rec is MemberReference || rec is MethodInstantiation
+            );
 
             return rec;
         }
@@ -55,7 +56,8 @@ namespace ILCompiler.Metadata
         {
             Debug.Assert(method.IsTypicalMethodDefinition);
             Debug.Assert(_policy.GeneratesMetadata(method));
-            return (Method)_methods.GetOrCreate(method, _initMethodDef ??= InitializeMethodDefinition);
+            return (Method)
+                _methods.GetOrCreate(method, _initMethodDef ??= InitializeMethodDefinition);
         }
 
         private void InitializeMethodDefinition(Cts.MethodDesc entity, Method record)
@@ -66,7 +68,9 @@ namespace ILCompiler.Metadata
             {
                 record.GenericParameters.Capacity = entity.Instantiation.Length;
                 foreach (var p in entity.Instantiation)
-                    record.GenericParameters.Add(HandleGenericParameter((Cts.GenericParameterDesc)p));
+                    record.GenericParameters.Add(
+                        HandleGenericParameter((Cts.GenericParameterDesc)p)
+                    );
             }
 
             var ecmaEntity = entity as Cts.Ecma.EcmaMethod;
@@ -89,7 +93,7 @@ namespace ILCompiler.Metadata
                     {
                         Flags = param.Attributes,
                         Name = HandleString(reader.GetString(param.Name)),
-                        Sequence = checked((ushort)param.SequenceNumber)
+                        Sequence = checked((ushort)param.SequenceNumber),
                     };
 
                     Ecma.ConstantHandle defaultValue = param.GetDefaultValue();
@@ -98,10 +102,14 @@ namespace ILCompiler.Metadata
                         paramRecord.DefaultValue = HandleConstant(ecmaEntity.Module, defaultValue);
                     }
 
-                    Ecma.CustomAttributeHandleCollection paramAttributes = param.GetCustomAttributes();
+                    Ecma.CustomAttributeHandleCollection paramAttributes =
+                        param.GetCustomAttributes();
                     if (paramAttributes.Count > 0)
                     {
-                        paramRecord.CustomAttributes = HandleCustomAttributes(ecmaEntity.Module, paramAttributes);
+                        paramRecord.CustomAttributes = HandleCustomAttributes(
+                            ecmaEntity.Module,
+                            paramAttributes
+                        );
                     }
 
                     record.Parameters.Add(paramRecord);
@@ -127,7 +135,8 @@ namespace ILCompiler.Metadata
         private MemberReference HandleMethodReference(Cts.MethodDesc method)
         {
             Debug.Assert(method.IsMethodDefinition);
-            return (MemberReference)_methods.GetOrCreate(method, _initMethodRef ??= InitializeMethodReference);
+            return (MemberReference)
+                _methods.GetOrCreate(method, _initMethodRef ??= InitializeMethodReference);
         }
 
         private void InitializeMethodReference(Cts.MethodDesc entity, MemberReference record)
@@ -139,10 +148,14 @@ namespace ILCompiler.Metadata
 
         private MethodInstantiation HandleMethodInstantiation(Cts.MethodDesc method)
         {
-            return (MethodInstantiation)_methods.GetOrCreate(method, _initMethodInst ??= InitializeMethodInstantiation);
+            return (MethodInstantiation)
+                _methods.GetOrCreate(method, _initMethodInst ??= InitializeMethodInstantiation);
         }
 
-        private void InitializeMethodInstantiation(Cts.MethodDesc entity, MethodInstantiation record)
+        private void InitializeMethodInstantiation(
+            Cts.MethodDesc entity,
+            MethodInstantiation record
+        )
         {
             Cts.InstantiatedMethod instantiation = (Cts.InstantiatedMethod)entity;
             record.Method = HandleQualifiedMethod(instantiation.GetMethodDefinition());
@@ -174,13 +187,19 @@ namespace ILCompiler.Metadata
             return result;
         }
 
-        private MethodSignature HandleMethodSignature(Cts.Ecma.EcmaModule module, Ecma.BlobHandle sigBlobHandle)
+        private MethodSignature HandleMethodSignature(
+            Cts.Ecma.EcmaModule module,
+            Ecma.BlobHandle sigBlobHandle
+        )
         {
             Ecma.BlobReader blobReader = module.MetadataReader.GetBlobReader(sigBlobHandle);
             return HandleMethodSignature(module, ref blobReader);
         }
 
-        private MethodSignature HandleMethodSignature(Cts.Ecma.EcmaModule module, ref Ecma.BlobReader blobReader)
+        private MethodSignature HandleMethodSignature(
+            Cts.Ecma.EcmaModule module,
+            ref Ecma.BlobReader blobReader
+        )
         {
             Ecma.SignatureHeader header = blobReader.ReadSignatureHeader();
 
@@ -231,12 +250,25 @@ namespace ILCompiler.Metadata
                 throw new NotImplementedException();
         }
 
-        private static SignatureCallingConvention GetSignatureCallingConvention(Cts.MethodSignature signature)
+        private static SignatureCallingConvention GetSignatureCallingConvention(
+            Cts.MethodSignature signature
+        )
         {
-            Debug.Assert((int)Cts.MethodSignatureFlags.UnmanagedCallingConventionCdecl == (int)SignatureCallingConvention.Cdecl);
-            Debug.Assert((int)Cts.MethodSignatureFlags.UnmanagedCallingConventionThisCall == (int)SignatureCallingConvention.ThisCall);
-            Debug.Assert((int)Cts.MethodSignatureFlags.UnmanagedCallingConventionMask == (int)SignatureCallingConvention.UnmanagedCallingConventionMask);
-            SignatureCallingConvention callingConvention = (SignatureCallingConvention)(signature.Flags & Cts.MethodSignatureFlags.UnmanagedCallingConventionMask);
+            Debug.Assert(
+                (int)Cts.MethodSignatureFlags.UnmanagedCallingConventionCdecl
+                    == (int)SignatureCallingConvention.Cdecl
+            );
+            Debug.Assert(
+                (int)Cts.MethodSignatureFlags.UnmanagedCallingConventionThisCall
+                    == (int)SignatureCallingConvention.ThisCall
+            );
+            Debug.Assert(
+                (int)Cts.MethodSignatureFlags.UnmanagedCallingConventionMask
+                    == (int)SignatureCallingConvention.UnmanagedCallingConventionMask
+            );
+            SignatureCallingConvention callingConvention = (SignatureCallingConvention)(
+                signature.Flags & Cts.MethodSignatureFlags.UnmanagedCallingConventionMask
+            );
             if ((signature.Flags & Cts.MethodSignatureFlags.Static) == 0)
             {
                 callingConvention |= SignatureCallingConvention.HasThis;
@@ -244,12 +276,24 @@ namespace ILCompiler.Metadata
             return callingConvention;
         }
 
-        private static SignatureCallingConvention GetSignatureCallingConvention(Ecma.SignatureHeader signature)
+        private static SignatureCallingConvention GetSignatureCallingConvention(
+            Ecma.SignatureHeader signature
+        )
         {
-            Debug.Assert((int)Ecma.SignatureCallingConvention.CDecl == (int)SignatureCallingConvention.Cdecl);
-            Debug.Assert((int)Ecma.SignatureCallingConvention.ThisCall == (int)SignatureCallingConvention.ThisCall);
-            Debug.Assert((int)Ecma.SignatureCallingConvention.Unmanaged == (int)SignatureCallingConvention.Unmanaged);
-            SignatureCallingConvention callingConvention = (SignatureCallingConvention)(signature.CallingConvention);
+            Debug.Assert(
+                (int)Ecma.SignatureCallingConvention.CDecl == (int)SignatureCallingConvention.Cdecl
+            );
+            Debug.Assert(
+                (int)Ecma.SignatureCallingConvention.ThisCall
+                    == (int)SignatureCallingConvention.ThisCall
+            );
+            Debug.Assert(
+                (int)Ecma.SignatureCallingConvention.Unmanaged
+                    == (int)SignatureCallingConvention.Unmanaged
+            );
+            SignatureCallingConvention callingConvention = (SignatureCallingConvention)(
+                signature.CallingConvention
+            );
             if (signature.IsInstance)
             {
                 callingConvention |= SignatureCallingConvention.HasThis;

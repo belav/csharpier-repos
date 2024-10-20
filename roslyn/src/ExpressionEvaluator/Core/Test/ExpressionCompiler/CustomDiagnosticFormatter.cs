@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 {
     internal sealed class CustomDiagnosticFormatter : DiagnosticFormatter
     {
-        internal static new readonly CustomDiagnosticFormatter Instance = new CustomDiagnosticFormatter();
+        internal static new readonly CustomDiagnosticFormatter Instance =
+            new CustomDiagnosticFormatter();
 
         public override string Format(Diagnostic diagnostic, IFormatProvider formatter = null)
         {

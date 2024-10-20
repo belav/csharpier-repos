@@ -23,7 +23,10 @@ namespace System.Threading.Tasks
         {
             if (_task is Task<int> task)
             {
-                Debug.Assert(task.IsCompletedSuccessfully, "Expected that a stored last task completed successfully");
+                Debug.Assert(
+                    task.IsCompletedSuccessfully,
+                    "Expected that a stored last task completed successfully"
+                );
                 if (task.Result == result)
                 {
                     return task;

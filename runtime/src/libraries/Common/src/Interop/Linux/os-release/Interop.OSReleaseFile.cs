@@ -30,14 +30,17 @@ internal static partial class Interop
 
                 // Parse the NAME, PRETTY_NAME, and VERSION fields.
                 // These fields are suitable for presentation to the user.
-                ReadOnlySpan<char> prettyName = default, name = default, version = default;
+                ReadOnlySpan<char> prettyName = default,
+                    name = default,
+                    version = default;
                 foreach (string line in lines)
                 {
                     ReadOnlySpan<char> lineSpan = line.AsSpan();
 
-                    _ = TryGetFieldValue(lineSpan, "PRETTY_NAME=", ref prettyName) ||
-                        TryGetFieldValue(lineSpan, "NAME=", ref name) ||
-                        TryGetFieldValue(lineSpan, "VERSION=", ref version);
+                    _ =
+                        TryGetFieldValue(lineSpan, "PRETTY_NAME=", ref prettyName)
+                        || TryGetFieldValue(lineSpan, "NAME=", ref name)
+                        || TryGetFieldValue(lineSpan, "VERSION=", ref version);
 
                     // Prefer "PRETTY_NAME".
                     if (!prettyName.IsEmpty)
@@ -56,7 +59,11 @@ internal static partial class Interop
                     return new string(name);
                 }
 
-                static bool TryGetFieldValue(ReadOnlySpan<char> line, ReadOnlySpan<char> prefix, ref ReadOnlySpan<char> value)
+                static bool TryGetFieldValue(
+                    ReadOnlySpan<char> line,
+                    ReadOnlySpan<char> prefix,
+                    ref ReadOnlySpan<char> value
+                )
                 {
                     if (!line.StartsWith(prefix))
                     {
@@ -65,9 +72,11 @@ internal static partial class Interop
                     ReadOnlySpan<char> fieldValue = line.Slice(prefix.Length);
 
                     // Remove enclosing quotes.
-                    if (fieldValue.Length >= 2 &&
-                        fieldValue[0] is '"' or '\'' &&
-                        fieldValue[0] == fieldValue[^1])
+                    if (
+                        fieldValue.Length >= 2
+                        && fieldValue[0] is '"' or '\''
+                        && fieldValue[0] == fieldValue[^1]
+                    )
                     {
                         fieldValue = fieldValue[1..^1];
                     }

@@ -5,10 +5,10 @@
 namespace System.Activities.Tracking
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
@@ -18,8 +18,14 @@ namespace System.Activities.Tracking
         ActivityInfo faultHandler;
         bool isFaultSource;
         Exception fault;
-        
-        internal FaultPropagationRecord(Guid instanceId, ActivityInstance source, ActivityInstance faultHandler, bool isFaultSource, Exception fault)
+
+        internal FaultPropagationRecord(
+            Guid instanceId,
+            ActivityInstance source,
+            ActivityInstance faultHandler,
+            bool isFaultSource,
+            Exception fault
+        )
             : base(instanceId)
         {
             Fx.Assert(source != null, "Fault source cannot be null");
@@ -36,12 +42,13 @@ namespace System.Activities.Tracking
 
         //parameter faultHandler is null if there are no handlers
         public FaultPropagationRecord(
-             Guid instanceId,
-             long recordNumber,
-             ActivityInfo faultSource,
-             ActivityInfo faultHandler,
-             bool isFaultSource,
-             Exception fault)
+            Guid instanceId,
+            long recordNumber,
+            ActivityInfo faultSource,
+            ActivityInfo faultHandler,
+            bool isFaultSource,
+            Exception fault
+        )
             : base(instanceId, recordNumber)
         {
             if (faultSource == null)
@@ -64,53 +71,29 @@ namespace System.Activities.Tracking
             this.Fault = record.Fault;
             this.IsFaultSource = record.IsFaultSource;
         }
-                
+
         public ActivityInfo FaultSource
         {
-            get
-            {
-                return this.faultSource;
-            }
-            private set
-            {
-                this.faultSource = value;
-            }
+            get { return this.faultSource; }
+            private set { this.faultSource = value; }
         }
-                
+
         public ActivityInfo FaultHandler
         {
-            get
-            {
-                return this.faultHandler;
-            }
-            private set
-            {
-                this.faultHandler = value;
-            }
+            get { return this.faultHandler; }
+            private set { this.faultHandler = value; }
         }
-        
+
         public bool IsFaultSource
         {
-            get
-            {
-                return this.isFaultSource;
-            }
-            private set
-            {
-                this.isFaultSource = value;
-            }
+            get { return this.isFaultSource; }
+            private set { this.isFaultSource = value; }
         }
-        
+
         public Exception Fault
         {
-            get
-            {
-                return this.fault;
-            }
-            private set
-            {
-                this.fault = value;
-            }
+            get { return this.fault; }
+            private set { this.fault = value; }
         }
 
         [DataMember(Name = "FaultSource")]
@@ -148,13 +131,14 @@ namespace System.Activities.Tracking
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture,
+            return string.Format(
+                CultureInfo.CurrentCulture,
                 "FaultPropagationRecord {{ {0}, FaultSource {{ {1} }}, FaultHandler {{ {2} }}, IsFaultSource = {3} }}",
                 base.ToString(),
                 this.FaultSource.ToString(),
                 this.FaultHandler != null ? this.FaultHandler.ToString() : "<null>",
-                this.IsFaultSource);
+                this.IsFaultSource
+            );
         }
-
     }
 }

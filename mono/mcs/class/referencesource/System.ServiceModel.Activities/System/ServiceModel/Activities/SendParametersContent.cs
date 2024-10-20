@@ -32,15 +32,11 @@ namespace System.ServiceModel.Activities
             {
                 throw FxTrace.Exception.ArgumentNull("parameters");
             }
-         
+
             this.Parameters = new OrderedDictionary<string, InArgument>(parameters);
         }
 
-        public IDictionary<string, InArgument> Parameters
-        {
-            get;
-            private set;
-        }
+        public IDictionary<string, InArgument> Parameters { get; private set; }
 
         internal string[] ArgumentNames
         {
@@ -66,14 +62,15 @@ namespace System.ServiceModel.Activities
             }
         }
 
-
         internal override bool IsFault
         {
-            get 
+            get
             {
                 if (this.ArgumentTypes.Length == 1)
                 {
-                    return ContractInferenceHelper.ExceptionType.IsAssignableFrom(this.ArgumentTypes[0]);
+                    return ContractInferenceHelper.ExceptionType.IsAssignableFrom(
+                        this.ArgumentTypes[0]
+                    );
                 }
                 else
                 {
@@ -101,7 +98,11 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        internal override void CacheMetadata(ActivityMetadata metadata, Activity owner, string operationName)
+        internal override void CacheMetadata(
+            ActivityMetadata metadata,
+            Activity owner,
+            string operationName
+        )
         {
             // force a shred for every CacheMetadata call
             ShredParameters();
@@ -111,11 +112,21 @@ namespace System.ServiceModel.Activities
             {
                 if (argumentType == null || argumentType == TypeHelper.VoidType)
                 {
-                    metadata.AddValidationError(SR.ArgumentCannotHaveNullOrVoidType(owner.DisplayName, argumentNames[index]));
+                    metadata.AddValidationError(
+                        SR.ArgumentCannotHaveNullOrVoidType(owner.DisplayName, argumentNames[index])
+                    );
                 }
-                if (argumentType == MessageDescription.TypeOfUntypedMessage || MessageBuilder.IsMessageContract(argumentType))
+                if (
+                    argumentType == MessageDescription.TypeOfUntypedMessage
+                    || MessageBuilder.IsMessageContract(argumentType)
+                )
                 {
-                    metadata.AddValidationError(SR.SendParametersContentDoesNotSupportMessage(owner.DisplayName, argumentNames[index]));
+                    metadata.AddValidationError(
+                        SR.SendParametersContentDoesNotSupportMessage(
+                            owner.DisplayName,
+                            argumentNames[index]
+                        )
+                    );
                 }
                 index++;
             }
@@ -124,51 +135,85 @@ namespace System.ServiceModel.Activities
             {
                 foreach (KeyValuePair<string, InArgument> pair in this.Parameters)
                 {
-                    RuntimeArgument newRuntimeArgument = new RuntimeArgument(pair.Key, pair.Value.ArgumentType, ArgumentDirection.In);
+                    RuntimeArgument newRuntimeArgument = new RuntimeArgument(
+                        pair.Key,
+                        pair.Value.ArgumentType,
+                        ArgumentDirection.In
+                    );
                     metadata.Bind(pair.Value, newRuntimeArgument);
                     metadata.AddArgument(newRuntimeArgument);
                 }
             }
         }
 
-        internal override void ConfigureInternalSend(InternalSendMessage internalSendMessage, out ToRequest requestFormatter)
+        internal override void ConfigureInternalSend(
+            InternalSendMessage internalSendMessage,
+            out ToRequest requestFormatter
+        )
         {
             //Zero or more arguments
             requestFormatter = new ToRequest();
 
             foreach (KeyValuePair<string, InArgument> parameter in this.Parameters)
             {
-                requestFormatter.Parameters.Add(InArgument.CreateReference(parameter.Value, parameter.Key));
+                requestFormatter.Parameters.Add(
+                    InArgument.CreateReference(parameter.Value, parameter.Key)
+                );
             }
         }
 
-        internal override void ConfigureInternalSendReply(InternalSendMessage internalSendMessage, out ToReply responseFormatter)
+        internal override void ConfigureInternalSendReply(
+            InternalSendMessage internalSendMessage,
+            out ToReply responseFormatter
+        )
         {
             responseFormatter = new ToReply();
 
             foreach (KeyValuePair<string, InArgument> parameter in this.Parameters)
             {
-                responseFormatter.Parameters.Add(InArgument.CreateReference(parameter.Value, parameter.Key));
+                responseFormatter.Parameters.Add(
+                    InArgument.CreateReference(parameter.Value, parameter.Key)
+                );
             }
         }
 
-        internal override void InferMessageDescription(OperationDescription operation, object owner, MessageDirection direction)
+        internal override void InferMessageDescription(
+            OperationDescription operation,
+            object owner,
+            MessageDirection direction
+        )
         {
             ContractInferenceHelper.CheckForDisposableParameters(operation, this.ArgumentTypes);
 
-            string overridingAction = owner is Send ? ((Send)owner).Action : ((SendReply)owner).Action;
+            string overridingAction =
+                owner is Send ? ((Send)owner).Action : ((SendReply)owner).Action;
 
             if (direction == MessageDirection.Input)
             {
-                ContractInferenceHelper.AddInputMessage(operation, overridingAction, this.ArgumentNames, this.ArgumentTypes);
+                ContractInferenceHelper.AddInputMessage(
+                    operation,
+                    overridingAction,
+                    this.ArgumentNames,
+                    this.ArgumentTypes
+                );
             }
             else
             {
-                ContractInferenceHelper.AddOutputMessage(operation, overridingAction, this.ArgumentNames, this.ArgumentTypes);
+                ContractInferenceHelper.AddOutputMessage(
+                    operation,
+                    overridingAction,
+                    this.ArgumentNames,
+                    this.ArgumentTypes
+                );
             }
         }
 
-        internal override void ValidateContract(NativeActivityContext context, OperationDescription targetOperation, object owner, MessageDirection direction)
+        internal override void ValidateContract(
+            NativeActivityContext context,
+            OperationDescription targetOperation,
+            object owner,
+            MessageDirection direction
+        )
         {
             MessageDescription targetMessage;
             string overridingAction;
@@ -176,20 +221,32 @@ namespace System.ServiceModel.Activities
 
             if (direction == MessageDirection.Input)
             {
-                Fx.Assert(targetOperation.Messages.Count >= 1, "There must be at least one MessageDescription in an OperationDescription!");
+                Fx.Assert(
+                    targetOperation.Messages.Count >= 1,
+                    "There must be at least one MessageDescription in an OperationDescription!"
+                );
                 targetMessage = targetOperation.Messages[0];
 
-                Fx.Assert(owner is Send, "The parent of a SendParametersContent with in-message can only be Send!");
+                Fx.Assert(
+                    owner is Send,
+                    "The parent of a SendParametersContent with in-message can only be Send!"
+                );
                 overridingAction = ((Send)owner).Action;
 
                 isResponse = false;
             }
             else
             {
-                Fx.Assert(targetOperation.Messages.Count == 2, "There must be exactly two MessageDescription objects for a two-way operation!");
+                Fx.Assert(
+                    targetOperation.Messages.Count == 2,
+                    "There must be exactly two MessageDescription objects for a two-way operation!"
+                );
                 targetMessage = targetOperation.Messages[1];
 
-                Fx.Assert(owner is SendReply, "The parent of a SendParametersContent with out-message can only be SendReply!");
+                Fx.Assert(
+                    owner is SendReply,
+                    "The parent of a SendParametersContent with out-message can only be SendReply!"
+                );
                 overridingAction = ((SendReply)owner).Action;
 
                 isResponse = true;
@@ -197,25 +254,57 @@ namespace System.ServiceModel.Activities
 
             if (!this.IsFault)
             {
-                ContractValidationHelper.ValidateAction(context, targetMessage, overridingAction, targetOperation, isResponse);
+                ContractValidationHelper.ValidateAction(
+                    context,
+                    targetMessage,
+                    overridingAction,
+                    targetOperation,
+                    isResponse
+                );
                 if (ContractValidationHelper.IsSendParameterContent(targetOperation))
                 {
-                    ContractValidationHelper.ValidateParametersContent(context, targetMessage, (IDictionary)this.Parameters, targetOperation, isResponse);
+                    ContractValidationHelper.ValidateParametersContent(
+                        context,
+                        targetMessage,
+                        (IDictionary)this.Parameters,
+                        targetOperation,
+                        isResponse
+                    );
                 }
                 else
                 {
-                    Constraint.AddValidationError(context, new ValidationError(SR.MisuseOfParameterContent(targetOperation.Name, targetOperation.DeclaringContract.Name))); 
+                    Constraint.AddValidationError(
+                        context,
+                        new ValidationError(
+                            SR.MisuseOfParameterContent(
+                                targetOperation.Name,
+                                targetOperation.DeclaringContract.Name
+                            )
+                        )
+                    );
                 }
             }
             else
             {
-                Fx.Assert(this.argumentTypes != null && this.argumentTypes.Length == 1, "Exception should be the only parameter in SendFault!");
+                Fx.Assert(
+                    this.argumentTypes != null && this.argumentTypes.Length == 1,
+                    "Exception should be the only parameter in SendFault!"
+                );
                 Type argumentType = this.argumentTypes[0];
 
-                if (argumentType.IsGenericType && argumentType.GetGenericTypeDefinition() == ContractInferenceHelper.FaultExceptionType)
+                if (
+                    argumentType.IsGenericType
+                    && argumentType.GetGenericTypeDefinition()
+                        == ContractInferenceHelper.FaultExceptionType
+                )
                 {
                     Type faultType = argumentType.GetGenericArguments()[0];
-                    ContractValidationHelper.ValidateFault(context, targetOperation, overridingAction, faultType);
+                    ContractValidationHelper.ValidateFault(
+                        context,
+                        targetOperation,
+                        overridingAction,
+                        faultType
+                    );
                 }
             }
         }

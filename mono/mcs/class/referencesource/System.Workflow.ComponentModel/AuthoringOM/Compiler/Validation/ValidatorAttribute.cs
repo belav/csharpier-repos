@@ -3,8 +3,14 @@ namespace System.Workflow.ComponentModel.Compiler
     using System;
 
     #region Class ValidatorAttribute
-    [AttributeUsageAttribute(AttributeTargets.Interface | AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [AttributeUsageAttribute(
+        AttributeTargets.Interface | AttributeTargets.Class,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityValidatorAttribute : Attribute
     {
         private string validatorTypeName = null;
@@ -22,10 +28,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public string ValidatorTypeName
         {
-            get
-            {
-                return this.validatorTypeName;
-            }
+            get { return this.validatorTypeName; }
         }
     }
     #endregion

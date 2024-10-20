@@ -19,9 +19,7 @@ namespace System.Threading
     [System.Runtime.Versioning.UnsupportedOSPlatformAttribute("browser")]
     public sealed class RegisteredWaitHandle : MarshalByRefObject
     {
-        internal RegisteredWaitHandle()
-        {
-        }
+        internal RegisteredWaitHandle() { }
 
 #pragma warning disable CA1822 // Mark members as static
         internal bool Repeating => false;
@@ -84,33 +82,35 @@ namespace System.Threading
             if (_callbackQueued)
                 return;
             _callbackQueued = true;
-            MainThreadScheduleBackgroundJob((void*)(delegate* unmanaged[Cdecl]<void>)&BackgroundJobHandler);
+            MainThreadScheduleBackgroundJob(
+                (void*)(delegate* unmanaged[Cdecl]<void>)&BackgroundJobHandler
+            );
         }
 
-        internal static void NotifyWorkItemProgress()
-        {
-        }
+        internal static void NotifyWorkItemProgress() { }
 
         internal static bool NotifyThreadBlocked() => false;
 
-        internal static void NotifyThreadUnblocked()
-        {
-        }
+        internal static void NotifyThreadUnblocked() { }
 
         internal static object? GetOrCreateThreadLocalCompletionCountObject() => null;
 
-        internal static bool NotifyWorkItemComplete(object? threadLocalCompletionCountObject, int currentTimeMs)
+        internal static bool NotifyWorkItemComplete(
+            object? threadLocalCompletionCountObject,
+            int currentTimeMs
+        )
         {
             return true;
         }
 
         private static RegisteredWaitHandle RegisterWaitForSingleObject(
-             WaitHandle? waitObject,
-             WaitOrTimerCallback? callBack,
-             object? state,
-             uint millisecondsTimeOutInterval,
-             bool executeOnlyOnce,
-             bool flowExecutionContext)
+            WaitHandle? waitObject,
+            WaitOrTimerCallback? callBack,
+            object? state,
+            uint millisecondsTimeOutInterval,
+            bool executeOnlyOnce,
+            bool flowExecutionContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -122,7 +122,7 @@ namespace System.Threading
         [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
 #pragma warning restore CS3016
         // this callback will arrive on the bound thread, called from mono_background_exec
-        private static void BackgroundJobHandler ()
+        private static void BackgroundJobHandler()
         {
             try
             {
@@ -136,7 +136,11 @@ namespace System.Threading
         }
 
         private static unsafe void NativeOverlappedCallback(nint overlappedPtr) =>
-            IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(0, 0, (NativeOverlapped*)overlappedPtr);
+            IOCompletionCallbackHelper.PerformSingleIOCompletionCallback(
+                0,
+                0,
+                (NativeOverlapped*)overlappedPtr
+            );
 
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]
@@ -150,10 +154,16 @@ namespace System.Threading
             // OS doesn't signal handle, so do it here
             overlapped->InternalLow = (IntPtr)0;
             // Both types of callbacks are executed on the same thread pool
-            return UnsafeQueueUserWorkItem(NativeOverlappedCallback, (nint)overlapped, preferLocal: false);
+            return UnsafeQueueUserWorkItem(
+                NativeOverlappedCallback,
+                (nint)overlapped,
+                preferLocal: false
+            );
         }
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.")]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
+        )]
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(IntPtr osHandle)
         {
@@ -167,9 +177,6 @@ namespace System.Threading
         }
 
         [Conditional("unnecessary")]
-        internal static void ReportThreadStatus(bool isWorking)
-        {
-
-        }
+        internal static void ReportThreadStatus(bool isWorking) { }
     }
 }

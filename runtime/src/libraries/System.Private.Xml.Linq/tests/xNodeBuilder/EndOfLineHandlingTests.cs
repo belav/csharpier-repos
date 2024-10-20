@@ -3,10 +3,10 @@
 
 using System;
 using System.Globalization;
+using System.IO;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using System.Text;
-using System.IO;
 using System.Xml.XmlDiff;
 using Microsoft.Test.ModuleCore;
 
@@ -20,6 +20,7 @@ namespace CoreXml.Test.XLinq
             public partial class TCEOFHandling : BridgeHelpers
             {
                 private XmlDiff _diff = null;
+
                 public TCEOFHandling()
                 {
                     _diff = new XmlDiff();
@@ -62,11 +63,19 @@ namespace CoreXml.Test.XLinq
                 public void EOF_Handling_01()
                 {
                     XmlWriterSettings wSettings = new XmlWriterSettings();
-                    TestLog.Compare(wSettings.NewLineHandling, NewLineHandling.Replace, "Incorrect default value for XmlWriterSettings.NewLineHandling");
+                    TestLog.Compare(
+                        wSettings.NewLineHandling,
+                        NewLineHandling.Replace,
+                        "Incorrect default value for XmlWriterSettings.NewLineHandling"
+                    );
                     XDocument d = new XDocument();
                     XmlWriter w = CreateWriter(d);
                     w.Dispose();
-                    TestLog.Compare(w.Settings.NewLineHandling, NewLineHandling.Replace, "Incorrect default value for XmlWriter.Settings.NewLineHandling");
+                    TestLog.Compare(
+                        w.Settings.NewLineHandling,
+                        NewLineHandling.Replace,
+                        "Incorrect default value for XmlWriter.Settings.NewLineHandling"
+                    );
                 }
 
                 //[Variation(Desc = "XmlWriter creation with NewLineHandling.Entitize", Param = NewLineHandling.Entitize, Id = 2, Priority = 0)]
@@ -78,7 +87,11 @@ namespace CoreXml.Test.XLinq
                     XDocument d = new XDocument();
                     XmlWriter w = CreateWriter(d);
                     TestLog.Compare(w != null, "XmlWriter creation failed");
-                    TestLog.Compare(w.Settings.NewLineHandling, NewLineHandling.Replace, "Invalid NewLineHandling assignment");
+                    TestLog.Compare(
+                        w.Settings.NewLineHandling,
+                        NewLineHandling.Replace,
+                        "Invalid NewLineHandling assignment"
+                    );
                     w.Dispose();
                 }
 
@@ -98,7 +111,14 @@ namespace CoreXml.Test.XLinq
 
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<root>" + ExpectedOutput(Tabs, (NewLineHandling)Variation.Param, false) + "</root>"))
+                    if (
+                        !CompareReader(
+                            d,
+                            "<root>"
+                                + ExpectedOutput(Tabs, (NewLineHandling)Variation.Param, false)
+                                + "</root>"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -115,7 +135,18 @@ namespace CoreXml.Test.XLinq
                     w.WriteAttributeString("foo", NewLineCombinations);
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<root foo=\"" + ExpectedOutput(NewLineCombinations, (NewLineHandling)Variation.Param, true) + "\" />"))
+                    if (
+                        !CompareReader(
+                            d,
+                            "<root foo=\""
+                                + ExpectedOutput(
+                                    NewLineCombinations,
+                                    (NewLineHandling)Variation.Param,
+                                    true
+                                )
+                                + "\" />"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -125,7 +156,8 @@ namespace CoreXml.Test.XLinq
                 public void EOF_Handling_08()
                 {
                     string NewLineCombinations = "\r \n \r\n \n\r \r\r \n\n \r\n\r \n\r\n";
-                    string NewLineEntities = "&#xD; &#xA; &#xD;&#xA; &#xA;&#xD; &#xD;&#xD; &#xA;&#xA; &#xD;&#xA;&#xD; &#xA;&#xD;&#xA;";
+                    string NewLineEntities =
+                        "&#xD; &#xA; &#xD;&#xA; &#xA;&#xD; &#xD;&#xD; &#xA;&#xA; &#xD;&#xA;&#xD; &#xA;&#xD;&#xA;";
 
                     XDocument d = new XDocument();
                     XmlWriter w = CreateWriter(d);
@@ -134,14 +166,27 @@ namespace CoreXml.Test.XLinq
 
                     for (int i = 0; i < NewLineCombinations.Length; i++)
                     {
-                        if (NewLineCombinations[i] == ' ') w.WriteString(" ");
-                        else w.WriteCharEntity(NewLineCombinations[i]);
+                        if (NewLineCombinations[i] == ' ')
+                            w.WriteString(" ");
+                        else
+                            w.WriteCharEntity(NewLineCombinations[i]);
                     }
 
                     w.WriteEndAttribute();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<root foo=\"" + ExpectedOutput(NewLineEntities, (NewLineHandling)Variation.Param, true) + "\" />"))
+                    if (
+                        !CompareReader(
+                            d,
+                            "<root foo=\""
+                                + ExpectedOutput(
+                                    NewLineEntities,
+                                    (NewLineHandling)Variation.Param,
+                                    true
+                                )
+                                + "\" />"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -186,7 +231,14 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndAttribute();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<root foo=\"" + ExpectedOutput(NewLines, (NewLineHandling)Variation.Param, true) + "\" />"))
+                    if (
+                        !CompareReader(
+                            d,
+                            "<root foo=\""
+                                + ExpectedOutput(NewLines, (NewLineHandling)Variation.Param, true)
+                                + "\" />"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -208,10 +260,16 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndAttribute();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<root foo=\"" + ExpectedOutput(Tabs, (NewLineHandling)Variation.Param, true) + "\" />"))
+                    if (
+                        !CompareReader(
+                            d,
+                            "<root foo=\""
+                                + ExpectedOutput(Tabs, (NewLineHandling)Variation.Param, true)
+                                + "\" />"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
-
 
                 /*================== NewLineChars, IndentChars ==================*/
 
@@ -222,8 +280,16 @@ namespace CoreXml.Test.XLinq
                 {
                     XDocument d = new XDocument();
                     XmlWriter w = CreateWriter(d);
-                    TestLog.Compare(w.Settings.NewLineChars, Environment.NewLine, "Incorrect default value for XmlWriter.Settings.NewLineChars");
-                    TestLog.Compare(w.Settings.IndentChars, "  ", "Incorrect default value for XmlWriter.Settings.IndentChars");
+                    TestLog.Compare(
+                        w.Settings.NewLineChars,
+                        Environment.NewLine,
+                        "Incorrect default value for XmlWriter.Settings.NewLineChars"
+                    );
+                    TestLog.Compare(
+                        w.Settings.IndentChars,
+                        "  ",
+                        "Incorrect default value for XmlWriter.Settings.IndentChars"
+                    );
 
                     w.WriteStartElement("root");
                     w.WriteStartElement("foo");
@@ -231,7 +297,9 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<root>\r\n  <foo>\r\n    <bar />\r\n  </foo>\r\n</root>"))
+                    if (
+                        !CompareReader(d, "<root>\r\n  <foo>\r\n    <bar />\r\n  </foo>\r\n</root>")
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -246,7 +314,8 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Desc = "Test fo proper indentation and newline handling when Indent = true, with custom NewLineChars and IndentChars; None, '\\r', '\\n'", Params = new object[] { NewLineHandling.None, "\r", "\n" }, Id = 40, Priority = 2)]
                 public void EOF_Handling_13()
                 {
-                    string PrototypeOutput = "<root>&NewLine&Indent<foo>&NewLine&Indent&Indent<bar />&NewLine&Indent</foo>&NewLine</root>";
+                    string PrototypeOutput =
+                        "<root>&NewLine&Indent<foo>&NewLine&Indent&Indent<bar />&NewLine&Indent</foo>&NewLine</root>";
 
                     XDocument d = new XDocument();
                     XmlWriter w = CreateWriter(d);
@@ -256,7 +325,14 @@ namespace CoreXml.Test.XLinq
                     w.WriteEndElement();
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, PrototypeOutput.Replace("&NewLine", Variation.Params[1].ToString()).Replace("&Indent", Variation.Params[2].ToString())))
+                    if (
+                        !CompareReader(
+                            d,
+                            PrototypeOutput
+                                .Replace("&NewLine", Variation.Params[1].ToString())
+                                .Replace("&Indent", Variation.Params[2].ToString())
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -277,7 +353,18 @@ namespace CoreXml.Test.XLinq
                     w.WriteAttributeString("foo", "foo\r\nfoo\nfoo\rfoo\tfoo");
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, "<root foo=\"" + ExpectedOutput("foo\r\nfoo\nfoo\rfoo\tfoo", (NewLineHandling)Variation.Params[0], true) + "\" />"))
+                    if (
+                        !CompareReader(
+                            d,
+                            "<root foo=\""
+                                + ExpectedOutput(
+                                    "foo\r\nfoo\nfoo\rfoo\tfoo",
+                                    (NewLineHandling)Variation.Params[0],
+                                    true
+                                )
+                                + "\" />"
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
 
@@ -292,7 +379,8 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Desc = "NewLine handling between attributes when NewLineOnAttributes=true; None, '---'", Params = new object[] { NewLineHandling.None, "---" }, Id = 64, Priority = 2)]
                 public void EOF_Handling_16()
                 {
-                    string PrototypeOutput = "<root&NewLine  foo=\"fooval\"&NewLine  bar=\"barval\" />";
+                    string PrototypeOutput =
+                        "<root&NewLine  foo=\"fooval\"&NewLine  bar=\"barval\" />";
 
                     XDocument d = new XDocument();
                     XmlWriter w = CreateWriter(d);
@@ -301,7 +389,12 @@ namespace CoreXml.Test.XLinq
                     w.WriteAttributeString("bar", "barval");
                     w.WriteEndElement();
                     w.Dispose();
-                    if (!CompareReader(d, PrototypeOutput.Replace("&NewLine", Variation.Params[1].ToString())))
+                    if (
+                        !CompareReader(
+                            d,
+                            PrototypeOutput.Replace("&NewLine", Variation.Params[1].ToString())
+                        )
+                    )
                         throw new TestException(TestResult.Failed, "");
                 }
             }

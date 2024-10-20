@@ -13,6 +13,7 @@ namespace ABIStress
     {
         private static readonly List<DynamicMethod> s_keepRooted = new List<DynamicMethod>();
         private static readonly Dictionary<int, Callee> s_pinvokees = new Dictionary<int, Callee>();
+
         private static bool DoPInvokes(int callerIndex)
         {
             string callerName = Config.PInvokerPrefix + callerIndex;
@@ -23,14 +24,21 @@ namespace ABIStress
             Callee callee;
             if (!s_pinvokees.TryGetValue(calleeIndex, out callee))
             {
-                callee = CreateCallee(Config.PInvokeePrefix + calleeIndex, s_pinvokeeCandidateArgTypes);
+                callee = CreateCallee(
+                    Config.PInvokeePrefix + calleeIndex,
+                    s_pinvokeeCandidateArgTypes
+                );
                 callee.Emit();
                 callee.EmitPInvokeDelegateTypes();
                 s_pinvokees.Add(calleeIndex, callee);
             }
 
             DynamicMethod caller = new DynamicMethod(
-                callerName, typeof(int[]), pms.Select(t => t.Type).ToArray(), typeof(Program).Module);
+                callerName,
+                typeof(int[]),
+                pms.Select(t => t.Type).ToArray(),
+                typeof(Program).Module
+            );
 
             // We need to keep callers rooted due to a stale cache bug in the runtime related to calli.
             s_keepRooted.Add(caller);
@@ -41,7 +49,11 @@ namespace ABIStress
             List<Value> args = GenCallerToCalleeArgs(pms, callee.Parameters, rand);
 
             if (Config.Verbose)
-                EmitDumpValues("Caller's incoming args", g, pms.Select((p, i) => new ArgValue(p, i)));
+                EmitDumpValues(
+                    "Caller's incoming args",
+                    g,
+                    pms.Select((p, i) => new ArgValue(p, i))
+                );
 
             // Create array to store results in
             LocalBuilder resultsArrLocal = g.DeclareLocal(typeof(int[]));
@@ -67,7 +79,12 @@ namespace ABIStress
                 IntPtr ptr = Marshal.GetFunctionPointerForDelegate(dlg);
                 g.Emit(OpCodes.Ldc_I8, (long)ptr);
                 g.Emit(OpCodes.Conv_I);
-                g.EmitCalli(OpCodes.Calli, cc, typeof(int), callee.Parameters.Select(p => p.Type).ToArray());
+                g.EmitCalli(
+                    OpCodes.Calli,
+                    cc,
+                    typeof(int),
+                    callee.Parameters.Select(p => p.Type).ToArray()
+                );
                 g.Emit(OpCodes.Stloc, resultLocal);
 
                 g.Emit(OpCodes.Ldloc, resultsArrLocal);
@@ -80,8 +97,13 @@ namespace ABIStress
             g.Emit(OpCodes.Ldloc, resultsArrLocal);
             g.Emit(OpCodes.Ret);
 
-            (object callerResult, object calleeResult) =
-                InvokeCallerCallee(caller, pms, callee.Method, args, rand);
+            (object callerResult, object calleeResult) = InvokeCallerCallee(
+                caller,
+                pms,
+                callee.Method,
+                args,
+                rand
+            );
 
             // The pointers used in the calli instructions are only valid while the delegates are alive,
             // so keep these alive until we're done executing.
@@ -97,7 +119,12 @@ namespace ABIStress
 
                 allCorrect = false;
                 string callType = callee.PInvokeDelegateTypes.ElementAt(i).Key.ToString();
-                Console.WriteLine("Mismatch in {0}: expected {1}, got {2}", callType, calleeResult, results[i]);
+                Console.WriteLine(
+                    "Mismatch in {0}: expected {1}, got {2}",
+                    callType,
+                    calleeResult,
+                    results[i]
+                );
             }
 
             if (!allCorrect)

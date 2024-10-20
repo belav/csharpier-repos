@@ -15,10 +15,18 @@ namespace System.Reflection.Emit.Tests
             Version = new Version("1.2.3.4"),
         };
 
-        internal static void WriteAssemblyToDisk(AssemblyName assemblyName, Type[] types, string fileLocation)
+        internal static void WriteAssemblyToDisk(
+            AssemblyName assemblyName,
+            Type[] types,
+            string fileLocation
+        )
         {
             AssemblyBuilder assemblyBuilder = PopulateAssemblyBuilderAndSaveMethod(
-                assemblyName, null, typeof(string), out MethodInfo saveMethod);
+                assemblyName,
+                null,
+                typeof(string),
+                out MethodInfo saveMethod
+            );
 
             ModuleBuilder mb = assemblyBuilder.DefineDynamicModule(assemblyName.Name);
             PopulateMembersForModule(mb, types);
@@ -32,12 +40,20 @@ namespace System.Reflection.Emit.Tests
             {
                 TypeBuilder tb = mb.DefineType(type.FullName, type.Attributes, type.BaseType);
 
-                MethodInfo[] methods = type.IsInterface ? type.GetMethods() : type.GetMethods(BindingFlags.DeclaredOnly);
+                MethodInfo[] methods = type.IsInterface
+                    ? type.GetMethods()
+                    : type.GetMethods(BindingFlags.DeclaredOnly);
                 foreach (var method in methods)
                 {
                     ParameterInfo[] parameters = method.GetParameters();
-                    MethodBuilder meb = tb.DefineMethod(method.Name, method.Attributes, method.CallingConvention, method.ReturnType, parameters.Select(p => p.ParameterType).ToArray());
-                    foreach(ParameterInfo param in parameters)
+                    MethodBuilder meb = tb.DefineMethod(
+                        method.Name,
+                        method.Attributes,
+                        method.CallingConvention,
+                        method.ReturnType,
+                        parameters.Select(p => p.ParameterType).ToArray()
+                    );
+                    foreach (ParameterInfo param in parameters)
                     {
                         meb.DefineParameter(param.Position + 1, param.Attributes, param.Name);
                     }
@@ -52,10 +68,18 @@ namespace System.Reflection.Emit.Tests
             }
         }
 
-        internal static void WriteAssemblyToStream(AssemblyName assemblyName, Type[] types, Stream stream)
+        internal static void WriteAssemblyToStream(
+            AssemblyName assemblyName,
+            Type[] types,
+            Stream stream
+        )
         {
             AssemblyBuilder assemblyBuilder = PopulateAssemblyBuilderAndSaveMethod(
-                assemblyName, null, typeof(Stream), out MethodInfo saveMethod);
+                assemblyName,
+                null,
+                typeof(Stream),
+                out MethodInfo saveMethod
+            );
 
             ModuleBuilder mb = assemblyBuilder.DefineDynamicModule(assemblyName.Name);
             PopulateMembersForModule(mb, types);
@@ -63,34 +87,76 @@ namespace System.Reflection.Emit.Tests
             saveMethod.Invoke(assemblyBuilder, new object[] { stream });
         }
 
-        internal static AssemblyBuilder PopulateAssemblyBuilderTypeBuilderAndSaveMethod(out TypeBuilder typeBuilder, out MethodInfo saveMethod)
+        internal static AssemblyBuilder PopulateAssemblyBuilderTypeBuilderAndSaveMethod(
+            out TypeBuilder typeBuilder,
+            out MethodInfo saveMethod
+        )
         {
-            AssemblyBuilder ab = PopulateAssemblyBuilderAndSaveMethod(s_assemblyName, null, typeof(string), out saveMethod);
-            typeBuilder = ab.DefineDynamicModule("MyModule").DefineType("MyType", TypeAttributes.Public | TypeAttributes.Class);
+            AssemblyBuilder ab = PopulateAssemblyBuilderAndSaveMethod(
+                s_assemblyName,
+                null,
+                typeof(string),
+                out saveMethod
+            );
+            typeBuilder = ab.DefineDynamicModule("MyModule")
+                .DefineType("MyType", TypeAttributes.Public | TypeAttributes.Class);
             return ab;
         }
-        
-        internal static AssemblyBuilder PopulateAssemblyBuilderAndSaveMethod(AssemblyName assemblyName,
-            List<CustomAttributeBuilder>? assemblyAttributes, Type parameterType, out MethodInfo saveMethod)
+
+        internal static AssemblyBuilder PopulateAssemblyBuilderAndSaveMethod(
+            AssemblyName assemblyName,
+            List<CustomAttributeBuilder>? assemblyAttributes,
+            Type parameterType,
+            out MethodInfo saveMethod
+        )
         {
-            Type assemblyType = Type.GetType("System.Reflection.Emit.AssemblyBuilderImpl, System.Reflection.Emit", throwOnError: true)!;
+            Type assemblyType = Type.GetType(
+                "System.Reflection.Emit.AssemblyBuilderImpl, System.Reflection.Emit",
+                throwOnError: true
+            )!;
 
-            saveMethod = assemblyType.GetMethod("Save", BindingFlags.NonPublic | BindingFlags.Instance, new Type[] { parameterType });
+            saveMethod = assemblyType.GetMethod(
+                "Save",
+                BindingFlags.NonPublic | BindingFlags.Instance,
+                new Type[] { parameterType }
+            );
 
-            MethodInfo defineDynamicAssemblyMethod = assemblyType.GetMethod("DefinePersistedAssembly", BindingFlags.NonPublic | BindingFlags.Static,
-                new Type[] { typeof(AssemblyName), typeof(Assembly), typeof(List<CustomAttributeBuilder>) });
+            MethodInfo defineDynamicAssemblyMethod = assemblyType.GetMethod(
+                "DefinePersistedAssembly",
+                BindingFlags.NonPublic | BindingFlags.Static,
+                new Type[]
+                {
+                    typeof(AssemblyName),
+                    typeof(Assembly),
+                    typeof(List<CustomAttributeBuilder>),
+                }
+            );
 
-            return (AssemblyBuilder)defineDynamicAssemblyMethod.Invoke(null,
-                new object[] { assemblyName, CoreMetadataAssemblyResolver.s_coreAssembly, assemblyAttributes });
+            return (AssemblyBuilder)
+                defineDynamicAssemblyMethod.Invoke(
+                    null,
+                    new object[]
+                    {
+                        assemblyName,
+                        CoreMetadataAssemblyResolver.s_coreAssembly,
+                        assemblyAttributes,
+                    }
+                );
         }
 
         internal static Assembly LoadAssemblyFromPath(string filePath) =>
-            new MetadataLoadContext(new CoreMetadataAssemblyResolver()).LoadFromAssemblyPath(filePath);
+            new MetadataLoadContext(new CoreMetadataAssemblyResolver()).LoadFromAssemblyPath(
+                filePath
+            );
 
         internal static Assembly LoadAssemblyFromStream(Stream stream) =>
             new MetadataLoadContext(new CoreMetadataAssemblyResolver()).LoadFromStream(stream);
 
-        internal static void AssertAssemblyNameAndModule(AssemblyName sourceAName, AssemblyName aNameFromDisk, Module moduleFromDisk)
+        internal static void AssertAssemblyNameAndModule(
+            AssemblyName sourceAName,
+            AssemblyName aNameFromDisk,
+            Module moduleFromDisk
+        )
         {
             // Runtime assemblies adding AssemblyNameFlags.PublicKey in Assembly.GetName() overloads
             Assert.Equal(sourceAName.Flags | AssemblyNameFlags.PublicKey, aNameFromDisk.Flags);
@@ -145,14 +211,20 @@ namespace System.Reflection.Emit.Tests
             }
         }
 
-        private static void AssertParameters(ParameterInfo[] sourceParameters, ParameterInfo[] parametersLoaded)
+        private static void AssertParameters(
+            ParameterInfo[] sourceParameters,
+            ParameterInfo[] parametersLoaded
+        )
         {
             Assert.Equal(sourceParameters.Length, parametersLoaded.Length);
 
             for (int i = 0; i < sourceParameters.Length; i++)
             {
                 Assert.Equal(sourceParameters[i].Name, parametersLoaded[i].Name);
-                Assert.Equal(sourceParameters[i].ParameterType.FullName, parametersLoaded[i].ParameterType.FullName);
+                Assert.Equal(
+                    sourceParameters[i].ParameterType.FullName,
+                    parametersLoaded[i].ParameterType.FullName
+                );
                 Assert.Equal(sourceParameters[i].Attributes, parametersLoaded[i].Attributes);
                 Assert.Equal(sourceParameters[i].Position, parametersLoaded[i].Position);
             }
@@ -164,18 +236,22 @@ namespace System.Reflection.Emit.Tests
     {
         public static Assembly s_coreAssembly = typeof(object).Assembly;
         public static Assembly s_emitAssembly = typeof(AssemblySaveTools).Assembly;
+
         public CoreMetadataAssemblyResolver() { }
 
         public override Assembly Resolve(MetadataLoadContext context, AssemblyName assemblyName)
         {
             string name = assemblyName.Name;
 
-            if (name.Equals("mscorlib", StringComparison.OrdinalIgnoreCase) ||
-                name.Equals("System.Private.CoreLib", StringComparison.OrdinalIgnoreCase) ||
-                name.Equals("System.Runtime", StringComparison.OrdinalIgnoreCase) ||
-                name.Equals("netstandard", StringComparison.OrdinalIgnoreCase) ||
+            if (
+                name.Equals("mscorlib", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("System.Private.CoreLib", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("System.Runtime", StringComparison.OrdinalIgnoreCase)
+                || name.Equals("netstandard", StringComparison.OrdinalIgnoreCase)
+                ||
                 // For interop attributes such as DllImport and Guid:
-                name.Equals("System.Runtime.InteropServices", StringComparison.OrdinalIgnoreCase))
+                name.Equals("System.Runtime.InteropServices", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 if (_coreAssembly == null)
                 {
@@ -213,9 +289,11 @@ namespace System.Reflection.Emit.Tests
                 string assumedLocationOfCoreLibrary = typeof(object).Assembly.Location;
                 if (string.IsNullOrEmpty(assumedLocationOfCoreLibrary))
                 {
-                    throw new Exception("Could not find a core assembly to use for tests as 'typeof(object).Assembly.Location` returned " +
-                        "a null or empty value. The most likely cause is that you built the tests for a Jitted runtime but are running them " +
-                        "on an AoT runtime.");
+                    throw new Exception(
+                        "Could not find a core assembly to use for tests as 'typeof(object).Assembly.Location` returned "
+                            + "a null or empty value. The most likely cause is that you built the tests for a Jitted runtime but are running them "
+                            + "on an AoT runtime."
+                    );
                 }
             }
 

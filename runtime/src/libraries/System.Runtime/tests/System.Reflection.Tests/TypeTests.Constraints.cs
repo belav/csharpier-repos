@@ -22,7 +22,10 @@ namespace System.Reflection.Tests
         public static void TestGenericTypeParameterConstraints_Class()
         {
             Type theT = typeof(GenericClassWithClassConstraint<>).GetGenericArguments()[0];
-            Assert.Equal(GenericParameterAttributes.ReferenceTypeConstraint, theT.GenericParameterAttributes);
+            Assert.Equal(
+                GenericParameterAttributes.ReferenceTypeConstraint,
+                theT.GenericParameterAttributes
+            );
             Assert.Equal(0, theT.GetGenericParameterConstraints().Length);
             Assert.Equal(typeof(object), theT.BaseType);
             Assert.False(theT.IsValueType);
@@ -32,7 +35,11 @@ namespace System.Reflection.Tests
         public static void TestGenericTypeParameterConstraints_Struct()
         {
             Type theT = typeof(GenericClassWithStructConstraint<>).GetGenericArguments()[0];
-            Assert.Equal(GenericParameterAttributes.NotNullableValueTypeConstraint | GenericParameterAttributes.DefaultConstructorConstraint, theT.GenericParameterAttributes);
+            Assert.Equal(
+                GenericParameterAttributes.NotNullableValueTypeConstraint
+                    | GenericParameterAttributes.DefaultConstructorConstraint,
+                theT.GenericParameterAttributes
+            );
             Type[] constraints = theT.GetGenericParameterConstraints();
             Assert.Equal(1, constraints.Length);
             Assert.Equal(typeof(ValueType), constraints[0]);
@@ -58,7 +65,10 @@ namespace System.Reflection.Tests
         public static void TestGenericTypeParameterConstraints_New()
         {
             Type theT = typeof(GenericClassWithNewConstraint<>).GetGenericArguments()[0];
-            Assert.Equal(GenericParameterAttributes.DefaultConstructorConstraint, theT.GenericParameterAttributes);
+            Assert.Equal(
+                GenericParameterAttributes.DefaultConstructorConstraint,
+                theT.GenericParameterAttributes
+            );
             Assert.Equal(0, theT.GetGenericParameterConstraints().Length);
             Assert.Equal(typeof(object), theT.BaseType);
             Assert.False(theT.IsValueType);
@@ -144,22 +154,44 @@ namespace System.Reflection.Tests
         }
 
         public interface IConstrained1 { }
+
         public interface IConstrained2<I> { }
+
         public class CConstrained1 { }
 
         public class GenericClassWithNoConstraint<T> { }
-        public class GenericClassWithClassConstraint<T> where T : class { }
-        public class GenericClassWithStructConstraint<T> where T : struct { }
-        public class GenericClassWithNewConstraint<T> where T : new() { }
-        public class GenericClassWithEnumConstraint<T> where T : Enum { }
-        public class GenericClassWithTypeConstraints<T> where T : CConstrained1, IConstrained1, IConstrained2<T> { }
-        public class GenericClassWithInterfaceConstraints<T> where T : IConstrained1, IConstrained2<T> { }
-        public class GenericClassWithQuirkyConstraints1<T, U> where T : U where U : CConstrained1, IConstrained1 { }
-        public class GenericClassWithQuirkyConstraints2<T, U> where T : U where U : class, IConstrained1 { }
+
+        public class GenericClassWithClassConstraint<T>
+            where T : class { }
+
+        public class GenericClassWithStructConstraint<T>
+            where T : struct { }
+
+        public class GenericClassWithNewConstraint<T>
+            where T : new() { }
+
+        public class GenericClassWithEnumConstraint<T>
+            where T : Enum { }
+
+        public class GenericClassWithTypeConstraints<T>
+            where T : CConstrained1, IConstrained1, IConstrained2<T> { }
+
+        public class GenericClassWithInterfaceConstraints<T>
+            where T : IConstrained1, IConstrained2<T> { }
+
+        public class GenericClassWithQuirkyConstraints1<T, U>
+            where T : U
+            where U : CConstrained1, IConstrained1 { }
+
+        public class GenericClassWithQuirkyConstraints2<T, U>
+            where T : U
+            where U : class, IConstrained1 { }
 
         public class GenericMethodWithTypeConstraints<T>
         {
-            public void Foo<M, N>() where M : IConstrained2<N> where N : IConstrained2<T> { }
+            public void Foo<M, N>()
+                where M : IConstrained2<N>
+                where N : IConstrained2<T> { }
         }
     }
 }

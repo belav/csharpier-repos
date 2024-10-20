@@ -10,9 +10,7 @@ namespace System.Security.Cryptography.Pkcs
     public sealed class CmsRecipient
     {
         public CmsRecipient(X509Certificate2 certificate)
-            : this(SubjectIdentifierType.IssuerAndSerialNumber, certificate)
-        {
-        }
+            : this(SubjectIdentifierType.IssuerAndSerialNumber, certificate) { }
 
 #if NETSTANDARD2_0
         internal
@@ -36,7 +34,11 @@ namespace System.Security.Cryptography.Pkcs
 #else
         public
 #endif
-        CmsRecipient(SubjectIdentifierType recipientIdentifierType, X509Certificate2 certificate, RSAEncryptionPadding rsaEncryptionPadding)
+        CmsRecipient(
+            SubjectIdentifierType recipientIdentifierType,
+            X509Certificate2 certificate,
+            RSAEncryptionPadding rsaEncryptionPadding
+        )
             : this(recipientIdentifierType, certificate)
         {
             if (rsaEncryptionPadding is null)
@@ -48,7 +50,10 @@ namespace System.Security.Cryptography.Pkcs
             RSAEncryptionPadding = rsaEncryptionPadding;
         }
 
-        public CmsRecipient(SubjectIdentifierType recipientIdentifierType, X509Certificate2 certificate)
+        public CmsRecipient(
+            SubjectIdentifierType recipientIdentifierType,
+            X509Certificate2 certificate
+        )
         {
             if (certificate is null)
             {
@@ -65,7 +70,12 @@ namespace System.Security.Cryptography.Pkcs
                 case SubjectIdentifierType.SubjectKeyIdentifier:
                     break;
                 default:
-                    throw new CryptographicException(SR.Format(SR.Cryptography_Cms_Invalid_Subject_Identifier_Type, recipientIdentifierType));
+                    throw new CryptographicException(
+                        SR.Format(
+                            SR.Cryptography_Cms_Invalid_Subject_Identifier_Type,
+                            recipientIdentifierType
+                        )
+                    );
             }
 
             RecipientIdentifierType = recipientIdentifierType;
@@ -89,7 +99,9 @@ namespace System.Security.Cryptography.Pkcs
                 case Oids.RsaOaep:
                     break;
                 default:
-                    throw new CryptographicException(SR.Cryptography_Cms_Recipient_RSARequired_RSAPaddingModeSupplied);
+                    throw new CryptographicException(
+                        SR.Cryptography_Cms_Recipient_RSARequired_RSAPaddingModeSupplied
+                    );
             }
         }
     }

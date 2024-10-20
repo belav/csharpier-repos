@@ -28,9 +28,7 @@ public class PropertyEntry : MemberEntry
     /// </summary>
     [EntityFrameworkInternal]
     public PropertyEntry(InternalEntityEntry internalEntry, IProperty property)
-        : base(internalEntry, property)
-    {
-    }
+        : base(internalEntry, property) { }
 
     /// <summary>
     ///     Gets or sets a value indicating whether the value of this property has been modified
@@ -69,8 +67,7 @@ public class PropertyEntry : MemberEntry
     /// <summary>
     ///     Gets the metadata that describes the facets of this property and how it maps to the database.
     /// </summary>
-    public new virtual IProperty Metadata
-        => (IProperty)base.Metadata;
+    public new virtual IProperty Metadata => (IProperty)base.Metadata;
 
     /// <summary>
     ///     Gets or sets the value that was assigned to this property when it was retrieved from the database.

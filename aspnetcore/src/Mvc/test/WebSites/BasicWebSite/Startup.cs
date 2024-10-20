@@ -11,9 +11,7 @@ public class Startup
     // Set up application services
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddMvc()
-            .AddNewtonsoftJson()
-            .AddXmlDataContractSerializerFormatters();
+        services.AddMvc().AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 
         services.ConfigureBaseWebSiteAuthPolicies();
 
@@ -36,11 +34,13 @@ public class Startup
             endpoints.MapControllerRoute(
                 name: "ActionAsMethod",
                 pattern: "{controller}/{action}",
-                defaults: new { controller = "Home", action = "Index" });
+                defaults: new { controller = "Home", action = "Index" }
+            );
 
             endpoints.MapControllerRoute(
                 name: "PageRoute",
-                pattern: "{controller}/{action}/{page}");
+                pattern: "{controller}/{action}/{page}"
+            );
         });
     }
 }

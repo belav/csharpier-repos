@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Client;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.AspNetCore.SignalR.Tests;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
@@ -24,7 +24,8 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
-public class HubProtocolVersionTestsCollection : ICollectionFixture<InProcessTestServer<VersionStartup>>
+public class HubProtocolVersionTestsCollection
+    : ICollectionFixture<InProcessTestServer<VersionStartup>>
 {
     public const string Name = nameof(HubProtocolVersionTestsCollection);
 }
@@ -48,13 +49,17 @@ public class HubProtocolVersionTests : FunctionalTestBase
             {
                 await connection.StartAsync().DefaultTimeout();
 
-                var result = await connection.InvokeAsync<string>(nameof(VersionHub.Echo), "Hello World!").DefaultTimeout();
+                var result = await connection
+                    .InvokeAsync<string>(nameof(VersionHub.Echo), "Hello World!")
+                    .DefaultTimeout();
 
                 Assert.Equal("Hello World!", result);
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLogger<HubConnectionTests>().LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
+                LoggerFactory
+                    .CreateLogger<HubConnectionTests>()
+                    .LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
                 throw;
             }
             finally
@@ -73,7 +78,9 @@ public class HubProtocolVersionTests : FunctionalTestBase
             var connectionBuilder = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
                 .WithUrl(server.Url + "/version", transportType);
-            connectionBuilder.Services.AddSingleton<IHubProtocol>(new VersionedJsonHubProtocol(1000));
+            connectionBuilder.Services.AddSingleton<IHubProtocol>(
+                new VersionedJsonHubProtocol(1000)
+            );
 
             var connection = connectionBuilder.Build();
 
@@ -81,13 +88,17 @@ public class HubProtocolVersionTests : FunctionalTestBase
             {
                 await connection.StartAsync().DefaultTimeout();
 
-                var result = await connection.InvokeAsync<string>(nameof(VersionHub.Echo), "Hello World!").DefaultTimeout();
+                var result = await connection
+                    .InvokeAsync<string>(nameof(VersionHub.Echo), "Hello World!")
+                    .DefaultTimeout();
 
                 Assert.Equal("Hello World!", result);
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLogger<HubConnectionTests>().LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
+                LoggerFactory
+                    .CreateLogger<HubConnectionTests>()
+                    .LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
                 throw;
             }
             finally
@@ -104,12 +115,15 @@ public class HubProtocolVersionTests : FunctionalTestBase
         await using (var server = await StartServer<VersionStartup>())
         {
             var httpConnectionFactory = new HttpConnectionFactory(
-                Options.Create(new HttpConnectionOptions
-                {
-                    Transports = transportType,
-                    DefaultTransferFormat = TransferFormat.Text
-                }),
-                LoggerFactory);
+                Options.Create(
+                    new HttpConnectionOptions
+                    {
+                        Transports = transportType,
+                        DefaultTransferFormat = TransferFormat.Text,
+                    }
+                ),
+                LoggerFactory
+            );
             var tcs = new TaskCompletionSource();
 
             var proxyConnectionFactory = new ProxyConnectionFactory(httpConnectionFactory);
@@ -117,14 +131,19 @@ public class HubProtocolVersionTests : FunctionalTestBase
             var connectionBuilder = new HubConnectionBuilder()
                 .WithUrl(new Uri(server.Url + "/version"))
                 .WithLoggerFactory(LoggerFactory);
-            connectionBuilder.Services.AddSingleton<IHubProtocol>(new VersionedJsonHubProtocol(1000));
+            connectionBuilder.Services.AddSingleton<IHubProtocol>(
+                new VersionedJsonHubProtocol(1000)
+            );
             connectionBuilder.Services.AddSingleton<IConnectionFactory>(proxyConnectionFactory);
 
             var connection = connectionBuilder.Build();
-            connection.On("NewProtocolMethodClient", () =>
-            {
-                tcs.SetResult();
-            });
+            connection.On(
+                "NewProtocolMethodClient",
+                () =>
+                {
+                    tcs.SetResult();
+                }
+            );
 
             try
             {
@@ -134,12 +153,11 @@ public class HubProtocolVersionTests : FunctionalTestBase
                 var connectionContext = await proxyConnectionFactory.ConnectTask.DefaultTimeout();
 
                 // Simulate a new call from the client
-                var messageToken = new JObject
-                {
-                    ["type"] = int.MaxValue
-                };
+                var messageToken = new JObject { ["type"] = int.MaxValue };
 
-                connectionContext.Transport.Output.Write(Encoding.UTF8.GetBytes(messageToken.ToString()));
+                connectionContext.Transport.Output.Write(
+                    Encoding.UTF8.GetBytes(messageToken.ToString())
+                );
                 connectionContext.Transport.Output.Write(new[] { (byte)0x1e });
                 await connectionContext.Transport.Output.FlushAsync().DefaultTimeout();
 
@@ -147,7 +165,9 @@ public class HubProtocolVersionTests : FunctionalTestBase
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLogger<HubConnectionTests>().LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
+                LoggerFactory
+                    .CreateLogger<HubConnectionTests>()
+                    .LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
                 throw;
             }
             finally
@@ -160,7 +180,9 @@ public class HubProtocolVersionTests : FunctionalTestBase
     [Theory]
     [MemberData(nameof(TransportTypes))]
     [LogLevel(LogLevel.Trace)]
-    public async Task ClientWithUnsupportedProtocolVersionDoesNotConnect(HttpTransportType transportType)
+    public async Task ClientWithUnsupportedProtocolVersionDoesNotConnect(
+        HttpTransportType transportType
+    )
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
@@ -172,19 +194,29 @@ public class HubProtocolVersionTests : FunctionalTestBase
             var connectionBuilder = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
                 .WithUrl(server.Url + "/version", transportType);
-            connectionBuilder.Services.AddSingleton<IHubProtocol>(new SingleVersionHubProtocol(new VersionedJsonHubProtocol(int.MaxValue), int.MaxValue));
+            connectionBuilder.Services.AddSingleton<IHubProtocol>(
+                new SingleVersionHubProtocol(
+                    new VersionedJsonHubProtocol(int.MaxValue),
+                    int.MaxValue
+                )
+            );
 
             var connection = connectionBuilder.Build();
 
             try
             {
-                await ExceptionAssert.ThrowsAsync<HubException>(
-                    () => connection.StartAsync(),
-                    "Unable to complete handshake with the server due to an error: The server does not support version 2147483647 of the 'json' protocol.").DefaultTimeout();
+                await ExceptionAssert
+                    .ThrowsAsync<HubException>(
+                        () => connection.StartAsync(),
+                        "Unable to complete handshake with the server due to an error: The server does not support version 2147483647 of the 'json' protocol."
+                    )
+                    .DefaultTimeout();
             }
             catch (Exception ex)
             {
-                LoggerFactory.CreateLogger<HubConnectionTests>().LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
+                LoggerFactory
+                    .CreateLogger<HubConnectionTests>()
+                    .LogError(ex, "{ExceptionType} from test", ex.GetType().FullName);
                 throw;
             }
             finally
@@ -211,14 +243,19 @@ public class HubProtocolVersionTests : FunctionalTestBase
 
         public TransferFormat TransferFormat => _protocol.TransferFormat;
 
-        public ReadOnlyMemory<byte> GetMessageBytes(HubMessage message) => _protocol.GetMessageBytes(message);
+        public ReadOnlyMemory<byte> GetMessageBytes(HubMessage message) =>
+            _protocol.GetMessageBytes(message);
 
         public bool IsVersionSupported(int version)
         {
             return version == _version;
         }
 
-        public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, [NotNullWhen(true)] out HubMessage message)
+        public bool TryParseMessage(
+            ref ReadOnlySequence<byte> input,
+            IInvocationBinder binder,
+            [NotNullWhen(true)] out HubMessage message
+        )
         {
             return _protocol.TryParseMessage(ref input, binder, out message);
         }
@@ -239,7 +276,10 @@ public class HubProtocolVersionTests : FunctionalTestBase
             _innerFactory = innerFactory;
         }
 
-        public ValueTask<ConnectionContext> ConnectAsync(EndPoint endPoint, CancellationToken cancellationToken = default)
+        public ValueTask<ConnectionContext> ConnectAsync(
+            EndPoint endPoint,
+            CancellationToken cancellationToken = default
+        )
         {
             ConnectTask = _innerFactory.ConnectAsync(endPoint, cancellationToken);
             return ConnectTask;

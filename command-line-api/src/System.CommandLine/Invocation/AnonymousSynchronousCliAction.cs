@@ -7,10 +7,8 @@ internal sealed class AnonymousSynchronousCliAction : SynchronousCliAction
 {
     private readonly Func<ParseResult, int> _syncAction;
 
-    internal AnonymousSynchronousCliAction(Func<ParseResult, int> action)
-        => _syncAction = action;
+    internal AnonymousSynchronousCliAction(Func<ParseResult, int> action) => _syncAction = action;
 
     /// <inheritdoc />
-    public override int Invoke(ParseResult parseResult) =>
-        _syncAction(parseResult);
+    public override int Invoke(ParseResult parseResult) => _syncAction(parseResult);
 }

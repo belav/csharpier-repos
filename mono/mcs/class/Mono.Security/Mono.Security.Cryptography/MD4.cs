@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,37 +32,38 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Mono.Security.Cryptography {
-
+namespace Mono.Security.Cryptography
+{
 #if !INSIDE_CORLIB
-	public
+    public
 #endif
-	abstract class MD4 : HashAlgorithm {
+    abstract class MD4 : HashAlgorithm
+    {
+        protected MD4()
+        {
+            // MD4 hash length are 128 bits long
+            HashSizeValue = 128;
+        }
 
-		protected MD4 () 
-		{
-			// MD4 hash length are 128 bits long
-			HashSizeValue = 128; 
-		}
-
-		public static new MD4 Create () 
-		{
+        public static new MD4 Create()
+        {
 #if FULL_AOT_RUNTIME
-			return new MD4Managed ();
+            return new MD4Managed();
 #else
-			// for this to work we must register ourself with CryptoConfig
-			return Create ("MD4");
+            // for this to work we must register ourself with CryptoConfig
+            return Create("MD4");
 #endif
-		}
+        }
 
-		public static new MD4 Create (string hashName) 
-		{
-			object o = CryptoConfig.CreateFromName (hashName);
-			// in case machine.config isn't configured to use any MD4 implementation
-			if (o == null) {
-				o = new MD4Managed ();
-			}
-			return (MD4) o;
-		}
-	}
+        public static new MD4 Create(string hashName)
+        {
+            object o = CryptoConfig.CreateFromName(hashName);
+            // in case machine.config isn't configured to use any MD4 implementation
+            if (o == null)
+            {
+                o = new MD4Managed();
+            }
+            return (MD4)o;
+        }
+    }
 }

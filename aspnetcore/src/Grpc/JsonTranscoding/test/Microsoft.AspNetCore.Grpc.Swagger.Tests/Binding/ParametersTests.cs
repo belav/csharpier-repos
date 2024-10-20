@@ -124,7 +124,9 @@ public class ParametersTests
         var swagger = OpenApiTestHelpers.GetOpenApiDocument<ParametersService>(_testOutputHelper);
 
         // Assert
-        var path = swagger.Paths["/v1/parameters7/{parameterOne.nestedParameterOne}/{parameterOne.nestedParameterTwo}"];
+        var path = swagger.Paths[
+            "/v1/parameters7/{parameterOne.nestedParameterOne}/{parameterOne.nestedParameterTwo}"
+        ];
         Assert.True(path.Operations.TryGetValue(OperationType.Get, out var operation));
         Assert.Equal(5, operation.Parameters.Count);
         Assert.Equal(ParameterLocation.Path, operation.Parameters[0].In);

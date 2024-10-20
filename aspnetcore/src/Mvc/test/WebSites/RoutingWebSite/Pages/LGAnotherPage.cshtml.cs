@@ -17,6 +17,12 @@ public class LGAnotherPageModel : PageModel
 
     public ContentResult OnGet()
     {
-        return Content(_linkGenerator.GetPathByAction(HttpContext, action: nameof(LG2Controller.SomeAction), controller: "LG2"));
+        return Content(
+            _linkGenerator.GetPathByAction(
+                HttpContext,
+                action: nameof(LG2Controller.SomeAction),
+                controller: "LG2"
+            )
+        );
     }
 }

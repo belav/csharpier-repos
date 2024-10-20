@@ -42,13 +42,21 @@ namespace System.Reflection.Emit.Tests
         public void GetGenericArguments_SingleParameters()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            MethodBuilder method = type.DefineMethod("Name", MethodAttributes.Public, typeof(void), new Type[] { typeof(int) });
+            MethodBuilder method = type.DefineMethod(
+                "Name",
+                MethodAttributes.Public,
+                typeof(void),
+                new Type[] { typeof(int) }
+            );
             GenericTypeParameterBuilder[] genericParams = method.DefineGenericParameters("T");
             method.DefineParameter(1, ParameterAttributes.HasDefault, "Parameter");
             VerifyGenericArguments(method, genericParams);
         }
 
-        private static void VerifyGenericArguments(MethodBuilder method, GenericTypeParameterBuilder[] expected)
+        private static void VerifyGenericArguments(
+            MethodBuilder method,
+            GenericTypeParameterBuilder[] expected
+        )
         {
             Type[] genericArguments = method.GetGenericArguments();
             Assert.Equal(expected.Select(p => p.AsType()), genericArguments);

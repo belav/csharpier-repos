@@ -24,9 +24,17 @@ namespace System.DirectoryServices.Protocols.Tests
         [Theory]
         [InlineData(null, null, null)]
         [InlineData("DistinguishedName", "NewParentDistinguishedName", "NewName")]
-        public void Ctor_DistinguishedName_NewParentDistinguishedName_NewName(string distinguishedName, string newParentDistinguishedName, string newName)
+        public void Ctor_DistinguishedName_NewParentDistinguishedName_NewName(
+            string distinguishedName,
+            string newParentDistinguishedName,
+            string newName
+        )
         {
-            var request = new ModifyDNRequest(distinguishedName, newParentDistinguishedName, newName);
+            var request = new ModifyDNRequest(
+                distinguishedName,
+                newParentDistinguishedName,
+                newName
+            );
             Assert.Empty(request.Controls);
             Assert.Equal(distinguishedName, request.DistinguishedName);
             Assert.Equal(newName, request.NewName);
@@ -45,7 +53,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void NewParentDistinguishedName_Set_GetReturnsExpected()
         {
-            var request = new ModifyDNRequest { NewParentDistinguishedName = "NewParentDistinguishedName" };
+            var request = new ModifyDNRequest
+            {
+                NewParentDistinguishedName = "NewParentDistinguishedName",
+            };
             Assert.Equal("NewParentDistinguishedName", request.NewParentDistinguishedName);
         }
 

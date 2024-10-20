@@ -31,10 +31,15 @@ namespace System.Reflection.Emit.Tests
         public void SetImplementationFlags_TypeCreated_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual
+            );
 
             type.CreateType();
-            Assert.Throws<InvalidOperationException>(() => method.SetImplementationFlags(MethodImplAttributes.Unmanaged));
+            Assert.Throws<InvalidOperationException>(
+                () => method.SetImplementationFlags(MethodImplAttributes.Unmanaged)
+            );
         }
     }
 }

@@ -1,9 +1,10 @@
 //------------------------------------------------------------------------------
 // <copyright file="ListSortDescriptionCollection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System.Collections;
     using System.Security.Permissions;
 
@@ -11,21 +12,24 @@ namespace System.ComponentModel {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [HostProtection(SharedState = true)]
-    public class ListSortDescriptionCollection : IList {
+    public class ListSortDescriptionCollection : IList
+    {
         ArrayList sorts = new ArrayList();
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ListSortDescriptionCollection() {
-        }
+        public ListSortDescriptionCollection() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ListSortDescriptionCollection(ListSortDescription[] sorts) {
-            if (sorts != null) {
-                for (int i = 0; i < sorts.Length; i ++) {
+        public ListSortDescriptionCollection(ListSortDescription[] sorts)
+        {
+            if (sorts != null)
+            {
+                for (int i = 0; i < sorts.Length; i++)
+                {
                     this.sorts.Add(sorts[i]);
                 }
             }
@@ -34,12 +38,14 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ListSortDescription this[int index] {
-            get {
-                return (ListSortDescription) sorts[index];
-            }
-            set {
-                throw new InvalidOperationException(SR.GetString(SR.CantModifyListSortDescriptionCollection));
+        public ListSortDescription this[int index]
+        {
+            get { return (ListSortDescription)sorts[index]; }
+            set
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.CantModifyListSortDescriptionCollection)
+                );
             }
         }
 
@@ -49,80 +55,97 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        bool IList.IsFixedSize {
-            get {
-                return true;
+        bool IList.IsFixedSize
+        {
+            get { return true; }
+        }
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        bool IList.IsReadOnly
+        {
+            get { return true; }
+        }
+
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        object IList.this[int index]
+        {
+            get { return this[index]; }
+            set
+            {
+                throw new InvalidOperationException(
+                    SR.GetString(SR.CantModifyListSortDescriptionCollection)
+                );
             }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        bool IList.IsReadOnly {
-            get {
-                return true;
-            }
+        int IList.Add(object value)
+        {
+            throw new InvalidOperationException(
+                SR.GetString(SR.CantModifyListSortDescriptionCollection)
+            );
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        object IList.this[int index] {
-            get {
-                return this[index];
-            }
-            set {
-                throw new InvalidOperationException(SR.GetString(SR.CantModifyListSortDescriptionCollection));
-            }
+        void IList.Clear()
+        {
+            throw new InvalidOperationException(
+                SR.GetString(SR.CantModifyListSortDescriptionCollection)
+            );
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        int IList.Add(object value) {
-            throw new InvalidOperationException(SR.GetString(SR.CantModifyListSortDescriptionCollection));
-        }
-
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        void IList.Clear() {
-            throw new InvalidOperationException(SR.GetString(SR.CantModifyListSortDescriptionCollection));
-        }
-
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
-        public bool Contains(object value) {
+        public bool Contains(object value)
+        {
             return ((IList)this.sorts).Contains(value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int IndexOf(object value) {
+        public int IndexOf(object value)
+        {
             return ((IList)this.sorts).IndexOf(value);
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IList.Insert(int index, object value) {
-            throw new InvalidOperationException(SR.GetString(SR.CantModifyListSortDescriptionCollection));
+        void IList.Insert(int index, object value)
+        {
+            throw new InvalidOperationException(
+                SR.GetString(SR.CantModifyListSortDescriptionCollection)
+            );
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IList.Remove(object value) {
-            throw new InvalidOperationException(SR.GetString(SR.CantModifyListSortDescriptionCollection));
+        void IList.Remove(object value)
+        {
+            throw new InvalidOperationException(
+                SR.GetString(SR.CantModifyListSortDescriptionCollection)
+            );
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        void IList.RemoveAt(int index) {
-            throw new InvalidOperationException(SR.GetString(SR.CantModifyListSortDescriptionCollection));
+        void IList.RemoveAt(int index)
+        {
+            throw new InvalidOperationException(
+                SR.GetString(SR.CantModifyListSortDescriptionCollection)
+            );
         }
 
         // ICollection
@@ -131,17 +154,18 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Count {
-            get {
-                return this.sorts.Count;
-            }
+        public int Count
+        {
+            get { return this.sorts.Count; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        bool ICollection.IsSynchronized {
-            get {
+        bool ICollection.IsSynchronized
+        {
+            get
+            {
                 // true because after the constructor finished running the ListSortDescriptionCollection is Read Only
                 return true;
             }
@@ -150,16 +174,16 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        object ICollection.SyncRoot {
-            get {
-                return this;
-            }
+        object ICollection.SyncRoot
+        {
+            get { return this; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void CopyTo(Array array, int index) {
+        public void CopyTo(Array array, int index)
+        {
             this.sorts.CopyTo(array, index);
         }
 
@@ -169,7 +193,8 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return this.sorts.GetEnumerator();
         }
     }

@@ -19,13 +19,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         /// </summary>
         private CultureInfo? _cultureInfo;
 
-        public RoslynRequestExecutionQueue(AbstractLanguageServer<RequestContext> languageServer, ILspLogger logger, IHandlerProvider handlerProvider)
+        public RoslynRequestExecutionQueue(
+            AbstractLanguageServer<RequestContext> languageServer,
+            ILspLogger logger,
+            IHandlerProvider handlerProvider
+        )
             : base(languageServer, logger, handlerProvider)
         {
-            _initializeManager = languageServer.GetLspServices().GetRequiredService<IInitializeManager>();
+            _initializeManager = languageServer
+                .GetLspServices()
+                .GetRequiredService<IInitializeManager>();
         }
 
-        public override Task WrapStartRequestTaskAsync(Task nonMutatingRequestTask, bool rethrowExceptions)
+        public override Task WrapStartRequestTaskAsync(
+            Task nonMutatingRequestTask,
+            bool rethrowExceptions
+        )
         {
             // Update the locale for this request to the desired LSP locale.
             CultureInfo.CurrentUICulture = GetCultureForRequest();

@@ -2,17 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
-using System.IO;
-using System.Text;
-using System.Globalization;
 using System.Collections;
+using System.Globalization;
+using System.IO;
 using System.IO.IsolatedStorage;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
+using System.Text;
 
 public class Helper
 {
-
     #region methods for InnerSequential struct
 
     // Return new InnerSequential instance
@@ -33,7 +32,11 @@ public class Helper
         Console.WriteLine("\t{0}.f3 = {1}", name, inner_seq.f3);
     }
 
-    public static bool ValidateInnerSequential(InnerSequential s1, InnerSequential s2, string methodName)
+    public static bool ValidateInnerSequential(
+        InnerSequential s1,
+        InnerSequential s2,
+        string methodName
+    )
     {
         if (s1.f1 != s2.f1 || s1.f2 != s2.f2 || s1.f3 != s2.f3)
         {
@@ -113,7 +116,11 @@ public class Helper
         Console.WriteLine("\t{0}.f3 = {1}", name, inner.f3);
     }
 
-    public static bool ValidateInnerExplicit(InnerExplicit inner1, InnerExplicit inner2, string methodName)
+    public static bool ValidateInnerExplicit(
+        InnerExplicit inner1,
+        InnerExplicit inner2,
+        string methodName
+    )
     {
         if (inner1.f1 != inner2.f1 || inner1.f2 != inner2.f2 || inner1.f3 != inner2.f3)
         {
@@ -162,23 +169,61 @@ public class Helper
     }
 
     //	Returns true if the two params have the same fields
-    public static bool ValidateInnerArraySequential(InnerArraySequential outer1, InnerArraySequential outer2, string methodName)
+    public static bool ValidateInnerArraySequential(
+        InnerArraySequential outer1,
+        InnerArraySequential outer2,
+        string methodName
+    )
     {
         for (int i = 0; i < Common.NumArrElements; i++)
         {
-            if (outer1.arr[i].f1 != outer2.arr[i].f1 ||
-                outer1.arr[i].f2 != outer2.arr[i].f2 ||
-                outer1.arr[i].f3 != outer2.arr[i].f3)
+            if (
+                outer1.arr[i].f1 != outer2.arr[i].f1
+                || outer1.arr[i].f2 != outer2.arr[i].f2
+                || outer1.arr[i].f3 != outer2.arr[i].f3
+            )
             {
-                Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
+                Console.WriteLine(
+                    "\tFAILED! " + methodName + "did not receive result as expected."
+                );
                 Console.WriteLine("\tThe Actual is...");
-                Console.WriteLine("\t{0}.arr[{1}].f1 = {2}", outer1.ToString(), i, outer1.arr[i].f1);
-                Console.WriteLine("\t{0}.arr[{1}].f2 = {2}", outer1.ToString(), i, outer1.arr[i].f2);
-                Console.WriteLine("\t{0}.arr[{1}].f3 = {2}", outer1.ToString(), i, outer1.arr[i].f3);
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f1 = {2}",
+                    outer1.ToString(),
+                    i,
+                    outer1.arr[i].f1
+                );
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f2 = {2}",
+                    outer1.ToString(),
+                    i,
+                    outer1.arr[i].f2
+                );
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f3 = {2}",
+                    outer1.ToString(),
+                    i,
+                    outer1.arr[i].f3
+                );
                 Console.WriteLine("\tThe Expected is...");
-                Console.WriteLine("\t{0}.arr[{1}].f1 = {2}", outer2.ToString(), i, outer2.arr[i].f1);
-                Console.WriteLine("\t{0}.arr[{1}].f2 = {2}", outer2.ToString(), i, outer2.arr[i].f2);
-                Console.WriteLine("\t{0}.arr[{1}].f3 = {2}", outer2.ToString(), i, outer2.arr[i].f3);
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f1 = {2}",
+                    outer2.ToString(),
+                    i,
+                    outer2.arr[i].f1
+                );
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f2 = {2}",
+                    outer2.ToString(),
+                    i,
+                    outer2.arr[i].f2
+                );
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f3 = {2}",
+                    outer2.ToString(),
+                    i,
+                    outer2.arr[i].f3
+                );
                 return false;
             }
         }
@@ -219,17 +264,33 @@ public class Helper
     }
 
     //	Returns true if the two params have the same fields
-    public static bool ValidateInnerArrayExplicit(InnerArrayExplicit outer1, InnerArrayExplicit InnerArrayExplicit, string methodName)
+    public static bool ValidateInnerArrayExplicit(
+        InnerArrayExplicit outer1,
+        InnerArrayExplicit InnerArrayExplicit,
+        string methodName
+    )
     {
         for (int i = 0; i < Common.NumArrElements; i++)
         {
             if (outer1.arr[i].f1 != InnerArrayExplicit.arr[i].f1)
             {
-                Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
+                Console.WriteLine(
+                    "\tFAILED! " + methodName + "did not receive result as expected."
+                );
                 Console.WriteLine("\tThe Actual f1 field is...");
-                Console.WriteLine("\t{0}.arr[{1}].f1 = {2}", outer1.ToString(), i, outer1.arr[i].f1);
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f1 = {2}",
+                    outer1.ToString(),
+                    i,
+                    outer1.arr[i].f1
+                );
                 Console.WriteLine("\tThe Expected f1 field is...");
-                Console.WriteLine("\t{0}.arr[{1}].f1 = {2}", InnerArrayExplicit.ToString(), i, InnerArrayExplicit.arr[i].f1);
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f1 = {2}",
+                    InnerArrayExplicit.ToString(),
+                    i,
+                    InnerArrayExplicit.arr[i].f1
+                );
                 return false;
             }
         }
@@ -239,7 +300,11 @@ public class Helper
             Console.WriteLine("\tThe Actual f4 field is...");
             Console.WriteLine("\t{0}.f4 = {1}", outer1.ToString(), outer1.f4);
             Console.WriteLine("\tThe Expected f4 field is...");
-            Console.WriteLine("\t{0}.f4 = {1}", InnerArrayExplicit.ToString(), InnerArrayExplicit.f4);
+            Console.WriteLine(
+                "\t{0}.f4 = {1}",
+                InnerArrayExplicit.ToString(),
+                InnerArrayExplicit.f4
+            );
             return false;
         }
         Console.WriteLine("\tPASSED!");
@@ -283,19 +348,53 @@ public class Helper
     {
         for (int i = 0; i < Common.NumArrElements; i++)
         {
-            if (outer1.arr[i].f1 != InnerArrayExplicit.arr[i].f1 ||
-                outer1.arr[i].f2 != InnerArrayExplicit.arr[i].f2 ||
-                outer1.arr[i].f3 != InnerArrayExplicit.arr[i].f3)
+            if (
+                outer1.arr[i].f1 != InnerArrayExplicit.arr[i].f1
+                || outer1.arr[i].f2 != InnerArrayExplicit.arr[i].f2
+                || outer1.arr[i].f3 != InnerArrayExplicit.arr[i].f3
+            )
             {
-                Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
+                Console.WriteLine(
+                    "\tFAILED! " + methodName + "did not receive result as expected."
+                );
                 Console.WriteLine("\tThe Actual is...");
-                Console.WriteLine("\t{0}.arr[{1}].f1 = {2}", outer1.ToString(), i, outer1.arr[i].f1);
-                Console.WriteLine("\t{0}.arr[{1}].f2 = {2}", outer1.ToString(), i, outer1.arr[i].f2);
-                Console.WriteLine("\t{0}.arr[{1}].f3 = {2}", outer1.ToString(), i, outer1.arr[i].f3);
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f1 = {2}",
+                    outer1.ToString(),
+                    i,
+                    outer1.arr[i].f1
+                );
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f2 = {2}",
+                    outer1.ToString(),
+                    i,
+                    outer1.arr[i].f2
+                );
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f3 = {2}",
+                    outer1.ToString(),
+                    i,
+                    outer1.arr[i].f3
+                );
                 Console.WriteLine("\tThe Expected is...");
-                Console.WriteLine("\t{0}.arr[{1}].f1 = {2}", InnerArrayExplicit.ToString(), i, InnerArrayExplicit.arr[i].f1);
-                Console.WriteLine("\t{0}.arr[{1}].f2 = {2}", InnerArrayExplicit.ToString(), i, InnerArrayExplicit.arr[i].f2);
-                Console.WriteLine("\t{0}.arr[{1}].f3 = {2}", InnerArrayExplicit.ToString(), i, InnerArrayExplicit.arr[i].f3);
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f1 = {2}",
+                    InnerArrayExplicit.ToString(),
+                    i,
+                    InnerArrayExplicit.arr[i].f1
+                );
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f2 = {2}",
+                    InnerArrayExplicit.ToString(),
+                    i,
+                    InnerArrayExplicit.arr[i].f2
+                );
+                Console.WriteLine(
+                    "\t{0}.arr[{1}].f3 = {2}",
+                    InnerArrayExplicit.ToString(),
+                    i,
+                    InnerArrayExplicit.arr[i].f3
+                );
                 return false;
             }
         }
@@ -305,7 +404,11 @@ public class Helper
             Console.WriteLine("\tThe Actual f4 field is...");
             Console.WriteLine("\t{0}.f4 = {1}", outer1.ToString(), outer1.f4);
             Console.WriteLine("\tThe Expected f4 field is...");
-            Console.WriteLine("\t{0}.f4 = {1}", InnerArrayExplicit.ToString(), InnerArrayExplicit.f4);
+            Console.WriteLine(
+                "\t{0}.f4 = {1}",
+                InnerArrayExplicit.ToString(),
+                InnerArrayExplicit.f4
+            );
             return false;
         }
         Console.WriteLine("\tPASSED!");
@@ -333,7 +436,11 @@ public class Helper
     }
 
     //	Returns true if the two params have the same fields
-    public static bool ValidateCharSetAnsiSequential(CharSetAnsiSequential str1, CharSetAnsiSequential str2, string methodName)
+    public static bool ValidateCharSetAnsiSequential(
+        CharSetAnsiSequential str1,
+        CharSetAnsiSequential str2,
+        string methodName
+    )
     {
         if (str1.f1 != str2.f1 || str1.f2 != str2.f2)
         {
@@ -372,7 +479,11 @@ public class Helper
     }
 
     //	Returns true if the two params have the same fields
-    public static bool ValidateCharSetUnicodeSequential(CharSetUnicodeSequential str1, CharSetUnicodeSequential str2, string methodName)
+    public static bool ValidateCharSetUnicodeSequential(
+        CharSetUnicodeSequential str1,
+        CharSetUnicodeSequential str2,
+        string methodName
+    )
     {
         if (str1.f1 != str2.f1 || str1.f2 != str2.f2)
         {
@@ -394,8 +505,20 @@ public class Helper
 
     #region methods for NumberSequential struct
 
-    public static NumberSequential NewNumberSequential(int i32, uint ui32, short s1, ushort us1, Byte b, SByte sb,
-        Int16 i16, UInt16 ui16, Int64 i64, UInt64 ui64, Single sgl, Double d)
+    public static NumberSequential NewNumberSequential(
+        int i32,
+        uint ui32,
+        short s1,
+        ushort us1,
+        Byte b,
+        SByte sb,
+        Int16 i16,
+        UInt16 ui16,
+        Int64 i64,
+        UInt64 ui64,
+        Single sgl,
+        Double d
+    )
     {
         NumberSequential str1 = new NumberSequential();
         str1.i32 = i32;
@@ -429,12 +552,26 @@ public class Helper
         Console.WriteLine("\t{0}.d = {1}", name, str1.d);
     }
 
-    public static bool ValidateNumberSequential(NumberSequential str1, NumberSequential str2, string methodName)
+    public static bool ValidateNumberSequential(
+        NumberSequential str1,
+        NumberSequential str2,
+        string methodName
+    )
     {
-        if (str1.i32 != str2.i32 || str1.ui32 != str2.ui32 || str1.s1 != str2.s1 ||
-            str1.us1 != str2.us1 || str1.b != str2.b || str1.sb != str2.sb || str1.i16 != str2.i16 ||
-            str1.ui16 != str2.ui16 || str1.i64 != str2.i64 || str1.ui64 != str2.ui64 ||
-            str1.sgl != str2.sgl || str1.d != str2.d)
+        if (
+            str1.i32 != str2.i32
+            || str1.ui32 != str2.ui32
+            || str1.s1 != str2.s1
+            || str1.us1 != str2.us1
+            || str1.b != str2.b
+            || str1.sb != str2.sb
+            || str1.i16 != str2.i16
+            || str1.ui16 != str2.ui16
+            || str1.i64 != str2.i64
+            || str1.ui64 != str2.ui64
+            || str1.sgl != str2.sgl
+            || str1.d != str2.d
+        )
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
             Console.WriteLine("\tThe Actual is...");
@@ -504,7 +641,9 @@ public class Helper
         {
             if (str1.vals[i] != str2.vals[i])
             {
-                Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
+                Console.WriteLine(
+                    "\tFAILED! " + methodName + "did not receive result as expected."
+                );
                 Console.WriteLine("\tThe Actual vals field is...");
                 Console.WriteLine("\t{0}.vals[{1}] = {2}", str1.ToString(), i, str1.vals[i]);
                 Console.WriteLine("\tThe Expected vals field is...");
@@ -574,7 +713,10 @@ public class Helper
 
     #region methods for StringStructSequentialAnsi struct
 
-    public static StringStructSequentialAnsi NewStringStructSequentialAnsi(string first, string last)
+    public static StringStructSequentialAnsi NewStringStructSequentialAnsi(
+        string first,
+        string last
+    )
     {
         StringStructSequentialAnsi s6 = new StringStructSequentialAnsi();
         s6.first = first;
@@ -589,7 +731,11 @@ public class Helper
         Console.WriteLine("\t{0}.last = {1}", name, str1.last);
     }
 
-    public static bool ValidateStringStructSequentialAnsi(StringStructSequentialAnsi str1, StringStructSequentialAnsi str2, string methodName)
+    public static bool ValidateStringStructSequentialAnsi(
+        StringStructSequentialAnsi str1,
+        StringStructSequentialAnsi str2,
+        string methodName
+    )
     {
         if (str1.first != str2.first || str1.last != str2.last)
         {
@@ -611,7 +757,10 @@ public class Helper
 
     #region methods for StringStructSequentialUnicode struct
 
-    public static StringStructSequentialUnicode NewStringStructSequentialUnicode(string first, string last)
+    public static StringStructSequentialUnicode NewStringStructSequentialUnicode(
+        string first,
+        string last
+    )
     {
         StringStructSequentialUnicode s7 = new StringStructSequentialUnicode();
         s7.first = first;
@@ -620,13 +769,20 @@ public class Helper
         return s7;
     }
 
-    public static void PrintStringStructSequentialUnicode(StringStructSequentialUnicode str1, string name)
+    public static void PrintStringStructSequentialUnicode(
+        StringStructSequentialUnicode str1,
+        string name
+    )
     {
         Console.WriteLine("\t{0}.first = {1}", name, str1.first);
         Console.WriteLine("\t{0}.last = {1}", name, str1.last);
     }
 
-    public static bool ValidateStringStructSequentialUnicode(StringStructSequentialUnicode str1, StringStructSequentialUnicode str2, string methodName)
+    public static bool ValidateStringStructSequentialUnicode(
+        StringStructSequentialUnicode str1,
+        StringStructSequentialUnicode str2,
+        string methodName
+    )
     {
         if (str1.first != str2.first || str1.last != str2.last)
         {
@@ -648,7 +804,14 @@ public class Helper
 
     #region methods for S8 struct
 
-    public static S8 NewS8(string name, bool gender, UInt16 jobNum, int i32, uint ui32, sbyte mySByte)
+    public static S8 NewS8(
+        string name,
+        bool gender,
+        UInt16 jobNum,
+        int i32,
+        uint ui32,
+        sbyte mySByte
+    )
     {
         S8 s8 = new S8();
         s8.name = name;
@@ -672,9 +835,14 @@ public class Helper
 
     public static bool ValidateS8(S8 str1, S8 str2, string methodName)
     {
-        if (str1.name != str2.name || str1.gender != str2.gender ||
-            str1.jobNum != str2.jobNum ||
-            str1.i32 != str2.i32 || str1.ui32 != str2.ui32 || str1.mySByte != str2.mySByte)
+        if (
+            str1.name != str2.name
+            || str1.gender != str2.gender
+            || str1.jobNum != str2.jobNum
+            || str1.i32 != str2.i32
+            || str1.ui32 != str2.ui32
+            || str1.mySByte != str2.mySByte
+        )
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
             Console.WriteLine("\tThe Actual is...");
@@ -685,7 +853,6 @@ public class Helper
         }
         Console.WriteLine("\tPASSED!");
         return true;
-
     }
 
     #endregion
@@ -721,7 +888,10 @@ public class Helper
 
     #region methods for IncludeOuterIntegerStructSequential struct
 
-    public static IncludeOuterIntegerStructSequential NewIncludeOuterIntegerStructSequential(int i321, int i322)
+    public static IncludeOuterIntegerStructSequential NewIncludeOuterIntegerStructSequential(
+        int i321,
+        int i322
+    )
     {
         IncludeOuterIntegerStructSequential s10 = new IncludeOuterIntegerStructSequential();
         s10.s.s_int.i = i321;
@@ -729,13 +899,20 @@ public class Helper
         return s10;
     }
 
-    public static void PrintIncludeOuterIntegerStructSequential(IncludeOuterIntegerStructSequential str1, string name)
+    public static void PrintIncludeOuterIntegerStructSequential(
+        IncludeOuterIntegerStructSequential str1,
+        string name
+    )
     {
         Console.WriteLine("\t{0}.s.s_int.i = {1}", name, str1.s.s_int.i);
         Console.WriteLine("\t{0}.s.i = {1}", name, str1.s.i);
     }
 
-    public static bool ValidateIncludeOuterIntegerStructSequential(IncludeOuterIntegerStructSequential str1, IncludeOuterIntegerStructSequential str2, string methodName)
+    public static bool ValidateIncludeOuterIntegerStructSequential(
+        IncludeOuterIntegerStructSequential str1,
+        IncludeOuterIntegerStructSequential str2,
+        string methodName
+    )
     {
         if (str1.s.s_int.i != str2.s.s_int.i || str1.s.i != str2.s.i)
         {
@@ -763,7 +940,7 @@ public class Helper
         Console.WriteLine("\t{0}.i = {1}", name, str1.i);
     }
 
-    unsafe public static S11 NewS11(int* i32, int i)
+    public static unsafe S11 NewS11(int* i32, int i)
     {
         S11 s11 = new S11();
         s11.i32 = i32;
@@ -771,7 +948,7 @@ public class Helper
         return s11;
     }
 
-    unsafe public static bool ValidateS11(S11 str1, S11 str2, string methodName)
+    public static unsafe bool ValidateS11(S11 str1, S11 str2, string methodName)
     {
         if (str1.i32 != str2.i32 || str1.i != str2.i)
         {
@@ -790,7 +967,20 @@ public class Helper
 
     #region methods for U struct
 
-    public static U NewU(int i32, uint ui32, IntPtr iPtr, UIntPtr uiPtr, short s, ushort us, byte b, sbyte sb, long l, ulong ul, float f, double d)
+    public static U NewU(
+        int i32,
+        uint ui32,
+        IntPtr iPtr,
+        UIntPtr uiPtr,
+        short s,
+        ushort us,
+        byte b,
+        sbyte sb,
+        long l,
+        ulong ul,
+        float f,
+        double d
+    )
     {
         U u = new U();
         u.i32 = i32;
@@ -827,10 +1017,20 @@ public class Helper
 
     public static bool ValidateU(U str1, U str2, string methodName)
     {
-        if (str1.i32 != str2.i32 || str1.ui32 != str2.ui32 || str1.iPtr != str2.iPtr ||
-            str1.uiPtr != str2.uiPtr || str1.s != str2.s || str1.us != str2.us ||
-            str1.b != str2.b || str1.sb != str2.sb || str1.l != str2.l || str1.ul != str2.ul ||
-            str1.f != str2.f || str1.d != str2.d)
+        if (
+            str1.i32 != str2.i32
+            || str1.ui32 != str2.ui32
+            || str1.iPtr != str2.iPtr
+            || str1.uiPtr != str2.uiPtr
+            || str1.s != str2.s
+            || str1.us != str2.us
+            || str1.b != str2.b
+            || str1.sb != str2.sb
+            || str1.l != str2.l
+            || str1.ul != str2.ul
+            || str1.f != str2.f
+            || str1.d != str2.d
+        )
         {
             Console.WriteLine("\tFAILED! " + methodName + "did not receive result as expected.");
             Console.WriteLine("\tThe Actual is...");
@@ -862,7 +1062,11 @@ public class Helper
         Console.WriteLine("\t{0}.b2 = {1}", name, str1.b2);
     }
 
-    public static bool ValidateByteStructPack2Explicit(ByteStructPack2Explicit str1, ByteStructPack2Explicit str2, string methodName)
+    public static bool ValidateByteStructPack2Explicit(
+        ByteStructPack2Explicit str1,
+        ByteStructPack2Explicit str2,
+        string methodName
+    )
     {
         if (str1.b1 != str2.b1 || str1.b2 != str2.b2)
         {
@@ -899,7 +1103,11 @@ public class Helper
         Console.WriteLine("\t{0}.s2 = {1}", name, str1.s2);
     }
 
-    public static bool ValidateShortStructPack4Explicit(ShortStructPack4Explicit str1, ShortStructPack4Explicit str2, string methodName)
+    public static bool ValidateShortStructPack4Explicit(
+        ShortStructPack4Explicit str1,
+        ShortStructPack4Explicit str2,
+        string methodName
+    )
     {
         if (str1.s1 != str2.s1 || str1.s2 != str2.s2)
         {
@@ -936,7 +1144,11 @@ public class Helper
         Console.WriteLine("\t{0}.i2 = {1}", name, str1.i2);
     }
 
-    public static bool ValidateIntStructPack8Explicit(IntStructPack8Explicit str1, IntStructPack8Explicit str2, string methodName)
+    public static bool ValidateIntStructPack8Explicit(
+        IntStructPack8Explicit str1,
+        IntStructPack8Explicit str2,
+        string methodName
+    )
     {
         if (str1.i1 != str2.i1 || str1.i2 != str2.i2)
         {
@@ -973,7 +1185,11 @@ public class Helper
         Console.WriteLine("\t{0}.l2 = {1}", name, str1.l2);
     }
 
-    public static bool ValidateLongStructPack16Explicit(LongStructPack16Explicit str1, LongStructPack16Explicit str2, string methodName)
+    public static bool ValidateLongStructPack16Explicit(
+        LongStructPack16Explicit str1,
+        LongStructPack16Explicit str2,
+        string methodName
+    )
     {
         if (str1.l1 != str2.l1 || str1.l2 != str2.l2)
         {
@@ -1003,13 +1219,19 @@ public class Helper
 
         return u1;
     }
+
     public static void PrintByteStruct3Byte(ByteStruct3Byte str1, string name)
     {
         Console.WriteLine("\t{0}.b1 = {1}", name, str1.b1);
         Console.WriteLine("\t{0}.b2 = {1}", name, str1.b2);
         Console.WriteLine("\t{0}.b3 = {1}", name, str1.b3);
     }
-    public static bool ValidateByteStruct3Byte(ByteStruct3Byte str1, ByteStruct3Byte str2, string methodName)
+
+    public static bool ValidateByteStruct3Byte(
+        ByteStruct3Byte str1,
+        ByteStruct3Byte str2,
+        string methodName
+    )
     {
         if (str1.b1 != str2.b1 || str1.b2 != str2.b2)
         {
@@ -1036,11 +1258,17 @@ public class Helper
 
         return u1;
     }
+
     public static void PrintIntegerStructSequential(IntegerStructSequential str1, string name)
     {
         Console.WriteLine("\t{0}.i = {1}", name, str1.i);
     }
-    public static bool ValidateIntegerStructSequential(IntegerStructSequential str1, IntegerStructSequential str2, string methodName)
+
+    public static bool ValidateIntegerStructSequential(
+        IntegerStructSequential str1,
+        IntegerStructSequential str2,
+        string methodName
+    )
     {
         if (str1.i != str2.i)
         {
@@ -1058,7 +1286,6 @@ public class Helper
         }
     }
     #endregion
-
 }
 
 public static class TestFramework
@@ -1067,10 +1294,12 @@ public static class TestFramework
     {
         Logging.WriteLine(str);
     }
+
     public static void LogError(string id, string msg)
     {
         Logging.WriteLine("ERROR!!!-" + id + ": " + msg);
     }
+
     public static void BeginScenario(string name)
     {
         Logging.WriteLine("Beginning scenario: " + name);
@@ -1088,7 +1317,12 @@ public static class Logging
     public static void SetConsole(string fileName)
     {
 #if (!WIN_8_P)
-        FileStream fs = new FileStream(fileName, FileMode.Append, FileAccess.Write, FileShare.ReadWrite);
+        FileStream fs = new FileStream(
+            fileName,
+            FileMode.Append,
+            FileAccess.Write,
+            FileShare.ReadWrite
+        );
         loggingFile = new StreamWriter(fs, Encoding.Unicode);
         Console.SetOut(loggingFile);
 #endif
@@ -1313,5 +1547,4 @@ public static class Logging
         Console.Write(value);
         Console.Out.Flush();
     }
-
 }

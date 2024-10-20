@@ -35,16 +35,22 @@ internal sealed class UseMvcAnalyzer
         {
             foreach (var middlewareItem in middlewareAnalysis.Middleware)
             {
-                if (middlewareItem.UseMethod.Name == "UseMvc" || middlewareItem.UseMethod.Name == "UseMvcWithDefaultRoute")
+                if (
+                    middlewareItem.UseMethod.Name == "UseMvc"
+                    || middlewareItem.UseMethod.Name == "UseMvcWithDefaultRoute"
+                )
                 {
                     // Report a diagnostic if it's unclear that the user turned off Endpoint Routing.
                     if (!OptionsFacts.IsEndpointRoutingExplicitlyDisabled(optionsAnalysis))
                     {
-                        context.ReportDiagnostic(Diagnostic.Create(
-                            StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting,
-                            middlewareItem.Operation.Syntax.GetLocation(),
-                            middlewareItem.UseMethod.Name,
-                            optionsAnalysis.ConfigureServicesMethod.Name));
+                        context.ReportDiagnostic(
+                            Diagnostic.Create(
+                                StartupAnalyzer.Diagnostics.UnsupportedUseMvcWithEndpointRouting,
+                                middlewareItem.Operation.Syntax.GetLocation(),
+                                middlewareItem.UseMethod.Name,
+                                optionsAnalysis.ConfigureServicesMethod.Name
+                            )
+                        );
                     }
                 }
             }

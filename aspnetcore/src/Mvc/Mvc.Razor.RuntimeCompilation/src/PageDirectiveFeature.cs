@@ -13,23 +13,31 @@ namespace Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation;
 
 internal static partial class PageDirectiveFeature
 {
-    private static readonly RazorProjectEngine PageDirectiveEngine = RazorProjectEngine.Create(RazorConfiguration.Default, new EmptyRazorProjectFileSystem(), builder =>
-    {
-        for (var i = builder.Phases.Count - 1; i >= 0; i--)
+    private static readonly RazorProjectEngine PageDirectiveEngine = RazorProjectEngine.Create(
+        RazorConfiguration.Default,
+        new EmptyRazorProjectFileSystem(),
+        builder =>
         {
-            var phase = builder.Phases[i];
-            builder.Phases.RemoveAt(i);
-            if (phase is IRazorDocumentClassifierPhase)
+            for (var i = builder.Phases.Count - 1; i >= 0; i--)
             {
-                break;
+                var phase = builder.Phases[i];
+                builder.Phases.RemoveAt(i);
+                if (phase is IRazorDocumentClassifierPhase)
+                {
+                    break;
+                }
             }
+
+            RazorExtensions.Register(builder);
+            builder.Features.Add(new PageDirectiveParserOptionsFeature());
         }
+    );
 
-        RazorExtensions.Register(builder);
-        builder.Features.Add(new PageDirectiveParserOptionsFeature());
-    });
-
-    public static bool TryGetPageDirective(ILogger logger, RazorProjectItem projectItem, [NotNullWhen(true)] out string? template)
+    public static bool TryGetPageDirective(
+        ILogger logger,
+        RazorProjectItem projectItem,
+        [NotNullWhen(true)] out string? template
+    )
     {
         ArgumentNullException.ThrowIfNull(projectItem);
 
@@ -51,7 +59,9 @@ internal static partial class PageDirectiveFeature
         return false;
     }
 
-    private sealed class PageDirectiveParserOptionsFeature : RazorEngineFeatureBase, IConfigureRazorParserOptionsFeature
+    private sealed class PageDirectiveParserOptionsFeature
+        : RazorEngineFeatureBase,
+            IConfigureRazorParserOptionsFeature
     {
         public int Order { get; }
 
@@ -68,7 +78,11 @@ internal static partial class PageDirectiveFeature
             return Enumerable.Empty<RazorProjectItem>();
         }
 
-        public override IEnumerable<RazorProjectItem> FindHierarchicalItems(string basePath, string path, string fileName)
+        public override IEnumerable<RazorProjectItem> FindHierarchicalItems(
+            string basePath,
+            string path,
+            string fileName
+        )
         {
             return Enumerable.Empty<RazorProjectItem>();
         }
@@ -114,10 +128,24 @@ internal static partial class PageDirectiveFeature
 
     private static partial class Log
     {
-        [LoggerMessage(104, LogLevel.Warning, "The page directive at '{FilePath}' is malformed. Please fix the following issues: {Diagnostics}", EventName = "MalformedPageDirective", SkipEnabledCheck = true)]
-        private static partial void MalformedPageDirective(ILogger logger, string filePath, string[] diagnostics);
+        [LoggerMessage(
+            104,
+            LogLevel.Warning,
+            "The page directive at '{FilePath}' is malformed. Please fix the following issues: {Diagnostics}",
+            EventName = "MalformedPageDirective",
+            SkipEnabledCheck = true
+        )]
+        private static partial void MalformedPageDirective(
+            ILogger logger,
+            string filePath,
+            string[] diagnostics
+        );
 
-        public static void MalformedPageDirective(ILogger logger, string filePath, IList<RazorDiagnostic> diagnostics)
+        public static void MalformedPageDirective(
+            ILogger logger,
+            string filePath,
+            IList<RazorDiagnostic> diagnostics
+        )
         {
             if (logger.IsEnabled(LogLevel.Warning))
             {

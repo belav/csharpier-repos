@@ -11,7 +11,11 @@ namespace Microsoft.AspNetCore.Hosting.TestSites;
 
 public class StartupShutdown
 {
-    public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory, IHostApplicationLifetime lifetime)
+    public void Configure(
+        IApplicationBuilder app,
+        ILoggerFactory loggerFactory,
+        IHostApplicationLifetime lifetime
+    )
     {
         lifetime.ApplicationStarted.Register(() =>
         {
@@ -36,4 +40,3 @@ public class StartupShutdown
         });
     }
 }
-

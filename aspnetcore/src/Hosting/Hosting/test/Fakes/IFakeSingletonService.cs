@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Hosting.Fakes;
 
-interface IFakeSingletonService : IFakeService
-{
-}
+interface IFakeSingletonService : IFakeService { }

@@ -14,13 +14,19 @@ namespace System.Web.Razor.Test
         public void ConstructorRequiresNonNullCodeLanguage()
         {
             Assert.ThrowsArgumentNull(() => new RazorEngineHost(null), "codeLanguage");
-            Assert.ThrowsArgumentNull(() => new RazorEngineHost(null, () => new HtmlMarkupParser()), "codeLanguage");
+            Assert.ThrowsArgumentNull(
+                () => new RazorEngineHost(null, () => new HtmlMarkupParser()),
+                "codeLanguage"
+            );
         }
 
         [Fact]
         public void ConstructorRequiresNonNullMarkupParser()
         {
-            Assert.ThrowsArgumentNull(() => new RazorEngineHost(new CSharpRazorCodeLanguage(), null), "markupParserFactory");
+            Assert.ThrowsArgumentNull(
+                () => new RazorEngineHost(new CSharpRazorCodeLanguage(), null),
+                "markupParserFactory"
+            );
         }
 
         [Fact]
@@ -57,59 +63,92 @@ namespace System.Web.Razor.Test
         [Fact]
         public void DecorateCodeParserRequiresNonNullCodeParser()
         {
-            Assert.ThrowsArgumentNull(() => CreateHost().DecorateCodeParser(null), "incomingCodeParser");
+            Assert.ThrowsArgumentNull(
+                () => CreateHost().DecorateCodeParser(null),
+                "incomingCodeParser"
+            );
         }
 
         [Fact]
         public void DecorateMarkupParserRequiresNonNullMarkupParser()
         {
-            Assert.ThrowsArgumentNull(() => CreateHost().DecorateMarkupParser(null), "incomingMarkupParser");
+            Assert.ThrowsArgumentNull(
+                () => CreateHost().DecorateMarkupParser(null),
+                "incomingMarkupParser"
+            );
         }
 
         [Fact]
         public void DecorateCodeGeneratorRequiresNonNullCodeGenerator()
         {
-            Assert.ThrowsArgumentNull(() => CreateHost().DecorateCodeGenerator(null), "incomingCodeGenerator");
+            Assert.ThrowsArgumentNull(
+                () => CreateHost().DecorateCodeGenerator(null),
+                "incomingCodeGenerator"
+            );
         }
 
         [Fact]
         public void PostProcessGeneratedCodeRequiresNonNullCompileUnit()
         {
-            Assert.ThrowsArgumentNull(() => CreateHost().PostProcessGeneratedCode(codeCompileUnit: null,
-                                                                                      generatedNamespace: new CodeNamespace(),
-                                                                                      generatedClass: new CodeTypeDeclaration(),
-                                                                                      executeMethod: new CodeMemberMethod()),
-                                          "codeCompileUnit");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    CreateHost()
+                        .PostProcessGeneratedCode(
+                            codeCompileUnit: null,
+                            generatedNamespace: new CodeNamespace(),
+                            generatedClass: new CodeTypeDeclaration(),
+                            executeMethod: new CodeMemberMethod()
+                        ),
+                "codeCompileUnit"
+            );
         }
 
         [Fact]
         public void PostProcessGeneratedCodeRequiresNonNullGeneratedNamespace()
         {
-            Assert.ThrowsArgumentNull(() => CreateHost().PostProcessGeneratedCode(codeCompileUnit: new CodeCompileUnit(),
-                                                                                      generatedNamespace: null,
-                                                                                      generatedClass: new CodeTypeDeclaration(),
-                                                                                      executeMethod: new CodeMemberMethod()),
-                                          "generatedNamespace");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    CreateHost()
+                        .PostProcessGeneratedCode(
+                            codeCompileUnit: new CodeCompileUnit(),
+                            generatedNamespace: null,
+                            generatedClass: new CodeTypeDeclaration(),
+                            executeMethod: new CodeMemberMethod()
+                        ),
+                "generatedNamespace"
+            );
         }
 
         [Fact]
         public void PostProcessGeneratedCodeRequiresNonNullGeneratedClass()
         {
-            Assert.ThrowsArgumentNull(() => CreateHost().PostProcessGeneratedCode(codeCompileUnit: new CodeCompileUnit(),
-                                                                                      generatedNamespace: new CodeNamespace(),
-                                                                                      generatedClass: null,
-                                                                                      executeMethod: new CodeMemberMethod()),
-                                          "generatedClass");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    CreateHost()
+                        .PostProcessGeneratedCode(
+                            codeCompileUnit: new CodeCompileUnit(),
+                            generatedNamespace: new CodeNamespace(),
+                            generatedClass: null,
+                            executeMethod: new CodeMemberMethod()
+                        ),
+                "generatedClass"
+            );
         }
 
         [Fact]
         public void PostProcessGeneratedCodeRequiresNonNullExecuteMethod()
         {
-            Assert.ThrowsArgumentNull(() => CreateHost().PostProcessGeneratedCode(codeCompileUnit: new CodeCompileUnit(),
-                                                                                      generatedNamespace: new CodeNamespace(),
-                                                                                      generatedClass: new CodeTypeDeclaration(),
-                                                                                      executeMethod: null),
-                                          "executeMethod");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    CreateHost()
+                        .PostProcessGeneratedCode(
+                            codeCompileUnit: new CodeCompileUnit(),
+                            generatedNamespace: new CodeNamespace(),
+                            generatedClass: new CodeTypeDeclaration(),
+                            executeMethod: null
+                        ),
+                "executeMethod"
+            );
         }
 
         [Fact]
@@ -142,7 +181,12 @@ namespace System.Web.Razor.Test
         public void DecorateCodeGeneratorReturnsIncomingCodeGenerator()
         {
             // Arrange
-            RazorCodeGenerator expected = new CSharpRazorCodeGenerator("Foo", "Bar", "Baz", CreateHost());
+            RazorCodeGenerator expected = new CSharpRazorCodeGenerator(
+                "Foo",
+                "Bar",
+                "Baz",
+                CreateHost()
+            );
 
             // Act
             RazorCodeGenerator actual = CreateHost().DecorateCodeGenerator(expected);

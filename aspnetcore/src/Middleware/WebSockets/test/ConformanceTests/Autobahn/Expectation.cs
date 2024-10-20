@@ -8,5 +8,5 @@ public enum Expectation
     Fail,
     NonStrict,
     OkOrFail,
-    Ok
+    Ok,
 }

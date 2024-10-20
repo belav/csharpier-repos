@@ -15,23 +15,33 @@ namespace System.Collections.ObjectModel
     [Serializable]
     [DebuggerTypeProxy(typeof(CollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
-    [TypeForwardedFrom("WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
-    public class ReadOnlyObservableCollection<T> : ReadOnlyCollection<T>, INotifyCollectionChanged, INotifyPropertyChanged
+    [TypeForwardedFrom(
+        "WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
+    public class ReadOnlyObservableCollection<T>
+        : ReadOnlyCollection<T>,
+            INotifyCollectionChanged,
+            INotifyPropertyChanged
     {
         /// <summary>
         /// Initializes a new instance of ReadOnlyObservableCollection that
         /// wraps the given ObservableCollection.
         /// </summary>
-        public ReadOnlyObservableCollection(ObservableCollection<T> list) : base(list)
+        public ReadOnlyObservableCollection(ObservableCollection<T> list)
+            : base(list)
         {
-            ((INotifyCollectionChanged)Items).CollectionChanged += new NotifyCollectionChangedEventHandler(HandleCollectionChanged);
-            ((INotifyPropertyChanged)Items).PropertyChanged += new PropertyChangedEventHandler(HandlePropertyChanged);
+            ((INotifyCollectionChanged)Items).CollectionChanged +=
+                new NotifyCollectionChangedEventHandler(HandleCollectionChanged);
+            ((INotifyPropertyChanged)Items).PropertyChanged += new PropertyChangedEventHandler(
+                HandlePropertyChanged
+            );
         }
 
         /// <summary>Gets an empty <see cref="ReadOnlyObservableCollection{T}"/>.</summary>
         /// <value>An empty <see cref="ReadOnlyObservableCollection{T}"/>.</value>
         /// <remarks>The returned instance is immutable and will always be empty.</remarks>
-        public static new ReadOnlyObservableCollection<T> Empty { get; } = new ReadOnlyObservableCollection<T>(new ObservableCollection<T>());
+        public static new ReadOnlyObservableCollection<T> Empty { get; } =
+            new ReadOnlyObservableCollection<T>(new ObservableCollection<T>());
 
         /// <summary>
         /// CollectionChanged event (per <see cref="INotifyCollectionChanged" />).

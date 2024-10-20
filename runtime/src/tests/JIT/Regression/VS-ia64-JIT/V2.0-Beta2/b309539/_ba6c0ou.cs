@@ -11,14 +11,22 @@ using Xunit;
 public struct AA
 {
     public double m_dblField1;
+
     public static uint[][][] Static1(ref char param1)
     {
-        AA[, , ,] local1 = (new AA[66u, 67u, ((uint)(78.0f)), 114u]);
-        int[, ,] local2 = (new int[((uint)(72.0f)), 5u, 64u]);
+        AA[,,,] local1 = (new AA[66u, 67u, ((uint)(78.0f)), 114u]);
+        int[,,] local2 = (new int[((uint)(72.0f)), 5u, 64u]);
         return (new uint[31u][][]);
     }
-    public static double[] Static3(long[,][,] param1, ref Array[,][, ,] param2, ref 
-		object param3, ref String param4, ref bool param5, ref object param6)
+
+    public static double[] Static3(
+        long[,][,] param1,
+        ref Array[,][,,] param2,
+        ref object param3,
+        ref String param4,
+        ref bool param5,
+        ref object param6
+    )
     {
 #pragma warning disable 1717,0162
         for (App.m_axFwd2 = App.m_axFwd2; ((bool)(param3)); App.m_iFwd3 = 68)
@@ -28,12 +36,12 @@ public struct AA
         }
         return ((double[])(((Array)(param3))));
     }
+
     public static char[] Static4()
     {
         char local10 = '\x36';
         float[] local11 = new float[] { 79.0f, 33.0f, 96.0f, 109.0f, 86.0f };
-        for (App.m_uFwd4 /= 23u; Convert.ToBoolean(Convert.ToByte(local10)); App.m_iFwd3
-            = 19)
+        for (App.m_uFwd4 /= 23u; Convert.ToBoolean(Convert.ToByte(local10)); App.m_iFwd3 = 19)
         {
             AA.Static1(ref local10);
             while (App.m_bFwd6)
@@ -68,7 +76,8 @@ public class App
                 ref App.m_objFwd9,
                 ref App.m_xFwd10,
                 ref App.m_bFwd6,
-                ref App.m_objFwd9);
+                ref App.m_objFwd9
+            );
         }
         catch (Exception x)
         {
@@ -85,6 +94,7 @@ public class App
         }
         Console.WriteLine("Passed.");
     }
+
     public static char m_chFwd1;
     public static Array[][] m_axFwd2;
     public static int m_iFwd3;
@@ -92,7 +102,7 @@ public class App
     public static byte m_byFwd5;
     public static bool m_bFwd6;
     public static ulong m_ulFwd7;
-    public static Array[,][, ,] m_axFwd8;
+    public static Array[,][,,] m_axFwd8;
     public static object m_objFwd9;
     public static String m_xFwd10;
 }

@@ -13,9 +13,7 @@ public class ModelError
     /// </summary>
     /// <param name="exception">The <see cref="System.Exception"/>.</param>
     public ModelError(Exception exception)
-        : this(exception, errorMessage: null)
-    {
-    }
+        : this(exception, errorMessage: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ModelError"/> with the specified <paramref name="exception"/>

@@ -20,7 +20,7 @@ namespace System.ConfigurationTests
         }
 
         public static string SimpleCustomData =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <configSections>
         <section name='simpleCustomSection' type='System.ConfigurationTests.BasicCustomSectionTests+SimpleCustomSection, System.Configuration.ConfigurationManager.Tests' />
@@ -34,14 +34,15 @@ namespace System.ConfigurationTests
             using (var temp = new TempConfig(SimpleCustomData))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
-                SimpleCustomSection section = config.GetSection("simpleCustomSection") as SimpleCustomSection;
+                SimpleCustomSection section =
+                    config.GetSection("simpleCustomSection") as SimpleCustomSection;
                 Assert.NotNull(section);
                 Assert.Equal(string.Empty, section.Test);
             }
         }
 
         public static string SimpleCustomDataWithValue =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <configSections>
         <section name='simpleCustomSection' type='System.ConfigurationTests.BasicCustomSectionTests+SimpleCustomSection, System.Configuration.ConfigurationManager.Tests' />
@@ -55,7 +56,8 @@ namespace System.ConfigurationTests
             using (var temp = new TempConfig(SimpleCustomDataWithValue))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
-                SimpleCustomSection section = config.GetSection("simpleCustomSection") as SimpleCustomSection;
+                SimpleCustomSection section =
+                    config.GetSection("simpleCustomSection") as SimpleCustomSection;
                 Assert.NotNull(section);
                 Assert.Equal("Foo", section.Test);
             }
@@ -72,7 +74,7 @@ namespace System.ConfigurationTests
         }
 
         public static string MissingRequiredData =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <configSections>
         <section name='simpleCustomSectionRequiredValue' type='System.ConfigurationTests.BasicCustomSectionTests+SimpleCustomSectionRequiredValue, System.Configuration.ConfigurationManager.Tests' />
@@ -87,13 +89,17 @@ namespace System.ConfigurationTests
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
 
-                Assert.Throws<ConfigurationErrorsException>(() => config.GetSection("simpleCustomSectionRequiredValue") as SimpleCustomSectionRequiredValue);
+                Assert.Throws<ConfigurationErrorsException>(
+                    () =>
+                        config.GetSection("simpleCustomSectionRequiredValue")
+                        as SimpleCustomSectionRequiredValue
+                );
             }
         }
 
-        public class SimpleCustomSectionDefaultValue: ConfigurationSection
+        public class SimpleCustomSectionDefaultValue : ConfigurationSection
         {
-            [ConfigurationProperty("test", DefaultValue = "Bar" )]
+            [ConfigurationProperty("test", DefaultValue = "Bar")]
             public string Test
             {
                 get { return (string)this["test"]; }
@@ -102,7 +108,7 @@ namespace System.ConfigurationTests
         }
 
         public static string DefaultAppliedData =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <configSections>
         <section name='simpleCustomSectionDefaultValue' type='System.ConfigurationTests.BasicCustomSectionTests+SimpleCustomSectionDefaultValue, System.Configuration.ConfigurationManager.Tests' />
@@ -116,7 +122,9 @@ namespace System.ConfigurationTests
             using (var temp = new TempConfig(DefaultAppliedData))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
-                SimpleCustomSectionDefaultValue section = config.GetSection("simpleCustomSectionDefaultValue") as SimpleCustomSectionDefaultValue;
+                SimpleCustomSectionDefaultValue section =
+                    config.GetSection("simpleCustomSectionDefaultValue")
+                    as SimpleCustomSectionDefaultValue;
                 Assert.NotNull(section);
                 Assert.Equal("Bar", section.Test);
             }
@@ -125,11 +133,12 @@ namespace System.ConfigurationTests
         public class SimpleDefaultCollectionSection : ConfigurationSection
         {
             [ConfigurationProperty("", IsDefaultCollection = true)]
-            public KeyValueConfigurationCollection Settings => (KeyValueConfigurationCollection)base[""];
+            public KeyValueConfigurationCollection Settings =>
+                (KeyValueConfigurationCollection)base[""];
         }
 
         public static string SimpleDefaultCollection =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <configSections>
         <section name='simpleDefaultCollectionSection' type='System.ConfigurationTests.BasicCustomSectionTests+SimpleDefaultCollectionSection, System.Configuration.ConfigurationManager.Tests' />
@@ -146,7 +155,9 @@ namespace System.ConfigurationTests
             using (var temp = new TempConfig(SimpleDefaultCollection))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
-                SimpleDefaultCollectionSection section = config.GetSection("simpleDefaultCollectionSection") as SimpleDefaultCollectionSection;
+                SimpleDefaultCollectionSection section =
+                    config.GetSection("simpleDefaultCollectionSection")
+                    as SimpleDefaultCollectionSection;
                 Assert.NotNull(section);
 
                 Assert.Equal(2, section.Settings.Count);
@@ -158,11 +169,12 @@ namespace System.ConfigurationTests
         public class SimpleCollectionSection : ConfigurationSection
         {
             [ConfigurationProperty("foods", IsDefaultCollection = true)]
-            public KeyValueConfigurationCollection Foods => (KeyValueConfigurationCollection)base["foods"];
+            public KeyValueConfigurationCollection Foods =>
+                (KeyValueConfigurationCollection)base["foods"];
         }
 
         public static string SimpleCollection =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <configSections>
         <section name='simpleCollectionSection' type='System.ConfigurationTests.BasicCustomSectionTests+SimpleCollectionSection, System.Configuration.ConfigurationManager.Tests' />
@@ -181,7 +193,8 @@ namespace System.ConfigurationTests
             using (var temp = new TempConfig(SimpleCollection))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
-                SimpleCollectionSection section = config.GetSection("simpleCollectionSection") as SimpleCollectionSection;
+                SimpleCollectionSection section =
+                    config.GetSection("simpleCollectionSection") as SimpleCollectionSection;
                 Assert.NotNull(section);
 
                 Assert.Equal(2, section.Foods.Count);

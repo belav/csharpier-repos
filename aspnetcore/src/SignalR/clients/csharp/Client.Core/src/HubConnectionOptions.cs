@@ -28,6 +28,6 @@ public sealed class HubConnectionOptions
     /// Amount of serialized messages in bytes we'll buffer when using Stateful Reconnect until applying backpressure to sends from the client.
     /// </summary>
     /// <remarks>Defaults to 100,000 bytes.</remarks>
-    public long StatefulReconnectBufferSize { get; set; } = HubConnection.DefaultStatefulReconnectBufferSize;
-
+    public long StatefulReconnectBufferSize { get; set; } =
+        HubConnection.DefaultStatefulReconnectBufferSize;
 }

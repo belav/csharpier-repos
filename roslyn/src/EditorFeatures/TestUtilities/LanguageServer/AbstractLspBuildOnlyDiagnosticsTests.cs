@@ -25,10 +25,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.LanguageServer
         [Fact]
         public void TestExportedDiagnosticIds()
         {
-            var attribute = this.LspBuildOnlyDiagnosticsType.GetCustomAttribute<LspBuildOnlyDiagnosticsAttribute>();
+            var attribute =
+                this.LspBuildOnlyDiagnosticsType.GetCustomAttribute<LspBuildOnlyDiagnosticsAttribute>();
 
             var actualDiagnosticCodes = attribute.BuildOnlyDiagnostics;
-            var missing = ExpectedDiagnosticCodes.Except(actualDiagnosticCodes).OrderBy(k => k).ToList();
+            var missing = ExpectedDiagnosticCodes
+                .Except(actualDiagnosticCodes)
+                .OrderBy(k => k)
+                .ToList();
 
             var errorMessage = new StringBuilder();
             foreach (var missingItem in missing)
@@ -36,10 +40,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.LanguageServer
                 var code = missingItem.Substring(2).TrimStart('0'); // trim off CS or VB and any leading zeros
                 var codeValue = int.Parse(code);
 
-                var enumMembers = ErrorCodeType.GetFields(BindingFlags.Public | BindingFlags.Static);
-                var enumMember = enumMembers.First(m => Convert.ToInt32(m.GetValue(null)) == codeValue);
+                var enumMembers = ErrorCodeType.GetFields(
+                    BindingFlags.Public | BindingFlags.Static
+                );
+                var enumMember = enumMembers.First(m =>
+                    Convert.ToInt32(m.GetValue(null)) == codeValue
+                );
 
-                errorMessage.AppendLine($@"Missing: ""{missingItem}, // {ErrorCodeType.Name}.{enumMember.Name}""");
+                errorMessage.AppendLine(
+                    $@"Missing: ""{missingItem}, // {ErrorCodeType.Name}.{enumMember.Name}"""
+                );
             }
 
             var extra = actualDiagnosticCodes.Except(ExpectedDiagnosticCodes);

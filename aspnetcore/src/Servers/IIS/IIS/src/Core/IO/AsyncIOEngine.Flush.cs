@@ -30,7 +30,11 @@ internal partial class AsyncIOEngine
             Debug.Assert(_requestHandler != null, "Must initialize first.");
 
             bytes = 0;
-            hr = NativeMethods.HttpFlushResponseBytes(_requestHandler, _moreData, out var fCompletionExpected);
+            hr = NativeMethods.HttpFlushResponseBytes(
+                _requestHandler,
+                _moreData,
+                out var fCompletionExpected
+            );
 
             return !fCompletionExpected;
         }

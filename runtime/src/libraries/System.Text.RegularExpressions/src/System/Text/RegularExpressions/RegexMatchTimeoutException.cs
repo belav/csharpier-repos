@@ -10,7 +10,9 @@ namespace System.Text.RegularExpressions
     /// This is the exception that is thrown when a RegEx matching timeout occurs.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class RegexMatchTimeoutException : TimeoutException, ISerializable
     {
         /// <summary>
@@ -19,7 +21,11 @@ namespace System.Text.RegularExpressions
         /// <param name="regexInput">Matching timeout occurred during matching within the specified input.</param>
         /// <param name="regexPattern">Matching timeout occurred during matching to the specified pattern.</param>
         /// <param name="matchTimeout">Matching timeout occurred because matching took longer than the specified timeout.</param>
-        public RegexMatchTimeoutException(string regexInput, string regexPattern, TimeSpan matchTimeout)
+        public RegexMatchTimeoutException(
+            string regexInput,
+            string regexPattern,
+            TimeSpan matchTimeout
+        )
             : base(SR.RegexMatchTimeoutException_Occurred)
         {
             Input = regexInput;
@@ -40,7 +46,8 @@ namespace System.Text.RegularExpressions
         /// <code>public RegexMatchTimeoutException(string input, string pattern, TimeSpan matchTimeout)</code>.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        public RegexMatchTimeoutException(string message) : base(message) { }
+        public RegexMatchTimeoutException(string message)
+            : base(message) { }
 
         /// <summary>
         /// This constructor is provided in compliance with common .NET Framework design patterns;
@@ -49,9 +56,14 @@ namespace System.Text.RegularExpressions
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="inner">The exception that is the cause of the current exception, or a <code>null</code>.</param>
-        public RegexMatchTimeoutException(string message, Exception inner) : base(message, inner) { }
+        public RegexMatchTimeoutException(string message, Exception inner)
+            : base(message, inner) { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected RegexMatchTimeoutException(SerializationInfo info, StreamingContext context)
             : base(info, context)
@@ -61,7 +73,11 @@ namespace System.Text.RegularExpressions
             MatchTimeout = new TimeSpan(info.GetInt64("timeoutTicks"));
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);

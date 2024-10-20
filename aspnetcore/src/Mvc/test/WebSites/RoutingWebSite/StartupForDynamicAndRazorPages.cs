@@ -10,13 +10,14 @@ public class StartupForDynamicAndRazorPages
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services
-            .AddMvc();
+        services.AddMvc();
 
         services.AddTransient<Transformer>();
 
         // Used by some controllers defined in this project.
-        services.Configure<RouteOptions>(options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer));
+        services.Configure<RouteOptions>(options =>
+            options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
+        );
     }
 
     public void Configure(IApplicationBuilder app)
@@ -32,7 +33,10 @@ public class StartupForDynamicAndRazorPages
     private class Transformer : DynamicRouteValueTransformer
     {
         // Turns a format like `controller=Home,action=Index` into an RVD
-        public override ValueTask<RouteValueDictionary> TransformAsync(HttpContext httpContext, RouteValueDictionary values)
+        public override ValueTask<RouteValueDictionary> TransformAsync(
+            HttpContext httpContext,
+            RouteValueDictionary values
+        )
         {
             if (!(values["slug"] is string slug))
             {

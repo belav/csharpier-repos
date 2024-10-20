@@ -40,7 +40,11 @@ public static class WebDriverExtensions
         }
 
         // These two messages appear sometimes, but it doesn't actually block the tests.
-        if (entry.Message.Contains("WASM: wasm streaming compile failed: TypeError: Could not download wasm module"))
+        if (
+            entry.Message.Contains(
+                "WASM: wasm streaming compile failed: TypeError: Could not download wasm module"
+            )
+        )
         {
             return true;
         }

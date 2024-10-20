@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ApplicationQueuingAttribute.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,47 +31,51 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[AttributeUsage (AttributeTargets.Assembly)]
-	[ComVisible(false)]
-	public sealed class ApplicationQueuingAttribute : Attribute {
+namespace System.EnterpriseServices
+{
+    [AttributeUsage(AttributeTargets.Assembly)]
+    [ComVisible(false)]
+    public sealed class ApplicationQueuingAttribute : Attribute
+    {
+        #region Fields
 
-		#region Fields
+        bool enabled;
+        int maxListenerThreads;
+        bool queueListenerEnabled;
 
-		bool enabled;
-		int maxListenerThreads;
-		bool queueListenerEnabled;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public ApplicationQueuingAttribute()
+        {
+            enabled = true;
+            queueListenerEnabled = false;
+            maxListenerThreads = 0;
+        }
 
-		public ApplicationQueuingAttribute ()
-		{
-			enabled = true;
-			queueListenerEnabled = false;
-			maxListenerThreads = 0;
-		}
+        #endregion // Constructors
 
-		#endregion // Constructors
+        #region Properties
 
-		#region Properties
+        public bool Enabled
+        {
+            get { return enabled; }
+            set { enabled = value; }
+        }
 
-		public bool Enabled {
-			get { return enabled; }
-			set { enabled = value; }
-		}
+        public int MaxListenerThreads
+        {
+            get { return maxListenerThreads; }
+            set { maxListenerThreads = value; }
+        }
 
-		public int MaxListenerThreads {
-			get { return maxListenerThreads; }
-			set { maxListenerThreads = value; }
-		}
+        public bool QueueListenerEnabled
+        {
+            get { return queueListenerEnabled; }
+            set { queueListenerEnabled = value; }
+        }
 
-		public bool QueueListenerEnabled {
-			get { return queueListenerEnabled; }
-			set { queueListenerEnabled = value; }
-		}
-
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

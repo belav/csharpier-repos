@@ -55,7 +55,6 @@
 //
 //---------------------------------------------------------------------------
 using System;
-
 using RabbitMQ.Client;
 
 namespace RabbitMQ.Client.Impl
@@ -65,32 +64,34 @@ namespace RabbitMQ.Client.Impl
     /// Connection.Redirect method. The ConnectionFactory catches the
     /// exception and arranges for the redirect to take
     /// place. </summary>
-    public class RedirectException: Exception
+    public class RedirectException : Exception
     {
         public AmqpTcpEndpoint m_host;
         public AmqpTcpEndpoint[] m_knownHosts;
 
         ///<summary>The host we were redirected to. Try connecting to
         ///this first.</summary>
-        public AmqpTcpEndpoint Host { get { return m_host; } }
+        public AmqpTcpEndpoint Host
+        {
+            get { return m_host; }
+        }
 
         ///<summary>Other hosts the broker knows about. If connecting
         ///to Host fails, try some of these.</summary>
-        public AmqpTcpEndpoint[] KnownHosts { get { return m_knownHosts; } }
+        public AmqpTcpEndpoint[] KnownHosts
+        {
+            get { return m_knownHosts; }
+        }
 
         ///<summary>Uses AmqpTcpEndpoint.Parse and .ParseMultiple to
         ///convert the strings, and then passes them to the other
         ///overload of the constructor.</summary>
-        public RedirectException(IProtocol protocol,
-                                 string host,
-                                 string knownHosts)
-            : this(ParseHost(protocol, host),
-                   AmqpTcpEndpoint.ParseMultiple(protocol, knownHosts))
-        {}
+        public RedirectException(IProtocol protocol, string host, string knownHosts)
+            : this(ParseHost(protocol, host), AmqpTcpEndpoint.ParseMultiple(protocol, knownHosts))
+        { }
 
         public RedirectException(AmqpTcpEndpoint host, AmqpTcpEndpoint[] knownHosts)
-            : base(string.Format("The connection.open attempt was redirected to host '{0}'",
-                                 host))
+            : base(string.Format("The connection.open attempt was redirected to host '{0}'", host))
         {
             m_host = host;
             m_knownHosts = knownHosts;
@@ -107,12 +108,16 @@ namespace RabbitMQ.Client.Impl
         /// that fine). We arbitrarily take the first element of the
         /// array.
         ///</remarks>
-        public static AmqpTcpEndpoint ParseHost(IProtocol protocol, string host) {
+        public static AmqpTcpEndpoint ParseHost(IProtocol protocol, string host)
+        {
             AmqpTcpEndpoint[] addresses = AmqpTcpEndpoint.ParseMultiple(protocol, host);
-            if (addresses.Length == 0) {
+            if (addresses.Length == 0)
+            {
                 return AmqpTcpEndpoint.Parse(protocol, "");
                 // ^^ effectively, a (kind of useless) default or null result
-            } else {
+            }
+            else
+            {
                 return addresses[0];
             }
         }

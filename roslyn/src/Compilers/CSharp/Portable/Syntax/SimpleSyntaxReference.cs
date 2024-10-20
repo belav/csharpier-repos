@@ -21,18 +21,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override SyntaxTree SyntaxTree
         {
-            get
-            {
-                return _node.SyntaxTree;
-            }
+            get { return _node.SyntaxTree; }
         }
 
         public override TextSpan Span
         {
-            get
-            {
-                return _node.Span;
-            }
+            get { return _node.Span; }
         }
 
         public override SyntaxNode GetSyntax(CancellationToken cancellationToken)

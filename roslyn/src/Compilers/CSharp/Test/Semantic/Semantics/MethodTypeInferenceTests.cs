@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // TODO: Fill in the remaining holes in this test, marked with NYT.
 
             TestOverloadResolutionWithDiff(
-@"
+                @"
 using System.Collections.Generic;
 
 interface Con<in CON> {}
@@ -411,14 +411,15 @@ class C
         
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public void TestLambdaTypeInference()
         {
             TestOverloadResolutionWithDiff(
-@"
+                @"
 
 interface IE<out COV> {}
 delegate R F<out R> ();
@@ -469,13 +470,15 @@ class C
 
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public void TestMethodTypeInferenceErrors()
         {
-            var source = @"
+            var source =
+                @"
 class C 
 { 
     delegate R F<out R>();
@@ -486,16 +489,21 @@ class C
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (8,7): error CS0411: The type arguments for method 'C.Apply<T>(C.F<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //       Apply(delegate { while (true) { } });
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Apply").WithArguments("C.Apply<T>(C.F<T>)").WithLocation(8, 7));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (8,7): error CS0411: The type arguments for method 'C.Apply<T>(C.F<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //       Apply(delegate { while (true) { } });
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Apply")
+                        .WithArguments("C.Apply<T>(C.F<T>)")
+                        .WithLocation(8, 7)
+                );
         }
 
         [Fact, WorkItem(578362, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578362")]
         public void TypeInferenceDynamicByRef()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     static void Main()
@@ -509,17 +517,21 @@ class C
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(source, new[] { CSharpRef }).VerifyEmitDiagnostics(
-                // (7,9): error CS0411: The type arguments for method 'C.Goo<T>(ref T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         Goo(ref d);
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Goo").WithArguments("C.Goo<T>(ref T[])"));
+            CreateCompilationWithMscorlib40AndSystemCore(source, new[] { CSharpRef })
+                .VerifyEmitDiagnostics(
+                    // (7,9): error CS0411: The type arguments for method 'C.Goo<T>(ref T[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         Goo(ref d);
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Goo")
+                        .WithArguments("C.Goo<T>(ref T[])")
+                );
         }
 
         [WorkItem(541810, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541810")]
         [Fact]
         public void TestMethodTypeInferenceWhenFixedParameterIsOpenGenericType()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Test
 {
@@ -545,7 +557,8 @@ class Test
         [Fact]
         public void TestMethodTypeInferenceWhenFixedParameterIsOpenGenericType2()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class Test
 {
@@ -576,7 +589,8 @@ class Test
         [Fact]
         public void TestMethodTypeInferenceWhenFixedParameterIsOpenGenericType03()
         {
-            var source = @"
+            var source =
+                @"
 class Test
 {
     class C<T>
@@ -616,7 +630,8 @@ class Test
             // This should be illegal; we could produce an error at parse time or semantic
             // analysis time.
 
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -629,10 +644,13 @@ class Program
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,17): error CS0305: Using the generic method 'Program.Goo<T, U>(T, U)' requires 2 type arguments
-                //         var s = Goo<>(123, 345);
-                Diagnostic(ErrorCode.ERR_BadArity, "Goo<>").WithArguments("Program.Goo<T, U>(T, U)", "method", "2"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,17): error CS0305: Using the generic method 'Program.Goo<T, U>(T, U)' requires 2 type arguments
+                    //         var s = Goo<>(123, 345);
+                    Diagnostic(ErrorCode.ERR_BadArity, "Goo<>")
+                        .WithArguments("Program.Goo<T, U>(T, U)", "method", "2")
+                );
         }
 
         [Fact]
@@ -825,32 +843,52 @@ void M((string, string?) tuple)
 """;
 
             var comp = CreateCompilation(source, targetFramework: TargetFramework.Net70);
-            comp.VerifyDiagnostics(new[] { 
-                 // (2,6): warning CS8321: The local function 'M' is declared but never used
-                // void M((string, string?) tuple)
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M").WithArguments("M").WithLocation(2, 6),
-                // (5,28): warning CS8600: Converting null literal or possible null value to non-nullable type.
-                //     (string _, string _) = tuple;
-                Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "tuple").WithLocation(5, 28)
-            });
+            comp.VerifyDiagnostics(
+                new[]
+                {
+                    // (2,6): warning CS8321: The local function 'M' is declared but never used
+                    // void M((string, string?) tuple)
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M")
+                        .WithArguments("M")
+                        .WithLocation(2, 6),
+                    // (5,28): warning CS8600: Converting null literal or possible null value to non-nullable type.
+                    //     (string _, string _) = tuple;
+                    Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "tuple")
+                        .WithLocation(5, 28),
+                }
+            );
         }
 
-        private static void CheckDiscard(SemanticModel model, DiscardDesignationSyntax discard, string type)
+        private static void CheckDiscard(
+            SemanticModel model,
+            DiscardDesignationSyntax discard,
+            string type
+        )
         {
             Assert.Null(model.GetDeclaredSymbol(discard));
             Assert.Null(model.GetTypeInfo(discard).Type);
             Assert.Null(model.GetSymbolInfo(discard).Symbol);
             var declaration = (DeclarationExpressionSyntax)discard.Parent;
-            Assert.Equal(type, model.GetTypeInfo(declaration).Type.ToTestDisplayString(includeNonNullable: true));
+            Assert.Equal(
+                type,
+                model.GetTypeInfo(declaration).Type.ToTestDisplayString(includeNonNullable: true)
+            );
             Assert.Null(model.GetSymbolInfo(declaration).Symbol);
         }
 
-        private static void CheckDiscard(SemanticModel model, IdentifierNameSyntax discard, string type)
+        private static void CheckDiscard(
+            SemanticModel model,
+            IdentifierNameSyntax discard,
+            string type
+        )
         {
             Assert.Null(model.GetDeclaredSymbol(discard));
             var discardSymbol = (IDiscardSymbol)model.GetSymbolInfo(discard).Symbol;
             Assert.Equal(type, discardSymbol.Type.ToTestDisplayString(includeNonNullable: true));
-            Assert.Equal(type, model.GetTypeInfo(discard).Type.ToTestDisplayString(includeNonNullable: true));
+            Assert.Equal(
+                type,
+                model.GetTypeInfo(discard).Type.ToTestDisplayString(includeNonNullable: true)
+            );
         }
 
         private static IEnumerable<DiscardDesignationSyntax> GetDiscardDesignations(SyntaxTree tree)
@@ -860,7 +898,10 @@ void M((string, string?) tuple)
 
         private static IEnumerable<IdentifierNameSyntax> GetDiscardIdentifiers(SyntaxTree tree)
         {
-            return tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(i => i.Identifier.ContextualKind() == SyntaxKind.UnderscoreToken);
+            return tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(i => i.Identifier.ContextualKind() == SyntaxKind.UnderscoreToken);
         }
 
         [WorkItem(541887, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541887")]
@@ -870,7 +911,8 @@ void M((string, string?) tuple)
             // We should produce a parse error here, but *not* a semantic analysis error
             // stating that type "" could not be found.
 
-            var source = @"
+            var source =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -883,16 +925,17 @@ class Program
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,26): error CS1031: Type expected
-                //         var s = Goo<int, >(123, 345);
-                Diagnostic(ErrorCode.ERR_TypeExpected, ">"),
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,26): error CS1031: Type expected
+                    //         var s = Goo<int, >(123, 345);
+                    Diagnostic(ErrorCode.ERR_TypeExpected, ">"),
+                    // CONSIDER: we would prefer not to report this cascading diagnostic.
 
-                // CONSIDER: we would prefer not to report this cascading diagnostic.
-
-                // (6,33): error CS1503: Argument 2: cannot convert from 'int' to '?'
-                //         var s = Goo<int, >(123, 345);
-                Diagnostic(ErrorCode.ERR_BadArgType, "345").WithArguments("2", "int", "?"));
+                    // (6,33): error CS1503: Argument 2: cannot convert from 'int' to '?'
+                    //         var s = Goo<int, >(123, 345);
+                    Diagnostic(ErrorCode.ERR_BadArgType, "345").WithArguments("2", "int", "?")
+                );
         }
 
         [WorkItem(542591, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/542591")]
@@ -900,7 +943,8 @@ class Program
         public void Bug9877()
         {
             // No NRE
-            var source = @"
+            var source =
+                @"
 class Program
 {
     public static void M<T>(System.Func<T> f) 
@@ -909,16 +953,19 @@ class Program
     }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (6,11): error CS0103: The name 'E' does not exist in the current context
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "E").WithArguments("E"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (6,11): error CS0103: The name 'E' does not exist in the current context
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "E").WithArguments("E")
+                );
         }
 
         [WorkItem(9145, "http://vstfdevdiv:8080/DevDiv_Projects/Roslyn/_workitems/edit/9145")]
         [Fact]
         public void Bug9145()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Collections.Generic;
 public interface IParser<TSource, TSource1> { }
@@ -968,14 +1015,19 @@ class Program
 }
 
 ";
-            CreateCompilationWithMscorlib40(source, references: new[] { TestMetadata.Net40.SystemCore }).VerifyDiagnostics();
+            CreateCompilationWithMscorlib40(
+                    source,
+                    references: new[] { TestMetadata.Net40.SystemCore }
+                )
+                .VerifyDiagnostics();
         }
 
         [WorkItem(543691, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543691")]
         [Fact]
         public void Bug()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void M<T>(T? t1, T t2) where T : struct 
@@ -997,7 +1049,8 @@ class Program
         public void InferringVoid()
         {
             // inference off a void method should fail
-            var source = @"
+            var source =
+                @"
 public class Test
 {
     static void M<T>(T t) { }
@@ -1010,21 +1063,24 @@ public class Test
  
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-                // (8,9): error CS0411: The type arguments for method 'Test.M<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //         M(Main());
-                Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M").WithArguments("Test.M<T>(T)"),
-                // (9,16): error CS1510: A ref or out argument must be an assignable variable
-                //         M1(ref Main());
-                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "Main()")
-            );
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (8,9): error CS0411: The type arguments for method 'Test.M<T>(T)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    //         M(Main());
+                    Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M")
+                        .WithArguments("Test.M<T>(T)"),
+                    // (9,16): error CS1510: A ref or out argument must be an assignable variable
+                    //         M1(ref Main());
+                    Diagnostic(ErrorCode.ERR_RefLvalueExpected, "Main()")
+                );
         }
 
         [WorkItem(717264, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/717264")]
         [Fact]
         public void SubstitutedMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class C<T>
@@ -1043,18 +1099,25 @@ public class C<T>
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var syntax = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            var syntax = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single();
 
             var method = (IMethodSymbol)model.GetSymbolInfo(syntax).Symbol;
             Assert.Equal(SpecialType.System_Char, method.TypeArguments.Single().SpecialType);
-            Assert.Equal("void C<System.Char>.M<System.Char>(System.Func<System.Char, System.Char> f1, System.Func<System.Int64, System.Char> f2)", method.ToTestDisplayString());
+            Assert.Equal(
+                "void C<System.Char>.M<System.Char>(System.Func<System.Char, System.Char> f1, System.Func<System.Int64, System.Char> f2)",
+                method.ToTestDisplayString()
+            );
         }
 
         [WorkItem(717264, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/717264")]
         [Fact]
         public void SubstitutedMethod_Params()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 public class C<T>
@@ -1073,18 +1136,25 @@ public class C<T>
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
 
-            var syntax = tree.GetRoot().DescendantNodes().OfType<InvocationExpressionSyntax>().Single();
+            var syntax = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InvocationExpressionSyntax>()
+                .Single();
 
             var method = (IMethodSymbol)model.GetSymbolInfo(syntax).Symbol;
             Assert.Equal(SpecialType.System_Char, method.TypeArguments.Single().SpecialType);
-            Assert.Equal("void C<System.Char>.M<System.Char>(System.Func<System.Char, System.Char> f1, System.Func<System.Int64, System.Char> f2, params System.Int32[] a)", method.ToTestDisplayString());
+            Assert.Equal(
+                "void C<System.Char>.M<System.Char>(System.Func<System.Char, System.Char> f1, System.Func<System.Int64, System.Char> f2, params System.Int32[] a)",
+                method.ToTestDisplayString()
+            );
         }
 
         [WorkItem(8712, "https://github.com/dotnet/roslyn/issues/8712")]
         [Fact]
         public void EnumerableJoinIntellisenseForParameterTypesShouldPopOutAutoComplete_1()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1115,7 +1185,8 @@ public class Test
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var book = (IdentifierNameSyntax)tree.GetRoot().DescendantTokens().Last(t => t.Text == "b").Parent;
+            var book = (IdentifierNameSyntax)
+                tree.GetRoot().DescendantTokens().Last(t => t.Text == "b").Parent;
             var bookType = model.GetTypeInfo(book).Type;
 
             Assert.Equal("Book", bookType.Name);
@@ -1125,7 +1196,8 @@ public class Test
         [Fact]
         public void EnumerableJoinIntellisenseForParameterTypesShouldPopOutAutoComplete_2()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1156,7 +1228,8 @@ public class Test
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var author = (IdentifierNameSyntax)tree.GetRoot().DescendantTokens().Last(t => t.Text == "a").Parent;
+            var author = (IdentifierNameSyntax)
+                tree.GetRoot().DescendantTokens().Last(t => t.Text == "a").Parent;
             var authorType = model.GetTypeInfo(author).Type;
 
             Assert.Equal("Author", authorType.Name);
@@ -1166,7 +1239,8 @@ public class Test
         [Fact]
         public void EnumerableJoinIntellisenseForParameterTypesShouldPopOutAutoComplete_3()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1197,11 +1271,13 @@ public class Test
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var bookResult = (IdentifierNameSyntax)tree.GetRoot().DescendantTokens().Last(t => t.Text == "bookResult").Parent;
+            var bookResult = (IdentifierNameSyntax)
+                tree.GetRoot().DescendantTokens().Last(t => t.Text == "bookResult").Parent;
             var bookResultType = model.GetTypeInfo(bookResult).Type;
             Assert.Equal("Book", bookResultType.Name);
 
-            var authorResult = (IdentifierNameSyntax)tree.GetRoot().DescendantTokens().Last(t => t.Text == "authorResult").Parent;
+            var authorResult = (IdentifierNameSyntax)
+                tree.GetRoot().DescendantTokens().Last(t => t.Text == "authorResult").Parent;
             var authorResultType = model.GetTypeInfo(authorResult).Type;
             Assert.Equal("Author", authorResultType.Name);
         }

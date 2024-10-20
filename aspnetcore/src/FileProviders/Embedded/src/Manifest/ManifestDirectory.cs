@@ -49,7 +49,10 @@ internal class ManifestDirectory : ManifestEntry
     {
         if (string.IsNullOrWhiteSpace(name))
         {
-            throw new ArgumentException($"'{nameof(name)}' must not be null, empty or whitespace.", nameof(name));
+            throw new ArgumentException(
+                $"'{nameof(name)}' must not be null, empty or whitespace.",
+                nameof(name)
+            );
         }
 
         ArgumentNullThrowHelper.ThrowIfNull(children);
@@ -70,13 +73,18 @@ internal class ManifestDirectory : ManifestEntry
         return result;
     }
 
-    internal static void ValidateChildrenAndSetParent(ManifestEntry[] children, ManifestDirectory parent)
+    internal static void ValidateChildrenAndSetParent(
+        ManifestEntry[] children,
+        ManifestDirectory parent
+    )
     {
         foreach (var child in children)
         {
             if (child == UnknownPath)
             {
-                throw new InvalidOperationException($"Invalid entry type '{nameof(ManifestSinkDirectory)}'");
+                throw new InvalidOperationException(
+                    $"Invalid entry type '{nameof(ManifestSinkDirectory)}'"
+                );
             }
 
             if (child is ManifestRootDirectory)

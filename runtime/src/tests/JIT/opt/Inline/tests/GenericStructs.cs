@@ -5,6 +5,7 @@
 
 using System;
 using Xunit;
+
 internal struct XY<T>
 {
     private T _x;
@@ -36,6 +37,7 @@ public class StructTest
         xy.X = 10;
         xy.Y = 20;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -58,5 +60,3 @@ public class StructTest
         }
     }
 }
-
-

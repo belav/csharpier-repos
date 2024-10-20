@@ -28,8 +28,8 @@ public interface IViewColumn : IColumnBase
     /// </summary>
     /// <param name="entityType">An entity type.</param>
     /// <returns>The property mapping or <see langword="null" /> if not found.</returns>
-    new IViewColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType)
-        => (IViewColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
+    new IViewColumnMapping? FindColumnMapping(IReadOnlyEntityType entityType) =>
+        (IViewColumnMapping?)((IColumnBase)this).FindColumnMapping(entityType);
 
     /// <summary>
     ///     <para>

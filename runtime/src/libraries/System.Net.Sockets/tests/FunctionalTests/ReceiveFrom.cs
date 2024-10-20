@@ -1,4 +1,4 @@
- // Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Threading;
@@ -9,16 +9,24 @@ using Xunit.Sdk;
 
 namespace System.Net.Sockets.Tests
 {
-    public abstract class ReceiveFrom<T> : SocketTestHelperBase<T> where T : SocketHelperBase, new()
+    public abstract class ReceiveFrom<T> : SocketTestHelperBase<T>
+        where T : SocketHelperBase, new()
     {
-        protected static Socket CreateSocket(AddressFamily addressFamily = AddressFamily.InterNetwork) => new Socket(addressFamily, SocketType.Dgram, ProtocolType.Udp);
+        protected static Socket CreateSocket(
+            AddressFamily addressFamily = AddressFamily.InterNetwork
+        ) => new Socket(addressFamily, SocketType.Dgram, ProtocolType.Udp);
 
-        protected static IPEndPoint GetGetDummyTestEndpoint(AddressFamily addressFamily = AddressFamily.InterNetwork) =>
-            addressFamily == AddressFamily.InterNetwork ? new IPEndPoint(IPAddress.Parse("1.2.3.4"), 1234) : new IPEndPoint(IPAddress.Parse("1:2:3::4"), 1234);
+        protected static IPEndPoint GetGetDummyTestEndpoint(
+            AddressFamily addressFamily = AddressFamily.InterNetwork
+        ) =>
+            addressFamily == AddressFamily.InterNetwork
+                ? new IPEndPoint(IPAddress.Parse("1.2.3.4"), 1234)
+                : new IPEndPoint(IPAddress.Parse("1:2:3::4"), 1234);
 
         protected static readonly TimeSpan CancellationTestTimeout = TimeSpan.FromSeconds(30);
 
-        protected ReceiveFrom(ITestOutputHelper output) : base(output) { }
+        protected ReceiveFrom(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [InlineData(1, -1, 0)] // offset low
@@ -26,7 +34,11 @@ namespace System.Net.Sockets.Tests
         [InlineData(1, 0, -1)] // count low
         [InlineData(1, 0, 2)] // count high
         [InlineData(1, 1, 1)] // count high
-        public async Task OutOfRange_Throws_ArgumentOutOfRangeException(int length, int offset, int count)
+        public async Task OutOfRange_Throws_ArgumentOutOfRangeException(
+            int length,
+            int offset,
+            int count
+        )
         {
             using Socket socket = CreateSocket();
 
@@ -34,18 +46,23 @@ namespace System.Net.Sockets.Tests
             {
                 Array = new byte[length],
                 Count = count,
-                Offset = offset
+                Offset = offset,
             }.ToActual();
 
-            await AssertThrowsSynchronously<ArgumentOutOfRangeException>(() => ReceiveFromAsync(socket, buffer, GetGetDummyTestEndpoint()));
+            await AssertThrowsSynchronously<ArgumentOutOfRangeException>(
+                () => ReceiveFromAsync(socket, buffer, GetGetDummyTestEndpoint())
+            );
         }
 
         [Fact]
         public async Task NullBuffer_Throws_ArgumentNullException()
         {
-            if (!ValidatesArrayArguments) return;
+            if (!ValidatesArrayArguments)
+                return;
             using Socket socket = CreateSocket();
-            await AssertThrowsSynchronously<ArgumentNullException>(() => ReceiveFromAsync(socket, null, GetGetDummyTestEndpoint()));
+            await AssertThrowsSynchronously<ArgumentNullException>(
+                () => ReceiveFromAsync(socket, null, GetGetDummyTestEndpoint())
+            );
         }
 
         [Fact]
@@ -54,12 +71,16 @@ namespace System.Net.Sockets.Tests
             using Socket socket = CreateSocket();
             if (UsesEap)
             {
-                await AssertThrowsSynchronously<ArgumentException>(() => ReceiveFromAsync(socket, new byte[1], null));
+                await AssertThrowsSynchronously<ArgumentException>(
+                    () => ReceiveFromAsync(socket, new byte[1], null)
+                );
             }
             else
             {
-                await AssertThrowsSynchronously<ArgumentNullException>(() => ReceiveFromAsync(socket, new byte[1], null));
-            }   
+                await AssertThrowsSynchronously<ArgumentNullException>(
+                    () => ReceiveFromAsync(socket, new byte[1], null)
+                );
+            }
         }
 
         [Fact]
@@ -68,8 +89,19 @@ namespace System.Net.Sockets.Tests
             using Socket socket = CreateSocket();
             SocketAddress socketAddress = null;
 
-            Assert.Throws<ArgumentNullException>(() => socket.ReceiveFrom(new byte[1], SocketFlags.None, socketAddress));
-            await Assert.ThrowsAsync<ArgumentNullException>(() => socket.ReceiveFromAsync(new Memory<byte>(new byte[1]), SocketFlags.None, socketAddress).AsTask());
+            Assert.Throws<ArgumentNullException>(
+                () => socket.ReceiveFrom(new byte[1], SocketFlags.None, socketAddress)
+            );
+            await Assert.ThrowsAsync<ArgumentNullException>(
+                () =>
+                    socket
+                        .ReceiveFromAsync(
+                            new Memory<byte>(new byte[1]),
+                            SocketFlags.None,
+                            socketAddress
+                        )
+                        .AsTask()
+            );
         }
 
         [Fact]
@@ -77,7 +109,9 @@ namespace System.Net.Sockets.Tests
         {
             using var ipv4Socket = CreateSocket();
             EndPoint ipV6Endpoint = GetGetDummyTestEndpoint(AddressFamily.InterNetworkV6);
-            await AssertThrowsSynchronously<ArgumentException>(() => ReceiveFromAsync(ipv4Socket, new byte[1], ipV6Endpoint));
+            await AssertThrowsSynchronously<ArgumentException>(
+                () => ReceiveFromAsync(ipv4Socket, new byte[1], ipV6Endpoint)
+            );
         }
 
         [Fact]
@@ -85,10 +119,13 @@ namespace System.Net.Sockets.Tests
         {
             // ReceiveFromAsync(saea) does not throw.
             // [ActiveIssue("https://github.com/dotnet/runtime/issues/47714")]
-            if (UsesEap) return;
+            if (UsesEap)
+                return;
 
             using Socket socket = CreateSocket();
-            await AssertThrowsSynchronously<InvalidOperationException>(() => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint()));
+            await AssertThrowsSynchronously<InvalidOperationException>(
+                () => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint())
+            );
         }
 
         [Theory]
@@ -130,8 +167,16 @@ namespace System.Net.Sockets.Tests
             const int DatagramsToSend = 16;
 
             IPAddress address = ipv4 ? IPAddress.Loopback : IPAddress.IPv6Loopback;
-            using Socket receiver = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
-            using Socket sender = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+            using Socket receiver = new Socket(
+                address.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
+            using Socket sender = new Socket(
+                address.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
 
             ConfigureNonBlocking(sender);
             ConfigureNonBlocking(receiver);
@@ -142,7 +187,11 @@ namespace System.Net.Sockets.Tests
             byte[] sendBuffer = new byte[DatagramSize];
             var receiveInternalBuffer = new byte[DatagramSize + Offset];
             var emptyBuffer = new byte[Offset];
-            ArraySegment<byte> receiveBuffer = new ArraySegment<byte>(receiveInternalBuffer, Offset, DatagramSize);
+            ArraySegment<byte> receiveBuffer = new ArraySegment<byte>(
+                receiveInternalBuffer,
+                Offset,
+                DatagramSize
+            );
 
             Random rnd = new Random(0);
 
@@ -153,11 +202,21 @@ namespace System.Net.Sockets.Tests
                 rnd.NextBytes(sendBuffer);
                 sender.SendTo(sendBuffer, receiver.LocalEndPoint);
 
-                SocketReceiveFromResult result = await ReceiveFromAsync(receiver, receiveBuffer, remoteEp);
+                SocketReceiveFromResult result = await ReceiveFromAsync(
+                    receiver,
+                    receiveBuffer,
+                    remoteEp
+                );
 
                 Assert.Equal(DatagramSize, result.ReceivedBytes);
-                AssertExtensions.SequenceEqual(emptyBuffer, new ReadOnlySpan<byte>(receiveInternalBuffer, 0, Offset));
-                AssertExtensions.SequenceEqual(sendBuffer, new ReadOnlySpan<byte>(receiveInternalBuffer, Offset, DatagramSize));
+                AssertExtensions.SequenceEqual(
+                    emptyBuffer,
+                    new ReadOnlySpan<byte>(receiveInternalBuffer, 0, Offset)
+                );
+                AssertExtensions.SequenceEqual(
+                    sendBuffer,
+                    new ReadOnlySpan<byte>(receiveInternalBuffer, Offset, DatagramSize)
+                );
                 Assert.Equal(sender.LocalEndPoint, result.RemoteEndPoint);
                 remoteEp = (IPEndPoint)result.RemoteEndPoint;
                 if (i > 0)
@@ -194,7 +253,11 @@ namespace System.Net.Sockets.Tests
             byte[] sendBuffer = new byte[DatagramSize];
             var receiveInternalBuffer = new byte[DatagramSize + Offset];
             var emptyBuffer = new byte[Offset];
-            ArraySegment<byte> receiveBuffer = new ArraySegment<byte>(receiveInternalBuffer, Offset, DatagramSize);
+            ArraySegment<byte> receiveBuffer = new ArraySegment<byte>(
+                receiveInternalBuffer,
+                Offset,
+                DatagramSize
+            );
 
             Random rnd = new Random(0);
 
@@ -205,11 +268,21 @@ namespace System.Net.Sockets.Tests
 
                 IPEndPoint remoteEp = new IPEndPoint(ipv4 ? IPAddress.Any : IPAddress.IPv6Any, 0);
 
-                SocketReceiveFromResult result = await ReceiveFromAsync(receiver, receiveBuffer, remoteEp);
+                SocketReceiveFromResult result = await ReceiveFromAsync(
+                    receiver,
+                    receiveBuffer,
+                    remoteEp
+                );
 
                 Assert.Equal(DatagramSize, result.ReceivedBytes);
-                AssertExtensions.SequenceEqual(emptyBuffer, new ReadOnlySpan<byte>(receiveInternalBuffer, 0, Offset));
-                AssertExtensions.SequenceEqual(sendBuffer, new ReadOnlySpan<byte>(receiveInternalBuffer, Offset, DatagramSize));
+                AssertExtensions.SequenceEqual(
+                    emptyBuffer,
+                    new ReadOnlySpan<byte>(receiveInternalBuffer, 0, Offset)
+                );
+                AssertExtensions.SequenceEqual(
+                    sendBuffer,
+                    new ReadOnlySpan<byte>(receiveInternalBuffer, Offset, DatagramSize)
+                );
                 Assert.Equal(sender.LocalEndPoint, result.RemoteEndPoint);
             }
         }
@@ -223,8 +296,16 @@ namespace System.Net.Sockets.Tests
             const int DatagramsToSend = 16;
 
             IPAddress address = ipv4 ? IPAddress.Loopback : IPAddress.IPv6Loopback;
-            using Socket server = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
-            using Socket client = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+            using Socket server = new Socket(
+                address.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
+            using Socket client = new Socket(
+                address.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
 
             client.BindToAnonymousPort(address);
             server.BindToAnonymousPort(address);
@@ -267,8 +348,16 @@ namespace System.Net.Sockets.Tests
             const int DatagramsToSend = 16;
 
             IPAddress address = ipv4 ? IPAddress.Loopback : IPAddress.IPv6Loopback;
-            using Socket server = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
-            using Socket client = new Socket(address.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+            using Socket server = new Socket(
+                address.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
+            using Socket client = new Socket(
+                address.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
 
             client.BindToAnonymousPort(address);
             server.BindToAnonymousPort(address);
@@ -305,7 +394,11 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void ReceiveSent_SmallSocketAddress_Throws()
         {
-            using Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            using Socket server = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             server.BindToAnonymousPort(IPAddress.Loopback);
 
             byte[] receiveBuffer = new byte[1];
@@ -313,7 +406,9 @@ namespace System.Net.Sockets.Tests
             SocketAddress serverSA = server.LocalEndPoint.Serialize();
 
             SocketAddress sa = new SocketAddress(AddressFamily.InterNetwork, 2);
-           Assert.Throws<ArgumentOutOfRangeException>(() => server.ReceiveFrom(receiveBuffer, SocketFlags.None, sa));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => server.ReceiveFrom(receiveBuffer, SocketFlags.None, sa)
+            );
         }
 
         [Theory]
@@ -321,19 +416,32 @@ namespace System.Net.Sockets.Tests
         [InlineData(false)]
         public async Task ClosedBeforeOperation_Throws_ObjectDisposedException(bool closeOrDispose)
         {
-            using var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            using var socket = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             socket.BindToAnonymousPort(IPAddress.Any);
-            if (closeOrDispose) socket.Close();
-            else socket.Dispose();
+            if (closeOrDispose)
+                socket.Close();
+            else
+                socket.Dispose();
 
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint()));
+            await Assert.ThrowsAsync<ObjectDisposedException>(
+                () => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint())
+            );
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52124", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
-        public async Task ClosedDuringOperation_Throws_ObjectDisposedExceptionOrSocketException(bool closeOrDispose)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52124",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
+        public async Task ClosedDuringOperation_Throws_ObjectDisposedExceptionOrSocketException(
+            bool closeOrDispose
+        )
         {
             if (UsesSync && PlatformDetection.IsOSX)
             {
@@ -348,7 +456,11 @@ namespace System.Net.Sockets.Tests
                 // In sync case Dispose may happen before the operation is started,
                 // in that case we would see an ObjectDisposedException instead of a SocketException.
                 // We may need to try the run a couple of times to deal with the timing race.
-                await RetryHelper.ExecuteAsync(() => RunTestAsync(), maxAttempts: 10, retryWhen: e => e is XunitException);
+                await RetryHelper.ExecuteAsync(
+                    () => RunTestAsync(),
+                    maxAttempts: 10,
+                    retryWhen: e => e is XunitException
+                );
             }
             else
             {
@@ -357,18 +469,27 @@ namespace System.Net.Sockets.Tests
 
             async Task RunTestAsync()
             {
-                using var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                using var socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                );
                 socket.BindToAnonymousPort(IPAddress.Any);
 
                 Task receiveTask = ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint());
                 await Task.Delay(msDelay);
                 msDelay *= 2;
-                if (closeOrDispose) socket.Close();
-                else socket.Dispose();
+                if (closeOrDispose)
+                    socket.Close();
+                else
+                    socket.Dispose();
 
-                SocketException ex = await Assert.ThrowsAsync<SocketException>(() => receiveTask)
-                        .WaitAsync(CancellationTestTimeout);
-                SocketError expectedError = UsesSync ? SocketError.Interrupted : SocketError.OperationAborted;
+                SocketException ex = await Assert
+                    .ThrowsAsync<SocketException>(() => receiveTask)
+                    .WaitAsync(CancellationTestTimeout);
+                SocketError expectedError = UsesSync
+                    ? SocketError.Interrupted
+                    : SocketError.OperationAborted;
                 Assert.Equal(expectedError, ex.SocketErrorCode);
             }
         }
@@ -377,17 +498,27 @@ namespace System.Net.Sockets.Tests
         [Theory]
         [InlineData(SocketShutdown.Both)]
         [InlineData(SocketShutdown.Receive)]
-        public async Task ShutdownReceiveBeforeOperation_ThrowsSocketException(SocketShutdown shutdown)
+        public async Task ShutdownReceiveBeforeOperation_ThrowsSocketException(
+            SocketShutdown shutdown
+        )
         {
-            using var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            using var socket = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             socket.BindToAnonymousPort(IPAddress.Any);
             socket.Shutdown(shutdown);
 
             // [ActiveIssue("https://github.com/dotnet/runtime/issues/47469")]
             // Shutdown(Both) does not seem to take immediate effect for Receive(Message)From in a consistent manner, trying to workaround with a delay:
-            if (shutdown == SocketShutdown.Both) await Task.Delay(50);
+            if (shutdown == SocketShutdown.Both)
+                await Task.Delay(50);
 
-            SocketException exception = await Assert.ThrowsAnyAsync<SocketException>(() => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint()))
+            SocketException exception = await Assert
+                .ThrowsAnyAsync<SocketException>(
+                    () => ReceiveFromAsync(socket, new byte[1], GetGetDummyTestEndpoint())
+                )
                 .WaitAsync(CancellationTestTimeout);
 
             Assert.Equal(SocketError.Shutdown, exception.SocketErrorCode);
@@ -397,11 +528,19 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public async Task ShutdownSend_ReceiveFromShouldSucceed()
         {
-            using var receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            using var receiver = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             receiver.BindToAnonymousPort(IPAddress.Loopback);
             receiver.Shutdown(SocketShutdown.Send);
 
-            using var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            using var sender = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             sender.BindToAnonymousPort(IPAddress.Loopback);
             sender.SendTo(new byte[1], receiver.LocalEndPoint);
 
@@ -412,17 +551,21 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ReceiveFrom_Sync : ReceiveFrom<SocketHelperArraySync>
     {
-        public ReceiveFrom_Sync(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_Sync(ITestOutputHelper output)
+            : base(output) { }
     }
 
-    public sealed class ReceiveFrom_SyncForceNonBlocking : ReceiveFrom<SocketHelperSyncForceNonBlocking>
+    public sealed class ReceiveFrom_SyncForceNonBlocking
+        : ReceiveFrom<SocketHelperSyncForceNonBlocking>
     {
-        public ReceiveFrom_SyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_SyncForceNonBlocking(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class ReceiveFrom_Apm : ReceiveFrom<SocketHelperApm>
     {
-        public ReceiveFrom_Apm(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_Apm(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void EndReceiveFrom_NullAsyncResult_Throws_ArgumentNullException()
@@ -438,7 +581,9 @@ namespace System.Net.Sockets.Tests
             EndPoint endpoint = new IPEndPoint(IPAddress.Loopback, 1);
             using Socket socket = CreateSocket();
 
-            Assert.Throws<ArgumentException>(() => socket.EndReceiveFrom(Task.CompletedTask, ref endpoint));
+            Assert.Throws<ArgumentException>(
+                () => socket.EndReceiveFrom(Task.CompletedTask, ref endpoint)
+            );
         }
 
         [Fact]
@@ -448,8 +593,19 @@ namespace System.Net.Sockets.Tests
             EndPoint invalidEndPoint = null;
             using Socket socket = CreateSocket();
             socket.BindToAnonymousPort(IPAddress.Loopback);
-            IAsyncResult iar = socket.BeginReceiveFrom(new byte[1], 0, 1, SocketFlags.None, ref validEndPoint, null, null);
-            Assert.Throws<ArgumentNullException>("endPoint", () => socket.EndReceiveFrom(iar, ref invalidEndPoint));
+            IAsyncResult iar = socket.BeginReceiveFrom(
+                new byte[1],
+                0,
+                1,
+                SocketFlags.None,
+                ref validEndPoint,
+                null,
+                null
+            );
+            Assert.Throws<ArgumentNullException>(
+                "endPoint",
+                () => socket.EndReceiveFrom(iar, ref invalidEndPoint)
+            );
         }
 
         [Fact]
@@ -459,8 +615,19 @@ namespace System.Net.Sockets.Tests
             EndPoint invalidEndPoint = new IPEndPoint(IPAddress.IPv6Loopback, 1);
             using Socket socket = CreateSocket();
             socket.BindToAnonymousPort(IPAddress.Loopback);
-            IAsyncResult iar = socket.BeginReceiveFrom(new byte[1], 0, 1, SocketFlags.None, ref validEndPoint, null, null);
-            Assert.Throws<ArgumentException>("endPoint", () => socket.EndReceiveFrom(iar, ref invalidEndPoint));
+            IAsyncResult iar = socket.BeginReceiveFrom(
+                new byte[1],
+                0,
+                1,
+                SocketFlags.None,
+                ref validEndPoint,
+                null,
+                null
+            );
+            Assert.Throws<ArgumentException>(
+                "endPoint",
+                () => socket.EndReceiveFrom(iar, ref invalidEndPoint)
+            );
         }
 
         [Fact]
@@ -476,7 +643,15 @@ namespace System.Net.Sockets.Tests
 
             sender.SendTo(new byte[1], receiver.LocalEndPoint);
 
-            IAsyncResult iar = receiver.BeginReceiveFrom(new byte[1], 0, 1, SocketFlags.None, ref remoteEp, null, null);
+            IAsyncResult iar = receiver.BeginReceiveFrom(
+                new byte[1],
+                0,
+                1,
+                SocketFlags.None,
+                ref remoteEp,
+                null,
+                null
+            );
             if (iar.CompletedSynchronously)
             {
                 _output.WriteLine("Completed synchronously, updated endpoint.");
@@ -492,29 +667,51 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ReceiveFrom_Task : ReceiveFrom<SocketHelperTask>
     {
-        public ReceiveFrom_Task(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_Task(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class ReceiveFrom_CancellableTask : ReceiveFrom<SocketHelperCancellableTask>
     {
-        public ReceiveFrom_CancellableTask(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_CancellableTask(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [MemberData(nameof(LoopbacksAndBuffers))]
         public async Task WhenCanceled_Throws(IPAddress loopback, bool precanceled)
         {
-            using Socket socket = new Socket(loopback.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
-            using var dummy = new Socket(loopback.AddressFamily, SocketType.Dgram, ProtocolType.Udp);
+            using Socket socket = new Socket(
+                loopback.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
+            using var dummy = new Socket(
+                loopback.AddressFamily,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             socket.BindToAnonymousPort(loopback);
             dummy.BindToAnonymousPort(loopback);
             Memory<byte> buffer = new byte[1];
 
             CancellationTokenSource cts = new CancellationTokenSource();
-            if (precanceled) cts.Cancel();
-            else cts.CancelAfter(100);
+            if (precanceled)
+                cts.Cancel();
+            else
+                cts.CancelAfter(100);
 
-            OperationCanceledException ex = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                () => socket.ReceiveFromAsync(buffer, SocketFlags.None, dummy.LocalEndPoint, cts.Token).AsTask())
+            OperationCanceledException ex = await Assert
+                .ThrowsAnyAsync<OperationCanceledException>(
+                    () =>
+                        socket
+                            .ReceiveFromAsync(
+                                buffer,
+                                SocketFlags.None,
+                                dummy.LocalEndPoint,
+                                cts.Token
+                            )
+                            .AsTask()
+                )
                 .WaitAsync(CancellationTestTimeout);
             Assert.Equal(cts.Token, ex.CancellationToken);
         }
@@ -522,7 +719,8 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ReceiveFrom_Eap : ReceiveFrom<SocketHelperEap>
     {
-        public ReceiveFrom_Eap(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_Eap(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void ReceiveFromAsync_NullAsyncEventArgs_Throws_ArgumentNullException()
@@ -534,21 +732,26 @@ namespace System.Net.Sockets.Tests
 
     public sealed class ReceiveFrom_SpanSync : ReceiveFrom<SocketHelperSpanSync>
     {
-        public ReceiveFrom_SpanSync(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_SpanSync(ITestOutputHelper output)
+            : base(output) { }
     }
 
-    public sealed class ReceiveFrom_SpanSyncForceNonBlocking : ReceiveFrom<SocketHelperSpanSyncForceNonBlocking>
+    public sealed class ReceiveFrom_SpanSyncForceNonBlocking
+        : ReceiveFrom<SocketHelperSpanSyncForceNonBlocking>
     {
-        public ReceiveFrom_SpanSyncForceNonBlocking(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_SpanSyncForceNonBlocking(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class ReceiveFrom_MemoryArrayTask : ReceiveFrom<SocketHelperMemoryArrayTask>
     {
-        public ReceiveFrom_MemoryArrayTask(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_MemoryArrayTask(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public sealed class ReceiveFrom_MemoryNativeTask : ReceiveFrom<SocketHelperMemoryNativeTask>
     {
-        public ReceiveFrom_MemoryNativeTask(ITestOutputHelper output) : base(output) { }
+        public ReceiveFrom_MemoryNativeTask(ITestOutputHelper output)
+            : base(output) { }
     }
 }

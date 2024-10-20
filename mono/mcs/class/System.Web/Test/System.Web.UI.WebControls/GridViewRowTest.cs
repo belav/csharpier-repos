@@ -34,56 +34,67 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using NUnit.Framework;
 
-
 namespace MonoTests.System.Web.UI.WebControls
 {
-	class PokerGridViewRow : GridViewRow
-	{
-		// View state Stuff
-		public PokerGridViewRow(int rowIndex,int dataItemIndex,DataControlRowType rowType,DataControlRowState rowState)
-		       :base(rowIndex,dataItemIndex,rowType,rowState)
-		{
-			TrackViewState ();
-		}
+    class PokerGridViewRow : GridViewRow
+    {
+        // View state Stuff
+        public PokerGridViewRow(
+            int rowIndex,
+            int dataItemIndex,
+            DataControlRowType rowType,
+            DataControlRowState rowState
+        )
+            : base(rowIndex, dataItemIndex, rowType, rowState)
+        {
+            TrackViewState();
+        }
 
-		public bool DoOnBubbleEvent (object source, EventArgs e)
-		{
-			return base.OnBubbleEvent (source, e);
-		}
-	}
-	
-	[TestFixture]
-	public class GridViewRowTest
-	{
-		
-		[Test]
-		public void GridViewRow_DefaultProperty ()
-		{
-			GridViewRow row = new GridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Normal);
-			Assert.AreEqual (null, row.DataItem, "DataItem");
-			Assert.AreEqual (0, row.DataItemIndex, "DataItemIndex"); //This value assigned into constractor
-			Assert.AreEqual (0, row.RowIndex, "RowIndex");		 //This value assigned into constractor
-			Assert.AreEqual (DataControlRowType.DataRow, row.RowType, "RowType");   //This value assigned into constractor
-			Assert.AreEqual (DataControlRowState.Normal, row.RowState, "RowState"); //This value assigned into constractor
-		}
+        public bool DoOnBubbleEvent(object source, EventArgs e)
+        {
+            return base.OnBubbleEvent(source, e);
+        }
+    }
 
-		[Test]
-		public void GridViewRow_AssignProperty ()
-		{
-			// All public or protected property are assigned into constractor
-			// and was tested into default property test
-		}
+    [TestFixture]
+    public class GridViewRowTest
+    {
+        [Test]
+        public void GridViewRow_DefaultProperty()
+        {
+            GridViewRow row = new GridViewRow(
+                0,
+                0,
+                DataControlRowType.DataRow,
+                DataControlRowState.Normal
+            );
+            Assert.AreEqual(null, row.DataItem, "DataItem");
+            Assert.AreEqual(0, row.DataItemIndex, "DataItemIndex"); //This value assigned into constractor
+            Assert.AreEqual(0, row.RowIndex, "RowIndex"); //This value assigned into constractor
+            Assert.AreEqual(DataControlRowType.DataRow, row.RowType, "RowType"); //This value assigned into constractor
+            Assert.AreEqual(DataControlRowState.Normal, row.RowState, "RowState"); //This value assigned into constractor
+        }
 
-		[Test]
-		public void GridViewRow_BubbleEvent ()
-		{
-			PokerGridViewRow row = new PokerGridViewRow(0, 0, DataControlRowType.DataRow, DataControlRowState.Normal);
-			bool result = row.DoOnBubbleEvent (this, new CommandEventArgs ("", null));
-			Assert.AreEqual (true, result, "OnBubbleEventWithCommandEventArgs");
-			result = row.DoOnBubbleEvent (this, new EventArgs());
-			Assert.AreEqual (false, result, "OnBubbleEventWithEventArgs");
-		}
+        [Test]
+        public void GridViewRow_AssignProperty()
+        {
+            // All public or protected property are assigned into constractor
+            // and was tested into default property test
+        }
 
-
-	}
+        [Test]
+        public void GridViewRow_BubbleEvent()
+        {
+            PokerGridViewRow row = new PokerGridViewRow(
+                0,
+                0,
+                DataControlRowType.DataRow,
+                DataControlRowState.Normal
+            );
+            bool result = row.DoOnBubbleEvent(this, new CommandEventArgs("", null));
+            Assert.AreEqual(true, result, "OnBubbleEventWithCommandEventArgs");
+            result = row.DoOnBubbleEvent(this, new EventArgs());
+            Assert.AreEqual(false, result, "OnBubbleEventWithEventArgs");
+        }
+    }
 }

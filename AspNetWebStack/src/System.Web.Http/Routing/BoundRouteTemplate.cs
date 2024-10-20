@@ -4,7 +4,7 @@
 namespace System.Web.Http.Routing
 {
     /// <summary>
-    /// Represents a URI generated from a <see cref="HttpParsedRoute"/>. 
+    /// Represents a URI generated from a <see cref="HttpParsedRoute"/>.
     /// </summary>
     internal class BoundRouteTemplate
     {

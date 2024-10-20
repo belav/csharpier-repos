@@ -18,7 +18,8 @@ namespace System.Net.Configuration
             this.properties.Add(this.type);
         }
 
-        public AuthenticationModuleElement(string typeName) : this()
+        public AuthenticationModuleElement(string typeName)
+            : this()
         {
             if (typeName != (string)this.type.DefaultValue)
             {
@@ -28,13 +29,10 @@ namespace System.Net.Configuration
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Type, IsRequired=true, IsKey = true)]
+        [ConfigurationProperty(ConfigurationStrings.Type, IsRequired = true, IsKey = true)]
         public string Type
         {
             get { return (string)this[this.type]; }
@@ -45,14 +43,14 @@ namespace System.Net.Configuration
         {
             get { return this.Type; }
         }
-        
+
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty type = 
-            new ConfigurationProperty(ConfigurationStrings.Type, 
-                                      typeof(string), 
-                                      null, 
-                                      ConfigurationPropertyOptions.IsKey);
+        readonly ConfigurationProperty type = new ConfigurationProperty(
+            ConfigurationStrings.Type,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.IsKey
+        );
     }
 }
-

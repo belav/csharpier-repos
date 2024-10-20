@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlInputImage.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -10,45 +10,38 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
-
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Globalization;
     using System.ComponentModel;
+    using System.Globalization;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
-
-/// <devdoc>
-///    <para>
-///       The <see langword='HtmlInputImage'/> class defines the
-///       methods, properties and events for the HtmlInputImage control. This class allows
-///       programmatic access to the HTML &lt;input type=
-///       image&gt; element on the server.
-///    </para>
-/// </devdoc>
-    [
-    DefaultEvent("ServerClick"),
-    SupportsEventValidation,
-    ]
-    public class HtmlInputImage : HtmlInputControl,
-    IPostBackDataHandler, IPostBackEventHandler {
-
+    /// <devdoc>
+    ///    <para>
+    ///       The <see langword='HtmlInputImage'/> class defines the
+    ///       methods, properties and events for the HtmlInputImage control. This class allows
+    ///       programmatic access to the HTML &lt;input type=
+    ///       image&gt; element on the server.
+    ///    </para>
+    /// </devdoc>
+    [DefaultEvent("ServerClick"), SupportsEventValidation]
+    public class HtmlInputImage : HtmlInputControl, IPostBackDataHandler, IPostBackEventHandler
+    {
         private static readonly object EventServerClick = new object();
         private int _x;
         private int _y;
-
 
         /*
          * Creates an intrinsic Html INPUT type=image control.
          */
 
-        public HtmlInputImage() : base("image") {
-        }
-
+        public HtmlInputImage()
+            : base("image") { }
 
         /// <devdoc>
         ///    <para>
@@ -60,20 +53,19 @@ namespace System.Web.UI.HtmlControls {
          * Align property.
          */
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Align {
-            get {
+        public string Align
+        {
+            get
+            {
                 string s = Attributes["align"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["align"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["align"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -86,21 +78,20 @@ namespace System.Web.UI.HtmlControls {
          * Alt property.
          */
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        Localizable(true)
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            Localizable(true)
         ]
-        public string Alt {
-            get {
+        public string Alt
+        {
+            get
+            {
                 string s = Attributes["alt"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["alt"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["alt"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -112,20 +103,19 @@ namespace System.Web.UI.HtmlControls {
          * Border property, size of border in pixels.
          */
         [
-        WebCategory("Appearance"),
-        DefaultValue(-1),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(-1),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public int Border {
-            get {
+        public int Border
+        {
+            get
+            {
                 string s = Attributes["border"];
-                return((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
+                return ((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
             }
-            set {
-                Attributes["border"] = MapIntegerAttributeToString(value);
-            }
+            set { Attributes["border"] = MapIntegerAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -137,21 +127,20 @@ namespace System.Web.UI.HtmlControls {
          * Src property.
          */
         [
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        UrlProperty()
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            UrlProperty()
         ]
-        public string Src {
-            get {
+        public string Src
+        {
+            get
+            {
                 string s = Attributes["src"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["src"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["src"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>Gets or sets whether pressing the button causes page validation to fire. This defaults to True so that when
@@ -159,36 +148,31 @@ namespace System.Web.UI.HtmlControls {
         ///          on the client and the server. Setting this to False is useful when defining a cancel or reset button on a page
         ///          that has validators.</para>
         /// </devdoc>
-        [
-        WebCategory("Behavior"),
-        DefaultValue(true),
-        ]
-        public virtual bool CausesValidation {
-            get {
+        [WebCategory("Behavior"), DefaultValue(true)]
+        public virtual bool CausesValidation
+        {
+            get
+            {
                 object b = ViewState["CausesValidation"];
-                return((b == null) ? true : (bool)b);
+                return ((b == null) ? true : (bool)b);
             }
-            set {
-                ViewState["CausesValidation"] = value;
-            }
+            set { ViewState["CausesValidation"] = value; }
         }
-
 
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        WebSysDescription(SR.PostBackControl_ValidationGroup)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            WebSysDescription(SR.PostBackControl_ValidationGroup)
         ]
-        public virtual string ValidationGroup {
-            get {
+        public virtual string ValidationGroup
+        {
+            get
+            {
                 string s = (string)ViewState["ValidationGroup"];
-                return((s == null) ? String.Empty : s);
+                return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["ValidationGroup"] = value;
-            }
+            set { ViewState["ValidationGroup"] = value; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -196,19 +180,12 @@ namespace System.Web.UI.HtmlControls {
         ///       control.
         ///    </para>
         /// </devdoc>
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.HtmlInputImage_OnServerClick)
-        ]
-        public event ImageClickEventHandler ServerClick {
-            add {
-                Events.AddHandler(EventServerClick, value);
-            }
-            remove {
-                Events.RemoveHandler(EventServerClick, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.HtmlInputImage_OnServerClick)]
+        public event ImageClickEventHandler ServerClick
+        {
+            add { Events.AddHandler(EventServerClick, value); }
+            remove { Events.RemoveHandler(EventServerClick, value); }
         }
-
 
         /// <internalonly/>
         /// <devdoc>
@@ -217,18 +194,18 @@ namespace System.Web.UI.HtmlControls {
          * This method is invoked just prior to rendering.
          * Register requires handling postback to determine if image has been clicked.
          */
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
-            if (Page != null) {
+            if (Page != null)
+            {
                 if (!Disabled)
                     Page.RegisterRequiresPostBack(this);
                 if (CausesValidation)
                     Page.RegisterPostBackScript();
             }
         }
-
-
 
         /// <devdoc>
         ///    <para>
@@ -239,11 +216,12 @@ namespace System.Web.UI.HtmlControls {
         /*
          * Method used to raise the OnServerClick event.
          */
-        protected virtual void OnServerClick(ImageClickEventArgs e) {
+        protected virtual void OnServerClick(ImageClickEventArgs e)
+        {
             ImageClickEventHandler handler = (ImageClickEventHandler)Events[EventServerClick];
-            if (handler != null) handler(this, e);
+            if (handler != null)
+                handler(this, e);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
@@ -252,21 +230,22 @@ namespace System.Web.UI.HtmlControls {
          * Method of IPostBackEventHandler interface to raise events on post back.
          * HtmlInputImage fires an OnServerClick event.
          */
-        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual void RaisePostBackEvent(string eventArgument) {
-            if (CausesValidation) {
+        protected virtual void RaisePostBackEvent(string eventArgument)
+        {
+            if (CausesValidation)
+            {
                 Page.Validate(ValidationGroup);
             }
             OnServerClick(new ImageClickEventArgs(_x, _y));
         }
-        
 
         /// <internalonly/>
         /// <devdoc>
@@ -278,18 +257,21 @@ namespace System.Web.UI.HtmlControls {
          * control will then register with the Page that it wants to raise an event
          * during the event processing phase.
          */
-        bool IPostBackDataHandler.LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
+        {
             return LoadPostData(postDataKey, postCollection);
         }
 
-
-        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
+        {
             string postX = postCollection[RenderedNameAttribute + ".x"];
             string postY = postCollection[RenderedNameAttribute + ".y"];
 
-            if (postX != null && postY != null &&
-                postX.Length > 0 && postY.Length > 0) {
-
+            if (postX != null && postY != null && postX.Length > 0 && postY.Length > 0)
+            {
                 ValidateEvent(UniqueID);
 
                 _x = Int32.Parse(postX, CultureInfo.InvariantCulture);
@@ -301,7 +283,6 @@ namespace System.Web.UI.HtmlControls {
             return false;
         }
 
-
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -309,16 +290,15 @@ namespace System.Web.UI.HtmlControls {
          * Method of IPostBackDataHandler interface which is invoked whenever posted data
          * for a control has changed.
          */
-        void IPostBackDataHandler.RaisePostDataChangedEvent() {
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
             RaisePostDataChangedEvent();
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual void RaisePostDataChangedEvent() {
-        }
+        protected virtual void RaisePostDataChangedEvent() { }
 
         /*
          * Override to render unique name attribute.
@@ -328,14 +308,20 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected override void RenderAttributes(HtmlTextWriter writer) {
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
             PreProcessRelativeReferenceAttribute(writer, "src");
 
-            if (Page != null) {
+            if (Page != null)
+            {
                 Util.WriteOnClickAttribute(
-                    writer, this, true, false,
+                    writer,
+                    this,
+                    true,
+                    false,
                     (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0),
-                    ValidationGroup);
+                    ValidationGroup
+                );
             }
 
             base.RenderAttributes(writer);

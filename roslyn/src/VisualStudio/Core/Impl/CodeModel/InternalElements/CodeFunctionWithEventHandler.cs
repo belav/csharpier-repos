@@ -14,10 +14,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     public sealed class CodeFunctionWithEventHandler : CodeFunction, Interop.IEventHandler
     {
         internal static new EnvDTE.CodeFunction Create(
-           CodeModelState state,
-           FileCodeModel fileCodeModel,
-           SyntaxNodeKey nodeKey,
-           int? nodeKind)
+            CodeModelState state,
+            FileCodeModel fileCodeModel,
+            SyntaxNodeKey nodeKey,
+            int? nodeKind
+        )
         {
             var element = new CodeFunctionWithEventHandler(state, fileCodeModel, nodeKey, nodeKind);
             var result = (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
@@ -28,10 +29,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         }
 
         internal static new EnvDTE.CodeFunction CreateUnknown(
-           CodeModelState state,
-           FileCodeModel fileCodeModel,
-           int nodeKind,
-           string name)
+            CodeModelState state,
+            FileCodeModel fileCodeModel,
+            int nodeKind,
+            string name
+        )
         {
             var element = new CodeFunctionWithEventHandler(state, fileCodeModel, nodeKind, name);
             return (EnvDTE.CodeFunction)ComAggregate.CreateAggregatedObject(element);
@@ -41,19 +43,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             CodeModelState state,
             FileCodeModel fileCodeModel,
             SyntaxNodeKey nodeKey,
-            int? nodeKind)
-            : base(state, fileCodeModel, nodeKey, nodeKind)
-        {
-        }
+            int? nodeKind
+        )
+            : base(state, fileCodeModel, nodeKey, nodeKind) { }
 
         private CodeFunctionWithEventHandler(
             CodeModelState state,
             FileCodeModel fileCodeModel,
             int nodeKind,
-            string name)
-            : base(state, fileCodeModel, nodeKind, name)
-        {
-        }
+            string name
+        )
+            : base(state, fileCodeModel, nodeKind, name) { }
 
         public int AddHandler(string bstrEventName)
         {
@@ -62,7 +62,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
             FileCodeModel.PerformEdit(document =>
             {
-                return CodeModelService.AddHandlesClause(document, bstrEventName, node, CancellationToken.None);
+                return CodeModelService.AddHandlesClause(
+                    document,
+                    bstrEventName,
+                    node,
+                    CancellationToken.None
+                );
             });
 
             return VSConstants.S_OK;
@@ -75,7 +80,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
             FileCodeModel.PerformEdit(document =>
             {
-                return CodeModelService.RemoveHandlesClause(document, bstrEventName, node, CancellationToken.None);
+                return CodeModelService.RemoveHandlesClause(
+                    document,
+                    bstrEventName,
+                    node,
+                    CancellationToken.None
+                );
             });
 
             return VSConstants.S_OK;

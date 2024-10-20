@@ -4,7 +4,7 @@
 /// buffer as the data being encoded will most likely grow.
 /// Encoding and decoding is done transparently to the caller.
 /// this class is meant to be used when RFC 2047 quoted stream encoding
-///is needed.  This is for headers such as subject and should NOT be 
+///is needed.  This is for headers such as subject and should NOT be
 ///used for email body
 /// </summary>
 
@@ -31,27 +31,286 @@ namespace System.Net.Mime
         //folding takes up 3 characters "\r\n "
         const int sizeOfFoldingCRLF = 3;
 
-        static byte[] hexDecodeMap = new byte[] {// 0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // 0
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // 1
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // 2
-                                                    0,  1,  2,  3,  4,  5,  6,  7,  8,  9,255,255,255,255,255,255, // 3
-                                                  255, 10, 11, 12, 13, 14, 15,255,255,255,255,255,255,255,255,255, // 4
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // 5
-                                                  255, 10, 11, 12, 13, 14, 15,255,255,255,255,255,255,255,255,255, // 6
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // 7
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // 8
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // 9
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // A
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // B
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // C
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // D
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // E
-                                                  255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255, // F
+        static byte[] hexDecodeMap = new byte[]
+        { // 0   1   2   3   4   5   6   7   8   9   A   B   C   D   E   F
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 0
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 1
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 2
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 3
+            255,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 4
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 5
+            255,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 6
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 7
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 8
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // 9
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // A
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // B
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // C
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // D
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // E
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255,
+            255, // F
         };
 
         //bytes that correspond to the hex char representations in ASCII (0-9, A-F)
-        static byte[] hexEncodeMap = new byte[] { 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 65, 66, 67, 68, 69, 70 };
+        static byte[] hexEncodeMap = new byte[]
+        {
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+        };
 
         ReadStateInfo readState;
         WriteStateInfoBase writeState;
@@ -60,7 +319,7 @@ namespace System.Net.Mime
         {
             this.writeState = wsi;
         }
-        
+
         ReadStateInfo ReadState
         {
             get
@@ -73,13 +332,16 @@ namespace System.Net.Mime
 
         internal WriteStateInfoBase WriteState
         {
-            get
-            {
-                return this.writeState;
-            }
+            get { return this.writeState; }
         }
 
-      public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (buffer == null)
                 throw new ArgumentNullException("buffer");
@@ -90,7 +352,14 @@ namespace System.Net.Mime
             if (offset + count > buffer.Length)
                 throw new ArgumentOutOfRangeException("count");
 
-            WriteAsyncResult result = new WriteAsyncResult(this, buffer, offset, count, callback, state);
+            WriteAsyncResult result = new WriteAsyncResult(
+                this,
+                buffer,
+                offset,
+                count,
+                callback,
+                state
+            );
             result.Write();
             return result;
         }
@@ -186,7 +455,7 @@ namespace System.Net.Mime
                         else
                         {
                             // determine where we are relative to the end
-                            // of the data.  If we don't have enough data to 
+                            // of the data.  If we don't have enough data to
                             // decode the escape sequence, save off what we
                             // have and continue the decoding in the next
                             // read.  Otherwise, decode the data and copy
@@ -205,9 +474,13 @@ namespace System.Net.Mime
                                         byte b1 = hexDecodeMap[source[1]];
                                         byte b2 = hexDecodeMap[source[2]];
                                         if (b1 == 255)
-                                            throw new FormatException(SR.GetString(SR.InvalidHexDigit, b1));
+                                            throw new FormatException(
+                                                SR.GetString(SR.InvalidHexDigit, b1)
+                                            );
                                         if (b2 == 255)
-                                            throw new FormatException(SR.GetString(SR.InvalidHexDigit, b2));
+                                            throw new FormatException(
+                                                SR.GetString(SR.InvalidHexDigit, b2)
+                                            );
 
                                         *dest++ = (byte)((b1 << 4) + b2);
                                     }
@@ -216,7 +489,7 @@ namespace System.Net.Mime
                             }
                         }
                     }
-                EndWhile:
+                    EndWhile:
                     count = (int)(dest - start);
                 }
             }
@@ -227,17 +500,32 @@ namespace System.Net.Mime
         {
             // Add Encoding header, if any. e.g. =?encoding?b?
             writeState.AppendHeader();
-            
+
             // Scan one character at a time looking for chars that need to be encoded.
-            int cur = offset; 
+            int cur = offset;
             for (; cur < count + offset; cur++)
             {
                 if ( // Fold if we're before a whitespace and encoding another character would be too long
-                    ((WriteState.CurrentLineLength + sizeOfFoldingCRLF + WriteState.FooterLength >= WriteState.MaxLineLength)
-                        && (buffer[cur] == ' ' || buffer[cur] == '\t' || buffer[cur] == '\r' || buffer[cur] == '\n')) 
+                    (
+                        (
+                            WriteState.CurrentLineLength
+                                + sizeOfFoldingCRLF
+                                + WriteState.FooterLength
+                            >= WriteState.MaxLineLength
+                        )
+                        && (
+                            buffer[cur] == ' '
+                            || buffer[cur] == '\t'
+                            || buffer[cur] == '\r'
+                            || buffer[cur] == '\n'
+                        )
+                    )
                     // Or just adding the footer would be too long.
-                    || (WriteState.CurrentLineLength + writeState.FooterLength >= WriteState.MaxLineLength)
-                   )
+                    || (
+                        WriteState.CurrentLineLength + writeState.FooterLength
+                        >= WriteState.MaxLineLength
+                    )
+                )
                 {
                     WriteState.AppendCRLF(true);
                 }
@@ -251,7 +539,14 @@ namespace System.Net.Mime
                     cur++;
 
                     //the encoding for CRLF is =0D=0A
-                    WriteState.Append((byte)'=', (byte)'0', (byte)'D', (byte)'=', (byte)'0', (byte)'A');
+                    WriteState.Append(
+                        (byte)'=',
+                        (byte)'0',
+                        (byte)'D',
+                        (byte)'=',
+                        (byte)'0',
+                        (byte)'A'
+                    );
                 }
                 else if (buffer[cur] == ' ')
                 {
@@ -288,9 +583,7 @@ namespace System.Net.Mime
 
         public string GetEncodedString()
         {
-
             return ASCIIEncoding.ASCII.GetString(this.WriteState.Buffer, 0, this.WriteState.Length);
-
         }
 
         public override void EndWrite(IAsyncResult asyncResult)
@@ -313,7 +606,7 @@ namespace System.Net.Mime
             }
         }
 
-      public override void Write(byte[] buffer, int offset, int count)
+        public override void Write(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
                 throw new ArgumentNullException("buffer");
@@ -334,7 +627,7 @@ namespace System.Net.Mime
                     break;
             }
         }
-             
+
         class ReadStateInfo
         {
             bool isEscaped = false;
@@ -352,7 +645,7 @@ namespace System.Net.Mime
                 set { this.b1 = value; }
             }
         }
-        
+
         class WriteAsyncResult : LazyAsyncResult
         {
             QEncodedStream parent;
@@ -362,7 +655,14 @@ namespace System.Net.Mime
             static AsyncCallback onWrite = new AsyncCallback(OnWrite);
             int written;
 
-            internal WriteAsyncResult(QEncodedStream parent, byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+            internal WriteAsyncResult(
+                QEncodedStream parent,
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback callback,
+                object state
+            )
                 : base(null, state, callback)
             {
                 this.parent = parent;
@@ -405,10 +705,20 @@ namespace System.Net.Mime
             {
                 for (; ; )
                 {
-                    this.written += this.parent.EncodeBytes(this.buffer, this.offset + this.written, this.count - this.written);
+                    this.written += this.parent.EncodeBytes(
+                        this.buffer,
+                        this.offset + this.written,
+                        this.count - this.written
+                    );
                     if (this.written < this.count)
                     {
-                        IAsyncResult result = this.parent.BaseStream.BeginWrite(this.parent.WriteState.Buffer, 0, this.parent.WriteState.Length, onWrite, this);
+                        IAsyncResult result = this.parent.BaseStream.BeginWrite(
+                            this.parent.WriteState.Buffer,
+                            0,
+                            this.parent.WriteState.Length,
+                            onWrite,
+                            this
+                        );
                         if (!result.CompletedSynchronously)
                             break;
                         CompleteWrite(result);

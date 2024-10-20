@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,25 +31,32 @@ using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-	public sealed class CryptoKeyAuditRule : AuditRule
-	{
-		public CryptoKeyAuditRule (IdentityReference identity,
-					   CryptoKeyRights cryptoKeyRights,
-					   AuditFlags flags)
-			: base (identity, (int)cryptoKeyRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
-		{
-		}
-		
-		public CryptoKeyAuditRule (string identity,
-					   CryptoKeyRights cryptoKeyRights,
-					   AuditFlags flags)
-			: this (new NTAccount (identity), cryptoKeyRights, flags)
-		{
-		}
-		
-		public CryptoKeyRights CryptoKeyRights {
-			get { return (CryptoKeyRights)AccessMask; }
-		}
-	}
-}
+    public sealed class CryptoKeyAuditRule : AuditRule
+    {
+        public CryptoKeyAuditRule(
+            IdentityReference identity,
+            CryptoKeyRights cryptoKeyRights,
+            AuditFlags flags
+        )
+            : base(
+                identity,
+                (int)cryptoKeyRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                flags
+            ) { }
 
+        public CryptoKeyAuditRule(
+            string identity,
+            CryptoKeyRights cryptoKeyRights,
+            AuditFlags flags
+        )
+            : this(new NTAccount(identity), cryptoKeyRights, flags) { }
+
+        public CryptoKeyRights CryptoKeyRights
+        {
+            get { return (CryptoKeyRights)AccessMask; }
+        }
+    }
+}

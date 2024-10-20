@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,23 +29,25 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	public interface IContextChannel : IChannel, ICommunicationObject,
-		IExtensibleObject<IContextChannel>
-	{
-		// Properties
+    public interface IContextChannel
+        : IChannel,
+            ICommunicationObject,
+            IExtensibleObject<IContextChannel>
+    {
+        // Properties
 
-		bool AllowOutputBatching { get; set; }
+        bool AllowOutputBatching { get; set; }
 
-		IInputSession InputSession { get; }
+        IInputSession InputSession { get; }
 
-		EndpointAddress LocalAddress { get; }
+        EndpointAddress LocalAddress { get; }
 
-		TimeSpan OperationTimeout { get; set; }
+        TimeSpan OperationTimeout { get; set; }
 
-		IOutputSession OutputSession { get; }
+        IOutputSession OutputSession { get; }
 
-		EndpointAddress RemoteAddress { get; }
+        EndpointAddress RemoteAddress { get; }
 
-		string SessionId { get; }
-	}
+        string SessionId { get; }
+    }
 }

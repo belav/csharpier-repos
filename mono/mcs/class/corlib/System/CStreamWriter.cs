@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,144 +35,163 @@
 using System;
 using System.Text;
 
-namespace System.IO {
-	class CStreamWriter : StreamWriter {
-		TermInfoDriver driver;
+namespace System.IO
+{
+    class CStreamWriter : StreamWriter
+    {
+        TermInfoDriver driver;
 
-		public CStreamWriter (Stream stream, Encoding encoding, bool leaveOpen)
-			: base (stream, encoding, DefaultBufferSize, leaveOpen)
-		{
-			driver = (TermInfoDriver) ConsoleDriver.driver;
-		}
+        public CStreamWriter(Stream stream, Encoding encoding, bool leaveOpen)
+            : base(stream, encoding, DefaultBufferSize, leaveOpen)
+        {
+            driver = (TermInfoDriver)ConsoleDriver.driver;
+        }
 
-		public override void Write (char [] buffer, int index, int count)
-		{
-			if (count <= 0)
-				return;
-			
-			if (!driver.Initialized) {
-				try {
-					base.Write (buffer, index, count);
-				} catch (IOException) {
-				}
-				
-				return;
-			}
-			
-			lock (this) {
-				int last = index + count;
-				int i = index;
-				int n = 0;
-				char c;
+        public override void Write(char[] buffer, int index, int count)
+        {
+            if (count <= 0)
+                return;
 
-				do {
-					c = buffer [i++];
+            if (!driver.Initialized)
+            {
+                try
+                {
+                    base.Write(buffer, index, count);
+                }
+                catch (IOException) { }
 
-					if (driver.IsSpecialKey (c)) {
-						// flush what we have
-						if (n > 0) {
-							try {
-								base.Write (buffer, index, n);
-							} catch (IOException) {
-							}
-							
-							n = 0;
-						}
+                return;
+            }
 
-						// write the special key
-						driver.WriteSpecialKey (c);
+            lock (this)
+            {
+                int last = index + count;
+                int i = index;
+                int n = 0;
+                char c;
 
-						index = i;
-					} else {
-						n++;
-					}
-				} while (i < last);
+                do
+                {
+                    c = buffer[i++];
 
-				if (n > 0) {
-					// write out the remainder of the buffer
-					try {
-						base.Write (buffer, index, n);
-					} catch (IOException) {
-					}
-				}
-			}
-		}
+                    if (driver.IsSpecialKey(c))
+                    {
+                        // flush what we have
+                        if (n > 0)
+                        {
+                            try
+                            {
+                                base.Write(buffer, index, n);
+                            }
+                            catch (IOException) { }
 
-		public override void Write (char val)
-		{
-			lock (this) {
-				try {
-					if (driver.IsSpecialKey (val))
-						driver.WriteSpecialKey (val);
-					else
-						InternalWriteChar (val);
-				} catch (IOException) {
-				}
-			}
-		}
-/*
-		public void WriteKey (ConsoleKeyInfo key)
-		{
-			lock (this) {
-				ConsoleKeyInfo copy = new ConsoleKeyInfo (key);
-				if (driver.IsSpecialKey (copy))
-					driver.WriteSpecialKey (copy);
-				else
-					InternalWriteChar (copy.KeyChar);
-			}
-		}
-*/
-		public void InternalWriteString (string val)
-		{
-			try {
-				base.Write (val);
-			} catch (IOException) {
-			}
-		}
+                            n = 0;
+                        }
 
-		public void InternalWriteChar (char val)
-		{
-			try {
-				base.Write (val);
-			} catch (IOException) {
-			}
-		}
+                        // write the special key
+                        driver.WriteSpecialKey(c);
 
-		public void InternalWriteChars (char [] buffer, int n)
-		{
-			try {
-				base.Write (buffer, 0, n);
-			} catch (IOException) {
-			}
-		}
+                        index = i;
+                    }
+                    else
+                    {
+                        n++;
+                    }
+                } while (i < last);
 
-		public override void Write (char [] val)
-		{
-			Write (val, 0, val.Length);
-		}
+                if (n > 0)
+                {
+                    // write out the remainder of the buffer
+                    try
+                    {
+                        base.Write(buffer, index, n);
+                    }
+                    catch (IOException) { }
+                }
+            }
+        }
 
-		public override void Write (string val)
-		{
-			if (val == null)
-				return;
-			
-			if (driver.Initialized)
-				Write (val.ToCharArray ());
-			else {
-				try {
-					base.Write (val);
-				} catch (IOException){
-					
-				}
-			}
-		}
+        public override void Write(char val)
+        {
+            lock (this)
+            {
+                try
+                {
+                    if (driver.IsSpecialKey(val))
+                        driver.WriteSpecialKey(val);
+                    else
+                        InternalWriteChar(val);
+                }
+                catch (IOException) { }
+            }
+        }
 
-		public override void WriteLine (string val)
-		{
-			Write (val);
-			Write (NewLine);
-		}
-	}
+        /*
+                public void WriteKey (ConsoleKeyInfo key)
+                {
+                    lock (this) {
+                        ConsoleKeyInfo copy = new ConsoleKeyInfo (key);
+                        if (driver.IsSpecialKey (copy))
+                            driver.WriteSpecialKey (copy);
+                        else
+                            InternalWriteChar (copy.KeyChar);
+                    }
+                }
+        */
+        public void InternalWriteString(string val)
+        {
+            try
+            {
+                base.Write(val);
+            }
+            catch (IOException) { }
+        }
+
+        public void InternalWriteChar(char val)
+        {
+            try
+            {
+                base.Write(val);
+            }
+            catch (IOException) { }
+        }
+
+        public void InternalWriteChars(char[] buffer, int n)
+        {
+            try
+            {
+                base.Write(buffer, 0, n);
+            }
+            catch (IOException) { }
+        }
+
+        public override void Write(char[] val)
+        {
+            Write(val, 0, val.Length);
+        }
+
+        public override void Write(string val)
+        {
+            if (val == null)
+                return;
+
+            if (driver.Initialized)
+                Write(val.ToCharArray());
+            else
+            {
+                try
+                {
+                    base.Write(val);
+                }
+                catch (IOException) { }
+            }
+        }
+
+        public override void WriteLine(string val)
+        {
+            Write(val);
+            Write(NewLine);
+        }
+    }
 }
 #endif
-

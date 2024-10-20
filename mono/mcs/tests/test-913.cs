@@ -1,16 +1,16 @@
-namespace N 
+namespace N
 {
-	using X = A.B;
+    using X = A.B;
 
-	class A
-	{
-		public class B {}
+    class A
+    {
+        public class B { }
 
-		public class C : X {}
+        public class C : X { }
 
-		public static void Main ()
-		{
-			new C ();
-		}
-	}
+        public static void Main()
+        {
+            new C();
+        }
+    }
 }

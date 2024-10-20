@@ -14,7 +14,12 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// with status code Created (201) and Location header.
 /// </summary>
 /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
-public sealed class Created<TValue> : IResult, IEndpointMetadataProvider, IStatusCodeHttpResult, IValueHttpResult, IValueHttpResult<TValue>
+public sealed class Created<TValue>
+    : IResult,
+        IEndpointMetadataProvider,
+        IStatusCodeHttpResult,
+        IValueHttpResult,
+        IValueHttpResult<TValue>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Created"/> class with the values
@@ -48,7 +53,10 @@ public sealed class Created<TValue> : IResult, IEndpointMetadataProvider, IStatu
             }
             else
             {
-                Location = locationUri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+                Location = locationUri.GetComponents(
+                    UriComponents.SerializationInfoString,
+                    UriFormat.UriEscaped
+                );
             }
         }
     }
@@ -87,18 +95,24 @@ public sealed class Created<TValue> : IResult, IEndpointMetadataProvider, IStatu
         HttpResultsHelper.Log.WritingResultAsStatusCode(logger, StatusCode);
         httpContext.Response.StatusCode = StatusCode;
 
-        return HttpResultsHelper.WriteResultAsJsonAsync(
-                httpContext,
-                logger,
-                Value);
+        return HttpResultsHelper.WriteResultAsJsonAsync(httpContext, logger, Value);
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.Metadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status201Created, typeof(TValue), new[] { "application/json" }));
+        builder.Metadata.Add(
+            new ProducesResponseTypeMetadata(
+                StatusCodes.Status201Created,
+                typeof(TValue),
+                new[] { "application/json" }
+            )
+        );
     }
 }

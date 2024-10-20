@@ -25,15 +25,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ISymbol IFieldSymbol.AssociatedSymbol
         {
-            get
-            {
-                return _underlying.AssociatedSymbol.GetPublicSymbol();
-            }
+            get { return _underlying.AssociatedSymbol.GetPublicSymbol(); }
         }
 
         RefKind IFieldSymbol.RefKind => _underlying.RefKind;
 
-        ImmutableArray<CustomModifier> IFieldSymbol.RefCustomModifiers => _underlying.RefCustomModifiers;
+        ImmutableArray<CustomModifier> IFieldSymbol.RefCustomModifiers =>
+            _underlying.RefCustomModifiers;
 
         ITypeSymbol IFieldSymbol.Type
         {
@@ -41,14 +39,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyType, _underlying.TypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyType,
+                        _underlying.TypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyType;
             }
         }
 
-        CodeAnalysis.NullableAnnotation IFieldSymbol.NullableAnnotation => _underlying.TypeWithAnnotations.ToPublicAnnotation();
+        CodeAnalysis.NullableAnnotation IFieldSymbol.NullableAnnotation =>
+            _underlying.TypeWithAnnotations.ToPublicAnnotation();
 
         ImmutableArray<CustomModifier> IFieldSymbol.CustomModifiers
         {
@@ -57,26 +60,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         IFieldSymbol IFieldSymbol.OriginalDefinition
         {
-            get
-            {
-                return _underlying.OriginalDefinition.GetPublicSymbol();
-            }
+            get { return _underlying.OriginalDefinition.GetPublicSymbol(); }
         }
 
         IFieldSymbol IFieldSymbol.CorrespondingTupleField
         {
-            get
-            {
-                return _underlying.CorrespondingTupleField.GetPublicSymbol();
-            }
+            get { return _underlying.CorrespondingTupleField.GetPublicSymbol(); }
         }
 
         bool IFieldSymbol.IsExplicitlyNamedTupleElement
         {
-            get
-            {
-                return _underlying.IsExplicitlyNamedTupleElement;
-            }
+            get { return _underlying.IsExplicitlyNamedTupleElement; }
         }
 
         bool IFieldSymbol.IsConst => _underlying.IsConst;
@@ -107,7 +101,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitField(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitField(this, argument);
         }

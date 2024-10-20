@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
+using System.Workflow.Activities.Common;
 using System.Workflow.Activities.Rules;
 using System.Workflow.ComponentModel;
-using System.Workflow.ComponentModel.Design;
 using System.Workflow.ComponentModel.Compiler;
+using System.Workflow.ComponentModel.Design;
 using System.Workflow.Interop;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules.Design
 {
@@ -23,7 +23,10 @@ namespace System.Workflow.Activities.Rules.Design
         public RuleSetBrowserDialog(Activity activity, string name)
             : base(activity, name)
         {
-            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(activity.Site, Helpers.GetRootActivity(activity));
+            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(
+                activity.Site,
+                Helpers.GetRootActivity(activity)
+            );
             if (rules != null)
                 this.ruleSetCollection = rules.RuleSets;
 
@@ -56,7 +59,10 @@ namespace System.Workflow.Activities.Rules.Design
             return null;
         }
 
-        protected override bool OnEditInternal(object currentRuleObject, out object updatedRuleObject)
+        protected override bool OnEditInternal(
+            object currentRuleObject,
+            out object updatedRuleObject
+        )
         {
             RuleSet ruleSet = currentRuleObject as RuleSet;
             updatedRuleObject = null;
@@ -78,9 +84,19 @@ namespace System.Workflow.Activities.Rules.Design
         {
             RuleSet ruleSet = ruleObject as RuleSet;
 
-            using (RenameRuleObjectDialog dlg = new RenameRuleObjectDialog(this.Activity.Site, ruleSet.Name, new RenameRuleObjectDialog.NameValidatorDelegate(IsUniqueName), this))
+            using (
+                RenameRuleObjectDialog dlg = new RenameRuleObjectDialog(
+                    this.Activity.Site,
+                    ruleSet.Name,
+                    new RenameRuleObjectDialog.NameValidatorDelegate(IsUniqueName),
+                    this
+                )
+            )
             {
-                if ((dlg.ShowDialog(this) == DialogResult.OK) && (dlg.RuleObjectName != ruleSet.Name))
+                if (
+                    (dlg.ShowDialog(this) == DialogResult.OK)
+                    && (dlg.RuleObjectName != ruleSet.Name)
+                )
                 {
                     this.ruleSetCollection.Remove(ruleSet);
                     ruleSet.Name = dlg.RuleObjectName;
@@ -125,22 +141,58 @@ namespace System.Workflow.Activities.Rules.Design
         {
             RuleSet ruleSet = ruleObject as RuleSet;
 
-            NativeMethods.SendMessage(previewBox.Handle, NativeMethods.WM_SETREDRAW, IntPtr.Zero, IntPtr.Zero);
+            NativeMethods.SendMessage(
+                previewBox.Handle,
+                NativeMethods.WM_SETREDRAW,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
             previewBox.Lines = DesignerHelpers.GetRuleSetPreview(ruleSet).Split('\n');
-            NativeMethods.SendMessage(previewBox.Handle, NativeMethods.WM_SETREDRAW, new IntPtr(1), IntPtr.Zero);
+            NativeMethods.SendMessage(
+                previewBox.Handle,
+                NativeMethods.WM_SETREDRAW,
+                new IntPtr(1),
+                IntPtr.Zero
+            );
             previewBox.Invalidate();
         }
 
-        protected override string DescriptionText { get { return Messages.RuleSetDescriptionText; } }
-        protected override string TitleText { get { return Messages.RuleSetTitleText; } }
-        protected override string PreviewLabelText { get { return Messages.RuleSetPreviewLabelText; } }
-        protected override string ConfirmDeleteMessageText { get { return Messages.RuleSetConfirmDeleteMessageText; } }
-        protected override string ConfirmDeleteTitleText { get { return Messages.DeleteRuleSet; } }
-        internal override string EmptyNameErrorText { get { return Messages.RuleSetEmptyNameErrorText; } }
-        internal override string DuplicateNameErrorText { get { return Messages.RuleSetDuplicateNameErrorText; } }
-        internal override string NewNameLabelText { get { return Messages.RuleSetNewNameLableText; } }
-        internal override string RenameTitleText { get { return Messages.RuleSetRenameTitleText; } }
-
+        protected override string DescriptionText
+        {
+            get { return Messages.RuleSetDescriptionText; }
+        }
+        protected override string TitleText
+        {
+            get { return Messages.RuleSetTitleText; }
+        }
+        protected override string PreviewLabelText
+        {
+            get { return Messages.RuleSetPreviewLabelText; }
+        }
+        protected override string ConfirmDeleteMessageText
+        {
+            get { return Messages.RuleSetConfirmDeleteMessageText; }
+        }
+        protected override string ConfirmDeleteTitleText
+        {
+            get { return Messages.DeleteRuleSet; }
+        }
+        internal override string EmptyNameErrorText
+        {
+            get { return Messages.RuleSetEmptyNameErrorText; }
+        }
+        internal override string DuplicateNameErrorText
+        {
+            get { return Messages.RuleSetDuplicateNameErrorText; }
+        }
+        internal override string NewNameLabelText
+        {
+            get { return Messages.RuleSetNewNameLableText; }
+        }
+        internal override string RenameTitleText
+        {
+            get { return Messages.RuleSetRenameTitleText; }
+        }
 
         // used by RenameConditionDialog
         internal override bool IsUniqueName(string ruleName)

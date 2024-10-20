@@ -24,8 +24,13 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             CookieBrowserOverrideStore store = new CookieBrowserOverrideStore();
-            HttpCookie existingOverrideCookie = new HttpCookie(CookieBrowserOverrideStore.BrowserOverrideCookieName, "existingRequestAgent");
-            HttpContextBase context = CreateCookieContext(requestCookie: existingOverrideCookie).Object;
+            HttpCookie existingOverrideCookie = new HttpCookie(
+                CookieBrowserOverrideStore.BrowserOverrideCookieName,
+                "existingRequestAgent"
+            );
+            HttpContextBase context = CreateCookieContext(
+                requestCookie: existingOverrideCookie
+            ).Object;
 
             // Act & Assert
             Assert.Equal("existingRequestAgent", store.GetOverriddenUserAgent(context));
@@ -50,8 +55,13 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             CookieBrowserOverrideStore store = new CookieBrowserOverrideStore();
-            HttpCookie existingOverrideCookie = new HttpCookie(CookieBrowserOverrideStore.BrowserOverrideCookieName, "existingRequestAgent");
-            HttpContextBase context = CreateCookieContext(requestCookie: existingOverrideCookie).Object;
+            HttpCookie existingOverrideCookie = new HttpCookie(
+                CookieBrowserOverrideStore.BrowserOverrideCookieName,
+                "existingRequestAgent"
+            );
+            HttpContextBase context = CreateCookieContext(
+                requestCookie: existingOverrideCookie
+            ).Object;
 
             // Act
             store.SetOverriddenUserAgent(context, "setUserAgent");
@@ -80,8 +90,13 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             CookieBrowserOverrideStore store = new CookieBrowserOverrideStore();
-            HttpCookie existingOverrideCookie = new HttpCookie(CookieBrowserOverrideStore.BrowserOverrideCookieName, "setUserAgent");
-            HttpContextBase context = CreateCookieContext(requestCookie: existingOverrideCookie).Object;
+            HttpCookie existingOverrideCookie = new HttpCookie(
+                CookieBrowserOverrideStore.BrowserOverrideCookieName,
+                "setUserAgent"
+            );
+            HttpContextBase context = CreateCookieContext(
+                requestCookie: existingOverrideCookie
+            ).Object;
 
             // Act
             store.SetOverriddenUserAgent(context, null);
@@ -109,28 +124,61 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             CookieBrowserOverrideStore store = new CookieBrowserOverrideStore();
-            CookieBrowserOverrideStore sessionStore = new CookieBrowserOverrideStore(daysToExpire: 0);
-            CookieBrowserOverrideStore longTermStore = new CookieBrowserOverrideStore(daysToExpire: 100);
-            CookieBrowserOverrideStore negativeTermStore = new CookieBrowserOverrideStore(daysToExpire: -1);
+            CookieBrowserOverrideStore sessionStore = new CookieBrowserOverrideStore(
+                daysToExpire: 0
+            );
+            CookieBrowserOverrideStore longTermStore = new CookieBrowserOverrideStore(
+                daysToExpire: 100
+            );
+            CookieBrowserOverrideStore negativeTermStore = new CookieBrowserOverrideStore(
+                daysToExpire: -1
+            );
 
             HttpContextBase context = CreateCookieContext().Object;
 
             // Act & Assert
             store.SetOverriddenUserAgent(context, "testUserAgent");
-            Assert.True(DateTime.Now.AddDays(6.5) < context.Response.Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName].Expires &&
-                        context.Response.Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName].Expires < DateTime.Now.AddDays(7.5));
+            Assert.True(
+                DateTime.Now.AddDays(6.5)
+                    < context
+                        .Response
+                        .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
+                        .Expires
+                    && context
+                        .Response
+                        .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
+                        .Expires < DateTime.Now.AddDays(7.5)
+            );
 
             sessionStore.SetOverriddenUserAgent(context, "testUserAgent");
-            Assert.True(context.Response.Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName].Expires < DateTime.Now);
+            Assert.True(
+                context
+                    .Response
+                    .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
+                    .Expires < DateTime.Now
+            );
 
             longTermStore.SetOverriddenUserAgent(context, "testUserAgent");
-            Assert.True(context.Response.Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName].Expires > DateTime.Now.AddDays(99));
+            Assert.True(
+                context
+                    .Response
+                    .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
+                    .Expires > DateTime.Now.AddDays(99)
+            );
 
             negativeTermStore.SetOverriddenUserAgent(context, "testUserAgent");
-            Assert.True(context.Response.Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName].Expires < DateTime.Now);
+            Assert.True(
+                context
+                    .Response
+                    .Cookies[CookieBrowserOverrideStore.BrowserOverrideCookieName]
+                    .Expires < DateTime.Now
+            );
         }
 
-        internal static Mock<HttpContextBase> CreateCookieContext(HttpCookie requestCookie = null, HttpCookie responseCookie = null)
+        internal static Mock<HttpContextBase> CreateCookieContext(
+            HttpCookie requestCookie = null,
+            HttpCookie responseCookie = null
+        )
         {
             Mock<HttpContextBase> context = new Mock<HttpContextBase>();
 

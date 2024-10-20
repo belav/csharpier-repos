@@ -15,11 +15,15 @@ internal static class UseCollectionInitializerHelpers
     public const string UseCollectionExpressionName = nameof(UseCollectionExpressionName);
 
     public static readonly ImmutableDictionary<string, string?> UseCollectionExpressionProperties =
-        ImmutableDictionary<string, string?>.Empty.Add(UseCollectionExpressionName, UseCollectionExpressionName);
+        ImmutableDictionary<string, string?>.Empty.Add(
+            UseCollectionExpressionName,
+            UseCollectionExpressionName
+        );
 
     public static ImmutableArray<Location> GetLocationsToFade<TStatementSyntax>(
         ISyntaxFacts syntaxFacts,
-        Match<TStatementSyntax> matchInfo)
+        Match<TStatementSyntax> matchInfo
+    )
         where TStatementSyntax : SyntaxNode
     {
         var match = matchInfo.Statement;
@@ -32,8 +36,13 @@ internal static class UseCollectionInitializerHelpers
             {
                 var arguments = syntaxFacts.GetArgumentsOfInvocationExpression(expression);
                 var additionalUnnecessaryLocations = ImmutableArray.Create(
-                    syntaxTree.GetLocation(TextSpan.FromBounds(match.SpanStart, arguments[0].SpanStart)),
-                    syntaxTree.GetLocation(TextSpan.FromBounds(arguments.Last().FullSpan.End, match.Span.End)));
+                    syntaxTree.GetLocation(
+                        TextSpan.FromBounds(match.SpanStart, arguments[0].SpanStart)
+                    ),
+                    syntaxTree.GetLocation(
+                        TextSpan.FromBounds(arguments.Last().FullSpan.End, match.Span.End)
+                    )
+                );
 
                 return additionalUnnecessaryLocations;
             }
@@ -45,7 +54,8 @@ internal static class UseCollectionInitializerHelpers
             var expression = syntaxFacts.GetExpressionOfForeachStatement(match);
             var additionalUnnecessaryLocations = ImmutableArray.Create(
                 syntaxTree.GetLocation(TextSpan.FromBounds(match.SpanStart, expression.SpanStart)),
-                syntaxTree.GetLocation(TextSpan.FromBounds(expression.FullSpan.End, match.Span.End)));
+                syntaxTree.GetLocation(TextSpan.FromBounds(expression.FullSpan.End, match.Span.End))
+            );
 
             return additionalUnnecessaryLocations;
         }
@@ -55,7 +65,9 @@ internal static class UseCollectionInitializerHelpers
 
     public static IEnumerable<TStatementSyntax> GetSubsequentStatements<TStatementSyntax>(
         ISyntaxFacts syntaxFacts,
-        TStatementSyntax initialStatement) where TStatementSyntax : SyntaxNode
+        TStatementSyntax initialStatement
+    )
+        where TStatementSyntax : SyntaxNode
     {
         // If containing statement is inside a block (e.g. method), than we need to iterate through its child
         // statements. If containing statement is in top-level code, than we need to iterate through child statements of

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeStructMemberReadOnl
 
 using VerifyCS = CSharpCodeFixVerifier<
     CSharpMakeStructMemberReadOnlyDiagnosticAnalyzer,
-    CSharpMakeStructMemberReadOnlyCodeFixProvider>;
+    CSharpMakeStructMemberReadOnlyCodeFixProvider
+>;
 
 [Trait(Traits.Feature, Traits.Features.CodeActionsMakeStructMemberReadOnly)]
 public sealed class MakeStructMemberReadOnlyTests
@@ -27,17 +28,17 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                void [|M|]() { }
-            }
-            """,
+                struct S
+                {
+                    void [|M|]() { }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly void M() { }
-            }
-            """
+                struct S
+                {
+                    readonly void M() { }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -50,11 +51,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 void M() { }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -66,11 +63,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 void M() { }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -82,11 +75,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 readonly void M() { }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -101,11 +90,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -122,11 +107,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 static void G(ref S s) { }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -146,11 +127,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 public static void G(ref this S s) { }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -159,27 +136,27 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                void [|M|]()
+                struct S
                 {
-                    G(in this);
-                }
+                    void [|M|]()
+                    {
+                        G(in this);
+                    }
 
-                static void G(in S s) { }
-            }
-            """,
+                    static void G(in S s) { }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly void M()
+                struct S
                 {
-                    G(in this);
-                }
+                    readonly void M()
+                    {
+                        G(in this);
+                    }
 
-                static void G(in S s) { }
-            }
-            """,
+                    static void G(in S s) { }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -189,27 +166,27 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                void [|M|]()
+                struct S
                 {
-                    G(this);
-                }
+                    void [|M|]()
+                    {
+                        G(this);
+                    }
 
-                static void G(in S s) { }
-            }
-            """,
+                    static void G(in S s) { }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly void M()
+                struct S
                 {
-                    G(this);
-                }
+                    readonly void M()
+                    {
+                        G(this);
+                    }
 
-                static void G(in S s) { }
-            }
-            """,
+                    static void G(in S s) { }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -219,33 +196,33 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                void [|M|]()
+                struct S
                 {
-                    this.G();
+                    void [|M|]()
+                    {
+                        this.G();
+                    }
                 }
-            }
 
-            static class X
-            {
-                public static void G(in this S s) { }
-            }
-            """,
+                static class X
+                {
+                    public static void G(in this S s) { }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly void M()
+                struct S
                 {
-                    this.G();
+                    readonly void M()
+                    {
+                        this.G();
+                    }
                 }
-            }
 
-            static class X
-            {
-                public static void G(in this S s) { }
-            }
-            """,
+                static class X
+                {
+                    public static void G(in this S s) { }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -255,27 +232,27 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                void [|M|]()
+                struct S
                 {
-                    var v = this + this;
-                }
+                    void [|M|]()
+                    {
+                        var v = this + this;
+                    }
 
-                public static S operator+(in S s1, in S s2) => default;
-            }
-            """,
+                    public static S operator+(in S s1, in S s2) => default;
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly void M()
+                struct S
                 {
-                    var v = this + this;
-                }
+                    readonly void M()
+                    {
+                        var v = this + this;
+                    }
 
-                public static S operator+(in S s1, in S s2) => default;
-            }
-            """,
+                    public static S operator+(in S s1, in S s2) => default;
+                }
+                """,
         }.RunAsync();
     }
 
@@ -292,11 +269,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -312,11 +285,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -334,11 +303,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 static void G(ref int x) { }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -356,11 +321,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 static void G(out int x) { x = 0; }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -376,11 +337,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -400,11 +357,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -425,11 +378,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -450,11 +399,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -480,17 +425,17 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int P [|=>|] 0;
-            }
-            """,
+                struct S
+                {
+                    int P [|=>|] 0;
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly int P => 0;
-            }
-            """
+                struct S
+                {
+                    readonly int P => 0;
+                }
+                """,
         }.RunAsync();
     }
 
@@ -504,11 +449,7 @@ public sealed class MakeStructMemberReadOnlyTests
             }
             """;
 
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -517,17 +458,17 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int P { [|get|] => 0; }
-            }
-            """,
+                struct S
+                {
+                    int P { [|get|] => 0; }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly int P { get => 0; }
-            }
-            """
+                struct S
+                {
+                    readonly int P { get => 0; }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -537,17 +478,17 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int this[int i] { [|get|] => 0; }
-            }
-            """,
+                struct S
+                {
+                    int this[int i] { [|get|] => 0; }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly int this[int i] { get => 0; }
-            }
-            """
+                struct S
+                {
+                    readonly int this[int i] { get => 0; }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -557,17 +498,17 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int P { [|get|] { return 0; } }
-            }
-            """,
+                struct S
+                {
+                    int P { [|get|] { return 0; } }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly int P { get { return 0; } }
-            }
-            """
+                struct S
+                {
+                    readonly int P { get { return 0; } }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -577,17 +518,17 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int this[int i] { [|get|] { return 0; } }
-            }
-            """,
+                struct S
+                {
+                    int this[int i] { [|get|] { return 0; } }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly int this[int i] { get { return 0; } }
-            }
-            """
+                struct S
+                {
+                    readonly int this[int i] { get { return 0; } }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -597,29 +538,29 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
-
-                void [|M|]()
+                struct S
                 {
-                    S s;
-                    s.i = 1;
+                    int i;
+
+                    void [|M|]()
+                    {
+                        S s;
+                        s.i = 1;
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
-
-                readonly void M()
+                struct S
                 {
-                    S s;
-                    s.i = 1;
+                    int i;
+
+                    readonly void M()
+                    {
+                        S s;
+                        s.i = 1;
+                    }
                 }
-            }
-            """
+                """,
         }.RunAsync();
     }
 
@@ -629,31 +570,31 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
-
-                void [|M|]()
+                struct S
                 {
-                    G();
-                }
+                    int i;
 
-                static void G() { }
-            }
-            """,
+                    void [|M|]()
+                    {
+                        G();
+                    }
+
+                    static void G() { }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
-
-                readonly void M()
+                struct S
                 {
-                    G();
+                    int i;
+
+                    readonly void M()
+                    {
+                        G();
+                    }
+
+                    static void G() { }
                 }
-            
-                static void G() { }
-            }
-            """
+                """,
         }.RunAsync();
     }
 
@@ -663,27 +604,27 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
-
-                void [|M|]()
+                struct S
                 {
-                    M();
+                    int i;
+
+                    void [|M|]()
+                    {
+                        M();
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
-
-                readonly void M()
+                struct S
                 {
-                    M();
+                    int i;
+
+                    readonly void M()
+                    {
+                        M();
+                    }
                 }
-            }
-            """
+                """,
         }.RunAsync();
     }
 
@@ -693,21 +634,21 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                int X { [|get|] => 0; [|set|] { } }
-            }
-            """,
+                    int X { [|get|] => 0; [|set|] { } }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                readonly int X { get => 0; set { } }
-            }
-            """,
+                    readonly int X { get => 0; set { } }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -717,21 +658,21 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                int this[int x] { [|get|] => 0; [|set|] { } }
-            }
-            """,
+                    int this[int x] { [|get|] => 0; [|set|] { } }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                readonly int this[int x] { get => 0; set { } }
-            }
-            """,
+                    readonly int this[int x] { get => 0; set { } }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -741,40 +682,44 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                int X { [|get|] => 0; [|set|] { } }
-            }
-            """,
+                    int X { [|get|] => 0; [|set|] { } }
+                }
+                """,
             FixedState =
             {
                 Sources =
                 {
                     """
-                    struct S
-                    {
-                        int i;
+                        struct S
+                        {
+                            int i;
 
-                        int X { readonly get => 0; set { } }
-                    }
-                    """,
+                            int X { readonly get => 0; set { } }
+                        }
+                        """,
                 },
                 ExpectedDiagnostics =
                 {
-                    // /0/Test0.cs(5,32): info IDE0251: 
-                    VerifyCS.Diagnostic("IDE0251").WithSeverity(DiagnosticSeverity.Info).WithSpan(5, 32, 5, 35).WithOptions(DiagnosticOptions.IgnoreAdditionalLocations),
+                    // /0/Test0.cs(5,32): info IDE0251:
+                    VerifyCS
+                        .Diagnostic("IDE0251")
+                        .WithSeverity(DiagnosticSeverity.Info)
+                        .WithSpan(5, 32, 5, 35)
+                        .WithOptions(DiagnosticOptions.IgnoreAdditionalLocations),
                 },
             },
             BatchFixedCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                readonly int X { get => 0; set { } }
-            }
-            """,
+                    readonly int X { get => 0; set { } }
+                }
+                """,
             CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
         }.RunAsync();
     }
@@ -785,40 +730,44 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                int this[int x] { [|get|] => 0; [|set|] { } }
-            }
-            """,
+                    int this[int x] { [|get|] => 0; [|set|] { } }
+                }
+                """,
             FixedState =
             {
                 Sources =
                 {
                     """
-                    struct S
-                    {
-                        int i;
+                        struct S
+                        {
+                            int i;
 
-                        int this[int x] { readonly get => 0; set { } }
-                    }
-                    """,
+                            int this[int x] { readonly get => 0; set { } }
+                        }
+                        """,
                 },
                 ExpectedDiagnostics =
                 {
-                    // /0/Test0.cs(5,32): info IDE0251: 
-                    VerifyCS.Diagnostic("IDE0251").WithSeverity(DiagnosticSeverity.Info).WithSpan(5, 42, 5, 45).WithOptions(DiagnosticOptions.IgnoreAdditionalLocations),
+                    // /0/Test0.cs(5,32): info IDE0251:
+                    VerifyCS
+                        .Diagnostic("IDE0251")
+                        .WithSeverity(DiagnosticSeverity.Info)
+                        .WithSpan(5, 42, 5, 45)
+                        .WithOptions(DiagnosticOptions.IgnoreAdditionalLocations),
                 },
             },
             BatchFixedCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                readonly int this[int x] { get => 0; set { } }
-            }
-            """,
+                    readonly int this[int x] { get => 0; set { } }
+                }
+                """,
             CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
         }.RunAsync();
     }
@@ -829,21 +778,21 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                int X { [|get|] => 0; readonly set { } }
-            }
-            """,
+                    int X { [|get|] => 0; readonly set { } }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                readonly int X { get => 0; set { } }
-            }
-            """
+                    readonly int X { get => 0; set { } }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -853,21 +802,21 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                int this[int x] { [|get|] => 0; readonly set { } }
-            }
-            """,
+                    int this[int x] { [|get|] => 0; readonly set { } }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                readonly int this[int x] { get => 0; set { } }
-            }
-            """
+                    readonly int this[int x] { get => 0; set { } }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -877,27 +826,27 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
+                struct S
+                {
+                    int i;
 
-                void [|M|]()
-                {
-                    ref readonly int x = ref i;
+                    void [|M|]()
+                    {
+                        ref readonly int x = ref i;
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
-            
-                readonly void M()
+                struct S
                 {
-                    ref readonly int x = ref i;
+                    int i;
+
+                    readonly void M()
+                    {
+                        ref readonly int x = ref i;
+                    }
                 }
-            }
-            """
+                """,
         }.RunAsync();
     }
 
@@ -916,11 +865,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -941,11 +886,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -963,11 +904,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -988,11 +925,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -1027,17 +960,17 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                void [|M|]() { this.ToString(); }
-            }
-            """,
+                struct S
+                {
+                    void [|M|]() { this.ToString(); }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly void M() { this.ToString(); }
-            }
-            """
+                struct S
+                {
+                    readonly void M() { this.ToString(); }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -1047,19 +980,19 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                void [|M|]() { this.X(); }
-                readonly void X() { }
-            }
-            """,
+                struct S
+                {
+                    void [|M|]() { this.X(); }
+                    readonly void X() { }
+                }
+                """,
             FixedCode = """
-            struct S
-            {
-                readonly void M() { this.X(); }
-                readonly void X() { }
-            }
-            """
+                struct S
+                {
+                    readonly void M() { this.X(); }
+                    readonly void X() { }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -1069,29 +1002,29 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
-                int this[int x] { readonly get => 0; set { i++; } }
-
-                void [|M|]()
+                struct S
                 {
-                    var v = this[0];
+                    int i;
+                    int this[int x] { readonly get => 0; set { i++; } }
+
+                    void [|M|]()
+                    {
+                        var v = this[0];
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
-                int this[int x] { readonly get => 0; set { i++; } }
-
-                readonly void M()
+                struct S
                 {
-                    var v = this[0];
+                    int i;
+                    int this[int x] { readonly get => 0; set { i++; } }
+
+                    readonly void M()
+                    {
+                        var v = this[0];
+                    }
                 }
-            }
-            """
+                """,
         }.RunAsync();
     }
 
@@ -1101,29 +1034,29 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct S
-            {
-                int i;
-                readonly int this[int x] { get => 0; }
+                struct S
+                {
+                    int i;
+                    readonly int this[int x] { get => 0; }
 
-                void [|M|]()
-                {
-                    var v = this[0];
+                    void [|M|]()
+                    {
+                        var v = this[0];
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            struct S
-            {
-                int i;
-                readonly int this[int x] { get => 0; }
-            
-                readonly void M()
+                struct S
                 {
-                    var v = this[0];
+                    int i;
+                    readonly int this[int x] { get => 0; }
+
+                    readonly void M()
+                    {
+                        var v = this[0];
+                    }
                 }
-            }
-            """
+                """,
         }.RunAsync();
     }
 
@@ -1133,19 +1066,19 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            struct S : IEquatable<S>
-            {
-                bool IEquatable<S>.[|Equals|](S s) => true;
-            }
-            """,
+                using System;
+                struct S : IEquatable<S>
+                {
+                    bool IEquatable<S>.[|Equals|](S s) => true;
+                }
+                """,
             FixedCode = """
-            using System;
-            struct S : IEquatable<S>
-            {
-                readonly bool IEquatable<S>.Equals(S s) => true;
-            }
-            """
+                using System;
+                struct S : IEquatable<S>
+                {
+                    readonly bool IEquatable<S>.Equals(S s) => true;
+                }
+                """,
         }.RunAsync();
     }
 
@@ -1164,11 +1097,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = testCode,
-            FixedCode = testCode,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode }.RunAsync();
     }
 
     [Fact]
@@ -1191,11 +1120,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = testCode,
-            FixedCode = testCode,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode }.RunAsync();
     }
 
     [Fact]
@@ -1204,37 +1129,37 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct T
-            {
-                public readonly void Dispose() { }
-            }
-
-            struct S
-            {
-                T t;
-
-                void [|Dispose|]()
+                struct T
                 {
-                    t.Dispose();
+                    public readonly void Dispose() { }
                 }
-            }
-            """,
+
+                struct S
+                {
+                    T t;
+
+                    void [|Dispose|]()
+                    {
+                        t.Dispose();
+                    }
+                }
+                """,
             FixedCode = """
-            struct T
-            {
-                public readonly void Dispose() { }
-            }
-
-            struct S
-            {
-                T t;
-
-                readonly void Dispose()
+                struct T
                 {
-                    t.Dispose();
+                    public readonly void Dispose() { }
                 }
-            }
-            """,
+
+                struct S
+                {
+                    T t;
+
+                    readonly void Dispose()
+                    {
+                        t.Dispose();
+                    }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -1249,11 +1174,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 public void M() { x.CompareTo(null); }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = testCode,
-            FixedCode = testCode,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode }.RunAsync();
     }
 
     [Fact]
@@ -1267,11 +1188,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 public void M() { x.CompareTo(null); }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = testCode,
-            FixedCode = testCode,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode }.RunAsync();
     }
 
     [Fact]
@@ -1280,21 +1197,21 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            struct T<X> where X : class, IComparable
-            {
-                X x;
-                public void [|M|]() { x.CompareTo(null); }
-            }
-            """,
+                using System;
+                struct T<X> where X : class, IComparable
+                {
+                    X x;
+                    public void [|M|]() { x.CompareTo(null); }
+                }
+                """,
             FixedCode = """
-            using System;
-            struct T<X> where X : class, IComparable
-            {
-                X x;
-                public readonly void M() { x.CompareTo(null); }
-            }
-            """,
+                using System;
+                struct T<X> where X : class, IComparable
+                {
+                    X x;
+                    public readonly void M() { x.CompareTo(null); }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -1307,11 +1224,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 void M() => throw new System.Exception();
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -1326,11 +1239,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -1345,11 +1254,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test
-        {
-            TestCode = test,
-            FixedCode = test,
-        }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -1358,29 +1263,29 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System.Collections.Generic;
-            using System.Linq;
-            struct S
-            {
-                void [|M|](IEnumerable<int> x)
+                using System.Collections.Generic;
+                using System.Linq;
+                struct S
                 {
-                    var v = from y in x
-                            select y;
+                    void [|M|](IEnumerable<int> x)
+                    {
+                        var v = from y in x
+                                select y;
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            using System.Collections.Generic;
-            using System.Linq;
-            struct S
-            {
-                readonly void M(IEnumerable<int> x)
+                using System.Collections.Generic;
+                using System.Linq;
+                struct S
                 {
-                    var v = from y in x
-                            select y;
+                    readonly void M(IEnumerable<int> x)
+                    {
+                        var v = from y in x
+                                select y;
+                    }
                 }
-            }
-            """,
+                """,
         }.RunAsync();
     }
 
@@ -1390,18 +1295,18 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            struct Repro
-            {
-                private unsafe fixed byte bytes[16];
-
-                public unsafe void AsSpan()
+                struct Repro
                 {
-                    M(ref bytes[0]);
-                }
+                    private unsafe fixed byte bytes[16];
 
-                private readonly void M(ref byte b) { }
-            }
-            """,
+                    public unsafe void AsSpan()
+                    {
+                        M(ref bytes[0]);
+                    }
+
+                    private readonly void M(ref byte b) { }
+                }
+                """,
         }.RunAsync();
     }
 
@@ -1411,27 +1316,27 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public void RecalculateHash()
-            	{
-            		SHA1.HashData(Data, Hash);
-            	}
+                    public void RecalculateHash()
+                	{
+                		SHA1.HashData(Data, Hash);
+                	}
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
@@ -1443,29 +1348,29 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public void RecalculateHash()
-            	{
-                    TakesSpan(Data);
-            	}
+                    public void RecalculateHash()
+                	{
+                        TakesSpan(Data);
+                	}
 
-                readonly void TakesSpan(Span<byte> bytes) { }
+                    readonly void TakesSpan(Span<byte> bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
@@ -1477,29 +1382,29 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public void RecalculateHash()
-            	{
-                    TakesSpan(this.Data);
-            	}
+                    public void RecalculateHash()
+                	{
+                        TakesSpan(this.Data);
+                	}
 
-                readonly void TakesSpan(Span<byte> bytes) { }
+                    readonly void TakesSpan(Span<byte> bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
@@ -1511,53 +1416,53 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public void [|RecalculateHash|]()
-            	{
-                    TakesReadOnlySpan(Data);
-            	}
+                    public void [|RecalculateHash|]()
+                	{
+                        TakesReadOnlySpan(Data);
+                	}
 
-                readonly void TakesReadOnlySpan(ReadOnlySpan<byte> bytes) { }
+                    readonly void TakesReadOnlySpan(ReadOnlySpan<byte> bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             FixedCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public readonly void RecalculateHash()
-            	{
-                    TakesReadOnlySpan(Data);
-            	}
+                    public readonly void RecalculateHash()
+                	{
+                        TakesReadOnlySpan(Data);
+                	}
 
-                readonly void TakesReadOnlySpan(ReadOnlySpan<byte> bytes) { }
+                    readonly void TakesReadOnlySpan(ReadOnlySpan<byte> bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
@@ -1569,53 +1474,53 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public void [|RecalculateHash|]()
-            	{
-                    TakesReadOnlySpan(this.Data);
-            	}
+                    public void [|RecalculateHash|]()
+                	{
+                        TakesReadOnlySpan(this.Data);
+                	}
 
-                readonly void TakesReadOnlySpan(ReadOnlySpan<byte> bytes) { }
+                    readonly void TakesReadOnlySpan(ReadOnlySpan<byte> bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             FixedCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public readonly void RecalculateHash()
-            	{
-                    TakesReadOnlySpan(this.Data);
-            	}
+                    public readonly void RecalculateHash()
+                	{
+                        TakesReadOnlySpan(this.Data);
+                	}
 
-                readonly void TakesReadOnlySpan(ReadOnlySpan<byte> bytes) { }
+                    readonly void TakesReadOnlySpan(ReadOnlySpan<byte> bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
@@ -1627,53 +1532,53 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public void [|RecalculateHash|]()
-            	{
-                    TakesByteArray(Data);
-            	}
+                    public void [|RecalculateHash|]()
+                	{
+                        TakesByteArray(Data);
+                	}
 
-                readonly void TakesByteArray(ByteArray20 bytes) { }
+                    readonly void TakesByteArray(ByteArray20 bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             FixedCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public readonly void RecalculateHash()
-            	{
-                    TakesByteArray(Data);
-            	}
+                    public readonly void RecalculateHash()
+                	{
+                        TakesByteArray(Data);
+                	}
 
-                readonly void TakesByteArray(ByteArray20 bytes) { }
+                    readonly void TakesByteArray(ByteArray20 bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
@@ -1685,53 +1590,53 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public void [|RecalculateHash|]()
-            	{
-                    TakesByteArray(this.Data);
-            	}
+                    public void [|RecalculateHash|]()
+                	{
+                        TakesByteArray(this.Data);
+                	}
 
-                readonly void TakesByteArray(ByteArray20 bytes) { }
+                    readonly void TakesByteArray(ByteArray20 bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             FixedCode = """
-            using System;
-            using System.Runtime.CompilerServices;
-            using System.Security.Cryptography;
+                using System;
+                using System.Runtime.CompilerServices;
+                using System.Security.Cryptography;
 
-            public struct Repro
-            {
-            	public ByteArray20 Data;
-            	public ByteArray20 Hash;
+                public struct Repro
+                {
+                	public ByteArray20 Data;
+                	public ByteArray20 Hash;
 
-                public readonly void RecalculateHash()
-            	{
-                    TakesByteArray(this.Data);
-            	}
+                    public readonly void RecalculateHash()
+                	{
+                        TakesByteArray(this.Data);
+                	}
 
-                readonly void TakesByteArray(ByteArray20 bytes) { }
+                    readonly void TakesByteArray(ByteArray20 bytes) { }
 
-                [InlineArray(20)]
-            	public struct ByteArray20
-            	{
-            		private byte _byte;
-            	}
-            }
-            """,
+                    [InlineArray(20)]
+                	public struct ByteArray20
+                	{
+                		private byte _byte;
+                	}
+                }
+                """,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
@@ -1807,7 +1712,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     public int X;
                 }
-                
+
                 struct Cell(Point value)
                 {
                     public void RemoveBit(int candidate)
@@ -1830,7 +1735,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     public int X;
                 }
-                
+
                 struct Cell(Point value)
                 {
                     public void RemoveBit(int candidate)
@@ -1855,7 +1760,7 @@ public sealed class MakeStructMemberReadOnlyTests
 
                     public void MutatingMethod() => X++;
                 }
-                
+
                 struct Cell(Point value)
                 {
                     public void RemoveBit(int candidate)
@@ -1880,7 +1785,7 @@ public sealed class MakeStructMemberReadOnlyTests
 
                     public readonly void NonMutatingMethod() { }
                 }
-                
+
                 struct Cell(Point value)
                 {
                     public void [|RemoveBit|](int candidate)
@@ -1896,7 +1801,7 @@ public sealed class MakeStructMemberReadOnlyTests
 
                     public readonly void NonMutatingMethod() { }
                 }
-                
+
                 struct Cell(Point value)
                 {
                     public readonly void RemoveBit(int candidate)
@@ -2001,37 +1906,37 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            class Point
-            {
-                public int X;
-
-                public void MutatingMethod() => X++;
-            }
-
-            struct Cell(Point point)
-            {
-                public void [|RemoveBit|](int candidate)
+                class Point
                 {
-                    point.MutatingMethod();
+                    public int X;
+
+                    public void MutatingMethod() => X++;
                 }
-            }
-            """,
+
+                struct Cell(Point point)
+                {
+                    public void [|RemoveBit|](int candidate)
+                    {
+                        point.MutatingMethod();
+                    }
+                }
+                """,
             FixedCode = """
-            class Point
-            {
-                public int X;
-
-                public void MutatingMethod() => X++;
-            }
-
-            struct Cell(Point point)
-            {
-                public readonly void RemoveBit(int candidate)
+                class Point
                 {
-                    point.MutatingMethod();
+                    public int X;
+
+                    public void MutatingMethod() => X++;
                 }
-            }
-            """,
+
+                struct Cell(Point point)
+                {
+                    public readonly void RemoveBit(int candidate)
+                    {
+                        point.MutatingMethod();
+                    }
+                }
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -2042,27 +1947,27 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
+                using System;
 
-            struct Cell<T>(T t) where T : class, IDisposable
-            {
-                public void [|RemoveBit|](int candidate)
+                struct Cell<T>(T t) where T : class, IDisposable
                 {
-                    t.Dispose();
+                    public void [|RemoveBit|](int candidate)
+                    {
+                        t.Dispose();
+                    }
                 }
-            }
-            """,
+                """,
             FixedCode = """
-            using System;
-            
-            struct Cell<T>(T t) where T : class, IDisposable
-            {
-                public readonly void RemoveBit(int candidate)
+                using System;
+
+                struct Cell<T>(T t) where T : class, IDisposable
                 {
-                    t.Dispose();
+                    public readonly void RemoveBit(int candidate)
+                    {
+                        t.Dispose();
+                    }
                 }
-            }
-            """,
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -2073,16 +1978,16 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
+                using System;
 
-            struct Cell<T>(T t) where T : struct, IDisposable
-            {
-                public void RemoveBit(int candidate)
+                struct Cell<T>(T t) where T : struct, IDisposable
                 {
-                    t.Dispose();
+                    public void RemoveBit(int candidate)
+                    {
+                        t.Dispose();
+                    }
                 }
-            }
-            """,
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }
@@ -2093,16 +1998,16 @@ public sealed class MakeStructMemberReadOnlyTests
         await new VerifyCS.Test
         {
             TestCode = """
-            using System;
+                using System;
 
-            struct Cell<T>(T t) where T : IDisposable
-            {
-                public void RemoveBit(int candidate)
+                struct Cell<T>(T t) where T : IDisposable
                 {
-                    t.Dispose();
+                    public void RemoveBit(int candidate)
+                    {
+                        t.Dispose();
+                    }
                 }
-            }
-            """,
+                """,
             LanguageVersion = LanguageVersion.CSharp12,
         }.RunAsync();
     }

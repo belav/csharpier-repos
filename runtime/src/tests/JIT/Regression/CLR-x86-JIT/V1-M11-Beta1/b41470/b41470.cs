@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -15,23 +16,50 @@ namespace Test
         public static void TestEntryPoint()
         {
             ulong local3 = 168u;
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
-            try { Method1((float)local3 + App.m_afForward5[0]); }
+            try
+            {
+                Method1((float)local3 + App.m_afForward5[0]);
+            }
             catch (Exception) { }
         }
 
@@ -40,7 +68,7 @@ namespace Test
 }
 /*
 ---------------------------
-Assert Failure (PID 856, Thread 1076/434)        
+Assert Failure (PID 856, Thread 1076/434)
 ---------------------------
 conv >= 0
 
@@ -55,6 +83,6 @@ Image:
 D:\bugs\bug.exe
 
 ---------------------------
-Abort   Retry   Ignore   
+Abort   Retry   Ignore
 ---------------------------
 */

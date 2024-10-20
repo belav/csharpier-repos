@@ -32,7 +32,7 @@ namespace System.Data.ProviderBase
         private readonly DbConnectionPoolGroupOptions _poolGroupOptions;
         private ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool> _poolCollection;
 
-        private int _state;          // see PoolGroupState* below
+        private int _state; // see PoolGroupState* below
 
         private DbConnectionPoolGroupProviderInfo? _providerInfo;
         private DbMetaDataFactory? _metaDataFactory;
@@ -43,7 +43,11 @@ namespace System.Data.ProviderBase
         private const int PoolGroupStateIdle = 2; // all pools are pruned via Clear
         private const int PoolGroupStateDisabled = 4; // factory pool entry pruning method
 
-        internal DbConnectionPoolGroup(DbConnectionOptions connectionOptions, DbConnectionPoolKey key, DbConnectionPoolGroupOptions poolGroupOptions)
+        internal DbConnectionPoolGroup(
+            DbConnectionOptions connectionOptions,
+            DbConnectionPoolKey key,
+            DbConnectionPoolGroupOptions poolGroupOptions
+        )
         {
             Debug.Assert(null != connectionOptions, "null connection options");
 
@@ -55,7 +59,8 @@ namespace System.Data.ProviderBase
             // HybridDictionary does not create any sub-objects until add
             // so it is safe to use for non-pooled connection as long as
             // we check _poolGroupOptions first
-            _poolCollection = new ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>();
+            _poolCollection =
+                new ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>();
             _state = PoolGroupStateActive;
         }
 
@@ -65,10 +70,7 @@ namespace System.Data.ProviderBase
 
         internal DbConnectionPoolGroupProviderInfo? ProviderInfo
         {
-            get
-            {
-                return _providerInfo;
-            }
+            get { return _providerInfo; }
             set
             {
                 _providerInfo = value;
@@ -85,15 +87,8 @@ namespace System.Data.ProviderBase
 
         internal DbMetaDataFactory? MetaDataFactory
         {
-            get
-            {
-                return _metaDataFactory;
-            }
-
-            set
-            {
-                _metaDataFactory = value;
-            }
+            get { return _metaDataFactory; }
+            set { _metaDataFactory = value; }
         }
 
         internal int Clear()
@@ -102,13 +97,17 @@ namespace System.Data.ProviderBase
             // will return the number of connections in the group after clearing has finished
 
             // First, note the old collection and create a new collection to be used
-            ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>? oldPoolCollection = null;
+            ConcurrentDictionary<
+                DbConnectionPoolIdentity,
+                DbConnectionPool
+            >? oldPoolCollection = null;
             lock (this)
             {
                 if (!_poolCollection.IsEmpty)
                 {
                     oldPoolCollection = _poolCollection;
-                    _poolCollection = new ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>();
+                    _poolCollection =
+                        new ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>();
                 }
             }
 
@@ -168,8 +167,16 @@ namespace System.Data.ProviderBase
                             // Did someone already add it to the list?
                             if (!_poolCollection.TryGetValue(currentIdentity, out pool))
                             {
-                                DbConnectionPoolProviderInfo? connectionPoolProviderInfo = connectionFactory.CreateConnectionPoolProviderInfo(this.ConnectionOptions);
-                                DbConnectionPool newPool = new DbConnectionPool(connectionFactory, this, currentIdentity, connectionPoolProviderInfo);
+                                DbConnectionPoolProviderInfo? connectionPoolProviderInfo =
+                                    connectionFactory.CreateConnectionPoolProviderInfo(
+                                        this.ConnectionOptions
+                                    );
+                                DbConnectionPool newPool = new DbConnectionPool(
+                                    connectionFactory,
+                                    this,
+                                    currentIdentity,
+                                    connectionPoolProviderInfo
+                                );
 
                                 if (MarkPoolGroupAsActive())
                                 {
@@ -177,14 +184,23 @@ namespace System.Data.ProviderBase
                                     // a pool that matches the current identity, so we have to
                                     // add the optimistically created one
                                     newPool.Startup(); // must start pool before usage
-                                    bool addResult = _poolCollection.TryAdd(currentIdentity, newPool);
-                                    Debug.Assert(addResult, "No other pool with current identity should exist at this point");
+                                    bool addResult = _poolCollection.TryAdd(
+                                        currentIdentity,
+                                        newPool
+                                    );
+                                    Debug.Assert(
+                                        addResult,
+                                        "No other pool with current identity should exist at this point"
+                                    );
                                     pool = newPool;
                                 }
                                 else
                                 {
                                     // else pool entry has been disabled so don't create new pools
-                                    Debug.Assert(PoolGroupStateDisabled == _state, "state should be disabled");
+                                    Debug.Assert(
+                                        PoolGroupStateDisabled == _state,
+                                        "state should be disabled"
+                                    );
 
                                     // don't need to call connectionFactory.QueuePoolForRelease(newPool) because
                                     // pool callbacks were delayed and no risk of connections being created
@@ -194,7 +210,10 @@ namespace System.Data.ProviderBase
                             else
                             {
                                 // else found an existing pool to use instead
-                                Debug.Assert(PoolGroupStateActive == _state, "state should be active since a pool exists and lock holds");
+                                Debug.Assert(
+                                    PoolGroupStateActive == _state,
+                                    "state should be active since a pool exists and lock holds"
+                                );
                             }
                         }
                     }
@@ -234,7 +253,8 @@ namespace System.Data.ProviderBase
             {
                 if (!_poolCollection.IsEmpty)
                 {
-                    var newPoolCollection = new ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>();
+                    var newPoolCollection =
+                        new ConcurrentDictionary<DbConnectionPoolIdentity, DbConnectionPool>();
 
                     foreach (var entry in _poolCollection)
                     {

@@ -11,13 +11,18 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void CreateWrapperOfType_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.CreateWrapperOfType("object", null));
+            Assert.Throws<PlatformNotSupportedException>(
+                () => Marshal.CreateWrapperOfType("object", null)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void CreateWrapperOfType_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("t", () => Marshal.CreateWrapperOfType("object", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "t",
+                () => Marshal.CreateWrapperOfType("object", null)
+            );
         }
     }
 }

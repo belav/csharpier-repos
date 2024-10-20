@@ -5,8 +5,13 @@ using Xunit;
 
 namespace System.ServiceProcess.Tests
 {
-    [OuterLoop(/* Modifies machine state */)]
-    [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "Persistent issues starting test service on NETFX")]
+    [OuterLoop( /* Modifies machine state */
+
+    )]
+    [SkipOnTargetFramework(
+        TargetFrameworkMonikers.NetFramework,
+        "Persistent issues starting test service on NETFX"
+    )]
     public partial class ServiceControllerTests : IDisposable
     {
         private const int connectionTimeout = 30000;
@@ -21,7 +26,11 @@ namespace System.ServiceProcess.Tests
 
         private void AssertExpectedProperties(ServiceController testServiceController)
         {
-            Assert.Equal(_testService.TestServiceName, testServiceController.ServiceName, StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                _testService.TestServiceName,
+                testServiceController.ServiceName,
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Equal(_testService.TestServiceDisplayName, testServiceController.DisplayName);
             Assert.Equal(_testService.TestMachineName, testServiceController.MachineName);
             Assert.Equal(ServiceType.Win32OwnProcess, testServiceController.ServiceType);
@@ -51,10 +60,19 @@ namespace System.ServiceProcess.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
         public void ConstructWithMachineName()
         {
-            var controller = new ServiceController(_testService.TestServiceName, _testService.TestMachineName);
+            var controller = new ServiceController(
+                _testService.TestServiceName,
+                _testService.TestMachineName
+            );
             AssertExpectedProperties(controller);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => { new ServiceController(_testService.TestServiceName, ""); });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    new ServiceController(_testService.TestServiceName, "");
+                }
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
@@ -72,7 +90,7 @@ namespace System.ServiceProcess.Tests
         public void Start_NullArg_ThrowsArgumentNullException()
         {
             var controller = new ServiceController(_testService.TestServiceName);
-            Assert.Throws<ArgumentNullException>(() => controller.Start(new string[] { null } ));
+            Assert.Throws<ArgumentNullException>(() => controller.Start(new string[] { null }));
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
@@ -85,11 +103,17 @@ namespace System.ServiceProcess.Tests
             for (int i = 0; i < 2; i++)
             {
                 controller.Stop();
-                controller.WaitForStatus(ServiceControllerStatus.Stopped, _testService.ControlTimeout);
+                controller.WaitForStatus(
+                    ServiceControllerStatus.Stopped,
+                    _testService.ControlTimeout
+                );
                 Assert.Equal(ServiceControllerStatus.Stopped, controller.Status);
 
                 controller.Start();
-                controller.WaitForStatus(ServiceControllerStatus.Running, _testService.ControlTimeout);
+                controller.WaitForStatus(
+                    ServiceControllerStatus.Running,
+                    _testService.ControlTimeout
+                );
                 Assert.Equal(ServiceControllerStatus.Running, controller.Status);
             }
         }
@@ -110,12 +134,18 @@ namespace System.ServiceProcess.Tests
             {
                 controller.Pause();
                 Assert.Equal((int)PipeMessageByteCode.Pause, _testService.GetByte());
-                controller.WaitForStatus(ServiceControllerStatus.Paused, _testService.ControlTimeout);
+                controller.WaitForStatus(
+                    ServiceControllerStatus.Paused,
+                    _testService.ControlTimeout
+                );
                 Assert.Equal(ServiceControllerStatus.Paused, controller.Status);
 
                 controller.Continue();
                 Assert.Equal((int)PipeMessageByteCode.Continue, _testService.GetByte());
-                controller.WaitForStatus(ServiceControllerStatus.Running, _testService.ControlTimeout);
+                controller.WaitForStatus(
+                    ServiceControllerStatus.Running,
+                    _testService.ControlTimeout
+                );
                 Assert.Equal(ServiceControllerStatus.Running, controller.Status);
             }
 
@@ -149,12 +179,20 @@ namespace System.ServiceProcess.Tests
             Assert.Equal(0, controller.DependentServices.Length);
             Assert.Equal(1, controller.ServicesDependedOn.Length);
 
-            var prerequisiteServiceController = new ServiceController(_testService.TestServiceName + ".Prerequisite");
+            var prerequisiteServiceController = new ServiceController(
+                _testService.TestServiceName + ".Prerequisite"
+            );
             Assert.Equal(1, prerequisiteServiceController.DependentServices.Length);
             Assert.Equal(0, prerequisiteServiceController.ServicesDependedOn.Length);
 
-            Assert.Equal(controller.ServicesDependedOn[0].ServiceName, prerequisiteServiceController.ServiceName);
-            Assert.Equal(prerequisiteServiceController.DependentServices[0].ServiceName, controller.ServiceName);
+            Assert.Equal(
+                controller.ServicesDependedOn[0].ServiceName,
+                prerequisiteServiceController.ServiceName
+            );
+            Assert.Equal(
+                prerequisiteServiceController.DependentServices[0].ServiceName,
+                controller.ServiceName
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]

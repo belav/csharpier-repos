@@ -15,19 +15,31 @@ public abstract class ExpressionMutator
 
     static ExpressionMutator()
     {
-        IncludeMethodInfo = typeof(EntityFrameworkQueryableExtensions).GetMethods().Where(
-                m => m.Name == nameof(EntityFrameworkQueryableExtensions.Include)
-                    && m.GetParameters()[1].ParameterType != typeof(string))
+        IncludeMethodInfo = typeof(EntityFrameworkQueryableExtensions)
+            .GetMethods()
+            .Where(m =>
+                m.Name == nameof(EntityFrameworkQueryableExtensions.Include)
+                && m.GetParameters()[1].ParameterType != typeof(string)
+            )
             .Single();
-        ThenIncludeCollectionMethodInfo = typeof(EntityFrameworkQueryableExtensions).GetMethods().Where(
-                m => m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
-                    && m.GetParameters()[0].ParameterType.GetGenericArguments()[1].IsGenericType
-                    && m.GetParameters()[0].ParameterType.GetGenericArguments()[1].GetGenericTypeDefinition() == typeof(IEnumerable<>))
+        ThenIncludeCollectionMethodInfo = typeof(EntityFrameworkQueryableExtensions)
+            .GetMethods()
+            .Where(m =>
+                m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
+                && m.GetParameters()[0].ParameterType.GetGenericArguments()[1].IsGenericType
+                && m.GetParameters()[0]
+                    .ParameterType.GetGenericArguments()[1]
+                    .GetGenericTypeDefinition() == typeof(IEnumerable<>)
+            )
             .Single();
 
-        ThenIncludeReferenceMethodInfo = typeof(EntityFrameworkQueryableExtensions).GetMethods().Where(
-            m => m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
-                && m != ThenIncludeCollectionMethodInfo).Single();
+        ThenIncludeReferenceMethodInfo = typeof(EntityFrameworkQueryableExtensions)
+            .GetMethods()
+            .Where(m =>
+                m.Name == nameof(EntityFrameworkQueryableExtensions.ThenInclude)
+                && m != ThenIncludeCollectionMethodInfo
+            )
+            .Single();
     }
 
     public ExpressionMutator(DbContext context)
@@ -35,26 +47,26 @@ public abstract class ExpressionMutator
         Context = context;
     }
 
-    protected static bool IsQueryableType(Type type)
-        => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IQueryable<>);
+    protected static bool IsQueryableType(Type type) =>
+        type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IQueryable<>);
 
-    protected static bool IsEnumerableType(Type type)
-        => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>);
+    protected static bool IsEnumerableType(Type type) =>
+        type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IEnumerable<>);
 
-    protected static bool IsQueryableResult(Expression expression)
-        => IsQueryableType(expression.Type)
-            || expression.Type.GetInterfaces().Any(i => IsQueryableType(i));
+    protected static bool IsQueryableResult(Expression expression) =>
+        IsQueryableType(expression.Type)
+        || expression.Type.GetInterfaces().Any(i => IsQueryableType(i));
 
-    private static bool IsOrderedQueryableType(Type type)
-        => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IOrderedQueryable<>);
+    private static bool IsOrderedQueryableType(Type type) =>
+        type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IOrderedQueryable<>);
 
-    protected static bool IsOrderedQueryableResult(Expression expression)
-        => IsOrderedQueryableType(expression.Type)
-            || expression.Type.GetInterfaces().Any(i => IsOrderedQueryableType(i));
+    protected static bool IsOrderedQueryableResult(Expression expression) =>
+        IsOrderedQueryableType(expression.Type)
+        || expression.Type.GetInterfaces().Any(i => IsOrderedQueryableType(i));
 
-    protected static bool IsOrderedableType(Type type)
-        => !typeof(Geometry).IsAssignableFrom(type)
-            && type.GetInterfaces().Any(i => i == typeof(IComparable));
+    protected static bool IsOrderedableType(Type type) =>
+        !typeof(Geometry).IsAssignableFrom(type)
+        && type.GetInterfaces().Any(i => i == typeof(IComparable));
 
     protected List<PropertyInfo> FilterPropertyInfos(Type type, List<PropertyInfo> properties)
     {
@@ -63,25 +75,30 @@ public abstract class ExpressionMutator
             properties = properties.Where(p => p.Name != "Chars").ToList();
         }
 
-        if (type.IsGenericType
-            && type.GetGenericTypeDefinition() == typeof(List<>))
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(List<>))
         {
             properties = properties.Where(p => p.Name != "Item" && p.Name != "Capacity").ToList();
         }
 
-        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>)
-            || type.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICollection<>)))
+        if (
+            type.IsGenericType && type.GetGenericTypeDefinition() == typeof(ICollection<>)
+            || type.GetInterfaces()
+                .Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICollection<>))
+        )
         {
             properties = properties.Where(p => p.Name != "IsReadOnly").ToList();
         }
 
         if (type.IsArray)
         {
-            properties = properties.Where(p => p.Name != "Rank" && p.Name != "IsFixedSize" && p.Name != "IsSynchronized").ToList();
+            properties = properties
+                .Where(p =>
+                    p.Name != "Rank" && p.Name != "IsFixedSize" && p.Name != "IsSynchronized"
+                )
+                .ToList();
         }
 
-        if (type.IsGenericType
-            && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
         {
             properties = properties.Where(p => p.Name != "Value").ToList();
         }
@@ -89,15 +106,21 @@ public abstract class ExpressionMutator
         var entityType = Context.Model.FindEntityType(type);
         if (entityType != null)
         {
-            properties = properties.Where(
-                p => entityType.GetProperties().Where(pp => pp.PropertyInfo != null).Select(pp => pp.Name).Contains(p.Name)).ToList();
+            properties = properties
+                .Where(p =>
+                    entityType
+                        .GetProperties()
+                        .Where(pp => pp.PropertyInfo != null)
+                        .Select(pp => pp.Name)
+                        .Contains(p.Name)
+                )
+                .ToList();
         }
 
         return properties;
     }
 
-    protected bool IsEntityType(Type type)
-        => Context.Model.FindEntityType(type) != null;
+    protected bool IsEntityType(Type type) => Context.Model.FindEntityType(type) != null;
 
     public abstract bool IsValid(Expression expression);
     public abstract Expression Apply(Expression expression, Random random);
@@ -107,7 +130,10 @@ public abstract class ExpressionMutator
         private readonly Expression _expressionToInject;
         private readonly Func<Expression, Expression> _injectionPattern;
 
-        public ExpressionInjector(Expression expressionToInject, Func<Expression, Expression> injectionPattern)
+        public ExpressionInjector(
+            Expression expressionToInject,
+            Func<Expression, Expression> injectionPattern
+        )
         {
             _expressionToInject = expressionToInject;
             _injectionPattern = injectionPattern;

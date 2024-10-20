@@ -16,7 +16,8 @@ namespace System.IO.Hashing.Tests
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "hashLengthInBytes",
-                () => new FlexibleAlgorithm(0));
+                () => new FlexibleAlgorithm(0)
+            );
         }
 
         [Fact]
@@ -24,7 +25,8 @@ namespace System.IO.Hashing.Tests
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "hashLengthInBytes",
-                () => new FlexibleAlgorithm(-1));
+                () => new FlexibleAlgorithm(-1)
+            );
         }
 
         [Fact]
@@ -93,7 +95,8 @@ namespace System.IO.Hashing.Tests
             {
                 AssertExtensions.Throws<ArgumentException>(
                     "destination",
-                    () => hash.GetCurrentHash(buf.AsSpan(i)));
+                    () => hash.GetCurrentHash(buf.AsSpan(i))
+                );
             }
 
             Assert.False(hash.IsReset);
@@ -233,7 +236,8 @@ namespace System.IO.Hashing.Tests
             {
                 AssertExtensions.Throws<ArgumentException>(
                     "destination",
-                    () => hash.GetHashAndReset(buf.AsSpan(i)));
+                    () => hash.GetHashAndReset(buf.AsSpan(i))
+                );
             }
 
             Assert.Equal(0, hash.GetCurrentHashCoreCallCount);
@@ -346,7 +350,8 @@ namespace System.IO.Hashing.Tests
             {
                 AssertExtensions.Throws<ArgumentException>(
                     "destination",
-                    () => hash.GetHashAndReset(buf.AsSpan(i)));
+                    () => hash.GetHashAndReset(buf.AsSpan(i))
+                );
             }
 
             Assert.Equal(0, hash.GetCurrentHashCoreCallCount);
@@ -396,14 +401,20 @@ namespace System.IO.Hashing.Tests
         public static void AppendNullArrayThrows()
         {
             NonCryptographicHashAlgorithm hash = new FlexibleAlgorithm(5);
-            AssertExtensions.Throws<ArgumentNullException>("source", () => hash.Append((byte[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => hash.Append((byte[])null)
+            );
         }
 
         [Fact]
         public static void AppendNullStreamThrows()
         {
             NonCryptographicHashAlgorithm hash = new FlexibleAlgorithm(5);
-            AssertExtensions.Throws<ArgumentNullException>("stream", () => hash.Append((Stream)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "stream",
+                () => hash.Append((Stream)null)
+            );
         }
 
         [Fact]
@@ -480,14 +491,13 @@ namespace System.IO.Hashing.Tests
             NonCryptographicHashAlgorithm hash = new CountingAlgorithm();
             Assert.Throws<NotSupportedException>(() => hash.GetHashCode());
         }
+
         private sealed class CountingAlgorithm : NonCryptographicHashAlgorithm
         {
             private int _count;
 
             public CountingAlgorithm()
-                : base(sizeof(int))
-            {
-            }
+                : base(sizeof(int)) { }
 
             public override void Append(ReadOnlySpan<byte> source)
             {

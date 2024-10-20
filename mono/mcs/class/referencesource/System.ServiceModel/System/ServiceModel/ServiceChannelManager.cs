@@ -23,11 +23,12 @@ namespace System.ServiceModel
         InstanceContext instanceContext;
 
         public ServiceChannelManager(InstanceContext instanceContext)
-            : this(instanceContext, null)
-        {
-        }
+            : this(instanceContext, null) { }
 
-        public ServiceChannelManager(InstanceContext instanceContext, InstanceContextEmptyCallback emptyCallback)
+        public ServiceChannelManager(
+            InstanceContext instanceContext,
+            InstanceContextEmptyCallback emptyCallback
+        )
             : base(instanceContext.ThisLock)
         {
             this.instanceContext = instanceContext;
@@ -118,7 +119,9 @@ namespace System.ServiceModel
             if (!added)
             {
                 channel.Abort();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().ToString())
+                );
             }
         }
 
@@ -130,11 +133,18 @@ namespace System.ServiceModel
             {
                 if (this.activityCount > 0)
                 {
-                    closeResult = new CloseCommunicationAsyncResult(timeout, callback, state, this.ThisLock);
+                    closeResult = new CloseCommunicationAsyncResult(
+                        timeout,
+                        callback,
+                        state,
+                        this.ThisLock
+                    );
 
                     if (!(this.activityWaiter == null))
                     {
-                        Fx.Assert("ServiceChannelManager.BeginCloseInput: (this.activityWaiter == null)");
+                        Fx.Assert(
+                            "ServiceChannelManager.BeginCloseInput: (this.activityWaiter == null)"
+                        );
                     }
                     this.activityWaiter = closeResult;
                     Interlocked.Increment(ref this.activityWaiterCount);
@@ -159,7 +169,6 @@ namespace System.ServiceModel
             base.DecrementBusyCount();
         }
 
-
         public void CloseInput(TimeSpan timeout)
         {
             SyncCommunicationWaiter activityWaiter = null;
@@ -171,7 +180,9 @@ namespace System.ServiceModel
                     activityWaiter = new SyncCommunicationWaiter(this.ThisLock);
                     if (!(this.activityWaiter == null))
                     {
-                        Fx.Assert("ServiceChannelManager.CloseInput: (this.activityWaiter == null)");
+                        Fx.Assert(
+                            "ServiceChannelManager.CloseInput: (this.activityWaiter == null)"
+                        );
                     }
                     this.activityWaiter = activityWaiter;
                     Interlocked.Increment(ref this.activityWaiterCount);
@@ -190,9 +201,15 @@ namespace System.ServiceModel
                 switch (result)
                 {
                     case CommunicationWaitResult.Expired:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException(SR.GetString(SR.SfxCloseTimedOutWaitingForDispatchToComplete)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new TimeoutException(
+                                SR.GetString(SR.SfxCloseTimedOutWaitingForDispatchToComplete)
+                            )
+                        );
                     case CommunicationWaitResult.Aborted:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ObjectDisposedException(this.GetType().ToString())
+                        );
                 }
             }
         }
@@ -206,7 +223,9 @@ namespace System.ServiceModel
             {
                 if (!(this.activityCount > 0))
                 {
-                    Fx.Assert("ServiceChannelManager.DecrementActivityCount: (this.activityCount > 0)");
+                    Fx.Assert(
+                        "ServiceChannelManager.DecrementActivityCount: (this.activityCount > 0)"
+                    );
                 }
                 if (--this.activityCount == 0)
                 {
@@ -271,7 +290,9 @@ namespace System.ServiceModel
             lock (this.ThisLock)
             {
                 if (this.State == LifetimeState.Closed)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException(this.GetType().ToString())
+                    );
                 this.activityCount++;
             }
         }
@@ -311,9 +332,21 @@ namespace System.ServiceModel
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, BeginCloseInput, EndCloseInput, OnBeginCloseContinue, OnEndCloseContinue);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                BeginCloseInput,
+                EndCloseInput,
+                OnBeginCloseContinue,
+                OnEndCloseContinue
+            );
         }
 
         IAsyncResult OnBeginCloseContinue(TimeSpan timeout, AsyncCallback callback, object state)
@@ -381,7 +414,9 @@ namespace System.ServiceModel
         {
             lock (this.ThisLock)
             {
-                int outgoingCount = (this.outgoingChannels != null ? this.outgoingChannels.Count : 0);
+                int outgoingCount = (
+                    this.outgoingChannels != null ? this.outgoingChannels.Count : 0
+                );
 
                 if (this.firstIncomingChannel != null)
                 {
@@ -436,7 +471,9 @@ namespace System.ServiceModel
             public ChannelCollection(ServiceChannelManager channelManager, object syncRoot)
             {
                 if (syncRoot == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("syncRoot"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("syncRoot")
+                    );
 
                 this.channelManager = channelManager;
                 this.syncRoot = syncRoot;

@@ -63,7 +63,10 @@ namespace Microsoft.Extensions.Primitives
         {
             get
             {
-                if (_cancellationTokenSource != null && _cancellationTokenSource.Token.IsCancellationRequested)
+                if (
+                    _cancellationTokenSource != null
+                    && _cancellationTokenSource.Token.IsCancellationRequested
+                )
                 {
                     return true;
                 }
@@ -106,7 +109,8 @@ namespace Microsoft.Extensions.Primitives
                 {
                     if (ChangeTokens[i].ActiveChangeCallbacks)
                     {
-                        IDisposable disposable = ChangeTokens[i].RegisterChangeCallback(_onChangeDelegate, this);
+                        IDisposable disposable = ChangeTokens[i]
+                            .RegisterChangeCallback(_onChangeDelegate, this);
                         if (_cancellationTokenSource.IsCancellationRequested)
                         {
                             disposable.Dispose();
@@ -140,9 +144,7 @@ namespace Microsoft.Extensions.Primitives
                 {
                     compositeChangeTokenState._cancellationTokenSource.Cancel();
                 }
-                catch
-                {
-                }
+                catch { }
             }
 
             List<IDisposable>? disposables = compositeChangeTokenState._disposables;

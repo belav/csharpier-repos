@@ -16,7 +16,10 @@ namespace Microsoft.Cci
         private readonly ITypeReference _modifiedType;
         private readonly ImmutableArray<ICustomModifier> _customModifiers;
 
-        public ModifiedTypeReference(ITypeReference modifiedType, ImmutableArray<ICustomModifier> customModifiers)
+        public ModifiedTypeReference(
+            ITypeReference modifiedType,
+            ImmutableArray<ICustomModifier> customModifiers
+        )
         {
             RoslynDebug.Assert(modifiedType != null);
             Debug.Assert(!customModifiers.IsDefault);
@@ -29,17 +32,14 @@ namespace Microsoft.Cci
         {
             get
             {
-                // TODO: Should we thread this through Module.Translate? For example, can we run into Pia type here? 
+                // TODO: Should we thread this through Module.Translate? For example, can we run into Pia type here?
                 return _customModifiers;
             }
         }
 
         ITypeReference IModifiedTypeReference.UnmodifiedType
         {
-            get
-            {
-                return _modifiedType;
-            }
+            get { return _modifiedType; }
         }
 
         bool ITypeReference.IsEnum
@@ -79,26 +79,17 @@ namespace Microsoft.Cci
 
         IGenericMethodParameterReference? ITypeReference.AsGenericMethodParameterReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         IGenericTypeInstanceReference? ITypeReference.AsGenericTypeInstanceReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         IGenericTypeParameterReference? ITypeReference.AsGenericTypeParameterReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         INamespaceTypeDefinition? ITypeReference.AsNamespaceTypeDefinition(EmitContext context)
@@ -108,10 +99,7 @@ namespace Microsoft.Cci
 
         INamespaceTypeReference? ITypeReference.AsNamespaceTypeReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         INestedTypeDefinition? ITypeReference.AsNestedTypeDefinition(EmitContext context)
@@ -121,18 +109,12 @@ namespace Microsoft.Cci
 
         INestedTypeReference? ITypeReference.AsNestedTypeReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         ISpecializedNestedTypeReference? ITypeReference.AsSpecializedNestedTypeReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         ITypeDefinition? ITypeReference.AsTypeDefinition(EmitContext context)

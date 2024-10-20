@@ -18,13 +18,34 @@ namespace System.Tests
             const int Count = -1;
             const StringSplitOptions Options = StringSplitOptions.None;
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => Value.Split(',', Count));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => Value.Split(',', Count, Options));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => Value.Split(new[] { ',' }, Count));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => Value.Split(new[] { ',' }, Count, Options));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => Value.Split(",", Count));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => Value.Split(",", Count, Options));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => Value.Split(new[] { "," }, Count, Options));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => Value.Split(',', Count)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => Value.Split(',', Count, Options)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => Value.Split(new[] { ',' }, Count)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => Value.Split(new[] { ',' }, Count, Options)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => Value.Split(",", Count)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => Value.Split(",", Count, Options)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => Value.Split(new[] { "," }, Count, Options)
+            );
         }
 
         [Fact]
@@ -33,21 +54,63 @@ namespace System.Tests
             const string Value = "a,b";
             const int Count = 0;
 
-            foreach (StringSplitOptions options in new[] { StringSplitOptions.None - 1, (StringSplitOptions)0x04 })
+            foreach (
+                StringSplitOptions options in new[]
+                {
+                    StringSplitOptions.None - 1,
+                    (StringSplitOptions)0x04,
+                }
+            )
             {
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.Split(',', options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.Split(',', Count, options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.Split(new[] { ',' }, options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.Split(new[] { ',' }, Count, options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.Split(",", options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.Split(",", Count, options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.Split(new[] { "," }, options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.Split(new[] { "," }, Count, options));
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.Split(',', options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.Split(',', Count, options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.Split(new[] { ',' }, options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.Split(new[] { ',' }, Count, options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.Split(",", options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.Split(",", Count, options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.Split(new[] { "," }, options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.Split(new[] { "," }, Count, options)
+                );
 
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.AsSpan().Split(Span<Range>.Empty, ',', options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.AsSpan().Split(Span<Range>.Empty, ",", options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.AsSpan().SplitAny(Span<Range>.Empty, ",", options));
-                AssertExtensions.Throws<ArgumentException>("options", () => Value.AsSpan().SplitAny(Span<Range>.Empty, new[] { "," }, options));
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.AsSpan().Split(Span<Range>.Empty, ',', options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.AsSpan().Split(Span<Range>.Empty, ",", options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.AsSpan().SplitAny(Span<Range>.Empty, ",", options)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "options",
+                    () => Value.AsSpan().SplitAny(Span<Range>.Empty, new[] { "," }, options)
+                );
             }
         }
 
@@ -193,7 +256,7 @@ namespace System.Tests
         [InlineData(",", ',', M, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData(",,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData(",,", ',', 1, StringSplitOptions.None, new[] { ",," })]
-        [InlineData(",,", ',', 2, StringSplitOptions.None, new[] { "", ",", })]
+        [InlineData(",,", ',', 2, StringSplitOptions.None, new[] { "", "," })]
         [InlineData(",,", ',', 3, StringSplitOptions.None, new[] { "", "", "" })]
         [InlineData(",,", ',', 4, StringSplitOptions.None, new[] { "", "", "" })]
         [InlineData(",,", ',', M, StringSplitOptions.None, new[] { "", "", "" })]
@@ -265,7 +328,7 @@ namespace System.Tests
         [InlineData(",a,b", ',', 5, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
         [InlineData("a,b,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("a,b,", ',', 1, StringSplitOptions.None, new[] { "a,b," })]
-        [InlineData("a,b,", ',', 2, StringSplitOptions.None, new[] { "a", "b,", })]
+        [InlineData("a,b,", ',', 2, StringSplitOptions.None, new[] { "a", "b," })]
         [InlineData("a,b,", ',', 3, StringSplitOptions.None, new[] { "a", "b", "" })]
         [InlineData("a,b,", ',', 4, StringSplitOptions.None, new[] { "a", "b", "" })]
         [InlineData("a,b,", ',', M, StringSplitOptions.None, new[] { "a", "b", "" })]
@@ -283,19 +346,37 @@ namespace System.Tests
         [InlineData("a,b,c", ',', M, StringSplitOptions.None, new[] { "a", "b", "c" })]
         [InlineData("a,b,c", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData("a,b,c", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "a,b,c" })]
-        [InlineData("a,b,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c", })]
-        [InlineData("a,b,c", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
-        [InlineData("a,b,c", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
-        [InlineData("a,b,c", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
+        [InlineData("a,b,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c" })]
+        [InlineData(
+            "a,b,c",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
+        [InlineData(
+            "a,b,c",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
+        [InlineData(
+            "a,b,c",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
         [InlineData("a,,c", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("a,,c", ',', 1, StringSplitOptions.None, new[] { "a,,c" })]
-        [InlineData("a,,c", ',', 2, StringSplitOptions.None, new[] { "a", ",c", })]
+        [InlineData("a,,c", ',', 2, StringSplitOptions.None, new[] { "a", ",c" })]
         [InlineData("a,,c", ',', 3, StringSplitOptions.None, new[] { "a", "", "c" })]
         [InlineData("a,,c", ',', 4, StringSplitOptions.None, new[] { "a", "", "c" })]
         [InlineData("a,,c", ',', M, StringSplitOptions.None, new[] { "a", "", "c" })]
         [InlineData("a,,c", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData("a,,c", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "a,,c" })]
-        [InlineData("a,,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c", })]
+        [InlineData("a,,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c" })]
         [InlineData("a,,c", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c" })]
         [InlineData("a,,c", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c" })]
         [InlineData("a,,c", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c" })]
@@ -307,22 +388,58 @@ namespace System.Tests
         [InlineData(",a,b,c", ',', M, StringSplitOptions.None, new[] { "", "a", "b", "c" })]
         [InlineData(",a,b,c", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData(",a,b,c", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { ",a,b,c" })]
-        [InlineData(",a,b,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c", })]
-        [InlineData(",a,b,c", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
-        [InlineData(",a,b,c", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
-        [InlineData(",a,b,c", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
+        [InlineData(",a,b,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c" })]
+        [InlineData(
+            ",a,b,c",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
+        [InlineData(
+            ",a,b,c",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
+        [InlineData(
+            ",a,b,c",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
         [InlineData("a,b,c,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("a,b,c,", ',', 1, StringSplitOptions.None, new[] { "a,b,c," })]
         [InlineData("a,b,c,", ',', 2, StringSplitOptions.None, new[] { "a", "b,c," })]
-        [InlineData("a,b,c,", ',', 3, StringSplitOptions.None, new[] { "a", "b", "c,", })]
+        [InlineData("a,b,c,", ',', 3, StringSplitOptions.None, new[] { "a", "b", "c," })]
         [InlineData("a,b,c,", ',', 4, StringSplitOptions.None, new[] { "a", "b", "c", "" })]
         [InlineData("a,b,c,", ',', M, StringSplitOptions.None, new[] { "a", "b", "c", "" })]
         [InlineData("a,b,c,", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData("a,b,c,", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "a,b,c," })]
-        [InlineData("a,b,c,", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c,", })]
-        [InlineData("a,b,c,", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c," })]
-        [InlineData("a,b,c,", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
-        [InlineData("a,b,c,", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
+        [InlineData("a,b,c,", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c," })]
+        [InlineData(
+            "a,b,c,",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c," }
+        )]
+        [InlineData(
+            "a,b,c,",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
+        [InlineData(
+            "a,b,c,",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
         [InlineData(",a,b,c,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData(",a,b,c,", ',', 1, StringSplitOptions.None, new[] { ",a,b,c," })]
         [InlineData(",a,b,c,", ',', 2, StringSplitOptions.None, new[] { "", "a,b,c," })]
@@ -331,10 +448,34 @@ namespace System.Tests
         [InlineData(",a,b,c,", ',', M, StringSplitOptions.None, new[] { "", "a", "b", "c", "" })]
         [InlineData(",a,b,c,", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData(",a,b,c,", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { ",a,b,c," })]
-        [InlineData(",a,b,c,", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c," })]
-        [InlineData(",a,b,c,", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c," })]
-        [InlineData(",a,b,c,", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
-        [InlineData(",a,b,c,", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b", "c" })]
+        [InlineData(
+            ",a,b,c,",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b,c," }
+        )]
+        [InlineData(
+            ",a,b,c,",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c," }
+        )]
+        [InlineData(
+            ",a,b,c,",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
+        [InlineData(
+            ",a,b,c,",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b", "c" }
+        )]
         [InlineData("first,second", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("first,second", ',', 1, StringSplitOptions.None, new[] { "first,second" })]
         [InlineData("first,second", ',', 2, StringSplitOptions.None, new[] { "first", "second" })]
@@ -342,11 +483,41 @@ namespace System.Tests
         [InlineData("first,second", ',', 4, StringSplitOptions.None, new[] { "first", "second" })]
         [InlineData("first,second", ',', M, StringSplitOptions.None, new[] { "first", "second" })]
         [InlineData("first,second", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
-        [InlineData("first,second", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "first,second" })]
-        [InlineData("first,second", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
-        [InlineData("first,second", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
-        [InlineData("first,second", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
-        [InlineData("first,second", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
+        [InlineData(
+            "first,second",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first,second" }
+        )]
+        [InlineData(
+            "first,second",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
+        [InlineData(
+            "first,second",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
+        [InlineData(
+            "first,second",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
+        [InlineData(
+            "first,second",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
         [InlineData("first,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("first,", ',', 1, StringSplitOptions.None, new[] { "first," })]
         [InlineData("first,", ',', 2, StringSplitOptions.None, new[] { "first", "" })]
@@ -374,126 +545,660 @@ namespace System.Tests
         [InlineData(",first,second", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData(",first,second", ',', 1, StringSplitOptions.None, new[] { ",first,second" })]
         [InlineData(",first,second", ',', 2, StringSplitOptions.None, new[] { "", "first,second" })]
-        [InlineData(",first,second", ',', 3, StringSplitOptions.None, new[] { "", "first", "second" })]
-        [InlineData(",first,second", ',', 4, StringSplitOptions.None, new[] { "", "first", "second" })]
-        [InlineData(",first,second", ',', M, StringSplitOptions.None, new[] { "", "first", "second" })]
+        [InlineData(
+            ",first,second",
+            ',',
+            3,
+            StringSplitOptions.None,
+            new[] { "", "first", "second" }
+        )]
+        [InlineData(
+            ",first,second",
+            ',',
+            4,
+            StringSplitOptions.None,
+            new[] { "", "first", "second" }
+        )]
+        [InlineData(
+            ",first,second",
+            ',',
+            M,
+            StringSplitOptions.None,
+            new[] { "", "first", "second" }
+        )]
         [InlineData(",first,second", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
-        [InlineData(",first,second", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { ",first,second" })]
-        [InlineData(",first,second", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
-        [InlineData(",first,second", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
-        [InlineData(",first,second", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
-        [InlineData(",first,second", ',', 5, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
+        [InlineData(
+            ",first,second",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { ",first,second" }
+        )]
+        [InlineData(
+            ",first,second",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
+        [InlineData(
+            ",first,second",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
+        [InlineData(
+            ",first,second",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
+        [InlineData(
+            ",first,second",
+            ',',
+            5,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
         [InlineData("first,second,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("first,second,", ',', 1, StringSplitOptions.None, new[] { "first,second," })]
-        [InlineData("first,second,", ',', 2, StringSplitOptions.None, new[] { "first", "second,", })]
-        [InlineData("first,second,", ',', 3, StringSplitOptions.None, new[] { "first", "second", "" })]
-        [InlineData("first,second,", ',', 4, StringSplitOptions.None, new[] { "first", "second", "" })]
-        [InlineData("first,second,", ',', M, StringSplitOptions.None, new[] { "first", "second", "" })]
+        [InlineData("first,second,", ',', 2, StringSplitOptions.None, new[] { "first", "second," })]
+        [InlineData(
+            "first,second,",
+            ',',
+            3,
+            StringSplitOptions.None,
+            new[] { "first", "second", "" }
+        )]
+        [InlineData(
+            "first,second,",
+            ',',
+            4,
+            StringSplitOptions.None,
+            new[] { "first", "second", "" }
+        )]
+        [InlineData(
+            "first,second,",
+            ',',
+            M,
+            StringSplitOptions.None,
+            new[] { "first", "second", "" }
+        )]
         [InlineData("first,second,", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
-        [InlineData("first,second,", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "first,second," })]
-        [InlineData("first,second,", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second," })]
-        [InlineData("first,second,", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
-        [InlineData("first,second,", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
-        [InlineData("first,second,", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second" })]
+        [InlineData(
+            "first,second,",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first,second," }
+        )]
+        [InlineData(
+            "first,second,",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second," }
+        )]
+        [InlineData(
+            "first,second,",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
+        [InlineData(
+            "first,second,",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
+        [InlineData(
+            "first,second,",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second" }
+        )]
         [InlineData("first,second,third", ',', 0, StringSplitOptions.None, new string[0])]
-        [InlineData("first,second,third", ',', 1, StringSplitOptions.None, new[] { "first,second,third" })]
-        [InlineData("first,second,third", ',', 2, StringSplitOptions.None, new[] { "first", "second,third" })]
-        [InlineData("first,second,third", ',', 3, StringSplitOptions.None, new[] { "first", "second", "third" })]
-        [InlineData("first,second,third", ',', 4, StringSplitOptions.None, new[] { "first", "second", "third" })]
-        [InlineData("first,second,third", ',', M, StringSplitOptions.None, new[] { "first", "second", "third" })]
-        [InlineData("first,second,third", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
-        [InlineData("first,second,third", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "first,second,third" })]
-        [InlineData("first,second,third", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second,third", })]
-        [InlineData("first,second,third", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
-        [InlineData("first,second,third", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
-        [InlineData("first,second,third", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
+        [InlineData(
+            "first,second,third",
+            ',',
+            1,
+            StringSplitOptions.None,
+            new[] { "first,second,third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            2,
+            StringSplitOptions.None,
+            new[] { "first", "second,third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            3,
+            StringSplitOptions.None,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            4,
+            StringSplitOptions.None,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            M,
+            StringSplitOptions.None,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            0,
+            StringSplitOptions.RemoveEmptyEntries,
+            new string[0]
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first,second,third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second,third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
         [InlineData("first,,third", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("first,,third", ',', 1, StringSplitOptions.None, new[] { "first,,third" })]
-        [InlineData("first,,third", ',', 2, StringSplitOptions.None, new[] { "first", ",third", })]
-        [InlineData("first,,third", ',', 3, StringSplitOptions.None, new[] { "first", "", "third" })]
-        [InlineData("first,,third", ',', 4, StringSplitOptions.None, new[] { "first", "", "third" })]
-        [InlineData("first,,third", ',', M, StringSplitOptions.None, new[] { "first", "", "third" })]
+        [InlineData("first,,third", ',', 2, StringSplitOptions.None, new[] { "first", ",third" })]
+        [InlineData(
+            "first,,third",
+            ',',
+            3,
+            StringSplitOptions.None,
+            new[] { "first", "", "third" }
+        )]
+        [InlineData(
+            "first,,third",
+            ',',
+            4,
+            StringSplitOptions.None,
+            new[] { "first", "", "third" }
+        )]
+        [InlineData(
+            "first,,third",
+            ',',
+            M,
+            StringSplitOptions.None,
+            new[] { "first", "", "third" }
+        )]
         [InlineData("first,,third", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
-        [InlineData("first,,third", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "first,,third" })]
-        [InlineData("first,,third", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "third", })]
-        [InlineData("first,,third", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "third" })]
-        [InlineData("first,,third", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "third" })]
-        [InlineData("first,,third", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "third" })]
+        [InlineData(
+            "first,,third",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first,,third" }
+        )]
+        [InlineData(
+            "first,,third",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "third" }
+        )]
+        [InlineData(
+            "first,,third",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "third" }
+        )]
+        [InlineData(
+            "first,,third",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "third" }
+        )]
+        [InlineData(
+            "first,,third",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "third" }
+        )]
         [InlineData(",first,second,third", ',', 0, StringSplitOptions.None, new string[0])]
-        [InlineData(",first,second,third", ',', 1, StringSplitOptions.None, new[] { ",first,second,third" })]
-        [InlineData(",first,second,third", ',', 2, StringSplitOptions.None, new[] { "", "first,second,third" })]
-        [InlineData(",first,second,third", ',', 3, StringSplitOptions.None, new[] { "", "first", "second,third" })]
-        [InlineData(",first,second,third", ',', 4, StringSplitOptions.None, new[] { "", "first", "second", "third" })]
-        [InlineData(",first,second,third", ',', M, StringSplitOptions.None, new[] { "", "first", "second", "third" })]
-        [InlineData(",first,second,third", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
-        [InlineData(",first,second,third", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { ",first,second,third" })]
-        [InlineData(",first,second,third", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second,third", })]
-        [InlineData(",first,second,third", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
-        [InlineData(",first,second,third", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
-        [InlineData(",first,second,third", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            1,
+            StringSplitOptions.None,
+            new[] { ",first,second,third" }
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            2,
+            StringSplitOptions.None,
+            new[] { "", "first,second,third" }
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            3,
+            StringSplitOptions.None,
+            new[] { "", "first", "second,third" }
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            4,
+            StringSplitOptions.None,
+            new[] { "", "first", "second", "third" }
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            M,
+            StringSplitOptions.None,
+            new[] { "", "first", "second", "third" }
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            0,
+            StringSplitOptions.RemoveEmptyEntries,
+            new string[0]
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { ",first,second,third" }
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second,third" }
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            ",first,second,third",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
         [InlineData("first,second,third,", ',', 0, StringSplitOptions.None, new string[0])]
-        [InlineData("first,second,third,", ',', 1, StringSplitOptions.None, new[] { "first,second,third," })]
-        [InlineData("first,second,third,", ',', 2, StringSplitOptions.None, new[] { "first", "second,third," })]
-        [InlineData("first,second,third,", ',', 3, StringSplitOptions.None, new[] { "first", "second", "third,", })]
-        [InlineData("first,second,third,", ',', 4, StringSplitOptions.None, new[] { "first", "second", "third", "" })]
-        [InlineData("first,second,third,", ',', M, StringSplitOptions.None, new[] { "first", "second", "third", "" })]
-        [InlineData("first,second,third,", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
-        [InlineData("first,second,third,", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "first,second,third," })]
-        [InlineData("first,second,third,", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second,third,", })]
-        [InlineData("first,second,third,", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third," })]
-        [InlineData("first,second,third,", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
-        [InlineData("first,second,third,", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            1,
+            StringSplitOptions.None,
+            new[] { "first,second,third," }
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            2,
+            StringSplitOptions.None,
+            new[] { "first", "second,third," }
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            3,
+            StringSplitOptions.None,
+            new[] { "first", "second", "third," }
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            4,
+            StringSplitOptions.None,
+            new[] { "first", "second", "third", "" }
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            M,
+            StringSplitOptions.None,
+            new[] { "first", "second", "third", "" }
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            0,
+            StringSplitOptions.RemoveEmptyEntries,
+            new string[0]
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first,second,third," }
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second,third," }
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third," }
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            "first,second,third,",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
         [InlineData(",first,second,third,", ',', 0, StringSplitOptions.None, new string[0])]
-        [InlineData(",first,second,third,", ',', 1, StringSplitOptions.None, new[] { ",first,second,third," })]
-        [InlineData(",first,second,third,", ',', 2, StringSplitOptions.None, new[] { "", "first,second,third," })]
-        [InlineData(",first,second,third,", ',', 3, StringSplitOptions.None, new[] { "", "first", "second,third," })]
-        [InlineData(",first,second,third,", ',', 4, StringSplitOptions.None, new[] { "", "first", "second", "third," })]
-        [InlineData(",first,second,third,", ',', M, StringSplitOptions.None, new[] { "", "first", "second", "third", "" })]
-        [InlineData(",first,second,third,", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
-        [InlineData(",first,second,third,", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { ",first,second,third," })]
-        [InlineData(",first,second,third,", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second,third," })]
-        [InlineData(",first,second,third,", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third," })]
-        [InlineData(",first,second,third,", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
-        [InlineData(",first,second,third,", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "first", "second", "third" })]
-        [InlineData("first,second,third", ' ', M, StringSplitOptions.None, new[] { "first,second,third" })]
-        [InlineData("first,second,third", ' ', M, StringSplitOptions.RemoveEmptyEntries, new[] { "first,second,third" })]
-        [InlineData("Foo Bar Baz", ' ', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "Foo", "Bar Baz" })]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            1,
+            StringSplitOptions.None,
+            new[] { ",first,second,third," }
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            2,
+            StringSplitOptions.None,
+            new[] { "", "first,second,third," }
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            3,
+            StringSplitOptions.None,
+            new[] { "", "first", "second,third," }
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            4,
+            StringSplitOptions.None,
+            new[] { "", "first", "second", "third," }
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            M,
+            StringSplitOptions.None,
+            new[] { "", "first", "second", "third", "" }
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            0,
+            StringSplitOptions.RemoveEmptyEntries,
+            new string[0]
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { ",first,second,third," }
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second,third," }
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third," }
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            4,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            ",first,second,third,",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first", "second", "third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ' ',
+            M,
+            StringSplitOptions.None,
+            new[] { "first,second,third" }
+        )]
+        [InlineData(
+            "first,second,third",
+            ' ',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "first,second,third" }
+        )]
+        [InlineData(
+            "Foo Bar Baz",
+            ' ',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "Foo", "Bar Baz" }
+        )]
         [InlineData("Foo Bar Baz", ' ', M, StringSplitOptions.None, new[] { "Foo", "Bar", "Baz" })]
         [InlineData("a", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("a", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData("a", ',', 0, StringSplitOptions.TrimEntries, new string[0])]
-        [InlineData("a", ',', 0, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new string[0])]
+        [InlineData(
+            "a",
+            ',',
+            0,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new string[0]
+        )]
         [InlineData("a", ',', 1, StringSplitOptions.None, new string[] { "a" })]
         [InlineData("a", ',', 1, StringSplitOptions.RemoveEmptyEntries, new string[] { "a" })]
         [InlineData("a", ',', 1, StringSplitOptions.TrimEntries, new string[] { "a" })]
-        [InlineData("a", ',', 1, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new string[] { "a" })]
+        [InlineData(
+            "a",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new string[] { "a" }
+        )]
         [InlineData(" ", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData(" ", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData(" ", ',', 0, StringSplitOptions.TrimEntries, new string[0])]
-        [InlineData(" ", ',', 0, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new string[0])]
+        [InlineData(
+            " ",
+            ',',
+            0,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new string[0]
+        )]
         [InlineData(" ", ',', 1, StringSplitOptions.None, new string[] { " " })]
         [InlineData(" ", ',', 1, StringSplitOptions.RemoveEmptyEntries, new string[] { " " })]
         [InlineData(" ", ',', 1, StringSplitOptions.TrimEntries, new string[] { "" })]
-        [InlineData(" ", ',', 1, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new string[0])]
-        [InlineData(" a,, b, c ", ',', 2, StringSplitOptions.None, new string[] { " a", ", b, c " })]
-        [InlineData(" a,, b, c ", ',', 2, StringSplitOptions.RemoveEmptyEntries, new string[] { " a", " b, c " })]
-        [InlineData(" a,, b, c ", ',', 2, StringSplitOptions.TrimEntries, new string[] { "a", ", b, c" })]
-        [InlineData(" a,, b, c ", ',', 2, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new string[] { "a", "b, c" })]
-        [InlineData(" a,, b, c ", ',', 3, StringSplitOptions.None, new string[] { " a", "", " b, c " })]
-        [InlineData(" a,, b, c ", ',', 3, StringSplitOptions.RemoveEmptyEntries, new string[] { " a", " b", " c " })]
-        [InlineData(" a,, b, c ", ',', 3, StringSplitOptions.TrimEntries, new string[] { "a", "", "b, c" })]
-        [InlineData(" a,, b, c ", ',', 3, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new string[] { "a", "b", "c" })]
+        [InlineData(
+            " ",
+            ',',
+            1,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new string[0]
+        )]
+        [InlineData(
+            " a,, b, c ",
+            ',',
+            2,
+            StringSplitOptions.None,
+            new string[] { " a", ", b, c " }
+        )]
+        [InlineData(
+            " a,, b, c ",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries,
+            new string[] { " a", " b, c " }
+        )]
+        [InlineData(
+            " a,, b, c ",
+            ',',
+            2,
+            StringSplitOptions.TrimEntries,
+            new string[] { "a", ", b, c" }
+        )]
+        [InlineData(
+            " a,, b, c ",
+            ',',
+            2,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new string[] { "a", "b, c" }
+        )]
+        [InlineData(
+            " a,, b, c ",
+            ',',
+            3,
+            StringSplitOptions.None,
+            new string[] { " a", "", " b, c " }
+        )]
+        [InlineData(
+            " a,, b, c ",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries,
+            new string[] { " a", " b", " c " }
+        )]
+        [InlineData(
+            " a,, b, c ",
+            ',',
+            3,
+            StringSplitOptions.TrimEntries,
+            new string[] { "a", "", "b, c" }
+        )]
+        [InlineData(
+            " a,, b, c ",
+            ',',
+            3,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new string[] { "a", "b", "c" }
+        )]
         [InlineData("    Monday    ", ',', M, StringSplitOptions.None, new[] { "    Monday    " })]
         [InlineData("    Monday    ", ',', M, StringSplitOptions.TrimEntries, new[] { "Monday" })]
-        [InlineData("    Monday    ", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "    Monday    " })]
-        [InlineData("    Monday    ", ',', M, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "Monday" })]
+        [InlineData(
+            "    Monday    ",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "    Monday    " }
+        )]
+        [InlineData(
+            "    Monday    ",
+            ',',
+            M,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "Monday" }
+        )]
         [InlineData("              ", ',', M, StringSplitOptions.None, new[] { "              " })]
         [InlineData("              ", ',', M, StringSplitOptions.TrimEntries, new[] { "" })]
-        [InlineData("              ", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "              " })]
-        [InlineData("              ", ',', M, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new string[0])]
+        [InlineData(
+            "              ",
+            ',',
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "              " }
+        )]
+        [InlineData(
+            "              ",
+            ',',
+            M,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new string[0]
+        )]
         [InlineData("a b ", ' ', 2, StringSplitOptions.TrimEntries, new[] { "a", "b" })]
-        [InlineData(" a b ", ' ', 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
-        public static void SplitCharSeparator(string value, char separator, int count, StringSplitOptions options, string[] expected)
+        [InlineData(
+            " a b ",
+            ' ',
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b" }
+        )]
+        public static void SplitCharSeparator(
+            string value,
+            char separator,
+            int count,
+            StringSplitOptions options,
+            string[] expected
+        )
         {
             Assert.Equal(expected, value.Split(separator, count, options));
             Assert.Equal(expected, value.Split(new[] { separator }, count, options));
@@ -524,7 +1229,10 @@ namespace System.Tests
             Assert.Equal(expected.Length, value.AsSpan().Split(ranges, separator, options));
             Assert.Equal(expected, ranges.Take(expected.Length).Select(r => value[r]).ToArray());
 
-            Assert.Equal(expected.Length, value.AsSpan().Split(ranges, separator.ToString(), options));
+            Assert.Equal(
+                expected.Length,
+                value.AsSpan().Split(ranges, separator.ToString(), options)
+            );
             Assert.Equal(expected, ranges.Take(expected.Length).Select(r => value[r]).ToArray());
         }
 
@@ -532,33 +1240,129 @@ namespace System.Tests
         [InlineData("", null, 0, StringSplitOptions.None, new string[0])]
         [InlineData("", "", 0, StringSplitOptions.None, new string[0])]
         [InlineData("", "separator", 0, StringSplitOptions.None, new string[0])]
-        [InlineData("  a ,   b ,c  ", "", M, StringSplitOptions.TrimEntries, new[] { "a ,   b ,c" })]
-        [InlineData("       ", "", M, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new string[0])]
+        [InlineData(
+            "  a ,   b ,c  ",
+            "",
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "a ,   b ,c" }
+        )]
+        [InlineData(
+            "       ",
+            "",
+            M,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new string[0]
+        )]
         [InlineData("       ", "", M, StringSplitOptions.TrimEntries, new[] { "" })]
         [InlineData("a,b,c", null, M, StringSplitOptions.None, new[] { "a,b,c" })]
         [InlineData("a,b,c", "", M, StringSplitOptions.None, new[] { "a,b,c" })]
         [InlineData("aaabaaabaaa", "aa", M, StringSplitOptions.None, new[] { "", "ab", "ab", "a" })]
-        [InlineData("aaabaaabaaa", "aa", M, StringSplitOptions.RemoveEmptyEntries, new[] { "ab", "ab", "a" })]
-        [InlineData("this, is, a, string, with some spaces", ", ", M, StringSplitOptions.None, new[] { "this", "is", "a", "string", "with some spaces" })]
-        [InlineData("Monday, Tuesday, Wednesday, Thursday, Friday", ",", M, StringSplitOptions.TrimEntries, new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" })]
-        [InlineData("Monday, Tuesday,\r, Wednesday,\n, Thursday, Friday", ",", M, StringSplitOptions.TrimEntries, new[] { "Monday", "Tuesday", "", "Wednesday", "", "Thursday", "Friday" })]
-        [InlineData("Monday, Tuesday,\r, Wednesday,\n, Thursday, Friday", ",", M, StringSplitOptions.RemoveEmptyEntries, new[] { "Monday", " Tuesday", "\r", " Wednesday", "\n", " Thursday", " Friday" })]
-        [InlineData("Monday, Tuesday,\r, Wednesday,\n, Thursday, Friday", ",", M, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" })]
+        [InlineData(
+            "aaabaaabaaa",
+            "aa",
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "ab", "ab", "a" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            ", ",
+            M,
+            StringSplitOptions.None,
+            new[] { "this", "is", "a", "string", "with some spaces" }
+        )]
+        [InlineData(
+            "Monday, Tuesday, Wednesday, Thursday, Friday",
+            ",",
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
+        )]
+        [InlineData(
+            "Monday, Tuesday,\r, Wednesday,\n, Thursday, Friday",
+            ",",
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "Monday", "Tuesday", "", "Wednesday", "", "Thursday", "Friday" }
+        )]
+        [InlineData(
+            "Monday, Tuesday,\r, Wednesday,\n, Thursday, Friday",
+            ",",
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "Monday", " Tuesday", "\r", " Wednesday", "\n", " Thursday", " Friday" }
+        )]
+        [InlineData(
+            "Monday, Tuesday,\r, Wednesday,\n, Thursday, Friday",
+            ",",
+            M,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new[] { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" }
+        )]
         [InlineData("    Monday    ", ",", M, StringSplitOptions.None, new[] { "    Monday    " })]
         [InlineData("    Monday    ", ",", M, StringSplitOptions.TrimEntries, new[] { "Monday" })]
-        [InlineData("    Monday    ", ",", M, StringSplitOptions.RemoveEmptyEntries, new[] { "    Monday    " })]
-        [InlineData("    Monday    ", ",", M, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "Monday" })]
+        [InlineData(
+            "    Monday    ",
+            ",",
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "    Monday    " }
+        )]
+        [InlineData(
+            "    Monday    ",
+            ",",
+            M,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "Monday" }
+        )]
         [InlineData("              ", ",", M, StringSplitOptions.None, new[] { "              " })]
         [InlineData("              ", ",", M, StringSplitOptions.TrimEntries, new[] { "" })]
-        [InlineData("              ", ",", M, StringSplitOptions.RemoveEmptyEntries, new[] { "              " })]
-        [InlineData("              ", ",", M, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new string[0])]
+        [InlineData(
+            "              ",
+            ",",
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "              " }
+        )]
+        [InlineData(
+            "              ",
+            ",",
+            M,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new string[0]
+        )]
         [InlineData("a b ", null, 2, StringSplitOptions.TrimEntries, new[] { "a b" })]
         [InlineData("a b ", "", 2, StringSplitOptions.TrimEntries, new[] { "a b" })]
         [InlineData("a b ", " ", 2, StringSplitOptions.TrimEntries, new[] { "a", "b" })]
-        [InlineData(" a b ", null, 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a b" })]
-        [InlineData(" a b ", "", 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a b" })]
-        [InlineData(" a b ", " ", 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
-        public static void SplitStringSeparator(string value, string separator, int count, StringSplitOptions options, string[] expected)
+        [InlineData(
+            " a b ",
+            null,
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a b" }
+        )]
+        [InlineData(
+            " a b ",
+            "",
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a b" }
+        )]
+        [InlineData(
+            " a b ",
+            " ",
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b" }
+        )]
+        public static void SplitStringSeparator(
+            string value,
+            string separator,
+            int count,
+            StringSplitOptions options,
+            string[] expected
+        )
         {
             Assert.Equal(expected, value.Split(separator, count, options));
             Assert.Equal(expected, value.Split(new[] { separator }, count, options));
@@ -595,36 +1399,284 @@ namespace System.Tests
         [InlineData("a b c", new char[0], M, StringSplitOptions.None, new[] { "a", "b", "c" })]
         [InlineData("a,b,c", null, M, StringSplitOptions.None, new[] { "a,b,c" })]
         [InlineData("a,b,c", new char[0], M, StringSplitOptions.None, new[] { "a,b,c" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ' ' }, M, StringSplitOptions.None, new[] { "this,", "is,", "a,", "string,", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ' ', ',' }, M, StringSplitOptions.None, new[] { "this", "", "is", "", "a", "", "string", "", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', ' ' }, M, StringSplitOptions.None, new[] { "this", "", "is", "", "a", "", "string", "", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', ' ', 's' }, M, StringSplitOptions.None, new[] { "thi", "", "", "i", "", "", "a", "", "", "tring", "", "with", "", "ome", "", "pace", "" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', ' ', 's', 'a' }, M, StringSplitOptions.None, new[] { "thi", "", "", "i", "", "", "", "", "", "", "tring", "", "with", "", "ome", "", "p", "ce", "" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ' ' }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "this,", "is,", "a,", "string,", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ' ', ',' }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "this", "is", "a", "string", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', ' ' }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "this", "is", "a", "string", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', ' ', 's' }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "thi", "i", "a", "tring", "with", "ome", "pace" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', ' ', 's', 'a' }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "thi", "i", "tring", "with", "ome", "p", "ce" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', 's', 'a' }, M, StringSplitOptions.None, new[] { "thi" /*s*/, "" /*,*/, " i" /*s*/, "" /*,*/, " " /*a*/, "" /*,*/, " " /*s*/, "tring" /*,*/, " with " /*s*/, "ome " /*s*/, "p" /*a*/, "ce" /*s*/, "" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', 's', 'a' }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "thi", " i", " ", " ", "tring", " with ", "ome ", "p", "ce" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', 's', 'a' }, M, StringSplitOptions.TrimEntries, new[] { "thi", "", "i", "", "", "", "", "tring", "with", "ome", "p", "ce", "" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ',', 's', 'a' }, M, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new[] { "thi", "i", "tring", "with", "ome", "p", "ce" })]
-        [InlineData("this, is, a, very long string, with some spaces, commas and more spaces", new[] { ',', 's' }, M, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new[] { "thi", "i", "a", "very long", "tring", "with", "ome", "pace", "comma", "and more", "pace" })]
-        [InlineData("    Monday    ", new[] { ',', ':' }, M, StringSplitOptions.None, new[] { "    Monday    " })]
-        [InlineData("    Monday    ", new[] { ',', ':' }, M, StringSplitOptions.TrimEntries, new[] { "Monday" })]
-        [InlineData("    Monday    ", new[] { ',', ':' }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "    Monday    " })]
-        [InlineData("    Monday    ", new[] { ',', ':' }, M, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "Monday" })]
-        [InlineData("              ", new[] { ',', ':' }, M, StringSplitOptions.None, new[] { "              " })]
-        [InlineData("              ", new[] { ',', ':' }, M, StringSplitOptions.TrimEntries, new[] { "" })]
-        [InlineData("              ", new[] { ',', ':' }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "              " })]
-        [InlineData("              ", new[] { ',', ':' }, M, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new string[0])]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ' ' },
+            M,
+            StringSplitOptions.None,
+            new[] { "this,", "is,", "a,", "string,", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ' ', ',' },
+            M,
+            StringSplitOptions.None,
+            new[] { "this", "", "is", "", "a", "", "string", "", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', ' ' },
+            M,
+            StringSplitOptions.None,
+            new[] { "this", "", "is", "", "a", "", "string", "", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', ' ', 's' },
+            M,
+            StringSplitOptions.None,
+            new[]
+            {
+                "thi",
+                "",
+                "",
+                "i",
+                "",
+                "",
+                "a",
+                "",
+                "",
+                "tring",
+                "",
+                "with",
+                "",
+                "ome",
+                "",
+                "pace",
+                "",
+            }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', ' ', 's', 'a' },
+            M,
+            StringSplitOptions.None,
+            new[]
+            {
+                "thi",
+                "",
+                "",
+                "i",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "tring",
+                "",
+                "with",
+                "",
+                "ome",
+                "",
+                "p",
+                "ce",
+                "",
+            }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ' ' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "this,", "is,", "a,", "string,", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ' ', ',' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "this", "is", "a", "string", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', ' ' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "this", "is", "a", "string", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', ' ', 's' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "thi", "i", "a", "tring", "with", "ome", "pace" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', ' ', 's', 'a' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "thi", "i", "tring", "with", "ome", "p", "ce" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', 's', 'a' },
+            M,
+            StringSplitOptions.None,
+            new[]
+            {
+                "thi" /*s*/
+                ,
+                "" /*,*/
+                ,
+                " i" /*s*/
+                ,
+                "" /*,*/
+                ,
+                " " /*a*/
+                ,
+                "" /*,*/
+                ,
+                " " /*s*/
+                ,
+                "tring" /*,*/
+                ,
+                " with " /*s*/
+                ,
+                "ome " /*s*/
+                ,
+                "p" /*a*/
+                ,
+                "ce" /*s*/
+                ,
+                "",
+            }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', 's', 'a' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "thi", " i", " ", " ", "tring", " with ", "ome ", "p", "ce" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', 's', 'a' },
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "thi", "", "i", "", "", "", "", "tring", "with", "ome", "p", "ce", "" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ',', 's', 'a' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new[] { "thi", "i", "tring", "with", "ome", "p", "ce" }
+        )]
+        [InlineData(
+            "this, is, a, very long string, with some spaces, commas and more spaces",
+            new[] { ',', 's' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new[]
+            {
+                "thi",
+                "i",
+                "a",
+                "very long",
+                "tring",
+                "with",
+                "ome",
+                "pace",
+                "comma",
+                "and more",
+                "pace",
+            }
+        )]
+        [InlineData(
+            "    Monday    ",
+            new[] { ',', ':' },
+            M,
+            StringSplitOptions.None,
+            new[] { "    Monday    " }
+        )]
+        [InlineData(
+            "    Monday    ",
+            new[] { ',', ':' },
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "Monday" }
+        )]
+        [InlineData(
+            "    Monday    ",
+            new[] { ',', ':' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "    Monday    " }
+        )]
+        [InlineData(
+            "    Monday    ",
+            new[] { ',', ':' },
+            M,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "Monday" }
+        )]
+        [InlineData(
+            "              ",
+            new[] { ',', ':' },
+            M,
+            StringSplitOptions.None,
+            new[] { "              " }
+        )]
+        [InlineData(
+            "              ",
+            new[] { ',', ':' },
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "" }
+        )]
+        [InlineData(
+            "              ",
+            new[] { ',', ':' },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "              " }
+        )]
+        [InlineData(
+            "              ",
+            new[] { ',', ':' },
+            M,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new string[0]
+        )]
         [InlineData("a b ", null, 2, StringSplitOptions.TrimEntries, new[] { "a", "b" })]
         [InlineData("a b ", new char[0], 2, StringSplitOptions.TrimEntries, new[] { "a", "b" })]
-        [InlineData("a b ", new char[] { ' ' }, 2, StringSplitOptions.TrimEntries, new[] { "a", "b" })]
-        [InlineData(" a b ", null, 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
-        [InlineData(" a b ", new char[0], 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
-        [InlineData(" a b ", new char[] { ' ' }, 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
-        public static void SplitCharArraySeparator(string value, char[] separators, int count, StringSplitOptions options, string[] expected)
+        [InlineData(
+            "a b ",
+            new char[] { ' ' },
+            2,
+            StringSplitOptions.TrimEntries,
+            new[] { "a", "b" }
+        )]
+        [InlineData(
+            " a b ",
+            null,
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b" }
+        )]
+        [InlineData(
+            " a b ",
+            new char[0],
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b" }
+        )]
+        [InlineData(
+            " a b ",
+            new char[] { ' ' },
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b" }
+        )]
+        public static void SplitCharArraySeparator(
+            string value,
+            char[] separators,
+            int count,
+            StringSplitOptions options,
+            string[] expected
+        )
         {
             Assert.Equal(expected, value.Split(separators, count, options));
             Assert.Equal(expected, value.Split(ToStringArray(separators), count, options));
@@ -641,40 +1693,311 @@ namespace System.Tests
         [InlineData("a,b,c", new string[0], M, StringSplitOptions.None, new[] { "a,b,c" })]
         [InlineData("a,b,c", new string[] { null }, M, StringSplitOptions.None, new[] { "a,b,c" })]
         [InlineData("a,b,c", new string[] { "" }, M, StringSplitOptions.None, new[] { "a,b,c" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { " " }, M, StringSplitOptions.None, new[] { "this,", "is,", "a,", "string,", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { " ", ", " }, M, StringSplitOptions.None, new[] { "this", "is", "a", "string", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ", ", " " }, M, StringSplitOptions.None, new[] { "this", "is", "a", "string", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ",", " ", "s" }, M, StringSplitOptions.None, new[] { "thi", "", "", "i", "", "", "a", "", "", "tring", "", "with", "", "ome", "", "pace", "" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ",", " ", "s", "a" }, M, StringSplitOptions.None, new[] { "thi", "", "", "i", "", "", "", "", "", "", "tring", "", "with", "", "ome", "", "p", "ce", "" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { " " }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "this,", "is,", "a,", "string,", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { " ", ", " }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "this", "is", "a", "string", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ", ", " " }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "this", "is", "a", "string", "with", "some", "spaces" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ",", " ", "s" }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "thi", "i", "a", "tring", "with", "ome", "pace" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ",", " ", "s", "a" }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "thi", "i", "tring", "with", "ome", "p", "ce" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ",", "s", "a" }, M, StringSplitOptions.None, new[] { "thi" /*s*/, "" /*,*/, " i" /*s*/, "" /*,*/, " " /*a*/, "" /*,*/, " " /*s*/, "tring" /*,*/, " with " /*s*/, "ome " /*s*/, "p" /*a*/, "ce" /*s*/, "" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ",", "s", "a" }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "thi", " i", " ", " ", "tring", " with ", "ome ", "p", "ce" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ",", "s", "a" }, M, StringSplitOptions.TrimEntries, new[] { "thi", "", "i", "", "", "", "", "tring", "with", "ome", "p", "ce", "" })]
-        [InlineData("this, is, a, string, with some spaces", new[] { ",", "s", "a" }, M, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new[] { "thi", "i", "tring", "with", "ome", "p", "ce" })]
-        [InlineData("this, is, a, string, with some spaces, ", new[] { ",", " s" }, M, StringSplitOptions.None, new[] { "this", " is", " a", "", "tring", " with", "ome", "paces", " " })]
-        [InlineData("this, is, a, string, with some spaces, ", new[] { ",", " s" }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "this", " is", " a", "tring", " with", "ome", "paces", " " })]
-        [InlineData("this, is, a, string, with some spaces, ", new[] { ",", " s" }, M, StringSplitOptions.TrimEntries, new[] { "this", "is", "a", "", "tring", "with", "ome", "paces", "" })]
-        [InlineData("this, is, a, string, with some spaces, ", new[] { ",", " s" }, M, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new[] { "this", "is", "a", "tring", "with", "ome", "paces" })]
-        [InlineData("this, is, a, very long string, with some spaces, commas and more spaces", new[] { ",", " s" }, M, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries, new[] { "this", "is", "a", "very long", "tring", "with", "ome", "paces", "commas and more", "paces" })]
-        [InlineData("    Monday    ", new[] { ",", ":" }, M, StringSplitOptions.None, new[] { "    Monday    " })]
-        [InlineData("    Monday    ", new[] { ",", ":" }, M, StringSplitOptions.TrimEntries, new[] { "Monday" })]
-        [InlineData("    Monday    ", new[] { ",", ":" }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "    Monday    " })]
-        [InlineData("    Monday    ", new[] { ",", ":" }, M, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "Monday" })]
-        [InlineData("              ", new[] { ",", ":" }, M, StringSplitOptions.None, new[] { "              " })]
-        [InlineData("              ", new[] { ",", ":" }, M, StringSplitOptions.TrimEntries, new[] { "" })]
-        [InlineData("              ", new[] { ",", ":" }, M, StringSplitOptions.RemoveEmptyEntries, new[] { "              " })]
-        [InlineData("              ", new[] { ",", ":" }, M, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new string[0])]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { " " },
+            M,
+            StringSplitOptions.None,
+            new[] { "this,", "is,", "a,", "string,", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { " ", ", " },
+            M,
+            StringSplitOptions.None,
+            new[] { "this", "is", "a", "string", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ", ", " " },
+            M,
+            StringSplitOptions.None,
+            new[] { "this", "is", "a", "string", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ",", " ", "s" },
+            M,
+            StringSplitOptions.None,
+            new[]
+            {
+                "thi",
+                "",
+                "",
+                "i",
+                "",
+                "",
+                "a",
+                "",
+                "",
+                "tring",
+                "",
+                "with",
+                "",
+                "ome",
+                "",
+                "pace",
+                "",
+            }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ",", " ", "s", "a" },
+            M,
+            StringSplitOptions.None,
+            new[]
+            {
+                "thi",
+                "",
+                "",
+                "i",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "tring",
+                "",
+                "with",
+                "",
+                "ome",
+                "",
+                "p",
+                "ce",
+                "",
+            }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { " " },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "this,", "is,", "a,", "string,", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { " ", ", " },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "this", "is", "a", "string", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ", ", " " },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "this", "is", "a", "string", "with", "some", "spaces" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ",", " ", "s" },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "thi", "i", "a", "tring", "with", "ome", "pace" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ",", " ", "s", "a" },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "thi", "i", "tring", "with", "ome", "p", "ce" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ",", "s", "a" },
+            M,
+            StringSplitOptions.None,
+            new[]
+            {
+                "thi" /*s*/
+                ,
+                "" /*,*/
+                ,
+                " i" /*s*/
+                ,
+                "" /*,*/
+                ,
+                " " /*a*/
+                ,
+                "" /*,*/
+                ,
+                " " /*s*/
+                ,
+                "tring" /*,*/
+                ,
+                " with " /*s*/
+                ,
+                "ome " /*s*/
+                ,
+                "p" /*a*/
+                ,
+                "ce" /*s*/
+                ,
+                "",
+            }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ",", "s", "a" },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "thi", " i", " ", " ", "tring", " with ", "ome ", "p", "ce" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ",", "s", "a" },
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "thi", "", "i", "", "", "", "", "tring", "with", "ome", "p", "ce", "" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces",
+            new[] { ",", "s", "a" },
+            M,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new[] { "thi", "i", "tring", "with", "ome", "p", "ce" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces, ",
+            new[] { ",", " s" },
+            M,
+            StringSplitOptions.None,
+            new[] { "this", " is", " a", "", "tring", " with", "ome", "paces", " " }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces, ",
+            new[] { ",", " s" },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "this", " is", " a", "tring", " with", "ome", "paces", " " }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces, ",
+            new[] { ",", " s" },
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "this", "is", "a", "", "tring", "with", "ome", "paces", "" }
+        )]
+        [InlineData(
+            "this, is, a, string, with some spaces, ",
+            new[] { ",", " s" },
+            M,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new[] { "this", "is", "a", "tring", "with", "ome", "paces" }
+        )]
+        [InlineData(
+            "this, is, a, very long string, with some spaces, commas and more spaces",
+            new[] { ",", " s" },
+            M,
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries,
+            new[]
+            {
+                "this",
+                "is",
+                "a",
+                "very long",
+                "tring",
+                "with",
+                "ome",
+                "paces",
+                "commas and more",
+                "paces",
+            }
+        )]
+        [InlineData(
+            "    Monday    ",
+            new[] { ",", ":" },
+            M,
+            StringSplitOptions.None,
+            new[] { "    Monday    " }
+        )]
+        [InlineData(
+            "    Monday    ",
+            new[] { ",", ":" },
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "Monday" }
+        )]
+        [InlineData(
+            "    Monday    ",
+            new[] { ",", ":" },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "    Monday    " }
+        )]
+        [InlineData(
+            "    Monday    ",
+            new[] { ",", ":" },
+            M,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "Monday" }
+        )]
+        [InlineData(
+            "              ",
+            new[] { ",", ":" },
+            M,
+            StringSplitOptions.None,
+            new[] { "              " }
+        )]
+        [InlineData(
+            "              ",
+            new[] { ",", ":" },
+            M,
+            StringSplitOptions.TrimEntries,
+            new[] { "" }
+        )]
+        [InlineData(
+            "              ",
+            new[] { ",", ":" },
+            M,
+            StringSplitOptions.RemoveEmptyEntries,
+            new[] { "              " }
+        )]
+        [InlineData(
+            "              ",
+            new[] { ",", ":" },
+            M,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new string[0]
+        )]
         [InlineData("a b ", null, 2, StringSplitOptions.TrimEntries, new[] { "a", "b" })]
         [InlineData("a b ", new string[0], 2, StringSplitOptions.TrimEntries, new[] { "a", "b" })]
-        [InlineData("a b ", new string[] { " " }, 2, StringSplitOptions.TrimEntries, new[] { "a", "b" })]
-        [InlineData(" a b ", null, 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
-        [InlineData(" a b ", new string[0], 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
-        [InlineData(" a b ", new string[] { " " }, 2, StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
-        public static void SplitStringArraySeparator(string value, string[] separators, int count, StringSplitOptions options, string[] expected)
+        [InlineData(
+            "a b ",
+            new string[] { " " },
+            2,
+            StringSplitOptions.TrimEntries,
+            new[] { "a", "b" }
+        )]
+        [InlineData(
+            " a b ",
+            null,
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b" }
+        )]
+        [InlineData(
+            " a b ",
+            new string[0],
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b" }
+        )]
+        [InlineData(
+            " a b ",
+            new string[] { " " },
+            2,
+            StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries,
+            new[] { "a", "b" }
+        )]
+        public static void SplitStringArraySeparator(
+            string value,
+            string[] separators,
+            int count,
+            StringSplitOptions options,
+            string[] expected
+        )
         {
             Assert.Equal(expected, value.Split(separators, count, options));
 

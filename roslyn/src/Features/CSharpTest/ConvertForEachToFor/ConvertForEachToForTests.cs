@@ -22,13 +22,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForEachToFor
     public partial class ConvertForEachToForTests : AbstractCSharpCodeActionTest
     {
         protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
-            Workspace workspace, TestParameters parameters)
-            => new CSharpConvertForEachToForCodeRefactoringProvider();
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpConvertForEachToForCodeRefactoringProvider();
 
-        private readonly CodeStyleOption2<bool> onWithSilent = new CodeStyleOption2<bool>(true, NotificationOption2.Silent);
+        private readonly CodeStyleOption2<bool> onWithSilent = new CodeStyleOption2<bool>(
+            true,
+            NotificationOption2.Silent
+        );
 
-        private OptionsCollection ImplicitTypeEverywhere
-            => new(GetLanguage())
+        private OptionsCollection ImplicitTypeEverywhere =>
+            new(GetLanguage())
             {
                 { CSharpCodeStyleOptions.VarElsewhere, onWithSilent },
                 { CSharpCodeStyleOptions.VarWhenTypeIsApparent, onWithSilent },
@@ -1125,30 +1129,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertForEachToFor
         [Fact(Skip = "https://github.com/dotnet/roslyn/issues/29740")]
         public async Task ImmutableArray()
         {
-            var text = """
-                <Workspace>
-                    <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
-                    <MetadataReference>
-                """ + typeof(ImmutableArray<>).Assembly.Location + """
-                </MetadataReference>
-                        <Document>
-                using System;
-                using System.Collections.Immutable;
+            var text =
+                """
+                    <Workspace>
+                        <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
+                        <MetadataReference>
+                    """
+                + typeof(ImmutableArray<>).Assembly.Location
+                + """
+                    </MetadataReference>
+                            <Document>
+                    using System;
+                    using System.Collections.Immutable;
 
-                class Test
-                {
-                    void Method()
+                    class Test
                     {
-                        var list = ImmutableArray.Create(1);
-                        foreach [||](var a in list)
+                        void Method()
                         {
-                            Console.WriteLine(a);
+                            var list = ImmutableArray.Create(1);
+                            foreach [||](var a in list)
+                            {
+                                Console.WriteLine(a);
+                            }
                         }
-                    }
-                }</Document>
-                    </Project>
-                </Workspace>
-                """;
+                    }</Document>
+                        </Project>
+                    </Workspace>
+                    """;
 
             var expected = """
                 using System;

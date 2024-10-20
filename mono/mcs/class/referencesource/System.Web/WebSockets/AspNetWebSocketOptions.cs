@@ -4,14 +4,15 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.WebSockets {
+namespace System.Web.WebSockets
+{
     using System;
     using System.Linq;
 
     // Specifies configuration settings for a WebSocket connection
 
-    public sealed class AspNetWebSocketOptions {
-
+    public sealed class AspNetWebSocketOptions
+    {
         private string _subProtocol;
 
         // Flag specifying whether ASP.NET should check that the URL that initiated
@@ -23,17 +24,17 @@ namespace System.Web.WebSockets {
         // Corresponds to the "subprotocol" that will be sent from the server
         // to the client (see WebSockets spec, Sec. 5.2.2). Set to null (default)
         // to suppress sending a protocol.
-        public string SubProtocol {
-            get {
-                return _subProtocol;
-            }
-            set {
-                if (value != null && !SubProtocolUtil.IsValidSubProtocolName(value)) {
+        public string SubProtocol
+        {
+            get { return _subProtocol; }
+            set
+            {
+                if (value != null && !SubProtocolUtil.IsValidSubProtocolName(value))
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 _subProtocol = value;
             }
         }
-
     }
 }

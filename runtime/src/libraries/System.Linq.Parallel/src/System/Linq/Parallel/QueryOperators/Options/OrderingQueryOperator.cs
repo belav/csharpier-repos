@@ -34,7 +34,10 @@ namespace System.Linq.Parallel
             return _child.Open(settings, preferStriping);
         }
 
-        internal override IEnumerator<TSource> GetEnumerator(ParallelMergeOptions? mergeOptions, bool suppressOrderPreservation)
+        internal override IEnumerator<TSource> GetEnumerator(
+            ParallelMergeOptions? mergeOptions,
+            bool suppressOrderPreservation
+        )
         {
             if (_child is ScanQueryOperator<TSource> childAsScan)
             {
@@ -51,7 +54,6 @@ namespace System.Linq.Parallel
         {
             return _child.AsSequentialQuery(token);
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in

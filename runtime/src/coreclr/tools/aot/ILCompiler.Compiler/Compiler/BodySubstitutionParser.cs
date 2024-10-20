@@ -4,14 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Reflection.Metadata;
-using Internal.TypeSystem;
 using System.Xml;
 using System.Xml.XPath;
-using System.Globalization;
-using System.Linq;
 using ILLink.Shared;
+using Internal.TypeSystem;
 
 namespace ILCompiler
 {
@@ -20,29 +20,58 @@ namespace ILCompiler
         private readonly Dictionary<MethodDesc, BodySubstitution> _methodSubstitutions;
         private readonly Dictionary<FieldDesc, object> _fieldSubstitutions;
 
-
-        private BodySubstitutionsParser(Logger logger, TypeSystemContext context, Stream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
-                : base(logger, context, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues)
+        private BodySubstitutionsParser(
+            Logger logger,
+            TypeSystemContext context,
+            Stream documentStream,
+            ManifestResource resource,
+            ModuleDesc resourceAssembly,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
+            : base(
+                logger,
+                context,
+                documentStream,
+                resource,
+                resourceAssembly,
+                xmlDocumentLocation,
+                featureSwitchValues
+            )
         {
             _methodSubstitutions = new Dictionary<MethodDesc, BodySubstitution>();
             _fieldSubstitutions = new Dictionary<FieldDesc, object>();
         }
 
-        private BodySubstitutionsParser(Logger logger, TypeSystemContext context, XmlReader document, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
-                : base(logger, context, document, xmlDocumentLocation, featureSwitchValues)
+        private BodySubstitutionsParser(
+            Logger logger,
+            TypeSystemContext context,
+            XmlReader document,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
+            : base(logger, context, document, xmlDocumentLocation, featureSwitchValues)
         {
             _methodSubstitutions = new Dictionary<MethodDesc, BodySubstitution>();
             _fieldSubstitutions = new Dictionary<FieldDesc, object>();
         }
 
-        protected override void ProcessAssembly(ModuleDesc assembly, XPathNavigator nav, bool warnOnUnresolvedTypes)
+        protected override void ProcessAssembly(
+            ModuleDesc assembly,
+            XPathNavigator nav,
+            bool warnOnUnresolvedTypes
+        )
         {
             ProcessTypes(assembly, nav, warnOnUnresolvedTypes);
         }
 
         // protected override TypeDesc? ProcessExportedType(ExportedType exported, ModuleDesc assembly, XPathNavigator nav) => null;
 
-        protected override bool ProcessTypePattern(string fullname, ModuleDesc assembly, XPathNavigator nav) => false;
+        protected override bool ProcessTypePattern(
+            string fullname,
+            ModuleDesc assembly,
+            XPathNavigator nav
+        ) => false;
 
         protected override void ProcessType(TypeDesc type, XPathNavigator nav)
         {
@@ -50,7 +79,11 @@ namespace ILCompiler
             ProcessTypeChildren(type, nav);
         }
 
-        protected override void ProcessMethod(TypeDesc type, XPathNavigator methodNav, object customData)
+        protected override void ProcessMethod(
+            TypeDesc type,
+            XPathNavigator methodNav,
+            object customData
+        )
         {
             string signature = GetSignature(methodNav);
             if (string.IsNullOrEmpty(signature))
@@ -60,7 +93,12 @@ namespace ILCompiler
             if (method == null)
             {
 #if !READYTORUN
-                LogWarning(methodNav, DiagnosticId.XmlCouldNotFindMethodOnType, signature, type.GetDisplayName());
+                LogWarning(
+                    methodNav,
+                    DiagnosticId.XmlCouldNotFindMethodOnType,
+                    signature,
+                    type.GetDisplayName()
+                );
 #endif
                 return;
             }
@@ -76,7 +114,12 @@ namespace ILCompiler
                     if (method.Signature.ReturnType.IsVoid)
                         stubBody = BodySubstitution.EmptyBody;
                     else
-                        stubBody = BodySubstitution.Create(TryCreateSubstitution(method.Signature.ReturnType, GetAttribute(methodNav, "value")));
+                        stubBody = BodySubstitution.Create(
+                            TryCreateSubstitution(
+                                method.Signature.ReturnType,
+                                GetAttribute(methodNav, "value")
+                            )
+                        );
 
                     if (stubBody != null)
                     {
@@ -85,13 +128,22 @@ namespace ILCompiler
                     else
                     {
 #if !READYTORUN
-                        LogWarning(methodNav, DiagnosticId.XmlInvalidValueForStub, method.GetDisplayName());
+                        LogWarning(
+                            methodNav,
+                            DiagnosticId.XmlInvalidValueForStub,
+                            method.GetDisplayName()
+                        );
 #endif
                     }
                     break;
                 default:
 #if !READYTORUN
-                    LogWarning(methodNav, DiagnosticId.XmlUnkownBodyModification, action, method.GetDisplayName());
+                    LogWarning(
+                        methodNav,
+                        DiagnosticId.XmlUnkownBodyModification,
+                        action,
+                        method.GetDisplayName()
+                    );
 #endif
                     break;
             }
@@ -107,7 +159,12 @@ namespace ILCompiler
             if (field == null)
             {
 #if !READYTORUN
-                LogWarning(fieldNav, DiagnosticId.XmlCouldNotFindFieldOnType, name, type.GetDisplayName());
+                LogWarning(
+                    fieldNav,
+                    DiagnosticId.XmlCouldNotFindFieldOnType,
+                    name,
+                    type.GetDisplayName()
+                );
 #endif
                 return;
             }
@@ -115,7 +172,11 @@ namespace ILCompiler
             if (!field.IsStatic || field.IsLiteral)
             {
 #if !READYTORUN
-                LogWarning(fieldNav, DiagnosticId.XmlSubstitutedFieldNeedsToBeStatic, field.GetDisplayName());
+                LogWarning(
+                    fieldNav,
+                    DiagnosticId.XmlSubstitutedFieldNeedsToBeStatic,
+                    field.GetDisplayName()
+                );
 #endif
                 return;
             }
@@ -124,7 +185,11 @@ namespace ILCompiler
             if (string.IsNullOrEmpty(value))
             {
 #if !READYTORUN
-                LogWarning(fieldNav, DiagnosticId.XmlMissingSubstitutionValueForField, field.GetDisplayName());
+                LogWarning(
+                    fieldNav,
+                    DiagnosticId.XmlMissingSubstitutionValueForField,
+                    field.GetDisplayName()
+                );
 #endif
                 return;
             }
@@ -133,12 +198,23 @@ namespace ILCompiler
             if (substitution == null)
             {
 #if !READYTORUN
-                LogWarning(fieldNav, DiagnosticId.XmlInvalidSubstitutionValueForField, value, field.GetDisplayName());
+                LogWarning(
+                    fieldNav,
+                    DiagnosticId.XmlInvalidSubstitutionValueForField,
+                    value,
+                    field.GetDisplayName()
+                );
 #endif
                 return;
             }
 
-            if (string.Equals(GetAttribute(fieldNav, "initialize"), "true", StringComparison.InvariantCultureIgnoreCase))
+            if (
+                string.Equals(
+                    GetAttribute(fieldNav, "initialize"),
+                    "true",
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            )
             {
                 // We would need to also mess with the cctor of the type to set the field to this value:
                 //
@@ -167,7 +243,14 @@ namespace ILCompiler
                 case TypeFlags.Int32:
                     if (string.IsNullOrEmpty(value))
                         return 0;
-                    else if (int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out int iresult))
+                    else if (
+                        int.TryParse(
+                            value,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out int iresult
+                        )
+                    )
                         return iresult;
                     break;
 
@@ -186,16 +269,44 @@ namespace ILCompiler
             return null;
         }
 
-        public static BodyAndFieldSubstitutions GetSubstitutions(Logger logger, TypeSystemContext context, Stream documentStream, ManifestResource resource, ModuleDesc resourceAssembly, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
+        public static BodyAndFieldSubstitutions GetSubstitutions(
+            Logger logger,
+            TypeSystemContext context,
+            Stream documentStream,
+            ManifestResource resource,
+            ModuleDesc resourceAssembly,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
         {
-            var rdr = new BodySubstitutionsParser(logger, context, documentStream, resource, resourceAssembly, xmlDocumentLocation, featureSwitchValues);
+            var rdr = new BodySubstitutionsParser(
+                logger,
+                context,
+                documentStream,
+                resource,
+                resourceAssembly,
+                xmlDocumentLocation,
+                featureSwitchValues
+            );
             rdr.ProcessXml(false);
             return new BodyAndFieldSubstitutions(rdr._methodSubstitutions, rdr._fieldSubstitutions);
         }
 
-        public static BodyAndFieldSubstitutions GetSubstitutions(Logger logger, TypeSystemContext context, XmlReader reader, string xmlDocumentLocation, IReadOnlyDictionary<string, bool> featureSwitchValues)
+        public static BodyAndFieldSubstitutions GetSubstitutions(
+            Logger logger,
+            TypeSystemContext context,
+            XmlReader reader,
+            string xmlDocumentLocation,
+            IReadOnlyDictionary<string, bool> featureSwitchValues
+        )
         {
-            var rdr = new BodySubstitutionsParser(logger, context, reader, xmlDocumentLocation, featureSwitchValues);
+            var rdr = new BodySubstitutionsParser(
+                logger,
+                context,
+                reader,
+                xmlDocumentLocation,
+                featureSwitchValues
+            );
             rdr.ProcessXml(false);
             return new BodyAndFieldSubstitutions(rdr._methodSubstitutions, rdr._fieldSubstitutions);
         }
@@ -206,11 +317,14 @@ namespace ILCompiler
         private Dictionary<MethodDesc, BodySubstitution> _bodySubstitutions;
         private Dictionary<FieldDesc, object> _fieldSubstitutions;
 
-        public IReadOnlyDictionary<MethodDesc, BodySubstitution> BodySubstitutions => _bodySubstitutions;
+        public IReadOnlyDictionary<MethodDesc, BodySubstitution> BodySubstitutions =>
+            _bodySubstitutions;
         public IReadOnlyDictionary<FieldDesc, object> FieldSubstitutions => _fieldSubstitutions;
 
-        public BodyAndFieldSubstitutions(Dictionary<MethodDesc, BodySubstitution> bodySubstitutions, Dictionary<FieldDesc, object> fieldSubstitutions)
-            => (_bodySubstitutions, _fieldSubstitutions) = (bodySubstitutions, fieldSubstitutions);
+        public BodyAndFieldSubstitutions(
+            Dictionary<MethodDesc, BodySubstitution> bodySubstitutions,
+            Dictionary<FieldDesc, object> fieldSubstitutions
+        ) => (_bodySubstitutions, _fieldSubstitutions) = (bodySubstitutions, fieldSubstitutions);
 
         public void AppendFrom(BodyAndFieldSubstitutions other)
         {

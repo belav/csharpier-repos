@@ -10,5 +10,6 @@ namespace Microsoft.AspNetCore.Mvc;
 /// failures. Use <see cref="IAntiforgeryValidationFailedResult"/> to
 /// match for validation failures inside MVC result filters.
 /// </summary>
-public class AntiforgeryValidationFailedResult : BadRequestResult, IAntiforgeryValidationFailedResult
-{ }
+public class AntiforgeryValidationFailedResult
+    : BadRequestResult,
+        IAntiforgeryValidationFailedResult { }

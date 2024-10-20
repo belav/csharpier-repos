@@ -11,7 +11,10 @@ namespace System.Reflection.Emit.Tests
         public void GenericParameterPosition()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            GenericTypeParameterBuilder[] genericParameters = type.DefineGenericParameters("T0", "T1");
+            GenericTypeParameterBuilder[] genericParameters = type.DefineGenericParameters(
+                "T0",
+                "T1"
+            );
             TypeInfo genericParameter = genericParameters[1].DeclaringType.GetTypeInfo();
             Assert.Equal(0, genericParameter.GenericParameterPosition);
         }

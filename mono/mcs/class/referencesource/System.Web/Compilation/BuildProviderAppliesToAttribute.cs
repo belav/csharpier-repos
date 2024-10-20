@@ -4,24 +4,24 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Compilation {
-
+namespace System.Web.Compilation
+{
     using System.Security.Permissions;
     using System.Web.Configuration;
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public sealed class BuildProviderAppliesToAttribute : Attribute {
-
+    public sealed class BuildProviderAppliesToAttribute : Attribute
+    {
         private BuildProviderAppliesTo _appliesTo;
 
-        public BuildProviderAppliesToAttribute(BuildProviderAppliesTo appliesTo) {
+        public BuildProviderAppliesToAttribute(BuildProviderAppliesTo appliesTo)
+        {
             _appliesTo = appliesTo;
         }
 
-        public BuildProviderAppliesTo AppliesTo {
-            get {
-                return _appliesTo;
-            }
+        public BuildProviderAppliesTo AppliesTo
+        {
+            get { return _appliesTo; }
         }
     }
 }

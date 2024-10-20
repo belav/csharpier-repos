@@ -17,13 +17,17 @@ namespace Microsoft.Interop.Analyzers
     {
         public override FixAllProvider? GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
 
-        public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(
+                GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
+            );
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             // Get the syntax root and semantic model
             Document doc = context.Document;
-            SyntaxNode? root = await doc.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            SyntaxNode? root = await doc.GetSyntaxRootAsync(context.CancellationToken)
+                .ConfigureAwait(false);
             if (root == null)
                 return;
 
@@ -31,7 +35,12 @@ namespace Microsoft.Interop.Analyzers
 
             foreach (var diagnostic in context.Diagnostics)
             {
-                if (!diagnostic.Properties.TryGetValue(GeneratorDiagnosticProperties.AddMarshalAsAttribute, out string? addMarshalAsAttribute))
+                if (
+                    !diagnostic.Properties.TryGetValue(
+                        GeneratorDiagnosticProperties.AddMarshalAsAttribute,
+                        out string? addMarshalAsAttribute
+                    )
+                )
                 {
                     continue;
                 }
@@ -40,34 +49,43 @@ namespace Microsoft.Interop.Analyzers
                 {
                     string unmanagedTypeName = unmanagedType.Trim();
                     context.RegisterCodeFix(
-                            CodeAction.Create(
-                                $"Add [MarshalAs(UnmanagedType.{unmanagedTypeName})]",
-                                async ct =>
+                        CodeAction.Create(
+                            $"Add [MarshalAs(UnmanagedType.{unmanagedTypeName})]",
+                            async ct =>
+                            {
+                                DocumentEditor editor = await DocumentEditor
+                                    .CreateAsync(doc, ct)
+                                    .ConfigureAwait(false);
+
+                                SyntaxGenerator gen = editor.Generator;
+
+                                SyntaxNode marshalAsAttribute = gen.Attribute(
+                                    TypeNames.System_Runtime_InteropServices_MarshalAsAttribute,
+                                    gen.AttributeArgument(
+                                        gen.MemberAccessExpression(
+                                            gen.DottedName(
+                                                TypeNames.System_Runtime_InteropServices_UnmanagedType
+                                            ),
+                                            gen.IdentifierName(unmanagedTypeName.Trim())
+                                        )
+                                    )
+                                );
+
+                                if (node.IsKind(SyntaxKind.MethodDeclaration))
                                 {
-                                    DocumentEditor editor = await DocumentEditor.CreateAsync(doc, ct).ConfigureAwait(false);
+                                    editor.AddReturnAttribute(node, marshalAsAttribute);
+                                }
+                                else
+                                {
+                                    editor.AddAttribute(node, marshalAsAttribute);
+                                }
 
-                                    SyntaxGenerator gen = editor.Generator;
-
-                                    SyntaxNode marshalAsAttribute = gen.Attribute(
-                                                TypeNames.System_Runtime_InteropServices_MarshalAsAttribute,
-                                                gen.AttributeArgument(
-                                                    gen.MemberAccessExpression(
-                                                        gen.DottedName(TypeNames.System_Runtime_InteropServices_UnmanagedType),
-                                                        gen.IdentifierName(unmanagedTypeName.Trim()))));
-
-                                    if (node.IsKind(SyntaxKind.MethodDeclaration))
-                                    {
-                                        editor.AddReturnAttribute(node, marshalAsAttribute);
-                                    }
-                                    else
-                                    {
-                                        editor.AddAttribute(node, marshalAsAttribute);
-                                    }
-
-                                    return editor.GetChangedDocument();
-                                },
-                                $"AddUnmanagedType.{unmanagedTypeName}"),
-                            diagnostic);
+                                return editor.GetChangedDocument();
+                            },
+                            $"AddUnmanagedType.{unmanagedTypeName}"
+                        ),
+                        diagnostic
+                    );
                 }
             }
         }

@@ -10,8 +10,8 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
 
@@ -25,17 +25,17 @@ namespace Roslyn.Test.Utilities
     /// string with the "$" character in it.  This allows for easy creation of "FIT" tests where all
     /// that needs to be provided are strings that encode every bit of state necessary in the string
     /// itself.
-    /// 
-    /// The current set of encoded features we support are: 
-    /// 
+    ///
+    /// The current set of encoded features we support are:
+    ///
     /// $$ - The position in the file.  There can be at most one of these.
-    /// 
+    ///
     /// [| ... |] - A span of text in the file.  There can be many of these and they can be nested
     /// and/or overlap the $ position.
-    /// 
+    ///
     /// {|Name: ... |} A span of text in the file annotated with an identifier.  There can be many of
     /// these, including ones with the same name.
-    /// 
+    ///
     /// Additional encoded features can be added on a case by case basis.
     /// </summary>
     public static class MarkupTestFile
@@ -46,11 +46,18 @@ namespace Roslyn.Test.Utilities
         private const string NamedSpanStartString = "{|";
         private const string NamedSpanEndString = "|}";
 
-        private static readonly Regex s_namedSpanStartRegex = new Regex(@"\{\| ([-_.A-Za-z0-9\+]+) \:",
-            RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace);
+        private static readonly Regex s_namedSpanStartRegex = new Regex(
+            @"\{\| ([-_.A-Za-z0-9\+]+) \:",
+            RegexOptions.Multiline | RegexOptions.IgnorePatternWhitespace
+        );
 
         private static void Parse(
-            string input, bool treatPositionIndicatorsAsCode, out string output, out int? position, out IDictionary<string, ArrayBuilder<TextSpan>> spans)
+            string input,
+            bool treatPositionIndicatorsAsCode,
+            out string output,
+            out int? position,
+            out IDictionary<string, ArrayBuilder<TextSpan>> spans
+        )
         {
             position = null;
             var tempSpans = new Dictionary<string, ArrayBuilder<TextSpan>>();
@@ -87,10 +94,14 @@ namespace Roslyn.Test.Utilities
                     break;
                 }
 
-                var orderedMatches = matches.OrderBy((t1, t2) => t1.matchIndex - t2.matchIndex).ToList();
-                if (orderedMatches.Count >= 2 &&
-                    (spanStartStack.Count > 0 || namedSpanStartStack.Count > 0) &&
-                    matches[0].matchIndex == matches[1].matchIndex - 1)
+                var orderedMatches = matches
+                    .OrderBy((t1, t2) => t1.matchIndex - t2.matchIndex)
+                    .ToList();
+                if (
+                    orderedMatches.Count >= 2
+                    && (spanStartStack.Count > 0 || namedSpanStartStack.Count > 0)
+                    && matches[0].matchIndex == matches[1].matchIndex - 1
+                )
                 {
                     // We have a slight ambiguity with cases like these:
                     //
@@ -99,8 +110,18 @@ namespace Roslyn.Test.Utilities
                     // Is it starting a new match, or ending an existing match.  As a workaround, we
                     // special case these and consider it ending a match if we have something on the
                     // stack already.
-                    if ((matches[0].name == SpanStartString && matches[1].name == SpanEndString && !spanStartStack.IsEmpty()) ||
-                        (matches[0].name == SpanStartString && matches[1].name == NamedSpanEndString && !namedSpanStartStack.IsEmpty()))
+                    if (
+                        (
+                            matches[0].name == SpanStartString
+                            && matches[1].name == SpanEndString
+                            && !spanStartStack.IsEmpty()
+                        )
+                        || (
+                            matches[0].name == SpanStartString
+                            && matches[1].name == NamedSpanEndString
+                            && !namedSpanStartStack.IsEmpty()
+                        )
+                    )
                     {
                         orderedMatches.RemoveAt(0);
                     }
@@ -113,7 +134,9 @@ namespace Roslyn.Test.Utilities
                 var matchString = firstMatch.name;
 
                 var matchIndexInOutput = matchIndexInInput - inputOutputOffset;
-                outputBuilder.Append(input.Substring(currentIndexInInput, matchIndexInInput - currentIndexInInput));
+                outputBuilder.Append(
+                    input.Substring(currentIndexInInput, matchIndexInInput - currentIndexInInput)
+                );
 
                 currentIndexInInput = matchIndexInInput + matchString.Length;
                 inputOutputOffset += matchString.Length;
@@ -123,7 +146,9 @@ namespace Roslyn.Test.Utilities
                     case PositionString:
                         if (position.HasValue)
                         {
-                            throw new ArgumentException(string.Format("Saw multiple occurrences of {0}", PositionString));
+                            throw new ArgumentException(
+                                string.Format("Saw multiple occurrences of {0}", PositionString)
+                            );
                         }
 
                         position = matchIndexInOutput;
@@ -136,7 +161,13 @@ namespace Roslyn.Test.Utilities
                     case SpanEndString:
                         if (spanStartStack.Count == 0)
                         {
-                            throw new ArgumentException(string.Format("Saw {0} without matching {1}", SpanEndString, SpanStartString));
+                            throw new ArgumentException(
+                                string.Format(
+                                    "Saw {0} without matching {1}",
+                                    SpanEndString,
+                                    SpanStartString
+                                )
+                            );
                         }
 
                         PopSpan(spanStartStack, tempSpans, matchIndexInOutput);
@@ -150,7 +181,13 @@ namespace Roslyn.Test.Utilities
                     case NamedSpanEndString:
                         if (namedSpanStartStack.Count == 0)
                         {
-                            throw new ArgumentException(string.Format("Saw {0} without matching {1}", NamedSpanEndString, NamedSpanStartString));
+                            throw new ArgumentException(
+                                string.Format(
+                                    "Saw {0} without matching {1}",
+                                    NamedSpanEndString,
+                                    NamedSpanStartString
+                                )
+                            );
                         }
 
                         PopSpan(namedSpanStartStack, tempSpans, matchIndexInOutput);
@@ -163,12 +200,20 @@ namespace Roslyn.Test.Utilities
 
             if (spanStartStack.Count > 0)
             {
-                throw new ArgumentException(string.Format("Saw {0} without matching {1}", SpanStartString, SpanEndString));
+                throw new ArgumentException(
+                    string.Format("Saw {0} without matching {1}", SpanStartString, SpanEndString)
+                );
             }
 
             if (namedSpanStartStack.Count > 0)
             {
-                throw new ArgumentException(string.Format("Saw {0} without matching {1}", NamedSpanEndString, NamedSpanEndString));
+                throw new ArgumentException(
+                    string.Format(
+                        "Saw {0} without matching {1}",
+                        NamedSpanEndString,
+                        NamedSpanEndString
+                    )
+                );
             }
 
             // Append the remainder of the string.
@@ -191,7 +236,8 @@ namespace Roslyn.Test.Utilities
         private static void PopSpan(
             Stack<(int matchIndex, string name)> spanStartStack,
             IDictionary<string, ArrayBuilder<TextSpan>> spans,
-            int finalIndex)
+            int finalIndex
+        )
         {
             var (matchIndex, name) = spanStartStack.Pop();
 
@@ -199,7 +245,12 @@ namespace Roslyn.Test.Utilities
             GetOrAdd(spans, name, _ => ArrayBuilder<TextSpan>.GetInstance()).Add(span);
         }
 
-        private static void AddMatch(string input, string value, int currentIndex, List<(int, string)> matches)
+        private static void AddMatch(
+            string input,
+            string value,
+            int currentIndex,
+            List<(int, string)> matches
+        )
         {
             var index = input.IndexOf(value, currentIndex, StringComparison.Ordinal);
             if (index >= 0)
@@ -209,53 +260,116 @@ namespace Roslyn.Test.Utilities
         }
 
         private static void GetPositionAndSpans(
-            string input, out string output, out int? cursorPositionOpt, out ImmutableArray<TextSpan> spans,
-            bool treatPositionIndicatorsAsCode = false)
+            string input,
+            out string output,
+            out int? cursorPositionOpt,
+            out ImmutableArray<TextSpan> spans,
+            bool treatPositionIndicatorsAsCode = false
+        )
         {
-            Parse(input, treatPositionIndicatorsAsCode, out output, out cursorPositionOpt, out var dictionary);
+            Parse(
+                input,
+                treatPositionIndicatorsAsCode,
+                out output,
+                out cursorPositionOpt,
+                out var dictionary
+            );
 
-            var builder = GetOrAdd(dictionary, string.Empty, _ => ArrayBuilder<TextSpan>.GetInstance());
+            var builder = GetOrAdd(
+                dictionary,
+                string.Empty,
+                _ => ArrayBuilder<TextSpan>.GetInstance()
+            );
             builder.Sort((left, right) => left.Start - right.Start);
             spans = builder.ToImmutableAndFree();
         }
 
         public static void GetPositionAndSpans(
-            string input, out string output, out int? cursorPositionOpt, out IDictionary<string, ImmutableArray<TextSpan>> spans,
-            bool treatPositionIndicatorsAsCode = false)
+            string input,
+            out string output,
+            out int? cursorPositionOpt,
+            out IDictionary<string, ImmutableArray<TextSpan>> spans,
+            bool treatPositionIndicatorsAsCode = false
+        )
         {
-            Parse(input, treatPositionIndicatorsAsCode, out output, out cursorPositionOpt, out var dictionary);
+            Parse(
+                input,
+                treatPositionIndicatorsAsCode,
+                out output,
+                out cursorPositionOpt,
+                out var dictionary
+            );
             spans = dictionary.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.ToImmutableAndFree());
         }
 
-        public static void GetSpans(string input, out string output, out IDictionary<string, ImmutableArray<TextSpan>> spans,
-            bool treatPositionIndicatorsAsCode = false)
-            => GetPositionAndSpans(input, out output, out var cursorPositionOpt, out spans, treatPositionIndicatorsAsCode);
+        public static void GetSpans(
+            string input,
+            out string output,
+            out IDictionary<string, ImmutableArray<TextSpan>> spans,
+            bool treatPositionIndicatorsAsCode = false
+        ) =>
+            GetPositionAndSpans(
+                input,
+                out output,
+                out var cursorPositionOpt,
+                out spans,
+                treatPositionIndicatorsAsCode
+            );
 
-        public static void GetPositionAndSpans(string input, out string output, out int cursorPosition, out ImmutableArray<TextSpan> spans)
+        public static void GetPositionAndSpans(
+            string input,
+            out string output,
+            out int cursorPosition,
+            out ImmutableArray<TextSpan> spans
+        )
         {
             GetPositionAndSpans(input, out output, out int? pos, out spans);
             cursorPosition = pos.Value;
         }
 
-        public static void GetPosition(string input, out string output, out int? cursorPosition)
-            => GetPositionAndSpans(input, out output, out cursorPosition, out ImmutableArray<TextSpan> spans);
+        public static void GetPosition(string input, out string output, out int? cursorPosition) =>
+            GetPositionAndSpans(
+                input,
+                out output,
+                out cursorPosition,
+                out ImmutableArray<TextSpan> spans
+            );
 
-        public static void GetPosition(string input, out string output, out int cursorPosition)
-            => GetPositionAndSpans(input, out output, out cursorPosition, out var spans);
+        public static void GetPosition(string input, out string output, out int cursorPosition) =>
+            GetPositionAndSpans(input, out output, out cursorPosition, out var spans);
 
-        public static void GetPositionAndSpan(string input, out string output, out int? cursorPosition, out TextSpan? textSpan)
+        public static void GetPositionAndSpan(
+            string input,
+            out string output,
+            out int? cursorPosition,
+            out TextSpan? textSpan
+        )
         {
-            GetPositionAndSpans(input, out output, out cursorPosition, out ImmutableArray<TextSpan> spans);
+            GetPositionAndSpans(
+                input,
+                out output,
+                out cursorPosition,
+                out ImmutableArray<TextSpan> spans
+            );
             textSpan = spans.Length == 0 ? null : (TextSpan?)spans.Single();
         }
 
-        public static void GetPositionAndSpan(string input, out string output, out int cursorPosition, out TextSpan textSpan)
+        public static void GetPositionAndSpan(
+            string input,
+            out string output,
+            out int cursorPosition,
+            out TextSpan textSpan
+        )
         {
             GetPositionAndSpans(input, out output, out cursorPosition, out var spans);
             textSpan = spans.Single();
         }
 
-        public static void GetSpans(string input, out string output, out ImmutableArray<TextSpan> spans)
+        public static void GetSpans(
+            string input,
+            out string output,
+            out ImmutableArray<TextSpan> spans
+        )
         {
             GetPositionAndSpans(input, out output, out int? pos, out spans);
         }

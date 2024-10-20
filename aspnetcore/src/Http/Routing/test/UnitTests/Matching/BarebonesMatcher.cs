@@ -46,7 +46,7 @@ internal class BarebonesMatcher : Matcher
             _segments = segments;
             Endpoint = endpoint;
 
-            _candidates = new Candidate[] { new Candidate(endpoint), };
+            _candidates = new Candidate[] { new Candidate(endpoint) };
         }
 
         public bool TryMatch(string path)
@@ -58,16 +58,23 @@ internal class BarebonesMatcher : Matcher
             while ((end = path.IndexOf('/', start)) >= 0)
             {
                 var comparand = _segments.Length > segment ? _segments[segment] : null;
-                if ((comparand == null && end - start == 0) ||
-                    (comparand != null &&
-                        (comparand.Length != end - start ||
-                        string.Compare(
-                            path,
-                            start,
-                            comparand,
-                            0,
-                            comparand.Length,
-                            StringComparison.OrdinalIgnoreCase) != 0)))
+                if (
+                    (comparand == null && end - start == 0)
+                    || (
+                        comparand != null
+                        && (
+                            comparand.Length != end - start
+                            || string.Compare(
+                                path,
+                                start,
+                                comparand,
+                                0,
+                                comparand.Length,
+                                StringComparison.OrdinalIgnoreCase
+                            ) != 0
+                        )
+                    )
+                )
                 {
                     return false;
                 }
@@ -81,15 +88,20 @@ internal class BarebonesMatcher : Matcher
             if (length > 0)
             {
                 var comparand = _segments.Length > segment ? _segments[segment] : null;
-                if (comparand != null &&
-                    (comparand.Length != length ||
-                    string.Compare(
-                        path,
-                        start,
-                        comparand,
-                        0,
-                        comparand.Length,
-                        StringComparison.OrdinalIgnoreCase) != 0))
+                if (
+                    comparand != null
+                    && (
+                        comparand.Length != length
+                        || string.Compare(
+                            path,
+                            start,
+                            comparand,
+                            0,
+                            comparand.Length,
+                            StringComparison.OrdinalIgnoreCase
+                        ) != 0
+                    )
+                )
                 {
                     return false;
                 }

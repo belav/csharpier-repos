@@ -15,7 +15,8 @@ namespace Algorithms
         // corresponding for loop.  Don't use it on a hot code path
         // (i.e. inside a loop)
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static Vector<T> Create<T>(Func<int, T> creator) where T : struct
+        public static Vector<T> Create<T>(Func<int, T> creator)
+            where T : struct
         {
             T[] data = new T[Vector<T>.Count];
             for (int i = 0; i < data.Length; i++)
@@ -28,7 +29,8 @@ namespace Algorithms
         // better than a for loop. Don't use it somewhere that
         // performance truly matters
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static void ForEach<T>(this Vector<T> vec, Action<T, int> op) where T : struct
+        public static void ForEach<T>(this Vector<T> vec, Action<T, int> op)
+            where T : struct
         {
             for (int i = 0; i < Vector<T>.Count; i++)
                 op(vec[i], i);

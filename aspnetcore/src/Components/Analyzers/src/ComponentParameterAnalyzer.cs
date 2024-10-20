@@ -21,14 +21,16 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
 {
     public ComponentParameterAnalyzer()
     {
-        SupportedDiagnostics = ImmutableArray.Create(new[]
-        {
-            DiagnosticDescriptors.ComponentParametersShouldBePublic,
-            DiagnosticDescriptors.ComponentParameterSettersShouldBePublic,
-            DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesMustBeUnique,
-            DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesHasWrongType,
-            DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties,
-        });
+        SupportedDiagnostics = ImmutableArray.Create(
+            new[]
+            {
+                DiagnosticDescriptors.ComponentParametersShouldBePublic,
+                DiagnosticDescriptors.ComponentParameterSettersShouldBePublic,
+                DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesMustBeUnique,
+                DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesHasWrongType,
+                DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties,
+            }
+        );
     }
 
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; }
@@ -36,7 +38,9 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
     public override void Initialize(AnalysisContext context)
     {
         context.EnableConcurrentExecution();
-        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
+        context.ConfigureGeneratedCodeAnalysis(
+            GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
+        );
         context.RegisterCompilationStartAction(context =>
         {
             if (!ComponentSymbols.TryCreate(context.Compilation, out var symbols))
@@ -47,93 +51,151 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
 
             // This operates per-type because one of the validations we need has to look for duplicates
             // defined on the same type.
-            context.RegisterSymbolStartAction(context =>
-            {
-                var properties = new List<IPropertySymbol>();
-
-                var type = (INamedTypeSymbol)context.Symbol;
-                foreach (var member in type.GetMembers())
+            context.RegisterSymbolStartAction(
+                context =>
                 {
-                    if (member is IPropertySymbol property && ComponentFacts.IsParameter(symbols, property))
+                    var properties = new List<IPropertySymbol>();
+
+                    var type = (INamedTypeSymbol)context.Symbol;
+                    foreach (var member in type.GetMembers())
                     {
-                        // Annotated with [Parameter]. We ignore [CascadingParameter]'s because they don't interact with tooling and don't currently have any analyzer restrictions.
-                        properties.Add(property);
+                        if (
+                            member is IPropertySymbol property
+                            && ComponentFacts.IsParameter(symbols, property)
+                        )
+                        {
+                            // Annotated with [Parameter]. We ignore [CascadingParameter]'s because they don't interact with tooling and don't currently have any analyzer restrictions.
+                            properties.Add(property);
+                        }
                     }
-                }
 
-                if (properties.Count == 0)
-                {
-                    return;
-                }
-
-                context.RegisterSymbolEndAction(context =>
-                {
-                    var captureUnmatchedValuesParameters = new List<IPropertySymbol>();
-
-                    // Per-property validations
-                    foreach (var property in properties)
+                    if (properties.Count == 0)
                     {
-                        var propertyLocation = property.Locations.FirstOrDefault();
-                        if (propertyLocation == null)
-                        {
-                            continue;
-                        }
+                        return;
+                    }
 
-                        if (property.DeclaredAccessibility != Accessibility.Public)
-                        {
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                DiagnosticDescriptors.ComponentParametersShouldBePublic,
-                                propertyLocation,
-                                property.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat)));
-                        }
-                        else if (property.SetMethod?.DeclaredAccessibility != Accessibility.Public)
-                        {
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                DiagnosticDescriptors.ComponentParameterSettersShouldBePublic,
-                                propertyLocation,
-                                property.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat)));
-                        }
+                    context.RegisterSymbolEndAction(context =>
+                    {
+                        var captureUnmatchedValuesParameters = new List<IPropertySymbol>();
 
-                        if (ComponentFacts.IsParameterWithCaptureUnmatchedValues(symbols, property))
+                        // Per-property validations
+                        foreach (var property in properties)
                         {
-                            captureUnmatchedValuesParameters.Add(property);
-
-                            // Check the type, we need to be able to assign a Dictionary<string, object>
-                            var conversion = context.Compilation.ClassifyConversion(symbols.ParameterCaptureUnmatchedValuesRuntimeType, property.Type);
-                            if (!conversion.Exists || conversion.IsExplicit)
+                            var propertyLocation = property.Locations.FirstOrDefault();
+                            if (propertyLocation == null)
                             {
-                                context.ReportDiagnostic(Diagnostic.Create(
-                                    DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesHasWrongType,
-                                    propertyLocation,
-                                    property.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat),
-                                    property.Type.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat),
-                                    symbols.ParameterCaptureUnmatchedValuesRuntimeType.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat)));
+                                continue;
+                            }
+
+                            if (property.DeclaredAccessibility != Accessibility.Public)
+                            {
+                                context.ReportDiagnostic(
+                                    Diagnostic.Create(
+                                        DiagnosticDescriptors.ComponentParametersShouldBePublic,
+                                        propertyLocation,
+                                        property.ToDisplayString(
+                                            SymbolDisplayFormat.CSharpErrorMessageFormat
+                                        )
+                                    )
+                                );
+                            }
+                            else if (
+                                property.SetMethod?.DeclaredAccessibility != Accessibility.Public
+                            )
+                            {
+                                context.ReportDiagnostic(
+                                    Diagnostic.Create(
+                                        DiagnosticDescriptors.ComponentParameterSettersShouldBePublic,
+                                        propertyLocation,
+                                        property.ToDisplayString(
+                                            SymbolDisplayFormat.CSharpErrorMessageFormat
+                                        )
+                                    )
+                                );
+                            }
+
+                            if (
+                                ComponentFacts.IsParameterWithCaptureUnmatchedValues(
+                                    symbols,
+                                    property
+                                )
+                            )
+                            {
+                                captureUnmatchedValuesParameters.Add(property);
+
+                                // Check the type, we need to be able to assign a Dictionary<string, object>
+                                var conversion = context.Compilation.ClassifyConversion(
+                                    symbols.ParameterCaptureUnmatchedValuesRuntimeType,
+                                    property.Type
+                                );
+                                if (!conversion.Exists || conversion.IsExplicit)
+                                {
+                                    context.ReportDiagnostic(
+                                        Diagnostic.Create(
+                                            DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesHasWrongType,
+                                            propertyLocation,
+                                            property.ToDisplayString(
+                                                SymbolDisplayFormat.CSharpErrorMessageFormat
+                                            ),
+                                            property.Type.ToDisplayString(
+                                                SymbolDisplayFormat.CSharpErrorMessageFormat
+                                            ),
+                                            symbols.ParameterCaptureUnmatchedValuesRuntimeType.ToDisplayString(
+                                                SymbolDisplayFormat.CSharpErrorMessageFormat
+                                            )
+                                        )
+                                    );
+                                }
+                            }
+                            if (
+                                !IsAutoProperty(property)
+                                && !IsSameSemanticAsAutoProperty(
+                                    property,
+                                    context.CancellationToken
+                                )
+                            )
+                            {
+                                context.ReportDiagnostic(
+                                    Diagnostic.Create(
+                                        DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties,
+                                        propertyLocation,
+                                        property.ToDisplayString(
+                                            SymbolDisplayFormat.CSharpErrorMessageFormat
+                                        )
+                                    )
+                                );
                             }
                         }
-                        if (!IsAutoProperty(property) && !IsSameSemanticAsAutoProperty(property, context.CancellationToken))
-                        {
-                            context.ReportDiagnostic(Diagnostic.Create(
-                                DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties,
-                                propertyLocation,
-                                property.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat)));
-                        }
-                    }
 
-                    // Check if the type defines multiple CaptureUnmatchedValues parameters. Doing this outside the loop means we place the
-                    // errors on the type.
-                    if (captureUnmatchedValuesParameters.Count > 1)
-                    {
-                        context.ReportDiagnostic(Diagnostic.Create(
-                            DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesMustBeUnique,
-                            context.Symbol.Locations[0],
-                            type.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat),
-                            Environment.NewLine,
-                            string.Join(
-                                Environment.NewLine,
-                                captureUnmatchedValuesParameters.Select(p => p.ToDisplayString(SymbolDisplayFormat.CSharpErrorMessageFormat)).OrderBy(n => n))));
-                    }
-                });
-            }, SymbolKind.NamedType);
+                        // Check if the type defines multiple CaptureUnmatchedValues parameters. Doing this outside the loop means we place the
+                        // errors on the type.
+                        if (captureUnmatchedValuesParameters.Count > 1)
+                        {
+                            context.ReportDiagnostic(
+                                Diagnostic.Create(
+                                    DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesMustBeUnique,
+                                    context.Symbol.Locations[0],
+                                    type.ToDisplayString(
+                                        SymbolDisplayFormat.CSharpErrorMessageFormat
+                                    ),
+                                    Environment.NewLine,
+                                    string.Join(
+                                        Environment.NewLine,
+                                        captureUnmatchedValuesParameters
+                                            .Select(p =>
+                                                p.ToDisplayString(
+                                                    SymbolDisplayFormat.CSharpErrorMessageFormat
+                                                )
+                                            )
+                                            .OrderBy(n => n)
+                                    )
+                                )
+                            );
+                        }
+                    });
+                },
+                SymbolKind.NamedType
+            );
         });
     }
 
@@ -141,16 +203,26 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
     /// Check if a property is an auto-property.
     /// TODO: Remove this helper when https://github.com/dotnet/roslyn/issues/46682 is handled.
     /// </summary>
-    private static bool IsAutoProperty(IPropertySymbol propertySymbol)
-       => propertySymbol.ContainingType.GetMembers()
-              .OfType<IFieldSymbol>()
-              .Any(f => f.IsImplicitlyDeclared && SymbolEqualityComparer.Default.Equals(propertySymbol, f.AssociatedSymbol));
+    private static bool IsAutoProperty(IPropertySymbol propertySymbol) =>
+        propertySymbol
+            .ContainingType.GetMembers()
+            .OfType<IFieldSymbol>()
+            .Any(f =>
+                f.IsImplicitlyDeclared
+                && SymbolEqualityComparer.Default.Equals(propertySymbol, f.AssociatedSymbol)
+            );
 
-    private static bool IsSameSemanticAsAutoProperty(IPropertySymbol symbol, CancellationToken cancellationToken)
+    private static bool IsSameSemanticAsAutoProperty(
+        IPropertySymbol symbol,
+        CancellationToken cancellationToken
+    )
     {
-        if (symbol.DeclaringSyntaxReferences.Length == 1 &&
-            symbol.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken) is PropertyDeclarationSyntax syntax &&
-            syntax.AccessorList?.Accessors.Count == 2)
+        if (
+            symbol.DeclaringSyntaxReferences.Length == 1
+            && symbol.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken)
+                is PropertyDeclarationSyntax syntax
+            && syntax.AccessorList?.Accessors.Count == 2
+        )
         {
             var getterAccessor = syntax.AccessorList.Accessors[0];
             var setterAccessor = syntax.AccessorList.Accessors[1];
@@ -160,19 +232,27 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
                 (getterAccessor, setterAccessor) = (setterAccessor, getterAccessor);
             }
 
-            if (!getterAccessor.IsKind(SyntaxKind.GetAccessorDeclaration) || !setterAccessor.IsKind(SyntaxKind.SetAccessorDeclaration))
+            if (
+                !getterAccessor.IsKind(SyntaxKind.GetAccessorDeclaration)
+                || !setterAccessor.IsKind(SyntaxKind.SetAccessorDeclaration)
+            )
             {
                 return false;
             }
 
-            IdentifierNameSyntax? identifierUsedInGetter = GetIdentifierUsedInGetter(getterAccessor);
+            IdentifierNameSyntax? identifierUsedInGetter = GetIdentifierUsedInGetter(
+                getterAccessor
+            );
             if (identifierUsedInGetter is null)
             {
                 return false;
             }
 
-            IdentifierNameSyntax? identifierUsedInSetter = GetIdentifierUsedInSetter(setterAccessor);
-            return identifierUsedInGetter.Identifier.ValueText == identifierUsedInSetter?.Identifier.ValueText;
+            IdentifierNameSyntax? identifierUsedInSetter = GetIdentifierUsedInSetter(
+                setterAccessor
+            );
+            return identifierUsedInGetter.Identifier.ValueText
+                == identifierUsedInSetter?.Identifier.ValueText;
         }
 
         return false;
@@ -180,7 +260,10 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
 
     private static IdentifierNameSyntax? GetIdentifierUsedInGetter(AccessorDeclarationSyntax getter)
     {
-        if (getter.Body is { Statements: { Count: 1 } } && getter.Body.Statements[0] is ReturnStatementSyntax returnStatement)
+        if (
+            getter.Body is { Statements: { Count: 1 } }
+            && getter.Body.Statements[0] is ReturnStatementSyntax returnStatement
+        )
         {
             return returnStatement.Expression as IdentifierNameSyntax;
         }
@@ -195,7 +278,9 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
         {
             if (setter.Body.Statements.Count == 1)
             {
-                assignmentExpression = (setter.Body.Statements[0] as ExpressionStatementSyntax)?.Expression as AssignmentExpressionSyntax;
+                assignmentExpression =
+                    (setter.Body.Statements[0] as ExpressionStatementSyntax)?.Expression
+                    as AssignmentExpressionSyntax;
             }
         }
         else
@@ -203,8 +288,11 @@ public sealed class ComponentParameterAnalyzer : DiagnosticAnalyzer
             assignmentExpression = setter.ExpressionBody?.Expression as AssignmentExpressionSyntax;
         }
 
-        if (assignmentExpression is not null && assignmentExpression.Right is IdentifierNameSyntax right &&
-            right.Identifier.ValueText == "value")
+        if (
+            assignmentExpression is not null
+            && assignmentExpression.Right is IdentifierNameSyntax right
+            && right.Identifier.ValueText == "value"
+        )
         {
             return assignmentExpression.Left as IdentifierNameSyntax;
         }

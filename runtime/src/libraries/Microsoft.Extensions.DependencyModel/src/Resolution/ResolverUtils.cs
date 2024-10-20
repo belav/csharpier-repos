@@ -7,7 +7,12 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
 {
     internal static class ResolverUtils
     {
-        internal static bool TryResolvePackagePath(IFileSystem fileSystem, CompilationLibrary library, string basePath, out string packagePath)
+        internal static bool TryResolvePackagePath(
+            IFileSystem fileSystem,
+            CompilationLibrary library,
+            string basePath,
+            out string packagePath
+        )
         {
             string? path = library.Path;
             if (string.IsNullOrEmpty(path))
@@ -24,7 +29,12 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
             return false;
         }
 
-        internal static bool TryResolveAssemblyFile(IFileSystem fileSystem, string basePath, string assemblyPath, out string fullName)
+        internal static bool TryResolveAssemblyFile(
+            IFileSystem fileSystem,
+            string basePath,
+            string assemblyPath,
+            out string fullName
+        )
         {
             fullName = Path.Combine(basePath, assemblyPath);
             if (fileSystem.File.Exists(fullName))

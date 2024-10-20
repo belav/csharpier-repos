@@ -8,11 +8,10 @@ namespace System.Data.OleDb
     internal sealed class OleDbConnectionPoolGroupProviderInfo : DbConnectionPoolGroupProviderInfo
     {
         private bool _hasQuoteFix;
-        private string? _quotePrefix, _quoteSuffix;
+        private string? _quotePrefix,
+            _quoteSuffix;
 
-        internal OleDbConnectionPoolGroupProviderInfo()
-        {
-        }
+        internal OleDbConnectionPoolGroupProviderInfo() { }
 
         internal bool HasQuoteFix
         {

@@ -64,7 +64,6 @@ namespace System.Linq.Tests
                 Assert.Null(array[i]);
         }
 
-
         [Fact]
         public void Repeat_ZeroCountLeadToEmptySequence()
         {
@@ -75,9 +74,11 @@ namespace System.Linq.Tests
         [Fact]
         public void Repeat_ThrowExceptionOnNegativeCount()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => Enumerable.Repeat(1, -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => Enumerable.Repeat(1, -1)
+            );
         }
-
 
         [Fact]
         public void Repeat_NotEnumerateAfterEnd()
@@ -225,7 +226,10 @@ namespace System.Linq.Tests
         [Fact]
         public void ElementAtExcessive()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => Enumerable.Repeat(3, 3).ElementAt(100));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => Enumerable.Repeat(3, 3).ElementAt(100)
+            );
         }
 
         [Fact]
@@ -257,9 +261,15 @@ namespace System.Linq.Tests
                 Assert.Throws<NotSupportedException>(() => list.Remove(42));
                 Assert.Throws<NotSupportedException>(() => list[0] = 42);
                 AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => list[-1]);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => list[expected.Length]);
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => list[expected.Length]
+                );
                 AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => roList[-1]);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => roList[expected.Length]);
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => roList[expected.Length]
+                );
 
                 Assert.True(list.IsReadOnly);
                 Assert.Equal(expected.Length, list.Count);
@@ -268,7 +278,10 @@ namespace System.Linq.Tests
                 Assert.False(list.Contains(expected[0] - 1));
                 Assert.False(list.Contains(expected[^1] + 1));
                 Assert.All(expected, i => Assert.True(list.Contains(i)));
-                Assert.All(expected, i => Assert.Equal(Array.IndexOf(expected, i), list.IndexOf(i)));
+                Assert.All(
+                    expected,
+                    i => Assert.Equal(Array.IndexOf(expected, i), list.IndexOf(i))
+                );
                 for (int i = 0; i < expected.Length; i++)
                 {
                     Assert.Equal(expected[i], list[i]);

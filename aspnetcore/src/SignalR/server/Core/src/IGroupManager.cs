@@ -15,7 +15,11 @@ public interface IGroupManager
     /// <param name="groupName">The group name.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous add.</returns>
-    Task AddToGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default);
+    Task AddToGroupAsync(
+        string connectionId,
+        string groupName,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Removes a connection from the specified group.
@@ -24,5 +28,9 @@ public interface IGroupManager
     /// <param name="groupName">The group name.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous remove.</returns>
-    Task RemoveFromGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default);
+    Task RemoveFromGroupAsync(
+        string connectionId,
+        string groupName,
+        CancellationToken cancellationToken = default
+    );
 }

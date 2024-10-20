@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,119 +35,158 @@ using System.Threading;
 
 namespace System.ServiceModel.Discovery.Version11
 {
-	internal class DiscoveryTargetClient11 : DuplexClientBase<IDiscoveryTargetContract11>, DiscoveryClient.IDiscoveryCommon
-	{
-		public DiscoveryTargetClient11 (ServiceEndpoint endpoint)
-			: this (new DiscoveryTargetCallback11 (), endpoint)
-		{
-		}
+    internal class DiscoveryTargetClient11
+        : DuplexClientBase<IDiscoveryTargetContract11>,
+            DiscoveryClient.IDiscoveryCommon
+    {
+        public DiscoveryTargetClient11(ServiceEndpoint endpoint)
+            : this(new DiscoveryTargetCallback11(), endpoint) { }
 
-		DiscoveryTargetClient11 (DiscoveryTargetCallback11 instance, ServiceEndpoint endpoint)
-			: base (instance, endpoint)
-		{
-			instance.ReplyFindCompleted += delegate (MessageContracts11.FindResponse response) {
-				find_completed = delegate { return response; };
-				reply_find_handle.Set ();
-			};
-			instance.ReplyResolveCompleted += delegate (MessageContracts11.ResolveResponse response) {
-				resolve_completed = delegate { return response; };
-				reply_resolve_handle.Set ();
-			};
-		}
+        DiscoveryTargetClient11(DiscoveryTargetCallback11 instance, ServiceEndpoint endpoint)
+            : base(instance, endpoint)
+        {
+            instance.ReplyFindCompleted += delegate(MessageContracts11.FindResponse response)
+            {
+                find_completed = delegate
+                {
+                    return response;
+                };
+                reply_find_handle.Set();
+            };
+            instance.ReplyResolveCompleted += delegate(MessageContracts11.ResolveResponse response)
+            {
+                resolve_completed = delegate
+                {
+                    return response;
+                };
+                reply_resolve_handle.Set();
+            };
+        }
 
-		// Find
+        // Find
 
-		Func<FindCriteria,FindResponse> find_delegate;
-		Func<MessageContracts11.FindResponse> find_completed;
-		ManualResetEvent reply_find_handle = new ManualResetEvent (false);
+        Func<FindCriteria, FindResponse> find_delegate;
+        Func<MessageContracts11.FindResponse> find_completed;
+        ManualResetEvent reply_find_handle = new ManualResetEvent(false);
 
-		public IAsyncResult BeginFind (FindCriteria criteria, AsyncCallback callback, object state)
-		{
-			if (find_delegate == null)
-				find_delegate = new Func<FindCriteria,FindResponse> (Find);
-			return find_delegate.BeginInvoke (criteria, callback, state);
-		}
-		
-		public FindResponse EndFind (IAsyncResult result)
-		{
-			return find_delegate.EndInvoke (result);
-		}
-		
-		FindResponse Find (FindCriteria criteria)
-		{
-			var req = new MessageContracts11.FindRequest () { Body = new FindCriteria11 (criteria) };
-			Channel.BeginFind (req, delegate (IAsyncResult result) {
-				Channel.EndFind (result);
-			}, null);
-			
-			var timeout = InnerChannel.OperationTimeout < criteria.Duration ? InnerChannel.OperationTimeout : criteria.Duration;
-			if (!reply_find_handle.WaitOne (timeout))
-				throw new EndpointNotFoundException ("The discovery client could not receive Find operation response within the operation timeout.");
-			try {
-				var ir = find_completed ();
-				var ret = new FindResponse ();
-				foreach (var fr in ir.Body)
-					ret.Endpoints.Add (fr.ToEndpointDiscoveryMetadata ());
-				return ret;
-			} finally {
-				find_completed = null;
-			}
-		}
+        public IAsyncResult BeginFind(FindCriteria criteria, AsyncCallback callback, object state)
+        {
+            if (find_delegate == null)
+                find_delegate = new Func<FindCriteria, FindResponse>(Find);
+            return find_delegate.BeginInvoke(criteria, callback, state);
+        }
 
-		// Resolve
+        public FindResponse EndFind(IAsyncResult result)
+        {
+            return find_delegate.EndInvoke(result);
+        }
 
-		Func<ResolveCriteria,ResolveResponse> resolve_delegate;
-		Func<MessageContracts11.ResolveResponse> resolve_completed;
-		ManualResetEvent reply_resolve_handle = new ManualResetEvent (false);
+        FindResponse Find(FindCriteria criteria)
+        {
+            var req = new MessageContracts11.FindRequest() { Body = new FindCriteria11(criteria) };
+            Channel.BeginFind(
+                req,
+                delegate(IAsyncResult result)
+                {
+                    Channel.EndFind(result);
+                },
+                null
+            );
 
-		public IAsyncResult BeginResolve (ResolveCriteria criteria, AsyncCallback callback, object state)
-		{
-			if (resolve_delegate == null)
-				resolve_delegate = new Func<ResolveCriteria,ResolveResponse> (Resolve);
-			return resolve_delegate.BeginInvoke (criteria, callback, state);
-		}
-		
-		public ResolveResponse EndResolve (IAsyncResult result)
-		{
-			return resolve_delegate.EndInvoke (result);
-		}
-		
-		public ResolveResponse Resolve (ResolveCriteria criteria)
-		{
-			var req = new MessageContracts11.ResolveRequest () { Body = new ResolveCriteria11 (criteria) };
-			Channel.BeginResolve (req, delegate (IAsyncResult result) {
-				Channel.EndResolve (result);
-			}, null);
+            var timeout =
+                InnerChannel.OperationTimeout < criteria.Duration
+                    ? InnerChannel.OperationTimeout
+                    : criteria.Duration;
+            if (!reply_find_handle.WaitOne(timeout))
+                throw new EndpointNotFoundException(
+                    "The discovery client could not receive Find operation response within the operation timeout."
+                );
+            try
+            {
+                var ir = find_completed();
+                var ret = new FindResponse();
+                foreach (var fr in ir.Body)
+                    ret.Endpoints.Add(fr.ToEndpointDiscoveryMetadata());
+                return ret;
+            }
+            finally
+            {
+                find_completed = null;
+            }
+        }
 
-			var timeout = InnerChannel.OperationTimeout < criteria.Duration ? InnerChannel.OperationTimeout : criteria.Duration;
-			if (!reply_find_handle.WaitOne (timeout))
-				throw new TimeoutException ();
-			try {
-				var ir = resolve_completed ();
-				var metadata = ir.Body.ToEndpointDiscoveryMetadata ();
-				var sequence = ir.MessageSequence.ToDiscoveryMessageSequence ();
-				return new ResolveResponse (metadata, sequence);
-			} finally {
-				resolve_completed = null;
-			}
-		}
-	
-		internal class DiscoveryTargetCallback11 : IDiscoveryTargetCallbackContract11
-		{
-			public event Action<MessageContracts11.FindResponse> ReplyFindCompleted;
-			public event Action<MessageContracts11.ResolveResponse> ReplyResolveCompleted;
+        // Resolve
 
-			public void ReplyFind (MessageContracts11.FindResponse message)
-			{
-				if (ReplyFindCompleted != null)
-					ReplyFindCompleted (message);
-			}
+        Func<ResolveCriteria, ResolveResponse> resolve_delegate;
+        Func<MessageContracts11.ResolveResponse> resolve_completed;
+        ManualResetEvent reply_resolve_handle = new ManualResetEvent(false);
 
-			public void ReplyResolve (MessageContracts11.ResolveResponse message)
-			{
-				if (ReplyResolveCompleted != null)
-					ReplyResolveCompleted (message);
-			}
-		}
-	}
+        public IAsyncResult BeginResolve(
+            ResolveCriteria criteria,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            if (resolve_delegate == null)
+                resolve_delegate = new Func<ResolveCriteria, ResolveResponse>(Resolve);
+            return resolve_delegate.BeginInvoke(criteria, callback, state);
+        }
+
+        public ResolveResponse EndResolve(IAsyncResult result)
+        {
+            return resolve_delegate.EndInvoke(result);
+        }
+
+        public ResolveResponse Resolve(ResolveCriteria criteria)
+        {
+            var req = new MessageContracts11.ResolveRequest()
+            {
+                Body = new ResolveCriteria11(criteria),
+            };
+            Channel.BeginResolve(
+                req,
+                delegate(IAsyncResult result)
+                {
+                    Channel.EndResolve(result);
+                },
+                null
+            );
+
+            var timeout =
+                InnerChannel.OperationTimeout < criteria.Duration
+                    ? InnerChannel.OperationTimeout
+                    : criteria.Duration;
+            if (!reply_find_handle.WaitOne(timeout))
+                throw new TimeoutException();
+            try
+            {
+                var ir = resolve_completed();
+                var metadata = ir.Body.ToEndpointDiscoveryMetadata();
+                var sequence = ir.MessageSequence.ToDiscoveryMessageSequence();
+                return new ResolveResponse(metadata, sequence);
+            }
+            finally
+            {
+                resolve_completed = null;
+            }
+        }
+
+        internal class DiscoveryTargetCallback11 : IDiscoveryTargetCallbackContract11
+        {
+            public event Action<MessageContracts11.FindResponse> ReplyFindCompleted;
+            public event Action<MessageContracts11.ResolveResponse> ReplyResolveCompleted;
+
+            public void ReplyFind(MessageContracts11.FindResponse message)
+            {
+                if (ReplyFindCompleted != null)
+                    ReplyFindCompleted(message);
+            }
+
+            public void ReplyResolve(MessageContracts11.ResolveResponse message)
+            {
+                if (ReplyResolveCompleted != null)
+                    ReplyResolveCompleted(message);
+            }
+        }
+    }
 }

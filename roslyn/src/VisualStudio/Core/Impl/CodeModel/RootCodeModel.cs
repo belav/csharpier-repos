@@ -18,9 +18,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 {
     [ComVisible(true)]
     [ComDefaultInterface(typeof(EnvDTE.CodeModel))]
-    public sealed class RootCodeModel : AbstractCodeModelObject, ICodeElementContainer<AbstractExternalCodeElement>, EnvDTE.CodeModel, EnvDTE80.CodeModel2
+    public sealed class RootCodeModel
+        : AbstractCodeModelObject,
+            ICodeElementContainer<AbstractExternalCodeElement>,
+            EnvDTE.CodeModel,
+            EnvDTE80.CodeModel2
     {
-        internal static EnvDTE.CodeModel Create(CodeModelState state, EnvDTE.Project parent, ProjectId projectId)
+        internal static EnvDTE.CodeModel Create(
+            CodeModelState state,
+            EnvDTE.Project parent,
+            ProjectId projectId
+        )
         {
             var rootCodeModel = new RootCodeModel(state, parent, projectId);
             return (EnvDTE.CodeModel)ComAggregate.CreateAggregatedObject(rootCodeModel);
@@ -36,11 +44,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             _projectId = projectId;
         }
 
-        private Project GetProject()
-            => Workspace.CurrentSolution.GetProject(_projectId);
+        private Project GetProject() => Workspace.CurrentSolution.GetProject(_projectId);
 
-        private Compilation GetCompilation()
-            => GetProject().GetCompilationAsync().Result;
+        private Compilation GetCompilation() => GetProject().GetCompilationAsync().Result;
 
         private ComHandle<EnvDTE80.FileCodeModel2, FileCodeModel> GetFileCodeModel(object location)
         {
@@ -56,13 +62,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
                 var project = GetProject();
                 var projectDirectory = Path.GetDirectoryName(project.FilePath);
-                var absoluteFilePath = Path.GetFullPath(Path.Combine(projectDirectory, locationString));
+                var absoluteFilePath = Path.GetFullPath(
+                    Path.Combine(projectDirectory, locationString)
+                );
 
                 var foundFile = false;
                 foreach (var documentId in project.DocumentIds)
                 {
                     var document = project.GetDocument(documentId);
-                    if (document.FilePath != null && string.Equals(absoluteFilePath, document.FilePath, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        document.FilePath != null
+                        && string.Equals(
+                            absoluteFilePath,
+                            document.FilePath,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         foundFile = true;
                         break;
@@ -80,7 +95,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     vsProjectItems.AddFromFile(absoluteFilePath);
                 }
 
-                return this.State.ProjectCodeModelFactory.GetProjectCodeModel(_projectId).GetOrCreateFileCodeModel(absoluteFilePath);
+                return this
+                    .State.ProjectCodeModelFactory.GetProjectCodeModel(_projectId)
+                    .GetOrCreateFileCodeModel(absoluteFilePath);
             }
 
             throw Exceptions.ThrowEInvalidArg();
@@ -96,42 +113,92 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             get { return SyntaxFactsService.IsCaseSensitive; }
         }
 
-        public EnvDTE.CodeAttribute AddAttribute(string name, object location, string value, object position)
-            => GetFileCodeModel(location).Object.AddAttribute(name, value, position);
+        public EnvDTE.CodeAttribute AddAttribute(
+            string name,
+            object location,
+            string value,
+            object position
+        ) => GetFileCodeModel(location).Object.AddAttribute(name, value, position);
 
-        public EnvDTE.CodeClass AddClass(string name, object location, object position, object bases, object implementedInterfaces, EnvDTE.vsCMAccess access)
-            => GetFileCodeModel(location).Object.AddClass(name, position, bases, implementedInterfaces, access);
+        public EnvDTE.CodeClass AddClass(
+            string name,
+            object location,
+            object position,
+            object bases,
+            object implementedInterfaces,
+            EnvDTE.vsCMAccess access
+        ) =>
+            GetFileCodeModel(location)
+                .Object.AddClass(name, position, bases, implementedInterfaces, access);
 
-        public EnvDTE.CodeDelegate AddDelegate(string name, object location, object type, object position, EnvDTE.vsCMAccess access)
-            => GetFileCodeModel(location).Object.AddDelegate(name, type, position, access);
+        public EnvDTE.CodeDelegate AddDelegate(
+            string name,
+            object location,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        ) => GetFileCodeModel(location).Object.AddDelegate(name, type, position, access);
 
-        public EnvDTE.CodeEnum AddEnum(string name, object location, object position, object bases, EnvDTE.vsCMAccess access)
-            => GetFileCodeModel(location).Object.AddEnum(name, position, bases, access);
+        public EnvDTE.CodeEnum AddEnum(
+            string name,
+            object location,
+            object position,
+            object bases,
+            EnvDTE.vsCMAccess access
+        ) => GetFileCodeModel(location).Object.AddEnum(name, position, bases, access);
 
-        public EnvDTE.CodeFunction AddFunction(string name, object location, EnvDTE.vsCMFunction kind, object type, object position, EnvDTE.vsCMAccess access)
-            => GetFileCodeModel(location).Object.AddFunction(name, kind, type, position, access);
+        public EnvDTE.CodeFunction AddFunction(
+            string name,
+            object location,
+            EnvDTE.vsCMFunction kind,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        ) => GetFileCodeModel(location).Object.AddFunction(name, kind, type, position, access);
 
-        public EnvDTE.CodeInterface AddInterface(string name, object location, object position, object bases, EnvDTE.vsCMAccess access)
-            => GetFileCodeModel(location).Object.AddInterface(name, position, bases, access);
+        public EnvDTE.CodeInterface AddInterface(
+            string name,
+            object location,
+            object position,
+            object bases,
+            EnvDTE.vsCMAccess access
+        ) => GetFileCodeModel(location).Object.AddInterface(name, position, bases, access);
 
-        public EnvDTE.CodeNamespace AddNamespace(string name, object location, object position)
-            => GetFileCodeModel(location).Object.AddNamespace(name, position);
+        public EnvDTE.CodeNamespace AddNamespace(string name, object location, object position) =>
+            GetFileCodeModel(location).Object.AddNamespace(name, position);
 
-        public EnvDTE.CodeStruct AddStruct(string name, object location, object position, object bases, object implementedInterfaces, EnvDTE.vsCMAccess access)
-            => GetFileCodeModel(location).Object.AddStruct(name, position, bases, implementedInterfaces, access);
+        public EnvDTE.CodeStruct AddStruct(
+            string name,
+            object location,
+            object position,
+            object bases,
+            object implementedInterfaces,
+            EnvDTE.vsCMAccess access
+        ) =>
+            GetFileCodeModel(location)
+                .Object.AddStruct(name, position, bases, implementedInterfaces, access);
 
-        public EnvDTE.CodeVariable AddVariable(string name, object location, object type, object position, EnvDTE.vsCMAccess access)
-            => GetFileCodeModel(location).Object.AddVariable(name, type, position, access);
+        public EnvDTE.CodeVariable AddVariable(
+            string name,
+            object location,
+            object type,
+            object position,
+            EnvDTE.vsCMAccess access
+        ) => GetFileCodeModel(location).Object.AddVariable(name, type, position, access);
 
-        EnvDTE.CodeElements ICodeElementContainer<AbstractExternalCodeElement>.GetCollection()
-            => CodeElements;
+        EnvDTE.CodeElements ICodeElementContainer<AbstractExternalCodeElement>.GetCollection() =>
+            CodeElements;
 
         public EnvDTE.CodeElements CodeElements
         {
             get
             {
                 var compilation = GetCompilation();
-                var rootNamespace = ExternalCodeNamespace.Create(this.State, _projectId, compilation.GlobalNamespace);
+                var rootNamespace = ExternalCodeNamespace.Create(
+                    this.State,
+                    _projectId,
+                    compilation.GlobalNamespace
+                );
                 return rootNamespace.Members;
             }
         }
@@ -140,24 +207,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         {
             var compilation = GetCompilation();
             var typeSymbol = CodeModelService.GetTypeSymbolFromFullName(name, compilation);
-            if (typeSymbol == null ||
-                typeSymbol.TypeKind == TypeKind.Error ||
-                typeSymbol.TypeKind == TypeKind.Unknown)
+            if (
+                typeSymbol == null
+                || typeSymbol.TypeKind == TypeKind.Error
+                || typeSymbol.TypeKind == TypeKind.Unknown
+            )
             {
                 return null;
             }
 
-            return (EnvDTE.CodeType)CodeModelService.CreateCodeType(this.State, _projectId, typeSymbol);
+            return (EnvDTE.CodeType)
+                CodeModelService.CreateCodeType(this.State, _projectId, typeSymbol);
         }
 
-        public EnvDTE.CodeTypeRef CreateCodeTypeRef(object type)
-            => CodeModelService.CreateCodeTypeRef(this.State, _projectId, type);
+        public EnvDTE.CodeTypeRef CreateCodeTypeRef(object type) =>
+            CodeModelService.CreateCodeTypeRef(this.State, _projectId, type);
 
-        public bool IsValidID(string name)
-            => SyntaxFactsService.IsValidIdentifier(name);
+        public bool IsValidID(string name) => SyntaxFactsService.IsValidIdentifier(name);
 
-        public void Remove(object element)
-            => throw Exceptions.ThrowENotImpl();
+        public void Remove(object element) => throw Exceptions.ThrowENotImpl();
 
         public string DotNetNameFromLanguageSpecific(string languageName)
         {
@@ -171,8 +239,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             return MetadataNameHelpers.GetMetadataName(typeSymbol);
         }
 
-        public EnvDTE.CodeElement ElementFromID(string id)
-            => throw Exceptions.ThrowENotImpl();
+        public EnvDTE.CodeElement ElementFromID(string id) => throw Exceptions.ThrowENotImpl();
 
         public string LanguageSpecificNameFromDotNet(string dotNetName)
         {
@@ -180,7 +247,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             throw Exceptions.ThrowENotImpl();
         }
 
-        public void Synchronize()
-            => throw Exceptions.ThrowENotImpl();
+        public void Synchronize() => throw Exceptions.ThrowENotImpl();
     }
 }

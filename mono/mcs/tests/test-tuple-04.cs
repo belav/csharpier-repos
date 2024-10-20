@@ -2,16 +2,16 @@
 
 class Test
 {
-	public static int Main ()
-	{
-		var x = X.Test1 ();
-		if (x.b != true)
-			return 1;
+    public static int Main()
+    {
+        var x = X.Test1();
+        if (x.b != true)
+            return 1;
 
-		var z = X.Field;
-		if (z.z != false)
-			return 2;
+        var z = X.Field;
+        if (z.z != false)
+            return 2;
 
-		return 0;
-	}
+        return 0;
+    }
 }

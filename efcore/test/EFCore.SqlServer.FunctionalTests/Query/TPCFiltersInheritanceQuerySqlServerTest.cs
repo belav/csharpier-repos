@@ -3,11 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class TPCFiltersInheritanceQuerySqlServerTest : TPCFiltersInheritanceQueryTestBase<TPCFiltersInheritanceQuerySqlServerFixture>
+public class TPCFiltersInheritanceQuerySqlServerTest
+    : TPCFiltersInheritanceQueryTestBase<TPCFiltersInheritanceQuerySqlServerFixture>
 {
     public TPCFiltersInheritanceQuerySqlServerTest(
         TPCFiltersInheritanceQuerySqlServerFixture fixture,
-        ITestOutputHelper testOutputHelper)
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         Fixture.TestSqlLoggerFactory.Clear();
@@ -15,8 +17,8 @@ public class TPCFiltersInheritanceQuerySqlServerTest : TPCFiltersInheritanceQuer
     }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Can_use_of_type_animal(bool async)
     {
@@ -34,7 +36,8 @@ FROM (
 ) AS [t]
 WHERE [t].[CountryId] = 1
 ORDER BY [t].[Species]
-""");
+"""
+        );
     }
 
     public override async Task Can_use_is_kiwi(bool async)
@@ -49,7 +52,8 @@ FROM (
     FROM [Kiwi] AS [k]
 ) AS [t]
 WHERE [t].[CountryId] = 1
-""");
+"""
+        );
     }
 
     public override async Task Can_use_is_kiwi_with_other_predicate(bool async)
@@ -67,7 +71,8 @@ FROM (
     FROM [Kiwi] AS [k]
 ) AS [t]
 WHERE [t].[CountryId] = 1 AND [t].[Discriminator] = N'Kiwi' AND [t].[CountryId] = 1
-""");
+"""
+        );
     }
 
     public override async Task Can_use_is_kiwi_in_projection(bool async)
@@ -88,7 +93,8 @@ FROM (
     FROM [Kiwi] AS [k]
 ) AS [t]
 WHERE [t].[CountryId] = 1
-""");
+"""
+        );
     }
 
     public override async Task Can_use_of_type_bird(bool async)
@@ -107,7 +113,8 @@ FROM (
 ) AS [t]
 WHERE [t].[CountryId] = 1
 ORDER BY [t].[Species]
-""");
+"""
+        );
     }
 
     public override async Task Can_use_of_type_bird_predicate(bool async)
@@ -126,7 +133,8 @@ FROM (
 ) AS [t]
 WHERE [t].[CountryId] = 1
 ORDER BY [t].[Species]
-""");
+"""
+        );
     }
 
     public override async Task Can_use_of_type_bird_with_projection(bool async)
@@ -144,7 +152,8 @@ FROM (
     FROM [Kiwi] AS [k]
 ) AS [t]
 WHERE [t].[CountryId] = 1
-""");
+"""
+        );
     }
 
     public override async Task Can_use_of_type_bird_first(bool async)
@@ -163,7 +172,8 @@ FROM (
 ) AS [t]
 WHERE [t].[CountryId] = 1
 ORDER BY [t].[Species]
-""");
+"""
+        );
     }
 
     public override async Task Can_use_of_type_kiwi(bool async)
@@ -178,7 +188,8 @@ FROM (
     FROM [Kiwi] AS [k]
 ) AS [t]
 WHERE [t].[CountryId] = 1
-""");
+"""
+        );
     }
 
     public override async Task Can_use_derived_set(bool async)
@@ -190,7 +201,8 @@ WHERE [t].[CountryId] = 1
 SELECT [e].[Id], [e].[CountryId], [e].[Name], [e].[Species], [e].[EagleId], [e].[IsFlightless], [e].[Group]
 FROM [Eagle] AS [e]
 WHERE [e].[CountryId] = 1
-""");
+"""
+        );
     }
 
     public override async Task Can_use_IgnoreQueryFilters_and_GetDatabaseValues(bool async)
@@ -209,9 +221,10 @@ FROM [Eagle] AS [e]
 SELECT TOP(1) [e].[Id], [e].[CountryId], [e].[Name], [e].[Species], [e].[EagleId], [e].[IsFlightless], [e].[Group]
 FROM [Eagle] AS [e]
 WHERE [e].[Id] = @__p_0
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 }

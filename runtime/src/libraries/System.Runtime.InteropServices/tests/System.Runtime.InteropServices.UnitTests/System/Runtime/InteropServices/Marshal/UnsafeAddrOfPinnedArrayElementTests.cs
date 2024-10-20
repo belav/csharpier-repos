@@ -34,9 +34,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             Array array = new Point[]
             {
-                new Point() {x = 100, y = 100 },
-                new Point() {x = -1, y = -1 },
-                new Point() {x = 0, y = 0 }
+                new Point() { x = 100, y = 100 },
+                new Point() { x = -1, y = -1 },
+                new Point() { x = 0, y = 0 },
             };
 
             GCHandle handle = GCHandle.Alloc(array, GCHandleType.Pinned);
@@ -90,9 +90,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             var array = new Point[]
             {
-                new Point() {x = 100, y = 100 },
-                new Point() {x = -1, y = -1 },
-                new Point() {x = 0, y = 0 }
+                new Point() { x = 100, y = 100 },
+                new Point() { x = -1, y = -1 },
+                new Point() { x = 0, y = 0 },
             };
 
             GCHandle handle = GCHandle.Alloc(array, GCHandleType.Pinned);
@@ -122,8 +122,14 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void UnsafeAddrOfPinnedArrayElement_NullArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("arr", () => Marshal.UnsafeAddrOfPinnedArrayElement(null, 0));
-            AssertExtensions.Throws<ArgumentNullException>("arr", () => Marshal.UnsafeAddrOfPinnedArrayElement((int[])null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "arr",
+                () => Marshal.UnsafeAddrOfPinnedArrayElement(null, 0)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "arr",
+                () => Marshal.UnsafeAddrOfPinnedArrayElement((int[])null, 0)
+            );
         }
 
         public struct Point

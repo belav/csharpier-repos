@@ -15,11 +15,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 {
     internal abstract class AbstractDocumentDifferenceService : IDocumentDifferenceService
     {
-        public async Task<DocumentDifferenceResult?> GetDifferenceAsync(Document oldDocument, Document newDocument, CancellationToken cancellationToken)
+        public async Task<DocumentDifferenceResult?> GetDifferenceAsync(
+            Document oldDocument,
+            Document newDocument,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                var syntaxFactsService = newDocument.Project.Services.GetService<ISyntaxFactsService>();
+                var syntaxFactsService =
+                    newDocument.Project.Services.GetService<ISyntaxFactsService>();
                 if (syntaxFactsService == null)
                 {
                     // somehow, we can't get the service. without it, there is nothing we can do.
@@ -27,16 +32,20 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 }
                 // this is based on the implementation detail where opened documents use strong references
                 // to tree and text rather than recoverable versions.
-                if (!oldDocument.TryGetText(out var oldText) ||
-                    !newDocument.TryGetText(out var newText))
+                if (
+                    !oldDocument.TryGetText(out var oldText)
+                    || !newDocument.TryGetText(out var newText)
+                )
                 {
                     // no cheap way to determine top level changes. assumes top level has changed
                     return new DocumentDifferenceResult(InvocationReasons.DocumentChanged);
                 }
                 // quick check whether two tree versions are same
-                if (oldDocument.TryGetSyntaxVersion(out var oldVersion) &&
-                    newDocument.TryGetSyntaxVersion(out var newVersion) &&
-                    oldVersion.Equals(newVersion))
+                if (
+                    oldDocument.TryGetSyntaxVersion(out var oldVersion)
+                    && newDocument.TryGetSyntaxVersion(out var newVersion)
+                    && oldVersion.Equals(newVersion)
+                )
                 {
                     // nothing has changed. don't do anything.
                     // this could happen if a document is opened/closed without any buffer change
@@ -52,8 +61,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 var incrementalParsingCandidate = range.NewLength != newText.Length;
                 // see whether we can get it without explicit parsing
-                if (!oldDocument.TryGetSyntaxRoot(out var oldRoot) ||
-                    !newDocument.TryGetSyntaxRoot(out var newRoot))
+                if (
+                    !oldDocument.TryGetSyntaxRoot(out var oldRoot)
+                    || !newDocument.TryGetSyntaxRoot(out var newRoot)
+                )
                 {
                     if (!incrementalParsingCandidate)
                     {
@@ -62,16 +73,24 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     }
 
                     // explicitly parse them
-                    oldRoot = await oldDocument.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-                    newRoot = await newDocument.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                    oldRoot = await oldDocument
+                        .GetSyntaxRootAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    newRoot = await newDocument
+                        .GetSyntaxRootAsync(cancellationToken)
+                        .ConfigureAwait(false);
 
                     Contract.ThrowIfNull(oldRoot);
                     Contract.ThrowIfNull(newRoot);
                 }
 
                 // at this point, we must have these version already calculated
-                if (!oldDocument.TryGetTopLevelChangeTextVersion(out var oldTopLevelChangeVersion) ||
-                    !newDocument.TryGetTopLevelChangeTextVersion(out var newTopLevelChangeVersion))
+                if (
+                    !oldDocument.TryGetTopLevelChangeTextVersion(out var oldTopLevelChangeVersion)
+                    || !newDocument.TryGetTopLevelChangeTextVersion(
+                        out var newTopLevelChangeVersion
+                    )
+                )
                 {
                     throw ExceptionUtilities.Unreachable();
                 }
@@ -81,10 +100,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 {
                     if (oldTopLevelChangeVersion.Equals(newTopLevelChangeVersion))
                     {
-                        return new DocumentDifferenceResult(InvocationReasons.SyntaxChanged, GetChangedMember(syntaxFactsService, oldRoot, newRoot, range));
+                        return new DocumentDifferenceResult(
+                            InvocationReasons.SyntaxChanged,
+                            GetChangedMember(syntaxFactsService, oldRoot, newRoot, range)
+                        );
                     }
 
-                    return new DocumentDifferenceResult(InvocationReasons.DocumentChanged, GetBestGuessChangedMember(syntaxFactsService, oldRoot, newRoot, range));
+                    return new DocumentDifferenceResult(
+                        InvocationReasons.DocumentChanged,
+                        GetBestGuessChangedMember(syntaxFactsService, oldRoot, newRoot, range)
+                    );
                 }
 
                 if (oldTopLevelChangeVersion.Equals(newTopLevelChangeVersion))
@@ -94,14 +119,19 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 return new DocumentDifferenceResult(InvocationReasons.DocumentChanged);
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable();
             }
         }
 
         private static SyntaxNode? GetChangedMember(
-            ISyntaxFactsService syntaxFactsService, SyntaxNode oldRoot, SyntaxNode newRoot, TextChangeRange range)
+            ISyntaxFactsService syntaxFactsService,
+            SyntaxNode oldRoot,
+            SyntaxNode newRoot,
+            TextChangeRange range
+        )
         {
             // if either old or new tree contains skipped text, re-analyze whole document
             if (oldRoot.ContainsSkippedText || newRoot.ContainsSkippedText)
@@ -109,8 +139,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 return null;
             }
 
-            var oldMember = syntaxFactsService.GetContainingMemberDeclaration(oldRoot, range.Span.Start);
-            var newMember = syntaxFactsService.GetContainingMemberDeclaration(newRoot, range.Span.Start);
+            var oldMember = syntaxFactsService.GetContainingMemberDeclaration(
+                oldRoot,
+                range.Span.Start
+            );
+            var newMember = syntaxFactsService.GetContainingMemberDeclaration(
+                newRoot,
+                range.Span.Start
+            );
 
             // reached the top (compilation unit)
             if (oldMember == null || newMember == null)
@@ -135,7 +171,11 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         }
 
         private static SyntaxNode? GetBestGuessChangedMember(
-            ISyntaxFactsService syntaxFactsService, SyntaxNode oldRoot, SyntaxNode newRoot, TextChangeRange range)
+            ISyntaxFactsService syntaxFactsService,
+            SyntaxNode oldRoot,
+            SyntaxNode newRoot,
+            TextChangeRange range
+        )
         {
             // if either old or new tree contains skipped text, re-analyze whole document
             if (oldRoot.ContainsSkippedText || newRoot.ContainsSkippedText)
@@ -150,8 +190,14 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             // that would be preferable. but currently we don't have such thing.
 
             // get top level elements at the position where change has happened
-            var oldMember = syntaxFactsService.GetContainingMemberDeclaration(oldRoot, range.Span.Start);
-            var newMember = syntaxFactsService.GetContainingMemberDeclaration(newRoot, range.Span.Start);
+            var oldMember = syntaxFactsService.GetContainingMemberDeclaration(
+                oldRoot,
+                range.Span.Start
+            );
+            var newMember = syntaxFactsService.GetContainingMemberDeclaration(
+                newRoot,
+                range.Span.Start
+            );
 
             // reached the top (compilation unit)
             if (oldMember == null || newMember == null)
@@ -174,7 +220,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             // change happened inside of the old member, check whether new member seems just delta of that change
             var lengthDelta = range.NewLength - range.Span.Length;
 
-            return (oldMember.Span.Length + lengthDelta) == newMember.Span.Length ? newMember : null;
+            return (oldMember.Span.Length + lengthDelta) == newMember.Span.Length
+                ? newMember
+                : null;
         }
     }
 }

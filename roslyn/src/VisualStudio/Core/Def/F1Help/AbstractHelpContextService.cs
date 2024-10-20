@@ -23,27 +23,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.F1Help
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
                 propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
                 genericsOptions: SymbolDisplayGenericsOptions.None,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers);
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+            );
 
         protected static readonly SymbolDisplayFormat SpecialTypeFormat =
             new(
                 globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
                 genericsOptions: SymbolDisplayGenericsOptions.None,
-                miscellaneousOptions:
-                    SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         protected static readonly SymbolDisplayFormat NameFormat =
             new(
                 globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         public abstract string Language { get; }
         public abstract string Product { get; }
 
-        public abstract Task<string> GetHelpTermAsync(Document document, TextSpan textSpan, CancellationToken cancellationToken);
+        public abstract Task<string> GetHelpTermAsync(
+            Document document,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
 
         public abstract string FormatSymbol(ISymbol symbol);
     }

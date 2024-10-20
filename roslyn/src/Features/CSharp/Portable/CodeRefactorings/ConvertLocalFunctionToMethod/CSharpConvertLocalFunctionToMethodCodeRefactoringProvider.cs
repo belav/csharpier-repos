@@ -25,16 +25,25 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToMethod
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertLocalFunctionToMethod), Shared]
-    internal sealed class CSharpConvertLocalFunctionToMethodCodeRefactoringProvider : CodeRefactoringProvider
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertLocalFunctionToMethod
+        ),
+        Shared
+    ]
+    internal sealed class CSharpConvertLocalFunctionToMethodCodeRefactoringProvider
+        : CodeRefactoringProvider
     {
         private static readonly SyntaxAnnotation s_delegateToReplaceAnnotation = new();
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpConvertLocalFunctionToMethodCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpConvertLocalFunctionToMethodCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -44,7 +53,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 return;
             }
 
-            var localFunction = await context.TryGetRelevantNodeAsync<LocalFunctionStatementSyntax>().ConfigureAwait(false);
+            var localFunction = await context
+                .TryGetRelevantNodeAsync<LocalFunctionStatementSyntax>()
+                .ConfigureAwait(false);
             if (localFunction == null)
             {
                 return;
@@ -68,9 +79,20 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             context.RegisterRefactoring(
                 CodeAction.Create(
                     CSharpFeaturesResources.Convert_to_method,
-                    c => UpdateDocumentAsync(root, document, parentBlock, localFunction, container, context.Options, c),
-                    nameof(CSharpFeaturesResources.Convert_to_method)),
-                localFunction.Span);
+                    c =>
+                        UpdateDocumentAsync(
+                            root,
+                            document,
+                            parentBlock,
+                            localFunction,
+                            container,
+                            context.Options,
+                            c
+                        ),
+                    nameof(CSharpFeaturesResources.Convert_to_method)
+                ),
+                localFunction.Span
+            );
         }
 
         private static async Task<Document> UpdateDocumentAsync(
@@ -80,28 +102,42 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             LocalFunctionStatementSyntax localFunction,
             MemberDeclarationSyntax container,
             CodeGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var declaredSymbol = (IMethodSymbol)semanticModel.GetDeclaredSymbol(localFunction, cancellationToken);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var declaredSymbol = (IMethodSymbol)
+                semanticModel.GetDeclaredSymbol(localFunction, cancellationToken);
 
             var dataFlow = semanticModel.AnalyzeDataFlow(
-                localFunction.Body ?? (SyntaxNode)localFunction.ExpressionBody.Expression);
+                localFunction.Body ?? (SyntaxNode)localFunction.ExpressionBody.Expression
+            );
 
             // Exclude local function parameters in case they were captured inside the function body
-            var captures = dataFlow.CapturedInside.Except(dataFlow.VariablesDeclared).Except(declaredSymbol.Parameters).ToList();
+            var captures = dataFlow
+                .CapturedInside.Except(dataFlow.VariablesDeclared)
+                .Except(declaredSymbol.Parameters)
+                .ToList();
 
             // First, create a parameter per each capture so that we can pass them as arguments to the final method
             // Filter out `this` because it doesn't need a parameter, we will just make a non-static method for that
             // We also make a `ref` parameter here for each capture that is being written into inside the function
             var capturesAsParameters = captures
                 .Where(capture => !capture.IsThisParameter())
-                .Select(capture => CodeGenerationSymbolFactory.CreateParameterSymbol(
-                    attributes: default,
-                    refKind: dataFlow.WrittenInside.Contains(capture) ? RefKind.Ref : RefKind.None,
-                    isParams: false,
-                    type: capture.GetSymbolType(),
-                    name: capture.Name)).ToList();
+                .Select(capture =>
+                    CodeGenerationSymbolFactory.CreateParameterSymbol(
+                        attributes: default,
+                        refKind: dataFlow.WrittenInside.Contains(capture)
+                            ? RefKind.Ref
+                            : RefKind.None,
+                        isParams: false,
+                        type: capture.GetSymbolType(),
+                        name: capture.Name
+                    )
+                )
+                .ToList();
 
             // Find all enclosing type parameters e.g. from outer local functions and the containing member
             // We exclude the containing type itself which has type parameters accessible to all members
@@ -110,11 +146,19 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
 
             // We're going to remove unreferenced type parameters but we explicitly preserve
             // captures' types, just in case that they were not spelt out in the function body
-            var captureTypes = captures.SelectMany(capture => capture.GetSymbolType().GetReferencedTypeParameters());
-            RemoveUnusedTypeParameters(localFunction, semanticModel, typeParameters, reservedTypeParameters: captureTypes);
+            var captureTypes = captures.SelectMany(capture =>
+                capture.GetSymbolType().GetReferencedTypeParameters()
+            );
+            RemoveUnusedTypeParameters(
+                localFunction,
+                semanticModel,
+                typeParameters,
+                reservedTypeParameters: captureTypes
+            );
 
             var containerSymbol = semanticModel.GetDeclaredSymbol(container, cancellationToken);
-            var isStatic = containerSymbol.IsStatic || captures.All(capture => !capture.IsThisParameter());
+            var isStatic =
+                containerSymbol.IsStatic || captures.All(capture => !capture.IsThisParameter());
 
             // GetSymbolModifiers actually checks if the local function needs to be unsafe, not whether
             // it is declared as such, so this check we don't need to worry about whether the containing method
@@ -127,19 +171,39 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 containingType: declaredSymbol.ContainingType,
                 attributes: default,
                 accessibility: Accessibility.Private,
-                modifiers: new DeclarationModifiers(isStatic, isAsync: declaredSymbol.IsAsync, isUnsafe: needsUnsafe),
+                modifiers: new DeclarationModifiers(
+                    isStatic,
+                    isAsync: declaredSymbol.IsAsync,
+                    isUnsafe: needsUnsafe
+                ),
                 returnType: declaredSymbol.ReturnType,
                 refKind: declaredSymbol.RefKind,
                 explicitInterfaceImplementations: default,
                 name: methodName,
                 typeParameters: typeParameters.ToImmutableArray(),
-                parameters: parameters.AddRange(capturesAsParameters));
+                parameters: parameters.AddRange(capturesAsParameters)
+            );
 
-            var info = (CSharpCodeGenerationContextInfo)await document.GetCodeGenerationInfoAsync(CodeGenerationContext.Default, fallbackOptions, cancellationToken).ConfigureAwait(false);
-            var method = MethodGenerator.GenerateMethodDeclaration(methodSymbol, CodeGenerationDestination.Unspecified, info, cancellationToken);
+            var info = (CSharpCodeGenerationContextInfo)
+                await document
+                    .GetCodeGenerationInfoAsync(
+                        CodeGenerationContext.Default,
+                        fallbackOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+            var method = MethodGenerator.GenerateMethodDeclaration(
+                methodSymbol,
+                CodeGenerationDestination.Unspecified,
+                info,
+                cancellationToken
+            );
 
             if (localFunction.AttributeLists.Count > 0)
-                method = method.WithoutLeadingTrivia().WithAttributeLists(localFunction.AttributeLists).WithLeadingTrivia(method.GetLeadingTrivia());
+                method = method
+                    .WithoutLeadingTrivia()
+                    .WithAttributeLists(localFunction.AttributeLists)
+                    .WithLeadingTrivia(method.GetLeadingTrivia());
 
             var generator = CSharpSyntaxGenerator.Instance;
             var editor = new SyntaxEditor(root, generator);
@@ -148,10 +212,14 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             var identifierToken = needsRename ? methodName.ToIdentifierToken() : default;
             var supportsNonTrailing = SupportsNonTrailingNamedArguments(root.SyntaxTree.Options);
             var hasAdditionalArguments = !capturesAsParameters.IsEmpty();
-            var additionalTypeParameters = typeParameters.Except(declaredSymbol.TypeParameters).ToList();
+            var additionalTypeParameters = typeParameters
+                .Except(declaredSymbol.TypeParameters)
+                .ToList();
             var hasAdditionalTypeArguments = !additionalTypeParameters.IsEmpty();
             var additionalTypeArguments = hasAdditionalTypeArguments
-                ? additionalTypeParameters.Select(p => (TypeSyntax)p.Name.ToIdentifierName()).ToArray()
+                ? additionalTypeParameters
+                    .Select(p => (TypeSyntax)p.Name.ToIdentifierName())
+                    .ToArray()
                 : null;
 
             var anyDelegatesToReplace = false;
@@ -169,7 +237,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 }
 
                 // Using symbol to get type arguments, since it could be inferred and not present in the source
-                var symbol = semanticModel.GetSymbolInfo(node, cancellationToken).Symbol as IMethodSymbol;
+                var symbol =
+                    semanticModel.GetSymbolInfo(node, cancellationToken).Symbol as IMethodSymbol;
                 if (!Equals(symbol?.OriginalDefinition, declaredSymbol))
                 {
                     continue;
@@ -184,7 +253,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
 
                 if (hasAdditionalTypeArguments)
                 {
-                    var existingTypeArguments = symbol.TypeArguments.Select(s => s.GenerateTypeSyntax());
+                    var existingTypeArguments = symbol.TypeArguments.Select(s =>
+                        s.GenerateTypeSyntax()
+                    );
                     // Prepend additional type arguments to preserve lexical order in which they are defined
                     var typeArguments = additionalTypeArguments.Concat(existingTypeArguments);
                     currentNode = generator.WithTypeArguments(currentNode, typeArguments);
@@ -196,19 +267,27 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                     if (hasAdditionalArguments)
                     {
                         var shouldUseNamedArguments =
-                            !supportsNonTrailing && invocation.ArgumentList.Arguments.Any(arg => arg.NameColon != null);
+                            !supportsNonTrailing
+                            && invocation.ArgumentList.Arguments.Any(arg => arg.NameColon != null);
 
-                        var additionalArguments = capturesAsParameters.Select(p =>
-                            (ArgumentSyntax)GenerateArgument(p, p.Name, shouldUseNamedArguments)).ToArray();
+                        var additionalArguments = capturesAsParameters
+                            .Select(p =>
+                                (ArgumentSyntax)GenerateArgument(p, p.Name, shouldUseNamedArguments)
+                            )
+                            .ToArray();
 
-                        editor.ReplaceNode(invocation.ArgumentList,
-                            invocation.ArgumentList.AddArguments(additionalArguments));
+                        editor.ReplaceNode(
+                            invocation.ArgumentList,
+                            invocation.ArgumentList.AddArguments(additionalArguments)
+                        );
                     }
                 }
                 else if (hasAdditionalArguments || hasAdditionalTypeArguments)
                 {
                     // Convert local function delegates to lambda if the signature no longer matches
-                    currentNode = currentNode.WithAdditionalAnnotations(s_delegateToReplaceAnnotation);
+                    currentNode = currentNode.WithAdditionalAnnotations(
+                        s_delegateToReplaceAnnotation
+                    );
                     anyDelegatesToReplace = true;
                 }
 
@@ -232,7 +311,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             if (anyDelegatesToReplace)
             {
                 document = document.WithSyntaxRoot(editor.GetChangedRoot());
-                semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                semanticModel = await document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
                 editor = new SyntaxEditor(root, generator);
 
@@ -240,11 +321,24 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 {
                     var reservedNames = GetReservedNames(node, semanticModel, cancellationToken);
                     var parameterNames = GenerateUniqueParameterNames(parameters, reservedNames);
-                    var lambdaParameters = parameters.Zip(parameterNames, (p, name) => GenerateParameter(p, name));
-                    var lambdaArguments = parameters.Zip(parameterNames, (p, name) => GenerateArgument(p, name));
-                    var additionalArguments = capturesAsParameters.Select(p => GenerateArgument(p, p.Name));
-                    var newNode = generator.ValueReturningLambdaExpression(lambdaParameters,
-                        generator.InvocationExpression(node, lambdaArguments.Concat(additionalArguments)));
+                    var lambdaParameters = parameters.Zip(
+                        parameterNames,
+                        (p, name) => GenerateParameter(p, name)
+                    );
+                    var lambdaArguments = parameters.Zip(
+                        parameterNames,
+                        (p, name) => GenerateArgument(p, name)
+                    );
+                    var additionalArguments = capturesAsParameters.Select(p =>
+                        GenerateArgument(p, p.Name)
+                    );
+                    var newNode = generator.ValueReturningLambdaExpression(
+                        lambdaParameters,
+                        generator.InvocationExpression(
+                            node,
+                            lambdaArguments.Concat(additionalArguments)
+                        )
+                    );
 
                     newNode = newNode.WithAdditionalAnnotations(Simplifier.Annotation);
 
@@ -260,27 +354,50 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             return document.WithSyntaxRoot(editor.GetChangedRoot());
         }
 
-        private static bool SupportsNonTrailingNamedArguments(ParseOptions options)
-            => options.LanguageVersion() >= LanguageVersion.CSharp7_2;
+        private static bool SupportsNonTrailingNamedArguments(ParseOptions options) =>
+            options.LanguageVersion() >= LanguageVersion.CSharp7_2;
 
-        private static SyntaxNode GenerateArgument(IParameterSymbol p, string name, bool shouldUseNamedArguments = false)
-            => CSharpSyntaxGenerator.Instance.Argument(shouldUseNamedArguments ? name : null, p.RefKind, name.ToIdentifierName());
+        private static SyntaxNode GenerateArgument(
+            IParameterSymbol p,
+            string name,
+            bool shouldUseNamedArguments = false
+        ) =>
+            CSharpSyntaxGenerator.Instance.Argument(
+                shouldUseNamedArguments ? name : null,
+                p.RefKind,
+                name.ToIdentifierName()
+            );
 
-        private static List<string> GenerateUniqueParameterNames(ImmutableArray<IParameterSymbol> parameters, List<string> reservedNames)
-            => parameters.Select(p => NameGenerator.EnsureUniqueness(p.Name, reservedNames)).ToList();
+        private static List<string> GenerateUniqueParameterNames(
+            ImmutableArray<IParameterSymbol> parameters,
+            List<string> reservedNames
+        ) => parameters.Select(p => NameGenerator.EnsureUniqueness(p.Name, reservedNames)).ToList();
 
-        private static List<string> GetReservedNames(SyntaxNode node, SemanticModel semanticModel, CancellationToken cancellationToken)
-            => semanticModel.GetAllDeclaredSymbols(node.GetAncestor<MemberDeclarationSyntax>(), cancellationToken).Select(s => s.Name).ToList();
+        private static List<string> GetReservedNames(
+            SyntaxNode node,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) =>
+            semanticModel
+                .GetAllDeclaredSymbols(
+                    node.GetAncestor<MemberDeclarationSyntax>(),
+                    cancellationToken
+                )
+                .Select(s => s.Name)
+                .ToList();
 
         private static ParameterSyntax GenerateParameter(IParameterSymbol p, string name)
         {
-            return SyntaxFactory.Parameter(name.ToIdentifierToken())
+            return SyntaxFactory
+                .Parameter(name.ToIdentifierToken())
                 .WithModifiers(CSharpSyntaxGeneratorInternal.GetParameterModifiers(p.RefKind))
                 .WithType(p.Type.GenerateTypeSyntax());
         }
 
         private static MethodDeclarationSyntax WithBodyFrom(
-            MethodDeclarationSyntax method, LocalFunctionStatementSyntax localFunction)
+            MethodDeclarationSyntax method,
+            LocalFunctionStatementSyntax localFunction
+        )
         {
             return method
                 .WithExpressionBody(localFunction.ExpressionBody)
@@ -288,11 +405,13 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 .WithBody(localFunction.Body);
         }
 
-        private static void AddCapturedTypeParameters(ISymbol symbol, List<ITypeParameterSymbol> typeParameters)
+        private static void AddCapturedTypeParameters(
+            ISymbol symbol,
+            List<ITypeParameterSymbol> typeParameters
+        )
         {
             var containingSymbol = symbol.ContainingSymbol;
-            if (containingSymbol != null &&
-                containingSymbol.Kind != SymbolKind.NamedType)
+            if (containingSymbol != null && containingSymbol.Kind != SymbolKind.NamedType)
             {
                 AddCapturedTypeParameters(containingSymbol, typeParameters);
             }
@@ -304,13 +423,17 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             SyntaxNode localFunction,
             SemanticModel semanticModel,
             List<ITypeParameterSymbol> typeParameters,
-            IEnumerable<ITypeParameterSymbol> reservedTypeParameters)
+            IEnumerable<ITypeParameterSymbol> reservedTypeParameters
+        )
         {
             var unusedTypeParameters = typeParameters.ToList();
             foreach (var id in localFunction.DescendantNodes().OfType<IdentifierNameSyntax>())
             {
                 var symbol = semanticModel.GetSymbolInfo(id).Symbol;
-                if (symbol != null && symbol.OriginalDefinition is ITypeParameterSymbol typeParameter)
+                if (
+                    symbol != null
+                    && symbol.OriginalDefinition is ITypeParameterSymbol typeParameter
+                )
                 {
                     unusedTypeParameters.Remove(typeParameter);
                 }
@@ -323,7 +446,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
         {
             return NameGenerator.EnsureUniqueness(
                 baseName: declaredSymbol.Name,
-                reservedNames: declaredSymbol.ContainingType.GetMembers().Select(m => m.Name));
+                reservedNames: declaredSymbol.ContainingType.GetMembers().Select(m => m.Name)
+            );
         }
     }
 }

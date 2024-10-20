@@ -20,8 +20,14 @@ namespace Microsoft.Extensions.Logging
         /// <param name="configuration">This method is retained only for compatibility.</param>
         /// <returns>This method is retained only for compatibility.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).", error: true)]
-        public static Logging.ILoggerFactory AddConsole(this Logging.ILoggerFactory factory, Extensions.Configuration.IConfiguration configuration)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static Logging.ILoggerFactory AddConsole(
+            this Logging.ILoggerFactory factory,
+            Extensions.Configuration.IConfiguration configuration
+        )
         {
             var settings = new ConfigurationConsoleLoggerSettings(configuration);
             return factory.AddConsole(settings);
@@ -34,10 +40,18 @@ namespace Microsoft.Extensions.Logging
         /// <param name="settings">This method is retained only for compatibility.</param>
         /// <returns>This method is retained only for compatibility.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).", error: true)]
-        public static Logging.ILoggerFactory AddConsole(this Logging.ILoggerFactory factory, Console.IConsoleLoggerSettings settings)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static Logging.ILoggerFactory AddConsole(
+            this Logging.ILoggerFactory factory,
+            Console.IConsoleLoggerSettings settings
+        )
         {
-            factory.AddProvider(new ConsoleLoggerProvider(ConsoleLoggerSettingsAdapter.GetOptionsMonitor(settings)));
+            factory.AddProvider(
+                new ConsoleLoggerProvider(ConsoleLoggerSettingsAdapter.GetOptionsMonitor(settings))
+            );
             return factory;
         }
 
@@ -49,8 +63,15 @@ namespace Microsoft.Extensions.Logging
         /// <param name="includeScopes">This method is retained only for compatibility.</param>
         /// <returns>This method is retained only for compatibility.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).", error: true)]
-        public static Logging.ILoggerFactory AddConsole(this Logging.ILoggerFactory factory, Logging.LogLevel minLevel, bool includeScopes)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static Logging.ILoggerFactory AddConsole(
+            this Logging.ILoggerFactory factory,
+            Logging.LogLevel minLevel,
+            bool includeScopes
+        )
         {
             factory.AddConsole((n, l) => l >= LogLevel.Information, includeScopes);
             return factory;
@@ -63,8 +84,14 @@ namespace Microsoft.Extensions.Logging
         /// <param name="minLevel">This method is retained only for compatibility.</param>
         /// <returns>This method is retained only for compatibility.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).", error: true)]
-        public static Logging.ILoggerFactory AddConsole(this Logging.ILoggerFactory factory, Logging.LogLevel minLevel)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static Logging.ILoggerFactory AddConsole(
+            this Logging.ILoggerFactory factory,
+            Logging.LogLevel minLevel
+        )
         {
             factory.AddConsole(minLevel, includeScopes: false);
             return factory;
@@ -77,8 +104,14 @@ namespace Microsoft.Extensions.Logging
         /// <param name="includeScopes">This method is retained only for compatibility.</param>
         /// <returns>This method is retained only for compatibility.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).", error: true)]
-        public static Logging.ILoggerFactory AddConsole(this Logging.ILoggerFactory factory, bool includeScopes)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static Logging.ILoggerFactory AddConsole(
+            this Logging.ILoggerFactory factory,
+            bool includeScopes
+        )
         {
             factory.AddConsole((n, l) => l >= LogLevel.Information, includeScopes);
             return factory;
@@ -92,8 +125,15 @@ namespace Microsoft.Extensions.Logging
         /// <param name="includeScopes">This method is retained only for compatibility.</param>
         /// <returns>This method is retained only for compatibility.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).", error: true)]
-        public static Logging.ILoggerFactory AddConsole(this Logging.ILoggerFactory factory, System.Func<string, Logging.LogLevel, bool> filter, bool includeScopes)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static Logging.ILoggerFactory AddConsole(
+            this Logging.ILoggerFactory factory,
+            System.Func<string, Logging.LogLevel, bool> filter,
+            bool includeScopes
+        )
         {
             factory.AddConsole(new ConsoleLoggerSettings() { IncludeScopes = includeScopes });
             return factory;
@@ -106,8 +146,14 @@ namespace Microsoft.Extensions.Logging
         /// <param name="filter">This method is retained only for compatibility.</param>
         /// <returns>This method is retained only for compatibility.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).", error: true)]
-        public static Logging.ILoggerFactory AddConsole(this Logging.ILoggerFactory factory, System.Func<string, Logging.LogLevel, bool> filter)
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).",
+            error: true
+        )]
+        public static Logging.ILoggerFactory AddConsole(
+            this Logging.ILoggerFactory factory,
+            System.Func<string, Logging.LogLevel, bool> filter
+        )
         {
             factory.AddConsole(filter, includeScopes: false);
             return factory;
@@ -119,24 +165,32 @@ namespace Microsoft.Extensions.Logging
         /// <param name="factory">This method is retained only for compatibility.</param>
         /// <returns>This method is retained only for compatibility.</returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).", error: true)]
+        [Obsolete(
+            "This method is retained only for compatibility. The recommended alternative is AddConsole(this ILoggingBuilder builder).",
+            error: true
+        )]
         public static Logging.ILoggerFactory AddConsole(this Logging.ILoggerFactory factory)
         {
             return factory.AddConsole(includeScopes: false);
         }
 
         [Obsolete]
-        private sealed class ConsoleLoggerSettingsAdapter : IConfigureOptions<ConsoleLoggerOptions>, IOptionsChangeTokenSource<ConsoleLoggerOptions>
+        private sealed class ConsoleLoggerSettingsAdapter
+            : IConfigureOptions<ConsoleLoggerOptions>,
+                IOptionsChangeTokenSource<ConsoleLoggerOptions>
         {
             private IConsoleLoggerSettings _settings;
+
             private ConsoleLoggerSettingsAdapter(IConsoleLoggerSettings settings)
             {
                 _settings = settings;
             }
 
-            IChangeToken IOptionsChangeTokenSource<ConsoleLoggerOptions>.GetChangeToken() => _settings.ChangeToken ?? NullChangeToken.Instance;
+            IChangeToken IOptionsChangeTokenSource<ConsoleLoggerOptions>.GetChangeToken() =>
+                _settings.ChangeToken ?? NullChangeToken.Instance;
 
-            string IOptionsChangeTokenSource<ConsoleLoggerOptions>.Name => Options.Options.DefaultName;
+            string IOptionsChangeTokenSource<ConsoleLoggerOptions>.Name =>
+                Options.Options.DefaultName;
 
             void IConfigureOptions<ConsoleLoggerOptions>.Configure(ConsoleLoggerOptions options)
             {
@@ -151,11 +205,18 @@ namespace Microsoft.Extensions.Logging
                 }
             }
 
-            internal static OptionsMonitor<ConsoleLoggerOptions> GetOptionsMonitor(IConsoleLoggerSettings settings)
+            internal static OptionsMonitor<ConsoleLoggerOptions> GetOptionsMonitor(
+                IConsoleLoggerSettings settings
+            )
             {
                 ConsoleLoggerSettingsAdapter adapter = new(settings);
-                OptionsFactory<ConsoleLoggerOptions> factory = new(new IConfigureOptions<ConsoleLoggerOptions>[] { adapter }, Array.Empty<IPostConfigureOptions<ConsoleLoggerOptions>>());
-                IOptionsChangeTokenSource<ConsoleLoggerOptions>[] sources = new IOptionsChangeTokenSource<ConsoleLoggerOptions>[] { adapter };
+                OptionsFactory<ConsoleLoggerOptions> factory =
+                    new(
+                        new IConfigureOptions<ConsoleLoggerOptions>[] { adapter },
+                        Array.Empty<IPostConfigureOptions<ConsoleLoggerOptions>>()
+                    );
+                IOptionsChangeTokenSource<ConsoleLoggerOptions>[] sources =
+                    new IOptionsChangeTokenSource<ConsoleLoggerOptions>[] { adapter };
                 OptionsCache<ConsoleLoggerOptions> cache = new();
 
                 return new OptionsMonitor<ConsoleLoggerOptions>(factory, sources, cache);
@@ -165,10 +226,15 @@ namespace Microsoft.Extensions.Logging
         private sealed class NullChangeToken : IChangeToken, IDisposable
         {
             internal static NullChangeToken Instance { get; } = new NullChangeToken();
+
             private NullChangeToken() { }
+
             public bool HasChanged => false;
             public bool ActiveChangeCallbacks => false;
-            public IDisposable RegisterChangeCallback(Action<object?> callback, object? state) => this;
+
+            public IDisposable RegisterChangeCallback(Action<object?> callback, object? state) =>
+                this;
+
             public void Dispose() { }
         }
     }

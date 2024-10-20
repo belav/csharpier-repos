@@ -12,7 +12,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void IsTypeVisibleFromCom_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("t", () => Marshal.IsTypeVisibleFromCom(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "t",
+                () => Marshal.IsTypeVisibleFromCom(null)
+            );
         }
     }
 }

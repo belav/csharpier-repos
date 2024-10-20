@@ -86,7 +86,11 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for reading.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static long Read(SafeFileHandle handle, IReadOnlyList<Memory<byte>> buffers, long fileOffset)
+        public static long Read(
+            SafeFileHandle handle,
+            IReadOnlyList<Memory<byte>> buffers,
+            long fileOffset
+        )
         {
             ValidateInput(handle, fileOffset);
             ValidateBuffers(buffers);
@@ -110,7 +114,12 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for reading.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static ValueTask<int> ReadAsync(SafeFileHandle handle, Memory<byte> buffer, long fileOffset, CancellationToken cancellationToken = default)
+        public static ValueTask<int> ReadAsync(
+            SafeFileHandle handle,
+            Memory<byte> buffer,
+            long fileOffset,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateInput(handle, fileOffset);
 
@@ -138,7 +147,12 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for reading.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static ValueTask<long> ReadAsync(SafeFileHandle handle, IReadOnlyList<Memory<byte>> buffers, long fileOffset, CancellationToken cancellationToken = default)
+        public static ValueTask<long> ReadAsync(
+            SafeFileHandle handle,
+            IReadOnlyList<Memory<byte>> buffers,
+            long fileOffset,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateInput(handle, fileOffset);
             ValidateBuffers(buffers);
@@ -186,7 +200,11 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for writing.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static void Write(SafeFileHandle handle, IReadOnlyList<ReadOnlyMemory<byte>> buffers, long fileOffset)
+        public static void Write(
+            SafeFileHandle handle,
+            IReadOnlyList<ReadOnlyMemory<byte>> buffers,
+            long fileOffset
+        )
         {
             ValidateInput(handle, fileOffset);
             ValidateBuffers(buffers);
@@ -210,7 +228,12 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for writing.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static ValueTask WriteAsync(SafeFileHandle handle, ReadOnlyMemory<byte> buffer, long fileOffset, CancellationToken cancellationToken = default)
+        public static ValueTask WriteAsync(
+            SafeFileHandle handle,
+            ReadOnlyMemory<byte> buffer,
+            long fileOffset,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateInput(handle, fileOffset);
 
@@ -238,7 +261,12 @@ namespace System.IO
         /// <exception cref="T:System.UnauthorizedAccessException"><paramref name="handle" /> was not opened for writing.</exception>
         /// <exception cref="T:System.IO.IOException">An I/O error occurred.</exception>
         /// <remarks>Position of the file is not advanced.</remarks>
-        public static ValueTask WriteAsync(SafeFileHandle handle, IReadOnlyList<ReadOnlyMemory<byte>> buffers, long fileOffset, CancellationToken cancellationToken = default)
+        public static ValueTask WriteAsync(
+            SafeFileHandle handle,
+            IReadOnlyList<ReadOnlyMemory<byte>> buffers,
+            long fileOffset,
+            CancellationToken cancellationToken = default
+        )
         {
             ValidateInput(handle, fileOffset);
             ValidateBuffers(buffers);
@@ -281,7 +309,11 @@ namespace System.IO
             FileStreamHelpers.FlushToDisk(handle);
         }
 
-        private static void ValidateInput(SafeFileHandle handle, long fileOffset, bool allowUnseekableHandles = false)
+        private static void ValidateInput(
+            SafeFileHandle handle,
+            long fileOffset,
+            bool allowUnseekableHandles = false
+        )
         {
             if (handle is null)
             {

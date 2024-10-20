@@ -15,25 +15,39 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.ConvertNumericLiteral;
 
-internal abstract class AbstractConvertNumericLiteralCodeRefactoringProvider<TNumericLiteralExpression>(string hexPrefix, string binaryPrefix)
-    : CodeRefactoringProvider
+internal abstract class AbstractConvertNumericLiteralCodeRefactoringProvider<TNumericLiteralExpression>(
+    string hexPrefix,
+    string binaryPrefix
+) : CodeRefactoringProvider
     where TNumericLiteralExpression : SyntaxNode
 {
-    private enum NumericKind { Unknown, Decimal, Binary, Hexadecimal }
+    private enum NumericKind
+    {
+        Unknown,
+        Decimal,
+        Binary,
+        Hexadecimal,
+    }
 
-    private readonly Regex _regex = new($"({hexPrefix}|{binaryPrefix})?([_0-9a-f]+)(.*)", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+    private readonly Regex _regex =
+        new(
+            $"({hexPrefix}|{binaryPrefix})?([_0-9a-f]+)(.*)",
+            RegexOptions.IgnoreCase | RegexOptions.Compiled
+        );
 
     /// <summary>
     /// Converting numbers is a fairly uncommon task.  Put these at the end of the list after more relevant
     /// refactorings.
     /// </summary>
-    protected override CodeActionRequestPriority ComputeRequestPriority()
-        => CodeActionRequestPriority.Low;
+    protected override CodeActionRequestPriority ComputeRequestPriority() =>
+        CodeActionRequestPriority.Low;
 
     public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
     {
         var (document, _, cancellationToken) = context;
-        var numericLiteralNode = await context.TryGetRelevantNodeAsync<TNumericLiteralExpression>().ConfigureAwait(false);
+        var numericLiteralNode = await context
+            .TryGetRelevantNodeAsync<TNumericLiteralExpression>()
+            .ConfigureAwait(false);
         var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
         if (!syntaxFacts.IsNumericLiteralExpression(numericLiteralNode))
@@ -43,7 +57,9 @@ internal abstract class AbstractConvertNumericLiteralCodeRefactoringProvider<TNu
         if (numericToken.ContainsDiagnostics)
             return;
 
-        var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+        var semanticModel = await document
+            .GetRequiredSemanticModelAsync(cancellationToken)
+            .ConfigureAwait(false);
         var symbol = semanticModel.GetTypeInfo(numericLiteralNode, cancellationToken).Type;
         if (symbol == null)
             return;
@@ -55,12 +71,15 @@ internal abstract class AbstractConvertNumericLiteralCodeRefactoringProvider<TNu
         if (!valueOpt.HasValue)
             return;
 
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
 
         var value = IntegerUtilities.ToInt64(valueOpt.Value);
         var numericText = numericToken.ToString();
         var (prefix, number, suffix) = GetNumericLiteralParts(numericText);
-        var kind = string.IsNullOrEmpty(prefix) ? NumericKind.Decimal
+        var kind =
+            string.IsNullOrEmpty(prefix) ? NumericKind.Decimal
             : prefix.Equals(hexPrefix, StringComparison.OrdinalIgnoreCase) ? NumericKind.Hexadecimal
             : prefix.Equals(binaryPrefix, StringComparison.OrdinalIgnoreCase) ? NumericKind.Binary
             : NumericKind.Unknown;
@@ -74,25 +93,50 @@ internal abstract class AbstractConvertNumericLiteralCodeRefactoringProvider<TNu
             result.Add(CreateCodeAction(value.ToString(), FeaturesResources.Convert_to_decimal));
 
         if (kind != NumericKind.Binary)
-            result.Add(CreateCodeAction(binaryPrefix + Convert.ToString(value, toBase: 2), FeaturesResources.Convert_to_binary));
+            result.Add(
+                CreateCodeAction(
+                    binaryPrefix + Convert.ToString(value, toBase: 2),
+                    FeaturesResources.Convert_to_binary
+                )
+            );
 
         if (kind != NumericKind.Hexadecimal)
-            result.Add(CreateCodeAction(hexPrefix + value.ToString("X"), FeaturesResources.Convert_to_hex));
+            result.Add(
+                CreateCodeAction(hexPrefix + value.ToString("X"), FeaturesResources.Convert_to_hex)
+            );
 
         const string DigitSeparator = "_";
         if (numericText.Contains(DigitSeparator))
         {
-            result.Add(CreateCodeAction(prefix + number.Replace(DigitSeparator, string.Empty), FeaturesResources.Remove_separators));
+            result.Add(
+                CreateCodeAction(
+                    prefix + number.Replace(DigitSeparator, string.Empty),
+                    FeaturesResources.Remove_separators
+                )
+            );
         }
         else
         {
-            result.AsRef().AddIfNotNull(kind switch
-            {
-                NumericKind.Decimal when number.Length > 3 => CreateCodeAction(AddSeparators(number, interval: 3), FeaturesResources.Separate_thousands),
-                NumericKind.Hexadecimal when number.Length > 4 => CreateCodeAction(hexPrefix + AddSeparators(number, interval: 4), FeaturesResources.Separate_words),
-                NumericKind.Binary when number.Length > 4 => CreateCodeAction(binaryPrefix + AddSeparators(number, interval: 4), FeaturesResources.Separate_nibbles),
-                _ => null,
-            });
+            result
+                .AsRef()
+                .AddIfNotNull(
+                    kind switch
+                    {
+                        NumericKind.Decimal when number.Length > 3 => CreateCodeAction(
+                            AddSeparators(number, interval: 3),
+                            FeaturesResources.Separate_thousands
+                        ),
+                        NumericKind.Hexadecimal when number.Length > 4 => CreateCodeAction(
+                            hexPrefix + AddSeparators(number, interval: 4),
+                            FeaturesResources.Separate_words
+                        ),
+                        NumericKind.Binary when number.Length > 4 => CreateCodeAction(
+                            binaryPrefix + AddSeparators(number, interval: 4),
+                            FeaturesResources.Separate_nibbles
+                        ),
+                        _ => null,
+                    }
+                );
         }
 
         if (result.Count == 1)
@@ -101,27 +145,47 @@ internal abstract class AbstractConvertNumericLiteralCodeRefactoringProvider<TNu
         }
         else if (result.Count > 1)
         {
-            context.RegisterRefactoring(CodeAction.Create(
-                FeaturesResources.Convert_number,
-                result.ToImmutableAndClear(),
-                isInlinable: true));
+            context.RegisterRefactoring(
+                CodeAction.Create(
+                    FeaturesResources.Convert_number,
+                    result.ToImmutableAndClear(),
+                    isInlinable: true
+                )
+            );
         }
 
-        CodeAction CreateCodeAction(string text, string title)
-            => CodeAction.Create(title, c => ReplaceTokenAsync(document, root, numericToken, value, text, suffix), title);
+        CodeAction CreateCodeAction(string text, string title) =>
+            CodeAction.Create(
+                title,
+                c => ReplaceTokenAsync(document, root, numericToken, value, text, suffix),
+                title
+            );
 
         static string AddSeparators(string numericText, int interval)
         {
             // Insert digit separators in the given interval.
-            var result = Regex.Replace(numericText, $"(.{{{interval}}})", "_$1", RegexOptions.RightToLeft);
+            var result = Regex.Replace(
+                numericText,
+                $"(.{{{interval}}})",
+                "_$1",
+                RegexOptions.RightToLeft
+            );
             // Fix for the case "0x_1111" that is not supported yet.
             return result[0] == '_' ? result[1..] : result;
         }
 
-        static Task<Document> ReplaceTokenAsync(Document document, SyntaxNode root, SyntaxToken numericToken, long value, string text, string suffix)
+        static Task<Document> ReplaceTokenAsync(
+            Document document,
+            SyntaxNode root,
+            SyntaxToken numericToken,
+            long value,
+            string text,
+            string suffix
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
-            var updatedToken = generator.NumericLiteralToken(text + suffix, (ulong)value)
+            var updatedToken = generator
+                .NumericLiteralToken(text + suffix, (ulong)value)
                 .WithTriviaFrom(numericToken);
             var updatedRoot = root.ReplaceToken(numericToken, updatedToken);
             return Task.FromResult(document.WithSyntaxRoot(updatedRoot));

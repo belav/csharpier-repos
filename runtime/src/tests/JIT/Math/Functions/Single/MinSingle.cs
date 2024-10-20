@@ -16,7 +16,9 @@ namespace System.MathBenchmarks
 
         public static void MinTest()
         {
-            float result = 0.0f, val1 = 1.0f, val2 = 1.0f + minDelta;
+            float result = 0.0f,
+                val1 = 1.0f,
+                val2 = 1.0f + minDelta;
 
             for (int iteration = 0; iteration < MathTests.Iterations; iteration++)
             {
@@ -28,7 +30,9 @@ namespace System.MathBenchmarks
 
             if (diff > MathTests.SingleEpsilon)
             {
-                throw new Exception($"Expected Result {minExpectedResult,10:g9}; Actual Result {result,10:g9}");
+                throw new Exception(
+                    $"Expected Result {minExpectedResult, 10:g9}; Actual Result {result, 10:g9}"
+                );
             }
         }
     }

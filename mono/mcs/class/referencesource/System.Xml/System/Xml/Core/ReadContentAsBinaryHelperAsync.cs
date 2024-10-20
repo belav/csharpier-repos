@@ -1,209 +1,277 @@
-
 using System.Diagnostics;
-
 using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    internal partial class ReadContentAsBinaryHelper {
+    internal partial class ReadContentAsBinaryHelper
+    {
+        // Internal methods
 
-// Internal methods 
-
-        internal async Task< int > ReadContentAsBase64Async( byte[] buffer, int index, int count ) {
+        internal async Task<int> ReadContentAsBase64Async(byte[] buffer, int index, int count)
+        {
             // check arguments
-            if ( buffer == null ) {
-                throw new ArgumentNullException( "buffer" );
+            if (buffer == null)
+            {
+                throw new ArgumentNullException("buffer");
             }
-            if ( count < 0 ) {
-                throw new ArgumentOutOfRangeException( "count" );
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException("count");
             }
-            if ( index < 0 ) {
-                throw new ArgumentOutOfRangeException( "index" );
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException("index");
             }
-            if ( buffer.Length - index < count ) {
-                throw new ArgumentOutOfRangeException( "count" );
+            if (buffer.Length - index < count)
+            {
+                throw new ArgumentOutOfRangeException("count");
             }
 
-            switch ( state ) {
+            switch (state)
+            {
                 case State.None:
-                    if ( !reader.CanReadContentAs() ) {
-                        throw reader.CreateReadContentAsException( "ReadContentAsBase64" );
+                    if (!reader.CanReadContentAs())
+                    {
+                        throw reader.CreateReadContentAsException("ReadContentAsBase64");
                     }
-                    if ( !await InitAsync().ConfigureAwait(false) ) {
+                    if (!await InitAsync().ConfigureAwait(false))
+                    {
                         return 0;
                     }
                     break;
                 case State.InReadContent:
                     // if we have a correct decoder, go read
-                    if ( decoder == base64Decoder ) {
+                    if (decoder == base64Decoder)
+                    {
                         // read more binary data
-                        return await ReadContentAsBinaryAsync( buffer, index, count ).ConfigureAwait(false);
+                        return await ReadContentAsBinaryAsync(buffer, index, count)
+                            .ConfigureAwait(false);
                     }
                     break;
                 case State.InReadElementContent:
-                    throw new InvalidOperationException( Res.GetString( Res.Xml_MixingBinaryContentMethods ) );
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.Xml_MixingBinaryContentMethods)
+                    );
                 default:
-                    Debug.Assert( false );
+                    Debug.Assert(false);
                     return 0;
             }
 
-            Debug.Assert( state == State.InReadContent );
+            Debug.Assert(state == State.InReadContent);
 
             // setup base64 decoder
             InitBase64Decoder();
 
             // read more binary data
-            return await ReadContentAsBinaryAsync( buffer, index, count ).ConfigureAwait(false);
+            return await ReadContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
         }
 
-        internal async Task< int > ReadContentAsBinHexAsync( byte[] buffer, int index, int count ) {
+        internal async Task<int> ReadContentAsBinHexAsync(byte[] buffer, int index, int count)
+        {
             // check arguments
-            if ( buffer == null ) {
-                throw new ArgumentNullException( "buffer" );
+            if (buffer == null)
+            {
+                throw new ArgumentNullException("buffer");
             }
-            if ( count < 0 ) {
-                throw new ArgumentOutOfRangeException( "count" );
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException("count");
             }
-            if ( index < 0 ) {
-                throw new ArgumentOutOfRangeException( "index" );
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException("index");
             }
-            if ( buffer.Length - index < count ) {
-                throw new ArgumentOutOfRangeException( "count" );
+            if (buffer.Length - index < count)
+            {
+                throw new ArgumentOutOfRangeException("count");
             }
 
-            switch ( state ) {
+            switch (state)
+            {
                 case State.None:
-                    if ( !reader.CanReadContentAs() ) {
-                        throw reader.CreateReadContentAsException( "ReadContentAsBinHex" );
+                    if (!reader.CanReadContentAs())
+                    {
+                        throw reader.CreateReadContentAsException("ReadContentAsBinHex");
                     }
-                    if ( !await InitAsync().ConfigureAwait(false) ) {
+                    if (!await InitAsync().ConfigureAwait(false))
+                    {
                         return 0;
                     }
                     break;
                 case State.InReadContent:
                     // if we have a correct decoder, go read
-                    if ( decoder == binHexDecoder ) {
+                    if (decoder == binHexDecoder)
+                    {
                         // read more binary data
-                        return await ReadContentAsBinaryAsync( buffer, index, count ).ConfigureAwait(false);
+                        return await ReadContentAsBinaryAsync(buffer, index, count)
+                            .ConfigureAwait(false);
                     }
                     break;
                 case State.InReadElementContent:
-                    throw new InvalidOperationException( Res.GetString( Res.Xml_MixingBinaryContentMethods ) );
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.Xml_MixingBinaryContentMethods)
+                    );
                 default:
-                    Debug.Assert( false );
+                    Debug.Assert(false);
                     return 0;
-            }    
+            }
 
-            Debug.Assert( state == State.InReadContent );
+            Debug.Assert(state == State.InReadContent);
 
             // setup binhex decoder
             InitBinHexDecoder();
 
             // read more binary data
-            return await ReadContentAsBinaryAsync( buffer, index, count ).ConfigureAwait(false);
+            return await ReadContentAsBinaryAsync(buffer, index, count).ConfigureAwait(false);
         }
 
-        internal async Task< int > ReadElementContentAsBase64Async( byte[] buffer, int index, int count ) {
+        internal async Task<int> ReadElementContentAsBase64Async(
+            byte[] buffer,
+            int index,
+            int count
+        )
+        {
             // check arguments
-            if ( buffer == null ) {
-                throw new ArgumentNullException( "buffer" );
+            if (buffer == null)
+            {
+                throw new ArgumentNullException("buffer");
             }
-            if ( count < 0 ) {
-                throw new ArgumentOutOfRangeException( "count" );
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException("count");
             }
-            if ( index < 0 ) {
-                throw new ArgumentOutOfRangeException( "index" );
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException("index");
             }
-            if ( buffer.Length - index < count ) {
-                throw new ArgumentOutOfRangeException( "count" );
+            if (buffer.Length - index < count)
+            {
+                throw new ArgumentOutOfRangeException("count");
             }
 
-            switch ( state ) {
+            switch (state)
+            {
                 case State.None:
-                    if ( reader.NodeType != XmlNodeType.Element ) {
-                        throw reader.CreateReadElementContentAsException( "ReadElementContentAsBase64" );
+                    if (reader.NodeType != XmlNodeType.Element)
+                    {
+                        throw reader.CreateReadElementContentAsException(
+                            "ReadElementContentAsBase64"
+                        );
                     }
-                    if ( !await InitOnElementAsync().ConfigureAwait(false) ) {
+                    if (!await InitOnElementAsync().ConfigureAwait(false))
+                    {
                         return 0;
                     }
                     break;
                 case State.InReadContent:
-                    throw new InvalidOperationException( Res.GetString( Res.Xml_MixingBinaryContentMethods ) );
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.Xml_MixingBinaryContentMethods)
+                    );
                 case State.InReadElementContent:
                     // if we have a correct decoder, go read
-                    if ( decoder == base64Decoder ) {
+                    if (decoder == base64Decoder)
+                    {
                         // read more binary data
-                        return await ReadElementContentAsBinaryAsync( buffer, index, count ).ConfigureAwait(false);
+                        return await ReadElementContentAsBinaryAsync(buffer, index, count)
+                            .ConfigureAwait(false);
                     }
                     break;
                 default:
-                    Debug.Assert( false );
+                    Debug.Assert(false);
                     return 0;
-            }    
+            }
 
-            Debug.Assert( state == State.InReadElementContent );
+            Debug.Assert(state == State.InReadElementContent);
 
             // setup base64 decoder
             InitBase64Decoder();
 
             // read more binary data
-            return await ReadElementContentAsBinaryAsync( buffer, index, count ).ConfigureAwait(false);
+            return await ReadElementContentAsBinaryAsync(buffer, index, count)
+                .ConfigureAwait(false);
         }
 
-        internal async Task< int > ReadElementContentAsBinHexAsync( byte[] buffer, int index, int count ) {
+        internal async Task<int> ReadElementContentAsBinHexAsync(
+            byte[] buffer,
+            int index,
+            int count
+        )
+        {
             // check arguments
-            if ( buffer == null ) {
-                throw new ArgumentNullException( "buffer" );
+            if (buffer == null)
+            {
+                throw new ArgumentNullException("buffer");
             }
-            if ( count < 0 ) {
-                throw new ArgumentOutOfRangeException( "count" );
+            if (count < 0)
+            {
+                throw new ArgumentOutOfRangeException("count");
             }
-            if ( index < 0 ) {
-                throw new ArgumentOutOfRangeException( "index" );
+            if (index < 0)
+            {
+                throw new ArgumentOutOfRangeException("index");
             }
-            if ( buffer.Length - index < count ) {
-                throw new ArgumentOutOfRangeException( "count" );
+            if (buffer.Length - index < count)
+            {
+                throw new ArgumentOutOfRangeException("count");
             }
 
-            switch ( state ) {
+            switch (state)
+            {
                 case State.None:
-                    if ( reader.NodeType != XmlNodeType.Element ) {
-                        throw reader.CreateReadElementContentAsException( "ReadElementContentAsBinHex" );
+                    if (reader.NodeType != XmlNodeType.Element)
+                    {
+                        throw reader.CreateReadElementContentAsException(
+                            "ReadElementContentAsBinHex"
+                        );
                     }
-                    if ( !await InitOnElementAsync().ConfigureAwait(false) ) {
+                    if (!await InitOnElementAsync().ConfigureAwait(false))
+                    {
                         return 0;
                     }
                     break;
                 case State.InReadContent:
-                    throw new InvalidOperationException( Res.GetString( Res.Xml_MixingBinaryContentMethods ) );
+                    throw new InvalidOperationException(
+                        Res.GetString(Res.Xml_MixingBinaryContentMethods)
+                    );
                 case State.InReadElementContent:
                     // if we have a correct decoder, go read
-                    if ( decoder == binHexDecoder ) {
+                    if (decoder == binHexDecoder)
+                    {
                         // read more binary data
-                        return await ReadElementContentAsBinaryAsync( buffer, index, count ).ConfigureAwait(false);
+                        return await ReadElementContentAsBinaryAsync(buffer, index, count)
+                            .ConfigureAwait(false);
                     }
                     break;
                 default:
-                    Debug.Assert( false );
+                    Debug.Assert(false);
                     return 0;
-            }    
+            }
 
-            Debug.Assert( state == State.InReadElementContent );
+            Debug.Assert(state == State.InReadElementContent);
 
             // setup binhex decoder
             InitBinHexDecoder();
 
             // read more binary data
-            return await ReadElementContentAsBinaryAsync( buffer, index, count ).ConfigureAwait(false);
+            return await ReadElementContentAsBinaryAsync(buffer, index, count)
+                .ConfigureAwait(false);
         }
 
-        internal async Task FinishAsync() {
-            if ( state != State.None ) {
-                while ( await MoveToNextContentNodeAsync( true ).ConfigureAwait(false) )
+        internal async Task FinishAsync()
+        {
+            if (state != State.None)
+            {
+                while (await MoveToNextContentNodeAsync(true).ConfigureAwait(false))
                     ;
-                if ( state == State.InReadElementContent ) {
-                    if ( reader.NodeType != XmlNodeType.EndElement ) {
-                        throw new XmlException( Res.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo );
+                if (state == State.InReadElementContent)
+                {
+                    if (reader.NodeType != XmlNodeType.EndElement)
+                    {
+                        throw new XmlException(
+                            Res.Xml_InvalidNodeType,
+                            reader.NodeType.ToString(),
+                            reader as IXmlLineInfo
+                        );
                     }
                     // move off the EndElement
                     await reader.ReadAsync().ConfigureAwait(false);
@@ -212,10 +280,12 @@ namespace System.Xml
             Reset();
         }
 
-// Private methods
-        private async Task< bool > InitAsync() {
+        // Private methods
+        private async Task<bool> InitAsync()
+        {
             // make sure we are on a content node
-            if ( !await MoveToNextContentNodeAsync( false ).ConfigureAwait(false) ) {
+            if (!await MoveToNextContentNodeAsync(false).ConfigureAwait(false))
+            {
                 return false;
             }
 
@@ -224,20 +294,28 @@ namespace System.Xml
             return true;
         }
 
-        private async Task< bool > InitOnElementAsync() {
-            Debug.Assert( reader.NodeType == XmlNodeType.Element );
+        private async Task<bool> InitOnElementAsync()
+        {
+            Debug.Assert(reader.NodeType == XmlNodeType.Element);
             bool isEmpty = reader.IsEmptyElement;
 
             // move to content or off the empty element
             await reader.ReadAsync().ConfigureAwait(false);
-            if ( isEmpty ) {
+            if (isEmpty)
+            {
                 return false;
             }
 
             // make sure we are on a content node
-            if ( !await MoveToNextContentNodeAsync( false ).ConfigureAwait(false) ) {
-                if ( reader.NodeType != XmlNodeType.EndElement ) {
-                    throw new XmlException( Res.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo );
+            if (!await MoveToNextContentNodeAsync(false).ConfigureAwait(false))
+            {
+                if (reader.NodeType != XmlNodeType.EndElement)
+                {
+                    throw new XmlException(
+                        Res.Xml_InvalidNodeType,
+                        reader.NodeType.ToString(),
+                        reader as IXmlLineInfo
+                    );
                 }
                 // move off end element
                 await reader.ReadAsync().ConfigureAwait(false);
@@ -248,40 +326,64 @@ namespace System.Xml
             return true;
         }
 
-        private async Task< int > ReadContentAsBinaryAsync( byte[] buffer, int index, int count ) {
-            Debug.Assert( decoder != null );
+        private async Task<int> ReadContentAsBinaryAsync(byte[] buffer, int index, int count)
+        {
+            Debug.Assert(decoder != null);
 
-            if ( isEnd ) {
+            if (isEnd)
+            {
                 Reset();
                 return 0;
             }
-            decoder.SetNextOutputBuffer( buffer, index, count );
+            decoder.SetNextOutputBuffer(buffer, index, count);
 
-            for (;;) {
+            for (; ; )
+            {
                 // use streaming ReadValueChunk if the reader supports it
-                if ( canReadValueChunk ) {
-                    for (;;) {
-                        if ( valueOffset < valueChunkLength ) {
-                            int decodedCharsCount = decoder.Decode( valueChunk, valueOffset, valueChunkLength - valueOffset );
+                if (canReadValueChunk)
+                {
+                    for (; ; )
+                    {
+                        if (valueOffset < valueChunkLength)
+                        {
+                            int decodedCharsCount = decoder.Decode(
+                                valueChunk,
+                                valueOffset,
+                                valueChunkLength - valueOffset
+                            );
                             valueOffset += decodedCharsCount;
                         }
-                        if ( decoder.IsFull ) {
+                        if (decoder.IsFull)
+                        {
                             return decoder.DecodedCount;
                         }
-                        Debug.Assert( valueOffset == valueChunkLength );
-                        if ( ( valueChunkLength = await reader.ReadValueChunkAsync( valueChunk, 0, ChunkSize ).ConfigureAwait(false) ) == 0 ) {
+                        Debug.Assert(valueOffset == valueChunkLength);
+                        if (
+                            (
+                                valueChunkLength = await reader
+                                    .ReadValueChunkAsync(valueChunk, 0, ChunkSize)
+                                    .ConfigureAwait(false)
+                            ) == 0
+                        )
+                        {
                             break;
                         }
                         valueOffset = 0;
                     }
                 }
-                else {
+                else
+                {
                     // read what is reader.Value
                     string value = await reader.GetValueAsync().ConfigureAwait(false);
-                    int decodedCharsCount = decoder.Decode( value, valueOffset, value.Length - valueOffset );
+                    int decodedCharsCount = decoder.Decode(
+                        value,
+                        valueOffset,
+                        value.Length - valueOffset
+                    );
                     valueOffset += decodedCharsCount;
 
-                    if ( decoder.IsFull ) {
+                    if (decoder.IsFull)
+                    {
                         return decoder.DecodedCount;
                     }
                 }
@@ -289,26 +391,36 @@ namespace System.Xml
                 valueOffset = 0;
 
                 // move to next textual node in the element content; throw on sub elements
-                if ( !await MoveToNextContentNodeAsync( true ).ConfigureAwait(false) ) {
+                if (!await MoveToNextContentNodeAsync(true).ConfigureAwait(false))
+                {
                     isEnd = true;
                     return decoder.DecodedCount;
                 }
             }
         }
 
-        private async Task< int > ReadElementContentAsBinaryAsync( byte[] buffer, int index, int count ) {
-            if ( count == 0 ) {
+        private async Task<int> ReadElementContentAsBinaryAsync(byte[] buffer, int index, int count)
+        {
+            if (count == 0)
+            {
                 return 0;
             }
             // read binary
-            int decoded = await ReadContentAsBinaryAsync( buffer, index, count ).ConfigureAwait(false);
-            if ( decoded > 0 ) {
+            int decoded = await ReadContentAsBinaryAsync(buffer, index, count)
+                .ConfigureAwait(false);
+            if (decoded > 0)
+            {
                 return decoded;
             }
 
             // if 0 bytes returned check if we are on a closing EndElement, throw exception if not
-            if ( reader.NodeType != XmlNodeType.EndElement ) {
-                throw new XmlException( Res.Xml_InvalidNodeType, reader.NodeType.ToString(), reader as IXmlLineInfo );
+            if (reader.NodeType != XmlNodeType.EndElement)
+            {
+                throw new XmlException(
+                    Res.Xml_InvalidNodeType,
+                    reader.NodeType.ToString(),
+                    reader as IXmlLineInfo
+                );
             }
 
             // move off the EndElement
@@ -317,16 +429,20 @@ namespace System.Xml
             return 0;
         }
 
-        async Task< bool > MoveToNextContentNodeAsync( bool moveIfOnContentNode ) {
-            do {
-                switch ( reader.NodeType ) {
+        async Task<bool> MoveToNextContentNodeAsync(bool moveIfOnContentNode)
+        {
+            do
+            {
+                switch (reader.NodeType)
+                {
                     case XmlNodeType.Attribute:
                         return !moveIfOnContentNode;
                     case XmlNodeType.Text:
                     case XmlNodeType.Whitespace:
                     case XmlNodeType.SignificantWhitespace:
                     case XmlNodeType.CDATA:
-                        if ( !moveIfOnContentNode ) {
+                        if (!moveIfOnContentNode)
+                        {
                             return true;
                         }
                         break;
@@ -336,7 +452,8 @@ namespace System.Xml
                         // skip comments, pis and end entity nodes
                         break;
                     case XmlNodeType.EntityReference:
-                        if ( reader.CanResolveEntity ) {
+                        if (reader.CanResolveEntity)
+                        {
                             reader.ResolveEntity();
                             break;
                         }
@@ -345,7 +462,7 @@ namespace System.Xml
                         return false;
                 }
                 moveIfOnContentNode = false;
-            } while ( await reader.ReadAsync().ConfigureAwait(false) );
+            } while (await reader.ReadAsync().ConfigureAwait(false));
             return false;
         }
     }

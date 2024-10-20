@@ -1,6 +1,6 @@
 //
 // SqlSharpDataAdapter.cs - data adapter for SQL#
-//                          but uses a data reader 
+//                          but uses a data reader
 //                          as the source of data
 //
 // based on
@@ -22,202 +22,227 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
 
-namespace Mono.Data.SqlSharp 
+namespace Mono.Data.SqlSharp
 {
-	[DefaultEvent ("RowUpdated")]
-	public sealed class SqlSharpDataAdapter : DbDataAdapter, IDbDataAdapter 
-	{
-		#region Fields
+    [DefaultEvent("RowUpdated")]
+    public sealed class SqlSharpDataAdapter : DbDataAdapter, IDbDataAdapter
+    {
+        #region Fields
 
-		bool disposed = false;	
-		IDbCommand deleteCommand;
-		IDbCommand insertCommand;
-		IDbCommand selectCommand;
-		IDbCommand updateCommand;
+        bool disposed = false;
+        IDbCommand deleteCommand;
+        IDbCommand insertCommand;
+        IDbCommand selectCommand;
+        IDbCommand updateCommand;
 
-		#endregion
+        #endregion
 
-		#region Constructors
-		
-		public SqlSharpDataAdapter () 	
-		{
-		}
+        #region Constructors
 
-		public SqlSharpDataAdapter (IDbCommand selectCommand) 
-		{
-			DeleteCommand = null;
-			InsertCommand = null;
-			SelectCommand = selectCommand;
-			UpdateCommand = null;
-		}
+        public SqlSharpDataAdapter() { }
 
-		#endregion
+        public SqlSharpDataAdapter(IDbCommand selectCommand)
+        {
+            DeleteCommand = null;
+            InsertCommand = null;
+            SelectCommand = selectCommand;
+            UpdateCommand = null;
+        }
 
-		#region Properties
+        #endregion
 
-//		[DataCategory ("Update")]
-		[DataSysDescription ("Used during Update for deleted rows in DataSet.")]
-		[DefaultValue (null)]
-		public IDbCommand DeleteCommand {
-			get { return deleteCommand; }
-			set { deleteCommand = value; }
-		}
+        #region Properties
 
-//		[DataCategory ("Update")]
-		[DataSysDescription ("Used during Update for new rows in DataSet.")]
-		[DefaultValue (null)]
-		public IDbCommand InsertCommand {
-			get { return insertCommand; }
-			set { insertCommand = value; }
-		}
+        //		[DataCategory ("Update")]
+        [DataSysDescription("Used during Update for deleted rows in DataSet.")]
+        [DefaultValue(null)]
+        public IDbCommand DeleteCommand
+        {
+            get { return deleteCommand; }
+            set { deleteCommand = value; }
+        }
 
-//		[DataCategory ("Fill")]
-		[DataSysDescription ("Used during Fill/FillSchema.")]
-		[DefaultValue (null)]
-		public IDbCommand SelectCommand {
-			get { return selectCommand; }
-			set { selectCommand = value; }
-		}
+        //		[DataCategory ("Update")]
+        [DataSysDescription("Used during Update for new rows in DataSet.")]
+        [DefaultValue(null)]
+        public IDbCommand InsertCommand
+        {
+            get { return insertCommand; }
+            set { insertCommand = value; }
+        }
 
-//		[DataCategory ("Update")]
-		[DataSysDescription ("Used during Update for modified rows in DataSet.")]
-		[DefaultValue (null)]
-		public IDbCommand UpdateCommand {
-			get { return updateCommand; }
-			set { updateCommand = value; }
-		}
+        //		[DataCategory ("Fill")]
+        [DataSysDescription("Used during Fill/FillSchema.")]
+        [DefaultValue(null)]
+        public IDbCommand SelectCommand
+        {
+            get { return selectCommand; }
+            set { selectCommand = value; }
+        }
 
-		IDbCommand IDbDataAdapter.DeleteCommand {
-			get { return DeleteCommand; }
-			set { 
-				DeleteCommand = value;
-			}
-		}
+        //		[DataCategory ("Update")]
+        [DataSysDescription("Used during Update for modified rows in DataSet.")]
+        [DefaultValue(null)]
+        public IDbCommand UpdateCommand
+        {
+            get { return updateCommand; }
+            set { updateCommand = value; }
+        }
 
-		IDbCommand IDbDataAdapter.InsertCommand {
-			get { return InsertCommand; }
-			set { 
-				InsertCommand = value;
-			}
-		}
+        IDbCommand IDbDataAdapter.DeleteCommand
+        {
+            get { return DeleteCommand; }
+            set { DeleteCommand = value; }
+        }
 
-		IDbCommand IDbDataAdapter.SelectCommand {
-			get { return SelectCommand; }
-			set { 
-				SelectCommand = value;
-			}
-		}
+        IDbCommand IDbDataAdapter.InsertCommand
+        {
+            get { return InsertCommand; }
+            set { InsertCommand = value; }
+        }
 
-		IDbCommand IDbDataAdapter.UpdateCommand {
-			get { return UpdateCommand; }
-			set { 
-				UpdateCommand = value;
-			}
-		}
+        IDbCommand IDbDataAdapter.SelectCommand
+        {
+            get { return SelectCommand; }
+            set { SelectCommand = value; }
+        }
 
+        IDbCommand IDbDataAdapter.UpdateCommand
+        {
+            get { return UpdateCommand; }
+            set { UpdateCommand = value; }
+        }
 
-		ITableMappingCollection IDataAdapter.TableMappings {
-			get { return TableMappings; }
-		}
+        ITableMappingCollection IDataAdapter.TableMappings
+        {
+            get { return TableMappings; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		protected override RowUpdatedEventArgs CreateRowUpdatedEvent (DataRow dataRow, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
-		{
-			return new SqlSharpRowUpdatedEventArgs (dataRow, command, statementType, tableMapping);
-		}
+        protected override RowUpdatedEventArgs CreateRowUpdatedEvent(
+            DataRow dataRow,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+        {
+            return new SqlSharpRowUpdatedEventArgs(dataRow, command, statementType, tableMapping);
+        }
 
+        protected override RowUpdatingEventArgs CreateRowUpdatingEvent(
+            DataRow dataRow,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+        {
+            return new SqlSharpRowUpdatingEventArgs(dataRow, command, statementType, tableMapping);
+        }
 
-		protected override RowUpdatingEventArgs CreateRowUpdatingEvent (DataRow dataRow, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
-		{
-			return new SqlSharpRowUpdatingEventArgs (dataRow, command, statementType, tableMapping);
-		}
+        protected override void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    // Release managed resources
+                }
+                // Release unmanaged resources
+                disposed = true;
+            }
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			if (!disposed) {
-				if (disposing) {
-					// Release managed resources
-				}
-				// Release unmanaged resources
-				disposed = true;
-			}
-		}
+        protected override void OnRowUpdated(RowUpdatedEventArgs value)
+        {
+            if (RowUpdated != null)
+                RowUpdated(this, (SqlSharpRowUpdatedEventArgs)value);
+        }
 
-		protected override void OnRowUpdated (RowUpdatedEventArgs value) 
-		{
-			if (RowUpdated != null)
-				RowUpdated (this, (SqlSharpRowUpdatedEventArgs) value);
-		}
+        protected override void OnRowUpdating(RowUpdatingEventArgs value)
+        {
+            if (RowUpdating != null)
+                RowUpdating(this, (SqlSharpRowUpdatingEventArgs)value);
+        }
 
-		protected override void OnRowUpdating (RowUpdatingEventArgs value) 
-		{
-			if (RowUpdating != null)
-				RowUpdating (this, (SqlSharpRowUpdatingEventArgs) value);
-		}
-                
-		public int FillTable (DataTable dataTable, IDataReader dataReader) 
-		{
-			return base.Fill (dataTable, dataReader);
-		}
+        public int FillTable(DataTable dataTable, IDataReader dataReader)
+        {
+            return base.Fill(dataTable, dataReader);
+        }
 
-		#endregion // Methods
+        #endregion // Methods
 
-		#region Events and Delegates
+        #region Events and Delegates
 
-//		[DataCategory ("Update")]
-		[DataSysDescription ("Event triggered before every DataRow during Update.")]
-		public event SqlSharpRowUpdatedEventHandler RowUpdated;
+        //		[DataCategory ("Update")]
+        [DataSysDescription("Event triggered before every DataRow during Update.")]
+        public event SqlSharpRowUpdatedEventHandler RowUpdated;
 
-//		[DataCategory ("Update")]
-		[DataSysDescription ("Event triggered after every DataRow during Update.")]
-		public event SqlSharpRowUpdatingEventHandler RowUpdating;
+        //		[DataCategory ("Update")]
+        [DataSysDescription("Event triggered after every DataRow during Update.")]
+        public event SqlSharpRowUpdatingEventHandler RowUpdating;
 
-		#endregion // Events and Delegates
-	}
+        #endregion // Events and Delegates
+    }
 
-	public sealed class SqlSharpRowUpdatedEventArgs : RowUpdatedEventArgs {
-		#region Constructors
+    public sealed class SqlSharpRowUpdatedEventArgs : RowUpdatedEventArgs
+    {
+        #region Constructors
 
-		public SqlSharpRowUpdatedEventArgs (DataRow row, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
-			: base (row, command, statementType, tableMapping) {
-		}
+        public SqlSharpRowUpdatedEventArgs(
+            DataRow row,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+            : base(row, command, statementType, tableMapping) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public new IDbCommand Command {
-			get { return base.Command; }
-		}
+        public new IDbCommand Command
+        {
+            get { return base.Command; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 
-	public delegate void SqlSharpRowUpdatedEventHandler (object sender, SqlSharpRowUpdatedEventArgs e);
+    public delegate void SqlSharpRowUpdatedEventHandler(
+        object sender,
+        SqlSharpRowUpdatedEventArgs e
+    );
 
-	public sealed class SqlSharpRowUpdatingEventArgs : RowUpdatingEventArgs {
-		#region Constructors
+    public sealed class SqlSharpRowUpdatingEventArgs : RowUpdatingEventArgs
+    {
+        #region Constructors
 
-		public SqlSharpRowUpdatingEventArgs (DataRow row, IDbCommand command, StatementType statementType, DataTableMapping tableMapping) 
-			: base (row, command, statementType, tableMapping) {
-		}
+        public SqlSharpRowUpdatingEventArgs(
+            DataRow row,
+            IDbCommand command,
+            StatementType statementType,
+            DataTableMapping tableMapping
+        )
+            : base(row, command, statementType, tableMapping) { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public new IDbCommand Command {
-			get { return base.Command; }
-			set { base.Command = value; }
-		}
+        public new IDbCommand Command
+        {
+            get { return base.Command; }
+            set { base.Command = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 
-	public delegate void SqlSharpRowUpdatingEventHandler(object sender, SqlSharpRowUpdatingEventArgs e);
-
+    public delegate void SqlSharpRowUpdatingEventHandler(
+        object sender,
+        SqlSharpRowUpdatingEventArgs e
+    );
 }
-

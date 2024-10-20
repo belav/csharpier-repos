@@ -15,26 +15,35 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// A source for <see cref="TextAndVersion"/> constructed from an syntax tree.
         /// </summary>
-        private sealed class TreeTextSource(AsyncLazy<SourceText> textSource, VersionStamp version) : ITextAndVersionSource
+        private sealed class TreeTextSource(AsyncLazy<SourceText> textSource, VersionStamp version)
+            : ITextAndVersionSource
         {
             private readonly VersionStamp _version = version;
 
-            public bool CanReloadText
-                => false;
+            public bool CanReloadText => false;
 
-            public async Task<TextAndVersion> GetValueAsync(LoadTextOptions options, CancellationToken cancellationToken)
+            public async Task<TextAndVersion> GetValueAsync(
+                LoadTextOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 var text = await textSource.GetValueAsync(cancellationToken).ConfigureAwait(false);
                 return TextAndVersion.Create(text, _version);
             }
 
-            public TextAndVersion GetValue(LoadTextOptions options, CancellationToken cancellationToken)
+            public TextAndVersion GetValue(
+                LoadTextOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 var text = textSource.GetValue(cancellationToken);
                 return TextAndVersion.Create(text, _version);
             }
 
-            public bool TryGetValue(LoadTextOptions options, [NotNullWhen(true)] out TextAndVersion? value)
+            public bool TryGetValue(
+                LoadTextOptions options,
+                [NotNullWhen(true)] out TextAndVersion? value
+            )
             {
                 if (textSource.TryGetValue(out var text))
                 {
@@ -54,8 +63,10 @@ namespace Microsoft.CodeAnalysis
                 return version != default;
             }
 
-            public ValueTask<VersionStamp> GetVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
-                => new(_version);
+            public ValueTask<VersionStamp> GetVersionAsync(
+                LoadTextOptions options,
+                CancellationToken cancellationToken
+            ) => new(_version);
         }
     }
 }

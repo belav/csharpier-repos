@@ -59,10 +59,7 @@ namespace System.Xml
         // Gets the number of nodes in this XmlNamedNodeMap.
         public virtual int Count
         {
-            get
-            {
-                return nodes.Count;
-            }
+            get { return nodes.Count; }
         }
 
         // Retrieves the node at the specified index in this XmlNamedNodeMap.
@@ -148,7 +145,14 @@ namespace System.Xml
                 oldParent = node.ParentNode;
 
             string? nodeValue = node.Value;
-            XmlNodeChangedEventArgs? args = parent.GetEventArgs(node, oldParent, parent, nodeValue, nodeValue, XmlNodeChangedAction.Insert);
+            XmlNodeChangedEventArgs? args = parent.GetEventArgs(
+                node,
+                oldParent,
+                parent,
+                nodeValue,
+                nodeValue,
+                XmlNodeChangedAction.Insert
+            );
 
             if (args != null)
                 parent.BeforeEvent(args);
@@ -185,7 +189,14 @@ namespace System.Xml
             XmlNode oldNode = (XmlNode)nodes[i];
 
             string? oldNodeValue = oldNode.Value;
-            XmlNodeChangedEventArgs? args = parent.GetEventArgs(oldNode, parent, null, oldNodeValue, oldNodeValue, XmlNodeChangedAction.Remove);
+            XmlNodeChangedEventArgs? args = parent.GetEventArgs(
+                oldNode,
+                parent,
+                null,
+                oldNodeValue,
+                oldNodeValue,
+                XmlNodeChangedAction.Remove
+            );
 
             if (args != null)
                 parent.BeforeEvent(args);
@@ -215,7 +226,14 @@ namespace System.Xml
                 oldParent = node.ParentNode;
 
             string? nodeValue = node.Value;
-            XmlNodeChangedEventArgs? args = parent.GetEventArgs(node, oldParent, parent, nodeValue, nodeValue, XmlNodeChangedAction.Insert);
+            XmlNodeChangedEventArgs? args = parent.GetEventArgs(
+                node,
+                oldParent,
+                parent,
+                nodeValue,
+                nodeValue,
+                XmlNodeChangedAction.Insert
+            );
 
             if (args != null)
                 parent.BeforeEvent(args);

@@ -195,7 +195,9 @@ public class DecisionTreeBuilderTest
     {
         public Item()
         {
-            Criteria = new Dictionary<string, DecisionCriterionValue>(StringComparer.OrdinalIgnoreCase);
+            Criteria = new Dictionary<string, DecisionCriterionValue>(
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public Dictionary<string, DecisionCriterionValue> Criteria { get; private set; }

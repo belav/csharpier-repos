@@ -10,4 +10,5 @@ namespace Microsoft.AspNetCore.Components.QuickGrid;
 /// <param name="request">Parameters describing the data being requested.</param>
 /// <returns>A <see cref="ValueTask{GridItemsProviderResult}" /> that gives the data to be displayed.</returns>
 public delegate ValueTask<GridItemsProviderResult<TGridItem>> GridItemsProvider<TGridItem>(
-    GridItemsProviderRequest<TGridItem> request);
+    GridItemsProviderRequest<TGridItem> request
+);

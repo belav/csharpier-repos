@@ -22,7 +22,13 @@ public class FormFile : IFormFile
     /// <param name="length">The length of the form file.</param>
     /// <param name="name">The name of the form file from the <c>Content-Disposition</c> header.</param>
     /// <param name="fileName">The file name from the <c>Content-Disposition</c> header.</param>
-    public FormFile(Stream baseStream, long baseStreamOffset, long length, string name, string fileName)
+    public FormFile(
+        Stream baseStream,
+        long baseStreamOffset,
+        long length,
+        string name,
+        string fileName
+    )
     {
         _baseStream = baseStream;
         _baseStreamOffset = baseStreamOffset;
@@ -96,7 +102,10 @@ public class FormFile : IFormFile
     /// </summary>
     /// <param name="target">The stream to copy the file contents to.</param>
     /// <param name="cancellationToken"></param>
-    public async Task CopyToAsync(Stream target, CancellationToken cancellationToken = default(CancellationToken))
+    public async Task CopyToAsync(
+        Stream target,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         ArgumentNullException.ThrowIfNull(target);
 

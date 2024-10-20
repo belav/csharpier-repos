@@ -28,59 +28,79 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class CalendarDay
+    {
+        DateTime date;
+        bool isWeekend;
+        bool isToday;
+        bool isSelected;
+        bool isOtherMonth;
+        string dayNumberText;
+        bool isSelectable;
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class CalendarDay 
-	{
-		DateTime date;
-		bool isWeekend;
-		bool isToday;
-		bool isSelected;
-		bool isOtherMonth;
-		string dayNumberText;
-		bool isSelectable;
+        public CalendarDay(
+            DateTime date,
+            bool isWeekend,
+            bool isToday,
+            bool isSelected,
+            bool isOtherMonth,
+            string dayNumberText
+        )
+        {
+            this.date = date;
+            this.isWeekend = isWeekend;
+            this.isToday = isToday;
+            this.isSelected = isSelected;
+            this.isOtherMonth = isOtherMonth;
+            this.dayNumberText = dayNumberText;
+            isSelectable = false;
+        }
 
-		public CalendarDay (DateTime date, bool isWeekend, bool isToday, bool isSelected, bool isOtherMonth, string dayNumberText)
-		{
-			this.date = date;
-			this.isWeekend = isWeekend;
-			this.isToday = isToday;
-			this.isSelected = isSelected;
-			this.isOtherMonth = isOtherMonth;
-			this.dayNumberText = dayNumberText;
-			isSelectable = false;
-		}
+        public DateTime Date
+        {
+            get { return date; }
+        }
 
-		public DateTime Date {
-			get { return date; }
-		}
+        public string DayNumberText
+        {
+            get { return dayNumberText; }
+        }
 
-		public string DayNumberText {
-			get { return dayNumberText; }
- 		}
+        public bool IsOtherMonth
+        {
+            get { return isOtherMonth; }
+        }
 
-		public bool IsOtherMonth {
-			get { return isOtherMonth; }
-		}
+        public bool IsSelectable
+        {
+            get { return isSelectable; }
+            set { isSelectable = value; }
+        }
 
-		public bool IsSelectable {
-			get { return isSelectable; }
-			set { isSelectable = value; }
-		}
+        public bool IsSelected
+        {
+            get { return isSelected; }
+        }
 
-		public bool IsSelected {
-			get { return isSelected; }
-		}
+        public bool IsToday
+        {
+            get { return isToday; }
+        }
 
-		public bool IsToday {
-			get { return isToday;}
-		}
-
-		public bool IsWeekend {
-			get { return isWeekend; }
-		}
-	}
+        public bool IsWeekend
+        {
+            get { return isWeekend; }
+        }
+    }
 }

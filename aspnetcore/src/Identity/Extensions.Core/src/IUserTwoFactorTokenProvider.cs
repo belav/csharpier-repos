@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for two-factor token generators.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserTwoFactorTokenProvider<TUser> where TUser : class
+public interface IUserTwoFactorTokenProvider<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Generates a token for the specified <paramref name="user"/> and <paramref name="purpose"/>.

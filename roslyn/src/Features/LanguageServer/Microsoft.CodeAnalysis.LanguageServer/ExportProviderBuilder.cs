@@ -14,7 +14,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer;
 
 internal sealed class ExportProviderBuilder
 {
-    public static async Task<ExportProvider> CreateExportProviderAsync(IEnumerable<string> extensionAssemblyPaths, ILoggerFactory loggerFactory)
+    public static async Task<ExportProvider> CreateExportProviderAsync(
+        IEnumerable<string> extensionAssemblyPaths,
+        ILoggerFactory loggerFactory
+    )
     {
         var logger = loggerFactory.CreateLogger<ExportProviderBuilder>();
 
@@ -24,7 +27,9 @@ internal sealed class ExportProviderBuilder
 
         // Load any Roslyn assemblies from the extension directory
         var assemblyPaths = Directory.EnumerateFiles(baseDirectory, "Microsoft.CodeAnalysis*.dll");
-        assemblyPaths = assemblyPaths.Concat(Directory.EnumerateFiles(baseDirectory, "Microsoft.ServiceHub*.dll"));
+        assemblyPaths = assemblyPaths.Concat(
+            Directory.EnumerateFiles(baseDirectory, "Microsoft.ServiceHub*.dll")
+        );
 
         // Temporarily explicitly load the dlls we want to add to the MEF composition.  This is due to a runtime bug
         // in the 7.0.4 runtime where the APIs MEF uses to load assemblies break with R2R assemblies.
@@ -39,23 +44,28 @@ internal sealed class ExportProviderBuilder
         var discovery = PartDiscovery.Combine(
             resolver,
             new AttributedPartDiscovery(resolver, isNonPublicSupported: true), // "NuGet MEF" attributes (Microsoft.Composition)
-            new AttributedPartDiscoveryV1(resolver));
+            new AttributedPartDiscoveryV1(resolver)
+        );
 
-        var assemblies = new List<Assembly>()
-        {
-            typeof(ExportProviderBuilder).Assembly
-        };
+        var assemblies = new List<Assembly>() { typeof(ExportProviderBuilder).Assembly };
 
         foreach (var extensionAssemblyPath in extensionAssemblyPaths)
         {
-            if (AssemblyLoadContextWrapper.TryLoadExtension(extensionAssemblyPath, logger, out var extensionAssembly))
+            if (
+                AssemblyLoadContextWrapper.TryLoadExtension(
+                    extensionAssemblyPath,
+                    logger,
+                    out var extensionAssembly
+                )
+            )
             {
                 assemblies.Add(extensionAssembly);
             }
         }
 
         // TODO - we should likely cache the catalog so we don't have to rebuild it every time.
-        var catalog = ComposableCatalog.Create(resolver)
+        var catalog = ComposableCatalog
+            .Create(resolver)
             .AddParts(await discovery.CreatePartsAsync(assemblies))
             .AddParts(await discovery.CreatePartsAsync(assemblyPaths))
             .WithCompositionService(); // Makes an ICompositionService export available to MEF parts to import
@@ -79,7 +89,10 @@ internal sealed class ExportProviderBuilder
         return exportProvider;
     }
 
-    private static void ThrowOnUnexpectedErrors(CompositionConfiguration configuration, ILogger logger)
+    private static void ThrowOnUnexpectedErrors(
+        CompositionConfiguration configuration,
+        ILogger logger
+    )
     {
         // Verify that we have exactly the MEF errors that we expect.  If we have less or more this needs to be updated to assert the expected behavior.
         // Currently we are expecting the following:
@@ -89,9 +102,16 @@ internal sealed class ExportProviderBuilder
         //         TypeIdentityName: Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api.IPythiaSignatureHelpProviderImplementation
         //     but found 0.
         //         part definition Microsoft.CodeAnalysis.ExternalAccess.Pythia.PythiaSignatureHelpProvider
-        var erroredParts = configuration.CompositionErrors.FirstOrDefault()?.SelectMany(error => error.Parts).Select(part => part.Definition.Type.Name) ?? Enumerable.Empty<string>();
+        var erroredParts =
+            configuration
+                .CompositionErrors.FirstOrDefault()
+                ?.SelectMany(error => error.Parts)
+                .Select(part => part.Definition.Type.Name) ?? Enumerable.Empty<string>();
         var expectedErroredParts = new string[] { "PythiaSignatureHelpProvider" };
-        if (erroredParts.Count() != expectedErroredParts.Length || !erroredParts.All(part => expectedErroredParts.Contains(part)))
+        if (
+            erroredParts.Count() != expectedErroredParts.Length
+            || !erroredParts.All(part => expectedErroredParts.Contains(part))
+        )
         {
             try
             {
@@ -100,7 +120,9 @@ internal sealed class ExportProviderBuilder
             catch (CompositionFailedException ex)
             {
                 // The ToString for the composition failed exception doesn't output a nice set of errors by default, so log it separately here.
-                logger.LogError($"Encountered errors in the MEF composition:{Environment.NewLine}{ex.ErrorsAsString}");
+                logger.LogError(
+                    $"Encountered errors in the MEF composition:{Environment.NewLine}{ex.ErrorsAsString}"
+                );
                 throw;
             }
         }

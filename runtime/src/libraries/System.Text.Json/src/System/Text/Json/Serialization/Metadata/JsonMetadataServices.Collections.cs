@@ -18,11 +18,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <param name="collectionInfo">Provides serialization metadata about the collection type.</param>
         /// <returns>Serialization metadata for the given type.</returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonTypeInfo<TElement[]> CreateArrayInfo<TElement>(JsonSerializerOptions options, JsonCollectionInfoValues<TElement[]> collectionInfo)
-            => CreateCore(
-                options,
-                collectionInfo,
-                new ArrayConverter<TElement[], TElement>());
+        public static JsonTypeInfo<TElement[]> CreateArrayInfo<TElement>(
+            JsonSerializerOptions options,
+            JsonCollectionInfoValues<TElement[]> collectionInfo
+        ) => CreateCore(options, collectionInfo, new ArrayConverter<TElement[], TElement>());
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="List{T}"/>.
@@ -35,12 +34,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateListInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : List<TElement>
-            => CreateCore(
-                options,
-                collectionInfo,
-                new ListOfTConverter<TCollection, TElement>());
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : List<TElement> =>
+            CreateCore(options, collectionInfo, new ListOfTConverter<TCollection, TElement>());
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="Dictionary{TKey, TValue}"/>.
@@ -54,14 +51,15 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateDictionaryInfo<TCollection, TKey, TValue>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
             where TCollection : Dictionary<TKey, TValue>
-            where TKey : notnull
-            => CreateCore(
+            where TKey : notnull =>
+            CreateCore(
                 options,
                 collectionInfo,
-                new DictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>());
-
+                new DictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>()
+            );
 
 #pragma warning disable CS1574 // XML comment has cref attribute that could not be resolved
         /// <summary>
@@ -77,10 +75,15 @@ namespace System.Text.Json.Serialization.Metadata
         /// <returns>Serialization metadata for the given type.</returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
 #pragma warning restore CS1574 // XML comment has cref attribute that could not be resolved
-        public static JsonTypeInfo<TCollection> CreateImmutableDictionaryInfo<TCollection, TKey, TValue>(
+        public static JsonTypeInfo<TCollection> CreateImmutableDictionaryInfo<
+            TCollection,
+            TKey,
+            TValue
+        >(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo,
-            Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection> createRangeFunc)
+            Func<IEnumerable<KeyValuePair<TKey, TValue>>, TCollection> createRangeFunc
+        )
             where TCollection : IReadOnlyDictionary<TKey, TValue>
             where TKey : notnull
         {
@@ -93,7 +96,8 @@ namespace System.Text.Json.Serialization.Metadata
                 options,
                 collectionInfo,
                 new ImmutableDictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>(),
-                createObjectWithArgs: createRangeFunc);
+                createObjectWithArgs: createRangeFunc
+            );
         }
 
         /// <summary>
@@ -108,13 +112,15 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateIDictionaryInfo<TCollection, TKey, TValue>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
             where TCollection : IDictionary<TKey, TValue>
-            where TKey : notnull
-            => CreateCore(
+            where TKey : notnull =>
+            CreateCore(
                 options,
                 collectionInfo,
-                new IDictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>());
+                new IDictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>()
+            );
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="IReadOnlyDictionary{TKey, TValue}"/>.
@@ -126,15 +132,18 @@ namespace System.Text.Json.Serialization.Metadata
         /// <param name="collectionInfo">Provides serialization metadata about the collection type.</param>
         /// <returns>Serialization metadata for the given type.</returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonTypeInfo<TCollection> CreateIReadOnlyDictionaryInfo<TCollection, TKey, TValue>(
-            JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
+        public static JsonTypeInfo<TCollection> CreateIReadOnlyDictionaryInfo<
+            TCollection,
+            TKey,
+            TValue
+        >(JsonSerializerOptions options, JsonCollectionInfoValues<TCollection> collectionInfo)
             where TCollection : IReadOnlyDictionary<TKey, TValue>
-            where TKey : notnull
-            => CreateCore(
+            where TKey : notnull =>
+            CreateCore(
                 options,
                 collectionInfo,
-                new IReadOnlyDictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>());
+                new IReadOnlyDictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>()
+            );
 
         /// <summary>
         /// Creates serialization metadata for non-dictionary immutable collection types.
@@ -146,10 +155,14 @@ namespace System.Text.Json.Serialization.Metadata
         /// <param name="createRangeFunc">A method to create an immutable dictionary instance.</param>
         /// <returns>Serialization metadata for the given type.</returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonTypeInfo<TCollection> CreateImmutableEnumerableInfo<TCollection, TElement>(
+        public static JsonTypeInfo<TCollection> CreateImmutableEnumerableInfo<
+            TCollection,
+            TElement
+        >(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo,
-            Func<IEnumerable<TElement>, TCollection> createRangeFunc)
+            Func<IEnumerable<TElement>, TCollection> createRangeFunc
+        )
             where TCollection : IEnumerable<TElement>
         {
             if (createRangeFunc is null)
@@ -161,7 +174,8 @@ namespace System.Text.Json.Serialization.Metadata
                 options,
                 collectionInfo,
                 new ImmutableEnumerableOfTConverter<TCollection, TElement>(),
-                createObjectWithArgs: createRangeFunc);
+                createObjectWithArgs: createRangeFunc
+            );
         }
 
         /// <summary>
@@ -174,12 +188,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateIListInfo<TCollection>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : IList
-            => CreateCore(
-                options,
-                collectionInfo,
-                new IListConverter<TCollection>());
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : IList =>
+            CreateCore(options, collectionInfo, new IListConverter<TCollection>());
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="IList{T}"/>.
@@ -192,12 +204,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateIListInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : IList<TElement>
-            => CreateCore(
-                options,
-                collectionInfo,
-                new IListOfTConverter<TCollection, TElement>());
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : IList<TElement> =>
+            CreateCore(options, collectionInfo, new IListOfTConverter<TCollection, TElement>());
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="ISet{T}"/>.
@@ -210,12 +220,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateISetInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : ISet<TElement>
-            => CreateCore(
-                options,
-                collectionInfo,
-                new ISetOfTConverter<TCollection, TElement>());
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : ISet<TElement> =>
+            CreateCore(options, collectionInfo, new ISetOfTConverter<TCollection, TElement>());
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="ICollection{T}"/>.
@@ -228,12 +236,14 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateICollectionInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : ICollection<TElement>
-            => CreateCore(
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : ICollection<TElement> =>
+            CreateCore(
                 options,
                 collectionInfo,
-                new ICollectionOfTConverter<TCollection, TElement>());
+                new ICollectionOfTConverter<TCollection, TElement>()
+            );
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="Stack{T}"/>.
@@ -246,12 +256,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateStackInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : Stack<TElement>
-            => CreateCore(
-                options,
-                collectionInfo,
-                new StackOfTConverter<TCollection, TElement>());
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : Stack<TElement> =>
+            CreateCore(options, collectionInfo, new StackOfTConverter<TCollection, TElement>());
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="Queue{T}"/>.
@@ -264,12 +272,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateQueueInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : Queue<TElement>
-            => CreateCore(
-                options,
-                collectionInfo,
-                new QueueOfTConverter<TCollection, TElement>());
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : Queue<TElement> =>
+            CreateCore(options, collectionInfo, new QueueOfTConverter<TCollection, TElement>());
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="ConcurrentStack{T}"/>.
@@ -282,12 +288,14 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateConcurrentStackInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : ConcurrentStack<TElement>
-            => CreateCore(
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : ConcurrentStack<TElement> =>
+            CreateCore(
                 options,
                 collectionInfo,
-                new ConcurrentStackOfTConverter<TCollection, TElement>());
+                new ConcurrentStackOfTConverter<TCollection, TElement>()
+            );
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="Queue{T}"/>.
@@ -300,12 +308,14 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateConcurrentQueueInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : ConcurrentQueue<TElement>
-            => CreateCore(
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : ConcurrentQueue<TElement> =>
+            CreateCore(
                 options,
                 collectionInfo,
-                new ConcurrentQueueOfTConverter<TCollection, TElement>());
+                new ConcurrentQueueOfTConverter<TCollection, TElement>()
+            );
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="IEnumerable{T}"/>.
@@ -318,12 +328,14 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateIEnumerableInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : IEnumerable<TElement>
-            => CreateCore(
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : IEnumerable<TElement> =>
+            CreateCore(
                 options,
                 collectionInfo,
-                new IEnumerableOfTConverter<TCollection, TElement>());
+                new IEnumerableOfTConverter<TCollection, TElement>()
+            );
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="IAsyncEnumerable{T}"/>.
@@ -336,12 +348,14 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateIAsyncEnumerableInfo<TCollection, TElement>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : IAsyncEnumerable<TElement>
-            => CreateCore(
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : IAsyncEnumerable<TElement> =>
+            CreateCore(
                 options,
                 collectionInfo,
-                new IAsyncEnumerableOfTConverter<TCollection, TElement>());
+                new IAsyncEnumerableOfTConverter<TCollection, TElement>()
+            );
 
         /// <summary>
         /// Creates serialization metadata for types assignable to <see cref="IDictionary"/>.
@@ -353,12 +367,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateIDictionaryInfo<TCollection>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : IDictionary
-            => CreateCore(
-                options,
-                collectionInfo,
-                new IDictionaryConverter<TCollection>());
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : IDictionary =>
+            CreateCore(options, collectionInfo, new IDictionaryConverter<TCollection>());
 
 #pragma warning disable CS1574 // XML comment has cref attribute that could not be resolved
         /// <summary>
@@ -374,9 +386,10 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateStackInfo<TCollection>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo,
-            Action<TCollection, object?> addFunc)
-            where TCollection : IEnumerable
-            => CreateStackOrQueueInfo(options, collectionInfo, addFunc);
+            Action<TCollection, object?> addFunc
+        )
+            where TCollection : IEnumerable =>
+            CreateStackOrQueueInfo(options, collectionInfo, addFunc);
 
 #pragma warning disable CS1574 // XML comment has cref attribute that could not be resolved
         /// <summary>
@@ -392,14 +405,16 @@ namespace System.Text.Json.Serialization.Metadata
         public static JsonTypeInfo<TCollection> CreateQueueInfo<TCollection>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo,
-            Action<TCollection, object?> addFunc)
-            where TCollection : IEnumerable
-            => CreateStackOrQueueInfo(options, collectionInfo, addFunc);
+            Action<TCollection, object?> addFunc
+        )
+            where TCollection : IEnumerable =>
+            CreateStackOrQueueInfo(options, collectionInfo, addFunc);
 
         private static JsonTypeInfo<TCollection> CreateStackOrQueueInfo<TCollection>(
             JsonSerializerOptions options,
             JsonCollectionInfoValues<TCollection> collectionInfo,
-            Action<TCollection, object?> addFunc)
+            Action<TCollection, object?> addFunc
+        )
             where TCollection : IEnumerable
         {
             if (addFunc is null)
@@ -412,7 +427,8 @@ namespace System.Text.Json.Serialization.Metadata
                 collectionInfo,
                 new StackOrQueueConverter<TCollection>(),
                 createObjectWithArgs: null,
-                addFunc: addFunc);
+                addFunc: addFunc
+            );
         }
 
         /// <summary>
@@ -425,12 +441,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
         public static JsonTypeInfo<TCollection> CreateIEnumerableInfo<TCollection>(
             JsonSerializerOptions options,
-            JsonCollectionInfoValues<TCollection> collectionInfo)
-            where TCollection : IEnumerable
-            => CreateCore(
-                options,
-                collectionInfo,
-                new IEnumerableConverter<TCollection>());
+            JsonCollectionInfoValues<TCollection> collectionInfo
+        )
+            where TCollection : IEnumerable =>
+            CreateCore(options, collectionInfo, new IEnumerableConverter<TCollection>());
 
         /// <summary>
         /// Creates serialization metadata for <see cref="Memory{T}"/>.
@@ -440,11 +454,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <param name="collectionInfo">Provides serialization metadata about the collection type.</param>
         /// <returns>Serialization metadata for the given type.</returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonTypeInfo<Memory<TElement>> CreateMemoryInfo<TElement>(JsonSerializerOptions options, JsonCollectionInfoValues<Memory<TElement>> collectionInfo)
-            => CreateCore(
-                options,
-                collectionInfo,
-                new MemoryConverter<TElement>());
+        public static JsonTypeInfo<Memory<TElement>> CreateMemoryInfo<TElement>(
+            JsonSerializerOptions options,
+            JsonCollectionInfoValues<Memory<TElement>> collectionInfo
+        ) => CreateCore(options, collectionInfo, new MemoryConverter<TElement>());
 
         /// <summary>
         /// Creates serialization metadata for <see cref="ReadOnlyMemory{T}"/>.
@@ -454,10 +467,9 @@ namespace System.Text.Json.Serialization.Metadata
         /// <param name="collectionInfo">Provides serialization metadata about the collection type.</param>
         /// <returns>Serialization metadata for the given type.</returns>
         /// <remarks>This API is for use by the output of the System.Text.Json source generator and should not be called directly.</remarks>
-        public static JsonTypeInfo<ReadOnlyMemory<TElement>> CreateReadOnlyMemoryInfo<TElement>(JsonSerializerOptions options, JsonCollectionInfoValues<ReadOnlyMemory<TElement>> collectionInfo)
-            => CreateCore(
-                options,
-                collectionInfo,
-                new ReadOnlyMemoryConverter<TElement>());
+        public static JsonTypeInfo<ReadOnlyMemory<TElement>> CreateReadOnlyMemoryInfo<TElement>(
+            JsonSerializerOptions options,
+            JsonCollectionInfoValues<ReadOnlyMemory<TElement>> collectionInfo
+        ) => CreateCore(options, collectionInfo, new ReadOnlyMemoryConverter<TElement>());
     }
 }

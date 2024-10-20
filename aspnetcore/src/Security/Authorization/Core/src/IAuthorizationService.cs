@@ -29,7 +29,11 @@ public interface IAuthorizationService
     /// Resource is an optional parameter and may be null. Please ensure that you check it is not
     /// null before acting upon it.
     /// </remarks>
-    Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object? resource, IEnumerable<IAuthorizationRequirement> requirements);
+    Task<AuthorizationResult> AuthorizeAsync(
+        ClaimsPrincipal user,
+        object? resource,
+        IEnumerable<IAuthorizationRequirement> requirements
+    );
 
     /// <summary>
     /// Checks if a user meets a specific authorization policy
@@ -49,5 +53,9 @@ public interface IAuthorizationService
     /// Resource is an optional parameter and may be null. Please ensure that you check it is not
     /// null before acting upon it.
     /// </remarks>
-    Task<AuthorizationResult> AuthorizeAsync(ClaimsPrincipal user, object? resource, string policyName);
+    Task<AuthorizationResult> AuthorizeAsync(
+        ClaimsPrincipal user,
+        object? resource,
+        string policyName
+    );
 }

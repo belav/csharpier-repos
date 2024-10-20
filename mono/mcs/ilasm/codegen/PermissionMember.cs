@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,33 +28,37 @@
 
 using System.Reflection;
 
-namespace Mono.ILASM {
+namespace Mono.ILASM
+{
+    public class PermissionMember
+    {
+        MemberTypes member_type;
+        BaseTypeRef type_ref;
+        string name;
+        object value;
 
-        public class PermissionMember {
+        PEAPI.PermissionMember member;
 
-                MemberTypes member_type;
-                BaseTypeRef type_ref;
-                string name;
-                object value;
-
-                PEAPI.PermissionMember member;
-                
-                public PermissionMember (MemberTypes member_type, BaseTypeRef type_ref, string name, object value)
-                {
-                        this.member_type = member_type;
-                        this.type_ref = type_ref;
-                        this.name = name;
-                        this.value = value;
-                }
-
-                public PEAPI.PermissionMember Resolve (CodeGen code_gen)
-                {
-                        type_ref.Resolve (code_gen);
-
-                        member = new PEAPI.PermissionMember (member_type, type_ref.PeapiType, name, value);
-
-                        return member;
-                }
+        public PermissionMember(
+            MemberTypes member_type,
+            BaseTypeRef type_ref,
+            string name,
+            object value
+        )
+        {
+            this.member_type = member_type;
+            this.type_ref = type_ref;
+            this.name = name;
+            this.value = value;
         }
 
+        public PEAPI.PermissionMember Resolve(CodeGen code_gen)
+        {
+            type_ref.Resolve(code_gen);
+
+            member = new PEAPI.PermissionMember(member_type, type_ref.PeapiType, name, value);
+
+            return member;
+        }
+    }
 }

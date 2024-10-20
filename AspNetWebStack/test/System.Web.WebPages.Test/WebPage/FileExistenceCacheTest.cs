@@ -44,7 +44,9 @@ namespace System.Web.WebPages.Test
         public void ConstructorTest_VPPRegistrationChanging()
         {
             // Arrange
-            Mock<VirtualPathProvider> mockProvider = new Mock<VirtualPathProvider>(MockBehavior.Strict);
+            Mock<VirtualPathProvider> mockProvider = new Mock<VirtualPathProvider>(
+                MockBehavior.Strict
+            );
             VirtualPathProvider provider = null;
 
             // Act
@@ -63,8 +65,13 @@ namespace System.Web.WebPages.Test
         {
             // Arrange
             string path = "~/Index.cshtml";
-            Mock<VirtualPathProvider> mockProvider = new Mock<VirtualPathProvider>(MockBehavior.Strict);
-            mockProvider.Setup(c => c.FileExists(It.IsAny<string>())).Returns<string>(p => p.Equals(path)).Verifiable();
+            Mock<VirtualPathProvider> mockProvider = new Mock<VirtualPathProvider>(
+                MockBehavior.Strict
+            );
+            mockProvider
+                .Setup(c => c.FileExists(It.IsAny<string>()))
+                .Returns<string>(p => p.Equals(path))
+                .Verifiable();
             VirtualPathProvider provider = null;
 
             // Act
@@ -148,7 +155,8 @@ namespace System.Web.WebPages.Test
         private static VirtualPathProvider GetVpp(params string[] files)
         {
             var vpp = new Mock<VirtualPathProvider>();
-            vpp.Setup(c => c.FileExists(It.IsAny<string>())).Returns<string>(p => files.Contains(p, StringComparer.OrdinalIgnoreCase));
+            vpp.Setup(c => c.FileExists(It.IsAny<string>()))
+                .Returns<string>(p => files.Contains(p, StringComparer.OrdinalIgnoreCase));
             return vpp.Object;
         }
     }

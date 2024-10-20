@@ -11,24 +11,36 @@ namespace System.ServiceModel.Activation
     {
         const string name = "webhost";
 
-        [Fx.Tag.SecurityNote(Critical = "Keeps track of impersonated user, caller must use with care and call Dispose at the appropriate time.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Keeps track of impersonated user, caller must use with care and call Dispose at the appropriate time."
+        )]
         [SecurityCritical]
         HostedImpersonationContext impersonationContext;
 
-        [Fx.Tag.SecurityNote(Critical = "Stores a SecurityCritical helper class that controls HttpContext.Current with an elevation." +
-            "Need to ensure that HostedThreadData is constructed and used properly.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Stores a SecurityCritical helper class that controls HttpContext.Current with an elevation."
+                + "Need to ensure that HostedThreadData is constructed and used properly."
+        )]
         [SecurityCritical]
         HostedThreadData currentThreadData;
 
-        [Fx.Tag.SecurityNote(Critical = "Sets impersonation context from an arbitrary source, caller must guard.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Sets impersonation context from an arbitrary source, caller must guard."
+        )]
         [SecurityCritical]
         internal HostingMessageProperty(HostedHttpRequestAsyncResult result)
         {
-            Fx.Assert(ServiceHostingEnvironment.IsHosted, "should only be called in the hosted path");
+            Fx.Assert(
+                ServiceHostingEnvironment.IsHosted,
+                "should only be called in the hosted path"
+            );
 
             if (ServiceHostingEnvironment.AspNetCompatibilityEnabled)
             {
-                if (result.ImpersonationContext != null && result.ImpersonationContext.IsImpersonated)
+                if (
+                    result.ImpersonationContext != null
+                    && result.ImpersonationContext.IsImpersonated
+                )
                 {
                     this.impersonationContext = result.ImpersonationContext;
                     this.impersonationContext.AddRef();
@@ -40,33 +52,27 @@ namespace System.ServiceModel.Activation
             this.OriginalRequestUri = result.OriginalRequestUri;
         }
 
-        public Uri OriginalRequestUri
-        {
-            get;
-            private set;
-        }
+        public Uri OriginalRequestUri { get; private set; }
 
-        static internal string Name
+        internal static string Name
         {
-            get
-            {
-                return name;
-            }
+            get { return name; }
         }
 
         HostedImpersonationContext ImpersonationContext
         {
-            [Fx.Tag.SecurityNote(Critical = "Keeps track of impersonated user, caller must use with care.",
-                Safe = "Safe for Get, individual members of HostedImpersonationContext are protected.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Keeps track of impersonated user, caller must use with care.",
+                Safe = "Safe for Get, individual members of HostedImpersonationContext are protected."
+            )]
             [SecuritySafeCritical]
-            get
-            {
-                return impersonationContext;
-            }
+            get { return impersonationContext; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Delegates to a SecurityCritical method in HostedThreadData." +
-            "Caller must ensure that function is called appropriately and result is guarded and Dispose()'d correctly.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Delegates to a SecurityCritical method in HostedThreadData."
+                + "Caller must ensure that function is called appropriately and result is guarded and Dispose()'d correctly."
+        )]
         [SecurityCritical]
         public IDisposable ApplyIntegrationContext()
         {
@@ -78,8 +84,10 @@ namespace System.ServiceModel.Activation
             return null;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical method HostedImpersonationContext.Impersonate." +
-            "Caller should use with care, must take responsibility for reverting impersonation.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses SecurityCritical method HostedImpersonationContext.Impersonate."
+                + "Caller should use with care, must take responsibility for reverting impersonation."
+        )]
         [SecurityCritical]
         public IDisposable Impersonate()
         {
@@ -93,7 +101,10 @@ namespace System.ServiceModel.Activation
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Cleans up impersonationContext, which is critical.", Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Cleans up impersonationContext, which is critical.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         public void Close()
         {

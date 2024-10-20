@@ -10,14 +10,18 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 
 [Collection(IISTestSiteCollection.Name)]
-[MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "No WebSocket supported on Win7")]
+[MinimumOSVersion(
+    OperatingSystems.Windows,
+    WindowsVersions.Win8,
+    SkipReason = "No WebSocket supported on Win7"
+)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class WebSocketsTests
 {
@@ -34,7 +38,10 @@ public class WebSocketsTests
     public async Task RequestWithBody_NotUpgradable()
     {
         using var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(200) };
-        using var response = await client.PostAsync(_requestUri + "WebSocketNotUpgradable", new StringContent("Hello World"));
+        using var response = await client.PostAsync(
+            _requestUri + "WebSocketNotUpgradable",
+            new StringContent("Hello World")
+        );
         response.EnsureSuccessStatusCode();
     }
 
@@ -43,7 +50,10 @@ public class WebSocketsTests
     {
         using var client = new HttpClient() { Timeout = TimeSpan.FromSeconds(200) };
         // POST with Content-Length: 0 counts as not having a body.
-        using var response = await client.PostAsync(_requestUri + "WebSocketUpgradable", new StringContent(""));
+        using var response = await client.PostAsync(
+            _requestUri + "WebSocketUpgradable",
+            new StringContent("")
+        );
         response.EnsureSuccessStatusCode();
     }
 
@@ -96,7 +106,9 @@ public class WebSocketsTests
         string[] parts = statusLine.Split(' ');
         if (int.Parse(parts[1], CultureInfo.InvariantCulture) != 200)
         {
-            throw new InvalidOperationException("The response status code was incorrect: " + statusLine);
+            throw new InvalidOperationException(
+                "The response status code was incorrect: " + statusLine
+            );
         }
     }
 
@@ -116,7 +128,9 @@ public class WebSocketsTests
         string[] parts = statusLine.Split(' ');
         if (int.Parse(parts[1], CultureInfo.InvariantCulture) != 200)
         {
-            throw new InvalidOperationException("The response status code was incorrect: " + statusLine);
+            throw new InvalidOperationException(
+                "The response status code was incorrect: " + statusLine
+            );
         }
     }
 
@@ -143,7 +157,12 @@ public class WebSocketsTests
 
     private async Task SendMessage(ClientWebSocket webSocket, string message)
     {
-        await webSocket.SendAsync(new ArraySegment<byte>(Encoding.ASCII.GetBytes(message)), WebSocketMessageType.Text, true, default);
+        await webSocket.SendAsync(
+            new ArraySegment<byte>(Encoding.ASCII.GetBytes(message)),
+            WebSocketMessageType.Text,
+            true,
+            default
+        );
     }
 
     private async Task ReceiveMessage(ClientWebSocket webSocket, string expectedMessage)
@@ -154,7 +173,10 @@ public class WebSocketsTests
         WebSocketReceiveResult result;
         do
         {
-            result = await webSocket.ReceiveAsync(new ArraySegment<byte>(received, offset, received.Length - offset), default);
+            result = await webSocket.ReceiveAsync(
+                new ArraySegment<byte>(received, offset, received.Length - offset),
+                default
+            );
             offset += result.Count;
         } while (!result.EndOfMessage);
 

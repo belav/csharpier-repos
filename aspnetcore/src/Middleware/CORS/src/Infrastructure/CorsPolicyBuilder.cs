@@ -68,11 +68,16 @@ public class CorsPolicyBuilder
     {
         ArgumentNullException.ThrowIfNull(origin);
 
-        if (Uri.TryCreate(origin, UriKind.Absolute, out var uri) &&
-            (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps) &&
-            !string.Equals(uri.IdnHost, uri.Host, StringComparison.Ordinal))
+        if (
+            Uri.TryCreate(origin, UriKind.Absolute, out var uri)
+            && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)
+            && !string.Equals(uri.IdnHost, uri.Host, StringComparison.Ordinal)
+        )
         {
-            var builder = new UriBuilder(uri.Scheme.ToLowerInvariant(), uri.IdnHost.ToLowerInvariant());
+            var builder = new UriBuilder(
+                uri.Scheme.ToLowerInvariant(),
+                uri.IdnHost.ToLowerInvariant()
+            );
             if (!uri.IsDefaultPort)
             {
                 // Uri does not have a way to differentiate between a port value inferred by default (e.g. Port = 80 for http://www.example.com) and

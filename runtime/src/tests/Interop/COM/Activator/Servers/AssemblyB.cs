@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 public class ClassFromB : IGetTypeFromC
 {
     private readonly ClassFromC _fromC;
+
     public ClassFromB()
     {
         this._fromC = new ClassFromC();

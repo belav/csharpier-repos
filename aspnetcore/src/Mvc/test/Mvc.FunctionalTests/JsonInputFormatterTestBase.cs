@@ -11,11 +11,14 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>> where TStartup : class
+public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTestFixture<TStartup>>
+    where TStartup : class
 {
     protected JsonInputFormatterTestBase(MvcTestFixture<TStartup> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -39,7 +42,10 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal(sampleInputInt.ToString(CultureInfo.InvariantCulture), await response.Content.ReadAsStringAsync());
+        Assert.Equal(
+            sampleInputInt.ToString(CultureInfo.InvariantCulture),
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Theory]
@@ -48,13 +54,17 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
     public async Task JsonInputFormatter_IsModelStateValid_ForValidContentType(
         string requestContentType,
         string jsonInput,
-        int expectedSampleIntValue)
+        int expectedSampleIntValue
+    )
     {
         // Arrange
         var content = new StringContent(jsonInput, Encoding.UTF8, requestContentType);
 
         // Act
-        var response = await Client.PostAsync("http://localhost/JsonFormatter/ReturnInput/", content);
+        var response = await Client.PostAsync(
+            "http://localhost/JsonFormatter/ReturnInput/",
+            content
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -72,7 +82,10 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
         var content = new StringContent(input, Encoding.UTF8, "application/json");
 
         // Act
-        var response = await Client.PostAsync("http://localhost/JsonFormatter/ValueTypeAsBody/", content);
+        var response = await Client.PostAsync(
+            "http://localhost/JsonFormatter/ValueTypeAsBody/",
+            content
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -88,7 +101,10 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
         var content = new StringContent(expected, Encoding.UTF8, "application/json");
 
         // Act
-        var response = await Client.PostAsync("http://localhost/JsonFormatter/ValueTypeAsBody/", content);
+        var response = await Client.PostAsync(
+            "http://localhost/JsonFormatter/ValueTypeAsBody/",
+            content
+        );
         var responseBody = await response.Content.ReadAsStringAsync();
 
         // Assert
@@ -108,7 +124,10 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
         };
 
         // Act
-        var response = await Client.PostAsJsonAsync("http://localhost/JsonFormatter/RoundtripSimpleModel/", expected);
+        var response = await Client.PostAsJsonAsync(
+            "http://localhost/JsonFormatter/RoundtripSimpleModel/",
+            expected
+        );
         var actual = await response.Content.ReadAsAsync<JsonFormatterController.SimpleModel>();
 
         // Assert
@@ -125,8 +144,12 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
         var expected = new JsonFormatterController.SimpleRecordModel(18, "James", "JnK");
 
         // Act
-        var response = await Client.PostAsJsonAsync("http://localhost/JsonFormatter/RoundtripRecordType/", expected);
-        var actual = await response.Content.ReadAsAsync<JsonFormatterController.SimpleRecordModel>();
+        var response = await Client.PostAsJsonAsync(
+            "http://localhost/JsonFormatter/RoundtripRecordType/",
+            expected
+        );
+        var actual =
+            await response.Content.ReadAsAsync<JsonFormatterController.SimpleRecordModel>();
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -139,10 +162,17 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
     public virtual async Task JsonInputFormatter_ValidationWithRecordTypes_ValidationErrors()
     {
         // Arrange
-        var expected = new JsonFormatterController.SimpleModelWithValidation(123, "This is a very long name", StreetName: null);
+        var expected = new JsonFormatterController.SimpleModelWithValidation(
+            123,
+            "This is a very long name",
+            StreetName: null
+        );
 
         // Act
-        var response = await Client.PostAsJsonAsync($"JsonFormatter/{nameof(JsonFormatterController.RoundtripModelWithValidation)}", expected);
+        var response = await Client.PostAsJsonAsync(
+            $"JsonFormatter/{nameof(JsonFormatterController.RoundtripModelWithValidation)}",
+            expected
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
@@ -157,27 +187,39 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
             kvp =>
             {
                 Assert.Equal("Name", kvp.Key);
-                Assert.Equal("The field Name must be a string with a minimum length of 2 and a maximum length of 8.", Assert.Single(kvp.Value));
+                Assert.Equal(
+                    "The field Name must be a string with a minimum length of 2 and a maximum length of 8.",
+                    Assert.Single(kvp.Value)
+                );
             },
             kvp =>
             {
                 Assert.Equal("StreetName", kvp.Key);
                 Assert.Equal("The StreetName field is required.", Assert.Single(kvp.Value));
-            });
+            }
+        );
     }
 
     [Fact]
     public virtual async Task JsonInputFormatter_ValidationWithRecordTypes_NoValidationErrors()
     {
         // Arrange
-        var expected = new JsonFormatterController.SimpleModelWithValidation(99, "TestName", "Some address");
+        var expected = new JsonFormatterController.SimpleModelWithValidation(
+            99,
+            "TestName",
+            "Some address"
+        );
 
         // Act
-        var response = await Client.PostAsJsonAsync($"JsonFormatter/{nameof(JsonFormatterController.RoundtripModelWithValidation)}", expected);
+        var response = await Client.PostAsJsonAsync(
+            $"JsonFormatter/{nameof(JsonFormatterController.RoundtripModelWithValidation)}",
+            expected
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-        var actual = await response.Content.ReadFromJsonAsync<JsonFormatterController.SimpleModel>();
+        var actual =
+            await response.Content.ReadFromJsonAsync<JsonFormatterController.SimpleModel>();
         Assert.Equal(expected.Id, actual.Id);
         Assert.Equal(expected.Name, actual.Name);
         Assert.Equal(expected.StreetName, actual.StreetName);
@@ -192,7 +234,10 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
         content.Headers.Clear();
 
         // Act
-        var response = await Client.PostAsync("http://localhost/JsonFormatter/ReturnInput/", content);
+        var response = await Client.PostAsync(
+            "http://localhost/JsonFormatter/ReturnInput/",
+            content
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.UnsupportedMediaType, response.StatusCode);
@@ -204,11 +249,15 @@ public abstract class JsonInputFormatterTestBase<TStartup> : IClassFixture<MvcTe
     public async Task JsonInputFormatter_IsModelStateValid_ForTransferEncodingChunk(
         string requestContentType,
         string jsonInput,
-        int expectedSampleIntValue)
+        int expectedSampleIntValue
+    )
     {
         // Arrange
         var content = new StringContent(jsonInput, Encoding.UTF8, requestContentType);
-        var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost/JsonFormatter/ReturnInput/");
+        var request = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/JsonFormatter/ReturnInput/"
+        );
         request.Headers.TransferEncodingChunked = true;
         request.Content = content;
 

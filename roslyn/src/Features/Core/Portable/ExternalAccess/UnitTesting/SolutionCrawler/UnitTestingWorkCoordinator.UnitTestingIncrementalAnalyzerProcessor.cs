@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         {
             private partial class UnitTestingIncrementalAnalyzerProcessor
             {
-                private static readonly Func<int, object, bool, string> s_enqueueLogger = EnqueueLogger;
+                private static readonly Func<int, object, bool, string> s_enqueueLogger =
+                    EnqueueLogger;
 
                 private readonly UnitTestingRegistration _registration;
                 private readonly IAsynchronousOperationListener _listener;
@@ -54,7 +55,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                 public UnitTestingIncrementalAnalyzerProcessor(
                     IAsynchronousOperationListener listener,
-                    IEnumerable<Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>> analyzerProviders,
+                    IEnumerable<
+                        Lazy<
+                            IUnitTestingIncrementalAnalyzerProvider,
+                            UnitTestingIncrementalAnalyzerProviderMetadata
+                        >
+                    > analyzerProviders,
 #if false // Not used in unit testing crawling
                     bool initializeLazily,
 #endif
@@ -62,7 +68,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     TimeSpan highBackOffTimeSpan,
                     TimeSpan normalBackOffTimeSpan,
                     TimeSpan lowBackOffTimeSpan,
-                    CancellationToken shutdownToken)
+                    CancellationToken shutdownToken
+                )
                 {
                     _listener = listener;
                     _registration = registration;
@@ -77,7 +84,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                     var lazyActiveFileAnalyzers = new Lazy<ImmutableArray<IUnitTestingIncrementalAnalyzer>>(() => GetIncrementalAnalyzers(_registration, analyzersGetter, onlyHighPriorityAnalyzer: true));
 #endif
-                    var lazyAllAnalyzers = new Lazy<ImmutableArray<IUnitTestingIncrementalAnalyzer>>(() => GetIncrementalAnalyzers(_registration, analyzersGetter, onlyHighPriorityAnalyzer: false));
+                    var lazyAllAnalyzers = new Lazy<
+                        ImmutableArray<IUnitTestingIncrementalAnalyzer>
+                    >(
+                        () =>
+                            GetIncrementalAnalyzers(
+                                _registration,
+                                analyzersGetter,
+                                onlyHighPriorityAnalyzer: false
+                            )
+                    );
 
 #if false // Not used in unit testing crawling
                     if (!initializeLazily)
@@ -89,15 +105,33 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #endif
 
                     // event and worker queues
-                    _documentTracker = _registration.Services.GetRequiredService<IUnitTestingDocumentTrackingService>();
+                    _documentTracker =
+                        _registration.Services.GetRequiredService<IUnitTestingDocumentTrackingService>();
 
-                    var globalNotificationService = _registration.Services.ExportProvider.GetExports<IGlobalOperationNotificationService>().FirstOrDefault()?.Value;
+                    var globalNotificationService = _registration
+                        .Services.ExportProvider.GetExports<IGlobalOperationNotificationService>()
+                        .FirstOrDefault()
+                        ?.Value;
 
 #if false // Not used in unit testing crawling
                     _highPriorityProcessor = new UnitTestingHighPriorityProcessor(listener, this, lazyActiveFileAnalyzers, highBackOffTimeSpan, shutdownToken);
 #endif
-                    _normalPriorityProcessor = new UnitTestingNormalPriorityProcessor(listener, this, lazyAllAnalyzers, globalNotificationService, normalBackOffTimeSpan, shutdownToken);
-                    _lowPriorityProcessor = new UnitTestingLowPriorityProcessor(listener, this, lazyAllAnalyzers, globalNotificationService, lowBackOffTimeSpan, shutdownToken);
+                    _normalPriorityProcessor = new UnitTestingNormalPriorityProcessor(
+                        listener,
+                        this,
+                        lazyAllAnalyzers,
+                        globalNotificationService,
+                        normalBackOffTimeSpan,
+                        shutdownToken
+                    );
+                    _lowPriorityProcessor = new UnitTestingLowPriorityProcessor(
+                        listener,
+                        this,
+                        lazyAllAnalyzers,
+                        globalNotificationService,
+                        lowBackOffTimeSpan,
+                        shutdownToken
+                    );
                 }
 
 #if false // Not used in unit testing crawling
@@ -109,11 +143,24 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                 }
 #endif
 
-                private static ImmutableArray<IUnitTestingIncrementalAnalyzer> GetIncrementalAnalyzers(UnitTestingRegistration registration, UnitTestingAnalyzersGetter analyzersGetter, bool onlyHighPriorityAnalyzer)
+                private static ImmutableArray<IUnitTestingIncrementalAnalyzer> GetIncrementalAnalyzers(
+                    UnitTestingRegistration registration,
+                    UnitTestingAnalyzersGetter analyzersGetter,
+                    bool onlyHighPriorityAnalyzer
+                )
                 {
-                    var orderedAnalyzers = analyzersGetter.GetOrderedAnalyzers(registration.WorkspaceKind, registration.Services, onlyHighPriorityAnalyzer);
+                    var orderedAnalyzers = analyzersGetter.GetOrderedAnalyzers(
+                        registration.WorkspaceKind,
+                        registration.Services,
+                        onlyHighPriorityAnalyzer
+                    );
 
-                    UnitTestingSolutionCrawlerLogger.LogAnalyzers(registration.CorrelationId, registration.WorkspaceKind, orderedAnalyzers, onlyHighPriorityAnalyzer);
+                    UnitTestingSolutionCrawlerLogger.LogAnalyzers(
+                        registration.CorrelationId,
+                        registration.WorkspaceKind,
+                        orderedAnalyzers,
+                        onlyHighPriorityAnalyzer
+                    );
                     return orderedAnalyzers;
                 }
 
@@ -130,12 +177,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     ReportPendingWorkItemCount();
                 }
 
-                public void AddAnalyzer(
-                    IUnitTestingIncrementalAnalyzer analyzer
+                public void AddAnalyzer(IUnitTestingIncrementalAnalyzer analyzer
 #if false // Not used in unit testing crawling
                     , bool highPriorityForActiveFile
 #endif
-                    )
+                )
                 {
 #if false // Not used in unit testing crawling
                     if (highPriorityForActiveFile)
@@ -157,7 +203,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     _lowPriorityProcessor.Shutdown();
                 }
 
-                public ImmutableArray<IUnitTestingIncrementalAnalyzer> Analyzers => _normalPriorityProcessor.Analyzers;
+                public ImmutableArray<IUnitTestingIncrementalAnalyzer> Analyzers =>
+                    _normalPriorityProcessor.Analyzers;
 
 #if false // Not used in unit testing crawling
                 private ProjectDependencyGraph DependencyGraph => _registration.GetSolutionToAnalyze().GetProjectDependencyGraph();
@@ -173,7 +220,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             _highPriorityProcessor.AsyncProcessorTask,
 #endif
                             _normalPriorityProcessor.AsyncProcessorTask,
-                            _lowPriorityProcessor.AsyncProcessorTask);
+                            _lowPriorityProcessor.AsyncProcessorTask
+                        );
                     }
                 }
 
@@ -182,8 +230,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     => _registration.Workspace.GetOpenDocumentIds();
 #endif
 
-                private void ResetLogAggregator()
-                    => _logAggregator = new CountLogAggregator<object>();
+                private void ResetLogAggregator() =>
+                    _logAggregator = new CountLogAggregator<object>();
 
                 private void ReportPendingWorkItemCount()
                 {
@@ -191,12 +239,17 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                         _highPriorityProcessor.WorkItemCount +
 #endif
-                        _normalPriorityProcessor.WorkItemCount + _lowPriorityProcessor.WorkItemCount;
+                        _normalPriorityProcessor.WorkItemCount
+                        + _lowPriorityProcessor.WorkItemCount;
                     _registration.ProgressReporter.UpdatePendingItemCount(pendingItemCount);
                 }
 
                 private async Task ProcessDocumentAnalyzersAsync(
-                    TextDocument textDocument, ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers, UnitTestingWorkItem workItem, CancellationToken cancellationToken)
+                    TextDocument textDocument,
+                    ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers,
+                    UnitTestingWorkItem workItem,
+                    CancellationToken cancellationToken
+                )
                 {
 #if false // Not used in unit testing crawling
                     // process special active document switched request, if any.
@@ -229,18 +282,33 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #endif
                         reasons.Contains(UnitTestingPredefinedInvocationReasons.SemanticChanged))
                     {
-                        await RunAnalyzersAsync(analyzers, document, workItem, (analyzer, document, cancellationToken) =>
-                            analyzer.AnalyzeDocumentAsync(document,
+                        await RunAnalyzersAsync(
+                                analyzers,
+                                document,
+                                workItem,
+                                (analyzer, document, cancellationToken) =>
+                                    analyzer.AnalyzeDocumentAsync(
+                                        document,
 #if false // Not used in unit testing crawling
                                 bodyOpt: null,
 #endif
-                                reasons,
-                                cancellationToken), cancellationToken).ConfigureAwait(false);
+                                        reasons,
+                                        cancellationToken
+                                    ),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                     else
                     {
                         // if we don't need to re-analyze whole body, see whether we need to at least re-analyze one method.
-                        await RunBodyAnalyzersAsync(analyzers, workItem, document, cancellationToken).ConfigureAwait(false);
+                        await RunBodyAnalyzersAsync(
+                                analyzers,
+                                workItem,
+                                document,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
 
                     return;
@@ -287,14 +355,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     T value,
                     UnitTestingWorkItem workItem,
                     Func<IUnitTestingIncrementalAnalyzer, T, CancellationToken, Task> runnerAsync,
-                    CancellationToken cancellationToken)
+                    CancellationToken cancellationToken
+                )
                 {
                     using var evaluating = _registration.ProgressReporter.GetEvaluatingScope();
 
                     ReportPendingWorkItemCount();
 
                     // Check if the work item is specific to some incremental analyzer(s).
-                    var analyzersToExecute = workItem.GetApplicableAnalyzers(analyzers) ?? analyzers;
+                    var analyzersToExecute =
+                        workItem.GetApplicableAnalyzers(analyzers) ?? analyzers;
                     foreach (var analyzer in analyzersToExecute)
                     {
                         if (cancellationToken.IsCancellationRequested)
@@ -308,32 +378,55 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                             return;
                         }
 
-                        await GetOrDefaultAsync(value, async (v, c) =>
-                        {
-                            await runnerAsync(local, v, c).ConfigureAwait(false);
-                            return (object?)null;
-                        }, cancellationToken).ConfigureAwait(false);
+                        await GetOrDefaultAsync(
+                                value,
+                                async (v, c) =>
+                                {
+                                    await runnerAsync(local, v, c).ConfigureAwait(false);
+                                    return (object?)null;
+                                },
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
 
-                private async Task RunBodyAnalyzersAsync(ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers, UnitTestingWorkItem workItem, Document document, CancellationToken cancellationToken)
+                private async Task RunBodyAnalyzersAsync(
+                    ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers,
+                    UnitTestingWorkItem workItem,
+                    Document document,
+                    CancellationToken cancellationToken
+                )
                 {
                     try
                     {
-                        var root = await GetOrDefaultAsync(document, (d, c) => d.GetSyntaxRootAsync(c), cancellationToken).ConfigureAwait(false);
+                        var root = await GetOrDefaultAsync(
+                                document,
+                                (d, c) => d.GetSyntaxRootAsync(c),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
                         var reasons = workItem.InvocationReasons;
                         if (root == null || syntaxFactsService == null)
                         {
                             // as a fallback mechanism, if we can't run one method body due to some missing service, run whole document analyzer.
-                            await RunAnalyzersAsync(analyzers, document, workItem, (analyzer, document, cancellationToken) =>
-                                analyzer.AnalyzeDocumentAsync(
+                            await RunAnalyzersAsync(
+                                    analyzers,
                                     document,
+                                    workItem,
+                                    (analyzer, document, cancellationToken) =>
+                                        analyzer.AnalyzeDocumentAsync(
+                                            document,
 #if false // Not used in unit testing crawling
                                     null,
 #endif
-                                    reasons,
-                                    cancellationToken), cancellationToken).ConfigureAwait(false);
+                                            reasons,
+                                            cancellationToken
+                                        ),
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(false);
                             return;
                         }
 
@@ -352,22 +445,35 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #endif
 
                         // re-run just the body
-                        await RunAnalyzersAsync(analyzers, document, workItem, (analyzer, document, cancellationToken) =>
-                            analyzer.AnalyzeDocumentAsync(
+                        await RunAnalyzersAsync(
+                                analyzers,
                                 document,
+                                workItem,
+                                (analyzer, document, cancellationToken) =>
+                                    analyzer.AnalyzeDocumentAsync(
+                                        document,
 #if false // Not used in unit testing crawling
                                 activeMember,
 #endif
-                                reasons,
-                                cancellationToken), cancellationToken).ConfigureAwait(false);
+                                        reasons,
+                                        cancellationToken
+                                    ),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
-                    catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                    catch (Exception e)
+                        when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                     {
                         throw ExceptionUtilities.Unreachable();
                     }
                 }
 
-                private static async Task<TResult?> GetOrDefaultAsync<TData, TResult>(TData value, Func<TData, CancellationToken, Task<TResult?>> funcAsync, CancellationToken cancellationToken)
+                private static async Task<TResult?> GetOrDefaultAsync<TData, TResult>(
+                    TData value,
+                    Func<TData, CancellationToken, Task<TResult?>> funcAsync,
+                    CancellationToken cancellationToken
+                )
                     where TResult : class
                 {
                     try
@@ -378,7 +484,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                     {
                         return null;
                     }
-                    catch (AggregateException e) when (ReportWithoutCrashUnlessAllCanceledAndPropagate(e))
+                    catch (AggregateException e)
+                        when (ReportWithoutCrashUnlessAllCanceledAndPropagate(e))
                     {
                         return null;
                     }
@@ -388,7 +495,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         throw ExceptionUtilities.Unreachable();
                     }
 
-                    static bool ReportWithoutCrashUnlessAllCanceledAndPropagate(AggregateException aggregate)
+                    static bool ReportWithoutCrashUnlessAllCanceledAndPropagate(
+                        AggregateException aggregate
+                    )
                     {
                         var flattened = aggregate.Flatten();
                         if (flattened.InnerExceptions.All(e => e is OperationCanceledException))
@@ -417,7 +526,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                 }
 #endif
 
-                private static string EnqueueLogger(int tick, object documentOrProjectId, bool replaced)
+                private static string EnqueueLogger(
+                    int tick,
+                    object documentOrProjectId,
+                    bool replaced
+                )
                 {
                     if (documentOrProjectId is DocumentId documentId)
                     {
@@ -436,42 +549,81 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                 {
                     private readonly UnitTestingIncrementalAnalyzerProcessor _incrementalAnalyzerProcessor;
 
-                    internal TestAccessor(UnitTestingIncrementalAnalyzerProcessor incrementalAnalyzerProcessor)
+                    internal TestAccessor(
+                        UnitTestingIncrementalAnalyzerProcessor incrementalAnalyzerProcessor
+                    )
                     {
                         _incrementalAnalyzerProcessor = incrementalAnalyzerProcessor;
                     }
 
-                    internal void WaitUntilCompletion(ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers, List<UnitTestingWorkItem> items)
+                    internal void WaitUntilCompletion(
+                        ImmutableArray<IUnitTestingIncrementalAnalyzer> analyzers,
+                        List<UnitTestingWorkItem> items
+                    )
                     {
-                        _incrementalAnalyzerProcessor._normalPriorityProcessor.GetTestAccessor().WaitUntilCompletion(analyzers, items);
+                        _incrementalAnalyzerProcessor
+                            ._normalPriorityProcessor.GetTestAccessor()
+                            .WaitUntilCompletion(analyzers, items);
 
-                        var projectItems = items.Select(i => i.ToProjectWorkItem(EmptyAsyncToken.Instance));
-                        _incrementalAnalyzerProcessor._lowPriorityProcessor.GetTestAccessor().WaitUntilCompletion(analyzers, items);
+                        var projectItems = items.Select(i =>
+                            i.ToProjectWorkItem(EmptyAsyncToken.Instance)
+                        );
+                        _incrementalAnalyzerProcessor
+                            ._lowPriorityProcessor.GetTestAccessor()
+                            .WaitUntilCompletion(analyzers, items);
                     }
 
                     internal void WaitUntilCompletion()
                     {
-                        _incrementalAnalyzerProcessor._normalPriorityProcessor.GetTestAccessor().WaitUntilCompletion();
-                        _incrementalAnalyzerProcessor._lowPriorityProcessor.GetTestAccessor().WaitUntilCompletion();
+                        _incrementalAnalyzerProcessor
+                            ._normalPriorityProcessor.GetTestAccessor()
+                            .WaitUntilCompletion();
+                        _incrementalAnalyzerProcessor
+                            ._lowPriorityProcessor.GetTestAccessor()
+                            .WaitUntilCompletion();
                     }
                 }
 
-                private class UnitTestingAnalyzersGetter(IEnumerable<Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>> analyzerProviders)
+                private class UnitTestingAnalyzersGetter(
+                    IEnumerable<
+                        Lazy<
+                            IUnitTestingIncrementalAnalyzerProvider,
+                            UnitTestingIncrementalAnalyzerProviderMetadata
+                        >
+                    > analyzerProviders
+                )
                 {
-                    private readonly List<Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>> _analyzerProviders = analyzerProviders.ToList();
-                    private readonly Dictionary<(string workspaceKind, SolutionServices services), ImmutableArray<
+                    private readonly List<
+                        Lazy<
+                            IUnitTestingIncrementalAnalyzerProvider,
+                            UnitTestingIncrementalAnalyzerProviderMetadata
+                        >
+                    > _analyzerProviders = analyzerProviders.ToList();
+                    private readonly Dictionary<
+                        (string workspaceKind, SolutionServices services),
+                        ImmutableArray<
 #if false // Not used in unit testing crawling
                         (IUnitTestingIncrementalAnalyzer analyzer, bool highPriorityForActiveFile)
 #else
                         IUnitTestingIncrementalAnalyzer
 #endif
-                        >> _analyzerMap = new();
+                        >
+                    > _analyzerMap = new();
 
-                    public ImmutableArray<IUnitTestingIncrementalAnalyzer> GetOrderedAnalyzers(string workspaceKind, SolutionServices services, bool onlyHighPriorityAnalyzer)
+                    public ImmutableArray<IUnitTestingIncrementalAnalyzer> GetOrderedAnalyzers(
+                        string workspaceKind,
+                        SolutionServices services,
+                        bool onlyHighPriorityAnalyzer
+                    )
                     {
                         lock (_analyzerMap)
                         {
-                            if (!_analyzerMap.TryGetValue((workspaceKind, services), out var analyzers))
+                            if (
+                                !_analyzerMap.TryGetValue(
+                                    (workspaceKind, services),
+                                    out var analyzers
+                                )
+                            )
                             {
 #if false // Not used in unit testing crawling
                                 // Sort list so DiagnosticIncrementalAnalyzers (if any) come first.

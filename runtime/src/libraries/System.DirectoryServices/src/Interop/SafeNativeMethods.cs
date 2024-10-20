@@ -16,17 +16,28 @@ namespace System.DirectoryServices
         [return: MarshalAs(UnmanagedType.Bool)]
         public static partial bool FreeADsMem(IntPtr pVoid);
 
-        public const int
-            FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200,
+        public const int FORMAT_MESSAGE_IGNORE_INSERTS = 0x00000200,
             FORMAT_MESSAGE_FROM_SYSTEM = 0x00001000,
             FORMAT_MESSAGE_ARGUMENT_ARRAY = 0x00002000,
             ERROR_MORE_DATA = 234,
             ERROR_SUCCESS = 0;
 
-        [LibraryImport(global::Interop.Libraries.Activeds, StringMarshalling = StringMarshalling.Utf16)]
-        public static unsafe partial int ADsGetLastError(out int error, char* errorBuffer, int errorBufferLength, char* nameBuffer, int nameBufferLength);
+        [LibraryImport(
+            global::Interop.Libraries.Activeds,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
+        public static unsafe partial int ADsGetLastError(
+            out int error,
+            char* errorBuffer,
+            int errorBufferLength,
+            char* nameBuffer,
+            int nameBufferLength
+        );
 
-        [LibraryImport(global::Interop.Libraries.Activeds, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            global::Interop.Libraries.Activeds,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         public static partial int ADsSetLastError(int error, string? errorString, string? provider);
 
         public sealed class EnumVariant
@@ -114,9 +125,11 @@ namespace System.DirectoryServices
         [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         public interface IEnumVariant
         {
-            void Next([In, MarshalAs(UnmanagedType.U4)] int celt,
-                      [In, Out] IntPtr rgvar,
-                      [Out, MarshalAs(UnmanagedType.LPArray)] int[] pceltFetched);
+            void Next(
+                [In, MarshalAs(UnmanagedType.U4)] int celt,
+                [In, Out] IntPtr rgvar,
+                [Out, MarshalAs(UnmanagedType.LPArray)] int[] pceltFetched
+            );
 
             void Skip([In, MarshalAs(UnmanagedType.U4)] int celt);
 

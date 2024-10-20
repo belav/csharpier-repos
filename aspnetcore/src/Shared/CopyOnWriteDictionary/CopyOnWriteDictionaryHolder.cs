@@ -9,7 +9,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.Extensions.Internal;
 
-internal struct CopyOnWriteDictionaryHolder<TKey, TValue> where TKey : notnull
+internal struct CopyOnWriteDictionaryHolder<TKey, TValue>
+    where TKey : notnull
 {
     private readonly Dictionary<TKey, TValue> _source;
     private Dictionary<TKey, TValue>? _copy;
@@ -71,46 +72,28 @@ internal struct CopyOnWriteDictionaryHolder<TKey, TValue> where TKey : notnull
 
     public Dictionary<TKey, TValue>.KeyCollection Keys
     {
-        get
-        {
-            return ReadDictionary.Keys;
-        }
+        get { return ReadDictionary.Keys; }
     }
 
     public Dictionary<TKey, TValue>.ValueCollection Values
     {
-        get
-        {
-            return ReadDictionary.Values;
-        }
+        get { return ReadDictionary.Values; }
     }
 
     public int Count
     {
-        get
-        {
-            return ReadDictionary.Count;
-        }
+        get { return ReadDictionary.Count; }
     }
 
     public static bool IsReadOnly
     {
-        get
-        {
-            return false;
-        }
+        get { return false; }
     }
 
     public TValue this[TKey key]
     {
-        get
-        {
-            return ReadDictionary[key];
-        }
-        set
-        {
-            WriteDictionary[key] = value;
-        }
+        get { return ReadDictionary[key]; }
+        set { WriteDictionary[key] = value; }
     }
 
     public bool ContainsKey(TKey key)

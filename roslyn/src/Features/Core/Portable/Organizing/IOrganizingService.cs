@@ -25,6 +25,10 @@ namespace Microsoft.CodeAnalysis.Organizing
         /// <summary>
         /// Organize document
         /// </summary>
-        Task<Document> OrganizeAsync(Document document, IEnumerable<ISyntaxOrganizer> organizers, CancellationToken cancellationToken);
+        Task<Document> OrganizeAsync(
+            Document document,
+            IEnumerable<ISyntaxOrganizer> organizers,
+            CancellationToken cancellationToken
+        );
     }
 }

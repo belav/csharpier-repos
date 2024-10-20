@@ -26,7 +26,9 @@ public static class WebHostBuilderNamedPipeExtensions
     {
         if (!OperatingSystem.IsWindows())
         {
-            throw new PlatformNotSupportedException("Named pipes transport requires a Windows operating system.");
+            throw new PlatformNotSupportedException(
+                "Named pipes transport requires a Windows operating system."
+            );
         }
 
         hostBuilder.ConfigureServices(services =>
@@ -44,11 +46,16 @@ public static class WebHostBuilderNamedPipeExtensions
     /// <param name="configureOptions">A callback to configure transport options.</param>
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     [SupportedOSPlatform("windows")]
-    public static IWebHostBuilder UseNamedPipes(this IWebHostBuilder hostBuilder, Action<NamedPipeTransportOptions> configureOptions)
+    public static IWebHostBuilder UseNamedPipes(
+        this IWebHostBuilder hostBuilder,
+        Action<NamedPipeTransportOptions> configureOptions
+    )
     {
-        return hostBuilder.UseNamedPipes().ConfigureServices(services =>
-        {
-            services.Configure(configureOptions);
-        });
+        return hostBuilder
+            .UseNamedPipes()
+            .ConfigureServices(services =>
+            {
+                services.Configure(configureOptions);
+            });
     }
 }

@@ -43,7 +43,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed class RuntimeParameterBuilder : ParameterBuilder
     {
-#region Sync with MonoReflectionParamBuilder in object-internals.h
+        #region Sync with MonoReflectionParamBuilder in object-internals.h
         private MethodBase methodb; /* MethodBuilder, ConstructorBuilder or DynamicMethod */
         private string? name;
         private CustomAttributeBuilder[]? cattrs;
@@ -52,10 +52,15 @@ namespace System.Reflection.Emit
         private int position;
         private int table_idx;
         private object? def_value;
-#endregion
+        #endregion
 
-        [DynamicDependency(nameof(def_value))]  // Automatically keeps all previous fields too due to StructLayout
-        internal RuntimeParameterBuilder(MethodBase mb, int pos, ParameterAttributes attributes, string? strParamName)
+        [DynamicDependency(nameof(def_value))] // Automatically keeps all previous fields too due to StructLayout
+        internal RuntimeParameterBuilder(
+            MethodBase mb,
+            int pos,
+            ParameterAttributes attributes,
+            string? strParamName
+        )
         {
             name = strParamName;
             position = pos;
@@ -84,15 +89,21 @@ namespace System.Reflection.Emit
         {
             if (position > 0)
             {
-                RuntimeTypeBuilder.SetConstantValue(methodb.GetParameterType(position - 1),
-                                  defaultValue, ref defaultValue);
+                RuntimeTypeBuilder.SetConstantValue(
+                    methodb.GetParameterType(position - 1),
+                    defaultValue,
+                    ref defaultValue
+                );
             }
 
             def_value = defaultValue;
             attrs |= ParameterAttributes.HasDefault;
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             CustomAttributeBuilder customBuilder = new CustomAttributeBuilder(con, binaryAttribute);
             string? attrname = con.ReflectedType!.FullName;
@@ -121,7 +132,8 @@ namespace System.Reflection.Emit
             else if (attrname == "System.Runtime.InteropServices.DefaultParameterValueAttribute")
             {
                 /* MS.NET doesn't handle this attribute but we handle it for consistency */
-                CustomAttributeBuilder.CustomAttributeInfo cinfo = CustomAttributeBuilder.decode_cattr(customBuilder);
+                CustomAttributeBuilder.CustomAttributeInfo cinfo =
+                    CustomAttributeBuilder.decode_cattr(customBuilder);
                 /* FIXME: check for type compatibility */
                 SetConstant(cinfo.ctorArgs[0]);
                 return;

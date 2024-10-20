@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Http;
 #if COMPONENTS
 using Microsoft.AspNetCore.Components.Forms;
 #endif
-using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
@@ -13,7 +13,13 @@ internal sealed class FileConverter<T> : FormDataConverter<T>
 {
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
-    internal override bool TryRead(ref FormDataReader reader, Type type, FormDataMapperOptions options, out T? result, out bool found)
+    internal override bool TryRead(
+        ref FormDataReader reader,
+        Type type,
+        FormDataMapperOptions options,
+        out T? result,
+        out bool found
+    )
     {
         if (reader.FormFileCollection == null)
         {
@@ -41,9 +47,14 @@ internal sealed class FileConverter<T> : FormDataConverter<T>
             var buffer = ReadOnlyCollectionBufferAdapter<IBrowserFile>.CreateBuffer();
             for (var i = 0; i < targetFiles.Count; i++)
             {
-                buffer = ReadOnlyCollectionBufferAdapter<IBrowserFile>.Add(ref buffer, new BrowserFileFromFormFile(targetFiles[i]));
+                buffer = ReadOnlyCollectionBufferAdapter<IBrowserFile>.Add(
+                    ref buffer,
+                    new BrowserFileFromFormFile(targetFiles[i])
+                );
             }
-            result = (T)(IReadOnlyList<IBrowserFile>)ReadOnlyCollectionBufferAdapter<IBrowserFile>.ToResult(buffer);
+            result = (T)
+                (IReadOnlyList<IBrowserFile>)
+                    ReadOnlyCollectionBufferAdapter<IBrowserFile>.ToResult(buffer);
             found = true;
             return true;
         }

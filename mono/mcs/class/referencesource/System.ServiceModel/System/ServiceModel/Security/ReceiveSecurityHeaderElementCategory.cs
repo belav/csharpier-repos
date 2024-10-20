@@ -13,6 +13,6 @@ namespace System.ServiceModel.Security
         ReferenceList,
         SecurityTokenReference,
         Timestamp,
-        Token
+        Token,
     }
 }

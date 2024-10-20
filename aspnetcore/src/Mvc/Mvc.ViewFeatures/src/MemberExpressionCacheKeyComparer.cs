@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal sealed class MemberExpressionCacheKeyComparer : IEqualityComparer<MemberExpressionCacheKey>
 {
-    public static readonly MemberExpressionCacheKeyComparer Instance = new MemberExpressionCacheKeyComparer();
+    public static readonly MemberExpressionCacheKeyComparer Instance =
+        new MemberExpressionCacheKeyComparer();
 
     public bool Equals(MemberExpressionCacheKey x, MemberExpressionCacheKey y)
     {

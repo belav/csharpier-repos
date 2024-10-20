@@ -16,7 +16,8 @@ namespace System.Collections.Immutable.Tests
         /// A test for Empty
         /// </summary>
         /// <typeparam name="T">The type of elements held in the stack.</typeparam>
-        private void EmptyTestHelper<T>() where T : new()
+        private void EmptyTestHelper<T>()
+            where T : new()
         {
             IImmutableStack<T> actual = ImmutableStack<T>.Empty;
             Assert.NotNull(actual);
@@ -38,7 +39,8 @@ namespace System.Collections.Immutable.Tests
             return result;
         }
 
-        private void PushAndCountTestHelper<T>() where T : new()
+        private void PushAndCountTestHelper<T>()
+            where T : new()
         {
             ImmutableStack<T> actual0 = ImmutableStack<T>.Empty;
             Assert.Equal(0, actual0.Count());
@@ -131,7 +133,8 @@ namespace System.Collections.Immutable.Tests
             this.PopTestHelper(
                 new GenericParameterHelper(1),
                 new GenericParameterHelper(2),
-                new GenericParameterHelper(3));
+                new GenericParameterHelper(3)
+            );
             this.PopTestHelper(1, 2, 3);
         }
 
@@ -158,7 +161,8 @@ namespace System.Collections.Immutable.Tests
             this.PeekTestHelper(
                 new GenericParameterHelper(1),
                 new GenericParameterHelper(2),
-                new GenericParameterHelper(3));
+                new GenericParameterHelper(3)
+            );
             this.PeekTestHelper(1, 2, 3);
         }
 
@@ -208,8 +212,14 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(ImmutableStack<int>.Empty, ImmutableStack<int>.Empty);
             Assert.Equal(ImmutableStack<int>.Empty.Push(3), ImmutableStack<int>.Empty.Push(3));
             Assert.NotEqual(ImmutableStack<int>.Empty.Push(5), ImmutableStack<int>.Empty.Push(3));
-            Assert.NotEqual(ImmutableStack<int>.Empty.Push(3).Push(5), ImmutableStack<int>.Empty.Push(3));
-            Assert.NotEqual(ImmutableStack<int>.Empty.Push(3), ImmutableStack<int>.Empty.Push(3).Push(5));
+            Assert.NotEqual(
+                ImmutableStack<int>.Empty.Push(3).Push(5),
+                ImmutableStack<int>.Empty.Push(3)
+            );
+            Assert.NotEqual(
+                ImmutableStack<int>.Empty.Push(3),
+                ImmutableStack<int>.Empty.Push(3).Push(5)
+            );
         }
 
         [Fact]
@@ -222,13 +232,17 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EmptyPeekThrows()
         {
-            Assert.Throws<InvalidOperationException>(() => ImmutableStack<GenericParameterHelper>.Empty.Peek());
+            Assert.Throws<InvalidOperationException>(
+                () => ImmutableStack<GenericParameterHelper>.Empty.Peek()
+            );
         }
 
         [Fact]
         public void EmptyPopThrows()
         {
-            Assert.Throws<InvalidOperationException>(() => ImmutableStack<GenericParameterHelper>.Empty.Pop());
+            Assert.Throws<InvalidOperationException>(
+                () => ImmutableStack<GenericParameterHelper>.Empty.Pop()
+            );
         }
 
         [Fact]
@@ -253,36 +267,54 @@ namespace System.Collections.Immutable.Tests
             Assert.False(stack.IsEmpty);
             Assert.Equal(new[] { 2, 1 }, stack);
 
-            AssertExtensions.Throws<ArgumentNullException>("items", () => ImmutableStack.CreateRange((IEnumerable<int>)null));
-            AssertExtensions.Throws<ArgumentNullException>("items", () => ImmutableStack.Create((int[])null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "items",
+                () => ImmutableStack.CreateRange((IEnumerable<int>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "items",
+                () => ImmutableStack.Create((int[])null)
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public void DebuggerAttributesValid()
         {
             DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableStack.Create<int>());
             ImmutableStack<string> stack = ImmutableStack.Create<string>("1", "2", "3");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(stack);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                stack
+            );
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                == DebuggerBrowsableState.RootHidden
+            );
             string[] items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(stack, items);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableStack.Create<string>("1", "2", "3"));
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableStack.Create<string>("1", "2", "3")
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
         [Fact]
         public void PeekRef()
         {
-            ImmutableStack<int> stack = ImmutableStack<int>.Empty
-                .Push(1)
-                .Push(2)
-                .Push(3);
+            ImmutableStack<int> stack = ImmutableStack<int>.Empty.Push(1).Push(2).Push(3);
 
             ref readonly int safeRef = ref stack.PeekRef();
             ref int unsafeRef = ref Unsafe.AsRef(in safeRef);

@@ -15,7 +15,9 @@ internal sealed class CommandOption
         OptionType = optionType;
         Values = new List<string>();
 
-        foreach (var part in Template.Split(new[] { ' ', '|' }, StringSplitOptions.RemoveEmptyEntries))
+        foreach (
+            var part in Template.Split(new[] { ' ', '|' }, StringSplitOptions.RemoveEmptyEntries)
+        )
         {
             if (part.StartsWith("--", StringComparison.Ordinal))
             {
@@ -35,17 +37,27 @@ internal sealed class CommandOption
                     ShortName = optName;
                 }
             }
-            else if (part.StartsWith("<", StringComparison.Ordinal) && part.EndsWith(">", StringComparison.Ordinal))
+            else if (
+                part.StartsWith("<", StringComparison.Ordinal)
+                && part.EndsWith(">", StringComparison.Ordinal)
+            )
             {
                 ValueName = part.Substring(1, part.Length - 2);
             }
             else
             {
-                throw new ArgumentException($"Invalid template pattern '{template}'", nameof(template));
+                throw new ArgumentException(
+                    $"Invalid template pattern '{template}'",
+                    nameof(template)
+                );
             }
         }
 
-        if (string.IsNullOrEmpty(LongName) && string.IsNullOrEmpty(ShortName) && string.IsNullOrEmpty(SymbolName))
+        if (
+            string.IsNullOrEmpty(LongName)
+            && string.IsNullOrEmpty(ShortName)
+            && string.IsNullOrEmpty(SymbolName)
+        )
         {
             throw new ArgumentException($"Invalid template pattern '{template}'", nameof(template));
         }

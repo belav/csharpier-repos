@@ -5,8 +5,7 @@ namespace System.IO.Pipelines.Tests
 {
     public class ThrowingStream : ThrowAfterNWritesStream
     {
-        public ThrowingStream() : base(0)
-        {
-        }
+        public ThrowingStream()
+            : base(0) { }
     }
 }

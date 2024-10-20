@@ -18,15 +18,17 @@ namespace System.Data.Objects.DataClasses
     /// Implied default AttributeUsage properties Inherited=True, AllowMultiple=False,
     /// The metadata system expects this and will only look at the first of each of these attributes, even if there are more.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
     [AttributeUsage(AttributeTargets.Property)]
-    public abstract class EdmPropertyAttribute: System.Attribute
+    public abstract class EdmPropertyAttribute : System.Attribute
     {
         /// <summary>
         /// Only allow derived attributes from this assembly
         /// </summary>
-        internal EdmPropertyAttribute()
-        {
-        }
+        internal EdmPropertyAttribute() { }
     }
 }

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlSchemaAttributeGroup.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>   
-// <owner current="true" primary="true">Microsoft</owner>                                                             
+// </copyright>
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Schema {
-
+namespace System.Xml.Schema
+{
     using System.Collections;
     using System.Xml.Serialization;
 
@@ -14,11 +14,12 @@ namespace System.Xml.Schema {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlSchemaAttributeGroup : XmlSchemaAnnotated {
-        string name;        
+    public class XmlSchemaAttributeGroup : XmlSchemaAnnotated
+    {
+        string name;
         XmlSchemaObjectCollection attributes = new XmlSchemaObjectCollection();
         XmlSchemaAnyAttribute anyAttribute;
-        XmlQualifiedName qname = XmlQualifiedName.Empty; 
+        XmlQualifiedName qname = XmlQualifiedName.Empty;
         XmlSchemaAttributeGroup redefined;
         XmlSchemaObjectTable attributeUses;
         XmlSchemaAnyAttribute attributeWildcard;
@@ -29,7 +30,8 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("name")]
-        public string Name { 
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
@@ -38,9 +40,12 @@ namespace System.Xml.Schema {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [XmlElement("attribute", typeof(XmlSchemaAttribute)),
-         XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))]
-        public XmlSchemaObjectCollection Attributes {
+        [
+            XmlElement("attribute", typeof(XmlSchemaAttribute)),
+            XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))
+        ]
+        public XmlSchemaObjectCollection Attributes
+        {
             get { return attributes; }
         }
 
@@ -49,70 +54,82 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("anyAttribute")]
-        public XmlSchemaAnyAttribute AnyAttribute {
+        public XmlSchemaAnyAttribute AnyAttribute
+        {
             get { return anyAttribute; }
             set { anyAttribute = value; }
         }
 
         [XmlIgnore]
-        public XmlQualifiedName QualifiedName {
+        public XmlQualifiedName QualifiedName
+        {
             get { return qname; }
         }
 
         [XmlIgnore]
-        internal XmlSchemaObjectTable AttributeUses {
-            get { 
-                if (attributeUses == null) {
+        internal XmlSchemaObjectTable AttributeUses
+        {
+            get
+            {
+                if (attributeUses == null)
+                {
                     attributeUses = new XmlSchemaObjectTable();
                 }
-                return attributeUses; 
+                return attributeUses;
             }
         }
 
         [XmlIgnore]
-        internal XmlSchemaAnyAttribute AttributeWildcard {
+        internal XmlSchemaAnyAttribute AttributeWildcard
+        {
             get { return attributeWildcard; }
             set { attributeWildcard = value; }
         }
 
         /// <include file='doc\XmlSchemaAttributeGroup.uex' path='docs/doc[@for="XmlSchemaAttributeGroup.RedefinedAttributeGroup"]/*' />
         [XmlIgnore]
-        public XmlSchemaAttributeGroup RedefinedAttributeGroup {
+        public XmlSchemaAttributeGroup RedefinedAttributeGroup
+        {
             get { return redefined; }
         }
 
         [XmlIgnore]
-        internal XmlSchemaAttributeGroup Redefined {
+        internal XmlSchemaAttributeGroup Redefined
+        {
             get { return redefined; }
             set { redefined = value; }
         }
-        
+
         [XmlIgnore]
-        internal int SelfReferenceCount {
+        internal int SelfReferenceCount
+        {
             get { return selfReferenceCount; }
             set { selfReferenceCount = value; }
         }
 
         [XmlIgnore]
-        internal override string NameAttribute {
+        internal override string NameAttribute
+        {
             get { return Name; }
             set { Name = value; }
         }
 
-        internal void SetQualifiedName(XmlQualifiedName value) { 
+        internal void SetQualifiedName(XmlQualifiedName value)
+        {
             qname = value;
         }
 
-        internal override XmlSchemaObject Clone() {
+        internal override XmlSchemaObject Clone()
+        {
             XmlSchemaAttributeGroup newGroup = (XmlSchemaAttributeGroup)MemberwiseClone();
-            if (XmlSchemaComplexType.HasAttributeQNameRef(this.attributes)) { //If a ref/type name is present
+            if (XmlSchemaComplexType.HasAttributeQNameRef(this.attributes))
+            { //If a ref/type name is present
                 newGroup.attributes = XmlSchemaComplexType.CloneAttributes(this.attributes);
-                
+
                 //Clear compiled tables
                 newGroup.attributeUses = null;
             }
             return newGroup;
         }
     }
-
 }

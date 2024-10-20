@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DefaultValueFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(int i)
@@ -28,7 +29,8 @@ class C
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'i = default(int);')
     Expression: 
@@ -39,14 +41,19 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
           IDefaultValueOperation (OperationKind.DefaultValue, Type: System.Int32, Constant: 0) (Syntax: 'default(int)')
 ";
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string s)
@@ -58,7 +65,8 @@ class C
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 's = default;')
     Expression: 
@@ -71,14 +79,19 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
             Operand: 
               IDefaultValueOperation (OperationKind.DefaultValue, Type: System.String, Constant: null) (Syntax: 'default')";
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueFlow_03()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(string s)
@@ -91,13 +104,17 @@ class C
 }
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.M2(int)' and 'C.M2(string)'
                 //         M2(default);
-                Diagnostic(ErrorCode.ERR_AmbigCall, "M2").WithArguments("C.M2(int)", "C.M2(string)").WithLocation(6, 9)
+                Diagnostic(ErrorCode.ERR_AmbigCall, "M2")
+                    .WithArguments("C.M2(int)", "C.M2(string)")
+                    .WithLocation(6, 9),
             };
 
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syntax: '{ ... }')
   IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null, IsInvalid) (Syntax: 'M2(default);')
     Expression: 
@@ -105,7 +122,11 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
         Children(1):
             IDefaultValueOperation (OperationKind.DefaultValue, Type: ?) (Syntax: 'default')";
 
-            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
     }
 }

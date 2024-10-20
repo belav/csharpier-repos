@@ -5,7 +5,8 @@ namespace System.Net
 {
     internal static class ExceptionHelper
     {
-        internal static NotSupportedException PropertyNotSupportedException => new NotSupportedException(SR.net_PropertyNotSupportedException);
+        internal static NotSupportedException PropertyNotSupportedException =>
+            new NotSupportedException(SR.net_PropertyNotSupportedException);
 
         internal static WebException RequestAbortedException => new WebException(SR.net_reqaborted);
 

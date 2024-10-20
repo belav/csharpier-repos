@@ -4,8 +4,8 @@
 
 using System;
 using System.CodeDom;
-using System.Security.Permissions;
 using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.Workflow.ComponentModel.Compiler;
 
 namespace System.Workflow.Activities.Rules
@@ -21,18 +21,14 @@ namespace System.Workflow.Activities.Rules
         /// Initializes a new instance of the RuleException class
         /// </summary>
         public RuleException()
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of the RuleException class
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception</param>
         public RuleException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the RuleException class
@@ -40,9 +36,7 @@ namespace System.Workflow.Activities.Rules
         /// <param name="message">The error message that explains the reason for the exception</param>
         /// <param name="ex">The inner exception</param>
         public RuleException(string message, Exception ex)
-            : base(message, ex)
-        {
-        }
+            : base(message, ex) { }
 
         /// <summary>
         /// Constructor required by for Serialization - initialize a new instance from serialized data
@@ -50,9 +44,7 @@ namespace System.Workflow.Activities.Rules
         /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize the exception</param>
         /// <param name="context">Provides the means for deserializing the exception data</param>
         protected RuleException(SerializationInfo serializeInfo, StreamingContext context)
-            : base(serializeInfo, context)
-        {
-        }
+            : base(serializeInfo, context) { }
     }
     #endregion
 
@@ -67,18 +59,14 @@ namespace System.Workflow.Activities.Rules
         /// Initializes a new instance of the RuleRuntimeException class
         /// </summary>
         public RuleEvaluationException()
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of the RuleRuntimeException class
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception</param>
         public RuleEvaluationException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the RuleRuntimeException class
@@ -86,9 +74,7 @@ namespace System.Workflow.Activities.Rules
         /// <param name="message">The error message that explains the reason for the exception</param>
         /// <param name="ex">The inner exception</param>
         public RuleEvaluationException(string message, Exception ex)
-            : base(message, ex)
-        {
-        }
+            : base(message, ex) { }
 
         /// <summary>
         /// Constructor required by for Serialization - initialize a new instance from serialized data
@@ -96,9 +82,7 @@ namespace System.Workflow.Activities.Rules
         /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize the exception</param>
         /// <param name="context">Provides the means for deserializing the exception data</param>
         protected RuleEvaluationException(SerializationInfo serializeInfo, StreamingContext context)
-            : base(serializeInfo, context)
-        {
-        }
+            : base(serializeInfo, context) { }
     }
     #endregion
 
@@ -144,18 +128,14 @@ namespace System.Workflow.Activities.Rules
         /// Initializes a new instance of the RuleEvaluationIncompatibleTypesException class
         /// </summary>
         public RuleEvaluationIncompatibleTypesException()
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of the RuleEvaluationIncompatibleTypesException class
         /// </summary>
         /// <param name="message"></param>
         public RuleEvaluationIncompatibleTypesException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the RuleEvaluationIncompatibleTypesException class
@@ -163,9 +143,7 @@ namespace System.Workflow.Activities.Rules
         /// <param name="message"></param>
         /// <param name="ex"></param>
         public RuleEvaluationIncompatibleTypesException(string message, Exception ex)
-            : base(message, ex)
-        {
-        }
+            : base(message, ex) { }
 
         /// <summary>
         /// Initializes a new instance of the RuleEvaluationIncompatibleTypesException class
@@ -178,7 +156,8 @@ namespace System.Workflow.Activities.Rules
             string message,
             Type left,
             CodeBinaryOperatorType op,
-            Type right)
+            Type right
+        )
             : base(message)
         {
             m_leftType = left;
@@ -199,7 +178,8 @@ namespace System.Workflow.Activities.Rules
             Type left,
             CodeBinaryOperatorType op,
             Type right,
-            Exception ex)
+            Exception ex
+        )
             : base(message, ex)
         {
             m_leftType = left;
@@ -212,7 +192,10 @@ namespace System.Workflow.Activities.Rules
         /// </summary>
         /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize the exception</param>
         /// <param name="context">Provides the means for deserializing the exception data</param>
-        protected RuleEvaluationIncompatibleTypesException(SerializationInfo serializeInfo, StreamingContext context)
+        protected RuleEvaluationIncompatibleTypesException(
+            SerializationInfo serializeInfo,
+            StreamingContext context
+        )
             : base(serializeInfo, context)
         {
             if (serializeInfo == null)
@@ -220,7 +203,8 @@ namespace System.Workflow.Activities.Rules
             string qualifiedTypeString = serializeInfo.GetString("left");
             if (qualifiedTypeString != "null")
                 m_leftType = Type.GetType(qualifiedTypeString);
-            m_op = (CodeBinaryOperatorType)serializeInfo.GetValue("op", typeof(CodeBinaryOperatorType));
+            m_op = (CodeBinaryOperatorType)
+                serializeInfo.GetValue("op", typeof(CodeBinaryOperatorType));
             qualifiedTypeString = serializeInfo.GetString("right");
             if (qualifiedTypeString != "null")
                 m_rightType = Type.GetType(qualifiedTypeString);
@@ -239,7 +223,10 @@ namespace System.Workflow.Activities.Rules
             base.GetObjectData(info, context);
             info.AddValue("left", (m_leftType != null) ? m_leftType.AssemblyQualifiedName : "null");
             info.AddValue("op", m_op);
-            info.AddValue("right", (m_rightType != null) ? m_rightType.AssemblyQualifiedName : "null");
+            info.AddValue(
+                "right",
+                (m_rightType != null) ? m_rightType.AssemblyQualifiedName : "null"
+            );
         }
     }
     #endregion
@@ -265,18 +252,14 @@ namespace System.Workflow.Activities.Rules
         /// Initializes a new instance of the RuleSetValidationException class
         /// </summary>
         public RuleSetValidationException()
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
         /// Initializes a new instance of the RuleSetValidationException class
         /// </summary>
         /// <param name="message"></param>
         public RuleSetValidationException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         /// <summary>
         /// Initializes a new instance of the RuleSetValidationException class
@@ -284,18 +267,14 @@ namespace System.Workflow.Activities.Rules
         /// <param name="message"></param>
         /// <param name="ex"></param>
         public RuleSetValidationException(string message, Exception ex)
-            : base(message, ex)
-        {
-        }
+            : base(message, ex) { }
 
         /// <summary>
         /// Initializes a new instance of the RuleSetValidationException class
         /// </summary>
         /// <param name="message"></param>
         /// <param name="errors"></param>
-        public RuleSetValidationException(
-            string message,
-            ValidationErrorCollection errors)
+        public RuleSetValidationException(string message, ValidationErrorCollection errors)
             : base(message)
         {
             m_errors = errors;
@@ -306,12 +285,16 @@ namespace System.Workflow.Activities.Rules
         /// </summary>
         /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize the exception</param>
         /// <param name="context">Provides the means for deserializing the exception data</param>
-        protected RuleSetValidationException(SerializationInfo serializeInfo, StreamingContext context)
+        protected RuleSetValidationException(
+            SerializationInfo serializeInfo,
+            StreamingContext context
+        )
             : base(serializeInfo, context)
         {
             if (serializeInfo == null)
                 throw new ArgumentNullException("serializeInfo");
-            m_errors = (ValidationErrorCollection)serializeInfo.GetValue("errors", typeof(ValidationErrorCollection));
+            m_errors = (ValidationErrorCollection)
+                serializeInfo.GetValue("errors", typeof(ValidationErrorCollection));
         }
 
         /// <summary>

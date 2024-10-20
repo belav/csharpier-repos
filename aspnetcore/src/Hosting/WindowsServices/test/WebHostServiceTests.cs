@@ -27,7 +27,8 @@ public class WebHostServiceTests
         webHostService.Start();
 
         await Assert.ThrowsAsync<TaskCanceledException>(
-            () => Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped));
+            () => Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped)
+        );
     }
 
     [ConditionalFact]
@@ -41,7 +42,8 @@ public class WebHostServiceTests
         applicationLifetime.StopApplication();
 
         await Assert.ThrowsAsync<TaskCanceledException>(
-            () => Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped));
+            () => Task.Delay(OperationTimeout, applicationLifetime.ApplicationStopped)
+        );
     }
 
     private sealed class FakeServer : IServer
@@ -51,7 +53,10 @@ public class WebHostServiceTests
 
         public void Dispose() { }
 
-        public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
+        public Task StartAsync<TContext>(
+            IHttpApplication<TContext> application,
+            CancellationToken cancellationToken
+        )
         {
             RequestDelegate = ctx => throw new NotSupportedException();
 

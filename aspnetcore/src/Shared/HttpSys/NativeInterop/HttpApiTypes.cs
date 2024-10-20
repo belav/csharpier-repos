@@ -1,4 +1,3 @@
-
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
@@ -11,9 +10,12 @@ namespace Microsoft.AspNetCore.HttpSys.Internal;
 internal static unsafe class HttpApiTypes
 {
     // 255 + the null terminator
-    internal const int SniPropertySizeInBytes = (int)((sizeof(ushort) * (PInvoke.HTTP_REQUEST_PROPERTY_SNI_HOST_MAX_LENGTH + 1)) + sizeof(uint));
+    internal const int SniPropertySizeInBytes = (int)(
+        (sizeof(ushort) * (PInvoke.HTTP_REQUEST_PROPERTY_SNI_HOST_MAX_LENGTH + 1)) + sizeof(uint)
+    );
 
-    internal static FrozenDictionary<string, int> KnownResponseHeaders { get; } = CreateLookupTable();
+    internal static FrozenDictionary<string, int> KnownResponseHeaders { get; } =
+        CreateLookupTable();
 
     private static FrozenDictionary<string, int> CreateLookupTable()
     {
@@ -30,7 +32,6 @@ internal static unsafe class HttpApiTypes
             HeaderNames.Upgrade,
             HeaderNames.Via,
             HeaderNames.Warning,
-
             HeaderNames.Allow,
             HeaderNames.ContentLength,
             HeaderNames.ContentType,
@@ -41,7 +42,6 @@ internal static unsafe class HttpApiTypes
             HeaderNames.ContentRange,
             HeaderNames.Expires,
             HeaderNames.LastModified,
-
             HeaderNames.AcceptRanges,
             HeaderNames.Age,
             HeaderNames.ETag,
@@ -55,6 +55,10 @@ internal static unsafe class HttpApiTypes
         ];
 
         var index = 0;
-        return headerNames.ToFrozenDictionary(s => s, _ => index++, StringComparer.OrdinalIgnoreCase);
+        return headerNames.ToFrozenDictionary(
+            s => s,
+            _ => index++,
+            StringComparer.OrdinalIgnoreCase
+        );
     }
 }

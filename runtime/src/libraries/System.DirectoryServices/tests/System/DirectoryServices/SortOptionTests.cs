@@ -30,15 +30,23 @@ namespace System.DirectoryServices.Tests
         [Fact]
         public void Ctor_NullPropertyName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new SortOption(null, SortDirection.Ascending));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new SortOption(null, SortDirection.Ascending)
+            );
         }
 
         [Theory]
         [InlineData(SortDirection.Ascending - 1)]
         [InlineData(SortDirection.Descending + 1)]
-        public void Ctor_InvalidDirection_ThrowsInvalidEnumArgumentException(SortDirection direction)
+        public void Ctor_InvalidDirection_ThrowsInvalidEnumArgumentException(
+            SortDirection direction
+        )
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => new SortOption("propertyName", direction));
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "value",
+                () => new SortOption("propertyName", direction)
+            );
         }
     }
 }

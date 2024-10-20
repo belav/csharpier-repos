@@ -28,130 +28,141 @@
 
 using System;
 using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
 using Microsoft.Build.Tasks.Deployment.ManifestUtilities;
+using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public abstract class GenerateManifestBase : Task {
-	
-		string		assemblyName;
-		string		assemblyVersion;
-		string		description;
-		ITaskItem	entryPoint;
-		ITaskItem	inputManifest;
-		int		maxTargetPath;
-		ITaskItem	outputManifest;
-		string		platform;
-		string		targetCulture;
-	
-		protected GenerateManifestBase ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public abstract class GenerateManifestBase : Task
+    {
+        string assemblyName;
+        string assemblyVersion;
+        string description;
+        ITaskItem entryPoint;
+        ITaskItem inputManifest;
+        int maxTargetPath;
+        ITaskItem outputManifest;
+        string platform;
+        string targetCulture;
 
-		[MonoTODO]
-		public override bool Execute ()
-		{
-			return false;
-		}
-		
-		[MonoTODO]
-		protected internal AssemblyReference AddAssemblyFromItem (ITaskItem item)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected internal AssemblyReference AddAssemblyNameFromItem (ITaskItem item,
-									      AssemblyReferenceType referenceType)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected internal AssemblyReference AddEntryPointFromItem (ITaskItem item,
-									    AssemblyReferenceType referenceType)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected internal FileReference AddFileFromItem (ITaskItem item)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected internal FileReference FindFileFromItem (ITaskItem item)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected abstract Type GetObjectType ();
-		
-		[MonoTODO]
-		protected abstract bool OnManifestLoaded (Manifest manifest);
-		
-		[MonoTODO]
-		protected abstract bool OnManifestResolved (Manifest manifest);
-		
-		[MonoTODO]
-		protected internal virtual bool ValidateInputs ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		protected internal virtual bool ValidateOutput ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public string AssemblyName {
-			get { return assemblyName; }
-			set { assemblyName = value; }
-		}
-		
-		public string AssemblyVersion {
-			get { return assemblyVersion; }
-			set { assemblyVersion = value; }
-		}
-		
-		public string Description {
-			get { return description; }
-			set { description = value; }
-		}
-		
-		public ITaskItem EntryPoint {
-			get { return entryPoint; }
-			set { entryPoint = value; }
-		}
-		
-		public ITaskItem InputManifest {
-			get { return inputManifest; }
-			set { inputManifest = value; }
-		}
-		
-		public int MaxTargetPath {
-			get { return maxTargetPath; }
-			set { maxTargetPath = value; }
-		}
-		
-		[Output]
-		public ITaskItem OutputManifest {
-			get { return outputManifest; }
-			set { outputManifest = value; }
-		}
-		
-		public string Platform {
-			get { return platform; }
-			set { platform = value; }
-		}
-		
-		public string TargetCulture {
-			get { return targetCulture; }
-			set { targetCulture = value; }
-		}
-	}
+        protected GenerateManifestBase() { }
+
+        [MonoTODO]
+        public override bool Execute()
+        {
+            return false;
+        }
+
+        [MonoTODO]
+        protected internal AssemblyReference AddAssemblyFromItem(ITaskItem item)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected internal AssemblyReference AddAssemblyNameFromItem(
+            ITaskItem item,
+            AssemblyReferenceType referenceType
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected internal AssemblyReference AddEntryPointFromItem(
+            ITaskItem item,
+            AssemblyReferenceType referenceType
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected internal FileReference AddFileFromItem(ITaskItem item)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected internal FileReference FindFileFromItem(ITaskItem item)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected abstract Type GetObjectType();
+
+        [MonoTODO]
+        protected abstract bool OnManifestLoaded(Manifest manifest);
+
+        [MonoTODO]
+        protected abstract bool OnManifestResolved(Manifest manifest);
+
+        [MonoTODO]
+        protected internal virtual bool ValidateInputs()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected internal virtual bool ValidateOutput()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string AssemblyName
+        {
+            get { return assemblyName; }
+            set { assemblyName = value; }
+        }
+
+        public string AssemblyVersion
+        {
+            get { return assemblyVersion; }
+            set { assemblyVersion = value; }
+        }
+
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
+
+        public ITaskItem EntryPoint
+        {
+            get { return entryPoint; }
+            set { entryPoint = value; }
+        }
+
+        public ITaskItem InputManifest
+        {
+            get { return inputManifest; }
+            set { inputManifest = value; }
+        }
+
+        public int MaxTargetPath
+        {
+            get { return maxTargetPath; }
+            set { maxTargetPath = value; }
+        }
+
+        [Output]
+        public ITaskItem OutputManifest
+        {
+            get { return outputManifest; }
+            set { outputManifest = value; }
+        }
+
+        public string Platform
+        {
+            get { return platform; }
+            set { platform = value; }
+        }
+
+        public string TargetCulture
+        {
+            get { return targetCulture; }
+            set { targetCulture = value; }
+        }
+    }
 }
-

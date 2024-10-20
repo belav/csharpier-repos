@@ -30,98 +30,120 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Data.SqlClient {
-	[TestFixture]
-	public class SqlBulkCopyTest {
-		private const string testFailParamNameMessage = "We have to provide the same parameter name as in original .NET";
-		
-		[Test] // .ctor(SqlConnection connection)
+namespace MonoTests.System.Data.SqlClient
+{
+    [TestFixture]
+    public class SqlBulkCopyTest
+    {
+        private const string testFailParamNameMessage =
+            "We have to provide the same parameter name as in original .NET";
+
+        [Test] // .ctor(SqlConnection connection)
 #if FEATURE_NO_BSD_SOCKETS
-		[ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #else
-		[ExpectedException (typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
 #endif
-		public void ConstructorNotNull1 ()
-		{
-			new SqlBulkCopy ((SqlConnection)null);
-		}
-		
-		[Test] // .ctor(string connectionString)
+        public void ConstructorNotNull1()
+        {
+            new SqlBulkCopy((SqlConnection)null);
+        }
+
+        [Test] // .ctor(string connectionString)
 #if FEATURE_NO_BSD_SOCKETS
-		[ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #else
-		[ExpectedException (typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
 #endif
-		public void ConstructorNotNull2 ()
-		{
-			new SqlBulkCopy ((string)null);
-		}
-		
-		[Test] // .ctor(SqlConnection connection)
+        public void ConstructorNotNull2()
+        {
+            new SqlBulkCopy((string)null);
+        }
+
+        [Test] // .ctor(SqlConnection connection)
 #if FEATURE_NO_BSD_SOCKETS
-		[ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #else
-		[ExpectedException (typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
 #endif
-		public void ConstructorNotNull3 ()
-		{
-			try {
-				new SqlBulkCopy ((SqlConnection)null);
-			} catch (ArgumentNullException ane) {
-				Assert.AreEqual ("connection", ane.ParamName, "#001 - " + testFailParamNameMessage);
-				throw;
-			}
-		}
-		
-		[Test] // .ctor(string connectionString)
+        public void ConstructorNotNull3()
+        {
+            try
+            {
+                new SqlBulkCopy((SqlConnection)null);
+            }
+            catch (ArgumentNullException ane)
+            {
+                Assert.AreEqual("connection", ane.ParamName, "#001 - " + testFailParamNameMessage);
+                throw;
+            }
+        }
+
+        [Test] // .ctor(string connectionString)
 #if FEATURE_NO_BSD_SOCKETS
-		[ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #else
-		[ExpectedException (typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
 #endif
-		public void ConstructorNotNull4 ()
-		{
-			try {
-				new SqlBulkCopy ((string)null);
-			} catch (ArgumentNullException ane) {
-				Assert.AreEqual ("connectionString", ane.ParamName, "#002 - " + testFailParamNameMessage);
-				throw;
-			}
-		}
-		
-		[Test] // .ctor(string connectionString)
+        public void ConstructorNotNull4()
+        {
+            try
+            {
+                new SqlBulkCopy((string)null);
+            }
+            catch (ArgumentNullException ane)
+            {
+                Assert.AreEqual(
+                    "connectionString",
+                    ane.ParamName,
+                    "#002 - " + testFailParamNameMessage
+                );
+                throw;
+            }
+        }
+
+        [Test] // .ctor(string connectionString)
 #if FEATURE_NO_BSD_SOCKETS
-		[ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #else
-		[ExpectedException (typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
 #endif
-		public void ConstructorNotNull5 ()
-		{
-			try {
-				new SqlBulkCopy ((string)null, SqlBulkCopyOptions.Default);
-			} catch (ArgumentNullException ane) {
-				Assert.AreEqual ("connectionString", ane.ParamName, "#003 - " + testFailParamNameMessage);
-				throw;
-			}
-		}
-		
-		[Test] // .ctor(string connectionString)
+        public void ConstructorNotNull5()
+        {
+            try
+            {
+                new SqlBulkCopy((string)null, SqlBulkCopyOptions.Default);
+            }
+            catch (ArgumentNullException ane)
+            {
+                Assert.AreEqual(
+                    "connectionString",
+                    ane.ParamName,
+                    "#003 - " + testFailParamNameMessage
+                );
+                throw;
+            }
+        }
+
+        [Test] // .ctor(string connectionString)
 #if FEATURE_NO_BSD_SOCKETS
-		[ExpectedException (typeof (PlatformNotSupportedException))]
+        [ExpectedException(typeof(PlatformNotSupportedException))]
 #else
-		[ExpectedException (typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentNullException))]
 #endif
-		public void ConstructorNotNull6 ()
-		{
-			try {
-				new SqlBulkCopy ((SqlConnection)null, SqlBulkCopyOptions.Default, null);
-			} catch (ArgumentNullException ane) {
-				Assert.AreEqual ("connection", ane.ParamName, "#004 - " + testFailParamNameMessage);
-				throw;
-			}
-		}
-	}
+        public void ConstructorNotNull6()
+        {
+            try
+            {
+                new SqlBulkCopy((SqlConnection)null, SqlBulkCopyOptions.Default, null);
+            }
+            catch (ArgumentNullException ane)
+            {
+                Assert.AreEqual("connection", ane.ParamName, "#004 - " + testFailParamNameMessage);
+                throw;
+            }
+        }
+    }
 }

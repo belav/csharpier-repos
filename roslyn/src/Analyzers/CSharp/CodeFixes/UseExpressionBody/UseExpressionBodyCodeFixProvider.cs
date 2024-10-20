@@ -22,29 +22,37 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseExpressionBody), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseExpressionBody
+        ),
+        Shared
+    ]
     internal partial class UseExpressionBodyCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         public sealed override ImmutableArray<string> FixableDiagnosticIds { get; }
 
-        private static readonly ImmutableArray<UseExpressionBodyHelper> _helpers = UseExpressionBodyHelper.Helpers;
+        private static readonly ImmutableArray<UseExpressionBodyHelper> _helpers =
+            UseExpressionBodyHelper.Helpers;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public UseExpressionBodyCodeFixProvider()
-            => FixableDiagnosticIds = _helpers.SelectAsArray(h => h.DiagnosticId);
+        public UseExpressionBodyCodeFixProvider() =>
+            FixableDiagnosticIds = _helpers.SelectAsArray(h => h.DiagnosticId);
 
-        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic)
-            => !diagnostic.IsSuppressed ||
-               diagnostic.Properties.ContainsKey(UseExpressionBodyDiagnosticAnalyzer.FixesError);
+        protected override bool IncludeDiagnosticDuringFixAll(Diagnostic diagnostic) =>
+            !diagnostic.IsSuppressed
+            || diagnostic.Properties.ContainsKey(UseExpressionBodyDiagnosticAnalyzer.FixesError);
 
         public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var diagnostic = context.Diagnostics.First();
 
-            var priority = diagnostic.Severity == DiagnosticSeverity.Hidden
-                ? CodeActionPriority.Low
-                : CodeActionPriority.Default;
+            var priority =
+                diagnostic.Severity == DiagnosticSeverity.Hidden
+                    ? CodeActionPriority.Low
+                    : CodeActionPriority.Default;
 
             var title = diagnostic.GetMessage();
 
@@ -53,10 +61,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var accessorLists = new HashSet<AccessorListSyntax>();
             foreach (var diagnostic in diagnostics)
@@ -70,22 +84,32 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             // individual changes made to the child accessors if we're doing a fix-all.
             foreach (var accessorList in accessorLists)
             {
-                editor.ReplaceNode(accessorList, (current, _) => current.WithAdditionalAnnotations(Formatter.Annotation));
+                editor.ReplaceNode(
+                    accessorList,
+                    (current, _) => current.WithAdditionalAnnotations(Formatter.Annotation)
+                );
             }
         }
 
         private static void AddEdits(
-            SemanticModel semanticModel, SyntaxEditor editor, Diagnostic diagnostic,
+            SemanticModel semanticModel,
+            SyntaxEditor editor,
+            Diagnostic diagnostic,
             HashSet<AccessorListSyntax> accessorLists,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var declarationLocation = diagnostic.AdditionalLocations[0];
             var helper = _helpers.Single(h => h.DiagnosticId == diagnostic.Id);
-            var declaration = declarationLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
+            var declaration = declarationLocation.FindNode(
+                getInnermostNodeForTie: true,
+                cancellationToken
+            );
             var useExpressionBody = diagnostic.Properties.ContainsKey(nameof(UseExpressionBody));
 
-            var updatedDeclaration = helper.Update(semanticModel, declaration, useExpressionBody, cancellationToken)
-                                           .WithAdditionalAnnotations(Formatter.Annotation);
+            var updatedDeclaration = helper
+                .Update(semanticModel, declaration, useExpressionBody, cancellationToken)
+                .WithAdditionalAnnotations(Formatter.Annotation);
 
             editor.ReplaceNode(declaration, updatedDeclaration);
 

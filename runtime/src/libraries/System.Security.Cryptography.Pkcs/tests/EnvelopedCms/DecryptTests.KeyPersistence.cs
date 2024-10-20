@@ -1,9 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
-
 using System.Security.Cryptography.Pkcs.Tests;
+using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
@@ -25,7 +24,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 Certificates.RSASha256KeyTransfer1.CloneAsEphemeralLoader(),
                 contentInfo,
                 algOid,
-                SubjectIdentifierType.IssuerAndSerialNumber);
+                SubjectIdentifierType.IssuerAndSerialNumber
+            );
         }
 
         [Theory]
@@ -45,7 +45,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 Certificates.RSASha256KeyTransfer1.CloneAsPerphemeralLoader(),
                 contentInfo,
                 algOid,
-                SubjectIdentifierType.IssuerAndSerialNumber);
+                SubjectIdentifierType.IssuerAndSerialNumber
+            );
         }
 
         [Theory]
@@ -64,7 +65,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 Certificates.RSAKeyTransferCapi1.CloneAsEphemeralLoader(),
                 contentInfo,
                 algOid,
-                SubjectIdentifierType.IssuerAndSerialNumber);
+                SubjectIdentifierType.IssuerAndSerialNumber
+            );
         }
 
         [Theory]
@@ -80,7 +82,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public void Decrypt_Capi_Perphemeral(string algOid)
         {
             // Explicit key API uses managed implementation which does not support RC4
-            if (algOid == Oids.Rc4 && (!ContentEncryptionAlgorithmTests.SupportsRc4 || _useExplicitPrivateKey))
+            if (
+                algOid == Oids.Rc4
+                && (!ContentEncryptionAlgorithmTests.SupportsRc4 || _useExplicitPrivateKey)
+            )
             {
                 return;
             }
@@ -91,7 +96,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 Certificates.RSAKeyTransferCapi1.CloneAsPerphemeralLoader(),
                 contentInfo,
                 algOid,
-                SubjectIdentifierType.IssuerAndSerialNumber);
+                SubjectIdentifierType.IssuerAndSerialNumber
+            );
         }
     }
 }

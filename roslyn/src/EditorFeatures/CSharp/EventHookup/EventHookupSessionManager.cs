@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
     internal sealed partial class EventHookupSessionManager(
         IThreadingContext threadingContext,
         IToolTipService toolTipService,
-        IGlobalOptionService globalOptions)
+        IGlobalOptionService globalOptions
+    )
     {
         public readonly IThreadingContext ThreadingContext = threadingContext;
         private readonly IToolTipService _toolTipService = toolTipService;
@@ -49,22 +50,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             // only generate tooltip if it is not already shown (_toolTipPresenter == null)
             // Ensure the analyzed session matches the current session and that the caret is still
             // in the session's tracking span.
-            if (_toolTipPresenter == null &&
-                CurrentSession == analyzedSession &&
-                caretPoint.HasValue &&
-                IsCaretWithinSpanOrAtEnd(analyzedSession.TrackingSpan, analyzedSession.TextView.TextSnapshot, caretPoint.Value))
+            if (
+                _toolTipPresenter == null
+                && CurrentSession == analyzedSession
+                && caretPoint.HasValue
+                && IsCaretWithinSpanOrAtEnd(
+                    analyzedSession.TrackingSpan,
+                    analyzedSession.TextView.TextSnapshot,
+                    caretPoint.Value
+                )
+            )
             {
                 // Create a tooltip presenter that stays alive, even when the user types, without tracking the mouse.
-                _toolTipPresenter = _toolTipService.CreatePresenter(analyzedSession.TextView,
-                    new ToolTipParameters(trackMouse: false, ignoreBufferChange: true));
+                _toolTipPresenter = _toolTipService.CreatePresenter(
+                    analyzedSession.TextView,
+                    new ToolTipParameters(trackMouse: false, ignoreBufferChange: true)
+                );
 
                 // tooltips text is: Program_MyEvents;      (Press TAB to insert)
                 // GetEventNameTask() gets back the event name, only needs to add a semicolon after it.
                 var textRuns = new[]
                 {
-                    new ClassifiedTextRun(ClassificationTypeNames.MethodName, analyzedSession.GetEventNameTask.Result, ClassifiedTextRunStyle.UseClassificationFont),
-                    new ClassifiedTextRun(ClassificationTypeNames.Punctuation, ";", ClassifiedTextRunStyle.UseClassificationFont),
-                    new ClassifiedTextRun(ClassificationTypeNames.Text, CSharpEditorResources.Press_TAB_to_insert),
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.MethodName,
+                        analyzedSession.GetEventNameTask.Result,
+                        ClassifiedTextRunStyle.UseClassificationFont
+                    ),
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Punctuation,
+                        ";",
+                        ClassifiedTextRunStyle.UseClassificationFont
+                    ),
+                    new ClassifiedTextRun(
+                        ClassificationTypeNames.Text,
+                        CSharpEditorResources.Press_TAB_to_insert
+                    ),
                 };
                 var content = new[] { new ClassifiedTextElement(textRuns) };
 
@@ -75,14 +95,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
 
                 // Watch all text buffer changes & caret moves while this event hookup session is active
                 analyzedSession.TextView.TextSnapshot.TextBuffer.Changed += TextBuffer_Changed;
-                CurrentSession.Dismissed += () => { analyzedSession.TextView.TextSnapshot.TextBuffer.Changed -= TextBuffer_Changed; };
+                CurrentSession.Dismissed += () =>
+                {
+                    analyzedSession.TextView.TextSnapshot.TextBuffer.Changed -= TextBuffer_Changed;
+                };
 
                 analyzedSession.TextView.Caret.PositionChanged += Caret_PositionChanged;
-                CurrentSession.Dismissed += () => { analyzedSession.TextView.Caret.PositionChanged -= Caret_PositionChanged; };
+                CurrentSession.Dismissed += () =>
+                {
+                    analyzedSession.TextView.Caret.PositionChanged -= Caret_PositionChanged;
+                };
             }
         }
 
-        private static bool IsCaretWithinSpanOrAtEnd(ITrackingSpan trackingSpan, ITextSnapshot textSnapshot, SnapshotPoint caretPoint)
+        private static bool IsCaretWithinSpanOrAtEnd(
+            ITrackingSpan trackingSpan,
+            ITextSnapshot textSnapshot,
+            SnapshotPoint caretPoint
+        )
         {
             var snapshotSpan = trackingSpan.GetSpan(textSnapshot);
 
@@ -94,9 +124,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
 
             // Otherwise if the span is empty, and at the end of the file, and the caret
             // is also at the end of the file, then show the tooltip.
-            if (snapshotSpan.IsEmpty &&
-                snapshotSpan.Start.Position == caretPoint.Position &&
-                caretPoint.Position == textSnapshot.Length)
+            if (
+                snapshotSpan.IsEmpty
+                && snapshotSpan.Start.Position == caretPoint.Position
+                && caretPoint.Position == textSnapshot.Length
+            )
             {
                 return true;
             }
@@ -109,9 +141,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
             ITextView textView,
             ITextBuffer subjectBuffer,
             IAsynchronousOperationListener asyncListener,
-            Mutex testSessionHookupMutex)
+            Mutex testSessionHookupMutex
+        )
         {
-            CurrentSession = new EventHookupSession(this, eventHookupCommandHandler, textView, subjectBuffer, asyncListener, _globalOptions, testSessionHookupMutex);
+            CurrentSession = new EventHookupSession(
+                this,
+                eventHookupCommandHandler,
+                textView,
+                subjectBuffer,
+                asyncListener,
+                _globalOptions,
+                testSessionHookupMutex
+            );
         }
 
         internal void CancelAndDismissExistingSessions()
@@ -171,14 +212,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 CancelAndDismissExistingSessions();
             }
 
-            var snapshotSpan = CurrentSession.TrackingSpan.GetSpan(CurrentSession.TextView.TextSnapshot);
-            if (snapshotSpan.Snapshot != caretPoint.Value.Snapshot || !snapshotSpan.Contains(caretPoint.Value))
+            var snapshotSpan = CurrentSession.TrackingSpan.GetSpan(
+                CurrentSession.TextView.TextSnapshot
+            );
+            if (
+                snapshotSpan.Snapshot != caretPoint.Value.Snapshot
+                || !snapshotSpan.Contains(caretPoint.Value)
+            )
             {
                 CancelAndDismissExistingSessions();
             }
         }
 
-        internal bool IsTrackingSession()
-            => CurrentSession != null;
+        internal bool IsTrackingSession() => CurrentSession != null;
     }
 }

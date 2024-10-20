@@ -31,13 +31,29 @@ namespace System.Data.Tests.Common
         [Fact]
         public void GetDataColumnBySchemaAction_String_String_DataTable_Type_MissingSchemaAction_MissingDataTableThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("dataTable", () => DataColumnMapping.GetDataColumnBySchemaAction("", "", null, typeof(string), new MissingSchemaAction()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "dataTable",
+                () =>
+                    DataColumnMapping.GetDataColumnBySchemaAction(
+                        "",
+                        "",
+                        null,
+                        typeof(string),
+                        new MissingSchemaAction()
+                    )
+            );
         }
 
         [Fact]
         public void GetDataColumnBySchemaAction_String_String_DataTable_Type_MissingSchemaAction_MissingDataSetColumnReturnsNull()
         {
-            DataColumn dataColumn = DataColumnMapping.GetDataColumnBySchemaAction("", null, new DataTable(), typeof(string), new MissingSchemaAction());
+            DataColumn dataColumn = DataColumnMapping.GetDataColumnBySchemaAction(
+                "",
+                null,
+                new DataTable(),
+                typeof(string),
+                new MissingSchemaAction()
+            );
 
             Assert.Null(dataColumn);
         }
@@ -59,7 +75,16 @@ namespace System.Data.Tests.Common
             dataTable.Columns.Add(priceColumn);
             dataTable.Columns.Add(taxColumn);
 
-            Assert.Throws<InvalidOperationException>(() => DataColumnMapping.GetDataColumnBySchemaAction("", "tax", dataTable, typeof(string), new MissingSchemaAction()));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    DataColumnMapping.GetDataColumnBySchemaAction(
+                        "",
+                        "tax",
+                        dataTable,
+                        typeof(string),
+                        new MissingSchemaAction()
+                    )
+            );
         }
 
         [Fact]

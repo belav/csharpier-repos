@@ -19,7 +19,10 @@ namespace System.Activities.Core.Presentation
             // We need to show SR.ClickToAdd instruction as a whole string without trim.
             // So we need to set the MaxWidth to double.PositiveInfinity. Otherwise, we
             // set it according to the parameter and TextBlock will do proper trimming.
-            double maxWidth = double.Parse(parameter as string, CultureInfo.InvariantCulture.NumberFormat);
+            double maxWidth = double.Parse(
+                parameter as string,
+                CultureInfo.InvariantCulture.NumberFormat
+            );
             return o != null ? maxWidth : DependencyProperty.UnsetValue;
         }
 
@@ -27,6 +30,5 @@ namespace System.Activities.Core.Presentation
         {
             throw FxTrace.Exception.AsError(new NotImplementedException());
         }
-
     }
 }

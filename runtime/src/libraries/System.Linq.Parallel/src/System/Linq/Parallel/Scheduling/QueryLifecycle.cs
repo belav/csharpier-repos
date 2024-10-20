@@ -26,7 +26,6 @@ namespace System.Linq.Parallel
             PlinqEtwProvider.Log.ParallelQueryBegin(queryID);
         }
 
-
         // This method is called once per execution of a logical query.
         // (It is not called multiple time if repartitionings occur)
         internal static void LogicalQueryExecutionEnd(int queryID)

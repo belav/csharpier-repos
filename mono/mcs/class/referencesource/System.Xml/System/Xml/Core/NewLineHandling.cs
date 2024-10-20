@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="NewLineHandling.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">helenak</owner>
 //------------------------------------------------------------------------------
 
@@ -23,9 +23,10 @@ namespace System.Xml
     // ------------------------------------------------------------------------------------------------------------
 
     // Specifies how end of line is handled in XmlWriter.
-    public enum NewLineHandling {
+    public enum NewLineHandling
+    {
         Replace = 0,
         Entitize = 1,
-        None = 2
+        None = 2,
     }
 }

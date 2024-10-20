@@ -15,16 +15,18 @@ public class WebAssemblyPrerenderedTest : ServerTestBase<AspNetSiteServerFixture
     public WebAssemblyPrerenderedTest(
         BrowserFixture browserFixture,
         AspNetSiteServerFixture serverFixture,
-        ITestOutputHelper output)
+        ITestOutputHelper output
+    )
         : base(browserFixture, serverFixture, output)
     {
         serverFixture.BuildWebHostMethod = Wasm.Prerendered.Server.Program.BuildWebHost;
         serverFixture.Environment = AspNetEnvironment.Development;
 
-        var testTrimmedApps = typeof(ToggleExecutionModeServerFixture<>).Assembly
-            .GetCustomAttributes<AssemblyMetadataAttribute>()
-            .First(m => m.Key == "Microsoft.AspNetCore.E2ETesting.TestTrimmedApps")
-            .Value == "true";
+        var testTrimmedApps =
+            typeof(ToggleExecutionModeServerFixture<>)
+                .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                .First(m => m.Key == "Microsoft.AspNetCore.E2ETesting.TestTrimmedApps")
+                .Value == "true";
 
         if (testTrimmedApps)
         {
@@ -51,16 +53,28 @@ public class WebAssemblyPrerenderedTest : ServerTestBase<AspNetSiteServerFixture
     private void WaitUntilLoaded()
     {
         var jsExecutor = (IJavaScriptExecutor)Browser;
-        Browser.True(() => jsExecutor.ExecuteScript("return window['__aspnetcore__testing__blazor_wasm__started__'];") is not null);
+        Browser.True(
+            () =>
+                jsExecutor.ExecuteScript(
+                    "return window['__aspnetcore__testing__blazor_wasm__started__'];"
+                )
+                    is not null
+        );
     }
 
     private static string GetPublishedContentRoot(Assembly assembly)
     {
-        var contentRoot = Path.Combine(AppContext.BaseDirectory, "trimmed", assembly.GetName().Name);
+        var contentRoot = Path.Combine(
+            AppContext.BaseDirectory,
+            "trimmed",
+            assembly.GetName().Name
+        );
 
         if (!Directory.Exists(contentRoot))
         {
-            throw new DirectoryNotFoundException($"Test is configured to use trimmed outputs, but trimmed outputs were not found in {contentRoot}.");
+            throw new DirectoryNotFoundException(
+                $"Test is configured to use trimmed outputs, but trimmed outputs were not found in {contentRoot}."
+            );
         }
 
         return contentRoot;

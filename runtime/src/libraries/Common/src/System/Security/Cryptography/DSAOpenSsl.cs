@@ -30,9 +30,7 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
         public DSAOpenSsl()
-            : this(2048)
-        {
-        }
+            : this(2048) { }
 
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
@@ -76,10 +74,7 @@ namespace System.Security.Cryptography
 
         public override KeySizes[] LegalKeySizes
         {
-            get
-            {
-                return base.LegalKeySizes;
-            }
+            get { return base.LegalKeySizes; }
         }
 
         public override DSAParameters ExportParameters(bool includePrivateParameters)
@@ -87,7 +82,10 @@ namespace System.Security.Cryptography
             // It's entirely possible that this line will cause the key to be generated in the first place.
             SafeDsaHandle key = GetKey();
 
-            DSAParameters dsaParameters = Interop.Crypto.ExportDsaParameters(key, includePrivateParameters);
+            DSAParameters dsaParameters = Interop.Crypto.ExportDsaParameters(
+                key,
+                includePrivateParameters
+            );
             bool hasPrivateKey = dsaParameters.X != null;
 
             if (hasPrivateKey != includePrivateParameters)
@@ -98,7 +96,12 @@ namespace System.Security.Cryptography
 
         public override void ImportParameters(DSAParameters parameters)
         {
-            if (parameters.P == null || parameters.Q == null || parameters.G == null || parameters.Y == null)
+            if (
+                parameters.P == null
+                || parameters.Q == null
+                || parameters.G == null
+                || parameters.Y == null
+            )
                 throw new ArgumentException(SR.Cryptography_InvalidDsaParameters_MissingFields);
 
             // J is not required and is not even used on CNG blobs. It should however be less than P (J == (P-1) / Q). This validation check
@@ -118,13 +121,21 @@ namespace System.Security.Cryptography
             ThrowIfDisposed();
 
             SafeDsaHandle key;
-            if (!Interop.Crypto.DsaKeyCreateByExplicitParameters(
-                out key,
-                parameters.P, parameters.P.Length,
-                parameters.Q, parameters.Q.Length,
-                parameters.G, parameters.G.Length,
-                parameters.Y, parameters.Y.Length,
-                parameters.X, parameters.X != null ? parameters.X.Length : 0))
+            if (
+                !Interop.Crypto.DsaKeyCreateByExplicitParameters(
+                    out key,
+                    parameters.P,
+                    parameters.P.Length,
+                    parameters.Q,
+                    parameters.Q.Length,
+                    parameters.G,
+                    parameters.G.Length,
+                    parameters.Y,
+                    parameters.Y.Length,
+                    parameters.X,
+                    parameters.X != null ? parameters.X.Length : 0
+                )
+            )
             {
                 Exception e = Interop.Crypto.CreateOpenSslCryptographicException();
                 key.Dispose();
@@ -137,7 +148,8 @@ namespace System.Security.Cryptography
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
@@ -146,7 +158,8 @@ namespace System.Security.Cryptography
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);
@@ -202,27 +215,38 @@ namespace System.Security.Cryptography
             int signatureFieldSize = Interop.Crypto.DsaSignatureFieldSize(key) * BitsPerByte;
             Span<byte> signDestination = stackalloc byte[SignatureStackBufSize];
 
-            ReadOnlySpan<byte> derSignature = SignHash(rgbHash, signDestination, signatureSize, key);
-            return AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(derSignature, signatureFieldSize);
+            ReadOnlySpan<byte> derSignature = SignHash(
+                rgbHash,
+                signDestination,
+                signatureSize,
+                key
+            );
+            return AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
+                derSignature,
+                signatureFieldSize
+            );
         }
 
         public override bool TryCreateSignature(
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return TryCreateSignatureCore(
                 hash,
                 destination,
                 DSASignatureFormat.IeeeP1363FixedFieldConcatenation,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         protected override bool TryCreateSignatureCore(
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             DSASignatureFormat signatureFormat,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             SafeDsaHandle key = GetKey();
             int maxSignatureSize = Interop.Crypto.DsaEncodedSignatureSize(key);
@@ -241,8 +265,17 @@ namespace System.Security.Cryptography
 
                 int fieldSizeBits = fieldSizeBytes * 8;
 
-                ReadOnlySpan<byte> derSignature = SignHash(hash, signDestination, maxSignatureSize, key);
-                bytesWritten = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(derSignature, fieldSizeBits, destination);
+                ReadOnlySpan<byte> derSignature = SignHash(
+                    hash,
+                    signDestination,
+                    maxSignatureSize,
+                    key
+                );
+                bytesWritten = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
+                    derSignature,
+                    fieldSizeBits,
+                    destination
+                );
                 Debug.Assert(bytesWritten == p1363SignatureSize);
                 return true;
             }
@@ -254,12 +287,19 @@ namespace System.Security.Cryptography
                 }
                 else if (maxSignatureSize > signDestination.Length)
                 {
-                    Debug.Fail($"Stack-based signDestination is insufficient ({maxSignatureSize} needed)");
+                    Debug.Fail(
+                        $"Stack-based signDestination is insufficient ({maxSignatureSize} needed)"
+                    );
                     bytesWritten = 0;
                     return false;
                 }
 
-                ReadOnlySpan<byte> derSignature = SignHash(hash, signDestination, maxSignatureSize, key);
+                ReadOnlySpan<byte> derSignature = SignHash(
+                    hash,
+                    signDestination,
+                    maxSignatureSize,
+                    key
+                );
 
                 if (destination == signDestination)
                 {
@@ -271,10 +311,13 @@ namespace System.Security.Cryptography
             }
             else
             {
-                Debug.Fail($"Missing internal implementation handler for signature format {signatureFormat}");
+                Debug.Fail(
+                    $"Missing internal implementation handler for signature format {signatureFormat}"
+                );
                 throw new CryptographicException(
                     SR.Cryptography_UnknownSignatureFormat,
-                    signatureFormat.ToString());
+                    signatureFormat.ToString()
+                );
             }
         }
 
@@ -282,11 +325,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             int signatureLength,
-            SafeDsaHandle key)
+            SafeDsaHandle key
+        )
         {
             if (signatureLength > destination.Length)
             {
-                Debug.Fail($"Stack-based signDestination is insufficient ({signatureLength} needed)");
+                Debug.Fail(
+                    $"Stack-based signDestination is insufficient ({signatureLength} needed)"
+                );
                 destination = new byte[signatureLength];
             }
 
@@ -300,7 +346,8 @@ namespace System.Security.Cryptography
                 "DSA_sign reported an unexpected signature size",
                 "DSA_sign reported signatureSize was {0}, when <= {1} was expected",
                 actualLength,
-                signatureLength);
+                signatureLength
+            );
 
             return destination.Slice(0, actualLength);
         }
@@ -313,13 +360,21 @@ namespace System.Security.Cryptography
             return VerifySignature((ReadOnlySpan<byte>)rgbHash, (ReadOnlySpan<byte>)rgbSignature);
         }
 
-        public override bool VerifySignature(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature) =>
-            VerifySignatureCore(hash, signature, DSASignatureFormat.IeeeP1363FixedFieldConcatenation);
+        public override bool VerifySignature(
+            ReadOnlySpan<byte> hash,
+            ReadOnlySpan<byte> signature
+        ) =>
+            VerifySignatureCore(
+                hash,
+                signature,
+                DSASignatureFormat.IeeeP1363FixedFieldConcatenation
+            );
 
         protected override bool VerifySignatureCore(
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             SafeDsaHandle key = GetKey();
 
@@ -336,10 +391,13 @@ namespace System.Security.Cryptography
             }
             else if (signatureFormat != DSASignatureFormat.Rfc3279DerSequence)
             {
-                Debug.Fail($"Missing internal implementation handler for signature format {signatureFormat}");
+                Debug.Fail(
+                    $"Missing internal implementation handler for signature format {signatureFormat}"
+                );
                 throw new CryptographicException(
                     SR.Cryptography_UnknownSignatureFormat,
-                    signatureFormat.ToString());
+                    signatureFormat.ToString()
+                );
             }
 
             return Interop.Crypto.DsaVerify(key, hash, signature);
@@ -376,6 +434,9 @@ namespace System.Security.Cryptography
 
         static partial void ThrowIfNotSupported();
 
-        private static readonly KeySizes[] s_legalKeySizes = new KeySizes[] { new KeySizes(minSize: 512, maxSize: 3072, skipSize: 64) };
+        private static readonly KeySizes[] s_legalKeySizes = new KeySizes[]
+        {
+            new KeySizes(minSize: 512, maxSize: 3072, skipSize: 64),
+        };
     }
 }

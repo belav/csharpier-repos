@@ -1,17 +1,17 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using Xunit;
 
 namespace RuntimeEventCounterTests
 {
@@ -19,8 +19,9 @@ namespace RuntimeEventCounterTests
     {
         public RuntimeCounterListener()
         {
-            observedRuntimeCounters = new Dictionary<string, bool>() {
-                { "cpu-usage" , false },
+            observedRuntimeCounters = new Dictionary<string, bool>()
+            {
+                { "cpu-usage", false },
                 { "working-set", false },
                 { "gc-heap-size", false },
                 { "gen-0-gc-count", false },
@@ -44,9 +45,10 @@ namespace RuntimeEventCounterTests
                 { "assembly-count", false },
                 { "il-bytes-jitted", false },
                 { "methods-jitted-count", false },
-                { "time-in-jit", false }
+                { "time-in-jit", false },
             };
         }
+
         private Dictionary<string, bool> observedRuntimeCounters;
 
         protected override void OnEventSourceCreated(EventSource source)
@@ -55,18 +57,26 @@ namespace RuntimeEventCounterTests
             {
                 Dictionary<string, string> refreshInterval = new Dictionary<string, string>();
                 refreshInterval.Add("EventCounterIntervalSec", "1");
-                EnableEvents(source, EventLevel.Informational,
-                    (EventKeywords)(-1 & (~1 /* RuntimeEventSource.Keywords.AppContext */)),
-                    refreshInterval);
+                EnableEvents(
+                    source,
+                    EventLevel.Informational,
+                    (EventKeywords)(
+                        -1
+                        & (
+                            ~1 /* RuntimeEventSource.Keywords.AppContext */
+                        )
+                    ),
+                    refreshInterval
+                );
             }
         }
 
         protected override void OnEventWritten(EventWrittenEventArgs eventData)
         {
-
             for (int i = 0; i < eventData.Payload.Count; i++)
             {
-                IDictionary<string, object> eventPayload = eventData.Payload[i] as IDictionary<string, object>;
+                IDictionary<string, object> eventPayload =
+                    eventData.Payload[i] as IDictionary<string, object>;
                 if (eventPayload != null)
                 {
                     foreach (KeyValuePair<string, object> payload in eventPayload)
@@ -112,7 +122,9 @@ namespace RuntimeEventCounterTests
                 }
                 else
                 {
-                    Console.WriteLine($"Test Failed - did not see one or more of the expected runtime counters.");
+                    Console.WriteLine(
+                        $"Test Failed - did not see one or more of the expected runtime counters."
+                    );
                     return 1;
                 }
             }

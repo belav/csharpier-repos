@@ -11,15 +11,28 @@ namespace System.Net.Http.Json
         private static HttpMethod HttpPatch => s_httpPatch ??= new HttpMethod("PATCH");
         private static HttpMethod? s_httpPatch;
 
-        private static Task<HttpResponseMessage> PatchAsync(this HttpClient client, string? requestUri, HttpContent content, CancellationToken cancellationToken)
+        private static Task<HttpResponseMessage> PatchAsync(
+            this HttpClient client,
+            string? requestUri,
+            HttpContent content,
+            CancellationToken cancellationToken
+        )
         {
             return client.PatchAsync(CreateUri(requestUri), content, cancellationToken);
         }
 
-        private static Task<HttpResponseMessage> PatchAsync(this HttpClient client, Uri? requestUri, HttpContent content, CancellationToken cancellationToken)
+        private static Task<HttpResponseMessage> PatchAsync(
+            this HttpClient client,
+            Uri? requestUri,
+            HttpContent content,
+            CancellationToken cancellationToken
+        )
         {
             // HttpClient.PatchAsync is not available in .NET standard and NET462
-            HttpRequestMessage request = new HttpRequestMessage(HttpPatch, requestUri) { Content = content };
+            HttpRequestMessage request = new HttpRequestMessage(HttpPatch, requestUri)
+            {
+                Content = content,
+            };
             return client.SendAsync(request, cancellationToken);
         }
     }

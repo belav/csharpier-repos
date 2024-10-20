@@ -6,8 +6,8 @@ using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Globalization;
 using System.Reflection;
-using Microsoft.Internal;
 using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
@@ -48,16 +48,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     exportedValue = this._member.GetValue(instance);
                 }
                 catch (TargetInvocationException exception)
-                {   // Member threw an exception. Avoid letting this 
+                { // Member threw an exception. Avoid letting this
                     // leak out as a 'raw' unhandled exception, instead,
                     // we'll add some context and rethrow.
 
                     throw new ComposablePartException(
-                        String.Format(CultureInfo.CurrentCulture,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
                             Strings.ReflectionModel_ExportThrewException,
-                            this._member.GetDisplayName()),
+                            this._member.GetDisplayName()
+                        ),
                         Definition.ToElement(),
-                        exception.InnerException);
+                        exception.InnerException
+                    );
                 }
                 catch (TargetParameterCountException exception)
                 {
@@ -65,11 +68,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     // this is not supported in MEF currently.  Ideally we would validate against it, however, we already shipped
                     // so we will turn it into a ComposablePartException instead, that they should already be prepared for
                     throw new ComposablePartException(
-                        String.Format(CultureInfo.CurrentCulture,
-                        Strings.ExportNotValidOnIndexers,
-                        this._member.GetDisplayName()),
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Strings.ExportNotValidOnIndexers,
+                            this._member.GetDisplayName()
+                        ),
                         Definition.ToElement(),
-                        exception.InnerException);
+                        exception.InnerException
+                    );
                 }
 
                 lock (@lock)
@@ -90,13 +96,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private void EnsureReadable()
         {
             if (!this._member.CanRead)
-            {   // Property does not have a getter
-
+            { // Property does not have a getter
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture, 
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ReflectionModel_ExportNotReadable,
-                        this._member.GetDisplayName()),
-                    Definition.ToElement());
+                        this._member.GetDisplayName()
+                    ),
+                    Definition.ToElement()
+                );
             }
         }
     }

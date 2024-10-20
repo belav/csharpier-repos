@@ -8,15 +8,19 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Design;
+using System.Data.Entity.Design.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Globalization;
-using System.Data.Entity.Design.Common;
-using System.Data.Entity.Design;
 
 namespace System.Data.Entity.Design.PluralizationServices
 {
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pluralization")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Pluralization"
+    )]
     public abstract class PluralizationService
     {
         public CultureInfo Culture { get; protected set; }
@@ -43,7 +47,9 @@ namespace System.Data.Entity.Design.PluralizationServices
             }
             else
             {
-                throw new NotImplementedException(Strings.UnsupportedLocaleForPluralizationServices(culture.DisplayName));
+                throw new NotImplementedException(
+                    Strings.UnsupportedLocaleForPluralizationServices(culture.DisplayName)
+                );
             }
         }
     }

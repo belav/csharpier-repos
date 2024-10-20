@@ -13,11 +13,17 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConventionTypeBase, ITypeBase
+public abstract class TypeBase
+    : ConventionAnnotatable,
+        IMutableTypeBase,
+        IConventionTypeBase,
+        ITypeBase
 {
     private readonly SortedDictionary<string, Property> _properties;
-    private readonly SortedDictionary<string, ComplexProperty> _complexProperties = new(StringComparer.Ordinal);
-    private readonly Dictionary<string, ConfigurationSource> _ignoredMembers = new(StringComparer.Ordinal);
+    private readonly SortedDictionary<string, ComplexProperty> _complexProperties =
+        new(StringComparer.Ordinal);
+    private readonly Dictionary<string, ConfigurationSource> _ignoredMembers =
+        new(StringComparer.Ordinal);
 
     private TypeBase? _baseType;
     private readonly SortedSet<TypeBase> _directlyDerivedTypes = new(TypeBaseNameComparer.Instance);
@@ -40,7 +46,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     protected TypeBase(
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type type,
         Model model,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Check.NotNull(model, nameof(model));
 
@@ -63,7 +70,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         string name,
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type type,
         Model model,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Name = name;
         ClrType = type;
@@ -81,7 +89,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
-    public virtual Type ClrType { [DebuggerStepThrough] get; }
+    public virtual Type ClrType
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -89,7 +101,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Model Model { [DebuggerStepThrough] get; }
+    public virtual Model Model
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -97,8 +113,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => Model.IsReadOnly;
+    public override bool IsReadOnly => Model.IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -114,7 +129,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string Name { [DebuggerStepThrough] get; }
+    public virtual string Name
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -122,7 +141,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool HasSharedClrType { [DebuggerStepThrough] get; }
+    public virtual bool HasSharedClrType
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -130,7 +153,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsPropertyBag { [DebuggerStepThrough] get; }
+    public virtual bool IsPropertyBag
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -138,8 +165,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InternalTypeBaseBuilder Builder
-        => BaseBuilder;
+    public virtual InternalTypeBaseBuilder Builder => BaseBuilder;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -167,8 +193,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual SortedSet<TypeBase> DirectlyDerivedTypes
-        => _directlyDerivedTypes;
+    protected virtual SortedSet<TypeBase> DirectlyDerivedTypes => _directlyDerivedTypes;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -176,8 +201,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<TypeBase> GetDerivedTypes()
-        => GetDerivedTypes<TypeBase>();
+    public virtual IEnumerable<TypeBase> GetDerivedTypes() => GetDerivedTypes<TypeBase>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -199,9 +223,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         while (type != null)
         {
             derivedTypes.AddRange(type.DirectlyDerivedTypes.Cast<T>());
-            type = derivedTypes.Count > currentTypeIndex
-                ? derivedTypes[currentTypeIndex]
-                : null;
+            type = derivedTypes.Count > currentTypeIndex ? derivedTypes[currentTypeIndex] : null;
             currentTypeIndex++;
         }
 
@@ -215,10 +237,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual IEnumerable<TypeBase> GetDerivedTypesInclusive()
-        => DirectlyDerivedTypes.Count == 0
-            ? new[] { this }
-            : new[] { this }.Concat(GetDerivedTypes());
+    public virtual IEnumerable<TypeBase> GetDerivedTypesInclusive() =>
+        DirectlyDerivedTypes.Count == 0 ? new[] { this } : new[] { this }.Concat(GetDerivedTypes());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -261,8 +281,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource GetConfigurationSource()
-        => _configurationSource;
+    public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -270,8 +289,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource)
-        => _configurationSource = configurationSource.Max(_configurationSource);
+    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource) =>
+        _configurationSource = configurationSource.Max(_configurationSource);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -311,7 +330,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual Type? ValidateClrMember(string name, MemberInfo memberInfo, bool throwOnNameMismatch = true)
+    protected virtual Type? ValidateClrMember(
+        string name,
+        MemberInfo memberInfo,
+        bool throwOnNameMismatch = true
+    )
     {
         if (name != memberInfo.GetSimpleMemberName())
         {
@@ -323,7 +346,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
                         CoreStrings.PropertyWrongName(
                             name,
                             DisplayName(),
-                            memberInfo.GetSimpleMemberName()));
+                            memberInfo.GetSimpleMemberName()
+                        )
+                    );
                 }
 
                 return memberInfo.GetMemberType();
@@ -335,9 +360,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
             if (clashingMemberInfo != null)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.PropertyClashingNonIndexer(
-                        name,
-                        DisplayName()));
+                    CoreStrings.PropertyClashingNonIndexer(name, DisplayName())
+                );
             }
         }
 
@@ -356,17 +380,13 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         string name,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         ConfigurationSource? typeConfigurationSource,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NotNull(propertyType, nameof(propertyType));
 
-        return AddProperty(
-            name,
-            propertyType,
-            null,
-            typeConfigurationSource,
-            configurationSource);
+        return AddProperty(name, propertyType, null, typeConfigurationSource, configurationSource);
     }
 
     /// <summary>
@@ -378,13 +398,15 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     [RequiresUnreferencedCode("Use an overload that accepts a type")]
     public virtual Property? AddProperty(
         MemberInfo memberInfo,
-        ConfigurationSource configurationSource)
-        => AddProperty(
+        ConfigurationSource configurationSource
+    ) =>
+        AddProperty(
             memberInfo.GetSimpleMemberName(),
             memberInfo.GetMemberType(),
             memberInfo,
             configurationSource,
-            configurationSource);
+            configurationSource
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -393,9 +415,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [RequiresUnreferencedCode("Use an overload that accepts a type")]
-    public virtual Property? AddProperty(
-        string name,
-        ConfigurationSource configurationSource)
+    public virtual Property? AddProperty(string name, ConfigurationSource configurationSource)
     {
         MemberInfo? clrMember;
         if (IsPropertyBag)
@@ -407,7 +427,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
             clrMember = ClrType.GetMembersInHierarchy(name).FirstOrDefault();
             if (clrMember == null)
             {
-                throw new InvalidOperationException(CoreStrings.NoPropertyType(name, DisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.NoPropertyType(name, DisplayName())
+                );
             }
         }
 
@@ -425,7 +447,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         MemberInfo? memberInfo,
         ConfigurationSource? typeConfigurationSource,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NotNull(propertyType, nameof(propertyType));
@@ -437,20 +460,28 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         {
             throw new InvalidOperationException(
                 CoreStrings.ConflictingPropertyOrNavigation(
-                    name, DisplayName(),
-                    ((IReadOnlyTypeBase)conflictingMember.DeclaringType).DisplayName()));
+                    name,
+                    DisplayName(),
+                    ((IReadOnlyTypeBase)conflictingMember.DeclaringType).DisplayName()
+                )
+            );
         }
 
         if (memberInfo != null)
         {
-            propertyType = ValidateClrMember(name, memberInfo, typeConfigurationSource != null)
+            propertyType =
+                ValidateClrMember(name, memberInfo, typeConfigurationSource != null)
                 ?? propertyType;
 
             if (memberInfo.DeclaringType?.IsAssignableFrom(ClrType) != true)
             {
                 throw new InvalidOperationException(
                     CoreStrings.PropertyWrongEntityClrType(
-                        memberInfo.Name, DisplayName(), memberInfo.DeclaringType?.ShortDisplayName()));
+                        memberInfo.Name,
+                        DisplayName(),
+                        memberInfo.DeclaringType?.ShortDisplayName()
+                    )
+                );
             }
         }
         else if (IsPropertyBag)
@@ -462,9 +493,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
             memberInfo = ClrType.GetMembersInHierarchy(name).FirstOrDefault();
         }
 
-        if (memberInfo != null
+        if (
+            memberInfo != null
             && propertyType != memberInfo.GetMemberType()
-            && memberInfo != FindIndexerPropertyInfo())
+            && memberInfo != FindIndexerPropertyInfo()
+        )
         {
             if (typeConfigurationSource != null)
             {
@@ -473,15 +506,23 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
                         name,
                         DisplayName(),
                         memberInfo.GetMemberType().ShortDisplayName(),
-                        propertyType.ShortDisplayName()));
+                        propertyType.ShortDisplayName()
+                    )
+                );
             }
 
             propertyType = memberInfo.GetMemberType();
         }
 
         var property = new Property(
-            name, propertyType, memberInfo as PropertyInfo, memberInfo as FieldInfo, this,
-            configurationSource, typeConfigurationSource);
+            name,
+            propertyType,
+            memberInfo as PropertyInfo,
+            memberInfo as FieldInfo,
+            this,
+            configurationSource,
+            typeConfigurationSource
+        );
 
         _properties.Add(property.Name, property);
 
@@ -506,8 +547,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Property? FindProperty(string name)
-        => FindDeclaredProperty(Check.NotEmpty(name, nameof(name))) ?? _baseType?.FindProperty(name);
+    public virtual Property? FindProperty(string name) =>
+        FindDeclaredProperty(Check.NotEmpty(name, nameof(name))) ?? _baseType?.FindProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -515,8 +556,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Property? FindDeclaredProperty(string name)
-        => _properties.TryGetValue(Check.NotEmpty(name, nameof(name)), out var property)
+    public virtual Property? FindDeclaredProperty(string name) =>
+        _properties.TryGetValue(Check.NotEmpty(name, nameof(name)), out var property)
             ? property
             : null;
 
@@ -526,8 +567,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<Property> GetDeclaredProperties()
-        => _properties.Values;
+    public virtual IEnumerable<Property> GetDeclaredProperties() => _properties.Values;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -535,8 +575,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<Property> GetDerivedProperties()
-        => _directlyDerivedTypes.Count == 0
+    public virtual IEnumerable<Property> GetDerivedProperties() =>
+        _directlyDerivedTypes.Count == 0
             ? Enumerable.Empty<Property>()
             : GetDerivedTypes().SelectMany(et => et.GetDeclaredProperties());
 
@@ -552,7 +592,10 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
 
         return _directlyDerivedTypes.Count == 0
             ? Enumerable.Empty<Property>()
-            : (IEnumerable<Property>)GetDerivedTypes().Select(et => et.FindDeclaredProperty(propertyName)).Where(p => p != null);
+            : (IEnumerable<Property>)
+                GetDerivedTypes()
+                    .Select(et => et.FindDeclaredProperty(propertyName))
+                    .Where(p => p != null);
     }
 
     /// <summary>
@@ -561,10 +604,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<Property> FindDerivedPropertiesInclusive(string propertyName)
-        => _directlyDerivedTypes.Count == 0
+    public virtual IEnumerable<Property> FindDerivedPropertiesInclusive(string propertyName) =>
+        _directlyDerivedTypes.Count == 0
             ? ToEnumerable(FindDeclaredProperty(propertyName))
-            : ToEnumerable(FindDeclaredProperty(propertyName)).Concat(FindDerivedProperties(propertyName));
+            : ToEnumerable(FindDeclaredProperty(propertyName))
+                .Concat(FindDerivedProperties(propertyName));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -572,8 +616,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<Property> FindPropertiesInHierarchy(string propertyName)
-        => _directlyDerivedTypes.Count == 0
+    public virtual IEnumerable<Property> FindPropertiesInHierarchy(string propertyName) =>
+        _directlyDerivedTypes.Count == 0
             ? ToEnumerable(FindProperty(propertyName))
             : ToEnumerable(FindProperty(propertyName)).Concat(FindDerivedProperties(propertyName));
 
@@ -613,9 +657,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         Check.NotEmpty(name, nameof(name));
 
         var property = FindDeclaredProperty(name);
-        return property == null
-            ? null
-            : RemoveProperty(property);
+        return property == null ? null : RemoveProperty(property);
     }
 
     /// <summary>
@@ -636,7 +678,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
                 CoreStrings.PropertyWrongType(
                     property.Name,
                     DisplayName(),
-                    property.DeclaringType.DisplayName()));
+                    property.DeclaringType.DisplayName()
+                )
+            );
         }
 
         CheckPropertyNotInUse(property);
@@ -655,7 +699,12 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         if (containingKey != null)
         {
             throw new InvalidOperationException(
-                CoreStrings.PropertyInUseKey(property.Name, DisplayName(), containingKey.Properties.Format()));
+                CoreStrings.PropertyInUseKey(
+                    property.Name,
+                    DisplayName(),
+                    containingKey.Properties.Format()
+                )
+            );
         }
 
         var containingForeignKey = property.ForeignKeys?.FirstOrDefault();
@@ -663,8 +712,12 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         {
             throw new InvalidOperationException(
                 CoreStrings.PropertyInUseForeignKey(
-                    property.Name, DisplayName(),
-                    containingForeignKey.Properties.Format(), containingForeignKey.DeclaringEntityType.DisplayName()));
+                    property.Name,
+                    DisplayName(),
+                    containingForeignKey.Properties.Format(),
+                    containingForeignKey.DeclaringEntityType.DisplayName()
+                )
+            );
         }
 
         var containingIndex = property.Indexes?.FirstOrDefault();
@@ -672,8 +725,12 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         {
             throw new InvalidOperationException(
                 CoreStrings.PropertyInUseIndex(
-                    property.Name, DisplayName(),
-                    containingIndex.DisplayName(), containingIndex.DeclaringEntityType.DisplayName()));
+                    property.Name,
+                    DisplayName(),
+                    containingIndex.DisplayName(),
+                    containingIndex.DeclaringEntityType.DisplayName()
+                )
+            );
         }
     }
 
@@ -683,8 +740,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<Property> GetProperties()
-        => _baseType != null
+    public virtual IEnumerable<Property> GetProperties() =>
+        _baseType != null
             ? _baseType.GetProperties().Concat(_properties.Values)
             : _properties.Values;
 
@@ -694,8 +751,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual SortedDictionary<string, Property> Properties
-        => _properties;
+    protected virtual SortedDictionary<string, Property> Properties => _properties;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -707,11 +763,12 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     {
         if (_runtimeProperties == null)
         {
-            var runtimeProperties = new SortedDictionary<string, PropertyInfo>(StringComparer.Ordinal);
+            var runtimeProperties = new SortedDictionary<string, PropertyInfo>(
+                StringComparer.Ordinal
+            );
             foreach (var property in ClrType.GetRuntimeProperties())
             {
-                if (!property.IsStatic()
-                    && !runtimeProperties.ContainsKey(property.Name))
+                if (!property.IsStatic() && !runtimeProperties.ContainsKey(property.Name))
                 {
                     runtimeProperties[property.Name] = property;
                 }
@@ -736,8 +793,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
             var runtimeFields = new SortedDictionary<string, FieldInfo>(StringComparer.Ordinal);
             foreach (var field in ClrType.GetRuntimeFields())
             {
-                if (!field.IsStatic
-                    && !runtimeFields.ContainsKey(field.Name))
+                if (!field.IsStatic && !runtimeFields.ContainsKey(field.Name))
                 {
                     runtimeFields[field.Name] = field;
                 }
@@ -783,7 +839,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type targetType,
         bool collection,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NotNull(propertyType, nameof(propertyType));
@@ -796,7 +853,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
             complexTypeName: null,
             targetType,
             collection,
-            configurationSource);
+            configurationSource
+        );
     }
 
     /// <summary>
@@ -809,15 +867,19 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     public virtual ComplexProperty? AddComplexProperty(
         MemberInfo memberInfo,
         bool collection,
-        ConfigurationSource configurationSource)
-        => AddComplexProperty(
+        ConfigurationSource configurationSource
+    ) =>
+        AddComplexProperty(
             memberInfo.GetSimpleMemberName(),
             memberInfo.GetMemberType(),
             memberInfo,
             complexTypeName: null,
-            collection ? memberInfo.GetMemberType().TryGetSequenceType()! : memberInfo.GetMemberType(),
+            collection
+                ? memberInfo.GetMemberType().TryGetSequenceType()!
+                : memberInfo.GetMemberType(),
             collection,
-            configurationSource);
+            configurationSource
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -829,7 +891,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     public virtual ComplexProperty? AddComplexProperty(
         string name,
         bool collection,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         MemberInfo? clrMember;
         if (IsPropertyBag)
@@ -841,7 +904,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
             clrMember = ClrType.GetMembersInHierarchy(name).FirstOrDefault();
             if (clrMember == null)
             {
-                throw new InvalidOperationException(CoreStrings.NoPropertyType(name, DisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.NoPropertyType(name, DisplayName())
+                );
             }
         }
 
@@ -861,7 +926,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         string? complexTypeName,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type targetType,
         bool collection,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         Check.NotNull(name, nameof(name));
         Check.NotNull(propertyType, nameof(propertyType));
@@ -874,20 +940,26 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         {
             throw new InvalidOperationException(
                 CoreStrings.ConflictingPropertyOrNavigation(
-                    name, DisplayName(),
-                    conflictingMember.DeclaringType.DisplayName()));
+                    name,
+                    DisplayName(),
+                    conflictingMember.DeclaringType.DisplayName()
+                )
+            );
         }
 
         if (memberInfo != null)
         {
-            propertyType = ValidateClrMember(name, memberInfo)
-                ?? propertyType;
+            propertyType = ValidateClrMember(name, memberInfo) ?? propertyType;
 
             if (memberInfo.DeclaringType?.IsAssignableFrom(ClrType) != true)
             {
                 throw new InvalidOperationException(
                     CoreStrings.PropertyWrongEntityClrType(
-                        memberInfo.Name, DisplayName(), memberInfo.DeclaringType?.ShortDisplayName()));
+                        memberInfo.Name,
+                        DisplayName(),
+                        memberInfo.DeclaringType?.ShortDisplayName()
+                    )
+                );
             }
         }
         else if (IsPropertyBag)
@@ -901,15 +973,19 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
 
         if (memberInfo != null)
         {
-            if (propertyType != memberInfo.GetMemberType()
-                && memberInfo != FindIndexerPropertyInfo())
+            if (
+                propertyType != memberInfo.GetMemberType()
+                && memberInfo != FindIndexerPropertyInfo()
+            )
             {
                 throw new InvalidOperationException(
                     CoreStrings.PropertyWrongClrType(
                         name,
                         DisplayName(),
                         memberInfo.GetMemberType().ShortDisplayName(),
-                        propertyType.ShortDisplayName()));
+                        propertyType.ShortDisplayName()
+                    )
+                );
             }
 
             ComplexProperty.IsCompatible(
@@ -918,12 +994,21 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
                 this,
                 targetType,
                 collection,
-                shouldThrow: true);
+                shouldThrow: true
+            );
         }
 
         var property = new ComplexProperty(
-            name, propertyType, memberInfo as PropertyInfo, memberInfo as FieldInfo, this,
-            complexTypeName, targetType, collection, configurationSource);
+            name,
+            propertyType,
+            memberInfo as PropertyInfo,
+            memberInfo as FieldInfo,
+            this,
+            complexTypeName,
+            targetType,
+            collection,
+            configurationSource
+        );
 
         _complexProperties.Add(property.Name, property);
 
@@ -931,13 +1016,15 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         {
             using (Model.ConventionDispatcher.DelayConventions())
             {
-                property = (ComplexProperty)Model.ConventionDispatcher.OnComplexPropertyAdded(property.Builder)!.Metadata;
+                property = (ComplexProperty)
+                    Model.ConventionDispatcher.OnComplexPropertyAdded(property.Builder)!.Metadata;
                 Model.Configuration.ConfigureComplexProperty(property);
                 return property;
             }
         }
 
-        return (ComplexProperty?)Model.ConventionDispatcher.OnComplexPropertyAdded(property.Builder)?.Metadata;
+        return (ComplexProperty?)
+            Model.ConventionDispatcher.OnComplexPropertyAdded(property.Builder)?.Metadata;
     }
 
     /// <summary>
@@ -946,8 +1033,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ComplexProperty? FindComplexProperty(string name)
-        => FindDeclaredComplexProperty(Check.NotEmpty(name, nameof(name))) ?? BaseType?.FindComplexProperty(name);
+    public virtual ComplexProperty? FindComplexProperty(string name) =>
+        FindDeclaredComplexProperty(Check.NotEmpty(name, nameof(name)))
+        ?? BaseType?.FindComplexProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -955,8 +1043,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ComplexProperty? FindDeclaredComplexProperty(string name)
-        => _complexProperties.TryGetValue(Check.NotEmpty(name, nameof(name)), out var property)
+    public virtual ComplexProperty? FindDeclaredComplexProperty(string name) =>
+        _complexProperties.TryGetValue(Check.NotEmpty(name, nameof(name)), out var property)
             ? property
             : null;
 
@@ -966,8 +1054,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<ComplexProperty> GetDeclaredComplexProperties()
-        => _complexProperties.Values;
+    public virtual IEnumerable<ComplexProperty> GetDeclaredComplexProperties() =>
+        _complexProperties.Values;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -975,8 +1063,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<ComplexProperty> GetDerivedComplexProperties()
-        => _directlyDerivedTypes.Count == 0
+    public virtual IEnumerable<ComplexProperty> GetDerivedComplexProperties() =>
+        _directlyDerivedTypes.Count == 0
             ? Enumerable.Empty<ComplexProperty>()
             : GetDerivedTypes().SelectMany(et => et.GetDeclaredComplexProperties());
 
@@ -992,8 +1080,10 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
 
         return _directlyDerivedTypes.Count == 0
             ? Enumerable.Empty<ComplexProperty>()
-            : (IEnumerable<ComplexProperty>)GetDerivedTypes()
-                .Select(et => et.FindDeclaredComplexProperty(propertyName)).Where(p => p != null);
+            : (IEnumerable<ComplexProperty>)
+                GetDerivedTypes()
+                    .Select(et => et.FindDeclaredComplexProperty(propertyName))
+                    .Where(p => p != null);
     }
 
     /// <summary>
@@ -1002,10 +1092,13 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<ComplexProperty> FindDerivedComplexPropertiesInclusive(string propertyName)
-        => _directlyDerivedTypes.Count == 0
+    public virtual IEnumerable<ComplexProperty> FindDerivedComplexPropertiesInclusive(
+        string propertyName
+    ) =>
+        _directlyDerivedTypes.Count == 0
             ? ToEnumerable(FindDeclaredComplexProperty(propertyName))
-            : ToEnumerable(FindDeclaredComplexProperty(propertyName)).Concat(FindDerivedComplexProperties(propertyName));
+            : ToEnumerable(FindDeclaredComplexProperty(propertyName))
+                .Concat(FindDerivedComplexProperties(propertyName));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1013,10 +1106,13 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<ComplexProperty> FindComplexPropertiesInHierarchy(string propertyName)
-        => _directlyDerivedTypes.Count == 0
+    public virtual IEnumerable<ComplexProperty> FindComplexPropertiesInHierarchy(
+        string propertyName
+    ) =>
+        _directlyDerivedTypes.Count == 0
             ? ToEnumerable(FindComplexProperty(propertyName))
-            : ToEnumerable(FindComplexProperty(propertyName)).Concat(FindDerivedComplexProperties(propertyName));
+            : ToEnumerable(FindComplexProperty(propertyName))
+                .Concat(FindDerivedComplexProperties(propertyName));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1029,9 +1125,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         Check.NotEmpty(name, nameof(name));
 
         var property = FindDeclaredComplexProperty(name);
-        return property == null
-            ? null
-            : RemoveComplexProperty(property);
+        return property == null ? null : RemoveComplexProperty(property);
     }
 
     /// <summary>
@@ -1052,7 +1146,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
                 CoreStrings.PropertyWrongType(
                     property.Name,
                     DisplayName(),
-                    property.DeclaringType.DisplayName()));
+                    property.DeclaringType.DisplayName()
+                )
+            );
         }
 
         CheckPropertyNotInUse(property);
@@ -1061,12 +1157,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
 
         property.SetRemovedFromModel();
 
-        return (ComplexProperty?)Model.ConventionDispatcher.OnComplexPropertyRemoved(BaseBuilder, property);
+        return (ComplexProperty?)
+            Model.ConventionDispatcher.OnComplexPropertyRemoved(BaseBuilder, property);
     }
 
-    private void CheckPropertyNotInUse(ComplexProperty property)
-    {
-    }
+    private void CheckPropertyNotInUse(ComplexProperty property) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1074,8 +1169,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<ComplexProperty> GetComplexProperties()
-        => BaseType != null
+    public virtual IEnumerable<ComplexProperty> GetComplexProperties() =>
+        BaseType != null
             ? BaseType.GetComplexProperties().Concat(_complexProperties.Values)
             : _complexProperties.Values;
 
@@ -1087,9 +1182,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual PropertyAccessMode GetPropertyAccessMode()
-        => (PropertyAccessMode?)this[CoreAnnotationNames.PropertyAccessMode]
-            ?? Model.GetPropertyAccessMode();
+    public virtual PropertyAccessMode GetPropertyAccessMode() =>
+        (PropertyAccessMode?)this[CoreAnnotationNames.PropertyAccessMode]
+        ?? Model.GetPropertyAccessMode();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1099,9 +1194,14 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     /// </summary>
     public virtual PropertyAccessMode? SetPropertyAccessMode(
         PropertyAccessMode? propertyAccessMode,
-        ConfigurationSource configurationSource)
-        => (PropertyAccessMode?)SetOrRemoveAnnotation(
-            CoreAnnotationNames.PropertyAccessMode, propertyAccessMode, configurationSource)?.Value;
+        ConfigurationSource configurationSource
+    ) =>
+        (PropertyAccessMode?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.PropertyAccessMode,
+                propertyAccessMode,
+                configurationSource
+            )?.Value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1110,8 +1210,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ChangeTrackingStrategy GetChangeTrackingStrategy()
-        => _changeTrackingStrategy ?? Model.GetChangeTrackingStrategy();
+    public virtual ChangeTrackingStrategy GetChangeTrackingStrategy() =>
+        _changeTrackingStrategy ?? Model.GetChangeTrackingStrategy();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1121,7 +1221,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     /// </summary>
     public virtual ChangeTrackingStrategy? SetChangeTrackingStrategy(
         ChangeTrackingStrategy? changeTrackingStrategy,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         EnsureMutable();
 
@@ -1129,7 +1230,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         {
             var requireFullNotifications =
                 (bool?)Model[CoreAnnotationNames.FullChangeTrackingNotificationsRequired] == true;
-            var errorMessage = CheckChangeTrackingStrategy(this, changeTrackingStrategy.Value, requireFullNotifications);
+            var errorMessage = CheckChangeTrackingStrategy(
+                this,
+                changeTrackingStrategy.Value,
+                requireFullNotifications
+            );
             if (errorMessage != null)
             {
                 throw new InvalidOperationException(errorMessage);
@@ -1138,9 +1243,10 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
 
         _changeTrackingStrategy = changeTrackingStrategy;
 
-        _changeTrackingStrategyConfigurationSource = _changeTrackingStrategy == null
-            ? null
-            : configurationSource.Max(_changeTrackingStrategyConfigurationSource);
+        _changeTrackingStrategyConfigurationSource =
+            _changeTrackingStrategy == null
+                ? null
+                : configurationSource.Max(_changeTrackingStrategyConfigurationSource);
 
         return changeTrackingStrategy;
     }
@@ -1154,31 +1260,51 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     public static string? CheckChangeTrackingStrategy(
         IReadOnlyTypeBase typeBase,
         ChangeTrackingStrategy value,
-        bool requireFullNotifications)
+        bool requireFullNotifications
+    )
     {
         if (requireFullNotifications)
         {
-            if (value != ChangeTrackingStrategy.ChangingAndChangedNotifications
-                && value != ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)
+            if (
+                value != ChangeTrackingStrategy.ChangingAndChangedNotifications
+                && value != ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+            )
             {
                 return CoreStrings.FullChangeTrackingRequired(
-                    typeBase.DisplayName(), value, nameof(ChangeTrackingStrategy.ChangingAndChangedNotifications),
-                    nameof(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues));
+                    typeBase.DisplayName(),
+                    value,
+                    nameof(ChangeTrackingStrategy.ChangingAndChangedNotifications),
+                    nameof(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)
+                );
             }
         }
         else
         {
-            if (value != ChangeTrackingStrategy.Snapshot
-                && !typeof(INotifyPropertyChanged).IsAssignableFrom(typeBase.ClrType))
+            if (
+                value != ChangeTrackingStrategy.Snapshot
+                && !typeof(INotifyPropertyChanged).IsAssignableFrom(typeBase.ClrType)
+            )
             {
-                return CoreStrings.ChangeTrackingInterfaceMissing(typeBase.DisplayName(), value, nameof(INotifyPropertyChanged));
+                return CoreStrings.ChangeTrackingInterfaceMissing(
+                    typeBase.DisplayName(),
+                    value,
+                    nameof(INotifyPropertyChanged)
+                );
             }
 
-            if ((value == ChangeTrackingStrategy.ChangingAndChangedNotifications
-                    || value == ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)
-                && !typeof(INotifyPropertyChanging).IsAssignableFrom(typeBase.ClrType))
+            if (
+                (
+                    value == ChangeTrackingStrategy.ChangingAndChangedNotifications
+                    || value
+                        == ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                ) && !typeof(INotifyPropertyChanging).IsAssignableFrom(typeBase.ClrType)
+            )
             {
-                return CoreStrings.ChangeTrackingInterfaceMissing(typeBase.DisplayName(), value, nameof(INotifyPropertyChanging));
+                return CoreStrings.ChangeTrackingInterfaceMissing(
+                    typeBase.DisplayName(),
+                    value,
+                    nameof(INotifyPropertyChanging)
+                );
             }
         }
 
@@ -1191,8 +1317,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetChangeTrackingStrategyConfigurationSource()
-        => _changeTrackingStrategyConfigurationSource;
+    public virtual ConfigurationSource? GetChangeTrackingStrategyConfigurationSource() =>
+        _changeTrackingStrategyConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1230,8 +1356,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<string> GetIgnoredMembers()
-        => _ignoredMembers.Keys;
+    public virtual IEnumerable<string> GetIgnoredMembers() => _ignoredMembers.Keys;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1239,8 +1364,11 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? FindDeclaredIgnoredConfigurationSource(string name)
-        => _ignoredMembers.TryGetValue(Check.NotEmpty(name, nameof(name)), out var ignoredConfigurationSource)
+    public virtual ConfigurationSource? FindDeclaredIgnoredConfigurationSource(string name) =>
+        _ignoredMembers.TryGetValue(
+            Check.NotEmpty(name, nameof(name)),
+            out var ignoredConfigurationSource
+        )
             ? ignoredConfigurationSource
             : null;
 
@@ -1254,7 +1382,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     {
         var ignoredSource = FindDeclaredIgnoredConfigurationSource(name);
 
-        return BaseType == null ? ignoredSource : BaseType.FindIgnoredConfigurationSource(name).Max(ignoredSource);
+        return BaseType == null
+            ? ignoredSource
+            : BaseType.FindIgnoredConfigurationSource(name).Max(ignoredSource);
     }
 
     /// <summary>
@@ -1263,8 +1393,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsIgnored(string name)
-        => FindIgnoredConfigurationSource(name) != null;
+    public virtual bool IsIgnored(string name) => FindIgnoredConfigurationSource(name) != null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1286,8 +1415,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    private string DisplayName()
-        => ((IReadOnlyTypeBase)this).DisplayName();
+    private string DisplayName() => ((IReadOnlyTypeBase)this).DisplayName();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1304,10 +1432,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected static IEnumerable<T> ToEnumerable<T>(T? element)
-        where T : class
-        => element == null
-            ? Enumerable.Empty<T>()
-            : new[] { element };
+        where T : class => element == null ? Enumerable.Empty<T>() : new[] { element };
 
     /// <summary>
     ///     Returns all <see cref="IProperty" /> members from this type and all nested complex types, if any.
@@ -1339,7 +1464,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         {
             yield return complexProperty;
 
-            foreach (var nestedComplexProperty in complexProperty.ComplexType.GetFlattenedComplexProperties())
+            foreach (
+                var nestedComplexProperty in complexProperty.ComplexType.GetFlattenedComplexProperties()
+            )
             {
                 yield return nestedComplexProperty;
             }
@@ -1470,8 +1597,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    string? IMutableTypeBase.AddIgnored(string name)
-        => AddIgnored(name, ConfigurationSource.Explicit);
+    string? IMutableTypeBase.AddIgnored(string name) =>
+        AddIgnored(name, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1480,30 +1607,34 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    string? IConventionTypeBase.AddIgnored(string name, bool fromDataAnnotation)
-        => AddIgnored(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    [DebuggerStepThrough]
-    IMutableProperty IMutableTypeBase.AddProperty(string name)
-        => AddProperty(name, ConfigurationSource.Explicit)!;
-
-    /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
-    /// </summary>
-    [DebuggerStepThrough]
-    IConventionProperty? IConventionTypeBase.AddProperty(string name, bool fromDataAnnotation)
-        => AddProperty(
+    string? IConventionTypeBase.AddIgnored(string name, bool fromDataAnnotation) =>
+        AddIgnored(
             name,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    [DebuggerStepThrough]
+    IMutableProperty IMutableTypeBase.AddProperty(string name) =>
+        AddProperty(name, ConfigurationSource.Explicit)!;
+
+    /// <summary>
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    /// </summary>
+    [DebuggerStepThrough]
+    IConventionProperty? IConventionTypeBase.AddProperty(string name, bool fromDataAnnotation) =>
+        AddProperty(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1514,12 +1645,14 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     [DebuggerStepThrough]
     IMutableProperty IMutableTypeBase.AddProperty(
         string name,
-        [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType)
-        => AddProperty(
+        [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType
+    ) =>
+        AddProperty(
             name,
             propertyType,
             ConfigurationSource.Explicit,
-            ConfigurationSource.Explicit)!;
+            ConfigurationSource.Explicit
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1532,14 +1665,18 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         string name,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         bool setTypeConfigurationSource,
-        bool fromDataAnnotation)
-        => AddProperty(
+        bool fromDataAnnotation
+    ) =>
+        AddProperty(
             name,
             propertyType,
             setTypeConfigurationSource
-                ? fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+                ? fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
                 : null,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1551,10 +1688,15 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     IMutableProperty IMutableTypeBase.AddProperty(
         string name,
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
-        MemberInfo memberInfo)
-        => AddProperty(
-            name, propertyType, memberInfo,
-            ConfigurationSource.Explicit, ConfigurationSource.Explicit)!;
+        MemberInfo memberInfo
+    ) =>
+        AddProperty(
+            name,
+            propertyType,
+            memberInfo,
+            ConfigurationSource.Explicit,
+            ConfigurationSource.Explicit
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1568,15 +1710,19 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         [DynamicallyAccessedMembers(IProperty.DynamicallyAccessedMemberTypes)] Type propertyType,
         MemberInfo? memberInfo,
         bool setTypeConfigurationSource,
-        bool fromDataAnnotation)
-        => AddProperty(
+        bool fromDataAnnotation
+    ) =>
+        AddProperty(
             name,
             propertyType,
             memberInfo,
             setTypeConfigurationSource
-                ? fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+                ? fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
                 : null,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1585,8 +1731,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IReadOnlyProperty? IReadOnlyTypeBase.FindDeclaredProperty(string name)
-        => FindDeclaredProperty(name);
+    IReadOnlyProperty? IReadOnlyTypeBase.FindDeclaredProperty(string name) =>
+        FindDeclaredProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1595,8 +1741,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IProperty? ITypeBase.FindDeclaredProperty(string name)
-        => FindDeclaredProperty(name);
+    IProperty? ITypeBase.FindDeclaredProperty(string name) => FindDeclaredProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1605,8 +1750,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IReadOnlyList<IReadOnlyProperty>? IReadOnlyTypeBase.FindProperties(IReadOnlyList<string> propertyNames)
-        => FindProperties(propertyNames);
+    IReadOnlyList<IReadOnlyProperty>? IReadOnlyTypeBase.FindProperties(
+        IReadOnlyList<string> propertyNames
+    ) => FindProperties(propertyNames);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1615,8 +1761,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IReadOnlyProperty? IReadOnlyTypeBase.FindProperty(string name)
-        => FindProperty(name);
+    IReadOnlyProperty? IReadOnlyTypeBase.FindProperty(string name) => FindProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1625,8 +1770,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutableProperty? IMutableTypeBase.FindProperty(string name)
-        => FindProperty(name);
+    IMutableProperty? IMutableTypeBase.FindProperty(string name) => FindProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1635,8 +1779,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionProperty? IConventionTypeBase.FindProperty(string name)
-        => FindProperty(name);
+    IConventionProperty? IConventionTypeBase.FindProperty(string name) => FindProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1645,8 +1788,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IProperty? ITypeBase.FindProperty(string name)
-        => FindProperty(name);
+    IProperty? ITypeBase.FindProperty(string name) => FindProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1655,8 +1797,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetDeclaredProperties()
-        => GetDeclaredProperties();
+    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetDeclaredProperties() =>
+        GetDeclaredProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1665,8 +1807,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IMutableProperty> IMutableTypeBase.GetDeclaredProperties()
-        => GetDeclaredProperties();
+    IEnumerable<IMutableProperty> IMutableTypeBase.GetDeclaredProperties() =>
+        GetDeclaredProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1675,8 +1817,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IConventionProperty> IConventionTypeBase.GetDeclaredProperties()
-        => GetDeclaredProperties();
+    IEnumerable<IConventionProperty> IConventionTypeBase.GetDeclaredProperties() =>
+        GetDeclaredProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1685,8 +1827,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IProperty> ITypeBase.GetDeclaredProperties()
-        => GetDeclaredProperties();
+    IEnumerable<IProperty> ITypeBase.GetDeclaredProperties() => GetDeclaredProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1695,8 +1836,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetDerivedProperties()
-        => GetDerivedProperties();
+    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetDerivedProperties() =>
+        GetDerivedProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1705,8 +1846,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetProperties()
-        => GetProperties();
+    IEnumerable<IReadOnlyProperty> IReadOnlyTypeBase.GetProperties() => GetProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1715,8 +1855,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IMutableProperty> IMutableTypeBase.GetProperties()
-        => GetProperties();
+    IEnumerable<IMutableProperty> IMutableTypeBase.GetProperties() => GetProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1725,8 +1864,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IConventionProperty> IConventionTypeBase.GetProperties()
-        => GetProperties();
+    IEnumerable<IConventionProperty> IConventionTypeBase.GetProperties() => GetProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1735,8 +1873,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IProperty> ITypeBase.GetProperties()
-        => GetProperties();
+    IEnumerable<IProperty> ITypeBase.GetProperties() => GetProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1745,8 +1882,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutableProperty? IMutableTypeBase.RemoveProperty(string name)
-        => RemoveProperty(name);
+    IMutableProperty? IMutableTypeBase.RemoveProperty(string name) => RemoveProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1755,8 +1891,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionProperty? IConventionTypeBase.RemoveProperty(string name)
-        => RemoveProperty(name);
+    IConventionProperty? IConventionTypeBase.RemoveProperty(string name) => RemoveProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1765,8 +1900,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutableProperty? IMutableTypeBase.RemoveProperty(IReadOnlyProperty property)
-        => RemoveProperty((Property)property);
+    IMutableProperty? IMutableTypeBase.RemoveProperty(IReadOnlyProperty property) =>
+        RemoveProperty((Property)property);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1775,8 +1910,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionProperty? IConventionTypeBase.RemoveProperty(IReadOnlyProperty property)
-        => RemoveProperty((Property)property);
+    IConventionProperty? IConventionTypeBase.RemoveProperty(IReadOnlyProperty property) =>
+        RemoveProperty((Property)property);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1785,8 +1920,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutableComplexProperty IMutableTypeBase.AddComplexProperty(string name, bool collection)
-        => AddComplexProperty(name, collection, ConfigurationSource.Explicit)!;
+    IMutableComplexProperty IMutableTypeBase.AddComplexProperty(string name, bool collection) =>
+        AddComplexProperty(name, collection, ConfigurationSource.Explicit)!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1795,11 +1930,16 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionComplexProperty? IConventionTypeBase.AddComplexProperty(string name, bool collection, bool fromDataAnnotation)
-        => AddComplexProperty(
+    IConventionComplexProperty? IConventionTypeBase.AddComplexProperty(
+        string name,
+        bool collection,
+        bool fromDataAnnotation
+    ) =>
+        AddComplexProperty(
             name,
             collection,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1813,10 +1953,17 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         Type propertyType,
         Type targetType,
         string? complexTypeName,
-        bool collection)
-        => AddComplexProperty(
-            name, propertyType, memberInfo: null, complexTypeName, targetType, collection,
-            ConfigurationSource.Explicit)!;
+        bool collection
+    ) =>
+        AddComplexProperty(
+            name,
+            propertyType,
+            memberInfo: null,
+            complexTypeName,
+            targetType,
+            collection,
+            ConfigurationSource.Explicit
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1831,10 +1978,17 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         Type targetType,
         string? complexTypeName,
         bool collection,
-        bool fromDataAnnotation)
-        => AddComplexProperty(
-            name, propertyType, memberInfo: null, complexTypeName, targetType, collection,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)!;
+        bool fromDataAnnotation
+    ) =>
+        AddComplexProperty(
+            name,
+            propertyType,
+            memberInfo: null,
+            complexTypeName,
+            targetType,
+            collection,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1849,8 +2003,17 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         MemberInfo memberInfo,
         Type targetType,
         string? complexTypeName,
-        bool collection)
-        => AddComplexProperty(name, propertyType, memberInfo, complexTypeName, targetType, collection, ConfigurationSource.Explicit)!;
+        bool collection
+    ) =>
+        AddComplexProperty(
+            name,
+            propertyType,
+            memberInfo,
+            complexTypeName,
+            targetType,
+            collection,
+            ConfigurationSource.Explicit
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1866,10 +2029,17 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
         Type targetType,
         string? complexTypeName,
         bool collection,
-        bool fromDataAnnotation)
-        => AddComplexProperty(
-            name, propertyType, memberInfo, complexTypeName, targetType, collection,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)!;
+        bool fromDataAnnotation
+    ) =>
+        AddComplexProperty(
+            name,
+            propertyType,
+            memberInfo,
+            complexTypeName,
+            targetType,
+            collection,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1878,8 +2048,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IReadOnlyComplexProperty? IReadOnlyTypeBase.FindComplexProperty(string name)
-        => FindComplexProperty(name);
+    IReadOnlyComplexProperty? IReadOnlyTypeBase.FindComplexProperty(string name) =>
+        FindComplexProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1888,8 +2058,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutableComplexProperty? IMutableTypeBase.FindComplexProperty(string name)
-        => FindComplexProperty(name);
+    IMutableComplexProperty? IMutableTypeBase.FindComplexProperty(string name) =>
+        FindComplexProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1898,8 +2068,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionComplexProperty? IConventionTypeBase.FindComplexProperty(string name)
-        => FindComplexProperty(name);
+    IConventionComplexProperty? IConventionTypeBase.FindComplexProperty(string name) =>
+        FindComplexProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1908,8 +2078,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IComplexProperty? ITypeBase.FindComplexProperty(string name)
-        => FindComplexProperty(name);
+    IComplexProperty? ITypeBase.FindComplexProperty(string name) => FindComplexProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1918,8 +2087,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IReadOnlyComplexProperty? IReadOnlyTypeBase.FindDeclaredComplexProperty(string name)
-        => FindDeclaredComplexProperty(name);
+    IReadOnlyComplexProperty? IReadOnlyTypeBase.FindDeclaredComplexProperty(string name) =>
+        FindDeclaredComplexProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1928,8 +2097,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetComplexProperties()
-        => GetComplexProperties();
+    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetComplexProperties() =>
+        GetComplexProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1938,8 +2107,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IMutableComplexProperty> IMutableTypeBase.GetComplexProperties()
-        => GetComplexProperties();
+    IEnumerable<IMutableComplexProperty> IMutableTypeBase.GetComplexProperties() =>
+        GetComplexProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1948,8 +2117,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IConventionComplexProperty> IConventionTypeBase.GetComplexProperties()
-        => GetComplexProperties();
+    IEnumerable<IConventionComplexProperty> IConventionTypeBase.GetComplexProperties() =>
+        GetComplexProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1958,8 +2127,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IComplexProperty> ITypeBase.GetComplexProperties()
-        => GetComplexProperties();
+    IEnumerable<IComplexProperty> ITypeBase.GetComplexProperties() => GetComplexProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1968,8 +2136,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetDeclaredComplexProperties()
-        => GetDeclaredComplexProperties();
+    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetDeclaredComplexProperties() =>
+        GetDeclaredComplexProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1978,8 +2146,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IMutableComplexProperty> IMutableTypeBase.GetDeclaredComplexProperties()
-        => GetDeclaredComplexProperties();
+    IEnumerable<IMutableComplexProperty> IMutableTypeBase.GetDeclaredComplexProperties() =>
+        GetDeclaredComplexProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1988,8 +2156,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IConventionComplexProperty> IConventionTypeBase.GetDeclaredComplexProperties()
-        => GetDeclaredComplexProperties();
+    IEnumerable<IConventionComplexProperty> IConventionTypeBase.GetDeclaredComplexProperties() =>
+        GetDeclaredComplexProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1998,8 +2166,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IComplexProperty> ITypeBase.GetDeclaredComplexProperties()
-        => GetDeclaredComplexProperties();
+    IEnumerable<IComplexProperty> ITypeBase.GetDeclaredComplexProperties() =>
+        GetDeclaredComplexProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2008,8 +2176,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetDerivedComplexProperties()
-        => GetDerivedComplexProperties();
+    IEnumerable<IReadOnlyComplexProperty> IReadOnlyTypeBase.GetDerivedComplexProperties() =>
+        GetDerivedComplexProperties();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2018,8 +2186,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutableComplexProperty? IMutableTypeBase.RemoveComplexProperty(string name)
-        => RemoveComplexProperty(name);
+    IMutableComplexProperty? IMutableTypeBase.RemoveComplexProperty(string name) =>
+        RemoveComplexProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2028,8 +2196,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionComplexProperty? IConventionTypeBase.RemoveComplexProperty(string name)
-        => RemoveComplexProperty(name);
+    IConventionComplexProperty? IConventionTypeBase.RemoveComplexProperty(string name) =>
+        RemoveComplexProperty(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2038,8 +2206,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutableComplexProperty? IMutableTypeBase.RemoveComplexProperty(IReadOnlyProperty property)
-        => RemoveComplexProperty((ComplexProperty)property);
+    IMutableComplexProperty? IMutableTypeBase.RemoveComplexProperty(IReadOnlyProperty property) =>
+        RemoveComplexProperty((ComplexProperty)property);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2048,8 +2216,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionComplexProperty? IConventionTypeBase.RemoveComplexProperty(IConventionComplexProperty property)
-        => RemoveComplexProperty((ComplexProperty)property);
+    IConventionComplexProperty? IConventionTypeBase.RemoveComplexProperty(
+        IConventionComplexProperty property
+    ) => RemoveComplexProperty((ComplexProperty)property);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2058,8 +2227,9 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableTypeBase.SetChangeTrackingStrategy(ChangeTrackingStrategy? changeTrackingStrategy)
-        => SetChangeTrackingStrategy(changeTrackingStrategy, ConfigurationSource.Explicit);
+    void IMutableTypeBase.SetChangeTrackingStrategy(
+        ChangeTrackingStrategy? changeTrackingStrategy
+    ) => SetChangeTrackingStrategy(changeTrackingStrategy, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2070,9 +2240,12 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     [DebuggerStepThrough]
     ChangeTrackingStrategy? IConventionTypeBase.SetChangeTrackingStrategy(
         ChangeTrackingStrategy? changeTrackingStrategy,
-        bool fromDataAnnotation)
-        => SetChangeTrackingStrategy(
-            changeTrackingStrategy, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        SetChangeTrackingStrategy(
+            changeTrackingStrategy,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2081,8 +2254,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IPropertyBase> ITypeBase.GetMembers()
-        => GetMembers();
+    IEnumerable<IPropertyBase> ITypeBase.GetMembers() => GetMembers();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2091,8 +2263,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IMutablePropertyBase> IMutableTypeBase.GetMembers()
-        => GetMembers();
+    IEnumerable<IMutablePropertyBase> IMutableTypeBase.GetMembers() => GetMembers();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2101,8 +2272,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IConventionPropertyBase> IConventionTypeBase.GetMembers()
-        => GetMembers();
+    IEnumerable<IConventionPropertyBase> IConventionTypeBase.GetMembers() => GetMembers();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2111,8 +2281,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.GetMembers()
-        => GetMembers();
+    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.GetMembers() => GetMembers();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2121,8 +2290,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.GetDeclaredMembers()
-        => GetDeclaredMembers();
+    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.GetDeclaredMembers() =>
+        GetDeclaredMembers();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2131,8 +2300,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IMutablePropertyBase> IMutableTypeBase.GetDeclaredMembers()
-        => GetDeclaredMembers();
+    IEnumerable<IMutablePropertyBase> IMutableTypeBase.GetDeclaredMembers() => GetDeclaredMembers();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2141,8 +2309,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IConventionPropertyBase> IConventionTypeBase.GetDeclaredMembers()
-        => GetDeclaredMembers();
+    IEnumerable<IConventionPropertyBase> IConventionTypeBase.GetDeclaredMembers() =>
+        GetDeclaredMembers();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2151,8 +2319,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IPropertyBase> ITypeBase.GetDeclaredMembers()
-        => GetDeclaredMembers();
+    IEnumerable<IPropertyBase> ITypeBase.GetDeclaredMembers() => GetDeclaredMembers();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2161,8 +2328,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IReadOnlyPropertyBase? IReadOnlyTypeBase.FindMember(string name)
-        => FindMember(name);
+    IReadOnlyPropertyBase? IReadOnlyTypeBase.FindMember(string name) => FindMember(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2171,8 +2337,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IMutablePropertyBase? IMutableTypeBase.FindMember(string name)
-        => FindMember(name);
+    IMutablePropertyBase? IMutableTypeBase.FindMember(string name) => FindMember(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2181,8 +2346,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IConventionPropertyBase? IConventionTypeBase.FindMember(string name)
-        => FindMember(name);
+    IConventionPropertyBase? IConventionTypeBase.FindMember(string name) => FindMember(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2191,8 +2355,7 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IPropertyBase? ITypeBase.FindMember(string name)
-        => FindMember(name);
+    IPropertyBase? ITypeBase.FindMember(string name) => FindMember(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2201,8 +2364,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.FindMembersInHierarchy(string name)
-        => FindMembersInHierarchy(name);
+    IEnumerable<IReadOnlyPropertyBase> IReadOnlyTypeBase.FindMembersInHierarchy(string name) =>
+        FindMembersInHierarchy(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2211,8 +2374,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IMutablePropertyBase> IMutableTypeBase.FindMembersInHierarchy(string name)
-        => FindMembersInHierarchy(name);
+    IEnumerable<IMutablePropertyBase> IMutableTypeBase.FindMembersInHierarchy(string name) =>
+        FindMembersInHierarchy(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2221,8 +2384,8 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IConventionPropertyBase> IConventionTypeBase.FindMembersInHierarchy(string name)
-        => FindMembersInHierarchy(name);
+    IEnumerable<IConventionPropertyBase> IConventionTypeBase.FindMembersInHierarchy(string name) =>
+        FindMembersInHierarchy(name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2231,34 +2394,32 @@ public abstract class TypeBase : ConventionAnnotatable, IMutableTypeBase, IConve
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IPropertyBase> ITypeBase.FindMembersInHierarchy(string name)
-        => FindMembersInHierarchy(name);
+    IEnumerable<IPropertyBase> ITypeBase.FindMembersInHierarchy(string name) =>
+        FindMembersInHierarchy(name);
 
     /// <summary>
     ///     Returns all properties that implement <see cref="IProperty" />, including those on complex types.
     /// </summary>
     /// <returns>The properties.</returns>
-    IEnumerable<IPropertyBase> ITypeBase.GetSnapshottableMembers()
-        => GetSnapshottableMembers();
+    IEnumerable<IPropertyBase> ITypeBase.GetSnapshottableMembers() => GetSnapshottableMembers();
 
     /// <summary>
     ///     Returns all properties that implement <see cref="IProperty" />, including those on complex types.
     /// </summary>
     /// <returns>The properties.</returns>
-    IEnumerable<IProperty> ITypeBase.GetFlattenedProperties()
-        => GetFlattenedProperties();
+    IEnumerable<IProperty> ITypeBase.GetFlattenedProperties() => GetFlattenedProperties();
 
     /// <summary>
     ///     Returns all properties that implement <see cref="IComplexProperty" />, including those on complex types.
     /// </summary>
     /// <returns>The properties.</returns>
-    IEnumerable<IComplexProperty> ITypeBase.GetFlattenedComplexProperties()
-        => GetFlattenedComplexProperties();
+    IEnumerable<IComplexProperty> ITypeBase.GetFlattenedComplexProperties() =>
+        GetFlattenedComplexProperties();
 
     /// <summary>
     ///     Returns all properties declared properties that implement <see cref="IProperty" />, including those on complex types.
     /// </summary>
     /// <returns>The properties.</returns>
-    IEnumerable<IProperty> ITypeBase.GetFlattenedDeclaredProperties()
-        => GetFlattenedDeclaredProperties();
+    IEnumerable<IProperty> ITypeBase.GetFlattenedDeclaredProperties() =>
+        GetFlattenedDeclaredProperties();
 }

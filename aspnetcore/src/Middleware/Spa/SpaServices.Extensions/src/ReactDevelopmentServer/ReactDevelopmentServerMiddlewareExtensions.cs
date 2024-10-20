@@ -20,9 +20,7 @@ public static class ReactDevelopmentServerMiddlewareExtensions
     /// </summary>
     /// <param name="spaBuilder">The <see cref="ISpaBuilder"/>.</param>
     /// <param name="npmScript">The name of the script in your package.json file that launches the create-react-app server.</param>
-    public static void UseReactDevelopmentServer(
-        this ISpaBuilder spaBuilder,
-        string npmScript)
+    public static void UseReactDevelopmentServer(this ISpaBuilder spaBuilder, string npmScript)
     {
         ArgumentNullException.ThrowIfNull(spaBuilder);
 
@@ -30,7 +28,9 @@ public static class ReactDevelopmentServerMiddlewareExtensions
 
         if (string.IsNullOrEmpty(spaOptions.SourcePath))
         {
-            throw new InvalidOperationException($"To use {nameof(UseReactDevelopmentServer)}, you must supply a non-empty value for the {nameof(SpaOptions.SourcePath)} property of {nameof(SpaOptions)} when calling {nameof(SpaApplicationBuilderExtensions.UseSpa)}.");
+            throw new InvalidOperationException(
+                $"To use {nameof(UseReactDevelopmentServer)}, you must supply a non-empty value for the {nameof(SpaOptions.SourcePath)} property of {nameof(SpaOptions)} when calling {nameof(SpaApplicationBuilderExtensions.UseSpa)}."
+            );
         }
 
         ReactDevelopmentServerMiddleware.Attach(spaBuilder, npmScript);

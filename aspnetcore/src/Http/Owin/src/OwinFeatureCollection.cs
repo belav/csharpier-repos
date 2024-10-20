@@ -20,18 +20,18 @@ using SendFileFunc = Func<string, long, long?, CancellationToken, Task>;
 /// <summary>
 /// OWIN feature collection.
 /// </summary>
-public class OwinFeatureCollection :
-    IFeatureCollection,
-    IHttpRequestFeature,
-    IHttpResponseFeature,
-    IHttpResponseBodyFeature,
-    IHttpConnectionFeature,
-    ITlsConnectionFeature,
-    IHttpRequestIdentifierFeature,
-    IHttpRequestLifetimeFeature,
-    IHttpAuthenticationFeature,
-    IHttpWebSocketFeature,
-    IOwinEnvironmentFeature
+public class OwinFeatureCollection
+    : IFeatureCollection,
+        IHttpRequestFeature,
+        IHttpResponseFeature,
+        IHttpResponseBodyFeature,
+        IHttpConnectionFeature,
+        ITlsConnectionFeature,
+        IHttpRequestIdentifierFeature,
+        IHttpRequestLifetimeFeature,
+        IHttpAuthenticationFeature,
+        IHttpWebSocketFeature,
+        IOwinEnvironmentFeature
 {
     /// <summary>
     /// Gets or sets OWIN environment values.
@@ -49,12 +49,17 @@ public class OwinFeatureCollection :
         Environment = environment;
         SupportsWebSockets = true;
 
-        var register = Prop<Action<Action<object>, object>>(OwinConstants.CommonKeys.OnSendingHeaders);
-        register?.Invoke(state =>
-        {
-            var collection = (OwinFeatureCollection)state;
-            collection._headersSent = true;
-        }, this);
+        var register = Prop<Action<Action<object>, object>>(
+            OwinConstants.CommonKeys.OnSendingHeaders
+        );
+        register?.Invoke(
+            state =>
+            {
+                var collection = (OwinFeatureCollection)state;
+                collection._headersSent = true;
+            },
+            this
+        );
     }
 
     T Prop<T>(string key)
@@ -116,7 +121,12 @@ public class OwinFeatureCollection :
 
     IHeaderDictionary IHttpRequestFeature.Headers
     {
-        get { return Utilities.MakeHeaderDictionary(Prop<IDictionary<string, string[]>>(OwinConstants.RequestHeaders)); }
+        get
+        {
+            return Utilities.MakeHeaderDictionary(
+                Prop<IDictionary<string, string[]>>(OwinConstants.RequestHeaders)
+            );
+        }
         set { Prop(OwinConstants.RequestHeaders, Utilities.MakeDictionaryStringArray(value)); }
     }
 
@@ -146,7 +156,12 @@ public class OwinFeatureCollection :
 
     IHeaderDictionary IHttpResponseFeature.Headers
     {
-        get { return Utilities.MakeHeaderDictionary(Prop<IDictionary<string, string[]>>(OwinConstants.ResponseHeaders)); }
+        get
+        {
+            return Utilities.MakeHeaderDictionary(
+                Prop<IDictionary<string, string[]>>(OwinConstants.ResponseHeaders)
+            );
+        }
         set { Prop(OwinConstants.ResponseHeaders, Utilities.MakeDictionaryStringArray(value)); }
     }
 
@@ -167,7 +182,10 @@ public class OwinFeatureCollection :
         {
             if (_responseBodyWrapper == null)
             {
-                _responseBodyWrapper = PipeWriter.Create(Prop<Stream>(OwinConstants.ResponseBody), new StreamPipeWriterOptions(leaveOpen: true));
+                _responseBodyWrapper = PipeWriter.Create(
+                    Prop<Stream>(OwinConstants.ResponseBody),
+                    new StreamPipeWriterOptions(leaveOpen: true)
+                );
             }
 
             return _responseBodyWrapper;
@@ -181,7 +199,9 @@ public class OwinFeatureCollection :
 
     void IHttpResponseFeature.OnStarting(Func<object, Task> callback, object state)
     {
-        var register = Prop<Action<Action<object>, object>>(OwinConstants.CommonKeys.OnSendingHeaders);
+        var register = Prop<Action<Action<object>, object>>(
+            OwinConstants.CommonKeys.OnSendingHeaders
+        );
         if (register == null)
         {
             throw new NotSupportedException(OwinConstants.CommonKeys.OnSendingHeaders);
@@ -210,14 +230,32 @@ public class OwinFeatureCollection :
 
     int IHttpConnectionFeature.RemotePort
     {
-        get { return int.Parse(Prop<string>(OwinConstants.CommonKeys.RemotePort), CultureInfo.InvariantCulture); }
-        set { Prop(OwinConstants.CommonKeys.RemotePort, value.ToString(CultureInfo.InvariantCulture)); }
+        get
+        {
+            return int.Parse(
+                Prop<string>(OwinConstants.CommonKeys.RemotePort),
+                CultureInfo.InvariantCulture
+            );
+        }
+        set
+        {
+            Prop(OwinConstants.CommonKeys.RemotePort, value.ToString(CultureInfo.InvariantCulture));
+        }
     }
 
     int IHttpConnectionFeature.LocalPort
     {
-        get { return int.Parse(Prop<string>(OwinConstants.CommonKeys.LocalPort), CultureInfo.InvariantCulture); }
-        set { Prop(OwinConstants.CommonKeys.LocalPort, value.ToString(CultureInfo.InvariantCulture)); }
+        get
+        {
+            return int.Parse(
+                Prop<string>(OwinConstants.CommonKeys.LocalPort),
+                CultureInfo.InvariantCulture
+            );
+        }
+        set
+        {
+            Prop(OwinConstants.CommonKeys.LocalPort, value.ToString(CultureInfo.InvariantCulture));
+        }
     }
 
     string IHttpConnectionFeature.ConnectionId
@@ -226,7 +264,12 @@ public class OwinFeatureCollection :
         set { Prop(OwinConstants.CommonKeys.ConnectionId, value); }
     }
 
-    Task IHttpResponseBodyFeature.SendFileAsync(string path, long offset, long? length, CancellationToken cancellation)
+    Task IHttpResponseBodyFeature.SendFileAsync(
+        string path,
+        long offset,
+        long? length,
+        CancellationToken cancellation
+    )
     {
         object obj;
         if (Environment.TryGetValue(OwinConstants.SendFiles.SendAsync, out obj))
@@ -242,10 +285,18 @@ public class OwinFeatureCollection :
         get
         {
             object obj;
-            if (string.Equals("https", ((IHttpRequestFeature)this).Scheme, StringComparison.OrdinalIgnoreCase)
-                && (Environment.TryGetValue(OwinConstants.CommonKeys.LoadClientCertAsync, out obj)
-                    || Environment.TryGetValue(OwinConstants.CommonKeys.ClientCertificate, out obj))
-                && obj != null)
+            if (
+                string.Equals(
+                    "https",
+                    ((IHttpRequestFeature)this).Scheme,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && (
+                    Environment.TryGetValue(OwinConstants.CommonKeys.LoadClientCertAsync, out obj)
+                    || Environment.TryGetValue(OwinConstants.CommonKeys.ClientCertificate, out obj)
+                )
+                && obj != null
+            )
             {
                 return true;
             }
@@ -259,7 +310,9 @@ public class OwinFeatureCollection :
         set { Prop(OwinConstants.CommonKeys.ClientCertificate, value); }
     }
 
-    async Task<X509Certificate2> ITlsConnectionFeature.GetClientCertificateAsync(CancellationToken cancellationToken)
+    async Task<X509Certificate2> ITlsConnectionFeature.GetClientCertificateAsync(
+        CancellationToken cancellationToken
+    )
     {
         var loadAsync = Prop<Func<Task>>(OwinConstants.CommonKeys.LoadClientCertAsync);
         if (loadAsync != null)
@@ -302,10 +355,7 @@ public class OwinFeatureCollection :
 
     bool IHttpWebSocketFeature.IsWebSocketRequest
     {
-        get
-        {
-            return Environment.TryGetValue(OwinConstants.WebSocket.AcceptAlt, out _);
-        }
+        get { return Environment.TryGetValue(OwinConstants.WebSocket.AcceptAlt, out _); }
     }
 
     Task<WebSocket> IHttpWebSocketFeature.AcceptAsync(WebSocketAcceptContext context)
@@ -417,9 +467,7 @@ public class OwinFeatureCollection :
         }
     }
 
-    void IHttpResponseBodyFeature.DisableBuffering()
-    {
-    }
+    void IHttpResponseBodyFeature.DisableBuffering() { }
 
     async Task IHttpResponseBodyFeature.StartAsync(CancellationToken cancellationToken)
     {
@@ -443,8 +491,5 @@ public class OwinFeatureCollection :
     }
 
     /// <inheritdoc/>
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }
-

@@ -10,7 +10,11 @@ namespace System
     internal sealed partial class ComAwareWeakReference
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ComWeakRefToObject")]
-        private static partial void ComWeakRefToObject(IntPtr pComWeakRef, long wrapperId, ObjectHandleOnStack retRcw);
+        private static partial void ComWeakRefToObject(
+            IntPtr pComWeakRef,
+            long wrapperId,
+            ObjectHandleOnStack retRcw
+        );
 
         internal static object? ComWeakRefToObject(IntPtr pComWeakRef, long wrapperId)
         {
@@ -32,7 +36,8 @@ namespace System
                 // The header is 4 bytes before MT field on all architectures
                 int header = *(int*)(pRawData - sizeof(IntPtr) - sizeof(int));
                 // common case: target does not have a syncblock, so there is no interop info
-                return (header & (BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX | BIT_SBLK_IS_HASHCODE)) == BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX;
+                return (header & (BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX | BIT_SBLK_IS_HASHCODE))
+                    == BIT_SBLK_IS_HASH_OR_SYNCBLKINDEX;
             }
         }
 
@@ -40,7 +45,10 @@ namespace System
         internal static extern bool HasInteropInfo(object target);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "ObjectToComWeakRef")]
-        private static partial IntPtr ObjectToComWeakRef(ObjectHandleOnStack retRcw, out long wrapperId);
+        private static partial IntPtr ObjectToComWeakRef(
+            ObjectHandleOnStack retRcw,
+            out long wrapperId
+        );
 
         internal static nint ObjectToComWeakRef(object target, out long wrapperId)
         {

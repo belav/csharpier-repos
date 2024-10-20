@@ -1,15 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="StateBag.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-    using System.Text;
-    using System.IO;
+namespace System.Web.UI
+{
     using System.Collections;
     using System.Collections.Specialized;
+    using System.IO;
     using System.Reflection;
+    using System.Text;
     using System.Web.Util;
 
     /*
@@ -20,7 +21,7 @@ namespace System.Web.UI {
      */
 
     /// <devdoc>
-    ///    <para>Manages the state of Web Forms control properties. This 
+    ///    <para>Manages the state of Web Forms control properties. This
     ///       class stores attribute/value pairs as string/object and tracks changes to these
     ///       attributes, which are treated as properties, after the Page.Init
     ///       method is executed for a
@@ -30,10 +31,11 @@ namespace System.Web.UI {
     ///       has executed are persisted to the page's view state.
     ///    </note>
     /// </devdoc>
-    public sealed class StateBag : IStateManager, IDictionary {
+    public sealed class StateBag : IStateManager, IDictionary
+    {
         private IDictionary bag;
-        private bool        marked;
-        private bool        ignoreCase;
+        private bool marked;
+        private bool ignoreCase;
 
         /*
          * Constructs an StateBag
@@ -42,36 +44,35 @@ namespace System.Web.UI {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.StateBag'/> class.</para>
         /// </devdoc>
-        public StateBag() : this(false) {
-        }
+        public StateBag()
+            : this(false) { }
 
         /*
          * Constructs an StateBag
          */
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.StateBag'/> class that allows stored state 
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.StateBag'/> class that allows stored state
         ///    values to be case-insensitive.</para>
         /// </devdoc>
-        public StateBag(bool ignoreCase) {
+        public StateBag(bool ignoreCase)
+        {
             marked = false;
             this.ignoreCase = ignoreCase;
             bag = CreateBag();
         }
-
 
         /*
          * Return count of number of StateItems in the bag.
          */
 
         /// <devdoc>
-        /// <para>Indicates the number of items in the <see cref='System.Web.UI.StateBag'/> object. This property is 
+        /// <para>Indicates the number of items in the <see cref='System.Web.UI.StateBag'/> object. This property is
         ///    read-only.</para>
         /// </devdoc>
-        public int Count {
-            get {
-                return bag.Count;
-            }
+        public int Count
+        {
+            get { return bag.Count; }
         }
 
         /*
@@ -79,13 +80,12 @@ namespace System.Web.UI {
          */
 
         /// <devdoc>
-        /// <para>Indicates a collection of keys representing the items in the <see cref='System.Web.UI.StateBag'/> object. 
+        /// <para>Indicates a collection of keys representing the items in the <see cref='System.Web.UI.StateBag'/> object.
         ///    This property is read-only.</para>
         /// </devdoc>
-        public ICollection Keys {
-            get {
-                return bag.Keys;
-            }
+        public ICollection Keys
+        {
+            get { return bag.Keys; }
         }
 
         /*
@@ -93,13 +93,12 @@ namespace System.Web.UI {
          */
 
         /// <devdoc>
-        /// <para>Indicates a collection of view state values in the <see cref='System.Web.UI.StateBag'/> object. 
+        /// <para>Indicates a collection of view state values in the <see cref='System.Web.UI.StateBag'/> object.
         ///    This property is read-only.</para>
         /// </devdoc>
-        public ICollection Values {
-            get {
-                return bag.Values;
-            }
+        public ICollection Values
+        {
+            get { return bag.Values; }
         }
 
         /*
@@ -112,27 +111,27 @@ namespace System.Web.UI {
          */
 
         /// <devdoc>
-        ///    <para> Indicates the value of an item stored in the 
-        ///    <see langword='StateBag'/> 
+        ///    <para> Indicates the value of an item stored in the
+        ///    <see langword='StateBag'/>
         ///    object. Setting this property with a key not already stored in the StateBag will
         ///    add an item to the bag. If you set this property to <see langword='null'/> before
         ///    the TrackState method is called on an item will remove it from the bag. Otherwise,
         ///    when you set this property to <see langword='null'/>
         ///    the key will be saved to allow tracking of the item's state.</para>
         /// </devdoc>
-        public object this[string key] {
-            get {
+        public object this[string key]
+        {
+            get
+            {
                 if (String.IsNullOrEmpty(key))
                     throw ExceptionUtil.ParameterNullOrEmpty("key");
-              
+
                 StateItem item = bag[key] as StateItem;
                 if (item != null)
                     return item.Value;
                 return null;
             }
-            set {
-                Add(key,value);
-            }
+            set { Add(key, value); }
         }
 
         /*
@@ -140,12 +139,14 @@ namespace System.Web.UI {
          */
 
         /// <internalonly/>
-        object IDictionary.this[object key] {
-            get { return this[(string) key]; }
-            set { this[(string) key] = value; }
+        object IDictionary.this[object key]
+        {
+            get { return this[(string)key]; }
+            set { this[(string)key] = value; }
         }
 
-        private IDictionary CreateBag() {
+        private IDictionary CreateBag()
+        {
             return new HybridDictionary(ignoreCase);
         }
 
@@ -156,28 +157,34 @@ namespace System.Web.UI {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public StateItem Add(string key,object value) {
-
+        public StateItem Add(string key, object value)
+        {
             if (String.IsNullOrEmpty(key))
                 throw ExceptionUtil.ParameterNullOrEmpty("key");
-              
+
             StateItem item = bag[key] as StateItem;
 
-            if (item == null) {
-                if (value != null || marked) {
+            if (item == null)
+            {
+                if (value != null || marked)
+                {
                     item = new StateItem(value);
-                    bag.Add(key,item);
+                    bag.Add(key, item);
                 }
             }
-            else {
-                if (value == null && !marked) {
+            else
+            {
+                if (value == null && !marked)
+                {
                     bag.Remove(key);
                 }
-                else {
+                else
+                {
                     item.Value = value;
                 }
             }
-            if (item != null && marked) {
+            if (item != null && marked)
+            {
                 item.IsDirty = true;
             }
             return item;
@@ -188,8 +195,9 @@ namespace System.Web.UI {
          */
 
         /// <internalonly/>
-        void IDictionary.Add(object key,object value) {
-            Add((string) key, value);
+        void IDictionary.Add(object key, object value)
+        {
+            Add((string)key, value);
         }
 
         /*
@@ -199,7 +207,8 @@ namespace System.Web.UI {
         /// <devdoc>
         /// <para>Removes all controls from the <see cref='System.Web.UI.StateBag'/> object.</para>
         /// </devdoc>
-        public void Clear() {
+        public void Clear()
+        {
             bag.Clear();
         }
 
@@ -208,10 +217,11 @@ namespace System.Web.UI {
          */
 
         /// <devdoc>
-        ///    <para>Returns an enumerator that iterates over the key/value pairs stored in 
+        ///    <para>Returns an enumerator that iterates over the key/value pairs stored in
         ///       the <see langword='StateBag'/>.</para>
         /// </devdoc>
-        public IDictionaryEnumerator GetEnumerator() {
+        public IDictionaryEnumerator GetEnumerator()
+        {
             return bag.GetEnumerator();
         }
 
@@ -221,10 +231,11 @@ namespace System.Web.UI {
          */
 
         /// <devdoc>
-        /// <para>Checks an item stored in the <see langword='StateBag'/> to see if it has been 
+        /// <para>Checks an item stored in the <see langword='StateBag'/> to see if it has been
         ///    modified.</para>
         /// </devdoc>
-        public bool IsItemDirty(string key) {
+        public bool IsItemDirty(string key)
+        {
             StateItem item = bag[key] as StateItem;
             if (item != null)
                 return item.IsDirty;
@@ -239,10 +250,9 @@ namespace System.Web.UI {
         /// <devdoc>
         ///    <para>Determines if state changes in the StateBag object's store are being tracked.</para>
         /// </devdoc>
-        internal bool IsTrackingViewState {
-            get {
-                return marked;
-            }
+        internal bool IsTrackingViewState
+        {
+            get { return marked; }
         }
 
         /*
@@ -252,11 +262,14 @@ namespace System.Web.UI {
         /// <devdoc>
         ///    <para>Loads the specified previously saved state information</para>
         /// </devdoc>
-        internal void LoadViewState(object state) {
-            if (state != null) {
+        internal void LoadViewState(object state)
+        {
+            if (state != null)
+            {
                 ArrayList data = (ArrayList)state;
 
-                for (int i = 0; i < data.Count; i += 2) {
+                for (int i = 0; i < data.Count; i += 2)
+                {
 #if OBJECTSTATEFORMATTER
                     string key = ((IndexedString)data[i]).Value;
 #else
@@ -274,10 +287,11 @@ namespace System.Web.UI {
          */
 
         /// <devdoc>
-        ///    <para>Initiates the tracking of state changes for items stored in the 
+        ///    <para>Initiates the tracking of state changes for items stored in the
         ///    <see langword='StateBag'/> object.</para>
         /// </devdoc>
-        internal void TrackViewState() {
+        internal void TrackViewState()
+        {
             marked = true;
         }
 
@@ -289,7 +303,8 @@ namespace System.Web.UI {
         /// <devdoc>
         /// <para>Removes the specified item from the <see cref='System.Web.UI.StateBag'/> object.</para>
         /// </devdoc>
-        public void Remove(string key) {
+        public void Remove(string key)
+        {
             bag.Remove(key);
         }
 
@@ -298,10 +313,10 @@ namespace System.Web.UI {
          */
 
         /// <internalonly/>
-        void IDictionary.Remove(object key) {
-            Remove((string) key);
+        void IDictionary.Remove(object key)
+        {
+            Remove((string)key);
         }
-
 
         /*
          * Return object containing state that has been modified since "mark".
@@ -309,20 +324,25 @@ namespace System.Web.UI {
          */
 
         /// <devdoc>
-        ///    <para>Returns an object that contains all state changes for items stored in the 
+        ///    <para>Returns an object that contains all state changes for items stored in the
         ///    <see langword='StateBag'/> object.</para>
         /// </devdoc>
-        internal object SaveViewState() {
+        internal object SaveViewState()
+        {
             ArrayList data = null;
 
-            // 
+            //
 
-            if (bag.Count != 0) {
+            if (bag.Count != 0)
+            {
                 IDictionaryEnumerator e = bag.GetEnumerator();
-                while (e.MoveNext()) {
+                while (e.MoveNext())
+                {
                     StateItem item = (StateItem)(e.Value);
-                    if (item.IsDirty) {
-                        if (data == null) {
+                    if (item.IsDirty)
+                    {
+                        if (data == null)
+                        {
                             data = new ArrayList();
                         }
 #if OBJECTSTATEFORMATTER
@@ -338,13 +358,15 @@ namespace System.Web.UI {
             return data;
         }
 
-
         /// <devdoc>
         /// Sets the dirty state of all item values currently in the StateBag.
         /// </devdoc>
-        public void SetDirty(bool dirty) {
-            if (bag.Count != 0) {
-                foreach (StateItem item in bag.Values) {
+        public void SetDirty(bool dirty)
+        {
+            if (bag.Count != 0)
+            {
+                foreach (StateItem item in bag.Values)
+                {
                     item.IsDirty = dirty;
                 }
             }
@@ -358,54 +380,56 @@ namespace System.Web.UI {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        public void SetItemDirty(string key,bool dirty) {
+        public void SetItemDirty(string key, bool dirty)
+        {
             StateItem item = bag[key] as StateItem;
-            if (item != null) {
+            if (item != null)
+            {
                 item.IsDirty = dirty;
             }
         }
 
         /// <internalonly/>
-        bool IDictionary.IsFixedSize {
+        bool IDictionary.IsFixedSize
+        {
             get { return false; }
         }
 
-
         /// <internalonly/>
-        bool IDictionary.IsReadOnly {
+        bool IDictionary.IsReadOnly
+        {
             get { return false; }
         }
 
-
         /// <internalonly/>
-        bool ICollection.IsSynchronized { 
-            get { return false;}
+        bool ICollection.IsSynchronized
+        {
+            get { return false; }
         }
 
-
         /// <internalonly/>
-        object ICollection.SyncRoot {
-            get {return this; }
+        object ICollection.SyncRoot
+        {
+            get { return this; }
         }
 
-
         /// <internalonly/>
-        bool IDictionary.Contains(object key) {
-            return bag.Contains((string) key);
+        bool IDictionary.Contains(object key)
+        {
+            return bag.Contains((string)key);
         }
 
-
         /// <internalonly/>
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return ((IDictionary)this).GetEnumerator();
         }
 
-
         /// <internalonly/>
-        void ICollection.CopyTo(Array array, int index) {
+        void ICollection.CopyTo(Array array, int index)
+        {
             Values.CopyTo(array, index);
         }
-
 
         /*
          * Return true if tracking state changes.
@@ -413,10 +437,9 @@ namespace System.Web.UI {
          */
 
         /// <internalonly/>
-        bool IStateManager.IsTrackingViewState {
-            get {
-                return IsTrackingViewState;
-            }
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return IsTrackingViewState; }
         }
 
         /*
@@ -425,7 +448,8 @@ namespace System.Web.UI {
          */
 
         /// <internalonly/>
-        void IStateManager.LoadViewState(object state) {
+        void IStateManager.LoadViewState(object state)
+        {
             LoadViewState(state);
         }
 
@@ -435,7 +459,8 @@ namespace System.Web.UI {
          */
 
         /// <internalonly/>
-        void IStateManager.TrackViewState() {
+        void IStateManager.TrackViewState()
+        {
             TrackViewState();
         }
 
@@ -445,7 +470,8 @@ namespace System.Web.UI {
          */
 
         /// <internalonly/>
-        object IStateManager.SaveViewState() {
+        object IStateManager.SaveViewState()
+        {
             return SaveViewState();
         }
     }

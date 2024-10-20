@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -21,9 +21,10 @@ namespace System.Linq.Parallel
     /// partitioning of the count space by implementing an interface that PLINQ recognizes.
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
-    internal class RepeatEnumerable<TResult> : ParallelQuery<TResult>, IParallelPartitionable<TResult>
+    internal class RepeatEnumerable<TResult>
+        : ParallelQuery<TResult>,
+            IParallelPartitionable<TResult>
     {
-
         private TResult m_element; // Element value to repeat.
         private int m_count; // Count of element values.
 
@@ -52,12 +53,19 @@ namespace System.Linq.Parallel
             // Now generate the actual enumerators. Each produces 'stride' elements, except
             // for the last partition which may produce fewer (if 'm_count' isn't evenly
             // divisible by 'partitionCount').
-            QueryOperatorEnumerator<TResult, int>[] partitions = new QueryOperatorEnumerator<TResult, int>[partitionCount];
+            QueryOperatorEnumerator<TResult, int>[] partitions = new QueryOperatorEnumerator<
+                TResult,
+                int
+            >[partitionCount];
             for (int i = 0, offset = 0; i < partitionCount; i++, offset += stride)
             {
                 if ((offset + stride) > m_count)
                 {
-                    partitions[i] = new RepeatEnumerator(m_element, offset < m_count ? m_count - offset : 0, offset);
+                    partitions[i] = new RepeatEnumerator(
+                        m_element,
+                        offset < m_count ? m_count - offset : 0,
+                        offset
+                    );
                 }
                 else
                 {
@@ -83,7 +91,6 @@ namespace System.Linq.Parallel
 
         class RepeatEnumerator : QueryOperatorEnumerator<TResult, int>
         {
-
             private readonly TResult m_element; // The element to repeat.
             private readonly int m_count; // The number of times to repeat it.
             private readonly int m_indexOffset; // Our index offset.
@@ -106,9 +113,9 @@ namespace System.Linq.Parallel
 
             internal override bool MoveNext(ref TResult currentElement, ref int currentKey)
             {
-                if( m_currentIndex == null)
+                if (m_currentIndex == null)
                     m_currentIndex = new Shared<int>(-1);
-                
+
                 if (m_currentIndex.Value < (m_count - 1))
                 {
                     ++m_currentIndex.Value;

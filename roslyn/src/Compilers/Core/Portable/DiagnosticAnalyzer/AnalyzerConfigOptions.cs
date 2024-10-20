@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Comparer that should be used for all analyzer config keys. This is a case-insensitive comparison based
         /// on Unicode case sensitivity rules for identifiers.
         /// </summary>
-        public static StringComparer KeyComparer { get; } = AnalyzerConfig.Section.PropertiesKeyComparer;
+        public static StringComparer KeyComparer { get; } =
+            AnalyzerConfig.Section.PropertiesKeyComparer;
 
         /// <summary>
         /// Get an analyzer config value for the given key, using the <see cref="KeyComparer"/>.
@@ -25,7 +26,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Enumerates unique keys of all available options in no specific order.
         /// </summary>
         /// <exception cref="NotImplementedException">Not implemented by the derived type.</exception>
-        public virtual IEnumerable<string> Keys
-            => throw new NotImplementedException();
+        public virtual IEnumerable<string> Keys => throw new NotImplementedException();
     }
 }

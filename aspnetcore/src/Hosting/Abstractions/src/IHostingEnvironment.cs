@@ -12,7 +12,10 @@ namespace Microsoft.AspNetCore.Hosting;
 ///  The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.
 /// </para>
 /// </summary>
-[System.Obsolete("This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.", error: false)]
+[System.Obsolete(
+    "This type is obsolete and will be removed in a future version. The recommended alternative is Microsoft.AspNetCore.Hosting.IWebHostEnvironment.",
+    error: false
+)]
 public interface IHostingEnvironment
 {
     /// <summary>

@@ -7,27 +7,32 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
 
-    internal sealed class LookupNode : ExpressionNode {
-        private readonly string relationName;    // can be null
+    internal sealed class LookupNode : ExpressionNode
+    {
+        private readonly string relationName; // can be null
         private readonly string columnName;
 
         private DataColumn column;
         private DataRelation relation;
 
-        internal LookupNode(DataTable table, string columnName, string relationName) : base(table) {
+        internal LookupNode(DataTable table, string columnName, string relationName)
+            : base(table)
+        {
             this.relationName = relationName;
             this.columnName = columnName;
         }
 
-        internal override void Bind(DataTable table, List<DataColumn> list) {
+        internal override void Bind(DataTable table, List<DataColumn> list)
+        {
             BindTable(table);
-            column = null;  // clear for rebinding (if original binding was valid)
+            column = null; // clear for rebinding (if original binding was valid)
             relation = null;
 
             if (table == null)
@@ -38,19 +43,23 @@ namespace System.Data {
             DataRelationCollection relations;
             relations = table.ParentRelations;
 
-            if (relationName == null) {
+            if (relationName == null)
+            {
                 // must have one and only one relation
 
-                if (relations.Count > 1) {
+                if (relations.Count > 1)
+                {
                     throw ExprException.UnresolvedRelation(table.TableName, this.ToString());
                 }
                 relation = relations[0];
             }
-            else {
+            else
+            {
                 relation = relations[relationName];
             }
-            if (null == relation) {
-                throw ExprException.BindFailure(relationName);// WebData 112162: this operation is not clne specific, throw generic exception
+            if (null == relation)
+            {
+                throw ExprException.BindFailure(relationName); // WebData 112162: this operation is not clne specific, throw generic exception
             }
             DataTable parentTable = relation.ParentTable;
 
@@ -65,14 +74,17 @@ namespace System.Data {
             // add column to the dependency list
 
             int i;
-            for (i = 0; i < list.Count; i++) {
+            for (i = 0; i < list.Count; i++)
+            {
                 // walk the list, check if the current column already on the list
                 DataColumn dataColumn = list[i];
-                if (column == dataColumn) {
+                if (column == dataColumn)
+                {
                     break;
                 }
             }
-            if (i >= list.Count) {
+            if (i >= list.Count)
+            {
                 list.Add(column);
             }
 
@@ -80,11 +92,13 @@ namespace System.Data {
             AggregateNode.Bind(relation, list);
         }
 
-        internal override object Eval() {
+        internal override object Eval()
+        {
             throw ExprException.EvalNoContext();
         }
 
-        internal override object Eval(DataRow row, DataRowVersion version) {
+        internal override object Eval(DataRow row, DataRowVersion version)
+        {
             if (column == null || relation == null)
                 throw ExprException.ExpressionUnbound(this.ToString());
 
@@ -95,34 +109,42 @@ namespace System.Data {
             return parent[column, parent.HasVersion(version) ? version : DataRowVersion.Current]; // Microsoft : Bug 76154
         }
 
-        internal override object Eval(int[] recordNos) {
+        internal override object Eval(int[] recordNos)
+        {
             throw ExprException.ComputeNotAggregate(this.ToString());
         }
 
-        internal override bool IsConstant() {
+        internal override bool IsConstant()
+        {
             return false;
         }
 
-        internal override bool IsTableConstant() {
+        internal override bool IsTableConstant()
+        {
             return false;
         }
 
-        internal override bool HasLocalAggregate() {
+        internal override bool HasLocalAggregate()
+        {
             return false;
         }
 
-        internal override bool HasRemoteAggregate() {
+        internal override bool HasRemoteAggregate()
+        {
             return false;
         }
 
-        internal override bool DependsOn(DataColumn column) {
-            if (this.column == column) {
+        internal override bool DependsOn(DataColumn column)
+        {
+            if (this.column == column)
+            {
                 return true;
             }
             return false;
         }
 
-        internal override ExpressionNode Optimize() {
+        internal override ExpressionNode Optimize()
+        {
             return this;
         }
     }

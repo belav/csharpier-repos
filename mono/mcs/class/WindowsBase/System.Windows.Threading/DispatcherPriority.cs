@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,22 +26,23 @@
 using System;
 using System.Threading;
 
-namespace System.Windows.Threading {
+namespace System.Windows.Threading
+{
+    public enum DispatcherPriority
+    {
+        Invalid = -1,
+        Inactive = 0,
+        SystemIdle = 1,
+        ApplicationIdle = 2,
+        ContextIdle = 3,
+        Background = 4,
+        Input = 5,
+        Loaded = 6,
+        Render = 7,
+        DataBind = 8,
 
-	public enum DispatcherPriority {
-		Invalid = -1,
-		Inactive = 0,
-		SystemIdle = 1,
-		ApplicationIdle = 2,
-		ContextIdle = 3,
-		Background = 4,
-		Input = 5,
-		Loaded = 6,
-		Render = 7,
-		DataBind = 8,
+        Normal = 9,
 
-		Normal = 9,
-
-		Send = 10,
-	}
+        Send = 10,
+    }
 }

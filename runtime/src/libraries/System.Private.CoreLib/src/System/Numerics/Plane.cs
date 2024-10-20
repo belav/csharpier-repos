@@ -94,14 +94,12 @@ namespace System.Numerics
                 float ls = nx * nx + ny * ny + nz * nz;
                 float invNorm = 1.0f / MathF.Sqrt(ls);
 
-                Vector3 normal = new Vector3(
-                    nx * invNorm,
-                    ny * invNorm,
-                    nz * invNorm);
+                Vector3 normal = new Vector3(nx * invNorm, ny * invNorm, nz * invNorm);
 
                 return new Plane(
                     normal,
-                    -(normal.X * point1.X + normal.Y * point1.Y + normal.Z * point1.Z));
+                    -(normal.X * point1.X + normal.Y * point1.Y + normal.Z * point1.Z)
+                );
             }
         }
 
@@ -114,9 +112,9 @@ namespace System.Numerics
         public static float Dot(Plane plane, Vector4 value)
         {
             return (plane.Normal.X * value.X)
-                 + (plane.Normal.Y * value.Y)
-                 + (plane.Normal.Z * value.Z)
-                 + (plane.D * value.W);
+                + (plane.Normal.Y * value.Y)
+                + (plane.Normal.Z * value.Z)
+                + (plane.D * value.W);
         }
 
         /// <summary>Returns the dot product of a specified three-dimensional vector and the normal vector of this plane plus the distance (<see cref="D" />) value of the plane.</summary>
@@ -132,10 +130,10 @@ namespace System.Numerics
             }
             else
             {
-                return plane.Normal.X * value.X +
-                       plane.Normal.Y * value.Y +
-                       plane.Normal.Z * value.Z +
-                       plane.D;
+                return plane.Normal.X * value.X
+                    + plane.Normal.Y * value.Y
+                    + plane.Normal.Z * value.Z
+                    + plane.D;
             }
         }
 
@@ -152,9 +150,9 @@ namespace System.Numerics
             }
             else
             {
-                return plane.Normal.X * value.X +
-                       plane.Normal.Y * value.Y +
-                       plane.Normal.Z * value.Z;
+                return plane.Normal.X * value.X
+                    + plane.Normal.Y * value.Y
+                    + plane.Normal.Z * value.Z;
             }
         }
 
@@ -173,13 +171,14 @@ namespace System.Numerics
                     return value;
                 }
                 float normalLength = MathF.Sqrt(normalLengthSquared);
-                return new Plane(
-                    value.Normal / normalLength,
-                    value.D / normalLength);
+                return new Plane(value.Normal / normalLength, value.D / normalLength);
             }
             else
             {
-                float f = value.Normal.X * value.Normal.X + value.Normal.Y * value.Normal.Y + value.Normal.Z * value.Normal.Z;
+                float f =
+                    value.Normal.X * value.Normal.X
+                    + value.Normal.Y * value.Normal.Y
+                    + value.Normal.Z * value.Normal.Z;
 
                 if (MathF.Abs(f - 1.0f) < NormalizeEpsilon)
                 {
@@ -192,7 +191,8 @@ namespace System.Numerics
                     value.Normal.X * fInv,
                     value.Normal.Y * fInv,
                     value.Normal.Z * fInv,
-                    value.D * fInv);
+                    value.D * fInv
+                );
             }
         }
 
@@ -206,13 +206,17 @@ namespace System.Numerics
         {
             Matrix4x4.Invert(matrix, out Matrix4x4 m);
 
-            float x = plane.Normal.X, y = plane.Normal.Y, z = plane.Normal.Z, w = plane.D;
+            float x = plane.Normal.X,
+                y = plane.Normal.Y,
+                z = plane.Normal.Z,
+                w = plane.D;
 
             return new Plane(
                 x * m.M11 + y * m.M12 + z * m.M13 + w * m.M14,
                 x * m.M21 + y * m.M22 + z * m.M23 + w * m.M24,
                 x * m.M31 + y * m.M32 + z * m.M33 + w * m.M34,
-                x * m.M41 + y * m.M42 + z * m.M43 + w * m.M44);
+                x * m.M41 + y * m.M42 + z * m.M43 + w * m.M44
+            );
         }
 
         /// <summary>Transforms a normalized plane by a Quaternion rotation.</summary>
@@ -250,13 +254,16 @@ namespace System.Numerics
             float m23 = yz2 + wx2;
             float m33 = 1.0f - xx2 - yy2;
 
-            float x = plane.Normal.X, y = plane.Normal.Y, z = plane.Normal.Z;
+            float x = plane.Normal.X,
+                y = plane.Normal.Y,
+                z = plane.Normal.Z;
 
             return new Plane(
                 x * m11 + y * m21 + z * m31,
                 x * m12 + y * m22 + z * m32,
                 x * m13 + y * m23 + z * m33,
-                plane.D);
+                plane.D
+            );
         }
 
         /// <summary>Returns a value that indicates whether two planes are equal.</summary>
@@ -269,8 +276,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool operator ==(Plane value1, Plane value2)
         {
-            return (value1.Normal == value2.Normal)
-                && (value1.D == value2.D);
+            return (value1.Normal == value2.Normal) && (value1.D == value2.D);
         }
 
         /// <summary>Returns a value that indicates whether two planes are not equal.</summary>
@@ -314,8 +320,7 @@ namespace System.Numerics
 
             static bool SoftwareFallback(in Plane self, Plane other)
             {
-                return self.Normal.Equals(other.Normal)
-                    && self.D.Equals(other.D);
+                return self.Normal.Equals(other.Normal) && self.D.Equals(other.D);
             }
         }
 

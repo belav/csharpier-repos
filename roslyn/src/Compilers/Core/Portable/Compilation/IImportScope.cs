@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis;
 /// not guaranteed to be returned in any specific file-oriented order.
 /// </item>
 /// <item>There is no guarantee that the same scope instances will be returned from successive calls to <see
-/// cref="SemanticModel.GetImportScopes"/>.</item> 
+/// cref="SemanticModel.GetImportScopes"/>.</item>
 /// </list>
 /// </remarks>
 public interface IImportScope
@@ -90,7 +90,10 @@ public readonly struct ImportedNamespaceOrType
     public SyntaxReference? DeclaringSyntaxReference { get; }
 #pragma warning restore CA1200 // Avoid using cref tags with a prefix
 
-    internal ImportedNamespaceOrType(INamespaceOrTypeSymbol namespaceOrType, SyntaxReference? declaringSyntaxReference)
+    internal ImportedNamespaceOrType(
+        INamespaceOrTypeSymbol namespaceOrType,
+        SyntaxReference? declaringSyntaxReference
+    )
     {
         NamespaceOrType = namespaceOrType;
         DeclaringSyntaxReference = declaringSyntaxReference;
@@ -127,13 +130,16 @@ internal sealed class SimpleImportScope : IImportScope
         ImmutableArray<IAliasSymbol> aliases,
         ImmutableArray<IAliasSymbol> externAliases,
         ImmutableArray<ImportedNamespaceOrType> imports,
-        ImmutableArray<ImportedXmlNamespace> xmlNamespaces)
+        ImmutableArray<ImportedXmlNamespace> xmlNamespaces
+    )
     {
         Debug.Assert(!aliases.IsDefault);
         Debug.Assert(!externAliases.IsDefault);
         Debug.Assert(!imports.IsDefault);
         Debug.Assert(!xmlNamespaces.IsDefault);
-        Debug.Assert(aliases.Length + externAliases.Length + imports.Length + xmlNamespaces.Length > 0);
+        Debug.Assert(
+            aliases.Length + externAliases.Length + imports.Length + xmlNamespaces.Length > 0
+        );
 
         // We make no guarantees about order of these arrays.  So intentionally reorder them in debug to help find any
         // cases where code may be depending on a particular order.

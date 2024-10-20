@@ -12,23 +12,25 @@ namespace SourceGenerators
     /// <summary>
     /// Provides an immutable list implementation which implements sequence equality.
     /// </summary>
-    public sealed class ImmutableEquatableArray<T> : IEquatable<ImmutableEquatableArray<T>>, IReadOnlyList<T>
+    public sealed class ImmutableEquatableArray<T>
+        : IEquatable<ImmutableEquatableArray<T>>,
+            IReadOnlyList<T>
         where T : IEquatable<T>
     {
-        public static ImmutableEquatableArray<T> Empty { get; } = new ImmutableEquatableArray<T>(Array.Empty<T>());
+        public static ImmutableEquatableArray<T> Empty { get; } =
+            new ImmutableEquatableArray<T>(Array.Empty<T>());
 
         private readonly T[] _values;
         public T this[int index] => _values[index];
         public int Count => _values.Length;
 
-        public ImmutableEquatableArray(IEnumerable<T> values)
-            => _values = values.ToArray();
+        public ImmutableEquatableArray(IEnumerable<T> values) => _values = values.ToArray();
 
-        public bool Equals(ImmutableEquatableArray<T>? other)
-            => other != null && ((ReadOnlySpan<T>)_values).SequenceEqual(other._values);
+        public bool Equals(ImmutableEquatableArray<T>? other) =>
+            other != null && ((ReadOnlySpan<T>)_values).SequenceEqual(other._values);
 
-        public override bool Equals(object? obj)
-            => obj is ImmutableEquatableArray<T> other && Equals(other);
+        public override bool Equals(object? obj) =>
+            obj is ImmutableEquatableArray<T> other && Equals(other);
 
         public override int GetHashCode()
         {
@@ -42,7 +44,9 @@ namespace SourceGenerators
         }
 
         public Enumerator GetEnumerator() => new Enumerator(_values);
+
         IEnumerator<T> IEnumerable<T>.GetEnumerator() => ((IEnumerable<T>)_values).GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => _values.GetEnumerator();
 
         public struct Enumerator
@@ -75,7 +79,9 @@ namespace SourceGenerators
 
     internal static class ImmutableEquatableArray
     {
-        public static ImmutableEquatableArray<T> ToImmutableEquatableArray<T>(this IEnumerable<T> values) where T : IEquatable<T>
-            => new(values);
+        public static ImmutableEquatableArray<T> ToImmutableEquatableArray<T>(
+            this IEnumerable<T> values
+        )
+            where T : IEquatable<T> => new(values);
     }
 }

@@ -11,15 +11,15 @@ public class StartupForFallback
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services
-            .AddMvc()
-            .AddNewtonsoftJson();
+        services.AddMvc().AddNewtonsoftJson();
 
         services.AddScoped<TestResponseGenerator>();
         services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
         // Used by some controllers defined in this project.
-        services.Configure<RouteOptions>(options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer));
+        services.Configure<RouteOptions>(options =>
+            options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
+        );
     }
 
     public void Configure(IApplicationBuilder app)
@@ -27,16 +27,28 @@ public class StartupForFallback
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapFallbackToAreaController("admin/{*path:nonfile}", "Index", "Fallback", "Admin");
+            endpoints.MapFallbackToAreaController(
+                "admin/{*path:nonfile}",
+                "Index",
+                "Fallback",
+                "Admin"
+            );
             endpoints.MapFallbackToPage("FallbackToPage/{*path:nonfile}", "/FallbackPage");
             endpoints.MapFallbackToFile("notfound.html");
 
-            endpoints.MapControllerRoute("admin", "link_generation/{area}/{controller}/{action}/{id?}");
+            endpoints.MapControllerRoute(
+                "admin",
+                "link_generation/{area}/{controller}/{action}/{id?}"
+            );
         });
 
-        app.Map("/afterrouting", b => b.Run(c =>
-        {
-            return c.Response.WriteAsync("Hello from middleware after routing");
-        }));
+        app.Map(
+            "/afterrouting",
+            b =>
+                b.Run(c =>
+                {
+                    return c.Response.WriteAsync("Hello from middleware after routing");
+                })
+        );
     }
 }

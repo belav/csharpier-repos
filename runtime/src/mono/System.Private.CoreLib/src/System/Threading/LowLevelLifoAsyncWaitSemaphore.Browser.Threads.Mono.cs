@@ -13,15 +13,22 @@ namespace System.Threading;
 // This class provides a way for browser threads to asynchronously wait for a semaphore
 // from JS, without using the threadpool.  It is used to implement threadpool workers.
 // </summary>
-internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemaphoreBase, IDisposable
+internal sealed partial class LowLevelLifoAsyncWaitSemaphore
+    : LowLevelLifoSemaphoreBase,
+        IDisposable
 {
     private IntPtr lifo_semaphore;
 
     [MethodImplAttribute(MethodImplOptions.InternalCall)]
     private static extern IntPtr InitInternal();
 
-    public LowLevelLifoAsyncWaitSemaphore(int initialSignalCount, int maximumSignalCount, int spinCount, Action onWait)
-        : base (initialSignalCount, maximumSignalCount, spinCount, onWait)
+    public LowLevelLifoAsyncWaitSemaphore(
+        int initialSignalCount,
+        int maximumSignalCount,
+        int spinCount,
+        Action onWait
+    )
+        : base(initialSignalCount, maximumSignalCount, spinCount, onWait)
     {
         CreateAsyncWait(maximumSignalCount);
     }
@@ -50,13 +57,23 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
         ReleaseInternal(lifo_semaphore, count);
     }
 
-    private sealed record WaitEntry (LowLevelLifoAsyncWaitSemaphore Semaphore, Action<LowLevelLifoAsyncWaitSemaphore, object?> OnSuccess, Action<LowLevelLifoAsyncWaitSemaphore, object?> OnTimeout, object? State)
+    private sealed record WaitEntry(
+        LowLevelLifoAsyncWaitSemaphore Semaphore,
+        Action<LowLevelLifoAsyncWaitSemaphore, object?> OnSuccess,
+        Action<LowLevelLifoAsyncWaitSemaphore, object?> OnTimeout,
+        object? State
+    )
     {
-        public int TimeoutMs {get; internal set;}
-        public int StartWaitTicks {get; internal set; }
+        public int TimeoutMs { get; internal set; }
+        public int StartWaitTicks { get; internal set; }
     }
 
-    public void PrepareAsyncWait(int timeoutMs, Action<LowLevelLifoAsyncWaitSemaphore, object?> onSuccess, Action<LowLevelLifoAsyncWaitSemaphore, object?> onTimeout, object? state)
+    public void PrepareAsyncWait(
+        int timeoutMs,
+        Action<LowLevelLifoAsyncWaitSemaphore, object?> onSuccess,
+        Action<LowLevelLifoAsyncWaitSemaphore, object?> onTimeout,
+        object? state
+    )
     {
         Debug.Assert(timeoutMs >= -1);
 
@@ -78,12 +95,15 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
                 newCounts.IncrementWaiterCount();
             }
 
-            Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(newCounts, counts);
+            Counts countsBeforeUpdate = _separated._counts.InterlockedCompareExchange(
+                newCounts,
+                counts
+            );
             if (countsBeforeUpdate == counts)
             {
                 if (counts.SignalCount != 0)
                 {
-                    onSuccess (this, state);
+                    onSuccess(this, state);
                     return;
                 }
                 if (newCounts.WaiterCount != counts.WaiterCount)
@@ -93,7 +113,7 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
                 }
                 if (timeoutMs == 0)
                 {
-                    onTimeout (this, state);
+                    onTimeout(this, state);
                     return;
                 }
                 break;
@@ -105,7 +125,12 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
         Debug.Fail("unreachable");
     }
 
-    private void PrepareAsyncWaitForSignal(int timeoutMs, Action<LowLevelLifoAsyncWaitSemaphore, object?> onSuccess, Action<LowLevelLifoAsyncWaitSemaphore, object?> onTimeout, object? state)
+    private void PrepareAsyncWaitForSignal(
+        int timeoutMs,
+        Action<LowLevelLifoAsyncWaitSemaphore, object?> onSuccess,
+        Action<LowLevelLifoAsyncWaitSemaphore, object?> onTimeout,
+        object? state
+    )
     {
         Debug.Assert(timeoutMs > 0 || timeoutMs == -1);
 
@@ -120,7 +145,10 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
         // on success calls InternalAsyncWaitSuccess, on timeout calls InternalAsyncWaitTimeout
     }
 
-    private static void InternalAsyncWaitTimeout(LowLevelLifoAsyncWaitSemaphore self, WaitEntry internalWaitEntry)
+    private static void InternalAsyncWaitTimeout(
+        LowLevelLifoAsyncWaitSemaphore self,
+        WaitEntry internalWaitEntry
+    )
     {
         WaitEntry we = internalWaitEntry!;
         // Unregister the waiter. The wait subsystem used above guarantees that a thread that wakes due to a timeout does
@@ -129,7 +157,10 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
         we.OnTimeout(self, we.State);
     }
 
-    private static void InternalAsyncWaitSuccess(LowLevelLifoAsyncWaitSemaphore self, WaitEntry internalWaitEntry)
+    private static void InternalAsyncWaitSuccess(
+        LowLevelLifoAsyncWaitSemaphore self,
+        WaitEntry internalWaitEntry
+    )
     {
         WaitEntry we = internalWaitEntry!;
         int endWaitTicks = we.TimeoutMs != -1 ? Environment.TickCount : 0;
@@ -151,7 +182,10 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
                 newCounts.DecrementCountOfWaitersSignaledToWake();
             }
 
-            Counts countsBeforeUpdate = self._separated._counts.InterlockedCompareExchange(newCounts, counts);
+            Counts countsBeforeUpdate = self._separated._counts.InterlockedCompareExchange(
+                newCounts,
+                counts
+            );
             if (countsBeforeUpdate == counts)
             {
                 if (counts.SignalCount != 0)
@@ -167,7 +201,8 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
         // if we get here, we need to keep waiting because the SignalCount above was 0 after we did
         // the CompareExchange - someone took the signal before us.
 
-        if (we.TimeoutMs != -1) {
+        if (we.TimeoutMs != -1)
+        {
             int waitMs = endWaitTicks - we.StartWaitTicks;
             if (waitMs >= 0 && waitMs < we.TimeoutMs)
                 we.TimeoutMs -= waitMs;
@@ -175,7 +210,7 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
                 we.TimeoutMs = 0;
             we.StartWaitTicks = endWaitTicks;
         }
-        PrepareAsyncWaitCore (we);
+        PrepareAsyncWaitCore(we);
         // on success calls InternalAsyncWaitSuccess, on timeout calls InternalAsyncWaitTimeout
     }
 
@@ -183,24 +218,34 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
     {
         int timeoutMs = internalWaitEntry.TimeoutMs;
         LowLevelLifoAsyncWaitSemaphore semaphore = internalWaitEntry.Semaphore;
-        if (timeoutMs == 0) {
-            internalWaitEntry.OnTimeout (semaphore, internalWaitEntry.State);
+        if (timeoutMs == 0)
+        {
+            internalWaitEntry.OnTimeout(semaphore, internalWaitEntry.State);
             return;
         }
-        GCHandle gchandle = GCHandle.Alloc (internalWaitEntry);
-        unsafe {
+        GCHandle gchandle = GCHandle.Alloc(internalWaitEntry);
+        unsafe
+        {
             delegate* unmanaged<IntPtr, IntPtr, void> successCallback = &SuccessCallback;
             delegate* unmanaged<IntPtr, IntPtr, void> timeoutCallback = &TimeoutCallback;
-            PrepareAsyncWaitInternal (semaphore.lifo_semaphore, timeoutMs, successCallback, timeoutCallback, GCHandle.ToIntPtr(gchandle));
+            PrepareAsyncWaitInternal(
+                semaphore.lifo_semaphore,
+                timeoutMs,
+                successCallback,
+                timeoutCallback,
+                GCHandle.ToIntPtr(gchandle)
+            );
         }
     }
 
     [MethodImpl(MethodImplOptions.InternalCall)]
-    private static extern unsafe void PrepareAsyncWaitInternal(IntPtr semaphore,
-                                                               int timeoutMs,
-                                                               /*delegate* unmanaged<IntPtr, IntPtr, void> successCallback*/ void* successCallback,
-                                                               /*delegate* unmanaged<IntPtr, IntPtr, void> timeoutCallback*/ void* timeoutCallback,
-                                                               IntPtr userData);
+    private static extern unsafe void PrepareAsyncWaitInternal(
+        IntPtr semaphore,
+        int timeoutMs,
+        /*delegate* unmanaged<IntPtr, IntPtr, void> successCallback*/void* successCallback,
+        /*delegate* unmanaged<IntPtr, IntPtr, void> timeoutCallback*/void* timeoutCallback,
+        IntPtr userData
+    );
 
     [UnmanagedCallersOnly]
     private static void SuccessCallback(IntPtr lifoSemaphore, IntPtr userData)
@@ -219,5 +264,4 @@ internal sealed partial class LowLevelLifoAsyncWaitSemaphore : LowLevelLifoSemap
         gchandle.Free();
         InternalAsyncWaitTimeout(internalWaitEntry.Semaphore, internalWaitEntry);
     }
-
 }

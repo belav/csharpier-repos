@@ -10,9 +10,7 @@ internal static partial class FormDataMapper
 {
     [RequiresDynamicCode(FormMappingHelpers.RequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(FormMappingHelpers.RequiresUnreferencedCodeMessage)]
-    public static T? Map<T>(
-        FormDataReader reader,
-        FormDataMapperOptions options)
+    public static T? Map<T>(FormDataReader reader, FormDataMapperOptions options)
     {
         FormDataConverter<T>? converter;
         try
@@ -42,7 +40,12 @@ internal static partial class FormDataMapper
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Warning, "Cannot resolve converter for type '{Type}'.", EventName = "CannotResolveConverter")]
+        [LoggerMessage(
+            1,
+            LogLevel.Warning,
+            "Cannot resolve converter for type '{Type}'.",
+            EventName = "CannotResolveConverter"
+        )]
         public static partial void CannotResolveConverter(ILogger logger, Type type, Exception? ex);
     }
 }

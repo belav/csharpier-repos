@@ -42,7 +42,10 @@ namespace System.Globalization.Tests
             Assert.Equal(format.ShortDatePattern, clone.ShortDatePattern);
             Assert.Equal(format.ShortTimePattern, clone.ShortTimePattern);
             Assert.Equal(format.SortableDateTimePattern, clone.SortableDateTimePattern);
-            Assert.Equal(format.UniversalSortableDateTimePattern, clone.UniversalSortableDateTimePattern);
+            Assert.Equal(
+                format.UniversalSortableDateTimePattern,
+                clone.UniversalSortableDateTimePattern
+            );
             Assert.Equal(format.YearMonthPattern, clone.YearMonthPattern);
             Assert.Equal(format.CalendarWeekRule, clone.CalendarWeekRule);
             Assert.Equal(format.FirstDayOfWeek, clone.FirstDayOfWeek);

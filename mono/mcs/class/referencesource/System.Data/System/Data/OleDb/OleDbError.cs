@@ -6,8 +6,8 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.OleDb {
-
+namespace System.Data.OleDb
+{
     using System;
     using System.Data.Common;
     using System.Diagnostics;
@@ -15,25 +15,31 @@ namespace System.Data.OleDb {
     using System.Runtime.InteropServices;
 
     [Serializable]
-    public sealed class OleDbError {
-        readonly private string message;
-        readonly private string source;
-        readonly private string sqlState;
-        readonly private int nativeError;
+    public sealed class OleDbError
+    {
+        private readonly string message;
+        private readonly string source;
+        private readonly string sqlState;
+        private readonly int nativeError;
 
-        internal OleDbError(UnsafeNativeMethods.IErrorRecords errorRecords, int index) {
+        internal OleDbError(UnsafeNativeMethods.IErrorRecords errorRecords, int index)
+        {
             OleDbHResult hr;
             int lcid = System.Globalization.CultureInfo.CurrentCulture.LCID;
 
             Bid.Trace("<oledb.IErrorRecords.GetErrorInfo|API|OS>\n");
             UnsafeNativeMethods.IErrorInfo errorInfo = errorRecords.GetErrorInfo(index, lcid);
-            if (null != errorInfo) {
-
+            if (null != errorInfo)
+            {
                 Bid.Trace("<oledb.IErrorInfo.GetDescription|API|OS>\n");
                 hr = errorInfo.GetDescription(out this.message);
-                Bid.Trace("<oledb.IErrorInfo.GetDescription|API|OS|RET> Message='%ls'\n", this.message);
+                Bid.Trace(
+                    "<oledb.IErrorInfo.GetDescription|API|OS|RET> Message='%ls'\n",
+                    this.message
+                );
 
-                if (OleDbHResult.DB_E_NOLOCALE == hr) { // MDAC 87303
+                if (OleDbHResult.DB_E_NOLOCALE == hr)
+                { // MDAC 87303
                     Bid.Trace("<oledb.ReleaseComObject|API|OS> ErrorInfo\n");
                     Marshal.ReleaseComObject(errorInfo);
 
@@ -43,23 +49,31 @@ namespace System.Data.OleDb {
                     Bid.Trace("<oledb.IErrorRecords.GetErrorInfo|API|OS> LCID=%d\n", lcid);
                     errorInfo = errorRecords.GetErrorInfo(index, lcid);
 
-                    if (null != errorInfo) {
-
+                    if (null != errorInfo)
+                    {
                         Bid.Trace("<oledb.IErrorInfo.GetDescription|API|OS>\n");
                         hr = errorInfo.GetDescription(out this.message);
-                        Bid.Trace("<oledb.IErrorInfo.GetDescription|API|OS|RET> Message='%ls'\n", this.message);
+                        Bid.Trace(
+                            "<oledb.IErrorInfo.GetDescription|API|OS|RET> Message='%ls'\n",
+                            this.message
+                        );
                     }
                 }
-                if ((hr < 0) && ADP.IsEmpty(this.message)) {
+                if ((hr < 0) && ADP.IsEmpty(this.message))
+                {
                     this.message = ODB.FailedGetDescription(hr);
                 }
-                if (null != errorInfo) {
-
+                if (null != errorInfo)
+                {
                     Bid.Trace("<oledb.IErrorInfo.GetSource|API|OS>\n");
                     hr = errorInfo.GetSource(out this.source);
-                    Bid.Trace("<oledb.IErrorInfo.GetSource|API|OS|RET> Source='%ls'\n", this.source);
+                    Bid.Trace(
+                        "<oledb.IErrorInfo.GetSource|API|OS|RET> Source='%ls'\n",
+                        this.source
+                    );
 
-                    if (OleDbHResult.DB_E_NOLOCALE == hr) { // MDAC 87303
+                    if (OleDbHResult.DB_E_NOLOCALE == hr)
+                    { // MDAC 87303
                         Marshal.ReleaseComObject(errorInfo);
 
                         Bid.Trace("<oledb.Kernel32.GetUserDefaultLCID|API|OS>\n");
@@ -68,14 +82,18 @@ namespace System.Data.OleDb {
                         Bid.Trace("<oledb.IErrorRecords.GetErrorInfo|API|OS> LCID=%d\n", lcid);
                         errorInfo = errorRecords.GetErrorInfo(index, lcid);
 
-                        if (null != errorInfo) {
-
+                        if (null != errorInfo)
+                        {
                             Bid.Trace("<oledb.IErrorInfo.GetSource|API|OS>\n");
                             hr = errorInfo.GetSource(out this.source);
-                            Bid.Trace("<oledb.IErrorInfo.GetSource|API|OS|RET> Source='%ls'\n", this.source);
+                            Bid.Trace(
+                                "<oledb.IErrorInfo.GetSource|API|OS|RET> Source='%ls'\n",
+                                this.source
+                            );
                         }
                     }
-                    if ((hr < 0) && ADP.IsEmpty(this.source)) {
+                    if ((hr < 0) && ADP.IsEmpty(this.source))
+                    {
                         this.source = ODB.FailedGetSource(hr);
                     }
                     Bid.Trace("<oledb.Marshal.ReleaseComObject|API|OS> ErrorInfo\n");
@@ -86,10 +104,14 @@ namespace System.Data.OleDb {
             UnsafeNativeMethods.ISQLErrorInfo sqlErrorInfo;
 
             Bid.Trace("<oledb.IErrorRecords.GetCustomErrorObject|API|OS> IID_ISQLErrorInfo\n");
-            hr = errorRecords.GetCustomErrorObject(index, ref ODB.IID_ISQLErrorInfo, out sqlErrorInfo);
+            hr = errorRecords.GetCustomErrorObject(
+                index,
+                ref ODB.IID_ISQLErrorInfo,
+                out sqlErrorInfo
+            );
 
-            if (null != sqlErrorInfo) {
-
+            if (null != sqlErrorInfo)
+            {
                 Bid.Trace("<oledb.ISQLErrorInfo.GetSQLInfo|API|OS>\n");
                 this.nativeError = sqlErrorInfo.GetSQLInfo(out this.sqlState);
 
@@ -98,34 +120,40 @@ namespace System.Data.OleDb {
             }
         }
 
-        public string Message {
-            get {
+        public string Message
+        {
+            get
+            {
                 string message = this.message;
                 return ((null != message) ? message : ADP.StrEmpty);
             }
         }
 
-        public int NativeError {
-            get {
-                return this.nativeError;
-            }
+        public int NativeError
+        {
+            get { return this.nativeError; }
         }
 
-        public string Source {
-            get {
+        public string Source
+        {
+            get
+            {
                 string source = this.source;
                 return ((null != source) ? source : ADP.StrEmpty);
             }
         }
 
-        public string SQLState {
-            get {
+        public string SQLState
+        {
+            get
+            {
                 string sqlState = this.sqlState;
                 return ((null != sqlState) ? sqlState : ADP.StrEmpty);
             }
         }
 
-        override public string ToString() {
+        public override string ToString()
+        {
             return Message;
         }
     }

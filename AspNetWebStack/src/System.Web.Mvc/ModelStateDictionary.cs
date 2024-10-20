@@ -24,8 +24,10 @@ namespace System.Web.Mvc
                 throw new ArgumentNullException("dictionary");
             }
 
-            _innerDictionary = new CopyOnWriteDictionary<string, ModelState>(dictionary,
-                                                                             StringComparer.OrdinalIgnoreCase);
+            _innerDictionary = new CopyOnWriteDictionary<string, ModelState>(
+                dictionary,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public int Count
@@ -140,7 +142,9 @@ namespace System.Web.Mvc
             }
 
             // if the key is not found in the dictionary, we just say that it's valid (since there are no errors)
-            return DictionaryHelpers.FindKeysWithPrefix(this, key).All(entry => entry.Value.Errors.Count == 0);
+            return DictionaryHelpers
+                .FindKeysWithPrefix(this, key)
+                .All(entry => entry.Value.Errors.Count == 0);
         }
 
         public void Merge(ModelStateDictionary dictionary)

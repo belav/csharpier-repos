@@ -29,12 +29,13 @@
 
 using System;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public enum MessageImportance {
-		High,
-		Normal,
-		Low
-	}
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public enum MessageImportance
+    {
+        High,
+        Normal,
+        Low,
+    }
 }
-

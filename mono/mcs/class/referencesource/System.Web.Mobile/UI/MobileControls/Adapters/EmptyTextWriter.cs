@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="EmptyTextWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -17,7 +17,7 @@ using System.Web.UI.MobileControls;
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
@@ -26,8 +26,10 @@ namespace System.Web.UI.MobileControls.Adapters
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
-    
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class EmptyTextWriter : TextWriter
     {
 #if UNUSED_CODE
@@ -35,29 +37,25 @@ namespace System.Web.UI.MobileControls.Adapters
 #endif
         bool _nonWhiteSpaceWritten = false;
 
-        internal EmptyTextWriter() : base(CultureInfo.CurrentCulture)
-        {
-        }
+        internal EmptyTextWriter()
+            : base(CultureInfo.CurrentCulture) { }
 
 #if UNUSED_CODE
-        internal /*public*/ bool WriteCalled
+        internal /*public*/
+        bool WriteCalled
         {
-            get
-            {
-                return _writeCalled;
-            }
+            get { return _writeCalled; }
         }
 #endif
 
-        internal /*public*/ bool NonWhiteSpaceWritten
+        internal /*public*/
+        bool NonWhiteSpaceWritten
         {
-            get
-            {
-                return _nonWhiteSpaceWritten;
-            }
+            get { return _nonWhiteSpaceWritten; }
         }
 
-        internal /*public*/ void Reset()
+        internal /*public*/
+        void Reset()
         {
 #if UNUSED_CODE
             _writeCalled = false;
@@ -65,7 +63,7 @@ namespace System.Web.UI.MobileControls.Adapters
             _nonWhiteSpaceWritten = false;
         }
 
-        public override void Write(string s) 
+        public override void Write(string s)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -76,7 +74,7 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        public override void Write(bool value) 
+        public override void Write(bool value)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -84,7 +82,7 @@ namespace System.Web.UI.MobileControls.Adapters
             _nonWhiteSpaceWritten = true;
         }
 
-        public override void Write(char value) 
+        public override void Write(char value)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -92,7 +90,7 @@ namespace System.Web.UI.MobileControls.Adapters
             _nonWhiteSpaceWritten = true;
         }
 
-        public override void Write(char[] buffer) 
+        public override void Write(char[] buffer)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -103,7 +101,7 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        public override void Write(char[] buffer, int index, int count) 
+        public override void Write(char[] buffer, int index, int count)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -162,7 +160,10 @@ namespace System.Web.UI.MobileControls.Adapters
 #if UNUSED_CODE
             _writeCalled = true;
 #endif
-            if (!IsWhiteSpace(format) && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg0)))
+            if (
+                !IsWhiteSpace(format)
+                && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg0))
+            )
             {
                 _nonWhiteSpaceWritten = true;
             }
@@ -173,7 +174,10 @@ namespace System.Web.UI.MobileControls.Adapters
 #if UNUSED_CODE
             _writeCalled = true;
 #endif
-            if (!IsWhiteSpace(format) && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg0, arg1)))
+            if (
+                !IsWhiteSpace(format)
+                && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg0, arg1))
+            )
             {
                 _nonWhiteSpaceWritten = true;
             }
@@ -184,13 +188,16 @@ namespace System.Web.UI.MobileControls.Adapters
 #if UNUSED_CODE
             _writeCalled = true;
 #endif
-            if (!IsWhiteSpace(format) && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg)))
+            if (
+                !IsWhiteSpace(format)
+                && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg))
+            )
             {
                 _nonWhiteSpaceWritten = true;
             }
         }
 
-        public override void WriteLine(string s) 
+        public override void WriteLine(string s)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -201,7 +208,7 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        public override void WriteLine(bool value) 
+        public override void WriteLine(bool value)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -209,7 +216,7 @@ namespace System.Web.UI.MobileControls.Adapters
             _nonWhiteSpaceWritten = true;
         }
 
-        public override void WriteLine(char value) 
+        public override void WriteLine(char value)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -217,7 +224,7 @@ namespace System.Web.UI.MobileControls.Adapters
             _nonWhiteSpaceWritten = true;
         }
 
-        public override void WriteLine(char[] buffer) 
+        public override void WriteLine(char[] buffer)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -228,7 +235,7 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        public override void WriteLine(char[] buffer, int index, int count) 
+        public override void WriteLine(char[] buffer, int index, int count)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -287,7 +294,10 @@ namespace System.Web.UI.MobileControls.Adapters
 #if UNUSED_CODE
             _writeCalled = true;
 #endif
-            if (!IsWhiteSpace(format) && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg0)))
+            if (
+                !IsWhiteSpace(format)
+                && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg0))
+            )
             {
                 _nonWhiteSpaceWritten = true;
             }
@@ -298,7 +308,10 @@ namespace System.Web.UI.MobileControls.Adapters
 #if UNUSED_CODE
             _writeCalled = true;
 #endif
-            if (!IsWhiteSpace(format) && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg0, arg1)))
+            if (
+                !IsWhiteSpace(format)
+                && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg0, arg1))
+            )
             {
                 _nonWhiteSpaceWritten = true;
             }
@@ -309,13 +322,16 @@ namespace System.Web.UI.MobileControls.Adapters
 #if UNUSED_CODE
             _writeCalled = true;
 #endif
-            if (!IsWhiteSpace(format) && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg)))
+            if (
+                !IsWhiteSpace(format)
+                && !IsWhiteSpace(String.Format(CultureInfo.CurrentCulture, format, arg))
+            )
             {
                 _nonWhiteSpaceWritten = true;
             }
         }
 
-        public override void WriteLine(UInt32 value) 
+        public override void WriteLine(UInt32 value)
         {
 #if UNUSED_CODE
             _writeCalled = true;
@@ -323,12 +339,9 @@ namespace System.Web.UI.MobileControls.Adapters
             _nonWhiteSpaceWritten = true;
         }
 
-        public override Encoding Encoding 
+        public override Encoding Encoding
         {
-            get 
-            {
-                return Encoding.UTF8;
-            }
+            get { return Encoding.UTF8; }
         }
 
         private static bool IsWhiteSpace(String s)
@@ -379,5 +392,4 @@ namespace System.Web.UI.MobileControls.Adapters
             return true;
         }
     }
-
 }

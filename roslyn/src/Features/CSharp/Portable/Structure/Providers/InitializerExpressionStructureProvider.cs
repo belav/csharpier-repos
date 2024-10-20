@@ -12,14 +12,16 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal class InitializerExpressionStructureProvider : AbstractSyntaxNodeStructureProvider<InitializerExpressionSyntax>
+    internal class InitializerExpressionStructureProvider
+        : AbstractSyntaxNodeStructureProvider<InitializerExpressionSyntax>
     {
         protected override void CollectBlockSpans(
             SyntaxToken previousToken,
             InitializerExpressionSyntax node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (node.Parent is InitializerExpressionSyntax)
             {
@@ -37,15 +39,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 //  In this case, we want to collapse the "{ ... }," (including the comma).
 
                 var nextToken = node.CloseBraceToken.GetNextToken();
-                var end = nextToken.Kind() == SyntaxKind.CommaToken
-                    ? nextToken.Span.End
-                    : node.Span.End;
+                var end =
+                    nextToken.Kind() == SyntaxKind.CommaToken ? nextToken.Span.End : node.Span.End;
 
-                spans.Add(new BlockSpan(
-                    isCollapsible: true,
-                    textSpan: TextSpan.FromBounds(node.SpanStart, end),
-                    hintSpan: TextSpan.FromBounds(node.SpanStart, end),
-                    type: BlockTypes.Expression));
+                spans.Add(
+                    new BlockSpan(
+                        isCollapsible: true,
+                        textSpan: TextSpan.FromBounds(node.SpanStart, end),
+                        hintSpan: TextSpan.FromBounds(node.SpanStart, end),
+                        type: BlockTypes.Expression
+                    )
+                );
             }
             else
             {
@@ -59,11 +63,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
                 //
                 // However, the hint span should be the entire object creation.
 
-                spans.Add(new BlockSpan(
-                    isCollapsible: true,
-                    textSpan: TextSpan.FromBounds(previousToken.Span.End, node.Span.End),
-                    hintSpan: node.Parent.Span,
-                    type: BlockTypes.Expression));
+                spans.Add(
+                    new BlockSpan(
+                        isCollapsible: true,
+                        textSpan: TextSpan.FromBounds(previousToken.Span.End, node.Span.End),
+                        hintSpan: node.Parent.Span,
+                        type: BlockTypes.Expression
+                    )
+                );
             }
         }
     }

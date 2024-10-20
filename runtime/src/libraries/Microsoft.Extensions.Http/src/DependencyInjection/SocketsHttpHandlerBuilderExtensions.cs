@@ -25,21 +25,33 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configure">A delegate that is used to modify a <see cref="SocketsHttpHandler"/>.</param>
         /// <returns>An <see cref="ISocketsHttpHandlerBuilder"/> that can be used to configure the handler.</returns>
         [UnsupportedOSPlatform("browser")]
-        public static ISocketsHttpHandlerBuilder Configure(this ISocketsHttpHandlerBuilder builder, Action<SocketsHttpHandler, IServiceProvider> configure)
+        public static ISocketsHttpHandlerBuilder Configure(
+            this ISocketsHttpHandlerBuilder builder,
+            Action<SocketsHttpHandler, IServiceProvider> configure
+        )
         {
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b =>
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
                 {
-                    if (b.PrimaryHandler is not SocketsHttpHandler socketsHttpHandler)
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
                     {
-                        string message = SR.Format(SR.SocketsHttpHandlerBuilder_PrimaryHandlerIsInvalid, nameof(b.PrimaryHandler), typeof(SocketsHttpHandler).FullName, Environment.NewLine, b.PrimaryHandler?.ToString() ?? "(null)");
-                        throw new InvalidOperationException(message);
-                    }
+                        if (b.PrimaryHandler is not SocketsHttpHandler socketsHttpHandler)
+                        {
+                            string message = SR.Format(
+                                SR.SocketsHttpHandlerBuilder_PrimaryHandlerIsInvalid,
+                                nameof(b.PrimaryHandler),
+                                typeof(SocketsHttpHandler).FullName,
+                                Environment.NewLine,
+                                b.PrimaryHandler?.ToString() ?? "(null)"
+                            );
+                            throw new InvalidOperationException(message);
+                        }
 
-                    configure(socketsHttpHandler, b.Services);
-                });
-            });
+                        configure(socketsHttpHandler, b.Services);
+                    });
+                }
+            );
             return builder;
         }
 
@@ -59,14 +71,22 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </para>
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
-        public static ISocketsHttpHandlerBuilder Configure(this ISocketsHttpHandlerBuilder builder, IConfiguration configuration)
+        public static ISocketsHttpHandlerBuilder Configure(
+            this ISocketsHttpHandlerBuilder builder,
+            IConfiguration configuration
+        )
         {
-            SocketsHttpHandlerConfiguration parsedConfig = ParseSocketsHttpHandlerConfiguration(configuration);
+            SocketsHttpHandlerConfiguration parsedConfig = ParseSocketsHttpHandlerConfiguration(
+                configuration
+            );
             return Configure(builder, (handler, _) => FillFromConfig(handler, parsedConfig));
         }
 
         [UnsupportedOSPlatform("browser")]
-        private static void FillFromConfig(SocketsHttpHandler handler, in SocketsHttpHandlerConfiguration config)
+        private static void FillFromConfig(
+            SocketsHttpHandler handler,
+            in SocketsHttpHandlerConfiguration config
+        )
         {
             if (config.PooledConnectionIdleTimeout is not null)
             {
@@ -100,7 +120,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (config.EnableMultipleHttp2Connections is not null)
             {
-                handler.EnableMultipleHttp2Connections = config.EnableMultipleHttp2Connections.Value;
+                handler.EnableMultipleHttp2Connections = config
+                    .EnableMultipleHttp2Connections
+                    .Value;
             }
 
             if (config.MaxResponseHeadersLength is not null)
@@ -188,38 +210,74 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         [UnsupportedOSPlatform("browser")]
-        private static SocketsHttpHandlerConfiguration ParseSocketsHttpHandlerConfiguration(IConfiguration config)
+        private static SocketsHttpHandlerConfiguration ParseSocketsHttpHandlerConfiguration(
+            IConfiguration config
+        )
         {
             return new SocketsHttpHandlerConfiguration()
             {
-                PooledConnectionIdleTimeout = ParseTimeSpan(config[nameof(SocketsHttpHandler.PooledConnectionIdleTimeout)]),
-                PooledConnectionLifetime = ParseTimeSpan(config[nameof(SocketsHttpHandler.PooledConnectionLifetime)]),
+                PooledConnectionIdleTimeout = ParseTimeSpan(
+                    config[nameof(SocketsHttpHandler.PooledConnectionIdleTimeout)]
+                ),
+                PooledConnectionLifetime = ParseTimeSpan(
+                    config[nameof(SocketsHttpHandler.PooledConnectionLifetime)]
+                ),
                 PreAuthenticate = ParseBool(config[nameof(SocketsHttpHandler.PreAuthenticate)]),
-                ResponseDrainTimeout = ParseTimeSpan(config[nameof(SocketsHttpHandler.ResponseDrainTimeout)]),
+                ResponseDrainTimeout = ParseTimeSpan(
+                    config[nameof(SocketsHttpHandler.ResponseDrainTimeout)]
+                ),
                 UseCookies = ParseBool(config[nameof(SocketsHttpHandler.UseCookies)]),
                 UseProxy = ParseBool(config[nameof(SocketsHttpHandler.UseProxy)]),
-                EnableMultipleHttp2Connections = ParseBool(config[nameof(SocketsHttpHandler.EnableMultipleHttp2Connections)]),
-                MaxResponseHeadersLength = ParseInt(config[nameof(SocketsHttpHandler.MaxResponseHeadersLength)]),
-                MaxResponseDrainSize = ParseInt(config[nameof(SocketsHttpHandler.MaxResponseDrainSize)]),
-                MaxConnectionsPerServer = ParseInt(config[nameof(SocketsHttpHandler.MaxConnectionsPerServer)]),
-                MaxAutomaticRedirections = ParseInt(config[nameof(SocketsHttpHandler.MaxAutomaticRedirections)]),
-                InitialHttp2StreamWindowSize = ParseInt(config[nameof(SocketsHttpHandler.InitialHttp2StreamWindowSize)]),
+                EnableMultipleHttp2Connections = ParseBool(
+                    config[nameof(SocketsHttpHandler.EnableMultipleHttp2Connections)]
+                ),
+                MaxResponseHeadersLength = ParseInt(
+                    config[nameof(SocketsHttpHandler.MaxResponseHeadersLength)]
+                ),
+                MaxResponseDrainSize = ParseInt(
+                    config[nameof(SocketsHttpHandler.MaxResponseDrainSize)]
+                ),
+                MaxConnectionsPerServer = ParseInt(
+                    config[nameof(SocketsHttpHandler.MaxConnectionsPerServer)]
+                ),
+                MaxAutomaticRedirections = ParseInt(
+                    config[nameof(SocketsHttpHandler.MaxAutomaticRedirections)]
+                ),
+                InitialHttp2StreamWindowSize = ParseInt(
+                    config[nameof(SocketsHttpHandler.InitialHttp2StreamWindowSize)]
+                ),
                 AllowAutoRedirect = ParseBool(config[nameof(SocketsHttpHandler.AllowAutoRedirect)]),
-                AutomaticDecompression = ParseEnum<DecompressionMethods>(config[nameof(SocketsHttpHandler.AutomaticDecompression)]),
+                AutomaticDecompression = ParseEnum<DecompressionMethods>(
+                    config[nameof(SocketsHttpHandler.AutomaticDecompression)]
+                ),
                 ConnectTimeout = ParseTimeSpan(config[nameof(SocketsHttpHandler.ConnectTimeout)]),
-                Expect100ContinueTimeout = ParseTimeSpan(config[nameof(SocketsHttpHandler.Expect100ContinueTimeout)]),
-                KeepAlivePingDelay = ParseTimeSpan(config[nameof(SocketsHttpHandler.KeepAlivePingDelay)]),
-                KeepAlivePingTimeout = ParseTimeSpan(config[nameof(SocketsHttpHandler.KeepAlivePingTimeout)]),
-                KeepAlivePingPolicy = ParseEnum<HttpKeepAlivePingPolicy>(config[nameof(SocketsHttpHandler.KeepAlivePingPolicy)])
+                Expect100ContinueTimeout = ParseTimeSpan(
+                    config[nameof(SocketsHttpHandler.Expect100ContinueTimeout)]
+                ),
+                KeepAlivePingDelay = ParseTimeSpan(
+                    config[nameof(SocketsHttpHandler.KeepAlivePingDelay)]
+                ),
+                KeepAlivePingTimeout = ParseTimeSpan(
+                    config[nameof(SocketsHttpHandler.KeepAlivePingTimeout)]
+                ),
+                KeepAlivePingPolicy = ParseEnum<HttpKeepAlivePingPolicy>(
+                    config[nameof(SocketsHttpHandler.KeepAlivePingPolicy)]
+                ),
             };
         }
 
-        private static TEnum? ParseEnum<TEnum>(string? enumString) where TEnum : struct
-            => Enum.TryParse<TEnum>(enumString, ignoreCase: true, out var result) ? result : null;
+        private static TEnum? ParseEnum<TEnum>(string? enumString)
+            where TEnum : struct =>
+            Enum.TryParse<TEnum>(enumString, ignoreCase: true, out var result) ? result : null;
 
-        private static bool? ParseBool(string? boolString) => bool.TryParse(boolString, out var result) ? result : null;
-        private static int? ParseInt(string? intString) => int.TryParse(intString, out var result) ? result : null;
-        private static TimeSpan? ParseTimeSpan(string? timeSpanString) => TimeSpan.TryParse(timeSpanString, out var result) ? result : null;
+        private static bool? ParseBool(string? boolString) =>
+            bool.TryParse(boolString, out var result) ? result : null;
+
+        private static int? ParseInt(string? intString) =>
+            int.TryParse(intString, out var result) ? result : null;
+
+        private static TimeSpan? ParseTimeSpan(string? timeSpanString) =>
+            TimeSpan.TryParse(timeSpanString, out var result) ? result : null;
     }
 }
 #endif

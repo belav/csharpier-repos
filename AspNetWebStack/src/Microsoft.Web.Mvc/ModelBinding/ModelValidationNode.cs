@@ -11,11 +11,13 @@ namespace Microsoft.Web.Mvc.ModelBinding
     public sealed class ModelValidationNode
     {
         public ModelValidationNode(ModelMetadata modelMetadata, string modelStateKey)
-            : this(modelMetadata, modelStateKey, null)
-        {
-        }
+            : this(modelMetadata, modelStateKey, null) { }
 
-        public ModelValidationNode(ModelMetadata modelMetadata, string modelStateKey, IEnumerable<ModelValidationNode> childNodes)
+        public ModelValidationNode(
+            ModelMetadata modelMetadata,
+            string modelStateKey,
+            IEnumerable<ModelValidationNode> childNodes
+        )
         {
             if (modelMetadata == null)
             {
@@ -28,7 +30,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
             ModelMetadata = modelMetadata;
             ModelStateKey = modelStateKey;
-            ChildNodes = (childNodes != null) ? childNodes.ToList() : new List<ModelValidationNode>();
+            ChildNodes =
+                (childNodes != null) ? childNodes.ToList() : new List<ModelValidationNode>();
         }
 
         public event EventHandler<ModelValidatedEventArgs> Validated;
@@ -99,7 +102,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
 
         public void Validate(ControllerContext controllerContext)
         {
-            Validate(controllerContext, null /* parentNode */);
+            Validate(
+                controllerContext,
+                null /* parentNode */
+            );
         }
 
         public void Validate(ControllerContext controllerContext, ModelValidationNode parentNode)
@@ -116,7 +122,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             }
 
             // pre-validation steps
-            ModelValidatingEventArgs validatingEventArgs = new ModelValidatingEventArgs(controllerContext, parentNode);
+            ModelValidatingEventArgs validatingEventArgs = new ModelValidatingEventArgs(
+                controllerContext,
+                parentNode
+            );
             OnValidating(validatingEventArgs);
             if (validatingEventArgs.Cancel)
             {
@@ -127,7 +136,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             ValidateThis(controllerContext, parentNode);
 
             // post-validation steps
-            ModelValidatedEventArgs validatedEventArgs = new ModelValidatedEventArgs(controllerContext, parentNode);
+            ModelValidatedEventArgs validatedEventArgs = new ModelValidatedEventArgs(
+                controllerContext,
+                parentNode
+            );
             OnValidated(validatedEventArgs);
         }
 
@@ -152,21 +164,38 @@ namespace Microsoft.Web.Mvc.ModelBinding
             // DevDiv Bugs #227802 - Caching problem in ModelMetadata requires us to manually regenerate
             // the ModelMetadata.
             object model = ModelMetadata.Model;
-            ModelMetadata updatedMetadata = ModelMetadataProviders.Current.GetMetadataForType(() => model, ModelMetadata.ModelType);
+            ModelMetadata updatedMetadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => model,
+                ModelMetadata.ModelType
+            );
 
             foreach (ModelMetadata propertyMetadata in updatedMetadata.Properties)
             {
                 // Only want to add errors to ModelState if something doesn't already exist for the property node,
                 // else we could end up with duplicate or irrelevant error messages.
-                string propertyKeyRoot = ModelBinderUtil.CreatePropertyModelName(ModelStateKey, propertyMetadata.PropertyName);
+                string propertyKeyRoot = ModelBinderUtil.CreatePropertyModelName(
+                    ModelStateKey,
+                    propertyMetadata.PropertyName
+                );
 
                 if (modelState.IsValidField(propertyKeyRoot))
                 {
-                    foreach (ModelValidator propertyValidator in propertyMetadata.GetValidators(controllerContext))
+                    foreach (
+                        ModelValidator propertyValidator in propertyMetadata.GetValidators(
+                            controllerContext
+                        )
+                    )
                     {
-                        foreach (ModelValidationResult propertyResult in propertyValidator.Validate(model))
+                        foreach (
+                            ModelValidationResult propertyResult in propertyValidator.Validate(
+                                model
+                            )
+                        )
                         {
-                            string thisErrorKey = ModelBinderUtil.CreatePropertyModelName(propertyKeyRoot, propertyResult.MemberName);
+                            string thisErrorKey = ModelBinderUtil.CreatePropertyModelName(
+                                propertyKeyRoot,
+                                propertyResult.MemberName
+                            );
                             modelState.AddModelError(thisErrorKey, propertyResult.Message);
                         }
                     }
@@ -174,7 +203,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             }
         }
 
-        private void ValidateThis(ControllerContext controllerContext, ModelValidationNode parentNode)
+        private void ValidateThis(
+            ControllerContext controllerContext,
+            ModelValidationNode parentNode
+        )
         {
             ModelStateDictionary modelState = controllerContext.Controller.ViewData.ModelState;
             if (!modelState.IsValidField(ModelStateKey))
@@ -187,7 +219,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
             {
                 foreach (ModelValidationResult validationResult in validator.Validate(container))
                 {
-                    string trueModelStateKey = ModelBinderUtil.CreatePropertyModelName(ModelStateKey, validationResult.MemberName);
+                    string trueModelStateKey = ModelBinderUtil.CreatePropertyModelName(
+                        ModelStateKey,
+                        validationResult.MemberName
+                    );
                     modelState.AddModelError(trueModelStateKey, validationResult.Message);
                 }
             }

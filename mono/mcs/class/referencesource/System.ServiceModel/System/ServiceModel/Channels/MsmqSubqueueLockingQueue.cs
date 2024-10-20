@@ -3,13 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Globalization;
     using System.Collections.Generic;
     using System.EnterpriseServices;
+    using System.Globalization;
     using System.Runtime;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
     using System.Transactions;
 
     class MsmqSubqueueLockingQueue : MsmqQueue, ILockingQueue
@@ -32,10 +32,13 @@ namespace System.ServiceModel.Channels
         public MsmqSubqueueLockingQueue(string formatName, string hostname, int accessMode)
             : base(formatName, accessMode)
         {
-            // The hostname will be empty for MsmqIntegrationBinding 
+            // The hostname will be empty for MsmqIntegrationBinding
             if (string.Compare(hostname, string.Empty, StringComparison.OrdinalIgnoreCase) == 0)
             {
-                this.validHostName = MsmqSubqueueLockingQueue.TryGetHostName(formatName, out hostname);
+                this.validHostName = MsmqSubqueueLockingQueue.TryGetHostName(
+                    formatName,
+                    out hostname
+                );
             }
             else
             {
@@ -43,11 +46,26 @@ namespace System.ServiceModel.Channels
             }
 
             this.disposed = false;
-            this.lockQueueName = this.formatName + ";" + MsmqSubqueueLockingQueue.GenerateLockQueueName();
-            this.lockQueueForReceive = new MsmqQueue(this.lockQueueName, UnsafeNativeMethods.MQ_RECEIVE_ACCESS, UnsafeNativeMethods.MQ_DENY_RECEIVE_SHARE);
-            this.lockQueueForMove = new MsmqQueue(this.lockQueueName, UnsafeNativeMethods.MQ_MOVE_ACCESS);
-            this.mainQueueForMove = new MsmqQueue(this.formatName, UnsafeNativeMethods.MQ_MOVE_ACCESS);
-            this.lockCollectionTimer = new IOThreadTimer(new Action<object>(OnCollectionTimer), null, false);
+            this.lockQueueName =
+                this.formatName + ";" + MsmqSubqueueLockingQueue.GenerateLockQueueName();
+            this.lockQueueForReceive = new MsmqQueue(
+                this.lockQueueName,
+                UnsafeNativeMethods.MQ_RECEIVE_ACCESS,
+                UnsafeNativeMethods.MQ_DENY_RECEIVE_SHARE
+            );
+            this.lockQueueForMove = new MsmqQueue(
+                this.lockQueueName,
+                UnsafeNativeMethods.MQ_MOVE_ACCESS
+            );
+            this.mainQueueForMove = new MsmqQueue(
+                this.formatName,
+                UnsafeNativeMethods.MQ_MOVE_ACCESS
+            );
+            this.lockCollectionTimer = new IOThreadTimer(
+                new Action<object>(OnCollectionTimer),
+                null,
+                false
+            );
 
             if (string.Compare(hostname, "localhost", StringComparison.OrdinalIgnoreCase) == 0)
             {
@@ -62,24 +80,30 @@ namespace System.ServiceModel.Channels
         private static string GenerateLockQueueName()
         {
             string lockGuid = Guid.NewGuid().ToString();
-            return MsmqSubqueueLockingQueue.LockSubqueuePrefix + lockGuid.Substring(lockGuid.Length - 8, 8);
+            return MsmqSubqueueLockingQueue.LockSubqueuePrefix
+                + lockGuid.Substring(lockGuid.Length - 8, 8);
         }
 
         public MsmqQueue LockQueueForReceive
         {
-            get
-            {
-                return this.lockQueueForReceive;
-            }
+            get { return this.lockQueueForReceive; }
         }
 
         internal override MsmqQueueHandle OpenQueue()
         {
             if (!this.validHostName)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqOpenError,
-                    MsmqError.GetErrorString(UnsafeNativeMethods.MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION)),
-                    UnsafeNativeMethods.MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(
+                            SR.MsmqOpenError,
+                            MsmqError.GetErrorString(
+                                UnsafeNativeMethods.MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION
+                            )
+                        ),
+                        UnsafeNativeMethods.MQ_ERROR_UNSUPPORTED_FORMATNAME_OPERATION
+                    )
+                );
             }
 
             this.EnsureLockQueuesOpen();
@@ -93,7 +117,7 @@ namespace System.ServiceModel.Channels
         {
             int attempts = 0;
 
-            // handle lock queue name collisions, if we fail three times in a row it is probably not the name 
+            // handle lock queue name collisions, if we fail three times in a row it is probably not the name
             // collision that is causing the open to fail
             while (true)
             {
@@ -114,15 +138,27 @@ namespace System.ServiceModel.Channels
                 this.lockQueueForReceive.Dispose();
                 this.lockQueueForMove.Dispose();
 
-                this.lockQueueName = this.formatName + ";" + MsmqSubqueueLockingQueue.GenerateLockQueueName();
-                this.lockQueueForReceive = new MsmqQueue(this.lockQueueName, UnsafeNativeMethods.MQ_RECEIVE_ACCESS, UnsafeNativeMethods.MQ_DENY_RECEIVE_SHARE);
-                this.lockQueueForMove = new MsmqQueue(this.lockQueueName, UnsafeNativeMethods.MQ_MOVE_ACCESS);
+                this.lockQueueName =
+                    this.formatName + ";" + MsmqSubqueueLockingQueue.GenerateLockQueueName();
+                this.lockQueueForReceive = new MsmqQueue(
+                    this.lockQueueName,
+                    UnsafeNativeMethods.MQ_RECEIVE_ACCESS,
+                    UnsafeNativeMethods.MQ_DENY_RECEIVE_SHARE
+                );
+                this.lockQueueForMove = new MsmqQueue(
+                    this.lockQueueName,
+                    UnsafeNativeMethods.MQ_MOVE_ACCESS
+                );
                 attempts++;
             }
             this.lockQueueForMove.EnsureOpen();
         }
 
-        public override ReceiveResult TryReceive(NativeMsmqMessage message, TimeSpan timeout, MsmqTransactionMode transactionMode)
+        public override ReceiveResult TryReceive(
+            NativeMsmqMessage message,
+            TimeSpan timeout,
+            MsmqTransactionMode transactionMode
+        )
         {
             // we ignore transaction mode for receive context receives
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
@@ -149,7 +185,11 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    moveResult = this.TryMoveMessage(lookupId, this.lockQueueForMove, MsmqTransactionMode.None);
+                    moveResult = this.TryMoveMessage(
+                        lookupId,
+                        this.lockQueueForMove,
+                        MsmqTransactionMode.None
+                    );
                     if (moveResult == MoveReceiveResult.Succeeded)
                     {
                         receivedMessage = true;
@@ -164,7 +204,12 @@ namespace System.ServiceModel.Channels
             MoveReceiveResult lookupIdReceiveResult;
             try
             {
-                lookupIdReceiveResult = this.lockQueueForReceive.TryReceiveByLookupId(lookupId, message, MsmqTransactionMode.None, UnsafeNativeMethods.MQ_LOOKUP_PEEK_CURRENT);
+                lookupIdReceiveResult = this.lockQueueForReceive.TryReceiveByLookupId(
+                    lookupId,
+                    message,
+                    MsmqTransactionMode.None,
+                    UnsafeNativeMethods.MQ_LOOKUP_PEEK_CURRENT
+                );
             }
             catch (MsmqException ex)
             {
@@ -192,13 +237,17 @@ namespace System.ServiceModel.Channels
             {
                 using (MsmqEmptyMessage emptyMessage = new MsmqEmptyMessage())
                 {
-                    receiveResult = this.lockQueueForReceive.TryReceiveByLookupId(lookupId, emptyMessage, MsmqTransactionMode.CurrentOrNone);
+                    receiveResult = this.lockQueueForReceive.TryReceiveByLookupId(
+                        lookupId,
+                        emptyMessage,
+                        MsmqTransactionMode.CurrentOrNone
+                    );
                 }
 
                 if (receiveResult != MsmqQueue.MoveReceiveResult.MessageLockedUnderTransaction)
                     break;
 
-                // We could have failed because of ---- with transaction.abort() for the transaction 
+                // We could have failed because of ---- with transaction.abort() for the transaction
                 // that had this message locked previously. We will retry in these cases.
             } while (postRollBack.AnotherTryNeeded());
 
@@ -209,7 +258,14 @@ namespace System.ServiceModel.Channels
             // ..not much we can do in any of these cases
             if (receiveResult != MoveReceiveResult.Succeeded)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqReceiveContextMessageNotReceived, lookupId.ToString(CultureInfo.InvariantCulture))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(
+                            SR.MsmqReceiveContextMessageNotReceived,
+                            lookupId.ToString(CultureInfo.InvariantCulture)
+                        )
+                    )
+                );
             }
         }
 
@@ -219,11 +275,15 @@ namespace System.ServiceModel.Channels
             IPostRollbackErrorStrategy postRollBack = new SimplePostRollbackErrorStrategy(lookupId);
             do
             {
-                moveResult = this.lockQueueForReceive.TryMoveMessage(lookupId, this.mainQueueForMove, MsmqTransactionMode.None);
+                moveResult = this.lockQueueForReceive.TryMoveMessage(
+                    lookupId,
+                    this.mainQueueForMove,
+                    MsmqTransactionMode.None
+                );
                 if (moveResult != MsmqQueue.MoveReceiveResult.MessageLockedUnderTransaction)
                     break;
 
-                // We could have failed because of ---- with transaction.abort() for the transaction 
+                // We could have failed because of ---- with transaction.abort() for the transaction
                 // that had this message locked previously. We will retry in these cases.
             } while (postRollBack.AnotherTryNeeded());
 
@@ -235,7 +295,14 @@ namespace System.ServiceModel.Channels
                 //  c) ---- with Channel.Close()
                 // ..not much we can do in any of these cases
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqReceiveContextMessageNotMoved, lookupId.ToString(CultureInfo.InvariantCulture))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(
+                            SR.MsmqReceiveContextMessageNotMoved,
+                            lookupId.ToString(CultureInfo.InvariantCulture)
+                        )
+                    )
+                );
             }
         }
 
@@ -271,7 +338,12 @@ namespace System.ServiceModel.Channels
                 {
                     foreach (string subqueueName in subqueues)
                     {
-                        if (subqueueName.StartsWith(MsmqSubqueueLockingQueue.LockSubqueuePrefix, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            subqueueName.StartsWith(
+                                MsmqSubqueueLockingQueue.LockSubqueuePrefix,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             MsmqQueue collectQueue;
                             if (TryOpenLockQueueForCollection(subqueueName, out collectQueue))
@@ -304,14 +376,21 @@ namespace System.ServiceModel.Channels
                 {
                     // The lock subqueue is either being actively used by a channel or is not available.
                     // So, we do not have to collect this lock queue.
-                    if (error == UnsafeNativeMethods.MQ_ERROR_SHARING_VIOLATION ||
-                        error == UnsafeNativeMethods.MQ_ERROR_QUEUE_NOT_FOUND)
+                    if (
+                        error == UnsafeNativeMethods.MQ_ERROR_SHARING_VIOLATION
+                        || error == UnsafeNativeMethods.MQ_ERROR_QUEUE_NOT_FOUND
+                    )
                     {
                         return false;
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqOpenError, MsmqError.GetErrorString(error)), error));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new MsmqException(
+                                SR.GetString(SR.MsmqOpenError, MsmqError.GetErrorString(error)),
+                                error
+                            )
+                        );
                     }
                 }
             }
@@ -338,7 +417,11 @@ namespace System.ServiceModel.Channels
                         result = lockQueue.TryPeek(message, TimeSpan.FromSeconds(0));
                         if (result == ReceiveResult.MessageReceived)
                         {
-                            lockQueue.TryMoveMessage(message.lookupId.Value, this.mainQueueForMove, MsmqTransactionMode.None);
+                            lockQueue.TryMoveMessage(
+                                message.lookupId.Value,
+                                this.mainQueueForMove,
+                                MsmqTransactionMode.None
+                            );
                         }
                     }
                     catch (MsmqException ex)
@@ -378,12 +461,27 @@ namespace System.ServiceModel.Channels
                 props.variants = propHandle.AddrOfPinnedObject();
                 props.ids = nativePropertyIdsHandle.AddrOfPinnedObject();
 
-                if (UnsafeNativeMethods.MQMgmtGetInfo(this.hostname, "queue=" + this.formatName, propsHandle.AddrOfPinnedObject()) == 0)
+                if (
+                    UnsafeNativeMethods.MQMgmtGetInfo(
+                        this.hostname,
+                        "queue=" + this.formatName,
+                        propsHandle.AddrOfPinnedObject()
+                    ) == 0
+                )
                 {
-                    retProp = (UnsafeNativeMethods.MQPROPVARIANT)Marshal.PtrToStructure(props.variants, typeof(UnsafeNativeMethods.MQPROPVARIANT));
+                    retProp = (UnsafeNativeMethods.MQPROPVARIANT)
+                        Marshal.PtrToStructure(
+                            props.variants,
+                            typeof(UnsafeNativeMethods.MQPROPVARIANT)
+                        );
 
                     IntPtr[] stringArrays = new IntPtr[retProp.stringArraysValue.count];
-                    Marshal.Copy(retProp.stringArraysValue.stringArrays, stringArrays, 0, retProp.stringArraysValue.count);
+                    Marshal.Copy(
+                        retProp.stringArraysValue.stringArrays,
+                        stringArrays,
+                        0,
+                        retProp.stringArraysValue.count
+                    );
 
                     for (int i = 0; i < retProp.stringArraysValue.count; i++)
                     {
@@ -396,7 +494,6 @@ namespace System.ServiceModel.Channels
                 {
                     return false;
                 }
-
             }
             finally
             {
@@ -429,20 +526,34 @@ namespace System.ServiceModel.Channels
             if (formatName.StartsWith(directFormatNamePrefix, StringComparison.OrdinalIgnoreCase))
             {
                 // The direct format name of the form DIRECT=OS:.\sampleq is parsed here
-                string formatNameWithProtocol = formatName.Substring(directFormatNamePrefix.Length,
-                    formatName.Length - directFormatNamePrefix.Length);
+                string formatNameWithProtocol = formatName.Substring(
+                    directFormatNamePrefix.Length,
+                    formatName.Length - directFormatNamePrefix.Length
+                );
 
                 int addressStartPos = formatNameWithProtocol.IndexOf(':') + 1;
-                string address = formatNameWithProtocol.Substring(addressStartPos,
-                    formatNameWithProtocol.IndexOf('\\') - addressStartPos);
+                string address = formatNameWithProtocol.Substring(
+                    addressStartPos,
+                    formatNameWithProtocol.IndexOf('\\') - addressStartPos
+                );
 
-                if (formatNameWithProtocol.StartsWith(tcpProtocolPrefix, StringComparison.OrdinalIgnoreCase))
+                if (
+                    formatNameWithProtocol.StartsWith(
+                        tcpProtocolPrefix,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // formatNameWithProtocol is TCP:<tcp-address>\<queue-type>\<queue-name>
                     hostName = address;
                     return true;
                 }
-                else if (formatNameWithProtocol.StartsWith(osProtocolPrefix, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    formatNameWithProtocol.StartsWith(
+                        osProtocolPrefix,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     if (address.Equals("."))
                     {
@@ -473,4 +584,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

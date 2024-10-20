@@ -15,16 +15,16 @@ public class HttpUtilities
     {
         var httpMethods = new[]
         {
-                new Tuple<string, String>("CONNECT ", "Connect"),
-                new Tuple<string, String>("DELETE ", "Delete"),
-                new Tuple<string, String>("HEAD ", "Head"),
-                new Tuple<string, String>("PATCH ", "Patch"),
-                new Tuple<string, String>("POST ", "Post"),
-                new Tuple<string, String>("PUT ", "Put"),
-                new Tuple<string, String>("OPTIONS ", "Options"),
-                new Tuple<string, String>("TRACE ", "Trace"),
-                new Tuple<string, String>("GET ", "Get")
-            };
+            new Tuple<string, String>("CONNECT ", "Connect"),
+            new Tuple<string, String>("DELETE ", "Delete"),
+            new Tuple<string, String>("HEAD ", "Head"),
+            new Tuple<string, String>("PATCH ", "Patch"),
+            new Tuple<string, String>("POST ", "Post"),
+            new Tuple<string, String>("PUT ", "Put"),
+            new Tuple<string, String>("OPTIONS ", "Options"),
+            new Tuple<string, String>("TRACE ", "Trace"),
+            new Tuple<string, String>("GET ", "Get"),
+        };
 
         return GenerateFile(httpMethods);
     }
@@ -39,11 +39,22 @@ public class HttpUtilities
 
         var methodsAsciiStringAsLong = methodsInfo.Select(m => m.AsciiStringAsLong).ToArray();
 
-        var mask = HttpUtilitiesGeneratorHelpers.SearchKeyByLookThroughMaskCombinations(methodsAsciiStringAsLong, 0, sizeof(ulong) * 8, maskLength);
+        var mask = HttpUtilitiesGeneratorHelpers.SearchKeyByLookThroughMaskCombinations(
+            methodsAsciiStringAsLong,
+            0,
+            sizeof(ulong) * 8,
+            maskLength
+        );
 
         if (mask.HasValue == false)
         {
-            throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, "Generated {0} not found.", nameof(mask)));
+            throw new InvalidOperationException(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Generated {0} not found.",
+                    nameof(mask)
+                )
+            );
         }
 
         var functionGetKnownMethodIndex = GetFunctionBodyGetKnownMethodIndex(mask.Value);
@@ -58,7 +69,9 @@ public class HttpUtilities
         int knownMethodsArrayLength = (int)(Math.Pow(2, maskLength) + 1);
         int methodNamesArrayLength = httpMethods.Length;
 
-        return string.Format(CultureInfo.InvariantCulture, @"// Licensed to the .NET Foundation under one or more agreements.
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            @"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -94,7 +107,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 {6}
         }}
     }}
-}}", methodsSection, masksSection, knownMethodsArrayLength, methodNamesArrayLength, setKnownMethodSection, methodNamesSection, functionGetKnownMethodIndex);
+}}",
+            methodsSection,
+            masksSection,
+            knownMethodsArrayLength,
+            methodNamesArrayLength,
+            setKnownMethodSection,
+            methodNamesSection,
+            functionGetKnownMethodIndex
+        );
     }
 
     private static string GetMethodsSection(List<MethodInfo> methodsInfo)
@@ -106,7 +127,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             var methodInfo = methodsInfo[index];
 
             var httpMethodFieldName = GetHttpMethodFieldName(methodInfo);
-            result.AppendFormat(CultureInfo.InvariantCulture, "        private static readonly ulong {0} = GetAsciiStringAsLong(\"{1}\");", httpMethodFieldName, methodInfo.MethodAsciiString.Replace("\0", "\\0"));
+            result.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "        private static readonly ulong {0} = GetAsciiStringAsLong(\"{1}\");",
+                httpMethodFieldName,
+                methodInfo.MethodAsciiString.Replace("\0", "\\0")
+            );
 
             if (index < methodsInfo.Count - 1)
             {
@@ -133,7 +159,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             var hexMaskString = HttpUtilitiesGeneratorHelpers.GeHexString(maskArray, "0x", ", ");
             var maskFieldName = GetMaskFieldName(maskBytesLength);
 
-            result.AppendFormat(CultureInfo.InvariantCulture, """        private static readonly ulong {0} = GetMaskAsLong([{1}]);""", maskFieldName, hexMaskString);
+            result.AppendFormat(
+                CultureInfo.InvariantCulture,
+                """        private static readonly ulong {0} = GetMaskAsLong([{1}]);""",
+                maskFieldName,
+                hexMaskString
+            );
             result.AppendLine();
             if (index < distinctLengths.Count - 1)
             {
@@ -158,7 +189,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             var maskFieldName = GetMaskFieldName(methodInfo.MaskLength);
             var httpMethodFieldName = GetHttpMethodFieldName(methodInfo);
 
-            result.AppendFormat(CultureInfo.InvariantCulture, "            SetKnownMethod({0}, {1}, HttpMethod.{3}, {4});", maskFieldName, httpMethodFieldName, typeof(String).Name, methodInfo.HttpMethod, methodInfo.MaskLength - 1);
+            result.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "            SetKnownMethod({0}, {1}, HttpMethod.{3}, {4});",
+                maskFieldName,
+                httpMethodFieldName,
+                typeof(String).Name,
+                methodInfo.HttpMethod,
+                methodInfo.MaskLength - 1
+            );
 
             if (index < methodsInfo.Count - 1)
             {
@@ -173,7 +212,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
     {
         methodsInfo = methodsInfo.ToList();
 
-        methodsInfo.Sort((t1, t2) => string.Compare(t1.HttpMethod, t2.HttpMethod, StringComparison.Ordinal));
+        methodsInfo.Sort(
+            (t1, t2) => string.Compare(t1.HttpMethod, t2.HttpMethod, StringComparison.Ordinal)
+        );
 
         var result = new StringBuilder();
 
@@ -181,7 +222,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
         {
             var methodInfo = methodsInfo[index];
 
-            result.AppendFormat(CultureInfo.InvariantCulture, "            _methodNames[(byte)HttpMethod.{1}] = {2}.{3};", typeof(String).Name, methodInfo.HttpMethod, typeof(HttpMethods).Name, methodInfo.HttpMethod);
+            result.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "            _methodNames[(byte)HttpMethod.{1}] = {2}.{3};",
+                typeof(String).Name,
+                methodInfo.HttpMethod,
+                typeof(HttpMethods).Name,
+                methodInfo.HttpMethod
+            );
 
             if (index < methodsInfo.Count - 1)
             {
@@ -212,19 +260,37 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
                     tmpReturn += " | ";
                 }
 
-                tmpReturn += string.Format(CultureInfo.InvariantCulture, "(tmp >> {1})", HttpUtilitiesGeneratorHelpers.MaskToHexString(item.Mask), item.Shift);
+                tmpReturn += string.Format(
+                    CultureInfo.InvariantCulture,
+                    "(tmp >> {1})",
+                    HttpUtilitiesGeneratorHelpers.MaskToHexString(item.Mask),
+                    item.Shift
+                );
             }
 
             var mask2 = (ulong)(Math.Pow(2, bitsCount) - 1);
 
-            string returnString = string.Format(CultureInfo.InvariantCulture, "return ({0}) & {1};", tmpReturn, HttpUtilitiesGeneratorHelpers.MaskToHexString(mask2));
+            string returnString = string.Format(
+                CultureInfo.InvariantCulture,
+                "return ({0}) & {1};",
+                tmpReturn,
+                HttpUtilitiesGeneratorHelpers.MaskToHexString(mask2)
+            );
 
-            bodyString = string.Format(CultureInfo.InvariantCulture, "            const int magicNumer = {0};\r\n            var tmp = (int)value & magicNumer;\r\n            {1}", HttpUtilitiesGeneratorHelpers.MaskToHexString(mask), returnString);
-
+            bodyString = string.Format(
+                CultureInfo.InvariantCulture,
+                "            const int magicNumer = {0};\r\n            var tmp = (int)value & magicNumer;\r\n            {1}",
+                HttpUtilitiesGeneratorHelpers.MaskToHexString(mask),
+                returnString
+            );
         }
         else
         {
-            bodyString = string.Format(CultureInfo.InvariantCulture, "return (int)(value & {0});", maskHexString);
+            bodyString = string.Format(
+                CultureInfo.InvariantCulture,
+                "return (int)(value & {0});",
+                maskHexString
+            );
         }
 
         return bodyString;
@@ -232,7 +298,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
     private static string GetHttpMethodFieldName(MethodInfo methodsInfo)
     {
-        return string.Format(CultureInfo.InvariantCulture, "_http{0}MethodLong", methodsInfo.HttpMethod.ToString());
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "_http{0}MethodLong",
+            methodsInfo.HttpMethod.ToString()
+        );
     }
 
     private static string GetMaskFieldName(int nBytes)
@@ -248,7 +318,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
         if (method.Length > length)
         {
-            throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "MethodAsciiString {0} length is greather than {1}", method, length));
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "MethodAsciiString {0} length is greather than {1}",
+                    method,
+                    length
+                )
+            );
         }
         string result = method;
 
@@ -289,7 +366,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
             MethodAsciiString = methodString,
             AsciiStringAsLong = asciiAsLong,
             HttpMethod = method.Item2.ToString(),
-            MaskLength = method.Item1.Length
+            MaskLength = method.Item1.Length,
         };
     }
 
@@ -305,7 +382,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
 
     private static ulong GetAsciiStringAsLong(string str)
     {
-        Debug.Assert(str.Length == sizeof(ulong), string.Format(CultureInfo.InvariantCulture, "String must be exactly {0} (ASCII) characters long.", sizeof(ulong)));
+        Debug.Assert(
+            str.Length == sizeof(ulong),
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "String must be exactly {0} (ASCII) characters long.",
+                sizeof(ulong)
+            )
+        );
 
         var bytes = Encoding.ASCII.GetBytes(str);
 

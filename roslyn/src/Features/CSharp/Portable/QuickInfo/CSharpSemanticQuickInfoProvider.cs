@@ -18,24 +18,35 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpSemanticQuickInfoProvider()
-        {
-        }
+        public CSharpSemanticQuickInfoProvider() { }
 
         /// <summary>
         /// If the token is the '=>' in a lambda, or the 'delegate' in an anonymous function,
         /// return the syntax for the lambda or anonymous function.
         /// </summary>
-        protected override bool GetBindableNodeForTokenIndicatingLambda(SyntaxToken token, [NotNullWhen(returnValue: true)] out SyntaxNode? found)
+        protected override bool GetBindableNodeForTokenIndicatingLambda(
+            SyntaxToken token,
+            [NotNullWhen(returnValue: true)] out SyntaxNode? found
+        )
         {
-            if (token.IsKind(SyntaxKind.EqualsGreaterThanToken)
-                && token.Parent is (kind: SyntaxKind.ParenthesizedLambdaExpression or SyntaxKind.SimpleLambdaExpression))
+            if (
+                token.IsKind(SyntaxKind.EqualsGreaterThanToken)
+                && token.Parent
+                    is
+                    (
+                        kind: SyntaxKind.ParenthesizedLambdaExpression
+                            or SyntaxKind.SimpleLambdaExpression
+                    )
+            )
             {
                 // () =>
                 found = token.Parent;
                 return true;
             }
-            else if (token.IsKind(SyntaxKind.DelegateKeyword) && token.Parent.IsKind(SyntaxKind.AnonymousMethodExpression))
+            else if (
+                token.IsKind(SyntaxKind.DelegateKeyword)
+                && token.Parent.IsKind(SyntaxKind.AnonymousMethodExpression)
+            )
             {
                 // delegate (...) { ... }
                 found = token.Parent;
@@ -46,10 +57,15 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             return false;
         }
 
-        protected override bool GetBindableNodeForTokenIndicatingPossibleIndexerAccess(SyntaxToken token, [NotNullWhen(returnValue: true)] out SyntaxNode? found)
+        protected override bool GetBindableNodeForTokenIndicatingPossibleIndexerAccess(
+            SyntaxToken token,
+            [NotNullWhen(returnValue: true)] out SyntaxNode? found
+        )
         {
-            if (token.Kind() is SyntaxKind.CloseBracketToken or SyntaxKind.OpenBracketToken &&
-                token.Parent?.Parent.IsKind(SyntaxKind.ElementAccessExpression) == true)
+            if (
+                token.Kind() is SyntaxKind.CloseBracketToken or SyntaxKind.OpenBracketToken
+                && token.Parent?.Parent.IsKind(SyntaxKind.ElementAccessExpression) == true
+            )
             {
                 found = token.Parent.Parent;
                 return true;
@@ -59,10 +75,15 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             return false;
         }
 
-        protected override bool GetBindableNodeForTokenIndicatingMemberAccess(SyntaxToken token, out SyntaxToken found)
+        protected override bool GetBindableNodeForTokenIndicatingMemberAccess(
+            SyntaxToken token,
+            out SyntaxToken found
+        )
         {
-            if (token.IsKind(SyntaxKind.DotToken) &&
-                token.Parent is MemberAccessExpressionSyntax memberAccess)
+            if (
+                token.IsKind(SyntaxKind.DotToken)
+                && token.Parent is MemberAccessExpressionSyntax memberAccess
+            )
             {
                 found = memberAccess.Name.Identifier;
                 return true;
@@ -72,10 +93,15 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             return false;
         }
 
-        protected override bool ShouldCheckPreviousToken(SyntaxToken token)
-            => !token.Parent.IsKind(SyntaxKind.XmlCrefAttribute);
+        protected override bool ShouldCheckPreviousToken(SyntaxToken token) =>
+            !token.Parent.IsKind(SyntaxKind.XmlCrefAttribute);
 
-        protected override NullableFlowState GetNullabilityAnalysis(SemanticModel semanticModel, ISymbol symbol, SyntaxNode node, CancellationToken cancellationToken)
+        protected override NullableFlowState GetNullabilityAnalysis(
+            SemanticModel semanticModel,
+            ISymbol symbol,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        )
         {
             // Anything less than C# 8 we just won't show anything, even if the compiler could theoretically give analysis
             var parseOptions = (CSharpParseOptions)semanticModel.SyntaxTree!.Options;
@@ -99,8 +125,10 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             switch (symbol)
             {
                 // Ignore constant values for nullability flow state
-                case IFieldSymbol { HasConstantValue: true }: return default;
-                case ILocalSymbol { HasConstantValue: true }: return default;
+                case IFieldSymbol { HasConstantValue: true }:
+                    return default;
+                case ILocalSymbol { HasConstantValue: true }:
+                    return default;
 
                 // Symbols with useful quick info
                 case IFieldSymbol _:

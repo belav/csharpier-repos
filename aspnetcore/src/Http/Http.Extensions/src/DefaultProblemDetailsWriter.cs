@@ -11,12 +11,16 @@ namespace Microsoft.AspNetCore.Http;
 internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWriter
 {
     private static readonly MediaTypeHeaderValue _jsonMediaType = new("application/json");
-    private static readonly MediaTypeHeaderValue _problemDetailsJsonMediaType = new("application/problem+json");
+    private static readonly MediaTypeHeaderValue _problemDetailsJsonMediaType =
+        new("application/problem+json");
 
     private readonly ProblemDetailsOptions _options;
     private readonly JsonSerializerOptions _serializerOptions;
 
-    public DefaultProblemDetailsWriter(IOptions<ProblemDetailsOptions> options, IOptions<JsonOptions> jsonOptions)
+    public DefaultProblemDetailsWriter(
+        IOptions<ProblemDetailsOptions> options,
+        IOptions<JsonOptions> jsonOptions
+    )
     {
         _options = options.Value;
         _serializerOptions = jsonOptions.Value.SerializerOptions;
@@ -39,8 +43,10 @@ internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWrite
         {
             var acceptHeaderValue = acceptHeader[i];
 
-            if (_jsonMediaType.IsSubsetOf(acceptHeaderValue) ||
-                _problemDetailsJsonMediaType.IsSubsetOf(acceptHeaderValue))
+            if (
+                _jsonMediaType.IsSubsetOf(acceptHeaderValue)
+                || _problemDetailsJsonMediaType.IsSubsetOf(acceptHeaderValue)
+            )
             {
                 return true;
             }
@@ -57,9 +63,12 @@ internal sealed partial class DefaultProblemDetailsWriter : IProblemDetailsWrite
 
         var problemDetailsType = context.ProblemDetails.GetType();
 
-        return new ValueTask(httpContext.Response.WriteAsJsonAsync(
-                        context.ProblemDetails,
-                         _serializerOptions.GetTypeInfo(problemDetailsType),
-                        contentType: "application/problem+json"));
+        return new ValueTask(
+            httpContext.Response.WriteAsJsonAsync(
+                context.ProblemDetails,
+                _serializerOptions.GetTypeInfo(problemDetailsType),
+                contentType: "application/problem+json"
+            )
+        );
     }
 }

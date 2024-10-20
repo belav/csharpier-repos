@@ -30,7 +30,11 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         [InlineData(null)]
         public static void Ctor_String_NullName_ThrowsArgumentException(string name)
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", null, () => new ColumnAttribute(name));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                null,
+                () => new ColumnAttribute(name)
+            );
         }
 
         [Theory]
@@ -38,7 +42,11 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         [InlineData(" \t\r\n")]
         public static void Ctor_String_WhitespaceName_ThrowsArgumentException(string name)
         {
-            AssertExtensions.Throws<ArgumentException>("name", null, () => new ColumnAttribute(name));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => new ColumnAttribute(name)
+            );
         }
 
         [Theory]
@@ -54,7 +62,10 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         public static void Order_Set_NegativeValue_ThrowsArgumentOutOfRangeException()
         {
             ColumnAttribute attribute = new ColumnAttribute();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => attribute.Order = -1);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => attribute.Order = -1
+            );
         }
 
         [Theory]
@@ -70,7 +81,11 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         public static void TypeName_Set_NullValue_ThrowsArgumentException(string value)
         {
             ColumnAttribute attribute = new ColumnAttribute();
-            AssertExtensions.Throws<ArgumentNullException>("value", null, () => attribute.TypeName = value);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                null,
+                () => attribute.TypeName = value
+            );
         }
 
         [Theory]
@@ -79,7 +94,11 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         public static void TypeName_Set_WhitespaceValue_ThrowsArgumentException(string value)
         {
             ColumnAttribute attribute = new ColumnAttribute();
-            AssertExtensions.Throws<ArgumentException>("value", null, () => attribute.TypeName = value);
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                null,
+                () => attribute.TypeName = value
+            );
         }
     }
 }

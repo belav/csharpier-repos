@@ -9,24 +9,43 @@ namespace Internal.TypeSystem
     // That way we can share the exception string resources.
     public static partial class ThrowHelper
     {
-        private static void ThrowTypeLoadException(ExceptionStringID id, string typeName, string assemblyName, string messageArg)
+        private static void ThrowTypeLoadException(
+            ExceptionStringID id,
+            string typeName,
+            string assemblyName,
+            string messageArg
+        )
         {
             CoreLibThrow.ThrowTypeLoadExceptionWithArgument(id, typeName, assemblyName, messageArg);
         }
 
-        private static void ThrowTypeLoadException(ExceptionStringID id, string typeName, string assemblyName)
+        private static void ThrowTypeLoadException(
+            ExceptionStringID id,
+            string typeName,
+            string assemblyName
+        )
         {
             CoreLibThrow.ThrowTypeLoadException(id, typeName, assemblyName);
         }
 
-        public static void ThrowMissingMethodException(TypeDesc owningType, string methodName, MethodSignature signature)
+        public static void ThrowMissingMethodException(
+            TypeDesc owningType,
+            string methodName,
+            MethodSignature signature
+        )
         {
-            CoreLibThrow.ThrowMissingMethodException(ExceptionStringID.MissingMethod, Format.Method(owningType, methodName, signature));
+            CoreLibThrow.ThrowMissingMethodException(
+                ExceptionStringID.MissingMethod,
+                Format.Method(owningType, methodName, signature)
+            );
         }
 
         public static void ThrowMissingFieldException(TypeDesc owningType, string fieldName)
         {
-            CoreLibThrow.ThrowMissingFieldException(ExceptionStringID.MissingField, Format.Field(owningType, fieldName));
+            CoreLibThrow.ThrowMissingFieldException(
+                ExceptionStringID.MissingField,
+                Format.Field(owningType, fieldName)
+            );
         }
 
         public static void ThrowFileNotFoundException(ExceptionStringID id, string fileName)

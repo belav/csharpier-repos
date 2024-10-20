@@ -15,9 +15,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
     internal sealed partial class CSharpFormatter : Formatter
     {
         public CSharpFormatter()
-            : base(defaultFormat: "{{{0}}}", nullString: "null", thisString: "this")
-        {
-        }
+            : base(defaultFormat: "{{{0}}}", nullString: "null", thisString: "this") { }
 
         internal override bool IsValidIdentifier(string name)
         {
@@ -39,34 +37,63 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             return SyntaxFacts.IsWhitespace(c);
         }
 
-        // TODO: https://github.com/dotnet/roslyn/issues/37536 
+        // TODO: https://github.com/dotnet/roslyn/issues/37536
         // This parsing is imprecise and may result in bad expressions.
-        internal override string TrimAndGetFormatSpecifiers(string expression, out ReadOnlyCollection<string> formatSpecifiers)
+        internal override string TrimAndGetFormatSpecifiers(
+            string expression,
+            out ReadOnlyCollection<string> formatSpecifiers
+        )
         {
             expression = RemoveComments(expression);
             expression = RemoveFormatSpecifiers(expression, out formatSpecifiers);
-            return RemoveLeadingAndTrailingContent(expression, 0, expression.Length, IsWhitespace, ch => ch == ';' || IsWhitespace(ch));
+            return RemoveLeadingAndTrailingContent(
+                expression,
+                0,
+                expression.Length,
+                IsWhitespace,
+                ch => ch == ';' || IsWhitespace(ch)
+            );
         }
 
         internal override string GetOriginalLocalVariableName(string name)
         {
-            if (!GeneratedNameParser.TryParseGeneratedName(name, out _, out var openBracketOffset, out var closeBracketOffset))
+            if (
+                !GeneratedNameParser.TryParseGeneratedName(
+                    name,
+                    out _,
+                    out var openBracketOffset,
+                    out var closeBracketOffset
+                )
+            )
             {
                 return name;
             }
 
-            var result = name.Substring(openBracketOffset + 1, closeBracketOffset - openBracketOffset - 1);
+            var result = name.Substring(
+                openBracketOffset + 1,
+                closeBracketOffset - openBracketOffset - 1
+            );
             return result;
         }
 
         internal override string GetOriginalFieldName(string name)
         {
-            if (!GeneratedNameParser.TryParseGeneratedName(name, out _, out var openBracketOffset, out var closeBracketOffset))
+            if (
+                !GeneratedNameParser.TryParseGeneratedName(
+                    name,
+                    out _,
+                    out var openBracketOffset,
+                    out var closeBracketOffset
+                )
+            )
             {
                 return name;
             }
 
-            var result = name.Substring(openBracketOffset + 1, closeBracketOffset - openBracketOffset - 1);
+            var result = name.Substring(
+                openBracketOffset + 1,
+                closeBracketOffset - openBracketOffset - 1
+            );
             return result;
         }
 
@@ -78,7 +105,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             int length = expression.Length;
 
             // Workaround for https://dev.azure.com/devdiv/DevDiv/_workitems/edit/847849
-            // Do not remove any comments that might be in a string. 
+            // Do not remove any comments that might be in a string.
             // This won't work when there are quotes in the comment, but that's not that common.
             int lastQuote = expression.LastIndexOf('"') + 1;
             builder.Append(expression, 0, lastQuote);

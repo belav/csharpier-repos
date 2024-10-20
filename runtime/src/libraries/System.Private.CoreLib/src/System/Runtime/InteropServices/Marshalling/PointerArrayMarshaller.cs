@@ -12,12 +12,16 @@ namespace System.Runtime.InteropServices.Marshalling
     /// <typeparam name="T">The array element pointer type.</typeparam>
     /// <typeparam name="TUnmanagedElement">The unmanaged type for the element pointer type.</typeparam>
     [CLSCompliant(false)]
-    [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder*[]),
+    [CustomMarshaller(
+        typeof(CustomMarshallerAttribute.GenericPlaceholder*[]),
         MarshalMode.Default,
-        typeof(PointerArrayMarshaller<,>))]
-    [CustomMarshaller(typeof(CustomMarshallerAttribute.GenericPlaceholder*[]),
+        typeof(PointerArrayMarshaller<,>)
+    )]
+    [CustomMarshaller(
+        typeof(CustomMarshallerAttribute.GenericPlaceholder*[]),
         MarshalMode.ManagedToUnmanagedIn,
-        typeof(PointerArrayMarshaller<,>.ManagedToUnmanagedIn))]
+        typeof(PointerArrayMarshaller<,>.ManagedToUnmanagedIn)
+    )]
     [ContiguousCollectionMarshaller]
     public static unsafe class PointerArrayMarshaller<T, TUnmanagedElement>
         where T : unmanaged
@@ -29,7 +33,10 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="managed">The managed array to marshal.</param>
         /// <param name="numElements">The unmanaged element count.</param>
         /// <returns>The unmanaged pointer to the allocated memory.</returns>
-        public static TUnmanagedElement* AllocateContainerForUnmanagedElements(T*[]? managed, out int numElements)
+        public static TUnmanagedElement* AllocateContainerForUnmanagedElements(
+            T*[]? managed,
+            out int numElements
+        )
         {
             if (managed is null)
             {
@@ -49,8 +56,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         /// <param name="managed">The managed array to get a source for.</param>
         /// <returns>The <see cref="ReadOnlySpan{IntPtr}"/> containing the managed elements to marshal.</returns>
-        public static ReadOnlySpan<IntPtr> GetManagedValuesSource(T*[]? managed)
-            => Unsafe.As<IntPtr[]>(managed);
+        public static ReadOnlySpan<IntPtr> GetManagedValuesSource(T*[]? managed) =>
+            Unsafe.As<IntPtr[]>(managed);
 
         /// <summary>
         /// Gets a destination for the unmanaged elements in the array.
@@ -58,8 +65,10 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="unmanaged">The unmanaged allocation to get a destination for.</param>
         /// <param name="numElements">The unmanaged element count.</param>
         /// <returns>The <see cref="Span{TUnmanagedElement}"/> of unmanaged elements.</returns>
-        public static Span<TUnmanagedElement> GetUnmanagedValuesDestination(TUnmanagedElement* unmanaged, int numElements)
-            => new Span<TUnmanagedElement>(unmanaged, numElements);
+        public static Span<TUnmanagedElement> GetUnmanagedValuesDestination(
+            TUnmanagedElement* unmanaged,
+            int numElements
+        ) => new Span<TUnmanagedElement>(unmanaged, numElements);
 
         /// <summary>
         /// Allocates memory for the managed representation of the array.
@@ -67,7 +76,10 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="unmanaged">The unmanaged array.</param>
         /// <param name="numElements">The unmanaged element count.</param>
         /// <returns>The managed array.</returns>
-        public static T*[]? AllocateContainerForManagedElements(TUnmanagedElement* unmanaged, int numElements)
+        public static T*[]? AllocateContainerForManagedElements(
+            TUnmanagedElement* unmanaged,
+            int numElements
+        )
         {
             if (unmanaged is null)
                 return null;
@@ -80,8 +92,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         /// <param name="managed">The managed array to get a destination for.</param>
         /// <returns>The <see cref="Span{T}"/> of managed elements.</returns>
-        public static Span<IntPtr> GetManagedValuesDestination(T*[]? managed)
-            => Unsafe.As<IntPtr[]>(managed);
+        public static Span<IntPtr> GetManagedValuesDestination(T*[]? managed) =>
+            Unsafe.As<IntPtr[]>(managed);
 
         /// <summary>
         /// Gets a source for the unmanaged elements in the array.
@@ -89,15 +101,17 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="unmanagedValue">The unmanaged array to get a source for.</param>
         /// <param name="numElements">The unmanaged element count.</param>
         /// <returns>The <see cref="ReadOnlySpan{TUnmanagedElement}"/> containing the unmanaged elements to marshal.</returns>
-        public static ReadOnlySpan<TUnmanagedElement> GetUnmanagedValuesSource(TUnmanagedElement* unmanagedValue, int numElements)
-            => new ReadOnlySpan<TUnmanagedElement>(unmanagedValue, numElements);
+        public static ReadOnlySpan<TUnmanagedElement> GetUnmanagedValuesSource(
+            TUnmanagedElement* unmanagedValue,
+            int numElements
+        ) => new ReadOnlySpan<TUnmanagedElement>(unmanagedValue, numElements);
 
         /// <summary>
         /// Frees memory for the unmanaged array.
         /// </summary>
         /// <param name="unmanaged">The unmanaged array.</param>
-        public static void Free(TUnmanagedElement* unmanaged)
-            => Marshal.FreeCoTaskMem((IntPtr)unmanaged);
+        public static void Free(TUnmanagedElement* unmanaged) =>
+            Marshal.FreeCoTaskMem((IntPtr)unmanaged);
 
         /// <summary>
         /// Represents a marshaller for marshalling an array from managed to unmanaged.
@@ -147,7 +161,8 @@ namespace System.Runtime.InteropServices.Marshalling
                 {
                     int bufferSize = checked(array.Length * sizeof(TUnmanagedElement));
                     int spaceToAllocate = Math.Max(bufferSize, 1);
-                    _allocatedMemory = (TUnmanagedElement*)NativeMemory.Alloc((nuint)spaceToAllocate);
+                    _allocatedMemory = (TUnmanagedElement*)
+                        NativeMemory.Alloc((nuint)spaceToAllocate);
                     _span = new Span<TUnmanagedElement>(_allocatedMemory, array.Length);
                 }
             }
@@ -156,7 +171,8 @@ namespace System.Runtime.InteropServices.Marshalling
             /// Returns a span that points to the memory where the managed values of the array are stored.
             /// </summary>
             /// <returns>A span over managed values of the array.</returns>
-            public ReadOnlySpan<IntPtr> GetManagedValuesSource() => Unsafe.As<IntPtr[]>(_managedArray);
+            public ReadOnlySpan<IntPtr> GetManagedValuesSource() =>
+                Unsafe.As<IntPtr[]>(_managedArray);
 
             /// <summary>
             /// Returns a span that points to the memory where the unmanaged values of the array should be stored.
@@ -168,13 +184,15 @@ namespace System.Runtime.InteropServices.Marshalling
             /// Returns a reference to the marshalled array.
             /// </summary>
             /// <returns>A pinnable reference to the unmanaged marshalled array.</returns>
-            public ref TUnmanagedElement GetPinnableReference() => ref MemoryMarshal.GetReference(_span);
+            public ref TUnmanagedElement GetPinnableReference() =>
+                ref MemoryMarshal.GetReference(_span);
 
             /// <summary>
             /// Returns the unmanaged value representing the array.
             /// </summary>
             /// <returns>A pointer to the beginning of the unmanaged value.</returns>
-            public TUnmanagedElement* ToUnmanaged() => (TUnmanagedElement*)Unsafe.AsPointer(ref GetPinnableReference());
+            public TUnmanagedElement* ToUnmanaged() =>
+                (TUnmanagedElement*)Unsafe.AsPointer(ref GetPinnableReference());
 
             /// <summary>
             /// Frees resources.

@@ -1,6 +1,6 @@
 using System;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace GitHub_21666
@@ -18,10 +18,10 @@ namespace GitHub_21666
         static uint uintSF = 1;
         static ulong ulongSF = 1;
 
-        readonly static byte[] byteArray = new byte[10];
-        readonly static ushort[] ushortArray = new ushort[10];
-        readonly static uint[] uintArray = new uint[10];
-        readonly static ulong[] ulongArray = new ulong[10];
+        static readonly byte[] byteArray = new byte[10];
+        static readonly ushort[] ushortArray = new ushort[10];
+        static readonly uint[] uintArray = new uint[10];
+        static readonly ulong[] ulongArray = new ulong[10];
 
         [Fact]
         public static void Test()
@@ -154,7 +154,6 @@ namespace GitHub_21666
                     Console.WriteLine("TestUInt32Containment failed on LeadingZeroCount");
                     return false;
                 }
-
             }
 
             uint* ptr1 = &value;
@@ -223,7 +222,6 @@ namespace GitHub_21666
                     Console.WriteLine("TestUInt64Containment failed on LeadingZeroCount");
                     return false;
                 }
-
             }
 
             ulong* ptr1 = &value;
@@ -254,7 +252,10 @@ namespace GitHub_21666
                     return false;
                 }
 
-                if (Sse42.X64.Crc32(0xffffffffffffffffUL, ulongArray[*ptr + 1]) != 0x0000000073d74d75UL)
+                if (
+                    Sse42.X64.Crc32(0xffffffffffffffffUL, ulongArray[*ptr + 1])
+                    != 0x0000000073d74d75UL
+                )
                 {
                     Console.WriteLine("TestUInt64Containment failed on Crc32");
                     return false;

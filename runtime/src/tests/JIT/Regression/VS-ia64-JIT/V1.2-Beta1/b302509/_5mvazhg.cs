@@ -13,12 +13,8 @@ public struct AA
         do
         {
             TypedReference local19 = __makeref(App.m_xFwd6);
-            do
-            {
-            }
-            while (App.m_bFwd5);
-        }
-        while (App.m_bFwd5);
+            do { } while (App.m_bFwd5);
+        } while (App.m_bFwd5);
         return App.m_byFwd9;
     }
 }
@@ -40,6 +36,7 @@ public class App
         }
         Console.WriteLine("Passed.");
     }
+
     public static bool m_bFwd5;
     public static AA m_xFwd6;
     public static byte m_byFwd9;

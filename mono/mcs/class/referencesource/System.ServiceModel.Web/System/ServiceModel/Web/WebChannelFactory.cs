@@ -4,61 +4,51 @@
 
 namespace System.ServiceModel.Web
 {
-    using System.IO;
     using System.Collections.Generic;
+    using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Configuration;
-    using System.Net;
-    using System.Globalization;
 
     public class WebChannelFactory<TChannel> : ChannelFactory<TChannel>
         where TChannel : class
     {
         public WebChannelFactory()
-            : base()
-        {
-        }
+            : base() { }
 
         public WebChannelFactory(Binding binding)
-            : base(binding)
-        {
-        }
+            : base(binding) { }
 
-        public WebChannelFactory(ServiceEndpoint endpoint) :
-            base(endpoint)
-        {
-        }
+        public WebChannelFactory(ServiceEndpoint endpoint)
+            : base(endpoint) { }
 
-
-        [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads", Justification = "This is a configuration string and not a network location")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1057:StringUriOverloadsCallSystemUriOverloads",
+            Justification = "This is a configuration string and not a network location"
+        )]
         public WebChannelFactory(string endpointConfigurationName)
-            : base(endpointConfigurationName)
-        {
-        }
+            : base(endpointConfigurationName) { }
 
         public WebChannelFactory(Type channelType)
-            : base(channelType)
-        {
-        }
+            : base(channelType) { }
 
         public WebChannelFactory(Uri remoteAddress)
-            : this(GetDefaultBinding(remoteAddress), remoteAddress)
-        {
-        }
+            : this(GetDefaultBinding(remoteAddress), remoteAddress) { }
 
         public WebChannelFactory(Binding binding, Uri remoteAddress)
-            : base(binding, (remoteAddress != null) ? new EndpointAddress(remoteAddress) : null)
-        {
-        }
+            : base(binding, (remoteAddress != null) ? new EndpointAddress(remoteAddress) : null) { }
 
         public WebChannelFactory(string endpointConfigurationName, Uri remoteAddress)
-            : base(endpointConfigurationName, (remoteAddress != null) ? new EndpointAddress(remoteAddress) : null)
-        {
-        }
+            : base(
+                endpointConfigurationName,
+                (remoteAddress != null) ? new EndpointAddress(remoteAddress) : null
+            ) { }
 
         protected override void OnOpening()
         {
@@ -82,7 +72,13 @@ namespace System.ServiceModel.Web
 
         static Binding GetDefaultBinding(Uri remoteAddress)
         {
-            if (remoteAddress == null || (remoteAddress.Scheme != Uri.UriSchemeHttp && remoteAddress.Scheme != Uri.UriSchemeHttps))
+            if (
+                remoteAddress == null
+                || (
+                    remoteAddress.Scheme != Uri.UriSchemeHttp
+                    && remoteAddress.Scheme != Uri.UriSchemeHttps
+                )
+            )
             {
                 return null;
             }

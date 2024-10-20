@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Runtime;
-    using System.ServiceModel.Routing;
     using System.Collections.Generic;
+    using System.Runtime;
     using System.Security.Principal;
+    using System.ServiceModel.Routing;
     using SR2 = System.ServiceModel.SR;
 
     class SynchronousSendBindingElement : BindingElement
@@ -35,22 +35,25 @@ namespace System.ServiceModel.Channels
                 throw FxTrace.Exception.ArgumentNull("context");
             }
 
-            
             Type typeofTChannel = typeof(TChannel);
 
-            if (typeofTChannel == typeof(IDuplexChannel) ||
-                typeofTChannel == typeof(IDuplexSessionChannel) ||
-                typeofTChannel == typeof(IRequestChannel) ||
-                typeofTChannel == typeof(IRequestSessionChannel) || 
-                typeofTChannel == typeof(IOutputChannel) ||
-                typeofTChannel == typeof(IOutputSessionChannel))
+            if (
+                typeofTChannel == typeof(IDuplexChannel)
+                || typeofTChannel == typeof(IDuplexSessionChannel)
+                || typeofTChannel == typeof(IRequestChannel)
+                || typeofTChannel == typeof(IRequestSessionChannel)
+                || typeofTChannel == typeof(IOutputChannel)
+                || typeofTChannel == typeof(IOutputSessionChannel)
+            )
             {
                 return context.CanBuildInnerChannelFactory<TChannel>();
             }
             return false;
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -59,7 +62,10 @@ namespace System.ServiceModel.Channels
 
             if (!this.CanBuildChannelFactory<TChannel>(context.Clone()))
             {
-                throw FxTrace.Exception.Argument("TChannel", SR2.GetString(SR2.ChannelTypeNotSupported, typeof(TChannel)));
+                throw FxTrace.Exception.Argument(
+                    "TChannel",
+                    SR2.GetString(SR2.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             IChannelFactory<TChannel> innerFactory = context.BuildInnerChannelFactory<TChannel>();
@@ -69,15 +75,20 @@ namespace System.ServiceModel.Channels
             }
             return null;
         }
-      
+
         class SynchronousChannelFactory<TChannel> : LayeredChannelFactory<TChannel>
         {
-            public SynchronousChannelFactory(IDefaultCommunicationTimeouts timeouts, IChannelFactory<TChannel> innerFactory)
-                : base(timeouts, innerFactory)
-            {
-            }
+            public SynchronousChannelFactory(
+                IDefaultCommunicationTimeouts timeouts,
+                IChannelFactory<TChannel> innerFactory
+            )
+                : base(timeouts, innerFactory) { }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 this.InnerChannelFactory.Open(timeout);
                 return new CompletedAsyncResult(callback, state);
@@ -90,38 +101,59 @@ namespace System.ServiceModel.Channels
 
             protected override TChannel OnCreateChannel(EndpointAddress address, Uri via)
             {
-                IChannelFactory<TChannel> factory = (IChannelFactory<TChannel>)this.InnerChannelFactory;
+                IChannelFactory<TChannel> factory =
+                    (IChannelFactory<TChannel>)this.InnerChannelFactory;
                 TChannel channel = factory.CreateChannel(address, via);
                 if (channel != null)
                 {
                     Type channelType = typeof(TChannel);
                     if (channelType == typeof(IDuplexSessionChannel))
                     {
-                        channel = (TChannel)(object)new SynchronousDuplexSessionChannel(this, (IDuplexSessionChannel)channel);
+                        channel = (TChannel)
+                            (object)
+                                new SynchronousDuplexSessionChannel(
+                                    this,
+                                    (IDuplexSessionChannel)channel
+                                );
                     }
                     else if (channelType == typeof(IRequestChannel))
                     {
-                        channel = (TChannel)(object)new SynchronousRequestChannel(this, (IRequestChannel)channel);
+                        channel = (TChannel)
+                            (object)new SynchronousRequestChannel(this, (IRequestChannel)channel);
                     }
                     else if (channelType == typeof(IRequestSessionChannel))
                     {
-                        channel = (TChannel)(object)new SynchronousRequestSessionChannel(this, (IRequestSessionChannel)channel);
+                        channel = (TChannel)
+                            (object)
+                                new SynchronousRequestSessionChannel(
+                                    this,
+                                    (IRequestSessionChannel)channel
+                                );
                     }
                     else if (channelType == typeof(IOutputChannel))
                     {
-                        channel = (TChannel)(object)new SynchronousOutputChannel(this, (IOutputChannel)channel);
+                        channel = (TChannel)
+                            (object)new SynchronousOutputChannel(this, (IOutputChannel)channel);
                     }
                     else if (channelType == typeof(IOutputSessionChannel))
                     {
-                        channel = (TChannel)(object)new SynchronousOutputSessionChannel(this, (IOutputSessionChannel)channel);
+                        channel = (TChannel)
+                            (object)
+                                new SynchronousOutputSessionChannel(
+                                    this,
+                                    (IOutputSessionChannel)channel
+                                );
                     }
                     else if (channelType == typeof(IDuplexChannel))
                     {
-                        channel = (TChannel)(object)new SynchronousDuplexChannel(this, (IDuplexChannel)channel);
+                        channel = (TChannel)
+                            (object)new SynchronousDuplexChannel(this, (IDuplexChannel)channel);
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(base.CreateChannelTypeNotSupportedException(typeof(TChannel)));
+                        throw FxTrace.Exception.AsError(
+                            base.CreateChannelTypeNotSupportedException(typeof(TChannel))
+                        );
                     }
                 }
                 return channel;
@@ -132,11 +164,13 @@ namespace System.ServiceModel.Channels
             where TChannel : class, IChannel
         {
             protected SynchronousChannelBase(ChannelManagerBase manager, TChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+                : base(manager, innerChannel) { }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 this.InnerChannel.Open(timeout);
                 return new CompletedAsyncResult(callback, state);
@@ -152,9 +186,7 @@ namespace System.ServiceModel.Channels
             where TChannel : class, IDuplexChannel
         {
             public SynchronousDuplexChannelBase(ChannelManagerBase manager, TChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+                : base(manager, innerChannel) { }
 
             public IAsyncResult BeginReceive(TimeSpan timeout, AsyncCallback callback, object state)
             {
@@ -166,12 +198,20 @@ namespace System.ServiceModel.Channels
                 return this.InnerChannel.BeginReceive(callback, state);
             }
 
-            public IAsyncResult BeginTryReceive(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginTryReceive(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.InnerChannel.BeginTryReceive(timeout, callback, state);
             }
 
-            public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginWaitForMessage(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.InnerChannel.BeginWaitForMessage(timeout, callback, state);
             }
@@ -217,20 +257,23 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class SynchronousDuplexChannel : SynchronousDuplexChannelBase<IDuplexChannel>, IDuplexChannel
+        class SynchronousDuplexChannel
+            : SynchronousDuplexChannelBase<IDuplexChannel>,
+                IDuplexChannel
         {
             public SynchronousDuplexChannel(ChannelManagerBase manager, IDuplexChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+                : base(manager, innerChannel) { }
         }
 
-        class SynchronousDuplexSessionChannel : SynchronousDuplexChannelBase<IDuplexSessionChannel>, IDuplexSessionChannel
+        class SynchronousDuplexSessionChannel
+            : SynchronousDuplexChannelBase<IDuplexSessionChannel>,
+                IDuplexSessionChannel
         {
-            public SynchronousDuplexSessionChannel(ChannelManagerBase manager, IDuplexSessionChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+            public SynchronousDuplexSessionChannel(
+                ChannelManagerBase manager,
+                IDuplexSessionChannel innerChannel
+            )
+                : base(manager, innerChannel) { }
 
             IDuplexSession ISessionChannel<IDuplexSession>.Session
             {
@@ -242,11 +285,14 @@ namespace System.ServiceModel.Channels
             where TChannel : class, IOutputChannel
         {
             public SynchronousOutputChannelBase(ChannelManagerBase manager, TChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+                : base(manager, innerChannel) { }
 
-            public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginSend(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 this.InnerChannel.Send(message, timeout);
                 return new CompletedAsyncResult(callback, state);
@@ -284,20 +330,23 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class SynchronousOutputChannel : SynchronousOutputChannelBase<IOutputChannel>, IOutputChannel
+        class SynchronousOutputChannel
+            : SynchronousOutputChannelBase<IOutputChannel>,
+                IOutputChannel
         {
             public SynchronousOutputChannel(ChannelManagerBase manager, IOutputChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+                : base(manager, innerChannel) { }
         }
 
-        class SynchronousOutputSessionChannel : SynchronousOutputChannelBase<IOutputSessionChannel>, IOutputSessionChannel
+        class SynchronousOutputSessionChannel
+            : SynchronousOutputChannelBase<IOutputSessionChannel>,
+                IOutputSessionChannel
         {
-            public SynchronousOutputSessionChannel(ChannelManagerBase manager, IOutputSessionChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+            public SynchronousOutputSessionChannel(
+                ChannelManagerBase manager,
+                IOutputSessionChannel innerChannel
+            )
+                : base(manager, innerChannel) { }
 
             IOutputSession ISessionChannel<IOutputSession>.Session
             {
@@ -309,11 +358,14 @@ namespace System.ServiceModel.Channels
             where TChannel : class, IRequestChannel
         {
             public SynchronousRequestChannelBase(ChannelManagerBase manager, TChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+                : base(manager, innerChannel) { }
 
-            public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            public IAsyncResult BeginRequest(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 Message reply = this.InnerChannel.Request(message, timeout);
                 return new CompletedAsyncResult<Message>(reply, callback, state);
@@ -351,27 +403,30 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        class SynchronousRequestChannel : SynchronousRequestChannelBase<IRequestChannel>, IRequestChannel
+        class SynchronousRequestChannel
+            : SynchronousRequestChannelBase<IRequestChannel>,
+                IRequestChannel
         {
-            public SynchronousRequestChannel(ChannelManagerBase manager, IRequestChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+            public SynchronousRequestChannel(
+                ChannelManagerBase manager,
+                IRequestChannel innerChannel
+            )
+                : base(manager, innerChannel) { }
         }
 
-        class SynchronousRequestSessionChannel : SynchronousRequestChannelBase<IRequestSessionChannel>, IRequestSessionChannel
+        class SynchronousRequestSessionChannel
+            : SynchronousRequestChannelBase<IRequestSessionChannel>,
+                IRequestSessionChannel
         {
-            public SynchronousRequestSessionChannel(ChannelManagerBase manager, IRequestSessionChannel innerChannel)
-                : base(manager, innerChannel)
-            {
-            }
+            public SynchronousRequestSessionChannel(
+                ChannelManagerBase manager,
+                IRequestSessionChannel innerChannel
+            )
+                : base(manager, innerChannel) { }
 
             public IOutputSession Session
             {
-                get
-                {
-                    return this.InnerChannel.Session;
-                }
+                get { return this.InnerChannel.Session; }
             }
         }
     }

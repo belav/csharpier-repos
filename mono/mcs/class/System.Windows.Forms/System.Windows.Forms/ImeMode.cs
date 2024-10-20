@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,22 +27,22 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-	[ComVisible(true)]
-	public enum ImeMode
-	{
-		NoControl	= 0,
-		On		= 1,
-		Off		= 2,
-		Disable		= 3,
-		Hiragana	= 4,
-		Katakana	= 5,
-		KatakanaHalf	= 6,
-		AlphaFull	= 7,
-		Alpha		= 8,
-		HangulFull	= 9,
-		Hangul		= 10,
-		Inherit		= -1,
-		Close		= 11,
-		OnHalf		= 12
-	}
+    [ComVisible(true)]
+    public enum ImeMode
+    {
+        NoControl = 0,
+        On = 1,
+        Off = 2,
+        Disable = 3,
+        Hiragana = 4,
+        Katakana = 5,
+        KatakanaHalf = 6,
+        AlphaFull = 7,
+        Alpha = 8,
+        HangulFull = 9,
+        Hangul = 10,
+        Inherit = -1,
+        Close = 11,
+        OnHalf = 12,
+    }
 }

@@ -16,18 +16,35 @@ namespace System.ServiceModel.Security
         SecurityTokenParameters tokenParameters;
         bool isTokenOptional;
 
-        public SupportingTokenAuthenticatorSpecification(SecurityTokenAuthenticator tokenAuthenticator, SecurityTokenResolver securityTokenResolver, SecurityTokenAttachmentMode attachmentMode, SecurityTokenParameters tokenParameters)
-            : this(tokenAuthenticator, securityTokenResolver, attachmentMode, tokenParameters, false)
-        {
-        }
+        public SupportingTokenAuthenticatorSpecification(
+            SecurityTokenAuthenticator tokenAuthenticator,
+            SecurityTokenResolver securityTokenResolver,
+            SecurityTokenAttachmentMode attachmentMode,
+            SecurityTokenParameters tokenParameters
+        )
+            : this(
+                tokenAuthenticator,
+                securityTokenResolver,
+                attachmentMode,
+                tokenParameters,
+                false
+            ) { }
 
-        internal SupportingTokenAuthenticatorSpecification(SecurityTokenAuthenticator tokenAuthenticator, SecurityTokenResolver securityTokenResolver, SecurityTokenAttachmentMode attachmentMode, SecurityTokenParameters tokenParameters, bool isTokenOptional)
+        internal SupportingTokenAuthenticatorSpecification(
+            SecurityTokenAuthenticator tokenAuthenticator,
+            SecurityTokenResolver securityTokenResolver,
+            SecurityTokenAttachmentMode attachmentMode,
+            SecurityTokenParameters tokenParameters,
+            bool isTokenOptional
+        )
         {
             if (tokenAuthenticator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenAuthenticator");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "tokenAuthenticator"
+                );
             }
-            
+
             SecurityTokenAttachmentModeHelper.Validate(attachmentMode);
 
             if (tokenParameters == null)

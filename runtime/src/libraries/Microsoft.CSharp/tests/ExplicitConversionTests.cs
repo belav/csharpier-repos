@@ -14,13 +14,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             Succeed,
             CompileError,
-            RuntimeError
+            RuntimeError,
         }
-        private static void AssertExplicitConvert<TSource, TTarget>(TSource argument, TTarget target, ExpectedConversionResult expected)
+
+        private static void AssertExplicitConvert<TSource, TTarget>(
+            TSource argument,
+            TTarget target,
+            ExpectedConversionResult expected
+        )
         {
-            CallSiteBinder binder = Binder.Convert(CSharpBinderFlags.ConvertExplicit, typeof(TTarget), typeof(ExplicitConversionTests));
-            CallSite<Func<CallSite, TSource, TTarget>> callSite =
-                CallSite<Func<CallSite, TSource, TTarget>>.Create(binder);
+            CallSiteBinder binder = Binder.Convert(
+                CSharpBinderFlags.ConvertExplicit,
+                typeof(TTarget),
+                typeof(ExplicitConversionTests)
+            );
+            CallSite<Func<CallSite, TSource, TTarget>> callSite = CallSite<
+                Func<CallSite, TSource, TTarget>
+            >.Create(binder);
             Func<CallSite, TSource, TTarget> func = callSite.Target;
             switch (expected)
             {
@@ -44,54 +54,68 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             }
         }
 
+        private interface IInterface { }
 
-        private interface IInterface
-        {
-        }
+        private class UnsealedClass { }
 
-        private class UnsealedClass
-        {
-        }
+        private sealed class SealedClass { }
 
-        private sealed class SealedClass
-        {
-        }
+        private class ImplementingClass : IInterface { }
 
-        private class ImplementingClass : IInterface
-        {
-        }
+        private class ImplementingSealedClass : IInterface { }
 
-        private class ImplementingSealedClass : IInterface
-        {
-        }
+        private class UnrelatedNonInterface { }
 
-        private class UnrelatedNonInterface
-        {
-        }
+        private struct Struct { }
 
-        private struct Struct
-        {
-        }
-
-        private struct ImplementingStruct : IInterface
-        {
-        }
+        private struct ImplementingStruct : IInterface { }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void ClassInterfaceExplicitConversion()
         {
-            AssertExplicitConvert(new SealedClass(), default(IInterface), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new UnsealedClass(), default(IInterface), ExpectedConversionResult.RuntimeError);
+            AssertExplicitConvert(
+                new SealedClass(),
+                default(IInterface),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new UnsealedClass(),
+                default(IInterface),
+                ExpectedConversionResult.RuntimeError
+            );
             ImplementingClass ic = new ImplementingClass();
             AssertExplicitConvert(ic, (IInterface)ic, ExpectedConversionResult.Succeed);
             ImplementingSealedClass isc = new ImplementingSealedClass();
             AssertExplicitConvert(isc, (IInterface)isc, ExpectedConversionResult.Succeed);
-            AssertExplicitConvert(new Struct(), default(IInterface), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new ImplementingStruct(), new ImplementingStruct(), ExpectedConversionResult.Succeed);
-            AssertExplicitConvert(new SealedClass(), default(UnrelatedNonInterface), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new UnsealedClass(), default(UnrelatedNonInterface), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new Struct(), default(UnrelatedNonInterface), ExpectedConversionResult.CompileError);
+            AssertExplicitConvert(
+                new Struct(),
+                default(IInterface),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new ImplementingStruct(),
+                new ImplementingStruct(),
+                ExpectedConversionResult.Succeed
+            );
+            AssertExplicitConvert(
+                new SealedClass(),
+                default(UnrelatedNonInterface),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new UnsealedClass(),
+                default(UnrelatedNonInterface),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new Struct(),
+                default(UnrelatedNonInterface),
+                ExpectedConversionResult.CompileError
+            );
         }
 
         [Fact]
@@ -99,50 +123,118 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             IInterface iif = new ImplementingClass();
             AssertExplicitConvert(iif, default(SealedClass), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(iif, default(UnsealedClass), ExpectedConversionResult.CompileError);
+            AssertExplicitConvert(
+                iif,
+                default(UnsealedClass),
+                ExpectedConversionResult.CompileError
+            );
             ImplementingClass ic = new ImplementingClass();
             AssertExplicitConvert((IInterface)ic, ic, ExpectedConversionResult.Succeed);
             ImplementingSealedClass isc = new ImplementingSealedClass();
             AssertExplicitConvert((IInterface)isc, isc, ExpectedConversionResult.Succeed);
             AssertExplicitConvert(iif, default(Struct), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert((IInterface)new ImplementingStruct(), new ImplementingStruct(), ExpectedConversionResult.Succeed);
+            AssertExplicitConvert(
+                (IInterface)new ImplementingStruct(),
+                new ImplementingStruct(),
+                ExpectedConversionResult.Succeed
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void ClassInterfaceArrayElementExplicitConversions()
         {
-            AssertExplicitConvert(new SealedClass[0], default(IInterface[]), ExpectedConversionResult.CompileError);
+            AssertExplicitConvert(
+                new SealedClass[0],
+                default(IInterface[]),
+                ExpectedConversionResult.CompileError
+            );
             var ic = new ImplementingClass[0];
             AssertExplicitConvert(ic, (IInterface[])ic, ExpectedConversionResult.Succeed);
             var isc = new ImplementingSealedClass[0];
             AssertExplicitConvert(isc, (IInterface[])isc, ExpectedConversionResult.Succeed);
-            AssertExplicitConvert(new Struct[0], default(IInterface[]), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new SealedClass[0], default(UnrelatedNonInterface[]), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new UnsealedClass[0], default(UnrelatedNonInterface[]), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new Struct[0], default(UnrelatedNonInterface[]), ExpectedConversionResult.CompileError);
+            AssertExplicitConvert(
+                new Struct[0],
+                default(IInterface[]),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new SealedClass[0],
+                default(UnrelatedNonInterface[]),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new UnsealedClass[0],
+                default(UnrelatedNonInterface[]),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new Struct[0],
+                default(UnrelatedNonInterface[]),
+                ExpectedConversionResult.CompileError
+            );
         }
 
-        [Fact, SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, "25754 is not fixed in NetFX")]
+        [
+            Fact,
+            SkipOnTargetFramework(
+                TargetFrameworkMonikers.NetFramework,
+                "25754 is not fixed in NetFX"
+            )
+        ]
         public void ClassInterfaceArrayElementExplicitConversionsCoreFX()
         {
-            AssertExplicitConvert(new UnsealedClass[0], default(IInterface[]), ExpectedConversionResult.RuntimeError);
+            AssertExplicitConvert(
+                new UnsealedClass[0],
+                default(IInterface[]),
+                ExpectedConversionResult.RuntimeError
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void ClassInterfaceArrayIListElementExplicitConversions()
         {
-            AssertExplicitConvert(new SealedClass[0], default(IList<IInterface>), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new UnsealedClass[0], default(IList<IInterface>), ExpectedConversionResult.RuntimeError);
+            AssertExplicitConvert(
+                new SealedClass[0],
+                default(IList<IInterface>),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new UnsealedClass[0],
+                default(IList<IInterface>),
+                ExpectedConversionResult.RuntimeError
+            );
             var ic = new ImplementingClass[0];
             AssertExplicitConvert(ic, (IList<IInterface>)ic, ExpectedConversionResult.Succeed);
             var isc = new ImplementingSealedClass[0];
             AssertExplicitConvert(isc, (IList<IInterface>)isc, ExpectedConversionResult.Succeed);
-            AssertExplicitConvert(new Struct[0], default(IList<IInterface>), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new SealedClass[0], default(IList<UnrelatedNonInterface>), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new UnsealedClass[0], default(IList<UnrelatedNonInterface>), ExpectedConversionResult.CompileError);
-            AssertExplicitConvert(new Struct[0], default(IList<UnrelatedNonInterface>), ExpectedConversionResult.CompileError);
+            AssertExplicitConvert(
+                new Struct[0],
+                default(IList<IInterface>),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new SealedClass[0],
+                default(IList<UnrelatedNonInterface>),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new UnsealedClass[0],
+                default(IList<UnrelatedNonInterface>),
+                ExpectedConversionResult.CompileError
+            );
+            AssertExplicitConvert(
+                new Struct[0],
+                default(IList<UnrelatedNonInterface>),
+                ExpectedConversionResult.CompileError
+            );
         }
     }
 }

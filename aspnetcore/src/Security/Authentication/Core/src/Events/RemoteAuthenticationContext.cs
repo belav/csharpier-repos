@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Base context for remote authentication.
 /// </summary>
-public abstract class RemoteAuthenticationContext<TOptions> : HandleRequestContext<TOptions> where TOptions : AuthenticationSchemeOptions
+public abstract class RemoteAuthenticationContext<TOptions> : HandleRequestContext<TOptions>
+    where TOptions : AuthenticationSchemeOptions
 {
     /// <summary>
     /// Constructor.
@@ -22,9 +23,10 @@ public abstract class RemoteAuthenticationContext<TOptions> : HandleRequestConte
         HttpContext context,
         AuthenticationScheme scheme,
         TOptions options,
-        AuthenticationProperties? properties)
-        : base(context, scheme, options)
-        => Properties = properties ?? new AuthenticationProperties();
+        AuthenticationProperties? properties
+    )
+        : base(context, scheme, options) =>
+        Properties = properties ?? new AuthenticationProperties();
 
     /// <summary>
     /// Gets the <see cref="ClaimsPrincipal"/> containing the user claims.
@@ -39,7 +41,10 @@ public abstract class RemoteAuthenticationContext<TOptions> : HandleRequestConte
     /// <summary>
     /// Calls success creating a ticket with the <see cref="Principal"/> and <see cref="Properties"/>.
     /// </summary>
-    public void Success() => Result = HandleRequestResult.Success(new AuthenticationTicket(Principal!, Properties, Scheme.Name));
+    public void Success() =>
+        Result = HandleRequestResult.Success(
+            new AuthenticationTicket(Principal!, Properties, Scheme.Name)
+        );
 
     /// <summary>
     /// Indicates that authentication failed.

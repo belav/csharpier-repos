@@ -31,12 +31,14 @@ namespace Microsoft.Extensions.Options.Tests
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
             };
             var services = new ServiceCollection();
-            services.Configure<ComplexOptions>(new ConfigurationBuilder().AddInMemoryCollection(dic).Build());
+            services.Configure<ComplexOptions>(
+                new ConfigurationBuilder().AddInMemoryCollection(dic).Build()
+            );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<ComplexOptions>>().Value;
             Assert.True(options.Boolean);
@@ -49,13 +51,15 @@ namespace Microsoft.Extensions.Options.Tests
         {
             var dic = new Dictionary<string, string>
             {
-                {"Integer", "-2"},
-                {"Boolean", "TRUe"},
-                {"Nested:Integer", "11"},
-                {"Virtual","Sup"}
+                { "Integer", "-2" },
+                { "Boolean", "TRUe" },
+                { "Nested:Integer", "11" },
+                { "Virtual", "Sup" },
             };
             var services = new ServiceCollection();
-            services.Configure<DerivedOptions>(new ConfigurationBuilder().AddInMemoryCollection(dic).Build());
+            services.Configure<DerivedOptions>(
+                new ConfigurationBuilder().AddInMemoryCollection(dic).Build()
+            );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<DerivedOptions>>().Value;
             Assert.True(options.Boolean);
@@ -67,12 +71,11 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void CanReadStaticProperty()
         {
-            var dic = new Dictionary<string, string>
-            {
-                {"StaticProperty", "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { "StaticProperty", "stuff" } };
             var services = new ServiceCollection();
-            services.Configure<ComplexOptions>(new ConfigurationBuilder().AddInMemoryCollection(dic).Build());
+            services.Configure<ComplexOptions>(
+                new ConfigurationBuilder().AddInMemoryCollection(dic).Build()
+            );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<ComplexOptions>>().Value;
             Assert.Equal("stuff", ComplexOptions.StaticProperty);
@@ -85,12 +88,11 @@ namespace Microsoft.Extensions.Options.Tests
         [InlineData("InternalSetter")]
         public void ShouldBeIgnoredTests(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" } };
             var services = new ServiceCollection();
-            services.Configure<ComplexOptions>(new ConfigurationBuilder().AddInMemoryCollection(dic).Build());
+            services.Configure<ComplexOptions>(
+                new ConfigurationBuilder().AddInMemoryCollection(dic).Build()
+            );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<ComplexOptions>>().Value;
             Assert.Null(options.GetType().GetProperty(property).GetValue(options));
@@ -102,12 +104,12 @@ namespace Microsoft.Extensions.Options.Tests
         [InlineData("InternalSetter")]
         public void CanBindToNonPublicProperties(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" } };
             var services = new ServiceCollection();
-            services.Configure<ComplexOptions>(new ConfigurationBuilder().AddInMemoryCollection(dic).Build(), o => o.BindNonPublicProperties = true);
+            services.Configure<ComplexOptions>(
+                new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
+                o => o.BindNonPublicProperties = true
+            );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<ComplexOptions>>().Value;
             Assert.Equal("stuff", options.GetType().GetProperty(property).GetValue(options));
@@ -119,12 +121,13 @@ namespace Microsoft.Extensions.Options.Tests
         [InlineData("InternalSetter")]
         public void CanNamedBindToNonPublicProperties(string property)
         {
-            var dic = new Dictionary<string, string>
-            {
-                {property, "stuff"},
-            };
+            var dic = new Dictionary<string, string> { { property, "stuff" } };
             var services = new ServiceCollection();
-            services.Configure<ComplexOptions>("named", new ConfigurationBuilder().AddInMemoryCollection(dic).Build(), o => o.BindNonPublicProperties = true);
+            services.Configure<ComplexOptions>(
+                "named",
+                new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
+                o => o.BindNonPublicProperties = true
+            );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("named");
             Assert.Equal("stuff", options.GetType().GetProperty(property).GetValue(options));
@@ -134,10 +137,7 @@ namespace Microsoft.Extensions.Options.Tests
         public void SetupCallsInOrder()
         {
             var services = new ServiceCollection().AddOptions();
-            var dic = new Dictionary<string, string>
-            {
-                {"Message", "!"},
-            };
+            var dic = new Dictionary<string, string> { { "Message", "!" } };
             var builder = new ConfigurationBuilder().AddInMemoryCollection(dic);
             var config = builder.Build();
             services.Configure<FakeOptions>(o => o.Message += "Igetstomped");
@@ -178,13 +178,21 @@ namespace Microsoft.Extensions.Options.Tests
                         {
                             { nameof(NullableOptions.MyNullableBool), "true" },
                             { nameof(NullableOptions.MyNullableInt), "1" },
-                            { nameof(NullableOptions.MyNullableDateTime), new DateTime(2015, 1, 1).ToString(CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern) }
+                            {
+                                nameof(NullableOptions.MyNullableDateTime),
+                                new DateTime(2015, 1, 1).ToString(
+                                    CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern
+                                )
+                            },
                         },
                         new Dictionary<string, object>
                         {
                             { nameof(NullableOptions.MyNullableBool), true },
                             { nameof(NullableOptions.MyNullableInt), 1 },
-                            { nameof(NullableOptions.MyNullableDateTime), new DateTime(2015, 1, 1) }
+                            {
+                                nameof(NullableOptions.MyNullableDateTime),
+                                new DateTime(2015, 1, 1)
+                            },
                         }
                     },
                     {
@@ -192,13 +200,21 @@ namespace Microsoft.Extensions.Options.Tests
                         {
                             { nameof(NullableOptions.MyNullableBool), "false" },
                             { nameof(NullableOptions.MyNullableInt), "-1" },
-                            { nameof(NullableOptions.MyNullableDateTime), new DateTime(1995, 12, 31).ToString(CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern) }
+                            {
+                                nameof(NullableOptions.MyNullableDateTime),
+                                new DateTime(1995, 12, 31).ToString(
+                                    CultureInfo.InvariantCulture.DateTimeFormat.ShortDatePattern
+                                )
+                            },
                         },
                         new Dictionary<string, object>
                         {
                             { nameof(NullableOptions.MyNullableBool), false },
                             { nameof(NullableOptions.MyNullableInt), -1 },
-                            { nameof(NullableOptions.MyNullableDateTime), new DateTime(1995, 12, 31) }
+                            {
+                                nameof(NullableOptions.MyNullableDateTime),
+                                new DateTime(1995, 12, 31)
+                            },
                         }
                     },
                     {
@@ -206,15 +222,15 @@ namespace Microsoft.Extensions.Options.Tests
                         {
                             { nameof(NullableOptions.MyNullableBool), null },
                             { nameof(NullableOptions.MyNullableInt), null },
-                            { nameof(NullableOptions.MyNullableDateTime), null }
+                            { nameof(NullableOptions.MyNullableDateTime), null },
                         },
                         new Dictionary<string, object>
                         {
                             { nameof(NullableOptions.MyNullableBool), null },
                             { nameof(NullableOptions.MyNullableInt), null },
-                            { nameof(NullableOptions.MyNullableDateTime), null }
+                            { nameof(NullableOptions.MyNullableDateTime), null },
                         }
-                    }
+                    },
                 };
             }
         }
@@ -223,7 +239,8 @@ namespace Microsoft.Extensions.Options.Tests
         [MemberData(nameof(Configure_GetsNullableOptionsFromConfiguration_Data))]
         public void Configure_GetsNullableOptionsFromConfiguration(
             IDictionary<string, string> configValues,
-            IDictionary<string, object> expectedValues)
+            IDictionary<string, object> expectedValues
+        )
         {
             // Arrange
             var services = new ServiceCollection();
@@ -232,13 +249,16 @@ namespace Microsoft.Extensions.Options.Tests
             services.Configure<NullableOptions>(config);
 
             // Act
-            var options = services.BuildServiceProvider().GetService<IOptions<NullableOptions>>().Value;
+            var options = services
+                .BuildServiceProvider()
+                .GetService<IOptions<NullableOptions>>()
+                .Value;
 
             // Assert
             var optionsProps = options.GetType().GetProperties().ToDictionary(p => p.Name);
-            var assertions = expectedValues
-                .Select(_ => new Action<KeyValuePair<string, object>>(kvp =>
-                    Assert.Equal(kvp.Value, optionsProps[kvp.Key].GetValue(options))));
+            var assertions = expectedValues.Select(_ => new Action<KeyValuePair<string, object>>(
+                kvp => Assert.Equal(kvp.Value, optionsProps[kvp.Key].GetValue(options))
+            ));
             Assert.Collection(expectedValues, assertions.ToArray());
         }
 
@@ -269,15 +289,12 @@ namespace Microsoft.Extensions.Options.Tests
                         }
                     },
                     {
-                        new Dictionary<string, string>
-                        {
-                            { nameof(EnumOptions.UriKind), null },
-                        },
+                        new Dictionary<string, string> { { nameof(EnumOptions.UriKind), null } },
                         new Dictionary<string, object>
                         {
-                            { nameof(EnumOptions.UriKind), UriKind.RelativeOrAbsolute },  //default enum, since not overridden by configuration
+                            { nameof(EnumOptions.UriKind), UriKind.RelativeOrAbsolute }, //default enum, since not overridden by configuration
                         }
-                    }
+                    },
                 };
             }
         }
@@ -286,7 +303,8 @@ namespace Microsoft.Extensions.Options.Tests
         [MemberData(nameof(Configure_GetsEnumOptionsFromConfiguration_Data))]
         public void Configure_GetsEnumOptionsFromConfiguration(
             IDictionary<string, string> configValues,
-            IDictionary<string, object> expectedValues)
+            IDictionary<string, object> expectedValues
+        )
         {
             // Arrange
             var services = new ServiceCollection();
@@ -299,19 +317,16 @@ namespace Microsoft.Extensions.Options.Tests
 
             // Assert
             var optionsProps = options.GetType().GetProperties().ToDictionary(p => p.Name);
-            var assertions = expectedValues
-                .Select(_ => new Action<KeyValuePair<string, object>>(kvp =>
-                    Assert.Equal(kvp.Value, optionsProps[kvp.Key].GetValue(options))));
+            var assertions = expectedValues.Select(_ => new Action<KeyValuePair<string, object>>(
+                kvp => Assert.Equal(kvp.Value, optionsProps[kvp.Key].GetValue(options))
+            ));
             Assert.Collection(expectedValues, assertions.ToArray());
         }
 
         [Fact]
         public void Options_StaticCreateCreateMakesOptions()
         {
-            var options = Options.Create(new FakeOptions
-            {
-                Message = "This is a message"
-            });
+            var options = Options.Create(new FakeOptions { Message = "This is a message" });
 
             Assert.Equal("This is a message", options.Value.Message);
         }
@@ -319,10 +334,9 @@ namespace Microsoft.Extensions.Options.Tests
         [Fact]
         public void OptionsWrapper_MakesOptions()
         {
-            var options = new OptionsWrapper<FakeOptions>(new FakeOptions
-            {
-                Message = "This is a message"
-            });
+            var options = new OptionsWrapper<FakeOptions>(
+                new FakeOptions { Message = "This is a message" }
+            );
 
             Assert.Equal("This is a message", options.Value.Message);
         }
@@ -336,10 +350,7 @@ namespace Microsoft.Extensions.Options.Tests
                 options.Message = "Initial value";
             });
 
-            services.AddSingleton(Options.Create(new FakeOptions
-            {
-                Message = "Override"
-            }));
+            services.AddSingleton(Options.Create(new FakeOptions { Message = "Override" }));
 
             var sp = services.BuildServiceProvider();
             Assert.Equal("Override", sp.GetRequiredService<IOptions<FakeOptions>>().Value.Message);
@@ -349,15 +360,24 @@ namespace Microsoft.Extensions.Options.Tests
         public void Options_CanCreateInstancesWithoutDefaultCtor()
         {
             var services = new ServiceCollection();
-            services.Configure<OptionsWithoutDefaultCtor>("Named", options =>
-            {
-                options.Message = "Initial value";
-            });
+            services.Configure<OptionsWithoutDefaultCtor>(
+                "Named",
+                options =>
+                {
+                    options.Message = "Initial value";
+                }
+            );
 
-            services.AddSingleton<IOptionsFactory<OptionsWithoutDefaultCtor>, CustomOptionsFactory>();
+            services.AddSingleton<
+                IOptionsFactory<OptionsWithoutDefaultCtor>,
+                CustomOptionsFactory
+            >();
 
             var sp = services.BuildServiceProvider();
-            var optionsWithoutDefaultCtor = sp.GetRequiredService<IOptionsMonitor<OptionsWithoutDefaultCtor>>().Get("Named");
+            var optionsWithoutDefaultCtor = sp.GetRequiredService<
+                IOptionsMonitor<OptionsWithoutDefaultCtor>
+            >()
+                .Get("Named");
             Assert.Equal("Initial value", optionsWithoutDefaultCtor.Message);
             Assert.Equal("Named", optionsWithoutDefaultCtor.Name);
         }
@@ -366,13 +386,19 @@ namespace Microsoft.Extensions.Options.Tests
         public void Options_WithoutDefaultCtor_ThrowDuringResolution()
         {
             var services = new ServiceCollection();
-            services.Configure<OptionsWithoutDefaultCtor>("Named", options =>
-            {
-                options.Message = "Initial value";
-            });
+            services.Configure<OptionsWithoutDefaultCtor>(
+                "Named",
+                options =>
+                {
+                    options.Message = "Initial value";
+                }
+            );
 
             var sp = services.BuildServiceProvider();
-            Assert.Throws<MissingMethodException>(() => sp.GetRequiredService<IOptionsMonitor<OptionsWithoutDefaultCtor>>().Get("Named"));
+            Assert.Throws<MissingMethodException>(
+                () =>
+                    sp.GetRequiredService<IOptionsMonitor<OptionsWithoutDefaultCtor>>().Get("Named")
+            );
         }
 
         private class OptionsWithoutDefaultCtor
@@ -386,11 +412,14 @@ namespace Microsoft.Extensions.Options.Tests
             }
         }
 
-        private class CustomOptionsFactory: OptionsFactory<OptionsWithoutDefaultCtor>
+        private class CustomOptionsFactory : OptionsFactory<OptionsWithoutDefaultCtor>
         {
-            public CustomOptionsFactory(IEnumerable<IConfigureOptions<OptionsWithoutDefaultCtor>> setups, IEnumerable<IPostConfigureOptions<OptionsWithoutDefaultCtor>> postConfigures, IEnumerable<IValidateOptions<OptionsWithoutDefaultCtor>> validations) : base(setups, postConfigures, validations)
-            {
-            }
+            public CustomOptionsFactory(
+                IEnumerable<IConfigureOptions<OptionsWithoutDefaultCtor>> setups,
+                IEnumerable<IPostConfigureOptions<OptionsWithoutDefaultCtor>> postConfigures,
+                IEnumerable<IValidateOptions<OptionsWithoutDefaultCtor>> validations
+            )
+                : base(setups, postConfigures, validations) { }
 
             protected override OptionsWithoutDefaultCtor CreateInstance(string name)
             {

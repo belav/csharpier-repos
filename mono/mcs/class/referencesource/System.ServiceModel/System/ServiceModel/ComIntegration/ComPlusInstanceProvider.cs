@@ -17,7 +17,7 @@ namespace System.ServiceModel.ComIntegration
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
-    
+
     class ComPlusInstanceProvider : IInstanceProvider
     {
         ServiceInfo info;
@@ -30,22 +30,34 @@ namespace System.ServiceModel.ComIntegration
 
         public object GetInstance(InstanceContext instanceContext)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ComPlusInstanceProviderRequiresMessage0)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.ComPlusInstanceProviderRequiresMessage0)
+                )
+            );
         }
 
-        // We call ContextUtil.IsInTransaction and ContextUtil.TransactionId, from a non-APTCA assembly. There is no identified security vulnerability with these properties, 
+        // We call ContextUtil.IsInTransaction and ContextUtil.TransactionId, from a non-APTCA assembly. There is no identified security vulnerability with these properties,
         // so we can't justify adding a demand for full trust here. Both properties call code marked as usafe, but no user input is passed to it and results are not
         // cached (so there is no leak as a side-effect).
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods)]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods
+        )]
         public object GetInstance(InstanceContext instanceContext, Message message)
         {
-
             object result = null;
             Guid incomingTransactionID = Guid.Empty;
             if (ContextUtil.IsInTransaction)
                 incomingTransactionID = ContextUtil.TransactionId;
-            ComPlusInstanceCreationTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationInstanceCreationRequest,
-                            SR.TraceCodeComIntegrationInstanceCreationRequest, this.info, message, incomingTransactionID);
+            ComPlusInstanceCreationTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationInstanceCreationRequest,
+                SR.TraceCodeComIntegrationInstanceCreationRequest,
+                this.info,
+                message,
+                incomingTransactionID
+            );
 
             WindowsIdentity callerIdentity = null;
             callerIdentity = MessageUtil.GetMessageIdentity(message);
@@ -54,21 +66,28 @@ namespace System.ServiceModel.ComIntegration
             {
                 try
                 {
-
-                    if (this.info.HostingMode ==
-                        HostingMode.WebHostOutOfProcess)
+                    if (this.info.HostingMode == HostingMode.WebHostOutOfProcess)
                     {
-
-                        if (SecurityUtils.IsAtleastImpersonationToken(new SafeCloseHandle(callerIdentity.Token, false)))
+                        if (
+                            SecurityUtils.IsAtleastImpersonationToken(
+                                new SafeCloseHandle(callerIdentity.Token, false)
+                            )
+                        )
                             impersonateContext = callerIdentity.Impersonate();
                         else
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new COMException (SR.GetString(SR.BadImpersonationLevelForOutOfProcWas), HR.ERROR_BAD_IMPERSONATION_LEVEL));
-                        
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new COMException(
+                                    SR.GetString(SR.BadImpersonationLevelForOutOfProcWas),
+                                    HR.ERROR_BAD_IMPERSONATION_LEVEL
+                                )
+                            );
                     }
 
                     CLSCTX clsctx = CLSCTX.SERVER;
-                    if (PlatformSupportsBitness && (this.info.HostingMode ==
-                        HostingMode.WebHostOutOfProcess))
+                    if (
+                        PlatformSupportsBitness
+                        && (this.info.HostingMode == HostingMode.WebHostOutOfProcess)
+                    )
                     {
                         if (this.info.Bitness == Bitness.Bitness32)
                         {
@@ -81,10 +100,11 @@ namespace System.ServiceModel.ComIntegration
                     }
 
                     result = SafeNativeMethods.CoCreateInstance(
-                            info.Clsid,
-                            null,
-                            clsctx,
-                            IID_IUnknown);
+                        info.Clsid,
+                        null,
+                        clsctx,
+                        IID_IUnknown
+                    );
                 }
                 finally
                 {
@@ -95,13 +115,14 @@ namespace System.ServiceModel.ComIntegration
             catch (Exception e)
             {
                 if (Fx.IsFatal(e))
-                    throw;    
+                    throw;
 
                 Uri from = null;
                 if (message.Headers.From != null)
                     from = message.Headers.From.Uri;
 
-                DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                DiagnosticUtility.EventLog.LogEvent(
+                    TraceEventType.Error,
                     (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
                     (uint)System.Runtime.Diagnostics.EventLogEventId.ComPlusInstanceCreationError,
                     from == null ? string.Empty : from.ToString(),
@@ -109,20 +130,27 @@ namespace System.ServiceModel.ComIntegration
                     this.info.Clsid.ToString(),
                     incomingTransactionID.ToString(),
                     callerIdentity.Name,
-                    e.ToString());
+                    e.ToString()
+                );
 
                 throw TraceUtility.ThrowHelperError(e, message);
             }
-            
-            
+
             TransactionProxy proxy = instanceContext.Extensions.Find<TransactionProxy>();
             if (proxy != null)
             {
                 proxy.InstanceID = result.GetHashCode();
             }
 
-            ComPlusInstanceCreationTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationInstanceCreationSuccess,
-                        SR.TraceCodeComIntegrationInstanceCreationSuccess, this.info, message, result.GetHashCode(), incomingTransactionID);
+            ComPlusInstanceCreationTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationInstanceCreationSuccess,
+                SR.TraceCodeComIntegrationInstanceCreationSuccess,
+                this.info,
+                message,
+                result.GetHashCode(),
+                incomingTransactionID
+            );
             return result;
         }
 
@@ -143,8 +171,14 @@ namespace System.ServiceModel.ComIntegration
                 Marshal.ReleaseComObject(instance);
             }
 
-            ComPlusInstanceCreationTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationInstanceReleased,
-                        SR.TraceCodeComIntegrationInstanceReleased, this.info, instanceContext, instanceID);
+            ComPlusInstanceCreationTrace.Trace(
+                TraceEventType.Verbose,
+                TraceCode.ComIntegrationInstanceReleased,
+                SR.TraceCodeComIntegrationInstanceReleased,
+                this.info,
+                instanceContext,
+                instanceID
+            );
         }
 
         static bool platformSupportsBitness;

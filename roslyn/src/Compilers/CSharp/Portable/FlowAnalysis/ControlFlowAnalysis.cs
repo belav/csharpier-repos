@@ -42,8 +42,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (_entryPoints == null)
                 {
                     _succeeded = !_context.Failed;
-                    var result = _context.Failed ? ImmutableArray<SyntaxNode>.Empty :
-                            ((IEnumerable<SyntaxNode>)EntryPointsWalker.Analyze(_context.Compilation, _context.Member, _context.BoundNode, _context.FirstInRegion, _context.LastInRegion, out _succeeded)).ToImmutableArray();
+                    var result = _context.Failed
+                        ? ImmutableArray<SyntaxNode>.Empty
+                        : (
+                            (IEnumerable<SyntaxNode>)
+                                EntryPointsWalker.Analyze(
+                                    _context.Compilation,
+                                    _context.Member,
+                                    _context.BoundNode,
+                                    _context.FirstInRegion,
+                                    _context.LastInRegion,
+                                    out _succeeded
+                                )
+                        ).ToImmutableArray();
                     ImmutableInterlocked.InterlockedInitialize(ref _entryPoints, result);
                 }
 
@@ -61,7 +72,15 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (_exitPoints == null)
                 {
                     var result = Succeeded
-                        ? ImmutableArray<SyntaxNode>.CastUp(ExitPointsWalker.Analyze(_context.Compilation, _context.Member, _context.BoundNode, _context.FirstInRegion, _context.LastInRegion))
+                        ? ImmutableArray<SyntaxNode>.CastUp(
+                            ExitPointsWalker.Analyze(
+                                _context.Compilation,
+                                _context.Member,
+                                _context.BoundNode,
+                                _context.FirstInRegion,
+                                _context.LastInRegion
+                            )
+                        )
                         : ImmutableArray<SyntaxNode>.Empty;
                     ImmutableInterlocked.InterlockedInitialize(ref _exitPoints, result);
                 }
@@ -106,10 +125,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void ComputeReachability()
         {
-            bool startIsReachable, endIsReachable;
+            bool startIsReachable,
+                endIsReachable;
             if (Succeeded)
             {
-                RegionReachableWalker.Analyze(_context.Compilation, _context.Member, _context.BoundNode, _context.FirstInRegion, _context.LastInRegion, out startIsReachable, out endIsReachable);
+                RegionReachableWalker.Analyze(
+                    _context.Compilation,
+                    _context.Member,
+                    _context.BoundNode,
+                    _context.FirstInRegion,
+                    _context.LastInRegion,
+                    out startIsReachable,
+                    out endIsReachable
+                );
             }
             else
             {
@@ -128,7 +156,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // way that jumps out of the region are computed.
             get
             {
-                return ExitPoints.WhereAsArray(s => s.IsKind(SyntaxKind.ReturnStatement) || s.IsKind(SyntaxKind.YieldBreakStatement));
+                return ExitPoints.WhereAsArray(s =>
+                    s.IsKind(SyntaxKind.ReturnStatement) || s.IsKind(SyntaxKind.YieldBreakStatement)
+                );
             }
         }
 

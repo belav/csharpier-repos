@@ -6,7 +6,12 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Xunit;
 
-[ActiveIssue("https://github.com/dotnet/runtime/issues/34502", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+[ActiveIssue(
+    "https://github.com/dotnet/runtime/issues/34502",
+    TestPlatforms.Windows,
+    TargetFrameworkMonikers.Netcoreapp,
+    TestRuntimes.Mono
+)]
 public partial class ThreadPoolBoundHandleTests
 {
     [Fact]
@@ -15,8 +20,14 @@ public partial class ThreadPoolBoundHandleTests
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            AssertExtensions.Throws<ArgumentNullException>("callback", () => handle.AllocateNativeOverlapped(null, new object(), new byte[256]));
-            AssertExtensions.Throws<ArgumentNullException>("callback", () => handle.UnsafeAllocateNativeOverlapped(null, new object(), new byte[256]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "callback",
+                () => handle.AllocateNativeOverlapped(null, new object(), new byte[256])
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "callback",
+                () => handle.UnsafeAllocateNativeOverlapped(null, new object(), new byte[256])
+            );
         }
     }
 
@@ -26,7 +37,10 @@ public partial class ThreadPoolBoundHandleTests
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            AssertExtensions.Throws<ArgumentNullException>("preAllocated", () => handle.AllocateNativeOverlapped((PreAllocatedOverlapped)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "preAllocated",
+                () => handle.AllocateNativeOverlapped((PreAllocatedOverlapped)null)
+            );
         }
     }
 
@@ -36,11 +50,19 @@ public partial class ThreadPoolBoundHandleTests
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            NativeOverlapped* result = handle.AllocateNativeOverlapped((_, __, ___) => { }, (object)null, new byte[256]);
+            NativeOverlapped* result = handle.AllocateNativeOverlapped(
+                (_, __, ___) => { },
+                (object)null,
+                new byte[256]
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
 
-            result = handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, (object)null, new byte[256]);
+            result = handle.UnsafeAllocateNativeOverlapped(
+                (_, __, ___) => { },
+                (object)null,
+                new byte[256]
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
         }
@@ -52,11 +74,19 @@ public partial class ThreadPoolBoundHandleTests
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            NativeOverlapped* result = handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), (byte[])null);
+            NativeOverlapped* result = handle.AllocateNativeOverlapped(
+                (_, __, ___) => { },
+                new object(),
+                (byte[])null
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
 
-            result = handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), (byte[])null);
+            result = handle.UnsafeAllocateNativeOverlapped(
+                (_, __, ___) => { },
+                new object(),
+                (byte[])null
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
         }
@@ -68,11 +98,19 @@ public partial class ThreadPoolBoundHandleTests
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            NativeOverlapped* result = handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[0]);
+            NativeOverlapped* result = handle.AllocateNativeOverlapped(
+                (_, __, ___) => { },
+                new object(),
+                new byte[0]
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
 
-            result = handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[0]);
+            result = handle.UnsafeAllocateNativeOverlapped(
+                (_, __, ___) => { },
+                new object(),
+                new byte[0]
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
         }
@@ -84,8 +122,22 @@ public partial class ThreadPoolBoundHandleTests
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            Assert.Throws<ArgumentException>(() => handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new NonBlittableType() { s = "foo" }));
-            Assert.Throws<ArgumentException>(() => handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), new NonBlittableType() { s = "foo" }));
+            Assert.Throws<ArgumentException>(
+                () =>
+                    handle.AllocateNativeOverlapped(
+                        (_, __, ___) => { },
+                        new object(),
+                        new NonBlittableType() { s = "foo" }
+                    )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    handle.UnsafeAllocateNativeOverlapped(
+                        (_, __, ___) => { },
+                        new object(),
+                        new NonBlittableType() { s = "foo" }
+                    )
+            );
         }
     }
 
@@ -95,11 +147,19 @@ public partial class ThreadPoolBoundHandleTests
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            NativeOverlapped* result = handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new BlittableType() { i = 42 });
+            NativeOverlapped* result = handle.AllocateNativeOverlapped(
+                (_, __, ___) => { },
+                new object(),
+                new BlittableType() { i = 42 }
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
 
-            result = handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), new BlittableType() { i = 42 });
+            result = handle.UnsafeAllocateNativeOverlapped(
+                (_, __, ___) => { },
+                new object(),
+                new BlittableType() { i = 42 }
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
         }
@@ -117,11 +177,19 @@ public partial class ThreadPoolBoundHandleTests
 
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            NativeOverlapped* result = handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), array);
+            NativeOverlapped* result = handle.AllocateNativeOverlapped(
+                (_, __, ___) => { },
+                new object(),
+                array
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
 
-            result = handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), array);
+            result = handle.UnsafeAllocateNativeOverlapped(
+                (_, __, ___) => { },
+                new object(),
+                array
+            );
             Assert.True(result != null);
             handle.FreeNativeOverlapped(result);
         }
@@ -139,8 +207,13 @@ public partial class ThreadPoolBoundHandleTests
 
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            Assert.Throws<ArgumentException>(() => handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), array));
-            Assert.Throws<ArgumentException>(() => handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), array));
+            Assert.Throws<ArgumentException>(
+                () => handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), array)
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), array)
+            );
         }
     }
 
@@ -148,13 +221,19 @@ public partial class ThreadPoolBoundHandleTests
     [InlineData(false)]
     [InlineData(true)]
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix
-    public unsafe void AllocateNativeOverlapped_ReturnedNativeOverlapped_AllFieldsZero(bool useUnsafe)
+    public unsafe void AllocateNativeOverlapped_ReturnedNativeOverlapped_AllFieldsZero(
+        bool useUnsafe
+    )
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            NativeOverlapped* overlapped = useUnsafe ?
-                handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]) :
-                handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]);
+            NativeOverlapped* overlapped = useUnsafe
+                ? handle.UnsafeAllocateNativeOverlapped(
+                    (_, __, ___) => { },
+                    new object(),
+                    new byte[256]
+                )
+                : handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]);
 
             Assert.Equal(IntPtr.Zero, overlapped->InternalLow);
             Assert.Equal(IntPtr.Zero, overlapped->InternalHigh);
@@ -170,13 +249,21 @@ public partial class ThreadPoolBoundHandleTests
     [InlineData(false)]
     [InlineData(true)]
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix
-    public unsafe void AllocateNativeOverlapped_PreAllocated_ReturnedNativeOverlapped_AllFieldsZero(bool useUnsafe)
+    public unsafe void AllocateNativeOverlapped_PreAllocated_ReturnedNativeOverlapped_AllFieldsZero(
+        bool useUnsafe
+    )
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            using (PreAllocatedOverlapped preAlloc = useUnsafe ?
-                PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), new byte[256]) :
-                new PreAllocatedOverlapped((_, __, ___) => { }, new object(), new byte[256]))
+            using (
+                PreAllocatedOverlapped preAlloc = useUnsafe
+                    ? PreAllocatedOverlapped.UnsafeCreate(
+                        (_, __, ___) => { },
+                        new object(),
+                        new byte[256]
+                    )
+                    : new PreAllocatedOverlapped((_, __, ___) => { }, new object(), new byte[256])
+            )
             {
                 NativeOverlapped* overlapped = handle.AllocateNativeOverlapped(preAlloc);
 
@@ -195,21 +282,35 @@ public partial class ThreadPoolBoundHandleTests
     [InlineData(false)]
     [InlineData(true)]
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix
-    public unsafe void AllocateNativeOverlapped_PossibleReusedReturnedNativeOverlapped_OffsetLowAndOffsetHighSetToZero(bool useUnsafe)
+    public unsafe void AllocateNativeOverlapped_PossibleReusedReturnedNativeOverlapped_OffsetLowAndOffsetHighSetToZero(
+        bool useUnsafe
+    )
     {
         // The CLR reuses NativeOverlapped underneath, check to make sure that they reset fields back to zero
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            NativeOverlapped* overlapped = useUnsafe ?
-                handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]) :
-                handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]);
+            NativeOverlapped* overlapped = useUnsafe
+                ? handle.UnsafeAllocateNativeOverlapped(
+                    (_, __, ___) => { },
+                    new object(),
+                    new byte[256]
+                )
+                : handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]);
             overlapped->OffsetHigh = 1;
             overlapped->OffsetLow = 1;
             handle.FreeNativeOverlapped(overlapped);
 
-            overlapped = useUnsafe ?
-                handle.UnsafeAllocateNativeOverlapped((errorCode, numBytes, overlap) => { }, new object(), new byte[256]) :
-                handle.AllocateNativeOverlapped((errorCode, numBytes, overlap) => { }, new object(), new byte[256]);
+            overlapped = useUnsafe
+                ? handle.UnsafeAllocateNativeOverlapped(
+                    (errorCode, numBytes, overlap) => { },
+                    new object(),
+                    new byte[256]
+                )
+                : handle.AllocateNativeOverlapped(
+                    (errorCode, numBytes, overlap) => { },
+                    new object(),
+                    new byte[256]
+                );
 
             Assert.Equal(IntPtr.Zero, overlapped->InternalLow);
             Assert.Equal(IntPtr.Zero, overlapped->InternalHigh);
@@ -225,14 +326,20 @@ public partial class ThreadPoolBoundHandleTests
     [InlineData(false)]
     [InlineData(true)]
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix
-    public unsafe void AllocateNativeOverlapped_PreAllocated_ReusedReturnedNativeOverlapped_OffsetLowAndOffsetHighSetToZero(bool useUnsafe)
+    public unsafe void AllocateNativeOverlapped_PreAllocated_ReusedReturnedNativeOverlapped_OffsetLowAndOffsetHighSetToZero(
+        bool useUnsafe
+    )
     {
         // The CLR reuses NativeOverlapped underneath, check to make sure that they reset fields back to zero
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            PreAllocatedOverlapped preAlloc = useUnsafe ?
-                PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), new byte[256]) :
-                new PreAllocatedOverlapped((_, __, ___) => { }, new object(), new byte[256]);
+            PreAllocatedOverlapped preAlloc = useUnsafe
+                ? PreAllocatedOverlapped.UnsafeCreate(
+                    (_, __, ___) => { },
+                    new object(),
+                    new byte[256]
+                )
+                : new PreAllocatedOverlapped((_, __, ___) => { }, new object(), new byte[256]);
 
             NativeOverlapped* overlapped = handle.AllocateNativeOverlapped(preAlloc);
             overlapped->OffsetHigh = 1;
@@ -258,21 +365,32 @@ public partial class ThreadPoolBoundHandleTests
         ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle();
         handle.Dispose();
 
-        Assert.Throws<ObjectDisposedException>(() => handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]));
-        Assert.Throws<ObjectDisposedException>(() => handle.UnsafeAllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256]));
+        Assert.Throws<ObjectDisposedException>(
+            () => handle.AllocateNativeOverlapped((_, __, ___) => { }, new object(), new byte[256])
+        );
+        Assert.Throws<ObjectDisposedException>(
+            () =>
+                handle.UnsafeAllocateNativeOverlapped(
+                    (_, __, ___) => { },
+                    new object(),
+                    new byte[256]
+                )
+        );
     }
 
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix
-    public unsafe void AllocateNativeOverlapped_PreAllocated_WhenDisposed_ThrowsObjectDisposedException(bool useUnsafe)
+    public unsafe void AllocateNativeOverlapped_PreAllocated_WhenDisposed_ThrowsObjectDisposedException(
+        bool useUnsafe
+    )
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            PreAllocatedOverlapped preAlloc = useUnsafe ?
-                PreAllocatedOverlapped.UnsafeCreate(delegate { }, null, null) :
-                new PreAllocatedOverlapped(delegate { }, null, null);
+            PreAllocatedOverlapped preAlloc = useUnsafe
+                ? PreAllocatedOverlapped.UnsafeCreate(delegate { }, null, null)
+                : new PreAllocatedOverlapped(delegate { }, null, null);
             preAlloc.Dispose();
             Assert.Throws<ObjectDisposedException>(() => handle.AllocateNativeOverlapped(preAlloc));
         }
@@ -282,14 +400,16 @@ public partial class ThreadPoolBoundHandleTests
     [InlineData(false)]
     [InlineData(true)]
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix
-    public unsafe void AllocateNativeOverlapped_PreAllocated_WhenHandleDisposed_ThrowsObjectDisposedException(bool useUnsafe)
+    public unsafe void AllocateNativeOverlapped_PreAllocated_WhenHandleDisposed_ThrowsObjectDisposedException(
+        bool useUnsafe
+    )
     {
         ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle();
         handle.Dispose();
 
-        PreAllocatedOverlapped preAlloc = useUnsafe ?
-            PreAllocatedOverlapped.UnsafeCreate(delegate { }, null, null) :
-            new PreAllocatedOverlapped(delegate { }, null, null);
+        PreAllocatedOverlapped preAlloc = useUnsafe
+            ? PreAllocatedOverlapped.UnsafeCreate(delegate { }, null, null)
+            : new PreAllocatedOverlapped(delegate { }, null, null);
 
         Assert.Throws<ObjectDisposedException>(() => handle.AllocateNativeOverlapped(preAlloc));
     }
@@ -298,17 +418,22 @@ public partial class ThreadPoolBoundHandleTests
     [InlineData(false)]
     [InlineData(true)]
     [PlatformSpecific(TestPlatforms.Windows)] // ThreadPoolBoundHandle.BindHandle is not supported on Unix
-    public unsafe void AllocateNativeOverlapped_PreAllocated_WhenAlreadyAllocated_ThrowsArgumentException(bool useUnsafe)
+    public unsafe void AllocateNativeOverlapped_PreAllocated_WhenAlreadyAllocated_ThrowsArgumentException(
+        bool useUnsafe
+    )
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            using PreAllocatedOverlapped preAlloc = useUnsafe ?
-                PreAllocatedOverlapped.UnsafeCreate(delegate { }, null, null) :
-                new PreAllocatedOverlapped(delegate { }, null, null);
+            using PreAllocatedOverlapped preAlloc = useUnsafe
+                ? PreAllocatedOverlapped.UnsafeCreate(delegate { }, null, null)
+                : new PreAllocatedOverlapped(delegate { }, null, null);
 
             NativeOverlapped* overlapped = handle.AllocateNativeOverlapped(preAlloc);
 
-            AssertExtensions.Throws<ArgumentException>("preAllocated", () => handle.AllocateNativeOverlapped(preAlloc));
+            AssertExtensions.Throws<ArgumentException>(
+                "preAllocated",
+                () => handle.AllocateNativeOverlapped(preAlloc)
+            );
 
             handle.FreeNativeOverlapped(overlapped);
         }

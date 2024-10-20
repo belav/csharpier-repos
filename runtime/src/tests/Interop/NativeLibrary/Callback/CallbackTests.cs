@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 using Xunit;
 
 [assembly: DefaultDllImportSearchPaths(DllImportSearchPath.SafeDirectories)]
+
 public class CallbackTests
 {
     private static readonly int seed = 123;
@@ -41,8 +41,12 @@ public class CallbackTests
         DllImportResolver resolver = Resolver.Instance.Callback;
 
         // Invalid arguments
-        Assert.Throws<ArgumentNullException>(() => NativeLibrary.SetDllImportResolver(null, resolver));
-        Assert.Throws<ArgumentNullException>(() => NativeLibrary.SetDllImportResolver(assembly, null));
+        Assert.Throws<ArgumentNullException>(
+            () => NativeLibrary.SetDllImportResolver(null, resolver)
+        );
+        Assert.Throws<ArgumentNullException>(
+            () => NativeLibrary.SetDllImportResolver(assembly, null)
+        );
 
         // No callback registered yet
         Assert.Throws<DllNotFoundException>(() => NativeSum(10, 10));
@@ -51,13 +55,19 @@ public class CallbackTests
         NativeLibrary.SetDllImportResolver(assembly, resolver);
 
         // Try to set the resolver again on the same assembly
-        Assert.Throws<InvalidOperationException>(() => NativeLibrary.SetDllImportResolver(assembly, resolver));
+        Assert.Throws<InvalidOperationException>(
+            () => NativeLibrary.SetDllImportResolver(assembly, resolver)
+        );
 
         // Try to set another resolver on the same assembly
-        DllImportResolver anotherResolver =
-            (string libraryName, Assembly asm, DllImportSearchPath? dllImportSearchPath) =>
-                IntPtr.Zero;
-        Assert.Throws<InvalidOperationException>(() => NativeLibrary.SetDllImportResolver(assembly, anotherResolver));
+        DllImportResolver anotherResolver = (
+            string libraryName,
+            Assembly asm,
+            DllImportSearchPath? dllImportSearchPath
+        ) => IntPtr.Zero;
+        Assert.Throws<InvalidOperationException>(
+            () => NativeLibrary.SetDllImportResolver(assembly, anotherResolver)
+        );
     }
 
     public static void ValidatePInvoke()
@@ -93,7 +103,11 @@ public class CallbackTests
                 Assert.Equal(expectedNames[i], invocations[i]);
         }
 
-        private IntPtr ResolveDllImport(string libraryName, Assembly asm, DllImportSearchPath? dllImportSearchPath)
+        private IntPtr ResolveDllImport(
+            string libraryName,
+            Assembly asm,
+            DllImportSearchPath? dllImportSearchPath
+        )
         {
             invocations.Add(libraryName);
 

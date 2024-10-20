@@ -15,17 +15,14 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._INPUT_
         {
             if (id == 0)
             {
-                return new ObjectResult(new object())
-                {
-                    StatusCode = 422
-                };
+                return new ObjectResult(new object()) { StatusCode = 422 };
             }
 
             if (id == 1)
             {
                 return new ObjectResult(new object())
                 {
-                    StatusCode = StatusCodes.Status202Accepted
+                    StatusCode = StatusCodes.Status202Accepted,
                 };
             }
 
@@ -33,10 +30,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._INPUT_
             {
                 const int localStatusCode = 204;
 
-                return new ObjectResult(new object())
-                {
-                    StatusCode = localStatusCode
-                };
+                return new ObjectResult(new object()) { StatusCode = localStatusCode };
             }
 
             if (id == 3)
@@ -44,7 +38,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._INPUT_
                 return new ObjectResult(new object())
                 {
                     ContentTypes = { "application/json" },
-                    StatusCode = FieldStatusCode
+                    StatusCode = FieldStatusCode,
                 };
             }
 

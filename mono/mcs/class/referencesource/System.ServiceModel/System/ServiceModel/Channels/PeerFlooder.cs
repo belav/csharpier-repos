@@ -18,9 +18,14 @@ namespace System.ServiceModel.Channels
 
     class PeerFlooder : PeerFlooderSimple
     {
-        PeerFlooder(PeerNodeConfig config, PeerNeighborManager neighborManager) : base(config, neighborManager) { }
+        PeerFlooder(PeerNodeConfig config, PeerNeighborManager neighborManager)
+            : base(config, neighborManager) { }
 
-        public static PeerFlooder CreateFlooder(PeerNodeConfig config, PeerNeighborManager neighborManager, IPeerNodeMessageHandling messageHandler)
+        public static PeerFlooder CreateFlooder(
+            PeerNodeConfig config,
+            PeerNeighborManager neighborManager,
+            IPeerNodeMessageHandling messageHandler
+        )
         {
             PeerFlooder flooder = new PeerFlooder(config, neighborManager);
             flooder.messageHandler = messageHandler;
@@ -34,7 +39,10 @@ namespace System.ServiceModel.Channels
         void OnThrottleReleased();
     }
 
-    abstract class PeerFlooderBase<TFloodContract, TLinkContract> : IFlooderForThrottle, IPeerFlooderContract<TFloodContract, TLinkContract> where TFloodContract : Message
+    abstract class PeerFlooderBase<TFloodContract, TLinkContract>
+        : IFlooderForThrottle,
+            IPeerFlooderContract<TFloodContract, TLinkContract>
+        where TFloodContract : Message
     {
         protected PeerNodeConfig config;
         protected PeerNeighborManager neighborManager;
@@ -49,7 +57,6 @@ namespace System.ServiceModel.Channels
         public event EventHandler SlowNeighborKilled;
         public event EventHandler ThrottleReleased;
         public EventHandler OnMessageSentHandler;
-
 
         public PeerFlooderBase(PeerNodeConfig config, PeerNeighborManager neighborManager)
         {
@@ -70,9 +77,18 @@ namespace System.ServiceModel.Channels
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
                     string message = SR.GetString(SR.PeerThrottlePruning, this.config.MeshId);
-                    PeerThrottleTraceRecord record = new PeerThrottleTraceRecord(this.config.MeshId, message);
-                    TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.PeerFlooderReceiveMessageQuotaExceeded,
-                        SR.GetString(SR.TraceCodePeerFlooderReceiveMessageQuotaExceeded), record, this, null);
+                    PeerThrottleTraceRecord record = new PeerThrottleTraceRecord(
+                        this.config.MeshId,
+                        message
+                    );
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
+                        TraceCode.PeerFlooderReceiveMessageQuotaExceeded,
+                        SR.GetString(SR.TraceCodePeerFlooderReceiveMessageQuotaExceeded),
+                        record,
+                        this,
+                        null
+                    );
                 }
             }
             try
@@ -81,7 +97,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 if (null != CloseNeighborIfKnownException(neighborManager, e, peer))
                 {
                     throw;
@@ -95,9 +112,18 @@ namespace System.ServiceModel.Channels
             if (DiagnosticUtility.ShouldTraceInformation)
             {
                 string message = SR.GetString(SR.PeerThrottleWaiting, this.config.MeshId);
-                PeerThrottleTraceRecord record = new PeerThrottleTraceRecord(this.config.MeshId, message);
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.PeerFlooderReceiveMessageQuotaExceeded,
-                    SR.GetString(SR.TraceCodePeerFlooderReceiveMessageQuotaExceeded), record, this, null);
+                PeerThrottleTraceRecord record = new PeerThrottleTraceRecord(
+                    this.config.MeshId,
+                    message
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.PeerFlooderReceiveMessageQuotaExceeded,
+                    SR.GetString(SR.TraceCodePeerFlooderReceiveMessageQuotaExceeded),
+                    record,
+                    this,
+                    null
+                );
             }
 
             IPeerNeighbor peer = this.neighborManager.SlowestNeighbor();
@@ -108,11 +134,16 @@ namespace System.ServiceModel.Channels
             {
                 if (extension.PendingMessages > PeerTransportConstants.MessageThreshold)
                 {
-                    extension.BeginCheckPoint(new UtilityExtension.PruneNeighborCallback(PruneNeighborCallback));
+                    extension.BeginCheckPoint(
+                        new UtilityExtension.PruneNeighborCallback(PruneNeighborCallback)
+                    );
                 }
                 else
                 {
-                    Fx.Assert(false, "Neighbor is marked slow with messages " + extension.PendingMessages);
+                    Fx.Assert(
+                        false,
+                        "Neighbor is marked slow with messages " + extension.PendingMessages
+                    );
                 }
                 FireReachedEvent();
             }
@@ -123,11 +154,20 @@ namespace System.ServiceModel.Channels
             FireDequeuedEvent();
         }
 
-        public void FireDequeuedEvent() { FireEvent(ThrottleReleased); }
+        public void FireDequeuedEvent()
+        {
+            FireEvent(ThrottleReleased);
+        }
 
-        public void FireReachedEvent() { FireEvent(ThrottleReached); }
+        public void FireReachedEvent()
+        {
+            FireEvent(ThrottleReached);
+        }
 
-        public void FireKilledEvent() { FireEvent(SlowNeighborKilled); }
+        public void FireKilledEvent()
+        {
+            FireEvent(SlowNeighborKilled);
+        }
 
         void FireEvent(EventHandler handler)
         {
@@ -136,7 +176,13 @@ namespace System.ServiceModel.Channels
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        public virtual IAsyncResult BeginFloodEncodedMessage(byte[] id, MessageBuffer encodedMessage, TimeSpan timeout, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginFloodEncodedMessage(
+            byte[] id,
+            MessageBuffer encodedMessage,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             RecordOutgoingMessage(id);
             SynchronizationContext syncContext = ThreadBehavior.GetCurrentSynchronizationContext();
@@ -148,43 +194,73 @@ namespace System.ServiceModel.Channels
             }
             try
             {
-                return FloodMessageToNeighbors(encodedMessage, timeout, callback, state, -1, null, null, OnMessageSentHandler);
+                return FloodMessageToNeighbors(
+                    encodedMessage,
+                    timeout,
+                    callback,
+                    state,
+                    -1,
+                    null,
+                    null,
+                    OnMessageSentHandler
+                );
             }
             finally
             {
                 SynchronizationContext.SetSynchronizationContext(syncContext);
             }
-
         }
 
-        protected virtual IAsyncResult BeginFloodReceivedMessage(IPeerNeighbor sender, MessageBuffer messageBuffer,
-            TimeSpan timeout, AsyncCallback callback, object state, int index, MessageHeader hopHeader)
+        protected virtual IAsyncResult BeginFloodReceivedMessage(
+            IPeerNeighbor sender,
+            MessageBuffer messageBuffer,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            int index,
+            MessageHeader hopHeader
+        )
         {
             quotaHelper.AcquireNoQueue();
 
             try
             {
-                return FloodMessageToNeighbors(messageBuffer, timeout, callback, state, index, hopHeader, sender, OnMessageSentHandler);
+                return FloodMessageToNeighbors(
+                    messageBuffer,
+                    timeout,
+                    callback,
+                    state,
+                    index,
+                    hopHeader,
+                    sender,
+                    OnMessageSentHandler
+                );
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
-                if (e is QuotaExceededException || (e is CommunicationException && e.InnerException is QuotaExceededException))
+                if (Fx.IsFatal(e))
+                    throw;
+                if (
+                    e is QuotaExceededException
+                    || (e is CommunicationException && e.InnerException is QuotaExceededException)
+                )
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                     if (DiagnosticUtility.ShouldTraceError)
                     {
                         PeerFlooderTraceRecord record = new PeerFlooderTraceRecord(
-                                                            this.config.MeshId,
-                                                            sender.ListenAddress,
-                                                            e);
+                            this.config.MeshId,
+                            sender.ListenAddress,
+                            e
+                        );
                         TraceUtility.TraceEvent(
-                                    TraceEventType.Error,
-                                    TraceCode.PeerFlooderReceiveMessageQuotaExceeded,
-                                    SR.GetString(SR.TraceCodePeerFlooderReceiveMessageQuotaExceeded),
-                                    record,
-                                    this,
-                                    null);
+                            TraceEventType.Error,
+                            TraceCode.PeerFlooderReceiveMessageQuotaExceeded,
+                            SR.GetString(SR.TraceCodePeerFlooderReceiveMessageQuotaExceeded),
+                            record,
+                            this,
+                            null
+                        );
                     }
                     return null;
                 }
@@ -192,14 +268,24 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected IAsyncResult BeginSendHelper(IPeerNeighbor neighbor, TimeSpan timeout, Message message, FloodAsyncResult fresult)
+        protected IAsyncResult BeginSendHelper(
+            IPeerNeighbor neighbor,
+            TimeSpan timeout,
+            Message message,
+            FloodAsyncResult fresult
+        )
         {
             IAsyncResult result = null;
             bool fatal = false;
             try
             {
                 UtilityExtension.OnMessageSent(neighbor);
-                result = neighbor.BeginSend(message, timeout, Fx.ThunkCallback(new AsyncCallback(fresult.OnSendComplete)), message);
+                result = neighbor.BeginSend(
+                    message,
+                    timeout,
+                    Fx.ThunkCallback(new AsyncCallback(fresult.OnSendComplete)),
+                    message
+                );
                 fresult.AddResult(result, neighbor);
                 if (result.CompletedSynchronously)
                 {
@@ -228,7 +314,6 @@ namespace System.ServiceModel.Channels
             {
                 if ((result == null || result.CompletedSynchronously) && !fatal)
                     message.Close();
-
             }
         }
 
@@ -244,14 +329,24 @@ namespace System.ServiceModel.Channels
                 neighbor.Abort(PeerCloseReason.NodeTooSlow, PeerCloseInitiator.LocalNode);
         }
 
-
-        protected virtual IAsyncResult FloodMessageToNeighbors(MessageBuffer messageBuffer,
-                                                               TimeSpan timeout, AsyncCallback callback, object state,
-                                                               int index, MessageHeader hopHeader, IPeerNeighbor except,
-                                                               EventHandler OnMessageSentCallback)
+        protected virtual IAsyncResult FloodMessageToNeighbors(
+            MessageBuffer messageBuffer,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            int index,
+            MessageHeader hopHeader,
+            IPeerNeighbor except,
+            EventHandler OnMessageSentCallback
+        )
         {
             long temp = Interlocked.Increment(ref messageSequence);
-            FloodAsyncResult fresult = new FloodAsyncResult(this.neighborManager, timeout, callback, state);
+            FloodAsyncResult fresult = new FloodAsyncResult(
+                this.neighborManager,
+                timeout,
+                callback,
+                state
+            );
             fresult.OnMessageSent += OnMessageSentCallback;
             List<IPeerNeighbor> neighbors = this.Neighbors;
 
@@ -277,7 +372,6 @@ namespace System.ServiceModel.Channels
             }
             fresult.MarkEnd(true);
             return fresult;
-
         }
 
         public void Open()
@@ -317,11 +411,19 @@ namespace System.ServiceModel.Channels
             try
             {
                 // If a message contains multiple Hopcounts with our name and namespace or the message can't deserialize to a ulong then ignore the HopCount
-                index = message.Headers.FindHeader(PeerStrings.HopCountElementName, PeerStrings.HopCountElementNamespace);
+                index = message.Headers.FindHeader(
+                    PeerStrings.HopCountElementName,
+                    PeerStrings.HopCountElementNamespace
+                );
                 if (index != -1)
                 {
                     currentValue = PeerMessageHelpers.GetHeaderULong(message.Headers, index);
-                    hopHeader = MessageHeader.CreateHeader(PeerStrings.HopCountElementName, PeerStrings.HopCountElementNamespace, --currentValue, false);
+                    hopHeader = MessageHeader.CreateHeader(
+                        PeerStrings.HopCountElementName,
+                        PeerStrings.HopCountElementNamespace,
+                        --currentValue,
+                        false
+                    );
                 }
             }
             catch (MessageHeaderException e)
@@ -340,11 +442,19 @@ namespace System.ServiceModel.Channels
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
             }
-            Fx.Assert((index == -1) || (hopHeader != null), "Could not successfully create new HopCount Header!");
+            Fx.Assert(
+                (index == -1) || (hopHeader != null),
+                "Could not successfully create new HopCount Header!"
+            );
             return index;
         }
 
-        public virtual IAsyncResult OnFloodedMessage(IPeerNeighbor neighbor, TFloodContract floodInfo, AsyncCallback callback, object state)
+        public virtual IAsyncResult OnFloodedMessage(
+            IPeerNeighbor neighbor,
+            TFloodContract floodInfo,
+            AsyncCallback callback,
+            object state
+        )
         {
             bool process = false;
             MessageBuffer messageBuffer = null;
@@ -372,7 +482,9 @@ namespace System.ServiceModel.Channels
                 else
                 {
                     process = true;
-                    messageBuffer = floodInfo.CreateBufferedCopy((int)this.config.MaxReceivedMessageSize);
+                    messageBuffer = floodInfo.CreateBufferedCopy(
+                        (int)this.config.MaxReceivedMessageSize
+                    );
                     message = messageBuffer.CreateMessage();
                     via = peerProperty.PeerVia;
                     to = peerProperty.PeerTo;
@@ -387,7 +499,10 @@ namespace System.ServiceModel.Channels
                     {
                         using (Message filterMessage = messageBuffer.CreateMessage())
                         {
-                            propagateFlags = messageHandler.DetermineMessagePropagation(filterMessage, PeerMessageOrigination.Remote);
+                            propagateFlags = messageHandler.DetermineMessagePropagation(
+                                filterMessage,
+                                PeerMessageOrigination.Remote
+                            );
                         }
                     }
 
@@ -398,7 +513,15 @@ namespace System.ServiceModel.Channels
                     }
                     if ((propagateFlags & PeerMessagePropagation.Remote) != 0)
                     {
-                        result = BeginFloodReceivedMessage(neighbor, messageBuffer, PeerTransportConstants.ForwardTimeout, callback, state, index, hopHeader);
+                        result = BeginFloodReceivedMessage(
+                            neighbor,
+                            messageBuffer,
+                            PeerTransportConstants.ForwardTimeout,
+                            callback,
+                            state,
+                            index,
+                            hopHeader
+                        );
                     }
                     else
                     {
@@ -406,7 +529,14 @@ namespace System.ServiceModel.Channels
                     }
                     if ((propagateFlags & PeerMessagePropagation.Local) != 0)
                     {
-                        messageHandler.HandleIncomingMessage(messageBuffer, propagateFlags, index, hopHeader, via, to);
+                        messageHandler.HandleIncomingMessage(
+                            messageBuffer,
+                            propagateFlags,
+                            index,
+                            hopHeader,
+                            via,
+                            to
+                        );
                     }
                 }
                 UtilityExtension.UpdateLinkUtility(neighbor, process);
@@ -447,7 +577,6 @@ namespace System.ServiceModel.Channels
             FloodAsyncResult fresult = result as FloodAsyncResult;
             Fx.Assert(fresult != null, "Invalid AsyncResult type in EndFloodResult");
             fresult.End();
-
         }
 
         protected long MaxReceivedMessageSize
@@ -471,7 +600,11 @@ namespace System.ServiceModel.Channels
         }
 
         // Guaranteed not to throw anything other than fatal exceptions
-        static internal Exception CloseNeighborIfKnownException(PeerNeighborManager neighborManager, Exception exception, IPeerNeighbor peer)
+        static internal Exception CloseNeighborIfKnownException(
+            PeerNeighborManager neighborManager,
+            Exception exception,
+            IPeerNeighbor peer
+        )
         {
             try
             {
@@ -479,26 +612,35 @@ namespace System.ServiceModel.Channels
                 if (exception is ObjectDisposedException)
                     return null;
                 else if (
-                    (exception is CommunicationException && !(exception.InnerException is QuotaExceededException))
+                    (
+                        exception is CommunicationException
+                        && !(exception.InnerException is QuotaExceededException)
+                    )
                     || (exception is TimeoutException)
                     || (exception is InvalidOperationException)
                     || (exception is MessageSecurityException)
                 )
                 {
                     //is this the right close reason?
-                    neighborManager.CloseNeighbor(peer, PeerCloseReason.InternalFailure, PeerCloseInitiator.LocalNode, exception);
+                    neighborManager.CloseNeighbor(
+                        peer,
+                        PeerCloseReason.InternalFailure,
+                        PeerCloseInitiator.LocalNode,
+                        exception
+                    );
                     return null;
                 }
                 else
                 {
-                    //exception that we dont know or cant act on. 
+                    //exception that we dont know or cant act on.
                     //we will throw this exception to the user.
                     return exception;
                 }
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 return e;
             }
@@ -513,7 +655,10 @@ namespace System.ServiceModel.Channels
             {
                 FloodAsyncResult fresult = result as FloodAsyncResult;
                 if (fresult == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "result",
+                        SR.GetString(SR.InvalidAsyncResult)
+                    );
                 fresult.End();
             }
         }
@@ -521,16 +666,17 @@ namespace System.ServiceModel.Channels
         public void EndFloodReceivedMessage(IAsyncResult result)
         {
             FloodAsyncResult fresult = result as FloodAsyncResult;
-            Fx.Assert(fresult != null, "Invalid FloodAsyncResult instance during EndFloodReceivedMessage");
+            Fx.Assert(
+                fresult != null,
+                "Invalid FloodAsyncResult instance during EndFloodReceivedMessage"
+            );
         }
-
 
         public class PeerThrottleHelper
         {
             int outgoingEnqueuedCount = 0;
             int outgoingQuota = 128;
             IFlooderForThrottle flooder;
-
 
             public PeerThrottleHelper(IFlooderForThrottle flooder, int outgoingLimit)
             {
@@ -570,6 +716,7 @@ namespace System.ServiceModel.Channels
         {
             return message.Properties.ContainsKey(PeerStrings.MessageVerified);
         }
+
         public bool IsNotSeenBefore(Message message, out byte[] id, out int cacheHit)
         {
             cacheHit = -1;
@@ -577,11 +724,14 @@ namespace System.ServiceModel.Channels
             if (message is SecurityVerifiedMessage)
             {
                 id = (message as SecurityVerifiedMessage).PrimarySignatureValue;
-
             }
             else
             {
-                System.Xml.UniqueId messageId = PeerMessageHelpers.GetHeaderUniqueId(message.Headers, PeerStrings.MessageId, PeerStrings.Namespace);
+                System.Xml.UniqueId messageId = PeerMessageHelpers.GetHeaderUniqueId(
+                    message.Headers,
+                    PeerStrings.MessageId,
+                    PeerStrings.Namespace
+                );
                 if (messageId == null)
                     return false;
                 if (messageId.IsGuid)
@@ -598,7 +748,6 @@ namespace System.ServiceModel.Channels
                 return true;
             }
             return false;
-
         }
 
         public override void RecordOutgoingMessage(byte[] id)
@@ -606,17 +755,19 @@ namespace System.ServiceModel.Channels
             this.messageIds.AddForFlood(id);
         }
 
-        public override void OnOpen()
-        {
-        }
+        public override void OnOpen() { }
 
         public override void OnClose()
         {
             this.messageIds.Close();
         }
 
-
-        public override IAsyncResult OnFloodedMessage(IPeerNeighbor neighbor, Message floodInfo, AsyncCallback callback, object state)
+        public override IAsyncResult OnFloodedMessage(
+            IPeerNeighbor neighbor,
+            Message floodInfo,
+            AsyncCallback callback,
+            object state
+        )
         {
             return base.OnFloodedMessage(neighbor, floodInfo, callback, state);
         }
@@ -624,7 +775,6 @@ namespace System.ServiceModel.Channels
         public override void EndFloodMessage(IAsyncResult result)
         {
             base.EndFloodMessage(result);
-
         }
 
         public override void ProcessLinkUtility(IPeerNeighbor neighbor, UtilityInfo utilityInfo)
@@ -641,7 +791,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 if (null != CloseNeighborIfKnownException(neighborManager, e, neighbor))
                 {
                     throw;
@@ -652,23 +803,27 @@ namespace System.ServiceModel.Channels
 
         class ListManager
         {
-            uint active;            //current bucket.
+            uint active; //current bucket.
             readonly uint buckets;
-            
+
             // Double-checked locking pattern requires volatile for read/write synchronization
             volatile bool disposed = false;
             IOThreadTimer messagePruningTimer;
+
             //we service the hashtables every one minute
             static readonly int PruningTimout = 60 * 1000;
             static readonly int InitialCount = 1000;
             Dictionary<byte[], bool>[] tables;
+
             //Hashtable[] tables;
             object thisLock;
-            static InMemoryNonceCache.NonceCacheImpl.NonceKeyComparer keyComparer = new InMemoryNonceCache.NonceCacheImpl.NonceKeyComparer();
+            static InMemoryNonceCache.NonceCacheImpl.NonceKeyComparer keyComparer =
+                new InMemoryNonceCache.NonceCacheImpl.NonceKeyComparer();
             const int NotFound = -1;
+
             //creating this ListManager with n implies that the entries will be available for n minutes atmost.
             //in the n+1 minute, the timer message handler will kick in to clear older messages.
-            //every minute, the 
+            //every minute, the
             public ListManager(uint buckets)
             {
                 if (!(buckets > 1))
@@ -692,10 +847,7 @@ namespace System.ServiceModel.Channels
 
             object ThisLock
             {
-                get
-                {
-                    return thisLock;
-                }
+                get { return thisLock; }
             }
 
             public int AddForLookup(byte[] key)
@@ -703,7 +855,9 @@ namespace System.ServiceModel.Channels
                 int table = NotFound;
                 if (disposed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed))
+                    );
                 }
 
                 lock (ThisLock)
@@ -720,7 +874,9 @@ namespace System.ServiceModel.Channels
             {
                 if (disposed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.PeerFlooderDisposed))
+                    );
                 }
 
                 lock (ThisLock)
@@ -813,7 +969,6 @@ namespace System.ServiceModel.Channels
         }
     }
 
-
     // this class should contain a collection of IAsyncResults returned from neighbor.BeginSend
     // and complete once all sends have completed
     class FloodAsyncResult : AsyncResult
@@ -824,17 +979,23 @@ namespace System.ServiceModel.Channels
 
         // Double-checked locking pattern requires volatile for read/write synchronization
         volatile bool isCompleted = false;
+
         //async results who signaled completion but we have not called EndSend.
         List<IAsyncResult> pending = new List<IAsyncResult>();
-        Dictionary<IAsyncResult, IPeerNeighbor> results = new Dictionary<IAsyncResult, IPeerNeighbor>();
+        Dictionary<IAsyncResult, IPeerNeighbor> results =
+            new Dictionary<IAsyncResult, IPeerNeighbor>();
         bool shouldCallComplete = false;
         object thisLock = new object();
         TimeoutHelper timeoutHelper;
         bool offNode = false;
         public event EventHandler OnMessageSent;
 
-
-        public FloodAsyncResult(PeerNeighborManager owner, TimeSpan timeout, AsyncCallback callback, object state)
+        public FloodAsyncResult(
+            PeerNeighborManager owner,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             this.pnm = owner;
@@ -843,10 +1004,7 @@ namespace System.ServiceModel.Channels
 
         object ThisLock
         {
-            get
-            {
-                return thisLock;
-            }
+            get { return thisLock; }
         }
 
         public void AddResult(IAsyncResult result, IPeerNeighbor neighbor)
@@ -871,7 +1029,10 @@ namespace System.ServiceModel.Channels
             }
 
             //simply wait on the base's event handle
-            bool completed = TimeoutHelper.WaitOne(this.AsyncWaitHandle, this.timeoutHelper.RemainingTime());
+            bool completed = TimeoutHelper.WaitOne(
+                this.AsyncWaitHandle,
+                this.timeoutHelper.RemainingTime()
+            );
             if (!completed)
             {
                 // a time out occurred - if mo message went off node then tell AsyncResult to throw.
@@ -879,11 +1040,14 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new TimeoutException()
+                        );
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                         this.exception = e;
                     }
@@ -933,9 +1097,7 @@ namespace System.ServiceModel.Channels
                     CompleteOp(true);
                 }
             }
-
         }
-
 
         //this is the callback routine for async completion on channel BeginSend() operations.
         //if we are done, simply return. This can happen if user called sync EndX.
@@ -972,7 +1134,7 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    //try doing this only if the async result is marked !CompletedSynchronously. 
+                    //try doing this only if the async result is marked !CompletedSynchronously.
                     if (!result.CompletedSynchronously)
                     {
                         neighbor.EndSend(result);
@@ -989,7 +1151,7 @@ namespace System.ServiceModel.Channels
                     }
 
                     Exception temp = PeerFlooder.CloseNeighborIfKnownException(pnm, e, neighbor);
-                    //we want to return the very first exception to the user. 
+                    //we want to return the very first exception to the user.
                     if (temp != null && this.doneAdding && !this.shouldCallComplete)
                         throw;
                     if (this.exception == null)
@@ -1003,7 +1165,7 @@ namespace System.ServiceModel.Channels
                     if (message != null && !result.CompletedSynchronously && !fatal)
                         message.Close();
                 }
-                //dont want to call Complete from the lock. 
+                //dont want to call Complete from the lock.
                 //we just decide if this thread should call complete and call outside the lock.
                 if (this.results.Count == 0 && this.doneAdding && this.shouldCallComplete)
                 {
@@ -1011,7 +1173,7 @@ namespace System.ServiceModel.Channels
                     callComplete = true;
                 }
             }
-            //if we are done with callbacks and beginx calls, 
+            //if we are done with callbacks and beginx calls,
             if (callComplete && this.shouldCallComplete)
             {
                 CompleteOp(false);
@@ -1024,6 +1186,5 @@ namespace System.ServiceModel.Channels
             OnMessageSent(this, EventArgs.Empty);
             base.Complete(sync, this.exception);
         }
-
     }
 }

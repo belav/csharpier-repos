@@ -7,16 +7,20 @@ namespace System.ServiceModel.Diagnostics
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Channels;
     using System.Xml;
-    
+
     sealed class MessageHeaderInfoTraceRecord : TraceRecord
     {
         MessageHeaderInfo messageHeaderInfo;
+
         internal MessageHeaderInfoTraceRecord(MessageHeaderInfo messageHeaderInfo)
         {
             this.messageHeaderInfo = messageHeaderInfo;
         }
 
-        internal override string EventId { get { return BuildEventId("MessageHeaderInfo"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("MessageHeaderInfo"); }
+        }
 
         internal override void WriteTo(XmlWriter xml)
         {
@@ -27,7 +31,10 @@ namespace System.ServiceModel.Diagnostics
                 {
                     xml.WriteElementString("Actor", this.messageHeaderInfo.Actor);
                 }
-                xml.WriteElementString("MustUnderstand", this.messageHeaderInfo.MustUnderstand.ToString());
+                xml.WriteElementString(
+                    "MustUnderstand",
+                    this.messageHeaderInfo.MustUnderstand.ToString()
+                );
                 if (!string.IsNullOrEmpty(this.messageHeaderInfo.Name))
                 {
                     xml.WriteElementString("Name", this.messageHeaderInfo.Name);

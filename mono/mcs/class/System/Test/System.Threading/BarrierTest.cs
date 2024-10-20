@@ -24,75 +24,74 @@
 
 
 
-using NUnit.Framework;
-
 using System;
 using System.Threading;
+using NUnit.Framework;
 
-namespace MonoTests.System.Threading {
+namespace MonoTests.System.Threading
+{
+    [TestFixture]
+    public class BarrierTests
+    {
+        Barrier barrier;
+        const int participants = 10;
+        bool triggered;
 
-	[TestFixture]
-	public class BarrierTests {
-		Barrier barrier;
-		const int participants = 10;
-		bool triggered;
-		
-		[SetUp]
-		public void Setup ()
-		{
-			barrier = new Barrier (participants, PostPhaseAction);
-			triggered = false;
-		}
-		
-		void PostPhaseAction (Barrier b)
-		{
-			Assert.AreEqual (barrier, b, "postphase");
-			triggered = true;
-		}
-		
-		[Test]
-		public void AddParticipantTest ()
-		{
-			barrier.AddParticipant ();
-			Assert.AreEqual (participants + 1, barrier.ParticipantCount, "#1");
-			barrier.AddParticipants (3);
-			Assert.AreEqual (participants + 4, barrier.ParticipantCount, "#2");
-		}
-		
-		[Test]
-		public void RemoveParticipantTest ()
-		{
-			barrier.RemoveParticipant ();
-			Assert.AreEqual (participants - 1, barrier.ParticipantCount, "#1");
-			barrier.RemoveParticipants (3);
-			Assert.AreEqual (participants - 4, barrier.ParticipantCount, "#2");
-		}
-		
-		[Test]
-		public void SignalTest ()
-		{
-			barrier.RemoveParticipants (participants - 2);
-			Assert.IsFalse (barrier.SignalAndWait (1), "#1");
-			Assert.IsFalse (triggered, "#3");
-			Assert.AreEqual (0, barrier.CurrentPhaseNumber, "#4");
-		}
-		
-		[Test]
-		public void RemoveTriggeringTest ()
-		{
-			barrier.RemoveParticipants (participants - 2);
-			barrier.RemoveParticipants (2);
-			Assert.IsFalse (triggered, "#1");
-			Assert.AreEqual (0, barrier.CurrentPhaseNumber, "#2");
-		}
+        [SetUp]
+        public void Setup()
+        {
+            barrier = new Barrier(participants, PostPhaseAction);
+            triggered = false;
+        }
 
-		[Test]
-		public void SignalSimple ()
-		{
-			var barrier = new Barrier (0);
-			barrier.AddParticipant ();
-			Assert.IsTrue (barrier.SignalAndWait (500), "#1");
-		}
-	}
+        void PostPhaseAction(Barrier b)
+        {
+            Assert.AreEqual(barrier, b, "postphase");
+            triggered = true;
+        }
+
+        [Test]
+        public void AddParticipantTest()
+        {
+            barrier.AddParticipant();
+            Assert.AreEqual(participants + 1, barrier.ParticipantCount, "#1");
+            barrier.AddParticipants(3);
+            Assert.AreEqual(participants + 4, barrier.ParticipantCount, "#2");
+        }
+
+        [Test]
+        public void RemoveParticipantTest()
+        {
+            barrier.RemoveParticipant();
+            Assert.AreEqual(participants - 1, barrier.ParticipantCount, "#1");
+            barrier.RemoveParticipants(3);
+            Assert.AreEqual(participants - 4, barrier.ParticipantCount, "#2");
+        }
+
+        [Test]
+        public void SignalTest()
+        {
+            barrier.RemoveParticipants(participants - 2);
+            Assert.IsFalse(barrier.SignalAndWait(1), "#1");
+            Assert.IsFalse(triggered, "#3");
+            Assert.AreEqual(0, barrier.CurrentPhaseNumber, "#4");
+        }
+
+        [Test]
+        public void RemoveTriggeringTest()
+        {
+            barrier.RemoveParticipants(participants - 2);
+            barrier.RemoveParticipants(2);
+            Assert.IsFalse(triggered, "#1");
+            Assert.AreEqual(0, barrier.CurrentPhaseNumber, "#2");
+        }
+
+        [Test]
+        public void SignalSimple()
+        {
+            var barrier = new Barrier(0);
+            barrier.AddParticipant();
+            Assert.IsTrue(barrier.SignalAndWait(500), "#1");
+        }
+    }
 }
-

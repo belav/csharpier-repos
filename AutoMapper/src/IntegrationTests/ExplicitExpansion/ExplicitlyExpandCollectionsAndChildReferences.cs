@@ -1,22 +1,31 @@
 ﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-public class ExplicitlyExpandCollectionsAndChildReferences : IntegrationTest<ExplicitlyExpandCollectionsAndChildReferences.DatabaseInitializer>
+public class ExplicitlyExpandCollectionsAndChildReferences
+    : IntegrationTest<ExplicitlyExpandCollectionsAndChildReferences.DatabaseInitializer>
 {
     TrainingCourseDto _course;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Category, CategoryDto>();
-        cfg.CreateProjection<TrainingCourse, TrainingCourseDto>().ForMember(c => c.Content, o => o.ExplicitExpansion());
-        cfg.CreateProjection<TrainingContent, TrainingContentDto>().ForMember(c => c.Category, o => o.ExplicitExpansion());
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Category, CategoryDto>();
+            cfg.CreateProjection<TrainingCourse, TrainingCourseDto>()
+                .ForMember(c => c.Content, o => o.ExplicitExpansion());
+            cfg.CreateProjection<TrainingContent, TrainingContentDto>()
+                .ForMember(c => c.Category, o => o.ExplicitExpansion());
+        });
 
     [Fact]
     public void Should_expand_collections_items()
     {
         using (var context = new ClientContext())
         {
-            _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses, null, c => c.Content.Select(co => co.Category)).FirstOrDefault(n => n.CourseName == "Course 1");
+            _course = ProjectTo<TrainingCourseDto>(
+                    context.TrainingCourses,
+                    null,
+                    c => c.Content.Select(co => co.Category)
+                )
+                .FirstOrDefault(n => n.CourseName == "Course 1");
         }
         _course.Content[0].Category.CategoryName.ShouldBe("Category 1");
     }
@@ -66,7 +75,6 @@ public class ExplicitlyExpandCollectionsAndChildReferences : IntegrationTest<Exp
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
     }
-
 
     public class TrainingCourseDto
     {

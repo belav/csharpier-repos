@@ -13,11 +13,13 @@ public class OpenApiRouteHandlerBuilderExtensionsTest
     [Fact]
     public void ExcludeFromDescription_AddsExcludeFromDescriptionAttribute()
     {
-        static void GenericExclude(IEndpointConventionBuilder builder) => builder.ExcludeFromDescription();
-        static void SpecificExclude(RouteHandlerBuilder builder) => builder.ExcludeFromDescription();
+        static void GenericExclude(IEndpointConventionBuilder builder) =>
+            builder.ExcludeFromDescription();
+        static void SpecificExclude(RouteHandlerBuilder builder) =>
+            builder.ExcludeFromDescription();
 
-        static void AssertMetadata(EndpointBuilder builder)
-            => Assert.IsType<ExcludeFromDescriptionAttribute>(Assert.Single(builder.Metadata));
+        static void AssertMetadata(EndpointBuilder builder) =>
+            Assert.IsType<ExcludeFromDescriptionAttribute>(Assert.Single(builder.Metadata));
 
         RunWithBothBuilders(GenericExclude, SpecificExclude, AssertMetadata);
     }
@@ -25,16 +27,20 @@ public class OpenApiRouteHandlerBuilderExtensionsTest
     [Fact]
     public void WithTags_AddsTagsAttribute()
     {
-        static void GenericWithTags(IEndpointConventionBuilder builder) => builder.WithTags("a", "b", "c");
-        static void SpecificWithTags(RouteHandlerBuilder builder) => builder.WithTags("a", "b", "c");
+        static void GenericWithTags(IEndpointConventionBuilder builder) =>
+            builder.WithTags("a", "b", "c");
+        static void SpecificWithTags(RouteHandlerBuilder builder) =>
+            builder.WithTags("a", "b", "c");
 
         static void AssertMetadata(EndpointBuilder builder)
         {
             var tags = Assert.IsType<TagsAttribute>(Assert.Single(builder.Metadata));
-            Assert.Collection(tags.Tags,
+            Assert.Collection(
+                tags.Tags,
                 tag => Assert.Equal("a", tag),
                 tag => Assert.Equal("b", tag),
-                tag => Assert.Equal("c", tag));
+                tag => Assert.Equal("c", tag)
+            );
         }
 
         RunWithBothBuilders(GenericWithTags, SpecificWithTags, AssertMetadata);
@@ -48,7 +54,9 @@ public class OpenApiRouteHandlerBuilderExtensionsTest
 
         builder.Produces<TestEndointConventionBuilder>();
 
-        var metadata = Assert.IsType<ProducesResponseTypeMetadata>(Assert.Single(testBuilder.Metadata));
+        var metadata = Assert.IsType<ProducesResponseTypeMetadata>(
+            Assert.Single(testBuilder.Metadata)
+        );
         Assert.Equal(typeof(TestEndointConventionBuilder), metadata.Type);
         Assert.Equal(StatusCodes.Status200OK, metadata.StatusCode);
         Assert.Equal("application/json", Assert.Single(metadata.ContentTypes));
@@ -62,7 +70,9 @@ public class OpenApiRouteHandlerBuilderExtensionsTest
 
         builder.Produces(StatusCodes.Status404NotFound);
 
-        var metadata = Assert.IsType<ProducesResponseTypeMetadata>(Assert.Single(testBuilder.Metadata));
+        var metadata = Assert.IsType<ProducesResponseTypeMetadata>(
+            Assert.Single(testBuilder.Metadata)
+        );
         Assert.Equal(typeof(void), metadata.Type);
         Assert.Equal(StatusCodes.Status404NotFound, metadata.StatusCode);
         Assert.Empty(metadata.ContentTypes);
@@ -76,7 +86,9 @@ public class OpenApiRouteHandlerBuilderExtensionsTest
 
         builder.ProducesProblem(StatusCodes.Status400BadRequest);
 
-        var metadata = Assert.IsType<ProducesResponseTypeMetadata>(Assert.Single(testBuilder.Metadata));
+        var metadata = Assert.IsType<ProducesResponseTypeMetadata>(
+            Assert.Single(testBuilder.Metadata)
+        );
         Assert.Equal(typeof(ProblemDetails), metadata.Type);
         Assert.Equal(StatusCodes.Status400BadRequest, metadata.StatusCode);
         Assert.Equal("application/problem+json", Assert.Single(metadata.ContentTypes));
@@ -90,7 +102,9 @@ public class OpenApiRouteHandlerBuilderExtensionsTest
 
         builder.ProducesValidationProblem();
 
-        var metadata = Assert.IsType<ProducesResponseTypeMetadata>(Assert.Single(testBuilder.Metadata));
+        var metadata = Assert.IsType<ProducesResponseTypeMetadata>(
+            Assert.Single(testBuilder.Metadata)
+        );
         Assert.Equal(typeof(HttpValidationProblemDetails), metadata.Type);
         Assert.Equal(StatusCodes.Status400BadRequest, metadata.StatusCode);
         Assert.Equal("application/problem+json", Assert.Single(metadata.ContentTypes));
@@ -134,7 +148,8 @@ public class OpenApiRouteHandlerBuilderExtensionsTest
     private void RunWithBothBuilders(
         Action<IEndpointConventionBuilder> genericSetup,
         Action<RouteHandlerBuilder> specificSetup,
-        Action<EndpointBuilder> assert)
+        Action<EndpointBuilder> assert
+    )
     {
         var testBuilder = new TestEndointConventionBuilder();
         genericSetup(testBuilder);

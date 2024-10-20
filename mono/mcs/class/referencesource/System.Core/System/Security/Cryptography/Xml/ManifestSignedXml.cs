@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
@@ -18,47 +18,68 @@ using System.Text;
 using System.Xml;
 using Microsoft.Win32.SafeHandles;
 
-namespace System.Security.Cryptography.Xml {
+namespace System.Security.Cryptography.Xml
+{
     /// <summary>
     ///     Class which verifies the signature of a single manifest and can return detailed information
     ///     about the signature.
     /// </summary>
-    internal sealed class ManifestSignedXml : SignedXml {
+    internal sealed class ManifestSignedXml : SignedXml
+    {
         private ManifestKinds m_manifest;
         private XmlDocument m_manifestXml;
         private XmlNamespaceManager m_namespaceManager;
 
-        public ManifestSignedXml(XmlDocument manifestXml, ManifestKinds manifest) : base(manifestXml) {
+        public ManifestSignedXml(XmlDocument manifestXml, ManifestKinds manifest)
+            : base(manifestXml)
+        {
             Debug.Assert(manifestXml != null, "manifestXml != null");
-            Debug.Assert(manifest == ManifestKinds.Application || manifest == ManifestKinds.Deployment, "Unknown manifest kind");
+            Debug.Assert(
+                manifest == ManifestKinds.Application || manifest == ManifestKinds.Deployment,
+                "Unknown manifest kind"
+            );
 
             m_manifest = manifest;
             m_manifestXml = manifestXml;
 
             m_namespaceManager = new XmlNamespaceManager(manifestXml.NameTable);
-            m_namespaceManager.AddNamespace("as", "http://schemas.microsoft.com/windows/pki/2005/Authenticode");
+            m_namespaceManager.AddNamespace(
+                "as",
+                "http://schemas.microsoft.com/windows/pki/2005/Authenticode"
+            );
             m_namespaceManager.AddNamespace("asm", "urn:schemas-microsoft-com:asm.v1");
             m_namespaceManager.AddNamespace("asmv2", "urn:schemas-microsoft-com:asm.v2");
             m_namespaceManager.AddNamespace("ds", SignedXml.XmlDsigNamespaceUrl);
-            m_namespaceManager.AddNamespace("msrel", "http://schemas.microsoft.com/windows/rel/2005/reldata");
+            m_namespaceManager.AddNamespace(
+                "msrel",
+                "http://schemas.microsoft.com/windows/rel/2005/reldata"
+            );
             m_namespaceManager.AddNamespace("r", "urn:mpeg:mpeg21:2003:01-REL-R-NS");
         }
 
         /// <summary>
         ///     Convert a hex string to bytes in reverse order
         /// </summary>
-        private static byte[] BackwardHexToBytes(string hex) {
-            if (String.IsNullOrEmpty(hex) || hex.Length % 2 != 0) {
+        private static byte[] BackwardHexToBytes(string hex)
+        {
+            if (String.IsNullOrEmpty(hex) || hex.Length % 2 != 0)
+            {
                 return null;
             }
 
             byte[] bytes = new byte[hex.Length / 2];
 
-            for (int stringIndex = hex.Length - 2, decodedIndex = 0; decodedIndex < bytes.Length;stringIndex -= 2, decodedIndex++) {
+            for (
+                int stringIndex = hex.Length - 2, decodedIndex = 0;
+                decodedIndex < bytes.Length;
+                stringIndex -= 2, decodedIndex++
+            )
+            {
                 byte? upper = HexToByte(hex[stringIndex]);
                 byte? lower = HexToByte(hex[stringIndex + 1]);
 
-                if (!upper.HasValue || !lower.HasValue) {
+                if (!upper.HasValue || !lower.HasValue)
+                {
                     return null;
                 }
 
@@ -79,33 +100,52 @@ namespace System.Security.Cryptography.Xml {
         /// </remarks>
         [System.Security.SecurityCritical]
         [StorePermission(SecurityAction.Assert, EnumerateCertificates = true, OpenStore = true)]
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Reviewed")]
-        private X509Chain BuildSignatureChain(X509Native.AXL_AUTHENTICODE_SIGNER_INFO signer,
-                                              XmlElement licenseNode,
-                                              X509RevocationFlag revocationFlag,
-                                              X509RevocationMode revocationMode) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "Reviewed"
+        )]
+        private X509Chain BuildSignatureChain(
+            X509Native.AXL_AUTHENTICODE_SIGNER_INFO signer,
+            XmlElement licenseNode,
+            X509RevocationFlag revocationFlag,
+            X509RevocationMode revocationMode
+        )
+        {
             Debug.Assert(licenseNode != null, "licenseNode != null");
 
             X509Chain signatureChain = null;
 
-            if (signer.pChainContext != IntPtr.Zero) {
+            if (signer.pChainContext != IntPtr.Zero)
+            {
                 signatureChain = new X509Chain(signer.pChainContext);
             }
-            else if (signer.dwError == (int)SignatureVerificationResult.UntrustedRootCertificate) {
+            else if (signer.dwError == (int)SignatureVerificationResult.UntrustedRootCertificate)
+            {
                 // CertVerifyAuthenticodeLicense will not return the certificate chain for self signed certificates
                 // so we'll need to extract the certificate from the signature ourselves.
 
-                XmlElement x509Data = licenseNode.SelectSingleNode("r:issuer/ds:Signature/ds:KeyInfo/ds:X509Data",
-                                                                   m_namespaceManager) as XmlElement;
-                if (x509Data != null) {
-                    XmlNodeList certificateNodes = x509Data.SelectNodes("ds:X509Certificate", m_namespaceManager);
+                XmlElement x509Data =
+                    licenseNode.SelectSingleNode(
+                        "r:issuer/ds:Signature/ds:KeyInfo/ds:X509Data",
+                        m_namespaceManager
+                    ) as XmlElement;
+                if (x509Data != null)
+                {
+                    XmlNodeList certificateNodes = x509Data.SelectNodes(
+                        "ds:X509Certificate",
+                        m_namespaceManager
+                    );
 
                     // A manifest could have many X509Certificate nodes in its X509Data, which may include the
                     // signing certificate, links on the chain to a root, or certificates not used at all in
                     // the chain.  Since we don't know which certificate actually did the signing, we only
                     // process the chain if we have a single certificate.
-                    if (certificateNodes.Count == 1 && certificateNodes[0] is XmlElement) {
-                        byte[] rawCertificate = Convert.FromBase64String(certificateNodes[0].InnerText.Trim());
+                    if (certificateNodes.Count == 1 && certificateNodes[0] is XmlElement)
+                    {
+                        byte[] rawCertificate = Convert.FromBase64String(
+                            certificateNodes[0].InnerText.Trim()
+                        );
                         X509Certificate2 signingCertificate = new X509Certificate2(rawCertificate);
 
                         signatureChain = new X509Chain();
@@ -123,10 +163,15 @@ namespace System.Security.Cryptography.Xml {
         /// <summary>
         ///     Get the public key token specified in the manifest id
         /// </summary>
-        private byte[] CalculateManifestPublicKeyToken() {
-            XmlElement identityElement = m_manifestXml.SelectSingleNode("//asm:assembly/asm:assemblyIdentity",
-                                                                        m_namespaceManager) as XmlElement;
-            if (identityElement == null) {
+        private byte[] CalculateManifestPublicKeyToken()
+        {
+            XmlElement identityElement =
+                m_manifestXml.SelectSingleNode(
+                    "//asm:assembly/asm:assemblyIdentity",
+                    m_namespaceManager
+                ) as XmlElement;
+            if (identityElement == null)
+            {
                 return null;
             }
 
@@ -137,29 +182,45 @@ namespace System.Security.Cryptography.Xml {
         ///     Get the public key token of the strong name key used in the strong name signature
         /// </summary>
         [SecuritySafeCritical]
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle", Justification = "DangerousGetHandle is protected by a CER")]
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Reviewed")]
-        private static byte[] CalculateSignerPublicKeyToken(AsymmetricAlgorithm key) {
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2001:AvoidCallingProblematicMethods",
+            MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle",
+            Justification = "DangerousGetHandle is protected by a CER"
+        )]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "Reviewed"
+        )]
+        private static byte[] CalculateSignerPublicKeyToken(AsymmetricAlgorithm key)
+        {
             Debug.Assert(key != null, "key != null");
 
             ICspAsymmetricAlgorithm cspAlgorithm = key as ICspAsymmetricAlgorithm;
-            if (cspAlgorithm == null) {
+            if (cspAlgorithm == null)
+            {
                 return null;
             }
 
             byte[] publicKey = cspAlgorithm.ExportCspBlob(false);
             SafeAxlBufferHandle tokenBuffer;
 
-            unsafe {
-                fixed (byte* pPublicKey = publicKey) {
+            unsafe
+            {
+                fixed (byte* pPublicKey = publicKey)
+                {
                     // Safe, since we're ensuring the CAPI buffer going in is sized correctly
                     CapiNative.CRYPTOAPI_BLOB keyBlob = new CapiNative.CRYPTOAPI_BLOB();
                     keyBlob.cbData = publicKey.Length;
                     keyBlob.pbData = new IntPtr(pPublicKey);
 
-                    int hrToken = CapiNative.UnsafeNativeMethods._AxlPublicKeyBlobToPublicKeyToken(ref keyBlob,
-                                                                                                   out tokenBuffer);
-                    if (((uint)hrToken & 0x80000000) != 0) {
+                    int hrToken = CapiNative.UnsafeNativeMethods._AxlPublicKeyBlobToPublicKeyToken(
+                        ref keyBlob,
+                        out tokenBuffer
+                    );
+                    if (((uint)hrToken & 0x80000000) != 0)
+                    {
                         return null;
                     }
                 }
@@ -168,12 +229,15 @@ namespace System.Security.Cryptography.Xml {
             bool acquired = false;
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 tokenBuffer.DangerousAddRef(ref acquired);
                 return HexStringToBytes(Marshal.PtrToStringUni(tokenBuffer.DangerousGetHandle()));
             }
-            finally {
-                if (acquired) {
+            finally
+            {
+                if (acquired)
+                {
                     tokenBuffer.DangerousRelease();
                 }
             }
@@ -183,12 +247,15 @@ namespace System.Security.Cryptography.Xml {
         ///     Compare two byte arrays for equality
         /// </summary>
         /// <returns>true if both arrays are the non-null, the same length, and have the same contents</returns>
-        private static bool CompareBytes(byte[] lhs, byte[] rhs) {
-            if (lhs == null || rhs == null) {
+        private static bool CompareBytes(byte[] lhs, byte[] rhs)
+        {
+            if (lhs == null || rhs == null)
+            {
                 return false;
             }
 
-            for (int i = 0; i < lhs.Length; i++) {
+            for (int i = 0; i < lhs.Length; i++)
+            {
                 if (lhs[i] != rhs[i])
                     return false;
             }
@@ -199,9 +266,14 @@ namespace System.Security.Cryptography.Xml {
         /// <summary>
         ///     Find the XML element being referenced by the signature
         /// </summary>
-        public override XmlElement GetIdElement(XmlDocument document, string idValue) {
+        public override XmlElement GetIdElement(XmlDocument document, string idValue)
+        {
             // Redirect id elements back into the KeyInfo element
-            if (KeyInfo != null && String.Compare(KeyInfo.Id, idValue, StringComparison.OrdinalIgnoreCase) == 0) {
+            if (
+                KeyInfo != null
+                && String.Compare(KeyInfo.Id, idValue, StringComparison.OrdinalIgnoreCase) == 0
+            )
+            {
                 return KeyInfo.GetXml();
             }
 
@@ -212,9 +284,16 @@ namespace System.Security.Cryptography.Xml {
         ///     Gether information about the timestamp of the authenticode signature, if there is one
         /// </summary>
         [System.Security.SecurityCritical]
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Reviewed")]
-        private TimestampInformation GetTimestampInformation(X509Native.AXL_AUTHENTICODE_TIMESTAMPER_INFO timestamper,
-                                                             XmlElement licenseNode) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "Reviewed"
+        )]
+        private TimestampInformation GetTimestampInformation(
+            X509Native.AXL_AUTHENTICODE_TIMESTAMPER_INFO timestamper,
+            XmlElement licenseNode
+        )
+        {
             Debug.Assert(licenseNode != null, "licenseNode != null");
 
             TimestampInformation timestamp = null;
@@ -223,19 +302,28 @@ namespace System.Security.Cryptography.Xml {
             // If the leaf certificate is not explicitly a trusted publisher, CAPI will not process
             // the timestamp information so we will verify it ourselves. In any other case, we will
             // return no timestamp information.
-            if (timestamper.dwError == (int)SignatureVerificationResult.Valid) {
+            if (timestamper.dwError == (int)SignatureVerificationResult.Valid)
+            {
                 timestamp = new TimestampInformation(timestamper);
             }
-            else if (timestamper.dwError == (int)SignatureVerificationResult.CertificateNotExplicitlyTrusted ||
-                     timestamper.dwError == (int)SignatureVerificationResult.MissingSignature) {
-
-                XmlElement timestampElement = licenseNode.SelectSingleNode("r:issuer/ds:Signature/ds:Object/as:Timestamp",
-                                                                           m_namespaceManager) as XmlElement;
-                if (timestampElement != null) {
+            else if (
+                timestamper.dwError
+                    == (int)SignatureVerificationResult.CertificateNotExplicitlyTrusted
+                || timestamper.dwError == (int)SignatureVerificationResult.MissingSignature
+            )
+            {
+                XmlElement timestampElement =
+                    licenseNode.SelectSingleNode(
+                        "r:issuer/ds:Signature/ds:Object/as:Timestamp",
+                        m_namespaceManager
+                    ) as XmlElement;
+                if (timestampElement != null)
+                {
                     // The timestamp is held as a parameter of a base64 encoded PKCS7 message in the signature
                     byte[] timestampBlob = Convert.FromBase64String(timestampElement.InnerText);
 
-                    try {
+                    try
+                    {
                         SignedCms timestampCms = new SignedCms();
                         timestampCms.Decode(timestampBlob);
                         timestampCms.CheckSignature(true);
@@ -248,12 +336,16 @@ namespace System.Security.Cryptography.Xml {
                         // pull all of this information.
                         timestamp = null;
                     }
-                    catch (CryptographicException e) {
-                        timestamp = new TimestampInformation((SignatureVerificationResult)Marshal.GetHRForException(e));
+                    catch (CryptographicException e)
+                    {
+                        timestamp = new TimestampInformation(
+                            (SignatureVerificationResult)Marshal.GetHRForException(e)
+                        );
                     }
                 }
             }
-            else {
+            else
+            {
                 timestamp = null;
             }
 
@@ -263,17 +355,21 @@ namespace System.Security.Cryptography.Xml {
         /// <summary>
         ///     Convert a string of hex digits into an equivilent byte array, returning null on any error
         /// </summary>
-        private static byte[] HexStringToBytes(string hex) {
-            if (String.IsNullOrEmpty(hex) || hex.Length % 2 != 0) {
+        private static byte[] HexStringToBytes(string hex)
+        {
+            if (String.IsNullOrEmpty(hex) || hex.Length % 2 != 0)
+            {
                 return null;
             }
 
             byte[] bytes = new byte[hex.Length / 2];
-            for (int i = 0; i < bytes.Length; i++) {
+            for (int i = 0; i < bytes.Length; i++)
+            {
                 byte? upper = HexToByte(hex[i]);
                 byte? lower = HexToByte(hex[i + 1]);
 
-                if (!upper.HasValue || !lower.HasValue) {
+                if (!upper.HasValue || !lower.HasValue)
+                {
                     return null;
                 }
 
@@ -286,17 +382,22 @@ namespace System.Security.Cryptography.Xml {
         /// <summary>
         ///     Convert a single hex character to a byte
         /// </summary>
-        private static byte? HexToByte(char hex) {
-            if (hex >= '0' && hex <= '9') {
+        private static byte? HexToByte(char hex)
+        {
+            if (hex >= '0' && hex <= '9')
+            {
                 return (byte)(hex - '0');
             }
-            else if (hex >= 'a' && hex <= 'f') {
+            else if (hex >= 'a' && hex <= 'f')
+            {
                 return (byte)(hex - 'a' + 10);
             }
-            else if (hex >= 'A' && hex <= 'F') {
+            else if (hex >= 'A' && hex <= 'F')
+            {
                 return (byte)(hex - 'A' + 10);
             }
-            else {
+            else
+            {
                 return null;
             }
         }
@@ -304,11 +405,15 @@ namespace System.Security.Cryptography.Xml {
         /// <summary>
         ///     Map X509 revocation flags to flags for the AXL verification APIs
         /// </summary>
-        private static X509Native.AxlVerificationFlags MapRevocationFlags(X509RevocationFlag revocationFlag,
-                                                                          X509RevocationMode revocationMode) {
+        private static X509Native.AxlVerificationFlags MapRevocationFlags(
+            X509RevocationFlag revocationFlag,
+            X509RevocationMode revocationMode
+        )
+        {
             X509Native.AxlVerificationFlags axlFlags = X509Native.AxlVerificationFlags.None;
 
-            switch (revocationFlag) {
+            switch (revocationFlag)
+            {
                 case X509RevocationFlag.EndCertificateOnly:
                     axlFlags |= X509Native.AxlVerificationFlags.RevocationCheckEndCertOnly;
                     break;
@@ -323,7 +428,8 @@ namespace System.Security.Cryptography.Xml {
                     break;
             }
 
-            switch (revocationMode) {
+            switch (revocationMode)
+            {
                 case X509RevocationMode.NoCheck:
                     axlFlags |= X509Native.AxlVerificationFlags.NoRevocationCheck;
                     break;
@@ -345,17 +451,20 @@ namespace System.Security.Cryptography.Xml {
         ///     Verify the hash of the manifest without any signature attached is what the Authenticode
         ///     signature expects it to be
         /// </summary>
-        private SignatureVerificationResult VerifyAuthenticodeExpectedHash(XmlElement licenseNode) {
+        private SignatureVerificationResult VerifyAuthenticodeExpectedHash(XmlElement licenseNode)
+        {
             Debug.Assert(licenseNode != null, "licenseNode != null");
 
             // Get the expected hash value from the signature
-            XmlElement manifestInformation = licenseNode.SelectSingleNode("r:grant/as:ManifestInformation",
-                                                                          m_namespaceManager) as XmlElement;
+            XmlElement manifestInformation =
+                licenseNode.SelectSingleNode("r:grant/as:ManifestInformation", m_namespaceManager)
+                as XmlElement;
             if (manifestInformation == null)
                 return SignatureVerificationResult.BadSignatureFormat;
 
             string expectedHashString = manifestInformation.GetAttribute("Hash");
-            if (String.IsNullOrEmpty(expectedHashString)) {
+            if (String.IsNullOrEmpty(expectedHashString))
+            {
                 return SignatureVerificationResult.BadSignatureFormat;
             }
 
@@ -371,12 +480,22 @@ namespace System.Security.Cryptography.Xml {
             normalizationSettings.DtdProcessing = DtdProcessing.Parse;
 
             using (TextReader manifestReader = new StringReader(m_manifestXml.OuterXml))
-            using (XmlReader xmlReader = XmlReader.Create(manifestReader, normalizationSettings, m_manifestXml.BaseURI)) {
+            using (
+                XmlReader xmlReader = XmlReader.Create(
+                    manifestReader,
+                    normalizationSettings,
+                    m_manifestXml.BaseURI
+                )
+            )
+            {
                 normalizedManifest.Load(xmlReader);
             }
 
-            XmlElement signatureNode = normalizedManifest.SelectSingleNode("//asm:assembly/ds:Signature",
-                                                                           m_namespaceManager) as XmlElement;
+            XmlElement signatureNode =
+                normalizedManifest.SelectSingleNode(
+                    "//asm:assembly/ds:Signature",
+                    m_namespaceManager
+                ) as XmlElement;
             Debug.Assert(signatureNode != null, "signatureNode != null");
 
             signatureNode.ParentNode.RemoveChild(signatureNode);
@@ -386,11 +505,13 @@ namespace System.Security.Cryptography.Xml {
             canonicalizedXml.LoadInput(normalizedManifest);
 
             byte[] actualHash = null;
-            using (SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider()) {
+            using (SHA1CryptoServiceProvider sha1 = new SHA1CryptoServiceProvider())
+            {
                 actualHash = sha1.ComputeHash(canonicalizedXml.GetOutput() as MemoryStream);
             }
 
-            if (!CompareBytes(expectedHash, actualHash)) {
+            if (!CompareBytes(expectedHash, actualHash))
+            {
                 return SignatureVerificationResult.BadDigest;
             }
 
@@ -402,29 +523,48 @@ namespace System.Security.Cryptography.Xml {
         ///     to be signed with
         /// </summary>
         [SecuritySafeCritical]
-        [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle", Justification = "DangerousGetHandle is protected by a CER")]
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Reviewed")]
-        private SignatureVerificationResult VerifyAuthenticodePublisher(X509Certificate2 publisherCertificate) {
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2001:AvoidCallingProblematicMethods",
+            MessageId = "System.Runtime.InteropServices.SafeHandle.DangerousGetHandle",
+            Justification = "DangerousGetHandle is protected by a CER"
+        )]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "Reviewed"
+        )]
+        private SignatureVerificationResult VerifyAuthenticodePublisher(
+            X509Certificate2 publisherCertificate
+        )
+        {
             Debug.Assert(publisherCertificate != null, "publisherCertificate != null");
 
             // Get the expected name and key hash
-            XmlElement publisherIdentity = m_manifestXml.SelectSingleNode("//asm:assembly/asmv2:publisherIdentity",
-                                                                          m_namespaceManager) as XmlElement;
+            XmlElement publisherIdentity =
+                m_manifestXml.SelectSingleNode(
+                    "//asm:assembly/asmv2:publisherIdentity",
+                    m_namespaceManager
+                ) as XmlElement;
             if (publisherIdentity == null)
                 return SignatureVerificationResult.BadSignatureFormat;
 
             string publisherName = publisherIdentity.GetAttribute("name");
             string publisherIssuerKeyHash = publisherIdentity.GetAttribute("issuerKeyHash");
 
-            if (String.IsNullOrEmpty(publisherName) || String.IsNullOrEmpty(publisherIssuerKeyHash)) {
+            if (String.IsNullOrEmpty(publisherName) || String.IsNullOrEmpty(publisherIssuerKeyHash))
+            {
                 return SignatureVerificationResult.BadSignatureFormat;
             }
 
             // Get the actual key hash
             SafeAxlBufferHandle issuerKeyBuffer = null;
-            int hrHash = X509Native.UnsafeNativeMethods._AxlGetIssuerPublicKeyHash(publisherCertificate.Handle,
-                                                                                   out issuerKeyBuffer);
-            if (hrHash != (int)SignatureVerificationResult.Valid) {
+            int hrHash = X509Native.UnsafeNativeMethods._AxlGetIssuerPublicKeyHash(
+                publisherCertificate.Handle,
+                out issuerKeyBuffer
+            );
+            if (hrHash != (int)SignatureVerificationResult.Valid)
+            {
                 return (SignatureVerificationResult)hrHash;
             }
 
@@ -432,18 +572,29 @@ namespace System.Security.Cryptography.Xml {
             bool acquired = false;
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 issuerKeyBuffer.DangerousAddRef(ref acquired);
                 actualKeyHash = Marshal.PtrToStringUni(issuerKeyBuffer.DangerousGetHandle());
             }
-            finally {
-                if (acquired) {
+            finally
+            {
+                if (acquired)
+                {
                     issuerKeyBuffer.DangerousRelease();
                 }
             }
 
-            if (String.Compare(publisherName, publisherCertificate.SubjectName.Name, StringComparison.Ordinal) != 0 ||
-                String.Compare(publisherIssuerKeyHash, actualKeyHash, StringComparison.Ordinal) != 0) {
+            if (
+                String.Compare(
+                    publisherName,
+                    publisherCertificate.SubjectName.Name,
+                    StringComparison.Ordinal
+                ) != 0
+                || String.Compare(publisherIssuerKeyHash, actualKeyHash, StringComparison.Ordinal)
+                    != 0
+            )
+            {
                 return SignatureVerificationResult.PublisherMismatch;
             }
 
@@ -454,88 +605,129 @@ namespace System.Security.Cryptography.Xml {
         ///     Verify the Authenticode signature has a valid format, applies to this manifest, and is valid
         /// </summary>
         [SecuritySafeCritical]
-        [SuppressMessage("Microsoft.Security", "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands", Justification = "Reviewed")]
-        private AuthenticodeSignatureInformation VerifyAuthenticodeSignature(XmlElement signatureNode,
-                                                                             X509RevocationFlag revocationFlag,
-                                                                             X509RevocationMode revocationMode) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2122:DoNotIndirectlyExposeMethodsWithLinkDemands",
+            Justification = "Reviewed"
+        )]
+        private AuthenticodeSignatureInformation VerifyAuthenticodeSignature(
+            XmlElement signatureNode,
+            X509RevocationFlag revocationFlag,
+            X509RevocationMode revocationMode
+        )
+        {
             Debug.Assert(signatureNode != null, "signatureNode != null");
 
             // See if there is an Authenticode signature on the manifest
-            XmlElement licenseNode = signatureNode.SelectSingleNode("ds:KeyInfo/msrel:RelData/r:license",
-                                                                     m_namespaceManager) as XmlElement;
-            if (licenseNode == null) {
+            XmlElement licenseNode =
+                signatureNode.SelectSingleNode(
+                    "ds:KeyInfo/msrel:RelData/r:license",
+                    m_namespaceManager
+                ) as XmlElement;
+            if (licenseNode == null)
+            {
                 return null;
             }
 
             // Make sure that the signature is for this manifest
-            SignatureVerificationResult identityVerification = VerifyAuthenticodeSignatureIdentity(licenseNode);
-            if (identityVerification != SignatureVerificationResult.Valid) {
+            SignatureVerificationResult identityVerification = VerifyAuthenticodeSignatureIdentity(
+                licenseNode
+            );
+            if (identityVerification != SignatureVerificationResult.Valid)
+            {
                 return new AuthenticodeSignatureInformation(identityVerification);
             }
 
-            SignatureVerificationResult hashVerification = VerifyAuthenticodeExpectedHash(licenseNode);
-            if (hashVerification != SignatureVerificationResult.Valid) {
+            SignatureVerificationResult hashVerification = VerifyAuthenticodeExpectedHash(
+                licenseNode
+            );
+            if (hashVerification != SignatureVerificationResult.Valid)
+            {
                 return new AuthenticodeSignatureInformation(hashVerification);
             }
 
             // Verify the signature, extracting information about it
             AuthenticodeSignatureInformation authenticodeSignature = null;
 
-            X509Native.AXL_AUTHENTICODE_SIGNER_INFO signer = new X509Native.AXL_AUTHENTICODE_SIGNER_INFO();
+            X509Native.AXL_AUTHENTICODE_SIGNER_INFO signer =
+                new X509Native.AXL_AUTHENTICODE_SIGNER_INFO();
             signer.cbSize = Marshal.SizeOf(typeof(X509Native.AXL_AUTHENTICODE_SIGNER_INFO));
 
-            X509Native.AXL_AUTHENTICODE_TIMESTAMPER_INFO timestamper = new X509Native.AXL_AUTHENTICODE_TIMESTAMPER_INFO();
-            timestamper.cbsize = Marshal.SizeOf(typeof(X509Native.AXL_AUTHENTICODE_TIMESTAMPER_INFO));
+            X509Native.AXL_AUTHENTICODE_TIMESTAMPER_INFO timestamper =
+                new X509Native.AXL_AUTHENTICODE_TIMESTAMPER_INFO();
+            timestamper.cbsize = Marshal.SizeOf(
+                typeof(X509Native.AXL_AUTHENTICODE_TIMESTAMPER_INFO)
+            );
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try {
+            try
+            {
                 byte[] licenseXml = Encoding.UTF8.GetBytes(licenseNode.OuterXml);
-                X509Native.AxlVerificationFlags verificationFlags = MapRevocationFlags(revocationFlag,
-                                                                                       revocationMode);
+                X509Native.AxlVerificationFlags verificationFlags = MapRevocationFlags(
+                    revocationFlag,
+                    revocationMode
+                );
 
-                unsafe {
-                    fixed (byte* pLicenseXml = licenseXml) {
+                unsafe
+                {
+                    fixed (byte* pLicenseXml = licenseXml)
+                    {
                         // Safe since we're verifying the size of this buffer is correct
                         CapiNative.CRYPTOAPI_BLOB xmlBlob = new CapiNative.CRYPTOAPI_BLOB();
                         xmlBlob.cbData = licenseXml.Length;
                         xmlBlob.pbData = new IntPtr(pLicenseXml);
 
-                        int hrVerify = X509Native.UnsafeNativeMethods.CertVerifyAuthenticodeLicense(ref xmlBlob,
-                                                                                                    verificationFlags,
-                                                                                                    ref signer,
-                                                                                                    ref timestamper);
+                        int hrVerify = X509Native.UnsafeNativeMethods.CertVerifyAuthenticodeLicense(
+                            ref xmlBlob,
+                            verificationFlags,
+                            ref signer,
+                            ref timestamper
+                        );
 
-                        if (hrVerify == (int)SignatureVerificationResult.MissingSignature) {
-                            return new AuthenticodeSignatureInformation(SignatureVerificationResult.MissingSignature);
+                        if (hrVerify == (int)SignatureVerificationResult.MissingSignature)
+                        {
+                            return new AuthenticodeSignatureInformation(
+                                SignatureVerificationResult.MissingSignature
+                            );
                         }
                     }
                 }
 
-                X509Chain signatureChain = BuildSignatureChain(signer,
-                                                               licenseNode,
-                                                               revocationFlag,
-                                                               revocationMode);
+                X509Chain signatureChain = BuildSignatureChain(
+                    signer,
+                    licenseNode,
+                    revocationFlag,
+                    revocationMode
+                );
 
-                TimestampInformation timestamp = GetTimestampInformation(timestamper,
-                                                                         licenseNode);
+                TimestampInformation timestamp = GetTimestampInformation(timestamper, licenseNode);
 
-                authenticodeSignature = new AuthenticodeSignatureInformation(signer,
-                                                                             signatureChain,
-                                                                             timestamp);
+                authenticodeSignature = new AuthenticodeSignatureInformation(
+                    signer,
+                    signatureChain,
+                    timestamp
+                );
             }
-            finally {
+            finally
+            {
                 X509Native.UnsafeNativeMethods.CertFreeAuthenticodeSignerInfo(ref signer);
                 X509Native.UnsafeNativeMethods.CertFreeAuthenticodeTimestamperInfo(ref timestamper);
             }
 
             // Verify the signing certificate matches the expected publisher
             Debug.Assert(authenticodeSignature != null, "authenticodeSignature != null");
-            if (authenticodeSignature.SigningCertificate == null) {
-                return new AuthenticodeSignatureInformation(authenticodeSignature.VerificationResult);
+            if (authenticodeSignature.SigningCertificate == null)
+            {
+                return new AuthenticodeSignatureInformation(
+                    authenticodeSignature.VerificationResult
+                );
             }
 
-            SignatureVerificationResult publisherMatch = VerifyAuthenticodePublisher(authenticodeSignature.SigningCertificate);
-            if (publisherMatch != SignatureVerificationResult.Valid) {
+            SignatureVerificationResult publisherMatch = VerifyAuthenticodePublisher(
+                authenticodeSignature.SigningCertificate
+            );
+            if (publisherMatch != SignatureVerificationResult.Valid)
+            {
                 return new AuthenticodeSignatureInformation(publisherMatch);
             }
 
@@ -545,28 +737,49 @@ namespace System.Security.Cryptography.Xml {
         /// <summary>
         ///     Verify that the Authenticode signature expects to be attached to this manifest
         /// </summary>
-        private SignatureVerificationResult VerifyAuthenticodeSignatureIdentity(XmlElement licenseNode) {
+        private SignatureVerificationResult VerifyAuthenticodeSignatureIdentity(
+            XmlElement licenseNode
+        )
+        {
             Debug.Assert(licenseNode != null, "licenseNode != null");
 
-            XmlElement signatureIdentity = licenseNode.SelectSingleNode("r:grant/as:ManifestInformation/as:assemblyIdentity",
-                                                                        m_namespaceManager) as XmlElement;
-            XmlElement assemblyIdentity = m_manifestXml.SelectSingleNode("//asm:assembly/asm:assemblyIdentity",
-                                                                         m_namespaceManager) as XmlElement;
+            XmlElement signatureIdentity =
+                licenseNode.SelectSingleNode(
+                    "r:grant/as:ManifestInformation/as:assemblyIdentity",
+                    m_namespaceManager
+                ) as XmlElement;
+            XmlElement assemblyIdentity =
+                m_manifestXml.SelectSingleNode(
+                    "//asm:assembly/asm:assemblyIdentity",
+                    m_namespaceManager
+                ) as XmlElement;
 
             bool validAssemblyIdentity = assemblyIdentity != null && assemblyIdentity.HasAttributes;
-            bool validSignatureIdentity = signatureIdentity != null && signatureIdentity.HasAttributes;
+            bool validSignatureIdentity =
+                signatureIdentity != null && signatureIdentity.HasAttributes;
 
-            if (!validAssemblyIdentity ||
-                !validSignatureIdentity ||
-                assemblyIdentity.Attributes.Count != signatureIdentity.Attributes.Count) {
+            if (
+                !validAssemblyIdentity
+                || !validSignatureIdentity
+                || assemblyIdentity.Attributes.Count != signatureIdentity.Attributes.Count
+            )
+            {
                 return SignatureVerificationResult.BadSignatureFormat;
             }
 
-            foreach (XmlAttribute identityAttribute in assemblyIdentity.Attributes) {
+            foreach (XmlAttribute identityAttribute in assemblyIdentity.Attributes)
+            {
                 string signatureValue = signatureIdentity.GetAttribute(identityAttribute.LocalName);
 
-                if (signatureValue == null ||
-                    String.Compare(identityAttribute.Value, signatureValue, StringComparison.Ordinal) != 0) {
+                if (
+                    signatureValue == null
+                    || String.Compare(
+                        identityAttribute.Value,
+                        signatureValue,
+                        StringComparison.Ordinal
+                    ) != 0
+                )
+                {
                     return SignatureVerificationResult.AssemblyIdentityMismatch;
                 }
             }
@@ -577,20 +790,33 @@ namespace System.Security.Cryptography.Xml {
         /// <summary>
         ///     Verify that the strong name signature has a valid id
         /// </summary>
-        private static SignatureVerificationResult VerifyStrongNameSignatureId(XmlElement signatureNode) {
+        private static SignatureVerificationResult VerifyStrongNameSignatureId(
+            XmlElement signatureNode
+        )
+        {
             Debug.Assert(signatureNode != null, "signatureNode != null");
 
             string signatureId = null;
-            for (int i = 0; i < signatureNode.Attributes.Count && signatureId == null; i++) {
-                if (String.Compare(signatureNode.Attributes[i].LocalName, "id", StringComparison.OrdinalIgnoreCase) == 0) {
+            for (int i = 0; i < signatureNode.Attributes.Count && signatureId == null; i++)
+            {
+                if (
+                    String.Compare(
+                        signatureNode.Attributes[i].LocalName,
+                        "id",
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
+                {
                     signatureId = signatureNode.Attributes[i].Value;
                 }
             }
 
-            if (String.IsNullOrEmpty(signatureId)) {
+            if (String.IsNullOrEmpty(signatureId))
+            {
                 return SignatureVerificationResult.BadSignatureFormat;
             }
-            if (String.Compare(signatureId, "StrongNameSignature", StringComparison.Ordinal) != 0) {
+            if (String.Compare(signatureId, "StrongNameSignature", StringComparison.Ordinal) != 0)
+            {
                 return SignatureVerificationResult.BadSignatureFormat;
             }
 
@@ -607,37 +833,63 @@ namespace System.Security.Cryptography.Xml {
         ///     and are ignored. Failure to have exactly the correct set of transforms is an error with the
         ///     strong name signature.
         /// </remarks>
-        private static SignatureVerificationResult VerifyStrongNameSignatureTransforms(SignedInfo signedInfo) {
+        private static SignatureVerificationResult VerifyStrongNameSignatureTransforms(
+            SignedInfo signedInfo
+        )
+        {
             Debug.Assert(signedInfo != null, "signedInfo != null");
 
             int totalReferences = 0;
-            foreach (Reference reference in signedInfo.References) {
+            foreach (Reference reference in signedInfo.References)
+            {
                 TransformChain transforms = reference.TransformChain;
                 bool validTransformChain = false;
 
-                if (String.IsNullOrEmpty(reference.Uri)) {
+                if (String.IsNullOrEmpty(reference.Uri))
+                {
                     totalReferences++;
-                    validTransformChain = transforms != null &&
-                                          transforms.Count == 2 &&
-                                          String.Compare(transforms[0].Algorithm, SignedXml.XmlDsigEnvelopedSignatureTransformUrl, StringComparison.Ordinal) == 0 &&
-                                          String.Compare(transforms[1].Algorithm, SignedXml.XmlDsigExcC14NTransformUrl, StringComparison.Ordinal) == 0;
+                    validTransformChain =
+                        transforms != null
+                        && transforms.Count == 2
+                        && String.Compare(
+                            transforms[0].Algorithm,
+                            SignedXml.XmlDsigEnvelopedSignatureTransformUrl,
+                            StringComparison.Ordinal
+                        ) == 0
+                        && String.Compare(
+                            transforms[1].Algorithm,
+                            SignedXml.XmlDsigExcC14NTransformUrl,
+                            StringComparison.Ordinal
+                        ) == 0;
                 }
-                else if (String.Compare(reference.Uri, "#StrongNameKeyInfo", StringComparison.Ordinal) == 0) {
+                else if (
+                    String.Compare(reference.Uri, "#StrongNameKeyInfo", StringComparison.Ordinal)
+                    == 0
+                )
+                {
                     totalReferences++;
-                    validTransformChain = transforms != null &&
-                                          transforms.Count == 1 &&
-                                          String.Compare(transforms[0].Algorithm, SignedXml.XmlDsigExcC14NTransformUrl, StringComparison.Ordinal) == 0;
+                    validTransformChain =
+                        transforms != null
+                        && transforms.Count == 1
+                        && String.Compare(
+                            transforms[0].Algorithm,
+                            SignedXml.XmlDsigExcC14NTransformUrl,
+                            StringComparison.Ordinal
+                        ) == 0;
                 }
-                else {
+                else
+                {
                     validTransformChain = true;
                 }
 
-                if (!validTransformChain) {
+                if (!validTransformChain)
+                {
                     return SignatureVerificationResult.BadSignatureFormat;
                 }
             }
 
-            if (totalReferences == 0) {
+            if (totalReferences == 0)
+            {
                 return SignatureVerificationResult.BadSignatureFormat;
             }
 
@@ -647,33 +899,46 @@ namespace System.Security.Cryptography.Xml {
         /// <summary>
         ///     Verify the strong name signature has a valid format and applies to this manifest
         /// </summary>
-        private StrongNameSignatureInformation VerifyStrongNameSignature(XmlElement signatureNode) {
+        private StrongNameSignatureInformation VerifyStrongNameSignature(XmlElement signatureNode)
+        {
             Debug.Assert(signatureNode != null, "signatureNode != null");
 
             // Verify that the signature is valid
             AsymmetricAlgorithm key;
-            if (!CheckSignatureReturningKey(out key)) {
+            if (!CheckSignatureReturningKey(out key))
+            {
                 return new StrongNameSignatureInformation(SignatureVerificationResult.BadDigest);
             }
 
             // ensure there is an ID element, and it is the strong name id
             SignatureVerificationResult strongNameId = VerifyStrongNameSignatureId(signatureNode);
-            if (strongNameId != SignatureVerificationResult.Valid) {
+            if (strongNameId != SignatureVerificationResult.Valid)
+            {
                 return new StrongNameSignatureInformation(strongNameId);
             }
 
             // Verify that the transforms are the ones we expect.
-            Debug.Assert(Signature != null && Signature.SignedInfo != null,
-                         "XML signature must be verified before getting SN details");
-            SignatureVerificationResult transformsValid = VerifyStrongNameSignatureTransforms(Signature.SignedInfo);
-            if (transformsValid != SignatureVerificationResult.Valid) {
+            Debug.Assert(
+                Signature != null && Signature.SignedInfo != null,
+                "XML signature must be verified before getting SN details"
+            );
+            SignatureVerificationResult transformsValid = VerifyStrongNameSignatureTransforms(
+                Signature.SignedInfo
+            );
+            if (transformsValid != SignatureVerificationResult.Valid)
+            {
                 return new StrongNameSignatureInformation(transformsValid);
             }
 
             // ensure the public key token in the manifest identity matches the public key token of the signing
             // strong name key
-            if (!CompareBytes(CalculateManifestPublicKeyToken(), CalculateSignerPublicKeyToken(key))) {
-                return new StrongNameSignatureInformation(SignatureVerificationResult.PublicKeyTokenMismatch);
+            if (
+                !CompareBytes(CalculateManifestPublicKeyToken(), CalculateSignerPublicKeyToken(key))
+            )
+            {
+                return new StrongNameSignatureInformation(
+                    SignatureVerificationResult.PublicKeyTokenMismatch
+                );
             }
 
             return new StrongNameSignatureInformation(key);
@@ -682,10 +947,15 @@ namespace System.Security.Cryptography.Xml {
         /// <summary>
         ///     Verify the signature of the manifest
         /// </summary>
-        public ManifestSignatureInformation VerifySignature(X509RevocationFlag revocationFlag,
-                                                            X509RevocationMode revocationMode) {
-            XmlElement signatureNode = m_manifestXml.SelectSingleNode("//ds:Signature", m_namespaceManager) as XmlElement;
-            if (signatureNode == null) {
+        public ManifestSignatureInformation VerifySignature(
+            X509RevocationFlag revocationFlag,
+            X509RevocationMode revocationMode
+        )
+        {
+            XmlElement signatureNode =
+                m_manifestXml.SelectSingleNode("//ds:Signature", m_namespaceManager) as XmlElement;
+            if (signatureNode == null)
+            {
                 return new ManifestSignatureInformation(m_manifest, null, null);
             }
 
@@ -697,11 +967,19 @@ namespace System.Security.Cryptography.Xml {
             // give a valid AuthenticodeSignatureInformation object for an Authenticode signature which is
             // contained within a strong name signature with an invalid hash value.
             AuthenticodeSignatureInformation authenticode = null;
-            if (strongName.VerificationResult != SignatureVerificationResult.BadDigest) {
-                authenticode = VerifyAuthenticodeSignature(signatureNode, revocationFlag, revocationMode);
+            if (strongName.VerificationResult != SignatureVerificationResult.BadDigest)
+            {
+                authenticode = VerifyAuthenticodeSignature(
+                    signatureNode,
+                    revocationFlag,
+                    revocationMode
+                );
             }
-            else {
-                authenticode = new AuthenticodeSignatureInformation(SignatureVerificationResult.ContainingSignatureInvalid);
+            else
+            {
+                authenticode = new AuthenticodeSignatureInformation(
+                    SignatureVerificationResult.ContainingSignatureInvalid
+                );
             }
 
             return new ManifestSignatureInformation(m_manifest, strongName, authenticode);

@@ -15,10 +15,9 @@ public class WebAssemblyLoggingTest : ServerTestBase<ToggleExecutionModeServerFi
     public WebAssemblyLoggingTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -34,32 +33,43 @@ public class WebAssemblyLoggingTest : ServerTestBase<ToggleExecutionModeServerFi
     public void LogsSimpleExceptionsUsingLogger()
     {
         Browser.Exists(By.Id("throw-simple-exception")).Click();
-        Browser.Exists(By.CssSelector("#blazor-error-ui[style='display: block;']"), TimeSpan.FromSeconds(10));
+        Browser.Exists(
+            By.CssSelector("#blazor-error-ui[style='display: block;']"),
+            TimeSpan.FromSeconds(10)
+        );
         AssertLogContainsCriticalMessages(
             "crit: Microsoft.AspNetCore.Components.WebAssembly.Rendering.WebAssemblyRenderer[100]",
             "[Custom logger] Unhandled exception rendering component: Doing something that won't work!",
             "System.InvalidTimeZoneException: Doing something that won't work!",
-            "at BasicTestApp.ErrorComponent.ThrowSimple");
+            "at BasicTestApp.ErrorComponent.ThrowSimple"
+        );
     }
 
     [Fact]
     public void LogsInnerExceptionsUsingLogger()
     {
         Browser.Exists(By.Id("throw-inner-exception")).Click();
-        Browser.Exists(By.CssSelector("#blazor-error-ui[style='display: block;']"), TimeSpan.FromSeconds(10));
+        Browser.Exists(
+            By.CssSelector("#blazor-error-ui[style='display: block;']"),
+            TimeSpan.FromSeconds(10)
+        );
         AssertLogContainsCriticalMessages(
             "crit: Microsoft.AspNetCore.Components.WebAssembly.Rendering.WebAssemblyRenderer[100]",
             "[Custom logger] Unhandled exception rendering component: Here is the outer exception",
             "System.InvalidTimeZoneException: Here is the outer exception",
             "System.ArithmeticException: Here is the inner exception",
-            "at BasicTestApp.ErrorComponent.ThrowInner");
+            "at BasicTestApp.ErrorComponent.ThrowInner"
+        );
     }
 
     [Fact]
     public void LogsAggregateExceptionsUsingLogger()
     {
         Browser.Exists(By.Id("throw-aggregate-exception")).Click();
-        Browser.Exists(By.CssSelector("#blazor-error-ui[style='display: block;']"), TimeSpan.FromSeconds(10));
+        Browser.Exists(
+            By.CssSelector("#blazor-error-ui[style='display: block;']"),
+            TimeSpan.FromSeconds(10)
+        );
         AssertLogContainsCriticalMessages(
             "crit: Microsoft.AspNetCore.Components.WebAssembly.Rendering.WebAssemblyRenderer[100]",
             "[Custom logger] Unhandled exception rendering component: Aggregate exception 1",
@@ -67,7 +77,8 @@ public class WebAssemblyLoggingTest : ServerTestBase<ToggleExecutionModeServerFi
             "[Custom logger] Unhandled exception rendering component: Aggregate exception 2",
             "System.InvalidTimeZoneException: Aggregate exception 2",
             "[Custom logger] Unhandled exception rendering component: Aggregate exception 3",
-            "System.InvalidTimeZoneException: Aggregate exception 3");
+            "System.InvalidTimeZoneException: Aggregate exception 3"
+        );
     }
 
     [Fact]
@@ -92,9 +103,15 @@ public class WebAssemblyLoggingTest : ServerTestBase<ToggleExecutionModeServerFi
 
         // These severity levels are displayed
         Browser.Exists(By.Id("log-warning")).Click();
-        AssertLastLogMessage(LogLevel.Warning, "[Custom logger] This is a Warning message with count=5");
+        AssertLastLogMessage(
+            LogLevel.Warning,
+            "[Custom logger] This is a Warning message with count=5"
+        );
         Browser.Exists(By.Id("log-error")).Click();
-        AssertLastLogMessage(LogLevel.Severe, "[Custom logger] This is a Error message with count=6");
+        AssertLastLogMessage(
+            LogLevel.Severe,
+            "[Custom logger] This is a Error message with count=6"
+        );
 
         // All the preceding levels don't cause the error UI to appear
         var errorUi = Browser.Exists(By.Id("blazor-error-ui"));
@@ -102,7 +119,10 @@ public class WebAssemblyLoggingTest : ServerTestBase<ToggleExecutionModeServerFi
 
         // ... but "Critical" level does
         Browser.Exists(By.Id("log-critical")).Click();
-        AssertLastLogMessage(LogLevel.Severe, "[Custom logger] This is a Critical message with count=7");
+        AssertLastLogMessage(
+            LogLevel.Severe,
+            "[Custom logger] This is a Critical message with count=7"
+        );
         Assert.Equal("block", errorUi.GetCssValue("display"));
     }
 
@@ -121,11 +141,13 @@ public class WebAssemblyLoggingTest : ServerTestBase<ToggleExecutionModeServerFi
         var log = Browser.Manage().Logs.GetLog(LogType.Browser);
         foreach (var message in messages)
         {
-            Assert.Contains(log, entry =>
-            {
-                return entry.Level == LogLevel.Severe
-                && entry.Message.Contains(message);
-            });
+            Assert.Contains(
+                log,
+                entry =>
+                {
+                    return entry.Level == LogLevel.Severe && entry.Message.Contains(message);
+                }
+            );
         }
     }
 }

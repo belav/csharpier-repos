@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="WsiProfiles.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services {
-
+namespace System.Web.Services
+{
     using System;
 
     /// <include file='doc\WsiProfiles.uex' path='docs/doc[@for="WsiProfiles"]/*' />
@@ -13,7 +13,8 @@ namespace System.Web.Services {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [Flags]
-    public enum WsiProfiles {
+    public enum WsiProfiles
+    {
         /// <include file='doc\WsiProfiles.uex' path='docs/doc[@for="WsiProfiles.None"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

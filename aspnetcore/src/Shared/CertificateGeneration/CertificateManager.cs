@@ -23,22 +23,25 @@ internal abstract class CertificateManager
     internal const string AspNetHttpsOidFriendlyName = "ASP.NET Core HTTPS development certificate";
 
     private const string ServerAuthenticationEnhancedKeyUsageOid = "1.3.6.1.5.5.7.3.1";
-    private const string ServerAuthenticationEnhancedKeyUsageOidFriendlyName = "Server Authentication";
+    private const string ServerAuthenticationEnhancedKeyUsageOidFriendlyName =
+        "Server Authentication";
 
     private const string LocalhostHttpsDnsName = "localhost";
     private const string LocalhostHttpsDistinguishedName = "CN=" + LocalhostHttpsDnsName;
 
     public const int RSAMinimumKeySizeInBits = 2048;
 
-    public static CertificateManager Instance { get; } = OperatingSystem.IsWindows() ?
+    public static CertificateManager Instance { get; } =
+        OperatingSystem.IsWindows() ?
 #pragma warning disable CA1416 // Validate platform compatibility
-            new WindowsCertificateManager() :
+            new WindowsCertificateManager()
+        :
 #pragma warning restore CA1416 // Validate platform compatibility
-            OperatingSystem.IsMacOS() ?
-            new MacOSCertificateManager() as CertificateManager :
-            new UnixCertificateManager();
+        OperatingSystem.IsMacOS() ? new MacOSCertificateManager() as CertificateManager
+        : new UnixCertificateManager();
 
-    public static CertificateManagerEventSource Log { get; set; } = new CertificateManagerEventSource();
+    public static CertificateManagerEventSource Log { get; set; } =
+        new CertificateManagerEventSource();
 
     // Setting to 0 means we don't append the version byte,
     // which is what all machines currently have.
@@ -51,9 +54,8 @@ internal abstract class CertificateManager
 
     public string Subject { get; }
 
-    public CertificateManager() : this(LocalhostHttpsDistinguishedName, CurrentAspNetCoreCertificateVersion)
-    {
-    }
+    public CertificateManager()
+        : this(LocalhostHttpsDistinguishedName, CurrentAspNetCoreCertificateVersion) { }
 
     // For testing purposes only
     internal CertificateManager(string subject, int version)
@@ -63,14 +65,16 @@ internal abstract class CertificateManager
     }
 
     public static bool IsHttpsDevelopmentCertificate(X509Certificate2 certificate) =>
-        certificate.Extensions.OfType<X509Extension>()
-        .Any(e => string.Equals(AspNetHttpsOid, e.Oid?.Value, StringComparison.Ordinal));
+        certificate
+            .Extensions.OfType<X509Extension>()
+            .Any(e => string.Equals(AspNetHttpsOid, e.Oid?.Value, StringComparison.Ordinal));
 
     public IList<X509Certificate2> ListCertificates(
         StoreName storeName,
         StoreLocation location,
         bool isValid,
-        bool requireExportable = true)
+        bool requireExportable = true
+    )
     {
         Log.ListCertificatesStart(location, storeName);
         var certificates = new List<X509Certificate2>();
@@ -80,8 +84,7 @@ internal abstract class CertificateManager
             store.Open(OpenFlags.ReadOnly);
             PopulateCertificatesFromStore(store, certificates, requireExportable);
             IEnumerable<X509Certificate2> matchingCertificates = certificates;
-            matchingCertificates = matchingCertificates
-                .Where(c => HasOid(c, AspNetHttpsOid));
+            matchingCertificates = matchingCertificates.Where(c => HasOid(c, AspNetHttpsOid));
 
             if (Log.IsEnabled())
             {
@@ -132,17 +135,22 @@ internal abstract class CertificateManager
         }
 
         bool HasOid(X509Certificate2 certificate, string oid) =>
-            certificate.Extensions.OfType<X509Extension>()
+            certificate
+                .Extensions.OfType<X509Extension>()
                 .Any(e => string.Equals(oid, e.Oid?.Value, StringComparison.Ordinal));
 
         static byte GetCertificateVersion(X509Certificate2 c)
         {
-            var byteArray = c.Extensions.OfType<X509Extension>()
+            var byteArray = c
+                .Extensions.OfType<X509Extension>()
                 .Where(e => string.Equals(AspNetHttpsOid, e.Oid?.Value, StringComparison.Ordinal))
                 .Single()
                 .RawData;
 
-            if ((byteArray.Length == AspNetHttpsOidFriendlyName.Length && byteArray[0] == (byte)'A') || byteArray.Length == 0)
+            if (
+                (byteArray.Length == AspNetHttpsOidFriendlyName.Length && byteArray[0] == (byte)'A')
+                || byteArray.Length == 0
+            )
             {
                 // No Version set, default to 0
                 return 0b0;
@@ -154,20 +162,33 @@ internal abstract class CertificateManager
             }
         }
 
-        bool IsValidCertificate(X509Certificate2 certificate, DateTimeOffset currentDate, bool requireExportable) =>
-            certificate.NotBefore <= currentDate &&
-            currentDate <= certificate.NotAfter &&
-            (!requireExportable || IsExportable(certificate)) &&
-            GetCertificateVersion(certificate) >= AspNetHttpsCertificateVersion;
+        bool IsValidCertificate(
+            X509Certificate2 certificate,
+            DateTimeOffset currentDate,
+            bool requireExportable
+        ) =>
+            certificate.NotBefore <= currentDate
+            && currentDate <= certificate.NotAfter
+            && (!requireExportable || IsExportable(certificate))
+            && GetCertificateVersion(certificate) >= AspNetHttpsCertificateVersion;
     }
 
-    protected virtual void PopulateCertificatesFromStore(X509Store store, List<X509Certificate2> certificates, bool requireExportable)
+    protected virtual void PopulateCertificatesFromStore(
+        X509Store store,
+        List<X509Certificate2> certificates,
+        bool requireExportable
+    )
     {
         certificates.AddRange(store.Certificates.OfType<X509Certificate2>());
     }
 
     public IList<X509Certificate2> GetHttpsCertificates() =>
-        ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true, requireExportable: true);
+        ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: true,
+            requireExportable: true
+        );
 
     public EnsureCertificateResult EnsureAspNetCoreHttpsDevelopmentCertificate(
         DateTimeOffset notBefore,
@@ -177,12 +198,23 @@ internal abstract class CertificateManager
         bool includePrivateKey = false,
         string? password = null,
         CertificateKeyExportFormat keyExportFormat = CertificateKeyExportFormat.Pfx,
-        bool isInteractive = true)
+        bool isInteractive = true
+    )
     {
         var result = EnsureCertificateResult.Succeeded;
 
-        var currentUserCertificates = ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true, requireExportable: true);
-        var trustedCertificates = ListCertificates(StoreName.My, StoreLocation.LocalMachine, isValid: true, requireExportable: true);
+        var currentUserCertificates = ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: true,
+            requireExportable: true
+        );
+        var trustedCertificates = ListCertificates(
+            StoreName.My,
+            StoreLocation.LocalMachine,
+            isValid: true,
+            requireExportable: true
+        );
         var certificates = currentUserCertificates.Concat(trustedCertificates);
 
         var filteredCertificates = certificates.Where(c => c.Subject == Subject);
@@ -277,7 +309,8 @@ internal abstract class CertificateManager
             catch (Exception e)
             {
                 Log.SaveCertificateInStoreError(e.ToString());
-                result = EnsureCertificateResult.ErrorSavingTheCertificateIntoTheCurrentUserPersonalStore;
+                result =
+                    EnsureCertificateResult.ErrorSavingTheCertificateIntoTheCurrentUserPersonalStore;
                 return result;
             }
 
@@ -321,9 +354,11 @@ internal abstract class CertificateManager
                 }
 
                 // We don't want to mask the original source of the error here.
-                result = result != EnsureCertificateResult.Succeeded && result != EnsureCertificateResult.ValidCertificatePresent ?
-                    result :
-                    EnsureCertificateResult.ErrorExportingTheCertificate;
+                result =
+                    result != EnsureCertificateResult.Succeeded
+                    && result != EnsureCertificateResult.ValidCertificatePresent
+                        ? result
+                        : EnsureCertificateResult.ErrorExportingTheCertificate;
 
                 return result;
             }
@@ -369,7 +404,12 @@ internal abstract class CertificateManager
             return ImportCertificateResult.CertificateFileMissing;
         }
 
-        var certificates = ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false, requireExportable: false);
+        var certificates = ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: false,
+            requireExportable: false
+        );
         if (certificates.Any())
         {
             if (Log.IsEnabled())
@@ -383,7 +423,11 @@ internal abstract class CertificateManager
         try
         {
             Log.LoadCertificateStart(certificatePath);
-            certificate = new X509Certificate2(certificatePath, password, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.EphemeralKeySet);
+            certificate = new X509Certificate2(
+                certificatePath,
+                password,
+                X509KeyStorageFlags.Exportable | X509KeyStorageFlags.EphemeralKeySet
+            );
             if (Log.IsEnabled())
             {
                 Log.LoadCertificateEnd(GetDescription(certificate));
@@ -425,7 +469,11 @@ internal abstract class CertificateManager
 
     public void CleanupHttpsCertificates()
     {
-        var certificates = ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false);
+        var certificates = ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: false
+        );
         var filteredCertificates = certificates.Where(c => c.Subject == Subject);
 
         if (Log.IsEnabled())
@@ -445,7 +493,11 @@ internal abstract class CertificateManager
 
     public abstract bool IsTrusted(X509Certificate2 certificate);
 
-    protected abstract X509Certificate2 SaveCertificateCore(X509Certificate2 certificate, StoreName storeName, StoreLocation storeLocation);
+    protected abstract X509Certificate2 SaveCertificateCore(
+        X509Certificate2 certificate,
+        StoreName storeName,
+        StoreLocation storeLocation
+    );
 
     protected abstract void TrustCertificateCore(X509Certificate2 certificate);
 
@@ -453,9 +505,18 @@ internal abstract class CertificateManager
 
     protected abstract void RemoveCertificateFromTrustedRoots(X509Certificate2 certificate);
 
-    protected abstract IList<X509Certificate2> GetCertificatesToRemove(StoreName storeName, StoreLocation storeLocation);
+    protected abstract IList<X509Certificate2> GetCertificatesToRemove(
+        StoreName storeName,
+        StoreLocation storeLocation
+    );
 
-    internal static void ExportCertificate(X509Certificate2 certificate, string path, bool includePrivateKey, string? password, CertificateKeyExportFormat format)
+    internal static void ExportCertificate(
+        X509Certificate2 certificate,
+        string path,
+        bool includePrivateKey,
+        string? password,
+        CertificateKeyExportFormat format
+    )
     {
         if (Log.IsEnabled())
         {
@@ -494,7 +555,14 @@ internal abstract class CertificateManager
                         char[] pem;
                         if (password != null)
                         {
-                            keyBytes = key.ExportEncryptedPkcs8PrivateKey(password, new PbeParameters(PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA256, 100000));
+                            keyBytes = key.ExportEncryptedPkcs8PrivateKey(
+                                password,
+                                new PbeParameters(
+                                    PbeEncryptionAlgorithm.Aes256Cbc,
+                                    HashAlgorithmName.SHA256,
+                                    100000
+                                )
+                            );
                             pem = PemEncoding.Write("ENCRYPTED PRIVATE KEY", keyBytes);
                             pemEnvelope = Encoding.ASCII.GetBytes(pem);
                         }
@@ -503,7 +571,14 @@ internal abstract class CertificateManager
                             // Export the key first to an encrypted PEM to avoid issues with System.Security.Cryptography.Cng indicating that the operation is not supported.
                             // This is likely by design to avoid exporting the key by mistake.
                             // To bypass it, we export the certificate to pem temporarily and then we import it and export it as unprotected PEM.
-                            keyBytes = key.ExportEncryptedPkcs8PrivateKey(string.Empty, new PbeParameters(PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA256, 1));
+                            keyBytes = key.ExportEncryptedPkcs8PrivateKey(
+                                string.Empty,
+                                new PbeParameters(
+                                    PbeEncryptionAlgorithm.Aes256Cbc,
+                                    HashAlgorithmName.SHA256,
+                                    1
+                                )
+                            );
                             pem = PemEncoding.Write("ENCRYPTED PRIVATE KEY", keyBytes);
                             key.Dispose();
                             key = RSA.Create();
@@ -518,7 +593,12 @@ internal abstract class CertificateManager
                         Array.Clear(keyBytes, 0, keyBytes.Length);
                         Array.Clear(pem, 0, pem.Length);
 
-                        bytes = Encoding.ASCII.GetBytes(PemEncoding.Write("CERTIFICATE", certificate.Export(X509ContentType.Cert)));
+                        bytes = Encoding.ASCII.GetBytes(
+                            PemEncoding.Write(
+                                "CERTIFICATE",
+                                certificate.Export(X509ContentType.Cert)
+                            )
+                        );
                         break;
                     default:
                         throw new InvalidOperationException("Unknown format.");
@@ -528,7 +608,9 @@ internal abstract class CertificateManager
             {
                 if (format == CertificateKeyExportFormat.Pem)
                 {
-                    bytes = Encoding.ASCII.GetBytes(PemEncoding.Write("CERTIFICATE", certificate.Export(X509ContentType.Cert)));
+                    bytes = Encoding.ASCII.GetBytes(
+                        PemEncoding.Write("CERTIFICATE", certificate.Export(X509ContentType.Cert))
+                    );
                 }
                 else
                 {
@@ -599,27 +681,37 @@ internal abstract class CertificateManager
         }
     }
 
-    internal X509Certificate2 CreateAspNetCoreHttpsDevelopmentCertificate(DateTimeOffset notBefore, DateTimeOffset notAfter)
+    internal X509Certificate2 CreateAspNetCoreHttpsDevelopmentCertificate(
+        DateTimeOffset notBefore,
+        DateTimeOffset notAfter
+    )
     {
         var subject = new X500DistinguishedName(Subject);
         var extensions = new List<X509Extension>();
         var sanBuilder = new SubjectAlternativeNameBuilder();
         sanBuilder.AddDnsName(LocalhostHttpsDnsName);
 
-        var keyUsage = new X509KeyUsageExtension(X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DigitalSignature, critical: true);
+        var keyUsage = new X509KeyUsageExtension(
+            X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DigitalSignature,
+            critical: true
+        );
         var enhancedKeyUsage = new X509EnhancedKeyUsageExtension(
-            new OidCollection() {
-                    new Oid(
-                        ServerAuthenticationEnhancedKeyUsageOid,
-                        ServerAuthenticationEnhancedKeyUsageOidFriendlyName)
+            new OidCollection()
+            {
+                new Oid(
+                    ServerAuthenticationEnhancedKeyUsageOid,
+                    ServerAuthenticationEnhancedKeyUsageOidFriendlyName
+                ),
             },
-            critical: true);
+            critical: true
+        );
 
         var basicConstraints = new X509BasicConstraintsExtension(
             certificateAuthority: false,
             hasPathLengthConstraint: false,
             pathLengthConstraint: 0,
-            critical: true);
+            critical: true
+        );
 
         byte[] bytePayload;
 
@@ -634,10 +726,9 @@ internal abstract class CertificateManager
         }
 
         var aspNetHttpsExtension = new X509Extension(
-            new AsnEncodedData(
-                new Oid(AspNetHttpsOid, AspNetHttpsOidFriendlyName),
-                bytePayload),
-            critical: false);
+            new AsnEncodedData(new Oid(AspNetHttpsOid, AspNetHttpsOidFriendlyName), bytePayload),
+            critical: false
+        );
 
         extensions.Add(basicConstraints);
         extensions.Add(keyUsage);
@@ -689,7 +780,8 @@ internal abstract class CertificateManager
         var certificates = GetCertificatesToRemove(storeName, storeLocation);
         var certificatesWithName = certificates.Where(c => c.Subject == Subject);
 
-        var removeLocation = storeName == StoreName.My ? RemoveLocations.Local : RemoveLocations.Trusted;
+        var removeLocation =
+            storeName == StoreName.My ? RemoveLocations.Local : RemoveLocations.Trusted;
 
         foreach (var certificate in certificates)
         {
@@ -704,7 +796,9 @@ internal abstract class CertificateManager
         switch (locations)
         {
             case RemoveLocations.Undefined:
-                throw new InvalidOperationException($"'{nameof(RemoveLocations.Undefined)}' is not a valid location.");
+                throw new InvalidOperationException(
+                    $"'{nameof(RemoveLocations.Undefined)}' is not a valid location."
+                );
             case RemoveLocations.Local:
                 RemoveCertificateFromUserStore(certificate);
                 break;
@@ -720,7 +814,10 @@ internal abstract class CertificateManager
         }
     }
 
-    internal abstract CheckCertificateStateResult CheckCertificateState(X509Certificate2 candidate, bool interactive);
+    internal abstract CheckCertificateStateResult CheckCertificateState(
+        X509Certificate2 candidate,
+        bool interactive
+    );
 
     internal abstract void CorrectCertificateState(X509Certificate2 candidate);
 
@@ -728,11 +825,17 @@ internal abstract class CertificateManager
         X500DistinguishedName subject,
         IEnumerable<X509Extension> extensions,
         DateTimeOffset notBefore,
-        DateTimeOffset notAfter)
+        DateTimeOffset notAfter
+    )
     {
         using var key = CreateKeyMaterial(RSAMinimumKeySizeInBits);
 
-        var request = new CertificateRequest(subject, key, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+        var request = new CertificateRequest(
+            subject,
+            key,
+            HashAlgorithmName.SHA256,
+            RSASignaturePadding.Pkcs1
+        );
         foreach (var extension in extensions)
         {
             request.CertificateExtensions.Add(extension);
@@ -746,7 +849,9 @@ internal abstract class CertificateManager
             var rsa = RSA.Create(minimumKeySize);
             if (rsa.KeySize < minimumKeySize)
             {
-                throw new InvalidOperationException($"Failed to create a key with a size of {minimumKeySize} bits");
+                throw new InvalidOperationException(
+                    $"Failed to create a key with a size of {minimumKeySize} bits"
+                );
             }
 
             return rsa;
@@ -761,9 +866,7 @@ internal abstract class CertificateManager
             {
                 disposable.Dispose();
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 
@@ -789,8 +892,8 @@ internal abstract class CertificateManager
     {
         using var store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
         store.Open(OpenFlags.ReadWrite);
-        var matching = store.Certificates
-            .OfType<X509Certificate2>()
+        var matching = store
+            .Certificates.OfType<X509Certificate2>()
             .Single(c => c.SerialNumber == certificate.SerialNumber);
 
         store.Remove(matching);
@@ -805,7 +908,9 @@ internal abstract class CertificateManager
             1 => "1 certificate",
             _ => $"{list.Count} certificates",
         };
-        var description = list.OrderBy(c => c.Thumbprint).Select((c, i) => $"    {i + 1}) " + GetDescription(c)).Prepend(certificatesDescription);
+        var description = list.OrderBy(c => c.Thumbprint)
+            .Select((c, i) => $"    {i + 1}) " + GetDescription(c))
+            .Prepend(certificatesDescription);
         return string.Join(Environment.NewLine, description);
     }
 
@@ -816,32 +921,46 @@ internal abstract class CertificateManager
     public sealed class CertificateManagerEventSource : EventSource
     {
         [Event(1, Level = EventLevel.Verbose, Message = "Listing certificates from {0}\\{1}")]
-        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Parameters passed to WriteEvent are all primative values.")]
-        public void ListCertificatesStart(StoreLocation location, StoreName storeName) => WriteEvent(1, location, storeName);
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2026",
+            Justification = "Parameters passed to WriteEvent are all primative values."
+        )]
+        public void ListCertificatesStart(StoreLocation location, StoreName storeName) =>
+            WriteEvent(1, location, storeName);
 
         [Event(2, Level = EventLevel.Verbose, Message = "Found certificates: {0}")]
-        public void DescribeFoundCertificates(string matchingCertificates) => WriteEvent(2, matchingCertificates);
+        public void DescribeFoundCertificates(string matchingCertificates) =>
+            WriteEvent(2, matchingCertificates);
 
         [Event(3, Level = EventLevel.Verbose, Message = "Checking certificates validity")]
         public void CheckCertificatesValidity() => WriteEvent(3);
 
         [Event(4, Level = EventLevel.Verbose, Message = "Valid certificates: {0}")]
-        public void DescribeValidCertificates(string validCertificates) => WriteEvent(4, validCertificates);
+        public void DescribeValidCertificates(string validCertificates) =>
+            WriteEvent(4, validCertificates);
 
         [Event(5, Level = EventLevel.Verbose, Message = "Invalid certificates: {0}")]
-        public void DescribeInvalidCertificates(string invalidCertificates) => WriteEvent(5, invalidCertificates);
+        public void DescribeInvalidCertificates(string invalidCertificates) =>
+            WriteEvent(5, invalidCertificates);
 
         [Event(6, Level = EventLevel.Verbose, Message = "Finished listing certificates.")]
         public void ListCertificatesEnd() => WriteEvent(6);
 
-        [Event(7, Level = EventLevel.Error, Message = "An error occurred while listing the certificates: {0}")]
+        [Event(
+            7,
+            Level = EventLevel.Error,
+            Message = "An error occurred while listing the certificates: {0}"
+        )]
         public void ListCertificatesError(string e) => WriteEvent(7, e);
 
         [Event(8, Level = EventLevel.Verbose, Message = "Filtered certificates: {0}")]
-        public void FilteredCertificates(string filteredCertificates) => WriteEvent(8, filteredCertificates);
+        public void FilteredCertificates(string filteredCertificates) =>
+            WriteEvent(8, filteredCertificates);
 
         [Event(9, Level = EventLevel.Verbose, Message = "Excluded certificates: {0}")]
-        public void ExcludedCertificates(string excludedCertificates) => WriteEvent(9, excludedCertificates);
+        public void ExcludedCertificates(string excludedCertificates) =>
+            WriteEvent(9, excludedCertificates);
 
         [Event(14, Level = EventLevel.Verbose, Message = "Valid certificates: {0}")]
         public void ValidCertificatesFound(string certificates) => WriteEvent(14, certificates);
@@ -852,41 +971,93 @@ internal abstract class CertificateManager
         [Event(16, Level = EventLevel.Verbose, Message = "No valid certificates found.")]
         public void NoValidCertificatesFound() => WriteEvent(16);
 
-        [Event(17, Level = EventLevel.Verbose, Message = "Generating HTTPS development certificate.")]
+        [Event(
+            17,
+            Level = EventLevel.Verbose,
+            Message = "Generating HTTPS development certificate."
+        )]
         public void CreateDevelopmentCertificateStart() => WriteEvent(17);
 
-        [Event(18, Level = EventLevel.Verbose, Message = "Finished generating HTTPS development certificate.")]
+        [Event(
+            18,
+            Level = EventLevel.Verbose,
+            Message = "Finished generating HTTPS development certificate."
+        )]
         public void CreateDevelopmentCertificateEnd() => WriteEvent(18);
 
-        [Event(19, Level = EventLevel.Error, Message = "An error has occurred generating the certificate: {0}.")]
+        [Event(
+            19,
+            Level = EventLevel.Error,
+            Message = "An error has occurred generating the certificate: {0}."
+        )]
         public void CreateDevelopmentCertificateError(string e) => WriteEvent(19, e);
 
-        [Event(20, Level = EventLevel.Verbose, Message = "Saving certificate '{0}' to store {2}\\{1}.")]
-        [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Parameters passed to WriteEvent are all primative values.")]
-        public void SaveCertificateInStoreStart(string certificate, StoreName name, StoreLocation location) => WriteEvent(20, certificate, name, location);
+        [Event(
+            20,
+            Level = EventLevel.Verbose,
+            Message = "Saving certificate '{0}' to store {2}\\{1}."
+        )]
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2026",
+            Justification = "Parameters passed to WriteEvent are all primative values."
+        )]
+        public void SaveCertificateInStoreStart(
+            string certificate,
+            StoreName name,
+            StoreLocation location
+        ) => WriteEvent(20, certificate, name, location);
 
-        [Event(21, Level = EventLevel.Verbose, Message = "Finished saving certificate to the store.")]
+        [Event(
+            21,
+            Level = EventLevel.Verbose,
+            Message = "Finished saving certificate to the store."
+        )]
         public void SaveCertificateInStoreEnd() => WriteEvent(21);
 
-        [Event(22, Level = EventLevel.Error, Message = "An error has occurred saving the certificate: {0}.")]
+        [Event(
+            22,
+            Level = EventLevel.Error,
+            Message = "An error has occurred saving the certificate: {0}."
+        )]
         public void SaveCertificateInStoreError(string e) => WriteEvent(22, e);
 
-        [Event(23, Level = EventLevel.Verbose, Message = "Saving certificate '{0}' to {1} {2} private key.")]
-        public void ExportCertificateStart(string certificate, string path, bool includePrivateKey) => WriteEvent(23, certificate, path, includePrivateKey ? "with" : "without");
+        [Event(
+            23,
+            Level = EventLevel.Verbose,
+            Message = "Saving certificate '{0}' to {1} {2} private key."
+        )]
+        public void ExportCertificateStart(
+            string certificate,
+            string path,
+            bool includePrivateKey
+        ) => WriteEvent(23, certificate, path, includePrivateKey ? "with" : "without");
 
-        [Event(24, Level = EventLevel.Verbose, Message = "Exporting certificate with private key but no password.")]
+        [Event(
+            24,
+            Level = EventLevel.Verbose,
+            Message = "Exporting certificate with private key but no password."
+        )]
         public void NoPasswordForCertificate() => WriteEvent(24);
 
         [Event(25, Level = EventLevel.Verbose, Message = "Creating directory {0}.")]
         public void CreateExportCertificateDirectory(string path) => WriteEvent(25, path);
 
-        [Event(26, Level = EventLevel.Error, Message = "An error has occurred while exporting the certificate: {0}.")]
+        [Event(
+            26,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while exporting the certificate: {0}."
+        )]
         public void ExportCertificateError(string error) => WriteEvent(26, error);
 
         [Event(27, Level = EventLevel.Verbose, Message = "Writing the certificate to: {0}.")]
         public void WriteCertificateToDisk(string path) => WriteEvent(27, path);
 
-        [Event(28, Level = EventLevel.Error, Message = "An error has occurred while writing the certificate to disk: {0}.")]
+        [Event(
+            28,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while writing the certificate to disk: {0}."
+        )]
         public void WriteCertificateToDiskError(string error) => WriteEvent(28, error);
 
         [Event(29, Level = EventLevel.Verbose, Message = "Trusting the certificate to: {0}.")]
@@ -895,7 +1066,11 @@ internal abstract class CertificateManager
         [Event(30, Level = EventLevel.Verbose, Message = "Finished trusting the certificate.")]
         public void TrustCertificateEnd() => WriteEvent(30);
 
-        [Event(31, Level = EventLevel.Error, Message = "An error has occurred while trusting the certificate: {0}.")]
+        [Event(
+            31,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while trusting the certificate: {0}."
+        )]
         public void TrustCertificateError(string error) => WriteEvent(31, error);
 
         [Event(32, Level = EventLevel.Verbose, Message = "Running the trust command {0}.")]
@@ -904,124 +1079,265 @@ internal abstract class CertificateManager
         [Event(33, Level = EventLevel.Verbose, Message = "Finished running the trust command.")]
         public void MacOSTrustCommandEnd() => WriteEvent(33);
 
-        [Event(34, Level = EventLevel.Warning, Message = "An error has occurred while running the trust command: {0}.")]
+        [Event(
+            34,
+            Level = EventLevel.Warning,
+            Message = "An error has occurred while running the trust command: {0}."
+        )]
         public void MacOSTrustCommandError(int exitCode) => WriteEvent(34, exitCode);
 
-        [Event(35, Level = EventLevel.Verbose, Message = "Running the remove trust command for {0}.")]
-        public void MacOSRemoveCertificateTrustRuleStart(string certificate) => WriteEvent(35, certificate);
+        [Event(
+            35,
+            Level = EventLevel.Verbose,
+            Message = "Running the remove trust command for {0}."
+        )]
+        public void MacOSRemoveCertificateTrustRuleStart(string certificate) =>
+            WriteEvent(35, certificate);
 
-        [Event(36, Level = EventLevel.Verbose, Message = "Finished running the remove trust command.")]
+        [Event(
+            36,
+            Level = EventLevel.Verbose,
+            Message = "Finished running the remove trust command."
+        )]
         public void MacOSRemoveCertificateTrustRuleEnd() => WriteEvent(36);
 
-        [Event(37, Level = EventLevel.Warning, Message = "An error has occurred while running the remove trust command: {0}.")]
+        [Event(
+            37,
+            Level = EventLevel.Warning,
+            Message = "An error has occurred while running the remove trust command: {0}."
+        )]
         public void MacOSRemoveCertificateTrustRuleError(int exitCode) => WriteEvent(37, exitCode);
 
         [Event(38, Level = EventLevel.Verbose, Message = "The certificate is not trusted: {0}.")]
         public void MacOSCertificateUntrusted(string certificate) => WriteEvent(38, certificate);
 
-        [Event(39, Level = EventLevel.Verbose, Message = "Removing the certificate from the keychain {0} {1}.")]
-        public void MacOSRemoveCertificateFromKeyChainStart(string keyChain, string certificate) => WriteEvent(39, keyChain, certificate);
+        [Event(
+            39,
+            Level = EventLevel.Verbose,
+            Message = "Removing the certificate from the keychain {0} {1}."
+        )]
+        public void MacOSRemoveCertificateFromKeyChainStart(string keyChain, string certificate) =>
+            WriteEvent(39, keyChain, certificate);
 
-        [Event(40, Level = EventLevel.Verbose, Message = "Finished removing the certificate from the keychain.")]
+        [Event(
+            40,
+            Level = EventLevel.Verbose,
+            Message = "Finished removing the certificate from the keychain."
+        )]
         public void MacOSRemoveCertificateFromKeyChainEnd() => WriteEvent(40);
 
-        [Event(41, Level = EventLevel.Warning, Message = "An error has occurred while running the remove trust command: {0}.")]
-        public void MacOSRemoveCertificateFromKeyChainError(int exitCode) => WriteEvent(41, exitCode);
+        [Event(
+            41,
+            Level = EventLevel.Warning,
+            Message = "An error has occurred while running the remove trust command: {0}."
+        )]
+        public void MacOSRemoveCertificateFromKeyChainError(int exitCode) =>
+            WriteEvent(41, exitCode);
 
-        [Event(42, Level = EventLevel.Verbose, Message = "Removing the certificate from the user store {0}.")]
-        public void RemoveCertificateFromUserStoreStart(string certificate) => WriteEvent(42, certificate);
+        [Event(
+            42,
+            Level = EventLevel.Verbose,
+            Message = "Removing the certificate from the user store {0}."
+        )]
+        public void RemoveCertificateFromUserStoreStart(string certificate) =>
+            WriteEvent(42, certificate);
 
-        [Event(43, Level = EventLevel.Verbose, Message = "Finished removing the certificate from the user store.")]
+        [Event(
+            43,
+            Level = EventLevel.Verbose,
+            Message = "Finished removing the certificate from the user store."
+        )]
         public void RemoveCertificateFromUserStoreEnd() => WriteEvent(43);
 
-        [Event(44, Level = EventLevel.Error, Message = "An error has occurred while removing the certificate from the user store: {0}.")]
+        [Event(
+            44,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while removing the certificate from the user store: {0}."
+        )]
         public void RemoveCertificateFromUserStoreError(string error) => WriteEvent(44, error);
 
-        [Event(45, Level = EventLevel.Verbose, Message = "Adding certificate to the trusted root certification authority store.")]
+        [Event(
+            45,
+            Level = EventLevel.Verbose,
+            Message = "Adding certificate to the trusted root certification authority store."
+        )]
         public void WindowsAddCertificateToRootStore() => WriteEvent(45);
 
         [Event(46, Level = EventLevel.Verbose, Message = "The certificate is already trusted.")]
         public void WindowsCertificateAlreadyTrusted() => WriteEvent(46);
 
-        [Event(47, Level = EventLevel.Verbose, Message = "Trusting the certificate was cancelled by the user.")]
+        [Event(
+            47,
+            Level = EventLevel.Verbose,
+            Message = "Trusting the certificate was cancelled by the user."
+        )]
         public void WindowsCertificateTrustCanceled() => WriteEvent(47);
 
-        [Event(48, Level = EventLevel.Verbose, Message = "Removing the certificate from the trusted root certification authority store.")]
+        [Event(
+            48,
+            Level = EventLevel.Verbose,
+            Message = "Removing the certificate from the trusted root certification authority store."
+        )]
         public void WindowsRemoveCertificateFromRootStoreStart() => WriteEvent(48);
 
-        [Event(49, Level = EventLevel.Verbose, Message = "Finished removing the certificate from the trusted root certification authority store.")]
+        [Event(
+            49,
+            Level = EventLevel.Verbose,
+            Message = "Finished removing the certificate from the trusted root certification authority store."
+        )]
         public void WindowsRemoveCertificateFromRootStoreEnd() => WriteEvent(49);
 
         [Event(50, Level = EventLevel.Verbose, Message = "The certificate was not trusted.")]
         public void WindowsRemoveCertificateFromRootStoreNotFound() => WriteEvent(50);
 
-        [Event(51, Level = EventLevel.Verbose, Message = "Correcting the the certificate state for '{0}'.")]
+        [Event(
+            51,
+            Level = EventLevel.Verbose,
+            Message = "Correcting the the certificate state for '{0}'."
+        )]
         public void CorrectCertificateStateStart(string certificate) => WriteEvent(51, certificate);
 
-        [Event(52, Level = EventLevel.Verbose, Message = "Finished correcting the certificate state.")]
+        [Event(
+            52,
+            Level = EventLevel.Verbose,
+            Message = "Finished correcting the certificate state."
+        )]
         public void CorrectCertificateStateEnd() => WriteEvent(52);
 
-        [Event(53, Level = EventLevel.Error, Message = "An error has occurred while correcting the certificate state: {0}.")]
+        [Event(
+            53,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while correcting the certificate state: {0}."
+        )]
         public void CorrectCertificateStateError(string error) => WriteEvent(53, error);
 
-        [Event(54, Level = EventLevel.Verbose, Message = "Importing the certificate {1} to the keychain '{0}'.")]
-        internal void MacOSAddCertificateToKeyChainStart(string keychain, string certificate) => WriteEvent(54, keychain, certificate);
+        [Event(
+            54,
+            Level = EventLevel.Verbose,
+            Message = "Importing the certificate {1} to the keychain '{0}'."
+        )]
+        internal void MacOSAddCertificateToKeyChainStart(string keychain, string certificate) =>
+            WriteEvent(54, keychain, certificate);
 
-        [Event(55, Level = EventLevel.Verbose, Message = "Finished importing the certificate to the keychain.")]
+        [Event(
+            55,
+            Level = EventLevel.Verbose,
+            Message = "Finished importing the certificate to the keychain."
+        )]
         internal void MacOSAddCertificateToKeyChainEnd() => WriteEvent(55);
 
-        [Event(56, Level = EventLevel.Error, Message = "An error has occurred while importing the certificate to the keychain: {0}, {1}")]
-        internal void MacOSAddCertificateToKeyChainError(int exitCode, string output) => WriteEvent(56, exitCode, output);
+        [Event(
+            56,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while importing the certificate to the keychain: {0}, {1}"
+        )]
+        internal void MacOSAddCertificateToKeyChainError(int exitCode, string output) =>
+            WriteEvent(56, exitCode, output);
 
         [Event(57, Level = EventLevel.Verbose, Message = "Writing the certificate to: {0}.")]
         public void WritePemKeyToDisk(string path) => WriteEvent(57, path);
 
-        [Event(58, Level = EventLevel.Error, Message = "An error has occurred while writing the certificate to disk: {0}.")]
+        [Event(
+            58,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while writing the certificate to disk: {0}."
+        )]
         public void WritePemKeyToDiskError(string error) => WriteEvent(58, error);
 
         [Event(59, Level = EventLevel.Error, Message = "The file '{0}' does not exist.")]
-        internal void ImportCertificateMissingFile(string certificatePath) => WriteEvent(59, certificatePath);
+        internal void ImportCertificateMissingFile(string certificatePath) =>
+            WriteEvent(59, certificatePath);
 
-        [Event(60, Level = EventLevel.Error, Message = "One or more HTTPS certificates exist '{0}'.")]
-        internal void ImportCertificateExistingCertificates(string certificateDescription) => WriteEvent(60, certificateDescription);
+        [Event(
+            60,
+            Level = EventLevel.Error,
+            Message = "One or more HTTPS certificates exist '{0}'."
+        )]
+        internal void ImportCertificateExistingCertificates(string certificateDescription) =>
+            WriteEvent(60, certificateDescription);
 
         [Event(61, Level = EventLevel.Verbose, Message = "Loading certificate from path '{0}'.")]
-        internal void LoadCertificateStart(string certificatePath) => WriteEvent(61, certificatePath);
+        internal void LoadCertificateStart(string certificatePath) =>
+            WriteEvent(61, certificatePath);
 
-        [Event(62, Level = EventLevel.Verbose, Message = "The certificate '{0}' has been loaded successfully.")]
+        [Event(
+            62,
+            Level = EventLevel.Verbose,
+            Message = "The certificate '{0}' has been loaded successfully."
+        )]
         internal void LoadCertificateEnd(string description) => WriteEvent(62, description);
 
-        [Event(63, Level = EventLevel.Error, Message = "An error has occurred while loading the certificate from disk: {0}.")]
+        [Event(
+            63,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while loading the certificate from disk: {0}."
+        )]
         internal void LoadCertificateError(string error) => WriteEvent(63, error);
 
-        [Event(64, Level = EventLevel.Error, Message = "The provided certificate '{0}' is not a valid ASP.NET Core HTTPS development certificate.")]
-        internal void NoHttpsDevelopmentCertificate(string description) => WriteEvent(64, description);
+        [Event(
+            64,
+            Level = EventLevel.Error,
+            Message = "The provided certificate '{0}' is not a valid ASP.NET Core HTTPS development certificate."
+        )]
+        internal void NoHttpsDevelopmentCertificate(string description) =>
+            WriteEvent(64, description);
 
         [Event(65, Level = EventLevel.Verbose, Message = "The certificate is already trusted.")]
         public void MacOSCertificateAlreadyTrusted() => WriteEvent(65);
 
-        [Event(66, Level = EventLevel.Verbose, Message = "Saving the certificate {1} to the user profile folder '{0}'.")]
-        internal void MacOSAddCertificateToUserProfileDirStart(string directory, string certificate) => WriteEvent(66, directory, certificate);
+        [Event(
+            66,
+            Level = EventLevel.Verbose,
+            Message = "Saving the certificate {1} to the user profile folder '{0}'."
+        )]
+        internal void MacOSAddCertificateToUserProfileDirStart(
+            string directory,
+            string certificate
+        ) => WriteEvent(66, directory, certificate);
 
-        [Event(67, Level = EventLevel.Verbose, Message = "Finished saving the certificate to the user profile folder.")]
+        [Event(
+            67,
+            Level = EventLevel.Verbose,
+            Message = "Finished saving the certificate to the user profile folder."
+        )]
         internal void MacOSAddCertificateToUserProfileDirEnd() => WriteEvent(67);
 
-        [Event(68, Level = EventLevel.Error, Message = "An error has occurred while saving certificate '{0}' in the user profile folder: {1}.")]
-        internal void MacOSAddCertificateToUserProfileDirError(string certificateThumbprint, string errorMessage) => WriteEvent(68, certificateThumbprint, errorMessage);
+        [Event(
+            68,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while saving certificate '{0}' in the user profile folder: {1}."
+        )]
+        internal void MacOSAddCertificateToUserProfileDirError(
+            string certificateThumbprint,
+            string errorMessage
+        ) => WriteEvent(68, certificateThumbprint, errorMessage);
 
-        [Event(69, Level = EventLevel.Error, Message = "An error has occurred while removing certificate '{0}' from the user profile folder: {1}.")]
-        internal void MacOSRemoveCertificateFromUserProfileDirError(string certificateThumbprint, string errorMessage) => WriteEvent(69, certificateThumbprint, errorMessage);
+        [Event(
+            69,
+            Level = EventLevel.Error,
+            Message = "An error has occurred while removing certificate '{0}' from the user profile folder: {1}."
+        )]
+        internal void MacOSRemoveCertificateFromUserProfileDirError(
+            string certificateThumbprint,
+            string errorMessage
+        ) => WriteEvent(69, certificateThumbprint, errorMessage);
 
-        [Event(70, Level = EventLevel.Error, Message = "The file '{0}' is not a valid certificate.")]
+        [Event(
+            70,
+            Level = EventLevel.Error,
+            Message = "The file '{0}' is not a valid certificate."
+        )]
         internal void MacOSFileIsNotAValidCertificate(string path) => WriteEvent(70, path);
 
-        [Event(71, Level = EventLevel.Warning, Message = "The on-disk store directory was not found.")]
+        [Event(
+            71,
+            Level = EventLevel.Warning,
+            Message = "The on-disk store directory was not found."
+        )]
         internal void MacOSDiskStoreDoesNotExist() => WriteEvent(71);
     }
 
-    internal sealed class UserCancelledTrustException : Exception
-    {
-    }
+    internal sealed class UserCancelledTrustException : Exception { }
 
     internal readonly struct CheckCertificateStateResult
     {
@@ -1040,6 +1356,6 @@ internal abstract class CertificateManager
         Undefined,
         Local,
         Trusted,
-        All
+        All,
     }
 }

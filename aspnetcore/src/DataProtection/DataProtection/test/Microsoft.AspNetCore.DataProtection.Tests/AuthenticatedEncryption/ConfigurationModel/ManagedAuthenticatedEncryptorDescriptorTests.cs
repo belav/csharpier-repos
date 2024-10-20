@@ -13,19 +13,26 @@ public class ManagedAuthenticatedEncryptorDescriptorTests
     {
         // Arrange
         var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
-        var descriptor = new ManagedAuthenticatedEncryptorDescriptor(new ManagedAuthenticatedEncryptorConfiguration()
-        {
-            EncryptionAlgorithmType = typeof(MySymmetricAlgorithm),
-            EncryptionAlgorithmKeySize = 2048,
-            ValidationAlgorithmType = typeof(MyKeyedHashAlgorithm)
-        }, masterKey.ToSecret());
+        var descriptor = new ManagedAuthenticatedEncryptorDescriptor(
+            new ManagedAuthenticatedEncryptorConfiguration()
+            {
+                EncryptionAlgorithmType = typeof(MySymmetricAlgorithm),
+                EncryptionAlgorithmKeySize = 2048,
+                ValidationAlgorithmType = typeof(MyKeyedHashAlgorithm),
+            },
+            masterKey.ToSecret()
+        );
 
         // Act
         var retVal = descriptor.ExportToXml();
 
         // Assert
-        Assert.Equal(typeof(ManagedAuthenticatedEncryptorDescriptorDeserializer), retVal.DeserializerType);
-        var expectedXml = $@"
+        Assert.Equal(
+            typeof(ManagedAuthenticatedEncryptorDescriptorDeserializer),
+            retVal.DeserializerType
+        );
+        var expectedXml =
+            $@"
                 <descriptor>
                   <encryption algorithm='{typeof(MySymmetricAlgorithm).AssemblyQualifiedName}' keyLength='2048' />
                   <validation algorithm='{typeof(MyKeyedHashAlgorithm).AssemblyQualifiedName}' />
@@ -41,23 +48,33 @@ public class ManagedAuthenticatedEncryptorDescriptorTests
     [InlineData(typeof(Aes), typeof(HMACSHA256))]
     [InlineData(typeof(Aes), typeof(HMACSHA384))]
     [InlineData(typeof(Aes), typeof(HMACSHA512))]
-    public void ExportToXml_BuiltInTypes_ProducesCorrectPayload(Type encryptionAlgorithmType, Type validationAlgorithmType)
+    public void ExportToXml_BuiltInTypes_ProducesCorrectPayload(
+        Type encryptionAlgorithmType,
+        Type validationAlgorithmType
+    )
     {
         // Arrange
         var masterKey = Convert.ToBase64String(Encoding.UTF8.GetBytes("[PLACEHOLDER]"));
-        var descriptor = new ManagedAuthenticatedEncryptorDescriptor(new ManagedAuthenticatedEncryptorConfiguration()
-        {
-            EncryptionAlgorithmType = encryptionAlgorithmType,
-            EncryptionAlgorithmKeySize = 2048,
-            ValidationAlgorithmType = validationAlgorithmType
-        }, masterKey.ToSecret());
+        var descriptor = new ManagedAuthenticatedEncryptorDescriptor(
+            new ManagedAuthenticatedEncryptorConfiguration()
+            {
+                EncryptionAlgorithmType = encryptionAlgorithmType,
+                EncryptionAlgorithmKeySize = 2048,
+                ValidationAlgorithmType = validationAlgorithmType,
+            },
+            masterKey.ToSecret()
+        );
 
         // Act
         var retVal = descriptor.ExportToXml();
 
         // Assert
-        Assert.Equal(typeof(ManagedAuthenticatedEncryptorDescriptorDeserializer), retVal.DeserializerType);
-        var expectedXml = $@"
+        Assert.Equal(
+            typeof(ManagedAuthenticatedEncryptorDescriptorDeserializer),
+            retVal.DeserializerType
+        );
+        var expectedXml =
+            $@"
                 <descriptor>
                   <encryption algorithm='{encryptionAlgorithmType.Name}' keyLength='2048' />
                   <validation algorithm='{validationAlgorithmType.Name}' />

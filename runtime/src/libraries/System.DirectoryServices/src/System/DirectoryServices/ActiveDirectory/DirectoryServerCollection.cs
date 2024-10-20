@@ -20,7 +20,11 @@ namespace System.DirectoryServices.ActiveDirectory
         private readonly bool _isADAM;
         private readonly bool _isForNC;
 
-        internal DirectoryServerCollection(DirectoryContext context, string siteDN, string transportName)
+        internal DirectoryServerCollection(
+            DirectoryContext context,
+            string siteDN,
+            string transportName
+        )
         {
             Hashtable tempTable = new Hashtable();
 
@@ -30,7 +34,12 @@ namespace System.DirectoryServices.ActiveDirectory
             this.transportDN = transportName;
         }
 
-        internal DirectoryServerCollection(DirectoryContext context, DirectoryEntry? crossRefEntry, bool isADAM, ReadOnlyDirectoryServerCollection servers)
+        internal DirectoryServerCollection(
+            DirectoryContext context,
+            DirectoryEntry? crossRefEntry,
+            bool isADAM,
+            ReadOnlyDirectoryServerCollection servers
+        )
         {
             this.context = context;
             _crossRefEntry = crossRefEntry;
@@ -56,7 +65,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (!Contains(server))
                     List[index] = server;
                 else
-                    throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, server), nameof(value));
+                    throw new ArgumentException(
+                        SR.Format(SR.AlreadyExistingInCollection, server),
+                        nameof(value)
+                    );
             }
         }
 
@@ -87,12 +99,18 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, server), nameof(server));
+                    throw new ArgumentException(
+                        SR.Format(SR.AlreadyExistingInCollection, server),
+                        nameof(server)
+                    );
                 }
             }
             else
             {
-                string siteName = (server is DomainController) ? ((DomainController)server).SiteObjectName : ((AdamInstance)server).SiteObjectName;
+                string siteName =
+                    (server is DomainController)
+                        ? ((DomainController)server).SiteObjectName
+                        : ((AdamInstance)server).SiteObjectName;
                 Debug.Assert(siteName != null);
                 if (Utils.Compare(siteDN, siteName) != 0)
                 {
@@ -102,7 +120,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (!Contains(server))
                     return List.Add(server);
                 else
-                    throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, server), nameof(server));
+                    throw new ArgumentException(
+                        SR.Format(SR.AlreadyExistingInCollection, server),
+                        nameof(server)
+                    );
             }
         }
 
@@ -188,13 +209,19 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 else
                 {
-                    throw new ArgumentException(SR.Format(SR.AlreadyExistingInCollection, server), nameof(server));
+                    throw new ArgumentException(
+                        SR.Format(SR.AlreadyExistingInCollection, server),
+                        nameof(server)
+                    );
                 }
             }
             else
             {
                 // make sure that it is within the current site
-                string siteName = (server is DomainController) ? ((DomainController)server).SiteObjectName : ((AdamInstance)server).SiteObjectName;
+                string siteName =
+                    (server is DomainController)
+                        ? ((DomainController)server).SiteObjectName
+                        : ((AdamInstance)server).SiteObjectName;
                 Debug.Assert(siteName != null);
                 if (Utils.Compare(siteDN, siteName) != 0)
                 {
@@ -249,9 +276,15 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     try
                     {
-                        if (_crossRefEntry.Properties.Contains(PropertyManager.MsDSNCReplicaLocations))
+                        if (
+                            _crossRefEntry.Properties.Contains(
+                                PropertyManager.MsDSNCReplicaLocations
+                            )
+                        )
                         {
-                            _crossRefEntry.Properties[PropertyManager.MsDSNCReplicaLocations].Clear();
+                            _crossRefEntry
+                                .Properties[PropertyManager.MsDSNCReplicaLocations]
+                                .Clear();
                         }
                     }
                     catch (COMException e)
@@ -280,8 +313,13 @@ namespace System.DirectoryServices.ActiveDirectory
                     try
                     {
                         DirectoryServer server = (DirectoryServer)value;
-                        string ntdsaName = (server is DomainController) ? ((DomainController)server).NtdsaObjectName : ((AdamInstance)server).NtdsaObjectName;
-                        _crossRefEntry.Properties[PropertyManager.MsDSNCReplicaLocations].Add(ntdsaName);
+                        string ntdsaName =
+                            (server is DomainController)
+                                ? ((DomainController)server).NtdsaObjectName
+                                : ((AdamInstance)server).NtdsaObjectName;
+                        _crossRefEntry
+                            .Properties[PropertyManager.MsDSNCReplicaLocations]
+                            .Add(ntdsaName);
                     }
                     catch (COMException e)
                     {
@@ -293,17 +331,25 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 DirectoryServer server = (DirectoryServer)value;
                 string name = server.Name;
-                string serverName = (server is DomainController) ? ((DomainController)server).ServerObjectName : ((AdamInstance)server).ServerObjectName;
+                string serverName =
+                    (server is DomainController)
+                        ? ((DomainController)server).ServerObjectName
+                        : ((AdamInstance)server).ServerObjectName;
 
                 try
                 {
                     if (changeList!.Contains(name))
                     {
-                        ((DirectoryEntry)changeList[name]!).Properties["bridgeheadTransportList"].Value = this.transportDN;
+                        ((DirectoryEntry)changeList[name]!)
+                            .Properties["bridgeheadTransportList"]
+                            .Value = this.transportDN;
                     }
                     else
                     {
-                        DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, serverName);
+                        DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                            context,
+                            serverName
+                        );
 
                         de.Properties["bridgeheadTransportList"].Value = this.transportDN;
                         changeList.Add(name, de);
@@ -326,8 +372,13 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     if (_crossRefEntry != null)
                     {
-                        string ntdsaName = (value is DomainController) ? ((DomainController)value).NtdsaObjectName : ((AdamInstance)value).NtdsaObjectName;
-                        _crossRefEntry.Properties[PropertyManager.MsDSNCReplicaLocations].Remove(ntdsaName);
+                        string ntdsaName =
+                            (value is DomainController)
+                                ? ((DomainController)value).NtdsaObjectName
+                                : ((AdamInstance)value).NtdsaObjectName;
+                        _crossRefEntry
+                            .Properties[PropertyManager.MsDSNCReplicaLocations]
+                            .Remove(ntdsaName);
                     }
                 }
                 catch (COMException e)
@@ -339,17 +390,25 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 DirectoryServer server = (DirectoryServer)value;
                 string name = server.Name;
-                string serverName = (server is DomainController) ? ((DomainController)server).ServerObjectName : ((AdamInstance)server).ServerObjectName;
+                string serverName =
+                    (server is DomainController)
+                        ? ((DomainController)server).ServerObjectName
+                        : ((AdamInstance)server).ServerObjectName;
 
                 try
                 {
                     if (changeList!.Contains(name))
                     {
-                        ((DirectoryEntry)changeList[name]!).Properties["bridgeheadTransportList"].Clear();
+                        ((DirectoryEntry)changeList[name]!)
+                            .Properties["bridgeheadTransportList"]
+                            .Clear();
                     }
                     else
                     {
-                        DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(context, serverName);
+                        DirectoryEntry de = DirectoryEntryManager.GetDirectoryEntry(
+                            context,
+                            serverName
+                        );
 
                         de.Properties["bridgeheadTransportList"].Clear();
                         changeList.Add(name, de);
@@ -372,7 +431,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
         protected override void OnValidate(object value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value));
 
             if (_isForNC)
             {
@@ -403,7 +463,10 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 DirectoryServer ds = (DirectoryServer)InnerList[i]!;
 
-                string ntdsaName = (ds is DomainController) ? ((DomainController)ds).NtdsaObjectName : ((AdamInstance)ds).NtdsaObjectName;
+                string ntdsaName =
+                    (ds is DomainController)
+                        ? ((DomainController)ds).NtdsaObjectName
+                        : ((AdamInstance)ds).NtdsaObjectName;
                 values.Add(ntdsaName);
             }
             return values.ToArray();

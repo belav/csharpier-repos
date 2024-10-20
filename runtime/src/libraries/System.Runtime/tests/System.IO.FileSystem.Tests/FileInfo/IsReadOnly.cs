@@ -16,7 +16,8 @@ namespace System.IO.Tests
         public void NotReadOnly(char trailingChar)
         {
             string path = GetTestFilePath() + trailingChar;
-            File.Create(path.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)).Dispose();
+            File.Create(path.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar))
+                .Dispose();
             FileInfo info = new FileInfo(path);
             Assert.False(info.IsReadOnly);
         }
@@ -25,7 +26,10 @@ namespace System.IO.Tests
         public void ReadOnly(char trailingChar)
         {
             string path = GetTestFilePath() + trailingChar;
-            string trimmedPath = path.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            string trimmedPath = path.TrimEnd(
+                Path.DirectorySeparatorChar,
+                Path.AltDirectorySeparatorChar
+            );
             File.Create(trimmedPath).Dispose();
             var attributes = File.GetAttributes(path);
             File.SetAttributes(trimmedPath, attributes | FileAttributes.ReadOnly);

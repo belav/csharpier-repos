@@ -11,18 +11,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
 {
     internal static class AccessibilityExtensions
     {
-        internal static bool MatchesSymbol(this Accessibility accessibility, ISymbol symbol)
-            => GetAccessibility(symbol) == accessibility;
+        internal static bool MatchesSymbol(this Accessibility accessibility, ISymbol symbol) =>
+            GetAccessibility(symbol) == accessibility;
 
-        internal static XElement CreateXElement(this Accessibility accessibility)
-            => new("AccessibilityKind", accessibility);
+        internal static XElement CreateXElement(this Accessibility accessibility) =>
+            new("AccessibilityKind", accessibility);
 
-        internal static Accessibility FromXElement(XElement accessibilityElement)
-            => (Accessibility)Enum.Parse(typeof(Accessibility), accessibilityElement.Value);
+        internal static Accessibility FromXElement(XElement accessibilityElement) =>
+            (Accessibility)Enum.Parse(typeof(Accessibility), accessibilityElement.Value);
 
         private static Accessibility GetAccessibility(ISymbol symbol)
         {
-            for (var currentSymbol = symbol; currentSymbol != null; currentSymbol = currentSymbol.ContainingSymbol)
+            for (
+                var currentSymbol = symbol;
+                currentSymbol != null;
+                currentSymbol = currentSymbol.ContainingSymbol
+            )
             {
                 switch (currentSymbol.Kind)
                 {

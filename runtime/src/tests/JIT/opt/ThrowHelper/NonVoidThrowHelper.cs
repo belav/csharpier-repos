@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class ProgramException : Exception {}
+public class ProgramException : Exception { }
 
 public sealed class ProgramSubclass : Program
 {
@@ -19,7 +19,7 @@ public unsafe class Program
 
     private Guid field;
 
-    private static Program s_Instance = new ();
+    private static Program s_Instance = new();
 
     private static Program GetClass() => throw new ProgramException();
 
@@ -32,7 +32,6 @@ public unsafe class Program
     private static Span<byte> GetSpan() => throw new ProgramException();
 
     private static int GetInt(object obj) => throw new ProgramException();
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void DoWork() => s_ReturnCode++;
@@ -159,9 +158,11 @@ public unsafe class Program
     [Fact]
     public static int TestEntryPoint()
     {
-        foreach (var method in typeof(Program)
-            .GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
-            .Where(m => m.Name.StartsWith("Test")))
+        foreach (
+            var method in typeof(Program)
+                .GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
+                .Where(m => m.Name.StartsWith("Test"))
+        )
         {
             try
             {

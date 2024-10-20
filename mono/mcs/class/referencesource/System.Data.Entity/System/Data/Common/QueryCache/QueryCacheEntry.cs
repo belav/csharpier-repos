@@ -11,13 +11,13 @@ namespace System.Data.Common.QueryCache
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Data.Common;
     using System.Diagnostics;
+    using System.Text;
 
-    /// <summary> 
-    /// Represents the abstract base class for all cache entry values in the query cache 
-    /// </summary> 
+    /// <summary>
+    /// Represents the abstract base class for all cache entry values in the query cache
+    /// </summary>
     internal class QueryCacheEntry
     {
         #region Fields
@@ -26,18 +26,18 @@ namespace System.Data.Common.QueryCache
         /// </summary>
         readonly private QueryCacheKey _queryCacheKey;
 
-        /// <summary> 
-        /// strong reference to the target object 
-        /// </summary> 
+        /// <summary>
+        /// strong reference to the target object
+        /// </summary>
         readonly protected object _target;
         #endregion
 
         #region Constructors
-        /// <summary> 
-        /// cache entry constructor 
-        /// </summary> 
-        /// <param name="queryCacheKey"></param> 
-        /// <param name="target"></param> 
+        /// <summary>
+        /// cache entry constructor
+        /// </summary>
+        /// <param name="queryCacheKey"></param>
+        /// <param name="target"></param>
         internal QueryCacheEntry(QueryCacheKey queryCacheKey, object target)
         {
             _queryCacheKey = queryCacheKey;
@@ -46,9 +46,9 @@ namespace System.Data.Common.QueryCache
         #endregion
 
         #region Methods and Properties
-        /// <summary> 
+        /// <summary>
         /// The payload of this cache entry.
-        /// </summary> 
+        /// </summary>
         internal virtual object GetTarget()
         {
             return _target;

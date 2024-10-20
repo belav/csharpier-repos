@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Components.WebAssembly.Server;
 
 namespace Microsoft.AspNetCore.Builder;
 
-internal class WebAssemblyRenderModeWithOptions(WebAssemblyComponentsEndpointOptions? options) : InteractiveWebAssemblyRenderMode
+internal class WebAssemblyRenderModeWithOptions(WebAssemblyComponentsEndpointOptions? options)
+    : InteractiveWebAssemblyRenderMode
 {
     public WebAssemblyComponentsEndpointOptions? EndpointOptions => options;
 }

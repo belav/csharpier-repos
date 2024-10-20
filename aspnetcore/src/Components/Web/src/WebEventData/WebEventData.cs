@@ -17,7 +17,8 @@ internal sealed class WebEventData
         Renderer renderer,
         JsonSerializerOptions jsonSerializerOptions,
         JsonElement eventDescriptorJson,
-        JsonElement eventArgsJson)
+        JsonElement eventArgsJson
+    )
     {
         WebEventDescriptor eventDescriptor;
         try
@@ -36,13 +37,21 @@ internal sealed class WebEventData
         Renderer renderer,
         JsonSerializerOptions jsonSerializerOptions,
         WebEventDescriptor eventDescriptor,
-        JsonElement eventArgsJson)
+        JsonElement eventArgsJson
+    )
     {
-        var parsedEventArgs = ParseEventArgsJson(renderer, jsonSerializerOptions, eventDescriptor.EventHandlerId, eventDescriptor.EventName, eventArgsJson);
+        var parsedEventArgs = ParseEventArgsJson(
+            renderer,
+            jsonSerializerOptions,
+            eventDescriptor.EventHandlerId,
+            eventDescriptor.EventName,
+            eventArgsJson
+        );
         return new WebEventData(
             eventDescriptor.EventHandlerId,
             eventDescriptor.EventFieldInfo,
-            parsedEventArgs);
+            parsedEventArgs
+        );
     }
 
     private WebEventData(ulong eventHandlerId, EventFieldInfo? eventFieldInfo, EventArgs eventArgs)
@@ -58,14 +67,18 @@ internal sealed class WebEventData
 
     public EventArgs EventArgs { get; }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-        Justification = "We are already using the appropriate overload")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "We are already using the appropriate overload"
+    )]
     private static EventArgs ParseEventArgsJson(
         Renderer renderer,
         JsonSerializerOptions jsonSerializerOptions,
         ulong eventHandlerId,
         string eventName,
-        JsonElement eventArgsJson)
+        JsonElement eventArgsJson
+    )
     {
         try
         {
@@ -76,18 +89,27 @@ internal sealed class WebEventData
 
             // For custom events, the args type is determined from the associated delegate
             var eventArgsType = renderer.GetEventArgsType(eventHandlerId);
-            return (EventArgs)JsonSerializer.Deserialize(eventArgsJson.GetRawText(), eventArgsType, jsonSerializerOptions)!;
+            return (EventArgs)
+                JsonSerializer.Deserialize(
+                    eventArgsJson.GetRawText(),
+                    eventArgsType,
+                    jsonSerializerOptions
+                )!;
         }
         catch (Exception e)
         {
-            throw new InvalidOperationException($"There was an error parsing the event arguments. EventId: '{eventHandlerId}'.", e);
+            throw new InvalidOperationException(
+                $"There was an error parsing the event arguments. EventId: '{eventHandlerId}'.",
+                e
+            );
         }
     }
 
     private static bool TryDeserializeStandardWebEventArgs(
         string eventName,
         JsonElement eventArgsJson,
-        [NotNullWhen(true)] out EventArgs? eventArgs)
+        [NotNullWhen(true)] out EventArgs? eventArgs
+    )
     {
         // For back-compatibility, we recognize the built-in list of web event names and hard-code
         // rules about the deserialization type for their eventargs. This makes it possible to declare

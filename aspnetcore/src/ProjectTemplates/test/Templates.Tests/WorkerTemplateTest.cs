@@ -35,10 +35,11 @@ public class WorkerTemplateTest : LoggedTest
     public async Task WorkerTemplateAsync(string language, string[] args)
     {
         await WorkerTemplateCoreAsync(language, args);
-
     }
 
-    [ConditionalTheory(Skip = "Unskip when Helix supports native AOT. https://github.com/dotnet/aspnetcore/pull/47247/")]
+    [ConditionalTheory(
+        Skip = "Unskip when Helix supports native AOT. https://github.com/dotnet/aspnetcore/pull/47247/"
+    )]
     [InlineData("C#")]
     // [InlineData("F#")] F# doesn't fully support NativeAOT - https://github.com/dotnet/fsharp/issues/13398
     public async Task WorkerTemplateNativeAotAsync(string language)
@@ -76,14 +77,29 @@ public class WorkerTemplateTest : LoggedTest
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run built project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run built project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
         }
 
-        using (var aspNetProcess = project.StartPublishedProjectAsync(hasListeningUri: false, usePublishedAppHost: nativeAot))
+        using (
+            var aspNetProcess = project.StartPublishedProjectAsync(
+                hasListeningUri: false,
+                usePublishedAppHost: nativeAot
+            )
+        )
         {
             Assert.False(
                 aspNetProcess.Process.HasExited,
-                ErrorMessages.GetFailedProcessMessageOrEmpty("Run published project", project, aspNetProcess.Process));
+                ErrorMessages.GetFailedProcessMessageOrEmpty(
+                    "Run published project",
+                    project,
+                    aspNetProcess.Process
+                )
+            );
         }
     }
 }

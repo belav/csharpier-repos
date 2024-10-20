@@ -19,11 +19,12 @@ public class Startup
     {
         services.Configure<RewriteOptions>(options =>
         {
-            options.AddRedirect("(.*)/$", "$1")
-                   .AddRewrite(@"app/(\d+)", "app?id=$1", skipRemainingRules: false)
-                   .AddRedirectToHttps(302, 5001)
-                   .AddIISUrlRewrite(Environment.ContentRootFileProvider, "UrlRewrite.xml")
-                   .AddApacheModRewrite(Environment.ContentRootFileProvider, "Rewrite.txt");
+            options
+                .AddRedirect("(.*)/$", "$1")
+                .AddRewrite(@"app/(\d+)", "app?id=$1", skipRemainingRules: false)
+                .AddRedirectToHttps(302, 5001)
+                .AddIISUrlRewrite(Environment.ContentRootFileProvider, "UrlRewrite.xml")
+                .AddApacheModRewrite(Environment.ContentRootFileProvider, "Rewrite.txt");
         });
     }
 
@@ -33,7 +34,9 @@ public class Startup
 
         app.Run(context =>
         {
-            return context.Response.WriteAsync($"Rewritten Url: {context.Request.Path + context.Request.QueryString}");
+            return context.Response.WriteAsync(
+                $"Rewritten Url: {context.Request.Path + context.Request.QueryString}"
+            );
         });
     }
 
@@ -43,18 +46,23 @@ public class Startup
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseKestrel(options =>
-                {
-                    options.Listen(IPAddress.Loopback, 5000);
-                    options.Listen(IPAddress.Loopback, 5001, listenOptions =>
+                    .UseKestrel(options =>
                     {
-                        // Configure SSL
-                        listenOptions.UseHttps("testCert.pfx", "testPassword");
-                    });
-                })
-                .UseStartup<Startup>()
-                .UseContentRoot(Directory.GetCurrentDirectory());
-            }).Build();
+                        options.Listen(IPAddress.Loopback, 5000);
+                        options.Listen(
+                            IPAddress.Loopback,
+                            5001,
+                            listenOptions =>
+                            {
+                                // Configure SSL
+                                listenOptions.UseHttps("testCert.pfx", "testPassword");
+                            }
+                        );
+                    })
+                    .UseStartup<Startup>()
+                    .UseContentRoot(Directory.GetCurrentDirectory());
+            })
+            .Build();
 
         return host.RunAsync();
     }

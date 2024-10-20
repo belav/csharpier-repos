@@ -93,18 +93,17 @@ Details:
 --*/
 namespace System.IdentityModel
 {
-    using System.Security;
-    using System.Runtime.InteropServices;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Threading;
-    using System.Security.Permissions;
     using System.ComponentModel;
-    using System.Text;
-    using System.ServiceModel.Diagnostics;
-    using Microsoft.Win32.SafeHandles;
+    using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
-
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.ServiceModel.Diagnostics;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32.SafeHandles;
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     struct SSPIHandle
@@ -124,7 +123,7 @@ namespace System.IdentityModel
             HandleLo = IntPtr.Zero;
         }
 
-        //public static string ToString(ref SSPIHandle obj) 
+        //public static string ToString(ref SSPIHandle obj)
         //{
         //    return obj.HandleHi.ToString("x") + ":" + obj.HandleLo.ToString("x");
         //}
@@ -148,10 +147,7 @@ namespace System.IdentityModel
 
         public override bool IsInvalid
         {
-            get
-            {
-                return IsClosed || _handle.IsZero;
-            }
+            get { return IsClosed || _handle.IsZero; }
         }
 
         //This method should never be called for this type
@@ -160,7 +156,7 @@ namespace System.IdentityModel
         //    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException());
         //}
 
-        //public static string ToString(SafeDeleteContext obj) 
+        //public static string ToString(SafeDeleteContext obj)
         //{
         //    {   return obj == null ? "null" : SSPIHandle.ToString(ref obj._handle); }
         //}
@@ -175,7 +171,8 @@ namespace System.IdentityModel
             SecurityBuffer inSecBuffer,
             SecurityBuffer[] inSecBuffers,
             SecurityBuffer outSecBuffer,
-            ref SspiContextFlags outFlags)
+            ref SspiContextFlags outFlags
+        )
         {
             if (inCredentials == null)
             {
@@ -214,7 +211,9 @@ namespace System.IdentityModel
             {
                 pinnedOutBytes = GCHandle.Alloc(outSecBuffer.token, GCHandleType.Pinned);
 
-                SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[inSecurityBufferDescriptor == null ? 1 : inSecurityBufferDescriptor.Count];
+                SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[
+                    inSecurityBufferDescriptor == null ? 1 : inSecurityBufferDescriptor.Count
+                ];
                 fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)
                 {
                     if (inSecurityBufferDescriptor != null)
@@ -225,7 +224,8 @@ namespace System.IdentityModel
                         SecurityBuffer securityBuffer;
                         for (int index = 0; index < inSecurityBufferDescriptor.Count; ++index)
                         {
-                            securityBuffer = inSecBuffer != null ? inSecBuffer : inSecBuffers[index];
+                            securityBuffer =
+                                inSecBuffer != null ? inSecBuffer : inSecBuffers[index];
                             if (securityBuffer != null)
                             {
                                 // Copy the SecurityBuffer content into unmanaged place holder
@@ -234,16 +234,27 @@ namespace System.IdentityModel
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken.DangerousGetHandle();
+                                    inUnmanagedBuffer[index].token =
+                                        securityBuffer.unmanagedToken.DangerousGetHandle();
                                 }
-                                else if (securityBuffer.token == null || securityBuffer.token.Length == 0)
+                                else if (
+                                    securityBuffer.token == null
+                                    || securityBuffer.token.Length == 0
+                                )
                                 {
                                     inUnmanagedBuffer[index].token = IntPtr.Zero;
                                 }
                                 else
                                 {
-                                    pinnedInBytes[index] = GCHandle.Alloc(securityBuffer.token, GCHandleType.Pinned);
-                                    inUnmanagedBuffer[index].token = Marshal.UnsafeAddrOfPinnedArrayElement(securityBuffer.token, securityBuffer.offset);
+                                    pinnedInBytes[index] = GCHandle.Alloc(
+                                        securityBuffer.token,
+                                        GCHandleType.Pinned
+                                    );
+                                    inUnmanagedBuffer[index].token =
+                                        Marshal.UnsafeAddrOfPinnedArrayElement(
+                                            securityBuffer.token,
+                                            securityBuffer.offset
+                                        );
                                 }
                             }
                         }
@@ -261,7 +272,10 @@ namespace System.IdentityModel
                         }
                         else
                         {
-                            outUnmanagedBuffer[0].token = Marshal.UnsafeAddrOfPinnedArrayElement(outSecBuffer.token, outSecBuffer.offset);
+                            outUnmanagedBuffer[0].token = Marshal.UnsafeAddrOfPinnedArrayElement(
+                                outSecBuffer.token,
+                                outSecBuffer.offset
+                            );
                         }
                         if (isSspiAllocated)
                         {
@@ -288,7 +302,7 @@ namespace System.IdentityModel
                                 outSecurityBufferDescriptor,
                                 ref outFlags,
                                 outFreeContextBuffer
-                                );
+                            );
                         }
 
                         // Get unmanaged buffer with index 0 as the only one passed into PInvoke
@@ -296,8 +310,15 @@ namespace System.IdentityModel
                         outSecBuffer.type = outUnmanagedBuffer[0].type;
                         if (outSecBuffer.size > 0)
                         {
-                            outSecBuffer.token = DiagnosticUtility.Utility.AllocateByteArray(outSecBuffer.size);
-                            Marshal.Copy(outUnmanagedBuffer[0].token, outSecBuffer.token, 0, outSecBuffer.size);
+                            outSecBuffer.token = DiagnosticUtility.Utility.AllocateByteArray(
+                                outSecBuffer.size
+                            );
+                            Marshal.Copy(
+                                outUnmanagedBuffer[0].token,
+                                outSecBuffer.token,
+                                0,
+                                outSecBuffer.size
+                            );
                         }
                         else
                         {
@@ -346,7 +367,8 @@ namespace System.IdentityModel
             SafeDeleteContext outContext,
             SecurityBufferDescriptor outputBuffer,
             ref SspiContextFlags attributes,
-            SafeFreeContextBuffer handleTemplate)
+            SafeFreeContextBuffer handleTemplate
+        )
         {
             int errorCode = -1;
             bool b1 = false;
@@ -363,13 +385,13 @@ namespace System.IdentityModel
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 if (b1)
                 {
                     inCredentials.DangerousRelease();
                     b1 = false;
                 }
-                
+
                 if (b2)
                 {
                     outContext.DangerousRelease();
@@ -389,9 +411,8 @@ namespace System.IdentityModel
                 }
                 else if (b1 && b2)
                 {
-
                     SSPIHandle credentialHandle = inCredentials._handle;
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // This API does not set Win32 Last Error.
                     errorCode = InitializeSecurityContextW(
                         ref credentialHandle,
@@ -406,13 +427,16 @@ namespace System.IdentityModel
                         outputBuffer,
                         ref attributes,
                         out timeStamp
-                        );
+                    );
                     //
                     // When a credential handle is first associated with the context we keep credential
                     // ref count bumped up to ensure ordered finalization.
                     // If the credential handle has been changed we de-ref the old one and associate the
                     //  context with the new cred handle but only if the call was successful.
-                    if (outContext._EffectiveCredential != inCredentials && (errorCode & 0x80000000) == 0)
+                    if (
+                        outContext._EffectiveCredential != inCredentials
+                        && (errorCode & 0x80000000) == 0
+                    )
                     {
                         // Disassociate the previous credential handle
                         if (outContext._EffectiveCredential != null)
@@ -429,13 +453,14 @@ namespace System.IdentityModel
                     // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
                     if (handleTemplate != null)
                     {
-                        handleTemplate.Set(((SecurityBufferStruct*)outputBuffer.UnmanagedPointer)->token); //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes
+                        handleTemplate.Set(
+                            ((SecurityBufferStruct*)outputBuffer.UnmanagedPointer)->token
+                        ); //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes
                         if (handleTemplate.IsInvalid)
                         {
                             handleTemplate.SetHandleAsInvalid();
                         }
                     }
-
                 }
                 if (inContextPtr == null && (errorCode & 0x80000000) != 0)
                 {
@@ -455,9 +480,9 @@ namespace System.IdentityModel
             SecurityBuffer inSecBuffer,
             SecurityBuffer[] inSecBuffers,
             SecurityBuffer outSecBuffer,
-            ref SspiContextFlags outFlags)
+            ref SspiContextFlags outFlags
+        )
         {
-
             if (inCredentials == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("inCredentials");
@@ -494,7 +519,9 @@ namespace System.IdentityModel
             {
                 pinnedOutBytes = GCHandle.Alloc(outSecBuffer.token, GCHandleType.Pinned);
 
-                SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[inSecurityBufferDescriptor == null ? 1 : inSecurityBufferDescriptor.Count];
+                SecurityBufferStruct[] inUnmanagedBuffer = new SecurityBufferStruct[
+                    inSecurityBufferDescriptor == null ? 1 : inSecurityBufferDescriptor.Count
+                ];
                 fixed (void* inUnmanagedBufferPtr = inUnmanagedBuffer)
                 {
                     if (inSecurityBufferDescriptor != null)
@@ -505,7 +532,8 @@ namespace System.IdentityModel
                         SecurityBuffer securityBuffer;
                         for (int index = 0; index < inSecurityBufferDescriptor.Count; ++index)
                         {
-                            securityBuffer = inSecBuffer != null ? inSecBuffer : inSecBuffers[index];
+                            securityBuffer =
+                                inSecBuffer != null ? inSecBuffer : inSecBuffers[index];
                             if (securityBuffer != null)
                             {
                                 // Copy the SecurityBuffer content into unmanaged place holder
@@ -514,16 +542,27 @@ namespace System.IdentityModel
                                 // use the unmanaged token if it's not null; otherwise use the managed buffer
                                 if (securityBuffer.unmanagedToken != null)
                                 {
-                                    inUnmanagedBuffer[index].token = securityBuffer.unmanagedToken.DangerousGetHandle();
+                                    inUnmanagedBuffer[index].token =
+                                        securityBuffer.unmanagedToken.DangerousGetHandle();
                                 }
-                                else if (securityBuffer.token == null || securityBuffer.token.Length == 0)
+                                else if (
+                                    securityBuffer.token == null
+                                    || securityBuffer.token.Length == 0
+                                )
                                 {
                                     inUnmanagedBuffer[index].token = IntPtr.Zero;
                                 }
                                 else
                                 {
-                                    pinnedInBytes[index] = GCHandle.Alloc(securityBuffer.token, GCHandleType.Pinned);
-                                    inUnmanagedBuffer[index].token = Marshal.UnsafeAddrOfPinnedArrayElement(securityBuffer.token, securityBuffer.offset);
+                                    pinnedInBytes[index] = GCHandle.Alloc(
+                                        securityBuffer.token,
+                                        GCHandleType.Pinned
+                                    );
+                                    inUnmanagedBuffer[index].token =
+                                        Marshal.UnsafeAddrOfPinnedArrayElement(
+                                            securityBuffer.token,
+                                            securityBuffer.offset
+                                        );
                                 }
                             }
                         }
@@ -542,7 +581,10 @@ namespace System.IdentityModel
                         }
                         else
                         {
-                            outUnmanagedBuffer[0].token = Marshal.UnsafeAddrOfPinnedArrayElement(outSecBuffer.token, outSecBuffer.offset);
+                            outUnmanagedBuffer[0].token = Marshal.UnsafeAddrOfPinnedArrayElement(
+                                outSecBuffer.token,
+                                outSecBuffer.offset
+                            );
                         }
                         if (isSspiAllocated)
                         {
@@ -563,15 +605,22 @@ namespace System.IdentityModel
                             outSecurityBufferDescriptor,
                             ref outFlags,
                             outFreeContextBuffer
-                            );
+                        );
 
                         // Get unmanaged buffer with index 0 as the only one passed into PInvoke
                         outSecBuffer.size = outUnmanagedBuffer[0].count;
                         outSecBuffer.type = outUnmanagedBuffer[0].type;
                         if (outSecBuffer.size > 0)
                         {
-                            outSecBuffer.token = DiagnosticUtility.Utility.AllocateByteArray(outSecBuffer.size);
-                            Marshal.Copy(outUnmanagedBuffer[0].token, outSecBuffer.token, 0, outSecBuffer.size);
+                            outSecBuffer.token = DiagnosticUtility.Utility.AllocateByteArray(
+                                outSecBuffer.size
+                            );
+                            Marshal.Copy(
+                                outUnmanagedBuffer[0].token,
+                                outSecBuffer.token,
+                                0,
+                                outSecBuffer.size
+                            );
                         }
                         else
                         {
@@ -617,7 +666,8 @@ namespace System.IdentityModel
             SafeDeleteContext outContext,
             SecurityBufferDescriptor outputBuffer,
             ref SspiContextFlags outFlags,
-            SafeFreeContextBuffer handleTemplate)
+            SafeFreeContextBuffer handleTemplate
+        )
         {
             int errorCode = -1;
             bool b1 = false;
@@ -635,7 +685,7 @@ namespace System.IdentityModel
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 if (b1)
                 {
                     inCredentials.DangerousRelease();
@@ -659,9 +709,8 @@ namespace System.IdentityModel
                 }
                 else if (b1 && b2)
                 {
-
                     SSPIHandle credentialHandle = inCredentials._handle;
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // This API does not set Win32 Last Error.
                     errorCode = AcceptSecurityContext(
                         ref credentialHandle,
@@ -673,14 +722,17 @@ namespace System.IdentityModel
                         outputBuffer,
                         ref outFlags,
                         out timeStamp
-                        );
+                    );
 
                     //
                     // When a credential handle is first associated with the context we keep credential
                     // ref count bumped up to ensure ordered finalization.
                     // If the credential handle has been changed we de-ref the old one and associate the
                     //  context with the new cred handle but only if the call was successful.
-                    if (outContext._EffectiveCredential != inCredentials && (errorCode & 0x80000000) == 0)
+                    if (
+                        outContext._EffectiveCredential != inCredentials
+                        && (errorCode & 0x80000000) == 0
+                    )
                     {
                         // Disassociate the previous credential handle
                         if (outContext._EffectiveCredential != null)
@@ -697,7 +749,9 @@ namespace System.IdentityModel
                     // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
                     if (handleTemplate != null)
                     {
-                        handleTemplate.Set(((SecurityBufferStruct*)outputBuffer.UnmanagedPointer)->token); //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes
+                        handleTemplate.Set(
+                            ((SecurityBufferStruct*)outputBuffer.UnmanagedPointer)->token
+                        ); //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes
                         if (handleTemplate.IsInvalid)
                         {
                             handleTemplate.SetHandleAsInvalid();
@@ -727,7 +781,7 @@ namespace System.IdentityModel
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 if (b)
                 {
                     context.DangerousRelease();
@@ -738,10 +792,9 @@ namespace System.IdentityModel
             }
             finally
             {
-
                 if (b)
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                     status = ImpersonateSecurityContext(ref context._handle);
                     context.DangerousRelease();
@@ -750,7 +803,11 @@ namespace System.IdentityModel
             return status;
         }
 
-        public static int EncryptMessage(SafeDeleteContext context, SecurityBufferDescriptor inputOutput, uint sequenceNumber)
+        public static int EncryptMessage(
+            SafeDeleteContext context,
+            SecurityBufferDescriptor inputOutput,
+            uint sequenceNumber
+        )
         {
             int status = (int)SecurityStatus.InvalidHandle;
             bool b = false;
@@ -764,7 +821,7 @@ namespace System.IdentityModel
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 if (b)
                 {
                     context.DangerousRelease();
@@ -777,7 +834,7 @@ namespace System.IdentityModel
             {
                 if (b)
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                     status = EncryptMessage(ref context._handle, 0, inputOutput, sequenceNumber);
                     context.DangerousRelease();
@@ -786,7 +843,11 @@ namespace System.IdentityModel
             return status;
         }
 
-        public unsafe static int DecryptMessage(SafeDeleteContext context, SecurityBufferDescriptor inputOutput, uint sequenceNumber)
+        public static unsafe int DecryptMessage(
+            SafeDeleteContext context,
+            SecurityBufferDescriptor inputOutput,
+            uint sequenceNumber
+        )
         {
             int status = (int)SecurityStatus.InvalidHandle;
             bool b = false;
@@ -801,7 +862,7 @@ namespace System.IdentityModel
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 if (b)
                 {
                     context.DangerousRelease();
@@ -812,7 +873,6 @@ namespace System.IdentityModel
             }
             finally
             {
-
                 if (b)
                 {
 #pragma warning suppress 56523 // we don't take any action on the win32 error message.
@@ -824,7 +884,9 @@ namespace System.IdentityModel
             const uint SECQOP_WRAP_NO_ENCRYPT = 0x80000001;
             if (status == 0 && qop == SECQOP_WRAP_NO_ENCRYPT)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SspiPayloadNotEncrypted)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SspiPayloadNotEncrypted))
+                );
             }
 
             return status;
@@ -844,7 +906,7 @@ namespace System.IdentityModel
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 if (b)
                 {
                     DangerousRelease();
@@ -857,7 +919,7 @@ namespace System.IdentityModel
             {
                 if (b)
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. The API returns a error code.
                     status = QuerySecurityContextToken(ref _handle, out safeHandle);
                     DangerousRelease();
@@ -875,7 +937,7 @@ namespace System.IdentityModel
             if (this._EffectiveCredential != null)
                 this._EffectiveCredential.DangerousRelease();
 
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
             return DeleteSecurityContext(ref _handle) == 0;
         }
@@ -883,12 +945,15 @@ namespace System.IdentityModel
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        extern static int QuerySecurityContextToken(ref SSPIHandle phContext, [Out] out SafeCloseHandle handle);
+        static extern int QuerySecurityContextToken(
+            ref SSPIHandle phContext,
+            [Out] out SafeCloseHandle handle
+        );
 
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static unsafe int InitializeSecurityContextW(
+        internal static extern unsafe int InitializeSecurityContextW(
             ref SSPIHandle credentialHandle,
             [In] void* inContextPtr,
             [In] byte* targetName,
@@ -901,12 +966,12 @@ namespace System.IdentityModel
             [In, Out] SecurityBufferDescriptor outputBuffer,
             [In, Out] ref SspiContextFlags attributes,
             out long timestamp
-            );
+        );
 
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static unsafe int AcceptSecurityContext(
+        internal static extern unsafe int AcceptSecurityContext(
             ref SSPIHandle credentialHandle,
             [In] void* inContextPtr,
             [In] SecurityBufferDescriptor inputBuffer,
@@ -916,41 +981,37 @@ namespace System.IdentityModel
             [In, Out] SecurityBufferDescriptor outputBuffer,
             [In, Out] ref SspiContextFlags attributes,
             out long timestamp
-            );
+        );
 
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [SuppressUnmanagedCodeSecurity]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern static int DeleteSecurityContext(
-            ref SSPIHandle handlePtr
-            );
+        internal static extern int DeleteSecurityContext(ref SSPIHandle handlePtr);
 
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int ImpersonateSecurityContext(
-            ref SSPIHandle handlePtr
-            );
+        internal static extern int ImpersonateSecurityContext(ref SSPIHandle handlePtr);
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int EncryptMessage(
+        internal static extern int EncryptMessage(
             ref SSPIHandle contextHandle,
             [In] uint qualityOfProtection,
             [In, Out] SecurityBufferDescriptor inputOutput,
             [In] uint sequenceNumber
-            );
+        );
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal unsafe extern static int DecryptMessage(
+        internal static extern unsafe int DecryptMessage(
             ref SSPIHandle contextHandle,
             [In, Out] SecurityBufferDescriptor inputOutput,
             [In] uint sequenceNumber,
             uint* qualityOfProtection
-            );
+        );
     }
 
     class SafeFreeCredentials : SafeHandle
@@ -982,7 +1043,8 @@ namespace System.IdentityModel
             string package,
             CredentialUse intent,
             ref AuthIdentityEx authdata,
-            out SafeFreeCredentials outCredential)
+            out SafeFreeCredentials outCredential
+        )
         {
             int errorCode = -1;
             long timeStamp;
@@ -992,7 +1054,7 @@ namespace System.IdentityModel
             try { }
             finally
             {
-                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                 errorCode = AcquireCredentialsHandleW(
                     null,
@@ -1004,7 +1066,7 @@ namespace System.IdentityModel
                     null,
                     ref outCredential._handle,
                     out timeStamp
-                    );
+                );
                 if (errorCode != 0)
                 {
                     outCredential.SetHandleAsInvalid();
@@ -1017,7 +1079,8 @@ namespace System.IdentityModel
             string package,
             CredentialUse intent,
             ref AuthIdentityEx authIdentity,
-            out SafeFreeCredentials outCredential)
+            out SafeFreeCredentials outCredential
+        )
         {
             int errorCode = -1;
             long timeStamp;
@@ -1027,19 +1090,19 @@ namespace System.IdentityModel
             try { }
             finally
             {
-                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                 errorCode = AcquireCredentialsHandleW(
-                                null,
-                                package,
-                                (int)intent,
-                                null,
-                                ref authIdentity, // IntPtr.Zero,
-                                null,
-                                null,
-                                ref outCredential._handle,
-                                out timeStamp
-                                );
+                    null,
+                    package,
+                    (int)intent,
+                    null,
+                    ref authIdentity, // IntPtr.Zero,
+                    null,
+                    null,
+                    ref outCredential._handle,
+                    out timeStamp
+                );
 
                 if (errorCode != 0)
                 {
@@ -1053,7 +1116,8 @@ namespace System.IdentityModel
             string package,
             CredentialUse intent,
             ref SecureCredential authdata,
-            out SafeFreeCredentials outCredential)
+            out SafeFreeCredentials outCredential
+        )
         {
             int errorCode = -1;
             long timeStamp;
@@ -1073,19 +1137,19 @@ namespace System.IdentityModel
                 try { }
                 finally
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                     errorCode = AcquireCredentialsHandleW(
-                                    null,
-                                    package,
-                                    (int)intent,
-                                    null,
-                                    ref authdata,
-                                    null,
-                                    null,
-                                    ref outCredential._handle,
-                                    out timeStamp
-                                    );
+                        null,
+                        package,
+                        (int)intent,
+                        null,
+                        ref authdata,
+                        null,
+                        null,
+                        ref outCredential._handle,
+                        out timeStamp
+                    );
                     if (errorCode != 0)
                     {
                         outCredential.SetHandleAsInvalid();
@@ -1101,11 +1165,11 @@ namespace System.IdentityModel
         }
 
         public static unsafe int AcquireCredentialsHandle(
-         string package,
-         CredentialUse intent,
-         ref IntPtr ppAuthIdentity,
-         out SafeFreeCredentials outCredential
-         )
+            string package,
+            CredentialUse intent,
+            ref IntPtr ppAuthIdentity,
+            out SafeFreeCredentials outCredential
+        )
         {
             int errorCode = -1;
             long timeStamp;
@@ -1114,19 +1178,19 @@ namespace System.IdentityModel
             try { }
             finally
             {
-                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                 errorCode = AcquireCredentialsHandleW(
-                                    null,
-                                    package,
-                                    (int)intent,
-                                    null,
-                                    ppAuthIdentity,
-                                    null,
-                                    null,
-                                    ref outCredential._handle,
-                                    out timeStamp
-                                    );
+                    null,
+                    package,
+                    (int)intent,
+                    null,
+                    ppAuthIdentity,
+                    null,
+                    null,
+                    ref outCredential._handle,
+                    out timeStamp
+                );
                 if (errorCode != 0)
                 {
                     outCredential.SetHandleAsInvalid();
@@ -1138,14 +1202,14 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
             return FreeCredentialsHandle(ref _handle) == 0;
         }
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(SECURITY, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal extern static unsafe int AcquireCredentialsHandleW(
+        internal static extern unsafe int AcquireCredentialsHandleW(
             [In] string principal,
             [In] string moduleName,
             [In] int usage,
@@ -1155,11 +1219,11 @@ namespace System.IdentityModel
             [In] void* keyArgument,
             ref SSPIHandle handlePtr,
             [Out] out long timeStamp
-            );
+        );
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(SECURITY, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal extern static unsafe int AcquireCredentialsHandleW(
+        internal static extern unsafe int AcquireCredentialsHandleW(
             [In] string principal,
             [In] string moduleName,
             [In] int usage,
@@ -1169,11 +1233,11 @@ namespace System.IdentityModel
             [In] void* keyArgument,
             ref SSPIHandle handlePtr,
             [Out] out long timeStamp
-            );
+        );
 
         [ResourceExposure(ResourceScope.None)]
         [DllImport(SECURITY, ExactSpelling = true, CharSet = CharSet.Unicode, SetLastError = true)]
-        internal extern static unsafe int AcquireCredentialsHandleW(
+        internal static extern unsafe int AcquireCredentialsHandleW(
             [In] string principal,
             [In] string moduleName,
             [In] int usage,
@@ -1183,16 +1247,13 @@ namespace System.IdentityModel
             [In] void* keyArgument,
             ref SSPIHandle handlePtr,
             [Out] out long timeStamp
-            );
-
+        );
 
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int FreeCredentialsHandle(
-            ref SSPIHandle handlePtr
-            );
+        internal static extern int FreeCredentialsHandle(ref SSPIHandle handlePtr);
     }
 
     sealed class SafeFreeCertContext : SafeHandleZeroOrMinusOneIsInvalid
@@ -1200,7 +1261,8 @@ namespace System.IdentityModel
         const string CRYPT32 = "crypt32.dll";
         const string ADVAPI32 = "advapi32.dll";
 
-        internal SafeFreeCertContext() : base(true) { }
+        internal SafeFreeCertContext()
+            : base(true) { }
 
         // This must be ONLY called from this file and form a MustRun method
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -1215,12 +1277,13 @@ namespace System.IdentityModel
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertFreeCertificateContext(// Suppressing returned status check, it's always==TRUE,
-            [In] IntPtr certContext);
+        static extern bool CertFreeCertificateContext( // Suppressing returned status check, it's always==TRUE,
+            [In] IntPtr certContext
+        );
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error.
             return CertFreeCertificateContext(handle);
         }
@@ -1230,7 +1293,8 @@ namespace System.IdentityModel
     {
         const string SECURITY = "security.dll";
 
-        SafeFreeContextBuffer() : base(true) { }
+        SafeFreeContextBuffer()
+            : base(true) { }
 
         // This must be ONLY called from this file and form a MustRun method
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -1242,7 +1306,7 @@ namespace System.IdentityModel
         internal static int EnumeratePackages(out int pkgnum, out SafeFreeContextBuffer pkgArray)
         {
             int res = -1;
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. The API returns a error code.
             res = SafeFreeContextBuffer.EnumerateSecurityPackagesW(out pkgnum, out pkgArray);
 
@@ -1265,7 +1329,12 @@ namespace System.IdentityModel
         //
         // This method is run as non-interruptible.
         //
-        public static unsafe int QueryContextAttributes(SafeDeleteContext phContext, ContextAttribute contextAttribute, byte* buffer, SafeHandle refHandle)
+        public static unsafe int QueryContextAttributes(
+            SafeDeleteContext phContext,
+            ContextAttribute contextAttribute,
+            byte* buffer,
+            SafeHandle refHandle
+        )
         {
             int status = (int)SecurityStatus.InvalidHandle;
             bool b = false;
@@ -1282,7 +1351,7 @@ namespace System.IdentityModel
             {
                 if (System.Runtime.Fx.IsFatal(e))
                     throw;
-                
+
                 if (b)
                 {
                     phContext.DangerousRelease();
@@ -1295,9 +1364,13 @@ namespace System.IdentityModel
             {
                 if (b)
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. The API returns a error code.
-                    status = SafeFreeContextBuffer.QueryContextAttributesW(ref phContext._handle, contextAttribute, buffer);
+                    status = SafeFreeContextBuffer.QueryContextAttributesW(
+                        ref phContext._handle,
+                        contextAttribute,
+                        buffer
+                    );
                     phContext.DangerousRelease();
                 }
                 if (status == 0 && refHandle != null)
@@ -1306,7 +1379,10 @@ namespace System.IdentityModel
                     {
                         if (contextAttribute == ContextAttribute.SessionKey)
                         {
-                            IntPtr keyPtr = Marshal.ReadIntPtr(new IntPtr(buffer), SecPkgContext_SessionKey.SessionkeyOffset);
+                            IntPtr keyPtr = Marshal.ReadIntPtr(
+                                new IntPtr(buffer),
+                                SecPkgContext_SessionKey.SessionkeyOffset
+                            );
                             ((SafeFreeContextBuffer)refHandle).Set(keyPtr);
                         }
                         else
@@ -1330,7 +1406,7 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. The API returns a error code.
             return FreeContextBuffer(handle) == 0;
         }
@@ -1338,40 +1414,46 @@ namespace System.IdentityModel
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static unsafe int QueryContextAttributesW(
+        internal static extern unsafe int QueryContextAttributesW(
             ref SSPIHandle contextHandle,
             [In] ContextAttribute attribute,
-            [In] void* buffer);
+            [In] void* buffer
+        );
 
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
-        internal extern static int EnumerateSecurityPackagesW(
+        internal static extern int EnumerateSecurityPackagesW(
             [Out] out int pkgnum,
-            [Out] out SafeFreeContextBuffer handle);
+            [Out] out SafeFreeContextBuffer handle
+        );
 
         [DllImport(SECURITY, ExactSpelling = true, SetLastError = true)]
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        extern static int FreeContextBuffer(
-            [In] IntPtr contextBuffer);
+        static extern int FreeContextBuffer([In] IntPtr contextBuffer);
     }
 
     sealed class SafeCloseHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
         const string KERNEL32 = "kernel32.dll";
 
-        SafeCloseHandle() : base(true) { }
+        SafeCloseHandle()
+            : base(true) { }
+
         internal SafeCloseHandle(IntPtr handle, bool ownsHandle)
             : base(ownsHandle)
         {
-            DiagnosticUtility.DebugAssert(handle == IntPtr.Zero || !ownsHandle, "Unsafe to create a SafeHandle that owns a pre-existing handle before the SafeHandle was created.");
+            DiagnosticUtility.DebugAssert(
+                handle == IntPtr.Zero || !ownsHandle,
+                "Unsafe to create a SafeHandle that owns a pre-existing handle before the SafeHandle was created."
+            );
             SetHandle(handle);
         }
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // We are not interested to throw an exception here. We can ignore the Last Error code.
             return CloseHandle(handle);
         }
@@ -1380,7 +1462,7 @@ namespace System.IdentityModel
         [SuppressUnmanagedCodeSecurity]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CloseHandle(IntPtr handle);
+        static extern bool CloseHandle(IntPtr handle);
     }
 
 #pragma warning disable 618 // have not moved to the v4 security model yet
@@ -1388,13 +1470,17 @@ namespace System.IdentityModel
 #pragma warning restore 618
     sealed class SafeHGlobalHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        SafeHGlobalHandle() : base(true) { }
+        SafeHGlobalHandle()
+            : base(true) { }
 
         // 0 is an Invalid Handle
         SafeHGlobalHandle(IntPtr handle)
             : base(true)
         {
-            DiagnosticUtility.DebugAssert(handle == IntPtr.Zero, "SafeHGlobalHandle constructor can only be called with IntPtr.Zero.");
+            DiagnosticUtility.DebugAssert(
+                handle == IntPtr.Zero,
+                "SafeHGlobalHandle constructor can only be called with IntPtr.Zero."
+            );
             SetHandle(handle);
         }
 
@@ -1434,12 +1520,14 @@ namespace System.IdentityModel
         {
             if (cb < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("cb", SR.GetString(SR.ValueMustBeNonNegative)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("cb", SR.GetString(SR.ValueMustBeNonNegative))
+                );
             }
 
             SafeHGlobalHandle result = new SafeHGlobalHandle();
 
-            // CER 
+            // CER
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
             finally
@@ -1453,7 +1541,8 @@ namespace System.IdentityModel
 
     sealed class SafeLsaLogonProcessHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        SafeLsaLogonProcessHandle() : base(true) { }
+        SafeLsaLogonProcessHandle()
+            : base(true) { }
 
         // 0 is an Invalid Handle
         internal SafeLsaLogonProcessHandle(IntPtr handle)
@@ -1467,7 +1556,7 @@ namespace System.IdentityModel
             get { return new SafeLsaLogonProcessHandle(IntPtr.Zero); }
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             // LsaDeregisterLogonProcess returns an NTSTATUS
             return NativeMethods.LsaDeregisterLogonProcess(handle) >= 0;
@@ -1476,7 +1565,8 @@ namespace System.IdentityModel
 
     sealed class SafeLsaReturnBufferHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        SafeLsaReturnBufferHandle() : base(true) { }
+        SafeLsaReturnBufferHandle()
+            : base(true) { }
 
         // 0 is an Invalid Handle
         internal SafeLsaReturnBufferHandle(IntPtr handle)
@@ -1490,7 +1580,7 @@ namespace System.IdentityModel
             get { return new SafeLsaReturnBufferHandle(IntPtr.Zero); }
         }
 
-        override protected bool ReleaseHandle()
+        protected override bool ReleaseHandle()
         {
             // LsaFreeReturnBuffer returns an NTSTATUS
             return NativeMethods.LsaFreeReturnBuffer(handle) >= 0;

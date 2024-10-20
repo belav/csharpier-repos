@@ -65,7 +65,9 @@ internal sealed class ManifestFileInfo : IFileInfo
         var stream = Assembly.GetManifestResourceStream(ManifestFile.ResourcePath);
         if (stream == null)
         {
-            throw new InvalidOperationException($"Couldn't get resource at '{ManifestFile.ResourcePath}'.");
+            throw new InvalidOperationException(
+                $"Couldn't get resource at '{ManifestFile.ResourcePath}'."
+            );
         }
 
         return stream;

@@ -29,7 +29,11 @@ public interface IConventionStoredProcedureParameterBuilder : IConventionAnnotat
     ///     An <see cref="IConventionStoredProcedureParameterBuilder" /> to continue configuration if the annotation was set,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionStoredProcedureParameterBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionStoredProcedureParameterBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -46,7 +50,8 @@ public interface IConventionStoredProcedureParameterBuilder : IConventionAnnotat
     new IConventionStoredProcedureParameterBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -57,7 +62,10 @@ public interface IConventionStoredProcedureParameterBuilder : IConventionAnnotat
     ///     An <see cref="IConventionStoredProcedureParameterBuilder" /> to continue configuration if the annotation was set,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionStoredProcedureParameterBuilder? HasNoAnnotation(string name, bool fromDataAnnotation = false);
+    new IConventionStoredProcedureParameterBuilder? HasNoAnnotation(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the parameter name.
@@ -71,7 +79,10 @@ public interface IConventionStoredProcedureParameterBuilder : IConventionAnnotat
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureParameterBuilder? HasName(string name, bool fromDataAnnotation = false);
+    IConventionStoredProcedureParameterBuilder? HasName(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given parameter name can be set.
@@ -93,7 +104,10 @@ public interface IConventionStoredProcedureParameterBuilder : IConventionAnnotat
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureParameterBuilder? HasDirection(ParameterDirection direction, bool fromDataAnnotation = false);
+    IConventionStoredProcedureParameterBuilder? HasDirection(
+        ParameterDirection direction,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given direction can be configured on the corresponding stored procedure parameter.

@@ -18,7 +18,8 @@ namespace System.ServiceModel.Configuration
         internal const string AllowedImpersonationLevel = "allowedImpersonationLevel";
         internal const string AllowInsecureTransport = "allowInsecureTransport";
         internal const string AllowNtlm = "allowNtlm";
-        internal const string AllowSerializedSigningTokenOnReply = "allowSerializedSigningTokenOnReply";
+        internal const string AllowSerializedSigningTokenOnReply =
+            "allowSerializedSigningTokenOnReply";
         internal const string AllowUntrustedRsaIssuers = "allowUntrustedRsaIssuers";
         internal const string AlternativeIssuedTokenParameters = "alternativeIssuedTokenParameters";
         internal const string ApplicationContainerSettings = "applicationContainerSettings";
@@ -109,7 +110,8 @@ namespace System.ServiceModel.Configuration
         internal const string CustomBindingCollectionElementName = "customBinding";
         internal const string CustomCertificateValidatorType = "customCertificateValidatorType";
         internal const string CustomDeadLetterQueue = "customDeadLetterQueue";
-        internal const string CustomUserNamePasswordValidatorType = "customUserNamePasswordValidatorType";
+        internal const string CustomUserNamePasswordValidatorType =
+            "customUserNamePasswordValidatorType";
         internal const string DataContractSerializerSectionName = "dataContractSerializer";
         internal const string DeadLetterQueue = "deadLetterQueue";
         internal const string DecompressionEnabled = "decompressionEnabled";
@@ -166,7 +168,8 @@ namespace System.ServiceModel.Configuration
         internal const string HttpHelpPageBinding = "httpHelpPageBinding";
         internal const string HttpHelpPageBindingConfiguration = "httpHelpPageBindingConfiguration";
         internal const string HttpsHelpPageBinding = "httpsHelpPageBinding";
-        internal const string HttpsHelpPageBindingConfiguration = "httpsHelpPageBindingConfiguration";
+        internal const string HttpsHelpPageBindingConfiguration =
+            "httpsHelpPageBindingConfiguration";
         internal const string HttpGetBinding = "httpGetBinding";
         internal const string HttpGetBindingConfiguration = "httpGetBindingConfiguration";
         internal const string HttpsGetBinding = "httpsGetBinding";
@@ -177,10 +180,11 @@ namespace System.ServiceModel.Configuration
         internal const string MexHttpsBindingCollectionElementName = "mexHttpsBinding";
         internal const string ID = "ID";
         internal const string Identity = "identity";
-        internal const string IdentityConfiguration = "identityConfiguration";        
+        internal const string IdentityConfiguration = "identityConfiguration";
         internal const string IdleTimeout = "idleTimeout";
         internal const string IgnoreExtensionDataObject = "ignoreExtensionDataObject";
-        internal const string ImpersonateCallerForAllOperations = "impersonateCallerForAllOperations";
+        internal const string ImpersonateCallerForAllOperations =
+            "impersonateCallerForAllOperations";
         internal const string ImpersonateOnSerializingReply = "impersonateOnSerializingReply";
         internal const string ImpersonationLevel = "impersonationLevel";
         internal const string InactivityTimeout = "inactivityTimeout";
@@ -194,7 +198,8 @@ namespace System.ServiceModel.Configuration
         internal const string IssuedToken = "issuedToken";
         internal const string IssuedTokenAuthentication = "issuedTokenAuthentication";
         internal const string IssuedTokenParameters = "issuedTokenParameters";
-        internal const string IssuedTokenRenewalThresholdPercentage = "issuedTokenRenewalThresholdPercentage";
+        internal const string IssuedTokenRenewalThresholdPercentage =
+            "issuedTokenRenewalThresholdPercentage";
         internal const string IssuedTokenType = "issuedTokenType";
         internal const string Issuer = "issuer";
         internal const string IssuerAddress = "issuerAddress";
@@ -223,7 +228,8 @@ namespace System.ServiceModel.Configuration
         internal const string LogMessagesAtServiceLevel = "logMessagesAtServiceLevel";
         internal const string LogMessagesAtTransportLevel = "logMessagesAtTransportLevel";
         internal const string ManualAddressing = "manualAddressing";
-        internal const string MapClientCertificateToWindowsAccount = "mapClientCertificateToWindowsAccount";
+        internal const string MapClientCertificateToWindowsAccount =
+            "mapClientCertificateToWindowsAccount";
         internal const string MaxAcceptedChannels = "maxAcceptedChannels";
         internal const string MaxArrayLength = "maxArrayLength";
         internal const string MaxBatchSize = "maxBatchSize";
@@ -244,7 +250,8 @@ namespace System.ServiceModel.Configuration
         internal const string MaxMessagesToLog = "maxMessagesToLog";
         internal const string MaxNameTableCharCount = "maxNameTableCharCount";
         internal const string MaxOutboundChannelsPerEndpoint = "maxOutboundChannelsPerEndpoint";
-        internal const string MaxOutboundConnectionsPerEndpoint = "maxOutboundConnectionsPerEndpoint";
+        internal const string MaxOutboundConnectionsPerEndpoint =
+            "maxOutboundConnectionsPerEndpoint";
         internal const string MaxOutputDelay = "maxOutputDelay";
         internal const string MaxPendingAccepts = "maxPendingAccepts";
         internal const string MaxPendingChannels = "maxPendingChannels";
@@ -274,11 +281,13 @@ namespace System.ServiceModel.Configuration
         internal const string MessageSenderAuthentication = "messageSenderAuthentication";
         internal const string MessageVersion = "messageVersion";
         internal const string Metadata = "metadata";
-        internal const string MinFreeMemoryPercentageToActivateService = "minFreeMemoryPercentageToActivateService";
+        internal const string MinFreeMemoryPercentageToActivateService =
+            "minFreeMemoryPercentageToActivateService";
         internal const string Mode = "mode";
         internal const string MsmqAuthenticationMode = "msmqAuthenticationMode";
         internal const string MsmqEncryptionAlgorithm = "msmqEncryptionAlgorithm";
-        internal const string MsmqIntegrationBindingCollectionElementName = "msmqIntegrationBinding";
+        internal const string MsmqIntegrationBindingCollectionElementName =
+            "msmqIntegrationBinding";
         internal const string MsmqIntegrationSectionName = "msmqIntegration";
         internal const string MsmqProtectionLevel = "msmqProtectionLevel";
         internal const string MsmqSecureHashAlgorithm = "msmqSecureHashAlgorithm";
@@ -331,7 +340,7 @@ namespace System.ServiceModel.Configuration
         internal const string PropagateActivity = "propagateActivity";
         internal const string ProtectionLevel = "protectionLevel";
         internal const string ProtectTokens = "protectTokens";
-        internal const string ProtocolMappingSectionName = "protocolMapping";        
+        internal const string ProtocolMappingSectionName = "protocolMapping";
         internal const string ProxyAddress = "proxyAddress";
         internal const string ProxyAuthenticationScheme = "proxyAuthenticationScheme";
         internal const string ProxyCredentialType = "proxyCredentialType";
@@ -354,7 +363,8 @@ namespace System.ServiceModel.Configuration
         internal const string RequestInitializationTimeout = "requestInitializationTimeout";
         internal const string RequireClientCertificate = "requireClientCertificate";
         internal const string RequireDerivedKeys = "requireDerivedKeys";
-        internal const string RequireSecurityContextCancellation = "requireSecurityContextCancellation";
+        internal const string RequireSecurityContextCancellation =
+            "requireSecurityContextCancellation";
         internal const string RequireSignatureConfirmation = "requireSignatureConfirmation";
         internal const string RetryCycleDelay = "retryCycleDelay";
         internal const string RevocationMode = "revocationMode";
@@ -374,8 +384,9 @@ namespace System.ServiceModel.Configuration
         internal const string SerializationFormat = "serializationFormat";
         internal const string Service = "service";
         internal const string ServiceActivations = "serviceActivations";
-        internal const string ServiceAuthenticationManagerSectionName = "serviceAuthenticationManager";        
-        internal const string ServiceAuthenticationManagerType = "serviceAuthenticationManagerType";        
+        internal const string ServiceAuthenticationManagerSectionName =
+            "serviceAuthenticationManager";
+        internal const string ServiceAuthenticationManagerType = "serviceAuthenticationManagerType";
         internal const string ServiceAuthorizationAuditLevel = "serviceAuthorizationAuditLevel";
         internal const string ServiceAuthorizationManagerType = "serviceAuthorizationManagerType";
         internal const string ServiceAuthorizationSectionName = "serviceAuthorization";
@@ -404,7 +415,7 @@ namespace System.ServiceModel.Configuration
         internal const string SslProtocols = "sslProtocols";
         internal const string SslStreamSecuritySectionName = "sslStreamSecurity";
         internal const string StandardEndpoint = "standardEndpoint";
-        internal const string StandardEndpointsSectionName = "standardEndpoints";        
+        internal const string StandardEndpointsSectionName = "standardEndpoints";
         internal const string StoreLocation = "storeLocation";
         internal const string StoreName = "storeName";
         internal const string SubProtocol = "subProtocol";
@@ -445,12 +456,17 @@ namespace System.ServiceModel.Configuration
         internal const string TypeLibID = "typeLibID";
         internal const string TypeLibVersion = "typeLibVersion";
         internal const string UdpBindingCollectionElementName = "udpBinding";
-        internal const string UdpBindingCollectionElementType = "System.ServiceModel.Configuration.UdpBindingCollectionElement, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"; 
-        internal const string UdpTransportElementType = "System.ServiceModel.Configuration.UdpTransportElement, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
-        internal const string UdpTransportImporterType = "System.ServiceModel.Channels.UdpTransportImporter, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+        internal const string UdpBindingCollectionElementType =
+            "System.ServiceModel.Configuration.UdpBindingCollectionElement, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+        internal const string UdpTransportElementType =
+            "System.ServiceModel.Configuration.UdpTransportElement, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
+        internal const string UdpTransportImporterType =
+            "System.ServiceModel.Channels.UdpTransportImporter, System.ServiceModel.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35";
         internal const string UdpTransportSectionName = "udpTransport";
-        internal const string UnrecognizedPolicyAssertionSectionName = "unrecognizedPolicyAssertions";
-        internal const string UnsafeConnectionNtlmAuthentication = "unsafeConnectionNtlmAuthentication";
+        internal const string UnrecognizedPolicyAssertionSectionName =
+            "unrecognizedPolicyAssertions";
+        internal const string UnsafeConnectionNtlmAuthentication =
+            "unsafeConnectionNtlmAuthentication";
         internal const string Url = "url";
         internal const string UseActiveDirectory = "useActiveDirectory";
         internal const string UseDefaultWebProxy = "useDefaultWebProxy";
@@ -460,7 +476,8 @@ namespace System.ServiceModel.Configuration
         internal const string UserNameAuthentication = "userNameAuthentication";
         internal const string UserNamePasswordValidationMode = "userNamePasswordValidationMode";
         internal const string UserPrincipalName = "userPrincipalName";
-        internal const string UseRequestHeadersForMetadataAddress = "useRequestHeadersForMetadataAddress";
+        internal const string UseRequestHeadersForMetadataAddress =
+            "useRequestHeadersForMetadataAddress";
         internal const string UseSourceJournal = "useSourceJournal";
         internal const string UseStrTransform = "useStrTransform";
         internal const string ValidityDuration = "validityDuration";
@@ -474,52 +491,88 @@ namespace System.ServiceModel.Configuration
         internal const string WmiProviderEnabled = "wmiProviderEnabled";
         internal const string WriteEncoding = "writeEncoding";
         internal const string WSAtomicTransactionOctober2004 = "WSAtomicTransactionOctober2004";
-        internal const string WSAtomicTransaction11 = "WSAtomicTransaction11";        
+        internal const string WSAtomicTransaction11 = "WSAtomicTransaction11";
         internal const string WsdlImporters = "wsdlImporters";
         internal const string WSDualHttpBindingCollectionElementName = "wsDualHttpBinding";
-        internal const string WSFederationHttpBindingCollectionElementName = "wsFederationHttpBinding";
-        internal const string WS2007FederationHttpBindingCollectionElementName = "ws2007FederationHttpBinding";
+        internal const string WSFederationHttpBindingCollectionElementName =
+            "wsFederationHttpBinding";
+        internal const string WS2007FederationHttpBindingCollectionElementName =
+            "ws2007FederationHttpBinding";
         internal const string WS2007HttpBindingCollectionElementName = "ws2007HttpBinding";
         internal const string WSHttpBindingCollectionElementName = "wsHttpBinding";
         internal const string WSReliableMessaging11 = "WSReliableMessaging11";
         internal const string WSReliableMessagingFebruary2005 = "WSReliableMessagingFebruary2005";
-        internal const string WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 = "WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10";
-        internal const string WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11 = "WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11";
-        internal const string WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 = "WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10";
-        internal const string WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 = "WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10";
-        internal const string WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12 = "WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12";
-        internal const string WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 = "WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10";
+        internal const string WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 =
+            "WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10";
+        internal const string WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11 =
+            "WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11";
+        internal const string WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10 =
+            "WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10";
+        internal const string WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 =
+            "WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10";
+        internal const string WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12 =
+            "WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12";
+        internal const string WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 =
+            "WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10";
         internal const string X509FindType = "x509FindType";
         internal const string XmlElement = "xmlElement";
 
         internal static string BehaviorsSectionPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.BehaviorsSectionName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(
+                    ConfigurationStrings.BehaviorsSectionName
+                );
+            }
         }
 
         internal static string BindingsSectionGroupPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.BindingsSectionGroupName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(
+                    ConfigurationStrings.BindingsSectionGroupName
+                );
+            }
         }
 
         internal static string ClientSectionPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ClientSectionName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ClientSectionName);
+            }
         }
 
         internal static string ComContractsSectionPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ComContractsSectionName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(
+                    ConfigurationStrings.ComContractsSectionName
+                );
+            }
         }
 
         internal static string CommonBehaviorsSectionPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.CommonBehaviorsSectionName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(
+                    ConfigurationStrings.CommonBehaviorsSectionName
+                );
+            }
         }
 
         internal static string DiagnosticSectionPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.DiagnosticSectionName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(
+                    ConfigurationStrings.DiagnosticSectionName
+                );
+            }
         }
 
         internal static string ExtensionsSectionPath
@@ -529,22 +582,42 @@ namespace System.ServiceModel.Configuration
 
         internal static string ProtocolMappingSectionPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ProtocolMappingSectionName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(
+                    ConfigurationStrings.ProtocolMappingSectionName
+                );
+            }
         }
 
         internal static string ServiceHostingEnvironmentSectionPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ServiceHostingEnvironmentSectionName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(
+                    ConfigurationStrings.ServiceHostingEnvironmentSectionName
+                );
+            }
         }
 
         internal static string ServicesSectionPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.ServicesSectionName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(
+                    ConfigurationStrings.ServicesSectionName
+                );
+            }
         }
 
         internal static string StandardEndpointsSectionPath
         {
-            get { return ConfigurationHelpers.GetSectionPath(ConfigurationStrings.StandardEndpointsSectionName); }
+            get
+            {
+                return ConfigurationHelpers.GetSectionPath(
+                    ConfigurationStrings.StandardEndpointsSectionName
+                );
+            }
         }
     }
 }

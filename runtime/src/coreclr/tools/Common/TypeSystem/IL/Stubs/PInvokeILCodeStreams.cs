@@ -12,6 +12,7 @@ namespace Internal.IL.Stubs
         public ILCodeStream ReturnValueMarshallingCodeStream { get; }
         public ILCodeStream UnmarshallingCodestream { get; }
         public ILCodeStream CleanupCodeStream { get; }
+
         public PInvokeILCodeStreams()
         {
             Emitter = new ILEmitter();

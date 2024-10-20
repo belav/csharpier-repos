@@ -30,44 +30,44 @@ namespace System.ServiceModel.Description
         string workflowDefinitionPath;
         string workflowRulesPath;
 
-        public WorkflowServiceBehavior(Type workflowType) :
-            this(new CompiledWorkflowDefinitionContext(workflowType))
-        {
-
-        }
+        public WorkflowServiceBehavior(Type workflowType)
+            : this(new CompiledWorkflowDefinitionContext(workflowType)) { }
 
         public WorkflowServiceBehavior(string workflowDefinitionPath)
-            :
-            this(workflowDefinitionPath, null)
-        {
-
-        }
+            : this(workflowDefinitionPath, null) { }
 
         public WorkflowServiceBehavior(string workflowDefinitionPath, string ruleDefinitionPath)
-            :
-            this(new StreamedWorkflowDefinitionContext(workflowDefinitionPath, ruleDefinitionPath, null))
+            : this(
+                new StreamedWorkflowDefinitionContext(
+                    workflowDefinitionPath,
+                    ruleDefinitionPath,
+                    null
+                )
+            )
         {
             this.workflowDefinitionPath = workflowDefinitionPath;
             this.workflowRulesPath = ruleDefinitionPath;
         }
 
         public WorkflowServiceBehavior(Stream workflowDefinitionStream)
-            : this(new StreamedWorkflowDefinitionContext(workflowDefinitionStream, null, null))
-        {
-
-        }
+            : this(new StreamedWorkflowDefinitionContext(workflowDefinitionStream, null, null)) { }
 
         public WorkflowServiceBehavior(Stream workflowDefinitionStream, Stream ruleDefinitionStream)
-            : this(new StreamedWorkflowDefinitionContext(workflowDefinitionStream, ruleDefinitionStream, null))
-        {
-
-        }
+            : this(
+                new StreamedWorkflowDefinitionContext(
+                    workflowDefinitionStream,
+                    ruleDefinitionStream,
+                    null
+                )
+            ) { }
 
         internal WorkflowServiceBehavior(WorkflowDefinitionContext workflowDefinitionContext)
         {
             if (workflowDefinitionContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("workflowDefinitionContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "workflowDefinitionContext"
+                );
             }
 
             this.workflowDefinitionContext = workflowDefinitionContext;
@@ -77,15 +77,14 @@ namespace System.ServiceModel.Description
 
         public AddressFilterMode AddressFilterMode
         {
-            get
-            {
-                return this.addressFilterMode;
-            }
+            get { return this.addressFilterMode; }
             set
             {
                 if (!AddressFilterModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.addressFilterMode = value;
             }
@@ -93,10 +92,7 @@ namespace System.ServiceModel.Description
 
         public string ConfigurationName
         {
-            get
-            {
-                return this.configurationName;
-            }
+            get { return this.configurationName; }
             set
             {
                 if (value == null)
@@ -109,46 +105,25 @@ namespace System.ServiceModel.Description
 
         public bool IgnoreExtensionDataObject
         {
-            get
-            {
-                return this.ignoreExtensionDataObject;
-            }
-            set
-            {
-                this.ignoreExtensionDataObject = value;
-            }
+            get { return this.ignoreExtensionDataObject; }
+            set { this.ignoreExtensionDataObject = value; }
         }
 
         public bool IncludeExceptionDetailInFaults
         {
-            get
-            {
-                return this.includeExceptionDetailInFaults;
-            }
-            set
-            {
-                this.includeExceptionDetailInFaults = value;
-            }
+            get { return this.includeExceptionDetailInFaults; }
+            set { this.includeExceptionDetailInFaults = value; }
         }
 
         public int MaxItemsInObjectGraph
         {
-            get
-            {
-                return this.maxItemsInObjectGraph;
-            }
-            set
-            {
-                this.maxItemsInObjectGraph = value;
-            }
+            get { return this.maxItemsInObjectGraph; }
+            set { this.maxItemsInObjectGraph = value; }
         }
 
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
             set
             {
                 if (value == null)
@@ -161,10 +136,7 @@ namespace System.ServiceModel.Description
 
         public string Namespace
         {
-            get
-            {
-                return this.nameSpace;
-            }
+            get { return this.nameSpace; }
             set
             {
                 if (value == null)
@@ -177,35 +149,27 @@ namespace System.ServiceModel.Description
 
         public bool UseSynchronizationContext
         {
-            get
-            {
-                return this.useSynchronizationContext;
-            }
-            set
-            {
-                this.useSynchronizationContext = value;
-            }
+            get { return this.useSynchronizationContext; }
+            set { this.useSynchronizationContext = value; }
         }
 
         public bool ValidateMustUnderstand
         {
-            get
-            {
-                return this.validateMustUnderstand;
-            }
-            set
-            {
-                this.validateMustUnderstand = value;
-            }
+            get { return this.validateMustUnderstand; }
+            set { this.validateMustUnderstand = value; }
         }
 
+        public void AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-        public void AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
-        {
-
-        }
-
-        public void ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
+        public void ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (description == null)
             {
@@ -218,15 +182,22 @@ namespace System.ServiceModel.Description
             }
             if (description.Behaviors == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("description", SR2.GetString(SR2.NoBehaviors));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "description",
+                    SR2.GetString(SR2.NoBehaviors)
+                );
             }
             if (description.Endpoints == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("description", SR2.GetString(SR2.NoEndpoints));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "description",
+                    SR2.GetString(SR2.NoEndpoints)
+                );
             }
 
             bool syncContextRegistered = false;
-            WorkflowRuntimeBehavior workflowRuntimeBehavior = description.Behaviors.Find<WorkflowRuntimeBehavior>();
+            WorkflowRuntimeBehavior workflowRuntimeBehavior =
+                description.Behaviors.Find<WorkflowRuntimeBehavior>();
 
             if (workflowRuntimeBehavior == null)
             {
@@ -234,7 +205,8 @@ namespace System.ServiceModel.Description
                 description.Behaviors.Add(workflowRuntimeBehavior);
             }
 
-            WorkflowPersistenceService persistenceService = workflowRuntimeBehavior.WorkflowRuntime.GetService<WorkflowPersistenceService>();
+            WorkflowPersistenceService persistenceService =
+                workflowRuntimeBehavior.WorkflowRuntime.GetService<WorkflowPersistenceService>();
             if (persistenceService != null)
             {
                 bool wasRuntimeStarted = workflowRuntimeBehavior.WorkflowRuntime.IsStarted;
@@ -243,41 +215,56 @@ namespace System.ServiceModel.Description
                     workflowRuntimeBehavior.WorkflowRuntime.StopRuntime();
                 }
                 workflowRuntimeBehavior.WorkflowRuntime.RemoveService(persistenceService);
-                workflowRuntimeBehavior.WorkflowRuntime.AddService(new SkipUnloadOnFirstIdleWorkflowPersistenceService(persistenceService));
+                workflowRuntimeBehavior.WorkflowRuntime.AddService(
+                    new SkipUnloadOnFirstIdleWorkflowPersistenceService(persistenceService)
+                );
                 if (wasRuntimeStarted)
                 {
                     workflowRuntimeBehavior.WorkflowRuntime.StartRuntime();
                 }
             }
 
-            this.workflowDefinitionContext.Register(workflowRuntimeBehavior.WorkflowRuntime, workflowRuntimeBehavior.ValidateOnCreate);
+            this.workflowDefinitionContext.Register(
+                workflowRuntimeBehavior.WorkflowRuntime,
+                workflowRuntimeBehavior.ValidateOnCreate
+            );
 
-            WorkflowInstanceContextProvider instanceContextProvider = new WorkflowInstanceContextProvider(
-                serviceHostBase,
-                false,
-                this.workflowDefinitionContext
+            WorkflowInstanceContextProvider instanceContextProvider =
+                new WorkflowInstanceContextProvider(
+                    serviceHostBase,
+                    false,
+                    this.workflowDefinitionContext
                 );
 
             WorkflowInstanceContextProvider singleCallInstanceContextProvider = null;
 
-            IInstanceProvider instanceProvider = new WorkflowInstanceProvider(instanceContextProvider);
-            ServiceDebugBehavior serviceDebugBehavior = description.Behaviors.Find<ServiceDebugBehavior>();
+            IInstanceProvider instanceProvider = new WorkflowInstanceProvider(
+                instanceContextProvider
+            );
+            ServiceDebugBehavior serviceDebugBehavior =
+                description.Behaviors.Find<ServiceDebugBehavior>();
 
             bool includeExceptionDetailsInFaults = this.IncludeExceptionDetailInFaults;
             if (serviceDebugBehavior != null)
             {
-                includeExceptionDetailsInFaults |= serviceDebugBehavior.IncludeExceptionDetailInFaults;
+                includeExceptionDetailsInFaults |=
+                    serviceDebugBehavior.IncludeExceptionDetailInFaults;
             }
 
-            IErrorHandler workflowOperationErrorHandler = new WorkflowOperationErrorHandler(includeExceptionDetailsInFaults);
+            IErrorHandler workflowOperationErrorHandler = new WorkflowOperationErrorHandler(
+                includeExceptionDetailsInFaults
+            );
 
-            foreach (ChannelDispatcherBase channelDispatcherBase in serviceHostBase.ChannelDispatchers)
+            foreach (
+                ChannelDispatcherBase channelDispatcherBase in serviceHostBase.ChannelDispatchers
+            )
             {
                 ChannelDispatcher channelDispatcher = channelDispatcherBase as ChannelDispatcher;
 
                 if (channelDispatcher != null && channelDispatcher.HasApplicationEndpoints())
                 {
-                    channelDispatcher.IncludeExceptionDetailInFaults = includeExceptionDetailsInFaults;
+                    channelDispatcher.IncludeExceptionDetailInFaults =
+                        includeExceptionDetailsInFaults;
                     channelDispatcher.ErrorHandlers.Add(workflowOperationErrorHandler);
                     foreach (EndpointDispatcher endPointDispatcher in channelDispatcher.Endpoints)
                     {
@@ -286,11 +273,15 @@ namespace System.ServiceModel.Description
                             continue;
                         }
 
-                        ServiceEndpoint serviceEndPoint = description.Endpoints.Find(new XmlQualifiedName(endPointDispatcher.ContractName, endPointDispatcher.ContractNamespace));
+                        ServiceEndpoint serviceEndPoint = description.Endpoints.Find(
+                            new XmlQualifiedName(
+                                endPointDispatcher.ContractName,
+                                endPointDispatcher.ContractNamespace
+                            )
+                        );
 
                         if (serviceEndPoint != null)
                         {
-
                             DispatchRuntime dispatchRuntime = endPointDispatcher.DispatchRuntime;
 
                             dispatchRuntime.AutomaticInputSessionShutdown = true;
@@ -303,52 +294,79 @@ namespace System.ServiceModel.Description
                             }
                             else if (!syncContextRegistered)
                             {
-                                SynchronizationContextWorkflowSchedulerService syncSchedulerService = workflowRuntimeBehavior.WorkflowRuntime.GetService<SynchronizationContextWorkflowSchedulerService>();
-                                Fx.Assert(syncSchedulerService != null, "Wrong Synchronization Context Set");
-                                syncSchedulerService.SetSynchronizationContext(dispatchRuntime.SynchronizationContext);
+                                SynchronizationContextWorkflowSchedulerService syncSchedulerService =
+                                    workflowRuntimeBehavior.WorkflowRuntime.GetService<SynchronizationContextWorkflowSchedulerService>();
+                                Fx.Assert(
+                                    syncSchedulerService != null,
+                                    "Wrong Synchronization Context Set"
+                                );
+                                syncSchedulerService.SetSynchronizationContext(
+                                    dispatchRuntime.SynchronizationContext
+                                );
                                 syncContextRegistered = true;
                             }
 
                             if (!endPointDispatcher.AddressFilterSetExplicit)
                             {
-                                EndpointAddress endPointAddress = endPointDispatcher.OriginalAddress;
-                                if ((endPointAddress == null) || (this.AddressFilterMode == AddressFilterMode.Any))
+                                EndpointAddress endPointAddress =
+                                    endPointDispatcher.OriginalAddress;
+                                if (
+                                    (endPointAddress == null)
+                                    || (this.AddressFilterMode == AddressFilterMode.Any)
+                                )
                                 {
                                     endPointDispatcher.AddressFilter = new MatchAllMessageFilter();
                                 }
                                 else if (this.AddressFilterMode == AddressFilterMode.Prefix)
                                 {
-                                    endPointDispatcher.AddressFilter = new PrefixEndpointAddressMessageFilter(endPointAddress);
+                                    endPointDispatcher.AddressFilter =
+                                        new PrefixEndpointAddressMessageFilter(endPointAddress);
                                 }
                                 else if (this.AddressFilterMode == AddressFilterMode.Exact)
                                 {
-                                    endPointDispatcher.AddressFilter = new EndpointAddressMessageFilter(endPointAddress);
+                                    endPointDispatcher.AddressFilter =
+                                        new EndpointAddressMessageFilter(endPointAddress);
                                 }
                             }
 
                             if (serviceEndPoint.Contract.SessionMode != SessionMode.NotAllowed)
                             {
-                                endPointDispatcher.DispatchRuntime.InstanceContextProvider = instanceContextProvider;
+                                endPointDispatcher.DispatchRuntime.InstanceContextProvider =
+                                    instanceContextProvider;
                             }
                             else
                             {
                                 if (singleCallInstanceContextProvider == null)
                                 {
-                                    singleCallInstanceContextProvider = new WorkflowInstanceContextProvider(
-                                        serviceHostBase,
-                                        true,
-                                        this.workflowDefinitionContext);
+                                    singleCallInstanceContextProvider =
+                                        new WorkflowInstanceContextProvider(
+                                            serviceHostBase,
+                                            true,
+                                            this.workflowDefinitionContext
+                                        );
                                 }
-                                endPointDispatcher.DispatchRuntime.InstanceContextProvider = singleCallInstanceContextProvider;
+                                endPointDispatcher.DispatchRuntime.InstanceContextProvider =
+                                    singleCallInstanceContextProvider;
                             }
-                            endPointDispatcher.DispatchRuntime.MessageInspectors.Add(new DurableMessageDispatchInspector(serviceEndPoint.Contract.SessionMode));
+                            endPointDispatcher.DispatchRuntime.MessageInspectors.Add(
+                                new DurableMessageDispatchInspector(
+                                    serviceEndPoint.Contract.SessionMode
+                                )
+                            );
                             endPointDispatcher.DispatchRuntime.InstanceProvider = instanceProvider;
-                            SetContractFilterToIncludeAllOperations(endPointDispatcher, serviceEndPoint.Contract);
+                            SetContractFilterToIncludeAllOperations(
+                                endPointDispatcher,
+                                serviceEndPoint.Contract
+                            );
                         }
                     }
                 }
             }
-            DataContractSerializerServiceBehavior.ApplySerializationSettings(description, this.ignoreExtensionDataObject, this.maxItemsInObjectGraph);
+            DataContractSerializerServiceBehavior.ApplySerializationSettings(
+                description,
+                this.ignoreExtensionDataObject,
+                this.maxItemsInObjectGraph
+            );
         }
 
         void IWmiInstanceProvider.FillInstance(IWmiInstance wmiInstance)
@@ -356,7 +374,10 @@ namespace System.ServiceModel.Description
             wmiInstance.SetProperty("AddressFilterMode", this.AddressFilterMode.ToString());
             wmiInstance.SetProperty("ConfigurationName", this.ConfigurationName);
             wmiInstance.SetProperty("IgnoreExtensionDataObject", this.IgnoreExtensionDataObject);
-            wmiInstance.SetProperty("IncludeExceptionDetailInFaults", this.IncludeExceptionDetailInFaults);
+            wmiInstance.SetProperty(
+                "IncludeExceptionDetailInFaults",
+                this.IncludeExceptionDetailInFaults
+            );
             wmiInstance.SetProperty("MaxItemsInObjectGraph", this.MaxItemsInObjectGraph);
             wmiInstance.SetProperty("Name", this.Name);
             wmiInstance.SetProperty("Namespace", this.Namespace);
@@ -374,10 +395,16 @@ namespace System.ServiceModel.Description
 
         public void Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
         {
-            ContextBindingElement.ValidateContextBindingElementOnAllEndpointsWithSessionfulContract(description, this);
+            ContextBindingElement.ValidateContextBindingElementOnAllEndpointsWithSessionfulContract(
+                description,
+                this
+            );
         }
 
-        internal static void SetContractFilterToIncludeAllOperations(EndpointDispatcher dispatcher, ContractDescription contract)
+        internal static void SetContractFilterToIncludeAllOperations(
+            EndpointDispatcher dispatcher,
+            ContractDescription contract
+        )
         {
             if (dispatcher == null)
             {
@@ -418,7 +445,10 @@ namespace System.ServiceModel.Description
                 this.inner = inner;
             }
 
-            protected internal override Activity LoadCompletedContextActivity(Guid scopeId, Activity outerActivity)
+            protected internal override Activity LoadCompletedContextActivity(
+                Guid scopeId,
+                Activity outerActivity
+            )
             {
                 return this.inner.LoadCompletedContextActivity(scopeId, outerActivity);
             }
@@ -433,7 +463,10 @@ namespace System.ServiceModel.Description
                 this.inner.SaveCompletedContextActivity(activity);
             }
 
-            protected internal override void SaveWorkflowInstanceState(Activity rootActivity, bool unlock)
+            protected internal override void SaveWorkflowInstanceState(
+                Activity rootActivity,
+                bool unlock
+            )
             {
                 this.inner.SaveWorkflowInstanceState(rootActivity, unlock);
             }
@@ -452,7 +485,10 @@ namespace System.ServiceModel.Description
 
             protected internal override bool UnloadOnIdle(Activity activity)
             {
-                if (WorkflowDispatchContext.Current != null && WorkflowDispatchContext.Current.IsWorkflowStarting)
+                if (
+                    WorkflowDispatchContext.Current != null
+                    && WorkflowDispatchContext.Current.IsWorkflowStarting
+                )
                 {
                     return false;
                 }

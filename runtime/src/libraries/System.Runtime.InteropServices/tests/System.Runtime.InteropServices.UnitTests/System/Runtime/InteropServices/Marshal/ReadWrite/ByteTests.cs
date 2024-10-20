@@ -43,17 +43,19 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteByte_BlittableObject_Roundtrips()
         {
-            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1)).ToInt32();
-            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2)).ToInt32();
+            int offset1 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1))
+                .ToInt32();
+            int offset2 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
+                .ToInt32();
 
-            object structure = new BlittableStruct
-            {
-                value1 = 10,
-                value2 = 20
-            };
+            object structure = new BlittableStruct { value1 = 10, value2 = 20 };
 
             Marshal.WriteByte(structure, offset1, 11);
             Marshal.WriteByte(structure, offset2, 21);
@@ -65,18 +67,26 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteByte_StructWithReferenceTypes_ReturnsExpected()
         {
-            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue)).ToInt32();
-            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue)).ToInt32();
-            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray)).ToInt32();
+            int pointerOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue))
+                .ToInt32();
+            int stringOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue))
+                .ToInt32();
+            int arrayOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray))
+                .ToInt32();
 
             object structure = new StructWithReferenceTypes
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new byte[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                byValueArray = new byte[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
             };
 
             Marshal.WriteByte(structure, pointerOffset, 200);
@@ -84,41 +94,54 @@ namespace System.Runtime.InteropServices.Tests
 
             Assert.Equal((IntPtr)200, ((StructWithReferenceTypes)structure).pointerValue);
             Assert.Equal("ABC", ((StructWithReferenceTypes)structure).stringValue);
-            Assert.Equal(new byte[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 100 }, ((StructWithReferenceTypes)structure).byValueArray);
+            Assert.Equal(
+                new byte[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 100 },
+                ((StructWithReferenceTypes)structure).byValueArray
+            );
             Assert.Equal(200, Marshal.ReadByte(structure, pointerOffset));
             Assert.Equal(100, Marshal.ReadByte(structure, arrayOffset + sizeof(byte) * 9));
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadByte_BlittableObject_ReturnsExpected()
         {
-            int offset1 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1)).ToInt32();
-            int offset2 = Marshal.OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2)).ToInt32();
+            int offset1 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value1))
+                .ToInt32();
+            int offset2 = Marshal
+                .OffsetOf<BlittableStruct>(nameof(BlittableStruct.value2))
+                .ToInt32();
 
-            object structure = new BlittableStruct
-            {
-                value1 = 10,
-                value2 = 20
-            };
+            object structure = new BlittableStruct { value1 = 10, value2 = 20 };
 
             Assert.Equal(10, Marshal.ReadByte(structure, offset1));
             Assert.Equal(20, Marshal.ReadByte(structure, offset2));
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadByte_StructWithReferenceTypes_ReturnsExpected()
         {
-            int pointerOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue)).ToInt32();
-            int stringOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue)).ToInt32();
-            int arrayOffset = Marshal.OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray)).ToInt32();
+            int pointerOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.pointerValue))
+                .ToInt32();
+            int stringOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.stringValue))
+                .ToInt32();
+            int arrayOffset = Marshal
+                .OffsetOf<StructWithReferenceTypes>(nameof(StructWithReferenceTypes.byValueArray))
+                .ToInt32();
 
             object structure = new StructWithReferenceTypes
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new byte[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                byValueArray = new byte[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
             };
 
             Assert.Equal(100, Marshal.ReadByte(structure, pointerOffset));
@@ -131,59 +154,97 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadByte_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.ReadByte(IntPtr.Zero));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.ReadByte(IntPtr.Zero, 2));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadByte(IntPtr.Zero)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.ReadByte(IntPtr.Zero, 2)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadByte_NullObject_ThrowsAccessViolationException()
         {
             Assert.Throws<AccessViolationException>(() => Marshal.ReadByte(null, 2));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void ReadByte_NotReadable_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => Marshal.ReadByte(collectibleObject, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Marshal.ReadByte(collectibleObject, 0)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.ReadByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteByte_ZeroPointer_ThrowsException()
         {
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.WriteByte(IntPtr.Zero, 0));
-            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(() => Marshal.WriteByte(IntPtr.Zero, 2, 0));
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteByte(IntPtr.Zero, 0)
+            );
+            AssertExtensions.ThrowsAny<AccessViolationException, NullReferenceException>(
+                () => Marshal.WriteByte(IntPtr.Zero, 2, 0)
+            );
         }
 
         [Fact]
-        [SkipOnMono("Marshal.WriteByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [SkipOnMono(
+            "Marshal.WriteByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteByte_NullObject_ThrowsAccessViolationException()
         {
             Assert.Throws<AccessViolationException>(() => Marshal.WriteByte(null, 2, 0));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
-        [SkipOnMono("Marshal.WriteByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085.")]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
+        [SkipOnMono(
+            "Marshal.WriteByte will not be implemented in Mono, see https://github.com/mono/mono/issues/15085."
+        )]
         public void WriteByte_NotReadable_ThrowsArgumentException()
         {
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.RunAndCollect);
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("Assembly"),
+                AssemblyBuilderAccess.RunAndCollect
+            );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
             Type collectibleType = typeBuilder.CreateType();
             object collectibleObject = Activator.CreateInstance(collectibleType);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => Marshal.WriteByte(collectibleObject, 0, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Marshal.WriteByte(collectibleObject, 0, 0)
+            );
         }
 
         public struct BlittableStruct
@@ -197,6 +258,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             public IntPtr pointerValue;
             public string stringValue;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 10)]
             public byte[] byValueArray;
         }

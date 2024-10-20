@@ -40,9 +40,7 @@ public class FormFeature : IFormFeature
     /// </summary>
     /// <param name="request">The <see cref="HttpRequest"/>.</param>
     public FormFeature(HttpRequest request)
-        : this(request, FormOptions.Default)
-    {
-    }
+        : this(request, FormOptions.Default) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormFeature"/>.
@@ -50,9 +48,7 @@ public class FormFeature : IFormFeature
     /// <param name="request">The <see cref="HttpRequest"/>.</param>
     /// <param name="options">The <see cref="FormOptions"/>.</param>
     public FormFeature(HttpRequest request, FormOptions options)
-        : this(request, options, null)
-    {
-    }
+        : this(request, options, null) { }
 
     internal FormFeature(HttpRequest request, FormOptions options, Endpoint? endpoint)
     {
@@ -88,11 +84,13 @@ public class FormFeature : IFormFeature
             }
 
             var contentType = ContentType;
-            return HasApplicationFormContentType(contentType) || HasMultipartFormContentType(contentType);
+            return HasApplicationFormContentType(contentType)
+                || HasMultipartFormContentType(contentType);
         }
     }
 
-    internal bool HasInvalidAntiforgeryValidationFeature => ResolveHasInvalidAntiforgeryValidationFeature();
+    internal bool HasInvalidAntiforgeryValidationFeature =>
+        ResolveHasInvalidAntiforgeryValidationFeature();
 
     /// <inheritdoc />
     public IFormCollection? Form
@@ -120,7 +118,9 @@ public class FormFeature : IFormFeature
 
         if (!HasFormContentType)
         {
-            throw new InvalidOperationException("This request does not have a Content-Type header. Forms are available from requests with bodies like POSTs and a form Content-Type of either application/x-www-form-urlencoded or multipart/form-data.");
+            throw new InvalidOperationException(
+                "This request does not have a Content-Type header. Forms are available from requests with bodies like POSTs and a form Content-Type of either application/x-www-form-urlencoded or multipart/form-data."
+            );
         }
 
         // c.f., https://aka.ms/aspnet/forms-async
@@ -175,7 +175,12 @@ public class FormFeature : IFormFeature
         FormFileCollection? files = null;
 
         // Some of these code paths use StreamReader which does not support cancellation tokens.
-        using (cancellationToken.Register((state) => ((HttpContext)state!).Abort(), _request.HttpContext))
+        using (
+            cancellationToken.Register(
+                (state) => ((HttpContext)state!).Abort(),
+                _request.HttpContext
+            )
+        )
         {
             var contentType = ContentType;
             // Check the content-type
@@ -208,12 +213,22 @@ public class FormFeature : IFormFeature
                     sectionCount++;
                     if (sectionCount > _options.ValueCountLimit)
                     {
-                        throw new InvalidDataException($"Form value count limit {_options.ValueCountLimit} exceeded.");
+                        throw new InvalidDataException(
+                            $"Form value count limit {_options.ValueCountLimit} exceeded."
+                        );
                     }
                     // Parse the content disposition here and pass it further to avoid reparsings
-                    if (!ContentDispositionHeaderValue.TryParse(section.ContentDisposition, out var contentDisposition))
+                    if (
+                        !ContentDispositionHeaderValue.TryParse(
+                            section.ContentDisposition,
+                            out var contentDisposition
+                        )
+                    )
                     {
-                        throw new InvalidDataException("Form section has invalid Content-Disposition value: " + section.ContentDisposition);
+                        throw new InvalidDataException(
+                            "Form section has invalid Content-Disposition value: "
+                                + section.ContentDisposition
+                        );
                     }
 
                     if (contentDisposition.IsFileDisposition())
@@ -223,7 +238,9 @@ public class FormFeature : IFormFeature
                         // Enable buffering for the file if not already done for the full body
                         section.EnableRewind(
                             _request.HttpContext.Response.RegisterForDispose,
-                            _options.MemoryBufferThreshold, _options.MultipartBodyLengthLimit);
+                            _options.MemoryBufferThreshold,
+                            _options.MultipartBodyLengthLimit
+                        );
 
                         // Find the end
                         await section.Body.DrainAsync(cancellationToken);
@@ -235,12 +252,24 @@ public class FormFeature : IFormFeature
                         if (section.BaseStreamOffset.HasValue)
                         {
                             // Relative reference to buffered request body
-                            file = new FormFile(_request.Body, section.BaseStreamOffset.GetValueOrDefault(), section.Body.Length, name, fileName);
+                            file = new FormFile(
+                                _request.Body,
+                                section.BaseStreamOffset.GetValueOrDefault(),
+                                section.Body.Length,
+                                name,
+                                fileName
+                            );
                         }
                         else
                         {
                             // Individually buffered file body
-                            file = new FormFile(section.Body, 0, section.Body.Length, name, fileName);
+                            file = new FormFile(
+                                section.Body,
+                                0,
+                                section.Body.Length,
+                                name,
+                                fileName
+                            );
                         }
                         file.Headers = new HeaderDictionary(section.Headers);
 
@@ -312,22 +341,38 @@ public class FormFeature : IFormFeature
         return encoding;
     }
 
-    private static bool HasApplicationFormContentType([NotNullWhen(true)] MediaTypeHeaderValue? contentType)
+    private static bool HasApplicationFormContentType(
+        [NotNullWhen(true)] MediaTypeHeaderValue? contentType
+    )
     {
         // Content-Type: application/x-www-form-urlencoded; charset=utf-8
-        return contentType != null && contentType.MediaType.Equals("application/x-www-form-urlencoded", StringComparison.OrdinalIgnoreCase);
+        return contentType != null
+            && contentType.MediaType.Equals(
+                "application/x-www-form-urlencoded",
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 
-    private static bool HasMultipartFormContentType([NotNullWhen(true)] MediaTypeHeaderValue? contentType)
+    private static bool HasMultipartFormContentType(
+        [NotNullWhen(true)] MediaTypeHeaderValue? contentType
+    )
     {
         // Content-Type: multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq
-        return contentType != null && contentType.MediaType.Equals("multipart/form-data", StringComparison.OrdinalIgnoreCase);
+        return contentType != null
+            && contentType.MediaType.Equals(
+                "multipart/form-data",
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 
     private bool ResolveHasInvalidAntiforgeryValidationFeature()
     {
-        var hasInvokedMiddleware = _request.HttpContext.Items.ContainsKey("__AntiforgeryMiddlewareWithEndpointInvoked");
-        var hasInvalidToken = _request.HttpContext.Features.Get<IAntiforgeryValidationFeature>() is { IsValid: false };
+        var hasInvokedMiddleware = _request.HttpContext.Items.ContainsKey(
+            "__AntiforgeryMiddlewareWithEndpointInvoked"
+        );
+        var hasInvalidToken =
+            _request.HttpContext.Features.Get<IAntiforgeryValidationFeature>()
+                is { IsValid: false };
         return hasInvokedMiddleware && hasInvalidToken;
     }
 
@@ -335,7 +380,9 @@ public class FormFeature : IFormFeature
     {
         if (HasInvalidAntiforgeryValidationFeature)
         {
-            throw new InvalidOperationException("This form is being accessed with an invalid anti-forgery token. Validate the `IAntiforgeryValidationFeature` on the request before reading from the form.");
+            throw new InvalidOperationException(
+                "This form is being accessed with an invalid anti-forgery token. Validate the `IAntiforgeryValidationFeature` on the request before reading from the form."
+            );
         }
     }
 
@@ -350,21 +397,27 @@ public class FormFeature : IFormFeature
         }
         if (boundary.Length > lengthLimit)
         {
-            throw new InvalidDataException($"Multipart boundary length limit {lengthLimit} exceeded.");
+            throw new InvalidDataException(
+                $"Multipart boundary length limit {lengthLimit} exceeded."
+            );
         }
         return boundary.ToString();
     }
 
-    private static FormOptions GetFormOptionsFromMetadata(FormOptions baseFormOptions, Endpoint endpoint)
+    private static FormOptions GetFormOptionsFromMetadata(
+        FormOptions baseFormOptions,
+        Endpoint endpoint
+    )
     {
-        var formOptionsMetadatas = endpoint.Metadata
-            .GetOrderedMetadata<IFormOptionsMetadata>();
+        var formOptionsMetadatas = endpoint.Metadata.GetOrderedMetadata<IFormOptionsMetadata>();
         var metadataCount = formOptionsMetadatas.Count;
         if (metadataCount == 0)
         {
             return baseFormOptions;
         }
-        var finalFormOptionsMetadata = new MutableFormOptionsMetadata(formOptionsMetadatas[metadataCount - 1]);
+        var finalFormOptionsMetadata = new MutableFormOptionsMetadata(
+            formOptionsMetadatas[metadataCount - 1]
+        );
         for (int i = metadataCount - 2; i >= 0; i--)
         {
             formOptionsMetadatas[i].MergeWith(ref finalFormOptionsMetadata);

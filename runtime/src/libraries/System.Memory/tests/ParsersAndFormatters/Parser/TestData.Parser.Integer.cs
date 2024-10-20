@@ -1,10 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
-using System.Globalization;
-using System.Numerics;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Numerics;
 
 namespace System.Buffers.Text.Tests
 {
@@ -14,7 +14,9 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<sbyte> testData in SByteFormatterTestData.ToParserTheoryDataCollection())
+                foreach (
+                    ParserTestData<sbyte> testData in SByteFormatterTestData.ToParserTheoryDataCollection()
+                )
                 {
                     yield return testData;
                 }
@@ -25,8 +27,14 @@ namespace System.Buffers.Text.Tests
                 }
 
                 // Code coverage
-                yield return new ParserTestData<sbyte>("5$", 5, 'D', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
-                yield return new ParserTestData<sbyte>("5$", 5, 'x', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
+                yield return new ParserTestData<sbyte>("5$", 5, 'D', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
+                yield return new ParserTestData<sbyte>("5$", 5, 'x', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
                 yield return new ParserTestData<sbyte>("5ff", 0, 'x', expectedSuccess: false);
             }
         }
@@ -35,7 +43,9 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<byte> testData in ByteFormatterTestData.ToParserTheoryDataCollection())
+                foreach (
+                    ParserTestData<byte> testData in ByteFormatterTestData.ToParserTheoryDataCollection()
+                )
                 {
                     yield return testData;
                 }
@@ -46,8 +56,14 @@ namespace System.Buffers.Text.Tests
                 }
 
                 // Code coverage
-                yield return new ParserTestData<byte>("5$", 5, 'D', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
-                yield return new ParserTestData<byte>("5$", 5, 'x', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
+                yield return new ParserTestData<byte>("5$", 5, 'D', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
+                yield return new ParserTestData<byte>("5$", 5, 'x', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
                 yield return new ParserTestData<byte>("5ff", 0, 'x', expectedSuccess: false);
             }
         }
@@ -56,7 +72,9 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<short> testData in Int16FormatterTestData.ToParserTheoryDataCollection())
+                foreach (
+                    ParserTestData<short> testData in Int16FormatterTestData.ToParserTheoryDataCollection()
+                )
                 {
                     yield return testData;
                 }
@@ -67,8 +85,14 @@ namespace System.Buffers.Text.Tests
                 }
 
                 // Code coverage
-                yield return new ParserTestData<short>("5$", 5, 'D', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
-                yield return new ParserTestData<short>("5$", 5, 'x', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
+                yield return new ParserTestData<short>("5$", 5, 'D', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
+                yield return new ParserTestData<short>("5$", 5, 'x', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
                 yield return new ParserTestData<short>("5faaf", 0, 'x', expectedSuccess: false);
             }
         }
@@ -77,7 +101,9 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<ushort> testData in UInt16FormatterTestData.ToParserTheoryDataCollection())
+                foreach (
+                    ParserTestData<ushort> testData in UInt16FormatterTestData.ToParserTheoryDataCollection()
+                )
                 {
                     yield return testData;
                 }
@@ -88,8 +114,14 @@ namespace System.Buffers.Text.Tests
                 }
 
                 // Code coverage
-                yield return new ParserTestData<ushort>("5$", 5, 'D', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
-                yield return new ParserTestData<ushort>("5$", 5, 'x', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
+                yield return new ParserTestData<ushort>("5$", 5, 'D', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
+                yield return new ParserTestData<ushort>("5$", 5, 'x', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
                 yield return new ParserTestData<ushort>("5faaf", 0, 'x', expectedSuccess: false);
             }
         }
@@ -98,7 +130,9 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<int> testData in Int32FormatterTestData.ToParserTheoryDataCollection())
+                foreach (
+                    ParserTestData<int> testData in Int32FormatterTestData.ToParserTheoryDataCollection()
+                )
                 {
                     yield return testData;
                 }
@@ -109,7 +143,10 @@ namespace System.Buffers.Text.Tests
                 }
 
                 // Code coverage
-                yield return new ParserTestData<int>("5$", 5, 'x', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
+                yield return new ParserTestData<int>("5$", 5, 'x', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
                 yield return new ParserTestData<int>("5faaccbbf", 0, 'x', expectedSuccess: false);
 
                 // This value will overflow a UInt32 accumulator upon assimilating the 0 in a way such that the wrapped-around value still looks like
@@ -122,7 +159,9 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<uint> testData in UInt32FormatterTestData.ToParserTheoryDataCollection())
+                foreach (
+                    ParserTestData<uint> testData in UInt32FormatterTestData.ToParserTheoryDataCollection()
+                )
                 {
                     yield return testData;
                 }
@@ -133,8 +172,14 @@ namespace System.Buffers.Text.Tests
                 }
 
                 // Code coverage
-                yield return new ParserTestData<uint>("5$", 5, 'D', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
-                yield return new ParserTestData<uint>("5$", 5, 'x', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
+                yield return new ParserTestData<uint>("5$", 5, 'D', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
+                yield return new ParserTestData<uint>("5$", 5, 'x', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
                 yield return new ParserTestData<uint>("5faaccbbf", 0, 'x', expectedSuccess: false);
             }
         }
@@ -143,7 +188,9 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<long> testData in Int64FormatterTestData.ToParserTheoryDataCollection())
+                foreach (
+                    ParserTestData<long> testData in Int64FormatterTestData.ToParserTheoryDataCollection()
+                )
                 {
                     yield return testData;
                 }
@@ -154,9 +201,20 @@ namespace System.Buffers.Text.Tests
                 }
 
                 // Code coverage
-                yield return new ParserTestData<long>("5$", 5, 'D', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
-                yield return new ParserTestData<long>("5$", 5, 'x', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
-                yield return new ParserTestData<long>("5faaccbb11223344f", 0, 'x', expectedSuccess: false);
+                yield return new ParserTestData<long>("5$", 5, 'D', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
+                yield return new ParserTestData<long>("5$", 5, 'x', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
+                yield return new ParserTestData<long>(
+                    "5faaccbb11223344f",
+                    0,
+                    'x',
+                    expectedSuccess: false
+                );
             }
         }
 
@@ -164,7 +222,9 @@ namespace System.Buffers.Text.Tests
         {
             get
             {
-                foreach (ParserTestData<ulong> testData in UInt64FormatterTestData.ToParserTheoryDataCollection())
+                foreach (
+                    ParserTestData<ulong> testData in UInt64FormatterTestData.ToParserTheoryDataCollection()
+                )
                 {
                     yield return testData;
                 }
@@ -175,32 +235,45 @@ namespace System.Buffers.Text.Tests
                 }
 
                 // Code coverage
-                yield return new ParserTestData<ulong>("5$", 5, 'D', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
-                yield return new ParserTestData<ulong>("5$", 5, 'x', expectedSuccess: true) { ExpectedBytesConsumed = 1 };
-                yield return new ParserTestData<ulong>("5faaccbb11223344f", 0, 'x', expectedSuccess: false);
+                yield return new ParserTestData<ulong>("5$", 5, 'D', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
+                yield return new ParserTestData<ulong>("5$", 5, 'x', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 1,
+                };
+                yield return new ParserTestData<ulong>(
+                    "5faaccbb11223344f",
+                    0,
+                    'x',
+                    expectedSuccess: false
+                );
             }
         }
 
         private static IEnumerable<ParserTestData<T>> GeneralIntegerParserTestData<T>()
         {
-            string[] GeneralIntegerNegativeInputs =
-            {
-                string.Empty,
-                "-",
-                "+",
-                "--5",
-                "++5",
-            };
+            string[] GeneralIntegerNegativeInputs = { string.Empty, "-", "+", "--5", "++5" };
 
             BigInteger minValue = TestUtils.GetMinValue<T>();
             BigInteger maxValue = TestUtils.GetMaxValue<T>();
             bool isSigned = !minValue.IsZero;
 
-            foreach (SupportedFormat format in IntegerFormats.Where(f => f.IsParsingImplemented<T>() && f.ParseSynonymFor == default))
+            foreach (
+                SupportedFormat format in IntegerFormats.Where(f =>
+                    f.IsParsingImplemented<T>() && f.ParseSynonymFor == default
+                )
+            )
             {
                 foreach (string integerNegativeInput in GeneralIntegerNegativeInputs)
                 {
-                    yield return new ParserTestData<T>(integerNegativeInput, default, format.Symbol, expectedSuccess: false);
+                    yield return new ParserTestData<T>(
+                        integerNegativeInput,
+                        default,
+                        format.Symbol,
+                        expectedSuccess: false
+                    );
                 }
 
                 // The hex format always parses as an unsigned number. That violates the assumptions made by this next set of test data.
@@ -213,23 +286,47 @@ namespace System.Buffers.Text.Tests
                     {
                         BigInteger bigValue = maxValue + offset;
                         string textD = bigValue.ToString("D", CultureInfo.InvariantCulture);
-                        string text = bigValue.ToString(format.Symbol.ToString(), CultureInfo.InvariantCulture);
+                        string text = bigValue.ToString(
+                            format.Symbol.ToString(),
+                            CultureInfo.InvariantCulture
+                        );
                         T expectedValue = (T)(Convert.ChangeType(textD, typeof(T)));
-                        yield return new ParserTestData<T>(text, expectedValue, format.Symbol, expectedSuccess: true);
+                        yield return new ParserTestData<T>(
+                            text,
+                            expectedValue,
+                            format.Symbol,
+                            expectedSuccess: true
+                        );
                     }
 
                     // Make sure that values just above MaxValue don't parse successfully.
                     for (int offset = 1; offset <= 20; offset++)
                     {
                         BigInteger bigValue = maxValue + offset;
-                        string text = bigValue.ToString(format.Symbol.ToString(), CultureInfo.InvariantCulture);
-                        yield return new ParserTestData<T>(text, default, format.Symbol, expectedSuccess: false);
+                        string text = bigValue.ToString(
+                            format.Symbol.ToString(),
+                            CultureInfo.InvariantCulture
+                        );
+                        yield return new ParserTestData<T>(
+                            text,
+                            default,
+                            format.Symbol,
+                            expectedSuccess: false
+                        );
                     }
 
                     {
                         BigInteger bigValue = maxValue * 10;
-                        string text = bigValue.ToString(format.Symbol.ToString(), CultureInfo.InvariantCulture);
-                        yield return new ParserTestData<T>(text, default, format.Symbol, expectedSuccess: false);
+                        string text = bigValue.ToString(
+                            format.Symbol.ToString(),
+                            CultureInfo.InvariantCulture
+                        );
+                        yield return new ParserTestData<T>(
+                            text,
+                            default,
+                            format.Symbol,
+                            expectedSuccess: false
+                        );
                     }
 
                     if (isSigned) // No such thing as an underflow for unsigned integer parsing...
@@ -239,23 +336,47 @@ namespace System.Buffers.Text.Tests
                         {
                             BigInteger bigValue = minValue + offset;
                             string textD = bigValue.ToString("D", CultureInfo.InvariantCulture);
-                            string text = bigValue.ToString(format.Symbol.ToString(), CultureInfo.InvariantCulture);
+                            string text = bigValue.ToString(
+                                format.Symbol.ToString(),
+                                CultureInfo.InvariantCulture
+                            );
                             T expectedValue = (T)(Convert.ChangeType(textD, typeof(T)));
-                            yield return new ParserTestData<T>(text, expectedValue, format.Symbol, expectedSuccess: true);
+                            yield return new ParserTestData<T>(
+                                text,
+                                expectedValue,
+                                format.Symbol,
+                                expectedSuccess: true
+                            );
                         }
 
                         // Make sure that values just below MinValue don't parse successfully.
                         for (int offset = -20; offset <= -1; offset++)
                         {
                             BigInteger bigValue = minValue + offset;
-                            string text = bigValue.ToString(format.Symbol.ToString(), CultureInfo.InvariantCulture);
-                            yield return new ParserTestData<T>(text, default, format.Symbol, expectedSuccess: false);
+                            string text = bigValue.ToString(
+                                format.Symbol.ToString(),
+                                CultureInfo.InvariantCulture
+                            );
+                            yield return new ParserTestData<T>(
+                                text,
+                                default,
+                                format.Symbol,
+                                expectedSuccess: false
+                            );
                         }
 
                         {
                             BigInteger bigValue = minValue * 10;
-                            string text = bigValue.ToString(format.Symbol.ToString(), CultureInfo.InvariantCulture);
-                            yield return new ParserTestData<T>(text, default, format.Symbol, expectedSuccess: false);
+                            string text = bigValue.ToString(
+                                format.Symbol.ToString(),
+                                CultureInfo.InvariantCulture
+                            );
+                            yield return new ParserTestData<T>(
+                                text,
+                                default,
+                                format.Symbol,
+                                expectedSuccess: false
+                            );
                         }
                     }
                 }
@@ -263,7 +384,9 @@ namespace System.Buffers.Text.Tests
                 if (format.Symbol == 'N' || format.Symbol == 'n')
                 {
                     // "N" format parsing
-                    foreach (ParserTestData<T> testData in TestDataForNFormat.ConvertTestDataForNFormat<T>())
+                    foreach (
+                        ParserTestData<T> testData in TestDataForNFormat.ConvertTestDataForNFormat<T>()
+                    )
                     {
                         yield return testData;
                     }
@@ -284,9 +407,24 @@ namespace System.Buffers.Text.Tests
                 yield return new ParserTestData<sbyte>("+1,,23", 123, 'N', expectedSuccess: true); // Comma placement is completely flexible.
                 yield return new ParserTestData<sbyte>("-1,,23", -123, 'N', expectedSuccess: true); // Comma placement is completely flexible.
 
-                yield return new ParserTestData<sbyte>(",234", default, 'N', expectedSuccess: false); // Leading comma not allowed.
-                yield return new ParserTestData<sbyte>("+,234", default, 'N', expectedSuccess: false); // Leading comma not allowed.
-                yield return new ParserTestData<sbyte>("-,234", default, 'N', expectedSuccess: false); // Leading comma not allowed.
+                yield return new ParserTestData<sbyte>(
+                    ",234",
+                    default,
+                    'N',
+                    expectedSuccess: false
+                ); // Leading comma not allowed.
+                yield return new ParserTestData<sbyte>(
+                    "+,234",
+                    default,
+                    'N',
+                    expectedSuccess: false
+                ); // Leading comma not allowed.
+                yield return new ParserTestData<sbyte>(
+                    "-,234",
+                    default,
+                    'N',
+                    expectedSuccess: false
+                ); // Leading comma not allowed.
 
                 yield return new ParserTestData<sbyte>("104,", 104, 'N', expectedSuccess: true); // Trailing comma is allowed.
                 yield return new ParserTestData<sbyte>("104,,", 104, 'N', expectedSuccess: true); // Trailing comma is allowed.
@@ -299,22 +437,45 @@ namespace System.Buffers.Text.Tests
                 yield return new ParserTestData<sbyte>("+", default, 'N', expectedSuccess: false); // Standalone sign symbol not allowed
                 yield return new ParserTestData<sbyte>("-", default, 'N', expectedSuccess: false); // Standalone sign symbol not allowed
 
-                yield return new ParserTestData<sbyte>("2.000000000000000000000000000000000", 2, 'N', expectedSuccess: true); // Decimal portion allowed as long as its 0.
-                yield return new ParserTestData<sbyte>("2.000000000000000000000000000000001", default, 'N', expectedSuccess: false);
+                yield return new ParserTestData<sbyte>(
+                    "2.000000000000000000000000000000000",
+                    2,
+                    'N',
+                    expectedSuccess: true
+                ); // Decimal portion allowed as long as its 0.
+                yield return new ParserTestData<sbyte>(
+                    "2.000000000000000000000000000000001",
+                    default,
+                    'N',
+                    expectedSuccess: false
+                );
                 yield return new ParserTestData<sbyte>(".1", default, 'N', expectedSuccess: false);
 
-                yield return new ParserTestData<sbyte>("2.0,0", 2, 'N', expectedSuccess: true) { ExpectedBytesConsumed = 3 }; // Commas must appear before the decimal point, not after.
+                yield return new ParserTestData<sbyte>("2.0,0", 2, 'N', expectedSuccess: true)
+                {
+                    ExpectedBytesConsumed = 3,
+                }; // Commas must appear before the decimal point, not after.
             }
         }
 
-        private static IEnumerable<ParserTestData<T>> ConvertTestDataForNFormat<T>(this IEnumerable<ParserTestData<sbyte>> testData) => testData.Select(td => td.ConvertTestDataForNFormat<T>());
+        private static IEnumerable<ParserTestData<T>> ConvertTestDataForNFormat<T>(
+            this IEnumerable<ParserTestData<sbyte>> testData
+        ) => testData.Select(td => td.ConvertTestDataForNFormat<T>());
 
-        private static ParserTestData<T> ConvertTestDataForNFormat<T>(this ParserTestData<sbyte> testData)
+        private static ParserTestData<T> ConvertTestDataForNFormat<T>(
+            this ParserTestData<sbyte> testData
+        )
         {
             Type t = typeof(T);
-            bool isSignedType = t == typeof(sbyte) || t == typeof(short) || t == typeof(int) || t == typeof(long);
+            bool isSignedType =
+                t == typeof(sbyte) || t == typeof(short) || t == typeof(int) || t == typeof(long);
             if (testData.ExpectedValue < 0 && !isSignedType)
-                return new ParserTestData<T>(testData.Text, default, testData.FormatSymbol, expectedSuccess: false);  // Unsigned parsers will never produce negative values.
+                return new ParserTestData<T>(
+                    testData.Text,
+                    default,
+                    testData.FormatSymbol,
+                    expectedSuccess: false
+                ); // Unsigned parsers will never produce negative values.
 
             T convertedValue;
             if (t == typeof(sbyte))
@@ -336,7 +497,15 @@ namespace System.Buffers.Text.Tests
             else
                 throw new Exception("Not an integer type: " + t);
 
-            return new ParserTestData<T>(testData.Text, convertedValue, testData.FormatSymbol, testData.ExpectedSuccess) { ExpectedBytesConsumed = testData.ExpectedBytesConsumed };
+            return new ParserTestData<T>(
+                testData.Text,
+                convertedValue,
+                testData.FormatSymbol,
+                testData.ExpectedSuccess
+            )
+            {
+                ExpectedBytesConsumed = testData.ExpectedBytesConsumed,
+            };
         }
     }
 }

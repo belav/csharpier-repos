@@ -11,7 +11,11 @@ internal static class JumpTableBuilder
 {
     public const int InvalidDestination = -1;
 
-    public static JumpTable Build(int defaultDestination, int exitDestination, (string text, int destination)[] pathEntries)
+    public static JumpTable Build(
+        int defaultDestination,
+        int exitDestination,
+        (string text, int destination)[] pathEntries
+    )
     {
         if (defaultDestination == InvalidDestination)
         {
@@ -46,14 +50,24 @@ internal static class JumpTableBuilder
         if (pathEntries.Length == 1 && Ascii.IsValid(pathEntries[0].text))
         {
             var entry = pathEntries[0];
-            return new SingleEntryAsciiJumpTable(defaultDestination, exitDestination, entry.text, entry.destination);
+            return new SingleEntryAsciiJumpTable(
+                defaultDestination,
+                exitDestination,
+                entry.text,
+                entry.destination
+            );
         }
 
         // We have a fallback that works for non-ASCII
         if (pathEntries.Length == 1)
         {
             var entry = pathEntries[0];
-            return new SingleEntryJumpTable(defaultDestination, exitDestination, entry.text, entry.destination);
+            return new SingleEntryJumpTable(
+                defaultDestination,
+                exitDestination,
+                entry.text,
+                entry.destination
+            );
         }
 
         // We choose a hard upper bound of 100 as the limit for when we switch to a dictionary
@@ -87,16 +101,36 @@ internal static class JumpTableBuilder
         }
 
         // Use the ILEmitTrieJumpTable if the IL is going to be compiled (not interpreted)
-        return MakeILEmitTrieJumpTableIfSupported(defaultDestination, exitDestination, pathEntries, fallback);
+        return MakeILEmitTrieJumpTableIfSupported(
+            defaultDestination,
+            exitDestination,
+            pathEntries,
+            fallback
+        );
 
         // TODO: This suppression can be removed when https://github.com/dotnet/linker/issues/2715 is complete.
-        [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "Guarded by IsDynamicCodeCompiled")]
-        static JumpTable MakeILEmitTrieJumpTableIfSupported(int defaultDestination, int exitDestination, (string text, int destination)[] pathEntries, JumpTable fallback)
+        [UnconditionalSuppressMessage(
+            "AOT",
+            "IL3050",
+            Justification = "Guarded by IsDynamicCodeCompiled"
+        )]
+        static JumpTable MakeILEmitTrieJumpTableIfSupported(
+            int defaultDestination,
+            int exitDestination,
+            (string text, int destination)[] pathEntries,
+            JumpTable fallback
+        )
         {
             // ILEmitTrieJumpTable use IL emit to generate a custom, high-performance jump table.
             // EL emit requires IsDynamicCodeCompiled to be true. Fallback to another jump table implementation if not available.
             return RuntimeFeature.IsDynamicCodeCompiled
-                ? new ILEmitTrieJumpTable(defaultDestination, exitDestination, pathEntries, vectorize: null, fallback)
+                ? new ILEmitTrieJumpTable(
+                    defaultDestination,
+                    exitDestination,
+                    pathEntries,
+                    vectorize: null,
+                    fallback
+                )
                 : fallback;
         }
     }

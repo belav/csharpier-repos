@@ -5,19 +5,16 @@ using Microsoft.EntityFrameworkCore.SqlServer.Design.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class DesignTimeSqlServerTest : DesignTimeTestBase<DesignTimeSqlServerTest.DesignTimeSqlServerFixture>
+public class DesignTimeSqlServerTest
+    : DesignTimeTestBase<DesignTimeSqlServerTest.DesignTimeSqlServerFixture>
 {
     public DesignTimeSqlServerTest(DesignTimeSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override Assembly ProviderAssembly
-        => typeof(SqlServerDesignTimeServices).Assembly;
+    protected override Assembly ProviderAssembly => typeof(SqlServerDesignTimeServices).Assembly;
 
     public class DesignTimeSqlServerFixture : DesignTimeFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

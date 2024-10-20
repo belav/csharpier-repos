@@ -16,6 +16,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
 
         Task<IWpfTextView> GetActiveTextViewAsync(CancellationToken cancellationToken);
 
-        Task<ITextBuffer?> GetBufferContainingCaretAsync(IWpfTextView view, CancellationToken cancellationToken);
+        Task<ITextBuffer?> GetBufferContainingCaretAsync(
+            IWpfTextView view,
+            CancellationToken cancellationToken
+        );
     }
 }

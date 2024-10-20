@@ -31,17 +31,17 @@ namespace System.Security.Cryptography.Pkcs
             get
             {
                 if (index < 0 || index >= _recipientInfos.Length)
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexMustBeLess
+                    );
                 return _recipientInfos[index];
             }
         }
 
         public int Count
         {
-            get
-            {
-                return _recipientInfos.Length;
-            }
+            get { return _recipientInfos.Length; }
         }
 
         public RecipientInfoEnumerator GetEnumerator()
@@ -64,7 +64,10 @@ namespace System.Security.Cryptography.Pkcs
             if (array.Rank != 1)
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported);
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             if (index > array.Length - Count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
             for (int i = 0; i < Count; i++)
@@ -82,24 +85,21 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             _recipientInfos.CopyTo(array, index);
         }
 
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         private readonly RecipientInfo[] _recipientInfos;

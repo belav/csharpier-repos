@@ -21,8 +21,10 @@ namespace System.Collections.ObjectModel.Tests
         {
             string[] anArray = { "one", "two", "three" };
             ObservableCollection<string> col = new ObservableCollection<string>(anArray);
-            ReadOnlyObservableCollection<string> readonlyCol = new ReadOnlyObservableCollection<string>(col);
-            ReadOnlyCollectionAndPropertyChangedTester helper = new ReadOnlyCollectionAndPropertyChangedTester();
+            ReadOnlyObservableCollection<string> readonlyCol =
+                new ReadOnlyObservableCollection<string>(col);
+            ReadOnlyCollectionAndPropertyChangedTester helper =
+                new ReadOnlyCollectionAndPropertyChangedTester();
             helper.AddOrInsertItemTest(readonlyCol, col, "four");
         }
 
@@ -39,8 +41,10 @@ namespace System.Collections.ObjectModel.Tests
             // trying to remove item in collection.
             string[] anArray = { "one", "two", "three", "four" };
             ObservableCollection<string> col = new ObservableCollection<string>(anArray);
-            ReadOnlyObservableCollection<string> readonlyCol = new ReadOnlyObservableCollection<string>(col);
-            ReadOnlyCollectionAndPropertyChangedTester helper = new ReadOnlyCollectionAndPropertyChangedTester();
+            ReadOnlyObservableCollection<string> readonlyCol =
+                new ReadOnlyObservableCollection<string>(col);
+            ReadOnlyCollectionAndPropertyChangedTester helper =
+                new ReadOnlyCollectionAndPropertyChangedTester();
             helper.RemoveItemTest(readonlyCol, col, 2, "three", true, hasDuplicates: false);
 
             // trying to remove item not in collection.
@@ -81,9 +85,11 @@ namespace System.Collections.ObjectModel.Tests
         {
             string[] anArray = { "one", "two", "three", "four" };
             //tests that the collectionChanged events are fired.
-            ReadOnlyCollectionAndPropertyChangedTester helper = new ReadOnlyCollectionAndPropertyChangedTester();
+            ReadOnlyCollectionAndPropertyChangedTester helper =
+                new ReadOnlyCollectionAndPropertyChangedTester();
             ObservableCollection<string> col = new ObservableCollection<string>(anArray);
-            ReadOnlyObservableCollection<string> readonlyCol = new ReadOnlyObservableCollection<string>(col);
+            ReadOnlyObservableCollection<string> readonlyCol =
+                new ReadOnlyObservableCollection<string>(col);
             helper.ClearTest(readonlyCol, col);
         }
 
@@ -96,8 +102,10 @@ namespace System.Collections.ObjectModel.Tests
         {
             string[] anArrayString = { "one", "two", "three", "four" };
             ObservableCollection<string> col = new ObservableCollection<string>(anArrayString);
-            ReadOnlyObservableCollection<string> readonlyCol = new ReadOnlyObservableCollection<string>(col);
-            ReadOnlyCollectionAndPropertyChangedTester helper = new ReadOnlyCollectionAndPropertyChangedTester();
+            ReadOnlyObservableCollection<string> readonlyCol =
+                new ReadOnlyObservableCollection<string>(col);
+            ReadOnlyCollectionAndPropertyChangedTester helper =
+                new ReadOnlyCollectionAndPropertyChangedTester();
             helper.RemoveItemAtTest(readonlyCol, col, 1);
         }
 
@@ -112,20 +120,50 @@ namespace System.Collections.ObjectModel.Tests
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
             ObservableCollection<Guid> collection = new ObservableCollection<Guid>(anArray);
-            ReadOnlyObservableCollection<Guid> readonlyCol = new ReadOnlyObservableCollection<Guid>(collection);
-            ((INotifyCollectionChanged)readonlyCol).CollectionChanged += (o, e) => { throw new ShouldNotBeInvokedException(); };
+            ReadOnlyObservableCollection<Guid> readonlyCol = new ReadOnlyObservableCollection<Guid>(
+                collection
+            );
+            ((INotifyCollectionChanged)readonlyCol).CollectionChanged += (o, e) =>
+            {
+                throw new ShouldNotBeInvokedException();
+            };
 
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+            };
             foreach (var index in iArrInvalidValues)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.RemoveAt(index));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.RemoveAt(index)
+                );
                 Assert.Equal(anArray.Length, readonlyCol.Count);
             }
 
-            int[] iArrLargeValues = new int[] { collection.Count, int.MaxValue, int.MaxValue / 2, int.MaxValue / 10 };
+            int[] iArrLargeValues = new int[]
+            {
+                collection.Count,
+                int.MaxValue,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+            };
             foreach (var index in iArrLargeValues)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.RemoveAt(index));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.RemoveAt(index)
+                );
                 Assert.Equal(anArray.Length, readonlyCol.Count);
             }
         }
@@ -137,10 +175,14 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void MoveTest()
         {
-            ReadOnlyCollectionAndPropertyChangedTester helper = new ReadOnlyCollectionAndPropertyChangedTester();
+            ReadOnlyCollectionAndPropertyChangedTester helper =
+                new ReadOnlyCollectionAndPropertyChangedTester();
             string[] anArrayString = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>(anArrayString);
-            ReadOnlyObservableCollection<string> readonlyCol = new ReadOnlyObservableCollection<string>(collection);
+            ObservableCollection<string> collection = new ObservableCollection<string>(
+                anArrayString
+            );
+            ReadOnlyObservableCollection<string> readonlyCol =
+                new ReadOnlyObservableCollection<string>(collection);
             helper.MoveItemTest(readonlyCol, collection, 0, 2);
             helper.MoveItemTest(readonlyCol, collection, 3, 0);
             helper.MoveItemTest(readonlyCol, collection, 1, 2);
@@ -160,24 +202,53 @@ namespace System.Collections.ObjectModel.Tests
         {
             string[] anArray = new string[] { "one", "two", "three", "four" };
             ObservableCollection<string> collection = new ObservableCollection<string>(anArray);
-            ReadOnlyObservableCollection<string> readonlyCol = new ReadOnlyObservableCollection<string>(collection);
-            ((INotifyCollectionChanged)readonlyCol).CollectionChanged += (o, e) => { throw new ShouldNotBeInvokedException(); };
+            ReadOnlyObservableCollection<string> readonlyCol =
+                new ReadOnlyObservableCollection<string>(collection);
+            ((INotifyCollectionChanged)readonlyCol).CollectionChanged += (o, e) =>
+            {
+                throw new ShouldNotBeInvokedException();
+            };
 
             int validIndex = 2;
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue };
-            int[] iArrLargeValues = new int[] { anArray.Length, int.MaxValue, int.MaxValue / 2, int.MaxValue / 10 };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+            };
+            int[] iArrLargeValues = new int[]
+            {
+                anArray.Length,
+                int.MaxValue,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+            };
 
             foreach (var index in iArrInvalidValues)
             {
                 // invalid startIndex, valid destination index.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Move(index, validIndex));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Move(index, validIndex)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
             }
 
             foreach (var index in iArrLargeValues)
             {
                 // invalid startIndex, valid destination index.
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Move(index, validIndex));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Move(index, validIndex)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
             }
         }
@@ -190,9 +261,13 @@ namespace System.Collections.ObjectModel.Tests
         public static void InsertTest()
         {
             string[] anArrayString = new string[] { "one", "two", "three", "four" };
-            ObservableCollection<string> collection = new ObservableCollection<string>(anArrayString);
-            ReadOnlyObservableCollection<string> readonlyCol = new ReadOnlyObservableCollection<string>(collection);
-            ReadOnlyCollectionAndPropertyChangedTester helper = new ReadOnlyCollectionAndPropertyChangedTester();
+            ObservableCollection<string> collection = new ObservableCollection<string>(
+                anArrayString
+            );
+            ReadOnlyObservableCollection<string> readonlyCol =
+                new ReadOnlyObservableCollection<string>(collection);
+            ReadOnlyCollectionAndPropertyChangedTester helper =
+                new ReadOnlyCollectionAndPropertyChangedTester();
             helper.AddOrInsertItemTest(readonlyCol, collection, "seven", 2);
             helper.AddOrInsertItemTest(readonlyCol, collection, "zero", 0);
             helper.AddOrInsertItemTest(readonlyCol, collection, "eight", collection.Count);
@@ -209,21 +284,51 @@ namespace System.Collections.ObjectModel.Tests
         {
             Guid[] anArray = { Guid.NewGuid(), Guid.NewGuid(), Guid.NewGuid() };
             ObservableCollection<Guid> collection = new ObservableCollection<Guid>(anArray);
-            ReadOnlyObservableCollection<Guid> readonlyCol = new ReadOnlyObservableCollection<Guid>(collection);
-            ((INotifyCollectionChanged)readonlyCol).CollectionChanged += (o, e) => { throw new ShouldNotBeInvokedException(); };
+            ReadOnlyObservableCollection<Guid> readonlyCol = new ReadOnlyObservableCollection<Guid>(
+                collection
+            );
+            ((INotifyCollectionChanged)readonlyCol).CollectionChanged += (o, e) =>
+            {
+                throw new ShouldNotBeInvokedException();
+            };
 
             Guid itemToInsert = Guid.NewGuid();
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+            };
             foreach (var index in iArrInvalidValues)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Insert(index, itemToInsert));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Insert(index, itemToInsert)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
             }
 
-            int[] iArrLargeValues = new int[] { collection.Count + 1, int.MaxValue, int.MaxValue / 2, int.MaxValue / 10 };
+            int[] iArrLargeValues = new int[]
+            {
+                collection.Count + 1,
+                int.MaxValue,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+            };
             foreach (var index in iArrLargeValues)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Insert(index, itemToInsert));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => collection.Insert(index, itemToInsert)
+                );
                 Assert.Equal(anArray.Length, collection.Count);
             }
         }
@@ -237,8 +342,10 @@ namespace System.Collections.ObjectModel.Tests
         {
             string[] anArray = new string[] { "one", "two", "three", "four" };
             ObservableCollection<string> collection = new ObservableCollection<string>(anArray);
-            ReadOnlyObservableCollection<string> readonlyCol = new ReadOnlyObservableCollection<string>(collection);
-            ReadOnlyCollectionAndPropertyChangedTester helper = new ReadOnlyCollectionAndPropertyChangedTester();
+            ReadOnlyObservableCollection<string> readonlyCol =
+                new ReadOnlyObservableCollection<string>(collection);
+            ReadOnlyCollectionAndPropertyChangedTester helper =
+                new ReadOnlyCollectionAndPropertyChangedTester();
             helper.ReplaceItemTest(readonlyCol, collection, 1, "seven");
             helper.ReplaceItemTest(readonlyCol, collection, 3, "zero");
         }
@@ -256,6 +363,7 @@ namespace System.Collections.ObjectModel.Tests
 
         // Number of collection changed events that were ACTUALLY fired.
         private int _numCollectionChangedFired;
+
         // Number of collection changed events that are EXPECTED to be fired.
         private int _expectedCollectionChangedFired;
 
@@ -273,15 +381,19 @@ namespace System.Collections.ObjectModel.Tests
         /// Will perform an Add or Insert on the given Collection depending on whether the
         /// insertIndex is null or not. If it is null, will Add, otherwise, will Insert.
         /// </summary>
-        public void AddOrInsertItemTest(ReadOnlyObservableCollection<string> readOnlyCol, ObservableCollection<string> collection,
-            string itemToAdd, int? insertIndex = null)
+        public void AddOrInsertItemTest(
+            ReadOnlyObservableCollection<string> readOnlyCol,
+            ObservableCollection<string> collection,
+            string itemToAdd,
+            int? insertIndex = null
+        )
         {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
             {
                 new PropertyNameExpected(COUNT),
-                new PropertyNameExpected(ITEMARRAY)
+                new PropertyNameExpected(ITEMARRAY),
             };
 
             INotifyCollectionChanged readOnlyCollectionChanged = readOnlyCol;
@@ -313,7 +425,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(_expectedCollectionChangedFired, _numCollectionChangedFired);
 
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we just added an item");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we just added an item"
+                );
 
             readOnlyCollectionChanged.CollectionChanged -= Collection_CollectionChanged;
             readOnlyPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -322,14 +439,17 @@ namespace System.Collections.ObjectModel.Tests
         /// <summary>
         /// Clears the given Collection.
         /// </summary>
-        public void ClearTest(ReadOnlyObservableCollection<string> readOnlyCol, ObservableCollection<string> collection)
+        public void ClearTest(
+            ReadOnlyObservableCollection<string> readOnlyCol,
+            ObservableCollection<string> collection
+        )
         {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
             {
                 new PropertyNameExpected(COUNT),
-                new PropertyNameExpected(ITEMARRAY)
+                new PropertyNameExpected(ITEMARRAY),
             };
 
             INotifyCollectionChanged readOnlyCollectionChange = readOnlyCol;
@@ -346,7 +466,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(_expectedCollectionChangedFired, _numCollectionChangedFired);
 
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we just cleared the collection.");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we just cleared the collection."
+                );
 
             readOnlyCollectionChange.CollectionChanged -= Collection_CollectionChanged;
             readOnlyPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -355,8 +480,12 @@ namespace System.Collections.ObjectModel.Tests
         /// <summary>
         /// Given a collection, will move an item from the oldIndex to the newIndex.
         /// </summary>
-        public void MoveItemTest(ReadOnlyObservableCollection<string> readOnlyCol, ObservableCollection<string> collection,
-            int oldIndex, int newIndex)
+        public void MoveItemTest(
+            ReadOnlyObservableCollection<string> readOnlyCol,
+            ObservableCollection<string> collection,
+            int oldIndex,
+            int newIndex
+        )
         {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
@@ -380,7 +509,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(_expectedCollectionChangedFired, _numCollectionChangedFired);
 
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we moved an item.");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we moved an item."
+                );
 
             readOnlyCollectionChange.CollectionChanged -= Collection_CollectionChanged;
             readOnlyPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -389,8 +523,12 @@ namespace System.Collections.ObjectModel.Tests
         /// <summary>
         /// Will set that new item at the specified index in the given collection.
         /// </summary>
-        public void ReplaceItemTest(ReadOnlyObservableCollection<string> readOnlyCol, ObservableCollection<string> collection,
-            int index, string newItem)
+        public void ReplaceItemTest(
+            ReadOnlyObservableCollection<string> readOnlyCol,
+            ObservableCollection<string> collection,
+            int index,
+            string newItem
+        )
         {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
@@ -416,7 +554,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(_expectedCollectionChangedFired, _numCollectionChangedFired);
 
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we replaced an item");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we replaced an item"
+                );
 
             readOnlyCollectionChange.CollectionChanged -= Collection_CollectionChanged;
             readOnlyPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -427,15 +570,21 @@ namespace System.Collections.ObjectModel.Tests
         /// from the index. If the item has duplicates, will verify that only the first
         /// instance was removed.
         /// </summary>
-        public void RemoveItemTest(ReadOnlyObservableCollection<string> readOnlyCol, ObservableCollection<string> collection,
-            int itemIndex, string itemToRemove, bool isSuccessfulRemove, bool hasDuplicates)
+        public void RemoveItemTest(
+            ReadOnlyObservableCollection<string> readOnlyCol,
+            ObservableCollection<string> collection,
+            int itemIndex,
+            string itemToRemove,
+            bool isSuccessfulRemove,
+            bool hasDuplicates
+        )
         {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
             {
                 new PropertyNameExpected(COUNT),
-                new PropertyNameExpected(ITEMARRAY)
+                new PropertyNameExpected(ITEMARRAY),
             };
 
             INotifyCollectionChanged readOnlyCollectionChange = readOnlyCol;
@@ -459,14 +608,24 @@ namespace System.Collections.ObjectModel.Tests
             if (isSuccessfulRemove)
             {
                 foreach (var item in _expectedPropertyChanged)
-                    Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since an item was removed");
+                    Assert.True(
+                        item.IsFound,
+                        "The propertychanged event should have fired for"
+                            + item.Name
+                            + ", since an item was removed"
+                    );
 
                 Assert.True(removedItem, "Should have been successful in removing the item.");
             }
             else
             {
                 foreach (var item in _expectedPropertyChanged)
-                    Assert.False(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since no items were removed.");
+                    Assert.False(
+                        item.IsFound,
+                        "The propertychanged event should have fired for"
+                            + item.Name
+                            + ", since no items were removed."
+                    );
 
                 Assert.False(removedItem, "Should not have been successful in removing the item.");
             }
@@ -482,15 +641,18 @@ namespace System.Collections.ObjectModel.Tests
         /// <summary>
         /// Verifies that the item is removed from a given index in the collection.
         /// </summary>
-        public void RemoveItemAtTest(ReadOnlyObservableCollection<string> readOnlyCol, ObservableCollection<string> collection,
-            int itemIndex)
+        public void RemoveItemAtTest(
+            ReadOnlyObservableCollection<string> readOnlyCol,
+            ObservableCollection<string> collection,
+            int itemIndex
+        )
         {
             INotifyPropertyChanged readOnlyPropertyChanged = readOnlyCol;
             readOnlyPropertyChanged.PropertyChanged += Collection_PropertyChanged;
             _expectedPropertyChanged = new[]
             {
                 new PropertyNameExpected(COUNT),
-                new PropertyNameExpected(ITEMARRAY)
+                new PropertyNameExpected(ITEMARRAY),
             };
 
             INotifyCollectionChanged readOnlyCollectionChange = readOnlyCol;
@@ -512,7 +674,12 @@ namespace System.Collections.ObjectModel.Tests
             Assert.Equal(_expectedCollectionChangedFired, _numCollectionChangedFired);
 
             foreach (var item in _expectedPropertyChanged)
-                Assert.True(item.IsFound, "The propertychanged event should have fired for" + item.Name + ", since we replaced an item");
+                Assert.True(
+                    item.IsFound,
+                    "The propertychanged event should have fired for"
+                        + item.Name
+                        + ", since we replaced an item"
+                );
 
             readOnlyCollectionChange.CollectionChanged -= Collection_CollectionChanged;
             readOnlyPropertyChanged.PropertyChanged -= Collection_PropertyChanged;
@@ -531,9 +698,15 @@ namespace System.Collections.ObjectModel.Tests
             if (_expectedNewItems != null)
             {
                 foreach (var newItem in e.NewItems)
-                    Assert.True(_expectedNewItems.Contains(newItem), "newItem was not in the ExpectedNewItems. newItem: " + newItem);
+                    Assert.True(
+                        _expectedNewItems.Contains(newItem),
+                        "newItem was not in the ExpectedNewItems. newItem: " + newItem
+                    );
                 foreach (var expectedItem in _expectedNewItems)
-                    Assert.True(e.NewItems.Contains(expectedItem), "expectedItem was not in e.NewItems. expectedItem: " + expectedItem);
+                    Assert.True(
+                        e.NewItems.Contains(expectedItem),
+                        "expectedItem was not in e.NewItems. expectedItem: " + expectedItem
+                    );
             }
             else
             {
@@ -543,9 +716,15 @@ namespace System.Collections.ObjectModel.Tests
             if (_expectedOldItems != null)
             {
                 foreach (var oldItem in e.OldItems)
-                    Assert.True(_expectedOldItems.Contains(oldItem), "oldItem was not in the ExpectedOldItems. oldItem: " + oldItem);
+                    Assert.True(
+                        _expectedOldItems.Contains(oldItem),
+                        "oldItem was not in the ExpectedOldItems. oldItem: " + oldItem
+                    );
                 foreach (var expectedItem in _expectedOldItems)
-                    Assert.True(e.OldItems.Contains(expectedItem), "expectedItem was not in e.OldItems. expectedItem: " + expectedItem);
+                    Assert.True(
+                        e.OldItems.Contains(expectedItem),
+                        "expectedItem was not in e.OldItems. expectedItem: " + expectedItem
+                    );
             }
             else
             {
@@ -555,7 +734,10 @@ namespace System.Collections.ObjectModel.Tests
 
         private void Collection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            Assert.True(sender is ReadOnlyObservableCollection<string>, "The sender of this event should be the ReadOnlyObservableCollection.");
+            Assert.True(
+                sender is ReadOnlyObservableCollection<string>,
+                "The sender of this event should be the ReadOnlyObservableCollection."
+            );
 
             _numCollectionChangedFired++;
             Assert.Equal(_expectedAction, e.Action);
@@ -575,7 +757,10 @@ namespace System.Collections.ObjectModel.Tests
 
         private void Collection_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            Assert.True(sender is ReadOnlyObservableCollection<string>, "The sender of this event should be the ReadOnlyObservableCollection.");
+            Assert.True(
+                sender is ReadOnlyObservableCollection<string>,
+                "The sender of this event should be the ReadOnlyObservableCollection."
+            );
             foreach (var item in _expectedPropertyChanged)
             {
                 if (item.Name == e.PropertyName)

@@ -5,6 +5,5 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class IncompleteMappingInheritanceQuerySqliteFixture : TPHInheritanceQuerySqliteFixture
 {
-    public override bool IsDiscriminatorMappingComplete
-        => false;
+    public override bool IsDiscriminatorMappingComplete => false;
 }

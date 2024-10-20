@@ -60,9 +60,9 @@ namespace System.Data.EntityClient
             this._updatedRowSource = UpdateRowSource.Both;
             this._parameters = new EntityParameterCollection();
 
-            // Future Enhancement: (See SQLPT #300004256) At some point it would be  
-            // really nice to read defaults from a global configuration, but we're not 
-            // doing that today.  
+            // Future Enhancement: (See SQLPT #300004256) At some point it would be
+            // really nice to read defaults from a global configuration, but we're not
+            // doing that today.
             this._enableQueryPlanCaching = true;
         }
 
@@ -95,7 +95,11 @@ namespace System.Data.EntityClient
         /// <param name="statement">The eSQL command text to execute</param>
         /// <param name="connection">The connection object</param>
         /// <param name="transaction">The transaction object this command executes in</param>
-        public EntityCommand(string statement, EntityConnection connection, EntityTransaction transaction)
+        public EntityCommand(
+            string statement,
+            EntityConnection connection,
+            EntityTransaction transaction
+        )
             : this(statement, connection)
         {
             // Assign other member fields from the parameters
@@ -110,7 +114,7 @@ namespace System.Data.EntityClient
             : this()
         {
             // Assign other member fields from the parameters
-            this._commandDefinition = commandDefinition; 
+            this._commandDefinition = commandDefinition;
             this._parameters = new EntityParameterCollection();
 
             // Make copies of the parameters
@@ -128,12 +132,15 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Constructs a new EntityCommand given a EntityConnection and an EntityCommandDefition. This 
+        /// Constructs a new EntityCommand given a EntityConnection and an EntityCommandDefition. This
         /// constructor is used by ObjectQueryExecution plan to execute an ObjectQuery.
         /// </summary>
         /// <param name="connection">The connection against which this EntityCommand should execute</param>
         /// <param name="commandDefinition">The prepared command definition that can be executed using this EntityCommand</param>
-        internal EntityCommand(EntityConnection connection, EntityCommandDefinition entityCommandDefinition )
+        internal EntityCommand(
+            EntityConnection connection,
+            EntityCommandDefinition entityCommandDefinition
+        )
             : this(entityCommandDefinition)
         {
             this._connection = connection;
@@ -144,10 +151,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public new EntityConnection Connection
         {
-            get
-            {
-                return this._connection;
-            }
+            get { return this._connection; }
             set
             {
                 ThrowIfDataReaderIsOpen();
@@ -169,14 +173,8 @@ namespace System.Data.EntityClient
         /// </summary>
         protected override DbConnection DbConnection
         {
-            get
-            {
-                return this.Connection;
-            }
-            set
-            {
-                this.Connection = (EntityConnection)value;
-            }
+            get { return this.Connection; }
+            set { this.Connection = (EntityConnection)value; }
         }
 
         /// <summary>
@@ -188,7 +186,9 @@ namespace System.Data.EntityClient
             {
                 // If the user set the command tree previously, then we cannot retrieve the command text
                 if (this._commandTreeSetByUser != null)
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_CannotGetCommandText);
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.EntityClient_CannotGetCommandText
+                    );
 
                 return this._esqlCommandText ?? "";
             }
@@ -198,7 +198,9 @@ namespace System.Data.EntityClient
 
                 // If the user set the command tree previously, then we cannot set the command text
                 if (this._commandTreeSetByUser != null)
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_CannotSetCommandText);
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.EntityClient_CannotSetCommandText
+                    );
 
                 if (this._esqlCommandText != value)
                 {
@@ -223,7 +225,9 @@ namespace System.Data.EntityClient
             {
                 // If the user set the command text previously, then we cannot retrieve the command tree
                 if (!string.IsNullOrEmpty(this._esqlCommandText))
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_CannotGetCommandTree);
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.EntityClient_CannotGetCommandTree
+                    );
 
                 return this._commandTreeSetByUser;
             }
@@ -233,12 +237,16 @@ namespace System.Data.EntityClient
 
                 // If the user set the command text previously, then we cannot set the command tree
                 if (!string.IsNullOrEmpty(this._esqlCommandText))
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_CannotSetCommandTree);
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.EntityClient_CannotSetCommandTree
+                    );
 
                 // If the command type is not Text, CommandTree cannot be set
                 if (CommandType.Text != CommandType)
                 {
-                    throw EntityUtil.InternalError(EntityUtil.InternalErrorCode.CommandTreeOnStoredProcedureEntityCommand);
+                    throw EntityUtil.InternalError(
+                        EntityUtil.InternalErrorCode.CommandTreeOnStoredProcedureEntityCommand
+                    );
                 }
 
                 if (this._commandTreeSetByUser != value)
@@ -267,7 +275,7 @@ namespace System.Data.EntityClient
                 {
                     return this._commandTimeout.Value;
                 }
-                
+
                 // Create a provider command object just so we can ask the default timeout
                 if (this._connection != null && this._connection.StoreProviderFactory != null)
                 {
@@ -292,10 +300,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override CommandType CommandType
         {
-            get
-            {
-                return this._commandType;
-            }
+            get { return this._commandType; }
             set
             {
                 ThrowIfDataReaderIsOpen();
@@ -303,7 +308,9 @@ namespace System.Data.EntityClient
                 // For now, command type other than Text is not supported
                 if (value != CommandType.Text && value != CommandType.StoredProcedure)
                 {
-                    throw EntityUtil.NotSupported(System.Data.Entity.Strings.EntityClient_UnsupportedCommandType);
+                    throw EntityUtil.NotSupported(
+                        System.Data.Entity.Strings.EntityClient_UnsupportedCommandType
+                    );
                 }
 
                 this._commandType = value;
@@ -315,10 +322,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public new EntityParameterCollection Parameters
         {
-            get
-            {
-                return this._parameters;
-            }
+            get { return this._parameters; }
         }
 
         /// <summary>
@@ -326,10 +330,7 @@ namespace System.Data.EntityClient
         /// </summary>
         protected override DbParameterCollection DbParameterCollection
         {
-            get
-            {
-                return this.Parameters;
-            }
+            get { return this.Parameters; }
         }
 
         /// <summary>
@@ -339,7 +340,7 @@ namespace System.Data.EntityClient
         {
             get
             {
-                return this._transaction;   // SQLBU 496829
+                return this._transaction; // SQLBU 496829
             }
             set
             {
@@ -353,14 +354,8 @@ namespace System.Data.EntityClient
         /// </summary>
         protected override DbTransaction DbTransaction
         {
-            get
-            {
-                return this.Transaction;
-            }
-            set
-            {
-                this.Transaction = (EntityTransaction)value;
-            }
+            get { return this.Transaction; }
+            set { this.Transaction = (EntityTransaction)value; }
         }
 
         /// <summary>
@@ -368,10 +363,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override UpdateRowSource UpdatedRowSource
         {
-            get
-            {
-                return this._updatedRowSource;
-            }
+            get { return this._updatedRowSource; }
             set
             {
                 ThrowIfDataReaderIsOpen();
@@ -384,10 +376,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override bool DesignTimeVisible
         {
-            get
-            {
-                return this._designTimeVisible;
-            }
+            get { return this._designTimeVisible; }
             set
             {
                 ThrowIfDataReaderIsOpen();
@@ -401,11 +390,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public bool EnablePlanCaching
         {
-            get
-            {
-                return this._enableQueryPlanCaching;
-            }
-
+            get { return this._enableQueryPlanCaching; }
             set
             {
                 ThrowIfDataReaderIsOpen();
@@ -416,15 +401,16 @@ namespace System.Data.EntityClient
         /// <summary>
         /// Cancel the execution of the command
         /// </summary>
-        public override void Cancel()
-        {
-        }
+        public override void Cancel() { }
 
         /// <summary>
         /// Create and return a new parameter object representing a parameter in the eSQL statement
         /// </summary>
         ///
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic"
+        )]
         public new EntityParameter CreateParameter()
         {
             return new EntityParameter();
@@ -459,7 +445,11 @@ namespace System.Data.EntityClient
         {
             Prepare(); // prepare the query first
 
-            EntityDataReader reader = new EntityDataReader(this, _commandDefinition.Execute(this, behavior), behavior);
+            EntityDataReader reader = new EntityDataReader(
+                this,
+                _commandDefinition.Execute(this, behavior),
+                behavior
+            );
             _dataReader = reader;
             return reader;
         }
@@ -480,7 +470,7 @@ namespace System.Data.EntityClient
         /// <returns>Number of rows affected</returns>
         public override int ExecuteNonQuery()
         {
-            return ExecuteScalar<int>(reader => 
+            return ExecuteScalar<int>(reader =>
             {
                 // consume reader before checking records affected
                 CommandHelper.ConsumeReader(reader);
@@ -494,7 +484,7 @@ namespace System.Data.EntityClient
         /// <returns>The result in the first column in the first row</returns>
         public override object ExecuteScalar()
         {
-            return ExecuteScalar<object>(reader => 
+            return ExecuteScalar<object>(reader =>
             {
                 object result = reader.Read() ? reader.GetValue(0) : null;
                 // consume reader before retrieving parameters
@@ -525,7 +515,7 @@ namespace System.Data.EntityClient
             this._preparedCommandTree = null;
 
             // Clear the dirty flag on the parameters and parameter collection
-            _parameters.ResetIsDirty();            
+            _parameters.ResetIsDirty();
         }
 
         /// <summary>
@@ -571,22 +561,28 @@ namespace System.Data.EntityClient
                 {
                     resultTree = this._commandTreeSetByUser;
                 }
-                else
-                if (CommandType.Text == CommandType)
+                else if (CommandType.Text == CommandType)
                 {
                     if (!string.IsNullOrEmpty(this._esqlCommandText))
                     {
                         // The perspective to be used for the query compilation
-                        Perspective perspective = (Perspective)new ModelPerspective(_connection.GetMetadataWorkspace());
+                        Perspective perspective = (Perspective)
+                            new ModelPerspective(_connection.GetMetadataWorkspace());
 
                         // get a dictionary of names and typeusage from entity parameter collection
                         Dictionary<string, TypeUsage> queryParams = GetParameterTypeUsage();
 
-                        resultTree = CqlQuery.Compile(
-                            this._esqlCommandText, 
-                            perspective, 
-                            null /*parser option - use default*/, 
-                            queryParams.Select(paramInfo => paramInfo.Value.Parameter(paramInfo.Key))).CommandTree;
+                        resultTree = CqlQuery
+                            .Compile(
+                                this._esqlCommandText,
+                                perspective,
+                                null /*parser option - use default*/
+                                ,
+                                queryParams.Select(paramInfo =>
+                                    paramInfo.Value.Parameter(paramInfo.Key)
+                                )
+                            )
+                            .CommandTree;
                     }
                     else
                     {
@@ -596,20 +592,35 @@ namespace System.Data.EntityClient
                             // This command was based on a prepared command definition and has no command text,
                             // so reprepare is not possible. To create a new command with different parameters
                             // requires creating a new entity command definition and calling it's CreateCommand method.
-                            throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_CannotReprepareCommandDefinitionBasedCommand);
+                            throw EntityUtil.InvalidOperation(
+                                System
+                                    .Data
+                                    .Entity
+                                    .Strings
+                                    .EntityClient_CannotReprepareCommandDefinitionBasedCommand
+                            );
                         }
                         else
                         {
-                            throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_NoCommandText);
+                            throw EntityUtil.InvalidOperation(
+                                System.Data.Entity.Strings.EntityClient_NoCommandText
+                            );
                         }
                     }
                 }
                 else if (CommandType.StoredProcedure == CommandType)
                 {
                     // get a dictionary of names and typeusage from entity parameter collection
-                    IEnumerable<KeyValuePair<string, TypeUsage>> queryParams = GetParameterTypeUsage();
+                    IEnumerable<KeyValuePair<string, TypeUsage>> queryParams =
+                        GetParameterTypeUsage();
                     EdmFunction function = DetermineFunctionImport();
-                    resultTree = new DbFunctionCommandTree(this.Connection.GetMetadataWorkspace(), DataSpace.CSpace, function, null, queryParams);
+                    resultTree = new DbFunctionCommandTree(
+                        this.Connection.GetMetadataWorkspace(),
+                        DataSpace.CSpace,
+                        function,
+                        null,
+                        queryParams
+                    );
                 }
 
                 // After everything is good and succeeded, assign the result to our field
@@ -623,10 +634,14 @@ namespace System.Data.EntityClient
         {
             Debug.Assert(CommandType.StoredProcedure == this.CommandType);
 
-            if (string.IsNullOrEmpty(this.CommandText) ||
-                string.IsNullOrEmpty(this.CommandText.Trim()))
+            if (
+                string.IsNullOrEmpty(this.CommandText)
+                || string.IsNullOrEmpty(this.CommandText.Trim())
+            )
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_FunctionImportEmptyCommandText);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_FunctionImportEmptyCommandText
+                );
             }
 
             MetadataWorkspace workspace = _connection.GetMetadataWorkspace();
@@ -635,9 +650,18 @@ namespace System.Data.EntityClient
             string containerName;
             string functionImportName;
             string defaultContainerName = null; // no default container in EntityCommand
-            CommandHelper.ParseFunctionImportCommandText(this.CommandText, defaultContainerName, out containerName, out functionImportName);
+            CommandHelper.ParseFunctionImportCommandText(
+                this.CommandText,
+                defaultContainerName,
+                out containerName,
+                out functionImportName
+            );
 
-            return CommandHelper.FindFunctionImport(_connection.GetMetadataWorkspace(), containerName, functionImportName);
+            return CommandHelper.FindFunctionImport(
+                _connection.GetMetadataWorkspace(),
+                containerName,
+                functionImportName
+            );
         }
 
         /// <summary>
@@ -674,14 +698,14 @@ namespace System.Data.EntityClient
         /// </summary>
         /// <returns></returns>
         [Browsable(false)]
-        public string ToTraceString() 
+        public string ToTraceString()
         {
             CheckConnectionPresent();
 
             InnerPrepare();
 
             EntityCommandDefinition commandDefinition = _commandDefinition;
-            if (null != commandDefinition) 
+            if (null != commandDefinition)
             {
                 return commandDefinition.ToTraceString();
             }
@@ -693,7 +717,9 @@ namespace System.Data.EntityClient
         /// </summary>
         /// <param name="entityCommandDefinition">out param. returns the entitycommanddefinition for a given cache key</param>
         /// <returns>true if a match is found in cache, false otherwise</returns>
-        private bool TryGetEntityCommandDefinitionFromQueryCache( out EntityCommandDefinition entityCommandDefinition )
+        private bool TryGetEntityCommandDefinitionFromQueryCache(
+            out EntityCommandDefinition entityCommandDefinition
+        )
         {
             Debug.Assert(null != _connection, "Connection must not be null at this point");
             entityCommandDefinition = null;
@@ -714,8 +740,10 @@ namespace System.Data.EntityClient
             //
             // Try cache lookup
             //
-            QueryCacheManager queryCacheManager = _connection.GetMetadataWorkspace().GetQueryCacheManager();
-            Debug.Assert(null != queryCacheManager,"QuerycacheManager instance cannot be null");
+            QueryCacheManager queryCacheManager = _connection
+                .GetMetadataWorkspace()
+                .GetQueryCacheManager();
+            Debug.Assert(null != queryCacheManager, "QuerycacheManager instance cannot be null");
             if (!queryCacheManager.TryCacheLookup(queryCacheKey, out entityCommandDefinition))
             {
                 //
@@ -727,33 +755,52 @@ namespace System.Data.EntityClient
                 // add to the cache
                 //
                 QueryCacheEntry outQueryCacheEntry = null;
-                if (queryCacheManager.TryLookupAndAdd(new QueryCacheEntry(queryCacheKey, entityCommandDefinition), out outQueryCacheEntry))
+                if (
+                    queryCacheManager.TryLookupAndAdd(
+                        new QueryCacheEntry(queryCacheKey, entityCommandDefinition),
+                        out outQueryCacheEntry
+                    )
+                )
                 {
-                    entityCommandDefinition = (EntityCommandDefinition)outQueryCacheEntry.GetTarget();
+                    entityCommandDefinition = (EntityCommandDefinition)
+                        outQueryCacheEntry.GetTarget();
                 }
             }
-            
-            Debug.Assert(null != entityCommandDefinition, "out entityCommandDefinition must not be null");
+
+            Debug.Assert(
+                null != entityCommandDefinition,
+                "out entityCommandDefinition must not be null"
+            );
 
             return true;
         }
 
         /// <summary>
-        /// Creates a commandDefinition for the command, using the options specified.  
-        /// 
+        /// Creates a commandDefinition for the command, using the options specified.
+        ///
         /// Note: This method must not be side-effecting of the command
         /// </summary>
         /// <returns>the command definition</returns>
-        private EntityCommandDefinition CreateCommandDefinition() 
+        private EntityCommandDefinition CreateCommandDefinition()
         {
             MakeCommandTree();
             // Always check the CQT metadata against the connection metadata (internally, CQT already
             // validates metadata consistency)
-            if (!_preparedCommandTree.MetadataWorkspace.IsMetadataWorkspaceCSCompatible(this.Connection.GetMetadataWorkspace()))
+            if (
+                !_preparedCommandTree.MetadataWorkspace.IsMetadataWorkspaceCSCompatible(
+                    this.Connection.GetMetadataWorkspace()
+                )
+            )
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_CommandTreeMetadataIncompatible);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_CommandTreeMetadataIncompatible
+                );
             }
-            EntityCommandDefinition result = EntityProviderServices.Instance.CreateCommandDefinition(this._connection.StoreProviderFactory, this._preparedCommandTree);
+            EntityCommandDefinition result =
+                EntityProviderServices.Instance.CreateCommandDefinition(
+                    this._connection.StoreProviderFactory,
+                    this._preparedCommandTree
+                );
             return result;
         }
 
@@ -761,7 +808,9 @@ namespace System.Data.EntityClient
         {
             if (this._connection == null)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_NoConnectionForCommand);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_NoConnectionForCommand
+                );
             }
         }
 
@@ -773,18 +822,28 @@ namespace System.Data.EntityClient
             // Check that we have a connection
             CheckConnectionPresent();
 
-            if (this._connection.StoreProviderFactory == null || this._connection.StoreConnection == null)
+            if (
+                this._connection.StoreProviderFactory == null
+                || this._connection.StoreConnection == null
+            )
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_ConnectionStringNeededBeforeOperation);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_ConnectionStringNeededBeforeOperation
+                );
             }
 
             // Make sure the connection is not closed or broken
-            if ((this._connection.State == ConnectionState.Closed) || (this._connection.State == ConnectionState.Broken))
+            if (
+                (this._connection.State == ConnectionState.Closed)
+                || (this._connection.State == ConnectionState.Broken)
+            )
             {
-                string message = System.Data.Entity.Strings.EntityClient_ExecutingOnClosedConnection(
-                    this._connection.State == ConnectionState.Closed ?
-                    System.Data.Entity.Strings.EntityClient_ConnectionStateClosed :
-                    System.Data.Entity.Strings.EntityClient_ConnectionStateBroken);
+                string message =
+                    System.Data.Entity.Strings.EntityClient_ExecutingOnClosedConnection(
+                        this._connection.State == ConnectionState.Closed
+                            ? System.Data.Entity.Strings.EntityClient_ConnectionStateClosed
+                            : System.Data.Entity.Strings.EntityClient_ConnectionStateBroken
+                    );
                 throw EntityUtil.InvalidOperation(message);
             }
         }
@@ -796,12 +855,14 @@ namespace System.Data.EntityClient
         {
             if (this._dataReader != null)
             {
-                throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_DataReaderIsStillOpen);
+                throw EntityUtil.InvalidOperation(
+                    System.Data.Entity.Strings.EntityClient_DataReaderIsStillOpen
+                );
             }
         }
 
         /// <summary>
-        /// Returns a dictionary of parameter name and parameter typeusage in s-space from the entity parameter 
+        /// Returns a dictionary of parameter name and parameter typeusage in s-space from the entity parameter
         /// collection given by the user.
         /// </summary>
         /// <returns></returns>
@@ -809,7 +870,9 @@ namespace System.Data.EntityClient
         {
             Debug.Assert(null != _parameters, "_parameters must not be null");
             // Extract type metadata objects from the parameters to be used by CqlQuery.Compile
-            Dictionary<string, TypeUsage> queryParams = new Dictionary<string, TypeUsage>(_parameters.Count);
+            Dictionary<string, TypeUsage> queryParams = new Dictionary<string, TypeUsage>(
+                _parameters.Count
+            );
             foreach (EntityParameter parameter in this._parameters)
             {
                 // Validate that the parameter name has the format: A character followed by alphanumerics or
@@ -817,20 +880,35 @@ namespace System.Data.EntityClient
                 string parameterName = parameter.ParameterName;
                 if (string.IsNullOrEmpty(parameterName))
                 {
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_EmptyParameterName);
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.EntityClient_EmptyParameterName
+                    );
                 }
 
                 // Check each parameter to make sure it's an input parameter, currently EntityCommand doesn't support
                 // anything else
-                if (this.CommandType == CommandType.Text && parameter.Direction != ParameterDirection.Input)
+                if (
+                    this.CommandType == CommandType.Text
+                    && parameter.Direction != ParameterDirection.Input
+                )
                 {
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_InvalidParameterDirection(parameter.ParameterName));
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.EntityClient_InvalidParameterDirection(
+                            parameter.ParameterName
+                        )
+                    );
                 }
 
                 // Checking that we can deduce the type from the parameter if the type is not set
-                if (parameter.EdmType == null && parameter.DbType == DbType.Object && (parameter.Value == null || parameter.Value is DBNull))
+                if (
+                    parameter.EdmType == null
+                    && parameter.DbType == DbType.Object
+                    && (parameter.Value == null || parameter.Value is DBNull)
+                )
                 {
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_UnknownParameterType(parameterName));
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.EntityClient_UnknownParameterType(parameterName)
+                    );
                 }
 
                 // Validate that the parameter has an appropriate type and value
@@ -845,10 +923,15 @@ namespace System.Data.EntityClient
                 }
                 catch (ArgumentException e)
                 {
-                    throw EntityUtil.InvalidOperation(System.Data.Entity.Strings.EntityClient_DuplicateParameterNames(parameter.ParameterName), e);
+                    throw EntityUtil.InvalidOperation(
+                        System.Data.Entity.Strings.EntityClient_DuplicateParameterNames(
+                            parameter.ParameterName
+                        ),
+                        e
+                    );
                 }
             }
-            
+
             return queryParams;
         }
 

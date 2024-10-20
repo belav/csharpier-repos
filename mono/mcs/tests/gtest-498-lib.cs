@@ -2,6 +2,6 @@
 
 public class C<T>
 {
-	protected int size;
-	protected internal static double ssize;
+    protected int size;
+    protected internal static double ssize;
 }

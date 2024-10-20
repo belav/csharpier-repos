@@ -15,24 +15,33 @@ public class W3CLoggingMiddlewareTests
     public void Ctor_ThrowsExceptionsWhenNullArgs()
     {
         var options = CreateOptionsAccessor();
-        Assert.Throws<ArgumentNullException>(() => new W3CLoggingMiddleware(
-            null,
-            options,
-            Helpers.CreateTestW3CLogger(options)));
+        Assert.Throws<ArgumentNullException>(
+            () => new W3CLoggingMiddleware(null, options, Helpers.CreateTestW3CLogger(options))
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new W3CLoggingMiddleware(c =>
-            {
-                return Task.CompletedTask;
-            },
-            null,
-            Helpers.CreateTestW3CLogger(options)));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new W3CLoggingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    null,
+                    Helpers.CreateTestW3CLogger(options)
+                )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new W3CLoggingMiddleware(c =>
-            {
-                return Task.CompletedTask;
-            },
-            options,
-            null));
+        Assert.Throws<ArgumentNullException>(
+            () =>
+                new W3CLoggingMiddleware(
+                    c =>
+                    {
+                        return Task.CompletedTask;
+                    },
+                    options,
+                    null
+                )
+        );
     }
 
     [Fact]
@@ -49,7 +58,8 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -76,7 +86,8 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -97,7 +108,10 @@ public class W3CLoggingMiddlewareTests
         var delta = startDate.Subtract(now).TotalSeconds;
         Assert.InRange(delta, -1, 10);
 
-        Assert.Equal("#Fields: date time c-ip s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Referer)", lines[2]);
+        Assert.Equal(
+            "#Fields: date time c-ip s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Referer)",
+            lines[2]
+        );
         Assert.DoesNotContain(lines[3], "Snickerdoodle");
     }
 
@@ -118,14 +132,16 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         options.CurrentValue.AdditionalRequestHeaders.Add("ignored-header-added-after-clone");
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
         httpContext.Request.Headers["Cookie"] = "Snickerdoodle";
-        httpContext.Request.Headers["x-forwarded-for"] = "1.3.3.7, 2001:db8:85a3:8d3:1319:8a2e:370:7348";
+        httpContext.Request.Headers["x-forwarded-for"] =
+            "1.3.3.7, 2001:db8:85a3:8d3:1319:8a2e:370:7348";
         httpContext.Response.StatusCode = 200;
 
         var now = DateTime.UtcNow;
@@ -142,7 +158,10 @@ public class W3CLoggingMiddlewareTests
         var delta = startDate.Subtract(now).TotalSeconds;
         Assert.InRange(delta, -1, 10);
 
-        Assert.Equal("#Fields: date time c-ip s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Referer) cs(:invalid) cs(x-client-ssl-protocol) cs(x-forwarded-for)", lines[2]);
+        Assert.Equal(
+            "#Fields: date time c-ip s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Referer) cs(:invalid) cs(x-client-ssl-protocol) cs(x-forwarded-for)",
+            lines[2]
+        );
         Assert.DoesNotContain("Snickerdoodle", lines[3]);
         Assert.EndsWith("- - 1.3.3.7,+2001:db8:85a3:8d3:1319:8a2e:370:7348", lines[3]);
     }
@@ -162,7 +181,8 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
@@ -193,12 +213,14 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
         httpContext.Request.Headers["Cookie"] = "Snickerdoodle";
-        httpContext.Request.Headers["x-forwarded-for"] = "1.3.3.7, 2001:db8:85a3:8d3:1319:8a2e:370:7348";
+        httpContext.Request.Headers["x-forwarded-for"] =
+            "1.3.3.7, 2001:db8:85a3:8d3:1319:8a2e:370:7348";
         httpContext.Response.StatusCode = 200;
 
         var now = DateTime.UtcNow;
@@ -217,9 +239,12 @@ public class W3CLoggingMiddlewareTests
     public async Task OmitsDuplicateAdditionalRequestHeaders()
     {
         var options = CreateOptionsAccessor();
-        options.CurrentValue.LoggingFields = options.CurrentValue.LoggingFields | W3CLoggingFields.Host |
-                                             W3CLoggingFields.Referer | W3CLoggingFields.UserAgent |
-                                             W3CLoggingFields.Cookie;
+        options.CurrentValue.LoggingFields =
+            options.CurrentValue.LoggingFields
+            | W3CLoggingFields.Host
+            | W3CLoggingFields.Referer
+            | W3CLoggingFields.UserAgent
+            | W3CLoggingFields.Cookie;
 
         options.CurrentValue.AdditionalRequestHeaders.Add(":invalid");
         options.CurrentValue.AdditionalRequestHeaders.Add("x-forwarded-for");
@@ -238,14 +263,16 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         options.CurrentValue.AdditionalRequestHeaders.Add("ignored-header-added-after-clone");
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.Protocol = "HTTP/1.0";
         httpContext.Request.Headers["Cookie"] = "Snickerdoodle";
-        httpContext.Request.Headers["x-forwarded-for"] = "1.3.3.7, 2001:db8:85a3:8d3:1319:8a2e:370:7348";
+        httpContext.Request.Headers["x-forwarded-for"] =
+            "1.3.3.7, 2001:db8:85a3:8d3:1319:8a2e:370:7348";
         httpContext.Response.StatusCode = 200;
 
         var now = DateTime.UtcNow;
@@ -262,7 +289,10 @@ public class W3CLoggingMiddlewareTests
         var delta = startDate.Subtract(now).TotalSeconds;
         Assert.InRange(delta, -1, 10);
 
-        Assert.Equal("#Fields: date time c-ip s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Cookie) cs(Referer) cs(:invalid) cs(x-client-ssl-protocol) cs(x-forwarded-for)", lines[2]);
+        Assert.Equal(
+            "#Fields: date time c-ip s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Cookie) cs(Referer) cs(:invalid) cs(x-client-ssl-protocol) cs(x-forwarded-for)",
+            lines[2]
+        );
         Assert.Equal(19, lines[3].Split(' ').Length);
         Assert.Contains("Snickerdoodle", lines[3]);
         Assert.Contains("- - 1.3.3.7,+2001:db8:85a3:8d3:1319:8a2e:370:7348", lines[3]);
@@ -282,7 +312,8 @@ public class W3CLoggingMiddlewareTests
                 return Task.CompletedTask;
             },
             options,
-            logger);
+            logger
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -302,13 +333,17 @@ public class W3CLoggingMiddlewareTests
 
         Assert.Equal("#Fields: time-taken", lines[2]);
         double num;
-        Assert.True(Double.TryParse(lines[3], NumberStyles.Number, CultureInfo.InvariantCulture, out num));
+        Assert.True(
+            Double.TryParse(lines[3], NumberStyles.Number, CultureInfo.InvariantCulture, out num)
+        );
     }
 
     private IOptionsMonitor<W3CLoggerOptions> CreateOptionsAccessor()
     {
         var options = new W3CLoggerOptions();
-        var optionsAccessor = Mock.Of<IOptionsMonitor<W3CLoggerOptions>>(o => o.CurrentValue == options);
+        var optionsAccessor = Mock.Of<IOptionsMonitor<W3CLoggerOptions>>(o =>
+            o.CurrentValue == options
+        );
         return optionsAccessor;
     }
 }

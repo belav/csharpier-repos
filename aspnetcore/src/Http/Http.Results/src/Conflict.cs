@@ -19,9 +19,7 @@ public sealed class Conflict : IResult, IEndpointMetadataProvider, IStatusCodeHt
     /// Initializes a new instance of the <see cref="Conflict"/> class with the values
     /// provided.
     /// </summary>
-    internal Conflict()
-    {
-    }
+    internal Conflict() { }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status409Conflict"/>
@@ -37,7 +35,9 @@ public sealed class Conflict : IResult, IEndpointMetadataProvider, IStatusCodeHt
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.ConflictObjectResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.ConflictObjectResult"
+        );
 
         HttpResultsHelper.Log.WritingResultAsStatusCode(logger, StatusCode);
         httpContext.Response.StatusCode = StatusCode;
@@ -46,11 +46,16 @@ public sealed class Conflict : IResult, IEndpointMetadataProvider, IStatusCodeHt
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.Metadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status409Conflict, typeof(void)));
+        builder.Metadata.Add(
+            new ProducesResponseTypeMetadata(StatusCodes.Status409Conflict, typeof(void))
+        );
     }
 }

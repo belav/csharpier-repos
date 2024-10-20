@@ -62,7 +62,11 @@ public abstract class RegisterModel : PageModel
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(
+            100,
+            ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+            MinimumLength = 6
+        )]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; } = default!;
@@ -81,16 +85,21 @@ public abstract class RegisterModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task OnGetAsync([StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task OnGetAsync(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null
+    ) => throw new NotImplementedException();
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPostAsync([StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPostAsync(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string? returnUrl = null
+    ) => throw new NotImplementedException();
 }
 
-internal sealed class RegisterModel<TUser> : RegisterModel where TUser : class
+internal sealed class RegisterModel<TUser> : RegisterModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly UserManager<TUser> _userManager;
@@ -104,7 +113,8 @@ internal sealed class RegisterModel<TUser> : RegisterModel where TUser : class
         IUserStore<TUser> userStore,
         SignInManager<TUser> signInManager,
         ILogger<RegisterModel> logger,
-        IEmailSender<TUser>  emailSender)
+        IEmailSender<TUser> emailSender
+    )
     {
         _userManager = userManager;
         _userStore = userStore;
@@ -134,7 +144,10 @@ internal sealed class RegisterModel<TUser> : RegisterModel where TUser : class
 
             if (result.Succeeded)
             {
-                _logger.LogInformation(LoggerEventIds.UserCreated, "User created a new account with password.");
+                _logger.LogInformation(
+                    LoggerEventIds.UserCreated,
+                    "User created a new account with password."
+                );
 
                 var userId = await _userManager.GetUserIdAsync(user);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -142,14 +155,28 @@ internal sealed class RegisterModel<TUser> : RegisterModel where TUser : class
                 var callbackUrl = Url.Page(
                     "/Account/ConfirmEmail",
                     pageHandler: null,
-                    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                    protocol: Request.Scheme)!;
+                    values: new
+                    {
+                        area = "Identity",
+                        userId = userId,
+                        code = code,
+                        returnUrl = returnUrl,
+                    },
+                    protocol: Request.Scheme
+                )!;
 
-                await _emailSender.SendConfirmationLinkAsync(user, Input.Email, HtmlEncoder.Default.Encode(callbackUrl));
+                await _emailSender.SendConfirmationLinkAsync(
+                    user,
+                    Input.Email,
+                    HtmlEncoder.Default.Encode(callbackUrl)
+                );
 
                 if (_userManager.Options.SignIn.RequireConfirmedAccount)
                 {
-                    return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+                    return RedirectToPage(
+                        "RegisterConfirmation",
+                        new { email = Input.Email, returnUrl = returnUrl }
+                    );
                 }
                 else
                 {
@@ -175,9 +202,11 @@ internal sealed class RegisterModel<TUser> : RegisterModel where TUser : class
         }
         catch
         {
-            throw new InvalidOperationException($"Can't create an instance of '{nameof(TUser)}'. " +
-                $"Ensure that '{nameof(TUser)}' is not an abstract class and has a parameterless constructor, or alternatively " +
-                $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml");
+            throw new InvalidOperationException(
+                $"Can't create an instance of '{nameof(TUser)}'. "
+                    + $"Ensure that '{nameof(TUser)}' is not an abstract class and has a parameterless constructor, or alternatively "
+                    + $"override the register page in /Areas/Identity/Pages/Account/Register.cshtml"
+            );
         }
     }
 
@@ -185,7 +214,9 @@ internal sealed class RegisterModel<TUser> : RegisterModel where TUser : class
     {
         if (!_userManager.SupportsUserEmail)
         {
-            throw new NotSupportedException("The default UI requires a user store with email support.");
+            throw new NotSupportedException(
+                "The default UI requires a user store with email support."
+            );
         }
         return (IUserEmailStore<TUser>)_userStore;
     }

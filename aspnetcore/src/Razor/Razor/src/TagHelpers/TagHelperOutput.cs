@@ -24,9 +24,9 @@ public class TagHelperOutput : IHtmlContentContainer
         : this(
             tagName,
             new TagHelperAttributeList(),
-            (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()))
-    {
-    }
+            (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        ) { }
 
     /// <summary>
     /// Instantiates a new instance of <see cref="TagHelperOutput"/>.
@@ -40,7 +40,8 @@ public class TagHelperOutput : IHtmlContentContainer
     public TagHelperOutput(
         string tagName,
         TagHelperAttributeList attributes,
-        Func<bool, HtmlEncoder, Task<TagHelperContent>> getChildContentAsync)
+        Func<bool, HtmlEncoder, Task<TagHelperContent>> getChildContentAsync
+    )
     {
         ArgumentNullException.ThrowIfNull(getChildContentAsync);
         ArgumentNullException.ThrowIfNull(attributes);
@@ -155,10 +156,7 @@ public class TagHelperOutput : IHtmlContentContainer
     /// </summary>
     public bool IsContentModified
     {
-        get
-        {
-            return _wasSuppressOutputCalled || _content?.IsModified == true;
-        }
+        get { return _wasSuppressOutputCalled || _content?.IsModified == true; }
     }
 
     /// <summary>

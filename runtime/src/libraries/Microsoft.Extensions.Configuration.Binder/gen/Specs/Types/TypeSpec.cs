@@ -40,18 +40,20 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
     public abstract record ComplexTypeSpec : TypeSpec
     {
-        protected ComplexTypeSpec(ITypeSymbol type) : base(type) { }
+        protected ComplexTypeSpec(ITypeSymbol type)
+            : base(type) { }
     }
 
     internal sealed record NullableSpec : TypeSpec
     {
-        public NullableSpec(ITypeSymbol type, TypeRef underlyingTypeRef) : base(type) =>
-            EffectiveTypeRef = underlyingTypeRef;
+        public NullableSpec(ITypeSymbol type, TypeRef underlyingTypeRef)
+            : base(type) => EffectiveTypeRef = underlyingTypeRef;
     }
 
     internal sealed record UnsupportedTypeSpec : TypeSpec
     {
-        public UnsupportedTypeSpec(ITypeSymbol type) : base(type) { }
+        public UnsupportedTypeSpec(ITypeSymbol type)
+            : base(type) { }
 
         public required NotSupportedReason NotSupportedReason { get; init; }
     }

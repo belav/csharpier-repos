@@ -15,16 +15,16 @@ public static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
     where TCodeFix : CodeFixProvider, new()
 {
     /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic()"/>
-    public static DiagnosticResult Diagnostic()
-        => CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic();
+    public static DiagnosticResult Diagnostic() =>
+        CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic();
 
     /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic(string)"/>
-    public static DiagnosticResult Diagnostic(string diagnosticId)
-        => CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(diagnosticId);
+    public static DiagnosticResult Diagnostic(string diagnosticId) =>
+        CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(diagnosticId);
 
     /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic(DiagnosticDescriptor)"/>
-    public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor)
-        => CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(descriptor);
+    public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor) =>
+        CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(descriptor);
 
     /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyAnalyzerAsync(string, DiagnosticResult[])"/>
     public static async Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
@@ -44,22 +44,36 @@ public static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
     }
 
     /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, string)"/>
-    public static async Task VerifyCodeFixAsync(string source, string fixedSource)
-        => await VerifyCodeFixAsync(source, DiagnosticResult.EmptyDiagnosticResults, fixedSource);
+    public static async Task VerifyCodeFixAsync(string source, string fixedSource) =>
+        await VerifyCodeFixAsync(source, DiagnosticResult.EmptyDiagnosticResults, fixedSource);
 
     /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult, string)"/>
-    public static async Task VerifyCodeFixAsync(string source, DiagnosticResult expected, string fixedSource)
-        => await VerifyCodeFixAsync(source, new[] { expected }, fixedSource);
+    public static async Task VerifyCodeFixAsync(
+        string source,
+        DiagnosticResult expected,
+        string fixedSource
+    ) => await VerifyCodeFixAsync(source, new[] { expected }, fixedSource);
 
     /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult[], string)"/>
-    public static async Task VerifyCodeFixAsync(string source, DiagnosticResult[] expected, string fixedSource, int? expectedIterations = null, string usageSource = null, string codeActionEquivalenceKey = null)
+    public static async Task VerifyCodeFixAsync(
+        string source,
+        DiagnosticResult[] expected,
+        string fixedSource,
+        int? expectedIterations = null,
+        string usageSource = null,
+        string codeActionEquivalenceKey = null
+    )
     {
         var test = new CSharpCodeFixTest<TAnalyzer, TCodeFix, XUnitVerifier>
         {
             // We need to set the output type to an exe to properly
             // support top-level programs in the tests. Otherwise,
             // the test infra will assume we are trying to build a library.
-            TestState = { Sources = { source.ReplaceLineEndings() }, OutputKind = OutputKind.ConsoleApplication },
+            TestState =
+            {
+                Sources = { source.ReplaceLineEndings() },
+                OutputKind = OutputKind.ConsoleApplication,
+            },
             FixedState = { Sources = { fixedSource.ReplaceLineEndings() } },
             ReferenceAssemblies = CSharpAnalyzerVerifier<TAnalyzer>.GetReferenceAssemblies(),
             NumberOfFixAllIterations = expectedIterations,

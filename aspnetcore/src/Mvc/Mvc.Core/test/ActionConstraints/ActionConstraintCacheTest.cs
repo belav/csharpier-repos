@@ -21,11 +21,7 @@ public class ActionConstraintCacheTest
 
         var action = new ControllerActionDescriptor()
         {
-            ActionConstraints = new[]
-            {
-                    new TestActionConstraint(),
-                    new TestActionConstraint()
-                },
+            ActionConstraints = new[] { new TestActionConstraint(), new TestActionConstraint() },
         };
         var context = new DefaultHttpContext();
 
@@ -36,7 +32,8 @@ public class ActionConstraintCacheTest
         Assert.Collection(
             actionConstraints1,
             a => Assert.Same(action.ActionConstraints[0], a), // Copied by provider
-            a => Assert.Same(action.ActionConstraints[1], a)); // Copied by provider
+            a => Assert.Same(action.ActionConstraints[1], a)
+        ); // Copied by provider
 
         // Act - 2
         var actionConstraints2 = cache.GetActionConstraints(context, action);
@@ -46,7 +43,8 @@ public class ActionConstraintCacheTest
         Assert.Collection(
             actionConstraints2,
             a => Assert.Same(actionConstraints1[0], a), // Cached
-            a => Assert.Same(actionConstraints1[1], a)); // Cached
+            a => Assert.Same(actionConstraints1[1], a)
+        ); // Cached
     }
 
     [Fact]
@@ -60,9 +58,9 @@ public class ActionConstraintCacheTest
         {
             ActionConstraints = new[]
             {
-                    new TestActionConstraintFactory() { IsReusable = true },
-                    new TestActionConstraint() as IActionConstraintMetadata
-                },
+                new TestActionConstraintFactory() { IsReusable = true },
+                new TestActionConstraint() as IActionConstraintMetadata,
+            },
         };
         var context = new DefaultHttpContext();
 
@@ -73,7 +71,8 @@ public class ActionConstraintCacheTest
         Assert.Collection(
             actionConstraints1,
             a => Assert.NotSame(action.ActionConstraints[0], a), // Created by factory
-            a => Assert.Same(action.ActionConstraints[1], a)); // Copied by provider
+            a => Assert.Same(action.ActionConstraints[1], a)
+        ); // Copied by provider
 
         // Act - 2
         var actionConstraints2 = cache.GetActionConstraints(context, action);
@@ -83,7 +82,8 @@ public class ActionConstraintCacheTest
         Assert.Collection(
             actionConstraints2,
             a => Assert.Same(actionConstraints1[0], a), // Cached
-            a => Assert.Same(actionConstraints1[1], a)); // Cached
+            a => Assert.Same(actionConstraints1[1], a)
+        ); // Cached
     }
 
     [Fact]
@@ -97,9 +97,9 @@ public class ActionConstraintCacheTest
         {
             ActionConstraints = new[]
             {
-                    new TestActionConstraintFactory() { IsReusable = false },
-                    new TestActionConstraint() as IActionConstraintMetadata
-                },
+                new TestActionConstraintFactory() { IsReusable = false },
+                new TestActionConstraint() as IActionConstraintMetadata,
+            },
         };
         var context = new DefaultHttpContext();
 
@@ -110,7 +110,8 @@ public class ActionConstraintCacheTest
         Assert.Collection(
             actionConstraints1,
             a => Assert.NotSame(action.ActionConstraints[0], a), // Created by factory
-            a => Assert.Same(action.ActionConstraints[1], a)); // Copied by provider
+            a => Assert.Same(action.ActionConstraints[1], a)
+        ); // Copied by provider
 
         // Act - 2
         var actionConstraints2 = cache.GetActionConstraints(context, action);
@@ -120,17 +121,15 @@ public class ActionConstraintCacheTest
         Assert.Collection(
             actionConstraints2,
             a => Assert.NotSame(actionConstraints1[0], a), // Created by factory (again)
-            a => Assert.Same(actionConstraints1[1], a)); // Cached
+            a => Assert.Same(actionConstraints1[1], a)
+        ); // Cached
     }
 
     private class TestActionConstraint : IActionConstraint
     {
         public int Order
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public bool Accept(ActionConstraintContext context)
@@ -159,7 +158,8 @@ public class ActionConstraintCacheTest
         var descriptorProvider = new DefaultActionDescriptorCollectionProvider(
             Enumerable.Empty<IActionDescriptorProvider>(),
             Enumerable.Empty<IActionDescriptorChangeProvider>(),
-            NullLogger<DefaultActionDescriptorCollectionProvider>.Instance);
+            NullLogger<DefaultActionDescriptorCollectionProvider>.Instance
+        );
         return new ActionConstraintCache(descriptorProvider, providers);
     }
 }

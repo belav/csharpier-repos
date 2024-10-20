@@ -12,7 +12,11 @@ namespace System.IO.Ports.Tests
 {
     public class ctor_str_int : PortsTest
     {
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         [Fact]
         public void COM1_9600()
@@ -23,7 +27,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate);
         }
 
-
         [Fact]
         public void COM2_14400()
         {
@@ -32,7 +35,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate);
         }
-
 
         [Fact]
         public void COM3_28800()
@@ -43,7 +45,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate);
         }
 
-
         [Fact]
         public void COM4_57600()
         {
@@ -53,7 +54,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate);
         }
 
-
         [Fact]
         public void COM256_115200()
         {
@@ -62,7 +62,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate);
         }
-
 
         //[] Error checking for PortName
         [Fact]
@@ -118,7 +117,6 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         [Fact]
         public void PHYSICALDRIVE0_14400()
         {
@@ -127,7 +125,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate, typeof(ArgumentException), ThrowAt.Open);
         }
-
 
         //[] Error checking for BaudRate
         [Fact]
@@ -139,7 +136,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
         }
 
-
         [Fact]
         public void COM2_Neg1()
         {
@@ -148,7 +144,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
         }
-
 
         [Fact]
         public void COM3_0()
@@ -159,7 +154,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
         }
 
-
         [Fact]
         public void COM4_Int32MaxValue()
         {
@@ -169,18 +163,25 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, typeof(ArgumentOutOfRangeException), ThrowAt.Open);
         }
 
-
         private void VerifyCtor(string portName, int baudRate)
         {
             VerifyCtor(portName, baudRate, null, ThrowAt.Set);
         }
 
-
-        private void VerifyCtor(string portName, int baudRate, Type expectedException, ThrowAt throwAt)
+        private void VerifyCtor(
+            string portName,
+            int baudRate,
+            Type expectedException,
+            ThrowAt throwAt
+        )
         {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
-            Debug.WriteLine("Verifying properties where PortName={0},BaudRate={1}", portName, baudRate);
+            Debug.WriteLine(
+                "Verifying properties where PortName={0},BaudRate={1}",
+                portName,
+                baudRate
+            );
             try
             {
                 using (SerialPort com = new SerialPort(portName, baudRate))
@@ -207,15 +208,26 @@ namespace System.IO.Ports.Tests
             {
                 if (null == expectedException)
                 {
-                    Fail("Err_07081hadnh Did not expect exception to be thrown and the following was thrown: \n{0}", e);
+                    Fail(
+                        "Err_07081hadnh Did not expect exception to be thrown and the following was thrown: \n{0}",
+                        e
+                    );
                 }
                 else if (throwAt == ThrowAt.Open)
                 {
-                    Fail("Err_88916adfa Expected {0} to be thrown at Open and the following was thrown at Set: \n{1}", expectedException, e);
+                    Fail(
+                        "Err_88916adfa Expected {0} to be thrown at Open and the following was thrown at Set: \n{1}",
+                        expectedException,
+                        e
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("Err_90282ahwhp Expected {0} to be thrown and the following was thrown: \n{1}", expectedException, e);
+                    Fail(
+                        "Err_90282ahwhp Expected {0} to be thrown and the following was thrown: \n{1}",
+                        expectedException,
+                        e
+                    );
                 }
             }
         }

@@ -35,118 +35,124 @@ using System.Drawing;
 using System.Web;
 using System.Web.SessionState;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-	public class HttpRequest_Cookies
-		: GHTBaseWeb 
-	{
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
-			GHTTestBegin(frm);
-			// ===================================
-			// testing if the Context object is set
-			// ===================================
-			GHTSubTestBegin("Request.Cookies1");
-			try 
-			{
-				if (Request.Cookies == null)
-					GHTSubTestAddResult("Failed");
-				else
-					GHTSubTestAddResult("Success");
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestAddResult("unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-				}
+    public class HttpRequest_Cookies : GHTBaseWeb
+    {
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)FindControl("Form1");
+            GHTTestBegin(frm);
+            // ===================================
+            // testing if the Context object is set
+            // ===================================
+            GHTSubTestBegin("Request.Cookies1");
+            try
+            {
+                if (Request.Cookies == null)
+                    GHTSubTestAddResult("Failed");
+                else
+                    GHTSubTestAddResult("Success");
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-			GHTSubTestEnd();
+            GHTSubTestEnd();
 
-			// ===================================
-			// testing if the objects return is from the 
-			// correct type
-			// ===================================
-			GHTSubTestBegin("Request.Cookies2");
-			try 
-			{
-				HttpCookieCollection cookie = Request.Cookies;
-				GHTSubTestAddResult("success");
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
+            // ===================================
+            // testing if the objects return is from the
+            // correct type
+            // ===================================
+            GHTSubTestBegin("Request.Cookies2");
+            try
+            {
+                HttpCookieCollection cookie = Request.Cookies;
+                GHTSubTestAddResult("success");
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-			GHTSubTestEnd();
+            GHTSubTestEnd();
 
-			// ===================================
-			// testing if the Cookies collection contains the
-			// right context. This is basic testing
-			// a more rigorous testing needs to be included
-			// in the HTTPColkiesCollction object
-			// ===================================
-			GHTSubTestBegin("Request.Cookies3");
-			HttpCookie MyCookie;
-			MyCookie = new HttpCookie("MyCookie", "MyCookieValue");
-			Response.Cookies.Add(MyCookie);
-			try 
-			{
-				HttpCookieCollection Cookies = Request.Cookies;
-				foreach (System.Web.HttpCookie cookie in Cookies)
-					if (cookie.Name == "MyCookie")
-						GHTSubTestAddResult(cookie.Name + " - " + cookie.Value);
-			}
+            // ===================================
+            // testing if the Cookies collection contains the
+            // right context. This is basic testing
+            // a more rigorous testing needs to be included
+            // in the HTTPColkiesCollction object
+            // ===================================
+            GHTSubTestBegin("Request.Cookies3");
+            HttpCookie MyCookie;
+            MyCookie = new HttpCookie("MyCookie", "MyCookieValue");
+            Response.Cookies.Add(MyCookie);
+            try
+            {
+                HttpCookieCollection Cookies = Request.Cookies;
+                foreach (System.Web.HttpCookie cookie in Cookies)
+                    if (cookie.Name == "MyCookie")
+                        GHTSubTestAddResult(cookie.Name + " - " + cookie.Value);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-			catch (Exception ex) 
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
+            GHTSubTestEnd();
 
-			GHTSubTestEnd();
+            // ===================================
+            // testing if the Cookies collection contains the
+            // right context. This is basic testing
+            // a more rigorous testing needs to be included
+            // in the HTTPColkiesCollction object
+            // ===================================
+            GHTSubTestBegin("Request.Cookies4");
+            try
+            {
+                System.Web.HttpCookieCollection Cookies = Request.Cookies;
+                string currentKey = "MyCookie";
+                GHTSubTestAddResult(Cookies[currentKey].Name + " - " + Cookies[currentKey].Value);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestAddResult(
+                    "Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message
+                );
+            }
 
-			// ===================================
-			// testing if the Cookies collection contains the
-			// right context. This is basic testing
-			// a more rigorous testing needs to be included
-			// in the HTTPColkiesCollction object
-			// ===================================
-			GHTSubTestBegin("Request.Cookies4");
-			try 
-			{
-				System.Web.HttpCookieCollection Cookies = Request.Cookies;
-				string currentKey = "MyCookie";
-				GHTSubTestAddResult(Cookies[currentKey].Name + " - " + Cookies[currentKey].Value);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestAddResult("Unxpected " + ex.GetType().Name + " exception was caught-" + ex.Message);
-			}
+            GHTSubTestEnd();
+            GHTTestEnd();
+        }
 
-			GHTSubTestEnd();
-			GHTTestEnd();
-		}
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e)
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+    }
 }

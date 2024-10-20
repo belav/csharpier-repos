@@ -29,8 +29,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             /// </summary>
             private readonly Dictionary<ISymbol, PooledHashSet<IOperation>> _reachingWrites;
 
-            private BasicBlockAnalysisData()
-                => _reachingWrites = new Dictionary<ISymbol, PooledHashSet<IOperation>>();
+            private BasicBlockAnalysisData() =>
+                _reachingWrites = new Dictionary<ISymbol, PooledHashSet<IOperation>>();
 
             public static BasicBlockAnalysisData GetInstance() => s_pool.Allocate();
 
@@ -73,7 +73,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             /// <summary>
             /// Gets the currently reachable writes for the given symbol.
             /// </summary>
-            public void ForEachCurrentWrite<TArg>(ISymbol symbol, Action<IOperation, TArg> action, TArg arg)
+            public void ForEachCurrentWrite<TArg>(
+                ISymbol symbol,
+                Action<IOperation, TArg> action,
+                TArg arg
+            )
             {
                 ForEachCurrentWrite(
                     symbol,
@@ -82,10 +86,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         arg.action(write, arg.arg);
                         return true;
                     },
-                    (action, arg));
+                    (action, arg)
+                );
             }
 
-            public bool ForEachCurrentWrite<TArg>(ISymbol symbol, Func<IOperation, TArg, bool> action, TArg arg)
+            public bool ForEachCurrentWrite<TArg>(
+                ISymbol symbol,
+                Func<IOperation, TArg, bool> action,
+                TArg arg
+            )
             {
                 if (_reachingWrites.TryGetValue(symbol, out var values))
                 {
@@ -103,7 +112,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             /// Marks the given symbol write as a new unread write operation,
             /// potentially clearing out the prior write operations if <paramref name="maybeWritten"/> is <code>false</code>.
             /// </summary>
-            public void OnWriteReferenceFound(ISymbol symbol, IOperation operation, bool maybeWritten)
+            public void OnWriteReferenceFound(
+                ISymbol symbol,
+                IOperation operation,
+                bool maybeWritten
+            )
             {
                 if (!_reachingWrites.TryGetValue(symbol, out var values))
                 {
@@ -121,8 +134,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             public bool Equals(BasicBlockAnalysisData other)
             {
                 // Check if both _reachingWrites maps have same key-value pair count.
-                if (other == null ||
-                    other._reachingWrites.Count != _reachingWrites.Count)
+                if (other == null || other._reachingWrites.Count != _reachingWrites.Count)
                 {
                     return false;
                 }
@@ -177,7 +189,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             public static BasicBlockAnalysisData Merge(
                 BasicBlockAnalysisData data1,
                 BasicBlockAnalysisData data2,
-                Action<BasicBlockAnalysisData> trackAllocatedData)
+                Action<BasicBlockAnalysisData> trackAllocatedData
+            )
             {
                 // Ensure that we don't return 'null' data if other the other data is non-null,
                 // even if latter is Empty.
@@ -222,7 +235,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 return mergedData;
             }
 
-            private static void AddEntries(Dictionary<ISymbol, PooledHashSet<IOperation>> result, BasicBlockAnalysisData source)
+            private static void AddEntries(
+                Dictionary<ISymbol, PooledHashSet<IOperation>> result,
+                BasicBlockAnalysisData source
+            )
             {
                 if (source != null)
                 {

@@ -13,7 +13,12 @@ namespace Microsoft.Extensions.Internal;
 // everywhere we use timers to avoid rooting any values stored in asynclocals.
 internal static class NonCapturingTimer
 {
-    public static Timer Create(TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)
+    public static Timer Create(
+        TimerCallback callback,
+        object? state,
+        TimeSpan dueTime,
+        TimeSpan period
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(callback);
 

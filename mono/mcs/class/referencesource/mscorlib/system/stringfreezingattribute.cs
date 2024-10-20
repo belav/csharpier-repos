@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -15,13 +15,10 @@
 
 namespace System.Runtime.CompilerServices
 {
-    
-[Serializable]
+    [Serializable]
     [AttributeUsage(AttributeTargets.Assembly, Inherited = false)]
     public sealed class StringFreezingAttribute : Attribute
     {
-        public StringFreezingAttribute()
-        {
-        }
+        public StringFreezingAttribute() { }
     }
 }

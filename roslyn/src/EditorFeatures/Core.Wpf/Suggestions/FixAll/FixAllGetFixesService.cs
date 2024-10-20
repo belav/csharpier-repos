@@ -15,7 +15,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions;
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal sealed class EditorFeaturesFixAllGetFixesService() : AbstractFixAllGetFixesService
 {
-    protected override Solution? GetChangedSolution(Workspace workspace, Solution currentSolution, Solution newSolution, string fixAllPreviewChangesTitle, string fixAllTopLevelHeader, Glyph glyph)
+    protected override Solution? GetChangedSolution(
+        Workspace workspace,
+        Solution currentSolution,
+        Solution newSolution,
+        string fixAllPreviewChangesTitle,
+        string fixAllTopLevelHeader,
+        Glyph glyph
+    )
     {
         var previewService = workspace.Services.GetRequiredService<IPreviewDialogService>();
 
@@ -26,7 +33,8 @@ internal sealed class EditorFeaturesFixAllGetFixesService() : AbstractFixAllGetF
             fixAllPreviewChangesTitle,
             glyph,
             newSolution,
-            currentSolution);
+            currentSolution
+        );
 
         return changedSolution;
     }

@@ -15,9 +15,7 @@ public abstract class FilterContext : ActionContext
     /// </summary>
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="filters">All applicable <see cref="IFilterMetadata"/> implementations.</param>
-    public FilterContext(
-        ActionContext actionContext,
-        IList<IFilterMetadata> filters)
+    public FilterContext(ActionContext actionContext, IList<IFilterMetadata> filters)
         : base(actionContext)
     {
         ArgumentNullException.ThrowIfNull(filters);
@@ -58,7 +56,8 @@ public abstract class FilterContext : ActionContext
     /// convention.
     /// </para>
     /// </remarks>
-    public bool IsEffectivePolicy<TMetadata>(TMetadata policy) where TMetadata : IFilterMetadata
+    public bool IsEffectivePolicy<TMetadata>(TMetadata policy)
+        where TMetadata : IFilterMetadata
     {
         if (policy == null)
         {
@@ -78,7 +77,8 @@ public abstract class FilterContext : ActionContext
     /// the <see cref="FilterContext"/>
     /// </returns>
     [return: MaybeNull]
-    public TMetadata FindEffectivePolicy<TMetadata>() where TMetadata : IFilterMetadata
+    public TMetadata FindEffectivePolicy<TMetadata>()
+        where TMetadata : IFilterMetadata
     {
         // The most specific policy is the one closest to the action (nearest the end of the list).
         for (var i = Filters.Count - 1; i >= 0; i--)

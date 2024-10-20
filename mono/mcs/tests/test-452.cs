@@ -1,13 +1,13 @@
 class Foo
 {
-        static public Foo x;
+    public static Foo x;
 }
 
 class Test
 {
-        public static void Main ()
-        {
-                Foo Foo;
-		Foo = Foo.x;
-        }
+    public static void Main()
+    {
+        Foo Foo;
+        Foo = Foo.x;
+    }
 }

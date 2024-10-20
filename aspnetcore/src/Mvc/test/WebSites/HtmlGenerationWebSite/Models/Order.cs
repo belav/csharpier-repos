@@ -5,53 +5,21 @@ namespace HtmlGenerationWebSite.Models;
 
 public class Order
 {
-    public bool NeedSpecialHandle
-    {
-        get;
-        set;
-    }
+    public bool NeedSpecialHandle { get; set; }
 
-    public DateTimeOffset OrderDate
-    {
-        get;
-        set;
-    }
+    public DateTimeOffset OrderDate { get; set; }
 
-    public ICollection<string> PaymentMethod
-    {
-        get;
-        set;
-    }
+    public ICollection<string> PaymentMethod { get; set; }
 
-    public DateTime ShippingDateTime
-    {
-        get;
-        set;
-    }
+    public DateTime ShippingDateTime { get; set; }
 
-    public string Shipping
-    {
-        get;
-        set;
-    }
+    public string Shipping { get; set; }
 
-    public IEnumerable<int> Products
-    {
-        get;
-        set;
-    }
+    public IEnumerable<int> Products { get; set; }
 
-    public IEnumerable<int> SubstituteProducts
-    {
-        get;
-        set;
-    }
+    public IEnumerable<int> SubstituteProducts { get; set; }
 
-    public Customer Customer
-    {
-        get;
-        set;
-    }
+    public Customer Customer { get; set; }
 
     public IList<Product> ProductDetails { get; } = new List<Product>();
 }

@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Components.Endpoints;
 
 internal class RazorComponentEndpointFactory
 {
-    private static readonly HttpMethodMetadata HttpMethodsMetadata = new(new[] { HttpMethods.Get, HttpMethods.Post });
+    private static readonly HttpMethodMetadata HttpMethodsMetadata =
+        new(new[] { HttpMethods.Get, HttpMethods.Post });
 
 #pragma warning disable CA1822 // It's a singleton
     internal void AddEndpoints(
@@ -25,7 +26,8 @@ internal class RazorComponentEndpointFactory
         PageComponentInfo pageDefinition,
         IReadOnlyList<Action<EndpointBuilder>> conventions,
         IReadOnlyList<Action<EndpointBuilder>> finallyConventions,
-        ConfiguredRenderModesMetadata configuredRenderModesMetadata)
+        ConfiguredRenderModesMetadata configuredRenderModesMetadata
+    )
     {
         // We do not provide a way to establish the order or the name for the page routes.
         // Order is not supported in our client router.
@@ -33,7 +35,8 @@ internal class RazorComponentEndpointFactory
         var builder = new RouteEndpointBuilder(
             null,
             RoutePatternFactory.Parse(pageDefinition.Route),
-            order: 0);
+            order: 0
+        );
 
         // Require antiforgery by default, let the page override it.
         builder.Metadata.Add(new RequireAntiforgeryTokenAttribute());
@@ -69,7 +72,8 @@ internal class RazorComponentEndpointFactory
 
         builder.RequestDelegate = httpContext =>
         {
-            var invoker = httpContext.RequestServices.GetRequiredService<IRazorComponentEndpointInvoker>();
+            var invoker =
+                httpContext.RequestServices.GetRequiredService<IRazorComponentEndpointInvoker>();
             return invoker.Render(httpContext);
         };
 

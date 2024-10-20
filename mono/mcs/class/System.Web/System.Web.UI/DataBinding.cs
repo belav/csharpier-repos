@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,53 +30,60 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class DataBinding
+    {
+        string propertyName;
+        Type propertyType;
+        string expression;
 
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class DataBinding
-	{
-		string propertyName;
-		Type propertyType;
-		string expression;
+        public DataBinding(string propertyName, Type propertyType, string expression)
+        {
+            this.propertyName = propertyName;
+            this.propertyType = propertyType;
+            this.expression = expression;
+        }
 
-		public DataBinding (string propertyName, Type propertyType,
-				    string expression)
-		{
-			this.propertyName = propertyName;
-			this.propertyType = propertyType;
-			this.expression = expression;
-		}
+        public string Expression
+        {
+            get { return expression; }
+            set { expression = value; }
+        }
 
-		public string Expression {
-			get { return expression; }
-			set { expression = value; }
-		}
+        public string PropertyName
+        {
+            get { return propertyName; }
+        }
 
-		public string PropertyName {
-			get { return propertyName; }
-		}
+        public Type PropertyType
+        {
+            get { return propertyType; }
+        }
 
-		public Type PropertyType {
-			get { return propertyType; }
-		}
+        public override bool Equals(object obj)
+        {
+            DataBinding o = (obj as DataBinding);
+            if (o == null)
+                return false;
 
-		public override bool Equals (object obj)
-		{
-			DataBinding o = (obj as DataBinding);
-			if (o == null)
-				return false;
-			
-			return (o.Expression == expression &&
-				o.PropertyName == propertyName &&
-				o.PropertyType == propertyType);
-		}
+            return (
+                o.Expression == expression
+                && o.PropertyName == propertyName
+                && o.PropertyType == propertyType
+            );
+        }
 
-		public override int GetHashCode ()
-		{
-			return propertyName.GetHashCode () +
-			       (propertyType.GetHashCode () << 1) +
-			       (expression.GetHashCode () << 2) ;
-		}
-	}
+        public override int GetHashCode()
+        {
+            return propertyName.GetHashCode()
+                + (propertyType.GetHashCode() << 1)
+                + (expression.GetHashCode() << 2);
+        }
+    }
 }

@@ -5,10 +5,10 @@
 namespace System.Activities.Tracking
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Globalization;
-    
+    using System.Runtime;
+    using System.Runtime.Serialization;
+
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
     public sealed class ActivityInfo
@@ -55,11 +55,7 @@ namespace System.Activities.Tracking
             this.instanceIdInternal = instanceId;
         }
 
-        internal ActivityInstance Instance
-        {
-            get;
-            private set;
-        }
+        internal ActivityInstance Instance { get; private set; }
 
         [DataMember]
         public string Name
@@ -108,7 +104,9 @@ namespace System.Activities.Tracking
             {
                 if (string.IsNullOrEmpty(this.instanceId))
                 {
-                    this.instanceId = this.instanceIdInternal.ToString(CultureInfo.InvariantCulture);
+                    this.instanceId = this.instanceIdInternal.ToString(
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 return this.instanceId;
             }
@@ -142,18 +140,16 @@ namespace System.Activities.Tracking
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.CurrentCulture,
-                "Name={0}, ActivityId = {1}, ActivityInstanceId = {2}, TypeName={3}",                
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "Name={0}, ActivityId = {1}, ActivityInstanceId = {2}, TypeName={3}",
                 this.Name,
                 this.Id,
                 this.InstanceId,
-                this.TypeName);
+                this.TypeName
+            );
         }
 
-        internal Activity Activity
-        {
-            get; 
-            private set;
-        }
+        internal Activity Activity { get; private set; }
     }
 }

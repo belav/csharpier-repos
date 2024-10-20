@@ -83,12 +83,20 @@ namespace System.Net
         private const int CacheScanPerIterations = 32;
         private const int TickCountResolution = 15;
 
-        private static readonly LinkedList<WeakReference> s_queues = new LinkedList<WeakReference>();
-        private static readonly LinkedList<WeakReference> s_newQueues = new LinkedList<WeakReference>();
-        private static int s_threadState = (int)TimerThreadState.Idle;  // Really a TimerThreadState, but need an int for Interlocked.
+        private static readonly LinkedList<WeakReference> s_queues =
+            new LinkedList<WeakReference>();
+        private static readonly LinkedList<WeakReference> s_newQueues =
+            new LinkedList<WeakReference>();
+        private static int s_threadState = (int)TimerThreadState.Idle; // Really a TimerThreadState, but need an int for Interlocked.
         private static readonly AutoResetEvent s_threadReadyEvent = new AutoResetEvent(false);
-        private static readonly ManualResetEvent s_threadShutdownEvent = new ManualResetEvent(false);
-        private static readonly WaitHandle[] s_threadEvents = { s_threadShutdownEvent, s_threadReadyEvent };
+        private static readonly ManualResetEvent s_threadShutdownEvent = new ManualResetEvent(
+            false
+        );
+        private static readonly WaitHandle[] s_threadEvents =
+        {
+            s_threadShutdownEvent,
+            s_threadReadyEvent,
+        };
         private static int s_cacheScanIteration;
         private static readonly Hashtable s_queuesCache = new Hashtable();
 
@@ -99,7 +107,7 @@ namespace System.Net
         {
             Idle,
             Running,
-            Stopped
+            Stopped,
         }
 
         /// <summary>
@@ -177,8 +185,8 @@ namespace System.Net
             /// order to synchronize with Shutdown().</para>
             /// </summary>
             /// <param name="durationMilliseconds"></param>
-            internal TimerQueue(int durationMilliseconds) :
-                base(durationMilliseconds)
+            internal TimerQueue(int durationMilliseconds)
+                : base(durationMilliseconds)
             {
                 // Create the doubly-linked list with a sentinel head and tail so that this member never needs updating.
                 _timers = new TimerNode();
@@ -268,12 +276,14 @@ namespace System.Net
         /// </summary>
         private sealed class InfiniteTimerQueue : Queue
         {
-            internal InfiniteTimerQueue() : base(Timeout.Infinite) { }
+            internal InfiniteTimerQueue()
+                : base(Timeout.Infinite) { }
 
             /// <summary>
             /// <para>Always returns a dummy infinite timer.</para>
             /// </summary>
-            internal override Timer CreateTimer(Callback callback, object? context) => new InfiniteTimer();
+            internal override Timer CreateTimer(Callback callback, object? context) =>
+                new InfiniteTimer();
         }
 
         /// <summary>
@@ -296,10 +306,16 @@ namespace System.Net
                 Ready,
                 Fired,
                 Cancelled,
-                Sentinel
+                Sentinel,
             }
 
-            internal TimerNode(Callback callback, object? context, int durationMilliseconds, object queueLock) : base(durationMilliseconds)
+            internal TimerNode(
+                Callback callback,
+                object? context,
+                int durationMilliseconds,
+                object queueLock
+            )
+                : base(durationMilliseconds)
             {
                 if (callback != null)
                 {
@@ -308,11 +324,13 @@ namespace System.Net
                 }
                 _timerState = TimerState.Ready;
                 _queueLock = queueLock;
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"TimerThreadTimer#{StartTime}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"TimerThreadTimer#{StartTime}");
             }
 
             // A sentinel node - both the head and tail are one, which prevent the head and tail from ever having to be updated.
-            internal TimerNode() : base(0)
+            internal TimerNode()
+                : base(0)
             {
                 _timerState = TimerState.Sentinel;
             }
@@ -356,13 +374,18 @@ namespace System.Net
 
                             _timerState = TimerState.Cancelled;
 
-                            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"TimerThreadTimer#{StartTime} Cancel (success)");
+                            if (NetEventSource.Log.IsEnabled())
+                                NetEventSource.Info(
+                                    this,
+                                    $"TimerThreadTimer#{StartTime} Cancel (success)"
+                                );
                             return true;
                         }
                     }
                 }
 
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"TimerThreadTimer#{StartTime} Cancel (failure)");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, $"TimerThreadTimer#{StartTime} Cancel (failure)");
                 return false;
             }
 
@@ -374,7 +397,8 @@ namespace System.Net
             {
                 if (_timerState == TimerState.Sentinel)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, "TimerQueue tried to Fire a Sentinel.");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, "TimerQueue tried to Fire a Sentinel.");
                 }
 
                 if (_timerState != TimerState.Ready)
@@ -387,7 +411,11 @@ namespace System.Net
                 int nowMilliseconds = Environment.TickCount;
                 if (IsTickBetween(StartTime, Expiration, nowMilliseconds))
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"TimerThreadTimer#{StartTime}::Fire() Not firing ({StartTime} <= {nowMilliseconds} < {Expiration})");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(
+                            this,
+                            $"TimerThreadTimer#{StartTime}::Fire() Not firing ({StartTime} <= {nowMilliseconds} < {Expiration})"
+                        );
                     return false;
                 }
 
@@ -396,7 +424,13 @@ namespace System.Net
                 {
                     if (_timerState == TimerState.Ready)
                     {
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"TimerThreadTimer#{StartTime}::Fire() Firing ({StartTime} <= {nowMilliseconds} >= " + Expiration + ")");
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Info(
+                                this,
+                                $"TimerThreadTimer#{StartTime}::Fire() Firing ({StartTime} <= {nowMilliseconds} >= "
+                                    + Expiration
+                                    + ")"
+                            );
                         _timerState = TimerState.Fired;
 
                         // Remove it from the list.
@@ -424,7 +458,8 @@ namespace System.Net
                         if (ExceptionCheck.IsFatal(exception))
                             throw;
 
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(this, $"exception in callback: {exception}");
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Error(this, $"exception in callback: {exception}");
 
                         // This thread is not allowed to go into user code, so we should never get an exception here.
                         // So, in debug, throw it up, killing the AppDomain.  In release, we'll just ignore it.
@@ -443,7 +478,8 @@ namespace System.Net
         /// </summary>
         private sealed class InfiniteTimer : Timer
         {
-            internal InfiniteTimer() : base(Timeout.Infinite) { }
+            internal InfiniteTimer()
+                : base(Timeout.Infinite) { }
 
             private int _cancelled;
 
@@ -461,17 +497,19 @@ namespace System.Net
         private static void Prod()
         {
             s_threadReadyEvent.Set();
-            TimerThreadState oldState = (TimerThreadState)Interlocked.CompareExchange(
-                ref s_threadState,
-                (int)TimerThreadState.Running,
-                (int)TimerThreadState.Idle);
+            TimerThreadState oldState = (TimerThreadState)
+                Interlocked.CompareExchange(
+                    ref s_threadState,
+                    (int)TimerThreadState.Running,
+                    (int)TimerThreadState.Idle
+                );
 
             if (oldState == TimerThreadState.Idle)
             {
                 new Thread(new ThreadStart(ThreadProc))
                 {
                     IsBackground = true,
-                    Name = ".NET Network Timer"
+                    Name = ".NET Network Timer",
                 }.Start();
             }
         }
@@ -486,8 +524,13 @@ namespace System.Net
             lock (s_queues)
             {
                 // If shutdown was recently called, abort here.
-                if (Interlocked.CompareExchange(ref s_threadState, (int)TimerThreadState.Running, (int)TimerThreadState.Running) !=
-                    (int)TimerThreadState.Running)
+                if (
+                    Interlocked.CompareExchange(
+                        ref s_threadState,
+                        (int)TimerThreadState.Running,
+                        (int)TimerThreadState.Running
+                    ) != (int)TimerThreadState.Running
+                )
                 {
                     return;
                 }
@@ -506,7 +549,11 @@ namespace System.Net
                             {
                                 lock (s_newQueues)
                                 {
-                                    for (LinkedListNode<WeakReference>? node = s_newQueues.First; node != null; node = s_newQueues.First)
+                                    for (
+                                        LinkedListNode<WeakReference>? node = s_newQueues.First;
+                                        node != null;
+                                        node = s_newQueues.First
+                                    )
                                     {
                                         s_newQueues.Remove(node);
                                         s_queues.AddLast(node);
@@ -517,7 +564,11 @@ namespace System.Net
                             int now = Environment.TickCount;
                             int nextTick = 0;
                             bool haveNextTick = false;
-                            for (LinkedListNode<WeakReference>? node = s_queues.First; node != null; /* node = node.Next must be done in the body */)
+                            for (
+                                LinkedListNode<WeakReference>? node = s_queues.First;
+                                node != null; /* node = node.Next must be done in the body */
+
+                            )
                             {
                                 TimerQueue? queue = (TimerQueue?)node.Value.Target;
                                 if (queue == null)
@@ -532,7 +583,13 @@ namespace System.Net
                                 // returned, it is 0x100000000 milliseconds in the future).  There's also a chance that Fire() will return a value
                                 // intended as > 0x100000000 milliseconds from 'now'.  Either case will just cause an extra scan through the timers.
                                 int nextTickInstance;
-                                if (queue.Fire(out nextTickInstance) && (!haveNextTick || IsTickBetween(now, nextTick, nextTickInstance)))
+                                if (
+                                    queue.Fire(out nextTickInstance)
+                                    && (
+                                        !haveNextTick
+                                        || IsTickBetween(now, nextTick, nextTickInstance)
+                                    )
+                                )
                                 {
                                     nextTick = nextTickInstance;
                                     haveNextTick = true;
@@ -544,35 +601,59 @@ namespace System.Net
                             // Figure out how long to wait, taking into account how long the loop took.
                             // Add 15 ms to compensate for poor TickCount resolution (want to guarantee a firing).
                             int newNow = Environment.TickCount;
-                            int waitDuration = haveNextTick ?
-                                (int)(IsTickBetween(now, nextTick, newNow) ?
-                                    Math.Min(unchecked((uint)(nextTick - newNow)), (uint)(int.MaxValue - TickCountResolution)) + TickCountResolution :
-                                    0) :
-                                ThreadIdleTimeoutMilliseconds;
+                            int waitDuration = haveNextTick
+                                ? (int)(
+                                    IsTickBetween(now, nextTick, newNow)
+                                        ? Math.Min(
+                                            unchecked((uint)(nextTick - newNow)),
+                                            (uint)(int.MaxValue - TickCountResolution)
+                                        ) + TickCountResolution
+                                        : 0
+                                )
+                                : ThreadIdleTimeoutMilliseconds;
 
-                            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Waiting for {waitDuration}ms");
+                            if (NetEventSource.Log.IsEnabled())
+                                NetEventSource.Info(null, $"Waiting for {waitDuration}ms");
 
-                            int waitResult = WaitHandle.WaitAny(s_threadEvents, waitDuration, false);
+                            int waitResult = WaitHandle.WaitAny(
+                                s_threadEvents,
+                                waitDuration,
+                                false
+                            );
 
                             // 0 is s_ThreadShutdownEvent - die.
                             if (waitResult == 0)
                             {
-                                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, "Awoke, cause: Shutdown");
+                                if (NetEventSource.Log.IsEnabled())
+                                    NetEventSource.Info(null, "Awoke, cause: Shutdown");
                                 running = false;
                                 break;
                             }
 
-                            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Awoke, cause {(waitResult == WaitHandle.WaitTimeout ? "Timeout" : "Prod")}");
+                            if (NetEventSource.Log.IsEnabled())
+                                NetEventSource.Info(
+                                    null,
+                                    $"Awoke, cause {(waitResult == WaitHandle.WaitTimeout ? "Timeout" : "Prod")}"
+                                );
 
                             // If we timed out with nothing to do, shut down.
                             if (waitResult == WaitHandle.WaitTimeout && !haveNextTick)
                             {
-                                Interlocked.CompareExchange(ref s_threadState, (int)TimerThreadState.Idle, (int)TimerThreadState.Running);
+                                Interlocked.CompareExchange(
+                                    ref s_threadState,
+                                    (int)TimerThreadState.Idle,
+                                    (int)TimerThreadState.Running
+                                );
                                 // There could have been one more prod between the wait and the exchange.  Check, and abort if necessary.
                                 if (s_threadReadyEvent.WaitOne(0, false))
                                 {
-                                    if (Interlocked.CompareExchange(ref s_threadState, (int)TimerThreadState.Running, (int)TimerThreadState.Idle) ==
-                                        (int)TimerThreadState.Idle)
+                                    if (
+                                        Interlocked.CompareExchange(
+                                            ref s_threadState,
+                                            (int)TimerThreadState.Running,
+                                            (int)TimerThreadState.Idle
+                                        ) == (int)TimerThreadState.Idle
+                                    )
                                     {
                                         continue;
                                     }
@@ -588,7 +669,8 @@ namespace System.Net
                         if (ExceptionCheck.IsFatal(exception))
                             throw;
 
-                        if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(null, exception);
+                        if (NetEventSource.Log.IsEnabled())
+                            NetEventSource.Error(null, exception);
 
                         // The only options are to continue processing and likely enter an error-loop,
                         // shut down timers for this AppDomain, or shut down the AppDomain.  Go with shutting
@@ -604,7 +686,8 @@ namespace System.Net
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, "Stop");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(null, "Stop");
         }
 
         /// <summary>

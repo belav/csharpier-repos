@@ -2,16 +2,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.DirectoryServices;
 using System.Configuration;
+using System.DirectoryServices;
+using System.Text;
 
 #endregion
 
 namespace System.Workflow.Activities.Configuration
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    sealed public class ActiveDirectoryRoleFactoryConfiguration : ConfigurationSection
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class ActiveDirectoryRoleFactoryConfiguration : ConfigurationSection
     {
         private const String _RootPath = "RootPath";
         private const String _Manager = "Manager";

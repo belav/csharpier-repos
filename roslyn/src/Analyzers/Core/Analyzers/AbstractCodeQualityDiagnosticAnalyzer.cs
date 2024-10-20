@@ -9,13 +9,16 @@ using Microsoft.CodeAnalysis.Simplification;
 
 namespace Microsoft.CodeAnalysis.CodeQuality
 {
-    internal abstract class AbstractCodeQualityDiagnosticAnalyzer : DiagnosticAnalyzer, IBuiltInAnalyzer
+    internal abstract class AbstractCodeQualityDiagnosticAnalyzer
+        : DiagnosticAnalyzer,
+            IBuiltInAnalyzer
     {
         private readonly GeneratedCodeAnalysisFlags _generatedCodeAnalysisFlags;
 
         protected AbstractCodeQualityDiagnosticAnalyzer(
             ImmutableArray<DiagnosticDescriptor> descriptors,
-            GeneratedCodeAnalysisFlags generatedCodeAnalysisFlags)
+            GeneratedCodeAnalysisFlags generatedCodeAnalysisFlags
+        )
         {
             SupportedDiagnostics = descriptors;
             _generatedCodeAnalysisFlags = generatedCodeAnalysisFlags;
@@ -36,8 +39,7 @@ namespace Microsoft.CodeAnalysis.CodeQuality
 
         public abstract DiagnosticAnalyzerCategory GetAnalyzerCategory();
 
-        public bool OpenFileOnly(SimplifierOptions? options)
-            => false;
+        public bool OpenFileOnly(SimplifierOptions? options) => false;
 
         protected static DiagnosticDescriptor CreateDescriptor(
             string id,
@@ -48,16 +50,26 @@ namespace Microsoft.CodeAnalysis.CodeQuality
             bool isUnnecessary,
             bool isEnabledByDefault = true,
             bool isConfigurable = true,
-            LocalizableString? description = null)
+            LocalizableString? description = null
+        )
 #pragma warning disable RS0030 // Do not use banned APIs
-            => new(
-                    id, title, messageFormat,
-                    DiagnosticCategory.CodeQuality,
-                    DiagnosticSeverity.Info,
-                    isEnabledByDefault,
-                    description,
-                    helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(id),
-                    customTags: DiagnosticCustomTags.Create(isUnnecessary, isConfigurable, isCustomConfigurable: hasAnyCodeStyleOption, enforceOnBuild));
+            =>
+            new(
+                id,
+                title,
+                messageFormat,
+                DiagnosticCategory.CodeQuality,
+                DiagnosticSeverity.Info,
+                isEnabledByDefault,
+                description,
+                helpLinkUri: DiagnosticHelper.GetHelpLinkForDiagnosticId(id),
+                customTags: DiagnosticCustomTags.Create(
+                    isUnnecessary,
+                    isConfigurable,
+                    isCustomConfigurable: hasAnyCodeStyleOption,
+                    enforceOnBuild
+                )
+            );
 #pragma warning restore RS0030 // Do not use banned APIs
     }
 }

@@ -30,7 +30,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             bool ensureExpectedItemsAreOrdered = false,
             FixAllScope? fixAllScope = null,
             bool blockUntilComplete = true,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var expectedItems = new[] { expectedItem };
 
@@ -39,8 +40,15 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                applied = await textViewWindowVerifier.CodeActionsAsync(expectedItems, applyFix ? expectedItem : null, verifyNotShowing,
-                    ensureExpectedItemsAreOrdered, fixAllScope, blockUntilComplete, cancellationToken);
+                applied = await textViewWindowVerifier.CodeActionsAsync(
+                    expectedItems,
+                    applyFix ? expectedItem : null,
+                    verifyNotShowing,
+                    ensureExpectedItemsAreOrdered,
+                    fixAllScope,
+                    blockUntilComplete,
+                    cancellationToken
+                );
             } while (applied is false);
         }
 
@@ -59,13 +67,21 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             bool ensureExpectedItemsAreOrdered = false,
             FixAllScope? fixAllScope = null,
             bool blockUntilComplete = true,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var events = new List<WorkspaceChangeEventArgs>();
-            void WorkspaceChangedHandler(object sender, WorkspaceChangeEventArgs e) => events.Add(e);
+            void WorkspaceChangedHandler(object sender, WorkspaceChangeEventArgs e) =>
+                events.Add(e);
 
-            var workspace = await textViewWindowVerifier.TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(cancellationToken);
-            using var workspaceEventRestorer = WithWorkspaceChangedHandler(workspace, WorkspaceChangedHandler);
+            var workspace =
+                await textViewWindowVerifier.TestServices.Shell.GetComponentModelServiceAsync<VisualStudioWorkspace>(
+                    cancellationToken
+                );
+            using var workspaceEventRestorer = WithWorkspaceChangedHandler(
+                workspace,
+                WorkspaceChangedHandler
+            );
 
             await textViewWindowVerifier.TestServices.Editor.ShowLightBulbAsync(cancellationToken);
 
@@ -75,21 +91,19 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                 return null;
             }
 
-            var actions = await textViewWindowVerifier.TestServices.Editor.GetLightBulbActionsAsync(cancellationToken);
+            var actions = await textViewWindowVerifier.TestServices.Editor.GetLightBulbActionsAsync(
+                cancellationToken
+            );
 
             if (expectedItems != null && expectedItems.Any())
             {
                 if (ensureExpectedItemsAreOrdered)
                 {
-                    TestUtilities.ThrowIfExpectedItemNotFoundInOrder(
-                        actions,
-                        expectedItems);
+                    TestUtilities.ThrowIfExpectedItemNotFoundInOrder(actions, expectedItems);
                 }
                 else
                 {
-                    TestUtilities.ThrowIfExpectedItemNotFound(
-                        actions,
-                        expectedItems);
+                    TestUtilities.ThrowIfExpectedItemNotFound(actions, expectedItems);
                 }
             }
 
@@ -101,9 +115,21 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             if (!RoslynString.IsNullOrEmpty(applyFix))
             {
                 var codeActionLogger = new CodeActionLogger();
-                using var loggerRestorer = WithLogger(AggregateLogger.AddOrReplace(codeActionLogger, Logger.GetLogger(), logger => logger is CodeActionLogger));
+                using var loggerRestorer = WithLogger(
+                    AggregateLogger.AddOrReplace(
+                        codeActionLogger,
+                        Logger.GetLogger(),
+                        logger => logger is CodeActionLogger
+                    )
+                );
 
-                var result = await textViewWindowVerifier.TestServices.Editor.ApplyLightBulbActionAsync(applyFix, fixAllScope, blockUntilComplete, cancellationToken);
+                var result =
+                    await textViewWindowVerifier.TestServices.Editor.ApplyLightBulbActionAsync(
+                        applyFix,
+                        fixAllScope,
+                        blockUntilComplete,
+                        cancellationToken
+                    );
 
                 if (blockUntilComplete)
                 {
@@ -115,19 +141,23 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                             FeatureAttribute.LightBulb,
                             FeatureAttribute.Rename,
                         },
-                        cancellationToken);
+                        cancellationToken
+                    );
 
                     if (codeActionLogger.Messages.Any())
                     {
                         foreach (var e in events)
                         {
-                            codeActionLogger.Messages.Add($"{e.OldSolution.WorkspaceVersion} to {e.NewSolution.WorkspaceVersion}: {e.Kind} {e.DocumentId}");
+                            codeActionLogger.Messages.Add(
+                                $"{e.OldSolution.WorkspaceVersion} to {e.NewSolution.WorkspaceVersion}: {e.Kind} {e.DocumentId}"
+                            );
                         }
                     }
 
                     AssertEx.EqualOrDiff(
                         "",
-                        string.Join(Environment.NewLine, codeActionLogger.Messages));
+                        string.Join(Environment.NewLine, codeActionLogger.Messages)
+                    );
                 }
 
                 return result;
@@ -136,27 +166,52 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             return null;
         }
 
-        public static async Task CodeActionsNotShowingAsync(this ITextViewWindowVerifierInProcess textViewWindowVerifier, CancellationToken cancellationToken)
+        public static async Task CodeActionsNotShowingAsync(
+            this ITextViewWindowVerifierInProcess textViewWindowVerifier,
+            CancellationToken cancellationToken
+        )
         {
-            if (await textViewWindowVerifier.TextViewWindow.IsLightBulbSessionExpandedAsync(cancellationToken))
+            if (
+                await textViewWindowVerifier.TextViewWindow.IsLightBulbSessionExpandedAsync(
+                    cancellationToken
+                )
+            )
             {
-                throw new InvalidOperationException("Expected no light bulb session, but one was found.");
+                throw new InvalidOperationException(
+                    "Expected no light bulb session, but one was found."
+                );
             }
         }
 
-        public static async Task CurrentTokenTypeAsync(this ITextViewWindowVerifierInProcess textViewWindowVerifier, string tokenType, CancellationToken cancellationToken)
+        public static async Task CurrentTokenTypeAsync(
+            this ITextViewWindowVerifierInProcess textViewWindowVerifier,
+            string tokenType,
+            CancellationToken cancellationToken
+        )
         {
             await textViewWindowVerifier.TestServices.Workspace.WaitForAllAsyncOperationsAsync(
-                new[] { FeatureAttribute.SolutionCrawlerLegacy, FeatureAttribute.DiagnosticService, FeatureAttribute.Classification },
-                cancellationToken);
+                new[]
+                {
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.Classification,
+                },
+                cancellationToken
+            );
 
-            var actualTokenTypes = await textViewWindowVerifier.TestServices.Editor.GetCurrentClassificationsAsync(cancellationToken);
+            var actualTokenTypes =
+                await textViewWindowVerifier.TestServices.Editor.GetCurrentClassificationsAsync(
+                    cancellationToken
+                );
             Assert.Equal(1, actualTokenTypes.Length);
             Assert.Contains(tokenType, actualTokenTypes[0]);
             Assert.NotEqual("text", tokenType);
         }
 
-        private static WorkspaceEventRestorer WithWorkspaceChangedHandler(Workspace workspace, EventHandler<WorkspaceChangeEventArgs> eventHandler)
+        private static WorkspaceEventRestorer WithWorkspaceChangedHandler(
+            Workspace workspace,
+            EventHandler<WorkspaceChangeEventArgs> eventHandler
+        )
         {
             workspace.WorkspaceChanged += eventHandler;
             return new WorkspaceEventRestorer(workspace, eventHandler);
@@ -187,13 +242,20 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                 }
             }
 
-            public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int uniquePairId, int delta, CancellationToken cancellationToken)
-            {
-            }
+            public void LogBlockEnd(
+                FunctionId functionId,
+                LogMessage logMessage,
+                int uniquePairId,
+                int delta,
+                CancellationToken cancellationToken
+            ) { }
 
-            public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int uniquePairId, CancellationToken cancellationToken)
-            {
-            }
+            public void LogBlockStart(
+                FunctionId functionId,
+                LogMessage logMessage,
+                int uniquePairId,
+                CancellationToken cancellationToken
+            ) { }
         }
 
         private readonly struct WorkspaceEventRestorer : IDisposable
@@ -201,7 +263,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             private readonly Workspace _workspace;
             private readonly EventHandler<WorkspaceChangeEventArgs> _eventHandler;
 
-            public WorkspaceEventRestorer(Workspace workspace, EventHandler<WorkspaceChangeEventArgs> eventHandler)
+            public WorkspaceEventRestorer(
+                Workspace workspace,
+                EventHandler<WorkspaceChangeEventArgs> eventHandler
+            )
             {
                 _workspace = workspace;
                 _eventHandler = eventHandler;

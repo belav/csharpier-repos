@@ -11,15 +11,15 @@ namespace System.ServiceModel.Syndication
     {
         private ExtensibleSyndicationObject _extensions;
 
-        internal CategoriesDocument()
-        {
-        }
+        internal CategoriesDocument() { }
 
-        public Dictionary<XmlQualifiedName, string> AttributeExtensions => _extensions.AttributeExtensions;
+        public Dictionary<XmlQualifiedName, string> AttributeExtensions =>
+            _extensions.AttributeExtensions;
 
         public Uri BaseUri { get; set; }
 
-        public SyndicationElementExtensionCollection ElementExtensions => _extensions.ElementExtensions;
+        public SyndicationElementExtensionCollection ElementExtensions =>
+            _extensions.ElementExtensions;
 
         public string Language { get; set; }
 
@@ -30,7 +30,11 @@ namespace System.ServiceModel.Syndication
             return new InlineCategoriesDocument(categories);
         }
 
-        public static InlineCategoriesDocument Create(Collection<SyndicationCategory> categories, bool isFixed, string scheme)
+        public static InlineCategoriesDocument Create(
+            Collection<SyndicationCategory> categories,
+            bool isFixed,
+            string scheme
+        )
         {
             return new InlineCategoriesDocument(categories, isFixed, scheme);
         }
@@ -42,19 +46,26 @@ namespace System.ServiceModel.Syndication
 
         public static CategoriesDocument Load(XmlReader reader)
         {
-            AtomPub10CategoriesDocumentFormatter formatter = new AtomPub10CategoriesDocumentFormatter();
+            AtomPub10CategoriesDocumentFormatter formatter =
+                new AtomPub10CategoriesDocumentFormatter();
             formatter.ReadFrom(reader);
             return formatter.Document;
         }
 
-        public CategoriesDocumentFormatter GetFormatter() => new AtomPub10CategoriesDocumentFormatter(this);
+        public CategoriesDocumentFormatter GetFormatter() =>
+            new AtomPub10CategoriesDocumentFormatter(this);
 
         public void Save(XmlWriter writer)
         {
             GetFormatter().WriteTo(writer);
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -74,7 +85,10 @@ namespace System.ServiceModel.Syndication
             _extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             _extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

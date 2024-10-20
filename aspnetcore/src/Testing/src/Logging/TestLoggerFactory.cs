@@ -19,11 +19,7 @@ public class TestLoggerFactory : ILoggerFactory
         return new TestLogger(name, _sink, _enabled);
     }
 
-    public void AddProvider(ILoggerProvider provider)
-    {
-    }
+    public void AddProvider(ILoggerProvider provider) { }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

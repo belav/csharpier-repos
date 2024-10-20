@@ -6,10 +6,15 @@ using System.Buffers;
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
 internal abstract class ArrayPoolBufferAdapter<TCollection, TCollectionFactory, TElement>
-    : ICollectionBufferAdapter<TCollection, ArrayPoolBufferAdapter<TCollection, TCollectionFactory, TElement>.PooledBuffer, TElement>
+    : ICollectionBufferAdapter<
+        TCollection,
+        ArrayPoolBufferAdapter<TCollection, TCollectionFactory, TElement>.PooledBuffer,
+        TElement
+    >
     where TCollectionFactory : ICollectionFactory<TCollection, TElement>
 {
-    public static PooledBuffer CreateBuffer() => new() { Data = ArrayPool<TElement>.Shared.Rent(16), Count = 0 };
+    public static PooledBuffer CreateBuffer() =>
+        new() { Data = ArrayPool<TElement>.Shared.Rent(16), Count = 0 };
 
     public static PooledBuffer Add(ref PooledBuffer buffer, TElement element)
     {

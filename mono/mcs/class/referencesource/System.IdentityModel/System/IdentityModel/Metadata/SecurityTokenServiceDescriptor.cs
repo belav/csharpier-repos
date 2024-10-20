@@ -11,15 +11,15 @@ namespace System.IdentityModel.Metadata
     /// </summary>
     public class SecurityTokenServiceDescriptor : WebServiceDescriptor
     {
-        Collection<EndpointReference> securityTokenServiceEndpoints = new Collection<EndpointReference>();
-        Collection<EndpointReference> passiveRequestorEndpoints = new Collection<EndpointReference>();
+        Collection<EndpointReference> securityTokenServiceEndpoints =
+            new Collection<EndpointReference>();
+        Collection<EndpointReference> passiveRequestorEndpoints =
+            new Collection<EndpointReference>();
 
         /// <summary>
         /// Empty constructor.
         /// </summary>
-        public SecurityTokenServiceDescriptor()
-        {
-        }
+        public SecurityTokenServiceDescriptor() { }
 
         /// <summary>
         /// Gets the collection of <see cref="EndpointReference"/> representing the endpoints of the security token service.

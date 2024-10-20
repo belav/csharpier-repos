@@ -26,7 +26,8 @@ public static class WebHostDefaults
     /// <summary>
     /// The configuration key associated with the "hostingStartupExcludeAssemblies" configuration.
     /// </summary>
-    public static readonly string HostingStartupExcludeAssembliesKey = "hostingStartupExcludeAssemblies";
+    public static readonly string HostingStartupExcludeAssembliesKey =
+        "hostingStartupExcludeAssemblies";
 
     /// <summary>
     /// The configuration key associated with the "DetailedErrors" configuration.

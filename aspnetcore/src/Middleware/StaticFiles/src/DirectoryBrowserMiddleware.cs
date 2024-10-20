@@ -27,10 +27,12 @@ public class DirectoryBrowserMiddleware
     /// <param name="next">The next middleware in the pipeline.</param>
     /// <param name="hostingEnv">The <see cref="IWebHostEnvironment"/> used by this middleware.</param>
     /// <param name="options">The configuration for this middleware.</param>
-    public DirectoryBrowserMiddleware(RequestDelegate next, IWebHostEnvironment hostingEnv, IOptions<DirectoryBrowserOptions> options)
-        : this(next, hostingEnv, HtmlEncoder.Default, options)
-    {
-    }
+    public DirectoryBrowserMiddleware(
+        RequestDelegate next,
+        IWebHostEnvironment hostingEnv,
+        IOptions<DirectoryBrowserOptions> options
+    )
+        : this(next, hostingEnv, HtmlEncoder.Default, options) { }
 
     /// <summary>
     /// Creates a new instance of the SendFileMiddleware.
@@ -39,7 +41,12 @@ public class DirectoryBrowserMiddleware
     /// <param name="hostingEnv">The <see cref="IWebHostEnvironment"/> used by this middleware.</param>
     /// <param name="encoder">The <see cref="HtmlEncoder"/> used by the default <see cref="HtmlDirectoryFormatter"/>.</param>
     /// <param name="options">The configuration for this middleware.</param>
-    public DirectoryBrowserMiddleware(RequestDelegate next, IWebHostEnvironment hostingEnv, HtmlEncoder encoder, IOptions<DirectoryBrowserOptions> options)
+    public DirectoryBrowserMiddleware(
+        RequestDelegate next,
+        IWebHostEnvironment hostingEnv,
+        HtmlEncoder encoder,
+        IOptions<DirectoryBrowserOptions> options
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(hostingEnv);
@@ -61,14 +68,24 @@ public class DirectoryBrowserMiddleware
     public Task Invoke(HttpContext context)
     {
         // Check if the URL matches any expected paths, skip if an endpoint with a request delegate was selected
-        if (context.GetEndpoint()?.RequestDelegate is null
+        if (
+            context.GetEndpoint()?.RequestDelegate is null
             && Helpers.IsGetOrHeadMethod(context.Request.Method)
-            && Helpers.TryMatchPath(context, _matchUrl, forDirectory: true, subpath: out var subpath)
-            && TryGetDirectoryInfo(subpath, out var contents))
+            && Helpers.TryMatchPath(
+                context,
+                _matchUrl,
+                forDirectory: true,
+                subpath: out var subpath
+            )
+            && TryGetDirectoryInfo(subpath, out var contents)
+        )
         {
             // If the path matches a directory but does not end in a slash, redirect to add the slash.
             // This prevents relative links from breaking.
-            if (_options.RedirectToAppendTrailingSlash && !Helpers.PathEndsInSlash(context.Request.Path))
+            if (
+                _options.RedirectToAppendTrailingSlash
+                && !Helpers.PathEndsInSlash(context.Request.Path)
+            )
             {
                 Helpers.RedirectToPathWithSlash(context);
                 return Task.CompletedTask;

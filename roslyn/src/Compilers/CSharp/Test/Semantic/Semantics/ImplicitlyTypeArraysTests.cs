@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ImplicitlyTypedArrayLocal()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 class M {}
 
 class C 
@@ -29,13 +30,22 @@ class C
         var a = new[] { new M() };
      }
 }
-");
+"
+            );
 
             compilation.VerifyDiagnostics();
 
-            var method = (SourceMemberMethodSymbol)compilation.GlobalNamespace.GetTypeMembers("C").Single().GetMembers("F").Single();
-            var diagnostics = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
-            var block = MethodCompiler.BindSynthesizedMethodBody(method, new TypeCompilationState(method.ContainingType, compilation, null), diagnostics);
+            var method = (SourceMemberMethodSymbol)
+                compilation.GlobalNamespace.GetTypeMembers("C").Single().GetMembers("F").Single();
+            var diagnostics = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
+            var block = MethodCompiler.BindSynthesizedMethodBody(
+                method,
+                new TypeCompilationState(method.ContainingType, compilation, null),
+                diagnostics
+            );
             diagnostics.Free();
 
             var locDecl = (BoundLocalDeclaration)block.Statements.Single();
@@ -49,7 +59,8 @@ class C
         [Fact]
         public void ImplicitlyTypedArray_BindArrayInitializer()
         {
-            var text = @"
+            var text =
+                @"
 class C 
 { 
      public void F()
@@ -76,7 +87,8 @@ class C
         [Fact]
         public void ImplicitlyTypedArray_BindImplicitlyTypedLocal()
         {
-            var text = @"
+            var text =
+                @"
 class C 
 { 
      public void F()

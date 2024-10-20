@@ -20,7 +20,8 @@ internal class BaseHttpConnectionContext
         IFeatureCollection connectionFeatures,
         MemoryPool<byte> memoryPool,
         IPEndPoint? localEndPoint,
-        IPEndPoint? remoteEndPoint)
+        IPEndPoint? remoteEndPoint
+    )
     {
         ConnectionId = connectionId;
         Protocols = protocols;

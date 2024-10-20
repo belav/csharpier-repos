@@ -5,6 +5,10 @@ namespace System.Reflection.Tests
 {
     public class Helpers
     {
-        public const BindingFlags AllFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance;
+        public const BindingFlags AllFlags =
+            BindingFlags.Public
+            | BindingFlags.NonPublic
+            | BindingFlags.Static
+            | BindingFlags.Instance;
     }
 }

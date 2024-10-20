@@ -9,9 +9,7 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
     class UsesRendererAsBaseClass : Renderer
     {
         public UsesRendererAsBaseClass()
-            : base(null, null)
-        {
-        }
+            : base(null, null) { }
 
         public override Dispatcher Dispatcher => throw new NotImplementedException();
 
@@ -20,7 +18,9 @@ namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInt
             throw new NotImplementedException();
         }
 
-        protected override Task UpdateDisplayAsync(/*M1*/in RenderBatch renderBatch)
+        protected override Task UpdateDisplayAsync( /*M1*/
+            in RenderBatch renderBatch
+        )
         {
             throw new NotImplementedException();
         }

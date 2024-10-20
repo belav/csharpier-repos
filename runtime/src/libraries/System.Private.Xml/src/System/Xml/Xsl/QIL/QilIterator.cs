@@ -20,11 +20,11 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct an iterator
         /// </summary>
-        public QilIterator(QilNodeType nodeType, QilNode? binding) : base(nodeType)
+        public QilIterator(QilNodeType nodeType, QilNode? binding)
+            : base(nodeType)
         {
             Binding = binding;
         }
-
 
         //-----------------------------------------------
         // IList<QilNode> methods -- override
@@ -37,10 +37,19 @@ namespace System.Xml.Xsl.Qil
 
         public override QilNode this[int index]
         {
-            get { if (index != 0) throw new IndexOutOfRangeException(); return _binding!; }
-            set { if (index != 0) throw new IndexOutOfRangeException(); _binding = value; }
+            get
+            {
+                if (index != 0)
+                    throw new IndexOutOfRangeException();
+                return _binding!;
+            }
+            set
+            {
+                if (index != 0)
+                    throw new IndexOutOfRangeException();
+                _binding = value;
+            }
         }
-
 
         //-----------------------------------------------
         // QilIterator methods

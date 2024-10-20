@@ -19,26 +19,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             private readonly object _value;
             public string PropertyName
             {
-                get
-                {
-                    return _propertyName;
-                }
+                get { return _propertyName; }
             }
 
             public Type FieldType
             {
-                get
-                {
-                    return _fieldType;
-                }
+                get { return _fieldType; }
             }
 
             public object Value
             {
-                get
-                {
-                    return _value;
-                }
+                get { return _value; }
             }
 
             public FieldInfo(string propertyName, Type fieldType, object value)

@@ -15,10 +15,7 @@ namespace System.Web.Mvc.Test
         public void Get_OnExistingProperty_ReturnsValue()
         {
             // Arrange
-            ViewDataDictionary vd = new ViewDataDictionary()
-            {
-                { "Prop", "Value" }
-            };
+            ViewDataDictionary vd = new ViewDataDictionary() { { "Prop", "Value" } };
             dynamic dynamicVD = new DynamicViewDataDictionary(() => vd);
 
             // Act
@@ -47,10 +44,7 @@ namespace System.Web.Mvc.Test
         public void Set_OnExistingProperty_OverridesValue()
         {
             // Arrange
-            ViewDataDictionary vd = new ViewDataDictionary()
-            {
-                { "Prop", "Value" }
-            };
+            ViewDataDictionary vd = new ViewDataDictionary() { { "Prop", "Value" } };
             dynamic dynamicVD = new DynamicViewDataDictionary(() => vd);
 
             // Act
@@ -81,12 +75,12 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             object result = null;
-            ViewDataDictionary vd = new ViewDataDictionary()
-            {
-                { "Prop", "Value" }
-            };
+            ViewDataDictionary vd = new ViewDataDictionary() { { "Prop", "Value" } };
             DynamicViewDataDictionary dynamicVD = new DynamicViewDataDictionary(() => vd);
-            Mock<GetMemberBinder> binderMock = new Mock<GetMemberBinder>("Prop", /* ignoreCase */ false);
+            Mock<GetMemberBinder> binderMock = new Mock<GetMemberBinder>(
+                "Prop", /* ignoreCase */
+                false
+            );
 
             // Act
             bool success = dynamicVD.TryGetMember(binderMock.Object, out result);
@@ -103,7 +97,10 @@ namespace System.Web.Mvc.Test
             object result = null;
             ViewDataDictionary vd = new ViewDataDictionary();
             DynamicViewDataDictionary dynamicVD = new DynamicViewDataDictionary(() => vd);
-            Mock<GetMemberBinder> binderMock = new Mock<GetMemberBinder>("Prop", /* ignoreCase */ false);
+            Mock<GetMemberBinder> binderMock = new Mock<GetMemberBinder>(
+                "Prop", /* ignoreCase */
+                false
+            );
 
             // Act
             bool success = dynamicVD.TryGetMember(binderMock.Object, out result);
@@ -117,12 +114,12 @@ namespace System.Web.Mvc.Test
         public void TrySetMember_OnExistingProperty_OverridesValueAndSucceeds()
         {
             // Arrange
-            ViewDataDictionary vd = new ViewDataDictionary()
-            {
-                { "Prop", "Value" }
-            };
+            ViewDataDictionary vd = new ViewDataDictionary() { { "Prop", "Value" } };
             DynamicViewDataDictionary dynamicVD = new DynamicViewDataDictionary(() => vd);
-            Mock<SetMemberBinder> binderMock = new Mock<SetMemberBinder>("Prop", /* ignoreCase */ false);
+            Mock<SetMemberBinder> binderMock = new Mock<SetMemberBinder>(
+                "Prop", /* ignoreCase */
+                false
+            );
 
             // Act
             bool success = dynamicVD.TrySetMember(binderMock.Object, "NewValue");
@@ -139,7 +136,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             ViewDataDictionary vd = new ViewDataDictionary();
             DynamicViewDataDictionary dynamicVD = new DynamicViewDataDictionary(() => vd);
-            Mock<SetMemberBinder> binderMock = new Mock<SetMemberBinder>("Prop", /* ignoreCase */ false);
+            Mock<SetMemberBinder> binderMock = new Mock<SetMemberBinder>(
+                "Prop", /* ignoreCase */
+                false
+            );
 
             // Act
             bool success = dynamicVD.TrySetMember(binderMock.Object, "NewValue");
@@ -168,11 +168,7 @@ namespace System.Web.Mvc.Test
         public void GetDynamicMemberNames_ReturnsKeyNamesForFilledViewDataDictionary()
         {
             // Arrange
-            ViewDataDictionary vd = new ViewDataDictionary()
-            {
-                { "Prop1", 1 },
-                { "Prop2", 2 }
-            };
+            ViewDataDictionary vd = new ViewDataDictionary() { { "Prop1", 1 }, { "Prop2", 2 } };
             DynamicViewDataDictionary dvd = new DynamicViewDataDictionary(() => vd);
 
             // Act

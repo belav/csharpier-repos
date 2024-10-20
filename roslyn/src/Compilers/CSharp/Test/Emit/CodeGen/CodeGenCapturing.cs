@@ -4,17 +4,17 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
-using Roslyn.Test.Utilities;
 using System;
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
-using Xunit;
-using System.Collections;
-using System.Collections.Immutable;
 using System.Threading.Tasks;
-using System.Collections.Concurrent;
+using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using Roslyn.Test.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
@@ -42,8 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 
             public void Add(int depth, string varName)
             {
-                if (VariablesByScope.Count <= depth ||
-                    VariablesByScope[depth] == null)
+                if (VariablesByScope.Count <= depth || VariablesByScope[depth] == null)
                 {
                     VariablesByScope.Insert(depth, new List<string>() { varName });
                 }
@@ -59,9 +58,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 var newCtx = new CaptureContext();
                 newCtx.VariablesByScope.Add(fields);
                 newCtx.VariablesByScope.AddRange(
-                    this.VariablesByScope
-                    .Skip(1)
-                    .Select(list => list == null ? null : new List<string>(list)));
+                    this.VariablesByScope.Skip(1)
+                        .Select(list => list == null ? null : new List<string>(list))
+                );
                 newCtx.CaptureNameIndex = this.CaptureNameIndex;
                 return newCtx;
             }
@@ -93,9 +92,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     // Capture the last variables added since if there are more
                     // vars in the context than the max vars to capture we'll never
                     // have code coverage of the newest vars added to the context.
-                    varNames.AddRange(varsAtCurrentDepth
-                        .Skip(numVarsAvailable - numToCapture)
-                        .Take(numToCapture));
+                    varNames.AddRange(
+                        varsAtCurrentDepth.Skip(numVarsAvailable - numToCapture).Take(numToCapture)
+                    );
                 }
                 else
                 {
@@ -124,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             IEnumerable<ImmutableList<int>> GenerateAll(
                 int remainingSum,
                 int setIndex, // 0-based index of subset we're generating
-                ImmutableList<int> setsSoFar)
+                ImmutableList<int> setsSoFar
+            )
             {
                 for (int i = 0; i <= remainingSum; i++)
                 {
@@ -135,9 +135,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     }
                     else
                     {
-                        foreach (var captures in GenerateAll(remainingSum - i,
-                                                             setIndex + 1,
-                                                             newSets))
+                        foreach (
+                            var captures in GenerateAll(remainingSum - i, setIndex + 1, newSets)
+                        )
                         {
                             yield return captures;
                         }
@@ -146,64 +146,79 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             }
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30212")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30212"
+        )]
         public void GenerateAllTest()
         {
-            Assert.Equal(new[]
-            {
-                ImmutableList<int>.Empty.Add(0),
-                ImmutableList<int>.Empty.Add(1),
-                ImmutableList<int>.Empty.Add(2),
-                ImmutableList<int>.Empty.Add(3)
-            }, GenerateAllSetCombinations(3, 1));
-            Assert.Equal(new[]
-            {
-                ImmutableList<int>.Empty.Add(0).Add(0),
-                ImmutableList<int>.Empty.Add(0).Add(1),
-                ImmutableList<int>.Empty.Add(0).Add(2),
-                ImmutableList<int>.Empty.Add(0).Add(3),
-                ImmutableList<int>.Empty.Add(1).Add(0),
-                ImmutableList<int>.Empty.Add(1).Add(1),
-                ImmutableList<int>.Empty.Add(1).Add(2),
-                ImmutableList<int>.Empty.Add(2).Add(0),
-                ImmutableList<int>.Empty.Add(2).Add(1),
-                ImmutableList<int>.Empty.Add(3).Add(0)
-            }, GenerateAllSetCombinations(3, 2));
+            Assert.Equal(
+                new[]
+                {
+                    ImmutableList<int>.Empty.Add(0),
+                    ImmutableList<int>.Empty.Add(1),
+                    ImmutableList<int>.Empty.Add(2),
+                    ImmutableList<int>.Empty.Add(3),
+                },
+                GenerateAllSetCombinations(3, 1)
+            );
+            Assert.Equal(
+                new[]
+                {
+                    ImmutableList<int>.Empty.Add(0).Add(0),
+                    ImmutableList<int>.Empty.Add(0).Add(1),
+                    ImmutableList<int>.Empty.Add(0).Add(2),
+                    ImmutableList<int>.Empty.Add(0).Add(3),
+                    ImmutableList<int>.Empty.Add(1).Add(0),
+                    ImmutableList<int>.Empty.Add(1).Add(1),
+                    ImmutableList<int>.Empty.Add(1).Add(2),
+                    ImmutableList<int>.Empty.Add(2).Add(0),
+                    ImmutableList<int>.Empty.Add(2).Add(1),
+                    ImmutableList<int>.Empty.Add(3).Add(0),
+                },
+                GenerateAllSetCombinations(3, 2)
+            );
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = "https://github.com/dotnet/roslyn/issues/30212")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30212"
+        )]
         public void ExpressionGeneratorTest01()
         {
             var ctx = new CaptureContext(1);
             int[] captures = { 1 }; // Capture 1 var at the 0 depth
             var expr = MakeCaptureExpression(captures, ctx);
             Assert.Equal("field_0", expr);
-            VerifyContext(new[]
-            {
-                new[] { "field_0"}
-            }, ctx.VariablesByScope);
+            VerifyContext(new[] { new[] { "field_0" } }, ctx.VariablesByScope);
 
             ctx = new CaptureContext(3);
             captures = new[] { 3 }; // Capture 3 vars at 0 depth
             expr = MakeCaptureExpression(captures, ctx);
             Assert.Equal("field_0 + field_1 + field_2", expr);
-            VerifyContext(new[]
-            {
-                new[] { "field_0", "field_1", "field_2" }
-            }, ctx.VariablesByScope);
+            VerifyContext(
+                new[] { new[] { "field_0", "field_1", "field_2" } },
+                ctx.VariablesByScope
+            );
 
             ctx = new CaptureContext(3);
             captures = new[] { 1, 1, 1 }; // Capture 1 var at each of 3 depths
             expr = MakeCaptureExpression(captures, ctx);
             Assert.Equal("field_2 + captureVar_0 + captureVar_1", expr);
-            VerifyContext(new[]
-            {
-                new[] { "field_0", "field_1", "field_2"},
-                new[] { "captureVar_0"},
-                new[] { "captureVar_1"}
-            }, ctx.VariablesByScope);
+            VerifyContext(
+                new[]
+                {
+                    new[] { "field_0", "field_1", "field_2" },
+                    new[] { "captureVar_0" },
+                    new[] { "captureVar_1" },
+                },
+                ctx.VariablesByScope
+            );
 
-            void VerifyContext(IList<IEnumerable<string>> expectedCtx, List<IList<string>> actualCtx)
+            void VerifyContext(
+                IList<IEnumerable<string>> expectedCtx,
+                List<IList<string>> actualCtx
+            )
             {
                 Assert.Equal(expectedCtx.Count, ctx.VariablesByScope.Count);
                 for (int depth = 0; depth < expectedCtx.Count; depth++)
@@ -212,6 +227,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 }
             }
         }
+
         private struct LayoutEnumerator : IEnumerator<(int depth, int localFuncIndex)>
         {
             private readonly IList<int> _layout;
@@ -247,7 +263,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     return true;
                 }
 
-                bool FindNonEmptyDepth(int startingDepth, IList<int> layout, out (int depth, int localFuncIndex) newCurrent)
+                bool FindNonEmptyDepth(
+                    int startingDepth,
+                    IList<int> layout,
+                    out (int depth, int localFuncIndex) newCurrent
+                )
                 {
                     for (int depth = startingDepth; depth < layout.Count; depth++)
                     {
@@ -285,11 +305,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             {
                 return new MethodInfo
                 {
-                    LocalFuncs = this.LocalFuncs
-                        .Select(x => x == null
-                                     ? null
-                                     : (IList<string>)new List<string>(x)).ToList(),
-                    CaptureContext = this.CaptureContext.Clone()
+                    LocalFuncs = this
+                        .LocalFuncs.Select(x =>
+                            x == null ? null : (IList<string>)new List<string>(x)
+                        )
+                        .ToList(),
+                    CaptureContext = this.CaptureContext.Clone(),
                 };
             }
         }
@@ -322,7 +343,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     var expr = MakeCaptureExpression(captureCombo, copy.CaptureContext);
                     if (depth >= copy.LocalFuncs.Count)
                     {
-                        copy.LocalFuncs.AddRange(Enumerable.Repeat<List<string>>(null, depth - copy.LocalFuncs.Count));
+                        copy.LocalFuncs.AddRange(
+                            Enumerable.Repeat<List<string>>(null, depth - copy.LocalFuncs.Count)
+                        );
                         copy.LocalFuncs.Insert(depth, new List<string>());
                     }
                     string localFuncName = $"Local_{localFuncNameIndex}";
@@ -374,8 +397,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 }
 
                 var captureVars = methodInfo.CaptureContext.VariablesByScope;
-                if (captureVars.Count > (depth + 1) &&
-                    captureVars[depth + 1] != null)
+                if (captureVars.Count > (depth + 1) && captureVars[depth + 1] != null)
                 {
                     foreach (var captureVar in captureVars[depth + 1])
                     {
@@ -399,8 +421,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 }
             }
 
-            var localFuncCalls = string.Join(" + ",
-                Enumerable.Range(0, totalLocalFuncs).Select(f => $"Local_{f}()"));
+            var localFuncCalls = string.Join(
+                " + ",
+                Enumerable.Range(0, totalLocalFuncs).Select(f => $"Local_{f}()")
+            );
             methodText.AppendLine($"Console.WriteLine({localFuncCalls});");
 
             for (int depth = localFuncs.Count - 1; depth > 0; depth--)
@@ -409,12 +433,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                 methodText.AppendLine("}");
             }
 
-            builder.Append($@"
+            builder.Append(
+                $@"
     public void M_{methodIndex}()
     {{
 {methodText.ToString()}
-    }}");
-
+    }}"
+            );
         }
 
         /// <summary>
@@ -424,7 +449,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         /// a maximum number of local functions, and a maximum scope depth to decide the
         /// limits of the combinations.
         /// </summary>
-        [ConditionalFact(typeof(WindowsOnly), typeof(NoIOperationValidation), Reason = "https://github.com/dotnet/roslyn/issues/30212")]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            typeof(NoIOperationValidation),
+            Reason = "https://github.com/dotnet/roslyn/issues/30212"
+        )]
         public void AllCaptureTests()
         {
             var methods = MakeAllMethods().ToList();
@@ -432,34 +461,42 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             var fields = methods.First().CaptureContext.VariablesByScope[0];
 
             const int PartitionSize = 500;
-            const string ClassFmt = @"
+            const string ClassFmt =
+                @"
 using System;
 public class C
 {{
     {0}";
-            StringBuilder GetClassStart()
-                => new StringBuilder(string.Format(ClassFmt,
-                    string.Join("\r\n", fields.Select(f => $"public int {f} = 0;"))));
+            StringBuilder GetClassStart() =>
+                new StringBuilder(
+                    string.Format(
+                        ClassFmt,
+                        string.Join("\r\n", fields.Select(f => $"public int {f} = 0;"))
+                    )
+                );
 
-            Parallel.ForEach(Partitioner.Create(0, methods.Count, PartitionSize), (range, state) =>
-            {
-                var methodsText = GetClassStart();
-
-                for (int methodIndex = range.Item1; methodIndex < range.Item2; methodIndex++)
+            Parallel.ForEach(
+                Partitioner.Create(0, methods.Count, PartitionSize),
+                (range, state) =>
                 {
-                    var methodInfo = methods[methodIndex];
+                    var methodsText = GetClassStart();
 
-                    if (methodInfo.TotalLocalFuncs == 0)
+                    for (int methodIndex = range.Item1; methodIndex < range.Item2; methodIndex++)
                     {
-                        continue;
+                        var methodInfo = methods[methodIndex];
+
+                        if (methodInfo.TotalLocalFuncs == 0)
+                        {
+                            continue;
+                        }
+
+                        SerializeMethod(methodInfo, methodsText, methodIndex);
                     }
 
-                    SerializeMethod(methodInfo, methodsText, methodIndex);
+                    methodsText.AppendLine("\r\n}");
+                    CreateCompilation(methodsText.ToString()).VerifyEmitDiagnostics();
                 }
-
-                methodsText.AppendLine("\r\n}");
-                CreateCompilation(methodsText.ToString()).VerifyEmitDiagnostics();
-            });
+            );
         }
     }
 }

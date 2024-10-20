@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,63 +35,83 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class HttpModuleAction: ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty nameProp;
-		static ConfigurationProperty typeProp;
+    public sealed class HttpModuleAction : ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty nameProp;
+        static ConfigurationProperty typeProp;
 
-		static ConfigurationElementProperty elementProperty;
+        static ConfigurationElementProperty elementProperty;
 
-		static HttpModuleAction ()
-		{
-			nameProp = new ConfigurationProperty ("name", typeof (string), null,
-							      TypeDescriptor.GetConverter (typeof (string)),
-							      PropertyHelper.NonEmptyStringValidator,
-							      ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			typeProp = new ConfigurationProperty ("type", typeof (string), "hoho", ConfigurationPropertyOptions.IsRequired);
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (nameProp);
-			properties.Add (typeProp);
+        static HttpModuleAction()
+        {
+            nameProp = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                null,
+                TypeDescriptor.GetConverter(typeof(string)),
+                PropertyHelper.NonEmptyStringValidator,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            typeProp = new ConfigurationProperty(
+                "type",
+                typeof(string),
+                "hoho",
+                ConfigurationPropertyOptions.IsRequired
+            );
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(nameProp);
+            properties.Add(typeProp);
 
-			elementProperty = new ConfigurationElementProperty (new CallbackValidator (typeof (HttpModuleAction), ValidateElement));
-		}
+            elementProperty = new ConfigurationElementProperty(
+                new CallbackValidator(typeof(HttpModuleAction), ValidateElement)
+            );
+        }
 
-		internal HttpModuleAction ()
-		{
-		}
+        internal HttpModuleAction() { }
 
-		public HttpModuleAction (string name, string type)
-		{
-			this.Name = name;
-			this.Type = type;
-		}
+        public HttpModuleAction(string name, string type)
+        {
+            this.Name = name;
+            this.Type = type;
+        }
 
-		static void ValidateElement (object o)
-		{
-			/* XXX do some sort of element validation here? */
-		}
+        static void ValidateElement(object o)
+        {
+            /* XXX do some sort of element validation here? */
+        }
 
-		protected internal override ConfigurationElementProperty ElementProperty {
-			get { return elementProperty; }
-		}
+        protected internal override ConfigurationElementProperty ElementProperty
+        {
+            get { return elementProperty; }
+        }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("name", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Name {
-			get { return (string)base[nameProp]; }
-			set { base[nameProp] = value; }
-		}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty(
+            "name",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Name
+        {
+            get { return (string)base[nameProp]; }
+            set { base[nameProp] = value; }
+        }
 
-		[ConfigurationProperty ("type", DefaultValue = "", Options = ConfigurationPropertyOptions.IsRequired)]
-		public string Type {
-			get { return (string)base[typeProp]; }
-			set { base[typeProp] = value; }
-		}
+        [ConfigurationProperty(
+            "type",
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
+        public string Type
+        {
+            get { return (string)base[typeProp]; }
+            set { base[typeProp] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

@@ -25,9 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
             CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp7_3);
 
         public MakeRefStructTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
         private const string SpanDeclarationSourceText = """
             using System;
@@ -42,43 +40,56 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
 
             """;
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new MakeRefStructCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new MakeRefStructCodeFixProvider());
 
         [Fact]
         public async Task FieldInNotRefStruct()
         {
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 struct S
                 {
                     Span<int>[||] m;
                 }
-                """);
-            var expected = CreateTestSource("""
+                """
+            );
+            var expected = CreateTestSource(
+                """
                 ref struct S
                 {
                     Span<int> m;
                 }
-                """);
+                """
+            );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
 
         [Fact]
         public async Task FieldInRecordStruct()
         {
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 record struct S
                 {
                     Span<int>[||] m;
                 }
-                """);
-            await TestMissingInRegularAndScriptAsync(text, new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12)));
+                """
+            );
+            await TestMissingInRegularAndScriptAsync(
+                text,
+                new TestParameters(
+                    CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp12)
+                )
+            );
         }
 
         [Fact]
         public async Task FieldInNestedClassInsideNotRefStruct()
         {
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 struct S
                 {
                     class C
@@ -86,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                         Span<int>[||] m;
                     }
                 }
-                """);
+                """
+            );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
 
@@ -94,49 +106,59 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         public async Task FieldStaticInRefStruct()
         {
             // Note: does not compile
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 ref struct S
                 {
                     static Span<int>[||] m;
                 }
-                """);
+                """
+            );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
 
         [Fact]
         public async Task FieldStaticInNotRefStruct()
         {
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 struct S
                 {
                     static Span<int>[||] m;
                 }
-                """);
+                """
+            );
             // Note: still does not compile after fix
-            var expected = CreateTestSource("""
+            var expected = CreateTestSource(
+                """
                 ref struct S
                 {
                     static Span<int> m;
                 }
-                """);
+                """
+            );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
 
         [Fact]
         public async Task PropInNotRefStruct()
         {
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 struct S
                 {
                     Span<int>[||] M { get; }
                 }
-                """);
-            var expected = CreateTestSource("""
+                """
+            );
+            var expected = CreateTestSource(
+                """
                 ref struct S
                 {
                     Span<int> M { get; }
                 }
-                """);
+                """
+            );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
 
@@ -144,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         public async Task PropInNestedClassInsideNotRefStruct()
         {
             // Note: does not compile
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 struct S
                 {
                     class C
@@ -152,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                         Span<int>[||] M { get; }
                     }
                 }
-                """);
+                """
+            );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
 
@@ -160,38 +184,45 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
         public async Task PropStaticInRefStruct()
         {
             // Note: does not compile
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 ref struct S
                 {
                     static Span<int>[||] M { get; }
                 }
-                """);
+                """
+            );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
 
         [Fact]
         public async Task PropStaticInNotRefStruct()
         {
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 struct S
                 {
                     static Span<int>[||] M { get; }
                 }
-                """);
+                """
+            );
             // Note: still does not compile after fix
-            var expected = CreateTestSource("""
+            var expected = CreateTestSource(
+                """
                 ref struct S
                 {
                     static Span<int> M { get; }
                 }
-                """);
+                """
+            );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
 
         [Fact]
         public async Task PartialByRefStruct()
         {
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 ref partial struct S
                 {
                 }
@@ -200,14 +231,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 {
                     Span<int>[||] M { get; }
                 }
-                """);
+                """
+            );
             await TestMissingInRegularAndScriptAsync(text, new TestParameters(s_parseOptions));
         }
 
         [Fact]
         public async Task PartialStruct()
         {
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 partial struct S
                 {
                 }
@@ -216,8 +249,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 {
                     Span<int>[||] M { get; }
                 }
-                """);
-            var expected = CreateTestSource("""
+                """
+            );
+            var expected = CreateTestSource(
+                """
                 partial struct S
                 {
                 }
@@ -226,14 +261,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 {
                     Span<int>[||] M { get; }
                 }
-                """);
+                """
+            );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
 
         [Fact]
         public async Task ReadonlyPartialStruct()
         {
-            var text = CreateTestSource("""
+            var text = CreateTestSource(
+                """
                 partial struct S
                 {
                 }
@@ -242,8 +279,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 {
                     Span<int>[||] M { get; }
                 }
-                """);
-            var expected = CreateTestSource("""
+                """
+            );
+            var expected = CreateTestSource(
+                """
                 partial struct S
                 {
                 }
@@ -252,10 +291,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeRefStruct
                 {
                     Span<int>[||] M { get; }
                 }
-                """);
+                """
+            );
             await TestInRegularAndScriptAsync(text, expected, parseOptions: s_parseOptions);
         }
 
-        private static string CreateTestSource(string testSource) => SpanDeclarationSourceText + testSource;
+        private static string CreateTestSource(string testSource) =>
+            SpanDeclarationSourceText + testSource;
     }
 }

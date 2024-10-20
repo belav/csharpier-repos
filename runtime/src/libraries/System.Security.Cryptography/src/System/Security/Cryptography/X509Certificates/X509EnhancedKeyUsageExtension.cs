@@ -13,14 +13,15 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public X509EnhancedKeyUsageExtension(AsnEncodedData encodedEnhancedKeyUsages, bool critical)
-            : base(Oids.EnhancedKeyUsageOid, encodedEnhancedKeyUsages.RawData, critical)
-        {
-        }
+            : base(Oids.EnhancedKeyUsageOid, encodedEnhancedKeyUsages.RawData, critical) { }
 
         public X509EnhancedKeyUsageExtension(OidCollection enhancedKeyUsages, bool critical)
-            : base(Oids.EnhancedKeyUsageOid, EncodeExtension(enhancedKeyUsages), critical, skipCopy: true)
-        {
-        }
+            : base(
+                Oids.EnhancedKeyUsageOid,
+                EncodeExtension(enhancedKeyUsages),
+                critical,
+                skipCopy: true
+            ) { }
 
         public OidCollection EnhancedKeyUsages
         {
@@ -28,7 +29,10 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 if (!_decoded)
                 {
-                    X509Pal.Instance.DecodeX509EnhancedKeyUsageExtension(RawData, out _enhancedKeyUsages);
+                    X509Pal.Instance.DecodeX509EnhancedKeyUsageExtension(
+                        RawData,
+                        out _enhancedKeyUsages
+                    );
                     _decoded = true;
                 }
                 OidCollection oids = new OidCollection();

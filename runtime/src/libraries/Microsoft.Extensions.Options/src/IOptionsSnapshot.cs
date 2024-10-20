@@ -9,8 +9,9 @@ namespace Microsoft.Extensions.Options
     /// Used to access the value of <typeparamref name="TOptions"/> for the lifetime of a request.
     /// </summary>
     /// <typeparam name="TOptions">Options type.</typeparam>
-    public interface IOptionsSnapshot<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] out TOptions> :
-        IOptions<TOptions>
+    public interface IOptionsSnapshot<
+        [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] out TOptions
+    > : IOptions<TOptions>
         where TOptions : class
     {
         /// <summary>

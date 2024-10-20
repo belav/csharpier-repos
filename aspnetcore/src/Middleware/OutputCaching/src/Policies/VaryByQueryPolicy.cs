@@ -13,9 +13,7 @@ internal sealed class VaryByQueryPolicy : IOutputCachePolicy
 {
     private readonly StringValues _queryKeys;
 
-    private VaryByQueryPolicy()
-    {
-    }
+    private VaryByQueryPolicy() { }
 
     public VaryByQueryPolicy(string queryKey, params string[] queryKeys)
     {
@@ -37,7 +35,10 @@ internal sealed class VaryByQueryPolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         // No vary by query?
         if (_queryKeys.Count == 0)
@@ -47,25 +48,37 @@ internal sealed class VaryByQueryPolicy : IOutputCachePolicy
         }
 
         // If the current key is "*" (default) replace it
-        if (context.CacheVaryByRules.QueryKeys.Count == 1 && string.Equals(context.CacheVaryByRules.QueryKeys[0], "*", StringComparison.Ordinal))
+        if (
+            context.CacheVaryByRules.QueryKeys.Count == 1
+            && string.Equals(context.CacheVaryByRules.QueryKeys[0], "*", StringComparison.Ordinal)
+        )
         {
             context.CacheVaryByRules.QueryKeys = _queryKeys;
             return ValueTask.CompletedTask;
         }
 
-        context.CacheVaryByRules.QueryKeys = StringValues.Concat(context.CacheVaryByRules.QueryKeys, _queryKeys);
+        context.CacheVaryByRules.QueryKeys = StringValues.Concat(
+            context.CacheVaryByRules.QueryKeys,
+            _queryKeys
+        );
 
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }

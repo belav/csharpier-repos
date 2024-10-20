@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class TemporalComplexNavigationsQuerySqlServerFixture : ComplexNavigationsQuerySqlServerFixture
+public class TemporalComplexNavigationsQuerySqlServerFixture
+    : ComplexNavigationsQuerySqlServerFixture
 {
-    protected override string StoreName
-        => "TemporalComplexNavigations";
+    protected override string StoreName => "TemporalComplexNavigations";
 
     public DateTime ChangesDate { get; private set; }
 
@@ -28,39 +28,56 @@ public class TemporalComplexNavigationsQuerySqlServerFixture : ComplexNavigation
 
         ChangesDate = new DateTime(2010, 1, 1);
 
-        var tableNames = new List<string>
-        {
-            "LevelOne",
-            "LevelTwo",
-            "LevelThree",
-            "LevelFour"
-        };
+        var tableNames = new List<string> { "LevelOne", "LevelTwo", "LevelThree", "LevelFour" };
 
         // clean up intermittent history since in the Seed method we do fixup in multiple stages
         foreach (var tableName in tableNames)
         {
-            context.Database.ExecuteSqlRaw($"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)");
+            context.Database.ExecuteSqlRaw(
+                $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)"
+            );
             context.Database.ExecuteSqlRaw($"DELETE FROM [{tableName + "History"}]");
             context.Database.ExecuteSqlRaw(
-                $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))");
+                $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
+            );
         }
 
-        foreach (var entityOne in context.ChangeTracker.Entries().Where(e => e.Entity is Level1).Select(e => e.Entity))
+        foreach (
+            var entityOne in context
+                .ChangeTracker.Entries()
+                .Where(e => e.Entity is Level1)
+                .Select(e => e.Entity)
+        )
         {
             ((Level1)entityOne).Name = ((Level1)entityOne).Name + "Modified";
         }
 
-        foreach (var entityOne in context.ChangeTracker.Entries().Where(e => e.Entity is Level2).Select(e => e.Entity))
+        foreach (
+            var entityOne in context
+                .ChangeTracker.Entries()
+                .Where(e => e.Entity is Level2)
+                .Select(e => e.Entity)
+        )
         {
             ((Level2)entityOne).Name = ((Level2)entityOne).Name + "Modified";
         }
 
-        foreach (var entityOne in context.ChangeTracker.Entries().Where(e => e.Entity is Level3).Select(e => e.Entity))
+        foreach (
+            var entityOne in context
+                .ChangeTracker.Entries()
+                .Where(e => e.Entity is Level3)
+                .Select(e => e.Entity)
+        )
         {
             ((Level3)entityOne).Name = ((Level3)entityOne).Name + "Modified";
         }
 
-        foreach (var entityOne in context.ChangeTracker.Entries().Where(e => e.Entity is Level4).Select(e => e.Entity))
+        foreach (
+            var entityOne in context
+                .ChangeTracker.Entries()
+                .Where(e => e.Entity is Level4)
+                .Select(e => e.Entity)
+        )
         {
             ((Level4)entityOne).Name = ((Level4)entityOne).Name + "Modified";
         }
@@ -69,15 +86,26 @@ public class TemporalComplexNavigationsQuerySqlServerFixture : ComplexNavigation
 
         foreach (var tableName in tableNames)
         {
-            context.Database.ExecuteSqlRaw($"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)");
-            context.Database.ExecuteSqlRaw($"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME");
-
-            context.Database.ExecuteSqlRaw($"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'");
-            context.Database.ExecuteSqlRaw($"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'");
-
-            context.Database.ExecuteSqlRaw($"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])");
             context.Database.ExecuteSqlRaw(
-                $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))");
+                $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = OFF)"
+            );
+            context.Database.ExecuteSqlRaw(
+                $"ALTER TABLE [{tableName}] DROP PERIOD FOR SYSTEM_TIME"
+            );
+
+            context.Database.ExecuteSqlRaw(
+                $"UPDATE [{tableName + "History"}] SET PeriodStart = '2000-01-01T01:00:00.0000000Z'"
+            );
+            context.Database.ExecuteSqlRaw(
+                $"UPDATE [{tableName + "History"}] SET PeriodEnd = '2020-07-01T07:00:00.0000000Z'"
+            );
+
+            context.Database.ExecuteSqlRaw(
+                $"ALTER TABLE [{tableName}] ADD PERIOD FOR SYSTEM_TIME ([PeriodStart], [PeriodEnd])"
+            );
+            context.Database.ExecuteSqlRaw(
+                $"ALTER TABLE [{tableName}] SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = [dbo].[{tableName + "History"}]))"
+            );
         }
     }
 }

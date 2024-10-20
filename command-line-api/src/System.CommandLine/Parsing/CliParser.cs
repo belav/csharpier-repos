@@ -18,8 +18,11 @@ namespace System.CommandLine.Parsing
         /// <param name="args">The string array typically passed to a program's <c>Main</c> method.</param>
         /// <param name="configuration">The configuration on which the parser's grammar and behaviors are based.</param>
         /// <returns>A <see cref="ParseResult"/> providing details about the parse operation.</returns>
-        public static ParseResult Parse(CliCommand command, IReadOnlyList<string> args, CliConfiguration? configuration = null)
-            => Parse(command, args, null, configuration);
+        public static ParseResult Parse(
+            CliCommand command,
+            IReadOnlyList<string> args,
+            CliConfiguration? configuration = null
+        ) => Parse(command, args, null, configuration);
 
         /// <summary>
         /// Parses a command line string.
@@ -29,8 +32,11 @@ namespace System.CommandLine.Parsing
         /// <param name="configuration">The configuration on which the parser's grammar and behaviors are based.</param>
         /// <remarks>The command line string input will be split into tokens as if it had been passed on the command line.</remarks>
         /// <returns>A <see cref="ParseResult"/> providing details about the parse operation.</returns>
-        public static ParseResult Parse(CliCommand command, string commandLine, CliConfiguration? configuration = null)
-            => Parse(command, SplitCommandLine(commandLine).ToArray(), commandLine, configuration);
+        public static ParseResult Parse(
+            CliCommand command,
+            string commandLine,
+            CliConfiguration? configuration = null
+        ) => Parse(command, SplitCommandLine(commandLine).ToArray(), commandLine, configuration);
 
         /// <summary>
         /// Splits a string into a sequence of strings based on whitespace and quotation marks.
@@ -127,7 +133,10 @@ namespace System.CommandLine.Parsing
 
             string CurrentToken()
             {
-                return memory.Slice(startTokenIndex, IndexOfEndOfToken()).ToString().Replace("\"", "");
+                return memory
+                    .Slice(startTokenIndex, IndexOfEndOfToken())
+                    .ToString()
+                    .Replace("\"", "");
             }
 
             int IndexOfEndOfToken() => pos - startTokenIndex;
@@ -139,7 +148,8 @@ namespace System.CommandLine.Parsing
             CliCommand command,
             IReadOnlyList<string> arguments,
             string? rawInput,
-            CliConfiguration? configuration)
+            CliConfiguration? configuration
+        )
         {
             if (arguments is null)
             {
@@ -152,13 +162,10 @@ namespace System.CommandLine.Parsing
                 configuration,
                 inferRootCommand: rawInput is not null,
                 out List<CliToken> tokens,
-                out List<string>? tokenizationErrors);
+                out List<string>? tokenizationErrors
+            );
 
-            var operation = new ParseOperation(
-                tokens,
-                configuration,
-                tokenizationErrors,
-                rawInput);
+            var operation = new ParseOperation(tokens, configuration, tokenizationErrors, rawInput);
 
             return operation.Parse();
         }
@@ -168,7 +175,7 @@ namespace System.CommandLine.Parsing
             TokenStart,
             WordEnd,
             QuoteStart,
-            QuoteEnd
+            QuoteEnd,
         }
     }
 }

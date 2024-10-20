@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,51 +35,51 @@ using System.Xml.XPath;
 namespace Mono.Xml.XPath
 {
 #if OUTSIDE_SYSTEM_XML
-	public
+    public
 #else
-	internal
+    internal
 #endif
-		class DTMXPathDocument2 : IXPathNavigable
-	{
+    class DTMXPathDocument2 : IXPathNavigable
+    {
+        public DTMXPathDocument2(
+            XmlNameTable nameTable,
+            DTMXPathLinkedNode2[] nodes,
+            DTMXPathAttributeNode2[] attributes,
+            DTMXPathNamespaceNode2[] namespaces,
+            string[] atomicStringPool,
+            string[] nonAtomicStringPool,
+            Hashtable idTable
+        )
+        {
+            this.Nodes = nodes;
+            this.Attributes = attributes;
+            this.Namespaces = namespaces;
+            this.AtomicStringPool = atomicStringPool;
+            this.NonAtomicStringPool = nonAtomicStringPool;
+            this.IdTable = idTable;
+            this.NameTable = nameTable;
 
-		public DTMXPathDocument2 (XmlNameTable nameTable,
-			DTMXPathLinkedNode2 [] nodes,
-			DTMXPathAttributeNode2 [] attributes,
-			DTMXPathNamespaceNode2 [] namespaces,
-			string [] atomicStringPool,
-			string [] nonAtomicStringPool,
-			Hashtable idTable)
-		{
-			this.Nodes = nodes;
-			this.Attributes = attributes;
-			this.Namespaces = namespaces;
-			this.AtomicStringPool = atomicStringPool;
-			this.NonAtomicStringPool = nonAtomicStringPool;
-			this.IdTable = idTable;
-			this.NameTable = nameTable;
+            root = new SeekableDTMXPathNavigator2(this);
+        }
 
-			root = new SeekableDTMXPathNavigator2 (this);
-		}
+        public XPathNavigator CreateNavigator()
+        {
+            return root.Clone();
+        }
 
-		public XPathNavigator CreateNavigator ()
-		{
-			return root.Clone ();
-		}
+        readonly XPathNavigator root;
 
-		readonly XPathNavigator root;
+        internal readonly XmlNameTable NameTable;
 
-		internal readonly XmlNameTable NameTable;
+        internal readonly DTMXPathLinkedNode2[] Nodes;
+        internal readonly DTMXPathAttributeNode2[] Attributes;
+        internal readonly DTMXPathNamespaceNode2[] Namespaces;
 
-		internal readonly DTMXPathLinkedNode2 [] Nodes;
-		internal readonly DTMXPathAttributeNode2 [] Attributes;
-		internal readonly DTMXPathNamespaceNode2 [] Namespaces;
+        // String pool
+        internal readonly string[] AtomicStringPool;
+        internal readonly string[] NonAtomicStringPool;
 
-		// String pool
-		internal readonly string [] AtomicStringPool;
-		internal readonly string [] NonAtomicStringPool;
-
-		// ID table
-		internal readonly Hashtable IdTable;
-	}
+        // ID table
+        internal readonly Hashtable IdTable;
+    }
 }
-

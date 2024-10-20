@@ -22,11 +22,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpImportAdder()
-        {
-        }
+        public CSharpImportAdder() { }
 
-        protected override INamespaceSymbol? GetExplicitNamespaceSymbol(SyntaxNode node, SemanticModel model)
+        protected override INamespaceSymbol? GetExplicitNamespaceSymbol(
+            SyntaxNode node,
+            SemanticModel model
+        )
         {
             switch (node)
             {
@@ -44,18 +45,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
             SyntaxNode container,
             ImmutableArray<INamespaceSymbol> namespaceSymbols,
             HashSet<INamespaceSymbol> conflicts,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var rewriter = new ConflictWalker(model, namespaceSymbols, conflicts, cancellationToken);
+            var rewriter = new ConflictWalker(
+                model,
+                namespaceSymbols,
+                conflicts,
+                cancellationToken
+            );
             rewriter.Visit(container);
         }
 
-        private static INamespaceSymbol? GetExplicitNamespaceSymbol(ExpressionSyntax fullName, ExpressionSyntax namespacePart, SemanticModel model)
+        private static INamespaceSymbol? GetExplicitNamespaceSymbol(
+            ExpressionSyntax fullName,
+            ExpressionSyntax namespacePart,
+            SemanticModel model
+        )
         {
-
             // name must refer to something that is not a namespace, but be qualified with a namespace.
             var symbol = model.GetSymbolInfo(fullName).Symbol;
-            if (symbol != null && symbol.Kind != SymbolKind.Namespace && model.GetSymbolInfo(namespacePart).Symbol is INamespaceSymbol)
+            if (
+                symbol != null
+                && symbol.Kind != SymbolKind.Namespace
+                && model.GetSymbolInfo(namespacePart).Symbol is INamespaceSymbol
+            )
             {
                 // use the symbols containing namespace, and not the potentially less than fully qualified namespace in the full name expression.
                 var ns = symbol.ContainingNamespace;
@@ -85,8 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
             /// A mapping containing the simple names and arity of all imported types, mapped to the import that they're
             /// brought in by.
             /// </summary>
-            private readonly MultiDictionary<(string name, int arity), INamespaceSymbol> _importedTypes
-                = new();
+            private readonly MultiDictionary<
+                (string name, int arity),
+                INamespaceSymbol
+            > _importedTypes = new();
 
             /// <summary>
             /// A mapping containing the simple names of all imported extension methods, mapped to the import that
@@ -98,8 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
             /// called with).  That could then be used to check if there could be a conflict. However, that's likely
             /// more complexity than we need currently.  But it is always something we can do in the future.
             /// </remarks>
-            private readonly MultiDictionary<string, INamespaceSymbol> _importedExtensionMethods
-                = new();
+            private readonly MultiDictionary<string, INamespaceSymbol> _importedExtensionMethods =
+                new();
 
             private readonly HashSet<INamespaceSymbol> _conflictNamespaces;
 
@@ -114,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
                 SemanticModel model,
                 ImmutableArray<INamespaceSymbol> namespaceSymbols,
                 HashSet<INamespaceSymbol> conflictNamespaces,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
                 : base(SyntaxWalkerDepth.StructuredTrivia)
             {
                 _model = model;
@@ -169,7 +186,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
                 _inAnonymousMethod = previousInAnonymousMethod;
             }
 
-            public override void VisitParenthesizedLambdaExpression(ParenthesizedLambdaExpressionSyntax node)
+            public override void VisitParenthesizedLambdaExpression(
+                ParenthesizedLambdaExpressionSyntax node
+            )
             {
                 var previousInAnonymousMethod = _inAnonymousMethod;
                 _inAnonymousMethod = true;
@@ -177,7 +196,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Editing
                 _inAnonymousMethod = previousInAnonymousMethod;
             }
 
-            public override void VisitAnonymousMethodExpression(AnonymousMethodExpressionSyntax node)
+            public override void VisitAnonymousMethodExpression(
+                AnonymousMethodExpressionSyntax node
+            )
             {
                 var previousInAnonymousMethod = _inAnonymousMethod;
                 _inAnonymousMethod = true;

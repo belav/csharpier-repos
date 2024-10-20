@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Name))]
             public string Name => _sourceGeneratedFileItem.HintName;
 
-            public override string GetClassName() => SolutionExplorerShim.Source_Generated_File_Properties;
+            public override string GetClassName() =>
+                SolutionExplorerShim.Source_Generated_File_Properties;
+
             public override string GetComponentName() => _sourceGeneratedFileItem.HintName;
         }
     }

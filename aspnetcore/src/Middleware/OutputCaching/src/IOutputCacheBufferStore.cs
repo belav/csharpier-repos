@@ -19,7 +19,11 @@ public interface IOutputCacheBufferStore : IOutputCacheStore
     /// <param name="destination">The location to which the value should be written.</param>
     /// <param name="cancellationToken">Indicates that the operation should be cancelled.</param>
     /// <returns><c>True</c> if the response cache entry if it exists; otherwise <c>False</c>.</returns>
-    ValueTask<bool> TryGetAsync(string key, PipeWriter destination, CancellationToken cancellationToken);
+    ValueTask<bool> TryGetAsync(
+        string key,
+        PipeWriter destination,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Stores the given response in the response cache.
@@ -29,5 +33,11 @@ public interface IOutputCacheBufferStore : IOutputCacheStore
     /// <param name="tags">The tags associated with the cache entry to store.</param>
     /// <param name="validFor">The amount of time the entry will be kept in the cache before expiring, relative to now.</param>
     /// <param name="cancellationToken">Indicates that the operation should be cancelled.</param>
-    ValueTask SetAsync(string key, ReadOnlySequence<byte> value, ReadOnlyMemory<string> tags, TimeSpan validFor, CancellationToken cancellationToken);
+    ValueTask SetAsync(
+        string key,
+        ReadOnlySequence<byte> value,
+        ReadOnlyMemory<string> tags,
+        TimeSpan validFor,
+        CancellationToken cancellationToken
+    );
 }

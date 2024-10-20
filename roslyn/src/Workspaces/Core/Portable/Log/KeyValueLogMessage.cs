@@ -3,12 +3,12 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis.PooledObjects;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Microsoft.CodeAnalysis.Internal.Log
 {
@@ -17,15 +17,19 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     /// </summary>
     internal sealed class KeyValueLogMessage : LogMessage
     {
-        private static readonly ObjectPool<KeyValueLogMessage> s_pool = new(() => new KeyValueLogMessage(), 20);
+        private static readonly ObjectPool<KeyValueLogMessage> s_pool =
+            new(() => new KeyValueLogMessage(), 20);
 
         public static readonly KeyValueLogMessage NoProperty = new();
 
         /// <summary>
         /// Creates a <see cref="KeyValueLogMessage"/> with default <see cref="LogLevel.Information"/>, since
-        /// KV Log Messages are by default more informational and should be logged as such. 
+        /// KV Log Messages are by default more informational and should be logged as such.
         /// </summary>
-        public static KeyValueLogMessage Create(Action<Dictionary<string, object?>> propertySetter, LogLevel logLevel = LogLevel.Information)
+        public static KeyValueLogMessage Create(
+            Action<Dictionary<string, object?>> propertySetter,
+            LogLevel logLevel = LogLevel.Information
+        )
         {
             var logMessage = s_pool.Allocate();
             logMessage.Initialize(LogType.Trace, propertySetter, logLevel);
@@ -33,10 +37,16 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             return logMessage;
         }
 
-        public static KeyValueLogMessage Create(LogType kind, LogLevel logLevel = LogLevel.Information)
-            => Create(kind, propertySetter: null, logLevel);
+        public static KeyValueLogMessage Create(
+            LogType kind,
+            LogLevel logLevel = LogLevel.Information
+        ) => Create(kind, propertySetter: null, logLevel);
 
-        public static KeyValueLogMessage Create(LogType kind, Action<Dictionary<string, object?>>? propertySetter, LogLevel logLevel = LogLevel.Information)
+        public static KeyValueLogMessage Create(
+            LogType kind,
+            Action<Dictionary<string, object?>>? propertySetter,
+            LogLevel logLevel = LogLevel.Information
+        )
         {
             var logMessage = s_pool.Allocate();
             logMessage.Initialize(kind, propertySetter, logLevel);
@@ -54,7 +64,11 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             _kind = LogType.Trace;
         }
 
-        private void Initialize(LogType kind, Action<Dictionary<string, object?>>? propertySetter, LogLevel logLevel)
+        private void Initialize(
+            LogType kind,
+            Action<Dictionary<string, object?>>? propertySetter,
+            LogLevel logLevel
+        )
         {
             _kind = kind;
             _propertySetter = propertySetter;
@@ -129,7 +143,12 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 if (value != null)
                 {
                     var str = value.ToString();
-                    Debug.Assert(str != null && !str.Contains(PairSeparator) && !str.Contains(KeyValueSeparator) && !str.Contains(ItemSeparator));
+                    Debug.Assert(
+                        str != null
+                            && !str.Contains(PairSeparator)
+                            && !str.Contains(KeyValueSeparator)
+                            && !str.Contains(ItemSeparator)
+                    );
                     builder.Append(str);
                 }
             }

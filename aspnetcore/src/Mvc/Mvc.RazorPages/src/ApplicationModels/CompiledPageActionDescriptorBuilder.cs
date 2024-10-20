@@ -21,22 +21,29 @@ internal static class CompiledPageActionDescriptorBuilder
     /// <returns>The <see cref="CompiledPageActionDescriptor"/>.</returns>
     public static CompiledPageActionDescriptor Build(
         PageApplicationModel applicationModel,
-        FilterCollection globalFilters)
+        FilterCollection globalFilters
+    )
     {
         var boundProperties = CreateBoundProperties(applicationModel);
-        var filters = Enumerable.Concat(
+        var filters = Enumerable
+            .Concat(
                 globalFilters.Select(f => new FilterDescriptor(f, FilterScope.Global)),
-                applicationModel.Filters.Select(f => new FilterDescriptor(f, FilterScope.Action)))
+                applicationModel.Filters.Select(f => new FilterDescriptor(f, FilterScope.Action))
+            )
             .ToArray();
         var handlerMethods = CreateHandlerMethods(applicationModel);
 
-        if (applicationModel.ModelType != null && applicationModel.DeclaredModelType != null &&
-            !applicationModel.DeclaredModelType.IsAssignableFrom(applicationModel.ModelType))
+        if (
+            applicationModel.ModelType != null
+            && applicationModel.DeclaredModelType != null
+            && !applicationModel.DeclaredModelType.IsAssignableFrom(applicationModel.ModelType)
+        )
         {
             var message = Resources.FormatInvalidActionDescriptorModelType(
                 applicationModel.ActionDescriptor.DisplayName,
                 applicationModel.ModelType.Name,
-                applicationModel.DeclaredModelType.Name);
+                applicationModel.DeclaredModelType.Name
+            );
 
             throw new InvalidOperationException(message);
         }
@@ -72,7 +79,9 @@ internal static class CompiledPageActionDescriptorBuilder
     }
 
     // Internal for unit testing
-    internal static HandlerMethodDescriptor[] CreateHandlerMethods(PageApplicationModel applicationModel)
+    internal static HandlerMethodDescriptor[] CreateHandlerMethods(
+        PageApplicationModel applicationModel
+    )
     {
         var handlerModels = applicationModel.HandlerMethods;
         var handlerDescriptors = new HandlerMethodDescriptor[handlerModels.Count];
@@ -94,7 +103,9 @@ internal static class CompiledPageActionDescriptorBuilder
     }
 
     // internal for unit testing
-    internal static HandlerParameterDescriptor[] CreateHandlerParameters(PageHandlerModel handlerModel)
+    internal static HandlerParameterDescriptor[] CreateHandlerParameters(
+        PageHandlerModel handlerModel
+    )
     {
         var methodParameters = handlerModel.Parameters;
         var parameters = new HandlerParameterDescriptor[methodParameters.Count];
@@ -116,7 +127,9 @@ internal static class CompiledPageActionDescriptorBuilder
     }
 
     // internal for unit testing
-    internal static PageBoundPropertyDescriptor[] CreateBoundProperties(PageApplicationModel applicationModel)
+    internal static PageBoundPropertyDescriptor[] CreateBoundProperties(
+        PageApplicationModel applicationModel
+    )
     {
         var results = new List<PageBoundPropertyDescriptor>();
         var properties = applicationModel.HandlerProperties;

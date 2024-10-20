@@ -5,10 +5,10 @@
 namespace System.Activities.Tracking
 {
     using System;
-    using System.Runtime.Serialization;
-    using System.Runtime;
     using System.Diagnostics;
     using System.Globalization;
+    using System.Runtime;
+    using System.Runtime.Serialization;
 
     [Fx.Tag.XamlVisible(false)]
     [DataContract]
@@ -17,13 +17,27 @@ namespace System.Activities.Tracking
         Exception unhandledException;
         ActivityInfo faultSource;
 
-        public WorkflowInstanceUnhandledExceptionRecord(Guid instanceId, string activityDefinitionId, ActivityInfo faultSource, Exception exception)
-            : this(instanceId, 0, activityDefinitionId, faultSource, exception)
-        {
-        }
+        public WorkflowInstanceUnhandledExceptionRecord(
+            Guid instanceId,
+            string activityDefinitionId,
+            ActivityInfo faultSource,
+            Exception exception
+        )
+            : this(instanceId, 0, activityDefinitionId, faultSource, exception) { }
 
-        public WorkflowInstanceUnhandledExceptionRecord(Guid instanceId, long recordNumber, string activityDefinitionId, ActivityInfo faultSource, Exception exception)
-            : base(instanceId, recordNumber, activityDefinitionId, WorkflowInstanceStates.UnhandledException)
+        public WorkflowInstanceUnhandledExceptionRecord(
+            Guid instanceId,
+            long recordNumber,
+            string activityDefinitionId,
+            ActivityInfo faultSource,
+            Exception exception
+        )
+            : base(
+                instanceId,
+                recordNumber,
+                activityDefinitionId,
+                WorkflowInstanceStates.UnhandledException
+            )
         {
             if (string.IsNullOrEmpty(activityDefinitionId))
             {
@@ -42,13 +56,26 @@ namespace System.Activities.Tracking
             this.Level = TraceLevel.Error;
         }
 
-        public WorkflowInstanceUnhandledExceptionRecord(Guid instanceId, string activityDefinitionId, ActivityInfo faultSource, Exception exception, WorkflowIdentity workflowDefinitionIdentity)
+        public WorkflowInstanceUnhandledExceptionRecord(
+            Guid instanceId,
+            string activityDefinitionId,
+            ActivityInfo faultSource,
+            Exception exception,
+            WorkflowIdentity workflowDefinitionIdentity
+        )
             : this(instanceId, activityDefinitionId, faultSource, exception)
         {
             this.WorkflowDefinitionIdentity = workflowDefinitionIdentity;
         }
 
-        public WorkflowInstanceUnhandledExceptionRecord(Guid instanceId, long recordNumber, string activityDefinitionId, ActivityInfo faultSource, Exception exception, WorkflowIdentity workflowDefinitionIdentity)
+        public WorkflowInstanceUnhandledExceptionRecord(
+            Guid instanceId,
+            long recordNumber,
+            string activityDefinitionId,
+            ActivityInfo faultSource,
+            Exception exception,
+            WorkflowIdentity workflowDefinitionIdentity
+        )
             : this(instanceId, recordNumber, activityDefinitionId, faultSource, exception)
         {
             this.WorkflowDefinitionIdentity = workflowDefinitionIdentity;
@@ -60,29 +87,17 @@ namespace System.Activities.Tracking
             this.FaultSource = record.FaultSource;
             this.UnhandledException = record.UnhandledException;
         }
-        
+
         public Exception UnhandledException
         {
-            get
-            {
-                return this.unhandledException;
-            }
-            private set
-            {
-                this.unhandledException = value;
-            }
+            get { return this.unhandledException; }
+            private set { this.unhandledException = value; }
         }
-        
+
         public ActivityInfo FaultSource
         {
-            get
-            {
-                return this.faultSource;
-            }
-            private set
-            {
-                this.faultSource = value;
-            }
+            get { return this.faultSource; }
+            private set { this.faultSource = value; }
         }
 
         [DataMember(Name = "UnhandledException")]
@@ -106,22 +121,25 @@ namespace System.Activities.Tracking
 
         public override string ToString()
         {
-            // For backward compatibility, the ToString() does not return 
+            // For backward compatibility, the ToString() does not return
             // WorkflowIdentity, if it is null.
             if (this.WorkflowDefinitionIdentity == null)
             {
-                return string.Format(CultureInfo.CurrentCulture,
+                return string.Format(
+                    CultureInfo.CurrentCulture,
                     "WorkflowInstanceUnhandledExceptionRecord {{ InstanceId = {0}, RecordNumber = {1}, EventTime = {2}, ActivityDefinitionId = {3}, FaultSource {{ {4} }}, UnhandledException = {5} }} ",
                     this.InstanceId,
                     this.RecordNumber,
                     this.EventTime,
                     this.ActivityDefinitionId,
                     this.FaultSource.ToString(),
-                    this.UnhandledException);
+                    this.UnhandledException
+                );
             }
             else
             {
-                return string.Format(CultureInfo.CurrentCulture,
+                return string.Format(
+                    CultureInfo.CurrentCulture,
                     "WorkflowInstanceUnhandledExceptionRecord {{ InstanceId = {0}, RecordNumber = {1}, EventTime = {2}, ActivityDefinitionId = {3}, FaultSource {{ {4} }}, UnhandledException = {5}, WorkflowDefinitionIdentity = {6} }} ",
                     this.InstanceId,
                     this.RecordNumber,
@@ -129,7 +147,8 @@ namespace System.Activities.Tracking
                     this.ActivityDefinitionId,
                     this.FaultSource.ToString(),
                     this.UnhandledException,
-                    this.WorkflowDefinitionIdentity);
+                    this.WorkflowDefinitionIdentity
+                );
             }
         }
     }

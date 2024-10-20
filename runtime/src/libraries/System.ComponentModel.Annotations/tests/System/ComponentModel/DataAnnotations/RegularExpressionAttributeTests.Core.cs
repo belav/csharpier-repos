@@ -13,7 +13,10 @@ namespace System.ComponentModel.Annotations.Tests
         [InlineData(-1)]
         public static void MatchTimeout_Get_ReturnsExpected(int newValue)
         {
-            var attribute = new RegularExpressionAttribute("SomePattern") { MatchTimeoutInMilliseconds = newValue };
+            var attribute = new RegularExpressionAttribute("SomePattern")
+            {
+                MatchTimeoutInMilliseconds = newValue,
+            };
             Assert.Equal(TimeSpan.FromMilliseconds(newValue), attribute.MatchTimeout);
         }
     }

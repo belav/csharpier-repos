@@ -10,6 +10,8 @@ internal class StartupHook
     private static void Initialize()
     {
         CallCount++;
-        Console.WriteLine($"-- Hello from startup hook with non-public method! Call count: {CallCount}");
+        Console.WriteLine(
+            $"-- Hello from startup hook with non-public method! Call count: {CallCount}"
+        );
     }
 }

@@ -14,6 +14,4 @@ namespace Microsoft.AspNetCore.Identity.Data;
 [JsonSerializable(typeof(InfoResponse))]
 [JsonSerializable(typeof(TwoFactorRequest))]
 [JsonSerializable(typeof(TwoFactorResponse))]
-internal sealed partial class IdentityEndpointsJsonSerializerContext : JsonSerializerContext
-{
-}
+internal sealed partial class IdentityEndpointsJsonSerializerContext : JsonSerializerContext { }

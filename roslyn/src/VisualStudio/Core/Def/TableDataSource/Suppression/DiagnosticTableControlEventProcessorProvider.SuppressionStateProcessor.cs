@@ -12,8 +12,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         {
             private readonly VisualStudioDiagnosticListSuppressionStateService _suppressionStateService;
 
-            public SuppressionStateEventProcessor(VisualStudioDiagnosticListSuppressionStateService suppressionStateService)
-                => _suppressionStateService = suppressionStateService;
+            public SuppressionStateEventProcessor(
+                VisualStudioDiagnosticListSuppressionStateService suppressionStateService
+            ) => _suppressionStateService = suppressionStateService;
 
             public override void PostprocessSelectionChanged(TableSelectionChangedEventArgs e)
             {

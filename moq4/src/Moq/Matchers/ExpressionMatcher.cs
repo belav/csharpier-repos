@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 
 namespace Moq.Matchers
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal class ExpressionMatcher : IMatcher
@@ -29,7 +28,6 @@ namespace Moq.Matchers
         class ExpressionMatcher : IMatcher
     */
     class ExpressionMatcher : IMatcher
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private Expression expression;

@@ -29,7 +29,10 @@ public class Runtime_77710
 
         if (Derived.DerivedCalls != 1)
         {
-            Console.WriteLine("FAIL: Expected DerivedCalls to be 1, is actually {0}", Derived.DerivedCalls);
+            Console.WriteLine(
+                "FAIL: Expected DerivedCalls to be 1, is actually {0}",
+                Derived.DerivedCalls
+            );
             result = -1;
         }
 

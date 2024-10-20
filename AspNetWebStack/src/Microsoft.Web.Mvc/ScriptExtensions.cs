@@ -14,7 +14,11 @@ namespace Microsoft.Web.Mvc
             return Script(helper, releaseFile, releaseFile);
         }
 
-        public static MvcHtmlString Script(this HtmlHelper helper, string releaseFile, string debugFile)
+        public static MvcHtmlString Script(
+            this HtmlHelper helper,
+            string releaseFile,
+            string debugFile
+        )
         {
             if (String.IsNullOrEmpty(releaseFile))
             {
@@ -26,7 +30,9 @@ namespace Microsoft.Web.Mvc
             }
 
             string src;
-            string file = helper.ViewContext.HttpContext.IsDebuggingEnabled ? debugFile : releaseFile;
+            string file = helper.ViewContext.HttpContext.IsDebuggingEnabled
+                ? debugFile
+                : releaseFile;
             if (IsRelativeToDefaultPath(file))
             {
                 src = "~/Scripts/" + file;
@@ -38,17 +44,22 @@ namespace Microsoft.Web.Mvc
 
             TagBuilder scriptTag = new TagBuilder("script");
             scriptTag.MergeAttribute("type", "text/javascript");
-            scriptTag.MergeAttribute("src", UrlHelper.GenerateContentUrl(src, helper.ViewContext.HttpContext));
+            scriptTag.MergeAttribute(
+                "src",
+                UrlHelper.GenerateContentUrl(src, helper.ViewContext.HttpContext)
+            );
             return MvcHtmlString.Create(scriptTag.ToString(TagRenderMode.Normal));
         }
 
         internal static bool IsRelativeToDefaultPath(string file)
         {
-            return !(file.StartsWith("~", StringComparison.Ordinal) ||
-                     file.StartsWith("../", StringComparison.Ordinal) ||
-                     file.StartsWith("/", StringComparison.Ordinal) ||
-                     file.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ||
-                     file.StartsWith("https://", StringComparison.OrdinalIgnoreCase));
+            return !(
+                file.StartsWith("~", StringComparison.Ordinal)
+                || file.StartsWith("../", StringComparison.Ordinal)
+                || file.StartsWith("/", StringComparison.Ordinal)
+                || file.StartsWith("http://", StringComparison.OrdinalIgnoreCase)
+                || file.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+            );
         }
     }
 }

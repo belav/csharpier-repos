@@ -2,21 +2,21 @@
 
 public interface IA
 {
-	string Prop { get; }
+    string Prop { get; }
 }
 
 public interface IAA
 {
-	char NestedProp { set; }
+    char NestedProp { set; }
 }
 
 public interface IB : IAA
 {
-	bool Prop { get; }
-	long NestedProp { set; }
+    bool Prop { get; }
+    long NestedProp { set; }
 }
 
 public interface IFoo : IA, IB
 {
-	int Prop { get; }
+    int Prop { get; }
 }

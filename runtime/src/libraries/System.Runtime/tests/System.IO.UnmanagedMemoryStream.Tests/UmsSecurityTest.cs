@@ -14,7 +14,12 @@ public class UmsSecurityTests
         byte[] data = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 127, 255 };
         fixed (byte* bytePtr = data)
         {
-            using var stream = new UnmanagedMemoryStream(bytePtr, data.Length, data.Length, FileAccess.ReadWrite);
+            using var stream = new UnmanagedMemoryStream(
+                bytePtr,
+                data.Length,
+                data.Length,
+                FileAccess.ReadWrite
+            );
 
             // Make sure the position pointer is where we set it to be
             Assert.Equal(expected: (IntPtr)bytePtr, actual: (IntPtr)stream.PositionPointer);
@@ -49,7 +54,9 @@ public class UmsSecurityTests
         }
         else
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => ums.PositionPointer = (byte*)ulong.MaxValue);
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => ums.PositionPointer = (byte*)ulong.MaxValue
+            );
         }
     }
 

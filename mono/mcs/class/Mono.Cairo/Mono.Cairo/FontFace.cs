@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,75 +34,71 @@ using System;
 
 namespace Cairo
 {
-	public class FontFace : IDisposable
-	{
-		IntPtr handle;
+    public class FontFace : IDisposable
+    {
+        IntPtr handle;
 
-		internal static FontFace Lookup (IntPtr handle, bool owner)
-		{
-			if (handle == IntPtr.Zero)
-				return null;
-			return new FontFace (handle, owner);
-		}
+        internal static FontFace Lookup(IntPtr handle, bool owner)
+        {
+            if (handle == IntPtr.Zero)
+                return null;
+            return new FontFace(handle, owner);
+        }
 
-		~FontFace ()
-		{
-			Dispose (false);
-		}
+        ~FontFace()
+        {
+            Dispose(false);
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (!disposing || CairoDebug.Enabled)
-				CairoDebug.OnDisposed<FontFace> (handle, disposing);
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing || CairoDebug.Enabled)
+                CairoDebug.OnDisposed<FontFace>(handle, disposing);
 
-			if (!disposing|| handle == IntPtr.Zero)
-				return;
+            if (!disposing || handle == IntPtr.Zero)
+                return;
 
-			NativeMethods.cairo_font_face_destroy (handle);
-			handle = IntPtr.Zero;
-		}
+            NativeMethods.cairo_font_face_destroy(handle);
+            handle = IntPtr.Zero;
+        }
 
-		[Obsolete]
-		public FontFace (IntPtr handle) : this (handle, true)
-		{
-		}
+        [Obsolete]
+        public FontFace(IntPtr handle)
+            : this(handle, true) { }
 
-		public FontFace (IntPtr handle, bool owned)
-		{
-			this.handle = handle;
-			if (!owned)
-				NativeMethods.cairo_font_face_reference (handle);
-			if (CairoDebug.Enabled)
-				CairoDebug.OnAllocated (handle);
-		}
+        public FontFace(IntPtr handle, bool owned)
+        {
+            this.handle = handle;
+            if (!owned)
+                NativeMethods.cairo_font_face_reference(handle);
+            if (CairoDebug.Enabled)
+                CairoDebug.OnAllocated(handle);
+        }
 
-		public IntPtr Handle {
-			get {
-				return handle;
-			}
-		}
+        public IntPtr Handle
+        {
+            get { return handle; }
+        }
 
-		public Status Status {
-			get {
-				return NativeMethods.cairo_font_face_status (handle);
-			}
-		}
-		
-		public FontType FontType {
-			get {
-				return NativeMethods.cairo_font_face_get_type (handle);
-			}
-		}
+        public Status Status
+        {
+            get { return NativeMethods.cairo_font_face_status(handle); }
+        }
 
-		public uint ReferenceCount {
-			get { return NativeMethods.cairo_font_face_get_reference_count (handle); }
-		}
-	}
+        public FontType FontType
+        {
+            get { return NativeMethods.cairo_font_face_get_type(handle); }
+        }
+
+        public uint ReferenceCount
+        {
+            get { return NativeMethods.cairo_font_face_get_reference_count(handle); }
+        }
+    }
 }
-

@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.NopReturnReader.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,34 +32,31 @@ using System.IO;
 using System.Net;
 using System.Web.Services;
 
-namespace System.Web.Services.Protocols {
-	public class NopReturnReader : MimeReturnReader {
+namespace System.Web.Services.Protocols
+{
+    public class NopReturnReader : MimeReturnReader
+    {
+        #region Constructors
 
-		#region Constructors
+        public NopReturnReader() { }
 
-		public NopReturnReader () 
-		{
-		}
-		
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
-		public override object GetInitializer (LogicalMethodInfo methodInfo)
-		{
-			return this;
-		}
+        public override object GetInitializer(LogicalMethodInfo methodInfo)
+        {
+            return this;
+        }
 
-		public override void Initialize (object initializer)
-		{
-		}
+        public override void Initialize(object initializer) { }
 
-		public override object Read (WebResponse response, Stream responseStream)
-		{
-			responseStream.Close ();
-			return null;
-		}
+        public override object Read(WebResponse response, Stream responseStream)
+        {
+            responseStream.Close();
+            return null;
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

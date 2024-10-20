@@ -13,20 +13,16 @@ namespace System.ServiceModel.Description
     public abstract class MetadataExporter
     {
         PolicyVersion policyVersion = PolicyVersion.Policy12;
-        readonly Collection<MetadataConversionError> errors = new Collection<MetadataConversionError>();
+        readonly Collection<MetadataConversionError> errors =
+            new Collection<MetadataConversionError>();
         readonly Dictionary<object, object> state = new Dictionary<object, object>();
 
         //prevent inheritance until we are ready to allow it.
-        internal MetadataExporter()
-        {
-        }
+        internal MetadataExporter() { }
 
         public PolicyVersion PolicyVersion
         {
-            get
-            {
-                return this.policyVersion;
-            }
+            get { return this.policyVersion; }
             set
             {
                 if (value == null)
@@ -49,11 +45,21 @@ namespace System.ServiceModel.Description
 
         public abstract MetadataSet GetGeneratedMetadata();
 
-        internal PolicyConversionContext ExportPolicy(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+        internal PolicyConversionContext ExportPolicy(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        )
         {
-            PolicyConversionContext policyContext = new ExportedPolicyConversionContext(endpoint, bindingParameters);
+            PolicyConversionContext policyContext = new ExportedPolicyConversionContext(
+                endpoint,
+                bindingParameters
+            );
 
-            foreach (IPolicyExportExtension exporter in endpoint.Binding.CreateBindingElements().FindAll<IPolicyExportExtension>())
+            foreach (
+                IPolicyExportExtension exporter in endpoint
+                    .Binding.CreateBindingElements()
+                    .FindAll<IPolicyExportExtension>()
+            )
                 try
                 {
                     exporter.ExportPolicy(this, policyContext);
@@ -63,7 +69,9 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateExtensionException(exporter, e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateExtensionException(exporter, e)
+                    );
                 }
 
             return policyContext;
@@ -83,14 +91,20 @@ namespace System.ServiceModel.Description
             Dictionary<FaultDescription, PolicyAssertionCollection> faultBindingAssertions;
             BindingParameterCollection bindingParameters;
 
-            internal ExportedPolicyConversionContext(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
+            internal ExportedPolicyConversionContext(
+                ServiceEndpoint endpoint,
+                BindingParameterCollection bindingParameters
+            )
                 : base(endpoint)
             {
                 this.bindingElements = endpoint.Binding.CreateBindingElements();
                 this.bindingAssertions = new PolicyAssertionCollection();
-                this.operationBindingAssertions = new Dictionary<OperationDescription, PolicyAssertionCollection>();
-                this.messageBindingAssertions = new Dictionary<MessageDescription, PolicyAssertionCollection>();
-                this.faultBindingAssertions = new Dictionary<FaultDescription, PolicyAssertionCollection>();
+                this.operationBindingAssertions =
+                    new Dictionary<OperationDescription, PolicyAssertionCollection>();
+                this.messageBindingAssertions =
+                    new Dictionary<MessageDescription, PolicyAssertionCollection>();
+                this.faultBindingAssertions =
+                    new Dictionary<FaultDescription, PolicyAssertionCollection>();
                 this.bindingParameters = bindingParameters;
             }
 
@@ -109,7 +123,9 @@ namespace System.ServiceModel.Description
                 return bindingAssertions;
             }
 
-            public override PolicyAssertionCollection GetOperationBindingAssertions(OperationDescription operation)
+            public override PolicyAssertionCollection GetOperationBindingAssertions(
+                OperationDescription operation
+            )
             {
                 lock (operationBindingAssertions)
                 {
@@ -120,7 +136,9 @@ namespace System.ServiceModel.Description
                 return operationBindingAssertions[operation];
             }
 
-            public override PolicyAssertionCollection GetMessageBindingAssertions(MessageDescription message)
+            public override PolicyAssertionCollection GetMessageBindingAssertions(
+                MessageDescription message
+            )
             {
                 lock (messageBindingAssertions)
                 {
@@ -130,7 +148,9 @@ namespace System.ServiceModel.Description
                 return messageBindingAssertions[message];
             }
 
-            public override PolicyAssertionCollection GetFaultBindingAssertions(FaultDescription fault)
+            public override PolicyAssertionCollection GetFaultBindingAssertions(
+                FaultDescription fault
+            )
             {
                 lock (faultBindingAssertions)
                 {
@@ -139,12 +159,15 @@ namespace System.ServiceModel.Description
                 }
                 return faultBindingAssertions[fault];
             }
-
         }
 
         Exception CreateExtensionException(IPolicyExportExtension exporter, Exception e)
         {
-            string errorMessage = SR.GetString(SR.PolicyExtensionExportError, exporter.GetType(), e.Message);
+            string errorMessage = SR.GetString(
+                SR.PolicyExtensionExportError,
+                exporter.GetType(),
+                e.Message
+            );
             return new InvalidOperationException(errorMessage, e);
         }
     }

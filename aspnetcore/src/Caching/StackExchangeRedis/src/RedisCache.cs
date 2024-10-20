@@ -39,30 +39,37 @@ public partial class RedisCache : IDistributedCache, IDisposable
     // ARGV[3] = relative-expiration (long, in seconds, -1 for none) - Min(absolute-expiration - Now, sliding-expiration)
     // ARGV[4] = data - byte[]
     // this order should not change LUA script depends on it
-    private const string SetScript = (@"
+    private const string SetScript = (
+        @"
                 redis.call('HSET', KEYS[1], 'absexp', ARGV[1], 'sldexp', ARGV[2], 'data', ARGV[4])
                 if ARGV[3] ~= '-1' then
                   redis.call('EXPIRE', KEYS[1], ARGV[3])
                 end
-                return 1");
-    private const string SetScriptPreExtendedSetCommand = (@"
+                return 1"
+    );
+    private const string SetScriptPreExtendedSetCommand = (
+        @"
                 redis.call('HMSET', KEYS[1], 'absexp', ARGV[1], 'sldexp', ARGV[2], 'data', ARGV[4])
                 if ARGV[3] ~= '-1' then
                   redis.call('EXPIRE', KEYS[1], ARGV[3])
                 end
-                return 1");
+                return 1"
+    );
 
     private const string AbsoluteExpirationKey = "absexp";
     private const string SlidingExpirationKey = "sldexp";
     private const string DataKey = "data";
 
     // combined keys - same hash keys fetched constantly; avoid allocating an array each time
-    private static readonly RedisValue[] _hashMembersAbsoluteExpirationSlidingExpirationData = new RedisValue[] { AbsoluteExpirationKey, SlidingExpirationKey, DataKey };
-    private static readonly RedisValue[] _hashMembersAbsoluteExpirationSlidingExpiration = new RedisValue[] { AbsoluteExpirationKey, SlidingExpirationKey };
+    private static readonly RedisValue[] _hashMembersAbsoluteExpirationSlidingExpirationData =
+        new RedisValue[] { AbsoluteExpirationKey, SlidingExpirationKey, DataKey };
+    private static readonly RedisValue[] _hashMembersAbsoluteExpirationSlidingExpiration =
+        new RedisValue[] { AbsoluteExpirationKey, SlidingExpirationKey };
 
-    private static RedisValue[] GetHashFields(bool getData) => getData
-        ? _hashMembersAbsoluteExpirationSlidingExpirationData
-        : _hashMembersAbsoluteExpirationSlidingExpiration;
+    private static RedisValue[] GetHashFields(bool getData) =>
+        getData
+            ? _hashMembersAbsoluteExpirationSlidingExpirationData
+            : _hashMembersAbsoluteExpirationSlidingExpiration;
 
     private const long NotPresent = -1;
     private static readonly Version ServerVersionWithExtendedSetCommand = new Version(4, 0, 0);
@@ -75,7 +82,10 @@ public partial class RedisCache : IDistributedCache, IDisposable
     private readonly RedisKey _instancePrefix;
     private readonly ILogger _logger;
 
-    private readonly SemaphoreSlim _connectionLock = new SemaphoreSlim(initialCount: 1, maxCount: 1);
+    private readonly SemaphoreSlim _connectionLock = new SemaphoreSlim(
+        initialCount: 1,
+        maxCount: 1
+    );
 
     private long _lastConnectTicks = DateTimeOffset.UtcNow.Ticks;
     private long _firstErrorTimeTicks;
@@ -87,6 +97,7 @@ public partial class RedisCache : IDistributedCache, IDisposable
 
     // Never reconnect within 60 seconds of the last attempt to connect or reconnect.
     private readonly TimeSpan ReconnectMinInterval = TimeSpan.FromSeconds(60);
+
     // Only reconnect if errors have occurred for at least the last 30 seconds.
     // This count resets if there are no errors for 30 seconds
     private readonly TimeSpan ReconnectErrorThreshold = TimeSpan.FromSeconds(30);
@@ -108,9 +119,10 @@ public partial class RedisCache : IDistributedCache, IDisposable
     /// </summary>
     /// <param name="optionsAccessor">The configuration options.</param>
     public RedisCache(IOptions<RedisCacheOptions> optionsAccessor)
-        : this(optionsAccessor, Logging.Abstractions.NullLoggerFactory.Instance.CreateLogger<RedisCache>())
-    {
-    }
+        : this(
+            optionsAccessor,
+            Logging.Abstractions.NullLoggerFactory.Instance.CreateLogger<RedisCache>()
+        ) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="RedisCache"/>.
@@ -169,14 +181,17 @@ public partial class RedisCache : IDistributedCache, IDisposable
 
         try
         {
-            cache.ScriptEvaluate(_setScript, new RedisKey[] { _instancePrefix.Append(key) },
+            cache.ScriptEvaluate(
+                _setScript,
+                new RedisKey[] { _instancePrefix.Append(key) },
                 new RedisValue[]
                 {
-                        absoluteExpiration?.Ticks ?? NotPresent,
-                        options.SlidingExpiration?.Ticks ?? NotPresent,
-                        GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
-                        value
-                });
+                    absoluteExpiration?.Ticks ?? NotPresent,
+                    options.SlidingExpiration?.Ticks ?? NotPresent,
+                    GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
+                    value,
+                }
+            );
         }
         catch (Exception ex)
         {
@@ -186,7 +201,12 @@ public partial class RedisCache : IDistributedCache, IDisposable
     }
 
     /// <inheritdoc />
-    public async Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default)
+    public async Task SetAsync(
+        string key,
+        byte[] value,
+        DistributedCacheEntryOptions options,
+        CancellationToken token = default
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(key);
         ArgumentNullThrowHelper.ThrowIfNull(value);
@@ -203,14 +223,20 @@ public partial class RedisCache : IDistributedCache, IDisposable
 
         try
         {
-            await cache.ScriptEvaluateAsync(_setScript, new RedisKey[] { _instancePrefix.Append(key) },
-                new RedisValue[]
-                {
-                absoluteExpiration?.Ticks ?? NotPresent,
-                options.SlidingExpiration?.Ticks ?? NotPresent,
-                GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
-                value
-                }).ConfigureAwait(false);
+            await cache
+                .ScriptEvaluateAsync(
+                    _setScript,
+                    new RedisKey[] { _instancePrefix.Append(key) },
+                    new RedisValue[]
+                    {
+                        absoluteExpiration?.Ticks ?? NotPresent,
+                        options.SlidingExpiration?.Ticks ?? NotPresent,
+                        GetExpirationInSeconds(creationTime, absoluteExpiration, options)
+                            ?? NotPresent,
+                        value,
+                    }
+                )
+                .ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -308,11 +334,15 @@ public partial class RedisCache : IDistributedCache, IDisposable
                 IConnectionMultiplexer connection;
                 if (_options.ConnectionMultiplexerFactory is null)
                 {
-                    connection = await ConnectionMultiplexer.ConnectAsync(_options.GetConfiguredOptions("asp.net DC")).ConfigureAwait(false);
+                    connection = await ConnectionMultiplexer
+                        .ConnectAsync(_options.GetConfiguredOptions("asp.net DC"))
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    connection = await _options.ConnectionMultiplexerFactory().ConfigureAwait(false);
+                    connection = await _options
+                        .ConnectionMultiplexerFactory()
+                        .ConfigureAwait(false);
                 }
 
                 PrepareConnection(connection);
@@ -336,7 +366,9 @@ public partial class RedisCache : IDistributedCache, IDisposable
 
     private void ValidateServerFeatures(IConnectionMultiplexer connection)
     {
-        _ = connection ?? throw new InvalidOperationException($"{nameof(connection)} cannot be null.");
+        _ =
+            connection
+            ?? throw new InvalidOperationException($"{nameof(connection)} cannot be null.");
 
         try
         {
@@ -361,7 +393,9 @@ public partial class RedisCache : IDistributedCache, IDisposable
 
     private void TryRegisterProfiler(IConnectionMultiplexer connection)
     {
-        _ = connection ?? throw new InvalidOperationException($"{nameof(connection)} cannot be null.");
+        _ =
+            connection
+            ?? throw new InvalidOperationException($"{nameof(connection)} cannot be null.");
 
         if (_options.ProfilingSession is not null)
         {
@@ -402,7 +436,11 @@ public partial class RedisCache : IDistributedCache, IDisposable
         return null;
     }
 
-    private async Task<byte[]?> GetAndRefreshAsync(string key, bool getData, CancellationToken token = default)
+    private async Task<byte[]?> GetAndRefreshAsync(
+        string key,
+        bool getData,
+        CancellationToken token = default
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(key);
 
@@ -416,7 +454,9 @@ public partial class RedisCache : IDistributedCache, IDisposable
         RedisValue[] results;
         try
         {
-            results = await cache.HashGetAsync(_instancePrefix.Append(key), GetHashFields(getData)).ConfigureAwait(false);
+            results = await cache
+                .HashGetAsync(_instancePrefix.Append(key), GetHashFields(getData))
+                .ConfigureAwait(false);
         }
         catch (Exception ex)
         {
@@ -474,7 +514,11 @@ public partial class RedisCache : IDistributedCache, IDisposable
         }
     }
 
-    private static void MapMetadata(RedisValue[] results, out DateTimeOffset? absoluteExpiration, out TimeSpan? slidingExpiration)
+    private static void MapMetadata(
+        RedisValue[] results,
+        out DateTimeOffset? absoluteExpiration,
+        out TimeSpan? slidingExpiration
+    )
     {
         absoluteExpiration = null;
         slidingExpiration = null;
@@ -519,7 +563,13 @@ public partial class RedisCache : IDistributedCache, IDisposable
         }
     }
 
-    private async Task RefreshAsync(IDatabase cache, string key, DateTimeOffset? absExpr, TimeSpan? sldExpr, CancellationToken token = default)
+    private async Task RefreshAsync(
+        IDatabase cache,
+        string key,
+        DateTimeOffset? absExpr,
+        TimeSpan? sldExpr,
+        CancellationToken token = default
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(key);
 
@@ -550,13 +600,19 @@ public partial class RedisCache : IDistributedCache, IDisposable
         }
     }
 
-    private static long? GetExpirationInSeconds(DateTimeOffset creationTime, DateTimeOffset? absoluteExpiration, DistributedCacheEntryOptions options)
+    private static long? GetExpirationInSeconds(
+        DateTimeOffset creationTime,
+        DateTimeOffset? absoluteExpiration,
+        DistributedCacheEntryOptions options
+    )
     {
         if (absoluteExpiration.HasValue && options.SlidingExpiration.HasValue)
         {
-            return (long)Math.Min(
-                (absoluteExpiration.Value - creationTime).TotalSeconds,
-                options.SlidingExpiration.Value.TotalSeconds);
+            return (long)
+                Math.Min(
+                    (absoluteExpiration.Value - creationTime).TotalSeconds,
+                    options.SlidingExpiration.Value.TotalSeconds
+                );
         }
         else if (absoluteExpiration.HasValue)
         {
@@ -569,7 +625,10 @@ public partial class RedisCache : IDistributedCache, IDisposable
         return null;
     }
 
-    private static DateTimeOffset? GetAbsoluteExpiration(DateTimeOffset creationTime, DistributedCacheEntryOptions options)
+    private static DateTimeOffset? GetAbsoluteExpiration(
+        DateTimeOffset creationTime,
+        DistributedCacheEntryOptions options
+    )
     {
         if (options.AbsoluteExpiration.HasValue && options.AbsoluteExpiration <= creationTime)
         {
@@ -577,7 +636,8 @@ public partial class RedisCache : IDistributedCache, IDisposable
             throw new ArgumentOutOfRangeException(
                 nameof(DistributedCacheEntryOptions.AbsoluteExpiration),
                 options.AbsoluteExpiration.Value,
-                "The absolute expiration value must be in the future.");
+                "The absolute expiration value must be in the future."
+            );
 #pragma warning restore CA2208 // Instantiate argument exceptions correctly
         }
 
@@ -599,7 +659,6 @@ public partial class RedisCache : IDistributedCache, IDisposable
 
         _disposed = true;
         ReleaseConnection(Interlocked.Exchange(ref _cache, null));
-
     }
 
     private void CheckDisposed()
@@ -609,7 +668,9 @@ public partial class RedisCache : IDistributedCache, IDisposable
 
     private void OnRedisError(Exception exception, IDatabase cache)
     {
-        if (_options.UseForceReconnect && (exception is RedisConnectionException or SocketException))
+        if (
+            _options.UseForceReconnect && (exception is RedisConnectionException or SocketException)
+        )
         {
             var utcNow = DateTimeOffset.UtcNow;
             var previousConnectTime = ReadTimeTicks(ref _lastConnectTicks);
@@ -631,11 +692,12 @@ public partial class RedisCache : IDistributedCache, IDisposable
             }
 
             TimeSpan elapsedSinceFirstError = utcNow - firstErrorTime;
-            TimeSpan elapsedSinceMostRecentError = utcNow - ReadTimeTicks(ref _previousErrorTimeTicks);
+            TimeSpan elapsedSinceMostRecentError =
+                utcNow - ReadTimeTicks(ref _previousErrorTimeTicks);
 
             bool shouldReconnect =
-                    elapsedSinceFirstError >= ReconnectErrorThreshold // Make sure we gave the multiplexer enough time to reconnect on its own if it could.
-                    && elapsedSinceMostRecentError <= ReconnectErrorThreshold; // Make sure we aren't working on stale data (e.g. if there was a gap in errors, don't reconnect yet).
+                elapsedSinceFirstError >= ReconnectErrorThreshold // Make sure we gave the multiplexer enough time to reconnect on its own if it could.
+                && elapsedSinceMostRecentError <= ReconnectErrorThreshold; // Make sure we aren't working on stale data (e.g. if there was a gap in errors, don't reconnect yet).
 
             // Update the previousErrorTime timestamp to be now (e.g. this reconnect request).
             WriteTimeTicks(ref _previousErrorTimeTicks, utcNow);

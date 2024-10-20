@@ -14,8 +14,5 @@ namespace System.Diagnostics.Tracing
     /// the event.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class EventIgnoreAttribute
-        : Attribute
-    {
-    }
+    public class EventIgnoreAttribute : Attribute { }
 }

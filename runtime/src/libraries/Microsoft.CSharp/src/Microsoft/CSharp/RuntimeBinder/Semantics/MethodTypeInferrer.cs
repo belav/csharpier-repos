@@ -16,7 +16,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             InferenceFailed,
             MadeProgress,
             NoProgress,
-            Success
+            Success,
         }
 
         [Flags]
@@ -25,7 +25,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Unknown = 0x00,
             NotDependent = 0x01,
             DependsMask = 0x10,
-            Indirect = 0x12
+            Indirect = 0x12,
         }
 
         private readonly ExpressionBinder _binder;
@@ -85,7 +85,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             MethodSymbol pMethod,
             TypeArray pMethodFormalParameterTypes,
             ArgInfos pMethodArguments,
-            out TypeArray ppInferredTypeArguments)
+            out TypeArray ppInferredTypeArguments
+        )
         {
             Debug.Assert(pMethod != null);
             Debug.Assert(pMethod.typeVars.Count > 0);
@@ -100,7 +101,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Debug.Assert(pMethodArguments.carg <= pMethodFormalParameterTypes.Count);
 
             var inferrer = new MethodTypeInferrer(
-                binder, pMethodFormalParameterTypes, pMethodArguments, pMethod.typeVars);
+                binder,
+                pMethodFormalParameterTypes,
+                pMethodArguments,
+                pMethod.typeVars
+            );
             bool success = inferrer.InferTypeArgs();
 
             ppInferredTypeArguments = inferrer.GetResults();
@@ -117,7 +122,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // SPEC: with an empty set of bounds.
 
         private MethodTypeInferrer(
-            ExpressionBinder exprBinder, TypeArray pMethodFormalParameterTypes, ArgInfos pMethodArguments, TypeArray pMethodTypeParameters)
+            ExpressionBinder exprBinder,
+            TypeArray pMethodFormalParameterTypes,
+            ArgInfos pMethodArguments,
+            TypeArray pMethodTypeParameters
+        )
         {
             _binder = exprBinder;
             _pMethodFormalParameterTypes = pMethodFormalParameterTypes;
@@ -216,9 +225,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             Debug.Assert(0 <= iParam);
             Debug.Assert(iParam < _pMethodTypeParameters.Count);
-            return !_pLowerBounds[iParam].IsEmpty() ||
-                !_pExactBounds[iParam].IsEmpty() ||
-                !_pUpperBounds[iParam].IsEmpty();
+            return !_pLowerBounds[iParam].IsEmpty()
+                || !_pExactBounds[iParam].IsEmpty()
+                || !_pUpperBounds[iParam].IsEmpty();
         }
 
         ////////////////////////////////////////////////////////////////////////////////
@@ -625,8 +634,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             for (int kParam = 0; kParam < _pMethodTypeParameters.Count; ++kParam)
             {
-                if (0 != ((_ppDependencies[iParam][kParam]) & Dependency.DependsMask) &&
-                    0 != ((_ppDependencies[kParam][jParam]) & Dependency.DependsMask))
+                if (
+                    0 != ((_ppDependencies[iParam][kParam]) & Dependency.DependsMask)
+                    && 0 != ((_ppDependencies[kParam][jParam]) & Dependency.DependsMask)
+                )
                 {
                     return true;
                 }
@@ -820,7 +831,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 return false;
             }
 
-            if (pArraySource.Rank != pArrayDest.Rank || pArraySource.IsSZArray != pArrayDest.IsSZArray)
+            if (
+                pArraySource.Rank != pArrayDest.Rank
+                || pArraySource.IsSZArray != pArrayDest.IsSZArray
+            )
             {
                 return false;
             }
@@ -852,8 +866,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // SPEC:   CType C<U1...Uk> then an exact inference
             // SPEC:   is made from each Ui to the corresponding Vi.
 
-            if (!(pSource is AggregateType pConstructedSource) || !(pDest is AggregateType pConstructedDest)
-                || pConstructedSource.OwningAggregate != pConstructedDest.OwningAggregate)
+            if (
+                !(pSource is AggregateType pConstructedSource)
+                || !(pDest is AggregateType pConstructedDest)
+                || pConstructedSource.OwningAggregate != pConstructedDest.OwningAggregate
+            )
             {
                 return false;
             }
@@ -864,9 +881,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         ////////////////////////////////////////////////////////////////////////////////
 
-        private void ExactTypeArgumentInference(
-            AggregateType pSource, AggregateType pDest)
-
+        private void ExactTypeArgumentInference(AggregateType pSource, AggregateType pDest)
         {
             Debug.Assert(pSource != null);
             Debug.Assert(pDest != null);
@@ -1006,18 +1021,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             if (pDest is ArrayType pArrayDest)
             {
-                if (pArrayDest.Rank != pArraySource.Rank || pArrayDest.IsSZArray != pArraySource.IsSZArray)
+                if (
+                    pArrayDest.Rank != pArraySource.Rank
+                    || pArrayDest.IsSZArray != pArraySource.IsSZArray
+                )
                 {
                     return false;
                 }
 
                 pElementDest = pArrayDest.ElementType;
             }
-            else if (pDest.IsPredefType(PredefinedType.PT_G_IENUMERABLE) ||
-                pDest.IsPredefType(PredefinedType.PT_G_ICOLLECTION) ||
-                pDest.IsPredefType(PredefinedType.PT_G_ILIST) ||
-                pDest.IsPredefType(PredefinedType.PT_G_IREADONLYCOLLECTION) ||
-                pDest.IsPredefType(PredefinedType.PT_G_IREADONLYLIST))
+            else if (
+                pDest.IsPredefType(PredefinedType.PT_G_IENUMERABLE)
+                || pDest.IsPredefType(PredefinedType.PT_G_ICOLLECTION)
+                || pDest.IsPredefType(PredefinedType.PT_G_ILIST)
+                || pDest.IsPredefType(PredefinedType.PT_G_IREADONLYCOLLECTION)
+                || pDest.IsPredefType(PredefinedType.PT_G_IREADONLYLIST)
+            )
             {
                 if (!pArraySource.IsSZArray)
                 {
@@ -1089,7 +1109,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // SPEC:   lower bound inference or upper bound inference
             // SPEC:   is made from each Ui to the corresponding Vi.
 
-            if (pSource is AggregateType aggSource && aggSource.OwningAggregate == pConstructedDest.OwningAggregate)
+            if (
+                pSource is AggregateType aggSource
+                && aggSource.OwningAggregate == pConstructedDest.OwningAggregate
+            )
             {
                 if (aggSource.IsInterfaceType || aggSource.IsDelegateType)
                 {
@@ -1188,7 +1211,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             //TypeArray pInterfaces = null;
 
-            if (pSource is AggregateType sourceAts && (sourceAts.IsStructType || sourceAts.IsClassType || sourceAts.IsInterfaceType))
+            if (
+                pSource is AggregateType sourceAts
+                && (sourceAts.IsStructType || sourceAts.IsClassType || sourceAts.IsInterfaceType)
+            )
             {
                 AggregateType iface = null;
                 foreach (AggregateType current in sourceAts.IfacesAll.Items)
@@ -1218,8 +1244,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private void LowerBoundTypeArgumentInference(
-            AggregateType pSource, AggregateType pDest)
+        private void LowerBoundTypeArgumentInference(AggregateType pSource, AggregateType pDest)
         {
             // SPEC: The choice of inference for the i-th CType argument is made
             // SPEC: based on the declaration of the i-th CType parameter of C, as
@@ -1357,18 +1382,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             if (pSource is ArrayType pArraySource)
             {
-                if (pArrayDest.Rank != pArraySource.Rank || pArrayDest.IsSZArray != pArraySource.IsSZArray)
+                if (
+                    pArrayDest.Rank != pArraySource.Rank
+                    || pArrayDest.IsSZArray != pArraySource.IsSZArray
+                )
                 {
                     return false;
                 }
 
                 pElementSource = pArraySource.ElementType;
             }
-            else if (pSource.IsPredefType(PredefinedType.PT_G_IENUMERABLE) ||
-                pSource.IsPredefType(PredefinedType.PT_G_ICOLLECTION) ||
-                pSource.IsPredefType(PredefinedType.PT_G_ILIST) ||
-                pSource.IsPredefType(PredefinedType.PT_G_IREADONLYLIST) ||
-                pSource.IsPredefType(PredefinedType.PT_G_IREADONLYCOLLECTION))
+            else if (
+                pSource.IsPredefType(PredefinedType.PT_G_IENUMERABLE)
+                || pSource.IsPredefType(PredefinedType.PT_G_ICOLLECTION)
+                || pSource.IsPredefType(PredefinedType.PT_G_ILIST)
+                || pSource.IsPredefType(PredefinedType.PT_G_IREADONLYLIST)
+                || pSource.IsPredefType(PredefinedType.PT_G_IREADONLYCOLLECTION)
+            )
             {
                 if (!pArrayDest.IsSZArray)
                 {
@@ -1415,7 +1445,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // SPEC:   lower bound inference or upper bound inference
             // SPEC:   is made from each Ui to the corresponding Vi.
 
-            if (pDest is AggregateType aggDest && pConstructedSource.OwningAggregate == aggDest.OwningAggregate)
+            if (
+                pDest is AggregateType aggDest
+                && pConstructedSource.OwningAggregate == aggDest.OwningAggregate
+            )
             {
                 if (aggDest.IsInterfaceType || aggDest.IsDelegateType)
                 {
@@ -1495,7 +1528,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // SPEC:   or indirectly implements C<V1...Vk> then an exact ...
             // SPEC:  ... and U is an interface CType ...
 
-            if (pDest is AggregateType destAts && (destAts.IsStructType || destAts.IsClassType || destAts.IsInterfaceType))
+            if (
+                pDest is AggregateType destAts
+                && (destAts.IsStructType || destAts.IsClassType || destAts.IsInterfaceType)
+            )
             {
                 AggregateType iface = null;
                 foreach (AggregateType current in destAts.IfacesAll.Items)
@@ -1525,8 +1561,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        private void UpperBoundTypeArgumentInference(
-            AggregateType pSource, AggregateType pDest)
+        private void UpperBoundTypeArgumentInference(AggregateType pSource, AggregateType pDest)
         {
             // SPEC: The choice of inference for the i-th CType argument is made
             // SPEC: based on the declaration of the i-th CType parameter of C, as
@@ -1694,7 +1729,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     return false;
                 }
                 pBest = pCandidate;
-            OuterBreak:
+                OuterBreak:
                 ;
             }
 
@@ -1719,7 +1754,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             // since we can never infer ref/out or pointer types here, we
             // are guaranteed a best accessible type.
 
-            _pFixedResults[iParam] = TypeManager.GetBestAccessibleType(_binder.Context.ContextForMemberLookup, pBest);
+            _pFixedResults[iParam] = TypeManager.GetBestAccessibleType(
+                _binder.Context.ContextForMemberLookup,
+                pBest
+            );
             // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             // END RUNTIME BINDER ONLY CHANGE
             // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

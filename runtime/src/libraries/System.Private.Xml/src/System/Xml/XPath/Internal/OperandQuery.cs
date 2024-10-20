@@ -21,7 +21,15 @@ namespace MS.Internal.Xml.XPath
         {
             return val;
         }
-        public override XPathResultType StaticType { get { return GetXPathType(val); } }
-        public override XPathNodeIterator Clone() { return this; }
+
+        public override XPathResultType StaticType
+        {
+            get { return GetXPathType(val); }
+        }
+
+        public override XPathNodeIterator Clone()
+        {
+            return this;
+        }
     }
 }

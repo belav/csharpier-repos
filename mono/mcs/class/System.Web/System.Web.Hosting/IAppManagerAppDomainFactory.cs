@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,14 +31,16 @@ using System.Runtime.InteropServices;
 
 namespace System.Web.Hosting
 {
-	[GuidAttribute ("02998279-7175-4D59-AA5A-FB8E44D4CA9D")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImportAttribute]
-        public interface IAppManagerAppDomainFactory
-        {
-		[return: MarshalAs (UnmanagedType.Interface)]
-                object Create ([In, MarshalAs(UnmanagedType.BStr)] string appId,
-			       [In, MarshalAs(UnmanagedType.BStr)] string appPath);
-                void Stop ();
-        }
+    [GuidAttribute("02998279-7175-4D59-AA5A-FB8E44D4CA9D")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImportAttribute]
+    public interface IAppManagerAppDomainFactory
+    {
+        [return: MarshalAs(UnmanagedType.Interface)]
+        object Create(
+            [In, MarshalAs(UnmanagedType.BStr)] string appId,
+            [In, MarshalAs(UnmanagedType.BStr)] string appPath
+        );
+        void Stop();
+    }
 }

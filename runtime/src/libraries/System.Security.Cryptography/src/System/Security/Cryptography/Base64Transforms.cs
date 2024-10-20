@@ -26,7 +26,13 @@ namespace System.Security.Cryptography
         public bool CanTransformMultipleBlocks => true;
         public virtual bool CanReuseTransform => true;
 
-        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+        public int TransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[] outputBuffer,
+            int outputOffset
+        )
         {
             ThrowHelper.ValidateTransformBlock(inputBuffer, inputOffset, inputCount);
 
@@ -48,7 +54,13 @@ namespace System.Security.Cryptography
             Span<byte> input = inputBuffer.AsSpan(inputOffset, inputCount);
             Span<byte> output = outputBuffer.AsSpan(outputOffset, requiredOutputLength);
 
-            OperationStatus status = Base64.EncodeToUtf8(input, output, out int consumed, out int written, isFinalBlock: false);
+            OperationStatus status = Base64.EncodeToUtf8(
+                input,
+                output,
+                out int consumed,
+                out int written,
+                isFinalBlock: false
+            );
 
             Debug.Assert(status == OperationStatus.Done);
             Debug.Assert(consumed == input.Length);
@@ -73,7 +85,13 @@ namespace System.Security.Cryptography
 
             byte[] output = new byte[outputBlocks * OutputBlockSize];
 
-            OperationStatus status = Base64.EncodeToUtf8(input, output, out int consumed, out int written, isFinalBlock: true);
+            OperationStatus status = Base64.EncodeToUtf8(
+                input,
+                output,
+                out int consumed,
+                out int written,
+                isFinalBlock: true
+            );
 
             Debug.Assert(written == output.Length);
             Debug.Assert(status == OperationStatus.Done);
@@ -119,12 +137,16 @@ namespace System.Security.Cryptography
         /// FORM FEED    12
         /// CR           13
         /// </remarks>
-        private static readonly SearchValues<byte> s_whiteSpace = SearchValues.Create(" \t\n\v\f\r"u8);
+        private static readonly SearchValues<byte> s_whiteSpace = SearchValues.Create(
+            " \t\n\v\f\r"u8
+        );
         private readonly FromBase64TransformMode _whitespaces;
         private byte[] _inputBuffer = new byte[4];
         private int _inputIndex;
 
-        public FromBase64Transform() : this(FromBase64TransformMode.IgnoreWhiteSpaces) { }
+        public FromBase64Transform()
+            : this(FromBase64TransformMode.IgnoreWhiteSpaces) { }
+
         public FromBase64Transform(FromBase64TransformMode whitespaces)
         {
             _whitespaces = whitespaces;
@@ -139,7 +161,13 @@ namespace System.Security.Cryptography
         public bool CanTransformMultipleBlocks => true;
         public virtual bool CanReuseTransform => true;
 
-        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+        public int TransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[] outputBuffer,
+            int outputOffset
+        )
         {
             // inputCount != InputBlockSize is allowed
             ThrowHelper.ValidateTransformBlock(inputBuffer, inputOffset, inputCount);
@@ -174,7 +202,12 @@ namespace System.Security.Cryptography
                 return 0;
             }
 
-            ConvertFromBase64(transformBuffer, outputBuffer.AsSpan(outputOffset), out _, out int written);
+            ConvertFromBase64(
+                transformBuffer,
+                outputBuffer.AsSpan(outputOffset),
+                out _,
+                out int written
+            );
 
             ReturnToCryptoPool(transformBufferArray, transformBuffer.Length);
 
@@ -233,7 +266,10 @@ namespace System.Security.Cryptography
             return output;
         }
 
-        private Span<byte> AppendInputBuffers(ReadOnlySpan<byte> inputBuffer, Span<byte> transformBuffer)
+        private Span<byte> AppendInputBuffers(
+            ReadOnlySpan<byte> inputBuffer,
+            Span<byte> transformBuffer
+        )
         {
             int index = _inputIndex;
             _inputBuffer.AsSpan(0, index).CopyTo(transformBuffer);
@@ -257,8 +293,7 @@ namespace System.Security.Cryptography
                     do
                     {
                         inputBuffer = inputBuffer.Slice(1);
-                    }
-                    while (!inputBuffer.IsEmpty && s_whiteSpace.Contains(inputBuffer[0]));
+                    } while (!inputBuffer.IsEmpty && s_whiteSpace.Contains(inputBuffer[0]));
                 }
             }
 
@@ -289,19 +324,29 @@ namespace System.Security.Cryptography
             return outputSize;
         }
 
-        private void ConvertFromBase64(Span<byte> transformBuffer, Span<byte> outputBuffer, out int consumed, out int written)
+        private void ConvertFromBase64(
+            Span<byte> transformBuffer,
+            Span<byte> outputBuffer,
+            out int consumed,
+            out int written
+        )
         {
             int bytesToTransform = transformBuffer.Length;
             Debug.Assert(bytesToTransform >= 4);
 
             // Save data that won't be transformed to _inputBuffer, so it can be transformed later
-            _inputIndex = bytesToTransform & 3;     // bit hack for % 4
-            bytesToTransform -= _inputIndex;        // only transform up to the next multiple of 4
+            _inputIndex = bytesToTransform & 3; // bit hack for % 4
+            bytesToTransform -= _inputIndex; // only transform up to the next multiple of 4
             Debug.Assert(_inputIndex < _inputBuffer.Length);
             transformBuffer.Slice(transformBuffer.Length - _inputIndex).CopyTo(_inputBuffer);
 
             transformBuffer = transformBuffer.Slice(0, bytesToTransform);
-            OperationStatus status = Base64.DecodeFromUtf8(transformBuffer, outputBuffer, out consumed, out written);
+            OperationStatus status = Base64.DecodeFromUtf8(
+                transformBuffer,
+                outputBuffer,
+                out consumed,
+                out written
+            );
 
             if (status == OperationStatus.Done)
             {
@@ -365,7 +410,11 @@ namespace System.Security.Cryptography
     internal static class ThrowHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void ValidateTransformBlock(byte[] inputBuffer, int inputOffset, int inputCount)
+        public static void ValidateTransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount
+        )
         {
             if (inputBuffer == null)
                 ThrowArgumentNull(ExceptionArgument.inputBuffer);
@@ -381,11 +430,20 @@ namespace System.Security.Cryptography
         }
 
         [DoesNotReturn]
-        public static void ThrowArgumentNull(ExceptionArgument argument) => throw new ArgumentNullException(argument.ToString());
+        public static void ThrowArgumentNull(ExceptionArgument argument) =>
+            throw new ArgumentNullException(argument.ToString());
+
         [DoesNotReturn]
-        public static void ThrowArgumentOutOfRange(ExceptionArgument argument) => throw new ArgumentOutOfRangeException(argument.ToString(), SR.ArgumentOutOfRange_NeedNonNegNum);
+        public static void ThrowArgumentOutOfRange(ExceptionArgument argument) =>
+            throw new ArgumentOutOfRangeException(
+                argument.ToString(),
+                SR.ArgumentOutOfRange_NeedNonNegNum
+            );
+
         [DoesNotReturn]
-        public static void ThrowInvalidOffLen() => throw new ArgumentException(SR.Argument_InvalidOffLen);
+        public static void ThrowInvalidOffLen() =>
+            throw new ArgumentException(SR.Argument_InvalidOffLen);
+
         [DoesNotReturn]
         public static void ThrowBase64FormatException() => throw new FormatException();
 
@@ -394,7 +452,7 @@ namespace System.Security.Cryptography
             inputBuffer,
             outputBuffer,
             inputOffset,
-            inputCount
+            inputCount,
         }
     }
 }

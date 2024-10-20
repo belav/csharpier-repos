@@ -10,7 +10,7 @@ using System.Threading;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// A structure used to lexically order symbols. For performance, it's important that this be 
+    /// A structure used to lexically order symbols. For performance, it's important that this be
     /// a STRUCTURE, and be able to be returned from a symbol without doing any additional allocations (even
     /// if nothing is cached yet).
     /// </summary>
@@ -28,28 +28,49 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // Offset of location within the tree. Doesn't need to exactly that span returns by Locations, just
         // be good enough to sort. In order word, we don't need to go to extra work to return the location of the identifier,
         // just some syntax location is fine.
-        // 
-        // Negative value indicates that the structure was not initialized yet, is used for lazy 
+        //
+        // Negative value indicates that the structure was not initialized yet, is used for lazy
         // initializations only along with LexicalSortKey.NotInitialized
         public int Position
         {
             get { return _position; }
         }
 
-        public static readonly LexicalSortKey NotInSource = new LexicalSortKey() { _treeOrdinal = -1, _position = 0 };
+        public static readonly LexicalSortKey NotInSource = new LexicalSortKey()
+        {
+            _treeOrdinal = -1,
+            _position = 0,
+        };
 
-        public static readonly LexicalSortKey NotInitialized = new LexicalSortKey() { _treeOrdinal = -1, _position = -1 };
+        public static readonly LexicalSortKey NotInitialized = new LexicalSortKey()
+        {
+            _treeOrdinal = -1,
+            _position = -1,
+        };
 
         // Put other synthesized members right before synthesized constructors.
-        public static LexicalSortKey GetSynthesizedMemberKey(int offset) => new LexicalSortKey() { _treeOrdinal = int.MaxValue, _position = int.MaxValue - 2 - offset };
+        public static LexicalSortKey GetSynthesizedMemberKey(int offset) =>
+            new LexicalSortKey()
+            {
+                _treeOrdinal = int.MaxValue,
+                _position = int.MaxValue - 2 - offset,
+            };
 
         // Dev12 compiler adds synthetic constructors to the child list after adding all other members.
-        // Methods are emitted in the children order, but synthetic cctors would be deferred 
+        // Methods are emitted in the children order, but synthetic cctors would be deferred
         // until later when it is known if they can be optimized or not.
         // As a result the last emitted method tokens are synthetic ctor and then synthetic cctor (if not optimized)
         // Since it is not too hard, we will try keeping the same order just to be easy on metadata diffing tools and such.
-        public static readonly LexicalSortKey SynthesizedCtor = new LexicalSortKey() { _treeOrdinal = int.MaxValue, _position = int.MaxValue - 1 };
-        public static readonly LexicalSortKey SynthesizedCCtor = new LexicalSortKey() { _treeOrdinal = int.MaxValue, _position = int.MaxValue };
+        public static readonly LexicalSortKey SynthesizedCtor = new LexicalSortKey()
+        {
+            _treeOrdinal = int.MaxValue,
+            _position = int.MaxValue - 1,
+        };
+        public static readonly LexicalSortKey SynthesizedCCtor = new LexicalSortKey()
+        {
+            _treeOrdinal = int.MaxValue,
+            _position = int.MaxValue,
+        };
 
         private LexicalSortKey(int treeOrdinal, int position)
         {
@@ -60,37 +81,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         private LexicalSortKey(SyntaxTree tree, int position, CSharpCompilation compilation)
-            : this(tree == null ? -1 : compilation.GetSyntaxTreeOrdinal(tree), position)
-        {
-        }
+            : this(tree == null ? -1 : compilation.GetSyntaxTreeOrdinal(tree), position) { }
 
         public LexicalSortKey(SyntaxReference syntaxRef, CSharpCompilation compilation)
-            : this(syntaxRef.SyntaxTree, syntaxRef.Span.Start, compilation)
-        {
-        }
+            : this(syntaxRef.SyntaxTree, syntaxRef.Span.Start, compilation) { }
 
         // WARNING: Only use this if the location is obtainable without allocating it (even if cached later). E.g., only
         // if the location object is stored in the constructor of the symbol.
         public LexicalSortKey(Location location, CSharpCompilation compilation)
-            : this(location.SourceTree, location.SourceSpan.Start, compilation)
-        {
-        }
+            : this(location.SourceTree, location.SourceSpan.Start, compilation) { }
 
         // WARNING: Only use this if the node is obtainable without allocating it (even if cached later). E.g., only
         // if the node is stored in the constructor of the symbol. In particular, do not call this on the result of a GetSyntax()
         // call on a SyntaxReference.
         public LexicalSortKey(CSharpSyntaxNode node, CSharpCompilation compilation)
-            : this(node.SyntaxTree, node.SpanStart, compilation)
-        {
-        }
+            : this(node.SyntaxTree, node.SpanStart, compilation) { }
 
         // WARNING: Only use this if the token is obtainable without allocating it (even if cached later). E.g., only
         // if the node is stored in the constructor of the symbol. In particular, do not call this on the result of a GetSyntax()
         // call on a SyntaxReference.
         public LexicalSortKey(SyntaxToken token, CSharpCompilation compilation)
-            : this(token.SyntaxTree, token.SpanStart, compilation)
-        {
-        }
+            : this(token.SyntaxTree, token.SpanStart, compilation) { }
 
         /// <summary>
         /// Compare two lexical sort keys in a compilation.
@@ -126,10 +137,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public bool IsInitialized
         {
-            get
-            {
-                return Volatile.Read(ref _position) >= 0;
-            }
+            get { return Volatile.Read(ref _position) >= 0; }
         }
 
         public void SetFrom(LexicalSortKey other)

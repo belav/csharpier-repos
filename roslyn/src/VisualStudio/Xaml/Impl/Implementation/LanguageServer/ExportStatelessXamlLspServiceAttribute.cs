@@ -12,8 +12,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer
     [AttributeUsage(AttributeTargets.Class), MetadataAttribute]
     internal class ExportStatelessXamlLspServiceAttribute : ExportStatelessLspServiceAttribute
     {
-        public ExportStatelessXamlLspServiceAttribute(Type handlerType) : base(handlerType, StringConstants.XamlLspLanguagesContract, WellKnownLspServerKinds.XamlLspServer)
-        {
-        }
+        public ExportStatelessXamlLspServiceAttribute(Type handlerType)
+            : base(
+                handlerType,
+                StringConstants.XamlLspLanguagesContract,
+                WellKnownLspServerKinds.XamlLspServer
+            ) { }
     }
 }

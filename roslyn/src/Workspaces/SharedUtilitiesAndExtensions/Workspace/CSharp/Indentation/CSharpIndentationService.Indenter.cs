@@ -21,23 +21,44 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
 {
     internal partial class CSharpIndentationService
     {
-        protected override bool ShouldUseTokenIndenter(Indenter indenter, out SyntaxToken syntaxToken)
-            => ShouldUseSmartTokenFormatterInsteadOfIndenter(
-                indenter.Rules, indenter.Root, indenter.LineToBeIndented, indenter.Options, out syntaxToken);
+        protected override bool ShouldUseTokenIndenter(
+            Indenter indenter,
+            out SyntaxToken syntaxToken
+        ) =>
+            ShouldUseSmartTokenFormatterInsteadOfIndenter(
+                indenter.Rules,
+                indenter.Root,
+                indenter.LineToBeIndented,
+                indenter.Options,
+                out syntaxToken
+            );
 
         protected override ISmartTokenFormatter CreateSmartTokenFormatter(
-            CompilationUnitSyntax root, SourceText text, TextLine lineToBeIndented,
-            IndentationOptions options, AbstractFormattingRule baseIndentationRule)
+            CompilationUnitSyntax root,
+            SourceText text,
+            TextLine lineToBeIndented,
+            IndentationOptions options,
+            AbstractFormattingRule baseIndentationRule
+        )
         {
-            var rules = ImmutableArray.Create(baseIndentationRule).AddRange(CSharpSyntaxFormatting.Instance.GetDefaultFormattingRules());
+            var rules = ImmutableArray
+                .Create(baseIndentationRule)
+                .AddRange(CSharpSyntaxFormatting.Instance.GetDefaultFormattingRules());
             return new CSharpSmartTokenFormatter(options, rules, root, text);
         }
 
-        protected override IndentationResult? GetDesiredIndentationWorker(Indenter indenter, SyntaxToken? tokenOpt, SyntaxTrivia? triviaOpt)
-            => TryGetDesiredIndentation(indenter, triviaOpt) ??
-               TryGetDesiredIndentation(indenter, tokenOpt);
+        protected override IndentationResult? GetDesiredIndentationWorker(
+            Indenter indenter,
+            SyntaxToken? tokenOpt,
+            SyntaxTrivia? triviaOpt
+        ) =>
+            TryGetDesiredIndentation(indenter, triviaOpt)
+            ?? TryGetDesiredIndentation(indenter, tokenOpt);
 
-        private static IndentationResult? TryGetDesiredIndentation(Indenter indenter, SyntaxTrivia? triviaOpt)
+        private static IndentationResult? TryGetDesiredIndentation(
+            Indenter indenter,
+            SyntaxTrivia? triviaOpt
+        )
         {
             // If we have a // comment, and it's the only thing on the line, then if we hit enter, we should align to
             // that.  This helps for cases like:
@@ -63,7 +84,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             return new IndentationResult(trivia.FullSpan.Start, 0);
         }
 
-        private static IndentationResult? TryGetDesiredIndentation(Indenter indenter, SyntaxToken? tokenOpt)
+        private static IndentationResult? TryGetDesiredIndentation(
+            Indenter indenter,
+            SyntaxToken? tokenOpt
+        )
         {
             if (tokenOpt == null)
                 return null;
@@ -71,7 +95,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             return GetIndentationBasedOnToken(indenter, tokenOpt.Value);
         }
 
-        private static IndentationResult GetIndentationBasedOnToken(Indenter indenter, SyntaxToken token)
+        private static IndentationResult GetIndentationBasedOnToken(
+            Indenter indenter,
+            SyntaxToken token
+        )
         {
             Contract.ThrowIfNull(indenter.Tree);
             Contract.ThrowIfTrue(token.Kind() == SyntaxKind.None);
@@ -92,7 +119,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                 // If possible, indent to match the indentation of the previous non-whitespace line contained in the
                 // same raw string. Otherwise, indent to match the ending line of the raw string.
                 var startLine = sourceText.Lines.GetLineFromPosition(token.SpanStart);
-                for (var currentLineNumber = indenter.LineToBeIndented.LineNumber - 1; currentLineNumber >= startLine.LineNumber + 1; currentLineNumber--)
+                for (
+                    var currentLineNumber = indenter.LineToBeIndented.LineNumber - 1;
+                    currentLineNumber >= startLine.LineNumber + 1;
+                    currentLineNumber--
+                )
                 {
                     var currentLine = sourceText.Lines[currentLineNumber];
                     if (currentLine.GetFirstNonWhitespaceOffset() is { } priorLineOffset)
@@ -120,14 +151,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             // case 3: $"""
             //          {value}$$
             //          """
-            if (token.Kind() is SyntaxKind.InterpolatedMultiLineRawStringStartToken or SyntaxKind.InterpolatedStringTextToken
-                || token is { RawKind: (int)SyntaxKind.CloseBraceToken, Parent: InterpolationSyntax })
+            if (
+                token.Kind()
+                    is SyntaxKind.InterpolatedMultiLineRawStringStartToken
+                        or SyntaxKind.InterpolatedStringTextToken
+                || token
+                    is { RawKind: (int)SyntaxKind.CloseBraceToken, Parent: InterpolationSyntax }
+            )
             {
-                var interpolatedExpression = token.GetAncestor<InterpolatedStringExpressionSyntax>();
+                var interpolatedExpression =
+                    token.GetAncestor<InterpolatedStringExpressionSyntax>();
                 Contract.ThrowIfNull(interpolatedExpression);
-                if (interpolatedExpression.StringStartToken.IsKind(SyntaxKind.InterpolatedMultiLineRawStringStartToken))
+                if (
+                    interpolatedExpression.StringStartToken.IsKind(
+                        SyntaxKind.InterpolatedMultiLineRawStringStartToken
+                    )
+                )
                 {
-                    var endLine = sourceText.Lines.GetLineFromPosition(interpolatedExpression.StringEndToken.Span.End);
+                    var endLine = sourceText.Lines.GetLineFromPosition(
+                        interpolatedExpression.StringEndToken.Span.End
+                    );
 
                     // Raw string may be unterminated.  So last line may just be the last line of the file, which may have
                     // no contents on it.  In that case, just presume the minimum offset is 0.
@@ -135,11 +178,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
 
                     // If possible, indent to match the indentation of the previous non-whitespace line contained in the
                     // same raw string. Otherwise, indent to match the ending line of the raw string.
-                    var startLine = sourceText.Lines.GetLineFromPosition(interpolatedExpression.StringStartToken.SpanStart);
-                    for (var currentLineNumber = indenter.LineToBeIndented.LineNumber - 1; currentLineNumber >= startLine.LineNumber + 1; currentLineNumber--)
+                    var startLine = sourceText.Lines.GetLineFromPosition(
+                        interpolatedExpression.StringStartToken.SpanStart
+                    );
+                    for (
+                        var currentLineNumber = indenter.LineToBeIndented.LineNumber - 1;
+                        currentLineNumber >= startLine.LineNumber + 1;
+                        currentLineNumber--
+                    )
                     {
                         var currentLine = sourceText.Lines[currentLineNumber];
-                        if (!indenter.Root.FindToken(currentLine.Start, findInsideTrivia: true).IsKind(SyntaxKind.InterpolatedStringTextToken))
+                        if (
+                            !indenter
+                                .Root.FindToken(currentLine.Start, findInsideTrivia: true)
+                                .IsKind(SyntaxKind.InterpolatedStringTextToken)
+                        )
                         {
                             // Avoid trying to indent to match the content of an interpolation. Example:
                             //
@@ -174,9 +227,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             // case 2: $@"$${0}"
             // case 3: $@"Comment$$ in-between{0}"
             // case 4: $@"{0}$$"
-            if (token.IsVerbatimStringLiteral() ||
-                token.Kind() is SyntaxKind.InterpolatedVerbatimStringStartToken or SyntaxKind.InterpolatedStringTextToken ||
-                (token.IsKind(SyntaxKind.CloseBraceToken) && token.Parent.IsKind(SyntaxKind.Interpolation)))
+            if (
+                token.IsVerbatimStringLiteral()
+                || token.Kind()
+                    is SyntaxKind.InterpolatedVerbatimStringStartToken
+                        or SyntaxKind.InterpolatedStringTextToken
+                || (
+                    token.IsKind(SyntaxKind.CloseBraceToken)
+                    && token.Parent.IsKind(SyntaxKind.Interpolation)
+                )
+            )
             {
                 return indenter.IndentFromStartOfLine(0);
             }
@@ -185,19 +245,32 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             // but its previous one.
             if (token.Parent is LabeledStatementSyntax || token.IsLastTokenInLabelStatement())
             {
-                token = token.GetAncestor<LabeledStatementSyntax>()!.GetFirstToken(includeZeroWidth: true).GetPreviousToken(includeZeroWidth: true);
+                token = token
+                    .GetAncestor<LabeledStatementSyntax>()!
+                    .GetFirstToken(includeZeroWidth: true)
+                    .GetPreviousToken(includeZeroWidth: true);
             }
 
-            var position = indenter.GetCurrentPositionNotBelongToEndOfFileToken(indenter.LineToBeIndented.Start);
+            var position = indenter.GetCurrentPositionNotBelongToEndOfFileToken(
+                indenter.LineToBeIndented.Start
+            );
 
             // first check operation service to see whether we can determine indentation from it
-            var indentation = indenter.Finder.FromIndentBlockOperations(indenter.Tree, token, position, indenter.CancellationToken);
+            var indentation = indenter.Finder.FromIndentBlockOperations(
+                indenter.Tree,
+                token,
+                position,
+                indenter.CancellationToken
+            );
             if (indentation.HasValue)
             {
                 return indenter.IndentFromStartOfLine(indentation.Value);
             }
 
-            var alignmentTokenIndentation = indenter.Finder.FromAlignTokensOperations(indenter.Tree, token);
+            var alignmentTokenIndentation = indenter.Finder.FromAlignTokensOperations(
+                indenter.Tree,
+                token
+            );
             if (alignmentTokenIndentation.HasValue)
             {
                 return indenter.IndentFromStartOfLine(alignmentTokenIndentation.Value);
@@ -216,12 +289,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             //   if (true)
             //     { }
 
-            if (token.IsSemicolonOfEmbeddedStatement() ||
-                token.IsCloseBraceOfEmbeddedBlock())
+            if (token.IsSemicolonOfEmbeddedStatement() || token.IsCloseBraceOfEmbeddedBlock())
             {
                 RoslynDebug.Assert(
-                    token.Parent != null &&
-                    (token.Parent.Parent is StatementSyntax || token.Parent.Parent is ElseClauseSyntax));
+                    token.Parent != null
+                        && (
+                            token.Parent.Parent is StatementSyntax
+                            || token.Parent.Parent is ElseClauseSyntax
+                        )
+                );
 
                 var embeddedStatementOwner = token.Parent.Parent;
                 while (embeddedStatementOwner.IsEmbeddedStatement())
@@ -230,109 +306,182 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
                     embeddedStatementOwner = embeddedStatementOwner.Parent;
                 }
 
-                return indenter.GetIndentationOfLine(sourceText.Lines.GetLineFromPosition(embeddedStatementOwner.GetFirstToken(includeZeroWidth: true).SpanStart));
+                return indenter.GetIndentationOfLine(
+                    sourceText.Lines.GetLineFromPosition(
+                        embeddedStatementOwner.GetFirstToken(includeZeroWidth: true).SpanStart
+                    )
+                );
             }
 
             switch (token.Kind())
             {
                 case SyntaxKind.SemicolonToken:
-                    {
-                        // special cases
-                        if (token.IsSemicolonInForStatement())
-                        {
-                            return GetDefaultIndentationFromToken(indenter, token);
-                        }
-
-                        return indenter.IndentFromStartOfLine(indenter.Finder.GetIndentationOfCurrentPosition(indenter.Tree, token, position, indenter.CancellationToken));
-                    }
-
-                case SyntaxKind.CloseBraceToken:
-                    {
-                        if (token.Parent.IsKind(SyntaxKind.AccessorList) &&
-                            token.Parent.Parent.IsKind(SyntaxKind.PropertyDeclaration))
-                        {
-                            if (token.GetNextToken().IsEqualsTokenInAutoPropertyInitializers())
-                            {
-                                return GetDefaultIndentationFromToken(indenter, token);
-                            }
-                        }
-
-                        return indenter.IndentFromStartOfLine(indenter.Finder.GetIndentationOfCurrentPosition(indenter.Tree, token, position, indenter.CancellationToken));
-                    }
-
-                case SyntaxKind.OpenBraceToken:
-                    {
-                        return indenter.IndentFromStartOfLine(indenter.Finder.GetIndentationOfCurrentPosition(indenter.Tree, token, position, indenter.CancellationToken));
-                    }
-
-                case SyntaxKind.ColonToken:
-                    {
-                        var nonTerminalNode = token.Parent;
-                        Contract.ThrowIfNull(nonTerminalNode, @"Malformed code or bug in parser???");
-
-                        if (nonTerminalNode is SwitchLabelSyntax)
-                        {
-                            return indenter.GetIndentationOfLine(sourceText.Lines.GetLineFromPosition(nonTerminalNode.GetFirstToken(includeZeroWidth: true).SpanStart), indenter.Options.FormattingOptions.IndentationSize);
-                        }
-
-                        goto default;
-                    }
-
-                case SyntaxKind.CloseBracketToken:
-                    {
-                        var nonTerminalNode = token.Parent;
-                        Contract.ThrowIfNull(nonTerminalNode, @"Malformed code or bug in parser???");
-
-                        // if this is closing an attribute, we shouldn't indent.
-                        if (nonTerminalNode is AttributeListSyntax)
-                        {
-                            return indenter.GetIndentationOfLine(sourceText.Lines.GetLineFromPosition(nonTerminalNode.GetFirstToken(includeZeroWidth: true).SpanStart));
-                        }
-
-                        goto default;
-                    }
-
-                case SyntaxKind.XmlTextLiteralToken:
-                    {
-                        return indenter.GetIndentationOfLine(sourceText.Lines.GetLineFromPosition(token.SpanStart));
-                    }
-
-                case SyntaxKind.CommaToken:
-                    {
-                        return GetIndentationFromCommaSeparatedList(indenter, token);
-                    }
-
-                case SyntaxKind.CloseParenToken:
-                    {
-                        if (token.Parent.IsKind(SyntaxKind.ArgumentList))
-                        {
-                            return GetDefaultIndentationFromToken(indenter, token.Parent.GetFirstToken(includeZeroWidth: true));
-                        }
-
-                        goto default;
-                    }
-
-                default:
+                {
+                    // special cases
+                    if (token.IsSemicolonInForStatement())
                     {
                         return GetDefaultIndentationFromToken(indenter, token);
                     }
+
+                    return indenter.IndentFromStartOfLine(
+                        indenter.Finder.GetIndentationOfCurrentPosition(
+                            indenter.Tree,
+                            token,
+                            position,
+                            indenter.CancellationToken
+                        )
+                    );
+                }
+
+                case SyntaxKind.CloseBraceToken:
+                {
+                    if (
+                        token.Parent.IsKind(SyntaxKind.AccessorList)
+                        && token.Parent.Parent.IsKind(SyntaxKind.PropertyDeclaration)
+                    )
+                    {
+                        if (token.GetNextToken().IsEqualsTokenInAutoPropertyInitializers())
+                        {
+                            return GetDefaultIndentationFromToken(indenter, token);
+                        }
+                    }
+
+                    return indenter.IndentFromStartOfLine(
+                        indenter.Finder.GetIndentationOfCurrentPosition(
+                            indenter.Tree,
+                            token,
+                            position,
+                            indenter.CancellationToken
+                        )
+                    );
+                }
+
+                case SyntaxKind.OpenBraceToken:
+                {
+                    return indenter.IndentFromStartOfLine(
+                        indenter.Finder.GetIndentationOfCurrentPosition(
+                            indenter.Tree,
+                            token,
+                            position,
+                            indenter.CancellationToken
+                        )
+                    );
+                }
+
+                case SyntaxKind.ColonToken:
+                {
+                    var nonTerminalNode = token.Parent;
+                    Contract.ThrowIfNull(nonTerminalNode, @"Malformed code or bug in parser???");
+
+                    if (nonTerminalNode is SwitchLabelSyntax)
+                    {
+                        return indenter.GetIndentationOfLine(
+                            sourceText.Lines.GetLineFromPosition(
+                                nonTerminalNode.GetFirstToken(includeZeroWidth: true).SpanStart
+                            ),
+                            indenter.Options.FormattingOptions.IndentationSize
+                        );
+                    }
+
+                    goto default;
+                }
+
+                case SyntaxKind.CloseBracketToken:
+                {
+                    var nonTerminalNode = token.Parent;
+                    Contract.ThrowIfNull(nonTerminalNode, @"Malformed code or bug in parser???");
+
+                    // if this is closing an attribute, we shouldn't indent.
+                    if (nonTerminalNode is AttributeListSyntax)
+                    {
+                        return indenter.GetIndentationOfLine(
+                            sourceText.Lines.GetLineFromPosition(
+                                nonTerminalNode.GetFirstToken(includeZeroWidth: true).SpanStart
+                            )
+                        );
+                    }
+
+                    goto default;
+                }
+
+                case SyntaxKind.XmlTextLiteralToken:
+                {
+                    return indenter.GetIndentationOfLine(
+                        sourceText.Lines.GetLineFromPosition(token.SpanStart)
+                    );
+                }
+
+                case SyntaxKind.CommaToken:
+                {
+                    return GetIndentationFromCommaSeparatedList(indenter, token);
+                }
+
+                case SyntaxKind.CloseParenToken:
+                {
+                    if (token.Parent.IsKind(SyntaxKind.ArgumentList))
+                    {
+                        return GetDefaultIndentationFromToken(
+                            indenter,
+                            token.Parent.GetFirstToken(includeZeroWidth: true)
+                        );
+                    }
+
+                    goto default;
+                }
+
+                default:
+                {
+                    return GetDefaultIndentationFromToken(indenter, token);
+                }
             }
         }
 
-        private static IndentationResult GetIndentationFromCommaSeparatedList(Indenter indenter, SyntaxToken token)
-            => token.Parent switch
+        private static IndentationResult GetIndentationFromCommaSeparatedList(
+            Indenter indenter,
+            SyntaxToken token
+        ) =>
+            token.Parent switch
             {
-                BaseArgumentListSyntax argument => GetIndentationFromCommaSeparatedList(indenter, argument.Arguments, token),
-                BaseParameterListSyntax parameter => GetIndentationFromCommaSeparatedList(indenter, parameter.Parameters, token),
-                TypeArgumentListSyntax typeArgument => GetIndentationFromCommaSeparatedList(indenter, typeArgument.Arguments, token),
-                TypeParameterListSyntax typeParameter => GetIndentationFromCommaSeparatedList(indenter, typeParameter.Parameters, token),
-                EnumDeclarationSyntax enumDeclaration => GetIndentationFromCommaSeparatedList(indenter, enumDeclaration.Members, token),
-                InitializerExpressionSyntax initializerSyntax => GetIndentationFromCommaSeparatedList(indenter, initializerSyntax.Expressions, token),
+                BaseArgumentListSyntax argument => GetIndentationFromCommaSeparatedList(
+                    indenter,
+                    argument.Arguments,
+                    token
+                ),
+                BaseParameterListSyntax parameter => GetIndentationFromCommaSeparatedList(
+                    indenter,
+                    parameter.Parameters,
+                    token
+                ),
+                TypeArgumentListSyntax typeArgument => GetIndentationFromCommaSeparatedList(
+                    indenter,
+                    typeArgument.Arguments,
+                    token
+                ),
+                TypeParameterListSyntax typeParameter => GetIndentationFromCommaSeparatedList(
+                    indenter,
+                    typeParameter.Parameters,
+                    token
+                ),
+                EnumDeclarationSyntax enumDeclaration => GetIndentationFromCommaSeparatedList(
+                    indenter,
+                    enumDeclaration.Members,
+                    token
+                ),
+                InitializerExpressionSyntax initializerSyntax =>
+                    GetIndentationFromCommaSeparatedList(
+                        indenter,
+                        initializerSyntax.Expressions,
+                        token
+                    ),
                 _ => GetDefaultIndentationFromToken(indenter, token),
             };
 
         private static IndentationResult GetIndentationFromCommaSeparatedList<T>(
-            Indenter indenter, SeparatedSyntaxList<T> list, SyntaxToken token) where T : SyntaxNode
+            Indenter indenter,
+            SeparatedSyntaxList<T> list,
+            SyntaxToken token
+        )
+            where T : SyntaxNode
         {
             var index = list.GetWithSeparators().IndexOf(token);
             if (index < 0)
@@ -350,7 +499,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
 
                 if (firstToken.IsFirstTokenOnLine(sourceText))
                 {
-                    return indenter.GetIndentationOfLine(sourceText.Lines.GetLineFromPosition(firstToken.SpanStart));
+                    return indenter.GetIndentationOfLine(
+                        sourceText.Lines.GetLineFromPosition(firstToken.SpanStart)
+                    );
                 }
             }
 
@@ -359,7 +510,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             return GetDefaultIndentationFromTokenLine(indenter, token, additionalSpace: 0);
         }
 
-        private static IndentationResult GetDefaultIndentationFromToken(Indenter indenter, SyntaxToken token)
+        private static IndentationResult GetDefaultIndentationFromToken(
+            Indenter indenter,
+            SyntaxToken token
+        )
         {
             if (IsPartOfQueryExpression(token))
             {
@@ -369,7 +523,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             return GetDefaultIndentationFromTokenLine(indenter, token);
         }
 
-        private static IndentationResult GetIndentationForQueryExpression(Indenter indenter, SyntaxToken token)
+        private static IndentationResult GetIndentationForQueryExpression(
+            Indenter indenter,
+            SyntaxToken token
+        )
         {
             // find containing non terminal node
             var queryExpressionClause = GetQueryExpressionClause(token);
@@ -425,12 +582,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
 
             // no query clause start a line. use the first token of the query expression
             RoslynDebug.AssertNotNull(queryBody.Parent);
-            return indenter.GetIndentationOfToken(queryBody.Parent.GetFirstToken(includeZeroWidth: true));
+            return indenter.GetIndentationOfToken(
+                queryBody.Parent.GetFirstToken(includeZeroWidth: true)
+            );
         }
 
         private static SyntaxNode? GetQueryExpressionClause(SyntaxToken token)
         {
-            var clause = token.GetAncestors<SyntaxNode>().FirstOrDefault(n => n is QueryClauseSyntax or SelectOrGroupClauseSyntax);
+            var clause = token
+                .GetAncestors<SyntaxNode>()
+                .FirstOrDefault(n => n is QueryClauseSyntax or SelectOrGroupClauseSyntax);
 
             if (clause != null)
             {
@@ -461,7 +622,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
         }
 
         private static IndentationResult GetDefaultIndentationFromTokenLine(
-            Indenter indenter, SyntaxToken token, int? additionalSpace = null)
+            Indenter indenter,
+            SyntaxToken token,
+            int? additionalSpace = null
+        )
         {
             var spaceToAdd = additionalSpace ?? indenter.Options.FormattingOptions.IndentationSize;
 
@@ -472,23 +636,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Indentation
             var givenTokenLine = sourceText.Lines.GetLineFromPosition(token.SpanStart);
 
             // find right position
-            var position = indenter.GetCurrentPositionNotBelongToEndOfFileToken(indenter.LineToBeIndented.Start);
+            var position = indenter.GetCurrentPositionNotBelongToEndOfFileToken(
+                indenter.LineToBeIndented.Start
+            );
 
             // find containing non expression node
-            var nonExpressionNode = token.GetAncestors<SyntaxNode>().FirstOrDefault(n => n is StatementSyntax);
+            var nonExpressionNode = token
+                .GetAncestors<SyntaxNode>()
+                .FirstOrDefault(n => n is StatementSyntax);
             if (nonExpressionNode == null)
             {
                 // well, I can't find any non expression node. use default behavior
-                return indenter.IndentFromStartOfLine(indenter.Finder.GetIndentationOfCurrentPosition(indenter.Tree, token, position, spaceToAdd, indenter.CancellationToken));
+                return indenter.IndentFromStartOfLine(
+                    indenter.Finder.GetIndentationOfCurrentPosition(
+                        indenter.Tree,
+                        token,
+                        position,
+                        spaceToAdd,
+                        indenter.CancellationToken
+                    )
+                );
             }
 
             // find line where first token of the node is
-            var firstTokenLine = sourceText.Lines.GetLineFromPosition(nonExpressionNode.GetFirstToken(includeZeroWidth: true).SpanStart);
+            var firstTokenLine = sourceText.Lines.GetLineFromPosition(
+                nonExpressionNode.GetFirstToken(includeZeroWidth: true).SpanStart
+            );
 
             // single line expression
             if (firstTokenLine.LineNumber == givenTokenLine.LineNumber)
             {
-                return indenter.IndentFromStartOfLine(indenter.Finder.GetIndentationOfCurrentPosition(indenter.Tree, token, position, spaceToAdd, indenter.CancellationToken));
+                return indenter.IndentFromStartOfLine(
+                    indenter.Finder.GetIndentationOfCurrentPosition(
+                        indenter.Tree,
+                        token,
+                        position,
+                        spaceToAdd,
+                        indenter.CancellationToken
+                    )
+                );
             }
 
             // okay, looks like containing node is written over multiple lines, in that case, give same indentation as given token

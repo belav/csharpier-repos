@@ -9,8 +9,16 @@
 
 using System;
 
-namespace Mono.AppleTls 
+namespace Mono.AppleTls
 {
-	delegate SslStatus SslReadFunc (IntPtr connection, IntPtr data, /* size_t* */ ref IntPtr dataLength);
-	delegate SslStatus SslWriteFunc (IntPtr connection, IntPtr data, /* size_t* */ ref IntPtr dataLength);
+    delegate SslStatus SslReadFunc(
+        IntPtr connection,
+        IntPtr data, /* size_t* */
+        ref IntPtr dataLength
+    );
+    delegate SslStatus SslWriteFunc(
+        IntPtr connection,
+        IntPtr data, /* size_t* */
+        ref IntPtr dataLength
+    );
 }

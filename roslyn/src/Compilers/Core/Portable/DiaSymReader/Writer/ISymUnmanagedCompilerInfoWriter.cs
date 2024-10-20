@@ -17,6 +17,12 @@ namespace Microsoft.DiaSymReader
         /// Adds compiler version number and name.
         /// </summary>
         [PreserveSig]
-        int AddCompilerInfo(ushort major, ushort minor, ushort build, ushort revision, [MarshalAs(UnmanagedType.LPWStr)] string name);
+        int AddCompilerInfo(
+            ushort major,
+            ushort minor,
+            ushort build,
+            ushort revision,
+            [MarshalAs(UnmanagedType.LPWStr)] string name
+        );
     }
 }

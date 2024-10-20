@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,34 +32,24 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel.Security
 {
-	[Serializable]
-	public class ExpiredSecurityTokenException : MessageSecurityException
-	{
-		public ExpiredSecurityTokenException ()
-			: this ("The security token is expired.")
-		{
-		}
+    [Serializable]
+    public class ExpiredSecurityTokenException : MessageSecurityException
+    {
+        public ExpiredSecurityTokenException()
+            : this("The security token is expired.") { }
 
-		public ExpiredSecurityTokenException (string message)
-			: base (message)
-		{
-		}
+        public ExpiredSecurityTokenException(string message)
+            : base(message) { }
 
-		public ExpiredSecurityTokenException (string message,
-			Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public ExpiredSecurityTokenException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		protected ExpiredSecurityTokenException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected ExpiredSecurityTokenException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		public override void GetObjectData (SerializationInfo info,  StreamingContext ctx)
-		{
-			base.GetObjectData (info, ctx);
-		}
-	}
+        public override void GetObjectData(SerializationInfo info, StreamingContext ctx)
+        {
+            base.GetObjectData(info, ctx);
+        }
+    }
 }

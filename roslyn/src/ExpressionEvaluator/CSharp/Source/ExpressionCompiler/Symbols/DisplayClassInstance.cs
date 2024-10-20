@@ -4,9 +4,9 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
 using System;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
@@ -67,7 +67,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         internal override BoundExpression ToBoundExpression(SyntaxNode syntax)
         {
-            return new BoundLocal(syntax, this.Local, constantValueOpt: null, type: this.Local.Type) { WasCompilerGenerated = true };
+            return new BoundLocal(syntax, this.Local, constantValueOpt: null, type: this.Local.Type)
+            {
+                WasCompilerGenerated = true,
+            };
         }
 
         protected override string GetInstanceName() => Local.Name;
@@ -80,10 +83,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal DisplayClassInstanceFromParameter(ParameterSymbol parameter)
         {
             Debug.Assert((object)parameter != null);
-            Debug.Assert(parameter.Name.EndsWith("this", StringComparison.Ordinal) ||
-                parameter.Name.Length == 0 || // unnamed
-                parameter.Name.Equals("value", StringComparison.Ordinal) || // display class instance passed to local function as parameter
-                GeneratedNameParser.GetKind(parameter.Name) == GeneratedNameKind.TransparentIdentifier);
+            Debug.Assert(
+                parameter.Name.EndsWith("this", StringComparison.Ordinal)
+                    || parameter.Name.Length == 0
+                    || // unnamed
+                    parameter.Name.Equals("value", StringComparison.Ordinal)
+                    || // display class instance passed to local function as parameter
+                    GeneratedNameParser.GetKind(parameter.Name)
+                        == GeneratedNameKind.TransparentIdentifier
+            );
             this.Parameter = parameter;
         }
 

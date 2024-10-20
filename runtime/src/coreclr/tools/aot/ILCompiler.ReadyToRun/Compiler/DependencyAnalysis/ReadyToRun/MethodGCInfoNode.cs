@@ -32,7 +32,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             if (factory.RuntimeFunctionsGCInfo.Deduplicator == null)
             {
-                factory.RuntimeFunctionsGCInfo.Deduplicator = new HashSet<MethodGCInfoNode>(new MethodGCInfoNodeDeduplicatingComparer(factory));
+                factory.RuntimeFunctionsGCInfo.Deduplicator = new HashSet<MethodGCInfoNode>(
+                    new MethodGCInfoNodeDeduplicatingComparer(factory)
+                );
             }
             factory.RuntimeFunctionsGCInfo.AddEmbeddedObject(this);
         }
@@ -46,13 +48,22 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
 
             int[] offsets = new int[_methodNode.FrameInfos.Length + coldCodeUnwindInfoCount];
-            if (!factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(this, out var deduplicatedResult))
+            if (
+                !factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(
+                    this,
+                    out var deduplicatedResult
+                )
+            )
             {
                 throw new Exception("Did not properly initialize deduplicator");
             }
 
             int offset = deduplicatedResult.OffsetFromBeginningOfArray;
-            for (int frameInfoIndex = 0; frameInfoIndex < deduplicatedResult._methodNode.FrameInfos.Length; frameInfoIndex++)
+            for (
+                int frameInfoIndex = 0;
+                frameInfoIndex < deduplicatedResult._methodNode.FrameInfos.Length;
+                frameInfoIndex++
+            )
             {
                 offsets[frameInfoIndex] = offset;
                 offset += deduplicatedResult._methodNode.FrameInfos[frameInfoIndex].BlobData.Length;
@@ -71,7 +82,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             if (_methodNode.ColdCodeNode != null)
             {
                 // TODO: Take a look at deduplicatedResult
-                for (int frameInfoIndex = 0; frameInfoIndex < _methodNode.ColdFrameInfos.Length; frameInfoIndex++)
+                for (
+                    int frameInfoIndex = 0;
+                    frameInfoIndex < _methodNode.ColdFrameInfos.Length;
+                    frameInfoIndex++
+                )
                 {
                     offsets[frameInfoIndex + _methodNode.FrameInfos.Length] = offset;
                     byte[] blobData = _methodNode.ColdFrameInfos[frameInfoIndex].BlobData;
@@ -142,7 +157,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     if (other.Bytes == null)
                         return false;
-                    
+
                     return Bytes.SequenceEqual(other.Bytes);
                 }
                 else
@@ -167,12 +182,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             const byte UNW_FLAG_UHANDLER = 2;
             const byte UNW_FLAG_CHAININFO = 4;
             const byte FlagsShift = 3;
-            
+
             for (int frameInfoIndex = 0; frameInfoIndex < numFrameInfos; frameInfoIndex++)
             {
-                FrameInfo frameInfo = (frameInfoIndex >= numHotFrameInfos) ?
-                    _methodNode.ColdFrameInfos[frameInfoIndex - numHotFrameInfos] :
-                    _methodNode.FrameInfos[frameInfoIndex];
+                FrameInfo frameInfo =
+                    (frameInfoIndex >= numHotFrameInfos)
+                        ? _methodNode.ColdFrameInfos[frameInfoIndex - numHotFrameInfos]
+                        : _methodNode.FrameInfos[frameInfoIndex];
                 byte[] unwindInfo = frameInfo.BlobData;
                 if (unwindInfo == null)
                 {
@@ -186,8 +202,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     yield return new GCInfoComponent(header);
                     yield return new GCInfoComponent(_methodNode, 0);
                     yield return new GCInfoComponent(_methodNode, _methodNode.Size);
-                    // TODO: Is this correct? 
-                    yield return new GCInfoComponent(factory.RuntimeFunctionsGCInfo, this.OffsetFromBeginningOfArray);
+                    // TODO: Is this correct?
+                    yield return new GCInfoComponent(
+                        factory.RuntimeFunctionsGCInfo,
+                        this.OffsetFromBeginningOfArray
+                    );
                 }
                 else
                 {
@@ -195,9 +214,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         // On Amd64, patch the first byte of the unwind info by setting the flags to EHANDLER | UHANDLER
                         // as that's what CoreCLR does (zapcode.cpp, ZapUnwindData::Save).
-                        unwindInfo[0] |= (byte)((UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER) << FlagsShift);
+                        unwindInfo[0] |= (byte)(
+                            (UNW_FLAG_EHANDLER | UNW_FLAG_UHANDLER) << FlagsShift
+                        );
                     }
-                    else if ((targetArch == TargetArchitecture.ARM) || (targetArch == TargetArchitecture.ARM64) || (targetArch == TargetArchitecture.LoongArch64))
+                    else if (
+                        (targetArch == TargetArchitecture.ARM)
+                        || (targetArch == TargetArchitecture.ARM64)
+                        || (targetArch == TargetArchitecture.LoongArch64)
+                    )
                     {
                         // Set the 'X' bit to indicate that there is a personality routine associated with this method
                         unwindInfo[2] |= 1 << 4;
@@ -208,8 +233,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     if (targetArch != TargetArchitecture.X86)
                     {
                         bool isFilterFunclet = (frameInfo.Flags & FrameInfoFlags.Filter) != 0;
-                        ISymbolNode personalityRoutine = (isFilterFunclet ? factory.FilterFuncletPersonalityRoutine : factory.PersonalityRoutine);
-                        yield return new GCInfoComponent(personalityRoutine, factory.Target.CodeDelta);
+                        ISymbolNode personalityRoutine = (
+                            isFilterFunclet
+                                ? factory.FilterFuncletPersonalityRoutine
+                                : factory.PersonalityRoutine
+                        );
+                        yield return new GCInfoComponent(
+                            personalityRoutine,
+                            factory.Target.CodeDelta
+                        );
                     }
 
                     if (frameInfoIndex == 0 && _methodNode.GCInfo != null)
@@ -228,10 +260,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
 
             NodeFactory _factory;
+
             public bool Equals(MethodGCInfoNode a, MethodGCInfoNode b)
             {
                 return a.EncodeDataCore(_factory).SequenceEqual(b.EncodeDataCore(_factory));
             }
+
             public int GetHashCode(MethodGCInfoNode node)
             {
                 HashCode hashcode = new HashCode();
@@ -243,14 +277,21 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
         }
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             if (relocsOnly)
             {
                 return;
             }
 
-            bool isFound = factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(this, out var found);
+            bool isFound = factory.RuntimeFunctionsGCInfo.Deduplicator.TryGetValue(
+                this,
+                out var found
+            );
 
             if (isFound && (found != this))
             {
@@ -270,7 +311,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
                 else
                 {
-                    dataBuilder.EmitReloc(item.Symbol, RelocType.IMAGE_REL_BASED_ADDR32NB, item.SymbolDelta);
+                    dataBuilder.EmitReloc(
+                        item.Symbol,
+                        RelocType.IMAGE_REL_BASED_ADDR32NB,
+                        item.SymbolDelta
+                    );
                 }
             }
         }
@@ -283,7 +328,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return sb.ToString();
         }
 
-        public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory context) => null;
+        public override IEnumerable<DependencyListEntry> GetStaticDependencies(
+            NodeFactory context
+        ) => null;
 
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {

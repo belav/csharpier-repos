@@ -10,7 +10,11 @@ namespace System.Text.Json.SourceGeneration.Tests
     /// </summary>
     public class CustomConverter_ClassWithCustomConverter : JsonConverter<ClassWithCustomConverter>
     {
-        public override ClassWithCustomConverter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ClassWithCustomConverter Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -20,8 +24,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             ClassWithCustomConverter obj = new();
 
             reader.Read();
-            if (reader.TokenType != JsonTokenType.PropertyName &&
-                reader.GetString() != "MyInt")
+            if (reader.TokenType != JsonTokenType.PropertyName && reader.GetString() != "MyInt")
             {
                 throw new JsonException("Wrong property name");
             }
@@ -38,7 +41,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             return obj;
         }
 
-        public override void Write(Utf8JsonWriter writer, ClassWithCustomConverter value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            ClassWithCustomConverter value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStartObject();
             writer.WriteNumber(nameof(ClassWithCustomConverter.MyInt), value.MyInt + 100);
@@ -49,9 +56,14 @@ namespace System.Text.Json.SourceGeneration.Tests
     /// <summary>
     /// Custom converter that adds\subtract 100 from MyIntProperty.
     /// </summary>
-    public class CustomConverter_ClassWithCustomConverterFactory : JsonConverter<ClassWithCustomConverterFactory>
+    public class CustomConverter_ClassWithCustomConverterFactory
+        : JsonConverter<ClassWithCustomConverterFactory>
     {
-        public override ClassWithCustomConverterFactory Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ClassWithCustomConverterFactory Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -61,8 +73,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             ClassWithCustomConverterFactory obj = new();
 
             reader.Read();
-            if (reader.TokenType != JsonTokenType.PropertyName &&
-                reader.GetString() != "MyInt")
+            if (reader.TokenType != JsonTokenType.PropertyName && reader.GetString() != "MyInt")
             {
                 throw new JsonException("Wrong property name");
             }
@@ -79,7 +90,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             return obj;
         }
 
-        public override void Write(Utf8JsonWriter writer, ClassWithCustomConverterFactory value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            ClassWithCustomConverterFactory value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStartObject();
             writer.WriteNumber(nameof(ClassWithCustomConverterFactory.MyInt), value.MyInt + 100);
@@ -90,9 +105,14 @@ namespace System.Text.Json.SourceGeneration.Tests
     /// <summary>
     /// Custom converter that adds\subtract 100 from MyIntProperty.
     /// </summary>
-    public class CustomConverter_StructWithCustomConverter : JsonConverter<StructWithCustomConverter>
+    public class CustomConverter_StructWithCustomConverter
+        : JsonConverter<StructWithCustomConverter>
     {
-        public override StructWithCustomConverter Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override StructWithCustomConverter Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -102,8 +122,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             StructWithCustomConverter obj = new();
 
             reader.Read();
-            if (reader.TokenType != JsonTokenType.PropertyName &&
-                reader.GetString() != "MyInt")
+            if (reader.TokenType != JsonTokenType.PropertyName && reader.GetString() != "MyInt")
             {
                 throw new JsonException("Wrong property name");
             }
@@ -120,7 +139,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             return obj;
         }
 
-        public override void Write(Utf8JsonWriter writer, StructWithCustomConverter value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            StructWithCustomConverter value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStartObject();
             writer.WriteNumber(nameof(StructWithCustomConverter.MyInt), value.MyInt + 100);
@@ -131,9 +154,14 @@ namespace System.Text.Json.SourceGeneration.Tests
     /// <summary>
     /// Custom converter that adds\subtract 100 from MyIntProperty.
     /// </summary>
-    public class CustomConverter_StructWithCustomConverterFactory : JsonConverter<StructWithCustomConverterFactory>
+    public class CustomConverter_StructWithCustomConverterFactory
+        : JsonConverter<StructWithCustomConverterFactory>
     {
-        public override StructWithCustomConverterFactory Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override StructWithCustomConverterFactory Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
@@ -143,8 +171,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             StructWithCustomConverterFactory obj = new();
 
             reader.Read();
-            if (reader.TokenType != JsonTokenType.PropertyName &&
-                reader.GetString() != "MyInt")
+            if (reader.TokenType != JsonTokenType.PropertyName && reader.GetString() != "MyInt")
             {
                 throw new JsonException("Wrong property name");
             }
@@ -161,7 +188,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             return obj;
         }
 
-        public override void Write(Utf8JsonWriter writer, StructWithCustomConverterFactory value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            StructWithCustomConverterFactory value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteStartObject();
             writer.WriteNumber(nameof(StructWithCustomConverterFactory.MyInt), value.MyInt + 100);
@@ -171,18 +202,20 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public class CustomConverterFactory : JsonConverterFactory
     {
-        public CustomConverterFactory()
-        {
-        }
+        public CustomConverterFactory() { }
 
         public override bool CanConvert(Type typeToConvert)
         {
             return (
-                typeToConvert == typeof(StructWithCustomConverterFactory) ||
-                typeToConvert == typeof(ClassWithCustomConverterFactory));
+                typeToConvert == typeof(StructWithCustomConverterFactory)
+                || typeToConvert == typeof(ClassWithCustomConverterFactory)
+            );
         }
 
-        public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        public override JsonConverter? CreateConverter(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (typeToConvert == typeof(StructWithCustomConverterFactory))
             {
@@ -234,8 +267,17 @@ namespace System.Text.Json.SourceGeneration.Tests
 
         public class NestedPocoCustomConverter : JsonConverter<NestedPoco>
         {
-            public override NestedPoco? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => new NestedPoco { Value = reader.GetInt32() };
-            public override void Write(Utf8JsonWriter writer, NestedPoco value, JsonSerializerOptions options) => writer.WriteNumberValue(value.Value);
+            public override NestedPoco? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => new NestedPoco { Value = reader.GetInt32() };
+
+            public override void Write(
+                Utf8JsonWriter writer,
+                NestedPoco value,
+                JsonSerializerOptions options
+            ) => writer.WriteNumberValue(value.Value);
         }
     }
 
@@ -271,12 +313,20 @@ namespace System.Text.Json.SourceGeneration.Tests
 
     public class TimeSpanSecondsConverter : JsonConverter<TimeSpan>
     {
-        public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override TimeSpan Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return TimeSpan.FromSeconds(reader.GetDouble());
         }
 
-        public override void Write(Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            TimeSpan value,
+            JsonSerializerOptions options
+        )
         {
             writer.WriteNumberValue(value.TotalSeconds);
         }
@@ -298,6 +348,6 @@ namespace System.Text.Json.SourceGeneration.Tests
     {
         MinZero = 0,
         One = 1,
-        Two = 2
+        Two = 2,
     }
 }

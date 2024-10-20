@@ -24,7 +24,12 @@ namespace Tests.System
         [InlineData(" hello\t\n ", 6, 3, "")]
         [InlineData(" hello\t\n ", 8, 1, "")]
         [InlineData(" hello\t\n ", 9, 0, "")]
-        public void SubstringTrim_VariousInputsOutputs(string source, int startIndex, int length, string expectedResult)
+        public void SubstringTrim_VariousInputsOutputs(
+            string source,
+            int startIndex,
+            int length,
+            string expectedResult
+        )
         {
             string result = source.SubstringTrim(startIndex, length);
 

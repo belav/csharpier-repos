@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
             protected AnalysisData()
             {
-                _allocatedBasicBlockAnalysisDatas = ArrayBuilder<BasicBlockAnalysisData>.GetInstance();
+                _allocatedBasicBlockAnalysisDatas =
+                    ArrayBuilder<BasicBlockAnalysisData>.GetInstance();
                 _referenceTakenSymbolsBuilder = PooledHashSet<ISymbol>.GetInstance();
                 CurrentBlockAnalysisData = CreateBlockAnalysisData();
                 AdditionalConditionalBranchAnalysisData = CreateBlockAnalysisData();
@@ -53,12 +54,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             /// </code>
             /// This map will have two entries for 'x':
             ///     1. Key = (symbol: x, write: 'int x = 0')
-            ///        Value = 'false', because value assigned to 'x' here **is never** read. 
+            ///        Value = 'false', because value assigned to 'x' here **is never** read.
             ///     2. Key = (symbol: x, write: 'x = 1')
             ///        Value = 'true', because value assigned to 'x' here **may be** read on
             ///        some control flow path.
             /// </summary>
-            protected abstract PooledDictionary<(ISymbol symbol, IOperation operation), bool> SymbolsWriteBuilder { get; }
+            protected abstract PooledDictionary<
+                (ISymbol symbol, IOperation operation),
+                bool
+            > SymbolsWriteBuilder { get; }
 
             /// <summary>
             /// Set of locals/parameters that are read at least once.
@@ -84,11 +88,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             /// <summary>
             /// Creates an immutable <see cref="SymbolUsageResult"/> for the current analysis data.
             /// </summary>
-            public SymbolUsageResult ToResult()
-                => new(SymbolsWriteBuilder.ToImmutableDictionary(),
-                                         SymbolsReadBuilder.ToImmutableHashSet());
+            public SymbolUsageResult ToResult() =>
+                new(
+                    SymbolsWriteBuilder.ToImmutableDictionary(),
+                    SymbolsReadBuilder.ToImmutableHashSet()
+                );
 
-            public BasicBlockAnalysisData AnalyzeLocalFunctionInvocation(IMethodSymbol localFunction, CancellationToken cancellationToken)
+            public BasicBlockAnalysisData AnalyzeLocalFunctionInvocation(
+                IMethodSymbol localFunction,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(localFunction.IsLocalFunction());
 
@@ -102,13 +111,19 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 }
                 else
                 {
-                    var result = AnalyzeLocalFunctionInvocationCore(localFunction, cancellationToken);
+                    var result = AnalyzeLocalFunctionInvocationCore(
+                        localFunction,
+                        cancellationToken
+                    );
                     LambdaOrLocalFunctionsBeingAnalyzed.Remove(localFunction);
                     return result;
                 }
             }
 
-            public BasicBlockAnalysisData AnalyzeLambdaInvocation(IFlowAnonymousFunctionOperation lambda, CancellationToken cancellationToken)
+            public BasicBlockAnalysisData AnalyzeLambdaInvocation(
+                IFlowAnonymousFunctionOperation lambda,
+                CancellationToken cancellationToken
+            )
             {
                 if (!LambdaOrLocalFunctionsBeingAnalyzed.Add(lambda.Symbol))
                 {
@@ -123,33 +138,61 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 }
             }
 
-            protected abstract BasicBlockAnalysisData AnalyzeLocalFunctionInvocationCore(IMethodSymbol localFunction, CancellationToken cancellationToken);
-            protected abstract BasicBlockAnalysisData AnalyzeLambdaInvocationCore(IFlowAnonymousFunctionOperation lambda, CancellationToken cancellationToken);
+            protected abstract BasicBlockAnalysisData AnalyzeLocalFunctionInvocationCore(
+                IMethodSymbol localFunction,
+                CancellationToken cancellationToken
+            );
+            protected abstract BasicBlockAnalysisData AnalyzeLambdaInvocationCore(
+                IFlowAnonymousFunctionOperation lambda,
+                CancellationToken cancellationToken
+            );
 
             // Methods specific to flow capture analysis for CFG based dataflow analysis.
             public abstract bool IsLValueFlowCapture(CaptureId captureId);
             public abstract bool IsRValueFlowCapture(CaptureId captureId);
-            public abstract void OnLValueCaptureFound(ISymbol symbol, IOperation operation, CaptureId captureId);
+            public abstract void OnLValueCaptureFound(
+                ISymbol symbol,
+                IOperation operation,
+                CaptureId captureId
+            );
             public abstract void OnLValueDereferenceFound(CaptureId captureId);
 
             // Methods specific to delegate analysis to track potential delegate invocation targets for CFG based dataflow analysis.
             public abstract bool IsTrackingDelegateCreationTargets { get; }
             public abstract void SetTargetsFromSymbolForDelegate(IOperation write, ISymbol symbol);
-            public abstract void SetLambdaTargetForDelegate(IOperation write, IFlowAnonymousFunctionOperation lambdaTarget);
-            public abstract void SetLocalFunctionTargetForDelegate(IOperation write, IMethodReferenceOperation localFunctionTarget);
+            public abstract void SetLambdaTargetForDelegate(
+                IOperation write,
+                IFlowAnonymousFunctionOperation lambdaTarget
+            );
+            public abstract void SetLocalFunctionTargetForDelegate(
+                IOperation write,
+                IMethodReferenceOperation localFunctionTarget
+            );
             public abstract void SetEmptyInvocationTargetsForDelegate(IOperation write);
-            public abstract bool TryGetDelegateInvocationTargets(IOperation write, out ImmutableHashSet<IOperation> targets);
+            public abstract bool TryGetDelegateInvocationTargets(
+                IOperation write,
+                out ImmutableHashSet<IOperation> targets
+            );
 
-            protected static PooledDictionary<(ISymbol Symbol, IOperation Write), bool> CreateSymbolsWriteMap(
-                ImmutableArray<IParameterSymbol> parameters)
+            protected static PooledDictionary<
+                (ISymbol Symbol, IOperation Write),
+                bool
+            > CreateSymbolsWriteMap(ImmutableArray<IParameterSymbol> parameters)
             {
-                var symbolsWriteMap = PooledDictionary<(ISymbol Symbol, IOperation Write), bool>.GetInstance();
+                var symbolsWriteMap = PooledDictionary<
+                    (ISymbol Symbol, IOperation Write),
+                    bool
+                >.GetInstance();
                 return UpdateSymbolsWriteMap(symbolsWriteMap, parameters);
             }
 
-            protected static PooledDictionary<(ISymbol Symbol, IOperation Write), bool> UpdateSymbolsWriteMap(
+            protected static PooledDictionary<
+                (ISymbol Symbol, IOperation Write),
+                bool
+            > UpdateSymbolsWriteMap(
                 PooledDictionary<(ISymbol Symbol, IOperation Write), bool> symbolsWriteMap,
-                ImmutableArray<IParameterSymbol> parameters)
+                ImmutableArray<IParameterSymbol> parameters
+            )
             {
                 // Mark parameters as being written from the value provided at the call site.
                 // Note that the write operation is "null" as there is no corresponding IOperation for parameter definition.
@@ -172,8 +215,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 return instance;
             }
 
-            public void TrackAllocatedBlockAnalysisData(BasicBlockAnalysisData allocatedData)
-                => _allocatedBasicBlockAnalysisDatas.Add(allocatedData);
+            public void TrackAllocatedBlockAnalysisData(BasicBlockAnalysisData allocatedData) =>
+                _allocatedBasicBlockAnalysisDatas.Add(allocatedData);
 
             public void OnReadReferenceFound(ISymbol symbol)
             {
@@ -191,14 +234,20 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         {
                             arg.self.SymbolsWriteBuilder[(arg.symbol, write)] = true;
                         },
-                        (symbol, self: this));
+                        (symbol, self: this)
+                    );
                 }
 
                 // Mark the current symbol as read.
                 SymbolsReadBuilder.Add(symbol);
             }
 
-            public void OnWriteReferenceFound(ISymbol symbol, IOperation operation, bool maybeWritten, bool isRef)
+            public void OnWriteReferenceFound(
+                ISymbol symbol,
+                IOperation operation,
+                bool maybeWritten,
+                bool isRef
+            )
             {
                 var symbolAndWrite = (symbol, operation);
                 if (symbol.Kind == SymbolKind.Discard)
@@ -222,8 +271,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 }
 
                 // Only mark as unused write if we are processing it for the first time (not from back edge for loops)
-                if (!SymbolsWriteBuilder.ContainsKey(symbolAndWrite) &&
-                    !maybeWritten)
+                if (!SymbolsWriteBuilder.ContainsKey(symbolAndWrite) && !maybeWritten)
                 {
                     SymbolsWriteBuilder.Add((symbol, operation), false);
                 }

@@ -16,15 +16,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges;
 [Method(Methods.TextDocumentDidChangeName)]
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-internal class DidChangeHandler() : ILspServiceDocumentRequestHandler<DidChangeTextDocumentParams, object?>
+internal class DidChangeHandler()
+    : ILspServiceDocumentRequestHandler<DidChangeTextDocumentParams, object?>
 {
     public bool MutatesSolutionState => true;
     public bool RequiresLSPSolution => false;
 
-    public TextDocumentIdentifier GetTextDocumentIdentifier(DidChangeTextDocumentParams request)
-        => request.TextDocument;
+    public TextDocumentIdentifier GetTextDocumentIdentifier(DidChangeTextDocumentParams request) =>
+        request.TextDocument;
 
-    public Task<object?> HandleRequestAsync(DidChangeTextDocumentParams request, RequestContext context, CancellationToken cancellationToken)
+    public Task<object?> HandleRequestAsync(
+        DidChangeTextDocumentParams request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         var text = context.GetTrackedDocumentSourceText(request.TextDocument.Uri);
 
@@ -33,7 +38,9 @@ internal class DidChangeHandler() : ILspServiceDocumentRequestHandler<DidChangeT
         // https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#didChangeTextDocumentParams
         // for more details.
         foreach (var change in request.ContentChanges)
-            text = text.WithChanges(ProtocolConversions.ContentChangeEventToTextChange(change, text));
+            text = text.WithChanges(
+                ProtocolConversions.ContentChangeEventToTextChange(change, text)
+            );
 
         context.UpdateTrackedDocument(request.TextDocument.Uri, text);
 

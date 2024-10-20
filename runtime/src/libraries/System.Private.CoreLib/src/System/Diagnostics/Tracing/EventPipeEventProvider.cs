@@ -18,12 +18,13 @@ namespace System.Diagnostics.Tracing
         }
 
         protected override unsafe void HandleEnableNotification(
-                                    EventProvider target,
-                                    byte* additionalData,
-                                    byte level,
-                                    long matchAnyKeywords,
-                                    long matchAllKeywords,
-                                    Interop.Advapi32.EVENT_FILTER_DESCRIPTOR* filterData)
+            EventProvider target,
+            byte* additionalData,
+            byte level,
+            long matchAnyKeywords,
+            long matchAllKeywords,
+            Interop.Advapi32.EVENT_FILTER_DESCRIPTOR* filterData
+        )
         {
             ulong id = 0;
             if (additionalData != null)
@@ -59,13 +60,29 @@ namespace System.Diagnostics.Tracing
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void Callback(byte* sourceId, int isEnabled, byte level,
-            long matchAnyKeywords, long matchAllKeywords, Interop.Advapi32.EVENT_FILTER_DESCRIPTOR* filterData, void* callbackContext)
+        private static unsafe void Callback(
+            byte* sourceId,
+            int isEnabled,
+            byte level,
+            long matchAnyKeywords,
+            long matchAllKeywords,
+            Interop.Advapi32.EVENT_FILTER_DESCRIPTOR* filterData,
+            void* callbackContext
+        )
         {
-            EventPipeEventProvider _this = (EventPipeEventProvider)GCHandle.FromIntPtr((IntPtr)callbackContext).Target!;
+            EventPipeEventProvider _this = (EventPipeEventProvider)
+                GCHandle.FromIntPtr((IntPtr)callbackContext).Target!;
             if (_this._eventProvider.TryGetTarget(out EventProvider? target))
             {
-                _this.ProviderCallback(target, sourceId, isEnabled, level, matchAnyKeywords, matchAllKeywords, filterData);
+                _this.ProviderCallback(
+                    target,
+                    sourceId,
+                    isEnabled,
+                    level,
+                    matchAnyKeywords,
+                    matchAllKeywords,
+                    filterData
+                );
             }
         }
 
@@ -75,7 +92,11 @@ namespace System.Diagnostics.Tracing
             Debug.Assert(!_gcHandle.IsAllocated);
             _gcHandle = GCHandle.Alloc(this);
 
-            _provHandle = EventPipeInternal.CreateProvider(eventSource.Name, &Callback, (void*)GCHandle.ToIntPtr(_gcHandle));
+            _provHandle = EventPipeInternal.CreateProvider(
+                eventSource.Name,
+                &Callback,
+                (void*)GCHandle.ToIntPtr(_gcHandle)
+            );
             if (_provHandle == 0)
             {
                 // Unable to create the provider.
@@ -105,13 +126,20 @@ namespace System.Diagnostics.Tracing
             Guid* activityId,
             Guid* relatedActivityId,
             int userDataCount,
-            EventProvider.EventData* userData)
+            EventProvider.EventData* userData
+        )
         {
             if (eventHandle != IntPtr.Zero)
             {
                 if (userDataCount == 0)
                 {
-                    EventPipeInternal.WriteEventData(eventHandle, null, 0, activityId, relatedActivityId);
+                    EventPipeInternal.WriteEventData(
+                        eventHandle,
+                        null,
+                        0,
+                        activityId,
+                        relatedActivityId
+                    );
                     return EventProvider.WriteEventErrorCode.NoError;
                 }
 
@@ -124,27 +152,54 @@ namespace System.Diagnostics.Tracing
                     userDataCount -= 3;
                     Debug.Assert(userDataCount >= 0);
                 }
-                EventPipeInternal.WriteEventData(eventHandle, userData, (uint)userDataCount, activityId, relatedActivityId);
+                EventPipeInternal.WriteEventData(
+                    eventHandle,
+                    userData,
+                    (uint)userDataCount,
+                    activityId,
+                    relatedActivityId
+                );
             }
 
             return EventProvider.WriteEventErrorCode.NoError;
         }
 
         // Get or set the per-thread activity ID.
-        internal override int ActivityIdControl(Interop.Advapi32.ActivityControl controlCode, ref Guid activityId)
+        internal override int ActivityIdControl(
+            Interop.Advapi32.ActivityControl controlCode,
+            ref Guid activityId
+        )
         {
             return EventActivityIdControl(controlCode, ref activityId);
         }
 
         // Define an EventPipeEvent handle.
-        internal override unsafe IntPtr DefineEventHandle(uint eventID, string eventName, long keywords, uint eventVersion, uint level,
-            byte* pMetadata, uint metadataLength)
+        internal override unsafe IntPtr DefineEventHandle(
+            uint eventID,
+            string eventName,
+            long keywords,
+            uint eventVersion,
+            uint level,
+            byte* pMetadata,
+            uint metadataLength
+        )
         {
-            return EventPipeInternal.DefineEvent(_provHandle, eventID, keywords, eventVersion, level, pMetadata, metadataLength);
+            return EventPipeInternal.DefineEvent(
+                _provHandle,
+                eventID,
+                keywords,
+                eventVersion,
+                level,
+                pMetadata,
+                metadataLength
+            );
         }
 
         // Get or set the per-thread activity ID.
-        internal static int EventActivityIdControl(Interop.Advapi32.ActivityControl controlCode, ref Guid activityId)
+        internal static int EventActivityIdControl(
+            Interop.Advapi32.ActivityControl controlCode,
+            ref Guid activityId
+        )
         {
             return EventPipeInternal.EventActivityIdControl((uint)controlCode, ref activityId);
         }

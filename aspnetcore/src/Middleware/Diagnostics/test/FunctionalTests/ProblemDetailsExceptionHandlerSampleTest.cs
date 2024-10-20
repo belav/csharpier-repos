@@ -3,15 +3,18 @@
 
 using System.Net;
 using System.Net.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Net.Http.Json;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.AspNetCore.Diagnostics.FunctionalTests;
 
-public class ProblemDetailsExceptionHandlerSampleTest : IClassFixture<TestFixture<ExceptionHandlerSample.StartupWithProblemDetails>>
+public class ProblemDetailsExceptionHandlerSampleTest
+    : IClassFixture<TestFixture<ExceptionHandlerSample.StartupWithProblemDetails>>
 {
-    public ProblemDetailsExceptionHandlerSampleTest(TestFixture<ExceptionHandlerSample.StartupWithProblemDetails> fixture)
+    public ProblemDetailsExceptionHandlerSampleTest(
+        TestFixture<ExceptionHandlerSample.StartupWithProblemDetails> fixture
+    )
     {
         Client = fixture.Client;
     }

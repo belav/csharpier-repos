@@ -20,16 +20,12 @@ namespace System.ServiceModel.Channels
 
         public CookieContainer CookieContainer
         {
-            get
-            {
-                return this.cookieContainer;
-            }
-
+            get { return this.cookieContainer; }
             set
             {
                 this.IsInitialized = true;
                 this.cookieContainer = value;
             }
         }
-    } 
+    }
 }

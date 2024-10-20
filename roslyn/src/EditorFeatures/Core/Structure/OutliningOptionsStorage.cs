@@ -8,6 +8,7 @@ namespace Microsoft.CodeAnalysis.Structure
 {
     internal static class OutliningOptionsStorage
     {
-        public static readonly PerLanguageOption2<bool> Outlining = new("dotnet_enter_outlining_mode_on_file_open", defaultValue: true);
+        public static readonly PerLanguageOption2<bool> Outlining =
+            new("dotnet_enter_outlining_mode_on_file_open", defaultValue: true);
     }
 }

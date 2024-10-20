@@ -262,7 +262,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         [InlineData(CipherMode.CFB, 8)]
         [InlineData(CipherMode.CFB, 64)]
         [InlineData(CipherMode.ECB, 0)]
-        public static void EncryptorReuse_LeadsToSameResults(CipherMode cipherMode, int feedbackSize)
+        public static void EncryptorReuse_LeadsToSameResults(
+            CipherMode cipherMode,
+            int feedbackSize
+        )
         {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
@@ -292,7 +295,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         [InlineData(CipherMode.CFB, 8)]
         [InlineData(CipherMode.CFB, 64)]
         [InlineData(CipherMode.ECB, 0)]
-        public static void DecryptorReuse_LeadsToSameResults(CipherMode cipherMode, int feedbackSize)
+        public static void DecryptorReuse_LeadsToSameResults(
+            CipherMode cipherMode,
+            int feedbackSize
+        )
         {
             // AppleCCCryptor does not allow calling Reset on CFB cipher.
             // this test validates that the behavior is taken into consideration.
@@ -457,11 +463,22 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             );
         }
 
-        private static byte[] TripleDESEncryptDirectKey(TripleDES tdes, byte[] key, byte[] iv, byte[] plainBytes)
+        private static byte[] TripleDESEncryptDirectKey(
+            TripleDES tdes,
+            byte[] key,
+            byte[] iv,
+            byte[] plainBytes
+        )
         {
             using (MemoryStream output = new MemoryStream())
             using (ICryptoTransform encryptor = tdes.CreateEncryptor(key, iv))
-            using (CryptoStream cryptoStream = new CryptoStream(output, encryptor, CryptoStreamMode.Write))
+            using (
+                CryptoStream cryptoStream = new CryptoStream(
+                    output,
+                    encryptor,
+                    CryptoStreamMode.Write
+                )
+            )
             {
                 cryptoStream.Write(plainBytes, 0, plainBytes.Length);
                 cryptoStream.FlushFinalBlock();
@@ -470,11 +487,22 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             }
         }
 
-        private static byte[] TripleDESDecryptDirectKey(TripleDES tdes, byte[] key, byte[] iv, byte[] cipherBytes)
+        private static byte[] TripleDESDecryptDirectKey(
+            TripleDES tdes,
+            byte[] key,
+            byte[] iv,
+            byte[] cipherBytes
+        )
         {
             using (MemoryStream output = new MemoryStream())
             using (ICryptoTransform decryptor = tdes.CreateDecryptor(key, iv))
-            using (CryptoStream cryptoStream = new CryptoStream(output, decryptor, CryptoStreamMode.Write))
+            using (
+                CryptoStream cryptoStream = new CryptoStream(
+                    output,
+                    decryptor,
+                    CryptoStreamMode.Write
+                )
+            )
             {
                 cryptoStream.Write(cipherBytes, 0, cipherBytes.Length);
                 cryptoStream.FlushFinalBlock();
@@ -490,7 +518,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             byte[] iv,
             byte[] plainBytes,
             byte[] cipherBytes,
-            int? feedbackSize = default)
+            int? feedbackSize = default
+        )
         {
             byte[] liveEncryptBytes;
             byte[] liveDecryptBytes;
@@ -523,8 +552,18 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 }
                 else if (cipherMode == CipherMode.CFB)
                 {
-                    liveOneShotDecryptBytes = tdes.DecryptCfb(cipherBytes, iv, paddingMode, feedbackSizeInBits: feedbackSize.Value);
-                    liveOneShotEncryptBytes = tdes.EncryptCfb(plainBytes, iv, paddingMode, feedbackSizeInBits: feedbackSize.Value);
+                    liveOneShotDecryptBytes = tdes.DecryptCfb(
+                        cipherBytes,
+                        iv,
+                        paddingMode,
+                        feedbackSizeInBits: feedbackSize.Value
+                    );
+                    liveOneShotEncryptBytes = tdes.EncryptCfb(
+                        plainBytes,
+                        iv,
+                        paddingMode,
+                        feedbackSizeInBits: feedbackSize.Value
+                    );
                 }
 
                 if (liveOneShotDecryptBytes is not null)
@@ -543,10 +582,26 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         }
 
         [Theory]
-        [InlineData(192, "e56f72478c7479d169d54c0548b744af5b53efb1cdd26037", "c5629363d957054eba793093b83739bb78711db221a82379")]
-        [InlineData(128, "1387b981dbb40f34b915c4ed89fd681a740d3b4869c0b575", "c5629363d957054eba793093b83739bb")]
-        [InlineData(192, "1387b981dbb40f34b915c4ed89fd681a740d3b4869c0b575", "c5629363d957054eba793093b83739bbc5629363d957054e")]
-        public static void TripleDESRoundTripNoneECB(int keySize, string expectedCipherHex, string keyHex)
+        [InlineData(
+            192,
+            "e56f72478c7479d169d54c0548b744af5b53efb1cdd26037",
+            "c5629363d957054eba793093b83739bb78711db221a82379"
+        )]
+        [InlineData(
+            128,
+            "1387b981dbb40f34b915c4ed89fd681a740d3b4869c0b575",
+            "c5629363d957054eba793093b83739bb"
+        )]
+        [InlineData(
+            192,
+            "1387b981dbb40f34b915c4ed89fd681a740d3b4869c0b575",
+            "c5629363d957054eba793093b83739bbc5629363d957054e"
+        )]
+        public static void TripleDESRoundTripNoneECB(
+            int keySize,
+            string expectedCipherHex,
+            string keyHex
+        )
         {
             byte[] key = keyHex.HexToByteArray();
 
@@ -558,22 +613,40 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 alg.Padding = PaddingMode.None;
                 alg.Mode = CipherMode.ECB;
 
-                byte[] plainText = "de7d2dddea96b691e979e647dc9d3ca27d7f1ad673ca9570".HexToByteArray();
+                byte[] plainText =
+                    "de7d2dddea96b691e979e647dc9d3ca27d7f1ad673ca9570".HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
                 byte[] expectedCipher = expectedCipherHex.HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "de7d2dddea96b691e979e647dc9d3ca27d7f1ad673ca9570".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "de7d2dddea96b691e979e647dc9d3ca27d7f1ad673ca9570".HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
 
         [Theory]
-        [InlineData(192, "dea36279600f19c602b6ed9bf3ffdac5ebf25c1c470eb61c", "b43eaf0260813fb47c87ae073a146006d359ad04061eb0e6")]
-        [InlineData(128, "a25e55381f0cc45541741b9ce6e96b7799aa1e0db70780f7", "b43eaf0260813fb47c87ae073a146006")]
-        [InlineData(192, "a25e55381f0cc45541741b9ce6e96b7799aa1e0db70780f7", "b43eaf0260813fb47c87ae073a146006b43eaf0260813fb4")]
-        public static void TripleDESRoundTripNoneCBC(int keySize, string expectedCipherHex, string keyHex)
+        [InlineData(
+            192,
+            "dea36279600f19c602b6ed9bf3ffdac5ebf25c1c470eb61c",
+            "b43eaf0260813fb47c87ae073a146006d359ad04061eb0e6"
+        )]
+        [InlineData(
+            128,
+            "a25e55381f0cc45541741b9ce6e96b7799aa1e0db70780f7",
+            "b43eaf0260813fb47c87ae073a146006"
+        )]
+        [InlineData(
+            192,
+            "a25e55381f0cc45541741b9ce6e96b7799aa1e0db70780f7",
+            "b43eaf0260813fb47c87ae073a146006b43eaf0260813fb4"
+        )]
+        public static void TripleDESRoundTripNoneCBC(
+            int keySize,
+            string expectedCipherHex,
+            string keyHex
+        )
         {
             byte[] key = keyHex.HexToByteArray();
             byte[] iv = "5fbc5bc21b8597d8".HexToByteArray();
@@ -587,22 +660,40 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 alg.Padding = PaddingMode.None;
                 alg.Mode = CipherMode.CBC;
 
-                byte[] plainText = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] plainText =
+                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
                 byte[] expectedCipher = expectedCipherHex.HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "79a86903608e133e020e1dc68c9835250c2f17b0ebeed91b".HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
 
         [Theory]
-        [InlineData(192, "149ec32f558b27c7e4151e340d8184f18b4e25d2518f69d9", "9da5b265179d65f634dfc95513f25094411e51bb3be877ef")]
-        [InlineData(128, "02ac5db31cfada874f6042c4e92b09175fd08e93a20f936b", "9da5b265179d65f634dfc95513f25094")]
-        [InlineData(192, "02ac5db31cfada874f6042c4e92b09175fd08e93a20f936b", "9da5b265179d65f634dfc95513f250949da5b265179d65f6")]
-        public static void TripleDESRoundTripZerosECB(int keySize, string expectedCipherHex, string keyHex)
+        [InlineData(
+            192,
+            "149ec32f558b27c7e4151e340d8184f18b4e25d2518f69d9",
+            "9da5b265179d65f634dfc95513f25094411e51bb3be877ef"
+        )]
+        [InlineData(
+            128,
+            "02ac5db31cfada874f6042c4e92b09175fd08e93a20f936b",
+            "9da5b265179d65f634dfc95513f25094"
+        )]
+        [InlineData(
+            192,
+            "02ac5db31cfada874f6042c4e92b09175fd08e93a20f936b",
+            "9da5b265179d65f634dfc95513f250949da5b265179d65f6"
+        )]
+        public static void TripleDESRoundTripZerosECB(
+            int keySize,
+            string expectedCipherHex,
+            string keyHex
+        )
         {
             byte[] key = keyHex.HexToByteArray();
 
@@ -620,7 +711,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8000000".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8000000".HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
@@ -653,10 +745,26 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         }
 
         [Theory]
-        [InlineData(192, "149ec32f558b27c7e4151e340d8184f1c90f0a499e20fda9", "9da5b265179d65f634dfc95513f25094411e51bb3be877ef")]
-        [InlineData(128, "02ac5db31cfada874f6042c4e92b091783620e54a1e75957", "9da5b265179d65f634dfc95513f25094")]
-        [InlineData(192, "02ac5db31cfada874f6042c4e92b091783620e54a1e75957", "9da5b265179d65f634dfc95513f250949da5b265179d65f6")]
-        public static void TripleDESRoundTripANSIX923ECB(int keySize, string expectedCipherHex, string keyHex)
+        [InlineData(
+            192,
+            "149ec32f558b27c7e4151e340d8184f1c90f0a499e20fda9",
+            "9da5b265179d65f634dfc95513f25094411e51bb3be877ef"
+        )]
+        [InlineData(
+            128,
+            "02ac5db31cfada874f6042c4e92b091783620e54a1e75957",
+            "9da5b265179d65f634dfc95513f25094"
+        )]
+        [InlineData(
+            192,
+            "02ac5db31cfada874f6042c4e92b091783620e54a1e75957",
+            "9da5b265179d65f634dfc95513f250949da5b265179d65f6"
+        )]
+        public static void TripleDESRoundTripANSIX923ECB(
+            int keySize,
+            string expectedCipherHex,
+            string keyHex
+        )
         {
             byte[] key = keyHex.HexToByteArray();
 
@@ -675,7 +783,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8".HexToByteArray();
                 Assert.Equal<byte>(plainText, decrypted);
             }
         }
@@ -694,12 +803,14 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 byte[] plainText = "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8".HexToByteArray();
                 byte[] cipher = alg.Encrypt(plainText);
 
-                byte[] expectedCipher = "149ec32f558b27c7e4151e340d8184f1c90f0a499e20fda9".HexToByteArray();
+                byte[] expectedCipher =
+                    "149ec32f558b27c7e4151e340d8184f1c90f0a499e20fda9".HexToByteArray();
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 alg.Padding = PaddingMode.Zeros;
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "77a8b2efb45addb38d7ef3aa9e6ab5d71957445ab8".HexToByteArray();
 
                 // They should not decrypt to the same value
                 Assert.NotEqual<byte>(plainText, decrypted);
@@ -707,10 +818,26 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
         }
 
         [Theory]
-        [InlineData(192, "65f3dc211876a9daad238aa7d0c7ed7a3662296faf77dff9", "5e970c0d2323d53b28fa3de507d6d20f9f0cd97123398b4d")]
-        [InlineData(128, "2f55ff6bd8270f1d68dcb342bb674f914d9e1c0e61017a77", "5e970c0d2323d53b28fa3de507d6d20f")]
-        [InlineData(192, "2f55ff6bd8270f1d68dcb342bb674f914d9e1c0e61017a77", "5e970c0d2323d53b28fa3de507d6d20f5e970c0d2323d53b")]
-        public static void TripleDESRoundTripZerosCBC(int keySize, string expectedCipherHex, string keyHex)
+        [InlineData(
+            192,
+            "65f3dc211876a9daad238aa7d0c7ed7a3662296faf77dff9",
+            "5e970c0d2323d53b28fa3de507d6d20f9f0cd97123398b4d"
+        )]
+        [InlineData(
+            128,
+            "2f55ff6bd8270f1d68dcb342bb674f914d9e1c0e61017a77",
+            "5e970c0d2323d53b28fa3de507d6d20f"
+        )]
+        [InlineData(
+            192,
+            "2f55ff6bd8270f1d68dcb342bb674f914d9e1c0e61017a77",
+            "5e970c0d2323d53b28fa3de507d6d20f5e970c0d2323d53b"
+        )]
+        public static void TripleDESRoundTripZerosCBC(
+            int keySize,
+            string expectedCipherHex,
+            string keyHex
+        )
         {
             byte[] key = keyHex.HexToByteArray();
             byte[] iv = "95498b5bf570f4c8".HexToByteArray();
@@ -730,16 +857,33 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "f9e9a1385bf3bd056d6a06eac662736891bd3e6837000000".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "f9e9a1385bf3bd056d6a06eac662736891bd3e6837000000".HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
 
         [Theory]
-        [InlineData(192, "7b8d982ee0c14821daf1b8cf4e407c2eb328627b696ac36e", "155425f12109cd89378795a4ca337b3264689dca497ba2fa")]
-        [InlineData(128, "ce7daa4723c4f880fb44c2809821fc2183b46f0c32084620", "155425f12109cd89378795a4ca337b32")]
-        [InlineData(192, "ce7daa4723c4f880fb44c2809821fc2183b46f0c32084620", "155425f12109cd89378795a4ca337b32155425f12109cd89")]
-        public static void TripleDESRoundTripPKCS7ECB(int keySize, string expectedCipherHex, string keyHex)
+        [InlineData(
+            192,
+            "7b8d982ee0c14821daf1b8cf4e407c2eb328627b696ac36e",
+            "155425f12109cd89378795a4ca337b3264689dca497ba2fa"
+        )]
+        [InlineData(
+            128,
+            "ce7daa4723c4f880fb44c2809821fc2183b46f0c32084620",
+            "155425f12109cd89378795a4ca337b32"
+        )]
+        [InlineData(
+            192,
+            "ce7daa4723c4f880fb44c2809821fc2183b46f0c32084620",
+            "155425f12109cd89378795a4ca337b32155425f12109cd89"
+        )]
+        public static void TripleDESRoundTripPKCS7ECB(
+            int keySize,
+            string expectedCipherHex,
+            string keyHex
+        )
         {
             byte[] key = keyHex.HexToByteArray();
 
@@ -757,16 +901,33 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "5bd3c4e16a723a17ac60dd0efdb158e269cddfd0fa".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "5bd3c4e16a723a17ac60dd0efdb158e269cddfd0fa".HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
 
         [Theory]
-        [InlineData(192, "446f57875e107702afde16b57eaf250b87b8110bef29af89", "6b42da08f93e819fbd26fce0785b0eec3d0cb6bfa053c505")]
-        [InlineData(128, "ebf995606ceceddf5c90a7302521bc1f6d31f330969cb768", "6b42da08f93e819fbd26fce0785b0eec")]
-        [InlineData(192, "ebf995606ceceddf5c90a7302521bc1f6d31f330969cb768", "6b42da08f93e819fbd26fce0785b0eec6b42da08f93e819f")]
-        public static void TripleDESRoundTripPKCS7CBC(int keySize, string expectedCipherHex, string keyHex)
+        [InlineData(
+            192,
+            "446f57875e107702afde16b57eaf250b87b8110bef29af89",
+            "6b42da08f93e819fbd26fce0785b0eec3d0cb6bfa053c505"
+        )]
+        [InlineData(
+            128,
+            "ebf995606ceceddf5c90a7302521bc1f6d31f330969cb768",
+            "6b42da08f93e819fbd26fce0785b0eec"
+        )]
+        [InlineData(
+            192,
+            "ebf995606ceceddf5c90a7302521bc1f6d31f330969cb768",
+            "6b42da08f93e819fbd26fce0785b0eec6b42da08f93e819f"
+        )]
+        public static void TripleDESRoundTripPKCS7CBC(
+            int keySize,
+            string expectedCipherHex,
+            string keyHex
+        )
         {
             byte[] key = keyHex.HexToByteArray();
             byte[] iv = "8fc67ce5e7f28cde".HexToByteArray();
@@ -786,7 +947,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 Assert.Equal<byte>(expectedCipher, cipher);
 
                 byte[] decrypted = alg.Decrypt(cipher);
-                byte[] expectedDecrypted = "e867f915e275eab27d6951165d26dec6dd0acafcfc".HexToByteArray();
+                byte[] expectedDecrypted =
+                    "e867f915e275eab27d6951165d26dec6dd0acafcfc".HexToByteArray();
                 Assert.Equal<byte>(expectedDecrypted, decrypted);
             }
         }
@@ -813,8 +975,14 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
 
                 Assert.Equal(3 * (alg.BlockSize / 8), outputOffset);
                 string outputAsHex = output.ByteArrayToHex();
-                Assert.NotEqual(new string('0', outputOffset * 2), outputAsHex.Substring(0, outputOffset * 2));
-                Assert.Equal(new string('0', (output.Length - outputOffset) * 2), outputAsHex.Substring(outputOffset * 2));
+                Assert.NotEqual(
+                    new string('0', outputOffset * 2),
+                    outputAsHex.Substring(0, outputOffset * 2)
+                );
+                Assert.Equal(
+                    new string('0', (output.Length - outputOffset) * 2),
+                    outputAsHex.Substring(outputOffset * 2)
+                );
             }
         }
 
@@ -845,7 +1013,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
 
                 Assert.Throws(
                     exceptionType,
-                    () => xform.TransformBlock(input, 0, input.Length, output, 0));
+                    () => xform.TransformBlock(input, 0, input.Length, output, 0)
+                );
 
                 Assert.Equal(new byte[output.Length], output);
             }
@@ -869,7 +1038,13 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             using (ICryptoTransform xform = alg.CreateDecryptor(key, iv))
             {
                 Assert.Equal(2 * alg.BlockSize, (outputBytes.Length - outputPadding) * 8);
-                outputOffset += xform.TransformBlock(input, 0, input.Length, outputBytes, outputOffset);
+                outputOffset += xform.TransformBlock(
+                    input,
+                    0,
+                    input.Length,
+                    outputBytes,
+                    outputOffset
+                );
                 byte[] overflow = xform.TransformFinalBlock(Array.Empty<byte>(), 0, 0);
                 Buffer.BlockCopy(overflow, 0, outputBytes, outputOffset, overflow.Length);
                 outputOffset += overflow.Length;

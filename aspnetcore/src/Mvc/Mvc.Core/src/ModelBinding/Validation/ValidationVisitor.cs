@@ -32,7 +32,8 @@ public class ValidationVisitor
         IModelValidatorProvider validatorProvider,
         ValidatorCache validatorCache,
         IModelMetadataProvider metadataProvider,
-        ValidationStateDictionary? validationState)
+        ValidationStateDictionary? validationState
+    )
     {
         ArgumentNullException.ThrowIfNull(actionContext);
         ArgumentNullException.ThrowIfNull(validatorProvider);
@@ -154,8 +155,12 @@ public class ValidationVisitor
     /// <param name="model">The model object.</param>
     /// <param name="alwaysValidateAtTopLevel">If <c>true</c>, applies validation rules even if the top-level value is <c>null</c>.</param>
     /// <returns><c>true</c> if the object is valid, otherwise <c>false</c>.</returns>
-    public virtual bool Validate(ModelMetadata? metadata, string? key, object? model, bool alwaysValidateAtTopLevel)
-        => Validate(metadata, key, model, alwaysValidateAtTopLevel, container: null);
+    public virtual bool Validate(
+        ModelMetadata? metadata,
+        string? key,
+        object? model,
+        bool alwaysValidateAtTopLevel
+    ) => Validate(metadata, key, model, alwaysValidateAtTopLevel, container: null);
 
     /// <summary>
     /// Validates a object.
@@ -166,11 +171,19 @@ public class ValidationVisitor
     /// <param name="alwaysValidateAtTopLevel">If <c>true</c>, applies validation rules even if the top-level value is <c>null</c>.</param>
     /// <param name="container">The model container.</param>
     /// <returns><c>true</c> if the object is valid, otherwise <c>false</c>.</returns>
-    public virtual bool Validate(ModelMetadata? metadata, string? key, object? model, bool alwaysValidateAtTopLevel, object? container)
+    public virtual bool Validate(
+        ModelMetadata? metadata,
+        string? key,
+        object? model,
+        bool alwaysValidateAtTopLevel,
+        object? container
+    )
     {
         if (container != null && metadata!.MetadataKind != ModelMetadataKind.Property)
         {
-            throw new ArgumentException(Resources.FormatValidationVisitor_ContainerCannotBeSpecified(metadata.MetadataKind));
+            throw new ArgumentException(
+                Resources.FormatValidationVisitor_ContainerCannotBeSpecified(metadata.MetadataKind)
+            );
         }
 
         if (model == null && key != null && !alwaysValidateAtTopLevel)
@@ -218,7 +231,8 @@ public class ValidationVisitor
                     Metadata!,
                     MetadataProvider,
                     Container,
-                    Model);
+                    Model
+                );
 
                 var results = new List<ModelValidationResult>();
                 for (var i = 0; i < count; i++)
@@ -299,20 +313,31 @@ public class ValidationVisitor
             switch (metadata.MetadataKind)
             {
                 case ModelMetadataKind.Property:
-                    message = Resources.FormatValidationVisitor_ExceededMaxPropertyDepth(nameof(ValidationVisitor), MaxValidationDepth, metadata.Name, metadata.ContainerType);
+                    message = Resources.FormatValidationVisitor_ExceededMaxPropertyDepth(
+                        nameof(ValidationVisitor),
+                        MaxValidationDepth,
+                        metadata.Name,
+                        metadata.ContainerType
+                    );
                     break;
 
                 default:
                     // Since the minimum depth is never 0, MetadataKind can never be Parameter. Consequently we only special case MetadataKind.Property.
-                    message = Resources.FormatValidationVisitor_ExceededMaxDepth(nameof(ValidationVisitor), MaxValidationDepth, metadata.ModelType);
+                    message = Resources.FormatValidationVisitor_ExceededMaxDepth(
+                        nameof(ValidationVisitor),
+                        MaxValidationDepth,
+                        metadata.ModelType
+                    );
                     break;
             }
 
-            message += " " + Resources.FormatValidationVisitor_ExceededMaxDepthFix(nameof(MvcOptions), nameof(MvcOptions.MaxValidationDepth));
-            throw new InvalidOperationException(message)
-            {
-                HelpLink = "https://aka.ms/AA21ue1",
-            };
+            message +=
+                " "
+                + Resources.FormatValidationVisitor_ExceededMaxDepthFix(
+                    nameof(MvcOptions),
+                    nameof(MvcOptions.MaxValidationDepth)
+                );
+            throw new InvalidOperationException(message) { HelpLink = "https://aka.ms/AA21ue1" };
         }
 
         var entry = GetValidationEntry(model);
@@ -333,8 +358,10 @@ public class ValidationVisitor
         }
         // If the metadata indicates that no validators exist AND the aggregate state for the key says that the model graph
         // is not invalid (i.e. is one of Unvalidated, Valid, or Skipped) we can safely mark the graph as valid.
-        else if (metadata.HasValidators == false &&
-            ModelState.GetFieldValidationState(key) != ModelValidationState.Invalid)
+        else if (
+            metadata.HasValidators == false
+            && ModelState.GetFieldValidationState(key) != ModelValidationState.Invalid
+        )
         {
             if (metadata.BoundConstructor != null)
             {
@@ -394,7 +421,10 @@ public class ValidationVisitor
 
         // Double-checking HasReachedMaxErrors just in case this model has no properties.
         // If validation has failed for any children, only validate the parent if ValidateComplexTypesIfChildValidationFails is true.
-        if ((isValid || ValidateComplexTypesIfChildValidationFails) && !ModelState.HasReachedMaxErrors)
+        if (
+            (isValid || ValidateComplexTypesIfChildValidationFails)
+            && !ModelState.HasReachedMaxErrors
+        )
         {
             isValid &= ValidateNode();
         }
@@ -512,7 +542,8 @@ public class ValidationVisitor
             string key,
             ModelMetadata metadata,
             object? model,
-            IValidationStrategy strategy)
+            IValidationStrategy strategy
+        )
         {
             var recursifier = new StateManager(visitor, null);
 

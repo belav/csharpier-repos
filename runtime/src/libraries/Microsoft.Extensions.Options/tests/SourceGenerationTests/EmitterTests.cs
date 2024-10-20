@@ -7,10 +7,10 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using SourceGenerators.Tests;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Options.Generators;
 using Microsoft.Shared.Data.Validation;
+using SourceGenerators.Tests;
 using Xunit;
 
 namespace Microsoft.Gen.OptionsValidation.Test;
@@ -31,16 +31,18 @@ public class EmitterTests
 #endif
         }
 
-        var (d, r) = await RoslynTestUtils.RunGenerator(
-            new OptionsValidatorGenerator(),
-            new[]
-            {
-                Assembly.GetAssembly(typeof(RequiredAttribute))!,
-                Assembly.GetAssembly(typeof(TimeSpanAttribute))!,
-                Assembly.GetAssembly(typeof(OptionsValidatorAttribute))!,
-                Assembly.GetAssembly(typeof(IValidateOptions<object>))!,
-            },
-            sources)
+        var (d, r) = await RoslynTestUtils
+            .RunGenerator(
+                new OptionsValidatorGenerator(),
+                new[]
+                {
+                    Assembly.GetAssembly(typeof(RequiredAttribute))!,
+                    Assembly.GetAssembly(typeof(TimeSpanAttribute))!,
+                    Assembly.GetAssembly(typeof(OptionsValidatorAttribute))!,
+                    Assembly.GetAssembly(typeof(IValidateOptions<object>))!,
+                },
+                sources
+            )
             .ConfigureAwait(false);
 
         Assert.Empty(d);

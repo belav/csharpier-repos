@@ -23,63 +23,113 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [ExportCompletionProvider(nameof(PartialTypeCompletionProvider), LanguageNames.CSharp)]
     [ExtensionOrder(After = nameof(PartialMethodCompletionProvider))]
     [Shared]
-    internal partial class PartialTypeCompletionProvider : AbstractPartialTypeCompletionProvider<CSharpSyntaxContext>
+    internal partial class PartialTypeCompletionProvider
+        : AbstractPartialTypeCompletionProvider<CSharpSyntaxContext>
     {
         private const string InsertionTextOnLessThan = nameof(InsertionTextOnLessThan);
 
         private static readonly SymbolDisplayFormat _symbolFormatWithGenerics =
-            new(globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            new(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                genericsOptions:
-                    SymbolDisplayGenericsOptions.IncludeTypeParameters |
-                    SymbolDisplayGenericsOptions.IncludeVariance,
-                miscellaneousOptions:
-                    SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers |
-                    SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         private static readonly SymbolDisplayFormat _symbolFormatWithoutGenerics =
             _symbolFormatWithGenerics.WithGenericsOptions(SymbolDisplayGenericsOptions.None);
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PartialTypeCompletionProvider()
-        {
-        }
+        public PartialTypeCompletionProvider() { }
 
         internal override string Language => LanguageNames.CSharp;
 
-        public override bool IsInsertionTrigger(SourceText text, int characterPosition, CompletionOptions options)
-            => text[characterPosition] == ' ' ||
-               options.TriggerOnTypingLetters && CompletionUtilities.IsStartingNewWord(text, characterPosition);
+        public override bool IsInsertionTrigger(
+            SourceText text,
+            int characterPosition,
+            CompletionOptions options
+        ) =>
+            text[characterPosition] == ' '
+            || options.TriggerOnTypingLetters
+                && CompletionUtilities.IsStartingNewWord(text, characterPosition);
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = CompletionUtilities.SpaceTriggerCharacter;
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            CompletionUtilities.SpaceTriggerCharacter;
 
-        protected override SyntaxNode? GetPartialTypeSyntaxNode(SyntaxTree tree, int position, CancellationToken cancellationToken)
-            => tree.IsPartialTypeDeclarationNameContext(position, cancellationToken, out var declaration) ? declaration : null;
+        protected override SyntaxNode? GetPartialTypeSyntaxNode(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            tree.IsPartialTypeDeclarationNameContext(
+                position,
+                cancellationToken,
+                out var declaration
+            )
+                ? declaration
+                : null;
 
-        protected override (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(INamedTypeSymbol symbol, CSharpSyntaxContext context)
+        protected override (
+            string displayText,
+            string suffix,
+            string insertionText
+        ) GetDisplayAndSuffixAndInsertionText(INamedTypeSymbol symbol, CSharpSyntaxContext context)
         {
-            var displayAndInsertionText = symbol.ToMinimalDisplayString(context.SemanticModel, context.Position, _symbolFormatWithGenerics);
+            var displayAndInsertionText = symbol.ToMinimalDisplayString(
+                context.SemanticModel,
+                context.Position,
+                _symbolFormatWithGenerics
+            );
             return (displayAndInsertionText, "", displayAndInsertionText);
         }
 
-        protected override IEnumerable<INamedTypeSymbol>? LookupCandidateSymbols(CSharpSyntaxContext context, INamedTypeSymbol declaredSymbol, CancellationToken cancellationToken)
+        protected override IEnumerable<INamedTypeSymbol>? LookupCandidateSymbols(
+            CSharpSyntaxContext context,
+            INamedTypeSymbol declaredSymbol,
+            CancellationToken cancellationToken
+        )
         {
-            var candidates = base.LookupCandidateSymbols(context, declaredSymbol, cancellationToken);
+            var candidates = base.LookupCandidateSymbols(
+                context,
+                declaredSymbol,
+                cancellationToken
+            );
 
             // The base class applies a broad filter when finding candidates, but since C# requires
             // that all parts have the "partial" modifier, the results can be trimmed further here.
-            return candidates?.Where(symbol => symbol.DeclaringSyntaxReferences.Any(static (reference, cancellationToken) => IsPartialTypeDeclaration(reference.GetSyntax(cancellationToken)), cancellationToken));
+            return candidates?.Where(symbol =>
+                symbol.DeclaringSyntaxReferences.Any(
+                    static (reference, cancellationToken) =>
+                        IsPartialTypeDeclaration(reference.GetSyntax(cancellationToken)),
+                    cancellationToken
+                )
+            );
         }
 
-        private static bool IsPartialTypeDeclaration(SyntaxNode syntax)
-            => syntax is BaseTypeDeclarationSyntax declarationSyntax && declarationSyntax.Modifiers.Any(SyntaxKind.PartialKeyword);
+        private static bool IsPartialTypeDeclaration(SyntaxNode syntax) =>
+            syntax is BaseTypeDeclarationSyntax declarationSyntax
+            && declarationSyntax.Modifiers.Any(SyntaxKind.PartialKeyword);
 
-        protected override ImmutableArray<KeyValuePair<string, string>> GetProperties(INamedTypeSymbol symbol, CSharpSyntaxContext context)
-            => ImmutableArray.Create(new KeyValuePair<string, string>(InsertionTextOnLessThan, symbol.Name.EscapeIdentifier()));
+        protected override ImmutableArray<KeyValuePair<string, string>> GetProperties(
+            INamedTypeSymbol symbol,
+            CSharpSyntaxContext context
+        ) =>
+            ImmutableArray.Create(
+                new KeyValuePair<string, string>(
+                    InsertionTextOnLessThan,
+                    symbol.Name.EscapeIdentifier()
+                )
+            );
 
         public override async Task<TextChange?> GetTextChangeAsync(
-            Document document, CompletionItem selectedItem, char? ch, CancellationToken cancellationToken)
+            Document document,
+            CompletionItem selectedItem,
+            char? ch,
+            CancellationToken cancellationToken
+        )
         {
             if (ch == '<')
             {
@@ -89,7 +139,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
             }
 
-            return await base.GetTextChangeAsync(document, selectedItem, ch, cancellationToken).ConfigureAwait(false);
+            return await base.GetTextChangeAsync(document, selectedItem, ch, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

@@ -8,7 +8,10 @@ namespace System.Web.Http.Filters
 {
     public class ConfigurationFilterProvider : IFilterProvider
     {
-        public IEnumerable<FilterInfo> GetFilters(HttpConfiguration configuration, HttpActionDescriptor actionDescriptor)
+        public IEnumerable<FilterInfo> GetFilters(
+            HttpConfiguration configuration,
+            HttpActionDescriptor actionDescriptor
+        )
         {
             if (configuration == null)
             {

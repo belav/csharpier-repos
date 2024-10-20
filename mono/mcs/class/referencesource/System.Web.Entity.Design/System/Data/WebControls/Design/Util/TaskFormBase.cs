@@ -24,7 +24,6 @@ namespace System.Web.UI.Design.WebControls.Util
     /// </devdoc>
     internal abstract class TaskFormBase : DesignerForm
     {
-
         private System.Windows.Forms.Panel _taskPanel;
         private System.Windows.Forms.Label _bottomDividerLabel;
         private System.Windows.Forms.Panel _headerPanel;
@@ -43,10 +42,7 @@ namespace System.Web.UI.Design.WebControls.Util
 
         protected System.Windows.Forms.Label CaptionLabel
         {
-            get
-            {
-                return _captionLabel;
-            }
+            get { return _captionLabel; }
         }
 
         /// <devdoc>
@@ -59,10 +55,7 @@ namespace System.Web.UI.Design.WebControls.Util
 
         protected System.Windows.Forms.Panel TaskPanel
         {
-            get
-            {
-                return _taskPanel;
-            }
+            get { return _taskPanel; }
         }
 
         #region Designer generated code
@@ -72,7 +65,6 @@ namespace System.Web.UI.Design.WebControls.Util
         /// </summary>
         private void InitializeComponent()
         {
-
             this._taskPanel = new System.Windows.Forms.Panel();
             this._bottomDividerLabel = new System.Windows.Forms.Label();
             this._captionLabel = new System.Windows.Forms.Label();
@@ -82,31 +74,56 @@ namespace System.Web.UI.Design.WebControls.Util
             ((System.ComponentModel.ISupportInitialize)(this._glyphPictureBox)).BeginInit();
             this.SuspendLayout();
 
-            // 
+            //
             // _taskPanel
-            // 
-            this._taskPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._taskPanel.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        (
+                            (
+                                System.Windows.Forms.AnchorStyles.Top
+                                | System.Windows.Forms.AnchorStyles.Bottom
+                            ) | System.Windows.Forms.AnchorStyles.Left
+                        ) | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._taskPanel.Location = new System.Drawing.Point(0, 63);
             this._taskPanel.Name = "_taskPanel";
-            this._taskPanel.Size = new System.Drawing.Size(528, 319);            
+            this._taskPanel.Size = new System.Drawing.Size(528, 319);
             this._taskPanel.TabIndex = 30;
-            // 
+            //
             // _bottomDividerLabel
-            // 
-            this._bottomDividerLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._bottomDividerLabel.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        (
+                            System.Windows.Forms.AnchorStyles.Bottom
+                            | System.Windows.Forms.AnchorStyles.Left
+                        ) | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._bottomDividerLabel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this._bottomDividerLabel.Location = new System.Drawing.Point(0, 382);
             this._bottomDividerLabel.Name = "_bottomDividerLabel";
             this._bottomDividerLabel.Size = new System.Drawing.Size(572, 1);
             this._bottomDividerLabel.TabIndex = 40;
-            // 
+            //
             // _headerPanel
-            // 
-            this._headerPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._headerPanel.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        (
+                            System.Windows.Forms.AnchorStyles.Top
+                            | System.Windows.Forms.AnchorStyles.Left
+                        ) | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._headerPanel.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this._headerPanel.Controls.Add(this._glyphPictureBox);
             this._headerPanel.Controls.Add(this._captionLabel);
@@ -114,26 +131,34 @@ namespace System.Web.UI.Design.WebControls.Util
             this._headerPanel.Name = "_headerPanel";
             this._headerPanel.Size = new System.Drawing.Size(572, 63);
             this._headerPanel.TabIndex = 10;
-            // 
+            //
             // _glyphPictureBox
-            // 
+            //
             this._glyphPictureBox.Location = new System.Drawing.Point(0, 0);
             this._glyphPictureBox.Name = "_glyphPictureBox";
             this._glyphPictureBox.Size = new System.Drawing.Size(65, 63);
             this._glyphPictureBox.TabIndex = 20;
             this._glyphPictureBox.TabStop = false;
-            // 
+            //
             // _captionLabel
-            // 
-            this._captionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            //
+            this._captionLabel.Anchor = (
+                (System.Windows.Forms.AnchorStyles)(
+                    (
+                        (
+                            System.Windows.Forms.AnchorStyles.Top
+                            | System.Windows.Forms.AnchorStyles.Left
+                        ) | System.Windows.Forms.AnchorStyles.Right
+                    )
+                )
+            );
             this._captionLabel.Location = new System.Drawing.Point(71, 17);
             this._captionLabel.Name = "_captionLabel";
             this._captionLabel.Size = new System.Drawing.Size(487, 47);
             this._captionLabel.TabIndex = 10;
-            // 
+            //
             // TaskForm
-            // 
+            //
             this.ClientSize = new System.Drawing.Size(530, 423);
             this.Controls.Add(this._headerPanel);
             this.Controls.Add(this._bottomDividerLabel);
@@ -163,8 +188,12 @@ namespace System.Web.UI.Design.WebControls.Util
 
         private void UpdateFonts()
         {
-            _captionLabel.Font = new Font(Font.FontFamily, Font.Size + 2.0f, FontStyle.Bold, Font.Unit);
+            _captionLabel.Font = new Font(
+                Font.FontFamily,
+                Font.Size + 2.0f,
+                FontStyle.Bold,
+                Font.Unit
+            );
         }
     }
 }
-

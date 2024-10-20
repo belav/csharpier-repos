@@ -13,21 +13,34 @@ namespace System.DirectoryServices.AccountManagement
         //
         // Public constructors
         //
-        public ComputerPrincipal(PrincipalContext context) : base(context)
+        public ComputerPrincipal(PrincipalContext context)
+            : base(context)
         {
-            if (Context.ContextType == ContextType.ApplicationDirectory && this.GetType() == typeof(ComputerPrincipal))
+            if (
+                Context.ContextType == ContextType.ApplicationDirectory
+                && this.GetType() == typeof(ComputerPrincipal)
+            )
                 throw new InvalidOperationException(SR.ComputerInvalidForAppDirectoryStore);
 
             this.ContextRaw = context;
             this.unpersisted = true;
         }
 
-        public ComputerPrincipal(PrincipalContext context, string samAccountName, string password, bool enabled) : this(context)
+        public ComputerPrincipal(
+            PrincipalContext context,
+            string samAccountName,
+            string password,
+            bool enabled
+        )
+            : this(context)
         {
             if (samAccountName == null || password == null)
                 throw new ArgumentException(SR.NullArguments);
 
-            if (Context.ContextType == ContextType.ApplicationDirectory && this.GetType() == typeof(ComputerPrincipal))
+            if (
+                Context.ContextType == ContextType.ApplicationDirectory
+                && this.GetType() == typeof(ComputerPrincipal)
+            )
                 throw new InvalidOperationException(SR.ComputerInvalidForAppDirectoryStore);
 
             if (Context.ContextType != ContextType.ApplicationDirectory)
@@ -43,53 +56,94 @@ namespace System.DirectoryServices.AccountManagement
         //
 
         // ServicePrincipalNames
-        private PrincipalValueCollection<string> _servicePrincipalNames = new PrincipalValueCollection<string>();
+        private PrincipalValueCollection<string> _servicePrincipalNames =
+            new PrincipalValueCollection<string>();
         private LoadState _servicePrincipalNamesLoaded = LoadState.NotSet;
 
         public PrincipalValueCollection<string> ServicePrincipalNames
         {
             get
             {
-                return HandleGet<PrincipalValueCollection<string>>(ref _servicePrincipalNames, PropertyNames.ComputerServicePrincipalNames, ref _servicePrincipalNamesLoaded);
+                return HandleGet<PrincipalValueCollection<string>>(
+                    ref _servicePrincipalNames,
+                    PropertyNames.ComputerServicePrincipalNames,
+                    ref _servicePrincipalNamesLoaded
+                );
             }
         }
 
         //
         // Public methods
         //
-        public static new PrincipalSearchResult<ComputerPrincipal> FindByLockoutTime(PrincipalContext context, DateTime time, MatchType type)
+        public static new PrincipalSearchResult<ComputerPrincipal> FindByLockoutTime(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByLockoutTime<ComputerPrincipal>(context, time, type);
         }
 
-        public static new PrincipalSearchResult<ComputerPrincipal> FindByLogonTime(PrincipalContext context, DateTime time, MatchType type)
+        public static new PrincipalSearchResult<ComputerPrincipal> FindByLogonTime(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByLogonTime<ComputerPrincipal>(context, time, type);
         }
 
-        public static new PrincipalSearchResult<ComputerPrincipal> FindByExpirationTime(PrincipalContext context, DateTime time, MatchType type)
+        public static new PrincipalSearchResult<ComputerPrincipal> FindByExpirationTime(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByExpirationTime<ComputerPrincipal>(context, time, type);
         }
 
-        public static new PrincipalSearchResult<ComputerPrincipal> FindByBadPasswordAttempt(PrincipalContext context, DateTime time, MatchType type)
+        public static new PrincipalSearchResult<ComputerPrincipal> FindByBadPasswordAttempt(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByBadPasswordAttempt<ComputerPrincipal>(context, time, type);
         }
 
-        public static new PrincipalSearchResult<ComputerPrincipal> FindByPasswordSetTime(PrincipalContext context, DateTime time, MatchType type)
+        public static new PrincipalSearchResult<ComputerPrincipal> FindByPasswordSetTime(
+            PrincipalContext context,
+            DateTime time,
+            MatchType type
+        )
         {
             return FindByPasswordSetTime<ComputerPrincipal>(context, time, type);
         }
 
-        public static new ComputerPrincipal FindByIdentity(PrincipalContext context, string identityValue)
+        public static new ComputerPrincipal FindByIdentity(
+            PrincipalContext context,
+            string identityValue
+        )
         {
-            return (ComputerPrincipal)FindByIdentityWithType(context, typeof(ComputerPrincipal), identityValue);
+            return (ComputerPrincipal)FindByIdentityWithType(
+                context,
+                typeof(ComputerPrincipal),
+                identityValue
+            );
         }
 
-        public static new ComputerPrincipal FindByIdentity(PrincipalContext context, IdentityType identityType, string identityValue)
+        public static new ComputerPrincipal FindByIdentity(
+            PrincipalContext context,
+            IdentityType identityType,
+            string identityValue
+        )
         {
-            return (ComputerPrincipal)FindByIdentityWithType(context, typeof(ComputerPrincipal), identityType, identityValue);
+            return (ComputerPrincipal)FindByIdentityWithType(
+                context,
+                typeof(ComputerPrincipal),
+                identityType,
+                identityValue
+            );
         }
 
         //
@@ -112,7 +166,14 @@ namespace System.DirectoryServices.AccountManagement
         //
         internal override void LoadValueIntoProperty(string propertyName, object value)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "Computer", "LoadValueIntoProperty: name=" + propertyName + " value=" + (value == null ? "null" : value.ToString()));
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "Computer",
+                "LoadValueIntoProperty: name="
+                    + propertyName
+                    + " value="
+                    + (value == null ? "null" : value.ToString())
+            );
 
             switch (propertyName)
             {
@@ -134,7 +195,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns true if that property has changed since it was loaded, false otherwise.
         internal override bool GetChangeStatusForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "Computer", "GetChangeStatusForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "Computer",
+                "GetChangeStatusForProperty: name=" + propertyName
+            );
 
             return propertyName switch
             {
@@ -146,7 +211,11 @@ namespace System.DirectoryServices.AccountManagement
         // Given a property name, returns the current value for the property.
         internal override object GetValueForProperty(string propertyName)
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "Computer", "GetValueForProperty: name=" + propertyName);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "Computer",
+                "GetValueForProperty: name=" + propertyName
+            );
 
             return propertyName switch
             {

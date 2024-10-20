@@ -6,7 +6,7 @@
 // <owner current="true" primary="false">blained</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.SqlClient {
+namespace System.Data.SqlClient
+{
     public delegate void SqlRowsCopiedEventHandler(object sender, SqlRowsCopiedEventArgs e);
 }
-

@@ -33,8 +33,11 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         // Arrange
         var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
         var outputFile = "compiler/resources/BasicWebSite.Home.CSharp7View.html";
-        var expectedContent =
-            await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+        var expectedContent = await ResourceFile.ReadResourceAsync(
+            _resourcesAssembly,
+            outputFile,
+            sourceFile: false
+        );
 
         // Act
         var response = await Client.GetAsync("Home/CSharp7View");
@@ -44,7 +47,12 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(expectedMediaType, response.Content.Headers.ContentType);
 
-        ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+        ResourceFile.UpdateOrVerify(
+            _resourcesAssembly,
+            outputFile,
+            expectedContent,
+            responseContent
+        );
     }
 
     [Fact]
@@ -53,8 +61,11 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         // Arrange
         var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
         var outputFile = "compiler/resources/BasicWebSite.PassThrough.Index.html";
-        var expectedContent =
-            await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+        var expectedContent = await ResourceFile.ReadResourceAsync(
+            _resourcesAssembly,
+            outputFile,
+            sourceFile: false
+        );
 
         // Act
         var response = await Client.GetAsync("PassThrough/Index?value=123");
@@ -64,7 +75,12 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(expectedMediaType, response.Content.Headers.ContentType);
 
-        ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+        ResourceFile.UpdateOrVerify(
+            _resourcesAssembly,
+            outputFile,
+            expectedContent,
+            responseContent
+        );
     }
 
     [Theory]
@@ -76,8 +92,11 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         // Arrange
         var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
         var outputFile = "compiler/resources/BasicWebSite.Home.Index.html";
-        var expectedContent =
-            await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+        var expectedContent = await ResourceFile.ReadResourceAsync(
+            _resourcesAssembly,
+            outputFile,
+            sourceFile: false
+        );
 
         // Act
         // The host is not important as everything runs in memory and tests are isolated from each other.
@@ -88,7 +107,12 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(expectedMediaType, response.Content.Headers.ContentType);
 
-        ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+        ResourceFile.UpdateOrVerify(
+            _resourcesAssembly,
+            outputFile,
+            expectedContent,
+            responseContent
+        );
     }
 
     [Fact]
@@ -97,8 +121,11 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         // Arrange
         var expectedMediaType = MediaTypeHeaderValue.Parse("text/html; charset=utf-8");
         var outputFile = "compiler/resources/BasicWebSite.Home.PlainView.html";
-        var expectedContent =
-            await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+        var expectedContent = await ResourceFile.ReadResourceAsync(
+            _resourcesAssembly,
+            outputFile,
+            sourceFile: false
+        );
 
         // Act
         var response = await Client.GetAsync("http://localhost/Home/PlainView");
@@ -108,7 +135,12 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(expectedMediaType, response.Content.Headers.ContentType);
 
-        ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+        ResourceFile.UpdateOrVerify(
+            _resourcesAssembly,
+            outputFile,
+            expectedContent,
+            responseContent
+        );
     }
 
     [Fact]
@@ -116,8 +148,11 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     {
         // Arrange
         var outputFile = "compiler/resources/BasicWebSite.Home.ViewWithPrefixedAttributeValue.html";
-        var expectedContent =
-            await ResourceFile.ReadResourceAsync(_resourcesAssembly, outputFile, sourceFile: false);
+        var expectedContent = await ResourceFile.ReadResourceAsync(
+            _resourcesAssembly,
+            outputFile,
+            sourceFile: false
+        );
 
         // Act
         var response = await Client.GetAsync("Home/ViewWithPrefixedAttributeValue");
@@ -126,7 +161,12 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-        ResourceFile.UpdateOrVerify(_resourcesAssembly, outputFile, expectedContent, responseContent);
+        ResourceFile.UpdateOrVerify(
+            _resourcesAssembly,
+            outputFile,
+            expectedContent,
+            responseContent
+        );
     }
 
     [Fact]
@@ -181,7 +221,10 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         // Assert
         Assert.Equal(HttpStatusCode.Found, response.StatusCode);
         Assert.NotNull(response.Headers.Location);
-        Assert.Equal("https://localhost/Home/HttpsOnlyAction", response.Headers.Location.ToString());
+        Assert.Equal(
+            "https://localhost/Home/HttpsOnlyAction",
+            response.Headers.Location.ToString()
+        );
         Assert.Equal(0, response.Content.Headers.ContentLength);
 
         var responseBytes = await response.Content.ReadAsByteArrayAsync();
@@ -192,9 +235,9 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task ActionWithRequireHttps_ReturnsBadRequestResponse_ForNonHttpsNonGetRequests()
     {
         // Act
-        var response = await Client.SendAsync(new HttpRequestMessage(
-            HttpMethod.Post,
-            "http://localhost/Home/HttpsOnlyAction"));
+        var response = await Client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Post, "http://localhost/Home/HttpsOnlyAction")
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.Forbidden, response.StatusCode);
@@ -210,9 +253,9 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task ActionWithRequireHttps_AllowsHttpsRequests(string method)
     {
         // Act
-        var response = await Client.SendAsync(new HttpRequestMessage(
-            new HttpMethod(method),
-            "https://localhost/Home/HttpsOnlyAction"));
+        var response = await Client.SendAsync(
+            new HttpRequestMessage(new HttpMethod(method), "https://localhost/Home/HttpsOnlyAction")
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -223,7 +266,7 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     {
         // Arrange
         var expectedBody =
-@"<script type=""text/javascript"">
+            @"<script type=""text/javascript"">
     var json = {""id"":9000,""fullName"":""John \u003cb\u003eSmith\u003c/b\u003e""};
 </script>";
 
@@ -248,7 +291,8 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
             @"<script type=""text/javascript"">
     var json = {0};
 </script>",
-            json);
+            json
+        );
 
         // Act
         var response = await Client.GetAsync("Home/JsonHelperWithSettingsInView?snakeCase=false");
@@ -271,7 +315,8 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
             @"<script type=""text/javascript"">
     var json = {0};
 </script>",
-            json);
+            json
+        );
 
         // Act
         var response = await Client.GetAsync("Home/JsonHelperWithSettingsInView?snakeCase=true");
@@ -288,34 +333,42 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     {
         get
         {
-            yield return new[] {
-                    "ActionLink_ActionOnSameController",
-                    @"<a href=""/Links/Details"">linktext</a>" };
-            yield return new[] {
-                    "ActionLink_ActionOnOtherController",
-                    @"<a href=""/Products/Details?print=true"">linktext</a>"
-                };
-            yield return new[] {
-                    "ActionLink_SecurePage_ImplicitHostName",
-                    @"<a href=""https://localhost/Products/Details?print=true"">linktext</a>"
-                };
-            yield return new[] {
-                    "ActionLink_HostNameFragmentAttributes",
-                    // note: attributes are alphabetically ordered
-                    @"<a href=""https://www.contoso.com:9000/Products/Details?print=true#details"" p1=""p1-value"">linktext</a>"
-                };
-            yield return new[] {
-                    "RouteLink_RestLinkToOtherController",
-                    @"<a href=""/api/orders/10"">linktext</a>"
-                };
-            yield return new[] {
-                    "RouteLink_SecureApi_ImplicitHostName",
-                    @"<a href=""https://localhost/api/orders/10"">linktext</a>"
-                };
-            yield return new[] {
-                    "RouteLink_HostNameFragmentAttributes",
-                    @"<a href=""https://www.contoso.com:9000/api/orders/10?print=True#details"" p1=""p1-value"">linktext</a>"
-                };
+            yield return new[]
+            {
+                "ActionLink_ActionOnSameController",
+                @"<a href=""/Links/Details"">linktext</a>",
+            };
+            yield return new[]
+            {
+                "ActionLink_ActionOnOtherController",
+                @"<a href=""/Products/Details?print=true"">linktext</a>",
+            };
+            yield return new[]
+            {
+                "ActionLink_SecurePage_ImplicitHostName",
+                @"<a href=""https://localhost/Products/Details?print=true"">linktext</a>",
+            };
+            yield return new[]
+            {
+                "ActionLink_HostNameFragmentAttributes",
+                // note: attributes are alphabetically ordered
+                @"<a href=""https://www.contoso.com:9000/Products/Details?print=true#details"" p1=""p1-value"">linktext</a>",
+            };
+            yield return new[]
+            {
+                "RouteLink_RestLinkToOtherController",
+                @"<a href=""/api/orders/10"">linktext</a>",
+            };
+            yield return new[]
+            {
+                "RouteLink_SecureApi_ImplicitHostName",
+                @"<a href=""https://localhost/api/orders/10"">linktext</a>",
+            };
+            yield return new[]
+            {
+                "RouteLink_HostNameFragmentAttributes",
+                @"<a href=""https://www.contoso.com:9000/api/orders/10?print=True#details"" p1=""p1-value"">linktext</a>",
+            };
         }
     }
 
@@ -384,10 +437,7 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task RedirectToAction_WithEmptyActionName_UsesAmbientValue()
     {
         // Arrange
-        var product = new Dictionary<string, string>
-            {
-                { "SampleInt", "20" }
-            };
+        var product = new Dictionary<string, string> { { "SampleInt", "20" } };
 
         // Act
         var response = await Client.PostAsync("/Home/Product", new FormUrlEncodedContent(product));
@@ -400,6 +450,7 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         var responseBody = await Client.GetStringAsync("/Home/Product");
         Assert.Equal("Get Product", responseBody);
     }
+
     [Fact]
     public async Task ActionMethod_ReturningActionMethodOfT_WithBadRequest()
     {
@@ -423,7 +474,10 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         var response = await Client.GetStringAsync(url);
 
         // Assert
-        var result = JsonSerializer.Deserialize<Product>(response, TestJsonSerializerOptionsProvider.Options);
+        var result = JsonSerializer.Deserialize<Product>(
+            response,
+            TestJsonSerializerOptionsProvider.Options
+        );
         Assert.Equal(10, result.SampleInt);
     }
 
@@ -437,7 +491,10 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
         var response = await Client.GetStringAsync(url);
 
         // Assert
-        var result = JsonSerializer.Deserialize<Product[]>(response, TestJsonSerializerOptionsProvider.Options);
+        var result = JsonSerializer.Deserialize<Product[]>(
+            response,
+            TestJsonSerializerOptionsProvider.Options
+        );
         Assert.Equal(2, result.Length);
     }
 
@@ -456,16 +513,19 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     {
         // Act
         var response = await Client.GetStringAsync("Home/GetAssemblyPartData");
-        var assemblyParts = JsonSerializer.Deserialize<IList<string>>(response, TestJsonSerializerOptionsProvider.Options);
+        var assemblyParts = JsonSerializer.Deserialize<IList<string>>(
+            response,
+            TestJsonSerializerOptionsProvider.Options
+        );
         var expected = new[]
         {
-                "BasicWebSite",
-                "Microsoft.AspNetCore.Components.Server",
-                "Microsoft.AspNetCore.SpaServices",
-                "Microsoft.AspNetCore.SpaServices.Extensions",
-                "Microsoft.AspNetCore.Mvc.TagHelpers",
-                "Microsoft.AspNetCore.Mvc.Razor",
-            };
+            "BasicWebSite",
+            "Microsoft.AspNetCore.Components.Server",
+            "Microsoft.AspNetCore.SpaServices",
+            "Microsoft.AspNetCore.SpaServices.Extensions",
+            "Microsoft.AspNetCore.Mvc.TagHelpers",
+            "Microsoft.AspNetCore.Mvc.Razor",
+        };
 
         // Assert
         //
@@ -501,7 +561,9 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task ViewDataProperties_AreTransferredToViewComponents()
     {
         // Act
-        var document = await Client.GetHtmlDocumentAsync("ViewDataProperty/ViewDataPropertyToViewComponent");
+        var document = await Client.GetHtmlDocumentAsync(
+            "ViewDataProperty/ViewDataPropertyToViewComponent"
+        );
 
         // Assert
         var message = document.QuerySelector("#message").TextContent;
@@ -515,19 +577,21 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task BindPropertiesAttribute_CanBeAppliedToControllers()
     {
         // Arrange
-        var formContent = new Dictionary<string, string>
-            {
-                { "Name", "TestName" },
-                { "Id", "10" },
-            };
+        var formContent = new Dictionary<string, string> { { "Name", "TestName" }, { "Id", "10" } };
 
         // Act
-        var response = await Client.PostAsync("BindProperties/Action", new FormUrlEncodedContent(formContent));
+        var response = await Client.PostAsync(
+            "BindProperties/Action",
+            new FormUrlEncodedContent(formContent)
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
         var content = await response.Content.ReadAsStringAsync();
-        var data = JsonSerializer.Deserialize<BindPropertyControllerData>(content, TestJsonSerializerOptionsProvider.Options);
+        var data = JsonSerializer.Deserialize<BindPropertyControllerData>(
+            content,
+            TestJsonSerializerOptionsProvider.Options
+        );
 
         Assert.Equal("TestName", data.Name);
         Assert.Equal(10, data.Id);
@@ -538,19 +602,25 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     {
         // Arrange
         var formContent = new Dictionary<string, string>
-            {
-                { "Id", "10" },
-                { "FromRoute", "12" },
-                { "CustomBound", "Test" },
-            };
+        {
+            { "Id", "10" },
+            { "FromRoute", "12" },
+            { "CustomBound", "Test" },
+        };
 
         // Act
-        var response = await Client.PostAsync("BindProperties/Action", new FormUrlEncodedContent(formContent));
+        var response = await Client.PostAsync(
+            "BindProperties/Action",
+            new FormUrlEncodedContent(formContent)
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
         var content = await response.Content.ReadAsStringAsync();
-        var data = JsonSerializer.Deserialize<BindPropertyControllerData>(content, TestJsonSerializerOptionsProvider.Options);
+        var data = JsonSerializer.Deserialize<BindPropertyControllerData>(
+            content,
+            TestJsonSerializerOptionsProvider.Options
+        );
 
         Assert.Equal(10, data.Id);
         Assert.Null(data.IdFromRoute);
@@ -561,18 +631,21 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task BindPropertiesAttribute_DoesNotCausePropertiesWithBindNeverAttributeToBeModelBound()
     {
         // Arrange
-        var formContent = new Dictionary<string, string>
-            {
-                { "BindNeverProperty", "Hello world" },
-            };
+        var formContent = new Dictionary<string, string> { { "BindNeverProperty", "Hello world" } };
 
         // Act
-        var response = await Client.PostAsync("BindProperties/Action", new FormUrlEncodedContent(formContent));
+        var response = await Client.PostAsync(
+            "BindProperties/Action",
+            new FormUrlEncodedContent(formContent)
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
         var content = await response.Content.ReadAsStringAsync();
-        var data = JsonSerializer.Deserialize<BindPropertyControllerData>(content, TestJsonSerializerOptionsProvider.Options);
+        var data = JsonSerializer.Deserialize<BindPropertyControllerData>(
+            content,
+            TestJsonSerializerOptionsProvider.Options
+        );
 
         Assert.Null(data.BindNeverProperty);
     }
@@ -581,13 +654,13 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task BindPropertiesAttributeWithSupportsGet_BindsOnNonGet()
     {
         // Arrange
-        var formContent = new Dictionary<string, string>
-            {
-                {  "Name", "TestName" },
-            };
+        var formContent = new Dictionary<string, string> { { "Name", "TestName" } };
 
         // Act
-        var response = await Client.PostAsync("BindPropertiesSupportsGet/Action", new FormUrlEncodedContent(formContent));
+        var response = await Client.PostAsync(
+            "BindPropertiesSupportsGet/Action",
+            new FormUrlEncodedContent(formContent)
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
@@ -611,7 +684,9 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task BindPropertiesAppliesValidation()
     {
         // Act
-        var response = await Client.GetAsync("BindPropertiesWithValidation/Action?Password=Test&ConfirmPassword=different");
+        var response = await Client.GetAsync(
+            "BindPropertiesWithValidation/Action?Password=Test&ConfirmPassword=different"
+        );
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
@@ -622,13 +697,17 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
             kvp =>
             {
                 Assert.Equal("ConfirmPassword", kvp.Key);
-                Assert.Equal("Password and confirm password do not match.", Assert.Single(kvp.Value));
+                Assert.Equal(
+                    "Password and confirm password do not match.",
+                    Assert.Single(kvp.Value)
+                );
             },
             kvp =>
             {
                 Assert.Equal("UserName", kvp.Key);
                 Assert.Equal("User name is required.", Assert.Single(kvp.Value));
-            });
+            }
+        );
     }
 
     [Fact]
@@ -642,14 +721,21 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
 
         await response.AssertStatusCodeAsync(HttpStatusCode.BadRequest);
         var content = await response.Content.ReadAsStringAsync();
-        var problemDetails = JsonSerializer.Deserialize<ValidationProblemDetails>(content, TestJsonSerializerOptionsProvider.Options);
+        var problemDetails = JsonSerializer.Deserialize<ValidationProblemDetails>(
+            content,
+            TestJsonSerializerOptionsProvider.Options
+        );
         Assert.Collection(
             problemDetails.Errors,
             kvp =>
             {
                 Assert.Empty(kvp.Key);
-                Assert.Equal("Failed to read the request form. Form section has invalid Content-Disposition value: ", string.Join(" ", kvp.Value));
-            });
+                Assert.Equal(
+                    "Failed to read the request form. Form section has invalid Content-Disposition value: ",
+                    string.Join(" ", kvp.Value)
+                );
+            }
+        );
     }
 
     public class BindPropertyControllerData

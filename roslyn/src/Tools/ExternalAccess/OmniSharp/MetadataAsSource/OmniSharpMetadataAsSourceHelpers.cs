@@ -10,16 +10,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.MetadataAsSource
 {
     internal static class OmniSharpMetadataAsSourceHelpers
     {
-        public static string GetAssemblyInfo(IAssemblySymbol assemblySymbol)
-            => MetadataAsSourceHelpers.GetAssemblyInfo(assemblySymbol);
+        public static string GetAssemblyInfo(IAssemblySymbol assemblySymbol) =>
+            MetadataAsSourceHelpers.GetAssemblyInfo(assemblySymbol);
 
-        public static string GetAssemblyDisplay(Compilation compilation, IAssemblySymbol assemblySymbol)
-            => MetadataAsSourceHelpers.GetAssemblyDisplay(compilation, assemblySymbol);
+        public static string GetAssemblyDisplay(
+            Compilation compilation,
+            IAssemblySymbol assemblySymbol
+        ) => MetadataAsSourceHelpers.GetAssemblyDisplay(compilation, assemblySymbol);
 
-        public static Task<Location> GetLocationInGeneratedSourceAsync(ISymbol symbol, Document generatedDocument, CancellationToken cancellationToken)
+        public static Task<Location> GetLocationInGeneratedSourceAsync(
+            ISymbol symbol,
+            Document generatedDocument,
+            CancellationToken cancellationToken
+        )
         {
             var symbolKey = SymbolKey.Create(symbol, cancellationToken);
-            return MetadataAsSourceHelpers.GetLocationInGeneratedSourceAsync(symbolKey, generatedDocument, cancellationToken);
+            return MetadataAsSourceHelpers.GetLocationInGeneratedSourceAsync(
+                symbolKey,
+                generatedDocument,
+                cancellationToken
+            );
         }
     }
 }

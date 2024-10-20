@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,7 +11,9 @@ namespace Test
     public struct AA
     {
         public double[] Method1(String param1, bool[] param2, ref long param3, __arglist)
-        { return null; }
+        {
+            return null;
+        }
     }
 
     public class BB
@@ -35,6 +38,7 @@ namespace Test
             }
             return new double[] { 42.0 };
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

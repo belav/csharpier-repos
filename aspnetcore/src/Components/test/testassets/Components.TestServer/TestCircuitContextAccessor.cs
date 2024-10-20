@@ -12,8 +12,9 @@ public class TestCircuitContextAccessor : CircuitHandler
     public bool HasCircuitContext => _hasCircuitContext.Value;
 
     public override Func<CircuitInboundActivityContext, Task> CreateInboundActivityHandler(
-        Func<CircuitInboundActivityContext, Task> next)
-        => async (context) =>
+        Func<CircuitInboundActivityContext, Task> next
+    ) =>
+        async (context) =>
         {
             _hasCircuitContext.Value = true;
             await next(context);

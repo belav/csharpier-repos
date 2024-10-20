@@ -8,11 +8,17 @@ internal static partial class Interop
 {
     internal static partial class NetSecurityNative
     {
-        [LibraryImport(Interop.Libraries.NetSecurityNative, EntryPoint="NetSecurityNative_IsNtlmInstalled")]
+        [LibraryImport(
+            Interop.Libraries.NetSecurityNative,
+            EntryPoint = "NetSecurityNative_IsNtlmInstalled"
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool IsNtlmInstalled();
 
-        [LibraryImport(Interop.Libraries.NetSecurityNative, EntryPoint = "NetSecurityNative_EnsureGssInitialized")]
+        [LibraryImport(
+            Interop.Libraries.NetSecurityNative,
+            EntryPoint = "NetSecurityNative_EnsureGssInitialized"
+        )]
         private static partial int EnsureGssInitialized();
 
         static NetSecurityNative()

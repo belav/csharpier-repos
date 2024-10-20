@@ -19,22 +19,92 @@ namespace System.Web.Http.ApiExplorer
                 object controllerType = typeof(ItemController);
                 object expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Item?name={name}&series={series}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Put, RelativePath = "Item", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Item?name={name}&series={series}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Put,
+                        RelativePath = "Item",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
 
                 controllerType = typeof(OverloadsController);
                 expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/{id}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 0},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads?name={name}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/{id}?name={name}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads?name={name}&age={age}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads?name={name}&age={age}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 3},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/{id}?name={name}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 3},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads?name={name}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/{id}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 0,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads?name={name}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/{id}?name={name}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads?name={name}&age={age}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads?name={name}&age={age}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 3,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/{id}?name={name}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 3,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads?name={name}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -42,12 +112,21 @@ namespace System.Web.Http.ApiExplorer
 
         [Theory]
         [PropertyData("HttpMethodConstraints_LimitsTheDescriptions_PropertyData")]
-        public void HttpMethodConstraints_LimitsTheDescriptions(Type controllerType, List<object> expectedResults)
+        public void HttpMethodConstraints_LimitsTheDescriptions(
+            Type controllerType,
+            List<object> expectedResults
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional }, new { routeConstraint = new HttpMethodConstraint(HttpMethod.Get, HttpMethod.Put) });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional },
+                new { routeConstraint = new HttpMethodConstraint(HttpMethod.Get, HttpMethod.Put) }
+            );
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerType);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -58,13 +137,45 @@ namespace System.Web.Http.ApiExplorer
         {
             get
             {
-                object[] controllerTypes = new Type[] { typeof(OverloadsController), typeof(ItemController) };
+                object[] controllerTypes = new Type[]
+                {
+                    typeof(OverloadsController),
+                    typeof(ItemController),
+                };
                 object expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Item?name={name}&series={series}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Post, RelativePath = "Item", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Put, RelativePath = "Item", HasRequestFormatters = true, HasResponseFormatters = true, NumberOfParameters = 1},
-                    new { HttpMethod = HttpMethod.Delete, RelativePath = "Item/{id}", HasRequestFormatters = false, HasResponseFormatters = false, NumberOfParameters = 1}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Item?name={name}&series={series}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Post,
+                        RelativePath = "Item",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Put,
+                        RelativePath = "Item",
+                        HasRequestFormatters = true,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 1,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Delete,
+                        RelativePath = "Item/{id}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = false,
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerTypes, expectedApiDescriptions };
             }
@@ -72,12 +183,21 @@ namespace System.Web.Http.ApiExplorer
 
         [Theory]
         [PropertyData("RegexConstraint_LimitsTheController_PropertyData")]
-        public void RegexConstraint_LimitsTheController(Type[] controllerTypes, List<object> expectedResults)
+        public void RegexConstraint_LimitsTheController(
+            Type[] controllerTypes,
+            List<object> expectedResults
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{id}", new { id = RouteParameter.Optional }, new { controller = "It.*" }); // controllers that start with "It"
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional },
+                new { controller = "It.*" }
+            ); // controllers that start with "It"
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerTypes);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerTypes);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();
@@ -88,15 +208,61 @@ namespace System.Web.Http.ApiExplorer
         {
             get
             {
-                object[] controllerTypes = new Type[] { typeof(OverloadsController), typeof(ItemController) };
+                object[] controllerTypes = new Type[]
+                {
+                    typeof(OverloadsController),
+                    typeof(ItemController),
+                };
                 object expectedApiDescriptions = new List<object>
                 {
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Item/GetItem?name={name}&series={series}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameAndId/{id}?name={name}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameAndAge?name={name}&age={age}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameAgeAndSsn?name={name}&age={age}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 3},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameIdAndSsn/{id}?name={name}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 3},
-                    new { HttpMethod = HttpMethod.Get, RelativePath = "Overloads/GetPersonByNameAndSsn?name={name}&ssn={ssn}", HasRequestFormatters = false, HasResponseFormatters = true, NumberOfParameters = 2}
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Item/GetItem?name={name}&series={series}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameAndId/{id}?name={name}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameAndAge?name={name}&age={age}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameAgeAndSsn?name={name}&age={age}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 3,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameIdAndSsn/{id}?name={name}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 3,
+                    },
+                    new
+                    {
+                        HttpMethod = HttpMethod.Get,
+                        RelativePath = "Overloads/GetPersonByNameAndSsn?name={name}&ssn={ssn}",
+                        HasRequestFormatters = false,
+                        HasResponseFormatters = true,
+                        NumberOfParameters = 2,
+                    },
                 };
                 yield return new[] { controllerTypes, expectedApiDescriptions };
             }
@@ -104,12 +270,21 @@ namespace System.Web.Http.ApiExplorer
 
         [Theory]
         [PropertyData("RegexConstraint_LimitsTheAction_PropertyData")]
-        public void RegexConstraint_LimitsTheAction(Type[] controllerTypes, List<object> expectedResults)
+        public void RegexConstraint_LimitsTheAction(
+            Type[] controllerTypes,
+            List<object> expectedResults
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
-            config.Routes.MapHttpRoute("Default", "{controller}/{action}/{id}", new { id = RouteParameter.Optional }, new { action = "Get.+" }); // actions that start with "Get" and at least one extra character
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}/{id}",
+                new { id = RouteParameter.Optional },
+                new { action = "Get.+" }
+            ); // actions that start with "Get" and at least one extra character
 
-            DefaultHttpControllerSelector controllerSelector = ApiExplorerHelper.GetStrictControllerSelector(config, controllerTypes);
+            DefaultHttpControllerSelector controllerSelector =
+                ApiExplorerHelper.GetStrictControllerSelector(config, controllerTypes);
             config.Services.Replace(typeof(IHttpControllerSelector), controllerSelector);
 
             IApiExplorer explorer = config.Services.GetApiExplorer();

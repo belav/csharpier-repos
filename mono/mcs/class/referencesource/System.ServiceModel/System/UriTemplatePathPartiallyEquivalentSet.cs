@@ -22,20 +22,15 @@ namespace System
             this.segmentsCount = segmentsCount;
             this.kvps = new List<KeyValuePair<UriTemplate, object>>();
         }
+
         public List<KeyValuePair<UriTemplate, object>> Items
         {
-            get
-            {
-                return this.kvps;
-            }
+            get { return this.kvps; }
         }
 
         public int SegmentsCount
         {
-            get
-            {
-                return this.segmentsCount;
-            }
+            get { return this.segmentsCount; }
         }
     }
 }

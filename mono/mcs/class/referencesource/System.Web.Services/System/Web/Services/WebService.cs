@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="WebService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.Web.Services {
-
-    using System.Diagnostics;
-    using System.Web;
+namespace System.Web.Services
+{
     using System.ComponentModel;
-    using System.Web.SessionState;
-    using System.Web.Services.Protocols;
-    using System.Security.Principal;
-    using System.Security.Permissions;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Web;
+    using System.Web.Services.Protocols;
+    using System.Web.SessionState;
 
     /// <include file='doc\WebService.uex' path='docs/doc[@for="WebService"]/*' />
     /// <devdoc>
@@ -23,8 +23,8 @@ namespace System.Web.Services {
     ///       optional base class for Web Services, which provides direct access to common
     ///       ASP.NET objects, like those for application and session state.</para>
     /// </devdoc>
-    public class WebService : MarshalByValueComponent {
-
+    public class WebService : MarshalByValueComponent
+    {
         private HttpContext context;
 
         /// <include file='doc\WebService.uex' path='docs/doc[@for="WebService.Application"]/*' />
@@ -32,12 +32,18 @@ namespace System.Web.Services {
         ///    <para>Gets a
         ///       reference to the application object for the current HTTP request.</para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Description("The ASP.NET application object for the current request.")]
-        public HttpApplicationState Application {
-            [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-            get {
-                return Context.Application;
-            }
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            Description("The ASP.NET application object for the current request.")
+        ]
+        public HttpApplicationState Application
+        {
+            [AspNetHostingPermission(
+                SecurityAction.LinkDemand,
+                Level = AspNetHostingPermissionLevel.Minimal
+            )]
+            get { return Context.Application; }
         }
 
         /// <include file='doc\WebService.uex' path='docs/doc[@for="WebService.Context"]/*' />
@@ -46,10 +52,19 @@ namespace System.Web.Services {
         ///       which encapsulates all HTTP-specific context
         ///       used by the HTTP server to process Web requests.</para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), WebServicesDescription(Res.WebServiceContext)]
-        public HttpContext Context {
-            [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-            get {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            WebServicesDescription(Res.WebServiceContext)
+        ]
+        public HttpContext Context
+        {
+            [AspNetHostingPermission(
+                SecurityAction.LinkDemand,
+                Level = AspNetHostingPermissionLevel.Minimal
+            )]
+            get
+            {
                 PartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
                 if (context == null)
                     context = HttpContext.Current;
@@ -64,12 +79,18 @@ namespace System.Web.Services {
         /// <para>Gets a reference to the <see cref='T:System.Web.HttpSessionState'/>
         /// instance for the current request.</para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), WebServicesDescription(Res.WebServiceSession)]
-        public HttpSessionState Session {
-            [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-            get {
-                return Context.Session;
-            }
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            WebServicesDescription(Res.WebServiceSession)
+        ]
+        public HttpSessionState Session
+        {
+            [AspNetHostingPermission(
+                SecurityAction.LinkDemand,
+                Level = AspNetHostingPermissionLevel.Minimal
+            )]
+            get { return Context.Session; }
         }
 
         /// <include file='doc\WebService.uex' path='docs/doc[@for="WebService.Server"]/*' />
@@ -77,31 +98,53 @@ namespace System.Web.Services {
         /// <para>Gets a reference to the <see cref='T:System.Web.HttpServerUtility'/>
         /// for the current request.</para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), WebServicesDescription(Res.WebServiceServer)]
-        public HttpServerUtility Server {
-            [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-            get {
-                return Context.Server;
-            }
-        }       
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            WebServicesDescription(Res.WebServiceServer)
+        ]
+        public HttpServerUtility Server
+        {
+            [AspNetHostingPermission(
+                SecurityAction.LinkDemand,
+                Level = AspNetHostingPermissionLevel.Minimal
+            )]
+            get { return Context.Server; }
+        }
 
         /// <include file='doc\WebService.uex' path='docs/doc[@for="WebService.User"]/*' />
         /// <devdoc>
         ///    <para>Gets the ASP.NET server User object, used for authorizing the request.</para>
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), WebServicesDescription(Res.WebServiceUser)]
-        public IPrincipal User {
-            [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-            get {
-                return Context.User;
-            }
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            WebServicesDescription(Res.WebServiceUser)
+        ]
+        public IPrincipal User
+        {
+            [AspNetHostingPermission(
+                SecurityAction.LinkDemand,
+                Level = AspNetHostingPermissionLevel.Minimal
+            )]
+            get { return Context.User; }
         }
 
         /// <include file='doc\WebService.uex' path='docs/doc[@for="WebService.SoapVersion"]/*' />
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), WebServicesDescription(Res.WebServiceSoapVersion), ComVisible(false)]
-        public SoapProtocolVersion SoapVersion {
-            [AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-            get {
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
+            WebServicesDescription(Res.WebServiceSoapVersion),
+            ComVisible(false)
+        ]
+        public SoapProtocolVersion SoapVersion
+        {
+            [AspNetHostingPermission(
+                SecurityAction.LinkDemand,
+                Level = AspNetHostingPermissionLevel.Minimal
+            )]
+            get
+            {
                 object o = Context.Items[SoapVersionContextSlot];
                 if (o != null && o is SoapProtocolVersion)
                     return (SoapProtocolVersion)o;
@@ -112,9 +155,9 @@ namespace System.Web.Services {
 
         internal static readonly string SoapVersionContextSlot = "WebServiceSoapVersion";
 
-        internal void SetContext(HttpContext context) {
+        internal void SetContext(HttpContext context)
+        {
             this.context = context;
         }
-
     }
 }

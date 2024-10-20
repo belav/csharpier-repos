@@ -41,7 +41,11 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string str = value as string;
             if (str == null)
@@ -72,7 +76,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             throw new ArgumentException("Bad format.");
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == null)
             {

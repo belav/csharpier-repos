@@ -13,8 +13,16 @@ namespace System.Xml.Tests
         public void Resolving_RelativeBase_Throws()
         {
             var resolver = new XmlUrlResolver();
-            Assert.Throws<NotSupportedException>(() => resolver.ResolveUri(
-                new Uri(Environment.CurrentDirectory + Path.DirectorySeparatorChar, UriKind.Relative), "test.xml"));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    resolver.ResolveUri(
+                        new Uri(
+                            Environment.CurrentDirectory + Path.DirectorySeparatorChar,
+                            UriKind.Relative
+                        ),
+                        "test.xml"
+                    )
+            );
         }
 
         [Theory]
@@ -24,7 +32,10 @@ namespace System.Xml.Tests
             var resolver = new XmlUrlResolver();
             Uri resolvedUri = resolver.ResolveUri(baseUri, path);
 
-            Assert.Equal(Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, path)), resolvedUri.LocalPath);
+            Assert.Equal(
+                Path.GetFullPath(Path.Combine(Environment.CurrentDirectory, path)),
+                resolvedUri.LocalPath
+            );
             Assert.EndsWith(path.Replace('/', Path.DirectorySeparatorChar), resolvedUri.LocalPath);
         }
 
@@ -47,7 +58,8 @@ namespace System.Xml.Tests
             if (OperatingSystem.IsWindows())
             {
                 // The case below does not work on Unix, the '#' ends up treated as a fragment and the path is cut there.
-                var currDirWithDirSeparator = Environment.CurrentDirectory + Path.DirectorySeparatorChar;
+                var currDirWithDirSeparator =
+                    Environment.CurrentDirectory + Path.DirectorySeparatorChar;
                 baseUris.Add(new Uri(currDirWithDirSeparator, UriKind.Absolute));
                 baseUris.Add(new Uri(string.Empty, UriKind.RelativeOrAbsolute));
             }
@@ -59,17 +71,18 @@ namespace System.Xml.Tests
             }
         }
 
-        public static IEnumerable<object[]> XmlFileTargets => new object[][]
-        {
-            new object[] { "f#/t/\u00eb/test.xml" },
-            new object[] { "/f#/t/\u00eb/t#st.xml" },
-            new object[] { "/f#/\u00e3/\u00eb/t\u00ebst.xml" },
-            new object[] { "u/t/c/test.xml" },
-            new object[] { "u/t/c/t#st.xml" },
-            new object[] { "/u/t/c/t\u00ebst.xml" },
-            new object[] { "test.xml" },
-            new object[] { "t#st.xml" },
-            new object[] { "t\u00ebst.xml" }
-        };
+        public static IEnumerable<object[]> XmlFileTargets =>
+            new object[][]
+            {
+                new object[] { "f#/t/\u00eb/test.xml" },
+                new object[] { "/f#/t/\u00eb/t#st.xml" },
+                new object[] { "/f#/\u00e3/\u00eb/t\u00ebst.xml" },
+                new object[] { "u/t/c/test.xml" },
+                new object[] { "u/t/c/t#st.xml" },
+                new object[] { "/u/t/c/t\u00ebst.xml" },
+                new object[] { "test.xml" },
+                new object[] { "t#st.xml" },
+                new object[] { "t\u00ebst.xml" },
+            };
     }
 }

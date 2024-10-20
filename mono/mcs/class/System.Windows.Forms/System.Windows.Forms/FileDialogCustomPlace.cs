@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,42 +31,51 @@ using System;
 
 namespace System.Windows.Forms
 {
-	public class FileDialogCustomPlace
-	{
-		private string path;
-		private Guid guid;
-		
-		public FileDialogCustomPlace (string path)
-		{
-			this.path = path;
-			this.guid = Guid.Empty;
-		}
+    public class FileDialogCustomPlace
+    {
+        private string path;
+        private Guid guid;
 
-		public FileDialogCustomPlace (Guid knownFolderGuid)
-		{
-			this.path = string.Empty;
-			this.guid = knownFolderGuid;
-		}
+        public FileDialogCustomPlace(string path)
+        {
+            this.path = path;
+            this.guid = Guid.Empty;
+        }
 
-		public string Path {
-			get { return path; }
-			set {
-				path = value;
-				guid = Guid.Empty;
-			}
-		}
+        public FileDialogCustomPlace(Guid knownFolderGuid)
+        {
+            this.path = string.Empty;
+            this.guid = knownFolderGuid;
+        }
 
-		public Guid KnownFolderGuid {
-			get { return guid; }
-			set {
-				guid = value;
-				path = string.Empty;
-			}
-		}
+        public string Path
+        {
+            get { return path; }
+            set
+            {
+                path = value;
+                guid = Guid.Empty;
+            }
+        }
 
-		public override string ToString ()
-		{
-			return string.Format ("{0} Path: {1} KnownFolderGuid: {2}", GetType ().ToString (), path, guid);
-		}
-	}
+        public Guid KnownFolderGuid
+        {
+            get { return guid; }
+            set
+            {
+                guid = value;
+                path = string.Empty;
+            }
+        }
+
+        public override string ToString()
+        {
+            return string.Format(
+                "{0} Path: {1} KnownFolderGuid: {2}",
+                GetType().ToString(),
+                path,
+                guid
+            );
+        }
+    }
 }

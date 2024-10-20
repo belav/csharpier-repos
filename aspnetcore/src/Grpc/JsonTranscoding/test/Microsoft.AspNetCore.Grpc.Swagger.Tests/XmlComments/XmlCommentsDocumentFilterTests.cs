@@ -26,17 +26,17 @@ public class XmlCommentsDocumentFilterTests
     [Theory]
     [InlineData(typeof(XmlDocService), "XmlDoc!")]
     [InlineData(typeof(XmlDocServiceWithComments), "XmlDocServiceWithComments XML comment!")]
-    public void Apply_SetsTagDescription_FromControllerSummaryTags(Type serviceType, string expectedDescription)
+    public void Apply_SetsTagDescription_FromControllerSummaryTags(
+        Type serviceType,
+        string expectedDescription
+    )
     {
         var document = new OpenApiDocument();
         var filterContext = new DocumentFilterContext(
-            new[]
-            {
-                CreateApiDescription(serviceType),
-                CreateApiDescription(serviceType)
-            },
+            new[] { CreateApiDescription(serviceType), CreateApiDescription(serviceType) },
             null,
-            null);
+            null
+        );
 
         Subject().Apply(document, filterContext);
 
@@ -49,22 +49,21 @@ public class XmlCommentsDocumentFilterTests
             {
                 ActionDescriptor = new ActionDescriptor
                 {
-                    RouteValues =
-                    {
-                        ["controller"] = "greet.Greeter"
-                    },
+                    RouteValues = { ["controller"] = "greet.Greeter" },
                     EndpointMetadata = new List<object>
                     {
-                        new GrpcMethodMetadata(serviceType, new TestMethod())
-                    }
-                }
+                        new GrpcMethodMetadata(serviceType, new TestMethod()),
+                    },
+                },
             };
         }
     }
 
     private GrpcXmlCommentsDocumentFilter Subject()
     {
-        using (var xmlComments = File.OpenText($"{typeof(GreeterService).Assembly.GetName().Name}.xml"))
+        using (
+            var xmlComments = File.OpenText($"{typeof(GreeterService).Assembly.GetName().Name}.xml")
+        )
         {
             return new GrpcXmlCommentsDocumentFilter(new XPathDocument(xmlComments));
         }

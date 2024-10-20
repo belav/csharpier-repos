@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             Resource,
             Type,
             Member,
-            NamespaceAndDescendants
+            NamespaceAndDescendants,
         }
     }
 }

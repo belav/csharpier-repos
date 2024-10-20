@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Globalization;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
@@ -163,16 +163,17 @@ public class HtmlHelperValueTest
         viewData.ModelState.SetModelValue(
             "FieldPrefix.StringProperty",
             "StringPropertyRawValue",
-            "StringPropertyAttemptedValue");
+            "StringPropertyAttemptedValue"
+        );
 
-        viewData.ModelState.SetModelValue(
-            "FieldPrefix",
-            "ModelRawValue",
-            "ModelAttemptedValue");
+        viewData.ModelState.SetModelValue("FieldPrefix", "ModelRawValue", "ModelAttemptedValue");
 
         // Act & Assert
         Assert.Equal("StringPropertyRawValue", helper.Value("StringProperty", format: null));
-        Assert.Equal("StringPropertyRawValue", helper.ValueFor(m => m.StringProperty, format: null));
+        Assert.Equal(
+            "StringPropertyRawValue",
+            helper.ValueFor(m => m.StringProperty, format: null)
+        );
         Assert.Equal("ModelRawValue", helper.ValueForModel(format: null));
     }
 
@@ -220,15 +221,23 @@ public class HtmlHelperValueTest
         viewData.ModelState.SetModelValue(
             "ObjectProperty",
             "ObjectPropertyRawValue <\"\">",
-            "ObjectPropertyAttemptedValue <\"\">");
+            "ObjectPropertyAttemptedValue <\"\">"
+        );
 
         // Act & Assert
         Assert.Equal(
             "<{ StringProperty = ModelStringPropertyValue <\"\">, ObjectProperty = (null) }>",
-            helper.ValueForModel("<{0}>"));
+            helper.ValueForModel("<{0}>")
+        );
         Assert.Equal("<ViewDataValue <\"\">>", helper.Value("StringProperty", "<{0}>"));
-        Assert.Equal("<ModelStringPropertyValue <\"\">>", helper.ValueFor(m => m.StringProperty, "<{0}>"));
-        Assert.Equal("ObjectPropertyRawValue <\"\">", helper.ValueFor(m => m.ObjectProperty, format: null));
+        Assert.Equal(
+            "<ModelStringPropertyValue <\"\">>",
+            helper.ValueFor(m => m.StringProperty, "<{0}>")
+        );
+        Assert.Equal(
+            "ObjectPropertyRawValue <\"\">",
+            helper.ValueFor(m => m.ObjectProperty, format: null)
+        );
     }
 
     private sealed class TestModel
@@ -242,7 +251,8 @@ public class HtmlHelperValueTest
                 CultureInfo.InvariantCulture,
                 "{{ StringProperty = {0}, ObjectProperty = {1} }}",
                 StringProperty ?? "(null)",
-                ObjectProperty ?? "(null)");
+                ObjectProperty ?? "(null)"
+            );
         }
     }
 

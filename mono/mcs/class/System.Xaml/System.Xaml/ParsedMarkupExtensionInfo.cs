@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,76 +24,89 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Xml;
 using System.Xaml.Schema;
+using System.Xml;
 
 namespace System.Xaml
 {
-	internal class ParsedMarkupExtensionInfo
-	{
-		Dictionary<XamlMember,object> args = new Dictionary<XamlMember,object> ();
-		public Dictionary<XamlMember,object> Arguments {
-			get { return args; }
-		}
-	
-		public XamlType Type { get; set; }
+    internal class ParsedMarkupExtensionInfo
+    {
+        Dictionary<XamlMember, object> args = new Dictionary<XamlMember, object>();
+        public Dictionary<XamlMember, object> Arguments
+        {
+            get { return args; }
+        }
 
-		public static ParsedMarkupExtensionInfo Parse (string raw, IXamlNamespaceResolver nsResolver, XamlSchemaContext sctx)
-		{
-			if (raw == null)
-				throw new ArgumentNullException ("raw");
-			if (raw.Length == 0 || raw [0] != '{')
-				throw Error ("Invalid markup extension attribute. It should begin with '{{', but was {0}", raw);
-			var ret = new ParsedMarkupExtensionInfo ();
-			int idx = raw.IndexOf ('}');
-			if (idx < 0)
-				throw Error ("Expected '}}' in the markup extension attribute: '{0}'", raw);
-			raw = raw.Substring (1, idx - 1);
-			idx = raw.IndexOf (' ');
-			string name = idx < 0 ? raw : raw.Substring (0, idx);
+        public XamlType Type { get; set; }
 
-			XamlTypeName xtn;
-			if (!XamlTypeName.TryParse (name, nsResolver, out xtn))
-				throw Error ("Failed to parse type name '{0}'", name);
-			var xt = sctx.GetXamlType (xtn);
-			ret.Type = xt;
+        public static ParsedMarkupExtensionInfo Parse(
+            string raw,
+            IXamlNamespaceResolver nsResolver,
+            XamlSchemaContext sctx
+        )
+        {
+            if (raw == null)
+                throw new ArgumentNullException("raw");
+            if (raw.Length == 0 || raw[0] != '{')
+                throw Error(
+                    "Invalid markup extension attribute. It should begin with '{{', but was {0}",
+                    raw
+                );
+            var ret = new ParsedMarkupExtensionInfo();
+            int idx = raw.IndexOf('}');
+            if (idx < 0)
+                throw Error("Expected '}}' in the markup extension attribute: '{0}'", raw);
+            raw = raw.Substring(1, idx - 1);
+            idx = raw.IndexOf(' ');
+            string name = idx < 0 ? raw : raw.Substring(0, idx);
 
-			if (idx < 0)
-				return ret;
+            XamlTypeName xtn;
+            if (!XamlTypeName.TryParse(name, nsResolver, out xtn))
+                throw Error("Failed to parse type name '{0}'", name);
+            var xt = sctx.GetXamlType(xtn);
+            ret.Type = xt;
 
-			string [] vpairs = raw.Substring (idx + 1, raw.Length - idx - 1).Split (',');
-			List<string> posPrms = null;
-			foreach (string vpair in vpairs) {
-				idx = vpair.IndexOf ('=');
-				// FIXME: unescape string (e.g. comma)
-				if (idx < 0) {
-					if (posPrms == null) {
-						posPrms = new List<string> ();
-						ret.Arguments.Add (XamlLanguage.PositionalParameters, posPrms);
-					}
-					posPrms.Add (UnescapeValue (vpair.Trim ()));
-				} else {
-					var key = vpair.Substring (0, idx).Trim ();
-					// FIXME: is unknown member always isAttacheable = false?
-					var xm = xt.GetMember (key) ?? new XamlMember (key, xt, false);
-					ret.Arguments.Add (xm, UnescapeValue (vpair.Substring (idx + 1).Trim ()));
-				}
-			}
-			return ret;
-		}
-		
-		static string UnescapeValue (string s)
-		{
-			// change XamlXmlWriter too if we change here.
-			if (s == "\"\"") // FIXME: there could be some escape syntax.
-				return String.Empty;
-			else
-				return s;
-		}
+            if (idx < 0)
+                return ret;
 
-		static Exception Error (string format, params object [] args)
-		{
-			return new XamlParseException (String.Format (format, args));
-		}
-	}
+            string[] vpairs = raw.Substring(idx + 1, raw.Length - idx - 1).Split(',');
+            List<string> posPrms = null;
+            foreach (string vpair in vpairs)
+            {
+                idx = vpair.IndexOf('=');
+                // FIXME: unescape string (e.g. comma)
+                if (idx < 0)
+                {
+                    if (posPrms == null)
+                    {
+                        posPrms = new List<string>();
+                        ret.Arguments.Add(XamlLanguage.PositionalParameters, posPrms);
+                    }
+                    posPrms.Add(UnescapeValue(vpair.Trim()));
+                }
+                else
+                {
+                    var key = vpair.Substring(0, idx).Trim();
+                    // FIXME: is unknown member always isAttacheable = false?
+                    var xm = xt.GetMember(key) ?? new XamlMember(key, xt, false);
+                    ret.Arguments.Add(xm, UnescapeValue(vpair.Substring(idx + 1).Trim()));
+                }
+            }
+            return ret;
+        }
+
+        static string UnescapeValue(string s)
+        {
+            // change XamlXmlWriter too if we change here.
+            if (s == "\"\"") // FIXME: there could be some escape syntax.
+                return String.Empty;
+            else
+                return s;
+        }
+
+        static Exception Error(string format, params object[] args)
+        {
+            return new XamlParseException(String.Format(format, args));
+        }
+    }
 }

@@ -39,7 +39,6 @@ using InteropServicesCallingConvention = System.Runtime.InteropServices.CallingC
 
 namespace System.Reflection
 {
-
     [Flags]
     internal enum PInvokeAttributes
     {
@@ -134,11 +133,15 @@ namespace System.Reflection
 
         internal static ParameterInfo GetReturnParameterInfo(RuntimeMethodInfo method)
         {
-            return RuntimeParameterInfo.New(GetReturnType(method.mhandle), method, get_retval_marshal(method.mhandle));
+            return RuntimeParameterInfo.New(
+                GetReturnType(method.mhandle),
+                method,
+                get_retval_marshal(method.mhandle)
+            );
         }
     }
 
-#region Sync with _MonoReflectionMethod in object-internals.h
+    #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
     internal sealed unsafe partial class RuntimeMethodInfo : MethodInfo
     {
@@ -147,7 +150,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-#endregion
+    #endregion
         private string? toString;
         private RuntimeType[]? parameterTypes;
         private MethodBaseInvoker? invoker;
@@ -175,10 +178,7 @@ namespace System.Reflection
 
         public override Module Module
         {
-            get
-            {
-                return GetRuntimeModule();
-            }
+            get { return GetRuntimeModule(); }
         }
 
         private string FormatNameAndSig()
@@ -240,32 +240,45 @@ namespace System.Reflection
             return GetMethodFromHandleInternalType_native(handle.Value, IntPtr.Zero, false);
         }
 
-        internal static MethodBase GetMethodFromHandleNoGenericCheck(RuntimeMethodHandle handle, RuntimeTypeHandle reflectedType)
+        internal static MethodBase GetMethodFromHandleNoGenericCheck(
+            RuntimeMethodHandle handle,
+            RuntimeTypeHandle reflectedType
+        )
         {
             return GetMethodFromHandleInternalType_native(handle.Value, reflectedType.Value, false);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        [DynamicDependency("#ctor(System.Reflection.ExceptionHandlingClause[],System.Reflection.LocalVariableInfo[],System.Byte[],System.Boolean,System.Int32,System.Int32)", typeof(RuntimeMethodBody))]
+        [DynamicDependency(
+            "#ctor(System.Reflection.ExceptionHandlingClause[],System.Reflection.LocalVariableInfo[],System.Byte[],System.Boolean,System.Int32,System.Int32)",
+            typeof(RuntimeMethodBody)
+        )]
         internal static extern MethodBody GetMethodBodyInternal(IntPtr handle);
 
-        [RequiresUnreferencedCode("Trimming may change method bodies. For example it can change some instructions, remove branches or local variables.")]
+        [RequiresUnreferencedCode(
+            "Trimming may change method bodies. For example it can change some instructions, remove branches or local variables."
+        )]
         internal static MethodBody GetMethodBody(IntPtr handle)
         {
             return GetMethodBodyInternal(handle);
         }
 
-        internal static MethodBase GetMethodFromHandleInternalType(IntPtr method_handle, IntPtr type_handle)
+        internal static MethodBase GetMethodFromHandleInternalType(
+            IntPtr method_handle,
+            IntPtr type_handle
+        )
         {
             return GetMethodFromHandleInternalType_native(method_handle, type_handle, true);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern MethodBase GetMethodFromHandleInternalType_native(IntPtr method_handle, IntPtr type_handle, bool genericCheck);
+        private static extern MethodBase GetMethodFromHandleInternalType_native(
+            IntPtr method_handle,
+            IntPtr type_handle,
+            bool genericCheck
+        );
 
-        internal RuntimeMethodInfo()
-        {
-        }
+        internal RuntimeMethodInfo() { }
 
         internal RuntimeMethodInfo(RuntimeMethodHandle mhandle)
         {
@@ -276,7 +289,10 @@ namespace System.Reflection
         internal static extern string get_name(MethodBase method);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern RuntimeMethodInfo get_base_method(RuntimeMethodInfo method, bool definition);
+        internal static extern RuntimeMethodInfo get_base_method(
+            RuntimeMethodInfo method,
+            bool definition
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern int get_metadata_token(RuntimeMethodInfo method);
@@ -294,33 +310,21 @@ namespace System.Reflection
 
         public override ParameterInfo ReturnParameter
         {
-            get
-            {
-                return MonoMethodInfo.GetReturnParameterInfo(this);
-            }
+            get { return MonoMethodInfo.GetReturnParameterInfo(this); }
         }
 
         public override Type ReturnType
         {
-            get
-            {
-                return MonoMethodInfo.GetReturnType(mhandle);
-            }
+            get { return MonoMethodInfo.GetReturnType(mhandle); }
         }
         public override ICustomAttributeProvider ReturnTypeCustomAttributes
         {
-            get
-            {
-                return MonoMethodInfo.GetReturnParameterInfo(this);
-            }
+            get { return MonoMethodInfo.GetReturnParameterInfo(this); }
         }
 
         public override int MetadataToken
         {
-            get
-            {
-                return get_metadata_token(this);
-            }
+            get { return get_metadata_token(this); }
         }
 
         public override MethodImplAttributes GetMethodImplementationFlags()
@@ -336,7 +340,13 @@ namespace System.Reflection
 
             // Have to clone because GetParametersInfo icall returns cached value
             var dest = new ParameterInfo[src.Length];
-            Array.FastCopy(ObjectHandleOnStack.Create (ref src), 0, ObjectHandleOnStack.Create (ref dest), 0, src.Length);
+            Array.FastCopy(
+                ObjectHandleOnStack.Create(ref src),
+                0,
+                ObjectHandleOnStack.Create(ref dest),
+                0,
+                src.Length
+            );
             return dest;
         }
 
@@ -378,45 +388,30 @@ namespace System.Reflection
          * Exceptions thrown by the called method propagate normally.
          */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern object? InternalInvoke(object? obj, IntPtr *args, out Exception? exc);
+        internal extern object? InternalInvoke(object? obj, IntPtr* args, out Exception? exc);
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                return new RuntimeMethodHandle(mhandle);
-            }
+            get { return new RuntimeMethodHandle(mhandle); }
         }
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return MonoMethodInfo.GetAttributes(mhandle);
-            }
+            get { return MonoMethodInfo.GetAttributes(mhandle); }
         }
 
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return MonoMethodInfo.GetCallingConvention(mhandle);
-            }
+            get { return MonoMethodInfo.GetCallingConvention(mhandle); }
         }
 
         public override Type? ReflectedType
         {
-            get
-            {
-                return reftype;
-            }
+            get { return reftype; }
         }
         public override Type DeclaringType
         {
-            get
-            {
-                return MonoMethodInfo.GetDeclaringType(mhandle);
-            }
+            get { return MonoMethodInfo.GetDeclaringType(mhandle); }
         }
         public override string Name
         {
@@ -437,13 +432,18 @@ namespace System.Reflection
         {
             return CustomAttribute.GetCustomAttributes(this, inherit);
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return CustomAttribute.GetCustomAttributes(this, attributeType, inherit);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern void GetPInvoke(out PInvokeAttributes flags, out string entryPoint, out string dllName);
+        internal extern void GetPInvoke(
+            out PInvokeAttributes flags,
+            out string entryPoint,
+            out string dllName
+        );
 
         internal object[]? GetPseudoCustomAttributes()
         {
@@ -484,34 +484,58 @@ namespace System.Reflection
 
             switch (flags & PInvokeAttributes.CharSetMask)
             {
-                case PInvokeAttributes.CharSetNotSpec: charSet = CharSet.None; break;
-                case PInvokeAttributes.CharSetAnsi: charSet = CharSet.Ansi; break;
-                case PInvokeAttributes.CharSetUnicode: charSet = CharSet.Unicode; break;
-                case PInvokeAttributes.CharSetAuto: charSet = CharSet.Auto; break;
+                case PInvokeAttributes.CharSetNotSpec:
+                    charSet = CharSet.None;
+                    break;
+                case PInvokeAttributes.CharSetAnsi:
+                    charSet = CharSet.Ansi;
+                    break;
+                case PInvokeAttributes.CharSetUnicode:
+                    charSet = CharSet.Unicode;
+                    break;
+                case PInvokeAttributes.CharSetAuto:
+                    charSet = CharSet.Auto;
+                    break;
 
                 // Invalid: default to CharSet.None
-                default: break;
+                default:
+                    break;
             }
 
             CallingConvention callingConvention = InteropServicesCallingConvention.Cdecl;
 
             switch (flags & PInvokeAttributes.CallConvMask)
             {
-                case PInvokeAttributes.CallConvWinapi: callingConvention = InteropServicesCallingConvention.Winapi; break;
-                case PInvokeAttributes.CallConvCdecl: callingConvention = InteropServicesCallingConvention.Cdecl; break;
-                case PInvokeAttributes.CallConvStdcall: callingConvention = InteropServicesCallingConvention.StdCall; break;
-                case PInvokeAttributes.CallConvThiscall: callingConvention = InteropServicesCallingConvention.ThisCall; break;
-                case PInvokeAttributes.CallConvFastcall: callingConvention = InteropServicesCallingConvention.FastCall; break;
+                case PInvokeAttributes.CallConvWinapi:
+                    callingConvention = InteropServicesCallingConvention.Winapi;
+                    break;
+                case PInvokeAttributes.CallConvCdecl:
+                    callingConvention = InteropServicesCallingConvention.Cdecl;
+                    break;
+                case PInvokeAttributes.CallConvStdcall:
+                    callingConvention = InteropServicesCallingConvention.StdCall;
+                    break;
+                case PInvokeAttributes.CallConvThiscall:
+                    callingConvention = InteropServicesCallingConvention.ThisCall;
+                    break;
+                case PInvokeAttributes.CallConvFastcall:
+                    callingConvention = InteropServicesCallingConvention.FastCall;
+                    break;
 
                 // Invalid: default to CallingConvention.Cdecl
-                default: break;
+                default:
+                    break;
             }
 
             bool exactSpelling = (flags & PInvokeAttributes.NoMangle) != 0;
             bool setLastError = (flags & PInvokeAttributes.SupportsLastError) != 0;
-            bool bestFitMapping = (flags & PInvokeAttributes.BestFitMask) == PInvokeAttributes.BestFitEnabled;
-            bool throwOnUnmappableChar = (flags & PInvokeAttributes.ThrowOnUnmappableCharMask) == PInvokeAttributes.ThrowOnUnmappableCharEnabled;
-            bool preserveSig = (GetMethodImplementationFlags() & MethodImplAttributes.PreserveSig) != 0;
+            bool bestFitMapping =
+                (flags & PInvokeAttributes.BestFitMask) == PInvokeAttributes.BestFitEnabled;
+            bool throwOnUnmappableChar =
+                (flags & PInvokeAttributes.ThrowOnUnmappableCharMask)
+                == PInvokeAttributes.ThrowOnUnmappableCharEnabled;
+            bool preserveSig =
+                (GetMethodImplementationFlags() & MethodImplAttributes.PreserveSig) != 0;
 
             return new DllImportAttribute(dllName)
             {
@@ -522,7 +546,7 @@ namespace System.Reflection
                 PreserveSig = preserveSig,
                 BestFitMapping = bestFitMapping,
                 ThrowOnUnmappableChar = throwOnUnmappableChar,
-                CallingConvention = callingConvention
+                CallingConvention = callingConvention,
             };
         }
 
@@ -544,7 +568,9 @@ namespace System.Reflection
             count = 0;
 
             if ((info.iattrs & MethodImplAttributes.PreserveSig) != 0)
-                attrsData[count++] = new RuntimeCustomAttributeData((typeof(PreserveSigAttribute)).GetConstructor(Type.EmptyTypes)!);
+                attrsData[count++] = new RuntimeCustomAttributeData(
+                    (typeof(PreserveSigAttribute)).GetConstructor(Type.EmptyTypes)!
+                );
             if ((info.attrs & MethodAttributes.PinvokeImpl) != 0)
                 attrsData[count++] = GetDllImportAttributeData()!;
 
@@ -572,7 +598,9 @@ namespace System.Reflection
                 _ => CharSet.None,
             };
 
-            InteropServicesCallingConvention callingConvention = (flags & PInvokeAttributes.CallConvMask) switch
+            InteropServicesCallingConvention callingConvention = (
+                flags & PInvokeAttributes.CallConvMask
+            ) switch
             {
                 PInvokeAttributes.CallConvWinapi => InteropServicesCallingConvention.Winapi,
                 PInvokeAttributes.CallConvCdecl => InteropServicesCallingConvention.Cdecl,
@@ -585,44 +613,73 @@ namespace System.Reflection
 
             bool exactSpelling = (flags & PInvokeAttributes.NoMangle) != 0;
             bool setLastError = (flags & PInvokeAttributes.SupportsLastError) != 0;
-            bool bestFitMapping = (flags & PInvokeAttributes.BestFitMask) == PInvokeAttributes.BestFitEnabled;
-            bool throwOnUnmappableChar = (flags & PInvokeAttributes.ThrowOnUnmappableCharMask) == PInvokeAttributes.ThrowOnUnmappableCharEnabled;
-            bool preserveSig = (GetMethodImplementationFlags() & MethodImplAttributes.PreserveSig) != 0;
+            bool bestFitMapping =
+                (flags & PInvokeAttributes.BestFitMask) == PInvokeAttributes.BestFitEnabled;
+            bool throwOnUnmappableChar =
+                (flags & PInvokeAttributes.ThrowOnUnmappableCharMask)
+                == PInvokeAttributes.ThrowOnUnmappableCharEnabled;
+            bool preserveSig =
+                (GetMethodImplementationFlags() & MethodImplAttributes.PreserveSig) != 0;
 
-            var ctorArgs = new CustomAttributeTypedArgument[] {
-                new CustomAttributeTypedArgument (typeof(string), dllName),
+            var ctorArgs = new CustomAttributeTypedArgument[]
+            {
+                new CustomAttributeTypedArgument(typeof(string), dllName),
             };
 
             Type attrType = typeof(DllImportAttribute);
 
-            var namedArgs = new CustomAttributeNamedArgument[] {
-                new CustomAttributeNamedArgument (attrType.GetField ("EntryPoint")!, entryPoint),
-                new CustomAttributeNamedArgument (attrType.GetField ("CharSet")!, charSet),
-                new CustomAttributeNamedArgument (attrType.GetField ("ExactSpelling")!, exactSpelling),
-                new CustomAttributeNamedArgument (attrType.GetField ("SetLastError")!, setLastError),
-                new CustomAttributeNamedArgument (attrType.GetField ("PreserveSig")!, preserveSig),
-                new CustomAttributeNamedArgument (attrType.GetField ("CallingConvention")!, callingConvention),
-                new CustomAttributeNamedArgument (attrType.GetField ("BestFitMapping")!, bestFitMapping),
-                new CustomAttributeNamedArgument (attrType.GetField ("ThrowOnUnmappableChar")!, throwOnUnmappableChar)
+            var namedArgs = new CustomAttributeNamedArgument[]
+            {
+                new CustomAttributeNamedArgument(attrType.GetField("EntryPoint")!, entryPoint),
+                new CustomAttributeNamedArgument(attrType.GetField("CharSet")!, charSet),
+                new CustomAttributeNamedArgument(
+                    attrType.GetField("ExactSpelling")!,
+                    exactSpelling
+                ),
+                new CustomAttributeNamedArgument(attrType.GetField("SetLastError")!, setLastError),
+                new CustomAttributeNamedArgument(attrType.GetField("PreserveSig")!, preserveSig),
+                new CustomAttributeNamedArgument(
+                    attrType.GetField("CallingConvention")!,
+                    callingConvention
+                ),
+                new CustomAttributeNamedArgument(
+                    attrType.GetField("BestFitMapping")!,
+                    bestFitMapping
+                ),
+                new CustomAttributeNamedArgument(
+                    attrType.GetField("ThrowOnUnmappableChar")!,
+                    throwOnUnmappableChar
+                ),
             };
 
             return new RuntimeCustomAttributeData(
                 attrType.GetConstructor(new[] { typeof(string) })!,
                 ctorArgs,
-                namedArgs);
+                namedArgs
+            );
         }
 
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override MethodInfo MakeGenericMethod(Type[] methodInstantiation)
         {
             ArgumentNullException.ThrowIfNull(methodInstantiation);
 
             if (!IsGenericMethodDefinition)
-                throw new InvalidOperationException(SR.Format(SR.Arg_NotGenericMethodDefinition, this));
+                throw new InvalidOperationException(
+                    SR.Format(SR.Arg_NotGenericMethodDefinition, this)
+                );
 
             /*FIXME add GetGenericArgumentsLength() internal vcall to speed this up*/
             if (GetGenericArguments().Length != methodInstantiation.Length)
-                throw new ArgumentException(SR.Format(SR.Argument_NotEnoughGenArguments, GetGenericArguments().Length, methodInstantiation.Length));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_NotEnoughGenArguments,
+                        GetGenericArguments().Length,
+                        methodInstantiation.Length
+                    )
+                );
 
             bool hasUserType = false;
             foreach (Type type in methodInstantiation)
@@ -643,7 +700,13 @@ namespace System.Reflection
 
             MethodInfo ret = MakeGenericMethod_impl(methodInstantiation);
             if (ret == null)
-                throw new ArgumentException(SR.Format(SR.Argument_NotEnoughGenArguments, GetGenericArguments().Length, methodInstantiation.Length));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.Argument_NotEnoughGenArguments,
+                        GetGenericArguments().Length,
+                        methodInstantiation.Length
+                    )
+                );
             return ret;
         }
 
@@ -691,7 +754,9 @@ namespace System.Reflection
             }
         }
 
-        [RequiresUnreferencedCode("Trimming may change method bodies. For example it can change some instructions, remove branches or local variables.")]
+        [RequiresUnreferencedCode(
+            "Trimming may change method bodies. For example it can change some instructions, remove branches or local variables."
+        )]
         public override MethodBody GetMethodBody()
         {
             return GetMethodBody(mhandle);
@@ -702,9 +767,11 @@ namespace System.Reflection
             return RuntimeCustomAttributeData.GetCustomAttributesInternal(this);
         }
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeMethodInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeMethodInfo>(other);
     }
-#region Sync with _MonoReflectionMethod in object-internals.h
+
+    #region Sync with _MonoReflectionMethod in object-internals.h
     [StructLayout(LayoutKind.Sequential)]
     internal sealed unsafe partial class RuntimeConstructorInfo : ConstructorInfo
     {
@@ -713,7 +780,7 @@ namespace System.Reflection
         private string? name;
         private Type? reftype;
 #pragma warning restore 649
-#endregion
+    #endregion
         private string? toString;
         private RuntimeType[]? parameterTypes;
         private MethodBaseInvoker? invoker;
@@ -741,10 +808,7 @@ namespace System.Reflection
 
         public override Module Module
         {
-            get
-            {
-                return GetRuntimeModule();
-            }
+            get { return GetRuntimeModule(); }
         }
 
         internal RuntimeModule GetRuntimeModule()
@@ -808,53 +872,35 @@ namespace System.Reflection
          * to match the types of the method signature.
          */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern object InternalInvoke(object? obj, IntPtr *args, out Exception? exc);
+        internal extern object InternalInvoke(object? obj, IntPtr* args, out Exception? exc);
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                return new RuntimeMethodHandle(mhandle);
-            }
+            get { return new RuntimeMethodHandle(mhandle); }
         }
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return MonoMethodInfo.GetAttributes(mhandle);
-            }
+            get { return MonoMethodInfo.GetAttributes(mhandle); }
         }
 
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return MonoMethodInfo.GetCallingConvention(mhandle);
-            }
+            get { return MonoMethodInfo.GetCallingConvention(mhandle); }
         }
 
         public override bool ContainsGenericParameters
         {
-            get
-            {
-                return DeclaringType.ContainsGenericParameters;
-            }
+            get { return DeclaringType.ContainsGenericParameters; }
         }
 
         public override Type? ReflectedType
         {
-            get
-            {
-                return reftype;
-            }
+            get { return reftype; }
         }
         public override Type DeclaringType
         {
-            get
-            {
-                return MonoMethodInfo.GetDeclaringType(mhandle);
-            }
+            get { return MonoMethodInfo.GetDeclaringType(mhandle); }
         }
         public override string Name
         {
@@ -881,7 +927,9 @@ namespace System.Reflection
             return CustomAttribute.GetCustomAttributes(this, attributeType, inherit);
         }
 
-        [RequiresUnreferencedCode("Trimming may change method bodies. For example it can change some instructions, remove branches or local variables.")]
+        [RequiresUnreferencedCode(
+            "Trimming may change method bodies. For example it can change some instructions, remove branches or local variables."
+        )]
         public override MethodBody GetMethodBody()
         {
             return RuntimeMethodInfo.GetMethodBody(mhandle);
@@ -914,14 +962,12 @@ namespace System.Reflection
             return RuntimeCustomAttributeData.GetCustomAttributesInternal(this);
         }
 
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => HasSameMetadataDefinitionAsCore<RuntimeConstructorInfo>(other);
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            HasSameMetadataDefinitionAsCore<RuntimeConstructorInfo>(other);
 
         public override int MetadataToken
         {
-            get
-            {
-                return get_metadata_token(this);
-            }
+            get { return get_metadata_token(this); }
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]

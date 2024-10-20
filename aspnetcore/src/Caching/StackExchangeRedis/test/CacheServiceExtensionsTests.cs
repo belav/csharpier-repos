@@ -23,7 +23,9 @@ public class CacheServiceExtensionsTests
         services.AddStackExchangeRedisCache(options => { });
 
         // Assert
-        var distributedCache = services.FirstOrDefault(desc => desc.ServiceType == typeof(IDistributedCache));
+        var distributedCache = services.FirstOrDefault(desc =>
+            desc.ServiceType == typeof(IDistributedCache)
+        );
 
         Assert.NotNull(distributedCache);
         Assert.Equal(ServiceLifetime.Singleton, distributedCache.Lifetime);
@@ -42,11 +44,15 @@ public class CacheServiceExtensionsTests
         // Assert
         var serviceProvider = services.BuildServiceProvider();
 
-        var distributedCache = services.FirstOrDefault(desc => desc.ServiceType == typeof(IDistributedCache));
+        var distributedCache = services.FirstOrDefault(desc =>
+            desc.ServiceType == typeof(IDistributedCache)
+        );
 
         Assert.NotNull(distributedCache);
         Assert.Equal(ServiceLifetime.Scoped, distributedCache.Lifetime);
-        Assert.IsAssignableFrom<RedisCache>(serviceProvider.GetRequiredService<IDistributedCache>());
+        Assert.IsAssignableFrom<RedisCache>(
+            serviceProvider.GetRequiredService<IDistributedCache>()
+        );
     }
 
     [Fact]
@@ -113,11 +119,15 @@ public class CacheServiceExtensionsTests
         // Assert
         var serviceProvider = services.BuildServiceProvider();
 
-        var distributedCache = services.FirstOrDefault(desc => desc.ServiceType == typeof(IDistributedCache));
+        var distributedCache = services.FirstOrDefault(desc =>
+            desc.ServiceType == typeof(IDistributedCache)
+        );
 
         Assert.NotNull(distributedCache);
         Assert.Equal(ServiceLifetime.Scoped, distributedCache.Lifetime);
-        Assert.IsAssignableFrom<RedisCache>(serviceProvider.GetRequiredService<IDistributedCache>());
+        Assert.IsAssignableFrom<RedisCache>(
+            serviceProvider.GetRequiredService<IDistributedCache>()
+        );
 
         loggerFactory.Verify();
     }

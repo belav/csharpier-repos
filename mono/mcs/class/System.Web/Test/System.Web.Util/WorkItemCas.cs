@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,54 +26,54 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security;
 using System.Security.Permissions;
 using System.Web.Util;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.Util {
+namespace MonoCasTests.System.Web.Util
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class WorkItemCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor_Deny_Unrestricted()
+        {
+            new WorkItem();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class WorkItemCas : AspNetHostingMinimal {
+        private void Callback() { }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor_Deny_Unrestricted ()
-		{
-			new WorkItem ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void Post_Deny_UnmanagedCode()
+        {
+            WorkItem.Post(new WorkItemCallback(Callback));
+        }
 
-		private void Callback ()
-		{
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void Post_PermitOnly_UnmanagedCode()
+        {
+            try
+            {
+                WorkItem.Post(new WorkItemCallback(Callback));
+            }
+            catch (PlatformNotSupportedException)
+            {
+                // Mono and Windows prior to NT
+            }
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void Post_Deny_UnmanagedCode ()
-		{
-			WorkItem.Post (new WorkItemCallback (Callback));
-		}
+        // LinkDemand
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void Post_PermitOnly_UnmanagedCode ()
-		{
-			try {
-				WorkItem.Post (new WorkItemCallback (Callback));
-			}
-			catch (PlatformNotSupportedException) {
-				// Mono and Windows prior to NT
-			}
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (WorkItem); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(WorkItem); }
+        }
+    }
 }

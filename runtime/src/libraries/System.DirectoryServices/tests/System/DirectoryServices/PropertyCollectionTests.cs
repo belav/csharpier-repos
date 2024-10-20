@@ -13,8 +13,14 @@ namespace System.DirectoryServices.Tests
         {
             using (var entry = new DirectoryEntry())
             {
-                AssertExtensions.Throws<ArgumentNullException>("propertyName", () => entry.Properties[null]);
-                AssertExtensions.Throws<ArgumentNullException>("propertyName", () => ((IDictionary)entry.Properties)[null]);
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "propertyName",
+                    () => entry.Properties[null]
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "propertyName",
+                    () => ((IDictionary)entry.Properties)[null]
+                );
             }
         }
 
@@ -60,8 +66,14 @@ namespace System.DirectoryServices.Tests
             using (var entry = new DirectoryEntry())
             {
                 PropertyCollection properties = entry.Properties;
-                AssertExtensions.Throws<ArgumentNullException>("array", () => properties.CopyTo(null, 0));
-                AssertExtensions.Throws<ArgumentNullException>("array", () => ((ICollection)properties).CopyTo(null, 0));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "array",
+                    () => properties.CopyTo(null, 0)
+                );
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "array",
+                    () => ((ICollection)properties).CopyTo(null, 0)
+                );
             }
         }
 
@@ -71,7 +83,10 @@ namespace System.DirectoryServices.Tests
             using (var entry = new DirectoryEntry())
             {
                 PropertyCollection properties = entry.Properties;
-                AssertExtensions.Throws<ArgumentException>("array", () => ((ICollection)properties).CopyTo(new int[1, 1], 0));
+                AssertExtensions.Throws<ArgumentException>(
+                    "array",
+                    () => ((ICollection)properties).CopyTo(new int[1, 1], 0)
+                );
             }
         }
 
@@ -81,8 +96,16 @@ namespace System.DirectoryServices.Tests
             using (var entry = new DirectoryEntry())
             {
                 PropertyCollection properties = entry.Properties;
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("Number was less than the array's lower bound in the first dimension.", null, () => properties.CopyTo(new PropertyValueCollection[0], -1));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("Number was less than the array's lower bound in the first dimension.", null, () => ((ICollection)properties).CopyTo(new PropertyValueCollection[0], -1));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "Number was less than the array's lower bound in the first dimension.",
+                    null,
+                    () => properties.CopyTo(new PropertyValueCollection[0], -1)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "Number was less than the array's lower bound in the first dimension.",
+                    null,
+                    () => ((ICollection)properties).CopyTo(new PropertyValueCollection[0], -1)
+                );
             }
         }
 

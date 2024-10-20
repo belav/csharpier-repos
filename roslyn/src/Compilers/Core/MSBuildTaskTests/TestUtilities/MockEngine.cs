@@ -61,7 +61,11 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             _testOutputHelper = testOutputHelper;
         }
 
-        public bool BuildProjectFile(string projectFileName, string[] targetNames, IDictionary globalProperties, IDictionary targetOutputs)
-            => throw new NotImplementedException();
+        public bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            IDictionary globalProperties,
+            IDictionary targetOutputs
+        ) => throw new NotImplementedException();
     }
 }

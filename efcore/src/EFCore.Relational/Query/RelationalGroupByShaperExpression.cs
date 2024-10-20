@@ -24,7 +24,8 @@ public class RelationalGroupByShaperExpression : GroupByShaperExpression
     public RelationalGroupByShaperExpression(
         Expression keySelector,
         Expression elementSelector,
-        ShapedQueryExpression groupingEnumerable)
+        ShapedQueryExpression groupingEnumerable
+    )
         : base(keySelector, groupingEnumerable)
     {
         ElementSelector = elementSelector;
@@ -36,9 +37,12 @@ public class RelationalGroupByShaperExpression : GroupByShaperExpression
     public virtual Expression ElementSelector { get; }
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => throw new InvalidOperationException(
-            CoreStrings.VisitIsNotAllowed($"{nameof(RelationalGroupByShaperExpression)}.{nameof(VisitChildren)}"));
+    protected override Expression VisitChildren(ExpressionVisitor visitor) =>
+        throw new InvalidOperationException(
+            CoreStrings.VisitIsNotAllowed(
+                $"{nameof(RelationalGroupByShaperExpression)}.{nameof(VisitChildren)}"
+            )
+        );
 
     /// <inheritdoc />
     public override void Print(ExpressionPrinter expressionPrinter)

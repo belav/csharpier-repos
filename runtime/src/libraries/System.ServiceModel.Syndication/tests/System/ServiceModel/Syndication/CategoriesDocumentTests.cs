@@ -13,14 +13,18 @@ namespace System.ServiceModel.Syndication.Tests
         {
             yield return new object[] { null };
             yield return new object[] { new SyndicationCategory[0] };
-            yield return new object[] { new SyndicationCategory[] { new SyndicationCategory("name", "scheme", "label") } };
+            yield return new object[]
+            {
+                new SyndicationCategory[] { new SyndicationCategory("name", "scheme", "label") },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Create_Categories_TestData))]
         public void Create_Categories_ReturnsExpected(IList<SyndicationCategory> categories)
         {
-            Collection<SyndicationCategory> categoriesCollection = categories == null ? null : new Collection<SyndicationCategory>(categories);
+            Collection<SyndicationCategory> categoriesCollection =
+                categories == null ? null : new Collection<SyndicationCategory>(categories);
             InlineCategoriesDocument document = CategoriesDocument.Create(categoriesCollection);
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
@@ -35,15 +39,29 @@ namespace System.ServiceModel.Syndication.Tests
         {
             yield return new object[] { null, true, null };
             yield return new object[] { new SyndicationCategory[0], false, "" };
-            yield return new object[] { new SyndicationCategory[] { new SyndicationCategory("name", "scheme", "label") }, true, "scheme" };
+            yield return new object[]
+            {
+                new SyndicationCategory[] { new SyndicationCategory("name", "scheme", "label") },
+                true,
+                "scheme",
+            };
         }
 
         [Theory]
         [MemberData(nameof(Create_CategoriesAdvanced_TestData))]
-        public void Create_CategoriesAdvanced_ReturnsExpected(IList<SyndicationCategory> categories, bool isFixed, string scheme)
+        public void Create_CategoriesAdvanced_ReturnsExpected(
+            IList<SyndicationCategory> categories,
+            bool isFixed,
+            string scheme
+        )
         {
-            Collection<SyndicationCategory> categoriesCollection = categories == null ? null : new Collection<SyndicationCategory>(categories);
-            InlineCategoriesDocument document = CategoriesDocument.Create(categoriesCollection, isFixed, scheme);
+            Collection<SyndicationCategory> categoriesCollection =
+                categories == null ? null : new Collection<SyndicationCategory>(categories);
+            InlineCategoriesDocument document = CategoriesDocument.Create(
+                categoriesCollection,
+                isFixed,
+                scheme
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Equal(categoriesCollection?.Count ?? 0, document.Categories.Count);
@@ -57,8 +75,14 @@ namespace System.ServiceModel.Syndication.Tests
         public void Create_NullValueInCategories_ThrowsArgumentNullException()
         {
             var categories = new Collection<SyndicationCategory> { null };
-            AssertExtensions.Throws<ArgumentNullException>("item", () => CategoriesDocument.Create(categories));
-            AssertExtensions.Throws<ArgumentNullException>("item", () => CategoriesDocument.Create(categories, true, "scheme"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "item",
+                () => CategoriesDocument.Create(categories)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "item",
+                () => CategoriesDocument.Create(categories, true, "scheme")
+            );
         }
 
         public static IEnumerable<object[]> Create_LinkToCategoriesDocument_TestData()
@@ -71,7 +95,9 @@ namespace System.ServiceModel.Syndication.Tests
         [MemberData(nameof(Create_LinkToCategoriesDocument_TestData))]
         public void Create_LinkToCategoriesDocument_ReturnsExpected(Uri linkToCategoriesDocument)
         {
-            ReferencedCategoriesDocument document = CategoriesDocument.Create(linkToCategoriesDocument);
+            ReferencedCategoriesDocument document = CategoriesDocument.Create(
+                linkToCategoriesDocument
+            );
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.ElementExtensions);
@@ -82,14 +108,18 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Create_NullLinkToCategoriesDocument_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("link", () => CategoriesDocument.Create((Uri)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "link",
+                () => CategoriesDocument.Create((Uri)null)
+            );
         }
 
         [Fact]
         public void GetFormatter_Invoke_ReturnsExpected()
         {
             var document = new InlineCategoriesDocument();
-            AtomPub10CategoriesDocumentFormatter formatter = Assert.IsType<AtomPub10CategoriesDocumentFormatter>(document.GetFormatter());
+            AtomPub10CategoriesDocumentFormatter formatter =
+                Assert.IsType<AtomPub10CategoriesDocumentFormatter>(document.GetFormatter());
             Assert.Same(document, formatter.Document);
             Assert.Equal("http://www.w3.org/2007/app", formatter.Version);
         }

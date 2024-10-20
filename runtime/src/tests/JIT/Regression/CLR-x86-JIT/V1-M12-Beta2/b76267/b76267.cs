@@ -3,6 +3,7 @@
 
 using System;
 using Xunit;
+
 public unsafe class testout1
 {
     public struct VT2
@@ -27,7 +28,9 @@ public unsafe class testout1
         vt2.a4 = 10;
         vt2.a5 = 18;
 
-        int retval1 = Convert.ToInt32((*arg1) + (vt2.a5 * 12)) % Convert.ToInt32((Convert.ToInt32(4 - (-9)) % (17 % vt2.a4)) / (s_a1 * (*arg2)));
+        int retval1 =
+            Convert.ToInt32((*arg1) + (vt2.a5 * 12))
+            % Convert.ToInt32((Convert.ToInt32(4 - (-9)) % (17 % vt2.a4)) / (s_a1 * (*arg2)));
         Console.WriteLine("The correct result is 1");
         Console.WriteLine("The actual result is {0}", retval1);
         return retval1;

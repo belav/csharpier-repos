@@ -10,9 +10,12 @@ namespace BasicWebSite;
 
 public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
 {
-    public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder)
-        : base(options, logger, encoder)
-    { }
+    public BasicAuthenticationHandler(
+        IOptionsMonitor<AuthenticationSchemeOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     protected override Task<AuthenticateResult> HandleAuthenticateAsync()
     {
@@ -22,18 +25,22 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
         }
 
         var principal = new ClaimsPrincipal();
-        principal.AddIdentity(new ClaimsIdentity(
-            new[]
-            {
+        principal.AddIdentity(
+            new ClaimsIdentity(
+                new[]
+                {
                     new Claim("Manager", "yes"),
                     new Claim(ClaimTypes.Role, "Administrator"),
-                    new Claim(ClaimTypes.NameIdentifier, "John")
-            },
-            Scheme.Name));
+                    new Claim(ClaimTypes.NameIdentifier, "John"),
+                },
+                Scheme.Name
+            )
+        );
 
-        return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(
-            principal,
-            new AuthenticationProperties(),
-            Scheme.Name)));
+        return Task.FromResult(
+            AuthenticateResult.Success(
+                new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)
+            )
+        );
     }
 }

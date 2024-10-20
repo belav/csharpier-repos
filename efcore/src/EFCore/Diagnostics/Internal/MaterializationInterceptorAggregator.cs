@@ -9,28 +9,33 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class MaterializationInterceptorAggregator : InterceptorAggregator<IMaterializationInterceptor>
+public class MaterializationInterceptorAggregator
+    : InterceptorAggregator<IMaterializationInterceptor>
 {
     /// <summary>
     ///     Must be implemented by the inheriting type to create a single interceptor from the given list.
     /// </summary>
     /// <param name="interceptors">The interceptors to combine.</param>
     /// <returns>The combined interceptor.</returns>
-    protected override IMaterializationInterceptor CreateChain(IEnumerable<IMaterializationInterceptor> interceptors)
-        => new CompositeMaterializationInterceptor(interceptors);
+    protected override IMaterializationInterceptor CreateChain(
+        IEnumerable<IMaterializationInterceptor> interceptors
+    ) => new CompositeMaterializationInterceptor(interceptors);
 
     private sealed class CompositeMaterializationInterceptor : IMaterializationInterceptor
     {
         private readonly IMaterializationInterceptor[] _interceptors;
 
-        public CompositeMaterializationInterceptor(IEnumerable<IMaterializationInterceptor> interceptors)
+        public CompositeMaterializationInterceptor(
+            IEnumerable<IMaterializationInterceptor> interceptors
+        )
         {
             _interceptors = interceptors.ToArray();
         }
 
         public InterceptionResult<object> CreatingInstance(
             MaterializationInterceptionData materializationData,
-            InterceptionResult<object> result)
+            InterceptionResult<object> result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -42,7 +47,8 @@ public class MaterializationInterceptorAggregator : InterceptorAggregator<IMater
 
         public object CreatedInstance(
             MaterializationInterceptionData materializationData,
-            object entity)
+            object entity
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -55,7 +61,8 @@ public class MaterializationInterceptorAggregator : InterceptorAggregator<IMater
         public InterceptionResult InitializingInstance(
             MaterializationInterceptionData materializationData,
             object entity,
-            InterceptionResult result)
+            InterceptionResult result
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
@@ -67,7 +74,8 @@ public class MaterializationInterceptorAggregator : InterceptorAggregator<IMater
 
         public object InitializedInstance(
             MaterializationInterceptionData materializationData,
-            object entity)
+            object entity
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {

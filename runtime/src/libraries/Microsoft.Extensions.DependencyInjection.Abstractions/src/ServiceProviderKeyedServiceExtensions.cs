@@ -39,14 +39,21 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="serviceKey">An object that specifies the key of service object to get.</param>
         /// <returns>A service object of type <paramref name="serviceType"/>.</returns>
         /// <exception cref="System.InvalidOperationException">There is no service of type <paramref name="serviceType"/>.</exception>
-        public static object GetRequiredKeyedService(this IServiceProvider provider, Type serviceType, object? serviceKey)
+        public static object GetRequiredKeyedService(
+            this IServiceProvider provider,
+            Type serviceType,
+            object? serviceKey
+        )
         {
             ThrowHelper.ThrowIfNull(provider);
             ThrowHelper.ThrowIfNull(serviceType);
 
             if (provider is IKeyedServiceProvider requiredServiceSupportingProvider)
             {
-                return requiredServiceSupportingProvider.GetRequiredKeyedService(serviceType, serviceKey);
+                return requiredServiceSupportingProvider.GetRequiredKeyedService(
+                    serviceType,
+                    serviceKey
+                );
             }
 
             throw new InvalidOperationException(SR.KeyedServicesNotSupported);
@@ -60,7 +67,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="serviceKey">An object that specifies the key of service object to get.</param>
         /// <returns>A service object of type <typeparamref name="T"/>.</returns>
         /// <exception cref="System.InvalidOperationException">There is no service of type <typeparamref name="T"/>.</exception>
-        public static T GetRequiredKeyedService<T>(this IServiceProvider provider, object? serviceKey) where T : notnull
+        public static T GetRequiredKeyedService<T>(
+            this IServiceProvider provider,
+            object? serviceKey
+        )
+            where T : notnull
         {
             ThrowHelper.ThrowIfNull(provider);
 
@@ -74,7 +85,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the services from.</param>
         /// <param name="serviceKey">An object that specifies the key of service object to get.</param>
         /// <returns>An enumeration of services of type <typeparamref name="T"/>.</returns>
-        public static IEnumerable<T> GetKeyedServices<T>(this IServiceProvider provider, object? serviceKey)
+        public static IEnumerable<T> GetKeyedServices<T>(
+            this IServiceProvider provider,
+            object? serviceKey
+        )
         {
             ThrowHelper.ThrowIfNull(provider);
 
@@ -88,14 +102,21 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="serviceType">An object that specifies the type of service object to get.</param>
         /// <param name="serviceKey">An object that specifies the key of service object to get.</param>
         /// <returns>An enumeration of services of type <paramref name="serviceType"/>.</returns>
-        [RequiresDynamicCode("The native code for an IEnumerable<serviceType> might not be available at runtime.")]
-        public static IEnumerable<object?> GetKeyedServices(this IServiceProvider provider, Type serviceType, object? serviceKey)
+        [RequiresDynamicCode(
+            "The native code for an IEnumerable<serviceType> might not be available at runtime."
+        )]
+        public static IEnumerable<object?> GetKeyedServices(
+            this IServiceProvider provider,
+            Type serviceType,
+            object? serviceKey
+        )
         {
             ThrowHelper.ThrowIfNull(provider);
             ThrowHelper.ThrowIfNull(serviceType);
 
             Type? genericEnumerable = typeof(IEnumerable<>).MakeGenericType(serviceType);
-            return (IEnumerable<object>)provider.GetRequiredKeyedService(genericEnumerable, serviceKey);
+            return (IEnumerable<object>)
+                provider.GetRequiredKeyedService(genericEnumerable, serviceKey);
         }
     }
 }

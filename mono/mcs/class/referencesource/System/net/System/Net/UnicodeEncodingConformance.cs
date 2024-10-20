@@ -45,8 +45,12 @@ namespace System.Net.Configuration
         /// HtmlEncode takes place. For example, given a string "\uD84C\uDFB4" (or "\U000233B4"),
         /// the output of HtmlEncode is "\uD84C\uDFB4" (the input is not encoded).
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Compat", Justification="Shorthand for 'compatibility mode'.")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Compat",
+            Justification = "Shorthand for 'compatibility mode'."
+        )]
         Compat,
     }
-
 }

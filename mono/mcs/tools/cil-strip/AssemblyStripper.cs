@@ -28,196 +28,220 @@
 
 using System.Collections;
 using System.IO;
-
 using Mono.Cecil;
 using Mono.Cecil.Binary;
 using Mono.Cecil.Cil;
 using Mono.Cecil.Metadata;
 
-namespace Mono.CilStripper {
+namespace Mono.CilStripper
+{
+    class AssemblyStripper
+    {
+        AssemblyDefinition assembly;
+        BinaryWriter writer;
 
-	class AssemblyStripper {
+        Image original;
+        Image stripped;
 
-		AssemblyDefinition assembly;
-		BinaryWriter writer;
+        ReflectionWriter reflection_writer;
+        MetadataWriter metadata_writer;
 
-		Image original;
-		Image stripped;
+        TablesHeap original_tables;
+        TablesHeap stripped_tables;
 
-		ReflectionWriter reflection_writer;
-		MetadataWriter metadata_writer;
+        AssemblyStripper(AssemblyDefinition assembly, BinaryWriter writer)
+        {
+            this.assembly = assembly;
+            this.writer = writer;
+        }
 
-		TablesHeap original_tables;
-		TablesHeap stripped_tables;
+        void Strip()
+        {
+            FullLoad();
+            ClearMethodBodies();
+            CopyOriginalImage();
+            PatchMethods();
+            PatchFields();
+            PatchResources();
+            Write();
+        }
 
-		AssemblyStripper (AssemblyDefinition assembly, BinaryWriter writer)
-		{
-			this.assembly = assembly;
-			this.writer = writer;
-		}
+        void FullLoad()
+        {
+            assembly.MainModule.FullLoad();
+        }
 
-		void Strip ()
-		{
-			FullLoad ();
-			ClearMethodBodies ();
-			CopyOriginalImage ();
-			PatchMethods ();
-			PatchFields ();
-			PatchResources ();
-			Write ();
-		}
+        void ClearMethodBodies()
+        {
+            foreach (TypeDefinition type in assembly.MainModule.Types)
+            {
+                ClearMethodBodies(type.Constructors);
+                ClearMethodBodies(type.Methods);
+            }
+        }
 
-		void FullLoad ()
-		{
-			assembly.MainModule.FullLoad ();
-		}
+        static void ClearMethodBodies(ICollection methods)
+        {
+            foreach (MethodDefinition method in methods)
+            {
+                if (!method.HasBody)
+                    continue;
 
-		void ClearMethodBodies ()
-		{
-			foreach (TypeDefinition type in assembly.MainModule.Types) {
-				ClearMethodBodies (type.Constructors);
-				ClearMethodBodies (type.Methods);
-			}
-		}
+                MethodBody body = new MethodBody(method);
+                body.CilWorker.Emit(OpCodes.Ret);
 
-		static void ClearMethodBodies (ICollection methods)
-		{
-			foreach (MethodDefinition method in methods) {
-				if (!method.HasBody)
-					continue;
+                method.Body = body;
+            }
+        }
 
-				MethodBody body = new MethodBody (method);
-				body.CilWorker.Emit (OpCodes.Ret);
+        void CopyOriginalImage()
+        {
+            original = assembly.MainModule.Image;
+            stripped = Image.CreateImage();
 
-				method.Body = body;
-			}
-		}
+            stripped.Accept(new CopyImageVisitor(original));
 
-		void CopyOriginalImage ()
-		{
-			original = assembly.MainModule.Image;
-			stripped = Image.CreateImage();
+            assembly.MainModule.Image = stripped;
 
-			stripped.Accept (new CopyImageVisitor (original));
+            original_tables = original.MetadataRoot.Streams.TablesHeap;
+            stripped_tables = stripped.MetadataRoot.Streams.TablesHeap;
 
-			assembly.MainModule.Image = stripped;
+            TableCollection tables = original_tables.Tables;
+            foreach (IMetadataTable table in tables)
+                stripped_tables.Tables.Add(table);
 
-			original_tables = original.MetadataRoot.Streams.TablesHeap;
-			stripped_tables = stripped.MetadataRoot.Streams.TablesHeap;
+            stripped_tables.Valid = original_tables.Valid;
+            stripped_tables.Sorted = original_tables.Sorted;
 
-			TableCollection tables = original_tables.Tables;
-			foreach (IMetadataTable table in tables)
-				stripped_tables.Tables.Add(table);
+            reflection_writer = new ReflectionWriter(assembly.MainModule);
+            reflection_writer.StructureWriter = new StructureWriter(assembly, writer);
+            reflection_writer.CodeWriter.Stripped = true;
 
-			stripped_tables.Valid = original_tables.Valid;
-			stripped_tables.Sorted = original_tables.Sorted;
+            metadata_writer = reflection_writer.MetadataWriter;
 
-			reflection_writer = new ReflectionWriter (assembly.MainModule);
-			reflection_writer.StructureWriter = new StructureWriter (assembly, writer);
-			reflection_writer.CodeWriter.Stripped = true;
+            PatchHeap(metadata_writer.StringWriter, original.MetadataRoot.Streams.StringsHeap);
+            PatchHeap(metadata_writer.GuidWriter, original.MetadataRoot.Streams.GuidHeap);
+            PatchHeap(
+                metadata_writer.UserStringWriter,
+                original.MetadataRoot.Streams.UserStringsHeap
+            );
+            PatchHeap(metadata_writer.BlobWriter, original.MetadataRoot.Streams.BlobHeap);
 
-			metadata_writer = reflection_writer.MetadataWriter;
+            if (assembly.EntryPoint != null)
+                metadata_writer.EntryPointToken = assembly.EntryPoint.MetadataToken.ToUInt();
+        }
 
-			PatchHeap (metadata_writer.StringWriter, original.MetadataRoot.Streams.StringsHeap);
-			PatchHeap (metadata_writer.GuidWriter, original.MetadataRoot.Streams.GuidHeap);
-			PatchHeap (metadata_writer.UserStringWriter, original.MetadataRoot.Streams.UserStringsHeap);
-			PatchHeap (metadata_writer.BlobWriter, original.MetadataRoot.Streams.BlobHeap);
+        static void PatchHeap(MemoryBinaryWriter heap_writer, MetadataHeap heap)
+        {
+            if (heap == null)
+                return;
 
-			if (assembly.EntryPoint != null)
-				metadata_writer.EntryPointToken = assembly.EntryPoint.MetadataToken.ToUInt ();
-		}
+            heap_writer.BaseStream.Position = 0;
+            heap_writer.Write(heap.Data);
+        }
 
-		static void PatchHeap (MemoryBinaryWriter heap_writer, MetadataHeap heap)
-		{
-			if (heap == null)
-				return;
+        void PatchMethods()
+        {
+            MethodTable methodTable = (MethodTable)stripped_tables[MethodTable.RId];
+            if (methodTable == null)
+                return;
 
-			heap_writer.BaseStream.Position = 0;
-			heap_writer.Write (heap.Data);
-		}
+            RVA method_rva = RVA.Zero;
 
-		void PatchMethods ()
-		{
-			MethodTable methodTable = (MethodTable) stripped_tables [MethodTable.RId];
-			if (methodTable == null)
-				return;
+            for (int i = 0; i < methodTable.Rows.Count; i++)
+            {
+                MethodRow methodRow = methodTable[i];
 
-			RVA method_rva = RVA.Zero;
+                methodRow.ImplFlags |= MethodImplAttributes.NoInlining;
 
-			for (int i = 0; i < methodTable.Rows.Count; i++) {
-				MethodRow methodRow = methodTable[i];
+                MetadataToken methodToken = MetadataToken.FromMetadataRow(TokenType.Method, i);
 
-				methodRow.ImplFlags |= MethodImplAttributes.NoInlining;
+                MethodDefinition method = (MethodDefinition)
+                    assembly.MainModule.LookupByToken(methodToken);
 
-				MetadataToken methodToken = MetadataToken.FromMetadataRow (TokenType.Method, i);
+                if (method.HasBody)
+                {
+                    method_rva =
+                        method_rva != RVA.Zero
+                            ? method_rva
+                            : reflection_writer.CodeWriter.WriteMethodBody(method);
 
-				MethodDefinition method = (MethodDefinition) assembly.MainModule.LookupByToken (methodToken);
+                    methodRow.RVA = method_rva;
+                }
+                else
+                    methodRow.RVA = RVA.Zero;
+            }
+        }
 
-				if (method.HasBody) {
-					method_rva = method_rva != RVA.Zero
-						? method_rva
-						: reflection_writer.CodeWriter.WriteMethodBody (method);
+        void PatchFields()
+        {
+            FieldRVATable fieldRvaTable = (FieldRVATable)stripped_tables[FieldRVATable.RId];
+            if (fieldRvaTable == null)
+                return;
 
-					methodRow.RVA = method_rva;
-				} else
-					methodRow.RVA = RVA.Zero;
-			}
-		}
+            for (int i = 0; i < fieldRvaTable.Rows.Count; i++)
+            {
+                FieldRVARow fieldRvaRow = fieldRvaTable[i];
 
-		void PatchFields ()
-		{
-			FieldRVATable fieldRvaTable = (FieldRVATable) stripped_tables [FieldRVATable.RId];
-			if (fieldRvaTable == null)
-				return;
+                MetadataToken fieldToken = new MetadataToken(TokenType.Field, fieldRvaRow.Field);
 
-			for (int i = 0; i < fieldRvaTable.Rows.Count; i++) {
-				FieldRVARow fieldRvaRow = fieldRvaTable [i];
+                FieldDefinition field = (FieldDefinition)
+                    assembly.MainModule.LookupByToken(fieldToken);
 
-				MetadataToken fieldToken = new MetadataToken (TokenType.Field, fieldRvaRow.Field);
+                fieldRvaRow.RVA = metadata_writer.GetDataCursor();
+                metadata_writer.AddData(field.InitialValue.Length + 3 & (~3));
+                metadata_writer.AddFieldInitData(field.InitialValue);
+            }
+        }
 
-				FieldDefinition field = (FieldDefinition) assembly.MainModule.LookupByToken (fieldToken);
+        void PatchResources()
+        {
+            ManifestResourceTable resourceTable = (ManifestResourceTable)
+                stripped_tables[ManifestResourceTable.RId];
+            if (resourceTable == null)
+                return;
 
-				fieldRvaRow.RVA = metadata_writer.GetDataCursor ();
-				metadata_writer.AddData (field.InitialValue.Length + 3 & (~3));
-				metadata_writer.AddFieldInitData (field.InitialValue);
-			}
-		}
+            for (int i = 0; i < resourceTable.Rows.Count; i++)
+            {
+                ManifestResourceRow resourceRow = resourceTable[i];
 
-		void PatchResources ()
-		{
-			ManifestResourceTable resourceTable = (ManifestResourceTable) stripped_tables [ManifestResourceTable.RId];
-			if (resourceTable == null)
-				return;
+                if (resourceRow.Implementation.RID != 0)
+                    continue;
 
-			for (int i = 0; i < resourceTable.Rows.Count; i++) {
-				ManifestResourceRow resourceRow = resourceTable [i];
+                foreach (Resource resource in assembly.MainModule.Resources)
+                {
+                    EmbeddedResource er = resource as EmbeddedResource;
+                    if (er == null)
+                        continue;
 
-				if (resourceRow.Implementation.RID != 0)
-					continue;
+                    if (
+                        resource.Name != original.MetadataRoot.Streams.StringsHeap[resourceRow.Name]
+                    )
+                        continue;
 
-				foreach (Resource resource in assembly.MainModule.Resources) {
-					EmbeddedResource er = resource as EmbeddedResource;
-					if (er == null)
-						continue;
+                    resourceRow.Offset = metadata_writer.AddResource(er.Data);
+                }
+            }
+        }
 
-					if (resource.Name != original.MetadataRoot.Streams.StringsHeap [resourceRow.Name])
-						continue;
+        void Write()
+        {
+            stripped.MetadataRoot.Accept(metadata_writer);
+        }
 
-					resourceRow.Offset = metadata_writer.AddResource (er.Data);
-				}
-			}
-		}
-
-		void Write ()
-		{
-			stripped.MetadataRoot.Accept (metadata_writer);
-		}
-
-		public static void StripAssembly (AssemblyDefinition assembly, string file)
-		{
-			using (FileStream fs = new FileStream (file, FileMode.Create, FileAccess.Write, FileShare.None)) {
-				new AssemblyStripper (assembly, new BinaryWriter (fs)).Strip ();
-			}
-		}
-	}
+        public static void StripAssembly(AssemblyDefinition assembly, string file)
+        {
+            using (
+                FileStream fs = new FileStream(
+                    file,
+                    FileMode.Create,
+                    FileAccess.Write,
+                    FileShare.None
+                )
+            )
+            {
+                new AssemblyStripper(assembly, new BinaryWriter(fs)).Strip();
+            }
+        }
+    }
 }

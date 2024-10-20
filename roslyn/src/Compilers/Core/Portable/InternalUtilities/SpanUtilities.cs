@@ -8,7 +8,11 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class SpanUtilities
     {
-        public static bool All<TElement, TParam>(this ReadOnlySpan<TElement> span, TParam param, Func<TElement, TParam, bool> predicate)
+        public static bool All<TElement, TParam>(
+            this ReadOnlySpan<TElement> span,
+            TParam param,
+            Func<TElement, TParam, bool> predicate
+        )
         {
             foreach (var e in span)
             {
@@ -21,7 +25,10 @@ namespace Microsoft.CodeAnalysis
             return true;
         }
 
-        public static bool All<TElement>(this ReadOnlySpan<TElement> span, Func<TElement, bool> predicate)
+        public static bool All<TElement>(
+            this ReadOnlySpan<TElement> span,
+            Func<TElement, bool> predicate
+        )
         {
             foreach (var e in span)
             {

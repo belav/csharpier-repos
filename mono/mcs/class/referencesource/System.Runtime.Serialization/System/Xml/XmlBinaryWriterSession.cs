@@ -4,12 +4,12 @@
 namespace System.Xml
 {
     using System;
-    using System.Xml;
     using System.Collections;
-    using System.Diagnostics;
-    using System.Runtime.Serialization;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Runtime.Serialization;
+    using System.Xml;
 
     public class XmlBinaryWriterSession
     {
@@ -28,7 +28,9 @@ namespace System.Xml
         {
             IntArray keys;
             if (value == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "value"
+                );
 
             if (maps.TryGetValue(value.Dictionary, out keys))
             {
@@ -37,7 +39,9 @@ namespace System.Xml
                 if (key != -1)
                 {
                     // If the key is already set, then something is wrong
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.XmlKeyAlreadyExists)));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.XmlKeyAlreadyExists))
+                    );
                 }
 
                 key = Add(value.Value);
@@ -100,7 +104,8 @@ namespace System.Xml
             return false;
         }
 
-        class PriorityDictionary<K, V> where K : class
+        class PriorityDictionary<K, V>
+            where K : class
         {
             Dictionary<K, V> dictionary;
             Entry[] list;

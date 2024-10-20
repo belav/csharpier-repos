@@ -31,9 +31,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         /// <summary>
         /// Returns all the replacements that need to be performed for the specified document.
         /// </summary>
-        public abstract IEnumerable<VSTypeScriptInlineRenameReplacementWrapper> GetReplacements(DocumentId documentId);
+        public abstract IEnumerable<VSTypeScriptInlineRenameReplacementWrapper> GetReplacements(
+            DocumentId documentId
+        );
 
-        IEnumerable<InlineRenameReplacement> IInlineRenameReplacementInfo.GetReplacements(DocumentId documentId)
-            => GetReplacements(documentId).Select(r => r.UnderlyingObject);
+        IEnumerable<InlineRenameReplacement> IInlineRenameReplacementInfo.GetReplacements(
+            DocumentId documentId
+        ) => GetReplacements(documentId).Select(r => r.UnderlyingObject);
     }
 }

@@ -15,10 +15,18 @@ namespace System.Reflection
 
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public object Invoke(object?[]? parameters) => Invoke(BindingFlags.Default, binder: null, parameters: parameters, culture: null);
-        public abstract object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture);
+        public object Invoke(object?[]? parameters) =>
+            Invoke(BindingFlags.Default, binder: null, parameters: parameters, culture: null);
+
+        public abstract object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        );
 
         public override bool Equals(object? obj) => base.Equals(obj);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -40,7 +48,8 @@ namespace System.Reflection
             return (left is null) ? false : left.Equals(right);
         }
 
-        public static bool operator !=(ConstructorInfo? left, ConstructorInfo? right) => !(left == right);
+        public static bool operator !=(ConstructorInfo? left, ConstructorInfo? right) =>
+            !(left == right);
 
         public static readonly string ConstructorName = ".ctor";
         public static readonly string TypeConstructorName = ".cctor";

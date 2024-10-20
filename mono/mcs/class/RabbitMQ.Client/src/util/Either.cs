@@ -57,50 +57,55 @@
 using System.Collections;
 using System.Threading;
 
-namespace RabbitMQ.Util {
+namespace RabbitMQ.Util
+{
     ///<summary>Used internally by class Either.</summary>
-    public enum EitherAlternative {
+    public enum EitherAlternative
+    {
         Left,
-        Right
+        Right,
     }
 
     ///<summary>Models the disjoint union of two alternatives, a
     ///"left" alternative and a "right" alternative.</summary>
     ///<remarks>Borrowed from ML, Haskell etc.</remarks>
-    public class Either {
+    public class Either
+    {
         ///<summary>Records which alternative this instance represents.</summary>
         private EitherAlternative m_alternative;
+
         ///<summary>Holds the value this instance carries.</summary>
         private object m_value;
 
         ///<summary>Private constructor. Use the static methods Left, Right instead.</summary>
-        private Either(EitherAlternative alternative, object value) {
+        private Either(EitherAlternative alternative, object value)
+        {
             m_alternative = alternative;
             m_value = value;
         }
 
         ///<summary>Constructs an Either instance representing a Left alternative.</summary>
-        public static Either Left(object value) {
+        public static Either Left(object value)
+        {
             return new Either(EitherAlternative.Left, value);
         }
 
         ///<summary>Constructs an Either instance representing a Right alternative.</summary>
-        public static Either Right(object value) {
+        public static Either Right(object value)
+        {
             return new Either(EitherAlternative.Right, value);
         }
 
         ///<summary>Retrieve the alternative represented by this instance.</summary>
-        public EitherAlternative Alternative {
-            get {
-                return m_alternative;
-            }
+        public EitherAlternative Alternative
+        {
+            get { return m_alternative; }
         }
 
         ///<summary>Retrieve the value carried by this instance.</summary>
-        public object Value {
-            get {
-                return m_value;
-            }
+        public object Value
+        {
+            get { return m_value; }
         }
     }
 }

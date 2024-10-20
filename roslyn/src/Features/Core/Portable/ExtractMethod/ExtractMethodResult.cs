@@ -22,12 +22,19 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         /// </summary>
         public ImmutableArray<string> Reasons { get; }
 
-        private readonly AsyncLazy<(Document document, SyntaxToken? invocationNameToken)>? _lazyData;
+        private readonly AsyncLazy<(
+            Document document,
+            SyntaxToken? invocationNameToken
+        )>? _lazyData;
 
         internal ExtractMethodResult(
             bool succeeded,
             ImmutableArray<string> reasons,
-            Func<CancellationToken, Task<(Document document, SyntaxToken? invocationNameToken)>>? getDocumentAsync)
+            Func<
+                CancellationToken,
+                Task<(Document document, SyntaxToken? invocationNameToken)>
+            >? getDocumentAsync
+        )
         {
             Succeeded = succeeded;
 
@@ -37,17 +44,22 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 _lazyData = AsyncLazy.Create(getDocumentAsync);
         }
 
-        public static ExtractMethodResult Fail(OperationStatus status)
-            => new(status.Succeeded, status.Reasons, getDocumentAsync: null);
+        public static ExtractMethodResult Fail(OperationStatus status) =>
+            new(status.Succeeded, status.Reasons, getDocumentAsync: null);
 
         public static ExtractMethodResult Success(
             OperationStatus status,
-            Func<CancellationToken, Task<(Document document, SyntaxToken? invocationNameToken)>> getDocumentAsync)
+            Func<
+                CancellationToken,
+                Task<(Document document, SyntaxToken? invocationNameToken)>
+            > getDocumentAsync
+        )
         {
             return new(status.Succeeded, status.Reasons, getDocumentAsync);
         }
 
-        public Task<(Document document, SyntaxToken? invocationNameToken)> GetDocumentAsync(CancellationToken cancellationToken)
-            => _lazyData!.GetValueAsync(cancellationToken);
+        public Task<(Document document, SyntaxToken? invocationNameToken)> GetDocumentAsync(
+            CancellationToken cancellationToken
+        ) => _lazyData!.GetValueAsync(cancellationToken);
     }
 }

@@ -9,14 +9,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 /// <summary>
 /// A common LSP pattern is an initial request to the server that returns some set of partially filled out items.
 /// Then the client issues a xyz/resolve request to fully resolve a specific item when actually needed.
-/// 
+///
 /// On the server side we often need to cache non-serializable data that can't be included in the typical
 /// 'data' field on the actual item.  This type is a general cache that helps keep track of data between requests.
 ///
 /// This cache is generally only written to as part of the initial request to store data for later resolution.
 /// It is only read from as part of a resolve request for some data sent in the initial request to restore state.
 /// </summary>
-internal abstract class ResolveCache<TCacheEntry> : ILspService where TCacheEntry : class
+internal abstract class ResolveCache<TCacheEntry> : ILspService
+    where TCacheEntry : class
 {
     /// <summary>
     /// Maximum number of cache entries allowed in cache. Must be >= 1.
@@ -109,10 +110,9 @@ internal abstract class ResolveCache<TCacheEntry> : ILspService where TCacheEntr
 
         public int MaximumCacheSize => _resolveCache._maxCacheSize;
 
-        public TestAccessor(ResolveCache<TCacheEntry> resolveCache)
-            => _resolveCache = resolveCache;
+        public TestAccessor(ResolveCache<TCacheEntry> resolveCache) => _resolveCache = resolveCache;
 
-        public List<(long ResultId, TCacheEntry CacheEntry)> GetCacheContents()
-            => _resolveCache._resultIdToCachedItem;
+        public List<(long ResultId, TCacheEntry CacheEntry)> GetCacheContents() =>
+            _resolveCache._resultIdToCachedItem;
     }
 }

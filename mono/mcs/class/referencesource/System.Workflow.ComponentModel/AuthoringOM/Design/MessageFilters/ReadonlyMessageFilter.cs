@@ -1,8 +1,8 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
     using System.Diagnostics;
+    using System.Drawing;
     using System.Windows.Forms;
 
     #region Class ReadonlyMessageFilter
@@ -11,9 +11,7 @@
     internal sealed class ReadonlyMessageFilter : WorkflowDesignerMessageFilter
     {
         #region Members and Contructor/Destruction
-        public ReadonlyMessageFilter()
-        {
-        }
+        public ReadonlyMessageFilter() { }
         #endregion
 
         #region MessageFilter Overridables

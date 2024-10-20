@@ -15,16 +15,30 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
     [CompilerTrait(CompilerFeature.AsyncStreams)]
     public class AsyncStreamsParsingTests : ParsingTests
     {
-        public AsyncStreamsParsingTests(ITestOutputHelper output) : base(output) { }
+        public AsyncStreamsParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {
-            return SyntaxFactory.ParseSyntaxTree(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp8));
+            return SyntaxFactory.ParseSyntaxTree(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
-        protected override CSharpSyntaxNode ParseNode(string text, CSharpParseOptions options = null)
+        protected override CSharpSyntaxNode ParseNode(
+            string text,
+            CSharpParseOptions options = null
+        )
         {
-            return SyntaxFactory.ParseExpression(text, options: (options ?? TestOptions.Regular).WithLanguageVersion(LanguageVersion.CSharp8));
+            return SyntaxFactory.ParseExpression(
+                text,
+                options: (options ?? TestOptions.Regular).WithLanguageVersion(
+                    LanguageVersion.CSharp8
+                )
+            );
         }
 
         [Theory, WorkItem(32318, "https://github.com/dotnet/roslyn/issues/32318")]
@@ -32,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [InlineData(false)]
         public void AwaitUsingDeclaration(bool useCSharp8)
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -42,7 +57,9 @@ class C
         }
     }
 }
-", options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3);
+",
+                options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -110,7 +127,8 @@ class C
         [Fact]
         public void AwaitUsingWithExpression()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -120,7 +138,8 @@ class C
         }
     }
 }
-");
+"
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -173,7 +192,8 @@ class C
         [Fact, WorkItem(30565, "https://github.com/dotnet/roslyn/issues/30565")]
         public void AwaitUsingWithExpression_Reversed()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -201,7 +221,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(6, 26),
                 // (6,27): error CS1002: ; expected
                 //         using await (this)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 27));
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(6, 27)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -273,7 +294,8 @@ class C
         [InlineData(false)]
         public void AwaitForeach(bool useCSharp8)
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -283,7 +305,9 @@ class C
         }
     }
 }
-", options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3);
+",
+                options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -342,7 +366,8 @@ class C
         [Fact, WorkItem(30565, "https://github.com/dotnet/roslyn/issues/30565")]
         public void AwaitForeach_Reversed()
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -355,7 +380,9 @@ class C
 ",
                 // (6,17): error CS1003: Syntax error, '(' expected
                 //         foreach await (var i in collection)
-                Diagnostic(ErrorCode.ERR_SyntaxError, "await").WithArguments("(").WithLocation(6, 17),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "await")
+                    .WithArguments("(")
+                    .WithLocation(6, 17),
                 // (6,28): error CS1026: ) expected
                 //         foreach await (var i in collection)
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "i").WithLocation(6, 28),
@@ -370,7 +397,9 @@ class C
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "in").WithLocation(6, 30),
                 // (6,30): error CS1525: Invalid expression term 'in'
                 //         foreach await (var i in collection)
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "in").WithArguments("in").WithLocation(6, 30),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "in")
+                    .WithArguments("in")
+                    .WithLocation(6, 30),
                 // (6,30): error CS1002: ; expected
                 //         foreach await (var i in collection)
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "in").WithLocation(6, 30),
@@ -382,7 +411,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(6, 43),
                 // (6,43): error CS1513: } expected
                 //         foreach await (var i in collection)
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(6, 43));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(6, 43)
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);
@@ -466,7 +496,8 @@ class C
         [InlineData(false)]
         public void DeconstructionAwaitForeach(bool useCSharp8)
         {
-            UsingTree(@"
+            UsingTree(
+                @"
 class C
 {
     async void M()
@@ -476,7 +507,9 @@ class C
         }
     }
 }
-", options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3);
+",
+                options: useCSharp8 ? TestOptions.Regular8 : TestOptions.Regular7_3
+            );
             N(SyntaxKind.CompilationUnit);
             {
                 N(SyntaxKind.ClassDeclaration);

@@ -15,13 +15,20 @@ namespace System.Runtime.InteropServices
         /// Get <see cref="ReadOnlySequenceSegment{T}"/> from the underlying <see cref="ReadOnlySequence{T}"/>.
         /// If unable to get the <see cref="ReadOnlySequenceSegment{T}"/>, return false.
         /// </summary>
-        public static bool TryGetReadOnlySequenceSegment<T>(ReadOnlySequence<T> sequence,
+        public static bool TryGetReadOnlySequenceSegment<T>(
+            ReadOnlySequence<T> sequence,
             [NotNullWhen(true)] out ReadOnlySequenceSegment<T>? startSegment,
             out int startIndex,
             [NotNullWhen(true)] out ReadOnlySequenceSegment<T>? endSegment,
-            out int endIndex)
+            out int endIndex
+        )
         {
-            return sequence.TryGetReadOnlySequenceSegment(out startSegment, out startIndex, out endSegment, out endIndex);
+            return sequence.TryGetReadOnlySequenceSegment(
+                out startSegment,
+                out startIndex,
+                out endSegment,
+                out endIndex
+            );
         }
 
         /// <summary>
@@ -37,7 +44,10 @@ namespace System.Runtime.InteropServices
         /// Get <see cref="ReadOnlyMemory{T}"/> from the underlying <see cref="ReadOnlySequence{T}"/>.
         /// If unable to get the <see cref="ReadOnlyMemory{T}"/>, return false.
         /// </summary>
-        public static bool TryGetReadOnlyMemory<T>(ReadOnlySequence<T> sequence, out ReadOnlyMemory<T> memory)
+        public static bool TryGetReadOnlyMemory<T>(
+            ReadOnlySequence<T> sequence,
+            out ReadOnlyMemory<T> memory
+        )
         {
             if (!sequence.IsSingleSegment)
             {
@@ -53,7 +63,12 @@ namespace System.Runtime.InteropServices
         /// Get <see cref="string"/> from the underlying <see cref="ReadOnlySequence{T}"/>.
         /// If unable to get the <see cref="string"/>, return false.
         /// </summary>
-        internal static bool TryGetString(ReadOnlySequence<char> sequence, [NotNullWhen(true)] out string? text, out int start, out int length)
+        internal static bool TryGetString(
+            ReadOnlySequence<char> sequence,
+            [NotNullWhen(true)] out string? text,
+            out int start,
+            out int length
+        )
         {
             return sequence.TryGetString(out text, out start, out length);
         }
@@ -70,7 +85,8 @@ namespace System.Runtime.InteropServices
         /// <returns>
         /// True if successful. <paramref name="value"/> will be default if failed (due to lack of space).
         /// </returns>
-        public static bool TryRead<T>(ref SequenceReader<byte> reader, out T value) where T : unmanaged
+        public static bool TryRead<T>(ref SequenceReader<byte> reader, out T value)
+            where T : unmanaged
         {
             return reader.TryRead<T>(out value);
         }

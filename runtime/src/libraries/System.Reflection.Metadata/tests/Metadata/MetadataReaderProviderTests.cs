@@ -15,7 +15,13 @@ namespace System.Reflection.Metadata.Tests
         private static BlobBuilder BuildMetadataImage()
         {
             var mdBuilder = new MetadataBuilder();
-            mdBuilder.AddModule(0, default(StringHandle), default(GuidHandle), default(GuidHandle), default(GuidHandle));
+            mdBuilder.AddModule(
+                0,
+                default(StringHandle),
+                default(GuidHandle),
+                default(GuidHandle),
+                default(GuidHandle)
+            );
 
             var rootBuilder = new MetadataRootBuilder(mdBuilder, "v9.9.9.9");
 
@@ -28,36 +34,55 @@ namespace System.Reflection.Metadata.Tests
         [Fact]
         public unsafe void FromMetadataImage_BadArgs()
         {
-            Assert.Throws<ArgumentNullException>(() => MetadataReaderProvider.FromMetadataImage(null, 10));
+            Assert.Throws<ArgumentNullException>(
+                () => MetadataReaderProvider.FromMetadataImage(null, 10)
+            );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                fixed (byte* p = new byte[] { 0 }) MetadataReaderProvider.FromMetadataImage(p, -1);
+                fixed (byte* p = new byte[] { 0 })
+                    MetadataReaderProvider.FromMetadataImage(p, -1);
             });
 
-            Assert.Throws<ArgumentNullException>(() => MetadataReaderProvider.FromMetadataImage(default(ImmutableArray<byte>)));
+            Assert.Throws<ArgumentNullException>(
+                () => MetadataReaderProvider.FromMetadataImage(default(ImmutableArray<byte>))
+            );
         }
 
         [Fact]
         public void FromMetadataStream1()
         {
-            Assert.Throws<ArgumentNullException>(() => MetadataReaderProvider.FromMetadataStream(null, MetadataStreamOptions.Default));
+            Assert.Throws<ArgumentNullException>(
+                () => MetadataReaderProvider.FromMetadataStream(null, MetadataStreamOptions.Default)
+            );
 
             var invalid = new MemoryStream(new byte[] { 1, 2, 3, 4 });
 
             // the stream should not be disposed if the arguments are bad
-            Assert.Throws<ArgumentOutOfRangeException>(() => MetadataReaderProvider.FromMetadataStream(invalid, (MetadataStreamOptions)int.MaxValue));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () =>
+                    MetadataReaderProvider.FromMetadataStream(
+                        invalid,
+                        (MetadataStreamOptions)int.MaxValue
+                    )
+            );
             Assert.True(invalid.CanRead);
 
             // prefetching metadata doesn't create a reader yet, so no exception is thrown:
-            var badReader = MetadataReaderProvider.FromMetadataStream(invalid, MetadataStreamOptions.PrefetchMetadata | MetadataStreamOptions.LeaveOpen);
+            var badReader = MetadataReaderProvider.FromMetadataStream(
+                invalid,
+                MetadataStreamOptions.PrefetchMetadata | MetadataStreamOptions.LeaveOpen
+            );
             Assert.True(invalid.CanRead);
             invalid.Position = 0;
             Assert.Throws<BadImageFormatException>(() => badReader.GetMetadataReader());
 
             // valid metadata:
             var valid = new MemoryStream(PortablePdbs.DocumentsPdb);
-            var PortablePdbReader = MetadataReaderProvider.FromMetadataStream(valid, MetadataStreamOptions.Default);
+            var PortablePdbReader = MetadataReaderProvider.FromMetadataStream(
+                valid,
+                MetadataStreamOptions.Default
+            );
             Assert.True(valid.CanRead);
             PortablePdbReader.Dispose();
             Assert.False(valid.CanRead);
@@ -66,28 +91,55 @@ namespace System.Reflection.Metadata.Tests
         [Fact]
         public void FromMetadataStream2()
         {
-            AssertExtensions.Throws<ArgumentException>("stream", () => MetadataReaderProvider.FromMetadataStream(new CustomAccessMemoryStream(canRead: false, canSeek: false, canWrite: false)));
-            AssertExtensions.Throws<ArgumentException>("stream", () => MetadataReaderProvider.FromMetadataStream(new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)));
-            MetadataReaderProvider.FromMetadataStream(new CustomAccessMemoryStream(canRead: true, canSeek: true, canWrite: false));
+            AssertExtensions.Throws<ArgumentException>(
+                "stream",
+                () =>
+                    MetadataReaderProvider.FromMetadataStream(
+                        new CustomAccessMemoryStream(
+                            canRead: false,
+                            canSeek: false,
+                            canWrite: false
+                        )
+                    )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "stream",
+                () =>
+                    MetadataReaderProvider.FromMetadataStream(
+                        new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)
+                    )
+            );
+            MetadataReaderProvider.FromMetadataStream(
+                new CustomAccessMemoryStream(canRead: true, canSeek: true, canWrite: false)
+            );
         }
 
         [Fact]
         public void GetMetadataReader_EmptyStream()
         {
-            var provider = MetadataReaderProvider.FromMetadataStream(new MemoryStream(), MetadataStreamOptions.PrefetchMetadata);
+            var provider = MetadataReaderProvider.FromMetadataStream(
+                new MemoryStream(),
+                MetadataStreamOptions.PrefetchMetadata
+            );
             Assert.Throws<BadImageFormatException>(() => provider.GetMetadataReader());
         }
 
         [Fact]
         public void GetMetadataReader_FromMetadataImage()
         {
-            TestGetMetadataReader(MetadataReaderProvider.FromMetadataImage(BuildMetadataImage().ToImmutableArray()));
+            TestGetMetadataReader(
+                MetadataReaderProvider.FromMetadataImage(BuildMetadataImage().ToImmutableArray())
+            );
         }
 
         [Fact]
         public void GetMetadataReader_FromMetadataStream()
         {
-            TestGetMetadataReader(MetadataReaderProvider.FromMetadataStream(new MemoryStream(BuildMetadataImage().ToArray())));
+            TestGetMetadataReader(
+                MetadataReaderProvider.FromMetadataStream(
+                    new MemoryStream(BuildMetadataImage().ToArray())
+                )
+            );
         }
 
         private unsafe void TestGetMetadataReader(MetadataReaderProvider provider)
@@ -111,14 +163,19 @@ namespace System.Reflection.Metadata.Tests
             var reader4 = provider.GetMetadataReader(MetadataReaderOptions.None);
             Assert.Same(reader3, reader4);
 
-            var reader5 = provider.GetMetadataReader(MetadataReaderOptions.ApplyWindowsRuntimeProjections);
+            var reader5 = provider.GetMetadataReader(
+                MetadataReaderOptions.ApplyWindowsRuntimeProjections
+            );
             Assert.NotSame(reader4, reader5);
             Assert.Equal("v9.9.9.9", reader5.MetadataVersion);
             Assert.Same(reader5.UTF8Decoder, MetadataStringDecoder.DefaultUTF8);
             Assert.Equal(MetadataReaderOptions.ApplyWindowsRuntimeProjections, reader5.Options);
 
             provider.Dispose();
-            Assert.Throws<ObjectDisposedException>(() => provider.GetMetadataReader(MetadataReaderOptions.ApplyWindowsRuntimeProjections));
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                    provider.GetMetadataReader(MetadataReaderOptions.ApplyWindowsRuntimeProjections)
+            );
             Assert.Throws<ObjectDisposedException>(() => provider.GetMetadataReader());
         }
 
@@ -133,23 +190,39 @@ namespace System.Reflection.Metadata.Tests
             stream.WriteByte(0xff);
 
             stream.Position = 1;
-            var PortablePdbReader1 = MetadataReaderProvider.FromMetadataStream(stream, MetadataStreamOptions.LeaveOpen, PortablePdbs.DocumentsPdb.Length);
+            var PortablePdbReader1 = MetadataReaderProvider.FromMetadataStream(
+                stream,
+                MetadataStreamOptions.LeaveOpen,
+                PortablePdbs.DocumentsPdb.Length
+            );
 
-            Assert.Equal(PortablePdbs.DocumentsPdb.Length, PortablePdbReader1.GetMetadataReader().Block.Length);
+            Assert.Equal(
+                PortablePdbs.DocumentsPdb.Length,
+                PortablePdbReader1.GetMetadataReader().Block.Length
+            );
             var reader1 = PortablePdbReader1.GetMetadataReader();
             Assert.Equal(13, reader1.Documents.Count);
 
             stream.Position = 1;
-            var PortablePdbReader2 = MetadataReaderProvider.FromMetadataStream(stream, MetadataStreamOptions.LeaveOpen | MetadataStreamOptions.PrefetchMetadata, PortablePdbs.DocumentsPdb.Length);
+            var PortablePdbReader2 = MetadataReaderProvider.FromMetadataStream(
+                stream,
+                MetadataStreamOptions.LeaveOpen | MetadataStreamOptions.PrefetchMetadata,
+                PortablePdbs.DocumentsPdb.Length
+            );
 
-            Assert.Equal(PortablePdbs.DocumentsPdb.Length, PortablePdbReader2.GetMetadataReader().Block.Length);
+            Assert.Equal(
+                PortablePdbs.DocumentsPdb.Length,
+                PortablePdbReader2.GetMetadataReader().Block.Length
+            );
             var reader2 = PortablePdbReader2.GetMetadataReader();
             Assert.Equal(13, reader2.Documents.Count);
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static MetadataReader GetMetadataReaderFromProvider()
-            => MetadataReaderProvider.FromMetadataImage(PortablePdbs.DocumentsPdb.ToImmutableArray()).GetMetadataReader();
+        private static MetadataReader GetMetadataReaderFromProvider() =>
+            MetadataReaderProvider
+                .FromMetadataImage(PortablePdbs.DocumentsPdb.ToImmutableArray())
+                .GetMetadataReader();
 
         [Fact, MethodImpl(MethodImplOptions.NoOptimization)]
         public void KeepMetadataAlive()
@@ -159,7 +232,10 @@ namespace System.Reflection.Metadata.Tests
             GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, blocking: true, compacting: true);
             GC.WaitForPendingFinalizers();
 
-            Assert.Equal(@"C:\Documents.cs", reader.GetString(reader.GetDocument(MetadataTokens.DocumentHandle(1)).Name));
+            Assert.Equal(
+                @"C:\Documents.cs",
+                reader.GetString(reader.GetDocument(MetadataTokens.DocumentHandle(1)).Name)
+            );
         }
     }
 }

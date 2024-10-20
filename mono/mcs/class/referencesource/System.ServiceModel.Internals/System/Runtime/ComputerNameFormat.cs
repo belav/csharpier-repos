@@ -14,6 +14,6 @@ namespace System.Runtime
         PhysicalNetBIOS,
         PhysicalDnsHostName,
         PhysicalDnsDomain,
-        PhysicalDnsFullyQualified
+        PhysicalDnsFullyQualified,
     }
 }

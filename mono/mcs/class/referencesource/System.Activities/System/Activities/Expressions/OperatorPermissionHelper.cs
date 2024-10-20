@@ -23,10 +23,14 @@ namespace System.Activities.Expressions
         // the operator method. If the operator method is public, we don't need the demand.
         // We don't need to check the public visibility of the declaring type because the user must have already constructed a generic activity
         // that is parameterized by the declaring type (i.e. new Add<Foo,Foo,Foo>).
-        [Fx.Tag.SecurityNote(Miscellaneous =
-            "RequiresReview - Functions invoking non-public overloaded operators get cached in a static and thus could get invoked under different permission sets."
-             + " Ensure that the function contains a demand for ReflectionPermission(MemberAccess) if the method is non-public.")]
-        internal static Expression InjectReflectionPermissionIfNecessary(MethodInfo method, Expression expression)
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Functions invoking non-public overloaded operators get cached in a static and thus could get invoked under different permission sets."
+                + " Ensure that the function contains a demand for ReflectionPermission(MemberAccess) if the method is non-public."
+        )]
+        internal static Expression InjectReflectionPermissionIfNecessary(
+            MethodInfo method,
+            Expression expression
+        )
         {
             if (method == null)
             {
@@ -39,8 +43,15 @@ namespace System.Activities.Expressions
             }
             else
             {
-                ReflectionPermission reflectionMemberAccessPermission = new ReflectionPermission(ReflectionPermissionFlag.MemberAccess);
-                Expression demandExpression = Expression.Call(Expression.Constant(reflectionMemberAccessPermission), "Demand", null, null);
+                ReflectionPermission reflectionMemberAccessPermission = new ReflectionPermission(
+                    ReflectionPermissionFlag.MemberAccess
+                );
+                Expression demandExpression = Expression.Call(
+                    Expression.Constant(reflectionMemberAccessPermission),
+                    "Demand",
+                    null,
+                    null
+                );
                 return Expression.Block(expression.Type, demandExpression, expression);
             }
         }

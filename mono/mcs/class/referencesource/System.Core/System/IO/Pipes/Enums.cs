@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -16,29 +16,29 @@
 using System;
 using System.Text;
 
-namespace System.IO.Pipes {
-
+namespace System.IO.Pipes
+{
     [Serializable]
-    public enum PipeDirection {
+    public enum PipeDirection
+    {
         In = 1,
         Out = 2,
         InOut = In | Out,
     }
 
     [Serializable]
-    public enum PipeTransmissionMode {
+    public enum PipeTransmissionMode
+    {
         Byte = 0,
         Message = 1,
     }
 
     [Serializable]
     [Flags]
-    public enum PipeOptions {
+    public enum PipeOptions
+    {
         None = 0x0,
         WriteThrough = unchecked((int)0x80000000),
-        Asynchronous = unchecked((int)0x40000000),  // corresponds to FILE_FLAG_OVERLAPPED
+        Asynchronous = unchecked((int)0x40000000), // corresponds to FILE_FLAG_OVERLAPPED
     }
-
 }
-
-

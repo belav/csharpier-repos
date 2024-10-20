@@ -21,6 +21,7 @@ namespace System.ServiceModel.PeerResolvers
             public Guid RegistrationId;
 
             public RegisterResponseInfoDC() { }
+
             public RegisterResponseInfoDC(Guid registrationId, TimeSpan registrationLifetime)
             {
                 this.RegistrationLifetime = registrationLifetime;
@@ -51,14 +52,24 @@ namespace System.ServiceModel.PeerResolvers
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.body.RegistrationLifetime = value;
@@ -74,4 +85,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

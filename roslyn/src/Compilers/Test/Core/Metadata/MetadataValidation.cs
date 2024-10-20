@@ -22,20 +22,27 @@ namespace Roslyn.Test.Utilities
     public static class MetadataValidation
     {
         /// <summary>
-        /// Returns the name of the attribute class 
+        /// Returns the name of the attribute class
         /// </summary>
-        internal static string GetAttributeName(MetadataReader metadataReader, CustomAttributeHandle customAttribute)
+        internal static string GetAttributeName(
+            MetadataReader metadataReader,
+            CustomAttributeHandle customAttribute
+        )
         {
             var ctorHandle = metadataReader.GetCustomAttribute(customAttribute).Constructor;
             if (ctorHandle.Kind == HandleKind.MemberReference) // MemberRef
             {
-                var container = metadataReader.GetMemberReference((MemberReferenceHandle)ctorHandle).Parent;
+                var container = metadataReader
+                    .GetMemberReference((MemberReferenceHandle)ctorHandle)
+                    .Parent;
                 var name = metadataReader.GetTypeReference((TypeReferenceHandle)container).Name;
                 return metadataReader.GetString(name);
             }
             else if (ctorHandle.Kind == HandleKind.MethodDefinition)
             {
-                var container = metadataReader.GetMethodDefinition((MethodDefinitionHandle)ctorHandle).GetDeclaringType();
+                var container = metadataReader
+                    .GetMethodDefinition((MethodDefinitionHandle)ctorHandle)
+                    .GetDeclaringType();
                 var name = metadataReader.GetTypeDefinition(container).Name;
                 return metadataReader.GetString(name);
             }
@@ -46,11 +53,20 @@ namespace Roslyn.Test.Utilities
             }
         }
 
-        internal static CustomAttributeHandle FindCustomAttribute(MetadataReader metadataReader, string attributeClassName)
+        internal static CustomAttributeHandle FindCustomAttribute(
+            MetadataReader metadataReader,
+            string attributeClassName
+        )
         {
             foreach (var caHandle in metadataReader.CustomAttributes)
             {
-                if (string.Equals(GetAttributeName(metadataReader, caHandle), attributeClassName, StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        GetAttributeName(metadataReader, caHandle),
+                        attributeClassName,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     return caHandle;
                 }
@@ -62,7 +78,11 @@ namespace Roslyn.Test.Utilities
         /// <summary>
         /// Used to validate metadata blobs emitted for MarshalAs.
         /// </summary>
-        internal static void MarshalAsMetadataValidator(PEAssembly assembly, Func<string, PEAssembly, byte[]> getExpectedBlob, bool isField = true)
+        internal static void MarshalAsMetadataValidator(
+            PEAssembly assembly,
+            Func<string, PEAssembly, byte[]> getExpectedBlob,
+            bool isField = true
+        )
         {
             var metadataReader = assembly.GetMetadataReader();
 
@@ -85,10 +105,15 @@ namespace Roslyn.Test.Utilities
                     byte[] expectedBlob = getExpectedBlob(fieldName, assembly);
                     if (expectedBlob != null)
                     {
-                        BlobHandle descriptor = metadataReader.GetFieldDefinition(fieldDef).GetMarshallingDescriptor();
+                        BlobHandle descriptor = metadataReader
+                            .GetFieldDefinition(fieldDef)
+                            .GetMarshallingDescriptor();
                         Assert.False(descriptor.IsNil, "Expecting record in FieldMarshal table");
 
-                        Assert.NotEqual(0, (int)(field.Attributes & FieldAttributes.HasFieldMarshal));
+                        Assert.NotEqual(
+                            0,
+                            (int)(field.Attributes & FieldAttributes.HasFieldMarshal)
+                        );
                         expectedMarshalCount++;
 
                         byte[] actualBlob = metadataReader.GetBlobBytes(descriptor);
@@ -112,14 +137,25 @@ namespace Roslyn.Test.Utilities
                         var paramRow = metadataReader.GetParameter(paramHandle);
                         string paramName = metadataReader.GetString(paramRow.Name);
 
-                        byte[] expectedBlob = getExpectedBlob(memberName + ":" + paramName, assembly);
+                        byte[] expectedBlob = getExpectedBlob(
+                            memberName + ":" + paramName,
+                            assembly
+                        );
                         if (expectedBlob != null)
                         {
-                            Assert.NotEqual(0, (int)(paramRow.Attributes & ParameterAttributes.HasFieldMarshal));
+                            Assert.NotEqual(
+                                0,
+                                (int)(paramRow.Attributes & ParameterAttributes.HasFieldMarshal)
+                            );
                             expectedMarshalCount++;
 
-                            BlobHandle descriptor = metadataReader.GetParameter(paramHandle).GetMarshallingDescriptor();
-                            Assert.False(descriptor.IsNil, "Expecting record in FieldMarshal table");
+                            BlobHandle descriptor = metadataReader
+                                .GetParameter(paramHandle)
+                                .GetMarshallingDescriptor();
+                            Assert.False(
+                                descriptor.IsNil,
+                                "Expecting record in FieldMarshal table"
+                            );
 
                             byte[] actualBlob = metadataReader.GetBlobBytes(descriptor);
 
@@ -127,13 +163,19 @@ namespace Roslyn.Test.Utilities
                         }
                         else
                         {
-                            Assert.Equal(0, (int)(paramRow.Attributes & ParameterAttributes.HasFieldMarshal));
+                            Assert.Equal(
+                                0,
+                                (int)(paramRow.Attributes & ParameterAttributes.HasFieldMarshal)
+                            );
                         }
                     }
                 }
             }
 
-            Assert.Equal(expectedMarshalCount, metadataReader.GetTableRowCount(TableIndex.FieldMarshal));
+            Assert.Equal(
+                expectedMarshalCount,
+                metadataReader.GetTableRowCount(TableIndex.FieldMarshal)
+            );
         }
 
         internal static IEnumerable<string> GetFullTypeNames(MetadataReader metadataReader)
@@ -177,8 +219,12 @@ namespace Roslyn.Test.Utilities
             var mvidIndex1 = mdReader1.GetModuleDefinition().Mvid;
             var mvidIndex2 = mdReader2.GetModuleDefinition().Mvid;
 
-            var mvidOffset1 = mdReader1.GetHeapMetadataOffset(HeapIndex.Guid) + 16 * (MetadataTokens.GetHeapOffset(mvidIndex1) - 1);
-            var mvidOffset2 = mdReader2.GetHeapMetadataOffset(HeapIndex.Guid) + 16 * (MetadataTokens.GetHeapOffset(mvidIndex2) - 1);
+            var mvidOffset1 =
+                mdReader1.GetHeapMetadataOffset(HeapIndex.Guid)
+                + 16 * (MetadataTokens.GetHeapOffset(mvidIndex1) - 1);
+            var mvidOffset2 =
+                mdReader2.GetHeapMetadataOffset(HeapIndex.Guid)
+                + 16 * (MetadataTokens.GetHeapOffset(mvidIndex2) - 1);
 
             if (!md1.RemoveRange(mvidOffset1, 16).SequenceEqual(md1.RemoveRange(mvidOffset2, 16)))
             {

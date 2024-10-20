@@ -63,16 +63,14 @@ namespace System.Xml.Linq
         /// </exception>
         public string Data
         {
-            get
-            {
-                return data;
-            }
+            get { return data; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Value);
                 data = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Value);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Value);
             }
         }
 
@@ -84,10 +82,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.ProcessingInstruction;
-            }
+            get { return XmlNodeType.ProcessingInstruction; }
         }
 
         /// <summary>
@@ -98,16 +93,14 @@ namespace System.Xml.Linq
         /// </exception>
         public string Target
         {
-            get
-            {
-                return target;
-            }
+            get { return target; }
             set
             {
                 ValidateName(value);
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Name);
                 target = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Name);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Name);
             }
         }
 
@@ -159,7 +152,8 @@ namespace System.Xml.Linq
         private static void ValidateName(string name)
         {
             XmlConvert.VerifyNCName(name);
-            if (string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase)) throw new ArgumentException(SR.Format(SR.Argument_InvalidPIName, name));
+            if (string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentException(SR.Format(SR.Argument_InvalidPIName, name));
         }
     }
 }

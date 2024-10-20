@@ -20,8 +20,8 @@ internal static class TypeExtensions
     /// <param name="genericTypeDefinition">The generic type definition.</param>
     /// <returns><see langword="true" /> if <paramref name="type"/> is a constructed type of <paramref name="genericTypeDefinition"/>; otherwise, <see langword="false" />.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsConstructedGenericTypeOf(this Type type, Type genericTypeDefinition)
-        => type.IsConstructedGenericType && type.GetGenericTypeDefinition() == genericTypeDefinition;
+    public static bool IsConstructedGenericTypeOf(this Type type, Type genericTypeDefinition) =>
+        type.IsConstructedGenericType && type.GetGenericTypeDefinition() == genericTypeDefinition;
 
     /// <summary>
     /// Determines whether <paramref name="type"/> is a nullable value type.
@@ -29,8 +29,8 @@ internal static class TypeExtensions
     /// <param name="type">The self.</param>
     /// <returns><see langword="true" /> if <paramref name="type"/> is a nullable value type; otherwise, <see langword="false" />.</returns>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsNullableValueType(this Type type)
-        => type.IsValueType && type.IsConstructedGenericTypeOf(typeof(Nullable<>));
+    public static bool IsNullableValueType(this Type type) =>
+        type.IsValueType && type.IsConstructedGenericTypeOf(typeof(Nullable<>));
 
     internal static object? GetDefaultValue(this Type type)
     {
@@ -47,17 +47,16 @@ internal static class TypeExtensions
         return type switch
         {
             { } nonGeneric
-                when nonGeneric == typeof(IList) ||
-                     nonGeneric == typeof(ICollection) ||
-                     nonGeneric == typeof(IEnumerable)
-                => Array.Empty<object>(),
+                when nonGeneric == typeof(IList)
+                    || nonGeneric == typeof(ICollection)
+                    || nonGeneric == typeof(IEnumerable) => Array.Empty<object>(),
             _ when type.IsValueType =>
 #if NET
-                RuntimeHelpers.GetUninitializedObject(type),
+            RuntimeHelpers.GetUninitializedObject(type),
 #else
-                FormatterServices.GetUninitializedObject(type),
+            FormatterServices.GetUninitializedObject(type),
 #endif
-            _ => null
+            _ => null,
         };
     }
 }

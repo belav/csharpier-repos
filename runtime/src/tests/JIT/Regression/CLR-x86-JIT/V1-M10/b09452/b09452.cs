@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -27,10 +28,7 @@ namespace DefaultNamespace
             //    		IL_000b:  newobj instance void System.Object::.ctor()
             //   	 	IL_0010:  call instance void class System.Object[,]::Set(int32,int32,class System.Object)
 
-            //    		IL_0015:  ret 
-
+            //    		IL_0015:  ret
         } // main
-
     } // X
-
 }

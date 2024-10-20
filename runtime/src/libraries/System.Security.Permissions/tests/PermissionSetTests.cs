@@ -33,7 +33,9 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void PermissionSetAttributeCallMethods()
         {
-            PermissionSetAttribute psa = new PermissionSetAttribute(new Permissions.SecurityAction());
+            PermissionSetAttribute psa = new PermissionSetAttribute(
+                new Permissions.SecurityAction()
+            );
             IPermission ip = psa.CreatePermission();
             PermissionSet ps = psa.CreatePermissionSet();
         }

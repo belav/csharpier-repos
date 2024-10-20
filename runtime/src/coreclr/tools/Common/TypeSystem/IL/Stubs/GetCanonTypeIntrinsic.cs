@@ -3,7 +3,6 @@
 
 using Internal.Runtime;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -21,7 +20,9 @@ namespace Internal.IL.Stubs
             var codeStream = emitter.NewCodeStream();
 
             TypeSystemContext context = target.Context;
-            TypeDesc runtimeTypeHandleType = context.GetWellKnownType(WellKnownType.RuntimeTypeHandle);
+            TypeDesc runtimeTypeHandleType = context.GetWellKnownType(
+                WellKnownType.RuntimeTypeHandle
+            );
             Debug.Assert(target.Signature.ReturnType == runtimeTypeHandleType);
 
             if (context.SupportsCanon)

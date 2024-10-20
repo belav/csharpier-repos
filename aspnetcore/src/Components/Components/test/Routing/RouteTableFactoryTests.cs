@@ -14,9 +14,7 @@ public class RouteTableFactoryTests
 
     public RouteTableFactoryTests()
     {
-        _serviceProvider = new ServiceCollection()
-            .AddLogging()
-            .BuildServiceProvider();
+        _serviceProvider = new ServiceCollection().AddLogging().BuildServiceProvider();
     }
 
     [Fact]
@@ -24,10 +22,16 @@ public class RouteTableFactoryTests
     {
         // Arrange
         var routeTableFactory = new RouteTableFactory();
-        var routes1 = routeTableFactory.Create(new RouteKey(GetType().Assembly, null), _serviceProvider);
+        var routes1 = routeTableFactory.Create(
+            new RouteKey(GetType().Assembly, null),
+            _serviceProvider
+        );
 
         // Act
-        var routes2 = routeTableFactory.Create(new RouteKey(GetType().Assembly, null), _serviceProvider);
+        var routes2 = routeTableFactory.Create(
+            new RouteKey(GetType().Assembly, null),
+            _serviceProvider
+        );
 
         // Assert
         Assert.Same(routes1, routes2);
@@ -38,10 +42,22 @@ public class RouteTableFactoryTests
     {
         // Arrange
         var routeTableFactory = new RouteTableFactory();
-        var routes1 = routeTableFactory.Create(new RouteKey(typeof(object).Assembly, new[] { typeof(ComponentBase).Assembly, GetType().Assembly, }), _serviceProvider);
+        var routes1 = routeTableFactory.Create(
+            new RouteKey(
+                typeof(object).Assembly,
+                new[] { typeof(ComponentBase).Assembly, GetType().Assembly }
+            ),
+            _serviceProvider
+        );
 
         // Act
-        var routes2 = routeTableFactory.Create(new RouteKey(typeof(object).Assembly, new[] { GetType().Assembly, typeof(ComponentBase).Assembly, }), _serviceProvider);
+        var routes2 = routeTableFactory.Create(
+            new RouteKey(
+                typeof(object).Assembly,
+                new[] { GetType().Assembly, typeof(ComponentBase).Assembly }
+            ),
+            _serviceProvider
+        );
 
         // Assert
         Assert.Same(routes1, routes2);
@@ -52,10 +68,16 @@ public class RouteTableFactoryTests
     {
         // Arrange
         var routeTableFactory = new RouteTableFactory();
-        var routes1 = routeTableFactory.Create(new RouteKey(GetType().Assembly, null), _serviceProvider);
+        var routes1 = routeTableFactory.Create(
+            new RouteKey(GetType().Assembly, null),
+            _serviceProvider
+        );
 
         // Act
-        var routes2 = routeTableFactory.Create(new RouteKey(GetType().Assembly, new[] { typeof(object).Assembly }), _serviceProvider);
+        var routes2 = routeTableFactory.Create(
+            new RouteKey(GetType().Assembly, new[] { typeof(object).Assembly }),
+            _serviceProvider
+        );
 
         // Assert
         Assert.NotSame(routes1, routes2);
@@ -66,7 +88,10 @@ public class RouteTableFactoryTests
     {
         // Arrange & Act
         var routeTableFactory = new RouteTableFactory();
-        var routeTable = routeTableFactory.Create(new RouteKey(GetType().Assembly, new[] { GetType().Assembly }), _serviceProvider);
+        var routeTable = routeTableFactory.Create(
+            new RouteKey(GetType().Assembly, new[] { GetType().Assembly }),
+            _serviceProvider
+        );
 
         var routes = GetRoutes(routeTable);
 
@@ -78,7 +103,10 @@ public class RouteTableFactoryTests
     public void CanDiscoverRoute()
     {
         // Arrange & Act
-        var routeTable = RouteTableFactory.Create(new List<Type> { typeof(MyComponent), }, _serviceProvider);
+        var routeTable = RouteTableFactory.Create(
+            new List<Type> { typeof(MyComponent) },
+            _serviceProvider
+        );
 
         var routes = GetRoutes(routeTable);
 
@@ -87,15 +115,16 @@ public class RouteTableFactoryTests
     }
 
     [Route("Test1")]
-    private class MyComponent : ComponentBase
-    {
-    }
+    private class MyComponent : ComponentBase { }
 
     [Fact]
     public void CanDiscoverRoutes_WithInheritance()
     {
         // Arrange & Act
-        var routeTable = RouteTableFactory.Create(new List<Type> { typeof(MyComponent), typeof(MyInheritedComponent) }, _serviceProvider);
+        var routeTable = RouteTableFactory.Create(
+            new List<Type> { typeof(MyComponent), typeof(MyInheritedComponent) },
+            _serviceProvider
+        );
 
         var routes = GetRoutes(routeTable);
 
@@ -103,7 +132,8 @@ public class RouteTableFactoryTests
         Assert.Collection(
             routes.OrderBy(r => r.RoutePattern.RawText),
             r => Assert.Equal("Test1", r.RoutePattern.RawText),
-            r => Assert.Equal("Test2", r.RoutePattern.RawText));
+            r => Assert.Equal("Test2", r.RoutePattern.RawText)
+        );
     }
 
     private List<InboundRouteEntry> GetRoutes(RouteTable routeTable)
@@ -147,9 +177,7 @@ public class RouteTableFactoryTests
     }
 
     [Route("Test2")]
-    private class MyInheritedComponent : MyComponent
-    {
-    }
+    private class MyInheritedComponent : MyComponent { }
 
     [Fact]
     public void CanMatchRootTemplate()
@@ -290,7 +318,10 @@ public class RouteTableFactoryTests
 
         // Assert
         Assert.NotNull(context.Handler);
-        Assert.Single(context.Parameters, p => p.Key == "parameter" && (string)p.Value == expectedValue);
+        Assert.Single(
+            context.Parameters,
+            p => p.Key == "parameter" && (string)p.Value == expectedValue
+        );
     }
 
     [Theory]
@@ -307,7 +338,10 @@ public class RouteTableFactoryTests
 
         // Assert
         Assert.NotNull(context.Handler);
-        Assert.Single(context.Parameters, p => p.Key == "parameter" && (string)p.Value == expectedValue);
+        Assert.Single(
+            context.Parameters,
+            p => p.Key == "parameter" && (string)p.Value == expectedValue
+        );
     }
 
     [Fact]
@@ -320,7 +354,7 @@ public class RouteTableFactoryTests
         var expectedParameters = new Dictionary<string, object>
         {
             ["some"] = "an",
-            ["route"] = "path"
+            ["route"] = "path",
         };
 
         // Act
@@ -335,14 +369,16 @@ public class RouteTableFactoryTests
     public void CanMatchTemplateWithMultipleParametersAndCatchAllParameter()
     {
         // Arrange
-        var routeTable = new TestRouteTableBuilder().AddRoute("/{some}/awesome/{route}/with/{*catchAll}").Build();
+        var routeTable = new TestRouteTableBuilder()
+            .AddRoute("/{some}/awesome/{route}/with/{*catchAll}")
+            .Build();
         var context = new RouteContext("/an/awesome/path/with/some/catch/all/stuff");
 
         var expectedParameters = new Dictionary<string, object>
         {
             ["some"] = "an",
             ["route"] = "path",
-            ["catchAll"] = "some/catch/all/stuff"
+            ["catchAll"] = "some/catch/all/stuff",
         };
 
         // Act
@@ -353,24 +389,34 @@ public class RouteTableFactoryTests
         Assert.Equal(expectedParameters, context.Parameters);
     }
 
-    public static IEnumerable<object[]> CanMatchParameterWithConstraintCases() => new object[][]
-    {
+    public static IEnumerable<object[]> CanMatchParameterWithConstraintCases() =>
+        new object[][]
+        {
             new object[] { "/{value:bool}", "/true", true },
             new object[] { "/{value:bool}", "/false", false },
             new object[] { "/{value:datetime}", "/1955-01-30", new DateTime(1955, 1, 30) },
             new object[] { "/{value:decimal}", "/5.3", 5.3m },
             new object[] { "/{value:double}", "/0.1", 0.1d },
             new object[] { "/{value:float}", "/0.1", 0.1f },
-            new object[] { "/{value:guid}", "/1FCEF085-884F-416E-B0A1-71B15F3E206B", Guid.Parse("1FCEF085-884F-416E-B0A1-71B15F3E206B", CultureInfo.InvariantCulture) },
+            new object[]
+            {
+                "/{value:guid}",
+                "/1FCEF085-884F-416E-B0A1-71B15F3E206B",
+                Guid.Parse("1FCEF085-884F-416E-B0A1-71B15F3E206B", CultureInfo.InvariantCulture),
+            },
             new object[] { "/{value:int}", "/123", 123 },
-            new object[] { "/{value:int}", "/-123", -123},
+            new object[] { "/{value:int}", "/-123", -123 },
             new object[] { "/{value:long}", "/9223372036854775807", long.MaxValue },
             new object[] { "/{value:long}", $"/-9223372036854775808", long.MinValue },
-    };
+        };
 
     [Theory]
     [MemberData(nameof(CanMatchParameterWithConstraintCases))]
-    public void CanMatchParameterWithConstraint(string template, string contextUrl, object convertedValue)
+    public void CanMatchParameterWithConstraint(
+        string template,
+        string contextUrl,
+        object convertedValue
+    )
     {
         // Arrange
         var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
@@ -385,10 +431,10 @@ public class RouteTableFactoryTests
             // Make it easier to track down failing tests when using MemberData
             throw new InvalidOperationException($"Failed to match template '{template}'.");
         }
-        Assert.Equal(new Dictionary<string, object>
-            {
-                { "value", convertedValue }
-            }, context.Parameters);
+        Assert.Equal(
+            new Dictionary<string, object> { { "value", convertedValue } },
+            context.Parameters
+        );
     }
 
     [Fact]
@@ -411,17 +457,17 @@ public class RouteTableFactoryTests
 
         var expectedOrder = new[]
         {
-                "literal",
-                "literal/literal",
-                "literal/{last:int}",
-                "literal/{last}",
-                "literal/{*last:int}",
-                "literal/{*last}",
-                "{last:int}",
-                "{last}",
-                "{*last:int}",
-                "{*last}",
-            };
+            "literal",
+            "literal/literal",
+            "literal/{last:int}",
+            "literal/{last}",
+            "literal/{*last:int}",
+            "literal/{*last}",
+            "{last:int}",
+            "{last}",
+            "{*last:int}",
+            "{*last}",
+        };
 
         // Act
         var table = builder.Build();
@@ -435,10 +481,34 @@ public class RouteTableFactoryTests
     [Theory]
     [InlineData("/literal", null, "literal", "literal/{parameter?}", typeof(TestHandler1))]
     [InlineData("/literal/value", "value", "literal", "literal/{parameter?}", typeof(TestHandler2))]
-    [InlineData("/literal", null, "literal/{parameter?}", "literal/{*parameter}", typeof(TestHandler1))]
-    [InlineData("/literal/value", "value", "literal/{parameter?}", "literal/{*parameter}", typeof(TestHandler1))]
-    [InlineData("/literal/value/other", "value/other", "literal /{parameter?}", "literal/{*parameter}", typeof(TestHandler2))]
-    public void CorrectlyMatchesVariableLengthSegments(string path, string expectedValue, string first, string second, Type handler)
+    [InlineData(
+        "/literal",
+        null,
+        "literal/{parameter?}",
+        "literal/{*parameter}",
+        typeof(TestHandler1)
+    )]
+    [InlineData(
+        "/literal/value",
+        "value",
+        "literal/{parameter?}",
+        "literal/{*parameter}",
+        typeof(TestHandler1)
+    )]
+    [InlineData(
+        "/literal/value/other",
+        "value/other",
+        "literal /{parameter?}",
+        "literal/{*parameter}",
+        typeof(TestHandler2)
+    )]
+    public void CorrectlyMatchesVariableLengthSegments(
+        string path,
+        string expectedValue,
+        string first,
+        string second,
+        Type handler
+    )
     {
         // Arrange
 
@@ -455,7 +525,10 @@ public class RouteTableFactoryTests
 
         // Assert
         Assert.Equal(handler, context.Handler);
-        var value = expectedValue != null ? Assert.Single(context.Parameters, p => p.Key == "parameter").Value : null;
+        var value =
+            expectedValue != null
+                ? Assert.Single(context.Parameters, p => p.Key == "parameter").Value
+                : null;
         Assert.Equal(expectedValue, value?.ToString());
     }
 
@@ -467,9 +540,7 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder()
-            .AddRoute(template)
-            .Build();
+        var table = new TestRouteTableBuilder().AddRoute(template).Build();
 
         var context = new RouteContext(path);
 
@@ -487,9 +558,7 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder()
-            .AddRoute("{*catchall}")
-            .Build();
+        var table = new TestRouteTableBuilder().AddRoute("{*catchall}").Build();
 
         var context = new RouteContext("/");
 
@@ -507,9 +576,7 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder()
-            .AddRoute("{parameter?}")
-            .Build();
+        var table = new TestRouteTableBuilder().AddRoute("{parameter?}").Build();
 
         var context = new RouteContext("/");
 
@@ -531,9 +598,7 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder()
-            .AddRoute("{param1?}/{param2?}/{param3?}")
-            .Build();
+        var table = new TestRouteTableBuilder().AddRoute("{param1?}/{param2?}/{param3?}").Build();
 
         var context = new RouteContext(path);
 
@@ -598,14 +663,17 @@ public class RouteTableFactoryTests
     [InlineData("prefix/{parameter?}/{*catchAll}", "/prefix/parameter", "parameter", null)]
     [InlineData("prefix/{parameter?}/{*catchAll}", "/prefix/value/1", "value", "1")]
     [InlineData("prefix/{parameter?}/{*catchAll}", "/prefix/value/1/2/3/4/5", "value", "1/2/3/4/5")]
-    public void OptionalParameterPlusCatchAllRoute(string template, string path, string parameterValue, string catchAllValue)
+    public void OptionalParameterPlusCatchAllRoute(
+        string template,
+        string path,
+        string parameterValue,
+        string catchAllValue
+    )
     {
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder()
-            .AddRoute(template)
-            .Build();
+        var table = new TestRouteTableBuilder().AddRoute(template).Build();
 
         var context = new RouteContext(path);
 
@@ -625,9 +693,7 @@ public class RouteTableFactoryTests
         // Arrange
 
         // Routes are added in reverse precedence order
-        var table = new TestRouteTableBuilder()
-            .AddRoute("/values/{*values:int}")
-            .Build();
+        var table = new TestRouteTableBuilder().AddRoute("/values/{*values:int}").Build();
 
         var context = new RouteContext("/values/1/2/3/4/5/A");
 
@@ -658,22 +724,27 @@ public class RouteTableFactoryTests
             // Make it easier to track down failing tests when using MemberData
             throw new InvalidOperationException($"Failed to match template '{template}'.");
         }
-        Assert.Equal(new Dictionary<string, object>
-            {
-                { "value", convertedValue }
-            }, context.Parameters);
+        Assert.Equal(
+            new Dictionary<string, object> { { "value", convertedValue } },
+            context.Parameters
+        );
     }
 
-    public static IEnumerable<object[]> CanMatchOptionalParameterWithConstraintCases() => new object[][]
-{
+    public static IEnumerable<object[]> CanMatchOptionalParameterWithConstraintCases() =>
+        new object[][]
+        {
             new object[] { "/optional/{value:bool?}", "/optional/", null },
             new object[] { "/optional/{value:datetime?}", "/optional/", null },
             new object[] { "/optional/{value:decimal?}", "/optional/", null },
-};
+        };
 
     [Theory]
     [MemberData(nameof(CanMatchOptionalParameterWithConstraintCases))]
-    public void CanMatchOptionalParameterWithConstraint(string template, string contextUrl, object convertedValue)
+    public void CanMatchOptionalParameterWithConstraint(
+        string template,
+        string contextUrl,
+        object convertedValue
+    )
     {
         // Arrange
         var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
@@ -688,10 +759,10 @@ public class RouteTableFactoryTests
             // Make it easier to track down failing tests when using MemberData
             throw new InvalidOperationException($"Failed to match template '{template}'.");
         }
-        Assert.Equal(new Dictionary<string, object>
-            {
-                { "value", convertedValue }
-            }, context.Parameters);
+        Assert.Equal(
+            new Dictionary<string, object> { { "value", convertedValue } },
+            context.Parameters
+        );
     }
 
     [Fact]
@@ -714,22 +785,30 @@ public class RouteTableFactoryTests
             // Make it easier to track down failing tests when using MemberData
             throw new InvalidOperationException($"Failed to match template '{template}'.");
         }
-        Assert.Equal(new Dictionary<string, object>
+        Assert.Equal(
+            new Dictionary<string, object>
             {
                 { "value", convertedValue },
-                { "value2", convertedValue }
-            }, context.Parameters);
+                { "value2", convertedValue },
+            },
+            context.Parameters
+        );
     }
 
-    public static IEnumerable<object[]> CanMatchSegmentWithMultipleConstraintsCases() => new object[][]
-{
+    public static IEnumerable<object[]> CanMatchSegmentWithMultipleConstraintsCases() =>
+        new object[][]
+        {
             new object[] { "/{value:double:int}/", "/15", 15 },
             new object[] { "/{value:double:int?}/", "/", null },
-};
+        };
 
     [Theory]
     [MemberData(nameof(CanMatchSegmentWithMultipleConstraintsCases))]
-    public void CanMatchSegmentWithMultipleConstraints(string template, string contextUrl, object convertedValue)
+    public void CanMatchSegmentWithMultipleConstraints(
+        string template,
+        string contextUrl,
+        object convertedValue
+    )
     {
         // Arrange
         var routeTable = new TestRouteTableBuilder().AddRoute(template).Build();
@@ -739,10 +818,10 @@ public class RouteTableFactoryTests
         routeTable.Route(context);
 
         // Assert
-        Assert.Equal(new Dictionary<string, object>
-            {
-                { "value", convertedValue }
-            }, context.Parameters);
+        Assert.Equal(
+            new Dictionary<string, object> { { "value", convertedValue } },
+            context.Parameters
+        );
     }
 
     [Fact]
@@ -785,10 +864,13 @@ public class RouteTableFactoryTests
     public void ThrowsForOptionalParametersAndNonOptionalParameters()
     {
         // Arrange, act & assert
-        Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-            .AddRoute("/users/{id}", typeof(TestHandler1))
-            .AddRoute("/users/{id?}", typeof(TestHandler2))
-            .Build());
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                new TestRouteTableBuilder()
+                    .AddRoute("/users/{id}", typeof(TestHandler1))
+                    .AddRoute("/users/{id?}", typeof(TestHandler2))
+                    .Build()
+        );
     }
 
     [Theory]
@@ -803,9 +885,9 @@ public class RouteTableFactoryTests
     public void ThrowsWhenCatchAllIsNotTheLastSegment(string template)
     {
         // Arrange, act & assert
-        Assert.Throws<RoutePatternException>(() => new TestRouteTableBuilder()
-            .AddRoute(template)
-            .Build());
+        Assert.Throws<RoutePatternException>(
+            () => new TestRouteTableBuilder().AddRoute(template).Build()
+        );
     }
 
     [Theory(Skip = "This is allowed in ASP.NET Core routing.")]
@@ -818,9 +900,9 @@ public class RouteTableFactoryTests
     public void ThrowsForOptionalParametersFollowedByNonOptionalParameters(string template)
     {
         // Arrange, act & assert
-        Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-            .AddRoute(template)
-            .Build());
+        Assert.Throws<InvalidOperationException>(
+            () => new TestRouteTableBuilder().AddRoute(template).Build()
+        );
     }
 
     [Theory]
@@ -829,10 +911,13 @@ public class RouteTableFactoryTests
     public void ThrowsForAmbiguousRoutes(string first, string second)
     {
         // Arrange, act & assert
-        var exception = Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-            .AddRoute(first, typeof(TestHandler1))
-            .AddRoute(second, typeof(TestHandler2))
-            .Build());
+        var exception = Assert.Throws<InvalidOperationException>(
+            () =>
+                new TestRouteTableBuilder()
+                    .AddRoute(first, typeof(TestHandler1))
+                    .AddRoute(second, typeof(TestHandler2))
+                    .Build()
+        );
 
         exception.Message.Contains("The following routes are ambiguous");
     }
@@ -856,11 +941,23 @@ public class RouteTableFactoryTests
     [InlineData("{param}/{*catchAll:int}", "{param}/{optional?}")]
     [InlineData("{param}/{*catchAll}", "{param}/{optional?}")]
     [InlineData("{param1?}/{param2?}/{param3?}/{optional?}", "/")]
-    [InlineData("{param1?}/{param2?}/{param3?}/{optional?}", "{param1?}/{param2?}/{param3?}/{optional:int?}")]
-    [InlineData("{param1?}/{param2?}/{param3?}/{optional?}", "{param1?}/{param2?}/{param3:int?}/{optional?}")]
+    [InlineData(
+        "{param1?}/{param2?}/{param3?}/{optional?}",
+        "{param1?}/{param2?}/{param3?}/{optional:int?}"
+    )]
+    [InlineData(
+        "{param1?}/{param2?}/{param3?}/{optional?}",
+        "{param1?}/{param2?}/{param3:int?}/{optional?}"
+    )]
     [InlineData("{param1?}/{param2?}/{param3:int?}/{optional?}", "{param1?}/{param2?}")]
-    [InlineData("{param1?}/{param2?}/{param3?}/{*catchAll:int}", "{param1?}/{param2?}/{param3?}/{optional?}")]
-    [InlineData("{param1?}/{param2?}/{param3?}/{*catchAll}", "{param1?}/{param2?}/{param3?}/{optional?}")]
+    [InlineData(
+        "{param1?}/{param2?}/{param3?}/{*catchAll:int}",
+        "{param1?}/{param2?}/{param3?}/{optional?}"
+    )]
+    [InlineData(
+        "{param1?}/{param2?}/{param3?}/{*catchAll}",
+        "{param1?}/{param2?}/{param3?}/{optional?}"
+    )]
     public void DoesNotThrowForNonAmbiguousRoutes(string first, string second)
     {
         // Arrange
@@ -882,9 +979,9 @@ public class RouteTableFactoryTests
     public void ThrowsForLiteralWithQuestionMark()
     {
         // Arrange, act & assert
-        Assert.Throws<RoutePatternException>(() => new TestRouteTableBuilder()
-            .AddRoute("literal?")
-            .Build());
+        Assert.Throws<RoutePatternException>(
+            () => new TestRouteTableBuilder().AddRoute("literal?").Build()
+        );
     }
 
     [Fact]
@@ -914,7 +1011,8 @@ public class RouteTableFactoryTests
         var handler = typeof(int);
         var routeTable = new TestRouteTableBuilder()
             .AddRoute("/an/awesome/path")
-            .AddRoute("/an/awesome/", handler).Build();
+            .AddRoute("/an/awesome/", handler)
+            .Build();
 
         // Act
         //Assert.Equal("an/awesome", routeTable.Routes[0].Template.TemplateText);
@@ -926,7 +1024,8 @@ public class RouteTableFactoryTests
         // Arrange
         var routeTable = new TestRouteTableBuilder()
             .AddRoute("/products/{id}")
-            .AddRoute("/products/{id:int}").Build();
+            .AddRoute("/products/{id:int}")
+            .Build();
         var context = new RouteContext("/products/456");
 
         // Act
@@ -934,10 +1033,7 @@ public class RouteTableFactoryTests
 
         // Assert
         Assert.NotNull(context.Handler);
-        Assert.Equal(context.Parameters, new Dictionary<string, object>
-            {
-                { "id", 456 }
-            });
+        Assert.Equal(context.Parameters, new Dictionary<string, object> { { "id", 456 } });
     }
 
     [Fact]
@@ -966,7 +1062,8 @@ public class RouteTableFactoryTests
         var handler = typeof(int);
         var routeTable = new TestRouteTableBuilder()
             .AddRoute("/an/awesome/", handler)
-            .AddRoute("/a/brilliant/").Build();
+            .AddRoute("/a/brilliant/")
+            .Build();
 
         // Act
         //Assert.Equal("a/brilliant", routeTable.Routes[0].Template.TemplateText);
@@ -1019,14 +1116,15 @@ public class RouteTableFactoryTests
     public void DetectsAmbiguousRoutes(string left, string right)
     {
         // Arrange
-        var expectedMessage = $@"The following routes are ambiguous:
+        var expectedMessage =
+            $@"The following routes are ambiguous:
 '{left.Trim('/')}' in '{typeof(object).FullName}'
 '{right.Trim('/')}' in '{typeof(object).FullName}'
 ";
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() => new TestRouteTableBuilder()
-            .AddRoute(left)
-            .AddRoute(right).Build());
+        var exception = Assert.Throws<InvalidOperationException>(
+            () => new TestRouteTableBuilder().AddRoute(left).AddRoute(right).Build()
+        );
 
         Assert.Equal(expectedMessage, exception.Message);
     }
@@ -1075,11 +1173,10 @@ public class RouteTableFactoryTests
         //    });
 
         Assert.Same(typeof(TestHandler1), context.Handler);
-        Assert.Equal(new Dictionary<string, object>
-            {
-                { "param1", 456 },
-                { "param2", null },
-            }, context.Parameters);
+        Assert.Equal(
+            new Dictionary<string, object> { { "param1", 456 }, { "param2", null } },
+            context.Parameters
+        );
     }
 
     private class TestRouteTableBuilder
@@ -1088,11 +1185,11 @@ public class RouteTableFactoryTests
 
         public TestRouteTableBuilder()
         {
-            _serviceProvider = new ServiceCollection()
-                .AddLogging()
-                .BuildServiceProvider();
+            _serviceProvider = new ServiceCollection().AddLogging().BuildServiceProvider();
         }
-        readonly IList<(string Template, Type Handler)> _routeTemplates = new List<(string, Type)>();
+
+        readonly IList<(string Template, Type Handler)> _routeTemplates =
+            new List<(string, Type)>();
         readonly Type _handler = typeof(object);
 
         public TestRouteTableBuilder AddRoute(string template, Type handler = null)
@@ -1107,10 +1204,14 @@ public class RouteTableFactoryTests
             {
                 var templatesByHandler = _routeTemplates
                     .GroupBy(rt => rt.Handler)
-                    .ToDictionary(group => group.Key, group => group.Select(g => g.Template).ToArray());
+                    .ToDictionary(
+                        group => group.Key,
+                        group => group.Select(g => g.Template).ToArray()
+                    );
                 return RouteTableFactory.Create(templatesByHandler, _serviceProvider);
             }
-            catch (InvalidOperationException ex) when (ex.InnerException is InvalidOperationException)
+            catch (InvalidOperationException ex)
+                when (ex.InnerException is InvalidOperationException)
             {
                 // ToArray() will wrap our exception in its own.
                 throw ex.InnerException;
@@ -1119,5 +1220,6 @@ public class RouteTableFactoryTests
     }
 
     class TestHandler1 { }
+
     class TestHandler2 { }
 }

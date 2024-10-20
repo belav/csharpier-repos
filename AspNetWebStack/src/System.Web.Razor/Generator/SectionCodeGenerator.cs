@@ -19,7 +19,9 @@ namespace System.Web.Razor.Generator
         {
             string startBlock = context.BuildCodeString(cw =>
             {
-                cw.WriteStartMethodInvoke(context.Host.GeneratedClassContext.DefineSectionMethodName);
+                cw.WriteStartMethodInvoke(
+                    context.Host.GeneratedClassContext.DefineSectionMethodName
+                );
                 cw.WriteStringLiteral(SectionName);
                 cw.WriteParameterSeparator();
                 cw.WriteStartLambdaDelegate();
@@ -41,17 +43,14 @@ namespace System.Web.Razor.Generator
         public override bool Equals(object obj)
         {
             SectionCodeGenerator other = obj as SectionCodeGenerator;
-            return other != null &&
-                   base.Equals(other) &&
-                   String.Equals(SectionName, other.SectionName, StringComparison.Ordinal);
+            return other != null
+                && base.Equals(other)
+                && String.Equals(SectionName, other.SectionName, StringComparison.Ordinal);
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(base.GetHashCode())
-                .Add(SectionName)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(base.GetHashCode()).Add(SectionName).CombinedHash;
         }
 
         public override string ToString()

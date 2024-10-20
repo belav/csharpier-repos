@@ -10,9 +10,9 @@ using Xunit;
 // Reduced from 7.8 KiB to 0.3 KiB in 00:00:41
 // Hits JIT assert in Release:
 // Assertion failed '!"SSA check failures"' in 'Program:M1()' during 'Redundant branch opts' (IL size 29; hash 0xaf510bb6; FullOpts)
-// 
+//
 //     File: D:\a\_work\1\s\src\coreclr\jit\fgdiagnostic.cpp Line: 4392
-// 
+//
 public class Runtime_85226
 {
     [Fact]

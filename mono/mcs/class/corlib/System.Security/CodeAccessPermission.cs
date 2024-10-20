@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,253 +39,279 @@ using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Threading;
 
-namespace System.Security {
-
-	[Serializable]
-	[SecurityPermission (SecurityAction.InheritanceDemand, ControlEvidence = true, ControlPolicy = true)]
-	[ComVisible (true)]
-	[MonoTODO ("CAS support is experimental (and unsupported).")]
-	public abstract class CodeAccessPermission : IPermission, ISecurityEncodable, IStackWalk {
-
-
-		protected CodeAccessPermission ()
-		{
-		}
+namespace System.Security
+{
+    [Serializable]
+    [SecurityPermission(
+        SecurityAction.InheritanceDemand,
+        ControlEvidence = true,
+        ControlPolicy = true
+    )]
+    [ComVisible(true)]
+    [MonoTODO("CAS support is experimental (and unsupported).")]
+    public abstract class CodeAccessPermission : IPermission, ISecurityEncodable, IStackWalk
+    {
+        protected CodeAccessPermission() { }
 
 #if MOBILE
-		[Conditional ("MONO_FEATURE_CAS")]
+        [Conditional("MONO_FEATURE_CAS")]
 #else
-		[MonoTODO ("CAS support is experimental (and unsupported). Imperative mode is not implemented.")]
+        [MonoTODO(
+            "CAS support is experimental (and unsupported). Imperative mode is not implemented."
+        )]
 #endif
-		public void Assert ()
-		{
-			new PermissionSet (this).Assert ();
-		}
+        public void Assert()
+        {
+            new PermissionSet(this).Assert();
+        }
 
-		public abstract IPermission Copy ();
+        public abstract IPermission Copy();
 
 #if MOBILE
-		[Conditional ("MONO_FEATURE_CAS")]
+        [Conditional("MONO_FEATURE_CAS")]
 #endif
-		public void Demand ()
-		{
-			// note: here we're sure it's a CAS demand
-			if (!SecurityManager.SecurityEnabled)
-				return;
+        public void Demand()
+        {
+            // note: here we're sure it's a CAS demand
+            if (!SecurityManager.SecurityEnabled)
+                return;
 
-			// skip frames until we get the caller (of our caller)
-			new PermissionSet (this).CasOnlyDemand (3);
-		}
+            // skip frames until we get the caller (of our caller)
+            new PermissionSet(this).CasOnlyDemand(3);
+        }
 
 #if MOBILE
-		[Conditional ("MONO_FEATURE_CAS")]
+        [Conditional("MONO_FEATURE_CAS")]
 #else
-		[MonoTODO ("CAS support is experimental (and unsupported). Imperative mode is not implemented.")]
+        [MonoTODO(
+            "CAS support is experimental (and unsupported). Imperative mode is not implemented."
+        )]
 #endif
-		public void Deny ()
-		{
-			new PermissionSet (this).Deny ();
-		}
+        public void Deny()
+        {
+            new PermissionSet(this).Deny();
+        }
 
-		[ComVisible (false)]
-		public override bool Equals (object obj)
-		{
-			if (obj == null)
-				return false;
-			if (obj.GetType () != this.GetType ())
-				return false;
-			CodeAccessPermission cap = (obj as CodeAccessPermission);
-			return (IsSubsetOf (cap) && cap.IsSubsetOf (this));
-		}
+        [ComVisible(false)]
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            if (obj.GetType() != this.GetType())
+                return false;
+            CodeAccessPermission cap = (obj as CodeAccessPermission);
+            return (IsSubsetOf(cap) && cap.IsSubsetOf(this));
+        }
 
-		public abstract void FromXml (SecurityElement elem);
+        public abstract void FromXml(SecurityElement elem);
 
-		[ComVisible (false)]
-		public override int GetHashCode ()
-		{
-			return base.GetHashCode ();
-		}
+        [ComVisible(false)]
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
 
-		public abstract IPermission Intersect (IPermission target);
+        public abstract IPermission Intersect(IPermission target);
 
-		public abstract bool IsSubsetOf (IPermission target);
+        public abstract bool IsSubsetOf(IPermission target);
 
-		public override string ToString ()
-		{
-			SecurityElement elem = ToXml ();
-			return elem.ToString ();
-		}
+        public override string ToString()
+        {
+            SecurityElement elem = ToXml();
+            return elem.ToString();
+        }
 
-		public abstract SecurityElement ToXml ();
+        public abstract SecurityElement ToXml();
 
-		public virtual IPermission Union (IPermission other)
-		{
-			if (null != other)
-				throw new System.NotSupportedException (); // other is not null.
-			return null;
-		}
+        public virtual IPermission Union(IPermission other)
+        {
+            if (null != other)
+                throw new System.NotSupportedException(); // other is not null.
+            return null;
+        }
 
 #if MOBILE
-		[Conditional ("MONO_FEATURE_CAS")]
+        [Conditional("MONO_FEATURE_CAS")]
 #else
-		[MonoTODO ("CAS support is experimental (and unsupported). Imperative mode is not implemented.")]
+        [MonoTODO(
+            "CAS support is experimental (and unsupported). Imperative mode is not implemented."
+        )]
 #endif
-		public void PermitOnly ()
-		{
-			new PermissionSet (this).PermitOnly ();
-		}
+        public void PermitOnly()
+        {
+            new PermissionSet(this).PermitOnly();
+        }
 
 #if MOBILE
-		[Conditional ("MONO_FEATURE_CAS")]
+        [Conditional("MONO_FEATURE_CAS")]
 #else
-		[MonoTODO ("CAS support is experimental (and unsupported). Imperative mode is not implemented.")]
+        [MonoTODO(
+            "CAS support is experimental (and unsupported). Imperative mode is not implemented."
+        )]
 #endif
-		public static void RevertAll ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				return;
-			throw new NotImplementedException ();
-		}
+        public static void RevertAll()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                return;
+            throw new NotImplementedException();
+        }
 
 #if MOBILE
-		[Conditional ("MONO_FEATURE_CAS")]
+        [Conditional("MONO_FEATURE_CAS")]
 #else
-		[MonoTODO ("CAS support is experimental (and unsupported). Imperative mode is not implemented.")]
+        [MonoTODO(
+            "CAS support is experimental (and unsupported). Imperative mode is not implemented."
+        )]
 #endif
-		public static void RevertAssert ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				return;
-			throw new NotImplementedException ();
-		}
+        public static void RevertAssert()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                return;
+            throw new NotImplementedException();
+        }
 
 #if MOBILE
-		[Conditional ("MONO_FEATURE_CAS")]
+        [Conditional("MONO_FEATURE_CAS")]
 #else
-		[MonoTODO ("CAS support is experimental (and unsupported). Imperative mode is not implemented.")]
+        [MonoTODO(
+            "CAS support is experimental (and unsupported). Imperative mode is not implemented."
+        )]
 #endif
-		public static void RevertDeny ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				return;
-			throw new NotImplementedException ();
-		}
+        public static void RevertDeny()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                return;
+            throw new NotImplementedException();
+        }
 
 #if MOBILE
-		[Conditional ("MONO_FEATURE_CAS")]
+        [Conditional("MONO_FEATURE_CAS")]
 #else
-		[MonoTODO ("CAS support is experimental (and unsupported). Imperative mode is not implemented.")]
+        [MonoTODO(
+            "CAS support is experimental (and unsupported). Imperative mode is not implemented."
+        )]
 #endif
-		public static void RevertPermitOnly ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				return;
-			throw new NotImplementedException ();
-		}
+        public static void RevertPermitOnly()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                return;
+            throw new NotImplementedException();
+        }
 
-		// Internal helpers methods
+        // Internal helpers methods
 
-		// snippet moved from FileIOPermission (nickd) to be reused in all derived classes
-		internal SecurityElement Element (int version) 
-		{
-			SecurityElement se = new SecurityElement ("IPermission");
-			Type type = this.GetType ();
-			se.AddAttribute ("class", type.FullName + ", " + type.Assembly.ToString ().Replace ('\"', '\''));
-			se.AddAttribute ("version", version.ToString ());
-			return se;
-		}
+        // snippet moved from FileIOPermission (nickd) to be reused in all derived classes
+        internal SecurityElement Element(int version)
+        {
+            SecurityElement se = new SecurityElement("IPermission");
+            Type type = this.GetType();
+            se.AddAttribute(
+                "class",
+                type.FullName + ", " + type.Assembly.ToString().Replace('\"', '\'')
+            );
+            se.AddAttribute("version", version.ToString());
+            return se;
+        }
 
-		internal static PermissionState CheckPermissionState (PermissionState state, bool allowUnrestricted)
-		{
-			string msg;
-			switch (state) {
-			case PermissionState.None:
-				break;
-			case PermissionState.Unrestricted:
-				// unrestricted permissions are possible for identiy permissions
-				break;
-			default:
-				msg = String.Format (Locale.GetText ("Invalid enum {0}"), state);
-				throw new ArgumentException (msg, "state");
-			}
-			return state;
-		}
+        internal static PermissionState CheckPermissionState(
+            PermissionState state,
+            bool allowUnrestricted
+        )
+        {
+            string msg;
+            switch (state)
+            {
+                case PermissionState.None:
+                    break;
+                case PermissionState.Unrestricted:
+                    // unrestricted permissions are possible for identiy permissions
+                    break;
+                default:
+                    msg = String.Format(Locale.GetText("Invalid enum {0}"), state);
+                    throw new ArgumentException(msg, "state");
+            }
+            return state;
+        }
 
-		internal static int CheckSecurityElement (SecurityElement se, string parameterName, int minimumVersion, int maximumVersion) 
-		{
-			if (se == null)
-				throw new ArgumentNullException (parameterName);
+        internal static int CheckSecurityElement(
+            SecurityElement se,
+            string parameterName,
+            int minimumVersion,
+            int maximumVersion
+        )
+        {
+            if (se == null)
+                throw new ArgumentNullException(parameterName);
 
-			// Tag is case-sensitive
-			if (se.Tag != "IPermission") {
-				string msg = String.Format (Locale.GetText ("Invalid tag {0}"), se.Tag);
-				throw new ArgumentException (msg, parameterName);
-			}
+            // Tag is case-sensitive
+            if (se.Tag != "IPermission")
+            {
+                string msg = String.Format(Locale.GetText("Invalid tag {0}"), se.Tag);
+                throw new ArgumentException(msg, parameterName);
+            }
 
-			// Note: we do not care about the class attribute at 
-			// this stage (in fact we don't even if the class 
-			// attribute is present or not). Anyway the object has
-			// already be created, with success, if we're loading it
+            // Note: we do not care about the class attribute at
+            // this stage (in fact we don't even if the class
+            // attribute is present or not). Anyway the object has
+            // already be created, with success, if we're loading it
 
-			// we assume minimum version if no version number is supplied
-			int version = minimumVersion;
-			string v = se.Attribute ("version");
-			if (v != null) {
-				try {
-					version = Int32.Parse (v);
-				}
-				catch (Exception e) {
-					string msg = Locale.GetText ("Couldn't parse version from '{0}'.");
-					msg = String.Format (msg, v);
-					throw new ArgumentException (msg, parameterName, e);
-				}
-			}
+            // we assume minimum version if no version number is supplied
+            int version = minimumVersion;
+            string v = se.Attribute("version");
+            if (v != null)
+            {
+                try
+                {
+                    version = Int32.Parse(v);
+                }
+                catch (Exception e)
+                {
+                    string msg = Locale.GetText("Couldn't parse version from '{0}'.");
+                    msg = String.Format(msg, v);
+                    throw new ArgumentException(msg, parameterName, e);
+                }
+            }
 
-			if ((version < minimumVersion) || (version > maximumVersion)) {
-				string msg = Locale.GetText ("Unknown version '{0}', expected versions between ['{1}','{2}'].");
-				msg = String.Format (msg, version, minimumVersion, maximumVersion);
-				throw new ArgumentException (msg, parameterName);
-			}
-			return version;
-		}
+            if ((version < minimumVersion) || (version > maximumVersion))
+            {
+                string msg = Locale.GetText(
+                    "Unknown version '{0}', expected versions between ['{1}','{2}']."
+                );
+                msg = String.Format(msg, version, minimumVersion, maximumVersion);
+                throw new ArgumentException(msg, parameterName);
+            }
+            return version;
+        }
 
-		// must be called after CheckSecurityElement (i.e. se != null)
-		internal static bool IsUnrestricted (SecurityElement se) 
-		{
-			string value = se.Attribute ("Unrestricted");
-			if (value == null)
-				return false;
-			return (String.Compare (value, Boolean.TrueString, true, CultureInfo.InvariantCulture) == 0);
-		}
+        // must be called after CheckSecurityElement (i.e. se != null)
+        internal static bool IsUnrestricted(SecurityElement se)
+        {
+            string value = se.Attribute("Unrestricted");
+            if (value == null)
+                return false;
+            return (
+                String.Compare(value, Boolean.TrueString, true, CultureInfo.InvariantCulture) == 0
+            );
+        }
 
-		internal static void ThrowInvalidPermission (IPermission target, Type expected) 
-		{
-			string msg = Locale.GetText ("Invalid permission type '{0}', expected type '{1}'.");
-			msg = String.Format (msg, target.GetType (), expected);
-			throw new ArgumentException (msg, "target");
-		}
+        internal static void ThrowInvalidPermission(IPermission target, Type expected)
+        {
+            string msg = Locale.GetText("Invalid permission type '{0}', expected type '{1}'.");
+            msg = String.Format(msg, target.GetType(), expected);
+            throw new ArgumentException(msg, "target");
+        }
 
 #if MOBILE
-		// Workaround for CS0629
-		void IStackWalk.Assert ()
-		{
-		}
+        // Workaround for CS0629
+        void IStackWalk.Assert() { }
 
-		void IStackWalk.Deny ()
-		{
-		}
+        void IStackWalk.Deny() { }
 
-		void IStackWalk.PermitOnly ()
-		{
-		}
+        void IStackWalk.PermitOnly() { }
 
-		void IStackWalk.Demand ()
-		{
-		}
+        void IStackWalk.Demand() { }
 
-		void IPermission.Demand ()
-		{
-		}
+        void IPermission.Demand() { }
 #endif
-	}
+    }
 }

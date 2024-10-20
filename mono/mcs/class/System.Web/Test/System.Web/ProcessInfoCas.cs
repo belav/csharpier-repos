@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,52 +26,60 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web {
+namespace MonoCasTests.System.Web
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ProcessInfoCas : AspNetHostingMinimal
+    {
+        private void CheckProperties(ProcessInfo pi)
+        {
+            Assert.AreEqual(TimeSpan.Zero, pi.Age, "Age");
+            Assert.AreEqual(0, pi.PeakMemoryUsed, "PeakMemoryUsed");
+            Assert.AreEqual(0, pi.ProcessID, "ProcessID");
+            Assert.AreEqual(0, pi.RequestCount, "RequestCount");
+            Assert.AreEqual(ProcessShutdownReason.None, pi.ShutdownReason, "ShutdownReason");
+            Assert.AreEqual(DateTime.MinValue, pi.StartTime, "StartTime");
+            Assert.AreEqual(0, (int)pi.Status, "Status");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ProcessInfoCas : AspNetHostingMinimal {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0()
+        {
+            ProcessInfo pi = new ProcessInfo();
+            CheckProperties(pi);
+            pi.SetAll(DateTime.MinValue, TimeSpan.Zero, 0, 0, 0, ProcessShutdownReason.None, 0);
+            CheckProperties(pi);
+        }
 
-		private void CheckProperties (ProcessInfo pi)
-		{
-			Assert.AreEqual (TimeSpan.Zero, pi.Age, "Age");
-			Assert.AreEqual (0, pi.PeakMemoryUsed, "PeakMemoryUsed");
-			Assert.AreEqual (0, pi.ProcessID, "ProcessID");
-			Assert.AreEqual (0, pi.RequestCount, "RequestCount");
-			Assert.AreEqual (ProcessShutdownReason.None, pi.ShutdownReason, "ShutdownReason");
-			Assert.AreEqual (DateTime.MinValue, pi.StartTime, "StartTime");
-			Assert.AreEqual (0, (int)pi.Status, "Status");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor7()
+        {
+            ProcessInfo pi = new ProcessInfo(
+                DateTime.MinValue,
+                TimeSpan.Zero,
+                0,
+                0,
+                0,
+                ProcessShutdownReason.None,
+                0
+            );
+            CheckProperties(pi);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0 ()
-		{
-			ProcessInfo pi = new ProcessInfo ();
-			CheckProperties (pi);
-			pi.SetAll (DateTime.MinValue, TimeSpan.Zero, 0, 0, 0, ProcessShutdownReason.None, 0);
-			CheckProperties (pi);
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor7 ()
-		{
-			ProcessInfo pi = new ProcessInfo (DateTime.MinValue, TimeSpan.Zero, 0, 0, 0, ProcessShutdownReason.None, 0);
-			CheckProperties (pi);
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (ProcessInfo); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(ProcessInfo); }
+        }
+    }
 }

@@ -14,169 +14,193 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
+    using Castle.DynamicProxy.Tests.Interceptors;
+    using NUnit.Framework;
 
-	using Castle.DynamicProxy.Tests.Interceptors;
+    [TestFixture]
+    public class InterceptorSelectorTargetTypeTestCase : BasePEVerifyTestCase
+    {
+        // NOTE: This fixture does not just contain tests targeting IInterceptorSelector.SelectInterceptors,
+        // but also tests targeting IInvocation.TargetType. These tests complement the former set of tests
+        // to ensure consistency between the two.
 
-	using NUnit.Framework;
+        [Test]
+        public void When_using_CreateClassProxy_SelectInterceptors_receives_type_equal_to_proxied_type()
+        {
+            var selector = new InterceptorSelector();
 
-	[TestFixture]
-	public class InterceptorSelectorTargetTypeTestCase : BasePEVerifyTestCase
-	{
-		// NOTE: This fixture does not just contain tests targeting IInterceptorSelector.SelectInterceptors,
-		// but also tests targeting IInvocation.TargetType. These tests complement the former set of tests
-		// to ensure consistency between the two.
+            var proxy = generator.CreateClassProxy<Foo>(
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateClassProxy_SelectInterceptors_receives_type_equal_to_proxied_type()
-		{
-			var selector = new InterceptorSelector();
+            Assert.AreEqual(typeof(Foo), selector.ReceivedType);
+        }
 
-			var proxy = generator.CreateClassProxy<Foo>(new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
-			proxy.Method();
+        [Test]
+        public void When_using_CreateClassProxy_Invocation_TargetType_is_equal_to_proxied_type()
+        {
+            var interceptor = new Interceptor();
 
-			Assert.AreEqual(typeof(Foo), selector.ReceivedType);
-		}
+            var proxy = generator.CreateClassProxy<Foo>(interceptor);
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateClassProxy_Invocation_TargetType_is_equal_to_proxied_type()
-		{
-			var interceptor = new Interceptor();
+            Assert.AreEqual(typeof(Foo), interceptor.ReceivedTargetType);
+        }
 
-			var proxy = generator.CreateClassProxy<Foo>(interceptor);
-			proxy.Method();
+        [Test]
+        public void When_using_CreateClassProxyWithTarget_SelectInterceptors_receives_type_equal_to_type_of_target()
+        {
+            var selector = new InterceptorSelector();
 
-			Assert.AreEqual(typeof(Foo), interceptor.ReceivedTargetType);
-		}
+            var proxy = generator.CreateClassProxyWithTarget<Foo>(
+                new FooTarget(),
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateClassProxyWithTarget_SelectInterceptors_receives_type_equal_to_type_of_target()
-		{
-			var selector = new InterceptorSelector();
+            Assert.AreEqual(typeof(FooTarget), selector.ReceivedType);
+        }
 
-			var proxy = generator.CreateClassProxyWithTarget<Foo>(new FooTarget(), new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
-			proxy.Method();
+        [Test]
+        public void When_using_CreateClassProxyWithTarget_Invocation_TargetType_is_equal_to_type_of_target()
+        {
+            var interceptor = new Interceptor();
 
-			Assert.AreEqual(typeof(FooTarget), selector.ReceivedType);
-		}
+            var proxy = generator.CreateClassProxyWithTarget<Foo>(new FooTarget(), interceptor);
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateClassProxyWithTarget_Invocation_TargetType_is_equal_to_type_of_target()
-		{
-			var interceptor = new Interceptor();
+            Assert.AreEqual(typeof(FooTarget), interceptor.ReceivedTargetType);
+        }
 
-			var proxy = generator.CreateClassProxyWithTarget<Foo>(new FooTarget(), interceptor);
-			proxy.Method();
+        [Test]
+        public void When_using_CreateInterfaceProxyWithoutTarget_SelectInterceptors_receives_type_equal_to_null()
+        {
+            var selector = new InterceptorSelector();
 
-			Assert.AreEqual(typeof(FooTarget), interceptor.ReceivedTargetType);
-		}
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IFoo>(
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateInterfaceProxyWithoutTarget_SelectInterceptors_receives_type_equal_to_null()
-		{
-			var selector = new InterceptorSelector();
+            Assert.AreEqual(null, selector.ReceivedType);
+        }
 
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IFoo>(new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
-			proxy.Method();
+        [Test]
+        public void When_using_CreateInterfaceProxyWithoutTarget_Invocation_TargetType_is_equal_to_null()
+        {
+            var interceptor = new Interceptor();
 
-			Assert.AreEqual(null, selector.ReceivedType);
-		}
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IFoo>(interceptor);
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateInterfaceProxyWithoutTarget_Invocation_TargetType_is_equal_to_null()
-		{
-			var interceptor = new Interceptor();
+            Assert.AreEqual(null, interceptor.ReceivedTargetType);
+        }
 
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IFoo>(interceptor);
-			proxy.Method();
+        [Test]
+        public void When_using_CreateInterfaceProxyWithTarget_SelectInterceptors_receives_type_equal_to_type_of_target()
+        {
+            var selector = new InterceptorSelector();
 
-			Assert.AreEqual(null, interceptor.ReceivedTargetType);
-		}
+            var proxy = generator.CreateInterfaceProxyWithTarget<IFoo>(
+                new FooTarget(),
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateInterfaceProxyWithTarget_SelectInterceptors_receives_type_equal_to_type_of_target()
-		{
-			var selector = new InterceptorSelector();
+            Assert.AreEqual(typeof(FooTarget), selector.ReceivedType);
+        }
 
-			var proxy = generator.CreateInterfaceProxyWithTarget<IFoo>(new FooTarget(), new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
-			proxy.Method();
+        [Test]
+        public void When_using_CreateInterfaceProxyWithTarget_Invocation_TargetType_is_equal_to_type_of_target()
+        {
+            var interceptor = new Interceptor();
 
-			Assert.AreEqual(typeof(FooTarget), selector.ReceivedType);
-		}
+            var proxy = generator.CreateInterfaceProxyWithTarget<IFoo>(
+                new FooTarget(),
+                interceptor
+            );
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateInterfaceProxyWithTarget_Invocation_TargetType_is_equal_to_type_of_target()
-		{
-			var interceptor = new Interceptor();
+            Assert.AreEqual(typeof(FooTarget), interceptor.ReceivedTargetType);
+        }
 
-			var proxy = generator.CreateInterfaceProxyWithTarget<IFoo>(new FooTarget(), interceptor);
-			proxy.Method();
+        [Test]
+        public void When_using_CreateInterfaceProxyWithTargetInterface_SelectInterceptors_receives_type_equal_to_type_of_target()
+        {
+            var selector = new InterceptorSelector();
 
-			Assert.AreEqual(typeof(FooTarget), interceptor.ReceivedTargetType);
-		}
+            var proxy = generator.CreateInterfaceProxyWithTargetInterface<IFoo>(
+                new FooTarget(),
+                new ProxyGenerationOptions { Selector = selector },
+                new DoNothingInterceptor()
+            );
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateInterfaceProxyWithTargetInterface_SelectInterceptors_receives_type_equal_to_type_of_target()
-		{
-			var selector = new InterceptorSelector();
+            Assert.AreEqual(typeof(FooTarget), selector.ReceivedType);
+        }
 
-			var proxy = generator.CreateInterfaceProxyWithTargetInterface<IFoo>(new FooTarget(), new ProxyGenerationOptions { Selector = selector }, new DoNothingInterceptor());
-			proxy.Method();
+        [Test]
+        public void When_using_CreateInterfaceProxyWithTargetInterface_Invocation_TargetType_is_equal_to_type_of_target()
+        {
+            var interceptor = new Interceptor();
 
-			Assert.AreEqual(typeof(FooTarget), selector.ReceivedType);
-		}
+            var proxy = generator.CreateInterfaceProxyWithTargetInterface<IFoo>(
+                new FooTarget(),
+                interceptor
+            );
+            proxy.Method();
 
-		[Test]
-		public void When_using_CreateInterfaceProxyWithTargetInterface_Invocation_TargetType_is_equal_to_type_of_target()
-		{
-			var interceptor = new Interceptor();
+            Assert.AreEqual(typeof(FooTarget), interceptor.ReceivedTargetType);
+        }
 
-			var proxy = generator.CreateInterfaceProxyWithTargetInterface<IFoo>(new FooTarget(), interceptor);
-			proxy.Method();
+        public interface IFoo
+        {
+            void Method();
+        }
 
-			Assert.AreEqual(typeof(FooTarget), interceptor.ReceivedTargetType);
-		}
+        public abstract class Foo : IFoo
+        {
+            public abstract void Method();
+        }
 
-		public interface IFoo
-		{
-			void Method();
-		}
-
-		public abstract class Foo : IFoo
-		{
-			public abstract void Method();
-		}
-
-		public sealed class FooTarget : Foo
-		{
-			public override void Method()
-			{
-			}
-		}
+        public sealed class FooTarget : Foo
+        {
+            public override void Method() { }
+        }
 
 #if FEATURE_SERIALIZATION
-		[Serializable]
+        [Serializable]
 #endif
-		public sealed class InterceptorSelector : IInterceptorSelector
-		{
-			public Type ReceivedType { get; private set; }
+        public sealed class InterceptorSelector : IInterceptorSelector
+        {
+            public Type ReceivedType { get; private set; }
 
-			public IInterceptor[] SelectInterceptors(Type type, MethodInfo method, IInterceptor[] interceptors)
-			{
-				this.ReceivedType = type;
-				return interceptors;
-			}
-		}
+            public IInterceptor[] SelectInterceptors(
+                Type type,
+                MethodInfo method,
+                IInterceptor[] interceptors
+            )
+            {
+                this.ReceivedType = type;
+                return interceptors;
+            }
+        }
 
-		public sealed class Interceptor : IInterceptor
-		{
-			public Type ReceivedTargetType { get; private set; }
+        public sealed class Interceptor : IInterceptor
+        {
+            public Type ReceivedTargetType { get; private set; }
 
-			public void Intercept(IInvocation invocation)
-			{
-				ReceivedTargetType = invocation.TargetType;
-			}
-		}
-	}
+            public void Intercept(IInvocation invocation)
+            {
+                ReceivedTargetType = invocation.TargetType;
+            }
+        }
+    }
 }

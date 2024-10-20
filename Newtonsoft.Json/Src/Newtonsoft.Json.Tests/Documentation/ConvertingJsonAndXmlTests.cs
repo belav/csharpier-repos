@@ -56,8 +56,9 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void SerializeXmlNode()
         {
-            #region SerializeXmlNode
-            string xml = @"<?xml version='1.0' standalone='no'?>
+#region SerializeXmlNode
+            string xml =
+                @"<?xml version='1.0' standalone='no'?>
             <root>
               <person id='1'>
                 <name>Alan</name>
@@ -93,14 +94,15 @@ namespace Newtonsoft.Json.Tests.Documentation
             //    ]
             //  }
             //}
-            #endregion
+#endregion
         }
 
         [Test]
         public void DeserializeXmlNode()
         {
-            #region DeserializeXmlNode
-            string json = @"{
+#region DeserializeXmlNode
+            string json =
+                @"{
               '?xml': {
                 '@version': '1.0',
                 '@standalone': 'no'
@@ -133,14 +135,15 @@ namespace Newtonsoft.Json.Tests.Documentation
             //     <url>http://www.yahoo.com</url>
             //   </person>
             // </root>
-            #endregion
+#endregion
         }
 
         [Test]
         public void ForceJsonArray()
         {
-            #region ForceJsonArray
-            string xml = @"<person id='1'>
+#region ForceJsonArray
+            string xml =
+                @"<person id='1'>
 			  <name>Alan</name>
 			  <url>http://www.google.com</url>
 			  <role>Admin1</role>
@@ -159,7 +162,8 @@ namespace Newtonsoft.Json.Tests.Documentation
             //  }
             //}
 
-            xml = @"<person xmlns:json='http://james.newtonking.com/projects/json' id='1'>
+            xml =
+                @"<person xmlns:json='http://james.newtonking.com/projects/json' id='1'>
 			  <name>Alan</name>
 			  <url>http://www.google.com</url>
 			  <role json:Array='true'>Admin</role>
@@ -179,7 +183,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             //    ]
             //  }
             //}
-            #endregion
+#endregion
         }
     }
 }

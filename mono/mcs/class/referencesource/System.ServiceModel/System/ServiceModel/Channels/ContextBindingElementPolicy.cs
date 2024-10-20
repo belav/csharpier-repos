@@ -7,9 +7,9 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Xml;
-    using System.ServiceModel.Description;
     using System.Net.Security;
+    using System.ServiceModel.Description;
+    using System.Xml;
 
     static class ContextBindingElementPolicy
     {
@@ -36,7 +36,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static void ExportRequireContextAssertion(ContextBindingElement bindingElement, PolicyAssertionCollection assertions)
+        public static void ExportRequireContextAssertion(
+            ContextBindingElement bindingElement,
+            PolicyAssertionCollection assertions
+        )
         {
             if (bindingElement == null)
             {
@@ -47,10 +50,19 @@ namespace System.ServiceModel.Channels
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("assertions");
             }
 
-            if (bindingElement.ContextExchangeMechanism == ContextExchangeMechanism.ContextSoapHeader)
+            if (
+                bindingElement.ContextExchangeMechanism
+                == ContextExchangeMechanism.ContextSoapHeader
+            )
             {
-                XmlElement assertion = Document.CreateElement(null, IncludeContextName, WscNamespace);
-                XmlAttribute protectionLevelAttribute = Document.CreateAttribute(ProtectionLevelName);
+                XmlElement assertion = Document.CreateElement(
+                    null,
+                    IncludeContextName,
+                    WscNamespace
+                );
+                XmlAttribute protectionLevelAttribute = Document.CreateAttribute(
+                    ProtectionLevelName
+                );
                 switch (bindingElement.ProtectionLevel)
                 {
                     case ProtectionLevel.EncryptAndSign:
@@ -69,12 +81,19 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                XmlElement assertion = Document.CreateElement(null, HttpUseCookieName, HttpNamespace);
+                XmlElement assertion = Document.CreateElement(
+                    null,
+                    HttpUseCookieName,
+                    HttpNamespace
+                );
                 assertions.Add(assertion);
             }
         }
 
-        public static bool TryGetHttpUseCookieAssertion(ICollection<XmlElement> assertions, out XmlElement httpUseCookieAssertion)
+        public static bool TryGetHttpUseCookieAssertion(
+            ICollection<XmlElement> assertions,
+            out XmlElement httpUseCookieAssertion
+        )
         {
             if (assertions == null)
             {
@@ -85,9 +104,11 @@ namespace System.ServiceModel.Channels
 
             foreach (XmlElement assertion in assertions)
             {
-                if (assertion.LocalName == HttpUseCookieName
+                if (
+                    assertion.LocalName == HttpUseCookieName
                     && assertion.NamespaceURI == HttpNamespace
-                    && assertion.ChildNodes.Count == 0)
+                    && assertion.ChildNodes.Count == 0
+                )
                 {
                     httpUseCookieAssertion = assertion;
                     break;
@@ -115,7 +136,10 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        public static bool TryImportRequireContextAssertion(PolicyAssertionCollection assertions, out ContextBindingElement bindingElement)
+        public static bool TryImportRequireContextAssertion(
+            PolicyAssertionCollection assertions,
+            out ContextBindingElement bindingElement
+        )
         {
             if (assertions == null)
             {
@@ -126,12 +150,19 @@ namespace System.ServiceModel.Channels
 
             foreach (XmlElement assertion in assertions)
             {
-                if (assertion.LocalName == IncludeContextName
+                if (
+                    assertion.LocalName == IncludeContextName
                     && assertion.NamespaceURI == WscNamespace
-                    && ContainOnlyWhitespaceChild(assertion))
-                {  
+                    && ContainOnlyWhitespaceChild(assertion)
+                )
+                {
                     string protectionLevelAttribute = assertion.GetAttribute(ProtectionLevelName);
-                    if (EncryptAndSignName.Equals(protectionLevelAttribute, StringComparison.Ordinal))
+                    if (
+                        EncryptAndSignName.Equals(
+                            protectionLevelAttribute,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         bindingElement = new ContextBindingElement(ProtectionLevel.EncryptAndSign);
                     }

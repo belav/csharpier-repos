@@ -56,6 +56,6 @@ public class InMemoryIntegerValueGeneratorTest
     }
 
     [ConditionalFact]
-    public void Does_not_generate_temp_values()
-        => Assert.False(new InMemoryIntegerValueGenerator<int>(0).GeneratesTemporaryValues);
+    public void Does_not_generate_temp_values() =>
+        Assert.False(new InMemoryIntegerValueGenerator<int>(0).GeneratesTemporaryValues);
 }

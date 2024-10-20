@@ -52,7 +52,8 @@ public class UriBuildingContextTest
         string value,
         int startIndex,
         int characterCount,
-        string expected)
+        string expected
+    )
     {
         // Arrange
         var urlTestEncoder = new UrlTestEncoder();
@@ -82,7 +83,12 @@ public class UriBuildingContextTest
     [InlineData("", false, true, "")]
     [InlineData("", true, false, "")]
     [InlineData("", true, true, "")]
-    public void ToPathString(string url, bool appendTrailingSlash, bool encodeSlashes, string expected)
+    public void ToPathString(
+        string url,
+        bool appendTrailingSlash,
+        bool encodeSlashes,
+        string expected
+    )
     {
         // Arrange
         var urlTestEncoder = new UrlTestEncoder();

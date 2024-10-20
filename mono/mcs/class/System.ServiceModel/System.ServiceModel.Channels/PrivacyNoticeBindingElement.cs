@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,38 +30,42 @@ using System.ServiceModel.Description;
 
 namespace System.ServiceModel.Channels
 {
-	public sealed class PrivacyNoticeBindingElement : BindingElement, IPolicyExportExtension
-	{
-		public PrivacyNoticeBindingElement ()
-		{
-			// FIXME: apply configuration
-		}
+    public sealed class PrivacyNoticeBindingElement : BindingElement, IPolicyExportExtension
+    {
+        public PrivacyNoticeBindingElement()
+        {
+            // FIXME: apply configuration
+        }
 
-		public PrivacyNoticeBindingElement (PrivacyNoticeBindingElement elementToBeCloned)
-		{
-			var e = elementToBeCloned;
-			Url = e.Url;
-			Version = e.Version;
-		}
+        public PrivacyNoticeBindingElement(PrivacyNoticeBindingElement elementToBeCloned)
+        {
+            var e = elementToBeCloned;
+            Url = e.Url;
+            Version = e.Version;
+        }
 
-		[MonoTODO]
-		public Uri Url { get; set; }
-		[MonoTODO]
-		public int Version { get; set; }
+        [MonoTODO]
+        public Uri Url { get; set; }
 
-		public override BindingElement Clone ()
-		{
-			return new PrivacyNoticeBindingElement (this);
-		}
+        [MonoTODO]
+        public int Version { get; set; }
 
-		public override T GetProperty<T> (BindingContext context)
-		{
-			return context.GetInnerProperty<T> ();
-		}
+        public override BindingElement Clone()
+        {
+            return new PrivacyNoticeBindingElement(this);
+        }
 
-		void IPolicyExportExtension.ExportPolicy (MetadataExporter exporter, PolicyConversionContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override T GetProperty<T>(BindingContext context)
+        {
+            return context.GetInnerProperty<T>();
+        }
+
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

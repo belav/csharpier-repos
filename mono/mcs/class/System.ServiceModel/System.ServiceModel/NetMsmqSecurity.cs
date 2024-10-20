@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,27 +31,28 @@ using System.ServiceModel.Security;
 
 namespace System.ServiceModel
 {
-	public sealed class NetMsmqSecurity
-	{
-		NetMsmqSecurityMode mode;
-		MessageSecurityOverMsmq message = new MessageSecurityOverMsmq ();
-		MsmqTransportSecurity transport = new MsmqTransportSecurity ();
+    public sealed class NetMsmqSecurity
+    {
+        NetMsmqSecurityMode mode;
+        MessageSecurityOverMsmq message = new MessageSecurityOverMsmq();
+        MsmqTransportSecurity transport = new MsmqTransportSecurity();
 
-		internal NetMsmqSecurity (NetMsmqSecurityMode mode)
-		{
-		}
+        internal NetMsmqSecurity(NetMsmqSecurityMode mode) { }
 
-		public MessageSecurityOverMsmq Message {
-			get { return message; }
-		}
+        public MessageSecurityOverMsmq Message
+        {
+            get { return message; }
+        }
 
-		public NetMsmqSecurityMode Mode {
-			get { return mode; }
-			set { mode = value; }
-		}
+        public NetMsmqSecurityMode Mode
+        {
+            get { return mode; }
+            set { mode = value; }
+        }
 
-		public MsmqTransportSecurity Transport {
-			get { return transport; }
-		}
-	}
+        public MsmqTransportSecurity Transport
+        {
+            get { return transport; }
+        }
+    }
 }

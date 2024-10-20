@@ -7,7 +7,4 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Testing;
 
 [DataContract]
-internal record DebugAttachParams(
-    [property: DataMember(Name = "processId")] int ProcessId
-);
-
+internal record DebugAttachParams([property: DataMember(Name = "processId")] int ProcessId);

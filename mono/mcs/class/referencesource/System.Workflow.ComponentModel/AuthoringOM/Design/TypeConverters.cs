@@ -3,18 +3,18 @@ namespace System.Workflow.ComponentModel.Design
     #region Imports
 
     using System;
-    using System.Drawing.Design;
-    using System.ComponentModel;
-    using System.ComponentModel.Design;
-    using System.Globalization;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.CodeDom;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.Diagnostics;
+    using System.Drawing.Design;
+    using System.Globalization;
+    using System.Reflection;
     using System.Text;
+    using System.Workflow.ComponentModel.Compiler;
 
     #endregion
 
@@ -29,24 +29,47 @@ namespace System.Workflow.ComponentModel.Design
 
         static ConditionTypeConverter()
         {
-            RuleConditionReferenceType = Type.GetType("System.Workflow.Activities.Rules.RuleDefinitions, " + AssemblyRef.ActivitiesAssemblyRef);
-            RuleDefinitionsType = Type.GetType("System.Workflow.Activities.Rules.RuleConditionReference, " + AssemblyRef.ActivitiesAssemblyRef);
-            CodeConditionType = Type.GetType("System.Workflow.Activities.CodeCondition, " + AssemblyRef.ActivitiesAssemblyRef);
-        
-            DeclarativeConditionDynamicProp = (DependencyProperty)RuleConditionReferenceType.GetField("RuleDefinitionsProperty").GetValue(null);
+            RuleConditionReferenceType = Type.GetType(
+                "System.Workflow.Activities.Rules.RuleDefinitions, "
+                    + AssemblyRef.ActivitiesAssemblyRef
+            );
+            RuleDefinitionsType = Type.GetType(
+                "System.Workflow.Activities.Rules.RuleConditionReference, "
+                    + AssemblyRef.ActivitiesAssemblyRef
+            );
+            CodeConditionType = Type.GetType(
+                "System.Workflow.Activities.CodeCondition, " + AssemblyRef.ActivitiesAssemblyRef
+            );
+
+            DeclarativeConditionDynamicProp = (DependencyProperty)
+                RuleConditionReferenceType.GetField("RuleDefinitionsProperty").GetValue(null);
         }
 
         public ConditionTypeConverter()
         {
             string key = CodeConditionType.FullName;
-            object[] attributes = CodeConditionType.GetCustomAttributes(typeof(DisplayNameAttribute), false);
-            if (attributes != null && attributes.Length > 0 && attributes[0] is DisplayNameAttribute)
+            object[] attributes = CodeConditionType.GetCustomAttributes(
+                typeof(DisplayNameAttribute),
+                false
+            );
+            if (
+                attributes != null
+                && attributes.Length > 0
+                && attributes[0] is DisplayNameAttribute
+            )
                 key = ((DisplayNameAttribute)attributes[0]).DisplayName;
             this.conditionDecls.Add(key, CodeConditionType);
 
             key = RuleDefinitionsType.FullName;
-            attributes = RuleDefinitionsType.GetCustomAttributes(typeof(DisplayNameAttribute), false);
-            if (attributes != null && attributes.Length > 0 && attributes[0] is DisplayNameAttribute)
+            attributes = RuleDefinitionsType.GetCustomAttributes(
+                typeof(DisplayNameAttribute),
+                false
+            );
+            if (
+                attributes != null
+                && attributes.Length > 0
+                && attributes[0] is DisplayNameAttribute
+            )
                 key = ((DisplayNameAttribute)attributes[0]).DisplayName;
             this.conditionDecls.Add(key, RuleDefinitionsType);
         }
@@ -58,11 +81,18 @@ namespace System.Workflow.ComponentModel.Design
             return base.CanConvertFrom(context, sourceType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value is string)
             {
-                if (((string)value).Length == 0 || ((string)value) == SR.GetString(SR.NullConditionExpression))
+                if (
+                    ((string)value).Length == 0
+                    || ((string)value) == SR.GetString(SR.NullConditionExpression)
+                )
                     return null;
                 else
                     return Activator.CreateInstance(this.conditionDecls[value] as Type);
@@ -78,8 +108,13 @@ namespace System.Workflow.ComponentModel.Design
             else
                 return base.CanConvertTo(context, destinationType);
         }
-        
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (value == null)
                 return SR.GetString(SR.NullConditionExpression);
@@ -102,6 +137,7 @@ namespace System.Workflow.ComponentModel.Design
 
             return convertedValue;
         }
+
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
             ArrayList conditionDeclList = new ArrayList();
@@ -112,22 +148,37 @@ namespace System.Workflow.ComponentModel.Design
                 Type declType = this.conditionDecls[key] as Type;
                 conditionDeclList.Add(Activator.CreateInstance(declType));
             }
-            return new StandardValuesCollection((ActivityCondition[])conditionDeclList.ToArray(typeof(ActivityCondition)));
+            return new StandardValuesCollection(
+                (ActivityCondition[])conditionDeclList.ToArray(typeof(ActivityCondition))
+            );
         }
+
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
             return true;
         }
+
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return true;
         }
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
+
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
         {
-            PropertyDescriptorCollection props = new PropertyDescriptorCollection(new PropertyDescriptor[] { });
+            PropertyDescriptorCollection props = new PropertyDescriptorCollection(
+                new PropertyDescriptor[] { }
+            );
 
             TypeConverter typeConverter = TypeDescriptor.GetConverter(value.GetType());
-            if (typeConverter != null && typeConverter.GetType() != GetType() && typeConverter.GetPropertiesSupported())
+            if (
+                typeConverter != null
+                && typeConverter.GetType() != GetType()
+                && typeConverter.GetPropertiesSupported()
+            )
             {
                 return typeConverter.GetProperties(context, value, attributes);
             }
@@ -135,11 +186,19 @@ namespace System.Workflow.ComponentModel.Design
             {
                 IComponent component = PropertyDescriptorUtils.GetComponent(context);
                 if (component != null)
-                    props = PropertyDescriptorFilter.FilterProperties(component.Site, value, TypeDescriptor.GetProperties(value, new Attribute[] { BrowsableAttribute.Yes }));
+                    props = PropertyDescriptorFilter.FilterProperties(
+                        component.Site,
+                        value,
+                        TypeDescriptor.GetProperties(
+                            value,
+                            new Attribute[] { BrowsableAttribute.Yes }
+                        )
+                    );
             }
 
             return props;
         }
+
         public override bool GetPropertiesSupported(ITypeDescriptorContext context)
         {
             return true;
@@ -148,18 +207,22 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region ActivityBindTypeConverter
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityBindTypeConverter : TypeConverter
     {
-        public ActivityBindTypeConverter()
-        {
-        }
+        public ActivityBindTypeConverter() { }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            ITypeDescriptorContext actualContext = null; TypeConverter actualConverter = null;
+            ITypeDescriptorContext actualContext = null;
+            TypeConverter actualConverter = null;
             GetActualTypeConverterAndContext(context, out actualConverter, out actualContext);
-            if (actualConverter != null && actualConverter.GetType() != typeof(ActivityBindTypeConverter))
+            if (
+                actualConverter != null
+                && actualConverter.GetType() != typeof(ActivityBindTypeConverter)
+            )
                 return actualConverter.CanConvertFrom(actualContext, sourceType);
             else if (sourceType == typeof(string))
                 return true;
@@ -169,16 +232,25 @@ namespace System.Workflow.ComponentModel.Design
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
-            if (destinationType == typeof(string) && context != null && context.PropertyDescriptor != null)
+            if (
+                destinationType == typeof(string)
+                && context != null
+                && context.PropertyDescriptor != null
+            )
             {
-                ActivityBind activityBind = context.PropertyDescriptor.GetValue(context.Instance) as ActivityBind;
+                ActivityBind activityBind =
+                    context.PropertyDescriptor.GetValue(context.Instance) as ActivityBind;
                 if (activityBind != null)
                     return true;
             }
 
-            ITypeDescriptorContext actualContext = null; TypeConverter actualConverter = null;
+            ITypeDescriptorContext actualContext = null;
+            TypeConverter actualConverter = null;
             GetActualTypeConverterAndContext(context, out actualConverter, out actualContext);
-            if (actualConverter != null && actualConverter.GetType() != typeof(ActivityBindTypeConverter))
+            if (
+                actualConverter != null
+                && actualConverter.GetType() != typeof(ActivityBindTypeConverter)
+            )
                 return actualConverter.CanConvertTo(actualContext, destinationType);
             else if (destinationType == typeof(string))
                 return true;
@@ -186,7 +258,11 @@ namespace System.Workflow.ComponentModel.Design
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object valueToConvert)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object valueToConvert
+        )
         {
             string value = valueToConvert as string;
             if (value == null)
@@ -197,7 +273,8 @@ namespace System.Workflow.ComponentModel.Design
 
             //Check if format is "Activity=, Path="
             string[] splitParts = Parse(value);
-            object convertedValue = (splitParts.Length == 2) ? new ActivityBind(splitParts[0], splitParts[1]) : null;
+            object convertedValue =
+                (splitParts.Length == 2) ? new ActivityBind(splitParts[0], splitParts[1]) : null;
 
             if (convertedValue == null && (context == null || context.PropertyDescriptor == null))
                 return base.ConvertFrom(context, culture, valueToConvert);
@@ -205,9 +282,14 @@ namespace System.Workflow.ComponentModel.Design
             //For string's only if they begin and end with " we will use the type converter
             if (convertedValue == null)
             {
-                ITypeDescriptorContext actualContext = null; TypeConverter actualConverter = null;
+                ITypeDescriptorContext actualContext = null;
+                TypeConverter actualConverter = null;
                 GetActualTypeConverterAndContext(context, out actualConverter, out actualContext);
-                if (actualConverter != null && actualConverter.GetType() != typeof(ActivityBindTypeConverter) && actualConverter.CanConvertFrom(actualContext, typeof(string)))
+                if (
+                    actualConverter != null
+                    && actualConverter.GetType() != typeof(ActivityBindTypeConverter)
+                    && actualConverter.CanConvertFrom(actualContext, typeof(string))
+                )
                     convertedValue = actualConverter.ConvertFrom(actualContext, culture, value);
                 else
                     convertedValue = valueToConvert;
@@ -216,7 +298,12 @@ namespace System.Workflow.ComponentModel.Design
             return convertedValue;
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType != typeof(string))
                 return base.ConvertTo(context, culture, value, destinationType);
@@ -227,17 +314,33 @@ namespace System.Workflow.ComponentModel.Design
             if (activityBind != null)
             {
                 Activity activity = PropertyDescriptorUtils.GetComponent(context) as Activity;
-                activity = (activity != null) ? Helpers.ParseActivityForBind(activity, activityBind.Name) : null;
-                convertedValue = String.Format(CultureInfo.InvariantCulture, ("Activity={0}, Path={1}"), (activity != null) ? activity.QualifiedName : activityBind.Name, activityBind.Path);
+                activity =
+                    (activity != null)
+                        ? Helpers.ParseActivityForBind(activity, activityBind.Name)
+                        : null;
+                convertedValue = String.Format(
+                    CultureInfo.InvariantCulture,
+                    ("Activity={0}, Path={1}"),
+                    (activity != null) ? activity.QualifiedName : activityBind.Name,
+                    activityBind.Path
+                );
             }
             else
             {
-                ITypeDescriptorContext actualContext = null; TypeConverter actualConverter = null;
+                ITypeDescriptorContext actualContext = null;
+                TypeConverter actualConverter = null;
                 GetActualTypeConverterAndContext(context, out actualConverter, out actualContext);
-                if (actualConverter != null && actualConverter.GetType() != typeof(ActivityBindTypeConverter) && actualConverter.CanConvertTo(actualContext, destinationType))
-                    convertedValue = actualConverter.ConvertTo(actualContext, culture, value, destinationType) as string;
+                if (
+                    actualConverter != null
+                    && actualConverter.GetType() != typeof(ActivityBindTypeConverter)
+                    && actualConverter.CanConvertTo(actualContext, destinationType)
+                )
+                    convertedValue =
+                        actualConverter.ConvertTo(actualContext, culture, value, destinationType)
+                        as string;
                 else
-                    convertedValue = base.ConvertTo(context, culture, value, destinationType) as string;
+                    convertedValue =
+                        base.ConvertTo(context, culture, value, destinationType) as string;
             }
 
             return convertedValue;
@@ -248,16 +351,25 @@ namespace System.Workflow.ComponentModel.Design
             bool propertiesSupported = false;
             if (context != null && context.PropertyDescriptor != null)
             {
-                ActivityBind activityBind = context.PropertyDescriptor.GetValue(context.Instance) as ActivityBind;
+                ActivityBind activityBind =
+                    context.PropertyDescriptor.GetValue(context.Instance) as ActivityBind;
                 if (activityBind != null)
                 {
                     propertiesSupported = true;
                 }
                 else
                 {
-                    ITypeDescriptorContext actualContext = null; TypeConverter actualConverter = null;
-                    GetActualTypeConverterAndContext(context, out actualConverter, out actualContext);
-                    if (actualConverter != null && actualConverter.GetType() != typeof(ActivityBindTypeConverter))
+                    ITypeDescriptorContext actualContext = null;
+                    TypeConverter actualConverter = null;
+                    GetActualTypeConverterAndContext(
+                        context,
+                        out actualConverter,
+                        out actualContext
+                    );
+                    if (
+                        actualConverter != null
+                        && actualConverter.GetType() != typeof(ActivityBindTypeConverter)
+                    )
                         propertiesSupported = actualConverter.GetPropertiesSupported(actualContext);
                 }
             }
@@ -265,17 +377,26 @@ namespace System.Workflow.ComponentModel.Design
             return propertiesSupported;
         }
 
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
         {
             ArrayList properties = new ArrayList();
             ActivityBind activityBind = value as ActivityBind;
             if (activityBind != null && context != null)
             {
-                PropertyDescriptorCollection props = TypeDescriptor.GetProperties(value, new Attribute[] { BrowsableAttribute.Yes });
+                PropertyDescriptorCollection props = TypeDescriptor.GetProperties(
+                    value,
+                    new Attribute[] { BrowsableAttribute.Yes }
+                );
 
                 PropertyDescriptor activityDescriptor = props["Name"];
                 if (activityDescriptor != null)
-                    properties.Add(new ActivityBindNamePropertyDescriptor(context, activityDescriptor));
+                    properties.Add(
+                        new ActivityBindNamePropertyDescriptor(context, activityDescriptor)
+                    );
 
                 PropertyDescriptor pathDescriptor = props["Path"];
                 if (pathDescriptor != null)
@@ -283,13 +404,21 @@ namespace System.Workflow.ComponentModel.Design
             }
             else if (context != null && context.PropertyDescriptor != null)
             {
-                ITypeDescriptorContext actualContext = null; TypeConverter actualConverter = null;
+                ITypeDescriptorContext actualContext = null;
+                TypeConverter actualConverter = null;
                 GetActualTypeConverterAndContext(context, out actualConverter, out actualContext);
-                if (actualConverter != null && actualConverter.GetType() != typeof(ActivityBindTypeConverter))
-                    properties.AddRange(actualConverter.GetProperties(actualContext, value, attributes));
+                if (
+                    actualConverter != null
+                    && actualConverter.GetType() != typeof(ActivityBindTypeConverter)
+                )
+                    properties.AddRange(
+                        actualConverter.GetProperties(actualContext, value, attributes)
+                    );
             }
 
-            return new PropertyDescriptorCollection((PropertyDescriptor[])properties.ToArray(typeof(PropertyDescriptor)));
+            return new PropertyDescriptorCollection(
+                (PropertyDescriptor[])properties.ToArray(typeof(PropertyDescriptor))
+            );
         }
 
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
@@ -299,29 +428,47 @@ namespace System.Workflow.ComponentModel.Design
                 return new StandardValuesCollection(new ArrayList());
 
             //If the property type supports exclusive values then we need to add them to list
-            ITypeDescriptorContext actualContext = null; TypeConverter actualConverter = null;
+            ITypeDescriptorContext actualContext = null;
+            TypeConverter actualConverter = null;
             GetActualTypeConverterAndContext(context, out actualConverter, out actualContext);
 
-            if (actualConverter != null && actualConverter.GetStandardValuesSupported(actualContext) && actualConverter.GetType() != typeof(ActivityBindTypeConverter))
+            if (
+                actualConverter != null
+                && actualConverter.GetStandardValuesSupported(actualContext)
+                && actualConverter.GetType() != typeof(ActivityBindTypeConverter)
+            )
                 valuesList.AddRange(actualConverter.GetStandardValues(actualContext));
 
-            return new StandardValuesCollection(valuesList.ToArray()); 
+            return new StandardValuesCollection(valuesList.ToArray());
         }
 
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
-            //We do not support standard values through the 
+            //We do not support standard values through the
             bool standardValuesSupported = false;
             if (context != null && context.PropertyDescriptor != null)
             {
-                object existingPropertyValue = (context.Instance != null) ? context.PropertyDescriptor.GetValue(context.Instance) : null;
+                object existingPropertyValue =
+                    (context.Instance != null)
+                        ? context.PropertyDescriptor.GetValue(context.Instance)
+                        : null;
                 if (!(existingPropertyValue is ActivityBind))
                 {
-                    ITypeDescriptorContext actualContext = null; TypeConverter actualConverter = null;
-                    GetActualTypeConverterAndContext(context, out actualConverter, out actualContext);
+                    ITypeDescriptorContext actualContext = null;
+                    TypeConverter actualConverter = null;
+                    GetActualTypeConverterAndContext(
+                        context,
+                        out actualConverter,
+                        out actualContext
+                    );
 
-                    if (actualConverter != null && actualConverter.GetType() != typeof(ActivityBindTypeConverter))
-                        standardValuesSupported = actualConverter.GetStandardValuesSupported(actualContext);
+                    if (
+                        actualConverter != null
+                        && actualConverter.GetType() != typeof(ActivityBindTypeConverter)
+                    )
+                        standardValuesSupported = actualConverter.GetStandardValuesSupported(
+                            actualContext
+                        );
                 }
             }
 
@@ -333,14 +480,27 @@ namespace System.Workflow.ComponentModel.Design
             bool exclusiveValuesSupported = false;
             if (context != null && context.PropertyDescriptor != null)
             {
-                object existingPropertyValue = (context.Instance != null) ? context.PropertyDescriptor.GetValue(context.Instance) : null;
+                object existingPropertyValue =
+                    (context.Instance != null)
+                        ? context.PropertyDescriptor.GetValue(context.Instance)
+                        : null;
                 if (!(existingPropertyValue is ActivityBind))
                 {
-                    ITypeDescriptorContext actualContext = null; TypeConverter actualConverter = null;
-                    GetActualTypeConverterAndContext(context, out actualConverter, out actualContext);
+                    ITypeDescriptorContext actualContext = null;
+                    TypeConverter actualConverter = null;
+                    GetActualTypeConverterAndContext(
+                        context,
+                        out actualConverter,
+                        out actualContext
+                    );
 
-                    if (actualConverter != null && actualConverter.GetType() != typeof(ActivityBindTypeConverter))
-                        exclusiveValuesSupported = actualConverter.GetStandardValuesExclusive(actualContext);
+                    if (
+                        actualConverter != null
+                        && actualConverter.GetType() != typeof(ActivityBindTypeConverter)
+                    )
+                        exclusiveValuesSupported = actualConverter.GetStandardValuesExclusive(
+                            actualContext
+                        );
                 }
             }
 
@@ -348,7 +508,11 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         #region Helper Methods
-        private void GetActualTypeConverterAndContext(ITypeDescriptorContext currentContext, out TypeConverter realTypeConverter, out ITypeDescriptorContext realContext)
+        private void GetActualTypeConverterAndContext(
+            ITypeDescriptorContext currentContext,
+            out TypeConverter realTypeConverter,
+            out ITypeDescriptorContext realContext
+        )
         {
             //The following case covers the scenario where we have users writting custom property descriptors in which they have returned custom type converters
             //In such cases we should honor the type converter returned by property descriptor only if it is not a ActivityBindTypeConverter
@@ -359,16 +523,28 @@ namespace System.Workflow.ComponentModel.Design
 
             if (currentContext != null && currentContext.PropertyDescriptor != null)
             {
-                realTypeConverter = TypeDescriptor.GetConverter(currentContext.PropertyDescriptor.PropertyType);
+                realTypeConverter = TypeDescriptor.GetConverter(
+                    currentContext.PropertyDescriptor.PropertyType
+                );
 
-                ActivityBindPropertyDescriptor activityBindPropertyDescriptor = currentContext.PropertyDescriptor as ActivityBindPropertyDescriptor;
-                if (activityBindPropertyDescriptor != null &&
-                    activityBindPropertyDescriptor.RealPropertyDescriptor != null &&
-                    activityBindPropertyDescriptor.RealPropertyDescriptor.Converter != null &&
-                    activityBindPropertyDescriptor.RealPropertyDescriptor.Converter.GetType() != typeof(ActivityBindTypeConverter))
+                ActivityBindPropertyDescriptor activityBindPropertyDescriptor =
+                    currentContext.PropertyDescriptor as ActivityBindPropertyDescriptor;
+                if (
+                    activityBindPropertyDescriptor != null
+                    && activityBindPropertyDescriptor.RealPropertyDescriptor != null
+                    && activityBindPropertyDescriptor.RealPropertyDescriptor.Converter != null
+                    && activityBindPropertyDescriptor.RealPropertyDescriptor.Converter.GetType()
+                        != typeof(ActivityBindTypeConverter)
+                )
                 {
-                    realTypeConverter = activityBindPropertyDescriptor.RealPropertyDescriptor.Converter;
-                    realContext = new TypeDescriptorContext(currentContext, activityBindPropertyDescriptor.RealPropertyDescriptor, currentContext.Instance);
+                    realTypeConverter = activityBindPropertyDescriptor
+                        .RealPropertyDescriptor
+                        .Converter;
+                    realContext = new TypeDescriptorContext(
+                        currentContext,
+                        activityBindPropertyDescriptor.RealPropertyDescriptor,
+                        currentContext.Instance
+                    );
                 }
             }
         }
@@ -383,8 +559,10 @@ namespace System.Workflow.ComponentModel.Design
 
                 string activityID = splitValues[0].Trim();
                 string path = splitValues[1].Trim();
-                if (activityID.StartsWith(activityIDMatch, StringComparison.OrdinalIgnoreCase) &&
-                    path.StartsWith(pathMatch, StringComparison.OrdinalIgnoreCase))
+                if (
+                    activityID.StartsWith(activityIDMatch, StringComparison.OrdinalIgnoreCase)
+                    && path.StartsWith(pathMatch, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     activityID = activityID.Substring(activityIDMatch.Length);
                     path = path.Substring(pathMatch.Length);
@@ -411,12 +589,21 @@ namespace System.Workflow.ComponentModel.Design
             return new StringConverter().CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             return new StringConverter().ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             return new StringConverter().ConvertTo(context, culture, value, destinationType);
         }

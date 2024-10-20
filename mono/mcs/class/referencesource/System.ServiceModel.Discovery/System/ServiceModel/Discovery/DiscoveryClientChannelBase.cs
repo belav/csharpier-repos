@@ -35,11 +35,15 @@ namespace System.ServiceModel.Discovery
             ChannelManagerBase channelManagerBase,
             IChannelFactory<TChannel> innerChannelFactory,
             FindCriteria findCriteria,
-            DiscoveryEndpointProvider discoveryEndpointProvider)
+            DiscoveryEndpointProvider discoveryEndpointProvider
+        )
             : base(channelManagerBase)
         {
             Fx.Assert(findCriteria != null, "The findCriteria must be non null.");
-            Fx.Assert(discoveryEndpointProvider != null, "The discoveryEndpointProvider must be non null.");
+            Fx.Assert(
+                discoveryEndpointProvider != null,
+                "The discoveryEndpointProvider must be non null."
+            );
             Fx.Assert(innerChannelFactory != null, "The innerChannelFactory must be non null.");
 
             this.innerChannelFactory = innerChannelFactory;
@@ -55,10 +59,7 @@ namespace System.ServiceModel.Discovery
 
         protected TChannel InnerChannel
         {
-            get
-            {
-                return this.innerChannel;
-            }
+            get { return this.innerChannel; }
         }
 
         public override T GetProperty<T>()
@@ -83,13 +84,13 @@ namespace System.ServiceModel.Discovery
             this.innerChannel.Faulted += new EventHandler(OnInnerChannelFaulted);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new DiscoveryChannelBuilderAsyncResult(
-                this,
-                timeout,
-                callback,
-                state);
+            return new DiscoveryChannelBuilderAsyncResult(this, timeout, callback, state);
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -115,13 +116,13 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new CloseAsyncResult(
-                this.innerChannel,
-                timeout,
-                callback,
-                state);
+            return new CloseAsyncResult(this.innerChannel, timeout, callback, state);
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -159,28 +160,51 @@ namespace System.ServiceModel.Discovery
                 {
                     try
                     {
-                        currentEndpointDiscoveryMetadata = this.discoveredEndpoints.Dequeue(timeoutHelper.RemainingTime());
+                        currentEndpointDiscoveryMetadata = this.discoveredEndpoints.Dequeue(
+                            timeoutHelper.RemainingTime()
+                        );
                     }
                     catch (TimeoutException te)
                     {
-                        throw FxTrace.Exception.AsError(new TimeoutException(SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout), te));
+                        throw FxTrace.Exception.AsError(
+                            new TimeoutException(
+                                SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout),
+                                te
+                            )
+                        );
                     }
 
                     if (currentEndpointDiscoveryMetadata == null)
                     {
                         if (this.totalDiscoveredEndpoints < 1)
                         {
-                            throw FxTrace.Exception.AsError(new EndpointNotFoundException(SR.DiscoveryClientChannelEndpointNotFound, this.exception));
+                            throw FxTrace.Exception.AsError(
+                                new EndpointNotFoundException(
+                                    SR.DiscoveryClientChannelEndpointNotFound,
+                                    this.exception
+                                )
+                            );
                         }
                         else
                         {
-                            throw FxTrace.Exception.AsError(new EndpointNotFoundException(SR.DiscoveryClientChannelCreationFailed(this.totalDiscoveredEndpoints), this.exception));
+                            throw FxTrace.Exception.AsError(
+                                new EndpointNotFoundException(
+                                    SR.DiscoveryClientChannelCreationFailed(
+                                        this.totalDiscoveredEndpoints
+                                    ),
+                                    this.exception
+                                )
+                            );
                         }
                     }
 
                     if (timeoutHelper.RemainingTime() == TimeSpan.Zero)
                     {
-                        throw FxTrace.Exception.AsError(new TimeoutException(SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout)));
+                        throw FxTrace.Exception.AsError(
+                            new TimeoutException(
+                                SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout)
+                            )
+                        );
                     }
 
                     if (currentEndpointDiscoveryMetadata.ListenUris.Count == 0)
@@ -189,7 +213,8 @@ namespace System.ServiceModel.Discovery
                             ref innerChannel,
                             currentEndpointDiscoveryMetadata.Address,
                             currentEndpointDiscoveryMetadata.Address.Uri,
-                            timeoutHelper);
+                            timeoutHelper
+                        );
                     }
                     else
                     {
@@ -199,7 +224,8 @@ namespace System.ServiceModel.Discovery
                                 ref innerChannel,
                                 currentEndpointDiscoveryMetadata.Address,
                                 listenUri,
-                                timeoutHelper);
+                                timeoutHelper
+                            );
 
                             if (completed)
                             {
@@ -207,8 +233,7 @@ namespace System.ServiceModel.Discovery
                             }
                         }
                     }
-                }
-                while (!completed);
+                } while (!completed);
             }
             finally
             {
@@ -216,7 +241,8 @@ namespace System.ServiceModel.Discovery
                 {
                     TD.InnerChannelOpenSucceeded(
                         currentEndpointDiscoveryMetadata.Address.ToString(),
-                        GetVia(innerChannel).ToString());
+                        GetVia(innerChannel).ToString()
+                    );
                 }
 
                 this.Cleanup(timeoutHelper.RemainingTime());
@@ -225,7 +251,12 @@ namespace System.ServiceModel.Discovery
             return innerChannel;
         }
 
-        bool CreateChannel(ref TChannel innerChannel, EndpointAddress to, Uri via, TimeoutHelper timeoutHelper)
+        bool CreateChannel(
+            ref TChannel innerChannel,
+            EndpointAddress to,
+            Uri via,
+            TimeoutHelper timeoutHelper
+        )
         {
             bool completed = false;
             Exception exception = null;
@@ -238,7 +269,12 @@ namespace System.ServiceModel.Discovery
             }
             catch (TimeoutException timeoutException)
             {
-                throw FxTrace.Exception.AsError(new TimeoutException(SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout), timeoutException));
+                throw FxTrace.Exception.AsError(
+                    new TimeoutException(
+                        SR.DiscoveryClientChannelOpenTimeout(timeoutHelper.OriginalTimeout),
+                        timeoutException
+                    )
+                );
             }
             catch (CommunicationException communicationException)
             {
@@ -275,7 +311,11 @@ namespace System.ServiceModel.Discovery
             {
                 if (!this.discoveryCompleted)
                 {
-                    this.discoveredEndpoints.EnqueueAndDispatch(e.EndpointDiscoveryMetadata, null, false);
+                    this.discoveredEndpoints.EnqueueAndDispatch(
+                        e.EndpointDiscoveryMetadata,
+                        null,
+                        false
+                    );
                     if (++this.totalDiscoveredEndpoints == this.totalExpectedEndpoints)
                     {
                         this.discoveryCompleted = true;
@@ -291,9 +331,11 @@ namespace System.ServiceModel.Discovery
             {
                 if (!this.discoveryCompleted)
                 {
-                    if (e.Error != null ||
-                        e.Cancelled ||
-                        this.totalDiscoveredEndpoints == e.Result.Endpoints.Count)
+                    if (
+                        e.Error != null
+                        || e.Cancelled
+                        || this.totalDiscoveredEndpoints == e.Result.Endpoints.Count
+                    )
                     {
                         this.exception = e.Error;
                         this.discoveryCompleted = true;
@@ -309,18 +351,27 @@ namespace System.ServiceModel.Discovery
 
         void InitializeAndFindAsync()
         {
-            DiscoveryEndpoint discoveryEndpoint = this.discoveryEndpointProvider.GetDiscoveryEndpoint();
+            DiscoveryEndpoint discoveryEndpoint =
+                this.discoveryEndpointProvider.GetDiscoveryEndpoint();
 
             if (discoveryEndpoint == null)
             {
                 throw FxTrace.Exception.AsError(
                     new InvalidOperationException(
-                        SR.DiscoveryMethodImplementationReturnsNull("GetDiscoveryEndpoint", this.discoveryEndpointProvider.GetType())));
+                        SR.DiscoveryMethodImplementationReturnsNull(
+                            "GetDiscoveryEndpoint",
+                            this.discoveryEndpointProvider.GetType()
+                        )
+                    )
+                );
             }
 
             this.discoveryClient = new DiscoveryClient(discoveryEndpoint);
-            this.discoveryClient.FindProgressChanged += new EventHandler<FindProgressChangedEventArgs>(OnFindProgressChanged);
-            this.discoveryClient.FindCompleted += new EventHandler<FindCompletedEventArgs>(OnFindCompleted);
+            this.discoveryClient.FindProgressChanged +=
+                new EventHandler<FindProgressChangedEventArgs>(OnFindProgressChanged);
+            this.discoveryClient.FindCompleted += new EventHandler<FindCompletedEventArgs>(
+                OnFindCompleted
+            );
 
             SynchronizationContext originalSynchronizationContext = SynchronizationContext.Current;
             if (originalSynchronizationContext != null)
@@ -335,22 +386,26 @@ namespace System.ServiceModel.Discovery
 
             try
             {
-                // AsyncOperation uses the SynchronizationContext set during its 
+                // AsyncOperation uses the SynchronizationContext set during its
                 // initialization to Post the FindProgressed and FindProgressCompleted
                 // events. Hence even if the async operation does not complete
                 // synchronously, the right SynchronizationContext will be used by
-                // AsyncOperation.                
+                // AsyncOperation.
                 this.discoveryClient.FindAsync(this.findCriteria, this);
             }
             finally
             {
                 if (originalSynchronizationContext != null)
                 {
-                    SynchronizationContext.SetSynchronizationContext(originalSynchronizationContext);
+                    SynchronizationContext.SetSynchronizationContext(
+                        originalSynchronizationContext
+                    );
 
                     if (TD.SynchronizationContextResetIsEnabled())
                     {
-                        TD.SynchronizationContextReset(originalSynchronizationContext.GetType().ToString());
+                        TD.SynchronizationContextReset(
+                            originalSynchronizationContext.GetType().ToString()
+                        );
                     }
                 }
             }
@@ -401,7 +456,12 @@ namespace System.ServiceModel.Discovery
             this.innerChannelFactory = null;
         }
 
-        static void TraceInnerChannelFailure(TChannel innerChannel, EndpointAddress to, Uri via, Exception exception)
+        static void TraceInnerChannelFailure(
+            TChannel innerChannel,
+            EndpointAddress to,
+            Uri via,
+            Exception exception
+        )
         {
             if (innerChannel == null && TD.InnerChannelCreationFailedIsEnabled())
             {
@@ -433,7 +493,8 @@ namespace System.ServiceModel.Discovery
             return null;
         }
 
-        sealed class DiscoveryChannelBuilderAsyncResult : IteratorAsyncResult<DiscoveryChannelBuilderAsyncResult>
+        sealed class DiscoveryChannelBuilderAsyncResult
+            : IteratorAsyncResult<DiscoveryChannelBuilderAsyncResult>
         {
             static AsyncStep openStep;
             static AsyncStep dequeueStep;
@@ -446,7 +507,8 @@ namespace System.ServiceModel.Discovery
                 DiscoveryClientChannelBase<TChannel> discoveryClientChannelBase,
                 TimeSpan timeout,
                 AsyncCallback callback,
-                object state)
+                object state
+            )
                 : base(callback, state)
             {
                 this.discoveryClientChannelBase = discoveryClientChannelBase;
@@ -456,7 +518,8 @@ namespace System.ServiceModel.Discovery
 
             public static TChannel End(IAsyncResult result)
             {
-                DiscoveryChannelBuilderAsyncResult thisPtr = AsyncResult.End<DiscoveryChannelBuilderAsyncResult>(result);
+                DiscoveryChannelBuilderAsyncResult thisPtr =
+                    AsyncResult.End<DiscoveryChannelBuilderAsyncResult>(result);
                 thisPtr.discoveryClientChannelBase.Cleanup(thisPtr.RemainingTime());
                 return thisPtr.innerChannel;
             }
@@ -486,13 +549,15 @@ namespace System.ServiceModel.Discovery
                         {
                             this.CreateChannel(
                                 this.currentEndpointDiscoveryMetadata.Address,
-                                this.currentEndpointDiscoveryMetadata.ListenUris[index++]);
+                                this.currentEndpointDiscoveryMetadata.ListenUris[index++]
+                            );
                         }
                         else
                         {
                             this.CreateChannel(
                                 this.currentEndpointDiscoveryMetadata.Address,
-                                this.currentEndpointDiscoveryMetadata.Address.Uri);
+                                this.currentEndpointDiscoveryMetadata.Address.Uri
+                            );
                         }
 
                         if (this.innerChannel != null)
@@ -501,19 +566,19 @@ namespace System.ServiceModel.Discovery
 
                             if (this.innerChannel != null)
                             {
-                                // The channel was successfully opened                                  
+                                // The channel was successfully opened
                                 if (TD.InnerChannelOpenSucceededIsEnabled())
                                 {
                                     TD.InnerChannelOpenSucceeded(
                                         this.currentEndpointDiscoveryMetadata.Address.ToString(),
-                                        GetVia(this.innerChannel).ToString());
+                                        GetVia(this.innerChannel).ToString()
+                                    );
                                 }
 
                                 yield break;
                             }
                         }
-                    }
-                    while (index < this.currentEndpointDiscoveryMetadata.ListenUris.Count);
+                    } while (index < this.currentEndpointDiscoveryMetadata.ListenUris.Count);
                 }
             }
 
@@ -522,12 +587,24 @@ namespace System.ServiceModel.Discovery
                 if (dequeueStep == null)
                 {
                     dequeueStep = DiscoveryChannelBuilderAsyncResult.CallAsync(
-                        (thisPtr, t, c, s) => thisPtr.discoveryClientChannelBase.discoveredEndpoints.BeginDequeue(thisPtr.RemainingTime(), c, s),
-                        (thisPtr, r) => thisPtr.currentEndpointDiscoveryMetadata = thisPtr.discoveryClientChannelBase.discoveredEndpoints.EndDequeue(r),
+                        (thisPtr, t, c, s) =>
+                            thisPtr.discoveryClientChannelBase.discoveredEndpoints.BeginDequeue(
+                                thisPtr.RemainingTime(),
+                                c,
+                                s
+                            ),
+                        (thisPtr, r) =>
+                            thisPtr.currentEndpointDiscoveryMetadata =
+                                thisPtr.discoveryClientChannelBase.discoveredEndpoints.EndDequeue(
+                                    r
+                                ),
                         new IAsyncCatch[]
                         {
-                            new DiscoveryChannelBuilderAsyncResult.AsyncCatch<TimeoutException>(HandleTimeoutException)
-                        });
+                            new DiscoveryChannelBuilderAsyncResult.AsyncCatch<TimeoutException>(
+                                HandleTimeoutException
+                            ),
+                        }
+                    );
                 }
 
                 return dequeueStep;
@@ -538,20 +615,31 @@ namespace System.ServiceModel.Discovery
                 if (openStep == null)
                 {
                     openStep = DiscoveryChannelBuilderAsyncResult.CallAsync(
-                        (thisPtr, t, c, s) => thisPtr.innerChannel.BeginOpen(thisPtr.RemainingTime(), c, s),
+                        (thisPtr, t, c, s) =>
+                            thisPtr.innerChannel.BeginOpen(thisPtr.RemainingTime(), c, s),
                         (thisPtr, r) => thisPtr.innerChannel.EndOpen(r),
                         new IAsyncCatch[]
                         {
-                            new DiscoveryChannelBuilderAsyncResult.AsyncCatch<TimeoutException>(HandleTimeoutException),
-                            new DiscoveryChannelBuilderAsyncResult.AsyncCatch<CommunicationException>(HandleCommunicationException),
-                            new DiscoveryChannelBuilderAsyncResult.AsyncCatch<Exception>(HandleException)
-                        });
+                            new DiscoveryChannelBuilderAsyncResult.AsyncCatch<TimeoutException>(
+                                HandleTimeoutException
+                            ),
+                            new DiscoveryChannelBuilderAsyncResult.AsyncCatch<CommunicationException>(
+                                HandleCommunicationException
+                            ),
+                            new DiscoveryChannelBuilderAsyncResult.AsyncCatch<Exception>(
+                                HandleException
+                            ),
+                        }
+                    );
                 }
 
                 return openStep;
             }
 
-            static Exception HandleTimeoutException(DiscoveryChannelBuilderAsyncResult thisPtr, TimeoutException e)
+            static Exception HandleTimeoutException(
+                DiscoveryChannelBuilderAsyncResult thisPtr,
+                TimeoutException e
+            )
             {
                 if (thisPtr.innerChannel != null)
                 {
@@ -559,10 +647,16 @@ namespace System.ServiceModel.Discovery
                     thisPtr.innerChannel = null;
                 }
 
-                return new TimeoutException(SR.DiscoveryClientChannelOpenTimeout(thisPtr.OriginalTimeout), e);
+                return new TimeoutException(
+                    SR.DiscoveryClientChannelOpenTimeout(thisPtr.OriginalTimeout),
+                    e
+                );
             }
 
-            static Exception HandleException(DiscoveryChannelBuilderAsyncResult thisPtr, Exception e)
+            static Exception HandleException(
+                DiscoveryChannelBuilderAsyncResult thisPtr,
+                Exception e
+            )
             {
                 if (thisPtr.innerChannel != null)
                 {
@@ -573,7 +667,10 @@ namespace System.ServiceModel.Discovery
                 return e;
             }
 
-            static Exception HandleCommunicationException(DiscoveryChannelBuilderAsyncResult thisPtr, CommunicationException e)
+            static Exception HandleCommunicationException(
+                DiscoveryChannelBuilderAsyncResult thisPtr,
+                CommunicationException e
+            )
             {
                 if (thisPtr.innerChannel != null)
                 {
@@ -584,7 +681,8 @@ namespace System.ServiceModel.Discovery
                         TD.InnerChannelOpenFailed(
                             thisPtr.currentEndpointDiscoveryMetadata.Address.ToString(),
                             GetVia(thisPtr.innerChannel).ToString(),
-                            e);
+                            e
+                        );
                     }
 
                     thisPtr.innerChannel = null;
@@ -599,9 +697,11 @@ namespace System.ServiceModel.Discovery
 
                 try
                 {
-                    this.innerChannel = this.discoveryClientChannelBase.innerChannelFactory.CreateChannel(
-                        address,
-                        listenUri);
+                    this.innerChannel =
+                        this.discoveryClientChannelBase.innerChannelFactory.CreateChannel(
+                            address,
+                            listenUri
+                        );
                 }
                 catch (ArgumentException argumentException)
                 {
@@ -620,25 +720,36 @@ namespace System.ServiceModel.Discovery
                 {
                     if (exception != null && TD.InnerChannelCreationFailedIsEnabled())
                     {
-                        TD.InnerChannelCreationFailed(address.ToString(), listenUri.ToString(), exception);
+                        TD.InnerChannelCreationFailed(
+                            address.ToString(),
+                            listenUri.ToString(),
+                            exception
+                        );
                     }
                 }
-
             }
 
             Exception CheckEndpointDiscoveryMetadataAndGetException()
             {
                 if (this.RemainingTime() == TimeSpan.Zero)
                 {
-                    return new TimeoutException(SR.DiscoveryClientChannelOpenTimeout(this.OriginalTimeout));
+                    return new TimeoutException(
+                        SR.DiscoveryClientChannelOpenTimeout(this.OriginalTimeout)
+                    );
                 }
 
                 if (this.currentEndpointDiscoveryMetadata == null)
                 {
-                    string exceptionMessage = (this.discoveryClientChannelBase.totalDiscoveredEndpoints < 1) ?
-                        SR.DiscoveryClientChannelEndpointNotFound :
-                        SR.DiscoveryClientChannelCreationFailed(this.discoveryClientChannelBase.totalDiscoveredEndpoints);
-                    return new EndpointNotFoundException(exceptionMessage, this.discoveryClientChannelBase.exception);
+                    string exceptionMessage =
+                        (this.discoveryClientChannelBase.totalDiscoveredEndpoints < 1)
+                            ? SR.DiscoveryClientChannelEndpointNotFound
+                            : SR.DiscoveryClientChannelCreationFailed(
+                                this.discoveryClientChannelBase.totalDiscoveredEndpoints
+                            );
+                    return new EndpointNotFoundException(
+                        exceptionMessage,
+                        this.discoveryClientChannelBase.exception
+                    );
                 }
 
                 return null;
@@ -649,7 +760,12 @@ namespace System.ServiceModel.Discovery
         {
             TChannel innerChannel;
 
-            public CloseAsyncResult(TChannel innerChannel, TimeSpan timeout, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                TChannel innerChannel,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.innerChannel = innerChannel;
@@ -659,7 +775,8 @@ namespace System.ServiceModel.Discovery
                     IAsyncResult closeResult = this.innerChannel.BeginClose(
                         timeout,
                         PrepareAsyncCompletion(new AsyncCompletion(OnCloseCompleted)),
-                        this);
+                        this
+                    );
 
                     if (closeResult.CompletedSynchronously && OnCloseCompleted(closeResult))
                     {

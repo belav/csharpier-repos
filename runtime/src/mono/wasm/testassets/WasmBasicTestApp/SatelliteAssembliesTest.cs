@@ -3,9 +3,9 @@
 
 using System;
 using System.Globalization;
-using System.Threading.Tasks;
 using System.Resources;
 using System.Runtime.InteropServices.JavaScript;
+using System.Threading.Tasks;
 
 public partial class SatelliteAssembliesTest
 {
@@ -14,13 +14,17 @@ public partial class SatelliteAssembliesTest
     {
         var rm = new ResourceManager("WasmBasicTestApp.words", typeof(Program).Assembly);
         TestOutput.WriteLine("default: " + rm.GetString("hello", CultureInfo.CurrentCulture));
-        TestOutput.WriteLine("es-ES without satellite: " + rm.GetString("hello", new CultureInfo("es-ES")));
+        TestOutput.WriteLine(
+            "es-ES without satellite: " + rm.GetString("hello", new CultureInfo("es-ES"))
+        );
 
         await LoadSatelliteAssemblies(new[] { "es-ES" });
 
         rm = new ResourceManager("WasmBasicTestApp.words", typeof(Program).Assembly);
         TestOutput.WriteLine("default: " + rm.GetString("hello", CultureInfo.CurrentCulture));
-        TestOutput.WriteLine("es-ES with satellite: " + rm.GetString("hello", new CultureInfo("es-ES")));
+        TestOutput.WriteLine(
+            "es-ES with satellite: " + rm.GetString("hello", new CultureInfo("es-ES"))
+        );
     }
 
     [JSImport("INTERNAL.loadSatelliteAssemblies")]

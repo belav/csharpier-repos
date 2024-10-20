@@ -34,30 +34,43 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=aspnet-Identity.ExternalClaims-53bc9b9d-9d6a-45d4-8429-2a2761773502;Trusted_Connection=True;MultipleActiveResultSets=true"));
+            options.UseSqlServer(
+                "Server=(localdb)\\mssqllocaldb;Database=aspnet-Identity.ExternalClaims-53bc9b9d-9d6a-45d4-8429-2a2761773502;Trusted_Connection=True;MultipleActiveResultSets=true"
+            )
+        );
 
-        services.AddIdentity<ApplicationUser, IdentityRole>()
+        services
+            .AddIdentity<ApplicationUser, IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
 
-        services.AddAuthentication().AddGoogle(o =>
-        {
-            // Configure your auth keys, usually stored in Config or User Secrets
-            o.ClientId = "<yourid>";
-            o.ClientSecret = "<yoursecret>";
-            o.Scope.Add("https://www.googleapis.com/auth/plus.login");
-            o.ClaimActions.MapJsonKey(ClaimTypes.Gender, "gender");
-            o.SaveTokens = true;
-            o.Events.OnCreatingTicket = ctx =>
+        services
+            .AddAuthentication()
+            .AddGoogle(o =>
             {
-                List<AuthenticationToken> tokens = ctx.Properties.GetTokens().ToList();
-                tokens.Add(new AuthenticationToken() { Name = "TicketCreated", Value = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture) });
-                ctx.Properties.StoreTokens(tokens);
-                return Task.CompletedTask;
-            };
-        });
+                // Configure your auth keys, usually stored in Config or User Secrets
+                o.ClientId = "<yourid>";
+                o.ClientSecret = "<yoursecret>";
+                o.Scope.Add("https://www.googleapis.com/auth/plus.login");
+                o.ClaimActions.MapJsonKey(ClaimTypes.Gender, "gender");
+                o.SaveTokens = true;
+                o.Events.OnCreatingTicket = ctx =>
+                {
+                    List<AuthenticationToken> tokens = ctx.Properties.GetTokens().ToList();
+                    tokens.Add(
+                        new AuthenticationToken()
+                        {
+                            Name = "TicketCreated",
+                            Value = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                        }
+                    );
+                    ctx.Properties.StoreTokens(tokens);
+                    return Task.CompletedTask;
+                };
+            });
 
-        services.AddMvc()
+        services
+            .AddMvc()
             .AddRazorPagesOptions(options =>
             {
                 options.Conventions.AuthorizeFolder("/Account/Manage");

@@ -19,9 +19,7 @@ namespace System.IdentityModel.Metadata
         /// Empty constructor.
         /// </summary>
         public ProtocolEndpoint()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         /// <summary>
         /// Constructs an endpoint with the specified <paramref name="binding"/> and <paramref name="location"/>.
@@ -40,7 +38,6 @@ namespace System.IdentityModel.Metadata
         public Uri Binding
         {
             get { return this.binding; }
-
             set { this.binding = value; }
         }
 
@@ -50,7 +47,6 @@ namespace System.IdentityModel.Metadata
         public Uri Location
         {
             get { return this.location; }
-
             set { this.location = value; }
         }
 
@@ -60,7 +56,6 @@ namespace System.IdentityModel.Metadata
         public Uri ResponseLocation
         {
             get { return this.responseLocation; }
-
             set { this.responseLocation = value; }
         }
     }

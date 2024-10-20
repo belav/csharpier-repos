@@ -5,12 +5,12 @@ namespace System.Configuration
 {
     public class ProtectedProviderSettings : ConfigurationElement
     {
-        private readonly ConfigurationProperty _propProviders =
-            new ConfigurationProperty(
-                name: null,
-                type: typeof(ProviderSettingsCollection),
-                defaultValue: null,
-                options: ConfigurationPropertyOptions.IsDefaultCollection);
+        private readonly ConfigurationProperty _propProviders = new ConfigurationProperty(
+            name: null,
+            type: typeof(ProviderSettingsCollection),
+            defaultValue: null,
+            options: ConfigurationPropertyOptions.IsDefaultCollection
+        );
 
         private readonly ConfigurationPropertyCollection _properties;
 
@@ -22,7 +22,12 @@ namespace System.Configuration
 
         protected internal override ConfigurationPropertyCollection Properties => _properties;
 
-        [ConfigurationProperty("", IsDefaultCollection = true, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public ProviderSettingsCollection Providers => (ProviderSettingsCollection)base[_propProviders];
+        [ConfigurationProperty(
+            "",
+            IsDefaultCollection = true,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
+        public ProviderSettingsCollection Providers =>
+            (ProviderSettingsCollection)base[_propProviders];
     }
 }

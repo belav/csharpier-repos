@@ -1,31 +1,34 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapServerMessage.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
+    using System;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.Web.Services;
     using System.Xml.Serialization;
-    using System;
-    using System.Reflection;
-    using System.Collections;
-    using System.IO;
-    using System.ComponentModel;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
 
     /// <include file='doc\SoapServerMessage.uex' path='docs/doc[@for="SoapServerMessage"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public sealed class SoapServerMessage : SoapMessage {
+    public sealed class SoapServerMessage : SoapMessage
+    {
         SoapServerProtocol protocol;
         internal SoapExtension[] highPriConfigExtensions;
         internal SoapExtension[] otherExtensions;
         internal SoapExtension[] allExtensions;
 
-        internal SoapServerMessage(SoapServerProtocol protocol) {
+        internal SoapServerMessage(SoapServerProtocol protocol)
+        {
             this.protocol = protocol;
         }
 
@@ -49,7 +52,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override bool OneWay {
+        public override bool OneWay
+        {
             get { return protocol.ServerMethod.oneWay; }
         }
 
@@ -57,7 +61,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string Url {
+        public override string Url
+        {
             get { return RuntimeUtils.EscapeUri(protocol.Request.Url); }
         }
 
@@ -65,13 +70,15 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string Action {
+        public override string Action
+        {
             get { return protocol.ServerMethod.action; }
         }
 
         /// <include file='doc\SoapServerMessage.uex' path='docs/doc[@for="SoapServerMessage.SoapVersion"]/*' />
         [ComVisible(false)]
-        public override SoapProtocolVersion SoapVersion {
+        public override SoapProtocolVersion SoapVersion
+        {
             get { return protocol.Version; }
         }
 
@@ -79,15 +86,21 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object Server {
-            get { EnsureStage(SoapMessageStage.AfterDeserialize | SoapMessageStage.BeforeSerialize); return protocol.Target; }
+        public object Server
+        {
+            get
+            {
+                EnsureStage(SoapMessageStage.AfterDeserialize | SoapMessageStage.BeforeSerialize);
+                return protocol.Target;
+            }
         }
 
         /// <include file='doc\SoapServerMessage.uex' path='docs/doc[@for="SoapServerMessage.MethodInfo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override LogicalMethodInfo MethodInfo {
+        public override LogicalMethodInfo MethodInfo
+        {
             get { return protocol.MethodInfo; }
         }
 
@@ -95,7 +108,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void EnsureOutStage() {
+        protected override void EnsureOutStage()
+        {
             EnsureStage(SoapMessageStage.BeforeSerialize);
         }
 
@@ -103,7 +117,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected override void EnsureInStage() {
+        protected override void EnsureInStage()
+        {
             EnsureStage(SoapMessageStage.AfterDeserialize);
         }
     }

@@ -5,17 +5,17 @@
 namespace System.ServiceModel.Activities.Description
 {
     using System.Activities.Statements;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Runtime;
+    using System.Runtime.DurableInstancing;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.ServiceModel.Dispatcher;
-    using System.Runtime.DurableInstancing;
-    using System.Collections.Generic;
-    using System.Threading;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
+    using System.Threading;
 
     [Fx.Tag.XamlVisible(false)]
     class WorkflowRuntimeServicesBehavior : IEndpointBehavior
@@ -59,17 +59,20 @@ namespace System.ServiceModel.Activities.Description
             return this.extensionProvider.GetService<T>();
         }
 
-        public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
-        {
-        }
+        public void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime) { }
 
-        public void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+        public void ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
-            WorkflowServiceHost serviceHost = endpointDispatcher.ChannelDispatcher.Host as WorkflowServiceHost;
+            WorkflowServiceHost serviceHost =
+                endpointDispatcher.ChannelDispatcher.Host as WorkflowServiceHost;
             if (serviceHost != null)
             {
                 foreach (OperationDescription operation in endpoint.Contract.Operations)
@@ -78,12 +81,13 @@ namespace System.ServiceModel.Activities.Description
                         NetDataContractSerializerOperationBehavior.ApplyTo(operation);
                 }
 
-                this.extensionProvider.PopulateExtensions(serviceHost, endpointDispatcher.EndpointAddress.Uri.AbsoluteUri);
+                this.extensionProvider.PopulateExtensions(
+                    serviceHost,
+                    endpointDispatcher.EndpointAddress.Uri.AbsoluteUri
+                );
             }
         }
 
-        public void Validate(ServiceEndpoint endpoint)
-        {
-        }
+        public void Validate(ServiceEndpoint endpoint) { }
     }
 }

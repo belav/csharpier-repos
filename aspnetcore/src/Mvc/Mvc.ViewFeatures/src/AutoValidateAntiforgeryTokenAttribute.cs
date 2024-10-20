@@ -19,7 +19,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <see cref="IgnoreAntiforgeryTokenAttribute"/> to suppress validation of the antiforgery token for
 /// a controller or action.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public class AutoValidateAntiforgeryTokenAttribute : Attribute, IFilterFactory, IOrderedFilter
 {
     /// <summary>

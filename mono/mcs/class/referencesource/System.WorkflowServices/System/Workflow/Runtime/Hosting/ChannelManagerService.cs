@@ -16,7 +16,9 @@ namespace System.Workflow.Runtime.Hosting
     using System.Workflow.Activities;
     using System.Workflow.ComponentModel;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ChannelManagerService : WorkflowRuntimeService
     {
         const string IdleTimeoutSetting = "idleTimeout";
@@ -31,19 +33,13 @@ namespace System.Workflow.Runtime.Hosting
         ChannelPoolSettings settings;
 
         public ChannelManagerService()
-            : this(new ChannelPoolSettings(), new List<ServiceEndpoint>())
-        {
-        }
+            : this(new ChannelPoolSettings(), new List<ServiceEndpoint>()) { }
 
         public ChannelManagerService(ChannelPoolSettings settings)
-            : this(settings, new List<ServiceEndpoint>())
-        {
-        }
+            : this(settings, new List<ServiceEndpoint>()) { }
 
         public ChannelManagerService(IList<ServiceEndpoint> endpoints)
-            : this(new ChannelPoolSettings(), endpoints)
-        {
-        }
+            : this(new ChannelPoolSettings(), endpoints) { }
 
         public ChannelManagerService(ChannelPoolSettings settings, IList<ServiceEndpoint> endpoints)
         {
@@ -75,55 +71,88 @@ namespace System.Workflow.Runtime.Hosting
                 if (string.IsNullOrEmpty(key))
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR2.GetString(SR2.Error_UnknownConfigurationParameter, key), "parameters");
+                        SR2.GetString(SR2.Error_UnknownConfigurationParameter, key),
+                        "parameters"
+                    );
                 }
-                else if (key.Equals(ChannelManagerService.IdleTimeoutSetting, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    key.Equals(
+                        ChannelManagerService.IdleTimeoutSetting,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     try
                     {
-                        channelPoolSettings.IdleTimeout =
-                            ConvertToTimeSpan(parameters[ChannelManagerService.IdleTimeoutSetting]);
+                        channelPoolSettings.IdleTimeout = ConvertToTimeSpan(
+                            parameters[ChannelManagerService.IdleTimeoutSetting]
+                        );
                     }
                     catch (FormatException ex)
                     {
                         ArgumentException exception = new ArgumentException(
-                            SR2.GetString(SR2.Error_InvalidIdleTimeout, parameters[ChannelManagerService.IdleTimeoutSetting]),
+                            SR2.GetString(
+                                SR2.Error_InvalidIdleTimeout,
+                                parameters[ChannelManagerService.IdleTimeoutSetting]
+                            ),
                             "parameters",
-                            ex);
+                            ex
+                        );
 
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception);
                     }
                 }
-                else if (key.Equals(ChannelManagerService.LeaseTimeoutSetting, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    key.Equals(
+                        ChannelManagerService.LeaseTimeoutSetting,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     try
                     {
-                        channelPoolSettings.LeaseTimeout =
-                            ConvertToTimeSpan(parameters[ChannelManagerService.LeaseTimeoutSetting]);
+                        channelPoolSettings.LeaseTimeout = ConvertToTimeSpan(
+                            parameters[ChannelManagerService.LeaseTimeoutSetting]
+                        );
                     }
                     catch (FormatException ex)
                     {
                         ArgumentException exception = new ArgumentException(
-                            SR2.GetString(SR2.Error_InvalidLeaseTimeout, parameters[ChannelManagerService.LeaseTimeoutSetting]),
+                            SR2.GetString(
+                                SR2.Error_InvalidLeaseTimeout,
+                                parameters[ChannelManagerService.LeaseTimeoutSetting]
+                            ),
                             "parameters",
-                            ex);
+                            ex
+                        );
 
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception);
                     }
                 }
-                else if (key.Equals(ChannelManagerService.MaxIdleChannelsPerEndpointSetting, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    key.Equals(
+                        ChannelManagerService.MaxIdleChannelsPerEndpointSetting,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     try
                     {
-                        channelPoolSettings.MaxOutboundChannelsPerEndpoint =
-                            Convert.ToInt32(parameters[ChannelManagerService.MaxIdleChannelsPerEndpointSetting], System.Globalization.CultureInfo.CurrentCulture);
+                        channelPoolSettings.MaxOutboundChannelsPerEndpoint = Convert.ToInt32(
+                            parameters[ChannelManagerService.MaxIdleChannelsPerEndpointSetting],
+                            System.Globalization.CultureInfo.CurrentCulture
+                        );
                     }
                     catch (FormatException ex)
                     {
                         ArgumentException exception = new ArgumentException(
-                            SR2.GetString(SR2.Error_InvalidMaxIdleChannelsPerEndpoint, parameters[ChannelManagerService.MaxIdleChannelsPerEndpointSetting]),
+                            SR2.GetString(
+                                SR2.Error_InvalidMaxIdleChannelsPerEndpoint,
+                                parameters[ChannelManagerService.MaxIdleChannelsPerEndpointSetting]
+                            ),
                             "parameters",
-                            ex);
+                            ex
+                        );
 
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(exception);
                     }
@@ -131,7 +160,9 @@ namespace System.Workflow.Runtime.Hosting
                 else
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                        SR2.GetString(SR2.Error_UnknownConfigurationParameter, key), "parameters");
+                        SR2.GetString(SR2.Error_UnknownConfigurationParameter, key),
+                        "parameters"
+                    );
                 }
             }
 
@@ -161,15 +192,23 @@ namespace System.Workflow.Runtime.Hosting
 
         internal static void ApplyLogicalChannelContext(LogicalChannel logicalChannel)
         {
-            Fx.Assert(OperationContext.Current != null, "Can be called within a valid OperationContext Scope");
+            Fx.Assert(
+                OperationContext.Current != null,
+                "Can be called within a valid OperationContext Scope"
+            );
 
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Verbose, 0,
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Verbose,
+                0,
                 "ChannelManagerService: updating context associated with logical channel {0}",
-                logicalChannel.InstanceId);
+                logicalChannel.InstanceId
+            );
 
             if (logicalChannel.Context != null)
             {
-                new ContextMessageProperty(logicalChannel.Context).AddOrReplaceInMessageProperties(OperationContext.Current.OutgoingMessageProperties);
+                new ContextMessageProperty(logicalChannel.Context).AddOrReplaceInMessageProperties(
+                    OperationContext.Current.OutgoingMessageProperties
+                );
             }
         }
 
@@ -183,8 +222,15 @@ namespace System.Workflow.Runtime.Hosting
 
             try
             {
-                factory = ChannelManagerHelpers.CreateChannelFactory(logicalChannel.ConfigurationName, logicalChannel.ContractType);
-                channel = ChannelManagerHelpers.CreateChannel(logicalChannel.ContractType, factory, logicalChannel.CustomAddress);
+                factory = ChannelManagerHelpers.CreateChannelFactory(
+                    logicalChannel.ConfigurationName,
+                    logicalChannel.ContractType
+                );
+                channel = ChannelManagerHelpers.CreateChannel(
+                    logicalChannel.ContractType,
+                    factory,
+                    logicalChannel.CustomAddress
+                );
                 channelOpened = true;
             }
             finally
@@ -205,17 +251,25 @@ namespace System.Workflow.Runtime.Hosting
             return new TransientChannelTicket(channel, factory);
         }
 
-        internal static ChannelTicket Take(ActivityExecutionContext executionContext, Guid workflowId, LogicalChannel logicalChannel)
+        internal static ChannelTicket Take(
+            ActivityExecutionContext executionContext,
+            Guid workflowId,
+            LogicalChannel logicalChannel
+        )
         {
             if (executionContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("executionContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "executionContext"
+                );
             }
 
             if (workflowId == Guid.Empty)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("workflowId",
-                    SR2.GetString(SR2.Error_Cache_InvalidWorkflowId));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "workflowId",
+                    SR2.GetString(SR2.Error_Cache_InvalidWorkflowId)
+                );
             }
 
             if (logicalChannel == null)
@@ -223,7 +277,8 @@ namespace System.Workflow.Runtime.Hosting
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("logicalChannel");
             }
 
-            ChannelManagerService channelManager = executionContext.GetService<ChannelManagerService>();
+            ChannelManagerService channelManager =
+                executionContext.GetService<ChannelManagerService>();
 
             ChannelTicket channel;
             if (channelManager != null)
@@ -240,16 +295,25 @@ namespace System.Workflow.Runtime.Hosting
 
         internal static void UpdateLogicalChannelContext(LogicalChannel logicalChannel)
         {
-            Fx.Assert(OperationContext.Current != null, "Can be called from valid OperationContextScope");
+            Fx.Assert(
+                OperationContext.Current != null,
+                "Can be called from valid OperationContextScope"
+            );
 
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Verbose, 0,
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Verbose,
+                0,
                 "ChannelManagerService: updating context associated with logical channel {0}",
-                logicalChannel.InstanceId);
+                logicalChannel.InstanceId
+            );
 
             ContextMessageProperty contextMessageProperty;
             MessageProperties properties = OperationContext.Current.IncomingMessageProperties;
 
-            if (properties != null && ContextMessageProperty.TryGet(properties, out contextMessageProperty))
+            if (
+                properties != null
+                && ContextMessageProperty.TryGet(properties, out contextMessageProperty)
+            )
             {
                 logicalChannel.Context = contextMessageProperty.Context;
             }
@@ -264,11 +328,16 @@ namespace System.Workflow.Runtime.Hosting
             }
 
             WorkflowTrace.Host.TraceEvent(
-                TraceEventType.Information, 0,
+                TraceEventType.Information,
+                0,
                 "ChannelManagerService: return channel for workflow instance {0}, logical channel {1}",
-                new object[] { pooledChannel.WorkflowId, pooledChannel.LogicalChannelId });
+                new object[] { pooledChannel.WorkflowId, pooledChannel.LogicalChannelId }
+            );
 
-            this.channelManager.ReturnChannel(pooledChannel.ChannelPoolKey, pooledChannel.PooledChannel);
+            this.channelManager.ReturnChannel(
+                pooledChannel.ChannelPoolKey,
+                pooledChannel.PooledChannel
+            );
         }
 
         internal PooledChannelTicket TakeChannel(Guid workflowId, LogicalChannel logicalChannel)
@@ -276,13 +345,22 @@ namespace System.Workflow.Runtime.Hosting
             if (this.closed)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_CannotProvideChannel_ServiceStopped, logicalChannel.ConfigurationName, logicalChannel.CustomAddress)));
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.Error_CannotProvideChannel_ServiceStopped,
+                            logicalChannel.ConfigurationName,
+                            logicalChannel.CustomAddress
+                        )
+                    )
+                );
             }
 
             if (workflowId == Guid.Empty)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("workflowId",
-                    SR2.GetString(SR2.Error_Cache_InvalidWorkflowId));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "workflowId",
+                    SR2.GetString(SR2.Error_Cache_InvalidWorkflowId)
+                );
             }
 
             if (logicalChannel == null)
@@ -290,27 +368,56 @@ namespace System.Workflow.Runtime.Hosting
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("logicalChannel");
             }
 
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "ChannelManagerService: get channel for workflow instance {0}, logical channel {1}", new object[] { workflowId, logicalChannel.InstanceId });
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "ChannelManagerService: get channel for workflow instance {0}, logical channel {1}",
+                new object[] { workflowId, logicalChannel.InstanceId }
+            );
 
             string endpointName = logicalChannel.ConfigurationName;
             Type contractType = logicalChannel.ContractType;
             string customAddress = logicalChannel.CustomAddress;
 
             ChannelPoolKey channelKey;
-            ChannelManager.PooledChannel channel = this.channelManager.TakeChannel(endpointName, contractType, customAddress, out channelKey);
+            ChannelManager.PooledChannel channel = this.channelManager.TakeChannel(
+                endpointName,
+                contractType,
+                customAddress,
+                out channelKey
+            );
             if (channel == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_CannotProvideChannel, logicalChannel.ConfigurationName, logicalChannel.CustomAddress)));
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.Error_CannotProvideChannel,
+                            logicalChannel.ConfigurationName,
+                            logicalChannel.CustomAddress
+                        )
+                    )
+                );
             }
 
-            PooledChannelTicket pooledChannel = new PooledChannelTicket(this, channel, channelKey, workflowId, logicalChannel.InstanceId);
+            PooledChannelTicket pooledChannel = new PooledChannelTicket(
+                this,
+                channel,
+                channelKey,
+                workflowId,
+                logicalChannel.InstanceId
+            );
             return pooledChannel;
         }
 
         TimeSpan ConvertToTimeSpan(string value)
         {
-            if (string.Equals(value, ChannelManagerService.InfiniteTimeSpanValue, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    value,
+                    ChannelManagerService.InfiniteTimeSpanValue,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return TimeSpan.MaxValue;
             }
@@ -322,14 +429,9 @@ namespace System.Workflow.Runtime.Hosting
         {
             bool disposed;
 
-            protected ChannelTicket()
-            {
-            }
+            protected ChannelTicket() { }
 
-            public abstract IChannel Channel
-            {
-                get;
-            }
+            public abstract IChannel Channel { get; }
 
             public void Dispose()
             {
@@ -340,9 +442,7 @@ namespace System.Workflow.Runtime.Hosting
                 }
             }
 
-            protected virtual void Close()
-            {
-            }
+            protected virtual void Close() { }
         }
 
         internal class PooledChannelTicket : ChannelTicket
@@ -354,7 +454,13 @@ namespace System.Workflow.Runtime.Hosting
             ChannelManagerService service;
             Guid workflowId;
 
-            public PooledChannelTicket(ChannelManagerService service, ChannelManager.PooledChannel channel, ChannelPoolKey channelPoolKey, Guid workflowId, Guid logicalChannelId)
+            public PooledChannelTicket(
+                ChannelManagerService service,
+                ChannelManager.PooledChannel channel,
+                ChannelPoolKey channelPoolKey,
+                Guid workflowId,
+                Guid logicalChannelId
+            )
                 : base()
             {
                 this.service = service;
@@ -366,47 +472,35 @@ namespace System.Workflow.Runtime.Hosting
 
             public override IChannel Channel
             {
-                get
-                {
-                    return this.channel.InnerChannel;
-                }
+                get { return this.channel.InnerChannel; }
             }
 
             internal ChannelPoolKey ChannelPoolKey
             {
-                get
-                {
-                    return this.channelPoolKey;
-                }
+                get { return this.channelPoolKey; }
             }
 
             internal Guid LogicalChannelId
             {
-                get
-                {
-                    return this.logicalChannelId;
-                }
+                get { return this.logicalChannelId; }
             }
 
             internal ChannelManager.PooledChannel PooledChannel
             {
-                get
-                {
-                    return this.channel;
-                }
+                get { return this.channel; }
             }
 
             internal Guid WorkflowId
             {
-                get
-                {
-                    return this.workflowId;
-                }
+                get { return this.workflowId; }
             }
 
             protected override void Close()
             {
-                DiagnosticUtility.DebugAssert(this.channel != null, "channel has been closed already.");
+                DiagnosticUtility.DebugAssert(
+                    this.channel != null,
+                    "channel has been closed already."
+                );
                 if (this.channel != null)
                 {
                     this.service.ReturnChannel(this);
@@ -429,10 +523,7 @@ namespace System.Workflow.Runtime.Hosting
 
             public override IChannel Channel
             {
-                get
-                {
-                    return this.channel;
-                }
+                get { return this.channel; }
             }
 
             protected override void Close()

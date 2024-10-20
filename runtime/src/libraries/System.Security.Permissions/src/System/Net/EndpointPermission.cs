@@ -6,11 +6,25 @@ namespace System.Net
     public class EndpointPermission
     {
         internal EndpointPermission() { }
-        public string Hostname { get { return null; } }
-        public int Port { get { return 0; } }
-        public TransportType Transport { get; }
-        public override bool Equals(object obj) { return false; }
-        public override int GetHashCode() { return 0; }
 
+        public string Hostname
+        {
+            get { return null; }
+        }
+        public int Port
+        {
+            get { return 0; }
+        }
+        public TransportType Transport { get; }
+
+        public override bool Equals(object obj)
+        {
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return 0;
+        }
     }
 }

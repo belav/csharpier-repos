@@ -23,9 +23,7 @@ public class TemplateMatcher
     /// </summary>
     /// <param name="template">The <see cref="RouteTemplate"/> to compare against.</param>
     /// <param name="defaults">The default values for parameters in the <paramref name="template"/>.</param>
-    public TemplateMatcher(
-        RouteTemplate template,
-        RouteValueDictionary defaults)
+    public TemplateMatcher(RouteTemplate template, RouteValueDictionary defaults)
     {
         ArgumentNullException.ThrowIfNull(template);
 

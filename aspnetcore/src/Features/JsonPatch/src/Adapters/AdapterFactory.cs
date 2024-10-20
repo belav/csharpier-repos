@@ -37,7 +37,10 @@ public class AdapterFactory : IAdapterFactory
         }
         else if (jsonContract is JsonDictionaryContract jsonDictionaryContract)
         {
-            var type = typeof(DictionaryAdapter<,>).MakeGenericType(jsonDictionaryContract.DictionaryKeyType, jsonDictionaryContract.DictionaryValueType);
+            var type = typeof(DictionaryAdapter<,>).MakeGenericType(
+                jsonDictionaryContract.DictionaryKeyType,
+                jsonDictionaryContract.DictionaryValueType
+            );
             return (IAdapter)Activator.CreateInstance(type);
         }
         else if (jsonContract is JsonDynamicContract)
@@ -50,4 +53,3 @@ public class AdapterFactory : IAdapterFactory
         }
     }
 }
-

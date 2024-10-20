@@ -12,24 +12,29 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 {
     internal sealed class DeletedSourceMethodDefinition
-        : DeletedSourceDefinition<IMethodDefinition>, IMethodDefinition, IDeletedMethodDefinition
+        : DeletedSourceDefinition<IMethodDefinition>,
+            IMethodDefinition,
+            IDeletedMethodDefinition
     {
         private readonly MethodDefinitionHandle _handle;
         private readonly ImmutableArray<DeletedSourceParameterDefinition> _parameters;
         private DeletedMethodBody? _body;
 
-        public DeletedSourceMethodDefinition(IMethodDefinition oldMethod, MethodDefinitionHandle handle, Dictionary<ITypeDefinition, DeletedSourceTypeDefinition> typesUsedByDeletedMembers)
+        public DeletedSourceMethodDefinition(
+            IMethodDefinition oldMethod,
+            MethodDefinitionHandle handle,
+            Dictionary<ITypeDefinition, DeletedSourceTypeDefinition> typesUsedByDeletedMembers
+        )
             : base(oldMethod, typesUsedByDeletedMembers)
         {
             _handle = handle;
             _parameters = WrapParameters(oldMethod.Parameters);
         }
 
-        public MethodDefinitionHandle MetadataHandle
-            => _handle;
+        public MethodDefinitionHandle MetadataHandle => _handle;
 
-        public IEnumerable<IGenericMethodParameter> GenericParameters
-            => throw ExceptionUtilities.Unreachable();
+        public IEnumerable<IGenericMethodParameter> GenericParameters =>
+            throw ExceptionUtilities.Unreachable();
 
         public bool HasDeclarativeSecurity => OldDefinition.HasDeclarativeSecurity;
 
@@ -57,19 +62,24 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public bool IsVirtual => OldDefinition.IsVirtual;
 
-        public ImmutableArray<IParameterDefinition> Parameters => StaticCast<IParameterDefinition>.From(_parameters);
+        public ImmutableArray<IParameterDefinition> Parameters =>
+            StaticCast<IParameterDefinition>.From(_parameters);
 
         public IPlatformInvokeInformation PlatformInvokeData => OldDefinition.PlatformInvokeData;
 
         public bool RequiresSecurityObject => OldDefinition.RequiresSecurityObject;
 
-        public bool ReturnValueIsMarshalledExplicitly => OldDefinition.ReturnValueIsMarshalledExplicitly;
+        public bool ReturnValueIsMarshalledExplicitly =>
+            OldDefinition.ReturnValueIsMarshalledExplicitly;
 
-        public IMarshallingInformation ReturnValueMarshallingInformation => OldDefinition.ReturnValueMarshallingInformation;
+        public IMarshallingInformation ReturnValueMarshallingInformation =>
+            OldDefinition.ReturnValueMarshallingInformation;
 
-        public ImmutableArray<byte> ReturnValueMarshallingDescriptor => OldDefinition.ReturnValueMarshallingDescriptor;
+        public ImmutableArray<byte> ReturnValueMarshallingDescriptor =>
+            OldDefinition.ReturnValueMarshallingDescriptor;
 
-        public IEnumerable<SecurityAttribute> SecurityAttributes => OldDefinition.SecurityAttributes;
+        public IEnumerable<SecurityAttribute> SecurityAttributes =>
+            OldDefinition.SecurityAttributes;
 
         public INamespace ContainingNamespace => OldDefinition.ContainingNamespace;
 
@@ -81,19 +91,24 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public ushort GenericParameterCount => OldDefinition.GenericParameterCount;
 
-        public ImmutableArray<IParameterTypeInformation> ExtraParameters => OldDefinition.ExtraParameters;
+        public ImmutableArray<IParameterTypeInformation> ExtraParameters =>
+            OldDefinition.ExtraParameters;
 
-        public IGenericMethodInstanceReference? AsGenericMethodInstanceReference => OldDefinition.AsGenericMethodInstanceReference;
+        public IGenericMethodInstanceReference? AsGenericMethodInstanceReference =>
+            OldDefinition.AsGenericMethodInstanceReference;
 
-        public ISpecializedMethodReference? AsSpecializedMethodReference => OldDefinition.AsSpecializedMethodReference;
+        public ISpecializedMethodReference? AsSpecializedMethodReference =>
+            OldDefinition.AsSpecializedMethodReference;
 
         public CallingConvention CallingConvention => OldDefinition.CallingConvention;
 
         public ushort ParameterCount => (ushort)_parameters.Length;
 
-        public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers => OldDefinition.ReturnValueCustomModifiers;
+        public ImmutableArray<ICustomModifier> ReturnValueCustomModifiers =>
+            OldDefinition.ReturnValueCustomModifiers;
 
-        public ImmutableArray<ICustomModifier> RefCustomModifiers => OldDefinition.RefCustomModifiers;
+        public ImmutableArray<ICustomModifier> RefCustomModifiers =>
+            OldDefinition.RefCustomModifiers;
 
         public bool ReturnValueIsByRef => OldDefinition.ReturnValueIsByRef;
 
@@ -104,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             visitor.Visit(this);
         }
 
-        public bool HasBody
-            => true;
+        public bool HasBody => true;
 
         public IMethodBody GetBody(EmitContext context)
         {
@@ -113,8 +127,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
             return _body;
         }
 
-        public ITypeReference GetContainingType(EmitContext context)
-            => throw ExceptionUtilities.Unreachable();
+        public ITypeReference GetContainingType(EmitContext context) =>
+            throw ExceptionUtilities.Unreachable();
 
         public MethodImplAttributes GetImplementationAttributes(EmitContext context)
         {
@@ -133,7 +147,8 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
 
         public IEnumerable<ICustomAttribute> GetReturnValueAttributes(EmitContext context)
             // attributes shouldn't be emitted for deleted definitions
-            => throw ExceptionUtilities.Unreachable();
+            =>
+            throw ExceptionUtilities.Unreachable();
 
         public ITypeReference GetType(EmitContext context)
         {

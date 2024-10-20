@@ -44,7 +44,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
         }
 
         // Internal for unit testing
-        internal static TimeSpan PollingInterval { get; set; } = PhysicalFilesWatcher.DefaultPollingInterval;
+        internal static TimeSpan PollingInterval { get; set; } =
+            PhysicalFilesWatcher.DefaultPollingInterval;
 
         private DateTime GetLastWriteTimeUtc()
         {
@@ -55,7 +56,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
                 return DateTime.MinValue;
             }
 
-            return FileSystemInfoHelper.GetFileLinkTargetLastWriteTimeUtc(_fileInfo) ?? _fileInfo.LastWriteTimeUtc;
+            return FileSystemInfoHelper.GetFileLinkTargetLastWriteTimeUtc(_fileInfo)
+                ?? _fileInfo.LastWriteTimeUtc;
         }
 
         /// <summary>
@@ -69,14 +71,18 @@ namespace Microsoft.Extensions.FileProviders.Physical
             get => _tokenSource;
             set
             {
-                Debug.Assert(_tokenSource == null, "We expect CancellationTokenSource to be initialized exactly once.");
+                Debug.Assert(
+                    _tokenSource == null,
+                    "We expect CancellationTokenSource to be initialized exactly once."
+                );
 
                 _tokenSource = value;
                 _changeToken = new CancellationChangeToken(_tokenSource.Token);
             }
         }
 
-        CancellationTokenSource? IPollingChangeToken.CancellationTokenSource => CancellationTokenSource;
+        CancellationTokenSource? IPollingChangeToken.CancellationTokenSource =>
+            CancellationTokenSource;
 
         /// <summary>
         /// True when the file has changed since the change token was created. Once the file changes, this value is always true

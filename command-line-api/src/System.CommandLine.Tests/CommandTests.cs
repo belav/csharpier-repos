@@ -1,9 +1,9 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using FluentAssertions;
 using System.CommandLine.Parsing;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests
@@ -16,10 +16,7 @@ namespace System.CommandLine.Tests
         {
             _outerCommand = new CliCommand("outer")
             {
-                new CliCommand("inner")
-                {
-                    new CliOption<string>("--option")
-                }
+                new CliCommand("inner") { new CliOption<string>("--option") },
             };
         }
 
@@ -28,12 +25,7 @@ namespace System.CommandLine.Tests
         {
             var result = _outerCommand.Parse("outer inner --option argument1");
 
-            result
-                .RootCommandResult
-                .Command
-                .Name
-                .Should()
-                .Be("outer");
+            result.RootCommandResult.Command.Name.Should().Be("outer");
         }
 
         [Fact]
@@ -42,14 +34,9 @@ namespace System.CommandLine.Tests
             var result = _outerCommand.Parse("outer inner --option argument1");
 
             result
-                .CommandResult
-                .Parent
-                .Should()
+                .CommandResult.Parent.Should()
                 .BeOfType<CommandResult>()
-                .Which
-                .Command
-                .Name
-                .Should()
+                .Which.Command.Name.Should()
                 .Be("outer");
         }
 
@@ -58,14 +45,11 @@ namespace System.CommandLine.Tests
         {
             var result = _outerCommand.Parse("outer inner --option argument1");
 
-            result.CommandResult
-                  .Should()
-                  .BeOfType<CommandResult>()
-                  .Which
-                  .Command
-                  .Name
-                  .Should()
-                  .Be("inner");
+            result
+                .CommandResult.Should()
+                .BeOfType<CommandResult>()
+                .Which.Command.Name.Should()
+                .Be("inner");
         }
 
         [Fact]
@@ -73,16 +57,12 @@ namespace System.CommandLine.Tests
         {
             var result = _outerCommand.Parse("outer inner --option argument1");
 
-            result.CommandResult
-                  .Children
-                  .ElementAt(0)
-                  .Should()
-                  .BeOfType<OptionResult>()
-                  .Which
-                  .Option
-                  .Name
-                  .Should()
-                  .Be("--option");
+            result
+                .CommandResult.Children.ElementAt(0)
+                .Should()
+                .BeOfType<OptionResult>()
+                .Which.Option.Name.Should()
+                .Be("--option");
         }
 
         [Fact]
@@ -90,42 +70,29 @@ namespace System.CommandLine.Tests
         {
             var result = _outerCommand.Parse("outer inner --option argument1");
 
-            result.CommandResult
-                  .Children
-                  .ElementAt(0)
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("argument1");
+            result
+                .CommandResult.Children.ElementAt(0)
+                .Tokens.Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("argument1");
         }
 
         [Fact]
         public void Commands_at_multiple_levels_can_have_their_own_arguments()
         {
-            var outer = new CliCommand("outer")
-            {
-                new CliArgument<string>("outer_arg")
-            };
+            var outer = new CliCommand("outer") { new CliArgument<string>("outer_arg") };
             outer.Subcommands.Add(
-                new CliCommand("inner")
-                {
-                    new CliArgument<string[]>("inner_arg")
-                });
+                new CliCommand("inner") { new CliArgument<string[]>("inner_arg") }
+            );
 
             var result = outer.Parse("outer arg1 inner arg2 arg3");
 
-            result.CommandResult
-                  .Parent
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("arg1");
+            result.CommandResult.Parent.Tokens.Select(t => t.Value).Should().BeEquivalentTo("arg1");
 
-            result.CommandResult
-                  .Tokens
-                  .Select(t => t.Value)
-                  .Should()
-                  .BeEquivalentTo("arg2", "arg3");
+            result
+                .CommandResult.Tokens.Select(t => t.Value)
+                .Should()
+                .BeEquivalentTo("arg2", "arg3");
         }
 
         [Fact]
@@ -138,22 +105,21 @@ namespace System.CommandLine.Tests
             command.Aliases.Should().Contain("added");
         }
 
-
         [Theory]
         [InlineData("aa ")]
         [InlineData(" aa")]
         [InlineData("aa aa")]
         public void When_a_command_is_created_with_an_alias_that_contains_whitespace_then_an_informative_error_is_returned(
-            string alias)
+            string alias
+        )
         {
             Action create = () => new CliCommand(alias);
 
-            create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Contain($"Names and aliases cannot contain whitespace: \"{alias}\"");
+            create
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain($"Names and aliases cannot contain whitespace: \"{alias}\"");
         }
 
         [Theory]
@@ -161,7 +127,8 @@ namespace System.CommandLine.Tests
         [InlineData(" aa")]
         [InlineData("aa aa")]
         public void When_a_command_alias_is_added_and_contains_whitespace_then_an_informative_error_is_returned(
-            string alias)
+            string alias
+        )
         {
             var command = new CliCommand("-x");
 
@@ -170,9 +137,7 @@ namespace System.CommandLine.Tests
             addAlias
                 .Should()
                 .Throw<ArgumentException>()
-                .Which
-                .Message
-                .Should()
+                .Which.Message.Should()
                 .Contain($"Names and aliases cannot contain whitespace: \"{alias}\"");
         }
 
@@ -187,15 +152,15 @@ namespace System.CommandLine.Tests
         [InlineData("outer inner arg inner-er", "inner-er")]
         [InlineData("outer inner arg inner-er arg", "inner-er")]
         [InlineData("outer arg inner arg inner-er arg", "inner-er")]
-        public void ParseResult_Command_identifies_innermost_command(string input, string expectedCommand)
+        public void ParseResult_Command_identifies_innermost_command(
+            string input,
+            string expectedCommand
+        )
         {
             var outer = new CliCommand("outer")
             {
-                new CliCommand("inner")
-                {
-                    new CliCommand("inner-er")
-                },
-                new CliCommand("sibling")
+                new CliCommand("inner") { new CliCommand("inner-er") },
+                new CliCommand("sibling"),
             };
 
             var result = outer.Parse(input);
@@ -238,10 +203,7 @@ namespace System.CommandLine.Tests
             var subcommand = new CliCommand("this");
             subcommand.Aliases.Add("that");
 
-            var rootCommand = new CliRootCommand
-            {
-                subcommand
-            };
+            var rootCommand = new CliRootCommand { subcommand };
 
             var result = rootCommand.Parse("that");
 
@@ -252,10 +214,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void It_retains_argument_name_when_it_is_provided()
         {
-            var command = new CliCommand("-alias")
-            {
-                new CliArgument<bool>("arg")
-            };
+            var command = new CliCommand("-alias") { new CliArgument<bool>("arg") };
 
             command.Arguments.Single().Name.Should().Be("arg");
         }
@@ -267,9 +226,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("mycommand");
             command.Options.Add(option);
 
-            command.Options
-                   .Should()
-                   .Contain(option);
+            command.Options.Should().Contain(option);
         }
 
         // https://github.com/dotnet/command-line-api/issues/1437
@@ -281,16 +238,12 @@ namespace System.CommandLine.Tests
 
             // referencing command.Options here would reproduce the above bug before the fix
             // keeping it ensures the fix works and doesn't regress
-            command.Options
-                .Should()
-                .BeEmpty();
+            command.Options.Should().BeEmpty();
 
             option.Recursive = true;
             command.Options.Add(option);
 
-            command.Options
-                .Should()
-                .Contain(option);
+            command.Options.Should().Contain(option);
         }
     }
 }

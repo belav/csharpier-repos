@@ -18,8 +18,10 @@ namespace System.IO.Tests
             return link;
         }
 
-        protected override FileSystemInfo ResolveLinkTarget(string linkPath, bool returnFinalTarget)
-            => GetFileSystemInfo(linkPath).ResolveLinkTarget(returnFinalTarget);
+        protected override FileSystemInfo ResolveLinkTarget(
+            string linkPath,
+            bool returnFinalTarget
+        ) => GetFileSystemInfo(linkPath).ResolveLinkTarget(returnFinalTarget);
 
         private void Delete(string path)
         {

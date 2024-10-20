@@ -17,7 +17,8 @@ public class RazorPagePropertyActivatorTest
             typeof(TestPage),
             typeof(TestModel),
             new EmptyModelMetadataProvider(),
-            propertyValueAccessors: null);
+            propertyValueAccessors: null
+        );
         var viewContext = new ViewContext();
 
         // Act
@@ -36,7 +37,8 @@ public class RazorPagePropertyActivatorTest
             typeof(TestPage),
             declaredModelType: null,
             metadataProvider: new EmptyModelMetadataProvider(),
-            propertyValueAccessors: null);
+            propertyValueAccessors: null
+        );
         var viewContext = new ViewContext();
 
         // Act
@@ -56,15 +58,13 @@ public class RazorPagePropertyActivatorTest
             typeof(TestPage),
             declaredModelType: typeof(TestModel),
             metadataProvider: modelMetadataProvider,
-            propertyValueAccessors: null);
+            propertyValueAccessors: null
+        );
         var original = new ViewDataDictionary(modelMetadataProvider, new ModelStateDictionary())
-            {
-                {  "test-key", "test-value" },
-            };
-        var viewContext = new ViewContext
         {
-            ViewData = original,
+            { "test-key", "test-value" },
         };
+        var viewContext = new ViewContext { ViewData = original };
 
         // Act
         var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -85,15 +85,13 @@ public class RazorPagePropertyActivatorTest
             typeof(TestPage),
             declaredModelType: typeof(TestModel),
             metadataProvider: modelMetadataProvider,
-            propertyValueAccessors: null);
+            propertyValueAccessors: null
+        );
         var original = new ViewDataDictionary(modelMetadataProvider, new ModelStateDictionary())
-            {
-                {  "test-key", "test-value" },
-            };
-        var viewContext = new ViewContext
         {
-            ViewData = original,
+            { "test-key", "test-value" },
         };
+        var viewContext = new ViewContext { ViewData = original };
 
         // Act
         var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -114,15 +112,16 @@ public class RazorPagePropertyActivatorTest
             typeof(TestPage),
             declaredModelType: typeof(TestModel),
             metadataProvider: modelMetadataProvider,
-            propertyValueAccessors: null);
-        var original = new ViewDataDictionary<object>(modelMetadataProvider, new ModelStateDictionary())
-            {
-                {  "test-key", "test-value" },
-            };
-        var viewContext = new ViewContext
+            propertyValueAccessors: null
+        );
+        var original = new ViewDataDictionary<object>(
+            modelMetadataProvider,
+            new ModelStateDictionary()
+        )
         {
-            ViewData = original,
+            { "test-key", "test-value" },
         };
+        var viewContext = new ViewContext { ViewData = original };
 
         // Act
         var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -143,15 +142,16 @@ public class RazorPagePropertyActivatorTest
             typeof(TestPage),
             declaredModelType: null,
             metadataProvider: modelMetadataProvider,
-            propertyValueAccessors: null);
-        var original = new ViewDataDictionary<TestModel>(modelMetadataProvider, new ModelStateDictionary())
-            {
-                {  "test-key", "test-value" },
-            };
-        var viewContext = new ViewContext
+            propertyValueAccessors: null
+        );
+        var original = new ViewDataDictionary<TestModel>(
+            modelMetadataProvider,
+            new ModelStateDictionary()
+        )
         {
-            ViewData = original,
+            { "test-key", "test-value" },
         };
+        var viewContext = new ViewContext { ViewData = original };
 
         // Act
         var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -172,15 +172,16 @@ public class RazorPagePropertyActivatorTest
             typeof(TestPage),
             declaredModelType: typeof(TestModel),
             metadataProvider: modelMetadataProvider,
-            propertyValueAccessors: null);
-        var original = new ViewDataDictionary<TestModel>(modelMetadataProvider, new ModelStateDictionary())
-            {
-                {  "test-key", "test-value" },
-            };
-        var viewContext = new ViewContext
+            propertyValueAccessors: null
+        );
+        var original = new ViewDataDictionary<TestModel>(
+            modelMetadataProvider,
+            new ModelStateDictionary()
+        )
         {
-            ViewData = original,
+            { "test-key", "test-value" },
         };
+        var viewContext = new ViewContext { ViewData = original };
 
         // Act
         var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -199,12 +200,13 @@ public class RazorPagePropertyActivatorTest
             typeof(TestPage),
             declaredModelType: null,
             metadataProvider: modelMetadataProvider,
-            propertyValueAccessors: null);
-        var original = new ViewDataDictionary<object>(modelMetadataProvider, new ModelStateDictionary());
-        var viewContext = new ViewContext
-        {
-            ViewData = original,
-        };
+            propertyValueAccessors: null
+        );
+        var original = new ViewDataDictionary<object>(
+            modelMetadataProvider,
+            new ModelStateDictionary()
+        );
+        var viewContext = new ViewContext { ViewData = original };
 
         // Act
         var viewDataDictionary = activator.CreateViewDataDictionary(viewContext);
@@ -214,15 +216,9 @@ public class RazorPagePropertyActivatorTest
         Assert.Same(original, viewDataDictionary);
     }
 
-    private class TestPage
-    {
-    }
+    private class TestPage { }
 
-    private class TestModel
-    {
-    }
+    private class TestModel { }
 
-    private class DerivedTestModel : TestModel
-    {
-    }
+    private class DerivedTestModel : TestModel { }
 }

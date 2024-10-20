@@ -2,19 +2,19 @@ using System;
 
 class X
 {
-	int v;
+    int v;
 
-	public int Prop {
-		get => 1;
-		set => v = value;
-	}
+    public int Prop
+    {
+        get => 1;
+        set => v = value;
+    }
 
-	public event Action A {
-		add => v = 1;
-		remove => v = 2;
-	}
+    public event Action A
+    {
+        add => v = 1;
+        remove => v = 2;
+    }
 
-	public static void Main ()
-	{		
-	}
+    public static void Main() { }
 }

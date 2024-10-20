@@ -14,23 +14,30 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ObjectBrowser
         private static readonly SymbolDisplayFormat s_memberDisplayFormat =
             new(
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance,
-                memberOptions: SymbolDisplayMemberOptions.IncludeExplicitInterface | SymbolDisplayMemberOptions.IncludeParameters,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance,
+                memberOptions: SymbolDisplayMemberOptions.IncludeExplicitInterface
+                    | SymbolDisplayMemberOptions.IncludeParameters,
                 parameterOptions: SymbolDisplayParameterOptions.IncludeType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
         private static readonly SymbolDisplayFormat s_memberWithContainingTypeDisplayFormat =
             new(
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters | SymbolDisplayGenericsOptions.IncludeVariance,
-                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType | SymbolDisplayMemberOptions.IncludeExplicitInterface | SymbolDisplayMemberOptions.IncludeParameters,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance,
+                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                    | SymbolDisplayMemberOptions.IncludeParameters,
                 parameterOptions: SymbolDisplayParameterOptions.IncludeType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
-        protected override string GetMemberDisplayString(ISymbol memberSymbol)
-            => memberSymbol.ToDisplayString(s_memberDisplayFormat);
+        protected override string GetMemberDisplayString(ISymbol memberSymbol) =>
+            memberSymbol.ToDisplayString(s_memberDisplayFormat);
 
-        protected override string GetMemberAndTypeDisplayString(ISymbol memberSymbol)
-            => memberSymbol.ToDisplayString(s_memberWithContainingTypeDisplayFormat);
+        protected override string GetMemberAndTypeDisplayString(ISymbol memberSymbol) =>
+            memberSymbol.ToDisplayString(s_memberWithContainingTypeDisplayFormat);
     }
 }

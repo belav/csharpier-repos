@@ -29,7 +29,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(ExtenderProvidedPropertyAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            ExtenderProvidedPropertyAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is ExtenderProvidedPropertyAttribute)

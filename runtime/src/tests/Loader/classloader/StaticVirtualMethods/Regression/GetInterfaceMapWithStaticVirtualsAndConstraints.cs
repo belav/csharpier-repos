@@ -12,22 +12,25 @@ namespace GetInterfaceMapWithStaticVirtualsAndConstraints
         [Fact]
         public static void TestEntryPoint()
         {
-            Type i, s;
+            Type i,
+                s;
             InterfaceMapping imap;
             Console.WriteLine("Inner");
-            s = typeof(Program).Assembly.GetType("GetInterfaceMapWithStaticVirtualsAndConstraints.Outer`1+Inner");
+            s = typeof(Program).Assembly.GetType(
+                "GetInterfaceMapWithStaticVirtualsAndConstraints.Outer`1+Inner"
+            );
             s = s.MakeGenericType(typeof(int));
             i = s.GetInterface("IStatics");
             imap = s.GetInterfaceMap(i);
             foreach (var iMethod in imap.InterfaceMethods)
             {
-                Console.WriteLine($"{iMethod.DeclaringType } {iMethod}");
+                Console.WriteLine($"{iMethod.DeclaringType} {iMethod}");
             }
 
             Assert.Single(imap.TargetMethods);
             foreach (var iMethod in imap.TargetMethods)
             {
-                Console.WriteLine($"{iMethod.DeclaringType } {iMethod}");
+                Console.WriteLine($"{iMethod.DeclaringType} {iMethod}");
                 Assert.Equal(typeof(Outer<int>.Inner), iMethod.DeclaringType);
             }
 
@@ -35,29 +38,31 @@ namespace GetInterfaceMapWithStaticVirtualsAndConstraints
             imap = s.GetInterfaceMap(i);
             foreach (var iMethod in imap.InterfaceMethods)
             {
-                Console.WriteLine($"{iMethod.DeclaringType } {iMethod}");
+                Console.WriteLine($"{iMethod.DeclaringType} {iMethod}");
             }
 
             Assert.Single(imap.TargetMethods);
             foreach (var iMethod in imap.TargetMethods)
             {
-                Console.WriteLine($"{iMethod.DeclaringType } {iMethod}");
+                Console.WriteLine($"{iMethod.DeclaringType} {iMethod}");
                 Assert.Equal(typeof(Outer<int>.Inner), iMethod.DeclaringType);
             }
 
             Console.WriteLine("Inner2");
-            s = typeof(Program).Assembly.GetType("GetInterfaceMapWithStaticVirtualsAndConstraints.Outer`1+Inner2");
+            s = typeof(Program).Assembly.GetType(
+                "GetInterfaceMapWithStaticVirtualsAndConstraints.Outer`1+Inner2"
+            );
             s = s.MakeGenericType(typeof(int));
             i = s.GetInterface("IStatics");
             imap = s.GetInterfaceMap(i);
             foreach (var iMethod in imap.InterfaceMethods)
             {
-                Console.WriteLine($"{iMethod.DeclaringType } {iMethod}");
+                Console.WriteLine($"{iMethod.DeclaringType} {iMethod}");
             }
             Assert.Single(imap.TargetMethods);
             foreach (var iMethod in imap.TargetMethods)
             {
-                Console.WriteLine($"{iMethod.DeclaringType } {iMethod}");
+                Console.WriteLine($"{iMethod.DeclaringType} {iMethod}");
                 Assert.Equal(typeof(Outer<int>.IStaticsImpl), iMethod.DeclaringType);
             }
 
@@ -65,12 +70,12 @@ namespace GetInterfaceMapWithStaticVirtualsAndConstraints
             imap = s.GetInterfaceMap(i);
             foreach (var iMethod in imap.InterfaceMethods)
             {
-                Console.WriteLine($"{iMethod.DeclaringType } {iMethod}");
+                Console.WriteLine($"{iMethod.DeclaringType} {iMethod}");
             }
             Assert.Single(imap.TargetMethods);
             foreach (var iMethod in imap.TargetMethods)
             {
-                Console.WriteLine($"{iMethod.DeclaringType } {iMethod}");
+                Console.WriteLine($"{iMethod.DeclaringType} {iMethod}");
                 Assert.Equal(typeof(Outer<int>.IInstanceImpl), iMethod.DeclaringType);
             }
         }
@@ -80,14 +85,14 @@ namespace GetInterfaceMapWithStaticVirtualsAndConstraints
     {
         public struct Inner : IStatics, IInstance
         {
-            public void M<TInner>() where TInner : IConstraint { }
-            public static void MStatic<TInner>() where TInner : IConstraint { }
+            public void M<TInner>()
+                where TInner : IConstraint { }
+
+            public static void MStatic<TInner>()
+                where TInner : IConstraint { }
         }
 
-        public struct Inner2 : IStaticsImpl, IInstanceImpl
-        {
-
-        }
+        public struct Inner2 : IStaticsImpl, IInstanceImpl { }
 
         public interface IStaticsImpl : IStatics
         {
@@ -101,12 +106,14 @@ namespace GetInterfaceMapWithStaticVirtualsAndConstraints
 
         public interface IStatics
         {
-            static abstract void MStatic<TInner2>() where TInner2 : IConstraint;
+            static abstract void MStatic<TInner2>()
+                where TInner2 : IConstraint;
         }
 
         public interface IInstance
         {
-            abstract void M<TInner2>() where TInner2 : IConstraint;
+            abstract void M<TInner2>()
+                where TInner2 : IConstraint;
         }
 
         public interface IConstraint { }

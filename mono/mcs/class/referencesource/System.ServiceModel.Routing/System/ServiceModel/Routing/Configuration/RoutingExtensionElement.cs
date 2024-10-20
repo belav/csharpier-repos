@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Routing.Configuration
 {
     using System;
-    using System.Linq;
     using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
@@ -20,63 +20,57 @@ namespace System.ServiceModel.Routing.Configuration
             this.RouteOnHeadersOnly = RoutingConfiguration.DefaultRouteOnHeadersOnly;
         }
 
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationPropertyAttributeRule, Justification = "this is not a configuration property")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyAttributeRule,
+            Justification = "this is not a configuration property"
+        )]
         public override Type BehaviorType
         {
             get { return typeof(RoutingBehavior); }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.RouteOnHeadersOnly, DefaultValue = RoutingConfiguration.DefaultRouteOnHeadersOnly, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.RouteOnHeadersOnly,
+            DefaultValue = RoutingConfiguration.DefaultRouteOnHeadersOnly,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public bool RouteOnHeadersOnly
         {
-            get
-            {
-                return (bool)this[ConfigurationStrings.RouteOnHeadersOnly];
-            }
-            set
-            {
-                this[ConfigurationStrings.RouteOnHeadersOnly] = value;
-            }
+            get { return (bool)this[ConfigurationStrings.RouteOnHeadersOnly]; }
+            set { this[ConfigurationStrings.RouteOnHeadersOnly] = value; }
         }
 
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationValidatorAttributeRule, Justification = "fxcop didn't like [StringValidator(MinLength = 0)]")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationValidatorAttributeRule,
+            Justification = "fxcop didn't like [StringValidator(MinLength = 0)]"
+        )]
         [ConfigurationProperty(ConfigurationStrings.FilterTableName, DefaultValue = null)]
         public string FilterTableName
         {
-            get
-            {
-                return (string)this[ConfigurationStrings.FilterTableName];
-            }
-            set
-            {
-                this[ConfigurationStrings.FilterTableName] = value;
-            }
+            get { return (string)this[ConfigurationStrings.FilterTableName]; }
+            set { this[ConfigurationStrings.FilterTableName] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SoapProcessingEnabled, DefaultValue = RoutingConfiguration.DefaultSoapProcessingEnabled)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SoapProcessingEnabled,
+            DefaultValue = RoutingConfiguration.DefaultSoapProcessingEnabled
+        )]
         public bool SoapProcessingEnabled
         {
-            get
-            {
-                return (bool)this[ConfigurationStrings.SoapProcessingEnabled];
-            }
-            set
-            {
-                this[ConfigurationStrings.SoapProcessingEnabled] = value;
-            }
+            get { return (bool)this[ConfigurationStrings.SoapProcessingEnabled]; }
+            set { this[ConfigurationStrings.SoapProcessingEnabled] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.EnsureOrderedDispatch, DefaultValue = RoutingConfiguration.DefaultEnsureOrderedDispatch)]
+        [ConfigurationProperty(
+            ConfigurationStrings.EnsureOrderedDispatch,
+            DefaultValue = RoutingConfiguration.DefaultEnsureOrderedDispatch
+        )]
         public bool EnsureOrderedDispatch
         {
-            get
-            {
-                return (bool)this[ConfigurationStrings.EnsureOrderedDispatch];
-            }
-            set
-            {
-                this[ConfigurationStrings.EnsureOrderedDispatch] = value;
-            }
+            get { return (bool)this[ConfigurationStrings.EnsureOrderedDispatch]; }
+            set { this[ConfigurationStrings.EnsureOrderedDispatch] = value; }
         }
 
         protected internal override object CreateBehavior()
@@ -89,7 +83,10 @@ namespace System.ServiceModel.Routing.Configuration
             }
             else
             {
-                config = new RoutingConfiguration(RoutingSection.CreateFilterTable(this.FilterTableName), this.RouteOnHeadersOnly);
+                config = new RoutingConfiguration(
+                    RoutingSection.CreateFilterTable(this.FilterTableName),
+                    this.RouteOnHeadersOnly
+                );
             }
 
             config.SoapProcessingEnabled = this.SoapProcessingEnabled;

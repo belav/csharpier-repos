@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DesignerTextBoxAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Globalization;
@@ -12,25 +12,25 @@ using System.Web.UI.MobileControls.Adapters;
 
 namespace System.Web.UI.Design.MobileControls.Adapters
 {
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class DesignerTextBoxAdapter : HtmlTextBoxAdapter 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class DesignerTextBoxAdapter : HtmlTextBoxAdapter
     {
         // required width may differ a little bit from actual exact pixel value
         private const int SAFETY_MARGIN = 12;
+
         // size after which we simply assume the control is too large to fit
         // into its container.
         private const int LARGESIZE_THRESHOLD = 100;
 
         public override MobileCapabilities Device
         {
-            get
-            {
-                return DesignerCapabilities.Instance;
-            }
+            get { return DesignerCapabilities.Instance; }
         }
 
         public override void Render(HtmlMobileTextWriter writer)
@@ -66,7 +66,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
             }
 
             bool restoreEmptyFontName = false;
-            if (String.IsNullOrEmpty((String) Style[Style.FontNameKey, true]))
+            if (String.IsNullOrEmpty((String)Style[Style.FontNameKey, true]))
             {
                 // MSHTMLHostUtil is using another font by default.
                 // Setting the font name to the one that is actually
@@ -101,7 +101,11 @@ namespace System.Web.UI.Design.MobileControls.Adapters
 
             if (size < LARGESIZE_THRESHOLD)
             {
-                requiredWidth = MSHTMLHostUtil.GetHtmlFragmentWidth(size > 0 ? String.Format(CultureInfo.InvariantCulture, htmlFragment, size) : htmlFragment);
+                requiredWidth = MSHTMLHostUtil.GetHtmlFragmentWidth(
+                    size > 0
+                        ? String.Format(CultureInfo.InvariantCulture, htmlFragment, size)
+                        : htmlFragment
+                );
             }
 
             if (requiredWidth + SAFETY_MARGIN > maxWidth || size >= LARGESIZE_THRESHOLD)
@@ -119,9 +123,10 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                 do
                 {
                     fittingSize++;
-                    requiredWidth = MSHTMLHostUtil.GetHtmlFragmentWidth(String.Format(CultureInfo.InvariantCulture, htmlFragment, fittingSize));
-                }
-                while (requiredWidth + SAFETY_MARGIN <= maxWidth);
+                    requiredWidth = MSHTMLHostUtil.GetHtmlFragmentWidth(
+                        String.Format(CultureInfo.InvariantCulture, htmlFragment, fittingSize)
+                    );
+                } while (requiredWidth + SAFETY_MARGIN <= maxWidth);
 
                 if (fittingSize > 1)
                 {
@@ -138,7 +143,7 @@ namespace System.Web.UI.Design.MobileControls.Adapters
                 Style[Style.FontNameKey] = String.Empty;
             }
 
-            Alignment alignment = (Alignment) Style[Style.AlignmentKey, true];
+            Alignment alignment = (Alignment)Style[Style.AlignmentKey, true];
             String width = DesignerAdapterUtil.GetWidth(Control);
 
             writer.Write("<div style='width:" + width);
@@ -175,4 +180,3 @@ namespace System.Web.UI.Design.MobileControls.Adapters
         }
     }
 }
-

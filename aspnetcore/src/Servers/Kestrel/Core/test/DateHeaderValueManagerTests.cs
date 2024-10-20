@@ -28,7 +28,10 @@ public class DateHeaderValueManagerTests
         var dateHeaderValueManager = new DateHeaderValueManager(timeProvider);
         dateHeaderValueManager.OnHeartbeat();
 
-        Assert.Equal(now.ToString(Rfc1123DateFormat), dateHeaderValueManager.GetDateHeaderValues().String);
+        Assert.Equal(
+            now.ToString(Rfc1123DateFormat),
+            dateHeaderValueManager.GetDateHeaderValues().String
+        );
     }
 
     [Fact]
@@ -42,11 +45,25 @@ public class DateHeaderValueManagerTests
 
         var testKestrelTrace = new KestrelTrace(NullLoggerFactory.Instance);
 
-        using (var heartbeat = new Heartbeat(new IHeartbeatHandler[] { dateHeaderValueManager }, timeProvider, DebuggerWrapper.Singleton, testKestrelTrace, Heartbeat.Interval))
+        using (
+            var heartbeat = new Heartbeat(
+                new IHeartbeatHandler[] { dateHeaderValueManager },
+                timeProvider,
+                DebuggerWrapper.Singleton,
+                testKestrelTrace,
+                Heartbeat.Interval
+            )
+        )
         {
-            Assert.Equal(now.ToString(Rfc1123DateFormat), dateHeaderValueManager.GetDateHeaderValues().String);
+            Assert.Equal(
+                now.ToString(Rfc1123DateFormat),
+                dateHeaderValueManager.GetDateHeaderValues().String
+            );
             timeProvider.Advance(TimeSpan.FromSeconds(10));
-            Assert.Equal(now.ToString(Rfc1123DateFormat), dateHeaderValueManager.GetDateHeaderValues().String);
+            Assert.Equal(
+                now.ToString(Rfc1123DateFormat),
+                dateHeaderValueManager.GetDateHeaderValues().String
+            );
         }
     }
 
@@ -64,18 +81,32 @@ public class DateHeaderValueManagerTests
 
         var mockHeartbeatHandler = new Mock<IHeartbeatHandler>();
 
-        using (var heartbeat = new Heartbeat(new[] { dateHeaderValueManager, mockHeartbeatHandler.Object }, timeProvider, DebuggerWrapper.Singleton, testKestrelTrace, Heartbeat.Interval))
+        using (
+            var heartbeat = new Heartbeat(
+                new[] { dateHeaderValueManager, mockHeartbeatHandler.Object },
+                timeProvider,
+                DebuggerWrapper.Singleton,
+                testKestrelTrace,
+                Heartbeat.Interval
+            )
+        )
         {
             heartbeat.OnHeartbeat();
 
-            Assert.Equal(now.ToString(Rfc1123DateFormat), dateHeaderValueManager.GetDateHeaderValues().String);
+            Assert.Equal(
+                now.ToString(Rfc1123DateFormat),
+                dateHeaderValueManager.GetDateHeaderValues().String
+            );
 
             // Wait for the next heartbeat before verifying GetDateHeaderValues picks up new time.
             timeProvider.SetUtcNow(future);
 
             heartbeat.OnHeartbeat();
 
-            Assert.Equal(future.ToString(Rfc1123DateFormat), dateHeaderValueManager.GetDateHeaderValues().String);
+            Assert.Equal(
+                future.ToString(Rfc1123DateFormat),
+                dateHeaderValueManager.GetDateHeaderValues().String
+            );
         }
     }
 
@@ -90,13 +121,27 @@ public class DateHeaderValueManagerTests
 
         var testKestrelTrace = new KestrelTrace(NullLoggerFactory.Instance);
 
-        using (var heartbeat = new Heartbeat(new IHeartbeatHandler[] { dateHeaderValueManager }, timeProvider, DebuggerWrapper.Singleton, testKestrelTrace, Heartbeat.Interval))
+        using (
+            var heartbeat = new Heartbeat(
+                new IHeartbeatHandler[] { dateHeaderValueManager },
+                timeProvider,
+                DebuggerWrapper.Singleton,
+                testKestrelTrace,
+                Heartbeat.Interval
+            )
+        )
         {
             heartbeat.OnHeartbeat();
-            Assert.Equal(now.ToString(Rfc1123DateFormat), dateHeaderValueManager.GetDateHeaderValues().String);
+            Assert.Equal(
+                now.ToString(Rfc1123DateFormat),
+                dateHeaderValueManager.GetDateHeaderValues().String
+            );
         }
 
         timeProvider.Advance(TimeSpan.FromSeconds(10));
-        Assert.Equal(now.ToString(Rfc1123DateFormat), dateHeaderValueManager.GetDateHeaderValues().String);
+        Assert.Equal(
+            now.ToString(Rfc1123DateFormat),
+            dateHeaderValueManager.GetDateHeaderValues().String
+        );
     }
 }

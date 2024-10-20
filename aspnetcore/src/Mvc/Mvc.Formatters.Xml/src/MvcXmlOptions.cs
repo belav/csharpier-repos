@@ -12,9 +12,11 @@ namespace Microsoft.AspNetCore.Mvc.Formatters.Xml;
 /// <remarks>This class is currently empty.</remarks>
 public class MvcXmlOptions : IEnumerable<ICompatibilitySwitch>
 {
-    private readonly IReadOnlyList<ICompatibilitySwitch> _switches = Array.Empty<ICompatibilitySwitch>();
+    private readonly IReadOnlyList<ICompatibilitySwitch> _switches =
+        Array.Empty<ICompatibilitySwitch>();
 
-    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() => _switches.GetEnumerator();
+    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() =>
+        _switches.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => _switches.GetEnumerator();
 }

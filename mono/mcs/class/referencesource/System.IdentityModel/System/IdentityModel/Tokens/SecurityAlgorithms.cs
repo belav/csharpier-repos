@@ -18,12 +18,14 @@ namespace System.IdentityModel.Tokens
         public const string DsaSha1Signature = SecurityAlgorithmStrings.DsaSha1Signature;
 
         public const string ExclusiveC14n = SecurityAlgorithmStrings.ExclusiveC14n;
-        public const string ExclusiveC14nWithComments = SecurityAlgorithmStrings.ExclusiveC14nWithComments;
+        public const string ExclusiveC14nWithComments =
+            SecurityAlgorithmStrings.ExclusiveC14nWithComments;
         public const string HmacSha1Signature = SecurityAlgorithmStrings.HmacSha1Signature;
         public const string HmacSha256Signature = SecurityAlgorithmStrings.HmacSha256Signature;
 
         public const string Psha1KeyDerivation = SecurityAlgorithmStrings.Psha1KeyDerivation;
-        public const string Psha1KeyDerivationDec2005 = SecurityAlgorithmDec2005Strings.Psha1KeyDerivationDec2005;
+        public const string Psha1KeyDerivationDec2005 =
+            SecurityAlgorithmDec2005Strings.Psha1KeyDerivationDec2005;
 
         public const string Ripemd160Digest = SecurityAlgorithmStrings.Ripemd160Digest;
         public const string RsaOaepKeyWrap = SecurityAlgorithmStrings.RsaOaepKeyWrap;

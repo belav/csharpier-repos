@@ -16,19 +16,40 @@ namespace System.Activities.Core.Presentation
     {
         public DelegateArgumentsValueEditor()
         {
-            this.InlineEditorTemplate = EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate("DelegateArguments_InlineTemplate");
+            this.InlineEditorTemplate =
+                EditorCategoryTemplateDictionary.Instance.GetCategoryTemplate(
+                    "DelegateArguments_InlineTemplate"
+                );
         }
 
-        public override void ShowDialog(PropertyValue propertyValue, Windows.IInputElement commandSource)
+        public override void ShowDialog(
+            PropertyValue propertyValue,
+            Windows.IInputElement commandSource
+        )
         {
-            ModelPropertyEntryToOwnerActivityConverter propertyEntryConverter = new ModelPropertyEntryToOwnerActivityConverter();
-            ModelItem parentModelItem = (ModelItem)propertyEntryConverter.Convert(propertyValue.ParentProperty, typeof(ModelItem), true, null);
+            ModelPropertyEntryToOwnerActivityConverter propertyEntryConverter =
+                new ModelPropertyEntryToOwnerActivityConverter();
+            ModelItem parentModelItem = (ModelItem)
+                propertyEntryConverter.Convert(
+                    propertyValue.ParentProperty,
+                    typeof(ModelItem),
+                    true,
+                    null
+                );
             EditingContext context = ((IModelTreeItem)parentModelItem).ModelTreeManager.Context;
-            ModelItemDictionary inputData = parentModelItem.Properties[propertyValue.ParentProperty.PropertyName].Dictionary;
+            ModelItemDictionary inputData = parentModelItem
+                .Properties[propertyValue.ParentProperty.PropertyName]
+                .Dictionary;
             DynamicArgumentDesignerOptions options = new DynamicArgumentDesignerOptions();
             options.Title = propertyValue.ParentProperty.DisplayName;
 
-            DynamicArgumentDialog.ShowDialog(parentModelItem, inputData, context, parentModelItem.View, options);
+            DynamicArgumentDialog.ShowDialog(
+                parentModelItem,
+                inputData,
+                context,
+                parentModelItem.View,
+                options
+            );
         }
     }
 }

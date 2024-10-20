@@ -16,6 +16,7 @@ public abstract class ValidationAttributeAdapter<TAttribute> : IClientModelValid
     where TAttribute : ValidationAttribute
 {
     private readonly IStringLocalizer? _stringLocalizer;
+
     /// <summary>
     /// Create a new instance of <see cref="ValidationAttributeAdapter{TAttribute}"/>.
     /// </summary>
@@ -44,7 +45,11 @@ public abstract class ValidationAttributeAdapter<TAttribute> : IClientModelValid
     /// <param name="key">The attribute key.</param>
     /// <param name="value">The attribute value.</param>
     /// <returns><c>true</c> if an attribute was added, otherwise <c>false</c>.</returns>
-    protected static bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
+    protected static bool MergeAttribute(
+        IDictionary<string, string> attributes,
+        string key,
+        string value
+    )
     {
         if (attributes.ContainsKey(key))
         {
@@ -66,10 +71,12 @@ public abstract class ValidationAttributeAdapter<TAttribute> : IClientModelValid
     {
         ArgumentNullException.ThrowIfNull(modelMetadata);
 
-        if (_stringLocalizer != null &&
-            !string.IsNullOrEmpty(Attribute.ErrorMessage) &&
-            string.IsNullOrEmpty(Attribute.ErrorMessageResourceName) &&
-            Attribute.ErrorMessageResourceType == null)
+        if (
+            _stringLocalizer != null
+            && !string.IsNullOrEmpty(Attribute.ErrorMessage)
+            && string.IsNullOrEmpty(Attribute.ErrorMessageResourceName)
+            && Attribute.ErrorMessageResourceType == null
+        )
         {
             return _stringLocalizer[Attribute.ErrorMessage, arguments];
         }

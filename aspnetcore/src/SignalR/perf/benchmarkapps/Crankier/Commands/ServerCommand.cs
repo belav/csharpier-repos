@@ -2,16 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Connections;
-using Microsoft.Extensions.CommandLineUtils;
-using static Microsoft.AspNetCore.SignalR.Crankier.Commands.CommandLineUtilities;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Connections;
+using Microsoft.AspNetCore.SignalR.Crankier.Server;
+using Microsoft.Extensions.CommandLineUtils;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.SignalR.Crankier.Server;
-using System.Collections.Generic;
+using static Microsoft.AspNetCore.SignalR.Crankier.Commands.CommandLineUtilities;
 
 namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
 {
@@ -19,40 +19,66 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
     {
         public static void Register(CommandLineApplication app)
         {
-            app.Command("server", cmd =>
-            {
-                var logLevelOption = cmd.Option("--log <LOG_LEVEL>", "The LogLevel to use.", CommandOptionType.SingleValue);
-                var azureSignalRConnectionString = cmd.Option("--azure-signalr-connectionstring <CONNECTION_STRING>", "Azure SignalR Connection string to use", CommandOptionType.SingleValue);
-
-                cmd.OnExecute(() =>
+            app.Command(
+                "server",
+                cmd =>
                 {
-                    LogLevel logLevel = Defaults.LogLevel;
+                    var logLevelOption = cmd.Option(
+                        "--log <LOG_LEVEL>",
+                        "The LogLevel to use.",
+                        CommandOptionType.SingleValue
+                    );
+                    var azureSignalRConnectionString = cmd.Option(
+                        "--azure-signalr-connectionstring <CONNECTION_STRING>",
+                        "Azure SignalR Connection string to use",
+                        CommandOptionType.SingleValue
+                    );
 
-                    if (logLevelOption.HasValue() && !Enum.TryParse(logLevelOption.Value(), out logLevel))
+                    cmd.OnExecute(() =>
                     {
-                        return InvalidArg(logLevelOption);
-                    }
+                        LogLevel logLevel = Defaults.LogLevel;
 
-                    if (azureSignalRConnectionString.HasValue() && string.IsNullOrWhiteSpace(azureSignalRConnectionString.Value()))
-                    {
-                        return InvalidArg(azureSignalRConnectionString);
-                    }
+                        if (
+                            logLevelOption.HasValue()
+                            && !Enum.TryParse(logLevelOption.Value(), out logLevel)
+                        )
+                        {
+                            return InvalidArg(logLevelOption);
+                        }
 
-                    return Execute(logLevel, azureSignalRConnectionString.Value());
-                });
-            });
+                        if (
+                            azureSignalRConnectionString.HasValue()
+                            && string.IsNullOrWhiteSpace(azureSignalRConnectionString.Value())
+                        )
+                        {
+                            return InvalidArg(azureSignalRConnectionString);
+                        }
+
+                        return Execute(logLevel, azureSignalRConnectionString.Value());
+                    });
+                }
+            );
         }
 
         private static int Execute(LogLevel logLevel, string azureSignalRConnectionString)
         {
             Console.WriteLine($"Process ID: {Process.GetCurrentProcess().Id}");
 
-            var configBuilder = new ConfigurationBuilder()
-                .AddEnvironmentVariables(prefix: "ASPNETCORE_");
+            var configBuilder = new ConfigurationBuilder().AddEnvironmentVariables(
+                prefix: "ASPNETCORE_"
+            );
 
             if (azureSignalRConnectionString != null)
             {
-                configBuilder.AddInMemoryCollection(new [] { new KeyValuePair<string, string>("Azure:SignalR:ConnectionString", azureSignalRConnectionString) });
+                configBuilder.AddInMemoryCollection(
+                    new[]
+                    {
+                        new KeyValuePair<string, string>(
+                            "Azure:SignalR:ConnectionString",
+                            azureSignalRConnectionString
+                        ),
+                    }
+                );
                 Console.WriteLine("Using Azure SignalR");
             }
 

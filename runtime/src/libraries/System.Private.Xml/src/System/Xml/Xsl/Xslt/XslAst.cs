@@ -60,8 +60,8 @@ namespace System.Xml.Xsl.Xslt
     internal sealed class NsDecl
     {
         public readonly NsDecl? Prev;
-        public readonly string? Prefix;  // Empty string denotes the default namespace, null - extension or excluded namespace
-        public readonly string? NsUri;   // null means "#all" -- all namespace defined above this one are excluded.
+        public readonly string? Prefix; // Empty string denotes the default namespace, null - extension or excluded namespace
+        public readonly string? NsUri; // null means "#all" -- all namespace defined above this one are excluded.
 
         public NsDecl(NsDecl? prev, string? prefix, string? nsUri)
         {
@@ -77,8 +77,8 @@ namespace System.Xml.Xsl.Xslt
         public readonly XslNodeType NodeType;
         public ISourceLineInfo? SourceLine;
         public NsDecl? Namespaces;
-        public readonly QilName? Name;   // name or mode
-        public readonly object? Arg;    // select or test or terminate or stylesheet;-)
+        public readonly QilName? Name; // name or mode
+        public readonly object? Arg; // select or test or terminate or stylesheet;-)
         public readonly XslVersion XslVersion;
         public XslFlags Flags;
         private List<XslNode>? _content;
@@ -97,8 +97,14 @@ namespace System.Xml.Xsl.Xslt
             this.XslVersion = XslVersion.Current;
         }
 
-        public string? Select { get { return (string?)Arg; } }
-        public bool ForwardsCompatible { get { return XslVersion == XslVersion.ForwardsCompatible; } }
+        public string? Select
+        {
+            get { return (string?)Arg; }
+        }
+        public bool ForwardsCompatible
+        {
+            get { return XslVersion == XslVersion.ForwardsCompatible; }
+        }
 
         // -------------------------------- Content Management --------------------------------
 
@@ -136,9 +142,11 @@ namespace System.Xml.Xsl.Xslt
 
     internal abstract class ProtoTemplate : XslNode
     {
-        public QilFunction? Function;                   // Compiled body
+        public QilFunction? Function; // Compiled body
 
-        public ProtoTemplate(XslNodeType nt, QilName? name, XslVersion xslVer) : base(nt, name, null, xslVer) { }
+        public ProtoTemplate(XslNodeType nt, QilName? name, XslVersion xslVer)
+            : base(nt, name, null, xslVer) { }
+
         public abstract string GetDebugName();
     }
 
@@ -151,11 +159,13 @@ namespace System.Xml.Xsl.Xslt
 
     internal sealed class AttributeSet : ProtoTemplate
     {
-        public CycleCheck CycleCheck;     // Used to detect circular references
+        public CycleCheck CycleCheck; // Used to detect circular references
 
-        public AttributeSet(QilName name, XslVersion xslVer) : base(XslNodeType.AttributeSet, name, xslVer) { }
+        public AttributeSet(QilName name, XslVersion xslVer)
+            : base(XslNodeType.AttributeSet, name, xslVer) { }
 
-        public override string GetDebugName() => $"<xsl:attribute-set name=\"{Name!.QualifiedName}\">";
+        public override string GetDebugName() =>
+            $"<xsl:attribute-set name=\"{Name!.QualifiedName}\">";
 
         public new void AddContent(XslNode node)
         {
@@ -177,7 +187,13 @@ namespace System.Xml.Xsl.Xslt
         public int ImportPrecedence;
         public int OrderNumber;
 
-        public Template(QilName? name, string? match, QilName mode, double priority, XslVersion xslVer)
+        public Template(
+            QilName? name,
+            string? match,
+            QilName mode,
+            double priority,
+            XslVersion xslVer
+        )
             : base(XslNodeType.Template, name, xslVer)
         {
             this.Match = match;
@@ -221,9 +237,10 @@ namespace System.Xml.Xsl.Xslt
     internal sealed class VarPar : XslNode
     {
         public XslFlags DefValueFlags;
-        public QilNode? Value;          // Contains value for WithParams and global VarPars
+        public QilNode? Value; // Contains value for WithParams and global VarPars
 
-        public VarPar(XslNodeType nt, QilName name, string? select, XslVersion xslVer) : base(nt, name, select, xslVer) { }
+        public VarPar(XslNodeType nt, QilName name, string? select, XslVersion xslVer)
+            : base(nt, name, select, xslVer) { }
     }
 
     internal sealed class Sort : XslNode
@@ -233,7 +250,14 @@ namespace System.Xml.Xsl.Xslt
         public readonly string? Order;
         public readonly string? CaseOrder;
 
-        public Sort(string select, string? lang, string? dataType, string? order, string? caseOrder, XslVersion xslVer)
+        public Sort(
+            string select,
+            string? lang,
+            string? dataType,
+            string? order,
+            string? caseOrder,
+            XslVersion xslVer
+        )
             : base(XslNodeType.Sort, null, select, xslVer)
         {
             this.Lang = lang;
@@ -310,9 +334,19 @@ namespace System.Xml.Xsl.Xslt
         public readonly string? GroupingSeparator;
         public readonly string? GroupingSize;
 
-        public Number(NumberLevel level, string? count, string? from, string? value,
-            string format, string? lang, string? letterValue, string? groupingSeparator, string? groupingSize,
-            XslVersion xslVer) : base(XslNodeType.Number, null, null, xslVer)
+        public Number(
+            NumberLevel level,
+            string? count,
+            string? from,
+            string? value,
+            string format,
+            string? lang,
+            string? letterValue,
+            string? groupingSeparator,
+            string? groupingSize,
+            XslVersion xslVer
+        )
+            : base(XslNodeType.Number, null, null, xslVer)
         {
             this.Level = level;
             this.Count = count;
@@ -355,21 +389,31 @@ namespace System.Xml.Xsl.Xslt
         public readonly ISourceLineInfo? ElemNameLi;
         public readonly ISourceLineInfo? EndTagLi;
 
-        public XslNodeEx(XslNodeType t, QilName? name, object? arg, ContextInfo ctxInfo, XslVersion xslVer)
+        public XslNodeEx(
+            XslNodeType t,
+            QilName? name,
+            object? arg,
+            ContextInfo ctxInfo,
+            XslVersion xslVer
+        )
             : base(t, name, arg, xslVer)
         {
             ElemNameLi = ctxInfo.elemNameLi;
             EndTagLi = ctxInfo.endTagLi;
         }
 
-        public XslNodeEx(XslNodeType t, QilName? name, object? arg, XslVersion xslVer) : base(t, name, arg, xslVer)
-        {
-        }
+        public XslNodeEx(XslNodeType t, QilName? name, object? arg, XslVersion xslVer)
+            : base(t, name, arg, xslVer) { }
     }
 
     internal static class AstFactory
     {
-        public static XslNode XslNode(XslNodeType nodeType, QilName? name, string? arg, XslVersion xslVer)
+        public static XslNode XslNode(
+            XslNodeType nodeType,
+            QilName? name,
+            string? arg,
+            XslVersion xslVer
+        )
         {
             return new XslNode(nodeType, name, arg, xslVer);
         }
@@ -379,7 +423,12 @@ namespace System.Xml.Xsl.Xslt
             return new XslNode(XslNodeType.ApplyImports, mode, sheet, xslVer);
         }
 
-        public static XslNodeEx ApplyTemplates(QilName mode, string select, ContextInfo ctxInfo, XslVersion xslVer)
+        public static XslNodeEx ApplyTemplates(
+            QilName mode,
+            string select,
+            ContextInfo ctxInfo,
+            XslVersion xslVer
+        )
         {
             return new XslNodeEx(XslNodeType.ApplyTemplates, mode, select, ctxInfo, xslVer);
         }
@@ -387,7 +436,12 @@ namespace System.Xml.Xsl.Xslt
         // Special node for start apply-templates
         public static XslNodeEx ApplyTemplates(QilName mode)
         {
-            return new XslNodeEx(XslNodeType.ApplyTemplates, mode, /*select:*/null, XslVersion.Current);
+            return new XslNodeEx(
+                XslNodeType.ApplyTemplates,
+                mode, /*select:*/
+                null,
+                XslVersion.Current
+            );
         }
 
         public static NodeCtor Attribute(string nameAvt, string? nsAvt, XslVersion xslVer)
@@ -475,11 +529,31 @@ namespace System.Xml.Xsl.Xslt
             return new XslNode(XslNodeType.Nop);
         }
 
-        public static Number Number(NumberLevel level, string? count, string? from, string? value,
-            string format, string? lang, string? letterValue, string? groupingSeparator, string? groupingSize,
-            XslVersion xslVer)
+        public static Number Number(
+            NumberLevel level,
+            string? count,
+            string? from,
+            string? value,
+            string format,
+            string? lang,
+            string? letterValue,
+            string? groupingSeparator,
+            string? groupingSize,
+            XslVersion xslVer
+        )
         {
-            return new Number(level, count, from, value, format, lang, letterValue, groupingSeparator, groupingSize, xslVer);
+            return new Number(
+                level,
+                count,
+                from,
+                value,
+                format,
+                lang,
+                letterValue,
+                groupingSeparator,
+                groupingSize,
+                xslVer
+            );
         }
 
         public static XslNode Otherwise()
@@ -492,12 +566,25 @@ namespace System.Xml.Xsl.Xslt
             return new XslNode(XslNodeType.PI, null, name, xslVer);
         }
 
-        public static Sort Sort(string select, string? lang, string? dataType, string? order, string? caseOrder, XslVersion xslVer)
+        public static Sort Sort(
+            string select,
+            string? lang,
+            string? dataType,
+            string? order,
+            string? caseOrder,
+            XslVersion xslVer
+        )
         {
             return new Sort(select, lang, dataType, order, caseOrder, xslVer);
         }
 
-        public static Template Template(QilName? name, string? match, QilName mode, double priority, XslVersion xslVer)
+        public static Template Template(
+            QilName? name,
+            string? match,
+            QilName mode,
+            double priority,
+            XslVersion xslVer
+        )
         {
             return new Template(name, match, mode, priority, xslVer);
         }
@@ -524,7 +611,12 @@ namespace System.Xml.Xsl.Xslt
 
         public static VarPar WithParam(QilName name)
         {
-            return VarPar(XslNodeType.WithParam, name, /*select*/null, XslVersion.Current);
+            return VarPar(
+                XslNodeType.WithParam,
+                name, /*select*/
+                null,
+                XslVersion.Current
+            );
         }
 
         private static readonly QilFactory s_f = new QilFactory();

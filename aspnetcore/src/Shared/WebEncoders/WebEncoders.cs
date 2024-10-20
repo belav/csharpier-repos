@@ -3,19 +3,21 @@
 
 #nullable enable
 using System;
-#if NETCOREAPP
-using System.Buffers;
-#endif
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Shared;
 using Microsoft.Extensions.WebEncoders.Sources;
+#if NETCOREAPP
+using System.Buffers;
+#endif
 
 #if WebEncoders_In_WebUtilities
 namespace Microsoft.AspNetCore.WebUtilities;
+
 #else
 namespace Microsoft.Extensions.Internal;
+
 #endif
 /// <summary>
 /// Contains utility APIs to assist with common encoding and decoding operations.
@@ -91,7 +93,13 @@ static class WebEncoders
     /// The input must not contain any whitespace or padding characters.
     /// Throws <see cref="FormatException"/> if the input is malformed.
     /// </remarks>
-    public static byte[] Base64UrlDecode(string input, int offset, char[] buffer, int bufferOffset, int count)
+    public static byte[] Base64UrlDecode(
+        string input,
+        int offset,
+        char[] buffer,
+        int bufferOffset,
+        int count
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(input);
         ArgumentNullThrowHelper.ThrowIfNull(buffer);
@@ -108,7 +116,10 @@ static class WebEncoders
 
         var paddingCharsToAdd = GetNumBase64PaddingCharsToAddForDecode(count);
         var arraySizeRequired = checked(count + paddingCharsToAdd);
-        Debug.Assert(arraySizeRequired % 4 == 0, "Invariant: Array length must be a multiple of 4.");
+        Debug.Assert(
+            arraySizeRequired % 4 == 0,
+            "Invariant: Array length must be a multiple of 4."
+        );
 
         if (buffer.Length - bufferOffset < arraySizeRequired)
         {
@@ -118,8 +129,10 @@ static class WebEncoders
                     EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
                     nameof(count),
                     nameof(bufferOffset),
-                    nameof(input)),
-                nameof(count));
+                    nameof(input)
+                ),
+                nameof(count)
+            );
         }
 
         // Copy input into buffer, fixing up '-' -> '+' and '_' -> '/'.
@@ -233,7 +246,13 @@ static class WebEncoders
     /// <returns>
     /// The number of characters written to <paramref name="output"/>, less any padding characters.
     /// </returns>
-    public static int Base64UrlEncode(byte[] input, int offset, char[] output, int outputOffset, int count)
+    public static int Base64UrlEncode(
+        byte[] input,
+        int offset,
+        char[] output,
+        int outputOffset,
+        int count
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(input);
         ArgumentNullThrowHelper.ThrowIfNull(output);
@@ -250,8 +269,10 @@ static class WebEncoders
                     EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
                     nameof(count),
                     nameof(outputOffset),
-                    nameof(output)),
-                nameof(count));
+                    nameof(output)
+                ),
+                nameof(count)
+            );
         }
 
 #if NETCOREAPP
@@ -324,9 +345,10 @@ static class WebEncoders
         int bufferSize = GetArraySizeRequiredToEncode(input.Length);
 
         char[]? bufferToReturnToPool = null;
-        Span<char> buffer = bufferSize <= StackAllocThreshold
-            ? stackalloc char[StackAllocThreshold]
-            : bufferToReturnToPool = ArrayPool<char>.Shared.Rent(bufferSize);
+        Span<char> buffer =
+            bufferSize <= StackAllocThreshold
+                ? stackalloc char[StackAllocThreshold]
+                : bufferToReturnToPool = ArrayPool<char>.Shared.Rent(bufferSize);
 
         var numBase64Chars = Base64UrlEncode(input, buffer);
         var base64Url = new string(buffer.Slice(0, numBase64Chars));
@@ -390,11 +412,18 @@ static class WebEncoders
                     string.Format(
                         CultureInfo.CurrentCulture,
                         EncoderResources.WebEncoders_MalformedInput,
-                        inputLength));
+                        inputLength
+                    )
+                );
         }
     }
 
-    private static void ValidateParameters(int bufferLength, string inputName, int offset, int count)
+    private static void ValidateParameters(
+        int bufferLength,
+        string inputName,
+        int offset,
+        int count
+    )
     {
         ArgumentOutOfRangeThrowHelper.ThrowIfNegative(offset);
         ArgumentOutOfRangeThrowHelper.ThrowIfNegative(count);
@@ -406,9 +435,10 @@ static class WebEncoders
                     EncoderResources.WebEncoders_InvalidCountOffsetOrLength,
                     nameof(count),
                     nameof(offset),
-                    inputName),
-                nameof(count));
+                    inputName
+                ),
+                nameof(count)
+            );
         }
     }
 }
-

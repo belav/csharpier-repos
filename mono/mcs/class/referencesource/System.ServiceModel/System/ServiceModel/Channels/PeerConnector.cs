@@ -11,7 +11,7 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Description;
     using System.Threading;
 
-    // Connector is responsible for transitioning neighbors to connected state. 
+    // Connector is responsible for transitioning neighbors to connected state.
     class PeerConnector : IPeerConnectorContract
     {
         enum State
@@ -19,7 +19,7 @@ namespace System.ServiceModel.Channels
             Created,
             Opened,
             Closed,
-            Closing
+            Closing,
         }
 
         PeerNodeConfig config;
@@ -37,15 +37,24 @@ namespace System.ServiceModel.Channels
         // To keep track of timers to transition neighbors to connected state
         Dictionary<IPeerNeighbor, IOThreadTimer> timerTable;
 
-        public PeerConnector(PeerNodeConfig config, PeerNeighborManager neighborManager,
-            PeerMaintainer maintainer)
+        public PeerConnector(
+            PeerNodeConfig config,
+            PeerNeighborManager neighborManager,
+            PeerMaintainer maintainer
+        )
         {
             Fx.Assert(config != null, "Config is expected to non-null");
             Fx.Assert(neighborManager != null, "NeighborManager is expected to be non-null");
             Fx.Assert(maintainer != null, "Maintainer is expected to be non-null");
             Fx.Assert(config.NodeId != PeerTransportConstants.InvalidNodeId, "Invalid NodeId");
-            Fx.Assert(config.MaxNeighbors > 0, "MaxNeighbors is expected to be non-zero positive value");
-            Fx.Assert(config.ConnectTimeout > 0, "ConnectTimeout is expected to be non-zero positive value");
+            Fx.Assert(
+                config.MaxNeighbors > 0,
+                "MaxNeighbors is expected to be non-zero positive value"
+            );
+            Fx.Assert(
+                config.ConnectTimeout > 0,
+                "ConnectTimeout is expected to be non-zero positive value"
+            );
 
             this.thisLock = new object();
             this.config = config;
@@ -57,12 +66,8 @@ namespace System.ServiceModel.Channels
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
-
 
         internal TypedMessageConverter ConnectInfoMessageConverter
         {
@@ -70,7 +75,10 @@ namespace System.ServiceModel.Channels
             {
                 if (connectInfoMessageConverter == null)
                 {
-                    connectInfoMessageConverter = TypedMessageConverter.Create(typeof(ConnectInfo), PeerStrings.ConnectAction);
+                    connectInfoMessageConverter = TypedMessageConverter.Create(
+                        typeof(ConnectInfo),
+                        PeerStrings.ConnectAction
+                    );
                 }
                 return connectInfoMessageConverter;
             }
@@ -82,7 +90,10 @@ namespace System.ServiceModel.Channels
             {
                 if (disconnectInfoMessageConverter == null)
                 {
-                    disconnectInfoMessageConverter = TypedMessageConverter.Create(typeof(DisconnectInfo), PeerStrings.DisconnectAction);
+                    disconnectInfoMessageConverter = TypedMessageConverter.Create(
+                        typeof(DisconnectInfo),
+                        PeerStrings.DisconnectAction
+                    );
                 }
                 return disconnectInfoMessageConverter;
             }
@@ -94,7 +105,10 @@ namespace System.ServiceModel.Channels
             {
                 if (refuseInfoMessageConverter == null)
                 {
-                    refuseInfoMessageConverter = TypedMessageConverter.Create(typeof(RefuseInfo), PeerStrings.RefuseAction);
+                    refuseInfoMessageConverter = TypedMessageConverter.Create(
+                        typeof(RefuseInfo),
+                        PeerStrings.RefuseAction
+                    );
                 }
                 return refuseInfoMessageConverter;
             }
@@ -106,7 +120,10 @@ namespace System.ServiceModel.Channels
             {
                 if (welcomeInfoMessageConverter == null)
                 {
-                    welcomeInfoMessageConverter = TypedMessageConverter.Create(typeof(WelcomeInfo), PeerStrings.WelcomeAction);
+                    welcomeInfoMessageConverter = TypedMessageConverter.Create(
+                        typeof(WelcomeInfo),
+                        PeerStrings.WelcomeAction
+                    );
                 }
                 return welcomeInfoMessageConverter;
             }
@@ -122,7 +139,11 @@ namespace System.ServiceModel.Channels
             {
                 if (state == State.Opened && neighbor.State == PeerNeighborState.Connecting)
                 {
-                    IOThreadTimer timer = new IOThreadTimer(new Action<object>(OnConnectTimeout), neighbor, true);
+                    IOThreadTimer timer = new IOThreadTimer(
+                        new Action<object>(OnConnectTimeout),
+                        neighbor,
+                        true
+                    );
                     timer.Set(this.config.ConnectTimeout);
                     this.timerTable.Add(neighbor, timer);
                     added = true;
@@ -133,7 +154,11 @@ namespace System.ServiceModel.Channels
         }
 
         //this method takes care of closing the message.
-        void SendMessageToNeighbor(IPeerNeighbor neighbor, Message message, PeerMessageHelpers.CleanupCallback cleanupCallback)
+        void SendMessageToNeighbor(
+            IPeerNeighbor neighbor,
+            Message message,
+            PeerMessageHelpers.CleanupCallback cleanupCallback
+        )
         {
             bool fatal = false;
             try
@@ -147,10 +172,12 @@ namespace System.ServiceModel.Channels
                     fatal = true;
                     throw;
                 }
-                if (e is CommunicationException ||
-                    e is QuotaExceededException ||
-                    e is ObjectDisposedException ||
-                    e is TimeoutException)
+                if (
+                    e is CommunicationException
+                    || e is QuotaExceededException
+                    || e is ObjectDisposedException
+                    || e is TimeoutException
+                )
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                     // Message failed to transmit due to quota exceeding or channel failure
@@ -171,16 +198,23 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        // If neighbor cannot transition to connected state, this method cleans up the timer and 
+        // If neighbor cannot transition to connected state, this method cleans up the timer and
         // closes the neighbor
-        void CleanupOnConnectFailure(IPeerNeighbor neighbor, PeerCloseReason reason,
-            Exception exception)
+        void CleanupOnConnectFailure(
+            IPeerNeighbor neighbor,
+            PeerCloseReason reason,
+            Exception exception
+        )
         {
             // timer will not be found if neighbor is already closed or connected.
             if (RemoveTimer(neighbor))
             {
-                this.neighborManager.CloseNeighbor(neighbor, reason,
-                    PeerCloseInitiator.LocalNode, exception);
+                this.neighborManager.CloseNeighbor(
+                    neighbor,
+                    reason,
+                    PeerCloseInitiator.LocalNode,
+                    exception
+                );
             }
         }
 
@@ -193,7 +227,6 @@ namespace System.ServiceModel.Channels
                 table = this.timerTable;
                 this.timerTable = null;
                 this.state = State.Closed;
-
             }
 
             // Cancel each timer
@@ -213,38 +246,47 @@ namespace System.ServiceModel.Channels
         }
 
         // Complete processing of Disconnect or Refuse message from the neighbor
-        void CompleteTerminateMessageProcessing(IPeerNeighbor neighbor,
-            PeerCloseReason closeReason, IList<Referral> referrals)
+        void CompleteTerminateMessageProcessing(
+            IPeerNeighbor neighbor,
+            PeerCloseReason closeReason,
+            IList<Referral> referrals
+        )
         {
             // Close the neighbor after setting the neighbor state to Disconnected.
             // The set can fail if the neighbor is already being closed and that is ok.
             if (neighbor.TrySetState(PeerNeighborState.Disconnected))
-                this.neighborManager.CloseNeighbor(neighbor, closeReason, PeerCloseInitiator.RemoteNode);
-            else
-                if (!(neighbor.State >= PeerNeighborState.Disconnected))
-                {
-                    throw Fx.AssertAndThrow("Unexpected neighbor state");
-                }
+                this.neighborManager.CloseNeighbor(
+                    neighbor,
+                    closeReason,
+                    PeerCloseInitiator.RemoteNode
+                );
+            else if (!(neighbor.State >= PeerNeighborState.Disconnected))
+            {
+                throw Fx.AssertAndThrow("Unexpected neighbor state");
+            }
 
             // Hand over the referrals to maintainer
             this.maintainer.AddReferrals(referrals, neighbor);
         }
 
-        void OnConnectFailure(IPeerNeighbor neighbor, PeerCloseReason reason,
-            Exception exception)
+        void OnConnectFailure(IPeerNeighbor neighbor, PeerCloseReason reason, Exception exception)
         {
             CleanupOnConnectFailure(neighbor, reason, exception);
         }
 
         void OnConnectTimeout(object asyncState)
         {
-            CleanupOnConnectFailure((IPeerNeighbor)asyncState, PeerCloseReason.ConnectTimedOut, null);
+            CleanupOnConnectFailure(
+                (IPeerNeighbor)asyncState,
+                PeerCloseReason.ConnectTimedOut,
+                null
+            );
         }
 
         // Process neighbor closed notification.
         public void OnNeighborClosed(IPeerNeighbor neighbor)
         {
-            // If the neighbor is closed abruptly by the remote node, OnNeighborClosing will 
+            // If the neighbor is closed abruptly by the remote node, OnNeighborClosing will
             // not be invoked. Remove neighbor's timer from the table.
             RemoveTimer(neighbor);
         }
@@ -267,7 +309,13 @@ namespace System.ServiceModel.Channels
 
             if (!(PeerNeighborStateHelper.IsAuthenticatedOrClosed(neighbor.State)))
             {
-                throw Fx.AssertAndThrow(string.Format(CultureInfo.InvariantCulture, "Neighbor state expected to be Authenticated or Closed, actual state: {0}", neighbor.State));
+                throw Fx.AssertAndThrow(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Neighbor state expected to be Authenticated or Closed, actual state: {0}",
+                        neighbor.State
+                    )
+                );
             }
 
             // setting the state fails if neighbor is already closed or closing
@@ -276,7 +324,13 @@ namespace System.ServiceModel.Channels
             {
                 if (!(neighbor.State >= PeerNeighborState.Faulted))
                 {
-                    throw Fx.AssertAndThrow(string.Format(CultureInfo.InvariantCulture, "Neighbor state expected to be Faulted or Closed, actual state: {0}", neighbor.State));
+                    throw Fx.AssertAndThrow(
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "Neighbor state expected to be Faulted or Closed, actual state: {0}",
+                            neighbor.State
+                        )
+                    );
                 }
                 return;
             }
@@ -295,8 +349,11 @@ namespace System.ServiceModel.Channels
                     else
                     {
                         // We have max connected neighbors already. So close this one.
-                        this.neighborManager.CloseNeighbor(neighbor, PeerCloseReason.NodeBusy,
-                            PeerCloseInitiator.LocalNode);
+                        this.neighborManager.CloseNeighbor(
+                            neighbor,
+                            PeerCloseReason.NodeBusy,
+                            PeerCloseInitiator.LocalNode
+                        );
                     }
                 }
             }
@@ -325,17 +382,22 @@ namespace System.ServiceModel.Channels
             PeerCloseReason closeReason = PeerCloseReason.None;
 
             // A connect message should only be received by a responder neighbor that is
-            // in Connecting state. If not, we close the neighbor without bothering 
+            // in Connecting state. If not, we close the neighbor without bothering
             // to send a Refuse message
             // A malicious neighbor can format a message with a null connectInfo as an argument
-            if (neighbor.IsInitiator || !connectInfo.HasBody() || (neighbor.State != PeerNeighborState.Connecting &&
-                neighbor.State != PeerNeighborState.Closed))
+            if (
+                neighbor.IsInitiator
+                || !connectInfo.HasBody()
+                || (
+                    neighbor.State != PeerNeighborState.Connecting
+                    && neighbor.State != PeerNeighborState.Closed
+                )
+            )
             {
                 closeReason = PeerCloseReason.InvalidNeighbor;
             }
-
             // Remove the timer from the timer table for this neighbor. If the timer is not
-            // present, the neighbor is already being closed and the Connect message should 
+            // present, the neighbor is already being closed and the Connect message should
             // be ignored.
             else if (RemoveTimer(neighbor))
             {
@@ -357,9 +419,15 @@ namespace System.ServiceModel.Channels
                         PeerCloseReason closeReason2;
                         IPeerNeighbor neighborToClose;
                         string action = PeerStrings.RefuseAction;
-                        ValidateNeighbor(neighbor, connectInfo.NodeId, out neighborToClose, out closeReason2, out action);
+                        ValidateNeighbor(
+                            neighbor,
+                            connectInfo.NodeId,
+                            out neighborToClose,
+                            out closeReason2,
+                            out action
+                        );
 
-                        if (neighbor != neighborToClose)    // new neighbor should be accepted
+                        if (neighbor != neighborToClose) // new neighbor should be accepted
                         {
                             SendWelcome(neighbor);
                             try
@@ -368,20 +436,30 @@ namespace System.ServiceModel.Channels
                             }
                             catch (ObjectDisposedException e)
                             {
-                                DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
+                                DiagnosticUtility.TraceHandledException(
+                                    e,
+                                    TraceEventType.Information
+                                );
                             }
 
                             if (!neighbor.TrySetState(PeerNeighborState.Connected))
                                 if (!(neighbor.State >= PeerNeighborState.Disconnecting))
                                 {
-                                    throw Fx.AssertAndThrow("Neighbor state expected to be >= Disconnecting; it is " + neighbor.State.ToString());
+                                    throw Fx.AssertAndThrow(
+                                        "Neighbor state expected to be >= Disconnecting; it is "
+                                            + neighbor.State.ToString()
+                                    );
                                 }
 
                             if (neighborToClose != null)
                             {
                                 // The other neighbor should be closed
                                 SendTerminatingMessage(neighborToClose, action, closeReason2);
-                                this.neighborManager.CloseNeighbor(neighborToClose, closeReason2, PeerCloseInitiator.LocalNode);
+                                this.neighborManager.CloseNeighbor(
+                                    neighborToClose,
+                                    closeReason2,
+                                    PeerCloseInitiator.LocalNode
+                                );
                             }
                         }
                         else
@@ -393,7 +471,11 @@ namespace System.ServiceModel.Channels
             if (closeReason != PeerCloseReason.None)
             {
                 SendTerminatingMessage(neighbor, PeerStrings.RefuseAction, closeReason);
-                this.neighborManager.CloseNeighbor(neighbor, closeReason, PeerCloseInitiator.LocalNode);
+                this.neighborManager.CloseNeighbor(
+                    neighbor,
+                    closeReason,
+                    PeerCloseInitiator.LocalNode
+                );
             }
         }
 
@@ -425,7 +507,6 @@ namespace System.ServiceModel.Channels
             CompleteTerminateMessageProcessing(neighbor, closeReason, referrals);
         }
 
-
         // Process Refuse message from the neighbor
         public void Refuse(IPeerNeighbor neighbor, RefuseInfo refuseInfo)
         {
@@ -441,8 +522,13 @@ namespace System.ServiceModel.Channels
                 // Refuse message should only be received when neighbor is the initiator
                 // and is in connecting state --we accept in closed state to account for
                 // timeouts.
-                if (neighbor.IsInitiator && (neighbor.State == PeerNeighborState.Connecting ||
-                    neighbor.State == PeerNeighborState.Closed))
+                if (
+                    neighbor.IsInitiator
+                    && (
+                        neighbor.State == PeerNeighborState.Connecting
+                        || neighbor.State == PeerNeighborState.Closed
+                    )
+                )
                 {
                     // Remove the entry from timer table for this neighbor
                     RemoveTimer(neighbor);
@@ -470,13 +556,19 @@ namespace System.ServiceModel.Channels
             // Welcome message should only be received when neighbor is the initiator
             // and is in connecting state --we accept in closed state to account for
             // timeouts.
-            if (!neighbor.IsInitiator || !welcomeInfo.HasBody() || (neighbor.State != PeerNeighborState.Connecting &&
-                neighbor.State != PeerNeighborState.Closed))
+            if (
+                !neighbor.IsInitiator
+                || !welcomeInfo.HasBody()
+                || (
+                    neighbor.State != PeerNeighborState.Connecting
+                    && neighbor.State != PeerNeighborState.Closed
+                )
+            )
             {
                 closeReason = PeerCloseReason.InvalidNeighbor;
             }
             // Remove the entry from timer table for this neighbor. If entry is still present,
-            // RemoveTimer returns true. Otherwise, neighbor is already being closed and 
+            // RemoveTimer returns true. Otherwise, neighbor is already being closed and
             // welcome message will be ignored.
             else if (RemoveTimer(neighbor))
             {
@@ -485,11 +577,17 @@ namespace System.ServiceModel.Channels
                 PeerCloseReason closeReason2;
                 IPeerNeighbor neighborToClose;
                 string action = PeerStrings.RefuseAction;
-                ValidateNeighbor(neighbor, welcomeInfo.NodeId, out neighborToClose, out closeReason2, out action);
+                ValidateNeighbor(
+                    neighbor,
+                    welcomeInfo.NodeId,
+                    out neighborToClose,
+                    out closeReason2,
+                    out action
+                );
 
                 if (neighbor != neighborToClose)
                 {
-                    // Neighbor should be accepted AddReferrals validates the referrals, 
+                    // Neighbor should be accepted AddReferrals validates the referrals,
                     // if they are valid then the neighbor is accepted.
                     if (this.maintainer.AddReferrals(welcomeInfo.Referrals, neighbor))
                     {
@@ -497,7 +595,10 @@ namespace System.ServiceModel.Channels
                         {
                             if (!(neighbor.State >= PeerNeighborState.Faulted))
                             {
-                                throw Fx.AssertAndThrow("Neighbor state expected to be >= Faulted; it is " + neighbor.State.ToString());
+                                throw Fx.AssertAndThrow(
+                                    "Neighbor state expected to be >= Faulted; it is "
+                                        + neighbor.State.ToString()
+                                );
                             }
                         }
 
@@ -505,7 +606,11 @@ namespace System.ServiceModel.Channels
                         {
                             // The other neighbor should be closed
                             SendTerminatingMessage(neighborToClose, action, closeReason2);
-                            this.neighborManager.CloseNeighbor(neighborToClose, closeReason2, PeerCloseInitiator.LocalNode);
+                            this.neighborManager.CloseNeighbor(
+                                neighborToClose,
+                                closeReason2,
+                                PeerCloseInitiator.LocalNode
+                            );
                         }
                     }
                     else
@@ -523,7 +628,11 @@ namespace System.ServiceModel.Channels
             if (closeReason != PeerCloseReason.None)
             {
                 SendTerminatingMessage(neighbor, PeerStrings.DisconnectAction, closeReason);
-                this.neighborManager.CloseNeighbor(neighbor, closeReason, PeerCloseInitiator.LocalNode);
+                this.neighborManager.CloseNeighbor(
+                    neighbor,
+                    closeReason,
+                    PeerCloseInitiator.LocalNode
+                );
             }
         }
 
@@ -536,8 +645,7 @@ namespace System.ServiceModel.Channels
             // still open. Otherwise, Close method will have already cancelled the timers.
             lock (ThisLock)
             {
-                if (this.state == State.Opened &&
-                    this.timerTable.TryGetValue(neighbor, out timer))
+                if (this.state == State.Opened && this.timerTable.TryGetValue(neighbor, out timer))
                 {
                     removed = this.timerTable.Remove(neighbor);
                 }
@@ -547,7 +655,9 @@ namespace System.ServiceModel.Channels
                 timer.Cancel();
                 if (!removed)
                 {
-                    throw Fx.AssertAndThrow("Neighbor key should have beeen removed from the table");
+                    throw Fx.AssertAndThrow(
+                        "Neighbor key should have beeen removed from the table"
+                    );
                 }
             }
 
@@ -559,28 +669,35 @@ namespace System.ServiceModel.Channels
             // We do not attempt to send the message if PeerConnector is not open
             if (neighbor.State == PeerNeighborState.Connecting && this.state == State.Opened)
             {
-                // Retrieve the local address. The retrieved address may be null if the node 
-                // is shutdown. In that case, don't bother to send connect message since the 
+                // Retrieve the local address. The retrieved address may be null if the node
+                // is shutdown. In that case, don't bother to send connect message since the
                 // node is closing...
                 PeerNodeAddress listenAddress = this.config.GetListenAddress(true);
                 if (listenAddress != null)
                 {
                     ConnectInfo connectInfo = new ConnectInfo(this.config.NodeId, listenAddress);
-                    Message message = ConnectInfoMessageConverter.ToMessage(connectInfo, MessageVersion.Soap12WSAddressing10);
+                    Message message = ConnectInfoMessageConverter.ToMessage(
+                        connectInfo,
+                        MessageVersion.Soap12WSAddressing10
+                    );
                     SendMessageToNeighbor(neighbor, message, OnConnectFailure);
                 }
             }
         }
 
         // Send Disconnect or Refuse message
-        void SendTerminatingMessage(IPeerNeighbor neighbor, string action, PeerCloseReason closeReason)
+        void SendTerminatingMessage(
+            IPeerNeighbor neighbor,
+            string action,
+            PeerCloseReason closeReason
+        )
         {
             // We do not attempt to send the message if Connector is not open
             // or if the close reason is InvalidNeighbor.
             if (this.state != State.Opened || closeReason == PeerCloseReason.InvalidNeighbor)
                 return;
 
-            // Set the neighbor state to disconnecting. TrySetState can fail if the 
+            // Set the neighbor state to disconnecting. TrySetState can fail if the
             // neighbor is already being closed. Disconnect/Refuse msg not sent in that case.
             if (neighbor.TrySetState(PeerNeighborState.Disconnecting))
             {
@@ -591,21 +708,32 @@ namespace System.ServiceModel.Channels
                 Message message;
                 if (action == PeerStrings.DisconnectAction)
                 {
-                    DisconnectInfo disconnectInfo = new DisconnectInfo((DisconnectReason)closeReason, referrals);
-                    message = DisconnectInfoMessageConverter.ToMessage(disconnectInfo, MessageVersion.Soap12WSAddressing10);
+                    DisconnectInfo disconnectInfo = new DisconnectInfo(
+                        (DisconnectReason)closeReason,
+                        referrals
+                    );
+                    message = DisconnectInfoMessageConverter.ToMessage(
+                        disconnectInfo,
+                        MessageVersion.Soap12WSAddressing10
+                    );
                 }
                 else
                 {
                     RefuseInfo refuseInfo = new RefuseInfo((RefuseReason)closeReason, referrals);
-                    message = RefuseInfoMessageConverter.ToMessage(refuseInfo, MessageVersion.Soap12WSAddressing10);
+                    message = RefuseInfoMessageConverter.ToMessage(
+                        refuseInfo,
+                        MessageVersion.Soap12WSAddressing10
+                    );
                 }
                 SendMessageToNeighbor(neighbor, message, null);
             }
-            else
-                if (!(neighbor.State >= PeerNeighborState.Disconnecting))
-                {
-                    throw Fx.AssertAndThrow("Neighbor state expected to be >= Disconnecting; it is " + neighbor.State.ToString());
-                }
+            else if (!(neighbor.State >= PeerNeighborState.Disconnecting))
+            {
+                throw Fx.AssertAndThrow(
+                    "Neighbor state expected to be >= Disconnecting; it is "
+                        + neighbor.State.ToString()
+                );
+            }
         }
 
         void SendWelcome(IPeerNeighbor neighbor)
@@ -617,15 +745,23 @@ namespace System.ServiceModel.Channels
                 Referral[] referrals = maintainer.GetReferrals();
 
                 WelcomeInfo welcomeInfo = new WelcomeInfo(this.config.NodeId, referrals);
-                Message message = WelcomeInfoMessageConverter.ToMessage(welcomeInfo, MessageVersion.Soap12WSAddressing10);
+                Message message = WelcomeInfoMessageConverter.ToMessage(
+                    welcomeInfo,
+                    MessageVersion.Soap12WSAddressing10
+                );
                 SendMessageToNeighbor(neighbor, message, OnConnectFailure);
             }
         }
 
         // Validates the new neighbor based on its node ID. If it detects duplicate neighbor condition,
         // it will return reference to the neighbor that should be closed.
-        void ValidateNeighbor(IPeerNeighbor neighbor, ulong neighborNodeId,
-            out IPeerNeighbor neighborToClose, out PeerCloseReason closeReason, out string action)
+        void ValidateNeighbor(
+            IPeerNeighbor neighbor,
+            ulong neighborNodeId,
+            out IPeerNeighbor neighborToClose,
+            out PeerCloseReason closeReason,
+            out string action
+        )
         {
             neighborToClose = null;
             closeReason = PeerCloseReason.None;
@@ -658,20 +794,24 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                IPeerNeighbor duplicateNeighbor =
-                    this.neighborManager.FindDuplicateNeighbor(neighborNodeId, neighbor);
-                if (duplicateNeighbor != null && this.neighborManager.PingNeighbor(duplicateNeighbor))
+                IPeerNeighbor duplicateNeighbor = this.neighborManager.FindDuplicateNeighbor(
+                    neighborNodeId,
+                    neighbor
+                );
+                if (
+                    duplicateNeighbor != null
+                    && this.neighborManager.PingNeighbor(duplicateNeighbor)
+                )
                 {
                     // We have a duplicate neighbor. Determine which one should be closed
                     closeReason = PeerCloseReason.DuplicateNeighbor;
 
-                    // In the corner case where both neighbors are initiated by the same node, 
-                    // close the new neighbor -- Maintainer is expected to check if there is 
+                    // In the corner case where both neighbors are initiated by the same node,
+                    // close the new neighbor -- Maintainer is expected to check if there is
                     // already a connection to a node prior to initiating a new connection.
                     if (neighbor.IsInitiator == duplicateNeighbor.IsInitiator)
                         neighborToClose = neighbor;
-
-                    // Otherwise, close the neighbor that was initiated by the node with the 
+                    // Otherwise, close the neighbor that was initiated by the node with the
                     // larger node ID -- this ensures that both nodes tear down the same link.
                     else if (this.config.NodeId > neighborNodeId)
                         neighborToClose = (neighbor.IsInitiator ? neighbor : duplicateNeighbor);
@@ -690,8 +830,10 @@ namespace System.ServiceModel.Channels
                     {
                         action = PeerStrings.DisconnectAction;
                     }
-                    else if (!neighborToClose.IsInitiator &&
-                        neighborToClose.State == PeerNeighborState.Connecting)
+                    else if (
+                        !neighborToClose.IsInitiator
+                        && neighborToClose.State == PeerNeighborState.Connecting
+                    )
                     {
                         action = PeerStrings.RefuseAction;
                     }

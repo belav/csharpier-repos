@@ -39,6 +39,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             }
             return false;
         }
+
         //CONFORMING
         internal static bool AreAssignable(Type dest, Type src)
         {
@@ -50,15 +51,27 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             {
                 return true;
             }
-            if (dest.IsArray && src.IsArray && dest.GetArrayRank() == src.GetArrayRank() && AreReferenceAssignable(dest.GetElementType(), src.GetElementType()))
+            if (
+                dest.IsArray
+                && src.IsArray
+                && dest.GetArrayRank() == src.GetArrayRank()
+                && AreReferenceAssignable(dest.GetElementType(), src.GetElementType())
+            )
             {
                 return true;
             }
-            if (src.IsArray && dest.IsGenericType &&
-                (dest.GetGenericTypeDefinition() == typeof(System.Collections.Generic.IEnumerable<>)
-                || dest.GetGenericTypeDefinition() == typeof(System.Collections.Generic.IList<>)
-                || dest.GetGenericTypeDefinition() == typeof(System.Collections.Generic.ICollection<>))
-                && dest.GetGenericArguments()[0] == src.GetElementType())
+            if (
+                src.IsArray
+                && dest.IsGenericType
+                && (
+                    dest.GetGenericTypeDefinition()
+                        == typeof(System.Collections.Generic.IEnumerable<>)
+                    || dest.GetGenericTypeDefinition() == typeof(System.Collections.Generic.IList<>)
+                    || dest.GetGenericTypeDefinition()
+                        == typeof(System.Collections.Generic.ICollection<>)
+                )
+                && dest.GetGenericArguments()[0] == src.GetElementType()
+            )
             {
                 return true;
             }
@@ -68,34 +81,54 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         //CONFORMING
         internal static bool IsImplicitlyConvertible(Type source, Type destination)
         {
-            return IsIdentityConversion(source, destination) ||
-                IsImplicitNumericConversion(source, destination) ||
-                IsImplicitReferenceConversion(source, destination) ||
-                IsImplicitBoxingConversion(source, destination);
+            return IsIdentityConversion(source, destination)
+                || IsImplicitNumericConversion(source, destination)
+                || IsImplicitReferenceConversion(source, destination)
+                || IsImplicitBoxingConversion(source, destination);
         }
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal static bool IsImplicitlyConvertible(Type source, Type destination, bool considerUserDefined)
+        internal static bool IsImplicitlyConvertible(
+            Type source,
+            Type destination,
+            bool considerUserDefined
+        )
         {
-            return IsImplicitlyConvertible(source, destination) ||
-                (considerUserDefined && GetUserDefinedCoercionMethod(source, destination, true) != null);
+            return IsImplicitlyConvertible(source, destination)
+                || (
+                    considerUserDefined
+                    && GetUserDefinedCoercionMethod(source, destination, true) != null
+                );
         }
 
         //CONFORMING
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        internal static MethodInfo GetUserDefinedCoercionMethod(Type convertFrom, Type convertToType, bool implicitOnly)
+        internal static MethodInfo GetUserDefinedCoercionMethod(
+            Type convertFrom,
+            Type convertToType,
+            bool implicitOnly
+        )
         {
             // check for implicit coercions first
             Type nnExprType = TypeUtils.GetNonNullableType(convertFrom);
             Type nnConvType = TypeUtils.GetNonNullableType(convertToType);
             // try exact match on types
-            MethodInfo[] eMethods = nnExprType.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
-            MethodInfo method = FindConversionOperator(eMethods, convertFrom, convertToType, implicitOnly);
+            MethodInfo[] eMethods = nnExprType.GetMethods(
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+            );
+            MethodInfo method = FindConversionOperator(
+                eMethods,
+                convertFrom,
+                convertToType,
+                implicitOnly
+            );
             if (method != null)
             {
                 return method;
             }
-            MethodInfo[] cMethods = nnConvType.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+            MethodInfo[] cMethods = nnConvType.GetMethods(
+                BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+            );
             method = FindConversionOperator(cMethods, convertFrom, convertToType, implicitOnly);
             if (method != null)
             {
@@ -105,8 +138,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             if (nnExprType != convertFrom || nnConvType != convertToType)
             {
                 method =
-                    FindConversionOperator(eMethods, nnExprType, nnConvType, implicitOnly) ??
-                    FindConversionOperator(cMethods, nnExprType, nnConvType, implicitOnly);
+                    FindConversionOperator(eMethods, nnExprType, nnConvType, implicitOnly)
+                    ?? FindConversionOperator(cMethods, nnExprType, nnConvType, implicitOnly);
                 if (method != null)
                 {
                     return method;
@@ -116,7 +149,12 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         //CONFORMING
-        internal static MethodInfo FindConversionOperator(MethodInfo[] methods, Type typeFrom, Type typeTo, bool implicitOnly)
+        internal static MethodInfo FindConversionOperator(
+            MethodInfo[] methods,
+            Type typeFrom,
+            Type typeTo,
+            bool implicitOnly
+        )
         {
             foreach (MethodInfo mi in methods)
             {
@@ -257,7 +295,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         //CONFORMING
         private static bool IsImplicitBoxingConversion(Type source, Type destination)
         {
-            if (source.IsValueType && (destination == typeof(object) || destination == typeof(System.ValueType)))
+            if (
+                source.IsValueType
+                && (destination == typeof(object) || destination == typeof(System.ValueType))
+            )
                 return true;
             if (source.IsEnum && destination == typeof(System.Enum))
                 return true;

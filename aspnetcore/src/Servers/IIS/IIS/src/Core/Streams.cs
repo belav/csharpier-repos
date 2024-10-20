@@ -5,8 +5,8 @@ namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 internal sealed class Streams
 {
-    private static readonly ThrowingWasUpgradedWriteOnlyStreamInternal _throwingResponseStream
-        = new ThrowingWasUpgradedWriteOnlyStreamInternal();
+    private static readonly ThrowingWasUpgradedWriteOnlyStreamInternal _throwingResponseStream =
+        new ThrowingWasUpgradedWriteOnlyStreamInternal();
 
     private readonly IISHttpContext _context;
     private readonly HttpResponseStream _response;

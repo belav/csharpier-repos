@@ -21,13 +21,16 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
+        var model = new Customer { Name = "Joana" };
 
         // Act
-        var addStatus = adapter.TryAdd(model, "Name", contractResolver, "John", out var errorMessage);
+        var addStatus = adapter.TryAdd(
+            model,
+            "Name",
+            contractResolver,
+            "John",
+            out var errorMessage
+        );
 
         // Assert
         Assert.Equal("John", model.Name);
@@ -41,14 +44,18 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
-        var expectedErrorMessage = "The target location specified by path segment 'LastName' was not found.";
+        var model = new Customer { Name = "Joana" };
+        var expectedErrorMessage =
+            "The target location specified by path segment 'LastName' was not found.";
 
         // Act
-        var addStatus = adapter.TryAdd(model, "LastName", contractResolver, "Smith", out var errorMessage);
+        var addStatus = adapter.TryAdd(
+            model,
+            "LastName",
+            contractResolver,
+            "Smith",
+            out var errorMessage
+        );
 
         // Assert
         Assert.False(addStatus);
@@ -61,13 +68,16 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
+        var model = new Customer { Name = "Joana" };
 
         // Act
-        var getStatus = adapter.TryGet(model, "Name", contractResolver, out var value, out var errorMessage);
+        var getStatus = adapter.TryGet(
+            model,
+            "Name",
+            contractResolver,
+            out var value,
+            out var errorMessage
+        );
 
         // Assert
         Assert.Equal("Joana", value);
@@ -81,14 +91,18 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
-        var expectedErrorMessage = "The target location specified by path segment 'LastName' was not found.";
+        var model = new Customer { Name = "Joana" };
+        var expectedErrorMessage =
+            "The target location specified by path segment 'LastName' was not found.";
 
         // Act
-        var getStatus = adapter.TryGet(model, "LastName", contractResolver, out var value, out var errorMessage);
+        var getStatus = adapter.TryGet(
+            model,
+            "LastName",
+            contractResolver,
+            out var value,
+            out var errorMessage
+        );
 
         // Assert
         Assert.Null(value);
@@ -102,10 +116,7 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
+        var model = new Customer { Name = "Joana" };
 
         // Act
         var removeStatus = adapter.TryRemove(model, "Name", contractResolver, out var errorMessage);
@@ -122,14 +133,17 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
-        var expectedErrorMessage = "The target location specified by path segment 'LastName' was not found.";
+        var model = new Customer { Name = "Joana" };
+        var expectedErrorMessage =
+            "The target location specified by path segment 'LastName' was not found.";
 
         // Act
-        var removeStatus = adapter.TryRemove(model, "LastName", contractResolver, out var errorMessage);
+        var removeStatus = adapter.TryRemove(
+            model,
+            "LastName",
+            contractResolver,
+            out var errorMessage
+        );
 
         // Assert
         Assert.False(removeStatus);
@@ -142,13 +156,16 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
+        var model = new Customer { Name = "Joana" };
 
         // Act
-        var replaceStatus = adapter.TryReplace(model, "Name", contractResolver, "John", out var errorMessage);
+        var replaceStatus = adapter.TryReplace(
+            model,
+            "Name",
+            contractResolver,
+            "John",
+            out var errorMessage
+        );
 
         // Assert
         Assert.Equal("John", model.Name);
@@ -162,15 +179,18 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Age = 25
-        };
+        var model = new Customer { Age = 25 };
 
         var expectedErrorMessage = "The value 'TwentySix' is invalid for target location.";
 
         // Act
-        var replaceStatus = adapter.TryReplace(model, "Age", contractResolver, "TwentySix", out var errorMessage);
+        var replaceStatus = adapter.TryReplace(
+            model,
+            "Age",
+            contractResolver,
+            "TwentySix",
+            out var errorMessage
+        );
 
         // Assert
         Assert.Equal(25, model.Age);
@@ -184,14 +204,18 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
-        var expectedErrorMessage = "The target location specified by path segment 'LastName' was not found.";
+        var model = new Customer { Name = "Joana" };
+        var expectedErrorMessage =
+            "The target location specified by path segment 'LastName' was not found.";
 
         // Act
-        var replaceStatus = adapter.TryReplace(model, "LastName", contractResolver, "Smith", out var errorMessage);
+        var replaceStatus = adapter.TryReplace(
+            model,
+            "LastName",
+            contractResolver,
+            "Smith",
+            out var errorMessage
+        );
 
         // Assert
         Assert.Equal("Joana", model.Name);
@@ -205,16 +229,16 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new RectangleContractResolver();
-        var model = new Square()
-        {
-            Rectangle = new Rectangle()
-            {
-                RectangleProperty = "Square"
-            }
-        };
+        var model = new Square() { Rectangle = new Rectangle() { RectangleProperty = "Square" } };
 
         // Act
-        var replaceStatus = adapter.TryReplace(model, "Rectangle", contractResolver, "Oval", out var errorMessage);
+        var replaceStatus = adapter.TryReplace(
+            model,
+            "Rectangle",
+            contractResolver,
+            "Oval",
+            out var errorMessage
+        );
 
         // Assert
         Assert.Equal("Oval", model.Rectangle.RectangleProperty);
@@ -226,13 +250,16 @@ public class PocoAdapterTest
     {
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
+        var model = new Customer { Name = "Joana" };
 
         // Act
-        var testStatus = adapter.TryTest(model, "Name", contractResolver, "Joana", out var errorMessage);
+        var testStatus = adapter.TryTest(
+            model,
+            "Name",
+            contractResolver,
+            "Joana",
+            out var errorMessage
+        );
 
         // Assert
         Assert.Equal("Joana", model.Name);
@@ -246,14 +273,18 @@ public class PocoAdapterTest
         // Arrange
         var adapter = new PocoAdapter();
         var contractResolver = new DefaultContractResolver();
-        var model = new Customer
-        {
-            Name = "Joana"
-        };
-        var expectedErrorMessage = "The current value 'Joana' at path 'Name' is not equal to the test value 'John'.";
+        var model = new Customer { Name = "Joana" };
+        var expectedErrorMessage =
+            "The current value 'Joana' at path 'Name' is not equal to the test value 'John'.";
 
         // Act
-        var testStatus = adapter.TryTest(model, "Name", contractResolver, "John", out var errorMessage);
+        var testStatus = adapter.TryTest(
+            model,
+            "Name",
+            contractResolver,
+            "John",
+            out var errorMessage
+        );
 
         // Assert
         Assert.False(testStatus);

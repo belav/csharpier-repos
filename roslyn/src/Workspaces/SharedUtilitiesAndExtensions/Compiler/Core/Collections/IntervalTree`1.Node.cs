@@ -26,7 +26,11 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
                 this.MaxEndNode = this;
             }
 
-            internal void SetLeftRight<TIntrospector>(Node? left, Node? right, in TIntrospector introspector)
+            internal void SetLeftRight<TIntrospector>(
+                Node? left,
+                Node? right,
+                in TIntrospector introspector
+            )
                 where TIntrospector : struct, IIntervalIntrospector<T>
             {
                 this.Left = left;

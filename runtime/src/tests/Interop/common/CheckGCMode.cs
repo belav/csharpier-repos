@@ -4,20 +4,26 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 using Xunit;
 
-unsafe internal class CheckGCMode
+internal unsafe class CheckGCMode
 {
     internal static bool Enabled = false;
-    internal static void Initialize(delegate* <delegate* unmanaged<int>, void> setIsInCooperativeModeFunction)
+
+    internal static void Initialize(
+        delegate* <delegate* unmanaged<int>, void> setIsInCooperativeModeFunction
+    )
     {
         // GetIsInCooperativeGCModeFunctionPointer is conditionally included based on the runtime build configuration,
         // so we check for its existence and only do the explicit mode validation if it is available.
-        MethodInfo getFunctionPtr = typeof(Marshal).GetMethod("GetIsInCooperativeGCModeFunctionPointer", BindingFlags.NonPublic | BindingFlags.Static);
+        MethodInfo getFunctionPtr = typeof(Marshal).GetMethod(
+            "GetIsInCooperativeGCModeFunctionPointer",
+            BindingFlags.NonPublic | BindingFlags.Static
+        );
         if (getFunctionPtr != null)
         {
-            var isInCooperativeModeFunc = (delegate* unmanaged<int>)(IntPtr)getFunctionPtr.Invoke(null, null);
+            var isInCooperativeModeFunc = (delegate* unmanaged<int>)
+                (IntPtr)getFunctionPtr.Invoke(null, null);
             setIsInCooperativeModeFunction(isInCooperativeModeFunc);
             Enabled = true;
             Console.WriteLine("Explicit GC mode check is enabled");
@@ -32,6 +38,6 @@ unsafe internal class CheckGCMode
         Assert.Equal(transitionSuppressed, inCooperativeMode);
     }
 
-    internal static void Validate(bool transitionSuppressed, int inCooperativeMode)
-        => Validate(transitionSuppressed, inCooperativeMode != 0);
+    internal static void Validate(bool transitionSuppressed, int inCooperativeMode) =>
+        Validate(transitionSuppressed, inCooperativeMode != 0);
 }

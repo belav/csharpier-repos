@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -12,12 +11,17 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_ProductOverload_MatchExpectation()
         {
-            ProductInfoHeaderValue productInfo = new ProductInfoHeaderValue(new ProductHeaderValue("product"));
+            ProductInfoHeaderValue productInfo = new ProductInfoHeaderValue(
+                new ProductHeaderValue("product")
+            );
             Assert.Equal(new ProductHeaderValue("product"), productInfo.Product);
             Assert.Null(productInfo.Comment);
 
             ProductHeaderValue input = null;
-            Assert.Throws<ArgumentNullException>(() => { new ProductInfoHeaderValue(input); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new ProductInfoHeaderValue(input);
+            });
         }
 
         [Fact]
@@ -35,10 +39,25 @@ namespace System.Net.Http.Tests
             Assert.Null(productInfo.Product);
             Assert.Equal("(this is a comment)", productInfo.Comment);
 
-            AssertExtensions.Throws<ArgumentNullException>("comment", () => { new ProductInfoHeaderValue((string)null); });
-            Assert.Throws<FormatException>(() => { new ProductInfoHeaderValue("invalid comment"); });
-            Assert.Throws<FormatException>(() => { new ProductInfoHeaderValue(" (leading space)"); });
-            Assert.Throws<FormatException>(() => { new ProductInfoHeaderValue("(trailing space) "); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "comment",
+                () =>
+                {
+                    new ProductInfoHeaderValue((string)null);
+                }
+            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductInfoHeaderValue("invalid comment");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductInfoHeaderValue(" (leading space)");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductInfoHeaderValue("(trailing space) ");
+            });
         }
 
         [Fact]
@@ -76,7 +95,9 @@ namespace System.Net.Http.Tests
         public void GetHashCode_UseSameAndDifferentProductInfos_SameOrDifferentHashCodes()
         {
             ProductInfoHeaderValue productInfo1 = new ProductInfoHeaderValue("product", "1.0");
-            ProductInfoHeaderValue productInfo2 = new ProductInfoHeaderValue(new ProductHeaderValue("product", "1.0"));
+            ProductInfoHeaderValue productInfo2 = new ProductInfoHeaderValue(
+                new ProductHeaderValue("product", "1.0")
+            );
             ProductInfoHeaderValue productInfo3 = new ProductInfoHeaderValue("(comment)");
             ProductInfoHeaderValue productInfo4 = new ProductInfoHeaderValue("(COMMENT)");
 
@@ -89,7 +110,9 @@ namespace System.Net.Http.Tests
         public void Equals_UseSameAndDifferentRanges_EqualOrNotEqualNoExceptions()
         {
             ProductInfoHeaderValue productInfo1 = new ProductInfoHeaderValue("product", "1.0");
-            ProductInfoHeaderValue productInfo2 = new ProductInfoHeaderValue(new ProductHeaderValue("product", "1.0"));
+            ProductInfoHeaderValue productInfo2 = new ProductInfoHeaderValue(
+                new ProductHeaderValue("product", "1.0")
+            );
             ProductInfoHeaderValue productInfo3 = new ProductInfoHeaderValue("(comment)");
             ProductInfoHeaderValue productInfo4 = new ProductInfoHeaderValue("(COMMENT)");
 
@@ -163,8 +186,12 @@ namespace System.Net.Http.Tests
             CheckValidParse(" (comment)   ", new ProductInfoHeaderValue("(comment)"));
 
             CheckValidParse(" Mozilla/5.0 ", new ProductInfoHeaderValue("Mozilla", "5.0"));
-            CheckValidParse(" (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0) ",
-                new ProductInfoHeaderValue("(compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)"));
+            CheckValidParse(
+                " (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0) ",
+                new ProductInfoHeaderValue(
+                    "(compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)"
+                )
+            );
         }
 
         [Fact]
@@ -175,7 +202,9 @@ namespace System.Net.Http.Tests
             CheckInvalidParse("p/1.0(comment)");
             CheckInvalidParse("(comment)[");
 
-            CheckInvalidParse(" Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0) ");
+            CheckInvalidParse(
+                " Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0) "
+            );
             CheckInvalidParse("p/1.0 =");
 
             // "User-Agent" and "Server" don't allow empty values (unlike most other headers supporting lists of values)
@@ -198,22 +227,35 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { ProductInfoHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                ProductInfoHeaderValue.Parse(input);
+            });
 
             Assert.False(ProductInfoHeaderValue.TryParse(input, out ProductInfoHeaderValue result));
             Assert.Null(result);
         }
 
-        private static void CallGetProductInfoLength(string input, int startIndex, int expectedLength,
-            out ProductInfoHeaderValue result)
+        private static void CallGetProductInfoLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            out ProductInfoHeaderValue result
+        )
         {
-            Assert.Equal(expectedLength, ProductInfoHeaderValue.GetProductInfoLength(input, startIndex, out result));
+            Assert.Equal(
+                expectedLength,
+                ProductInfoHeaderValue.GetProductInfoLength(input, startIndex, out result)
+            );
         }
 
         private static void CheckInvalidGetProductInfoLength(string input, int startIndex)
         {
             ProductInfoHeaderValue result = null;
-            Assert.Equal(0, ProductInfoHeaderValue.GetProductInfoLength(input, startIndex, out result));
+            Assert.Equal(
+                0,
+                ProductInfoHeaderValue.GetProductInfoLength(input, startIndex, out result)
+            );
             Assert.Null(result);
         }
         #endregion

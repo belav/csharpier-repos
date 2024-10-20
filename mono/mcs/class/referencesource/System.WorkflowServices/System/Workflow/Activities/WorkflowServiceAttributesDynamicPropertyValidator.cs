@@ -11,10 +11,12 @@ namespace System.Workflow.Activities
     using System.Reflection;
     using System.ServiceModel;
     using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowServiceAttributesDynamicPropertyValidator : Validator
     {
         public override ValidationErrorCollection Validate(ValidationManager manager, object obj)
@@ -24,29 +26,40 @@ namespace System.Workflow.Activities
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("manager");
             }
 
-            ValidationErrorCollection validationErrors = ValidationHelpers.ValidateObject(manager, obj);
+            ValidationErrorCollection validationErrors = ValidationHelpers.ValidateObject(
+                manager,
+                obj
+            );
             if (validationErrors.Count == 0)
             {
                 if (manager.Context == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR2.GetString(SR2.Error_ContextStackMissing)));
+                        new InvalidOperationException(SR2.GetString(SR2.Error_ContextStackMissing))
+                    );
                 }
 
                 Activity rootActivity = manager.Context[typeof(Activity)] as Activity;
                 if (rootActivity == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR2.GetString(SR2.Error_ContextStackItemMissing, typeof(Activity).Name)));
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.Error_ContextStackItemMissing, typeof(Activity).Name)
+                        )
+                    );
                 }
                 else
                 {
-                    validationErrors.AddRange(ValidationHelper.ValidateAllServiceOperationsImplemented(manager, rootActivity));
+                    validationErrors.AddRange(
+                        ValidationHelper.ValidateAllServiceOperationsImplemented(
+                            manager,
+                            rootActivity
+                        )
+                    );
                 }
             }
 
             return validationErrors;
         }
-
     }
 }

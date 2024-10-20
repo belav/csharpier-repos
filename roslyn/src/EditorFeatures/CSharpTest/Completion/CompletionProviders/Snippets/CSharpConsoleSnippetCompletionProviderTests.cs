@@ -12,15 +12,15 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpConsoleSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpConsoleSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "cw";
 
         [WpfFact]
         public async Task InsertConsoleSnippetInMethodTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -30,8 +30,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 class Program
@@ -42,14 +41,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertAsyncConsoleSnippetTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public async Task MethodAsync()
@@ -59,8 +61,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 class Program
@@ -71,14 +72,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertConsoleSnippetGlobalTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 $$
                 class Program
                 {
@@ -88,8 +92,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 Console.WriteLine($$);
@@ -100,14 +103,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoConsoleSnippetInBlockNamespaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace
                 {
                     $$
@@ -125,8 +131,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task NoConsoleSnippetInFileScopedNamespaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace;
                 $$
                 class Program
@@ -142,8 +147,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task InsertConsoleSnippetInConstructorTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public Program()
@@ -154,8 +158,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 class Program
@@ -167,14 +170,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertConsoleSnippetInLocalFunctionTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -188,8 +194,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 class Program
@@ -204,14 +209,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertConsoleSnippetInAnonymousFunctionTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 public delegate void Print(int value);
 
                 static void Main(string[] args)
@@ -223,8 +231,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 public delegate void Print(int value);
@@ -237,14 +244,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertConsoleSnippetInParenthesizedLambdaExpressionTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 Func<int, int, bool> testForEquality = (x, y) =>
                 {
                     $$
@@ -252,8 +262,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 };
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 Func<int, int, bool> testForEquality = (x, y) =>
@@ -262,14 +271,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     return x == y;
                 };
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoConsoleSnippetInSwitchExpression()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -293,8 +305,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task NoConsoleSnippetInSingleLambdaExpression()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -309,8 +320,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task NoConsoleSnippetInStringTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -326,8 +336,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task NoConsoleSnippetInObjectInitializerTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -353,8 +362,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task NoConsoleSnippetInParameterListTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method(int x, $$)
@@ -369,8 +377,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task NoConsoleSnippetInRecordDeclarationTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 public record Person
                 {
                     $$
@@ -385,8 +392,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task NoConsoleSnippetInVariableDeclarationTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -402,8 +408,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task InsertConsoleSnippetWithInvocationBeforeAndAfterCursorTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -413,8 +418,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 class Program
@@ -425,14 +429,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertConsoleSnippetWithInvocationUnderscoreBeforeAndAfterCursorTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -442,8 +449,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 class Program
@@ -454,7 +460,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         /// <summary>
@@ -464,8 +474,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [WpfFact]
         public async Task InsertConsoleSnippetWithPropertyNamedConsoleTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public int Console { get; set; }
@@ -477,8 +486,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 using System;
 
                 class Program
@@ -491,7 +499,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

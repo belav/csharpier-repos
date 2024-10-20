@@ -35,8 +35,12 @@ namespace System.ComponentModel.Tests
             yield return ConvertTest.Valid("+5", (Int128)5);
             yield return ConvertTest.Valid(" +5 ", (Int128)5);
 
-            yield return ConvertTest.Throws<ArgumentException, Exception>("170141183460469231731687303715884105728");
-            yield return ConvertTest.Throws<ArgumentException, Exception>("-170141183460469231731687303715884105729");
+            yield return ConvertTest.Throws<ArgumentException, Exception>(
+                "170141183460469231731687303715884105728"
+            );
+            yield return ConvertTest.Throws<ArgumentException, Exception>(
+                "-170141183460469231731687303715884105729"
+            );
 
             foreach (ConvertTest test in base.ConvertFromTestData())
             {

@@ -27,13 +27,21 @@ namespace IdeCoreBenchmarks
 
         private IncrementalAnalyzerRunner _incrementalAnalyzerRunner;
 
-        [Params("SymbolTreeInfoIncrementalAnalyzerProvider", "SyntaxTreeInfoIncrementalAnalyzerProvider")]
+        [Params(
+            "SymbolTreeInfoIncrementalAnalyzerProvider",
+            "SyntaxTreeInfoIncrementalAnalyzerProvider"
+        )]
         public string AnalyzerName { get; set; }
 
         public IncrementalAnalyzerBenchmarks()
         {
-            var roslynRoot = Environment.GetEnvironmentVariable(Program.RoslynRootPathEnvVariableName);
-            _solutionPath = Path.Combine(roslynRoot, @"src\Tools\IdeCoreBenchmarks\Assets\Microsoft.CodeAnalysis.sln");
+            var roslynRoot = Environment.GetEnvironmentVariable(
+                Program.RoslynRootPathEnvVariableName
+            );
+            _solutionPath = Path.Combine(
+                roslynRoot,
+                @"src\Tools\IdeCoreBenchmarks\Assets\Microsoft.CodeAnalysis.sln"
+            );
 
             if (!File.Exists(_solutionPath))
             {
@@ -44,7 +52,10 @@ namespace IdeCoreBenchmarks
         [IterationSetup]
         public void Setup()
         {
-            var analyzerAssemblyPath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Microsoft.CodeAnalysis.Features.dll");
+            var analyzerAssemblyPath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "Microsoft.CodeAnalysis.Features.dll"
+            );
 
             _options = new Options(
                 analyzerPath: analyzerAssemblyPath,
@@ -58,12 +69,15 @@ namespace IdeCoreBenchmarks
                 iterations: 1,
                 usePersistentStorage: false,
                 fullSolutionAnalysis: true,
-                incrementalAnalyzerNames: ImmutableArray.Create(AnalyzerName));
+                incrementalAnalyzerNames: ImmutableArray.Create(AnalyzerName)
+            );
 
             _workspace = AnalyzerRunnerHelper.CreateWorkspace();
             _incrementalAnalyzerRunner = new IncrementalAnalyzerRunner(_workspace, _options);
 
-            _ = _workspace.OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None).Result;
+            _ = _workspace
+                .OpenSolutionAsync(_solutionPath, progress: null, CancellationToken.None)
+                .Result;
         }
 
         [IterationCleanup]

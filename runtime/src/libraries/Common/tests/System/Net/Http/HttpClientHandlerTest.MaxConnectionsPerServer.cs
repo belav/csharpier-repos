@@ -6,21 +6,20 @@ using System.Net.Test.Common;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
 namespace System.Net.Http.Functional.Tests
 {
     using Configuration = System.Net.Test.Common.Configuration;
-
 #if WINHTTPHANDLER_TEST
     using HttpClientHandler = System.Net.Http.WinHttpClientHandler;
 #endif
 
     public abstract class HttpClientHandler_MaxConnectionsPerServer_Test : HttpClientHandlerTestBase
     {
-        public HttpClientHandler_MaxConnectionsPerServer_Test(ITestOutputHelper output) : base(output) { }
+        public HttpClientHandler_MaxConnectionsPerServer_Test(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void Default_ExpectedValue()
@@ -38,7 +37,9 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
-                Assert.Throws<ArgumentOutOfRangeException>(() => handler.MaxConnectionsPerServer = invalidValue);
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => handler.MaxConnectionsPerServer = invalidValue
+                );
             }
         }
 
@@ -64,7 +65,11 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(3, 2, true)]
         [InlineData(3, 5, false)]
         [OuterLoop("Uses external servers")]
-        public async Task GetAsync_MaxLimited_ConcurrentCallsStillSucceed(int maxConnections, int numRequests, bool secure)
+        public async Task GetAsync_MaxLimited_ConcurrentCallsStillSucceed(
+            int maxConnections,
+            int numRequests,
+            bool secure
+        )
         {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             using (HttpClient client = CreateHttpClient(handler))
@@ -72,7 +77,12 @@ namespace System.Net.Http.Functional.Tests
                 handler.MaxConnectionsPerServer = maxConnections;
                 await Task.WhenAll(
                     from i in Enumerable.Range(0, numRequests)
-                    select client.GetAsync(secure ? Configuration.Http.RemoteEchoServer : Configuration.Http.SecureRemoteEchoServer));
+                    select client.GetAsync(
+                        secure
+                            ? Configuration.Http.RemoteEchoServer
+                            : Configuration.Http.SecureRemoteEchoServer
+                    )
+                );
             }
         }
 
@@ -80,34 +90,52 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public async Task GetAsync_DontDisposeResponse_EventuallyUnblocksWaiters()
         {
-            await LoopbackServer.CreateServerAsync(async (server, uri) =>
-            {
-                using (HttpClientHandler handler = CreateHttpClientHandler())
-                using (HttpClient client = CreateHttpClient(handler))
+            await LoopbackServer.CreateServerAsync(
+                async (server, uri) =>
                 {
-                    handler.MaxConnectionsPerServer = 1;
-
-                    // Let server handle two requests.
-                    const string ResponseContent = "abcdefghijklmnopqrstuvwxyz";
-                    Task serverTask1 = server.AcceptConnectionSendResponseAndCloseAsync(content: ResponseContent);
-                    Task serverTask2 = server.AcceptConnectionSendResponseAndCloseAsync(content: ResponseContent);
-
-                    // Make first request and drop the response, not explicitly disposing of it.
-                    void MakeAndDropRequest() => client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead); // separated out to enable GC of response
-                    MakeAndDropRequest();
-
-                    // A second request should eventually succeed, once the first one is cleaned up.
-                    Task<HttpResponseMessage> secondResponse = client.GetAsync(uri);
-                    Assert.True(SpinWait.SpinUntil(() =>
+                    using (HttpClientHandler handler = CreateHttpClientHandler())
+                    using (HttpClient client = CreateHttpClient(handler))
                     {
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
-                        return secondResponse.IsCompleted;
-                    }, 30 * 1000), "Expected second response to have completed");
+                        handler.MaxConnectionsPerServer = 1;
 
-                    await new[] { serverTask1, serverTask2, secondResponse }.WhenAllOrAnyFailed();
+                        // Let server handle two requests.
+                        const string ResponseContent = "abcdefghijklmnopqrstuvwxyz";
+                        Task serverTask1 = server.AcceptConnectionSendResponseAndCloseAsync(
+                            content: ResponseContent
+                        );
+                        Task serverTask2 = server.AcceptConnectionSendResponseAndCloseAsync(
+                            content: ResponseContent
+                        );
+
+                        // Make first request and drop the response, not explicitly disposing of it.
+                        void MakeAndDropRequest() =>
+                            client.GetAsync(uri, HttpCompletionOption.ResponseHeadersRead); // separated out to enable GC of response
+                        MakeAndDropRequest();
+
+                        // A second request should eventually succeed, once the first one is cleaned up.
+                        Task<HttpResponseMessage> secondResponse = client.GetAsync(uri);
+                        Assert.True(
+                            SpinWait.SpinUntil(
+                                () =>
+                                {
+                                    GC.Collect();
+                                    GC.WaitForPendingFinalizers();
+                                    return secondResponse.IsCompleted;
+                                },
+                                30 * 1000
+                            ),
+                            "Expected second response to have completed"
+                        );
+
+                        await new[]
+                        {
+                            serverTask1,
+                            serverTask2,
+                            secondResponse,
+                        }.WhenAllOrAnyFailed();
+                    }
                 }
-            });
+            );
         }
     }
 }

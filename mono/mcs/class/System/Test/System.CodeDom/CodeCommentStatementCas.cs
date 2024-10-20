@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,70 +27,69 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeCommentStatementCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeCommentStatementCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeCommentStatement ccs = new CodeCommentStatement();
+            Assert.IsNull(ccs.Comment, "Comment");
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            CodeComment cc = new CodeComment("mono");
+            CodeCommentStatement ccs = new CodeCommentStatement(cc);
+            Assert.AreEqual("mono", ccs.Comment.Text, "Comment.Text");
+            Assert.IsFalse(ccs.Comment.DocComment, "Comment.DocComment");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeCommentStatement ccs = new CodeCommentStatement ();
-			Assert.IsNull (ccs.Comment, "Comment");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted()
+        {
+            CodeCommentStatement ccs = new CodeCommentStatement("mono");
+            Assert.AreEqual("mono", ccs.Comment.Text, "Comment.Text");
+            Assert.IsFalse(ccs.Comment.DocComment, "Comment.DocComment");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeComment cc = new CodeComment ("mono");
-			CodeCommentStatement ccs = new CodeCommentStatement (cc);
-			Assert.AreEqual ("mono", ccs.Comment.Text, "Comment.Text");
-			Assert.IsFalse (ccs.Comment.DocComment, "Comment.DocComment");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor3_Deny_Unrestricted()
+        {
+            CodeCommentStatement ccs = new CodeCommentStatement("mono", true);
+            Assert.AreEqual("mono", ccs.Comment.Text, "Comment.Text");
+            Assert.IsTrue(ccs.Comment.DocComment, "Comment.DocComment");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeCommentStatement ccs = new CodeCommentStatement ("mono");
-			Assert.AreEqual ("mono", ccs.Comment.Text, "Comment.Text");
-			Assert.IsFalse (ccs.Comment.DocComment, "Comment.DocComment");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor3_Deny_Unrestricted ()
-		{
-			CodeCommentStatement ccs = new CodeCommentStatement ("mono", true);
-			Assert.AreEqual ("mono", ccs.Comment.Text, "Comment.Text");
-			Assert.IsTrue (ccs.Comment.DocComment, "Comment.DocComment");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeCommentStatement).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeCommentStatement).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

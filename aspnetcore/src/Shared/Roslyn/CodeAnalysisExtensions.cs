@@ -12,24 +12,40 @@ namespace Microsoft.CodeAnalysis;
 
 internal static class CodeAnalysisExtensions
 {
-    public static bool HasAttribute(this ITypeSymbol typeSymbol, ITypeSymbol attribute, bool inherit)
-        => GetAttributes(typeSymbol, attribute, inherit).Any();
+    public static bool HasAttribute(
+        this ITypeSymbol typeSymbol,
+        ITypeSymbol attribute,
+        bool inherit
+    ) => GetAttributes(typeSymbol, attribute, inherit).Any();
 
-    public static bool HasAttribute(this IMethodSymbol methodSymbol, ITypeSymbol attribute, bool inherit)
-        => GetAttributes(methodSymbol, attribute, inherit).Any();
+    public static bool HasAttribute(
+        this IMethodSymbol methodSymbol,
+        ITypeSymbol attribute,
+        bool inherit
+    ) => GetAttributes(methodSymbol, attribute, inherit).Any();
 
-    public static IEnumerable<AttributeData> GetAttributes(this ISymbol symbol, ITypeSymbol attribute)
+    public static IEnumerable<AttributeData> GetAttributes(
+        this ISymbol symbol,
+        ITypeSymbol attribute
+    )
     {
         foreach (var declaredAttribute in symbol.GetAttributes())
         {
-            if (declaredAttribute.AttributeClass is not null && attribute.IsAssignableFrom(declaredAttribute.AttributeClass))
+            if (
+                declaredAttribute.AttributeClass is not null
+                && attribute.IsAssignableFrom(declaredAttribute.AttributeClass)
+            )
             {
                 yield return declaredAttribute;
             }
         }
     }
 
-    public static IEnumerable<AttributeData> GetAttributes(this IMethodSymbol methodSymbol, ITypeSymbol attribute, bool inherit)
+    public static IEnumerable<AttributeData> GetAttributes(
+        this IMethodSymbol methodSymbol,
+        ITypeSymbol attribute,
+        bool inherit
+    )
     {
         Debug.Assert(methodSymbol != null);
         attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
@@ -51,7 +67,11 @@ internal static class CodeAnalysisExtensions
         }
     }
 
-    public static IEnumerable<AttributeData> GetAttributes(this ITypeSymbol typeSymbol, ITypeSymbol attribute, bool inherit)
+    public static IEnumerable<AttributeData> GetAttributes(
+        this ITypeSymbol typeSymbol,
+        ITypeSymbol attribute,
+        bool inherit
+    )
     {
         typeSymbol = typeSymbol ?? throw new ArgumentNullException(nameof(typeSymbol));
         attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
@@ -70,7 +90,11 @@ internal static class CodeAnalysisExtensions
         }
     }
 
-    public static bool HasAttribute(this IPropertySymbol propertySymbol, ITypeSymbol attribute, bool inherit)
+    public static bool HasAttribute(
+        this IPropertySymbol propertySymbol,
+        ITypeSymbol attribute,
+        bool inherit
+    )
     {
         propertySymbol = propertySymbol ?? throw new ArgumentNullException(nameof(propertySymbol));
         attribute = attribute ?? throw new ArgumentNullException(nameof(attribute));
@@ -132,7 +156,10 @@ internal static class CodeAnalysisExtensions
     {
         foreach (var declaredAttribute in symbol.GetAttributes())
         {
-            if (declaredAttribute.AttributeClass is not null && attribute.IsAssignableFrom(declaredAttribute.AttributeClass))
+            if (
+                declaredAttribute.AttributeClass is not null
+                && attribute.IsAssignableFrom(declaredAttribute.AttributeClass)
+            )
             {
                 return true;
             }
@@ -152,17 +179,24 @@ internal static class CodeAnalysisExtensions
     }
 
     // Adapted from https://github.com/dotnet/roslyn/blob/929272/src/Workspaces/Core/Portable/Shared/Extensions/IMethodSymbolExtensions.cs#L61
-    public static IEnumerable<IMethodSymbol> GetAllMethodSymbolsOfPartialParts(this IMethodSymbol method)
+    public static IEnumerable<IMethodSymbol> GetAllMethodSymbolsOfPartialParts(
+        this IMethodSymbol method
+    )
     {
         if (method.PartialDefinitionPart != null)
         {
-            Debug.Assert(method.PartialImplementationPart == null && !SymbolEqualityComparer.Default.Equals(method.PartialDefinitionPart, method));
+            Debug.Assert(
+                method.PartialImplementationPart == null
+                    && !SymbolEqualityComparer.Default.Equals(method.PartialDefinitionPart, method)
+            );
             yield return method;
             yield return method.PartialDefinitionPart;
         }
         else if (method.PartialImplementationPart != null)
         {
-            Debug.Assert(!SymbolEqualityComparer.Default.Equals(method.PartialImplementationPart, method));
+            Debug.Assert(
+                !SymbolEqualityComparer.Default.Equals(method.PartialImplementationPart, method)
+            );
             yield return method.PartialImplementationPart;
             yield return method;
         }
@@ -176,18 +210,29 @@ internal static class CodeAnalysisExtensions
     // See https://github.com/dotnet/roslyn-analyzers/blob/762b08948cdcc1d94352fba681296be7bf474dd7/src/Utilities/Compiler/Extensions/IOperationExtensions.cs#L22-L51
     public static INamedTypeSymbol? GetReceiverType(
         this IInvocationOperation invocation,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         if (invocation.Instance != null)
         {
-            return GetReceiverType(invocation.Instance.Syntax, invocation.SemanticModel, cancellationToken);
+            return GetReceiverType(
+                invocation.Instance.Syntax,
+                invocation.SemanticModel,
+                cancellationToken
+            );
         }
-        else if (invocation.TargetMethod.IsExtensionMethod && !invocation.TargetMethod.Parameters.IsEmpty)
+        else if (
+            invocation.TargetMethod.IsExtensionMethod && !invocation.TargetMethod.Parameters.IsEmpty
+        )
         {
             var firstArg = invocation.Arguments.FirstOrDefault();
             if (firstArg != null)
             {
-                return GetReceiverType(firstArg.Value.Syntax, invocation.SemanticModel, cancellationToken);
+                return GetReceiverType(
+                    firstArg.Value.Syntax,
+                    invocation.SemanticModel,
+                    cancellationToken
+                );
             }
             else if (invocation.TargetMethod.Parameters[0].IsParams)
             {
@@ -200,7 +245,8 @@ internal static class CodeAnalysisExtensions
         static INamedTypeSymbol? GetReceiverType(
             SyntaxNode receiverSyntax,
             SemanticModel? model,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var typeInfo = model?.GetTypeInfo(receiverSyntax, cancellationToken);
             return typeInfo?.Type as INamedTypeSymbol;

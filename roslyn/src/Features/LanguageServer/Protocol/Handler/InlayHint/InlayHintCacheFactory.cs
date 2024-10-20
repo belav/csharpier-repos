@@ -13,10 +13,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public InlayHintCacheFactory()
-        {
-        }
+        public InlayHintCacheFactory() { }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind) => new InlayHintCache();
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        ) => new InlayHintCache();
     }
 }

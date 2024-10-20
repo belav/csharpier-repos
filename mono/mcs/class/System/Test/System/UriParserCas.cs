@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,73 +27,70 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System;
+using NUnit.Framework;
 
-namespace MonoCasTests.System {
+namespace MonoCasTests.System
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class UriParserCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class UriParserCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTest_Deny_Unrestricted()
+        {
+            UriParserTest unit = new UriParserTest();
+            unit.Prefix = "cas.deny.unrestricted.test.";
+            // static stuff
+            unit.IsKnownScheme_WellKnown();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, Infrastructure = true)]
+        public void ReuseUnitTest_PermitOnly_Infrastructure()
+        {
+            UriParserTest unit = new UriParserTest();
+            unit.Prefix = "cas.permitonly.infrastructure..test.";
+            // static stuff
+            unit.Register();
+            unit.Register_Minus1Port();
+            unit.Register_UInt16PortMinus1();
+            unit.OnRegister();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTest_Deny_Unrestricted ()
-		{
-			UriParserTest unit = new UriParserTest ();
-			unit.Prefix = "cas.deny.unrestricted.test.";
-			// static stuff
-			unit.IsKnownScheme_WellKnown ();
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, Infrastructure = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void ReuseUnitTest_Deny_Infrastructure()
+        {
+            UriParserTest unit = new UriParserTest();
+            unit.Prefix = "cas.deny.infrastructure.test.";
+            // static stuff
+            unit.Register();
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, Infrastructure = true)]
-		public void ReuseUnitTest_PermitOnly_Infrastructure ()
-		{
-			UriParserTest unit = new UriParserTest ();
-			unit.Prefix = "cas.permitonly.infrastructure..test.";
-			// static stuff
-			unit.Register ();
-			unit.Register_Minus1Port ();
-			unit.Register_UInt16PortMinus1 ();
-			unit.OnRegister ();
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, Infrastructure = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void ReuseUnitTest_Deny_Infrastructure ()
-		{
-			UriParserTest unit = new UriParserTest ();
-			unit.Prefix = "cas.deny.infrastructure.test.";
-			// static stuff
-			unit.Register ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			// UriParser is an asbtract class - so we use the unit test derived class
-			// because we're 100% sure this doesn't introduce new security checks
-			ConstructorInfo ci = typeof (UnitTestUriParser).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            // UriParser is an asbtract class - so we use the unit test derived class
+            // because we're 100% sure this doesn't introduce new security checks
+            ConstructorInfo ci = typeof(UnitTestUriParser).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor()");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }
-

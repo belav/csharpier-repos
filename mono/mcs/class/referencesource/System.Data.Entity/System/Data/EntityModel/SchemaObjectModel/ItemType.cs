@@ -16,20 +16,24 @@ namespace System.Data.EntityModel.SchemaObjectModel
     /// <summary>
     /// Summary description for Item.
     /// </summary>
-    [System.Diagnostics.DebuggerDisplay("Name={Name}, BaseType={BaseType.FQName}, HasKeys={HasKeys}")]
+    [System.Diagnostics.DebuggerDisplay(
+        "Name={Name}, BaseType={BaseType.FQName}, HasKeys={HasKeys}"
+    )]
     internal sealed class SchemaEntityType : StructuredType
     {
         #region Private Fields
-        
+
         private const char KEY_DELIMITER = ' ';
         private ISchemaElementLookUpTable<NavigationProperty> _navigationProperties = null;
         private EntityKeyElement _keyElement = null;
-        private static List<PropertyRefElement> EmptyKeyProperties = new List<PropertyRefElement>(0);
+        private static List<PropertyRefElement> EmptyKeyProperties = new List<PropertyRefElement>(
+            0
+        );
         #endregion
         #region Public Methods
-        
+
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         public SchemaEntityType(Schema parentElement)
@@ -38,12 +42,12 @@ namespace System.Data.EntityModel.SchemaObjectModel
             if (Schema.DataModel == SchemaDataModelOption.EntityDataModel)
                 OtherContent.Add(Schema.SchemaSource);
         }
-        
+
         #endregion
         #region Protected Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         internal override void ResolveTopLevelNames()
         {
@@ -53,22 +57,37 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 if (!(BaseType is SchemaEntityType))
                 {
-                    AddError(ErrorCode.InvalidBaseType, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidBaseTypeForItemType(BaseType.FQName, FQName));
+                    AddError(
+                        ErrorCode.InvalidBaseType,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidBaseTypeForItemType(
+                            BaseType.FQName,
+                            FQName
+                        )
+                    );
                 }
                 // Since the base type is not null, key must be defined on the base type
                 else if (_keyElement != null && BaseType != null)
                 {
-                    AddError(ErrorCode.InvalidKey, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidKeyKeyDefinedInBaseClass(FQName, BaseType.FQName));
+                    AddError(
+                        ErrorCode.InvalidKey,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidKeyKeyDefinedInBaseClass(
+                            FQName,
+                            BaseType.FQName
+                        )
+                    );
                 }
             }
             // If the base type is not null, then the key must be defined on the base entity type, since
-            // we don't allow entity type without keys. 
+            // we don't allow entity type without keys.
             else if (_keyElement == null)
             {
-                AddError(ErrorCode.KeyMissingOnEntityType, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.KeyMissingOnEntityType(this.FQName));
+                AddError(
+                    ErrorCode.KeyMissingOnEntityType,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.KeyMissingOnEntityType(this.FQName)
+                );
             }
             else if (null == BaseType && null != UnresolvedBaseType)
             {
@@ -90,7 +109,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 return true;
             }
-            else if (CanHandleAttribute(reader, XmlConstants.OpenType) && Schema.DataModel == SchemaDataModelOption.EntityDataModel)
+            else if (
+                CanHandleAttribute(reader, XmlConstants.OpenType)
+                && Schema.DataModel == SchemaDataModelOption.EntityDataModel
+            )
             {
                 // EF does not support this EDM 3.0 attribute, so ignore it.
                 return true;
@@ -107,14 +129,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         public EntityKeyElement KeyElement
         {
-            get
-            {
-                return _keyElement;
-            }
+            get { return _keyElement; }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public IList<PropertyRefElement> DeclaredKeyProperties
         {
@@ -129,7 +148,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <value></value>
         public IList<PropertyRefElement> KeyProperties
@@ -140,7 +159,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 {
                     if (BaseType != null)
                     {
-                        System.Diagnostics.Debug.Assert(BaseType is SchemaEntityType, "ItemType.BaseType is not ItemType");
+                        System.Diagnostics.Debug.Assert(
+                            BaseType is SchemaEntityType,
+                            "ItemType.BaseType is not ItemType"
+                        );
                         return (BaseType as SchemaEntityType).KeyProperties;
                     }
 
@@ -151,7 +173,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public ISchemaElementLookUpTable<NavigationProperty> NavigationProperties
         {
@@ -159,17 +181,20 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 if (_navigationProperties == null)
                 {
-                    _navigationProperties = new FilteredSchemaElementLookUpTable<NavigationProperty, SchemaElement>(NamedMembers);
+                    _navigationProperties = new FilteredSchemaElementLookUpTable<
+                        NavigationProperty,
+                        SchemaElement
+                    >(NamedMembers);
                 }
                 return _navigationProperties;
             }
         }
-        
+
         #endregion
         #region Protected Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         internal override void Validate()
         {
@@ -201,13 +226,19 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 HandleNavigationPropertyElement(reader);
                 return true;
             }
-            else if (CanHandleElement(reader, XmlConstants.ValueAnnotation) && Schema.DataModel == SchemaDataModelOption.EntityDataModel)
+            else if (
+                CanHandleElement(reader, XmlConstants.ValueAnnotation)
+                && Schema.DataModel == SchemaDataModelOption.EntityDataModel
+            )
             {
                 // EF does not support this EDM 3.0 element, so ignore it.
                 SkipElement(reader);
                 return true;
             }
-            else if (CanHandleElement(reader, XmlConstants.TypeAnnotation) && Schema.DataModel == SchemaDataModelOption.EntityDataModel)
+            else if (
+                CanHandleElement(reader, XmlConstants.TypeAnnotation)
+                && Schema.DataModel == SchemaDataModelOption.EntityDataModel
+            )
             {
                 // EF does not support this EDM 3.0 element, so ignore it.
                 SkipElement(reader);
@@ -220,7 +251,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         #region Private Methods
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleNavigationPropertyElement(XmlReader reader)
@@ -231,7 +262,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void HandleKeyElement(XmlReader reader)

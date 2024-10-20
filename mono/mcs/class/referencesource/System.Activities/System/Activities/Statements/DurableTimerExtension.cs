@@ -6,26 +6,36 @@ namespace System.Activities.Statements
 {
     using System;
     using System.Activities;
-    using System.Runtime;
-    using System.ComponentModel;
+    using System.Activities.Hosting;
     using System.Activities.Persistence;
     using System.Collections.Generic;
-    using System.Xml.Linq;
-    using System.Activities.Hosting;
+    using System.ComponentModel;
+    using System.Runtime;
     using System.Threading;
+    using System.Xml.Linq;
 
     [Fx.Tag.XamlVisible(false)]
-    public class DurableTimerExtension : TimerExtension, IWorkflowInstanceExtension, IDisposable, ICancelable
+    public class DurableTimerExtension
+        : TimerExtension,
+            IWorkflowInstanceExtension,
+            IDisposable,
+            ICancelable
     {
         WorkflowInstanceProxy instance;
         TimerTable registeredTimers;
         Action<object> onTimerFiredCallback;
         TimerPersistenceParticipant timerPersistenceParticipant;
-        static AsyncCallback onResumeBookmarkComplete = Fx.ThunkCallback(new AsyncCallback(OnResumeBookmarkComplete));
+        static AsyncCallback onResumeBookmarkComplete = Fx.ThunkCallback(
+            new AsyncCallback(OnResumeBookmarkComplete)
+        );
 
-        static readonly XName timerTableName = XNamespace.Get("urn:schemas-microsoft-com:System.Activities/4.0/properties").GetName("RegisteredTimers");
-        static readonly XName timerExpirationTimeName = XNamespace.Get("urn:schemas-microsoft-com:System.Activities/4.0/properties").GetName("TimerExpirationTime");
-        bool isDisposed; 
+        static readonly XName timerTableName = XNamespace
+            .Get("urn:schemas-microsoft-com:System.Activities/4.0/properties")
+            .GetName("RegisteredTimers");
+        static readonly XName timerExpirationTimeName = XNamespace
+            .Get("urn:schemas-microsoft-com:System.Activities/4.0/properties")
+            .GetName("TimerExpirationTime");
+        bool isDisposed;
 
         [Fx.Tag.SynchronizationObject()]
         object thisLock;
@@ -36,23 +46,17 @@ namespace System.Activities.Statements
             this.onTimerFiredCallback = new Action<object>(this.OnTimerFired);
             this.thisLock = new object();
             this.timerPersistenceParticipant = new TimerPersistenceParticipant(this);
-            this.isDisposed = false; 
+            this.isDisposed = false;
         }
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         internal Action<object> OnTimerFiredCallback
         {
-            get
-            {
-                return this.onTimerFiredCallback;
-            }
+            get { return this.onTimerFiredCallback; }
         }
 
         internal TimerTable RegisteredTimers
@@ -76,7 +80,9 @@ namespace System.Activities.Statements
         {
             if (this.instance != null && instance != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.TimerExtensionAlreadyAttached));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.TimerExtensionAlreadyAttached)
+                );
             }
 
             this.instance = instance;
@@ -89,7 +95,10 @@ namespace System.Activities.Statements
             {
                 lock (this.ThisLock)
                 {
-                    Fx.Assert(!this.isDisposed, "DurableTimerExtension is already disposed, it cannot be used to register a new timer.");
+                    Fx.Assert(
+                        !this.isDisposed,
+                        "DurableTimerExtension is already disposed, it cannot be used to register a new timer."
+                    );
                     this.RegisteredTimers.AddTimer(timeout, bookmark);
                 }
             }
@@ -104,11 +113,14 @@ namespace System.Activities.Statements
             }
         }
 
-        internal void OnSave(out IDictionary<XName, object> readWriteValues, out IDictionary<XName, object> writeOnlyValues)
+        internal void OnSave(
+            out IDictionary<XName, object> readWriteValues,
+            out IDictionary<XName, object> writeOnlyValues
+        )
         {
             readWriteValues = null;
             writeOnlyValues = null;
-            
+
             // Using a lock here to prevent the timer firing back without us being ready
             lock (this.ThisLock)
             {
@@ -118,7 +130,10 @@ namespace System.Activities.Statements
                     readWriteValues = new Dictionary<XName, object>(1);
                     writeOnlyValues = new Dictionary<XName, object>(1);
                     readWriteValues.Add(timerTableName, this.registeredTimers);
-                    writeOnlyValues.Add(timerExpirationTimeName, this.registeredTimers.GetNextDueTime());
+                    writeOnlyValues.Add(
+                        timerExpirationTimeName,
+                        this.registeredTimers.GetNextDueTime()
+                    );
                 }
             }
         }
@@ -136,7 +151,10 @@ namespace System.Activities.Statements
             lock (this.ThisLock)
             {
                 object timerTable;
-                if (readWriteValues != null && readWriteValues.TryGetValue(timerTableName, out timerTable))
+                if (
+                    readWriteValues != null
+                    && readWriteValues.TryGetValue(timerTableName, out timerTable)
+                )
                 {
                     this.registeredTimers = timerTable as TimerTable;
                     Fx.Assert(this.RegisteredTimers != null, "Timer Table cannot be null");
@@ -158,9 +176,14 @@ namespace System.Activities.Statements
                 IAsyncResult result = null;
                 bool completed = false;
 
-                result = targetInstance.BeginResumeBookmark(timerBookmark, null, TimeSpan.MaxValue,
-                    onResumeBookmarkComplete, new BookmarkResumptionState(timerBookmark, this, targetInstance));
-                completed = result.CompletedSynchronously; 
+                result = targetInstance.BeginResumeBookmark(
+                    timerBookmark,
+                    null,
+                    TimeSpan.MaxValue,
+                    onResumeBookmarkComplete,
+                    new BookmarkResumptionState(timerBookmark, this, targetInstance)
+                );
+                completed = result.CompletedSynchronously;
 
                 if (completed && result != null)
                 {
@@ -171,7 +194,10 @@ namespace System.Activities.Statements
                     }
                     catch (TimeoutException)
                     {
-                        ProcessBookmarkResumptionResult(timerBookmark, BookmarkResumptionResult.NotReady);
+                        ProcessBookmarkResumptionResult(
+                            timerBookmark,
+                            BookmarkResumptionResult.NotReady
+                        );
                     }
                 }
             }
@@ -187,11 +213,16 @@ namespace System.Activities.Statements
             BookmarkResumptionState state = (BookmarkResumptionState)result.AsyncState;
 
             BookmarkResumptionResult resumptionResult = state.Instance.EndResumeBookmark(result);
-            state.TimerExtension.ProcessBookmarkResumptionResult(state.TimerBookmark, resumptionResult);
+            state.TimerExtension.ProcessBookmarkResumptionResult(
+                state.TimerBookmark,
+                resumptionResult
+            );
         }
 
-
-        void ProcessBookmarkResumptionResult(Bookmark timerBookmark, BookmarkResumptionResult result)
+        void ProcessBookmarkResumptionResult(
+            Bookmark timerBookmark,
+            BookmarkResumptionResult result
+        )
         {
             switch (result)
             {
@@ -210,8 +241,8 @@ namespace System.Activities.Statements
                 case BookmarkResumptionResult.NotReady:
                     // The workflow maybe in one of these states: Completed, Aborted, Abandoned, unloading, Suspended
                     // In the first 3 cases, we will let TimerExtension.CancelTimer take care of the cleanup.
-                    // In the 4th case, we want the timer to retry when it is loaded back, in all 4 cases we don't need to delete the timer 
-                    // In the 5th case, we want the timer to retry until it succeeds. 
+                    // In the 4th case, we want the timer to retry when it is loaded back, in all 4 cases we don't need to delete the timer
+                    // In the 5th case, we want the timer to retry until it succeeds.
                     // Retry:
                     lock (this.ThisLock)
                     {
@@ -227,7 +258,7 @@ namespace System.Activities.Statements
             {
                 lock (this.ThisLock)
                 {
-                    this.isDisposed = true; 
+                    this.isDisposed = true;
                     if (this.registeredTimers != null)
                     {
                         this.registeredTimers.Dispose();
@@ -236,7 +267,7 @@ namespace System.Activities.Statements
             }
             GC.SuppressFinalize(this);
         }
-        
+
         void ICancelable.Cancel()
         {
             Dispose();
@@ -244,30 +275,22 @@ namespace System.Activities.Statements
 
         class BookmarkResumptionState
         {
-            public BookmarkResumptionState(Bookmark timerBookmark, DurableTimerExtension timerExtension, WorkflowInstanceProxy instance)
+            public BookmarkResumptionState(
+                Bookmark timerBookmark,
+                DurableTimerExtension timerExtension,
+                WorkflowInstanceProxy instance
+            )
             {
                 this.TimerBookmark = timerBookmark;
                 this.TimerExtension = timerExtension;
                 this.Instance = instance;
             }
 
-            public Bookmark TimerBookmark
-            {
-                get;
-                private set;
-            }
+            public Bookmark TimerBookmark { get; private set; }
 
-            public DurableTimerExtension TimerExtension
-            {
-                get;
-                private set;
-            }
+            public DurableTimerExtension TimerExtension { get; private set; }
 
-            public WorkflowInstanceProxy Instance
-            {
-                get;
-                private set;
-            }
+            public WorkflowInstanceProxy Instance { get; private set; }
         }
 
         class TimerPersistenceParticipant : PersistenceIOParticipant
@@ -280,7 +303,10 @@ namespace System.Activities.Statements
                 this.defaultTimerExtension = timerExtension;
             }
 
-            protected override void CollectValues(out IDictionary<XName, object> readWriteValues, out IDictionary<XName, object> writeOnlyValues)
+            protected override void CollectValues(
+                out IDictionary<XName, object> readWriteValues,
+                out IDictionary<XName, object> writeOnlyValues
+            )
             {
                 this.defaultTimerExtension.OnSave(out readWriteValues, out writeOnlyValues);
             }
@@ -290,7 +316,13 @@ namespace System.Activities.Statements
                 this.defaultTimerExtension.OnLoad(readWriteValues);
             }
 
-            protected override IAsyncResult BeginOnSave(IDictionary<XName, object> readWriteValues, IDictionary<XName, object> writeOnlyValues, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult BeginOnSave(
+                IDictionary<XName, object> readWriteValues,
+                IDictionary<XName, object> writeOnlyValues,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 this.defaultTimerExtension.PersistenceDone();
                 return base.BeginOnSave(readWriteValues, writeOnlyValues, timeout, callback, state);

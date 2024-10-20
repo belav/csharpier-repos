@@ -21,7 +21,9 @@ namespace System.Reflection.Emit.Tests
         public void DefineGenericParameters(string[] typeParamNames)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            GenericTypeParameterBuilder[] genericParameters = type.DefineGenericParameters(typeParamNames);
+            GenericTypeParameterBuilder[] genericParameters = type.DefineGenericParameters(
+                typeParamNames
+            );
             Assert.True(type.IsGenericType);
             Assert.True(type.IsGenericTypeDefinition);
             for (int i = 0; i < typeParamNames.Length; i++)
@@ -54,21 +56,30 @@ namespace System.Reflection.Emit.Tests
         public void DefineGenericParameters_NullNames_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>("names", () => type.DefineGenericParameters(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "names",
+                () => type.DefineGenericParameters(null)
+            );
         }
 
         [Fact]
         public void DefineGenericParameters_EmptyNames_ThrowsArgumentException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentException>("names", () => type.DefineGenericParameters(new string[0]));
+            AssertExtensions.Throws<ArgumentException>(
+                "names",
+                () => type.DefineGenericParameters(new string[0])
+            );
         }
 
         [Fact]
         public void DefineGenericParameters_NullName_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>("names", () => type.DefineGenericParameters(new string[] { null }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "names",
+                () => type.DefineGenericParameters(new string[] { null })
+            );
         }
 
         [Fact]

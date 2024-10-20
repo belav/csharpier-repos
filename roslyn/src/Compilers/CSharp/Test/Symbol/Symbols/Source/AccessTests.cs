@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Access_3_5_1_a()
         {
             var text =
-@"
+                @"
 namespace A {}
 ";
             var tree = Parse(text);
@@ -38,7 +38,7 @@ namespace A {}
         public void Access_3_5_1_b()
         {
             var text =
-@"
+                @"
 public namespace A {}
 ";
             var tree = Parse(text);
@@ -51,7 +51,8 @@ public namespace A {}
             comp.VerifyDiagnostics(
                 // (2,1): error CS1671: A namespace declaration cannot have modifiers or attributes
                 // public namespace A {}
-                Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "public").WithLocation(2, 1));
+                Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "public").WithLocation(2, 1)
+            );
         }
 
         // Types declared in compilation units or namespaces can have public or internal declared accessibility.
@@ -59,7 +60,7 @@ public namespace A {}
         public void Access_3_5_1_c()
         {
             var text =
-@"
+                @"
 public class A {}
 internal class B {}
 namespace X {
@@ -80,7 +81,7 @@ namespace X {
         public void Access_3_5_1_d()
         {
             var text =
-@"
+                @"
 private class A {}
 protected class B {}
 protected internal class C {}
@@ -99,7 +100,7 @@ namespace X {
         }
 
         // TODO: Types declared in compilation units or namespaces default to internal declared accessibility.
-        // TODO: Class members can have any of the five kinds of declared accessibility. 
+        // TODO: Class members can have any of the five kinds of declared accessibility.
         // TODO: Class members default to private declared accessibility.
         // TODO: A type declared as a member of a namespace can have only public or internal declared accessibility.
         // TODO: Struct members can have public, internal, or private declared accessibility.
@@ -113,7 +114,8 @@ namespace X {
         [Fact]
         public void AccessInternalClassWithPublicConstructor()
         {
-            var text = @"
+            var text =
+                @"
 class C1
 {
     public void M1(C1 c) { }
@@ -128,7 +130,8 @@ class C1
         [Fact]
         public void ProtectedAcrossClasses01()
         {
-            var text = @"
+            var text =
+                @"
 public class C<T>
 {
     protected class A { }
@@ -150,7 +153,8 @@ public class E
         [Fact]
         public void ProtectedAcrossClasses02()
         {
-            var text = @"
+            var text =
+                @"
 class B
 {
     protected class I

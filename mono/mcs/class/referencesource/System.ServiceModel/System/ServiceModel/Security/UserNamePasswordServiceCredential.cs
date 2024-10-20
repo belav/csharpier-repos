@@ -14,11 +14,15 @@ namespace System.ServiceModel.Security
 
     public sealed class UserNamePasswordServiceCredential
     {
-        internal const UserNamePasswordValidationMode DefaultUserNamePasswordValidationMode = UserNamePasswordValidationMode.Windows;
+        internal const UserNamePasswordValidationMode DefaultUserNamePasswordValidationMode =
+            UserNamePasswordValidationMode.Windows;
         internal const bool DefaultCacheLogonTokens = false;
         internal const int DefaultMaxCachedLogonTokens = 128;
         internal const string DefaultCachedLogonTokenLifetimeString = "00:15:00";
-        internal static readonly TimeSpan DefaultCachedLogonTokenLifetime = TimeSpan.Parse(DefaultCachedLogonTokenLifetimeString, CultureInfo.InvariantCulture);
+        internal static readonly TimeSpan DefaultCachedLogonTokenLifetime = TimeSpan.Parse(
+            DefaultCachedLogonTokenLifetimeString,
+            CultureInfo.InvariantCulture
+        );
 
         UserNamePasswordValidationMode validationMode = DefaultUserNamePasswordValidationMode;
         UserNamePasswordValidator validator;
@@ -46,39 +50,30 @@ namespace System.ServiceModel.Security
             this.isReadOnly = other.isReadOnly;
         }
 
-        public UserNamePasswordValidationMode UserNamePasswordValidationMode 
-        { 
-            get 
-            {
-                return this.validationMode;
-            } 
-            set 
+        public UserNamePasswordValidationMode UserNamePasswordValidationMode
+        {
+            get { return this.validationMode; }
+            set
             {
                 UserNamePasswordValidationModeHelper.Validate(value);
                 ThrowIfImmutable();
                 this.validationMode = value;
-            } 
+            }
         }
 
-        public UserNamePasswordValidator CustomUserNamePasswordValidator 
-        { 
-            get 
-            {
-                return this.validator; 
-            } 
-            set 
+        public UserNamePasswordValidator CustomUserNamePasswordValidator
+        {
+            get { return this.validator; }
+            set
             {
                 ThrowIfImmutable();
                 this.validator = value;
-            } 
+            }
         }
 
         public MembershipProvider MembershipProvider
         {
-            get
-            {
-                return (MembershipProvider)this.membershipProvider;
-            }
+            get { return (MembershipProvider)this.membershipProvider; }
             set
             {
                 ThrowIfImmutable();
@@ -88,10 +83,7 @@ namespace System.ServiceModel.Security
 
         public bool IncludeWindowsGroups
         {
-            get
-            {
-                return this.includeWindowsGroups;
-            }
+            get { return this.includeWindowsGroups; }
             set
             {
                 ThrowIfImmutable();
@@ -101,10 +93,7 @@ namespace System.ServiceModel.Security
 
         public bool CacheLogonTokens
         {
-            get
-            {
-                return this.cacheLogonTokens;
-            }
+            get { return this.cacheLogonTokens; }
             set
             {
                 ThrowIfImmutable();
@@ -114,15 +103,17 @@ namespace System.ServiceModel.Security
 
         public int MaxCachedLogonTokens
         {
-            get
-            {
-                return this.maxCachedLogonTokens;
-            }
+            get { return this.maxCachedLogonTokens; }
             set
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.ValueMustBeGreaterThanZero)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBeGreaterThanZero)
+                        )
+                    );
                 }
                 ThrowIfImmutable();
                 this.maxCachedLogonTokens = value;
@@ -131,21 +122,28 @@ namespace System.ServiceModel.Security
 
         public TimeSpan CachedLogonTokenLifetime
         {
-            get
-            {
-                return this.cachedLogonTokenLifetime;
-            }
+            get { return this.cachedLogonTokenLifetime; }
             set
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
                 ThrowIfImmutable();
                 this.cachedLogonTokenLifetime = value;
@@ -162,7 +160,11 @@ namespace System.ServiceModel.Security
             {
                 if (this.validator == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MissingCustomUserNamePasswordValidator)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MissingCustomUserNamePasswordValidator)
+                        )
+                    );
                 }
                 return this.validator;
             }
@@ -186,7 +188,9 @@ namespace System.ServiceModel.Security
 
             if (provider == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MissingMembershipProvider)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MissingMembershipProvider))
+                );
             }
             return UserNamePasswordValidator.CreateMembershipProviderValidator(provider);
         }
@@ -200,7 +204,9 @@ namespace System.ServiceModel.Security
         {
             if (this.isReadOnly)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                );
             }
         }
     }

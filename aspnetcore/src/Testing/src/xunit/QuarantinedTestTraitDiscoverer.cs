@@ -19,7 +19,9 @@ public class QuarantinedTestTraitDiscoverer : ITraitDiscoverer
         }
         else
         {
-            throw new InvalidOperationException("The 'QuarantinedTest' attribute is only supported via reflection.");
+            throw new InvalidOperationException(
+                "The 'QuarantinedTest' attribute is only supported via reflection."
+            );
         }
     }
 }

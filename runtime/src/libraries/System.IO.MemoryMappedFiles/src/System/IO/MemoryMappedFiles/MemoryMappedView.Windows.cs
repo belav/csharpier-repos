@@ -11,11 +11,15 @@ namespace System.IO.MemoryMappedFiles
     internal sealed partial class MemoryMappedView
     {
         // These control the retry behaviour when lock violation errors occur during Flush:
-        private const int MaxFlushWaits = 15;  // must be <=30
+        private const int MaxFlushWaits = 15; // must be <=30
         private const int MaxFlushRetriesPerWait = 20;
 
-        public static MemoryMappedView CreateView(SafeMemoryMappedFileHandle memMappedFileHandle,
-                                            MemoryMappedFileAccess access, long offset, long size)
+        public static MemoryMappedView CreateView(
+            SafeMemoryMappedFileHandle memMappedFileHandle,
+            MemoryMappedFileAccess access,
+            long offset,
+            long size
+        )
         {
             // MapViewOfFile can only create views that start at a multiple of the system memory allocation
             // granularity. We decided to hide this restriction from the user by creating larger views than the
@@ -24,18 +28,28 @@ namespace System.IO.MemoryMappedFiles
             // capacity of the view to the nearest multiple of the system page size.  Once again, we hide this
             // from the user by preventing them from writing to any memory that they did not request.
             ulong nativeSize;
-            long extraMemNeeded, newOffset;
+            long extraMemNeeded,
+                newOffset;
             ValidateSizeAndOffset(
-                size, offset, GetSystemPageAllocationGranularity(),
-                out nativeSize, out extraMemNeeded, out newOffset);
+                size,
+                offset,
+                GetSystemPageAllocationGranularity(),
+                out nativeSize,
+                out extraMemNeeded,
+                out newOffset
+            );
 
             // if request is >= than total virtual, then MapViewOfFile will fail with meaningless error message
             // "the parameter is incorrect"; this provides better error message in advance
             Interop.CheckForAvailableVirtualMemory(nativeSize);
 
             // create the view
-            SafeMemoryMappedViewHandle viewHandle = Interop.MapViewOfFile(memMappedFileHandle,
-                    (int)MemoryMappedFile.GetFileMapAccess(access), newOffset, new UIntPtr(nativeSize));
+            SafeMemoryMappedViewHandle viewHandle = Interop.MapViewOfFile(
+                memMappedFileHandle,
+                (int)MemoryMappedFile.GetFileMapAccess(access),
+                newOffset,
+                new UIntPtr(nativeSize)
+            );
             if (viewHandle.IsInvalid)
             {
                 viewHandle.Dispose();
@@ -44,7 +58,11 @@ namespace System.IO.MemoryMappedFiles
 
             // Query the view for its size and allocation type
             Interop.Kernel32.MEMORY_BASIC_INFORMATION viewInfo = default;
-            Interop.Kernel32.VirtualQuery(viewHandle, ref viewInfo, (UIntPtr)Marshal.SizeOf(viewInfo));
+            Interop.Kernel32.VirtualQuery(
+                viewHandle,
+                ref viewInfo,
+                (UIntPtr)Marshal.SizeOf(viewInfo)
+            );
             ulong viewSize = (ulong)viewInfo.RegionSize;
 
             // Allocate the pages if we were using the MemoryMappedFileOptions.DelayAllocatePages option
@@ -57,11 +75,17 @@ namespace System.IO.MemoryMappedFiles
             // This is because, VirtualQuery function(that internally invokes VirtualQueryEx function) returns the attributes
             // and size of the region of pages with matching attributes starting from base address.
             // VirtualQueryEx: https://msdn.microsoft.com/en-us/library/windows/desktop/aa366907(v=vs.85).aspx
-            if (((viewInfo.State & Interop.Kernel32.MemOptions.MEM_RESERVE) != 0) || ((ulong)viewSize < (ulong)nativeSize))
+            if (
+                ((viewInfo.State & Interop.Kernel32.MemOptions.MEM_RESERVE) != 0)
+                || ((ulong)viewSize < (ulong)nativeSize)
+            )
             {
                 Interop.VirtualAlloc(
-                    viewHandle, (nuint)(nativeSize != MemoryMappedFile.DefaultSize ? nativeSize : viewSize),
-                    Interop.Kernel32.MemOptions.MEM_COMMIT, MemoryMappedFile.GetPageAccess(access));
+                    viewHandle,
+                    (nuint)(nativeSize != MemoryMappedFile.DefaultSize ? nativeSize : viewSize),
+                    Interop.Kernel32.MemOptions.MEM_COMMIT,
+                    MemoryMappedFile.GetPageAccess(access)
+                );
                 int lastError = Marshal.GetLastPInvokeError();
                 if (viewHandle.IsInvalid)
                 {
@@ -70,7 +94,11 @@ namespace System.IO.MemoryMappedFiles
                 }
                 // again query the view for its new size
                 viewInfo = default;
-                Interop.Kernel32.VirtualQuery(viewHandle, ref viewInfo, (UIntPtr)Marshal.SizeOf(viewInfo));
+                Interop.Kernel32.VirtualQuery(
+                    viewHandle,
+                    ref viewInfo,
+                    (UIntPtr)Marshal.SizeOf(viewInfo)
+                );
                 viewSize = (ulong)viewInfo.RegionSize;
             }
 
@@ -117,7 +145,7 @@ namespace System.IO.MemoryMappedFiles
                 SpinWait spinWait = default;
                 for (int w = 0; w < MaxFlushWaits; w++)
                 {
-                    int pause = (1 << w);  // MaxFlushRetries should never be over 30
+                    int pause = (1 << w); // MaxFlushRetries should never be over 30
                     Thread.Sleep(pause);
 
                     for (int r = 0; r < MaxFlushRetriesPerWait; r++)

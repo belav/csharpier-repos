@@ -5,12 +5,11 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class ToSqlQuerySqlServerTest : ToSqlQueryTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Entity_type_with_navigation_mapped_to_SqlQuery(bool async)
     {
@@ -23,9 +22,10 @@ FROM [Authors] AS [a]
 LEFT JOIN (
     SELECT * FROM PostStats
 ) AS [m] ON [a].[PostStatAuthorId] = [m].[AuthorId]
-""");
+"""
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 }

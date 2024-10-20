@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,38 +25,39 @@
 
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 
-namespace MonoTests.System.IO.Packaging {
-
-    public class FakeStream : MemoryStream {
+namespace MonoTests.System.IO.Packaging
+{
+    public class FakeStream : MemoryStream
+    {
         public bool canRead;
         public bool canSeek;
         public bool canWrite;
 
-        public FakeStream ()
-            : this (true, true, true)
-        {
+        public FakeStream()
+            : this(true, true, true) { }
 
-        }
-
-        public FakeStream (bool canread, bool canWrite, bool canSeek)
+        public FakeStream(bool canread, bool canWrite, bool canSeek)
         {
             this.canRead = canread;
             this.canSeek = canSeek;
             this.canWrite = canWrite;
         }
 
-        public override bool CanRead {
+        public override bool CanRead
+        {
             get { return canRead; }
         }
 
-        public override bool CanSeek {
+        public override bool CanSeek
+        {
             get { return canSeek; }
         }
 
-        public override bool CanWrite {
+        public override bool CanWrite
+        {
             get { return canWrite; }
         }
     }

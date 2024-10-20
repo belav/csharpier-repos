@@ -29,7 +29,12 @@ public class BarebonesMatcherConformanceTest : MatcherConformanceTest
     // Route values not supported
     [Theory]
     [InlineData(null, null, null, null)]
-    public override Task Match_MultipleParameters(string template, string path, string[] keys, string[] values)
+    public override Task Match_MultipleParameters(
+        string template,
+        string path,
+        string[] keys,
+        string[] values
+    )
     {
         GC.KeepAlive(new object[] { template, path, keys, values });
         return Task.CompletedTask;

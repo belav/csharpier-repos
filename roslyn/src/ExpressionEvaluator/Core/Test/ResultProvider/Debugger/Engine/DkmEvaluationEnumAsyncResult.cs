@@ -31,7 +31,10 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 
         public static DkmEvaluationEnumAsyncResult CreateErrorResult(Exception exception)
         {
-            return new DkmEvaluationEnumAsyncResult(new DkmEvaluationResult[0]) { Exception = exception };
+            return new DkmEvaluationEnumAsyncResult(new DkmEvaluationResult[0])
+            {
+                Exception = exception,
+            };
         }
     }
 }

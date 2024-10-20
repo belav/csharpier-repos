@@ -11,15 +11,26 @@ using Microsoft.CodeAnalysis.SplitOrMergeIfStatements;
 
 namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.SplitIntoNestedIfStatements), Shared]
-    [ExtensionOrder(After = PredefinedCodeRefactoringProviderNames.InvertLogical, Before = PredefinedCodeRefactoringProviderNames.IntroduceVariable)]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.SplitIntoNestedIfStatements
+        ),
+        Shared
+    ]
+    [ExtensionOrder(
+        After = PredefinedCodeRefactoringProviderNames.InvertLogical,
+        Before = PredefinedCodeRefactoringProviderNames.IntroduceVariable
+    )]
     internal sealed class CSharpSplitIntoNestedIfStatementsCodeRefactoringProvider
         : AbstractSplitIntoNestedIfStatementsCodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpSplitIntoNestedIfStatementsCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpSplitIntoNestedIfStatementsCodeRefactoringProvider() { }
     }
 }

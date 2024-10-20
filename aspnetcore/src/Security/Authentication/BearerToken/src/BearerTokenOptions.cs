@@ -47,7 +47,9 @@ public sealed class BearerTokenOptions : AuthenticationSchemeOptions
     /// </summary>
     public ISecureDataFormat<AuthenticationTicket> BearerTokenProtector
     {
-        get => _bearerTokenProtector ?? throw new InvalidOperationException($"{nameof(BearerTokenProtector)} was not set.");
+        get =>
+            _bearerTokenProtector
+            ?? throw new InvalidOperationException($"{nameof(BearerTokenProtector)} was not set.");
         set => _bearerTokenProtector = value;
     }
 
@@ -58,7 +60,9 @@ public sealed class BearerTokenOptions : AuthenticationSchemeOptions
     /// </summary>
     public ISecureDataFormat<AuthenticationTicket> RefreshTokenProtector
     {
-        get => _refreshTokenProtector ?? throw new InvalidOperationException($"{nameof(RefreshTokenProtector)} was not set.");
+        get =>
+            _refreshTokenProtector
+            ?? throw new InvalidOperationException($"{nameof(RefreshTokenProtector)} was not set.");
         set => _refreshTokenProtector = value;
     }
 
@@ -73,4 +77,3 @@ public sealed class BearerTokenOptions : AuthenticationSchemeOptions
         set { base.Events = value; }
     }
 }
-

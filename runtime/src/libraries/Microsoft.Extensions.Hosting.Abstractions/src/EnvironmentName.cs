@@ -10,7 +10,9 @@ namespace Microsoft.Extensions.Hosting
     ///  The recommended alternative is Microsoft.Extensions.Hosting.Environments.
     /// </para>
     /// </summary>
-    [System.Obsolete("EnvironmentName has been deprecated. Use Microsoft.Extensions.Hosting.Environments instead.")]
+    [System.Obsolete(
+        "EnvironmentName has been deprecated. Use Microsoft.Extensions.Hosting.Environments instead."
+    )]
     public static class EnvironmentName
     {
         /// <summary>

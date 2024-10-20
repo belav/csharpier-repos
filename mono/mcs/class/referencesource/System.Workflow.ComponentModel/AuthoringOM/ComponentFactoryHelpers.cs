@@ -3,8 +3,8 @@ namespace System.Workflow.ComponentModel
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.Reflection;
     using System.Workflow.ComponentModel.Compiler;
@@ -12,7 +12,8 @@ namespace System.Workflow.ComponentModel
     #region Class ComponentDispenser
     internal static class ComponentDispenser
     {
-        private static IDictionary<Type, List<IExtenderProvider>> componentExtenderMap = new Dictionary<Type, List<IExtenderProvider>>();
+        private static IDictionary<Type, List<IExtenderProvider>> componentExtenderMap =
+            new Dictionary<Type, List<IExtenderProvider>>();
 
         //it is super critical to note that even though we pass activity instead of a System.Type
         //here, the method impl does not rely on any objectness but relies only on typeness
@@ -58,15 +59,26 @@ namespace System.Workflow.ComponentModel
             GetCustomAttributes(objectType, typeof(ActivityCodeGeneratorAttribute), true);
             GetCustomAttributes(objectType, typeof(ActivityValidatorAttribute), true);
             GetCustomAttributes(objectType, typeof(System.ComponentModel.DesignerAttribute), true);
-            GetCustomAttributes(objectType, typeof(System.ComponentModel.Design.Serialization.DesignerSerializerAttribute), true);
+            GetCustomAttributes(
+                objectType,
+                typeof(System.ComponentModel.Design.Serialization.DesignerSerializerAttribute),
+                true
+            );
 
-            if (objectType.GetCustomAttributes(typeof(SupportsTransactionAttribute), true).Length > 0)
+            if (
+                objectType.GetCustomAttributes(typeof(SupportsTransactionAttribute), true).Length
+                > 0
+            )
             {
                 if (componentTypeAttribute == typeof(ActivityValidatorAttribute))
                     supportsTransactionComponents.Add(new TransactionContextValidator());
             }
 
-            if (objectType.GetCustomAttributes(typeof(SupportsSynchronizationAttribute), true).Length > 0)
+            if (
+                objectType
+                    .GetCustomAttributes(typeof(SupportsSynchronizationAttribute), true)
+                    .Length > 0
+            )
             {
                 if (componentTypeAttribute == typeof(ActivityValidatorAttribute))
                     supportsSynchronizationComponents.Add(new SynchronizationValidator());
@@ -81,10 +93,18 @@ namespace System.Workflow.ComponentModel
             //Goto all the interfaces and collect matching attributes and component factories
             ArrayList customAttributes = new ArrayList();
             foreach (Type interfaceType in objectType.GetInterfaces())
-                customAttributes.AddRange(ComponentDispenser.GetCustomAttributes(interfaceType, componentTypeAttribute, true));
+                customAttributes.AddRange(
+                    ComponentDispenser.GetCustomAttributes(
+                        interfaceType,
+                        componentTypeAttribute,
+                        true
+                    )
+                );
 
             //Add all the component's attributes
-            customAttributes.AddRange(ComponentDispenser.GetCustomAttributes(objectType, componentTypeAttribute, true));
+            customAttributes.AddRange(
+                ComponentDispenser.GetCustomAttributes(objectType, componentTypeAttribute, true)
+            );
 
             string typeName = null;
             foreach (Attribute attribute in customAttributes)
@@ -109,26 +129,42 @@ namespace System.Workflow.ComponentModel
                 try
                 {
                     if (!String.IsNullOrEmpty(typeName))
-                        component = ComponentDispenser.CreateComponentInstance(typeName, objectType);
+                        component = ComponentDispenser.CreateComponentInstance(
+                            typeName,
+                            objectType
+                        );
                 }
-                catch
-                {
-                }
+                catch { }
 
-                if ((component != null && expectedBaseType != null && expectedBaseType.IsAssignableFrom(component.GetType())))
+                if (
+                    (
+                        component != null
+                        && expectedBaseType != null
+                        && expectedBaseType.IsAssignableFrom(component.GetType())
+                    )
+                )
                 {
                     if (!components.ContainsKey(component.GetType()))
                         components.Add(component.GetType(), component);
                 }
                 else
                 {
-                    throw new InvalidOperationException(SR.GetString(SR.Error_InvalidAttribute, componentTypeAttribute.Name, objectType.FullName));
+                    throw new InvalidOperationException(
+                        SR.GetString(
+                            SR.Error_InvalidAttribute,
+                            componentTypeAttribute.Name,
+                            objectType.FullName
+                        )
+                    );
                 }
             }
             return new ArrayList(components.Values).ToArray();
         }
 
-        private static void AddComponents(Dictionary<Type, object> components, object[] attribComponents)
+        private static void AddComponents(
+            Dictionary<Type, object> components,
+            object[] attribComponents
+        )
         {
             foreach (object component in attribComponents)
             {
@@ -136,7 +172,11 @@ namespace System.Workflow.ComponentModel
                     components.Add(component.GetType(), component);
             }
         }
-        internal static void RegisterComponentExtenders(Type extendingType, IExtenderProvider[] extenders)
+
+        internal static void RegisterComponentExtenders(
+            Type extendingType,
+            IExtenderProvider[] extenders
+        )
         {
             //Make sure that there are no previous registered components
             List<IExtenderProvider> extenderProviders = null;
@@ -158,7 +198,9 @@ namespace System.Workflow.ComponentModel
             get
             {
                 List<IExtenderProvider> extenders = new List<IExtenderProvider>();
-                foreach (IList<IExtenderProvider> registeredExtenders in componentExtenderMap.Values)
+                foreach (
+                    IList<IExtenderProvider> registeredExtenders in componentExtenderMap.Values
+                )
                     extenders.AddRange(registeredExtenders);
                 return extenders.AsReadOnly();
             }
@@ -186,9 +228,7 @@ namespace System.Workflow.ComponentModel
                 }
                 componentType = referenceType.Assembly.GetType(typeFullName, false);
             }
-            catch
-            {
-            }
+            catch { }
 
             if (componentType == null)
             {
@@ -196,9 +236,7 @@ namespace System.Workflow.ComponentModel
                 {
                     componentType = Type.GetType(typeName, false);
                 }
-                catch
-                {
-                }
+                catch { }
             }
 
             string message = null;
@@ -217,15 +255,27 @@ namespace System.Workflow.ComponentModel
 
             if (component == null)
             {
-                System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager("System.Workflow.ComponentModel.StringResources", typeof(System.Workflow.ComponentModel.Activity).Assembly);
+                System.Resources.ResourceManager resourceManager =
+                    new System.Resources.ResourceManager(
+                        "System.Workflow.ComponentModel.StringResources",
+                        typeof(System.Workflow.ComponentModel.Activity).Assembly
+                    );
                 if (resourceManager != null)
-                    message = string.Format(CultureInfo.CurrentCulture, resourceManager.GetString("Error_CantCreateInstanceOfComponent"), new object[] { typeName, message });
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        resourceManager.GetString("Error_CantCreateInstanceOfComponent"),
+                        new object[] { typeName, message }
+                    );
                 throw new Exception(message);
             }
             return component;
         }
 
-        private static object[] GetCustomAttributes(Type objectType, Type attributeType, bool inherit)
+        private static object[] GetCustomAttributes(
+            Type objectType,
+            Type attributeType,
+            bool inherit
+        )
         {
             object[] attribs = null;
             try
@@ -237,7 +287,10 @@ namespace System.Workflow.ComponentModel
             }
             catch (Exception e)
             {
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidAttributes, objectType.FullName), e);
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_InvalidAttributes, objectType.FullName),
+                    e
+                );
             }
 
             return attribs;

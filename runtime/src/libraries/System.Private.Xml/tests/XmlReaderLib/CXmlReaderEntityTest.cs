@@ -29,7 +29,8 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
@@ -54,7 +55,8 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
@@ -79,11 +81,15 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (b)
                     return TEST_PASS;
                 else
-                    throw new CTestException(CTestBase.TEST_FAIL, "ResolveEntity for Attribute returns true");
+                    throw new CTestException(
+                        CTestBase.TEST_FAIL,
+                        "ResolveEntity for Attribute returns true"
+                    );
             }
             return TEST_FAIL;
         }
@@ -104,11 +110,15 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
-                    throw new CTestException(CTestBase.TEST_FAIL, "ResolveEntity for Text returns true");
+                    throw new CTestException(
+                        CTestBase.TEST_FAIL,
+                        "ResolveEntity for Text returns true"
+                    );
             }
             return TEST_FAIL;
         }
@@ -132,11 +142,15 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
-                    throw new CTestException(CTestBase.TEST_FAIL, "ResolveEntity for CDATA returns true");
+                    throw new CTestException(
+                        CTestBase.TEST_FAIL,
+                        "ResolveEntity for CDATA returns true"
+                    );
             }
             return TEST_FAIL;
         }
@@ -157,11 +171,15 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
-                    throw new CTestException(CTestBase.TEST_FAIL, "ResolveEntity for PI returns true");
+                    throw new CTestException(
+                        CTestBase.TEST_FAIL,
+                        "ResolveEntity for PI returns true"
+                    );
             }
             return TEST_FAIL;
         }
@@ -182,11 +200,15 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
-                    throw new CTestException(CTestBase.TEST_FAIL, "ResolveEntity for Comment returns true");
+                    throw new CTestException(
+                        CTestBase.TEST_FAIL,
+                        "ResolveEntity for Comment returns true"
+                    );
             }
             return TEST_FAIL;
         }
@@ -210,7 +232,8 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
@@ -235,7 +258,8 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
@@ -263,7 +287,8 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
@@ -275,7 +300,13 @@ namespace System.Xml.Tests
         [Variation("ResolveEntity On EndEntity")]
         public int TestResolveEntityNodeType_EndEntity()
         {
-            if (IsXsltReader() || IsXmlTextReader() || IsXmlNodeReaderDataDoc() || IsCoreReader() || IsXPathNavigatorReader())
+            if (
+                IsXsltReader()
+                || IsXmlTextReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsCoreReader()
+                || IsXPathNavigatorReader()
+            )
                 return TEST_SKIPPED;
 
             ReloadSource();
@@ -293,7 +324,8 @@ namespace System.Xml.Tests
                 }
                 throw new CTestException(CTestBase.TEST_FAIL, WRONG_EXCEPTION);
 
-            next: bool b = DataReader.ReadAttributeValue();
+                next:
+                bool b = DataReader.ReadAttributeValue();
                 if (!b)
                     return TEST_PASS;
                 else
@@ -372,7 +404,10 @@ namespace System.Xml.Tests
             return BoolToLTMResult(bPassed);
         }
 
-        [Variation("ReadAttributeValue where Attribute count = 1 and value is empty String", Pri = 0)]
+        [Variation(
+            "ReadAttributeValue where Attribute count = 1 and value is empty String",
+            Pri = 0
+        )]
         public int TestReadAttributeValue4()
         {
             bool bPassed = false;
@@ -391,7 +426,13 @@ namespace System.Xml.Tests
         [Variation("ReadAttributeValue successive calls")]
         public int TestReadAttributeValue5()
         {
-            if (IsXsltReader() || IsXmlNodeReaderDataDoc() || IsCoreReader() || IsBinaryReader() || IsXPathNavigatorReader())
+            if (
+                IsXsltReader()
+                || IsXmlNodeReaderDataDoc()
+                || IsCoreReader()
+                || IsBinaryReader()
+                || IsXPathNavigatorReader()
+            )
                 return TEST_SKIPPED;
 
             string strxml = "<!DOCTYPE ROOT [<!ENTITY e 'bbb'>]><ROOT attr='a&e;c'/>";
@@ -404,7 +445,10 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.VerifyNode(XmlNodeType.Text, string.Empty, "a"), "vna");
 
             CError.Compare(DataReader.ReadAttributeValue(), "rave");
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.EntityReference, "e", string.Empty), "vne");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.EntityReference, "e", string.Empty),
+                "vne"
+            );
 
             CError.Compare(DataReader.ReadAttributeValue(), "ravc");
             CError.Compare(DataReader.VerifyNode(XmlNodeType.Text, string.Empty, "c"), "vnc");
@@ -412,7 +456,10 @@ namespace System.Xml.Tests
             CError.Compare(!DataReader.ReadAttributeValue(), "nrav");
 
             DataReader.Read();
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.None, string.Empty, string.Empty), "vnn");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.None, string.Empty, string.Empty),
+                "vnn"
+            );
 
             return TEST_PASS;
         }

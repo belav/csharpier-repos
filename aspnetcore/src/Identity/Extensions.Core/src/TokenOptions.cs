@@ -33,7 +33,8 @@ public class TokenOptions
     /// <summary>
     /// Will be used to construct UserTokenProviders with the key used as the providerName.
     /// </summary>
-    public Dictionary<string, TokenProviderDescriptor> ProviderMap { get; set; } = new Dictionary<string, TokenProviderDescriptor>();
+    public Dictionary<string, TokenProviderDescriptor> ProviderMap { get; set; } =
+        new Dictionary<string, TokenProviderDescriptor>();
 
     /// <summary>
     /// Gets or sets the token provider used to generate tokens used in account confirmation emails.

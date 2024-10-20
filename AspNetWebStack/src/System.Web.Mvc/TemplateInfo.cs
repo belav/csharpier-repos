@@ -49,7 +49,10 @@ namespace System.Web.Mvc
 
         public string GetFullHtmlFieldName(string partialFieldName)
         {
-            if (partialFieldName != null && partialFieldName.StartsWith("[", StringComparison.Ordinal))
+            if (
+                partialFieldName != null
+                && partialFieldName.StartsWith("[", StringComparison.Ordinal)
+            )
             {
                 // See Codeplex #544 - the partialFieldName might represent an indexer access, in which case combining
                 // with a 'dot' would be invalid.

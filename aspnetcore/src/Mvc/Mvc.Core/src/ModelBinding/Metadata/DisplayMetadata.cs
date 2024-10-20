@@ -47,14 +47,8 @@ public class DisplayMetadata
     /// </remarks>
     public string? DisplayFormatString
     {
-        get
-        {
-            return DisplayFormatStringProvider();
-        }
-        set
-        {
-            DisplayFormatStringProvider = () => value;
-        }
+        get { return DisplayFormatStringProvider(); }
+        set { DisplayFormatStringProvider = () => value; }
     }
 
     /// <summary>
@@ -66,10 +60,7 @@ public class DisplayMetadata
     /// </remarks>
     public Func<string?> DisplayFormatStringProvider
     {
-        get
-        {
-            return _displayFormatStringProvider;
-        }
+        get { return _displayFormatStringProvider; }
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -100,14 +91,8 @@ public class DisplayMetadata
     /// </remarks>
     public string? EditFormatString
     {
-        get
-        {
-            return EditFormatStringProvider();
-        }
-        set
-        {
-            EditFormatStringProvider = () => value;
-        }
+        get { return EditFormatStringProvider(); }
+        set { EditFormatStringProvider = () => value; }
     }
 
     /// <summary>
@@ -125,10 +110,7 @@ public class DisplayMetadata
     /// </remarks>
     public Func<string?> EditFormatStringProvider
     {
-        get
-        {
-            return _editFormatStringProvider;
-        }
+        get { return _editFormatStringProvider; }
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -142,7 +124,9 @@ public class DisplayMetadata
     /// <see cref="ModelMetadata.UnderlyingOrModelType"/>. See
     /// <see cref="ModelMetadata.EnumGroupedDisplayNamesAndValues"/>.
     /// </summary>
-    public IEnumerable<KeyValuePair<EnumGroupAndName, string>>? EnumGroupedDisplayNamesAndValues { get; set; }
+    public IEnumerable<
+        KeyValuePair<EnumGroupAndName, string>
+    >? EnumGroupedDisplayNamesAndValues { get; set; }
 
     /// <summary>
     /// Gets the names and values of all <see cref="System.Enum"/> values in
@@ -193,14 +177,8 @@ public class DisplayMetadata
     /// </remarks>
     public string? NullDisplayText
     {
-        get
-        {
-            return NullDisplayTextProvider();
-        }
-        set
-        {
-            NullDisplayTextProvider = () => value;
-        }
+        get { return NullDisplayTextProvider(); }
+        set { NullDisplayTextProvider = () => value; }
     }
 
     /// <summary>
@@ -212,10 +190,7 @@ public class DisplayMetadata
     /// </remarks>
     public Func<string?> NullDisplayTextProvider
     {
-        get
-        {
-            return _nullDisplayTextProvider;
-        }
+        get { return _nullDisplayTextProvider; }
         set
         {
             ArgumentNullException.ThrowIfNull(value);

@@ -23,6 +23,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         BeforeOpenBraceInAnonymousMethods = 1 << 11,
         BeforeOpenBraceInLambdaExpressionBody = 1 << 12,
         BeforeOpenBraceInControlBlocks = 1 << 13,
-        BetweenQueryExpressionClauses = 1 << 14
+        BetweenQueryExpressionClauses = 1 << 14,
     }
 }

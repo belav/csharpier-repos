@@ -29,7 +29,13 @@ namespace System.Web.Http.Validation
         /// <param name="actionContext">The <see cref="HttpActionContext"/> within which the model is being validated.</param>
         /// <param name="keyPrefix">The <see cref="string"/> to append to the key for any validation errors.</param>
         /// <returns><c>true</c>if <paramref name="model"/> is valid, <c>false</c> otherwise.</returns>
-        public bool Validate(object model, Type type, ModelMetadataProvider metadataProvider, HttpActionContext actionContext, string keyPrefix)
+        public bool Validate(
+            object model,
+            Type type,
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            string keyPrefix
+        )
         {
             if (type == null)
             {
@@ -51,7 +57,9 @@ namespace System.Web.Http.Validation
                 return true;
             }
 
-            ModelValidatorProvider[] validatorProviders = actionContext.GetValidatorProviders().ToArray();
+            ModelValidatorProvider[] validatorProviders = actionContext
+                .GetValidatorProviders()
+                .ToArray();
             // Optimization : avoid validating the object graph if there are no validator providers
             if (validatorProviders == null || validatorProviders.Length == 0)
             {
@@ -59,14 +67,21 @@ namespace System.Web.Http.Validation
             }
 
             ModelMetadata metadata = metadataProvider.GetMetadataForType(() => model, type);
-            BodyModelValidatorContext validationContext = new BodyModelValidatorContext(actionContext.ModelState)
+            BodyModelValidatorContext validationContext = new BodyModelValidatorContext(
+                actionContext.ModelState
+            )
             {
                 MetadataProvider = metadataProvider,
                 ActionContext = actionContext,
                 ValidatorCache = actionContext.GetValidatorCache(),
-                RootPrefix = keyPrefix
+                RootPrefix = keyPrefix,
             };
-            return ValidateNodeAndChildren(metadata, validationContext, container: null, validators: null);
+            return ValidateNodeAndChildren(
+                metadata,
+                validationContext,
+                container: null,
+                validators: null
+            );
         }
 
         /// <summary>
@@ -90,12 +105,17 @@ namespace System.Web.Http.Validation
         /// <see langword="true"/> if validation succeeds for the given <paramref name="metadata"/>,
         /// <paramref name="container"/>, and child nodes; <see langword="false"/> otherwise.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "See comment below")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "See comment below"
+        )]
         protected virtual bool ValidateNodeAndChildren(
             ModelMetadata metadata,
             BodyModelValidatorContext validationContext,
             object container,
-            IEnumerable<ModelValidator> validators)
+            IEnumerable<ModelValidator> validators
+        )
         {
             // Recursion guard to avoid stack overflows
             RuntimeHelpers.EnsureSufficientExecutionStack();
@@ -126,7 +146,10 @@ namespace System.Web.Http.Validation
 
             if (validators == null)
             {
-                validators = validationContext.ActionContext.GetValidators(metadata, validationContext.ValidatorCache);
+                validators = validationContext.ActionContext.GetValidators(
+                    metadata,
+                    validationContext.ValidatorCache
+                );
             }
 
             // We don't need to recursively traverse the graph for null values
@@ -180,7 +203,10 @@ namespace System.Web.Http.Validation
         /// <see langword="true"/> if validation succeeds for all properties in <paramref name="metadata"/>;
         /// <see langword="false"/> otherwise.
         /// </returns>
-        protected virtual bool ValidateProperties(ModelMetadata metadata, BodyModelValidatorContext validationContext)
+        protected virtual bool ValidateProperties(
+            ModelMetadata metadata,
+            BodyModelValidatorContext validationContext
+        )
         {
             if (metadata == null)
             {
@@ -194,10 +220,22 @@ namespace System.Web.Http.Validation
             bool isValid = true;
             PropertyScope propertyScope = new PropertyScope();
             validationContext.KeyBuilders.Push(propertyScope);
-            foreach (ModelMetadata childMetadata in validationContext.MetadataProvider.GetMetadataForProperties(metadata.Model, metadata.RealModelType))
+            foreach (
+                ModelMetadata childMetadata in validationContext.MetadataProvider.GetMetadataForProperties(
+                    metadata.Model,
+                    metadata.RealModelType
+                )
+            )
             {
                 propertyScope.PropertyName = childMetadata.PropertyName;
-                if (!ValidateNodeAndChildren(childMetadata, validationContext, metadata.Model, validators: null))
+                if (
+                    !ValidateNodeAndChildren(
+                        childMetadata,
+                        validationContext,
+                        metadata.Model,
+                        validators: null
+                    )
+                )
                 {
                     isValid = false;
                 }
@@ -215,7 +253,10 @@ namespace System.Web.Http.Validation
         /// <see langword="true"/> if validation succeeds for all elements of <paramref name="model"/>;
         /// <see langword="false"/> otherwise.
         /// </returns>
-        protected virtual bool ValidateElements(IEnumerable model, BodyModelValidatorContext validationContext)
+        protected virtual bool ValidateElements(
+            IEnumerable model,
+            BodyModelValidatorContext validationContext
+        )
         {
             if (model == null)
             {
@@ -228,11 +269,17 @@ namespace System.Web.Http.Validation
 
             bool isValid = true;
             Type elementType = GetElementType(model.GetType());
-            ModelMetadata elementMetadata = validationContext.MetadataProvider.GetMetadataForType(null, elementType);
+            ModelMetadata elementMetadata = validationContext.MetadataProvider.GetMetadataForType(
+                null,
+                elementType
+            );
 
             ElementScope elementScope = new ElementScope() { Index = 0 };
             validationContext.KeyBuilders.Push(elementScope);
-            IEnumerable<ModelValidator> validators = validationContext.ActionContext.GetValidators(elementMetadata, validationContext.ValidatorCache);
+            IEnumerable<ModelValidator> validators = validationContext.ActionContext.GetValidators(
+                elementMetadata,
+                validationContext.ValidatorCache
+            );
 
             // if there are no validators or the object is null we bail out quickly
             // when there are large arrays of null, this will save a significant amount of processing
@@ -247,7 +294,14 @@ namespace System.Web.Http.Validation
                 {
                     elementMetadata.Model = element;
 
-                    if (!ValidateNodeAndChildren(elementMetadata, validationContext, model, validators))
+                    if (
+                        !ValidateNodeAndChildren(
+                            elementMetadata,
+                            validationContext,
+                            model,
+                            validators
+                        )
+                    )
                     {
                         isValid = false;
                     }
@@ -274,7 +328,8 @@ namespace System.Web.Http.Validation
             ModelMetadata metadata,
             BodyModelValidatorContext validationContext,
             object container,
-            IEnumerable<ModelValidator> validators)
+            IEnumerable<ModelValidator> validators
+        )
         {
             if (metadata == null)
             {
@@ -307,12 +362,17 @@ namespace System.Web.Http.Validation
                     if (modelKey == null)
                     {
                         modelKey = validationContext.RootPrefix;
-                        foreach (IBodyModelValidatorKeyBuilder keyBuilder in validationContext.KeyBuilders.Reverse())
+                        foreach (
+                            IBodyModelValidatorKeyBuilder keyBuilder in validationContext.KeyBuilders.Reverse()
+                        )
                         {
                             modelKey = keyBuilder.AppendTo(modelKey);
                         }
                     }
-                    string errorKey = ModelBindingHelper.CreatePropertyModelName(modelKey, error.MemberName);
+                    string errorKey = ModelBindingHelper.CreatePropertyModelName(
+                        modelKey,
+                        error.MemberName
+                    );
                     validationContext.ModelState.AddModelError(errorKey, error.Message);
                     isValid = false;
                 }
@@ -330,7 +390,10 @@ namespace System.Web.Http.Validation
 
             foreach (Type implementedInterface in type.GetInterfaces())
             {
-                if (implementedInterface.IsGenericType && implementedInterface.GetGenericTypeDefinition() == typeof(IEnumerable<>))
+                if (
+                    implementedInterface.IsGenericType
+                    && implementedInterface.GetGenericTypeDefinition() == typeof(IEnumerable<>)
+                )
                 {
                     return implementedInterface.GetGenericArguments()[0];
                 }

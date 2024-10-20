@@ -12,23 +12,30 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 {
-    [ExportCSharpVisualBasicStatelessLspService(typeof(FailingMutatingRequestHandler)), PartNotDiscoverable, Shared]
+    [
+        ExportCSharpVisualBasicStatelessLspService(typeof(FailingMutatingRequestHandler)),
+        PartNotDiscoverable,
+        Shared
+    ]
     [Method(MethodName)]
-    internal class FailingMutatingRequestHandler : ILspServiceRequestHandler<TestRequest, TestResponse>
+    internal class FailingMutatingRequestHandler
+        : ILspServiceRequestHandler<TestRequest, TestResponse>
     {
         public const string MethodName = nameof(FailingMutatingRequestHandler);
         private const int Delay = 100;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FailingMutatingRequestHandler()
-        {
-        }
+        public FailingMutatingRequestHandler() { }
 
         public bool MutatesSolutionState => true;
         public bool RequiresLSPSolution => true;
 
-        public async Task<TestResponse> HandleRequestAsync(TestRequest request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<TestResponse> HandleRequestAsync(
+            TestRequest request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             await Task.Delay(Delay, cancellationToken).ConfigureAwait(false);
 

@@ -21,11 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public MefTestWorkspace()
-            : base(Microsoft.CodeAnalysis.Host.Mef.MefHostServices.DefaultHost, "MefTest")
-        {
-        }
+            : base(Microsoft.CodeAnalysis.Host.Mef.MefHostServices.DefaultHost, "MefTest") { }
 
-        public override bool CanApplyChange(ApplyChangesKind feature)
-            => true;
+        public override bool CanApplyChange(ApplyChangesKind feature) => true;
     }
 }

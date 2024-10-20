@@ -7,7 +7,6 @@ using Xunit;
 
 public class Class1
 {
-
     [Fact]
     public static int TestEntryPoint()
     {

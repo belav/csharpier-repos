@@ -48,8 +48,20 @@ namespace System.Data.Common
 #pragma warning restore CA1823
 #pragma warning restore CS0169
 
-        internal DBConnectionString(string value, string restrictions, KeyRestrictionBehavior behavior, Dictionary<string, string> synonyms, bool useOdbcRules)
-            : this(new DbConnectionOptions(value, synonyms, useOdbcRules), restrictions, behavior, synonyms, false)
+        internal DBConnectionString(
+            string value,
+            string restrictions,
+            KeyRestrictionBehavior behavior,
+            Dictionary<string, string> synonyms,
+            bool useOdbcRules
+        )
+            : this(
+                new DbConnectionOptions(value, synonyms, useOdbcRules),
+                restrictions,
+                behavior,
+                synonyms,
+                false
+            )
         {
             // useOdbcRules is only used to parse the connection string, not to parse restrictions because values don't apply there
             // the hashtable doesn't need clone since it isn't shared with anything else
@@ -62,7 +74,13 @@ namespace System.Data.Common
             // since backward compatibility requires Everett level classes
         }
 
-        private DBConnectionString(DbConnectionOptions connectionOptions, string? restrictions, KeyRestrictionBehavior behavior, Dictionary<string, string>? synonyms, bool mustCloneDictionary)
+        private DBConnectionString(
+            DbConnectionOptions connectionOptions,
+            string? restrictions,
+            KeyRestrictionBehavior behavior,
+            Dictionary<string, string>? synonyms,
+            bool mustCloneDictionary
+        )
         { // used by DBDataPermission
             Debug.Assert(null != connectionOptions, "null connectionOptions");
             switch (behavior)
@@ -107,7 +125,10 @@ namespace System.Data.Common
                 }
 
                 // replace user's password/pwd value with "*" in the linked list and build a new string
-                _keychain = connectionOptions.ReplacePasswordPwd(out _encryptedUsersConnectionString, true);
+                _keychain = connectionOptions.ReplacePasswordPwd(
+                    out _encryptedUsersConnectionString,
+                    true
+                );
             }
 
             if (!string.IsNullOrEmpty(restrictions))
@@ -117,7 +138,11 @@ namespace System.Data.Common
             }
         }
 
-        private DBConnectionString(DBConnectionString connectionString, string[]? restrictionValues, KeyRestrictionBehavior behavior)
+        private DBConnectionString(
+            DBConnectionString connectionString,
+            string[]? restrictionValues,
+            KeyRestrictionBehavior behavior
+        )
         {
             // used by intersect for two equal connection strings with different restrictions
             _encryptedUsersConnectionString = connectionString._encryptedUsersConnectionString;
@@ -215,7 +240,10 @@ namespace System.Data.Common
                         if (!ADP.IsEmptyArray(entry._restrictionValues))
                         {
                             //Debug.WriteLine("1 this PreventUsage with restrictions and entry AllowOnly with restrictions");
-                            restrictionValues = NewRestrictionAllowOnly(entry._restrictionValues, _restrictionValues);
+                            restrictionValues = NewRestrictionAllowOnly(
+                                entry._restrictionValues,
+                                _restrictionValues
+                            );
                         }
                         else
                         {
@@ -233,7 +261,10 @@ namespace System.Data.Common
                     if (!ADP.IsEmptyArray(entry._restrictionValues))
                     {
                         //Debug.WriteLine("5 this AllowOnly with restrictions and entry PreventUsage with restrictions");
-                        restrictionValues = NewRestrictionAllowOnly(_restrictionValues, entry._restrictionValues);
+                        restrictionValues = NewRestrictionAllowOnly(
+                            _restrictionValues,
+                            entry._restrictionValues
+                        );
                     }
                     else
                     {
@@ -261,20 +292,31 @@ namespace System.Data.Common
                 else
                 {
                     //Debug.WriteLine("12 both PreventUsage with restrictions");
-                    restrictionValues = NoDuplicateUnion(_restrictionValues, entry._restrictionValues);
+                    restrictionValues = NoDuplicateUnion(
+                        _restrictionValues,
+                        entry._restrictionValues
+                    );
                 }
             }
-            else if (!ADP.IsEmptyArray(_restrictionValues) && !ADP.IsEmptyArray(entry._restrictionValues))
+            else if (
+                !ADP.IsEmptyArray(_restrictionValues) && !ADP.IsEmptyArray(entry._restrictionValues)
+            )
             { // both AllowOnly with restrictions
                 if (_restrictionValues.Length <= entry._restrictionValues.Length)
                 {
                     //Debug.WriteLine("13a this AllowOnly with restrictions and entry AllowOnly with restrictions");
-                    restrictionValues = NewRestrictionIntersect(_restrictionValues, entry._restrictionValues);
+                    restrictionValues = NewRestrictionIntersect(
+                        _restrictionValues,
+                        entry._restrictionValues
+                    );
                 }
                 else
                 {
                     //Debug.WriteLine("13b this AllowOnly with restrictions and entry AllowOnly with restrictions");
-                    restrictionValues = NewRestrictionIntersect(entry._restrictionValues, _restrictionValues);
+                    restrictionValues = NewRestrictionIntersect(
+                        entry._restrictionValues,
+                        _restrictionValues
+                    );
                 }
             }
             else
@@ -283,8 +325,17 @@ namespace System.Data.Common
             }
 
             // verify _hasPassword & _parsetable are in [....] between Everett/Whidbey
-            Debug.Assert(!_hasPassword || ContainsKey(KEY.Password) || ContainsKey(KEY.Pwd), "OnDeserialized password mismatch this");
-            Debug.Assert(null == entry || !entry._hasPassword || entry.ContainsKey(KEY.Password) || entry.ContainsKey(KEY.Pwd), "OnDeserialized password mismatch entry");
+            Debug.Assert(
+                !_hasPassword || ContainsKey(KEY.Password) || ContainsKey(KEY.Pwd),
+                "OnDeserialized password mismatch this"
+            );
+            Debug.Assert(
+                null == entry
+                    || !entry._hasPassword
+                    || entry.ContainsKey(KEY.Password)
+                    || entry.ContainsKey(KEY.Pwd),
+                "OnDeserialized password mismatch entry"
+            );
 
             DBConnectionString value = new DBConnectionString(this, restrictionValues, behavior);
             ValidateCombinedSet(this, value);
@@ -294,10 +345,17 @@ namespace System.Data.Common
         }
 
         [Conditional("DEBUG")]
-        private static void ValidateCombinedSet(DBConnectionString? componentSet, DBConnectionString combinedSet)
+        private static void ValidateCombinedSet(
+            DBConnectionString? componentSet,
+            DBConnectionString combinedSet
+        )
         {
             Debug.Assert(combinedSet != null, "The combined connection string should not be null");
-            if ((componentSet != null) && (combinedSet._restrictionValues != null) && (componentSet._restrictionValues != null))
+            if (
+                (componentSet != null)
+                && (combinedSet._restrictionValues != null)
+                && (componentSet._restrictionValues != null)
+            )
             {
                 if (componentSet._behavior == KeyRestrictionBehavior.AllowOnly)
                 {
@@ -306,7 +364,12 @@ namespace System.Data.Common
                         // Component==Allow, Combined==Allow
                         // All values in the Combined Set should also be in the Component Set
                         // Combined - Component == null
-                        Debug.Assert(!combinedSet._restrictionValues.Except(componentSet._restrictionValues).Any(), "Combined set allows values not allowed by component set");
+                        Debug.Assert(
+                            !combinedSet
+                                ._restrictionValues.Except(componentSet._restrictionValues)
+                                .Any(),
+                            "Combined set allows values not allowed by component set"
+                        );
                     }
                     else if (combinedSet._behavior == KeyRestrictionBehavior.PreventUsage)
                     {
@@ -325,14 +388,24 @@ namespace System.Data.Common
                         // Component==PreventUsage, Combined==Allow
                         // There shouldn't be any of the values from the Component Set in the Combined Set
                         // Intersect(Component, Combined) == null
-                        Debug.Assert(!combinedSet._restrictionValues.Intersect(componentSet._restrictionValues).Any(), "Combined values allows values prevented by component set");
+                        Debug.Assert(
+                            !combinedSet
+                                ._restrictionValues.Intersect(componentSet._restrictionValues)
+                                .Any(),
+                            "Combined values allows values prevented by component set"
+                        );
                     }
                     else if (combinedSet._behavior == KeyRestrictionBehavior.PreventUsage)
                     {
                         // Component==PreventUsage, Combined==PreventUsage
                         // All values in the Component Set should also be in the Combined Set
                         // Component - Combined == null
-                        Debug.Assert(!componentSet._restrictionValues.Except(combinedSet._restrictionValues).Any(), "Combined values does not prevent all of the values prevented by the component set");
+                        Debug.Assert(
+                            !componentSet
+                                ._restrictionValues.Except(combinedSet._restrictionValues)
+                                .Any(),
+                            "Combined values does not prevent all of the values prevented by the component set"
+                        );
                     }
                     else
                     {
@@ -349,20 +422,35 @@ namespace System.Data.Common
         private bool IsRestrictedKeyword(string key)
         {
             // restricted if not found
-            return ((null == _restrictionValues) || (0 > Array.BinarySearch(_restrictionValues, key, StringComparer.Ordinal)));
+            return (
+                (null == _restrictionValues)
+                || (0 > Array.BinarySearch(_restrictionValues, key, StringComparer.Ordinal))
+            );
         }
 
         internal bool IsSupersetOf(DBConnectionString entry)
         {
-            Debug.Assert(!_hasPassword || ContainsKey(KEY.Password) || ContainsKey(KEY.Pwd), "OnDeserialized password mismatch this");
-            Debug.Assert(!entry._hasPassword || entry.ContainsKey(KEY.Password) || entry.ContainsKey(KEY.Pwd), "OnDeserialized password mismatch entry");
+            Debug.Assert(
+                !_hasPassword || ContainsKey(KEY.Password) || ContainsKey(KEY.Pwd),
+                "OnDeserialized password mismatch this"
+            );
+            Debug.Assert(
+                !entry._hasPassword
+                    || entry.ContainsKey(KEY.Password)
+                    || entry.ContainsKey(KEY.Pwd),
+                "OnDeserialized password mismatch entry"
+            );
 
             switch (_behavior)
             {
                 case KeyRestrictionBehavior.AllowOnly:
                     // every key must either be in the resticted connection string or in the allowed keywords
                     // keychain may contain duplicates, but it is better than GetEnumerator on _parsetable.Keys
-                    for (NameValuePair? current = entry.KeyChain; null != current; current = current.Next)
+                    for (
+                        NameValuePair? current = entry.KeyChain;
+                        null != current;
+                        current = current.Next
+                    )
                     {
                         if (!ContainsKey(current.Name) && IsRestrictedKeyword(current.Name))
                         {
@@ -462,7 +550,10 @@ namespace System.Data.Common
             return restrictionValues;
         }
 
-        private static string[]? ParseRestrictions(string restrictions, Dictionary<string, string>? synonyms)
+        private static string[]? ParseRestrictions(
+            string restrictions,
+            Dictionary<string, string>? synonyms
+        )
         {
             List<string> restrictionValues = new List<string>();
             StringBuilder buffer = new StringBuilder(restrictions.Length);
@@ -474,7 +565,14 @@ namespace System.Data.Common
                 int startPosition = nextStartPosition;
 
                 string? keyname; // since parsing restrictions ignores values, it doesn't matter if we use ODBC rules or OLEDB rules
-                nextStartPosition = DbConnectionOptions.GetKeyValuePair(restrictions, startPosition, buffer, false, out keyname, out _);
+                nextStartPosition = DbConnectionOptions.GetKeyValuePair(
+                    restrictions,
+                    startPosition,
+                    buffer,
+                    false,
+                    out keyname,
+                    out _
+                );
                 if (!string.IsNullOrEmpty(keyname))
                 {
                     string realkeyname = ((null != synonyms) ? (string)synonyms[keyname] : keyname); // MDAC 85144
@@ -534,9 +632,18 @@ namespace System.Data.Common
             {
                 for (int i = 1; i < restrictionValues.Length; ++i)
                 {
-                    Debug.Assert(!string.IsNullOrEmpty(restrictionValues[i - 1]), "empty restriction");
+                    Debug.Assert(
+                        !string.IsNullOrEmpty(restrictionValues[i - 1]),
+                        "empty restriction"
+                    );
                     Debug.Assert(!string.IsNullOrEmpty(restrictionValues[i]), "empty restriction");
-                    Debug.Assert(0 >= StringComparer.Ordinal.Compare(restrictionValues[i - 1], restrictionValues[i]));
+                    Debug.Assert(
+                        0
+                            >= StringComparer.Ordinal.Compare(
+                                restrictionValues[i - 1],
+                                restrictionValues[i]
+                            )
+                    );
                 }
             }
         }

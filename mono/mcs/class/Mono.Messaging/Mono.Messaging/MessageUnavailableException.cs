@@ -8,21 +8,16 @@ using System;
 
 namespace Mono.Messaging
 {
-	
-	[Serializable]
-	public class MessageUnavailableException : MonoMessagingException
-	{
-		public MessageUnavailableException () : base ()
-		{
-		}
-		
-		public MessageUnavailableException (string msg) : base (msg)
-		{
-		}
-		
-		public MessageUnavailableException (string msg, Exception e) 
-			: base (msg, e)
-		{
-		}
-	}
+    [Serializable]
+    public class MessageUnavailableException : MonoMessagingException
+    {
+        public MessageUnavailableException()
+            : base() { }
+
+        public MessageUnavailableException(string msg)
+            : base(msg) { }
+
+        public MessageUnavailableException(string msg, Exception e)
+            : base(msg, e) { }
+    }
 }

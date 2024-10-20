@@ -19,23 +19,38 @@ internal static class ShowToastNotification
 {
     private const string ShowToastNotificationName = "window/_roslyn_showToast";
 
-    public static readonly LSP.Command ShowCSharpLogsCommand = new()
-    {
-        Title = LanguageServerResources.Show_csharp_logs,
-        CommandIdentifier = "csharp.showOutputWindow"
-    };
+    public static readonly LSP.Command ShowCSharpLogsCommand =
+        new()
+        {
+            Title = LanguageServerResources.Show_csharp_logs,
+            CommandIdentifier = "csharp.showOutputWindow",
+        };
 
-    public static async Task ShowToastNotificationAsync(LSP.MessageType messageType, string message, CancellationToken cancellationToken, params LSP.Command[] commands)
+    public static async Task ShowToastNotificationAsync(
+        LSP.MessageType messageType,
+        string message,
+        CancellationToken cancellationToken,
+        params LSP.Command[] commands
+    )
     {
-        Contract.ThrowIfNull(LanguageServerHost.Instance, "We don't have an LSP channel yet to send this request through.");
-        var languageServerManager = LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
+        Contract.ThrowIfNull(
+            LanguageServerHost.Instance,
+            "We don't have an LSP channel yet to send this request through."
+        );
+        var languageServerManager =
+            LanguageServerHost.Instance.GetRequiredLspService<IClientLanguageServerManager>();
         var toastParams = new ShowToastNotificationParams(messageType, message, commands);
-        await languageServerManager.SendNotificationAsync(ShowToastNotificationName, toastParams, cancellationToken);
+        await languageServerManager.SendNotificationAsync(
+            ShowToastNotificationName,
+            toastParams,
+            cancellationToken
+        );
     }
 
     [DataContract]
     private record ShowToastNotificationParams(
         [property: DataMember(Name = "messageType")] LSP.MessageType MessageType,
         [property: DataMember(Name = "message")] string Message,
-        [property: DataMember(Name = "commands")] LSP.Command[] Commands);
+        [property: DataMember(Name = "commands")] LSP.Command[] Commands
+    );
 }

@@ -26,6 +26,10 @@ internal sealed class DfaMatcherFactory : MatcherFactory
         // when the services are disposed.
         var lifetime = _services.GetRequiredService<DataSourceDependentMatcher.Lifetime>();
 
-        return new DataSourceDependentMatcher(dataSource, lifetime, _services.GetRequiredService<DfaMatcherBuilder>);
+        return new DataSourceDependentMatcher(
+            dataSource,
+            lifetime,
+            _services.GetRequiredService<DfaMatcherBuilder>
+        );
     }
 }

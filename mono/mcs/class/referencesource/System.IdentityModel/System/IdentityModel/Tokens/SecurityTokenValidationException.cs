@@ -10,23 +10,15 @@ namespace System.IdentityModel.Tokens
     public class SecurityTokenValidationException : SecurityTokenException
     {
         public SecurityTokenValidationException()
-            : base()
-        {
-        }
+            : base() { }
 
         public SecurityTokenValidationException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public SecurityTokenValidationException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         protected SecurityTokenValidationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

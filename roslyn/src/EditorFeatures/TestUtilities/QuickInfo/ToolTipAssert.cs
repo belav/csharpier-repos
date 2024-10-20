@@ -38,7 +38,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
 
                 if (expected is ClassifiedTextElement classifiedTextElement)
                 {
-                    EqualClassifiedTextElement(classifiedTextElement, (ClassifiedTextElement)actual!);
+                    EqualClassifiedTextElement(
+                        classifiedTextElement,
+                        (ClassifiedTextElement)actual!
+                    );
                     return;
                 }
 
@@ -61,11 +64,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
             }
         }
 
-        private static void EqualContainerElement(ContainerElement expected, ContainerElement actual)
+        private static void EqualContainerElement(
+            ContainerElement expected,
+            ContainerElement actual
+        )
         {
             Assert.Equal(expected.Style, actual.Style);
             Assert.Equal(expected.Elements.Count(), actual.Elements.Count());
-            foreach (var (expectedElement, actualElement) in expected.Elements.Zip(actual.Elements, (expectedElement, actualElement) => (expectedElement, actualElement)))
+            foreach (
+                var (expectedElement, actualElement) in expected.Elements.Zip(
+                    actual.Elements,
+                    (expectedElement, actualElement) => (expectedElement, actualElement)
+                )
+            )
             {
                 EqualContent(expectedElement, actualElement);
             }
@@ -78,16 +89,27 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
             Assert.Equal(expected.AutomationName, actual.AutomationName);
         }
 
-        private static void EqualClassifiedTextElement(ClassifiedTextElement expected, ClassifiedTextElement actual)
+        private static void EqualClassifiedTextElement(
+            ClassifiedTextElement expected,
+            ClassifiedTextElement actual
+        )
         {
             Assert.Equal(expected.Runs.Count(), actual.Runs.Count());
-            foreach (var (expectedRun, actualRun) in expected.Runs.Zip(actual.Runs, (expectedRun, actualRun) => (expectedRun, actualRun)))
+            foreach (
+                var (expectedRun, actualRun) in expected.Runs.Zip(
+                    actual.Runs,
+                    (expectedRun, actualRun) => (expectedRun, actualRun)
+                )
+            )
             {
                 EqualClassifiedTextRun(expectedRun, actualRun);
             }
         }
 
-        private static void EqualClassifiedTextRun(ClassifiedTextRun expected, ClassifiedTextRun actual)
+        private static void EqualClassifiedTextRun(
+            ClassifiedTextRun expected,
+            ClassifiedTextRun actual
+        )
         {
             Assert.Equal(expected.ClassificationTypeName, actual.ClassificationTypeName);
             Assert.Equal(expected.Text, actual.Text);
@@ -101,7 +123,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
             else if (expected.NavigationAction.Target is QuickInfoHyperLink hyperLink)
             {
                 Assert.Same(expected.NavigationAction, hyperLink.NavigationAction);
-                var actualTarget = Assert.IsType<QuickInfoHyperLink>(actual.NavigationAction.Target);
+                var actualTarget = Assert.IsType<QuickInfoHyperLink>(
+                    actual.NavigationAction.Target
+                );
                 Assert.Same(actual.NavigationAction, actualTarget.NavigationAction);
                 Assert.Equal(hyperLink, actualTarget);
             }
@@ -171,14 +195,26 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
 
             if (element is ClassifiedTextRun classifiedTextRun)
             {
-                var classification = GetKnownClassification(classifiedTextRun.ClassificationTypeName);
-                result.Append($"{classification}, \"{classifiedTextRun.Text.Replace("\"", "\"\"")}\"");
-                if (classifiedTextRun.NavigationAction is object || !string.IsNullOrEmpty(classifiedTextRun.Tooltip))
+                var classification = GetKnownClassification(
+                    classifiedTextRun.ClassificationTypeName
+                );
+                result.Append(
+                    $"{classification}, \"{classifiedTextRun.Text.Replace("\"", "\"\"")}\""
+                );
+                if (
+                    classifiedTextRun.NavigationAction is object
+                    || !string.IsNullOrEmpty(classifiedTextRun.Tooltip)
+                )
                 {
-                    var tooltip = classifiedTextRun.Tooltip is object ? $"\"{classifiedTextRun.Tooltip.Replace("\"", "\"\"")}\"" : "Nothing";
+                    var tooltip =
+                        classifiedTextRun.Tooltip is object
+                            ? $"\"{classifiedTextRun.Tooltip.Replace("\"", "\"\"")}\""
+                            : "Nothing";
                     if (classifiedTextRun.NavigationAction?.Target is QuickInfoHyperLink hyperLink)
                     {
-                        result.Append($", QuickInfoHyperLink.TestAccessor.CreateNavigationAction(new Uri(\"{hyperLink.Uri}\", UriKind.Absolute))");
+                        result.Append(
+                            $", QuickInfoHyperLink.TestAccessor.CreateNavigationAction(new Uri(\"{hyperLink.Uri}\", UriKind.Absolute))"
+                        );
                     }
                     else
                     {
@@ -203,13 +239,23 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.QuickInfo
         private static string ContainerStyleToString(ContainerElementStyle style)
         {
             var stringValue = style.ToString();
-            return string.Join(" Or ", stringValue.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(value => $"{nameof(ContainerElementStyle)}.{value}"));
+            return string.Join(
+                " Or ",
+                stringValue
+                    .Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(value => $"{nameof(ContainerElementStyle)}.{value}")
+            );
         }
 
         private static string TextRunStyleToString(ClassifiedTextRunStyle style)
         {
             var stringValue = style.ToString();
-            return string.Join(" Or ", stringValue.Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries).Select(value => $"{nameof(ClassifiedTextRunStyle)}.{value}"));
+            return string.Join(
+                " Or ",
+                stringValue
+                    .Split(new[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(value => $"{nameof(ClassifiedTextRunStyle)}.{value}")
+            );
         }
 
         private static string GetKnownClassification(string classification)

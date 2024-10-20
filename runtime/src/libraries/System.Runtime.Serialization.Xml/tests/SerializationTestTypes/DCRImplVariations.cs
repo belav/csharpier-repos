@@ -19,9 +19,7 @@ namespace SerializationTestTypes
             address = new Address("rd", "wa", 90012);
         }
 
-        public Person1()
-        {
-        }
+        public Person1() { }
 
         [DataMember]
         public int age;
@@ -45,7 +43,11 @@ namespace SerializationTestTypes
         public Person2()
         {
             Uid = new Guid("ff816178-54df-2ea8-6511-cfeb4d14ab5a");
-            XQAArray = new XmlQualifiedName[] { new XmlQualifiedName("Name1", "http://www.PlayForFun.com"), new XmlQualifiedName("Name2", "http://www.FunPlay.com") };
+            XQAArray = new XmlQualifiedName[]
+            {
+                new XmlQualifiedName("Name1", "http://www.PlayForFun.com"),
+                new XmlQualifiedName("Name2", "http://www.FunPlay.com"),
+            };
             anyData = new Kid();
         }
     }
@@ -77,9 +79,7 @@ namespace SerializationTestTypes
     [DataContract]
     public class Address
     {
-        public Address()
-        {
-        }
+        public Address() { }
 
         public Address(string c, string s, int z)
         {

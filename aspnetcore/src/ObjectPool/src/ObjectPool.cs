@@ -7,7 +7,8 @@ namespace Microsoft.Extensions.ObjectPool;
 /// A pool of objects.
 /// </summary>
 /// <typeparam name="T">The type of objects to pool.</typeparam>
-public abstract class ObjectPool<T> where T : class
+public abstract class ObjectPool<T>
+    where T : class
 {
     /// <summary>
     /// Gets an object from the pool if one is available, otherwise creates one.
@@ -28,7 +29,8 @@ public abstract class ObjectPool<T> where T : class
 public static class ObjectPool
 {
     /// <inheritdoc />
-    public static ObjectPool<T> Create<T>(IPooledObjectPolicy<T>? policy = null) where T : class, new()
+    public static ObjectPool<T> Create<T>(IPooledObjectPolicy<T>? policy = null)
+        where T : class, new()
     {
         var provider = new DefaultObjectPoolProvider();
         return provider.Create(policy ?? new DefaultPooledObjectPolicy<T>());

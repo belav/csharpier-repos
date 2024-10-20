@@ -24,7 +24,8 @@ public class StoredProcedurePropertyEventData : PropertyEventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         IEntityType entityType,
         IProperty property,
-        string storedProcedureName)
+        string storedProcedureName
+    )
         : base(eventDefinition, messageGenerator, property)
     {
         EntityType = entityType;

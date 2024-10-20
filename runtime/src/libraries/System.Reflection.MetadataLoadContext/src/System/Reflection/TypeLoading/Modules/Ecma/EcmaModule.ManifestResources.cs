@@ -11,7 +11,9 @@ namespace System.Reflection.TypeLoading.Ecma
     /// </summary>
     internal sealed partial class EcmaModule
     {
-        internal unsafe InternalManifestResourceInfo GetInternalManifestResourceInfo(string resourceName)
+        internal unsafe InternalManifestResourceInfo GetInternalManifestResourceInfo(
+            string resourceName
+        )
         {
             MetadataReader reader = Reader;
 
@@ -28,11 +30,18 @@ namespace System.Reflection.TypeLoading.Ecma
                         checked
                         {
                             // Embedded data resource
-                            result.ResourceLocation = ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile;
+                            result.ResourceLocation =
+                                ResourceLocation.Embedded
+                                | ResourceLocation.ContainedInManifestFile;
                             PEReader pe = _guardedPEReader.PEReader;
 
-                            PEMemoryBlock resourceDirectory = pe.GetSectionData(pe.PEHeaders.CorHeader!.ResourcesDirectory.RelativeVirtualAddress);
-                            BlobReader blobReader = resourceDirectory.GetReader((int)resource.Offset, resourceDirectory.Length - (int)resource.Offset);
+                            PEMemoryBlock resourceDirectory = pe.GetSectionData(
+                                pe.PEHeaders.CorHeader!.ResourcesDirectory.RelativeVirtualAddress
+                            );
+                            BlobReader blobReader = resourceDirectory.GetReader(
+                                (int)resource.Offset,
+                                resourceDirectory.Length - (int)resource.Offset
+                            );
                             uint length = blobReader.ReadUInt32();
                             result.PointerToResource = blobReader.CurrentPointer;
 
@@ -48,13 +57,21 @@ namespace System.Reflection.TypeLoading.Ecma
                         {
                             // Get file name
                             result.ResourceLocation = default;
-                            AssemblyFile file = ((AssemblyFileHandle)resource.Implementation).GetAssemblyFile(reader);
+                            AssemblyFile file = (
+                                (AssemblyFileHandle)resource.Implementation
+                            ).GetAssemblyFile(reader);
                             result.FileName = file.Name.GetString(reader);
                             if (file.ContainsMetadata)
                             {
-                                EcmaModule? module = (EcmaModule?)Assembly.GetModule(result.FileName);
+                                EcmaModule? module = (EcmaModule?)
+                                    Assembly.GetModule(result.FileName);
                                 if (module == null)
-                                    throw new BadImageFormatException(SR.Format(SR.ManifestResourceInfoReferencedBadModule, result.FileName));
+                                    throw new BadImageFormatException(
+                                        SR.Format(
+                                            SR.ManifestResourceInfoReferencedBadModule,
+                                            result.FileName
+                                        )
+                                    );
                                 result = module.GetInternalManifestResourceInfo(resourceName);
                             }
                         }
@@ -62,8 +79,12 @@ namespace System.Reflection.TypeLoading.Ecma
                         {
                             // Resolve assembly reference
                             result.ResourceLocation = ResourceLocation.ContainedInAnotherAssembly;
-                            RoAssemblyName destinationAssemblyName = ((AssemblyReferenceHandle)resource.Implementation).ToRoAssemblyName(reader);
-                            result.ReferencedAssembly = Loader.ResolveAssembly(destinationAssemblyName);
+                            RoAssemblyName destinationAssemblyName = (
+                                (AssemblyReferenceHandle)resource.Implementation
+                            ).ToRoAssemblyName(reader);
+                            result.ReferencedAssembly = Loader.ResolveAssembly(
+                                destinationAssemblyName
+                            );
                         }
                     }
                 }

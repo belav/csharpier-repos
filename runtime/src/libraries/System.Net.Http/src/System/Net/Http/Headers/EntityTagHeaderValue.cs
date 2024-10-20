@@ -29,17 +29,17 @@ namespace System.Net.Http.Headers
         }
 
         public EntityTagHeaderValue(string tag)
-            : this(tag, false)
-        {
-        }
+            : this(tag, false) { }
 
         public EntityTagHeaderValue(string tag, bool isWeak)
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(tag);
 
             int length;
-            if ((HttpRuleParser.GetQuotedStringLength(tag, 0, out length) != HttpParseResult.Parsed) ||
-                (length != tag.Length))
+            if (
+                (HttpRuleParser.GetQuotedStringLength(tag, 0, out length) != HttpParseResult.Parsed)
+                || (length != tag.Length)
+            )
             {
                 // Note that we don't allow 'W/' prefixes for weak ETags in the 'tag' parameter. If the user wants to
                 // add a weak ETag, they can set 'isWeak' to true.
@@ -77,7 +77,10 @@ namespace System.Net.Http.Headers
             }
 
             // Since the tag is a quoted-string we treat it case-sensitive.
-            return ((_isWeak == other._isWeak) && string.Equals(_tag, other._tag, StringComparison.Ordinal));
+            return (
+                (_isWeak == other._isWeak)
+                && string.Equals(_tag, other._tag, StringComparison.Ordinal)
+            );
         }
 
         public override int GetHashCode()
@@ -89,16 +92,26 @@ namespace System.Net.Http.Headers
         public static EntityTagHeaderValue Parse(string input)
         {
             int index = 0;
-            return (EntityTagHeaderValue)GenericHeaderParser.SingleValueEntityTagParser.ParseValue(
-                input, null, ref index);
+            return (EntityTagHeaderValue)
+                GenericHeaderParser.SingleValueEntityTagParser.ParseValue(input, null, ref index);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out EntityTagHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out EntityTagHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.SingleValueEntityTagParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.SingleValueEntityTagParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (EntityTagHeaderValue)output!;
                 return true;
@@ -106,7 +119,11 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetEntityTagLength(string? input, int startIndex, out EntityTagHeaderValue? parsedValue)
+        internal static int GetEntityTagLength(
+            string? input,
+            int startIndex,
+            out EntityTagHeaderValue? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
@@ -146,7 +163,11 @@ namespace System.Net.Http.Headers
 
                 int tagStartIndex = current;
                 int tagLength;
-                if (current == input.Length || HttpRuleParser.GetQuotedStringLength(input, current, out tagLength) != HttpParseResult.Parsed)
+                if (
+                    current == input.Length
+                    || HttpRuleParser.GetQuotedStringLength(input, current, out tagLength)
+                        != HttpParseResult.Parsed
+                )
                 {
                     return 0;
                 }
@@ -160,7 +181,10 @@ namespace System.Net.Http.Headers
                 }
                 else
                 {
-                    parsedValue = new EntityTagHeaderValue(input.Substring(tagStartIndex, tagLength), isWeak);
+                    parsedValue = new EntityTagHeaderValue(
+                        input.Substring(tagStartIndex, tagLength),
+                        isWeak
+                    );
                 }
 
                 current += tagLength;
@@ -170,6 +194,7 @@ namespace System.Net.Http.Headers
             return current - startIndex;
         }
 
-        object ICloneable.Clone() => ReferenceEquals(this, Any) ? Any : new EntityTagHeaderValue(this);
+        object ICloneable.Clone() =>
+            ReferenceEquals(this, Any) ? Any : new EntityTagHeaderValue(this);
     }
 }

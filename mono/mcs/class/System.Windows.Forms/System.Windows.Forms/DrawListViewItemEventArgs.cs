@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -44,28 +44,34 @@ namespace System.Windows.Forms
 
         #region Properties
 
-        public bool DrawDefault {
+        public bool DrawDefault
+        {
             get { return drawDefault; }
             set { drawDefault = value; }
         }
 
-        public Rectangle Bounds {
+        public Rectangle Bounds
+        {
             get { return bounds; }
         }
 
-        public Graphics Graphics {
+        public Graphics Graphics
+        {
             get { return graphics; }
         }
 
-        public ListViewItem Item {
+        public ListViewItem Item
+        {
             get { return item; }
         }
 
-        public int ItemIndex {
+        public int ItemIndex
+        {
             get { return itemIndex; }
         }
 
-        public ListViewItemStates State {
+        public ListViewItemStates State
+        {
             get { return state; }
         }
 
@@ -74,8 +80,13 @@ namespace System.Windows.Forms
 
         #region Constructors
 
-        public DrawListViewItemEventArgs (Graphics graphics, ListViewItem item,
-                                        Rectangle bounds, int itemIndex, ListViewItemStates state)
+        public DrawListViewItemEventArgs(
+            Graphics graphics,
+            ListViewItem item,
+            Rectangle bounds,
+            int itemIndex,
+            ListViewItemStates state
+        )
         {
             this.graphics = graphics;
             this.item = item;
@@ -89,25 +100,33 @@ namespace System.Windows.Forms
 
         #region Public Methods
 
-        public void DrawBackground ()
+        public void DrawBackground()
         {
-		graphics.FillRectangle (ThemeEngine.Current.ResPool.GetSolidBrush (item.BackColor), bounds);
+            graphics.FillRectangle(
+                ThemeEngine.Current.ResPool.GetSolidBrush(item.BackColor),
+                bounds
+            );
         }
 
-        public void DrawFocusRectangle ()
+        public void DrawFocusRectangle()
         {
-		if ((state & ListViewItemStates.Focused) != 0)
-			ThemeEngine.Current.CPDrawFocusRectangle (graphics, bounds, item.ListView.ForeColor, item.ListView.BackColor);
+            if ((state & ListViewItemStates.Focused) != 0)
+                ThemeEngine.Current.CPDrawFocusRectangle(
+                    graphics,
+                    bounds,
+                    item.ListView.ForeColor,
+                    item.ListView.BackColor
+                );
         }
 
-        public void DrawText ()
+        public void DrawText()
         {
-		DrawText (TextFormatFlags.Default);
+            DrawText(TextFormatFlags.Default);
         }
 
-        public void DrawText (TextFormatFlags flags)
+        public void DrawText(TextFormatFlags flags)
         {
-		TextRenderer.DrawText (graphics, item.Text, item.Font, bounds, item.ForeColor, flags);
+            TextRenderer.DrawText(graphics, item.Text, item.Font, bounds, item.ForeColor, flags);
         }
 
         #endregion Public Methods

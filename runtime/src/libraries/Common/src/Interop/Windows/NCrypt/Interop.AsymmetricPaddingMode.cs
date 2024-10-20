@@ -9,9 +9,9 @@ internal static partial class Interop
         {
             None = 0x00000000,
             NCRYPT_NO_PADDING_FLAG = 0x00000001,
-            NCRYPT_PAD_PKCS1_FLAG = 0x00000002,    // NCryptEncrypt/Decrypt or NCryptSignHash/VerifySignature
-            NCRYPT_PAD_OAEP_FLAG = 0x00000004,     // NCryptEncrypt/Decrypt
-            NCRYPT_PAD_PSS_FLAG = 0x00000008,      // NCryptSignHash/VerifySignature
+            NCRYPT_PAD_PKCS1_FLAG = 0x00000002, // NCryptEncrypt/Decrypt or NCryptSignHash/VerifySignature
+            NCRYPT_PAD_OAEP_FLAG = 0x00000004, // NCryptEncrypt/Decrypt
+            NCRYPT_PAD_PSS_FLAG = 0x00000008, // NCryptSignHash/VerifySignature
         }
     }
 }

@@ -17,12 +17,12 @@ namespace System.Web.Mvc.Test
         private string _expectedVirtualPath;
         private bool _fileExists = true;
 
-        public readonly Dictionary<string, Stream> CachedFileStore = new Dictionary<string, Stream>(StringComparer.OrdinalIgnoreCase);
+        public readonly Dictionary<string, Stream> CachedFileStore = new Dictionary<string, Stream>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public MockBuildManager()
-            : this(new Assembly[] { typeof(MockBuildManager).Assembly })
-        {
-        }
+            : this(new Assembly[] { typeof(MockBuildManager).Assembly }) { }
 
         public MockBuildManager(Assembly[] referencedAssemblies)
         {
@@ -58,7 +58,9 @@ namespace System.Web.Mvc.Test
                 return _compiledType;
             }
 
-            throw new InvalidOperationException("Unexpected call to IBuildManager.GetCompiledType()");
+            throw new InvalidOperationException(
+                "Unexpected call to IBuildManager.GetCompiledType()"
+            );
         }
 
         public virtual ICollection GetReferencedAssemblies()

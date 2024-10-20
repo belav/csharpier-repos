@@ -1,21 +1,20 @@
 using System;
 
-struct X {
-    static public implicit operator string (X x)
+struct X
+{
+    public static implicit operator string(X x)
     {
-       return "x";
+        return "x";
     }
-
 }
 
-class Test { 
+class Test
+{
+    public static int Main()
+    {
+        X x = new X();
+        Console.WriteLine(x);
 
-	public static int Main ()
-	{
-		X x = new X ();
-		Console.WriteLine (x);
-	
-		return 0;
-	}
+        return 0;
+    }
 }
-

@@ -62,6 +62,6 @@ namespace Newtonsoft.Json
         /// Ignore members where the member value is the same as the member's default value when serializing objects
         /// and set members to their default value when deserializing.
         /// </summary>
-        IgnoreAndPopulate = Ignore | Populate
+        IgnoreAndPopulate = Ignore | Populate,
     }
 }

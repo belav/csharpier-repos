@@ -63,8 +63,7 @@ namespace System.Diagnostics
         {
             bool ret;
 
-            try
-            { }
+            try { }
             finally
             {
                 // Wait for the mutex for half a second (long enough to gain the mutex in most scenarios and short enough to avoid
@@ -119,7 +118,9 @@ namespace System.Diagnostics
                     baseKey = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, machineName);
 
                 if (baseKey == null)
-                    throw new InvalidOperationException(SR.Format(SR.RegKeyMissingShort, "HKEY_LOCAL_MACHINE", machineName));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.RegKeyMissingShort, "HKEY_LOCAL_MACHINE", machineName)
+                    );
 
                 complusReg = baseKey.OpenSubKey("SOFTWARE\\Microsoft\\.NETFramework");
                 if (complusReg != null)
@@ -131,7 +132,8 @@ namespace System.Diagnostics
                         // some extra subkeys like "standards" and "upgrades" we want to ignore.
 
                         // first we figure out what version we are...
-                        string versionPrefix = "v" + Environment.Version.Major + "." + Environment.Version.Minor;
+                        string versionPrefix =
+                            "v" + Environment.Version.Major + "." + Environment.Version.Minor;
                         RegistryKey policyKey = complusReg.OpenSubKey("policy");
 
                         // This is the full version string of the install on the remote machine we want to use (for example "v2.0.50727")
@@ -148,7 +150,10 @@ namespace System.Diagnostics
                                 {
                                     try
                                     {
-                                        version = versionPrefix + "." + GetLargestBuildNumberFromKey(bestKey);
+                                        version =
+                                            versionPrefix
+                                            + "."
+                                            + GetLargestBuildNumberFromKey(bestKey);
                                     }
                                     finally
                                     {
@@ -166,18 +171,33 @@ namespace System.Diagnostics
                                         string majorVersion = majorVersions[i];
 
                                         // If this looks like a key of the form v{something}.{something}, we should see if it's a usable build.
-                                        if (majorVersion.Length > 1 && majorVersion[0] == 'v' && majorVersion.Contains(".")) // string.Contains(char) is .NetCore2.1+ specific
+                                        if (
+                                            majorVersion.Length > 1
+                                            && majorVersion[0] == 'v'
+                                            && majorVersion.Contains(".")
+                                        ) // string.Contains(char) is .NetCore2.1+ specific
                                         {
                                             int[] currentVersion = new int[] { -1, -1, -1 };
 
-                                            string[] splitVersion = majorVersion.Substring(1).Split('.');
+                                            string[] splitVersion = majorVersion
+                                                .Substring(1)
+                                                .Split('.');
 
                                             if (splitVersion.Length != 2)
                                             {
                                                 continue;
                                             }
 
-                                            if (!int.TryParse(splitVersion[0], out currentVersion[0]) || !int.TryParse(splitVersion[1], out currentVersion[1]))
+                                            if (
+                                                !int.TryParse(
+                                                    splitVersion[0],
+                                                    out currentVersion[0]
+                                                )
+                                                || !int.TryParse(
+                                                    splitVersion[1],
+                                                    out currentVersion[1]
+                                                )
+                                            )
                                             {
                                                 continue;
                                             }
@@ -192,8 +212,13 @@ namespace System.Diagnostics
                                             {
                                                 currentVersion[2] = GetLargestBuildNumberFromKey(k);
 
-                                                if (currentVersion[0] > largestVersion[0]
-                                                    || ((currentVersion[0] == largestVersion[0]) && (currentVersion[1] > largestVersion[1])))
+                                                if (
+                                                    currentVersion[0] > largestVersion[0]
+                                                    || (
+                                                        (currentVersion[0] == largestVersion[0])
+                                                        && (currentVersion[1] > largestVersion[1])
+                                                    )
+                                                )
                                                 {
                                                     largestVersion = currentVersion;
                                                 }
@@ -205,7 +230,13 @@ namespace System.Diagnostics
                                         }
                                     }
 
-                                    version = "v" + largestVersion[0] + "." + largestVersion[1] + "." + largestVersion[2];
+                                    version =
+                                        "v"
+                                        + largestVersion[0]
+                                        + "."
+                                        + largestVersion[1]
+                                        + "."
+                                        + largestVersion[2];
                                 }
                             }
                             finally

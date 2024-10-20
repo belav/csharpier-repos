@@ -17,7 +17,10 @@ namespace System.Security.Cryptography
     {
         public sealed partial class RSASecurityTransforms : RSA
         {
-            private static RSAParameters ExportParametersFromLegacyKey(SecKeyPair keys, bool includePrivateParameters)
+            private static RSAParameters ExportParametersFromLegacyKey(
+                SecKeyPair keys,
+                bool includePrivateParameters
+            )
             {
                 // Apple requires all private keys to be exported encrypted, but since we're trying to export
                 // as parsed structures we will need to decrypt it for the user.
@@ -26,7 +29,8 @@ namespace System.Security.Cryptography
                 byte[] keyBlob = Interop.AppleCrypto.SecKeyExport(
                     includePrivateParameters ? keys.PrivateKey : keys.PublicKey,
                     exportPrivate: includePrivateParameters,
-                    password: ExportPassword);
+                    password: ExportPassword
+                );
 
                 try
                 {
@@ -52,7 +56,8 @@ namespace System.Security.Cryptography
                             RSAKeyFormatHelper.ReadSubjectPublicKeyInfo(
                                 keyBlob,
                                 out int localRead,
-                                out key);
+                                out key
+                            );
                             Debug.Assert(localRead == keyBlob.Length);
                         }
                         return key;
@@ -63,7 +68,8 @@ namespace System.Security.Cryptography
                             keyBlob,
                             (ReadOnlySpan<char>)ExportPassword,
                             out _,
-                            out RSAParameters key);
+                            out RSAParameters key
+                        );
                         return key;
                     }
                 }

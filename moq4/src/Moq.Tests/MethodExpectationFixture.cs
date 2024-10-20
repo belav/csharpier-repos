@@ -5,7 +5,6 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -46,7 +45,9 @@ namespace Moq.Tests
             var snd = ToMethodExpectation<B>(b => b.Method(x, 2, 3));
             //                                           ^
             // `x` will be captured and represented in the expression tree as a display class field access:
-            var xExpr = ((snd.Expression.Body as MethodCallExpression).Arguments.Last() as NewArrayExpression).Expressions.First();
+            var xExpr = (
+                (snd.Expression.Body as MethodCallExpression).Arguments.Last() as NewArrayExpression
+            ).Expressions.First();
 
             Assert.False(xExpr is ConstantExpression);
             Assert.NotSame(fst, snd);

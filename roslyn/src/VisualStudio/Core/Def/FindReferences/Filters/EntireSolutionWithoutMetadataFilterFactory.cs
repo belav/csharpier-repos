@@ -21,9 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences.
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EntireSolutionWithoutMetadataFilterFactory()
-        {
-        }
+        public EntireSolutionWithoutMetadataFilterFactory() { }
 
         public IErrorListFilterHandler? CreateFilter(IWpfTableControl tableControl)
         {
@@ -31,7 +29,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences.
             return null;
         }
 
-        public IErrorListFilterHandler ReplaceFilter(IWpfTableControl tableControl, string filterIdentifier)
+        public IErrorListFilterHandler ReplaceFilter(
+            IWpfTableControl tableControl,
+            string filterIdentifier
+        )
         {
             return EntireSolutionWithoutMetadataFilterHandler.Instance;
         }

@@ -17,8 +17,7 @@ public class ForbidResultTests
     {
         // Arrange
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), "", null))
+        auth.Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), "", null))
             .Returns(Task.CompletedTask)
             .Verifiable();
         var httpContext = GetHttpContext(auth.Object);
@@ -37,12 +36,10 @@ public class ForbidResultTests
         // Arrange
         var authProperties = new AuthenticationProperties();
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), "Scheme1", authProperties))
+        auth.Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), "Scheme1", authProperties))
             .Returns(Task.CompletedTask)
             .Verifiable();
-        auth
-            .Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), "Scheme2", authProperties))
+        auth.Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), "Scheme2", authProperties))
             .Returns(Task.CompletedTask)
             .Verifiable();
         var httpContext = GetHttpContext(auth.Object);
@@ -57,20 +54,17 @@ public class ForbidResultTests
     }
 
     public static TheoryData ExecuteResultAsync_InvokesForbidAsyncWithAuthPropertiesData =>
-        new TheoryData<AuthenticationProperties>
-        {
-                null,
-                new AuthenticationProperties()
-        };
+        new TheoryData<AuthenticationProperties> { null, new AuthenticationProperties() };
 
     [Theory]
     [MemberData(nameof(ExecuteResultAsync_InvokesForbidAsyncWithAuthPropertiesData))]
-    public async Task ExecuteResultAsync_InvokesForbidAsyncWithAuthProperties(AuthenticationProperties expected)
+    public async Task ExecuteResultAsync_InvokesForbidAsyncWithAuthProperties(
+        AuthenticationProperties expected
+    )
     {
         // Arrange
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), null, expected))
+        auth.Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), null, expected))
             .Returns(Task.CompletedTask)
             .Verifiable();
         var result = new ForbidHttpResult(expected);
@@ -86,19 +80,16 @@ public class ForbidResultTests
     [Theory]
     [MemberData(nameof(ExecuteResultAsync_InvokesForbidAsyncWithAuthPropertiesData))]
     public async Task ExecuteResultAsync_InvokesForbidAsyncWithAuthProperties_WhenAuthenticationSchemesIsEmpty(
-        AuthenticationProperties expected)
+        AuthenticationProperties expected
+    )
     {
         // Arrange
         var auth = new Mock<IAuthenticationService>();
-        auth
-            .Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), null, expected))
+        auth.Setup(c => c.ForbidAsync(It.IsAny<HttpContext>(), null, expected))
             .Returns(Task.CompletedTask)
             .Verifiable();
         var httpContext = GetHttpContext(auth.Object);
-        var result = new ForbidHttpResult(expected)
-        {
-            AuthenticationSchemes = new string[0]
-        };
+        var result = new ForbidHttpResult(expected) { AuthenticationSchemes = new string[0] };
         var routeData = new RouteData();
 
         // Act
@@ -116,15 +107,16 @@ public class ForbidResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     private static DefaultHttpContext GetHttpContext(IAuthenticationService auth)
     {
         var httpContext = new DefaultHttpContext();
-        httpContext.RequestServices = CreateServices()
-            .AddSingleton(auth)
-            .BuildServiceProvider();
+        httpContext.RequestServices = CreateServices().AddSingleton(auth).BuildServiceProvider();
         return httpContext;
     }
 

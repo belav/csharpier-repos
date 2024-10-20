@@ -39,7 +39,8 @@ namespace System.Web.Http.ModelBinding
         /// </summary>
         private static void EnsureOneBodyParameter(HttpActionBinding actionBinding)
         {
-            IList<HttpParameterDescriptor> parameters = actionBinding.ActionDescriptor.GetParameters();
+            IList<HttpParameterDescriptor> parameters =
+                actionBinding.ActionDescriptor.GetParameters();
 
             int idxFromBody = -1;
             for (int i = 0; i < actionBinding.ParameterBindings.Length; i++)
@@ -52,9 +53,19 @@ namespace System.Web.Http.ModelBinding
                         string name1 = parameters[idxFromBody].ParameterName;
                         string name2 = parameters[i].ParameterName;
 
-                        string message = Error.Format(SRResources.ParameterBindingCantHaveMultipleBodyParameters, name1, name2);
-                        actionBinding.ParameterBindings[i] = new ErrorParameterBinding(parameters[i], message);
-                        actionBinding.ParameterBindings[idxFromBody] = new ErrorParameterBinding(parameters[idxFromBody], message);
+                        string message = Error.Format(
+                            SRResources.ParameterBindingCantHaveMultipleBodyParameters,
+                            name1,
+                            name2
+                        );
+                        actionBinding.ParameterBindings[i] = new ErrorParameterBinding(
+                            parameters[i],
+                            message
+                        );
+                        actionBinding.ParameterBindings[idxFromBody] = new ErrorParameterBinding(
+                            parameters[idxFromBody],
+                            message
+                        );
                     }
                     else
                     {
@@ -66,7 +77,9 @@ namespace System.Web.Http.ModelBinding
 
         // Determine how a single parameter will get bound.
         // This is all sync. We don't need to actually read the body just to determine that we'll bind to the body.
-        protected virtual HttpParameterBinding GetParameterBinding(HttpParameterDescriptor parameter)
+        protected virtual HttpParameterBinding GetParameterBinding(
+            HttpParameterDescriptor parameter
+        )
         {
             // Attribute has the highest precedence
             // Presence of a model binder attribute overrides.
@@ -106,13 +119,27 @@ namespace System.Web.Http.ModelBinding
         {
             ParameterBindingRulesCollection pb = new ParameterBindingRulesCollection();
 
-            pb.Add(typeof(CancellationToken), parameter => new CancellationTokenParameterBinding(parameter));
-            pb.Add(typeof(HttpRequestMessage), parameter => new HttpRequestParameterBinding(parameter));
+            pb.Add(
+                typeof(CancellationToken),
+                parameter => new CancellationTokenParameterBinding(parameter)
+            );
+            pb.Add(
+                typeof(HttpRequestMessage),
+                parameter => new HttpRequestParameterBinding(parameter)
+            );
 
             // Warning binder for HttpContent.
-            pb.Add(parameter => typeof(HttpContent).IsAssignableFrom(parameter.ParameterType) ?
-                                    parameter.BindAsError(Error.Format(SRResources.ParameterBindingIllegalType, parameter.ParameterType.Name, parameter.ParameterName))
-                                    : null);
+            pb.Add(parameter =>
+                typeof(HttpContent).IsAssignableFrom(parameter.ParameterType)
+                    ? parameter.BindAsError(
+                        Error.Format(
+                            SRResources.ParameterBindingIllegalType,
+                            parameter.ParameterType.Name,
+                            parameter.ParameterName
+                        )
+                    )
+                    : null
+            );
 
             return pb;
         }

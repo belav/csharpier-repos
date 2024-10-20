@@ -82,10 +82,7 @@ public class ModelExplorerTest
     public void GetPropertyExplorer_DeferredModelAccess()
     {
         // Arrange
-        var model = new DerivedClass()
-        {
-            Base1 = 5,
-        };
+        var model = new DerivedClass() { Base1 = 5 };
 
         var provider = new EmptyModelMetadataProvider();
         var modelExplorer = provider.GetModelExplorerForType(typeof(BaseClass), model);
@@ -121,10 +118,7 @@ public class ModelExplorerTest
     public void GetPropertyExplorer_ReturnsNull_ForPropertyNotFound()
     {
         // Arrange
-        var model = new DerivedClass()
-        {
-            Base1 = 5,
-        };
+        var model = new DerivedClass() { Base1 = 5 };
 
         var provider = new EmptyModelMetadataProvider();
         var modelExplorer = provider.GetModelExplorerForType(typeof(BaseClass), model);

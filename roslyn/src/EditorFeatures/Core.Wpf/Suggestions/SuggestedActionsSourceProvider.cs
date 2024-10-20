@@ -37,19 +37,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     [Order]
     [SuggestedActionPriority(DefaultOrderings.Highest)] // for providers *and* items explicitly marked as high pri.
     [SuggestedActionPriority(DefaultOrderings.Default)] // for any provider/item that is neither high or low pri and is not suppressions.
-    [SuggestedActionPriority(DefaultOrderings.Low)]     // for providers or items explicitly marked as low pri
-    [SuggestedActionPriority(DefaultOrderings.Lowest)]  // Only for suppressions
+    [SuggestedActionPriority(DefaultOrderings.Low)] // for providers or items explicitly marked as low pri
+    [SuggestedActionPriority(DefaultOrderings.Lowest)] // Only for suppressions
     internal partial class SuggestedActionsSourceProvider : ISuggestedActionsSourceProvider
     {
         public static readonly ImmutableArray<string> Orderings = ImmutableArray.Create(
             DefaultOrderings.Highest,
             DefaultOrderings.Default,
             DefaultOrderings.Low,
-            DefaultOrderings.Lowest);
+            DefaultOrderings.Lowest
+        );
 
-        private static readonly Guid s_CSharpSourceGuid = new Guid("b967fea8-e2c3-4984-87d4-71a38f49e16a");
-        private static readonly Guid s_visualBasicSourceGuid = new Guid("4de30e93-3e0c-40c2-a4ba-1124da4539f6");
-        private static readonly Guid s_xamlSourceGuid = new Guid("a0572245-2eab-4c39-9f61-06a6d8c5ddda");
+        private static readonly Guid s_CSharpSourceGuid = new Guid(
+            "b967fea8-e2c3-4984-87d4-71a38f49e16a"
+        );
+        private static readonly Guid s_visualBasicSourceGuid = new Guid(
+            "4de30e93-3e0c-40c2-a4ba-1124da4539f6"
+        );
+        private static readonly Guid s_xamlSourceGuid = new Guid(
+            "a0572245-2eab-4c39-9f61-06a6d8c5ddda"
+        );
 
         private readonly IThreadingContext _threadingContext;
         private readonly ICodeRefactoringService _codeRefactoringService;
@@ -73,7 +80,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ISuggestedActionCategoryRegistryService suggestedActionCategoryRegistry,
             IAsynchronousOperationListenerProvider listenerProvider,
             IGlobalOptionService globalOptions,
-            [ImportMany] IEnumerable<Lazy<IImageIdService, OrderableMetadata>> imageIdServices)
+            [ImportMany] IEnumerable<Lazy<IImageIdService, OrderableMetadata>> imageIdServices
+        )
         {
             _threadingContext = threadingContext;
             _codeRefactoringService = codeRefactoringService;
@@ -87,7 +95,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ImageIdServices = ExtensionOrderer.Order(imageIdServices).ToImmutableArray();
         }
 
-        public ISuggestedActionsSource? CreateSuggestedActionsSource(ITextView textView, ITextBuffer textBuffer)
+        public ISuggestedActionsSource? CreateSuggestedActionsSource(
+            ITextView textView,
+            ITextBuffer textBuffer
+        )
         {
             Contract.ThrowIfNull(textView);
             Contract.ThrowIfNull(textBuffer);
@@ -98,11 +109,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 return null;
 
             return new SuggestedActionsSource(
-                _threadingContext, _globalOptions, this, textView, textBuffer, _suggestedActionCategoryRegistry, this.OperationListener);
+                _threadingContext,
+                _globalOptions,
+                this,
+                textView,
+                textBuffer,
+                _suggestedActionCategoryRegistry,
+                this.OperationListener
+            );
         }
 
-        private static CodeActionRequestPriority? TryGetPriority(string priority)
-            => priority switch
+        private static CodeActionRequestPriority? TryGetPriority(string priority) =>
+            priority switch
             {
                 DefaultOrderings.Highest => CodeActionRequestPriority.High,
                 DefaultOrderings.Default => CodeActionRequestPriority.Default,

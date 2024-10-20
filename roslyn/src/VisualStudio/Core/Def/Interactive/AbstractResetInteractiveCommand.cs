@@ -4,12 +4,12 @@
 
 #nullable disable
 
+using System;
 using EnvDTE;
 using Microsoft.VisualStudio.ComponentModelHost;
 using Microsoft.VisualStudio.LanguageServices;
 using Microsoft.VisualStudio.LanguageServices.Interactive;
 using Microsoft.VisualStudio.Shell.Interop;
-using System;
 
 namespace Roslyn.VisualStudio.Services.Interactive
 {
@@ -27,7 +27,8 @@ namespace Roslyn.VisualStudio.Services.Interactive
         public AbstractResetInteractiveCommand(
             VisualStudioWorkspace workspace,
             VsInteractiveWindowProvider interactiveWindowProvider,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider
+        )
         {
             _workspace = workspace;
             _interactiveWindowProvider = interactiveWindowProvider;
@@ -35,8 +36,7 @@ namespace Roslyn.VisualStudio.Services.Interactive
             _componentModel = (IComponentModel)GetService(typeof(SComponentModel));
         }
 
-        private object GetService(Type type)
-            => _serviceProvider.GetService(type);
+        private object GetService(Type type) => _serviceProvider.GetService(type);
 
         public void ExecuteResetInteractive()
         {
@@ -47,7 +47,8 @@ namespace Roslyn.VisualStudio.Services.Interactive
                 (IVsMonitorSelection)GetService(typeof(SVsShellMonitorSelection)),
                 (IVsSolutionBuildManager)GetService(typeof(SVsSolutionBuildManager)),
                 CreateReference,
-                CreateImport);
+                CreateImport
+            );
 
             var vsInteractiveWindow = _interactiveWindowProvider.Open(instanceId: 0, focus: true);
 
@@ -58,7 +59,10 @@ namespace Roslyn.VisualStudio.Services.Interactive
                 resetInteractive.ExecutionCompleted -= focusWindow;
             }
 
-            resetInteractive.ExecuteAsync(vsInteractiveWindow.InteractiveWindow, LanguageName + " Interactive");
+            resetInteractive.ExecuteAsync(
+                vsInteractiveWindow.InteractiveWindow,
+                LanguageName + " Interactive"
+            );
             resetInteractive.ExecutionCompleted += focusWindow;
         }
     }

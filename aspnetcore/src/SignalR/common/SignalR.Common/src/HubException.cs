@@ -19,18 +19,15 @@ public class HubException : Exception
     /// <summary>
     /// Initializes a new instance of the <see cref="HubException"/> class.
     /// </summary>
-    public HubException()
-    {
-    }
+    public HubException() { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HubException"/> class
     /// with a specified error message.
     /// </summary>
     /// <param name="message">The error message that explains the reason for the exception.</param>
-    public HubException(string? message) : base(message)
-    {
-    }
+    public HubException(string? message)
+        : base(message) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HubException"/> class
@@ -38,9 +35,8 @@ public class HubException : Exception
     /// </summary>
     /// <param name="message">The error message that explains the reason for the exception.</param>
     /// <param name="innerException">The exception that is the cause of the current exception, or <c>null</c> if no inner exception is specified.</param>
-    public HubException(string? message, Exception? innerException) : base(message, innerException)
-    {
-    }
+    public HubException(string? message, Exception? innerException)
+        : base(message, innerException) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HubException"/> class.
@@ -50,11 +46,16 @@ public class HubException : Exception
     /// <exception cref="ArgumentNullException">The <paramref name="info"/> parameter is <c>null</c>.</exception>
     /// <exception cref="SerializationException">The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).</exception>
 #if NET8_0_OR_GREATER
-    [Obsolete("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.", DiagnosticId = "SYSLIB0051", UrlFormat = "https://aka.ms/dotnet-warnings/{0}")]
+    [Obsolete(
+        "This API supports obsolete formatter-based serialization. It should not be called or extended by application code.",
+        DiagnosticId = "SYSLIB0051",
+        UrlFormat = "https://aka.ms/dotnet-warnings/{0}"
+    )]
 #else
-    [Obsolete("This API supports obsolete formatter-based serialization. It should not be called or extended by application code.")]
+    [Obsolete(
+        "This API supports obsolete formatter-based serialization. It should not be called or extended by application code."
+    )]
 #endif
-    public HubException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
+    public HubException(SerializationInfo info, StreamingContext context)
+        : base(info, context) { }
 }

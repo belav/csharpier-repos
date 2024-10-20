@@ -11,13 +11,13 @@ namespace System.IdentityModel.Tokens
 
     /// <summary>
     /// When caching an <see cref="SessionSecurityToken"/> there are two indexes required. One is the ContextId
-    /// that is unique across all <see cref="SessionSecurityToken"/> and the next is KeyGeneration which is 
+    /// that is unique across all <see cref="SessionSecurityToken"/> and the next is KeyGeneration which is
     /// unique within a session. When an <see cref="SessionSecurityToken"/> is issued it has only a ContextId. When
     /// the <see cref="SessionSecurityToken"/> is renewed the KeyGeneration is added as an second index to the
-    /// <see cref="SessionSecurityToken"/>. Now the renewed <see cref="SessionSecurityToken"/> is uniquely identifiable via the ContextId and 
-    /// KeyGeneration. 
+    /// <see cref="SessionSecurityToken"/>. Now the renewed <see cref="SessionSecurityToken"/> is uniquely identifiable via the ContextId and
+    /// KeyGeneration.
     /// The class <see cref="SessionSecurityTokenCacheKey"/> is used as the index
-    /// to the <see cref="SessionSecurityToken"/> cache. This index will always have a valid ContextId specified 
+    /// to the <see cref="SessionSecurityToken"/> cache. This index will always have a valid ContextId specified
     /// but the KeyGeneration may be null. There is also an optional EndpointId
     /// which gives the endpoint to which the token is scoped.
     /// </summary>
@@ -27,7 +27,7 @@ namespace System.IdentityModel.Tokens
         private SystemUniqueId keyGeneration;
         private string endpointId;
         private bool ignoreKeyGeneration;
-        
+
         /// <summary>
         /// Creates an instance of <see cref="SessionSecurityTokenCacheKey"/> which
         /// is used as an index while caching <see cref="SessionSecurityToken"/>.
@@ -36,7 +36,11 @@ namespace System.IdentityModel.Tokens
         /// <param name="contextId">UniqueId of the <see cref="SessionSecurityToken"/>.</param>
         /// <param name="keyGeneration">UniqueId which is available when the <see cref="SessionSecurityToken"/> is renewed. Will be
         /// null when caching a new <see cref="SessionSecurityToken"/>.</param>
-        public SessionSecurityTokenCacheKey(string endpointId, System.Xml.UniqueId contextId, System.Xml.UniqueId keyGeneration)
+        public SessionSecurityTokenCacheKey(
+            string endpointId,
+            System.Xml.UniqueId contextId,
+            System.Xml.UniqueId keyGeneration
+        )
         {
             if (endpointId == null)
             {
@@ -47,7 +51,7 @@ namespace System.IdentityModel.Tokens
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contextId");
             }
-            
+
             this.endpointId = endpointId;
             this.contextId = contextId;
             this.keyGeneration = keyGeneration;
@@ -59,15 +63,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public bool IgnoreKeyGeneration
         {
-            get
-            {
-                return this.ignoreKeyGeneration;
-            }
-            
-            set
-            {
-                this.ignoreKeyGeneration = value;
-            }
+            get { return this.ignoreKeyGeneration; }
+            set { this.ignoreKeyGeneration = value; }
         }
 
         /// <summary>
@@ -75,10 +72,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public System.Xml.UniqueId ContextId
         {
-            get
-            {
-                return this.contextId;
-            }
+            get { return this.contextId; }
         }
 
         /// <summary>
@@ -86,10 +80,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public string EndpointId
         {
-            get
-            {
-                return this.endpointId;
-            }
+            get { return this.endpointId; }
         }
 
         /// <summary>
@@ -97,10 +88,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public System.Xml.UniqueId KeyGeneration
         {
-            get
-            {
-                return this.keyGeneration;
-            }
+            get { return this.keyGeneration; }
         }
 
         /// <summary>
@@ -109,7 +97,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="first">First object to compare.</param>
         /// <param name="second">Second object to compare.</param>
         /// <returns>'true' if both objects are equal.</returns>
-        public static bool operator ==(SessionSecurityTokenCacheKey first, SessionSecurityTokenCacheKey second)
+        public static bool operator ==(
+            SessionSecurityTokenCacheKey first,
+            SessionSecurityTokenCacheKey second
+        )
         {
             if (object.ReferenceEquals(first, null))
             {
@@ -125,11 +116,14 @@ namespace System.IdentityModel.Tokens
         /// <param name="first">First object to compare.</param>
         /// <param name="second">Second object to compare.</param>
         /// <returns>'true' if both the objects are different.</returns>
-        public static bool operator !=(SessionSecurityTokenCacheKey first, SessionSecurityTokenCacheKey second)
+        public static bool operator !=(
+            SessionSecurityTokenCacheKey first,
+            SessionSecurityTokenCacheKey second
+        )
         {
             return !(first == second);
         }
-        
+
         /// <summary>
         /// Checks if the given object is the same as the current object.
         /// </summary>
@@ -149,7 +143,7 @@ namespace System.IdentityModel.Tokens
                 {
                     return false;
                 }
-                
+
                 // If KeyGeneration can be ignored on either one of them then we
                 // don't do KeyGeneration comparison.
                 if (!this.ignoreKeyGeneration && !key2.IgnoreKeyGeneration)
@@ -196,6 +190,6 @@ namespace System.IdentityModel.Tokens
             }
 
             return sb.ToString();
-        }       
+        }
     }
 }

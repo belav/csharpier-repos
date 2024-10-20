@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,70 +30,75 @@
 
 using System.Collections;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Data;
 using System.Text;
-using System.ComponentModel;
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
+    [DefaultPropertyAttribute("SessionField")]
+    public class SessionParameter : Parameter
+    {
+        public SessionParameter()
+            : base() { }
 
-	[DefaultPropertyAttribute ("SessionField")]
-	public class SessionParameter : Parameter {
+        protected SessionParameter(SessionParameter original)
+            : base(original)
+        {
+            this.SessionField = original.SessionField;
+        }
 
-		public SessionParameter () : base ()
-		{
-		}
+        public SessionParameter(string name, string sessionField)
+            : base(name)
+        {
+            SessionField = sessionField;
+        }
 
-		protected SessionParameter (SessionParameter original) : base (original)
-		{
-			this.SessionField = original.SessionField;
-		}
-		
-		public SessionParameter (string name, string sessionField) : base (name)
-		{
-			SessionField = sessionField;
-		}
-		
-		public SessionParameter (string name, TypeCode type, string sessionField) : base (name, type)
-		{
-			SessionField = sessionField;
-		}
+        public SessionParameter(string name, TypeCode type, string sessionField)
+            : base(name, type)
+        {
+            SessionField = sessionField;
+        }
 
-		public SessionParameter (string name, DbType dbType, string sessionField) : base (name, dbType)
-		{
-			SessionField = sessionField;
-		}
-		
-		protected override Parameter Clone ()
-		{
-			return new SessionParameter (this);
-		}
-		protected internal
-		override object Evaluate (HttpContext context, Control control)
-		{
-			if (context == null || context.Session == null)
-				return null;
-			
-			return context.Session [SessionField];
-		}
-		
-		[DefaultValueAttribute ("")]
-		[WebCategoryAttribute ("Parameter")]
-		public string SessionField {
-			get {
-				string s = ViewState ["SessionField"] as string;
-				if (s != null)
-					return s;
-				
-				return "";
-			}
-			set {
-				if (SessionField != value) {
-					ViewState ["SessionField"] = value;
-					OnParameterChanged ();
-				}
-			}
-		}
-	}
+        public SessionParameter(string name, DbType dbType, string sessionField)
+            : base(name, dbType)
+        {
+            SessionField = sessionField;
+        }
+
+        protected override Parameter Clone()
+        {
+            return new SessionParameter(this);
+        }
+
+        protected internal override object Evaluate(HttpContext context, Control control)
+        {
+            if (context == null || context.Session == null)
+                return null;
+
+            return context.Session[SessionField];
+        }
+
+        [DefaultValueAttribute("")]
+        [WebCategoryAttribute("Parameter")]
+        public string SessionField
+        {
+            get
+            {
+                string s = ViewState["SessionField"] as string;
+                if (s != null)
+                    return s;
+
+                return "";
+            }
+            set
+            {
+                if (SessionField != value)
+                {
+                    ViewState["SessionField"] = value;
+                    OnParameterChanged();
+                }
+            }
+        }
+    }
 }
-
-

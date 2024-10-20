@@ -8,6 +8,7 @@ namespace Microsoft.Interop.UnitTests
         readonly ICustomMarshallingSignatureTestProvider _provider;
         public StatelessSnippets Stateless { get; }
         public StatefulSnippets Stateful { get; }
+
         public CustomStructMarshallingCodeSnippets(ICustomMarshallingSignatureTestProvider provider)
         {
             _provider = provider;
@@ -15,17 +16,24 @@ namespace Microsoft.Interop.UnitTests
             Stateful = new StatefulSnippets(provider);
         }
 
-        private static readonly string UsingSystemRuntimeInteropServicesMarshalling = "using System.Runtime.InteropServices.Marshalling;";
+        private static readonly string UsingSystemRuntimeInteropServicesMarshalling =
+            "using System.Runtime.InteropServices.Marshalling;";
 
-        public static string NonBlittableUserDefinedType(bool defineNativeMarshalling = true) => $$"""
-            {{(defineNativeMarshalling ? "[{|#10:NativeMarshalling(typeof(Marshaller))|}]" : string.Empty)}}
-            public struct S
-            {
-            #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
-                public bool b;
-            #pragma warning restore CS0649
-            }
-            """;
+        public static string NonBlittableUserDefinedType(bool defineNativeMarshalling = true) =>
+            $$"""
+                {{(
+                    defineNativeMarshalling
+                        ? "[{|#10:NativeMarshalling(typeof(Marshaller))|}]"
+                        : string.Empty
+                )}}
+                public struct S
+                {
+                #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
+                    public bool b;
+                #pragma warning restore CS0649
+                }
+                """;
+
         private static string NonStatic = """
             [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
             public class Marshaller
@@ -35,9 +43,8 @@ namespace Microsoft.Interop.UnitTests
                 public static Native ConvertToUnmanaged(S s) => default;
             }
             """;
-        public string NonStaticMarshallerEntryPoint => _provider.BasicParameterByValue("S")
-            + NonBlittableUserDefinedType()
-            + NonStatic;
+        public string NonStaticMarshallerEntryPoint =>
+            _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + NonStatic;
 
         private static string Struct = """
             [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(Marshaller))]
@@ -49,14 +56,13 @@ namespace Microsoft.Interop.UnitTests
                 public Native ToUnmanaged() => default;
             }
             """;
-        public string StructMarshallerEntryPoint => _provider.BasicParameterByValue("S")
-            + NonBlittableUserDefinedType()
-            + Struct;
-
+        public string StructMarshallerEntryPoint =>
+            _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + Struct;
 
         public class StatelessSnippets
         {
             public readonly ICustomMarshallingSignatureTestProvider _provider;
+
             public StatelessSnippets(ICustomMarshallingSignatureTestProvider provider)
             {
                 this._provider = provider;
@@ -176,94 +182,104 @@ namespace Microsoft.Interop.UnitTests
                     public static S ConvertToManaged(Native n) => default;
                 }
                 """;
-            public string ManagedToNativeOnlyOutParameter => _provider.BasicParameterWithByRefModifier("out", "S")
+            public string ManagedToNativeOnlyOutParameter =>
+                _provider.BasicParameterWithByRefModifier("out", "S")
                 + NonBlittableUserDefinedType()
                 + In;
 
-            public string NativeToManagedOnlyOutParameter => _provider.BasicParameterWithByRefModifier("out", "S")
+            public string NativeToManagedOnlyOutParameter =>
+                _provider.BasicParameterWithByRefModifier("out", "S")
                 + NonBlittableUserDefinedType()
                 + Out;
 
-            public string NativeToManagedFinallyOnlyOutParameter => _provider.BasicParameterWithByRefModifier("out", "S")
+            public string NativeToManagedFinallyOnlyOutParameter =>
+                _provider.BasicParameterWithByRefModifier("out", "S")
                 + NonBlittableUserDefinedType()
                 + OutGuaranteed;
 
-            public string ManagedToNativeOnlyReturnValue => _provider.BasicReturnType("S")
-                + NonBlittableUserDefinedType()
-                + In;
+            public string ManagedToNativeOnlyReturnValue =>
+                _provider.BasicReturnType("S") + NonBlittableUserDefinedType() + In;
 
-            public string NativeToManagedOnlyReturnValue => _provider.BasicReturnType("S")
-                + NonBlittableUserDefinedType()
-                + Out;
+            public string NativeToManagedOnlyReturnValue =>
+                _provider.BasicReturnType("S") + NonBlittableUserDefinedType() + Out;
 
-            public string NativeToManagedFinallyOnlyReturnValue => _provider.BasicReturnType("S")
-                + NonBlittableUserDefinedType()
-                + Out;
+            public string NativeToManagedFinallyOnlyReturnValue =>
+                _provider.BasicReturnType("S") + NonBlittableUserDefinedType() + Out;
 
-            public string NativeToManagedOnlyInParameter => _provider.BasicParameterWithByRefModifier("in", "S")
+            public string NativeToManagedOnlyInParameter =>
+                _provider.BasicParameterWithByRefModifier("in", "S")
                 + NonBlittableUserDefinedType()
                 + Out;
 
-            public string NativeToManagedFinallyOnlyInParameter => _provider.BasicParameterWithByRefModifier("in", "S")
+            public string NativeToManagedFinallyOnlyInParameter =>
+                _provider.BasicParameterWithByRefModifier("in", "S")
                 + NonBlittableUserDefinedType()
                 + OutGuaranteed;
 
-            public string ParametersAndModifiers => _provider.BasicParametersAndModifiers("S", UsingSystemRuntimeInteropServicesMarshalling)
+            public string ParametersAndModifiers =>
+                _provider.BasicParametersAndModifiers(
+                    "S",
+                    UsingSystemRuntimeInteropServicesMarshalling
+                )
                 + NonBlittableUserDefinedType(defineNativeMarshalling: true)
                 + Default;
 
-            public string MarshalUsingParametersAndModifiers => _provider.MarshalUsingParametersAndModifiers("S", "Marshaller")
+            public string MarshalUsingParametersAndModifiers =>
+                _provider.MarshalUsingParametersAndModifiers("S", "Marshaller")
                 + NonBlittableUserDefinedType(defineNativeMarshalling: false)
                 + Default;
 
-            public string ByValueInParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + In;
+            public string ByValueInParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + In;
 
-            public string ByValueOutParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + Out;
+            public string ByValueOutParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + Out;
 
-            public string StackallocByValueInParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + InBuffer;
+            public string StackallocByValueInParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + InBuffer;
 
-            public string PinByValueInParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + InPinnable;
+            public string PinByValueInParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + InPinnable;
 
-            public string StackallocParametersAndModifiersNoRef => _provider.BasicParametersAndModifiersNoRef("S")
+            public string StackallocParametersAndModifiersNoRef =>
+                _provider.BasicParametersAndModifiersNoRef("S")
                 + NonBlittableUserDefinedType()
                 + InOutBuffer;
 
-            public string RefParameter => _provider.BasicParameterWithByRefModifier("ref", "S")
+            public string RefParameter =>
+                _provider.BasicParameterWithByRefModifier("ref", "S")
                 + NonBlittableUserDefinedType()
                 + Ref;
 
-            public string StackallocOnlyRefParameter => _provider.BasicParameterWithByRefModifier("ref", "S")
-            + NonBlittableUserDefinedType()
-            + InOutBuffer;
+            public string StackallocOnlyRefParameter =>
+                _provider.BasicParameterWithByRefModifier("ref", "S")
+                + NonBlittableUserDefinedType()
+                + InOutBuffer;
 
-            public string OptionalStackallocParametersAndModifiers => _provider.BasicParametersAndModifiers("S", UsingSystemRuntimeInteropServicesMarshalling)
+            public string OptionalStackallocParametersAndModifiers =>
+                _provider.BasicParametersAndModifiers(
+                    "S",
+                    UsingSystemRuntimeInteropServicesMarshalling
+                )
                 + NonBlittableUserDefinedType()
                 + DefaultOptionalBuffer;
 
-            public string DefaultModeByValueInParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + DefaultIn;
+            public string DefaultModeByValueInParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + DefaultIn;
 
-            public string DefaultModeReturnValue => _provider.BasicReturnType("S")
-                + NonBlittableUserDefinedType()
-                + DefaultOut;
+            public string DefaultModeReturnValue =>
+                _provider.BasicReturnType("S") + NonBlittableUserDefinedType() + DefaultOut;
         }
 
         public class StatefulSnippets
         {
             private readonly ICustomMarshallingSignatureTestProvider _provider;
-            public StatefulSnippets (ICustomMarshallingSignatureTestProvider provider)
+
+            public StatefulSnippets(ICustomMarshallingSignatureTestProvider provider)
             {
                 _provider = provider;
             }
+
             private static string In = """
                 [CustomMarshaller(typeof(S), MarshalMode.ManagedToUnmanagedIn, typeof(M))]
                 [CustomMarshaller(typeof(S), MarshalMode.UnmanagedToManagedOut, typeof(M))]
@@ -474,97 +490,114 @@ namespace Microsoft.Interop.UnitTests
                     }
                 }
                 """;
-            public string ManagedToNativeOnlyOutParameter => _provider.BasicParameterWithByRefModifier("out", "S")
+            public string ManagedToNativeOnlyOutParameter =>
+                _provider.BasicParameterWithByRefModifier("out", "S")
                 + NonBlittableUserDefinedType()
                 + In;
 
-            public string NativeToManagedOnlyOutParameter => _provider.BasicParameterWithByRefModifier("out", "S")
+            public string NativeToManagedOnlyOutParameter =>
+                _provider.BasicParameterWithByRefModifier("out", "S")
                 + NonBlittableUserDefinedType()
                 + Out;
 
-            public string NativeToManagedFinallyOnlyOutParameter => _provider.BasicParameterWithByRefModifier("out", "S")
+            public string NativeToManagedFinallyOnlyOutParameter =>
+                _provider.BasicParameterWithByRefModifier("out", "S")
                 + NonBlittableUserDefinedType()
                 + OutGuaranteed;
 
-            public string ManagedToNativeOnlyReturnValue => _provider.BasicReturnType("S")
-                + NonBlittableUserDefinedType()
-                + In;
+            public string ManagedToNativeOnlyReturnValue =>
+                _provider.BasicReturnType("S") + NonBlittableUserDefinedType() + In;
 
-            public string NativeToManagedOnlyReturnValue => _provider.BasicReturnType("S")
-                + NonBlittableUserDefinedType()
-                + Out;
+            public string NativeToManagedOnlyReturnValue =>
+                _provider.BasicReturnType("S") + NonBlittableUserDefinedType() + Out;
 
-            public string NativeToManagedFinallyOnlyReturnValue => _provider.BasicReturnType("S")
-                + NonBlittableUserDefinedType()
-                + Out;
+            public string NativeToManagedFinallyOnlyReturnValue =>
+                _provider.BasicReturnType("S") + NonBlittableUserDefinedType() + Out;
 
-            public string NativeToManagedOnlyInParameter => _provider.BasicParameterWithByRefModifier("in", "S")
+            public string NativeToManagedOnlyInParameter =>
+                _provider.BasicParameterWithByRefModifier("in", "S")
                 + NonBlittableUserDefinedType()
                 + Out;
 
-            public string NativeToManagedFinallyOnlyInParameter => _provider.BasicParameterWithByRefModifier("in", "S")
+            public string NativeToManagedFinallyOnlyInParameter =>
+                _provider.BasicParameterWithByRefModifier("in", "S")
                 + NonBlittableUserDefinedType()
                 + OutGuaranteed;
 
-            public string ParametersAndModifiers => _provider.BasicParametersAndModifiers("S", UsingSystemRuntimeInteropServicesMarshalling)
+            public string ParametersAndModifiers =>
+                _provider.BasicParametersAndModifiers(
+                    "S",
+                    UsingSystemRuntimeInteropServicesMarshalling
+                )
                 + NonBlittableUserDefinedType(defineNativeMarshalling: true)
                 + Default;
 
-            public string ParametersAndModifiersWithFree => _provider.BasicParametersAndModifiers("S", UsingSystemRuntimeInteropServicesMarshalling)
+            public string ParametersAndModifiersWithFree =>
+                _provider.BasicParametersAndModifiers(
+                    "S",
+                    UsingSystemRuntimeInteropServicesMarshalling
+                )
                 + NonBlittableUserDefinedType(defineNativeMarshalling: true)
                 + DefaultWithFree;
 
-            public string ParametersAndModifiersWithOnInvoked => _provider.BasicParametersAndModifiers("S", UsingSystemRuntimeInteropServicesMarshalling)
+            public string ParametersAndModifiersWithOnInvoked =>
+                _provider.BasicParametersAndModifiers(
+                    "S",
+                    UsingSystemRuntimeInteropServicesMarshalling
+                )
                 + NonBlittableUserDefinedType(defineNativeMarshalling: true)
                 + DefaultWithOnInvoked;
 
-            public string MarshalUsingParametersAndModifiers => _provider.MarshalUsingParametersAndModifiers("S", "Marshaller")
+            public string MarshalUsingParametersAndModifiers =>
+                _provider.MarshalUsingParametersAndModifiers("S", "Marshaller")
                 + NonBlittableUserDefinedType(defineNativeMarshalling: false)
                 + Default;
 
-            public string ByValueInParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + In;
+            public string ByValueInParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + In;
 
-            public string ByValueOutParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + Out;
+            public string ByValueOutParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + Out;
 
-            public string StackallocByValueInParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + InBuffer;
+            public string StackallocByValueInParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + InBuffer;
 
-            public string PinByValueInParameter => _provider.BasicParameterByValue("S")
+            public string PinByValueInParameter =>
+                _provider.BasicParameterByValue("S")
                 + NonBlittableUserDefinedType()
                 + InStatelessPinnable;
 
-            public string MarshallerPinByValueInParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + InPinnable;
+            public string MarshallerPinByValueInParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + InPinnable;
 
-            public string StackallocParametersAndModifiersNoRef => _provider.BasicParametersAndModifiersNoRef("S")
+            public string StackallocParametersAndModifiersNoRef =>
+                _provider.BasicParametersAndModifiersNoRef("S")
                 + NonBlittableUserDefinedType()
                 + InOutBuffer;
 
-            public string RefParameter => _provider.BasicParameterWithByRefModifier("ref", "S")
+            public string RefParameter =>
+                _provider.BasicParameterWithByRefModifier("ref", "S")
                 + NonBlittableUserDefinedType()
                 + Ref;
 
-            public string StackallocOnlyRefParameter => _provider.BasicParameterWithByRefModifier("ref", "S")
+            public string StackallocOnlyRefParameter =>
+                _provider.BasicParameterWithByRefModifier("ref", "S")
                 + NonBlittableUserDefinedType()
                 + InOutBuffer;
 
-            public string OptionalStackallocParametersAndModifiers => _provider.BasicParametersAndModifiers("S", UsingSystemRuntimeInteropServicesMarshalling)
+            public string OptionalStackallocParametersAndModifiers =>
+                _provider.BasicParametersAndModifiers(
+                    "S",
+                    UsingSystemRuntimeInteropServicesMarshalling
+                )
                 + NonBlittableUserDefinedType()
                 + DefaultOptionalBuffer;
 
-            public string DefaultModeByValueInParameter => _provider.BasicParameterByValue("S")
-                + NonBlittableUserDefinedType()
-                + DefaultIn;
+            public string DefaultModeByValueInParameter =>
+                _provider.BasicParameterByValue("S") + NonBlittableUserDefinedType() + DefaultIn;
 
-            public string DefaultModeReturnValue => _provider.BasicReturnType("S")
-                + NonBlittableUserDefinedType()
-                + DefaultOut;
+            public string DefaultModeReturnValue =>
+                _provider.BasicReturnType("S") + NonBlittableUserDefinedType() + DefaultOut;
         }
     }
 }

@@ -13,7 +13,11 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
     /// </summary>
     internal sealed class AlignTokensOperation
     {
-        internal AlignTokensOperation(SyntaxToken baseToken, IEnumerable<SyntaxToken> tokens, AlignTokensOption option)
+        internal AlignTokensOperation(
+            SyntaxToken baseToken,
+            IEnumerable<SyntaxToken> tokens,
+            AlignTokensOption option
+        )
         {
             Contract.ThrowIfNull(tokens);
             Debug.Assert(!tokens.IsEmpty());

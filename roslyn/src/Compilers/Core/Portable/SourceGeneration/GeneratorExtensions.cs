@@ -34,6 +34,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="incrementalGenerator">The incremental generator to wrap</param>
         /// <returns>A wrapped generator that can be passed to a generator driver</returns>
-        public static ISourceGenerator AsSourceGenerator(this IIncrementalGenerator incrementalGenerator) => new IncrementalGeneratorWrapper(incrementalGenerator);
+        public static ISourceGenerator AsSourceGenerator(
+            this IIncrementalGenerator incrementalGenerator
+        ) => new IncrementalGeneratorWrapper(incrementalGenerator);
     }
 }

@@ -25,7 +25,10 @@ namespace System.Security.Cryptography.Xml.Tests
 
             XmlElement xmlElement = keyInfo.GetXml();
             Assert.NotNull(xmlElement);
-            Assert.Equal("<KeyInfo xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />", xmlElement.OuterXml);
+            Assert.Equal(
+                "<KeyInfo xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />",
+                xmlElement.OuterXml
+            );
 
             IEnumerator enumerator = keyInfo.GetEnumerator();
             Assert.NotNull(enumerator);

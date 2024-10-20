@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis.FindUsages
         /// <summary>
         /// Get <see cref="FindUsagesOptions"/> for specified language.
         /// </summary>
-        ValueTask<FindUsagesOptions> GetOptionsAsync(string language, CancellationToken cancellationToken);
+        ValueTask<FindUsagesOptions> GetOptionsAsync(
+            string language,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Report a failure message to be displayed to the user.  This will be reported if the find operation returns
@@ -32,14 +35,23 @@ namespace Microsoft.CodeAnalysis.FindUsages
         /// Report a informational message to be displayed to the user.  This may appear to the user in the results
         /// UI in some fashion (for example: in an info-bar).
         /// </summary>
-        ValueTask ReportInformationalMessageAsync(string message, CancellationToken cancellationToken);
+        ValueTask ReportInformationalMessageAsync(
+            string message,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Set the title of the window that results are displayed in.
         /// </summary>
         ValueTask SetSearchTitleAsync(string title, CancellationToken cancellationToken);
 
-        ValueTask OnDefinitionFoundAsync(DefinitionItem definition, CancellationToken cancellationToken);
-        ValueTask OnReferenceFoundAsync(SourceReferenceItem reference, CancellationToken cancellationToken);
+        ValueTask OnDefinitionFoundAsync(
+            DefinitionItem definition,
+            CancellationToken cancellationToken
+        );
+        ValueTask OnReferenceFoundAsync(
+            SourceReferenceItem reference,
+            CancellationToken cancellationToken
+        );
     }
 }

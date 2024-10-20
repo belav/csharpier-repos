@@ -21,7 +21,6 @@ namespace System.ComponentModel.Composition
         /// <summary>
         /// The import can only be satisfied with values from the parent container (or other ancestor containers) (scopes)
         /// </summary>
-        NonLocal = 2
-
+        NonLocal = 2,
     }
 }

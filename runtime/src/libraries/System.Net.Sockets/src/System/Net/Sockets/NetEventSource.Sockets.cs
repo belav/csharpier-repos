@@ -40,12 +40,18 @@ namespace System.Net
             WriteEvent(ConnectedAsyncDnsId, socketHash);
 
         [NonEvent]
-        public static void NotLoggedFile(string filePath, Socket socket, SocketAsyncOperation completedOperation) =>
-            Log.NotLoggedFile(filePath, GetHashCode(socket), completedOperation);
+        public static void NotLoggedFile(
+            string filePath,
+            Socket socket,
+            SocketAsyncOperation completedOperation
+        ) => Log.NotLoggedFile(filePath, GetHashCode(socket), completedOperation);
 
         [Event(NotLoggedFileId, Keywords = Keywords.Default, Level = EventLevel.Informational)]
-        private void NotLoggedFile(string filePath, int socketHash, SocketAsyncOperation completedOperation) =>
-            WriteEvent(NotLoggedFileId, filePath, socketHash, (int)completedOperation);
+        private void NotLoggedFile(
+            string filePath,
+            int socketHash,
+            SocketAsyncOperation completedOperation
+        ) => WriteEvent(NotLoggedFileId, filePath, socketHash, (int)completedOperation);
 
         /// <summary>Logs the contents of a buffer.</summary>
         /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for the operation.</param>
@@ -54,7 +60,12 @@ namespace System.Net
         /// <param name="count">The number of bytes to log.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
-        public static void DumpBuffer(object thisOrContextObject, Memory<byte> buffer, int offset, int count, [CallerMemberName] string? memberName = null) =>
-            DumpBuffer(thisOrContextObject, buffer.Span.Slice(offset, count), memberName);
+        public static void DumpBuffer(
+            object thisOrContextObject,
+            Memory<byte> buffer,
+            int offset,
+            int count,
+            [CallerMemberName] string? memberName = null
+        ) => DumpBuffer(thisOrContextObject, buffer.Span.Slice(offset, count), memberName);
     }
 }

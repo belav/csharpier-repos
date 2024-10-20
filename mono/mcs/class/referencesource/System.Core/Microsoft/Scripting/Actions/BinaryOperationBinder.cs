@@ -1,11 +1,11 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -13,26 +13,28 @@
  *
  * ***************************************************************************/
 
+using System.Dynamic.Utils;
 #if CLR2
 using Microsoft.Scripting.Ast;
 #else
 using System.Linq.Expressions;
 #endif
 
-using System.Dynamic.Utils;
-
-namespace System.Dynamic {
+namespace System.Dynamic
+{
     /// <summary>
     /// Represents the binary dynamic operation at the call site, providing the binding semantic and the details about the operation.
     /// </summary>
-    public abstract class BinaryOperationBinder : DynamicMetaObjectBinder {
+    public abstract class BinaryOperationBinder : DynamicMetaObjectBinder
+    {
         private ExpressionType _operation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BinaryOperationBinder"/> class.
         /// </summary>
         /// <param name="operation">The binary operation kind.</param>
-        protected BinaryOperationBinder(ExpressionType operation) {
+        protected BinaryOperationBinder(ExpressionType operation)
+        {
             ContractUtils.Requires(OperationIsValid(operation), "operation");
             _operation = operation;
         }
@@ -40,17 +42,17 @@ namespace System.Dynamic {
         /// <summary>
         /// The result type of the operation.
         /// </summary>
-        public override sealed Type ReturnType {
+        public override sealed Type ReturnType
+        {
             get { return typeof(object); }
         }
 
         /// <summary>
         /// The binary operation kind.
         /// </summary>
-        public ExpressionType Operation {
-            get {
-                return _operation;
-            }
+        public ExpressionType Operation
+        {
+            get { return _operation; }
         }
 
         /// <summary>
@@ -59,7 +61,11 @@ namespace System.Dynamic {
         /// <param name="target">The target of the dynamic binary operation.</param>
         /// <param name="arg">The right hand side operand of the dynamic binary operation.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public DynamicMetaObject FallbackBinaryOperation(DynamicMetaObject target, DynamicMetaObject arg) {
+        public DynamicMetaObject FallbackBinaryOperation(
+            DynamicMetaObject target,
+            DynamicMetaObject arg
+        )
+        {
             return FallbackBinaryOperation(target, arg, null);
         }
 
@@ -70,7 +76,11 @@ namespace System.Dynamic {
         /// <param name="arg">The right hand side operand of the dynamic binary operation.</param>
         /// <param name="errorSuggestion">The binding result in case the binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public abstract DynamicMetaObject FallbackBinaryOperation(DynamicMetaObject target, DynamicMetaObject arg, DynamicMetaObject errorSuggestion);
+        public abstract DynamicMetaObject FallbackBinaryOperation(
+            DynamicMetaObject target,
+            DynamicMetaObject arg,
+            DynamicMetaObject errorSuggestion
+        );
 
         /// <summary>
         /// Performs the binding of the dynamic binary operation.
@@ -78,7 +88,11 @@ namespace System.Dynamic {
         /// <param name="target">The target of the dynamic operation.</param>
         /// <param name="args">An array of arguments of the dynamic operation.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public sealed override DynamicMetaObject Bind(DynamicMetaObject target, DynamicMetaObject[] args) {
+        public sealed override DynamicMetaObject Bind(
+            DynamicMetaObject target,
+            DynamicMetaObject[] args
+        )
+        {
             ContractUtils.RequiresNotNull(target, "target");
             ContractUtils.RequiresNotNull(args, "args");
             ContractUtils.Requires(args.Length == 1, "args");
@@ -90,15 +104,19 @@ namespace System.Dynamic {
         }
 
         // this is a standard DynamicMetaObjectBinder
-        internal override sealed bool IsStandardBinder {
-            get {
-                return true;
-            }
+        internal override sealed bool IsStandardBinder
+        {
+            get { return true; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal static bool OperationIsValid(ExpressionType operation) {
-            switch (operation) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity"
+        )]
+        internal static bool OperationIsValid(ExpressionType operation)
+        {
+            switch (operation)
+            {
                 #region Generated Binary Operation Binder Validator
 
                 // *** BEGIN GENERATED CODE ***

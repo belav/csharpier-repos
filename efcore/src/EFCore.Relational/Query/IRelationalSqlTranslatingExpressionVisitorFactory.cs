@@ -22,5 +22,6 @@ public interface IRelationalSqlTranslatingExpressionVisitorFactory
     /// <returns>A relational sql translating expression visitor.</returns>
     RelationalSqlTranslatingExpressionVisitor Create(
         QueryCompilationContext queryCompilationContext,
-        QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor);
+        QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
+    );
 }

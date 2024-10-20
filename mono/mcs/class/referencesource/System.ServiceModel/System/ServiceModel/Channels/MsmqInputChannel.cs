@@ -4,18 +4,28 @@
 
 namespace System.ServiceModel.Channels
 {
-    sealed class MsmqInputChannel
-        : MsmqInputChannelBase
+    sealed class MsmqInputChannel : MsmqInputChannelBase
     {
         public MsmqInputChannel(MsmqInputChannelListener listener)
-            : base(listener, new MsmqInputMessagePool((listener.ReceiveParameters as MsmqTransportReceiveParameters).MaxPoolSize))
-        { }
+            : base(
+                listener,
+                new MsmqInputMessagePool(
+                    (listener.ReceiveParameters as MsmqTransportReceiveParameters).MaxPoolSize
+                )
+            ) { }
 
-        protected override Message DecodeMsmqMessage(MsmqInputMessage msmqMessage, MsmqMessageProperty messageProperty)
+        protected override Message DecodeMsmqMessage(
+            MsmqInputMessage msmqMessage,
+            MsmqMessageProperty messageProperty
+        )
         {
             MsmqInputChannelListener listener = this.Manager as MsmqInputChannelListener;
-            return MsmqDecodeHelper.DecodeTransportDatagram(listener, this.MsmqReceiveHelper, msmqMessage, messageProperty);
+            return MsmqDecodeHelper.DecodeTransportDatagram(
+                listener,
+                this.MsmqReceiveHelper,
+                msmqMessage,
+                messageProperty
+            );
         }
     }
 }
-

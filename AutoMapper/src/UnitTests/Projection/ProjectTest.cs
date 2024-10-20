@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Projection;
+
 public class ProjectWithFields : AutoMapperSpecBase
 {
     public class Foo
@@ -11,10 +12,11 @@ public class ProjectWithFields : AutoMapperSpecBase
         public int A;
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Foo, FooDto>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Foo, FooDto>();
+        });
 
     [Fact]
     public void Should_work()
@@ -25,8 +27,10 @@ public class ProjectWithFields : AutoMapperSpecBase
         var p2 = Configuration.Internal().ProjectionBuilder;
         p2.ShouldBe(p1);
         var profile = Configuration.Internal().Profiles[0];
-        profile.CreateTypeDetails(typeof(DateTime)).ShouldBe(profile.CreateTypeDetails(typeof(DateTime)));
-    } 
+        profile
+            .CreateTypeDetails(typeof(DateTime))
+            .ShouldBe(profile.CreateTypeDetails(typeof(DateTime)));
+    }
 }
 
 public class ProjectTest
@@ -45,13 +49,21 @@ public class ProjectTest
     [Fact]
     public void ProjectToWithUnmappedTypeShouldThrowException()
     {
-        var customers =
-            new[] { new Customer { FirstName = "Bill", LastName = "White", Address = new Address("Street1") } }
-                .AsQueryable();
+        var customers = new[]
+        {
+            new Customer
+            {
+                FirstName = "Bill",
+                LastName = "White",
+                Address = new Address("Street1"),
+            },
+        }.AsQueryable();
 
         IList<Unmapped> projected = null;
 
-        typeof(InvalidOperationException).ShouldBeThrownBy(() => projected = customers.ProjectTo<Unmapped>(_config).ToList());
+        typeof(InvalidOperationException).ShouldBeThrownBy(
+            () => projected = customers.ProjectTo<Unmapped>(_config).ToList()
+        );
 
         projected.ShouldBeNull();
     }
@@ -59,9 +71,15 @@ public class ProjectTest
     [Fact]
     public void DynamicProjectToShouldWork()
     {
-        var customers =
-            new[] { new Customer { FirstName = "Bill", LastName = "White", Address = new Address("Street1") } }
-                .AsQueryable();
+        var customers = new[]
+        {
+            new Customer
+            {
+                FirstName = "Bill",
+                LastName = "White",
+                Address = new Address("Street1"),
+            },
+        }.AsQueryable();
 
         IQueryable projected = customers.ProjectTo(typeof(CustomerDto), _config);
 

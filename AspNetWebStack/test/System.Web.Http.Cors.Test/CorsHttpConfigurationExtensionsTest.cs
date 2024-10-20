@@ -14,11 +14,13 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void EnableCors_NullConfig_Throws()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CorsHttpConfigurationExtensions.EnableCors(null);
-            },
-            "httpConfiguration");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CorsHttpConfigurationExtensions.EnableCors(null);
+                },
+                "httpConfiguration"
+            );
         }
 
         [Fact]
@@ -75,12 +77,17 @@ namespace System.Web.Http.Cors.Test
         {
             HttpConfiguration config = new HttpConfiguration();
             config.MessageHandlers.Clear();
-            EnableCorsAttribute policyProvider = new EnableCorsAttribute(origins: "*", headers: "*", methods: "*");
+            EnableCorsAttribute policyProvider = new EnableCorsAttribute(
+                origins: "*",
+                headers: "*",
+                methods: "*"
+            );
             config.EnableCors(policyProvider);
             config.Initializer(config);
 
             ICorsPolicyProviderFactory providerFactory = config.GetCorsPolicyProviderFactory();
-            AttributeBasedPolicyProviderFactory attributeProviderFactory = Assert.IsType<AttributeBasedPolicyProviderFactory>(providerFactory);
+            AttributeBasedPolicyProviderFactory attributeProviderFactory =
+                Assert.IsType<AttributeBasedPolicyProviderFactory>(providerFactory);
             Assert.Same(policyProvider, attributeProviderFactory.DefaultPolicyProvider);
         }
 
@@ -91,7 +98,11 @@ namespace System.Web.Http.Cors.Test
             ITraceWriter traceMock = new Mock<ITraceWriter>().Object;
             config.Services.Replace(typeof(ITraceWriter), traceMock);
             config.MessageHandlers.Clear();
-            EnableCorsAttribute policyProvider = new EnableCorsAttribute(origins: "*", headers: "*", methods: "*");
+            EnableCorsAttribute policyProvider = new EnableCorsAttribute(
+                origins: "*",
+                headers: "*",
+                methods: "*"
+            );
             config.EnableCors(policyProvider);
             config.Initializer(config);
 
@@ -102,11 +113,13 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsPolicyProviderFactory_NullHttpConfiguration_Throws()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CorsHttpConfigurationExtensions.GetCorsPolicyProviderFactory(null);
-            },
-            "httpConfiguration");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CorsHttpConfigurationExtensions.GetCorsPolicyProviderFactory(null);
+                },
+                "httpConfiguration"
+            );
         }
 
         [Fact]
@@ -133,11 +146,13 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void GetCorsEngine_NullHttpConfiguration_Throws()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CorsHttpConfigurationExtensions.GetCorsEngine(null);
-            },
-            "httpConfiguration");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CorsHttpConfigurationExtensions.GetCorsEngine(null);
+                },
+                "httpConfiguration"
+            );
         }
 
         [Fact]
@@ -161,41 +176,55 @@ namespace System.Web.Http.Cors.Test
         [Fact]
         public void SetCorsEngine_NullHttpConfiguration_Throws()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CorsHttpConfigurationExtensions.SetCorsEngine(null, new CorsEngine());
-            },
-            "httpConfiguration");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CorsHttpConfigurationExtensions.SetCorsEngine(null, new CorsEngine());
+                },
+                "httpConfiguration"
+            );
         }
 
         [Fact]
         public void SetCorsEngine_NullCorsEngine_Throws()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CorsHttpConfigurationExtensions.SetCorsEngine(new HttpConfiguration(), null);
-            },
-            "corsEngine");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CorsHttpConfigurationExtensions.SetCorsEngine(new HttpConfiguration(), null);
+                },
+                "corsEngine"
+            );
         }
 
         [Fact]
         public void SetCorsPolicyProviderFactory_NullHttpConfiguration_Throws()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CorsHttpConfigurationExtensions.SetCorsPolicyProviderFactory(null, new AttributeBasedPolicyProviderFactory());
-            },
-            "httpConfiguration");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CorsHttpConfigurationExtensions.SetCorsPolicyProviderFactory(
+                        null,
+                        new AttributeBasedPolicyProviderFactory()
+                    );
+                },
+                "httpConfiguration"
+            );
         }
 
         [Fact]
         public void SetCorsPolicyProviderFactory_NullCorsEngine_Throws()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                CorsHttpConfigurationExtensions.SetCorsPolicyProviderFactory(new HttpConfiguration(), null);
-            },
-            "corsPolicyProviderFactory");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CorsHttpConfigurationExtensions.SetCorsPolicyProviderFactory(
+                        new HttpConfiguration(),
+                        null
+                    );
+                },
+                "corsPolicyProviderFactory"
+            );
         }
     }
 }

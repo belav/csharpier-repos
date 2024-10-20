@@ -38,12 +38,20 @@ internal sealed class ServerWebSocket : WebSocket
         _context.Abort();
     }
 
-    public override Task CloseAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
+    public override Task CloseAsync(
+        WebSocketCloseStatus closeStatus,
+        string? statusDescription,
+        CancellationToken cancellationToken
+    )
     {
         return _wrappedSocket.CloseAsync(closeStatus, statusDescription, cancellationToken);
     }
 
-    public override Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string? statusDescription, CancellationToken cancellationToken)
+    public override Task CloseOutputAsync(
+        WebSocketCloseStatus closeStatus,
+        string? statusDescription,
+        CancellationToken cancellationToken
+    )
     {
         return _wrappedSocket.CloseOutputAsync(closeStatus, statusDescription, cancellationToken);
     }
@@ -53,27 +61,48 @@ internal sealed class ServerWebSocket : WebSocket
         _wrappedSocket.Dispose();
     }
 
-    public override Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken)
+    public override Task<WebSocketReceiveResult> ReceiveAsync(
+        ArraySegment<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         return _wrappedSocket.ReceiveAsync(buffer, cancellationToken);
     }
 
-    public override ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+    public override ValueTask<ValueWebSocketReceiveResult> ReceiveAsync(
+        Memory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         return _wrappedSocket.ReceiveAsync(buffer, cancellationToken);
     }
 
-    public override ValueTask SendAsync(ReadOnlyMemory<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+    public override ValueTask SendAsync(
+        ReadOnlyMemory<byte> buffer,
+        WebSocketMessageType messageType,
+        bool endOfMessage,
+        CancellationToken cancellationToken
+    )
     {
         return _wrappedSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
     }
 
-    public override ValueTask SendAsync(ReadOnlyMemory<byte> buffer, WebSocketMessageType messageType, WebSocketMessageFlags messageFlags, CancellationToken cancellationToken)
+    public override ValueTask SendAsync(
+        ReadOnlyMemory<byte> buffer,
+        WebSocketMessageType messageType,
+        WebSocketMessageFlags messageFlags,
+        CancellationToken cancellationToken
+    )
     {
         return _wrappedSocket.SendAsync(buffer, messageType, messageFlags, cancellationToken);
     }
 
-    public override Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+    public override Task SendAsync(
+        ArraySegment<byte> buffer,
+        WebSocketMessageType messageType,
+        bool endOfMessage,
+        CancellationToken cancellationToken
+    )
     {
         return _wrappedSocket.SendAsync(buffer, messageType, endOfMessage, cancellationToken);
     }

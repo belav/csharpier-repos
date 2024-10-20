@@ -42,7 +42,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void ExtendedComplex()
         {
-            string first = @"{
+            string first =
+                @"{
   ""id"":""first"",
   ""type"":""object"",
   ""properties"":
@@ -60,7 +61,8 @@ namespace Newtonsoft.Json.Tests.Schema
   ""additionalProperties"":{}
 }";
 
-            string second = @"{
+            string second =
+                @"{
   ""id"":""second"",
   ""type"":""object"",
   ""extends"":{""$ref"":""first""},
@@ -106,25 +108,84 @@ namespace Newtonsoft.Json.Tests.Schema
 
             Assert.AreEqual(JsonSchemaType.Object, model.Properties["thirdproperty"].Type);
             Assert.AreEqual(3, model.Properties["thirdproperty"].AdditionalProperties.Enum.Count);
-            Assert.AreEqual("two", (string)model.Properties["thirdproperty"].AdditionalProperties.Enum[0]);
-            Assert.AreEqual("three", (string)model.Properties["thirdproperty"].AdditionalProperties.Enum[1]);
-            Assert.AreEqual("one", (string)model.Properties["thirdproperty"].AdditionalProperties.Enum[2]);
+            Assert.AreEqual(
+                "two",
+                (string)model.Properties["thirdproperty"].AdditionalProperties.Enum[0]
+            );
+            Assert.AreEqual(
+                "three",
+                (string)model.Properties["thirdproperty"].AdditionalProperties.Enum[1]
+            );
+            Assert.AreEqual(
+                "one",
+                (string)model.Properties["thirdproperty"].AdditionalProperties.Enum[2]
+            );
 
-            Assert.AreEqual(JsonSchemaType.String, model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Type);
-            Assert.AreEqual(9, model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].MaximumLength);
-            Assert.AreEqual(7, model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].MinimumLength);
-            Assert.AreEqual(2, model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Patterns.Count);
-            Assert.AreEqual("hi", model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Patterns[0]);
-            Assert.AreEqual("hi2u", model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Patterns[1]);
-            Assert.AreEqual(null, model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Properties);
-            Assert.AreEqual(null, model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Items);
-            Assert.AreEqual(null, model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].AdditionalProperties);
+            Assert.AreEqual(
+                JsonSchemaType.String,
+                model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Type
+            );
+            Assert.AreEqual(
+                9,
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .MaximumLength
+            );
+            Assert.AreEqual(
+                7,
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .MinimumLength
+            );
+            Assert.AreEqual(
+                2,
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .Patterns
+                    .Count
+            );
+            Assert.AreEqual(
+                "hi",
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .Patterns[0]
+            );
+            Assert.AreEqual(
+                "hi2u",
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .Patterns[1]
+            );
+            Assert.AreEqual(
+                null,
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .Properties
+            );
+            Assert.AreEqual(
+                null,
+                model.Properties["thirdproperty"].Properties["thirdproperty_firstproperty"].Items
+            );
+            Assert.AreEqual(
+                null,
+                model
+                    .Properties["thirdproperty"]
+                    .Properties["thirdproperty_firstproperty"]
+                    .AdditionalProperties
+            );
         }
 
         [Test]
         public void CircularReference()
         {
-            string json = @"{
+            string json =
+                @"{
   ""id"":""CircularReferenceArray"",
   ""description"":""CircularReference"",
   ""type"":[""array""],
@@ -145,7 +206,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void Required()
         {
-            string schemaJson = @"{
+            string schemaJson =
+                @"{
   ""description"":""A person"",
   ""type"":""object"",
   ""properties"":

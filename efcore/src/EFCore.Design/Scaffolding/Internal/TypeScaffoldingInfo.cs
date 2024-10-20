@@ -24,7 +24,8 @@ public class TypeScaffoldingInfo
         int? scaffoldMaxLength,
         bool? scaffoldFixedLength,
         int? scaffoldPrecision,
-        int? scaffoldScale)
+        int? scaffoldScale
+    )
     {
         IsInferred = inferred;
         ScaffoldUnicode = scaffoldUnicode;

@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Default implementation of <see cref="IUserConfirmation{TUser}"/>.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public class DefaultUserConfirmation<TUser> : IUserConfirmation<TUser> where TUser : class
+public class DefaultUserConfirmation<TUser> : IUserConfirmation<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Determines whether the specified <paramref name="user"/> is confirmed.

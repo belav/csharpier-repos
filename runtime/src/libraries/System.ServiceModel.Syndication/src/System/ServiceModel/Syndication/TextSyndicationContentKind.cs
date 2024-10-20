@@ -7,6 +7,6 @@ namespace System.ServiceModel.Syndication
     {
         Plaintext,
         Html,
-        XHtml
+        XHtml,
     }
 }

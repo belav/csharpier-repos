@@ -16,7 +16,9 @@ namespace System.Data.Metadata.Edm
     /// Class representing a read-only wrapper around MetadataCollection
     /// </summary>
     /// <typeparam name="T">The type of items in this collection</typeparam>
-    public class ReadOnlyMetadataCollection<T> : System.Collections.ObjectModel.ReadOnlyCollection<T> where T : MetadataItem
+    public class ReadOnlyMetadataCollection<T>
+        : System.Collections.ObjectModel.ReadOnlyCollection<T>
+        where T : MetadataItem
     {
         #region Constructors
         /// <summary>
@@ -24,9 +26,8 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="collection">The metadata collection to wrap</param>
         /// <exception cref="System.ArgumentNullException">Thrown if collection argument is null</exception>
-        internal ReadOnlyMetadataCollection(IList<T> collection) : base(collection)
-        {
-        }
+        internal ReadOnlyMetadataCollection(IList<T> collection)
+            : base(collection) { }
         #endregion
 
         #region InnerClasses
@@ -35,7 +36,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// The enumerator for MetadataCollection
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1815:OverrideEqualsAndOperatorEqualsOnValueTypes"
+        )]
         public struct Enumerator : IEnumerator<T>
         {
             /// <summary>
@@ -58,10 +62,7 @@ namespace System.Data.Metadata.Edm
             /// </summary>
             public T Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             }
 
             /// <summary>
@@ -69,18 +70,13 @@ namespace System.Data.Metadata.Edm
             /// </summary>
             object IEnumerator.Current
             {
-                get
-                {
-                    return this.Current;
-                }
+                get { return this.Current; }
             }
 
             /// <summary>
             /// Dispose this enumerator
             /// </summary>
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             /// <summary>
             /// Move to the next member in the collection
@@ -116,10 +112,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -131,10 +124,7 @@ namespace System.Data.Metadata.Edm
         /// <exception cref="System.NotSupportedException">Thrown if setter is called</exception>
         public virtual T this[string identity]
         {
-            get
-            {
-                return (((MetadataCollection<T>)this.Items)[identity]);
-            }
+            get { return (((MetadataCollection<T>)this.Items)[identity]); }
         }
 
         /// <summary>
@@ -142,10 +132,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         internal MetadataCollection<T> Source
         {
-            get
-            {
-                return (MetadataCollection<T>)this.Items;
-            }
+            get { return (MetadataCollection<T>)this.Items; }
         }
         #endregion
 
@@ -188,7 +175,6 @@ namespace System.Data.Metadata.Edm
             return ((MetadataCollection<T>)this.Items).TryGetValue(identity, ignoreCase, out item);
         }
 
-
         /// <summary>
         /// Gets the enumerator over this collection
         /// </summary>
@@ -199,7 +185,7 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Workaround for bug 
+        /// Workaround for bug
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>

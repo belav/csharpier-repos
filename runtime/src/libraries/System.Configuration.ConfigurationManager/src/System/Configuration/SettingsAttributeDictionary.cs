@@ -8,11 +8,16 @@ namespace System.Configuration
 {
     public class SettingsAttributeDictionary : Hashtable
     {
-        public SettingsAttributeDictionary() : base() { }
+        public SettingsAttributeDictionary()
+            : base() { }
 
-        public SettingsAttributeDictionary(SettingsAttributeDictionary attributes) : base(attributes) { }
+        public SettingsAttributeDictionary(SettingsAttributeDictionary attributes)
+            : base(attributes) { }
 
-        protected SettingsAttributeDictionary(SerializationInfo serializationInfo, StreamingContext streamingContext)
+        protected SettingsAttributeDictionary(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
         {
             throw new PlatformNotSupportedException();
         }

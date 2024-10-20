@@ -11,7 +11,10 @@ namespace System.Diagnostics.Tests
     public partial class ProcessModuleTests : ProcessTestBase
     {
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "libproc is not supported on iOS/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "libproc is not supported on iOS/tvOS"
+        )]
         public void TestModuleProperties()
         {
             ProcessModuleCollection modules = Process.GetCurrentProcess().Modules;
@@ -31,11 +34,17 @@ namespace System.Diagnostics.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "libproc is not supported on iOS/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS,
+            "libproc is not supported on iOS/tvOS"
+        )]
         public void Modules_Get_ContainsHostFileName()
         {
             ProcessModuleCollection modules = Process.GetCurrentProcess().Modules;
-            Assert.Contains(modules.Cast<ProcessModule>(), m => m.FileName.Contains(RemoteExecutor.HostRunnerName));
+            Assert.Contains(
+                modules.Cast<ProcessModule>(),
+                m => m.FileName.Contains(RemoteExecutor.HostRunnerName)
+            );
         }
 
         // Single-file executables don't have libcoreclr or libSystem.Native
@@ -45,7 +54,10 @@ namespace System.Diagnostics.Tests
         {
             ProcessModuleCollection modules = Process.GetCurrentProcess().Modules;
             Assert.Contains(modules.Cast<ProcessModule>(), m => m.FileName.Contains("libcoreclr"));
-            Assert.Contains(modules.Cast<ProcessModule>(), m => m.FileName.Contains("System.Native"));
+            Assert.Contains(
+                modules.Cast<ProcessModule>(),
+                m => m.FileName.Contains("System.Native")
+            );
         }
 
         [Fact]
@@ -70,7 +82,8 @@ namespace System.Diagnostics.Tests
 
         public class ModuleCollectionSubClass : ProcessModuleCollection
         {
-            public ModuleCollectionSubClass() : base() { }
+            public ModuleCollectionSubClass()
+                : base() { }
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -82,10 +95,15 @@ namespace System.Diagnostics.Tests
             // so far on this particular test, the only one that creates a new process.
             // Assumption is that we need to give a little extra time.
             ProcessModuleCollection modulesCollection = null;
-            RetryHelper.Execute(() =>
-            {
-                modulesCollection = process.Modules;
-            }, maxAttempts: 5, backoffFunc: null, retryWhen: e => e.GetType() == typeof(Win32Exception));
+            RetryHelper.Execute(
+                () =>
+                {
+                    modulesCollection = process.Modules;
+                },
+                maxAttempts: 5,
+                backoffFunc: null,
+                retryWhen: e => e.GetType() == typeof(Win32Exception)
+            );
 
             int expectedCount = 0;
             int disposedCount = 0;

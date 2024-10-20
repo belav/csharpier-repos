@@ -7,7 +7,8 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public class CodeMethodReferenceExpressionTests : CodeObjectTestBase<CodeMethodReferenceExpression>
+    public class CodeMethodReferenceExpressionTests
+        : CodeObjectTestBase<CodeMethodReferenceExpression>
     {
         [Fact]
         public void Ctor_Default()
@@ -37,25 +38,50 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_CodeExpression_String_ParamsCodeExpression_TestData()
         {
             yield return new object[] { null, null, null };
-            yield return new object[] { new CodePrimitiveExpression(), "", new CodeTypeReference[0] };
-            yield return new object[] { new CodePrimitiveExpression("Value"), "Length", new CodeTypeReference[] { new CodeTypeReference(typeof(void)) } };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression(),
+                "",
+                new CodeTypeReference[0],
+            };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value"),
+                "Length",
+                new CodeTypeReference[] { new CodeTypeReference(typeof(void)) },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_CodeExpression_String_ParamsCodeExpression_TestData))]
-        public void Ctor_TargetObject_MethodName_TypeArguments(CodeExpression targetObject, string methodName, CodeTypeReference[] typeArguments)
+        public void Ctor_TargetObject_MethodName_TypeArguments(
+            CodeExpression targetObject,
+            string methodName,
+            CodeTypeReference[] typeArguments
+        )
         {
-            var methodReference = new CodeMethodReferenceExpression(targetObject, methodName, typeArguments);
+            var methodReference = new CodeMethodReferenceExpression(
+                targetObject,
+                methodName,
+                typeArguments
+            );
             Assert.Equal(targetObject, methodReference.TargetObject);
             Assert.Equal(methodName ?? string.Empty, methodReference.MethodName);
-            Assert.Equal(typeArguments ?? new CodeTypeReference[0], methodReference.TypeArguments.Cast<CodeTypeReference>());
+            Assert.Equal(
+                typeArguments ?? new CodeTypeReference[0],
+                methodReference.TypeArguments.Cast<CodeTypeReference>()
+            );
         }
 
         [Fact]
         public void Ctor_NullObjectInParameters_ThrowsArgumentNullException()
         {
             CodeTypeReference[] parameters = new CodeTypeReference[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeMethodReferenceExpression(new CodePrimitiveExpression(), "", parameters));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                    new CodeMethodReferenceExpression(new CodePrimitiveExpression(), "", parameters)
+            );
         }
 
         [Theory]
@@ -83,11 +109,17 @@ namespace System.CodeDom.Tests
 
             CodeTypeReference type1 = new CodeTypeReference(typeof(int));
             methodReference.TypeArguments.Add(type1);
-            Assert.Equal(new CodeTypeReference[] { type1 }, methodReference.TypeArguments.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1 },
+                methodReference.TypeArguments.Cast<CodeTypeReference>()
+            );
 
             CodeTypeReference type2 = new CodeTypeReference(typeof(char));
             methodReference.TypeArguments.Add(type2);
-            Assert.Equal(new CodeTypeReference[] { type1, type2 }, methodReference.TypeArguments.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1, type2 },
+                methodReference.TypeArguments.Cast<CodeTypeReference>()
+            );
         }
     }
 }

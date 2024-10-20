@@ -13,68 +13,79 @@ namespace Microsoft.AspNetCore.Analyzers.Http;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public partial class HeaderDictionaryIndexerAnalyzer : DiagnosticAnalyzer
 {
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+        ImmutableArray.Create(DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer);
 
     public override void Initialize(AnalysisContext context)
     {
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
         context.EnableConcurrentExecution();
-        context.RegisterOperationAction(context =>
-        {
-            var propertyReference = (IPropertyReferenceOperation)context.Operation;
-            var property = propertyReference.Property;
-
-            // Check if property is the indexer on IHeaderDictionary, e.g. headers["content-type"]
-            if (property.IsIndexer &&
-                property.Parameters.Length == 1 &&
-                property.Parameters[0].Type.SpecialType == SpecialType.System_String &&
-                IsIHeadersDictionaryType(property.ContainingType))
+        context.RegisterOperationAction(
+            context =>
             {
-                // Get the indexer string argument.
-                if (propertyReference.Arguments.Length == 1 &&
-                    propertyReference.Arguments[0].Value is ILiteralOperation literalOperation &&
-                    literalOperation.ConstantValue.Value is string indexerValue)
+                var propertyReference = (IPropertyReferenceOperation)context.Operation;
+                var property = propertyReference.Property;
+
+                // Check if property is the indexer on IHeaderDictionary, e.g. headers["content-type"]
+                if (
+                    property.IsIndexer
+                    && property.Parameters.Length == 1
+                    && property.Parameters[0].Type.SpecialType == SpecialType.System_String
+                    && IsIHeadersDictionaryType(property.ContainingType)
+                )
                 {
-                    // Check that the header has a matching property on IHeaderDictionary.
-                    if (PropertyMapping.TryGetValue(indexerValue, out var propertyName))
+                    // Get the indexer string argument.
+                    if (
+                        propertyReference.Arguments.Length == 1
+                        && propertyReference.Arguments[0].Value
+                            is ILiteralOperation literalOperation
+                        && literalOperation.ConstantValue.Value is string indexerValue
+                    )
                     {
-                        AddDiagnosticWarning(context, propertyReference.Syntax.GetLocation(), indexerValue, propertyName);
+                        // Check that the header has a matching property on IHeaderDictionary.
+                        if (PropertyMapping.TryGetValue(indexerValue, out var propertyName))
+                        {
+                            AddDiagnosticWarning(
+                                context,
+                                propertyReference.Syntax.GetLocation(),
+                                indexerValue,
+                                propertyName
+                            );
+                        }
                     }
                 }
-            }
-        }, OperationKind.PropertyReference);
+            },
+            OperationKind.PropertyReference
+        );
     }
 
     private static bool IsIHeadersDictionaryType(INamedTypeSymbol type)
     {
         // Only IHeaderDictionary is valid. Types like HeaderDictionary, which implement IHeaderDictionary,
         // can't access header properties unless cast as IHeaderDictionary.
-        return type is
-        {
-            Name: "IHeaderDictionary",
-            ContainingNamespace:
-            {
-                Name: "Http",
+        return type
+            is {
+                Name: "IHeaderDictionary",
                 ContainingNamespace:
                 {
-                    Name: "AspNetCore",
+                    Name: "Http",
                     ContainingNamespace:
                     {
-                        Name: "Microsoft",
+                        Name: "AspNetCore",
                         ContainingNamespace:
-                        {
-                            IsGlobalNamespace: true
-                        }
+                        { Name: "Microsoft", ContainingNamespace: { IsGlobalNamespace: true } }
                     }
                 }
-            }
-        };
+            };
     }
 
     // Internal for unit tests
     // Note that this dictionary should be kept in sync with properties in IHeaderDictionary.Keyed.cs
     // Key = property name, Value = header name
-    internal static readonly Dictionary<string, string> PropertyMapping = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+    internal static readonly Dictionary<string, string> PropertyMapping = new Dictionary<
+        string,
+        string
+    >(StringComparer.OrdinalIgnoreCase)
     {
         ["Accept"] = "Accept",
         ["Accept-Charset"] = "AcceptCharset",
@@ -166,17 +177,25 @@ public partial class HeaderDictionaryIndexerAnalyzer : DiagnosticAnalyzer
         ["X-XSS-Protection"] = "XXSSProtection",
     };
 
-    private static void AddDiagnosticWarning(OperationAnalysisContext context, Location location, string headerName, string propertyName)
+    private static void AddDiagnosticWarning(
+        OperationAnalysisContext context,
+        Location location,
+        string headerName,
+        string propertyName
+    )
     {
         var propertiesBuilder = ImmutableDictionary.CreateBuilder<string, string?>();
         propertiesBuilder.Add("HeaderName", headerName);
         propertiesBuilder.Add("ResolvedPropertyName", propertyName);
 
-        context.ReportDiagnostic(Diagnostic.Create(
-            DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer,
-            location,
-            propertiesBuilder.ToImmutable(),
-            headerName,
-            propertyName));
+        context.ReportDiagnostic(
+            Diagnostic.Create(
+                DiagnosticDescriptors.UseHeaderDictionaryPropertiesInsteadOfIndexer,
+                location,
+                propertiesBuilder.ToImmutable(),
+                headerName,
+                propertyName
+            )
+        );
     }
 }

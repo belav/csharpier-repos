@@ -39,7 +39,15 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedMultiplyNullableDecimalTest(bool useInterpreter)
         {
-            decimal?[] values = new decimal?[] { null, decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
+            decimal?[] values = new decimal?[]
+            {
+                null,
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -52,7 +60,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedMultiplyNullableDoubleTest(bool useInterpreter)
         {
-            double?[] values = new double?[] { null, 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
+            double?[] values = new double?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -65,7 +85,19 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLiftedMultiplyNullableFloatTest(bool useInterpreter)
         {
-            float?[] values = new float?[] { null, 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
+            float?[] values = new float?[]
+            {
+                null,
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+            };
             for (int i = 0; i < values.Length; i++)
             {
                 for (int j = 0; j < values.Length; j++)
@@ -171,7 +203,13 @@ namespace System.Linq.Expressions.Tests
         {
             AssertExtensions.ThrowsOnAot<NotSupportedException>(() =>
             {
-                Number?[] values = new Number?[] { null, new Number(0), new Number(1), Number.MaxValue };
+                Number?[] values = new Number?[]
+                {
+                    null,
+                    new Number(0),
+                    new Number(1),
+                    Number.MaxValue,
+                };
                 for (int i = 0; i < values.Length; i++)
                 {
                     for (int j = 0; j < values.Length; j++)
@@ -252,12 +290,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableByte(byte? a, byte? b, bool useInterpreter)
         {
-            Expression<Func<byte?>> e =
-                Expression.Lambda<Func<byte?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(byte?)),
-                        Expression.Constant(b, typeof(byte?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableByte")));
+            Expression<Func<byte?>> e = Expression.Lambda<Func<byte?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(byte?)),
+                    Expression.Constant(b, typeof(byte?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableByte")
+                )
+            );
             Func<byte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((byte?)(a * b)), f());
@@ -265,25 +306,35 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableChar(char? a, char? b, bool useInterpreter)
         {
-            Expression<Func<char?>> e =
-                Expression.Lambda<Func<char?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(char?)),
-                        Expression.Constant(b, typeof(char?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableChar")));
+            Expression<Func<char?>> e = Expression.Lambda<Func<char?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(char?)),
+                    Expression.Constant(b, typeof(char?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableChar")
+                )
+            );
             Func<char?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((char?)(a * b)), f());
         }
 
-        private static void VerifyMultiplyNullableDecimal(decimal? a, decimal? b, bool useInterpreter)
+        private static void VerifyMultiplyNullableDecimal(
+            decimal? a,
+            decimal? b,
+            bool useInterpreter
+        )
         {
-            Expression<Func<decimal?>> e =
-                Expression.Lambda<Func<decimal?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(decimal?)),
-                        Expression.Constant(b, typeof(decimal?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableDecimal")));
+            Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(decimal?)),
+                    Expression.Constant(b, typeof(decimal?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableDecimal")
+                )
+            );
             Func<decimal?> f = e.Compile(useInterpreter);
 
             decimal? expected = null;
@@ -302,12 +353,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableDouble(double? a, double? b, bool useInterpreter)
         {
-            Expression<Func<double?>> e =
-                Expression.Lambda<Func<double?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(double?)),
-                        Expression.Constant(b, typeof(double?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableDouble")));
+            Expression<Func<double?>> e = Expression.Lambda<Func<double?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(double?)),
+                    Expression.Constant(b, typeof(double?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableDouble")
+                )
+            );
             Func<double?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a * b, f());
@@ -315,12 +369,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableFloat(float? a, float? b, bool useInterpreter)
         {
-            Expression<Func<float?>> e =
-                Expression.Lambda<Func<float?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(float?)),
-                        Expression.Constant(b, typeof(float?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableFloat")));
+            Expression<Func<float?>> e = Expression.Lambda<Func<float?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(float?)),
+                    Expression.Constant(b, typeof(float?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableFloat")
+                )
+            );
             Func<float?> f = e.Compile(useInterpreter);
 
             Assert.Equal(a * b, f());
@@ -328,12 +385,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableInt(int? a, int? b, bool useInterpreter)
         {
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableInt")));
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(int?)),
+                    Expression.Constant(b, typeof(int?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableInt")
+                )
+            );
             Func<int?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a * b), f());
@@ -341,12 +401,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableLong(long? a, long? b, bool useInterpreter)
         {
-            Expression<Func<long?>> e =
-                Expression.Lambda<Func<long?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableLong")));
+            Expression<Func<long?>> e = Expression.Lambda<Func<long?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(long?)),
+                    Expression.Constant(b, typeof(long?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableLong")
+                )
+            );
             Func<long?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a * b), f());
@@ -354,12 +417,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableSByte(sbyte? a, sbyte? b, bool useInterpreter)
         {
-            Expression<Func<sbyte?>> e =
-                Expression.Lambda<Func<sbyte?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(sbyte?)),
-                        Expression.Constant(b, typeof(sbyte?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableSByte")));
+            Expression<Func<sbyte?>> e = Expression.Lambda<Func<sbyte?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(sbyte?)),
+                    Expression.Constant(b, typeof(sbyte?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableSByte")
+                )
+            );
             Func<sbyte?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((sbyte?)(a * b)), f());
@@ -367,12 +433,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableShort(short? a, short? b, bool useInterpreter)
         {
-            Expression<Func<short?>> e =
-                Expression.Lambda<Func<short?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableShort")));
+            Expression<Func<short?>> e = Expression.Lambda<Func<short?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(short?)),
+                    Expression.Constant(b, typeof(short?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableShort")
+                )
+            );
             Func<short?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((short?)(a * b)), f());
@@ -380,12 +449,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableUInt(uint? a, uint? b, bool useInterpreter)
         {
-            Expression<Func<uint?>> e =
-                Expression.Lambda<Func<uint?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableUInt")));
+            Expression<Func<uint?>> e = Expression.Lambda<Func<uint?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(uint?)),
+                    Expression.Constant(b, typeof(uint?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableUInt")
+                )
+            );
             Func<uint?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a * b), f());
@@ -393,12 +465,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableULong(ulong? a, ulong? b, bool useInterpreter)
         {
-            Expression<Func<ulong?>> e =
-                Expression.Lambda<Func<ulong?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableULong")));
+            Expression<Func<ulong?>> e = Expression.Lambda<Func<ulong?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(ulong?)),
+                    Expression.Constant(b, typeof(ulong?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableULong")
+                )
+            );
             Func<ulong?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked(a * b), f());
@@ -406,12 +481,15 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableUShort(ushort? a, ushort? b, bool useInterpreter)
         {
-            Expression<Func<ushort?>> e =
-                Expression.Lambda<Func<ushort?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?)),
-                        typeof(LiftedMultiplyNullableTests).GetTypeInfo().GetDeclaredMethod("MultiplyNullableUShort")));
+            Expression<Func<ushort?>> e = Expression.Lambda<Func<ushort?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(ushort?)),
+                    Expression.Constant(b, typeof(ushort?)),
+                    typeof(LiftedMultiplyNullableTests)
+                        .GetTypeInfo()
+                        .GetDeclaredMethod("MultiplyNullableUShort")
+                )
+            );
             Func<ushort?> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((ushort?)(a * b)), f());
@@ -419,11 +497,12 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyMultiplyNullableNumber(Number? a, Number? b, bool useInterpreter)
         {
-            Expression<Func<Number?>> e =
-                Expression.Lambda<Func<Number?>>(
-                    Expression.Multiply(
-                        Expression.Constant(a, typeof(Number?)),
-                        Expression.Constant(b, typeof(Number?))));
+            Expression<Func<Number?>> e = Expression.Lambda<Func<Number?>>(
+                Expression.Multiply(
+                    Expression.Constant(a, typeof(Number?)),
+                    Expression.Constant(b, typeof(Number?))
+                )
+            );
             Assert.Equal(typeof(Number?), e.Body.Type);
             Func<Number?> f = e.Compile(useInterpreter);
 

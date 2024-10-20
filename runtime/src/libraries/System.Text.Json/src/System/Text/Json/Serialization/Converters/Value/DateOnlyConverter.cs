@@ -10,9 +10,14 @@ namespace System.Text.Json.Serialization.Converters
     internal sealed class DateOnlyConverter : JsonPrimitiveConverter<DateOnly>
     {
         public const int FormatLength = 10; // YYYY-MM-DD
-        public const int MaxEscapedFormatLength = FormatLength * JsonConstants.MaxExpansionFactorWhileEscaping;
+        public const int MaxEscapedFormatLength =
+            FormatLength * JsonConstants.MaxExpansionFactorWhileEscaping;
 
-        public override DateOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override DateOnly Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.String)
             {
@@ -22,7 +27,11 @@ namespace System.Text.Json.Serialization.Converters
             return ReadCore(ref reader);
         }
 
-        internal override DateOnly ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override DateOnly ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
             return ReadCore(ref reader);
@@ -30,7 +39,13 @@ namespace System.Text.Json.Serialization.Converters
 
         private static DateOnly ReadCore(ref Utf8JsonReader reader)
         {
-            if (!JsonHelpers.IsInRangeInclusive(reader.ValueLength, FormatLength, MaxEscapedFormatLength))
+            if (
+                !JsonHelpers.IsInRangeInclusive(
+                    reader.ValueLength,
+                    FormatLength,
+                    MaxEscapedFormatLength
+                )
+            )
             {
                 ThrowHelper.ThrowFormatException(DataType.DateOnly);
             }
@@ -55,26 +70,45 @@ namespace System.Text.Json.Serialization.Converters
             return value;
         }
 
-        public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            DateOnly value,
+            JsonSerializerOptions options
+        )
         {
 #if NET8_0_OR_GREATER
             Span<byte> buffer = stackalloc byte[FormatLength];
 #else
             Span<char> buffer = stackalloc char[FormatLength];
 #endif
-            bool formattedSuccessfully = value.TryFormat(buffer, out int charsWritten, "O", CultureInfo.InvariantCulture);
+            bool formattedSuccessfully = value.TryFormat(
+                buffer,
+                out int charsWritten,
+                "O",
+                CultureInfo.InvariantCulture
+            );
             Debug.Assert(formattedSuccessfully && charsWritten == FormatLength);
             writer.WriteStringValue(buffer);
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            DateOnly value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
 #if NET8_0_OR_GREATER
             Span<byte> buffer = stackalloc byte[FormatLength];
 #else
             Span<char> buffer = stackalloc char[FormatLength];
 #endif
-            bool formattedSuccessfully = value.TryFormat(buffer, out int charsWritten, "O", CultureInfo.InvariantCulture);
+            bool formattedSuccessfully = value.TryFormat(
+                buffer,
+                out int charsWritten,
+                "O",
+                CultureInfo.InvariantCulture
+            );
             Debug.Assert(formattedSuccessfully && charsWritten == FormatLength);
             writer.WritePropertyName(buffer);
         }

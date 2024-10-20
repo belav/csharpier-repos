@@ -13,8 +13,10 @@ namespace System.Configuration
         // from the <location> tag with the closest parent path in the current file, or the parent file if no such location in the current one,
         // or the default for the specific section ( section.OverrideModeDefault )
         Inherit = 0,
+
         // Allow overriding in child config files. I.e. unlock the settings for overridiing
         Allow = 1,
+
         // Deny overriding of the settings defined in the <location> tag. It is an error for the sections in the <location> tag
         // to appear in a child config file. It is not an error for them to appear in another <lcoation> tag in the current file
         Deny = 2,

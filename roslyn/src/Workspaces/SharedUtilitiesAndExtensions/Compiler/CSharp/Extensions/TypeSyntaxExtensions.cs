@@ -10,14 +10,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class TypeSyntaxExtensions
     {
-        public static bool IsVoid(this TypeSyntax typeSyntax)
-            => typeSyntax is PredefinedTypeSyntax predefinedType &&
-               predefinedType.Keyword.IsKind(SyntaxKind.VoidKeyword);
+        public static bool IsVoid(this TypeSyntax typeSyntax) =>
+            typeSyntax is PredefinedTypeSyntax predefinedType
+            && predefinedType.Keyword.IsKind(SyntaxKind.VoidKeyword);
 
         public static bool IsPartial(this TypeSyntax typeSyntax)
         {
-            return typeSyntax is IdentifierNameSyntax &&
-                ((IdentifierNameSyntax)typeSyntax).Identifier.IsKind(SyntaxKind.PartialKeyword);
+            return typeSyntax is IdentifierNameSyntax
+                && ((IdentifierNameSyntax)typeSyntax).Identifier.IsKind(SyntaxKind.PartialKeyword);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             return true;
         }
 
-        public static TypeSyntax StripRefIfNeeded(this TypeSyntax type)
-            => type is RefTypeSyntax refType ? refType.Type : type;
+        public static TypeSyntax StripRefIfNeeded(this TypeSyntax type) =>
+            type is RefTypeSyntax refType ? refType.Type : type;
     }
 }

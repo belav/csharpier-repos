@@ -10,5 +10,5 @@ internal enum IntegerOperationType
     GreaterEqual,
     Less,
     LessEqual,
-    NotEqual
+    NotEqual,
 }

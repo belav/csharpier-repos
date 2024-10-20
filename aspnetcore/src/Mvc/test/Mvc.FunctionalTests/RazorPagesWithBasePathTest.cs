@@ -7,7 +7,8 @@ using System.Net.Http;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class RazorPagesWithBasePathTest : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithBasePath>>
+public class RazorPagesWithBasePathTest
+    : IClassFixture<MvcTestFixture<RazorPagesWebSite.StartupWithBasePath>>
 {
     public RazorPagesWithBasePathTest(MvcTestFixture<RazorPagesWebSite.StartupWithBasePath> fixture)
     {
@@ -99,7 +100,10 @@ public class RazorPagesWithBasePathTest : IClassFixture<MvcTestFixture<RazorPage
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("/Login?ReturnUrl=%2FConventions%2FAuth", response.Headers.Location.PathAndQuery);
+        Assert.Equal(
+            "/Login?ReturnUrl=%2FConventions%2FAuth",
+            response.Headers.Location.PathAndQuery
+        );
     }
 
     [Fact]
@@ -110,7 +114,10 @@ public class RazorPagesWithBasePathTest : IClassFixture<MvcTestFixture<RazorPage
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("/Login?ReturnUrl=%2FConventions%2FAuthFolder", response.Headers.Location.PathAndQuery);
+        Assert.Equal(
+            "/Login?ReturnUrl=%2FConventions%2FAuthFolder",
+            response.Headers.Location.PathAndQuery
+        );
     }
 
     [Fact]
@@ -128,7 +135,8 @@ public class RazorPagesWithBasePathTest : IClassFixture<MvcTestFixture<RazorPage
     {
         // Test for https://github.com/aspnet/Mvc/issues/5915
         //Arrange
-        var expected = @"Hello from _ViewStart
+        var expected =
+            @"Hello from _ViewStart
 Hello from /Pages/WithViewStart/Index.cshtml!";
 
         // Act
@@ -142,7 +150,8 @@ Hello from /Pages/WithViewStart/Index.cshtml!";
     public async Task ViewStart_IsDiscoveredForFilesOutsidePageRoot()
     {
         //Arrange
-        var expected = @"Hello from _ViewStart at root
+        var expected =
+            @"Hello from _ViewStart at root
 Hello from _ViewStart
 Hello from page";
 
@@ -185,7 +194,7 @@ Hello from page";
     {
         //Arrange
         var expected =
-@"<form action=""/TagHelper/PostWithHandler/Edit"" method=""post""><input name=""__RequestVerificationToken"" type=""hidden"" value=""{0}"" /></form>
+            @"<form action=""/TagHelper/PostWithHandler/Edit"" method=""post""><input name=""__RequestVerificationToken"" type=""hidden"" value=""{0}"" /></form>
 <form method=""post"" action=""/TagHelper/PostWithHandler/Edit""><input name=""__RequestVerificationToken"" type=""hidden"" value=""{0}"" /></form>
 <form method=""post"" action=""/TagHelper/PostWithHandler/Edit/10""></form>";
 
@@ -194,7 +203,10 @@ Hello from page";
 
         // Assert
         var responseContent = response.Trim();
-        var forgeryToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(responseContent, "/TagHelper/PostWithHandler");
+        var forgeryToken = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            responseContent,
+            "/TagHelper/PostWithHandler"
+        );
         var expectedContent = string.Format(CultureInfo.InvariantCulture, expected, forgeryToken);
 
         Assert.Equal(expectedContent, responseContent, ignoreLineEndingDifferences: true);
@@ -205,7 +217,7 @@ Hello from page";
     {
         //Arrange
         var expected =
-@"<form method=""POST"" action=""/TagHelper/SelfPost/10""></form>
+            @"<form method=""POST"" action=""/TagHelper/SelfPost/10""></form>
 <form method=""POST"" action=""/TagHelper/PostWithHandler/Delete/10""></form>";
 
         // Act
@@ -220,7 +232,7 @@ Hello from page";
     {
         //Arrange
         var expected =
-@"<button formaction=""/TagHelper/CrossPost/10"" />
+            @"<button formaction=""/TagHelper/CrossPost/10"" />
 <input type=""submit"" formaction=""/TagHelper/CrossPost/10"" />
 <input type=""image"" formaction=""/TagHelper/CrossPost/10"" />
 <button formaction=""/TagHelper/PostWithHandler/Edit/11"" />
@@ -319,7 +331,7 @@ Hello from page";
     {
         // Arrange
         var expected =
-@"<a href=""/Accounts/Manage/RenderPartials"">Link inside area</a>
+            @"<a href=""/Accounts/Manage/RenderPartials"">Link inside area</a>
 <a href=""/Products/List/old/20"">Link to external area</a>
 <a href=""/Accounts"">Link to area action</a>
 <a href=""/Admin"">Link to non-area page</a>";
@@ -336,7 +348,7 @@ Hello from page";
     {
         // Arrange
         var expected =
-@"<a href=""/Accounts/PageWithRouteTemplate/1"">Parent directory</a>
+            @"<a href=""/Accounts/PageWithRouteTemplate/1"">Parent directory</a>
 <a href=""/Accounts/Manage/RenderPartials"">Sibling directory</a>
 <a href=""/Products/List"">Go back to root of different area</a>";
 
@@ -352,7 +364,7 @@ Hello from page";
     {
         // Arrange
         var expected =
-@"Layout in /Views/Shared
+            @"Layout in /Views/Shared
 Partial in /Areas/Accounts/Pages/Manage/
 
 Partial in /Areas/Accounts/Pages/
@@ -378,7 +390,10 @@ Hello from /Pages/Shared/";
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("/Login?ReturnUrl=%2FAccounts%2FRequiresAuth", response.Headers.Location.PathAndQuery);
+        Assert.Equal(
+            "/Login?ReturnUrl=%2FAccounts%2FRequiresAuth",
+            response.Headers.Location.PathAndQuery
+        );
     }
 
     [Fact]
@@ -414,18 +429,23 @@ Hello from /Pages/Shared/";
     {
         // Arrange
         var getPage = await Client.GetAsync("/CustomModelTypeModel");
-        var token = AntiforgeryTestHelper.RetrieveAntiforgeryToken(await getPage.Content.ReadAsStringAsync(), "");
+        var token = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            await getPage.Content.ReadAsStringAsync(),
+            ""
+        );
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getPage);
 
         var message = new HttpRequestMessage(HttpMethod.Post, "/CustomModelTypeModel")
         {
-            Content = new FormUrlEncodedContent(new Dictionary<string, string>
-            {
-                ["__RequestVerificationToken"] = token,
-                ["ConfirmPassword"] = "",
-                ["Password"] = "",
-                ["Email"] = ""
-            })
+            Content = new FormUrlEncodedContent(
+                new Dictionary<string, string>
+                {
+                    ["__RequestVerificationToken"] = token,
+                    ["ConfirmPassword"] = "",
+                    ["Password"] = "",
+                    ["Email"] = "",
+                }
+            ),
         };
         message.Headers.TryAddWithoutValidation("Cookie", $"{cookie.Key}={cookie.Value}");
 
@@ -443,18 +463,23 @@ Hello from /Pages/Shared/";
     {
         // Arrange
         var getPage = await Client.GetAsync("/CustomModelTypeModel?Attempts=0");
-        var token = AntiforgeryTestHelper.RetrieveAntiforgeryToken(await getPage.Content.ReadAsStringAsync(), "");
+        var token = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            await getPage.Content.ReadAsStringAsync(),
+            ""
+        );
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getPage);
 
         var message = new HttpRequestMessage(HttpMethod.Post, "/CustomModelTypeModel?Attempts=3")
         {
-            Content = new FormUrlEncodedContent(new Dictionary<string, string>
-            {
-                ["__RequestVerificationToken"] = token,
-                ["Email"] = "javi@example.com",
-                ["Password"] = "[PLACEHOLDER]-1a",
-                ["ConfirmPassword"] = "[PLACEHOLDER]-1a",
-            })
+            Content = new FormUrlEncodedContent(
+                new Dictionary<string, string>
+                {
+                    ["__RequestVerificationToken"] = token,
+                    ["Email"] = "javi@example.com",
+                    ["Password"] = "[PLACEHOLDER]-1a",
+                    ["ConfirmPassword"] = "[PLACEHOLDER]-1a",
+                }
+            ),
         };
         message.Headers.TryAddWithoutValidation("Cookie", $"{cookie.Key}={cookie.Value}");
 
@@ -471,18 +496,23 @@ Hello from /Pages/Shared/";
     {
         // Arrange
         var getPage = await Client.GetAsync("/CustomModelTypeModel?Attempts=0");
-        var token = AntiforgeryTestHelper.RetrieveAntiforgeryToken(await getPage.Content.ReadAsStringAsync(), "");
+        var token = AntiforgeryTestHelper.RetrieveAntiforgeryToken(
+            await getPage.Content.ReadAsStringAsync(),
+            ""
+        );
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(getPage);
 
         var message = new HttpRequestMessage(HttpMethod.Post, "/CustomModelTypeModel")
         {
-            Content = new FormUrlEncodedContent(new Dictionary<string, string>
-            {
-                ["__RequestVerificationToken"] = token,
-                ["Email"] = "javi@example.com",
-                ["Password"] = "[PLACEHOLDER]-1a",
-                ["ConfirmPassword"] = "[PLACEHOLDER]-1a",
-            })
+            Content = new FormUrlEncodedContent(
+                new Dictionary<string, string>
+                {
+                    ["__RequestVerificationToken"] = token,
+                    ["Email"] = "javi@example.com",
+                    ["Password"] = "[PLACEHOLDER]-1a",
+                    ["ConfirmPassword"] = "[PLACEHOLDER]-1a",
+                }
+            ),
         };
         message.Headers.TryAddWithoutValidation("Cookie", $"{cookie.Key}={cookie.Value}");
 
@@ -494,7 +524,8 @@ Hello from /Pages/Shared/";
         var responseText = await response.Content.ReadAsStringAsync();
         Assert.Contains(
             "A value for the &#x27;Attempts&#x27; parameter or property was not provided.",
-            responseText);
+            responseText
+        );
     }
 
     [Fact]
@@ -512,7 +543,9 @@ Hello from /Pages/Shared/";
     public async Task CompareValidationAttributes_OnTopLevelProperties()
     {
         // Act
-        var response = await Client.GetStringAsync("/Validation/PageWithCompareValidation?password=[PlaceHolder]-1a&comparePassword=[PlaceHolder]-1b");
+        var response = await Client.GetStringAsync(
+            "/Validation/PageWithCompareValidation?password=[PlaceHolder]-1a&comparePassword=[PlaceHolder]-1b"
+        );
 
         // Assert
         Assert.Contains("User name is required", response);
@@ -686,16 +719,13 @@ Hello from /Pages/Shared/";
         var cookie = AntiforgeryTestHelper.RetrieveAntiforgeryCookie(response);
 
         var content = new MultipartFormDataContent
-            {
-                { new StringContent("property1-value"), property1 },
-                { new StringContent("test-value1"), file1, "test1.txt" },
-                { new StringContent("test-value2"), file3, "test2.txt" }
-            };
-
-        var request = new HttpRequestMessage(HttpMethod.Post, url)
         {
-            Content = content,
+            { new StringContent("property1-value"), property1 },
+            { new StringContent("test-value1"), file1, "test1.txt" },
+            { new StringContent("test-value2"), file3, "test2.txt" },
         };
+
+        var request = new HttpRequestMessage(HttpMethod.Post, url) { Content = content };
         request.Headers.Add("Cookie", cookie.Key + "=" + cookie.Value);
         request.Headers.Add("RequestVerificationToken", antiforgeryToken);
 
@@ -712,7 +742,10 @@ Hello from /Pages/Shared/";
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("/Login?ReturnUrl=%2FFilters%2FAuthFilterOnPage", response.Headers.Location.PathAndQuery);
+        Assert.Equal(
+            "/Login?ReturnUrl=%2FFilters%2FAuthFilterOnPage",
+            response.Headers.Location.PathAndQuery
+        );
     }
 
     [Fact]
@@ -723,7 +756,10 @@ Hello from /Pages/Shared/";
 
         // Assert
         Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
-        Assert.Equal("/Login?ReturnUrl=%2FFilters%2FAuthFilterOnPageWithModel", response.Headers.Location.PathAndQuery);
+        Assert.Equal(
+            "/Login?ReturnUrl=%2FFilters%2FAuthFilterOnPageWithModel",
+            response.Headers.Location.PathAndQuery
+        );
     }
 
     [Fact]
@@ -734,7 +770,10 @@ Hello from /Pages/Shared/";
 
         // Assert
         await response.AssertStatusCodeAsync(HttpStatusCode.OK);
-        Assert.Equal(new[] { "PageModelFilterValue" }, response.Headers.GetValues("PageModelFilterKey"));
+        Assert.Equal(
+            new[] { "PageModelFilterValue" },
+            response.Headers.GetValues("PageModelFilterKey")
+        );
         Assert.Equal(new[] { "PageFilterValue" }, response.Headers.GetValues("PageFilterKey"));
     }
 

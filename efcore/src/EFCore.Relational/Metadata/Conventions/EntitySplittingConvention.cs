@@ -21,7 +21,8 @@ public class EntitySplittingConvention : IModelFinalizingConvention, IEntityType
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public EntitySplittingConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -40,7 +41,8 @@ public class EntitySplittingConvention : IModelFinalizingConvention, IEntityType
     /// <inheritdoc />
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
         if (!entityType.HasSharedClrType)
@@ -79,25 +81,30 @@ public class EntitySplittingConvention : IModelFinalizingConvention, IEntityType
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {
-            if (!entityType.GetMappingFragments().Any()
-                || entityType.GetTableName() == null)
+            if (!entityType.GetMappingFragments().Any() || entityType.GetTableName() == null)
             {
                 continue;
             }
 
             var pk = entityType.FindPrimaryKey();
-            if (pk != null
-                && !entityType.FindDeclaredForeignKeys(pk.Properties)
-                    .Any(
-                        fk => fk.PrincipalKey.IsPrimaryKey()
-                            && fk.PrincipalEntityType.IsAssignableFrom(entityType)
-                            && fk.PrincipalEntityType != entityType))
+            if (
+                pk != null
+                && !entityType
+                    .FindDeclaredForeignKeys(pk.Properties)
+                    .Any(fk =>
+                        fk.PrincipalKey.IsPrimaryKey()
+                        && fk.PrincipalEntityType.IsAssignableFrom(entityType)
+                        && fk.PrincipalEntityType != entityType
+                    )
+            )
             {
-                entityType.Builder.HasRelationship(entityType, pk.Properties, pk)
+                entityType
+                    .Builder.HasRelationship(entityType, pk.Properties, pk)
                     ?.IsUnique(true)
                     ?.IsRequiredDependent(true);
             }

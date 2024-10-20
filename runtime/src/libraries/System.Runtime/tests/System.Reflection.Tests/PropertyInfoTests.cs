@@ -16,7 +16,10 @@ namespace System.Reflection.Tests
         [InlineData(typeof(BaseClass), nameof(BaseClass.DoubleProperty))]
         [InlineData(typeof(BaseClass), nameof(BaseClass.FloatProperty))]
         [InlineData(typeof(BaseClass), nameof(BaseClass.EnumProperty))]
-        public void GetConstantValue_NotConstant_ThrowsInvalidOperationException(Type type, string name)
+        public void GetConstantValue_NotConstant_ThrowsInvalidOperationException(
+            Type type,
+            string name
+        )
         {
             PropertyInfo propertyInfo = GetProperty(type, name);
             Assert.Throws<InvalidOperationException>(() => propertyInfo.GetConstantValue());
@@ -34,7 +37,12 @@ namespace System.Reflection.Tests
         [InlineData(typeof(GetSetStruct), "Item", true, false)]
         [InlineData(typeof(GetSetInterface), nameof(GetSetInterface.ReadWriteProperty), true, true)]
         [InlineData(typeof(GetSetInterface), nameof(GetSetInterface.ReadOnlyProperty), true, false)]
-        [InlineData(typeof(GetSetInterface), nameof(GetSetInterface.WriteOnlyProperty), false, true)]
+        [InlineData(
+            typeof(GetSetInterface),
+            nameof(GetSetInterface.WriteOnlyProperty),
+            false,
+            true
+        )]
         [InlineData(typeof(GetSetInterface), "Item", false, true)]
         public void GetMethod_SetMethod(Type type, string name, bool hasGetter, bool hasSetter)
         {
@@ -45,11 +53,46 @@ namespace System.Reflection.Tests
 
         public static IEnumerable<object[]> GetValue_TestData()
         {
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.ReadWriteProperty2), new BaseClass(), null, -1.0 };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.ReadWriteProperty3), typeof(BaseClass), null, -2 };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.Name), new BaseClass(), null, "hello" };
-            yield return new object[] { typeof(CustomIndexerNameClass), "BasicIndexer", new CustomIndexerNameClass(), new object[] { 1, "2" }, null };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.ReadOnlyProperty), new BaseClass(), null, 100 };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.ReadWriteProperty2),
+                new BaseClass(),
+                null,
+                -1.0,
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.ReadWriteProperty3),
+                typeof(BaseClass),
+                null,
+                -2,
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.Name),
+                new BaseClass(),
+                null,
+                "hello",
+            };
+            yield return new object[]
+            {
+                typeof(CustomIndexerNameClass),
+                "BasicIndexer",
+                new CustomIndexerNameClass(),
+                new object[] { 1, "2" },
+                null,
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.ReadOnlyProperty),
+                new BaseClass(),
+                null,
+                100,
+            };
         }
 
         [Theory]
@@ -67,23 +110,64 @@ namespace System.Reflection.Tests
         public static IEnumerable<object[]> GetValue_Invalid_TestData()
         {
             // Incorrect indexer parameters
-            yield return new object[] { typeof(CustomIndexerNameClass), "BasicIndexer", new CustomIndexerNameClass(), new object[] { 1, "2", 3 }, typeof(TargetParameterCountException) };
-            yield return new object[] { typeof(CustomIndexerNameClass), "BasicIndexer", new CustomIndexerNameClass(), null, typeof(TargetParameterCountException) };
+            yield return new object[]
+            {
+                typeof(CustomIndexerNameClass),
+                "BasicIndexer",
+                new CustomIndexerNameClass(),
+                new object[] { 1, "2", 3 },
+                typeof(TargetParameterCountException),
+            };
+            yield return new object[]
+            {
+                typeof(CustomIndexerNameClass),
+                "BasicIndexer",
+                new CustomIndexerNameClass(),
+                null,
+                typeof(TargetParameterCountException),
+            };
 
             // Incorrect type
-            yield return new object[] { typeof(CustomIndexerNameClass), "BasicIndexer", new CustomIndexerNameClass(), new object[] { "1", "2" }, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                typeof(CustomIndexerNameClass),
+                "BasicIndexer",
+                new CustomIndexerNameClass(),
+                new object[] { "1", "2" },
+                typeof(ArgumentException),
+            };
 
             // Readonly
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.WriteOnlyProperty), new BaseClass(), null, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.WriteOnlyProperty),
+                new BaseClass(),
+                null,
+                typeof(ArgumentException),
+            };
 
             // Null target
-            yield return new object[] { typeof(CustomIndexerNameClass), "BasicIndexer", null, new object[] { "1", "2" }, typeof(TargetException) };
+            yield return new object[]
+            {
+                typeof(CustomIndexerNameClass),
+                "BasicIndexer",
+                null,
+                new object[] { "1", "2" },
+                typeof(TargetException),
+            };
         }
 
         [Theory]
         [ActiveIssue("https://github.com/mono/mono/issues/15027", TestRuntimes.Mono)]
         [MemberData(nameof(GetValue_Invalid_TestData))]
-        public void GetValue_Invalid(Type type, string name, object obj, object[] index, Type exceptionType)
+        public void GetValue_Invalid(
+            Type type,
+            string name,
+            object obj,
+            object[] index,
+            Type exceptionType
+        )
         {
             PropertyInfo propertyInfo = GetProperty(type, name);
             Assert.Throws(exceptionType, () => propertyInfo.GetValue(obj, index));
@@ -91,19 +175,90 @@ namespace System.Reflection.Tests
 
         public static IEnumerable<object[]> SetValue_TestData()
         {
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.StaticObjectArrayProperty), typeof(BaseClass), new string[] { "hello" }, null, new string[] { "hello" } };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.ObjectArrayProperty), new BaseClass(), new string[] { "hello" }, null, new string[] { "hello" } };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.Name), new BaseClass(), "hello", null, "hello" };
-            yield return new object[] { typeof(AdvancedIndexerClass), "Item", new AdvancedIndexerClass(), "hello", new object[] { 99, 2, new string[] { "hello" }, "f" }, "992f1" };
-            yield return new object[] { typeof(AdvancedIndexerClass), "Item", new AdvancedIndexerClass(), "pw", new object[] { 99, 2, new string[] { "hello" }, "SOME string" }, "992SOME string1" };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.ShortEnumProperty), new BaseClass(), (byte)1, null, (BaseClass.ShortEnum)1 };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.IntEnumProperty), new BaseClass(), (short)2, null, (BaseClass.IntEnum)2 };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.LongEnumProperty), new BaseClass(), (int)3, null, (BaseClass.LongEnum)3 };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.StaticObjectArrayProperty),
+                typeof(BaseClass),
+                new string[] { "hello" },
+                null,
+                new string[] { "hello" },
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.ObjectArrayProperty),
+                new BaseClass(),
+                new string[] { "hello" },
+                null,
+                new string[] { "hello" },
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.Name),
+                new BaseClass(),
+                "hello",
+                null,
+                "hello",
+            };
+            yield return new object[]
+            {
+                typeof(AdvancedIndexerClass),
+                "Item",
+                new AdvancedIndexerClass(),
+                "hello",
+                new object[] { 99, 2, new string[] { "hello" }, "f" },
+                "992f1",
+            };
+            yield return new object[]
+            {
+                typeof(AdvancedIndexerClass),
+                "Item",
+                new AdvancedIndexerClass(),
+                "pw",
+                new object[] { 99, 2, new string[] { "hello" }, "SOME string" },
+                "992SOME string1",
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.ShortEnumProperty),
+                new BaseClass(),
+                (byte)1,
+                null,
+                (BaseClass.ShortEnum)1,
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.IntEnumProperty),
+                new BaseClass(),
+                (short)2,
+                null,
+                (BaseClass.IntEnum)2,
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.LongEnumProperty),
+                new BaseClass(),
+                (int)3,
+                null,
+                (BaseClass.LongEnum)3,
+            };
         }
 
         [Theory]
         [MemberData(nameof(SetValue_TestData))]
-        public void SetValue(Type type, string name, object obj, object value, object[] index, object expected)
+        public void SetValue(
+            Type type,
+            string name,
+            object obj,
+            object value,
+            object[] index,
+            object expected
+        )
         {
             PropertyInfo PropertyInfo = GetProperty(type, name);
             object originalValue;
@@ -137,24 +292,87 @@ namespace System.Reflection.Tests
         public static IEnumerable<object[]> SetValue_Invalid_TestData()
         {
             // Incorrect number of parameters
-            yield return new object[] { typeof(AdvancedIndexerClass), "Item", new AdvancedIndexerClass(), "value", new object[] { 99, 2, new string[] { "a" } }, typeof(TargetParameterCountException) };
+            yield return new object[]
+            {
+                typeof(AdvancedIndexerClass),
+                "Item",
+                new AdvancedIndexerClass(),
+                "value",
+                new object[] { 99, 2, new string[] { "a" } },
+                typeof(TargetParameterCountException),
+            };
 
             // Obj is null
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.WriteOnlyProperty), null, null, null, typeof(TargetException) };
-            yield return new object[] { typeof(AdvancedIndexerClass), "Item", null, "value", new object[] { 99, 2, new string[] { "a" }, "b" }, typeof(TargetException) };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.WriteOnlyProperty),
+                null,
+                null,
+                null,
+                typeof(TargetException),
+            };
+            yield return new object[]
+            {
+                typeof(AdvancedIndexerClass),
+                "Item",
+                null,
+                "value",
+                new object[] { 99, 2, new string[] { "a" }, "b" },
+                typeof(TargetException),
+            };
 
             // Readonly
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.ReadOnlyProperty), new BaseClass(), 100, null, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.ReadOnlyProperty),
+                new BaseClass(),
+                100,
+                null,
+                typeof(ArgumentException),
+            };
 
             // Wrong value type
-            yield return new object[] { typeof(AdvancedIndexerClass), "Item", new AdvancedIndexerClass(), "value", new object[] { 99, 2, "invalid", "string" }, typeof(ArgumentException) };
-            yield return new object[] { typeof(AdvancedIndexerClass), "Item", new AdvancedIndexerClass(), 100, new object[] { 99, 2, new string[] { "a" }, "b" }, typeof(ArgumentException) };
-            yield return new object[] { typeof(BaseClass), nameof(BaseClass.WriteOnlyProperty), new BaseClass(), "string", null, typeof(ArgumentException) };
+            yield return new object[]
+            {
+                typeof(AdvancedIndexerClass),
+                "Item",
+                new AdvancedIndexerClass(),
+                "value",
+                new object[] { 99, 2, "invalid", "string" },
+                typeof(ArgumentException),
+            };
+            yield return new object[]
+            {
+                typeof(AdvancedIndexerClass),
+                "Item",
+                new AdvancedIndexerClass(),
+                100,
+                new object[] { 99, 2, new string[] { "a" }, "b" },
+                typeof(ArgumentException),
+            };
+            yield return new object[]
+            {
+                typeof(BaseClass),
+                nameof(BaseClass.WriteOnlyProperty),
+                new BaseClass(),
+                "string",
+                null,
+                typeof(ArgumentException),
+            };
         }
 
         [Theory]
         [MemberData(nameof(SetValue_Invalid_TestData))]
-        public void SetValue_Invalid(Type type, string name, object obj, object value, object[] index, Type exceptionType)
+        public void SetValue_Invalid(
+            Type type,
+            string name,
+            object obj,
+            object value,
+            object[] index,
+            Type exceptionType
+        )
         {
             PropertyInfo PropertyInfo = GetProperty(type, name);
             Assert.Throws(exceptionType, () => PropertyInfo.SetValue(obj, value, index));
@@ -170,7 +388,12 @@ namespace System.Reflection.Tests
         [InlineData(nameof(PropertyInfoMembers.PublicGetPrivateSetProperty))]
         public static void GetRequiredCustomModifiers_GetOptionalCustomModifiers(string name)
         {
-            PropertyInfo property = typeof(PropertyInfoMembers).GetTypeInfo().GetProperty(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            PropertyInfo property = typeof(PropertyInfoMembers)
+                .GetTypeInfo()
+                .GetProperty(
+                    name,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
 
             Assert.Empty(property.GetRequiredCustomModifiers());
             Assert.Empty(property.GetOptionalCustomModifiers());
@@ -184,9 +407,18 @@ namespace System.Reflection.Tests
         [InlineData(nameof(PropertyInfoMembers.PublicGetEnumProperty), 2, 2)]
         [InlineData("PrivateGetPrivateSetIntProperty", 0, 2)]
         [InlineData(nameof(PropertyInfoMembers.PublicGetPrivateSetProperty), 1, 2)]
-        public static void GetAccessors(string name, int accessorPublicCount, int accessorPublicAndNonPublicCount)
+        public static void GetAccessors(
+            string name,
+            int accessorPublicCount,
+            int accessorPublicAndNonPublicCount
+        )
         {
-            PropertyInfo pi = typeof(PropertyInfoMembers).GetTypeInfo().GetProperty(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            PropertyInfo pi = typeof(PropertyInfoMembers)
+                .GetTypeInfo()
+                .GetProperty(
+                    name,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
             Assert.Equal(accessorPublicCount, pi.GetAccessors().Length);
             Assert.Equal(accessorPublicCount, pi.GetAccessors(false).Length);
             Assert.Equal(accessorPublicAndNonPublicCount, pi.GetAccessors(true).Length);
@@ -194,15 +426,38 @@ namespace System.Reflection.Tests
 
         [Theory]
         [InlineData(nameof(PropertyInfoMembers.PublicGetIntProperty), true, true, false, false)]
-        [InlineData(nameof(PropertyInfoMembers.PublicGetPublicSetStringProperty), true, true, true, true)]
+        [InlineData(
+            nameof(PropertyInfoMembers.PublicGetPublicSetStringProperty),
+            true,
+            true,
+            true,
+            true
+        )]
         [InlineData(nameof(PropertyInfoMembers.PublicGetDoubleProperty), true, true, false, false)]
         [InlineData(nameof(PropertyInfoMembers.PublicGetFloatProperty), true, true, false, false)]
         [InlineData(nameof(PropertyInfoMembers.PublicGetEnumProperty), true, true, true, true)]
         [InlineData("PrivateGetPrivateSetIntProperty", false, true, false, true)]
-        [InlineData(nameof(PropertyInfoMembers.PublicGetPrivateSetProperty), true, true, false, true)]
-        public static void GetGetMethod_GetSetMethod(string name, bool publicGet, bool nonPublicGet, bool publicSet, bool nonPublicSet)
+        [InlineData(
+            nameof(PropertyInfoMembers.PublicGetPrivateSetProperty),
+            true,
+            true,
+            false,
+            true
+        )]
+        public static void GetGetMethod_GetSetMethod(
+            string name,
+            bool publicGet,
+            bool nonPublicGet,
+            bool publicSet,
+            bool nonPublicSet
+        )
         {
-            PropertyInfo pi = typeof(PropertyInfoMembers).GetTypeInfo().GetProperty(name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            PropertyInfo pi = typeof(PropertyInfoMembers)
+                .GetTypeInfo()
+                .GetProperty(
+                    name,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
             if (publicGet)
             {
                 Assert.Equal("get_" + name, pi.GetGetMethod().Name);
@@ -245,8 +500,20 @@ namespace System.Reflection.Tests
         }
 
         [Theory]
-        [InlineData(typeof(BaseClass), nameof(BaseClass.ReadWriteProperty1), typeof(BaseClass), nameof(BaseClass.ReadWriteProperty1), true)]
-        [InlineData(typeof(BaseClass), nameof(BaseClass.ReadWriteProperty1), typeof(BaseClass), nameof(BaseClass.ReadWriteProperty2), false)]
+        [InlineData(
+            typeof(BaseClass),
+            nameof(BaseClass.ReadWriteProperty1),
+            typeof(BaseClass),
+            nameof(BaseClass.ReadWriteProperty1),
+            true
+        )]
+        [InlineData(
+            typeof(BaseClass),
+            nameof(BaseClass.ReadWriteProperty1),
+            typeof(BaseClass),
+            nameof(BaseClass.ReadWriteProperty2),
+            false
+        )]
         public void EqualsTest(Type type1, string name1, Type type2, string name2, bool expected)
         {
             PropertyInfo propertyInfo1 = GetProperty(type1, name1);
@@ -344,7 +611,8 @@ namespace System.Reflection.Tests
 
         public static PropertyInfo GetProperty(Type type, string name)
         {
-            return type.GetTypeInfo().DeclaredProperties.First(propertyInfo => propertyInfo.Name.Equals(name));
+            return type.GetTypeInfo()
+                .DeclaredProperties.First(propertyInfo => propertyInfo.Name.Equals(name));
         }
 
         public interface InterfaceWithPropertyDeclaration
@@ -361,9 +629,12 @@ namespace System.Reflection.Tests
                 set { _staticObjectArrayProperty = value; }
             }
 
-            public enum ShortEnum : short {}
-            public enum IntEnum {}
-            public enum LongEnum : long {}
+            public enum ShortEnum : short { }
+
+            public enum IntEnum { }
+
+            public enum LongEnum : long { }
+
             public ShortEnum ShortEnumProperty { get; set; }
             public IntEnum IntEnumProperty { get; set; }
             public LongEnum LongEnumProperty { get; set; }
@@ -431,11 +702,26 @@ namespace System.Reflection.Tests
             private const float FloatField = 99.99F;
             private const PublicEnum EnumField = PublicEnum.Case1;
 
-            public int IntProperty { get { return IntField; } }
-            public string StringProperty { get { return StringField; } }
-            public double DoubleProperty { get { return DoubleField; } }
-            public float FloatProperty { get { return FloatField; } }
-            public PublicEnum EnumProperty { get { return EnumField; } }
+            public int IntProperty
+            {
+                get { return IntField; }
+            }
+            public string StringProperty
+            {
+                get { return StringField; }
+            }
+            public double DoubleProperty
+            {
+                get { return DoubleField; }
+            }
+            public float FloatProperty
+            {
+                get { return FloatField; }
+            }
+            public PublicEnum EnumProperty
+            {
+                get { return EnumField; }
+            }
         }
 
         public class SubClass : BaseClass
@@ -489,25 +775,53 @@ namespace System.Reflection.Tests
                     {
                         strHashLength = h.Length.ToString();
                     }
-                    _setValue = _setValue = index.ToString() + index2.ToString() + myStr + strHashLength + value;
+                    _setValue = _setValue =
+                        index.ToString() + index2.ToString() + myStr + strHashLength + value;
                 }
             }
         }
 
         public class GetSetClass
         {
-            public int ReadWriteProperty { get { return 1; } set { } }
-            public string ReadOnlyProperty { get { return "Test"; } }
-            public char WriteOnlyProperty { set { } }
-            public int this[int index] { get { return 2; } set { } }
+            public int ReadWriteProperty
+            {
+                get { return 1; }
+                set { }
+            }
+            public string ReadOnlyProperty
+            {
+                get { return "Test"; }
+            }
+            public char WriteOnlyProperty
+            {
+                set { }
+            }
+            public int this[int index]
+            {
+                get { return 2; }
+                set { }
+            }
         }
 
         public struct GetSetStruct
         {
-            public int ReadWriteProperty { get { return 1; } set { } }
-            public string ReadOnlyProperty { get { return "Test"; } }
-            public char WriteOnlyProperty { set { } }
-            public string this[int index] { get { return "name"; } }
+            public int ReadWriteProperty
+            {
+                get { return 1; }
+                set { }
+            }
+            public string ReadOnlyProperty
+            {
+                get { return "Test"; }
+            }
+            public char WriteOnlyProperty
+            {
+                set { }
+            }
+            public string this[int index]
+            {
+                get { return "name"; }
+            }
         }
 
         public interface GetSetInterface

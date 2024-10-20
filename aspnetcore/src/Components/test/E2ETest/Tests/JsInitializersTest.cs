@@ -15,10 +15,9 @@ public class JsInitializersTest : ServerTestBase<ToggleExecutionModeServerFixtur
     public JsInitializersTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -34,7 +33,10 @@ public class JsInitializersTest : ServerTestBase<ToggleExecutionModeServerFixtur
         Browser.Exists(By.Id("initializer-start"));
         Browser.Exists(By.Id("initializer-end"));
         var expectedCallbacks = GetExpectedCallbacks();
-        Browser.Equal(expectedCallbacks.Length, () => Browser.FindElements(By.CssSelector("#initializers-content > p")).Count);
+        Browser.Equal(
+            expectedCallbacks.Length,
+            () => Browser.FindElements(By.CssSelector("#initializers-content > p")).Count
+        );
         foreach (var callback in expectedCallbacks)
         {
             Browser.Exists(By.Id(callback));
@@ -43,18 +45,24 @@ public class JsInitializersTest : ServerTestBase<ToggleExecutionModeServerFixtur
 
     protected virtual string[] GetExpectedCallbacks()
     {
-        return ["classic-before-start",
+        return
+        [
+            "classic-before-start",
             "classic-after-started",
             "classic-and-modern-before-web-assembly-start",
             "classic-and-modern-after-web-assembly-started",
             "modern-before-web-assembly-start",
-            "modern-after-web-assembly-started"];
+            "modern-after-web-assembly-started",
+        ];
     }
 
     [Fact]
     public void CanLoadJsModulePackagesFromLibrary()
     {
         Browser.MountTestComponent<ExternalContentPackage>();
-        Browser.Equal<string>("Hello from module", () => Browser.Exists(By.CssSelector(".js-module-message > p")).Text);
+        Browser.Equal<string>(
+            "Hello from module",
+            () => Browser.Exists(By.CssSelector(".js-module-message > p")).Text
+        );
     }
 }

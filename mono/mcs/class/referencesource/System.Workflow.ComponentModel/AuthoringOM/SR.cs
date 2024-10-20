@@ -1,11 +1,11 @@
 using System;
-using System.Reflection;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Reflection;
 using System.Resources;
 using System.Text;
-using System.ComponentModel;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 [AttributeUsage(AttributeTargets.All)]
 internal sealed class SRDescriptionAttribute : DescriptionAttribute
@@ -19,7 +19,14 @@ internal sealed class SRDescriptionAttribute : DescriptionAttribute
     {
         ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
         DescriptionValue = rm.GetString(description);
-        System.Diagnostics.Debug.Assert(DescriptionValue != null, string.Format(CultureInfo.CurrentCulture, "String resource {0} not found.", new object[] { description }));
+        System.Diagnostics.Debug.Assert(
+            DescriptionValue != null,
+            string.Format(
+                CultureInfo.CurrentCulture,
+                "String resource {0} not found.",
+                new object[] { description }
+            )
+        );
     }
 }
 
@@ -29,9 +36,7 @@ internal sealed class SRCategoryAttribute : CategoryAttribute
     private string resourceSet = String.Empty;
 
     public SRCategoryAttribute(string category)
-        : base(category)
-    {
-    }
+        : base(category) { }
 
     public SRCategoryAttribute(string category, string resourceSet)
         : base(category)
@@ -45,7 +50,14 @@ internal sealed class SRCategoryAttribute : CategoryAttribute
         {
             ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
             String localizedString = rm.GetString(value);
-            System.Diagnostics.Debug.Assert(localizedString != null, string.Format(CultureInfo.CurrentCulture, "String resource {0} not found.", new object[] { value }));
+            System.Diagnostics.Debug.Assert(
+                localizedString != null,
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "String resource {0} not found.",
+                    new object[] { value }
+                )
+            );
             return localizedString;
         }
         else
@@ -67,7 +79,14 @@ internal sealed class SRDisplayNameAttribute : DisplayNameAttribute
     {
         ResourceManager rm = new ResourceManager(resourceSet, Assembly.GetExecutingAssembly());
         DisplayNameValue = rm.GetString(name);
-        System.Diagnostics.Debug.Assert(DisplayNameValue != null, string.Format(CultureInfo.CurrentCulture, "String resource {0} not found.", new object[] { name }));
+        System.Diagnostics.Debug.Assert(
+            DisplayNameValue != null,
+            string.Format(
+                CultureInfo.CurrentCulture,
+                "String resource {0} not found.",
+                new object[] { name }
+            )
+        );
     }
 }
 
@@ -83,7 +102,10 @@ internal sealed class SR
 
     internal SR()
     {
-        resources = new System.Resources.ResourceManager("System.Workflow.ComponentModel.StringResources", Assembly.GetExecutingAssembly());
+        resources = new System.Resources.ResourceManager(
+            "System.Workflow.ComponentModel.StringResources",
+            Assembly.GetExecutingAssembly()
+        );
     }
 
     private static SR GetLoader()
@@ -95,7 +117,11 @@ internal sealed class SR
 
     private static CultureInfo Culture
     {
-        get { return null/*use ResourceManager default, CultureInfo.CurrentUICulture*/; }
+        get
+        {
+            return null /*use ResourceManager default, CultureInfo.CurrentUICulture*/
+            ;
+        }
     }
 
     [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
@@ -111,7 +137,14 @@ internal sealed class SR
         if (sys == null)
             return null;
         string res = sys.resources.GetString(name, culture);
-        System.Diagnostics.Debug.Assert(res != null, string.Format(CultureInfo.CurrentCulture, "String resource {0} not found.", new object[] { name }));
+        System.Diagnostics.Debug.Assert(
+            res != null,
+            string.Format(
+                CultureInfo.CurrentCulture,
+                "String resource {0} not found.",
+                new object[] { name }
+            )
+        );
         if (args != null && args.Length > 0)
         {
             return string.Format(CultureInfo.CurrentCulture, res, args);
@@ -133,7 +166,14 @@ internal sealed class SR
         if (sys == null)
             return null;
         string res = sys.resources.GetString(name, culture);
-        System.Diagnostics.Debug.Assert(res != null, string.Format(CultureInfo.CurrentCulture, "String resource {0} not found.", new object[] { name }));
+        System.Diagnostics.Debug.Assert(
+            res != null,
+            string.Format(
+                CultureInfo.CurrentCulture,
+                "String resource {0} not found.",
+                new object[] { name }
+            )
+        );
         return res;
     }
 
@@ -242,22 +282,31 @@ internal sealed class SR
     internal const string ActivityBindPathDescription = "ActivityBindPathDescription";
     internal const string XPathDescription = "XPathDescription";
     internal const string TransformerDescription = "TransformerDescription";
-    internal const string CustomPropertiesCollectionFormHeader = "CustomPropertiesCollectionFormHeader";
-    internal const string CustomPropertiesCollectionFormDescription = "CustomPropertiesCollectionFormDescription";
+    internal const string CustomPropertiesCollectionFormHeader =
+        "CustomPropertiesCollectionFormHeader";
+    internal const string CustomPropertiesCollectionFormDescription =
+        "CustomPropertiesCollectionFormDescription";
     internal const string BaseTypePropertyName = "BaseTypePropertyName";
-    internal const string CustomActivityBaseClassTypeFilterProviderDesc = "CustomActivityBaseClassTypeFilterProviderDesc";
-    internal const string CustomActivityDesignerTypeFilterProviderDesc = "CustomActivityDesignerTypeFilterProviderDesc";
-    internal const string CustomActivityValidatorTypeFilterProviderDesc = "CustomActivityValidatorTypeFilterProviderDesc";
-    internal const string CustomActivityExecutorTypeFilterProviderDesc = "CustomActivityExecutorTypeFilterProviderDesc";
+    internal const string CustomActivityBaseClassTypeFilterProviderDesc =
+        "CustomActivityBaseClassTypeFilterProviderDesc";
+    internal const string CustomActivityDesignerTypeFilterProviderDesc =
+        "CustomActivityDesignerTypeFilterProviderDesc";
+    internal const string CustomActivityValidatorTypeFilterProviderDesc =
+        "CustomActivityValidatorTypeFilterProviderDesc";
+    internal const string CustomActivityExecutorTypeFilterProviderDesc =
+        "CustomActivityExecutorTypeFilterProviderDesc";
     internal const string GenericParameters = "GenericParameters";
     internal const string ToolboxItem = "ToolboxItem";
     internal const string ToolboxItemCompanionClassDesc = "ToolboxItemCompanionClassDesc";
-    internal const string Error_SerializationInsufficientState = "Error_SerializationInsufficientState";
+    internal const string Error_SerializationInsufficientState =
+        "Error_SerializationInsufficientState";
     internal const string Error_ActivityHasParent = "Error_ActivityHasParent";
     internal const string Error_CompensantionParentNotScope = "Error_CompensantionParentNotScope";
-    internal const string Error_ConditionedActivityParentNotCAG = "Error_ConditionedActivityParentNotCAG";
+    internal const string Error_ConditionedActivityParentNotCAG =
+        "Error_ConditionedActivityParentNotCAG";
     internal const string Error_CorrelationTypeNotComparable = "Error_CorrelationTypeNotComparable";
-    internal const string Error_ArgumentTypeNotMatchParameter = "Error_ArgumentTypeNotMatchParameter";
+    internal const string Error_ArgumentTypeNotMatchParameter =
+        "Error_ArgumentTypeNotMatchParameter";
     internal const string Error_TypeTypeMismatch = "Error_TypeTypeMismatch";
     internal const string Error_ParameterTypeMismatch = "Error_ParameterTypeMismatch";
     internal const string Error_InvokeParameterTypeMismatch = "Error_InvokeParameterTypeMismatch";
@@ -276,11 +325,14 @@ internal sealed class SR
     internal const string Error_MethodReturnTypeMismatch = "Error_MethodReturnTypeMismatch";
     internal const string Error_PropertyNotSet = "Error_PropertyNotSet";
     internal const string Error_ScopeCouldNotBeResolved = "Error_ScopeCouldNotBeResolved";
-    internal const string Error_IfElseNotAllIfElseBranchDecl = "Error_ConditionalNotAllConditionalBranchDecl";
+    internal const string Error_IfElseNotAllIfElseBranchDecl =
+        "Error_ConditionalNotAllConditionalBranchDecl";
     internal const string Error_TypeTypeMismatchAmbiguity = "Error_TypeTypeMismatchAmbiguity";
-    internal const string Error_InvalidCorrelationSetDatasource = "Error_InvalidCorrelationSetDatasource";
+    internal const string Error_InvalidCorrelationSetDatasource =
+        "Error_InvalidCorrelationSetDatasource";
     internal const string Error_InvalidCorrelationSetType = "Error_InvalidCorrelationSetType";
-    internal const string Error_MissingCorrelationParameterAttribute = "Error_MissingCorrelationParameterAttribute";
+    internal const string Error_MissingCorrelationParameterAttribute =
+        "Error_MissingCorrelationParameterAttribute";
     internal const string Error_CorrelationTypeNotConsistent = "Error_CorrelationTypeNotConsistent";
     internal const string Error_CorrelationInvalid = "Error_CorrelationInvalid";
     internal const string Error_MissingDelegateMethod = "Error_MissingDelegateMethod";
@@ -294,14 +346,17 @@ internal sealed class SR
     internal const string Error_ScopeDuplicatedNameActivity = "Error_ScopeDuplicatedNameActivity";
     internal const string Error_DuplicatedActivityID = "Error_DuplicatedActivityID";
     internal const string Error_DuplicatedParameterName = "Error_DuplicatedParameterName";
-    internal const string Error_ScopeMissingSerializableAttribute = "Error_ScopeMissingSerializableAttribute";
+    internal const string Error_ScopeMissingSerializableAttribute =
+        "Error_ScopeMissingSerializableAttribute";
     internal const string Error_FieldNotExists = "Error_FieldNotExists";
     internal const string Error_PropertyNotExists = "Error_PropertyNotExists";
     internal const string Error_FieldTypeMismatch = "Error_FieldTypeMismatch";
     internal const string Error_PropertyTypeMismatch = "Error_PropertyTypeMismatch";
     internal const string Error_TypeNotResolvedInFieldName = "Error_TypeNotResolvedInFieldName";
-    internal const string Error_TypeNotResolvedInPropertyName = "Error_TypeNotResolvedInPropertyName";
-    internal const string Error_FieldGenericParamTypeMismatch = "Error_FieldGenericParamTypeMismatch";
+    internal const string Error_TypeNotResolvedInPropertyName =
+        "Error_TypeNotResolvedInPropertyName";
+    internal const string Error_FieldGenericParamTypeMismatch =
+        "Error_FieldGenericParamTypeMismatch";
     internal const string Error_TypeNotResolved = "Error_TypeNotResolved";
     internal const string Error_TypeIsUnboundedGeneric = "Error_TypeIsUnboundedGeneric";
     internal const string Error_MissingRootActivity = "Error_MissingRootActivity";
@@ -326,14 +381,19 @@ internal sealed class SR
     internal const string Failure_DoDefaultActionCaption = "Failure_DoDefaultActionCaption";
     internal const string Error_FaultInsideAtomicScope = "Error_FaultInsideAtomicScope";
     internal const string Error_ListenNotMoreThanOneDelay = "Error_ListenNotMoreThanOneDelay";
-    internal const string Error_AtomicScopeWithFaultHandlersActivityDecl = "Error_AtomicScopeWithFaultHandlersActivityDecl";
-    internal const string Error_AtomicScopeWithCancellationHandlerActivity = "Error_AtomicScopeWithCancellationHandlerActivity";
-    internal const string Error_ScopeDuplicateFaultHandlerActivityForAll = "Error_ScopeDuplicateFaultHandlerActivityForAll";
-    internal const string Error_ScopeDuplicateFaultHandlerActivityFor = "Error_ScopeDuplicateFaultHandlerActivityFor";
+    internal const string Error_AtomicScopeWithFaultHandlersActivityDecl =
+        "Error_AtomicScopeWithFaultHandlersActivityDecl";
+    internal const string Error_AtomicScopeWithCancellationHandlerActivity =
+        "Error_AtomicScopeWithCancellationHandlerActivity";
+    internal const string Error_ScopeDuplicateFaultHandlerActivityForAll =
+        "Error_ScopeDuplicateFaultHandlerActivityForAll";
+    internal const string Error_ScopeDuplicateFaultHandlerActivityFor =
+        "Error_ScopeDuplicateFaultHandlerActivityFor";
     internal const string Error_AtomicScopeNestedInNonLRT = "Error_AtomicScopeNestedInNonLRT";
     internal const string Error_LRTScopeNestedInNonLRT = "Error_LRTScopeNestedInNonLRT";
     internal const string Error_CAGNotAllChildrenConditioned = "Error_CAGNotAllChildrenConditioned";
-    internal const string Error_ConditionedActivityChildCount = "Error_ConditionedActivityChildCount";
+    internal const string Error_ConditionedActivityChildCount =
+        "Error_ConditionedActivityChildCount";
     internal const string Error_NegativeValue = "Error_NegativeValue";
     internal const string Error_MethodWithReturnType = "Error_MethodWithReturnType";
     internal const string Error_SendReceiveOrderIncorrect = "Error_SendReceiveOrderIncorrect";
@@ -346,14 +406,18 @@ internal sealed class SR
     internal const string Error_CouldNotDeserializeXomlFile = "Error_CouldNotDeserializeXomlFile";
     internal const string Error_InternalCompilerError = "Error_InternalCompilerError";
     internal const string Error_TypeNotAsseblyQualified = "Error_TypeNotAsseblyQualified";
-    internal const string CompilerWarning_StandardAssemlbyInReferences = "CompilerWarning_StandardAssemlbyInReferences";
+    internal const string CompilerWarning_StandardAssemlbyInReferences =
+        "CompilerWarning_StandardAssemlbyInReferences";
     internal const string Error_SuspendInAtomicScope = "Error_SuspendInAtomicScope";
-    internal const string Error_InvalidActivityExecutionContext = "Error_InvalidActivityExecutionContext";
+    internal const string Error_InvalidActivityExecutionContext =
+        "Error_InvalidActivityExecutionContext";
     internal const string Error_NoRuntimeAvailable = "Error_NoRuntimeAvailable";
     internal const string Error_CanNotChangeAtRuntime = "Error_CanNotChangeAtRuntime";
     internal const string Error_DataContextNotInitialized = "Error_DataContextNotInitialized";
-    internal const string Error_DataContextAlreadyInitialized = "Error_DataContextAlreadyInitialized";
-    internal const string Error_ParseActivityNameDoesNotExist = "Error_ParseActivityNameDoesNotExist";
+    internal const string Error_DataContextAlreadyInitialized =
+        "Error_DataContextAlreadyInitialized";
+    internal const string Error_ParseActivityNameDoesNotExist =
+        "Error_ParseActivityNameDoesNotExist";
     internal const string Error_NoParameterPropertyDeclared = "Error_NoParameterPropertyDeclared";
     internal const string Error_PropertyInvalidIdentifier = "Error_PropertyInvalidIdentifier";
     internal const string Error_WorkflowDefinitionModified = "Error_WorkflowDefinitionModified";
@@ -363,7 +427,8 @@ internal sealed class SR
     internal const string Error_RootActivityTypeInvalid = "Error_RootActivityTypeInvalid";
     internal const string Error_RootActivityTypeInvalid2 = "Error_RootActivityTypeInvalid2";
     internal const string Error_CannotCompile_No_XClass = "Error_CannotCompile_No_XClass";
-    internal const string Error_TemplateActivityIsNotActivity = "Error_TemplateActivityIsNotActivity";
+    internal const string Error_TemplateActivityIsNotActivity =
+        "Error_TemplateActivityIsNotActivity";
     internal const string Error_TypeIsNotRootActivity = "Error_TypeIsNotRootActivity";
     internal const string Error_NoTypeProvider = "Error_NoTypeProvider";
     internal const string Error_NotCodeGeneratorType = "Error_NotCodeGeneratorType";
@@ -374,32 +439,38 @@ internal sealed class SR
     internal const string Error_EmptyArgument = "Error_EmptyArgument";
     internal const string Error_DPAlreadyExist = "Error_DPAlreadyExist";
     internal const string Error_DuplicateDynamicProperty = "Error_DuplicateDynamicProperty";
-    internal const string Error_DynamicPropertyTypeValueMismatch = "Error_DynamicPropertyTypeValueMismatch";
+    internal const string Error_DynamicPropertyTypeValueMismatch =
+        "Error_DynamicPropertyTypeValueMismatch";
     internal const string Error_DynamicPropertyNoSupport = "Error_DynamicPropertyNoSupport";
     internal const string Error_NoContextForDatasource = "Error_NoContextForDatasource";
-    internal const string Error_NoContextForDatasourceCaption = "Error_NoContextForDatasourceCaption";
+    internal const string Error_NoContextForDatasourceCaption =
+        "Error_NoContextForDatasourceCaption";
     internal const string Error_DataSourceHasParent = "Error_DataSourceHasParent";
     internal const string OnTaskCompletedDescr = "OnTaskCompletedDescr";
     internal const string OnTaskInitializedDescr = "OnTaskInitializedDescr";
     internal const string Error_InvalidXmlData = "Error_InvalidXmlData";
     internal const string Error_HandlerNotOnRoot = "Error_HandlerNotOnRoot";
     internal const string Error_InvalidArgumentIndex = "Error_InvalidArgumentIndex";
-    internal const string Error_UITypeEditorTypeNotUITypeEditor = "Error_UITypeEditorTypeNotUITypeEditor";
+    internal const string Error_UITypeEditorTypeNotUITypeEditor =
+        "Error_UITypeEditorTypeNotUITypeEditor";
     internal const string FilterDescription_UITypeEditor = "FilterDescription_UITypeEditor";
     internal const string Error_UserCodeFilesNotAllowed = "Error_UserCodeFilesNotAllowed";
     internal const string Error_CodeWithinNotAllowed = "Error_CodeWithinNotAllowed";
     internal const string Error_TypeNotAuthorized = "Error_TypeNotAuthorized";
     internal const string Error_CantDetermineBaseType = "Error_CantDetermineBaseType";
-    internal const string Error_MultipleSelectNotSupportedForBindAndPromote = "Error_MultipleSelectNotSupportedForBindAndPromote";
+    internal const string Error_MultipleSelectNotSupportedForBindAndPromote =
+        "Error_MultipleSelectNotSupportedForBindAndPromote";
     internal const string Error_CantDetermineBaseTypeCaption = "Error_CantDetermineBaseTypeCaption";
-    internal const string Error_CantDeterminePropertyBaseType = "Error_CantDeterminePropertyBaseType";
+    internal const string Error_CantDeterminePropertyBaseType =
+        "Error_CantDeterminePropertyBaseType";
     internal const string Error_NullCustomActivityTypeName = "Error_NullCustomActivityTypeName";
     internal const string Error_InvalidAttribute = "Error_InvalidAttribute";
     internal const string Error_InvalidAttributes = "Error_InvalidAttributes";
     internal const string Error_ConfigFileMissingOrInvalid = "Error_ConfigFileMissingOrInvalid";
     internal const string Error_CantHaveContextActivity = "Error_CantHaveContextActivity";
     internal const string Error_SynchronizedNeedsDataContext = "Error_SynchronizedNeedsDataContext";
-    internal const string Error_MoreThanOneFaultHandlersActivityDecl = "Error_MoreThanOneFaultHandlersActivityDecl";
+    internal const string Error_MoreThanOneFaultHandlersActivityDecl =
+        "Error_MoreThanOneFaultHandlersActivityDecl";
     internal const string Error_MoreThanOneEventHandlersDecl = "Error_MoreThanOneEventHandlersDecl";
     internal const string Error_MoreThanOneCancelHandler = "Error_MoreThanOneCancelHandler";
     internal const string Error_MetaDataInterfaceMissing = "Error_MetaDataInterfaceMissing";
@@ -408,50 +479,69 @@ internal sealed class SR
     internal const string Error_CollectionHasNullEntry = "Error_CollectionHasNullEntry";
     internal const string Error_MissingContextProperty = "Error_MissingContextProperty";
     internal const string Error_AssociatedDesignerMissing = "Error_AssociatedDesignerMissing";
-    internal const string Error_MissingContextActivityProperty = "Error_MissingContextActivityProperty";
+    internal const string Error_MissingContextActivityProperty =
+        "Error_MissingContextActivityProperty";
     internal const string Error_MissingActivityProperty = "Error_MissingActivityProperty";
     internal const string Error_MissingOwnerTypeProperty = "Error_MissingOwnerTypeProperty";
     internal const string Error_DOIsNotAnActivity = "Error_DOIsNotAnActivity";
     internal const string Error_PropertyCanBeOnlyCleared = "Error_PropertyCanBeOnlyCleared";
     internal const string Error_PropertyDefaultTypeMismatch = "Error_PropertyDefaultTypeMismatch";
     internal const string Error_PropertyDefaultIsReference = "Error_PropertyDefaultIsReference";
+
     // workflow load errors
     internal const string Error_WorkflowLoadFailed = "Error_WorkflowLoadFailed";
     internal const string Error_WorkflowLoadValidationFailed = "Error_WorkflowLoadValidationFailed";
-    internal const string Error_WorkflowLoadDeserializationFailed = "Error_WorkflowLoadDeserializationFailed";
+    internal const string Error_WorkflowLoadDeserializationFailed =
+        "Error_WorkflowLoadDeserializationFailed";
     internal const string Error_WorkflowLoadTypeMismatch = "Error_WorkflowLoadTypeMismatch";
     internal const string Error_WorkflowLoadInvalidXoml = "Error_WorkflowLoadInvalidXoml";
     internal const string Error_WorkflowLoadNotValidRootType = "Error_WorkflowLoadNotValidRootType";
-    internal const string Error_CantCreateInstanceOfComponent = "Error_CantCreateInstanceOfComponent";
+    internal const string Error_CantCreateInstanceOfComponent =
+        "Error_CantCreateInstanceOfComponent";
     internal const string Error_NotComponentFactoryType = "Error_NotComponentFactoryType";
     internal const string Error_WorkflowTerminated = "Error_WorkflowTerminated";
 
     // serializer errrors
-    internal const string Error_SerializerAttributesFoundInComplexProperty = "Error_SerializerAttributesFoundInComplexProperty";
+    internal const string Error_SerializerAttributesFoundInComplexProperty =
+        "Error_SerializerAttributesFoundInComplexProperty";
     internal const string Error_InvalidDataFound = "Error_InvalidDataFound";
     internal const string Error_InvalidDataFoundForType = "Error_InvalidDataFoundForType";
     internal const string Error_InvalidDataFoundForType1 = "Error_InvalidDataFoundForType1";
     internal const string Error_SerializerTypeNotResolved = "Error_SerializerTypeNotResolved";
-    internal const string Error_MarkupSerializerTypeNotResolved = "Error_MarkupSerializerTypeNotResolved";
-    internal const string Error_SerializerTypeNotResolvedWithInnerError = "Error_SerializerTypeNotResolvedWithInnerError";
+    internal const string Error_MarkupSerializerTypeNotResolved =
+        "Error_MarkupSerializerTypeNotResolved";
+    internal const string Error_SerializerTypeNotResolvedWithInnerError =
+        "Error_SerializerTypeNotResolvedWithInnerError";
     internal const string Error_SerializerNotAvailable = "Error_SerializerNotAvailable";
-    internal const string Error_SerializerNotAvailableForSerialize = "Error_SerializerNotAvailableForSerialize";
-    internal const string Error_SerializerCreateInstanceFailed = "Error_SerializerCreateInstanceFailed";
+    internal const string Error_SerializerNotAvailableForSerialize =
+        "Error_SerializerNotAvailableForSerialize";
+    internal const string Error_SerializerCreateInstanceFailed =
+        "Error_SerializerCreateInstanceFailed";
     internal const string Error_SerializerAddChildFailed = "Error_SerializerAddChildFailed";
-    internal const string Error_SerializerNoPropertyAvailable = "Error_SerializerNoPropertyAvailable";
-    internal const string Error_SerializerPrimitivePropertyReadOnly = "Error_SerializerPrimitivePropertyReadOnly";
+    internal const string Error_SerializerNoPropertyAvailable =
+        "Error_SerializerNoPropertyAvailable";
+    internal const string Error_SerializerPrimitivePropertyReadOnly =
+        "Error_SerializerPrimitivePropertyReadOnly";
     internal const string Error_SerializerCantChangeIsLocked = "Error_SerializerCantChangeIsLocked";
-    internal const string Error_SerializerPrimitivePropertySetFailed = "Error_SerializerPrimitivePropertySetFailed";
+    internal const string Error_SerializerPrimitivePropertySetFailed =
+        "Error_SerializerPrimitivePropertySetFailed";
     internal const string Error_SerializerPropertyGetFailed = "Error_SerializerPropertyGetFailed";
-    internal const string Error_SerializerPrimitivePropertyNoLogic = "Error_SerializerPrimitivePropertyNoLogic";
-    internal const string Error_SerializerPrimitivePropertyParentIsNull = "Error_SerializerPrimitivePropertyParentIsNull";
-    internal const string Error_SerializerComplexPropertySetFailed = "Error_SerializerComplexPropertySetFailed";
+    internal const string Error_SerializerPrimitivePropertyNoLogic =
+        "Error_SerializerPrimitivePropertyNoLogic";
+    internal const string Error_SerializerPrimitivePropertyParentIsNull =
+        "Error_SerializerPrimitivePropertyParentIsNull";
+    internal const string Error_SerializerComplexPropertySetFailed =
+        "Error_SerializerComplexPropertySetFailed";
     internal const string Error_SerializerNoChildNotion = "Error_SerializerNoChildNotion";
-    internal const string Error_SerializerNoDynamicPropertySupport = "Error_SerializerNoDynamicPropertySupport";
+    internal const string Error_SerializerNoDynamicPropertySupport =
+        "Error_SerializerNoDynamicPropertySupport";
     internal const string Error_SerializerNoSerializeLogic = "Error_SerializerNoSerializeLogic";
-    internal const string Error_SerializerReadOnlyPropertyAndValueIsNull = "Error_SerializerReadOnlyPropertyAndValueIsNull";
-    internal const string Error_SerializerReadOnlyParametersNoChild = "Error_SerializerReadOnlyParametersNoChild";
-    internal const string Error_SerializerNotParameterBindingObject = "Error_SerializerNotParameterBindingObject";
+    internal const string Error_SerializerReadOnlyPropertyAndValueIsNull =
+        "Error_SerializerReadOnlyPropertyAndValueIsNull";
+    internal const string Error_SerializerReadOnlyParametersNoChild =
+        "Error_SerializerReadOnlyParametersNoChild";
+    internal const string Error_SerializerNotParameterBindingObject =
+        "Error_SerializerNotParameterBindingObject";
     internal const string Error_SerializerThrewException = "Error_SerializerThrewException";
     internal const string Error_ActivityCollectionSerializer = "Error_ActivityCollectionSerializer";
     internal const string Error_MissingClassAttribute = "Error_MissingClassAttribute";
@@ -490,11 +580,14 @@ internal sealed class SR
     internal const string Warning_UnverifiedRecursion = "Warning_UnverifiedRecursion";
     internal const string AddConstructorCode = "AddConstructorCode";
     internal const string Error_UninitializedCorrelation = "Error_UninitializedCorrelation";
-    internal const string Error_CorrelationAlreadyInitialized = "Error_CorrelationAlreadyInitialized";
-    internal const string Error_CorrelatedSendReceiveAtomicScope = "Error_CorrelatedSendReceiveAtomicScope";
+    internal const string Error_CorrelationAlreadyInitialized =
+        "Error_CorrelationAlreadyInitialized";
+    internal const string Error_CorrelatedSendReceiveAtomicScope =
+        "Error_CorrelatedSendReceiveAtomicScope";
     internal const string Warning_ActivityValidation = "Warning_ActivityValidation";
     internal const string Warning_EmptyBehaviourActivity = "Warning_EmptyBehaviourActivity";
-    internal const string Error_ParallelActivationNoCorrelation = "Error_ParallelActivationNoCorrelation";
+    internal const string Error_ParallelActivationNoCorrelation =
+        "Error_ParallelActivationNoCorrelation";
     internal const string Error_MethodNotAccessible = "Error_MethodNotAccessible";
     internal const string Error_FieldNotAccessible = "Error_FieldNotAccessible";
     internal const string Error_PropertyNotAccessible = "Error_PropertyNotAccessible";
@@ -509,22 +602,30 @@ internal sealed class SR
     internal const string Error_SerializerNoMemberFound = "Error_SerializerNoMemberFound";
     internal const string Error_DynamicEventConflict = "Error_DynamicEventConflict";
     internal const string Error_SerializerMemberSetFailed = "Error_SerializerMemberSetFailed";
-    internal const string Error_ContentPropertyCouldNotBeFound = "Error_ContentPropertyCouldNotBeFound";
+    internal const string Error_ContentPropertyCouldNotBeFound =
+        "Error_ContentPropertyCouldNotBeFound";
     internal const string Error_ContentPropertyValueInvalid = "Error_ContentPropertyValueInvalid";
     internal const string Error_ContentPropertyNoSetter = "Error_ContentPropertyNoSetter";
     internal const string Error_ContentCanNotBeConverted = "Error_ContentCanNotBeConverted";
     internal const string Error_ContentPropertyCanNotBeNull = "Error_ContentPropertyCanNotBeNull";
     internal const string Error_SerializerTypeMismatch = "Error_SerializerTypeMismatch";
-    internal const string Error_CouldNotAddValueInContentProperty = "Error_CouldNotAddValueInContentProperty";
+    internal const string Error_CouldNotAddValueInContentProperty =
+        "Error_CouldNotAddValueInContentProperty";
     internal const string Error_SerializerTypeRequirement = "Error_SerializerTypeRequirement";
-    internal const string Error_CanNotAddActivityInBlackBoxActivity = "Error_CanNotAddActivityInBlackBoxActivity";
-    internal const string Error_ContentPropertyCanNotSupportCompactFormat = "Error_ContentPropertyCanNotSupportCompactFormat";
-    internal const string Error_ContentPropertyNoMultipleContents = "Error_ContentPropertyNoMultipleContents";
+    internal const string Error_CanNotAddActivityInBlackBoxActivity =
+        "Error_CanNotAddActivityInBlackBoxActivity";
+    internal const string Error_ContentPropertyCanNotSupportCompactFormat =
+        "Error_ContentPropertyCanNotSupportCompactFormat";
+    internal const string Error_ContentPropertyNoMultipleContents =
+        "Error_ContentPropertyNoMultipleContents";
     internal const string Error_InternalSerializerError = "Error_InternalSerializerError";
-    internal const string Error_DictionarySerializerNonDictionaryObject = "Error_DictionarySerializerNonDictionaryObject";
-    internal const string Error_DictionarySerializerKeyNotFound = "Error_DictionarySerializerKeyNotFound";
+    internal const string Error_DictionarySerializerNonDictionaryObject =
+        "Error_DictionarySerializerNonDictionaryObject";
+    internal const string Error_DictionarySerializerKeyNotFound =
+        "Error_DictionarySerializerKeyNotFound";
     internal const string Error_InvalidCancelActivityState = "Error_InvalidCancelActivityState";
-    internal const string Error_InvalidCompensateActivityState = "Error_InvalidCompensateActivityState";
+    internal const string Error_InvalidCompensateActivityState =
+        "Error_InvalidCompensateActivityState";
     internal const string Error_InvalidCloseActivityState = "Error_InvalidCloseActivityState";
     internal const string Error_SealedPropertyMetadata = "Error_SealedPropertyMetadata";
     internal const string Error_MemberNotFound = "Error_MemberNotFound";
@@ -561,11 +662,13 @@ internal sealed class SR
     //Collection Editor Resources
     internal const string CollectionEditorCaption = "CollectionEditorCaption";
     internal const string CollectionEditorProperties = "CollectionEditorProperties";
-    internal const string CollectionEditorPropertiesMultiSelect = "CollectionEditorPropertiesMultiSelect";
+    internal const string CollectionEditorPropertiesMultiSelect =
+        "CollectionEditorPropertiesMultiSelect";
     internal const string CollectionEditorPropertiesNone = "CollectionEditorPropertiesNone";
     internal const string CollectionEditorCantRemoveItem = "CollectionEditorCantRemoveItem";
     internal const string CollectionEditorUndoBatchDesc = "CollectionEditorUndoBatchDesc";
-    internal const string CollectionEditorInheritedReadOnlySelection = "CollectionEditorInheritedReadOnlySelection";
+    internal const string CollectionEditorInheritedReadOnlySelection =
+        "CollectionEditorInheritedReadOnlySelection";
     internal const string Error_ParameterAlreadyExists = "Error_ParameterAlreadyExists";
     internal const string Error_PropertyAlreadyExists = "Error_PropertyAlreadyExists";
     internal const string Error_HiddenPropertyAlreadyExists = "Error_HiddenPropertyAlreadyExists";
@@ -575,13 +678,16 @@ internal sealed class SR
     internal const string Error_DuplicateWorkflow = "Error_DuplicateWorkflow";
     internal const string Error_Recursion = "Error_Recursion";
     internal const string Error_RootActivity = "Error_RootActivity";
-    internal const string Error_ConditionDefinitionDeserializationFailed = "Error_ConditionDefinitionDeserializationFailed";
+    internal const string Error_ConditionDefinitionDeserializationFailed =
+        "Error_ConditionDefinitionDeserializationFailed";
     internal const string Error_InvalidConditionDefinition = "Error_InvalidConditionDefinition";
     internal const string SR_InvokeTransactionalFromAtomic = "SR_InvokeTransactionalFromAtomic";
     internal const string Error_SuspendInAtomicCallChain = "Error_SuspendInAtomicCallChain";
     internal const string Error_LiteralPassedToOutRef = "Error_LiteralPassedToOutRef";
-    internal const string Error_GeneratorShouldContainSingleActivity = "Error_GeneratorShouldContainSingleActivity";
-    internal const string Error_DeclaringPropertyNotSupported = "Error_DeclaringPropertyNotSupported";
+    internal const string Error_GeneratorShouldContainSingleActivity =
+        "Error_GeneratorShouldContainSingleActivity";
+    internal const string Error_DeclaringPropertyNotSupported =
+        "Error_DeclaringPropertyNotSupported";
     internal const string Error_DeclaringEventNotSupported = "Error_DeclaringEventNotSupported";
     internal const string Error_DynamicEventNotSupported = "Error_DynamicEventNotSupported";
     internal const string Error_DynamicPropertyNotSupported = "Error_DynamicPropertyNotSupported";
@@ -598,9 +704,9 @@ internal sealed class SR
     internal const string SuspendReason_WorkflowChange = "SuspendReason_WorkflowChange";
 
     //type filtering
-    internal const string FilterDescription_ParameterDeclaration = "FilterDescription_ParameterDeclaration";
+    internal const string FilterDescription_ParameterDeclaration =
+        "FilterDescription_ParameterDeclaration";
     internal const string FilterDescription_GenericArgument = "FilterDescription_GenericArgument";
-
 
     internal const string LibraryPathIsInvalid = "LibraryPathIsInvalid";
 
@@ -613,14 +719,18 @@ internal sealed class SR
 
     // Bind validations
     internal const string Error_CannotResolveActivity = "Error_CannotResolveActivity";
-    internal const string Error_CannotResolveRelativeActivity = "Error_CannotResolveRelativeActivity";
+    internal const string Error_CannotResolveRelativeActivity =
+        "Error_CannotResolveRelativeActivity";
     internal const string Error_PathNotSetForActivitySource = "Error_PathNotSetForActivitySource";
     internal const string Error_InvalidMemberPath = "Error_InvalidMemberPath";
     internal const string Error_TargetTypeMismatch = "Error_TargetTypeMismatch";
     internal const string Warning_ParameterBinding = "Warning_ParameterBinding";
-    internal const string Error_ReferencedActivityPropertyNotBind = "Error_ReferencedActivityPropertyNotBind";
-    internal const string Error_TargetTypeDataSourcePathMismatch = "Error_TargetTypeDataSourcePathMismatch";
-    internal const string Bind_ActivityDataSourceRecursionDetected = "Bind_ActivityDataSourceRecursionDetected";
+    internal const string Error_ReferencedActivityPropertyNotBind =
+        "Error_ReferencedActivityPropertyNotBind";
+    internal const string Error_TargetTypeDataSourcePathMismatch =
+        "Error_TargetTypeDataSourcePathMismatch";
+    internal const string Bind_ActivityDataSourceRecursionDetected =
+        "Bind_ActivityDataSourceRecursionDetected";
     internal const string Bind_DuplicateDataSourceNames = "Bind_DuplicateDataSourceNames";
     internal const string Error_PathNotSetForXmlDataSource = "Error_PathNotSetForXmlDataSource";
     internal const string Error_XmlDocumentLoadFailed = "Error_XmlDocumentLoadFailed";
@@ -637,16 +747,20 @@ internal sealed class SR
     internal const string Error_PropertyHasNoGetterDefined = "Error_PropertyHasNoGetterDefined";
     internal const string Error_PropertyHasNoSetterDefined = "Error_PropertyHasNoSetterDefined";
     internal const string Error_PropertyReferenceNoGetter = "Error_PropertyReferenceNoGetter";
-    internal const string Error_PropertyReferenceGetterNoAccess = "Error_PropertyReferenceGetterNoAccess";
+    internal const string Error_PropertyReferenceGetterNoAccess =
+        "Error_PropertyReferenceGetterNoAccess";
     internal const string Error_PropertyHasIndexParameters = "Error_PropertyHasIndexParameters";
     internal const string Error_ReadOnlyField = "Error_ReadOnlyField";
     internal const string Error_NoEnclosingContext = "Error_NoEnclosingContext";
     internal const string Error_NestedPersistOnClose = "Error_NestedPersistOnClose";
     internal const string Error_NestedCompensatableActivity = "Error_NestedCompensatableActivity";
-    internal const string Error_InvalidActivityForObjectDatasource = "Error_InvalidActivityForObjectDatasource";
-    internal const string Error_DataSourceTypeConversionFailed = "Error_DataSourceTypeConversionFailed";
+    internal const string Error_InvalidActivityForObjectDatasource =
+        "Error_InvalidActivityForObjectDatasource";
+    internal const string Error_DataSourceTypeConversionFailed =
+        "Error_DataSourceTypeConversionFailed";
     internal const string Error_BindDialogWrongPropertyType = "Error_BindDialogWrongPropertyType";
-    internal const string Error_BindDialogNoValidPropertySelected = "Error_BindDialogNoValidPropertySelected";
+    internal const string Error_BindDialogNoValidPropertySelected =
+        "Error_BindDialogNoValidPropertySelected";
     internal const string Error_BindDialogBindNotValid = "Error_BindDialogBindNotValid";
     internal const string Error_BindDialogCanNotBindToItself = "Error_BindDialogCanNotBindToItself";
     internal const string Error_BindActivityReference = "Error_BindActivityReference";
@@ -658,9 +772,11 @@ internal sealed class SR
     internal const string Error_UnmatchedParen = "Error_UnmatchedParen";
     internal const string Error_UnmatchedBracket = "Error_UnmatchedBracket";
     internal const string Error_MemberWithSameNameExists = "Error_MemberWithSameNameExists";
-    internal const string Error_ActivityIdentifierCanNotBeEmpty = "Error_ActivityIdentifierCanNotBeEmpty";
+    internal const string Error_ActivityIdentifierCanNotBeEmpty =
+        "Error_ActivityIdentifierCanNotBeEmpty";
     internal const string Error_InvalidActivityIdentifier = "Error_InvalidActivityIdentifier";
-    internal const string Error_ActivityBindTypeConversionError = "Error_ActivityBindTypeConversionError";
+    internal const string Error_ActivityBindTypeConversionError =
+        "Error_ActivityBindTypeConversionError";
     internal const string EmptyValue = "EmptyValue";
     internal const string Error_PropertyTypeNotDefined = "Error_PropertyTypeNotDefined";
 
@@ -736,13 +852,17 @@ internal sealed class SR
     internal const string Error_CustomActivityCantCreate = "Error_CustomActivityCantCreate";
     internal const string Error_CantChangeBuiltInActivity = "Error_CantChangeBuiltInActivity";
     internal const string Error_CantAddBeforeBuiltInActivity = "Error_CantAddBeforeBuiltInActivity";
-    internal const string Error_CantAddAfterNonBuiltInActivity = "Error_CantAddAfterNonBuiltInActivity";
-    internal const string Error_CannotAddRemoveChildActivities = "Error_CannotAddRemoveChildActivities";
+    internal const string Error_CantAddAfterNonBuiltInActivity =
+        "Error_CantAddAfterNonBuiltInActivity";
+    internal const string Error_CannotAddRemoveChildActivities =
+        "Error_CannotAddRemoveChildActivities";
     internal const string Error_CantFindBuiltInActivity = "Error_CantFindBuiltInActivity";
-    internal const string Error_MissingBaseCompanionClassAttribute = "Error_MissingBaseCompanionClassAttribute";
+    internal const string Error_MissingBaseCompanionClassAttribute =
+        "Error_MissingBaseCompanionClassAttribute";
     internal const string Error_CantFindBuiltInParent = "Error_CantFindBuiltInParent";
     internal const string Error_CantCreateInstanceOfBaseType = "Error_CantCreateInstanceOfBaseType";
-    internal const string Error_CustomActivityTypeCouldNotBeFound = "Error_CustomActivityTypeCouldNotBeFound";
+    internal const string Error_CustomActivityTypeCouldNotBeFound =
+        "Error_CustomActivityTypeCouldNotBeFound";
     internal const string None = "None";
     internal const string AtomicTransaction = "AtomicTransaction";
     internal const string LocalDataContext = "LocalDataContext";
@@ -757,10 +877,14 @@ internal sealed class SR
     internal const string Error_CantCreateMethod = "Error_CantCreateMethod";
     internal const string Error_CantEditNullValue = "Error_CantEditNullValue";
     internal const string Error_CompanionTypeNotSet = "Error_CompanionTypeNotSet";
-    internal const string Error_CompanionClassNameCanNotBeEmpty = "Error_CompanionClassNameCanNotBeEmpty";
-    internal const string Error_CouldNotEmitFieldInLocalDataContext = "Error_CouldNotEmitFieldInLocalDataContext";
-    internal const string Error_CouldNotEmitMethodInLocalDataContext = "Error_CouldNotEmitMethodInLocalDataContext";
-    internal const string Error_DerivationFromTypeWithLocalDataContext = "Error_DerivationFromTypeWithLocalDataContext";
+    internal const string Error_CompanionClassNameCanNotBeEmpty =
+        "Error_CompanionClassNameCanNotBeEmpty";
+    internal const string Error_CouldNotEmitFieldInLocalDataContext =
+        "Error_CouldNotEmitFieldInLocalDataContext";
+    internal const string Error_CouldNotEmitMethodInLocalDataContext =
+        "Error_CouldNotEmitMethodInLocalDataContext";
+    internal const string Error_DerivationFromTypeWithLocalDataContext =
+        "Error_DerivationFromTypeWithLocalDataContext";
     internal const string Error_CompanionTypeDerivationError = "Error_CompanionTypeDerivationError";
     internal const string Error_CantCreateDataContextClass = "Error_CantCreateDataContextClass";
     internal const string ArrayExistingBind = "ArrayExistingBind";
@@ -769,7 +893,8 @@ internal sealed class SR
 
     internal const string SupportsTransaction = "SupportsTransaction";
     internal const string SupportsExceptions = "SupportsExceptions";
-    internal const string SupportsCancellationHandlerActivity = "SupportsCancellationHandlerActivity";
+    internal const string SupportsCancellationHandlerActivity =
+        "SupportsCancellationHandlerActivity";
     internal const string SupportsEvents = "SupportsEvents";
     internal const string SupportsDataSources = "SupportsDataSources";
     internal const string SupportsCompensationHandler = "SupportsCompensationHandler";
@@ -794,21 +919,26 @@ internal sealed class SR
     internal const string Error_BindBaseTypeNotSpecified = "Error_BindBaseTypeNotSpecified";
     internal const string NonDelegateTargetType = "NonDelegateTargetType";
     internal const string Error_ClassnameNotInRootNamespace = "Error_ClassnameNotInRootNamespace";
-    internal const string Error_CantUseCurrentProjectTypeAsBase = "Error_CantUseCurrentProjectTypeAsBase";
+    internal const string Error_CantUseCurrentProjectTypeAsBase =
+        "Error_CantUseCurrentProjectTypeAsBase";
     internal const string Error_UnboundGenericType = "Error_UnboundGenericType";
     internal const string Error_UnboundGenericTypeDataSource = "Error_UnboundGenericTypeDataSource";
     internal const string Error_BaseTypeUnknown = "Error_BaseTypeUnknown";
     internal const string Error_UnconfiguredBind = "Error_UnconfiguredBind";
-    internal const string Error_CanNotEmitMemberInLocalDataContext = "Error_CanNotEmitMemberInLocalDataContext";
+    internal const string Error_CanNotEmitMemberInLocalDataContext =
+        "Error_CanNotEmitMemberInLocalDataContext";
     internal const string Error_DesignedTypeNotFound = "Error_DesignedTypeNotFound";
-    internal const string Error_PathCouldNotBeResolvedToMember = "Error_PathCouldNotBeResolvedToMember";
+    internal const string Error_PathCouldNotBeResolvedToMember =
+        "Error_PathCouldNotBeResolvedToMember";
     internal const string Error_EdittingNullCollection = "Error_EdittingNullCollection";
     internal const string Error_MoreThanOneCompensationDecl = "Error_MoreThanOneCompensationDecl";
-    internal const string Error_ParentDoesNotSupportCompensation = "Error_ParentDoesNotSupportCompensation";
+    internal const string Error_ParentDoesNotSupportCompensation =
+        "Error_ParentDoesNotSupportCompensation";
     internal const string Error_CantResolveEventHandler = "Error_CantResolveEventHandler";
     internal const string Error_XSDObjectTypeNotSerializable = "Error_XSDObjectTypeNotSerializable";
     internal const string AEC_InvalidActivity = "AEC_InvalidActivity";
-    internal const string GetDynamicActivities_InvalidActivity = "GetDynamicActivities_InvalidActivity";
+    internal const string GetDynamicActivities_InvalidActivity =
+        "GetDynamicActivities_InvalidActivity";
     internal const string AEC_InvalidNestedActivity = "AEC_InvalidNestedActivity";
     internal const string Error_IDNotSetForActivitySource = "Error_IDNotSetForActivitySource";
     internal const string Error_InvalidCustomPropertyName = "Error_InvalidCustomPropertyName";
@@ -831,9 +961,12 @@ internal sealed class SR
     internal const string Error_EventMustBeDelegate = "Error_EventMustBeDelegate";
     internal const string Error_DPPropertyTypeMissing = "Error_DPPropertyTypeMissing";
 
-    internal const string TransactionalContextActivityDescription = "TransactionalContextActivityDescription";
-    internal const string CompensatableTransactionalContextActivityDescription = "CompensatableTransactionalContextActivityDescription";
-    internal const string SynchronizationScopeActivityDescription = "SynchronizationScopeActivityDescription";
+    internal const string TransactionalContextActivityDescription =
+        "TransactionalContextActivityDescription";
+    internal const string CompensatableTransactionalContextActivityDescription =
+        "CompensatableTransactionalContextActivityDescription";
+    internal const string SynchronizationScopeActivityDescription =
+        "SynchronizationScopeActivityDescription";
     internal const string SequenceActivityDescription = "SequenceActivityDescription";
     internal const string CompensateActivityDescription = "CompensateActivityDescription";
     internal const string Error_CompensateBadTargetTX = "Error_CompensateBadTargetTX";
@@ -841,19 +974,30 @@ internal sealed class SR
     internal const string FaultHandlerActivityDescription = "FaultHandlerActivityDescription";
     internal const string Error_ExceptionTypeNotException = "Error_ExceptionTypeNotException";
     internal const string Error_FaultIsNotOfFaultType = "Error_FaultIsNotOfFaultType";
-    internal const string Error_FaultTypeNoDefaultConstructor = "Error_FaultTypeNoDefaultConstructor";
-    internal const string FilterDescription_FaultHandlerActivity = "FilterDescription_FaultHandlerActivity";
-    internal const string Error_FaultHandlerActivityParentNotFaultHandlersActivity = "Error_FaultHandlerActivityParentNotFaultHandlersActivity";
-    internal const string Error_FaultHandlerActivityAllMustBeLast = "Error_FaultHandlerActivityAllMustBeLast";
-    internal const string Error_FaultHandlersActivityDeclNotAllFaultHandlerActivityDecl = "Error_FaultHandlersActivityDeclNotAllFaultHandlerActivityDecl";
-    internal const string Error_FaultHandlerActivityWrongOrder = "Error_FaultHandlerActivityWrongOrder";
-    internal const string Error_SenderMustBeActivityExecutionContext = "Error_SenderMustBeActivityExecutionContext";
+    internal const string Error_FaultTypeNoDefaultConstructor =
+        "Error_FaultTypeNoDefaultConstructor";
+    internal const string FilterDescription_FaultHandlerActivity =
+        "FilterDescription_FaultHandlerActivity";
+    internal const string Error_FaultHandlerActivityParentNotFaultHandlersActivity =
+        "Error_FaultHandlerActivityParentNotFaultHandlersActivity";
+    internal const string Error_FaultHandlerActivityAllMustBeLast =
+        "Error_FaultHandlerActivityAllMustBeLast";
+    internal const string Error_FaultHandlersActivityDeclNotAllFaultHandlerActivityDecl =
+        "Error_FaultHandlersActivityDeclNotAllFaultHandlerActivityDecl";
+    internal const string Error_FaultHandlerActivityWrongOrder =
+        "Error_FaultHandlerActivityWrongOrder";
+    internal const string Error_SenderMustBeActivityExecutionContext =
+        "Error_SenderMustBeActivityExecutionContext";
     internal const string Error_XomlWorkflowHasCode = "Error_XomlWorkflowHasCode";
-    internal const string Error_WrongParamForActivityResolveEventArgs = "Error_WrongParamForActivityResolveEventArgs";
+    internal const string Error_WrongParamForActivityResolveEventArgs =
+        "Error_WrongParamForActivityResolveEventArgs";
     internal const string Error_ValidatorThrewException = "Error_ValidatorThrewException";
-    internal const string Error_Missing_CanModifyProperties_True = "Error_Missing_CanModifyProperties_True";
-    internal const string Error_Missing_CanModifyProperties_False = "Error_Missing_CanModifyProperties_False";
-    internal const string Error_ModelingConstructsCanNotContainModelingConstructs = "Error_ModelingConstructsCanNotContainModelingConstructs";
+    internal const string Error_Missing_CanModifyProperties_True =
+        "Error_Missing_CanModifyProperties_True";
+    internal const string Error_Missing_CanModifyProperties_False =
+        "Error_Missing_CanModifyProperties_False";
+    internal const string Error_ModelingConstructsCanNotContainModelingConstructs =
+        "Error_ModelingConstructsCanNotContainModelingConstructs";
     internal const string Error_RootIsNotEnabled = "Error_RootIsNotEnabled";
     internal const string Error_MissingSetAccessor = "Error_MissingSetAccessor";
     internal const string Error_MissingAddHandler = "Error_MissingAddHandler";
@@ -863,30 +1007,39 @@ internal sealed class SR
     internal const string Error_InvalidDependencyProperty = "Error_InvalidDependencyProperty";
     internal const string Error_ActivityNameExist = "Error_ActivityNameExist";
     internal const string CannotCreateAttribute = "CannotCreateAttribute";
-    internal const string NamespaceAndDeclaringTypeCannotBeNull = "NamespaceAndDeclaringTypeCannotBeNull";
+    internal const string NamespaceAndDeclaringTypeCannotBeNull =
+        "NamespaceAndDeclaringTypeCannotBeNull";
     internal const string NotElementType = "NotElementType";
 
     //Layout persistence errors
-    internal const string Error_LayoutSerializationActivityNotFound = "Error_LayoutSerializationActivityNotFound";
-    internal const string Error_LayoutSerializationAssociatedActivityNotFound = "Error_LayoutSerializationAssociatedActivityNotFound";
-    internal const string Error_LayoutSerializationPersistenceSupport = "Error_LayoutSerializationPersistenceSupport";
-    internal const string Error_LayoutSerializationRootDesignerNotFound = "Error_LayoutSerializationRootDesignerNotFound";
+    internal const string Error_LayoutSerializationActivityNotFound =
+        "Error_LayoutSerializationActivityNotFound";
+    internal const string Error_LayoutSerializationAssociatedActivityNotFound =
+        "Error_LayoutSerializationAssociatedActivityNotFound";
+    internal const string Error_LayoutSerializationPersistenceSupport =
+        "Error_LayoutSerializationPersistenceSupport";
+    internal const string Error_LayoutSerializationRootDesignerNotFound =
+        "Error_LayoutSerializationRootDesignerNotFound";
     internal const string Error_ParameterCannotBeEmpty = "Error_ParameterCannotBeEmpty";
     internal const string InvalidExecutionStatus = "InvalidExecutionStatus";
     internal const string Error_LayoutDeserialization = "Error_LayoutDeserialization";
     internal const string Error_LayoutSerialization = "Error_LayoutSerialization";
 
     internal const string Error_SerializerStackOverflow = "Error_SerializerStackOverflow";
-    internal const string Error_InvalidActivityForWorkflowChanges = "Error_InvalidActivityForWorkflowChanges";
+    internal const string Error_InvalidActivityForWorkflowChanges =
+        "Error_InvalidActivityForWorkflowChanges";
     internal const string Error_InvalidMemberType = "Error_InvalidMemberType";
     internal const string Error_BindPathNullValue = "Error_BindPathNullValue";
-    internal const string Error_MarkupExtensionMissingTerminatingCharacter = "Error_MarkupExtensionMissingTerminatingCharacter";
-    internal const string Error_MarkupExtensionDeserializeFailed = "Error_MarkupExtensionDeserializeFailed";
+    internal const string Error_MarkupExtensionMissingTerminatingCharacter =
+        "Error_MarkupExtensionMissingTerminatingCharacter";
+    internal const string Error_MarkupExtensionDeserializeFailed =
+        "Error_MarkupExtensionDeserializeFailed";
     internal const string Error_ApplyDynamicChangeFailed = "Error_ApplyDynamicChangeFailed";
     internal const string Error_ActivityCircularReference = "Error_ActivityCircularReference";
     internal const string Error_ValidatorTypeIsInvalid = "Error_ValidatorTypeIsInvalid";
     internal const string Error_InvalidServiceProvider = "Error_InvalidServiceProvider";
-    internal const string Error_InvalidRootForWorkflowChanges = "Error_InvalidRootForWorkflowChanges";
+    internal const string Error_InvalidRootForWorkflowChanges =
+        "Error_InvalidRootForWorkflowChanges";
     internal const string Error_ExtraCharacterFoundAtEnd = "Error_ExtraCharacterFoundAtEnd";
     internal const string Error_WorkflowChangesNotSupported = "Error_WorkflowChangesNotSupported";
     internal const string Error_TypeSystemAttributeArgument = "Error_TypeSystemAttributeArgument";

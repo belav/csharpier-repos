@@ -32,7 +32,10 @@ public abstract class EndpointRoutingBenchmarkBase
         services.AddRouting();
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Singleton<EndpointDataSource>(new DefaultEndpointDataSource(Endpoints)));
+            ServiceDescriptor.Singleton<EndpointDataSource>(
+                new DefaultEndpointDataSource(Endpoints)
+            )
+        );
 
         return services.BuildServiceProvider();
     }
@@ -51,8 +54,9 @@ public abstract class EndpointRoutingBenchmarkBase
         if (frequency < 2)
         {
             throw new InvalidOperationException(
-                "The sample count is too high. This won't produce an accurate sampling" +
-                "of the request data.");
+                "The sample count is too high. This won't produce an accurate sampling"
+                    + "of the request data."
+            );
         }
 
         var samples = new int[count];
@@ -70,10 +74,26 @@ public abstract class EndpointRoutingBenchmarkBase
         if (!object.ReferenceEquals(expected, actual))
         {
             var message = new StringBuilder();
-            message.AppendLine(FormattableString.Invariant($"Validation failed for request {Array.IndexOf(Requests, httpContext)}"));
-            message.AppendLine(FormattableString.Invariant($"{httpContext.Request.Method} {httpContext.Request.Path}"));
-            message.AppendLine(FormattableString.Invariant($"expected: '{((RouteEndpoint)expected)?.DisplayName ?? "null"}'"));
-            message.AppendLine(FormattableString.Invariant($"actual:   '{((RouteEndpoint)actual)?.DisplayName ?? "null"}'"));
+            message.AppendLine(
+                FormattableString.Invariant(
+                    $"Validation failed for request {Array.IndexOf(Requests, httpContext)}"
+                )
+            );
+            message.AppendLine(
+                FormattableString.Invariant(
+                    $"{httpContext.Request.Method} {httpContext.Request.Path}"
+                )
+            );
+            message.AppendLine(
+                FormattableString.Invariant(
+                    $"expected: '{((RouteEndpoint)expected)?.DisplayName ?? "null"}'"
+                )
+            );
+            message.AppendLine(
+                FormattableString.Invariant(
+                    $"actual:   '{((RouteEndpoint)actual)?.DisplayName ?? "null"}'"
+                )
+            );
             throw new InvalidOperationException(message.ToString());
         }
     }
@@ -83,7 +103,11 @@ public abstract class EndpointRoutingBenchmarkBase
         AssertUrl(expectedUrl, actualUrl, StringComparison.Ordinal);
     }
 
-    protected void AssertUrl(string expectedUrl, string actualUrl, StringComparison stringComparison)
+    protected void AssertUrl(
+        string expectedUrl,
+        string actualUrl,
+        StringComparison stringComparison
+    )
     {
         if (!string.Equals(expectedUrl, actualUrl, stringComparison))
         {
@@ -93,10 +117,10 @@ public abstract class EndpointRoutingBenchmarkBase
 
     protected RouteEndpoint CreateEndpoint(string template, string httpMethod)
     {
-        return CreateEndpoint(template, metadata: new object[]
-        {
-                new HttpMethodMetadata(new string[]{ httpMethod, }),
-        });
+        return CreateEndpoint(
+            template,
+            metadata: new object[] { new HttpMethodMetadata(new string[] { httpMethod }) }
+        );
     }
 
     protected RouteEndpoint CreateEndpoint(
@@ -107,7 +131,8 @@ public abstract class EndpointRoutingBenchmarkBase
         int order = 0,
         string displayName = null,
         string routeName = null,
-        params object[] metadata)
+        params object[] metadata
+    )
     {
         var endpointMetadata = new List<object>(metadata ?? Array.Empty<object>());
         if (routeName != null)
@@ -120,11 +145,14 @@ public abstract class EndpointRoutingBenchmarkBase
             RoutePatternFactory.Parse(template, defaults, constraints, requiredValues),
             order,
             new EndpointMetadataCollection(endpointMetadata),
-            displayName);
+            displayName
+        );
     }
 
-    protected (HttpContext httpContext, RouteValueDictionary ambientValues) CreateCurrentRequestContext(
-        object ambientValues = null)
+    protected (
+        HttpContext httpContext,
+        RouteValueDictionary ambientValues
+    ) CreateCurrentRequestContext(object ambientValues = null)
     {
         var context = new DefaultHttpContext();
         context.Request.RouteValues = new RouteValueDictionary(ambientValues);
@@ -132,16 +160,23 @@ public abstract class EndpointRoutingBenchmarkBase
         return (context, context.Request.RouteValues);
     }
 
-    protected void CreateOutboundRouteEntry(TreeRouteBuilder treeRouteBuilder, RouteEndpoint endpoint)
+    protected void CreateOutboundRouteEntry(
+        TreeRouteBuilder treeRouteBuilder,
+        RouteEndpoint endpoint
+    )
     {
         treeRouteBuilder.MapOutbound(
             NullRouter.Instance,
-            new RouteTemplate(RoutePatternFactory.Parse(
-                endpoint.RoutePattern.RawText,
-                defaults: endpoint.RoutePattern.Defaults,
-                parameterPolicies: null)),
+            new RouteTemplate(
+                RoutePatternFactory.Parse(
+                    endpoint.RoutePattern.RawText,
+                    defaults: endpoint.RoutePattern.Defaults,
+                    parameterPolicies: null
+                )
+            ),
             requiredLinkValues: new RouteValueDictionary(endpoint.RoutePattern.RequiredValues),
             routeName: null,
-            order: 0);
+            order: 0
+        );
     }
 }

@@ -15,10 +15,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         {
             private readonly object _gate = new();
 
-            // value is ValueSource so that how metadata is re-acquired back are different per entry. 
+            // value is ValueSource so that how metadata is re-acquired back are different per entry.
             private readonly Dictionary<FileKey, AssemblyMetadata> _metadataCache = new();
 
-            public bool TryGetMetadata(FileKey key, [NotNullWhen(true)] out AssemblyMetadata? metadata)
+            public bool TryGetMetadata(
+                FileKey key,
+                [NotNullWhen(true)] out AssemblyMetadata? metadata
+            )
             {
                 lock (_gate)
                 {
@@ -26,8 +29,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
             }
 
-            private bool TryGetMetadata_NoLock(FileKey key, [NotNullWhen(true)] out AssemblyMetadata? metadata)
-                => _metadataCache.TryGetValue(key, out metadata) && metadata != null;
+            private bool TryGetMetadata_NoLock(
+                FileKey key,
+                [NotNullWhen(true)] out AssemblyMetadata? metadata
+            ) => _metadataCache.TryGetValue(key, out metadata) && metadata != null;
 
             /// <summary>
             /// <para>Gets specified metadata from the cache, or retrieves metadata from given <paramref name="newMetadata"/>
@@ -36,7 +41,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             /// <returns>
             /// True if the metadata is retrieved from <paramref name="newMetadata"/> source, false if it already exists in the cache.
             /// </returns>
-            public bool GetOrAddMetadata(FileKey key, AssemblyMetadata newMetadata, out AssemblyMetadata metadata)
+            public bool GetOrAddMetadata(
+                FileKey key,
+                AssemblyMetadata newMetadata,
+                out AssemblyMetadata metadata
+            )
             {
                 lock (_gate)
                 {

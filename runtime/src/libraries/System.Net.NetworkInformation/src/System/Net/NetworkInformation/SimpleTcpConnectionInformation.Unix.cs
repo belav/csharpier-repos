@@ -5,7 +5,11 @@ namespace System.Net.NetworkInformation
 {
     internal sealed class SimpleTcpConnectionInformation : TcpConnectionInformation
     {
-        public SimpleTcpConnectionInformation(IPEndPoint localEndPoint, IPEndPoint remoteEndPoint, TcpState state)
+        public SimpleTcpConnectionInformation(
+            IPEndPoint localEndPoint,
+            IPEndPoint remoteEndPoint,
+            TcpState state
+        )
         {
             LocalEndPoint = localEndPoint;
             RemoteEndPoint = remoteEndPoint;

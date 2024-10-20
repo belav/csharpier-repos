@@ -11,7 +11,10 @@ namespace System.Xml.XPath
     {
         internal int count = -1;
 
-        object ICloneable.Clone() { return this.Clone(); }
+        object ICloneable.Clone()
+        {
+            return this.Clone();
+        }
 
         public abstract XPathNodeIterator Clone();
         public abstract bool MoveNext();
@@ -24,25 +27,35 @@ namespace System.Xml.XPath
                 if (count == -1)
                 {
                     XPathNodeIterator clone = this.Clone();
-                    while (clone.MoveNext()) ;
+                    while (clone.MoveNext())
+                        ;
                     count = clone.CurrentPosition;
                 }
                 return count;
             }
         }
+
         public virtual IEnumerator GetEnumerator()
         {
             return new Enumerator(this);
         }
 
-        private object? debuggerDisplayProxy { get { return Current == null ? null : (object)new XPathNavigator.DebuggerDisplayProxy(Current); } }
+        private object? debuggerDisplayProxy
+        {
+            get
+            {
+                return Current == null
+                    ? null
+                    : (object)new XPathNavigator.DebuggerDisplayProxy(Current);
+            }
+        }
 
         /// <summary>
         /// Implementation of a resettable enumerator that is linked to the XPathNodeIterator used to create it.
         /// </summary>
         private sealed class Enumerator : IEnumerator
         {
-            private readonly XPathNodeIterator _original;     // Keep original XPathNodeIterator in case Reset() is called
+            private readonly XPathNodeIterator _original; // Keep original XPathNodeIterator in case Reset() is called
             private XPathNodeIterator? _current;
             private bool _iterationStarted;
 
@@ -61,14 +74,18 @@ namespace System.Xml.XPath
                     {
                         // Current is null if iterator is positioned after the last node
                         if (_current == null)
-                            throw new InvalidOperationException(SR.Format(SR.Sch_EnumFinished, string.Empty));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.Sch_EnumFinished, string.Empty)
+                            );
 
                         Debug.Assert(_current.Current != null);
                         return _current.Current.Clone();
                     }
 
                     // User must call MoveNext before accessing Current property
-                    throw new InvalidOperationException(SR.Format(SR.Sch_EnumNotStarted, string.Empty));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.Sch_EnumNotStarted, string.Empty)
+                    );
                 }
             }
 

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,40 +33,43 @@ using System.Reflection;
 
 namespace System.Data.Linq
 {
-	public struct Link<T>
-	{
-		[MonoTODO]
-		public Link (T value)
-		{
-			throw new NotImplementedException ();
-		}
+    public struct Link<T>
+    {
+        [MonoTODO]
+        public Link(T value)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public Link (IEnumerable<T> source)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Link(IEnumerable<T> source)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public Link (Link<T> link)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public Link(Link<T> link)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public bool HasLoadedOrAssignedValue {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool HasLoadedOrAssignedValue
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public bool HasValue {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool HasValue
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public T Value {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public T Value
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
+    }
 }

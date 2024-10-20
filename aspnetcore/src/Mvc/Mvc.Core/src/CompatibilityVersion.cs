@@ -37,9 +37,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// </para>
 /// </remarks>
 // Remove after .NET 6.
-[Obsolete("This API is obsolete and will be removed in a future version. Consider removing usages.",
+[Obsolete(
+    "This API is obsolete and will be removed in a future version. Consider removing usages.",
     DiagnosticId = "ASP5001",
-    UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}")]
+    UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}"
+)]
 public enum CompatibilityVersion
 {
     /// <summary>

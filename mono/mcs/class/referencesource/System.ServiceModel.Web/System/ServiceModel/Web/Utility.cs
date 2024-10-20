@@ -7,12 +7,12 @@ namespace System.ServiceModel.Web
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Net.Mime;
     using System.Runtime;
-    using System.Text;
-    using System.Globalization;
     using System.ServiceModel.Channels;
-    
+    using System.Text;
+
     static class Utility
     {
         public const string applicationXml = "application/xml";
@@ -20,7 +20,6 @@ namespace System.ServiceModel.Web
         public const string applicationJson = "application/json";
         public const string textJson = "text/json";
         public const string GET = "GET";
-        
 
         public static bool IsXmlContent(this string contentType)
         {
@@ -31,8 +30,10 @@ namespace System.ServiceModel.Web
 
             string contentTypeProcessed = contentType.Trim();
 
-            return contentTypeProcessed.StartsWith(applicationXml, StringComparison.OrdinalIgnoreCase)
-                || contentTypeProcessed.StartsWith(textXml, StringComparison.OrdinalIgnoreCase);
+            return contentTypeProcessed.StartsWith(
+                    applicationXml,
+                    StringComparison.OrdinalIgnoreCase
+                ) || contentTypeProcessed.StartsWith(textXml, StringComparison.OrdinalIgnoreCase);
         }
 
         public static bool IsJsonContent(this string contentType)
@@ -44,8 +45,10 @@ namespace System.ServiceModel.Web
 
             string contentTypeProcessed = contentType.Trim();
 
-            return contentTypeProcessed.StartsWith(applicationJson, StringComparison.OrdinalIgnoreCase)
-                || contentTypeProcessed.StartsWith(textJson, StringComparison.OrdinalIgnoreCase);
+            return contentTypeProcessed.StartsWith(
+                    applicationJson,
+                    StringComparison.OrdinalIgnoreCase
+                ) || contentTypeProcessed.StartsWith(textJson, StringComparison.OrdinalIgnoreCase);
         }
 
         public static string CombineUri(string former, string latter)
@@ -77,6 +80,7 @@ namespace System.ServiceModel.Web
 
             return former + latter;
         }
+
         public static List<string> QuoteAwareStringSplit(string str)
         {
             List<string> subStrings = new List<string>();
@@ -95,13 +99,13 @@ namespace System.ServiceModel.Web
         }
 
         // This method extracts substrings from a string starting at the offset
-        // and up until the next comma in the string.  The sub string extraction is 
-        // quote aware such that commas inside quoted-strings are ignored.  On return, 
-        // offset points to the next char beyond the comma of the substring returned 
+        // and up until the next comma in the string.  The sub string extraction is
+        // quote aware such that commas inside quoted-strings are ignored.  On return,
+        // offset points to the next char beyond the comma of the substring returned
         // and may point beyond the length of the header.
         public static string QuoteAwareSubString(string str, ref int offset)
         {
-            // this method will filter out empty-string and white-space-only items in 
+            // this method will filter out empty-string and white-space-only items in
             // the header.  For example "x,,y" and "x, ,y" would result in just "x" and "y"
             // substrings being returned.
 
@@ -127,8 +131,10 @@ namespace System.ServiceModel.Web
 
             while (endIndex < str.Length)
             {
-                if (str[endIndex] == '\"' &&
-                   (!insideQuotes || endIndex == 0 || str[endIndex - 1] != '\\'))
+                if (
+                    str[endIndex] == '\"'
+                    && (!insideQuotes || endIndex == 0 || str[endIndex - 1] != '\\')
+                )
                 {
                     insideQuotes = !insideQuotes;
                 }
@@ -164,18 +170,30 @@ namespace System.ServiceModel.Web
         {
             try
             {
-                Fx.Assert(contentType == contentType.Trim(), "The ContentType input argument should already be trimmed.");
-                Fx.Assert(!string.IsNullOrEmpty(contentType), "The ContentType input argument should not be null or empty.");
-                
+                Fx.Assert(
+                    contentType == contentType.Trim(),
+                    "The ContentType input argument should already be trimmed."
+                );
+                Fx.Assert(
+                    !string.IsNullOrEmpty(contentType),
+                    "The ContentType input argument should not be null or empty."
+                );
+
                 ContentType contentTypeToReturn = new ContentType(contentType);
 
                 // Need to check for "*/<Something-other-than-*>" because the ContentType constructor doesn't catch this
                 string[] typeAndSubType = contentTypeToReturn.MediaType.Split('/');
-                Fx.Assert(typeAndSubType.Length == 2, "The creation of the ContentType would have failed if there wasn't a type and subtype.");
-                if (typeAndSubType[0][0] == '*' && typeAndSubType[0].Length == 1 &&
-                    !(typeAndSubType[1][0] == '*' && typeAndSubType[1].Length == 1))
+                Fx.Assert(
+                    typeAndSubType.Length == 2,
+                    "The creation of the ContentType would have failed if there wasn't a type and subtype."
+                );
+                if (
+                    typeAndSubType[0][0] == '*'
+                    && typeAndSubType[0].Length == 1
+                    && !(typeAndSubType[1][0] == '*' && typeAndSubType[1].Length == 1)
+                )
                 {
-                    // 
+                    //
 
 
 
@@ -188,7 +206,10 @@ namespace System.ServiceModel.Web
             catch (FormatException e)
             {
                 // Return null to indicate that the content type creation failed
-                System.ServiceModel.DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
+                System.ServiceModel.DiagnosticUtility.TraceHandledException(
+                    e,
+                    TraceEventType.Warning
+                );
             }
             return null;
         }

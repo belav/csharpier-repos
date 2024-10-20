@@ -8,20 +8,29 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-internal sealed class ConnectionLimitMiddleware<T> where T : BaseConnectionContext
+internal sealed class ConnectionLimitMiddleware<T>
+    where T : BaseConnectionContext
 {
     private readonly Func<T, Task> _next;
     private readonly ResourceCounter _concurrentConnectionCounter;
     private readonly KestrelTrace _trace;
     private readonly KestrelMetrics _metrics;
 
-    public ConnectionLimitMiddleware(Func<T, Task> next, long connectionLimit, KestrelTrace trace, KestrelMetrics metrics)
-        : this(next, ResourceCounter.Quota(connectionLimit), trace, metrics)
-    {
-    }
+    public ConnectionLimitMiddleware(
+        Func<T, Task> next,
+        long connectionLimit,
+        KestrelTrace trace,
+        KestrelMetrics metrics
+    )
+        : this(next, ResourceCounter.Quota(connectionLimit), trace, metrics) { }
 
     // For Testing
-    internal ConnectionLimitMiddleware(Func<T, Task> next, ResourceCounter concurrentConnectionCounter, KestrelTrace trace, KestrelMetrics metrics)
+    internal ConnectionLimitMiddleware(
+        Func<T, Task> next,
+        ResourceCounter concurrentConnectionCounter,
+        KestrelTrace trace,
+        KestrelMetrics metrics
+    )
     {
         _next = next;
         _concurrentConnectionCounter = concurrentConnectionCounter;
@@ -35,7 +44,11 @@ internal sealed class ConnectionLimitMiddleware<T> where T : BaseConnectionConte
         {
             KestrelEventSource.Log.ConnectionRejected(connection.ConnectionId);
             _trace.ConnectionRejected(connection.ConnectionId);
-            _metrics.ConnectionRejected(connection.Features.GetRequiredFeature<IConnectionMetricsContextFeature>().MetricsContext);
+            _metrics.ConnectionRejected(
+                connection
+                    .Features.GetRequiredFeature<IConnectionMetricsContextFeature>()
+                    .MetricsContext
+            );
             await connection.DisposeAsync();
             return;
         }

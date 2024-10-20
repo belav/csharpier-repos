@@ -1,21 +1,23 @@
-class X {
-	public bool eh;
+class X
+{
+    public bool eh;
 }
 
-static class Program {
-	delegate void D (X o);
-	static event D E;
-	
-	public static void Main()
-	{
-		bool running = true;
+static class Program
+{
+    delegate void D(X o);
+    static event D E;
 
-		E = delegate(X o) {
-			o.eh = false;
-			running = false;
-		};
+    public static void Main()
+    {
+        bool running = true;
 
-		running = true;
-		
-	}
+        E = delegate(X o)
+        {
+            o.eh = false;
+            running = false;
+        };
+
+        running = true;
+    }
 }

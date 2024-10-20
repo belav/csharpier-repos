@@ -11,7 +11,8 @@ namespace System.Security.Cryptography.Asn1
     [StructLayout(LayoutKind.Sequential)]
     internal partial struct Pbkdf2Params
     {
-        private static ReadOnlySpan<byte> DefaultPrf => [0x30, 0x0C, 0x06, 0x08, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x02, 0x07, 0x05, 0x00];
+        private static ReadOnlySpan<byte> DefaultPrf =>
+            [0x30, 0x0C, 0x06, 0x08, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x02, 0x07, 0x05, 0x00];
 
         internal System.Security.Cryptography.Asn1.Pbkdf2SaltChoice Salt;
         internal int IterationCount;
@@ -26,7 +27,11 @@ namespace System.Security.Cryptography.Asn1
             AsnValueReader reader;
 
             reader = new AsnValueReader(DefaultPrf, AsnEncodingRules.DER);
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(ref reader, rebind, out decoded.Prf);
+            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                ref reader,
+                rebind,
+                out decoded.Prf
+            );
             reader.ThrowIfNotEmpty();
         }
 #endif
@@ -48,7 +53,6 @@ namespace System.Security.Cryptography.Asn1
                 writer.WriteInteger(KeyLength.Value);
             }
 
-
             // DEFAULT value handler for Prf.
             {
                 AsnWriter tmp = new AsnWriter(AsnEncodingRules.DER);
@@ -68,7 +72,11 @@ namespace System.Security.Cryptography.Asn1
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static Pbkdf2Params Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static Pbkdf2Params Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -84,12 +92,21 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out Pbkdf2Params decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out Pbkdf2Params decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out Pbkdf2Params decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out Pbkdf2Params decoded
+        )
         {
             try
             {
@@ -101,23 +118,33 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out Pbkdf2Params decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out Pbkdf2Params decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader defaultReader;
 
-            System.Security.Cryptography.Asn1.Pbkdf2SaltChoice.Decode(ref sequenceReader, rebind, out decoded.Salt);
+            System.Security.Cryptography.Asn1.Pbkdf2SaltChoice.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.Salt
+            );
 
             if (!sequenceReader.TryReadInt32(out decoded.IterationCount))
             {
                 sequenceReader.ThrowIfNotEmpty();
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Integer))
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Integer)
+            )
             {
-
                 if (sequenceReader.TryReadInt32(out int tmpKeyLength))
                 {
                     decoded.KeyLength = tmpKeyLength;
@@ -126,20 +153,28 @@ namespace System.Security.Cryptography.Asn1
                 {
                     sequenceReader.ThrowIfNotEmpty();
                 }
-
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence))
+            if (
+                sequenceReader.HasData
+                && sequenceReader.PeekTag().HasSameClassAndValue(Asn1Tag.Sequence)
+            )
             {
-                System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(ref sequenceReader, rebind, out decoded.Prf);
+                System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                    ref sequenceReader,
+                    rebind,
+                    out decoded.Prf
+                );
             }
             else
             {
                 defaultReader = new AsnValueReader(DefaultPrf, AsnEncodingRules.DER);
-                System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(ref defaultReader, rebind, out decoded.Prf);
+                System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                    ref defaultReader,
+                    rebind,
+                    out decoded.Prf
+                );
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

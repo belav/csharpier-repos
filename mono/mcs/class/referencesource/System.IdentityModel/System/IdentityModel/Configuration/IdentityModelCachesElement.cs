@@ -37,16 +37,13 @@ namespace System.IdentityModel.Configuration
             get { return (CustomTypeElement)this[ConfigurationStrings.SessionSecurityTokenCache]; }
             set { this[ConfigurationStrings.SessionSecurityTokenCache] = value; }
         }
-            
+
         /// <summary>
         /// Gets a value indicating whether this element has been configured.
         /// </summary>
         public bool IsConfigured
         {
-            get
-            {
-                return this.TokenReplayCache != null || this.SessionSecurityTokenCache != null;
-            }
-        }        
+            get { return this.TokenReplayCache != null || this.SessionSecurityTokenCache != null; }
+        }
     }
 }

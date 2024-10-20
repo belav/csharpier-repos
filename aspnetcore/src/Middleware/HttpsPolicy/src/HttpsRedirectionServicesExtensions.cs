@@ -17,7 +17,10 @@ public static class HttpsRedirectionServicesExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="HttpsRedirectionOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddHttpsRedirection(this IServiceCollection services, Action<HttpsRedirectionOptions> configureOptions)
+    public static IServiceCollection AddHttpsRedirection(
+        this IServiceCollection services,
+        Action<HttpsRedirectionOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configureOptions);

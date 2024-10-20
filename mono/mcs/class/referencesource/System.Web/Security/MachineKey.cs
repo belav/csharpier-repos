@@ -10,7 +10,8 @@
  * Copyright (c) 2009 Microsoft Corporation
  */
 
-namespace System.Web.Security {
+namespace System.Web.Security
+{
     using System;
     using System.Linq;
     using System.Web.Configuration;
@@ -19,25 +20,34 @@ namespace System.Web.Security {
 
     /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////
-    public enum MachineKeyProtection {
+    public enum MachineKeyProtection
+    {
         All,
         Encryption,
-        Validation
+        Validation,
     }
 
     /////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////
-    public static class MachineKey {
+    public static class MachineKey
+    {
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        [Obsolete("This method is obsolete and is only provided for compatibility with existing code. It is recommended that new code use the Protect and Unprotect methods instead.")]
-        public static string Encode(byte[] data, MachineKeyProtection protectionOption) {
+        [Obsolete(
+            "This method is obsolete and is only provided for compatibility with existing code. It is recommended that new code use the Protect and Unprotect methods instead."
+        )]
+        public static string Encode(byte[] data, MachineKeyProtection protectionOption)
+        {
             if (data == null)
                 throw new ArgumentNullException("data");
 
             //////////////////////////////////////////////////////////////////////
             // Step 1: Get the MAC and add to the blob
-            if (protectionOption == MachineKeyProtection.All || protectionOption == MachineKeyProtection.Validation) {
+            if (
+                protectionOption == MachineKeyProtection.All
+                || protectionOption == MachineKeyProtection.Validation
+            )
+            {
                 byte[] bHash = MachineKeySection.HashData(data, null, 0, data.Length);
                 byte[] bAll = new byte[bHash.Length + data.Length];
                 Buffer.BlockCopy(data, 0, bAll, 0, data.Length);
@@ -45,10 +55,24 @@ namespace System.Web.Security {
                 data = bAll;
             }
 
-            if (protectionOption == MachineKeyProtection.All || protectionOption == MachineKeyProtection.Encryption) {
+            if (
+                protectionOption == MachineKeyProtection.All
+                || protectionOption == MachineKeyProtection.Encryption
+            )
+            {
                 //////////////////////////////////////////////////////////////////////
                 // Step 2: Encryption
-                data = MachineKeySection.EncryptOrDecryptData(true, data, null, 0, data.Length, false, false, IVType.Random, !AppSettings.UseLegacyMachineKeyEncryption);
+                data = MachineKeySection.EncryptOrDecryptData(
+                    true,
+                    data,
+                    null,
+                    0,
+                    data.Length,
+                    false,
+                    false,
+                    IVType.Random,
+                    !AppSettings.UseLegacyMachineKeyEncryption
+                );
             }
 
             //////////////////////////////////////////////////////////////////////
@@ -58,8 +82,11 @@ namespace System.Web.Security {
 
         /////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////
-        [Obsolete("This method is obsolete and is only provided for compatibility with existing code. It is recommended that new code use the Protect and Unprotect methods instead.")]
-        public static byte[] Decode(string encodedData, MachineKeyProtection protectionOption) {
+        [Obsolete(
+            "This method is obsolete and is only provided for compatibility with existing code. It is recommended that new code use the Protect and Unprotect methods instead."
+        )]
+        public static byte[] Decode(string encodedData, MachineKeyProtection protectionOption)
+        {
             if (encodedData == null)
                 throw new ArgumentNullException("encodedData");
 
@@ -67,27 +94,47 @@ namespace System.Web.Security {
                 throw new ArgumentException(null, "encodedData");
 
             byte[] data = null;
-            try {
+            try
+            {
                 //////////////////////////////////////////////////////////////////////
                 // Step 1: Covert the HEX string to byte array
                 data = CryptoUtil.HexToBinary(encodedData);
             }
-            catch {
+            catch
+            {
                 throw new ArgumentException(null, "encodedData");
             }
 
             if (data == null || data.Length < 1)
                 throw new ArgumentException(null, "encodedData");
 
-            if (protectionOption == MachineKeyProtection.All || protectionOption == MachineKeyProtection.Encryption) {
+            if (
+                protectionOption == MachineKeyProtection.All
+                || protectionOption == MachineKeyProtection.Encryption
+            )
+            {
                 //////////////////////////////////////////////////////////////////
                 // Step 2: Decrypt the data
-                data = MachineKeySection.EncryptOrDecryptData(false, data, null, 0, data.Length, false, false, IVType.Random, !AppSettings.UseLegacyMachineKeyEncryption);
+                data = MachineKeySection.EncryptOrDecryptData(
+                    false,
+                    data,
+                    null,
+                    0,
+                    data.Length,
+                    false,
+                    false,
+                    IVType.Random,
+                    !AppSettings.UseLegacyMachineKeyEncryption
+                );
                 if (data == null)
                     return null;
             }
 
-            if (protectionOption == MachineKeyProtection.All || protectionOption == MachineKeyProtection.Validation) {
+            if (
+                protectionOption == MachineKeyProtection.All
+                || protectionOption == MachineKeyProtection.Validation
+            )
+            {
                 //////////////////////////////////////////////////////////////////
                 // Step 3a: Remove the hash from the end of the data
                 if (data.Length < MachineKeySection.HashSize)
@@ -101,7 +148,8 @@ namespace System.Web.Security {
                 byte[] bHash = MachineKeySection.HashData(data, null, 0, data.Length);
                 if (bHash == null || bHash.Length != MachineKeySection.HashSize)
                     return null; // Sizes don't match
-                for (int iter = 0; iter < bHash.Length; iter++) {
+                for (int iter = 0; iter < bHash.Length; iter++)
+                {
                     if (bHash[iter] != originalData[data.Length + iter])
                         return null; // Mis-match found
                 }
@@ -124,7 +172,7 @@ namespace System.Web.Security {
         /// the plaintext data to be encrypted, signed, or both. In contrast, the Protect method just
         /// does the right thing and securely protects the data. Ciphertext data produced by this method
         /// can only be deciphered by the Unprotect method.
-        /// 
+        ///
         /// The 'purposes' parameter is an optional list of reason strings that can lock the ciphertext
         /// to a specific purpose. The intent of this parameter is that different subsystems within
         /// an application may depend on cryptographic operations, and a malicious client should not be
@@ -137,30 +185,33 @@ namespace System.Web.Security {
         /// For example, to protect or unprotect an authentication token, the application could call:
         /// MachineKey.Protect(..., "Authentication token");
         /// MachineKey.Unprotect(..., "Authentication token");
-        /// 
+        ///
         /// Applications may dynamically generate the 'purposes' parameter if desired. If an application
         /// does this, user-supplied values like usernames should never directly be passed for the 'purposes'
         /// parameter. They should instead be prefixed with something (like "Username: " + username) to
         /// minimize the risk of a malicious client crafting input that collides with a token in use by some
         /// other part of the system. Any dynamically-generated tokens should come after non-dynamically
         /// generated tokens.
-        /// 
+        ///
         /// For example, to protect or unprotect a private message that is tied to a specific user, the
         /// application could call:
         /// MachineKey.Protect(..., "Private message", "Recipient: " + username);
         /// MachineKey.Unprotect(..., "Private message", "Recipient: " + username);
-        /// 
+        ///
         /// In both of the above examples, is it important that the caller of the Unprotect method be able to
         /// resurrect the original 'purposes' list. Otherwise the operation will fail with a CryptographicException.
         /// </remarks>
-        public static byte[] Protect(byte[] userData, params string[] purposes) {
-            if (userData == null) {
+        public static byte[] Protect(byte[] userData, params string[] purposes)
+        {
+            if (userData == null)
+            {
                 throw new ArgumentNullException("userData");
             }
 
             // Technically we don't care if the purposes array contains whitespace-only entries,
             // but the DataProtector class does, so we'll just block them right here.
-            if (purposes != null && purposes.Any(String.IsNullOrWhiteSpace)) {
+            if (purposes != null && purposes.Any(String.IsNullOrWhiteSpace))
+            {
                 throw new ArgumentException(SR.GetString(SR.MachineKey_InvalidPurpose), "purposes");
             }
 
@@ -168,11 +219,18 @@ namespace System.Web.Security {
         }
 
         // Internal method for unit testing.
-        internal static byte[] Protect(ICryptoServiceProvider cryptoServiceProvider, byte[] userData, string[] purposes) {
+        internal static byte[] Protect(
+            ICryptoServiceProvider cryptoServiceProvider,
+            byte[] userData,
+            string[] purposes
+        )
+        {
             // If the user is calling this method, we want to use the ICryptoServiceProvider
             // regardless of whether or not it's the default provider.
 
-            Purpose derivedPurpose = Purpose.User_MachineKey_Protect.AppendSpecificPurposes(purposes);
+            Purpose derivedPurpose = Purpose.User_MachineKey_Protect.AppendSpecificPurposes(
+                purposes
+            );
             ICryptoService cryptoService = cryptoServiceProvider.GetCryptoService(derivedPurpose);
             return cryptoService.Protect(userData);
         }
@@ -187,14 +245,17 @@ namespace System.Web.Security {
         /// been tampered with, if an incorrect 'purposes' parameter is specified, or if an application is deployed
         /// to more than one server (as in a farm scenario) but is using auto-generated encryption keys.</exception>
         /// <remarks>See documentation on the Protect method for more information.</remarks>
-        public static byte[] Unprotect(byte[] protectedData, params string[] purposes) {
-            if (protectedData == null) {
+        public static byte[] Unprotect(byte[] protectedData, params string[] purposes)
+        {
+            if (protectedData == null)
+            {
                 throw new ArgumentNullException("protectedData");
             }
 
             // Technically we don't care if the purposes array contains whitespace-only entries,
             // but the DataProtector class does, so we'll just block them right here.
-            if (purposes != null && purposes.Any(String.IsNullOrWhiteSpace)) {
+            if (purposes != null && purposes.Any(String.IsNullOrWhiteSpace))
+            {
                 throw new ArgumentException(SR.GetString(SR.MachineKey_InvalidPurpose), "purposes");
             }
 
@@ -202,14 +263,20 @@ namespace System.Web.Security {
         }
 
         // Internal method for unit testing.
-        internal static byte[] Unprotect(ICryptoServiceProvider cryptoServiceProvider, byte[] protectedData, string[] purposes) {
+        internal static byte[] Unprotect(
+            ICryptoServiceProvider cryptoServiceProvider,
+            byte[] protectedData,
+            string[] purposes
+        )
+        {
             // If the user is calling this method, we want to use the ICryptoServiceProvider
             // regardless of whether or not it's the default provider.
 
-            Purpose derivedPurpose = Purpose.User_MachineKey_Protect.AppendSpecificPurposes(purposes);
+            Purpose derivedPurpose = Purpose.User_MachineKey_Protect.AppendSpecificPurposes(
+                purposes
+            );
             ICryptoService cryptoService = cryptoServiceProvider.GetCryptoService(derivedPurpose);
             return cryptoService.Unprotect(protectedData);
         }
-
     }
 }

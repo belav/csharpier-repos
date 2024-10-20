@@ -11,14 +11,15 @@ namespace System.Web.Http.Tracing.Tracers
     /// <summary>
     /// Tracer for <see cref="IExceptionFilter"/>.
     /// </summary>
-    internal class ExceptionFilterTracer : FilterTracer, IExceptionFilter, IDecorator<IExceptionFilter>
+    internal class ExceptionFilterTracer
+        : FilterTracer,
+            IExceptionFilter,
+            IDecorator<IExceptionFilter>
     {
         private const string ExecuteExceptionFilterAsyncMethodName = "ExecuteExceptionFilterAsync";
 
         public ExceptionFilterTracer(IExceptionFilter innerFilter, ITraceWriter traceWriter)
-            : base(innerFilter, traceWriter)
-        {
-        }
+            : base(innerFilter, traceWriter) { }
 
         public new IExceptionFilter Inner
         {
@@ -30,8 +31,10 @@ namespace System.Web.Http.Tracing.Tracers
             get { return InnerFilter as IExceptionFilter; }
         }
 
-        public Task ExecuteExceptionFilterAsync(HttpActionExecutedContext actionExecutedContext,
-                                                CancellationToken cancellationToken)
+        public Task ExecuteExceptionFilterAsync(
+            HttpActionExecutedContext actionExecutedContext,
+            CancellationToken cancellationToken
+        )
         {
             return TraceWriter.TraceBeginEndAsync(
                 actionExecutedContext.Request,
@@ -43,15 +46,17 @@ namespace System.Web.Http.Tracing.Tracers
                 {
                     tr.Exception = actionExecutedContext.Exception;
                 },
-
-                execute: () => InnerExceptionFilter.ExecuteExceptionFilterAsync(actionExecutedContext, cancellationToken),
-
+                execute: () =>
+                    InnerExceptionFilter.ExecuteExceptionFilterAsync(
+                        actionExecutedContext,
+                        cancellationToken
+                    ),
                 endTrace: (tr) =>
                 {
                     tr.Exception = actionExecutedContext.Exception;
                 },
-
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

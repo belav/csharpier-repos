@@ -2,22 +2,23 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Collections.Generic;
-using Point = System.Numerics.Vector<double>;
 using Xunit;
+using Point = System.Numerics.Vector<double>;
 
 namespace VectorMathTests
 {
     public class Program
     {
-		const float EPS = Single.Epsilon * 5;
+        const float EPS = Single.Epsilon * 5;
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+                new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
-		
+
         static float NextFloat(Random random)
         {
             double mantissa = (random.NextDouble() * 2.0) - 1.0;
@@ -115,7 +116,6 @@ namespace VectorMathTests
             double[] res = new double[N];
             for (int i = 0; i < N; ++i)
             {
-
                 if (mask[i] == 0)
                 {
                     res[i] = 0;

@@ -28,15 +28,16 @@ namespace Microsoft.Extensions.ApiDescription.Client;
 public class MetadataSerializerTest
 {
     // Maps literal to escaped values.
-    public static TheoryData<string, string> EscapedValuesMapping { get; } = new TheoryData<string, string>
+    public static TheoryData<string, string> EscapedValuesMapping { get; } =
+        new TheoryData<string, string>
         {
-          { "No escaping necessary for =.", "No escaping necessary for =." },
-          { "Value needs escaping? (yes)", "Value needs escaping%3f %28yes%29" },
-          { "$ comes earlier; @ comes later.", "%24 comes earlier%3b %40 comes later." },
-          {
-            "A '%' *character* needs escaping %-escaping.",
-            "A %27%25%27 %2acharacter%2a needs escaping %25-escaping."
-          },
+            { "No escaping necessary for =.", "No escaping necessary for =." },
+            { "Value needs escaping? (yes)", "Value needs escaping%3f %28yes%29" },
+            { "$ comes earlier; @ comes later.", "%24 comes earlier%3b %40 comes later." },
+            {
+                "A '%' *character* needs escaping %-escaping.",
+                "A %27%25%27 %2acharacter%2a needs escaping %25-escaping."
+            },
         };
 
     public static TheoryData<string> EscapedValues
@@ -103,28 +104,34 @@ public class MetadataSerializerTest
     {
         // Arrange
         var identity = "../files/azureMonitor.json";
-        var input = $"Identity={identity}|ClassName=azureMonitorClient|" +
-            "CodeGenerator=NSwagCSharp|FirstForGenerator=true|Namespace=ConsoleClient|" +
-            "Options=|OriginalItemSpec=../files/azureMonitor.json|" +
-            "OutputPath=C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs";
+        var input =
+            $"Identity={identity}|ClassName=azureMonitorClient|"
+            + "CodeGenerator=NSwagCSharp|FirstForGenerator=true|Namespace=ConsoleClient|"
+            + "Options=|OriginalItemSpec=../files/azureMonitor.json|"
+            + "OutputPath=C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs";
 
         var expectedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", "azureMonitorClient" },
+            { "CodeGenerator", "NSwagCSharp" },
+            { "FirstForGenerator", "true" },
+            { "Namespace", "ConsoleClient" },
+            { "Options", "" },
+            { "OriginalItemSpec", identity },
             {
-                { "ClassName", "azureMonitorClient" },
-                { "CodeGenerator", "NSwagCSharp" },
-                { "FirstForGenerator", "true" },
-                { "Namespace", "ConsoleClient" },
-                { "Options", "" },
-                { "OriginalItemSpec", identity },
-                { "OutputPath", "C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs" },
-            };
+                "OutputPath",
+                "C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs"
+            },
+        };
 
         // Act
         var item = MetadataSerializer.DeserializeMetadata(input);
 
         // Assert
         Assert.Equal(identity, item.ItemSpec);
-        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(item.CloneCustomMetadata());
+        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+            item.CloneCustomMetadata()
+        );
 
         // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
         var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -134,12 +141,14 @@ public class MetadataSerializerTest
         }
 
         Assert.Equal(expectedMetadata, orderedMetadata);
-
     }
 
     [Theory]
     [MemberData(nameof(EscapedValuesMapping))]
-    public void DeserializeMetadata_ReturnsExpectedTask_WhenEscaping(string value, string escapedValue)
+    public void DeserializeMetadata_ReturnsExpectedTask_WhenEscaping(
+        string value,
+        string escapedValue
+    )
     {
         // Arrange
         var identity = "../files/azureMonitor.json";
@@ -155,7 +164,10 @@ public class MetadataSerializerTest
 
     [Theory]
     [MemberData(nameof(EscapedValuesMapping))]
-    public void DeserializeMetadata_ReturnsExpectedTask_WhenEscapingIdentity(string value, string escapedValue)
+    public void DeserializeMetadata_ReturnsExpectedTask_WhenEscapingIdentity(
+        string value,
+        string escapedValue
+    )
     {
         // Arrange
         var input = $"Identity={escapedValue}|Value=a value";
@@ -174,21 +186,25 @@ public class MetadataSerializerTest
         // Arrange
         var identity = "../files/azureMonitor.json";
         var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", "azureMonitorClient" },
+            { "CodeGenerator", "NSwagCSharp" },
+            { "FirstForGenerator", "true" },
+            { "Namespace", "ConsoleClient" },
+            { "Options", "" },
+            { "OriginalItemSpec", identity },
             {
-                { "ClassName", "azureMonitorClient" },
-                { "CodeGenerator", "NSwagCSharp" },
-                { "FirstForGenerator", "true" },
-                { "Namespace", "ConsoleClient" },
-                { "Options", "" },
-                { "OriginalItemSpec", identity },
-                { "OutputPath", "C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs" },
-            };
+                "OutputPath",
+                "C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs"
+            },
+        };
 
         var input = new TaskItem(identity, metadata);
-        var expectedResult = $"Identity={identity}|FirstForGenerator=true|" +
-            "Options=|CodeGenerator=NSwagCSharp|" +
-            "OutputPath=C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs|" +
-            "Namespace=ConsoleClient|OriginalItemSpec=../files/azureMonitor.json|ClassName=azureMonitorClient";
+        var expectedResult =
+            $"Identity={identity}|FirstForGenerator=true|"
+            + "Options=|CodeGenerator=NSwagCSharp|"
+            + "OutputPath=C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs|"
+            + "Namespace=ConsoleClient|OriginalItemSpec=../files/azureMonitor.json|ClassName=azureMonitorClient";
 
         // Act
         var result = MetadataSerializer.SerializeMetadata(input);
@@ -204,7 +220,10 @@ public class MetadataSerializerTest
         // Arrange
         var identity = "../files/azureMonitor.json";
         var expectedResult = $"Identity={identity}|Value={escapedValue}";
-        var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal) { { "Value", escapedValue } };
+        var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "Value", escapedValue },
+        };
         var input = new TaskItem(identity, metadata);
 
         // Act
@@ -219,7 +238,10 @@ public class MetadataSerializerTest
     public void SerializeMetadata_ReturnsExpectedString_WhenEscapingIdentity(string escapedValue)
     {
         // Arrange
-        var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal) { { "Value", "a value" } };
+        var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "Value", "a value" },
+        };
         var expectedResult = $"Identity={escapedValue}|Value=a value";
         var input = new TaskItem(escapedValue, metadata);
 
@@ -236,24 +258,28 @@ public class MetadataSerializerTest
         // Arrange
         var identity = "../files/azureMonitor.json";
         var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", "azureMonitorClient" },
+            { "CodeGenerator", "NSwagCSharp" },
+            { "FirstForGenerator", "true" },
+            { "Namespace", "ConsoleClient" },
+            { "Options", "" },
+            { "OriginalItemSpec", identity },
             {
-                { "ClassName", "azureMonitorClient" },
-                { "CodeGenerator", "NSwagCSharp" },
-                { "FirstForGenerator", "true" },
-                { "Namespace", "ConsoleClient" },
-                { "Options", "" },
-                { "OriginalItemSpec", identity },
-                { "OutputPath", "C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs" },
-            };
+                "OutputPath",
+                "C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs"
+            },
+        };
 
         var input = new Mock<ITaskItem>(MockBehavior.Strict);
         input.SetupGet(i => i.ItemSpec).Returns(identity).Verifiable();
         input.Setup(i => i.CloneCustomMetadata()).Returns(metadata).Verifiable();
 
-        var expectedResult = $"Identity={identity}|ClassName=azureMonitorClient|" +
-            "CodeGenerator=NSwagCSharp|FirstForGenerator=true|Namespace=ConsoleClient|" +
-            "Options=|OriginalItemSpec=../files/azureMonitor.json|" +
-            "OutputPath=C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs";
+        var expectedResult =
+            $"Identity={identity}|ClassName=azureMonitorClient|"
+            + "CodeGenerator=NSwagCSharp|FirstForGenerator=true|Namespace=ConsoleClient|"
+            + "Options=|OriginalItemSpec=../files/azureMonitor.json|"
+            + "OutputPath=C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs";
 
         // Act
         var result = MetadataSerializer.SerializeMetadata(input.Object);
@@ -268,11 +294,15 @@ public class MetadataSerializerTest
     [MemberData(nameof(EscapedValuesMapping))]
     public void SerializeMetadata_ReturnsExpectedString_WithLegacyItem_WhenEscaping(
         string value,
-        string escapedValue)
+        string escapedValue
+    )
     {
         // Arrange
         var identity = "../files/azureMonitor.json";
-        var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal) { { "Value", value } };
+        var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "Value", value },
+        };
         var input = new Mock<ITaskItem>(MockBehavior.Strict);
         input.SetupGet(i => i.ItemSpec).Returns(identity).Verifiable();
         input.Setup(i => i.CloneCustomMetadata()).Returns(metadata).Verifiable();
@@ -292,10 +322,14 @@ public class MetadataSerializerTest
     [MemberData(nameof(EscapedValuesMapping))]
     public void SerializeMetadata_ReturnsExpectedString_WithLegacyItem_WhenEscapingIdentity(
         string value,
-        string escapedValue)
+        string escapedValue
+    )
     {
         // Arrange
-        var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal) { { "Value", "a value" } };
+        var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "Value", "a value" },
+        };
         var input = new Mock<ITaskItem>(MockBehavior.Strict);
         input.SetupGet(i => i.ItemSpec).Returns(value).Verifiable();
         input.Setup(i => i.CloneCustomMetadata()).Returns(metadata).Verifiable();

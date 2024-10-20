@@ -29,10 +29,14 @@ namespace System.Security.Principal
         Normal = 0,
         Guest = 1,
         System = 2,
-        Anonymous = 3
+        Anonymous = 3,
     }
 
-    public class WindowsIdentity : ClaimsIdentity, IDisposable, ISerializable, IDeserializationCallback
+    public class WindowsIdentity
+        : ClaimsIdentity,
+            IDisposable,
+            ISerializable,
+            IDeserializationCallback
     {
         private static SecurityIdentifier? s_authenticatedUserRid;
         private static SecurityIdentifier? s_domainRid;
@@ -59,14 +63,22 @@ namespace System.Security.Principal
 
         private static bool s_ignoreWindows8Properties;
 
-        public WindowsIdentity(IntPtr userToken) : this(userToken, null, -1) { }
+        public WindowsIdentity(IntPtr userToken)
+            : this(userToken, null, -1) { }
 
-        public WindowsIdentity(IntPtr userToken, string type) : this(userToken, type, -1) { }
+        public WindowsIdentity(IntPtr userToken, string type)
+            : this(userToken, type, -1) { }
 
         // The actual accType is ignored and always will be retrieved from the system.
-        public WindowsIdentity(IntPtr userToken, string type, WindowsAccountType acctType) : this(userToken, type, -1) { }
+        public WindowsIdentity(IntPtr userToken, string type, WindowsAccountType acctType)
+            : this(userToken, type, -1) { }
 
-        public WindowsIdentity(IntPtr userToken, string type, WindowsAccountType acctType, bool isAuthenticated)
+        public WindowsIdentity(
+            IntPtr userToken,
+            string type,
+            WindowsAccountType acctType,
+            bool isAuthenticated
+        )
             : this(userToken, type, isAuthenticated ? 1 : 0) { }
 
         protected WindowsIdentity(WindowsIdentity identity)
@@ -76,11 +88,17 @@ namespace System.Security.Principal
 
             try
             {
-                if (!identity._safeTokenHandle.IsInvalid && identity._safeTokenHandle.DangerousGetHandle() != IntPtr.Zero)
+                if (
+                    !identity._safeTokenHandle.IsInvalid
+                    && identity._safeTokenHandle.DangerousGetHandle() != IntPtr.Zero
+                )
                 {
                     identity._safeTokenHandle.DangerousAddRef(ref mustDecrement);
 
-                    if (!identity._safeTokenHandle.IsInvalid && identity._safeTokenHandle.DangerousGetHandle() != IntPtr.Zero)
+                    if (
+                        !identity._safeTokenHandle.IsInvalid
+                        && identity._safeTokenHandle.DangerousGetHandle() != IntPtr.Zero
+                    )
                     {
                         CreateFromToken(identity._safeTokenHandle.DangerousGetHandle());
                     }
@@ -134,7 +152,10 @@ namespace System.Security.Principal
 
             using (SafeLsaHandle lsaHandle = ConnectToLsa())
             {
-                int packageId = LookupAuthenticationPackage(lsaHandle, Interop.SspiCli.AuthenticationPackageNames.MICROSOFT_KERBEROS_NAME_A);
+                int packageId = LookupAuthenticationPackage(
+                    lsaHandle,
+                    Interop.SspiCli.AuthenticationPackageNames.MICROSOFT_KERBEROS_NAME_A
+                );
 
                 // 8 byte or less name that indicates the source of the access token. This choice of name is visible to callers through the native GetTokenInformation() api
                 // so we'll use the same name the CLR used even though we're not actually the "CLR."
@@ -146,7 +167,9 @@ namespace System.Security.Principal
                     if (!Interop.Advapi32.AllocateLocallyUniqueId(&sourceContext.SourceIdentifier))
                         throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
 
-                    sourceName.CopyTo(new Span<byte>(sourceContext.SourceName, TOKEN_SOURCE.TOKEN_SOURCE_LENGTH));
+                    sourceName.CopyTo(
+                        new Span<byte>(sourceContext.SourceName, TOKEN_SOURCE.TOKEN_SOURCE_LENGTH)
+                    );
                 }
 
                 ArgumentNullException.ThrowIfNull(sUserPrincipalName);
@@ -166,27 +189,50 @@ namespace System.Security.Principal
                     // enough room for both the structure itself and the UPN string in a single buffer
                     // and do the marshalling into this buffer by hand.
                     //
-                    int authenticationInfoLength = checked(sizeof(KERB_S4U_LOGON) + upnBytes.Length);
-                    using (SafeLocalAllocHandle authenticationInfo = SafeLocalAllocHandle.LocalAlloc(authenticationInfoLength))
+                    int authenticationInfoLength = checked(
+                        sizeof(KERB_S4U_LOGON) + upnBytes.Length
+                    );
+                    using (
+                        SafeLocalAllocHandle authenticationInfo = SafeLocalAllocHandle.LocalAlloc(
+                            authenticationInfoLength
+                        )
+                    )
                     {
-                        KERB_S4U_LOGON* pKerbS4uLogin = (KERB_S4U_LOGON*)(authenticationInfo.DangerousGetHandle());
+                        KERB_S4U_LOGON* pKerbS4uLogin = (KERB_S4U_LOGON*)(
+                            authenticationInfo.DangerousGetHandle()
+                        );
                         pKerbS4uLogin->MessageType = KERB_LOGON_SUBMIT_TYPE.KerbS4ULogon;
                         pKerbS4uLogin->Flags = KerbS4uLogonFlags.None;
 
-                        pKerbS4uLogin->ClientUpn.Length = pKerbS4uLogin->ClientUpn.MaximumLength = checked((ushort)upnBytes.Length);
+                        pKerbS4uLogin->ClientUpn.Length = pKerbS4uLogin->ClientUpn.MaximumLength =
+                            checked((ushort)upnBytes.Length);
 
                         IntPtr pUpnOffset = (IntPtr)(pKerbS4uLogin + 1);
                         pKerbS4uLogin->ClientUpn.Buffer = pUpnOffset;
                         Marshal.Copy(upnBytes, 0, pKerbS4uLogin->ClientUpn.Buffer, upnBytes.Length);
 
-                        pKerbS4uLogin->ClientRealm.Length = pKerbS4uLogin->ClientRealm.MaximumLength = 0;
+                        pKerbS4uLogin->ClientRealm.Length = pKerbS4uLogin
+                            ->ClientRealm
+                            .MaximumLength = 0;
                         pKerbS4uLogin->ClientRealm.Buffer = IntPtr.Zero;
 
                         ushort sourceNameLength = checked((ushort)(sourceName.Length));
-                        using (SafeLocalAllocHandle sourceNameBuffer = SafeLocalAllocHandle.LocalAlloc(sourceNameLength))
+                        using (
+                            SafeLocalAllocHandle sourceNameBuffer = SafeLocalAllocHandle.LocalAlloc(
+                                sourceNameLength
+                            )
+                        )
                         {
-                            sourceName.CopyTo(new Span<byte>((void*)sourceNameBuffer.DangerousGetHandle(), sourceName.Length));
-                            LSA_STRING lsaOriginName = new LSA_STRING(sourceNameBuffer.DangerousGetHandle(), sourceNameLength);
+                            sourceName.CopyTo(
+                                new Span<byte>(
+                                    (void*)sourceNameBuffer.DangerousGetHandle(),
+                                    sourceName.Length
+                                )
+                            );
+                            LSA_STRING lsaOriginName = new LSA_STRING(
+                                sourceNameBuffer.DangerousGetHandle(),
+                                sourceNameLength
+                            );
 
                             int ntStatus = Interop.SspiCli.LsaLogonUser(
                                 lsaHandle,
@@ -202,11 +248,18 @@ namespace System.Security.Principal
                                 out LUID logonId,
                                 out SafeAccessTokenHandle accessTokenHandle,
                                 out QUOTA_LIMITS quota,
-                                out int subStatus);
+                                out int subStatus
+                            );
 
                             profileBuffer.Dispose();
 
-                            if (ntStatus == unchecked((int)Interop.StatusOptions.STATUS_ACCOUNT_RESTRICTION) && subStatus < 0)
+                            if (
+                                ntStatus
+                                    == unchecked(
+                                        (int)Interop.StatusOptions.STATUS_ACCOUNT_RESTRICTION
+                                    )
+                                && subStatus < 0
+                            )
                             {
                                 ntStatus = subStatus;
                             }
@@ -246,8 +299,15 @@ namespace System.Security.Principal
                 byte[] asciiPackageName = Encoding.ASCII.GetBytes(packageName);
                 fixed (byte* pAsciiPackageName = &asciiPackageName[0])
                 {
-                    LSA_STRING lsaPackageName = new LSA_STRING((IntPtr)pAsciiPackageName, checked((ushort)(asciiPackageName.Length)));
-                    int ntStatus = Interop.SspiCli.LsaLookupAuthenticationPackage(lsaHandle, ref lsaPackageName, out packageId);
+                    LSA_STRING lsaPackageName = new LSA_STRING(
+                        (IntPtr)pAsciiPackageName,
+                        checked((ushort)(asciiPackageName.Length))
+                    );
+                    int ntStatus = Interop.SspiCli.LsaLookupAuthenticationPackage(
+                        lsaHandle,
+                        ref lsaPackageName,
+                        out packageId
+                    );
                     if (ntStatus < 0) // non-negative numbers indicate success
                         throw GetExceptionFromNtStatus(ntStatus);
                 }
@@ -263,27 +323,33 @@ namespace System.Security.Principal
             }
 
             // Find out if the specified token is a valid.
-            if (!Interop.Advapi32.GetTokenInformation(
+            if (
+                !Interop.Advapi32.GetTokenInformation(
                     accessToken,
                     (uint)TokenInformationClass.TokenType,
                     IntPtr.Zero,
                     0,
-                    out _) &&
-                Marshal.GetLastPInvokeError() == Interop.Errors.ERROR_INVALID_HANDLE)
+                    out _
+                )
+                && Marshal.GetLastPInvokeError() == Interop.Errors.ERROR_INVALID_HANDLE
+            )
             {
                 throw new ArgumentException(SR.Argument_InvalidImpersonationToken);
             }
 
             SafeAccessTokenHandle duplicateAccessToken;
             IntPtr currentProcessHandle = Interop.Kernel32.GetCurrentProcess();
-            if (!Interop.Kernel32.DuplicateHandle(
+            if (
+                !Interop.Kernel32.DuplicateHandle(
                     currentProcessHandle,
                     accessToken,
                     currentProcessHandle,
                     out duplicateAccessToken,
                     0,
                     true,
-                    Interop.DuplicateHandleOptions.DUPLICATE_SAME_ACCESS))
+                    Interop.DuplicateHandleOptions.DUPLICATE_SAME_ACCESS
+                )
+            )
             {
                 throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
             }
@@ -319,7 +385,11 @@ namespace System.Security.Principal
             _safeTokenHandle = DuplicateAccessToken(userToken);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public WindowsIdentity(SerializationInfo info, StreamingContext context)
         {
@@ -346,13 +416,10 @@ namespace System.Security.Principal
             return GetCurrentInternal(TokenAccessLevels.MaximumAllowed, threadOnly: false)!;
         }
 
-
         public static WindowsIdentity? GetCurrent(bool ifImpersonating)
         {
-
             return GetCurrentInternal(TokenAccessLevels.MaximumAllowed, ifImpersonating);
         }
-
 
         public static WindowsIdentity GetCurrent(TokenAccessLevels desiredAccess)
         {
@@ -391,14 +458,22 @@ namespace System.Security.Principal
                     SafeLsaReturnBufferHandle? pLogonSessionData = null;
                     try
                     {
-                        int status = Interop.SspiCli.LsaGetLogonSessionData(ref authId, out pLogonSessionData);
+                        int status = Interop.SspiCli.LsaGetLogonSessionData(
+                            ref authId,
+                            out pLogonSessionData
+                        );
                         if (status < 0) // non-negative numbers indicate success
                             throw GetExceptionFromNtStatus(status);
 
-                        pLogonSessionData.Initialize((uint)sizeof(Interop.SECURITY_LOGON_SESSION_DATA));
+                        pLogonSessionData.Initialize(
+                            (uint)sizeof(Interop.SECURITY_LOGON_SESSION_DATA)
+                        );
 
-                        Interop.SECURITY_LOGON_SESSION_DATA logonSessionData = pLogonSessionData.Read<Interop.SECURITY_LOGON_SESSION_DATA>(0);
-                        return Marshal.PtrToStringUni(logonSessionData.AuthenticationPackage.Buffer);
+                        Interop.SECURITY_LOGON_SESSION_DATA logonSessionData =
+                            pLogonSessionData.Read<Interop.SECURITY_LOGON_SESSION_DATA>(0);
+                        return Marshal.PtrToStringUni(
+                            logonSessionData.AuthenticationPackage.Buffer
+                        );
                     }
                     finally
                     {
@@ -426,7 +501,8 @@ namespace System.Security.Principal
                     }
                     else
                     {
-                        TokenType tokenType = (TokenType)GetTokenInformation<int>(TokenInformationClass.TokenType);
+                        TokenType tokenType = (TokenType)
+                            GetTokenInformation<int>(TokenInformationClass.TokenType);
                         if (tokenType == TokenType.TokenPrimary)
                         {
                             impersonationLevel = TokenImpersonationLevel.None; // primary token;
@@ -434,7 +510,9 @@ namespace System.Security.Principal
                         else
                         {
                             // This is an impersonation token, get the impersonation level
-                            int level = GetTokenInformation<int>(TokenInformationClass.TokenImpersonationLevel);
+                            int level = GetTokenInformation<int>(
+                                TokenInformationClass.TokenImpersonationLevel
+                            );
                             impersonationLevel = (TokenImpersonationLevel)level + 1;
                         }
                     }
@@ -480,21 +558,29 @@ namespace System.Security.Principal
 
             try
             {
-                if (til == TokenImpersonationLevel.None &&
-                    !Interop.Advapi32.DuplicateTokenEx(_safeTokenHandle,
-                                                      (uint)TokenAccessLevels.Query,
-                                                      IntPtr.Zero,
-                                                      (uint)TokenImpersonationLevel.Identification,
-                                                      (uint)TokenType.TokenImpersonation,
-                                                      ref token))
+                if (
+                    til == TokenImpersonationLevel.None
+                    && !Interop.Advapi32.DuplicateTokenEx(
+                        _safeTokenHandle,
+                        (uint)TokenAccessLevels.Query,
+                        IntPtr.Zero,
+                        (uint)TokenImpersonationLevel.Identification,
+                        (uint)TokenType.TokenImpersonation,
+                        ref token
+                    )
+                )
                 {
                     throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
                 }
 
                 // CheckTokenMembership will check if the SID is both present and enabled in the access token.
-                if (!Interop.Advapi32.CheckTokenMembership((til != TokenImpersonationLevel.None ? _safeTokenHandle : token),
-                                                      sid.BinaryForm,
-                                                      ref isMember))
+                if (
+                    !Interop.Advapi32.CheckTokenMembership(
+                        (til != TokenImpersonationLevel.None ? _safeTokenHandle : token),
+                        sid.BinaryForm,
+                        ref isMember
+                    )
+                )
                 {
                     throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
                 }
@@ -523,7 +609,11 @@ namespace System.Security.Principal
 
                 s_domainRid ??= new SecurityIdentifier(
                     IdentifierAuthority.NTAuthority,
-                    new int[] { Interop.SecurityIdentifier.SECURITY_BUILTIN_DOMAIN_RID, (int)WindowsBuiltInRole.Guest }
+                    new int[]
+                    {
+                        Interop.SecurityIdentifier.SECURITY_BUILTIN_DOMAIN_RID,
+                        (int)WindowsBuiltInRole.Guest,
+                    }
                 );
 
                 return CheckNtTokenForSid(s_domainRid);
@@ -566,10 +656,7 @@ namespace System.Security.Principal
 
         public override string Name
         {
-            get
-            {
-                return GetName();
-            }
+            get { return GetName(); }
         }
 
         internal string GetName()
@@ -582,11 +669,14 @@ namespace System.Security.Principal
             {
                 // revert thread impersonation for the duration of the call to get the name.
                 using SafeAccessTokenHandle invalidHandle = SafeAccessTokenHandle.InvalidHandle;
-                RunImpersonated(invalidHandle, delegate
-                {
-                    NTAccount? ntAccount = User!.Translate(typeof(NTAccount)) as NTAccount;
-                    _name = ntAccount!.ToString();
-                });
+                RunImpersonated(
+                    invalidHandle,
+                    delegate
+                    {
+                        NTAccount? ntAccount = User!.Translate(typeof(NTAccount)) as NTAccount;
+                        _name = ntAccount!.ToString();
+                    }
+                );
             }
 
             return _name!;
@@ -602,7 +692,13 @@ namespace System.Security.Principal
 
                 if (_owner == null)
                 {
-                    using (SafeLocalAllocHandle tokenOwner = GetTokenInformation(_safeTokenHandle, TokenInformationClass.TokenOwner, nullOnInvalidParam: false)!)
+                    using (
+                        SafeLocalAllocHandle tokenOwner = GetTokenInformation(
+                            _safeTokenHandle,
+                            TokenInformationClass.TokenOwner,
+                            nullOnInvalidParam: false
+                        )!
+                    )
                     {
                         _owner = new SecurityIdentifier(tokenOwner.Read<IntPtr>(0));
                     }
@@ -622,7 +718,13 @@ namespace System.Security.Principal
 
                 if (_user == null)
                 {
-                    using (SafeLocalAllocHandle tokenUser = GetTokenInformation(_safeTokenHandle, TokenInformationClass.TokenUser, nullOnInvalidParam: false)!)
+                    using (
+                        SafeLocalAllocHandle tokenUser = GetTokenInformation(
+                            _safeTokenHandle,
+                            TokenInformationClass.TokenUser,
+                            nullOnInvalidParam: false
+                        )!
+                    )
                     {
                         _user = new SecurityIdentifier(tokenUser!.Read<IntPtr>(0));
                     }
@@ -643,20 +745,37 @@ namespace System.Security.Principal
                 if (_groups == null)
                 {
                     IdentityReferenceCollection groups = new IdentityReferenceCollection();
-                    using (SafeLocalAllocHandle pGroups = GetTokenInformation(_safeTokenHandle, TokenInformationClass.TokenGroups, nullOnInvalidParam: false)!)
+                    using (
+                        SafeLocalAllocHandle pGroups = GetTokenInformation(
+                            _safeTokenHandle,
+                            TokenInformationClass.TokenGroups,
+                            nullOnInvalidParam: false
+                        )!
+                    )
                     {
                         Interop.TOKEN_GROUPS tokenGroups = pGroups!.Read<Interop.TOKEN_GROUPS>(0);
-                        Interop.SID_AND_ATTRIBUTES[] groupDetails = new Interop.SID_AND_ATTRIBUTES[tokenGroups.GroupCount];
-                        pGroups.ReadArray((uint)sizeof(IntPtr) /* offsetof(Interop.TOKEN_GROUPS, Groups) */,
-                                          groupDetails,
-                                          0,
-                                          groupDetails.Length);
+                        Interop.SID_AND_ATTRIBUTES[] groupDetails = new Interop.SID_AND_ATTRIBUTES[
+                            tokenGroups.GroupCount
+                        ];
+                        pGroups.ReadArray(
+                            (uint)
+                                sizeof(IntPtr) /* offsetof(Interop.TOKEN_GROUPS, Groups) */
+                            ,
+                            groupDetails,
+                            0,
+                            groupDetails.Length
+                        );
 
                         foreach (Interop.SID_AND_ATTRIBUTES group in groupDetails)
                         {
                             // Ignore disabled, logon ID, and deny-only groups.
-                            uint mask = Interop.SecurityGroups.SE_GROUP_ENABLED | Interop.SecurityGroups.SE_GROUP_LOGON_ID | Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY;
-                            if ((group.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_ENABLED)
+                            uint mask =
+                                Interop.SecurityGroups.SE_GROUP_ENABLED
+                                | Interop.SecurityGroups.SE_GROUP_LOGON_ID
+                                | Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY;
+                            if (
+                                (group.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_ENABLED
+                            )
                             {
                                 groups.Add(new SecurityIdentifier(group.Sid));
                             }
@@ -671,33 +790,32 @@ namespace System.Security.Principal
 
         public SafeAccessTokenHandle AccessToken
         {
-            get
-            {
-                return _safeTokenHandle;
-            }
+            get { return _safeTokenHandle; }
         }
 
         public virtual IntPtr Token
         {
-            get
-            {
-                return _safeTokenHandle.DangerousGetHandle();
-            }
+            get { return _safeTokenHandle.DangerousGetHandle(); }
         }
 
         //
         // Public methods.
         //
 
-        public static void RunImpersonated(SafeAccessTokenHandle safeAccessTokenHandle, Action action)
+        public static void RunImpersonated(
+            SafeAccessTokenHandle safeAccessTokenHandle,
+            Action action
+        )
         {
             ArgumentNullException.ThrowIfNull(action);
 
             RunImpersonatedInternal(safeAccessTokenHandle, action);
         }
 
-
-        public static T RunImpersonated<T>(SafeAccessTokenHandle safeAccessTokenHandle, Func<T> func)
+        public static T RunImpersonated<T>(
+            SafeAccessTokenHandle safeAccessTokenHandle,
+            Func<T> func
+        )
         {
             ArgumentNullException.ThrowIfNull(func);
 
@@ -712,8 +830,10 @@ namespace System.Security.Principal
         /// <param name="safeAccessTokenHandle">The SafeAccessTokenHandle of the impersonated Windows identity.</param>
         /// <param name="func">The <see cref="System.Func{Task}"/> to run.</param>
         /// <returns>A <see cref="Task"/> that represents the asynchronous operation of the provided <see cref="System.Func{Task}"/>.</returns>
-        public static Task RunImpersonatedAsync(SafeAccessTokenHandle safeAccessTokenHandle, Func<Task> func)
-            => RunImpersonated(safeAccessTokenHandle, func);
+        public static Task RunImpersonatedAsync(
+            SafeAccessTokenHandle safeAccessTokenHandle,
+            Func<Task> func
+        ) => RunImpersonated(safeAccessTokenHandle, func);
 
         /// <summary>
         /// Runs the specified asynchronous action as the impersonated Windows identity
@@ -722,8 +842,10 @@ namespace System.Security.Principal
         /// <param name="safeAccessTokenHandle">The SafeAccessTokenHandle of the impersonated Windows identity.</param>
         /// <param name="func">The <see cref="System.Func{Task}"/> of <see cref="System.Threading.Tasks.Task{T}"/> to run.</param>
         /// <returns>A <see cref="Task{T}"/> that represents the asynchronous operation of the <see cref="System.Func{Task}"/> of <see cref="System.Threading.Tasks.Task{T}"/> provided.</returns>
-        public static Task<T> RunImpersonatedAsync<T>(SafeAccessTokenHandle safeAccessTokenHandle, Func<Task<T>> func)
-            => RunImpersonated(safeAccessTokenHandle, func);
+        public static Task<T> RunImpersonatedAsync<T>(
+            SafeAccessTokenHandle safeAccessTokenHandle,
+            Func<Task<T>> func
+        ) => RunImpersonated(safeAccessTokenHandle, func);
 
         protected virtual void Dispose(bool disposing)
         {
@@ -746,13 +868,19 @@ namespace System.Security.Principal
         // internal.
         //
 
-        private static readonly AsyncLocal<SafeAccessTokenHandle?> s_currentImpersonatedToken = new AsyncLocal<SafeAccessTokenHandle?>(CurrentImpersonatedTokenChanged);
+        private static readonly AsyncLocal<SafeAccessTokenHandle?> s_currentImpersonatedToken =
+            new AsyncLocal<SafeAccessTokenHandle?>(CurrentImpersonatedTokenChanged);
 
         private static void RunImpersonatedInternal(SafeAccessTokenHandle token, Action action)
         {
             token = DuplicateAccessToken(token);
 
-            SafeAccessTokenHandle previousToken = GetCurrentToken(TokenAccessLevels.MaximumAllowed, false, out bool isImpersonating, out int hr);
+            SafeAccessTokenHandle previousToken = GetCurrentToken(
+                TokenAccessLevels.MaximumAllowed,
+                false,
+                out bool isImpersonating,
+                out int hr
+            );
             if (previousToken == null || previousToken.IsInvalid)
             {
                 previousToken?.Dispose();
@@ -788,10 +916,13 @@ namespace System.Security.Principal
 
                     action();
                 },
-                null);
+                null
+            );
         }
 
-        private static void CurrentImpersonatedTokenChanged(AsyncLocalValueChangedArgs<SafeAccessTokenHandle?> args)
+        private static void CurrentImpersonatedTokenChanged(
+            AsyncLocalValueChangedArgs<SafeAccessTokenHandle?> args
+        )
         {
             if (!args.ThreadContextChanged)
                 return; // we handle explicit Value property changes elsewhere.
@@ -806,9 +937,17 @@ namespace System.Security.Principal
             }
         }
 
-        internal static WindowsIdentity? GetCurrentInternal(TokenAccessLevels desiredAccess, bool threadOnly)
+        internal static WindowsIdentity? GetCurrentInternal(
+            TokenAccessLevels desiredAccess,
+            bool threadOnly
+        )
         {
-            SafeAccessTokenHandle safeTokenHandle = GetCurrentToken(desiredAccess, threadOnly, out bool isImpersonating, out int hr);
+            SafeAccessTokenHandle safeTokenHandle = GetCurrentToken(
+                desiredAccess,
+                threadOnly,
+                out bool isImpersonating,
+                out int hr
+            );
             if (safeTokenHandle == null || safeTokenHandle.IsInvalid)
             {
                 safeTokenHandle?.Dispose();
@@ -842,18 +981,30 @@ namespace System.Security.Principal
             if ((uint)status == Interop.StatusOptions.STATUS_ACCESS_DENIED)
                 return new UnauthorizedAccessException();
 
-            if ((uint)status == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES || (uint)status == Interop.StatusOptions.STATUS_NO_MEMORY)
+            if (
+                (uint)status == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES
+                || (uint)status == Interop.StatusOptions.STATUS_NO_MEMORY
+            )
                 return new OutOfMemoryException();
 
             uint win32ErrorCode = Interop.Advapi32.LsaNtStatusToWinError((uint)status);
             return new SecurityException(Marshal.GetPInvokeErrorMessage((int)win32ErrorCode));
         }
 
-        private static SafeAccessTokenHandle GetCurrentToken(TokenAccessLevels desiredAccess, bool threadOnly, out bool isImpersonating, out int hr)
+        private static SafeAccessTokenHandle GetCurrentToken(
+            TokenAccessLevels desiredAccess,
+            bool threadOnly,
+            out bool isImpersonating,
+            out int hr
+        )
         {
             isImpersonating = true;
             hr = 0;
-            bool success = Interop.Advapi32.OpenThreadToken(desiredAccess, WinSecurityContext.Both, out SafeAccessTokenHandle safeTokenHandle);
+            bool success = Interop.Advapi32.OpenThreadToken(
+                desiredAccess,
+                WinSecurityContext.Both,
+                out SafeAccessTokenHandle safeTokenHandle
+            );
             if (!success)
             {
                 hr = Marshal.GetHRForLastWin32Error();
@@ -872,10 +1023,19 @@ namespace System.Security.Principal
             return safeTokenHandle;
         }
 
-        private static SafeAccessTokenHandle GetCurrentProcessToken(TokenAccessLevels desiredAccess, out int hr)
+        private static SafeAccessTokenHandle GetCurrentProcessToken(
+            TokenAccessLevels desiredAccess,
+            out int hr
+        )
         {
             hr = 0;
-            if (!Interop.Advapi32.OpenProcessToken(Interop.Kernel32.GetCurrentProcess(), desiredAccess, out SafeAccessTokenHandle safeTokenHandle))
+            if (
+                !Interop.Advapi32.OpenProcessToken(
+                    Interop.Kernel32.GetCurrentProcess(),
+                    desiredAccess,
+                    out SafeAccessTokenHandle safeTokenHandle
+                )
+            )
                 hr = GetHRForWin32Error(Marshal.GetLastPInvokeError());
             return safeTokenHandle;
         }
@@ -884,14 +1044,26 @@ namespace System.Security.Principal
         ///   Get a property from the current token
         /// </summary>
 
-        private unsafe T GetTokenInformation<T>(TokenInformationClass tokenInformationClass) where T : unmanaged
+        private unsafe T GetTokenInformation<T>(TokenInformationClass tokenInformationClass)
+            where T : unmanaged
         {
-            Debug.Assert(!_safeTokenHandle.IsInvalid && !_safeTokenHandle.IsClosed, "!m_safeTokenHandle.IsInvalid && !m_safeTokenHandle.IsClosed");
+            Debug.Assert(
+                !_safeTokenHandle.IsInvalid && !_safeTokenHandle.IsClosed,
+                "!m_safeTokenHandle.IsInvalid && !m_safeTokenHandle.IsClosed"
+            );
 
-            using (SafeLocalAllocHandle information = GetTokenInformation(_safeTokenHandle, tokenInformationClass, nullOnInvalidParam: false)!)
+            using (
+                SafeLocalAllocHandle information = GetTokenInformation(
+                    _safeTokenHandle,
+                    tokenInformationClass,
+                    nullOnInvalidParam: false
+                )!
+            )
             {
-                Debug.Assert(information!.ByteLength >= (ulong)sizeof(T),
-                                "information.ByteLength >= (ulong)sizeof(T)");
+                Debug.Assert(
+                    information!.ByteLength >= (ulong)sizeof(T),
+                    "information.ByteLength >= (ulong)sizeof(T)"
+                );
 
                 return information.Read<T>(0);
             }
@@ -899,36 +1071,54 @@ namespace System.Security.Principal
 
         private static Interop.LUID GetLogonAuthId(SafeAccessTokenHandle safeTokenHandle)
         {
-            using (SafeLocalAllocHandle pStatistics = GetTokenInformation(safeTokenHandle, TokenInformationClass.TokenStatistics, nullOnInvalidParam: false)!)
+            using (
+                SafeLocalAllocHandle pStatistics = GetTokenInformation(
+                    safeTokenHandle,
+                    TokenInformationClass.TokenStatistics,
+                    nullOnInvalidParam: false
+                )!
+            )
             {
-                Interop.TOKEN_STATISTICS statistics = pStatistics!.Read<Interop.TOKEN_STATISTICS>(0);
+                Interop.TOKEN_STATISTICS statistics = pStatistics!.Read<Interop.TOKEN_STATISTICS>(
+                    0
+                );
                 return statistics.AuthenticationId;
             }
         }
 
-        private static SafeLocalAllocHandle? GetTokenInformation(SafeAccessTokenHandle tokenHandle, TokenInformationClass tokenInformationClass, bool nullOnInvalidParam = false)
+        private static SafeLocalAllocHandle? GetTokenInformation(
+            SafeAccessTokenHandle tokenHandle,
+            TokenInformationClass tokenInformationClass,
+            bool nullOnInvalidParam = false
+        )
         {
             SafeLocalAllocHandle safeLocalAllocHandle = SafeLocalAllocHandle.InvalidHandle;
             try
             {
-                Interop.Advapi32.GetTokenInformation(tokenHandle,
-                                                              (uint)tokenInformationClass,
-                                                              safeLocalAllocHandle,
-                                                              0,
-                                                              out uint dwLength);
+                Interop.Advapi32.GetTokenInformation(
+                    tokenHandle,
+                    (uint)tokenInformationClass,
+                    safeLocalAllocHandle,
+                    0,
+                    out uint dwLength
+                );
                 int dwErrorCode = Marshal.GetLastPInvokeError();
                 switch (dwErrorCode)
                 {
                     case Interop.Errors.ERROR_BAD_LENGTH: // special case for TokenSessionId. Falling through
                     case Interop.Errors.ERROR_INSUFFICIENT_BUFFER:
                         safeLocalAllocHandle.Dispose();
-                        safeLocalAllocHandle = SafeLocalAllocHandle.LocalAlloc(checked((int)dwLength));
+                        safeLocalAllocHandle = SafeLocalAllocHandle.LocalAlloc(
+                            checked((int)dwLength)
+                        );
 
-                        bool result = Interop.Advapi32.GetTokenInformation(tokenHandle,
-                                                                 (uint)tokenInformationClass,
-                                                                 safeLocalAllocHandle,
-                                                                 dwLength,
-                                                                 out _);
+                        bool result = Interop.Advapi32.GetTokenInformation(
+                            tokenHandle,
+                            (uint)tokenInformationClass,
+                            safeLocalAllocHandle,
+                            dwLength,
+                            out _
+                        );
                         if (!result)
                         {
                             throw new SecurityException(Marshal.GetLastPInvokeErrorMessage());
@@ -1049,7 +1239,16 @@ namespace System.Security.Principal
                         // WindowsIdentity.Name will be null when it is the fake anonymous user
                         // with a token value of IntPtr.Zero
                         //
-                        _userClaims.Add(new Claim(NameClaimType, Name, ClaimValueTypes.String, _issuerName, _issuerName, this));
+                        _userClaims.Add(
+                            new Claim(
+                                NameClaimType,
+                                Name,
+                                ClaimValueTypes.String,
+                                _issuerName,
+                                _issuerName,
+                                this
+                            )
+                        );
                     }
 
                     // primary sid
@@ -1061,15 +1260,26 @@ namespace System.Security.Principal
                     if (!s_ignoreWindows8Properties)
                     {
                         // Device group sids (may cause s_ignoreWindows8Properties to be set to true, so must be first in this block)
-                        AddDeviceGroupSidClaims(_deviceClaims, TokenInformationClass.TokenDeviceGroups);
+                        AddDeviceGroupSidClaims(
+                            _deviceClaims,
+                            TokenInformationClass.TokenDeviceGroups
+                        );
 
                         if (!s_ignoreWindows8Properties)
                         {
                             // User token claims
-                            AddTokenClaims(_userClaims, TokenInformationClass.TokenUserClaimAttributes, ClaimTypes.WindowsUserClaim);
+                            AddTokenClaims(
+                                _userClaims,
+                                TokenInformationClass.TokenUserClaimAttributes,
+                                ClaimTypes.WindowsUserClaim
+                            );
 
                             // Device token claims
-                            AddTokenClaims(_deviceClaims, TokenInformationClass.TokenDeviceClaimAttributes, ClaimTypes.WindowsDeviceClaim);
+                            AddTokenClaims(
+                                _deviceClaims,
+                                TokenInformationClass.TokenDeviceClaimAttributes,
+                                ClaimTypes.WindowsDeviceClaim
+                            );
                         }
                     }
                     return true;
@@ -1091,51 +1301,114 @@ namespace System.Security.Principal
             try
             {
                 // Retrieve the primary group sid
-                safeAllocHandlePrimaryGroup = GetTokenInformation(_safeTokenHandle, TokenInformationClass.TokenPrimaryGroup);
-                Interop.TOKEN_PRIMARY_GROUP primaryGroup = *(Interop.TOKEN_PRIMARY_GROUP*)(safeAllocHandlePrimaryGroup!.DangerousGetHandle());
-                SecurityIdentifier primaryGroupSid = new SecurityIdentifier(primaryGroup.PrimaryGroup);
+                safeAllocHandlePrimaryGroup = GetTokenInformation(
+                    _safeTokenHandle,
+                    TokenInformationClass.TokenPrimaryGroup
+                );
+                Interop.TOKEN_PRIMARY_GROUP primaryGroup = *(Interop.TOKEN_PRIMARY_GROUP*)(
+                    safeAllocHandlePrimaryGroup!.DangerousGetHandle()
+                );
+                SecurityIdentifier primaryGroupSid = new SecurityIdentifier(
+                    primaryGroup.PrimaryGroup
+                );
 
                 // only add one primary group sid
                 bool foundPrimaryGroupSid = false;
 
                 // Retrieve all group sids, primary group sid is one of them
-                safeAllocHandle = GetTokenInformation(_safeTokenHandle, TokenInformationClass.TokenGroups);
+                safeAllocHandle = GetTokenInformation(
+                    _safeTokenHandle,
+                    TokenInformationClass.TokenGroups
+                );
                 int count = *(int*)safeAllocHandle!.DangerousGetHandle();
-                Interop.SID_AND_ATTRIBUTES* pSidAndAttributes = (Interop.SID_AND_ATTRIBUTES*)
-                    ((byte*)safeAllocHandle.DangerousGetHandle() + sizeof(IntPtr) /* offsetof(Interop.TOKEN_GROUPS, Groups) */);
+                Interop.SID_AND_ATTRIBUTES* pSidAndAttributes = (Interop.SID_AND_ATTRIBUTES*)(
+                    (byte*)safeAllocHandle.DangerousGetHandle() + sizeof(IntPtr) /* offsetof(Interop.TOKEN_GROUPS, Groups) */
+                );
                 Claim claim;
                 for (int i = 0; i < count; i++)
                 {
                     Interop.SID_AND_ATTRIBUTES group = pSidAndAttributes[i];
-                    uint mask = Interop.SecurityGroups.SE_GROUP_ENABLED | Interop.SecurityGroups.SE_GROUP_LOGON_ID | Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY;
+                    uint mask =
+                        Interop.SecurityGroups.SE_GROUP_ENABLED
+                        | Interop.SecurityGroups.SE_GROUP_LOGON_ID
+                        | Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY;
                     SecurityIdentifier groupSid = new SecurityIdentifier(group.Sid);
 
                     if ((group.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_ENABLED)
                     {
-                        if (!foundPrimaryGroupSid && StringComparer.Ordinal.Equals(groupSid.Value, primaryGroupSid.Value))
+                        if (
+                            !foundPrimaryGroupSid
+                            && StringComparer.Ordinal.Equals(groupSid.Value, primaryGroupSid.Value)
+                        )
                         {
-                            claim = new Claim(ClaimTypes.PrimaryGroupSid, groupSid.Value, ClaimValueTypes.String, _issuerName, _issuerName, this);
-                            claim.Properties.Add(ClaimTypes.WindowsSubAuthority, groupSid.IdentifierAuthority.ToString());
+                            claim = new Claim(
+                                ClaimTypes.PrimaryGroupSid,
+                                groupSid.Value,
+                                ClaimValueTypes.String,
+                                _issuerName,
+                                _issuerName,
+                                this
+                            );
+                            claim.Properties.Add(
+                                ClaimTypes.WindowsSubAuthority,
+                                groupSid.IdentifierAuthority.ToString()
+                            );
                             instanceClaims.Add(claim);
                             foundPrimaryGroupSid = true;
                         }
                         //Primary group sid generates both regular groupsid claim and primary groupsid claim
-                        claim = new Claim(ClaimTypes.GroupSid, groupSid.Value, ClaimValueTypes.String, _issuerName, _issuerName, this);
-                        claim.Properties.Add(ClaimTypes.WindowsSubAuthority, groupSid.IdentifierAuthority.ToString());
+                        claim = new Claim(
+                            ClaimTypes.GroupSid,
+                            groupSid.Value,
+                            ClaimValueTypes.String,
+                            _issuerName,
+                            _issuerName,
+                            this
+                        );
+                        claim.Properties.Add(
+                            ClaimTypes.WindowsSubAuthority,
+                            groupSid.IdentifierAuthority.ToString()
+                        );
                         instanceClaims.Add(claim);
                     }
-                    else if ((group.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY)
+                    else if (
+                        (group.Attributes & mask)
+                        == Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY
+                    )
                     {
-                        if (!foundPrimaryGroupSid && StringComparer.Ordinal.Equals(groupSid.Value, primaryGroupSid.Value))
+                        if (
+                            !foundPrimaryGroupSid
+                            && StringComparer.Ordinal.Equals(groupSid.Value, primaryGroupSid.Value)
+                        )
                         {
-                            claim = new Claim(ClaimTypes.DenyOnlyPrimaryGroupSid, groupSid.Value, ClaimValueTypes.String, _issuerName, _issuerName, this);
-                            claim.Properties.Add(ClaimTypes.WindowsSubAuthority, groupSid.IdentifierAuthority.ToString());
+                            claim = new Claim(
+                                ClaimTypes.DenyOnlyPrimaryGroupSid,
+                                groupSid.Value,
+                                ClaimValueTypes.String,
+                                _issuerName,
+                                _issuerName,
+                                this
+                            );
+                            claim.Properties.Add(
+                                ClaimTypes.WindowsSubAuthority,
+                                groupSid.IdentifierAuthority.ToString()
+                            );
                             instanceClaims.Add(claim);
                             foundPrimaryGroupSid = true;
                         }
                         //Primary group sid generates both regular groupsid claim and primary groupsid claim
-                        claim = new Claim(ClaimTypes.DenyOnlySid, groupSid.Value, ClaimValueTypes.String, _issuerName, _issuerName, this);
-                        claim.Properties.Add(ClaimTypes.WindowsSubAuthority, groupSid.IdentifierAuthority.ToString());
+                        claim = new Claim(
+                            ClaimTypes.DenyOnlySid,
+                            groupSid.Value,
+                            ClaimValueTypes.String,
+                            _issuerName,
+                            _issuerName,
+                            this
+                        );
+                        claim.Properties.Add(
+                            ClaimTypes.WindowsSubAuthority,
+                            groupSid.IdentifierAuthority.ToString()
+                        );
                         instanceClaims.Add(claim);
                     }
                 }
@@ -1159,22 +1432,49 @@ namespace System.Security.Principal
             SafeLocalAllocHandle? safeAllocHandle = null;
             try
             {
-                safeAllocHandle = GetTokenInformation(_safeTokenHandle, TokenInformationClass.TokenUser);
-                Interop.SID_AND_ATTRIBUTES user = *(Interop.SID_AND_ATTRIBUTES*)(safeAllocHandle!.DangerousGetHandle());
+                safeAllocHandle = GetTokenInformation(
+                    _safeTokenHandle,
+                    TokenInformationClass.TokenUser
+                );
+                Interop.SID_AND_ATTRIBUTES user = *(Interop.SID_AND_ATTRIBUTES*)(
+                    safeAllocHandle!.DangerousGetHandle()
+                );
                 uint mask = Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY;
 
                 SecurityIdentifier sid = new SecurityIdentifier(user.Sid);
                 Claim claim;
                 if (user.Attributes == 0)
                 {
-                    claim = new Claim(ClaimTypes.PrimarySid, sid.Value, ClaimValueTypes.String, _issuerName, _issuerName, this);
-                    claim.Properties.Add(ClaimTypes.WindowsSubAuthority, sid.IdentifierAuthority.ToString());
+                    claim = new Claim(
+                        ClaimTypes.PrimarySid,
+                        sid.Value,
+                        ClaimValueTypes.String,
+                        _issuerName,
+                        _issuerName,
+                        this
+                    );
+                    claim.Properties.Add(
+                        ClaimTypes.WindowsSubAuthority,
+                        sid.IdentifierAuthority.ToString()
+                    );
                     instanceClaims.Add(claim);
                 }
-                else if ((user.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY)
+                else if (
+                    (user.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY
+                )
                 {
-                    claim = new Claim(ClaimTypes.DenyOnlyPrimarySid, sid.Value, ClaimValueTypes.String, _issuerName, _issuerName, this);
-                    claim.Properties.Add(ClaimTypes.WindowsSubAuthority, sid.IdentifierAuthority.ToString());
+                    claim = new Claim(
+                        ClaimTypes.DenyOnlyPrimarySid,
+                        sid.Value,
+                        ClaimValueTypes.String,
+                        _issuerName,
+                        _issuerName,
+                        this
+                    );
+                    claim.Properties.Add(
+                        ClaimTypes.WindowsSubAuthority,
+                        sid.IdentifierAuthority.ToString()
+                    );
                     instanceClaims.Add(claim);
                 }
             }
@@ -1184,7 +1484,10 @@ namespace System.Security.Principal
             }
         }
 
-        private unsafe void AddDeviceGroupSidClaims(List<Claim> instanceClaims, TokenInformationClass tokenInformationClass)
+        private unsafe void AddDeviceGroupSidClaims(
+            List<Claim> instanceClaims,
+            TokenInformationClass tokenInformationClass
+        )
         {
             // special case the anonymous identity.
             if (_safeTokenHandle.IsInvalid)
@@ -1195,7 +1498,11 @@ namespace System.Security.Principal
             {
                 // Retrieve all group sids
 
-                safeAllocHandle = GetTokenInformation(_safeTokenHandle, tokenInformationClass, nullOnInvalidParam: true);
+                safeAllocHandle = GetTokenInformation(
+                    _safeTokenHandle,
+                    tokenInformationClass,
+                    nullOnInvalidParam: true
+                );
 
                 if (safeAllocHandle == null)
                 {
@@ -1204,27 +1511,54 @@ namespace System.Security.Principal
                 }
 
                 int count = *(int*)safeAllocHandle.DangerousGetHandle();
-                Interop.SID_AND_ATTRIBUTES* pSidAndAttributes = (Interop.SID_AND_ATTRIBUTES*)
-                    ((byte*)safeAllocHandle.DangerousGetHandle() + sizeof(IntPtr) /* offsetof(Interop.TOKEN_GROUPS, Groups) */);
+                Interop.SID_AND_ATTRIBUTES* pSidAndAttributes = (Interop.SID_AND_ATTRIBUTES*)(
+                    (byte*)safeAllocHandle.DangerousGetHandle() + sizeof(IntPtr) /* offsetof(Interop.TOKEN_GROUPS, Groups) */
+                );
                 for (int i = 0; i < count; i++)
                 {
                     Interop.SID_AND_ATTRIBUTES group = pSidAndAttributes[i];
-                    uint mask = Interop.SecurityGroups.SE_GROUP_ENABLED | Interop.SecurityGroups.SE_GROUP_LOGON_ID | Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY;
+                    uint mask =
+                        Interop.SecurityGroups.SE_GROUP_ENABLED
+                        | Interop.SecurityGroups.SE_GROUP_LOGON_ID
+                        | Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY;
                     SecurityIdentifier groupSid = new SecurityIdentifier(group.Sid);
                     string claimType;
                     if ((group.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_ENABLED)
                     {
                         claimType = ClaimTypes.WindowsDeviceGroup;
-                        Claim claim = new Claim(claimType, groupSid.Value, ClaimValueTypes.String, _issuerName, _issuerName, this);
-                        claim.Properties.Add(ClaimTypes.WindowsSubAuthority, groupSid.IdentifierAuthority.ToString());
+                        Claim claim = new Claim(
+                            claimType,
+                            groupSid.Value,
+                            ClaimValueTypes.String,
+                            _issuerName,
+                            _issuerName,
+                            this
+                        );
+                        claim.Properties.Add(
+                            ClaimTypes.WindowsSubAuthority,
+                            groupSid.IdentifierAuthority.ToString()
+                        );
                         claim.Properties.Add(claimType, "");
                         instanceClaims.Add(claim);
                     }
-                    else if ((group.Attributes & mask) == Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY)
+                    else if (
+                        (group.Attributes & mask)
+                        == Interop.SecurityGroups.SE_GROUP_USE_FOR_DENY_ONLY
+                    )
                     {
                         claimType = ClaimTypes.DenyOnlyWindowsDeviceGroup;
-                        Claim claim = new Claim(claimType, groupSid.Value, ClaimValueTypes.String, _issuerName, _issuerName, this);
-                        claim.Properties.Add(ClaimTypes.WindowsSubAuthority, groupSid.IdentifierAuthority.ToString());
+                        Claim claim = new Claim(
+                            claimType,
+                            groupSid.Value,
+                            ClaimValueTypes.String,
+                            _issuerName,
+                            _issuerName,
+                            this
+                        );
+                        claim.Properties.Add(
+                            ClaimTypes.WindowsSubAuthority,
+                            groupSid.IdentifierAuthority.ToString()
+                        );
                         claim.Properties.Add(claimType, "");
                         instanceClaims.Add(claim);
                     }
@@ -1236,7 +1570,11 @@ namespace System.Security.Principal
             }
         }
 
-        private unsafe void AddTokenClaims(List<Claim> instanceClaims, TokenInformationClass tokenInformationClass, string propertyValue)
+        private unsafe void AddTokenClaims(
+            List<Claim> instanceClaims,
+            TokenInformationClass tokenInformationClass,
+            string propertyValue
+        )
         {
             // special case the anonymous identity.
             if (_safeTokenHandle.IsInvalid)
@@ -1248,26 +1586,45 @@ namespace System.Security.Principal
             {
                 safeAllocHandle = GetTokenInformation(_safeTokenHandle, tokenInformationClass);
 
-                Interop.CLAIM_SECURITY_ATTRIBUTES_INFORMATION claimAttributes = *(Interop.CLAIM_SECURITY_ATTRIBUTES_INFORMATION*)(safeAllocHandle!.DangerousGetHandle());
+                Interop.CLAIM_SECURITY_ATTRIBUTES_INFORMATION claimAttributes =
+                    *(Interop.CLAIM_SECURITY_ATTRIBUTES_INFORMATION*)(
+                        safeAllocHandle!.DangerousGetHandle()
+                    );
                 // An attribute represents a collection of claims.  Inside each attribute a claim can be multivalued, we create a claim for each value.
                 // It is a ragged multi-dimentional array, where each cell can be of different lengths.
 
                 for (int attribute = 0; attribute < claimAttributes.AttributeCount; attribute++)
                 {
-                    Interop.CLAIM_SECURITY_ATTRIBUTE_V1 windowsClaim = ((Interop.CLAIM_SECURITY_ATTRIBUTE_V1*)claimAttributes.Attribute.pAttributeV1)[attribute];
+                    Interop.CLAIM_SECURITY_ATTRIBUTE_V1 windowsClaim = (
+                        (Interop.CLAIM_SECURITY_ATTRIBUTE_V1*)claimAttributes.Attribute.pAttributeV1
+                    )[attribute];
 
                     string name = Marshal.PtrToStringUni(windowsClaim.Name)!;
 
                     // the switch was written this way, which appears to have multiple for loops, because each item in the ValueCount is of the same ValueType.  This saves the type check each item.
                     switch (windowsClaim.ValueType)
                     {
-                        case Interop.ClaimSecurityAttributeType.CLAIM_SECURITY_ATTRIBUTE_TYPE_STRING:
+                        case Interop
+                            .ClaimSecurityAttributeType
+                            .CLAIM_SECURITY_ATTRIBUTE_TYPE_STRING:
                             IntPtr[] stringPointers = new IntPtr[windowsClaim.ValueCount];
-                            Marshal.Copy(windowsClaim.Values.ppString, stringPointers, 0, (int)windowsClaim.ValueCount);
+                            Marshal.Copy(
+                                windowsClaim.Values.ppString,
+                                stringPointers,
+                                0,
+                                (int)windowsClaim.ValueCount
+                            );
 
                             for (int item = 0; item < windowsClaim.ValueCount; item++)
                             {
-                                Claim c = new Claim(name, Marshal.PtrToStringUni(stringPointers[item])!, ClaimValueTypes.String, _issuerName, _issuerName, this);
+                                Claim c = new Claim(
+                                    name,
+                                    Marshal.PtrToStringUni(stringPointers[item])!,
+                                    ClaimValueTypes.String,
+                                    _issuerName,
+                                    _issuerName,
+                                    this
+                                );
                                 c.Properties.Add(propertyValue, string.Empty);
                                 instanceClaims.Add(c);
                             }
@@ -1275,32 +1632,66 @@ namespace System.Security.Principal
 
                         case Interop.ClaimSecurityAttributeType.CLAIM_SECURITY_ATTRIBUTE_TYPE_INT64:
                             long[] intValues = new long[windowsClaim.ValueCount];
-                            Marshal.Copy(windowsClaim.Values.pInt64, intValues, 0, (int)windowsClaim.ValueCount);
+                            Marshal.Copy(
+                                windowsClaim.Values.pInt64,
+                                intValues,
+                                0,
+                                (int)windowsClaim.ValueCount
+                            );
 
                             for (int item = 0; item < windowsClaim.ValueCount; item++)
                             {
-                                Claim c = new Claim(name, intValues[item].ToString(CultureInfo.InvariantCulture), ClaimValueTypes.Integer64, _issuerName, _issuerName, this);
+                                Claim c = new Claim(
+                                    name,
+                                    intValues[item].ToString(CultureInfo.InvariantCulture),
+                                    ClaimValueTypes.Integer64,
+                                    _issuerName,
+                                    _issuerName,
+                                    this
+                                );
                                 c.Properties.Add(propertyValue, string.Empty);
                                 instanceClaims.Add(c);
                             }
                             break;
 
-
-                        case Interop.ClaimSecurityAttributeType.CLAIM_SECURITY_ATTRIBUTE_TYPE_UINT64:
+                        case Interop
+                            .ClaimSecurityAttributeType
+                            .CLAIM_SECURITY_ATTRIBUTE_TYPE_UINT64:
                             long[] uintValues = new long[windowsClaim.ValueCount];
-                            Marshal.Copy(windowsClaim.Values.pUint64, uintValues, 0, (int)windowsClaim.ValueCount);
+                            Marshal.Copy(
+                                windowsClaim.Values.pUint64,
+                                uintValues,
+                                0,
+                                (int)windowsClaim.ValueCount
+                            );
 
                             for (int item = 0; item < windowsClaim.ValueCount; item++)
                             {
-                                Claim c = new Claim(name, ((ulong)uintValues[item]).ToString(CultureInfo.InvariantCulture), ClaimValueTypes.UInteger64, _issuerName, _issuerName, this);
+                                Claim c = new Claim(
+                                    name,
+                                    ((ulong)uintValues[item]).ToString(
+                                        CultureInfo.InvariantCulture
+                                    ),
+                                    ClaimValueTypes.UInteger64,
+                                    _issuerName,
+                                    _issuerName,
+                                    this
+                                );
                                 c.Properties.Add(propertyValue, string.Empty);
                                 instanceClaims.Add(c);
                             }
                             break;
 
-                        case Interop.ClaimSecurityAttributeType.CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN:
+                        case Interop
+                            .ClaimSecurityAttributeType
+                            .CLAIM_SECURITY_ATTRIBUTE_TYPE_BOOLEAN:
                             long[] boolValues = new long[windowsClaim.ValueCount];
-                            Marshal.Copy(windowsClaim.Values.pUint64, boolValues, 0, (int)windowsClaim.ValueCount);
+                            Marshal.Copy(
+                                windowsClaim.Values.pUint64,
+                                boolValues,
+                                0,
+                                (int)windowsClaim.ValueCount
+                            );
 
                             for (int item = 0; item < windowsClaim.ValueCount; item++)
                             {
@@ -1310,7 +1701,8 @@ namespace System.Security.Principal
                                     ClaimValueTypes.Boolean,
                                     _issuerName,
                                     _issuerName,
-                                    this);
+                                    this
+                                );
 
                                 c.Properties.Add(propertyValue, string.Empty);
                                 instanceClaims.Add(c);
@@ -1330,13 +1722,15 @@ namespace System.Security.Principal
     {
         Thread = 1, // OpenAsSelf = false
         Process = 2, // OpenAsSelf = true
-        Both = 3 // OpenAsSelf = true, then OpenAsSelf = false
+        Both =
+            3 // OpenAsSelf = true, then OpenAsSelf = false
+        ,
     }
 
     internal enum TokenType : int
     {
         TokenPrimary = 1,
-        TokenImpersonation
+        TokenImpersonation,
     }
 
     internal enum TokenInformationClass : int
@@ -1379,6 +1773,7 @@ namespace System.Security.Principal
         TokenRestrictedDeviceClaimAttributes,
         TokenDeviceGroups,
         TokenRestrictedDeviceGroups,
-        MaxTokenInfoClass  // MaxTokenInfoClass should always be the last enum
+        MaxTokenInfoClass // MaxTokenInfoClass should always be the last enum
+        ,
     }
 }

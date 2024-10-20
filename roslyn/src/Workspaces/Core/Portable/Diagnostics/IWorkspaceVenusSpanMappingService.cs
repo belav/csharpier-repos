@@ -17,6 +17,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// For example, for Venus, we might change the mapped location to be the location in the primary buffer.
         /// Additionally, if the secondary buffer location is outside visible user code, then the original location is also adjusted to be within visible user code.
         /// </summary>
-        void GetAdjustedDiagnosticSpan(DocumentId documentId, Location location, out TextSpan span, out FileLinePositionSpan originalLineInfo, out FileLinePositionSpan mappedLineInfo);
+        void GetAdjustedDiagnosticSpan(
+            DocumentId documentId,
+            Location location,
+            out TextSpan span,
+            out FileLinePositionSpan originalLineInfo,
+            out FileLinePositionSpan mappedLineInfo
+        );
     }
 }

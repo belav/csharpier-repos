@@ -23,7 +23,8 @@ public sealed class TpcTablesExpression : TableExpressionBase
     public TpcTablesExpression(
         string? alias,
         IEntityType entityType,
-        IReadOnlyList<SelectExpression> subSelectExpressions)
+        IReadOnlyList<SelectExpression> subSelectExpressions
+    )
         : base(alias)
     {
         EntityType = entityType;
@@ -34,7 +35,8 @@ public sealed class TpcTablesExpression : TableExpressionBase
         string? alias,
         IEntityType entityType,
         IReadOnlyList<SelectExpression> subSelectExpressions,
-        IEnumerable<IAnnotation>? annotations)
+        IEnumerable<IAnnotation>? annotations
+    )
         : base(alias, annotations)
     {
         EntityType = entityType;
@@ -78,13 +80,21 @@ public sealed class TpcTablesExpression : TableExpressionBase
     /// </summary>
     public TpcTablesExpression Prune(IReadOnlyList<string> discriminatorValues)
     {
-        var subSelectExpressions = discriminatorValues.Count == 0
-            ? new List<SelectExpression> { SelectExpressions[0] }
-            : SelectExpressions.Where(
-                se =>
-                    discriminatorValues.Contains((string)((SqlConstantExpression)se.Projection[^1].Expression).Value!)).ToList();
+        var subSelectExpressions =
+            discriminatorValues.Count == 0
+                ? new List<SelectExpression> { SelectExpressions[0] }
+                : SelectExpressions
+                    .Where(se =>
+                        discriminatorValues.Contains(
+                            (string)((SqlConstantExpression)se.Projection[^1].Expression).Value!
+                        )
+                    )
+                    .ToList();
 
-        Check.DebugAssert(subSelectExpressions.Count > 0, "TPC must have at least 1 table selected.");
+        Check.DebugAssert(
+            subSelectExpressions.Count > 0,
+            "TPC must have at least 1 table selected."
+        );
 
         return new TpcTablesExpression(Alias, EntityType, subSelectExpressions, GetAnnotations());
     }
@@ -96,8 +106,7 @@ public sealed class TpcTablesExpression : TableExpressionBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     // This is implementation detail hence visitors are not supposed to see inside unless they really need to.
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -105,8 +114,9 @@ public sealed class TpcTablesExpression : TableExpressionBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override TableExpressionBase CreateWithAnnotations(IEnumerable<IAnnotation> annotations)
-        => new TpcTablesExpression(Alias, EntityType, SelectExpressions, annotations);
+    protected override TableExpressionBase CreateWithAnnotations(
+        IEnumerable<IAnnotation> annotations
+    ) => new TpcTablesExpression(Alias, EntityType, SelectExpressions, annotations);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -119,25 +129,27 @@ public sealed class TpcTablesExpression : TableExpressionBase
         expressionPrinter.AppendLine("(");
         using (expressionPrinter.Indent())
         {
-            expressionPrinter.VisitCollection(SelectExpressions, e => e.AppendLine().AppendLine("UNION ALL"));
+            expressionPrinter.VisitCollection(
+                SelectExpressions,
+                e => e.AppendLine().AppendLine("UNION ALL")
+            );
         }
 
-        expressionPrinter.AppendLine()
-            .AppendLine(") AS " + Alias);
+        expressionPrinter.AppendLine().AppendLine(") AS " + Alias);
         PrintAnnotations(expressionPrinter);
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is TpcTablesExpression tpcTablesExpression
-                && Equals(tpcTablesExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is TpcTablesExpression tpcTablesExpression && Equals(tpcTablesExpression)
+        );
 
     private bool Equals(TpcTablesExpression tpcTablesExpression)
     {
-        if (!base.Equals(tpcTablesExpression)
-            || EntityType != tpcTablesExpression.EntityType)
+        if (!base.Equals(tpcTablesExpression) || EntityType != tpcTablesExpression.EntityType)
         {
             return false;
         }
@@ -146,6 +158,5 @@ public sealed class TpcTablesExpression : TableExpressionBase
     }
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), EntityType);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), EntityType);
 }

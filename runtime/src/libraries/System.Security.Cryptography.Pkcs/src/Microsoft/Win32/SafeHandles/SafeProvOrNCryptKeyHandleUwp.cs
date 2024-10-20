@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
 using ErrorCode = Interop.NCrypt.ErrorCode;
 
 namespace Microsoft.Win32.SafeHandles

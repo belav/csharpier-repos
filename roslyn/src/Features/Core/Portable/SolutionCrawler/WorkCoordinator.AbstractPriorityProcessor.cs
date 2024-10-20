@@ -31,13 +31,20 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         Lazy<ImmutableArray<IIncrementalAnalyzer>> lazyAnalyzers,
                         IGlobalOperationNotificationService? globalOperationNotificationService,
                         TimeSpan backOffTimeSpan,
-                        CancellationToken shutdownToken)
-                        : base(listener, globalOperationNotificationService, backOffTimeSpan, shutdownToken)
+                        CancellationToken shutdownToken
+                    )
+                        : base(
+                            listener,
+                            globalOperationNotificationService,
+                            backOffTimeSpan,
+                            shutdownToken
+                        )
                     {
                         _lazyAnalyzers = lazyAnalyzers;
 
                         Processor = processor;
-                        Processor._documentTracker.NonRoslynBufferTextChanged += OnNonRoslynBufferTextChanged;
+                        Processor._documentTracker.NonRoslynBufferTextChanged +=
+                            OnNonRoslynBufferTextChanged;
                     }
 
                     public ImmutableArray<IIncrementalAnalyzer> Analyzers
@@ -56,19 +63,26 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         lock (_gate)
                         {
                             var analyzers = _lazyAnalyzers.Value;
-                            _lazyAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(() => analyzers.Add(analyzer));
+                            _lazyAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(
+                                () => analyzers.Add(analyzer)
+                            );
                         }
                     }
 
-                    protected override void OnPaused()
-                        => SolutionCrawlerLogger.LogGlobalOperation(Processor._logAggregator);
+                    protected override void OnPaused() =>
+                        SolutionCrawlerLogger.LogGlobalOperation(Processor._logAggregator);
 
                     protected abstract Task HigherQueueOperationTask { get; }
                     protected abstract bool HigherQueueHasWorkItem { get; }
 
                     protected async Task WaitForHigherPriorityOperationsAsync()
                     {
-                        using (Logger.LogBlock(FunctionId.WorkCoordinator_WaitForHigherPriorityOperationsAsync, CancellationToken))
+                        using (
+                            Logger.LogBlock(
+                                FunctionId.WorkCoordinator_WaitForHigherPriorityOperationsAsync,
+                                CancellationToken
+                            )
+                        )
                         {
                             while (true)
                             {
@@ -122,7 +136,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     {
                         base.Shutdown();
 
-                        Processor._documentTracker.NonRoslynBufferTextChanged -= OnNonRoslynBufferTextChanged;
+                        Processor._documentTracker.NonRoslynBufferTextChanged -=
+                            OnNonRoslynBufferTextChanged;
 
                         foreach (var analyzer in Analyzers)
                         {
@@ -140,7 +155,7 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         // we used to do #1 and #2 only for Roslyn files. and that is usually fine since most of time solution contains only roslyn files.
                         //
                         // but for mixed solution (ex, Roslyn files + HTML + JS + CSS), #2 still makes sense but #1 doesn't. We want
-                        // to pause any work while something is going on in other project types as well. 
+                        // to pause any work while something is going on in other project types as well.
                         //
                         // we need to make sure we play nice with neighbors as well.
                         //

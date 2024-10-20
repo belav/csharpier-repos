@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Routing.Matching;
 
 // End-to-end tests for the HTTP method matching functionality
-public class HttpMethodMatcherPolicyIEndpointSelectorPolicyIntegrationTestBase : HttpMethodMatcherPolicyIntegrationTestBase
+public class HttpMethodMatcherPolicyIEndpointSelectorPolicyIntegrationTestBase
+    : HttpMethodMatcherPolicyIntegrationTestBase
 {
     protected override bool HasDynamicMetadata => true;
 }

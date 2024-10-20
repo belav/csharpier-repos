@@ -19,37 +19,50 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal readonly struct RemoteSerializationOptions
     {
-        internal static readonly RemoteSerializationOptions Default = new(ImmutableArray<IMessagePackFormatter>.Empty, ImmutableArray<IFormatterResolver>.Empty);
+        internal static readonly RemoteSerializationOptions Default =
+            new(
+                ImmutableArray<IMessagePackFormatter>.Empty,
+                ImmutableArray<IFormatterResolver>.Empty
+            );
 
         // Enables remote APIs to pass Stream as parameter.
-        private static readonly MultiplexingStream.Options s_multiplexingStreamOptions = new MultiplexingStream.Options
-        {
-            ProtocolMajorVersion = 3
-        }.GetFrozenCopy();
+        private static readonly MultiplexingStream.Options s_multiplexingStreamOptions =
+            new MultiplexingStream.Options { ProtocolMajorVersion = 3 }.GetFrozenCopy();
 
         private readonly object _options;
 
-        public RemoteSerializationOptions(ImmutableArray<IMessagePackFormatter> additionalFormatters, ImmutableArray<IFormatterResolver> additionalResolvers)
-            => _options = StandardResolverAllowPrivate.Options
-                .WithSecurity(MessagePackSecurity.UntrustedData.WithHashCollisionResistant(false))
-                .WithResolver(MessagePackFormatters.CreateResolver(additionalFormatters, additionalResolvers));
+        public RemoteSerializationOptions(
+            ImmutableArray<IMessagePackFormatter> additionalFormatters,
+            ImmutableArray<IFormatterResolver> additionalResolvers
+        ) =>
+            _options = StandardResolverAllowPrivate
+                .Options.WithSecurity(
+                    MessagePackSecurity.UntrustedData.WithHashCollisionResistant(false)
+                )
+                .WithResolver(
+                    MessagePackFormatters.CreateResolver(additionalFormatters, additionalResolvers)
+                );
 
-        public RemoteSerializationOptions(ImmutableArray<JsonConverter> jsonConverters)
-            => _options = jsonConverters;
+        public RemoteSerializationOptions(ImmutableArray<JsonConverter> jsonConverters) =>
+            _options = jsonConverters;
 
-        public MessagePackSerializerOptions MessagePackOptions => (MessagePackSerializerOptions)_options;
-        public ImmutableArray<JsonConverter> JsonConverters => (ImmutableArray<JsonConverter>)_options;
+        public MessagePackSerializerOptions MessagePackOptions =>
+            (MessagePackSerializerOptions)_options;
+        public ImmutableArray<JsonConverter> JsonConverters =>
+            (ImmutableArray<JsonConverter>)_options;
 
-        public ServiceJsonRpcDescriptor.Formatters Formatter
-            => _options is MessagePackSerializerOptions ? ServiceJsonRpcDescriptor.Formatters.MessagePack : ServiceJsonRpcDescriptor.Formatters.UTF8;
+        public ServiceJsonRpcDescriptor.Formatters Formatter =>
+            _options is MessagePackSerializerOptions
+                ? ServiceJsonRpcDescriptor.Formatters.MessagePack
+                : ServiceJsonRpcDescriptor.Formatters.UTF8;
 
-        public ServiceJsonRpcDescriptor.MessageDelimiters MessageDelimiters
-           => _options is MessagePackSerializerOptions
-               ? ServiceJsonRpcDescriptor.MessageDelimiters.BigEndianInt32LengthHeader
-               : ServiceJsonRpcDescriptor.MessageDelimiters.HttpLikeHeaders;
+        public ServiceJsonRpcDescriptor.MessageDelimiters MessageDelimiters =>
+            _options is MessagePackSerializerOptions
+                ? ServiceJsonRpcDescriptor.MessageDelimiters.BigEndianInt32LengthHeader
+                : ServiceJsonRpcDescriptor.MessageDelimiters.HttpLikeHeaders;
 
-        public MultiplexingStream.Options? MultiplexingStreamOptions
-            => _options is MessagePackSerializerOptions ? s_multiplexingStreamOptions : null;
+        public MultiplexingStream.Options? MultiplexingStreamOptions =>
+            _options is MessagePackSerializerOptions ? s_multiplexingStreamOptions : null;
 
         internal IJsonRpcMessageFormatter ConfigureFormatter(IJsonRpcMessageFormatter formatter)
         {

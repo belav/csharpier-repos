@@ -17,7 +17,8 @@ internal readonly struct DfaState
         Candidate[] candidates,
         IEndpointSelectorPolicy[] policies,
         JumpTable pathTransitions,
-        PolicyJumpTable policyTransitions)
+        PolicyJumpTable policyTransitions
+    )
     {
         Candidates = candidates;
         Policies = policies;
@@ -27,9 +28,8 @@ internal readonly struct DfaState
 
     public string DebuggerToString()
     {
-        return
-            $"matches: {Candidates?.Length ?? 0}, " +
-            $"path: ({PathTransitions?.DebuggerToString()}), " +
-            $"policy: ({PolicyTransitions?.DebuggerToString()})";
+        return $"matches: {Candidates?.Length ?? 0}, "
+            + $"path: ({PathTransitions?.DebuggerToString()}), "
+            + $"policy: ({PolicyTransitions?.DebuggerToString()})";
     }
 }

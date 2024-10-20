@@ -9,16 +9,13 @@
 
 using System;
 using System.CodeDom;
-using System.Diagnostics;
 using System.Data.EntityModel.SchemaObjectModel;
-
-
-
+using System.Diagnostics;
 
 namespace System.Data.EntityModel.Emitters
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     internal abstract class Emitter
     {
@@ -32,13 +29,14 @@ namespace System.Data.EntityModel.Emitters
 
         /// <summary>Name of property used to get StorageContext from an Entity</summary>
         private const string EntityGetContextPropertyName = "Context";
+
         /// <summary>Name of property used to get StorageContext from a StorageSearcher</summary>
         protected const string SearcherGetContextPropertyName = "Context";
         #endregion
 
         #region Protected Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="generator"></param>
         protected Emitter(ClientApiGenerator generator)
@@ -47,21 +45,36 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="expression"></param>
         /// <returns></returns>
-        protected static CodeBinaryOperatorExpression EmitExpressionEqualsNull(CodeExpression expression)
+        protected static CodeBinaryOperatorExpression EmitExpressionEqualsNull(
+            CodeExpression expression
+        )
         {
-            return new CodeBinaryOperatorExpression(expression, CodeBinaryOperatorType.IdentityEquality, NullExpression);
+            return new CodeBinaryOperatorExpression(
+                expression,
+                CodeBinaryOperatorType.IdentityEquality,
+                NullExpression
+            );
         }
 
-        protected static CodeBinaryOperatorExpression EmitExpressionDoesNotEqualNull(CodeExpression expression)
+        protected static CodeBinaryOperatorExpression EmitExpressionDoesNotEqualNull(
+            CodeExpression expression
+        )
         {
-            return new CodeBinaryOperatorExpression(expression, CodeBinaryOperatorType.IdentityInequality, NullExpression);
+            return new CodeBinaryOperatorExpression(
+                expression,
+                CodeBinaryOperatorType.IdentityInequality,
+                NullExpression
+            );
         }
 
-        internal static CodeExpression EmitEnumMemberExpression(CodeTypeReference type, string member)
+        internal static CodeExpression EmitEnumMemberExpression(
+            CodeTypeReference type,
+            string member
+        )
         {
             CodeTypeReferenceExpression typeref = new CodeTypeReferenceExpression(type);
             return new CodeFieldReferenceExpression(typeref, member);
@@ -70,7 +83,7 @@ namespace System.Data.EntityModel.Emitters
 
         #region Protected Properties
         /// <summary>
-        /// 
+        ///
         /// </summary>
         protected static CodeExpression ThisRef
         {
@@ -83,26 +96,17 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         internal ClientApiGenerator Generator
         {
-            get
-            {
-                return _generator;
-            }
-            private set
-            {
-                _generator = value;
-            }
+            get { return _generator; }
+            private set { _generator = value; }
         }
 
         protected TypeReference TypeReference
         {
-            get
-            {
-                return _generator.TypeReference;
-            }
+            get { return _generator.TypeReference; }
         }
 
         protected AttributeEmitter AttributeEmitter
@@ -118,7 +122,6 @@ namespace System.Data.EntityModel.Emitters
                     _nullExpression = new CodePrimitiveExpression(null);
 
                 return _nullExpression;
-
             }
         }
 

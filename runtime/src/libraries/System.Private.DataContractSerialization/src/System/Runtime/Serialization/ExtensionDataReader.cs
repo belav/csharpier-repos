@@ -47,7 +47,6 @@ namespace System.Runtime.Serialization
 
         private static readonly object s_prefixLock = new object();
 
-
         private readonly XmlObjectSerializerReadContext _context;
 
         private static readonly Hashtable s_nsToPrefixTable = new Hashtable();
@@ -69,7 +68,10 @@ namespace System.Runtime.Serialization
 
         internal void SetDeserializedValue(object? obj)
         {
-            IDataNode? deserializedDataNode = (_deserializedDataNodes == null || _deserializedDataNodes.Count == 0) ? null : _deserializedDataNodes.Dequeue();
+            IDataNode? deserializedDataNode =
+                (_deserializedDataNodes == null || _deserializedDataNodes.Count == 0)
+                    ? null
+                    : _deserializedDataNodes.Dequeue();
             if (deserializedDataNode != null && !(obj is IDataNode))
             {
                 deserializedDataNode.Value = obj;
@@ -108,25 +110,82 @@ namespace System.Runtime.Serialization
 
         [MemberNotNullWhen(true, nameof(_xmlNodeReader))]
         [MemberNotNullWhen(false, nameof(_element))]
-        private bool IsXmlDataNode { get { return (_internalNodeType == ExtensionDataNodeType.Xml); } }
+        private bool IsXmlDataNode
+        {
+            get { return (_internalNodeType == ExtensionDataNodeType.Xml); }
+        }
 
-        public override XmlNodeType NodeType { get { return IsXmlDataNode ? _xmlNodeReader.NodeType : _nodeType; } }
-        public override string LocalName { get { return IsXmlDataNode ? _xmlNodeReader.LocalName : _localName!; } }
-        public override string NamespaceURI { get { return IsXmlDataNode ? _xmlNodeReader.NamespaceURI : _ns!; } }
-        public override string Prefix { get { return IsXmlDataNode ? _xmlNodeReader.Prefix : _prefix!; } }
-        public override string Value { get { return IsXmlDataNode ? _xmlNodeReader.Value : _value!; } }
-        public override int Depth { get { return IsXmlDataNode ? _xmlNodeReader.Depth : _depth; } }
-        public override int AttributeCount { get { return IsXmlDataNode ? _xmlNodeReader.AttributeCount : _attributeCount; } }
-        public override bool EOF { get { return IsXmlDataNode ? _xmlNodeReader.EOF : (_readState == ReadState.EndOfFile); } }
-        public override ReadState ReadState { get { return IsXmlDataNode ? _xmlNodeReader.ReadState : _readState; } }
-        public override bool IsEmptyElement { get { return IsXmlDataNode ? _xmlNodeReader.IsEmptyElement : false; } }
-        public override bool IsDefault { get { return IsXmlDataNode ? _xmlNodeReader.IsDefault : base.IsDefault; } }
+        public override XmlNodeType NodeType
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.NodeType : _nodeType; }
+        }
+        public override string LocalName
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.LocalName : _localName!; }
+        }
+        public override string NamespaceURI
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.NamespaceURI : _ns!; }
+        }
+        public override string Prefix
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.Prefix : _prefix!; }
+        }
+        public override string Value
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.Value : _value!; }
+        }
+        public override int Depth
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.Depth : _depth; }
+        }
+        public override int AttributeCount
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.AttributeCount : _attributeCount; }
+        }
+        public override bool EOF
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.EOF : (_readState == ReadState.EndOfFile); }
+        }
+        public override ReadState ReadState
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.ReadState : _readState; }
+        }
+        public override bool IsEmptyElement
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.IsEmptyElement : false; }
+        }
+        public override bool IsDefault
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.IsDefault : base.IsDefault; }
+        }
+
         //public override char QuoteChar { get { return IsXmlDataNode ? xmlNodeReader.QuoteChar : base.QuoteChar; } }
-        public override XmlSpace XmlSpace { get { return IsXmlDataNode ? _xmlNodeReader.XmlSpace : base.XmlSpace; } }
-        public override string XmlLang { get { return IsXmlDataNode ? _xmlNodeReader.XmlLang : base.XmlLang; } }
-        public override string this[int i] { get { return IsXmlDataNode ? _xmlNodeReader[i] : GetAttribute(i); } }
-        public override string? this[string name] { get { return IsXmlDataNode ? _xmlNodeReader[name] : GetAttribute(name); } }
-        public override string? this[string name, string? namespaceURI] { get { return IsXmlDataNode ? _xmlNodeReader[name, namespaceURI] : GetAttribute(name, namespaceURI); } }
+        public override XmlSpace XmlSpace
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.XmlSpace : base.XmlSpace; }
+        }
+        public override string XmlLang
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader.XmlLang : base.XmlLang; }
+        }
+        public override string this[int i]
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader[i] : GetAttribute(i); }
+        }
+        public override string? this[string name]
+        {
+            get { return IsXmlDataNode ? _xmlNodeReader[name] : GetAttribute(name); }
+        }
+        public override string? this[string name, string? namespaceURI]
+        {
+            get
+            {
+                return IsXmlDataNode
+                    ? _xmlNodeReader[name, namespaceURI]
+                    : GetAttribute(name, namespaceURI);
+            }
+        }
 
         public override bool MoveToFirstAttribute()
         {
@@ -266,9 +325,11 @@ namespace System.Runtime.Serialization
 
         private static bool IsElementNode(ExtensionDataNodeType nodeType)
         {
-            return (nodeType == ExtensionDataNodeType.Element ||
-                nodeType == ExtensionDataNodeType.ReferencedElement ||
-                nodeType == ExtensionDataNodeType.NullElement);
+            return (
+                nodeType == ExtensionDataNodeType.Element
+                || nodeType == ExtensionDataNodeType.ReferencedElement
+                || nodeType == ExtensionDataNodeType.NullElement
+            );
         }
 
         protected override void Dispose(bool disposing)
@@ -352,7 +413,9 @@ namespace System.Runtime.Serialization
                 {
                     return _xmlNodeReader.Name;
                 }
-                Debug.Fail("ExtensionDataReader Name property should only be called for IXmlSerializable");
+                Debug.Fail(
+                    "ExtensionDataReader Name property should only be called for IXmlSerializable"
+                );
                 return string.Empty;
             }
         }
@@ -365,7 +428,9 @@ namespace System.Runtime.Serialization
                 {
                     return _xmlNodeReader.HasValue;
                 }
-                Debug.Fail("ExtensionDataReader HasValue property should only be called for IXmlSerializable");
+                Debug.Fail(
+                    "ExtensionDataReader HasValue property should only be called for IXmlSerializable"
+                );
                 return false;
             }
         }
@@ -378,7 +443,9 @@ namespace System.Runtime.Serialization
                 {
                     return _xmlNodeReader.BaseURI;
                 }
-                Debug.Fail("ExtensionDataReader BaseURI property should only be called for IXmlSerializable");
+                Debug.Fail(
+                    "ExtensionDataReader BaseURI property should only be called for IXmlSerializable"
+                );
                 return string.Empty;
             }
         }
@@ -391,7 +458,9 @@ namespace System.Runtime.Serialization
                 {
                     return _xmlNodeReader.NameTable;
                 }
-                Debug.Fail("ExtensionDataReader NameTable property should only be called for IXmlSerializable");
+                Debug.Fail(
+                    "ExtensionDataReader NameTable property should only be called for IXmlSerializable"
+                );
                 return null;
             }
         }
@@ -402,7 +471,9 @@ namespace System.Runtime.Serialization
             {
                 return _xmlNodeReader.GetAttribute(name);
             }
-            Debug.Fail("ExtensionDataReader GetAttribute method should only be called for IXmlSerializable");
+            Debug.Fail(
+                "ExtensionDataReader GetAttribute method should only be called for IXmlSerializable"
+            );
             return null;
         }
 
@@ -412,7 +483,9 @@ namespace System.Runtime.Serialization
             {
                 return _xmlNodeReader.GetAttribute(i);
             }
-            Debug.Fail("ExtensionDataReader GetAttribute method should only be called for IXmlSerializable");
+            Debug.Fail(
+                "ExtensionDataReader GetAttribute method should only be called for IXmlSerializable"
+            );
             return null;
         }
 
@@ -422,7 +495,9 @@ namespace System.Runtime.Serialization
             {
                 return _xmlNodeReader.MoveToAttribute(name);
             }
-            Debug.Fail("ExtensionDataReader MoveToAttribute method should only be called for IXmlSerializable");
+            Debug.Fail(
+                "ExtensionDataReader MoveToAttribute method should only be called for IXmlSerializable"
+            );
             return false;
         }
 
@@ -434,7 +509,9 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                Debug.Fail("ExtensionDataReader ResolveEntity method should only be called for IXmlSerializable");
+                Debug.Fail(
+                    "ExtensionDataReader ResolveEntity method should only be called for IXmlSerializable"
+                );
             }
         }
 
@@ -444,7 +521,9 @@ namespace System.Runtime.Serialization
             {
                 return _xmlNodeReader.ReadAttributeValue();
             }
-            Debug.Fail("ExtensionDataReader ReadAttributeValue method should only be called for IXmlSerializable");
+            Debug.Fail(
+                "ExtensionDataReader ReadAttributeValue method should only be called for IXmlSerializable"
+            );
             return false;
         }
 
@@ -472,7 +551,9 @@ namespace System.Runtime.Serialization
                     else
                     {
                         Debug.Fail("Encountered invalid data node when deserializing unknown data");
-                        throw new SerializationException(SR.Format(SR.InvalidStateInExtensionDataReader));
+                        throw new SerializationException(
+                            SR.Format(SR.InvalidStateInExtensionDataReader)
+                        );
                     }
                     break;
             }
@@ -488,7 +569,12 @@ namespace System.Runtime.Serialization
             if (node == null)
             {
                 _nextElement.attributeCount = 0;
-                _nextElement.AddAttribute(Globals.XsiPrefix, Globals.SchemaInstanceNamespace, Globals.XsiNilLocalName, Globals.True);
+                _nextElement.AddAttribute(
+                    Globals.XsiPrefix,
+                    Globals.SchemaInstanceNamespace,
+                    Globals.XsiNilLocalName,
+                    Globals.True
+                );
                 _internalNodeType = ExtensionDataNodeType.NullElement;
             }
             else if (!CheckIfNodeHandled(node))
@@ -519,8 +605,18 @@ namespace System.Runtime.Serialization
                 {
                     _nextElement ??= GetNextElement();
                     _nextElement.attributeCount = 0;
-                    _nextElement.AddAttribute(Globals.SerPrefix, Globals.SerializationNamespace, Globals.RefLocalName, node.Id.ToString(NumberFormatInfo.InvariantInfo));
-                    _nextElement.AddAttribute(Globals.XsiPrefix, Globals.SchemaInstanceNamespace, Globals.XsiNilLocalName, Globals.True);
+                    _nextElement.AddAttribute(
+                        Globals.SerPrefix,
+                        Globals.SerializationNamespace,
+                        Globals.RefLocalName,
+                        node.Id.ToString(NumberFormatInfo.InvariantInfo)
+                    );
+                    _nextElement.AddAttribute(
+                        Globals.XsiPrefix,
+                        Globals.SchemaInstanceNamespace,
+                        Globals.XsiNilLocalName,
+                        Globals.True
+                    );
                     _internalNodeType = ExtensionDataNodeType.ReferencedElement;
                 }
                 else
@@ -541,7 +637,12 @@ namespace System.Runtime.Serialization
                     _context.IncrementItemCount(-dataNode.Members.Count);
 
                 ExtensionDataMember member = dataNode.Members[_element.childElementIndex++];
-                SetNextElement(member.Value, member.Name, member.Namespace, GetPrefix(member.Namespace));
+                SetNextElement(
+                    member.Value,
+                    member.Name,
+                    member.Namespace,
+                    GetPrefix(member.Namespace)
+                );
             }
             else
             {
@@ -560,7 +661,12 @@ namespace System.Runtime.Serialization
                     _context.IncrementItemCount(-dataNode.Items.Count);
 
                 IDataNode? item = dataNode.Items[_element.childElementIndex++];
-                SetNextElement(item, dataNode.ItemName, dataNode.ItemNamespace, GetPrefix(dataNode.ItemNamespace));
+                SetNextElement(
+                    item,
+                    dataNode.ItemName,
+                    dataNode.ItemNamespace,
+                    GetPrefix(dataNode.ItemNamespace)
+                );
             }
             else
             {
@@ -609,14 +715,24 @@ namespace System.Runtime.Serialization
 
                 Debug.Assert(dataNode.OwnerDocument != null); // OwnerDocument is always set on initialized dataNodes
 
-                XmlElement wrapperElement = XmlObjectSerializerReadContext.CreateWrapperXmlElement(dataNode.OwnerDocument,
-                    dataNode.XmlAttributes, dataNode.XmlChildNodes, _element?.prefix, _element?.localName, _element?.ns);
+                XmlElement wrapperElement = XmlObjectSerializerReadContext.CreateWrapperXmlElement(
+                    dataNode.OwnerDocument,
+                    dataNode.XmlAttributes,
+                    dataNode.XmlChildNodes,
+                    _element?.prefix,
+                    _element?.localName,
+                    _element?.ns
+                );
                 if (_element != null)
                 {
                     for (int i = 0; i < _element.attributeCount; i++)
                     {
                         AttributeData a = _element.attributes![i];
-                        XmlAttribute xmlAttr = dataNode.OwnerDocument.CreateAttribute(a.prefix, a.localName!, a.ns);
+                        XmlAttribute xmlAttr = dataNode.OwnerDocument.CreateAttribute(
+                            a.prefix,
+                            a.localName!,
+                            a.ns
+                        );
                         xmlAttr.Value = a.value;
                         wrapperElement.Attributes.Append(xmlAttr);
                     }
@@ -649,7 +765,9 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    throw new XmlException(SR.Format(SR.InvalidDataNode, DataContract.GetClrTypeFullName(type)));
+                    throw new XmlException(
+                        SR.Format(SR.InvalidDataNode, DataContract.GetClrTypeFullName(type))
+                    );
                 }
             }
         }
@@ -662,69 +780,125 @@ namespace System.Runtime.Serialization
             switch (Type.GetTypeCode(type))
             {
                 case TypeCode.Boolean:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<bool>)dataNode).GetValue() : (bool)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode ? ((DataNode<bool>)dataNode).GetValue() : (bool)dataNode.Value
+                    );
                     break;
                 case TypeCode.Char:
-                    _value = XmlConvert.ToString((int)(isTypedNode ? ((DataNode<char>)dataNode).GetValue() : (char)dataNode.Value));
+                    _value = XmlConvert.ToString(
+                        (int)(
+                            isTypedNode
+                                ? ((DataNode<char>)dataNode).GetValue()
+                                : (char)dataNode.Value
+                        )
+                    );
                     break;
                 case TypeCode.Byte:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<byte>)dataNode).GetValue() : (byte)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode ? ((DataNode<byte>)dataNode).GetValue() : (byte)dataNode.Value
+                    );
                     break;
                 case TypeCode.Int16:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<short>)dataNode).GetValue() : (short)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode ? ((DataNode<short>)dataNode).GetValue() : (short)dataNode.Value
+                    );
                     break;
                 case TypeCode.Int32:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<int>)dataNode).GetValue() : (int)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode ? ((DataNode<int>)dataNode).GetValue() : (int)dataNode.Value
+                    );
                     break;
                 case TypeCode.Int64:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<long>)dataNode).GetValue() : (long)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode ? ((DataNode<long>)dataNode).GetValue() : (long)dataNode.Value
+                    );
                     break;
                 case TypeCode.Single:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<float>)dataNode).GetValue() : (float)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode ? ((DataNode<float>)dataNode).GetValue() : (float)dataNode.Value
+                    );
                     break;
                 case TypeCode.Double:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<double>)dataNode).GetValue() : (double)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode
+                            ? ((DataNode<double>)dataNode).GetValue()
+                            : (double)dataNode.Value
+                    );
                     break;
                 case TypeCode.Decimal:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<decimal>)dataNode).GetValue() : (decimal)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode
+                            ? ((DataNode<decimal>)dataNode).GetValue()
+                            : (decimal)dataNode.Value
+                    );
                     break;
                 case TypeCode.DateTime:
-                    DateTime dateTime = isTypedNode ? ((DataNode<DateTime>)dataNode).GetValue() : (DateTime)dataNode.Value;
-                    _value = dateTime.ToString("yyyy-MM-ddTHH:mm:ss.fffffffK", DateTimeFormatInfo.InvariantInfo);
+                    DateTime dateTime = isTypedNode
+                        ? ((DataNode<DateTime>)dataNode).GetValue()
+                        : (DateTime)dataNode.Value;
+                    _value = dateTime.ToString(
+                        "yyyy-MM-ddTHH:mm:ss.fffffffK",
+                        DateTimeFormatInfo.InvariantInfo
+                    );
                     break;
                 case TypeCode.String:
-                    _value = isTypedNode ? ((DataNode<string>)dataNode).GetValue() : (string?)dataNode.Value;
+                    _value = isTypedNode
+                        ? ((DataNode<string>)dataNode).GetValue()
+                        : (string?)dataNode.Value;
                     break;
                 case TypeCode.SByte:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<sbyte>)dataNode).GetValue() : (sbyte)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode ? ((DataNode<sbyte>)dataNode).GetValue() : (sbyte)dataNode.Value
+                    );
                     break;
                 case TypeCode.UInt16:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<ushort>)dataNode).GetValue() : (ushort)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode
+                            ? ((DataNode<ushort>)dataNode).GetValue()
+                            : (ushort)dataNode.Value
+                    );
                     break;
                 case TypeCode.UInt32:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<uint>)dataNode).GetValue() : (uint)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode ? ((DataNode<uint>)dataNode).GetValue() : (uint)dataNode.Value
+                    );
                     break;
                 case TypeCode.UInt64:
-                    _value = XmlConvert.ToString(isTypedNode ? ((DataNode<ulong>)dataNode).GetValue() : (ulong)dataNode.Value);
+                    _value = XmlConvert.ToString(
+                        isTypedNode ? ((DataNode<ulong>)dataNode).GetValue() : (ulong)dataNode.Value
+                    );
                     break;
                 case TypeCode.Object:
                 default:
                     if (type == Globals.TypeOfByteArray)
                     {
-                        byte[]? bytes = isTypedNode ? ((DataNode<byte[]>)dataNode).GetValue() : (byte[])dataNode.Value;
+                        byte[]? bytes = isTypedNode
+                            ? ((DataNode<byte[]>)dataNode).GetValue()
+                            : (byte[])dataNode.Value;
                         _value = (bytes == null) ? string.Empty : Convert.ToBase64String(bytes);
                     }
                     else if (type == Globals.TypeOfTimeSpan)
-                        _value = XmlConvert.ToString(isTypedNode ? ((DataNode<TimeSpan>)dataNode).GetValue() : (TimeSpan)dataNode.Value);
+                        _value = XmlConvert.ToString(
+                            isTypedNode
+                                ? ((DataNode<TimeSpan>)dataNode).GetValue()
+                                : (TimeSpan)dataNode.Value
+                        );
                     else if (type == Globals.TypeOfGuid)
                     {
-                        Guid guid = isTypedNode ? ((DataNode<Guid>)dataNode).GetValue() : (Guid)dataNode.Value;
+                        Guid guid = isTypedNode
+                            ? ((DataNode<Guid>)dataNode).GetValue()
+                            : (Guid)dataNode.Value;
                         _value = guid.ToString();
                     }
                     else if (type == Globals.TypeOfUri)
                     {
-                        Uri uri = isTypedNode ? ((DataNode<Uri>)dataNode).GetValue() : (Uri)dataNode.Value;
-                        _value = uri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+                        Uri uri = isTypedNode
+                            ? ((DataNode<Uri>)dataNode).GetValue()
+                            : (Uri)dataNode.Value;
+                        _value = uri.GetComponents(
+                            UriComponents.SerializationInfoString,
+                            UriFormat.UriEscaped
+                        );
                     }
                     else
                         handled = false;
@@ -784,8 +958,11 @@ namespace System.Runtime.Serialization
         private ElementData GetNextElement()
         {
             int nextDepth = _depth + 1;
-            return (_elements == null || _elements.Length <= nextDepth || _elements[nextDepth] == null)
-                ? new ElementData() : _elements[nextDepth]!;
+            return (
+                _elements == null || _elements.Length <= nextDepth || _elements[nextDepth] == null
+            )
+                ? new ElementData()
+                : _elements[nextDepth]!;
         }
 
         internal static string GetPrefix(string? ns)

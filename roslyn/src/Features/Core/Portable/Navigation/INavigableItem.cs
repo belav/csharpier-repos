@@ -48,25 +48,41 @@ namespace Microsoft.CodeAnalysis.Navigation
 
         ImmutableArray<INavigableItem> ChildItems { get; }
 
-        public record NavigableDocument(NavigableProject Project, string Name, string? FilePath, IReadOnlyList<string> Folders, DocumentId Id, bool IsSourceGeneratedDocument, Workspace Workspace)
+        public record NavigableDocument(
+            NavigableProject Project,
+            string Name,
+            string? FilePath,
+            IReadOnlyList<string> Folders,
+            DocumentId Id,
+            bool IsSourceGeneratedDocument,
+            Workspace Workspace
+        )
         {
-            public static NavigableDocument FromDocument(Document document)
-                => new(
+            public static NavigableDocument FromDocument(Document document) =>
+                new(
                     NavigableProject.FromProject(document.Project),
                     document.Name,
                     document.FilePath,
                     document.Folders,
                     document.Id,
                     IsSourceGeneratedDocument: document is SourceGeneratedDocument,
-                    document.Project.Solution.Workspace);
+                    document.Project.Solution.Workspace
+                );
 
             /// <summary>
             /// Get the <see cref="CodeAnalysis.Document"/> within <paramref name="solution"/> which is referenced by
             /// this navigable item. The document is required to exist within the solution, e.g. a case where the
             /// navigable item was constructed during a Find Symbols operation on the same solution instance.
             /// </summary>
-            internal ValueTask<Document> GetRequiredDocumentAsync(Solution solution, CancellationToken cancellationToken)
-                => solution.GetRequiredDocumentAsync(Id, includeSourceGenerated: IsSourceGeneratedDocument, cancellationToken);
+            internal ValueTask<Document> GetRequiredDocumentAsync(
+                Solution solution,
+                CancellationToken cancellationToken
+            ) =>
+                solution.GetRequiredDocumentAsync(
+                    Id,
+                    includeSourceGenerated: IsSourceGeneratedDocument,
+                    cancellationToken
+                );
 
             /// <summary>
             /// Get the <see cref="SourceText"/> of the <see cref="CodeAnalysis.Document"/> within
@@ -74,13 +90,20 @@ namespace Microsoft.CodeAnalysis.Navigation
             /// exist within the solution, e.g. a case where the navigable item was constructed during a Find Symbols
             /// operation on the same solution instance.
             /// </summary>
-            internal async ValueTask<SourceText> GetTextAsync(Solution solution, CancellationToken cancellationToken)
+            internal async ValueTask<SourceText> GetTextAsync(
+                Solution solution,
+                CancellationToken cancellationToken
+            )
             {
-                var document = await GetRequiredDocumentAsync(solution, cancellationToken).ConfigureAwait(false);
+                var document = await GetRequiredDocumentAsync(solution, cancellationToken)
+                    .ConfigureAwait(false);
                 return await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
             }
 
-            internal SourceText? TryGetTextSynchronously(Solution solution, CancellationToken cancellationToken)
+            internal SourceText? TryGetTextSynchronously(
+                Solution solution,
+                CancellationToken cancellationToken
+            )
             {
                 var document = solution.GetDocument(Id);
                 return document?.GetTextSynchronously(cancellationToken);
@@ -89,8 +112,8 @@ namespace Microsoft.CodeAnalysis.Navigation
 
         public record struct NavigableProject(string Name, ProjectId Id)
         {
-            public static NavigableProject FromProject(Project project)
-                => new(project.Name, project.Id);
+            public static NavigableProject FromProject(Project project) =>
+                new(project.Name, project.Id);
         }
     }
 }

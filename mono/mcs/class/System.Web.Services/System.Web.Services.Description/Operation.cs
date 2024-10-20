@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.Operation.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,105 +30,112 @@
 
 using System.Collections;
 using System.ComponentModel;
+using System.Web.Services.Configuration;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Web.Services.Configuration;
 
-namespace System.Web.Services.Description 
+namespace System.Web.Services.Description
 {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class Operation :
-		NamedItem
-	{
-		#region Fields
+    [XmlFormatExtensionPoint("Extensions")]
+    public sealed class Operation : NamedItem
+    {
+        #region Fields
 
-		OperationFaultCollection faults;
-		OperationMessageCollection messages;
-		string[] parameterOrder;
-		PortType portType;
-		ServiceDescriptionFormatExtensionCollection extensions;
+        OperationFaultCollection faults;
+        OperationMessageCollection messages;
+        string[] parameterOrder;
+        PortType portType;
+        ServiceDescriptionFormatExtensionCollection extensions;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public Operation ()
-		{
-			faults = new OperationFaultCollection (this);
-			messages = new OperationMessageCollection (this);
-			parameterOrder = null;
-			portType = null;
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
+        public Operation()
+        {
+            faults = new OperationFaultCollection(this);
+            messages = new OperationMessageCollection(this);
+            parameterOrder = null;
+            portType = null;
+            extensions = new ServiceDescriptionFormatExtensionCollection(this);
+        }
 
-		[XmlElement ("fault")]
-		public OperationFaultCollection Faults {
-			get { return faults; }
-		}
+        #endregion // Constructors
 
-		[XmlElement ("output", typeof (OperationOutput))]
-		[XmlElement ("input", typeof (OperationInput))]
-		public OperationMessageCollection Messages {
-			get { return messages; }
-		}
+        #region Properties
 
+        [XmlElement("fault")]
+        public OperationFaultCollection Faults
+        {
+            get { return faults; }
+        }
 
-		[XmlIgnore]
-		public string[] ParameterOrder {
-			get { return parameterOrder; }
-			set { parameterOrder = value; }
-		}
+        [XmlElement("output", typeof(OperationOutput))]
+        [XmlElement("input", typeof(OperationInput))]
+        public OperationMessageCollection Messages
+        {
+            get { return messages; }
+        }
 
-		static readonly char [] wsChars = new char [] {' ', '\r', '\n', '\t'};
+        [XmlIgnore]
+        public string[] ParameterOrder
+        {
+            get { return parameterOrder; }
+            set { parameterOrder = value; }
+        }
 
-		[DefaultValue ("")]
-		// LAMESPEC: it could simply use xs:NMTOKENS
-		[XmlAttribute ("parameterOrder")]
-		public string ParameterOrderString {
-			get { 
-				if (parameterOrder == null)
-					return String.Empty;
-				return String.Join (" ", parameterOrder); 
-			}
-			set {
-				ArrayList al = new ArrayList ();
-				foreach (string s in value.Split (' ')) {
-					value = s.Trim (wsChars);
-					if (value.Length > 0)
-						al.Add (value);
-				}
-				ParameterOrder = (string []) al.ToArray (typeof (string));
-			}
-		}
+        static readonly char[] wsChars = new char[] { ' ', '\r', '\n', '\t' };
 
-//		[XmlIgnore]
-		public PortType PortType {
-			get { return portType; }
-		}
+        [DefaultValue("")]
+        // LAMESPEC: it could simply use xs:NMTOKENS
+        [XmlAttribute("parameterOrder")]
+        public string ParameterOrderString
+        {
+            get
+            {
+                if (parameterOrder == null)
+                    return String.Empty;
+                return String.Join(" ", parameterOrder);
+            }
+            set
+            {
+                ArrayList al = new ArrayList();
+                foreach (string s in value.Split(' '))
+                {
+                    value = s.Trim(wsChars);
+                    if (value.Length > 0)
+                        al.Add(value);
+                }
+                ParameterOrder = (string[])al.ToArray(typeof(string));
+            }
+        }
 
-		[XmlIgnore]
-		public override ServiceDescriptionFormatExtensionCollection Extensions {
-			get { return extensions; }
-		}
+        //		[XmlIgnore]
+        public PortType PortType
+        {
+            get { return portType; }
+        }
 
-		#endregion // Properties
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get { return extensions; }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		public bool IsBoundBy (OperationBinding operationBinding)
-		{
-			return (operationBinding.Name == Name);
-		}
+        #region Methods
 
-		internal void SetParent (PortType portType)
-		{
-			this.portType = portType;
-		}
+        public bool IsBoundBy(OperationBinding operationBinding)
+        {
+            return (operationBinding.Name == Name);
+        }
 
-		#endregion
-	}
+        internal void SetParent(PortType portType)
+        {
+            this.portType = portType;
+        }
+
+        #endregion
+    }
 }

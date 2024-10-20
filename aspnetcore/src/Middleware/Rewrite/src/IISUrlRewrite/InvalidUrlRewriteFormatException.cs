@@ -12,11 +12,13 @@ internal sealed class InvalidUrlRewriteFormatException : FormatException
     public int LinePosition { get; }
 
     public InvalidUrlRewriteFormatException(XElement element, string message)
-        : base(FormatMessage(element, message))
-    {
-    }
+        : base(FormatMessage(element, message)) { }
 
-    public InvalidUrlRewriteFormatException(XElement element, string message, Exception innerException)
+    public InvalidUrlRewriteFormatException(
+        XElement element,
+        string message,
+        Exception innerException
+    )
         : base(FormatMessage(element, message), innerException)
     {
         var xmlLineInfo = (IXmlLineInfo)element;
@@ -27,6 +29,10 @@ internal sealed class InvalidUrlRewriteFormatException : FormatException
     private static string FormatMessage(XElement element, string message)
     {
         var xmlLineInfo = (IXmlLineInfo)element;
-        return Resources.FormatError_UrlRewriteParseError(message, xmlLineInfo.LineNumber, xmlLineInfo.LinePosition);
+        return Resources.FormatError_UrlRewriteParseError(
+            message,
+            xmlLineInfo.LineNumber,
+            xmlLineInfo.LinePosition
+        );
     }
 }

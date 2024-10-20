@@ -22,8 +22,12 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.ChannelCreated,
-                    SR.GetString(SR.TraceCodeChannelCreated, TraceUtility.CreateSourceString(this)), this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.ChannelCreated,
+                    SR.GetString(SR.TraceCodeChannelCreated, TraceUtility.CreateSourceString(this)),
+                    this
+                );
             }
         }
 
@@ -69,13 +73,11 @@ namespace System.ServiceModel.Channels
 
         protected ChannelManagerBase Manager
         {
-            get
-            {
-                return channelManager;
-            }
+            get { return channelManager; }
         }
 
-        public virtual T GetProperty<T>() where T : class
+        public virtual T GetProperty<T>()
+            where T : class
         {
             IChannelFactory factory = this.channelManager as IChannelFactory;
             if (factory != null)
@@ -98,8 +100,15 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.ChannelDisposed,
-                    SR.GetString(SR.TraceCodeChannelDisposed, TraceUtility.CreateSourceString(this)), this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.ChannelDisposed,
+                    SR.GetString(
+                        SR.TraceCodeChannelDisposed,
+                        TraceUtility.CreateSourceString(this)
+                    ),
+                    this
+                );
             }
         }
     }

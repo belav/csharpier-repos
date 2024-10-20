@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -30,9 +30,7 @@ using System.Collections.ObjectModel;
 using System.Data.Linq.Mapping;
 using System.Linq;
 using System.Reflection;
-
 using DbLinq.Data.Linq.Sugar.Expressions;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #else
@@ -57,12 +55,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return null;
         }
 
-        public virtual string GetColumnName(TableExpression tableExpression, MemberInfo memberInfo, DataContext dataContext)
+        public virtual string GetColumnName(
+            TableExpression tableExpression,
+            MemberInfo memberInfo,
+            DataContext dataContext
+        )
         {
             return GetColumnName(tableExpression.Type, memberInfo, dataContext);
         }
 
-        public virtual string GetColumnName(Type tableType, MemberInfo memberInfo, DataContext dataContext)
+        public virtual string GetColumnName(
+            Type tableType,
+            MemberInfo memberInfo,
+            DataContext dataContext
+        )
         {
             var tableDescription = dataContext.Mapping.GetTable(tableType);
             var columnDescription = tableDescription.RowType.GetDataMember(memberInfo);
@@ -71,7 +77,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             return null;
         }
 
-        public virtual IList<MemberInfo> GetPrimaryKeys(TableExpression tableExpression, DataContext dataContext)
+        public virtual IList<MemberInfo> GetPrimaryKeys(
+            TableExpression tableExpression,
+            DataContext dataContext
+        )
         {
             var tableDescription = dataContext.Mapping.GetTable(tableExpression.Type);
             if (tableDescription != null)
@@ -81,7 +90,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
         public virtual IList<MemberInfo> GetPrimaryKeys(MetaTable tableDescription)
         {
-            return (from column in tableDescription.RowType.IdentityMembers select column.Member).ToList();
+            return (
+                from column in tableDescription.RowType.IdentityMembers
+                select column.Member
+            ).ToList();
         }
 
         /// <summary>
@@ -91,7 +103,10 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <returns></returns>
         public IList<MemberInfo> GetColumns(MetaTable tableDescription)
         {
-            return (from column in tableDescription.RowType.PersistentDataMembers select column.Member).ToList();
+            return (
+                from column in tableDescription.RowType.PersistentDataMembers
+                select column.Member
+            ).ToList();
         }
 
         /// <summary>
@@ -105,27 +120,47 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="joinID"></param>
         /// <param name="dataContext"></param>
         /// <returns>ThisKey</returns>
-        public virtual IList<MemberInfo> GetAssociation(TableExpression thisTableExpression, MemberInfo memberInfo, Type otherType, out IList<MemberInfo> otherKey, out TableJoinType joinType, out string joinID, DataContext dataContext)
+        public virtual IList<MemberInfo> GetAssociation(
+            TableExpression thisTableExpression,
+            MemberInfo memberInfo,
+            Type otherType,
+            out IList<MemberInfo> otherKey,
+            out TableJoinType joinType,
+            out string joinID,
+            DataContext dataContext
+        )
         {
             var thisTableDescription = dataContext.Mapping.GetTable(thisTableExpression.Type);
-            var thisAssociation =
-                (from association in thisTableDescription.RowType.Associations
-                 where association.ThisMember.Member == memberInfo
-                 select association).SingleOrDefault();
+            var thisAssociation = (
+                from association in thisTableDescription.RowType.Associations
+                where association.ThisMember.Member == memberInfo
+                select association
+            ).SingleOrDefault();
             if (thisAssociation != null)
             {
                 // by default, join is inner
                 joinType = TableJoinType.Inner;
                 joinID = thisAssociation.ThisMember.MappedName;
                 if (string.IsNullOrEmpty(joinID))
-                    throw Error.BadArgument("S0108: Association name is required to ensure join uniqueness");
+                    throw Error.BadArgument(
+                        "S0108: Association name is required to ensure join uniqueness"
+                    );
 
                 var otherTableDescription = dataContext.Mapping.GetTable(otherType);
-                bool thisKeyHasNullables, otherKeyHasNullables;
-                var thisKey = GetAssociationKeys(thisTableDescription, thisAssociation.ThisKey, dataContext,
-                                                 out thisKeyHasNullables);
-                otherKey = GetAssociationKeys(otherTableDescription, thisAssociation.OtherKey, dataContext,
-                                              out otherKeyHasNullables);
+                bool thisKeyHasNullables,
+                    otherKeyHasNullables;
+                var thisKey = GetAssociationKeys(
+                    thisTableDescription,
+                    thisAssociation.ThisKey,
+                    dataContext,
+                    out thisKeyHasNullables
+                );
+                otherKey = GetAssociationKeys(
+                    otherTableDescription,
+                    thisAssociation.OtherKey,
+                    dataContext,
+                    out otherKeyHasNullables
+                );
 
                 // we just test here the left join (since associations are symmetric,
                 //        we can only find left joins here, and the otherKeyHasNullables is
@@ -150,8 +185,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="dataContext"></param>
         /// <param name="hasNullableKeys">returned as true if some keys can be null (we then have an outer join)</param>
         /// <returns></returns>
-        protected virtual IList<MemberInfo> GetAssociationKeys(MetaTable description, ReadOnlyCollection<MetaDataMember> keys,
-                                                               DataContext dataContext, out bool hasNullableKeys)
+        protected virtual IList<MemberInfo> GetAssociationKeys(
+            MetaTable description,
+            ReadOnlyCollection<MetaDataMember> keys,
+            DataContext dataContext,
+            out bool hasNullableKeys
+        )
         {
             var sourceKeys = keys;
             if (sourceKeys.Count == 0)
@@ -175,14 +214,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             // TODO: Should be cached in a static thread safe cache.
 
             return type.GetProperties()
-                .Where(p => p.PropertyType.IsGenericType 
-                    && (p.PropertyType.GetGenericTypeDefinition() == typeof(System.Data.Linq.EntitySet<>) 
+                .Where(p =>
+                    p.PropertyType.IsGenericType
+                    && (
+                        p.PropertyType.GetGenericTypeDefinition()
+                        == typeof(System.Data.Linq.EntitySet<>)
 #if !MONO_STRICT
-                    || p.PropertyType.GetGenericTypeDefinition() == typeof(DbLinq.Data.Linq.EntitySet<>)
+                        || p.PropertyType.GetGenericTypeDefinition()
+                            == typeof(DbLinq.Data.Linq.EntitySet<>)
 #endif
                     )
-                    && p.IsDefined(typeof(AssociationAttribute), true))
-                .Cast<MemberInfo>().ToList();
+                    && p.IsDefined(typeof(AssociationAttribute), true)
+                )
+                .Cast<MemberInfo>()
+                .ToList();
         }
 
         public IList<MemberInfo> GetEntityRefAssociations(Type type)
@@ -194,17 +239,27 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             List<MemberInfo> associations = new List<MemberInfo>();
             foreach (var p in type.GetProperties())
             {
-                AssociationAttribute associationAttribute = p.GetCustomAttributes(typeof(AssociationAttribute), true).FirstOrDefault() as AssociationAttribute;
+                AssociationAttribute associationAttribute =
+                    p.GetCustomAttributes(typeof(AssociationAttribute), true).FirstOrDefault()
+                    as AssociationAttribute;
                 if (associationAttribute != null)
                 {
-                    FieldInfo field = type.GetField(associationAttribute.Storage, BindingFlags.NonPublic | BindingFlags.Instance);
-                    if (field != null && field.FieldType.IsGenericType &&
+                    FieldInfo field = type.GetField(
+                        associationAttribute.Storage,
+                        BindingFlags.NonPublic | BindingFlags.Instance
+                    );
+                    if (
+                        field != null
+                        && field.FieldType.IsGenericType
+                        &&
 #if MONO_STRICT
-                        field.FieldType.GetGenericTypeDefinition() == typeof(System.Data.Linq.EntityRef<>)
+                        field.FieldType.GetGenericTypeDefinition()
+                            == typeof(System.Data.Linq.EntityRef<>)
 #else
-                        field.FieldType.GetGenericTypeDefinition() == typeof(DbLinq.Data.Linq.EntityRef<>)
+                        field.FieldType.GetGenericTypeDefinition()
+                            == typeof(DbLinq.Data.Linq.EntityRef<>)
 #endif
-                        )
+                    )
                         associations.Add(p);
                 }
             }

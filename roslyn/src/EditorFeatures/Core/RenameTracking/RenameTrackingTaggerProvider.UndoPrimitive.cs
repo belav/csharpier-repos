@@ -14,14 +14,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
     {
         /// <summary>
         /// Clears or restores the state machine on relevant undo/redo actions.
-        /// 
+        ///
         /// These may stay alive on the global undo stack well beyond the lifetime of the
         /// <see cref="ITextBuffer"/> on which they were created, so we must avoid strong
         /// references to anything that may hold that <see cref="ITextBuffer"/> alive.
         /// </summary>
-        private class UndoPrimitive(ITextBuffer textBuffer, int trackingSessionId, bool shouldRestoreStateOnUndo) : ITextUndoPrimitive
+        private class UndoPrimitive(
+            ITextBuffer textBuffer,
+            int trackingSessionId,
+            bool shouldRestoreStateOnUndo
+        ) : ITextUndoPrimitive
         {
-            private readonly WeakReference<ITextBuffer> _weakTextBuffer = new WeakReference<ITextBuffer>(textBuffer);
+            private readonly WeakReference<ITextBuffer> _weakTextBuffer =
+                new WeakReference<ITextBuffer>(textBuffer);
             private readonly int _trackingSessionId = trackingSessionId;
             private readonly bool _shouldRestoreStateOnUndo = shouldRestoreStateOnUndo;
 
@@ -62,15 +67,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.RenameTracking
             private bool TryGetStateMachine(out StateMachine stateMachine)
             {
                 stateMachine = null;
-                return _weakTextBuffer.TryGetTarget(out var textBuffer) &&
-                    textBuffer.Properties.TryGetProperty(typeof(StateMachine), out stateMachine);
+                return _weakTextBuffer.TryGetTarget(out var textBuffer)
+                    && textBuffer.Properties.TryGetProperty(typeof(StateMachine), out stateMachine);
             }
 
-            public bool CanMerge(ITextUndoPrimitive older)
-                => false;
+            public bool CanMerge(ITextUndoPrimitive older) => false;
 
-            public ITextUndoPrimitive Merge(ITextUndoPrimitive older)
-                => throw new NotImplementedException();
+            public ITextUndoPrimitive Merge(ITextUndoPrimitive older) =>
+                throw new NotImplementedException();
         }
     }
 }

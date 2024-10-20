@@ -13,8 +13,12 @@ internal static class Guids
     internal const string IID_ITransactionOutcomeEvents = "3A6AD9E2-23B9-11cf-AD60-00AA00A74CCD";
     internal const string IID_ITransaction = "0fb15084-af41-11ce-bd2b-204c4f4f5020";
 
-    internal static readonly Guid IID_ITransactionDispenser_Guid = Guid.Parse(IID_ITransactionDispenser);
+    internal static readonly Guid IID_ITransactionDispenser_Guid = Guid.Parse(
+        IID_ITransactionDispenser
+    );
     internal static readonly Guid IID_IResourceManager_Guid = Guid.Parse(IID_IResourceManager);
-    internal static readonly Guid IID_ITransactionOutcomeEvents_Guid = Guid.Parse(IID_ITransactionOutcomeEvents);
+    internal static readonly Guid IID_ITransactionOutcomeEvents_Guid = Guid.Parse(
+        IID_ITransactionOutcomeEvents
+    );
     internal static readonly Guid IID_ITransaction_Guid = Guid.Parse(IID_ITransaction);
 }

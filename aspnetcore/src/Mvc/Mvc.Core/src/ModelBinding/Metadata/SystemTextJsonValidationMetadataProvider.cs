@@ -13,7 +13,9 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 /// An implementation of <see cref="IDisplayMetadataProvider"/> and <see cref="IValidationMetadataProvider"/> for
 /// the System.Text.Json.Serialization attribute classes.
 /// </summary>
-public sealed class SystemTextJsonValidationMetadataProvider : IDisplayMetadataProvider, IValidationMetadataProvider
+public sealed class SystemTextJsonValidationMetadataProvider
+    : IDisplayMetadataProvider,
+        IValidationMetadataProvider
 {
     private readonly JsonNamingPolicy _jsonNamingPolicy;
 
@@ -21,8 +23,7 @@ public sealed class SystemTextJsonValidationMetadataProvider : IDisplayMetadataP
     /// Creates a new <see cref="SystemTextJsonValidationMetadataProvider"/> with the default <see cref="JsonNamingPolicy.CamelCase"/>
     /// </summary>
     public SystemTextJsonValidationMetadataProvider()
-        : this(JsonNamingPolicy.CamelCase)
-    { }
+        : this(JsonNamingPolicy.CamelCase) { }
 
     /// <summary>
     /// Creates a new <see cref="SystemTextJsonValidationMetadataProvider"/> with an optional <see cref="JsonNamingPolicy"/>
@@ -65,6 +66,6 @@ public sealed class SystemTextJsonValidationMetadataProvider : IDisplayMetadataP
         context.ValidationMetadata.ValidationModelName = propertyName;
     }
 
-    private static string? ReadPropertyNameFrom(IReadOnlyList<object> attributes)
-        => attributes?.OfType<JsonPropertyNameAttribute>().FirstOrDefault()?.Name;
+    private static string? ReadPropertyNameFrom(IReadOnlyList<object> attributes) =>
+        attributes?.OfType<JsonPropertyNameAttribute>().FirstOrDefault()?.Name;
 }

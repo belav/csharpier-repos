@@ -31,7 +31,9 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
     private DefaultWebAssemblyJSRuntime()
     {
         ElementReferenceContext = new WebElementReferenceContext(this);
-        JsonSerializerOptions.Converters.Add(new ElementReferenceJsonConverter(ElementReferenceContext));
+        JsonSerializerOptions.Converters.Add(
+            new ElementReferenceJsonConverter(ElementReferenceContext)
+        );
     }
 
     public JsonSerializerOptions ReadJsonSerializerOptions() => JsonSerializerOptions;
@@ -42,9 +44,15 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
         string? assemblyName,
         string methodIdentifier,
         [JSMarshalAs<JSType.Number>] long dotNetObjectId,
-        string argsJson)
+        string argsJson
+    )
     {
-        var callInfo = new DotNetInvocationInfo(assemblyName, methodIdentifier, dotNetObjectId, callId: null);
+        var callInfo = new DotNetInvocationInfo(
+            assemblyName,
+            methodIdentifier,
+            dotNetObjectId,
+            callId: null
+        );
         return DotNetDispatcher.Invoke(Instance, callInfo, argsJson);
     }
 
@@ -52,17 +60,25 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
     [SupportedOSPlatform("browser")]
     public static void EndInvokeJS(string argsJson)
     {
-        WebAssemblyCallQueue.Schedule(argsJson, static argsJson =>
-        {
-            // This is not expected to throw, as it takes care of converting any unhandled user code
-            // exceptions into a failure on the Task that was returned when calling InvokeAsync.
-            DotNetDispatcher.EndInvokeJS(Instance, argsJson);
-        });
+        WebAssemblyCallQueue.Schedule(
+            argsJson,
+            static argsJson =>
+            {
+                // This is not expected to throw, as it takes care of converting any unhandled user code
+                // exceptions into a failure on the Task that was returned when calling InvokeAsync.
+                DotNetDispatcher.EndInvokeJS(Instance, argsJson);
+            }
+        );
     }
 
     [JSExport]
     [SupportedOSPlatform("browser")]
-    public static void BeginInvokeDotNet(string? callId, string assemblyNameOrDotNetObjectId, string methodIdentifier, string argsJson)
+    public static void BeginInvokeDotNet(
+        string? callId,
+        string assemblyNameOrDotNetObjectId,
+        string methodIdentifier,
+        string argsJson
+    )
     {
         // Figure out whether 'assemblyNameOrDotNetObjectId' is the assembly name or the instance ID
         // We only need one for any given call. This helps to work around the limitation that we can
@@ -80,13 +96,21 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
             assemblyName = assemblyNameOrDotNetObjectId;
         }
 
-        var callInfo = new DotNetInvocationInfo(assemblyName, methodIdentifier, dotNetObjectId, callId);
-        WebAssemblyCallQueue.Schedule((callInfo, argsJson), static state =>
-        {
-            // This is not expected to throw, as it takes care of converting any unhandled user code
-            // exceptions into a failure on the JS Promise object.
-            DotNetDispatcher.BeginInvokeDotNet(Instance, state.callInfo, state.argsJson);
-        });
+        var callInfo = new DotNetInvocationInfo(
+            assemblyName,
+            methodIdentifier,
+            dotNetObjectId,
+            callId
+        );
+        WebAssemblyCallQueue.Schedule(
+            (callInfo, argsJson),
+            static state =>
+            {
+                // This is not expected to throw, as it takes care of converting any unhandled user code
+                // exceptions into a failure on the JS Promise object.
+                DotNetDispatcher.BeginInvokeDotNet(Instance, state.callInfo, state.argsJson);
+            }
+        );
     }
 
     [SupportedOSPlatform("browser")]
@@ -106,12 +130,17 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
 
     [DynamicDependency(JsonSerialized, typeof(RootComponentOperation))]
     [DynamicDependency(JsonSerialized, typeof(RootComponentOperationBatch))]
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "The correct members will be preserved by the above DynamicDependency")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "The correct members will be preserved by the above DynamicDependency"
+    )]
     internal static RootComponentOperationBatch DeserializeOperations(string operationsJson)
     {
         var deserialized = JsonSerializer.Deserialize<RootComponentOperationBatch>(
             operationsJson,
-            WebAssemblyComponentSerializationSettings.JsonSerializationOptions)!;
+            WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+        )!;
 
         for (var i = 0; i < deserialized.Operations.Length; i++)
         {
@@ -123,11 +152,19 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
 
             if (operation.Marker == null)
             {
-                throw new InvalidOperationException($"The component operation of type '{operation.Type}' requires a '{nameof(operation.Marker)}' to be specified.");
+                throw new InvalidOperationException(
+                    $"The component operation of type '{operation.Type}' requires a '{nameof(operation.Marker)}' to be specified."
+                );
             }
 
-            var componentType = Instance._rootComponentCache.GetRootComponent(operation.Marker!.Value.Assembly!, operation.Marker.Value.TypeName!)
-                ?? throw new InvalidOperationException($"Root component type '{operation.Marker.Value.TypeName}' could not be found in the assembly '{operation.Marker.Value.Assembly}'.");
+            var componentType =
+                Instance._rootComponentCache.GetRootComponent(
+                    operation.Marker!.Value.Assembly!,
+                    operation.Marker.Value.TypeName!
+                )
+                ?? throw new InvalidOperationException(
+                    $"Root component type '{operation.Marker.Value.TypeName}' could not be found in the assembly '{operation.Marker.Value.Assembly}'."
+                );
             var parameters = DeserializeComponentParameters(operation.Marker.Value);
             operation.Descriptor = new(componentType, parameters);
         }
@@ -137,8 +174,12 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
 
     static WebRootComponentParameters DeserializeComponentParameters(ComponentMarker marker)
     {
-        var definitions = WebAssemblyComponentParameterDeserializer.GetParameterDefinitions(marker.ParameterDefinitions!);
-        var values = WebAssemblyComponentParameterDeserializer.GetParameterValues(marker.ParameterValues!);
+        var definitions = WebAssemblyComponentParameterDeserializer.GetParameterDefinitions(
+            marker.ParameterDefinitions!
+        );
+        var values = WebAssemblyComponentParameterDeserializer.GetParameterValues(
+            marker.ParameterValues!
+        );
         var componentDeserializer = WebAssemblyComponentParameterDeserializer.Instance;
         var parameters = componentDeserializer.DeserializeParameters(definitions, values);
 
@@ -153,12 +194,31 @@ internal sealed partial class DefaultWebAssemblyJSRuntime : WebAssemblyJSRuntime
     }
 
     /// <inheritdoc />
-    protected override Task<Stream> ReadJSDataAsStreamAsync(IJSStreamReference jsStreamReference, long totalLength, CancellationToken cancellationToken = default)
-        => Task.FromResult<Stream>(PullFromJSDataStream.CreateJSDataStream(this, jsStreamReference, totalLength, cancellationToken));
+    protected override Task<Stream> ReadJSDataAsStreamAsync(
+        IJSStreamReference jsStreamReference,
+        long totalLength,
+        CancellationToken cancellationToken = default
+    ) =>
+        Task.FromResult<Stream>(
+            PullFromJSDataStream.CreateJSDataStream(
+                this,
+                jsStreamReference,
+                totalLength,
+                cancellationToken
+            )
+        );
 
     /// <inheritdoc />
-    protected override Task TransmitStreamAsync(long streamId, DotNetStreamReference dotNetStreamReference)
+    protected override Task TransmitStreamAsync(
+        long streamId,
+        DotNetStreamReference dotNetStreamReference
+    )
     {
-        return TransmitDataStreamToJS.TransmitStreamAsync(this, "Blazor._internal.receiveWebAssemblyDotNetDataStream", streamId, dotNetStreamReference);
+        return TransmitDataStreamToJS.TransmitStreamAsync(
+            this,
+            "Blazor._internal.receiveWebAssemblyDotNetDataStream",
+            streamId,
+            dotNetStreamReference
+        );
     }
 }

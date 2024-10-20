@@ -34,18 +34,25 @@ namespace Microsoft.VisualBasic
 
         public override LanguageOptions LanguageOptions => LanguageOptions.CaseInsensitive;
 
-        [Obsolete("ICodeGenerator has been deprecated. Use the methods directly on the CodeDomProvider class instead.")]
+        [Obsolete(
+            "ICodeGenerator has been deprecated. Use the methods directly on the CodeDomProvider class instead."
+        )]
         public override ICodeGenerator CreateGenerator() => _generator;
 
-        [Obsolete("ICodeCompiler has been deprecated. Use the methods directly on the CodeDomProvider class instead.")]
+        [Obsolete(
+            "ICodeCompiler has been deprecated. Use the methods directly on the CodeDomProvider class instead."
+        )]
         public override ICodeCompiler CreateCompiler() => _generator;
 
         public override TypeConverter GetConverter(Type type) =>
-            type == typeof(MemberAttributes) ? VBMemberAttributeConverter.Default :
-            type == typeof(TypeAttributes) ? VBTypeAttributeConverter.Default :
-            base.GetConverter(type);
+            type == typeof(MemberAttributes) ? VBMemberAttributeConverter.Default
+            : type == typeof(TypeAttributes) ? VBTypeAttributeConverter.Default
+            : base.GetConverter(type);
 
-        public override void GenerateCodeFromMember(CodeTypeMember member, TextWriter writer, CodeGeneratorOptions options) =>
-            _generator.GenerateCodeFromMember(member, writer, options);
+        public override void GenerateCodeFromMember(
+            CodeTypeMember member,
+            TextWriter writer,
+            CodeGeneratorOptions options
+        ) => _generator.GenerateCodeFromMember(member, writer, options);
     }
 }

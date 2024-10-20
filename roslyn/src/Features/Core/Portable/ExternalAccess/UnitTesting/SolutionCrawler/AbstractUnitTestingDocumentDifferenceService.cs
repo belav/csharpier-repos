@@ -12,30 +12,44 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 {
-    internal abstract class AbstractUnitTestingDocumentDifferenceService : IUnitTestingDocumentDifferenceService
+    internal abstract class AbstractUnitTestingDocumentDifferenceService
+        : IUnitTestingDocumentDifferenceService
     {
-        public UnitTestingDocumentDifferenceResult? GetDifference(Document oldDocument, Document newDocument, CancellationToken cancellationToken)
+        public UnitTestingDocumentDifferenceResult? GetDifference(
+            Document oldDocument,
+            Document newDocument,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                var syntaxFactsService = newDocument.Project.Services.GetService<ISyntaxFactsService>();
+                var syntaxFactsService =
+                    newDocument.Project.Services.GetService<ISyntaxFactsService>();
                 if (syntaxFactsService == null)
                 {
                     // somehow, we can't get the service. without it, there is nothing we can do.
-                    return new UnitTestingDocumentDifferenceResult(UnitTestingInvocationReasons.DocumentChanged);
+                    return new UnitTestingDocumentDifferenceResult(
+                        UnitTestingInvocationReasons.DocumentChanged
+                    );
                 }
                 // this is based on the implementation detail where opened documents use strong references
                 // to tree and text rather than recoverable versions.
-                if (!oldDocument.TryGetText(out var oldText) ||
-                    !newDocument.TryGetText(out var newText))
+                if (
+                    !oldDocument.TryGetText(out var oldText)
+                    || !newDocument.TryGetText(out var newText)
+                )
                 {
                     // no cheap way to determine top level changes. assumes top level has changed
-                    return new UnitTestingDocumentDifferenceResult(UnitTestingInvocationReasons.DocumentChanged);
+                    return new UnitTestingDocumentDifferenceResult(
+                        UnitTestingInvocationReasons.DocumentChanged
+                    );
                 }
                 // quick check whether two tree versions are same
-                if (oldDocument.TryGetSyntaxVersion(out var oldVersion) &&
-                    newDocument.TryGetSyntaxVersion(out var newVersion) &&
-                    oldVersion.Equals(newVersion))
+                if (
+                    oldDocument.TryGetSyntaxVersion(out var oldVersion)
+                    && newDocument.TryGetSyntaxVersion(out var newVersion)
+                    && oldVersion.Equals(newVersion)
+                )
                 {
                     // nothing has changed. don't do anything.
                     // this could happen if a document is opened/closed without any buffer change
@@ -93,9 +107,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                 }
 #endif
 
-                return new UnitTestingDocumentDifferenceResult(UnitTestingInvocationReasons.DocumentChanged);
+                return new UnitTestingDocumentDifferenceResult(
+                    UnitTestingInvocationReasons.DocumentChanged
+                );
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 throw ExceptionUtilities.Unreachable();
             }

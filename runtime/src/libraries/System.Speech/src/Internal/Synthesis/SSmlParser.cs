@@ -160,7 +160,14 @@ namespace System.Speech.Internal.Synthesis
                 {
                     if (reader.Value != xmlNamespaceSsml && reader.Value != xmlNamespacePrompt)
                     {
-                        ssmlAttributes._unknownNamespaces.Add(new SsmlXmlAttribute(reader.Prefix, reader.LocalName, reader.Value, reader.NamespaceURI));
+                        ssmlAttributes._unknownNamespaces.Add(
+                            new SsmlXmlAttribute(
+                                reader.Prefix,
+                                reader.LocalName,
+                                reader.Value,
+                                reader.NamespaceURI
+                            )
+                        );
                     }
                     else if (reader.Value == xmlNamespacePrompt)
                     {
@@ -169,7 +176,14 @@ namespace System.Speech.Internal.Synthesis
                 }
                 else
                 {
-                    extraSpeakAttributes.Add(new SsmlXmlAttribute(reader.Prefix, reader.LocalName, reader.Value, reader.NamespaceURI));
+                    extraSpeakAttributes.Add(
+                        new SsmlXmlAttribute(
+                            reader.Prefix,
+                            reader.LocalName,
+                            reader.Value,
+                            reader.NamespaceURI
+                        )
+                    );
                 }
 
                 if (isInvalidAttribute)
@@ -195,15 +209,34 @@ namespace System.Speech.Internal.Synthesis
                 ssmlAttributes.AddUnknowAttribute(attribute, ref extraAttributes);
             }
 
-            voice = engine.ProcessSpeak(sVersion, sBaseUri, culture, ssmlAttributes._unknownNamespaces);
+            voice = engine.ProcessSpeak(
+                sVersion,
+                sBaseUri,
+                culture,
+                ssmlAttributes._unknownNamespaces
+            );
 
             ssmlAttributes._fragmentState.LangId = culture.LCID;
             ssmlAttributes._voice = voice;
             ssmlAttributes._baseUri = sBaseUri;
 
             // Process child elements.
-            SsmlElement possibleChild = SsmlElement.Lexicon | SsmlElement.Meta | SsmlElement.MetaData | SsmlElement.ParagraphOrSentence | SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes);
-            ProcessElement(reader, engine, "speak", possibleChild, ssmlAttributes, false, extraAttributes);
+            SsmlElement possibleChild =
+                SsmlElement.Lexicon
+                | SsmlElement.Meta
+                | SsmlElement.MetaData
+                | SsmlElement.ParagraphOrSentence
+                | SsmlElement.AudioMarkTextWithStyle
+                | ElementPromptEngine(ssmlAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                "speak",
+                possibleChild,
+                ssmlAttributes,
+                false,
+                extraAttributes
+            );
 
             // Notify the engine that the element is processed
             engine.EndSpeakElement();
@@ -214,7 +247,15 @@ namespace System.Speech.Internal.Synthesis
         /// The element name is fetch from the element name array and
         /// the delegate for that element will be called.
         /// </summary>
-        private static void ProcessElement(XmlReader reader, ISsmlParser engine, string sElement, SsmlElement possibleElements, SsmlAttributes ssmAttributesParent, bool fIgnore, List<SsmlXmlAttribute> extraAttributes)
+        private static void ProcessElement(
+            XmlReader reader,
+            ISsmlParser engine,
+            string sElement,
+            SsmlElement possibleElements,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore,
+            List<SsmlXmlAttribute> extraAttributes
+        )
         {
             // Make a local copy of the ssmlAttribute
             SsmlAttributes ssmlAttributes = new();
@@ -225,7 +266,12 @@ namespace System.Speech.Internal.Synthesis
             // Flush any remaining attributes from the previous element list
             if (extraAttributes != null && extraAttributes.Count > 0)
             {
-                engine.StartProcessUnknownAttributes(ssmlAttributes._voice, ref ssmlAttributes._fragmentState, sElement, extraAttributes);
+                engine.StartProcessUnknownAttributes(
+                    ssmlAttributes._voice,
+                    ref ssmlAttributes._fragmentState,
+                    sElement,
+                    extraAttributes
+                );
             }
 
             // Move to containing element of attributes
@@ -239,10 +285,14 @@ namespace System.Speech.Internal.Synthesis
                     switch (reader.NodeType)
                     {
                         case XmlNodeType.Element:
-                            int iElement = Array.BinarySearch<string>(s_elementsName, reader.LocalName);
+                            int iElement = Array.BinarySearch<string>(
+                                s_elementsName,
+                                reader.LocalName
+                            );
                             if (iElement >= 0)
                             {
-                                s_parseElements[iElement](reader, engine, possibleElements, ssmlAttributes, fIgnore);
+                                s_parseElements[iElement]
+                                    (reader, engine, possibleElements, ssmlAttributes, fIgnore);
                             }
                             else
                             {
@@ -253,7 +303,11 @@ namespace System.Speech.Internal.Synthesis
                                 }
                                 else
                                 {
-                                    engine.ProcessUnknownElement(ssmlAttributes._voice, ref ssmlAttributes._fragmentState, reader);
+                                    engine.ProcessUnknownElement(
+                                        ssmlAttributes._voice,
+                                        ref ssmlAttributes._fragmentState,
+                                        reader
+                                    );
                                     continue;
                                 }
                             }
@@ -263,7 +317,13 @@ namespace System.Speech.Internal.Synthesis
                         case XmlNodeType.Text:
                             if ((possibleElements & SsmlElement.Text) != 0)
                             {
-                                engine.ProcessText(reader.Value, ssmlAttributes._voice, ref ssmlAttributes._fragmentState, GetColumnPosition(reader), fIgnore);
+                                engine.ProcessText(
+                                    reader.Value,
+                                    ssmlAttributes._voice,
+                                    ref ssmlAttributes._fragmentState,
+                                    GetColumnPosition(reader),
+                                    fIgnore
+                                );
                             }
                             else
                             {
@@ -279,18 +339,30 @@ namespace System.Speech.Internal.Synthesis
                             reader.Read();
                             break;
                     }
-                }
-                while (reader.NodeType != XmlNodeType.EndElement && reader.NodeType != XmlNodeType.None);
+                } while (
+                    reader.NodeType != XmlNodeType.EndElement && reader.NodeType != XmlNodeType.None
+                );
             }
 
             // Flush any remaining attributes from the previous element list
             if (extraAttributes != null && extraAttributes.Count > 0)
             {
-                engine.EndProcessUnknownAttributes(ssmlAttributes._voice, ref ssmlAttributes._fragmentState, sElement, extraAttributes);
+                engine.EndProcessUnknownAttributes(
+                    ssmlAttributes._voice,
+                    ref ssmlAttributes._fragmentState,
+                    sElement,
+                    extraAttributes
+                );
             }
         }
 
-        private static void ParseAudio(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseAudio(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Audio, reader.Name);
@@ -318,7 +390,12 @@ namespace System.Speech.Internal.Synthesis
                             // Audio element
                             try
                             {
-                                engine.ProcessAudio(ssmlAttributes._voice, sUri, ssmlAttributes._baseUri, fIgnore);
+                                engine.ProcessAudio(
+                                    ssmlAttributes._voice,
+                                    sUri,
+                                    ssmlAttributes._baseUri,
+                                    fIgnore
+                                );
                             }
                             catch (IOException)
                             {
@@ -335,7 +412,10 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
@@ -344,14 +424,32 @@ namespace System.Speech.Internal.Synthesis
             ssmlAttributes._fRenderDesc = fRenderDesc;
 
             // Process child elements.
-            SsmlElement possibleChild = SsmlElement.Desc | SsmlElement.ParagraphOrSentence | SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes);
-            ProcessElement(reader, engine, sElement, possibleChild, ssmlAttributes, !fRenderDesc, extraAttributes);
+            SsmlElement possibleChild =
+                SsmlElement.Desc
+                | SsmlElement.ParagraphOrSentence
+                | SsmlElement.AudioMarkTextWithStyle
+                | ElementPromptEngine(ssmlAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                possibleChild,
+                ssmlAttributes,
+                !fRenderDesc,
+                extraAttributes
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
         }
 
-        private static void ParseBreak(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseBreak(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Break, reader.Name);
@@ -398,9 +496,13 @@ namespace System.Speech.Internal.Synthesis
                                 else
                                 {
                                     // SSML Spec if both strength and time are supplied, ignore strength
-                                    if (ssmlAttributes._fragmentState.Emphasis != (int)EmphasisBreak.None)
+                                    if (
+                                        ssmlAttributes._fragmentState.Emphasis
+                                        != (int)EmphasisBreak.None
+                                    )
                                     {
-                                        ssmlAttributes._fragmentState.Emphasis = (int)s_breakEmphasis[pos];
+                                        ssmlAttributes._fragmentState.Emphasis = (int)
+                                            s_breakEmphasis[pos];
                                     }
                                 }
                             }
@@ -411,13 +513,22 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidSpeakAttribute, reader.Name, "break");
                 }
             }
 
-            engine.ProcessBreak(ssmlAttributes._voice, ref ssmlAttributes._fragmentState, (EmphasisBreak)ssmlAttributes._fragmentState.Emphasis, ssmlAttributes._fragmentState.Duration, fIgnore);
+            engine.ProcessBreak(
+                ssmlAttributes._voice,
+                ref ssmlAttributes._fragmentState,
+                (EmphasisBreak)ssmlAttributes._fragmentState.Emphasis,
+                ssmlAttributes._fragmentState.Duration,
+                fIgnore
+            );
 
             // No Children allowed .
             ProcessElement(reader, engine, sElement, 0, ssmlAttributes, true, extraAttributes);
@@ -426,7 +537,13 @@ namespace System.Speech.Internal.Synthesis
             engine.EndElement();
         }
 
-        private static void ParseDesc(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseDesc(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Desc, reader.Name);
@@ -467,7 +584,10 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
@@ -476,13 +596,27 @@ namespace System.Speech.Internal.Synthesis
             engine.ProcessDesc(culture);
 
             // Process child elements.
-            ProcessElement(reader, engine, sElement, SsmlElement.Text, ssmlAttributes, true, extraAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                SsmlElement.Text,
+                ssmlAttributes,
+                true,
+                extraAttributes
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
         }
 
-        private static void ParseEmphasis(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseEmphasis(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Emphasis, reader.Name);
@@ -526,23 +660,44 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
 
-            engine.ProcessEmphasis(!string.IsNullOrEmpty(sLevel), (EmphasisWord)ssmlAttributes._fragmentState.Emphasis);
+            engine.ProcessEmphasis(
+                !string.IsNullOrEmpty(sLevel),
+                (EmphasisWord)ssmlAttributes._fragmentState.Emphasis
+            );
 
             // Process child elements.
-            SsmlElement possibleChild = SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes);
-            ProcessElement(reader, engine, sElement, possibleChild, ssmlAttributes, fIgnore, extraAttributes);
+            SsmlElement possibleChild =
+                SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                possibleChild,
+                ssmlAttributes,
+                fIgnore,
+                extraAttributes
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
         }
 
-        private static void ParseMark(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseMark(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Mark, reader.Name);
@@ -574,7 +729,10 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
@@ -586,7 +744,12 @@ namespace System.Speech.Internal.Synthesis
             }
 
             ssmlAttributes._fragmentState.Action = TtsEngineAction.Bookmark;
-            engine.ProcessMark(ssmlAttributes._voice, ref ssmlAttributes._fragmentState, sName, fIgnore);
+            engine.ProcessMark(
+                ssmlAttributes._voice,
+                ref ssmlAttributes._fragmentState,
+                sName,
+                fIgnore
+            );
 
             // No Children allowed.
             ProcessElement(reader, engine, sElement, 0, ssmlAttributes, true, extraAttributes);
@@ -595,7 +758,13 @@ namespace System.Speech.Internal.Synthesis
             engine.EndElement();
         }
 
-        private static void ParseMetaData(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseMetaData(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             ValidateElement(element, SsmlElement.MetaData, reader.Name);
@@ -614,19 +783,27 @@ namespace System.Speech.Internal.Synthesis
                     {
                         cEndNode++;
                     }
-                    if (reader.NodeType == XmlNodeType.EndElement || reader.NodeType == XmlNodeType.None)
+                    if (
+                        reader.NodeType == XmlNodeType.EndElement
+                        || reader.NodeType == XmlNodeType.None
+                    )
                     {
                         cEndNode--;
                     }
-                }
-                while (cEndNode > 0);
+                } while (cEndNode > 0);
 
                 // Consume the end element
                 System.Diagnostics.Debug.Assert(reader.NodeType == XmlNodeType.EndElement);
             }
         }
 
-        private static void ParseParagraph(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseParagraph(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Paragraph, reader.Name);
@@ -634,7 +811,13 @@ namespace System.Speech.Internal.Synthesis
             ParseTextBlock(reader, engine, true, sElement, ssmAttributesParent, fIgnore);
         }
 
-        private static void ParseSentence(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseSentence(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Sentence, reader.Name);
@@ -642,7 +825,14 @@ namespace System.Speech.Internal.Synthesis
             ParseTextBlock(reader, engine, false, sElement, ssmAttributesParent, fIgnore);
         }
 
-        private static void ParseTextBlock(XmlReader reader, ISsmlParser engine, bool isParagraph, string sElement, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseTextBlock(
+            XmlReader reader,
+            ISsmlParser engine,
+            bool isParagraph,
+            string sElement,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Make a local copy of the ssmlAttribute
             SsmlAttributes ssmlAttributes = new();
@@ -679,27 +869,48 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
 
             // Try to change the voice
-            bool fNewCulture = culture != null && culture.LCID != ssmlAttributes._fragmentState.LangId;
-            ssmlAttributes._voice = engine.ProcessTextBlock(isParagraph, ssmlAttributes._voice, ref ssmlAttributes._fragmentState, culture, fNewCulture, ssmlAttributes._gender, ssmlAttributes._age);
+            bool fNewCulture =
+                culture != null && culture.LCID != ssmlAttributes._fragmentState.LangId;
+            ssmlAttributes._voice = engine.ProcessTextBlock(
+                isParagraph,
+                ssmlAttributes._voice,
+                ref ssmlAttributes._fragmentState,
+                culture,
+                fNewCulture,
+                ssmlAttributes._gender,
+                ssmlAttributes._age
+            );
             if (fNewCulture)
             {
                 ssmlAttributes._fragmentState.LangId = culture.LCID;
             }
 
             // Process child elements.
-            SsmlElement possibleChild = SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes);
+            SsmlElement possibleChild =
+                SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes);
             if (isParagraph)
             {
                 possibleChild |= SsmlElement.Sentence;
             }
-            ProcessElement(reader, engine, sElement, possibleChild, ssmlAttributes, fIgnore, extraAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                possibleChild,
+                ssmlAttributes,
+                fIgnore,
+                extraAttributes
+            );
 
             engine.EndProcessTextBlock(isParagraph);
 
@@ -707,7 +918,13 @@ namespace System.Speech.Internal.Synthesis
             engine.EndElement();
         }
 
-        private static void ParsePhoneme(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParsePhoneme(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Phoneme, reader.Name);
@@ -753,7 +970,9 @@ namespace System.Speech.Internal.Synthesis
                                     break;
 
                                 default:
-                                    throw new FormatException(SR.Get(SRID.UnsupportedAlphabet, sAlphabet));
+                                    throw new FormatException(
+                                        SR.Get(SRID.UnsupportedAlphabet, sAlphabet)
+                                    );
                             }
                             break;
 
@@ -766,7 +985,10 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
@@ -783,11 +1005,15 @@ namespace System.Speech.Internal.Synthesis
                 switch (alphabet)
                 {
                     case AlphabetType.Sapi:
-                        aPhoneIds = PhonemeConverter.ConvertPronToId(sPh, ssmlAttributes._fragmentState.LangId).ToCharArray();
+                        aPhoneIds = PhonemeConverter
+                            .ConvertPronToId(sPh, ssmlAttributes._fragmentState.LangId)
+                            .ToCharArray();
                         break;
 
                     case AlphabetType.Ups:
-                        aPhoneIds = PhonemeConverter.UpsConverter.ConvertPronToId(sPh).ToCharArray();
+                        aPhoneIds = PhonemeConverter
+                            .UpsConverter.ConvertPronToId(sPh)
+                            .ToCharArray();
                         alphabet = AlphabetType.Ipa;
                         break;
 
@@ -808,7 +1034,9 @@ namespace System.Speech.Internal.Synthesis
                             {
                                 // try with sapi (backward compatibility)
                                 // if not a sapi phoneme either throw the IPA exception
-                                aPhoneIds = PhonemeConverter.ConvertPronToId(sPh, ssmlAttributes._fragmentState.LangId).ToCharArray();
+                                aPhoneIds = PhonemeConverter
+                                    .ConvertPronToId(sPh, ssmlAttributes._fragmentState.LangId)
+                                    .ToCharArray();
                                 alphabet = AlphabetType.Sapi;
                             }
                         }
@@ -823,13 +1051,27 @@ namespace System.Speech.Internal.Synthesis
             engine.ProcessPhoneme(ref ssmlAttributes._fragmentState, alphabet, sPh, aPhoneIds);
 
             // Process child elements.
-            ProcessElement(reader, engine, sElement, SsmlElement.Text, ssmlAttributes, fIgnore, extraAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                SsmlElement.Text,
+                ssmlAttributes,
+                fIgnore,
+                extraAttributes
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
         }
 
-        private static void ParseProsody(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseProsody(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Prosody, reader.Name);
@@ -847,7 +1089,10 @@ namespace System.Speech.Internal.Synthesis
             string sRate = null;
             string sDuration = null;
             string sVolume = null;
-            Prosody prosody = ssmlAttributes._fragmentState.Prosody != null ? ssmlAttributes._fragmentState.Prosody.Clone() : new Prosody();
+            Prosody prosody =
+                ssmlAttributes._fragmentState.Prosody != null
+                    ? ssmlAttributes._fragmentState.Prosody.Clone()
+                    : new Prosody();
             while (reader.MoveToNextAttribute())
             {
                 // Namespace must be empty
@@ -858,19 +1103,43 @@ namespace System.Speech.Internal.Synthesis
                     switch (reader.LocalName)
                     {
                         case "pitch":
-                            isInvalidAttribute = ParseNumberHz(reader, ref sPitch, s_pitchNames, s_pitchWords, ref prosody._pitch);
+                            isInvalidAttribute = ParseNumberHz(
+                                reader,
+                                ref sPitch,
+                                s_pitchNames,
+                                s_pitchWords,
+                                ref prosody._pitch
+                            );
                             break;
 
                         case "range":
-                            isInvalidAttribute = ParseNumberHz(reader, ref sRange, s_rangeNames, s_rangeWords, ref prosody._range);
+                            isInvalidAttribute = ParseNumberHz(
+                                reader,
+                                ref sRange,
+                                s_rangeNames,
+                                s_rangeWords,
+                                ref prosody._range
+                            );
                             break;
 
                         case "rate":
-                            isInvalidAttribute = ParseNumberRelative(reader, ref sRate, s_rateNames, s_rateWords, ref prosody._rate);
+                            isInvalidAttribute = ParseNumberRelative(
+                                reader,
+                                ref sRate,
+                                s_rateNames,
+                                s_rateWords,
+                                ref prosody._rate
+                            );
                             break;
 
                         case "volume":
-                            isInvalidAttribute = ParseNumberRelative(reader, ref sVolume, s_volumeNames, s_volumeWords, ref prosody._volume);
+                            isInvalidAttribute = ParseNumberRelative(
+                                reader,
+                                ref sVolume,
+                                s_volumeNames,
+                                s_volumeWords,
+                                ref prosody._volume
+                            );
                             break;
 
                         case "duration":
@@ -881,7 +1150,10 @@ namespace System.Speech.Internal.Synthesis
                         case "contour":
                             CheckForDuplicates(ref sContour, reader);
                             prosody.SetContourPoints(ParseContour(sContour));
-                            if (prosody.GetContourPoints() == null) { isInvalidAttribute = true; }
+                            if (prosody.GetContourPoints() == null)
+                            {
+                                isInvalidAttribute = true;
+                            }
                             break;
 
                         default:
@@ -889,15 +1161,29 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
             }
 
-            if (string.IsNullOrEmpty(sPitch) && string.IsNullOrEmpty(sContour) && string.IsNullOrEmpty(sRange) && string.IsNullOrEmpty(sRate) && string.IsNullOrEmpty(sDuration) && string.IsNullOrEmpty(sVolume))
+            if (
+                string.IsNullOrEmpty(sPitch)
+                && string.IsNullOrEmpty(sContour)
+                && string.IsNullOrEmpty(sRange)
+                && string.IsNullOrEmpty(sRate)
+                && string.IsNullOrEmpty(sDuration)
+                && string.IsNullOrEmpty(sVolume)
+            )
             {
-                ThrowFormatException(SRID.MissingRequiredAttribute, "pitch, contour, range, rate, duration, volume", "prosody");
+                ThrowFormatException(
+                    SRID.MissingRequiredAttribute,
+                    "pitch, contour, range, rate, duration, volume",
+                    "prosody"
+                );
             }
 
             ssmlAttributes._fragmentState.Prosody = prosody;
@@ -905,14 +1191,31 @@ namespace System.Speech.Internal.Synthesis
             engine.ProcessProsody(sPitch, sRange, sRate, sVolume, sDuration, sContour);
 
             // Process child elements.
-            SsmlElement possibleChild = SsmlElement.ParagraphOrSentence | SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes);
-            ProcessElement(reader, engine, sElement, possibleChild, ssmlAttributes, fIgnore, extraAttributes);
+            SsmlElement possibleChild =
+                SsmlElement.ParagraphOrSentence
+                | SsmlElement.AudioMarkTextWithStyle
+                | ElementPromptEngine(ssmlAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                possibleChild,
+                ssmlAttributes,
+                fIgnore,
+                extraAttributes
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
         }
 
-        private static void ParseSayAs(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseSayAs(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.SayAs, reader.Name);
@@ -958,7 +1261,10 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
@@ -975,13 +1281,27 @@ namespace System.Speech.Internal.Synthesis
             engine.ProcessSayAs(sInterpretAs, sFormat, sDetail);
 
             // Process child elements.
-            ProcessElement(reader, engine, sElement, SsmlElement.Text, ssmlAttributes, fIgnore, extraAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                SsmlElement.Text,
+                ssmlAttributes,
+                fIgnore,
+                extraAttributes
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
         }
 
-        private static void ParseSub(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseSub(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Sub, reader.Name);
@@ -1010,7 +1330,11 @@ namespace System.Speech.Internal.Synthesis
                             XmlTextReader textReader = reader as XmlTextReader;
                             if (textReader != null && engine.Ssml != null)
                             {
-                                textPosition = engine.Ssml.IndexOf(reader.Value, textReader.LinePosition + reader.LocalName.Length, StringComparison.Ordinal);
+                                textPosition = engine.Ssml.IndexOf(
+                                    reader.Value,
+                                    textReader.LinePosition + reader.LocalName.Length,
+                                    StringComparison.Ordinal
+                                );
                             }
                             break;
 
@@ -1019,7 +1343,10 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
@@ -1030,15 +1357,36 @@ namespace System.Speech.Internal.Synthesis
                 ThrowFormatException(SRID.MissingRequiredAttribute, "alias", "sub");
             }
 
-            engine.ProcessSub(sAlias, ssmlAttributes._voice, ref ssmlAttributes._fragmentState, textPosition, fIgnore);
+            engine.ProcessSub(
+                sAlias,
+                ssmlAttributes._voice,
+                ref ssmlAttributes._fragmentState,
+                textPosition,
+                fIgnore
+            );
 
             // The only allowed children element is text. Ignore it
-            ProcessElement(reader, engine, sElement, SsmlElement.Text, ssmlAttributes, true, extraAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                SsmlElement.Text,
+                ssmlAttributes,
+                true,
+                extraAttributes
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
         }
-        private static void ParseVoice(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+
+        private static void ParseVoice(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Voice, reader.Name);
@@ -1158,7 +1506,13 @@ namespace System.Speech.Internal.Synthesis
                             {
                                 localUnknownNamespaces ??= new List<SsmlXmlAttribute>();
 
-                                SsmlXmlAttribute ns = new(reader.Prefix, reader.LocalName, reader.Value, reader.NamespaceURI);
+                                SsmlXmlAttribute ns =
+                                    new(
+                                        reader.Prefix,
+                                        reader.LocalName,
+                                        reader.Value,
+                                        reader.NamespaceURI
+                                    );
                                 localUnknownNamespaces.Add(ns);
                                 ssmlAttributes._unknownNamespaces.Add(ns);
                             }
@@ -1166,11 +1520,21 @@ namespace System.Speech.Internal.Synthesis
                         else
                         {
                             extraAttributesVoice ??= new List<SsmlXmlAttribute>();
-                            extraAttributesVoice.Add(new SsmlXmlAttribute(reader.Prefix, reader.LocalName, reader.Value, reader.NamespaceURI));
+                            extraAttributesVoice.Add(
+                                new SsmlXmlAttribute(
+                                    reader.Prefix,
+                                    reader.LocalName,
+                                    reader.Value,
+                                    reader.NamespaceURI
+                                )
+                            );
                         }
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
@@ -1185,20 +1549,50 @@ namespace System.Speech.Internal.Synthesis
                 }
             }
 
-            if (string.IsNullOrEmpty(sCulture) && string.IsNullOrEmpty(sGender) && string.IsNullOrEmpty(sAge) && string.IsNullOrEmpty(sVariant) && string.IsNullOrEmpty(sName) && string.IsNullOrEmpty(xmlns))
+            if (
+                string.IsNullOrEmpty(sCulture)
+                && string.IsNullOrEmpty(sGender)
+                && string.IsNullOrEmpty(sAge)
+                && string.IsNullOrEmpty(sVariant)
+                && string.IsNullOrEmpty(sName)
+                && string.IsNullOrEmpty(xmlns)
+            )
             {
-                ThrowFormatException(SRID.MissingRequiredAttribute, "'xml:lang' or 'gender' or 'age' or 'variant' or 'name'", "voice");
+                ThrowFormatException(
+                    SRID.MissingRequiredAttribute,
+                    "'xml:lang' or 'gender' or 'age' or 'variant' or 'name'",
+                    "voice"
+                );
             }
 
             // Try to change the voice
             culture ??= new CultureInfo(ssmlAttributes._fragmentState.LangId);
             bool fNewCulture = culture.LCID != ssmlAttributes._fragmentState.LangId;
-            ssmlAttributes._voice = engine.ProcessVoice(sName, culture, ssmlAttributes._gender, ssmlAttributes._age, variant, fNewCulture, localUnknownNamespaces);
+            ssmlAttributes._voice = engine.ProcessVoice(
+                sName,
+                culture,
+                ssmlAttributes._gender,
+                ssmlAttributes._age,
+                variant,
+                fNewCulture,
+                localUnknownNamespaces
+            );
             ssmlAttributes._fragmentState.LangId = culture.LCID;
 
             // Process child elements.
-            SsmlElement possibleChild = SsmlElement.ParagraphOrSentence | SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes);
-            ProcessElement(reader, engine, sElement, possibleChild, ssmlAttributes, fIgnore, extraAttributes);
+            SsmlElement possibleChild =
+                SsmlElement.ParagraphOrSentence
+                | SsmlElement.AudioMarkTextWithStyle
+                | ElementPromptEngine(ssmlAttributes);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                possibleChild,
+                ssmlAttributes,
+                fIgnore,
+                extraAttributes
+            );
 
             // remove the local namespaces
             if (localUnknownNamespaces != null)
@@ -1213,7 +1607,13 @@ namespace System.Speech.Internal.Synthesis
             engine.EndElement();
         }
 
-        private static void ParseLexicon(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseLexicon(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(element, SsmlElement.Lexicon, reader.Name);
@@ -1249,7 +1649,10 @@ namespace System.Speech.Internal.Synthesis
                             break;
                     }
                 }
-                if (isInvalidAttribute && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes))
+                if (
+                    isInvalidAttribute
+                    && !ssmlAttributes.AddUnknowAttribute(reader, ref extraAttributes)
+                )
                 {
                     ThrowFormatException(SRID.InvalidItemAttribute, reader.Name);
                 }
@@ -1282,7 +1685,15 @@ namespace System.Speech.Internal.Synthesis
         private delegate bool ProcessPromptEngine0(object voice);
         private delegate bool ProcessPromptEngine1(object voice, string value);
 
-        private static void ParsePromptEngine0(XmlReader reader, ISsmlParser engine, SsmlElement elementAllowed, SsmlElement element, ProcessPromptEngine0 process, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParsePromptEngine0(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement elementAllowed,
+            SsmlElement element,
+            ProcessPromptEngine0 process,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(elementAllowed, element, reader.Name);
@@ -1313,10 +1724,27 @@ namespace System.Speech.Internal.Synthesis
             }
 
             // Process Children
-            ProcessElement(reader, engine, sElement, SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes), ssmlAttributes, fIgnore, null);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes),
+                ssmlAttributes,
+                fIgnore,
+                null
+            );
         }
 
-        private static string ParsePromptEngine1(XmlReader reader, ISsmlParser engine, SsmlElement elementAllowed, SsmlElement element, string attribute, ProcessPromptEngine1 process, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static string ParsePromptEngine1(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement elementAllowed,
+            SsmlElement element,
+            string attribute,
+            ProcessPromptEngine1 process,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
             string sElement = ValidateElement(elementAllowed, element, reader.Name);
@@ -1348,16 +1776,38 @@ namespace System.Speech.Internal.Synthesis
             }
 
             // No Children allowed
-            ProcessElement(reader, engine, sElement, SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes), ssmlAttributes, fIgnore, null);
+            ProcessElement(
+                reader,
+                engine,
+                sElement,
+                SsmlElement.AudioMarkTextWithStyle | ElementPromptEngine(ssmlAttributes),
+                ssmlAttributes,
+                fIgnore,
+                null
+            );
             return value;
         }
 
-        private static void ParsePromptOutput(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParsePromptOutput(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Increase the ref count for the Prompt output
             ssmAttributesParent._cPromptOutput++;
 
-            ParsePromptEngine0(reader, engine, element, SsmlElement.PromptEngineOutput, new ProcessPromptEngine0(engine.BeginPromptEngineOutput), ssmAttributesParent, fIgnore);
+            ParsePromptEngine0(
+                reader,
+                engine,
+                element,
+                SsmlElement.PromptEngineOutput,
+                new ProcessPromptEngine0(engine.BeginPromptEngineOutput),
+                ssmAttributesParent,
+                fIgnore
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
@@ -1367,18 +1817,42 @@ namespace System.Speech.Internal.Synthesis
             engine.EndPromptEngineOutput(ssmAttributesParent._voice);
         }
 
-        private static void ParseDiv(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseDiv(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
-            ParsePromptEngine0(reader, engine, element, SsmlElement.PromptEngineDiv, new ProcessPromptEngine0(engine.ProcessPromptEngineDiv), ssmAttributesParent, fIgnore);
+            ParsePromptEngine0(
+                reader,
+                engine,
+                element,
+                SsmlElement.PromptEngineDiv,
+                new ProcessPromptEngine0(engine.ProcessPromptEngineDiv),
+                ssmAttributesParent,
+                fIgnore
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
         }
 
-        private static void ParseDatabase(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseDatabase(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
             // Validate the SSML markup
-            string sElement = ValidateElement(element, SsmlElement.PromptEngineDatabase, reader.Name);
+            string sElement = ValidateElement(
+                element,
+                SsmlElement.PromptEngineDatabase,
+                reader.Name
+            );
 
             // Make a local copy of the ssmlAttribute
             SsmlAttributes ssmlAttributes = new();
@@ -1434,35 +1908,94 @@ namespace System.Speech.Internal.Synthesis
             engine.EndElement();
         }
 
-        private static void ParseId(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseId(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
-            ParsePromptEngine1(reader, engine, element, SsmlElement.PromptEngineId, "id", new ProcessPromptEngine1(engine.ProcessPromptEngineId), ssmAttributesParent, fIgnore);
+            ParsePromptEngine1(
+                reader,
+                engine,
+                element,
+                SsmlElement.PromptEngineId,
+                "id",
+                new ProcessPromptEngine1(engine.ProcessPromptEngineId),
+                ssmAttributesParent,
+                fIgnore
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
         }
 
-        private static void ParseTts(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseTts(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
-            ParsePromptEngine0(reader, engine, element, SsmlElement.PromptEngineTTS, new ProcessPromptEngine0(engine.BeginPromptEngineTts), ssmAttributesParent, fIgnore);
+            ParsePromptEngine0(
+                reader,
+                engine,
+                element,
+                SsmlElement.PromptEngineTTS,
+                new ProcessPromptEngine0(engine.BeginPromptEngineTts),
+                ssmAttributesParent,
+                fIgnore
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
             engine.EndPromptEngineTts(ssmAttributesParent._voice);
         }
 
-        private static void ParseWithTag(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseWithTag(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
-            string tag = ParsePromptEngine1(reader, engine, element, SsmlElement.PromptEngineWithTag, "tag", new ProcessPromptEngine1(engine.BeginPromptEngineWithTag), ssmAttributesParent, fIgnore);
+            string tag = ParsePromptEngine1(
+                reader,
+                engine,
+                element,
+                SsmlElement.PromptEngineWithTag,
+                "tag",
+                new ProcessPromptEngine1(engine.BeginPromptEngineWithTag),
+                ssmAttributesParent,
+                fIgnore
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
             engine.EndPromptEngineWithTag(ssmAttributesParent._voice, tag);
         }
 
-        private static void ParseRule(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmAttributesParent, bool fIgnore)
+        private static void ParseRule(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmAttributesParent,
+            bool fIgnore
+        )
         {
-            string name = ParsePromptEngine1(reader, engine, element, SsmlElement.PromptEngineRule, "name", new ProcessPromptEngine1(engine.BeginPromptEngineRule), ssmAttributesParent, fIgnore);
+            string name = ParsePromptEngine1(
+                reader,
+                engine,
+                element,
+                SsmlElement.PromptEngineRule,
+                "name",
+                new ProcessPromptEngine1(engine.BeginPromptEngineRule),
+                ssmAttributesParent,
+                fIgnore
+            );
 
             // Notify the engine that the element is processed
             engine.EndElement();
@@ -1503,8 +2036,7 @@ namespace System.Speech.Internal.Synthesis
                     duration = (int)(fDuration + 0.5);
                 }
             }
-            else
-                if ((pos = time.IndexOf('s')) > 0 && time.Length == pos + 1)
+            else if ((pos = time.IndexOf('s')) > 0 && time.Length == pos + 1)
             {
                 if (!float.TryParse(time.Substring(0, pos), out fDuration))
                 {
@@ -1528,7 +2060,9 @@ namespace System.Speech.Internal.Synthesis
             {
                 while (start < achContour.Length)
                 {
-                    bool percent, ignored, hz;
+                    bool percent,
+                        ignored,
+                        hz;
                     // Form is (0%, +20Hz)
                     if ((start = NextChar(achContour, start, '(', false, out ignored)) < 0)
                     {
@@ -1543,11 +2077,25 @@ namespace System.Speech.Internal.Synthesis
                     ProsodyNumber target = new();
 
                     // Parse the 2 numbers
-                    if (!percent || !TryParseNumber(contour.Substring(start, comma - (start + 1)), ref timePosition) || timePosition.SsmlAttributeId == ProsodyNumber.AbsoluteNumber)
+                    if (
+                        !percent
+                        || !TryParseNumber(
+                            contour.Substring(start, comma - (start + 1)),
+                            ref timePosition
+                        )
+                        || timePosition.SsmlAttributeId == ProsodyNumber.AbsoluteNumber
+                    )
                     {
                         return null;
                     }
-                    if (!TryParseHz(contour.Substring(comma, parenthesis - (comma + 1)), ref target, true, out hz))
+                    if (
+                        !TryParseHz(
+                            contour.Substring(comma, parenthesis - (comma + 1)),
+                            ref target,
+                            true,
+                            out hz
+                        )
+                    )
                     {
                         return null;
                     }
@@ -1558,7 +2106,9 @@ namespace System.Speech.Internal.Synthesis
                         // fake a zero entry if none is provided by duplicating the first entry
                         if (timePosition.Number > 0 && timePosition.Number < 100)
                         {
-                            points.Add(new ContourPoint(0, target.Number, ContourPointChangeType.Hz));
+                            points.Add(
+                                new ContourPoint(0, target.Number, ContourPointChangeType.Hz)
+                            );
                         }
                     }
                     else
@@ -1573,7 +2123,13 @@ namespace System.Speech.Internal.Synthesis
 
                     if (timePosition.Number >= 0 && timePosition.Number <= 1)
                     {
-                        points.Add(new ContourPoint(timePosition.Number, target.Number, (hz ? ContourPointChangeType.Hz : ContourPointChangeType.Percentage)));
+                        points.Add(
+                            new ContourPoint(
+                                timePosition.Number,
+                                target.Number,
+                                (hz ? ContourPointChangeType.Hz : ContourPointChangeType.Percentage)
+                            )
+                        );
                     }
                     start = parenthesis;
                 }
@@ -1591,17 +2147,37 @@ namespace System.Speech.Internal.Synthesis
             // Add a 100% if necessary
             if (!points[points.Count - 1].Start.Equals(1.0))
             {
-                points.Add(new ContourPoint(1, points[points.Count - 1].Change, points[points.Count - 1].ChangeType));
+                points.Add(
+                    new ContourPoint(
+                        1,
+                        points[points.Count - 1].Change,
+                        points[points.Count - 1].ChangeType
+                    )
+                );
             }
             return points.ToArray();
         }
 
-        private static int NextChar(char[] ach, int start, char expected, bool skipDigit, out bool percent)
+        private static int NextChar(
+            char[] ach,
+            int start,
+            char expected,
+            bool skipDigit,
+            out bool percent
+        )
         {
             percent = false;
 
             // skip the whitespace
-            while (start < ach.Length && (ach[start] == ' ' || ach[start] == '\t' || ach[start] == '\n' || ach[start] == '\r'))
+            while (
+                start < ach.Length
+                && (
+                    ach[start] == ' '
+                    || ach[start] == '\t'
+                    || ach[start] == '\n'
+                    || ach[start] == '\r'
+                )
+            )
             {
                 start++;
             }
@@ -1609,13 +2185,33 @@ namespace System.Speech.Internal.Synthesis
             // skip the digits
             if (skipDigit)
             {
-                while (start < ach.Length && ach[start] != expected && ((percent = ach[start] == '%') || char.IsDigit(ach[start]) || ach[start] == 'H' || ach[start] == 'z' || ach[start] == '.' || ach[start] == '+' || ach[start] == '-'))
+                while (
+                    start < ach.Length
+                    && ach[start] != expected
+                    && (
+                        (percent = ach[start] == '%')
+                        || char.IsDigit(ach[start])
+                        || ach[start] == 'H'
+                        || ach[start] == 'z'
+                        || ach[start] == '.'
+                        || ach[start] == '+'
+                        || ach[start] == '-'
+                    )
+                )
                 {
                     start++;
                 }
 
                 // skip the trailing white spaces
-                while (start < ach.Length && (ach[start] == ' ' || ach[start] == '\t' || ach[start] == '\n' || ach[start] == '\r'))
+                while (
+                    start < ach.Length
+                    && (
+                        ach[start] == ' '
+                        || ach[start] == '\t'
+                        || ach[start] == '\n'
+                        || ach[start] == '\r'
+                    )
+                )
                 {
                     start++;
                 }
@@ -1635,7 +2231,13 @@ namespace System.Speech.Internal.Synthesis
             return start + 1;
         }
 
-        private static bool ParseNumberHz(XmlReader reader, ref string attribute, string[] attributeValues, int[] attributeConst, ref ProsodyNumber number)
+        private static bool ParseNumberHz(
+            XmlReader reader,
+            ref string attribute,
+            string[] attributeValues,
+            int[] attributeConst,
+            ref ProsodyNumber number
+        )
         {
             bool isInvalidAttribute = false;
             bool isHz;
@@ -1656,7 +2258,13 @@ namespace System.Speech.Internal.Synthesis
             return isInvalidAttribute;
         }
 
-        private static bool ParseNumberRelative(XmlReader reader, ref string attribute, string[] attributeValues, int[] attributeConst, ref ProsodyNumber number)
+        private static bool ParseNumberRelative(
+            XmlReader reader,
+            ref string attribute,
+            string[] attributeValues,
+            int[] attributeConst,
+            ref ProsodyNumber number
+        )
         {
             bool isInvalidAttribute = false;
 
@@ -1731,7 +2339,12 @@ namespace System.Speech.Internal.Synthesis
             return fResult;
         }
 
-        private static bool TryParseHz(string sNumber, ref ProsodyNumber number, bool acceptHzRelative, out bool isHz)
+        private static bool TryParseHz(
+            string sNumber,
+            ref ProsodyNumber number,
+            bool acceptHzRelative,
+            out bool isHz
+        )
         {
             isHz = false;
 
@@ -1753,13 +2366,17 @@ namespace System.Speech.Internal.Synthesis
             if (unit != ProsodyUnit.Default)
             {
                 // Try as an Absolute Hz value
-                fResult = TryParseNumber(sNumber.Substring(0, sNumber.Length - 2), ref number) && (acceptHzRelative || number.SsmlAttributeId == ProsodyNumber.AbsoluteNumber);
+                fResult =
+                    TryParseNumber(sNumber.Substring(0, sNumber.Length - 2), ref number)
+                    && (acceptHzRelative || number.SsmlAttributeId == ProsodyNumber.AbsoluteNumber);
                 isHz = true;
             }
             else
             {
                 // Must be a relative number
-                fResult = TryParseNumber(sNumber, ref number) && number.SsmlAttributeId == ProsodyNumber.AbsoluteNumber;
+                fResult =
+                    TryParseNumber(sNumber, ref number)
+                    && number.SsmlAttributeId == ProsodyNumber.AbsoluteNumber;
             }
 
             return fResult;
@@ -1768,7 +2385,11 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Ensure the this element is properly placed in the SSML markup
         /// </summary>
-        private static string ValidateElement(SsmlElement possibleElements, SsmlElement currentElement, string sElement)
+        private static string ValidateElement(
+            SsmlElement possibleElements,
+            SsmlElement currentElement,
+            string sElement
+        )
         {
             if ((possibleElements & currentElement) == 0)
             {
@@ -1788,7 +2409,11 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Throws an Exception with the error specified by the resource ID.
         /// </summary>
-        private static void ThrowFormatException(Exception innerException, SRID id, params object[] args)
+        private static void ThrowFormatException(
+            Exception innerException,
+            SRID id,
+            params object[] args
+        )
         {
             throw new FormatException(SR.Get(id, args), innerException);
         }
@@ -1796,7 +2421,13 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Non speakable element
         /// </summary>
-        private static void NoOp(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmlAttributes, bool fIgnore)
+        private static void NoOp(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmlAttributes,
+            bool fIgnore
+        )
         {
             // No Children allowed .
             ProcessElement(reader, engine, null, 0, ssmlAttributes, true, null);
@@ -1828,7 +2459,10 @@ namespace System.Speech.Internal.Synthesis
             internal short _cPromptOutput;
             internal List<SsmlXmlAttribute> _unknownNamespaces;
 
-            internal bool AddUnknowAttribute(SsmlXmlAttribute attribute, ref List<SsmlXmlAttribute> extraAttributes)
+            internal bool AddUnknowAttribute(
+                SsmlXmlAttribute attribute,
+                ref List<SsmlXmlAttribute> extraAttributes
+            )
             {
                 foreach (SsmlXmlAttribute ns in _unknownNamespaces)
                 {
@@ -1842,14 +2476,24 @@ namespace System.Speech.Internal.Synthesis
                 return false;
             }
 
-            internal bool AddUnknowAttribute(XmlReader reader, ref List<SsmlXmlAttribute> extraAttributes)
+            internal bool AddUnknowAttribute(
+                XmlReader reader,
+                ref List<SsmlXmlAttribute> extraAttributes
+            )
             {
                 foreach (SsmlXmlAttribute ns in _unknownNamespaces)
                 {
                     if (ns._name == reader.Prefix)
                     {
                         extraAttributes ??= new List<SsmlXmlAttribute>();
-                        extraAttributes.Add(new SsmlXmlAttribute(reader.Prefix, reader.LocalName, reader.Value, reader.NamespaceURI));
+                        extraAttributes.Add(
+                            new SsmlXmlAttribute(
+                                reader.Prefix,
+                                reader.LocalName,
+                                reader.Value,
+                                reader.NamespaceURI
+                            )
+                        );
                         return true;
                     }
                 }
@@ -1869,7 +2513,13 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        private delegate void ParseElementDelegates(XmlReader reader, ISsmlParser engine, SsmlElement element, SsmlAttributes ssmlAttributes, bool fIgnore);
+        private delegate void ParseElementDelegates(
+            XmlReader reader,
+            ISsmlParser engine,
+            SsmlElement element,
+            SsmlAttributes ssmlAttributes,
+            bool fIgnore
+        );
 
         #endregion
 
@@ -1904,38 +2554,44 @@ namespace System.Speech.Internal.Synthesis
             "withtag",
         };
 
-        private static readonly ParseElementDelegates[] s_parseElements = new ParseElementDelegates[]
+        private static readonly ParseElementDelegates[] s_parseElements =
+            new ParseElementDelegates[]
             {
-                new ParseElementDelegates (ParseAudio),
-                new ParseElementDelegates (ParseBreak),
-                new ParseElementDelegates (ParseDatabase),
-                new ParseElementDelegates (ParseDesc),
-                new ParseElementDelegates (ParseDiv),
-                new ParseElementDelegates (ParseEmphasis),
-                new ParseElementDelegates (ParseId),
-                new ParseElementDelegates (ParseLexicon),
-                new ParseElementDelegates (ParseMark),
-                new ParseElementDelegates (NoOp),
-                new ParseElementDelegates (ParseMetaData),
-                new ParseElementDelegates (ParseParagraph),
-                new ParseElementDelegates (ParseParagraph),
-                new ParseElementDelegates (ParsePhoneme),
-                new ParseElementDelegates (ParsePromptOutput),
-                new ParseElementDelegates (ParseProsody),
-                new ParseElementDelegates (ParseRule),
-                new ParseElementDelegates (ParseSentence),
-                new ParseElementDelegates (ParseSayAs),
-                new ParseElementDelegates (ParseSentence),
-                new ParseElementDelegates (NoOp),
-                new ParseElementDelegates (ParseSub),
-                new ParseElementDelegates (ParseTts),
-                new ParseElementDelegates (ParseVoice),
-                new ParseElementDelegates (ParseWithTag)
+                new ParseElementDelegates(ParseAudio),
+                new ParseElementDelegates(ParseBreak),
+                new ParseElementDelegates(ParseDatabase),
+                new ParseElementDelegates(ParseDesc),
+                new ParseElementDelegates(ParseDiv),
+                new ParseElementDelegates(ParseEmphasis),
+                new ParseElementDelegates(ParseId),
+                new ParseElementDelegates(ParseLexicon),
+                new ParseElementDelegates(ParseMark),
+                new ParseElementDelegates(NoOp),
+                new ParseElementDelegates(ParseMetaData),
+                new ParseElementDelegates(ParseParagraph),
+                new ParseElementDelegates(ParseParagraph),
+                new ParseElementDelegates(ParsePhoneme),
+                new ParseElementDelegates(ParsePromptOutput),
+                new ParseElementDelegates(ParseProsody),
+                new ParseElementDelegates(ParseRule),
+                new ParseElementDelegates(ParseSentence),
+                new ParseElementDelegates(ParseSayAs),
+                new ParseElementDelegates(ParseSentence),
+                new ParseElementDelegates(NoOp),
+                new ParseElementDelegates(ParseSub),
+                new ParseElementDelegates(ParseTts),
+                new ParseElementDelegates(ParseVoice),
+                new ParseElementDelegates(ParseWithTag),
             };
 
         private static readonly string[] s_breakStrength = new string[]
         {
-            "medium", "none", "strong", "weak", "x-strong", "x-weak"
+            "medium",
+            "none",
+            "strong",
+            "weak",
+            "x-strong",
+            "x-weak",
         };
 
         /// <summary>
@@ -1943,12 +2599,20 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         private static readonly EmphasisBreak[] s_breakEmphasis = new EmphasisBreak[]
         {
-            EmphasisBreak.Medium, EmphasisBreak.None, EmphasisBreak.Strong, EmphasisBreak.Weak, EmphasisBreak.ExtraStrong, EmphasisBreak.ExtraWeak
+            EmphasisBreak.Medium,
+            EmphasisBreak.None,
+            EmphasisBreak.Strong,
+            EmphasisBreak.Weak,
+            EmphasisBreak.ExtraStrong,
+            EmphasisBreak.ExtraWeak,
         };
 
         private static readonly string[] s_emphasisNames = new string[]
         {
-            "moderate", "none", "reduced", "strong"
+            "moderate",
+            "none",
+            "reduced",
+            "strong",
         };
 
         /// <summary>
@@ -1956,7 +2620,10 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         private static readonly EmphasisWord[] s_emphasisWord = new EmphasisWord[]
         {
-            EmphasisWord.Moderate, EmphasisWord.None, EmphasisWord.Reduced, EmphasisWord.Strong
+            EmphasisWord.Moderate,
+            EmphasisWord.None,
+            EmphasisWord.Reduced,
+            EmphasisWord.Strong,
         };
 
         /// <summary>
@@ -1964,12 +2631,22 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         private static readonly int[] s_pitchWords = new int[]
         {
-            (int) ProsodyPitch.Default, (int) ProsodyPitch.High, (int) ProsodyPitch.Low, (int) ProsodyPitch.Medium, (int) ProsodyPitch.ExtraHigh, (int) ProsodyPitch.ExtraLow
+            (int)ProsodyPitch.Default,
+            (int)ProsodyPitch.High,
+            (int)ProsodyPitch.Low,
+            (int)ProsodyPitch.Medium,
+            (int)ProsodyPitch.ExtraHigh,
+            (int)ProsodyPitch.ExtraLow,
         };
 
         private static readonly string[] s_pitchNames = new string[]
         {
-            "default", "high", "low", "medium", "x-high", "x-low",
+            "default",
+            "high",
+            "low",
+            "medium",
+            "x-high",
+            "x-low",
         };
 
         /// <summary>
@@ -1977,12 +2654,22 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         private static readonly int[] s_rangeWords = new int[]
         {
-            (int) ProsodyRange.Default, (int) ProsodyRange.High, (int) ProsodyRange.Low, (int) ProsodyRange.Medium, (int) ProsodyRange.ExtraHigh, (int) ProsodyRange.ExtraLow
+            (int)ProsodyRange.Default,
+            (int)ProsodyRange.High,
+            (int)ProsodyRange.Low,
+            (int)ProsodyRange.Medium,
+            (int)ProsodyRange.ExtraHigh,
+            (int)ProsodyRange.ExtraLow,
         };
 
         private static readonly string[] s_rangeNames = new string[]
         {
-            "default", "high", "low", "medium", "x-high", "x-low",
+            "default",
+            "high",
+            "low",
+            "medium",
+            "x-high",
+            "x-low",
         };
 
         /// <summary>
@@ -1990,12 +2677,22 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         private static readonly int[] s_rateWords = new int[]
         {
-            (int) ProsodyRate.Default, (int) ProsodyRate.Fast, (int) ProsodyRate.Medium, (int) ProsodyRate.Slow, (int) ProsodyRate.ExtraFast, (int) ProsodyRate.ExtraSlow
+            (int)ProsodyRate.Default,
+            (int)ProsodyRate.Fast,
+            (int)ProsodyRate.Medium,
+            (int)ProsodyRate.Slow,
+            (int)ProsodyRate.ExtraFast,
+            (int)ProsodyRate.ExtraSlow,
         };
 
         private static readonly string[] s_rateNames = new string[]
         {
-            "default", "fast", "medium", "slow", "x-fast", "x-slow",
+            "default",
+            "fast",
+            "medium",
+            "slow",
+            "x-fast",
+            "x-slow",
         };
 
         /// <summary>
@@ -2003,18 +2700,31 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         private static readonly int[] s_volumeWords = new int[]
         {
-            (int) ProsodyVolume.Default, (int) ProsodyVolume.Loud, (int) ProsodyVolume.Medium, (int) ProsodyVolume.Silent, (int) ProsodyVolume.Soft, (int) ProsodyVolume.ExtraLoud, (int) ProsodyVolume.ExtraSoft
+            (int)ProsodyVolume.Default,
+            (int)ProsodyVolume.Loud,
+            (int)ProsodyVolume.Medium,
+            (int)ProsodyVolume.Silent,
+            (int)ProsodyVolume.Soft,
+            (int)ProsodyVolume.ExtraLoud,
+            (int)ProsodyVolume.ExtraSoft,
         };
 
         private static readonly string[] s_volumeNames = new string[]
         {
-            "default", "loud", "medium", "silent", "soft", "x-loud", "x-soft",
+            "default",
+            "loud",
+            "medium",
+            "silent",
+            "soft",
+            "x-loud",
+            "x-soft",
         };
 
         private const string xmlNamespace = "http://www.w3.org/XML/1998/namespace";
         private const string xmlNamespaceSsml = "http://www.w3.org/2001/10/synthesis";
         private const string xmlNamespaceXmlns = "http://www.w3.org/2000/xmlns/";
-        private const string xmlNamespacePrompt = "http://schemas.microsoft.com/Speech/2003/03/PromptEngine";
+        private const string xmlNamespacePrompt =
+            "http://schemas.microsoft.com/Speech/2003/03/PromptEngine";
 
         #endregion
     }
@@ -2090,7 +2800,9 @@ namespace System.Speech.Internal.Synthesis
 
         private static readonly string[] s_genderNames = new string[]
         {
-            "female", "male", "neutral"
+            "female",
+            "male",
+            "neutral",
         };
 
         /// <summary>
@@ -2098,7 +2810,9 @@ namespace System.Speech.Internal.Synthesis
         /// </summary>
         private static readonly VoiceGender[] s_genders = new VoiceGender[]
         {
-            VoiceGender.Female, VoiceGender.Male, VoiceGender.Neutral
+            VoiceGender.Female,
+            VoiceGender.Male,
+            VoiceGender.Neutral,
         };
     }
 
@@ -2134,8 +2848,25 @@ namespace System.Speech.Internal.Synthesis
 
         ParagraphOrSentence = Sentence | Paragraph,
 
-        AudioMarkTextWithStyle = Audio | Mark | Break | Emphasis | Phoneme | Prosody | SayAs | Sub | Voice | Text | PromptEngineOutput,
-        PromptEngineChildren = PromptEngineDatabase | PromptEngineDiv | PromptEngineId | PromptEngineTTS | PromptEngineWithTag | PromptEngineRule
+        AudioMarkTextWithStyle =
+            Audio
+            | Mark
+            | Break
+            | Emphasis
+            | Phoneme
+            | Prosody
+            | SayAs
+            | Sub
+            | Voice
+            | Text
+            | PromptEngineOutput,
+        PromptEngineChildren =
+            PromptEngineDatabase
+            | PromptEngineDiv
+            | PromptEngineId
+            | PromptEngineTTS
+            | PromptEngineWithTag
+            | PromptEngineRule,
     }
 
     #endregion

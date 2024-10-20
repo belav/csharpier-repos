@@ -31,11 +31,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
         /// <summary>
         /// Content of the tooltip.
         /// </summary>
-        public string Namespace => string.Format(ServicesVSResources.Namespace_0, Symbol.ContainingNamespace?.ToDisplayString() ?? "global");
+        public string Namespace =>
+            string.Format(
+                ServicesVSResources.Namespace_0,
+                Symbol.ContainingNamespace?.ToDisplayString() ?? "global"
+            );
 
-        private BaseTypeTreeNodeViewModel(INamedTypeSymbol node, IGlyphService glyphService) : base(node, glyphService)
-        {
-        }
+        private BaseTypeTreeNodeViewModel(INamedTypeSymbol node, IGlyphService glyphService)
+            : base(node, glyphService) { }
 
         /// <summary>
         /// Use breadth first search to create the inheritance tree. Only non-generated types in the solution will be included in the tree.
@@ -44,9 +47,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
             IGlyphService glyphService,
             Solution solution,
             INamedTypeSymbol root,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var rootTreeNode = new BaseTypeTreeNodeViewModel(root, glyphService) { IsChecked = false, IsExpanded = true };
+            var rootTreeNode = new BaseTypeTreeNodeViewModel(root, glyphService)
+            {
+                IsChecked = false,
+                IsExpanded = true,
+            };
             var queue = new Queue<BaseTypeTreeNodeViewModel>();
             queue.Enqueue(rootTreeNode);
             while (queue.Any())
@@ -54,11 +62,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
                 var currentTreeNode = queue.Dequeue();
                 var currentTypeSymbol = currentTreeNode.Symbol;
 
-                currentTreeNode.BaseTypeNodes = currentTypeSymbol.Interfaces
-                    .Concat(currentTypeSymbol.BaseType)
-                    .Where(baseType => baseType != null && MemberAndDestinationValidator.IsDestinationValid(solution, baseType, cancellationToken))
+                currentTreeNode.BaseTypeNodes = currentTypeSymbol
+                    .Interfaces.Concat(currentTypeSymbol.BaseType)
+                    .Where(baseType =>
+                        baseType != null
+                        && MemberAndDestinationValidator.IsDestinationValid(
+                            solution,
+                            baseType,
+                            cancellationToken
+                        )
+                    )
                     .OrderBy(baseType => baseType.ToDisplayString())
-                    .Select(baseType => new BaseTypeTreeNodeViewModel(baseType, glyphService) { IsChecked = false, IsExpanded = true })
+                    .Select(baseType => new BaseTypeTreeNodeViewModel(baseType, glyphService)
+                    {
+                        IsChecked = false,
+                        IsExpanded = true,
+                    })
                     .ToImmutableArray();
 
                 foreach (var node in currentTreeNode.BaseTypeNodes)

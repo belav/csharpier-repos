@@ -10,7 +10,12 @@ public sealed class FormValueMappingContext
 {
     private bool _resultSet;
 
-    internal FormValueMappingContext(string acceptMappingScopeName, string? acceptFormName, Type valueType, string parameterName)
+    internal FormValueMappingContext(
+        string acceptMappingScopeName,
+        string? acceptFormName,
+        Type valueType,
+        string parameterName
+    )
     {
         ArgumentNullException.ThrowIfNull(acceptMappingScopeName, nameof(acceptMappingScopeName));
         ArgumentNullException.ThrowIfNull(valueType, nameof(valueType));

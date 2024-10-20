@@ -3,9 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Internal.IL.Stubs;
 using Debug = System.Diagnostics.Debug;
-using System.Threading;
 
 namespace Internal.TypeSystem.Interop
 {
@@ -16,139 +16,92 @@ namespace Internal.TypeSystem.Interop
     public partial class PInvokeDelegateWrapper : MetadataType
     {
         // The type of delegate that will be created from the native function pointer
-        public MetadataType DelegateType
-        {
-            get;
-        }
+        public MetadataType DelegateType { get; }
 
-        public override ModuleDesc Module
-        {
-            get;
-        }
+        public override ModuleDesc Module { get; }
 
         public override string Name
         {
-            get
-            {
-                return "PInvokeDelegateWrapper__" + DelegateType.Name;
-            }
+            get { return "PInvokeDelegateWrapper__" + DelegateType.Name; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "PInvokeDelegateWrapper__" + DelegateType.DiagnosticName;
-            }
+            get { return "PInvokeDelegateWrapper__" + DelegateType.DiagnosticName; }
         }
 
         public override string Namespace
         {
-            get
-            {
-                return "Internal.CompilerGenerated";
-            }
+            get { return "Internal.CompilerGenerated"; }
         }
 
         public override string DiagnosticNamespace
         {
-            get
-            {
-                return "Internal.CompilerGenerated";
-            }
+            get { return "Internal.CompilerGenerated"; }
         }
 
         public override bool IsExplicitLayout
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override PInvokeStringFormat PInvokeStringFormat
         {
-            get
-            {
-                return PInvokeStringFormat.AnsiClass;
-            }
+            get { return PInvokeStringFormat.AnsiClass; }
         }
 
         public override bool IsSequentialLayout
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsBeforeFieldInit
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override MetadataType MetadataBaseType
         {
-            get
-            {
-                return InteropTypes.GetNativeFunctionPointerWrapper(Context);
-            }
+            get { return InteropTypes.GetNativeFunctionPointerWrapper(Context); }
         }
 
         public override DefType BaseType
         {
-            get
-            {
-                return InteropTypes.GetNativeFunctionPointerWrapper(Context);
-            }
+            get { return InteropTypes.GetNativeFunctionPointerWrapper(Context); }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override DefType ContainingType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override DefType[] ExplicitlyImplementedInterfaces
         {
-            get
-            {
-                return Array.Empty<DefType>();
-            }
+            get { return Array.Empty<DefType>(); }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return DelegateType.Context;
-            }
+            get { return DelegateType.Context; }
         }
 
         private InteropStateManager _interopStateManager;
 
-        public PInvokeDelegateWrapper(ModuleDesc owningModule, MetadataType delegateType, InteropStateManager interopStateManager)
+        public PInvokeDelegateWrapper(
+            ModuleDesc owningModule,
+            MetadataType delegateType,
+            InteropStateManager interopStateManager
+        )
         {
             Debug.Assert(delegateType.IsDelegate);
 
@@ -191,7 +144,9 @@ namespace Internal.TypeSystem.Interop
 
         private void InitializeHashCode()
         {
-            var hashCodeBuilder = new Internal.NativeFormat.TypeHashingAlgorithms.HashCodeBuilder(Namespace);
+            var hashCodeBuilder = new Internal.NativeFormat.TypeHashingAlgorithms.HashCodeBuilder(
+                Namespace
+            );
 
             if (Namespace.Length > 0)
             {
@@ -241,11 +196,17 @@ namespace Internal.TypeSystem.Interop
 
         private void InitializeMethods()
         {
-            MethodDesc[] methods = new MethodDesc[] {
-                     new PInvokeDelegateWrapperConstructor(this),                             // Constructor
-                     new DelegateMarshallingMethodThunk(DelegateType, this, _interopStateManager,
-                        DelegateMarshallingMethodThunkKind.ForwardNativeFunctionWrapper)     // a forward marshalling instance method
-                };
+            MethodDesc[] methods = new MethodDesc[]
+            {
+                new PInvokeDelegateWrapperConstructor(this), // Constructor
+                new DelegateMarshallingMethodThunk(
+                    DelegateType,
+                    this,
+                    _interopStateManager,
+                    DelegateMarshallingMethodThunkKind.ForwardNativeFunctionWrapper
+                ) // a forward marshalling instance method
+                ,
+            };
 
             Interlocked.CompareExchange(ref _methods, methods, null);
         }
@@ -275,7 +236,6 @@ namespace Internal.TypeSystem.Interop
     public enum PInvokeDelegateWrapperMethodKind : byte
     {
         Constructor = 0,
-        Invoke = 1
+        Invoke = 1,
     }
-
 }

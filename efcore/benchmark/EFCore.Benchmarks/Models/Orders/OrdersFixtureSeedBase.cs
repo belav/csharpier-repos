@@ -30,8 +30,9 @@ public abstract class OrdersFixtureSeedBase
                     City = "Sampleville",
                     StateOrProvince = "SMP",
                     ZipOrPostalCode = "00000",
-                    County = "United States"
-                });
+                    County = "United States",
+                }
+            );
         }
 
         return customers;
@@ -55,14 +56,19 @@ public abstract class OrdersFixtureSeedBase
                     ActualStockLevel = i % 7,
                     QuantityOnOrder = i % 3,
                     NextShipmentExpected = i % 3 == 0 ? null : DateTime.Today,
-                    IsDiscontinued = i % 20 == 0
-                });
+                    IsDiscontinued = i % 20 == 0,
+                }
+            );
         }
 
         return products;
     }
 
-    public virtual List<Order> CreateOrders(List<Customer> customers, int ordersPerCustomer, bool setPrimaryKeys)
+    public virtual List<Order> CreateOrders(
+        List<Customer> customers,
+        int ordersPerCustomer,
+        bool setPrimaryKeys
+    )
     {
         var orders = new List<Order>();
         for (var c = 0; c < customers.Count; c++)
@@ -83,15 +89,21 @@ public abstract class OrdersFixtureSeedBase
                         City = "Sampleville",
                         StateOrProvince = "SMP",
                         ZipOrPostalCode = "00000",
-                        County = "United States"
-                    });
+                        County = "United States",
+                    }
+                );
             }
         }
 
         return orders;
     }
 
-    public virtual List<OrderLine> CreateOrderLines(List<Product> products, List<Order> orders, int linesPerOrder, bool setPrimaryKeys)
+    public virtual List<OrderLine> CreateOrderLines(
+        List<Product> products,
+        List<Order> orders,
+        int linesPerOrder,
+        bool setPrimaryKeys
+    )
     {
         var lines = new List<OrderLine>();
         for (var o = 0; o < orders.Count; o++)
@@ -109,8 +121,9 @@ public abstract class OrdersFixtureSeedBase
                         Price = product.Retail * quantity,
                         Quantity = quantity,
                         IsSubjectToTax = o % 3 == 0,
-                        IsShipped = o % 5 == 0
-                    });
+                        IsShipped = o % 5 == 0,
+                    }
+                );
             }
         }
 

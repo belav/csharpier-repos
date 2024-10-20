@@ -13,7 +13,8 @@ namespace System.ComponentModel
     /// </summary>
     public abstract class PropertyDescriptor : MemberDescriptor
     {
-        internal const string PropertyDescriptorPropertyTypeMessage = "PropertyDescriptor's PropertyType cannot be statically discovered.";
+        internal const string PropertyDescriptorPropertyTypeMessage =
+            "PropertyDescriptor's PropertyType cannot be statically discovered.";
 
         private TypeConverter? _converter;
         private Dictionary<object, EventHandler?>? _valueChangedHandlers;
@@ -25,17 +26,15 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.PropertyDescriptor'/> class with the specified name and
         /// attributes.
         /// </summary>
-        protected PropertyDescriptor(string name, Attribute[]? attrs) : base(name, attrs)
-        {
-        }
+        protected PropertyDescriptor(string name, Attribute[]? attrs)
+            : base(name, attrs) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.PropertyDescriptor'/> class with
         /// the name and attributes in the specified <see cref='System.ComponentModel.MemberDescriptor'/>.
         /// </summary>
-        protected PropertyDescriptor(MemberDescriptor descr) : base(descr)
-        {
-        }
+        protected PropertyDescriptor(MemberDescriptor descr)
+            : base(descr) { }
 
         /// <summary>
         ///
@@ -45,9 +44,8 @@ namespace System.ComponentModel
         /// <see cref='System.Attribute'/> array.
         ///
         /// </summary>
-        protected PropertyDescriptor(MemberDescriptor descr, Attribute[]? attrs) : base(descr, attrs)
-        {
-        }
+        protected PropertyDescriptor(MemberDescriptor descr, Attribute[]? attrs)
+            : base(descr, attrs) { }
 
         /// <summary>
         /// When overridden in a derived class, gets the type of the
@@ -69,11 +67,15 @@ namespace System.ComponentModel
 
                 if (_converter == null)
                 {
-                    TypeConverterAttribute attr = (TypeConverterAttribute)attrs[typeof(TypeConverterAttribute)]!;
+                    TypeConverterAttribute attr = (TypeConverterAttribute)
+                        attrs[typeof(TypeConverterAttribute)]!;
                     if (attr.ConverterTypeName != null && attr.ConverterTypeName.Length > 0)
                     {
                         Type? converterType = GetTypeFromName(attr.ConverterTypeName);
-                        if (converterType != null && typeof(TypeConverter).IsAssignableFrom(converterType))
+                        if (
+                            converterType != null
+                            && typeof(TypeConverter).IsAssignableFrom(converterType)
+                        )
                         {
                             _converter = (TypeConverter)CreateInstance(converterType)!;
                         }
@@ -90,7 +92,8 @@ namespace System.ComponentModel
         /// indicating whether this property should be localized, as
         /// specified in the <see cref='System.ComponentModel.LocalizableAttribute'/>.
         /// </summary>
-        public virtual bool IsLocalizable => (LocalizableAttribute.Yes.Equals(Attributes[typeof(LocalizableAttribute)]));
+        public virtual bool IsLocalizable =>
+            (LocalizableAttribute.Yes.Equals(Attributes[typeof(LocalizableAttribute)]));
 
         /// <summary>
         /// When overridden in a derived class, gets a value indicating whether this
@@ -106,7 +109,9 @@ namespace System.ComponentModel
         {
             get
             {
-                DesignerSerializationVisibilityAttribute attr = (DesignerSerializationVisibilityAttribute)Attributes[typeof(DesignerSerializationVisibilityAttribute)]!;
+                DesignerSerializationVisibilityAttribute attr =
+                    (DesignerSerializationVisibilityAttribute)
+                        Attributes[typeof(DesignerSerializationVisibilityAttribute)]!;
                 return attr.Visibility;
             }
         }
@@ -126,7 +131,10 @@ namespace System.ComponentModel
 
             _valueChangedHandlers ??= new Dictionary<object, EventHandler?>();
 
-            EventHandler? h = _valueChangedHandlers.GetValueOrDefault(component, defaultValue: null);
+            EventHandler? h = _valueChangedHandlers.GetValueOrDefault(
+                component,
+                defaultValue: null
+            );
             _valueChangedHandlers[component] = (EventHandler?)Delegate.Combine(h, handler);
         }
 
@@ -160,9 +168,12 @@ namespace System.ComponentModel
                 // propertydescriptor vs. propertydescriptor... avoid the overhead
                 // of an instanceof call.
 
-                if (obj is PropertyDescriptor pd && pd.NameHashCode == NameHashCode
+                if (
+                    obj is PropertyDescriptor pd
+                    && pd.NameHashCode == NameHashCode
                     && pd.PropertyType == PropertyType
-                    && pd.Name.Equals(Name))
+                    && pd.Name.Equals(Name)
+                )
                 {
                     return true;
                 }
@@ -176,13 +187,20 @@ namespace System.ComponentModel
         /// Creates an instance of the specified type.
         /// </summary>
         protected object? CreateInstance(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type type
+        )
         {
             Type[] typeArgs = new Type[] { typeof(Type) };
             ConstructorInfo? ctor = type.GetConstructor(typeArgs);
             if (ctor != null)
             {
-                return TypeDescriptor.CreateInstance(null, type, typeArgs, new object[] { PropertyType });
+                return TypeDescriptor.CreateInstance(
+                    null,
+                    type,
+                    typeArgs,
+                    new object[] { PropertyType }
+                );
             }
 
             return TypeDescriptor.CreateInstance(null, type, null, null);
@@ -208,17 +226,33 @@ namespace System.ComponentModel
         [RequiresUnreferencedCode(PropertyDescriptorPropertyTypeMessage)]
         public PropertyDescriptorCollection GetChildProperties() => GetChildProperties(null, null);
 
-        [RequiresUnreferencedCode(PropertyDescriptorPropertyTypeMessage + " " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
-        public PropertyDescriptorCollection GetChildProperties(Attribute[] filter) => GetChildProperties(null, filter);
+        [RequiresUnreferencedCode(
+            PropertyDescriptorPropertyTypeMessage
+                + " "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
+        public PropertyDescriptorCollection GetChildProperties(Attribute[] filter) =>
+            GetChildProperties(null, filter);
 
-        [RequiresUnreferencedCode(PropertyDescriptorPropertyTypeMessage + " The Type of instance cannot be statically discovered.")]
-        public PropertyDescriptorCollection GetChildProperties(object instance) => GetChildProperties(instance, null);
+        [RequiresUnreferencedCode(
+            PropertyDescriptorPropertyTypeMessage
+                + " The Type of instance cannot be statically discovered."
+        )]
+        public PropertyDescriptorCollection GetChildProperties(object instance) =>
+            GetChildProperties(instance, null);
 
         /// <summary>
         /// Retrieves the properties
         /// </summary>
-        [RequiresUnreferencedCode(PropertyDescriptorPropertyTypeMessage + " The Type of instance cannot be statically discovered. " + AttributeCollection.FilterRequiresUnreferencedCodeMessage)]
-        public virtual PropertyDescriptorCollection GetChildProperties(object? instance, Attribute[]? filter)
+        [RequiresUnreferencedCode(
+            PropertyDescriptorPropertyTypeMessage
+                + " The Type of instance cannot be statically discovered. "
+                + AttributeCollection.FilterRequiresUnreferencedCodeMessage
+        )]
+        public virtual PropertyDescriptorCollection GetChildProperties(
+            object? instance,
+            Attribute[]? filter
+        )
         {
             if (instance == null)
             {
@@ -233,7 +267,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets an editor of the specified type.
         /// </summary>
-        [RequiresUnreferencedCode(TypeDescriptor.EditorRequiresUnreferencedCode + " " + PropertyDescriptorPropertyTypeMessage)]
+        [RequiresUnreferencedCode(
+            TypeDescriptor.EditorRequiresUnreferencedCode
+                + " "
+                + PropertyDescriptorPropertyTypeMessage
+        )]
         public virtual object? GetEditor(Type editorBaseType)
         {
             object? editor = null;
@@ -331,10 +369,14 @@ namespace System.ComponentModel
         /// <summary>
         /// Gets a type using its name.
         /// </summary>
-        [RequiresUnreferencedCode("Calls ComponentType.Assembly.GetType on the non-fully qualified typeName, which the trimmer cannot recognize.")]
+        [RequiresUnreferencedCode(
+            "Calls ComponentType.Assembly.GetType on the non-fully qualified typeName, which the trimmer cannot recognize."
+        )]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
         protected Type? GetTypeFromName(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] string? typeName)
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                string? typeName
+        )
         {
             if (string.IsNullOrEmpty(typeName))
             {
@@ -350,8 +392,10 @@ namespace System.ComponentModel
             Type? typeFromComponent = null;
             if (ComponentType != null)
             {
-                if ((typeFromGetType == null) ||
-                    (ComponentType.Assembly.FullName!.Equals(typeFromGetType.Assembly.FullName)))
+                if (
+                    (typeFromGetType == null)
+                    || (ComponentType.Assembly.FullName!.Equals(typeFromGetType.Assembly.FullName))
+                )
                 {
                     int comma = typeName.IndexOf(',');
 
@@ -378,7 +422,9 @@ namespace System.ComponentModel
         {
             if (component != null)
             {
-                _valueChangedHandlers?.GetValueOrDefault(component, defaultValue: null)?.Invoke(component, e);
+                _valueChangedHandlers
+                    ?.GetValueOrDefault(component, defaultValue: null)
+                    ?.Invoke(component, e);
             }
         }
 
@@ -392,7 +438,10 @@ namespace System.ComponentModel
 
             if (_valueChangedHandlers != null)
             {
-                EventHandler? h = _valueChangedHandlers.GetValueOrDefault(component, defaultValue: null);
+                EventHandler? h = _valueChangedHandlers.GetValueOrDefault(
+                    component,
+                    defaultValue: null
+                );
                 h = (EventHandler?)Delegate.Remove(h, handler);
                 if (h != null)
                 {

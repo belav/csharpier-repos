@@ -13,8 +13,12 @@ namespace Microsoft.Net.Http.Headers;
 /// </summary>
 public class CookieHeaderValue
 {
-    private static readonly CookieHeaderParser SingleValueParser = new CookieHeaderParser(supportsMultipleValues: false);
-    private static readonly CookieHeaderParser MultipleValueParser = new CookieHeaderParser(supportsMultipleValues: true);
+    private static readonly CookieHeaderParser SingleValueParser = new CookieHeaderParser(
+        supportsMultipleValues: false
+    );
+    private static readonly CookieHeaderParser MultipleValueParser = new CookieHeaderParser(
+        supportsMultipleValues: true
+    );
 
     private StringSegment _name;
     private StringSegment _value;
@@ -114,7 +118,10 @@ public class CookieHeaderValue
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
     /// <returns><see langword="true"/> if input is a valid <see cref="CookieHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParse(StringSegment input, [NotNullWhen(true)] out CookieHeaderValue? parsedValue)
+    public static bool TryParse(
+        StringSegment input,
+        [NotNullWhen(true)] out CookieHeaderValue? parsedValue
+    )
     {
         var index = 0;
         return SingleValueParser.TryParseValue(input, ref index, out parsedValue!);
@@ -146,7 +153,10 @@ public class CookieHeaderValue
     /// <param name="inputs">The values to parse.</param>
     /// <param name="parsedValues">The parsed values.</param>
     /// <returns><see langword="true"/> if all inputs are valid <see cref="CookieHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParseList(IList<string>? inputs, [NotNullWhen(true)] out IList<CookieHeaderValue>? parsedValues)
+    public static bool TryParseList(
+        IList<string>? inputs,
+        [NotNullWhen(true)] out IList<CookieHeaderValue>? parsedValues
+    )
     {
         return MultipleValueParser.TryParseValues(inputs, out parsedValues);
     }
@@ -157,7 +167,10 @@ public class CookieHeaderValue
     /// <param name="inputs">The values to parse.</param>
     /// <param name="parsedValues">The parsed values.</param>
     /// <returns><see langword="true"/> if all inputs are valid <see cref="StringWithQualityHeaderValue"/>, otherwise <see langword="false"/>.</returns>
-    public static bool TryParseStrictList(IList<string>? inputs, [NotNullWhen(true)] out IList<CookieHeaderValue>? parsedValues)
+    public static bool TryParseStrictList(
+        IList<string>? inputs,
+        [NotNullWhen(true)] out IList<CookieHeaderValue>? parsedValues
+    )
     {
         return MultipleValueParser.TryParseStrictValues(inputs, out parsedValues);
     }

@@ -8,15 +8,17 @@ using System.IO.Pipelines;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
 
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests;
+
 #else
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
+
 #endif
 
 public class ConnectionMiddlewareTests : LoggedTest
@@ -36,10 +38,7 @@ public class ConnectionMiddlewareTests : LoggedTest
                 // Will throw because the exception in the connection adapter will close the connection.
                 await Assert.ThrowsAnyAsync<IOException>(async () =>
                 {
-                    await connection.Send(
-                        "POST / HTTP/1.0",
-                        "Content-Length: 1000",
-                        "\r\n");
+                    await connection.Send("POST / HTTP/1.0", "Content-Length: 1000", "\r\n");
 
                     for (var i = 0; i < 1000; i++)
                     {
@@ -56,7 +55,9 @@ public class ConnectionMiddlewareTests : LoggedTest
     {
         var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
 
-        var connectionCloseTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var connectionCloseTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var mockDuplexPipe = new MockDuplexPipe();
 
         listenOptions.Use(next =>
@@ -120,7 +121,9 @@ public class ConnectionMiddlewareTests : LoggedTest
                 _duplexPipe.WasCompleted = true;
             }
 
-            public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
+            public override ValueTask<ReadResult> ReadAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 throw new NotImplementedException();
             }
@@ -155,7 +158,9 @@ public class ConnectionMiddlewareTests : LoggedTest
                 _duplexPipe.WasCompleted = true;
             }
 
-            public override ValueTask<FlushResult> FlushAsync(CancellationToken cancellationToken = default)
+            public override ValueTask<FlushResult> FlushAsync(
+                CancellationToken cancellationToken = default
+            )
             {
                 throw new NotImplementedException();
             }
@@ -172,4 +177,3 @@ public class ConnectionMiddlewareTests : LoggedTest
         }
     }
 }
-

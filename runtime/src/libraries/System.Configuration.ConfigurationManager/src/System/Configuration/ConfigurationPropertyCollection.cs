@@ -9,8 +9,8 @@ namespace System.Configuration
     {
         private readonly ArrayList _items = new ArrayList();
 
-        internal ConfigurationProperty DefaultCollectionProperty
-            => this[ConfigurationProperty.DefaultCollectionPropertyName];
+        internal ConfigurationProperty DefaultCollectionProperty =>
+            this[ConfigurationProperty.DefaultCollectionPropertyName];
 
         public ConfigurationProperty this[string name]
         {
@@ -19,7 +19,8 @@ namespace System.Configuration
                 for (int index = 0; index < _items.Count; index++)
                 {
                     ConfigurationProperty cp = (ConfigurationProperty)_items[index];
-                    if (cp.Name == name) return (ConfigurationProperty)_items[index];
+                    if (cp.Name == name)
+                        return (ConfigurationProperty)_items[index];
                 }
                 return null;
             }
@@ -51,14 +52,16 @@ namespace System.Configuration
             for (int index = 0; index < _items.Count; index++)
             {
                 ConfigurationProperty cp = (ConfigurationProperty)_items[index];
-                if (cp.Name == name) return true;
+                if (cp.Name == name)
+                    return true;
             }
             return false;
         }
 
         public void Add(ConfigurationProperty property)
         {
-            if (Contains(property.Name) != true) _items.Add(property);
+            if (Contains(property.Name) != true)
+                _items.Add(property);
         }
 
         public bool Remove(string name)
@@ -66,7 +69,8 @@ namespace System.Configuration
             for (int index = 0; index < _items.Count; index++)
             {
                 ConfigurationProperty cp = (ConfigurationProperty)_items[index];
-                if (cp.Name != name) continue;
+                if (cp.Name != name)
+                    continue;
 
                 _items.RemoveAt(index);
                 return true;

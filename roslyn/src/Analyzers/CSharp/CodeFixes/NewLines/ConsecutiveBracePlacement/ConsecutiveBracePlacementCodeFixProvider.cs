@@ -20,17 +20,21 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConsecutiveBracePlacement), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConsecutiveBracePlacement
+        ),
+        Shared
+    ]
     internal sealed class ConsecutiveBracePlacementCodeFixProvider : CodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConsecutiveBracePlacementCodeFixProvider()
-        {
-        }
+        public ConsecutiveBracePlacementCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.ConsecutiveBracePlacementDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.ConsecutiveBracePlacementDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -40,19 +44,32 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
                 CodeAction.Create(
                     CSharpCodeFixesResources.Remove_blank_lines_between_braces,
                     c => UpdateDocumentAsync(document, diagnostic, c),
-                    nameof(CSharpCodeFixesResources.Remove_blank_lines_between_braces)),
-                context.Diagnostics);
+                    nameof(CSharpCodeFixesResources.Remove_blank_lines_between_braces)
+                ),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
-        private static Task<Document> UpdateDocumentAsync(Document document, Diagnostic diagnostic, CancellationToken cancellationToken)
-            => FixAllAsync(document, ImmutableArray.Create(diagnostic), cancellationToken);
+        private static Task<Document> UpdateDocumentAsync(
+            Document document,
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        ) => FixAllAsync(document, ImmutableArray.Create(diagnostic), cancellationToken);
 
-        public static async Task<Document> FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, CancellationToken cancellationToken)
+        public static async Task<Document> FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>.GetInstance(out var tokenToToken);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>.GetInstance(
+                out var tokenToToken
+            );
 
             foreach (var diagnostic in diagnostics)
                 FixOne(root, text, tokenToToken, diagnostic, cancellationToken);
@@ -63,9 +80,12 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
         }
 
         private static void FixOne(
-            SyntaxNode root, SourceText text,
+            SyntaxNode root,
+            SourceText text,
             Dictionary<SyntaxToken, SyntaxToken> tokenToToken,
-            Diagnostic diagnostic, CancellationToken cancellationToken)
+            Diagnostic diagnostic,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -83,19 +103,30 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
                 return;
             }
 
-            if (!ConsecutiveBracePlacementDiagnosticAnalyzer.HasExcessBlankLinesAfter(
-                    text, firstBrace, out var secondBrace, out var lastEndOfLineTrivia))
+            if (
+                !ConsecutiveBracePlacementDiagnosticAnalyzer.HasExcessBlankLinesAfter(
+                    text,
+                    firstBrace,
+                    out var secondBrace,
+                    out var lastEndOfLineTrivia
+                )
+            )
             {
                 Debug.Fail("Could not match analyzer pattern");
                 return;
             }
 
             var updatedSecondBrace = secondBrace.WithLeadingTrivia(
-                secondBrace.LeadingTrivia.SkipWhile(t => t != lastEndOfLineTrivia).Skip(1));
+                secondBrace.LeadingTrivia.SkipWhile(t => t != lastEndOfLineTrivia).Skip(1)
+            );
             tokenToToken[secondBrace] = updatedSecondBrace;
         }
 
-        public override FixAllProvider GetFixAllProvider()
-            => FixAllProvider.Create(async (context, document, diagnostics) => await FixAllAsync(document, diagnostics, context.CancellationToken).ConfigureAwait(false));
+        public override FixAllProvider GetFixAllProvider() =>
+            FixAllProvider.Create(
+                async (context, document, diagnostics) =>
+                    await FixAllAsync(document, diagnostics, context.CancellationToken)
+                        .ConfigureAwait(false)
+            );
     }
 }

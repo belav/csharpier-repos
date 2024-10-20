@@ -36,7 +36,8 @@ public class KestrelConfigurationLoader
         IConfiguration configuration,
         IHttpsConfigurationService httpsConfigurationService,
         CertificatePathWatcher? certificatePathWatcher,
-        bool reloadOnChange)
+        bool reloadOnChange
+    )
     {
         Options = options;
         Configuration = configuration;
@@ -47,7 +48,10 @@ public class KestrelConfigurationLoader
 
         _httpsConfigurationService = httpsConfigurationService;
         _certificatePathWatcher = certificatePathWatcher;
-        Debug.Assert(reloadOnChange || (certificatePathWatcher is null), "If reloadOnChange is false, then certificatePathWatcher should be null");
+        Debug.Assert(
+            reloadOnChange || (certificatePathWatcher is null),
+            "If reloadOnChange is false, then certificatePathWatcher should be null"
+        );
     }
 
     /// <summary>
@@ -68,8 +72,8 @@ public class KestrelConfigurationLoader
 
     private ConfigurationReader ConfigurationReader { get; set; }
 
-    private IDictionary<string, Action<EndpointConfiguration>> EndpointConfigurations { get; }
-        = new Dictionary<string, Action<EndpointConfiguration>>(0, StringComparer.OrdinalIgnoreCase);
+    private IDictionary<string, Action<EndpointConfiguration>> EndpointConfigurations { get; } =
+        new Dictionary<string, Action<EndpointConfiguration>>(0, StringComparer.OrdinalIgnoreCase);
 
     // Actions that will be delayed until Load so that they aren't applied if the configuration loader is replaced.
     private IList<Action> EndpointsToAdd { get; } = new List<Action>();
@@ -80,23 +84,32 @@ public class KestrelConfigurationLoader
     /// <summary>
     /// Specifies a configuration Action to run when an endpoint with the given name is loaded from configuration.
     /// </summary>
-    public KestrelConfigurationLoader Endpoint(string name, Action<EndpointConfiguration> configureOptions)
+    public KestrelConfigurationLoader Endpoint(
+        string name,
+        Action<EndpointConfiguration> configureOptions
+    )
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
 
-        EndpointConfigurations[name] = configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
+        EndpointConfigurations[name] =
+            configureOptions ?? throw new ArgumentNullException(nameof(configureOptions));
         return this;
     }
 
     /// <summary>
     /// Bind to given IP address and port.
     /// </summary>
-    public KestrelConfigurationLoader Endpoint(IPAddress address, int port) => Endpoint(address, port, _ => { });
+    public KestrelConfigurationLoader Endpoint(IPAddress address, int port) =>
+        Endpoint(address, port, _ => { });
 
     /// <summary>
     /// Bind to given IP address and port.
     /// </summary>
-    public KestrelConfigurationLoader Endpoint(IPAddress address, int port, Action<ListenOptions> configure)
+    public KestrelConfigurationLoader Endpoint(
+        IPAddress address,
+        int port,
+        Action<ListenOptions> configure
+    )
     {
         ArgumentNullException.ThrowIfNull(address);
 
@@ -128,7 +141,8 @@ public class KestrelConfigurationLoader
     /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is not supported
     /// for this type of endpoint.
     /// </summary>
-    public KestrelConfigurationLoader LocalhostEndpoint(int port) => LocalhostEndpoint(port, options => { });
+    public KestrelConfigurationLoader LocalhostEndpoint(int port) =>
+        LocalhostEndpoint(port, options => { });
 
     /// <summary>
     /// Listens on ::1 and 127.0.0.1 with the given port. Requesting a dynamic port by specifying 0 is not supported
@@ -149,7 +163,8 @@ public class KestrelConfigurationLoader
     /// <summary>
     /// Listens on all IPs using IPv6 [::], or IPv4 0.0.0.0 if IPv6 is not supported.
     /// </summary>
-    public KestrelConfigurationLoader AnyIPEndpoint(int port) => AnyIPEndpoint(port, options => { });
+    public KestrelConfigurationLoader AnyIPEndpoint(int port) =>
+        AnyIPEndpoint(port, options => { });
 
     /// <summary>
     /// Listens on all IPs using IPv6 [::], or IPv4 0.0.0.0 if IPv6 is not supported.
@@ -169,17 +184,24 @@ public class KestrelConfigurationLoader
     /// <summary>
     /// Bind to given Unix domain socket path.
     /// </summary>
-    public KestrelConfigurationLoader UnixSocketEndpoint(string socketPath) => UnixSocketEndpoint(socketPath, _ => { });
+    public KestrelConfigurationLoader UnixSocketEndpoint(string socketPath) =>
+        UnixSocketEndpoint(socketPath, _ => { });
 
     /// <summary>
     /// Bind to given Unix domain socket path.
     /// </summary>
-    public KestrelConfigurationLoader UnixSocketEndpoint(string socketPath, Action<ListenOptions> configure)
+    public KestrelConfigurationLoader UnixSocketEndpoint(
+        string socketPath,
+        Action<ListenOptions> configure
+    )
     {
         ArgumentNullException.ThrowIfNull(socketPath);
         if (socketPath.Length == 0 || socketPath[0] != '/')
         {
-            throw new ArgumentException(CoreStrings.UnixSocketPathMustBeAbsolute, nameof(socketPath));
+            throw new ArgumentException(
+                CoreStrings.UnixSocketPathMustBeAbsolute,
+                nameof(socketPath)
+            );
         }
         ArgumentNullException.ThrowIfNull(configure);
 
@@ -194,7 +216,8 @@ public class KestrelConfigurationLoader
     /// <summary>
     /// Open a socket file descriptor.
     /// </summary>
-    public KestrelConfigurationLoader HandleEndpoint(ulong handle) => HandleEndpoint(handle, _ => { });
+    public KestrelConfigurationLoader HandleEndpoint(ulong handle) =>
+        HandleEndpoint(handle, _ => { });
 
     /// <summary>
     /// Open a socket file descriptor.
@@ -264,8 +287,14 @@ public class KestrelConfigurationLoader
     {
         if (!_loaded || ReloadOnChange)
         {
-            Debug.Assert(!!_loaded || _reloadToken is null, "Shouldn't have a reload token before first load");
-            Debug.Assert(!!ReloadOnChange || _reloadToken is null, "Shouldn't have a reload token unless reload-on-change is set");
+            Debug.Assert(
+                !!_loaded || _reloadToken is null,
+                "Shouldn't have a reload token before first load"
+            );
+            Debug.Assert(
+                !!ReloadOnChange || _reloadToken is null,
+                "Shouldn't have a reload token unless reload-on-change is set"
+            );
 
             _loaded = true;
 
@@ -327,7 +356,11 @@ public class KestrelConfigurationLoader
 
         ConfigurationReader = new ConfigurationReader(Configuration);
 
-        if (_httpsConfigurationService.IsInitialized && _httpsConfigurationService.LoadDefaultCertificate(ConfigurationReader) is CertificateAndConfig certPair)
+        if (
+            _httpsConfigurationService.IsInitialized
+            && _httpsConfigurationService.LoadDefaultCertificate(ConfigurationReader)
+                is CertificateAndConfig certPair
+        )
         {
             DefaultCertificate = certPair.Certificate;
             DefaultCertificateConfig = certPair.CertificateConfig;
@@ -361,7 +394,13 @@ public class KestrelConfigurationLoader
             if (https)
             {
                 // Throws an appropriate exception if https configuration isn't enabled
-                _httpsConfigurationService.ApplyHttpsConfiguration(httpsOptions, endpoint, Options, DefaultCertificateConfig, ConfigurationReader);
+                _httpsConfigurationService.ApplyHttpsConfiguration(
+                    httpsOptions,
+                    endpoint,
+                    Options,
+                    DefaultCertificateConfig,
+                    ConfigurationReader
+                );
             }
 
             // Now that defaults have been loaded, we can compare to the currently bound endpoints to see if the config changed.
@@ -371,7 +410,10 @@ public class KestrelConfigurationLoader
             {
                 if (o.EndpointConfig == endpoint)
                 {
-                    Debug.Assert(o.EndpointConfig?.Certificate?.FileHasChanged != true, "Preserving an endpoint with file changes");
+                    Debug.Assert(
+                        o.EndpointConfig?.Certificate?.FileHasChanged != true,
+                        "Preserving an endpoint with file changes"
+                    );
                     matchingBoundEndpoints.Add(o);
                 }
             }
@@ -385,7 +427,12 @@ public class KestrelConfigurationLoader
 
             if (EndpointConfigurations.TryGetValue(endpoint.Name, out var configureEndpoint))
             {
-                var endpointConfig = new EndpointConfiguration(https, listenOptions, httpsOptions, endpoint.ConfigSection);
+                var endpointConfig = new EndpointConfiguration(
+                    https,
+                    listenOptions,
+                    httpsOptions,
+                    endpoint.ConfigSection
+                );
                 configureEndpoint(endpointConfig);
             }
 
@@ -477,7 +524,10 @@ public class KestrelConfigurationLoader
                 }
             }
 
-            _certificatePathWatcher.UpdateWatches(certificateConfigsToRemove, certificateConfigsToAdd);
+            _certificatePathWatcher.UpdateWatches(
+                certificateConfigsToRemove,
+                certificateConfigsToAdd
+            );
         }
 
         return (endpointsToStop, endpointsToStart);

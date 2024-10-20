@@ -8,7 +8,12 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_InterfaceNameToIndex", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_InterfaceNameToIndex",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
         public static partial uint InterfaceNameToIndex(string name);
     }
 }

@@ -51,19 +51,25 @@ public abstract class ConnectionInfo
     /// Retrieves the client certificate.
     /// </summary>
     /// <returns>Asynchronously returns an <see cref="X509Certificate2" />. Can be null.</returns>
-    public abstract Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken = new CancellationToken());
+    public abstract Task<X509Certificate2?> GetClientCertificateAsync(
+        CancellationToken cancellationToken = new CancellationToken()
+    );
 
     /// <summary>
     /// Close connection gracefully.
     /// </summary>
-    public virtual void RequestClose()
-    {
-    }
+    public virtual void RequestClose() { }
 
     private string DebuggerToString()
     {
-        var remoteEndpoint = RemoteIpAddress == null ? "(null)" : new IPEndPoint(RemoteIpAddress, RemotePort).ToString();
-        var localEndpoint = LocalIpAddress == null ? "(null)" : new IPEndPoint(LocalIpAddress, LocalPort).ToString();
+        var remoteEndpoint =
+            RemoteIpAddress == null
+                ? "(null)"
+                : new IPEndPoint(RemoteIpAddress, RemotePort).ToString();
+        var localEndpoint =
+            LocalIpAddress == null
+                ? "(null)"
+                : new IPEndPoint(LocalIpAddress, LocalPort).ToString();
 
         var s = $"Id = {Id ?? "(null)"}, Remote = {remoteEndpoint}, Local = {localEndpoint}";
         if (ClientCertificate != null)

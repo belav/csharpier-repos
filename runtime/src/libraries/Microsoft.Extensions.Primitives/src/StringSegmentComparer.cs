@@ -14,14 +14,17 @@ namespace Microsoft.Extensions.Primitives
         /// <summary>
         /// Gets a <see cref="StringSegmentComparer"/> object that performs a case-sensitive ordinal <see cref="StringSegment"/> comparison.
         /// </summary>
-        public static StringSegmentComparer Ordinal { get; }
-            = new StringSegmentComparer(StringComparison.Ordinal, StringComparer.Ordinal);
+        public static StringSegmentComparer Ordinal { get; } =
+            new StringSegmentComparer(StringComparison.Ordinal, StringComparer.Ordinal);
 
         /// <summary>
         /// Gets a <see cref="StringSegmentComparer"/> object that performs a case-insensitive ordinal <see cref="StringSegment"/> comparison.
         /// </summary>
-        public static StringSegmentComparer OrdinalIgnoreCase { get; }
-            = new StringSegmentComparer(StringComparison.OrdinalIgnoreCase, StringComparer.OrdinalIgnoreCase);
+        public static StringSegmentComparer OrdinalIgnoreCase { get; } =
+            new StringSegmentComparer(
+                StringComparison.OrdinalIgnoreCase,
+                StringComparer.OrdinalIgnoreCase
+            );
 
         private StringSegmentComparer(StringComparison comparison, StringComparer comparer)
         {

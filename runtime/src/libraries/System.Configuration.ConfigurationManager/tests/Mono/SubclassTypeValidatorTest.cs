@@ -35,6 +35,7 @@ using Xunit;
 namespace MonoTests.System.Configuration
 {
     class A { }
+
     class B : A { }
 
     public class SubclassTypeValidatorTest

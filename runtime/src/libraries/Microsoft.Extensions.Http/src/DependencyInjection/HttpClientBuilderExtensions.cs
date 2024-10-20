@@ -25,12 +25,18 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IHttpClientBuilder"/>.</param>
         /// <param name="configureClient">A delegate that is used to configure an <see cref="HttpClient"/>.</param>
         /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
-        public static IHttpClientBuilder ConfigureHttpClient(this IHttpClientBuilder builder, Action<HttpClient> configureClient)
+        public static IHttpClientBuilder ConfigureHttpClient(
+            this IHttpClientBuilder builder,
+            Action<HttpClient> configureClient
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureClient);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options => options.HttpClientActions.Add(configureClient));
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options => options.HttpClientActions.Add(configureClient)
+            );
 
             return builder;
         }
@@ -45,17 +51,23 @@ namespace Microsoft.Extensions.DependencyInjection
         /// The <see cref="IServiceProvider"/> provided to <paramref name="configureClient"/> will be the
         /// same application's root service provider instance.
         /// </remarks>
-        public static IHttpClientBuilder ConfigureHttpClient(this IHttpClientBuilder builder, Action<IServiceProvider, HttpClient> configureClient)
+        public static IHttpClientBuilder ConfigureHttpClient(
+            this IHttpClientBuilder builder,
+            Action<IServiceProvider, HttpClient> configureClient
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureClient);
 
             builder.Services.AddTransient<IConfigureOptions<HttpClientFactoryOptions>>(services =>
             {
-                return new ConfigureNamedOptions<HttpClientFactoryOptions>(builder.Name, (options) =>
-                {
-                    options.HttpClientActions.Add(client => configureClient(services, client));
-                });
+                return new ConfigureNamedOptions<HttpClientFactoryOptions>(
+                    builder.Name,
+                    (options) =>
+                    {
+                        options.HttpClientActions.Add(client => configureClient(services, client));
+                    }
+                );
             });
 
             return builder;
@@ -71,15 +83,23 @@ namespace Microsoft.Extensions.DependencyInjection
         /// The <see paramref="configureHandler"/> delegate should return a new instance of the message handler each time it
         /// is invoked.
         /// </remarks>
-        public static IHttpClientBuilder AddHttpMessageHandler(this IHttpClientBuilder builder, Func<DelegatingHandler> configureHandler)
+        public static IHttpClientBuilder AddHttpMessageHandler(
+            this IHttpClientBuilder builder,
+            Func<DelegatingHandler> configureHandler
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b => b.AdditionalHandlers.Add(configureHandler()));
-            });
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.AdditionalHandlers.Add(configureHandler())
+                    );
+                }
+            );
 
             return builder;
         }
@@ -99,15 +119,23 @@ namespace Microsoft.Extensions.DependencyInjection
         /// a reference to a scoped service provider that shares the lifetime of the handler being constructed.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder AddHttpMessageHandler(this IHttpClientBuilder builder, Func<IServiceProvider, DelegatingHandler> configureHandler)
+        public static IHttpClientBuilder AddHttpMessageHandler(
+            this IHttpClientBuilder builder,
+            Func<IServiceProvider, DelegatingHandler> configureHandler
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b => b.AdditionalHandlers.Add(configureHandler(b.Services)));
-            });
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.AdditionalHandlers.Add(configureHandler(b.Services))
+                    );
+                }
+            );
 
             return builder;
         }
@@ -126,15 +154,22 @@ namespace Microsoft.Extensions.DependencyInjection
         /// the lifetime of the handler being constructed.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder AddHttpMessageHandler<THandler>(this IHttpClientBuilder builder)
+        public static IHttpClientBuilder AddHttpMessageHandler<THandler>(
+            this IHttpClientBuilder builder
+        )
             where THandler : DelegatingHandler
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b => b.AdditionalHandlers.Add(b.Services.GetRequiredService<THandler>()));
-            });
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.AdditionalHandlers.Add(b.Services.GetRequiredService<THandler>())
+                    );
+                }
+            );
 
             return builder;
         }
@@ -150,15 +185,23 @@ namespace Microsoft.Extensions.DependencyInjection
         /// The <see paramref="configureHandler"/> delegate should return a new instance of the message handler each time it
         /// is invoked.
         /// </remarks>
-        public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(this IHttpClientBuilder builder, Func<HttpMessageHandler> configureHandler)
+        public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(
+            this IHttpClientBuilder builder,
+            Func<HttpMessageHandler> configureHandler
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b => b.PrimaryHandler = configureHandler());
-            });
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.PrimaryHandler = configureHandler()
+                    );
+                }
+            );
 
             return builder;
         }
@@ -180,15 +223,23 @@ namespace Microsoft.Extensions.DependencyInjection
         /// a reference to a scoped service provider that shares the lifetime of the handler being constructed.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(this IHttpClientBuilder builder, Func<IServiceProvider, HttpMessageHandler> configureHandler)
+        public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(
+            this IHttpClientBuilder builder,
+            Func<IServiceProvider, HttpMessageHandler> configureHandler
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b => b.PrimaryHandler = configureHandler(b.Services));
-            });
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.PrimaryHandler = configureHandler(b.Services)
+                    );
+                }
+            );
 
             return builder;
         }
@@ -208,15 +259,22 @@ namespace Microsoft.Extensions.DependencyInjection
         /// the lifetime of the handler being constructed.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler<THandler>(this IHttpClientBuilder builder)
+        public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler<THandler>(
+            this IHttpClientBuilder builder
+        )
             where THandler : HttpMessageHandler
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b => b.PrimaryHandler = b.Services.GetRequiredService<THandler>());
-            });
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        b.PrimaryHandler = b.Services.GetRequiredService<THandler>()
+                    );
+                }
+            );
 
             return builder;
         }
@@ -234,15 +292,23 @@ namespace Microsoft.Extensions.DependencyInjection
         /// a reference to a scoped service provider that shares the lifetime of the handler being constructed.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(this IHttpClientBuilder builder, Action<HttpMessageHandler, IServiceProvider> configureHandler)
+        public static IHttpClientBuilder ConfigurePrimaryHttpMessageHandler(
+            this IHttpClientBuilder builder,
+            Action<HttpMessageHandler, IServiceProvider> configureHandler
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureHandler);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b => configureHandler(b.PrimaryHandler, b.Services));
-            });
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        configureHandler(b.PrimaryHandler, b.Services)
+                    );
+                }
+            );
 
             return builder;
         }
@@ -254,13 +320,21 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IHttpClientBuilder"/>.</param>
         /// <param name="configureBuilder">A delegate that is used to configure an <see cref="HttpMessageHandlerBuilder"/>.</param>
         /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
-        [Obsolete("This method has been deprecated. Use ConfigurePrimaryHttpMessageHandler or ConfigureAdditionalHttpMessageHandlers instead.")]
-        public static IHttpClientBuilder ConfigureHttpMessageHandlerBuilder(this IHttpClientBuilder builder, Action<HttpMessageHandlerBuilder> configureBuilder)
+        [Obsolete(
+            "This method has been deprecated. Use ConfigurePrimaryHttpMessageHandler or ConfigureAdditionalHttpMessageHandlers instead."
+        )]
+        public static IHttpClientBuilder ConfigureHttpMessageHandlerBuilder(
+            this IHttpClientBuilder builder,
+            Action<HttpMessageHandlerBuilder> configureBuilder
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureBuilder);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options => options.HttpMessageHandlerBuilderActions.Add(configureBuilder));
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options => options.HttpMessageHandlerBuilderActions.Add(configureBuilder)
+            );
 
             return builder;
         }
@@ -282,22 +356,28 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </para>
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
-        public static IHttpClientBuilder UseSocketsHttpHandler(this IHttpClientBuilder builder, Action<SocketsHttpHandler, IServiceProvider>? configureHandler = null)
+        public static IHttpClientBuilder UseSocketsHttpHandler(
+            this IHttpClientBuilder builder,
+            Action<SocketsHttpHandler, IServiceProvider>? configureHandler = null
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b =>
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
                 {
-                    if (b.PrimaryHandler is not SocketsHttpHandler handler)
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
                     {
-                        handler = new SocketsHttpHandler();
-                    }
-                    configureHandler?.Invoke(handler, b.Services);
-                    b.PrimaryHandler = handler;
-                });
-            });
+                        if (b.PrimaryHandler is not SocketsHttpHandler handler)
+                        {
+                            handler = new SocketsHttpHandler();
+                        }
+                        configureHandler?.Invoke(handler, b.Services);
+                        b.PrimaryHandler = handler;
+                    });
+                }
+            );
 
             return builder;
         }
@@ -320,7 +400,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </para>
         /// </remarks>
         [UnsupportedOSPlatform("browser")]
-        public static IHttpClientBuilder UseSocketsHttpHandler(this IHttpClientBuilder builder, Action<ISocketsHttpHandlerBuilder> configureBuilder)
+        public static IHttpClientBuilder UseSocketsHttpHandler(
+            this IHttpClientBuilder builder,
+            Action<ISocketsHttpHandlerBuilder> configureBuilder
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
 
@@ -356,8 +439,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// scope bound to the message handler, which is managed independently.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder AddTypedClient<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient>(
-            this IHttpClientBuilder builder)
+        public static IHttpClientBuilder AddTypedClient<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
+        >(this IHttpClientBuilder builder)
             where TClient : class
         {
             ThrowHelper.ThrowIfNull(builder);
@@ -365,13 +449,16 @@ namespace Microsoft.Extensions.DependencyInjection
             return AddTypedClientCore<TClient>(builder, validateSingleType: false);
         }
 
-        internal static IHttpClientBuilder AddTypedClientCore<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient>(
-            this IHttpClientBuilder builder, bool validateSingleType)
+        internal static IHttpClientBuilder AddTypedClientCore<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TClient
+        >(this IHttpClientBuilder builder, bool validateSingleType)
             where TClient : class
         {
             if (builder.Name is null)
             {
-                throw new InvalidOperationException($"{nameof(HttpClientBuilderExtensions.AddTypedClient)} isn't supported with {nameof(HttpClientFactoryServiceCollectionExtensions.ConfigureHttpClientDefaults)}.");
+                throw new InvalidOperationException(
+                    $"{nameof(HttpClientBuilderExtensions.AddTypedClient)} isn't supported with {nameof(HttpClientFactoryServiceCollectionExtensions.ConfigureHttpClientDefaults)}."
+                );
             }
 
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
@@ -381,14 +468,23 @@ namespace Microsoft.Extensions.DependencyInjection
             return builder;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2091:UnrecognizedReflectionPattern",
-            Justification = "Workaround for https://github.com/mono/linker/issues/1416. Outer method has been annotated with DynamicallyAccessedMembers.")]
-        private static TClient AddTransientHelper<TClient>(IServiceProvider s, IHttpClientBuilder builder) where TClient : class
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2091:UnrecognizedReflectionPattern",
+            Justification = "Workaround for https://github.com/mono/linker/issues/1416. Outer method has been annotated with DynamicallyAccessedMembers."
+        )]
+        private static TClient AddTransientHelper<TClient>(
+            IServiceProvider s,
+            IHttpClientBuilder builder
+        )
+            where TClient : class
         {
             IHttpClientFactory httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
             HttpClient httpClient = httpClientFactory.CreateClient(builder.Name);
 
-            ITypedHttpClientFactory<TClient> typedClientFactory = s.GetRequiredService<ITypedHttpClientFactory<TClient>>();
+            ITypedHttpClientFactory<TClient> typedClientFactory = s.GetRequiredService<
+                ITypedHttpClientFactory<TClient>
+            >();
             return typedClientFactory.CreateClient(httpClient);
         }
 
@@ -423,8 +519,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// scope bound to the message handler, which is managed independently.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder AddTypedClient<TClient, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TImplementation>(
-            this IHttpClientBuilder builder)
+        public static IHttpClientBuilder AddTypedClient<
+            TClient,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                TImplementation
+        >(this IHttpClientBuilder builder)
             where TClient : class
             where TImplementation : class, TClient
         {
@@ -433,26 +532,41 @@ namespace Microsoft.Extensions.DependencyInjection
             return AddTypedClientCore<TClient, TImplementation>(builder, validateSingleType: false);
         }
 
-        internal static IHttpClientBuilder AddTypedClientCore<TClient, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TImplementation>(
-            this IHttpClientBuilder builder, bool validateSingleType)
+        internal static IHttpClientBuilder AddTypedClientCore<
+            TClient,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                TImplementation
+        >(this IHttpClientBuilder builder, bool validateSingleType)
             where TClient : class
             where TImplementation : class, TClient
         {
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
 
-            builder.Services.AddTransient(s => AddTransientHelper<TClient, TImplementation>(s, builder));
+            builder.Services.AddTransient(s =>
+                AddTransientHelper<TClient, TImplementation>(s, builder)
+            );
 
             return builder;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2091:UnrecognizedReflectionPattern",
-            Justification = "Workaround for https://github.com/mono/linker/issues/1416. Outer method has been annotated with DynamicallyAccessedMembers.")]
-        private static TClient AddTransientHelper<TClient, TImplementation>(IServiceProvider s, IHttpClientBuilder builder) where TClient : class where TImplementation : class, TClient
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2091:UnrecognizedReflectionPattern",
+            Justification = "Workaround for https://github.com/mono/linker/issues/1416. Outer method has been annotated with DynamicallyAccessedMembers."
+        )]
+        private static TClient AddTransientHelper<TClient, TImplementation>(
+            IServiceProvider s,
+            IHttpClientBuilder builder
+        )
+            where TClient : class
+            where TImplementation : class, TClient
         {
             IHttpClientFactory httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
             HttpClient httpClient = httpClientFactory.CreateClient(builder.Name);
 
-            ITypedHttpClientFactory<TImplementation> typedClientFactory = s.GetRequiredService<ITypedHttpClientFactory<TImplementation>>();
+            ITypedHttpClientFactory<TImplementation> typedClientFactory = s.GetRequiredService<
+                ITypedHttpClientFactory<TImplementation>
+            >();
             return typedClientFactory.CreateClient(httpClient);
         }
 
@@ -477,7 +591,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// will register a typed client binding that creates <typeparamref name="TClient"/> using the provided factory function.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder AddTypedClient<TClient>(this IHttpClientBuilder builder, Func<HttpClient, TClient> factory)
+        public static IHttpClientBuilder AddTypedClient<TClient>(
+            this IHttpClientBuilder builder,
+            Func<HttpClient, TClient> factory
+        )
             where TClient : class
         {
             ThrowHelper.ThrowIfNull(builder);
@@ -486,7 +603,11 @@ namespace Microsoft.Extensions.DependencyInjection
             return AddTypedClientCore<TClient>(builder, factory, validateSingleType: false);
         }
 
-        internal static IHttpClientBuilder AddTypedClientCore<TClient>(this IHttpClientBuilder builder, Func<HttpClient, TClient> factory, bool validateSingleType)
+        internal static IHttpClientBuilder AddTypedClientCore<TClient>(
+            this IHttpClientBuilder builder,
+            Func<HttpClient, TClient> factory,
+            bool validateSingleType
+        )
             where TClient : class
         {
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
@@ -523,7 +644,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// will register a typed client binding that creates <typeparamref name="TClient"/> using the provided factory function.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder AddTypedClient<TClient>(this IHttpClientBuilder builder, Func<HttpClient, IServiceProvider, TClient> factory)
+        public static IHttpClientBuilder AddTypedClient<TClient>(
+            this IHttpClientBuilder builder,
+            Func<HttpClient, IServiceProvider, TClient> factory
+        )
             where TClient : class
         {
             ThrowHelper.ThrowIfNull(builder);
@@ -532,7 +656,11 @@ namespace Microsoft.Extensions.DependencyInjection
             return AddTypedClientCore<TClient>(builder, factory, validateSingleType: false);
         }
 
-        internal static IHttpClientBuilder AddTypedClientCore<TClient>(this IHttpClientBuilder builder, Func<HttpClient, IServiceProvider, TClient> factory, bool validateSingleType)
+        internal static IHttpClientBuilder AddTypedClientCore<TClient>(
+            this IHttpClientBuilder builder,
+            Func<HttpClient, IServiceProvider, TClient> factory,
+            bool validateSingleType
+        )
             where TClient : class
         {
             ThrowHelper.ThrowIfNull(builder);
@@ -559,15 +687,21 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <returns>The <see cref="IHttpClientBuilder"/>.</returns>
         /// <remarks>The provided <paramref name="shouldRedactHeaderValue"/> predicate will be evaluated for each header name when logging. If the predicate returns <see langword="true"/> then the header value will be replaced with a marker value <c>*</c> in logs; otherwise the header value will be logged.
         /// </remarks>
-        public static IHttpClientBuilder RedactLoggedHeaders(this IHttpClientBuilder builder, Func<string, bool> shouldRedactHeaderValue)
+        public static IHttpClientBuilder RedactLoggedHeaders(
+            this IHttpClientBuilder builder,
+            Func<string, bool> shouldRedactHeaderValue
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(shouldRedactHeaderValue);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
-            });
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    options.ShouldRedactHeaderValue = shouldRedactHeaderValue;
+                }
+            );
 
             return builder;
         }
@@ -578,17 +712,26 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IHttpClientBuilder"/>.</param>
         /// <param name="redactedLoggedHeaderNames">The collection of HTTP headers names for which values should be redacted before logging.</param>
         /// <returns>The <see cref="IHttpClientBuilder"/>.</returns>
-        public static IHttpClientBuilder RedactLoggedHeaders(this IHttpClientBuilder builder, IEnumerable<string> redactedLoggedHeaderNames)
+        public static IHttpClientBuilder RedactLoggedHeaders(
+            this IHttpClientBuilder builder,
+            IEnumerable<string> redactedLoggedHeaderNames
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(redactedLoggedHeaderNames);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                var sensitiveHeaders = new HashSet<string>(redactedLoggedHeaderNames, StringComparer.OrdinalIgnoreCase);
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    var sensitiveHeaders = new HashSet<string>(
+                        redactedLoggedHeaderNames,
+                        StringComparer.OrdinalIgnoreCase
+                    );
 
-                options.ShouldRedactHeaderValue = (header) => sensitiveHeaders.Contains(header);
-            });
+                    options.ShouldRedactHeaderValue = (header) => sensitiveHeaders.Contains(header);
+                }
+            );
 
             return builder;
         }
@@ -617,16 +760,28 @@ namespace Microsoft.Extensions.DependencyInjection
         /// disposed until all references are garbage-collected.
         /// </para>
         /// </remarks>
-        public static IHttpClientBuilder SetHandlerLifetime(this IHttpClientBuilder builder, TimeSpan handlerLifetime)
+        public static IHttpClientBuilder SetHandlerLifetime(
+            this IHttpClientBuilder builder,
+            TimeSpan handlerLifetime
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
 
-            if (handlerLifetime != Timeout.InfiniteTimeSpan && handlerLifetime < HttpClientFactoryOptions.MinimumHandlerLifetime)
+            if (
+                handlerLifetime != Timeout.InfiniteTimeSpan
+                && handlerLifetime < HttpClientFactoryOptions.MinimumHandlerLifetime
+            )
             {
-                throw new ArgumentException(SR.HandlerLifetime_InvalidValue, nameof(handlerLifetime));
+                throw new ArgumentException(
+                    SR.HandlerLifetime_InvalidValue,
+                    nameof(handlerLifetime)
+                );
             }
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options => options.HandlerLifetime = handlerLifetime);
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options => options.HandlerLifetime = handlerLifetime
+            );
             return builder;
         }
 
@@ -637,38 +792,56 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="builder">The <see cref="IHttpClientBuilder"/>.</param>
         /// <param name="configureAdditionalHandlers">A delegate that is used to configure a collection of <see cref="DelegatingHandler"/>s.</param>
         /// <returns>An <see cref="IHttpClientBuilder"/> that can be used to configure the client.</returns>
-        public static IHttpClientBuilder ConfigureAdditionalHttpMessageHandlers(this IHttpClientBuilder builder, Action<IList<DelegatingHandler>, IServiceProvider> configureAdditionalHandlers)
+        public static IHttpClientBuilder ConfigureAdditionalHttpMessageHandlers(
+            this IHttpClientBuilder builder,
+            Action<IList<DelegatingHandler>, IServiceProvider> configureAdditionalHandlers
+        )
         {
             ThrowHelper.ThrowIfNull(builder);
             ThrowHelper.ThrowIfNull(configureAdditionalHandlers);
 
-            builder.Services.Configure<HttpClientFactoryOptions>(builder.Name, options =>
-            {
-                options.HttpMessageHandlerBuilderActions.Add(b => configureAdditionalHandlers(b.AdditionalHandlers, b.Services));
-            });
+            builder.Services.Configure<HttpClientFactoryOptions>(
+                builder.Name,
+                options =>
+                {
+                    options.HttpMessageHandlerBuilderActions.Add(b =>
+                        configureAdditionalHandlers(b.AdditionalHandlers, b.Services)
+                    );
+                }
+            );
 
             return builder;
         }
 
         // See comments on HttpClientMappingRegistry.
-        private static void ReserveClient(IHttpClientBuilder builder, Type type, string name, bool validateSingleType)
+        private static void ReserveClient(
+            IHttpClientBuilder builder,
+            Type type,
+            string name,
+            bool validateSingleType
+        )
         {
-            var registry = (HttpClientMappingRegistry?)builder.Services.Single(sd => sd.ServiceType == typeof(HttpClientMappingRegistry)).ImplementationInstance;
+            var registry = (HttpClientMappingRegistry?)
+                builder
+                    .Services.Single(sd => sd.ServiceType == typeof(HttpClientMappingRegistry))
+                    .ImplementationInstance;
             Debug.Assert(registry != null);
 
             // Check for same name registered to two types. This won't work because we rely on named options for the configuration.
-            if (registry.NamedClientRegistrations.TryGetValue(name, out Type? otherType) &&
-
+            if (
+                registry.NamedClientRegistrations.TryGetValue(name, out Type? otherType)
+                &&
                 // Allow using the same name with multiple types in some cases (see callers).
-                validateSingleType &&
-
+                validateSingleType
+                &&
                 // Allow registering the same name twice to the same type.
-                type != otherType)
+                type != otherType
+            )
             {
                 string message =
-                    $"The HttpClient factory already has a registered client with the name '{name}', bound to the type '{otherType.FullName}'. " +
-                    $"Client names are computed based on the type name without considering the namespace ('{otherType.Name}'). " +
-                    $"Use an overload of AddHttpClient that accepts a string and provide a unique name to resolve the conflict.";
+                    $"The HttpClient factory already has a registered client with the name '{name}', bound to the type '{otherType.FullName}'. "
+                    + $"Client names are computed based on the type name without considering the namespace ('{otherType.Name}'). "
+                    + $"Use an overload of AddHttpClient that accepts a string and provide a unique name to resolve the conflict.";
                 throw new InvalidOperationException(message);
             }
 

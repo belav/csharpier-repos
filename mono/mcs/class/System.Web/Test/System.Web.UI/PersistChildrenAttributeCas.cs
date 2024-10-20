@@ -1,5 +1,5 @@
 //
-// PersistChildrenAttributeCas.cs 
+// PersistChildrenAttributeCas.cs
 //	- CAS unit tests for System.Web.UI.PersistChildrenAttribute
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,63 +27,66 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class PersistChildrenAttributeCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor1_Deny_Unrestricted()
+        {
+            PersistChildrenAttribute pca = new PersistChildrenAttribute(true);
+            Assert.IsTrue(pca.Persist, "Persist");
+            Assert.IsFalse(pca.UsesCustomPersistence, "UsesCustomPersistence");
+            Assert.IsTrue(pca.Equals(pca), "Equals");
+            Assert.IsTrue(pca.IsDefaultAttribute(), "IsDefaultAttribute");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PersistChildrenAttributeCas : AspNetHostingMinimal {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Ctor2_Deny_Unrestricted()
+        {
+            PersistChildrenAttribute pca = new PersistChildrenAttribute(false, true);
+            Assert.IsFalse(pca.Persist, "Persist");
+            Assert.IsTrue(pca.UsesCustomPersistence, "UsesCustomPersistence");
+            Assert.IsTrue(pca.Equals(pca), "Equals");
+            Assert.IsFalse(pca.IsDefaultAttribute(), "IsDefaultAttribute");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor1_Deny_Unrestricted ()
-		{
-			PersistChildrenAttribute pca = new PersistChildrenAttribute (true);
-			Assert.IsTrue (pca.Persist, "Persist");
-			Assert.IsFalse (pca.UsesCustomPersistence, "UsesCustomPersistence");
-			Assert.IsTrue (pca.Equals (pca), "Equals");
-			Assert.IsTrue (pca.IsDefaultAttribute (), "IsDefaultAttribute");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Static_Deny_Unrestricted()
+        {
+            Assert.IsNotNull(PersistChildrenAttribute.Default, "Default");
+            Assert.IsNotNull(PersistChildrenAttribute.Yes, "Yes");
+            Assert.IsNotNull(PersistChildrenAttribute.No, "No");
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Ctor2_Deny_Unrestricted ()
-		{
-			PersistChildrenAttribute pca = new PersistChildrenAttribute (false, true);
-			Assert.IsFalse (pca.Persist, "Persist");
-			Assert.IsTrue (pca.UsesCustomPersistence, "UsesCustomPersistence");
-			Assert.IsTrue (pca.Equals (pca), "Equals");
-			Assert.IsFalse (pca.IsDefaultAttribute (), "IsDefaultAttribute");
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Static_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (PersistChildrenAttribute.Default, "Default");
-			Assert.IsNotNull (PersistChildrenAttribute.Yes, "Yes");
-			Assert.IsNotNull (PersistChildrenAttribute.No, "No");
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(bool) });
+            Assert.IsNotNull(ci, ".ctor(bool)");
+            return ci.Invoke(new object[1] { false });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (bool) });
-			Assert.IsNotNull (ci, ".ctor(bool)");
-			return ci.Invoke (new object[1] { false });
-		}
-
-		public override Type Type {
-			get { return typeof (PersistChildrenAttribute); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(PersistChildrenAttribute); }
+        }
+    }
 }

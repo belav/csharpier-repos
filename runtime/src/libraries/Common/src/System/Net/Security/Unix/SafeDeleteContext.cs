@@ -13,13 +13,11 @@ namespace System.Net.Security
     internal abstract class SafeDeleteContext : SafeHandle
     {
 #endif
-        public SafeDeleteContext(IntPtr handle) : base(handle, true)
-        {
-        }
+        public SafeDeleteContext(IntPtr handle)
+            : base(handle, true) { }
 
-        public SafeDeleteContext(IntPtr handle, bool ownsHandle) : base(handle, ownsHandle)
-        {
-        }
+        public SafeDeleteContext(IntPtr handle, bool ownsHandle)
+            : base(handle, ownsHandle) { }
 
         public override bool IsInvalid
         {

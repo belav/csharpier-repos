@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -27,6 +28,7 @@ namespace Test
                 catch (Exception) { }
             }
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

@@ -69,6 +69,6 @@ namespace System.DirectoryServices
         ///     Specify this flag when using the LDAP provider if your ADsPath includes a server name. Do not use
         ///     this flag for paths that include a domain name or for serverless paths.
         /// </devdoc>
-        ServerBind = NativeMethods.AuthenticationModes.UseServerBinding
+        ServerBind = NativeMethods.AuthenticationModes.UseServerBinding,
     }
 }

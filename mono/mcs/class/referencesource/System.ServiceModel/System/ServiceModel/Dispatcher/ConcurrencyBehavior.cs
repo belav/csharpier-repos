@@ -20,20 +20,33 @@ namespace System.ServiceModel.Dispatcher
         {
             this.concurrencyMode = runtime.ConcurrencyMode;
             this.enforceOrderedReceive = runtime.EnsureOrderedDispatch;
-            this.supportsTransactedBatch = ConcurrencyBehavior.SupportsTransactedBatch(runtime.ChannelDispatcher);
+            this.supportsTransactedBatch = ConcurrencyBehavior.SupportsTransactedBatch(
+                runtime.ChannelDispatcher
+            );
         }
 
         static bool SupportsTransactedBatch(ChannelDispatcher channelDispatcher)
         {
-            return channelDispatcher.IsTransactedReceive && (channelDispatcher.MaxTransactedBatchSize > 0);
+            return channelDispatcher.IsTransactedReceive
+                && (channelDispatcher.MaxTransactedBatchSize > 0);
         }
 
         internal bool IsConcurrent(ref MessageRpc rpc)
         {
-            return IsConcurrent(this.concurrencyMode, this.enforceOrderedReceive, rpc.Channel.HasSession, this.supportsTransactedBatch);
+            return IsConcurrent(
+                this.concurrencyMode,
+                this.enforceOrderedReceive,
+                rpc.Channel.HasSession,
+                this.supportsTransactedBatch
+            );
         }
 
-        internal static bool IsConcurrent(ConcurrencyMode concurrencyMode, bool ensureOrderedDispatch, bool hasSession, bool supportsTransactedBatch)
+        internal static bool IsConcurrent(
+            ConcurrencyMode concurrencyMode,
+            bool ensureOrderedDispatch,
+            bool hasSession,
+            bool supportsTransactedBatch
+        )
         {
             if (supportsTransactedBatch)
             {
@@ -158,7 +171,7 @@ namespace System.ServiceModel.Dispatcher
             if (operationContext != null)
             {
                 InstanceContext instanceContext = operationContext.InstanceContext;
-                
+
                 if (operationContext.IsServiceReentrant)
                 {
                     ConcurrencyInstanceContextFacet resource = instanceContext.Concurrency;
@@ -249,8 +262,10 @@ namespace System.ServiceModel.Dispatcher
         {
             get
             {
-                return (((this.calloutMessageQueue != null) && (this.calloutMessageQueue.Count > 0)) ||
-                        ((this.newMessageQueue != null) && (this.newMessageQueue.Count > 0)));
+                return (
+                    ((this.calloutMessageQueue != null) && (this.calloutMessageQueue.Count > 0))
+                    || ((this.newMessageQueue != null) && (this.newMessageQueue.Count > 0))
+                );
             }
         }
 

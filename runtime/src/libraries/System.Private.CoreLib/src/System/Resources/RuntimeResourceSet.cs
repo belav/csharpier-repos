@@ -9,7 +9,7 @@ using System.Threading;
 
 namespace System.Resources
 #if RESOURCES_EXTENSIONS
-    .Extensions
+.Extensions
 #endif
 {
 #pragma warning disable IDE0065
@@ -162,7 +162,6 @@ namespace System.Resources
         // value is a ResourceLocator instance, which might cache the object.
         private Dictionary<string, ResourceLocator>? _resCache;
 
-
         // For our special load-on-demand reader. The
         // RuntimeResourceSet's implementation knows how to treat this reader specially.
         private ResourceReader? _defaultReader;
@@ -175,29 +174,33 @@ namespace System.Resources
         private Dictionary<string, ResourceLocator>? _caseInsensitiveTable;
 
 #if !RESOURCES_EXTENSIONS
-        internal RuntimeResourceSet(string fileName) :
-            this(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read))
-        {
-        }
+        internal RuntimeResourceSet(string fileName)
+            : this(new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read)) { }
 
-        internal RuntimeResourceSet(Stream stream, bool permitDeserialization = false) :
-            base(false)
+        internal RuntimeResourceSet(Stream stream, bool permitDeserialization = false)
+            : base(false)
         {
             _resCache = new Dictionary<string, ResourceLocator>(FastResourceComparer.Default);
             _defaultReader = new ResourceReader(stream, _resCache, permitDeserialization);
         }
 #else
-        internal RuntimeResourceSet(IResourceReader reader) :
-            // explicitly do not call IResourceReader constructor since it caches all resources
-            // the purpose of RuntimeResourceSet is to lazily load and cache.
-            base()
+        internal RuntimeResourceSet(IResourceReader reader)
+            :
+        // explicitly do not call IResourceReader constructor since it caches all resources
+        // the purpose of RuntimeResourceSet is to lazily load and cache.
+        base()
         {
             if (reader is null)
             {
                 throw new ArgumentNullException(nameof(reader));
             }
 
-            _defaultReader = reader as DeserializingResourceReader ?? throw new ArgumentException(SR.Format(SR.NotSupported_WrongResourceReader_Type, reader.GetType()), nameof(reader));
+            _defaultReader =
+                reader as DeserializingResourceReader
+                ?? throw new ArgumentException(
+                    SR.Format(SR.NotSupported_WrongResourceReader_Type, reader.GetType()),
+                    nameof(reader)
+                );
             _resCache = new Dictionary<string, ResourceLocator>(FastResourceComparer.Default);
 
             // in the CoreLib version RuntimeResourceSet creates ResourceReader and passes this in,
@@ -321,7 +324,9 @@ namespace System.Resources
             Dictionary<string, ResourceLocator>? caseInsensitiveTable = _caseInsensitiveTable;
             if (caseInsensitiveTable == null)
             {
-                caseInsensitiveTable = new Dictionary<string, ResourceLocator>(StringComparer.OrdinalIgnoreCase);
+                caseInsensitiveTable = new Dictionary<string, ResourceLocator>(
+                    StringComparer.OrdinalIgnoreCase
+                );
                 initialize = true;
             }
 
@@ -356,7 +361,12 @@ namespace System.Resources
             return value;
         }
 
-        private static object? ReadValue(ResourceReader reader, int dataPos, bool isString, out ResourceLocator locator)
+        private static object? ReadValue(
+            ResourceReader reader,
+            int dataPos,
+            bool isString,
+            out ResourceLocator locator
+        )
         {
             object? value;
             ResourceTypeCode typeCode;
@@ -371,7 +381,10 @@ namespace System.Resources
                 value = reader.LoadObject(dataPos, out typeCode);
             }
 
-            locator = new ResourceLocator(dataPos, ResourceLocator.CanCache(typeCode) ? value : null);
+            locator = new ResourceLocator(
+                dataPos,
+                ResourceLocator.CanCache(typeCode) ? value : null
+            );
             return value;
         }
     }

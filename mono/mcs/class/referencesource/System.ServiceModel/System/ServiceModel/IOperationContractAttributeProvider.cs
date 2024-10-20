@@ -4,11 +4,11 @@
 
 namespace System.ServiceModel
 {
-    using System.Security.Principal;
-    using System.Reflection;
-    using System.Transactions;
-    using System.ServiceModel.Security;
     using System.Net.Security;
+    using System.Reflection;
+    using System.Security.Principal;
+    using System.ServiceModel.Security;
+    using System.Transactions;
 
     interface IOperationContractAttributeProvider
     {

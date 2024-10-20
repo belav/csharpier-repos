@@ -15,7 +15,10 @@ namespace System.Web.Http.Cors.Tracing
         private ITraceWriter _traceWriter;
         private const string MethodName = "GetCorsPolicyProvider";
 
-        public CorsPolicyProviderFactoryTracer(ICorsPolicyProviderFactory innerPolicyProviderFactory, ITraceWriter traceWriter)
+        public CorsPolicyProviderFactoryTracer(
+            ICorsPolicyProviderFactory innerPolicyProviderFactory,
+            ITraceWriter traceWriter
+        )
         {
             Contract.Assert(innerPolicyProviderFactory != null);
             Contract.Assert(traceWriter != null);
@@ -36,21 +39,33 @@ namespace System.Web.Http.Cors.Tracing
                 MethodName,
                 beginTrace: (tr) =>
                 {
-                    tr.Message = String.Format(CultureInfo.CurrentCulture, SRResources.TraceCorsRequestContext, request.GetCorsRequestContext());
+                    tr.Message = String.Format(
+                        CultureInfo.CurrentCulture,
+                        SRResources.TraceCorsRequestContext,
+                        request.GetCorsRequestContext()
+                    );
                 },
-                execute: () => { policyProvider = _innerPolicyProviderFactory.GetCorsPolicyProvider(request); },
+                execute: () =>
+                {
+                    policyProvider = _innerPolicyProviderFactory.GetCorsPolicyProvider(request);
+                },
                 endTrace: (tr) =>
                 {
                     if (policyProvider != null)
                     {
-                        tr.Message = String.Format(CultureInfo.CurrentCulture, SRResources.TraceEndPolicyProviderReturned, policyProvider);
+                        tr.Message = String.Format(
+                            CultureInfo.CurrentCulture,
+                            SRResources.TraceEndPolicyProviderReturned,
+                            policyProvider
+                        );
                     }
                     else
                     {
                         tr.Message = SRResources.TraceEndNoPolicyProviderReturned;
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
 
             if (policyProvider != null)
             {

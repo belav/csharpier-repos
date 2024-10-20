@@ -6,20 +6,28 @@ namespace System.Activities.Runtime
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Runtime.Serialization;
     using System.Runtime;
+    using System.Runtime.Serialization;
     using System.Security;
+    using System.Text;
 
     [DataContract]
     class FuncCompletionCallbackWrapper<T> : CompletionCallbackWrapper
     {
         static readonly Type callbackType = typeof(CompletionCallback<T>);
-        static readonly Type[] callbackParameterTypes = new Type[] { typeof(NativeActivityContext), typeof(ActivityInstance), typeof(T) };
+        static readonly Type[] callbackParameterTypes = new Type[]
+        {
+            typeof(NativeActivityContext),
+            typeof(ActivityInstance),
+            typeof(T),
+        };
 
         T resultValue;
 
-        public FuncCompletionCallbackWrapper(CompletionCallback<T> callback, ActivityInstance owningInstance)
+        public FuncCompletionCallbackWrapper(
+            CompletionCallback<T> callback,
+            ActivityInstance owningInstance
+        )
             : base(callback, owningInstance)
         {
             this.NeedsToGatherOutputs = true;
@@ -60,7 +68,8 @@ namespace System.Activities.Runtime
 
             if (completedInstance.Activity.HandlerOf != null)
             {
-                DelegateOutArgument resultArgument = completedInstance.Activity.HandlerOf.GetResultArgument();
+                DelegateOutArgument resultArgument =
+                    completedInstance.Activity.HandlerOf.GetResultArgument();
                 if (resultArgument != null)
                 {
                     resultId = resultArgument.Id;
@@ -69,7 +78,10 @@ namespace System.Activities.Runtime
                 {
                     ActivityWithResult activity = completedInstance.Activity as ActivityWithResult;
                     // for auto-generated results, we should bind the value from the Handler if available
-                    if (activity != null && TypeHelper.AreTypesCompatible(activity.ResultType, typeof(T)))
+                    if (
+                        activity != null
+                        && TypeHelper.AreTypesCompatible(activity.ResultType, typeof(T))
+                    )
                     {
                         resultId = GetResultId(activity);
                     }
@@ -77,7 +89,10 @@ namespace System.Activities.Runtime
             }
             else
             {
-                Fx.Assert(completedInstance.Activity is ActivityWithResult, "should only be using FuncCompletionCallbackWrapper with ActivityFunc and ActivityWithResult");
+                Fx.Assert(
+                    completedInstance.Activity is ActivityWithResult,
+                    "should only be using FuncCompletionCallbackWrapper with ActivityFunc and ActivityWithResult"
+                );
                 resultId = GetResultId((ActivityWithResult)completedInstance.Activity);
             }
 
@@ -97,10 +112,15 @@ namespace System.Activities.Runtime
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Because we are calling EnsureCallback",
-            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Because we are calling EnsureCallback",
+            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT."
+        )]
         [SecuritySafeCritical]
-        protected internal override void Invoke(NativeActivityContext context, ActivityInstance completedInstance)
+        protected internal override void Invoke(
+            NativeActivityContext context,
+            ActivityInstance completedInstance
+        )
         {
             // Call the EnsureCallback overload that also looks for SomeMethod<T> where T is the result type
             // and the signature matches.
@@ -111,7 +131,11 @@ namespace System.Activities.Runtime
 
         protected override void OnSerializingGenericCallback()
         {
-            ValidateCallbackResolution(callbackType, callbackParameterTypes, callbackParameterTypes[2]);
+            ValidateCallbackResolution(
+                callbackType,
+                callbackParameterTypes,
+                callbackParameterTypes[2]
+            );
         }
     }
 }

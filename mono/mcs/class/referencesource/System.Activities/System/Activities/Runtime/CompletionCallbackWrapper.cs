@@ -18,28 +18,23 @@ namespace System.Activities.Runtime
     abstract class CompletionCallbackWrapper : CallbackWrapper
     {
         static Type completionCallbackType = typeof(CompletionCallback);
-        static Type[] completionCallbackParameters = new Type[] { typeof(NativeActivityContext), typeof(ActivityInstance) };
+        static Type[] completionCallbackParameters = new Type[]
+        {
+            typeof(NativeActivityContext),
+            typeof(ActivityInstance),
+        };
 
         bool checkForCancelation;
 
         bool needsToGatherOutputs;
 
         protected CompletionCallbackWrapper(Delegate callback, ActivityInstance owningInstance)
-            : base(callback, owningInstance)
-        {
-        }
+            : base(callback, owningInstance) { }
 
         protected bool NeedsToGatherOutputs
         {
-            get
-            {
-                return this.needsToGatherOutputs;
-            }
-
-            set
-            {
-                this.needsToGatherOutputs = value;
-            }
+            get { return this.needsToGatherOutputs; }
+            set { this.needsToGatherOutputs = value; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "checkForCancelation")]
@@ -66,7 +61,10 @@ namespace System.Activities.Runtime
             // No-op in the base class
         }
 
-        internal WorkItem CreateWorkItem(ActivityInstance completedInstance, ActivityExecutor executor)
+        internal WorkItem CreateWorkItem(
+            ActivityInstance completedInstance,
+            ActivityExecutor executor
+        )
         {
             // We use the property to guard against the virtual method call
             // since we don't need it in the common case
@@ -95,13 +93,20 @@ namespace System.Activities.Runtime
             return workItem;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Because any implementation will be calling EnsureCallback",
-            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Because any implementation will be calling EnsureCallback",
+            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT."
+        )]
         [SecuritySafeCritical]
-        protected internal abstract void Invoke(NativeActivityContext context, ActivityInstance completedInstance);
+        protected internal abstract void Invoke(
+            NativeActivityContext context,
+            ActivityInstance completedInstance
+        );
 
         [DataContract]
-        public class CompletionWorkItem : ActivityExecutionWorkItem, ActivityInstanceMap.IActivityReference
+        public class CompletionWorkItem
+            : ActivityExecutionWorkItem,
+                ActivityInstanceMap.IActivityReference
         {
             CompletionCallbackWrapper callbackWrapper;
             ActivityInstance completedInstance;
@@ -113,7 +118,10 @@ namespace System.Activities.Runtime
             }
 
             // Only used by non-pooled base classes.
-            protected CompletionWorkItem(CompletionCallbackWrapper callbackWrapper, ActivityInstance completedInstance)
+            protected CompletionWorkItem(
+                CompletionCallbackWrapper callbackWrapper,
+                ActivityInstance completedInstance
+            )
                 : base(callbackWrapper.ActivityInstance)
             {
                 this.callbackWrapper = callbackWrapper;
@@ -122,10 +130,7 @@ namespace System.Activities.Runtime
 
             protected ActivityInstance CompletedInstance
             {
-                get
-                {
-                    return this.completedInstance;
-                }
+                get { return this.completedInstance; }
             }
 
             [DataMember(Name = "callbackWrapper")]
@@ -142,7 +147,10 @@ namespace System.Activities.Runtime
                 set { this.completedInstance = value; }
             }
 
-            public void Initialize(CompletionCallbackWrapper callbackWrapper, ActivityInstance completedInstance)
+            public void Initialize(
+                CompletionCallbackWrapper callbackWrapper,
+                ActivityInstance completedInstance
+            )
             {
                 base.Reinitialize(callbackWrapper.ActivityInstance);
                 this.callbackWrapper = callbackWrapper;
@@ -154,7 +162,7 @@ namespace System.Activities.Runtime
                 base.ClearForReuse();
                 this.callbackWrapper = null;
                 this.completedInstance = null;
-            
+
                 executor.CompletionWorkItemPool.Release(this);
             }
 
@@ -162,7 +170,14 @@ namespace System.Activities.Runtime
             {
                 if (TD.CompleteCompletionWorkItemIsEnabled())
                 {
-                    TD.CompleteCompletionWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id, this.completedInstance.Activity.GetType().ToString(), this.completedInstance.Activity.DisplayName, this.completedInstance.Id);
+                    TD.CompleteCompletionWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id,
+                        this.completedInstance.Activity.GetType().ToString(),
+                        this.completedInstance.Activity.DisplayName,
+                        this.completedInstance.Id
+                    );
                 }
             }
 
@@ -170,7 +185,14 @@ namespace System.Activities.Runtime
             {
                 if (TD.ScheduleCompletionWorkItemIsEnabled())
                 {
-                    TD.ScheduleCompletionWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id, this.completedInstance.Activity.GetType().ToString(), this.completedInstance.Activity.DisplayName, this.completedInstance.Id);
+                    TD.ScheduleCompletionWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id,
+                        this.completedInstance.Activity.GetType().ToString(),
+                        this.completedInstance.Activity.DisplayName,
+                        this.completedInstance.Id
+                    );
                 }
             }
 
@@ -178,7 +200,14 @@ namespace System.Activities.Runtime
             {
                 if (TD.StartCompletionWorkItemIsEnabled())
                 {
-                    TD.StartCompletionWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id, this.completedInstance.Activity.GetType().ToString(), this.completedInstance.Activity.DisplayName, this.completedInstance.Id);
+                    TD.StartCompletionWorkItem(
+                        this.ActivityInstance.Activity.GetType().ToString(),
+                        this.ActivityInstance.Activity.DisplayName,
+                        this.ActivityInstance.Id,
+                        this.completedInstance.Activity.GetType().ToString(),
+                        this.completedInstance.Activity.DisplayName,
+                        this.completedInstance.Id
+                    );
                 }
             }
 
@@ -186,7 +215,10 @@ namespace System.Activities.Runtime
             {
                 NativeActivityContext context = executor.NativeActivityContextPool.Acquire();
 
-                Fx.Assert(this.completedInstance.Activity != null, "Activity definition should always be associated with an activity instance.");
+                Fx.Assert(
+                    this.completedInstance.Activity != null,
+                    "Activity definition should always be associated with an activity instance."
+                );
 
                 try
                 {
@@ -218,33 +250,39 @@ namespace System.Activities.Runtime
 
             Activity ActivityInstanceMap.IActivityReference.Activity
             {
-                get 
-                {
-                    return this.completedInstance.Activity;
-                }
+                get { return this.completedInstance.Activity; }
             }
 
-            void ActivityInstanceMap.IActivityReference.Load(Activity activity, ActivityInstanceMap instanceMap)
+            void ActivityInstanceMap.IActivityReference.Load(
+                Activity activity,
+                ActivityInstanceMap instanceMap
+            )
             {
                 if (this.completedInstance.Activity == null)
                 {
-                    ((ActivityInstanceMap.IActivityReference)this.completedInstance).Load(activity, instanceMap);
+                    ((ActivityInstanceMap.IActivityReference)this.completedInstance).Load(
+                        activity,
+                        instanceMap
+                    );
                 }
             }
-
         }
 
         [DataContract]
         class CompletionWithCancelationCheckWorkItem : CompletionWorkItem
         {
-            public CompletionWithCancelationCheckWorkItem(CompletionCallbackWrapper callbackWrapper, ActivityInstance completedInstance)
-                : base(callbackWrapper, completedInstance)
-            {
-            }
+            public CompletionWithCancelationCheckWorkItem(
+                CompletionCallbackWrapper callbackWrapper,
+                ActivityInstance completedInstance
+            )
+                : base(callbackWrapper, completedInstance) { }
 
             public override bool Execute(ActivityExecutor executor, BookmarkManager bookmarkManager)
             {
-                if (this.CompletedInstance.State != ActivityInstanceState.Closed && this.ActivityInstance.IsPerformingDefaultCancelation)
+                if (
+                    this.CompletedInstance.State != ActivityInstanceState.Closed
+                    && this.ActivityInstance.IsPerformingDefaultCancelation
+                )
                 {
                     this.ActivityInstance.MarkCanceled();
                 }

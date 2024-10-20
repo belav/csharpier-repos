@@ -49,12 +49,15 @@ namespace System.DirectoryServices.Protocols
         ResultsTooLarge = 70,
         AffectsMultipleDsas = 71,
         VirtualListViewError = 76,
-        Other = 80
+        Other = 80,
     }
 
     internal static class OperationErrorMappings
     {
-        private static readonly Dictionary<ResultCode, string> s_resultCodeMapping = new Dictionary<ResultCode, string>(capacity: 43)
+        private static readonly Dictionary<ResultCode, string> s_resultCodeMapping = new Dictionary<
+            ResultCode,
+            string
+        >(capacity: 43)
         {
             { ResultCode.Success, SR.LDAP_SUCCESS },
             { ResultCode.OperationsError, SR.LDAP_OPERATIONS_ERROR },
@@ -98,7 +101,7 @@ namespace System.DirectoryServices.Protocols
             { ResultCode.ResultsTooLarge, SR.LDAP_RESULTS_TOO_LARGE },
             { ResultCode.AffectsMultipleDsas, SR.LDAP_AFFECTS_MULTIPLE_DSAS },
             { ResultCode.VirtualListViewError, SR.LDAP_VIRTUAL_LIST_VIEW_ERROR },
-            { ResultCode.Other, SR.LDAP_OTHER }
+            { ResultCode.Other, SR.LDAP_OTHER },
         };
 
         public static string MapResultCode(int errorCode)
@@ -116,6 +119,6 @@ namespace System.DirectoryServices.Protocols
         LdapDelete = 3,
         LdapModifyDn = 4,
         LdapCompare = 5,
-        LdapExtendedRequest = 6
+        LdapExtendedRequest = 6,
     }
 }

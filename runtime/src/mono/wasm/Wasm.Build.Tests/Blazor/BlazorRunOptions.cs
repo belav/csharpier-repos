@@ -8,8 +8,8 @@ using Microsoft.Playwright;
 #nullable enable
 
 namespace Wasm.Build.Tests.Blazor;
-public record BlazorRunOptions
-(
+
+public record BlazorRunOptions(
     BlazorRunHost Host = BlazorRunHost.DotnetRun,
     bool DetectRuntimeFailures = true,
     bool CheckCounter = true,
@@ -21,4 +21,8 @@ public record BlazorRunOptions
     string QueryString = ""
 );
 
-public enum BlazorRunHost { DotnetRun, WebServer };
+public enum BlazorRunHost
+{
+    DotnetRun,
+    WebServer,
+};

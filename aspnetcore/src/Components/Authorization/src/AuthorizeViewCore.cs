@@ -18,34 +18,42 @@ public abstract class AuthorizeViewCore : ComponentBase
     /// <summary>
     /// The content that will be displayed if the user is authorized.
     /// </summary>
-    [Parameter] public RenderFragment<AuthenticationState>? ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment<AuthenticationState>? ChildContent { get; set; }
 
     /// <summary>
     /// The content that will be displayed if the user is not authorized.
     /// </summary>
-    [Parameter] public RenderFragment<AuthenticationState>? NotAuthorized { get; set; }
+    [Parameter]
+    public RenderFragment<AuthenticationState>? NotAuthorized { get; set; }
 
     /// <summary>
     /// The content that will be displayed if the user is authorized.
     /// If you specify a value for this parameter, do not also specify a value for <see cref="ChildContent"/>.
     /// </summary>
-    [Parameter] public RenderFragment<AuthenticationState>? Authorized { get; set; }
+    [Parameter]
+    public RenderFragment<AuthenticationState>? Authorized { get; set; }
 
     /// <summary>
     /// The content that will be displayed while asynchronous authorization is in progress.
     /// </summary>
-    [Parameter] public RenderFragment? Authorizing { get; set; }
+    [Parameter]
+    public RenderFragment? Authorizing { get; set; }
 
     /// <summary>
     /// The resource to which access is being controlled.
     /// </summary>
-    [Parameter] public object? Resource { get; set; }
+    [Parameter]
+    public object? Resource { get; set; }
 
-    [CascadingParameter] private Task<AuthenticationState>? AuthenticationState { get; set; }
+    [CascadingParameter]
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
 
-    [Inject] private IAuthorizationPolicyProvider AuthorizationPolicyProvider { get; set; } = default!;
+    [Inject]
+    private IAuthorizationPolicyProvider AuthorizationPolicyProvider { get; set; } = default!;
 
-    [Inject] private IAuthorizationService AuthorizationService { get; set; } = default!;
+    [Inject]
+    private IAuthorizationService AuthorizationService { get; set; } = default!;
 
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -75,12 +83,16 @@ public abstract class AuthorizeViewCore : ComponentBase
         // confusion, explicitly prevent the case where both are supplied.
         if (ChildContent != null && Authorized != null)
         {
-            throw new InvalidOperationException($"Do not specify both '{nameof(Authorized)}' and '{nameof(ChildContent)}'.");
+            throw new InvalidOperationException(
+                $"Do not specify both '{nameof(Authorized)}' and '{nameof(ChildContent)}'."
+            );
         }
 
         if (AuthenticationState == null)
         {
-            throw new InvalidOperationException($"Authorization requires a cascading parameter of type Task<{nameof(AuthenticationState)}>. Consider using {typeof(CascadingAuthenticationState).Name} to supply this.");
+            throw new InvalidOperationException(
+                $"Authorization requires a cascading parameter of type Task<{nameof(AuthenticationState)}>. Consider using {typeof(CascadingAuthenticationState).Name} to supply this."
+            );
         }
 
         // Clear the previous result of authorization
@@ -108,7 +120,9 @@ public abstract class AuthorizeViewCore : ComponentBase
         EnsureNoAuthenticationSchemeSpecified(authorizeData);
 
         var policy = await AuthorizationPolicy.CombineAsync(
-            AuthorizationPolicyProvider, authorizeData);
+            AuthorizationPolicyProvider,
+            authorizeData
+        );
         var result = await AuthorizationService.AuthorizeAsync(user, Resource, policy!);
         return result.Succeeded;
     }
@@ -123,7 +137,9 @@ public abstract class AuthorizeViewCore : ComponentBase
             var entry = authorizeData[i];
             if (!string.IsNullOrEmpty(entry.AuthenticationSchemes))
             {
-                throw new NotSupportedException($"The authorization data specifies an authentication scheme with value '{entry.AuthenticationSchemes}'. Authentication schemes cannot be specified for components.");
+                throw new NotSupportedException(
+                    $"The authorization data specifies an authentication scheme with value '{entry.AuthenticationSchemes}'. Authentication schemes cannot be specified for components."
+                );
             }
         }
     }

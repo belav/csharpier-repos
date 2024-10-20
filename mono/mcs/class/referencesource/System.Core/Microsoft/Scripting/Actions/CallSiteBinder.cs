@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -13,6 +13,13 @@
  *
  * ***************************************************************************/
 
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Dynamic;
+using System.Dynamic.Utils;
+using System.Reflection;
+using System.Threading;
 #if CLR2
 using Microsoft.Scripting.Ast;
 #else
@@ -22,20 +29,16 @@ using System.Linq.Expressions;
 using System.Core;
 #endif
 
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Dynamic;
-using System.Dynamic.Utils;
-using System.Threading;
-using System.Reflection;
-
-namespace System.Runtime.CompilerServices {
+namespace System.Runtime.CompilerServices
+{
     /// <summary>
     /// Class responsible for runtime binding of the dynamic operations on the dynamic call site.
     /// </summary>
-    public abstract class CallSiteBinder {
-        private static readonly LabelTarget _updateLabel = Expression.Label("CallSiteBinder.UpdateLabel");
+    public abstract class CallSiteBinder
+    {
+        private static readonly LabelTarget _updateLabel = Expression.Label(
+            "CallSiteBinder.UpdateLabel"
+        );
 
         /// <summary>
         /// The Level 2 cache - all rules produced for the same binder.
@@ -45,8 +48,7 @@ namespace System.Runtime.CompilerServices {
         /// <summary>
         /// Initializes a new instance of the <see cref="CallSiteBinder"/> class.
         /// </summary>
-        protected CallSiteBinder() {
-        }
+        protected CallSiteBinder() { }
 
         /// <summary>
         /// Gets a label that can be used to cause the binding to be updated. It
@@ -54,30 +56,37 @@ namespace System.Runtime.CompilerServices {
         /// This is typically used when the "version" of a dynamic object has
         /// changed.
         /// </summary>
-        public static LabelTarget UpdateLabel {
+        public static LabelTarget UpdateLabel
+        {
             get { return _updateLabel; }
         }
 
-        private sealed class LambdaSignature<T> where T : class {
+        private sealed class LambdaSignature<T>
+            where T : class
+        {
             internal static readonly LambdaSignature<T> Instance = new LambdaSignature<T>();
 
             internal readonly ReadOnlyCollection<ParameterExpression> Parameters;
             internal readonly LabelTarget ReturnLabel;
 
-            private LambdaSignature() {
+            private LambdaSignature()
+            {
                 Type target = typeof(T);
-                if (!target.IsSubclassOf(typeof(MulticastDelegate))) {
+                if (!target.IsSubclassOf(typeof(MulticastDelegate)))
+                {
                     throw Error.TypeParameterIsNotDelegate(target);
                 }
 
                 MethodInfo invoke = target.GetMethod("Invoke");
                 ParameterInfo[] pis = invoke.GetParametersCached();
-                if (pis[0].ParameterType != typeof(CallSite)) {
+                if (pis[0].ParameterType != typeof(CallSite))
+                {
                     throw Error.FirstArgumentMustBeCallSite();
                 }
 
                 var @params = new ParameterExpression[pis.Length - 1];
-                for (int i = 0; i < @params.Length; i++) {
+                for (int i = 0; i < @params.Length; i++)
+                {
                     @params[i] = Expression.Parameter(pis[i + 1].ParameterType, "$arg" + i);
                 }
 
@@ -98,7 +107,11 @@ namespace System.Runtime.CompilerServices {
         /// subsequent occurrences of the dynamic operation, Bind will be called again
         /// to produce a new <see cref="Expression"/> for the new argument types.
         /// </returns>
-        public abstract Expression Bind(object[] args, ReadOnlyCollection<ParameterExpression> parameters, LabelTarget returnLabel);
+        public abstract Expression Bind(
+            object[] args,
+            ReadOnlyCollection<ParameterExpression> parameters,
+            LabelTarget returnLabel
+        );
 
         /// <summary>
         /// Provides low-level runtime binding support.  Classes can override this and provide a direct
@@ -109,17 +122,21 @@ namespace System.Runtime.CompilerServices {
         /// <param name="site">The CallSite the bind is being performed for.</param>
         /// <param name="args">The arguments for the binder.</param>
         /// <returns>A new delegate which replaces the CallSite Target.</returns>
-        public virtual T BindDelegate<T>(CallSite<T> site, object[] args) where T : class {
+        public virtual T BindDelegate<T>(CallSite<T> site, object[] args)
+            where T : class
+        {
             return null;
         }
 
-        
-        internal T BindCore<T>(CallSite<T> site, object[] args) where T : class {
+        internal T BindCore<T>(CallSite<T> site, object[] args)
+            where T : class
+        {
             //
             // Try to find a precompiled delegate, and return it if found.
             //
             T result = BindDelegate(site, args);
-            if (result != null) {
+            if (result != null)
+            {
                 return result;
             }
 
@@ -132,10 +149,11 @@ namespace System.Runtime.CompilerServices {
             //
             // Check the produced rule
             //
-            if (binding == null) {
+            if (binding == null)
+            {
                 throw Error.NoOrInvalidRuleProduced();
             }
-            
+
             //
             // finally produce the new rule if we need to
             //
@@ -143,7 +161,8 @@ namespace System.Runtime.CompilerServices {
             // We cannot compile rules in the heterogeneous app domains since they
             // may come from less trusted sources
             // Silverlight always uses a homogenous appdomain, so we don’t need this check
-            if (!AppDomain.CurrentDomain.IsHomogenous) {
+            if (!AppDomain.CurrentDomain.IsHomogenous)
+            {
                 throw Error.HomogenousAppDomainRequired();
             }
 #endif
@@ -161,11 +180,15 @@ namespace System.Runtime.CompilerServices {
         /// </summary>
         /// <typeparam name="T">The type of target being added.</typeparam>
         /// <param name="target">The target delegate to be added to the cache.</param>
-        protected void CacheTarget<T>(T target) where T : class {
+        protected void CacheTarget<T>(T target)
+            where T : class
+        {
             GetRuleCache<T>().AddRule(target);
         }
 
-        private static Expression<T> Stitch<T>(Expression binding, LambdaSignature<T> signature) where T : class {
+        private static Expression<T> Stitch<T>(Expression binding, LambdaSignature<T> signature)
+            where T : class
+        {
             Type siteType = typeof(CallSite<T>);
 
             var body = new ReadOnlyCollectionBuilder<Expression>(3);
@@ -178,12 +201,8 @@ namespace System.Runtime.CompilerServices {
 
 #if DEBUG
             // put the AST into the constant pool for debugging purposes
-            updLabel = Expression.Block(
-                Expression.Constant(binding, typeof(Expression)),
-                updLabel
-            );
+            updLabel = Expression.Block(Expression.Constant(binding, typeof(Expression)), updLabel);
 #endif
-            
             body.Add(updLabel);
             body.Add(
                 Expression.Label(
@@ -213,16 +232,21 @@ namespace System.Runtime.CompilerServices {
             );
         }
 
-        internal RuleCache<T> GetRuleCache<T>() where T : class {
+        internal RuleCache<T> GetRuleCache<T>()
+            where T : class
+        {
             // make sure we have cache.
-            if (Cache == null) {
+            if (Cache == null)
+            {
                 Interlocked.CompareExchange(ref Cache, new Dictionary<Type, object>(), null);
             }
 
             object ruleCache;
             var cache = Cache;
-            lock (cache) {
-                if (!cache.TryGetValue(typeof(T), out ruleCache)) {
+            lock (cache)
+            {
+                if (!cache.TryGetValue(typeof(T), out ruleCache))
+                {
                     cache[typeof(T)] = ruleCache = new RuleCache<T>();
                 }
             }

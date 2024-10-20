@@ -21,7 +21,11 @@ namespace System.ServiceModel.Channels
         static WaitCallback readCallback;
         TimeoutHelper receiveTimeoutHelper;
 
-        public ConnectionModeReader(IConnection connection, ConnectionModeCallback callback, ConnectionClosedCallback closedCallback)
+        public ConnectionModeReader(
+            IConnection connection,
+            ConnectionModeCallback callback,
+            ConnectionClosedCallback closedCallback
+        )
             : base(connection, closedCallback)
         {
             this.callback = callback;
@@ -61,7 +65,7 @@ namespace System.ServiceModel.Channels
 
         bool ContinueReading()
         {
-            for (;;)
+            for (; ; )
             {
                 if (size == 0)
                 {
@@ -70,8 +74,15 @@ namespace System.ServiceModel.Channels
                         readCallback = new WaitCallback(ReadCallback);
                     }
 
-                    if (Connection.BeginRead(0, Connection.AsyncReadBufferSize, GetRemainingTimeout(),
-                        readCallback, this) == AsyncCompletionResult.Queued)
+                    if (
+                        Connection.BeginRead(
+                            0,
+                            Connection.AsyncReadBufferSize,
+                            GetRemainingTimeout(),
+                            readCallback,
+                            this
+                        ) == AsyncCompletionResult.Queued
+                    )
                     {
                         break;
                     }
@@ -81,7 +92,7 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                for (;;)
+                for (; ; )
                 {
                     int bytesDecoded;
                     try
@@ -96,8 +107,12 @@ namespace System.ServiceModel.Channels
                         {
                             byte[] drainBuffer = new byte[128];
                             InitialServerConnectionReader.SendFault(
-                                Connection, framingFault, drainBuffer, GetRemainingTimeout(),
-                                MaxViaSize + MaxContentTypeSize);
+                                Connection,
+                                framingFault,
+                                drainBuffer,
+                                GetRemainingTimeout(),
+                                MaxViaSize + MaxContentTypeSize
+                            );
                             base.Close(GetRemainingTimeout());
                         }
                         throw;
@@ -165,7 +180,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(decoder.CreatePrematureEOFException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        decoder.CreatePrematureEOFException()
+                    );
                 }
             }
 
@@ -184,7 +201,10 @@ namespace System.ServiceModel.Channels
         {
             if (readException != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(readException, Connection.ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    readException,
+                    Connection.ExceptionEventType
+                );
             }
 
             return decoder.Mode;

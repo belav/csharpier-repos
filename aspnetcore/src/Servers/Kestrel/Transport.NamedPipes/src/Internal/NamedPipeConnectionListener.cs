@@ -35,9 +35,12 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
         NamedPipeEndPoint endpoint,
         NamedPipeTransportOptions options,
         ILoggerFactory loggerFactory,
-        ObjectPoolProvider objectPoolProvider)
+        ObjectPoolProvider objectPoolProvider
+    )
     {
-        _log = loggerFactory.CreateLogger("Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes");
+        _log = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes"
+        );
         _endpoint = endpoint;
         _options = options;
         _memoryPool = options.MemoryPoolFactory();
@@ -49,18 +52,37 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
         // The OS maintains a backlog of clients that are waiting to connect, so the app queue only stores a single connection.
         // We want to have a queue plus a background task that populates the queue, rather than creating NamedPipeServerStream
         // when AcceptAsync is called, so that the server is always the owner of the pipe name.
-        _acceptedQueue = Channel.CreateBounded<ConnectionContext>(new BoundedChannelOptions(capacity: 1));
+        _acceptedQueue = Channel.CreateBounded<ConnectionContext>(
+            new BoundedChannelOptions(capacity: 1)
+        );
 
         var maxReadBufferSize = _options.MaxReadBufferSize ?? 0;
         var maxWriteBufferSize = _options.MaxWriteBufferSize ?? 0;
 
-        _inputOptions = new PipeOptions(_memoryPool, PipeScheduler.ThreadPool, PipeScheduler.Inline, maxReadBufferSize, maxReadBufferSize / 2, useSynchronizationContext: false);
-        _outputOptions = new PipeOptions(_memoryPool, PipeScheduler.Inline, PipeScheduler.ThreadPool, maxWriteBufferSize, maxWriteBufferSize / 2, useSynchronizationContext: false);
+        _inputOptions = new PipeOptions(
+            _memoryPool,
+            PipeScheduler.ThreadPool,
+            PipeScheduler.Inline,
+            maxReadBufferSize,
+            maxReadBufferSize / 2,
+            useSynchronizationContext: false
+        );
+        _outputOptions = new PipeOptions(
+            _memoryPool,
+            PipeScheduler.Inline,
+            PipeScheduler.ThreadPool,
+            maxWriteBufferSize,
+            maxWriteBufferSize / 2,
+            useSynchronizationContext: false
+        );
     }
 
     internal void ReturnStream(NamedPipeServerStream stream)
     {
-        Debug.Assert(!stream.IsConnected, "Stream should have been successfully disconnected to reach this point.");
+        Debug.Assert(
+            !stream.IsConnected,
+            "Stream should have been successfully disconnected to reach this point."
+        );
 
         // The stream is automatically disposed if there isn't space in the pool.
         _namedPipeServerStreamPool.Return(stream);
@@ -108,7 +130,15 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
 
                 await stream.WaitForConnectionAsync(_listeningToken);
 
-                var connection = new NamedPipeConnection(this, stream, _endpoint, _log, _memoryPool, _inputOptions, _outputOptions);
+                var connection = new NamedPipeConnection(
+                    this,
+                    stream,
+                    _endpoint,
+                    _log,
+                    _memoryPool,
+                    _inputOptions,
+                    _outputOptions
+                );
                 connection.Start();
 
                 // Create the next stream before writing connected stream to the channel.
@@ -120,7 +150,9 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
                 {
                     if (!await _acceptedQueue.Writer.WaitToWriteAsync(_listeningToken))
                     {
-                        throw new InvalidOperationException("Accept queue writer was unexpectedly closed.");
+                        throw new InvalidOperationException(
+                            "Accept queue writer was unexpectedly closed."
+                        );
                     }
                 }
             }
@@ -144,7 +176,9 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
         nextStream.Dispose();
     }
 
-    public async ValueTask<ConnectionContext?> AcceptAsync(CancellationToken cancellationToken = default)
+    public async ValueTask<ConnectionContext?> AcceptAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         while (await _acceptedQueue.Reader.WaitToReadAsync(cancellationToken))
         {
@@ -180,13 +214,17 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
         (_namedPipeServerStreamPool as IDisposable)?.Dispose();
     }
 
-    private sealed class NamedPipeServerStreamPoolPolicy : IPooledObjectPolicy<NamedPipeServerStream>
+    private sealed class NamedPipeServerStreamPoolPolicy
+        : IPooledObjectPolicy<NamedPipeServerStream>
     {
         private readonly NamedPipeEndPoint _endpoint;
         private readonly NamedPipeTransportOptions _options;
         private bool _hasFirstPipeStarted;
 
-        public NamedPipeServerStreamPoolPolicy(NamedPipeEndPoint endpoint, NamedPipeTransportOptions options)
+        public NamedPipeServerStreamPoolPolicy(
+            NamedPipeEndPoint endpoint,
+            NamedPipeTransportOptions options
+        )
         {
             _endpoint = endpoint;
             _options = options;
@@ -219,7 +257,8 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
                     pipeOptions,
                     inBufferSize: 0, // Buffer in System.IO.Pipelines
                     outBufferSize: 0, // Buffer in System.IO.Pipelines
-                    _options.PipeSecurity);
+                    _options.PipeSecurity
+                );
             }
             else
             {
@@ -230,7 +269,8 @@ internal sealed class NamedPipeConnectionListener : IConnectionListener
                     PipeTransmissionMode.Byte,
                     pipeOptions,
                     inBufferSize: 0,
-                    outBufferSize: 0);
+                    outBufferSize: 0
+                );
             }
             return stream;
         }

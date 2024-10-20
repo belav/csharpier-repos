@@ -8,23 +8,33 @@ namespace Microsoft.Interop.UnitTests
         ICustomMarshallingSignatureTestProvider _provider;
         public StatelessSnippets Stateless { get; }
         public StatefulSnippets Stateful { get; }
-        public CustomCollectionMarshallingCodeSnippets(ICustomMarshallingSignatureTestProvider provider)
+
+        public CustomCollectionMarshallingCodeSnippets(
+            ICustomMarshallingSignatureTestProvider provider
+        )
         {
             _provider = provider;
             Stateless = new StatelessSnippets(this, provider);
             Stateful = new StatefulSnippets(this, provider);
         }
 
-        public static readonly string DisableRuntimeMarshalling = "[assembly:System.Runtime.CompilerServices.DisableRuntimeMarshalling]";
-        public static readonly string UsingSystemRuntimeInteropServicesMarshalling = "using System.Runtime.InteropServices.Marshalling;";
+        public static readonly string DisableRuntimeMarshalling =
+            "[assembly:System.Runtime.CompilerServices.DisableRuntimeMarshalling]";
+        public static readonly string UsingSystemRuntimeInteropServicesMarshalling =
+            "using System.Runtime.InteropServices.Marshalling;";
 
-        public static string TestCollection(bool defineNativeMarshalling = true) => $@"
+        public static string TestCollection(bool defineNativeMarshalling = true) =>
+            $@"
 {(defineNativeMarshalling ? "[NativeMarshalling(typeof(Marshaller<,>))]" : string.Empty)}
 class TestCollection<T> {{}}
 ";
 
-        public string CollectionOutParameter(string collectionType, string predeclaration = "") => _provider.MarshalUsingCollectionOutConstantLength(collectionType, predeclaration);
-        public string CollectionReturnType(string collectionType, string predeclaration = "") => _provider.MarshalUsingCollectionReturnConstantLength(collectionType, predeclaration);
+        public string CollectionOutParameter(string collectionType, string predeclaration = "") =>
+            _provider.MarshalUsingCollectionOutConstantLength(collectionType, predeclaration);
+
+        public string CollectionReturnType(string collectionType, string predeclaration = "") =>
+            _provider.MarshalUsingCollectionReturnConstantLength(collectionType, predeclaration);
+
         public const string NonBlittableElement = """
             [NativeMarshalling(typeof(ElementMarshaller))]
             struct Element
@@ -74,11 +84,16 @@ class TestCollection<T> {{}}
                 public static int ConvertToManaged(Native n) => throw null;
             }
             """;
+
         public class StatelessSnippets
         {
             ICustomMarshallingSignatureTestProvider _provider;
             CustomCollectionMarshallingCodeSnippets _snippets;
-            public StatelessSnippets(CustomCollectionMarshallingCodeSnippets instance, ICustomMarshallingSignatureTestProvider provider)
+
+            public StatelessSnippets(
+                CustomCollectionMarshallingCodeSnippets instance,
+                ICustomMarshallingSignatureTestProvider provider
+            )
             {
                 _provider = provider;
                 _snippets = instance;
@@ -191,111 +206,168 @@ class TestCollection<T> {{}}
                     public static System.ReadOnlySpan<TUnmanagedElement> GetUnmanagedValuesSource(byte* unmanaged, int numElements) => throw null;
                 }
                 """;
+
             public string ByValue<T>() => ByValue(typeof(T).ToString());
-            public string ByValue(string elementType) => _provider.BasicParameterByValue($"TestCollection<{elementType}>", DisableRuntimeMarshalling)
+
+            public string ByValue(string elementType) =>
+                _provider.BasicParameterByValue(
+                    $"TestCollection<{elementType}>",
+                    DisableRuntimeMarshalling
+                )
                 + TestCollection()
                 + In;
 
             public string ByValueWithPinning<T>() => ByValueWithPinning(typeof(T).ToString());
-            public string ByValueWithPinning(string elementType) => _provider.BasicParameterByValue($"TestCollection<{elementType}>", DisableRuntimeMarshalling)
+
+            public string ByValueWithPinning(string elementType) =>
+                _provider.BasicParameterByValue(
+                    $"TestCollection<{elementType}>",
+                    DisableRuntimeMarshalling
+                )
                 + TestCollection()
                 + InPinnable;
 
-            public string ByValueCallerAllocatedBuffer<T>() => ByValueCallerAllocatedBuffer(typeof(T).ToString());
-            public string ByValueCallerAllocatedBuffer(string elementType) => _provider.BasicParameterByValue($"TestCollection<{elementType}>", DisableRuntimeMarshalling)
+            public string ByValueCallerAllocatedBuffer<T>() =>
+                ByValueCallerAllocatedBuffer(typeof(T).ToString());
+
+            public string ByValueCallerAllocatedBuffer(string elementType) =>
+                _provider.BasicParameterByValue(
+                    $"TestCollection<{elementType}>",
+                    DisableRuntimeMarshalling
+                )
                 + TestCollection()
                 + InBuffer;
 
-            public string DefaultMarshallerParametersAndModifiers<T>() => DefaultMarshallerParametersAndModifiers(typeof(T).ToString());
-            public string DefaultMarshallerParametersAndModifiers(string elementType) => _provider.MarshalUsingCollectionCountInfoParametersAndModifiers($"TestCollection<{elementType}>")
+            public string DefaultMarshallerParametersAndModifiers<T>() =>
+                DefaultMarshallerParametersAndModifiers(typeof(T).ToString());
+
+            public string DefaultMarshallerParametersAndModifiers(string elementType) =>
+                _provider.MarshalUsingCollectionCountInfoParametersAndModifiers(
+                    $"TestCollection<{elementType}>"
+                )
                 + TestCollection()
                 + Default;
 
-            public string CustomMarshallerParametersAndModifiers<T>() => CustomMarshallerParametersAndModifiers(typeof(T).ToString());
-            public string CustomMarshallerParametersAndModifiers(string elementType) => _provider.MarshalUsingCollectionParametersAndModifiers($"TestCollection<{elementType}>", $"Marshaller<,>")
+            public string CustomMarshallerParametersAndModifiers<T>() =>
+                CustomMarshallerParametersAndModifiers(typeof(T).ToString());
+
+            public string CustomMarshallerParametersAndModifiers(string elementType) =>
+                _provider.MarshalUsingCollectionParametersAndModifiers(
+                    $"TestCollection<{elementType}>",
+                    $"Marshaller<,>"
+                )
                 + TestCollection(defineNativeMarshalling: false)
                 + Default;
 
-            public string CustomMarshallerReturnValueLength<T>() => CustomMarshallerReturnValueLength(typeof(T).ToString());
-            public string CustomMarshallerReturnValueLength(string elementType) => _provider.MarshalUsingCollectionReturnValueLength($"TestCollection<{elementType}>", $"Marshaller<,>")
+            public string CustomMarshallerReturnValueLength<T>() =>
+                CustomMarshallerReturnValueLength(typeof(T).ToString());
+
+            public string CustomMarshallerReturnValueLength(string elementType) =>
+                _provider.MarshalUsingCollectionReturnValueLength(
+                    $"TestCollection<{elementType}>",
+                    $"Marshaller<,>"
+                )
                 + TestCollection(defineNativeMarshalling: false)
                 + Default;
 
-            public string NativeToManagedOnlyOutParameter<T>() => NativeToManagedOnlyOutParameter(typeof(T).ToString());
-            public string NativeToManagedOnlyOutParameter(string elementType) => _snippets.CollectionOutParameter($"TestCollection<{elementType}>")
+            public string NativeToManagedOnlyOutParameter<T>() =>
+                NativeToManagedOnlyOutParameter(typeof(T).ToString());
+
+            public string NativeToManagedOnlyOutParameter(string elementType) =>
+                _snippets.CollectionOutParameter($"TestCollection<{elementType}>")
                 + TestCollection()
                 + Out;
 
-            public string NativeToManagedFinallyOnlyOutParameter<T>() => NativeToManagedFinallyOnlyOutParameter(typeof(T).ToString());
-            public string NativeToManagedFinallyOnlyOutParameter(string elementType) => _snippets.CollectionOutParameter($"TestCollection<{elementType}>")
+            public string NativeToManagedFinallyOnlyOutParameter<T>() =>
+                NativeToManagedFinallyOnlyOutParameter(typeof(T).ToString());
+
+            public string NativeToManagedFinallyOnlyOutParameter(string elementType) =>
+                _snippets.CollectionOutParameter($"TestCollection<{elementType}>")
                 + TestCollection()
                 + OutGuaranteed;
-            public string NativeToManagedOnlyReturnValue<T>() => NativeToManagedOnlyReturnValue(typeof(T).ToString());
-            public string NativeToManagedOnlyReturnValue(string elementType) => _snippets.CollectionReturnType($"TestCollection<{elementType}>")
+
+            public string NativeToManagedOnlyReturnValue<T>() =>
+                NativeToManagedOnlyReturnValue(typeof(T).ToString());
+
+            public string NativeToManagedOnlyReturnValue(string elementType) =>
+                _snippets.CollectionReturnType($"TestCollection<{elementType}>")
                 + TestCollection()
                 + Out;
 
-            public string NativeToManagedFinallyOnlyReturnValue<T>() => NativeToManagedFinallyOnlyReturnValue(typeof(T).ToString());
-            public string NativeToManagedFinallyOnlyReturnValue(string elementType) => _snippets.CollectionReturnType($"TestCollection<{elementType}>")
+            public string NativeToManagedFinallyOnlyReturnValue<T>() =>
+                NativeToManagedFinallyOnlyReturnValue(typeof(T).ToString());
+
+            public string NativeToManagedFinallyOnlyReturnValue(string elementType) =>
+                _snippets.CollectionReturnType($"TestCollection<{elementType}>")
                 + TestCollection()
                 + OutGuaranteed;
-            public string NestedMarshallerParametersAndModifiers<T>() => NestedMarshallerParametersAndModifiers(typeof(T).ToString());
-            public string NestedMarshallerParametersAndModifiers(string elementType) => _provider.MarshalUsingCollectionCountInfoParametersAndModifiers($"TestCollection<{elementType}>")
+
+            public string NestedMarshallerParametersAndModifiers<T>() =>
+                NestedMarshallerParametersAndModifiers(typeof(T).ToString());
+
+            public string NestedMarshallerParametersAndModifiers(string elementType) =>
+                _provider.MarshalUsingCollectionCountInfoParametersAndModifiers(
+                    $"TestCollection<{elementType}>"
+                )
                 + TestCollection()
                 + DefaultNested;
 
-            public string NonBlittableElementParametersAndModifiers => DefaultMarshallerParametersAndModifiers("Element")
+            public string NonBlittableElementParametersAndModifiers =>
+                DefaultMarshallerParametersAndModifiers("Element")
                 + NonBlittableElement
                 + ElementMarshaller;
 
-            public string NonBlittableElementByValue => ByValue("Element")
-                + NonBlittableElement
-                + ElementIn;
+            public string NonBlittableElementByValue =>
+                ByValue("Element") + NonBlittableElement + ElementIn;
 
-            public string NonBlittableElementNativeToManagedOnlyOutParameter => NativeToManagedOnlyOutParameter("Element")
-                + NonBlittableElement
-                + ElementOut;
+            public string NonBlittableElementNativeToManagedOnlyOutParameter =>
+                NativeToManagedOnlyOutParameter("Element") + NonBlittableElement + ElementOut;
 
-            public string NonBlittableElementNativeToManagedFinallyOnlyOutParameter => NativeToManagedFinallyOnlyOutParameter("Element")
-                + NonBlittableElement
-                + ElementOut;
-
-            public string NonBlittableElementNativeToManagedOnlyReturnValue => NativeToManagedOnlyOutParameter("Element")
+            public string NonBlittableElementNativeToManagedFinallyOnlyOutParameter =>
+                NativeToManagedFinallyOnlyOutParameter("Element")
                 + NonBlittableElement
                 + ElementOut;
 
-            public string NonBlittableElementNativeToManagedFinallyOnlyReturnValue => NativeToManagedFinallyOnlyOutParameter("Element")
+            public string NonBlittableElementNativeToManagedOnlyReturnValue =>
+                NativeToManagedOnlyOutParameter("Element") + NonBlittableElement + ElementOut;
+
+            public string NonBlittableElementNativeToManagedFinallyOnlyReturnValue =>
+                NativeToManagedFinallyOnlyOutParameter("Element")
                 + NonBlittableElement
                 + ElementOut;
 
-            public string DefaultModeByValueInParameter => _provider.BasicParameterByValue($"TestCollection<int>", DisableRuntimeMarshalling)
+            public string DefaultModeByValueInParameter =>
+                _provider.BasicParameterByValue($"TestCollection<int>", DisableRuntimeMarshalling)
                 + TestCollection()
                 + DefaultIn;
 
-            public string DefaultModeReturnValue => _snippets.CollectionOutParameter($"TestCollection<int>")
+            public string DefaultModeReturnValue =>
+                _snippets.CollectionOutParameter($"TestCollection<int>")
                 + TestCollection()
                 + DefaultOut;
 
-            public string GenericCollectionMarshallingArityMismatch => _provider.BasicParameterByValue("TestCollection<int>", DisableRuntimeMarshalling)
+            public string GenericCollectionMarshallingArityMismatch =>
+                _provider.BasicParameterByValue("TestCollection<int>", DisableRuntimeMarshalling)
                 + """
-                [{|#10:NativeMarshalling(typeof(Marshaller<,,>))|}]
-                class TestCollection<T> {}
+                    [{|#10:NativeMarshalling(typeof(Marshaller<,,>))|}]
+                    class TestCollection<T> {}
 
-                [CustomMarshaller(typeof(TestCollection<>), MarshalMode.Default, typeof(Marshaller<,,>))]
-                [ContiguousCollectionMarshaller]
-                static unsafe class Marshaller<T, U, TUnmanagedElement> where TUnmanagedElement : unmanaged
-                {
-                    public static byte* AllocateContainerForUnmanagedElements(TestCollection<T> managed, out int numElements) => throw null;
-                    public static System.ReadOnlySpan<T> GetManagedValuesSource(TestCollection<T> managed) => throw null;
-                    public static System.Span<TUnmanagedElement> GetUnmanagedValuesDestination(byte* unmanaged, int numElements) => throw null;
+                    [CustomMarshaller(typeof(TestCollection<>), MarshalMode.Default, typeof(Marshaller<,,>))]
+                    [ContiguousCollectionMarshaller]
+                    static unsafe class Marshaller<T, U, TUnmanagedElement> where TUnmanagedElement : unmanaged
+                    {
+                        public static byte* AllocateContainerForUnmanagedElements(TestCollection<T> managed, out int numElements) => throw null;
+                        public static System.ReadOnlySpan<T> GetManagedValuesSource(TestCollection<T> managed) => throw null;
+                        public static System.Span<TUnmanagedElement> GetUnmanagedValuesDestination(byte* unmanaged, int numElements) => throw null;
 
-                    public static TestCollection<T> AllocateContainerForManagedElements(byte* unmanaged, int length) => throw null;
-                    public static System.Span<T> GetManagedValuesDestination(TestCollection<T> managed) => throw null;
-                    public static System.ReadOnlySpan<TUnmanagedElement> GetUnmanagedValuesSource(byte* unmanaged, int numElements) => throw null;
-                }
-                """;
+                        public static TestCollection<T> AllocateContainerForManagedElements(byte* unmanaged, int length) => throw null;
+                        public static System.Span<T> GetManagedValuesDestination(TestCollection<T> managed) => throw null;
+                        public static System.ReadOnlySpan<TUnmanagedElement> GetUnmanagedValuesSource(byte* unmanaged, int numElements) => throw null;
+                    }
+                    """;
 
-            public string CustomElementMarshalling => _provider.CustomElementMarshalling("TestCollection<int>", "CustomIntMarshaller")
+            public string CustomElementMarshalling =>
+                _provider.CustomElementMarshalling("TestCollection<int>", "CustomIntMarshaller")
                 + TestCollection()
                 + Default
                 + CustomIntMarshaller;
@@ -305,7 +377,11 @@ class TestCollection<T> {{}}
         {
             private readonly ICustomMarshallingSignatureTestProvider _provider;
             private readonly CustomCollectionMarshallingCodeSnippets _snippets;
-            public StatefulSnippets(CustomCollectionMarshallingCodeSnippets snippets, ICustomMarshallingSignatureTestProvider provider)
+
+            public StatefulSnippets(
+                CustomCollectionMarshallingCodeSnippets snippets,
+                ICustomMarshallingSignatureTestProvider provider
+            )
             {
                 _provider = provider;
                 _snippets = snippets;
@@ -445,93 +521,144 @@ class TestCollection<T> {{}}
                     }
                 }
                 """;
+
             public string ByValue<T>() => ByValue(typeof(T).ToString());
-            public string ByValue(string elementType) => _provider.BasicParameterByValue($"TestCollection<{elementType}>", DisableRuntimeMarshalling)
+
+            public string ByValue(string elementType) =>
+                _provider.BasicParameterByValue(
+                    $"TestCollection<{elementType}>",
+                    DisableRuntimeMarshalling
+                )
                 + TestCollection()
                 + In;
 
             public string ByValueWithPinning<T>() => ByValueWithPinning(typeof(T).ToString());
-            public string ByValueWithPinning(string elementType) => _provider.BasicParameterByValue($"TestCollection<{elementType}>", DisableRuntimeMarshalling)
+
+            public string ByValueWithPinning(string elementType) =>
+                _provider.BasicParameterByValue(
+                    $"TestCollection<{elementType}>",
+                    DisableRuntimeMarshalling
+                )
                 + TestCollection()
                 + InPinnable;
 
-            public string ByValueWithStaticPinning<T>() => ByValueWithStaticPinning(typeof(T).ToString());
-            public string ByValueWithStaticPinning(string elementType) => _provider.BasicParameterByValue($"TestCollection<{elementType}>", DisableRuntimeMarshalling)
+            public string ByValueWithStaticPinning<T>() =>
+                ByValueWithStaticPinning(typeof(T).ToString());
+
+            public string ByValueWithStaticPinning(string elementType) =>
+                _provider.BasicParameterByValue(
+                    $"TestCollection<{elementType}>",
+                    DisableRuntimeMarshalling
+                )
                 + TestCollection()
                 + InStaticPinnable;
 
-            public string ByValueCallerAllocatedBuffer<T>() => ByValueCallerAllocatedBuffer(typeof(T).ToString());
-            public string ByValueCallerAllocatedBuffer(string elementType) => _provider.BasicParameterByValue($"TestCollection<{elementType}>", DisableRuntimeMarshalling)
+            public string ByValueCallerAllocatedBuffer<T>() =>
+                ByValueCallerAllocatedBuffer(typeof(T).ToString());
+
+            public string ByValueCallerAllocatedBuffer(string elementType) =>
+                _provider.BasicParameterByValue(
+                    $"TestCollection<{elementType}>",
+                    DisableRuntimeMarshalling
+                )
                 + TestCollection()
                 + InBuffer;
 
-            public string DefaultMarshallerParametersAndModifiers<T>() => DefaultMarshallerParametersAndModifiers(typeof(T).ToString());
-            public string DefaultMarshallerParametersAndModifiers(string elementType) => _provider.MarshalUsingCollectionCountInfoParametersAndModifiers($"TestCollection<{elementType}>")
+            public string DefaultMarshallerParametersAndModifiers<T>() =>
+                DefaultMarshallerParametersAndModifiers(typeof(T).ToString());
+
+            public string DefaultMarshallerParametersAndModifiers(string elementType) =>
+                _provider.MarshalUsingCollectionCountInfoParametersAndModifiers(
+                    $"TestCollection<{elementType}>"
+                )
                 + TestCollection()
                 + Ref;
 
-            public string CustomMarshallerParametersAndModifiers<T>() => CustomMarshallerParametersAndModifiers(typeof(T).ToString());
-            public string CustomMarshallerParametersAndModifiers(string elementType) => _provider.MarshalUsingCollectionParametersAndModifiers($"TestCollection<{elementType}>", $"Marshaller<,>")
+            public string CustomMarshallerParametersAndModifiers<T>() =>
+                CustomMarshallerParametersAndModifiers(typeof(T).ToString());
+
+            public string CustomMarshallerParametersAndModifiers(string elementType) =>
+                _provider.MarshalUsingCollectionParametersAndModifiers(
+                    $"TestCollection<{elementType}>",
+                    $"Marshaller<,>"
+                )
                 + TestCollection(defineNativeMarshalling: false)
                 + Ref;
 
-            public string CustomMarshallerReturnValueLength<T>() => CustomMarshallerReturnValueLength(typeof(T).ToString());
-            public string CustomMarshallerReturnValueLength(string elementType) => _provider.MarshalUsingCollectionReturnValueLength($"TestCollection<{elementType}>", $"Marshaller<,>")
+            public string CustomMarshallerReturnValueLength<T>() =>
+                CustomMarshallerReturnValueLength(typeof(T).ToString());
+
+            public string CustomMarshallerReturnValueLength(string elementType) =>
+                _provider.MarshalUsingCollectionReturnValueLength(
+                    $"TestCollection<{elementType}>",
+                    $"Marshaller<,>"
+                )
                 + TestCollection(defineNativeMarshalling: false)
                 + Ref;
 
-            public string NativeToManagedOnlyOutParameter<T>() => NativeToManagedOnlyOutParameter(typeof(T).ToString());
-            public string NativeToManagedOnlyOutParameter(string elementType) => _snippets.CollectionOutParameter($"TestCollection<{elementType}>")
+            public string NativeToManagedOnlyOutParameter<T>() =>
+                NativeToManagedOnlyOutParameter(typeof(T).ToString());
+
+            public string NativeToManagedOnlyOutParameter(string elementType) =>
+                _snippets.CollectionOutParameter($"TestCollection<{elementType}>")
                 + TestCollection()
                 + Out;
 
-            public string NativeToManagedFinallyOnlyOutParameter<T>() => NativeToManagedFinallyOnlyOutParameter(typeof(T).ToString());
-            public string NativeToManagedFinallyOnlyOutParameter(string elementType) => _snippets.CollectionOutParameter($"TestCollection<{elementType}>")
+            public string NativeToManagedFinallyOnlyOutParameter<T>() =>
+                NativeToManagedFinallyOnlyOutParameter(typeof(T).ToString());
+
+            public string NativeToManagedFinallyOnlyOutParameter(string elementType) =>
+                _snippets.CollectionOutParameter($"TestCollection<{elementType}>")
                 + TestCollection()
                 + OutGuaranteed;
 
-            public string NativeToManagedOnlyReturnValue<T>() => NativeToManagedOnlyReturnValue(typeof(T).ToString());
-            public string NativeToManagedOnlyReturnValue(string elementType) => _snippets.CollectionReturnType($"TestCollection<{elementType}>")
+            public string NativeToManagedOnlyReturnValue<T>() =>
+                NativeToManagedOnlyReturnValue(typeof(T).ToString());
+
+            public string NativeToManagedOnlyReturnValue(string elementType) =>
+                _snippets.CollectionReturnType($"TestCollection<{elementType}>")
                 + TestCollection()
                 + Out;
 
-            public string NativeToManagedFinallyOnlyReturnValue<T>() => NativeToManagedFinallyOnlyReturnValue(typeof(T).ToString());
-            public string NativeToManagedFinallyOnlyReturnValue(string elementType) => _snippets.CollectionReturnType($"TestCollection<{elementType}>")
+            public string NativeToManagedFinallyOnlyReturnValue<T>() =>
+                NativeToManagedFinallyOnlyReturnValue(typeof(T).ToString());
+
+            public string NativeToManagedFinallyOnlyReturnValue(string elementType) =>
+                _snippets.CollectionReturnType($"TestCollection<{elementType}>")
                 + TestCollection()
                 + OutGuaranteed;
 
-            public string NonBlittableElementParametersAndModifiers => DefaultMarshallerParametersAndModifiers("Element")
+            public string NonBlittableElementParametersAndModifiers =>
+                DefaultMarshallerParametersAndModifiers("Element")
                 + NonBlittableElement
                 + ElementMarshaller;
 
-            public string NonBlittableElementByValue => ByValue("Element")
-                + NonBlittableElement
-                + ElementIn;
+            public string NonBlittableElementByValue =>
+                ByValue("Element") + NonBlittableElement + ElementIn;
 
-            public string NonBlittableElementNativeToManagedOnlyOutParameter => NativeToManagedOnlyOutParameter("Element")
-                + NonBlittableElement
-                + ElementOut;
+            public string NonBlittableElementNativeToManagedOnlyOutParameter =>
+                NativeToManagedOnlyOutParameter("Element") + NonBlittableElement + ElementOut;
 
-            public string NonBlittableElementNativeToManagedFinallyOnlyOutParameter => NativeToManagedOnlyOutParameter("Element")
-                + NonBlittableElement
-                + ElementOut;
-            public string NonBlittableElementNativeToManagedOnlyReturnValue => NativeToManagedOnlyOutParameter("Element")
-                + NonBlittableElement
-                + ElementOut;
+            public string NonBlittableElementNativeToManagedFinallyOnlyOutParameter =>
+                NativeToManagedOnlyOutParameter("Element") + NonBlittableElement + ElementOut;
+            public string NonBlittableElementNativeToManagedOnlyReturnValue =>
+                NativeToManagedOnlyOutParameter("Element") + NonBlittableElement + ElementOut;
 
-            public string NonBlittableElementNativeToManagedFinallyOnlyReturnValue => NativeToManagedOnlyOutParameter("Element")
-                + NonBlittableElement
-                + ElementOut;
+            public string NonBlittableElementNativeToManagedFinallyOnlyReturnValue =>
+                NativeToManagedOnlyOutParameter("Element") + NonBlittableElement + ElementOut;
 
-            public string DefaultModeByValueInParameter => _provider.BasicParameterByValue($"TestCollection<int>", DisableRuntimeMarshalling)
+            public string DefaultModeByValueInParameter =>
+                _provider.BasicParameterByValue($"TestCollection<int>", DisableRuntimeMarshalling)
                 + TestCollection()
                 + DefaultIn;
 
-            public string DefaultModeReturnValue => _snippets.CollectionOutParameter($"TestCollection<int>")
+            public string DefaultModeReturnValue =>
+                _snippets.CollectionOutParameter($"TestCollection<int>")
                 + TestCollection()
                 + DefaultOut;
 
-            public string CustomElementMarshalling => _provider.CustomElementMarshalling("TestCollection<int>", "CustomIntMarshaller")
+            public string CustomElementMarshalling =>
+                _provider.CustomElementMarshalling("TestCollection<int>", "CustomIntMarshaller")
                 + TestCollection()
                 + Ref
                 + CustomIntMarshaller;

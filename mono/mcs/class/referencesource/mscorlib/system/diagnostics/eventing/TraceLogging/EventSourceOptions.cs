@@ -32,11 +32,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public EventLevel Level
         {
-            get
-            {
-                return (EventLevel)this.level;
-            }
-
+            get { return (EventLevel)this.level; }
             set
             {
                 this.level = checked((byte)value);
@@ -50,11 +46,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public EventOpcode Opcode
         {
-            get
-            {
-                return (EventOpcode)this.opcode;
-            }
-
+            get { return (EventOpcode)this.opcode; }
             set
             {
                 this.opcode = checked((byte)value);
@@ -64,10 +56,7 @@ namespace System.Diagnostics.Tracing
 
         internal bool IsOpcodeSet
         {
-            get
-            {
-                return (this.valuesSet & opcodeSet) != 0;
-            }
+            get { return (this.valuesSet & opcodeSet) != 0; }
         }
 
         /// <summary>
@@ -76,11 +65,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public EventKeywords Keywords
         {
-            get
-            {
-                return this.keywords;
-            }
-
+            get { return this.keywords; }
             set
             {
                 this.keywords = value;
@@ -94,11 +79,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public EventTags Tags
         {
-            get
-            {
-                return this.tags;
-            }
-
+            get { return this.tags; }
             set
             {
                 this.tags = value;
@@ -112,10 +93,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         public EventActivityOptions ActivityOptions
         {
-            get
-            {
-                return this.activityOptions;
-            }
+            get { return this.activityOptions; }
             set
             {
                 this.activityOptions = value;

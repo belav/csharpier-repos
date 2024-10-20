@@ -129,7 +129,9 @@ namespace Microsoft.CodeAnalysis
 
     internal static class WorkspaceChangeKindExtensions
     {
-        public static bool IsValid(this WorkspaceChangeKind kind)
-            => kind is >= WorkspaceChangeKind.SolutionChanged and <= WorkspaceChangeKind.AnalyzerConfigDocumentChanged;
+        public static bool IsValid(this WorkspaceChangeKind kind) =>
+            kind
+                is >= WorkspaceChangeKind.SolutionChanged
+                    and <= WorkspaceChangeKind.AnalyzerConfigDocumentChanged;
     }
 }

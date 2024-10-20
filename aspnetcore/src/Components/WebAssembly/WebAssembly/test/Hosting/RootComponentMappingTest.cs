@@ -28,6 +28,7 @@ public class RootComponentMappingTest
         ExceptionAssert.ThrowsArgument(
             () => new RootComponentMapping(typeof(StringBuilder), "test"),
             "componentType",
-            $"The type '{nameof(StringBuilder)}' must implement IComponent to be used as a root component.");
+            $"The type '{nameof(StringBuilder)}' must implement IComponent to be used as a root component."
+        );
     }
 }

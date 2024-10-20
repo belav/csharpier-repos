@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Reflection;
     using System.Web;
@@ -15,7 +15,8 @@ namespace System.Web.UI.WebControls.WebParts {
     /// A ConnectionPoint defines a possible connection. A WebPart uses this
     /// to define the connections it can provide or consume.
     /// </devdoc>
-    public abstract class ConnectionPoint {
+    public abstract class ConnectionPoint
+    {
         private MethodInfo _callbackMethod;
         private Type _controlType;
         private Type _interfaceType;
@@ -28,26 +29,42 @@ namespace System.Web.UI.WebControls.WebParts {
         public static readonly string DefaultID = DefaultIDInternal;
         internal const string DefaultIDInternal = "default";
 
-        // 
+        //
 
-        internal ConnectionPoint(MethodInfo callbackMethod, Type interfaceType, Type controlType, string displayName, string id, bool allowsMultipleConnections) {
-            if (callbackMethod == null) {
+        internal ConnectionPoint(
+            MethodInfo callbackMethod,
+            Type interfaceType,
+            Type controlType,
+            string displayName,
+            string id,
+            bool allowsMultipleConnections
+        )
+        {
+            if (callbackMethod == null)
+            {
                 throw new ArgumentNullException("callbackMethod");
             }
 
-            if (interfaceType == null) {
+            if (interfaceType == null)
+            {
                 throw new ArgumentNullException("interfaceType");
             }
 
-            if (controlType == null) {
+            if (controlType == null)
+            {
                 throw new ArgumentNullException("controlType");
             }
 
-            if (!controlType.IsSubclassOf(typeof(Control))) {
-                throw new ArgumentException(SR.GetString(SR.ConnectionPoint_InvalidControlType), "controlType");
+            if (!controlType.IsSubclassOf(typeof(Control)))
+            {
+                throw new ArgumentException(
+                    SR.GetString(SR.ConnectionPoint_InvalidControlType),
+                    "controlType"
+                );
             }
 
-            if (String.IsNullOrEmpty(displayName)) {
+            if (String.IsNullOrEmpty(displayName))
+            {
                 throw new ArgumentNullException("displayName");
             }
 
@@ -59,47 +76,42 @@ namespace System.Web.UI.WebControls.WebParts {
             _allowsMultipleConnections = allowsMultipleConnections;
         }
 
-        public bool AllowsMultipleConnections {
-            get {
-                return _allowsMultipleConnections;
-            }
+        public bool AllowsMultipleConnections
+        {
+            get { return _allowsMultipleConnections; }
         }
 
-        internal MethodInfo CallbackMethod {
-            get {
-                return _callbackMethod;
-            }
+        internal MethodInfo CallbackMethod
+        {
+            get { return _callbackMethod; }
         }
 
-        public Type ControlType {
-            get {
-                return _controlType;
-            }
+        public Type ControlType
+        {
+            get { return _controlType; }
         }
 
-        public Type InterfaceType {
-            get {
-                return _interfaceType;
-            }
+        public Type InterfaceType
+        {
+            get { return _interfaceType; }
         }
 
-        public string ID {
-            get {
-                return (!String.IsNullOrEmpty(_id)) ? _id : DefaultID;
-            }
+        public string ID
+        {
+            get { return (!String.IsNullOrEmpty(_id)) ? _id : DefaultID; }
         }
 
-        public string DisplayName {
-            get {
-                return _displayName;
-            }
+        public string DisplayName
+        {
+            get { return _displayName; }
         }
 
         /// <devdoc>
         /// Base implementation returns true, can be overridden by subclasses to return
         /// true or false conditionally based on the state of the Control.
         /// </devdoc>
-        public virtual bool GetEnabled(Control control) {
+        public virtual bool GetEnabled(Control control)
+        {
             return true;
         }
     }

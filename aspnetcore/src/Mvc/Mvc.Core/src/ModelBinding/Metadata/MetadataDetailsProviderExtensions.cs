@@ -15,7 +15,10 @@ public static class MetadataDetailsProviderExtensions
     /// </summary>
     /// <param name="list">The list of <see cref="IMetadataDetailsProvider"/>s.</param>
     /// <typeparam name="TMetadataDetailsProvider">The type to remove.</typeparam>
-    public static void RemoveType<TMetadataDetailsProvider>(this IList<IMetadataDetailsProvider> list) where TMetadataDetailsProvider : IMetadataDetailsProvider
+    public static void RemoveType<TMetadataDetailsProvider>(
+        this IList<IMetadataDetailsProvider> list
+    )
+        where TMetadataDetailsProvider : IMetadataDetailsProvider
     {
         ArgumentNullException.ThrowIfNull(list);
 

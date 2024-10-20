@@ -17,13 +17,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class IndexerCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(UnnamedSymbolCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(UnnamedSymbolCompletionProvider);
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerIsSuggestedAfterDot()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class C
                 {
                     public int this[int i] => i;
@@ -37,13 +38,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         c.$$
                     }
                 }
-                """, "this", displayTextSuffix: "[]", matchingFilters: new List<CompletionFilter> { FilterSet.PropertyFilter });
+                """,
+                "this",
+                displayTextSuffix: "[]",
+                matchingFilters: new List<CompletionFilter> { FilterSet.PropertyFilter }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerIsSuggestedAfterDotForString()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class Program
                 {
                     public static void Main(string s)
@@ -51,13 +57,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         s.$$
                     }
                 }
-                """, "this", displayTextSuffix: "[]", matchingFilters: new List<CompletionFilter> { FilterSet.PropertyFilter });
+                """,
+                "this",
+                displayTextSuffix: "[]",
+                matchingFilters: new List<CompletionFilter> { FilterSet.PropertyFilter }
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerIsNotSuggestedOnStaticAccess()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public int this[int i] => i;
@@ -70,13 +81,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         C.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerIsNotSuggestedInNameOfContext()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public int this[int i] => i;
@@ -90,13 +103,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         var name = nameof(c.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerSuggestionCommitsOpenAndClosingBraces()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 public class C
                 {
                     public int this[int i] => i;
@@ -110,7 +125,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         c.$$
                     }
                 }
-                """, "this", """
+                """,
+                "this",
+                """
                 public class C
                 {
                     public int this[int i] => i;
@@ -124,13 +141,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         c[$$]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerWithTwoParametersSuggestionCommitsOpenAndClosingBraces()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 public class C
                 {
                     public int this[int x, int y] => i;
@@ -144,7 +163,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         c.$$
                     }
                 }
-                """, "this", """
+                """,
+                "this",
+                """
                 public class C
                 {
                     public int this[int x, int y] => i;
@@ -158,37 +179,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         c[$$]
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
-        [InlineData("c.$$",
-                    "c[$$]")]
-        [InlineData("c. $$",
-                    "c[$$] ")]
-        [InlineData("c.$$;",
-                    "c[$$];")]
-        [InlineData("c.th$$",
-                    "c[$$]")]
-        [InlineData("c.this$$",
-                    "c[$$]")]
-        [InlineData("c.th$$;",
-                    "c[$$];")]
-        [InlineData("var f = c.$$;",
-                    "var f = c[$$];")]
-        [InlineData("var f = c.th$$;",
-                    "var f = c[$$];")]
-        [InlineData("c?.$$",
-                    "c?[$$]")]
-        [InlineData("c?.this$$",
-                    "c?[$$]")]
-        [InlineData("((C)c).$$",
-                    "((C)c)[$$]")]
-        [InlineData("(true ? c : c).$$",
-                    "(true ? c : c)[$$]")]
-        public async Task IndexerCompletionForDifferentExpressions(string expression, string fixedCode)
+        [InlineData("c.$$", "c[$$]")]
+        [InlineData("c. $$", "c[$$] ")]
+        [InlineData("c.$$;", "c[$$];")]
+        [InlineData("c.th$$", "c[$$]")]
+        [InlineData("c.this$$", "c[$$]")]
+        [InlineData("c.th$$;", "c[$$];")]
+        [InlineData("var f = c.$$;", "var f = c[$$];")]
+        [InlineData("var f = c.th$$;", "var f = c[$$];")]
+        [InlineData("c?.$$", "c?[$$]")]
+        [InlineData("c?.this$$", "c?[$$]")]
+        [InlineData("((C)c).$$", "((C)c)[$$]")]
+        [InlineData("(true ? c : c).$$", "(true ? c : c)[$$]")]
+        public async Task IndexerCompletionForDifferentExpressions(
+            string expression,
+            string fixedCode
+        )
         {
-            await VerifyCustomCommitProviderAsync($@"
+            await VerifyCustomCommitProviderAsync(
+                $@"
 public class C
 {{
     public int this[int i] => i;
@@ -202,7 +216,9 @@ public class Program
         {expression}
     }}
 }}
-", "this", @$"
+",
+                "this",
+                @$"
 public class C
 {{
     public int this[int i] => i;
@@ -216,19 +232,18 @@ public class Program
         {fixedCode}
     }}
 }}
-");
+"
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
-        [InlineData("/* Leading trivia */c.$$",
-                    "/* Leading trivia */c[$$]")]
-        [InlineData("c. $$ /* Trailing trivia */",
-                    "c[$$]  /* Trailing trivia */")]
-        [InlineData("c./* Trivia in between */$$",
-                    "c[$$]/* Trivia in between */")]
+        [InlineData("/* Leading trivia */c.$$", "/* Leading trivia */c[$$]")]
+        [InlineData("c. $$ /* Trailing trivia */", "c[$$]  /* Trailing trivia */")]
+        [InlineData("c./* Trivia in between */$$", "c[$$]/* Trivia in between */")]
         public async Task IndexerCompletionTriviaTest(string expression, string fixedCode)
         {
-            await VerifyCustomCommitProviderAsync($@"
+            await VerifyCustomCommitProviderAsync(
+                $@"
 public class C
 {{
     public int this[int i] => i;
@@ -242,7 +257,9 @@ public class Program
         {expression}
     }}
 }}
-", "this", @$"
+",
+                "this",
+                @$"
 public class C
 {{
     public int this[int i] => i;
@@ -256,13 +273,15 @@ public class Program
         {fixedCode}
     }}
 }}
-");
+"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerDescriptionIncludesDocCommentsAndOverloadsHint()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class C
                 {
                     /// <summary>
@@ -288,14 +307,19 @@ public class Program
                         c.$$
                     }
                 }
-                """, "this", displayTextSuffix: "[]", expectedDescriptionOrNull: @$"int C.this[int i] {{ get; }} (+ 1 {FeaturesResources.overload})
-Returns the index i");
+                """,
+                "this",
+                displayTextSuffix: "[]",
+                expectedDescriptionOrNull: @$"int C.this[int i] {{ get; }} (+ 1 {FeaturesResources.overload})
+Returns the index i"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerOfBaseTypeIsSuggestedAfterDot()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class Base
                 {
                     public int this[int i] => i;
@@ -312,13 +336,17 @@ Returns the index i");
                         d.$$
                     }
                 }
-                """, "this", displayTextSuffix: "[]");
+                """,
+                "this",
+                displayTextSuffix: "[]"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerOfBaseTypeIsNotSuggestedIfNotAccessible()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class Base
                 {
                     protected int this[int i] => i;
@@ -335,13 +363,15 @@ Returns the index i");
                         d.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerIsSuggestedOnString()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class Program
                 {
                     public static void Main()
@@ -350,7 +380,10 @@ Returns the index i");
                         s.$$
                     }
                 }
-                """, "this", displayTextSuffix: "[]");
+                """,
+                "this",
+                displayTextSuffix: "[]"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -389,7 +422,8 @@ Returns the index i");
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -429,7 +463,8 @@ Returns the index i");
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             HideAdvancedMembers = false;
 
@@ -440,7 +475,8 @@ Returns the index i");
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -483,13 +519,15 @@ Returns the index i");
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task IndexerNullForgivingOperatorHandling()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 #nullable enable
 
                 public class C
@@ -505,7 +543,9 @@ Returns the index i");
                         var i = c!.$$
                     }
                 }
-                """, "this", """
+                """,
+                "this",
+                """
                 #nullable enable
 
                 public class C
@@ -521,7 +561,8 @@ Returns the index i");
                         var i = c![$$]
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

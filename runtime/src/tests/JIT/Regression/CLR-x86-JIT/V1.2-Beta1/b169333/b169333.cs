@@ -3,8 +3,11 @@
 //
 
 using Xunit;
+
 class A { }
+
 class B { }
+
 interface IFoo<T>
 {
     void Foo(T t);
@@ -31,4 +34,3 @@ public class C : IFoo<A>, IFoo<B>
         System.Console.WriteLine("PASSED");
     }
 }
-

@@ -11,12 +11,23 @@ namespace System.IO.Compression.Tests
 {
     public partial class ZipFileTestBase : FileCleanupTestBase
     {
-        public static string bad(string filename) => Path.Combine("ZipTestData", "badzipfiles", filename);
-        public static string compat(string filename) => Path.Combine("ZipTestData", "compat", filename);
-        public static string strange(string filename) => Path.Combine("ZipTestData", "StrangeZipFiles", filename);
-        public static string zfile(string filename) => Path.Combine("ZipTestData", "refzipfiles", filename);
-        public static string zfolder(string filename) => Path.Combine("ZipTestData", "refzipfolders", filename);
-        public static string zmodified(string filename) => Path.Combine("ZipTestData", "modified", filename);
+        public static string bad(string filename) =>
+            Path.Combine("ZipTestData", "badzipfiles", filename);
+
+        public static string compat(string filename) =>
+            Path.Combine("ZipTestData", "compat", filename);
+
+        public static string strange(string filename) =>
+            Path.Combine("ZipTestData", "StrangeZipFiles", filename);
+
+        public static string zfile(string filename) =>
+            Path.Combine("ZipTestData", "refzipfiles", filename);
+
+        public static string zfolder(string filename) =>
+            Path.Combine("ZipTestData", "refzipfolders", filename);
+
+        public static string zmodified(string filename) =>
+            Path.Combine("ZipTestData", "modified", filename);
 
         protected TempFile CreateTempCopyFile(string path, string newPath)
         {
@@ -58,17 +69,27 @@ namespace System.IO.Compression.Tests
             while (bytesLeftToRead > 0)
             {
                 int bytesRead = stream.Read(buffer, totalBytesRead, bytesLeftToRead);
-                if (bytesRead == 0) throw new IOException("Unexpected end of stream");
+                if (bytesRead == 0)
+                    throw new IOException("Unexpected end of stream");
 
                 totalBytesRead += bytesRead;
                 bytesLeftToRead -= bytesRead;
             }
         }
-        public static async Task<int> ReadAllBytesAsync(Stream stream, byte[] buffer, int offset, int count)
+
+        public static async Task<int> ReadAllBytesAsync(
+            Stream stream,
+            byte[] buffer,
+            int offset,
+            int count
+        )
         {
             int bytesRead;
             int totalRead = 0;
-            while ((bytesRead = await stream.ReadAsync(buffer, offset + totalRead, count - totalRead)) != 0)
+            while (
+                (bytesRead = await stream.ReadAsync(buffer, offset + totalRead, count - totalRead))
+                != 0
+            )
             {
                 totalRead += bytesRead;
             }
@@ -86,21 +107,26 @@ namespace System.IO.Compression.Tests
             return totalRead;
         }
 
-        public static bool ArraysEqual<T>(T[] a, T[] b) where T : IComparable<T>
+        public static bool ArraysEqual<T>(T[] a, T[] b)
+            where T : IComparable<T>
         {
-            if (a.Length != b.Length) return false;
+            if (a.Length != b.Length)
+                return false;
             for (int i = 0; i < a.Length; i++)
             {
-                if (a[i].CompareTo(b[i]) != 0) return false;
+                if (a[i].CompareTo(b[i]) != 0)
+                    return false;
             }
             return true;
         }
 
-        public static bool ArraysEqual<T>(T[] a, T[] b, int length) where T : IComparable<T>
+        public static bool ArraysEqual<T>(T[] a, T[] b, int length)
+            where T : IComparable<T>
         {
             for (int i = 0; i < length; i++)
             {
-                if (a[i].CompareTo(b[i]) != 0) return false;
+                if (a[i].CompareTo(b[i]) != 0)
+                    return false;
             }
             return true;
         }
@@ -145,7 +171,10 @@ namespace System.IO.Compression.Tests
                     bd = NormalizeLineEndings(bd);
                 }
 
-                Assert.True(ArraysEqual<byte>(ad, bd, ac), "Stream contents not equal: " + ast.ToString() + ", " + bst.ToString());
+                Assert.True(
+                    ArraysEqual<byte>(ad, bd, ac),
+                    "Stream contents not equal: " + ast.ToString() + ", " + bst.ToString()
+                );
 
                 blocksRead++;
             } while (ac == bufSize);
@@ -187,12 +216,28 @@ namespace System.IO.Compression.Tests
             } while (ac == bufSize);
         }
 
-        public static async Task IsZipSameAsDirAsync(string archiveFile, string directory, ZipArchiveMode mode)
+        public static async Task IsZipSameAsDirAsync(
+            string archiveFile,
+            string directory,
+            ZipArchiveMode mode
+        )
         {
-            await IsZipSameAsDirAsync(archiveFile, directory, mode, requireExplicit: false, checkTimes: false);
+            await IsZipSameAsDirAsync(
+                archiveFile,
+                directory,
+                mode,
+                requireExplicit: false,
+                checkTimes: false
+            );
         }
 
-        public static async Task IsZipSameAsDirAsync(string archiveFile, string directory, ZipArchiveMode mode, bool requireExplicit, bool checkTimes)
+        public static async Task IsZipSameAsDirAsync(
+            string archiveFile,
+            string directory,
+            ZipArchiveMode mode,
+            bool requireExplicit,
+            bool checkTimes
+        )
         {
             var s = await StreamHelpers.CreateTempCopyStream(archiveFile);
             IsZipSameAsDir(s, directory, mode, requireExplicit, checkTimes);
@@ -206,102 +251,127 @@ namespace System.IO.Compression.Tests
             return Text.Encoding.Default.GetBytes(rep);
         }
 
-        public static void IsZipSameAsDir(Stream archiveFile, string directory, ZipArchiveMode mode, bool requireExplicit, bool checkTimes)
+        public static void IsZipSameAsDir(
+            Stream archiveFile,
+            string directory,
+            ZipArchiveMode mode,
+            bool requireExplicit,
+            bool checkTimes
+        )
         {
             int count = 0;
 
             using (ZipArchive archive = new ZipArchive(archiveFile, mode))
             {
                 List<FileData> files = FileData.InPath(directory);
-                Assert.All<FileData>(files, (file) => {
-                    count++;
-                    string entryName = file.FullName;
-                    if (file.IsFolder)
-                        entryName += Path.DirectorySeparatorChar;
-                    ZipArchiveEntry entry = archive.GetEntry(entryName);
-                    if (entry == null)
+                Assert.All<FileData>(
+                    files,
+                    (file) =>
                     {
-                        entryName = FlipSlashes(entryName);
-                        entry = archive.GetEntry(entryName);
-                    }
-                    if (file.IsFile)
-                    {
-                        Assert.NotNull(entry);
-                        long givenLength = entry.Length;
-
-                        var buffer = new byte[entry.Length];
-                        using (Stream entrystream = entry.Open())
+                        count++;
+                        string entryName = file.FullName;
+                        if (file.IsFolder)
+                            entryName += Path.DirectorySeparatorChar;
+                        ZipArchiveEntry entry = archive.GetEntry(entryName);
+                        if (entry == null)
                         {
-                            ReadAllBytes(entrystream, buffer, 0, buffer.Length);
+                            entryName = FlipSlashes(entryName);
+                            entry = archive.GetEntry(entryName);
+                        }
+                        if (file.IsFile)
+                        {
+                            Assert.NotNull(entry);
+                            long givenLength = entry.Length;
+
+                            var buffer = new byte[entry.Length];
+                            using (Stream entrystream = entry.Open())
+                            {
+                                ReadAllBytes(entrystream, buffer, 0, buffer.Length);
 #if NETCOREAPP
-                            uint zipcrc = entry.Crc32;
-                            Assert.Equal(CRC.CalculateCRC(buffer), zipcrc);
+                                uint zipcrc = entry.Crc32;
+                                Assert.Equal(CRC.CalculateCRC(buffer), zipcrc);
 #endif
 
-                            if (file.Length != givenLength)
-                            {
-                                buffer = NormalizeLineEndings(buffer);
-                            }
-
-                            Assert.Equal(file.Length, buffer.Length);
-                            ulong crc = CRC.CalculateCRC(buffer);
-                            Assert.Equal(file.CRC, crc.ToString());
-                        }
-
-                        if (checkTimes)
-                        {
-                            const int zipTimestampResolution = 2; // Zip follows the FAT timestamp resolution of two seconds for file records
-                            DateTime lower = file.LastModifiedDate.AddSeconds(-zipTimestampResolution);
-                            DateTime upper = file.LastModifiedDate.AddSeconds(zipTimestampResolution);
-                            Assert.InRange(entry.LastWriteTime.Ticks, lower.Ticks, upper.Ticks);
-                        }
-
-                        Assert.Equal(file.Name, entry.Name);
-                        Assert.Equal(entryName, entry.FullName);
-                        Assert.Equal(entryName, entry.ToString());
-                        Assert.Equal(archive, entry.Archive);
-                    }
-                    else if (file.IsFolder)
-                    {
-                        if (entry == null) //entry not found
-                        {
-                            string entryNameOtherSlash = FlipSlashes(entryName);
-                            bool isEmpty = !files.Any(
-                                f => f.IsFile &&
-                                     (f.FullName.StartsWith(entryName, StringComparison.OrdinalIgnoreCase) ||
-                                      f.FullName.StartsWith(entryNameOtherSlash, StringComparison.OrdinalIgnoreCase)));
-                            if (requireExplicit || isEmpty)
-                            {
-                                Assert.Contains("emptydir", entryName);
-                            }
-
-                            if ((!requireExplicit && !isEmpty) || entryName.Contains("emptydir"))
-                                count--; //discount this entry
-                        }
-                        else
-                        {
-                            using (Stream es = entry.Open())
-                            {
-                                try
+                                if (file.Length != givenLength)
                                 {
-                                    Assert.Equal(0, es.Length);
+                                    buffer = NormalizeLineEndings(buffer);
                                 }
-                                catch (NotSupportedException)
+
+                                Assert.Equal(file.Length, buffer.Length);
+                                ulong crc = CRC.CalculateCRC(buffer);
+                                Assert.Equal(file.CRC, crc.ToString());
+                            }
+
+                            if (checkTimes)
+                            {
+                                const int zipTimestampResolution = 2; // Zip follows the FAT timestamp resolution of two seconds for file records
+                                DateTime lower = file.LastModifiedDate.AddSeconds(
+                                    -zipTimestampResolution
+                                );
+                                DateTime upper = file.LastModifiedDate.AddSeconds(
+                                    zipTimestampResolution
+                                );
+                                Assert.InRange(entry.LastWriteTime.Ticks, lower.Ticks, upper.Ticks);
+                            }
+
+                            Assert.Equal(file.Name, entry.Name);
+                            Assert.Equal(entryName, entry.FullName);
+                            Assert.Equal(entryName, entry.ToString());
+                            Assert.Equal(archive, entry.Archive);
+                        }
+                        else if (file.IsFolder)
+                        {
+                            if (entry == null) //entry not found
+                            {
+                                string entryNameOtherSlash = FlipSlashes(entryName);
+                                bool isEmpty = !files.Any(f =>
+                                    f.IsFile
+                                    && (
+                                        f.FullName.StartsWith(
+                                            entryName,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                        || f.FullName.StartsWith(
+                                            entryNameOtherSlash,
+                                            StringComparison.OrdinalIgnoreCase
+                                        )
+                                    )
+                                );
+                                if (requireExplicit || isEmpty)
+                                {
+                                    Assert.Contains("emptydir", entryName);
+                                }
+
+                                if (
+                                    (!requireExplicit && !isEmpty) || entryName.Contains("emptydir")
+                                )
+                                    count--; //discount this entry
+                            }
+                            else
+                            {
+                                using (Stream es = entry.Open())
                                 {
                                     try
                                     {
-                                        Assert.Equal(-1, es.ReadByte());
+                                        Assert.Equal(0, es.Length);
                                     }
-                                    catch (Exception)
+                                    catch (NotSupportedException)
                                     {
-                                        Console.WriteLine("Didn't return EOF");
-                                        throw;
+                                        try
+                                        {
+                                            Assert.Equal(-1, es.ReadByte());
+                                        }
+                                        catch (Exception)
+                                        {
+                                            Console.WriteLine("Didn't return EOF");
+                                            throw;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
-                });
+                );
                 Assert.Equal(count, archive.Entries.Count);
             }
         }
@@ -309,17 +379,20 @@ namespace System.IO.Compression.Tests
         private static string FlipSlashes(string name)
         {
             Debug.Assert(!(name.Contains("\\") && name.Contains("/")));
-            return
-                name.Contains("\\") ? name.Replace("\\", "/") :
-                name.Contains("/") ? name.Replace("/", "\\") :
-                name;
+            return name.Contains("\\") ? name.Replace("\\", "/")
+                : name.Contains("/") ? name.Replace("/", "\\")
+                : name;
         }
 
         public static void DirsEqual(string actual, string expected)
         {
             var expectedList = FileData.InPath(expected);
             var actualList = Directory.GetFiles(actual, "*.*", SearchOption.AllDirectories);
-            var actualFolders = Directory.GetDirectories(actual, "*.*", SearchOption.AllDirectories);
+            var actualFolders = Directory.GetDirectories(
+                actual,
+                "*.*",
+                SearchOption.AllDirectories
+            );
             var actualCount = actualList.Length + actualFolders.Length;
             Assert.Equal(expectedList.Count, actualCount);
 
@@ -329,9 +402,16 @@ namespace System.IO.Compression.Tests
 
         public static void DirFileNamesEqual(string actual, string expected)
         {
-            IOrderedEnumerable<string> actualEntries = Directory.EnumerateFileSystemEntries(actual, "*", SearchOption.AllDirectories).Order();
-            IOrderedEnumerable<string> expectedEntries = Directory.EnumerateFileSystemEntries(expected, "*", SearchOption.AllDirectories).Order();
-            AssertExtensions.SequenceEqual(expectedEntries.Select(Path.GetFileName).ToArray(), actualEntries.Select(Path.GetFileName).ToArray());
+            IOrderedEnumerable<string> actualEntries = Directory
+                .EnumerateFileSystemEntries(actual, "*", SearchOption.AllDirectories)
+                .Order();
+            IOrderedEnumerable<string> expectedEntries = Directory
+                .EnumerateFileSystemEntries(expected, "*", SearchOption.AllDirectories)
+                .Order();
+            AssertExtensions.SequenceEqual(
+                expectedEntries.Select(Path.GetFileName).ToArray(),
+                actualEntries.Select(Path.GetFileName).ToArray()
+            );
         }
 
         private static void ItemEqual(string[] actualList, List<FileData> expectedList, bool isFile)
@@ -342,7 +422,9 @@ namespace System.IO.Compression.Tests
                 string aEntry = Path.GetFullPath(actualFile);
                 string aName = Path.GetFileName(aEntry);
 
-                var bData = expectedList.Where(f => string.Equals(f.Name, aName, StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+                var bData = expectedList
+                    .Where(f => string.Equals(f.Name, aName, StringComparison.OrdinalIgnoreCase))
+                    .FirstOrDefault();
                 string bEntry = Path.GetFullPath(Path.Combine(bData.OrigFolder, bData.FullName));
                 string bName = Path.GetFileName(bEntry);
                 // expected 'emptydir' folder doesn't exist because MSBuild doesn't copy empty dir
@@ -350,7 +432,10 @@ namespace System.IO.Compression.Tests
                     continue;
 
                 //we want it to be false that one of them is a directory and the other isn't
-                Assert.False(Directory.Exists(aEntry) ^ Directory.Exists(bEntry), "Directory in one is file in other");
+                Assert.False(
+                    Directory.Exists(aEntry) ^ Directory.Exists(bEntry),
+                    "Directory in one is file in other"
+                );
 
                 //contents same
                 if (isFile)
@@ -364,7 +449,13 @@ namespace System.IO.Compression.Tests
 
         /// <param name="useSpansForWriting">Tests the Span overloads of Write</param>
         /// <param name="writeInChunks">Writes in chunks of 5 to test Write with a nonzero offset</param>
-        public static async Task CreateFromDir(string directory, Stream archiveStream, ZipArchiveMode mode, bool useSpansForWriting = false, bool writeInChunks = false)
+        public static async Task CreateFromDir(
+            string directory,
+            Stream archiveStream,
+            ZipArchiveMode mode,
+            bool useSpansForWriting = false,
+            bool writeInChunks = false
+        )
         {
             var files = FileData.InPath(directory);
             using (ZipArchive archive = new ZipArchive(archiveStream, mode, true))
@@ -386,7 +477,9 @@ namespace System.IO.Compression.Tests
                     {
                         string entryName = i.FullName;
 
-                        var installStream = await StreamHelpers.CreateTempCopyStream(Path.Combine(i.OrigFolder, i.FullName));
+                        var installStream = await StreamHelpers.CreateTempCopyStream(
+                            Path.Combine(i.OrigFolder, i.FullName)
+                        );
 
                         if (installStream != null)
                         {
@@ -398,22 +491,37 @@ namespace System.IO.Compression.Tests
                                 var buffer = new byte[1024];
                                 if (useSpansForWriting)
                                 {
-                                    while ((bytesRead = installStream.Read(new Span<byte>(buffer))) != 0)
+                                    while (
+                                        (bytesRead = installStream.Read(new Span<byte>(buffer)))
+                                        != 0
+                                    )
                                     {
-                                        entryStream.Write(new ReadOnlySpan<byte>(buffer, 0, bytesRead));
+                                        entryStream.Write(
+                                            new ReadOnlySpan<byte>(buffer, 0, bytesRead)
+                                        );
                                     }
                                 }
                                 else if (writeInChunks)
                                 {
-                                    while ((bytesRead = installStream.Read(buffer, 0, buffer.Length)) != 0)
+                                    while (
+                                        (bytesRead = installStream.Read(buffer, 0, buffer.Length))
+                                        != 0
+                                    )
                                     {
                                         for (int k = 0; k < bytesRead; k += 5)
-                                            entryStream.Write(buffer, k, Math.Min(5, bytesRead - k));
+                                            entryStream.Write(
+                                                buffer,
+                                                k,
+                                                Math.Min(5, bytesRead - k)
+                                            );
                                     }
                                 }
                                 else
                                 {
-                                    while ((bytesRead = installStream.Read(buffer, 0, buffer.Length)) != 0)
+                                    while (
+                                        (bytesRead = installStream.Read(buffer, 0, buffer.Length))
+                                        != 0
+                                    )
                                     {
                                         entryStream.Write(buffer, 0, bytesRead);
                                     }
@@ -425,7 +533,12 @@ namespace System.IO.Compression.Tests
             }
         }
 
-        internal static void AddEntry(ZipArchive archive, string name, string contents, DateTimeOffset lastWrite)
+        internal static void AddEntry(
+            ZipArchive archive,
+            string name,
+            string contents,
+            DateTimeOffset lastWrite
+        )
         {
             ZipArchiveEntry e = archive.CreateEntry(name);
             e.LastWriteTime = lastWrite;
@@ -440,14 +553,22 @@ namespace System.IO.Compression.Tests
         protected const string Utf8CopyrightChar = "\u00A9";
         protected const string AsciiFileName = "file.txt";
         protected const string UnicodeFileName = "\u4f60\u597D.txt";
+
         // The o with umlaut is a character that exists in both latin1 and utf8
         protected const string Utf8AndLatin1FileName = $"{Utf8LowerCaseOUmlautChar}.txt";
+
         // emojis only make sense in utf8
         protected const string Utf8FileName = $"{Utf8SmileyEmoji}.txt";
-        protected static readonly string ALettersUShortMaxValueMinusOne = new string('a', ushort.MaxValue - 1);
-        protected static readonly string ALettersUShortMaxValue = ALettersUShortMaxValueMinusOne + 'a';
-        protected static readonly string ALettersUShortMaxValueMinusOneAndCopyRightChar = ALettersUShortMaxValueMinusOne + Utf8CopyrightChar;
-        protected static readonly string ALettersUShortMaxValueMinusOneAndTwoCopyRightChars = ALettersUShortMaxValueMinusOneAndCopyRightChar + Utf8CopyrightChar;
+        protected static readonly string ALettersUShortMaxValueMinusOne = new string(
+            'a',
+            ushort.MaxValue - 1
+        );
+        protected static readonly string ALettersUShortMaxValue =
+            ALettersUShortMaxValueMinusOne + 'a';
+        protected static readonly string ALettersUShortMaxValueMinusOneAndCopyRightChar =
+            ALettersUShortMaxValueMinusOne + Utf8CopyrightChar;
+        protected static readonly string ALettersUShortMaxValueMinusOneAndTwoCopyRightChars =
+            ALettersUShortMaxValueMinusOneAndCopyRightChar + Utf8CopyrightChar;
 
         // Returns pairs that are returned the same way by Utf8 and Latin1
         // Returns: originalComment, expectedComment
@@ -467,15 +588,24 @@ namespace System.IO.Compression.Tests
 
             // A smiley emoji code point consists of two characters,
             // meaning the whole emoji should be fully truncated
-            string utf8OriginalALettersAndOneEmojiDoesNotFit = ALettersUShortMaxValueMinusOne + Utf8SmileyEmoji;
+            string utf8OriginalALettersAndOneEmojiDoesNotFit =
+                ALettersUShortMaxValueMinusOne + Utf8SmileyEmoji;
 
             // A smiley emoji code point consists of two characters,
             // so it should not be truncated if it's the last character and the total length is not over the limit.
             string utf8OriginalALettersAndOneEmojiFits = "aaaaa" + Utf8SmileyEmoji;
 
             yield return new object[] { asciiOriginalOverMaxLength, ALettersUShortMaxValue };
-            yield return new object[] { utf8OriginalALettersAndOneEmojiDoesNotFit, ALettersUShortMaxValueMinusOne };
-            yield return new object[] { utf8OriginalALettersAndOneEmojiFits, utf8OriginalALettersAndOneEmojiFits };
+            yield return new object[]
+            {
+                utf8OriginalALettersAndOneEmojiDoesNotFit,
+                ALettersUShortMaxValueMinusOne,
+            };
+            yield return new object[]
+            {
+                utf8OriginalALettersAndOneEmojiFits,
+                utf8OriginalALettersAndOneEmojiFits,
+            };
 
             foreach (object[] e in SharedComment_Data())
             {
@@ -489,10 +619,16 @@ namespace System.IO.Compression.Tests
         {
             // In Latin1, all characters are exactly 1 byte
 
-            string latin1ExpectedALettersAndOneOUmlaut = ALettersUShortMaxValueMinusOne + Utf8LowerCaseOUmlautChar;
-            string latin1OriginalALettersAndTwoOUmlauts = latin1ExpectedALettersAndOneOUmlaut + Utf8LowerCaseOUmlautChar;
+            string latin1ExpectedALettersAndOneOUmlaut =
+                ALettersUShortMaxValueMinusOne + Utf8LowerCaseOUmlautChar;
+            string latin1OriginalALettersAndTwoOUmlauts =
+                latin1ExpectedALettersAndOneOUmlaut + Utf8LowerCaseOUmlautChar;
 
-            yield return new object[] { latin1OriginalALettersAndTwoOUmlauts, latin1ExpectedALettersAndOneOUmlaut };
+            yield return new object[]
+            {
+                latin1OriginalALettersAndTwoOUmlauts,
+                latin1ExpectedALettersAndOneOUmlaut,
+            };
 
             foreach (object[] e in SharedComment_Data())
             {

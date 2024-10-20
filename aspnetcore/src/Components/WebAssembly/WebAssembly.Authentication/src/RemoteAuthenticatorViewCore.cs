@@ -13,7 +13,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 /// A component that handles remote authentication operations in an application.
 /// </summary>
 /// <typeparam name="TAuthenticationState">The user state type persisted while the operation is in progress. It must be serializable.</typeparam>
-public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(JsonSerialized)] TAuthenticationState> : ComponentBase where TAuthenticationState : RemoteAuthenticationState
+public partial class RemoteAuthenticatorViewCore<
+    [DynamicallyAccessedMembers(JsonSerialized)] TAuthenticationState
+> : ComponentBase
+    where TAuthenticationState : RemoteAuthenticationState
 {
     private RemoteAuthenticationApplicationPathsOptions? _applicationPaths;
     private string? _action;
@@ -26,67 +29,84 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
     /// <summary>
     /// Gets or sets the <see cref="RemoteAuthenticationActions"/> action the component needs to handle.
     /// </summary>
-    [Parameter] public string? Action { get => _action; set => _action = value?.ToLowerInvariant(); }
+    [Parameter]
+    public string? Action
+    {
+        get => _action;
+        set => _action = value?.ToLowerInvariant();
+    }
 
     /// <summary>
     /// Gets or sets the <typeparamref name="TAuthenticationState"/> instance to be preserved during the authentication operation.
     /// </summary>
-    [Parameter] public TAuthenticationState AuthenticationState { get; set; } = default!;
+    [Parameter]
+    public TAuthenticationState AuthenticationState { get; set; } = default!;
 
     /// <summary>
     /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogIn"/> is being handled.
     /// </summary>
-    [Parameter] public RenderFragment? LoggingIn { get; set; } = DefaultLogInFragment;
+    [Parameter]
+    public RenderFragment? LoggingIn { get; set; } = DefaultLogInFragment;
 
     /// <summary>
     /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.Register"/> is being handled.
     /// </summary>
-    [Parameter] public RenderFragment? Registering { get; set; }
+    [Parameter]
+    public RenderFragment? Registering { get; set; }
 
     /// <summary>
     /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.Profile"/> is being handled.
     /// </summary>
-    [Parameter] public RenderFragment? UserProfile { get; set; }
+    [Parameter]
+    public RenderFragment? UserProfile { get; set; }
 
     /// <summary>
     /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogInCallback"/> is being handled.
     /// </summary>
-    [Parameter] public RenderFragment CompletingLoggingIn { get; set; } = DefaultLogInCallbackFragment;
+    [Parameter]
+    public RenderFragment CompletingLoggingIn { get; set; } = DefaultLogInCallbackFragment;
 
     /// <summary>
     /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogInFailed"/> is being handled.
     /// </summary>
-    [Parameter] public RenderFragment<string?> LogInFailed { get; set; } = DefaultLogInFailedFragment;
+    [Parameter]
+    public RenderFragment<string?> LogInFailed { get; set; } = DefaultLogInFailedFragment;
 
     /// <summary>
     /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOut"/> is being handled.
     /// </summary>
-    [Parameter] public RenderFragment LogOut { get; set; } = DefaultLogOutFragment;
+    [Parameter]
+    public RenderFragment LogOut { get; set; } = DefaultLogOutFragment;
 
     /// <summary>
     /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOutCallback"/> is being handled.
     /// </summary>
-    [Parameter] public RenderFragment CompletingLogOut { get; set; } = DefaultLogOutCallbackFragment;
+    [Parameter]
+    public RenderFragment CompletingLogOut { get; set; } = DefaultLogOutCallbackFragment;
 
     /// <summary>
     /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOutFailed"/> is being handled.
     /// </summary>
-    [Parameter] public RenderFragment<string?> LogOutFailed { get; set; } = DefaultLogOutFailedFragment;
+    [Parameter]
+    public RenderFragment<string?> LogOutFailed { get; set; } = DefaultLogOutFailedFragment;
 
     /// <summary>
     /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOutSucceeded"/> is being handled.
     /// </summary>
-    [Parameter] public RenderFragment LogOutSucceeded { get; set; } = DefaultLoggedOutFragment;
+    [Parameter]
+    public RenderFragment LogOutSucceeded { get; set; } = DefaultLoggedOutFragment;
 
     /// <summary>
     /// Gets or sets an event callback that will be invoked with the stored authentication state when a log in operation succeeds.
     /// </summary>
-    [Parameter] public EventCallback<TAuthenticationState> OnLogInSucceeded { get; set; }
+    [Parameter]
+    public EventCallback<TAuthenticationState> OnLogInSucceeded { get; set; }
 
     /// <summary>
     /// Gets or sets an event callback that will be invoked with the stored authentication state when a log out operation succeeds.
     /// </summary>
-    [Parameter] public EventCallback<TAuthenticationState> OnLogOutSucceeded { get; set; }
+    [Parameter]
+    public EventCallback<TAuthenticationState> OnLogOutSucceeded { get; set; }
 
     /// <summary>
     /// Gets or sets the <see cref="RemoteAuthenticationApplicationPathsOptions"/> with the paths to different authentication pages.
@@ -98,19 +118,28 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
         set => _applicationPaths = value!;
     }
 
-    [Inject] internal NavigationManager Navigation { get; set; } = default!;
+    [Inject]
+    internal NavigationManager Navigation { get; set; } = default!;
 
-    [Inject] internal IRemoteAuthenticationService<TAuthenticationState> AuthenticationService { get; set; } = default!;
+    [Inject]
+    internal IRemoteAuthenticationService<TAuthenticationState> AuthenticationService { get; set; } =
+        default!;
 
-    [Inject] internal IRemoteAuthenticationPathsProvider RemoteApplicationPathsProvider { get; set; } = default!;
+    [Inject]
+    internal IRemoteAuthenticationPathsProvider RemoteApplicationPathsProvider { get; set; } =
+        default!;
 
-    [Inject] internal AuthenticationStateProvider AuthenticationProvider { get; set; } = default!;
+    [Inject]
+    internal AuthenticationStateProvider AuthenticationProvider { get; set; } = default!;
 
 #pragma warning disable CS0618 // Type or member is obsolete, we keep it for now for backwards compatibility
-    [Inject] internal SignOutSessionStateManager SignOutManager { get; set; } = default!;
+    [Inject]
+    internal SignOutSessionStateManager SignOutManager { get; set; } = default!;
 #pragma warning restore CS0618 // Type or member is obsolete, we keep it for now for backwards compatibility
 
-    [Inject] internal ILogger<RemoteAuthenticatorViewCore<TAuthenticationState>> Logger { get; set; } = default!;
+    [Inject]
+    internal ILogger<RemoteAuthenticatorViewCore<TAuthenticationState>> Logger { get; set; } =
+        default!;
 
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -194,7 +223,9 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
                 }
                 break;
             case RemoteAuthenticationActions.LogOut:
-                await ProcessLogOut(GetReturnUrl(state: null, ApplicationPaths.LogOutSucceededPath));
+                await ProcessLogOut(
+                    GetReturnUrl(state: null, ApplicationPaths.LogOutSucceededPath)
+                );
                 break;
             case RemoteAuthenticationActions.LogOutCallback:
                 await ProcessLogOutCallback();
@@ -212,11 +243,13 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
     {
         AuthenticationState.ReturnUrl = returnUrl;
         var interactiveRequest = GetCachedNavigationState();
-        var result = await AuthenticationService.SignInAsync(new RemoteAuthenticationContext<TAuthenticationState>
-        {
-            State = AuthenticationState,
-            InteractiveRequest = interactiveRequest
-        });
+        var result = await AuthenticationService.SignInAsync(
+            new RemoteAuthenticationContext<TAuthenticationState>
+            {
+                State = AuthenticationState,
+                InteractiveRequest = interactiveRequest,
+            }
+        );
 
         switch (result.Status)
         {
@@ -237,18 +270,27 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
             case RemoteAuthenticationStatus.Failure:
                 Log.LoginFailed(Logger, result.ErrorMessage!);
                 Log.NavigatingToUrl(Logger, ApplicationPaths.LogInFailedPath);
-                Navigation.NavigateTo(ApplicationPaths.LogInFailedPath, AuthenticationNavigationOptions with { HistoryEntryState = result.ErrorMessage });
+                Navigation.NavigateTo(
+                    ApplicationPaths.LogInFailedPath,
+                    AuthenticationNavigationOptions with
+                    {
+                        HistoryEntryState = result.ErrorMessage,
+                    }
+                );
                 break;
             case RemoteAuthenticationStatus.OperationCompleted:
             default:
-                throw new InvalidOperationException($"Invalid authentication result status '{result.Status}'.");
+                throw new InvalidOperationException(
+                    $"Invalid authentication result status '{result.Status}'."
+                );
         }
     }
 
     private async Task ProcessLogInCallback()
     {
         var result = await AuthenticationService.CompleteSignInAsync(
-            new RemoteAuthenticationContext<TAuthenticationState> { Url = Navigation.Uri });
+            new RemoteAuthenticationContext<TAuthenticationState> { Url = Navigation.Uri }
+        );
         switch (result.Status)
         {
             case RemoteAuthenticationStatus.Redirect:
@@ -273,21 +315,38 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
                 Log.NavigatingToUrl(Logger, ApplicationPaths.LogInFailedPath);
                 Navigation.NavigateTo(
                     ApplicationPaths.LogInFailedPath,
-                    AuthenticationNavigationOptions with { HistoryEntryState = result.ErrorMessage });
+                    AuthenticationNavigationOptions with
+                    {
+                        HistoryEntryState = result.ErrorMessage,
+                    }
+                );
                 break;
             default:
-                throw new InvalidOperationException($"Invalid authentication result status '{result.Status}'.");
+                throw new InvalidOperationException(
+                    $"Invalid authentication result status '{result.Status}'."
+                );
         }
     }
 
     private async Task ProcessLogOut(string returnUrl)
     {
-        if ((Navigation.HistoryEntryState != null && !ValidateSignOutRequestState()) ||
+        if (
+            (Navigation.HistoryEntryState != null && !ValidateSignOutRequestState())
+            ||
             // For backcompat purposes, keep SignOutManager working, even though we now use the history.state for this.
-            (Navigation.HistoryEntryState == null && !await SignOutManager.ValidateSignOutState()))
+            (
+                Navigation.HistoryEntryState == null && !await SignOutManager.ValidateSignOutState()
+            )
+        )
         {
             Log.LogoutOperationInitiatedExternally(Logger);
-            Navigation.NavigateTo(ApplicationPaths.LogOutFailedPath, AuthenticationNavigationOptions with { HistoryEntryState = "The logout was not initiated from within the page." });
+            Navigation.NavigateTo(
+                ApplicationPaths.LogOutFailedPath,
+                AuthenticationNavigationOptions with
+                {
+                    HistoryEntryState = "The logout was not initiated from within the page.",
+                }
+            );
             return;
         }
 
@@ -298,11 +357,13 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
         if (isauthenticated)
         {
             var interactiveRequest = GetCachedNavigationState();
-            var result = await AuthenticationService.SignOutAsync(new RemoteAuthenticationContext<TAuthenticationState>
-            {
-                State = AuthenticationState,
-                InteractiveRequest = interactiveRequest
-            });
+            var result = await AuthenticationService.SignOutAsync(
+                new RemoteAuthenticationContext<TAuthenticationState>
+                {
+                    State = AuthenticationState,
+                    InteractiveRequest = interactiveRequest,
+                }
+            );
             switch (result.Status)
             {
                 case RemoteAuthenticationStatus.Redirect:
@@ -323,7 +384,13 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
                 case RemoteAuthenticationStatus.Failure:
                     Log.LogoutFailed(Logger, result.ErrorMessage!);
                     Log.NavigatingToUrl(Logger, ApplicationPaths.LogOutFailedPath);
-                    Navigation.NavigateTo(ApplicationPaths.LogOutFailedPath, AuthenticationNavigationOptions with { HistoryEntryState = result.ErrorMessage });
+                    Navigation.NavigateTo(
+                        ApplicationPaths.LogOutFailedPath,
+                        AuthenticationNavigationOptions with
+                        {
+                            HistoryEntryState = result.ErrorMessage,
+                        }
+                    );
                     break;
                 default:
                     throw new InvalidOperationException($"Invalid authentication result status.");
@@ -338,7 +405,9 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
 
     private async Task ProcessLogOutCallback()
     {
-        var result = await AuthenticationService.CompleteSignOutAsync(new RemoteAuthenticationContext<TAuthenticationState> { Url = Navigation.Uri });
+        var result = await AuthenticationService.CompleteSignOutAsync(
+            new RemoteAuthenticationContext<TAuthenticationState> { Url = Navigation.Uri }
+        );
         switch (result.Status)
         {
             case RemoteAuthenticationStatus.Redirect:
@@ -360,7 +429,13 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
                 break;
             case RemoteAuthenticationStatus.Failure:
                 Log.LogoutCallbackFailed(Logger, result.ErrorMessage!);
-                Navigation.NavigateTo(ApplicationPaths.LogOutFailedPath, AuthenticationNavigationOptions with { HistoryEntryState = result.ErrorMessage });
+                Navigation.NavigateTo(
+                    ApplicationPaths.LogOutFailedPath,
+                    AuthenticationNavigationOptions with
+                    {
+                        HistoryEntryState = result.ErrorMessage,
+                    }
+                );
                 break;
             default:
                 throw new InvalidOperationException($"Invalid authentication result status.");
@@ -377,7 +452,6 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
         var fromNavigationState = GetCachedNavigationState()?.ReturnUrl;
 
         return fromNavigationState ?? defaultReturnUrl ?? Navigation.BaseUri;
-
     }
 
     private bool ValidateSignOutRequestState()
@@ -407,16 +481,23 @@ public partial class RemoteAuthenticatorViewCore<[DynamicallyAccessedMembers(Jso
         var registerUrl = Navigation.ToAbsoluteUri(ApplicationPaths.RemoteRegisterPath).AbsoluteUri;
         var navigationUrl = Navigation.GetUriWithQueryParameters(
             registerUrl,
-            new Dictionary<string, object?> { ["returnUrl"] = loginUrl });
+            new Dictionary<string, object?> { ["returnUrl"] = loginUrl }
+        );
 
-        Navigation.NavigateTo(navigationUrl, AuthenticationNavigationOptions with
-        {
-            ForceLoad = true,
-        });
+        Navigation.NavigateTo(
+            navigationUrl,
+            AuthenticationNavigationOptions with
+            {
+                ForceLoad = true,
+            }
+        );
     }
 
     private void RedirectToProfile() =>
-        Navigation.NavigateTo(Navigation.ToAbsoluteUri(ApplicationPaths.RemoteProfilePath).AbsoluteUri, new NavigationOptions { ReplaceHistoryEntry = true, ForceLoad = true });
+        Navigation.NavigateTo(
+            Navigation.ToAbsoluteUri(ApplicationPaths.RemoteProfilePath).AbsoluteUri,
+            new NavigationOptions { ReplaceHistoryEntry = true, ForceLoad = true }
+        );
 
     private static void DefaultLogInFragment(RenderTreeBuilder builder)
     {

@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_LocallocCnstB5_PSP
 {
     const int Pass = 100;
@@ -13,7 +14,8 @@ public class BringUpTest_LocallocCnstB5_PSP
 
     // Reduce all values to byte
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static unsafe bool CHECK(byte check, byte expected) {
+    public static unsafe bool CHECK(byte check, byte expected)
+    {
         return check == expected;
     }
 
@@ -24,7 +26,7 @@ public class BringUpTest_LocallocCnstB5_PSP
         int i;
         for (i = 0; i < 5; i++)
         {
-            a[i] = (byte) i;
+            a[i] = (byte)i;
         }
 
         i = 0;
@@ -32,7 +34,8 @@ public class BringUpTest_LocallocCnstB5_PSP
         {
             for (; i < 5; i++)
             {
-                if (!CHECK(a[i], (byte) i)) return i;
+                if (!CHECK(a[i], (byte)i))
+                    return i;
             }
         }
         catch
@@ -50,7 +53,8 @@ public class BringUpTest_LocallocCnstB5_PSP
         int ret;
 
         ret = LocallocCnstB5_PSP();
-        if (ret != -1) {
+        if (ret != -1)
+        {
             Console.WriteLine("LocallocCnstB5_PSP: Failed on index: " + ret);
             return Fail;
         }

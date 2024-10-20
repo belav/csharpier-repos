@@ -3,17 +3,14 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class CompositeKeyEndToEndSqlServerTest : CompositeKeyEndToEndTestBase<
-    CompositeKeyEndToEndSqlServerTest.CompositeKeyEndToEndSqlServerFixture>
+public class CompositeKeyEndToEndSqlServerTest
+    : CompositeKeyEndToEndTestBase<CompositeKeyEndToEndSqlServerTest.CompositeKeyEndToEndSqlServerFixture>
 {
     public CompositeKeyEndToEndSqlServerTest(CompositeKeyEndToEndSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class CompositeKeyEndToEndSqlServerFixture : CompositeKeyEndToEndFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

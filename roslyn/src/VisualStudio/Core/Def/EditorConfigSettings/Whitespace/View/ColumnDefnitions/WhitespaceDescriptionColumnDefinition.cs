@@ -17,9 +17,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WhitespaceDescriptionColumnDefinition()
-        {
-        }
+        public WhitespaceDescriptionColumnDefinition() { }
 
         public override string Name => Description;
         public override string DisplayName => ServicesVSResources.Description;

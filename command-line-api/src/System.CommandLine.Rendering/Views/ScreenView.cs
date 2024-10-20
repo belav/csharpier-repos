@@ -16,11 +16,15 @@ namespace System.CommandLine.Rendering.Views
         public ScreenView(
             ConsoleRenderer renderer,
             IConsole console,
-            SynchronizationContext synchronizationContext = null)
+            SynchronizationContext synchronizationContext = null
+        )
         {
             Renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
             _console = console ?? throw new ArgumentNullException(nameof(console));
-            _context = synchronizationContext ?? SynchronizationContext.Current ?? new SynchronizationContext();
+            _context =
+                synchronizationContext
+                ?? SynchronizationContext.Current
+                ?? new SynchronizationContext();
         }
 
         private ConsoleRenderer Renderer { get; }
@@ -51,17 +55,20 @@ namespace System.CommandLine.Rendering.Views
         {
             if (Interlocked.CompareExchange(ref _renderRequested, 1, 0) == 0)
             {
-                _context.Post(x =>
-                {
-                    while (Interlocked.CompareExchange(ref _renderRequested, 0, 1) == 1)
+                _context.Post(
+                    x =>
                     {
-                        if (Interlocked.CompareExchange(ref _renderInProgress, 1, 0) == 0)
+                        while (Interlocked.CompareExchange(ref _renderRequested, 0, 1) == 1)
                         {
-                            Render();
-                            Interlocked.Exchange(ref _renderInProgress, 0);
+                            if (Interlocked.CompareExchange(ref _renderInProgress, 1, 0) == 0)
+                            {
+                                Render();
+                                Interlocked.Exchange(ref _renderInProgress, 0);
+                            }
                         }
-                    }
-                }, null);
+                    },
+                    null
+                );
             }
         }
 

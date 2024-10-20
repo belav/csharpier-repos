@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,94 +35,106 @@ using System.Collections.Generic;
 
 namespace System.CodeDom.Compiler
 {
-	[ConfigurationCollection (typeof (CompilerProviderOption), CollectionType = ConfigurationElementCollectionType.BasicMap, AddItemName = "providerOption")]
-	internal sealed class CompilerProviderOptionsCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection(
+        typeof(CompilerProviderOption),
+        CollectionType = ConfigurationElementCollectionType.BasicMap,
+        AddItemName = "providerOption"
+    )]
+    internal sealed class CompilerProviderOptionsCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-		static CompilerProviderOptionsCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static CompilerProviderOptionsCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-		public CompilerProviderOptionsCollection ()
-		{
-		}
+        public CompilerProviderOptionsCollection() { }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new CompilerProviderOption ();
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new CompilerProviderOption();
+        }
 
-		public CompilerProviderOption Get (int index)
-		{
-			return (CompilerProviderOption) BaseGet (index);
-		}
+        public CompilerProviderOption Get(int index)
+        {
+            return (CompilerProviderOption)BaseGet(index);
+        }
 
-		public CompilerProviderOption Get (string name)
-		{
-			return (CompilerProviderOption) BaseGet (name);
-		}
+        public CompilerProviderOption Get(string name)
+        {
+            return (CompilerProviderOption)BaseGet(name);
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((CompilerProviderOption) element).Name;
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((CompilerProviderOption)element).Name;
+        }
 
-		public string GetKey (int index)
-		{
-			return (string) BaseGetKey (index);
-		}
+        public string GetKey(int index)
+        {
+            return (string)BaseGetKey(index);
+        }
 
-		public string[] AllKeys {
-			get {
-				int count = Count;
-				string[] keys = new string [count];
-				for (int i = 0; i < count; i++)
-					keys [i] = this [i].Name;
+        public string[] AllKeys
+        {
+            get
+            {
+                int count = Count;
+                string[] keys = new string[count];
+                for (int i = 0; i < count; i++)
+                    keys[i] = this[i].Name;
 
-				return keys;
-			}
-		}
+                return keys;
+            }
+        }
 
-		protected override string ElementName {
-			get { return "providerOption"; }
-		}
+        protected override string ElementName
+        {
+            get { return "providerOption"; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		public Dictionary <string, string> ProviderOptions {
-			get {
-				int count = Count;
+        public Dictionary<string, string> ProviderOptions
+        {
+            get
+            {
+                int count = Count;
 
-				if (count == 0)
-					return null;
+                if (count == 0)
+                    return null;
 
-				Dictionary <string, string> ret = new Dictionary <string, string> (count);
-				CompilerProviderOption opt;
-				
-				for (int i = 0; i < count; i++) {
-					opt = this [i];
-					ret.Add (opt.Name, opt.Value);
-				}
+                Dictionary<string, string> ret = new Dictionary<string, string>(count);
+                CompilerProviderOption opt;
 
-				return ret;
-			}
-		}
-		
-		public CompilerProviderOption this [int index] => (CompilerProviderOption) BaseGet (index);
+                for (int i = 0; i < count; i++)
+                {
+                    opt = this[i];
+                    ret.Add(opt.Name, opt.Value);
+                }
 
-		public new CompilerProviderOption this [string name] {
-			get {
-				foreach (CompilerProviderOption c in this) {
-					if (c.Name == name)
-						return c;
-				}
-				return null;
-			}
-		}
-	}
+                return ret;
+            }
+        }
+
+        public CompilerProviderOption this[int index] => (CompilerProviderOption)BaseGet(index);
+
+        public new CompilerProviderOption this[string name]
+        {
+            get
+            {
+                foreach (CompilerProviderOption c in this)
+                {
+                    if (c.Name == name)
+                        return c;
+                }
+                return null;
+            }
+        }
+    }
 }
 #endif

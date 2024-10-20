@@ -20,12 +20,16 @@ public class LoggingHandler : DelegatingHandler
 
     protected override async Task<HttpResponseMessage> SendAsync(
         HttpRequestMessage request,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         _logger.LogDebug(request.ToString());
         var response = await base.SendAsync(request, cancellationToken);
 
-        await LogResponse(response.IsSuccessStatusCode ? LogLevel.Debug : LogLevel.Warning, response);
+        await LogResponse(
+            response.IsSuccessStatusCode ? LogLevel.Debug : LogLevel.Warning,
+            response
+        );
         return response;
     }
 

@@ -5,7 +5,10 @@ using Xunit;
 
 namespace System.Security.Cryptography.Dsa.Tests
 {
-    [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst, "Not supported on Browser/iOS/tvOS/MacCatalyst")]
+    [SkipOnPlatform(
+        TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst,
+        "Not supported on Browser/iOS/tvOS/MacCatalyst"
+    )]
     public partial class DSAImportExport
     {
         public static bool SupportsFips186_3 => DSAFactory.SupportsFips186_3;
@@ -137,7 +140,9 @@ namespace System.Security.Cryptography.Dsa.Tests
         [InlineData(true)]
         public static void ExportAfterDispose(bool importKey)
         {
-            DSA key = importKey ? DSAFactory.Create(DSATestData.GetDSA1024Params()) : DSAFactory.Create(1024);
+            DSA key = importKey
+                ? DSAFactory.Create(DSATestData.GetDSA1024Params())
+                : DSAFactory.Create(1024);
             byte[] hash = new byte[20];
 
             // Ensure that the key got created, and then Dispose it.
@@ -147,14 +152,14 @@ namespace System.Security.Cryptography.Dsa.Tests
                 {
                     key.CreateSignature(hash);
                 }
-                catch (PlatformNotSupportedException) when (!SupportsKeyGeneration)
-                {
-                }
+                catch (PlatformNotSupportedException) when (!SupportsKeyGeneration) { }
             }
 
             Assert.Throws<ObjectDisposedException>(() => key.ExportParameters(false));
             Assert.Throws<ObjectDisposedException>(() => key.ExportParameters(true));
-            Assert.Throws<ObjectDisposedException>(() => key.ImportParameters(DSATestData.GetDSA1024Params()));
+            Assert.Throws<ObjectDisposedException>(
+                () => key.ImportParameters(DSATestData.GetDSA1024Params())
+            );
         }
 
         internal static void AssertKeyEquals(in DSAParameters expected, in DSAParameters actual)

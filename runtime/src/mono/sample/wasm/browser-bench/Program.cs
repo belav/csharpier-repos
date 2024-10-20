@@ -2,16 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Runtime.InteropServices.JavaScript;
 
 namespace Sample
 {
@@ -20,17 +20,18 @@ namespace Sample
         static bool JsonResults = false;
         static List<Regex> exclusionPatterns = new();
 
-        List<BenchTask> tasks = new()
-        {
-            new AppStartTask(),
-            new ExceptionsTask(),
-            new JsonTask(),
-            new SpanTask(),
-            new StringTask(),
-            new VectorTask(),
-            new JSInteropTask(),
-            new WebSocketTask(),
-        };
+        List<BenchTask> tasks =
+            new()
+            {
+                new AppStartTask(),
+                new ExceptionsTask(),
+                new JsonTask(),
+                new SpanTask(),
+                new StringTask(),
+                new VectorTask(),
+                new JSInteropTask(),
+                new WebSocketTask(),
+            };
         public static Test Instance = new Test();
         Formatter formatter = new HTMLFormatter();
 
@@ -44,7 +45,8 @@ namespace Sample
         public static void SetExclusions(string exclusions)
         {
             var patterns = exclusions.Split(',');
-            foreach(var def in patterns) {
+            foreach (var def in patterns)
+            {
                 exclusionPatterns.Add(new Regex(def));
             }
         }
@@ -139,8 +141,9 @@ namespace Sample
                     continue;
 
                 bool excluded = false;
-                foreach(var exc in exclusionPatterns)
-                    if (exc.IsMatch($"{Task.Name}:{Task.Measurements[measurementIdx].Name}")) {
+                foreach (var exc in exclusionPatterns)
+                    if (exc.IsMatch($"{Task.Name}:{Task.Measurements[measurementIdx].Name}"))
+                    {
                         excluded = true;
                         break;
                     }
@@ -148,7 +151,10 @@ namespace Sample
                 if (excluded)
                     continue;
 
-                if (Task.pattern == null || Task.pattern.IsMatch(Task.Measurements[measurementIdx].Name))
+                if (
+                    Task.pattern == null
+                    || Task.pattern.IsMatch(Task.Measurements[measurementIdx].Name)
+                )
                     return true;
             }
 
@@ -171,7 +177,11 @@ namespace Sample
             if (measurementIdx == -1)
                 return ResultsSummary();
 
-            if (runIdx >= Task.Measurements[measurementIdx].NumberOfRuns && !await NextMeasurement() && !await NextTask())
+            if (
+                runIdx >= Task.Measurements[measurementIdx].NumberOfRuns
+                && !await NextMeasurement()
+                && !await NextTask()
+            )
                 return ResultsSummary();
 
             runIdx++;
@@ -191,7 +201,9 @@ namespace Sample
                 sb.Append($"{key}: {minTimes[key]}ms{formatter.NewLine}");
             }
 
-            sb.Append($"{formatter.NewLine}.md{formatter.NewLine}{formatter.CodeStart}| measurement | time |{formatter.NewLine}|-:|-:|{formatter.NewLine}");
+            sb.Append(
+                $"{formatter.NewLine}.md{formatter.NewLine}{formatter.CodeStart}| measurement | time |{formatter.NewLine}|-:|-:|{formatter.NewLine}"
+            );
             foreach (var key in minTimes.Keys)
             {
                 var time = minTimes[key];
@@ -201,7 +213,12 @@ namespace Sample
                     time *= 1000;
                     unit = "us";
                 }
-                sb.Append($"| {key.Replace('_', ' '),38} | {time,10:F4}{unit} |{formatter.NewLine}".Replace(" ", formatter.NonBreakingSpace));
+                sb.Append(
+                    $"| {key.Replace('_', ' '), 38} | {time, 10:F4}{unit} |{formatter.NewLine}".Replace(
+                        " ",
+                        formatter.NonBreakingSpace
+                    )
+                );
             }
             sb.Append($"{formatter.CodeEnd}");
 
@@ -239,8 +256,16 @@ namespace Sample
 
         string GetJsonResults()
         {
-            var jsonObject = new JsonResultsData { results = results, minTimes = minTimes, timeStamp = DateTime.UtcNow };
-            return JsonSerializer.Serialize(jsonObject, ResultsSerializerContext.Default.JsonResultsData);
+            var jsonObject = new JsonResultsData
+            {
+                results = results,
+                minTimes = minTimes,
+                timeStamp = DateTime.UtcNow,
+            };
+            return JsonSerializer.Serialize(
+                jsonObject,
+                ResultsSerializerContext.Default.JsonResultsData
+            );
         }
 
         private void PrintJsonResults()
@@ -261,17 +286,17 @@ namespace Sample
 
     public class PlainFormatter : Formatter
     {
-        override public string NewLine => "\n";
-        override public string NonBreakingSpace => " ";
-        override public string CodeStart => "";
-        override public string CodeEnd => "";
+        public override string NewLine => "\n";
+        public override string NonBreakingSpace => " ";
+        public override string CodeStart => "";
+        public override string CodeEnd => "";
     }
 
     public class HTMLFormatter : Formatter
     {
-        override public string NewLine => "<br/>";
-        override public string NonBreakingSpace => "&nbsp;";
-        override public string CodeStart => "<code>";
-        override public string CodeEnd => "</code>";
+        public override string NewLine => "<br/>";
+        public override string NonBreakingSpace => "&nbsp;";
+        public override string CodeStart => "<code>";
+        public override string CodeEnd => "</code>";
     }
 }

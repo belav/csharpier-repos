@@ -12,11 +12,16 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    public class CSharpLanguageCharacteristics : LanguageCharacteristics<CSharpTokenizer, CSharpSymbol, CSharpSymbolType>
+    public class CSharpLanguageCharacteristics
+        : LanguageCharacteristics<CSharpTokenizer, CSharpSymbol, CSharpSymbolType>
     {
-        private static readonly CSharpLanguageCharacteristics _instance = new CSharpLanguageCharacteristics();
+        private static readonly CSharpLanguageCharacteristics _instance =
+            new CSharpLanguageCharacteristics();
 
-        private static Dictionary<CSharpSymbolType, string> _symbolSamples = new Dictionary<CSharpSymbolType, string>()
+        private static Dictionary<CSharpSymbolType, string> _symbolSamples = new Dictionary<
+            CSharpSymbolType,
+            string
+        >()
         {
             { CSharpSymbolType.Arrow, "->" },
             { CSharpSymbolType.Minus, "-" },
@@ -69,9 +74,7 @@ namespace System.Web.Razor.Parser
             { CSharpSymbolType.Transition, "@" },
         };
 
-        private CSharpLanguageCharacteristics()
-        {
-        }
+        private CSharpLanguageCharacteristics() { }
 
         public static CSharpLanguageCharacteristics Instance
         {
@@ -83,7 +86,12 @@ namespace System.Web.Razor.Parser
             return new CSharpTokenizer(source);
         }
 
-        protected override CSharpSymbol CreateSymbol(SourceLocation location, string content, CSharpSymbolType type, IEnumerable<RazorError> errors)
+        protected override CSharpSymbol CreateSymbol(
+            SourceLocation location,
+            string content,
+            CSharpSymbolType type,
+            IEnumerable<RazorError> errors
+        )
         {
             return new CSharpSymbol(location, content, type, errors);
         }
@@ -149,7 +157,11 @@ namespace System.Web.Razor.Parser
             }
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "C# Keywords are lower-case")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "C# Keywords are lower-case"
+        )]
         public static string GetKeyword(CSharpKeyword keyword)
         {
             return keyword.ToString().ToLowerInvariant();

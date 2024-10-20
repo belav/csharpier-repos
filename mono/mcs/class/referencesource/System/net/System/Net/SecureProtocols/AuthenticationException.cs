@@ -23,7 +23,8 @@ Revision History:
     12-Dec-2003 FxCop: added default and serialization constructors
 --*/
 
-namespace System.Security.Authentication {
+namespace System.Security.Authentication
+{
     using System;
     using System.Runtime.Serialization;
 
@@ -35,13 +36,21 @@ namespace System.Security.Authentication {
     /// </para>
     /// </summary>
     [Serializable]
-    public class AuthenticationException: SystemException
+    public class AuthenticationException : SystemException
     {
-        public AuthenticationException() {}
-        protected AuthenticationException(SerializationInfo serializationInfo, StreamingContext streamingContext) :
-            base(serializationInfo, streamingContext) {}
-        public AuthenticationException(string message): base(message) {}
-        public AuthenticationException(string message, Exception innerException): base(message, innerException) {}
+        public AuthenticationException() { }
+
+        protected AuthenticationException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext) { }
+
+        public AuthenticationException(string message)
+            : base(message) { }
+
+        public AuthenticationException(string message, Exception innerException)
+            : base(message, innerException) { }
     }
 
     /// <summary>
@@ -52,12 +61,20 @@ namespace System.Security.Authentication {
     /// </para>
     /// </summary>
     [Serializable]
-    public class InvalidCredentialException: AuthenticationException
+    public class InvalidCredentialException : AuthenticationException
     {
-        public InvalidCredentialException() {}
-        protected InvalidCredentialException(SerializationInfo serializationInfo, StreamingContext streamingContext) :
-            base(serializationInfo, streamingContext) {}
-        public InvalidCredentialException(string message): base(message) {}
-        public InvalidCredentialException(string message, Exception innerException):base(message, innerException) {}
+        public InvalidCredentialException() { }
+
+        protected InvalidCredentialException(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+            : base(serializationInfo, streamingContext) { }
+
+        public InvalidCredentialException(string message)
+            : base(message) { }
+
+        public InvalidCredentialException(string message, Exception innerException)
+            : base(message, innerException) { }
     }
 }

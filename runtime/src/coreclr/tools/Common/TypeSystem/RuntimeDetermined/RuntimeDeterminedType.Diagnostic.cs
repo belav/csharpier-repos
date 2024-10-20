@@ -7,17 +7,19 @@ namespace Internal.TypeSystem
     {
         public override string DiagnosticName
         {
-            get
-            {
-                return _rawCanonType.DiagnosticName;
-            }
+            get { return _rawCanonType.DiagnosticName; }
         }
 
         public override string DiagnosticNamespace
         {
             get
             {
-                return string.Concat(_runtimeDeterminedDetailsType.DiagnosticName, "_", _rawCanonType.DiagnosticNamespace); ;
+                return string.Concat(
+                    _runtimeDeterminedDetailsType.DiagnosticName,
+                    "_",
+                    _rawCanonType.DiagnosticNamespace
+                );
+                ;
             }
         }
     }

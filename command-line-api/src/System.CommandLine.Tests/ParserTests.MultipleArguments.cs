@@ -27,20 +27,12 @@ namespace System.CommandLine.Tests
                     Arity = ArgumentArity.ZeroOrMore,
                 };
 
-                var command = new CliCommand("the-command")
-                {
-                    multipleArityArg,
-                    singleArityArg
-                };
+                var command = new CliCommand("the-command") { multipleArityArg, singleArityArg };
 
                 var result = command.Parse("1 2 3 4");
 
-                result.GetValue(multipleArityArg)
-                      .Should()
-                      .BeEquivalentSequenceTo("1", "2", "3");
-                result.GetValue(singleArityArg)
-                      .Should()
-                      .BeEquivalentSequenceTo("4");
+                result.GetValue(multipleArityArg).Should().BeEquivalentSequenceTo("1", "2", "3");
+                result.GetValue(singleArityArg).Should().BeEquivalentSequenceTo("4");
             }
 
             [Fact]
@@ -49,11 +41,7 @@ namespace System.CommandLine.Tests
                 var stringArg = new CliArgument<string>("the-string");
                 var intArg = new CliArgument<int>("the-int");
 
-                var command = new CliCommand("the-command")
-                {
-                    stringArg,
-                    intArg
-                };
+                var command = new CliCommand("the-command") { stringArg, intArg };
 
                 var result = command.Parse("1 2");
 
@@ -74,42 +62,29 @@ namespace System.CommandLine.Tests
             [InlineData("one two three --verbose true four five")]
             [InlineData("one two three four --verbose true five")]
             [InlineData("one two three four five --verbose true")]
-            public void When_multiple_arguments_are_present_then_their_order_relative_to_sibling_options_is_not_significant(string commandLine)
+            public void When_multiple_arguments_are_present_then_their_order_relative_to_sibling_options_is_not_significant(
+                string commandLine
+            )
             {
                 var first = new CliArgument<string>("first");
                 var second = new CliArgument<string>("second");
                 var third = new CliArgument<string[]>("third");
                 var verbose = new CliOption<bool>("--verbose");
 
-                var command = new CliCommand("the-command")
-                {
-                    first,
-                    second,
-                    third,
-                    verbose
-                };
+                var command = new CliCommand("the-command") { first, second, third, verbose };
 
                 var parseResult = command.Parse(commandLine);
 
-                parseResult
-                    .GetValue(first)
-                    .Should()
-                    .Be("one");
+                parseResult.GetValue(first).Should().Be("one");
 
-                parseResult
-                    .GetValue(second)
-                    .Should()
-                    .Be("two");
+                parseResult.GetValue(second).Should().Be("two");
 
                 parseResult
                     .GetValue(third)
                     .Should()
                     .BeEquivalentSequenceTo("three", "four", "five");
 
-                parseResult
-                    .GetValue(verbose)
-                    .Should()
-                    .BeTrue();
+                parseResult.GetValue(verbose).Should().BeTrue();
             }
 
             [Fact]
@@ -117,25 +92,18 @@ namespace System.CommandLine.Tests
             {
                 var sourceArg = new CliArgument<string>("source");
                 var destinationArg = new CliArgument<string>("destination");
-                var root = new CliRootCommand
-                {
-                    sourceArg,
-                    destinationArg
-                };
+                var root = new CliRootCommand { sourceArg, destinationArg };
 
                 var result = root.Parse("src.txt dest.txt");
 
-                result.GetResult(sourceArg)
-                      .GetValueOrDefault<string>()
-                      .Should()
-                      .Be("src.txt");
-                
-                result.GetResult(destinationArg)
-                      .GetValueOrDefault<string>()
-                      .Should()
-                      .Be("dest.txt");
-            }
+                result.GetResult(sourceArg).GetValueOrDefault<string>().Should().Be("src.txt");
 
+                result
+                    .GetResult(destinationArg)
+                    .GetValueOrDefault<string>()
+                    .Should()
+                    .Be("dest.txt");
+            }
 
             [Fact]
             public void When_multiple_arguments_are_defined_but_not_provided_then_option_parses_correctly()
@@ -145,7 +113,7 @@ namespace System.CommandLine.Tests
                 {
                     option,
                     new CliArgument<string>("arg1"),
-                    new CliArgument<string>("arg2")
+                    new CliArgument<string>("arg2"),
                 };
 
                 var result = command.Parse("-e foo");
@@ -161,25 +129,24 @@ namespace System.CommandLine.Tests
                 var ints = new CliArgument<int[]>("ints");
                 var strings = new CliArgument<string[]>("strings");
 
-                var root = new CliRootCommand
-                {
-                    ints,
-                    strings
-                };
+                var root = new CliRootCommand { ints, strings };
 
                 var result = root.Parse("1 2 3 one two");
 
                 var _ = new AssertionScope();
 
-                result.GetValue(ints)
-                      .Should()
-                      .BeEquivalentTo(new[] { 1, 2, 3 },
-                                      options => options.WithStrictOrdering());
+                result
+                    .GetValue(ints)
+                    .Should()
+                    .BeEquivalentTo(new[] { 1, 2, 3 }, options => options.WithStrictOrdering());
 
-                result.GetValue(strings)
-                      .Should()
-                      .BeEquivalentTo(new[] { "one", "two" },
-                                      options => options.WithStrictOrdering());
+                result
+                    .GetValue(strings)
+                    .Should()
+                    .BeEquivalentTo(
+                        new[] { "one", "two" },
+                        options => options.WithStrictOrdering()
+                    );
             }
 
             [Fact]
@@ -188,50 +155,32 @@ namespace System.CommandLine.Tests
                 var ints = new CliArgument<int[]>("arg1");
                 var strings = new CliArgument<string>("arg2");
 
-                var root = new CliRootCommand
-                {
-                    ints,
-                    strings
-                };
+                var root = new CliRootCommand { ints, strings };
 
                 var result = root.Parse("1 2 3 four five");
 
                 var _ = new AssertionScope();
 
-                result.GetValue(ints)
-                      .Should()
-                      .BeEquivalentTo(new[] { 1, 2, 3 },
-                                      options => options.WithStrictOrdering());
+                result
+                    .GetValue(ints)
+                    .Should()
+                    .BeEquivalentTo(new[] { 1, 2, 3 }, options => options.WithStrictOrdering());
 
-                result.GetValue(strings)
-                      .Should()
-                      .Be("four");
+                result.GetValue(strings).Should().Be("four");
 
-                result.UnmatchedTokens
-                      .Should()
-                      .ContainSingle()
-                      .Which
-                      .Should()
-                      .Be("five");
+                result.UnmatchedTokens.Should().ContainSingle().Which.Should().Be("five");
             }
 
             [Fact]
             public void Unsatisfied_subsequent_argument_with_min_arity_0_parses_as_default_value()
             {
-                var arg1 = new CliArgument<string>("arg1")
-                {
-                    Arity = ArgumentArity.ExactlyOne
-                };
+                var arg1 = new CliArgument<string>("arg1") { Arity = ArgumentArity.ExactlyOne };
                 var arg2 = new CliArgument<string>("arg2")
                 {
                     Arity = ArgumentArity.ZeroOrOne,
-                    DefaultValueFactory = (_) => "the-default"
+                    DefaultValueFactory = (_) => "the-default",
                 };
-                var rootCommand = new CliRootCommand
-                {
-                    arg1,
-                    arg2,
-                };
+                var rootCommand = new CliRootCommand { arg1, arg2 };
 
                 var result = rootCommand.Parse("value-1");
 
@@ -243,16 +192,10 @@ namespace System.CommandLine.Tests
             public void Unsatisfied_subsequent_argument_with_min_arity_1_parses_as_default_value()
             {
                 CliArgument<string> arg1 = new(name: "arg1");
-                CliArgument<string> arg2 = new(name: "arg2")
-                {
-                    DefaultValueFactory = (_) => "the-default"
-                };
+                CliArgument<string> arg2 =
+                    new(name: "arg2") { DefaultValueFactory = (_) => "the-default" };
 
-                var rootCommand = new CliRootCommand
-                {
-                    arg1,
-                    arg2,
-                };
+                var rootCommand = new CliRootCommand { arg1, arg2 };
 
                 var result = rootCommand.Parse("");
 
@@ -267,10 +210,7 @@ namespace System.CommandLine.Tests
                 var rootCommand = new CliRootCommand
                 {
                     argument1,
-                    new CliArgument<string>("arg2")
-                    {
-                        Arity = ArgumentArity.ZeroOrOne
-                    },
+                    new CliArgument<string>("arg2") { Arity = ArgumentArity.ZeroOrOne },
                 };
 
                 var result = rootCommand.Parse("one");
@@ -286,23 +226,27 @@ namespace System.CommandLine.Tests
             [InlineData("a b")]
             [InlineData("a b c")]
             public void When_there_are_not_enough_tokens_for_all_arguments_then_the_correct_number_of_errors_is_reported(
-                string providedArgs)
+                string providedArgs
+            )
             {
                 var command = new CliCommand("command")
                 {
                     new CliArgument<string>("arg1"),
                     new CliArgument<string>("arg2"),
                     new CliArgument<string>("arg3"),
-                    new CliArgument<string>("arg4")
+                    new CliArgument<string>("arg4"),
                 };
 
                 var result = CliParser.Parse(command, providedArgs);
 
                 result
-                    .Errors
-                    .Count
-                    .Should()
-                    .Be(4 - providedArgs.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).Length);
+                    .Errors.Count.Should()
+                    .Be(
+                        4
+                            - providedArgs
+                                .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                                .Length
+                    );
             }
         }
     }

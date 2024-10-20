@@ -11,7 +11,8 @@ namespace System.Text.Json
     /// Keeps both a List and Dictionary in sync to enable deterministic enumeration ordering of List
     /// and performance benefits of Dictionary once a threshold is hit.
     /// </summary>
-    internal sealed partial class JsonPropertyDictionary<T> where T : class?
+    internal sealed partial class JsonPropertyDictionary<T>
+        where T : class?
     {
         private const int ListToDictionaryThreshold = 9;
 
@@ -22,13 +23,17 @@ namespace System.Text.Json
 
         public JsonPropertyDictionary(bool caseInsensitive)
         {
-            _stringComparer = caseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+            _stringComparer = caseInsensitive
+                ? StringComparer.OrdinalIgnoreCase
+                : StringComparer.Ordinal;
             _propertyList = new List<KeyValuePair<string, T>>();
         }
 
         public JsonPropertyDictionary(bool caseInsensitive, int capacity)
         {
-            _stringComparer = caseInsensitive ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+            _stringComparer = caseInsensitive
+                ? StringComparer.OrdinalIgnoreCase
+                : StringComparer.Ordinal;
             _propertyList = new List<KeyValuePair<string, T>>(capacity);
         }
 
@@ -96,10 +101,7 @@ namespace System.Text.Json
 
         public int Count
         {
-            get
-            {
-                return _propertyList.Count;
-            }
+            get { return _propertyList.Count; }
         }
 
         public bool Remove(string propertyName)
@@ -121,7 +123,10 @@ namespace System.Text.Json
         {
             foreach (KeyValuePair<string, T> existing in this)
             {
-                if (ReferenceEquals(item.Value, existing.Value) && _stringComparer.Equals(item.Key, existing.Key))
+                if (
+                    ReferenceEquals(item.Value, existing.Value)
+                    && _stringComparer.Equals(item.Key, existing.Key)
+                )
                 {
                     return true;
                 }
@@ -148,7 +153,8 @@ namespace System.Text.Json
             }
         }
 
-        public List<KeyValuePair<string, T>>.Enumerator GetEnumerator() => _propertyList.GetEnumerator();
+        public List<KeyValuePair<string, T>>.Enumerator GetEnumerator() =>
+            _propertyList.GetEnumerator();
 
         public IList<string> Keys => GetKeyCollection();
 
@@ -196,11 +202,7 @@ namespace System.Text.Json
                 // Return null for missing properties.
                 return null;
             }
-
-            set
-            {
-                SetValue(propertyName, value, out bool _);
-            }
+            set { SetValue(propertyName, value, out bool _); }
         }
 
         public T? SetValue(string propertyName, T value, out bool valueAlreadyInDictionary)
@@ -311,7 +313,10 @@ namespace System.Text.Json
         {
             if (_propertyDictionary == null && _propertyList.Count > ListToDictionaryThreshold)
             {
-                _propertyDictionary = JsonHelpers.CreateDictionaryFromCollection(_propertyList, _stringComparer);
+                _propertyDictionary = JsonHelpers.CreateDictionaryFromCollection(
+                    _propertyList,
+                    _stringComparer
+                );
             }
         }
 
@@ -373,7 +378,8 @@ namespace System.Text.Json
             return -1;
         }
 
-        public bool TryGetPropertyValue(string propertyName, [MaybeNullWhen(false)] out T value) => TryGetValue(propertyName, out value);
+        public bool TryGetPropertyValue(string propertyName, [MaybeNullWhen(false)] out T value) =>
+            TryGetValue(propertyName, out value);
 
         public bool TryRemoveProperty(string propertyName, [MaybeNullWhen(false)] out T existing)
         {

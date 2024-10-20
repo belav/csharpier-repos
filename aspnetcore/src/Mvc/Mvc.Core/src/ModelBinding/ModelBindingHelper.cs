@@ -41,7 +41,8 @@ internal static class ModelBindingHelper
         IModelMetadataProvider metadataProvider,
         IModelBinderFactory modelBinderFactory,
         IValueProvider valueProvider,
-        IObjectModelValidator objectModelValidator)
+        IObjectModelValidator objectModelValidator
+    )
         where TModel : class
     {
         return TryUpdateModelAsync(
@@ -53,7 +54,8 @@ internal static class ModelBindingHelper
             valueProvider,
             objectModelValidator,
             // Includes everything by default.
-            propertyFilter: (m) => true);
+            propertyFilter: (m) => true
+        );
     }
 
     /// <summary>
@@ -82,8 +84,9 @@ internal static class ModelBindingHelper
         IModelBinderFactory modelBinderFactory,
         IValueProvider valueProvider,
         IObjectModelValidator objectModelValidator,
-        params Expression<Func<TModel, object?>>[] includeExpressions)
-       where TModel : class
+        params Expression<Func<TModel, object?>>[] includeExpressions
+    )
+        where TModel : class
     {
         ArgumentNullException.ThrowIfNull(includeExpressions);
 
@@ -91,14 +94,15 @@ internal static class ModelBindingHelper
         var propertyFilter = expression.Compile();
 
         return TryUpdateModelAsync(
-           model,
-           prefix,
-           actionContext,
-           metadataProvider,
-           modelBinderFactory,
-           valueProvider,
-           objectModelValidator,
-           propertyFilter);
+            model,
+            prefix,
+            actionContext,
+            metadataProvider,
+            modelBinderFactory,
+            valueProvider,
+            objectModelValidator,
+            propertyFilter
+        );
     }
 
     /// <summary>
@@ -128,19 +132,21 @@ internal static class ModelBindingHelper
         IModelBinderFactory modelBinderFactory,
         IValueProvider valueProvider,
         IObjectModelValidator objectModelValidator,
-        Func<ModelMetadata, bool> propertyFilter)
+        Func<ModelMetadata, bool> propertyFilter
+    )
         where TModel : class
     {
         return TryUpdateModelAsync(
-           model,
-           typeof(TModel),
-           prefix,
-           actionContext,
-           metadataProvider,
-           modelBinderFactory,
-           valueProvider,
-           objectModelValidator,
-           propertyFilter);
+            model,
+            typeof(TModel),
+            prefix,
+            actionContext,
+            metadataProvider,
+            modelBinderFactory,
+            valueProvider,
+            objectModelValidator,
+            propertyFilter
+        );
     }
 
     /// <summary>
@@ -167,7 +173,8 @@ internal static class ModelBindingHelper
         IModelMetadataProvider metadataProvider,
         IModelBinderFactory modelBinderFactory,
         IValueProvider valueProvider,
-        IObjectModelValidator objectModelValidator)
+        IObjectModelValidator objectModelValidator
+    )
     {
         return TryUpdateModelAsync(
             model,
@@ -179,7 +186,8 @@ internal static class ModelBindingHelper
             valueProvider,
             objectModelValidator,
             // Includes everything by default.
-            propertyFilter: (m) => true);
+            propertyFilter: (m) => true
+        );
     }
 
     /// <summary>
@@ -209,7 +217,8 @@ internal static class ModelBindingHelper
         IModelBinderFactory modelBinderFactory,
         IValueProvider valueProvider,
         IObjectModelValidator objectModelValidator,
-        Func<ModelMetadata, bool> propertyFilter)
+        Func<ModelMetadata, bool> propertyFilter
+    )
     {
         ArgumentNullException.ThrowIfNull(model);
         ArgumentNullException.ThrowIfNull(modelType);
@@ -225,7 +234,8 @@ internal static class ModelBindingHelper
         {
             var message = Resources.FormatModelType_WrongType(
                 model.GetType().FullName,
-                modelType.FullName);
+                modelType.FullName
+            );
             throw new ArgumentException(message, nameof(modelType));
         }
 
@@ -233,7 +243,12 @@ internal static class ModelBindingHelper
 
         if (modelMetadata.BoundConstructor != null)
         {
-            throw new NotSupportedException(Resources.FormatTryUpdateModel_RecordTypeNotSupported(nameof(TryUpdateModelAsync), modelType));
+            throw new NotSupportedException(
+                Resources.FormatTryUpdateModel_RecordTypeNotSupported(
+                    nameof(TryUpdateModelAsync),
+                    modelType
+                )
+            );
         }
 
         var modelState = actionContext.ModelState;
@@ -243,7 +258,8 @@ internal static class ModelBindingHelper
             valueProvider,
             modelMetadata,
             bindingInfo: null,
-            modelName: prefix);
+            modelName: prefix
+        );
 
         modelBindingContext.Model = model;
         modelBindingContext.PropertyFilter = propertyFilter;
@@ -274,7 +290,8 @@ internal static class ModelBindingHelper
                 actionContext,
                 modelBindingContext.ValidationState,
                 modelBindingContext.ModelName,
-                modelBindingResult.Model);
+                modelBindingResult.Model
+            );
 
             return modelState.IsValid;
         }
@@ -285,8 +302,10 @@ internal static class ModelBindingHelper
     // Internal for tests
     internal static string GetPropertyName(Expression expression)
     {
-        if (expression.NodeType == ExpressionType.Convert ||
-            expression.NodeType == ExpressionType.ConvertChecked)
+        if (
+            expression.NodeType == ExpressionType.Convert
+            || expression.NodeType == ExpressionType.ConvertChecked
+        )
         {
             // For Boxed Value Types
             expression = ((UnaryExpression)expression).Operand;
@@ -295,7 +314,8 @@ internal static class ModelBindingHelper
         if (expression.NodeType != ExpressionType.MemberAccess)
         {
             throw new InvalidOperationException(
-                Resources.FormatInvalid_IncludePropertyExpression(expression.NodeType));
+                Resources.FormatInvalid_IncludePropertyExpression(expression.NodeType)
+            );
         }
 
         var memberExpression = (MemberExpression)expression;
@@ -305,7 +325,8 @@ internal static class ModelBindingHelper
             {
                 // Chained expressions and non parameter based expressions are not supported.
                 throw new InvalidOperationException(
-                    Resources.FormatInvalid_IncludePropertyExpression(expression.NodeType));
+                    Resources.FormatInvalid_IncludePropertyExpression(expression.NodeType)
+                );
             }
 
             return memberInfo.Name;
@@ -314,7 +335,8 @@ internal static class ModelBindingHelper
         {
             // Fields are also not supported.
             throw new InvalidOperationException(
-                Resources.FormatInvalid_IncludePropertyExpression(expression.NodeType));
+                Resources.FormatInvalid_IncludePropertyExpression(expression.NodeType)
+            );
         }
     }
 
@@ -325,7 +347,8 @@ internal static class ModelBindingHelper
     /// <param name="expressions">Expressions identifying the properties to allow for binding.</param>
     /// <returns>An expression which can be used with <see cref="IPropertyFilterProvider"/>.</returns>
     public static Expression<Func<ModelMetadata, bool>> GetPropertyFilterExpression<TModel>(
-        Expression<Func<TModel, object?>>[] expressions)
+        Expression<Func<TModel, object?>>[] expressions
+    )
     {
         if (expressions.Length == 0)
         {
@@ -340,18 +363,24 @@ internal static class ModelBindingHelper
             var predicate = GetPredicateExpression(expression);
             orWrapperExpression = Expression.OrElse(
                 orWrapperExpression,
-                Expression.Invoke(predicate, firstExpression.Parameters));
+                Expression.Invoke(predicate, firstExpression.Parameters)
+            );
         }
 
-        return Expression.Lambda<Func<ModelMetadata, bool>>(orWrapperExpression, firstExpression.Parameters);
+        return Expression.Lambda<Func<ModelMetadata, bool>>(
+            orWrapperExpression,
+            firstExpression.Parameters
+        );
     }
 
     private static Expression<Func<ModelMetadata, bool>> GetPredicateExpression<TModel>(
-        Expression<Func<TModel, object?>> expression)
+        Expression<Func<TModel, object?>> expression
+    )
     {
         var propertyName = GetPropertyName(expression.Body);
 
-        return (metadata) => string.Equals(metadata.PropertyName, propertyName, StringComparison.Ordinal);
+        return (metadata) =>
+            string.Equals(metadata.PropertyName, propertyName, StringComparison.Ordinal);
     }
 
     /// <summary>
@@ -365,13 +394,18 @@ internal static class ModelBindingHelper
         Type modelType,
         ModelStateDictionary modelState,
         IModelMetadataProvider metadataProvider,
-        string modelKey)
+        string modelKey
+    )
     {
         ArgumentNullException.ThrowIfNull(modelType);
         ArgumentNullException.ThrowIfNull(modelState);
         ArgumentNullException.ThrowIfNull(metadataProvider);
 
-        ClearValidationStateForModel(metadataProvider.GetMetadataForType(modelType), modelState, modelKey);
+        ClearValidationStateForModel(
+            metadataProvider.GetMetadataForType(modelType),
+            modelState,
+            modelKey
+        );
     }
 
     /// <summary>
@@ -383,7 +417,8 @@ internal static class ModelBindingHelper
     public static void ClearValidationStateForModel(
         ModelMetadata modelMetadata,
         ModelStateDictionary modelState,
-        string? modelKey)
+        string? modelKey
+    )
     {
         ArgumentNullException.ThrowIfNull(modelMetadata);
         ArgumentNullException.ThrowIfNull(modelState);
@@ -415,7 +450,9 @@ internal static class ModelBindingHelper
                 for (var i = 0; i < modelMetadata.Properties.Count; i++)
                 {
                     var property = modelMetadata.Properties[i];
-                    modelState.ClearValidationState((property.BinderModelName ?? property.PropertyName)!);
+                    modelState.ClearValidationState(
+                        (property.BinderModelName ?? property.PropertyName)!
+                    );
                 }
             }
             else
@@ -495,9 +532,9 @@ internal static class ModelBindingHelper
         }
 
         // Will we be able to activate an instance and use that?
-        return modelType.IsClass &&
-            !modelType.IsAbstract &&
-            typeof(ICollection<T>).IsAssignableFrom(modelType);
+        return modelType.IsClass
+            && !modelType.IsAbstract
+            && typeof(ICollection<T>).IsAssignableFrom(modelType);
     }
 
     /// <summary>
@@ -534,12 +571,18 @@ internal static class ModelBindingHelper
     /// <remarks>
     /// Should not be called if <see cref="CanGetCompatibleCollection{T}"/> returned <c>false</c>.
     /// </remarks>
-    public static ICollection<T> GetCompatibleCollection<T>(ModelBindingContext bindingContext, int capacity)
+    public static ICollection<T> GetCompatibleCollection<T>(
+        ModelBindingContext bindingContext,
+        int capacity
+    )
     {
         return GetCompatibleCollection<T>(bindingContext, (int?)capacity);
     }
 
-    private static ICollection<T> GetCompatibleCollection<T>(ModelBindingContext bindingContext, int? capacity)
+    private static ICollection<T> GetCompatibleCollection<T>(
+        ModelBindingContext bindingContext,
+        int? capacity
+    )
     {
         var model = bindingContext.Model;
         var modelType = bindingContext.ModelType;
@@ -627,7 +670,11 @@ internal static class ModelBindingHelper
         return UnwrapPossibleArrayType(value, type, cultureToUse);
     }
 
-    private static object? UnwrapPossibleArrayType(object value, Type destinationType, CultureInfo culture)
+    private static object? UnwrapPossibleArrayType(
+        object value,
+        Type destinationType,
+        CultureInfo culture
+    )
     {
         // array conversion results in four cases, as below
         var valueAsArray = value as Array;
@@ -637,10 +684,15 @@ internal static class ModelBindingHelper
             if (valueAsArray != null)
             {
                 // case 1: both destination + source type are arrays, so convert each element
-                var converted = (IList)Array.CreateInstance(destinationElementType, valueAsArray.Length);
+                var converted = (IList)
+                    Array.CreateInstance(destinationElementType, valueAsArray.Length);
                 for (var i = 0; i < valueAsArray.Length; i++)
                 {
-                    converted[i] = ConvertSimpleType(valueAsArray.GetValue(i), destinationElementType, culture);
+                    converted[i] = ConvertSimpleType(
+                        valueAsArray.GetValue(i),
+                        destinationElementType,
+                        culture
+                    );
                 }
                 return converted;
             }
@@ -673,7 +725,11 @@ internal static class ModelBindingHelper
         return ConvertSimpleType(value, destinationType, culture);
     }
 
-    private static object? ConvertSimpleType(object? value, Type destinationType, CultureInfo culture)
+    private static object? ConvertSimpleType(
+        object? value,
+        Type destinationType,
+        CultureInfo culture
+    )
     {
         if (value == null || destinationType.IsAssignableFrom(value.GetType()))
         {
@@ -698,21 +754,29 @@ internal static class ModelBindingHelper
         if (!(canConvertFrom || converter.CanConvertTo(destinationType)))
         {
             // EnumConverter cannot convert integer, so we verify manually
-            if (destinationType.IsEnum &&
-                (value is int ||
-                value is uint ||
-                value is long ||
-                value is ulong ||
-                value is short ||
-                value is ushort ||
-                value is byte ||
-                value is sbyte))
+            if (
+                destinationType.IsEnum
+                && (
+                    value is int
+                    || value is uint
+                    || value is long
+                    || value is ulong
+                    || value is short
+                    || value is ushort
+                    || value is byte
+                    || value is sbyte
+                )
+            )
             {
                 return Enum.ToObject(destinationType, value);
             }
 
             throw new InvalidOperationException(
-                Resources.FormatValueProviderResult_NoConverterExists(value.GetType(), destinationType));
+                Resources.FormatValueProviderResult_NoConverterExists(
+                    value.GetType(),
+                    destinationType
+                )
+            );
         }
 
         try

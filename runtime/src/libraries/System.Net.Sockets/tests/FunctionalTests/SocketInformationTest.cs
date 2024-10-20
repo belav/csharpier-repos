@@ -15,7 +15,10 @@ namespace System.Net.Sockets.Tests
 
             Assert.Equal((SocketInformationOptions)0, si.Options);
             si.Options = SocketInformationOptions.Listening | SocketInformationOptions.NonBlocking;
-            Assert.Equal(SocketInformationOptions.Listening | SocketInformationOptions.NonBlocking, si.Options);
+            Assert.Equal(
+                SocketInformationOptions.Listening | SocketInformationOptions.NonBlocking,
+                si.Options
+            );
 
             Assert.Null(si.ProtocolInformation);
             byte[] data = new byte[1];

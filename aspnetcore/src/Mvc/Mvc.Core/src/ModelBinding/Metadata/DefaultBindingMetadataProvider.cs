@@ -29,7 +29,9 @@ internal sealed class DefaultBindingMetadataProvider : IBindingMetadataProvider
         }
 
         // BinderType
-        foreach (var binderTypeAttribute in context.Attributes.OfType<IBinderTypeProviderMetadata>())
+        foreach (
+            var binderTypeAttribute in context.Attributes.OfType<IBinderTypeProviderMetadata>()
+        )
         {
             if (binderTypeAttribute.BinderType != null)
             {
@@ -49,7 +51,9 @@ internal sealed class DefaultBindingMetadataProvider : IBindingMetadataProvider
         }
 
         // PropertyFilterProvider
-        var propertyFilterProviders = context.Attributes.OfType<IPropertyFilterProvider>().ToArray();
+        var propertyFilterProviders = context
+            .Attributes.OfType<IPropertyFilterProvider>()
+            .ToArray();
         if (propertyFilterProviders.Length == 0)
         {
             context.BindingMetadata.PropertyFilterProvider = null;
@@ -67,8 +71,10 @@ internal sealed class DefaultBindingMetadataProvider : IBindingMetadataProvider
         var bindingBehavior = FindBindingBehavior(context);
         if (bindingBehavior != null)
         {
-            context.BindingMetadata.IsBindingAllowed = bindingBehavior.Behavior != BindingBehavior.Never;
-            context.BindingMetadata.IsBindingRequired = bindingBehavior.Behavior == BindingBehavior.Required;
+            context.BindingMetadata.IsBindingAllowed =
+                bindingBehavior.Behavior != BindingBehavior.Never;
+            context.BindingMetadata.IsBindingRequired =
+                bindingBehavior.Behavior == BindingBehavior.Required;
         }
 
         if (GetBoundConstructor(context.Key.ModelType) is ConstructorInfo constructorInfo)
@@ -93,7 +99,10 @@ internal sealed class DefaultBindingMetadataProvider : IBindingMetadataProvider
         return GetRecordTypeConstructor(type, constructors);
     }
 
-    private static ConstructorInfo? GetRecordTypeConstructor(Type type, ConstructorInfo[] constructors)
+    private static ConstructorInfo? GetRecordTypeConstructor(
+        Type type,
+        ConstructorInfo[] constructors
+    )
     {
         if (!IsRecordType(type))
         {
@@ -125,8 +134,9 @@ internal sealed class DefaultBindingMetadataProvider : IBindingMetadataProvider
         {
             var parameter = parameters[i];
             var mappedProperty = properties.FirstOrDefault(property =>
-                string.Equals(property.Name, parameter.Name, StringComparison.Ordinal) &&
-                property.Property.PropertyType == parameter.ParameterType);
+                string.Equals(property.Name, parameter.Name, StringComparison.Ordinal)
+                && property.Property.PropertyType == parameter.ParameterType
+            );
 
             if (mappedProperty is null)
             {
@@ -140,26 +150,38 @@ internal sealed class DefaultBindingMetadataProvider : IBindingMetadataProvider
         static bool IsRecordType(Type type)
         {
             // Based on the state of the art as described in https://github.com/dotnet/roslyn/issues/45777
-            var cloneMethod = type.GetMethod("<Clone>$", BindingFlags.Public | BindingFlags.Instance);
-            return cloneMethod != null && (cloneMethod.ReturnType == type || cloneMethod.ReturnType == type.BaseType);
+            var cloneMethod = type.GetMethod(
+                "<Clone>$",
+                BindingFlags.Public | BindingFlags.Instance
+            );
+            return cloneMethod != null
+                && (cloneMethod.ReturnType == type || cloneMethod.ReturnType == type.BaseType);
         }
     }
 
-    private static BindingBehaviorAttribute? FindBindingBehavior(BindingMetadataProviderContext context)
+    private static BindingBehaviorAttribute? FindBindingBehavior(
+        BindingMetadataProviderContext context
+    )
     {
         switch (context.Key.MetadataKind)
         {
             case ModelMetadataKind.Property:
                 // BindingBehavior can fall back to attributes on the Container Type, but we should ignore
                 // attributes on the Property Type.
-                var matchingAttributes = context.PropertyAttributes!.OfType<BindingBehaviorAttribute>();
+                var matchingAttributes =
+                    context.PropertyAttributes!.OfType<BindingBehaviorAttribute>();
                 return matchingAttributes.FirstOrDefault()
-                    ?? context.Key.ContainerType!
-                        .GetCustomAttributes(typeof(BindingBehaviorAttribute), inherit: true)
+                    ?? context
+                        .Key.ContainerType!.GetCustomAttributes(
+                            typeof(BindingBehaviorAttribute),
+                            inherit: true
+                        )
                         .OfType<BindingBehaviorAttribute>()
                         .FirstOrDefault();
             case ModelMetadataKind.Parameter:
-                return context.ParameterAttributes!.OfType<BindingBehaviorAttribute>().FirstOrDefault();
+                return context
+                    .ParameterAttributes!.OfType<BindingBehaviorAttribute>()
+                    .FirstOrDefault();
             default:
                 return null;
         }
@@ -178,9 +200,7 @@ internal sealed class DefaultBindingMetadataProvider : IBindingMetadataProvider
 
         private Func<ModelMetadata, bool> CreatePropertyFilter()
         {
-            var propertyFilters = _providers
-                .Select(p => p.PropertyFilter)
-                .Where(p => p != null);
+            var propertyFilters = _providers.Select(p => p.PropertyFilter).Where(p => p != null);
 
             return (m) =>
             {

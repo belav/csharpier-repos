@@ -18,19 +18,14 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     // Note: GetInnerXml is protected in XmlDsigXsltTransform making it
     // difficult to test properly. This class "open it up" :-)
     public class UnprotectedXmlDsigXsltTransform : XmlDsigXsltTransform
     {
-        public UnprotectedXmlDsigXsltTransform()
-        {
-        }
+        public UnprotectedXmlDsigXsltTransform() { }
 
         public UnprotectedXmlDsigXsltTransform(bool includeComments)
-            : base(includeComments)
-        {
-        }
+            : base(includeComments) { }
 
         public XmlNodeList UnprotectedGetInnerXml()
         {
@@ -40,7 +35,6 @@ namespace System.Security.Cryptography.Xml.Tests
 
     public class XmlDsigXsltTransformTest
     {
-
         protected UnprotectedXmlDsigXsltTransform transform;
 
         public XmlDsigXsltTransformTest()
@@ -117,7 +111,6 @@ namespace System.Security.Cryptography.Xml.Tests
             return sb.ToString();
         }
 
-
         [Fact]
         public void EmptyXslt()
         {
@@ -132,12 +125,16 @@ namespace System.Security.Cryptography.Xml.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         // Note that this is _valid_ as an "embedded stylesheet".
         // (see XSLT spec 2.7)
         public void EmbeddedStylesheet()
         {
-            string test = "<Test xsl:version='1.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>XmlDsigXsltTransform</Test>";
+            string test =
+                "<Test xsl:version='1.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>XmlDsigXsltTransform</Test>";
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(test);
 
@@ -155,7 +152,8 @@ namespace System.Security.Cryptography.Xml.Tests
             bool result = false;
             try
             {
-                string test = "<xsl:element name='foo' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>XmlDsigXsltTransform</xsl:element>";
+                string test =
+                    "<xsl:element name='foo' xmlns:xsl='http://www.w3.org/1999/XSL/Transform'>XmlDsigXsltTransform</xsl:element>";
                 XmlDocument doc = new XmlDocument();
                 doc.LoadXml(test);
 
@@ -174,10 +172,14 @@ namespace System.Security.Cryptography.Xml.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void OnlyInner()
         {
-            string test = "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns=\"http://www.w3.org/TR/xhtml1/strict\" version=\"1.0\">";
+            string test =
+                "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns=\"http://www.w3.org/TR/xhtml1/strict\" version=\"1.0\">";
             test += "<xsl:output encoding=\"UTF-8\" indent=\"no\" method=\"xml\" />";
             test += "<xsl:template match=\"/\"><html><head><title>Notaries</title>";
             test += "</head><body><table><xsl:for-each select=\"Notaries/Notary\">";
@@ -195,8 +197,10 @@ namespace System.Security.Cryptography.Xml.Tests
 
         private XmlDocument GetXslDoc()
         {
-            string test = "<Transform Algorithm=\"http://www.w3.org/TR/1999/REC-xslt-19991116\" xmlns='http://www.w3.org/2000/09/xmldsig#'>";
-            test += "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns=\"http://www.w3.org/TR/xhtml1/strict\" version=\"1.0\">";
+            string test =
+                "<Transform Algorithm=\"http://www.w3.org/TR/1999/REC-xslt-19991116\" xmlns='http://www.w3.org/2000/09/xmldsig#'>";
+            test +=
+                "<xsl:stylesheet xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\" xmlns=\"http://www.w3.org/TR/xhtml1/strict\" version=\"1.0\">";
             test += "<xsl:output encoding=\"UTF-8\" indent=\"no\" method=\"xml\" />";
             test += "<xsl:template match=\"/\"><html><head><title>Notaries</title>";
             test += "</head><body><table><xsl:for-each select=\"Notaries/Notary\">";
@@ -207,7 +211,10 @@ namespace System.Security.Cryptography.Xml.Tests
             return doc;
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void LoadInputAsXmlDocument()
         {
             XmlDocument doc = GetXslDoc();
@@ -220,7 +227,10 @@ namespace System.Security.Cryptography.Xml.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void LoadInputAsXmlNodeList()
         {
             XmlDocument doc = GetXslDoc();
@@ -233,7 +243,10 @@ namespace System.Security.Cryptography.Xml.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void LoadInputAsStream()
         {
             XmlDocument doc = GetXslDoc();
@@ -266,7 +279,8 @@ namespace System.Security.Cryptography.Xml.Tests
         void AssertNodeListEqual(XmlNodeList nl1, XmlNodeList nl2, string label)
         {
             Assert.Equal(nl1.Count, nl2.Count);
-            IEnumerator e1, e2;
+            IEnumerator e1,
+                e2;
             int i;
             for (i = 0, e1 = nl1.GetEnumerator(), e2 = nl2.GetEnumerator(); e1.MoveNext(); i++)
             {
@@ -276,7 +290,10 @@ namespace System.Security.Cryptography.Xml.Tests
             Assert.False(e2.MoveNext(), label + " : nl2 has extras");
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void Load2()
         {
             XmlDocument doc = GetXslDoc();
@@ -301,7 +318,10 @@ namespace System.Security.Cryptography.Xml.Tests
         public void UnsupportedOutput()
         {
             XmlDocument doc = new XmlDocument();
-            AssertExtensions.Throws<ArgumentException>("type", () => transform.GetOutput(doc.GetType()));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => transform.GetOutput(doc.GetType())
+            );
         }
     }
 }

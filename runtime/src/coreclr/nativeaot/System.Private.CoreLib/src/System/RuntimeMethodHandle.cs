@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
-
 using Internal.Reflection.Augments;
 using Internal.Runtime.Augments;
 using Internal.Runtime.CompilerServices;
@@ -41,18 +40,34 @@ namespace System
             if (_value == IntPtr.Zero || handle._value == IntPtr.Zero)
                 return false;
 
-            RuntimeTypeHandle declaringType1, declaringType2;
-            MethodNameAndSignature nameAndSignature1, nameAndSignature2;
-            RuntimeTypeHandle[] genericArgs1, genericArgs2;
+            RuntimeTypeHandle declaringType1,
+                declaringType2;
+            MethodNameAndSignature nameAndSignature1,
+                nameAndSignature2;
+            RuntimeTypeHandle[] genericArgs1,
+                genericArgs2;
 
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(this, out declaringType1, out nameAndSignature1, out genericArgs1);
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(handle, out declaringType2, out nameAndSignature2, out genericArgs2);
+            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
+                this,
+                out declaringType1,
+                out nameAndSignature1,
+                out genericArgs1
+            );
+            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
+                handle,
+                out declaringType2,
+                out nameAndSignature2,
+                out genericArgs2
+            );
 
             if (!declaringType1.Equals(declaringType2))
                 return false;
             if (!nameAndSignature1.Equals(nameAndSignature2))
                 return false;
-            if ((genericArgs1 == null && genericArgs2 != null) || (genericArgs1 != null && genericArgs2 == null))
+            if (
+                (genericArgs1 == null && genericArgs2 != null)
+                || (genericArgs1 != null && genericArgs2 == null)
+            )
                 return false;
             if (genericArgs1 != null)
             {
@@ -82,7 +97,12 @@ namespace System
             RuntimeTypeHandle declaringType;
             MethodNameAndSignature nameAndSignature;
             RuntimeTypeHandle[] genericArgs;
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(this, out declaringType, out nameAndSignature, out genericArgs);
+            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
+                this,
+                out declaringType,
+                out nameAndSignature,
+                out genericArgs
+            );
 
             int hashcode = declaringType.GetHashCode();
             hashcode = (hashcode + _rotl(hashcode, 13)) ^ nameAndSignature.Name.GetHashCode();
@@ -98,7 +118,8 @@ namespace System
             return hashcode;
         }
 
-        public static RuntimeMethodHandle FromIntPtr(IntPtr value) => new RuntimeMethodHandle(value);
+        public static RuntimeMethodHandle FromIntPtr(IntPtr value) =>
+            new RuntimeMethodHandle(value);
 
         public static IntPtr ToIntPtr(RuntimeMethodHandle value) => value.Value;
 
@@ -115,12 +136,24 @@ namespace System
         public IntPtr GetFunctionPointer()
         {
             RuntimeTypeHandle declaringType;
-            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(this, out declaringType, out _, out _);
+            RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleComponents(
+                this,
+                out declaringType,
+                out _,
+                out _
+            );
 
-            return ReflectionAugments.ReflectionCoreCallbacks.GetFunctionPointer(this, declaringType);
+            return ReflectionAugments.ReflectionCoreCallbacks.GetFunctionPointer(
+                this,
+                declaringType
+            );
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

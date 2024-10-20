@@ -4,18 +4,20 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System.Collections;
     using System.Xml;
 
     /**
      * Single-tag dictionary config factory
      *
-     * Use for tags of the form: <MySingleTag key1="value1" ... keyN="valueN"/> 
+     * Use for tags of the form: <MySingleTag key1="value1" ... keyN="valueN"/>
      */
     /// <devdoc>
     /// </devdoc>
-    public class SingleTagSectionHandler : IConfigurationSectionHandler {
+    public class SingleTagSectionHandler : IConfigurationSectionHandler
+    {
         /**
          * Create
          *
@@ -26,7 +28,8 @@ namespace System.Configuration {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public virtual object Create(Object parent, Object context, XmlNode section) {
+        public virtual object Create(Object parent, Object context, XmlNode section)
+        {
             Hashtable result;
 
             // start result off as a shallow clone of the parent
@@ -39,10 +42,11 @@ namespace System.Configuration {
             // verify that there are no children
 
             HandlerBase.CheckForChildNodes(section);
-            
+
             // iterate through each XML section in order and apply the directives
 
-            foreach (XmlAttribute attribute in section.Attributes) {
+            foreach (XmlAttribute attribute in section.Attributes)
+            {
                 // handle name-value pairs
                 result[attribute.Name] = attribute.Value;
             }

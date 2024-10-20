@@ -17,7 +17,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.CodeModel
     public class FileCodeVariableTests : AbstractFileCodeElementTests
     {
         public FileCodeVariableTests()
-            : base(@"using System;
+            : base(
+                @"using System;
 
 public class A
 {
@@ -39,9 +40,8 @@ public class A
 unsafe public struct DevDivBugs70194
 {
     fixed char buffer[100];
-}")
-        {
-        }
+}"
+            ) { }
 
         private CodeVariable GetCodeVariable(params object[] path)
         {
@@ -192,7 +192,9 @@ unsafe public struct DevDivBugs70194
         public void GetStartPoint_Attributes()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartAttributes));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartAttributes)
+            );
         }
 
         [WpfFact]
@@ -217,28 +219,36 @@ unsafe public struct DevDivBugs70194
         public void GetStartPoint_BodyWithDelimiter()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            );
         }
 
         [WpfFact]
         public void GetStartPoint_Header()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartHeader));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartHeader)
+            );
         }
 
         [WpfFact]
         public void GetStartPoint_HeaderWithAttributes()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            );
         }
 
         [WpfFact]
         public void GetStartPoint_Name()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartName));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartName)
+            );
         }
 
         [WpfFact]
@@ -256,7 +266,9 @@ unsafe public struct DevDivBugs70194
         public void GetStartPoint_Whole()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetStartPoint(vsCMPart.vsCMPartWhole));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetStartPoint(vsCMPart.vsCMPartWhole)
+            );
         }
 
         [WpfFact]
@@ -274,7 +286,9 @@ unsafe public struct DevDivBugs70194
         public void GetEndPoint_Attributes()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetEndPoint(vsCMPart.vsCMPartAttributes));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartAttributes)
+            );
         }
 
         [WpfFact]
@@ -299,28 +313,36 @@ unsafe public struct DevDivBugs70194
         public void GetEndPoint_BodyWithDelimiter()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartBodyWithDelimiter)
+            );
         }
 
         [WpfFact]
         public void GetEndPoint_Header()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetEndPoint(vsCMPart.vsCMPartHeader));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartHeader)
+            );
         }
 
         [WpfFact]
         public void GetEndPoint_HeaderWithAttributes()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartHeaderWithAttributes)
+            );
         }
 
         [WpfFact]
         public void GetEndPoint_Name()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetEndPoint(vsCMPart.vsCMPartName));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartName)
+            );
         }
 
         [WpfFact]
@@ -338,7 +360,9 @@ unsafe public struct DevDivBugs70194
         public void GetEndPoint_Whole()
         {
             var testObject = GetCodeVariable("A", "intC");
-            Assert.Throws<NotImplementedException>(() => testObject.GetEndPoint(vsCMPart.vsCMPartWhole));
+            Assert.Throws<NotImplementedException>(
+                () => testObject.GetEndPoint(vsCMPart.vsCMPartWhole)
+            );
         }
 
         [WpfFact]

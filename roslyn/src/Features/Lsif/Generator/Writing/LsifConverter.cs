@@ -13,13 +13,15 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
     {
         public override bool CanConvert(Type objectType)
         {
-            if (typeof(ISerializableId).IsAssignableFrom(objectType) ||
-                objectType == typeof(Uri))
+            if (typeof(ISerializableId).IsAssignableFrom(objectType) || objectType == typeof(Uri))
             {
                 return true;
             }
 
-            if (objectType.IsConstructedGenericType && objectType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (
+                objectType.IsConstructedGenericType
+                && objectType.GetGenericTypeDefinition() == typeof(Nullable<>)
+            )
             {
                 return CanConvert(objectType.GenericTypeArguments.Single());
             }
@@ -27,7 +29,12 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
             return false;
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object? existingValue,
+            JsonSerializer serializer
+        )
         {
             throw new NotImplementedException();
         }

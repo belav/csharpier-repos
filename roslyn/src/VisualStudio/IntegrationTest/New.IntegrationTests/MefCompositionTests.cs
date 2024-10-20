@@ -24,20 +24,40 @@ namespace Roslyn.VisualStudio.NewIntegrationTests
         {
             // Read the .err file that contains errors; this isn't a great way to do it but we have no
             // better option at this point.
-            var shell = await TestServices.Shell.GetRequiredGlobalServiceAsync<SVsSettingsManager, IVsSettingsManager>(HangMitigatingCancellationToken);
-            Marshal.ThrowExceptionForHR(shell.GetApplicationDataFolder((uint)__VsApplicationDataFolder.ApplicationDataFolder_LocalSettings, out var applicationDataFolder));
+            var shell = await TestServices.Shell.GetRequiredGlobalServiceAsync<
+                SVsSettingsManager,
+                IVsSettingsManager
+            >(HangMitigatingCancellationToken);
+            Marshal.ThrowExceptionForHR(
+                shell.GetApplicationDataFolder(
+                    (uint)__VsApplicationDataFolder.ApplicationDataFolder_LocalSettings,
+                    out var applicationDataFolder
+                )
+            );
 
-            var compositionErrorFileLines = File.ReadAllLines(Path.Combine(applicationDataFolder, @"ComponentModelCache\Microsoft.VisualStudio.Default.err"));
+            var compositionErrorFileLines = File.ReadAllLines(
+                Path.Combine(
+                    applicationDataFolder,
+                    @"ComponentModelCache\Microsoft.VisualStudio.Default.err"
+                )
+            );
             var compositionErrors = new List<string>();
 
             for (var i = 0; i < compositionErrorFileLines.Length; i++)
             {
                 var line = compositionErrorFileLines[i];
 
-                if (line.EndsWith("expected exactly 1 export matching constraints:") &&
-                    StartsWithApplicableSymbol(line))
+                if (
+                    line.EndsWith("expected exactly 1 export matching constraints:")
+                    && StartsWithApplicableSymbol(line)
+                )
                 {
-                    var entireError = string.Join(Environment.NewLine, compositionErrorFileLines.Skip(i).TakeWhile(s => !string.IsNullOrWhiteSpace(s)));
+                    var entireError = string.Join(
+                        Environment.NewLine,
+                        compositionErrorFileLines
+                            .Skip(i)
+                            .TakeWhile(s => !string.IsNullOrWhiteSpace(s))
+                    );
                     compositionErrors.Add(entireError);
                 }
             }
@@ -57,9 +77,9 @@ namespace Roslyn.VisualStudio.NewIntegrationTests
             if (s.StartsWith("Microsoft.CodeAnalysis.Editor.TypeScript"))
                 return false;
 
-            return s.StartsWith("Microsoft.CodeAnalysis") ||
-                   s.StartsWith("Microsoft.VisualStudio.LanguageServices") ||
-                   s.StartsWith("Roslyn");
+            return s.StartsWith("Microsoft.CodeAnalysis")
+                || s.StartsWith("Microsoft.VisualStudio.LanguageServices")
+                || s.StartsWith("Roslyn");
         }
     }
 }

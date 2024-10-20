@@ -17,18 +17,26 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
 {
-    public class BuildOnlyDiagnosticIdsHandlerTests(ITestOutputHelper testOutputHelper) : AbstractLanguageServerProtocolTests(testOutputHelper)
+    public class BuildOnlyDiagnosticIdsHandlerTests(ITestOutputHelper testOutputHelper)
+        : AbstractLanguageServerProtocolTests(testOutputHelper)
     {
         [Theory, CombinatorialData]
         [WorkItem("https://github.com/dotnet/vscode-csharp/issues/5728")]
         public async Task TestCSharpBuildOnlyDiagnosticIdsAsync(bool mutatingLspWorkspace)
         {
-            await using var testLspServer = await CreateTestLspServerAsync("class C { }", mutatingLspWorkspace);
+            await using var testLspServer = await CreateTestLspServerAsync(
+                "class C { }",
+                mutatingLspWorkspace
+            );
 
-            var result = await testLspServer.ExecuteRequest0Async<BuildOnlyDiagnosticIdsResult>(BuildOnlyDiagnosticIdsHandler.BuildOnlyDiagnosticIdsMethodName,
-                CancellationToken.None);
+            var result = await testLspServer.ExecuteRequest0Async<BuildOnlyDiagnosticIdsResult>(
+                BuildOnlyDiagnosticIdsHandler.BuildOnlyDiagnosticIdsMethodName,
+                CancellationToken.None
+            );
 
-            var expectedBuildOnlyDiagnosticIds = GetExpectedBuildOnlyDiagnosticIds(LanguageNames.CSharp);
+            var expectedBuildOnlyDiagnosticIds = GetExpectedBuildOnlyDiagnosticIds(
+                LanguageNames.CSharp
+            );
             AssertEx.SetEqual(expectedBuildOnlyDiagnosticIds, result.Ids);
         }
 
@@ -36,28 +44,46 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
         [WorkItem("https://github.com/dotnet/vscode-csharp/issues/5728")]
         public async Task TestVisualBasicBuildOnlyDiagnosticIdsAsync(bool mutatingLspWorkspace)
         {
-            await using var testLspServer = await CreateVisualBasicTestLspServerAsync(markup: @"
+            await using var testLspServer = await CreateVisualBasicTestLspServerAsync(
+                markup: @"
 Class C
-End Class", mutatingLspWorkspace);
+End Class",
+                mutatingLspWorkspace
+            );
 
-            var result = await testLspServer.ExecuteRequest0Async<BuildOnlyDiagnosticIdsResult>(BuildOnlyDiagnosticIdsHandler.BuildOnlyDiagnosticIdsMethodName,
-                CancellationToken.None);
+            var result = await testLspServer.ExecuteRequest0Async<BuildOnlyDiagnosticIdsResult>(
+                BuildOnlyDiagnosticIdsHandler.BuildOnlyDiagnosticIdsMethodName,
+                CancellationToken.None
+            );
 
-            var expectedBuildOnlyDiagnosticIds = GetExpectedBuildOnlyDiagnosticIds(LanguageNames.VisualBasic);
+            var expectedBuildOnlyDiagnosticIds = GetExpectedBuildOnlyDiagnosticIds(
+                LanguageNames.VisualBasic
+            );
             AssertEx.SetEqual(expectedBuildOnlyDiagnosticIds, result.Ids);
         }
 
         private protected override TestAnalyzerReferenceByLanguage CreateTestAnalyzersReference()
         {
-            var builder = ImmutableDictionary.CreateBuilder<string, ImmutableArray<DiagnosticAnalyzer>>();
-            builder.Add(LanguageNames.CSharp, ImmutableArray.Create(
-                DiagnosticExtensions.GetCompilerDiagnosticAnalyzer(LanguageNames.CSharp),
-                new BuildOnlyAnalyzer(),
-                new LiveAnalyzer()));
-            builder.Add(LanguageNames.VisualBasic, ImmutableArray.Create(
-                DiagnosticExtensions.GetCompilerDiagnosticAnalyzer(LanguageNames.VisualBasic),
-                new BuildOnlyAnalyzer(),
-                new LiveAnalyzer()));
+            var builder = ImmutableDictionary.CreateBuilder<
+                string,
+                ImmutableArray<DiagnosticAnalyzer>
+            >();
+            builder.Add(
+                LanguageNames.CSharp,
+                ImmutableArray.Create(
+                    DiagnosticExtensions.GetCompilerDiagnosticAnalyzer(LanguageNames.CSharp),
+                    new BuildOnlyAnalyzer(),
+                    new LiveAnalyzer()
+                )
+            );
+            builder.Add(
+                LanguageNames.VisualBasic,
+                ImmutableArray.Create(
+                    DiagnosticExtensions.GetCompilerDiagnosticAnalyzer(LanguageNames.VisualBasic),
+                    new BuildOnlyAnalyzer(),
+                    new LiveAnalyzer()
+                )
+            );
             return new(builder.ToImmutableDictionary());
         }
 
@@ -71,13 +97,15 @@ End Class", mutatingLspWorkspace);
             var compilerBuildOnlyDiagnosticsType = languageName switch
             {
                 LanguageNames.CSharp => typeof(CSharp.LanguageServer.CSharpLspBuildOnlyDiagnostics),
-                LanguageNames.VisualBasic => typeof(VisualBasic.LanguageServer.VisualBasicLspBuildOnlyDiagnostics),
-                _ => null
+                LanguageNames.VisualBasic =>
+                    typeof(VisualBasic.LanguageServer.VisualBasicLspBuildOnlyDiagnostics),
+                _ => null,
             };
 
             if (compilerBuildOnlyDiagnosticsType != null)
             {
-                var attribute = compilerBuildOnlyDiagnosticsType.GetCustomAttribute<LspBuildOnlyDiagnosticsAttribute>();
+                var attribute =
+                    compilerBuildOnlyDiagnosticsType.GetCustomAttribute<LspBuildOnlyDiagnosticsAttribute>();
                 builder.AddRange(attribute.BuildOnlyDiagnostics);
             }
 
@@ -89,24 +117,39 @@ End Class", mutatingLspWorkspace);
         private sealed class BuildOnlyAnalyzer : DiagnosticAnalyzer
         {
             public const string Id = "BuildOnly0001";
-            private static readonly DiagnosticDescriptor s_descriptor = new(Id, "Title", "Message", "Category", DiagnosticSeverity.Warning, isEnabledByDefault: true, customTags: new[] { WellKnownDiagnosticTags.CompilationEnd });
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_descriptor);
+            private static readonly DiagnosticDescriptor s_descriptor =
+                new(
+                    Id,
+                    "Title",
+                    "Message",
+                    "Category",
+                    DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true,
+                    customTags: new[] { WellKnownDiagnosticTags.CompilationEnd }
+                );
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_descriptor);
 
-            public override void Initialize(AnalysisContext context)
-            {
-            }
+            public override void Initialize(AnalysisContext context) { }
         }
 
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
         private sealed class LiveAnalyzer : DiagnosticAnalyzer
         {
             public const string Id = "Live0001";
-            private static readonly DiagnosticDescriptor s_descriptor = new(Id, "Title", "Message", "Category", DiagnosticSeverity.Warning, isEnabledByDefault: true);
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(s_descriptor);
+            private static readonly DiagnosticDescriptor s_descriptor =
+                new(
+                    Id,
+                    "Title",
+                    "Message",
+                    "Category",
+                    DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(s_descriptor);
 
-            public override void Initialize(AnalysisContext context)
-            {
-            }
+            public override void Initialize(AnalysisContext context) { }
         }
     }
 }

@@ -45,6 +45,15 @@ public sealed class AcceptsMetadata : IAcceptsMetadata
     /// <inheritdoc/>
     public override string ToString()
     {
-        return DebuggerHelpers.GetDebugText(nameof(ContentTypes), ContentTypes, nameof(RequestType), RequestType, nameof(IsOptional), IsOptional, includeNullValues: false, prefix: "Accepts");
+        return DebuggerHelpers.GetDebugText(
+            nameof(ContentTypes),
+            ContentTypes,
+            nameof(RequestType),
+            RequestType,
+            nameof(IsOptional),
+            IsOptional,
+            includeNullValues: false,
+            prefix: "Accepts"
+        );
     }
 }

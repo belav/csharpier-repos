@@ -31,7 +31,8 @@ public class HPackDecoderBenchmark
         .Concat(_headerValueBytes)
         .ToArray();
 
-    private static readonly byte[] _literalHeaderFieldNeverIndexed_NewName = _literalHeaderFieldWithoutIndexingNewName
+    private static readonly byte[] _literalHeaderFieldNeverIndexed_NewName =
+        _literalHeaderFieldWithoutIndexingNewName
             .Concat(_headerName)
             .Concat(_headerValue)
             .ToArray();
@@ -75,26 +76,42 @@ public class HPackDecoderBenchmark
     {
         _dynamicTable = new DynamicTable(maxSize: 4096);
         _dynamicTable.Insert(_headerNameBytes, _headerValueBytes);
-        _decoder = new HPackDecoder(maxDynamicTableSize: 4096, maxHeadersLength: 65536, _dynamicTable);
+        _decoder = new HPackDecoder(
+            maxDynamicTableSize: 4096,
+            maxHeadersLength: 65536,
+            _dynamicTable
+        );
         _testHeadersHandler = new TestHeadersHandler();
     }
 
     [Benchmark]
     public void DecodesLiteralHeaderFieldNeverIndexed_NewName()
     {
-        _decoder.Decode(_literalHeaderFieldNeverIndexed_NewName, endHeaders: true, handler: _testHeadersHandler);
+        _decoder.Decode(
+            _literalHeaderFieldNeverIndexed_NewName,
+            endHeaders: true,
+            handler: _testHeadersHandler
+        );
     }
 
     [Benchmark]
     public void DecodesLiteralHeaderFieldNeverIndexed_NewName_Large()
     {
-        _decoder.Decode(_literalHeaderFieldNeverIndexed_NewName_Large, endHeaders: true, handler: _testHeadersHandler);
+        _decoder.Decode(
+            _literalHeaderFieldNeverIndexed_NewName_Large,
+            endHeaders: true,
+            handler: _testHeadersHandler
+        );
     }
 
     [Benchmark]
     public void DecodesLiteralHeaderFieldNeverIndexed_NewName_Multiple()
     {
-        _decoder.Decode(_literalHeaderFieldNeverIndexed_NewName_Multiple, endHeaders: true, handler: _testHeadersHandler);
+        _decoder.Decode(
+            _literalHeaderFieldNeverIndexed_NewName_Multiple,
+            endHeaders: true,
+            handler: _testHeadersHandler
+        );
     }
 
     [Benchmark]
@@ -106,29 +123,27 @@ public class HPackDecoderBenchmark
     [Benchmark]
     public void DecodesIndexedHeaderField_DynamicTable_Multiple()
     {
-        _decoder.Decode(_indexedHeaderDynamic_Multiple, endHeaders: true, handler: _testHeadersHandler);
+        _decoder.Decode(
+            _indexedHeaderDynamic_Multiple,
+            endHeaders: true,
+            handler: _testHeadersHandler
+        );
     }
 
     private sealed class TestHeadersHandler : IHttpStreamHeadersHandler
     {
-        public void OnDynamicIndexedHeader(int? index, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-        {
-        }
+        public void OnDynamicIndexedHeader(
+            int? index,
+            ReadOnlySpan<byte> name,
+            ReadOnlySpan<byte> value
+        ) { }
 
-        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
-        {
-        }
+        public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) { }
 
-        public void OnHeadersComplete(bool endStream)
-        {
-        }
+        public void OnHeadersComplete(bool endStream) { }
 
-        public void OnStaticIndexedHeader(int index)
-        {
-        }
+        public void OnStaticIndexedHeader(int index) { }
 
-        public void OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value)
-        {
-        }
+        public void OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value) { }
     }
 }

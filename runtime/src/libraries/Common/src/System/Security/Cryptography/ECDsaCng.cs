@@ -33,9 +33,7 @@ namespace System.Security.Cryptography
         /// </summary>
         [SupportedOSPlatform("windows")]
         public ECDsaCng()
-            : this(521)
-        {
-        }
+            : this(521) { }
 
         /// <summary>
         ///     Creates a new ECDsaCng object that will use a randomly generated key of the specified size.
@@ -50,10 +48,7 @@ namespace System.Security.Cryptography
 
         public override int KeySize
         {
-            get
-            {
-                return base.KeySize;
-            }
+            get { return base.KeySize; }
             set
             {
                 if (KeySize == value)

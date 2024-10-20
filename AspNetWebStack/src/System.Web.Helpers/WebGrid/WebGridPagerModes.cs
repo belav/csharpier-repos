@@ -9,6 +9,6 @@ namespace System.Web.Helpers
         Numeric = 0x1,
         NextPrevious = 0x2,
         FirstLast = 0x4,
-        All = 0x7
+        All = 0x7,
     }
 }

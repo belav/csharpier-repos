@@ -31,8 +31,18 @@ namespace System.Xml.Linq.Tests
         [Fact]
         public void AllNodesTests()
         {
-            string fileName = Path.Combine("TestData", "XLinq", "IXmlLineInfoTests", "company-data.xml");
-            using (XmlReader r = XmlReader.Create(FilePathUtil.getStream(fileName), new XmlReaderSettings() { DtdProcessing = DtdProcessing.Ignore }))
+            string fileName = Path.Combine(
+                "TestData",
+                "XLinq",
+                "IXmlLineInfoTests",
+                "company-data.xml"
+            );
+            using (
+                XmlReader r = XmlReader.Create(
+                    FilePathUtil.getStream(fileName),
+                    new XmlReaderSettings() { DtdProcessing = DtdProcessing.Ignore }
+                )
+            )
             {
                 XDocument doc = XDocument.Load(r, LoadOptions.SetBaseUri);
                 foreach (XNode node in doc.DescendantNodes())

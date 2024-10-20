@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// Windows CNG algorithms in GCM encryption + authentication modes.
 /// </summary>
 [SupportedOSPlatform("windows")]
-public sealed class CngGcmAuthenticatedEncryptorConfiguration : AlgorithmConfiguration, IInternalAlgorithmConfiguration
+public sealed class CngGcmAuthenticatedEncryptorConfiguration
+    : AlgorithmConfiguration,
+        IInternalAlgorithmConfiguration
 {
     /// <summary>
     /// The name of the algorithm to use for symmetric encryption.
@@ -56,7 +58,9 @@ public sealed class CngGcmAuthenticatedEncryptorConfiguration : AlgorithmConfigu
         return internalConfiguration.CreateDescriptorFromSecret(Secret.Random(KDK_SIZE_IN_BYTES));
     }
 
-    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(ISecret secret)
+    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(
+        ISecret secret
+    )
     {
         return new CngGcmAuthenticatedEncryptorDescriptor(this, secret);
     }

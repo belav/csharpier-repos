@@ -2,9 +2,5 @@
 
 public class C : I
 {
-	public static void Main ()
-	{
-
-	}
+    public static void Main() { }
 }
-

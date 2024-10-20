@@ -18,15 +18,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
     public class CSharpReplIntellisense : AbstractInteractiveWindowTest
     {
         public CSharpReplIntellisense(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory)
-        {
-        }
+            : base(instanceFactory) { }
 
         [WpfFact]
         public void VerifyCompletionListOnEmptyTextAtTopLevel()
         {
             VisualStudio.InteractiveWindow.InvokeCompletionList();
-            VisualStudio.InteractiveWindow.Verify.CompletionItemsExist("var", "public", "readonly", "goto");
+            VisualStudio.InteractiveWindow.Verify.CompletionItemsExist(
+                "var",
+                "public",
+                "readonly",
+                "goto"
+            );
         }
 
         [WpfFact]
@@ -51,9 +54,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         [WpfFact]
         public void VerifyCompletionListForAmbiguousParsingCases()
         {
-            VisualStudio.InteractiveWindow.InsertCode(@"class C { }
+            VisualStudio.InteractiveWindow.InsertCode(
+                @"class C { }
 public delegate R Del<T, R>(T arg);
-Del<C, System");
+Del<C, System"
+            );
             VisualStudio.SendKeys.Send(VirtualKey.Period);
             VisualStudio.InteractiveWindow.Verify.CompletionItemsExist("ArgumentException");
         }
@@ -88,9 +93,12 @@ Del<C, System");
         {
             using var temporaryTextFile = new TemporaryTextFile(
                 "c.csx",
-                "int x = 2; class Complex { public int goo() { return 4; } }");
+                "int x = 2; class Complex { public int goo() { return 4; } }"
+            );
             temporaryTextFile.Create();
-            VisualStudio.InteractiveWindow.SubmitText(string.Format("#load \"{0}\"", temporaryTextFile.FullName));
+            VisualStudio.InteractiveWindow.SubmitText(
+                string.Format("#load \"{0}\"", temporaryTextFile.FullName)
+            );
             VisualStudio.InteractiveWindow.InvokeCompletionList();
             VisualStudio.InteractiveWindow.Verify.CompletionItemsExist("x", "Complex");
             VisualStudio.SendKeys.Send(VirtualKey.Escape);

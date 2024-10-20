@@ -15,7 +15,8 @@ public class MvcRazorPagesMvcBuilderExtensionsTest
     public void AddRazorPagesOptions_AddsConventions()
     {
         // Arrange
-        var services = new ServiceCollection().AddOptions()
+        var services = new ServiceCollection()
+            .AddOptions()
             .AddSingleton<IConfigureOptions<RazorPagesOptions>, RazorPagesOptionsSetup>();
         var applicationModelConvention = Mock.Of<IPageApplicationModelConvention>();
         var routeModelConvention = Mock.Of<IPageRouteModelConvention>();
@@ -35,6 +36,7 @@ public class MvcRazorPagesMvcBuilderExtensionsTest
         Assert.Collection(
             conventions,
             convention => Assert.Same(applicationModelConvention, convention),
-            convention => Assert.Same(routeModelConvention, convention));
+            convention => Assert.Same(routeModelConvention, convention)
+        );
     }
 }

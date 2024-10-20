@@ -28,13 +28,19 @@ namespace System.Globalization.Tests
         public void PerMilleSymbol_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "PerMilleSymbol", () => format.PerMilleSymbol = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "PerMilleSymbol",
+                () => format.PerMilleSymbol = null
+            );
         }
 
         [Fact]
         public void PerMilleSymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.PerMilleSymbol = "");
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.PerMilleSymbol = ""
+            );
         }
     }
 }

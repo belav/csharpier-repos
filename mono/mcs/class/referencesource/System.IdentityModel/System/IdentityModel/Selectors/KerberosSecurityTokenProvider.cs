@@ -16,23 +16,35 @@ namespace System.IdentityModel.Selectors
         NetworkCredential networkCredential;
 
         public KerberosSecurityTokenProvider(string servicePrincipalName)
-            : this(servicePrincipalName, TokenImpersonationLevel.Identification)
-        {
-        }
+            : this(servicePrincipalName, TokenImpersonationLevel.Identification) { }
 
-        public KerberosSecurityTokenProvider(string servicePrincipalName, TokenImpersonationLevel tokenImpersonationLevel)
-            : this(servicePrincipalName, tokenImpersonationLevel, null)
-        {
-        }
+        public KerberosSecurityTokenProvider(
+            string servicePrincipalName,
+            TokenImpersonationLevel tokenImpersonationLevel
+        )
+            : this(servicePrincipalName, tokenImpersonationLevel, null) { }
 
-        public KerberosSecurityTokenProvider(string servicePrincipalName, TokenImpersonationLevel tokenImpersonationLevel, NetworkCredential networkCredential)
+        public KerberosSecurityTokenProvider(
+            string servicePrincipalName,
+            TokenImpersonationLevel tokenImpersonationLevel,
+            NetworkCredential networkCredential
+        )
         {
             if (servicePrincipalName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("servicePrincipalName");
-            if (tokenImpersonationLevel != TokenImpersonationLevel.Identification && tokenImpersonationLevel != TokenImpersonationLevel.Impersonation)
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "servicePrincipalName"
+                );
+            if (
+                tokenImpersonationLevel != TokenImpersonationLevel.Identification
+                && tokenImpersonationLevel != TokenImpersonationLevel.Impersonation
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("tokenImpersonationLevel",
-                    SR.GetString(SR.ImpersonationLevelNotSupported, tokenImpersonationLevel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "tokenImpersonationLevel",
+                        SR.GetString(SR.ImpersonationLevelNotSupported, tokenImpersonationLevel)
+                    )
+                );
             }
 
             this.servicePrincipalName = servicePrincipalName;
@@ -57,14 +69,18 @@ namespace System.IdentityModel.Selectors
 
         internal SecurityToken GetToken(TimeSpan timeout, ChannelBinding channelbinding)
         {
-            return new KerberosRequestorSecurityToken(this.ServicePrincipalName,
-                this.TokenImpersonationLevel, this.NetworkCredential,
-                SecurityUniqueId.Create().Value, channelbinding);
+            return new KerberosRequestorSecurityToken(
+                this.ServicePrincipalName,
+                this.TokenImpersonationLevel,
+                this.NetworkCredential,
+                SecurityUniqueId.Create().Value,
+                channelbinding
+            );
         }
+
         protected override SecurityToken GetTokenCore(TimeSpan timeout)
         {
             return this.GetToken(timeout, null);
         }
-
     }
 }

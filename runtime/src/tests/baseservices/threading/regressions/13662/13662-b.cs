@@ -5,86 +5,85 @@ using System;
 using System.Threading;
 using Xunit;
 
+public class Test_13662_b
+{
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        int rValue = 100;
+        Timer[] tArray = new Timer[1000];
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-public class Test_13662_b {
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-	[Fact]
-	public static int TestEntryPoint(){
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-		int rValue = 100;
-		Timer[] tArray = new Timer[1000];
-			for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        for (int i = 0; i < tArray.Length; i++)
+            tArray[i] = new Timer(new TimerCallback(TFunc), 0, 1000, 100000);
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        Thread.Sleep(1000);
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
+        return rValue;
+    }
 
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		for(int i = 0;i<tArray.Length;i++)
-				tArray[i] = new Timer(new TimerCallback(TFunc),0,1000,100000);		
-
-			Thread.Sleep(1000);
-			GC.Collect();
-			GC.WaitForPendingFinalizers();
-		
-		return rValue;
-	}
-
-	public static void TFunc(Object o)
-	{
-		Thread.Sleep(1);
-	}
+    public static void TFunc(Object o)
+    {
+        Thread.Sleep(1);
+    }
 }

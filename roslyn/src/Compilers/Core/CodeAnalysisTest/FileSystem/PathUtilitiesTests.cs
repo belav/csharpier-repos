@@ -13,9 +13,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
 {
     public class PathUtilitiesTests
     {
-        private void TestGetDirectoryNameAndCompareToDotnet(string expectedDirectoryName, string fullPath)
+        private void TestGetDirectoryNameAndCompareToDotnet(
+            string expectedDirectoryName,
+            string fullPath
+        )
         {
-            var roslynName = PathUtilities.TestAccessor.GetDirectoryName(fullPath, isUnixLike: false);
+            var roslynName = PathUtilities.TestAccessor.GetDirectoryName(
+                fullPath,
+                isUnixLike: false
+            );
             Assert.Equal(expectedDirectoryName, roslynName);
 
             var dotnetName = Path.GetDirectoryName(fullPath);
@@ -54,28 +60,29 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
         {
             Assert.Equal(
                 @"/temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"/temp/goo.txt", isUnixLike: true));
+                PathUtilities.TestAccessor.GetDirectoryName(@"/temp/goo.txt", isUnixLike: true)
+            );
 
             Assert.Equal(
                 @"/temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"/temp/goo", isUnixLike: true));
+                PathUtilities.TestAccessor.GetDirectoryName(@"/temp/goo", isUnixLike: true)
+            );
 
             Assert.Equal(
                 @"/temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"/temp/", isUnixLike: true));
+                PathUtilities.TestAccessor.GetDirectoryName(@"/temp/", isUnixLike: true)
+            );
 
             Assert.Equal(
                 @"/",
-                PathUtilities.TestAccessor.GetDirectoryName(@"/temp", isUnixLike: true));
+                PathUtilities.TestAccessor.GetDirectoryName(@"/temp", isUnixLike: true)
+            );
 
-            Assert.Null(
-                PathUtilities.TestAccessor.GetDirectoryName(@"/", isUnixLike: true));
+            Assert.Null(PathUtilities.TestAccessor.GetDirectoryName(@"/", isUnixLike: true));
 
-            Assert.Null(
-                PathUtilities.TestAccessor.GetDirectoryName(@"", isUnixLike: true));
+            Assert.Null(PathUtilities.TestAccessor.GetDirectoryName(@"", isUnixLike: true));
 
-            Assert.Null(
-                PathUtilities.TestAccessor.GetDirectoryName(null, isUnixLike: true));
+            Assert.Null(PathUtilities.TestAccessor.GetDirectoryName(null, isUnixLike: true));
         }
 
         [Fact]
@@ -83,33 +90,34 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
         {
             Assert.Equal(
                 @"goo/temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"goo/temp/goo.txt", isUnixLike: true));
+                PathUtilities.TestAccessor.GetDirectoryName(@"goo/temp/goo.txt", isUnixLike: true)
+            );
 
             Assert.Equal(
                 @"goo/temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"goo/temp/goo", isUnixLike: true));
+                PathUtilities.TestAccessor.GetDirectoryName(@"goo/temp/goo", isUnixLike: true)
+            );
 
             Assert.Equal(
                 @"goo/temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"goo/temp/", isUnixLike: true));
+                PathUtilities.TestAccessor.GetDirectoryName(@"goo/temp/", isUnixLike: true)
+            );
 
             Assert.Equal(
                 @"goo",
-                PathUtilities.TestAccessor.GetDirectoryName(@"goo/temp", isUnixLike: true));
+                PathUtilities.TestAccessor.GetDirectoryName(@"goo/temp", isUnixLike: true)
+            );
 
             Assert.Equal(
                 @"goo",
-                PathUtilities.TestAccessor.GetDirectoryName(@"goo/", isUnixLike: true));
+                PathUtilities.TestAccessor.GetDirectoryName(@"goo/", isUnixLike: true)
+            );
 
-            Assert.Equal(
-                "",
-                PathUtilities.TestAccessor.GetDirectoryName(@"goo", isUnixLike: true));
+            Assert.Equal("", PathUtilities.TestAccessor.GetDirectoryName(@"goo", isUnixLike: true));
 
-            Assert.Null(
-                PathUtilities.TestAccessor.GetDirectoryName(@"", isUnixLike: true));
+            Assert.Null(PathUtilities.TestAccessor.GetDirectoryName(@"", isUnixLike: true));
 
-            Assert.Null(
-                PathUtilities.TestAccessor.GetDirectoryName(null, isUnixLike: true));
+            Assert.Null(PathUtilities.TestAccessor.GetDirectoryName(null, isUnixLike: true));
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
@@ -134,38 +142,49 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
             // Dotnet does normalization of dots, so we can't compare against it here.
             Assert.Equal(
                 @"C:\temp\..",
-                PathUtilities.TestAccessor.GetDirectoryName(@"C:\temp\..\goo.txt", isUnixLike: false));
+                PathUtilities.TestAccessor.GetDirectoryName(
+                    @"C:\temp\..\goo.txt",
+                    isUnixLike: false
+                )
+            );
 
             Assert.Equal(
                 @"C:\temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"C:\temp\..", isUnixLike: false));
+                PathUtilities.TestAccessor.GetDirectoryName(@"C:\temp\..", isUnixLike: false)
+            );
 
             Assert.Equal(
                 @"C:\temp\.",
-                PathUtilities.TestAccessor.GetDirectoryName(@"C:\temp\.\goo.txt", isUnixLike: false));
+                PathUtilities.TestAccessor.GetDirectoryName(@"C:\temp\.\goo.txt", isUnixLike: false)
+            );
 
             Assert.Equal(
                 @"C:\temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"C:\temp\.", isUnixLike: false));
+                PathUtilities.TestAccessor.GetDirectoryName(@"C:\temp\.", isUnixLike: false)
+            );
 
             TestGetDirectoryNameAndCompareToDotnet(@"C:temp", @"C:temp\\goo.txt");
             TestGetDirectoryNameAndCompareToDotnet(@"C:temp", @"C:temp\\\goo.txt");
 
             Assert.Equal(
                 @"C:temp\..",
-                PathUtilities.TestAccessor.GetDirectoryName(@"C:temp\..\goo.txt", isUnixLike: false));
+                PathUtilities.TestAccessor.GetDirectoryName(@"C:temp\..\goo.txt", isUnixLike: false)
+            );
 
             Assert.Equal(
                 @"C:temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"C:temp\..", isUnixLike: false));
+                PathUtilities.TestAccessor.GetDirectoryName(@"C:temp\..", isUnixLike: false)
+            );
 
             Assert.Equal(
                 @"C:temp\.",
-                PathUtilities.TestAccessor.GetDirectoryName(@"C:temp\.\goo.txt", isUnixLike: false));
+                PathUtilities.TestAccessor.GetDirectoryName(@"C:temp\.\goo.txt", isUnixLike: false)
+            );
 
             Assert.Equal(
                 @"C:temp",
-                PathUtilities.TestAccessor.GetDirectoryName(@"C:temp\.", isUnixLike: false));
+                PathUtilities.TestAccessor.GetDirectoryName(@"C:temp\.", isUnixLike: false)
+            );
 
             TestGetDirectoryNameAndCompareToDotnet(@"C:temp", @"C:temp\");
             TestGetDirectoryNameAndCompareToDotnet(@"C:", @"C:temp");
@@ -176,82 +195,238 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
         public void TestContainsPathComponent()
         {
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"c:\packages\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\packages\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"\\server\packages\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"\\server\packages\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"\\packages\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"\\packages\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"c:\packages", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(@"c:\packages", "packages", ignoreCase: true)
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\packages1\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\packages1\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\package\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\package\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
 
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"c:\packages\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\packages\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"\\server\packages\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"\\server\packages\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"\\packages\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"\\packages\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"c:\packages", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(@"c:\packages", "packages", ignoreCase: false)
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\packages1\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\packages1\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\package\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\package\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
 
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"c:\packages\temp", "Packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\packages\temp",
+                    "Packages",
+                    ignoreCase: true
+                )
+            );
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"\\server\packages\temp", "Packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"\\server\packages\temp",
+                    "Packages",
+                    ignoreCase: true
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"\\packages\temp", "Packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"\\packages\temp",
+                    "Packages",
+                    ignoreCase: true
+                )
+            );
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"c:\packages", "Packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(@"c:\packages", "Packages", ignoreCase: true)
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\packages1\temp", "Packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\packages1\temp",
+                    "Packages",
+                    ignoreCase: true
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\package\temp", "Packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\package\temp",
+                    "Packages",
+                    ignoreCase: true
+                )
+            );
 
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\packages\temp", "Packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\packages\temp",
+                    "Packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"\\server\packages\temp", "Packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"\\server\packages\temp",
+                    "Packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"\\packages\temp", "Packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"\\packages\temp",
+                    "Packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\packages", "Packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(@"c:\packages", "Packages", ignoreCase: false)
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\packages1\temp", "Packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\packages1\temp",
+                    "Packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\package\temp", "Packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\package\temp",
+                    "Packages",
+                    ignoreCase: false
+                )
+            );
 
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"c:\Packages\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\Packages\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"\\server\Packages\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"\\server\Packages\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"\\Packages\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"\\Packages\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
             Assert.True(
-                PathUtilities.ContainsPathComponent(@"c:\Packages", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(@"c:\Packages", "packages", ignoreCase: true)
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\Packages1\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\Packages1\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\Package\temp", "packages", ignoreCase: true));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\Package\temp",
+                    "packages",
+                    ignoreCase: true
+                )
+            );
 
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\Packages\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\Packages\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"\\server\Packages\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"\\server\Packages\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"\\Packages\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"\\Packages\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\Packages", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(@"c:\Packages", "packages", ignoreCase: false)
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\Packages1\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\Packages1\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
             Assert.False(
-                PathUtilities.ContainsPathComponent(@"c:\Package\temp", "packages", ignoreCase: false));
+                PathUtilities.ContainsPathComponent(
+                    @"c:\Package\temp",
+                    "packages",
+                    ignoreCase: false
+                )
+            );
         }
 
         [ConditionalFact(typeof(WindowsOnly))]
@@ -294,7 +469,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
         [Fact]
         public void IsValidFilePath()
         {
-            var cases = new[] {
+            var cases = new[]
+            {
                 ("test/data1.txt", true),
                 ("test\\data1.txt", true),
                 ("data1.txt", true),
@@ -308,16 +484,22 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
                 ("path/*.txt", !ExecutionConditionUtil.IsWindowsDesktop),
                 ("path/:.txt", !ExecutionConditionUtil.IsWindowsDesktop),
                 ("path/\".txt", !ExecutionConditionUtil.IsWindowsDesktop),
-                ("IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" +
-            "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" +
-            "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" +
-            "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII" +
-            "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII.txt", !ExecutionConditionUtil.IsWindowsDesktop)
+                (
+                    "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
+                        + "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
+                        + "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
+                        + "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII"
+                        + "IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII.txt",
+                    !ExecutionConditionUtil.IsWindowsDesktop
+                ),
             };
 
             foreach (var (path, isValid) in cases)
             {
-                Assert.True(isValid == PathUtilities.IsValidFilePath(path), $"Expected {isValid} for \"{path}\"");
+                Assert.True(
+                    isValid == PathUtilities.IsValidFilePath(path),
+                    $"Expected {isValid} for \"{path}\""
+                );
             }
         }
 
@@ -379,12 +561,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
         [InlineData("C:B", "C:", "B")]
         [InlineData(null, null, null)]
         [InlineData("B", null, "B")]
-        public void CombinePaths_DifferentFromPathCombine(string expected, string path1, string path2)
+        public void CombinePaths_DifferentFromPathCombine(
+            string expected,
+            string path1,
+            string path2
+        )
         {
             Assert.Equal(expected, PathUtilities.CombinePaths(path1, path2));
         }
 
-        [ConditionalFact(typeof(WindowsOnly)), WorkItem(51602, @"https://github.com/dotnet/roslyn/issues/51602")]
+        [
+            ConditionalFact(typeof(WindowsOnly)),
+            WorkItem(51602, @"https://github.com/dotnet/roslyn/issues/51602")
+        ]
         public void GetRelativePath_EnsureNo_IndexOutOfRangeException_Windows()
         {
             var expected = "";
@@ -392,7 +581,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.FileSystem
             Assert.Equal(expected, result);
         }
 
-        [ConditionalFact(typeof(UnixLikeOnly)), WorkItem(51602, @"https://github.com/dotnet/roslyn/issues/51602")]
+        [
+            ConditionalFact(typeof(UnixLikeOnly)),
+            WorkItem(51602, @"https://github.com/dotnet/roslyn/issues/51602")
+        ]
         public void GetRelativePath_EnsureNo_IndexOutOfRangeException_Unix()
         {
             var expected = "";

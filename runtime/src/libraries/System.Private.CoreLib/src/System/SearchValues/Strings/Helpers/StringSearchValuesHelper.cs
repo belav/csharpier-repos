@@ -14,19 +14,35 @@ namespace System.Buffers
     internal static class StringSearchValuesHelper
     {
         [Conditional("DEBUG")]
-        public static void ValidateReadPosition(ref char searchSpaceStart, int searchSpaceLength, ref char searchSpace, int offset = 0)
+        public static void ValidateReadPosition(
+            ref char searchSpaceStart,
+            int searchSpaceLength,
+            ref char searchSpace,
+            int offset = 0
+        )
         {
             Debug.Assert(searchSpaceLength >= 0);
 
-            ValidateReadPosition(MemoryMarshal.CreateReadOnlySpan(ref searchSpaceStart, searchSpaceLength), ref searchSpace, offset);
+            ValidateReadPosition(
+                MemoryMarshal.CreateReadOnlySpan(ref searchSpaceStart, searchSpaceLength),
+                ref searchSpace,
+                offset
+            );
         }
 
         [Conditional("DEBUG")]
-        public static void ValidateReadPosition(ReadOnlySpan<char> span, ref char searchSpace, int offset = 0)
+        public static void ValidateReadPosition(
+            ReadOnlySpan<char> span,
+            ref char searchSpace,
+            int offset = 0
+        )
         {
             Debug.Assert(offset >= 0);
 
-            nint currentByteOffset = Unsafe.ByteOffset(ref MemoryMarshal.GetReference(span), ref searchSpace);
+            nint currentByteOffset = Unsafe.ByteOffset(
+                ref MemoryMarshal.GetReference(span),
+                ref searchSpace
+            );
             Debug.Assert(currentByteOffset >= 0);
             Debug.Assert((currentByteOffset & 1) == 0);
 
@@ -36,7 +52,11 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool StartsWith<TCaseSensitivity>(ref char matchStart, int lengthRemaining, string[] candidates)
+        public static bool StartsWith<TCaseSensitivity>(
+            ref char matchStart,
+            int lengthRemaining,
+            string[] candidates
+        )
             where TCaseSensitivity : struct, ICaseSensitivity
         {
             foreach (string candidate in candidates)
@@ -51,7 +71,11 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool StartsWith<TCaseSensitivity>(ref char matchStart, int lengthRemaining, string candidate)
+        public static bool StartsWith<TCaseSensitivity>(
+            ref char matchStart,
+            int lengthRemaining,
+            string candidate
+        )
             where TCaseSensitivity : struct, ICaseSensitivity
         {
             Debug.Assert(lengthRemaining > 0);
@@ -116,13 +140,16 @@ namespace System.Buffers
             public static char TransformInput(char input) => (char)(input & ~0x20);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector128<byte> TransformInput(Vector128<byte> input) => input & Vector128.Create(unchecked((byte)~0x20));
+            public static Vector128<byte> TransformInput(Vector128<byte> input) =>
+                input & Vector128.Create(unchecked((byte)~0x20));
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector256<byte> TransformInput(Vector256<byte> input) => input & Vector256.Create(unchecked((byte)~0x20));
+            public static Vector256<byte> TransformInput(Vector256<byte> input) =>
+                input & Vector256.Create(unchecked((byte)~0x20));
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public static Vector512<byte> TransformInput(Vector512<byte> input) => input & Vector512.Create(unchecked((byte)~0x20));
+            public static Vector512<byte> TransformInput(Vector512<byte> input) =>
+                input & Vector512.Create(unchecked((byte)~0x20));
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool Equals(ref char matchStart, string candidate) =>
@@ -143,7 +170,9 @@ namespace System.Buffers
                 Vector128<byte> comparison = Vector128.Create((byte)(128 + 26));
                 Vector128<byte> caseConversion = Vector128.Create((byte)0x20);
 
-                Vector128<byte> matches = Vector128.LessThan((input - subtraction).AsSByte(), comparison.AsSByte()).AsByte();
+                Vector128<byte> matches = Vector128
+                    .LessThan((input - subtraction).AsSByte(), comparison.AsSByte())
+                    .AsByte();
                 return input ^ (matches & caseConversion);
             }
 
@@ -154,7 +183,9 @@ namespace System.Buffers
                 Vector256<byte> comparison = Vector256.Create((byte)(128 + 26));
                 Vector256<byte> caseConversion = Vector256.Create((byte)0x20);
 
-                Vector256<byte> matches = Vector256.LessThan((input - subtraction).AsSByte(), comparison.AsSByte()).AsByte();
+                Vector256<byte> matches = Vector256
+                    .LessThan((input - subtraction).AsSByte(), comparison.AsSByte())
+                    .AsByte();
                 return input ^ (matches & caseConversion);
             }
 
@@ -165,7 +196,9 @@ namespace System.Buffers
                 Vector512<byte> comparison = Vector512.Create((byte)(128 + 26));
                 Vector512<byte> caseConversion = Vector512.Create((byte)0x20);
 
-                Vector512<byte> matches = Vector512.LessThan((input - subtraction).AsSByte(), comparison.AsSByte()).AsByte();
+                Vector512<byte> matches = Vector512
+                    .LessThan((input - subtraction).AsSByte(), comparison.AsSByte())
+                    .AsByte();
                 return input ^ (matches & caseConversion);
             }
 
@@ -179,13 +212,23 @@ namespace System.Buffers
         public readonly struct CaseInsensitiveUnicode : ICaseSensitivity
         {
             public static char TransformInput(char input) => throw new UnreachableException();
-            public static Vector128<byte> TransformInput(Vector128<byte> input) => throw new UnreachableException();
-            public static Vector256<byte> TransformInput(Vector256<byte> input) => throw new UnreachableException();
-            public static Vector512<byte> TransformInput(Vector512<byte> input) => throw new UnreachableException();
+
+            public static Vector128<byte> TransformInput(Vector128<byte> input) =>
+                throw new UnreachableException();
+
+            public static Vector256<byte> TransformInput(Vector256<byte> input) =>
+                throw new UnreachableException();
+
+            public static Vector512<byte> TransformInput(Vector512<byte> input) =>
+                throw new UnreachableException();
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public static bool Equals(ref char matchStart, string candidate) =>
-                Ordinal.EqualsIgnoreCase(ref matchStart, ref candidate.GetRawStringData(), candidate.Length);
+                Ordinal.EqualsIgnoreCase(
+                    ref matchStart,
+                    ref candidate.GetRawStringData(),
+                    candidate.Length
+                );
         }
     }
 }

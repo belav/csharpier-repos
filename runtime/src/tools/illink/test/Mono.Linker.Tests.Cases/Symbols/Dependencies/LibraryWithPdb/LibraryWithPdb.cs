@@ -1,13 +1,9 @@
 namespace Mono.Linker.Tests.Cases.Symbols.Dependencies
 {
-	public class LibraryWithPdb
-	{
-		public static void SomeMethod ()
-		{
-		}
+    public class LibraryWithPdb
+    {
+        public static void SomeMethod() { }
 
-		static void NotUsed ()
-		{
-		}
-	}
+        static void NotUsed() { }
+    }
 }

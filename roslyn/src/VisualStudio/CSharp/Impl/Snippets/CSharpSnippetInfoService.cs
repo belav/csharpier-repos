@@ -21,20 +21,26 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Snippets
     internal class CSharpSnippetInfoService : AbstractSnippetInfoService
     {
         // #region and #endregion when appears in the completion list as snippets
-        // we should format the snippet on commit. 
-        private readonly ISet<string> _formatTriggeringSnippets = new HashSet<string>(new string[] { "#region", "#endregion" });
+        // we should format the snippet on commit.
+        private readonly ISet<string> _formatTriggeringSnippets = new HashSet<string>(
+            new string[] { "#region", "#endregion" }
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpSnippetInfoService(
             IThreadingContext threadingContext,
             SVsServiceProvider serviceProvider,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, (IAsyncServiceProvider)serviceProvider, Guids.CSharpLanguageServiceId, listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                (IAsyncServiceProvider)serviceProvider,
+                Guids.CSharpLanguageServiceId,
+                listenerProvider
+            ) { }
 
-        public override bool ShouldFormatSnippet(SnippetInfo snippetInfo)
-            => _formatTriggeringSnippets.Contains(snippetInfo.Shortcut);
+        public override bool ShouldFormatSnippet(SnippetInfo snippetInfo) =>
+            _formatTriggeringSnippets.Contains(snippetInfo.Shortcut);
     }
 }

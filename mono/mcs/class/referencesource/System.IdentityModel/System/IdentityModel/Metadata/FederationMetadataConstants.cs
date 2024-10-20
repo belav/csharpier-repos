@@ -26,7 +26,7 @@ namespace System.IdentityModel.Metadata
         }
 
         public const string Namespace = "http://docs.oasis-open.org/wsfed/federation/200706";
-        public const string Prefix    = "fed";
+        public const string Prefix = "fed";
     }
 #pragma warning restore 1591
 }

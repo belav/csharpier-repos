@@ -11,12 +11,11 @@ using System.Web.UI;
 
 namespace System.Web.UI.HtmlControls
 {
-	class HtmlControlBuilder : ControlBuilder
-	{
-		public override bool HasBody ()
-		{
-			return false;
-		}
-	}
+    class HtmlControlBuilder : ControlBuilder
+    {
+        public override bool HasBody()
+        {
+            return false;
+        }
+    }
 }
-

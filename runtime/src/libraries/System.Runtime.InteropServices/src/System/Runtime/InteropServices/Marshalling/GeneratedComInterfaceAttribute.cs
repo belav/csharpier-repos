@@ -15,7 +15,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <remarks>
         /// The default options generate both a managed object wrapper and a COM object wrapper.
         /// </remarks>
-        public ComInterfaceOptions Options { get; set; } = ComInterfaceOptions.ManagedObjectWrapper | ComInterfaceOptions.ComObjectWrapper;
+        public ComInterfaceOptions Options { get; set; } =
+            ComInterfaceOptions.ManagedObjectWrapper | ComInterfaceOptions.ComObjectWrapper;
 
         /// <summary>
         /// Gets or sets how to marshal string arguments to all methods on the interface.

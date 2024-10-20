@@ -4,15 +4,15 @@
 
 namespace System.IdentityModel.Tokens
 {
-    using System.ComponentModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.IdentityModel.Diagnostics;
     using System.Net;
     using System.Runtime.InteropServices;
+    using System.Security.Authentication.ExtendedProtection;
     using System.Security.Cryptography;
     using System.Security.Principal;
-    using System.Security.Authentication.ExtendedProtection;
-    using System.IdentityModel.Diagnostics;
 
     public class KerberosRequestorSecurityToken : SecurityToken
     {
@@ -25,38 +25,78 @@ namespace System.IdentityModel.Tokens
         DateTime expirationTime;
 
         public KerberosRequestorSecurityToken(string servicePrincipalName)
-            : this(servicePrincipalName, TokenImpersonationLevel.Impersonation, null, SecurityUniqueId.Create().Value, null)
-        {
-        }
+            : this(
+                servicePrincipalName,
+                TokenImpersonationLevel.Impersonation,
+                null,
+                SecurityUniqueId.Create().Value,
+                null
+            ) { }
 
-        public KerberosRequestorSecurityToken(string servicePrincipalName, TokenImpersonationLevel tokenImpersonationLevel, NetworkCredential networkCredential, string id)
+        public KerberosRequestorSecurityToken(
+            string servicePrincipalName,
+            TokenImpersonationLevel tokenImpersonationLevel,
+            NetworkCredential networkCredential,
+            string id
+        )
             : this(servicePrincipalName, tokenImpersonationLevel, networkCredential, id, null, null)
-        {
-        }
+        { }
 
-        internal KerberosRequestorSecurityToken(string servicePrincipalName, TokenImpersonationLevel tokenImpersonationLevel, NetworkCredential networkCredential, string id, ChannelBinding channelBinding)
-            : this(servicePrincipalName, tokenImpersonationLevel, networkCredential, id, null, channelBinding)
-        {
-        }
+        internal KerberosRequestorSecurityToken(
+            string servicePrincipalName,
+            TokenImpersonationLevel tokenImpersonationLevel,
+            NetworkCredential networkCredential,
+            string id,
+            ChannelBinding channelBinding
+        )
+            : this(
+                servicePrincipalName,
+                tokenImpersonationLevel,
+                networkCredential,
+                id,
+                null,
+                channelBinding
+            ) { }
 
-        internal KerberosRequestorSecurityToken(string servicePrincipalName, TokenImpersonationLevel tokenImpersonationLevel, NetworkCredential networkCredential, string id, SafeFreeCredentials credentialsHandle, ChannelBinding channelBinding)
+        internal KerberosRequestorSecurityToken(
+            string servicePrincipalName,
+            TokenImpersonationLevel tokenImpersonationLevel,
+            NetworkCredential networkCredential,
+            string id,
+            SafeFreeCredentials credentialsHandle,
+            ChannelBinding channelBinding
+        )
         {
             if (servicePrincipalName == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("servicePrincipalName");
-            if (tokenImpersonationLevel != TokenImpersonationLevel.Identification && tokenImpersonationLevel != TokenImpersonationLevel.Impersonation)
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "servicePrincipalName"
+                );
+            if (
+                tokenImpersonationLevel != TokenImpersonationLevel.Identification
+                && tokenImpersonationLevel != TokenImpersonationLevel.Impersonation
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("tokenImpersonationLevel",
-                    SR.GetString(SR.ImpersonationLevelNotSupported, tokenImpersonationLevel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "tokenImpersonationLevel",
+                        SR.GetString(SR.ImpersonationLevelNotSupported, tokenImpersonationLevel)
+                    )
+                );
             }
             if (id == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("id");
 
             this.servicePrincipalName = servicePrincipalName;
-            if (networkCredential != null && networkCredential != CredentialCache.DefaultNetworkCredentials)
+            if (
+                networkCredential != null
+                && networkCredential != CredentialCache.DefaultNetworkCredentials
+            )
             {
                 if (string.IsNullOrEmpty(networkCredential.UserName))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ProvidedNetworkCredentialsForKerberosHasInvalidUserName));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.ProvidedNetworkCredentialsForKerberosHasInvalidUserName)
+                    );
                 }
                 // Note: we don't check the domain, since Lsa accepts
                 // FQ userName.
@@ -64,15 +104,30 @@ namespace System.IdentityModel.Tokens
             this.id = id;
             try
             {
-                Initialize(tokenImpersonationLevel, networkCredential, credentialsHandle, channelBinding);
+                Initialize(
+                    tokenImpersonationLevel,
+                    networkCredential,
+                    credentialsHandle,
+                    channelBinding
+                );
             }
             catch (Win32Exception e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.UnableToCreateKerberosCredentials), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(
+                        SR.GetString(SR.UnableToCreateKerberosCredentials),
+                        e
+                    )
+                );
             }
             catch (SecurityTokenException ste)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.UnableToCreateKerberosCredentials), ste));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(
+                        SR.GetString(SR.UnableToCreateKerberosCredentials),
+                        ste
+                    )
+                );
             }
         }
 
@@ -112,10 +167,7 @@ namespace System.IdentityModel.Tokens
 
         public SymmetricSecurityKey SecurityKey
         {
-            get
-            {
-                return this.symmetricSecurityKey;
-            }
+            get { return this.symmetricSecurityKey; }
         }
 
         public byte[] GetRequest()
@@ -123,7 +175,12 @@ namespace System.IdentityModel.Tokens
             return SecurityUtils.CloneBuffer(this.apreq);
         }
 
-        void Initialize(TokenImpersonationLevel tokenImpersonationLevel, NetworkCredential networkCredential, SafeFreeCredentials credentialsHandle, ChannelBinding channelBinding)
+        void Initialize(
+            TokenImpersonationLevel tokenImpersonationLevel,
+            NetworkCredential networkCredential,
+            SafeFreeCredentials credentialsHandle,
+            ChannelBinding channelBinding
+        )
         {
             bool ownCredentialsHandle = false;
             SafeDeleteContext securityContext = null;
@@ -132,23 +189,37 @@ namespace System.IdentityModel.Tokens
             {
                 if (credentialsHandle == null)
                 {
-                    if (networkCredential == null || networkCredential == CredentialCache.DefaultNetworkCredentials)
+                    if (
+                        networkCredential == null
+                        || networkCredential == CredentialCache.DefaultNetworkCredentials
+                    )
                     {
-                        credentialsHandle = SspiWrapper.AcquireDefaultCredential("Kerberos", CredentialUse.Outbound);
+                        credentialsHandle = SspiWrapper.AcquireDefaultCredential(
+                            "Kerberos",
+                            CredentialUse.Outbound
+                        );
                     }
                     else
                     {
-                        AuthIdentityEx authIdentity = new AuthIdentityEx(networkCredential.UserName, networkCredential.Password, networkCredential.Domain);
-                        credentialsHandle = SspiWrapper.AcquireCredentialsHandle("Kerberos", CredentialUse.Outbound, ref authIdentity);
+                        AuthIdentityEx authIdentity = new AuthIdentityEx(
+                            networkCredential.UserName,
+                            networkCredential.Password,
+                            networkCredential.Domain
+                        );
+                        credentialsHandle = SspiWrapper.AcquireCredentialsHandle(
+                            "Kerberos",
+                            CredentialUse.Outbound,
+                            ref authIdentity
+                        );
                     }
                     ownCredentialsHandle = true;
                 }
 
-                SspiContextFlags fContextReq = SspiContextFlags.AllocateMemory
-                                             | SspiContextFlags.Confidentiality
-                                             | SspiContextFlags.ReplayDetect
-                                             | SspiContextFlags.SequenceDetect;
-
+                SspiContextFlags fContextReq =
+                    SspiContextFlags.AllocateMemory
+                    | SspiContextFlags.Confidentiality
+                    | SspiContextFlags.ReplayDetect
+                    | SspiContextFlags.SequenceDetect;
 
                 // we only accept Identity or Impersonation (Impersonation is default).
                 if (tokenImpersonationLevel == TokenImpersonationLevel.Identification)
@@ -165,18 +236,23 @@ namespace System.IdentityModel.Tokens
                 SecurityBuffer outSecurityBuffer = new SecurityBuffer(0, BufferType.Token);
 
                 int statusCode = SspiWrapper.InitializeSecurityContext(
-                                    credentialsHandle,
-                                    ref securityContext,
-                                    this.servicePrincipalName,
-                                    fContextReq,
-                                    Endianness.Native,
-                                    inSecurityBuffer,
-                                    outSecurityBuffer,
-                                    ref contextFlags);
+                    credentialsHandle,
+                    ref securityContext,
+                    this.servicePrincipalName,
+                    fContextReq,
+                    Endianness.Native,
+                    inSecurityBuffer,
+                    outSecurityBuffer,
+                    ref contextFlags
+                );
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    SecurityTraceRecordHelper.TraceChannelBindingInformation(null, false, channelBinding);
+                    SecurityTraceRecordHelper.TraceChannelBindingInformation(
+                        null,
+                        false,
+                        channelBinding
+                    );
                 }
 
                 if (statusCode != (int)SecurityStatus.OK)
@@ -184,12 +260,20 @@ namespace System.IdentityModel.Tokens
                     if (statusCode == (int)SecurityStatus.ContinueNeeded)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(SR.GetString(SR.KerberosMultilegsNotSupported), new Win32Exception(statusCode)));
+                            new SecurityTokenException(
+                                SR.GetString(SR.KerberosMultilegsNotSupported),
+                                new Win32Exception(statusCode)
+                            )
+                        );
                     }
                     else
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new SecurityTokenException(SR.GetString(SR.FailInitializeSecurityContext), new Win32Exception(statusCode)));
+                            new SecurityTokenException(
+                                SR.GetString(SR.FailInitializeSecurityContext),
+                                new Win32Exception(statusCode)
+                            )
+                        );
                     }
                 }
 
@@ -206,12 +290,17 @@ namespace System.IdentityModel.Tokens
 #endif
 
                 // Expiration
-                LifeSpan lifeSpan = (LifeSpan)SspiWrapper.QueryContextAttributes(securityContext, ContextAttribute.Lifespan);
+                LifeSpan lifeSpan = (LifeSpan)
+                    SspiWrapper.QueryContextAttributes(securityContext, ContextAttribute.Lifespan);
                 this.effectiveTime = lifeSpan.EffectiveTimeUtc;
                 this.expirationTime = lifeSpan.ExpiryTimeUtc;
 
                 // SessionKey
-                SecuritySessionKeyClass sessionKey = (SecuritySessionKeyClass)SspiWrapper.QueryContextAttributes(securityContext, ContextAttribute.SessionKey);
+                SecuritySessionKeyClass sessionKey = (SecuritySessionKeyClass)
+                    SspiWrapper.QueryContextAttributes(
+                        securityContext,
+                        ContextAttribute.SessionKey
+                    );
                 this.symmetricSecurityKey = new InMemorySymmetricSecurityKey(sessionKey.SessionKey);
             }
             finally
@@ -235,14 +324,22 @@ namespace System.IdentityModel.Tokens
         public override T CreateKeyIdentifierClause<T>()
         {
             if (typeof(T) == typeof(KerberosTicketHashKeyIdentifierClause))
-                return new KerberosTicketHashKeyIdentifierClause(CryptoHelper.ComputeHash(this.apreq), false, null, 0) as T;
+                return new KerberosTicketHashKeyIdentifierClause(
+                        CryptoHelper.ComputeHash(this.apreq),
+                        false,
+                        null,
+                        0
+                    ) as T;
 
             return base.CreateKeyIdentifierClause<T>();
         }
 
-        public override bool MatchesKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            KerberosTicketHashKeyIdentifierClause kerbKeyIdentifierClause = keyIdentifierClause as KerberosTicketHashKeyIdentifierClause;
+            KerberosTicketHashKeyIdentifierClause kerbKeyIdentifierClause =
+                keyIdentifierClause as KerberosTicketHashKeyIdentifierClause;
             if (kerbKeyIdentifierClause != null)
                 return kerbKeyIdentifierClause.Matches(CryptoHelper.ComputeHash(this.apreq));
 

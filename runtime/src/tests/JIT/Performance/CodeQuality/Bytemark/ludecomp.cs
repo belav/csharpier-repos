@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 /*
 ** This program was translated to C# and adapted for xunit-performance.
-** New variants of several tests were added to compare class versus 
+** New variants of several tests were added to compare class versus
 ** struct and to compare jagged arrays vs multi-dimensional arrays.
 */
 
@@ -23,7 +23,7 @@
 ** are error-free.  Consequently, McGraw-HIll and BYTE Magazine make
 ** no claims in regard to the fitness of the source code, executable
 ** code, and documentation of the BYTEmark.
-** 
+**
 ** Furthermore, BYTE Magazine, McGraw-Hill, and all employees
 ** of McGraw-Hill cannot be held responsible for any damages resulting
 ** from the use of this code or the results obtained from using
@@ -142,25 +142,34 @@ internal class LUDecomp : LUStruct
             iterations += (double)this.numarrays;
         } while (ByteMark.TicksToSecs(accumtime) < this.request_secs);
 
-        if (this.adjust == 0) this.adjust = 1;
+        if (this.adjust == 0)
+            this.adjust = 1;
 
         return iterations / ByteMark.TicksToFracSecs(accumtime);
     }
 
-    private static long DoLUIteration(double[][] a, double[] b, double[][][] abase, double[][] bbase, int numarrays)
+    private static long DoLUIteration(
+        double[][] a,
+        double[] b,
+        double[][][] abase,
+        double[][] bbase,
+        int numarrays
+    )
     {
         double[][] locabase;
         double[] locbbase;
         long elapsed;
-        int k, j, i;
+        int k,
+            j,
+            i;
 
         for (j = 0; j < numarrays; j++)
         {
             locabase = abase[j];
             locbbase = bbase[j];
             for (i = 0; i < global.LUARRAYROWS; i++)
-                for (k = 0; k < global.LUARRAYCOLS; k++)
-                    locabase[i][k] = a[i][k];
+            for (k = 0; k < global.LUARRAYCOLS; k++)
+                locabase[i][k] = a[i][k];
             for (i = 0; i < global.LUARRAYROWS; i++)
                 locbbase[i] = b[i];
         }
@@ -180,7 +189,10 @@ internal class LUDecomp : LUStruct
 
     private static void build_problem(double[][] a, int n, double[] b)
     {
-        int i, j, k, k1;
+        int i,
+            j,
+            k,
+            k1;
         double rcon;
 
         ByteMark.randnum(13);
@@ -201,8 +213,10 @@ internal class LUDecomp : LUStruct
             k1 = ByteMark.abs_randwc(n);
             if (k != k1)
             {
-                if (k < k1) rcon = 1.0;
-                else rcon = -1.0;
+                if (k < k1)
+                    rcon = 1.0;
+                else
+                    rcon = -1.0;
                 for (j = 0; j < n; j++)
                     a[k][j] += a[k1][j] * rcon;
                 b[k] += b[k1] * rcon;
@@ -215,7 +229,9 @@ internal class LUDecomp : LUStruct
         double big;
         double sum;
         double dum;
-        int i, j, k;
+        int i,
+            j,
+            k;
         int imax = 0;
         double tiny;
 
@@ -228,7 +244,8 @@ internal class LUDecomp : LUStruct
             for (j = 0; j < n; j++)
                 if (Math.Abs(a[i][j]) > big)
                     big = Math.Abs(a[i][j]);
-            if (big == 0.0) return 0;
+            if (big == 0.0)
+                return 0;
             s_LUtempvv[i] = 1.0 / big;
         }
 
@@ -290,7 +307,8 @@ internal class LUDecomp : LUStruct
 
     private static void lubksb(double[][] a, int n, int[] indx, double[] b)
     {
-        int i, j;
+        int i,
+            j;
         int ip;
         int ii;
         double sum;
@@ -305,8 +323,7 @@ internal class LUDecomp : LUStruct
             if (ii != -1)
                 for (j = ii; j < i; j++)
                     sum = sum - a[i][j] * b[j];
-            else
-                if (sum != (double)0.0)
+            else if (sum != (double)0.0)
                 ii = i;
             b[i] = sum;
         }
@@ -326,7 +343,8 @@ internal class LUDecomp : LUStruct
         int[] indx = new int[global.LUARRAYROWS];
         int d;
 
-        if (ludcmp(a, n, indx, out d) == 0) return 0;
+        if (ludcmp(a, n, indx, out d) == 0)
+            return 0;
 
         lubksb(a, n, indx, b);
 

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="WhiteSpaceHandling.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">helenak</owner>
 //------------------------------------------------------------------------------
 
@@ -15,12 +15,12 @@ namespace System.Xml
 #endif
     {
         // Return all Whitespace and SignificantWhitespace nodes. This is the default.
-        All              = 0,
+        All = 0,
 
         // Return just SignificantWhitespace, i.e. whitespace nodes that are in scope of xml:space="preserve"
-        Significant      = 1,
+        Significant = 1,
 
         // Do not return any Whitespace or SignificantWhitespace nodes.
-        None             = 2
+        None = 2,
     }
 }

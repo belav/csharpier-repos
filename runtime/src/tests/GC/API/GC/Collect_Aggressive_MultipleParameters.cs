@@ -12,7 +12,7 @@ public class AggressiveCollect_MultipleParameters
         long before = CreateGarbage();
         GC.Collect(2, GCCollectionMode.Aggressive, blocking: true, compacting: true);
 
-        // Positive Test Case. 
+        // Positive Test Case.
         long after = GC.GetGCMemoryInfo().TotalCommittedBytes;
         long reclaimed = before - after;
         long reclaimedAtLeast = 2000 * 4000;
@@ -20,7 +20,9 @@ public class AggressiveCollect_MultipleParameters
         {
             // If we reach this case, the aggressive GC is not releasing as much memory as
             // we wished, something is wrong.
-            throw new ArgumentException("Test for Collect_Aggressive_MultipleParameters failed: ArgumentException.");
+            throw new ArgumentException(
+                "Test for Collect_Aggressive_MultipleParameters failed: ArgumentException."
+            );
         }
         else
         {
@@ -48,13 +50,12 @@ public class AggressiveCollect_MultipleParameters
         {
             // Should throw an exception.
         }
-
         catch (Exception ex)
         {
             throw new Exception("Test for Collect_Aggressive_MultipleParameters failed.");
         }
 
-        // If we got this far, we have successfully executed all the tests. 
+        // If we got this far, we have successfully executed all the tests.
         return 100;
     }
 
@@ -74,7 +75,10 @@ public class AggressiveCollect_MultipleParameters
         byte[] largeGarbage = new byte[33 * 1024 * 1024];
 
         // This will force us to use more than one region in the pin object heap
-        byte[] pinnedGarbage = GC.AllocateArray<byte>(33 * 1024 * 1024, /* pinned = */true);
+        byte[] pinnedGarbage = GC.AllocateArray<byte>(
+            33 * 1024 * 1024, /* pinned = */
+            true
+        );
 
         GC.Collect(2, GCCollectionMode.Forced, blocking: true, compacting: true);
         long committed = GC.GetGCMemoryInfo().TotalCommittedBytes;

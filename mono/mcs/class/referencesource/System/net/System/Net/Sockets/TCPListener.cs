@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="TCPListener.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System;
     using System.Net;
     using System.Security.Permissions;
@@ -15,14 +16,12 @@ namespace System.Net.Sockets {
     /// class. <see cref='System.Net.Sockets.TcpListener'/> is used to create a host process that
     /// listens for connections from TCP clients.</para>
     /// </devdoc>
-    public class TcpListener {
-
+    public class TcpListener
+    {
         IPEndPoint m_ServerSocketEP;
         Socket m_ServerSocket;
         bool m_Active;
         bool m_ExclusiveAddressUse;
-
-
 
         /// <devdoc>
         ///    <para>
@@ -30,14 +29,22 @@ namespace System.Net.Sockets {
         ///       end point.
         ///    </para>
         /// </devdoc>
-        public TcpListener(IPEndPoint localEP) {
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "TcpListener", localEP);
-            if (localEP == null) {
+        public TcpListener(IPEndPoint localEP)
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "TcpListener", localEP);
+            if (localEP == null)
+            {
                 throw new ArgumentNullException("localEP");
             }
             m_ServerSocketEP = localEP;
-            m_ServerSocket   = new Socket(m_ServerSocketEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "TcpListener", null);
+            m_ServerSocket = new Socket(
+                m_ServerSocketEP.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "TcpListener", null);
         }
 
         /// <devdoc>
@@ -46,17 +53,26 @@ namespace System.Net.Sockets {
         ///       specified IP address and port.
         ///    </para>
         /// </devdoc>
-        public TcpListener(IPAddress localaddr, int port) {
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "TcpListener", localaddr);
-            if (localaddr == null) {
+        public TcpListener(IPAddress localaddr, int port)
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "TcpListener", localaddr);
+            if (localaddr == null)
+            {
                 throw new ArgumentNullException("localaddr");
             }
-            if (!ValidationHelper.ValidateTcpPort(port)) {
+            if (!ValidationHelper.ValidateTcpPort(port))
+            {
                 throw new ArgumentOutOfRangeException("port");
             }
             m_ServerSocketEP = new IPEndPoint(localaddr, port);
-            m_ServerSocket   = new Socket(m_ServerSocketEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "TcpListener", null);
+            m_ServerSocket = new Socket(
+                m_ServerSocketEP.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "TcpListener", null);
         }
 
         // implementation picks an address for client
@@ -67,30 +83,40 @@ namespace System.Net.Sockets {
         ///       port.
         ///    </para>
         /// </devdoc>
-        /// 
+        ///
 
-        [Obsolete("This method has been deprecated. Please use TcpListener(IPAddress localaddr, int port) instead. http://go.microsoft.com/fwlink/?linkid=14202")]
-        public TcpListener(int port){
-
-            if (!ValidationHelper.ValidateTcpPort(port)) 
+        [Obsolete(
+            "This method has been deprecated. Please use TcpListener(IPAddress localaddr, int port) instead. http://go.microsoft.com/fwlink/?linkid=14202"
+        )]
+        public TcpListener(int port)
+        {
+            if (!ValidationHelper.ValidateTcpPort(port))
                 throw new ArgumentOutOfRangeException("port");
-            
+
             m_ServerSocketEP = new IPEndPoint(IPAddress.Any, port);
-            m_ServerSocket = new Socket(m_ServerSocketEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            m_ServerSocket = new Socket(
+                m_ServerSocketEP.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
         }
 
         // This creates a TcpListener that listens on both IPv4 and IPv6 on the given port.
-        public static TcpListener Create(int port) {
-            if (Logging.On) Logging.Enter(Logging.Sockets, "TcpListener.Create", "Port: " + port);
+        public static TcpListener Create(int port)
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, "TcpListener.Create", "Port: " + port);
 
-            if (!ValidationHelper.ValidateTcpPort(port)) {
+            if (!ValidationHelper.ValidateTcpPort(port))
+            {
                 throw new ArgumentOutOfRangeException("port");
             }
 
             TcpListener listener = new TcpListener(IPAddress.IPv6Any, port);
             listener.Server.DualMode = true;
 
-            if (Logging.On) Logging.Exit(Logging.Sockets, "TcpListener.Create", "Port: " + port);
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, "TcpListener.Create", "Port: " + port);
             return listener;
         }
 
@@ -99,10 +125,9 @@ namespace System.Net.Sockets {
         ///       Used by the class to provide the underlying network socket.
         ///    </para>
         /// </devdoc>
-        public Socket Server {
-            get {
-                return m_ServerSocket;
-            }
+        public Socket Server
+        {
+            get { return m_ServerSocket; }
         }
 
         /// <devdoc>
@@ -112,45 +137,50 @@ namespace System.Net.Sockets {
         ///       and started listening.
         ///    </para>
         /// </devdoc>
-        protected bool Active {
-            get {
-                return m_Active;
-            }
+        protected bool Active
+        {
+            get { return m_Active; }
         }
-                
+
         /// <devdoc>
         ///    <para>
         ///        Gets the m_Active EndPoint for the local listener socket.
         ///    </para>
         /// </devdoc>
-        public EndPoint LocalEndpoint {
-            get {
-                return m_Active ? m_ServerSocket.LocalEndPoint : m_ServerSocketEP;
-            }
+        public EndPoint LocalEndpoint
+        {
+            get { return m_Active ? m_ServerSocket.LocalEndPoint : m_ServerSocketEP; }
         }
 
-        public bool ExclusiveAddressUse {
-            get {
-                return m_ServerSocket.ExclusiveAddressUse;
-            } 
-            set{
-                if (m_Active) {
-                    throw new InvalidOperationException(SR.GetString(SR.net_tcplistener_mustbestopped));
+        public bool ExclusiveAddressUse
+        {
+            get { return m_ServerSocket.ExclusiveAddressUse; }
+            set
+            {
+                if (m_Active)
+                {
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.net_tcplistener_mustbestopped)
+                    );
                 }
-                m_ServerSocket.ExclusiveAddressUse = value; 
+                m_ServerSocket.ExclusiveAddressUse = value;
                 m_ExclusiveAddressUse = value;
             }
         }
 
-        public void AllowNatTraversal(bool allowed) {
-            if (m_Active) {
+        public void AllowNatTraversal(bool allowed)
+        {
+            if (m_Active)
+            {
                 throw new InvalidOperationException(SR.GetString(SR.net_tcplistener_mustbestopped));
             }
 
-            if (allowed) {
+            if (allowed)
+            {
                 m_ServerSocket.SetIPProtectionLevel(IPProtectionLevel.Unrestricted);
             }
-            else {
+            else
+            {
                 m_ServerSocket.SetIPProtectionLevel(IPProtectionLevel.EdgeRestricted);
             }
         }
@@ -161,62 +191,79 @@ namespace System.Net.Sockets {
         ///       Starts listening to network requests.
         ///    </para>
         /// </devdoc>
-        public void Start() {
+        public void Start()
+        {
             Start((int)SocketOptionName.MaxConnections);
         }
-        
-        public void Start(int backlog) {
-            if (backlog > (int)SocketOptionName.MaxConnections || backlog < 0) {
+
+        public void Start(int backlog)
+        {
+            if (backlog > (int)SocketOptionName.MaxConnections || backlog < 0)
+            {
                 throw new ArgumentOutOfRangeException("backlog");
             }
 
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "Start", null);
-            GlobalLog.Print("TCPListener::Start()");            
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "Start", null);
+            GlobalLog.Print("TCPListener::Start()");
 
-            if (m_ServerSocket == null) 
+            if (m_ServerSocket == null)
                 throw new InvalidOperationException(SR.GetString(SR.net_InvalidSocketHandle));
 
             //already listening
-            if (m_Active) {
-                if(Logging.On)Logging.Exit(Logging.Sockets, this, "Start", null);
+            if (m_Active)
+            {
+                if (Logging.On)
+                    Logging.Exit(Logging.Sockets, this, "Start", null);
                 return;
             }
 
             m_ServerSocket.Bind(m_ServerSocketEP);
-            try {
+            try
+            {
                 m_ServerSocket.Listen(backlog);
             }
-            // When there is an exception unwind previous actions (bind etc) 
-            catch (SocketException) {
+            // When there is an exception unwind previous actions (bind etc)
+            catch (SocketException)
+            {
                 Stop();
                 throw;
             }
             m_Active = true;
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "Start", null);
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "Start", null);
         }
-
 
         /// <devdoc>
         ///    <para>
         ///       Closes the network connection.
         ///    </para>
         /// </devdoc>
-        public void Stop() {
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "Stop", null);
+        public void Stop()
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "Stop", null);
             GlobalLog.Print("TCPListener::Stop()");
 
-            if (m_ServerSocket != null) {
+            if (m_ServerSocket != null)
+            {
                 m_ServerSocket.Close();
                 m_ServerSocket = null;
             }
             m_Active = false;
-            m_ServerSocket = new Socket(m_ServerSocketEP.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            
-            if (m_ExclusiveAddressUse) {
+            m_ServerSocket = new Socket(
+                m_ServerSocketEP.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
+
+            if (m_ExclusiveAddressUse)
+            {
                 m_ServerSocket.ExclusiveAddressUse = true;
             }
 
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "Stop", null);
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "Stop", null);
         }
 
         // Determine if there are pending connections
@@ -225,8 +272,9 @@ namespace System.Net.Sockets {
         ///       Determine if there are pending connection requests.
         ///    </para>
         /// </devdoc>
-        public bool Pending() {
-            if (!m_Active) 
+        public bool Pending()
+        {
+            if (!m_Active)
                 throw new InvalidOperationException(SR.GetString(SR.net_stopped));
             return m_ServerSocket.Poll(0, SelectMode.SelectRead);
         }
@@ -237,12 +285,15 @@ namespace System.Net.Sockets {
         ///       Accepts a pending connection request.
         ///    </para>
         /// </devdoc>
-        public Socket AcceptSocket() {
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "AcceptSocket", null);
-            if (!m_Active) 
+        public Socket AcceptSocket()
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "AcceptSocket", null);
+            if (!m_Active)
                 throw new InvalidOperationException(SR.GetString(SR.net_stopped));
             Socket socket = m_ServerSocket.Accept();
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "AcceptSocket", socket);
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "AcceptSocket", socket);
             return socket;
         }
 
@@ -250,36 +301,41 @@ namespace System.Net.Sockets {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public TcpClient AcceptTcpClient() {
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "AcceptTcpClient", null);
-            if (!m_Active) 
+        public TcpClient AcceptTcpClient()
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "AcceptTcpClient", null);
+            if (!m_Active)
                 throw new InvalidOperationException(SR.GetString(SR.net_stopped));
-            
+
             Socket acceptedSocket = m_ServerSocket.Accept();
             TcpClient returnValue = new TcpClient(acceptedSocket);
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "AcceptTcpClient", returnValue);
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "AcceptTcpClient", returnValue);
             return returnValue;
         }
 
-
-
         //methods
-        
-        [HostProtection(ExternalThreading=true)]
+
+        [HostProtection(ExternalThreading = true)]
         public IAsyncResult BeginAcceptSocket(AsyncCallback callback, object state)
         {
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "BeginAcceptSocket", null);
-            if (!m_Active) 
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "BeginAcceptSocket", null);
+            if (!m_Active)
                 throw new InvalidOperationException(SR.GetString(SR.net_stopped));
 
-            IAsyncResult result = m_ServerSocket.BeginAccept(callback,state);
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "BeginAcceptSocket", null);
+            IAsyncResult result = m_ServerSocket.BeginAccept(callback, state);
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "BeginAcceptSocket", null);
             return result;
         }
 
-        public Socket EndAcceptSocket(IAsyncResult asyncResult){
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "EndAcceptSocket", null);
-            
+        public Socket EndAcceptSocket(IAsyncResult asyncResult)
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "EndAcceptSocket", null);
+
             if (asyncResult == null)
             {
                 throw new ArgumentNullException("asyncResult");
@@ -294,30 +350,38 @@ namespace System.Net.Sockets {
 #endif
             if (asyncSocket == null)
             {
-                throw new ArgumentException(SR.GetString(SR.net_io_invalidasyncresult), "asyncResult");
+                throw new ArgumentException(
+                    SR.GetString(SR.net_io_invalidasyncresult),
+                    "asyncResult"
+                );
             }
 
             // This will throw ObjectDisposedException if Stop() has been called.
             Socket socket = asyncSocket.EndAccept(asyncResult);
 
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "EndAcceptSocket", socket);
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "EndAcceptSocket", socket);
             return socket;
         }
-        
-        [HostProtection(ExternalThreading=true)]
+
+        [HostProtection(ExternalThreading = true)]
         public IAsyncResult BeginAcceptTcpClient(AsyncCallback callback, object state)
         {
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "BeginAcceptTcpClient", null);
-            if (!m_Active) 
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "BeginAcceptTcpClient", null);
+            if (!m_Active)
                 throw new InvalidOperationException(SR.GetString(SR.net_stopped));
-            IAsyncResult result = m_ServerSocket.BeginAccept(callback,state);
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "BeginAcceptTcpClient", null);
+            IAsyncResult result = m_ServerSocket.BeginAccept(callback, state);
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "BeginAcceptTcpClient", null);
             return result;
         }
 
-        public TcpClient EndAcceptTcpClient(IAsyncResult asyncResult){
-            if(Logging.On)Logging.Enter(Logging.Sockets, this, "EndAcceptTcpClient", null);
-            
+        public TcpClient EndAcceptTcpClient(IAsyncResult asyncResult)
+        {
+            if (Logging.On)
+                Logging.Enter(Logging.Sockets, this, "EndAcceptTcpClient", null);
+
             if (asyncResult == null)
             {
                 throw new ArgumentNullException("asyncResult");
@@ -332,13 +396,17 @@ namespace System.Net.Sockets {
 #endif
             if (asyncSocket == null)
             {
-                throw new ArgumentException(SR.GetString(SR.net_io_invalidasyncresult), "asyncResult");
+                throw new ArgumentException(
+                    SR.GetString(SR.net_io_invalidasyncresult),
+                    "asyncResult"
+                );
             }
 
             // This will throw ObjectDisposedException if Stop() has been called.
             Socket socket = asyncSocket.EndAccept(asyncResult);
 
-            if(Logging.On)Logging.Exit(Logging.Sockets, this, "EndAcceptTcpClient", socket);
+            if (Logging.On)
+                Logging.Exit(Logging.Sockets, this, "EndAcceptTcpClient", socket);
             return new TcpClient(socket);
         }
 
@@ -352,11 +420,11 @@ namespace System.Net.Sockets {
         [HostProtection(ExternalThreading = true)]
         public Task<TcpClient> AcceptTcpClientAsync()
         {
-            return Task<TcpClient>.Factory.FromAsync(BeginAcceptTcpClient, EndAcceptTcpClient, null);
+            return Task<TcpClient>.Factory.FromAsync(
+                BeginAcceptTcpClient,
+                EndAcceptTcpClient,
+                null
+            );
         }
-
-
     }; // class TcpListener
-
-
 } // namespace System.Net.Sockets

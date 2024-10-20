@@ -14,7 +14,8 @@ namespace System.Xml
         private string? _data;
 
         //base(doc) will throw exception if doc is null.
-        protected internal XmlCharacterData(string? data, XmlDocument doc) : base(doc)
+        protected internal XmlCharacterData(string? data, XmlDocument doc)
+            : base(doc)
         {
             _data = data;
         }
@@ -49,11 +50,17 @@ namespace System.Xml
                     return string.Empty;
                 }
             }
-
             set
             {
                 XmlNode? parent = ParentNode;
-                XmlNodeChangedEventArgs? args = GetEventArgs(this, parent, parent, _data, value, XmlNodeChangedAction.Change);
+                XmlNodeChangedEventArgs? args = GetEventArgs(
+                    this,
+                    parent,
+                    parent,
+                    _data,
+                    value,
+                    XmlNodeChangedAction.Change
+                );
 
                 if (args != null)
                     BeforeEvent(args);
@@ -100,9 +107,17 @@ namespace System.Xml
         {
             XmlNode? parent = ParentNode;
             int capacity = _data != null ? _data.Length : 0;
-            if (strData != null) capacity += strData.Length;
+            if (strData != null)
+                capacity += strData.Length;
             string newValue = new StringBuilder(capacity).Append(_data).Append(strData).ToString();
-            XmlNodeChangedEventArgs? args = GetEventArgs(this, parent, parent, _data, newValue, XmlNodeChangedAction.Change);
+            XmlNodeChangedEventArgs? args = GetEventArgs(
+                this,
+                parent,
+                parent,
+                _data,
+                newValue,
+                XmlNodeChangedAction.Change
+            );
 
             if (args != null)
                 BeforeEvent(args);
@@ -118,9 +133,20 @@ namespace System.Xml
         {
             XmlNode? parent = ParentNode;
             int capacity = _data != null ? _data.Length : 0;
-            if (strData != null) capacity += strData.Length;
-            string newValue = new StringBuilder(capacity).Append(_data).Insert(offset, strData).ToString();
-            XmlNodeChangedEventArgs? args = GetEventArgs(this, parent, parent, _data, newValue, XmlNodeChangedAction.Change);
+            if (strData != null)
+                capacity += strData.Length;
+            string newValue = new StringBuilder(capacity)
+                .Append(_data)
+                .Insert(offset, strData)
+                .ToString();
+            XmlNodeChangedEventArgs? args = GetEventArgs(
+                this,
+                parent,
+                parent,
+                _data,
+                newValue,
+                XmlNodeChangedAction.Change
+            );
             if (args != null)
                 BeforeEvent(args);
 
@@ -146,7 +172,14 @@ namespace System.Xml
 
             string newValue = new StringBuilder(_data).Remove(offset, count).ToString();
             XmlNode? parent = ParentNode;
-            XmlNodeChangedEventArgs? args = GetEventArgs(this, parent, parent, _data, newValue, XmlNodeChangedAction.Change);
+            XmlNodeChangedEventArgs? args = GetEventArgs(
+                this,
+                parent,
+                parent,
+                _data,
+                newValue,
+                XmlNodeChangedAction.Change
+            );
 
             if (args != null)
                 BeforeEvent(args);
@@ -174,7 +207,14 @@ namespace System.Xml
             string newValue = temp.Insert(offset, strData).ToString();
 
             XmlNode? parent = ParentNode;
-            XmlNodeChangedEventArgs? args = GetEventArgs(this, parent, parent, _data, newValue, XmlNodeChangedAction.Change);
+            XmlNodeChangedEventArgs? args = GetEventArgs(
+                this,
+                parent,
+                parent,
+                _data,
+                newValue,
+                XmlNodeChangedAction.Change
+            );
 
             if (args != null)
                 BeforeEvent(args);
@@ -198,7 +238,12 @@ namespace System.Xml
             //nodetype when it returns.
 
             XmlNode? n = node;
-            Debug.Assert(XmlDocument.IsTextNode(n.NodeType) || (n.ParentNode != null && n.ParentNode.NodeType == XmlNodeType.EntityReference));
+            Debug.Assert(
+                XmlDocument.IsTextNode(n.NodeType)
+                    || (
+                        n.ParentNode != null && n.ParentNode.NodeType == XmlNodeType.EntityReference
+                    )
+            );
             while (n != null)
             {
                 switch (n.NodeType)

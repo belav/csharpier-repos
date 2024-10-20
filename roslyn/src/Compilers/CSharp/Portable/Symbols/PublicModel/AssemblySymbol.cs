@@ -23,10 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         INamespaceSymbol IAssemblySymbol.GlobalNamespace
         {
-            get
-            {
-                return UnderlyingAssemblySymbol.GlobalNamespace.GetPublicSymbol();
-            }
+            get { return UnderlyingAssemblySymbol.GlobalNamespace.GetPublicSymbol(); }
         }
 
         IEnumerable<IModuleSymbol> IAssemblySymbol.Modules
@@ -46,21 +43,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ICollection<string> IAssemblySymbol.TypeNames => UnderlyingAssemblySymbol.TypeNames;
 
-        ICollection<string> IAssemblySymbol.NamespaceNames => UnderlyingAssemblySymbol.NamespaceNames;
+        ICollection<string> IAssemblySymbol.NamespaceNames =>
+            UnderlyingAssemblySymbol.NamespaceNames;
 
-        bool IAssemblySymbol.MightContainExtensionMethods => UnderlyingAssemblySymbol.MightContainExtensionMethods;
+        bool IAssemblySymbol.MightContainExtensionMethods =>
+            UnderlyingAssemblySymbol.MightContainExtensionMethods;
 
         AssemblyMetadata IAssemblySymbol.GetMetadata() => UnderlyingAssemblySymbol.GetMetadata();
 
         INamedTypeSymbol IAssemblySymbol.ResolveForwardedType(string fullyQualifiedMetadataName)
         {
-            return UnderlyingAssemblySymbol.ResolveForwardedType(fullyQualifiedMetadataName).GetPublicSymbol();
+            return UnderlyingAssemblySymbol
+                .ResolveForwardedType(fullyQualifiedMetadataName)
+                .GetPublicSymbol();
         }
 
         ImmutableArray<INamedTypeSymbol> IAssemblySymbol.GetForwardedTypes()
         {
-            return UnderlyingAssemblySymbol.GetAllTopLevelForwardedTypes().Select(t => t.GetPublicSymbol()).
-                   OrderBy(t => t.ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat)).AsImmutable();
+            return UnderlyingAssemblySymbol
+                .GetAllTopLevelForwardedTypes()
+                .Select(t => t.GetPublicSymbol())
+                .OrderBy(t => t.ToDisplayString(SymbolDisplayFormat.QualifiedNameArityFormat))
+                .AsImmutable();
         }
 
         bool IAssemblySymbol.GivesAccessTo(IAssemblySymbol assemblyWantingAccess)
@@ -70,12 +74,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
                 return true;
             }
 
-            var myKeys = UnderlyingAssemblySymbol.GetInternalsVisibleToPublicKeys(assemblyWantingAccess.Name);
+            var myKeys = UnderlyingAssemblySymbol.GetInternalsVisibleToPublicKeys(
+                assemblyWantingAccess.Name
+            );
 
             if (myKeys.Any())
             {
-                // We have an easy out here. Suppose the assembly wanting access is 
-                // being compiled as a module. You can only strong-name an assembly. So we are going to optimistically 
+                // We have an easy out here. Suppose the assembly wanting access is
+                // being compiled as a module. You can only strong-name an assembly. So we are going to optimistically
                 // assume that it is going to be compiled into an assembly with a matching strong name, if necessary.
                 if (assemblyWantingAccess.IsNetModule())
                 {
@@ -86,9 +92,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
                 foreach (var key in myKeys)
                 {
-                    IVTConclusion conclusion = identity.PerformIVTCheck(assemblyWantingAccess.Identity.PublicKey, key);
+                    IVTConclusion conclusion = identity.PerformIVTCheck(
+                        assemblyWantingAccess.Identity.PublicKey,
+                        key
+                    );
                     Debug.Assert(conclusion != IVTConclusion.NoRelationshipClaimed);
-                    if (conclusion == IVTConclusion.Match || conclusion == IVTConclusion.OneSignedOneNot)
+                    if (
+                        conclusion == IVTConclusion.Match
+                        || conclusion == IVTConclusion.OneSignedOneNot
+                    )
                     {
                         return true;
                     }
@@ -103,6 +115,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         {
             return UnderlyingAssemblySymbol.GetTypeByMetadataName(metadataName).GetPublicSymbol();
         }
+
 #nullable disable
 
         #region ISymbol Members
@@ -117,7 +130,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitAssembly(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitAssembly(this, argument);
         }

@@ -14,9 +14,15 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.Close();
 
             // Should throw if RegistryKey is closed
-            Assert.Throws<ObjectDisposedException>(() => TestRegistryKey.DeleteSubKey(TestRegistryKeyName));
-            Assert.Throws<ObjectDisposedException>(() => TestRegistryKey.CreateSubKey(TestRegistryKeyName));
-            Assert.Throws<ObjectDisposedException>(() => TestRegistryKey.SetValue(string.Empty, "String"));
+            Assert.Throws<ObjectDisposedException>(
+                () => TestRegistryKey.DeleteSubKey(TestRegistryKeyName)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => TestRegistryKey.CreateSubKey(TestRegistryKeyName)
+            );
+            Assert.Throws<ObjectDisposedException>(
+                () => TestRegistryKey.SetValue(string.Empty, "String")
+            );
         }
     }
 }

@@ -7,8 +7,11 @@ namespace MS.Internal.Xml.XPath
 {
     internal sealed class ParentQuery : CacheAxisQuery
     {
-        public ParentQuery(Query qyInput, string Name, string Prefix, XPathNodeType Type) : base(qyInput, Name, Prefix, Type) { }
-        private ParentQuery(ParentQuery other) : base(other) { }
+        public ParentQuery(Query qyInput, string Name, string Prefix, XPathNodeType Type)
+            : base(qyInput, Name, Prefix, Type) { }
+
+        private ParentQuery(ParentQuery other)
+            : base(other) { }
 
         public override object Evaluate(XPathNodeIterator context)
         {
@@ -30,6 +33,9 @@ namespace MS.Internal.Xml.XPath
             return this;
         }
 
-        public override XPathNodeIterator Clone() { return new ParentQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new ParentQuery(this);
+        }
     }
 }

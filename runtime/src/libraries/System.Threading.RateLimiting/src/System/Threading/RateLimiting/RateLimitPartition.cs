@@ -20,7 +20,8 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> Get<TKey>(
             TKey partitionKey,
-            Func<TKey, RateLimiter> factory)
+            Func<TKey, RateLimiter> factory
+        )
         {
             return new RateLimitPartition<TKey>(partitionKey, factory);
         }
@@ -34,7 +35,8 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> GetConcurrencyLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, ConcurrencyLimiterOptions> factory)
+            Func<TKey, ConcurrencyLimiterOptions> factory
+        )
         {
             return Get(partitionKey, key => new ConcurrencyLimiter(factory(key)));
         }
@@ -63,26 +65,30 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> GetTokenBucketLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, TokenBucketRateLimiterOptions> factory)
+            Func<TKey, TokenBucketRateLimiterOptions> factory
+        )
         {
-            return Get(partitionKey, key =>
-            {
-                TokenBucketRateLimiterOptions options = factory(key);
-                // We don't want individual TokenBucketRateLimiters to have timers. We will instead have our own internal Timer handling all of them
-                if (options.AutoReplenishment is true)
+            return Get(
+                partitionKey,
+                key =>
                 {
-                    options = new TokenBucketRateLimiterOptions
+                    TokenBucketRateLimiterOptions options = factory(key);
+                    // We don't want individual TokenBucketRateLimiters to have timers. We will instead have our own internal Timer handling all of them
+                    if (options.AutoReplenishment is true)
                     {
-                        TokenLimit = options.TokenLimit,
-                        QueueProcessingOrder = options.QueueProcessingOrder,
-                        QueueLimit = options.QueueLimit,
-                        ReplenishmentPeriod = options.ReplenishmentPeriod,
-                        TokensPerPeriod = options.TokensPerPeriod,
-                        AutoReplenishment = false
-                    };
+                        options = new TokenBucketRateLimiterOptions
+                        {
+                            TokenLimit = options.TokenLimit,
+                            QueueProcessingOrder = options.QueueProcessingOrder,
+                            QueueLimit = options.QueueLimit,
+                            ReplenishmentPeriod = options.ReplenishmentPeriod,
+                            TokensPerPeriod = options.TokensPerPeriod,
+                            AutoReplenishment = false,
+                        };
+                    }
+                    return new TokenBucketRateLimiter(options);
                 }
-                return new TokenBucketRateLimiter(options);
-            });
+            );
         }
 
         /// <summary>
@@ -97,26 +103,30 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> GetSlidingWindowLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, SlidingWindowRateLimiterOptions> factory)
+            Func<TKey, SlidingWindowRateLimiterOptions> factory
+        )
         {
-            return Get(partitionKey, key =>
-            {
-                SlidingWindowRateLimiterOptions options = factory(key);
-                // We don't want individual SlidingWindowRateLimiters to have timers. We will instead have our own internal Timer handling all of them
-                if (options.AutoReplenishment is true)
+            return Get(
+                partitionKey,
+                key =>
                 {
-                    options = new SlidingWindowRateLimiterOptions
+                    SlidingWindowRateLimiterOptions options = factory(key);
+                    // We don't want individual SlidingWindowRateLimiters to have timers. We will instead have our own internal Timer handling all of them
+                    if (options.AutoReplenishment is true)
                     {
-                        PermitLimit = options.PermitLimit,
-                        QueueProcessingOrder = options.QueueProcessingOrder,
-                        QueueLimit = options.QueueLimit,
-                        Window = options.Window,
-                        SegmentsPerWindow = options.SegmentsPerWindow,
-                        AutoReplenishment = false
-                    };
+                        options = new SlidingWindowRateLimiterOptions
+                        {
+                            PermitLimit = options.PermitLimit,
+                            QueueProcessingOrder = options.QueueProcessingOrder,
+                            QueueLimit = options.QueueLimit,
+                            Window = options.Window,
+                            SegmentsPerWindow = options.SegmentsPerWindow,
+                            AutoReplenishment = false,
+                        };
+                    }
+                    return new SlidingWindowRateLimiter(options);
                 }
-                return new SlidingWindowRateLimiter(options);
-            });
+            );
         }
 
         /// <summary>
@@ -131,25 +141,29 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static RateLimitPartition<TKey> GetFixedWindowLimiter<TKey>(
             TKey partitionKey,
-            Func<TKey, FixedWindowRateLimiterOptions> factory)
+            Func<TKey, FixedWindowRateLimiterOptions> factory
+        )
         {
-            return Get(partitionKey, key =>
-            {
-                FixedWindowRateLimiterOptions options = factory(key);
-                // We don't want individual FixedWindowRateLimiters to have timers. We will instead have our own internal Timer handling all of them
-                if (options.AutoReplenishment is true)
+            return Get(
+                partitionKey,
+                key =>
                 {
-                    options = new FixedWindowRateLimiterOptions
+                    FixedWindowRateLimiterOptions options = factory(key);
+                    // We don't want individual FixedWindowRateLimiters to have timers. We will instead have our own internal Timer handling all of them
+                    if (options.AutoReplenishment is true)
                     {
-                        PermitLimit = options.PermitLimit,
-                        QueueProcessingOrder = options.QueueProcessingOrder,
-                        QueueLimit = options.QueueLimit,
-                        Window = options.Window,
-                        AutoReplenishment = false
-                    };
+                        options = new FixedWindowRateLimiterOptions
+                        {
+                            PermitLimit = options.PermitLimit,
+                            QueueProcessingOrder = options.QueueProcessingOrder,
+                            QueueLimit = options.QueueLimit,
+                            Window = options.Window,
+                            AutoReplenishment = false,
+                        };
+                    }
+                    return new FixedWindowRateLimiter(options);
                 }
-                return new FixedWindowRateLimiter(options);
-            });
+            );
         }
     }
 }

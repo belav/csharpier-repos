@@ -18,26 +18,31 @@ namespace System.Activities.Hosting
 
         public Guid Id
         {
-            get
-            {
-                return this.instance.Id;
-            }
+            get { return this.instance.Id; }
         }
 
         public Activity WorkflowDefinition
         {
-            get
-            {
-                return this.instance.WorkflowDefinition;
-            }
+            get { return this.instance.WorkflowDefinition; }
         }
 
-        public IAsyncResult BeginResumeBookmark(Bookmark bookmark, object value, AsyncCallback callback, object state)
+        public IAsyncResult BeginResumeBookmark(
+            Bookmark bookmark,
+            object value,
+            AsyncCallback callback,
+            object state
+        )
         {
             return BeginResumeBookmark(bookmark, value, TimeSpan.MaxValue, callback, state);
         }
 
-        public IAsyncResult BeginResumeBookmark(Bookmark bookmark, object value, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginResumeBookmark(
+            Bookmark bookmark,
+            object value,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper.ThrowIfNegativeArgument(timeout);
 

@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -16,9 +16,9 @@ namespace System.Data.Services.Client
 
     using System.Collections;
     using System.Diagnostics;
-    using System.Xml;
-    using System.Reflection;
     using System.Linq.Expressions;
+    using System.Reflection;
+    using System.Xml;
 
     #endregion Namespaces.
 
@@ -36,15 +36,24 @@ namespace System.Data.Services.Client
 
         internal static readonly Version MaxResponseVersion = DataServiceVersion2;
 
-        internal static readonly Version[] SupportedResponseVersions = 
-        { 
+        internal static readonly Version[] SupportedResponseVersions =
+        {
             DataServiceVersion1,
-            DataServiceVersion2
+            DataServiceVersion2,
         };
 
         internal static readonly char[] ForwardSlash = new char[1] { '/' };
 
-        private static char[] whitespaceForTracing = new char[] { '\r', '\n', ' ', ' ', ' ', ' ', ' ' };
+        private static char[] whitespaceForTracing = new char[]
+        {
+            '\r',
+            '\n',
+            ' ',
+            ' ',
+            ' ',
+            ' ',
+            ' ',
+        };
 
 #if DEBUG
         private static Action<string> DebugFaultInjector = new Action<string>((s) => { });
@@ -86,7 +95,8 @@ namespace System.Data.Services.Client
 #endif
         }
 
-        internal static T CheckArgumentNull<T>(T value, string parameterName) where T : class
+        internal static T CheckArgumentNull<T>(T value, string parameterName)
+            where T : class
         {
             if (null == value)
             {
@@ -105,7 +115,8 @@ namespace System.Data.Services.Client
             }
         }
 
-        internal static void CheckArgumentNotEmpty<T>(T[] value, string parameterName) where T : class
+        internal static void CheckArgumentNotEmpty<T>(T[] value, string parameterName)
+            where T : class
         {
             CheckArgumentNull(value, parameterName);
             if (0 == value.Length)
@@ -136,7 +147,7 @@ namespace System.Data.Services.Client
             }
         }
 
-#if ASTORIA_LIGHT        
+#if ASTORIA_LIGHT
         internal static HttpStack CheckEnumerationValue(HttpStack value, string parameterName)
         {
             switch (value)
@@ -164,7 +175,11 @@ namespace System.Data.Services.Client
                     tmp[i] = ' ';
                 }
 
-                System.Threading.Interlocked.CompareExchange(ref Util.whitespaceForTracing, tmp, whitespace);
+                System.Threading.Interlocked.CompareExchange(
+                    ref Util.whitespaceForTracing,
+                    tmp,
+                    whitespace
+                );
                 whitespace = tmp;
             }
 
@@ -179,7 +194,10 @@ namespace System.Data.Services.Client
         internal static Uri CreateUri(Uri baseUri, Uri requestUri)
         {
             Debug.Assert((null != baseUri) && baseUri.IsAbsoluteUri, "baseUri !IsAbsoluteUri");
-            Debug.Assert(String.IsNullOrEmpty(baseUri.Query) && String.IsNullOrEmpty(baseUri.Fragment), "baseUri has query or fragment");
+            Debug.Assert(
+                String.IsNullOrEmpty(baseUri.Query) && String.IsNullOrEmpty(baseUri.Fragment),
+                "baseUri has query or fragment"
+            );
             Util.CheckArgumentNull(requestUri, "requestUri");
 
             if (!requestUri.IsAbsoluteUri)
@@ -188,7 +206,13 @@ namespace System.Data.Services.Client
                 {
                     if (requestUri.OriginalString.StartsWith("/", StringComparison.Ordinal))
                     {
-                        requestUri = new Uri(baseUri, Util.CreateUri(requestUri.OriginalString.TrimStart(Util.ForwardSlash), UriKind.Relative));
+                        requestUri = new Uri(
+                            baseUri,
+                            Util.CreateUri(
+                                requestUri.OriginalString.TrimStart(Util.ForwardSlash),
+                                UriKind.Relative
+                            )
+                        );
                     }
                     else
                     {
@@ -197,25 +221,33 @@ namespace System.Data.Services.Client
                 }
                 else
                 {
-                    requestUri = Util.CreateUri(baseUri.OriginalString + "/" + requestUri.OriginalString.TrimStart(Util.ForwardSlash), UriKind.Absolute);
+                    requestUri = Util.CreateUri(
+                        baseUri.OriginalString
+                            + "/"
+                            + requestUri.OriginalString.TrimStart(Util.ForwardSlash),
+                        UriKind.Absolute
+                    );
                 }
             }
 
             return requestUri;
         }
 
-        internal static bool ContainsReference<T>(T[] array, T value) where T : class
+        internal static bool ContainsReference<T>(T[] array, T value)
+            where T : class
         {
             return (0 <= IndexOfReference<T>(array, value));
         }
 
-        internal static void Dispose<T>(ref T disposable) where T : class, IDisposable
+        internal static void Dispose<T>(ref T disposable)
+            where T : class, IDisposable
         {
             Dispose(disposable);
             disposable = null;
         }
 
-        internal static void Dispose<T>(T disposable) where T : class, IDisposable
+        internal static void Dispose<T>(T disposable)
+            where T : class, IDisposable
         {
             if (null != disposable)
             {
@@ -223,7 +255,8 @@ namespace System.Data.Services.Client
             }
         }
 
-        internal static int IndexOfReference<T>(T[] array, T value) where T : class
+        internal static int IndexOfReference<T>(T[] array, T value)
+            where T : class
         {
             Debug.Assert(null != array, "null array");
             for (int i = 0; i < array.Length; ++i)
@@ -239,18 +272,25 @@ namespace System.Data.Services.Client
 
         internal static bool DoNotHandleException(Exception ex)
         {
-            return ((null != ex) &&
-                    ((ex is System.StackOverflowException) ||
-                     (ex is System.OutOfMemoryException) ||
-                     (ex is System.Threading.ThreadAbortException)));
+            return (
+                (null != ex)
+                && (
+                    (ex is System.StackOverflowException)
+                    || (ex is System.OutOfMemoryException)
+                    || (ex is System.Threading.ThreadAbortException)
+                )
+            );
         }
 
         internal static bool IsKnownClientExcption(Exception ex)
         {
-            return (ex is DataServiceClientException) || (ex is DataServiceQueryException) || (ex is DataServiceRequestException);
+            return (ex is DataServiceClientException)
+                || (ex is DataServiceQueryException)
+                || (ex is DataServiceRequestException);
         }
 
-        internal static T NullCheck<T>(T value, InternalError errorcode) where T : class
+        internal static T NullCheck<T>(T value, InternalError errorcode)
+            where T : class
         {
             if (Object.ReferenceEquals(value, null))
             {
@@ -269,13 +309,20 @@ namespace System.Data.Services.Client
         internal static bool AreSame(XmlReader reader, string localName, string namespaceUri)
         {
             Debug.Assert((null != reader) && (null != localName) && (null != namespaceUri), "null");
-            return ((XmlNodeType.Element == reader.NodeType) || (XmlNodeType.EndElement == reader.NodeType)) &&
-                    AreSame(reader.LocalName, localName) && AreSame(reader.NamespaceURI, namespaceUri);
+            return (
+                    (XmlNodeType.Element == reader.NodeType)
+                    || (XmlNodeType.EndElement == reader.NodeType)
+                )
+                && AreSame(reader.LocalName, localName)
+                && AreSame(reader.NamespaceURI, namespaceUri);
         }
 
         internal static bool DoesNullAttributeSayTrue(XmlReader reader)
         {
-            string attributeValue = reader.GetAttribute(XmlConstants.AtomNullAttributeName, XmlConstants.DataWebMetadataNamespace);
+            string attributeValue = reader.GetAttribute(
+                XmlConstants.AtomNullAttributeName,
+                XmlConstants.DataWebMetadataNamespace
+            );
             return ((null != attributeValue) && XmlConvert.ToBoolean(attributeValue));
         }
 
@@ -291,11 +338,21 @@ namespace System.Data.Services.Client
             return TypeAllowsNull(type) ? type : typeof(Nullable<>).MakeGenericType(type);
         }
 
-        internal static void SetNextLinkForCollection(object collection, DataServiceQueryContinuation continuation)
+        internal static void SetNextLinkForCollection(
+            object collection,
+            DataServiceQueryContinuation continuation
+        )
         {
             Debug.Assert(collection != null, "collection != null");
 
-            foreach (var property in collection.GetType().GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public))
+            foreach (
+                var property in collection
+                    .GetType()
+                    .GetProperties(
+                        System.Reflection.BindingFlags.Instance
+                            | System.Reflection.BindingFlags.Public
+                    )
+            )
             {
                 if (property.Name != "Continuation" || !property.CanWrite)
                 {
@@ -320,7 +377,10 @@ namespace System.Data.Services.Client
             {
                 if (constructors[i].GetParameters().Length == argumentCount)
                 {
-                    Debug.Assert( constructor == null, "Make sure that the specific type has only one constructor with specified argument count");
+                    Debug.Assert(
+                        constructor == null,
+                        "Make sure that the specific type has only one constructor with specified argument count"
+                    );
                     constructor = constructors[i];
 #if !DEBUG
                     break;
@@ -334,7 +394,7 @@ namespace System.Data.Services.Client
             }
 
             return ConstructorInvoke(constructor, arguments);
-#else            
+#else
             return Activator.CreateInstance(type, arguments);
 #endif
         }
@@ -347,18 +407,25 @@ namespace System.Data.Services.Client
             }
 #if ASTORIA_LIGHT
             int argumentCount = (arguments == null) ? 0 : arguments.Length;
-            ParameterExpression argumentsExpression = Expression.Parameter(typeof(object[]), "arguments");
+            ParameterExpression argumentsExpression = Expression.Parameter(
+                typeof(object[]),
+                "arguments"
+            );
             Expression[] argumentExpressions = new Expression[argumentCount];
             ParameterInfo[] parameters = constructor.GetParameters();
             for (int i = 0; i < argumentExpressions.Length; i++)
             {
-                argumentExpressions[i] = Expression.Constant(arguments[i], parameters[i].ParameterType);
+                argumentExpressions[i] = Expression.Constant(
+                    arguments[i],
+                    parameters[i].ParameterType
+                );
             }
 
             Expression newExpression = Expression.New(constructor, argumentExpressions);
             Expression<Func<object[], object>> lambda = Expression.Lambda<Func<object[], object>>(
                 Expression.Convert(newExpression, typeof(object)),
-                argumentsExpression);
+                argumentsExpression
+            );
             object result = lambda.Compile()(arguments);
             return result;
 #else
@@ -383,8 +450,7 @@ namespace System.Data.Services.Client
                     do
                     {
                         writer.Write(" {0}=\"{1}\"", reader.Name, reader.Value);
-                    }
-                    while (reader.MoveToNextAttribute());
+                    } while (reader.MoveToNextAttribute());
 
                     reader.MoveToElement();
                 }
@@ -394,13 +460,21 @@ namespace System.Data.Services.Client
         }
 
         [Conditional("TRACE")]
-        internal static void TraceEndElement(XmlReader reader, System.IO.TextWriter writer, bool indent)
+        internal static void TraceEndElement(
+            XmlReader reader,
+            System.IO.TextWriter writer,
+            bool indent
+        )
         {
             if (null != writer)
             {
                 if (indent)
                 {
-                    writer.Write(Util.GetWhitespaceForTracing(2 + reader.Depth), 0, 2 + reader.Depth);
+                    writer.Write(
+                        Util.GetWhitespaceForTracing(2 + reader.Depth),
+                        0,
+                        2 + reader.Depth
+                    );
                 }
 
                 writer.Write("</{0}>", reader.Name);
@@ -415,8 +489,8 @@ namespace System.Data.Services.Client
                 writer.Write(value);
             }
         }
-        
-        #endregion        
+
+        #endregion
 
         private static bool IsNullableType(Type type)
         {

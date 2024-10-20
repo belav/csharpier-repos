@@ -68,11 +68,11 @@ namespace Microsoft.CodeAnalysis
             return Create(stream);
         }
 
-        public static Checksum Create(Checksum checksum1, Checksum checksum2)
-            => Create(stackalloc[] { checksum1, checksum2 });
+        public static Checksum Create(Checksum checksum1, Checksum checksum2) =>
+            Create(stackalloc[] { checksum1, checksum2 });
 
-        public static Checksum Create(Checksum checksum1, Checksum checksum2, Checksum checksum3)
-            => Create(stackalloc[] { checksum1, checksum2, checksum3 });
+        public static Checksum Create(Checksum checksum1, Checksum checksum2, Checksum checksum3) =>
+            Create(stackalloc[] { checksum1, checksum2, checksum3 });
 
         public static Checksum Create(ReadOnlySpan<Checksum> hashes)
         {

@@ -34,12 +34,18 @@ namespace Microsoft.Extensions.DependencyModel
             string assemblyName = System.IO.Path.GetFileNameWithoutExtension(path);
             if (assemblyName == null)
             {
-                throw new ArgumentException($"Provided path has empty file name '{path}'", nameof(path));
+                throw new ArgumentException(
+                    $"Provided path has empty file name '{path}'",
+                    nameof(path)
+                );
             }
 
             if (assemblyName.EndsWith(NativeImageSufix))
             {
-                assemblyName = assemblyName.Substring(0, assemblyName.Length - NativeImageSufix.Length);
+                assemblyName = assemblyName.Substring(
+                    0,
+                    assemblyName.Length - NativeImageSufix.Length
+                );
             }
             return new RuntimeAssembly(assemblyName, path);
         }

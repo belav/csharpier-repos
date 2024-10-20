@@ -9,19 +9,25 @@ namespace Internal.TypeSystem
     public sealed partial class PointerType : ParameterizedType
     {
         internal PointerType(TypeDesc parameterType)
-            : base(parameterType)
-        {
-        }
+            : base(parameterType) { }
 
         public override int GetHashCode()
         {
-            return Internal.NativeFormat.TypeHashingAlgorithms.ComputePointerTypeHashCode(this.ParameterType.GetHashCode());
+            return Internal.NativeFormat.TypeHashingAlgorithms.ComputePointerTypeHashCode(
+                this.ParameterType.GetHashCode()
+            );
         }
 
-        public override TypeDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override TypeDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             TypeDesc parameterType = this.ParameterType;
-            TypeDesc instantiatedParameterType = parameterType.InstantiateSignature(typeInstantiation, methodInstantiation);
+            TypeDesc instantiatedParameterType = parameterType.InstantiateSignature(
+                typeInstantiation,
+                methodInstantiation
+            );
             if (instantiatedParameterType != parameterType)
                 return Context.GetPointerType(instantiatedParameterType);
 

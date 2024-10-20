@@ -3,32 +3,33 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Text;
+using System.ComponentModel.Design.Serialization;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Data.Common;
-using System.Data;
-using System.Data.SqlClient;
-using System.Timers;
-using System.Diagnostics;
-using System.Reflection;
-using System.Workflow.Runtime;
-using System.Workflow.ComponentModel;
-using System.Workflow.Runtime.Hosting;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Timers;
 using System.Transactions;
-using System.Globalization;
+using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Serialization;
-using System.ComponentModel.Design.Serialization;
+using System.Workflow.Runtime;
+using System.Workflow.Runtime.Hosting;
 using System.Xml;
-using System.Configuration;
-
 
 namespace System.Workflow.Runtime.Tracking
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class SqlTrackingService : TrackingService, IProfileNotification
     {
         #region Private/Protected Members
@@ -42,6 +43,7 @@ namespace System.Workflow.Runtime.Tracking
         private DateTime _lastProfileCheck;
         private System.Timers.Timer _timer = new System.Timers.Timer();
         private double _interval = 60000;
+
         //private static int _deadlock = 1205;
         private TypeKeyedCollection _types = new TypeKeyedCollection();
         private object _typeCacheLock = new object();
@@ -50,7 +52,7 @@ namespace System.Workflow.Runtime.Tracking
 
         private static Version UnknownProfileVersionId = new Version(0, 0);
 
-        // Saved from constructor input to be used in service start initialization        
+        // Saved from constructor input to be used in service start initialization
         private NameValueCollection _parameters;
         string _unvalidatedConnectionString;
 
@@ -64,6 +66,7 @@ namespace System.Workflow.Runtime.Tracking
         {
             get { return _unvalidatedConnectionString; }
         }
+
         /// <summary>
         /// Determines if tracking data should be held and transactionally written to the database at persistence points.
         /// </summary>
@@ -71,11 +74,9 @@ namespace System.Workflow.Runtime.Tracking
         public bool IsTransactional
         {
             get { return _isTrans; }
-            set
-            {
-                _isTrans = value;
-            }
+            set { _isTrans = value; }
         }
+
         /// <summary>
         /// Indicates that records should be moved from the active instance tables to the appropriate parition tables when the instance completes.
         /// </summary>
@@ -84,6 +85,7 @@ namespace System.Workflow.Runtime.Tracking
             get { return _partition; }
             set { _partition = value; }
         }
+
         /// <summary>
         /// Determines if the default profile should be used for workflow types that do not have a profile specified for them.
         /// </summary>
@@ -95,11 +97,11 @@ namespace System.Workflow.Runtime.Tracking
         }
 
         /// <summary>
-        /// The time interval, in milliseconds, at which to check the database for changes to profiles.  
+        /// The time interval, in milliseconds, at which to check the database for changes to profiles.
         /// Default is 60000.
         /// </summary>
         /// <remarks>
-        /// Setting the interval results in the next check to occur the specified number of millisecond 
+        /// Setting the interval results in the next check to occur the specified number of millisecond
         /// from the time at which the property is set.
         /// </remarks>
         public double ProfileChangeCheckInterval
@@ -139,7 +141,10 @@ namespace System.Workflow.Runtime.Tracking
         public SqlTrackingService(string connectionString)
         {
             if (String.IsNullOrEmpty(connectionString))
-                throw new ArgumentNullException("connectionString", ExecutionStringManager.MissingConnectionString);
+                throw new ArgumentNullException(
+                    "connectionString",
+                    ExecutionStringManager.MissingConnectionString
+                );
 
             _unvalidatedConnectionString = connectionString;
         }
@@ -147,27 +152,70 @@ namespace System.Workflow.Runtime.Tracking
         public SqlTrackingService(NameValueCollection parameters)
         {
             if (parameters == null)
-                throw new ArgumentNullException("parameters", ExecutionStringManager.MissingParameters);
+                throw new ArgumentNullException(
+                    "parameters",
+                    ExecutionStringManager.MissingParameters
+                );
 
             if (parameters.Count > 0)
             {
                 foreach (string key in parameters.Keys)
                 {
-                    if (0 == string.Compare("IsTransactional", key, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        0
+                        == string.Compare(
+                            "IsTransactional",
+                            key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         _isTrans = bool.Parse(parameters[key]);
-                    else if (0 == string.Compare("UseDefaultProfile", key, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        0
+                        == string.Compare(
+                            "UseDefaultProfile",
+                            key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         _defaultProfile = bool.Parse(parameters[key]);
-                    else if (0 == string.Compare("PartitionOnCompletion", key, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        0
+                        == string.Compare(
+                            "PartitionOnCompletion",
+                            key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         _partition = bool.Parse(parameters[key]);
-                    else if (0 == string.Compare("ProfileChangeCheckInterval", key, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        0
+                        == string.Compare(
+                            "ProfileChangeCheckInterval",
+                            key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         _interval = double.Parse(parameters[key], NumberFormatInfo.InvariantInfo);
                         if (_interval <= 0)
-                            throw new ArgumentException(ExecutionStringManager.InvalidProfileCheckValue);
+                            throw new ArgumentException(
+                                ExecutionStringManager.InvalidProfileCheckValue
+                            );
                     }
-                    else if (0 == string.Compare("ConnectionString", key, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        0
+                        == string.Compare(
+                            "ConnectionString",
+                            key,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                         _unvalidatedConnectionString = parameters[key];
-                    else if (0 == string.Compare("EnableRetries", key, StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        0
+                        == string.Compare("EnableRetries", key, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         _enableRetries = bool.Parse(parameters[key]);
                         _ignoreCommonEnableRetries = true;
@@ -186,7 +234,11 @@ namespace System.Workflow.Runtime.Tracking
         {
             _lastProfileCheck = DateTime.UtcNow;
 
-            _dbResourceAllocator = new DbResourceAllocator(this.Runtime, _parameters, _unvalidatedConnectionString);
+            _dbResourceAllocator = new DbResourceAllocator(
+                this.Runtime,
+                _parameters,
+                _unvalidatedConnectionString
+            );
 
             // Check connection string mismatch if using SharedConnectionWorkflowTransactionService
             _transactionService = this.Runtime.GetService<WorkflowCommitWorkBatchService>();
@@ -197,13 +249,17 @@ namespace System.Workflow.Runtime.Tracking
             // check in the common section
             if ((!_ignoreCommonEnableRetries) && (null != base.Runtime))
             {
-                NameValueConfigurationCollection commonConfigurationParameters = base.Runtime.CommonParameters;
+                NameValueConfigurationCollection commonConfigurationParameters =
+                    base.Runtime.CommonParameters;
                 if (commonConfigurationParameters != null)
                 {
                     // Then scan for connection string in the common configuration parameters section
                     foreach (string key in commonConfigurationParameters.AllKeys)
                     {
-                        if (string.Compare("EnableRetries", key, StringComparison.OrdinalIgnoreCase) == 0)
+                        if (
+                            string.Compare("EnableRetries", key, StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
                         {
                             _enableRetries = bool.Parse(commonConfigurationParameters[key].Value);
                             break;
@@ -224,7 +280,9 @@ namespace System.Workflow.Runtime.Tracking
 
         #region IProfileNotification Implementation
 
-        protected internal override TrackingChannel GetTrackingChannel(TrackingParameters parameters)
+        protected internal override TrackingChannel GetTrackingChannel(
+            TrackingParameters parameters
+        )
         {
             if (null == parameters)
                 throw new ArgumentNullException("parameters");
@@ -239,7 +297,10 @@ namespace System.Workflow.Runtime.Tracking
 
         public event EventHandler<ProfileRemovedEventArgs> ProfileRemoved;
 
-        protected internal override TrackingProfile GetProfile(Type workflowType, Version profileVersion)
+        protected internal override TrackingProfile GetProfile(
+            Type workflowType,
+            Version profileVersion
+        )
         {
             if (null == workflowType)
                 throw new ArgumentNullException("workflowType");
@@ -249,12 +310,19 @@ namespace System.Workflow.Runtime.Tracking
             return GetProfileByScheduleType(workflowType, profileVersion, false);
         }
 
-        protected internal override bool TryGetProfile(Type workflowType, out TrackingProfile profile)
+        protected internal override bool TryGetProfile(
+            Type workflowType,
+            out TrackingProfile profile
+        )
         {
             if (null == workflowType)
                 throw new ArgumentNullException("workflowType");
 
-            profile = GetProfileByScheduleType(workflowType, SqlTrackingService.UnknownProfileVersionId, _defaultProfile);
+            profile = GetProfileByScheduleType(
+                workflowType,
+                SqlTrackingService.UnknownProfileVersionId,
+                _defaultProfile
+            );
 
             if (null == profile)
                 return false;
@@ -276,7 +344,9 @@ namespace System.Workflow.Runtime.Tracking
             DbCommand cmd = this._dbResourceAllocator.NewCommand();
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "[dbo].[GetInstanceTrackingProfile]";
-            cmd.Parameters.Add(this._dbResourceAllocator.NewDbParameter("@InstanceId", scheduleInstanceId));
+            cmd.Parameters.Add(
+                this._dbResourceAllocator.NewDbParameter("@InstanceId", scheduleInstanceId)
+            );
 
             DbDataReader reader = null;
             try
@@ -328,12 +398,20 @@ namespace System.Workflow.Runtime.Tracking
                 if ((null != reader) && (!reader.IsClosed))
                     reader.Close();
 
-                if ((null != cmd) && (null != cmd.Connection) && (ConnectionState.Closed != cmd.Connection.State))
+                if (
+                    (null != cmd)
+                    && (null != cmd.Connection)
+                    && (ConnectionState.Closed != cmd.Connection.State)
+                )
                     cmd.Connection.Close();
             }
         }
 
-        protected internal override bool TryReloadProfile(Type workflowType, Guid scheduleInstanceId, out TrackingProfile profile)
+        protected internal override bool TryReloadProfile(
+            Type workflowType,
+            Guid scheduleInstanceId,
+            out TrackingProfile profile
+        )
         {
             if (null == workflowType)
                 throw new ArgumentNullException("workflowType");
@@ -368,7 +446,12 @@ namespace System.Workflow.Runtime.Tracking
                 cmd.CommandText = "GetUpdatedTrackingProfiles";
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.Add(this._dbResourceAllocator.NewDbParameter("@LastCheckDateTime", _lastProfileCheck));
+                cmd.Parameters.Add(
+                    this._dbResourceAllocator.NewDbParameter(
+                        "@LastCheckDateTime",
+                        _lastProfileCheck
+                    )
+                );
 
                 DbParameter param = this._dbResourceAllocator.NewDbParameter();
                 param.ParameterName = "@MaxCheckDateTime";
@@ -438,7 +521,11 @@ namespace System.Workflow.Runtime.Tracking
                         _lastProfileCheck = (DateTime)cmd.Parameters[1].Value;
                 }
 
-                if ((null != cmd) && (null != cmd.Connection) && (ConnectionState.Closed != cmd.Connection.State))
+                if (
+                    (null != cmd)
+                    && (null != cmd.Connection)
+                    && (ConnectionState.Closed != cmd.Connection.State)
+                )
                     cmd.Connection.Close();
                 //
                 // Start the timer again (autoreset is false to avoid multiple threads checking for profile changes)
@@ -459,18 +546,48 @@ namespace System.Workflow.Runtime.Tracking
             {
                 try
                 {
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteRetried " + executeRetried.Method.Name + " start: " + DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture));
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlTrackingService.ExecuteRetried "
+                            + executeRetried.Method.Name
+                            + " start: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     executeRetried(param);
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteRetried " + executeRetried.Method.Name + " end: " + DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture));
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlTrackingService.ExecuteRetried "
+                            + executeRetried.Method.Name
+                            + " end: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     break;
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Error, 0, "SqlTrackingService.ExecuteRetried caught exception: " + e.ToString());
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "SqlTrackingService.ExecuteRetried caught exception: " + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref count))
                     {
-                        WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteRetried " + executeRetried.Method.Name + " retrying.");
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlTrackingService.ExecuteRetried "
+                                + executeRetried.Method.Name
+                                + " retrying."
+                        );
                         continue;
                     }
                     throw;
@@ -489,18 +606,43 @@ namespace System.Workflow.Runtime.Tracking
                 {
                     ResetConnectionForCommand(command);
 
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteReaderRetried ExecuteReader start: " + DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture));
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlTrackingService.ExecuteReaderRetried ExecuteReader start: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     reader = command.ExecuteReader(behavior);
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteReaderRetried ExecuteReader end: " + DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture));
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlTrackingService.ExecuteReaderRetried ExecuteReader end: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     break;
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Error, 0, "SqlTrackingService.ExecuteReaderRetried caught exception from ExecuteReader: " + e.ToString());
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "SqlTrackingService.ExecuteReaderRetried caught exception from ExecuteReader: "
+                            + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref count))
                     {
-                        WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteReaderRetried retrying.");
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlTrackingService.ExecuteReaderRetried retrying."
+                        );
                         continue;
                     }
                     throw;
@@ -520,18 +662,43 @@ namespace System.Workflow.Runtime.Tracking
                 {
                     ResetConnectionForCommand(command);
 
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteNonQueryRetried ExecuteNonQuery start: " + DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture));
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlTrackingService.ExecuteNonQueryRetried ExecuteNonQuery start: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     command.ExecuteNonQuery();
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteNonQueryRetried ExecuteNonQuery end: " + DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture));
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "SqlTrackingService.ExecuteNonQueryRetried ExecuteNonQuery end: "
+                            + DateTime.UtcNow.ToString(
+                                "G",
+                                System.Globalization.CultureInfo.InvariantCulture
+                            )
+                    );
                     break;
                 }
                 catch (Exception e)
                 {
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Error, 0, "SqlTrackingService.ExecuteNonQueryRetried caught exception from ExecuteNonQuery: " + e.ToString());
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "SqlTrackingService.ExecuteNonQueryRetried caught exception from ExecuteNonQuery: "
+                            + e.ToString()
+                    );
 
                     if (dbRetry.TryDoRetry(ref count))
                     {
-                        WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteNonQueryRetried retrying.");
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlTrackingService.ExecuteNonQueryRetried retrying."
+                        );
                         continue;
                     }
                     throw;
@@ -551,16 +718,37 @@ namespace System.Workflow.Runtime.Tracking
                     {
                         ResetConnectionForCommand(command);
 
-                        WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteNonQueryWithTxRetried ExecuteNonQuery start: " + DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture));
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlTrackingService.ExecuteNonQueryWithTxRetried ExecuteNonQuery start: "
+                                + DateTime.UtcNow.ToString(
+                                    "G",
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                )
+                        );
                         command.Transaction = command.Connection.BeginTransaction();
                         command.ExecuteNonQuery();
                         command.Transaction.Commit();
-                        WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteNonQueryWithTxRetried ExecuteNonQuery end: " + DateTime.UtcNow.ToString("G", System.Globalization.CultureInfo.InvariantCulture));
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Information,
+                            0,
+                            "SqlTrackingService.ExecuteNonQueryWithTxRetried ExecuteNonQuery end: "
+                                + DateTime.UtcNow.ToString(
+                                    "G",
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                )
+                        );
                         break;
                     }
                     catch (Exception e)
                     {
-                        WorkflowTrace.Host.TraceEvent(TraceEventType.Error, 0, "SqlTrackingService.ExecuteNonQueryWithTxRetried caught exception from ExecuteNonQuery: " + e.ToString());
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            "SqlTrackingService.ExecuteNonQueryWithTxRetried caught exception from ExecuteNonQuery: "
+                                + e.ToString()
+                        );
 
                         try
                         {
@@ -576,7 +764,11 @@ namespace System.Workflow.Runtime.Tracking
 
                         if (dbRetry.TryDoRetry(ref count))
                         {
-                            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "SqlTrackingService.ExecuteNonQueryWithTxRetried retrying.");
+                            WorkflowTrace.Host.TraceEvent(
+                                TraceEventType.Information,
+                                0,
+                                "SqlTrackingService.ExecuteNonQueryWithTxRetried retrying."
+                            );
                             continue;
                         }
 
@@ -586,7 +778,11 @@ namespace System.Workflow.Runtime.Tracking
             }
             finally
             {
-                if ((null != command) && (null != command.Connection) && (ConnectionState.Closed != command.Connection.State))
+                if (
+                    (null != command)
+                    && (null != command.Connection)
+                    && (ConnectionState.Closed != command.Connection.State)
+                )
                     command.Connection.Close();
             }
         }
@@ -621,7 +817,11 @@ namespace System.Workflow.Runtime.Tracking
             return XmlWriter.Create(output as TextWriter, settings);
         }
 
-        private TrackingProfile GetProfileByScheduleType(Type workflowType, Version profileVersionId, bool wantToCreateDefault)
+        private TrackingProfile GetProfileByScheduleType(
+            Type workflowType,
+            Version profileVersionId,
+            bool wantToCreateDefault
+        )
         {
             DbCommand cmd = this._dbResourceAllocator.NewCommand();
             DbDataReader reader = null;
@@ -630,13 +830,27 @@ namespace System.Workflow.Runtime.Tracking
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.CommandText = "dbo.GetTrackingProfile";
 
-            cmd.Parameters.Add(this._dbResourceAllocator.NewDbParameter("@TypeFullName", workflowType.FullName));
-            cmd.Parameters.Add(this._dbResourceAllocator.NewDbParameter("@AssemblyFullName", workflowType.Assembly.FullName));
+            cmd.Parameters.Add(
+                this._dbResourceAllocator.NewDbParameter("@TypeFullName", workflowType.FullName)
+            );
+            cmd.Parameters.Add(
+                this._dbResourceAllocator.NewDbParameter(
+                    "@AssemblyFullName",
+                    workflowType.Assembly.FullName
+                )
+            );
 
             if (profileVersionId != SqlTrackingService.UnknownProfileVersionId)
-                cmd.Parameters.Add(this._dbResourceAllocator.NewDbParameter("@Version", profileVersionId.ToString()));
+                cmd.Parameters.Add(
+                    this._dbResourceAllocator.NewDbParameter(
+                        "@Version",
+                        profileVersionId.ToString()
+                    )
+                );
 
-            cmd.Parameters.Add(this._dbResourceAllocator.NewDbParameter("@CreateDefault", wantToCreateDefault));
+            cmd.Parameters.Add(
+                this._dbResourceAllocator.NewDbParameter("@CreateDefault", wantToCreateDefault)
+            );
             try
             {
                 reader = ExecuteReaderRetried(cmd, CommandBehavior.CloseConnection);
@@ -668,14 +882,16 @@ namespace System.Workflow.Runtime.Tracking
                 if ((null != reader) && (!reader.IsClosed))
                     reader.Close();
 
-                if ((null != cmd) && (null != cmd.Connection) && (ConnectionState.Closed != cmd.Connection.State))
+                if (
+                    (null != cmd)
+                    && (null != cmd.Connection)
+                    && (ConnectionState.Closed != cmd.Connection.State)
+                )
                     cmd.Connection.Close();
             }
 
             return profile;
-
         }
-
 
         #endregion
 
@@ -734,12 +950,15 @@ namespace System.Workflow.Runtime.Tracking
             #region Private Members
 
             private SqlTrackingService _service = null;
-            private string _callPathKey = null, _parentCallPathKey = null;
+            private string _callPathKey = null,
+                _parentCallPathKey = null;
             private bool _isTrans = false;
             private long _internalId = -1;
             private long _tmpInternalId = -1;
             private Dictionary<string, long> _activityInstanceId = new Dictionary<string, long>(32);
-            private Dictionary<string, long> _tmpActivityInstanceId = new Dictionary<string, long>(10);
+            private Dictionary<string, long> _tmpActivityInstanceId = new Dictionary<string, long>(
+                10
+            );
             private TrackingParameters _parameters = null;
             private bool _pendingArchive = false;
             private bool _completedTerminated = false;
@@ -749,13 +968,10 @@ namespace System.Workflow.Runtime.Tracking
             private static int _dataItemAnnotationBatchSize = 5;
             private static int _eventAnnotationBatchSize = 5;
 
-
             #endregion
 
             #region Construction
-            protected SqlTrackingChannel()
-            {
-            }
+            protected SqlTrackingChannel() { }
 
             public SqlTrackingChannel(TrackingParameters parameters, SqlTrackingService service)
             {
@@ -827,13 +1043,22 @@ namespace System.Workflow.Runtime.Tracking
                     command.CommandText = "[dbo].[PartitionWorkflowInstance]";
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", _internalId));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@WorkflowInstanceInternalId",
+                            _internalId
+                        )
+                    );
 
                     command.ExecuteNonQuery();
                 }
                 finally
                 {
-                    if ((null != command) && (null != command.Connection) && (ConnectionState.Closed != command.Connection.State))
+                    if (
+                        (null != command)
+                        && (null != command.Connection)
+                        && (ConnectionState.Closed != command.Connection.State)
+                    )
                         command.Connection.Close();
                 }
             }
@@ -852,7 +1077,11 @@ namespace System.Workflow.Runtime.Tracking
                 }
                 finally
                 {
-                    if ((null != command) && (null != command.Connection) && (ConnectionState.Closed != command.Connection.State))
+                    if (
+                        (null != command)
+                        && (null != command.Connection)
+                        && (ConnectionState.Closed != command.Connection.State)
+                    )
                         command.Connection.Close();
                 }
             }
@@ -866,8 +1095,12 @@ namespace System.Workflow.Runtime.Tracking
                 command.CommandText = "[dbo].[SetWorkflowInstanceEndDateTime]";
                 command.CommandType = CommandType.StoredProcedure;
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EndDateTime", DateTime.UtcNow));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@EndDateTime", DateTime.UtcNow)
+                );
                 command.ExecuteNonQuery();
             }
 
@@ -882,7 +1115,10 @@ namespace System.Workflow.Runtime.Tracking
                     if (_isTrans)
                         WorkflowEnvironment.WorkBatch.Add(this, SerializeRecord(act));
                     else
-                        _service.ExecuteRetried(ExecuteInsertActivityStatusInstance, SerializeRecord(act));
+                        _service.ExecuteRetried(
+                            ExecuteInsertActivityStatusInstance,
+                            SerializeRecord(act)
+                        );
                 }
                 else if (record is WorkflowTrackingRecord)
                 {
@@ -899,13 +1135,19 @@ namespace System.Workflow.Runtime.Tracking
                         {
                             //
                             // Dynamic updates are inserted in the WorkflowInstanceEvent table
-                            // and then the arg (workflowchanges) is normalized into xoml 
+                            // and then the arg (workflowchanges) is normalized into xoml
                             // and the added/removed activities tables
-                            _service.ExecuteRetried(ExecuteInsertWorkflowChange, SerializeRecord(inst));
+                            _service.ExecuteRetried(
+                                ExecuteInsertWorkflowChange,
+                                SerializeRecord(inst)
+                            );
                         }
                         else
                         {
-                            _service.ExecuteRetried(ExecuteInsertWorkflowInstanceEvent, SerializeRecord(inst));
+                            _service.ExecuteRetried(
+                                ExecuteInsertWorkflowInstanceEvent,
+                                SerializeRecord(inst)
+                            );
                         }
                     }
                 }
@@ -952,13 +1194,20 @@ namespace System.Workflow.Runtime.Tracking
                     // The connection might be shared or local
                     // The tx is shared and may be either a DTC or a local sql tx
                     connection = DbResourceAllocator.GetEnlistedConnection(
-                        this.WorkflowCommitWorkBatchService, transaction, out needToCloseConnection);
+                        this.WorkflowCommitWorkBatchService,
+                        transaction,
+                        out needToCloseConnection
+                    );
                     localTransaction = DbResourceAllocator.GetLocalTransaction(
-                        this.WorkflowCommitWorkBatchService, transaction);
+                        this.WorkflowCommitWorkBatchService,
+                        transaction
+                    );
 
                     if (null == localTransaction)
                     {
-                        localTransaction = connection.BeginTransaction(System.Data.IsolationLevel.ReadCommitted);
+                        localTransaction = connection.BeginTransaction(
+                            System.Data.IsolationLevel.ReadCommitted
+                        );
                         commitTx = true;
                     }
 
@@ -994,7 +1243,12 @@ namespace System.Workflow.Runtime.Tracking
                             // If we have a cached workflow tracking record send it
                             if (null != workflow)
                             {
-                                ExecuteInsertWorkflowInstanceEvent(internalId, workflow, null, command);
+                                ExecuteInsertWorkflowInstanceEvent(
+                                    internalId,
+                                    workflow,
+                                    null,
+                                    command
+                                );
                                 workflow = null;
                             }
 
@@ -1005,7 +1259,11 @@ namespace System.Workflow.Runtime.Tracking
 
                             if (_activityEventBatchSize == activities.Count)
                             {
-                                ExecuteInsertActivityStatusInstance(internalId, activities, command);
+                                ExecuteInsertActivityStatusInstance(
+                                    internalId,
+                                    activities,
+                                    command
+                                );
                                 activities = new List<ActivityTrackingRecord>(5);
                             }
                         }
@@ -1015,13 +1273,22 @@ namespace System.Workflow.Runtime.Tracking
                             // If we have cached activity or workflow tracking records send them
                             if (activities.Count > 0)
                             {
-                                ExecuteInsertActivityStatusInstance(internalId, activities, command);
+                                ExecuteInsertActivityStatusInstance(
+                                    internalId,
+                                    activities,
+                                    command
+                                );
                                 activities.Clear();
                             }
 
                             if (null != workflow)
                             {
-                                ExecuteInsertWorkflowInstanceEvent(internalId, workflow, null, command);
+                                ExecuteInsertWorkflowInstanceEvent(
+                                    internalId,
+                                    workflow,
+                                    null,
+                                    command
+                                );
                                 workflow = null;
                             }
 
@@ -1033,7 +1300,11 @@ namespace System.Workflow.Runtime.Tracking
                             // If we have cached activity tracking records send them
                             if (activities.Count > 0)
                             {
-                                ExecuteInsertActivityStatusInstance(internalId, activities, command);
+                                ExecuteInsertActivityStatusInstance(
+                                    internalId,
+                                    activities,
+                                    command
+                                );
                                 activities.Clear();
                             }
 
@@ -1046,7 +1317,12 @@ namespace System.Workflow.Runtime.Tracking
                                 // else cache it and wait for the next workflow tracking record
                                 if (null != workflow)
                                 {
-                                    ExecuteInsertWorkflowInstanceEvent(internalId, workflow, null, command);
+                                    ExecuteInsertWorkflowInstanceEvent(
+                                        internalId,
+                                        workflow,
+                                        null,
+                                        command
+                                    );
                                     workflow = null;
                                 }
                                 ExecuteInsertWorkflowChange(internalId, record, command);
@@ -1058,7 +1334,12 @@ namespace System.Workflow.Runtime.Tracking
                                 // else cache it and wait for the next workflow tracking record
                                 if (null != workflow)
                                 {
-                                    ExecuteInsertWorkflowInstanceEvent(internalId, workflow, record, command);
+                                    ExecuteInsertWorkflowInstanceEvent(
+                                        internalId,
+                                        workflow,
+                                        record,
+                                        command
+                                    );
                                     workflow = null;
                                 }
                                 else
@@ -1091,7 +1372,11 @@ namespace System.Workflow.Runtime.Tracking
                     if (commitTx)
                         localTransaction.Rollback();
 
-                    WorkflowTrace.Host.TraceEvent(TraceEventType.Error, 0, "Error writing tracking data to database: " + e);
+                    WorkflowTrace.Host.TraceEvent(
+                        TraceEventType.Error,
+                        0,
+                        "Error writing tracking data to database: " + e
+                    );
                     throw;
                 }
                 finally
@@ -1145,7 +1430,16 @@ namespace System.Workflow.Runtime.Tracking
                         //
                         // ---- exceptions here, do not fail the instance.
                         // Partition logic can be re-run to clean up on failure
-                        WorkflowTrace.Host.TraceEvent(TraceEventType.Error, 0, string.Format(System.Globalization.CultureInfo.InvariantCulture, "Error partitioning instance {0}: {1}", _parameters.InstanceId, e.ToString()));
+                        WorkflowTrace.Host.TraceEvent(
+                            TraceEventType.Error,
+                            0,
+                            string.Format(
+                                System.Globalization.CultureInfo.InvariantCulture,
+                                "Error partitioning instance {0}: {1}",
+                                _parameters.InstanceId,
+                                e.ToString()
+                            )
+                        );
                     }
                 }
             }
@@ -1156,7 +1450,6 @@ namespace System.Workflow.Runtime.Tracking
 
             private void ExecuteInsertWorkflowInstance(object param)
             {
-
                 DbConnection conn = DbResourceAllocator.OpenNewConnection();
                 DbCommand command = DbResourceAllocator.NewCommand(conn);
                 DbTransaction tx = null;
@@ -1202,15 +1495,28 @@ namespace System.Workflow.Runtime.Tracking
                 if (null == command)
                     throw new ArgumentNullException("command");
 
-                if ((null == command.Connection) || (ConnectionState.Open != command.Connection.State))
-                    throw new ArgumentException(ExecutionStringManager.InvalidCommandBadConnection, "command");
+                if (
+                    (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
+                    throw new ArgumentException(
+                        ExecutionStringManager.InvalidCommandBadConnection,
+                        "command"
+                    );
                 //
                 // Write the type and the workflow definition
-                string xaml = _parameters.RootActivity.GetValue(Activity.WorkflowXamlMarkupProperty) as string;
+                string xaml =
+                    _parameters.RootActivity.GetValue(Activity.WorkflowXamlMarkupProperty)
+                    as string;
                 if (null != xaml && xaml.Length > 0)
                     InsertWorkflow(command, _parameters.InstanceId, null, _parameters.RootActivity);
                 else
-                    InsertWorkflow(command, _parameters.InstanceId, _parameters.WorkflowType, _parameters.RootActivity);
+                    InsertWorkflow(
+                        command,
+                        _parameters.InstanceId,
+                        _parameters.WorkflowType,
+                        _parameters.RootActivity
+                    );
                 //
                 // Write the instance record
                 BuildInsertWorkflowInstanceParameters(command);
@@ -1241,25 +1547,79 @@ namespace System.Workflow.Runtime.Tracking
                 command.Parameters.Clear();
 
                 bool xamlInst = false;
-                string xaml = _parameters.RootActivity.GetValue(Activity.WorkflowXamlMarkupProperty) as string;
+                string xaml =
+                    _parameters.RootActivity.GetValue(Activity.WorkflowXamlMarkupProperty)
+                    as string;
                 if (null != xaml && xaml.Length > 0)
                     xamlInst = true;
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceId", _parameters.InstanceId));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@TypeFullName", (xamlInst ? _parameters.InstanceId.ToString() : _parameters.WorkflowType.FullName)));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@AssemblyFullName", (xamlInst ? _parameters.InstanceId.ToString() : _parameters.WorkflowType.Assembly.FullName)));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@ContextGuid", _parameters.ContextGuid));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@WorkflowInstanceId",
+                        _parameters.InstanceId
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@TypeFullName",
+                        (
+                            xamlInst
+                                ? _parameters.InstanceId.ToString()
+                                : _parameters.WorkflowType.FullName
+                        )
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@AssemblyFullName",
+                        (
+                            xamlInst
+                                ? _parameters.InstanceId.ToString()
+                                : _parameters.WorkflowType.Assembly.FullName
+                        )
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@ContextGuid", _parameters.ContextGuid)
+                );
                 if (Guid.Empty != _parameters.CallerInstanceId)
                 {
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@CallerInstanceId", _parameters.CallerInstanceId));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@CallPath", _callPathKey));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@CallerContextGuid", _parameters.CallerContextGuid));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@CallerParentContextGuid", _parameters.CallerParentContextGuid));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@CallerInstanceId",
+                            _parameters.CallerInstanceId
+                        )
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@CallPath", _callPathKey)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@CallerContextGuid",
+                            _parameters.CallerContextGuid
+                        )
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@CallerParentContextGuid",
+                            _parameters.CallerParentContextGuid
+                        )
+                    );
                 }
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventDateTime", this.GetSqlDateTimeString(DateTime.UtcNow)));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@EventDateTime",
+                        this.GetSqlDateTimeString(DateTime.UtcNow)
+                    )
+                );
             }
 
-            private void InsertWorkflow(DbCommand command, Guid workflowInstanceId, Type workflowType, Activity rootActivity)
+            private void InsertWorkflow(
+                DbCommand command,
+                Guid workflowInstanceId,
+                Type workflowType,
+                Activity rootActivity
+            )
             {
                 string xoml = null;
 
@@ -1291,17 +1651,58 @@ namespace System.Workflow.Runtime.Tracking
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "[dbo].[InsertWorkflow]";
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@TypeFullName", (null == workflowType ? workflowInstanceId.ToString() : workflowType.FullName)));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@AssemblyFullName", (null == workflowType ? workflowInstanceId.ToString() : workflowType.Assembly.FullName)));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@IsInstanceType", (null == workflowType ? true : false)));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@TypeFullName",
+                        (
+                            null == workflowType
+                                ? workflowInstanceId.ToString()
+                                : workflowType.FullName
+                        )
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@AssemblyFullName",
+                        (
+                            null == workflowType
+                                ? workflowInstanceId.ToString()
+                                : workflowType.Assembly.FullName
+                        )
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@IsInstanceType",
+                        (null == workflowType ? true : false)
+                    )
+                );
 
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowDefinition", xoml)
+                );
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowDefinition", xoml));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@WorkflowId",
+                        DbType.Int32,
+                        System.Data.ParameterDirection.Output
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@Exists",
+                        DbType.Boolean,
+                        System.Data.ParameterDirection.Output
+                    )
+                );
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowId", DbType.Int32, System.Data.ParameterDirection.Output));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Exists", DbType.Boolean, System.Data.ParameterDirection.Output));
-
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Activities", GetActivitiesXml((CompositeActivity)rootActivity)));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@Activities",
+                        GetActivitiesXml((CompositeActivity)rootActivity)
+                    )
+                );
 
                 command.ExecuteNonQuery();
                 //
@@ -1331,7 +1732,10 @@ namespace System.Workflow.Runtime.Tracking
                 WorkflowTrackingRecord record = param as WorkflowTrackingRecord;
 
                 if (null == record)
-                    throw new ArgumentException(ExecutionStringManager.InvalidWorkflowTrackingRecordParameter, "param");
+                    throw new ArgumentException(
+                        ExecutionStringManager.InvalidWorkflowTrackingRecordParameter,
+                        "param"
+                    );
 
                 DbConnection conn = DbResourceAllocator.OpenNewConnection();
                 DbCommand command = DbResourceAllocator.NewCommand(conn);
@@ -1373,9 +1777,18 @@ namespace System.Workflow.Runtime.Tracking
                 return;
             }
 
-            private void ExecuteInsertWorkflowInstanceEvent(long internalId, WorkflowTrackingRecord record1, WorkflowTrackingRecord record2, DbCommand command)
+            private void ExecuteInsertWorkflowInstanceEvent(
+                long internalId,
+                WorkflowTrackingRecord record1,
+                WorkflowTrackingRecord record2,
+                DbCommand command
+            )
             {
-                if ((null == command) || (null == command.Connection) || (ConnectionState.Open != command.Connection.State))
+                if (
+                    (null == command)
+                    || (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
                     throw new ArgumentException();
 
                 BuildInsertWorkflowInstanceEventParameters(internalId, record1, record2, command);
@@ -1392,7 +1805,9 @@ namespace System.Workflow.Runtime.Tracking
                     Debug.Assert(eventId2 > 0, "Invalid eventId2");
                 }
 
-                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(record1.Annotations.Count + (null == record2 ? 0 : record2.Annotations.Count));
+                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(
+                    record1.Annotations.Count + (null == record2 ? 0 : record2.Annotations.Count)
+                );
 
                 foreach (string s in record1.Annotations)
                     annotations.Add(new KeyValuePair<long, string>(eventId1, s));
@@ -1406,7 +1821,12 @@ namespace System.Workflow.Runtime.Tracking
                 BatchExecuteInsertEventAnnotation(internalId, 'w', annotations, command);
             }
 
-            private void BuildInsertWorkflowInstanceEventParameters(long internalId, WorkflowTrackingRecord record1, WorkflowTrackingRecord record2, DbCommand command)
+            private void BuildInsertWorkflowInstanceEventParameters(
+                long internalId,
+                WorkflowTrackingRecord record1,
+                WorkflowTrackingRecord record2,
+                DbCommand command
+            )
             {
                 if (null == record1)
                     throw new ArgumentNullException("record");
@@ -1420,11 +1840,22 @@ namespace System.Workflow.Runtime.Tracking
                 command.CommandText = "[dbo].[InsertWorkflowInstanceEvent]";
 
                 command.Parameters.Clear();
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId)
+                );
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@TrackingWorkflowEventId1", (int)record1.TrackingWorkflowEvent));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventDateTime1", record1.EventDateTime));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventOrder1", record1.EventOrder));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@TrackingWorkflowEventId1",
+                        (int)record1.TrackingWorkflowEvent
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@EventDateTime1", record1.EventDateTime)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@EventOrder1", record1.EventOrder)
+                );
 
                 if (null != record1.EventArgs)
                 {
@@ -1436,17 +1867,39 @@ namespace System.Workflow.Runtime.Tracking
 
                     SerializedEventArgs sargs = record1.EventArgs as SerializedEventArgs;
                     data = sargs.SerializedArgs;
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventArgTypeFullName1", t.FullName));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventArgAssemblyFullName1", t.Assembly.FullName));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@EventArgTypeFullName1", t.FullName)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@EventArgAssemblyFullName1",
+                            t.Assembly.FullName
+                        )
+                    );
                     command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventArg1", data));
                 }
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceEventId1", DbType.Int64, ParameterDirection.Output));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@WorkflowInstanceEventId1",
+                        DbType.Int64,
+                        ParameterDirection.Output
+                    )
+                );
 
                 if (null != record2)
                 {
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@TrackingWorkflowEventId2", (int)record2.TrackingWorkflowEvent));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventDateTime2", record2.EventDateTime));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventOrder2", record2.EventOrder));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@TrackingWorkflowEventId2",
+                            (int)record2.TrackingWorkflowEvent
+                        )
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@EventDateTime2", record2.EventDateTime)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@EventOrder2", record2.EventOrder)
+                    );
 
                     if (null != record2.EventArgs)
                     {
@@ -1458,11 +1911,26 @@ namespace System.Workflow.Runtime.Tracking
 
                         SerializedEventArgs sargs = record2.EventArgs as SerializedEventArgs;
                         data = sargs.SerializedArgs;
-                        command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventArgTypeFullName2", t.FullName));
-                        command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventArgAssemblyFullName2", t.Assembly.FullName));
-                        command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventArg2", data));
+                        command.Parameters.Add(
+                            DbResourceAllocator.NewDbParameter("@EventArgTypeFullName2", t.FullName)
+                        );
+                        command.Parameters.Add(
+                            DbResourceAllocator.NewDbParameter(
+                                "@EventArgAssemblyFullName2",
+                                t.Assembly.FullName
+                            )
+                        );
+                        command.Parameters.Add(
+                            DbResourceAllocator.NewDbParameter("@EventArg2", data)
+                        );
                     }
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceEventId2", DbType.Int64, ParameterDirection.Output));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@WorkflowInstanceEventId2",
+                            DbType.Int64,
+                            ParameterDirection.Output
+                        )
+                    );
                 }
             }
 
@@ -1475,7 +1943,10 @@ namespace System.Workflow.Runtime.Tracking
                 ActivityTrackingRecord record = param as ActivityTrackingRecord;
 
                 if (null == record)
-                    throw new ArgumentException(ExecutionStringManager.InvalidActivityTrackingRecordParameter, "param");
+                    throw new ArgumentException(
+                        ExecutionStringManager.InvalidActivityTrackingRecordParameter,
+                        "param"
+                    );
 
                 DbConnection conn = DbResourceAllocator.OpenNewConnection();
 
@@ -1504,9 +1975,7 @@ namespace System.Workflow.Runtime.Tracking
                         if (null != tx)
                             tx.Rollback();
                     }
-                    catch (Exception)
-                    {
-                    }
+                    catch (Exception) { }
 
                     //
                     // Re-throw original exception
@@ -1516,13 +1985,16 @@ namespace System.Workflow.Runtime.Tracking
                 {
                     if ((null != conn) && (ConnectionState.Closed != conn.State))
                         conn.Close();
-
                 }
 
                 return;
             }
 
-            private void ExecuteInsertActivityStatusInstance(long internalId, IList<ActivityTrackingRecord> activities, DbCommand command)
+            private void ExecuteInsertActivityStatusInstance(
+                long internalId,
+                IList<ActivityTrackingRecord> activities,
+                DbCommand command
+            )
             {
                 if (null == activities || activities.Count <= 0)
                     return;
@@ -1530,7 +2002,11 @@ namespace System.Workflow.Runtime.Tracking
                 if (activities.Count > _activityEventBatchSize)
                     throw new ArgumentOutOfRangeException("activities");
 
-                if ((null == command) || (null == command.Connection) || (ConnectionState.Open != command.Connection.State))
+                if (
+                    (null == command)
+                    || (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
                     throw new ArgumentException();
 
                 command.CommandType = CommandType.StoredProcedure;
@@ -1538,15 +2014,29 @@ namespace System.Workflow.Runtime.Tracking
                 //
                 // Add the common parameters
                 command.Parameters.Clear();
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceId", _parameters.InstanceId));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@WorkflowInstanceId",
+                        _parameters.InstanceId
+                    )
+                );
                 //
                 // If we have the workflow's internal id use it to avoid the look up in the db
-                DbParameter param = DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", DbType.Int64, System.Data.ParameterDirection.InputOutput);
+                DbParameter param = DbResourceAllocator.NewDbParameter(
+                    "@WorkflowInstanceInternalId",
+                    DbType.Int64,
+                    System.Data.ParameterDirection.InputOutput
+                );
                 command.Parameters.Add(param);
                 if (internalId > 0)
                     param.Value = internalId;
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceContextGuid", _parameters.ContextGuid));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@WorkflowInstanceContextGuid",
+                        _parameters.ContextGuid
+                    )
+                );
                 //
                 // Hashed ids of QName, context and pcontext used as key for storing activity record ids
                 // Save these for each record in the list so we don't have to recompute them below when adding to the cache
@@ -1557,11 +2047,21 @@ namespace System.Workflow.Runtime.Tracking
                     ActivityTrackingRecord record = activities[i];
 
                     long aid = -1;
-                    ids[i] = BuildQualifiedNameVarName(record.QualifiedName, record.ContextGuid, record.ParentContextGuid);
+                    ids[i] = BuildQualifiedNameVarName(
+                        record.QualifiedName,
+                        record.ContextGuid,
+                        record.ParentContextGuid
+                    );
 
                     TryGetActivityInstanceId(ids[i], out aid);
 
-                    BuildInsertActivityStatusEventParameters(internalId, aid, i + 1, record, command);
+                    BuildInsertActivityStatusEventParameters(
+                        internalId,
+                        aid,
+                        i + 1,
+                        record,
+                        command
+                    );
                 }
 
                 command.ExecuteNonQuery();
@@ -1587,13 +2087,21 @@ namespace System.Workflow.Runtime.Tracking
                         RemoveActivityInstanceId(ids[i]);
                     //
                     // ActivityExecutionStatusEventId
-                    long aeseId = (long)command.Parameters["@ActivityExecutionStatusEventId" + index].Value;
-                    Debug.Assert(aeseId > 0, "Invalid @ActivityExecutionStatusEventId output parameter value");
+                    long aeseId = (long)
+                        command.Parameters["@ActivityExecutionStatusEventId" + index].Value;
+                    Debug.Assert(
+                        aeseId > 0,
+                        "Invalid @ActivityExecutionStatusEventId output parameter value"
+                    );
                     eventIds[i] = aeseId;
                 }
 
-                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(10);
-                List<KeyValuePair<long, TrackingDataItem>> items = new List<KeyValuePair<long, TrackingDataItem>>(10);
+                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(
+                    10
+                );
+                List<KeyValuePair<long, TrackingDataItem>> items = new List<
+                    KeyValuePair<long, TrackingDataItem>
+                >(10);
                 for (int i = 0; i < activities.Count; i++)
                 {
                     ActivityTrackingRecord record = activities[i];
@@ -1615,25 +2123,70 @@ namespace System.Workflow.Runtime.Tracking
                 BatchExecuteInsertTrackingDataItems(internalId, 'a', items, command);
             }
 
-            private void BuildInsertActivityStatusEventParameters(long internalId, long activityInstanceId, int parameterId, ActivityTrackingRecord record, DbCommand command)
+            private void BuildInsertActivityStatusEventParameters(
+                long internalId,
+                long activityInstanceId,
+                int parameterId,
+                ActivityTrackingRecord record,
+                DbCommand command
+            )
             {
                 string paramIdString = parameterId.ToString(CultureInfo.InvariantCulture);
                 //
                 // If we have the activity's instance id use it to avoid the look up in the db
-                DbParameter param = DbResourceAllocator.NewDbParameter("@ActivityInstanceId" + paramIdString, DbType.Int64, System.Data.ParameterDirection.InputOutput);
+                DbParameter param = DbResourceAllocator.NewDbParameter(
+                    "@ActivityInstanceId" + paramIdString,
+                    DbType.Int64,
+                    System.Data.ParameterDirection.InputOutput
+                );
                 command.Parameters.Add(param);
 
                 if (activityInstanceId > 0)
                     param.Value = activityInstanceId;
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@QualifiedName" + paramIdString, record.QualifiedName));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@ContextGuid" + paramIdString, record.ContextGuid));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@ParentContextGuid" + paramIdString, record.ParentContextGuid));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@ExecutionStatusId" + paramIdString, (int)record.ExecutionStatus));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventDateTime" + paramIdString, record.EventDateTime));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventOrder" + paramIdString, record.EventOrder));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@ActivityExecutionStatusEventId" + paramIdString, DbType.Int64, ParameterDirection.Output));
-
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@QualifiedName" + paramIdString,
+                        record.QualifiedName
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@ContextGuid" + paramIdString,
+                        record.ContextGuid
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@ParentContextGuid" + paramIdString,
+                        record.ParentContextGuid
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@ExecutionStatusId" + paramIdString,
+                        (int)record.ExecutionStatus
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@EventDateTime" + paramIdString,
+                        record.EventDateTime
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@EventOrder" + paramIdString,
+                        record.EventOrder
+                    )
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@ActivityExecutionStatusEventId" + paramIdString,
+                        DbType.Int64,
+                        ParameterDirection.Output
+                    )
+                );
             }
 
             #endregion
@@ -1645,7 +2198,10 @@ namespace System.Workflow.Runtime.Tracking
                 UserTrackingRecord record = param as UserTrackingRecord;
 
                 if (null == record)
-                    throw new ArgumentException(ExecutionStringManager.InvalidUserTrackingRecordParameter, "param");
+                    throw new ArgumentException(
+                        ExecutionStringManager.InvalidUserTrackingRecordParameter,
+                        "param"
+                    );
 
                 DbConnection conn = DbResourceAllocator.OpenNewConnection();
 
@@ -1671,9 +2227,7 @@ namespace System.Workflow.Runtime.Tracking
                         if (null != tx)
                             tx.Rollback();
                     }
-                    catch (Exception)
-                    {
-                    }
+                    catch (Exception) { }
 
                     //
                     // Re-throw original exception
@@ -1683,22 +2237,33 @@ namespace System.Workflow.Runtime.Tracking
                 {
                     if ((null != conn) && (ConnectionState.Closed != conn.State))
                         conn.Close();
-
                 }
 
                 return;
             }
 
-            private void ExecuteInsertUserEvent(long internalId, UserTrackingRecord record, DbCommand command)
+            private void ExecuteInsertUserEvent(
+                long internalId,
+                UserTrackingRecord record,
+                DbCommand command
+            )
             {
-                if ((null == command) || (null == command.Connection) || (ConnectionState.Open != command.Connection.State))
+                if (
+                    (null == command)
+                    || (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
                     throw new ArgumentException();
 
                 long aid = -1;
                 bool cached = false;
                 //
                 // Check if we have the activityInstanceId in the cache - we cache to avoid repeatedly searching this table.
-                string id = BuildQualifiedNameVarName(record.QualifiedName, record.ContextGuid, record.ParentContextGuid);
+                string id = BuildQualifiedNameVarName(
+                    record.QualifiedName,
+                    record.ContextGuid,
+                    record.ParentContextGuid
+                );
                 if (TryGetActivityInstanceId(id, out aid))
                     cached = true;
 
@@ -1707,12 +2272,19 @@ namespace System.Workflow.Runtime.Tracking
                 //
                 // If we didn't already have the activityInstanceId get it from the IN/OUT param and put it in the cache
                 if (!cached)
-                    SetActivityInstanceId(id, (long)command.Parameters["@ActivityInstanceId"].Value);
+                    SetActivityInstanceId(
+                        id,
+                        (long)command.Parameters["@ActivityInstanceId"].Value
+                    );
 
                 long eventId = (long)command.Parameters["@UserEventId"].Value;
 
-                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(10);
-                List<KeyValuePair<long, TrackingDataItem>> items = new List<KeyValuePair<long, TrackingDataItem>>(10);
+                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(
+                    10
+                );
+                List<KeyValuePair<long, TrackingDataItem>> items = new List<
+                    KeyValuePair<long, TrackingDataItem>
+                >(10);
 
                 foreach (string s in record.Annotations)
                     annotations.Add(new KeyValuePair<long, string>(eventId, s));
@@ -1725,24 +2297,41 @@ namespace System.Workflow.Runtime.Tracking
                 BatchExecuteInsertTrackingDataItems(internalId, 'u', items, command);
             }
 
-            private void BuildInsertUserEventParameters(long internalId, long activityInstanceId, UserTrackingRecord record, DbCommand command)
+            private void BuildInsertUserEventParameters(
+                long internalId,
+                long activityInstanceId,
+                UserTrackingRecord record,
+                DbCommand command
+            )
             {
                 Debug.Assert(internalId != -1, "Invalid internalId");
-                Debug.Assert((command != null), "Null command passed to BuildInsertActivityStatusEventParameters");
+                Debug.Assert(
+                    (command != null),
+                    "Null command passed to BuildInsertActivityStatusEventParameters"
+                );
 
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "[dbo].[InsertUserEvent]";
 
                 command.Parameters.Clear();
 
-                DbParameter param = DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", DbType.Int64);
+                DbParameter param = DbResourceAllocator.NewDbParameter(
+                    "@WorkflowInstanceInternalId",
+                    DbType.Int64
+                );
                 command.Parameters.Add(param);
                 param.Value = internalId;
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventOrder", record.EventOrder));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@EventOrder", record.EventOrder)
+                );
                 //
                 // If we have the activity's instance id use it to avoid the look up in the db
-                param = DbResourceAllocator.NewDbParameter("@ActivityInstanceId", DbType.Int64, System.Data.ParameterDirection.InputOutput);
+                param = DbResourceAllocator.NewDbParameter(
+                    "@ActivityInstanceId",
+                    DbType.Int64,
+                    System.Data.ParameterDirection.InputOutput
+                );
                 command.Parameters.Add(param);
 
                 if (activityInstanceId > 0)
@@ -1752,15 +2341,28 @@ namespace System.Workflow.Runtime.Tracking
                 else
                 {
                     //
-                    // Keep the network traffic down - only include the fields needed 
+                    // Keep the network traffic down - only include the fields needed
                     // to insert an ActivityInstance record if we don't have the activityInstanceId
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@QualifiedName", record.QualifiedName));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@ContextGuid", record.ContextGuid));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@ParentContextGuid", record.ParentContextGuid));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@QualifiedName", record.QualifiedName)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@ContextGuid", record.ContextGuid)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@ParentContextGuid",
+                            record.ParentContextGuid
+                        )
+                    );
                 }
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventDateTime", record.EventDateTime));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@UserDataKey", record.UserDataKey));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@EventDateTime", record.EventDateTime)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@UserDataKey", record.UserDataKey)
+                );
 
                 if (null != record.UserData)
                 {
@@ -1777,20 +2379,47 @@ namespace System.Workflow.Runtime.Tracking
                     nonSerializable = sItem.NonSerializable;
                     userDataString = sItem.StringData;
 
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@UserDataTypeFullName", t.FullName));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@UserDataAssemblyFullName", t.Assembly.FullName));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@UserData_Str", userDataString));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@UserData_Blob", data));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@UserDataNonSerializable", nonSerializable));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@UserDataTypeFullName", t.FullName)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@UserDataAssemblyFullName",
+                            t.Assembly.FullName
+                        )
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@UserData_Str", userDataString)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@UserData_Blob", data)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@UserDataNonSerializable",
+                            nonSerializable
+                        )
+                    );
                 }
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@UserEventId", DbType.Int64, ParameterDirection.Output));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@UserEventId",
+                        DbType.Int64,
+                        ParameterDirection.Output
+                    )
+                );
             }
 
             #endregion
 
             #region Sql Commands - InsertTrackingDataItem
 
-            private void BatchExecuteInsertTrackingDataItems(long internalId, char eventTypeId, IList<KeyValuePair<long, TrackingDataItem>> items, DbCommand command)
+            private void BatchExecuteInsertTrackingDataItems(
+                long internalId,
+                char eventTypeId,
+                IList<KeyValuePair<long, TrackingDataItem>> items,
+                DbCommand command
+            )
             {
                 if (null == items || items.Count <= 0)
                     return;
@@ -1803,7 +2432,9 @@ namespace System.Workflow.Runtime.Tracking
                 }
                 //
                 // Need to split the list into max batch size chunks
-                List<KeyValuePair<long, TrackingDataItem>> batch = new List<KeyValuePair<long, TrackingDataItem>>(_dataItemBatchSize);
+                List<KeyValuePair<long, TrackingDataItem>> batch = new List<
+                    KeyValuePair<long, TrackingDataItem>
+                >(_dataItemBatchSize);
                 foreach (KeyValuePair<long, TrackingDataItem> kvp in items)
                 {
                     batch.Add(kvp);
@@ -1819,7 +2450,12 @@ namespace System.Workflow.Runtime.Tracking
                     ExecuteInsertTrackingDataItems(internalId, eventTypeId, batch, command);
             }
 
-            private void ExecuteInsertTrackingDataItems(long internalId, char eventTypeId, IList<KeyValuePair<long, TrackingDataItem>> items, DbCommand command)
+            private void ExecuteInsertTrackingDataItems(
+                long internalId,
+                char eventTypeId,
+                IList<KeyValuePair<long, TrackingDataItem>> items,
+                DbCommand command
+            )
             {
                 Debug.Assert(internalId != -1, "Invalid internalId");
                 if (null == items || items.Count <= 0)
@@ -1828,15 +2464,23 @@ namespace System.Workflow.Runtime.Tracking
                 if (items.Count > _dataItemAnnotationBatchSize)
                     throw new ArgumentOutOfRangeException("items");
 
-                if ((null == command) || (null == command.Connection) || (ConnectionState.Open != command.Connection.State))
+                if (
+                    (null == command)
+                    || (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
                     throw new ArgumentException();
 
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "[dbo].[InsertTrackingDataItemMultiple]";
 
                 command.Parameters.Clear();
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventTypeId", eventTypeId));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@EventTypeId", eventTypeId)
+                );
 
                 int i = 1; // base 1 to match parameter names
                 foreach (KeyValuePair<long, TrackingDataItem> kvp in items)
@@ -1849,14 +2493,46 @@ namespace System.Workflow.Runtime.Tracking
 
                     Type t = sItem.Type;
 
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventId" + index, kvp.Key));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@FieldName" + index, sItem.FieldName));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@TypeFullName" + index, ((null == t) ? null : t.FullName)));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@AssemblyFullName" + index, ((null == t) ? null : t.Assembly.FullName)));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Data_Str" + index, sItem.StringData));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Data_Blob" + index, sItem.SerializedData));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@DataNonSerializable" + index, sItem.NonSerializable));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@TrackingDataItemId" + index, DbType.Int64, System.Data.ParameterDirection.Output));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@EventId" + index, kvp.Key)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@FieldName" + index, sItem.FieldName)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@TypeFullName" + index,
+                            ((null == t) ? null : t.FullName)
+                        )
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@AssemblyFullName" + index,
+                            ((null == t) ? null : t.Assembly.FullName)
+                        )
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@Data_Str" + index, sItem.StringData)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@Data_Blob" + index,
+                            sItem.SerializedData
+                        )
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@DataNonSerializable" + index,
+                            sItem.NonSerializable
+                        )
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter(
+                            "@TrackingDataItemId" + index,
+                            DbType.Int64,
+                            System.Data.ParameterDirection.Output
+                        )
+                    );
                 }
 
                 command.ExecuteNonQuery();
@@ -1873,7 +2549,9 @@ namespace System.Workflow.Runtime.Tracking
 
                 //
                 // Go through all the data items and send all the annotations in batches
-                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(_dataItemAnnotationBatchSize);
+                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(
+                    _dataItemAnnotationBatchSize
+                );
                 i = 0;
 
                 foreach (KeyValuePair<long, TrackingDataItem> kvp in items)
@@ -1897,7 +2575,11 @@ namespace System.Workflow.Runtime.Tracking
                     ExecuteInsertAnnotation(internalId, annotations, command);
             }
 
-            private void ExecuteInsertAnnotation(long internalId, IList<KeyValuePair<long, string>> annotations, DbCommand command)
+            private void ExecuteInsertAnnotation(
+                long internalId,
+                IList<KeyValuePair<long, string>> annotations,
+                DbCommand command
+            )
             {
                 if (null == annotations || annotations.Count <= 0)
                     return;
@@ -1905,22 +2587,34 @@ namespace System.Workflow.Runtime.Tracking
                 if (annotations.Count > _dataItemAnnotationBatchSize)
                     throw new ArgumentOutOfRangeException("annotations");
 
-                if ((null == command) || (null == command.Connection) || (ConnectionState.Open != command.Connection.State))
+                if (
+                    (null == command)
+                    || (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
                     throw new ArgumentNullException("command");
 
                 command.Parameters.Clear();
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "[dbo].[InsertTrackingDataItemAnnotationMultiple]";
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId)
+                );
 
                 int i = 1; // base 1 to match parameter names
                 foreach (KeyValuePair<long, string> kvp in annotations)
                 {
                     string index = (i++).ToString(CultureInfo.InvariantCulture);
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@HasData" + index, true));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@TrackingDataItemId" + index, kvp.Key));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Annotation" + index, kvp.Value));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@HasData" + index, true)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@TrackingDataItemId" + index, kvp.Key)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@Annotation" + index, kvp.Value)
+                    );
                 }
 
                 command.ExecuteNonQuery();
@@ -1928,7 +2622,12 @@ namespace System.Workflow.Runtime.Tracking
                 return;
             }
 
-            private void BatchExecuteInsertEventAnnotation(long internalId, char eventTypeId, IList<KeyValuePair<long, string>> annotations, DbCommand command)
+            private void BatchExecuteInsertEventAnnotation(
+                long internalId,
+                char eventTypeId,
+                IList<KeyValuePair<long, string>> annotations,
+                DbCommand command
+            )
             {
                 if (null == annotations || annotations.Count <= 0)
                     return;
@@ -1942,7 +2641,9 @@ namespace System.Workflow.Runtime.Tracking
                 }
                 //
                 // Need to split the list into max batch size chunks
-                List<KeyValuePair<long, string>> batch = new List<KeyValuePair<long, string>>(_eventAnnotationBatchSize);
+                List<KeyValuePair<long, string>> batch = new List<KeyValuePair<long, string>>(
+                    _eventAnnotationBatchSize
+                );
                 foreach (KeyValuePair<long, string> kvp in annotations)
                 {
                     batch.Add(kvp);
@@ -1958,7 +2659,12 @@ namespace System.Workflow.Runtime.Tracking
                     ExecuteInsertEventAnnotation(internalId, eventTypeId, batch, command);
             }
 
-            private void ExecuteInsertEventAnnotation(long internalId, char eventTypeId, IList<KeyValuePair<long, string>> annotations, DbCommand command)
+            private void ExecuteInsertEventAnnotation(
+                long internalId,
+                char eventTypeId,
+                IList<KeyValuePair<long, string>> annotations,
+                DbCommand command
+            )
             {
                 Debug.Assert(internalId != -1, "Invalid internalId");
 
@@ -1968,30 +2674,43 @@ namespace System.Workflow.Runtime.Tracking
                 if (annotations.Count > _eventAnnotationBatchSize)
                     throw new ArgumentOutOfRangeException("annotations");
 
-                if ((null == command) || (null == command.Connection) || (ConnectionState.Open != command.Connection.State))
+                if (
+                    (null == command)
+                    || (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
                     throw new ArgumentNullException("command");
 
                 command.Parameters.Clear();
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "[dbo].[InsertEventAnnotationMultiple]";
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventTypeId", eventTypeId));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@EventTypeId", eventTypeId)
+                );
 
                 int i = 1; //base 1 to match parameter names
                 foreach (KeyValuePair<long, string> kvp in annotations)
                 {
                     string index = (i++).ToString(CultureInfo.InvariantCulture);
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@HasData" + index, true));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@EventId" + index, kvp.Key));
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Annotation" + index, kvp.Value));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@HasData" + index, true)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@EventId" + index, kvp.Key)
+                    );
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@Annotation" + index, kvp.Value)
+                    );
                 }
 
                 command.ExecuteNonQuery();
 
                 return;
             }
-
 
             #endregion
 
@@ -2002,7 +2721,10 @@ namespace System.Workflow.Runtime.Tracking
                 WorkflowTrackingRecord record = param as WorkflowTrackingRecord;
 
                 if (null == record)
-                    throw new ArgumentException(ExecutionStringManager.InvalidWorkflowTrackingRecordParameter, "param");
+                    throw new ArgumentException(
+                        ExecutionStringManager.InvalidWorkflowTrackingRecordParameter,
+                        "param"
+                    );
 
                 DbCommand command = DbResourceAllocator.NewCommand();
 
@@ -2026,9 +2748,7 @@ namespace System.Workflow.Runtime.Tracking
                         if ((null != command) && (null != command.Transaction))
                             command.Transaction.Rollback();
                     }
-                    catch (Exception)
-                    {
-                    }
+                    catch (Exception) { }
 
                     //
                     // Re-throw original exception
@@ -2036,22 +2756,36 @@ namespace System.Workflow.Runtime.Tracking
                 }
                 finally
                 {
-                    if ((null != command) && (null != command.Connection) && (ConnectionState.Closed != command.Connection.State))
+                    if (
+                        (null != command)
+                        && (null != command.Connection)
+                        && (ConnectionState.Closed != command.Connection.State)
+                    )
                         command.Connection.Close();
                 }
 
                 return;
             }
 
-            private void ExecuteInsertWorkflowChange(long internalId, WorkflowTrackingRecord record, DbCommand command)
+            private void ExecuteInsertWorkflowChange(
+                long internalId,
+                WorkflowTrackingRecord record,
+                DbCommand command
+            )
             {
                 if (null == record)
                     throw new ArgumentNullException("record");
 
                 if (null == record.EventArgs)
-                    throw new InvalidOperationException(ExecutionStringManager.InvalidWorkflowChangeArgs);
+                    throw new InvalidOperationException(
+                        ExecutionStringManager.InvalidWorkflowChangeArgs
+                    );
 
-                if ((null == command) || (null == command.Connection) || (ConnectionState.Open != command.Connection.State))
+                if (
+                    (null == command)
+                    || (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
                     throw new ArgumentNullException("command");
                 //
                 // If we haven't already serialized do so now.
@@ -2067,30 +2801,65 @@ namespace System.Workflow.Runtime.Tracking
                 // Get the event id for added/removed activities and annotations
                 long eventId = (long)command.Parameters["@WorkflowInstanceEventId1"].Value;
 
-                SerializedWorkflowChangedEventArgs sargs = (SerializedWorkflowChangedEventArgs)record.EventArgs;
+                SerializedWorkflowChangedEventArgs sargs = (SerializedWorkflowChangedEventArgs)
+                    record.EventArgs;
                 //
                 // Normalize the activities that have been added/removed if we're tracking definitions
                 if ((null != sargs.AddedActivities) && (sargs.AddedActivities.Count > 0))
                 {
                     foreach (AddedActivity added in sargs.AddedActivities)
-                        ExecuteInsertAddedActivity(internalId, added.QualifiedName, added.ParentQualifiedName, added.ActivityTypeFullName, added.ActivityTypeAssemblyFullName, added.AddedActivityActionXoml, eventId, added.Order, command);
+                        ExecuteInsertAddedActivity(
+                            internalId,
+                            added.QualifiedName,
+                            added.ParentQualifiedName,
+                            added.ActivityTypeFullName,
+                            added.ActivityTypeAssemblyFullName,
+                            added.AddedActivityActionXoml,
+                            eventId,
+                            added.Order,
+                            command
+                        );
                 }
 
                 if ((null != sargs.RemovedActivities) && (sargs.RemovedActivities.Count > 0))
                 {
                     foreach (RemovedActivity removed in sargs.RemovedActivities)
-                        ExecuteInsertRemovedActivity(internalId, removed.QualifiedName, removed.ParentQualifiedName, removed.RemovedActivityActionXoml, eventId, removed.Order, command);
+                        ExecuteInsertRemovedActivity(
+                            internalId,
+                            removed.QualifiedName,
+                            removed.ParentQualifiedName,
+                            removed.RemovedActivityActionXoml,
+                            eventId,
+                            removed.Order,
+                            command
+                        );
                 }
 
-                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(record.Annotations.Count);
+                List<KeyValuePair<long, string>> annotations = new List<KeyValuePair<long, string>>(
+                    record.Annotations.Count
+                );
                 foreach (string s in record.Annotations)
                     annotations.Add(new KeyValuePair<long, string>(eventId, s));
                 BatchExecuteInsertEventAnnotation(internalId, 'w', annotations, command);
             }
 
-            private void ExecuteInsertAddedActivity(long internalId, string qualifiedName, string parentQualifiedName, string typeFullName, string assemblyFullName, string addedActivityActionXoml, long eventId, int order, DbCommand command)
+            private void ExecuteInsertAddedActivity(
+                long internalId,
+                string qualifiedName,
+                string parentQualifiedName,
+                string typeFullName,
+                string assemblyFullName,
+                string addedActivityActionXoml,
+                long eventId,
+                int order,
+                DbCommand command
+            )
             {
-                if ((null == command) || (null == command.Connection) || (ConnectionState.Open != command.Connection.State))
+                if (
+                    (null == command)
+                    || (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
                     throw new ArgumentNullException("command");
 
                 command.Parameters.Clear();
@@ -2098,37 +2867,83 @@ namespace System.Workflow.Runtime.Tracking
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "[dbo].[InsertAddedActivity]";
 
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceEventId", eventId));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@QualifiedName", qualifiedName));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@TypeFullName", typeFullName));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@AssemblyFullName", assemblyFullName));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@ParentQualifiedName", parentQualifiedName));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@AddedActivityAction", addedActivityActionXoml));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowInstanceEventId", eventId)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@QualifiedName", qualifiedName)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@TypeFullName", typeFullName)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@AssemblyFullName", assemblyFullName)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@ParentQualifiedName", parentQualifiedName)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@AddedActivityAction",
+                        addedActivityActionXoml
+                    )
+                );
                 if (-1 == order)
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Order", DBNull.Value));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@Order", DBNull.Value)
+                    );
                 else
                     command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Order", order));
 
                 command.ExecuteNonQuery();
             }
 
-            private void ExecuteInsertRemovedActivity(long internalId, string qualifiedName, string parentQualifiedName, string removedActivityActionXoml, long eventId, int order, DbCommand command)
+            private void ExecuteInsertRemovedActivity(
+                long internalId,
+                string qualifiedName,
+                string parentQualifiedName,
+                string removedActivityActionXoml,
+                long eventId,
+                int order,
+                DbCommand command
+            )
             {
-                if ((null == command) || (null == command.Connection) || (ConnectionState.Open != command.Connection.State))
+                if (
+                    (null == command)
+                    || (null == command.Connection)
+                    || (ConnectionState.Open != command.Connection.State)
+                )
                     throw new ArgumentNullException("command");
 
                 command.Parameters.Clear();
 
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "[dbo].[InsertRemovedActivity]";
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@WorkflowInstanceEventId", eventId));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@QualifiedName", qualifiedName));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@ParentQualifiedName", parentQualifiedName));
-                command.Parameters.Add(DbResourceAllocator.NewDbParameter("@RemovedActivityAction", removedActivityActionXoml));
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowInstanceInternalId", internalId)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@WorkflowInstanceEventId", eventId)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@QualifiedName", qualifiedName)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter("@ParentQualifiedName", parentQualifiedName)
+                );
+                command.Parameters.Add(
+                    DbResourceAllocator.NewDbParameter(
+                        "@RemovedActivityAction",
+                        removedActivityActionXoml
+                    )
+                );
                 if (-1 == order)
-                    command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Order", DBNull.Value));
+                    command.Parameters.Add(
+                        DbResourceAllocator.NewDbParameter("@Order", DBNull.Value)
+                    );
                 else
                     command.Parameters.Add(DbResourceAllocator.NewDbParameter("@Order", order));
 
@@ -2187,9 +3002,20 @@ namespace System.Workflow.Runtime.Tracking
 
             private string GetSqlDateTimeString(DateTime dateTime)
             {
-                return dateTime.Year.ToString(System.Globalization.CultureInfo.InvariantCulture) + PadToDblDigit(dateTime.Month) + PadToDblDigit(dateTime.Day) + " " + dateTime.Hour.ToString(System.Globalization.CultureInfo.InvariantCulture) + ":" + dateTime.Minute.ToString(System.Globalization.CultureInfo.InvariantCulture) + ":" + dateTime.Second.ToString(System.Globalization.CultureInfo.InvariantCulture) + ":" + dateTime.Millisecond.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                return dateTime.Year.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                    + PadToDblDigit(dateTime.Month)
+                    + PadToDblDigit(dateTime.Day)
+                    + " "
+                    + dateTime.Hour.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                    + ":"
+                    + dateTime.Minute.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                    + ":"
+                    + dateTime.Second.ToString(System.Globalization.CultureInfo.InvariantCulture)
+                    + ":"
+                    + dateTime.Millisecond.ToString(
+                        System.Globalization.CultureInfo.InvariantCulture
+                    );
             }
-
 
             private string PadToDblDigit(int num)
             {
@@ -2209,7 +3035,11 @@ namespace System.Workflow.Runtime.Tracking
             private string BuildQualifiedNameVarName(string qId, Guid context, Guid parentContext)
             {
                 Guid hashed = HashHelper.HashServiceType(qId);
-                return hashed.ToString().Replace('-', '_') + "_" + context.ToString().Replace('-', '_') + "_" + parentContext.ToString().Replace('-', '_');
+                return hashed.ToString().Replace('-', '_')
+                    + "_"
+                    + context.ToString().Replace('-', '_')
+                    + "_"
+                    + parentContext.ToString().Replace('-', '_');
             }
 
             private ActivityTrackingRecord SerializeRecord(ActivityTrackingRecord record)
@@ -2225,7 +3055,11 @@ namespace System.Workflow.Runtime.Tracking
 
             private UserTrackingRecord SerializeRecord(UserTrackingRecord record)
             {
-                if (((null == record.Body) || (0 == record.Body.Count)) && (null == record.EventArgs) && (null == record.UserData))
+                if (
+                    ((null == record.Body) || (0 == record.Body.Count))
+                    && (null == record.EventArgs)
+                    && (null == record.UserData)
+                )
                     return record;
 
                 if (null != record.UserData)
@@ -2260,17 +3094,27 @@ namespace System.Workflow.Runtime.Tracking
                 {
                     //
                     // Convert the WorkflowChanged items
-                    SerializedWorkflowChangedEventArgs sargs = new SerializedWorkflowChangedEventArgs();
-                    TrackingWorkflowChangedEventArgs wargs = (TrackingWorkflowChangedEventArgs)record.EventArgs;
+                    SerializedWorkflowChangedEventArgs sargs =
+                        new SerializedWorkflowChangedEventArgs();
+                    TrackingWorkflowChangedEventArgs wargs = (TrackingWorkflowChangedEventArgs)
+                        record.EventArgs;
                     if (null != wargs)
                     {
                         for (int i = 0; i < wargs.Changes.Count; i++)
                         {
                             WorkflowChangeAction action = wargs.Changes[i];
                             if (action is RemovedActivityAction)
-                                AddRemovedActivity((RemovedActivityAction)action, i, sargs.RemovedActivities);
+                                AddRemovedActivity(
+                                    (RemovedActivityAction)action,
+                                    i,
+                                    sargs.RemovedActivities
+                                );
                             else if (action is AddedActivityAction)
-                                AddAddedActivity((AddedActivityAction)action, i, sargs.AddedActivities);
+                                AddAddedActivity(
+                                    (AddedActivityAction)action,
+                                    i,
+                                    sargs.AddedActivities
+                                );
                         }
                     }
                     args = sargs;
@@ -2295,7 +3139,9 @@ namespace System.Workflow.Runtime.Tracking
                         switch (record.TrackingWorkflowEvent)
                         {
                             case TrackingWorkflowEvent.Terminated:
-                                e = ((TrackingWorkflowTerminatedEventArgs)record.EventArgs).Exception;
+                                e = (
+                                    (TrackingWorkflowTerminatedEventArgs)record.EventArgs
+                                ).Exception;
                                 if (null != e)
                                 {
                                     SerializeDataItem(e.ToString(), out data, out nonSerializable);
@@ -2303,7 +3149,9 @@ namespace System.Workflow.Runtime.Tracking
                                 }
                                 break;
                             case TrackingWorkflowEvent.Exception:
-                                e = ((TrackingWorkflowExceptionEventArgs)record.EventArgs).Exception;
+                                e = (
+                                    (TrackingWorkflowExceptionEventArgs)record.EventArgs
+                                ).Exception;
                                 if (null != e)
                                 {
                                     SerializeDataItem(e.ToString(), out data, out nonSerializable);
@@ -2314,8 +3162,8 @@ namespace System.Workflow.Runtime.Tracking
                     }
                 }
                 //
-                // Set the type of the EventArgs and then 
-                // put the serialized item in the args member, 
+                // Set the type of the EventArgs and then
+                // put the serialized item in the args member,
                 // we don't need the original Args object any longer
                 args.Type = record.EventArgs.GetType();
                 record.EventArgs = args;
@@ -2323,7 +3171,11 @@ namespace System.Workflow.Runtime.Tracking
                 return record;
             }
 
-            private void AddRemovedActivity(RemovedActivityAction removedAction, int order, IList<RemovedActivity> activities)
+            private void AddRemovedActivity(
+                RemovedActivityAction removedAction,
+                int order,
+                IList<RemovedActivity> activities
+            )
             {
                 Activity removed = removedAction.OriginalRemovedActivity;
                 RemovedActivity removedActivity = new RemovedActivity();
@@ -2365,7 +3217,11 @@ namespace System.Workflow.Runtime.Tracking
                 }
             }
 
-            private void AddAddedActivity(AddedActivityAction addedAction, int order, IList<AddedActivity> activities)
+            private void AddAddedActivity(
+                AddedActivityAction addedAction,
+                int order,
+                IList<AddedActivity> activities
+            )
             {
                 Activity added = addedAction.AddedActivity;
                 AddedActivity addedActivity = new AddedActivity();
@@ -2465,7 +3321,9 @@ namespace System.Workflow.Runtime.Tracking
                         return;
                     else
                     {
-                        int read = 0, totalRead = 0, cbToRead = 0;
+                        int read = 0,
+                            totalRead = 0,
+                            cbToRead = 0;
                         do
                         {
                             totalRead += read;
@@ -2484,6 +3342,7 @@ namespace System.Workflow.Runtime.Tracking
                     stream.Close();
                 }
             }
+
             /// <summary>
             /// Make string sql safe
             /// </summary>
@@ -2496,6 +3355,7 @@ namespace System.Workflow.Runtime.Tracking
 
                 return val.Replace("'", "''");
             }
+
             /*
             static char[] hexDigits = {
             '0', '1', '2', '3', '4', '5', '6', '7',
@@ -2593,16 +3453,21 @@ namespace System.Workflow.Runtime.Tracking
                         WriteActivity(a, writer);
             }
 
-
             // This function returns all the executable activities including secondary flow activities.
             private IList<Activity> GetAllEnabledActivities(CompositeActivity compositeActivity)
             {
                 if (compositeActivity == null)
                     throw new ArgumentNullException("compositeActivity");
 
-                List<Activity> allActivities = new List<Activity>(compositeActivity.EnabledActivities);
+                List<Activity> allActivities = new List<Activity>(
+                    compositeActivity.EnabledActivities
+                );
 
-                foreach (Activity secondaryFlowActivity in ((ISupportAlternateFlow)compositeActivity).AlternateFlowActivities)
+                foreach (
+                    Activity secondaryFlowActivity in (
+                        (ISupportAlternateFlow)compositeActivity
+                    ).AlternateFlowActivities
+                )
                 {
                     if (!allActivities.Contains(secondaryFlowActivity))
                         allActivities.Add(secondaryFlowActivity);
@@ -2611,11 +3476,14 @@ namespace System.Workflow.Runtime.Tracking
                 return allActivities;
             }
 
-
             internal string GetXomlDocument(object obj)
             {
                 string xomlText = null;
-                using (StringWriter stringWriter = new StringWriter(System.Globalization.CultureInfo.InvariantCulture))
+                using (
+                    StringWriter stringWriter = new StringWriter(
+                        System.Globalization.CultureInfo.InvariantCulture
+                    )
+                )
                 {
                     using (XmlWriter xmlWriter = CreateXmlWriter(stringWriter))
                     {
@@ -2627,9 +3495,7 @@ namespace System.Workflow.Runtime.Tracking
                 return xomlText;
             }
 
-
             #endregion
-
         }
     }
 }

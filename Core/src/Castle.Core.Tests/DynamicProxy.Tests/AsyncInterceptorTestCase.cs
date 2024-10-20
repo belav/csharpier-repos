@@ -14,51 +14,49 @@
 
 namespace Castle.DynamicProxy.Tests
 {
-	using System.Threading.Tasks;
+    using System.Threading.Tasks;
+    using Castle.DynamicProxy.Tests.Classes;
+    using Castle.DynamicProxy.Tests.Interfaces;
+    using NUnit.Framework;
 
-	using Castle.DynamicProxy.Tests.Classes;
-	using Castle.DynamicProxy.Tests.Interfaces;
+    [TestFixture]
+    public class AsyncInterceptorTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public async Task Should_Intercept_Asynchronous_Methods_With_An_Async_Operations_Prior_To_Calling_Proceed()
+        {
+            // Arrange
+            IInterfaceWithAsynchronousMethod target = new ClassWithAsynchronousMethod();
+            IInterceptor interceptor = new AsyncInterceptor();
 
-	using NUnit.Framework;
+            IInterfaceWithAsynchronousMethod proxy =
+                generator.CreateInterfaceProxyWithTargetInterface(target, interceptor);
 
-	[TestFixture]
-	public class AsyncInterceptorTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public async Task Should_Intercept_Asynchronous_Methods_With_An_Async_Operations_Prior_To_Calling_Proceed()
-		{
-			// Arrange
-			IInterfaceWithAsynchronousMethod target = new ClassWithAsynchronousMethod();
-			IInterceptor interceptor = new AsyncInterceptor();
+            // Act
+            await proxy.Method().ConfigureAwait(false);
+        }
 
-			IInterfaceWithAsynchronousMethod proxy =
-				generator.CreateInterfaceProxyWithTargetInterface(target, interceptor);
+        private class AsyncInterceptor : IInterceptor
+        {
+            public void Intercept(IInvocation invocation)
+            {
+                invocation.ReturnValue = InterceptAsyncMethod(invocation);
+            }
 
-			// Act
-			await proxy.Method().ConfigureAwait(false);
-		}
+            private static async Task InterceptAsyncMethod(IInvocation invocation)
+            {
+                var proceed = invocation.CaptureProceedInfo();
 
-		private class AsyncInterceptor : IInterceptor
-		{
-			public void Intercept(IInvocation invocation)
-			{
-				invocation.ReturnValue = InterceptAsyncMethod(invocation);
-			}
+                await Task.Delay(10).ConfigureAwait(false);
 
-			private static async Task InterceptAsyncMethod(IInvocation invocation)
-			{
-				var proceed = invocation.CaptureProceedInfo();
+                proceed.Invoke();
 
-				await Task.Delay(10).ConfigureAwait(false);
+                // Return value is being set in two situations, but this doesn't matter
+                // for the above test.
+                Task returnValue = (Task)invocation.ReturnValue;
 
-				proceed.Invoke();
-
-				// Return value is being set in two situations, but this doesn't matter
-				// for the above test.
-				Task returnValue = (Task)invocation.ReturnValue;
-
-				await returnValue.ConfigureAwait(false);
-			}
-		}
-	}
+                await returnValue.ConfigureAwait(false);
+            }
+        }
+    }
 }

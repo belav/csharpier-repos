@@ -9,6 +9,10 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
 {
     internal interface IMoveStaticMembersOptionsService : IWorkspaceService
     {
-        MoveStaticMembersOptions GetMoveMembersToTypeOptions(Document document, INamedTypeSymbol selectedType, ImmutableArray<ISymbol> selectedNodeSymbols);
+        MoveStaticMembersOptions GetMoveMembersToTypeOptions(
+            Document document,
+            INamedTypeSymbol selectedType,
+            ImmutableArray<ISymbol> selectedNodeSymbols
+        );
     }
 }

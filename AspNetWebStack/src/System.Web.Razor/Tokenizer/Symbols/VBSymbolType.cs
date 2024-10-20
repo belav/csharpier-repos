@@ -44,6 +44,6 @@ namespace System.Web.Razor.Tokenizer.Symbols
 
         RazorCommentTransition,
         RazorCommentStar,
-        RazorComment
+        RazorComment,
     }
 }

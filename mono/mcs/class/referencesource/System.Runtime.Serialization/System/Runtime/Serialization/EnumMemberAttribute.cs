@@ -10,14 +10,16 @@ namespace System.Runtime.Serialization
         string value;
         bool isValueSetExplicitly;
 
-        public EnumMemberAttribute()
-        {
-        }
+        public EnumMemberAttribute() { }
 
         public string Value
         {
             get { return this.value; }
-            set { this.value = value; this.isValueSetExplicitly = true; }
+            set
+            {
+                this.value = value;
+                this.isValueSetExplicitly = true;
+            }
         }
 
         public bool IsValueSetExplicitly

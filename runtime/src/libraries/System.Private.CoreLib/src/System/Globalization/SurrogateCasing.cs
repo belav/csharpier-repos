@@ -15,7 +15,11 @@ namespace System.Globalization
             Debug.Assert(char.IsHighSurrogate(h));
             Debug.Assert(char.IsLowSurrogate(l));
 
-            UnicodeUtility.GetUtf16SurrogatesFromSupplementaryPlaneScalar(CharUnicodeInfo.ToUpper(UnicodeUtility.GetScalarFromUtf16SurrogatePair(h, l)), out hr, out lr);
+            UnicodeUtility.GetUtf16SurrogatesFromSupplementaryPlaneScalar(
+                CharUnicodeInfo.ToUpper(UnicodeUtility.GetScalarFromUtf16SurrogatePair(h, l)),
+                out hr,
+                out lr
+            );
 
             Debug.Assert(char.IsHighSurrogate(hr));
             Debug.Assert(char.IsLowSurrogate(lr));
@@ -27,7 +31,11 @@ namespace System.Globalization
             Debug.Assert(char.IsHighSurrogate(h));
             Debug.Assert(char.IsLowSurrogate(l));
 
-            UnicodeUtility.GetUtf16SurrogatesFromSupplementaryPlaneScalar(CharUnicodeInfo.ToLower(UnicodeUtility.GetScalarFromUtf16SurrogatePair(h, l)), out hr, out lr);
+            UnicodeUtility.GetUtf16SurrogatesFromSupplementaryPlaneScalar(
+                CharUnicodeInfo.ToLower(UnicodeUtility.GetScalarFromUtf16SurrogatePair(h, l)),
+                out hr,
+                out lr
+            );
 
             Debug.Assert(char.IsHighSurrogate(hr));
             Debug.Assert(char.IsLowSurrogate(lr));

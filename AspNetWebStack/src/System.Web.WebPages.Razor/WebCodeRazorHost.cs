@@ -17,7 +17,11 @@ namespace System.Web.WebPages.Razor
         private const string HttpContextAccessorName = "Context";
         private static readonly string _helperPageBaseType = typeof(HelperPage).FullName;
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The code path is safe, it is a property setter and not dependent on other state")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The code path is safe, it is a property setter and not dependent on other state"
+        )]
         public WebCodeRazorHost(string virtualPath)
             : base(virtualPath)
         {
@@ -27,7 +31,11 @@ namespace System.Web.WebPages.Razor
             StaticHelpers = true;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors", Justification = "The code path is safe, it is a property setter and not dependent on other state")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2214:DoNotCallOverridableMethodsInConstructors",
+            Justification = "The code path is safe, it is a property setter and not dependent on other state"
+        )]
         public WebCodeRazorHost(string virtualPath, string physicalPath)
             : base(virtualPath, physicalPath)
         {
@@ -45,12 +53,10 @@ namespace System.Web.WebPages.Razor
             context.GeneratedClass.Members.Remove(context.TargetMethod);
 
             // Make ApplicationInstance static
-            CodeMemberProperty appInstanceProperty =
-                context.GeneratedClass.Members
-                    .OfType<CodeMemberProperty>()
-                    .Where(p => ApplicationInstancePropertyName
-                                    .Equals(p.Name))
-                    .SingleOrDefault();
+            CodeMemberProperty appInstanceProperty = context
+                .GeneratedClass.Members.OfType<CodeMemberProperty>()
+                .Where(p => ApplicationInstancePropertyName.Equals(p.Name))
+                .SingleOrDefault();
 
             if (appInstanceProperty != null)
             {
@@ -79,7 +85,10 @@ namespace System.Web.WebPages.Razor
             }
 
             // Get the segments removing any empty entries
-            IEnumerable<string> segments = virtualPath.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+            IEnumerable<string> segments = virtualPath.Split(
+                new[] { '/' },
+                StringSplitOptions.RemoveEmptyEntries
+            );
 
             if (!segments.Any())
             {

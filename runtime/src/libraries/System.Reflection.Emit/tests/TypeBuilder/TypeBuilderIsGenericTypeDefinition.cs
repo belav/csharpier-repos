@@ -11,16 +11,39 @@ namespace System.Reflection.Emit.Tests
         public void IsGenericTypeDefinition_GenericType_ReturnsTrue()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            TypeBuilder type1 = module.DefineType("Sample", TypeAttributes.Class | TypeAttributes.Public);
+            TypeBuilder type1 = module.DefineType(
+                "Sample",
+                TypeAttributes.Class | TypeAttributes.Public
+            );
             GenericTypeParameterBuilder[] typeParams = type1.DefineGenericParameters("T");
 
-            ConstructorBuilder ctor = type1.DefineDefaultConstructor(MethodAttributes.PrivateScope | MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName);
+            ConstructorBuilder ctor = type1.DefineDefaultConstructor(
+                MethodAttributes.PrivateScope
+                    | MethodAttributes.Public
+                    | MethodAttributes.HideBySig
+                    | MethodAttributes.SpecialName
+                    | MethodAttributes.RTSpecialName
+            );
 
-            FieldBuilder field = type1.DefineField("Field", typeParams[0].AsType(), FieldAttributes.Public);
+            FieldBuilder field = type1.DefineField(
+                "Field",
+                typeParams[0].AsType(),
+                FieldAttributes.Public
+            );
 
-            MethodBuilder genericMethod = type1.DefineMethod("GM", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder genericMethod = type1.DefineMethod(
+                "GM",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             GenericTypeParameterBuilder[] methodParams = genericMethod.DefineGenericParameters("U");
-            genericMethod.SetSignature(null, null, null, new Type[] { methodParams[0].AsType() }, null, null);
+            genericMethod.SetSignature(
+                null,
+                null,
+                null,
+                new Type[] { methodParams[0].AsType() },
+                null,
+                null
+            );
 
             ILGenerator ilGenerator = genericMethod.GetILGenerator();
             Type genericUType = type1.MakeGenericType(methodParams[0].AsType());
@@ -41,12 +64,23 @@ namespace System.Reflection.Emit.Tests
             ilGenerator.Emit(OpCodes.Ldfld, genericUField);
             ilGenerator.Emit(OpCodes.Box, methodParams[0].AsType());
 
-            MethodInfo writeLineObj = typeof(Console).GetMethod("WriteLine", new Type[] { typeof(object) });
+            MethodInfo writeLineObj = typeof(Console).GetMethod(
+                "WriteLine",
+                new Type[] { typeof(object) }
+            );
             ilGenerator.EmitCall(OpCodes.Call, writeLineObj, null);
             ilGenerator.Emit(OpCodes.Ret);
 
-            TypeBuilder type2 = module.DefineType("Dummy", TypeAttributes.Class | TypeAttributes.NotPublic);
-            MethodBuilder entryPoint = type2.DefineMethod("Main", MethodAttributes.Public | MethodAttributes.Static, null, null);
+            TypeBuilder type2 = module.DefineType(
+                "Dummy",
+                TypeAttributes.Class | TypeAttributes.NotPublic
+            );
+            MethodBuilder entryPoint = type2.DefineMethod(
+                "Main",
+                MethodAttributes.Public | MethodAttributes.Static,
+                null,
+                null
+            );
             ilGenerator = entryPoint.GetILGenerator();
 
             Type genericIntType = type1.MakeGenericType(typeof(int));
@@ -65,11 +99,19 @@ namespace System.Reflection.Emit.Tests
         public void IsGenericTypeDefinition_NonGenericType_ReturnsFalse()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            MethodBuilder method = type.DefineMethod("Main", MethodAttributes.Public | MethodAttributes.Static, null, null);
+            MethodBuilder method = type.DefineMethod(
+                "Main",
+                MethodAttributes.Public | MethodAttributes.Static,
+                null,
+                null
+            );
 
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ldstr, "Test string here.");
-            MethodInfo writeLine = typeof(Console).GetMethod("WriteLine", new Type[] { typeof(string) });
+            MethodInfo writeLine = typeof(Console).GetMethod(
+                "WriteLine",
+                new Type[] { typeof(string) }
+            );
             ilGenerator.EmitCall(OpCodes.Call, writeLine, null);
             ilGenerator.Emit(OpCodes.Ret);
 

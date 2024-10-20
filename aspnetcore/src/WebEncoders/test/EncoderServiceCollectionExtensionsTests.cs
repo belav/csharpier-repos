@@ -23,8 +23,14 @@ public class EncoderServiceCollectionExtensionsTests
         var serviceProvider = serviceCollection.BuildServiceProvider();
         Assert.Same(HtmlEncoder.Default, serviceProvider.GetRequiredService<HtmlEncoder>()); // default encoder
         Assert.Same(HtmlEncoder.Default, serviceProvider.GetRequiredService<HtmlEncoder>()); // as singleton instance
-        Assert.Same(JavaScriptEncoder.Default, serviceProvider.GetRequiredService<JavaScriptEncoder>()); // default encoder
-        Assert.Same(JavaScriptEncoder.Default, serviceProvider.GetRequiredService<JavaScriptEncoder>()); // as singleton instance
+        Assert.Same(
+            JavaScriptEncoder.Default,
+            serviceProvider.GetRequiredService<JavaScriptEncoder>()
+        ); // default encoder
+        Assert.Same(
+            JavaScriptEncoder.Default,
+            serviceProvider.GetRequiredService<JavaScriptEncoder>()
+        ); // as singleton instance
         Assert.Same(UrlEncoder.Default, serviceProvider.GetRequiredService<UrlEncoder>()); // default encoder
         Assert.Same(UrlEncoder.Default, serviceProvider.GetRequiredService<UrlEncoder>()); // as singleton instance
     }

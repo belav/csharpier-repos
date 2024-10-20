@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -14,17 +13,20 @@ internal static partial class Interop
             SafeBCryptAlgorithmHandle hAlgorithm,
             out SafeBCryptKeyHandle phKey,
             int dwLength,
-            uint dwFlags);
+            uint dwFlags
+        );
 
         internal static SafeBCryptKeyHandle BCryptGenerateKeyPair(
             SafeBCryptAlgorithmHandle hAlgorithm,
-            int keyLength)
+            int keyLength
+        )
         {
             NTSTATUS status = BCryptGenerateKeyPair(
                 hAlgorithm,
                 out SafeBCryptKeyHandle hKey,
                 keyLength,
-                0);
+                0
+            );
 
             if (status != NTSTATUS.STATUS_SUCCESS)
             {

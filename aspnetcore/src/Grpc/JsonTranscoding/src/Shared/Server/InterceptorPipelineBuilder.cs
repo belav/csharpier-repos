@@ -35,21 +35,34 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
         _interceptors = interceptors.Select(i => new InterceptorActivatorHandle(i)).ToList();
     }
 
-    public ClientStreamingServerMethod<TRequest, TResponse> ClientStreamingPipeline(ClientStreamingServerMethod<TRequest, TResponse> innerInvoker)
+    public ClientStreamingServerMethod<TRequest, TResponse> ClientStreamingPipeline(
+        ClientStreamingServerMethod<TRequest, TResponse> innerInvoker
+    )
     {
         return BuildPipeline(innerInvoker, BuildInvoker);
 
-        static ClientStreamingServerMethod<TRequest, TResponse> BuildInvoker(InterceptorActivatorHandle interceptorActivatorHandle, ClientStreamingServerMethod<TRequest, TResponse> next)
+        static ClientStreamingServerMethod<TRequest, TResponse> BuildInvoker(
+            InterceptorActivatorHandle interceptorActivatorHandle,
+            ClientStreamingServerMethod<TRequest, TResponse> next
+        )
         {
             return async (requestStream, context) =>
             {
                 var serviceProvider = context.GetHttpContext().RequestServices;
                 var interceptorActivator = interceptorActivatorHandle.GetActivator(serviceProvider);
-                var interceptorHandle = CreateInterceptor(interceptorActivatorHandle, interceptorActivator, serviceProvider);
+                var interceptorHandle = CreateInterceptor(
+                    interceptorActivatorHandle,
+                    interceptorActivator,
+                    serviceProvider
+                );
 
                 try
                 {
-                    return await interceptorHandle.Instance.ClientStreamingServerHandler(requestStream, context, next);
+                    return await interceptorHandle.Instance.ClientStreamingServerHandler(
+                        requestStream,
+                        context,
+                        next
+                    );
                 }
                 finally
                 {
@@ -59,21 +72,35 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
         }
     }
 
-    internal DuplexStreamingServerMethod<TRequest, TResponse> DuplexStreamingPipeline(DuplexStreamingServerMethod<TRequest, TResponse> innerInvoker)
+    internal DuplexStreamingServerMethod<TRequest, TResponse> DuplexStreamingPipeline(
+        DuplexStreamingServerMethod<TRequest, TResponse> innerInvoker
+    )
     {
         return BuildPipeline(innerInvoker, BuildInvoker);
 
-        static DuplexStreamingServerMethod<TRequest, TResponse> BuildInvoker(InterceptorActivatorHandle interceptorActivatorHandle, DuplexStreamingServerMethod<TRequest, TResponse> next)
+        static DuplexStreamingServerMethod<TRequest, TResponse> BuildInvoker(
+            InterceptorActivatorHandle interceptorActivatorHandle,
+            DuplexStreamingServerMethod<TRequest, TResponse> next
+        )
         {
             return async (requestStream, responseStream, context) =>
             {
                 var serviceProvider = context.GetHttpContext().RequestServices;
                 var interceptorActivator = interceptorActivatorHandle.GetActivator(serviceProvider);
-                var interceptorHandle = CreateInterceptor(interceptorActivatorHandle, interceptorActivator, serviceProvider);
+                var interceptorHandle = CreateInterceptor(
+                    interceptorActivatorHandle,
+                    interceptorActivator,
+                    serviceProvider
+                );
 
                 try
                 {
-                    await interceptorHandle.Instance.DuplexStreamingServerHandler(requestStream, responseStream, context, next);
+                    await interceptorHandle.Instance.DuplexStreamingServerHandler(
+                        requestStream,
+                        responseStream,
+                        context,
+                        next
+                    );
                 }
                 finally
                 {
@@ -83,21 +110,35 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
         }
     }
 
-    internal ServerStreamingServerMethod<TRequest, TResponse> ServerStreamingPipeline(ServerStreamingServerMethod<TRequest, TResponse> innerInvoker)
+    internal ServerStreamingServerMethod<TRequest, TResponse> ServerStreamingPipeline(
+        ServerStreamingServerMethod<TRequest, TResponse> innerInvoker
+    )
     {
         return BuildPipeline(innerInvoker, BuildInvoker);
 
-        static ServerStreamingServerMethod<TRequest, TResponse> BuildInvoker(InterceptorActivatorHandle interceptorActivatorHandle, ServerStreamingServerMethod<TRequest, TResponse> next)
+        static ServerStreamingServerMethod<TRequest, TResponse> BuildInvoker(
+            InterceptorActivatorHandle interceptorActivatorHandle,
+            ServerStreamingServerMethod<TRequest, TResponse> next
+        )
         {
             return async (request, responseStream, context) =>
             {
                 var serviceProvider = context.GetHttpContext().RequestServices;
                 var interceptorActivator = interceptorActivatorHandle.GetActivator(serviceProvider);
-                var interceptorHandle = CreateInterceptor(interceptorActivatorHandle, interceptorActivator, serviceProvider);
+                var interceptorHandle = CreateInterceptor(
+                    interceptorActivatorHandle,
+                    interceptorActivator,
+                    serviceProvider
+                );
 
                 try
                 {
-                    await interceptorHandle.Instance.ServerStreamingServerHandler(request, responseStream, context, next);
+                    await interceptorHandle.Instance.ServerStreamingServerHandler(
+                        request,
+                        responseStream,
+                        context,
+                        next
+                    );
                 }
                 finally
                 {
@@ -107,21 +148,34 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
         }
     }
 
-    internal UnaryServerMethod<TRequest, TResponse> UnaryPipeline(UnaryServerMethod<TRequest, TResponse> innerInvoker)
+    internal UnaryServerMethod<TRequest, TResponse> UnaryPipeline(
+        UnaryServerMethod<TRequest, TResponse> innerInvoker
+    )
     {
         return BuildPipeline(innerInvoker, BuildInvoker);
 
-        static UnaryServerMethod<TRequest, TResponse> BuildInvoker(InterceptorActivatorHandle interceptorActivatorHandle, UnaryServerMethod<TRequest, TResponse> next)
+        static UnaryServerMethod<TRequest, TResponse> BuildInvoker(
+            InterceptorActivatorHandle interceptorActivatorHandle,
+            UnaryServerMethod<TRequest, TResponse> next
+        )
         {
             return async (request, context) =>
             {
                 var serviceProvider = context.GetHttpContext().RequestServices;
                 var interceptorActivator = interceptorActivatorHandle.GetActivator(serviceProvider);
-                var interceptorHandle = CreateInterceptor(interceptorActivatorHandle, interceptorActivator, serviceProvider);
+                var interceptorHandle = CreateInterceptor(
+                    interceptorActivatorHandle,
+                    interceptorActivator,
+                    serviceProvider
+                );
 
                 try
                 {
-                    return await interceptorHandle.Instance.UnaryServerHandler(request, context, next);
+                    return await interceptorHandle.Instance.UnaryServerHandler(
+                        request,
+                        context,
+                        next
+                    );
                 }
                 finally
                 {
@@ -148,13 +202,19 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
     private static GrpcActivatorHandle<Interceptor> CreateInterceptor(
         InterceptorActivatorHandle interceptorActivatorHandle,
         IGrpcInterceptorActivator interceptorActivator,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider
+    )
     {
-        var interceptorHandle = interceptorActivator.Create(serviceProvider, interceptorActivatorHandle.Registration);
+        var interceptorHandle = interceptorActivator.Create(
+            serviceProvider,
+            interceptorActivatorHandle.Registration
+        );
 
         if (interceptorHandle.Instance == null)
         {
-            throw new InvalidOperationException($"Could not construct Interceptor instance for type {interceptorActivatorHandle.Registration.Type.FullName}");
+            throw new InvalidOperationException(
+                $"Could not construct Interceptor instance for type {interceptorActivatorHandle.Registration.Type.FullName}"
+            );
         }
 
         return interceptorHandle;
@@ -176,8 +236,11 @@ internal sealed class InterceptorPipelineBuilder<TRequest, TResponse>
             // Not thread safe. Side effect is resolving the service twice.
             if (_interceptorActivator == null)
             {
-                var activatorType = typeof(IGrpcInterceptorActivator<>).MakeGenericType(Registration.Type);
-                _interceptorActivator = (IGrpcInterceptorActivator)serviceProvider.GetRequiredService(activatorType);
+                var activatorType = typeof(IGrpcInterceptorActivator<>).MakeGenericType(
+                    Registration.Type
+                );
+                _interceptorActivator = (IGrpcInterceptorActivator)
+                    serviceProvider.GetRequiredService(activatorType);
             }
 
             return _interceptorActivator;

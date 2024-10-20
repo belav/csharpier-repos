@@ -36,7 +36,10 @@ public class OwinEnvironmentTests
         Assert.Equal("SomeMethod", Get<string>(env, "owin.RequestMethod"));
         // User property should set both server.User (non-standard) and owin.RequestUser.
         Assert.Equal("Foo", Get<ClaimsPrincipal>(env, "server.User").Identity.AuthenticationType);
-        Assert.Equal("Foo", Get<ClaimsPrincipal>(env, "owin.RequestUser").Identity.AuthenticationType);
+        Assert.Equal(
+            "Foo",
+            Get<ClaimsPrincipal>(env, "owin.RequestUser").Identity.AuthenticationType
+        );
         Assert.Same(Stream.Null, Get<Stream>(env, "owin.RequestBody"));
         var requestHeaders = Get<IDictionary<string, string[]>>(env, "owin.RequestHeaders");
         Assert.NotNull(requestHeaders);
@@ -146,8 +149,8 @@ public class OwinEnvironmentTests
         collection.CopyTo(kvp, 0);
 
         Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0)); // array is null
-        Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(kvp, -1));   // arrayIndex is less than 0
-        Assert.Throws<ArgumentException>(() => collection.CopyTo(kvp, 1));  // The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.
+        Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(kvp, -1)); // arrayIndex is less than 0
+        Assert.Throws<ArgumentException>(() => collection.CopyTo(kvp, 1)); // The number of elements in the source ICollection<T> is greater than the available space from arrayIndex to the end of the destination array.
     }
 
     [Fact]

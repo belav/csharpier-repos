@@ -21,7 +21,10 @@ namespace System.Linq.Tests
         [Fact]
         public void TakeLastThrowsOnNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<DateTime>)null).TakeLast(3));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<DateTime>)null).TakeLast(3)
+            );
         }
     }
 }

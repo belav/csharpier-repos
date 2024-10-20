@@ -9,7 +9,6 @@ using Xunit;
 
 public static class XmlSerializerTests
 {
-
     public const string FakeNS = "http://example.com/XmlSerializerTests";
 
     [Fact]
@@ -21,7 +20,7 @@ public static class XmlSerializerTests
         TwoClasses twoClasses = new TwoClasses
         {
             First = new FirstClass { TestingEnumValues = TestEnum.First },
-            Second = new SecondClass { TestingEnumValues = TestEnum.Second }
+            Second = new SecondClass { TestingEnumValues = TestEnum.Second },
         };
 
         // 43675 - This line throws with inconsistent Flag.type/namespace usage
@@ -37,7 +36,7 @@ public static class XmlSerializerTests
     public enum TestEnum
     {
         First = 1,
-        Second = 2
+        Second = 2,
     }
 
     public class FirstClass
@@ -62,5 +61,4 @@ public static class XmlSerializerTests
         [XmlElement("second", Namespace = XmlSerializerTests.FakeNS)]
         public SecondClass Second;
     }
-
 }

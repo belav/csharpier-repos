@@ -10,16 +10,23 @@ using Microsoft.CommonLanguageServerProtocol.Framework;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-[ExportCSharpVisualBasicStatelessLspService(typeof(IRequestExecutionQueueProvider<RequestContext>)), Shared]
+[
+    ExportCSharpVisualBasicStatelessLspService(
+        typeof(IRequestExecutionQueueProvider<RequestContext>)
+    ),
+    Shared
+]
 internal sealed class RequestExecutionQueueProvider : IRequestExecutionQueueProvider<RequestContext>
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, true)]
-    public RequestExecutionQueueProvider()
-    {
-    }
+    public RequestExecutionQueueProvider() { }
 
-    public IRequestExecutionQueue<RequestContext> CreateRequestExecutionQueue(AbstractLanguageServer<RequestContext> languageServer, ILspLogger logger, IHandlerProvider handlerProvider)
+    public IRequestExecutionQueue<RequestContext> CreateRequestExecutionQueue(
+        AbstractLanguageServer<RequestContext> languageServer,
+        ILspLogger logger,
+        IHandlerProvider handlerProvider
+    )
     {
         var queue = new RoslynRequestExecutionQueue(languageServer, logger, handlerProvider);
         queue.Start();

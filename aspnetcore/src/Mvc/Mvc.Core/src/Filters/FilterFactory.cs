@@ -9,7 +9,8 @@ internal static class FilterFactory
 {
     public static FilterFactoryResult GetAllFilters(
         IFilterProvider[] filterProviders,
-        ActionContext actionContext)
+        ActionContext actionContext
+    )
     {
         ArgumentNullException.ThrowIfNull(filterProviders);
         ArgumentNullException.ThrowIfNull(actionContext);
@@ -18,10 +19,8 @@ internal static class FilterFactory
 
         var staticFilterItems = new FilterItem[actionDescriptor.FilterDescriptors.Count];
 
-        var orderedFilters = actionDescriptor.FilterDescriptors
-            .OrderBy(
-                filter => filter,
-                FilterDescriptorOrderComparer.Comparer)
+        var orderedFilters = actionDescriptor
+            .FilterDescriptors.OrderBy(filter => filter, FilterDescriptorOrderComparer.Comparer)
             .ToList();
 
         for (var i = 0; i < orderedFilters.Count; i++)
@@ -48,7 +47,11 @@ internal static class FilterFactory
             }
         }
 
-        if (allFiltersAreReusable && filterProviders.Length == 1 && filterProviders[0] is DefaultFilterProvider defaultFilterProvider)
+        if (
+            allFiltersAreReusable
+            && filterProviders.Length == 1
+            && filterProviders[0] is DefaultFilterProvider defaultFilterProvider
+        )
         {
             // If we know we can safely cache all filters and only the default filter provider is registered, we can
             // probably re-use filters between requests.
@@ -61,7 +64,8 @@ internal static class FilterFactory
     public static IFilterMetadata[] CreateUncachedFilters(
         IFilterProvider[] filterProviders,
         ActionContext actionContext,
-        FilterItem[] cachedFilterItems)
+        FilterItem[] cachedFilterItems
+    )
     {
         ArgumentNullException.ThrowIfNull(filterProviders);
         ArgumentNullException.ThrowIfNull(actionContext);
@@ -81,8 +85,9 @@ internal static class FilterFactory
                 new FilterItem(filterItem.Descriptor)
                 {
                     Filter = filterItem.Filter,
-                    IsReusable = filterItem.IsReusable
-                });
+                    IsReusable = filterItem.IsReusable,
+                }
+            );
         }
 
         return CreateUncachedFiltersCore(filterProviders, actionContext, filterItems);
@@ -91,7 +96,8 @@ internal static class FilterFactory
     private static IFilterMetadata[] CreateUncachedFiltersCore(
         IFilterProvider[] filterProviders,
         ActionContext actionContext,
-        List<FilterItem> filterItems)
+        List<FilterItem> filterItems
+    )
     {
         // Execute providers
         var context = new FilterProviderContext(actionContext, filterItems);

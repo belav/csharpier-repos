@@ -41,7 +41,13 @@ public abstract class BlazorTemplateTest : LoggedTest
 
     public abstract string ProjectType { get; }
 
-    protected async Task<Project> CreateBuildPublishAsync(string auth = null, string[] args = null, string targetFramework = null, bool serverProject = false, bool onlyCreate = false)
+    protected async Task<Project> CreateBuildPublishAsync(
+        string auth = null,
+        string[] args = null,
+        string targetFramework = null,
+        bool serverProject = false,
+        bool onlyCreate = false
+    )
     {
         // Additional arguments are needed. See: https://github.com/dotnet/aspnetcore/issues/24278
         Environment.SetEnvironmentVariable("EnableDefaultScopedCssItems", "true");
@@ -52,20 +58,25 @@ public abstract class BlazorTemplateTest : LoggedTest
             project.TargetFramework = targetFramework;
         }
 
-        await project.RunDotNetNewAsync(ProjectType, auth: auth, args: args, errorOnRestoreError: false);
+        await project.RunDotNetNewAsync(
+            ProjectType,
+            auth: auth,
+            args: args,
+            errorOnRestoreError: false
+        );
 
         if (serverProject || auth is null)
         {
             // External auth mechanisms (which is any auth at all for Blazor WASM) require https to work and thus don't honor the --no-https flag
-            var requiresHttps = string.Equals(auth, "IndividualB2C", StringComparison.OrdinalIgnoreCase)
-                                || string.Equals(auth, "SingleOrg", StringComparison.OrdinalIgnoreCase)
-                                || (!serverProject && auth is not null);
+            var requiresHttps =
+                string.Equals(auth, "IndividualB2C", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(auth, "SingleOrg", StringComparison.OrdinalIgnoreCase)
+                || (!serverProject && auth is not null);
             var noHttps = args?.Contains(ArgConstants.NoHttps) ?? false;
-            var expectedLaunchProfileNames = requiresHttps
-                ? new[] { "https", "IIS Express" }
-                : noHttps
-                    ? new[] { "http", "IIS Express" }
-                    : new[] { "http", "https", "IIS Express" };
+            var expectedLaunchProfileNames =
+                requiresHttps ? new[] { "https", "IIS Express" }
+                : noHttps ? new[] { "http", "IIS Express" }
+                : new[] { "http", "https", "IIS Express" };
             await project.VerifyLaunchSettings(expectedLaunchProfileNames);
         }
 
@@ -83,7 +94,11 @@ public abstract class BlazorTemplateTest : LoggedTest
         return project;
     }
 
-    protected static Project GetSubProject(Project project, string projectDirectory, string projectName)
+    protected static Project GetSubProject(
+        Project project,
+        string projectDirectory,
+        string projectName
+    )
     {
         var subProjectDirectory = Path.Combine(project.TemplateOutputDir, projectDirectory);
         if (!Directory.Exists(subProjectDirectory))

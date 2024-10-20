@@ -14,14 +14,20 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal Bmi1() { }
 
-        public static new bool IsSupported { get => IsSupported; }
+        public static new bool IsSupported
+        {
+            get => IsSupported;
+        }
 
         [Intrinsic]
         public new abstract class X64 : X86Base.X64
         {
             internal X64() { }
 
-            public static new bool IsSupported { get => IsSupported; }
+            public static new bool IsSupported
+            {
+                get => IsSupported;
+            }
 
             /// <summary>
             /// unsigned __int64 _andn_u64 (unsigned __int64 a, unsigned __int64 b)
@@ -35,14 +41,16 @@ namespace System.Runtime.Intrinsics.X86
             ///   BEXTR r64a, r/m64, r64b
             /// This intrinsic is only available on 64-bit processes
             /// </summary>
-            public static ulong BitFieldExtract(ulong value, byte start, byte length) => BitFieldExtract(value, (ushort)(start | (length << 8)));
+            public static ulong BitFieldExtract(ulong value, byte start, byte length) =>
+                BitFieldExtract(value, (ushort)(start | (length << 8)));
 
             /// <summary>
             /// unsigned __int64 _bextr2_u64 (unsigned __int64 a, unsigned __int64 control)
             ///   BEXTR r64a, r/m64, r64b
             /// This intrinsic is only available on 64-bit processes
             /// </summary>
-            public static ulong BitFieldExtract(ulong value, ushort control) => BitFieldExtract(value, control);
+            public static ulong BitFieldExtract(ulong value, ushort control) =>
+                BitFieldExtract(value, control);
 
             /// <summary>
             /// unsigned __int64 _blsi_u64 (unsigned __int64 a)
@@ -56,7 +64,8 @@ namespace System.Runtime.Intrinsics.X86
             ///   BLSMSK r64, r/m64
             /// This intrinsic is only available on 64-bit processes
             /// </summary>
-            public static ulong GetMaskUpToLowestSetBit(ulong value) => GetMaskUpToLowestSetBit(value);
+            public static ulong GetMaskUpToLowestSetBit(ulong value) =>
+                GetMaskUpToLowestSetBit(value);
 
             /// <summary>
             /// unsigned __int64 _blsr_u64 (unsigned __int64 a)
@@ -83,13 +92,15 @@ namespace System.Runtime.Intrinsics.X86
         /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len)
         ///   BEXTR r32a, r/m32, r32b
         /// </summary>
-        public static uint BitFieldExtract(uint value, byte start, byte length) => BitFieldExtract(value, (ushort)(start | (length << 8)));
+        public static uint BitFieldExtract(uint value, byte start, byte length) =>
+            BitFieldExtract(value, (ushort)(start | (length << 8)));
 
         /// <summary>
         /// unsigned int _bextr2_u32 (unsigned int a, unsigned int control)
         ///   BEXTR r32a, r/m32, r32b
         /// </summary>
-        public static uint BitFieldExtract(uint value, ushort control) => BitFieldExtract(value, control);
+        public static uint BitFieldExtract(uint value, ushort control) =>
+            BitFieldExtract(value, control);
 
         /// <summary>
         /// unsigned int _blsi_u32 (unsigned int a)

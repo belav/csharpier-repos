@@ -21,14 +21,15 @@ public static class IHostPortExtensions
 
     public static IEnumerable<int> GetPorts(this IHost host)
     {
-        return host.GetUris()
-            .Select(u => u.Port);
+        return host.GetUris().Select(u => u.Port);
     }
 
     public static IEnumerable<Uri> GetUris(this IHost host)
     {
-        return host.Services.GetRequiredService<IServer>().Features.Get<IServerAddressesFeature>().Addresses
-            .Select(a => new Uri(a));
+        return host
+            .Services.GetRequiredService<IServer>()
+            .Features.Get<IServerAddressesFeature>()
+            .Addresses.Select(a => new Uri(a));
     }
 
     public static string MakeUrl(this IHost host, string scheme)

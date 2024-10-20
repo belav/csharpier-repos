@@ -14,14 +14,21 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 public class AuthorizationPageApplicationModelProviderTest
 {
-    private readonly IOptions<MvcOptions> OptionsWithoutEndpointRouting = Options.Create(new MvcOptions { EnableEndpointRouting = false });
+    private readonly IOptions<MvcOptions> OptionsWithoutEndpointRouting = Options.Create(
+        new MvcOptions { EnableEndpointRouting = false }
+    );
 
     [Fact]
     public void OnProvidersExecuting_IgnoresAttributesOnHandlerMethods()
     {
         // Arrange
-        var policyProvider = new DefaultAuthorizationPolicyProvider(Options.Create(new AuthorizationOptions()));
-        var authorizationProvider = new AuthorizationPageApplicationModelProvider(policyProvider, OptionsWithoutEndpointRouting);
+        var policyProvider = new DefaultAuthorizationPolicyProvider(
+            Options.Create(new AuthorizationOptions())
+        );
+        var authorizationProvider = new AuthorizationPageApplicationModelProvider(
+            policyProvider,
+            OptionsWithoutEndpointRouting
+        );
         var typeInfo = typeof(PageWithAuthorizeHandlers).GetTypeInfo();
         var context = GetApplicationProviderContext(typeInfo);
 
@@ -32,7 +39,8 @@ public class AuthorizationPageApplicationModelProviderTest
         Assert.Collection(
             context.PageApplicationModel.Filters,
             f => Assert.IsType<PageHandlerPageFilter>(f),
-            f => Assert.IsType<HandleOptionsRequestsPageFilter>(f));
+            f => Assert.IsType<HandleOptionsRequestsPageFilter>(f)
+        );
     }
 
     private class PageWithAuthorizeHandlers : Page
@@ -45,17 +53,20 @@ public class AuthorizationPageApplicationModelProviderTest
     public class ModelWithAuthorizeHandlers : PageModel
     {
         [Authorize]
-        public void OnGet()
-        {
-        }
+        public void OnGet() { }
     }
 
     [Fact]
     public void OnProvidersExecuting_DoesNothingWithEndpointRouting()
     {
         // Arrange
-        var policyProvider = new DefaultAuthorizationPolicyProvider(Options.Create(new AuthorizationOptions()));
-        var authorizationProvider = new AuthorizationPageApplicationModelProvider(policyProvider, Options.Create(new MvcOptions()));
+        var policyProvider = new DefaultAuthorizationPolicyProvider(
+            Options.Create(new AuthorizationOptions())
+        );
+        var authorizationProvider = new AuthorizationPageApplicationModelProvider(
+            policyProvider,
+            Options.Create(new MvcOptions())
+        );
         var typeInfo = typeof(TestPage).GetTypeInfo();
         var context = GetApplicationProviderContext(typeInfo);
 
@@ -66,15 +77,21 @@ public class AuthorizationPageApplicationModelProviderTest
         Assert.Collection(
             context.PageApplicationModel.Filters,
             f => Assert.IsType<PageHandlerPageFilter>(f),
-            f => Assert.IsType<HandleOptionsRequestsPageFilter>(f));
+            f => Assert.IsType<HandleOptionsRequestsPageFilter>(f)
+        );
     }
 
     [Fact]
     public void OnProvidersExecuting_AddsAuthorizeFilter_IfModelHasAuthorizationAttributes()
     {
         // Arrange
-        var policyProvider = new DefaultAuthorizationPolicyProvider(Options.Create(new AuthorizationOptions()));
-        var authorizationProvider = new AuthorizationPageApplicationModelProvider(policyProvider, OptionsWithoutEndpointRouting);
+        var policyProvider = new DefaultAuthorizationPolicyProvider(
+            Options.Create(new AuthorizationOptions())
+        );
+        var authorizationProvider = new AuthorizationPageApplicationModelProvider(
+            policyProvider,
+            OptionsWithoutEndpointRouting
+        );
         var context = GetApplicationProviderContext(typeof(TestPage).GetTypeInfo());
 
         // Act
@@ -85,7 +102,8 @@ public class AuthorizationPageApplicationModelProviderTest
             context.PageApplicationModel.Filters,
             f => Assert.IsType<PageHandlerPageFilter>(f),
             f => Assert.IsType<HandleOptionsRequestsPageFilter>(f),
-            f => Assert.IsType<AuthorizeFilter>(f));
+            f => Assert.IsType<AuthorizeFilter>(f)
+        );
     }
 
     private class TestPage : Page
@@ -98,9 +116,7 @@ public class AuthorizationPageApplicationModelProviderTest
     [Authorize]
     private class TestModel : PageModel
     {
-        public virtual void OnGet()
-        {
-        }
+        public virtual void OnGet() { }
     }
 
     [Fact]
@@ -108,11 +124,17 @@ public class AuthorizationPageApplicationModelProviderTest
     {
         // Arrange
         var options = Options.Create(new AuthorizationOptions());
-        options.Value.AddPolicy("Base", policy => policy.RequireClaim("Basic").RequireClaim("Basic2"));
+        options.Value.AddPolicy(
+            "Base",
+            policy => policy.RequireClaim("Basic").RequireClaim("Basic2")
+        );
         options.Value.AddPolicy("Derived", policy => policy.RequireClaim("Derived"));
 
         var policyProvider = new DefaultAuthorizationPolicyProvider(options);
-        var authorizationProvider = new AuthorizationPageApplicationModelProvider(policyProvider, OptionsWithoutEndpointRouting);
+        var authorizationProvider = new AuthorizationPageApplicationModelProvider(
+            policyProvider,
+            OptionsWithoutEndpointRouting
+        );
 
         var context = GetApplicationProviderContext(typeof(TestPageWithDerivedModel).GetTypeInfo());
 
@@ -125,7 +147,8 @@ public class AuthorizationPageApplicationModelProviderTest
             context.PageApplicationModel.Filters,
             f => Assert.IsType<PageHandlerPageFilter>(f),
             f => Assert.IsType<HandleOptionsRequestsPageFilter>(f),
-            f => authorizeFilter = Assert.IsType<AuthorizeFilter>(f));
+            f => authorizeFilter = Assert.IsType<AuthorizeFilter>(f)
+        );
 
         // Basic + Basic2 + Derived authorize
         Assert.Equal(3, authorizeFilter.Policy.Requirements.Count);
@@ -139,24 +162,25 @@ public class AuthorizationPageApplicationModelProviderTest
     }
 
     [Authorize(Policy = "Base")]
-    public class BaseModel : PageModel
-    {
-    }
+    public class BaseModel : PageModel { }
 
     [Authorize(Policy = "Derived")]
     private class DerivedModel : BaseModel
     {
-        public virtual void OnGet()
-        {
-        }
+        public virtual void OnGet() { }
     }
 
     [Fact]
     public void OnProvidersExecuting_AddsAllowAnonymousFilter()
     {
         // Arrange
-        var policyProvider = new DefaultAuthorizationPolicyProvider(Options.Create(new AuthorizationOptions()));
-        var authorizationProvider = new AuthorizationPageApplicationModelProvider(policyProvider, OptionsWithoutEndpointRouting);
+        var policyProvider = new DefaultAuthorizationPolicyProvider(
+            Options.Create(new AuthorizationOptions())
+        );
+        var authorizationProvider = new AuthorizationPageApplicationModelProvider(
+            policyProvider,
+            OptionsWithoutEndpointRouting
+        );
         var context = GetApplicationProviderContext(typeof(PageWithAnonymousModel).GetTypeInfo());
 
         // Act
@@ -167,7 +191,8 @@ public class AuthorizationPageApplicationModelProviderTest
             context.PageApplicationModel.Filters,
             f => Assert.IsType<PageHandlerPageFilter>(f),
             f => Assert.IsType<HandleOptionsRequestsPageFilter>(f),
-            f => Assert.IsType<AllowAnonymousFilter>(f));
+            f => Assert.IsType<AllowAnonymousFilter>(f)
+        );
     }
 
     private class PageWithAnonymousModel : Page
@@ -183,14 +208,17 @@ public class AuthorizationPageApplicationModelProviderTest
         public void OnGet() { }
     }
 
-    private static PageApplicationModelProviderContext GetApplicationProviderContext(TypeInfo typeInfo)
+    private static PageApplicationModelProviderContext GetApplicationProviderContext(
+        TypeInfo typeInfo
+    )
     {
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
         var defaultProvider = new DefaultPageApplicationModelProvider(
             modelMetadataProvider,
             Options.Create(new RazorPagesOptions()),
-            new DefaultPageApplicationModelPartsProvider(modelMetadataProvider));
+            new DefaultPageApplicationModelPartsProvider(modelMetadataProvider)
+        );
 
         var context = new PageApplicationModelProviderContext(new PageActionDescriptor(), typeInfo);
         defaultProvider.OnProvidersExecuting(context);

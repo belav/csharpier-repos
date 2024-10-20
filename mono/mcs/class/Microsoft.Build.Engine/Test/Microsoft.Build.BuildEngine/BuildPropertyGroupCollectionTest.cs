@@ -32,19 +32,21 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
-	[TestFixture]
-	public class BuildPropertyGroupCollectionTest {
-		
-		Engine			engine;
-		Project			project;
-		
-		[Test]
-		[Category ("NotDotNet")]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void TestCopyTo1 ()
-		{
-			string documentString = @"
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
+    [TestFixture]
+    public class BuildPropertyGroupCollectionTest
+    {
+        Engine engine;
+        Project project;
+
+        [Test]
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TestCopyTo1()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<Name>Value</Name>
@@ -52,20 +54,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			
-			project.PropertyGroups.CopyTo (null, 0);
-		}
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-		// Index was outside the bounds of the array.
-		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
-		public void TestCopyTo2 ()
-		{
-			string documentString = @"
+            project.PropertyGroups.CopyTo(null, 0);
+        }
+
+        // Index was outside the bounds of the array.
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestCopyTo2()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<Name>Value</Name>
@@ -73,19 +76,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			
-			project.PropertyGroups.CopyTo (new BuildPropertyGroup [1], -1);
-		}
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-		[Test]
-		[ExpectedException (typeof (InvalidCastException))]
-		public void TestCopyTo3 ()
-		{
-			string documentString = @"
+            project.PropertyGroups.CopyTo(new BuildPropertyGroup[1], -1);
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidCastException))]
+        public void TestCopyTo3()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<Name>Value</Name>
@@ -93,21 +97,27 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			
-			project.PropertyGroups.CopyTo (new BuildPropertyGroup [][] { new BuildPropertyGroup [] {
-				new BuildPropertyGroup ()}}, 0);
-		}
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-		// Index was outside the bounds of the array.
-		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
-		public void TestCopyTo4 ()
-		{
-			string documentString = @"
+            project.PropertyGroups.CopyTo(
+                new BuildPropertyGroup[][]
+                {
+                    new BuildPropertyGroup[] { new BuildPropertyGroup() },
+                },
+                0
+            );
+        }
+
+        // Index was outside the bounds of the array.
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestCopyTo4()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<Name>Value</Name>
@@ -115,20 +125,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			
-			project.PropertyGroups.CopyTo (new BuildPropertyGroup [1], 2);
-		}
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-		// Index was outside the bounds of the array.
-		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
-		public void TestCopyTo5 ()
-		{
-			string documentString = @"
+            project.PropertyGroups.CopyTo(new BuildPropertyGroup[1], 2);
+        }
+
+        // Index was outside the bounds of the array.
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestCopyTo5()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<Name>Value</Name>
@@ -136,19 +147,20 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			
-			project.PropertyGroups.CopyTo (new BuildPropertyGroup [1], 1);
-		}
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-		[Test]
-		[ExpectedException (typeof (IndexOutOfRangeException))]
-		public void TestCopyTo6 ()
-		{
-			string documentString = @"
+            project.PropertyGroups.CopyTo(new BuildPropertyGroup[1], 1);
+        }
+
+        [Test]
+        [ExpectedException(typeof(IndexOutOfRangeException))]
+        public void TestCopyTo6()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 					</PropertyGroup>
@@ -157,12 +169,12 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
+            engine = new Engine(Consts.BinPath);
 
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			project.PropertyGroups.CopyTo (new BuildPropertyGroup [1], 0);
-		}
-	}
+            project.PropertyGroups.CopyTo(new BuildPropertyGroup[1], 0);
+        }
+    }
 }

@@ -19,16 +19,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging;
 internal sealed class VSCodeTelemetryLogger : ITelemetryReporter
 {
     private TelemetrySession? _telemetrySession;
-    private const string CollectorApiKey = "0c6ae279ed8443289764825290e4f9e2-1a736e7c-1324-4338-be46-fc2a58ae4d14-7255";
+    private const string CollectorApiKey =
+        "0c6ae279ed8443289764825290e4f9e2-1a736e7c-1324-4338-be46-fc2a58ae4d14-7255";
     private static int _dumpsSubmitted = 0;
 
-    private static readonly ConcurrentDictionary<int, object> _pendingScopes = new(concurrencyLevel: 2, capacity: 10);
+    private static readonly ConcurrentDictionary<int, object> _pendingScopes =
+        new(concurrencyLevel: 2, capacity: 10);
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public VSCodeTelemetryLogger()
-    {
-    }
+    public VSCodeTelemetryLogger() { }
 
     public void InitializeSession(string telemetryLevel, string? sessionId, bool isDefaultSession)
     {
@@ -64,12 +64,16 @@ internal sealed class VSCodeTelemetryLogger : ITelemetryReporter
         _pendingScopes[blockId] = kind switch
         {
             0 => _telemetrySession.StartOperation(eventName), // LogType.Trace
-            1 => _telemetrySession.StartUserTask(eventName),  // LogType.UserAction
-            _ => new InvalidOperationException($"Unknown BlockStart kind: {kind}")
+            1 => _telemetrySession.StartUserTask(eventName), // LogType.UserAction
+            _ => new InvalidOperationException($"Unknown BlockStart kind: {kind}"),
         };
     }
 
-    public void LogBlockEnd(int blockId, List<KeyValuePair<string, object?>> properties, CancellationToken cancellationToken)
+    public void LogBlockEnd(
+        int blockId,
+        List<KeyValuePair<string, object?>> properties,
+        CancellationToken cancellationToken
+    )
     {
         var found = _pendingScopes.TryRemove(blockId, out var scope);
         Debug.Assert(found);
@@ -77,7 +81,9 @@ internal sealed class VSCodeTelemetryLogger : ITelemetryReporter
         var endEvent = GetEndEvent(scope);
         SetProperties(endEvent, properties);
 
-        var result = cancellationToken.IsCancellationRequested ? TelemetryResult.UserCancel : TelemetryResult.Success;
+        var result = cancellationToken.IsCancellationRequested
+            ? TelemetryResult.UserCancel
+            : TelemetryResult.Success;
 
         if (scope is TelemetryScope<OperationEvent> operation)
             operation.End(result);
@@ -87,7 +93,14 @@ internal sealed class VSCodeTelemetryLogger : ITelemetryReporter
             throw new InvalidCastException($"Unexpected value for scope: {scope}");
     }
 
-    public void ReportFault(string eventName, string description, int logLevel, bool forceDump, int processId, Exception exception)
+    public void ReportFault(
+        string eventName,
+        string description,
+        int logLevel,
+        bool forceDump,
+        int processId,
+        Exception exception
+    )
     {
         Debug.Assert(_telemetrySession != null);
 
@@ -110,12 +123,13 @@ internal sealed class VSCodeTelemetryLogger : ITelemetryReporter
                     // if needed, add any extra logs here
                 }
 
-                // Returning "0" signals that, if sampled, we should send data to Watson. 
-                // Any other value will cancel the Watson report. We never want to trigger a process dump manually, 
+                // Returning "0" signals that, if sampled, we should send data to Watson.
+                // Any other value will cancel the Watson report. We never want to trigger a process dump manually,
                 // we'll let TargetedNotifications determine if a dump should be collected.
                 // See https://aka.ms/roslynnfwdocs for more details
                 return 0;
-            });
+            }
+        );
 
         _telemetrySession.PostEvent(faultEvent);
     }
@@ -140,18 +154,15 @@ internal sealed class VSCodeTelemetryLogger : ITelemetryReporter
         {
             { "Id", StringToJsonValue(sessionId) },
             { "HostName", StringToJsonValue("Default") },
-
             // Insert Telemetry Level instead of Opt-Out status. The telemetry service handles
             // validation of this value so there is no need to do so on this end. If it's invalid,
             // it defaults to off.
             { "TelemetryLevel", StringToJsonValue(telemetryLevel) },
-
             // this sets the Telemetry Session Created by LSP Server to be the Root Initial session
             // This means that the SessionID set here by "Id" will be the SessionID used by cloned session
             // further down stream
             { "IsInitialSession", "true" },
             { "CollectorApiKey", StringToJsonValue(CollectorApiKey) },
-
             // using 1010 to indicate VS Code and not to match it to devenv 1000
             { "AppId", "1010" },
             { "ProcessStartTime", processStartTime },
@@ -175,15 +186,18 @@ internal sealed class VSCodeTelemetryLogger : ITelemetryReporter
         }
     }
 
-    private static TelemetryEvent GetEndEvent(object? scope)
-        => scope switch
+    private static TelemetryEvent GetEndEvent(object? scope) =>
+        scope switch
         {
             TelemetryScope<OperationEvent> operation => operation.EndEvent,
             TelemetryScope<UserTaskEvent> userTask => userTask.EndEvent,
-            _ => throw new InvalidCastException($"Unexpected value for scope: {scope}")
+            _ => throw new InvalidCastException($"Unexpected value for scope: {scope}"),
         };
 
-    private static void SetProperties(TelemetryEvent telemetryEvent, List<KeyValuePair<string, object?>> properties)
+    private static void SetProperties(
+        TelemetryEvent telemetryEvent,
+        List<KeyValuePair<string, object?>> properties
+    )
     {
         foreach (var property in properties)
         {

@@ -31,7 +31,8 @@ public abstract partial class TagHelperComponentTagHelper : TagHelper
     /// added from controllers and views correctly.</remarks>
     public TagHelperComponentTagHelper(
         ITagHelperComponentManager manager,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(loggerFactory);
@@ -59,7 +60,8 @@ public abstract partial class TagHelperComponentTagHelper : TagHelper
         if (PropertyActivator == null)
         {
             var serviceProvider = ViewContext.HttpContext.RequestServices;
-            PropertyActivator = serviceProvider.GetRequiredService<ITagHelperComponentPropertyActivator>();
+            PropertyActivator =
+                serviceProvider.GetRequiredService<ITagHelperComponentPropertyActivator>();
         }
 
         for (var i = 0; i < _components.Length; i++)
@@ -90,10 +92,28 @@ public abstract partial class TagHelperComponentTagHelper : TagHelper
 
     private static partial class Log
     {
-        [LoggerMessage(2, LogLevel.Debug, "Tag helper component '{ComponentName}' initialized.", EventName = "TagHelperComponentInitialized", SkipEnabledCheck = true)]
-        public static partial void TagHelperComponentInitialized(ILogger logger, string componentName);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Tag helper component '{ComponentName}' initialized.",
+            EventName = "TagHelperComponentInitialized",
+            SkipEnabledCheck = true
+        )]
+        public static partial void TagHelperComponentInitialized(
+            ILogger logger,
+            string componentName
+        );
 
-        [LoggerMessage(3, LogLevel.Debug, "Tag helper component '{ComponentName}' processed.", EventName = "TagHelperComponentProcessed", SkipEnabledCheck = true)]
-        public static partial void TagHelperComponentProcessed(ILogger logger, string componentName);
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "Tag helper component '{ComponentName}' processed.",
+            EventName = "TagHelperComponentProcessed",
+            SkipEnabledCheck = true
+        )]
+        public static partial void TagHelperComponentProcessed(
+            ILogger logger,
+            string componentName
+        );
     }
 }

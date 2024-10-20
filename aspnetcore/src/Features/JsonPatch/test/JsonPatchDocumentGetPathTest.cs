@@ -100,15 +100,16 @@ public class JsonPatchDocumentGetPathTest
         });
 
         // Assert
-        Assert.Equal("The expression '(p.IntegerValue >= 4)' is not supported. Supported expressions include member access and indexer expressions.", exception.Message);
+        Assert.Equal(
+            "The expression '(p.IntegerValue >= 4)' is not supported. Supported expressions include member access and indexer expressions.",
+            exception.Message
+        );
     }
 }
 
 internal class DerivedClass : BaseClass
 {
-    public DerivedClass()
-    {
-    }
+    public DerivedClass() { }
 }
 
 internal class NestedObjectWithDerivedClass
@@ -116,6 +117,4 @@ internal class NestedObjectWithDerivedClass
     public DerivedClass DerivedObject { get; set; }
 }
 
-internal class BaseClass
-{
-}
+internal class BaseClass { }

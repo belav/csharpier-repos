@@ -34,26 +34,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioAddSolutionItemService(
-            IThreadingContext threadingContext)
+        public VisualStudioAddSolutionItemService(IThreadingContext threadingContext)
         {
             _threadingContext = threadingContext;
-            _fileChangeTrackers = new ConcurrentDictionary<string, FileChangeTracker>(StringComparer.OrdinalIgnoreCase);
+            _fileChangeTrackers = new ConcurrentDictionary<string, FileChangeTracker>(
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public async Task InitializeAsync(IAsyncServiceProvider serviceProvider)
         {
-            _dte = await serviceProvider.GetServiceAsync<DTE, DTE>(_threadingContext.JoinableTaskFactory).ConfigureAwait(false);
-            _fileChangeService = await serviceProvider.GetServiceAsync<SVsFileChangeEx, IVsFileChangeEx>(_threadingContext.JoinableTaskFactory).ConfigureAwait(false);
+            _dte = await serviceProvider
+                .GetServiceAsync<DTE, DTE>(_threadingContext.JoinableTaskFactory)
+                .ConfigureAwait(false);
+            _fileChangeService = await serviceProvider
+                .GetServiceAsync<SVsFileChangeEx, IVsFileChangeEx>(
+                    _threadingContext.JoinableTaskFactory
+                )
+                .ConfigureAwait(false);
         }
 
         public void TrackFilePathAndAddSolutionItemWhenFileCreated(string filePath)
         {
-            if (_fileChangeService != null &&
-                PathUtilities.IsAbsolute(filePath) &&
-                FileExistsWithGuard(filePath) == false)
+            if (
+                _fileChangeService != null
+                && PathUtilities.IsAbsolute(filePath)
+                && FileExistsWithGuard(filePath) == false
+            )
             {
-                // Setup a new file change tracker to track file path and 
+                // Setup a new file change tracker to track file path and
                 // add newly created file as solution item.
                 _fileChangeTrackers.GetOrAdd(filePath, CreateTracker);
             }
@@ -63,7 +72,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             // Local functions
             FileChangeTracker CreateTracker(string filePath)
             {
-                var tracker = new FileChangeTracker(_fileChangeService, filePath, _VSFILECHANGEFLAGS.VSFILECHG_Add);
+                var tracker = new FileChangeTracker(
+                    _fileChangeService,
+                    filePath,
+                    _VSFILECHANGEFLAGS.VSFILECHG_Add
+                );
                 tracker.UpdatedOnDisk += OnFileAdded;
                 _ = tracker.StartFileChangeListeningAsync();
                 return tracker;
@@ -95,14 +108,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             lock (_gate)
             {
                 var solution = (Solution2)_dte.Solution;
-                if (!TryGetExistingSolutionItemsFolder(solution, filePath, out var solutionItemsFolder, out var hasExistingSolutionItem))
+                if (
+                    !TryGetExistingSolutionItemsFolder(
+                        solution,
+                        filePath,
+                        out var solutionItemsFolder,
+                        out var hasExistingSolutionItem
+                    )
+                )
                 {
                     solutionItemsFolder = solution.AddSolutionFolder("Solution Items");
                 }
 
-                if (!hasExistingSolutionItem &&
-                    solutionItemsFolder != null &&
-                    FileExistsWithGuard(filePath) == true)
+                if (
+                    !hasExistingSolutionItem
+                    && solutionItemsFolder != null
+                    && FileExistsWithGuard(filePath) == true
+                )
                 {
                     solutionItemsFolder.ProjectItems.AddFromFile(filePath);
                     solution.SaveAs(solution.FileName);
@@ -122,7 +144,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
         }
 
-        public static bool TryGetExistingSolutionItemsFolder(Solution2 solution, string filePath, out EnvDTE.Project? solutionItemsFolder, out bool hasExistingSolutionItem)
+        public static bool TryGetExistingSolutionItemsFolder(
+            Solution2 solution,
+            string filePath,
+            out EnvDTE.Project? solutionItemsFolder,
+            out bool hasExistingSolutionItem
+        )
         {
             solutionItemsFolder = null;
             hasExistingSolutionItem = false;
@@ -130,8 +157,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             var fileName = PathUtilities.GetFileName(filePath);
             foreach (Project project in solution.Projects)
             {
-                if (project.Kind == EnvDTE.Constants.vsProjectKindSolutionItems &&
-                    project.Name == SolutionItemsFolderName)
+                if (
+                    project.Kind == EnvDTE.Constants.vsProjectKindSolutionItems
+                    && project.Name == SolutionItemsFolderName
+                )
                 {
                     solutionItemsFolder = project;
 

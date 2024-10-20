@@ -10,7 +10,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void TcpConstructor_EnableBroadcast_GetterReturnsFalse()
         {
-            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 Assert.False(socket.EnableBroadcast);
             }
@@ -20,7 +26,13 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void TcpConstructor_EnableBroadcast_SetterThrows()
         {
-            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 Assert.Throws<SocketException>(() =>
                 {
@@ -32,7 +44,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void UdpConstructor_EnableBroadcast_Configurable()
         {
-            using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp))
+            using (
+                Socket socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Dgram,
+                    ProtocolType.Udp
+                )
+            )
             {
                 Assert.False(socket.EnableBroadcast);
 

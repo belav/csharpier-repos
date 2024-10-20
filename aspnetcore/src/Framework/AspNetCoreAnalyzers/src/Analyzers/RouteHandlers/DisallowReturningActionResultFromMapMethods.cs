@@ -18,9 +18,17 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         WellKnownTypes wellKnownTypes,
         IInvocationOperation invocationOperation,
         IAnonymousFunctionOperation anonymousFunction,
-        SyntaxNode nodeForError)
+        SyntaxNode nodeForError
+    )
     {
-        DisallowReturningActionResultFromMapMethods(in context, wellKnownTypes, invocationOperation, anonymousFunction.Symbol, anonymousFunction.Body, nodeForError);
+        DisallowReturningActionResultFromMapMethods(
+            in context,
+            wellKnownTypes,
+            invocationOperation,
+            anonymousFunction.Symbol,
+            anonymousFunction.Body,
+            nodeForError
+        );
     }
 
     private static void DisallowReturningActionResultFromMapMethods(
@@ -29,25 +37,43 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         IInvocationOperation invocationOperation,
         IMethodSymbol methodSymbol,
         IBlockOperation? methodBody,
-        SyntaxNode nodeForError)
+        SyntaxNode nodeForError
+    )
     {
         var returnType = UnwrapPossibleAsyncReturnType(methodSymbol.ReturnType);
 
-        if (wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IResult).IsAssignableFrom(returnType))
+        if (
+            wellKnownTypes
+                .Get(WellKnownType.Microsoft_AspNetCore_Http_IResult)
+                .IsAssignableFrom(returnType)
+        )
         {
             // This type returns some form of IResult. Nothing to do here.
             return;
         }
 
-        if (methodBody is null &&
-            (wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_IActionResult).IsAssignableFrom(returnType) ||
-            wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_Infrastructure_IConvertToActionResult).IsAssignableFrom(returnType)))
+        if (
+            methodBody is null
+            && (
+                wellKnownTypes
+                    .Get(WellKnownType.Microsoft_AspNetCore_Mvc_IActionResult)
+                    .IsAssignableFrom(returnType)
+                || wellKnownTypes
+                    .Get(
+                        WellKnownType.Microsoft_AspNetCore_Mvc_Infrastructure_IConvertToActionResult
+                    )
+                    .IsAssignableFrom(returnType)
+            )
+        )
         {
             // if we don't have a method body, and the action is IResult or ActionResult<T> returning, produce diagnostics for the entire method.
-            context.ReportDiagnostic(Diagnostic.Create(
-                DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,
-                nodeForError.GetLocation(),
-                invocationOperation.TargetMethod.Name));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,
+                    nodeForError.GetLocation(),
+                    invocationOperation.TargetMethod.Name
+                )
+            );
             return;
         }
 
@@ -71,24 +97,43 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
                 continue;
             }
 
-            if (wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IResult).IsAssignableFrom(type))
+            if (
+                wellKnownTypes
+                    .Get(WellKnownType.Microsoft_AspNetCore_Http_IResult)
+                    .IsAssignableFrom(type)
+            )
             {
                 continue;
             }
 
-            if (wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_IActionResult).IsAssignableFrom(type))
+            if (
+                wellKnownTypes
+                    .Get(WellKnownType.Microsoft_AspNetCore_Mvc_IActionResult)
+                    .IsAssignableFrom(type)
+            )
             {
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,
-                    returnOperation.Syntax.GetLocation(),
-                    invocationOperation.TargetMethod.Name));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,
+                        returnOperation.Syntax.GetLocation(),
+                        invocationOperation.TargetMethod.Name
+                    )
+                );
             }
         }
     }
 
     private static ITypeSymbol UnwrapPossibleAsyncReturnType(ITypeSymbol returnType)
     {
-        if (returnType is not INamedTypeSymbol { Name: "Task" or "ValueTask", IsGenericType: true, TypeArguments: { Length: 1 } } taskLike)
+        if (
+            returnType
+            is not INamedTypeSymbol
+            {
+                Name: "Task" or "ValueTask",
+                IsGenericType: true,
+                TypeArguments: { Length: 1 }
+            } taskLike
+        )
         {
             return returnType;
         }

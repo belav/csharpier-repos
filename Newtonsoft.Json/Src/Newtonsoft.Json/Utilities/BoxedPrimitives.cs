@@ -35,20 +35,21 @@ namespace Newtonsoft.Json.Utilities
         internal static readonly object BooleanTrue = true;
         internal static readonly object BooleanFalse = false;
 
-        internal static object Get(int value) => value switch
-        {
-            -1 => Int32_M1,
-            0 => Int32_0,
-            1 => Int32_1,
-            2 => Int32_2,
-            3 => Int32_3,
-            4 => Int32_4,
-            5 => Int32_5,
-            6 => Int32_6,
-            7 => Int32_7,
-            8 => Int32_8,
-            _ => value,
-        };
+        internal static object Get(int value) =>
+            value switch
+            {
+                -1 => Int32_M1,
+                0 => Int32_0,
+                1 => Int32_1,
+                2 => Int32_2,
+                3 => Int32_3,
+                4 => Int32_4,
+                5 => Int32_5,
+                6 => Int32_6,
+                7 => Int32_7,
+                8 => Int32_8,
+                _ => value,
+            };
 
         // integers tend to be weighted towards a handful of low numbers; we could argue
         // for days over the "correct" range to have special handling, but I'm arbitrarily
@@ -64,20 +65,21 @@ namespace Newtonsoft.Json.Utilities
         internal static readonly object Int32_7 = 7;
         internal static readonly object Int32_8 = 8;
 
-        internal static object Get(long value) => value switch
-        {
-            -1 => Int64_M1,
-            0 => Int64_0,
-            1 => Int64_1,
-            2 => Int64_2,
-            3 => Int64_3,
-            4 => Int64_4,
-            5 => Int64_5,
-            6 => Int64_6,
-            7 => Int64_7,
-            8 => Int64_8,
-            _ => value,
-        };
+        internal static object Get(long value) =>
+            value switch
+            {
+                -1 => Int64_M1,
+                0 => Int64_0,
+                1 => Int64_1,
+                2 => Int64_2,
+                3 => Int64_3,
+                4 => Int64_4,
+                5 => Int64_5,
+                6 => Int64_6,
+                7 => Int64_7,
+                8 => Int64_8,
+                _ => value,
+            };
 
         internal static readonly object Int64_M1 = -1L;
         internal static readonly object Int64_0 = 0L;
@@ -99,7 +101,7 @@ namespace Newtonsoft.Json.Utilities
 #if NET6_0_OR_GREATER
             // Number of bits scale is shifted by.
             const int ScaleShift = 16;
-        
+
             if (value == decimal.Zero)
             {
                 Span<int> bits = stackalloc int[4];
@@ -136,7 +138,9 @@ namespace Newtonsoft.Json.Utilities
             }
             if (double.IsInfinity(value))
             {
-                return double.IsPositiveInfinity(value) ? DoublePositiveInfinity : DoubleNegativeInfinity;
+                return double.IsPositiveInfinity(value)
+                    ? DoublePositiveInfinity
+                    : DoubleNegativeInfinity;
             }
             if (double.IsNaN(value))
             {

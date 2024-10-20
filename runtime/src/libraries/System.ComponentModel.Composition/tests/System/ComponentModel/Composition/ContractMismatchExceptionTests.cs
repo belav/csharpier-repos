@@ -100,22 +100,31 @@ namespace System.ComponentModel.Composition
             return CreateContractMismatchException((string)null, (Exception)null);
         }
 
-        private static CompositionContractMismatchException CreateContractMismatchException(string message)
+        private static CompositionContractMismatchException CreateContractMismatchException(
+            string message
+        )
         {
             return CreateContractMismatchException(message, (Exception)null);
         }
 
-        private static CompositionContractMismatchException CreateContractMismatchExceptionFromId(string id)
+        private static CompositionContractMismatchException CreateContractMismatchExceptionFromId(
+            string id
+        )
         {
             return CreateContractMismatchException((string)null, (Exception)null);
         }
 
-        private static CompositionContractMismatchException CreateContractMismatchException(Exception innerException)
+        private static CompositionContractMismatchException CreateContractMismatchException(
+            Exception innerException
+        )
         {
             return CreateContractMismatchException((string)null, innerException);
         }
 
-        private static CompositionContractMismatchException CreateContractMismatchException(string message, Exception innerException)
+        private static CompositionContractMismatchException CreateContractMismatchException(
+            string message,
+            Exception innerException
+        )
         {
             return new CompositionContractMismatchException(message, innerException);
         }

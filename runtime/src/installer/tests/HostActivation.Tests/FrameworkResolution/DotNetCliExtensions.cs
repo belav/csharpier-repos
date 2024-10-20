@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.DotNet.Cli.Build;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Microsoft.DotNet.Cli.Build;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
@@ -35,15 +35,18 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             public DotNetFramework Framework(string name, string version = null)
             {
                 string path = Path.Combine(_dotnet.BinPath, "shared", name);
-                IEnumerable<string> versions =
-                    Directory.Exists(path) ? Directory.GetDirectories(path) : Enumerable.Empty<string>();
+                IEnumerable<string> versions = Directory.Exists(path)
+                    ? Directory.GetDirectories(path)
+                    : Enumerable.Empty<string>();
 
                 if (version == null)
                 {
                     version = versions.FirstOrDefault();
                     if (versions.Skip(1).Any())
                     {
-                        throw new Exception($"Multiple versions of framework {name} found, but no version selector specified.");
+                        throw new Exception(
+                            $"Multiple versions of framework {name} found, but no version selector specified."
+                        );
                     }
                 }
                 else

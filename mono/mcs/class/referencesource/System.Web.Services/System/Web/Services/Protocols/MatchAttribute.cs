@@ -1,4 +1,5 @@
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System;
     using System.Security.Permissions;
 
@@ -7,7 +8,8 @@ namespace System.Web.Services.Protocols {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class MatchAttribute : System.Attribute {
+    public sealed class MatchAttribute : System.Attribute
+    {
         string pattern;
         int group = 1;
         int capture = 0;
@@ -18,7 +20,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public MatchAttribute(string pattern) {
+        public MatchAttribute(string pattern)
+        {
             this.pattern = pattern;
         }
 
@@ -26,16 +29,18 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Pattern {
+        public string Pattern
+        {
             get { return pattern == null ? string.Empty : pattern; }
             set { pattern = value; }
         }
-        
+
         /// <include file='doc\MatchAttribute.uex' path='docs/doc[@for="MatchAttribute.Group"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Group {
+        public int Group
+        {
             get { return group; }
             set { group = value; }
         }
@@ -44,7 +49,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Capture {
+        public int Capture
+        {
             get { return capture; }
             set { capture = value; }
         }
@@ -53,7 +59,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IgnoreCase {
+        public bool IgnoreCase
+        {
             get { return ignoreCase; }
             set { ignoreCase = value; }
         }
@@ -62,7 +69,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int MaxRepeats {
+        public int MaxRepeats
+        {
             get { return repeats; }
             set { repeats = value; }
         }

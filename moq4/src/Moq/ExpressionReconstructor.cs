@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal abstract class ExpressionReconstructor
@@ -32,7 +31,6 @@ namespace Moq
     ///   from <see cref="Action"/> delegates. It is the counterpart to <see cref="ExpressionCompiler"/>.
     /// </summary>
     abstract class ExpressionReconstructor
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private static ExpressionReconstructor instance = new ActionObserver();
@@ -62,15 +60,16 @@ namespace Moq
             set => instance = value ?? throw new ArgumentNullException(nameof(value));
         }
 
-        protected ExpressionReconstructor()
-        {
-        }
+        protected ExpressionReconstructor() { }
 
         /// <summary>
         ///   Reconstructs a <see cref="LambdaExpression"/> from the given <see cref="Action{T}"/> delegate.
         /// </summary>
         /// <param name="action">The <see cref="Action"/> delegate for which to reconstruct a LINQ expression tree.</param>
         /// <param name="ctorArgs">Arguments to pass to a parameterized constructor of <typeparamref name="T"/>. (Optional.)</param>
-        public abstract Expression<Action<T>> ReconstructExpression<T>(Action<T> action, object[] ctorArgs = null);
+        public abstract Expression<Action<T>> ReconstructExpression<T>(
+            Action<T> action,
+            object[] ctorArgs = null
+        );
     }
 }

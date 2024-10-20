@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataFieldConverter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls.Converters
@@ -12,11 +12,11 @@ namespace System.Web.UI.Design.MobileControls.Converters
     using System.ComponentModel.Design;
     using System.Data;
     using System.Diagnostics;
-    using System.Runtime.InteropServices;
     using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
     using System.Web.UI.Design;
     using System.Web.UI.MobileControls;
-    using System.Security.Permissions;
 
     /// <include file='doc\DataFieldConverter.uex' path='docs/doc[@for="DataFieldConverter"]/*' />
     /// <devdoc>
@@ -24,14 +24,22 @@ namespace System.Web.UI.Design.MobileControls.Converters
     ///       Provides design-time support for a component's data field properties.
     ///    </para>
     /// </devdoc>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    public class DataFieldConverter : TypeConverter 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    public class DataFieldConverter : TypeConverter
     {
         private const String _dataMemberPropertyName = "DataMember";
         private const String _dataSourcePropertyName = "DataSource";
@@ -42,9 +50,7 @@ namespace System.Web.UI.Design.MobileControls.Converters
         ///       Initializes a new instance of <see cref='System.Web.UI.Design.DataFieldConverter'/>.
         ///    </para>
         /// </devdoc>
-        public DataFieldConverter() 
-        {
-        }
+        public DataFieldConverter() { }
 
         /// <include file='doc\DataFieldConverter.uex' path='docs/doc[@for="DataFieldConverter.CanConvertFrom"]/*' />
         /// <devdoc>
@@ -54,9 +60,9 @@ namespace System.Web.UI.Design.MobileControls.Converters
         ///       using the context.
         ///    </para>
         /// </devdoc>
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) 
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
-            if (sourceType == typeof(string)) 
+            if (sourceType == typeof(string))
             {
                 return true;
             }
@@ -69,13 +75,17 @@ namespace System.Web.UI.Design.MobileControls.Converters
         ///       Converts the given object to the converter's native type.
         ///    </para>
         /// </devdoc>
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) 
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
-            if (value == null) 
+            if (value == null)
             {
                 return String.Empty;
             }
-            else if (value.GetType() == typeof(string)) 
+            else if (value.GetType() == typeof(string))
             {
                 return (string)value;
             }
@@ -88,15 +98,15 @@ namespace System.Web.UI.Design.MobileControls.Converters
         ///       Gets the fields present within the selected data source if information about them is available.
         ///    </para>
         /// </devdoc>
-        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context) 
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
         {
             object[] names = null;
             String dataMember = null;
             bool autoGenerateFields = false;
             bool autoGenerateFieldsSet = false;
             ObjectList objectList = null;
-            
-            if (context != null) 
+
+            if (context != null)
             {
                 ArrayList list = new ArrayList();
 
@@ -106,8 +116,9 @@ namespace System.Web.UI.Design.MobileControls.Converters
                 if (component is IDeviceSpecificChoiceDesigner)
                 {
                     Object owner = ((ChoicePropertyFilter)component).Owner;
-                    PropertyDescriptor pd = 
-                        ((ICustomTypeDescriptor)component).GetProperties()[_dataMemberPropertyName];
+                    PropertyDescriptor pd = ((ICustomTypeDescriptor)component).GetProperties()[
+                        _dataMemberPropertyName
+                    ];
                     Debug.Assert(pd != null, "Cannot get DataMember");
 
                     if (owner is ObjectList)
@@ -129,13 +140,13 @@ namespace System.Web.UI.Design.MobileControls.Converters
                     }
                 }
 
-                if (component != null) 
+                if (component != null)
                 {
                     objectList = component as ObjectList;
 
                     if (objectList != null)
                     {
-                        foreach(ObjectListField field in objectList.Fields)
+                        foreach (ObjectListField field in objectList.Fields)
                         {
                             list.Add(field.Name);
                         }
@@ -149,37 +160,40 @@ namespace System.Web.UI.Design.MobileControls.Converters
                     if (objectList == null || autoGenerateFields)
                     {
                         ISite componentSite = component.Site;
-                        if (componentSite != null) 
+                        if (componentSite != null)
                         {
-                            IDesignerHost designerHost = (IDesignerHost)componentSite.GetService(typeof(IDesignerHost));
-                            if (designerHost != null) 
+                            IDesignerHost designerHost = (IDesignerHost)
+                                componentSite.GetService(typeof(IDesignerHost));
+                            if (designerHost != null)
                             {
                                 IDesigner designer = designerHost.GetDesigner(component);
 
-                                if (designer is IDataSourceProvider) 
+                                if (designer is IDataSourceProvider)
                                 {
                                     IEnumerable dataSource = null;
                                     if (!String.IsNullOrEmpty(dataMember))
                                     {
-                                        DataBindingCollection dataBindings = 
-                                            ((HtmlControlDesigner)designer).DataBindings;
+                                        DataBindingCollection dataBindings = (
+                                            (HtmlControlDesigner)designer
+                                        ).DataBindings;
                                         DataBinding binding = dataBindings[_dataSourcePropertyName];
                                         if (binding != null)
                                         {
-                                            dataSource = 
-                                                DesignTimeData.GetSelectedDataSource(
+                                            dataSource = DesignTimeData.GetSelectedDataSource(
                                                 component,
                                                 binding.Expression,
-                                                dataMember);
+                                                dataMember
+                                            );
                                         }
                                     }
                                     else
                                     {
-                                        dataSource = 
-                                            ((IDataSourceProvider)designer).GetResolvedSelectedDataSource();
+                                        dataSource = (
+                                            (IDataSourceProvider)designer
+                                        ).GetResolvedSelectedDataSource();
                                     }
 
-                                    if (dataSource != null) 
+                                    if (dataSource != null)
                                     {
                                         props = DesignTimeData.GetDataFields(dataSource);
                                     }
@@ -188,10 +202,10 @@ namespace System.Web.UI.Design.MobileControls.Converters
                         }
                     }
                 }
-                
-                if (props != null) 
+
+                if (props != null)
                 {
-                    foreach (PropertyDescriptor propDesc in props) 
+                    foreach (PropertyDescriptor propDesc in props)
                     {
                         list.Add(propDesc.Name);
                     }
@@ -207,11 +221,11 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// <devdoc>
         ///    <para>
         ///       Gets a value indicating whether the collection of standard values returned from
-        ///    <see cref='System.ComponentModel.TypeConverter.GetStandardValues'/> is an exclusive 
+        ///    <see cref='System.ComponentModel.TypeConverter.GetStandardValues'/> is an exclusive
         ///       list of possible values, using the specified context.
         ///    </para>
         /// </devdoc>
-        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context) 
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return false;
         }
@@ -223,14 +237,14 @@ namespace System.Web.UI.Design.MobileControls.Converters
         ///       that can be picked from a list.
         ///    </para>
         /// </devdoc>
-        public override bool GetStandardValuesSupported(ITypeDescriptorContext context) 
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {
-            if (context.Instance is IComponent) 
+            if (context.Instance is IComponent)
             {
                 // We only support the dropdown in single-select mode.
                 return true;
             }
             return false;
-        }    
+        }
     }
 }

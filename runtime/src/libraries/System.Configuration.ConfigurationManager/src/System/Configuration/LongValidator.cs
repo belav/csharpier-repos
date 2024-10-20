@@ -11,19 +11,21 @@ namespace System.Configuration
         private readonly long _resolution;
 
         public LongValidator(long minValue, long maxValue)
-            : this(minValue, maxValue, false, 1)
-        { }
+            : this(minValue, maxValue, false, 1) { }
 
         public LongValidator(long minValue, long maxValue, bool rangeIsExclusive)
-            : this(minValue, maxValue, rangeIsExclusive, 1)
-        { }
+            : this(minValue, maxValue, rangeIsExclusive, 1) { }
 
         public LongValidator(long minValue, long maxValue, bool rangeIsExclusive, long resolution)
         {
-            if (resolution <= 0) throw new ArgumentOutOfRangeException(nameof(resolution));
+            if (resolution <= 0)
+                throw new ArgumentOutOfRangeException(nameof(resolution));
 
             if (minValue > maxValue)
-                throw new ArgumentOutOfRangeException(nameof(minValue), SR.Validator_min_greater_than_max);
+                throw new ArgumentOutOfRangeException(
+                    nameof(minValue),
+                    SR.Validator_min_greater_than_max
+                );
 
             _minValue = minValue;
             _maxValue = maxValue;
@@ -41,11 +43,13 @@ namespace System.Configuration
         {
             ValidatorUtils.HelperParamValidation(value, typeof(long));
 
-            ValidatorUtils.ValidateScalar((long)value,
+            ValidatorUtils.ValidateScalar(
+                (long)value,
                 _minValue,
                 _maxValue,
                 _resolution,
-                _flags == ValidationFlags.ExclusiveRange);
+                _flags == ValidationFlags.ExclusiveRange
+            );
         }
 
         private enum ValidationFlags

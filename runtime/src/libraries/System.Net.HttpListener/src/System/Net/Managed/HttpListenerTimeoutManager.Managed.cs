@@ -85,7 +85,11 @@ namespace System.Net
         {
             long timeoutValue = Convert.ToInt64(value.TotalSeconds);
             ArgumentOutOfRangeException.ThrowIfNegative(timeoutValue, nameof(value));
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(timeoutValue, ushort.MaxValue, nameof(value));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                timeoutValue,
+                ushort.MaxValue,
+                nameof(value)
+            );
         }
     }
 }

@@ -13,18 +13,39 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 {
     public class IntegerBinaryOperationTests
     {
-        private static CallSite<Func<CallSite, object, object, object>> GetBinaryOperationCallSite(ExpressionType operation, bool checkedContext, bool constantLeftArgument, bool constantRightArgument)
+        private static CallSite<Func<CallSite, object, object, object>> GetBinaryOperationCallSite(
+            ExpressionType operation,
+            bool checkedContext,
+            bool constantLeftArgument,
+            bool constantRightArgument
+        )
         {
-            CSharpArgumentInfo x = CSharpArgumentInfo.Create(constantLeftArgument ? CSharpArgumentInfoFlags.Constant : CSharpArgumentInfoFlags.None, null);
-            CSharpArgumentInfo y = CSharpArgumentInfo.Create(constantRightArgument ? CSharpArgumentInfoFlags.Constant : CSharpArgumentInfoFlags.None, null);
-            CallSiteBinder binder =
-                Binder.BinaryOperation(
-                    checkedContext ? CSharpBinderFlags.CheckedContext : CSharpBinderFlags.None, operation,
-                    typeof(IntegerBinaryOperationTests), new[] {x, y});
+            CSharpArgumentInfo x = CSharpArgumentInfo.Create(
+                constantLeftArgument
+                    ? CSharpArgumentInfoFlags.Constant
+                    : CSharpArgumentInfoFlags.None,
+                null
+            );
+            CSharpArgumentInfo y = CSharpArgumentInfo.Create(
+                constantRightArgument
+                    ? CSharpArgumentInfoFlags.Constant
+                    : CSharpArgumentInfoFlags.None,
+                null
+            );
+            CallSiteBinder binder = Binder.BinaryOperation(
+                checkedContext ? CSharpBinderFlags.CheckedContext : CSharpBinderFlags.None,
+                operation,
+                typeof(IntegerBinaryOperationTests),
+                new[] { x, y }
+            );
             return CallSite<Func<CallSite, object, object, object>>.Create(binder);
         }
 
-        private static readonly ExpressionType[] DividingOperations = {ExpressionType.Divide, ExpressionType.Modulo};
+        private static readonly ExpressionType[] DividingOperations =
+        {
+            ExpressionType.Divide,
+            ExpressionType.Modulo,
+        };
 
         public static IEnumerable<object[]> DivisionExtremes
         {
@@ -41,336 +62,426 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             {
                 foreach (ExpressionType op in DividingOperations)
                 {
-                    yield return new object[] {op, int.MinValue, -1};
-                    yield return new object[] {op, long.MinValue, -1L};
+                    yield return new object[] { op, int.MinValue, -1 };
+                    yield return new object[] { op, long.MinValue, -1L };
                 }
             }
         }
 
-        private static readonly int[] TestInt32Values = {0, 1, -1, 3, int.MinValue, int.MaxValue};
+        private static readonly int[] TestInt32Values = { 0, 1, -1, 3, int.MinValue, int.MaxValue };
 
-        public static IEnumerable<object[]> Int32DivisionByZero
-            => from x in TestInt32Values from o in DividingOperations select new object[] {o, x};
+        public static IEnumerable<object[]> Int32DivisionByZero =>
+            from x in TestInt32Values
+            from o in DividingOperations
+            select new object[] { o, x };
 
-        public static IEnumerable<object[]> Int32TestAdditions
-            => from x in TestInt32Values
+        public static IEnumerable<object[]> Int32TestAdditions =>
+            from x in TestInt32Values
             from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.Add, unchecked(x + y), x == 0 || unchecked(x < 0 ? x + y < y : x + y > y)};
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Add,
+                unchecked(x + y),
+                x == 0 || unchecked(x < 0 ? x + y < y : x + y > y),
+            };
 
-        public static IEnumerable<object[]> Int32TestAnds
-            => from x in TestInt32Values
+        public static IEnumerable<object[]> Int32TestAnds =>
+            from x in TestInt32Values
             from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.And, x & y, true};
+            select new object[] { x, y, ExpressionType.And, x & y, true };
 
-        public static IEnumerable<object[]> Int32TestDivisions
-            => from x in TestInt32Values
-            from y in TestInt32Values
-            where y != 0 && (x != int.MinValue || y != -1)
-            select new object[] {x, y, ExpressionType.Divide, x / y, true};
-
-        public static IEnumerable<object[]> Int32TestEquals
-            => from x in TestInt32Values
-            from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.Equal, x == y, true};
-
-        public static IEnumerable<object[]> Int32TestExclusiveOrs
-            => from x in TestInt32Values
-            from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.ExclusiveOr, x ^ y, true};
-
-        public static IEnumerable<object[]> Int32TestGreaterThans
-            => from x in TestInt32Values
-            from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.GreaterThan, x > y, true};
-
-        public static IEnumerable<object[]> Int32TestGreaterThanOrEquals
-            => from x in TestInt32Values
-            from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.GreaterThanOrEqual, x >= y, true};
-
-        public static IEnumerable<object[]> Int32TestLeftShifts
-            => from x in TestInt32Values
-            from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.LeftShift, x << y, true};
-
-        public static IEnumerable<object[]> Int32TestLessThans
-            => from x in TestInt32Values
-            from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.LessThan, x < y, true};
-
-        public static IEnumerable<object[]> Int32TestLessThanOrEquals
-            => from x in TestInt32Values
-            from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.LessThanOrEqual, x <= y, true};
-
-        public static IEnumerable<object[]> Int32TestModulos
-            => from x in TestInt32Values
+        public static IEnumerable<object[]> Int32TestDivisions =>
+            from x in TestInt32Values
             from y in TestInt32Values
             where y != 0 && (x != int.MinValue || y != -1)
-            select new object[] {x, y, ExpressionType.Modulo, x % y, true};
+            select new object[] { x, y, ExpressionType.Divide, x / y, true };
 
-        public static IEnumerable<object[]> Int32TestMultiplications
-            => from x in TestInt32Values
+        public static IEnumerable<object[]> Int32TestEquals =>
+            from x in TestInt32Values
             from y in TestInt32Values
-            select
-                new object[]
-                {
-                    x, y, ExpressionType.Multiply, unchecked(x * y),
-                    y == 0 || !(x == -1 && y == int.MinValue) && !(x == int.MinValue && y == -1) && unchecked(x * y / y) == x
-                };
+            select new object[] { x, y, ExpressionType.Equal, x == y, true };
 
-        public static IEnumerable<object[]> Int32TestNotEquals
-            => from x in TestInt32Values
+        public static IEnumerable<object[]> Int32TestExclusiveOrs =>
+            from x in TestInt32Values
             from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.NotEqual, x != y, true};
+            select new object[] { x, y, ExpressionType.ExclusiveOr, x ^ y, true };
 
-
-        public static IEnumerable<object[]> Int32TestRightShifts
-            => from x in TestInt32Values
+        public static IEnumerable<object[]> Int32TestGreaterThans =>
+            from x in TestInt32Values
             from y in TestInt32Values
-            select new object[] {x, y, ExpressionType.RightShift, x >> y, true};
+            select new object[] { x, y, ExpressionType.GreaterThan, x > y, true };
 
-
-        public static IEnumerable<object[]> Int32TestSubtractions
-            => from x in TestInt32Values
+        public static IEnumerable<object[]> Int32TestGreaterThanOrEquals =>
+            from x in TestInt32Values
             from y in TestInt32Values
-            select
-                new object[]
-                {
-                    x, y, ExpressionType.Subtract, unchecked(x - y),
-                    (x == 0 && y != int.MinValue) || y == 0 || unchecked(y > 0 ? x - y < x : x - y > x)
-                };
+            select new object[] { x, y, ExpressionType.GreaterThanOrEqual, x >= y, true };
 
-        private static readonly uint[] TestUInt32Values = {0, 1, 3, int.MaxValue, uint.MaxValue};
+        public static IEnumerable<object[]> Int32TestLeftShifts =>
+            from x in TestInt32Values
+            from y in TestInt32Values
+            select new object[] { x, y, ExpressionType.LeftShift, x << y, true };
 
-        public static IEnumerable<object[]> UInt32DivisionByZero
-            => from x in TestUInt32Values from o in DividingOperations select new object[] {o, x};
+        public static IEnumerable<object[]> Int32TestLessThans =>
+            from x in TestInt32Values
+            from y in TestInt32Values
+            select new object[] { x, y, ExpressionType.LessThan, x < y, true };
 
-        public static IEnumerable<object[]> UInt32TestAdditions
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.Add, unchecked(x + y), x == 0 || unchecked(x + y) > y};
+        public static IEnumerable<object[]> Int32TestLessThanOrEquals =>
+            from x in TestInt32Values
+            from y in TestInt32Values
+            select new object[] { x, y, ExpressionType.LessThanOrEqual, x <= y, true };
 
-        public static IEnumerable<object[]> UInt32TestAnds
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.And, x & y, true};
+        public static IEnumerable<object[]> Int32TestModulos =>
+            from x in TestInt32Values
+            from y in TestInt32Values
+            where y != 0 && (x != int.MinValue || y != -1)
+            select new object[] { x, y, ExpressionType.Modulo, x % y, true };
 
-        public static IEnumerable<object[]> UInt32TestDivisions
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            where y != 0
-            select new object[] {x, y, ExpressionType.Divide, x / y, true};
+        public static IEnumerable<object[]> Int32TestMultiplications =>
+            from x in TestInt32Values
+            from y in TestInt32Values
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Multiply,
+                unchecked(x * y),
+                y == 0
+                    || !(x == -1 && y == int.MinValue)
+                        && !(x == int.MinValue && y == -1)
+                        && unchecked(x * y / y) == x,
+            };
 
-        public static IEnumerable<object[]> UInt32TestEquals
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.Equal, x == y, true};
+        public static IEnumerable<object[]> Int32TestNotEquals =>
+            from x in TestInt32Values
+            from y in TestInt32Values
+            select new object[] { x, y, ExpressionType.NotEqual, x != y, true };
 
-        public static IEnumerable<object[]> UInt32TestExclusiveOrs
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.ExclusiveOr, x ^ y, true};
+        public static IEnumerable<object[]> Int32TestRightShifts =>
+            from x in TestInt32Values
+            from y in TestInt32Values
+            select new object[] { x, y, ExpressionType.RightShift, x >> y, true };
 
-        public static IEnumerable<object[]> UInt32TestGreaterThans
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.GreaterThan, x > y, true};
+        public static IEnumerable<object[]> Int32TestSubtractions =>
+            from x in TestInt32Values
+            from y in TestInt32Values
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Subtract,
+                unchecked(x - y),
+                (x == 0 && y != int.MinValue) || y == 0 || unchecked(y > 0 ? x - y < x : x - y > x),
+            };
 
-        public static IEnumerable<object[]> UInt32TestGreaterThanOrEquals
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.GreaterThanOrEqual, x >= y, true};
+        private static readonly uint[] TestUInt32Values = { 0, 1, 3, int.MaxValue, uint.MaxValue };
 
-        public static IEnumerable<object[]> UInt32TestLessThans
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.LessThan, x < y, true};
+        public static IEnumerable<object[]> UInt32DivisionByZero =>
+            from x in TestUInt32Values
+            from o in DividingOperations
+            select new object[] { o, x };
 
-        public static IEnumerable<object[]> UInt32TestLessThanOrEquals
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.LessThanOrEqual, x <= y, true};
-
-        public static IEnumerable<object[]> UInt32TestModulos
-            => from x in TestUInt32Values
-            from y in TestUInt32Values
-            where y != 0
-            select new object[] {x, y, ExpressionType.Modulo, x % y, true};
-
-        public static IEnumerable<object[]> UInt32TestMultiplications
-            => from c in new[] {true, false}
+        public static IEnumerable<object[]> UInt32TestAdditions =>
             from x in TestUInt32Values
             from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.Multiply, unchecked(x * y), y == 0 || unchecked(x * y / y) == x};
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Add,
+                unchecked(x + y),
+                x == 0 || unchecked(x + y) > y,
+            };
 
-        public static IEnumerable<object[]> UInt32TestNotEquals
-            => from x in TestUInt32Values
+        public static IEnumerable<object[]> UInt32TestAnds =>
+            from x in TestUInt32Values
             from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.NotEqual, x != y, true};
+            select new object[] { x, y, ExpressionType.And, x & y, true };
 
-        public static IEnumerable<object[]> UInt32TestSubtractions
-            => from x in TestUInt32Values
+        public static IEnumerable<object[]> UInt32TestDivisions =>
+            from x in TestUInt32Values
             from y in TestUInt32Values
-            select new object[] {x, y, ExpressionType.Subtract, unchecked(x - y), y == 0 || unchecked(y > 0 ? x - y < x : x - y > x)};
+            where y != 0
+            select new object[] { x, y, ExpressionType.Divide, x / y, true };
 
+        public static IEnumerable<object[]> UInt32TestEquals =>
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            select new object[] { x, y, ExpressionType.Equal, x == y, true };
 
-        private static readonly long[] TestInt64Values = {0, 1, -1, 3, long.MinValue, long.MaxValue};
+        public static IEnumerable<object[]> UInt32TestExclusiveOrs =>
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            select new object[] { x, y, ExpressionType.ExclusiveOr, x ^ y, true };
 
-        public static IEnumerable<object[]> Int64DivisionByZero
-            => from x in TestInt64Values from o in DividingOperations select new object[] {o, x};
+        public static IEnumerable<object[]> UInt32TestGreaterThans =>
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            select new object[] { x, y, ExpressionType.GreaterThan, x > y, true };
 
+        public static IEnumerable<object[]> UInt32TestGreaterThanOrEquals =>
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            select new object[] { x, y, ExpressionType.GreaterThanOrEqual, x >= y, true };
 
-        public static IEnumerable<object[]> Int64TestAdditions
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> UInt32TestLessThans =>
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            select new object[] { x, y, ExpressionType.LessThan, x < y, true };
+
+        public static IEnumerable<object[]> UInt32TestLessThanOrEquals =>
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            select new object[] { x, y, ExpressionType.LessThanOrEqual, x <= y, true };
+
+        public static IEnumerable<object[]> UInt32TestModulos =>
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            where y != 0
+            select new object[] { x, y, ExpressionType.Modulo, x % y, true };
+
+        public static IEnumerable<object[]> UInt32TestMultiplications =>
+            from c in new[] { true, false }
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Multiply,
+                unchecked(x * y),
+                y == 0 || unchecked(x * y / y) == x,
+            };
+
+        public static IEnumerable<object[]> UInt32TestNotEquals =>
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            select new object[] { x, y, ExpressionType.NotEqual, x != y, true };
+
+        public static IEnumerable<object[]> UInt32TestSubtractions =>
+            from x in TestUInt32Values
+            from y in TestUInt32Values
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Subtract,
+                unchecked(x - y),
+                y == 0 || unchecked(y > 0 ? x - y < x : x - y > x),
+            };
+
+        private static readonly long[] TestInt64Values =
+        {
+            0,
+            1,
+            -1,
+            3,
+            long.MinValue,
+            long.MaxValue,
+        };
+
+        public static IEnumerable<object[]> Int64DivisionByZero =>
+            from x in TestInt64Values
+            from o in DividingOperations
+            select new object[] { o, x };
+
+        public static IEnumerable<object[]> Int64TestAdditions =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select new object[] {x, y, ExpressionType.Add, unchecked(x + y), x == 0 || unchecked(x < 0 ? x + y < y : x + y > y)};
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Add,
+                unchecked(x + y),
+                x == 0 || unchecked(x < 0 ? x + y < y : x + y > y),
+            };
 
-        public static IEnumerable<object[]> Int64TestAnds
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestAnds =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select new object[] {x, y, ExpressionType.And, x & y, true};
+            select new object[] { x, y, ExpressionType.And, x & y, true };
 
-        public static IEnumerable<object[]> Int64TestDivisions
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestDivisions =>
+            from x in TestInt64Values
             from y in TestInt64Values
             where y != 0 && (x != long.MinValue || y != -1)
-            select new object[] {x, y, ExpressionType.Divide, x / y, true};
+            select new object[] { x, y, ExpressionType.Divide, x / y, true };
 
-        public static IEnumerable<object[]> Int64TestEquals
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestEquals =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select new object[] {x, y, ExpressionType.Equal, x == y, true};
+            select new object[] { x, y, ExpressionType.Equal, x == y, true };
 
-        public static IEnumerable<object[]> Int64TestExclusiveOrs
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestExclusiveOrs =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select new object[] {x, y, ExpressionType.ExclusiveOr, x ^ y, true};
+            select new object[] { x, y, ExpressionType.ExclusiveOr, x ^ y, true };
 
-        public static IEnumerable<object[]> Int64TestGreaterThans
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestGreaterThans =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select new object[] {x, y, ExpressionType.GreaterThan, x > y, true};
+            select new object[] { x, y, ExpressionType.GreaterThan, x > y, true };
 
-        public static IEnumerable<object[]> Int64TestGreaterThanOrEquals
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestGreaterThanOrEquals =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select new object[] {x, y, ExpressionType.GreaterThanOrEqual, x >= y, true};
+            select new object[] { x, y, ExpressionType.GreaterThanOrEqual, x >= y, true };
 
-        public static IEnumerable<object[]> Int64TestLessThans
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestLessThans =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select new object[] {x, y, ExpressionType.LessThan, x < y, true};
+            select new object[] { x, y, ExpressionType.LessThan, x < y, true };
 
-        public static IEnumerable<object[]> Int64TestLessThanOrEquals
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestLessThanOrEquals =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select new object[] {x, y, ExpressionType.LessThanOrEqual, x <= y, true};
+            select new object[] { x, y, ExpressionType.LessThanOrEqual, x <= y, true };
 
-        public static IEnumerable<object[]> Int64TestModulos
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestModulos =>
+            from x in TestInt64Values
             from y in TestInt64Values
             where y != 0 && (x != long.MinValue || y != -1)
-            select new object[] {x, y, ExpressionType.Modulo, x % y, true};
+            select new object[] { x, y, ExpressionType.Modulo, x % y, true };
 
-        public static IEnumerable<object[]> Int64TestMultiplications
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestMultiplications =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select
-                new object[]
-                {
-                    x, y, ExpressionType.Multiply, unchecked(x * y),
-                    y == 0 || !(x == -1 && y == long.MinValue) && !(x == long.MinValue && y == -1) && unchecked(x * y / y) == x
-                };
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Multiply,
+                unchecked(x * y),
+                y == 0
+                    || !(x == -1 && y == long.MinValue)
+                        && !(x == long.MinValue && y == -1)
+                        && unchecked(x * y / y) == x,
+            };
 
-        public static IEnumerable<object[]> Int64TestNotEquals
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestNotEquals =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select new object[] {x, y, ExpressionType.NotEqual, x != y, true};
+            select new object[] { x, y, ExpressionType.NotEqual, x != y, true };
 
-        public static IEnumerable<object[]> Int64TestSubtractions
-            => from x in TestInt64Values
+        public static IEnumerable<object[]> Int64TestSubtractions =>
+            from x in TestInt64Values
             from y in TestInt64Values
-            select
-                new object[]
-                {
-                    x, y, ExpressionType.Subtract, unchecked(x - y),
-                    (x == 0 && y != long.MinValue) || y == 0 || unchecked(y > 0 ? x - y < x : x - y > x)
-                };
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Subtract,
+                unchecked(x - y),
+                (x == 0 && y != long.MinValue)
+                    || y == 0
+                    || unchecked(y > 0 ? x - y < x : x - y > x),
+            };
 
-        private static readonly ulong[] TestUInt64Values = {0, 1, 3, long.MaxValue, ulong.MaxValue};
+        private static readonly ulong[] TestUInt64Values =
+        {
+            0,
+            1,
+            3,
+            long.MaxValue,
+            ulong.MaxValue,
+        };
 
-        public static IEnumerable<object[]> UInt64DivisionByZero
-            => from x in TestUInt64Values from o in DividingOperations select new object[] {o, x};
+        public static IEnumerable<object[]> UInt64DivisionByZero =>
+            from x in TestUInt64Values
+            from o in DividingOperations
+            select new object[] { o, x };
 
-
-        public static IEnumerable<object[]> UInt64TestAdditions
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.Add, unchecked(x + y), x == 0 || unchecked(x + y) > y};
-
-        public static IEnumerable<object[]> UInt64TestAnds
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.And, x & y, true};
-
-        public static IEnumerable<object[]> UInt64TestDivisions
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            where y != 0
-            select new object[] {x, y, ExpressionType.Divide, x / y, true};
-
-        public static IEnumerable<object[]> UInt64TestEquals
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.Equal, x == y, true};
-
-        public static IEnumerable<object[]> UInt64TestExclusiveOrs
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.ExclusiveOr, x ^ y, true};
-
-        public static IEnumerable<object[]> UInt64TestGreaterThans
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.GreaterThan, x > y, true};
-
-        public static IEnumerable<object[]> UInt64TestGreaterThanOrEquals
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.GreaterThanOrEqual, x >= y, true};
-
-        public static IEnumerable<object[]> UInt64TestLessThans
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.LessThan, x < y, true};
-
-        public static IEnumerable<object[]> UInt64TestLessThanOrEquals
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.LessThanOrEqual, x <= y, true};
-
-        public static IEnumerable<object[]> UInt64TestModulos
-            => from x in TestUInt64Values
-            from y in TestUInt64Values
-            where y != 0
-            select new object[] {x, y, ExpressionType.Modulo, x % y, true};
-
-        public static IEnumerable<object[]> UInt64TestMultiplications
-            => from c in new[] {true, false}
+        public static IEnumerable<object[]> UInt64TestAdditions =>
             from x in TestUInt64Values
             from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.Multiply, unchecked(x * y), y == 0 || unchecked(x * y / y) == x};
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Add,
+                unchecked(x + y),
+                x == 0 || unchecked(x + y) > y,
+            };
 
-        public static IEnumerable<object[]> UInt64TestNotEquals
-            => from x in TestUInt64Values
+        public static IEnumerable<object[]> UInt64TestAnds =>
+            from x in TestUInt64Values
             from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.NotEqual, x != y, true};
+            select new object[] { x, y, ExpressionType.And, x & y, true };
 
-        public static IEnumerable<object[]> UInt64TestSubtractions
-            => from x in TestUInt64Values
+        public static IEnumerable<object[]> UInt64TestDivisions =>
+            from x in TestUInt64Values
             from y in TestUInt64Values
-            select new object[] {x, y, ExpressionType.Subtract, unchecked(x - y), y == 0 || unchecked(y > 0 ? x - y < x : x - y > x)};
+            where y != 0
+            select new object[] { x, y, ExpressionType.Divide, x / y, true };
+
+        public static IEnumerable<object[]> UInt64TestEquals =>
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            select new object[] { x, y, ExpressionType.Equal, x == y, true };
+
+        public static IEnumerable<object[]> UInt64TestExclusiveOrs =>
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            select new object[] { x, y, ExpressionType.ExclusiveOr, x ^ y, true };
+
+        public static IEnumerable<object[]> UInt64TestGreaterThans =>
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            select new object[] { x, y, ExpressionType.GreaterThan, x > y, true };
+
+        public static IEnumerable<object[]> UInt64TestGreaterThanOrEquals =>
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            select new object[] { x, y, ExpressionType.GreaterThanOrEqual, x >= y, true };
+
+        public static IEnumerable<object[]> UInt64TestLessThans =>
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            select new object[] { x, y, ExpressionType.LessThan, x < y, true };
+
+        public static IEnumerable<object[]> UInt64TestLessThanOrEquals =>
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            select new object[] { x, y, ExpressionType.LessThanOrEqual, x <= y, true };
+
+        public static IEnumerable<object[]> UInt64TestModulos =>
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            where y != 0
+            select new object[] { x, y, ExpressionType.Modulo, x % y, true };
+
+        public static IEnumerable<object[]> UInt64TestMultiplications =>
+            from c in new[] { true, false }
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Multiply,
+                unchecked(x * y),
+                y == 0 || unchecked(x * y / y) == x,
+            };
+
+        public static IEnumerable<object[]> UInt64TestNotEquals =>
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            select new object[] { x, y, ExpressionType.NotEqual, x != y, true };
+
+        public static IEnumerable<object[]> UInt64TestSubtractions =>
+            from x in TestUInt64Values
+            from y in TestUInt64Values
+            select new object[]
+            {
+                x,
+                y,
+                ExpressionType.Subtract,
+                unchecked(x - y),
+                y == 0 || unchecked(y > 0 ? x - y < x : x - y > x),
+            };
 
         [Theory]
         [MemberData(nameof(Int32TestAdditions))]
@@ -427,7 +538,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [MemberData(nameof(UInt64TestMultiplications))]
         [MemberData(nameof(UInt64TestNotEquals))]
         [MemberData(nameof(UInt64TestSubtractions))]
-        public void RuntimeExpression(object x, object y, ExpressionType type, object result, bool shouldSucceedChecked)
+        public void RuntimeExpression(
+            object x,
+            object y,
+            ExpressionType type,
+            object result,
+            bool shouldSucceedChecked
+        )
         {
             var callsite = GetBinaryOperationCallSite(type, false, false, false);
             Assert.Equal(result, callsite.Target(callsite, x, y));
@@ -497,8 +614,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [MemberData(nameof(UInt64TestMultiplications))]
         [MemberData(nameof(UInt64TestNotEquals))]
         [MemberData(nameof(UInt64TestSubtractions))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
-        public void ConstantExpressions(object x, object y, ExpressionType type, object result, bool shouldSucceedChecked)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
+        public void ConstantExpressions(
+            object x,
+            object y,
+            ExpressionType type,
+            object result,
+            bool shouldSucceedChecked
+        )
         {
             var callsite = GetBinaryOperationCallSite(type, false, true, true);
             Assert.Equal(result, callsite.Target(callsite, x, y));
@@ -532,7 +658,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [MemberData(nameof(UInt32DivisionByZero))]
         [MemberData(nameof(Int64DivisionByZero))]
         [MemberData(nameof(UInt64DivisionByZero))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void ConstantDivideByZero(ExpressionType type, object x)
         {
             var callsite = GetBinaryOperationCallSite(type, false, true, true);
@@ -580,7 +709,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Theory, MemberData(nameof(SignedMinDivisionByMinusOneData))]
-        public void RuntimeDivideSignedMinimumByMinusOne(ExpressionType type, object dividend, object divisor)
+        public void RuntimeDivideSignedMinimumByMinusOne(
+            ExpressionType type,
+            object dividend,
+            object divisor
+        )
         {
             var callsite = GetBinaryOperationCallSite(type, false, false, false);
             Assert.Throws<OverflowException>(() => callsite.Target(callsite, dividend, divisor));
@@ -608,21 +741,48 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void NullDMO()
         {
-            BinaryOperationBinder binder = Binder.BinaryOperation(
-                CSharpBinderFlags.None,
-                ExpressionType.Add,
-                GetType(),
-                new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
-            ) as BinaryOperationBinder;
-            DynamicMetaObject dmo2 = new DynamicMetaObject(Expression.Parameter(typeof(object)), BindingRestrictions.Empty, 2);
-            DynamicMetaObject dmoNoVal = new DynamicMetaObject(Expression.Parameter(typeof(object)), BindingRestrictions.Empty);
-            AssertExtensions.Throws<ArgumentNullException>("target", () => binder.FallbackBinaryOperation(null, null));
-            AssertExtensions.Throws<ArgumentNullException>("arg", () => binder.FallbackBinaryOperation(dmo2, null));
-            AssertExtensions.Throws<ArgumentException>("target", () => binder.FallbackBinaryOperation(dmoNoVal, null));
-            AssertExtensions.Throws<ArgumentException>("arg", () => binder.FallbackBinaryOperation(dmo2, dmoNoVal));
+            BinaryOperationBinder binder =
+                Binder.BinaryOperation(
+                    CSharpBinderFlags.None,
+                    ExpressionType.Add,
+                    GetType(),
+                    new[]
+                    {
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
+                    }
+                ) as BinaryOperationBinder;
+            DynamicMetaObject dmo2 = new DynamicMetaObject(
+                Expression.Parameter(typeof(object)),
+                BindingRestrictions.Empty,
+                2
+            );
+            DynamicMetaObject dmoNoVal = new DynamicMetaObject(
+                Expression.Parameter(typeof(object)),
+                BindingRestrictions.Empty
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => binder.FallbackBinaryOperation(null, null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "arg",
+                () => binder.FallbackBinaryOperation(dmo2, null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "target",
+                () => binder.FallbackBinaryOperation(dmoNoVal, null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "arg",
+                () => binder.FallbackBinaryOperation(dmo2, dmoNoVal)
+            );
         }
     }
 }

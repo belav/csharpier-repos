@@ -21,7 +21,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelValidationNode[] childNodes = new[]
             {
                 new ModelValidationNode(metadata, "someKey0"),
-                new ModelValidationNode(metadata, "someKey1")
+                new ModelValidationNode(metadata, "someKey1"),
             };
 
             // Act
@@ -36,7 +36,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ModelValidationNode(null, "someKey"); }, "modelMetadata");
+                delegate
+                {
+                    new ModelValidationNode(null, "someKey");
+                },
+                "modelMetadata"
+            );
         }
 
         [Fact]
@@ -47,7 +52,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ModelValidationNode(metadata, null); }, "modelStateKey");
+                delegate
+                {
+                    new ModelValidationNode(metadata, null);
+                },
+                "modelStateKey"
+            );
         }
 
         [Fact]
@@ -80,23 +90,50 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 new ModelValidationNode(GetModelMetadata(), "key3"),
             };
 
-            ModelValidationNode parentNode1 = new ModelValidationNode(GetModelMetadata(), "parent1");
+            ModelValidationNode parentNode1 = new ModelValidationNode(
+                GetModelMetadata(),
+                "parent1"
+            );
             parentNode1.ChildNodes.Add(allChildNodes[0]);
-            parentNode1.Validating += delegate { log.Add("Validating parent1."); };
-            parentNode1.Validated += delegate { log.Add("Validated parent1."); };
+            parentNode1.Validating += delegate
+            {
+                log.Add("Validating parent1.");
+            };
+            parentNode1.Validated += delegate
+            {
+                log.Add("Validated parent1.");
+            };
 
-            ModelValidationNode parentNode2 = new ModelValidationNode(GetModelMetadata(), "parent2");
+            ModelValidationNode parentNode2 = new ModelValidationNode(
+                GetModelMetadata(),
+                "parent2"
+            );
             parentNode2.ChildNodes.Add(allChildNodes[1]);
             parentNode2.ChildNodes.Add(allChildNodes[2]);
-            parentNode2.Validating += delegate { log.Add("Validating parent2."); };
-            parentNode2.Validated += delegate { log.Add("Validated parent2."); };
+            parentNode2.Validating += delegate
+            {
+                log.Add("Validating parent2.");
+            };
+            parentNode2.Validated += delegate
+            {
+                log.Add("Validated parent2.");
+            };
 
             // Act
             parentNode1.CombineWith(parentNode2);
             parentNode1.Validate(new ControllerContext { Controller = new EmptyController() });
 
             // Assert
-            Assert.Equal(new[] { "Validating parent1.", "Validating parent2.", "Validated parent1.", "Validated parent2." }, log.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    "Validating parent1.",
+                    "Validating parent2.",
+                    "Validated parent1.",
+                    "Validated parent2.",
+                },
+                log.ToArray()
+            );
             Assert.Equal(allChildNodes, parentNode1.ChildNodes.ToArray());
         }
 
@@ -113,21 +150,36 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 new ModelValidationNode(GetModelMetadata(), "key3"),
             };
 
-            ModelValidationNode[] expectedChildNodes = new[]
+            ModelValidationNode[] expectedChildNodes = new[] { allChildNodes[0] };
+
+            ModelValidationNode parentNode1 = new ModelValidationNode(
+                GetModelMetadata(),
+                "parent1"
+            );
+            parentNode1.ChildNodes.Add(allChildNodes[0]);
+            parentNode1.Validating += delegate
             {
-                allChildNodes[0]
+                log.Add("Validating parent1.");
+            };
+            parentNode1.Validated += delegate
+            {
+                log.Add("Validated parent1.");
             };
 
-            ModelValidationNode parentNode1 = new ModelValidationNode(GetModelMetadata(), "parent1");
-            parentNode1.ChildNodes.Add(allChildNodes[0]);
-            parentNode1.Validating += delegate { log.Add("Validating parent1."); };
-            parentNode1.Validated += delegate { log.Add("Validated parent1."); };
-
-            ModelValidationNode parentNode2 = new ModelValidationNode(GetModelMetadata(), "parent2");
+            ModelValidationNode parentNode2 = new ModelValidationNode(
+                GetModelMetadata(),
+                "parent2"
+            );
             parentNode2.ChildNodes.Add(allChildNodes[1]);
             parentNode2.ChildNodes.Add(allChildNodes[2]);
-            parentNode2.Validating += delegate { log.Add("Validating parent2."); };
-            parentNode2.Validated += delegate { log.Add("Validated parent2."); };
+            parentNode2.Validating += delegate
+            {
+                log.Add("Validating parent2.");
+            };
+            parentNode2.Validated += delegate
+            {
+                log.Add("Validated parent2.");
+            };
             parentNode2.SuppressValidation = true;
 
             // Act
@@ -155,21 +207,42 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
 
-            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(() => model, model.GetType(), "ValidStringProperty");
-            node.ChildNodes.Add(new ModelValidationNode(childMetadata, "theKey.ValidStringProperty"));
+            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
+                () => model,
+                model.GetType(),
+                "ValidStringProperty"
+            );
+            node.ChildNodes.Add(
+                new ModelValidationNode(childMetadata, "theKey.ValidStringProperty")
+            );
 
-            node.Validating += delegate { log.Add("In OnValidating()"); };
-            node.Validated += delegate { log.Add("In OnValidated()"); };
+            node.Validating += delegate
+            {
+                log.Add("In OnValidating()");
+            };
+            node.Validated += delegate
+            {
+                log.Add("In OnValidated()");
+            };
 
             // Act
             node.Validate(controllerContext);
 
             // Assert
-            Assert.Equal(new[] { "In OnValidating()", "In IDataErrorInfo.get_Item('ValidStringProperty')", "In IDataErrorInfo.get_Error()", "In OnValidated()" }, log.ToArray());
+            Assert.Equal(
+                new[]
+                {
+                    "In OnValidating()",
+                    "In IDataErrorInfo.get_Item('ValidStringProperty')",
+                    "In IDataErrorInfo.get_Error()",
+                    "In OnValidated()",
+                },
+                log.ToArray()
+            );
         }
 
         [Fact]
@@ -186,7 +259,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ModelValidationNode node = new ModelValidationNode(modelMetadata1, "theKey");
             node.ChildNodes.Add(new ModelValidationNode(modelMetadata2, "theKey.SomeProperty"));
@@ -211,22 +284,50 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
 
-            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(() => model, model.GetType(), "InvalidStringProperty");
-            node.ChildNodes.Add(new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty"));
+            ModelMetadata childMetadata = new EmptyModelMetadataProvider().GetMetadataForProperty(
+                () => model,
+                model.GetType(),
+                "InvalidStringProperty"
+            );
+            node.ChildNodes.Add(
+                new ModelValidationNode(childMetadata, "theKey.InvalidStringProperty")
+            );
 
-            node.Validating += delegate { log.Add("In OnValidating()"); };
-            node.Validated += delegate { log.Add("In OnValidated()"); };
+            node.Validating += delegate
+            {
+                log.Add("In OnValidating()");
+            };
+            node.Validated += delegate
+            {
+                log.Add("In OnValidated()");
+            };
 
             // Act
             node.Validate(controllerContext);
 
             // Assert
-            Assert.Equal(new[] { "In OnValidating()", "In IDataErrorInfo.get_Item('InvalidStringProperty')", "In OnValidated()" }, log.ToArray());
-            Assert.Equal("Sample error message", controllerContext.Controller.ViewData.ModelState["theKey.InvalidStringProperty"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                new[]
+                {
+                    "In OnValidating()",
+                    "In IDataErrorInfo.get_Item('InvalidStringProperty')",
+                    "In OnValidated()",
+                },
+                log.ToArray()
+            );
+            Assert.Equal(
+                "Sample error message",
+                controllerContext
+                    .Controller
+                    .ViewData
+                    .ModelState["theKey.InvalidStringProperty"]
+                    .Errors[0]
+                    .ErrorMessage
+            );
         }
 
         [Fact]
@@ -239,7 +340,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey");
 
@@ -248,7 +349,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 log.Add("In OnValidating()");
                 e.Cancel = true;
             };
-            node.Validated += delegate { log.Add("In OnValidated()"); };
+            node.Validated += delegate
+            {
+                log.Add("In OnValidated()");
+            };
 
             // Act
             node.Validate(controllerContext);
@@ -267,15 +371,21 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey")
             {
-                SuppressValidation = true
+                SuppressValidation = true,
             };
 
-            node.Validating += (sender, e) => { log.Add("In OnValidating()"); };
-            node.Validated += delegate { log.Add("In OnValidated()"); };
+            node.Validating += (sender, e) =>
+            {
+                log.Add("In OnValidating()");
+            };
+            node.Validated += delegate
+            {
+                log.Add("In OnValidated()");
+            };
 
             // Act
             node.Validate(controllerContext);
@@ -292,7 +402,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { node.Validate(null); }, "controllerContext");
+                delegate
+                {
+                    node.Validate(null);
+                },
+                "controllerContext"
+            );
         }
 
         [Fact]
@@ -302,30 +417,53 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ValidateAllPropertiesModel model = new ValidateAllPropertiesModel
             {
-                RequiredString = null /* error */,
-                RangedInt = 0 /* error */,
-                ValidString = "dog"
+                RequiredString =
+                    null /* error */
+                ,
+                RangedInt =
+                    0 /* error */
+                ,
+                ValidString = "dog",
             };
 
             ModelMetadata modelMetadata = GetModelMetadata(model);
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey")
             {
-                ValidateAllProperties = true
+                ValidateAllProperties = true,
             };
 
-            controllerContext.Controller.ViewData.ModelState.AddModelError("theKey.RequiredString.Dummy", "existing Error Text");
+            controllerContext.Controller.ViewData.ModelState.AddModelError(
+                "theKey.RequiredString.Dummy",
+                "existing Error Text"
+            );
 
             // Act
             node.Validate(controllerContext);
 
             // Assert
             Assert.Null(controllerContext.Controller.ViewData.ModelState["theKey.RequiredString"]);
-            Assert.Equal("existing Error Text", controllerContext.Controller.ViewData.ModelState["theKey.RequiredString.Dummy"].Errors[0].ErrorMessage);
-            Assert.Equal("The field RangedInt must be between 10 and 30.", controllerContext.Controller.ViewData.ModelState["theKey.RangedInt"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                "existing Error Text",
+                controllerContext
+                    .Controller
+                    .ViewData
+                    .ModelState["theKey.RequiredString.Dummy"]
+                    .Errors[0]
+                    .ErrorMessage
+            );
+            Assert.Equal(
+                "The field RangedInt must be between 10 and 30.",
+                controllerContext
+                    .Controller
+                    .ViewData
+                    .ModelState["theKey.RangedInt"]
+                    .Errors[0]
+                    .ErrorMessage
+            );
             Assert.Null(controllerContext.Controller.ViewData.ModelState["theKey.ValidString"]);
             Assert.Null(controllerContext.Controller.ViewData.ModelState["theKey"]);
         }
@@ -338,13 +476,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private static ModelMetadata GetModelMetadata(object o)
         {
-            DataAnnotationsModelMetadataProvider provider = new DataAnnotationsModelMetadataProvider();
+            DataAnnotationsModelMetadataProvider provider =
+                new DataAnnotationsModelMetadataProvider();
             return provider.GetMetadataForType(() => o, o.GetType());
         }
 
-        private sealed class EmptyController : Controller
-        {
-        }
+        private sealed class EmptyController : Controller { }
 
         private sealed class LoggingDataErrorInfoModel : IDataErrorInfo
         {

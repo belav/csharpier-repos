@@ -10,9 +10,7 @@ namespace System.Reflection.PortableExecutable
     /// </summary>
     public abstract class ResourceSectionBuilder
     {
-        protected ResourceSectionBuilder()
-        {
-        }
+        protected ResourceSectionBuilder() { }
 
         protected internal abstract void Serialize(BlobBuilder builder, SectionLocation location);
     }

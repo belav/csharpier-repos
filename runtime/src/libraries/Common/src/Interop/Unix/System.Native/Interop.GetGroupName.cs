@@ -20,13 +20,21 @@ internal static partial class Interop
         /// <param name="gid">The group ID.</param>
         /// <param name="groupName">When this method returns true, gets the value of the group name associated with the specified id. On failure, it is null.</param>
         /// <returns>On success, returns true. On failure, returns false.</returns>
-        internal static bool TryGetGroupName(uint gid, [NotNullWhen(returnValue: true)] out string? groupName)
+        internal static bool TryGetGroupName(
+            uint gid,
+            [NotNullWhen(returnValue: true)] out string? groupName
+        )
         {
             groupName = GetGroupName(gid);
             return groupName != null;
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetGroupName", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetGroupName",
+            StringMarshalling = StringMarshalling.Utf8,
+            SetLastError = true
+        )]
         private static unsafe partial string? GetGroupName(uint uid);
     }
 }

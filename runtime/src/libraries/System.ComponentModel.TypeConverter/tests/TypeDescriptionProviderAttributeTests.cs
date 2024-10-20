@@ -19,7 +19,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullTypeName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("typeName", () => new TypeDescriptionProviderAttribute((string)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeName",
+                () => new TypeDescriptionProviderAttribute((string)null)
+            );
         }
 
         [Theory]
@@ -34,7 +37,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new TypeDescriptionProviderAttribute((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new TypeDescriptionProviderAttribute((Type)null)
+            );
         }
     }
 }

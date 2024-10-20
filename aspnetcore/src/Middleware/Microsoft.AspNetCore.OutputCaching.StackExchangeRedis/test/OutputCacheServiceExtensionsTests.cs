@@ -20,7 +20,9 @@ public class OutputCacheServiceExtensionsTests
         services.AddStackExchangeRedisOutputCache(options => { });
 
         // Assert
-        var outputCacheStore = services.FirstOrDefault(desc => desc.ServiceType == typeof(IOutputCacheStore));
+        var outputCacheStore = services.FirstOrDefault(desc =>
+            desc.ServiceType == typeof(IOutputCacheStore)
+        );
 
         Assert.NotNull(outputCacheStore);
         Assert.Equal(ServiceLifetime.Singleton, outputCacheStore.Lifetime);
@@ -39,11 +41,15 @@ public class OutputCacheServiceExtensionsTests
         // Assert
         var serviceProvider = services.BuildServiceProvider();
 
-        var distributedCache = services.FirstOrDefault(desc => desc.ServiceType == typeof(IOutputCacheStore));
+        var distributedCache = services.FirstOrDefault(desc =>
+            desc.ServiceType == typeof(IOutputCacheStore)
+        );
 
         Assert.NotNull(distributedCache);
         Assert.Equal(ServiceLifetime.Scoped, distributedCache.Lifetime);
-        Assert.IsAssignableFrom<RedisOutputCacheStore>(serviceProvider.GetRequiredService<IOutputCacheStore>());
+        Assert.IsAssignableFrom<RedisOutputCacheStore>(
+            serviceProvider.GetRequiredService<IOutputCacheStore>()
+        );
     }
 
     [Fact]
@@ -110,11 +116,15 @@ public class OutputCacheServiceExtensionsTests
         // Assert
         var serviceProvider = services.BuildServiceProvider();
 
-        var distributedCache = services.FirstOrDefault(desc => desc.ServiceType == typeof(IOutputCacheStore));
+        var distributedCache = services.FirstOrDefault(desc =>
+            desc.ServiceType == typeof(IOutputCacheStore)
+        );
 
         Assert.NotNull(distributedCache);
         Assert.Equal(ServiceLifetime.Scoped, distributedCache.Lifetime);
-        Assert.IsAssignableFrom<RedisOutputCacheStore>(serviceProvider.GetRequiredService<IOutputCacheStore>());
+        Assert.IsAssignableFrom<RedisOutputCacheStore>(
+            serviceProvider.GetRequiredService<IOutputCacheStore>()
+        );
 
         loggerFactory.Verify();
     }

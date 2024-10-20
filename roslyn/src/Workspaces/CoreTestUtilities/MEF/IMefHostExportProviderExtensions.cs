@@ -12,10 +12,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     internal static class IMefHostExportProviderExtensions
     {
-        public static TExtension GetExportedValue<TExtension>(this IMefHostExportProvider provider)
-            => provider.GetExports<TExtension>().Single().Value;
+        public static TExtension GetExportedValue<TExtension>(
+            this IMefHostExportProvider provider
+        ) => provider.GetExports<TExtension>().Single().Value;
 
-        public static IEnumerable<TExtension> GetExportedValues<TExtension>(this IMefHostExportProvider provider)
-            => provider.GetExports<TExtension>().Select(l => l.Value);
+        public static IEnumerable<TExtension> GetExportedValues<TExtension>(
+            this IMefHostExportProvider provider
+        ) => provider.GetExports<TExtension>().Select(l => l.Value);
     }
 }

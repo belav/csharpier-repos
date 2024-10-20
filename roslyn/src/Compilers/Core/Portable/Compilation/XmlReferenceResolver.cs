@@ -12,9 +12,7 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     public abstract class XmlReferenceResolver
     {
-        protected XmlReferenceResolver()
-        {
-        }
+        protected XmlReferenceResolver() { }
 
         public abstract override bool Equals(object? other);
         public abstract override int GetHashCode();
@@ -42,7 +40,9 @@ namespace Microsoft.CodeAnalysis
 
             if (stream == null || !stream.CanRead)
             {
-                throw new InvalidOperationException(CodeAnalysisResources.ReferenceResolverShouldReturnReadableNonNullStream);
+                throw new InvalidOperationException(
+                    CodeAnalysisResources.ReferenceResolverShouldReturnReadableNonNullStream
+                );
             }
 
             return stream;

@@ -23,7 +23,11 @@ public readonly struct CascadingParameterInfo
     /// </summary>
     public Type PropertyType { get; }
 
-    internal CascadingParameterInfo(CascadingParameterAttributeBase attribute, string propertyName, Type propertyType)
+    internal CascadingParameterInfo(
+        CascadingParameterAttributeBase attribute,
+        string propertyName,
+        Type propertyType
+    )
     {
         Attribute = attribute;
         PropertyName = propertyName;

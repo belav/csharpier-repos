@@ -17,25 +17,51 @@ namespace System.Net.Security.Tests
 {
     public class NegotiateAuthenticationTests
     {
-        private static bool IsNtlmAvailable => Capability.IsNtlmInstalled() || OperatingSystem.IsAndroid() || OperatingSystem.IsTvOS();
+        private static bool IsNtlmAvailable =>
+            Capability.IsNtlmInstalled() || OperatingSystem.IsAndroid() || OperatingSystem.IsTvOS();
         private static bool IsNtlmUnavailable => !IsNtlmAvailable;
 
-        private static NetworkCredential s_testCredentialRight = new NetworkCredential("rightusername", "rightpassword");
-        private static NetworkCredential s_testCredentialWrong = new NetworkCredential("rightusername", "wrongpassword");
+        private static NetworkCredential s_testCredentialRight = new NetworkCredential(
+            "rightusername",
+            "rightpassword"
+        );
+        private static NetworkCredential s_testCredentialWrong = new NetworkCredential(
+            "rightusername",
+            "wrongpassword"
+        );
         private static readonly byte[] s_Hello = "Hello"u8.ToArray();
 
         [Fact]
         public void Constructor_Overloads_Validation()
         {
-            AssertExtensions.Throws<ArgumentNullException>("clientOptions", () => { new NegotiateAuthentication((NegotiateAuthenticationClientOptions)null); });
-            AssertExtensions.Throws<ArgumentNullException>("serverOptions", () => { new NegotiateAuthentication((NegotiateAuthenticationServerOptions)null); });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "clientOptions",
+                () =>
+                {
+                    new NegotiateAuthentication((NegotiateAuthenticationClientOptions)null);
+                }
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "serverOptions",
+                () =>
+                {
+                    new NegotiateAuthentication((NegotiateAuthenticationServerOptions)null);
+                }
+            );
         }
 
         [Fact]
         public void RemoteIdentity_ThrowsOnUnauthenticated()
         {
-            NegotiateAuthenticationClientOptions clientOptions = new NegotiateAuthenticationClientOptions { Credential = s_testCredentialRight, TargetName = "HTTP/foo" };
-            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(clientOptions);
+            NegotiateAuthenticationClientOptions clientOptions =
+                new NegotiateAuthenticationClientOptions
+                {
+                    Credential = s_testCredentialRight,
+                    TargetName = "HTTP/foo",
+                };
+            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(
+                clientOptions
+            );
             Assert.Throws<InvalidOperationException>(() => negotiateAuthentication.RemoteIdentity);
         }
 
@@ -49,8 +75,9 @@ namespace System.Net.Security.Tests
                     Package = "NTLM",
                     Credential = s_testCredentialRight,
                     TargetName = "HTTP/foo",
-                    RequiredProtectionLevel = ProtectionLevel.Sign
-                });
+                    RequiredProtectionLevel = ProtectionLevel.Sign,
+                }
+            );
 
             DoNtlmExchange(fakeNtlmServer, negotiateAuthentication);
 
@@ -60,15 +87,25 @@ namespace System.Net.Security.Tests
             using (remoteIdentity as IDisposable)
             {
                 negotiateAuthentication.Dispose();
-                Assert.Throws<InvalidOperationException>(() => negotiateAuthentication.RemoteIdentity);
+                Assert.Throws<InvalidOperationException>(
+                    () => negotiateAuthentication.RemoteIdentity
+                );
             }
         }
 
         [Fact]
         public void Package_Unsupported()
         {
-            NegotiateAuthenticationClientOptions clientOptions = new NegotiateAuthenticationClientOptions { Package = "INVALID", Credential = s_testCredentialRight, TargetName = "HTTP/foo" };
-            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(clientOptions);
+            NegotiateAuthenticationClientOptions clientOptions =
+                new NegotiateAuthenticationClientOptions
+                {
+                    Package = "INVALID",
+                    Credential = s_testCredentialRight,
+                    TargetName = "HTTP/foo",
+                };
+            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(
+                clientOptions
+            );
             NegotiateAuthenticationStatusCode statusCode;
             negotiateAuthentication.GetOutgoingBlob((byte[]?)null, out statusCode);
             Assert.Equal(NegotiateAuthenticationStatusCode.Unsupported, statusCode);
@@ -77,8 +114,16 @@ namespace System.Net.Security.Tests
         [ConditionalFact(nameof(IsNtlmAvailable))]
         public void Package_Supported_NTLM()
         {
-            NegotiateAuthenticationClientOptions clientOptions = new NegotiateAuthenticationClientOptions { Package = "NTLM", Credential = s_testCredentialRight, TargetName = "HTTP/foo" };
-            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(clientOptions);
+            NegotiateAuthenticationClientOptions clientOptions =
+                new NegotiateAuthenticationClientOptions
+                {
+                    Package = "NTLM",
+                    Credential = s_testCredentialRight,
+                    TargetName = "HTTP/foo",
+                };
+            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(
+                clientOptions
+            );
             NegotiateAuthenticationStatusCode statusCode;
             negotiateAuthentication.GetOutgoingBlob((byte[]?)null, out statusCode);
             Assert.Equal(NegotiateAuthenticationStatusCode.ContinueNeeded, statusCode);
@@ -87,20 +132,39 @@ namespace System.Net.Security.Tests
         [ConditionalFact(nameof(IsNtlmUnavailable))]
         public void Package_Unsupported_NTLM()
         {
-            NegotiateAuthenticationClientOptions clientOptions = new NegotiateAuthenticationClientOptions { Package = "NTLM", Credential = s_testCredentialRight, TargetName = "HTTP/foo" };
-            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(clientOptions);
+            NegotiateAuthenticationClientOptions clientOptions =
+                new NegotiateAuthenticationClientOptions
+                {
+                    Package = "NTLM",
+                    Credential = s_testCredentialRight,
+                    TargetName = "HTTP/foo",
+                };
+            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(
+                clientOptions
+            );
             NegotiateAuthenticationStatusCode statusCode;
             negotiateAuthentication.GetOutgoingBlob((byte[]?)null, out statusCode);
             Assert.Equal(NegotiateAuthenticationStatusCode.Unsupported, statusCode);
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Windows, "The test is specific to GSSAPI / Managed implementations of NegotiateAuthentication")]
+        [SkipOnPlatform(
+            TestPlatforms.Windows,
+            "The test is specific to GSSAPI / Managed implementations of NegotiateAuthentication"
+        )]
         public void DefaultNetworkCredentials_NTLM_DoesNotThrow()
         {
-            NegotiateAuthenticationClientOptions clientOptions = new NegotiateAuthenticationClientOptions { Package = "NTLM", Credential = CredentialCache.DefaultNetworkCredentials, TargetName = "HTTP/foo" };
+            NegotiateAuthenticationClientOptions clientOptions =
+                new NegotiateAuthenticationClientOptions
+                {
+                    Package = "NTLM",
+                    Credential = CredentialCache.DefaultNetworkCredentials,
+                    TargetName = "HTTP/foo",
+                };
             // Assert.DoesNotThrow
-            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(clientOptions);
+            NegotiateAuthentication negotiateAuthentication = new NegotiateAuthentication(
+                clientOptions
+            );
             NegotiateAuthenticationStatusCode statusCode;
             negotiateAuthentication.GetOutgoingBlob((byte[]?)null, out statusCode);
             Assert.Equal(NegotiateAuthenticationStatusCode.UnknownCredentials, statusCode);
@@ -134,27 +198,31 @@ namespace System.Net.Security.Tests
             // Domain: (empty) (should be "Domain" but the fake server doesn't check)
             // Workstation: (empty) (should be "COMPUTER" but the fake server doesn't check)
             // Version: 6.1.7600 / 15
-            byte[] negotiateBlob = Convert.FromHexString("4e544c4d535350000100000033828ae2000000000000000000000000000000000601b01d0000000f");
+            byte[] negotiateBlob = Convert.FromHexString(
+                "4e544c4d535350000100000033828ae2000000000000000000000000000000000601b01d0000000f"
+            );
             byte[]? challengeBlob = fakeNtlmServer.GetOutgoingBlob(negotiateBlob);
 
             // CHALLENGE_MESSAGE from 4.2.4.3 Messages
             byte[] expectedChallengeBlob = Convert.FromHexString(
-                "4e544c4d53535000020000000c000c003800000033828ae20123456789abcdef" +
-                "00000000000000002400240044000000060070170000000f5300650072007600" +
-                "6500720002000c0044006f006d00610069006e0001000c005300650072007600" +
-                "6500720000000000");
+                "4e544c4d53535000020000000c000c003800000033828ae20123456789abcdef"
+                    + "00000000000000002400240044000000060070170000000f5300650072007600"
+                    + "6500720002000c0044006f006d00610069006e0001000c005300650072007600"
+                    + "6500720000000000"
+            );
             Assert.Equal(expectedChallengeBlob, challengeBlob);
 
             // AUTHENTICATE_MESSAGE from 4.2.4.3 Messages
             byte[] authenticateBlob = Convert.FromHexString(
-                "4e544c4d5353500003000000180018006c00000054005400840000000c000c00" +
-                "480000000800080054000000100010005c00000010001000d8000000358288e2" +
-                "0501280a0000000f44006f006d00610069006e00550073006500720043004f00" +
-                "4d005000550054004500520086c35097ac9cec102554764a57cccc19aaaaaaaa" +
-                "aaaaaaaa68cd0ab851e51c96aabc927bebef6a1c010100000000000000000000" +
-                "00000000aaaaaaaaaaaaaaaa0000000002000c0044006f006d00610069006e00" +
-                "01000c005300650072007600650072000000000000000000c5dad2544fc97990" +
-                "94ce1ce90bc9d03e");
+                "4e544c4d5353500003000000180018006c00000054005400840000000c000c00"
+                    + "480000000800080054000000100010005c00000010001000d8000000358288e2"
+                    + "0501280a0000000f44006f006d00610069006e00550073006500720043004f00"
+                    + "4d005000550054004500520086c35097ac9cec102554764a57cccc19aaaaaaaa"
+                    + "aaaaaaaa68cd0ab851e51c96aabc927bebef6a1c010100000000000000000000"
+                    + "00000000aaaaaaaaaaaaaaaa0000000002000c0044006f006d00610069006e00"
+                    + "01000c005300650072007600650072000000000000000000c5dad2544fc97990"
+                    + "94ce1ce90bc9d03e"
+            );
             byte[]? empty = fakeNtlmServer.GetOutgoingBlob(authenticateBlob);
             Assert.Null(empty);
             Assert.True(fakeNtlmServer.IsAuthenticated);
@@ -164,8 +232,14 @@ namespace System.Net.Security.Tests
         public static IEnumerable<object[]> TestCredentials()
         {
             yield return new object[] { new NetworkCredential("rightusername", "rightpassword") };
-            yield return new object[] { new NetworkCredential("rightusername", "rightpassword", "rightdomain") };
-            yield return new object[] { new NetworkCredential("rightusername@rightdomain.com", "rightpassword") };
+            yield return new object[]
+            {
+                new NetworkCredential("rightusername", "rightpassword", "rightdomain"),
+            };
+            yield return new object[]
+            {
+                new NetworkCredential("rightusername@rightdomain.com", "rightpassword"),
+            };
         }
 
         [ConditionalTheory(nameof(IsNtlmAvailable))]
@@ -179,8 +253,9 @@ namespace System.Net.Security.Tests
                     Package = "NTLM",
                     Credential = credential,
                     TargetName = "HTTP/foo",
-                    RequiredProtectionLevel = ProtectionLevel.Sign
-                });
+                    RequiredProtectionLevel = ProtectionLevel.Sign,
+                }
+            );
 
             DoNtlmExchange(fakeNtlmServer, ntAuth);
 
@@ -203,8 +278,9 @@ namespace System.Net.Security.Tests
                     Package = "NTLM",
                     Credential = s_testCredentialWrong,
                     TargetName = "HTTP/foo",
-                    RequiredProtectionLevel = ProtectionLevel.Sign
-                });
+                    RequiredProtectionLevel = ProtectionLevel.Sign,
+                }
+            );
 
             DoNtlmExchange(fakeNtlmServer, ntAuth);
 
@@ -221,8 +297,9 @@ namespace System.Net.Security.Tests
                     Package = "NTLM",
                     Credential = s_testCredentialRight,
                     TargetName = "HTTP/foo",
-                    RequiredProtectionLevel = ProtectionLevel.EncryptAndSign
-                });
+                    RequiredProtectionLevel = ProtectionLevel.EncryptAndSign,
+                }
+            );
 
             DoNtlmExchange(fakeNtlmServer, ntAuth);
 
@@ -238,7 +315,7 @@ namespace System.Net.Security.Tests
             fakeNtlmServer.Unwrap(output.WrittenSpan, temp);
             Assert.Equal(s_Hello, temp);
 
-            // Test creating signature on server side and decoding it with VerifySignature on client side 
+            // Test creating signature on server side and decoding it with VerifySignature on client side
             byte[] serverSignedMessage = new byte[16 + s_Hello.Length];
             fakeNtlmServer.Wrap(s_Hello, serverSignedMessage);
             output.Clear();
@@ -270,16 +347,25 @@ namespace System.Net.Security.Tests
         public void NegotiateCorrectExchangeTest(bool requestMIC, bool requestConfidentiality)
         {
             // Older versions of gss-ntlmssp on Linux generate MIC at incorrect offset unless ForceNegotiateVersion is specified
-            using FakeNtlmServer fakeNtlmServer = new FakeNtlmServer(s_testCredentialRight) { ForceNegotiateVersion = true };
-            FakeNegotiateServer fakeNegotiateServer = new FakeNegotiateServer(fakeNtlmServer) { RequestMIC = requestMIC };
+            using FakeNtlmServer fakeNtlmServer = new FakeNtlmServer(s_testCredentialRight)
+            {
+                ForceNegotiateVersion = true,
+            };
+            FakeNegotiateServer fakeNegotiateServer = new FakeNegotiateServer(fakeNtlmServer)
+            {
+                RequestMIC = requestMIC,
+            };
             NegotiateAuthentication ntAuth = new NegotiateAuthentication(
                 new NegotiateAuthenticationClientOptions
                 {
                     Package = "Negotiate",
                     Credential = s_testCredentialRight,
                     TargetName = "HTTP/foo",
-                    RequiredProtectionLevel = requestConfidentiality ? ProtectionLevel.EncryptAndSign : ProtectionLevel.Sign
-                });
+                    RequiredProtectionLevel = requestConfidentiality
+                        ? ProtectionLevel.EncryptAndSign
+                        : ProtectionLevel.Sign,
+                }
+            );
 
             byte[]? clientBlob = null;
             byte[]? serverBlob = null;
@@ -309,8 +395,7 @@ namespace System.Net.Security.Tests
                 {
                     Assert.Fail(statusCode.ToString());
                 }
-            }
-            while (!ntAuth.IsAuthenticated);
+            } while (!ntAuth.IsAuthenticated);
         }
     }
 }

@@ -18,7 +18,11 @@ namespace Microsoft.AspNetCore.Mvc.Routing;
 /// actions defined by the controller.
 /// </para>
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = true,
+    Inherited = true
+)]
 public abstract class RouteValueAttribute : Attribute, IRouteValueProvider
 {
     /// <summary>
@@ -26,9 +30,7 @@ public abstract class RouteValueAttribute : Attribute, IRouteValueProvider
     /// </summary>
     /// <param name="routeKey">The route value key.</param>
     /// <param name="routeValue">The expected route value.</param>
-    protected RouteValueAttribute(
-        string routeKey,
-        string routeValue)
+    protected RouteValueAttribute(string routeKey, string routeValue)
     {
         ArgumentNullException.ThrowIfNull(routeKey);
         ArgumentNullException.ThrowIfNull(routeValue);

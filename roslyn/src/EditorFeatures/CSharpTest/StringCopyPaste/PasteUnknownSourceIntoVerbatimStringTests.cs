@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = @\"\n[||]\"",
                 afterUndo: """
                 var x = @"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = @"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -55,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = @\"\t[||]\"",
                 afterUndo: """
                 var x = @"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -71,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = @"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -89,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """",
                 afterUndo: """
                 var x = @""[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -103,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 "var x = @\"\t\"\"\t[||]\"",
                 afterUndo: """
                 var x = @"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact]
@@ -119,7 +125,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
                 """,
                 afterUndo: """
                 var x = @"[||]"
-                """);
+                """
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/62969")]
@@ -141,12 +148,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
 
                 var lambda = [SuppressMessage("""", ""CA2013"")] () => Object.ReferenceEquals(1, 2);[||]";
                 """""",
-                afterUndo:
-                """
+                afterUndo: """
                 string x = @"using System.Diagnostics.CodeAnalysis;
 
                 var lambda = [SuppressMessage("", "CA2013")] () => Object.ReferenceEquals(1, 2);[||]";
-                """);
+                """
+            );
         }
     }
 }

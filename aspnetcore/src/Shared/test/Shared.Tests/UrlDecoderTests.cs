@@ -54,14 +54,18 @@ public class UrlDecoderTests
     public void StringDestinationShorterThanSourceDecodeRequestLineThrows()
     {
         var source = new char[2];
-        Assert.Throws<ArgumentException>(() => UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1)));
+        Assert.Throws<ArgumentException>(
+            () => UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1))
+        );
     }
 
     [Fact]
     public void ByteDestinationShorterThanSourceDecodeRequestLineThrows()
     {
         var source = new byte[2];
-        Assert.Throws<ArgumentException>(() => UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1), false));
+        Assert.Throws<ArgumentException>(
+            () => UrlDecoder.DecodeRequestLine(source.AsSpan(), source.AsSpan(0, 1), false)
+        );
     }
 
     [Fact]
@@ -76,7 +80,11 @@ public class UrlDecoderTests
     public void ByteDestinationLargerThanSourceDecodeRequestLineReturnsCorrenctLenght()
     {
         var source = Encoding.UTF8.GetBytes("/a%20b".ToCharArray());
-        var length = UrlDecoder.DecodeRequestLine(source.AsSpan(), new byte[source.Length + 10], false);
+        var length = UrlDecoder.DecodeRequestLine(
+            source.AsSpan(),
+            new byte[source.Length + 10],
+            false
+        );
         Assert.Equal(4, length);
     }
 
@@ -91,7 +99,9 @@ public class UrlDecoderTests
     public void ByteInputNullCharDecodeInPlaceThrows()
     {
         var source = Encoding.UTF8.GetBytes("%00");
-        Assert.Throws<InvalidOperationException>(() => UrlDecoder.DecodeInPlace(source.AsSpan(), false));
+        Assert.Throws<InvalidOperationException>(
+            () => UrlDecoder.DecodeInPlace(source.AsSpan(), false)
+        );
     }
 
     [Theory]
@@ -165,26 +175,26 @@ public class UrlDecoderTests
         get
         {
             return new List<object[]>()
-                {
-                    new[] { "hello", "hello" },
-                    new[] { "/", "/" },
-                    new[] { "http://localhost:5000/api", "http://localhost:5000/api" },
-                    new[] { "/api/abc", "/api/abc" },
-                    new[] { "/api/a%2Fb", "/api/a%2Fb" },
-                    new[] { "/a%20b", "/a b" },
-                    new[] { "/a%24b", "/a$b" },
-                    new[] { "/a%C2%A2b", "/a¢b" },
-                    new[] { "/a%E0%A4%B9b", "/aहb" },
-                    new[] { "/a%E2%82%ACb", "/a€b" },
-                    new[] { "/a%ED%95%9Cb", "/a한b" },
-                    new[] { "/a%F0%90%8D%88b", "/a𐍈b" },
-                    new[] { "/a%25b", "/a%b" },
-                    new[] { "/%E4%BD%A0%E5%A5%BD", "/你好" },
-                    new[] { "/a%%2Fb", "/a%%2Fb" },
-                    new[] { "/a%2Fb+c", "/a%2Fb+c" },
-                    new[] { "/%C3%C3%A1", "/%C3á" },
-                    new[] { "/a%20%%b", "/a %%b" },
-                };
+            {
+                new[] { "hello", "hello" },
+                new[] { "/", "/" },
+                new[] { "http://localhost:5000/api", "http://localhost:5000/api" },
+                new[] { "/api/abc", "/api/abc" },
+                new[] { "/api/a%2Fb", "/api/a%2Fb" },
+                new[] { "/a%20b", "/a b" },
+                new[] { "/a%24b", "/a$b" },
+                new[] { "/a%C2%A2b", "/a¢b" },
+                new[] { "/a%E0%A4%B9b", "/aहb" },
+                new[] { "/a%E2%82%ACb", "/a€b" },
+                new[] { "/a%ED%95%9Cb", "/a한b" },
+                new[] { "/a%F0%90%8D%88b", "/a𐍈b" },
+                new[] { "/a%25b", "/a%b" },
+                new[] { "/%E4%BD%A0%E5%A5%BD", "/你好" },
+                new[] { "/a%%2Fb", "/a%%2Fb" },
+                new[] { "/a%2Fb+c", "/a%2Fb+c" },
+                new[] { "/%C3%C3%A1", "/%C3á" },
+                new[] { "/a%20%%b", "/a %%b" },
+            };
         }
     }
 

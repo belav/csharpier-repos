@@ -58,7 +58,8 @@ namespace System.Xml.Xsl.XsltOld
                     string nspace = input.NamespaceURI;
                     string name = input.LocalName;
 
-                    if (nspace.Length != 0) continue;
+                    if (nspace.Length != 0)
+                        continue;
 
                     if (Ref.Equal(name, input.Atoms.Version))
                     {
@@ -72,7 +73,11 @@ namespace System.Xml.Xsl.XsltOld
                             // XmlConvert.ToXPathDouble(version) an be NaN!
                             if (!compiler.ForwardCompatibility)
                             {
-                                throw XsltException.Create(SR.Xslt_InvalidAttrValue, "version", version);
+                                throw XsltException.Create(
+                                    SR.Xslt_InvalidAttrValue,
+                                    "version",
+                                    version
+                                );
                             }
                         }
                     }
@@ -93,8 +98,7 @@ namespace System.Xml.Xsl.XsltOld
                         // We can have version attribute later. For now remember this attribute and continue
                         badAttribute = name;
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
@@ -126,20 +130,23 @@ namespace System.Xml.Xsl.XsltOld
                     string nspace = input.NamespaceURI;
                     string name = input.LocalName;
 
-                    if (Ref.Equal(nspace, input.Atoms.UriXsl) &&
-                        Ref.Equal(name, input.Atoms.Version))
+                    if (
+                        Ref.Equal(nspace, input.Atoms.UriXsl)
+                        && Ref.Equal(name, input.Atoms.Version)
+                    )
                     {
                         version = input.Value;
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
             if (version == null)
             {
-                if (Ref.Equal(input.LocalName, input.Atoms.Stylesheet) &&
-                    input.NamespaceURI == XmlReservedNs.NsWdXsl)
+                if (
+                    Ref.Equal(input.LocalName, input.Atoms.Stylesheet)
+                    && input.NamespaceURI == XmlReservedNs.NsWdXsl
+                )
                 {
                     throw XsltException.Create(SR.Xslt_WdXslNamespace);
                 }
@@ -169,8 +176,8 @@ namespace System.Xml.Xsl.XsltOld
             if (Ref.Equal(input.NamespaceURI, input.Atoms.UriXsl))
             {
                 if (
-                    !Ref.Equal(input.LocalName, input.Atoms.Stylesheet) &&
-                    !Ref.Equal(input.LocalName, input.Atoms.Transform)
+                    !Ref.Equal(input.LocalName, input.Atoms.Stylesheet)
+                    && !Ref.Equal(input.LocalName, input.Atoms.Transform)
                 )
                 {
                     throw XsltException.Create(SR.Xslt_WrongStylesheetElement);
@@ -202,7 +209,10 @@ namespace System.Xml.Xsl.XsltOld
             {
                 compiler.PushStylesheet(new Stylesheet());
                 compiler.Stylesheetid = id;
-                CompileDocument(compiler, /*inInclude*/ false);
+                CompileDocument(
+                    compiler, /*inInclude*/
+                    false
+                );
             }
             catch (XsltCompileException)
             {
@@ -210,7 +220,12 @@ namespace System.Xml.Xsl.XsltOld
             }
             catch (Exception e)
             {
-                throw new XsltCompileException(e, input.BaseURI, input.LineNumber, input.LinePosition);
+                throw new XsltCompileException(
+                    e,
+                    input.BaseURI,
+                    input.LineNumber,
+                    input.LinePosition
+                );
             }
             finally
             {
@@ -225,7 +240,7 @@ namespace System.Xml.Xsl.XsltOld
             // We can't reverce imports order. Template lookup relyes on it after compilation
             int saveStylesheetId = compiler.Stylesheetid;
             for (int i = imports.Count - 1; 0 <= i; i--)
-            {   // Imports should be compiled in reverse order
+            { // Imports should be compiled in reverse order
                 Uri? uri = imports[i] as Uri;
                 Debug.Assert(uri != null);
                 imports[i] = CompileImport(compiler, uri, ++_maxid);
@@ -249,7 +264,10 @@ namespace System.Xml.Xsl.XsltOld
 
             try
             {
-                CompileDocument(compiler, /*inInclude*/ true);
+                CompileDocument(
+                    compiler, /*inInclude*/
+                    true
+                );
             }
             catch (XsltCompileException)
             {
@@ -257,7 +275,12 @@ namespace System.Xml.Xsl.XsltOld
             }
             catch (Exception e)
             {
-                throw new XsltCompileException(e, input.BaseURI, input.LineNumber, input.LinePosition);
+                throw new XsltCompileException(
+                    e,
+                    input.BaseURI,
+                    input.LineNumber,
+                    input.LinePosition
+                );
             }
             finally
             {
@@ -270,8 +293,10 @@ namespace System.Xml.Xsl.XsltOld
         {
             NavigatorInput input = compiler.Input;
             string element = input.LocalName;
-            string? namespace1 = null, namespace2 = null;
-            string? prefix1 = null, prefix2 = null;
+            string? namespace1 = null,
+                namespace2 = null;
+            string? prefix1 = null,
+                prefix2 = null;
             if (input.MoveToFirstAttribute())
             {
                 do
@@ -279,7 +304,8 @@ namespace System.Xml.Xsl.XsltOld
                     string nspace = input.NamespaceURI;
                     string name = input.LocalName;
 
-                    if (nspace.Length != 0) continue;
+                    if (nspace.Length != 0)
+                        continue;
 
                     if (Ref.Equal(name, input.Atoms.StylesheetPrefix))
                     {
@@ -298,8 +324,7 @@ namespace System.Xml.Xsl.XsltOld
                             throw XsltException.Create(SR.Xslt_InvalidAttribute, name, element);
                         }
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
@@ -308,7 +333,10 @@ namespace System.Xml.Xsl.XsltOld
             CheckEmpty(compiler);
 
             //String[] resultarray = { prefix2, namespace2 };
-            compiler.AddNamespaceAlias(namespace1!, new NamespaceInfo(prefix2, namespace2, compiler.Stylesheetid));
+            compiler.AddNamespaceAlias(
+                namespace1!,
+                new NamespaceInfo(prefix2, namespace2, compiler.Stylesheetid)
+            );
         }
 
         internal static void CompileKey(Compiler compiler)
@@ -327,7 +355,8 @@ namespace System.Xml.Xsl.XsltOld
                     string name = input.LocalName;
                     string value = input.Value;
 
-                    if (nspace.Length != 0) continue;
+                    if (nspace.Length != 0)
+                        continue;
 
                     if (Ref.Equal(name, input.Atoms.Name))
                     {
@@ -335,11 +364,21 @@ namespace System.Xml.Xsl.XsltOld
                     }
                     else if (Ref.Equal(name, input.Atoms.Match))
                     {
-                        MatchKey = compiler.AddQuery(value, /*allowVars:*/false, /*allowKey*/false, /*pattern*/true);
+                        MatchKey = compiler.AddQuery(
+                            value, /*allowVars:*/
+                            false, /*allowKey*/
+                            false, /*pattern*/
+                            true
+                        );
                     }
                     else if (Ref.Equal(name, input.Atoms.Use))
                     {
-                        UseKey = compiler.AddQuery(value, /*allowVars:*/false, /*allowKey*/false, /*pattern*/false);
+                        UseKey = compiler.AddQuery(
+                            value, /*allowVars:*/
+                            false, /*allowKey*/
+                            false, /*pattern*/
+                            false
+                        );
                     }
                     else
                     {
@@ -348,8 +387,7 @@ namespace System.Xml.Xsl.XsltOld
                             throw XsltException.Create(SR.Xslt_InvalidAttribute, name, element);
                         }
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
 
@@ -372,7 +410,8 @@ namespace System.Xml.Xsl.XsltOld
             {
                 do
                 {
-                    if (input.Prefix.Length != 0) continue;
+                    if (input.Prefix.Length != 0)
+                        continue;
 
                     string name = input.LocalName;
                     string value = input.Value;
@@ -430,11 +469,13 @@ namespace System.Xml.Xsl.XsltOld
                             format.patternSeparator = value[0];
                         }
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
-            info.NegativeInfinitySymbol = string.Concat(info.NegativeSign, info.PositiveInfinitySymbol);
+            info.NegativeInfinitySymbol = string.Concat(
+                info.NegativeSign,
+                info.PositiveInfinitySymbol
+            );
             Name ??= new XmlQualifiedName();
             compiler.AddDecimalFormat(Name, format);
             CheckEmpty(compiler);
@@ -446,7 +487,11 @@ namespace System.Xml.Xsl.XsltOld
             {
                 if (!compiler.ForwardCompatibility)
                 {
-                    throw XsltException.Create(SR.Xslt_InvalidAttrValue, compiler.Input.LocalName, compiler.Input.Value);
+                    throw XsltException.Create(
+                        SR.Xslt_InvalidAttrValue,
+                        compiler.Input.LocalName,
+                        compiler.Input.Value
+                    );
                 }
                 return false;
             }
@@ -460,7 +505,12 @@ namespace System.Xml.Xsl.XsltOld
             for (int i = 0; i < elements.Length; i++)
             {
                 double defaultPriority = NameTest(elements[i]);
-                compiler.CompiledStylesheet!.AddSpace(compiler, elements[i], defaultPriority, preserve);
+                compiler.CompiledStylesheet!.AddSpace(
+                    compiler,
+                    elements[i],
+                    defaultPriority,
+                    preserve
+                );
             }
             CheckEmpty(compiler);
         }
@@ -517,7 +567,9 @@ namespace System.Xml.Xsl.XsltOld
                                 }
                                 // We should compile imports in reverse order after all toplevel elements.
                                 // remember it now and return to it in CompileImpoorts();
-                                Uri uri = compiler.ResolveUri(compiler.GetSingleAttribute(compiler.Input.Atoms.Href));
+                                Uri uri = compiler.ResolveUri(
+                                    compiler.GetSingleAttribute(compiler.Input.Atoms.Href)
+                                );
                                 string resolved = uri.ToString();
                                 if (compiler.IsCircularReference(resolved))
                                 {
@@ -565,7 +617,9 @@ namespace System.Xml.Xsl.XsltOld
                                 }
                                 else if (Ref.Equal(name, input.Atoms.Variable))
                                 {
-                                    VariableAction? action = compiler.CreateVariableAction(VariableType.GlobalVariable);
+                                    VariableAction? action = compiler.CreateVariableAction(
+                                        VariableType.GlobalVariable
+                                    );
                                     if (action != null)
                                     {
                                         AddAction(action);
@@ -573,7 +627,9 @@ namespace System.Xml.Xsl.XsltOld
                                 }
                                 else if (Ref.Equal(name, input.Atoms.Param))
                                 {
-                                    VariableAction? action = compiler.CreateVariableAction(VariableType.GlobalParameter);
+                                    VariableAction? action = compiler.CreateVariableAction(
+                                        VariableType.GlobalParameter
+                                    );
                                     if (action != null)
                                     {
                                         AddAction(action);
@@ -616,8 +672,7 @@ namespace System.Xml.Xsl.XsltOld
                     default:
                         throw XsltException.Create(SR.Xslt_InvalidContents, "stylesheet");
                 }
-            }
-            while (compiler.Advance());
+            } while (compiler.Advance());
 
             compiler.ToParent();
         }
@@ -627,8 +682,7 @@ namespace System.Xml.Xsl.XsltOld
             do
             {
                 CompileOnceTemplate(compiler);
-            }
-            while (compiler.Advance());
+            } while (compiler.Advance());
         }
 
         protected void CompileOnceTemplate(Compiler compiler)
@@ -816,16 +870,15 @@ namespace System.Xml.Xsl.XsltOld
                         continue;
                     }
                     if (
-                        compiler.IsExcludedNamespace(uri) ||
-                        compiler.IsExtensionNamespace(uri) ||
-                        compiler.IsNamespaceAlias(uri)
+                        compiler.IsExcludedNamespace(uri)
+                        || compiler.IsExtensionNamespace(uri)
+                        || compiler.IsNamespaceAlias(uri)
                     )
                     {
                         continue;
                     }
                     this.AddEvent(new NamespaceEvent(input));
-                }
-                while (input.MoveToNextNamespace());
+                } while (input.MoveToNextNamespace());
                 input.ToParent();
             }
 
@@ -843,8 +896,7 @@ namespace System.Xml.Xsl.XsltOld
                     this.AddEvent(compiler.CreateBeginEvent());
                     this.AddEvents(compiler.CompileAvt(input.Value));
                     this.AddEvent(new EndEvent(XPathNodeType.Attribute));
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
         }
@@ -899,22 +951,30 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         string langName = input.Value;
                         if (
-                            string.Equals(langName, "jscript", StringComparison.OrdinalIgnoreCase) ||
-                            string.Equals(langName, "javascript", StringComparison.OrdinalIgnoreCase)
+                            string.Equals(langName, "jscript", StringComparison.OrdinalIgnoreCase)
+                            || string.Equals(
+                                langName,
+                                "javascript",
+                                StringComparison.OrdinalIgnoreCase
+                            )
                         )
                         {
                             lang = ScriptingLanguage.JScript;
                         }
                         else if (
-                          string.Equals(langName, "c#", StringComparison.OrdinalIgnoreCase) ||
-                          string.Equals(langName, "csharp", StringComparison.OrdinalIgnoreCase)
-                      )
+                            string.Equals(langName, "c#", StringComparison.OrdinalIgnoreCase)
+                            || string.Equals(langName, "csharp", StringComparison.OrdinalIgnoreCase)
+                        )
                         {
                             lang = ScriptingLanguage.CSharp;
                         }
                         else if (
-                            string.Equals(langName, "vb", StringComparison.OrdinalIgnoreCase) ||
-                            string.Equals(langName, "visualbasic", StringComparison.OrdinalIgnoreCase)
+                            string.Equals(langName, "vb", StringComparison.OrdinalIgnoreCase)
+                            || string.Equals(
+                                langName,
+                                "visualbasic",
+                                StringComparison.OrdinalIgnoreCase
+                            )
                         )
                         {
                             lang = ScriptingLanguage.VisualBasic;
@@ -928,12 +988,15 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         if (!PrefixQName.ValidatePrefix(input.Value))
                         {
-                            throw XsltException.Create(SR.Xslt_InvalidAttrValue, input.LocalName, input.Value);
+                            throw XsltException.Create(
+                                SR.Xslt_InvalidAttrValue,
+                                input.LocalName,
+                                input.Value
+                            );
                         }
                         implementsNamespace = compiler.ResolveXmlNamespace(input.Value);
                     }
-                }
-                while (input.MoveToNextAttribute());
+                } while (input.MoveToNextAttribute());
                 input.ToParent();
             }
             if (implementsNamespace == null)
@@ -964,7 +1027,7 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         frame.Finished();
                     }
-                    break;                              // Allow children to run
+                    break; // Allow children to run
 
                 case ProcessingChildren:
                     frame.Finished();

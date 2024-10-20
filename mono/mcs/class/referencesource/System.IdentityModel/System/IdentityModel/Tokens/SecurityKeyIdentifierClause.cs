@@ -18,9 +18,7 @@ namespace System.IdentityModel.Tokens
         string id = null;
 
         protected SecurityKeyIdentifierClause(string clauseType)
-            : this(clauseType, null, 0)
-        {
-        }
+            : this(clauseType, null, 0) { }
 
         protected SecurityKeyIdentifierClause(string clauseType, byte[] nonce, int length)
         {
@@ -47,7 +45,11 @@ namespace System.IdentityModel.Tokens
 
         public virtual SecurityKey CreateKey()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.KeyIdentifierClauseDoesNotSupportKeyCreation)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR.GetString(SR.KeyIdentifierClauseDoesNotSupportKeyCreation)
+                )
+            );
         }
 
         public virtual bool Matches(SecurityKeyIdentifierClause keyIdentifierClause)

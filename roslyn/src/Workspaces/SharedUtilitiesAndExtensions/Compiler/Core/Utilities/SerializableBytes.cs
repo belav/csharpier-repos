@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis
     {
         private const int ChunkSize = SharedPools.ByteBufferSize;
 
-        internal static PooledStream CreateReadableStream(byte[] bytes)
-            => CreateReadableStream(bytes, bytes.Length);
+        internal static PooledStream CreateReadableStream(byte[] bytes) =>
+            CreateReadableStream(bytes, bytes.Length);
 
         internal static PooledStream CreateReadableStream(byte[] bytes, int length)
         {
@@ -34,7 +34,10 @@ namespace Microsoft.CodeAnalysis
             return stream;
         }
 
-        internal static async Task<PooledStream> CreateReadableStreamAsync(Stream stream, CancellationToken cancellationToken)
+        internal static async Task<PooledStream> CreateReadableStreamAsync(
+            Stream stream,
+            CancellationToken cancellationToken
+        )
         {
             var length = stream.Length;
 
@@ -51,7 +54,9 @@ namespace Microsoft.CodeAnalysis
                     var chunkOffset = 0;
                     while (count > 0)
                     {
-                        var bytesRead = await stream.ReadAsync(chunk, chunkOffset, count, cancellationToken).ConfigureAwait(false);
+                        var bytesRead = await stream
+                            .ReadAsync(chunk, chunkOffset, count, cancellationToken)
+                            .ConfigureAwait(false);
                         if (bytesRead > 0)
                         {
                             count -= bytesRead;
@@ -92,8 +97,7 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        internal static PooledStream CreateWritableStream()
-            => new ReadWriteStream();
+        internal static PooledStream CreateWritableStream() => new ReadWriteStream();
 
         public class PooledStream : Stream
         {
@@ -111,10 +115,7 @@ namespace Microsoft.CodeAnalysis
 
             public override long Length
             {
-                get
-                {
-                    return this.length;
-                }
+                get { return this.length; }
             }
 
             public override bool CanRead => true;
@@ -130,11 +131,7 @@ namespace Microsoft.CodeAnalysis
 
             public override long Position
             {
-                get
-                {
-                    return this.position;
-                }
-
+                get { return this.position; }
                 set
                 {
                     if (value < 0 || value >= length)
@@ -197,13 +194,27 @@ namespace Microsoft.CodeAnalysis
                     return 0;
                 }
 
-                var totalCopyCount = Read(this.chunks, this.position, this.length, buffer, index, count);
+                var totalCopyCount = Read(
+                    this.chunks,
+                    this.position,
+                    this.length,
+                    buffer,
+                    index,
+                    count
+                );
                 this.position += totalCopyCount;
 
                 return totalCopyCount;
             }
 
-            private static int Read(List<byte[]> chunks, long position, long length, byte[] buffer, int index, int count)
+            private static int Read(
+                List<byte[]> chunks,
+                long position,
+                long length,
+                byte[] buffer,
+                int index,
+                int count
+            )
             {
                 var oldPosition = position;
 
@@ -212,7 +223,10 @@ namespace Microsoft.CodeAnalysis
                     var chunk = chunks[GetChunkIndex(position)];
                     var currentOffset = GetChunkOffset(position);
 
-                    var copyCount = Math.Min(Math.Min(ChunkSize - currentOffset, count), (int)(length - position));
+                    var copyCount = Math.Min(
+                        Math.Min(ChunkSize - currentOffset, count),
+                        (int)(length - position)
+                    );
                     Array.Copy(chunk, currentOffset, buffer, index, copyCount);
 
                     position += copyCount;
@@ -260,14 +274,18 @@ namespace Microsoft.CodeAnalysis
                 return builder.MoveToImmutable();
             }
 
-            protected int CurrentChunkIndex { get { return GetChunkIndex(this.position); } }
-            protected int CurrentChunkOffset { get { return GetChunkOffset(this.position); } }
+            protected int CurrentChunkIndex
+            {
+                get { return GetChunkIndex(this.position); }
+            }
+            protected int CurrentChunkOffset
+            {
+                get { return GetChunkOffset(this.position); }
+            }
 
-            protected static int GetChunkIndex(long value)
-                => (int)(value / ChunkSize);
+            protected static int GetChunkIndex(long value) => (int)(value / ChunkSize);
 
-            protected static int GetChunkOffset(long value)
-                => (int)(value % ChunkSize);
+            protected static int GetChunkOffset(long value) => (int)(value % ChunkSize);
 
             protected override void Dispose(bool disposing)
             {
@@ -284,16 +302,14 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            public override void SetLength(long value)
-                => throw new NotSupportedException();
+            public override void SetLength(long value) => throw new NotSupportedException();
 
-            public override void Write(byte[] buffer, int offset, int count)
-                => throw new NotSupportedException();
+            public override void Write(byte[] buffer, int offset, int count) =>
+                throw new NotSupportedException();
         }
 
-        private class ReadStream(long length, byte[][] chunks) : PooledStream(length, new List<byte[]>(chunks))
-        {
-        }
+        private class ReadStream(long length, byte[][] chunks)
+            : PooledStream(length, new List<byte[]>(chunks)) { }
 
         private class ReadWriteStream : PooledStream
         {
@@ -308,11 +324,7 @@ namespace Microsoft.CodeAnalysis
 
             public override long Position
             {
-                get
-                {
-                    return base.Position;
-                }
-
+                get { return base.Position; }
                 set
                 {
                     if (value < 0)
@@ -347,7 +359,11 @@ namespace Microsoft.CodeAnalysis
                     var chunkIndex = GetChunkIndex(value);
                     var chunkOffset = GetChunkOffset(value);
 
-                    Array.Clear(chunks[chunkIndex], chunkOffset, chunks[chunkIndex].Length - chunkOffset);
+                    Array.Clear(
+                        chunks[chunkIndex],
+                        chunkOffset,
+                        chunks[chunkIndex].Length - chunkOffset
+                    );
 
                     var trimIndex = chunkIndex + 1;
                     for (var i = trimIndex; i < chunks.Count; i++)

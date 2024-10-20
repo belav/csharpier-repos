@@ -18,13 +18,26 @@ namespace System.Web.Http
         [InlineData("DELETE", "ActionAttributeTest/DeleteUsers", "DeleteUsers")]
         [InlineData("PATCH", "ActionAttributeTest/Users?key=2", "Users")]
         [InlineData("HEAD", "ActionAttributeTest/Users?key=3", "Users")]
-        public void SelectAction_OnRouteWithActionParameter(string httpMethod, string requestUrl, string expectedActionName)
+        public void SelectAction_OnRouteWithActionParameter(
+            string httpMethod,
+            string requestUrl,
+            string expectedActionName
+        )
         {
             string routeUrl = "{controller}/{action}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
 
-            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(httpMethod, requestUrl, routeUrl, routeDefault);
-            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(controllerContext.Configuration, "test", typeof(ActionAttributeTestController));
+            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(
+                httpMethod,
+                requestUrl,
+                routeUrl,
+                routeDefault
+            );
+            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(
+                controllerContext.Configuration,
+                "test",
+                typeof(ActionAttributeTestController)
+            );
             HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(controllerContext);
 
             Assert.Equal(expectedActionName, descriptor.ActionName);
@@ -38,22 +51,39 @@ namespace System.Web.Http
         [InlineData("WHATEVER", "ActionAttributeTest/UpdateUsers")]
         [InlineData("POST", "ActionAttributeTest/DeleteUsers")]
         [InlineData("DELETEME", "ActionAttributeTest/DeleteUsers")]
-        public void SelectAction_ThrowsMethodNotSupported_OnRouteWithActionParameter(string httpMethod, string requestUrl)
+        public void SelectAction_ThrowsMethodNotSupported_OnRouteWithActionParameter(
+            string httpMethod,
+            string requestUrl
+        )
         {
             string routeUrl = "{controller}/{action}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
-            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(httpMethod, requestUrl, routeUrl, routeDefault);
+            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(
+                httpMethod,
+                requestUrl,
+                routeUrl,
+                routeDefault
+            );
             Type controllerType = typeof(ActionAttributeTestController);
-            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(controllerContext.Configuration, controllerType.Name, controllerType);
+            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(
+                controllerContext.Configuration,
+                controllerType.Name,
+                controllerType
+            );
 
             var exception = Assert.Throws<HttpResponseException>(() =>
-                {
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(controllerContext);
-                });
+            {
+                HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
+                    controllerContext
+                );
+            });
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);
-            Assert.Equal("The requested resource does not support http method '" + httpMethod + "'.", ((HttpError)content.Value).Message);
+            Assert.Equal(
+                "The requested resource does not support http method '" + httpMethod + "'.",
+                ((HttpError)content.Value).Message
+            );
         }
 
         [Theory]
@@ -67,26 +97,44 @@ namespace System.Web.Http
         [InlineData("PATCHING", "ActionAttributeTest/Users")] // key param is required, bad url. 404
         [InlineData("NonAction", "ActionAttributeTest/NonAction")] // NonAction, 404
         [InlineData("GET", "ActionAttributeTest/NonAction")] // NonAction, 404
-        public void SelectAction_ThrowsNotFound_OnRouteWithActionParameter(string httpMethod, string requestUrl)
+        public void SelectAction_ThrowsNotFound_OnRouteWithActionParameter(
+            string httpMethod,
+            string requestUrl
+        )
         {
             string routeUrl = "{controller}/{action}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
-            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(httpMethod, requestUrl, routeUrl, routeDefault);
-            controllerContext.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(
+                httpMethod,
+                requestUrl,
+                routeUrl,
+                routeDefault
+            );
+            controllerContext.Configuration.IncludeErrorDetailPolicy =
+                IncludeErrorDetailPolicy.Always;
             Type controllerType = typeof(ActionAttributeTestController);
-            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(controllerContext.Configuration, controllerType.Name, controllerType);
+            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(
+                controllerContext.Configuration,
+                controllerType.Name,
+                controllerType
+            );
 
             var exception = Assert.Throws<HttpResponseException>(() =>
-                {
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(controllerContext);
-                });
+            {
+                HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
+                    controllerContext
+                );
+            });
 
             Assert.Equal(HttpStatusCode.NotFound, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);
 
             // Error message might be ApiControllerActionSelector_ActionNameNotFound or ApiControllerActionSelector_ActionNotFound
             string actualMessage = (string)((HttpError)content.Value)["MessageDetail"];
-            Assert.StartsWith("No action was found on the controller 'ActionAttributeTestController' that matches", actualMessage);
+            Assert.StartsWith(
+                "No action was found on the controller 'ActionAttributeTestController' that matches",
+                actualMessage
+            );
         }
 
         [Theory]
@@ -106,13 +154,26 @@ namespace System.Web.Http
         [InlineData("PATCH", "ActionAttributeTest/2", "Update")]
         [InlineData("HEAD", "ActionAttributeTest/2", "Ping")]
         [InlineData("OPTIONS", "ActionAttributeTest/2", "Help")]
-        public void SelectAction_OnDefaultRoute(string httpMethod, string requestUrl, string expectedActionName)
+        public void SelectAction_OnDefaultRoute(
+            string httpMethod,
+            string requestUrl,
+            string expectedActionName
+        )
         {
             string routeUrl = "{controller}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
 
-            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(httpMethod, requestUrl, routeUrl, routeDefault);
-            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(controllerContext.Configuration, "test", typeof(ActionAttributeTestController));
+            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(
+                httpMethod,
+                requestUrl,
+                routeUrl,
+                routeDefault
+            );
+            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(
+                controllerContext.Configuration,
+                "test",
+                typeof(ActionAttributeTestController)
+            );
             HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(controllerContext);
 
             Assert.Equal(expectedActionName, descriptor.ActionName);
@@ -124,22 +185,39 @@ namespace System.Web.Http
         [InlineData("NonAction", "ActionAttributeTest/")]
         [InlineData("DENY", "ActionAttributeTest")]
         [InlineData("APP", "ActionAttributeTest")]
-        public void SelectAction_ThrowsMethodNotSupported_OnDefaultRoute(string httpMethod, string requestUrl)
+        public void SelectAction_ThrowsMethodNotSupported_OnDefaultRoute(
+            string httpMethod,
+            string requestUrl
+        )
         {
             string routeUrl = "{controller}/{id}";
             object routeDefault = new { id = RouteParameter.Optional };
-            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(httpMethod, requestUrl, routeUrl, routeDefault);
+            HttpControllerContext controllerContext = ApiControllerHelper.CreateControllerContext(
+                httpMethod,
+                requestUrl,
+                routeUrl,
+                routeDefault
+            );
             Type controllerType = typeof(ActionAttributeTestController);
-            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(controllerContext.Configuration, controllerType.Name, controllerType);
+            controllerContext.ControllerDescriptor = new HttpControllerDescriptor(
+                controllerContext.Configuration,
+                controllerType.Name,
+                controllerType
+            );
 
             var exception = Assert.Throws<HttpResponseException>(() =>
-                {
-                    HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(controllerContext);
-                });
+            {
+                HttpActionDescriptor descriptor = ApiControllerHelper.SelectAction(
+                    controllerContext
+                );
+            });
 
             Assert.Equal(HttpStatusCode.MethodNotAllowed, exception.Response.StatusCode);
             var content = Assert.IsType<ObjectContent<HttpError>>(exception.Response.Content);
-            Assert.Equal("The requested resource does not support http method '" + httpMethod + "'.", ((HttpError)content.Value).Message);
+            Assert.Equal(
+                "The requested resource does not support http method '" + httpMethod + "'.",
+                ((HttpError)content.Value).Message
+            );
         }
     }
 }

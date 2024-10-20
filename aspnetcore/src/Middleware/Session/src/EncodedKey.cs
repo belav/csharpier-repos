@@ -48,8 +48,11 @@ internal sealed class EncodedKey
         {
             return false;
         }
-        if (_hashCode.HasValue && otherKey._hashCode.HasValue
-            && _hashCode.Value != otherKey._hashCode.Value)
+        if (
+            _hashCode.HasValue
+            && otherKey._hashCode.HasValue
+            && _hashCode.Value != otherKey._hashCode.Value
+        )
         {
             return false;
         }

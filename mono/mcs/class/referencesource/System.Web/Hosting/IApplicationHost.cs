@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="ApplicationManager.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System;
     using System.Collections;
     using System.Configuration;
@@ -14,8 +15,8 @@ namespace System.Web.Hosting {
     using System.Web.Configuration;
     using System.Web.Util;
 
-    public interface IApplicationHost {
-
+    public interface IApplicationHost
+    {
         [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
         [SecurityPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         string GetVirtualPath();
@@ -43,6 +44,5 @@ namespace System.Web.Hosting {
         [SecurityPermission(SecurityAction.LinkDemand, Unrestricted = true)]
         [SecurityPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
         void MessageReceived();
-
     }
 }

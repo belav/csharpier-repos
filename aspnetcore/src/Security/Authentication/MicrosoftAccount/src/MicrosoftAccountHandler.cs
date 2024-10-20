@@ -25,20 +25,31 @@ public class MicrosoftAccountHandler : OAuthHandler<MicrosoftAccountOptions>
     /// </summary>
     /// <inheritdoc />
     [Obsolete("ISystemClock is obsolete, use TimeProvider on AuthenticationSchemeOptions instead.")]
-    public MicrosoftAccountHandler(IOptionsMonitor<MicrosoftAccountOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-        : base(options, logger, encoder, clock)
-    { }
+    public MicrosoftAccountHandler(
+        IOptionsMonitor<MicrosoftAccountOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="MicrosoftAccountHandler"/>.
     /// </summary>
     /// <inheritdoc />
-    public MicrosoftAccountHandler(IOptionsMonitor<MicrosoftAccountOptions> options, ILoggerFactory logger, UrlEncoder encoder)
-        : base(options, logger, encoder)
-    { }
+    public MicrosoftAccountHandler(
+        IOptionsMonitor<MicrosoftAccountOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     /// <inheritdoc />
-    protected override async Task<AuthenticationTicket> CreateTicketAsync(ClaimsIdentity identity, AuthenticationProperties properties, OAuthTokenResponse tokens)
+    protected override async Task<AuthenticationTicket> CreateTicketAsync(
+        ClaimsIdentity identity,
+        AuthenticationProperties properties,
+        OAuthTokenResponse tokens
+    )
     {
         var request = new HttpRequestMessage(HttpMethod.Get, Options.UserInformationEndpoint);
         request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
@@ -46,12 +57,27 @@ public class MicrosoftAccountHandler : OAuthHandler<MicrosoftAccountOptions>
         var response = await Backchannel.SendAsync(request, Context.RequestAborted);
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpRequestException($"An error occurred when retrieving Microsoft user information ({response.StatusCode}). Please check if the authentication information is correct and the corresponding Microsoft Account API is enabled.");
+            throw new HttpRequestException(
+                $"An error occurred when retrieving Microsoft user information ({response.StatusCode}). Please check if the authentication information is correct and the corresponding Microsoft Account API is enabled."
+            );
         }
 
-        using (var payload = JsonDocument.Parse(await response.Content.ReadAsStringAsync(Context.RequestAborted)))
+        using (
+            var payload = JsonDocument.Parse(
+                await response.Content.ReadAsStringAsync(Context.RequestAborted)
+            )
+        )
         {
-            var context = new OAuthCreatingTicketContext(new ClaimsPrincipal(identity), properties, Context, Scheme, Options, Backchannel, tokens, payload.RootElement);
+            var context = new OAuthCreatingTicketContext(
+                new ClaimsPrincipal(identity),
+                properties,
+                Context,
+                Scheme,
+                Options,
+                Backchannel,
+                tokens,
+                payload.RootElement
+            );
             context.RunClaimActions();
             await Events.CreatingTicket(context);
             return new AuthenticationTicket(context.Principal!, context.Properties, Scheme.Name);
@@ -59,16 +85,25 @@ public class MicrosoftAccountHandler : OAuthHandler<MicrosoftAccountOptions>
     }
 
     /// <inheritdoc />
-    protected override string BuildChallengeUrl(AuthenticationProperties properties, string redirectUri)
+    protected override string BuildChallengeUrl(
+        AuthenticationProperties properties,
+        string redirectUri
+    )
     {
         var queryStrings = new Dictionary<string, string>
-            {
-                { "client_id", Options.ClientId },
-                { "response_type", "code" },
-                { "redirect_uri", redirectUri }
-            };
+        {
+            { "client_id", Options.ClientId },
+            { "response_type", "code" },
+            { "redirect_uri", redirectUri },
+        };
 
-        AddQueryString(queryStrings, properties, MicrosoftChallengeProperties.ScopeKey, FormatScope, Options.Scope);
+        AddQueryString(
+            queryStrings,
+            properties,
+            MicrosoftChallengeProperties.ScopeKey,
+            FormatScope,
+            Options.Scope
+        );
 #pragma warning disable CS0618 // Type or member is obsolete
         AddQueryString(queryStrings, properties, MicrosoftChallengeProperties.ResponseModeKey);
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -89,7 +124,8 @@ public class MicrosoftAccountHandler : OAuthHandler<MicrosoftAccountOptions>
             var codeChallenge = WebEncoders.Base64UrlEncode(challengeBytes);
 
             queryStrings[OAuthConstants.CodeChallengeKey] = codeChallenge;
-            queryStrings[OAuthConstants.CodeChallengeMethodKey] = OAuthConstants.CodeChallengeMethodS256;
+            queryStrings[OAuthConstants.CodeChallengeMethodKey] =
+                OAuthConstants.CodeChallengeMethodS256;
         }
 
         var state = Options.StateDataFormat.Protect(properties);
@@ -99,11 +135,12 @@ public class MicrosoftAccountHandler : OAuthHandler<MicrosoftAccountOptions>
     }
 
     private static void AddQueryString<T>(
-       Dictionary<string, string> queryStrings,
-       AuthenticationProperties properties,
-       string name,
-       Func<T, string> formatter,
-       T defaultValue)
+        Dictionary<string, string> queryStrings,
+        AuthenticationProperties properties,
+        string name,
+        Func<T, string> formatter,
+        T defaultValue
+    )
     {
         string? value;
         var parameterValue = properties.GetParameter<T>(name);
@@ -129,6 +166,6 @@ public class MicrosoftAccountHandler : OAuthHandler<MicrosoftAccountOptions>
         Dictionary<string, string> queryStrings,
         AuthenticationProperties properties,
         string name,
-        string? defaultValue = null)
-        => AddQueryString(queryStrings, properties, name, x => x!, defaultValue);
+        string? defaultValue = null
+    ) => AddQueryString(queryStrings, properties, name, x => x!, defaultValue);
 }

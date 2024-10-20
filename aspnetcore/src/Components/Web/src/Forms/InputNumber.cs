@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Components.Forms;
 /// An input component for editing numeric values.
 /// Supported numeric types are <see cref="int"/>, <see cref="long"/>, <see cref="short"/>, <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.
 /// </summary>
-public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue> : InputBase<TValue>
+public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
+    : InputBase<TValue>
 {
     private static readonly string _stepAttributeValue = GetStepAttributeValue();
 
@@ -20,25 +21,30 @@ public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         // Unwrap Nullable<T>, because InputBase already deals with the Nullable aspect
         // of it for us. We will only get asked to parse the T for nonempty inputs.
         var targetType = Nullable.GetUnderlyingType(typeof(TValue)) ?? typeof(TValue);
-        if (targetType == typeof(int) ||
-            targetType == typeof(long) ||
-            targetType == typeof(short) ||
-            targetType == typeof(float) ||
-            targetType == typeof(double) ||
-            targetType == typeof(decimal))
+        if (
+            targetType == typeof(int)
+            || targetType == typeof(long)
+            || targetType == typeof(short)
+            || targetType == typeof(float)
+            || targetType == typeof(double)
+            || targetType == typeof(decimal)
+        )
         {
             return "any";
         }
         else
         {
-            throw new InvalidOperationException($"The type '{targetType}' is not a supported numeric type.");
+            throw new InvalidOperationException(
+                $"The type '{targetType}' is not a supported numeric type."
+            );
         }
     }
 
     /// <summary>
     /// Gets or sets the error message used when displaying an a parsing error.
     /// </summary>
-    [Parameter] public string ParsingErrorMessage { get; set; } = "The {0} field must be a number.";
+    [Parameter]
+    public string ParsingErrorMessage { get; set; } = "The {0} field must be a number.";
 
     /// <summary>
     /// Gets or sets the associated <see cref="ElementReference"/>.
@@ -46,7 +52,8 @@ public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     /// May be <see langword="null"/> if accessed before the component is rendered.
     /// </para>
     /// </summary>
-    [DisallowNull] public ElementReference? Element { get; protected set; }
+    [DisallowNull]
+    public ElementReference? Element { get; protected set; }
 
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -58,14 +65,26 @@ public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         builder.AddAttributeIfNotNullOrEmpty(4, "name", NameAttributeValue);
         builder.AddAttributeIfNotNullOrEmpty(5, "class", CssClass);
         builder.AddAttribute(6, "value", CurrentValueAsString);
-        builder.AddAttribute(7, "onchange", EventCallback.Factory.CreateBinder<string?>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddAttribute(
+            7,
+            "onchange",
+            EventCallback.Factory.CreateBinder<string?>(
+                this,
+                __value => CurrentValueAsString = __value,
+                CurrentValueAsString
+            )
+        );
         builder.SetUpdatesAttributeName("value");
         builder.AddElementReferenceCapture(8, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }
 
     /// <inheritdoc />
-    protected override bool TryParseValueFromString(string? value, [MaybeNullWhen(false)] out TValue result, [NotNullWhen(false)] out string? validationErrorMessage)
+    protected override bool TryParseValueFromString(
+        string? value,
+        [MaybeNullWhen(false)] out TValue result,
+        [NotNullWhen(false)] out string? validationErrorMessage
+    )
     {
         if (BindConverter.TryConvertTo<TValue>(value, CultureInfo.InvariantCulture, out result))
         {
@@ -74,7 +93,11 @@ public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
         }
         else
         {
-            validationErrorMessage = string.Format(CultureInfo.InvariantCulture, ParsingErrorMessage, DisplayName ?? FieldIdentifier.FieldName);
+            validationErrorMessage = string.Format(
+                CultureInfo.InvariantCulture,
+                ParsingErrorMessage,
+                DisplayName ?? FieldIdentifier.FieldName
+            );
             return false;
         }
     }

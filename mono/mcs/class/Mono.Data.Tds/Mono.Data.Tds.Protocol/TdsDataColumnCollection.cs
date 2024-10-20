@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,66 +28,69 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Mono.Data.Tds.Protocol;
 using System.Collections;
+using Mono.Data.Tds.Protocol;
 
-namespace Mono.Data.Tds.Protocol {
-	public class TdsDataColumnCollection : IEnumerable
-	{
-		#region Fields
+namespace Mono.Data.Tds.Protocol
+{
+    public class TdsDataColumnCollection : IEnumerable
+    {
+        #region Fields
 
-		ArrayList list;
-		
-		#endregion // Fields
+        ArrayList list;
 
-		#region Constructors
+        #endregion // Fields
 
-		public TdsDataColumnCollection ()
-		{
-			list = new ArrayList ();
-		}
+        #region Constructors
 
-		#endregion // Constructors
+        public TdsDataColumnCollection()
+        {
+            list = new ArrayList();
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		public TdsDataColumn this [int index] {
-			get { return (TdsDataColumn) list[index]; }
-			set { list[index] = value; }
-		}
+        #region Properties
 
-		public int Count {
-			get { return list.Count; }
-		}
+        public TdsDataColumn this[int index]
+        {
+            get { return (TdsDataColumn)list[index]; }
+            set { list[index] = value; }
+        }
 
-		#endregion // Properties
+        public int Count
+        {
+            get { return list.Count; }
+        }
 
-		#region Methods
+        #endregion // Properties
 
-		public int Add (TdsDataColumn schema)
-		{
-			int index;
-			index = list.Add (schema);
-			schema.ColumnOrdinal = index;
-			return index;
-		}
+        #region Methods
 
-		public void Add (TdsDataColumnCollection columns)
-		{
-			foreach (TdsDataColumn col in columns)
-				Add (col);
-		}
-		
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
+        public int Add(TdsDataColumn schema)
+        {
+            int index;
+            index = list.Add(schema);
+            schema.ColumnOrdinal = index;
+            return index;
+        }
 
-		public void Clear ()
-		{
-			list.Clear ();
-		}
-		
-		#endregion // Methods
-	}
+        public void Add(TdsDataColumnCollection columns)
+        {
+            foreach (TdsDataColumn col in columns)
+                Add(col);
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
+
+        public void Clear()
+        {
+            list.Clear();
+        }
+
+        #endregion // Methods
+    }
 }

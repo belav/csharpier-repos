@@ -16,13 +16,20 @@ public class RouteValueDictionaryBenchmark
     public void Setup()
     {
         _arrayValues = new RouteValueDictionary()
-            {
-                { "action", "Index" },
-                { "controller", "Home" },
-                { "id", "17" },
-            };
+        {
+            { "action", "Index" },
+            { "controller", "Home" },
+            { "id", "17" },
+        };
         _arrayValuesEmpty = new RouteValueDictionary();
-        _propertyValues = new RouteValueDictionary(new { action = "Index", controller = "Home", id = "17" });
+        _propertyValues = new RouteValueDictionary(
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17",
+            }
+        );
     }
 
     [Benchmark]
@@ -40,10 +47,7 @@ public class RouteValueDictionaryBenchmark
     [Benchmark]
     public RouteValueDictionary AddSingleItem()
     {
-        var dictionary = new RouteValueDictionary
-            {
-                { "action", "Index" }
-            };
+        var dictionary = new RouteValueDictionary { { "action", "Index" } };
         return dictionary;
     }
 
@@ -51,11 +55,11 @@ public class RouteValueDictionaryBenchmark
     public RouteValueDictionary AddThreeItems()
     {
         var dictionary = new RouteValueDictionary
-            {
-                { "action", "Index" },
-                { "controller", "Home" },
-                { "id", "15" }
-            };
+        {
+            { "action", "Index" },
+            { "controller", "Home" },
+            { "id", "15" },
+        };
         return dictionary;
     }
 
@@ -86,28 +90,58 @@ public class RouteValueDictionaryBenchmark
     [Benchmark]
     public void TryAdd_Properties_AtCapacity_KeyExists()
     {
-        var propertyValues = new RouteValueDictionary(new { action = "Index", controller = "Home", id = "17", area = "root" });
+        var propertyValues = new RouteValueDictionary(
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17",
+                area = "root",
+            }
+        );
         propertyValues.TryAdd("id", "15");
     }
 
     [Benchmark]
     public void TryAdd_Properties_AtCapacity_KeyDoesNotExist()
     {
-        var propertyValues = new RouteValueDictionary(new { action = "Index", controller = "Home", id = "17", area = "root" });
+        var propertyValues = new RouteValueDictionary(
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17",
+                area = "root",
+            }
+        );
         _propertyValues.TryAdd("name", "Service");
     }
 
     [Benchmark]
     public void TryAdd_Properties_NotAtCapacity_KeyExists()
     {
-        var propertyValues = new RouteValueDictionary(new { action = "Index", controller = "Home", id = "17" });
+        var propertyValues = new RouteValueDictionary(
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17",
+            }
+        );
         propertyValues.TryAdd("id", "15");
     }
 
     [Benchmark]
     public void TryAdd_Properties_NotAtCapacity_KeyDoesNotExist()
     {
-        var propertyValues = new RouteValueDictionary(new { action = "Index", controller = "Home", id = "17" });
+        var propertyValues = new RouteValueDictionary(
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17",
+            }
+        );
         _propertyValues.TryAdd("name", "Service");
     }
 
@@ -115,12 +149,12 @@ public class RouteValueDictionaryBenchmark
     public void TryAdd_Array_AtCapacity_KeyExists()
     {
         var arrayValues = new RouteValueDictionary
-                {
-                    { "action", "Index" },
-                    { "controller", "Home" },
-                    { "id", "17" },
-                    { "area", "root" }
-                };
+        {
+            { "action", "Index" },
+            { "controller", "Home" },
+            { "id", "17" },
+            { "area", "root" },
+        };
         arrayValues.TryAdd("id", "15");
     }
 
@@ -128,12 +162,12 @@ public class RouteValueDictionaryBenchmark
     public void TryAdd_Array_AtCapacity_KeyDoesNotExist()
     {
         var arrayValues = new RouteValueDictionary
-                {
-                    { "action", "Index" },
-                    { "controller", "Home" },
-                    { "id", "17" },
-                    { "area", "root" }
-                };
+        {
+            { "action", "Index" },
+            { "controller", "Home" },
+            { "id", "17" },
+            { "area", "root" },
+        };
         arrayValues.TryAdd("name", "Service");
     }
 
@@ -141,11 +175,11 @@ public class RouteValueDictionaryBenchmark
     public void TryAdd_Array_NotAtCapacity_KeyExists()
     {
         var arrayValues = new RouteValueDictionary
-                {
-                    { "action", "Index" },
-                    { "controller", "Home" },
-                    { "id", "17" }
-                };
+        {
+            { "action", "Index" },
+            { "controller", "Home" },
+            { "id", "17" },
+        };
         arrayValues.TryAdd("id", "15");
     }
 
@@ -153,11 +187,11 @@ public class RouteValueDictionaryBenchmark
     public void TryAdd_Array_NotAtCapacity_KeyDoesNotExist()
     {
         var arrayValues = new RouteValueDictionary
-                {
-                    { "action", "Index" },
-                    { "controller", "Home" },
-                    { "id", "17" },
-                };
+        {
+            { "action", "Index" },
+            { "controller", "Home" },
+            { "id", "17" },
+        };
         arrayValues.TryAdd("name", "Service");
     }
 
@@ -165,11 +199,11 @@ public class RouteValueDictionaryBenchmark
     public void ConditionalAdd_Array()
     {
         var arrayValues = new RouteValueDictionary()
-                {
-                    { "action", "Index" },
-                    { "controller", "Home" },
-                    { "id", "17" },
-                };
+        {
+            { "action", "Index" },
+            { "controller", "Home" },
+            { "id", "17" },
+        };
 
         if (!arrayValues.ContainsKey("name"))
         {
@@ -180,7 +214,14 @@ public class RouteValueDictionaryBenchmark
     [Benchmark]
     public void ConditionalAdd_Properties()
     {
-        var propertyValues = new RouteValueDictionary(new { action = "Index", controller = "Home", id = "17" });
+        var propertyValues = new RouteValueDictionary(
+            new
+            {
+                action = "Index",
+                controller = "Home",
+                id = "17",
+            }
+        );
 
         if (!propertyValues.ContainsKey("name"))
         {
@@ -268,10 +309,7 @@ public class RouteValueDictionaryBenchmark
     [Benchmark]
     public RouteValueDictionary SetSingleItem()
     {
-        var dictionary = new RouteValueDictionary
-        {
-            ["action"] = "Index"
-        };
+        var dictionary = new RouteValueDictionary { ["action"] = "Index" };
         return dictionary;
     }
 
@@ -290,7 +328,7 @@ public class RouteValueDictionaryBenchmark
         {
             ["action"] = "Index",
             ["controller"] = "Home",
-            ["id"] = "15"
+            ["id"] = "15",
         };
         return dictionary;
     }

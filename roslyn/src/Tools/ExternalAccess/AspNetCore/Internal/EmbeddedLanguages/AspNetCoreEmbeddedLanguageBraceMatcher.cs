@@ -13,19 +13,21 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLanguages
 {
-    [ExportEmbeddedLanguageBraceMatcher(
-        nameof(AspNetCoreEmbeddedLanguageBraceMatcher),
-        new[] { LanguageNames.CSharp },
-        supportsUnannotatedAPIs: false,
-        // Add more syntax names here in the future if there are additional cases ASP.Net would like to light up on.
-        identifiers: new[] { "Route" }), Shared]
+    [
+        ExportEmbeddedLanguageBraceMatcher(
+            nameof(AspNetCoreEmbeddedLanguageBraceMatcher),
+            new[] { LanguageNames.CSharp },
+            supportsUnannotatedAPIs: false,
+            // Add more syntax names here in the future if there are additional cases ASP.Net would like to light up on.
+            identifiers: new[] { "Route" }
+        ),
+        Shared
+    ]
     internal class AspNetCoreEmbeddedLanguageBraceMatcher : IEmbeddedLanguageBraceMatcher
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AspNetCoreEmbeddedLanguageBraceMatcher()
-        {
-        }
+        public AspNetCoreEmbeddedLanguageBraceMatcher() { }
 
         public BraceMatchingResult? FindBraces(
             Project project,
@@ -33,13 +35,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.Internal.EmbeddedLang
             SyntaxToken token,
             int position,
             BraceMatchingOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var braceMatchers = AspNetCoreBraceMatcherExtensionProvider.GetExtensions(project);
 
             foreach (var braceMatcher in braceMatchers)
             {
-                var result = braceMatcher.FindBraces(semanticModel, token, position, cancellationToken)?.ToBraceMatchingResult();
+                var result = braceMatcher
+                    .FindBraces(semanticModel, token, position, cancellationToken)
+                    ?.ToBraceMatchingResult();
                 if (result != null)
                     return result;
             }

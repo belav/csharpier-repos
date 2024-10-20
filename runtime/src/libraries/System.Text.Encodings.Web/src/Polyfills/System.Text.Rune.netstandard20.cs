@@ -46,9 +46,7 @@ namespace System.Text
         /// If <paramref name="value"/> does not represent a value Unicode scalar value.
         /// </exception>
         public Rune(int value)
-            : this((uint)value)
-        {
-        }
+            : this((uint)value) { }
 
         // non-validating ctor
         private Rune(uint scalarValue, bool _)
@@ -140,7 +138,11 @@ namespace System.Text
         /// the data could not be successfully decoded. This pattern provides convenient automatic U+FFFD substitution of
         /// invalid sequences while iterating through the loop.
         /// </remarks>
-        public static OperationStatus DecodeFromUtf16(ReadOnlySpan<char> source, out Rune result, out int charsConsumed)
+        public static OperationStatus DecodeFromUtf16(
+            ReadOnlySpan<char> source,
+            out Rune result,
+            out int charsConsumed
+        )
         {
             if (!source.IsEmpty)
             {
@@ -191,7 +193,7 @@ namespace System.Text
             result = ReplacementChar;
             return OperationStatus.NeedMoreData;
 
-        InvalidData:
+            InvalidData:
 
             charsConsumed = 1; // maximal invalid subsequence for UTF-16 is always a single code unit in length
             result = ReplacementChar;
@@ -224,7 +226,11 @@ namespace System.Text
         /// the data could not be successfully decoded. This pattern provides convenient automatic U+FFFD substitution of
         /// invalid sequences while iterating through the loop.
         /// </remarks>
-        public static OperationStatus DecodeFromUtf8(ReadOnlySpan<byte> source, out Rune result, out int bytesConsumed)
+        public static OperationStatus DecodeFromUtf8(
+            ReadOnlySpan<byte> source,
+            out Rune result,
+            out int bytesConsumed
+        )
         {
             // This method follows the Unicode Standard's recommendation for detecting
             // the maximal subpart of an ill-formed subsequence. See The Unicode Standard,
@@ -247,14 +253,14 @@ namespace System.Text
                 goto NotAscii;
             }
 
-        Finish:
+            Finish:
 
             bytesConsumed = index + 1;
             Debug.Assert(1 <= bytesConsumed && bytesConsumed <= 4); // Valid subsequences are always length [1..4]
             result = UnsafeCreate(tempValue);
             return OperationStatus.Done;
 
-        NotAscii:
+            NotAscii:
 
             // Per Table 3-7, the beginning of a multibyte sequence must be a code unit in
             // the range [C2..F4]. If it's outside of that range, it's either a standalone
@@ -300,20 +306,38 @@ namespace System.Text
             // enough information (from just two code units) to detect overlong or surrogate
             // sequences, we need to perform these checks now.
 
-            if (!UnicodeUtility.IsInRangeInclusive(tempValue, ((0xE0 - 0xC0) << 6) + (0xA0 - 0x80), ((0xF4 - 0xC0) << 6) + (0x8F - 0x80)))
+            if (
+                !UnicodeUtility.IsInRangeInclusive(
+                    tempValue,
+                    ((0xE0 - 0xC0) << 6) + (0xA0 - 0x80),
+                    ((0xF4 - 0xC0) << 6) + (0x8F - 0x80)
+                )
+            )
             {
                 // The first two bytes were not in the range [[E0 A0]..[F4 8F]].
                 // This is an overlong 3-byte sequence or an out-of-range 4-byte sequence.
                 goto Invalid;
             }
 
-            if (UnicodeUtility.IsInRangeInclusive(tempValue, ((0xED - 0xC0) << 6) + (0xA0 - 0x80), ((0xED - 0xC0) << 6) + (0xBF - 0x80)))
+            if (
+                UnicodeUtility.IsInRangeInclusive(
+                    tempValue,
+                    ((0xED - 0xC0) << 6) + (0xA0 - 0x80),
+                    ((0xED - 0xC0) << 6) + (0xBF - 0x80)
+                )
+            )
             {
                 // This is a UTF-16 surrogate code point, which is invalid in UTF-8.
                 goto Invalid;
             }
 
-            if (UnicodeUtility.IsInRangeInclusive(tempValue, ((0xF0 - 0xC0) << 6) + (0x80 - 0x80), ((0xF0 - 0xC0) << 6) + (0x8F - 0x80)))
+            if (
+                UnicodeUtility.IsInRangeInclusive(
+                    tempValue,
+                    ((0xF0 - 0xC0) << 6) + (0x80 - 0x80),
+                    ((0xF0 - 0xC0) << 6) + (0x8F - 0x80)
+                )
+            )
             {
                 // This is an overlong 4-byte sequence.
                 goto Invalid;
@@ -369,18 +393,18 @@ namespace System.Text
             UnicodeDebug.AssertIsValidSupplementaryPlaneScalar(tempValue);
             goto Finish; // this is a valid 4-byte sequence
 
-        FirstByteInvalid:
+            FirstByteInvalid:
 
             index = 1; // Invalid subsequences are always at least length 1.
 
-        Invalid:
+            Invalid:
 
             Debug.Assert(1 <= index && index <= 3); // Invalid subsequences are always length 1..3
             bytesConsumed = index;
             result = ReplacementChar;
             return OperationStatus.InvalidData;
 
-        NeedsMoreData:
+            NeedsMoreData:
 
             Debug.Assert(0 <= index && index <= 3); // Incomplete subsequences are always length 0..3
             bytesConsumed = index;
@@ -388,7 +412,8 @@ namespace System.Text
             return OperationStatus.NeedMoreData;
         }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => (obj is Rune other) && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is Rune other) && Equals(other);
 
         public bool Equals(Rune other) => this == other;
 
@@ -431,7 +456,11 @@ namespace System.Text
             if ((highSurrogateOffset | lowSurrogateOffset) <= HighSurrogateRange)
             {
                 // The 0x40u << 10 below is to account for uuuuu = wwww + 1 in the surrogate encoding.
-                result = UnsafeCreate((highSurrogateOffset << 10) + ((uint)lowSurrogate - LowSurrogateStart) + (0x40u << 10));
+                result = UnsafeCreate(
+                    (highSurrogateOffset << 10)
+                        + ((uint)lowSurrogate - LowSurrogateStart)
+                        + (0x40u << 10)
+                );
                 return true;
             }
             else
@@ -462,7 +491,11 @@ namespace System.Text
                 }
                 else if (destination.Length >= 2)
                 {
-                    UnicodeUtility.GetUtf16SurrogatesFromSupplementaryPlaneScalar(_value, out destination[0], out destination[1]);
+                    UnicodeUtility.GetUtf16SurrogatesFromSupplementaryPlaneScalar(
+                        _value,
+                        out destination[0],
+                        out destination[1]
+                    );
                     charsWritten = 2;
                     return true;
                 }

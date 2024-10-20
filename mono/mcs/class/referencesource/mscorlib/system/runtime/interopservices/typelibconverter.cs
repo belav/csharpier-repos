@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -14,116 +14,148 @@
 **
 **
 =============================================================================*/
-#if !FEATURE_CORECLR // current implementation requires reflection only load 
-namespace System.Runtime.InteropServices {
-   
+#if !FEATURE_CORECLR // current implementation requires reflection only load
+namespace System.Runtime.InteropServices
+{
     using System;
-    using System.Diagnostics.Contracts;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Threading;
-    using System.Runtime.InteropServices.TCEAdapterGen;
+    using System.Configuration.Assemblies;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Configuration.Assemblies;
-    using Microsoft.Win32;
     using System.Runtime.CompilerServices;
-    using System.Globalization;
+    using System.Runtime.InteropServices.ComTypes;
+    using System.Runtime.InteropServices.TCEAdapterGen;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Runtime.InteropServices.ComTypes;
-    using System.Runtime.Versioning;
-    using WORD = System.UInt16;
-    using DWORD = System.UInt32;
+    using System.Threading;
+    using Microsoft.Win32;
     using _TYPELIBATTR = System.Runtime.InteropServices.ComTypes.TYPELIBATTR;
+    using DWORD = System.UInt32;
+    using WORD = System.UInt16;
 
     [Guid("F1C3BF79-C3E4-11d3-88E7-00902754C43A")]
     [ClassInterface(ClassInterfaceType.None)]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class TypeLibConverter : ITypeLibConverter
     {
         private const String s_strTypeLibAssemblyTitlePrefix = "TypeLib ";
         private const String s_strTypeLibAssemblyDescPrefix = "Assembly generated from typelib ";
         private const int MAX_NAMESPACE_LENGTH = 1024;
 
-
         //
         // ITypeLibConverter interface.
         //
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.UnmanagedCode
+        )]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public AssemblyBuilder ConvertTypeLibToAssembly([MarshalAs(UnmanagedType.Interface)] Object typeLib, 
-                                                        String asmFileName,
-                                                        int flags,
-                                                        ITypeLibImporterNotifySink notifySink,
-                                                        byte[] publicKey,
-                                                        StrongNameKeyPair keyPair,
-                                                        bool unsafeInterfaces)
+        public AssemblyBuilder ConvertTypeLibToAssembly(
+            [MarshalAs(UnmanagedType.Interface)] Object typeLib,
+            String asmFileName,
+            int flags,
+            ITypeLibImporterNotifySink notifySink,
+            byte[] publicKey,
+            StrongNameKeyPair keyPair,
+            bool unsafeInterfaces
+        )
         {
-            return ConvertTypeLibToAssembly(typeLib,
-                                            asmFileName,
-                                            (unsafeInterfaces
-                                                ? TypeLibImporterFlags.UnsafeInterfaces
-                                                : 0),
-                                            notifySink,
-                                            publicKey,
-                                            keyPair,
-                                            null,
-                                            null);
+            return ConvertTypeLibToAssembly(
+                typeLib,
+                asmFileName,
+                (unsafeInterfaces ? TypeLibImporterFlags.UnsafeInterfaces : 0),
+                notifySink,
+                publicKey,
+                keyPair,
+                null,
+                null
+            );
         }
 
-
-
-
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.UnmanagedCode)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.UnmanagedCode
+        )]
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public AssemblyBuilder ConvertTypeLibToAssembly([MarshalAs(UnmanagedType.Interface)] Object typeLib, 
-                                                        String asmFileName,
-                                                        TypeLibImporterFlags flags, 
-                                                        ITypeLibImporterNotifySink notifySink,
-                                                        byte[] publicKey,
-                                                        StrongNameKeyPair keyPair,
-                                                        String asmNamespace,
-                                                        Version asmVersion)
+        public AssemblyBuilder ConvertTypeLibToAssembly(
+            [MarshalAs(UnmanagedType.Interface)] Object typeLib,
+            String asmFileName,
+            TypeLibImporterFlags flags,
+            ITypeLibImporterNotifySink notifySink,
+            byte[] publicKey,
+            StrongNameKeyPair keyPair,
+            String asmNamespace,
+            Version asmVersion
+        )
         {
             // Validate the arguments.
             if (typeLib == null)
                 throw new ArgumentNullException("typeLib");
             if (asmFileName == null)
-                throw new ArgumentNullException("asmFileName");         
+                throw new ArgumentNullException("asmFileName");
             if (notifySink == null)
                 throw new ArgumentNullException("notifySink");
             if (String.Empty.Equals(asmFileName))
-                throw new ArgumentException(Environment.GetResourceString("Arg_InvalidFileName"), "asmFileName");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_InvalidFileName"),
+                    "asmFileName"
+                );
             if (asmFileName.Length > Path.MAX_PATH)
-                throw new ArgumentException(Environment.GetResourceString("IO.PathTooLong"), asmFileName);
-            if ((flags & TypeLibImporterFlags.PrimaryInteropAssembly) != 0 && publicKey == null && keyPair == null)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_PIAMustBeStrongNamed"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("IO.PathTooLong"),
+                    asmFileName
+                );
+            if (
+                (flags & TypeLibImporterFlags.PrimaryInteropAssembly) != 0
+                && publicKey == null
+                && keyPair == null
+            )
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_PIAMustBeStrongNamed")
+                );
             Contract.EndContractBlock();
 
             ArrayList eventItfInfoList = null;
 
             // Determine the AssemblyNameFlags
             AssemblyNameFlags asmNameFlags = AssemblyNameFlags.None;
-            
+
             // Retrieve the assembly name from the typelib.
-            AssemblyName asmName = GetAssemblyNameFromTypelib(typeLib, asmFileName, publicKey, keyPair, asmVersion, asmNameFlags);
+            AssemblyName asmName = GetAssemblyNameFromTypelib(
+                typeLib,
+                asmFileName,
+                publicKey,
+                keyPair,
+                asmVersion,
+                asmNameFlags
+            );
 
             // Create the dynamic assembly that will contain the converted typelib types.
-            AssemblyBuilder asmBldr = CreateAssemblyForTypeLib(typeLib, asmFileName, asmName, 
-                                        (flags & TypeLibImporterFlags.PrimaryInteropAssembly) != 0,
-                                        (flags & TypeLibImporterFlags.ReflectionOnlyLoading) != 0,
-                                        (flags & TypeLibImporterFlags.NoDefineVersionResource) != 0);
+            AssemblyBuilder asmBldr = CreateAssemblyForTypeLib(
+                typeLib,
+                asmFileName,
+                asmName,
+                (flags & TypeLibImporterFlags.PrimaryInteropAssembly) != 0,
+                (flags & TypeLibImporterFlags.ReflectionOnlyLoading) != 0,
+                (flags & TypeLibImporterFlags.NoDefineVersionResource) != 0
+            );
 
             // Define a dynamic module that will contain the contain the imported types.
             String strNonQualifiedAsmFileName = Path.GetFileName(asmFileName);
-            ModuleBuilder modBldr = asmBldr.DefineDynamicModule(strNonQualifiedAsmFileName, strNonQualifiedAsmFileName);
+            ModuleBuilder modBldr = asmBldr.DefineDynamicModule(
+                strNonQualifiedAsmFileName,
+                strNonQualifiedAsmFileName
+            );
 
             // If the namespace hasn't been specified, then use the assembly name.
             if (asmNamespace == null)
@@ -135,15 +167,29 @@ namespace System.Runtime.InteropServices {
 
             // Add a listener for the type resolve events.
             AppDomain currentDomain = Thread.GetDomain();
-            ResolveEventHandler resolveHandler = new ResolveEventHandler(typeResolveHandler.ResolveEvent);
-            ResolveEventHandler asmResolveHandler = new ResolveEventHandler(typeResolveHandler.ResolveAsmEvent);
-            ResolveEventHandler ROAsmResolveHandler = new ResolveEventHandler(typeResolveHandler.ResolveROAsmEvent);
+            ResolveEventHandler resolveHandler = new ResolveEventHandler(
+                typeResolveHandler.ResolveEvent
+            );
+            ResolveEventHandler asmResolveHandler = new ResolveEventHandler(
+                typeResolveHandler.ResolveAsmEvent
+            );
+            ResolveEventHandler ROAsmResolveHandler = new ResolveEventHandler(
+                typeResolveHandler.ResolveROAsmEvent
+            );
             currentDomain.TypeResolve += resolveHandler;
             currentDomain.AssemblyResolve += asmResolveHandler;
             currentDomain.ReflectionOnlyAssemblyResolve += ROAsmResolveHandler;
 
             // Convert the types contained in the typelib into metadata and add them to the assembly.
-            nConvertTypeLibToMetadata(typeLib, asmBldr.InternalAssembly, modBldr.InternalModule, asmNamespace, flags, typeResolveHandler, out eventItfInfoList);
+            nConvertTypeLibToMetadata(
+                typeLib,
+                asmBldr.InternalAssembly,
+                modBldr.InternalModule,
+                asmNamespace,
+                flags,
+                typeResolveHandler,
+                out eventItfInfoList
+            );
 
             // Update the COM types in the assembly.
             UpdateComTypesInAssembly(asmBldr, modBldr);
@@ -161,12 +207,20 @@ namespace System.Runtime.InteropServices {
             return asmBldr;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.UnmanagedCode)]
-        [return : MarshalAs(UnmanagedType.Interface)]
-        public Object ConvertAssemblyToTypeLib(Assembly assembly, String strTypeLibName, TypeLibExporterFlags flags, ITypeLibExporterNotifySink notifySink)
+        [SecurityPermissionAttribute(
+            SecurityAction.Demand,
+            Flags = SecurityPermissionFlag.UnmanagedCode
+        )]
+        [return: MarshalAs(UnmanagedType.Interface)]
+        public Object ConvertAssemblyToTypeLib(
+            Assembly assembly,
+            String strTypeLibName,
+            TypeLibExporterFlags flags,
+            ITypeLibExporterNotifySink notifySink
+        )
         {
             RuntimeAssembly rtAssembly;
             AssemblyBuilder ab = assembly as AssemblyBuilder;
@@ -180,10 +234,20 @@ namespace System.Runtime.InteropServices {
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public bool GetPrimaryInteropAssembly(Guid g, Int32 major, Int32 minor, Int32 lcid, out String asmName, out String asmCodeBase)
+        public bool GetPrimaryInteropAssembly(
+            Guid g,
+            Int32 major,
+            Int32 minor,
+            Int32 lcid,
+            out String asmName,
+            out String asmCodeBase
+        )
         {
             String strTlbId = "{" + g.ToString().ToUpper(CultureInfo.InvariantCulture) + "}";
-            String strVersion = major.ToString("x", CultureInfo.InvariantCulture) + "." + minor.ToString("x", CultureInfo.InvariantCulture);
+            String strVersion =
+                major.ToString("x", CultureInfo.InvariantCulture)
+                + "."
+                + minor.ToString("x", CultureInfo.InvariantCulture);
 
             // Set the two out values to null before we start.
             asmName = null;
@@ -194,40 +258,50 @@ namespace System.Runtime.InteropServices {
             {
                 if (TypeLibKey != null)
                 {
-                    // Try to open the HKEY_CLASS_ROOT\TypeLib\<TLBID> key.            
+                    // Try to open the HKEY_CLASS_ROOT\TypeLib\<TLBID> key.
                     using (RegistryKey TypeLibSubKey = TypeLibKey.OpenSubKey(strTlbId))
                     {
                         if (TypeLibSubKey != null)
                         {
                             // Try to open the HKEY_CLASS_ROOT\TypeLib\<TLBID>\<Major.Minor> key.
-                            using (RegistryKey VersionKey = TypeLibSubKey.OpenSubKey(strVersion, false))
+                            using (
+                                RegistryKey VersionKey = TypeLibSubKey.OpenSubKey(strVersion, false)
+                            )
                             {
                                 if (VersionKey != null)
                                 {
                                     // Attempt to retrieve the assembly name and codebase under the version key.
-                                    asmName = (String)VersionKey.GetValue("PrimaryInteropAssemblyName");
-                                    asmCodeBase = (String)VersionKey.GetValue("PrimaryInteropAssemblyCodeBase");
+                                    asmName = (String)
+                                        VersionKey.GetValue("PrimaryInteropAssemblyName");
+                                    asmCodeBase = (String)
+                                        VersionKey.GetValue("PrimaryInteropAssemblyCodeBase");
                                 }
                             }
                         }
                     }
                 }
             }
-            
+
             // If the assembly name isn't null, then we found an PIA.
             return asmName != null;
         }
-
 
         //
         // Non native helper methods.
         //
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
-        private static AssemblyBuilder CreateAssemblyForTypeLib(Object typeLib, String asmFileName, AssemblyName asmName, bool bPrimaryInteropAssembly, bool bReflectionOnly, bool bNoDefineVersionResource)
+        private static AssemblyBuilder CreateAssemblyForTypeLib(
+            Object typeLib,
+            String asmFileName,
+            AssemblyName asmName,
+            bool bPrimaryInteropAssembly,
+            bool bReflectionOnly,
+            bool bNoDefineVersionResource
+        )
         {
             // Retrieve the current app domain.
             AppDomain currentDomain = Thread.GetDomain();
@@ -259,13 +333,23 @@ namespace System.Runtime.InteropServices {
             // mscorlib.dll must specify the security rules that assemblies it emits are to use, since by
             // default all assemblies will follow security rule set level 2, and we want to make that an
             // explicit decision.
-            ConstructorInfo securityRulesCtor = typeof(SecurityRulesAttribute).GetConstructor(new Type[] { typeof(SecurityRuleSet) });
-            CustomAttributeBuilder securityRulesAttribute =
-                new CustomAttributeBuilder(securityRulesCtor, new object[] { SecurityRuleSet.Level2 });
+            ConstructorInfo securityRulesCtor = typeof(SecurityRulesAttribute).GetConstructor(
+                new Type[] { typeof(SecurityRuleSet) }
+            );
+            CustomAttributeBuilder securityRulesAttribute = new CustomAttributeBuilder(
+                securityRulesCtor,
+                new object[] { SecurityRuleSet.Level2 }
+            );
             assemblyAttributes.Add(securityRulesAttribute);
 #endif // !FEATURE_CORECLR
 
-            asmBldr = currentDomain.DefineDynamicAssembly(asmName, aba, dir, false, assemblyAttributes);
+            asmBldr = currentDomain.DefineDynamicAssembly(
+                asmName,
+                aba,
+                dir,
+                false,
+                assemblyAttributes
+            );
 
             // Set the Guid custom attribute on the assembly.
             SetGuidAttributeOnAssembly(asmBldr, typeLib);
@@ -280,7 +364,7 @@ namespace System.Runtime.InteropServices {
             }
             else
             {
-            SetVersionInformation(asmBldr, typeLib, asmName);
+                SetVersionInformation(asmBldr, typeLib, asmName);
             }
 
             // If we are generating a PIA, then set the PIA custom attribute.
@@ -290,8 +374,15 @@ namespace System.Runtime.InteropServices {
             return asmBldr;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static AssemblyName GetAssemblyNameFromTypelib(Object typeLib, String asmFileName, byte[] publicKey, StrongNameKeyPair keyPair, Version asmVersion, AssemblyNameFlags asmNameFlags)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static AssemblyName GetAssemblyNameFromTypelib(
+            Object typeLib,
+            String asmFileName,
+            byte[] publicKey,
+            StrongNameKeyPair keyPair,
+            Version asmVersion,
+            AssemblyNameFlags asmNameFlags
+        )
         {
             // Extract the name of the typelib.
             String strTypeLibName = null;
@@ -299,7 +390,13 @@ namespace System.Runtime.InteropServices {
             int dwHelpContext = 0;
             String strHelpFile = null;
             ITypeLib pTLB = (ITypeLib)typeLib;
-            pTLB.GetDocumentation(-1, out strTypeLibName, out strDocString, out dwHelpContext, out strHelpFile);
+            pTLB.GetDocumentation(
+                -1,
+                out strTypeLibName,
+                out strDocString,
+                out dwHelpContext,
+                out strHelpFile
+            );
 
             // Retrieve the name to use for the assembly.
             if (asmFileName == null)
@@ -308,20 +405,31 @@ namespace System.Runtime.InteropServices {
             }
             else
             {
-                Contract.Assert((asmFileName != null) && (asmFileName.Length > 0), "The assembly file name cannot be an empty string!");
+                Contract.Assert(
+                    (asmFileName != null) && (asmFileName.Length > 0),
+                    "The assembly file name cannot be an empty string!"
+                );
 
                 String strFileNameNoPath = Path.GetFileName(asmFileName);
                 String strExtension = Path.GetExtension(asmFileName);
 
                 // Validate that the extension is valid.
-                bool bExtensionValid = ".dll".Equals(strExtension, StringComparison.OrdinalIgnoreCase);
+                bool bExtensionValid = ".dll".Equals(
+                    strExtension,
+                    StringComparison.OrdinalIgnoreCase
+                );
 
                 // If the extension is not valid then tell the user and quit.
                 if (!bExtensionValid)
-                    throw new ArgumentException(Environment.GetResourceString("Arg_InvalidFileExtension"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Arg_InvalidFileExtension")
+                    );
 
                 // The assembly cannot contain the path nor the extension.
-                asmFileName = strFileNameNoPath.Substring(0, strFileNameNoPath.Length - ".dll".Length);
+                asmFileName = strFileNameNoPath.Substring(
+                    0,
+                    strFileNameNoPath.Length - ".dll".Length
+                );
             }
 
             // If the version information was not specified, then retrieve it from the typelib.
@@ -332,7 +440,7 @@ namespace System.Runtime.InteropServices {
                 Marshal.GetTypeLibVersion(pTLB, out major, out minor);
                 asmVersion = new Version(major, minor, 0, 0);
             }
-            
+
             // Create the assembly name for the imported typelib's assembly.
             AssemblyName AsmName = new AssemblyName();
             AsmName.Init(
@@ -345,7 +453,8 @@ namespace System.Runtime.InteropServices {
                 AssemblyVersionCompatibility.SameMachine,
                 null,
                 asmNameFlags,
-                keyPair);
+                keyPair
+            );
 
             return AsmName;
         }
@@ -362,61 +471,76 @@ namespace System.Runtime.InteropServices {
                 AsmBldrData.AddPublicComType(aTypes[cTypes]);
         }
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static void SetGuidAttributeOnAssembly(AssemblyBuilder asmBldr, Object typeLib)
         {
             // Retrieve the GuidAttribute constructor.
-            Type []aConsParams = new Type[1] {typeof(String)};
+            Type[] aConsParams = new Type[1] { typeof(String) };
             ConstructorInfo GuidAttrCons = typeof(GuidAttribute).GetConstructor(aConsParams);
 
             // Create an instance of the custom attribute builder.
-            Object[] aArgs = new Object[1] {Marshal.GetTypeLibGuid((ITypeLib)typeLib).ToString()};
+            Object[] aArgs = new Object[1] { Marshal.GetTypeLibGuid((ITypeLib)typeLib).ToString() };
             CustomAttributeBuilder GuidCABuilder = new CustomAttributeBuilder(GuidAttrCons, aArgs);
 
             // Set the GuidAttribute on the assembly builder.
             asmBldr.SetCustomAttribute(GuidCABuilder);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private static void SetImportedFromTypeLibAttrOnAssembly(AssemblyBuilder asmBldr, Object typeLib)
+        [System.Security.SecurityCritical] // auto-generated
+        private static void SetImportedFromTypeLibAttrOnAssembly(
+            AssemblyBuilder asmBldr,
+            Object typeLib
+        )
         {
             // Retrieve the ImportedFromTypeLibAttribute constructor.
-            Type []aConsParams = new Type[1] {typeof(String)};
-            ConstructorInfo ImpFromComAttrCons = typeof(ImportedFromTypeLibAttribute).GetConstructor(aConsParams);
+            Type[] aConsParams = new Type[1] { typeof(String) };
+            ConstructorInfo ImpFromComAttrCons =
+                typeof(ImportedFromTypeLibAttribute).GetConstructor(aConsParams);
 
             // Retrieve the name of the typelib.
             String strTypeLibName = Marshal.GetTypeLibName((ITypeLib)typeLib);
 
             // Create an instance of the custom attribute builder.
-            Object[] aArgs = new Object[1] {strTypeLibName};
-            CustomAttributeBuilder ImpFromComCABuilder = new CustomAttributeBuilder(ImpFromComAttrCons, aArgs);
+            Object[] aArgs = new Object[1] { strTypeLibName };
+            CustomAttributeBuilder ImpFromComCABuilder = new CustomAttributeBuilder(
+                ImpFromComAttrCons,
+                aArgs
+            );
 
             // Set the ImportedFromTypeLibAttribute on the assembly builder.
             asmBldr.SetCustomAttribute(ImpFromComCABuilder);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static void SetTypeLibVersionAttribute(AssemblyBuilder asmBldr, Object typeLib)
         {
-            Type []aConsParams = new Type[2] {typeof(int), typeof(int)};
-            ConstructorInfo TypeLibVerCons = typeof(TypeLibVersionAttribute).GetConstructor(aConsParams);
+            Type[] aConsParams = new Type[2] { typeof(int), typeof(int) };
+            ConstructorInfo TypeLibVerCons = typeof(TypeLibVersionAttribute).GetConstructor(
+                aConsParams
+            );
 
             // Get the typelib version
             int major;
             int minor;
             Marshal.GetTypeLibVersion((ITypeLib)typeLib, out major, out minor);
-            
+
             // Create an instance of the custom attribute builder.
-            Object[] aArgs = new Object[2] {major, minor};
-            CustomAttributeBuilder TypeLibVerBuilder = new CustomAttributeBuilder(TypeLibVerCons, aArgs);
+            Object[] aArgs = new Object[2] { major, minor };
+            CustomAttributeBuilder TypeLibVerBuilder = new CustomAttributeBuilder(
+                TypeLibVerCons,
+                aArgs
+            );
 
             // Set the attribute on the assembly builder.
             asmBldr.SetCustomAttribute(TypeLibVerBuilder);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private static void SetVersionInformation(AssemblyBuilder asmBldr, Object typeLib, AssemblyName asmName)
+        [System.Security.SecurityCritical] // auto-generated
+        private static void SetVersionInformation(
+            AssemblyBuilder asmBldr,
+            Object typeLib,
+            AssemblyName asmName
+        )
         {
             // Extract the name of the typelib.
             String strTypeLibName = null;
@@ -424,19 +548,35 @@ namespace System.Runtime.InteropServices {
             int dwHelpContext = 0;
             String strHelpFile = null;
             ITypeLib pTLB = (ITypeLib)typeLib;
-            pTLB.GetDocumentation(-1, out strTypeLibName, out strDocString, out dwHelpContext, out strHelpFile);
+            pTLB.GetDocumentation(
+                -1,
+                out strTypeLibName,
+                out strDocString,
+                out dwHelpContext,
+                out strHelpFile
+            );
 
             // Generate the product name string from the named of the typelib.
-            String strProductName = String.Format(CultureInfo.InvariantCulture, Environment.GetResourceString("TypeLibConverter_ImportedTypeLibProductName"), strTypeLibName);
+            String strProductName = String.Format(
+                CultureInfo.InvariantCulture,
+                Environment.GetResourceString("TypeLibConverter_ImportedTypeLibProductName"),
+                strTypeLibName
+            );
 
             // Set the OS version information.
-            asmBldr.DefineVersionInfoResource(strProductName, asmName.Version.ToString(), null, null, null);
+            asmBldr.DefineVersionInfoResource(
+                strProductName,
+                asmName.Version.ToString(),
+                null,
+                null,
+                null
+            );
 
             // Set the TypeLibVersion attribute
             SetTypeLibVersionAttribute(asmBldr, typeLib);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static void SetPIAAttributeOnAssembly(AssemblyBuilder asmBldr, Object typeLib)
         {
             IntPtr pAttr = IntPtr.Zero;
@@ -446,8 +586,10 @@ namespace System.Runtime.InteropServices {
             int Minor = 0;
 
             // Retrieve the PrimaryInteropAssemblyAttribute constructor.
-            Type []aConsParams = new Type[2] {typeof(int), typeof(int)};
-            ConstructorInfo PIAAttrCons = typeof(PrimaryInteropAssemblyAttribute).GetConstructor(aConsParams);
+            Type[] aConsParams = new Type[2] { typeof(int), typeof(int) };
+            ConstructorInfo PIAAttrCons = typeof(PrimaryInteropAssemblyAttribute).GetConstructor(
+                aConsParams
+            );
 
             // Retrieve the major and minor version from the typelib.
             try
@@ -465,33 +607,45 @@ namespace System.Runtime.InteropServices {
             }
 
             // Create an instance of the custom attribute builder.
-            Object[] aArgs = new Object[2] {Major, Minor};
+            Object[] aArgs = new Object[2] { Major, Minor };
             CustomAttributeBuilder PIACABuilder = new CustomAttributeBuilder(PIAAttrCons, aArgs);
 
             // Set the PrimaryInteropAssemblyAttribute on the assembly builder.
             asmBldr.SetCustomAttribute(PIACABuilder);
         }
 
-
         //
         // Native helper methods.
         //
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall)] 
-        private static extern void nConvertTypeLibToMetadata(Object typeLib, RuntimeAssembly asmBldr, RuntimeModule modBldr, String nameSpace, TypeLibImporterFlags flags, ITypeLibImporterNotifySink notifySink, out ArrayList eventItfInfoList);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern void nConvertTypeLibToMetadata(
+            Object typeLib,
+            RuntimeAssembly asmBldr,
+            RuntimeModule modBldr,
+            String nameSpace,
+            TypeLibImporterFlags flags,
+            ITypeLibImporterNotifySink notifySink,
+            out ArrayList eventItfInfoList
+        );
 
         // Must use assembly versioning or GuidAttribute to avoid collisions in typelib export or registration.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall)] 
-        private static extern Object nConvertAssemblyToTypeLib(RuntimeAssembly assembly, String strTypeLibName, TypeLibExporterFlags flags, ITypeLibExporterNotifySink notifySink);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern Object nConvertAssemblyToTypeLib(
+            RuntimeAssembly assembly,
+            String strTypeLibName,
+            TypeLibExporterFlags flags,
+            ITypeLibExporterNotifySink notifySink
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
-        internal extern static void LoadInMemoryTypeByName(RuntimeModule module, String className);
+        internal static extern void LoadInMemoryTypeByName(RuntimeModule module, String className);
 
         //
         // Helper class called when a resolve type event is fired.
@@ -512,7 +666,10 @@ namespace System.Runtime.InteropServices {
 
             public Assembly ResolveRef(Object typeLib)
             {
-                Contract.Ensures(Contract.Result<Assembly>() != null && Contract.Result<Assembly>() is RuntimeAssembly);
+                Contract.Ensures(
+                    Contract.Result<Assembly>() != null
+                        && Contract.Result<Assembly>() is RuntimeAssembly
+                );
                 Contract.EndContractBlock();
 
                 // Call the user sink to resolve the reference.
@@ -534,7 +691,9 @@ namespace System.Runtime.InteropServices {
                 }
 
                 if (rtAssembly == null)
-                    throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeAssembly"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_MustBeRuntimeAssembly")
+                    );
 
                 // Add the assembly to the list of assemblies.
                 m_AsmList.Add(rtAssembly);
@@ -542,20 +701,20 @@ namespace System.Runtime.InteropServices {
                 return rtAssembly;
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             public Assembly ResolveEvent(Object sender, ResolveEventArgs args)
             {
                 // We need to load the type in the resolve event so that we will deal with
-                // cases where we are trying to load the CoClass before the interface has 
-                // been loaded.               
+                // cases where we are trying to load the CoClass before the interface has
+                // been loaded.
                 try
                 {
-                    LoadInMemoryTypeByName(m_Module.GetNativeHandle(), args.Name); 
+                    LoadInMemoryTypeByName(m_Module.GetNativeHandle(), args.Name);
                     return m_Module.Assembly;
                 }
                 catch (TypeLoadException e)
                 {
-                    if (e.ResourceId != System.__HResults.COR_E_TYPELOAD)  // type not found
+                    if (e.ResourceId != System.__HResults.COR_E_TYPELOAD) // type not found
                         throw;
                 }
 
@@ -568,11 +727,11 @@ namespace System.Runtime.InteropServices {
                     }
                     catch (TypeLoadException e)
                     {
-                        if (e._HResult != System.__HResults.COR_E_TYPELOAD)  // type not found
+                        if (e._HResult != System.__HResults.COR_E_TYPELOAD) // type not found
                             throw;
                     }
                 }
-                
+
                 return null;
             }
 
@@ -580,7 +739,10 @@ namespace System.Runtime.InteropServices {
             {
                 foreach (RuntimeAssembly asm in m_AsmList)
                 {
-                    if (String.Compare(asm.FullName, args.Name, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        String.Compare(asm.FullName, args.Name, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    )
                         return asm;
                 }
 
@@ -591,7 +753,10 @@ namespace System.Runtime.InteropServices {
             {
                 foreach (RuntimeAssembly asm in m_AsmList)
                 {
-                    if (String.Compare(asm.FullName, args.Name, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (
+                        String.Compare(asm.FullName, args.Name, StringComparison.OrdinalIgnoreCase)
+                        == 0
+                    )
                         return asm;
                 }
 
@@ -607,4 +772,3 @@ namespace System.Runtime.InteropServices {
     }
 }
 #endif // !FEATURE_CORECLR // current implementation requires reflection only load
-

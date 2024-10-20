@@ -24,31 +24,38 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="generators">The generators that will run as part of this driver.</param>
         /// <param name="optionsProvider">An <see cref="AnalyzerConfigOptionsProvider"/> that can be used to retrieve analyzer config values by the generators in this driver.</param>
         /// <param name="additionalTexts">A list of <see cref="AdditionalText"/>s available to generators in this driver.</param>
-        internal CSharpGeneratorDriver(CSharpParseOptions parseOptions, ImmutableArray<ISourceGenerator> generators, AnalyzerConfigOptionsProvider optionsProvider, ImmutableArray<AdditionalText> additionalTexts, GeneratorDriverOptions driverOptions)
-            : base(parseOptions, generators, optionsProvider, additionalTexts, driverOptions)
-        {
-        }
+        internal CSharpGeneratorDriver(
+            CSharpParseOptions parseOptions,
+            ImmutableArray<ISourceGenerator> generators,
+            AnalyzerConfigOptionsProvider optionsProvider,
+            ImmutableArray<AdditionalText> additionalTexts,
+            GeneratorDriverOptions driverOptions
+        )
+            : base(parseOptions, generators, optionsProvider, additionalTexts, driverOptions) { }
 
         private CSharpGeneratorDriver(GeneratorDriverState state)
-            : base(state)
-        {
-        }
+            : base(state) { }
 
         /// <summary>
         /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see cref="ISourceGenerator"/>s and default options
         /// </summary>
         /// <param name="generators">The generators to create this driver with</param>
         /// <returns>A new <see cref="CSharpGeneratorDriver"/> instance.</returns>
-        public static CSharpGeneratorDriver Create(params ISourceGenerator[] generators)
-            => Create(generators, additionalTexts: null);
+        public static CSharpGeneratorDriver Create(params ISourceGenerator[] generators) =>
+            Create(generators, additionalTexts: null);
 
         /// <summary>
         /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see cref="IIncrementalGenerator"/>s and default options
         /// </summary>
         /// <param name="incrementalGenerators">The incremental generators to create this driver with</param>
         /// <returns>A new <see cref="CSharpGeneratorDriver"/> instance.</returns>
-        public static CSharpGeneratorDriver Create(params IIncrementalGenerator[] incrementalGenerators)
-            => Create(incrementalGenerators.Select(GeneratorExtensions.AsSourceGenerator), additionalTexts: null);
+        public static CSharpGeneratorDriver Create(
+            params IIncrementalGenerator[] incrementalGenerators
+        ) =>
+            Create(
+                incrementalGenerators.Select(GeneratorExtensions.AsSourceGenerator),
+                additionalTexts: null
+            );
 
         /// <summary>
         /// Creates a new instance of <see cref="CSharpGeneratorDriver"/> with the specified <see cref="ISourceGenerator"/>s and the provided options or default.
@@ -59,18 +66,50 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="optionsProvider">An <see cref="AnalyzerConfigOptionsProvider"/> that can be used to retrieve analyzer config values by the generators in this driver, or <c>null</c> if there are none.</param>
         /// <param name="driverOptions">A <see cref="GeneratorDriverOptions"/> that controls the behavior of the created driver.</param>
         /// <returns>A new <see cref="CSharpGeneratorDriver"/> instance.</returns>
-        public static CSharpGeneratorDriver Create(IEnumerable<ISourceGenerator> generators, IEnumerable<AdditionalText>? additionalTexts = null, CSharpParseOptions? parseOptions = null, AnalyzerConfigOptionsProvider? optionsProvider = null, GeneratorDriverOptions driverOptions = default)
-            => new CSharpGeneratorDriver(parseOptions ?? CSharpParseOptions.Default, generators.ToImmutableArray(), optionsProvider ?? CompilerAnalyzerConfigOptionsProvider.Empty, additionalTexts.AsImmutableOrEmpty(), driverOptions);
+        public static CSharpGeneratorDriver Create(
+            IEnumerable<ISourceGenerator> generators,
+            IEnumerable<AdditionalText>? additionalTexts = null,
+            CSharpParseOptions? parseOptions = null,
+            AnalyzerConfigOptionsProvider? optionsProvider = null,
+            GeneratorDriverOptions driverOptions = default
+        ) =>
+            new CSharpGeneratorDriver(
+                parseOptions ?? CSharpParseOptions.Default,
+                generators.ToImmutableArray(),
+                optionsProvider ?? CompilerAnalyzerConfigOptionsProvider.Empty,
+                additionalTexts.AsImmutableOrEmpty(),
+                driverOptions
+            );
 
         // 3.11 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static CSharpGeneratorDriver Create(IEnumerable<ISourceGenerator> generators, IEnumerable<AdditionalText>? additionalTexts, CSharpParseOptions? parseOptions, AnalyzerConfigOptionsProvider? optionsProvider)
-            => Create(generators, additionalTexts, parseOptions, optionsProvider, driverOptions: default);
+        public static CSharpGeneratorDriver Create(
+            IEnumerable<ISourceGenerator> generators,
+            IEnumerable<AdditionalText>? additionalTexts,
+            CSharpParseOptions? parseOptions,
+            AnalyzerConfigOptionsProvider? optionsProvider
+        ) =>
+            Create(
+                generators,
+                additionalTexts,
+                parseOptions,
+                optionsProvider,
+                driverOptions: default
+            );
 
-        internal override SyntaxTree ParseGeneratedSourceText(GeneratedSourceText input, string fileName, CancellationToken cancellationToken)
-            => CSharpSyntaxTree.ParseTextLazy(input.Text, (CSharpParseOptions)_state.ParseOptions, fileName);
+        internal override SyntaxTree ParseGeneratedSourceText(
+            GeneratedSourceText input,
+            string fileName,
+            CancellationToken cancellationToken
+        ) =>
+            CSharpSyntaxTree.ParseTextLazy(
+                input.Text,
+                (CSharpParseOptions)_state.ParseOptions,
+                fileName
+            );
 
-        internal override GeneratorDriver FromState(GeneratorDriverState state) => new CSharpGeneratorDriver(state);
+        internal override GeneratorDriver FromState(GeneratorDriverState state) =>
+            new CSharpGeneratorDriver(state);
 
         internal override CommonMessageProvider MessageProvider => CSharp.MessageProvider.Instance;
 

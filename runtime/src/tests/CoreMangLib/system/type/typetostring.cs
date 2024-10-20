@@ -30,7 +30,6 @@ public class TypeToString
             TestLibrary.TestFramework.LogInformation("FAIL");
             return 0;
         }
-
     }
 
     public bool RunTests()
@@ -68,13 +67,14 @@ public class TypeToString
             actualValue = (0 == string.CompareOrdinal(typeName, "System.Int32"));
             if (actualValue != expectedValue)
             {
-                errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
+                errorDesc =
+                    "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
                 //errorDesc += GetDataString(strA, indexA, strB, indexB, length, comparisonType);
                 TestLibrary.TestFramework.LogError("001" + " TestId-" + c_TEST_ID, errorDesc);
                 retVal = false;
             }
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             errorDesc = "Unexpected exception: " + e;
             TestLibrary.TestFramework.LogError("002" + " TestId-" + c_TEST_ID, errorDesc);
@@ -104,7 +104,8 @@ public class TypeToString
             actualValue = (0 == string.CompareOrdinal(typeName, "System.String"));
             if (actualValue != expectedValue)
             {
-                errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
+                errorDesc =
+                    "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
                 //errorDesc += GetDataString(strA, indexA, strB, indexB, length, comparisonType);
                 TestLibrary.TestFramework.LogError("003" + " TestId-" + c_TEST_ID, errorDesc);
                 retVal = false;
@@ -140,7 +141,8 @@ public class TypeToString
             actualValue = (0 == string.CompareOrdinal(typeName, "System.Int32[]"));
             if (actualValue != expectedValue)
             {
-                errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
+                errorDesc =
+                    "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
                 //errorDesc += GetDataString(strA, indexA, strB, indexB, length, comparisonType);
                 TestLibrary.TestFramework.LogError("005" + " TestId-" + c_TEST_ID, errorDesc);
                 retVal = false;
@@ -173,10 +175,17 @@ public class TypeToString
         try
         {
             string typeName = testType.ToString();
-            actualValue = (0 == string.CompareOrdinal(typeName, "System.Collections.Generic.List`1[System.String]"));
+            actualValue = (
+                0
+                == string.CompareOrdinal(
+                    typeName,
+                    "System.Collections.Generic.List`1[System.String]"
+                )
+            );
             if (actualValue != expectedValue)
             {
-                errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
+                errorDesc =
+                    "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
                 //errorDesc += GetDataString(strA, indexA, strB, indexB, length, comparisonType);
                 TestLibrary.TestFramework.LogError("007" + " TestId-" + c_TEST_ID, errorDesc);
                 retVal = false;
@@ -209,10 +218,17 @@ public class TypeToString
         try
         {
             string typeName = testType.ToString();
-            actualValue = (0 == string.CompareOrdinal(typeName, "TestHelper.Foo`2[System.Collections.Generic.List`1[System.Int32],System.String]"));
+            actualValue = (
+                0
+                == string.CompareOrdinal(
+                    typeName,
+                    "TestHelper.Foo`2[System.Collections.Generic.List`1[System.Int32],System.String]"
+                )
+            );
             if (actualValue != expectedValue)
             {
-                errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
+                errorDesc =
+                    "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
                 //errorDesc += GetDataString(strA, indexA, strB, indexB, length, comparisonType);
                 TestLibrary.TestFramework.LogError("09" + " TestId-" + c_TEST_ID, errorDesc);
                 retVal = false;
@@ -246,7 +262,8 @@ public class TypeToString
             actualValue = (0 == string.CompareOrdinal(typeName, "TestHelper.ClassA"));
             if (actualValue != expectedValue)
             {
-                errorDesc = "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
+                errorDesc =
+                    "Value is not " + expectedValue + " as expected: Actual(" + actualValue + ")";
                 //errorDesc += GetDataString(strA, indexA, strB, indexB, length, comparisonType);
                 TestLibrary.TestFramework.LogError("011" + " TestId-" + c_TEST_ID, errorDesc);
                 retVal = false;
@@ -266,9 +283,7 @@ public class TypeToString
 #region helper class
 namespace TestHelper
 {
-    internal class Foo<T1, T2>
-    {
-    }
+    internal class Foo<T1, T2> { }
 
     internal class MyClass<T>
     {

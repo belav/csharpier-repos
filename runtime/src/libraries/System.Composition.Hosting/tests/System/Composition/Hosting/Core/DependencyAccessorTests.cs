@@ -24,17 +24,25 @@ namespace System.Composition.Hosting.Core.Tests
         public void ResolveDependencies_PromisesReturnsNonEmpty_ReturnsExpected()
         {
             var descriptor = ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            var target = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", false, () => Enumerable.Empty<CompositionDependency>(), dependencies =>
-            {
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            });
+            var target = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                false,
+                () => Enumerable.Empty<CompositionDependency>(),
+                dependencies =>
+                {
+                    return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
+                }
+            );
             var accessor = new SubAccessor { Result = new ExportDescriptorPromise[] { target } };
 
             var contract = new CompositionContract(typeof(int));
-            CompositionDependency dependency = Assert.Single(accessor.ResolveDependencies("Site", contract, true));
+            CompositionDependency dependency = Assert.Single(
+                accessor.ResolveDependencies("Site", contract, true)
+            );
             Assert.Same(contract, accessor.Contract);
 
-            Assert.Same(contract,  dependency.Contract);
+            Assert.Same(contract, dependency.Contract);
             Assert.Equal("Site", dependency.Site);
             Assert.True(dependency.IsPrerequisite);
             Assert.Same(target, dependency.Target);
@@ -46,7 +54,10 @@ namespace System.Composition.Hosting.Core.Tests
             var accessor = new SubAccessor();
 
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => accessor.ResolveDependencies("Site", contract, true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => accessor.ResolveDependencies("Site", contract, true)
+            );
             Assert.Same(contract, accessor.Contract);
         }
 
@@ -56,7 +67,10 @@ namespace System.Composition.Hosting.Core.Tests
             var accessor = new SubAccessor { Result = new ExportDescriptorPromise[] { null } };
 
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>("target", () => accessor.ResolveDependencies("Site", contract, true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => accessor.ResolveDependencies("Site", contract, true)
+            );
             Assert.Same(contract, accessor.Contract);
         }
 
@@ -66,7 +80,11 @@ namespace System.Composition.Hosting.Core.Tests
             var accessor = new SubAccessor { Result = new ExportDescriptorPromise[0] };
 
             var contract = new CompositionContract(typeof(int));
-            CompositionDependency dependency = accessor.ResolveRequiredDependency("Site", contract, true);
+            CompositionDependency dependency = accessor.ResolveRequiredDependency(
+                "Site",
+                contract,
+                true
+            );
             Assert.Same(contract, accessor.Contract);
 
             Assert.Same(contract, dependency.Contract);
@@ -79,14 +97,24 @@ namespace System.Composition.Hosting.Core.Tests
         public void ResolveRequiredDependency_PromisesReturnsOneTarget_ReturnsStatisfied()
         {
             var descriptor = ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            var target = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", false, () => Enumerable.Empty<CompositionDependency>(), dependencies =>
-            {
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            });
+            var target = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                false,
+                () => Enumerable.Empty<CompositionDependency>(),
+                dependencies =>
+                {
+                    return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
+                }
+            );
             var accessor = new SubAccessor { Result = new ExportDescriptorPromise[] { target } };
 
             var contract = new CompositionContract(typeof(int));
-            CompositionDependency dependency = accessor.ResolveRequiredDependency("Site", contract, true);
+            CompositionDependency dependency = accessor.ResolveRequiredDependency(
+                "Site",
+                contract,
+                true
+            );
             Assert.Same(contract, accessor.Contract);
 
             Assert.Same(contract, dependency.Contract);
@@ -99,14 +127,27 @@ namespace System.Composition.Hosting.Core.Tests
         public void ResolveRequiredDependency_PromisesReturnsMultipleTargets_ReturnsStatisfied()
         {
             var descriptor = ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            var target = new ExportDescriptorPromise(new CompositionContract(typeof(int)), "Origin", false, () => Enumerable.Empty<CompositionDependency>(), dependencies =>
+            var target = new ExportDescriptorPromise(
+                new CompositionContract(typeof(int)),
+                "Origin",
+                false,
+                () => Enumerable.Empty<CompositionDependency>(),
+                dependencies =>
+                {
+                    return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
+                }
+            );
+            var accessor = new SubAccessor
             {
-                return ExportDescriptor.Create(Activator, new Dictionary<string, object>());
-            });
-            var accessor = new SubAccessor { Result = new ExportDescriptorPromise[] { target, target } };
+                Result = new ExportDescriptorPromise[] { target, target },
+            };
 
             var contract = new CompositionContract(typeof(int));
-            CompositionDependency dependency = accessor.ResolveRequiredDependency("Site", contract, true);
+            CompositionDependency dependency = accessor.ResolveRequiredDependency(
+                "Site",
+                contract,
+                true
+            );
             Assert.Same(contract, accessor.Contract);
 
             Assert.Same(contract, dependency.Contract);
@@ -121,7 +162,10 @@ namespace System.Composition.Hosting.Core.Tests
             var accessor = new SubAccessor();
 
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => accessor.ResolveRequiredDependency("Site", contract, true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => accessor.ResolveRequiredDependency("Site", contract, true)
+            );
             Assert.Same(contract, accessor.Contract);
         }
 
@@ -131,7 +175,10 @@ namespace System.Composition.Hosting.Core.Tests
             var accessor = new SubAccessor { Result = new ExportDescriptorPromise[] { null } };
 
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>("target", () => accessor.ResolveRequiredDependency("Site", contract, true));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => accessor.ResolveRequiredDependency("Site", contract, true)
+            );
             Assert.Same(contract, accessor.Contract);
         }
 
@@ -140,13 +187,16 @@ namespace System.Composition.Hosting.Core.Tests
             public CompositionContract Contract { get; set; }
             public IEnumerable<ExportDescriptorPromise> Result { get; set; }
 
-            protected override IEnumerable<ExportDescriptorPromise> GetPromises(CompositionContract exportKey)
+            protected override IEnumerable<ExportDescriptorPromise> GetPromises(
+                CompositionContract exportKey
+            )
             {
                 Contract = exportKey;
                 return Result;
             }
         }
 
-        private static object Activator(LifetimeContext context, CompositionOperation operation) => "hi";
+        private static object Activator(LifetimeContext context, CompositionOperation operation) =>
+            "hi";
     }
 }

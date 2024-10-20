@@ -26,14 +26,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     /// </summary>
     [ExportStatelessXamlLspService(typeof(CompletionHandler)), Shared]
     [Method(Methods.TextDocumentCompletionName)]
-    internal class CompletionHandler : ILspServiceDocumentRequestHandler<CompletionParams, CompletionList?>
+    internal class CompletionHandler
+        : ILspServiceDocumentRequestHandler<CompletionParams, CompletionList?>
     {
         private const string CreateEventHandlerCommandTitle = "Create Event Handler";
 
         private static readonly Command s_retriggerCompletionCommand = new Command()
         {
             CommandIdentifier = StringConstants.RetriggerCompletionCommand,
-            Title = "Re-trigger completions"
+            Title = "Re-trigger completions",
         };
 
         public bool MutatesSolutionState => false;
@@ -41,15 +42,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CompletionHandler()
-        {
-        }
+        public CompletionHandler() { }
 
-        public TextDocumentIdentifier GetTextDocumentIdentifier(CompletionParams request) => request.TextDocument;
+        public TextDocumentIdentifier GetTextDocumentIdentifier(CompletionParams request) =>
+            request.TextDocument;
 
-        public async Task<CompletionList?> HandleRequestAsync(CompletionParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<CompletionList?> HandleRequestAsync(
+            CompletionParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
-            if (request.Context is VSInternalCompletionContext completionContext && completionContext.InvokeKind == VSInternalCompletionInvokeKind.Deletion)
+            if (
+                request.Context is VSInternalCompletionContext completionContext
+                && completionContext.InvokeKind == VSInternalCompletionInvokeKind.Deletion
+            )
             {
                 // Don't trigger completions on backspace.
                 return null;
@@ -61,24 +68,58 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return null;
             }
 
-            var completionService = document.Project.Services.GetRequiredService<IXamlCompletionService>();
+            var completionService =
+                document.Project.Services.GetRequiredService<IXamlCompletionService>();
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var offset = text.Lines.GetPosition(ProtocolConversions.PositionToLinePosition(request.Position));
-            var completionResult = await completionService.GetCompletionsAsync(new XamlCompletionContext(document, offset, request.Context?.TriggerCharacter?.FirstOrDefault() ?? '\0'), cancellationToken: cancellationToken).ConfigureAwait(false);
+            var offset = text.Lines.GetPosition(
+                ProtocolConversions.PositionToLinePosition(request.Position)
+            );
+            var completionResult = await completionService
+                .GetCompletionsAsync(
+                    new XamlCompletionContext(
+                        document,
+                        offset,
+                        request.Context?.TriggerCharacter?.FirstOrDefault() ?? '\0'
+                    ),
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
             if (completionResult?.Completions == null)
             {
                 return null;
             }
 
-            var commitCharactersCache = new Dictionary<XamlCompletionKind, ImmutableArray<VSInternalCommitCharacter>>();
+            var commitCharactersCache =
+                new Dictionary<XamlCompletionKind, ImmutableArray<VSInternalCommitCharacter>>();
             return new VSInternalCompletionList
             {
-                Items = completionResult.Completions.Select(c => CreateCompletionItem(c, document.Id, text, request.Position, request.TextDocument, commitCharactersCache)).ToArray(),
+                Items = completionResult
+                    .Completions.Select(c =>
+                        CreateCompletionItem(
+                            c,
+                            document.Id,
+                            text,
+                            request.Position,
+                            request.TextDocument,
+                            commitCharactersCache
+                        )
+                    )
+                    .ToArray(),
                 SuggestionMode = false,
             };
         }
 
-        private static CompletionItem CreateCompletionItem(XamlCompletionItem xamlCompletion, DocumentId documentId, SourceText text, Position position, TextDocumentIdentifier textDocument, Dictionary<XamlCompletionKind, ImmutableArray<VSInternalCommitCharacter>> commitCharactersCach)
+        private static CompletionItem CreateCompletionItem(
+            XamlCompletionItem xamlCompletion,
+            DocumentId documentId,
+            SourceText text,
+            Position position,
+            TextDocumentIdentifier textDocument,
+            Dictionary<
+                XamlCompletionKind,
+                ImmutableArray<VSInternalCommitCharacter>
+            > commitCharactersCach
+        )
         {
             var item = new VSInternalCompletionItem
             {
@@ -92,8 +133,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 Kind = GetItemKind(xamlCompletion.Kind),
                 Description = xamlCompletion.Description,
                 Icon = xamlCompletion.Icon,
-                InsertTextFormat = xamlCompletion.IsSnippet ? InsertTextFormat.Snippet : InsertTextFormat.Plaintext,
-                Data = new CompletionResolveData { ProjectGuid = documentId.ProjectId.Id, DocumentGuid = documentId.Id, Position = position, DisplayText = xamlCompletion.DisplayText }
+                InsertTextFormat = xamlCompletion.IsSnippet
+                    ? InsertTextFormat.Snippet
+                    : InsertTextFormat.Plaintext,
+                Data = new CompletionResolveData
+                {
+                    ProjectGuid = documentId.ProjectId.Id,
+                    DocumentGuid = documentId.Id,
+                    Position = position,
+                    DisplayText = xamlCompletion.DisplayText,
+                },
             };
 
             if (xamlCompletion.Span.HasValue)
@@ -101,7 +150,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 item.TextEdit = new TextEdit
                 {
                     NewText = xamlCompletion.InsertText,
-                    Range = ProtocolConversions.LinePositionToRange(text.Lines.GetLinePositionSpan(xamlCompletion.Span.Value))
+                    Range = ProtocolConversions.LinePositionToRange(
+                        text.Lines.GetLinePositionSpan(xamlCompletion.Span.Value)
+                    ),
                 };
             }
 
@@ -111,7 +162,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 {
                     CommandIdentifier = StringConstants.CreateEventHandlerCommand,
                     Arguments = [textDocument, xamlCompletion.EventDescription],
-                    Title = CreateEventHandlerCommandTitle
+                    Title = CreateEventHandlerCommandTitle,
                 };
             }
             else if (xamlCompletion.RetriggerCompletion)
@@ -123,7 +174,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             return item;
         }
 
-        private static SumType<string[], VSInternalCommitCharacter[]> GetCommitCharacters(XamlCompletionItem completionItem, Dictionary<XamlCompletionKind, ImmutableArray<VSInternalCommitCharacter>> commitCharactersCache)
+        private static SumType<string[], VSInternalCommitCharacter[]> GetCommitCharacters(
+            XamlCompletionItem completionItem,
+            Dictionary<
+                XamlCompletionKind,
+                ImmutableArray<VSInternalCommitCharacter>
+            > commitCharactersCache
+        )
         {
             if (!completionItem.XamlCommitCharacters.HasValue)
             {
@@ -138,7 +195,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
 
             var xamlCommitCharacters = completionItem.XamlCommitCharacters.Value;
 
-            var commitCharacters = xamlCommitCharacters.Characters.Select(c => new VSInternalCommitCharacter { Character = c.ToString(), Insert = !xamlCommitCharacters.NonInsertCharacters.Contains(c) }).ToImmutableArray();
+            var commitCharacters = xamlCommitCharacters
+                .Characters.Select(c => new VSInternalCommitCharacter
+                {
+                    Character = c.ToString(),
+                    Insert = !xamlCommitCharacters.NonInsertCharacters.Contains(c),
+                })
+                .ToImmutableArray();
             commitCharactersCache.Add(completionItem.Kind, commitCharacters);
             return commitCharacters.ToArray();
         }
@@ -188,7 +251,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 case XamlCompletionKind.Snippet:
                     return CompletionItemKind.Snippet;
                 default:
-                    Debug.Fail($"Unhandled {nameof(XamlCompletionKind)}: {Enum.GetName(typeof(XamlCompletionKind), kind)}");
+                    Debug.Fail(
+                        $"Unhandled {nameof(XamlCompletionKind)}: {Enum.GetName(typeof(XamlCompletionKind), kind)}"
+                    );
                     return CompletionItemKind.Text;
             }
         }

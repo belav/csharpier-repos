@@ -11,18 +11,21 @@ public class NegotiateEvents
     /// <summary>
     /// Invoked if exceptions are thrown during request processing. The exceptions will be re-thrown after this event unless suppressed.
     /// </summary>
-    public Func<AuthenticationFailedContext, Task> OnAuthenticationFailed { get; set; } = context => Task.CompletedTask;
+    public Func<AuthenticationFailedContext, Task> OnAuthenticationFailed { get; set; } =
+        context => Task.CompletedTask;
 
     /// <summary>
     /// Invoked after the authentication before ClaimsIdentity is populated with claims retrieved through the LDAP connection.
     /// This event is invoked when <see cref="LdapSettings.EnableLdapClaimResolution"/> is set to true on <see cref="LdapSettings"/>.
     /// </summary>
-    public Func<LdapContext, Task> OnRetrieveLdapClaims { get; set; } = context => Task.CompletedTask;
+    public Func<LdapContext, Task> OnRetrieveLdapClaims { get; set; } =
+        context => Task.CompletedTask;
 
     /// <summary>
     /// Invoked after the authentication is complete and a ClaimsIdentity has been generated.
     /// </summary>
-    public Func<AuthenticatedContext, Task> OnAuthenticated { get; set; } = context => Task.CompletedTask;
+    public Func<AuthenticatedContext, Task> OnAuthenticated { get; set; } =
+        context => Task.CompletedTask;
 
     /// <summary>
     /// Invoked before a challenge is sent back to the caller.
@@ -32,7 +35,8 @@ public class NegotiateEvents
     /// <summary>
     /// Invoked if exceptions are thrown during request processing. The exceptions will be re-thrown after this event unless suppressed.
     /// </summary>
-    public virtual Task AuthenticationFailed(AuthenticationFailedContext context) => OnAuthenticationFailed(context);
+    public virtual Task AuthenticationFailed(AuthenticationFailedContext context) =>
+        OnAuthenticationFailed(context);
 
     /// <summary>
     /// Invoked after the authentication before ClaimsIdentity is populated with claims retrieved through the LDAP connection.

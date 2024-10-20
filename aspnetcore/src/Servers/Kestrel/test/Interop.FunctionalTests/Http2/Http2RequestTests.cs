@@ -9,9 +9,9 @@ using System.Security.Authentication;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Internal;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.Metrics;
 using Microsoft.Extensions.Diagnostics.Metrics.Testing;
@@ -27,7 +27,9 @@ public class Http2RequestTests : LoggedTest
     public async Task GET_Metrics_HttpProtocolAndTlsSet()
     {
         // Arrange
-        var protocolTcs = new TaskCompletionSource<SslProtocols>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var protocolTcs = new TaskCompletionSource<SslProtocols>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var builder = CreateHostBuilder(
             c =>
             {
@@ -37,27 +39,42 @@ public class Http2RequestTests : LoggedTest
             configureKestrel: o =>
             {
                 // Test IPv6 endpoint with metrics.
-                o.Listen(IPAddress.IPv6Loopback, 0, listenOptions =>
-                {
-                    listenOptions.Protocols = HttpProtocols.Http2;
-                    listenOptions.UseHttps(TestResources.GetTestCertificate(), https =>
+                o.Listen(
+                    IPAddress.IPv6Loopback,
+                    0,
+                    listenOptions =>
                     {
-                        https.SslProtocols = SslProtocols.Tls12;
-                    });
-                });
-            });
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                        listenOptions.UseHttps(
+                            TestResources.GetTestCertificate(),
+                            https =>
+                            {
+                                https.SslProtocols = SslProtocols.Tls12;
+                            }
+                        );
+                    }
+                );
+            }
+        );
 
         using (var host = builder.Build())
         {
             var meterFactory = host.Services.GetRequiredService<IMeterFactory>();
 
-            using var connectionDuration = new MetricCollector<double>(meterFactory, "Microsoft.AspNetCore.Server.Kestrel", "kestrel.connection.duration");
+            using var connectionDuration = new MetricCollector<double>(
+                meterFactory,
+                "Microsoft.AspNetCore.Server.Kestrel",
+                "kestrel.connection.duration"
+            );
 
             await host.StartAsync();
             var client = HttpHelpers.CreateClient();
 
             // Act
-            var request1 = new HttpRequestMessage(HttpMethod.Get, $"https://[::1]:{host.GetPort()}/");
+            var request1 = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"https://[::1]:{host.GetPort()}/"
+            );
             request1.Version = HttpVersion.Version20;
             request1.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
@@ -72,7 +89,8 @@ public class Http2RequestTests : LoggedTest
             await connectionDuration.WaitForMeasurementsAsync(minCount: 1).DefaultTimeout();
 
             // Assert
-            Assert.Collection(connectionDuration.GetMeasurementSnapshot(),
+            Assert.Collection(
+                connectionDuration.GetMeasurementSnapshot(),
                 m =>
                 {
                     Assert.True(m.Value > 0);
@@ -83,7 +101,8 @@ public class Http2RequestTests : LoggedTest
                     Assert.Equal("::1", (string)m.Tags["server.address"]);
                     Assert.Equal(host.GetPort(), (int)m.Tags["server.port"]);
                     Assert.Equal("1.2", (string)m.Tags["tls.protocol.version"]);
-                });
+                }
+            );
 
             await host.StopAsync();
         }
@@ -93,23 +112,35 @@ public class Http2RequestTests : LoggedTest
     public async Task GET_NoTLS_Http11RequestToHttp2Endpoint_400Result()
     {
         // Arrange
-        var builder = CreateHostBuilder(c => Task.CompletedTask, protocol: HttpProtocols.Http2, plaintext: true);
+        var builder = CreateHostBuilder(
+            c => Task.CompletedTask,
+            protocol: HttpProtocols.Http2,
+            plaintext: true
+        );
 
         using (var host = builder.Build())
         using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync().DefaultTimeout();
 
-            var request = new HttpRequestMessage(HttpMethod.Get, $"http://127.0.0.1:{host.GetPort()}/");
+            var request = new HttpRequestMessage(
+                HttpMethod.Get,
+                $"http://127.0.0.1:{host.GetPort()}/"
+            );
             request.Version = HttpVersion.Version11;
             request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
             // Act
-            var responseMessage = await client.SendAsync(request, CancellationToken.None).DefaultTimeout();
+            var responseMessage = await client
+                .SendAsync(request, CancellationToken.None)
+                .DefaultTimeout();
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, responseMessage.StatusCode);
-            Assert.Equal("An HTTP/1.x request was sent to an HTTP/2 only endpoint.", await responseMessage.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "An HTTP/1.x request was sent to an HTTP/2 only endpoint.",
+                await responseMessage.Content.ReadAsStringAsync()
+            );
         }
     }
 
@@ -117,7 +148,9 @@ public class Http2RequestTests : LoggedTest
     [InlineData(true)]
     [InlineData(false)]
     [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41074")]
-    public async Task GET_RequestReturnsLargeData_GracefulShutdownDuringRequest_RequestGracefullyCompletes(bool hasTrailers)
+    public async Task GET_RequestReturnsLargeData_GracefulShutdownDuringRequest_RequestGracefullyCompletes(
+        bool hasTrailers
+    )
     {
         // Enable client logging.
         // Test failure on CI could be from HttpClient bug.
@@ -125,7 +158,10 @@ public class Http2RequestTests : LoggedTest
 
         // Arrange
         const int DataLength = 500_000;
-        var randomBytes = Enumerable.Range(1, DataLength).Select(i => (byte)((i % 10) + 48)).ToArray();
+        var randomBytes = Enumerable
+            .Range(1, DataLength)
+            .Select(i => (byte)((i % 10) + 48))
+            .ToArray();
 
         var syncPoint = new SyncPoint();
 
@@ -151,7 +187,8 @@ public class Http2RequestTests : LoggedTest
                 }
             },
             protocol: HttpProtocols.Http2,
-            plaintext: true);
+            plaintext: true
+        );
 
         using var host = builder.Build();
         logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger("Test");
@@ -182,7 +219,11 @@ public class Http2RequestTests : LoggedTest
         }
     }
 
-    private static async Task<(byte[], HttpResponseHeaders)> StartLongRunningRequestAsync(ILogger logger, IHost host, HttpMessageInvoker client)
+    private static async Task<(byte[], HttpResponseHeaders)> StartLongRunningRequestAsync(
+        ILogger logger,
+        IHost host,
+        HttpMessageInvoker client
+    )
     {
         var request = new HttpRequestMessage(HttpMethod.Get, $"http://127.0.0.1:{host.GetPort()}/");
         request.Headers.Host = "localhost2";
@@ -190,7 +231,9 @@ public class Http2RequestTests : LoggedTest
         request.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
         logger.LogInformation($"Sending request to '{request.RequestUri}'.");
-        var responseMessage = await client.SendAsync(request, CancellationToken.None).DefaultTimeout();
+        var responseMessage = await client
+            .SendAsync(request, CancellationToken.None)
+            .DefaultTimeout();
         responseMessage.EnsureSuccessStatusCode();
 
         var responseStream = await responseMessage.Content.ReadAsStreamAsync();
@@ -218,8 +261,19 @@ public class Http2RequestTests : LoggedTest
         return (data.ToArray(), responseMessage.TrailingHeaders);
     }
 
-    private IHostBuilder CreateHostBuilder(RequestDelegate requestDelegate, HttpProtocols? protocol = null, Action<KestrelServerOptions> configureKestrel = null, bool? plaintext = null)
+    private IHostBuilder CreateHostBuilder(
+        RequestDelegate requestDelegate,
+        HttpProtocols? protocol = null,
+        Action<KestrelServerOptions> configureKestrel = null,
+        bool? plaintext = null
+    )
     {
-        return HttpHelpers.CreateHostBuilder(AddTestLogging, requestDelegate, protocol, configureKestrel, plaintext);
+        return HttpHelpers.CreateHostBuilder(
+            AddTestLogging,
+            requestDelegate,
+            protocol,
+            configureKestrel,
+            plaintext
+        );
     }
 }

@@ -14,16 +14,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         {
             public RemoveDocumentUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
-                DocumentId documentId)
-                : base(workspace, documentId)
-            {
-            }
+                DocumentId documentId
+            )
+                : base(workspace, documentId) { }
 
-            protected override IReadOnlyList<DocumentId> GetDocumentIds(Project fromProject)
-                => fromProject.DocumentIds;
+            protected override IReadOnlyList<DocumentId> GetDocumentIds(Project fromProject) =>
+                fromProject.DocumentIds;
 
-            protected override TextDocument? GetDocument(Solution currentSolution)
-                => currentSolution.GetDocument(this.DocumentId);
+            protected override TextDocument? GetDocument(Solution currentSolution) =>
+                currentSolution.GetDocument(this.DocumentId);
         }
     }
 }

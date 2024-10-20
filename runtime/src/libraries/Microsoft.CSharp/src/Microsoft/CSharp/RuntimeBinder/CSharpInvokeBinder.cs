@@ -20,16 +20,20 @@ namespace Microsoft.CSharp.RuntimeBinder
         public BindingFlag BindingFlags => 0;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals)
-            => runtimeBinder.DispatchPayload(this, arguments, locals);
+        public Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        ) => runtimeBinder.DispatchPayload(this, arguments, locals);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments)
-            => RuntimeBinder.PopulateSymbolTableWithPayloadInformation(this, callingType, arguments);
+        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments) =>
+            RuntimeBinder.PopulateSymbolTableWithPayloadInformation(this, callingType, arguments);
 
         public bool IsBinderThatCanHaveRefReceiver => true;
 
-        bool ICSharpInvokeOrInvokeMemberBinder.StaticCall => _argumentInfo[0] != null && _argumentInfo[0].IsStaticType;
+        bool ICSharpInvokeOrInvokeMemberBinder.StaticCall =>
+            _argumentInfo[0] != null && _argumentInfo[0].IsStaticType;
 
         string ICSharpBinder.Name => "Invoke";
 
@@ -43,7 +47,8 @@ namespace Microsoft.CSharp.RuntimeBinder
 
         CSharpArgumentInfo ICSharpBinder.GetArgumentInfo(int index) => _argumentInfo[index];
 
-        bool ICSharpInvokeOrInvokeMemberBinder.ResultDiscarded => (_flags & CSharpCallFlags.ResultDiscarded) != 0;
+        bool ICSharpInvokeOrInvokeMemberBinder.ResultDiscarded =>
+            (_flags & CSharpCallFlags.ResultDiscarded) != 0;
 
         private readonly RuntimeBinder _binder;
 
@@ -57,10 +62,11 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public CSharpInvokeBinder(
-                CSharpCallFlags flags,
-                Type callingContext,
-                IEnumerable<CSharpArgumentInfo> argumentInfo) :
-            base(BinderHelper.CreateCallInfo(ref argumentInfo, 1)) // discard 1 argument: the target object (even if static, arg is type)
+            CSharpCallFlags flags,
+            Type callingContext,
+            IEnumerable<CSharpArgumentInfo> argumentInfo
+        )
+            : base(BinderHelper.CreateCallInfo(ref argumentInfo, 1)) // discard 1 argument: the target object (even if static, arg is type)
         {
             _flags = flags;
             _callingContext = callingContext;
@@ -85,9 +91,11 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return false;
             }
 
-            if (_flags != otherBinder._flags ||
-                _callingContext != otherBinder._callingContext ||
-                _argumentInfo.Length != otherBinder._argumentInfo.Length)
+            if (
+                _flags != otherBinder._flags
+                || _callingContext != otherBinder._callingContext
+                || _argumentInfo.Length != otherBinder._argumentInfo.Length
+            )
             {
                 return false;
             }
@@ -102,9 +110,16 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="args">The arguments of the dynamic invoke operation.</param>
         /// <param name="errorSuggestion">The binding result to use if binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
-        public override DynamicMetaObject FallbackInvoke(DynamicMetaObject target, DynamicMetaObject[] args, DynamicMetaObject errorSuggestion)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
+        public override DynamicMetaObject FallbackInvoke(
+            DynamicMetaObject target,
+            DynamicMetaObject[] args,
+            DynamicMetaObject errorSuggestion
+        )
         {
 #if ENABLECOMBINDER
             DynamicMetaObject com;
@@ -118,7 +133,13 @@ namespace Microsoft.CSharp.RuntimeBinder
 
             BinderHelper.ValidateBindArgument(target, nameof(target));
             BinderHelper.ValidateBindArgument(args, nameof(args));
-            return BinderHelper.Bind(this, _binder, BinderHelper.Cons(target, args), _argumentInfo, errorSuggestion);
+            return BinderHelper.Bind(
+                this,
+                _binder,
+                BinderHelper.Cons(target, args),
+                _argumentInfo,
+                errorSuggestion
+            );
         }
     }
 }

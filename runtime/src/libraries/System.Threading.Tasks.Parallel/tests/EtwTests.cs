@@ -15,37 +15,52 @@ namespace System.Threading.Tasks.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void TestEtw()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                var eventSourceName = "System.Threading.Tasks.Parallel.EventSource";
-                using (var listener = new TestEventListener(eventSourceName, EventLevel.Verbose))
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    var events = new ConcurrentQueue<int>();
-                    listener.RunWithCallback(ev => events.Enqueue(ev.EventId), () => {
-                        Parallel.For(0, 10000, i => { });
+                    var eventSourceName = "System.Threading.Tasks.Parallel.EventSource";
+                    using (
+                        var listener = new TestEventListener(eventSourceName, EventLevel.Verbose)
+                    )
+                    {
+                        var events = new ConcurrentQueue<int>();
+                        listener.RunWithCallback(
+                            ev => events.Enqueue(ev.EventId),
+                            () =>
+                            {
+                                Parallel.For(0, 10000, i => { });
 
-                        var barrier = new Barrier(2);
-                        Parallel.Invoke(
-                            () => barrier.SignalAndWait(),
-                            () => barrier.SignalAndWait());
-                    });
+                                var barrier = new Barrier(2);
+                                Parallel.Invoke(
+                                    () => barrier.SignalAndWait(),
+                                    () => barrier.SignalAndWait()
+                                );
+                            }
+                        );
 
-                    const int BeginLoopEventId = 1;
-                    const int BeginInvokeEventId = 3;
-                    Assert.Equal(expected: 1, actual: events.Count(i => i == BeginLoopEventId));
-                    Assert.Equal(expected: 1, actual: events.Count(i => i == BeginInvokeEventId));
+                        const int BeginLoopEventId = 1;
+                        const int BeginInvokeEventId = 3;
+                        Assert.Equal(expected: 1, actual: events.Count(i => i == BeginLoopEventId));
+                        Assert.Equal(
+                            expected: 1,
+                            actual: events.Count(i => i == BeginInvokeEventId)
+                        );
 
-                    const int EndLoopEventId = 2;
-                    const int EndInvokeEventId = 4;
-                    Assert.Equal(expected: 1, actual: events.Count(i => i == EndLoopEventId));
-                    Assert.Equal(expected: 1, actual: events.Count(i => i == EndInvokeEventId));
+                        const int EndLoopEventId = 2;
+                        const int EndInvokeEventId = 4;
+                        Assert.Equal(expected: 1, actual: events.Count(i => i == EndLoopEventId));
+                        Assert.Equal(expected: 1, actual: events.Count(i => i == EndInvokeEventId));
 
-                    const int ForkEventId = 5;
-                    const int JoinEventId = 6;
-                    Assert.True(events.Count(i => i == ForkEventId) >= 1);
-                    Assert.Equal(events.Count(i => i == ForkEventId), events.Count(i => i == JoinEventId));
-                }
-            }).Dispose();
+                        const int ForkEventId = 5;
+                        const int JoinEventId = 6;
+                        Assert.True(events.Count(i => i == ForkEventId) >= 1);
+                        Assert.Equal(
+                            events.Count(i => i == ForkEventId),
+                            events.Count(i => i == JoinEventId)
+                        );
+                    }
+                })
+                .Dispose();
         }
     }
 }

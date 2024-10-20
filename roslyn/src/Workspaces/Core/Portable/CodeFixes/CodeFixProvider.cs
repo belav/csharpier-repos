@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// Return null if the provider doesn't support fix all/multiple occurrences.
         /// Otherwise, you can return any of the well known fix all providers from <see cref="WellKnownFixAllProviders"/> or implement your own fix all provider.
         /// </summary>
-        public virtual FixAllProvider? GetFixAllProvider()
-            => null;
+        public virtual FixAllProvider? GetFixAllProvider() => null;
 
         /// <summary>
         /// Computes the <see cref="CodeActionRequestPriority"/> group this provider should be considered to run at. Legal values
@@ -49,8 +48,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// cref="CodeActionRequestPriority.High"/> may be downgraded to <see cref="CodeActionRequestPriority.Default"/> as they
         /// poorly behaving high-priority providers can cause a negative user experience.
         /// </remarks>
-        protected virtual CodeActionRequestPriority ComputeRequestPriority()
-            => CodeActionRequestPriority.Default;
+        protected virtual CodeActionRequestPriority ComputeRequestPriority() =>
+            CodeActionRequestPriority.Default;
 
         /// <summary>
         /// Priority class this refactoring provider should run at. Returns <see
@@ -62,7 +61,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             get
             {
                 var priority = ComputeRequestPriority();
-                Debug.Assert(priority is CodeActionRequestPriority.Low or CodeActionRequestPriority.Default or CodeActionRequestPriority.High, "Provider returned invalid priority");
+                Debug.Assert(
+                    priority
+                        is CodeActionRequestPriority.Low
+                            or CodeActionRequestPriority.Default
+                            or CodeActionRequestPriority.High,
+                    "Provider returned invalid priority"
+                );
                 return priority.Clamp(this.CustomTags);
             }
         }

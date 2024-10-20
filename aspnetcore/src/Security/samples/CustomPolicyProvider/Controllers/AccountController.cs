@@ -18,7 +18,11 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Signin(string userName, string birthDate = null, string returnUrl = null)
+    public async Task<IActionResult> Signin(
+        string userName,
+        string birthDate = null,
+        string returnUrl = null
+    )
     {
         if (string.IsNullOrEmpty(userName))
         {

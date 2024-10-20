@@ -13,15 +13,21 @@ internal readonly struct EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNod
     where TSyntaxNode : EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>
     where TDerivedNode : TSyntaxNode
 {
-    public ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>> NodesAndTokens { get; }
+    public ImmutableArray<
+        EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>
+    > NodesAndTokens { get; }
     public int Length { get; }
     public int SeparatorLength { get; }
 
-    public static readonly EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNode, TDerivedNode> Empty
-        = new(ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>>.Empty);
+    public static readonly EmbeddedSeparatedSyntaxNodeList<
+        TSyntaxKind,
+        TSyntaxNode,
+        TDerivedNode
+    > Empty = new(ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>>.Empty);
 
     public EmbeddedSeparatedSyntaxNodeList(
-        ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>> nodesAndTokens)
+        ImmutableArray<EmbeddedSyntaxNodeOrToken<TSyntaxKind, TSyntaxNode>> nodesAndTokens
+    )
     {
         Debug.Assert(!nodesAndTokens.IsDefault);
         NodesAndTokens = nodesAndTokens;
@@ -42,11 +48,13 @@ internal readonly struct EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNod
             {
                 // All even values should be TNode
                 Debug.Assert(NodesAndTokens[i].IsNode);
-                Debug.Assert(NodesAndTokens[i].Node is EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>);
+                Debug.Assert(
+                    NodesAndTokens[i].Node is EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>
+                );
             }
             else
             {
-                // All odd values should be separator tokens 
+                // All odd values should be separator tokens
                 Debug.Assert(!NodesAndTokens[i].IsNode);
             }
         }
@@ -61,7 +69,7 @@ internal readonly struct EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNod
         {
             if (index < Length && index >= 0)
             {
-                // x2 here to get only even indexed numbers. Follows same logic 
+                // x2 here to get only even indexed numbers. Follows same logic
                 // as SeparatedSyntaxList in that the separator tokens are not returned
                 var nodeOrToken = NodesAndTokens[index * 2];
                 AnalyzerDebug.Assert(nodeOrToken.IsNode);
@@ -77,10 +85,16 @@ internal readonly struct EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNod
 
     public struct Enumerator
     {
-        private readonly EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNode, TDerivedNode> _list;
+        private readonly EmbeddedSeparatedSyntaxNodeList<
+            TSyntaxKind,
+            TSyntaxNode,
+            TDerivedNode
+        > _list;
         private int _currentIndex;
 
-        public Enumerator(EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNode, TDerivedNode> list)
+        public Enumerator(
+            EmbeddedSeparatedSyntaxNodeList<TSyntaxKind, TSyntaxNode, TDerivedNode> list
+        )
         {
             _list = list;
             _currentIndex = -1;

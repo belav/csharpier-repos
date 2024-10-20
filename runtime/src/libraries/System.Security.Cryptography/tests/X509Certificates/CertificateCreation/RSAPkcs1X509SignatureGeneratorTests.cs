@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
-                () => X509SignatureGenerator.CreateForRSA(null, RSASignaturePadding.Pkcs1));
+                () => X509SignatureGenerator.CreateForRSA(null, RSASignaturePadding.Pkcs1)
+            );
         }
 
         [Fact]
@@ -25,7 +26,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             {
                 rsa.ImportParameters(TestData.RsaBigExponentParams);
 
-                X509SignatureGenerator signatureGenerator = X509SignatureGenerator.CreateForRSA(rsa, RSASignaturePadding.Pkcs1);
+                X509SignatureGenerator signatureGenerator = X509SignatureGenerator.CreateForRSA(
+                    rsa,
+                    RSASignaturePadding.Pkcs1
+                );
                 PublicKey publicKey = signatureGenerator.PublicKey;
 
                 // Irrespective of what the current key thinks, the PublicKey value we encode for RSA will always write
@@ -39,11 +43,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                 string expectedKeyHex =
                     // SEQUENCE
-                    "3082010C" +
+                    "3082010C"
+                    +
                     //   INTEGER (modulus)
-                    "0282010100" + TestData.RsaBigExponentParams.Modulus.ByteArrayToHex() +
+                    "0282010100"
+                    + TestData.RsaBigExponentParams.Modulus.ByteArrayToHex()
+                    +
                     //   INTEGER (exponent)
-                    "0205" + TestData.RsaBigExponentParams.Exponent.ByteArrayToHex();
+                    "0205"
+                    + TestData.RsaBigExponentParams.Exponent.ByteArrayToHex();
 
                 Assert.Equal(expectedKeyHex, publicKey.EncodedKeyValue.RawData.ByteArrayToHex());
 
@@ -66,7 +74,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 RSAParameters parameters = TestData.RsaBigExponentParams;
                 rsa.ImportParameters(parameters);
 
-                var signatureGenerator = X509SignatureGenerator.CreateForRSA(rsa, RSASignaturePadding.Pkcs1);
+                var signatureGenerator = X509SignatureGenerator.CreateForRSA(
+                    rsa,
+                    RSASignaturePadding.Pkcs1
+                );
 
                 byte[] sigAlg = signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm);
                 byte[] sigAlg2 = signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm);
@@ -87,13 +98,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 RSAParameters parameters = TestData.RsaBigExponentParams;
                 rsa.ImportParameters(parameters);
 
-                var signatureGenerator = X509SignatureGenerator.CreateForRSA(rsa, RSASignaturePadding.Pkcs1);
+                var signatureGenerator = X509SignatureGenerator.CreateForRSA(
+                    rsa,
+                    RSASignaturePadding.Pkcs1
+                );
 
                 HashAlgorithmName hashAlgorithm = new HashAlgorithmName(hashAlgorithmName);
 
                 Assert.Throws<ArgumentOutOfRangeException>(
                     "hashAlgorithm",
-                    () => signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm));
+                    () => signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm)
+                );
             }
         }
 
@@ -140,7 +155,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 RSAParameters parameters = TestData.RsaBigExponentParams;
                 rsa.ImportParameters(parameters);
 
-                X509SignatureGenerator signatureGenerator = X509SignatureGenerator.CreateForRSA(rsa, RSASignaturePadding.Pkcs1);
+                X509SignatureGenerator signatureGenerator = X509SignatureGenerator.CreateForRSA(
+                    rsa,
+                    RSASignaturePadding.Pkcs1
+                );
                 byte[] sigAlg = signatureGenerator.GetSignatureAlgorithmIdentifier(hashAlgorithm);
 
                 Assert.Equal(expectedHex, sigAlg.ByteArrayToHex());

@@ -15,7 +15,8 @@ public abstract class RequestCultureProvider : IRequestCultureProvider
     /// Result that indicates that this instance of <see cref="RequestCultureProvider" /> could not determine the
     /// request culture.
     /// </summary>
-    protected static readonly Task<ProviderCultureResult?> NullProviderCultureResult = Task.FromResult(default(ProviderCultureResult));
+    protected static readonly Task<ProviderCultureResult?> NullProviderCultureResult =
+        Task.FromResult(default(ProviderCultureResult));
 
     /// <summary>
     /// The current options for the <see cref="RequestLocalizationMiddleware"/>.
@@ -23,5 +24,7 @@ public abstract class RequestCultureProvider : IRequestCultureProvider
     public RequestLocalizationOptions? Options { get; set; }
 
     /// <inheritdoc />
-    public abstract Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext);
+    public abstract Task<ProviderCultureResult?> DetermineProviderCultureResult(
+        HttpContext httpContext
+    );
 }

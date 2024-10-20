@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Activation.Diagnostics
 {
     using System;
-    using System.Diagnostics;
-    using System.Runtime.Diagnostics;    
     using System.Collections.Generic;
-    
+    using System.Diagnostics;
+    using System.Runtime.Diagnostics;
+
     static class TraceCode
     {
         // WebHost trace codes
@@ -20,5 +20,5 @@ namespace System.ServiceModel.Activation.Diagnostics
         public const int WebHostProtocolMisconfigured = TraceCode.Activation | 0X0006;
         public const int WebHostServiceCloseFailed = TraceCode.Activation | 0X0007;
         public const int WebHostNoCBTSupport = TraceCode.Activation | 0X0008;
-    }    
+    }
 }

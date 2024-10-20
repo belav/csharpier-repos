@@ -26,7 +26,12 @@ namespace Microsoft.Web.Mvc.Resources
 
         internal static bool HasBody(this HttpRequestBase request)
         {
-            return request.ContentLength > 0 || String.Compare("chunked", request.Headers["Transfer-Encoding"], StringComparison.OrdinalIgnoreCase) == 0;
+            return request.ContentLength > 0
+                || String.Compare(
+                    "chunked",
+                    request.Headers["Transfer-Encoding"],
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0;
         }
 
         public static bool IsBrowserRequest(this HttpRequestBase request)
@@ -47,7 +52,11 @@ namespace Microsoft.Web.Mvc.Resources
         // CODEREVIEW: this implementation kind of misses the point of HttpVerbs
         // by falling back to string comparison, consider something better
         // also, how do we keep this switch in sync?
-        public static bool IsHttpMethod(this HttpRequestBase request, HttpVerbs httpMethod, bool allowOverride)
+        public static bool IsHttpMethod(
+            this HttpRequestBase request,
+            HttpVerbs httpMethod,
+            bool allowOverride
+        )
         {
             switch (httpMethod)
             {
@@ -67,13 +76,22 @@ namespace Microsoft.Web.Mvc.Resources
                     return request.IsHttpMethod("OPTIONS", allowOverride);
                 default:
                     // CODEREVIEW: does this look reasonable?
-                    return request.IsHttpMethod(httpMethod.ToString().ToUpperInvariant(), allowOverride);
+                    return request.IsHttpMethod(
+                        httpMethod.ToString().ToUpperInvariant(),
+                        allowOverride
+                    );
             }
         }
 
-        public static bool IsHttpMethod(this HttpRequestBase request, string httpMethod, bool allowOverride)
+        public static bool IsHttpMethod(
+            this HttpRequestBase request,
+            string httpMethod,
+            bool allowOverride
+        )
         {
-            string requestHttpMethod = allowOverride ? request.GetHttpMethodOverride() : request.HttpMethod;
+            string requestHttpMethod = allowOverride
+                ? request.GetHttpMethodOverride()
+                : request.HttpMethod;
             return String.Equals(requestHttpMethod, httpMethod, StringComparison.OrdinalIgnoreCase);
         }
     }

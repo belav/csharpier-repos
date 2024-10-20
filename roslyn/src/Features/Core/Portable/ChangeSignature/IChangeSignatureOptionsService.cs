@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         /// Gets options and produces a <see cref="SignatureChange"/> if successful.
         /// </summary>
         /// <param name="document">the context document</param>
-        /// <param name="positionForTypeBinding">the position in the document with 
+        /// <param name="positionForTypeBinding">the position in the document with
         /// the signature of the method, used for binding types (e.g. for added
         /// parameters)</param>
         /// <param name="symbol">the symbol for changing the signature</param>
@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             Document document,
             int positionForTypeBinding,
             ISymbol symbol,
-            ParameterConfiguration parameters);
+            ParameterConfiguration parameters
+        );
     }
 }

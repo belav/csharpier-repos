@@ -6,16 +6,16 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
+using System.Reflection.Metadata;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using CSReferenceManager = Microsoft.CodeAnalysis.CSharp.CSharpCompilation.ReferenceManager;
-using System.Reflection.Metadata;
 using static Roslyn.Test.Utilities.TestMetadata;
+using CSReferenceManager = Microsoft.CodeAnalysis.CSharp.CSharpCompilation.ReferenceManager;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 {
@@ -28,28 +28,34 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             TestBaseTypeResolutionHelper1(assembly);
 
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(mrefs: new[]
-            {
-                TestReferences.SymbolsTests.MDTestLib1,
-                TestReferences.SymbolsTests.MDTestLib2,
-                Net40.mscorlib
-            });
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                mrefs: new[]
+                {
+                    TestReferences.SymbolsTests.MDTestLib1,
+                    TestReferences.SymbolsTests.MDTestLib2,
+                    Net40.mscorlib,
+                }
+            );
 
             TestBaseTypeResolutionHelper2(assemblies);
 
-            assemblies = MetadataTestHelpers.GetSymbolsForReferences(mrefs: new[]
-            {
-                TestReferences.SymbolsTests.MDTestLib1,
-                TestReferences.SymbolsTests.MDTestLib2
-            });
+            assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                mrefs: new[]
+                {
+                    TestReferences.SymbolsTests.MDTestLib1,
+                    TestReferences.SymbolsTests.MDTestLib2,
+                }
+            );
 
             // TestBaseTypeResolutionHelper3(assemblies); // TODO(alekseyt): this test is not valid.  See email of 7/23/2010 for explanation.
 
-            assemblies = MetadataTestHelpers.GetSymbolsForReferences(mrefs: new[]
-            {
-                TestReferences.SymbolsTests.MultiModule.Assembly,
-                TestReferences.SymbolsTests.MultiModule.Consumer
-            });
+            assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                mrefs: new[]
+                {
+                    TestReferences.SymbolsTests.MultiModule.Assembly,
+                    TestReferences.SymbolsTests.MultiModule.Consumer,
+                }
+            );
 
             TestBaseTypeResolutionHelper4(assemblies);
         }
@@ -69,7 +75,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 
             var concurrent = ((NamespaceSymbol)collections[0]).GetMembers("Concurrent");
 
-            var orderablePartitioners = ((NamespaceSymbol)concurrent[0]).GetMembers("OrderablePartitioner");
+            var orderablePartitioners = ((NamespaceSymbol)concurrent[0]).GetMembers(
+                "OrderablePartitioner"
+            );
             NamedTypeSymbol orderablePartitioner = null;
 
             foreach (var p in orderablePartitioners)
@@ -86,7 +94,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             @base = orderablePartitioner.BaseType();
 
             AssertBaseType(@base, "System.Collections.Concurrent.Partitioner<TSource>");
-            Assert.Same(((NamedTypeSymbol)@base).TypeArguments()[0], orderablePartitioner.TypeParameters[0]);
+            Assert.Same(
+                ((NamedTypeSymbol)@base).TypeArguments()[0],
+                orderablePartitioner.TypeParameters[0]
+            );
 
             var partitioners = ((NamespaceSymbol)concurrent[0]).GetMembers("Partitioner");
             NamedTypeSymbol partitioner = null;
@@ -134,15 +145,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             AssertBaseType(varTC8.BaseType(), "C1<System.Type>");
             AssertBaseType(varTC9.BaseType(), "TC6<TC6_T1>");
 
-            var varCorTypes = module2.GlobalNamespace.GetMembers("CorTypes").OfType<NamespaceSymbol>().Single();
+            var varCorTypes = module2
+                .GlobalNamespace.GetMembers("CorTypes")
+                .OfType<NamespaceSymbol>()
+                .Single();
 
             var varCorTypes_Derived = varCorTypes.GetTypeMembers("Derived").Single();
-            AssertBaseType(varCorTypes_Derived.BaseType(),
-                           "CorTypes.NS.Base<System.Boolean, System.SByte, System.Byte, System.Int16, System.UInt16, System.Int32, System.UInt32, System.Int64, System.UInt64, System.Single, System.Double, System.Char, System.String, System.IntPtr, System.UIntPtr, System.Object>");
+            AssertBaseType(
+                varCorTypes_Derived.BaseType(),
+                "CorTypes.NS.Base<System.Boolean, System.SByte, System.Byte, System.Int16, System.UInt16, System.Int32, System.UInt32, System.Int64, System.UInt64, System.Single, System.Double, System.Char, System.String, System.IntPtr, System.UIntPtr, System.Object>"
+            );
 
             var varCorTypes_Derived1 = varCorTypes.GetTypeMembers("Derived1").Single();
-            AssertBaseType(varCorTypes_Derived1.BaseType(),
-                           "CorTypes.Base<System.Int32[], System.Double[,]>");
+            AssertBaseType(
+                varCorTypes_Derived1.BaseType(),
+                "CorTypes.Base<System.Int32[], System.Double[,]>"
+            );
 
             var varI101 = module1.GlobalNamespace.GetTypeMembers("I101").Single();
             var varI102 = module1.GlobalNamespace.GetTypeMembers("I102").Single();
@@ -210,11 +228,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact]
         public void Test2()
         {
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(mrefs: new[]
-                                    {
-                                        TestReferences.SymbolsTests.DifferByCase.Consumer,
-                                        TestReferences.SymbolsTests.DifferByCase.TypeAndNamespaceDifferByCase
-                                    });
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                mrefs: new[]
+                {
+                    TestReferences.SymbolsTests.DifferByCase.Consumer,
+                    TestReferences.SymbolsTests.DifferByCase.TypeAndNamespaceDifferByCase,
+                }
+            );
 
             var module0 = assemblies[0].Modules[0] as PEModuleSymbol;
             var module1 = assemblies[1].Modules[0] as PEModuleSymbol;
@@ -280,14 +300,78 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(base7, module1.TypeHandleToTypeMap[((PENamedTypeSymbol)base7).Handle]);
             Assert.Equal(base8, module1.TypeHandleToTypeMap[((PENamedTypeSymbol)base8).Handle]);
 
-            Assert.Equal(base1, module0.TypeRefHandleToTypeMap[(TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC1).Handle)]);
-            Assert.Equal(base2, module0.TypeRefHandleToTypeMap[(TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC2).Handle)]);
-            Assert.Equal(base3, module0.TypeRefHandleToTypeMap[(TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC3).Handle)]);
-            Assert.Equal(base4, module0.TypeRefHandleToTypeMap[(TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC4).Handle)]);
-            Assert.Equal(base5, module0.TypeRefHandleToTypeMap[(TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC5).Handle)]);
-            Assert.Equal(base6, module0.TypeRefHandleToTypeMap[(TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC6).Handle)]);
-            Assert.Equal(base7, module0.TypeRefHandleToTypeMap[(TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC7).Handle)]);
-            Assert.Equal(base8, module0.TypeRefHandleToTypeMap[(TypeReferenceHandle)module0.Module.GetBaseTypeOfTypeOrThrow(((PENamedTypeSymbol)localTC8).Handle)]);
+            Assert.Equal(
+                base1,
+                module0.TypeRefHandleToTypeMap[
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC1).Handle
+                        )
+                ]
+            );
+            Assert.Equal(
+                base2,
+                module0.TypeRefHandleToTypeMap[
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC2).Handle
+                        )
+                ]
+            );
+            Assert.Equal(
+                base3,
+                module0.TypeRefHandleToTypeMap[
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC3).Handle
+                        )
+                ]
+            );
+            Assert.Equal(
+                base4,
+                module0.TypeRefHandleToTypeMap[
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC4).Handle
+                        )
+                ]
+            );
+            Assert.Equal(
+                base5,
+                module0.TypeRefHandleToTypeMap[
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC5).Handle
+                        )
+                ]
+            );
+            Assert.Equal(
+                base6,
+                module0.TypeRefHandleToTypeMap[
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC6).Handle
+                        )
+                ]
+            );
+            Assert.Equal(
+                base7,
+                module0.TypeRefHandleToTypeMap[
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC7).Handle
+                        )
+                ]
+            );
+            Assert.Equal(
+                base8,
+                module0.TypeRefHandleToTypeMap[
+                    (TypeReferenceHandle)
+                        module0.Module.GetBaseTypeOfTypeOrThrow(
+                            ((PENamedTypeSymbol)localTC8).Handle
+                        )
+                ]
+            );
 
             var assembly1 = (MetadataOrSourceAssemblySymbol)assemblies[1];
 
@@ -298,7 +382,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             Assert.Equal(base5, assembly1.CachedTypeByEmittedName(base5.ToTestDisplayString()));
             Assert.Equal(base6, assembly1.CachedTypeByEmittedName(base6.ToTestDisplayString()));
 
-            Assert.Equal(base7.ContainingType, assembly1.CachedTypeByEmittedName(base7.ContainingType.ToTestDisplayString()));
+            Assert.Equal(
+                base7.ContainingType,
+                assembly1.CachedTypeByEmittedName(base7.ContainingType.ToTestDisplayString())
+            );
 
             Assert.Equal(7, assembly1.EmittedNameToTypeMapCount);
         }
@@ -308,20 +395,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         {
             var mscorlibRef = Net40.mscorlib;
 
-            var c1 = CSharpCompilation.Create("Test", references: new MetadataReference[] { mscorlibRef });
+            var c1 = CSharpCompilation.Create(
+                "Test",
+                references: new MetadataReference[] { mscorlibRef }
+            );
 
-            Assert.Equal("System.Object", ((SourceModuleSymbol)c1.Assembly.Modules[0]).GetCorLibType(SpecialType.System_Object).ToTestDisplayString());
+            Assert.Equal(
+                "System.Object",
+                ((SourceModuleSymbol)c1.Assembly.Modules[0])
+                    .GetCorLibType(SpecialType.System_Object)
+                    .ToTestDisplayString()
+            );
 
             var localMTTestLib1Ref = TestReferences.SymbolsTests.V1.MTTestLib1.dll;
 
-            var c2 = CSharpCompilation.Create("Test2", references: new MetadataReference[] { localMTTestLib1Ref });
-            Assert.Equal("System.Object[missing]", ((SourceModuleSymbol)c2.Assembly.Modules[0]).GetCorLibType(SpecialType.System_Object).ToTestDisplayString());
+            var c2 = CSharpCompilation.Create(
+                "Test2",
+                references: new MetadataReference[] { localMTTestLib1Ref }
+            );
+            Assert.Equal(
+                "System.Object[missing]",
+                ((SourceModuleSymbol)c2.Assembly.Modules[0])
+                    .GetCorLibType(SpecialType.System_Object)
+                    .ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void CrossModuleReferences1()
         {
-            var compilationDef1 = @"
+            var compilationDef1 =
+                @"
 class Test1 : M3
 {
 }
@@ -334,7 +438,11 @@ class Test2 : M4
             var crossRefModule2 = TestReferences.SymbolsTests.netModule.CrossRefModule2;
             var crossRefLib = TestReferences.SymbolsTests.netModule.CrossRefLib;
 
-            var compilation1 = CreateCompilation(compilationDef1, new MetadataReference[] { crossRefLib }, TestOptions.ReleaseDll);
+            var compilation1 = CreateCompilation(
+                compilationDef1,
+                new MetadataReference[] { crossRefLib },
+                TestOptions.ReleaseDll
+            );
 
             compilation1.VerifyDiagnostics();
 
@@ -347,14 +455,19 @@ class Test2 : M4
             Assert.False(test2.BaseType().BaseType().IsErrorType());
             Assert.False(test2.BaseType().BaseType().BaseType().IsErrorType());
 
-            var compilationDef2 = @"
+            var compilationDef2 =
+                @"
 public class M3 : M1
 {}
 
 public class M4 : M2
 {}
 ";
-            var compilation2 = CreateCompilation(compilationDef2, new MetadataReference[] { crossRefModule1, crossRefModule2 }, TestOptions.ReleaseDll);
+            var compilation2 = CreateCompilation(
+                compilationDef2,
+                new MetadataReference[] { crossRefModule1, crossRefModule2 },
+                TestOptions.ReleaseDll
+            );
 
             compilation2.VerifyDiagnostics();
 
@@ -366,7 +479,11 @@ public class M4 : M2
             Assert.False(m4.BaseType().IsErrorType());
             Assert.False(m4.BaseType().BaseType().IsErrorType());
 
-            var compilation3 = CreateCompilation(compilationDef2, new MetadataReference[] { crossRefModule2 }, TestOptions.ReleaseDll);
+            var compilation3 = CreateCompilation(
+                compilationDef2,
+                new MetadataReference[] { crossRefModule2 },
+                TestOptions.ReleaseDll
+            );
 
             m3 = compilation3.GetTypeByMetadataName("M3");
             m4 = compilation3.GetTypeByMetadataName("M4");
@@ -381,16 +498,19 @@ public class M4 : M2
             //CrossRefModule2.netmodule: error CS0011: The base class or interface 'M1' in assembly 'CrossRefModule1.netmodule'
             //        referenced by type 'M2' could not be resolved
 
-            DiagnosticDescription[] errors = {
+            DiagnosticDescription[] errors =
+            {
                 // (2,19): error CS0246: The type or namespace name 'M1' could not be found (are you missing a using directive or an assembly reference?)
                 // public class M3 : M1
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "M1").WithArguments("M1"),
                 // (5,19): error CS7079: The type 'M1' is defined in a module that has not been added. You must add the module 'CrossRefModule1.netmodule'.
                 // public class M4 : M2
-                Diagnostic(ErrorCode.ERR_NoTypeDefFromModule, "M2").WithArguments("M1", "CrossRefModule1.netmodule"),
+                Diagnostic(ErrorCode.ERR_NoTypeDefFromModule, "M2")
+                    .WithArguments("M1", "CrossRefModule1.netmodule"),
                 // error CS8014: Reference to 'CrossRefModule1.netmodule' netmodule missing.
-                Diagnostic(ErrorCode.ERR_MissingNetModuleReference).WithArguments("CrossRefModule1.netmodule")
-                                             };
+                Diagnostic(ErrorCode.ERR_MissingNetModuleReference)
+                    .WithArguments("CrossRefModule1.netmodule"),
+            };
 
             compilation3.VerifyDiagnostics(errors);
         }

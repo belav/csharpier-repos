@@ -10,8 +10,16 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// Sets the request body size limit to the specified size.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class RequestSizeLimitAttribute : Attribute, IFilterFactory, IOrderedFilter, IRequestSizeLimitMetadata
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
+public class RequestSizeLimitAttribute
+    : Attribute,
+        IFilterFactory,
+        IOrderedFilter,
+        IRequestSizeLimitMetadata
 {
     private readonly long _bytes;
 

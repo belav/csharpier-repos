@@ -8,17 +8,26 @@ namespace Microsoft.JSInterop.Infrastructure;
 
 public class DotNetDispatcherTest
 {
-    private static readonly string thisAssemblyName = typeof(DotNetDispatcherTest).Assembly.GetName().Name;
+    private static readonly string thisAssemblyName = typeof(DotNetDispatcherTest)
+        .Assembly.GetName()
+        .Name;
 
     [Fact]
     public void CannotInvokeWithEmptyAssemblyName()
     {
         var ex = Assert.Throws<ArgumentException>(() =>
         {
-            DotNetDispatcher.Invoke(new TestJSRuntime(), new DotNetInvocationInfo(" ", "SomeMethod", default, default), "[]");
+            DotNetDispatcher.Invoke(
+                new TestJSRuntime(),
+                new DotNetInvocationInfo(" ", "SomeMethod", default, default),
+                "[]"
+            );
         });
 
-        Assert.StartsWith("Property 'AssemblyName' cannot be null, empty, or whitespace.", ex.Message);
+        Assert.StartsWith(
+            "Property 'AssemblyName' cannot be null, empty, or whitespace.",
+            ex.Message
+        );
         Assert.Equal("assemblyKey", ex.ParamName);
     }
 
@@ -27,7 +36,11 @@ public class DotNetDispatcherTest
     {
         var ex = Assert.Throws<ArgumentException>(() =>
         {
-            DotNetDispatcher.Invoke(new TestJSRuntime(), new DotNetInvocationInfo("SomeAssembly", " ", default, default), "[]");
+            DotNetDispatcher.Invoke(
+                new TestJSRuntime(),
+                new DotNetInvocationInfo("SomeAssembly", " ", default, default),
+                "[]"
+            );
         });
 
         Assert.StartsWith("Cannot be null, empty, or whitespace.", ex.Message);
@@ -40,7 +53,11 @@ public class DotNetDispatcherTest
         var assemblyName = "Some.Fake.Assembly";
         var ex = Assert.Throws<ArgumentException>(() =>
         {
-            DotNetDispatcher.Invoke(new TestJSRuntime(), new DotNetInvocationInfo(assemblyName, "SomeMethod", default, default), null);
+            DotNetDispatcher.Invoke(
+                new TestJSRuntime(),
+                new DotNetInvocationInfo(assemblyName, "SomeMethod", default, default),
+                null
+            );
         });
 
         Assert.Equal($"There is no loaded assembly with the name '{assemblyName}'.", ex.Message);
@@ -62,10 +79,17 @@ public class DotNetDispatcherTest
     {
         var ex = Assert.Throws<ArgumentException>(() =>
         {
-            DotNetDispatcher.Invoke(new TestJSRuntime(), new DotNetInvocationInfo(thisAssemblyName, methodIdentifier, default, default), null);
+            DotNetDispatcher.Invoke(
+                new TestJSRuntime(),
+                new DotNetInvocationInfo(thisAssemblyName, methodIdentifier, default, default),
+                null
+            );
         });
 
-        Assert.Equal($"The assembly '{thisAssemblyName}' does not contain a public invokable method with [JSInvokableAttribute(\"{methodIdentifier}\")].", ex.Message);
+        Assert.Equal(
+            $"The assembly '{thisAssemblyName}' does not contain a public invokable method with [JSInvokableAttribute(\"{methodIdentifier}\")].",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -74,7 +98,11 @@ public class DotNetDispatcherTest
         // Arrange/Act
         var jsRuntime = new TestJSRuntime();
         SomePublicType.DidInvokeMyInvocableStaticVoid = false;
-        var resultJson = DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, "InvocableStaticVoid", default, default), null);
+        var resultJson = DotNetDispatcher.Invoke(
+            jsRuntime,
+            new DotNetInvocationInfo(thisAssemblyName, "InvocableStaticVoid", default, default),
+            null
+        );
 
         // Assert
         Assert.Null(resultJson);
@@ -86,8 +114,15 @@ public class DotNetDispatcherTest
     {
         // Arrange/Act
         var jsRuntime = new TestJSRuntime();
-        var resultJson = DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, "InvocableStaticNonVoid", default, default), null);
-        var result = JsonSerializer.Deserialize<TestDTO>(resultJson, jsRuntime.JsonSerializerOptions);
+        var resultJson = DotNetDispatcher.Invoke(
+            jsRuntime,
+            new DotNetInvocationInfo(thisAssemblyName, "InvocableStaticNonVoid", default, default),
+            null
+        );
+        var result = JsonSerializer.Deserialize<TestDTO>(
+            resultJson,
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Assert
         Assert.Equal("Test", result.StringVal);
@@ -99,8 +134,20 @@ public class DotNetDispatcherTest
     {
         // Arrange/Act
         var jsRuntime = new TestJSRuntime();
-        var resultJson = DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, nameof(SomePublicType.InvokableMethodWithoutCustomIdentifier), default, default), null);
-        var result = JsonSerializer.Deserialize<TestDTO>(resultJson, jsRuntime.JsonSerializerOptions);
+        var resultJson = DotNetDispatcher.Invoke(
+            jsRuntime,
+            new DotNetInvocationInfo(
+                thisAssemblyName,
+                nameof(SomePublicType.InvokableMethodWithoutCustomIdentifier),
+                default,
+                default
+            ),
+            null
+        );
+        var result = JsonSerializer.Deserialize<TestDTO>(
+            resultJson,
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Assert
         Assert.Equal("InvokableMethodWithoutCustomIdentifier", result.StringVal);
@@ -117,20 +164,35 @@ public class DotNetDispatcherTest
         jsRuntime.Invoke<object>("unimportant", objectRef);
 
         // Arrange: Remaining args
-        var argsJson = JsonSerializer.Serialize(new object[]
-        {
+        var argsJson = JsonSerializer.Serialize(
+            new object[]
+            {
                 new TestDTO { StringVal = "Another string", IntVal = 456 },
                 new[] { 100, 200 },
-                objectRef
-        }, jsRuntime.JsonSerializerOptions);
+                objectRef,
+            },
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Act
-        var resultJson = DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, "InvocableStaticWithParams", default, default), argsJson);
+        var resultJson = DotNetDispatcher.Invoke(
+            jsRuntime,
+            new DotNetInvocationInfo(
+                thisAssemblyName,
+                "InvocableStaticWithParams",
+                default,
+                default
+            ),
+            argsJson
+        );
         var result = JsonDocument.Parse(resultJson);
         var root = result.RootElement;
 
         // Assert: First result value marshalled via JSON
-        var resultDto1 = JsonSerializer.Deserialize<TestDTO>(root[0].GetRawText(), jsRuntime.JsonSerializerOptions);
+        var resultDto1 = JsonSerializer.Deserialize<TestDTO>(
+            root[0].GetRawText(),
+            jsRuntime.JsonSerializerOptions
+        );
 
         Assert.Equal("ANOTHER STRING", resultDto1.StringVal);
         Assert.Equal(756, resultDto1.IntVal);
@@ -140,8 +202,17 @@ public class DotNetDispatcherTest
         Assert.False(resultDto2Ref.TryGetProperty(nameof(TestDTO.StringVal), out _));
         Assert.False(resultDto2Ref.TryGetProperty(nameof(TestDTO.IntVal), out _));
 
-        Assert.True(resultDto2Ref.TryGetProperty(DotNetDispatcher.DotNetObjectRefKey.EncodedUtf8Bytes, out var property));
-        var resultDto2 = Assert.IsType<DotNetObjectReference<TestDTO>>(jsRuntime.GetObjectReference(property.GetInt64())).Value;
+        Assert.True(
+            resultDto2Ref.TryGetProperty(
+                DotNetDispatcher.DotNetObjectRefKey.EncodedUtf8Bytes,
+                out var property
+            )
+        );
+        var resultDto2 = Assert
+            .IsType<DotNetObjectReference<TestDTO>>(
+                jsRuntime.GetObjectReference(property.GetInt64())
+            )
+            .Value;
         Assert.Equal("MY STRING", resultDto2.StringVal);
         Assert.Equal(1299, resultDto2.IntVal);
     }
@@ -157,17 +228,29 @@ public class DotNetDispatcherTest
         jsRuntime.Invoke<object>("unimportant", objectRef);
 
         // Arrange: Remaining args
-        var argsJson = JsonSerializer.Serialize(new object[]
-        {
+        var argsJson = JsonSerializer.Serialize(
+            new object[]
+            {
                 new TestDTO { StringVal = "Another string", IntVal = 456 },
                 new[] { 100, 200 },
-                objectRef
-        }, jsRuntime.JsonSerializerOptions);
+                objectRef,
+            },
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() =>
-            DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, method, default, default), argsJson));
-        Assert.Equal($"In call to '{method}', parameter of type '{nameof(TestDTO)}' at index 3 must be declared as type 'DotNetObjectRef<TestDTO>' to receive the incoming value.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                DotNetDispatcher.Invoke(
+                    jsRuntime,
+                    new DotNetInvocationInfo(thisAssemblyName, method, default, default),
+                    argsJson
+                )
+        );
+        Assert.Equal(
+            $"In call to '{method}', parameter of type '{nameof(TestDTO)}' at index 3 must be declared as type 'DotNetObjectRef<TestDTO>' to receive the incoming value.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -180,7 +263,11 @@ public class DotNetDispatcherTest
         jsRuntime.Invoke<object>("unimportant", objectRef);
 
         // Act
-        var resultJson = DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default), null);
+        var resultJson = DotNetDispatcher.Invoke(
+            jsRuntime,
+            new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default),
+            null
+        );
 
         // Assert
         Assert.Null(resultJson);
@@ -197,7 +284,11 @@ public class DotNetDispatcherTest
         jsRuntime.Invoke<object>("unimportant", objectRef);
 
         // Act
-        var resultJson = DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(null, "BaseClassInvokableInstanceVoid", 1, default), null);
+        var resultJson = DotNetDispatcher.Invoke(
+            jsRuntime,
+            new DotNetInvocationInfo(null, "BaseClassInvokableInstanceVoid", 1, default),
+            null
+        );
 
         // Assert
         Assert.Null(resultJson);
@@ -214,7 +305,11 @@ public class DotNetDispatcherTest
         jsRuntime.Invoke<object>("unimportant", objectRef);
 
         // Act
-        DotNetDispatcher.BeginInvokeDotNet(jsRuntime, new DotNetInvocationInfo(null, "__Dispose", objectRef.ObjectId, default), null);
+        DotNetDispatcher.BeginInvokeDotNet(
+            jsRuntime,
+            new DotNetInvocationInfo(null, "__Dispose", objectRef.ObjectId, default),
+            null
+        );
 
         // Assert
         Assert.True(objectRef.Disposed);
@@ -235,7 +330,13 @@ public class DotNetDispatcherTest
 
         // Act/Assert
         var ex = Assert.Throws<ArgumentException>(
-            () => DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default), null));
+            () =>
+                DotNetDispatcher.Invoke(
+                    jsRuntime,
+                    new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default),
+                    null
+                )
+        );
         Assert.StartsWith("There is no tracked object with id '1'.", ex.Message);
     }
 
@@ -254,7 +355,13 @@ public class DotNetDispatcherTest
 
         // Act/Assert
         var ex = Assert.Throws<ArgumentException>(
-            () => DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default), null));
+            () =>
+                DotNetDispatcher.Invoke(
+                    jsRuntime,
+                    new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, default),
+                    null
+                )
+        );
         Assert.StartsWith("There is no tracked object with id '1'.", ex.Message);
     }
 
@@ -265,7 +372,10 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
         var testDTO = new TestDTO { StringVal = "Hello", IntVal = 4 };
         var task = jsRuntime.InvokeAsync<TestDTO>("unimportant");
-        var argsJson = JsonSerializer.Serialize(new object[] { jsRuntime.LastInvocationAsyncHandle, true, testDTO }, jsRuntime.JsonSerializerOptions);
+        var argsJson = JsonSerializer.Serialize(
+            new object[] { jsRuntime.LastInvocationAsyncHandle, true, testDTO },
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Act
         DotNetDispatcher.EndInvokeJS(jsRuntime, argsJson);
@@ -284,7 +394,10 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
         var expected = "Some error";
         var task = jsRuntime.InvokeAsync<TestDTO>("unimportant");
-        var argsJson = JsonSerializer.Serialize(new object[] { jsRuntime.LastInvocationAsyncHandle, false, expected }, jsRuntime.JsonSerializerOptions);
+        var argsJson = JsonSerializer.Serialize(
+            new object[] { jsRuntime.LastInvocationAsyncHandle, false, expected },
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Act
         DotNetDispatcher.EndInvokeJS(jsRuntime, argsJson);
@@ -300,7 +413,10 @@ public class DotNetDispatcherTest
         // Arrange
         var jsRuntime = new TestJSRuntime();
         var task = jsRuntime.InvokeAsync<TestDTO>("unimportant");
-        var argsJson = JsonSerializer.Serialize(new object[] { jsRuntime.LastInvocationAsyncHandle, false, null }, jsRuntime.JsonSerializerOptions);
+        var argsJson = JsonSerializer.Serialize(
+            new object[] { jsRuntime.LastInvocationAsyncHandle, false, null },
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Act
         DotNetDispatcher.EndInvokeJS(jsRuntime, argsJson);
@@ -317,7 +433,10 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
         var testDTO = new TestDTO { StringVal = "Hello", IntVal = 4 };
         var cts = new CancellationTokenSource();
-        var argsJson = JsonSerializer.Serialize(new object[] { jsRuntime.LastInvocationAsyncHandle, true, testDTO }, jsRuntime.JsonSerializerOptions);
+        var argsJson = JsonSerializer.Serialize(
+            new object[] { jsRuntime.LastInvocationAsyncHandle, true, testDTO },
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Act
         var task = jsRuntime.InvokeAsync<TestDTO>("unimportant", cts.Token);
@@ -350,7 +469,13 @@ public class DotNetDispatcherTest
         var task = jsRuntime.InvokeAsync<TestDTO>("somemethod");
 
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(() => DotNetDispatcher.EndInvokeJS(jsRuntime, $"{{\"key\": \"{jsRuntime.LastInvocationAsyncHandle}\"}}"));
+        Assert.ThrowsAny<JsonException>(
+            () =>
+                DotNetDispatcher.EndInvokeJS(
+                    jsRuntime,
+                    $"{{\"key\": \"{jsRuntime.LastInvocationAsyncHandle}\"}}"
+                )
+        );
     }
 
     [Fact]
@@ -361,7 +486,13 @@ public class DotNetDispatcherTest
         var task = jsRuntime.InvokeAsync<TestDTO>("somemethod");
 
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(() => DotNetDispatcher.EndInvokeJS(jsRuntime, $"[{jsRuntime.LastInvocationAsyncHandle}, false"));
+        Assert.ThrowsAny<JsonException>(
+            () =>
+                DotNetDispatcher.EndInvokeJS(
+                    jsRuntime,
+                    $"[{jsRuntime.LastInvocationAsyncHandle}, false"
+                )
+        );
     }
 
     [Fact]
@@ -372,7 +503,13 @@ public class DotNetDispatcherTest
         var task = jsRuntime.InvokeAsync<TestDTO>("somemethod");
 
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(() => DotNetDispatcher.EndInvokeJS(jsRuntime, $"[{jsRuntime.LastInvocationAsyncHandle}, false, \"Hello\", 5]"));
+        Assert.ThrowsAny<JsonException>(
+            () =>
+                DotNetDispatcher.EndInvokeJS(
+                    jsRuntime,
+                    $"[{jsRuntime.LastInvocationAsyncHandle}, false, \"Hello\", 5]"
+                )
+        );
     }
 
     [Fact]
@@ -387,7 +524,10 @@ public class DotNetDispatcherTest
 
         cts.Cancel();
 
-        DotNetDispatcher.EndInvokeJS(jsRuntime, $"[{jsRuntime.LastInvocationAsyncHandle}, false, \"Hello\", 5]");
+        DotNetDispatcher.EndInvokeJS(
+            jsRuntime,
+            $"[{jsRuntime.LastInvocationAsyncHandle}, false, \"Hello\", 5]"
+        );
 
         // Assert
         Assert.False(task.IsCompletedSuccessfully);
@@ -402,7 +542,10 @@ public class DotNetDispatcherTest
         var task = jsRuntime.InvokeAsync<TestDTO>("somemethod");
 
         // Act
-        DotNetDispatcher.EndInvokeJS(jsRuntime, $"[{jsRuntime.LastInvocationAsyncHandle}, true, {{\"intVal\": 7}}]");
+        DotNetDispatcher.EndInvokeJS(
+            jsRuntime,
+            $"[{jsRuntime.LastInvocationAsyncHandle}, true, {{\"intVal\": 7}}]"
+        );
 
         // Assert
         Assert.True(task.IsCompletedSuccessfully);
@@ -415,7 +558,10 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
         var task = jsRuntime.InvokeAsync<int[]>("somemethod");
 
-        DotNetDispatcher.EndInvokeJS(jsRuntime, $"[{jsRuntime.LastInvocationAsyncHandle}, true, [1, 2, 3]]");
+        DotNetDispatcher.EndInvokeJS(
+            jsRuntime,
+            $"[{jsRuntime.LastInvocationAsyncHandle}, true, [1, 2, 3]]"
+        );
 
         Assert.True(task.IsCompletedSuccessfully);
         Assert.Equal(new[] { 1, 2, 3 }, task.Result);
@@ -427,7 +573,10 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
         var task = jsRuntime.InvokeAsync<TestDTO>("somemethod");
 
-        DotNetDispatcher.EndInvokeJS(jsRuntime, $"[{jsRuntime.LastInvocationAsyncHandle}, true, null]");
+        DotNetDispatcher.EndInvokeJS(
+            jsRuntime,
+            $"[{jsRuntime.LastInvocationAsyncHandle}, true, null]"
+        );
 
         Assert.True(task.IsCompletedSuccessfully);
         Assert.Null(task.Result);
@@ -440,13 +589,19 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
         var targetInstance = new SomePublicType();
         var arg2 = new TestDTO { IntVal = 1234, StringVal = "My string" };
-        jsRuntime.Invoke<object>("unimportant",
+        jsRuntime.Invoke<object>(
+            "unimportant",
             DotNetObjectReference.Create(targetInstance),
-            DotNetObjectReference.Create(arg2));
+            DotNetObjectReference.Create(arg2)
+        );
         var argsJson = "[\"myvalue\",{\"__dotNetObject\":2}]";
 
         // Act
-        var resultJson = DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(null, "InvokableInstanceMethod", 1, default), argsJson);
+        var resultJson = DotNetDispatcher.Invoke(
+            jsRuntime,
+            new DotNetInvocationInfo(null, "InvokableInstanceMethod", 1, default),
+            argsJson
+        );
 
         // Assert
         Assert.Equal("[\"You passed myvalue\",{\"__dotNetObject\":3}]", resultJson);
@@ -460,12 +615,20 @@ public class DotNetDispatcherTest
     {
         var jsRuntime = new TestJSRuntime();
         var targetInstance = new GenericType<int>();
-        jsRuntime.Invoke<object>("_setup",
-            DotNetObjectReference.Create(targetInstance));
+        jsRuntime.Invoke<object>("_setup", DotNetObjectReference.Create(targetInstance));
         var argsJson = "[\"hello world\"]";
 
         // Act
-        var resultJson = DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(null, nameof(GenericType<int>.EchoStringParameter), 1, default), argsJson);
+        var resultJson = DotNetDispatcher.Invoke(
+            jsRuntime,
+            new DotNetInvocationInfo(
+                null,
+                nameof(GenericType<int>.EchoStringParameter),
+                1,
+                default
+            ),
+            argsJson
+        );
 
         // Assert
         Assert.Equal("\"hello world\"", resultJson);
@@ -476,12 +639,15 @@ public class DotNetDispatcherTest
     {
         var jsRuntime = new TestJSRuntime();
         var targetInstance = new GenericType<string>();
-        jsRuntime.Invoke<object>("_setup",
-            DotNetObjectReference.Create(targetInstance));
+        jsRuntime.Invoke<object>("_setup", DotNetObjectReference.Create(targetInstance));
         var argsJson = "[\"hello world\"]";
 
         // Act
-        var resultJson = DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(null, nameof(GenericType<string>.EchoParameter), 1, default), argsJson);
+        var resultJson = DotNetDispatcher.Invoke(
+            jsRuntime,
+            new DotNetInvocationInfo(null, nameof(GenericType<string>.EchoParameter), 1, default),
+            argsJson
+        );
 
         // Assert
         Assert.Equal("\"hello world\"", resultJson);
@@ -494,8 +660,18 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
 
         // Act
-        var ex = Assert.Throws<ArgumentException>(() => DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, methodIdentifier, 0, default), "[7]"));
-        Assert.Contains($"The assembly '{thisAssemblyName}' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].", ex.Message);
+        var ex = Assert.Throws<ArgumentException>(
+            () =>
+                DotNetDispatcher.Invoke(
+                    jsRuntime,
+                    new DotNetInvocationInfo(thisAssemblyName, methodIdentifier, 0, default),
+                    "[7]"
+                )
+        );
+        Assert.Contains(
+            $"The assembly '{thisAssemblyName}' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -504,13 +680,22 @@ public class DotNetDispatcherTest
         var methodIdentifier = "InstanceGenericMethod";
         var targetInstance = new GenericType<int>();
         var jsRuntime = new TestJSRuntime();
-        jsRuntime.Invoke<object>("_setup",
-            DotNetObjectReference.Create(targetInstance));
+        jsRuntime.Invoke<object>("_setup", DotNetObjectReference.Create(targetInstance));
         var argsJson = "[\"hello world\"]";
 
         // Act
-        var ex = Assert.Throws<ArgumentException>(() => DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(null, methodIdentifier, 1, default), argsJson));
-        Assert.Contains($"The type 'GenericType`1' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].", ex.Message);
+        var ex = Assert.Throws<ArgumentException>(
+            () =>
+                DotNetDispatcher.Invoke(
+                    jsRuntime,
+                    new DotNetInvocationInfo(null, methodIdentifier, 1, default),
+                    argsJson
+                )
+        );
+        Assert.Contains(
+            $"The type 'GenericType`1' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -518,13 +703,23 @@ public class DotNetDispatcherTest
     {
         var jsRuntime = new TestJSRuntime();
         var targetInstance = new GenericType<int>();
-        jsRuntime.Invoke<object>("_setup",
-            DotNetObjectReference.Create(targetInstance));
+        jsRuntime.Invoke<object>("_setup", DotNetObjectReference.Create(targetInstance));
         var argsJson = "[\"hello world\"]";
 
         // Act & Assert
-        Assert.Throws<JsonException>(() =>
-            DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(null, nameof(GenericType<int>.EchoParameter), 1, default), argsJson));
+        Assert.Throws<JsonException>(
+            () =>
+                DotNetDispatcher.Invoke(
+                    jsRuntime,
+                    new DotNetInvocationInfo(
+                        null,
+                        nameof(GenericType<int>.EchoParameter),
+                        1,
+                        default
+                    ),
+                    argsJson
+                )
+        );
     }
 
     [Fact]
@@ -532,19 +727,34 @@ public class DotNetDispatcherTest
     {
         // Arrange
         var jsRuntime = new TestJSRuntime();
-        var argsJson = JsonSerializer.Serialize(new object[]
-        {
+        var argsJson = JsonSerializer.Serialize(
+            new object[]
+            {
                 new TestDTO { StringVal = "Another string", IntVal = 456 },
                 new[] { 100, 200 },
-        }, jsRuntime.JsonSerializerOptions);
+            },
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Act/Assert
         var ex = Assert.Throws<ArgumentException>(() =>
         {
-            DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, "InvocableStaticWithParams", default, default), argsJson);
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(
+                    thisAssemblyName,
+                    "InvocableStaticWithParams",
+                    default,
+                    default
+                ),
+                argsJson
+            );
         });
 
-        Assert.Equal("The call to 'InvocableStaticWithParams' expects '3' parameters, but received '2'.", ex.Message);
+        Assert.Equal(
+            "The call to 'InvocableStaticWithParams' expects '3' parameters, but received '2'.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -553,21 +763,36 @@ public class DotNetDispatcherTest
         // Arrange
         var jsRuntime = new TestJSRuntime();
         var objectRef = DotNetObjectReference.Create(new TestDTO { IntVal = 4 });
-        var argsJson = JsonSerializer.Serialize(new object[]
-        {
+        var argsJson = JsonSerializer.Serialize(
+            new object[]
+            {
                 new TestDTO { StringVal = "Another string", IntVal = 456 },
                 new[] { 100, 200 },
                 objectRef,
                 7,
-        }, jsRuntime.JsonSerializerOptions);
+            },
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Act/Assert
         var ex = Assert.Throws<JsonException>(() =>
         {
-            DotNetDispatcher.Invoke(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, "InvocableStaticWithParams", default, default), argsJson);
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(
+                    thisAssemblyName,
+                    "InvocableStaticWithParams",
+                    default,
+                    default
+                ),
+                argsJson
+            );
         });
 
-        Assert.Equal("Unexpected JSON token Number. Ensure that the call to `InvocableStaticWithParams' is supplied with exactly '3' parameters.", ex.Message);
+        Assert.Equal(
+            "Unexpected JSON token Number. Ensure that the call to `InvocableStaticWithParams' is supplied with exactly '3' parameters.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -582,23 +807,33 @@ public class DotNetDispatcherTest
         jsRuntime.Invoke<object>("unimportant", arg1Ref, arg2Ref);
 
         // Arrange: all args
-        var argsJson = JsonSerializer.Serialize(new object[]
-        {
+        var argsJson = JsonSerializer.Serialize(
+            new object[]
+            {
                 new TestDTO { IntVal = 1000, StringVal = "String via JSON" },
                 arg2Ref,
-        }, jsRuntime.JsonSerializerOptions);
+            },
+            jsRuntime.JsonSerializerOptions
+        );
 
         // Act
         var callId = "123";
         var resultTask = jsRuntime.NextInvocationTask;
-        DotNetDispatcher.BeginInvokeDotNet(jsRuntime, new DotNetInvocationInfo(null, "InvokableAsyncMethod", 1, callId), argsJson);
+        DotNetDispatcher.BeginInvokeDotNet(
+            jsRuntime,
+            new DotNetInvocationInfo(null, "InvokableAsyncMethod", 1, callId),
+            argsJson
+        );
         await resultTask;
 
         // Assert: Correct completion information
         Assert.Equal(callId, jsRuntime.LastCompletionCallId);
         Assert.True(jsRuntime.LastCompletionResult.Success);
         var resultJson = Assert.IsType<string>(jsRuntime.LastCompletionResult.ResultJson);
-        var result = JsonSerializer.Deserialize<SomePublicType.InvokableAsyncMethodResult>(resultJson, jsRuntime.JsonSerializerOptions);
+        var result = JsonSerializer.Deserialize<SomePublicType.InvokableAsyncMethodResult>(
+            resultJson,
+            jsRuntime.JsonSerializerOptions
+        );
 
         Assert.Equal("STRING VIA JSON", result.SomeDTO.StringVal);
         Assert.Equal(2000, result.SomeDTO.IntVal);
@@ -609,59 +844,78 @@ public class DotNetDispatcherTest
         Assert.Equal(2468, resultDto2.IntVal);
     }
 
-        [Fact]
-        public async Task CanInvokeAsyncMethodReturningValueTask()
-        {
-            // Arrange: Track some instance plus another object we'll pass as a param
-            var jsRuntime = new TestJSRuntime();
-            var targetInstance = new SomePublicType();
-            var arg2 = new TestDTO { IntVal = 1234, StringVal = "My string" };
-            var arg1Ref = DotNetObjectReference.Create(targetInstance);
-            var arg2Ref = DotNetObjectReference.Create(arg2);
-            jsRuntime.Invoke<object>("unimportant", arg1Ref, arg2Ref);
+    [Fact]
+    public async Task CanInvokeAsyncMethodReturningValueTask()
+    {
+        // Arrange: Track some instance plus another object we'll pass as a param
+        var jsRuntime = new TestJSRuntime();
+        var targetInstance = new SomePublicType();
+        var arg2 = new TestDTO { IntVal = 1234, StringVal = "My string" };
+        var arg1Ref = DotNetObjectReference.Create(targetInstance);
+        var arg2Ref = DotNetObjectReference.Create(arg2);
+        jsRuntime.Invoke<object>("unimportant", arg1Ref, arg2Ref);
 
-            // Arrange: all args
-            var argsJson = JsonSerializer.Serialize(new object[]
+        // Arrange: all args
+        var argsJson = JsonSerializer.Serialize(
+            new object[]
             {
                 new TestDTO { IntVal = 1000, StringVal = "String via JSON" },
                 arg2Ref,
-            }, jsRuntime.JsonSerializerOptions);
+            },
+            jsRuntime.JsonSerializerOptions
+        );
 
-            // Act
-            var callId = "123";
-            var resultTask = jsRuntime.NextInvocationTask;
-            DotNetDispatcher.BeginInvokeDotNet(jsRuntime, new DotNetInvocationInfo(null,
-                nameof(SomePublicType.InvokableAsyncMethodReturningValueTask), 1, callId), argsJson);
-            await resultTask;
+        // Act
+        var callId = "123";
+        var resultTask = jsRuntime.NextInvocationTask;
+        DotNetDispatcher.BeginInvokeDotNet(
+            jsRuntime,
+            new DotNetInvocationInfo(
+                null,
+                nameof(SomePublicType.InvokableAsyncMethodReturningValueTask),
+                1,
+                callId
+            ),
+            argsJson
+        );
+        await resultTask;
 
-            // Assert: Correct completion information
-            Assert.Equal(callId, jsRuntime.LastCompletionCallId);
-            Assert.True(jsRuntime.LastCompletionResult.Success);
-        }
+        // Assert: Correct completion information
+        Assert.Equal(callId, jsRuntime.LastCompletionCallId);
+        Assert.True(jsRuntime.LastCompletionResult.Success);
+    }
 
-        [Fact]
-        public async Task CanInvokeAsyncMethodReturningNonGenericValueTask()
-        {
-            // Arrange: Track some instance plus another object we'll pass as a param
-            var jsRuntime = new TestJSRuntime();
-            var targetInstance = new SomePublicType();
-            var arg1Ref = DotNetObjectReference.Create(targetInstance);
-            jsRuntime.Invoke<object>("unimportant", arg1Ref);
+    [Fact]
+    public async Task CanInvokeAsyncMethodReturningNonGenericValueTask()
+    {
+        // Arrange: Track some instance plus another object we'll pass as a param
+        var jsRuntime = new TestJSRuntime();
+        var targetInstance = new SomePublicType();
+        var arg1Ref = DotNetObjectReference.Create(targetInstance);
+        jsRuntime.Invoke<object>("unimportant", arg1Ref);
 
-            // Arrange: all args
-            var argsJson = JsonSerializer.Serialize(new object[] { }, jsRuntime.JsonSerializerOptions);
+        // Arrange: all args
+        var argsJson = JsonSerializer.Serialize(new object[] { }, jsRuntime.JsonSerializerOptions);
 
-            // Act
-            var callId = "123";
-            var resultTask = jsRuntime.NextInvocationTask;
-            DotNetDispatcher.BeginInvokeDotNet(jsRuntime, new DotNetInvocationInfo(null,
-                nameof(SomePublicType.InvokableAsyncMethodReturningValueTaskNonGeneric), 1, callId), argsJson);
-            await resultTask;
+        // Act
+        var callId = "123";
+        var resultTask = jsRuntime.NextInvocationTask;
+        DotNetDispatcher.BeginInvokeDotNet(
+            jsRuntime,
+            new DotNetInvocationInfo(
+                null,
+                nameof(SomePublicType.InvokableAsyncMethodReturningValueTaskNonGeneric),
+                1,
+                callId
+            ),
+            argsJson
+        );
+        await resultTask;
 
-            // Assert: Correct completion information
-            Assert.Equal(callId, jsRuntime.LastCompletionCallId);
-            Assert.True(jsRuntime.LastCompletionResult.Success);
-        }
+        // Assert: Correct completion information
+        Assert.Equal(callId, jsRuntime.LastCompletionCallId);
+        Assert.True(jsRuntime.LastCompletionResult.Success);
+    }
 
     [Fact]
     public async Task CanInvokeSyncThrowingMethod()
@@ -672,7 +926,16 @@ public class DotNetDispatcherTest
         // Act
         var callId = "123";
         var resultTask = jsRuntime.NextInvocationTask;
-        DotNetDispatcher.BeginInvokeDotNet(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, nameof(ThrowingClass.ThrowingMethod), default, callId), default);
+        DotNetDispatcher.BeginInvokeDotNet(
+            jsRuntime,
+            new DotNetInvocationInfo(
+                thisAssemblyName,
+                nameof(ThrowingClass.ThrowingMethod),
+                default,
+                callId
+            ),
+            default
+        );
 
         await resultTask; // This won't throw, it sets properties on the jsRuntime.
 
@@ -682,7 +945,10 @@ public class DotNetDispatcherTest
 
         // Make sure the method that threw the exception shows up in the call stack
         // https://github.com/dotnet/aspnetcore/issues/8612
-        Assert.Contains(nameof(ThrowingClass.ThrowingMethod), jsRuntime.LastCompletionResult.Exception.ToString());
+        Assert.Contains(
+            nameof(ThrowingClass.ThrowingMethod),
+            jsRuntime.LastCompletionResult.Exception.ToString()
+        );
     }
 
     [Fact]
@@ -694,7 +960,16 @@ public class DotNetDispatcherTest
         // Act
         var callId = "123";
         var resultTask = jsRuntime.NextInvocationTask;
-        DotNetDispatcher.BeginInvokeDotNet(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, nameof(ThrowingClass.AsyncThrowingMethod), default, callId), default);
+        DotNetDispatcher.BeginInvokeDotNet(
+            jsRuntime,
+            new DotNetInvocationInfo(
+                thisAssemblyName,
+                nameof(ThrowingClass.AsyncThrowingMethod),
+                default,
+                callId
+            ),
+            default
+        );
 
         await resultTask; // This won't throw, it sets properties on the jsRuntime.
 
@@ -704,7 +979,10 @@ public class DotNetDispatcherTest
 
         // Make sure the method that threw the exception shows up in the call stack
         // https://github.com/dotnet/aspnetcore/issues/8612
-        Assert.Contains(nameof(ThrowingClass.AsyncThrowingMethod), jsRuntime.LastCompletionResult.Exception.ToString());
+        Assert.Contains(
+            nameof(ThrowingClass.AsyncThrowingMethod),
+            jsRuntime.LastCompletionResult.Exception.ToString()
+        );
     }
 
     [Fact]
@@ -714,7 +992,16 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
         var callId = "123";
         var resultTask = jsRuntime.NextInvocationTask;
-        DotNetDispatcher.BeginInvokeDotNet(jsRuntime, new DotNetInvocationInfo(thisAssemblyName, "InvocableStaticWithParams", default, callId), "<xml>not json</xml>");
+        DotNetDispatcher.BeginInvokeDotNet(
+            jsRuntime,
+            new DotNetInvocationInfo(
+                thisAssemblyName,
+                "InvocableStaticWithParams",
+                default,
+                callId
+            ),
+            "<xml>not json</xml>"
+        );
 
         await resultTask; // This won't throw, it sets properties on the jsRuntime.
 
@@ -722,7 +1009,10 @@ public class DotNetDispatcherTest
         Assert.Equal(callId, jsRuntime.LastCompletionCallId);
         Assert.False(jsRuntime.LastCompletionResult.Success); // Fails
         var exception = jsRuntime.LastCompletionResult.Exception;
-        Assert.Contains("JsonReaderException: '<' is an invalid start of a value.", exception.ToString());
+        Assert.Contains(
+            "JsonReaderException: '<' is an invalid start of a value.",
+            exception.ToString()
+        );
     }
 
     [Fact]
@@ -732,13 +1022,20 @@ public class DotNetDispatcherTest
         var jsRuntime = new TestJSRuntime();
         var callId = "123";
         var resultTask = jsRuntime.NextInvocationTask;
-        DotNetDispatcher.BeginInvokeDotNet(jsRuntime, new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, callId), null);
+        DotNetDispatcher.BeginInvokeDotNet(
+            jsRuntime,
+            new DotNetInvocationInfo(null, "InvokableInstanceVoid", 1, callId),
+            null
+        );
 
         // Assert
         Assert.Equal(callId, jsRuntime.LastCompletionCallId);
         Assert.False(jsRuntime.LastCompletionResult.Success); // Fails
         var exception = jsRuntime.LastCompletionResult.Exception;
-        Assert.StartsWith("System.ArgumentException: There is no tracked object with id '1'. Perhaps the DotNetObjectReference instance was already disposed.", exception.ToString());
+        Assert.StartsWith(
+            "System.ArgumentException: There is no tracked object with id '1'. Perhaps the DotNetObjectReference instance was already disposed.",
+            exception.ToString()
+        );
     }
 
     [Theory]
@@ -746,7 +1043,15 @@ public class DotNetDispatcherTest
     [InlineData("<xml>")]
     public void ParseArguments_ThrowsIfJsonIsInvalid(string arguments)
     {
-        Assert.ThrowsAny<JsonException>(() => DotNetDispatcher.ParseArguments(new TestJSRuntime(), "SomeMethod", arguments, new[] { typeof(string) }));
+        Assert.ThrowsAny<JsonException>(
+            () =>
+                DotNetDispatcher.ParseArguments(
+                    new TestJSRuntime(),
+                    "SomeMethod",
+                    arguments,
+                    new[] { typeof(string) }
+                )
+        );
     }
 
     [Theory]
@@ -755,7 +1060,15 @@ public class DotNetDispatcherTest
     public void ParseArguments_ThrowsIfTheArgsJsonIsNotArray(string arguments)
     {
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(() => DotNetDispatcher.ParseArguments(new TestJSRuntime(), "SomeMethod", arguments, new[] { typeof(string) }));
+        Assert.ThrowsAny<JsonException>(
+            () =>
+                DotNetDispatcher.ParseArguments(
+                    new TestJSRuntime(),
+                    "SomeMethod",
+                    arguments,
+                    new[] { typeof(string) }
+                )
+        );
     }
 
     [Theory]
@@ -764,7 +1077,15 @@ public class DotNetDispatcherTest
     public void ParseArguments_ThrowsIfTheArgsJsonIsInvalidArray(string arguments)
     {
         // Act & Assert
-        Assert.ThrowsAny<JsonException>(() => DotNetDispatcher.ParseArguments(new TestJSRuntime(), "SomeMethod", arguments, new[] { typeof(string) }));
+        Assert.ThrowsAny<JsonException>(
+            () =>
+                DotNetDispatcher.ParseArguments(
+                    new TestJSRuntime(),
+                    "SomeMethod",
+                    arguments,
+                    new[] { typeof(string) }
+                )
+        );
     }
 
     [Fact]
@@ -774,7 +1095,12 @@ public class DotNetDispatcherTest
         var arguments = "[\"Hello\", 2]";
 
         // Act
-        var result = DotNetDispatcher.ParseArguments(new TestJSRuntime(), "SomeMethod", arguments, new[] { typeof(string), typeof(int), });
+        var result = DotNetDispatcher.ParseArguments(
+            new TestJSRuntime(),
+            "SomeMethod",
+            arguments,
+            new[] { typeof(string), typeof(int) }
+        );
 
         // Assert
         Assert.Equal(new object[] { "Hello", 2 }, result);
@@ -787,7 +1113,12 @@ public class DotNetDispatcherTest
         var arguments = "[{\"IntVal\": 7}]";
 
         // Act
-        var result = DotNetDispatcher.ParseArguments(new TestJSRuntime(), "SomeMethod", arguments, new[] { typeof(TestDTO), });
+        var result = DotNetDispatcher.ParseArguments(
+            new TestJSRuntime(),
+            "SomeMethod",
+            arguments,
+            new[] { typeof(TestDTO) }
+        );
 
         // Assert
         var value = Assert.IsType<TestDTO>(Assert.Single(result));
@@ -802,13 +1133,15 @@ public class DotNetDispatcherTest
         var arguments = "[4, null]";
 
         // Act
-        var result = DotNetDispatcher.ParseArguments(new TestJSRuntime(), "SomeMethod", arguments, new[] { typeof(int), typeof(TestDTO), });
+        var result = DotNetDispatcher.ParseArguments(
+            new TestJSRuntime(),
+            "SomeMethod",
+            arguments,
+            new[] { typeof(int), typeof(TestDTO) }
+        );
 
         // Assert
-        Assert.Collection(
-            result,
-            v => Assert.Equal(4, v),
-            v => Assert.Null(v));
+        Assert.Collection(result, v => Assert.Equal(4, v), v => Assert.Null(v));
     }
 
     [Fact]
@@ -819,10 +1152,21 @@ public class DotNetDispatcherTest
         var arguments = "[4, {\"__dotNetObject\": 7}]";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => DotNetDispatcher.ParseArguments(new TestJSRuntime(), method, arguments, new[] { typeof(int), typeof(TestDTO), }));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () =>
+                DotNetDispatcher.ParseArguments(
+                    new TestJSRuntime(),
+                    method,
+                    arguments,
+                    new[] { typeof(int), typeof(TestDTO) }
+                )
+        );
 
         // Assert
-        Assert.Equal($"In call to '{method}', parameter of type '{nameof(TestDTO)}' at index 2 must be declared as type 'DotNetObjectRef<TestDTO>' to receive the incoming value.", ex.Message);
+        Assert.Equal(
+            $"In call to '{method}', parameter of type '{nameof(TestDTO)}' at index 2 must be declared as type 'DotNetObjectRef<TestDTO>' to receive the incoming value.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -842,7 +1186,8 @@ public class DotNetDispatcherTest
 
     internal class SomeInteralType
     {
-        [JSInvokable("MethodOnInternalType")] public void MyMethod() { }
+        [JSInvokable("MethodOnInternalType")]
+        public void MyMethod() { }
     }
 
     public class SomePublicType
@@ -850,9 +1195,14 @@ public class DotNetDispatcherTest
         public static bool DidInvokeMyInvocableStaticVoid;
         public bool DidInvokeMyInvocableInstanceVoid;
 
-        [JSInvokable("PrivateMethod")] private static void MyPrivateMethod() { }
-        [JSInvokable("ProtectedMethod")] protected static void MyProtectedMethod() { }
+        [JSInvokable("PrivateMethod")]
+        private static void MyPrivateMethod() { }
+
+        [JSInvokable("ProtectedMethod")]
+        protected static void MyProtectedMethod() { }
+
         protected static void StaticMethodWithoutAttribute() { }
+
         protected static void InstanceMethodWithoutAttribute() { }
 
         [JSInvokable("InvocableStaticVoid")]
@@ -862,32 +1212,41 @@ public class DotNetDispatcherTest
         }
 
         [JSInvokable("InvocableStaticNonVoid")]
-        public static object MyInvocableNonVoid()
-            => new TestDTO { StringVal = "Test", IntVal = 123 };
+        public static object MyInvocableNonVoid() =>
+            new TestDTO { StringVal = "Test", IntVal = 123 };
 
         [JSInvokable("InvocableStaticWithParams")]
-        public static object[] MyInvocableWithParams(TestDTO dtoViaJson, int[] incrementAmounts, DotNetObjectReference<TestDTO> dtoByRef)
-            => new object[]
+        public static object[] MyInvocableWithParams(
+            TestDTO dtoViaJson,
+            int[] incrementAmounts,
+            DotNetObjectReference<TestDTO> dtoByRef
+        ) =>
+            new object[]
             {
-                    new TestDTO // Return via JSON marshalling
-                    {
-                        StringVal = dtoViaJson.StringVal.ToUpperInvariant(),
-                        IntVal = dtoViaJson.IntVal + incrementAmounts.Sum()
-                    },
-                    DotNetObjectReference.Create(new TestDTO // Return by ref
+                new TestDTO // Return via JSON marshalling
+                {
+                    StringVal = dtoViaJson.StringVal.ToUpperInvariant(),
+                    IntVal = dtoViaJson.IntVal + incrementAmounts.Sum(),
+                },
+                DotNetObjectReference.Create(
+                    new TestDTO // Return by ref
                     {
                         StringVal = dtoByRef.Value.StringVal.ToUpperInvariant(),
-                        IntVal = dtoByRef.Value.IntVal + incrementAmounts.Sum()
-                    })
+                        IntVal = dtoByRef.Value.IntVal + incrementAmounts.Sum(),
+                    }
+                ),
             };
 
         [JSInvokable(nameof(IncorrectDotNetObjectRefUsage))]
-        public static object[] IncorrectDotNetObjectRefUsage(TestDTO dtoViaJson, int[] incrementAmounts, TestDTO dtoByRef)
-            => throw new InvalidOperationException("Shouldn't be called");
+        public static object[] IncorrectDotNetObjectRefUsage(
+            TestDTO dtoViaJson,
+            int[] incrementAmounts,
+            TestDTO dtoByRef
+        ) => throw new InvalidOperationException("Shouldn't be called");
 
         [JSInvokable]
-        public static TestDTO InvokableMethodWithoutCustomIdentifier()
-            => new TestDTO { StringVal = "InvokableMethodWithoutCustomIdentifier", IntVal = 456 };
+        public static TestDTO InvokableMethodWithoutCustomIdentifier() =>
+            new TestDTO { StringVal = "InvokableMethodWithoutCustomIdentifier", IntVal = 456 };
 
         [JSInvokable]
         public void InvokableInstanceVoid()
@@ -896,24 +1255,32 @@ public class DotNetDispatcherTest
         }
 
         [JSInvokable]
-        public object[] InvokableInstanceMethod(string someString, DotNetObjectReference<TestDTO> someDTORef)
+        public object[] InvokableInstanceMethod(
+            string someString,
+            DotNetObjectReference<TestDTO> someDTORef
+        )
         {
             var someDTO = someDTORef.Value;
             // Returning an array to make the point that object references
             // can be embedded anywhere in the result
             return new object[]
             {
-                    $"You passed {someString}",
-                    DotNetObjectReference.Create(new TestDTO
+                $"You passed {someString}",
+                DotNetObjectReference.Create(
+                    new TestDTO
                     {
                         IntVal = someDTO.IntVal + 1,
-                        StringVal = someDTO.StringVal.ToUpperInvariant()
-                    })
+                        StringVal = someDTO.StringVal.ToUpperInvariant(),
+                    }
+                ),
             };
         }
 
         [JSInvokable]
-        public async Task<InvokableAsyncMethodResult> InvokableAsyncMethod(TestDTO dtoViaJson, DotNetObjectReference<TestDTO> dtoByRefWrapper)
+        public async Task<InvokableAsyncMethodResult> InvokableAsyncMethod(
+            TestDTO dtoViaJson,
+            DotNetObjectReference<TestDTO> dtoByRefWrapper
+        )
         {
             await Task.Delay(50);
             var dtoByRef = dtoByRefWrapper.Value;
@@ -924,31 +1291,40 @@ public class DotNetDispatcherTest
                     StringVal = dtoViaJson.StringVal.ToUpperInvariant(),
                     IntVal = dtoViaJson.IntVal * 2,
                 },
-                SomeDTORef = DotNetObjectReference.Create(new TestDTO // Return by ref
-                {
-                    StringVal = dtoByRef.StringVal.ToUpperInvariant(),
-                    IntVal = dtoByRef.IntVal * 2,
-                })
+                SomeDTORef = DotNetObjectReference.Create(
+                    new TestDTO // Return by ref
+                    {
+                        StringVal = dtoByRef.StringVal.ToUpperInvariant(),
+                        IntVal = dtoByRef.IntVal * 2,
+                    }
+                ),
             };
         }
 
         [JSInvokable]
-        public async ValueTask<InvokableAsyncMethodResult> InvokableAsyncMethodReturningValueTask(TestDTO dtoViaJson, DotNetObjectReference<TestDTO> dtoByRefWrapper)
+        public async ValueTask<InvokableAsyncMethodResult> InvokableAsyncMethodReturningValueTask(
+            TestDTO dtoViaJson,
+            DotNetObjectReference<TestDTO> dtoByRefWrapper
+        )
         {
             var dtoByRef = dtoByRefWrapper.Value;
-            return await new ValueTask<InvokableAsyncMethodResult>( new InvokableAsyncMethodResult()
-            {
-                SomeDTO = new TestDTO // Return via JSON
+            return await new ValueTask<InvokableAsyncMethodResult>(
+                new InvokableAsyncMethodResult()
                 {
-                    StringVal = dtoViaJson.StringVal.ToUpperInvariant(),
-                    IntVal = dtoViaJson.IntVal * 2,
-                },
-                SomeDTORef = DotNetObjectReference.Create(new TestDTO // Return by ref
-                {
-                    StringVal = dtoByRef.StringVal.ToUpperInvariant(),
-                    IntVal = dtoByRef.IntVal * 2,
-                })
-            });
+                    SomeDTO = new TestDTO // Return via JSON
+                    {
+                        StringVal = dtoViaJson.StringVal.ToUpperInvariant(),
+                        IntVal = dtoViaJson.IntVal * 2,
+                    },
+                    SomeDTORef = DotNetObjectReference.Create(
+                        new TestDTO // Return by ref
+                        {
+                            StringVal = dtoByRef.StringVal.ToUpperInvariant(),
+                            IntVal = dtoByRef.IntVal * 2,
+                        }
+                    ),
+                }
+            );
         }
 
         [JSInvokable]
@@ -976,9 +1352,7 @@ public class DotNetDispatcherTest
         }
     }
 
-    public class DerivedClass : BaseClass
-    {
-    }
+    public class DerivedClass : BaseClass { }
 
     public class TestDTO
     {
@@ -1004,14 +1378,20 @@ public class DotNetDispatcherTest
 
     public class GenericType<TValue>
     {
-        [JSInvokable] public string EchoStringParameter(string input) => input;
-        [JSInvokable] public TValue EchoParameter(TValue input) => input;
+        [JSInvokable]
+        public string EchoStringParameter(string input) => input;
+
+        [JSInvokable]
+        public TValue EchoParameter(TValue input) => input;
     }
 
     public class GenericMethodClass
     {
-        [JSInvokable("StaticGenericMethod")] public static string StaticGenericMethod<TValue>(TValue input) => input.ToString();
-        [JSInvokable("InstanceGenericMethod")] public string GenericMethod<TValue>(TValue input) => input.ToString();
+        [JSInvokable("StaticGenericMethod")]
+        public static string StaticGenericMethod<TValue>(TValue input) => input.ToString();
+
+        [JSInvokable("InstanceGenericMethod")]
+        public string GenericMethod<TValue>(TValue input) => input.ToString();
     }
 
     public class TestJSRuntime : JSInProcessRuntime
@@ -1025,7 +1405,13 @@ public class DotNetDispatcherTest
         public string LastCompletionCallId { get; private set; }
         public DotNetInvocationResult LastCompletionResult { get; private set; }
 
-        protected override void BeginInvokeJS(long asyncHandle, string identifier, string argsJson, JSCallResultType resultType, long targetInstanceId)
+        protected override void BeginInvokeJS(
+            long asyncHandle,
+            string identifier,
+            string argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        )
         {
             LastInvocationAsyncHandle = asyncHandle;
             LastInvocationIdentifier = identifier;
@@ -1034,7 +1420,12 @@ public class DotNetDispatcherTest
             _nextInvocationTcs = new TaskCompletionSource();
         }
 
-        protected override string InvokeJS(string identifier, string argsJson, JSCallResultType resultType, long targetInstanceId)
+        protected override string InvokeJS(
+            string identifier,
+            string argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        )
         {
             LastInvocationAsyncHandle = default;
             LastInvocationIdentifier = identifier;
@@ -1044,7 +1435,10 @@ public class DotNetDispatcherTest
             return null;
         }
 
-        protected internal override void EndInvokeDotNet(DotNetInvocationInfo invocationInfo, in DotNetInvocationResult invocationResult)
+        protected internal override void EndInvokeDotNet(
+            DotNetInvocationInfo invocationInfo,
+            in DotNetInvocationResult invocationResult
+        )
         {
             LastCompletionCallId = invocationInfo.CallId;
             LastCompletionResult = invocationResult;

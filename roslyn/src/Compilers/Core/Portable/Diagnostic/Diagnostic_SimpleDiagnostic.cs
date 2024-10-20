@@ -35,19 +35,27 @@ namespace Microsoft.CodeAnalysis
                 IEnumerable<Location>? additionalLocations,
                 object?[]? messageArgs,
                 ImmutableDictionary<string, string?>? properties,
-                bool isSuppressed)
+                bool isSuppressed
+            )
             {
-                if ((warningLevel == 0 && severity != DiagnosticSeverity.Error) ||
-                    (warningLevel != 0 && severity == DiagnosticSeverity.Error))
+                if (
+                    (warningLevel == 0 && severity != DiagnosticSeverity.Error)
+                    || (warningLevel != 0 && severity == DiagnosticSeverity.Error)
+                )
                 {
-                    throw new ArgumentException($"{nameof(warningLevel)} ({warningLevel}) and {nameof(severity)} ({severity}) are not compatible.", nameof(warningLevel));
+                    throw new ArgumentException(
+                        $"{nameof(warningLevel)} ({warningLevel}) and {nameof(severity)} ({severity}) are not compatible.",
+                        nameof(warningLevel)
+                    );
                 }
 
                 _descriptor = descriptor ?? throw new ArgumentNullException(nameof(descriptor));
                 _severity = severity;
                 _warningLevel = warningLevel;
                 _location = location ?? Location.None;
-                _additionalLocations = additionalLocations?.ToImmutableArray() ?? SpecializedCollections.EmptyReadOnlyList<Location>();
+                _additionalLocations =
+                    additionalLocations?.ToImmutableArray()
+                    ?? SpecializedCollections.EmptyReadOnlyList<Location>();
                 _messageArgs = messageArgs ?? Array.Empty<object?>();
                 _properties = properties ?? ImmutableDictionary<string, string?>.Empty;
                 _isSuppressed = isSuppressed;
@@ -61,20 +69,60 @@ namespace Microsoft.CodeAnalysis
                 IEnumerable<Location>? additionalLocations,
                 object?[]? messageArgs,
                 ImmutableDictionary<string, string?>? properties,
-                bool isSuppressed = false)
+                bool isSuppressed = false
+            )
             {
-                return new SimpleDiagnostic(descriptor, severity, warningLevel, location, additionalLocations, messageArgs, properties, isSuppressed);
+                return new SimpleDiagnostic(
+                    descriptor,
+                    severity,
+                    warningLevel,
+                    location,
+                    additionalLocations,
+                    messageArgs,
+                    properties,
+                    isSuppressed
+                );
             }
 
-            internal static SimpleDiagnostic Create(string id, LocalizableString title, string category, LocalizableString message, LocalizableString description, string helpLink,
-                                      DiagnosticSeverity severity, DiagnosticSeverity defaultSeverity,
-                                      bool isEnabledByDefault, int warningLevel, Location location,
-                                      IEnumerable<Location>? additionalLocations, IEnumerable<string>? customTags,
-                                      ImmutableDictionary<string, string?>? properties, bool isSuppressed = false)
+            internal static SimpleDiagnostic Create(
+                string id,
+                LocalizableString title,
+                string category,
+                LocalizableString message,
+                LocalizableString description,
+                string helpLink,
+                DiagnosticSeverity severity,
+                DiagnosticSeverity defaultSeverity,
+                bool isEnabledByDefault,
+                int warningLevel,
+                Location location,
+                IEnumerable<Location>? additionalLocations,
+                IEnumerable<string>? customTags,
+                ImmutableDictionary<string, string?>? properties,
+                bool isSuppressed = false
+            )
             {
-                var descriptor = new DiagnosticDescriptor(id, title, message,
-                     category, defaultSeverity, isEnabledByDefault, description, helpLink, customTags.ToImmutableArrayOrEmpty());
-                return new SimpleDiagnostic(descriptor, severity, warningLevel, location, additionalLocations, messageArgs: null, properties: properties, isSuppressed: isSuppressed);
+                var descriptor = new DiagnosticDescriptor(
+                    id,
+                    title,
+                    message,
+                    category,
+                    defaultSeverity,
+                    isEnabledByDefault,
+                    description,
+                    helpLink,
+                    customTags.ToImmutableArrayOrEmpty()
+                );
+                return new SimpleDiagnostic(
+                    descriptor,
+                    severity,
+                    warningLevel,
+                    location,
+                    additionalLocations,
+                    messageArgs: null,
+                    properties: properties,
+                    isSuppressed: isSuppressed
+                );
             }
 
             public override DiagnosticDescriptor Descriptor
@@ -170,10 +218,13 @@ namespace Microsoft.CodeAnalysis
 
             public override int GetHashCode()
             {
-                return Hash.Combine(_descriptor,
-                    Hash.CombineValues(_messageArgs,
-                    Hash.Combine(_warningLevel,
-                    Hash.Combine(_location, (int)_severity))));
+                return Hash.Combine(
+                    _descriptor,
+                    Hash.CombineValues(
+                        _messageArgs,
+                        Hash.Combine(_warningLevel, Hash.Combine(_location, (int)_severity))
+                    )
+                );
             }
 
             internal override Diagnostic WithLocation(Location location)
@@ -185,7 +236,16 @@ namespace Microsoft.CodeAnalysis
 
                 if (location != _location)
                 {
-                    return new SimpleDiagnostic(_descriptor, _severity, _warningLevel, location, _additionalLocations, _messageArgs, _properties, _isSuppressed);
+                    return new SimpleDiagnostic(
+                        _descriptor,
+                        _severity,
+                        _warningLevel,
+                        location,
+                        _additionalLocations,
+                        _messageArgs,
+                        _properties,
+                        _isSuppressed
+                    );
                 }
 
                 return this;
@@ -196,7 +256,16 @@ namespace Microsoft.CodeAnalysis
                 if (this.Severity != severity)
                 {
                     var warningLevel = GetDefaultWarningLevel(severity);
-                    return new SimpleDiagnostic(_descriptor, severity, warningLevel, _location, _additionalLocations, _messageArgs, _properties, _isSuppressed);
+                    return new SimpleDiagnostic(
+                        _descriptor,
+                        severity,
+                        warningLevel,
+                        _location,
+                        _additionalLocations,
+                        _messageArgs,
+                        _properties,
+                        _isSuppressed
+                    );
                 }
 
                 return this;
@@ -206,7 +275,16 @@ namespace Microsoft.CodeAnalysis
             {
                 if (this.IsSuppressed != isSuppressed)
                 {
-                    return new SimpleDiagnostic(_descriptor, _severity, _warningLevel, _location, _additionalLocations, _messageArgs, _properties, isSuppressed);
+                    return new SimpleDiagnostic(
+                        _descriptor,
+                        _severity,
+                        _warningLevel,
+                        _location,
+                        _additionalLocations,
+                        _messageArgs,
+                        _properties,
+                        isSuppressed
+                    );
                 }
 
                 return this;

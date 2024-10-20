@@ -37,8 +37,11 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 var mefExporter = _services.SolutionServices.ExportProvider;
 
                 var providers = ExtensionOrderer
-                    .Order(mefExporter.GetExports<QuickInfoProvider, QuickInfoProviderMetadata>()
-                        .Where(lz => lz.Metadata.Language == _services.Language))
+                    .Order(
+                        mefExporter
+                            .GetExports<QuickInfoProvider, QuickInfoProviderMetadata>()
+                            .Where(lz => lz.Metadata.Language == _services.Language)
+                    )
                     .Select(lz => lz.Value)
                     .ToImmutableArray();
 
@@ -48,22 +51,36 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             return _providers;
         }
 
-        internal override async Task<QuickInfoItem?> GetQuickInfoAsync(Document document, int position, SymbolDescriptionOptions options, CancellationToken cancellationToken)
+        internal override async Task<QuickInfoItem?> GetQuickInfoAsync(
+            Document document,
+            int position,
+            SymbolDescriptionOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var extensionManager = _services.SolutionServices.GetRequiredService<IExtensionManager>();
+            var extensionManager =
+                _services.SolutionServices.GetRequiredService<IExtensionManager>();
 
             // returns the first non-empty quick info found (based on provider order)
             foreach (var provider in GetProviders())
             {
-                var info = await extensionManager.PerformFunctionAsync(
-                    provider,
-                    () =>
-                    {
-                        var context = new QuickInfoContext(document, position, options, cancellationToken);
+                var info = await extensionManager
+                    .PerformFunctionAsync(
+                        provider,
+                        () =>
+                        {
+                            var context = new QuickInfoContext(
+                                document,
+                                position,
+                                options,
+                                cancellationToken
+                            );
 
-                        return provider.GetQuickInfoAsync(context);
-                    },
-                    defaultValue: null).ConfigureAwait(false);
+                            return provider.GetQuickInfoAsync(context);
+                        },
+                        defaultValue: null
+                    )
+                    .ConfigureAwait(false);
                 if (info != null)
                     return info;
             }
@@ -71,22 +88,37 @@ namespace Microsoft.CodeAnalysis.QuickInfo
             return null;
         }
 
-        internal async Task<QuickInfoItem?> GetQuickInfoAsync(SemanticModel semanticModel, int position, SymbolDescriptionOptions options, CancellationToken cancellationToken)
+        internal async Task<QuickInfoItem?> GetQuickInfoAsync(
+            SemanticModel semanticModel,
+            int position,
+            SymbolDescriptionOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            var extensionManager = _services.SolutionServices.GetRequiredService<IExtensionManager>();
+            var extensionManager =
+                _services.SolutionServices.GetRequiredService<IExtensionManager>();
 
             // returns the first non-empty quick info found (based on provider order)
             foreach (var provider in GetProviders().OfType<CommonQuickInfoProvider>())
             {
-                var info = await extensionManager.PerformFunctionAsync(
-                    provider,
-                    () =>
-                    {
-                        var context = new CommonQuickInfoContext(_services.SolutionServices, semanticModel, position, options, cancellationToken);
+                var info = await extensionManager
+                    .PerformFunctionAsync(
+                        provider,
+                        () =>
+                        {
+                            var context = new CommonQuickInfoContext(
+                                _services.SolutionServices,
+                                semanticModel,
+                                position,
+                                options,
+                                cancellationToken
+                            );
 
-                        return provider.GetQuickInfoAsync(context);
-                    },
-                    defaultValue: null).ConfigureAwait(false);
+                            return provider.GetQuickInfoAsync(context);
+                        },
+                        defaultValue: null
+                    )
+                    .ConfigureAwait(false);
                 if (info != null)
                     return info;
             }

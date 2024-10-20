@@ -9,31 +9,35 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
 
-public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : CommonTestBase where TCompilation : Compilation
+public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : CommonTestBase
+    where TCompilation : Compilation
 {
-    private static string CompilerFeatureRequiredApplication(
-        bool? isOptional)
+    private static string CompilerFeatureRequiredApplication(bool? isOptional)
     {
         var builder = new BlobBuilder();
         builder.WriteSerializedString("test");
-        var featureLengthAndName = string.Join(" ", builder.ToImmutableArray().Select(b => $"{b:x2}"));
+        var featureLengthAndName = string.Join(
+            " ",
+            builder.ToImmutableArray().Select(b => $"{b:x2}")
+        );
 
         var isOptionalText = isOptional switch
         {
             true => "01 00 54 02 0a 49 73 4f 70 74 69 6f 6e 61 6c 01", // One optional parameter, "IsOptional", true
             false => "01 00 54 02 0a 49 73 4f 70 74 69 6f 6e 61 6c 00", // One optional parameter, "IsOptional", false
-            null => "00 00" // No optional parameters
+            null =>
+                "00 00" // No optional parameters
+            ,
         };
 
         return $"""
-                 .custom instance void System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::.ctor(string) = (
-                     01 00 {featureLengthAndName} {isOptionalText}
-                 )
-                 """;
+            .custom instance void System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute::.ctor(string) = (
+                01 00 {featureLengthAndName} {isOptionalText}
+            )
+            """;
     }
 
-    private const string CompilerFeatureRequiredIl =
-        """
+    private const string CompilerFeatureRequiredIl = """
         .class public auto ansi sealed beforefieldinit System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute
              extends [mscorlib]System.Attribute
          {
@@ -115,82 +119,82 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
     // public class OnType
     // {
     // }
-    // 
+    //
     // public class OnMethod
     // {
     //     [CompilerFeatureRequired("test")]
     //     public static void M() {}
     // }
-    // 
+    //
     // public class OnMethodReturn
     // {
     //     [return: CompilerFeatureRequired("test")]
     //     public static void M() {}
     // }
-    // 
+    //
     // public class OnParameter
     // {
     //     public static void M([CompilerFeatureRequired("test")] int param) {}
     // }
-    // 
+    //
     // public class OnField
     // {
     //     [CompilerFeatureRequired("test")]
     //     public static int Field;
     // }
-    // 
+    //
     // public class OnProperty
     // {
     //     [CompilerFeatureRequired("test")]
     //     public static int Property { get => 0; set {} }
     // }
-    // 
+    //
     // public class OnPropertySetter
     // {
     //     public static int Property { get => 0; [CompilerFeatureRequired("test")] set {} }
     // }
-    // 
+    //
     // public class OnPropertyGetter
     // {
     //     public static int Property { [CompilerFeatureRequired("test")] get => 0; set {} }
     // }
-    // 
+    //
     // public class OnEvent
     // {
     //     [CompilerFeatureRequired("test")]
     //     public static event Action Event { add {} remove {} }
     // }
-    // 
+    //
     // public class OnEventAdder
     // {
     //     public static event Action Event { [CompilerFeatureRequired("test")] add {} remove {} }
     // }
-    // 
+    //
     // public class OnEventRemover
     // {
     //     public static event Action Event { [CompilerFeatureRequired("test")] add {} remove {} }
     // }
-    // 
+    //
     // [CompilerFeatureRequired("test")]
     // public enum OnEnum
     // {
     //     A
     // }
-    // 
+    //
     // public enum OnEnumMember
     // {
     //     [CompilerFeatureRequired("test")] A
     // }
-    // 
+    //
     // public class OnClassTypeParameter<[CompilerFeatureRequired("test")] T>
     // {
     // }
-    // 
+    //
     // public class OnMethodTypeParameter
     // {
     //     public static void M<[CompilerFeatureRequired("test")] T>() {}
     // }
-    // 
+    //
     // [CompilerFeatureRequired("test")]
     // public delegate void OnDelegateType();
     //
@@ -218,7 +222,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ret
                 } // end of method OnMethod::M
             } // end of class OnType
-            
+
             .class public auto ansi beforefieldinit OnMethod
                 extends [mscorlib]System.Object
             {
@@ -230,7 +234,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ret
                 } // end of method OnMethod::M
             } // end of class OnMethod
-            
+
             .class public auto ansi beforefieldinit OnMethodReturn
                 extends [mscorlib]System.Object
             {
@@ -243,7 +247,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ret
                 } // end of method OnMethodReturn::M
             } // end of class OnMethodReturn
-            
+
             .class public auto ansi beforefieldinit OnParameter
                 extends [mscorlib]System.Object
             {
@@ -258,7 +262,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ret
                 } // end of method OnParameter::M
             } // end of class OnParameter
-            
+
             .class public auto ansi beforefieldinit OnField
                 extends [mscorlib]System.Object
             {
@@ -266,7 +270,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                 .field public static int32 Field
                 {{attributeApplication}}
             } // end of class OnField
-            
+
             .class public auto ansi beforefieldinit OnProperty
                 extends [mscorlib]System.Object
             {
@@ -277,7 +281,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ldc.i4.0
                     ret
                 } // end of method OnProperty::get_Property
-            
+
                 .method public hidebysig specialname static
                     void set_Property (
                         int32 'value'
@@ -285,7 +289,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                 {
                     ret
                 } // end of method OnProperty::set_Property
-            
+
                 // Properties
                 .property int32 Property()
                 {
@@ -293,9 +297,9 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     .get int32 OnProperty::get_Property()
                     .set void OnProperty::set_Property(int32)
                 }
-            
+
             } // end of class OnProperty
-            
+
             .class public auto ansi beforefieldinit OnPropertySetter
                 extends [mscorlib]System.Object
             {
@@ -335,7 +339,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ldc.i4.0
                     ret
                 } // end of method OnPropertyGetter::get_Property
-            
+
                 .method public hidebysig specialname static
                     void set_Property (
                         int32 'value'
@@ -350,9 +354,9 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     .get int32 OnPropertyGetter::get_Property()
                     .set void OnPropertyGetter::set_Property(int32)
                 }
-            
+
             } // end of class OnPropertyGetter
-            
+
             .class public auto ansi beforefieldinit OnEvent
                 extends [mscorlib]System.Object
             {
@@ -364,7 +368,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                 {
                     ret
                 } // end of method OnEvent::add_Event
-            
+
                 .method public hidebysig specialname static
                     void remove_Event (
                         class [mscorlib]System.Action 'value'
@@ -380,10 +384,10 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     .addon void OnEvent::add_Event(class [mscorlib]System.Action)
                     .removeon void OnEvent::remove_Event(class [mscorlib]System.Action)
                 }
-            
-            
+
+
             } // end of class OnEvent
-            
+
             .class public auto ansi beforefieldinit OnEventAdder
                 extends [mscorlib]System.Object
             {
@@ -411,10 +415,10 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     .addon void OnEventAdder::add_Event(class [mscorlib]System.Action)
                     .removeon void OnEventAdder::remove_Event(class [mscorlib]System.Action)
                 }
-            
-            
+
+
             } // end of class OnEventAdder
-            
+
             .class public auto ansi beforefieldinit OnEventRemover
                 extends [mscorlib]System.Object
             {
@@ -426,7 +430,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                 {
                     ret
                 } // end of method OnEventRemover::add_Event
-            
+
                 .method public hidebysig specialname static
                     void remove_Event (
                         class [mscorlib]System.Action 'value'
@@ -442,10 +446,10 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     .addon void OnEventRemover::add_Event(class [mscorlib]System.Action)
                     .removeon void OnEventRemover::remove_Event(class [mscorlib]System.Action)
                 }
-            
-            
+
+
             } // end of class OnEventRemover
-            
+
             .class public auto ansi sealed OnEnum
                 extends [mscorlib]System.Enum
             {
@@ -453,9 +457,9 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                 // Fields
                 .field public specialname rtspecialname int32 value__
                 .field public static literal valuetype OnEnum A = int32(0)
-            
+
             } // end of class OnEnum
-            
+
             .class public auto ansi sealed OnEnumMember
                 extends [mscorlib]System.Enum
             {
@@ -463,16 +467,16 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                 .field public specialname rtspecialname int32 value__
                 .field public static literal valuetype OnEnumMember A = int32(0)
                 {{attributeApplication}}
-            
+
             } // end of class OnEnumMember
-            
+
             .class public auto ansi beforefieldinit OnClassTypeParameter`1<T>
                 extends [mscorlib]System.Object
             {
                 .param type T
                     {{attributeApplication}}
             } // end of class OnClassTypeParameter`1
-            
+
             .class public auto ansi beforefieldinit OnMethodTypeParameter
                 extends [mscorlib]System.Object
             {
@@ -485,7 +489,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ret
                 } // end of method OnMethodTypeParameter::M
             } // end of class OnMethodTypeParameter
-            
+
             .class public auto ansi sealed OnDelegateType
                 extends [mscorlib]System.MulticastDelegate
             {
@@ -498,12 +502,12 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ) runtime managed 
                 {
                 } // end of method OnDelegateType::.ctor
-            
+
                 .method public hidebysig newslot virtual 
                     instance void Invoke () runtime managed 
                 {
                 } // end of method OnDelegateType::Invoke
-            
+
                 .method public hidebysig newslot virtual 
                     instance class [mscorlib]System.IAsyncResult BeginInvoke (
                         class [mscorlib]System.AsyncCallback callback,
@@ -511,14 +515,14 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ) runtime managed 
                 {
                 } // end of method OnDelegateType::BeginInvoke
-            
+
                 .method public hidebysig newslot virtual 
                     instance void EndInvoke (
                         class [mscorlib]System.IAsyncResult result
                     ) runtime managed 
                 {
                 } // end of method OnDelegateType::EndInvoke
-            
+
             } // end of class OnDelegateType
 
             .class public auto ansi OnIndexedPropertyParameter
@@ -538,7 +542,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     ldloc.0
                     ret
                 } // end of method OnIndexedPropertyParameter::get_Property
-            
+
                 .method public specialname static
                     void set_Property (
                         int32 param,
@@ -547,10 +551,10 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                 {
                     .param [1]
                         {{attributeApplication}}
-            
+
                     ret
                 } // end of method OnIndexedPropertyParameter::set_Property
-            
+
                 // Properties
                 .property int32 Property(
                     int32 param
@@ -559,7 +563,7 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
                     .get int32 OnIndexedPropertyParameter::get_Property(int32)
                     .set void OnIndexedPropertyParameter::set_Property(int32, int32)
                 }
-            
+
             } // end of class OnIndexedPropertyParameter
 
             .class public auto ansi beforefieldinit OnThisIndexerParameter
@@ -613,7 +617,10 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
 
     protected abstract TSource GetUsage();
     protected abstract TCompilation CreateCompilationWithIL(TSource source, string ilSource);
-    protected abstract TCompilation CreateCompilation(TSource source, MetadataReference[] references);
+    protected abstract TCompilation CreateCompilation(
+        TSource source,
+        MetadataReference[] references
+    );
     protected abstract CompilationVerifier CompileAndVerify(TCompilation compilation);
 
     [Theory]
@@ -623,9 +630,9 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
     public void OnNormalSymbols(bool? isOptional)
     {
         var testIl = $"""
-        {CompilerFeatureRequiredIl}
-        {GetTestIl(CompilerFeatureRequiredApplication(isOptional: isOptional))}
-        """;
+            {CompilerFeatureRequiredIl}
+            {GetTestIl(CompilerFeatureRequiredApplication(isOptional: isOptional))}
+            """;
         var comp = CreateCompilationWithIL(source: GetUsage(), ilSource: testIl);
 
         if (isOptional == true)
@@ -647,20 +654,20 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
     public void OnAssembly(bool? isOptional)
     {
         var il = $$"""
-        .assembly 'AssemblyTest'
-        {
-            {{CompilerFeatureRequiredApplication(isOptional: isOptional)}}
-        }
+            .assembly 'AssemblyTest'
+            {
+                {{CompilerFeatureRequiredApplication(isOptional: isOptional)}}
+            }
 
-        .assembly extern mscorlib 
-        {
-            .publickeytoken = (B7 7A 5C 56 19 34 E0 89)
-            .ver 4:0:0:0
-        } 
+            .assembly extern mscorlib 
+            {
+                .publickeytoken = (B7 7A 5C 56 19 34 E0 89)
+                .ver 4:0:0:0
+            } 
 
-        {{CompilerFeatureRequiredIl}}
-        {{GetTestIl(attributeApplication: "")}}
-        """;
+            {{CompilerFeatureRequiredIl}}
+            {{GetTestIl(attributeApplication: "")}}
+            """;
 
         var compiledIl = CompileIL(il, prependDefaultHeader: false);
 
@@ -685,12 +692,12 @@ public abstract class BaseCompilerFeatureRequiredTests<TCompilation, TSource> : 
     public void OnModule(bool? isOptional)
     {
         var il = $$"""
-        .module OnModule
-        {{CompilerFeatureRequiredApplication(isOptional: isOptional)}}
+            .module OnModule
+            {{CompilerFeatureRequiredApplication(isOptional: isOptional)}}
 
-        {{CompilerFeatureRequiredIl}}
-        {{GetTestIl(attributeApplication: "")}}
-        """;
+            {{CompilerFeatureRequiredIl}}
+            {{GetTestIl(attributeApplication: "")}}
+            """;
 
         var compiledIl = CompileIL(il);
         var comp = CreateCompilation(source: GetUsage(), references: new[] { compiledIl });

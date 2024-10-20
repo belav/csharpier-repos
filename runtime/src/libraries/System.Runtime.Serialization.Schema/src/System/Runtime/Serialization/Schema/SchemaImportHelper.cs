@@ -14,20 +14,21 @@ namespace System.Runtime.Serialization
         EnumDataContract,
         PrimitiveDataContract,
         XmlDataContract,
-        Unknown = -1
+        Unknown = -1,
     }
 
     internal static class DataContractExtensions
     {
-        internal static DataContractType GetContractType(this DataContract dataContract) => dataContract.ContractType switch
-        {
-            "ClassDataContract" => DataContractType.ClassDataContract,
-            "CollectionDataContract" => DataContractType.CollectionDataContract,
-            "EnumDataContract" => DataContractType.EnumDataContract,
-            "PrimitiveDataContract" => DataContractType.PrimitiveDataContract,
-            "XmlDataContract" => DataContractType.XmlDataContract,
-            _ => DataContractType.Unknown
-        };
+        internal static DataContractType GetContractType(this DataContract dataContract) =>
+            dataContract.ContractType switch
+            {
+                "ClassDataContract" => DataContractType.ClassDataContract,
+                "CollectionDataContract" => DataContractType.CollectionDataContract,
+                "EnumDataContract" => DataContractType.EnumDataContract,
+                "PrimitiveDataContract" => DataContractType.PrimitiveDataContract,
+                "XmlDataContract" => DataContractType.XmlDataContract,
+                _ => DataContractType.Unknown,
+            };
 
         internal static bool Is(this DataContract dataContract, DataContractType dcType)
         {
@@ -47,7 +48,9 @@ namespace System.Runtime.Serialization
             if (collectionDataContract.GetContractType() == DataContractType.CollectionDataContract)
             {
                 // ItemContract - aka BaseContract - is never null for CollectionDataContract
-                return SchemaImportHelper.IsTypeNullable(collectionDataContract.BaseContract!.UnderlyingType);
+                return SchemaImportHelper.IsTypeNullable(
+                    collectionDataContract.BaseContract!.UnderlyingType
+                );
             }
 
             return false;
@@ -58,9 +61,8 @@ namespace System.Runtime.Serialization
     {
         internal static bool IsTypeNullable(Type type)
         {
-            return !type.IsValueType ||
-                    (type.IsGenericType &&
-                    type.GetGenericTypeDefinition() == typeof(Nullable<>));
+            return !type.IsValueType
+                || (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
         }
 
         internal static string GetCollectionNamespace(string elementNs)
@@ -70,17 +72,27 @@ namespace System.Runtime.Serialization
 
         internal static string GetDataContractNamespaceFromUri(string uriString)
         {
-            return uriString.StartsWith(ImportGlobals.DataContractXsdBaseNamespace, StringComparison.Ordinal) ? uriString.Substring(ImportGlobals.DataContractXsdBaseNamespace.Length) : uriString;
+            return uriString.StartsWith(
+                ImportGlobals.DataContractXsdBaseNamespace,
+                StringComparison.Ordinal
+            )
+                ? uriString.Substring(ImportGlobals.DataContractXsdBaseNamespace.Length)
+                : uriString;
         }
 
         internal static string GetDefaultXmlNamespace(string? clrNs)
         {
-            return new Uri(ImportGlobals.DataContractXsdBaseNamespaceUri, clrNs ?? string.Empty).AbsoluteUri;
+            return new Uri(
+                ImportGlobals.DataContractXsdBaseNamespaceUri,
+                clrNs ?? string.Empty
+            ).AbsoluteUri;
         }
 
         internal static bool IsBuiltInNamespace(string ns)
         {
-            return (ns == ImportGlobals.SchemaNamespace || ns == ImportGlobals.SerializationNamespace);
+            return (
+                ns == ImportGlobals.SchemaNamespace || ns == ImportGlobals.SerializationNamespace
+            );
         }
 
         // This should match the behavior of DataContract.EncodeLocalName

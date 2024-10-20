@@ -20,7 +20,8 @@ public class SocketReceiver
         _socket = socket;
         _awaitable = new SocketAwaitable(scheduler);
         _eventArgs.UserToken = _awaitable;
-        _eventArgs.Completed += (_, e) => ((SocketAwaitable)e.UserToken).Complete(e.BytesTransferred, e.SocketError);
+        _eventArgs.Completed += (_, e) =>
+            ((SocketAwaitable)e.UserToken).Complete(e.BytesTransferred, e.SocketError);
     }
 
     public SocketAwaitable ReceiveAsync(Memory<byte> buffer)

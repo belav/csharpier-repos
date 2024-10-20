@@ -16,11 +16,12 @@ public class RecognizeDestinationPostfixes : AutoMapperSpecBase
         public string NameV { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg=>
-    {
-        cfg.RecognizeDestinationPostfixes("V");
-        cfg.CreateMap<Person, PersonDto>().ForMember("AgeV", m => m.MapFrom("Age2"));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.RecognizeDestinationPostfixes("V");
+            cfg.CreateMap<Person, PersonDto>().ForMember("AgeV", m => m.MapFrom("Age2"));
+        });
 
     [Fact]
     public void Should_be_overriden_by_MapFrom()

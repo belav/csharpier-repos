@@ -37,7 +37,6 @@ namespace System.Threading.Tasks
         internal int _bRangeFinished;
     }
 
-
     /// <summary>
     /// The RangeWorker struct wraps the state needed by a task that services the parallel loop
     /// </summary>
@@ -63,12 +62,20 @@ namespace System.Threading.Tasks
         // whether to use 32-bits or 64-bits of current index in each range
         internal readonly bool _use32BitCurrentIndex;
 
-        internal bool IsInitialized { get { return _indexRanges != null; } }
+        internal bool IsInitialized
+        {
+            get { return _indexRanges != null; }
+        }
 
         /// <summary>
         /// Initializes a RangeWorker struct
         /// </summary>
-        internal RangeWorker(IndexRange[] ranges, int nInitialRange, long nStep, bool use32BitCurrentIndex)
+        internal RangeWorker(
+            IndexRange[] ranges,
+            int nInitialRange,
+            long nStep,
+            bool use32BitCurrentIndex
+        )
         {
             _indexRanges = ranges;
             _use32BitCurrentIndex = use32BitCurrentIndex;
@@ -103,11 +110,19 @@ namespace System.Threading.Tasks
 
                 if (currentRange._bRangeFinished == 0)
                 {
-                    StrongBox<long>? sharedCurrentIndexOffset = _indexRanges[_nCurrentIndexRange]._nSharedCurrentIndexOffset;
+                    StrongBox<long>? sharedCurrentIndexOffset = _indexRanges[
+                        _nCurrentIndexRange
+                    ]._nSharedCurrentIndexOffset;
                     if (sharedCurrentIndexOffset == null)
                     {
-                        Interlocked.CompareExchange(ref _indexRanges[_nCurrentIndexRange]._nSharedCurrentIndexOffset, new StrongBox<long>(0), null);
-                        sharedCurrentIndexOffset = _indexRanges[_nCurrentIndexRange]._nSharedCurrentIndexOffset!;
+                        Interlocked.CompareExchange(
+                            ref _indexRanges[_nCurrentIndexRange]._nSharedCurrentIndexOffset,
+                            new StrongBox<long>(0),
+                            null
+                        );
+                        sharedCurrentIndexOffset = _indexRanges[
+                            _nCurrentIndexRange
+                        ]._nSharedCurrentIndexOffset!;
                     }
 
                     long nMyOffset;
@@ -120,13 +135,17 @@ namespace System.Threading.Tasks
                         {
                             fixed (long* indexPtr = &sharedCurrentIndexOffset.Value)
                             {
-                                nMyOffset = Interlocked.Add(ref *(int*)indexPtr, (int)_nIncrementValue) - _nIncrementValue;
+                                nMyOffset =
+                                    Interlocked.Add(ref *(int*)indexPtr, (int)_nIncrementValue)
+                                    - _nIncrementValue;
                             }
                         }
                     }
                     else
                     {
-                        nMyOffset = Interlocked.Add(ref sharedCurrentIndexOffset.Value, _nIncrementValue) - _nIncrementValue;
+                        nMyOffset =
+                            Interlocked.Add(ref sharedCurrentIndexOffset.Value, _nIncrementValue)
+                            - _nIncrementValue;
                     }
 
                     if (currentRange._nToExclusive - currentRange._nFromInclusive > nMyOffset)
@@ -137,7 +156,10 @@ namespace System.Threading.Tasks
                         nToExclusiveLocal = unchecked(nFromInclusiveLocal + _nIncrementValue);
 
                         // Check for going past end of range, or wrapping
-                        if ((nToExclusiveLocal > currentRange._nToExclusive) || (nToExclusiveLocal < currentRange._nFromInclusive))
+                        if (
+                            (nToExclusiveLocal > currentRange._nToExclusive)
+                            || (nToExclusiveLocal < currentRange._nFromInclusive)
+                        )
                         {
                             nToExclusiveLocal = currentRange._nToExclusive;
                         }
@@ -157,7 +179,10 @@ namespace System.Threading.Tasks
                     else
                     {
                         // this index range is completed, mark it so that others can skip it quickly
-                        Interlocked.Exchange(ref _indexRanges[_nCurrentIndexRange]._bRangeFinished, 1);
+                        Interlocked.Exchange(
+                            ref _indexRanges[_nCurrentIndexRange]._bRangeFinished,
+                            1
+                        );
                     }
                 }
 
@@ -173,15 +198,19 @@ namespace System.Threading.Tasks
             return false;
         }
 
-        internal bool FindNewWork<TInt>(out TInt fromInclusive, out TInt toExclusive) where TInt : struct, IBinaryInteger<TInt>, IMinMaxValue<TInt>
+        internal bool FindNewWork<TInt>(out TInt fromInclusive, out TInt toExclusive)
+            where TInt : struct, IBinaryInteger<TInt>, IMinMaxValue<TInt>
         {
             Debug.Assert(typeof(TInt) == typeof(int) || typeof(TInt) == typeof(long));
 
             bool success = FindNewWork(out long fromInclusiveInt64, out long toExclusiveInt64);
 
             Debug.Assert(
-                fromInclusiveInt64 <= long.CreateTruncating(TInt.MaxValue) && fromInclusiveInt64 >= long.CreateTruncating(TInt.MinValue) &&
-                toExclusiveInt64 <= long.CreateTruncating(TInt.MaxValue) && toExclusiveInt64 >= long.CreateTruncating(TInt.MinValue));
+                fromInclusiveInt64 <= long.CreateTruncating(TInt.MaxValue)
+                    && fromInclusiveInt64 >= long.CreateTruncating(TInt.MinValue)
+                    && toExclusiveInt64 <= long.CreateTruncating(TInt.MaxValue)
+                    && toExclusiveInt64 >= long.CreateTruncating(TInt.MinValue)
+            );
 
             fromInclusive = TInt.CreateTruncating(fromInclusiveInt64);
             toExclusive = TInt.CreateTruncating(toExclusiveInt64);
@@ -189,7 +218,6 @@ namespace System.Threading.Tasks
             return success;
         }
     }
-
 
     /// <summary>
     /// Represents the entire loop operation, keeping track of workers and ranges.
@@ -211,7 +239,12 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Initializes a RangeManager with the given loop parameters, and the desired number of outer ranges
         /// </summary>
-        internal RangeManager(long nFromInclusive, long nToExclusive, long nStep, int nNumExpectedWorkers)
+        internal RangeManager(
+            long nFromInclusive,
+            long nToExclusive,
+            long nStep,
+            int nNumExpectedWorkers
+        )
         {
             _nCurrentIndexRangeToAssign = 0;
             _nStep = nStep;
@@ -228,7 +261,7 @@ namespace System.Threading.Tasks
             ulong uRangeSize = uSpan / (ulong)nNumExpectedWorkers; // rough estimate first
 
             uRangeSize -= uRangeSize % (ulong)nStep; // snap to multiples of nStep
-                                                     // otherwise index range transitions will derail us from nStep
+            // otherwise index range transitions will derail us from nStep
 
             if (uRangeSize == 0)
             {
@@ -246,7 +279,6 @@ namespace System.Threading.Tasks
             {
                 nNumRanges++;
             }
-
 
             // Convert to signed so the rest of the logic works.
             // Should be fine so long as uRangeSize < Int64.MaxValue, which we guaranteed by setting #workers >= 2.
@@ -268,8 +300,10 @@ namespace System.Threading.Tasks
                 nCurrentIndex = unchecked(nCurrentIndex + nRangeSize);
 
                 // detect integer overflow or range overage and snap to nToExclusive
-                if (nCurrentIndex < unchecked(nCurrentIndex - nRangeSize) ||
-                    nCurrentIndex > nToExclusive)
+                if (
+                    nCurrentIndex < unchecked(nCurrentIndex - nRangeSize)
+                    || nCurrentIndex > nToExclusive
+                )
                 {
                     // this should only happen at the last index
                     Debug.Assert(i == nNumRanges - 1);
@@ -290,7 +324,8 @@ namespace System.Threading.Tasks
         {
             Debug.Assert(_indexRanges != null && _indexRanges.Length != 0);
 
-            int nInitialRange = (Interlocked.Increment(ref _nCurrentIndexRangeToAssign) - 1) % _indexRanges.Length;
+            int nInitialRange =
+                (Interlocked.Increment(ref _nCurrentIndexRangeToAssign) - 1) % _indexRanges.Length;
 
             return new RangeWorker(_indexRanges, nInitialRange, _nStep, _use32BitCurrentIndex);
         }

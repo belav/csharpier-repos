@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL
@@ -14,26 +13,17 @@ namespace Internal.IL
 
         public int Offset
         {
-            get
-            {
-                return _currentOffset;
-            }
+            get { return _currentOffset; }
         }
 
         public int Size
         {
-            get
-            {
-                return _ilBytes.Length;
-            }
+            get { return _ilBytes.Length; }
         }
 
         public bool HasNext
         {
-            get
-            {
-                return _currentOffset < _ilBytes.Length;
-            }
+            get { return _currentOffset < _ilBytes.Length; }
         }
 
         public ILReader(byte[] ilBytes, int currentOffset = 0)
@@ -69,7 +59,12 @@ namespace Internal.IL
             if (_currentOffset + 4 > _ilBytes.Length)
                 ThrowHelper.ThrowInvalidProgramException();
 
-            uint val = (uint)(_ilBytes[_currentOffset] + (_ilBytes[_currentOffset + 1] << 8) + (_ilBytes[_currentOffset + 2] << 16) + (_ilBytes[_currentOffset + 3] << 24));
+            uint val = (uint)(
+                _ilBytes[_currentOffset]
+                + (_ilBytes[_currentOffset + 1] << 8)
+                + (_ilBytes[_currentOffset + 2] << 16)
+                + (_ilBytes[_currentOffset + 3] << 24)
+            );
             _currentOffset += 4;
             return val;
         }
@@ -147,15 +142,19 @@ namespace Internal.IL
 
         public int ReadBranchDestination(ILOpcode currentOpcode)
         {
-            if ((currentOpcode >= ILOpcode.br_s && currentOpcode <= ILOpcode.blt_un_s)
-                || currentOpcode == ILOpcode.leave_s)
+            if (
+                (currentOpcode >= ILOpcode.br_s && currentOpcode <= ILOpcode.blt_un_s)
+                || currentOpcode == ILOpcode.leave_s
+            )
             {
                 return (sbyte)ReadILByte() + Offset;
             }
             else
             {
-                Debug.Assert((currentOpcode >= ILOpcode.br && currentOpcode <= ILOpcode.blt_un)
-                    || currentOpcode == ILOpcode.leave);
+                Debug.Assert(
+                    (currentOpcode >= ILOpcode.br && currentOpcode <= ILOpcode.blt_un)
+                        || currentOpcode == ILOpcode.leave
+                );
                 return (int)ReadILUInt32() + Offset;
             }
         }

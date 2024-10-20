@@ -13,7 +13,11 @@ namespace Internal.TypeSystem
     /// </summary>
     public static class RuntimeDeterminedCanonicalizationAlgorithm
     {
-        public static Instantiation ConvertInstantiationToCanonForm(Instantiation instantiation, CanonicalFormKind kind, out bool changed)
+        public static Instantiation ConvertInstantiationToCanonForm(
+            Instantiation instantiation,
+            CanonicalFormKind kind,
+            out bool changed
+        )
         {
             TypeDesc[] canonInstantiation = null;
 
@@ -26,7 +30,11 @@ namespace Internal.TypeSystem
             {
                 startLoopKind = currentKind;
 
-                for (int instantiationIndex = 0; instantiationIndex < instantiation.Length; instantiationIndex++)
+                for (
+                    int instantiationIndex = 0;
+                    instantiationIndex < instantiation.Length;
+                    instantiationIndex++
+                )
                 {
                     TypeDesc typeToConvert = instantiation[instantiationIndex];
                     TypeDesc canonForm = ConvertToCanon(typeToConvert, ref currentKind);
@@ -49,9 +57,7 @@ namespace Internal.TypeSystem
                 {
                     break;
                 }
-
             } while (currentKind != startLoopKind);
-
 
             changed = canonInstantiation != null;
             if (changed)
@@ -95,7 +101,9 @@ namespace Internal.TypeSystem
                     }
                     else if (typeToConvert.HasInstantiation)
                     {
-                        TypeDesc canonicalType = typeToConvert.ConvertToCanonForm(CanonicalFormKind.Specific);
+                        TypeDesc canonicalType = typeToConvert.ConvertToCanonForm(
+                            CanonicalFormKind.Specific
+                        );
 
                         // This is a generic struct type. If the generic struct is instantiated over universal canon,
                         // the entire struct becomes universally canonical.
@@ -115,7 +123,10 @@ namespace Internal.TypeSystem
                         // which will reach this case.
 
                         // We should only ever reach this for T__UniversalCanon.
-                        Debug.Assert(((RuntimeDeterminedType)typeToConvert).CanonicalType == context.UniversalCanonType);
+                        Debug.Assert(
+                            ((RuntimeDeterminedType)typeToConvert).CanonicalType
+                                == context.UniversalCanonType
+                        );
 
                         kind = CanonicalFormKind.Universal;
                         return context.UniversalCanonType;

@@ -16,7 +16,12 @@ namespace System.IO.Compression.Tests
         [InlineData("OSX_RWXRW_R__.zip", 0x8000 + 0x01C0 + 0x0020 + 0x0010 + 0x0004)]
         public static async Task Read_UnixFilePermissions(string zipName, uint expectedAttr)
         {
-            using (ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(compat(zipName)), ZipArchiveMode.Read))
+            using (
+                ZipArchive archive = new ZipArchive(
+                    await StreamHelpers.CreateTempCopyStream(compat(zipName)),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 foreach (ZipArchiveEntry e in archive.Entries)
                 {

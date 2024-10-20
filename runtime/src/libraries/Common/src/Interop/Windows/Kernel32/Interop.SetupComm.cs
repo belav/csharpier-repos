@@ -10,9 +10,6 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool SetupComm(
-            SafeFileHandle hFile,
-            int dwInQueue,
-            int dwOutQueue);
+        internal static partial bool SetupComm(SafeFileHandle hFile, int dwInQueue, int dwOutQueue);
     }
 }

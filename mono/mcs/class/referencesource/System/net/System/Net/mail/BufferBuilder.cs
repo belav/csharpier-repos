@@ -14,9 +14,8 @@ namespace System.Net.Mail
         byte[] buffer;
         int offset;
 
-        internal BufferBuilder() : this(256)
-        {
-        }
+        internal BufferBuilder()
+            : this(256) { }
 
         internal BufferBuilder(int initialSize)
         {
@@ -27,7 +26,11 @@ namespace System.Net.Mail
         {
             if (count > this.buffer.Length - this.offset)
             {
-                byte[] newBuffer = new byte[((buffer.Length * 2)>(buffer.Length + count))?(buffer.Length*2):(buffer.Length + count)];
+                byte[] newBuffer = new byte[
+                    ((buffer.Length * 2) > (buffer.Length + count))
+                        ? (buffer.Length * 2)
+                        : (buffer.Length + count)
+                ];
                 Buffer.BlockCopy(this.buffer, 0, newBuffer, 0, this.offset);
                 this.buffer = newBuffer;
             }
@@ -84,7 +87,7 @@ namespace System.Net.Mail
             EnsureBuffer(count);
             for (int i = 0; i < count; i++)
             {
-                char c = value[offset+i];
+                char c = value[offset + i];
                 if ((ushort)c > 0xFF)
                     throw new FormatException(SR.GetString(SR.MailHeaderFieldInvalidCharacter, c));
                 this.buffer[this.offset + i] = (byte)c;
@@ -94,10 +97,7 @@ namespace System.Net.Mail
 
         internal int Length
         {
-            get
-            {
-                return this.offset;
-            }
+            get { return this.offset; }
         }
 
         internal byte[] GetBuffer()

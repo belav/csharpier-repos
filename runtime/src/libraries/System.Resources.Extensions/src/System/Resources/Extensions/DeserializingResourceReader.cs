@@ -12,7 +12,7 @@ namespace System.Resources.Extensions
     {
         private bool _assumeBinaryFormatter;
 
-// Issue https://github.com/dotnet/runtime/issues/39292 tracks finding an alternative to BinaryFormatter
+        // Issue https://github.com/dotnet/runtime/issues/39292 tracks finding an alternative to BinaryFormatter
 #pragma warning disable SYSLIB0011
         private BinaryFormatter? _formatter;
 #pragma warning restore SYSLIB0011
@@ -20,13 +20,23 @@ namespace System.Resources.Extensions
         private bool ValidateReaderType(string readerType)
         {
             // our format?
-            if (TypeNameComparer.Instance.Equals(readerType, PreserializedResourceWriter.DeserializingResourceReaderFullyQualifiedName))
+            if (
+                TypeNameComparer.Instance.Equals(
+                    readerType,
+                    PreserializedResourceWriter.DeserializingResourceReaderFullyQualifiedName
+                )
+            )
             {
                 return true;
             }
 
             // default format?
-            if (TypeNameComparer.Instance.Equals(readerType, PreserializedResourceWriter.ResourceReaderFullyQualifiedName))
+            if (
+                TypeNameComparer.Instance.Equals(
+                    readerType,
+                    PreserializedResourceWriter.ResourceReaderFullyQualifiedName
+                )
+            )
             {
                 // we can read the default format, we just assume BinaryFormatter and don't
                 // read the SerializationFormat
@@ -37,13 +47,13 @@ namespace System.Resources.Extensions
             return false;
         }
 
-// Issue https://github.com/dotnet/runtime/issues/39292 tracks finding an alternative to BinaryFormatter
+        // Issue https://github.com/dotnet/runtime/issues/39292 tracks finding an alternative to BinaryFormatter
 #pragma warning disable SYSLIB0011
         private object ReadBinaryFormattedObject()
         {
             _formatter ??= new BinaryFormatter()
             {
-                Binder = new UndoTruncatedTypeNameSerializationBinder()
+                Binder = new UndoTruncatedTypeNameSerializationBinder(),
             };
 
             return _formatter.Deserialize(_store.BaseStream);
@@ -63,7 +73,7 @@ namespace System.Resources.Extensions
                     // incorrect ResXSerialization binder.
                     typeName = typeName + ", " + assemblyName;
 
-                    type = Type.GetType(typeName, throwOnError: false, ignoreCase:false);
+                    type = Type.GetType(typeName, throwOnError: false, ignoreCase: false);
                 }
 
                 // if type is null we'll fall back to the default type binder which is preferable
@@ -102,7 +112,6 @@ namespace System.Resources.Extensions
 
                 return brackets == 0;
             }
-
         }
 
         private object DeserializeObject(int typeIndex)
@@ -123,99 +132,115 @@ namespace System.Resources.Extensions
             switch (format)
             {
                 case SerializationFormat.BinaryFormatter:
+                {
+                    // read length
+                    int length = _store.Read7BitEncodedInt();
+                    if (length < 0)
                     {
-                        // read length
-                        int length = _store.Read7BitEncodedInt();
-                        if (length < 0)
-                        {
-                            throw new BadImageFormatException(SR.Format(SR.BadImageFormat_ResourceDataLengthInvalid, length));
-                        }
-
-                        long originalPosition = _store.BaseStream.Position;
-
-                        value = ReadBinaryFormattedObject();
-
-                        if (type == typeof(UnknownType))
-                        {
-                            // type information was omitted at the time of writing
-                            // allow the payload to define the type
-                            type = value.GetType();
-                        }
-
-                        long bytesRead = _store.BaseStream.Position - originalPosition;
-
-                        // Ensure BF read what we expected.
-                        if (bytesRead != length)
-                        {
-                            throw new BadImageFormatException(SR.Format(SR.BadImageFormat_ResourceDataLengthInvalid, length));
-                        }
-                        break;
+                        throw new BadImageFormatException(
+                            SR.Format(SR.BadImageFormat_ResourceDataLengthInvalid, length)
+                        );
                     }
+
+                    long originalPosition = _store.BaseStream.Position;
+
+                    value = ReadBinaryFormattedObject();
+
+                    if (type == typeof(UnknownType))
+                    {
+                        // type information was omitted at the time of writing
+                        // allow the payload to define the type
+                        type = value.GetType();
+                    }
+
+                    long bytesRead = _store.BaseStream.Position - originalPosition;
+
+                    // Ensure BF read what we expected.
+                    if (bytesRead != length)
+                    {
+                        throw new BadImageFormatException(
+                            SR.Format(SR.BadImageFormat_ResourceDataLengthInvalid, length)
+                        );
+                    }
+                    break;
+                }
                 case SerializationFormat.TypeConverterByteArray:
+                {
+                    // read length
+                    int length = _store.Read7BitEncodedInt();
+                    if (length < 0)
                     {
-                        // read length
-                        int length = _store.Read7BitEncodedInt();
-                        if (length < 0)
-                        {
-                            throw new BadImageFormatException(SR.Format(SR.BadImageFormat_ResourceDataLengthInvalid, length));
-                        }
-
-                        byte[] data = _store.ReadBytes(length);
-
-                        TypeConverter converter = TypeDescriptor.GetConverter(type);
-
-                        if (converter == null)
-                        {
-                            throw new TypeLoadException(SR.Format(SR.TypeLoadException_CannotLoadConverter, type));
-                        }
-
-                        value = converter.ConvertFrom(data)!;
-                        break;
+                        throw new BadImageFormatException(
+                            SR.Format(SR.BadImageFormat_ResourceDataLengthInvalid, length)
+                        );
                     }
+
+                    byte[] data = _store.ReadBytes(length);
+
+                    TypeConverter converter = TypeDescriptor.GetConverter(type);
+
+                    if (converter == null)
+                    {
+                        throw new TypeLoadException(
+                            SR.Format(SR.TypeLoadException_CannotLoadConverter, type)
+                        );
+                    }
+
+                    value = converter.ConvertFrom(data)!;
+                    break;
+                }
                 case SerializationFormat.TypeConverterString:
+                {
+                    string stringData = _store.ReadString();
+
+                    TypeConverter converter = TypeDescriptor.GetConverter(type);
+
+                    if (converter == null)
                     {
-                        string stringData = _store.ReadString();
-
-                        TypeConverter converter = TypeDescriptor.GetConverter(type);
-
-                        if (converter == null)
-                        {
-                            throw new TypeLoadException(SR.Format(SR.TypeLoadException_CannotLoadConverter, type));
-                        }
-
-                        value = converter.ConvertFromInvariantString(stringData)!;
-                        break;
+                        throw new TypeLoadException(
+                            SR.Format(SR.TypeLoadException_CannotLoadConverter, type)
+                        );
                     }
+
+                    value = converter.ConvertFromInvariantString(stringData)!;
+                    break;
+                }
                 case SerializationFormat.ActivatorStream:
+                {
+                    // read length
+                    int length = _store.Read7BitEncodedInt();
+                    if (length < 0)
                     {
-                        // read length
-                        int length = _store.Read7BitEncodedInt();
-                        if (length < 0)
-                        {
-                            throw new BadImageFormatException(SR.Format(SR.BadImageFormat_ResourceDataLengthInvalid, length));
-                        }
-                        Stream stream;
-
-                        if (_store.BaseStream is UnmanagedMemoryStream ums)
-                        {
-                            // For the case that we've memory mapped in the .resources
-                            // file, just return a Stream pointing to that block of memory.
-                            unsafe
-                            {
-                                stream = new UnmanagedMemoryStream(ums.PositionPointer, length, length, FileAccess.Read);
-                            }
-                        }
-                        else
-                        {
-
-                            byte[] bytes = _store.ReadBytes(length);
-                            // Lifetime of memory == lifetime of this stream.
-                            stream = new MemoryStream(bytes, false);
-                        }
-
-                        value = Activator.CreateInstance(type, new object[] { stream })!;
-                        break;
+                        throw new BadImageFormatException(
+                            SR.Format(SR.BadImageFormat_ResourceDataLengthInvalid, length)
+                        );
                     }
+                    Stream stream;
+
+                    if (_store.BaseStream is UnmanagedMemoryStream ums)
+                    {
+                        // For the case that we've memory mapped in the .resources
+                        // file, just return a Stream pointing to that block of memory.
+                        unsafe
+                        {
+                            stream = new UnmanagedMemoryStream(
+                                ums.PositionPointer,
+                                length,
+                                length,
+                                FileAccess.Read
+                            );
+                        }
+                    }
+                    else
+                    {
+                        byte[] bytes = _store.ReadBytes(length);
+                        // Lifetime of memory == lifetime of this stream.
+                        stream = new MemoryStream(bytes, false);
+                    }
+
+                    value = Activator.CreateInstance(type, new object[] { stream })!;
+                    break;
+                }
                 default:
                     throw new BadImageFormatException(SR.BadImageFormat_TypeMismatch);
             }
@@ -223,10 +248,15 @@ namespace System.Resources.Extensions
             // Make sure we deserialized the type that we expected.
             // This protects against bad typeconverters or bad binaryformatter payloads.
             if (value.GetType() != type)
-                throw new BadImageFormatException(SR.Format(SR.BadImageFormat_ResType_SerBlobMismatch, type.FullName, value.GetType().FullName));
+                throw new BadImageFormatException(
+                    SR.Format(
+                        SR.BadImageFormat_ResType_SerBlobMismatch,
+                        type.FullName,
+                        value.GetType().FullName
+                    )
+                );
 
             return value;
         }
-
     }
 }

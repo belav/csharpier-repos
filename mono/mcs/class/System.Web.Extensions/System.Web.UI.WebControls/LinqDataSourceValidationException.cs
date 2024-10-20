@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,49 +36,58 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[SerializableAttribute]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class LinqDataSourceValidationException : Exception, ISerializable
-	{
-		public LinqDataSourceValidationException ()
-			: this ("LinqDataSource validation error")
-		{
-		}
+    [SerializableAttribute]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class LinqDataSourceValidationException : Exception, ISerializable
+    {
+        public LinqDataSourceValidationException()
+            : this("LinqDataSource validation error") { }
 
-		public LinqDataSourceValidationException (string message)
-			: base (message)
-		{
-		}
+        public LinqDataSourceValidationException(string message)
+            : base(message) { }
 
-		[MonoTODO]
-		protected LinqDataSourceValidationException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected LinqDataSourceValidationException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context)
+        {
+            throw new NotImplementedException();
+        }
 
-		public LinqDataSourceValidationException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public LinqDataSourceValidationException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		public LinqDataSourceValidationException (string message, IDictionary<string, Exception> innerExceptions)
-			: base (message)
-		{
-			if (innerExceptions == null)
-				throw new ArgumentNullException ("innerExceptions");
-			InnerExceptions = innerExceptions;
-		}
+        public LinqDataSourceValidationException(
+            string message,
+            IDictionary<string, Exception> innerExceptions
+        )
+            : base(message)
+        {
+            if (innerExceptions == null)
+                throw new ArgumentNullException("innerExceptions");
+            InnerExceptions = innerExceptions;
+        }
 
-		[MonoTODO]
-		[SecurityPermission (SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			base.GetObjectData (info, context);
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            throw new NotImplementedException();
+        }
 
-		public IDictionary<string, Exception> InnerExceptions { get; private set; }
-	}
+        public IDictionary<string, Exception> InnerExceptions { get; private set; }
+    }
 }

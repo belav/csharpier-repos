@@ -29,12 +29,10 @@ namespace System.Net.Http
             "ddd, d MMM yy H:m:s", // RFC 1123, short year, no zone
             "d MMM yy H:m:s 'GMT'", // RFC 1123, no day-of-week, short year
             "d MMM yy H:m:s", // RFC 1123, no day-of-week, short year, no zone
-
             "dddd, d'-'MMM'-'yy H:m:s 'GMT'", // RFC 850, short year
             "dddd, d'-'MMM'-'yy H:m:s", // RFC 850 no zone
             "ddd, d'-'MMM'-'yyyy H:m:s 'GMT'", // RFC 850, long year
             "ddd MMM d H:m:s yyyy", // ANSI C's asctime() format
-
             "ddd, d MMM yyyy H:m:s zzz", // RFC 5322
             "ddd, d MMM yyyy H:m:s", // RFC 5322 no zone
             "d MMM yyyy H:m:s zzz", // RFC 5322 no day-of-week
@@ -102,7 +100,8 @@ namespace System.Net.Http
         /// <summary>
         /// A <see cref="Type"/> representing <see cref="DelegatingEnumerable{T}"/>.
         /// </summary>
-        public static readonly Type DelegatingEnumerableGenericType = typeof(DelegatingEnumerable<>);
+        public static readonly Type DelegatingEnumerableGenericType =
+            typeof(DelegatingEnumerable<>);
 
         /// <summary>
         /// A <see cref="Type"/> representing <see cref="IEnumerable{T}"/>.
@@ -118,7 +117,8 @@ namespace System.Net.Http
         /// <summary>
         /// An instance of <see cref="XsdDataContractExporter"/>.
         /// </summary>
-        public static readonly XsdDataContractExporter XsdDataContractExporter = new XsdDataContractExporter();
+        public static readonly XsdDataContractExporter XsdDataContractExporter =
+            new XsdDataContractExporter();
 #endif
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace System.Net.Http
                 MaxBytesPerRead = Int32.MaxValue,
                 MaxDepth = DefaultMaxDepth,
                 MaxNameTableCharCount = Int32.MaxValue,
-                MaxStringContentLength = Int32.MaxValue
+                MaxStringContentLength = Int32.MaxValue,
             };
         }
 
@@ -188,7 +188,11 @@ namespace System.Net.Http
                 return token;
             }
 
-            if (token.StartsWith("\"", StringComparison.Ordinal) && token.EndsWith("\"", StringComparison.Ordinal) && token.Length > 1)
+            if (
+                token.StartsWith("\"", StringComparison.Ordinal)
+                && token.EndsWith("\"", StringComparison.Ordinal)
+                && token.Length > 1
+            )
             {
                 return token.Substring(1, token.Length - 2);
             }
@@ -222,9 +226,13 @@ namespace System.Net.Http
 
         public static bool TryParseDate(string input, out DateTimeOffset result)
         {
-            return DateTimeOffset.TryParseExact(input, dateFormats, DateTimeFormatInfo.InvariantInfo,
-                                                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal,
-                                                out result);
+            return DateTimeOffset.TryParseExact(
+                input,
+                dateFormats,
+                DateTimeFormatInfo.InvariantInfo,
+                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal,
+                out result
+            );
         }
 
         /// <summary>
@@ -235,7 +243,12 @@ namespace System.Net.Http
         /// <returns>True if value was valid; false otherwise.</returns>
         public static bool TryParseInt32(string value, out int result)
         {
-            return Int32.TryParse(value, NumberStyles.None, NumberFormatInfo.InvariantInfo, out result);
+            return Int32.TryParse(
+                value,
+                NumberStyles.None,
+                NumberFormatInfo.InvariantInfo,
+                out result
+            );
         }
     }
 }

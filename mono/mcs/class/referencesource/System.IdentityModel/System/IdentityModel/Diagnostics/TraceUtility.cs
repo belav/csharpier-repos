@@ -24,48 +24,86 @@ namespace System.IdentityModel.Diagnostics
 
     static class TraceUtility
     {
-        static Dictionary<int, string> traceCodes = new Dictionary<int, string>( 5 )
+        static Dictionary<int, string> traceCodes = new Dictionary<int, string>(5)
         {
             { TraceCode.IdentityModel, "IdentityModel" },
             { TraceCode.AuthorizationContextCreated, "AuthorizationContextCreated" },
             { TraceCode.AuthorizationPolicyEvaluated, "AuthorizationPolicyEvaluated" },
             { TraceCode.ServiceBindingCheck, "ServiceBindingCheck" },
             { TraceCode.ChannelBindingCheck, "ChannelBindingCheck" },
-            { TraceCode.Diagnostics, "Diagnostics" }
+            { TraceCode.Diagnostics, "Diagnostics" },
         };
 
-        internal static void TraceEvent( TraceEventType severity, int traceCode, string traceDescription )
+        internal static void TraceEvent(
+            TraceEventType severity,
+            int traceCode,
+            string traceDescription
+        )
         {
-            TraceEvent( severity, traceCode, traceDescription, null, null, null );
+            TraceEvent(severity, traceCode, traceDescription, null, null, null);
         }
 
         // These methods require a TraceRecord to be allocated, so we want them to show up on profiles if the caller didn't avoid
         // allocating the TraceRecord by using ShouldTrace.
-        [MethodImpl( MethodImplOptions.NoInlining )]
-        internal static void TraceEvent( TraceEventType severity, int traceCode, string traceDescription, TraceRecord extendedData, object source, Exception exception )
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        internal static void TraceEvent(
+            TraceEventType severity,
+            int traceCode,
+            string traceDescription,
+            TraceRecord extendedData,
+            object source,
+            Exception exception
+        )
         {
-            if ( DiagnosticUtility.ShouldTrace( severity ) )
+            if (DiagnosticUtility.ShouldTrace(severity))
             {
                 Guid activityId = DiagnosticTraceBase.ActivityId;
-                Fx.Assert( traceCodes.ContainsKey( traceCode ),
-                    string.Format( CultureInfo.InvariantCulture, "Unsupported trace code: Please add trace code 0x{0} to the dictionary TraceUtility.traceCodes in {1}",
-                    traceCode.ToString( "X", CultureInfo.InvariantCulture ), typeof( TraceUtility ) ) );
-                string msdnTraceCode = System.ServiceModel.Diagnostics.LegacyDiagnosticTrace.GenerateMsdnTraceCode( "System.IdentityModel", traceCodes[traceCode]);
-                DiagnosticUtility.DiagnosticTrace.TraceEvent( severity, traceCode, msdnTraceCode, traceDescription, extendedData, exception, activityId, source );
+                Fx.Assert(
+                    traceCodes.ContainsKey(traceCode),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "Unsupported trace code: Please add trace code 0x{0} to the dictionary TraceUtility.traceCodes in {1}",
+                        traceCode.ToString("X", CultureInfo.InvariantCulture),
+                        typeof(TraceUtility)
+                    )
+                );
+                string msdnTraceCode =
+                    System.ServiceModel.Diagnostics.LegacyDiagnosticTrace.GenerateMsdnTraceCode(
+                        "System.IdentityModel",
+                        traceCodes[traceCode]
+                    );
+                DiagnosticUtility.DiagnosticTrace.TraceEvent(
+                    severity,
+                    traceCode,
+                    msdnTraceCode,
+                    traceDescription,
+                    extendedData,
+                    exception,
+                    activityId,
+                    source
+                );
             }
         }
 
-        internal static void TraceString( TraceEventType eventType, string formatString, params object[] args )
+        internal static void TraceString(
+            TraceEventType eventType,
+            string formatString,
+            params object[] args
+        )
         {
-            if ( DiagnosticUtility.ShouldTrace( eventType ) )
+            if (DiagnosticUtility.ShouldTrace(eventType))
             {
-                if ( null != args && args.Length > 0 )
+                if (null != args && args.Length > 0)
                 {
-                    TraceEvent( eventType, TraceCode.IdentityModel, String.Format( CultureInfo.InvariantCulture, formatString, args ) );
+                    TraceEvent(
+                        eventType,
+                        TraceCode.IdentityModel,
+                        String.Format(CultureInfo.InvariantCulture, formatString, args)
+                    );
                 }
                 else
                 {
-                    TraceEvent( eventType, TraceCode.IdentityModel, formatString );
+                    TraceEvent(eventType, TraceCode.IdentityModel, formatString);
                 }
             }
         }

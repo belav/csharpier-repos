@@ -21,7 +21,8 @@ public class PropertiesSnapshot
         List<InternalPropertyBuilder>? properties,
         List<InternalIndexBuilder>? indexes,
         List<(InternalKeyBuilder, ConfigurationSource?)>? keys,
-        List<RelationshipSnapshot>? relationships)
+        List<RelationshipSnapshot>? relationships
+    )
     {
         Properties = properties;
         Indexes = indexes;
@@ -29,10 +30,29 @@ public class PropertiesSnapshot
         Relationships = relationships;
     }
 
-    private List<InternalPropertyBuilder>? Properties { [DebuggerStepThrough] get; }
-    private List<RelationshipSnapshot>? Relationships { [DebuggerStepThrough] get; set; }
-    private List<InternalIndexBuilder>? Indexes { [DebuggerStepThrough] get; set; }
-    private List<(InternalKeyBuilder, ConfigurationSource?)>? Keys { [DebuggerStepThrough] get; set; }
+    private List<InternalPropertyBuilder>? Properties
+    {
+        [DebuggerStepThrough]
+        get;
+    }
+    private List<RelationshipSnapshot>? Relationships
+    {
+        [DebuggerStepThrough]
+        get;
+        set;
+    }
+    private List<InternalIndexBuilder>? Indexes
+    {
+        [DebuggerStepThrough]
+        get;
+        set;
+    }
+    private List<(InternalKeyBuilder, ConfigurationSource?)>? Keys
+    {
+        [DebuggerStepThrough]
+        get;
+        set;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -104,14 +124,18 @@ public class PropertiesSnapshot
             }
         }
 
-        var entityTypeBuilder = typeBaseBuilder as InternalEntityTypeBuilder
+        var entityTypeBuilder =
+            typeBaseBuilder as InternalEntityTypeBuilder
             ?? ((InternalComplexTypeBuilder)typeBaseBuilder).Metadata.ContainingEntityType.Builder;
 
         if (Keys != null)
         {
             foreach (var (internalKeyBuilder, configurationSource) in Keys)
             {
-                internalKeyBuilder.Attach(entityTypeBuilder.Metadata.GetRootType().Builder, configurationSource);
+                internalKeyBuilder.Attach(
+                    entityTypeBuilder.Metadata.GetRootType().Builder,
+                    configurationSource
+                );
             }
         }
 
@@ -120,8 +144,12 @@ public class PropertiesSnapshot
             foreach (var indexBuilder in Indexes)
             {
                 var originalEntityType = indexBuilder.Metadata.DeclaringEntityType;
-                var targetEntityTypeBuilder = originalEntityType.Name == entityTypeBuilder.Metadata.Name
-                    || (!originalEntityType.IsInModel && originalEntityType.ClrType == entityTypeBuilder.Metadata.ClrType)
+                var targetEntityTypeBuilder =
+                    originalEntityType.Name == entityTypeBuilder.Metadata.Name
+                    || (
+                        !originalEntityType.IsInModel
+                        && originalEntityType.ClrType == entityTypeBuilder.Metadata.ClrType
+                    )
                         ? entityTypeBuilder
                         : originalEntityType.Builder;
                 indexBuilder.Attach(targetEntityTypeBuilder);

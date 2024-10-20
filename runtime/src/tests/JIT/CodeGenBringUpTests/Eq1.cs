@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_Eq1
 {
     const int Pass = 100;
@@ -21,7 +22,9 @@ public class BringUpTest_Eq1
     public static int TestEntryPoint()
     {
         bool y = Eq1(1);
-        if (y == true) return Pass;
-        else return Fail;
+        if (y == true)
+            return Pass;
+        else
+            return Fail;
     }
 }

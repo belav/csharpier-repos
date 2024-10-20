@@ -20,15 +20,17 @@ namespace System.Dynamic
         /// <summary>
         /// Represents an empty set of binding restrictions. This field is read-only.
         /// </summary>
-        public static readonly BindingRestrictions Empty = new CustomRestriction(AstUtils.Constant(true));
+        public static readonly BindingRestrictions Empty = new CustomRestriction(
+            AstUtils.Constant(true)
+        );
 
-        private const int TypeRestrictionHash =                    0b_0100_1001_0010_0100_1001_0010_0100_1001;
-        private const int InstanceRestrictionHash = unchecked((int)0b_1001_0010_0100_1001_0010_0100_1001_0010);
-        private const int CustomRestrictionHash =                  0b_0010_0100_1001_0010_0100_1001_0010_0100;
+        private const int TypeRestrictionHash = 0b_0100_1001_0010_0100_1001_0010_0100_1001;
+        private const int InstanceRestrictionHash = unchecked(
+            (int)0b_1001_0010_0100_1001_0010_0100_1001_0010
+        );
+        private const int CustomRestrictionHash = 0b_0010_0100_1001_0010_0100_1001_0010_0100;
 
-        private BindingRestrictions()
-        {
-        }
+        private BindingRestrictions() { }
 
         // Overridden by specialized subclasses
         internal abstract Expression GetExpression();
@@ -91,7 +93,10 @@ namespace System.Dynamic
         /// <param name="expression">The expression to test.</param>
         /// <param name="instance">The exact object instance to test.</param>
         /// <returns>The new binding restrictions.</returns>
-        public static BindingRestrictions GetInstanceRestriction(Expression expression, object? instance)
+        public static BindingRestrictions GetInstanceRestriction(
+            Expression expression,
+            object? instance
+        )
         {
             ArgumentNullException.ThrowIfNull(expression);
 
@@ -142,7 +147,8 @@ namespace System.Dynamic
         /// </summary>
         private sealed class TestBuilder
         {
-            private readonly HashSet<BindingRestrictions> _unique = new HashSet<BindingRestrictions>();
+            private readonly HashSet<BindingRestrictions> _unique =
+                new HashSet<BindingRestrictions>();
             private readonly Stack<AndNode> _tests = new Stack<AndNode>();
 
             private struct AndNode
@@ -267,12 +273,16 @@ namespace System.Dynamic
 
             public override bool Equals([NotNullWhen(true)] object? obj)
             {
-                return obj is TypeRestriction other && other._expression == _expression && TypeUtils.AreEquivalent(other._type, _type);
+                return obj is TypeRestriction other
+                    && other._expression == _expression
+                    && TypeUtils.AreEquivalent(other._type, _type);
             }
 
-            public override int GetHashCode() => TypeRestrictionHash ^ _expression.GetHashCode() ^ _type.GetHashCode();
+            public override int GetHashCode() =>
+                TypeRestrictionHash ^ _expression.GetHashCode() ^ _type.GetHashCode();
 
-            internal override Expression GetExpression() => Expression.TypeEqual(_expression, _type);
+            internal override Expression GetExpression() =>
+                Expression.TypeEqual(_expression, _type);
         }
 
         private sealed class InstanceRestriction : BindingRestrictions
@@ -289,11 +299,15 @@ namespace System.Dynamic
 
             public override bool Equals([NotNullWhen(true)] object? obj)
             {
-                return obj is InstanceRestriction other && other._expression == _expression && other._instance == _instance;
+                return obj is InstanceRestriction other
+                    && other._expression == _expression
+                    && other._instance == _instance;
             }
 
-            public override int GetHashCode()
-                => InstanceRestrictionHash ^ RuntimeHelpers.GetHashCode(_instance!) ^ _expression.GetHashCode();
+            public override int GetHashCode() =>
+                InstanceRestrictionHash
+                ^ RuntimeHelpers.GetHashCode(_instance!)
+                ^ _expression.GetHashCode();
 
             internal override Expression GetExpression()
             {
@@ -318,18 +332,12 @@ namespace System.Dynamic
                             )
                         ),
 #else
-                        Expression.Assign(
-                            temp,
-                            Expression.Constant(_instance, typeof(object))
-                        ),
+                        Expression.Assign(temp, Expression.Constant(_instance, typeof(object))),
 #endif
                         Expression.AndAlso(
                             //check that WeakReference was not collected.
                             Expression.NotEqual(temp, AstUtils.Null),
-                            Expression.Equal(
-                                Expression.Convert(_expression, typeof(object)),
-                                temp
-                            )
+                            Expression.Equal(Expression.Convert(_expression, typeof(object)), temp)
                         )
                     )
                 );

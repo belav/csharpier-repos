@@ -17,11 +17,13 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "ruleSet",
-                () => new AsnWriter((AsnEncodingRules)value));
+                () => new AsnWriter((AsnEncodingRules)value)
+            );
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "ruleSet",
-                () => new AsnWriter((AsnEncodingRules)value, initialCapacity: 1000));
+                () => new AsnWriter((AsnEncodingRules)value, initialCapacity: 1000)
+            );
         }
 
         [Theory]
@@ -31,7 +33,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "initialCapacity",
-                () => new AsnWriter(AsnEncodingRules.DER, initialCapacity));
+                () => new AsnWriter(AsnEncodingRules.DER, initialCapacity)
+            );
         }
 
         [Theory]
@@ -138,7 +141,8 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "other",
-                () => writer.EncodedValueEquals((AsnWriter)null));
+                () => writer.EncodedValueEquals((AsnWriter)null)
+            );
         }
 
         [Theory]
@@ -151,13 +155,24 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "destination",
-                () => writer.CopyTo(null));
+                () => writer.CopyTo(null)
+            );
         }
 
         [Fact]
         public static void InitialCapacity_ExactCapacity()
         {
-            ReadOnlySpan<byte> value = new byte[] { 0x04, 0x06, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 };
+            ReadOnlySpan<byte> value = new byte[]
+            {
+                0x04,
+                0x06,
+                0x01,
+                0x02,
+                0x03,
+                0x04,
+                0x05,
+                0x06,
+            };
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER, initialCapacity: 8);
             writer.WriteEncodedValue(value);
 
@@ -206,7 +221,18 @@ namespace System.Formats.Asn1.Tests.Writer
         [Fact]
         public static void InitialCapacity_ExceedCapacity()
         {
-            ReadOnlySpan<byte> value = new byte[] { 0x04, 0x07, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07 };
+            ReadOnlySpan<byte> value = new byte[]
+            {
+                0x04,
+                0x07,
+                0x01,
+                0x02,
+                0x03,
+                0x04,
+                0x05,
+                0x06,
+                0x07,
+            };
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER, initialCapacity: 8);
             writer.WriteEncodedValue(value);
 
@@ -217,8 +243,29 @@ namespace System.Formats.Asn1.Tests.Writer
         [Fact]
         public static void InitialCapacity_ResizeBlockAligns()
         {
-            ReadOnlySpan<byte> value = new byte[] { 0x04, 0x06, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06 };
-            ReadOnlySpan<byte> valueLarge = new byte[] { 0x04, 0x07, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07 };
+            ReadOnlySpan<byte> value = new byte[]
+            {
+                0x04,
+                0x06,
+                0x01,
+                0x02,
+                0x03,
+                0x04,
+                0x05,
+                0x06,
+            };
+            ReadOnlySpan<byte> valueLarge = new byte[]
+            {
+                0x04,
+                0x07,
+                0x01,
+                0x02,
+                0x03,
+                0x04,
+                0x05,
+                0x06,
+                0x07,
+            };
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER, initialCapacity: 8);
             writer.WriteEncodedValue(value);
@@ -237,7 +284,10 @@ namespace System.Formats.Asn1.Tests.Writer
 
         private static byte[]? PeekRawBuffer(AsnWriter writer)
         {
-            FieldInfo bufField = typeof(AsnWriter).GetField("_buffer", BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo bufField = typeof(AsnWriter).GetField(
+                "_buffer",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             return (byte[]?)bufField.GetValue(writer);
         }
     }

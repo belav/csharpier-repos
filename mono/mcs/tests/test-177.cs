@@ -1,24 +1,25 @@
 using System;
 using System.Reflection;
 
-public class MethodAttribute : Attribute {}
-public class ReturnAttribute : Attribute {}
+public class MethodAttribute : Attribute { }
 
-public class Test {
-	[Method]
-	[return: Return]
-	public void Method () {}
+public class ReturnAttribute : Attribute { }
 
-	public static int Main () {
+public class Test
+{
+    [Method]
+    [return: Return]
+    public void Method() { }
 
-		Type t = typeof(Test);
-		MethodInfo mi = t.GetMethod ("Method");
-		ICustomAttributeProvider cap = mi.ReturnTypeCustomAttributes;
+    public static int Main()
+    {
+        Type t = typeof(Test);
+        MethodInfo mi = t.GetMethod("Method");
+        ICustomAttributeProvider cap = mi.ReturnTypeCustomAttributes;
 
-		if (cap != null) 
-			return 0;			
-		else
-			return 1;
-	}
+        if (cap != null)
+            return 0;
+        else
+            return 1;
+    }
 }
-

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,85 +33,89 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	[ConfigurationCollection (typeof (BypassElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class BypassElementCollection : ConfigurationElementCollection
-	{
-		#region Constructors
+    [ConfigurationCollection(
+        typeof(BypassElement),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class BypassElementCollection : ConfigurationElementCollection
+    {
+        #region Constructors
 
-		public BypassElementCollection ()
-		{
-		}
+        public BypassElementCollection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[MonoTODO]
-		public BypassElement this [int index] {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public BypassElement this[int index]
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public new BypassElement this [string name] {
-			get { return (BypassElement) base [name]; }
-			set { base [name] = value; }
-		}
+        public new BypassElement this[string name]
+        {
+            get { return (BypassElement)base[name]; }
+            set { base[name] = value; }
+        }
 
-		protected override bool ThrowOnDuplicate {
-			get { return false; }
-		}
-		#endregion // Properties
+        protected override bool ThrowOnDuplicate
+        {
+            get { return false; }
+        }
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public void Add (BypassElement element)
-		{
-			BaseAdd (element);
-		}
+        public void Add(BypassElement element)
+        {
+            BaseAdd(element);
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new BypassElement ();
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new BypassElement();
+        }
 
-		[MonoTODO ("argument exception?")]
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			if (!(element is BypassElement))
-				throw new ArgumentException ("element");
+        [MonoTODO("argument exception?")]
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            if (!(element is BypassElement))
+                throw new ArgumentException("element");
 
-			return ((BypassElement)element).Address;
-		}
+            return ((BypassElement)element).Address;
+        }
 
-		public int IndexOf (BypassElement element)
-		{
-			return BaseIndexOf (element);
-		}
+        public int IndexOf(BypassElement element)
+        {
+            return BaseIndexOf(element);
+        }
 
-		public void Remove (BypassElement element)
-		{
-			BaseRemove (element);
-		}
+        public void Remove(BypassElement element)
+        {
+            BaseRemove(element);
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        public void Remove(string name)
+        {
+            BaseRemove(name);
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
 
 #endif

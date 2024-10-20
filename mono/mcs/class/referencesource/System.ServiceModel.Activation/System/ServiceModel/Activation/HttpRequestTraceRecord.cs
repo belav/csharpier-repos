@@ -7,7 +7,7 @@ namespace System.ServiceModel.Diagnostics
     using System.Runtime.Diagnostics;
     using System.Web;
     using System.Xml;
-    
+
     class HttpRequestTraceRecord : TraceRecord
     {
         HttpRequest request;
@@ -17,7 +17,10 @@ namespace System.ServiceModel.Diagnostics
             this.request = request;
         }
 
-        internal override string EventId { get { return BuildEventId("HttpRequest"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("HttpRequest"); }
+        }
 
         internal override void WriteTo(XmlWriter writer)
         {

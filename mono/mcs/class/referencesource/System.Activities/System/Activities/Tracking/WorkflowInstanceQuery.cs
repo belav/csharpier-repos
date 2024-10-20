@@ -10,9 +10,7 @@ namespace System.Activities.Tracking
     {
         Collection<string> states;
 
-        public WorkflowInstanceQuery()
-        {
-        }
+        public WorkflowInstanceQuery() { }
 
         public Collection<string> States
         {
@@ -28,11 +26,7 @@ namespace System.Activities.Tracking
 
         internal bool HasStates
         {
-            get
-            {
-                return this.states != null && this.states.Count > 0;
-            }
+            get { return this.states != null && this.states.Count > 0; }
         }
-
     }
 }

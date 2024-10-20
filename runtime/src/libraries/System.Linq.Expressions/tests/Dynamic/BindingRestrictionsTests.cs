@@ -37,7 +37,9 @@ namespace System.Dynamic.Tests
         public void MergeWithEmptyReturnsSame()
         {
             BindingRestrictions isTrueBool = BindingRestrictions.GetTypeRestriction(
-                Expression.Constant(true), typeof(bool));
+                Expression.Constant(true),
+                typeof(bool)
+            );
             Assert.Same(isTrueBool, isTrueBool.Merge(BindingRestrictions.Empty));
             Assert.Same(isTrueBool, BindingRestrictions.Empty.Merge(isTrueBool));
         }
@@ -46,7 +48,9 @@ namespace System.Dynamic.Tests
         public void MergeWithSelfReturnsNotSame()
         {
             BindingRestrictions isTrueBool = BindingRestrictions.GetTypeRestriction(
-                Expression.Constant(true), typeof(bool));
+                Expression.Constant(true),
+                typeof(bool)
+            );
             Assert.NotSame(isTrueBool, isTrueBool.Merge(isTrueBool));
         }
 
@@ -62,29 +66,41 @@ namespace System.Dynamic.Tests
         [Fact]
         public void MergeNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("restrictions", () => BindingRestrictions.Empty.Merge(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "restrictions",
+                () => BindingRestrictions.Empty.Merge(null)
+            );
         }
 
         [Fact]
         public void ExpressionRestrictionFromNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("expression", () => BindingRestrictions.GetExpressionRestriction(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "expression",
+                () => BindingRestrictions.GetExpressionRestriction(null)
+            );
         }
 
         [Fact]
         public void ExpressionRestrictionFromNonBooleanExpression()
         {
             AssertExtensions.Throws<ArgumentException>(
-                "expression", () => BindingRestrictions.GetExpressionRestriction(Expression.Empty()));
+                "expression",
+                () => BindingRestrictions.GetExpressionRestriction(Expression.Empty())
+            );
             AssertExtensions.Throws<ArgumentException>(
-                "expression", () => BindingRestrictions.GetExpressionRestriction(Expression.Constant("")));
+                "expression",
+                () => BindingRestrictions.GetExpressionRestriction(Expression.Constant(""))
+            );
         }
 
         [Fact]
         public void InstanceRestrictionFromNull()
         {
             AssertExtensions.Throws<ArgumentNullException>(
-                "expression", () => BindingRestrictions.GetInstanceRestriction(null, new object()));
+                "expression",
+                () => BindingRestrictions.GetInstanceRestriction(null, new object())
+            );
         }
 
         [Fact]
@@ -96,13 +112,19 @@ namespace System.Dynamic.Tests
         [Fact]
         public void CombineRestrictionsFromEmpty()
         {
-            Assert.Same(BindingRestrictions.Empty, BindingRestrictions.Combine(Array.Empty<DynamicMetaObject>()));
+            Assert.Same(
+                BindingRestrictions.Empty,
+                BindingRestrictions.Combine(Array.Empty<DynamicMetaObject>())
+            );
         }
 
         [Fact]
         public void CombineRestrictionsFromAllNull()
         {
-            Assert.Same(BindingRestrictions.Empty, BindingRestrictions.Combine(new DynamicMetaObject[10]));
+            Assert.Same(
+                BindingRestrictions.Empty,
+                BindingRestrictions.Combine(new DynamicMetaObject[10])
+            );
         }
 
         [Fact]
@@ -118,52 +140,77 @@ namespace System.Dynamic.Tests
         [Fact]
         public void CustomRestrictionsNotEqualIfExpressionsNotSame()
         {
-            BindingRestrictions x = BindingRestrictions.GetExpressionRestriction(Expression.Constant(false));
-            BindingRestrictions y = BindingRestrictions.GetExpressionRestriction(Expression.Constant(false));
+            BindingRestrictions x = BindingRestrictions.GetExpressionRestriction(
+                Expression.Constant(false)
+            );
+            BindingRestrictions y = BindingRestrictions.GetExpressionRestriction(
+                Expression.Constant(false)
+            );
             Assert.NotEqual(x, y);
         }
 
         [Fact]
         public void CustomRestrictionsNotEqualNull()
         {
-            BindingRestrictions br = BindingRestrictions.GetExpressionRestriction(Expression.Constant(false));
+            BindingRestrictions br = BindingRestrictions.GetExpressionRestriction(
+                Expression.Constant(false)
+            );
             Assert.False(br.Equals(null));
         }
 
         [Fact]
         public void MergeCombines()
         {
-            foreach (bool x in new[] {false, true})
-                foreach (bool y in new[] {false, true})
-                {
-                    BindingRestrictions bX = BindingRestrictions.GetExpressionRestriction(Expression.Constant(x));
-                    BindingRestrictions bY = BindingRestrictions.GetExpressionRestriction(Expression.Constant(y));
-                    BindingRestrictions merged = bX.Merge(bY);
-                    Assert.Equal(x & y, Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()());
-                }
+            foreach (bool x in new[] { false, true })
+            foreach (bool y in new[] { false, true })
+            {
+                BindingRestrictions bX = BindingRestrictions.GetExpressionRestriction(
+                    Expression.Constant(x)
+                );
+                BindingRestrictions bY = BindingRestrictions.GetExpressionRestriction(
+                    Expression.Constant(y)
+                );
+                BindingRestrictions merged = bX.Merge(bY);
+                Assert.Equal(
+                    x & y,
+                    Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()()
+                );
+            }
         }
 
         [Fact]
         public void MergeCombinesDeeper()
         {
-            foreach (bool w in new[] {false, true})
+            foreach (bool w in new[] { false, true })
             {
-                BindingRestrictions bW = BindingRestrictions.GetExpressionRestriction(Expression.Constant(w));
-                foreach (bool x in new[] {false, true})
+                BindingRestrictions bW = BindingRestrictions.GetExpressionRestriction(
+                    Expression.Constant(w)
+                );
+                foreach (bool x in new[] { false, true })
                 {
-                    BindingRestrictions bX = BindingRestrictions.GetExpressionRestriction(Expression.Constant(x));
-                    foreach (bool y in new[] {false, true})
+                    BindingRestrictions bX = BindingRestrictions.GetExpressionRestriction(
+                        Expression.Constant(x)
+                    );
+                    foreach (bool y in new[] { false, true })
                     {
-                        BindingRestrictions bY = BindingRestrictions.GetExpressionRestriction(Expression.Constant(y));
+                        BindingRestrictions bY = BindingRestrictions.GetExpressionRestriction(
+                            Expression.Constant(y)
+                        );
                         BindingRestrictions merged = bW.Merge(bX).Merge(bY);
-                        Assert.Equal(w & x & y, Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()());
-                        foreach (bool z in new[] {false, true})
+                        Assert.Equal(
+                            w & x & y,
+                            Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()()
+                        );
+                        foreach (bool z in new[] { false, true })
                         {
                             BindingRestrictions bZ = BindingRestrictions.GetExpressionRestriction(
-                                Expression.Constant(z));
+                                Expression.Constant(z)
+                            );
                             merged = bW.Merge(bX).Merge(bY).Merge(bZ);
                             Assert.Equal(
-                                w & x & y & z, Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()());
+                                w & x & y & z,
+                                Expression.Lambda<Func<bool>>(merged.ToExpression()).Compile()()
+                            );
                         }
                     }
                 }
@@ -175,9 +222,15 @@ namespace System.Dynamic.Tests
         {
             Egalitarian instance = new Egalitarian();
             Expression exp = Expression.Constant(instance);
-            BindingRestrictions sameInstance = BindingRestrictions.GetInstanceRestriction(exp, instance);
+            BindingRestrictions sameInstance = BindingRestrictions.GetInstanceRestriction(
+                exp,
+                instance
+            );
             Assert.True(Expression.Lambda<Func<bool>>(sameInstance.ToExpression()).Compile()());
-            BindingRestrictions diffInstance = BindingRestrictions.GetInstanceRestriction(exp, new Egalitarian());
+            BindingRestrictions diffInstance = BindingRestrictions.GetInstanceRestriction(
+                exp,
+                new Egalitarian()
+            );
             Assert.False(Expression.Lambda<Func<bool>>(diffInstance.ToExpression()).Compile()());
             BindingRestrictions noInstance = BindingRestrictions.GetInstanceRestriction(exp, null);
             Assert.False(Expression.Lambda<Func<bool>>(noInstance.ToExpression()).Compile()());
@@ -189,7 +242,10 @@ namespace System.Dynamic.Tests
             Expression exp = Expression.Default(typeof(Egalitarian));
             BindingRestrictions hasNull = BindingRestrictions.GetInstanceRestriction(exp, null);
             Assert.True(Expression.Lambda<Func<bool>>(hasNull.ToExpression()).Compile()());
-            BindingRestrictions hasInst = BindingRestrictions.GetInstanceRestriction(exp, new Egalitarian());
+            BindingRestrictions hasInst = BindingRestrictions.GetInstanceRestriction(
+                exp,
+                new Egalitarian()
+            );
             Assert.False(Expression.Lambda<Func<bool>>(hasInst.ToExpression()).Compile()());
         }
 
@@ -212,8 +268,14 @@ namespace System.Dynamic.Tests
         public void InstanceRestrictionNotEqualIfDifferentInstance()
         {
             Expression exp = Expression.Default(typeof(Egalitarian));
-            BindingRestrictions x = BindingRestrictions.GetInstanceRestriction(exp, new Egalitarian());
-            BindingRestrictions y = BindingRestrictions.GetInstanceRestriction(exp, new Egalitarian());
+            BindingRestrictions x = BindingRestrictions.GetInstanceRestriction(
+                exp,
+                new Egalitarian()
+            );
+            BindingRestrictions y = BindingRestrictions.GetInstanceRestriction(
+                exp,
+                new Egalitarian()
+            );
             Assert.NotEqual(x, y);
         }
 
@@ -221,7 +283,9 @@ namespace System.Dynamic.Tests
         public void InstanceRestrictionNotEqualNull()
         {
             BindingRestrictions br = BindingRestrictions.GetInstanceRestriction(
-                Expression.Default(typeof(Egalitarian)), null);
+                Expression.Default(typeof(Egalitarian)),
+                null
+            );
             Assert.False(br.Equals(null));
         }
 
@@ -230,9 +294,13 @@ namespace System.Dynamic.Tests
         {
             Egalitarian inst = new Egalitarian();
             BindingRestrictions x = BindingRestrictions.GetInstanceRestriction(
-                Expression.Default(typeof(Egalitarian)), inst);
+                Expression.Default(typeof(Egalitarian)),
+                inst
+            );
             BindingRestrictions y = BindingRestrictions.GetInstanceRestriction(
-                Expression.Default(typeof(Egalitarian)), inst);
+                Expression.Default(typeof(Egalitarian)),
+                inst
+            );
             Assert.NotEqual(x, y);
         }
 
@@ -244,24 +312,32 @@ namespace System.Dynamic.Tests
             yield return DateTime.MaxValue;
         }
 
-        public static IEnumerable<object[]> ObjectsAsArguments => SomeObjects().Select(o => new[] {o});
+        public static IEnumerable<object[]> ObjectsAsArguments =>
+            SomeObjects().Select(o => new[] { o });
 
-        public static IEnumerable<object[]> ObjectsAndWrongTypes() => from obj in SomeObjects()
+        public static IEnumerable<object[]> ObjectsAndWrongTypes() =>
+            from obj in SomeObjects()
             from typeObj in SomeObjects()
             where obj.GetType() != typeObj.GetType()
-            select new[] {obj, typeObj.GetType()};
+            select new[] { obj, typeObj.GetType() };
 
         [Theory, MemberData(nameof(ObjectsAsArguments))]
         public void TypeRestrictionTrueForMatchType(object obj)
         {
-            BindingRestrictions isType = BindingRestrictions.GetTypeRestriction(Expression.Constant(obj), obj.GetType());
+            BindingRestrictions isType = BindingRestrictions.GetTypeRestriction(
+                Expression.Constant(obj),
+                obj.GetType()
+            );
             Assert.True(Expression.Lambda<Func<bool>>(isType.ToExpression()).Compile()());
         }
 
         [Theory, MemberData(nameof(ObjectsAndWrongTypes))]
         public void TypeRestrictionFalseForOtherType(object obj, Type type)
         {
-            BindingRestrictions isType = BindingRestrictions.GetTypeRestriction(Expression.Constant(obj), type);
+            BindingRestrictions isType = BindingRestrictions.GetTypeRestriction(
+                Expression.Constant(obj),
+                type
+            );
             Assert.False(Expression.Lambda<Func<bool>>(isType.ToExpression()).Compile()());
         }
 
@@ -269,9 +345,14 @@ namespace System.Dynamic.Tests
         public void TypeRestrictionEqualIfSameTypeAndExpression()
         {
             Expression exp = Expression.Default(typeof(Egalitarian));
-            BindingRestrictions x = BindingRestrictions.GetTypeRestriction(exp, typeof(Egalitarian));
+            BindingRestrictions x = BindingRestrictions.GetTypeRestriction(
+                exp,
+                typeof(Egalitarian)
+            );
             BindingRestrictions y = BindingRestrictions.GetTypeRestriction(
-                exp, typeof(Egalitarian).MakeArrayType().GetElementType());
+                exp,
+                typeof(Egalitarian).MakeArrayType().GetElementType()
+            );
             Assert.Equal(x, y);
             Assert.Equal(x.GetHashCode(), y.GetHashCode());
         }
@@ -280,7 +361,10 @@ namespace System.Dynamic.Tests
         public void TypeRestrictionNotEqualIfDifferentType()
         {
             Expression exp = Expression.Default(typeof(Egalitarian));
-            BindingRestrictions x = BindingRestrictions.GetTypeRestriction(exp, typeof(Egalitarian));
+            BindingRestrictions x = BindingRestrictions.GetTypeRestriction(
+                exp,
+                typeof(Egalitarian)
+            );
             BindingRestrictions y = BindingRestrictions.GetTypeRestriction(exp, typeof(string));
             Assert.NotEqual(x, y);
         }
@@ -289,9 +373,13 @@ namespace System.Dynamic.Tests
         public void TypeRestrictionNotEqualIfDifferentExpression()
         {
             BindingRestrictions x = BindingRestrictions.GetTypeRestriction(
-                Expression.Default(typeof(Egalitarian)), typeof(Egalitarian));
+                Expression.Default(typeof(Egalitarian)),
+                typeof(Egalitarian)
+            );
             BindingRestrictions y = BindingRestrictions.GetTypeRestriction(
-                Expression.Default(typeof(Egalitarian)), typeof(Egalitarian));
+                Expression.Default(typeof(Egalitarian)),
+                typeof(Egalitarian)
+            );
             Assert.NotEqual(x, y);
         }
 
@@ -299,7 +387,9 @@ namespace System.Dynamic.Tests
         public void TypeRestrictionNotEqualNull()
         {
             BindingRestrictions br = BindingRestrictions.GetTypeRestriction(
-                Expression.Default(typeof(Egalitarian)), typeof(Egalitarian));
+                Expression.Default(typeof(Egalitarian)),
+                typeof(Egalitarian)
+            );
             Assert.False(br.Equals(null));
         }
     }

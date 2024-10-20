@@ -15,7 +15,9 @@ public class AppVerifier
     public static IDisposable Disable(ServerType serverType, int code)
     {
         // Set in SetupTestEnvironment.ps1
-        var enabledCodes = (Environment.GetEnvironmentVariable("APPVERIFIER_ENABLED_CODES") ?? "").Split(' ');
+        var enabledCodes = (
+            Environment.GetEnvironmentVariable("APPVERIFIER_ENABLED_CODES") ?? ""
+        ).Split(' ');
         string processName;
         switch (serverType)
         {
@@ -34,11 +36,19 @@ public class AppVerifier
             return null;
         }
 
-        RunProcessAndWaitForExit("appverif.exe", $"-configure {code} -for {processName} -with ErrorReport=0", AppVerifierCommandTimeout);
+        RunProcessAndWaitForExit(
+            "appverif.exe",
+            $"-configure {code} -for {processName} -with ErrorReport=0",
+            AppVerifierCommandTimeout
+        );
         return new AppVerifierToken(processName, code.ToString(CultureInfo.InvariantCulture));
     }
 
-    private static void RunProcessAndWaitForExit(string fileName, string arguments, TimeSpan timeout)
+    private static void RunProcessAndWaitForExit(
+        string fileName,
+        string arguments,
+        TimeSpan timeout
+    )
     {
         var startInfo = new ProcessStartInfo
         {
@@ -58,7 +68,9 @@ public class AppVerifier
 
         if (process.ExitCode != 0)
         {
-            throw new InvalidOperationException($"Exit code {process.ExitCode} when running {fileName} {arguments}. Stdout: {process.StandardOutput.ReadToEnd()} Stderr: {process.StandardError.ReadToEnd()}");
+            throw new InvalidOperationException(
+                $"Exit code {process.ExitCode} when running {fileName} {arguments}. Stdout: {process.StandardOutput.ReadToEnd()} Stderr: {process.StandardError.ReadToEnd()}"
+            );
         }
     }
 
@@ -77,7 +89,11 @@ public class AppVerifier
         public void Dispose()
         {
             //
-            RunProcessAndWaitForExit("appverif.exe", $"-configure {_codes} -for {_processName} -with ErrorReport={Environment.GetEnvironmentVariable("APPVERIFIER_LEVEL")}", AppVerifierCommandTimeout);
+            RunProcessAndWaitForExit(
+                "appverif.exe",
+                $"-configure {_codes} -for {_processName} -with ErrorReport={Environment.GetEnvironmentVariable("APPVERIFIER_LEVEL")}",
+                AppVerifierCommandTimeout
+            );
         }
     }
 }

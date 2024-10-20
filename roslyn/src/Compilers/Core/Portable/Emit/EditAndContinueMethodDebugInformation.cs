@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Emit
             ImmutableArray<LocalSlotDebugInfo> localSlots,
             ImmutableArray<ClosureDebugInfo> closures,
             ImmutableArray<LambdaDebugInfo> lambdas,
-            ImmutableArray<StateMachineStateDebugInfo> stateMachineStates)
+            ImmutableArray<StateMachineStateDebugInfo> stateMachineStates
+        )
         {
             Debug.Assert(methodOrdinal >= -1);
 
@@ -46,8 +47,11 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <param name="compressedSlotMap">Local variable slot map.</param>
         /// <param name="compressedLambdaMap">Lambda and closure map.</param>
         /// <exception cref="InvalidDataException">Invalid data.</exception>
-        public static EditAndContinueMethodDebugInformation Create(ImmutableArray<byte> compressedSlotMap, ImmutableArray<byte> compressedLambdaMap)
-            => Create(compressedSlotMap, compressedLambdaMap, compressedStateMachineStateMap: default);
+        public static EditAndContinueMethodDebugInformation Create(
+            ImmutableArray<byte> compressedSlotMap,
+            ImmutableArray<byte> compressedLambdaMap
+        ) =>
+            Create(compressedSlotMap, compressedLambdaMap, compressedStateMachineStateMap: default);
 
         /// <summary>
         /// Deserializes Edit and Continue method debug information from specified blobs.
@@ -56,18 +60,31 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <param name="compressedLambdaMap">Lambda and closure map.</param>
         /// <param name="compressedStateMachineStateMap">State machine suspension points, if the method is the MoveNext method of the state machine.</param>
         /// <exception cref="InvalidDataException">Invalid data.</exception>
-        public static EditAndContinueMethodDebugInformation Create(ImmutableArray<byte> compressedSlotMap, ImmutableArray<byte> compressedLambdaMap, ImmutableArray<byte> compressedStateMachineStateMap)
+        public static EditAndContinueMethodDebugInformation Create(
+            ImmutableArray<byte> compressedSlotMap,
+            ImmutableArray<byte> compressedLambdaMap,
+            ImmutableArray<byte> compressedStateMachineStateMap
+        )
         {
-            UncompressLambdaMap(compressedLambdaMap, out var methodOrdinal, out var closures, out var lambdas);
+            UncompressLambdaMap(
+                compressedLambdaMap,
+                out var methodOrdinal,
+                out var closures,
+                out var lambdas
+            );
             return new EditAndContinueMethodDebugInformation(
                 methodOrdinal,
                 UncompressSlotMap(compressedSlotMap),
                 closures,
                 lambdas,
-                UncompressStateMachineStates(compressedStateMachineStateMap));
+                UncompressStateMachineStates(compressedStateMachineStateMap)
+            );
         }
 
-        private static InvalidDataException CreateInvalidDataException(ImmutableArray<byte> data, int offset)
+        private static InvalidDataException CreateInvalidDataException(
+            ImmutableArray<byte> data,
+            int offset
+        )
         {
             const int maxReportedLength = 1024;
 
@@ -80,8 +97,16 @@ namespace Microsoft.CodeAnalysis.Emit
             byte[] right = new byte[end - offset];
             data.CopyTo(offset, right, 0, right.Length);
 
-            throw new InvalidDataException(string.Format(CodeAnalysisResources.InvalidDataAtOffset,
-                offset, (start != 0) ? "..." : "", BitConverter.ToString(left), BitConverter.ToString(right), (end != data.Length) ? "..." : ""));
+            throw new InvalidDataException(
+                string.Format(
+                    CodeAnalysisResources.InvalidDataAtOffset,
+                    offset,
+                    (start != 0) ? "..." : "",
+                    BitConverter.ToString(left),
+                    BitConverter.ToString(right),
+                    (end != data.Length) ? "..." : ""
+                )
+            );
         }
 
         #region Local Slots
@@ -89,7 +114,9 @@ namespace Microsoft.CodeAnalysis.Emit
         private const byte SyntaxOffsetBaseline = 0xff;
 
         /// <exception cref="InvalidDataException">Invalid data.</exception>
-        private static unsafe ImmutableArray<LocalSlotDebugInfo> UncompressSlotMap(ImmutableArray<byte> compressedSlotMap)
+        private static unsafe ImmutableArray<LocalSlotDebugInfo> UncompressSlotMap(
+            ImmutableArray<byte> compressedSlotMap
+        )
         {
             if (compressedSlotMap.IsDefaultOrEmpty)
             {
@@ -119,18 +146,23 @@ namespace Microsoft.CodeAnalysis.Emit
                         if (b == 0)
                         {
                             // short-lived temp, no info
-                            mapBuilder.Add(new LocalSlotDebugInfo(SynthesizedLocalKind.LoweringTemp, default));
+                            mapBuilder.Add(
+                                new LocalSlotDebugInfo(SynthesizedLocalKind.LoweringTemp, default)
+                            );
                             continue;
                         }
 
                         var kind = (SynthesizedLocalKind)((b & 0x3f) - 1);
                         bool hasOrdinal = (b & (1 << 7)) != 0;
 
-                        int syntaxOffset = blobReader.ReadCompressedInteger() + syntaxOffsetBaseline;
+                        int syntaxOffset =
+                            blobReader.ReadCompressedInteger() + syntaxOffsetBaseline;
 
                         int ordinal = hasOrdinal ? blobReader.ReadCompressedInteger() : 0;
 
-                        mapBuilder.Add(new LocalSlotDebugInfo(kind, new LocalDebugId(syntaxOffset, ordinal)));
+                        mapBuilder.Add(
+                            new LocalSlotDebugInfo(kind, new LocalDebugId(syntaxOffset, ordinal))
+                        );
                     }
                     catch (BadImageFormatException)
                     {
@@ -162,7 +194,10 @@ namespace Microsoft.CodeAnalysis.Emit
             foreach (LocalSlotDebugInfo localSlot in LocalSlots)
             {
                 SynthesizedLocalKind kind = localSlot.SynthesizedKind;
-                Debug.Assert(kind <= SynthesizedLocalKind.MaxValidValueForLocalVariableSerializedToDebugInformation);
+                Debug.Assert(
+                    kind
+                        <= SynthesizedLocalKind.MaxValidValueForLocalVariableSerializedToDebugInformation
+                );
 
                 if (!kind.IsLongLived())
                 {
@@ -198,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Emit
             ImmutableArray<byte> compressedLambdaMap,
             out int methodOrdinal,
             out ImmutableArray<ClosureDebugInfo> closures,
-            out ImmutableArray<LambdaDebugInfo> lambdas)
+            out ImmutableArray<LambdaDebugInfo> lambdas
+        )
         {
             methodOrdinal = DebugId.UndefinedOrdinal;
             closures = default;
@@ -231,21 +267,33 @@ namespace Microsoft.CodeAnalysis.Emit
                         int syntaxOffset = blobReader.ReadCompressedInteger();
 
                         var closureId = new DebugId(closuresBuilder.Count, generation: 0);
-                        closuresBuilder.Add(new ClosureDebugInfo(syntaxOffset + syntaxOffsetBaseline, closureId));
+                        closuresBuilder.Add(
+                            new ClosureDebugInfo(syntaxOffset + syntaxOffsetBaseline, closureId)
+                        );
                     }
 
                     while (blobReader.RemainingBytes > 0)
                     {
                         int syntaxOffset = blobReader.ReadCompressedInteger();
-                        int closureOrdinal = blobReader.ReadCompressedInteger() + LambdaDebugInfo.MinClosureOrdinal;
+                        int closureOrdinal =
+                            blobReader.ReadCompressedInteger() + LambdaDebugInfo.MinClosureOrdinal;
 
                         if (closureOrdinal >= closureCount)
                         {
-                            throw CreateInvalidDataException(compressedLambdaMap, blobReader.Offset);
+                            throw CreateInvalidDataException(
+                                compressedLambdaMap,
+                                blobReader.Offset
+                            );
                         }
 
                         var lambdaId = new DebugId(lambdasBuilder.Count, generation: 0);
-                        lambdasBuilder.Add(new LambdaDebugInfo(syntaxOffset + syntaxOffsetBaseline, lambdaId, closureOrdinal));
+                        lambdasBuilder.Add(
+                            new LambdaDebugInfo(
+                                syntaxOffset + syntaxOffsetBaseline,
+                                lambdaId,
+                                closureOrdinal
+                            )
+                        );
                     }
                 }
                 catch (BadImageFormatException)
@@ -297,7 +345,9 @@ namespace Microsoft.CodeAnalysis.Emit
                 Debug.Assert(info.LambdaId.Generation == 0);
 
                 writer.WriteCompressedInteger(info.SyntaxOffset - syntaxOffsetBaseline);
-                writer.WriteCompressedInteger(info.ClosureOrdinal - LambdaDebugInfo.MinClosureOrdinal);
+                writer.WriteCompressedInteger(
+                    info.ClosureOrdinal - LambdaDebugInfo.MinClosureOrdinal
+                );
             }
         }
 
@@ -306,7 +356,9 @@ namespace Microsoft.CodeAnalysis.Emit
         #region State Machine States
 
         /// <exception cref="InvalidDataException">Invalid data.</exception>
-        private static unsafe ImmutableArray<StateMachineStateDebugInfo> UncompressStateMachineStates(ImmutableArray<byte> compressedStateMachineStates)
+        private static unsafe ImmutableArray<StateMachineStateDebugInfo> UncompressStateMachineStates(
+            ImmutableArray<byte> compressedStateMachineStates
+        )
         {
             if (compressedStateMachineStates.IsDefaultOrEmpty)
             {
@@ -331,22 +383,36 @@ namespace Microsoft.CodeAnalysis.Emit
                         while (count > 0)
                         {
                             int stateNumber = blobReader.ReadCompressedSignedInteger();
-                            int syntaxOffset = syntaxOffsetBaseline + blobReader.ReadCompressedInteger();
+                            int syntaxOffset =
+                                syntaxOffsetBaseline + blobReader.ReadCompressedInteger();
 
                             // The entries are ordered by syntax offset.
                             // The relative ordinal is the index of the entry relative to the last entry with a different syntax offset.
                             if (syntaxOffset < lastSyntaxOffset)
                             {
-                                throw CreateInvalidDataException(compressedStateMachineStates, blobReader.Offset);
+                                throw CreateInvalidDataException(
+                                    compressedStateMachineStates,
+                                    blobReader.Offset
+                                );
                             }
 
-                            relativeOrdinal = (syntaxOffset == lastSyntaxOffset) ? relativeOrdinal + 1 : 0;
+                            relativeOrdinal =
+                                (syntaxOffset == lastSyntaxOffset) ? relativeOrdinal + 1 : 0;
                             if (relativeOrdinal > byte.MaxValue)
                             {
-                                throw CreateInvalidDataException(compressedStateMachineStates, blobReader.Offset);
+                                throw CreateInvalidDataException(
+                                    compressedStateMachineStates,
+                                    blobReader.Offset
+                                );
                             }
 
-                            mapBuilder.Add(new StateMachineStateDebugInfo(syntaxOffset, new AwaitDebugId((byte)relativeOrdinal), (StateMachineState)stateNumber));
+                            mapBuilder.Add(
+                                new StateMachineStateDebugInfo(
+                                    syntaxOffset,
+                                    new AwaitDebugId((byte)relativeOrdinal),
+                                    (StateMachineState)stateNumber
+                                )
+                            );
                             count--;
                             lastSyntaxOffset = syntaxOffset;
                         }
@@ -354,7 +420,10 @@ namespace Microsoft.CodeAnalysis.Emit
                 }
                 catch (BadImageFormatException)
                 {
-                    throw CreateInvalidDataException(compressedStateMachineStates, blobReader.Offset);
+                    throw CreateInvalidDataException(
+                        compressedStateMachineStates,
+                        blobReader.Offset
+                    );
                 }
             }
 
@@ -369,10 +438,17 @@ namespace Microsoft.CodeAnalysis.Emit
                 // Negative syntax offsets are rare - only when the syntax node is in an initializer of a field or property.
                 // To optimize for size calculate the base offset and adds it to all syntax offsets. In common cases (no negative offsets)
                 // this base offset will be 0. Otherwise it will be the lowest negative offset.
-                int syntaxOffsetBaseline = Math.Min(StateMachineStates.Min(state => state.SyntaxOffset), 0);
+                int syntaxOffsetBaseline = Math.Min(
+                    StateMachineStates.Min(state => state.SyntaxOffset),
+                    0
+                );
                 writer.WriteCompressedInteger(-syntaxOffsetBaseline);
 
-                foreach (StateMachineStateDebugInfo state in StateMachineStates.OrderBy(s => s.SyntaxOffset).ThenBy(s => s.AwaitId.RelativeStateOrdinal))
+                foreach (
+                    StateMachineStateDebugInfo state in StateMachineStates
+                        .OrderBy(s => s.SyntaxOffset)
+                        .ThenBy(s => s.AwaitId.RelativeStateOrdinal)
+                )
                 {
                     writer.WriteCompressedSignedInteger((int)state.StateNumber);
                     writer.WriteCompressedInteger(state.SyntaxOffset - syntaxOffsetBaseline);

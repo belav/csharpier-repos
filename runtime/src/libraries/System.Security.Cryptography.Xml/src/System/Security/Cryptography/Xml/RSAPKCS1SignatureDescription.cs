@@ -16,29 +16,39 @@ namespace System.Security.Cryptography.Xml
         }
 
 #if NETCOREAPP
-        [RequiresUnreferencedCode("CreateDeformatter is not trim compatible because the algorithm implementation referenced by DeformatterAlgorithm might be removed.")]
+        [RequiresUnreferencedCode(
+            "CreateDeformatter is not trim compatible because the algorithm implementation referenced by DeformatterAlgorithm might be removed."
+        )]
 #endif
-        public sealed override AsymmetricSignatureDeformatter CreateDeformatter(AsymmetricAlgorithm key)
+        public sealed override AsymmetricSignatureDeformatter CreateDeformatter(
+            AsymmetricAlgorithm key
+        )
         {
-            var item = (AsymmetricSignatureDeformatter)CryptoConfig.CreateFromName(DeformatterAlgorithm!)!;
+            var item = (AsymmetricSignatureDeformatter)
+                CryptoConfig.CreateFromName(DeformatterAlgorithm!)!;
             item.SetKey(key);
             item.SetHashAlgorithm(DigestAlgorithm!);
             return item;
         }
 
 #if NETCOREAPP
-        [RequiresUnreferencedCode("CreateFormatter is not trim compatible because the algorithm implementation referenced by FormatterAlgorithm might be removed.")]
+        [RequiresUnreferencedCode(
+            "CreateFormatter is not trim compatible because the algorithm implementation referenced by FormatterAlgorithm might be removed."
+        )]
 #endif
         public sealed override AsymmetricSignatureFormatter CreateFormatter(AsymmetricAlgorithm key)
         {
-            var item = (AsymmetricSignatureFormatter)CryptoConfig.CreateFromName(FormatterAlgorithm!)!;
+            var item = (AsymmetricSignatureFormatter)
+                CryptoConfig.CreateFromName(FormatterAlgorithm!)!;
             item.SetKey(key);
             item.SetHashAlgorithm(DigestAlgorithm!);
             return item;
         }
 
 #if NETCOREAPP
-        [RequiresUnreferencedCode("CreateDigest is not trim compatible because the algorithm implementation referenced by DigestAlgorithm might be removed.")]
+        [RequiresUnreferencedCode(
+            "CreateDigest is not trim compatible because the algorithm implementation referenced by DigestAlgorithm might be removed."
+        )]
 #endif
         public abstract override HashAlgorithm CreateDigest();
     }

@@ -19,18 +19,28 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode.Api
         /// </summary>
         /// <param name="context">the intents with the context in which the intent was found.</param>
         /// <returns>the edits that should be applied to the current snapshot.</returns>
-        Task<ImmutableArray<IntentSource>> ComputeIntentsAsync(IntentRequestContext context, CancellationToken cancellationToken = default);
+        Task<ImmutableArray<IntentSource>> ComputeIntentsAsync(
+            IntentRequestContext context,
+            CancellationToken cancellationToken = default
+        );
     }
 
     /// <summary>
     /// Defines the data needed to compute the code action edits from an intent.
     /// </summary>
-    internal readonly struct IntentRequestContext(string intentName, SnapshotSpan currentSnapshotSpan, ImmutableArray<TextChange> textEditsToPrior, TextSpan priorSelection, string? intentData)
+    internal readonly struct IntentRequestContext(
+        string intentName,
+        SnapshotSpan currentSnapshotSpan,
+        ImmutableArray<TextChange> textEditsToPrior,
+        TextSpan priorSelection,
+        string? intentData
+    )
     {
         /// <summary>
         /// The intent name.  <see cref="WellKnownIntents"/> contains all intents roslyn knows how to handle.
         /// </summary>
-        public string IntentName { get; } = intentName ?? throw new ArgumentNullException(nameof(intentName));
+        public string IntentName { get; } =
+            intentName ?? throw new ArgumentNullException(nameof(intentName));
 
         /// <summary>
         /// JSON formatted data specific to the intent that must be deserialized into the appropriate object.
@@ -59,23 +69,32 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode.Api
     /// <summary>
     /// Defines the text changes needed to apply an intent.
     /// </summary>
-    internal readonly struct IntentSource(string title, string actionName, ImmutableDictionary<DocumentId, ImmutableArray<TextChange>> documentChanges)
+    internal readonly struct IntentSource(
+        string title,
+        string actionName,
+        ImmutableDictionary<DocumentId, ImmutableArray<TextChange>> documentChanges
+    )
     {
         /// <summary>
         /// The title associated with this intent result.
         /// </summary>
-        public readonly string Title { get; } = title ?? throw new ArgumentNullException(nameof(title));
+        public readonly string Title { get; } =
+            title ?? throw new ArgumentNullException(nameof(title));
 
         /// <summary>
         /// The text changes that should be applied to each document.
         /// </summary>
-        public readonly ImmutableDictionary<DocumentId, ImmutableArray<TextChange>> DocumentChanges = documentChanges;
+        public readonly ImmutableDictionary<
+            DocumentId,
+            ImmutableArray<TextChange>
+        > DocumentChanges = documentChanges;
 
         /// <summary>
         /// Contains metadata that can be used to identify the kind of sub-action these edits
         /// apply to for the requested intent.  Used for telemetry purposes only.
         /// For example, the code action type name like FieldDelegatingCodeAction.
         /// </summary>
-        public readonly string ActionName { get; } = actionName ?? throw new ArgumentNullException(nameof(actionName));
+        public readonly string ActionName { get; } =
+            actionName ?? throw new ArgumentNullException(nameof(actionName));
     }
 }

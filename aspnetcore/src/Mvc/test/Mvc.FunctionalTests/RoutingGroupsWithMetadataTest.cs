@@ -10,14 +10,18 @@ using RoutingWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class RoutingGroupsWithMetadataTests : IClassFixture<MvcTestFixture<StartupForRouteGroupsWithMetadata>>
+public class RoutingGroupsWithMetadataTests
+    : IClassFixture<MvcTestFixture<StartupForRouteGroupsWithMetadata>>
 {
     public RoutingGroupsWithMetadataTests(MvcTestFixture<StartupForRouteGroupsWithMetadata> fixture)
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
     }
 
-    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<StartupForRouteGroupsWithMetadata>();
+    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+        builder.UseStartup<StartupForRouteGroupsWithMetadata>();
 
     public WebApplicationFactory<StartupForRouteGroupsWithMetadata> Factory { get; }
 

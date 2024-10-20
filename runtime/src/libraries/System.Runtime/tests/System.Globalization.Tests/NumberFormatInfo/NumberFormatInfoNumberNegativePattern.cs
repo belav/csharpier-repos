@@ -38,15 +38,19 @@ namespace System.Globalization.Tests
         public void NumberNegativePattern_SetInvalid_ThrowsArgumentOutOfRangeException(int value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", "NumberNegativePattern", () => format.NumberNegativePattern = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                "NumberNegativePattern",
+                () => format.NumberNegativePattern = value
+            );
         }
-
 
         [Fact]
         public void NumberNegativePattern_SetReadOnly_ThrowsInvalidOperationException()
         {
-
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.NumberNegativePattern = 1);
+            Assert.Throws<InvalidOperationException>(
+                () => NumberFormatInfo.InvariantInfo.NumberNegativePattern = 1
+            );
         }
     }
 }

@@ -14,12 +14,8 @@ public class AuthorizationFilterContext : FilterContext
     /// </summary>
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="filters">All applicable <see cref="IFilterMetadata"/> implementations.</param>
-    public AuthorizationFilterContext(
-        ActionContext actionContext,
-        IList<IFilterMetadata> filters)
-        : base(actionContext, filters)
-    {
-    }
+    public AuthorizationFilterContext(ActionContext actionContext, IList<IFilterMetadata> filters)
+        : base(actionContext, filters) { }
 
     /// <summary>
     /// Gets or sets the result of the request. Setting <see cref="Result"/> to a non-<c>null</c> value inside

@@ -25,16 +25,28 @@ namespace Microsoft.Cci
             }
             RoslynDebug.Assert(x is object && y is object);
 
-            return
-                _metadataWriter.GetMethodDefinitionOrReferenceHandle(x.GetGenericMethod(_metadataWriter.Context)) == _metadataWriter.GetMethodDefinitionOrReferenceHandle(y.GetGenericMethod(_metadataWriter.Context)) &&
-                _metadataWriter.GetMethodSpecificationSignatureHandle(x) == _metadataWriter.GetMethodSpecificationSignatureHandle(y);
+            return _metadataWriter.GetMethodDefinitionOrReferenceHandle(
+                    x.GetGenericMethod(_metadataWriter.Context)
+                )
+                    == _metadataWriter.GetMethodDefinitionOrReferenceHandle(
+                        y.GetGenericMethod(_metadataWriter.Context)
+                    )
+                && _metadataWriter.GetMethodSpecificationSignatureHandle(x)
+                    == _metadataWriter.GetMethodSpecificationSignatureHandle(y);
         }
 
         public int GetHashCode(IGenericMethodInstanceReference methodInstanceReference)
         {
             return Hash.Combine(
-                _metadataWriter.GetMethodDefinitionOrReferenceHandle(methodInstanceReference.GetGenericMethod(_metadataWriter.Context)).GetHashCode(),
-                _metadataWriter.GetMethodSpecificationSignatureHandle(methodInstanceReference).GetHashCode());
+                _metadataWriter
+                    .GetMethodDefinitionOrReferenceHandle(
+                        methodInstanceReference.GetGenericMethod(_metadataWriter.Context)
+                    )
+                    .GetHashCode(),
+                _metadataWriter
+                    .GetMethodSpecificationSignatureHandle(methodInstanceReference)
+                    .GetHashCode()
+            );
         }
     }
 }

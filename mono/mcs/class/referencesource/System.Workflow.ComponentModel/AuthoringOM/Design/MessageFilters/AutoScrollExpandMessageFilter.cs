@@ -9,14 +9,20 @@
     internal sealed class AutoScrollingMessageFilter : WorkflowDesignerMessageFilter
     {
         #region Members and Constructor
-        private enum ScrollDirection { None = 1, Left = 2, Up = 4, Right = 8, Down = 16 }
+        private enum ScrollDirection
+        {
+            None = 1,
+            Left = 2,
+            Up = 4,
+            Right = 8,
+            Down = 16,
+        }
+
         private bool startAutoScroll = false;
         private EventHandler autoScrollEventHandler = null;
         private ScrollDirection autoScrollDirection = ScrollDirection.None;
 
-        internal AutoScrollingMessageFilter()
-        {
-        }
+        internal AutoScrollingMessageFilter() { }
         #endregion
 
         #region Behavior Overrides
@@ -61,7 +67,11 @@
             return false;
         }
 
-        protected override bool OnPaintWorkflowAdornments(PaintEventArgs e, Rectangle viewPort, AmbientTheme ambientTheme)
+        protected override bool OnPaintWorkflowAdornments(
+            PaintEventArgs e,
+            Rectangle viewPort,
+            AmbientTheme ambientTheme
+        )
         {
             if (ShowAutoScrollIndicators)
                 DrawScrollIndicators(e.Graphics);
@@ -72,11 +82,7 @@
         #region Helpers
         private ScrollDirection AutoScrollDirection
         {
-            get
-            {
-                return this.autoScrollDirection;
-            }
-
+            get { return this.autoScrollDirection; }
             set
             {
                 if (this.autoScrollDirection == value)
@@ -118,13 +124,19 @@
             ScrollBar hScrollBar = ParentView.HScrollBar;
             if (clientPoint.X <= clientRectangle.Width / 10 && hScrollBar.Value > 0)
                 autoScrollDirection |= ScrollDirection.Left;
-            else if (clientPoint.X >= clientRectangle.Right - clientRectangle.Width / 10 && hScrollBar.Value < hScrollBar.Maximum - hScrollBar.LargeChange)
+            else if (
+                clientPoint.X >= clientRectangle.Right - clientRectangle.Width / 10
+                && hScrollBar.Value < hScrollBar.Maximum - hScrollBar.LargeChange
+            )
                 autoScrollDirection |= ScrollDirection.Right;
 
             ScrollBar vScrollBar = ParentView.VScrollBar;
             if (clientPoint.Y <= clientRectangle.Height / 10 && vScrollBar.Value > 0)
                 autoScrollDirection |= ScrollDirection.Up;
-            else if (clientPoint.Y >= clientRectangle.Bottom - clientRectangle.Height / 10 && vScrollBar.Value < vScrollBar.Maximum - vScrollBar.LargeChange)
+            else if (
+                clientPoint.Y >= clientRectangle.Bottom - clientRectangle.Height / 10
+                && vScrollBar.Value < vScrollBar.Maximum - vScrollBar.LargeChange
+            )
                 autoScrollDirection |= ScrollDirection.Down;
 
             return autoScrollDirection;
@@ -142,7 +154,10 @@
                 Size indicatorSize = ambientTheme.ScrollIndicatorSize;
                 indicatorSize.Width += 2 * ambientTheme.Margin.Width;
                 indicatorSize.Height += 2 * ambientTheme.Margin.Height;
-                return (viewPortSize.Width > 2 * indicatorSize.Width && viewPortSize.Height > 2 * indicatorSize.Height);
+                return (
+                    viewPortSize.Width > 2 * indicatorSize.Width
+                    && viewPortSize.Height > 2 * indicatorSize.Height
+                );
             }
         }
 
@@ -152,28 +167,37 @@
             {
                 Rectangle clientRectangle = new Rectangle(Point.Empty, ParentView.ViewPortSize);
                 Size indicatorMargins = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
-                Size scrollIndicatorSize = WorkflowTheme.CurrentTheme.AmbientTheme.ScrollIndicatorSize;
+                Size scrollIndicatorSize = WorkflowTheme
+                    .CurrentTheme
+                    .AmbientTheme
+                    .ScrollIndicatorSize;
 
                 Rectangle[] scrollIndicatorRectangles = new Rectangle[4];
 
                 //Left indicator
                 scrollIndicatorRectangles[0].X = indicatorMargins.Width;
-                scrollIndicatorRectangles[0].Y = (clientRectangle.Height - scrollIndicatorSize.Height) / 2;
+                scrollIndicatorRectangles[0].Y =
+                    (clientRectangle.Height - scrollIndicatorSize.Height) / 2;
                 scrollIndicatorRectangles[0].Size = scrollIndicatorSize;
 
                 //Right indicator
-                scrollIndicatorRectangles[1].X = clientRectangle.Right - indicatorMargins.Width - scrollIndicatorSize.Width;
-                scrollIndicatorRectangles[1].Y = (clientRectangle.Height - scrollIndicatorSize.Height) / 2;
+                scrollIndicatorRectangles[1].X =
+                    clientRectangle.Right - indicatorMargins.Width - scrollIndicatorSize.Width;
+                scrollIndicatorRectangles[1].Y =
+                    (clientRectangle.Height - scrollIndicatorSize.Height) / 2;
                 scrollIndicatorRectangles[1].Size = scrollIndicatorSize;
 
                 //Top indicator
-                scrollIndicatorRectangles[2].X = (clientRectangle.Width - scrollIndicatorSize.Width) / 2;
+                scrollIndicatorRectangles[2].X =
+                    (clientRectangle.Width - scrollIndicatorSize.Width) / 2;
                 scrollIndicatorRectangles[2].Y = indicatorMargins.Height;
                 scrollIndicatorRectangles[2].Size = scrollIndicatorSize;
 
                 //Bottom indicator
-                scrollIndicatorRectangles[3].X = (clientRectangle.Width - scrollIndicatorSize.Width) / 2;
-                scrollIndicatorRectangles[3].Y = clientRectangle.Bottom - indicatorMargins.Height - scrollIndicatorSize.Height;
+                scrollIndicatorRectangles[3].X =
+                    (clientRectangle.Width - scrollIndicatorSize.Width) / 2;
+                scrollIndicatorRectangles[3].Y =
+                    clientRectangle.Bottom - indicatorMargins.Height - scrollIndicatorSize.Height;
                 scrollIndicatorRectangles[3].Size = scrollIndicatorSize;
 
                 return scrollIndicatorRectangles;
@@ -211,12 +235,22 @@
             //Left Right
             Rectangle[] scrollIndicatorRectangles = ScrollIndicatorRectangles;
             if (scrollPosition.X > 0)
-                ActivityDesignerPaint.DrawImage(graphics, AmbientTheme.ScrollIndicatorImage, scrollIndicatorRectangles[0], AmbientTheme.ScrollIndicatorTransparency);
+                ActivityDesignerPaint.DrawImage(
+                    graphics,
+                    AmbientTheme.ScrollIndicatorImage,
+                    scrollIndicatorRectangles[0],
+                    AmbientTheme.ScrollIndicatorTransparency
+                );
 
             if (scrollPosition.X < parentView.HScrollBar.Maximum - viewPortSize.Width)
             {
                 indicator.RotateFlip(RotateFlipType.Rotate180FlipY);
-                ActivityDesignerPaint.DrawImage(graphics, indicator, scrollIndicatorRectangles[1], AmbientTheme.ScrollIndicatorTransparency);
+                ActivityDesignerPaint.DrawImage(
+                    graphics,
+                    indicator,
+                    scrollIndicatorRectangles[1],
+                    AmbientTheme.ScrollIndicatorTransparency
+                );
                 indicator.RotateFlip(RotateFlipType.Rotate180FlipY);
             }
 
@@ -224,14 +258,24 @@
             if (scrollPosition.Y > 0)
             {
                 indicator.RotateFlip(RotateFlipType.Rotate90FlipX);
-                ActivityDesignerPaint.DrawImage(graphics, indicator, scrollIndicatorRectangles[2], AmbientTheme.ScrollIndicatorTransparency);
+                ActivityDesignerPaint.DrawImage(
+                    graphics,
+                    indicator,
+                    scrollIndicatorRectangles[2],
+                    AmbientTheme.ScrollIndicatorTransparency
+                );
                 indicator.RotateFlip(RotateFlipType.Rotate270FlipY);
             }
 
             if (scrollPosition.Y < parentView.VScrollBar.Maximum - viewPortSize.Height)
             {
                 indicator.RotateFlip(RotateFlipType.Rotate270FlipNone);
-                ActivityDesignerPaint.DrawImage(graphics, indicator, scrollIndicatorRectangles[3], AmbientTheme.ScrollIndicatorTransparency);
+                ActivityDesignerPaint.DrawImage(
+                    graphics,
+                    indicator,
+                    scrollIndicatorRectangles[3],
+                    AmbientTheme.ScrollIndicatorTransparency
+                );
                 indicator.RotateFlip(RotateFlipType.Rotate90FlipNone);
             }
         }
@@ -247,17 +291,21 @@
         private CompositeActivityDesigner autoExpandableDesigner = null;
         private EventHandler autoExpandEventHandler = null;
 
-        internal AutoExpandingMessageFilter()
-        {
-        }
+        internal AutoExpandingMessageFilter() { }
         #endregion
 
         #region Behavior Overrides
         protected override bool OnDragEnter(DragEventArgs eventArgs)
         {
             WorkflowView parentView = ParentView;
-            if (parentView.IsClientPointInActiveLayout(parentView.PointToClient(new Point(eventArgs.X, eventArgs.Y))))
-                SetAutoExpandableDesigner(parentView.MessageHitTestContext.AssociatedDesigner as CompositeActivityDesigner);
+            if (
+                parentView.IsClientPointInActiveLayout(
+                    parentView.PointToClient(new Point(eventArgs.X, eventArgs.Y))
+                )
+            )
+                SetAutoExpandableDesigner(
+                    parentView.MessageHitTestContext.AssociatedDesigner as CompositeActivityDesigner
+                );
             else
                 SetAutoExpandableDesigner(null);
 
@@ -267,8 +315,14 @@
         protected override bool OnDragOver(DragEventArgs eventArgs)
         {
             WorkflowView parentView = ParentView;
-            if (parentView.IsClientPointInActiveLayout(parentView.PointToClient(new Point(eventArgs.X, eventArgs.Y))))
-                SetAutoExpandableDesigner(parentView.MessageHitTestContext.AssociatedDesigner as CompositeActivityDesigner);
+            if (
+                parentView.IsClientPointInActiveLayout(
+                    parentView.PointToClient(new Point(eventArgs.X, eventArgs.Y))
+                )
+            )
+                SetAutoExpandableDesigner(
+                    parentView.MessageHitTestContext.AssociatedDesigner as CompositeActivityDesigner
+                );
             else
                 SetAutoExpandableDesigner(null);
 

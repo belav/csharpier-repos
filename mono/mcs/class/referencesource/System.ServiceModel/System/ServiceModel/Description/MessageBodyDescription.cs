@@ -2,11 +2,11 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 using System;
-using System.ServiceModel.Channels;
 using System.Collections.Generic;
-using System.Text;
-using System.Runtime.Serialization;
 using System.ComponentModel;
+using System.Runtime.Serialization;
+using System.ServiceModel.Channels;
+using System.Text;
 
 namespace System.ServiceModel.Description
 {
@@ -58,7 +58,13 @@ namespace System.ServiceModel.Description
         public string WrapperName
         {
             get { return wrapperName == null ? null : wrapperName.EncodedName; }
-            set { wrapperName = new XmlName(value, true /*isEncoded*/); }
+            set
+            {
+                wrapperName = new XmlName(
+                    value,
+                    true /*isEncoded*/
+                );
+            }
         }
 
         [DefaultValue(null)]
@@ -67,6 +73,5 @@ namespace System.ServiceModel.Description
             get { return wrapperNs; }
             set { wrapperNs = value; }
         }
-
     }
 }

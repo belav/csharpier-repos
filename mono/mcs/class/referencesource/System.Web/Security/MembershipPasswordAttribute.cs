@@ -1,28 +1,42 @@
-﻿namespace System.Web.Security {
+﻿namespace System.Web.Security
+{
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using  System.Web.Util;
+    using System.Web.Util;
 
     /// <summary>
     /// Validates whether a password field meets the current Membership Provider's password requirements.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is designed to be a base class for other attributes which further want to customize password validation.")]
-    public class MembershipPasswordAttribute : ValidationAttribute {
-
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "This attribute is designed to be a base class for other attributes which further want to customize password validation."
+    )]
+    public class MembershipPasswordAttribute : ValidationAttribute
+    {
         #region Fields
         private int? _minRequiredPasswordLength;
         private int? _minRequiredNonAlphanumericCharacters;
         private string _passwordStrengthRegularExpression;
 
         private Type _resourceType;
-        private LocalizableString _minPasswordLengthError = new LocalizableString("MinPasswordLengthError");
-        private LocalizableString _minNonAlphanumericCharactersError = new LocalizableString("MinNonAlphanumericCharactersError");
-        private LocalizableString _passwordStrengthError = new LocalizableString("PasswordStrengthError");
+        private LocalizableString _minPasswordLengthError = new LocalizableString(
+            "MinPasswordLengthError"
+        );
+        private LocalizableString _minNonAlphanumericCharactersError = new LocalizableString(
+            "MinNonAlphanumericCharactersError"
+        );
+        private LocalizableString _passwordStrengthError = new LocalizableString(
+            "PasswordStrengthError"
+        );
         #endregion
 
         #region Properties
@@ -30,51 +44,57 @@
         /// Minimum required password length this attribute uses for validation.
         /// If not explicitly set, defaults to <see cref="Membership.Provider.MinRequiredPasswordLength"/>.
         /// </summary>
-        public int MinRequiredPasswordLength {
-            get {
-                return _minRequiredPasswordLength != null ? (int)_minRequiredPasswordLength : Membership.Provider.MinRequiredPasswordLength;
+        public int MinRequiredPasswordLength
+        {
+            get
+            {
+                return _minRequiredPasswordLength != null
+                    ? (int)_minRequiredPasswordLength
+                    : Membership.Provider.MinRequiredPasswordLength;
             }
-            set {
-                _minRequiredPasswordLength = value;
-            }
+            set { _minRequiredPasswordLength = value; }
         }
 
         /// <summary>
         /// Minimum required non-alpha numeric characters this attribute uses for validation.
         /// If not explicitly set, defaults to <see cref="Membership.Provider.MinRequiredNonAlphanumericCharacters"/>.
         /// </summary>
-        public int MinRequiredNonAlphanumericCharacters {
-            get {
-                return _minRequiredNonAlphanumericCharacters != null ? (int)_minRequiredNonAlphanumericCharacters : Membership.Provider.MinRequiredNonAlphanumericCharacters;
+        public int MinRequiredNonAlphanumericCharacters
+        {
+            get
+            {
+                return _minRequiredNonAlphanumericCharacters != null
+                    ? (int)_minRequiredNonAlphanumericCharacters
+                    : Membership.Provider.MinRequiredNonAlphanumericCharacters;
             }
-            set {
-                _minRequiredNonAlphanumericCharacters = value;
-            }
+            set { _minRequiredNonAlphanumericCharacters = value; }
         }
 
         /// <summary>
         /// Regular expression string representing the password strength this attribute uses for validation.
         /// If not explicitly set, defaults to <see cref="Membership.Provider.PasswordStrengthRegularExpression"/>.
         /// </summary>
-        public string PasswordStrengthRegularExpression {
-            get {
-                return _passwordStrengthRegularExpression ?? Membership.Provider.PasswordStrengthRegularExpression;
+        public string PasswordStrengthRegularExpression
+        {
+            get
+            {
+                return _passwordStrengthRegularExpression
+                    ?? Membership.Provider.PasswordStrengthRegularExpression;
             }
-            set {
-                _passwordStrengthRegularExpression = value;
-            }
+            set { _passwordStrengthRegularExpression = value; }
         }
 
         /// <summary>
         /// Gets or sets the <see cref="System.Type"/> that contains the resources for <see cref="MinPasswordLengthError"/>,
         /// <see cref="MinNonAlphanumericCharactersError"/>, and <see cref="PasswordStrengthError"/>.
         /// </summary>
-        public Type ResourceType {
-            get {
-                return this._resourceType;
-            }
-            set {
-                if (this._resourceType != value) {
+        public Type ResourceType
+        {
+            get { return this._resourceType; }
+            set
+            {
+                if (this._resourceType != value)
+                {
                     this._resourceType = value;
 
                     this._minPasswordLengthError.ResourceType = value;
@@ -92,13 +112,18 @@
         /// to be used in conjunction with <see cref="ResourceType"/> to configure the localized
         /// error message displayed when the provided password is shorter than <see cref="Membership.Provider.MinRequiredPasswordLength"/>.
         /// </remarks>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public string MinPasswordLengthError {
-            get {
-                return this._minPasswordLengthError.Value;
-            }
-            set {
-                if (this._minPasswordLengthError.Value != value) {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public string MinPasswordLengthError
+        {
+            get { return this._minPasswordLengthError.Value; }
+            set
+            {
+                if (this._minPasswordLengthError.Value != value)
+                {
                     this._minPasswordLengthError.Value = value;
                 }
             }
@@ -110,16 +135,21 @@
         /// <remarks>
         /// The property contains either the literal, non-localized string or the resource key
         /// to be used in conjunction with <see cref="ResourceType"/> to configure the localized
-        /// error message displayed when the provided password contains less number of non-alphanumeric characters than 
+        /// error message displayed when the provided password contains less number of non-alphanumeric characters than
         /// <see cref="Membership.Provider.MinRequiredNonAlphanumericCharacters"/>
         /// </remarks>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public string MinNonAlphanumericCharactersError {
-            get {
-                return this._minNonAlphanumericCharactersError.Value;
-            }
-            set {
-                if (this._minNonAlphanumericCharactersError.Value != value) {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public string MinNonAlphanumericCharactersError
+        {
+            get { return this._minNonAlphanumericCharactersError.Value; }
+            set
+            {
+                if (this._minNonAlphanumericCharactersError.Value != value)
+                {
                     this._minNonAlphanumericCharactersError.Value = value;
                 }
             }
@@ -133,13 +163,18 @@
         /// to be used in conjunction with <see cref="ResourceType"/> to configure the localized
         /// error message displayed when the provided password is shorter than <see cref="Membership.Provider.MinRequiredPasswordLength"/>.
         /// </remarks>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public string PasswordStrengthError {
-            get {
-                return this._passwordStrengthError.Value;
-            }
-            set {
-                if (this._passwordStrengthError.Value != value) {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public string PasswordStrengthError
+        {
+            get { return this._passwordStrengthError.Value; }
+            set
+            {
+                if (this._passwordStrengthError.Value != value)
+                {
                     this._passwordStrengthError.Value = value;
                 }
             }
@@ -166,51 +201,84 @@
         /// When validation is invalid, an instance of <see cref="ValidationResult"/>.
         /// </para>
         /// </returns>
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext) {
+        protected override ValidationResult IsValid(
+            object value,
+            ValidationContext validationContext
+        )
+        {
             string valueAsString = value as string;
 
-            string name = (validationContext != null) ? validationContext.DisplayName : String.Empty;
-            string[] memberNames = (validationContext != null) ? new[] { validationContext.MemberName } : null;
+            string name =
+                (validationContext != null) ? validationContext.DisplayName : String.Empty;
+            string[] memberNames =
+                (validationContext != null) ? new[] { validationContext.MemberName } : null;
             string errorMessage;
 
-            if (String.IsNullOrEmpty(valueAsString)) {
+            if (String.IsNullOrEmpty(valueAsString))
+            {
                 return ValidationResult.Success;
             }
 
-            if (valueAsString.Length < MinRequiredPasswordLength) {
+            if (valueAsString.Length < MinRequiredPasswordLength)
+            {
                 errorMessage = GetMinPasswordLengthError();
-                return new ValidationResult(FormatErrorMessage(errorMessage, name, MinRequiredPasswordLength), memberNames);
+                return new ValidationResult(
+                    FormatErrorMessage(errorMessage, name, MinRequiredPasswordLength),
+                    memberNames
+                );
             }
 
             int nonAlphanumericCharacters = valueAsString.Count(c => !Char.IsLetterOrDigit(c));
-            if (nonAlphanumericCharacters < MinRequiredNonAlphanumericCharacters) {
+            if (nonAlphanumericCharacters < MinRequiredNonAlphanumericCharacters)
+            {
                 errorMessage = GetMinNonAlphanumericCharactersError();
-                return new ValidationResult(FormatErrorMessage(errorMessage, name, MinRequiredNonAlphanumericCharacters), memberNames);
+                return new ValidationResult(
+                    FormatErrorMessage(errorMessage, name, MinRequiredNonAlphanumericCharacters),
+                    memberNames
+                );
             }
 
             string passwordStrengthRegularExpression = PasswordStrengthRegularExpression;
-            if (passwordStrengthRegularExpression != null) {
-
+            if (passwordStrengthRegularExpression != null)
+            {
                 Regex passwordStrengthRegex;
-                try {
+                try
+                {
                     // Adding timeout for Regex in case of malicious string causing DoS
-                    passwordStrengthRegex = RegexUtil.CreateRegex(passwordStrengthRegularExpression, RegexOptions.None, PasswordStrengthRegexTimeout);
+                    passwordStrengthRegex = RegexUtil.CreateRegex(
+                        passwordStrengthRegularExpression,
+                        RegexOptions.None,
+                        PasswordStrengthRegexTimeout
+                    );
                 }
-                catch (ArgumentException ex) {
-                    throw new InvalidOperationException(SR.GetString(SR.MembershipPasswordAttribute_InvalidRegularExpression), ex);
+                catch (ArgumentException ex)
+                {
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.MembershipPasswordAttribute_InvalidRegularExpression),
+                        ex
+                    );
                 }
 
-                if (!passwordStrengthRegex.IsMatch(valueAsString)) {
+                if (!passwordStrengthRegex.IsMatch(valueAsString))
+                {
                     errorMessage = GetPasswordStrengthError();
-                    return new ValidationResult(FormatErrorMessage(errorMessage, name, additionalArgument: String.Empty), memberNames);
+                    return new ValidationResult(
+                        FormatErrorMessage(errorMessage, name, additionalArgument: String.Empty),
+                        memberNames
+                    );
                 }
             }
 
             return ValidationResult.Success;
         }
 
-        public override string FormatErrorMessage(string name) {
-            return FormatErrorMessage(errorMessageString: ErrorMessageString, name: name, additionalArgument: String.Empty);
+        public override string FormatErrorMessage(string name)
+        {
+            return FormatErrorMessage(
+                errorMessageString: ErrorMessageString,
+                name: name,
+                additionalArgument: String.Empty
+            );
         }
         #endregion
 
@@ -239,13 +307,19 @@
         /// but a public static property with a name matching the <see cref="MinPasswordLengthError"/> value couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        private string GetMinPasswordLengthError() {
-            return this._minPasswordLengthError.GetLocalizableValue() ?? SR.GetString(SR.MembershipPasswordAttribute_InvalidPasswordLength);
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        private string GetMinPasswordLengthError()
+        {
+            return this._minPasswordLengthError.GetLocalizableValue()
+                ?? SR.GetString(SR.MembershipPasswordAttribute_InvalidPasswordLength);
         }
 
         /// <summary>
-        /// Gets the error message string shown when the provided password contains less number of non-alphanumeric characters than 
+        /// Gets the error message string shown when the provided password contains less number of non-alphanumeric characters than
         /// <see cref="Membership.Provider.MinRequiredNonAlphanumericCharacters"/>
         /// <para>
         /// This can be either a literal, non-localized string provided to <see cref="MinNonAlphanumericCharactersError"/> or the
@@ -269,9 +343,17 @@
         /// but a public static property with a name matching the <see cref="MinNonAlphanumericCharactersError"/> value couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        private string GetMinNonAlphanumericCharactersError() {
-            return this._minNonAlphanumericCharactersError.GetLocalizableValue() ?? SR.GetString(SR.MembershipPasswordAttribute_InvalidPasswordNonAlphanumericCharacters);
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        private string GetMinNonAlphanumericCharactersError()
+        {
+            return this._minNonAlphanumericCharactersError.GetLocalizableValue()
+                ?? SR.GetString(
+                    SR.MembershipPasswordAttribute_InvalidPasswordNonAlphanumericCharacters
+                );
         }
 
         /// <summary>
@@ -298,13 +380,29 @@
         /// but a public static property with a name matching the <see cref="PasswordStrengthError"/> value couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        private string GetPasswordStrengthError() {
-            return this._passwordStrengthError.GetLocalizableValue() ?? SR.GetString(SR.MembershipPasswordAttribute_InvalidPasswordStrength);
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        private string GetPasswordStrengthError()
+        {
+            return this._passwordStrengthError.GetLocalizableValue()
+                ?? SR.GetString(SR.MembershipPasswordAttribute_InvalidPasswordStrength);
         }
 
-        private string FormatErrorMessage(string errorMessageString, string name, object additionalArgument) {
-            return String.Format(CultureInfo.CurrentCulture, errorMessageString, name, additionalArgument);
+        private string FormatErrorMessage(
+            string errorMessageString,
+            string name,
+            object additionalArgument
+        )
+        {
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                errorMessageString,
+                name,
+                additionalArgument
+            );
         }
         #endregion
     }

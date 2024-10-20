@@ -9,60 +9,60 @@
 /**************************************************************/
 
 
-namespace SingLink {
+namespace SingLink
+{
     using System;
     using System.Runtime.CompilerServices;
 
     public class SingLinkGen
     {
-// disabling unused variable warning
+        // disabling unused variable warning
 #pragma warning disable 0414
         internal SingLink Mv_Sing;
 #pragma warning restore 0414
 
-        public static int Main(System.String [] Args)
+        public static int Main(System.String[] Args)
         {
             int iRep = 0;
             int iObj = 0;
             Console.WriteLine("Test should return with ExitCode 100 ...");
-            switch( Args.Length )
+            switch (Args.Length)
             {
-               case 1:
-                   if (!Int32.TryParse( Args[0], out iRep ))
-                   {
-                       iRep = 100;
-                   }
-               break;
-               case 2:
-                   if (!Int32.TryParse( Args[0], out iRep ))
-                   {
-                       iRep = 100;
-                   }
-                   if (!Int32.TryParse( Args[1], out iObj ))
-                   {
-                       iObj = 10;
-                   }
-               break;
-               default:
-                   iRep = 100;
-                   iObj = 10;
-               break;
+                case 1:
+                    if (!Int32.TryParse(Args[0], out iRep))
+                    {
+                        iRep = 100;
+                    }
+                    break;
+                case 2:
+                    if (!Int32.TryParse(Args[0], out iRep))
+                    {
+                        iRep = 100;
+                    }
+                    if (!Int32.TryParse(Args[1], out iObj))
+                    {
+                        iObj = 10;
+                    }
+                    break;
+                default:
+                    iRep = 100;
+                    iObj = 10;
+                    break;
             }
 
             SingLinkGen Mv_Leak = new SingLinkGen();
 
-            if(Mv_Leak.runTest(iRep, iObj ))
+            if (Mv_Leak.runTest(iRep, iObj))
             {
-                Console.WriteLine( "Test Passed" );
+                Console.WriteLine("Test Passed");
                 return 100;
             }
             else
             {
-                Console.WriteLine( "Test Failed" );
+                Console.WriteLine("Test Failed");
                 return 1;
             }
         }
-
 
         public bool runTest(int iRep, int iObj)
         {
@@ -70,23 +70,25 @@ namespace SingLink {
 
             Console.Write("Times ~LinkNode() was called: ");
             Console.WriteLine(retVal);
-            return ( retVal == iRep*iObj);
+            return (retVal == iRep * iObj);
         }
-        
+
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        void Create(int iObj) {
+        void Create(int iObj)
+        {
             Mv_Sing = new SingLink(iObj);
         }
-        
+
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        void Delete() {
+        void Delete()
+        {
             Mv_Sing = null;
             GC.Collect();
         }
 
         public int SetLink(int iRep, int iObj)
         {
-            for(int i=0; i<iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 Create(iObj);
                 //Console.WriteLine("after number {0} singlink is set: {1}", i, GC.GetTotalMemory(false) );
@@ -96,14 +98,11 @@ namespace SingLink {
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
-
             }
             //Console.WriteLine("total allocated memory: {0}", GC.GetTotalMemory(false));
 
             return LinkNode.FinalCount;
-
         }
-
     }
 
     public class LinkNode
@@ -159,4 +158,3 @@ namespace SingLink {
         }
     }
 }
-

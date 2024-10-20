@@ -26,71 +26,73 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Microsoft.Build.BuildEngine
 {
+    public class ToolsetCollection : ICollection<Toolset>, IEnumerable<Toolset>, IEnumerable
+    {
+        List<Toolset> toolsets;
 
-	public class ToolsetCollection : ICollection<Toolset>, IEnumerable<Toolset>, IEnumerable
-	{
-		List<Toolset> toolsets;
-		
-		internal ToolsetCollection ()
-		{
-			toolsets = new List<Toolset> ();
-		}
-		
-		public int Count
-		{
-			get { return toolsets.Count; }
-		}
-		
-		public bool IsReadOnly { get { return false; } }
-			
-		public Toolset this [string toolsVersion]
-		{
-			get { return toolsets.Find (item => item.ToolsVersion == toolsVersion); }
-		}
-		
-		public void Add (Toolset item)
-		{
-			toolsets.Add (item);
-		}
-		
-		public void Clear ()
-		{
-			toolsets.Clear ();
-		}
-		
-		public bool Contains (string toolsVersion)
-		{
-			return toolsets.Exists (item => item.ToolsVersion == toolsVersion);
-		}
-		
-		public bool Contains (Toolset item)
-		{
-			return toolsets.Contains (item);
-		}
+        internal ToolsetCollection()
+        {
+            toolsets = new List<Toolset>();
+        }
 
-		public void CopyTo (Toolset[] array, int arrayIndex)
-		{
-			toolsets.CopyTo (array, arrayIndex);
-		}
-		
-		public IEnumerator<Toolset> GetEnumerator ()
-		{
-			return toolsets.GetEnumerator ();
-		}
-		
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return toolsets.GetEnumerator ();
-		}
-		
-		public bool Remove (Toolset item)
-		{
-			return toolsets.Remove (item);
-		}
-	}
+        public int Count
+        {
+            get { return toolsets.Count; }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return false; }
+        }
+
+        public Toolset this[string toolsVersion]
+        {
+            get { return toolsets.Find(item => item.ToolsVersion == toolsVersion); }
+        }
+
+        public void Add(Toolset item)
+        {
+            toolsets.Add(item);
+        }
+
+        public void Clear()
+        {
+            toolsets.Clear();
+        }
+
+        public bool Contains(string toolsVersion)
+        {
+            return toolsets.Exists(item => item.ToolsVersion == toolsVersion);
+        }
+
+        public bool Contains(Toolset item)
+        {
+            return toolsets.Contains(item);
+        }
+
+        public void CopyTo(Toolset[] array, int arrayIndex)
+        {
+            toolsets.CopyTo(array, arrayIndex);
+        }
+
+        public IEnumerator<Toolset> GetEnumerator()
+        {
+            return toolsets.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return toolsets.GetEnumerator();
+        }
+
+        public bool Remove(Toolset item)
+        {
+            return toolsets.Remove(item);
+        }
+    }
 }

@@ -11,7 +11,8 @@ internal static class DataAnnotationsLocalizationServices
 {
     public static void AddDataAnnotationsLocalizationServices(
         IServiceCollection services,
-        Action<MvcDataAnnotationsLocalizationOptions>? setupAction)
+        Action<MvcDataAnnotationsLocalizationOptions>? setupAction
+    )
     {
         services.AddLocalization();
 
@@ -22,9 +23,11 @@ internal static class DataAnnotationsLocalizationServices
         else
         {
             services.TryAddEnumerable(
-                ServiceDescriptor.Transient
-                <IConfigureOptions<MvcDataAnnotationsLocalizationOptions>,
-                MvcDataAnnotationsLocalizationOptionsSetup>());
+                ServiceDescriptor.Transient<
+                    IConfigureOptions<MvcDataAnnotationsLocalizationOptions>,
+                    MvcDataAnnotationsLocalizationOptionsSetup
+                >()
+            );
         }
     }
 }

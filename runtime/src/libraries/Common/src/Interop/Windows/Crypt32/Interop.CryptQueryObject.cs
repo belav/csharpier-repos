@@ -23,7 +23,7 @@ internal static partial class Interop
             out SafeCertStoreHandle phCertStore,
             out SafeCryptMsgHandle phMsg,
             out SafeCertContextHandle ppvContext
-            );
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -39,7 +39,7 @@ internal static partial class Interop
             IntPtr phCertStore,
             IntPtr phMsg,
             IntPtr ppvContext
-            );
+        );
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -55,6 +55,6 @@ internal static partial class Interop
             out SafeCertStoreHandle phCertStore,
             IntPtr phMsg,
             IntPtr ppvContext
-            );
+        );
     }
 }

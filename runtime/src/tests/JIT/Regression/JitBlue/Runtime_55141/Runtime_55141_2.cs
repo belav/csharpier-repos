@@ -17,7 +17,9 @@ struct S2
     public uint F2;
     public short F3;
     public bool F4;
-    public S2(uint f0, uint f2): this()
+
+    public S2(uint f0, uint f2)
+        : this()
     {
         F0 = f0;
         F2 = f2;
@@ -27,6 +29,7 @@ struct S2
 public class Runtime_55141_2
 {
     static int s_1;
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -34,7 +37,7 @@ public class Runtime_55141_2
         S2 vr29 = new S2(1, (uint)vr23 / 40319);
         return M(vr29.F0) == 1 ? 100 : -1;
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static uint M(uint val) => val;
 }

@@ -43,7 +43,8 @@ public class PersistComponentStateTagHelper : TagHelper
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(output);
 
-        var componentPrerenderer = ViewContext.HttpContext.RequestServices.GetRequiredService<IComponentPrerenderer>();
+        var componentPrerenderer =
+            ViewContext.HttpContext.RequestServices.GetRequiredService<IComponentPrerenderer>();
         var serializationMode = PersistenceMode switch
         {
             null => PersistedStateSerializationMode.Infer,
@@ -52,7 +53,10 @@ public class PersistComponentStateTagHelper : TagHelper
             _ => throw new InvalidOperationException("Invalid persistence mode."),
         };
 
-        var content = await componentPrerenderer.PrerenderPersistedStateAsync(ViewContext.HttpContext, serializationMode);
+        var content = await componentPrerenderer.PrerenderPersistedStateAsync(
+            ViewContext.HttpContext,
+            serializationMode
+        );
         output.TagName = null;
         output.Content.SetHtmlContent(content);
     }

@@ -1,21 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="ProtocolReflector.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 
-namespace System.Web.Services.Description {
+namespace System.Web.Services.Description
+{
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Security.Permissions;
     using System.Web.Services;
     using System.Web.Services.Protocols;
     using System.Xml;
-    using System.Xml.Serialization;
     using System.Xml.Schema;
-    using System.Collections;
-    using System;
-    using System.Reflection;
-    using System.Security.Permissions;
-    using System.Collections.Generic;
+    using System.Xml.Serialization;
 
     /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector"]/*' />
     /// <devdoc>
@@ -23,7 +24,8 @@ namespace System.Web.Services.Description {
     /// </devdoc>
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
-    public abstract class ProtocolReflector {
+    public abstract class ProtocolReflector
+    {
         ServiceDescriptionReflector reflector;
         LogicalMethodInfo method;
         Operation operation;
@@ -39,17 +41,22 @@ namespace System.Web.Services.Description {
         CodeIdentifiers portNames;
         bool emptyBinding;
 
-        internal void Initialize(ServiceDescriptionReflector reflector) {
+        internal void Initialize(ServiceDescriptionReflector reflector)
+        {
             this.reflector = reflector;
         }
 
-        internal bool IsEmptyBinding { get { return emptyBinding; } }
+        internal bool IsEmptyBinding
+        {
+            get { return emptyBinding; }
+        }
 
-            /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.Service"]/*' />
-            /// <devdoc>
-            ///    <para>[To be supplied.]</para>
-            /// </devdoc>
-            public Service Service {
+        /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.Service"]/*' />
+        /// <devdoc>
+        ///    <para>[To be supplied.]</para>
+        /// </devdoc>
+        public Service Service
+        {
             get { return reflector.Service; }
         }
 
@@ -57,7 +64,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ServiceDescription ServiceDescription {
+        public ServiceDescription ServiceDescription
+        {
             get { return reflector.ServiceDescription; }
         }
 
@@ -65,17 +73,22 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ServiceDescriptionCollection ServiceDescriptions {
+        public ServiceDescriptionCollection ServiceDescriptions
+        {
             get { return reflector.ServiceDescriptions; }
         }
 
-        internal List<Action<Uri>> UriFixups { get { return this.reflector.UriFixups; } }
+        internal List<Action<Uri>> UriFixups
+        {
+            get { return this.reflector.UriFixups; }
+        }
 
         /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.Schemas"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSchemas Schemas {
+        public XmlSchemas Schemas
+        {
             get { return reflector.Schemas; }
         }
 
@@ -83,15 +96,17 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSchemaExporter SchemaExporter {
+        public XmlSchemaExporter SchemaExporter
+        {
             get { return reflector.SchemaExporter; }
         }
-        
+
         /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ReflectionImporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlReflectionImporter ReflectionImporter {
+        public XmlReflectionImporter ReflectionImporter
+        {
             get { return reflector.ReflectionImporter; }
         }
 
@@ -99,7 +114,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string DefaultNamespace {
+        public string DefaultNamespace
+        {
             get { return reflector.ServiceAttribute.Namespace; }
         }
 
@@ -107,7 +123,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string ServiceUrl {
+        public string ServiceUrl
+        {
             get { return reflector.ServiceUrl; }
         }
 
@@ -115,7 +132,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Type ServiceType {
+        public Type ServiceType
+        {
             get { return reflector.ServiceType; }
         }
 
@@ -123,7 +141,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public LogicalMethodInfo Method {
+        public LogicalMethodInfo Method
+        {
             get { return method; }
         }
 
@@ -131,7 +150,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Binding Binding {
+        public Binding Binding
+        {
             get { return binding; }
         }
 
@@ -139,7 +159,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public PortType PortType {
+        public PortType PortType
+        {
             get { return portType; }
         }
 
@@ -147,7 +168,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Port Port {
+        public Port Port
+        {
             get { return port; }
         }
 
@@ -155,7 +177,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Operation Operation {
+        public Operation Operation
+        {
             get { return operation; }
         }
 
@@ -163,7 +186,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public OperationBinding OperationBinding {
+        public OperationBinding OperationBinding
+        {
             get { return operationBinding; }
         }
 
@@ -171,7 +195,8 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public WebMethodAttribute MethodAttribute {
+        public WebMethodAttribute MethodAttribute
+        {
             get { return methodAttr; }
         }
 
@@ -179,11 +204,13 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public LogicalMethodInfo[] Methods {
+        public LogicalMethodInfo[] Methods
+        {
             get { return reflector.Methods; }
         }
 
-        internal Hashtable ReflectionContext {
+        internal Hashtable ReflectionContext
+        {
             get { return reflector.ReflectionContext; }
         }
 
@@ -191,22 +218,32 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Message InputMessage {
-            get {
-                if (inputMessage == null) {
-                    string messageName = XmlConvert.EncodeLocalName(methodAttr.MessageName.Length == 0 ? Method.Name : methodAttr.MessageName);
+        public Message InputMessage
+        {
+            get
+            {
+                if (inputMessage == null)
+                {
+                    string messageName = XmlConvert.EncodeLocalName(
+                        methodAttr.MessageName.Length == 0 ? Method.Name : methodAttr.MessageName
+                    );
                     bool diffNames = messageName != Method.Name;
 
                     inputMessage = new Message();
                     inputMessage.Name = messageName + ProtocolName + "In";
 
                     OperationInput input = new OperationInput();
-                    if (diffNames) input.Name = messageName;
-                    input.Message = new XmlQualifiedName(inputMessage.Name, bindingServiceDescription.TargetNamespace);
+                    if (diffNames)
+                        input.Name = messageName;
+                    input.Message = new XmlQualifiedName(
+                        inputMessage.Name,
+                        bindingServiceDescription.TargetNamespace
+                    );
                     operation.Messages.Add(input);
 
                     OperationBinding.Input = new InputBinding();
-                    if (diffNames) OperationBinding.Input.Name = messageName;
+                    if (diffNames)
+                        OperationBinding.Input.Name = messageName;
                 }
                 return inputMessage;
             }
@@ -216,22 +253,32 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Message OutputMessage {
-            get {
-                if (outputMessage == null) {
-                    string messageName = XmlConvert.EncodeLocalName(methodAttr.MessageName.Length == 0 ? Method.Name : methodAttr.MessageName);
+        public Message OutputMessage
+        {
+            get
+            {
+                if (outputMessage == null)
+                {
+                    string messageName = XmlConvert.EncodeLocalName(
+                        methodAttr.MessageName.Length == 0 ? Method.Name : methodAttr.MessageName
+                    );
                     bool diffNames = messageName != Method.Name;
 
                     outputMessage = new Message();
                     outputMessage.Name = messageName + ProtocolName + "Out";
 
                     OperationOutput output = new OperationOutput();
-                    if (diffNames) output.Name = messageName;
-                    output.Message = new XmlQualifiedName(outputMessage.Name, bindingServiceDescription.TargetNamespace);
+                    if (diffNames)
+                        output.Name = messageName;
+                    output.Message = new XmlQualifiedName(
+                        outputMessage.Name,
+                        bindingServiceDescription.TargetNamespace
+                    );
                     operation.Messages.Add(output);
 
                     OperationBinding.Output = new OutputBinding();
-                    if (diffNames) OperationBinding.Output.Name = messageName;
+                    if (diffNames)
+                        OperationBinding.Output.Name = messageName;
                 }
                 return outputMessage;
             }
@@ -241,89 +288,131 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public MessageCollection HeaderMessages {
-            get {
-                if (headerMessages == null) {
+        public MessageCollection HeaderMessages
+        {
+            get
+            {
+                if (headerMessages == null)
+                {
                     headerMessages = new MessageCollection(bindingServiceDescription);
                 }
                 return headerMessages;
             }
         }
 
-        void MoveToMethod(LogicalMethodInfo method) {
+        void MoveToMethod(LogicalMethodInfo method)
+        {
             this.method = method;
             this.methodAttr = method.MethodAttribute;
         }
 
-        class ReflectedBinding {
+        class ReflectedBinding
+        {
             internal ReflectedBinding() { }
-            internal ReflectedBinding(WebServiceBindingAttribute bindingAttr) {
+
+            internal ReflectedBinding(WebServiceBindingAttribute bindingAttr)
+            {
                 this.bindingAttr = bindingAttr;
             }
+
             public WebServiceBindingAttribute bindingAttr;
             public ArrayList methodList;
         }
 
-
-        internal void Reflect() {
+        internal void Reflect()
+        {
             emptyBinding = false;
             Hashtable bindings = new Hashtable();
             Hashtable reflectedBindings = new Hashtable();
-            for (int i = 0; i < reflector.Methods.Length; i++) {
+            for (int i = 0; i < reflector.Methods.Length; i++)
+            {
                 MoveToMethod(reflector.Methods[i]);
                 string bindingName = ReflectMethodBinding();
-                if (bindingName == null) bindingName = string.Empty;
-                ReflectedBinding reflectedBinding = (ReflectedBinding)reflectedBindings[bindingName];
-                if (reflectedBinding == null) {
+                if (bindingName == null)
+                    bindingName = string.Empty;
+                ReflectedBinding reflectedBinding = (ReflectedBinding)
+                    reflectedBindings[bindingName];
+                if (reflectedBinding == null)
+                {
                     reflectedBinding = new ReflectedBinding();
-                    reflectedBinding.bindingAttr = WebServiceBindingReflector.GetAttribute(method, bindingName);
-                    if (reflectedBinding.bindingAttr == null || (bindingName.Length == 0 && reflectedBinding.bindingAttr.Location.Length > 0)) {
+                    reflectedBinding.bindingAttr = WebServiceBindingReflector.GetAttribute(
+                        method,
+                        bindingName
+                    );
+                    if (
+                        reflectedBinding.bindingAttr == null
+                        || (
+                            bindingName.Length == 0
+                            && reflectedBinding.bindingAttr.Location.Length > 0
+                        )
+                    )
+                    {
                         reflectedBinding.bindingAttr = new WebServiceBindingAttribute();
                     }
                     reflectedBindings.Add(bindingName, reflectedBinding);
                 }
-                if (reflectedBinding.bindingAttr.Location.Length == 0) {
+                if (reflectedBinding.bindingAttr.Location.Length == 0)
+                {
                     if (reflectedBinding.methodList == null)
                         reflectedBinding.methodList = new ArrayList();
                     reflectedBinding.methodList.Add(method);
                     bindings[reflectedBinding.bindingAttr.Name] = method;
                 }
-                else {
-                    AddImport(reflectedBinding.bindingAttr.Namespace, reflectedBinding.bindingAttr.Location);
+                else
+                {
+                    AddImport(
+                        reflectedBinding.bindingAttr.Namespace,
+                        reflectedBinding.bindingAttr.Location
+                    );
                 }
             }
-            foreach (ReflectedBinding reflectedBinding in reflectedBindings.Values) {
+            foreach (ReflectedBinding reflectedBinding in reflectedBindings.Values)
+            {
                 ReflectBinding(reflectedBinding);
             }
 
             // Only check for empty binding if we do not have real bindings
-            if (reflectedBindings.Count == 0) {
-                // It should be possible to get the value for WebReference.ServiceLocationUrl even if the web service has no web methods. 
-                // This is a common scenario for Whitehorse during the early stages of development when a user is defining the web 
+            if (reflectedBindings.Count == 0)
+            {
+                // It should be possible to get the value for WebReference.ServiceLocationUrl even if the web service has no web methods.
+                // This is a common scenario for Whitehorse during the early stages of development when a user is defining the web
                 // components and their inter-connections, but not the details of whatmethods will be present on each web service.
                 // get all WebServiceBindings
                 emptyBinding = true;
                 ReflectedBinding binding = null;
-                object[] attrs = ServiceType.GetCustomAttributes(typeof(WebServiceBindingAttribute), false);
-                for (int i = 0; i < attrs.Length; i++) {
-                    WebServiceBindingAttribute bindingAttribute = (WebServiceBindingAttribute)attrs[i];
+                object[] attrs = ServiceType.GetCustomAttributes(
+                    typeof(WebServiceBindingAttribute),
+                    false
+                );
+                for (int i = 0; i < attrs.Length; i++)
+                {
+                    WebServiceBindingAttribute bindingAttribute = (WebServiceBindingAttribute)
+                        attrs[i];
                     if (bindings[bindingAttribute.Name] != null)
                         continue;
-                    if (binding != null) {
+                    if (binding != null)
+                    {
                         binding = null;
                         break;
                     }
                     binding = new ReflectedBinding(bindingAttribute);
                 }
-                if (binding != null) ReflectBinding(binding);
+                if (binding != null)
+                    ReflectBinding(binding);
             }
 
             Type[] interfaces = ServiceType.GetInterfaces();
             // iterate through all the interfaces for this type
-            foreach (Type bindingInterface in interfaces) {
-                object[] attrs = bindingInterface.GetCustomAttributes(typeof(WebServiceBindingAttribute), false);
-                for (int i = 0; i < attrs.Length; i++) {
-                    WebServiceBindingAttribute bindingAttribute = (WebServiceBindingAttribute)attrs[i];
+            foreach (Type bindingInterface in interfaces)
+            {
+                object[] attrs = bindingInterface.GetCustomAttributes(
+                    typeof(WebServiceBindingAttribute),
+                    false
+                );
+                for (int i = 0; i < attrs.Length; i++)
+                {
+                    WebServiceBindingAttribute bindingAttribute = (WebServiceBindingAttribute)
+                        attrs[i];
                     if (bindings[bindingAttribute.Name] != null)
                         continue;
                     ReflectBinding(new ReflectedBinding(bindingAttribute));
@@ -332,9 +421,12 @@ namespace System.Web.Services.Description {
             ReflectDescription();
         }
 
-        void AddImport(string ns, string location) {
-            foreach (Import import in ServiceDescription.Imports) {
-                if (import.Namespace == ns && import.Location == location) {
+        void AddImport(string ns, string location)
+        {
+            foreach (Import import in ServiceDescription.Imports)
+            {
+                if (import.Namespace == ns && import.Location == location)
+                {
                     return;
                 }
             }
@@ -348,9 +440,11 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ServiceDescription GetServiceDescription(string ns) {
+        public ServiceDescription GetServiceDescription(string ns)
+        {
             ServiceDescription description = ServiceDescriptions[ns];
-            if (description == null) {
+            if (description == null)
+            {
                 description = new ServiceDescription();
                 description.TargetNamespace = ns;
                 ServiceDescriptions.Add(description);
@@ -358,20 +452,25 @@ namespace System.Web.Services.Description {
             return description;
         }
 
-        void ReflectBinding(ReflectedBinding reflectedBinding) {
+        void ReflectBinding(ReflectedBinding reflectedBinding)
+        {
             string bindingName = XmlConvert.EncodeLocalName(reflectedBinding.bindingAttr.Name);
             string bindingNamespace = reflectedBinding.bindingAttr.Namespace;
-            if (bindingName.Length == 0) bindingName = Service.Name + ProtocolName;
-            if (bindingNamespace.Length == 0) bindingNamespace = ServiceDescription.TargetNamespace;
+            if (bindingName.Length == 0)
+                bindingName = Service.Name + ProtocolName;
+            if (bindingNamespace.Length == 0)
+                bindingNamespace = ServiceDescription.TargetNamespace;
             WsiProfiles claims = WsiProfiles.None;
-            
-            if (reflectedBinding.bindingAttr.Location.Length > 0) {
+
+            if (reflectedBinding.bindingAttr.Location.Length > 0)
+            {
                 // If a URL is specified for the WSDL, file, then we just import the
                 // binding from there instead of generating it in this WSDL file.
                 portType = null;
                 binding = null;
             }
-            else {
+            else
+            {
                 bindingServiceDescription = GetServiceDescription(bindingNamespace);
                 CodeIdentifiers bindingNames = new CodeIdentifiers();
                 foreach (Binding b in bindingServiceDescription.Bindings)
@@ -385,14 +484,22 @@ namespace System.Web.Services.Description {
                 binding.Name = bindingName;
                 binding.Type = new XmlQualifiedName(portType.Name, bindingNamespace);
                 claims = reflectedBinding.bindingAttr.ConformsTo & this.ConformsTo;
-                if (reflectedBinding.bindingAttr.EmitConformanceClaims && claims != WsiProfiles.None) {
-                    ServiceDescription.AddConformanceClaims(binding.GetDocumentationElement(), claims);
+                if (
+                    reflectedBinding.bindingAttr.EmitConformanceClaims
+                    && claims != WsiProfiles.None
+                )
+                {
+                    ServiceDescription.AddConformanceClaims(
+                        binding.GetDocumentationElement(),
+                        claims
+                    );
                 }
                 bindingServiceDescription.Bindings.Add(binding);
                 bindingServiceDescription.PortTypes.Add(portType);
             }
-            
-            if (portNames == null) {
+
+            if (portNames == null)
+            {
                 portNames = new CodeIdentifiers();
                 foreach (Port p in Service.Ports)
                     portNames.AddReserved(p.Name);
@@ -402,12 +509,13 @@ namespace System.Web.Services.Description {
             port.Binding = new XmlQualifiedName(bindingName, bindingNamespace);
             port.Name = portNames.AddUnique(bindingName, port);
             Service.Ports.Add(port);
-            
+
             BeginClass();
 
-            if (reflectedBinding.methodList != null && reflectedBinding.methodList.Count > 0) {
-                foreach (LogicalMethodInfo method in reflectedBinding.methodList) {
-
+            if (reflectedBinding.methodList != null && reflectedBinding.methodList.Count > 0)
+            {
+                foreach (LogicalMethodInfo method in reflectedBinding.methodList)
+                {
                     MoveToMethod(method);
 
                     operation = new Operation();
@@ -422,11 +530,16 @@ namespace System.Web.Services.Description {
                     outputMessage = null;
                     headerMessages = null;
 
-                    if (ReflectMethod()) {
-                        if (inputMessage != null) bindingServiceDescription.Messages.Add(inputMessage);
-                        if (outputMessage != null) bindingServiceDescription.Messages.Add(outputMessage);
-                        if (headerMessages != null) {
-                            foreach (Message headerMessage in headerMessages) {
+                    if (ReflectMethod())
+                    {
+                        if (inputMessage != null)
+                            bindingServiceDescription.Messages.Add(inputMessage);
+                        if (outputMessage != null)
+                            bindingServiceDescription.Messages.Add(outputMessage);
+                        if (headerMessages != null)
+                        {
+                            foreach (Message headerMessage in headerMessages)
+                            {
                                 bindingServiceDescription.Messages.Add(headerMessage);
                             }
                         }
@@ -435,17 +548,33 @@ namespace System.Web.Services.Description {
                     }
                 }
             }
-            if (binding != null && claims == WsiProfiles.BasicProfile1_1 && ProtocolName == "Soap") {
+            if (binding != null && claims == WsiProfiles.BasicProfile1_1 && ProtocolName == "Soap")
+            {
                 BasicProfileViolationCollection warnings = new BasicProfileViolationCollection();
-                WebServicesInteroperability.AnalyzeBinding(binding, bindingServiceDescription, ServiceDescriptions, warnings);
-                if (warnings.Count > 0) {
-                    throw new InvalidOperationException(Res.GetString(Res.WebWsiViolation, ServiceType.FullName, warnings.ToString()));
+                WebServicesInteroperability.AnalyzeBinding(
+                    binding,
+                    bindingServiceDescription,
+                    ServiceDescriptions,
+                    warnings
+                );
+                if (warnings.Count > 0)
+                {
+                    throw new InvalidOperationException(
+                        Res.GetString(
+                            Res.WebWsiViolation,
+                            ServiceType.FullName,
+                            warnings.ToString()
+                        )
+                    );
                 }
             }
             EndClass();
         }
 
-        internal virtual WsiProfiles ConformsTo { get { return WsiProfiles.None; } }
+        internal virtual WsiProfiles ConformsTo
+        {
+            get { return WsiProfiles.None; }
+        }
 
         /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ProtocolName"]/*' />
         /// <devdoc>
@@ -463,16 +592,22 @@ namespace System.Web.Services.Description {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         protected virtual void BeginClass() { }
+
         /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ReflectMethod"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         protected abstract bool ReflectMethod();
+
         /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.ReflectMethodBinding"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected virtual string ReflectMethodBinding() { return string.Empty; }
+        protected virtual string ReflectMethodBinding()
+        {
+            return string.Empty;
+        }
+
         /// <include file='doc\ProtocolReflector.uex' path='docs/doc[@for="ProtocolReflector.EndClass"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -483,7 +618,6 @@ namespace System.Web.Services.Description {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        protected virtual void ReflectDescription() { 
-        }
+        protected virtual void ReflectDescription() { }
     }
 }

@@ -31,7 +31,5 @@ public interface IValueConverterSelector
     /// <param name="modelClrType">The type for which a converter is needed.</param>
     /// <param name="providerClrType">The store type to target, or null for any.</param>
     /// <returns>The converters available.</returns>
-    IEnumerable<ValueConverterInfo> Select(
-        Type modelClrType,
-        Type? providerClrType = null);
+    IEnumerable<ValueConverterInfo> Select(Type modelClrType, Type? providerClrType = null);
 }

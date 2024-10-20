@@ -24,11 +24,14 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void SatisfyParts_NullArgument_ShouldThrowArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("part", () =>
-            {
-                var compositionService = new TypeCatalog().CreateCompositionService();
-                compositionService.SatisfyImportsOnce(null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "part",
+                () =>
+                {
+                    var compositionService = new TypeCatalog().CreateCompositionService();
+                    compositionService.SatisfyImportsOnce(null);
+                }
+            );
         }
     }
 }

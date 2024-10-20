@@ -22,14 +22,23 @@ public class ControllerActionInvokerProviderTest
     public void OnExecuting_ConfiguresModelState_WithMvcOptions()
     {
         // Arrange
-        var provider = CreateInvokerProvider(new MvcOptions() { MaxValidationDepth = 1, MaxModelBindingRecursionDepth = 2, MaxModelValidationErrors = 3 });
+        var provider = CreateInvokerProvider(
+            new MvcOptions()
+            {
+                MaxValidationDepth = 1,
+                MaxModelBindingRecursionDepth = 2,
+                MaxModelValidationErrors = 3,
+            }
+        );
 
-        var context = new ActionInvokerProviderContext(new ActionContext()
-        {
-            ActionDescriptor = GetControllerActionDescriptor(),
-            HttpContext = new DefaultHttpContext(),
-            RouteData = new RouteData(),
-        });
+        var context = new ActionInvokerProviderContext(
+            new ActionContext()
+            {
+                ActionDescriptor = GetControllerActionDescriptor(),
+                HttpContext = new DefaultHttpContext(),
+                RouteData = new RouteData(),
+            }
+        );
 
         // Act
         provider.OnProvidersExecuting(context);
@@ -39,7 +48,6 @@ public class ControllerActionInvokerProviderTest
         Assert.Equal(1, invoker.ControllerContext.ModelState.MaxValidationDepth);
         Assert.Equal(2, invoker.ControllerContext.ModelState.MaxStateDepth);
         Assert.Equal(3, invoker.ControllerContext.ModelState.MaxAllowedErrors);
-
     }
 
     private static ControllerActionDescriptor GetControllerActionDescriptor()
@@ -54,13 +62,17 @@ public class ControllerActionInvokerProviderTest
 
         foreach (var filterAttribute in method.GetCustomAttributes().OfType<IFilterMetadata>())
         {
-            actionDescriptor.FilterDescriptors.Add(new FilterDescriptor(filterAttribute, FilterScope.Action));
+            actionDescriptor.FilterDescriptors.Add(
+                new FilterDescriptor(filterAttribute, FilterScope.Action)
+            );
         }
 
         return actionDescriptor;
     }
 
-    private static ControllerActionInvokerProvider CreateInvokerProvider(MvcOptions mvcOptions = null)
+    private static ControllerActionInvokerProvider CreateInvokerProvider(
+        MvcOptions mvcOptions = null
+    )
     {
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
@@ -71,7 +83,8 @@ public class ControllerActionInvokerProviderTest
             TestModelBinderFactory.CreateDefault(),
             Mock.Of<IObjectModelValidator>(),
             Options.Create(mvcOptions),
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var cache = new ControllerActionInvokerCache(
             parameterBinder,
@@ -79,14 +92,16 @@ public class ControllerActionInvokerProviderTest
             modelMetadataProvider,
             new[] { new DefaultFilterProvider() },
             Mock.Of<IControllerFactoryProvider>(),
-            Options.Create(mvcOptions));
+            Options.Create(mvcOptions)
+        );
 
         return new(
             cache,
             Options.Create(mvcOptions),
             NullLoggerFactory.Instance,
             new DiagnosticListener("Microsoft.AspNetCore"),
-            new ActionResultTypeMapper());
+            new ActionResultTypeMapper()
+        );
     }
 
     private class TestActions : Controller

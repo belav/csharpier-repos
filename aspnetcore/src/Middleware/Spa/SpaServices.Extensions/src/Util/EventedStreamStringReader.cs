@@ -17,8 +17,8 @@ internal sealed class EventedStreamStringReader : IDisposable
 
     public EventedStreamStringReader(EventedStreamReader eventedStreamReader)
     {
-        _eventedStreamReader = eventedStreamReader
-            ?? throw new ArgumentNullException(nameof(eventedStreamReader));
+        _eventedStreamReader =
+            eventedStreamReader ?? throw new ArgumentNullException(nameof(eventedStreamReader));
         _eventedStreamReader.OnReceivedLine += OnReceivedLine;
     }
 

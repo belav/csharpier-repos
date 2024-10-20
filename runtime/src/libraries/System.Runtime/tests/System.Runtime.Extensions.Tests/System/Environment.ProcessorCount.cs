@@ -27,9 +27,9 @@ namespace System.Tests
                 return 0;
 
             // Mimic handling the setting's value in coreclr's GetCurrentProcessCpuCount
-            fixed (char *ptr = settingValue)
+            fixed (char* ptr = settingValue)
             {
-                char *endptr;
+                char* endptr;
                 int value = (int)wcstoul(ptr, &endptr, 10);
 
                 if (0 < value && value <= MAX_PROCESSOR_COUNT)
@@ -72,7 +72,10 @@ namespace System.Tests
         [InlineData(2000, 0, " 17 ")]
         [InlineData(0, 0, "3")]
         public static unsafe void ProcessorCount_Windows_RespectsJobCpuRateAndConfigurationSetting(
-            ushort maxRate, ushort minRate, string procCountConfig)
+            ushort maxRate,
+            ushort minRate,
+            string procCountConfig
+        )
         {
             IntPtr hJob = IntPtr.Zero;
             PROCESS_INFORMATION processInfo = default;
@@ -92,8 +95,8 @@ namespace System.Tests
                     if (minRate == 0)
                     {
                         cpuRateControl.ControlFlags =
-                            JobObjectCpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_ENABLE |
-                            JobObjectCpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP;
+                            JobObjectCpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_ENABLE
+                            | JobObjectCpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP;
                         cpuRateControl.CpuRate = maxRate;
                     }
                     else
@@ -103,20 +106,31 @@ namespace System.Tests
                             return;
 
                         cpuRateControl.ControlFlags =
-                            JobObjectCpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_ENABLE |
-                            JobObjectCpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_MIN_MAX_RATE;
+                            JobObjectCpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_ENABLE
+                            | JobObjectCpuRateControlFlags.JOB_OBJECT_CPU_RATE_CONTROL_MIN_MAX_RATE;
                         cpuRateControl.MinRate = minRate;
                         cpuRateControl.MaxRate = maxRate;
                     }
 
-                    if (!SetInformationJobObject(
-                        hJob, JOBOBJECTINFOCLASS.JobObjectCpuRateControlInformation, (IntPtr)(&cpuRateControl), (uint)Marshal.SizeOf(cpuRateControl)))
+                    if (
+                        !SetInformationJobObject(
+                            hJob,
+                            JOBOBJECTINFOCLASS.JobObjectCpuRateControlInformation,
+                            (IntPtr)(&cpuRateControl),
+                            (uint)Marshal.SizeOf(cpuRateControl)
+                        )
+                    )
                         throw new Win32Exception();
                 }
 
                 ProcessStartInfo startInfo;
 
-                using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(GetProcessorCount, new RemoteInvokeOptions { Start = false }))
+                using (
+                    RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                        GetProcessorCount,
+                        new RemoteInvokeOptions { Start = false }
+                    )
+                )
                 {
                     startInfo = handle.Process.StartInfo;
                     handle.Process.Dispose();
@@ -126,10 +140,20 @@ namespace System.Tests
                 STARTUPINFO startupInfo = new() { cb = (uint)Marshal.SizeOf<STARTUPINFO>() };
                 Environment.SetEnvironmentVariable(ProcessorCountEnvVar, procCountConfig);
 
-                if (!CreateProcess(
-                    startInfo.FileName, $"\"{startInfo.FileName}\" {startInfo.Arguments}",
-                    IntPtr.Zero, IntPtr.Zero, false, CREATE_SUSPENDED,
-                    IntPtr.Zero, null, ref startupInfo, out processInfo))
+                if (
+                    !CreateProcess(
+                        startInfo.FileName,
+                        $"\"{startInfo.FileName}\" {startInfo.Arguments}",
+                        IntPtr.Zero,
+                        IntPtr.Zero,
+                        false,
+                        CREATE_SUSPENDED,
+                        IntPtr.Zero,
+                        null,
+                        ref startupInfo,
+                        out processInfo
+                    )
+                )
                     throw new Win32Exception();
 
                 if (!AssignProcessToJobObject(hJob, processInfo.hProcess))
@@ -184,7 +208,7 @@ namespace System.Tests
         }
 
         [DllImport("msvcrt.dll")]
-        private static extern unsafe uint wcstoul(char *strSource, char **endptr, int @base);
+        private static extern unsafe uint wcstoul(char* strSource, char** endptr, int @base);
 
         [StructLayout(LayoutKind.Sequential)]
         private struct SYSTEM_INFO
@@ -226,12 +250,16 @@ namespace System.Tests
         {
             [FieldOffset(0)]
             public JobObjectCpuRateControlFlags ControlFlags;
+
             [FieldOffset(4)]
             public uint CpuRate;
+
             [FieldOffset(4)]
             public uint Weight;
+
             [FieldOffset(4)]
             public ushort MinRate;
+
             [FieldOffset(6)]
             public ushort MaxRate;
         }
@@ -239,14 +267,21 @@ namespace System.Tests
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool SetInformationJobObject(
-            IntPtr hJob, JOBOBJECTINFOCLASS JobObjectInformationClass,
-            IntPtr lpJobObjectInformation, uint cbJobObjectInformationLength);
+            IntPtr hJob,
+            JOBOBJECTINFOCLASS JobObjectInformationClass,
+            IntPtr lpJobObjectInformation,
+            uint cbJobObjectInformationLength
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool QueryInformationJobObject(
-            IntPtr hJob, JOBOBJECTINFOCLASS JobObjectInformationClass,
-            IntPtr lpJobObjectInformation, uint cbJobObjectInformationLength, IntPtr lpReturnLength);
+            IntPtr hJob,
+            JOBOBJECTINFOCLASS JobObjectInformationClass,
+            IntPtr lpJobObjectInformation,
+            uint cbJobObjectInformationLength,
+            IntPtr lpReturnLength
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -287,16 +322,17 @@ namespace System.Tests
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
         private static extern bool CreateProcess(
-           string lpApplicationName,
-           string lpCommandLine,
-           IntPtr lpProcessAttributes,
-           IntPtr lpThreadAttributes,
-           bool bInheritHandles,
-           uint dwCreationFlags,
-           IntPtr lpEnvironment,
-           string lpCurrentDirectory,
-           [In] ref STARTUPINFO lpStartupInfo,
-           out PROCESS_INFORMATION lpProcessInformation);
+            string lpApplicationName,
+            string lpCommandLine,
+            IntPtr lpProcessAttributes,
+            IntPtr lpThreadAttributes,
+            bool bInheritHandles,
+            uint dwCreationFlags,
+            IntPtr lpEnvironment,
+            string lpCurrentDirectory,
+            [In] ref STARTUPINFO lpStartupInfo,
+            out PROCESS_INFORMATION lpProcessInformation
+        );
 
         private const uint RESUME_THREAD_FAILED = unchecked((uint)(-1));
 

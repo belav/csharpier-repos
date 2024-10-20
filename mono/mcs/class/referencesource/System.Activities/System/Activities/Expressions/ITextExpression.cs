@@ -8,20 +8,11 @@ namespace System.Activities.Expressions
 
     public interface ITextExpression
     {
-        string ExpressionText
-        {
-            get;
-        }
+        string ExpressionText { get; }
 
-        string Language
-        {
-            get;
-        }
+        string Language { get; }
 
-        bool RequiresCompilation
-        {
-            get;
-        }
+        bool RequiresCompilation { get; }
 
         Expression GetExpressionTree();
     }

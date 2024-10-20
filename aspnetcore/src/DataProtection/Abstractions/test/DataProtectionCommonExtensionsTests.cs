@@ -22,14 +22,17 @@ public class DataProtectionCommonExtensionsTests
     {
         // Arrange
         var mockProtector = new Mock<IDataProtector>();
-        mockProtector.Setup(o => o.CreateProtector(It.IsAny<string>())).Returns(mockProtector.Object);
+        mockProtector
+            .Setup(o => o.CreateProtector(It.IsAny<string>()))
+            .Returns(mockProtector.Object);
         var provider = mockProtector.Object;
 
         // Act & assert
         ExceptionAssert.ThrowsArgument(
             testCode: () => provider.CreateProtector((IEnumerable<string>)purposes),
             paramName: "purposes",
-            exceptionMessage: Resources.DataProtectionExtensions_NullPurposesCollection);
+            exceptionMessage: Resources.DataProtectionExtensions_NullPurposesCollection
+        );
     }
 
     [Theory]
@@ -39,14 +42,17 @@ public class DataProtectionCommonExtensionsTests
     {
         // Arrange
         var mockProtector = new Mock<IDataProtector>();
-        mockProtector.Setup(o => o.CreateProtector(It.IsAny<string>())).Returns(mockProtector.Object);
+        mockProtector
+            .Setup(o => o.CreateProtector(It.IsAny<string>()))
+            .Returns(mockProtector.Object);
         var provider = mockProtector.Object;
 
         // Act & assert
         ExceptionAssert.ThrowsArgument(
             testCode: () => provider.CreateProtector("primary-purpose", subPurposes),
             paramName: "purposes",
-            exceptionMessage: Resources.DataProtectionExtensions_NullPurposesCollection);
+            exceptionMessage: Resources.DataProtectionExtensions_NullPurposesCollection
+        );
     }
 
     [Fact]
@@ -63,7 +69,9 @@ public class DataProtectionCommonExtensionsTests
         firstMock.Setup(o => o.CreateProtector("first")).Returns(secondMock.Object);
 
         // Act
-        var retVal = firstMock.Object.CreateProtector((IEnumerable<string>)new string[] { "first", "second", "third" });
+        var retVal = firstMock.Object.CreateProtector(
+            (IEnumerable<string>)new string[] { "first", "second", "third" }
+        );
 
         // Assert
         Assert.Same(finalExpectedProtector, retVal);
@@ -113,8 +121,15 @@ public class DataProtectionCommonExtensionsTests
         var services = new Mock<IServiceProvider>().Object;
 
         // Act & assert
-        var ex = Assert.Throws<InvalidOperationException>(() => services.GetDataProtectionProvider());
-        Assert.Equal(Resources.FormatDataProtectionExtensions_NoService(typeof(IDataProtectionProvider).FullName), ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => services.GetDataProtectionProvider()
+        );
+        Assert.Equal(
+            Resources.FormatDataProtectionExtensions_NoService(
+                typeof(IDataProtectionProvider).FullName
+            ),
+            ex.Message
+        );
     }
 
     [Fact]
@@ -141,16 +156,21 @@ public class DataProtectionCommonExtensionsTests
     {
         // Arrange
         var mockProtector = new Mock<IDataProtector>();
-        mockProtector.Setup(o => o.CreateProtector(It.IsAny<string>())).Returns(mockProtector.Object);
+        mockProtector
+            .Setup(o => o.CreateProtector(It.IsAny<string>()))
+            .Returns(mockProtector.Object);
         var mockServices = new Mock<IServiceProvider>();
-        mockServices.Setup(o => o.GetService(typeof(IDataProtectionProvider))).Returns(mockProtector.Object);
+        mockServices
+            .Setup(o => o.GetService(typeof(IDataProtectionProvider)))
+            .Returns(mockProtector.Object);
         var services = mockServices.Object;
 
         // Act & assert
         ExceptionAssert.ThrowsArgument(
             testCode: () => services.GetDataProtector((IEnumerable<string>)purposes),
             paramName: "purposes",
-            exceptionMessage: Resources.DataProtectionExtensions_NullPurposesCollection);
+            exceptionMessage: Resources.DataProtectionExtensions_NullPurposesCollection
+        );
     }
 
     [Theory]
@@ -160,16 +180,21 @@ public class DataProtectionCommonExtensionsTests
     {
         // Arrange
         var mockProtector = new Mock<IDataProtector>();
-        mockProtector.Setup(o => o.CreateProtector(It.IsAny<string>())).Returns(mockProtector.Object);
+        mockProtector
+            .Setup(o => o.CreateProtector(It.IsAny<string>()))
+            .Returns(mockProtector.Object);
         var mockServices = new Mock<IServiceProvider>();
-        mockServices.Setup(o => o.GetService(typeof(IDataProtectionProvider))).Returns(mockProtector.Object);
+        mockServices
+            .Setup(o => o.GetService(typeof(IDataProtectionProvider)))
+            .Returns(mockProtector.Object);
         var services = mockServices.Object;
 
         // Act & assert
         ExceptionAssert.ThrowsArgument(
             testCode: () => services.GetDataProtector("primary-purpose", subPurposes),
             paramName: "purposes",
-            exceptionMessage: Resources.DataProtectionExtensions_NullPurposesCollection);
+            exceptionMessage: Resources.DataProtectionExtensions_NullPurposesCollection
+        );
     }
 
     [Fact]
@@ -186,11 +211,15 @@ public class DataProtectionCommonExtensionsTests
         firstMock.Setup(o => o.CreateProtector("first")).Returns(secondMock.Object);
 
         var mockServices = new Mock<IServiceProvider>();
-        mockServices.Setup(o => o.GetService(typeof(IDataProtectionProvider))).Returns(firstMock.Object);
+        mockServices
+            .Setup(o => o.GetService(typeof(IDataProtectionProvider)))
+            .Returns(firstMock.Object);
         var services = mockServices.Object;
 
         // Act
-        var retVal = services.GetDataProtector((IEnumerable<string>)new string[] { "first", "second", "third" });
+        var retVal = services.GetDataProtector(
+            (IEnumerable<string>)new string[] { "first", "second", "third" }
+        );
 
         // Assert
         Assert.Same(finalExpectedProtector, retVal);
@@ -210,7 +239,9 @@ public class DataProtectionCommonExtensionsTests
         firstMock.Setup(o => o.CreateProtector("first")).Returns(secondMock.Object);
 
         var mockServices = new Mock<IServiceProvider>();
-        mockServices.Setup(o => o.GetService(typeof(IDataProtectionProvider))).Returns(firstMock.Object);
+        mockServices
+            .Setup(o => o.GetService(typeof(IDataProtectionProvider)))
+            .Returns(firstMock.Object);
         var services = mockServices.Object;
 
         // Act
@@ -230,7 +261,9 @@ public class DataProtectionCommonExtensionsTests
         var firstMock = new Mock<IDataProtector>();
         firstMock.Setup(o => o.CreateProtector("first")).Returns(finalExpectedProtector);
         var mockServices = new Mock<IServiceProvider>();
-        mockServices.Setup(o => o.GetService(typeof(IDataProtectionProvider))).Returns(firstMock.Object);
+        mockServices
+            .Setup(o => o.GetService(typeof(IDataProtectionProvider)))
+            .Returns(firstMock.Object);
         var services = mockServices.Object;
 
         // Act
@@ -259,7 +292,9 @@ public class DataProtectionCommonExtensionsTests
     {
         // Arrange
         Mock<IDataProtector> mockProtector = new Mock<IDataProtector>();
-        mockProtector.Setup(p => p.Protect(new byte[] { 0x48, 0x65, 0x6c, 0x6c, 0x6f })).Returns(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 });
+        mockProtector
+            .Setup(p => p.Protect(new byte[] { 0x48, 0x65, 0x6c, 0x6c, 0x6f }))
+            .Returns(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 });
 
         // Act
         string retVal = mockProtector.Object.Protect("Hello");
@@ -286,7 +321,9 @@ public class DataProtectionCommonExtensionsTests
     {
         // Arrange
         Mock<IDataProtector> mockProtector = new Mock<IDataProtector>();
-        mockProtector.Setup(p => p.Unprotect(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 })).Returns(new byte[] { 0xff });
+        mockProtector
+            .Setup(p => p.Unprotect(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }))
+            .Returns(new byte[] { 0xff });
 
         // Act & assert
         var ex = Assert.Throws<CryptographicException>(() =>
@@ -301,7 +338,9 @@ public class DataProtectionCommonExtensionsTests
     {
         // Arrange
         Mock<IDataProtector> mockProtector = new Mock<IDataProtector>();
-        mockProtector.Setup(p => p.Unprotect(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 })).Returns(new byte[] { 0x48, 0x65, 0x6c, 0x6c, 0x6f });
+        mockProtector
+            .Setup(p => p.Unprotect(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05 }))
+            .Returns(new byte[] { 0x48, 0x65, 0x6c, 0x6c, 0x6f });
 
         // Act
         string retVal = DataProtectionCommonExtensions.Unprotect(mockProtector.Object, "AQIDBAU");

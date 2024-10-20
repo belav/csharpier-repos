@@ -14,7 +14,7 @@ namespace System.ServiceModel.Channels
     // The following rule must be followed in order to avoid deadlocks: ReliableRequestContext
     // locks MUST NOT be taken while under the ReliableReplySessionChannel lock.
     //
-    // lock(context)-->lock(channel) ok.    
+    // lock(context)-->lock(channel) ok.
     // lock(channel)-->lock(context) BAD!
     //
     sealed class ReliableReplySessionChannel : ReplyChannel, IReplySessionChannel
@@ -32,10 +32,14 @@ namespace System.ServiceModel.Channels
         ReliableChannelListenerBase<IReplySessionChannel> listener;
         InterruptibleWaitObject messagingCompleteWaitObject;
         Int64 nextReplySequenceNumber;
-        static AsyncCallback onReceiveCompleted = Fx.ThunkCallback(new AsyncCallback(OnReceiveCompletedStatic));
+        static AsyncCallback onReceiveCompleted = Fx.ThunkCallback(
+            new AsyncCallback(OnReceiveCompletedStatic)
+        );
         string perfCounterId;
-        Dictionary<Int64, ReliableRequestContext> requestsByRequestSequenceNumber = new Dictionary<Int64, ReliableRequestContext>();
-        Dictionary<Int64, ReliableRequestContext> requestsByReplySequenceNumber = new Dictionary<Int64, ReliableRequestContext>();
+        Dictionary<Int64, ReliableRequestContext> requestsByRequestSequenceNumber =
+            new Dictionary<Int64, ReliableRequestContext>();
+        Dictionary<Int64, ReliableRequestContext> requestsByReplySequenceNumber =
+            new Dictionary<Int64, ReliableRequestContext>();
         ServerReliableSession session;
         ReplyHelper terminateSequenceReplyHelper;
 
@@ -44,23 +48,41 @@ namespace System.ServiceModel.Channels
             IServerReliableChannelBinder binder,
             FaultHelper faultHelper,
             UniqueId inputID,
-            UniqueId outputID)
+            UniqueId outputID
+        )
             : base(listener, binder.LocalAddress)
         {
             this.listener = listener;
             this.connection = new ReliableInputConnection();
             this.connection.ReliableMessagingVersion = this.listener.ReliableMessagingVersion;
             this.binder = binder;
-            this.session = new ServerReliableSession(this, listener, binder, faultHelper, inputID, outputID);
+            this.session = new ServerReliableSession(
+                this,
+                listener,
+                binder,
+                faultHelper,
+                inputID,
+                outputID
+            );
             this.session.UnblockChannelCloseCallback = this.UnblockClose;
 
             if (this.listener.Ordered)
-                this.deliveryStrategy = new OrderedDeliveryStrategy<RequestContext>(this, this.listener.MaxTransferWindowSize, true);
+                this.deliveryStrategy = new OrderedDeliveryStrategy<RequestContext>(
+                    this,
+                    this.listener.MaxTransferWindowSize,
+                    true
+                );
             else
-                this.deliveryStrategy = new UnorderedDeliveryStrategy<RequestContext>(this, this.listener.MaxTransferWindowSize);
+                this.deliveryStrategy = new UnorderedDeliveryStrategy<RequestContext>(
+                    this,
+                    this.listener.MaxTransferWindowSize
+                );
             this.binder.Faulted += OnBinderFaulted;
             this.binder.OnException += OnBinderException;
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 this.messagingCompleteWaitObject = new InterruptibleWaitObject(false);
             }
@@ -90,10 +112,7 @@ namespace System.ServiceModel.Channels
 
         public IServerReliableChannelBinder Binder
         {
-            get
-            {
-                return this.binder;
-            }
+            get { return this.binder; }
         }
 
         bool IsMessagingCompleted
@@ -102,17 +121,16 @@ namespace System.ServiceModel.Channels
             {
                 lock (this.ThisLock)
                 {
-                    return this.connection.AllAdded && (this.requestsByRequestSequenceNumber.Count == 0) && this.lastReplyAcked;
+                    return this.connection.AllAdded
+                        && (this.requestsByRequestSequenceNumber.Count == 0)
+                        && this.lastReplyAcked;
                 }
             }
         }
 
         MessageVersion MessageVersion
         {
-            get
-            {
-                return this.listener.MessageVersion;
-            }
+            get { return this.listener.MessageVersion; }
         }
 
         int PendingRequestContexts
@@ -121,17 +139,17 @@ namespace System.ServiceModel.Channels
             {
                 lock (this.ThisLock)
                 {
-                    return (this.requestsByRequestSequenceNumber.Count - this.requestsByReplySequenceNumber.Count);
+                    return (
+                        this.requestsByRequestSequenceNumber.Count
+                        - this.requestsByReplySequenceNumber.Count
+                    );
                 }
             }
         }
 
         public IInputSession Session
         {
-            get
-            {
-                return this.session;
-            }
+            get { return this.session; }
         }
 
         void AbortContexts()
@@ -143,7 +161,8 @@ namespace System.ServiceModel.Channels
                 this.contextAborted = true;
             }
 
-            Dictionary<Int64, ReliableRequestContext>.ValueCollection contexts = this.requestsByRequestSequenceNumber.Values;
+            Dictionary<Int64, ReliableRequestContext>.ValueCollection contexts =
+                this.requestsByRequestSequenceNumber.Values;
 
             foreach (ReliableRequestContext request in contexts)
             {
@@ -153,8 +172,10 @@ namespace System.ServiceModel.Channels
             this.requestsByRequestSequenceNumber.Clear();
             this.requestsByReplySequenceNumber.Clear();
 
-
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 if (this.lastReply != null)
                     this.lastReply.Abort();
@@ -169,7 +190,8 @@ namespace System.ServiceModel.Channels
                 this.session.InputID,
                 this.connection.Ranges,
                 this.connection.IsLastKnown,
-                this.listener.MaxTransferWindowSize - this.deliveryStrategy.EnqueuedCount);
+                this.listener.MaxTransferWindowSize - this.deliveryStrategy.EnqueuedCount
+            );
         }
 
         static void AsyncReceiveCompleteStatic(object state)
@@ -202,7 +224,10 @@ namespace System.ServiceModel.Channels
 
         IAsyncResult BeginCloseOutput(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 ReliableRequestContext reply = this.lastReply;
 
@@ -225,8 +250,13 @@ namespace System.ServiceModel.Channels
 
         IAsyncResult BeginUnregisterChannel(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            return this.listener.OnReliableChannelBeginClose(this.session.InputID,
-                this.session.OutputID, timeout, callback, state);
+            return this.listener.OnReliableChannelBeginClose(
+                this.session.InputID,
+                this.session.OutputID,
+                timeout,
+                callback,
+                state
+            );
         }
 
         Message CreateAcknowledgement(SequenceRangeCollection ranges)
@@ -237,7 +267,8 @@ namespace System.ServiceModel.Channels
                 this.session.InputID,
                 ranges,
                 this.connection.IsLastKnown,
-                this.listener.MaxTransferWindowSize - this.deliveryStrategy.EnqueuedCount);
+                this.listener.MaxTransferWindowSize - this.deliveryStrategy.EnqueuedCount
+            );
 
             return message;
         }
@@ -245,7 +276,9 @@ namespace System.ServiceModel.Channels
         Message CreateSequenceClosedFault()
         {
             Message message = new SequenceClosedFault(this.session.InputID).CreateMessage(
-                this.listener.MessageVersion, this.listener.ReliableMessagingVersion);
+                this.listener.MessageVersion,
+                this.listener.ReliableMessagingVersion
+            );
             this.AddAcknowledgementHeader(message);
             return message;
         }
@@ -259,8 +292,11 @@ namespace System.ServiceModel.Channels
 
             if (this.closeSequenceReplyHelper == null)
             {
-                this.closeSequenceReplyHelper = new ReplyHelper(this, CloseSequenceReplyProvider.Instance,
-                    true);
+                this.closeSequenceReplyHelper = new ReplyHelper(
+                    this,
+                    CloseSequenceReplyProvider.Instance,
+                    true
+                );
             }
 
             return true;
@@ -275,8 +311,11 @@ namespace System.ServiceModel.Channels
 
             if (this.terminateSequenceReplyHelper == null)
             {
-                this.terminateSequenceReplyHelper = new ReplyHelper(this,
-                    TerminateSequenceReplyProvider.Instance, false);
+                this.terminateSequenceReplyHelper = new ReplyHelper(
+                    this,
+                    TerminateSequenceReplyProvider.Instance,
+                    false
+                );
             }
 
             return true;
@@ -284,7 +323,10 @@ namespace System.ServiceModel.Channels
 
         void CloseOutput(TimeSpan timeout)
         {
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 ReliableRequestContext reply = this.lastReply;
 
@@ -307,12 +349,23 @@ namespace System.ServiceModel.Channels
         {
             lock (this.ThisLock)
             {
-                bool haveRequestInDictionary = this.requestsByRequestSequenceNumber.ContainsKey(requestSeqNum);
+                bool haveRequestInDictionary = this.requestsByRequestSequenceNumber.ContainsKey(
+                    requestSeqNum
+                );
 
-                if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+                if (
+                    this.listener.ReliableMessagingVersion
+                    == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                )
                 {
-                    return (haveRequestInDictionary
-                        || ((this.lastReply != null) && (this.lastReply.RequestSequenceNumber == requestSeqNum) && (!this.lastReplyAcked)));
+                    return (
+                        haveRequestInDictionary
+                        || (
+                            (this.lastReply != null)
+                            && (this.lastReply.RequestSequenceNumber == requestSeqNum)
+                            && (!this.lastReplyAcked)
+                        )
+                    );
                 }
                 else
                 {
@@ -328,7 +381,10 @@ namespace System.ServiceModel.Channels
 
         void EndCloseOutput(IAsyncResult result)
         {
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 if (result is CloseOutputCompletedAsyncResult)
                     CloseOutputCompletedAsyncResult.End(result);
@@ -363,7 +419,8 @@ namespace System.ServiceModel.Channels
             T innerProperty = this.binder.Channel.GetProperty<T>();
             if ((innerProperty == null) && (typeof(T) == typeof(FaultConverter)))
             {
-                return (T)(object)FaultConverter.GetDefaultFaultConverter(this.listener.MessageVersion);
+                return (T)
+                    (object)FaultConverter.GetDefaultFaultConverter(this.listener.MessageVersion);
             }
             else
             {
@@ -388,16 +445,22 @@ namespace System.ServiceModel.Channels
 
                     if (!terminated && (this.Binder.State == CommunicationState.Opened))
                     {
-                        Exception e = new CommunicationException(SR.GetString(SR.EarlySecurityClose));
+                        Exception e = new CommunicationException(
+                            SR.GetString(SR.EarlySecurityClose)
+                        );
                         this.session.OnLocalFault(e, (Message)null, null);
                     }
 
                     return false;
                 }
 
-                WsrmMessageInfo info = WsrmMessageInfo.Get(this.listener.MessageVersion,
-                    this.listener.ReliableMessagingVersion, this.binder.Channel, this.binder.GetInnerSession(),
-                    context.RequestMessage);
+                WsrmMessageInfo info = WsrmMessageInfo.Get(
+                    this.listener.MessageVersion,
+                    this.listener.ReliableMessagingVersion,
+                    this.binder.Channel,
+                    this.binder.GetInnerSession(),
+                    context.RequestMessage
+                );
 
                 this.StartReceiving(false);
                 this.ProcessRequest(context, info);
@@ -421,7 +484,10 @@ namespace System.ServiceModel.Channels
             }
             this.session.Abort();
             this.AbortContexts();
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 this.messagingCompleteWaitObject.Abort(this);
             }
@@ -429,43 +495,57 @@ namespace System.ServiceModel.Channels
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.ThrowIfCloseInvalid();
-            bool wsrmFeb2005 = this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005;
+            bool wsrmFeb2005 =
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005;
 
             OperationWithTimeoutBeginCallback[] beginOperations =
-                new OperationWithTimeoutBeginCallback[] {
-                    new OperationWithTimeoutBeginCallback (this.BeginCloseOutput),
+                new OperationWithTimeoutBeginCallback[]
+                {
+                    new OperationWithTimeoutBeginCallback(this.BeginCloseOutput),
                     wsrmFeb2005
-                    ? new OperationWithTimeoutBeginCallback(this.connection.BeginClose)
-                    : new OperationWithTimeoutBeginCallback(this.BeginTerminateSequence),
+                        ? new OperationWithTimeoutBeginCallback(this.connection.BeginClose)
+                        : new OperationWithTimeoutBeginCallback(this.BeginTerminateSequence),
                     wsrmFeb2005
-                    ? new OperationWithTimeoutBeginCallback(this.messagingCompleteWaitObject.BeginWait)
-                    : new OperationWithTimeoutBeginCallback(this.connection.BeginClose),
+                        ? new OperationWithTimeoutBeginCallback(
+                            this.messagingCompleteWaitObject.BeginWait
+                        )
+                        : new OperationWithTimeoutBeginCallback(this.connection.BeginClose),
                     new OperationWithTimeoutBeginCallback(this.session.BeginClose),
                     new OperationWithTimeoutBeginCallback(this.BeginCloseBinder),
                     new OperationWithTimeoutBeginCallback(this.BeginUnregisterChannel),
-                    new OperationWithTimeoutBeginCallback(base.OnBeginClose)
+                    new OperationWithTimeoutBeginCallback(base.OnBeginClose),
                 };
 
-            OperationEndCallback[] endOperations =
-                new OperationEndCallback[] {
-                    new OperationEndCallback(this.EndCloseOutput),
-                    wsrmFeb2005
+            OperationEndCallback[] endOperations = new OperationEndCallback[]
+            {
+                new OperationEndCallback(this.EndCloseOutput),
+                wsrmFeb2005
                     ? new OperationEndCallback(this.connection.EndClose)
                     : new OperationEndCallback(this.EndTerminateSequence),
-                    wsrmFeb2005
+                wsrmFeb2005
                     ? new OperationEndCallback(this.messagingCompleteWaitObject.EndWait)
                     : new OperationEndCallback(this.connection.EndClose),
-                    new OperationEndCallback(this.session.EndClose),
-                    new OperationEndCallback(this.EndCloseBinder),
-                    new OperationEndCallback(this.EndUnregisterChannel),
-                    new OperationEndCallback(base.OnEndClose)
-                };
+                new OperationEndCallback(this.session.EndClose),
+                new OperationEndCallback(this.EndCloseBinder),
+                new OperationEndCallback(this.EndUnregisterChannel),
+                new OperationEndCallback(base.OnEndClose),
+            };
 
-            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(timeout,
-                beginOperations, endOperations, callback, state);
+            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
+                timeout,
+                beginOperations,
+                endOperations,
+                callback,
+                state
+            );
         }
 
         void OnBinderException(IReliableChannelBinder sender, Exception exception)
@@ -480,7 +560,10 @@ namespace System.ServiceModel.Channels
         {
             this.binder.Abort();
 
-            exception = new CommunicationException(SR.GetString(SR.EarlySecurityFaulted), exception);
+            exception = new CommunicationException(
+                SR.GetString(SR.EarlySecurityFaulted),
+                exception
+            );
             this.session.OnLocalFault(exception, (Message)null, null);
         }
 
@@ -489,7 +572,10 @@ namespace System.ServiceModel.Channels
             this.ThrowIfCloseInvalid();
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             this.CloseOutput(timeoutHelper.RemainingTime());
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 this.connection.Close(timeoutHelper.RemainingTime());
                 this.messagingCompleteWaitObject.Wait(timeoutHelper.RemainingTime());
@@ -501,8 +587,11 @@ namespace System.ServiceModel.Channels
             }
             this.session.Close(timeoutHelper.RemainingTime());
             this.binder.Close(timeoutHelper.RemainingTime(), MaskingMode.Handled);
-            this.listener.OnReliableChannelClose(this.session.InputID, this.session.OutputID,
-                timeoutHelper.RemainingTime());
+            this.listener.OnReliableChannelClose(
+                this.session.InputID,
+                this.session.OutputID,
+                timeoutHelper.RemainingTime()
+            );
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
@@ -511,7 +600,10 @@ namespace System.ServiceModel.Channels
             this.deliveryStrategy.Dispose();
             this.binder.Faulted -= this.OnBinderFaulted;
 
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 if (this.lastReply != null)
                 {
@@ -563,8 +655,12 @@ namespace System.ServiceModel.Channels
 
         void OnTerminateSequenceCompleted()
         {
-            if ((this.session.Settings.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
-                && this.connection.IsSequenceClosed)
+            if (
+                (
+                    this.session.Settings.ReliableMessagingVersion
+                    == ReliableMessagingVersion.WSReliableMessaging11
+                ) && this.connection.IsSequenceClosed
+            )
             {
                 lock (this.ThisLock)
                 {
@@ -577,18 +673,25 @@ namespace System.ServiceModel.Channels
         {
             lock (this.ThisLock)
             {
-                if (this.Aborted || this.State == CommunicationState.Faulted || this.State == CommunicationState.Closed)
+                if (
+                    this.Aborted
+                    || this.State == CommunicationState.Faulted
+                    || this.State == CommunicationState.Closed
+                )
                     return false;
 
                 long requestSequenceNumber = context.RequestSequenceNumber;
-                bool wsrmFeb2005 = this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005;
+                bool wsrmFeb2005 =
+                    this.listener.ReliableMessagingVersion
+                    == ReliableMessagingVersion.WSReliableMessagingFebruary2005;
 
                 if (wsrmFeb2005 && (this.connection.Last == requestSequenceNumber))
                 {
                     if (this.lastReply == null)
                         this.lastReply = context;
                     this.requestsByRequestSequenceNumber.Remove(requestSequenceNumber);
-                    bool canReply = this.connection.AllAdded && (this.State == CommunicationState.Closing);
+                    bool canReply =
+                        this.connection.AllAdded && (this.State == CommunicationState.Closing);
                     if (!canReply)
                         return false;
                 }
@@ -607,15 +710,19 @@ namespace System.ServiceModel.Channels
                 // won't throw if you do not need next sequence number
                 if (this.nextReplySequenceNumber == Int64.MaxValue)
                 {
-                    MessageNumberRolloverFault fault = new MessageNumberRolloverFault(this.session.OutputID);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(fault.CreateException());
+                    MessageNumberRolloverFault fault = new MessageNumberRolloverFault(
+                        this.session.OutputID
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        fault.CreateException()
+                    );
                 }
                 context.SetReplySequenceNumber(++this.nextReplySequenceNumber);
 
                 if (wsrmFeb2005 && (this.connection.Last == requestSequenceNumber))
                 {
                     if (!context.HasReply)
-                        this.lastReplyAcked = true;   //If Last Reply has no user data, it does not need to be acked. Here we just set it as its ack received.
+                        this.lastReplyAcked = true; //If Last Reply has no user data, it does not need to be acked. Here we just set it as its ack received.
                     this.lastReplySequenceNumber = this.nextReplySequenceNumber;
                     context.SetLastReply(this.lastReplySequenceNumber);
                 }
@@ -628,7 +735,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        Message PrepareReplyMessage(Int64 replySequenceNumber, bool isLast, SequenceRangeCollection ranges, Message reply)
+        Message PrepareReplyMessage(
+            Int64 replySequenceNumber,
+            bool isLast,
+            SequenceRangeCollection ranges,
+            Message reply
+        )
         {
             this.AddAcknowledgementHeader(reply);
 
@@ -637,7 +749,8 @@ namespace System.ServiceModel.Channels
                 reply,
                 this.session.OutputID,
                 replySequenceNumber,
-                isLast);
+                isLast
+            );
 
             return reply;
         }
@@ -646,7 +759,11 @@ namespace System.ServiceModel.Channels
         {
             lock (this.ThisLock)
             {
-                if (this.Aborted || this.State == CommunicationState.Faulted || this.State == CommunicationState.Closed)
+                if (
+                    this.Aborted
+                    || this.State == CommunicationState.Faulted
+                    || this.State == CommunicationState.Closed
+                )
                     return;
 
                 if (this.requestsByReplySequenceNumber.Count > 0)
@@ -655,7 +772,12 @@ namespace System.ServiceModel.Channels
 
                     this.acked.Clear();
 
-                    foreach (KeyValuePair<Int64, ReliableRequestContext> pair in this.requestsByReplySequenceNumber)
+                    foreach (
+                        KeyValuePair<
+                            Int64,
+                            ReliableRequestContext
+                        > pair in this.requestsByReplySequenceNumber
+                    )
                     {
                         reply = pair.Key;
                         if (info.Ranges.Contains(reply))
@@ -668,15 +790,23 @@ namespace System.ServiceModel.Channels
                     {
                         reply = this.acked[i];
                         this.requestsByRequestSequenceNumber.Remove(
-                            this.requestsByReplySequenceNumber[reply].RequestSequenceNumber);
+                            this.requestsByReplySequenceNumber[reply].RequestSequenceNumber
+                        );
                         this.requestsByReplySequenceNumber.Remove(reply);
                     }
 
-                    if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+                    if (
+                        this.listener.ReliableMessagingVersion
+                        == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                    )
                     {
-                        if (!this.lastReplyAcked && (this.lastReplySequenceNumber != Int64.MinValue))
+                        if (
+                            !this.lastReplyAcked && (this.lastReplySequenceNumber != Int64.MinValue)
+                        )
                         {
-                            this.lastReplyAcked = info.Ranges.Contains(this.lastReplySequenceNumber);
+                            this.lastReplyAcked = info.Ranges.Contains(
+                                this.lastReplySequenceNumber
+                            );
                         }
                     }
                 }
@@ -709,9 +839,18 @@ namespace System.ServiceModel.Channels
                 WsrmRequestInfo requestInfo = isTerminate
                     ? (WsrmRequestInfo)info.TerminateSequenceInfo
                     : (WsrmRequestInfo)info.CloseSequenceInfo;
-                Int64 last = isTerminate ? info.TerminateSequenceInfo.LastMsgNumber : info.CloseSequenceInfo.LastMsgNumber;
+                Int64 last = isTerminate
+                    ? info.TerminateSequenceInfo.LastMsgNumber
+                    : info.CloseSequenceInfo.LastMsgNumber;
 
-                if (!WsrmUtilities.ValidateWsrmRequest(this.session, requestInfo, this.binder, context))
+                if (
+                    !WsrmUtilities.ValidateWsrmRequest(
+                        this.session,
+                        requestInfo,
+                        this.binder,
+                        context
+                    )
+                )
                 {
                     cleanup = false;
                     return;
@@ -733,13 +872,20 @@ namespace System.ServiceModel.Channels
                         {
                             if (isTerminate)
                             {
-                                if (this.connection.SetTerminateSequenceLast(last, out isLastLargeEnough))
+                                if (
+                                    this.connection.SetTerminateSequenceLast(
+                                        last,
+                                        out isLastLargeEnough
+                                    )
+                                )
                                 {
                                     scheduleShutdown = true;
                                 }
                                 else if (isLastLargeEnough)
                                 {
-                                    remoteFaultException = new ProtocolException(SR.GetString(SR.EarlyTerminateSequence));
+                                    remoteFaultException = new ProtocolException(
+                                        SR.GetString(SR.EarlyTerminateSequence)
+                                    );
                                 }
                             }
                             else
@@ -786,27 +932,47 @@ namespace System.ServiceModel.Channels
                 {
                     string faultString = SR.GetString(SR.SequenceTerminatedSmallLastMsgNumber);
                     string exceptionString = SR.GetString(SR.SmallLastMsgNumberExceptionString);
-                    fault = SequenceTerminatedFault.CreateProtocolFault(this.session.InputID, faultString,
-                        exceptionString);
+                    fault = SequenceTerminatedFault.CreateProtocolFault(
+                        this.session.InputID,
+                        faultString,
+                        exceptionString
+                    );
                 }
                 else if (!haveAllReplyAcks)
                 {
-                    string faultString = SR.GetString(SR.SequenceTerminatedNotAllRepliesAcknowledged);
-                    string exceptionString = SR.GetString(SR.NotAllRepliesAcknowledgedExceptionString);
-                    fault = SequenceTerminatedFault.CreateProtocolFault(this.session.OutputID, faultString,
-                        exceptionString);
+                    string faultString = SR.GetString(
+                        SR.SequenceTerminatedNotAllRepliesAcknowledged
+                    );
+                    string exceptionString = SR.GetString(
+                        SR.NotAllRepliesAcknowledgedExceptionString
+                    );
+                    fault = SequenceTerminatedFault.CreateProtocolFault(
+                        this.session.OutputID,
+                        faultString,
+                        exceptionString
+                    );
                 }
                 else if (!isLastConsistent)
                 {
-                    string faultString = SR.GetString(SR.SequenceTerminatedInconsistentLastMsgNumber);
-                    string exceptionString = SR.GetString(SR.InconsistentLastMsgNumberExceptionString);
-                    fault = SequenceTerminatedFault.CreateProtocolFault(this.session.InputID,
-                        faultString, exceptionString);
+                    string faultString = SR.GetString(
+                        SR.SequenceTerminatedInconsistentLastMsgNumber
+                    );
+                    string exceptionString = SR.GetString(
+                        SR.InconsistentLastMsgNumberExceptionString
+                    );
+                    fault = SequenceTerminatedFault.CreateProtocolFault(
+                        this.session.InputID,
+                        faultString,
+                        exceptionString
+                    );
                 }
                 else if (remoteFaultException != null)
                 {
-                    Message message = WsrmUtilities.CreateTerminateMessage(this.MessageVersion,
-                        this.listener.ReliableMessagingVersion, this.session.OutputID);
+                    Message message = WsrmUtilities.CreateTerminateMessage(
+                        this.MessageVersion,
+                        this.listener.ReliableMessagingVersion,
+                        this.session.OutputID
+                    );
                     this.AddAcknowledgementHeader(message);
 
                     using (message)
@@ -841,7 +1007,9 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                ReplyHelper replyHelper = isTerminate ? this.terminateSequenceReplyHelper : this.closeSequenceReplyHelper;
+                ReplyHelper replyHelper = isTerminate
+                    ? this.terminateSequenceReplyHelper
+                    : this.closeSequenceReplyHelper;
 
                 if (!replyHelper.TransferRequestContext(context, info))
                 {
@@ -915,11 +1083,24 @@ namespace System.ServiceModel.Channels
                 {
                     EndpointAddress acksTo;
 
-                    if (WsrmUtilities.ValidateCreateSequence<IReplySessionChannel>(info, this.listener, this.binder.Channel, out acksTo))
+                    if (
+                        WsrmUtilities.ValidateCreateSequence<IReplySessionChannel>(
+                            info,
+                            this.listener,
+                            this.binder.Channel,
+                            out acksTo
+                        )
+                    )
                     {
-                        Message response = WsrmUtilities.CreateCreateSequenceResponse(this.listener.MessageVersion,
-                            this.listener.ReliableMessagingVersion, true, info.CreateSequenceInfo,
-                            this.listener.Ordered, this.session.InputID, acksTo);
+                        Message response = WsrmUtilities.CreateCreateSequenceResponse(
+                            this.listener.MessageVersion,
+                            this.listener.ReliableMessagingVersion,
+                            true,
+                            info.CreateSequenceInfo,
+                            this.listener.Ordered,
+                            this.session.InputID,
+                            acksTo
+                        );
 
                         using (context)
                         {
@@ -943,7 +1124,12 @@ namespace System.ServiceModel.Channels
                 if (info.AcknowledgementInfo != null)
                 {
                     ProcessAcknowledgment(info.AcknowledgementInfo);
-                    closeContext = (info.Action == WsrmIndex.GetSequenceAcknowledgementActionString(this.listener.ReliableMessagingVersion));
+                    closeContext = (
+                        info.Action
+                        == WsrmIndex.GetSequenceAcknowledgementActionString(
+                            this.listener.ReliableMessagingVersion
+                        )
+                    );
                 }
 
                 if (!closeContext)
@@ -955,7 +1141,10 @@ namespace System.ServiceModel.Channels
                     }
                     else if (info.TerminateSequenceInfo != null)
                     {
-                        if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+                        if (
+                            this.listener.ReliableMessagingVersion
+                            == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                        )
                         {
                             ProcessTerminateSequenceFeb2005(context, info);
                         }
@@ -963,11 +1152,13 @@ namespace System.ServiceModel.Channels
                         {
                             ProcessShutdown11(context, info);
                         }
-                        else    // Identifier == OutputID
+                        else // Identifier == OutputID
                         {
-                            WsrmFault fault = SequenceTerminatedFault.CreateProtocolFault(this.session.InputID,
+                            WsrmFault fault = SequenceTerminatedFault.CreateProtocolFault(
+                                this.session.InputID,
                                 SR.GetString(SR.SequenceTerminatedUnsupportedTerminateSequence),
-                                SR.GetString(SR.UnsupportedTerminateSequenceExceptionString));
+                                SR.GetString(SR.UnsupportedTerminateSequenceExceptionString)
+                            );
 
                             this.session.OnLocalFault(fault.CreateException(), fault, context);
                             closeMessage = false;
@@ -985,7 +1176,10 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+                if (
+                    this.listener.ReliableMessagingVersion
+                    == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+                )
                 {
                     if (this.IsMessagingCompleted)
                     {
@@ -1023,19 +1217,27 @@ namespace System.ServiceModel.Channels
         //          1. It is not captured because it is dropped (e.g. it doesn't fit in the buffer). In this
         //              case the reliable request's sequence number is not in the acknowledgment.
         //          2. It is not captured because it is a duplicate. In this case the reliable request's
-        //              sequence number is included in the acknowledgment. 
+        //              sequence number is included in the acknowledgment.
         //
         // By following these rules it is possible to support one-way and two-operations without having
         // knowledge of them (the user drives using the request context we give them) and at the same time
         // it is possible to forget about past replies once acknowledgments for them are received.
-        void ProcessSequencedMessage(RequestContext context, string action, WsrmSequencedMessageInfo info)
+        void ProcessSequencedMessage(
+            RequestContext context,
+            string action,
+            WsrmSequencedMessageInfo info
+        )
         {
             ReliableRequestContext reliableContext = null;
             WsrmFault fault = null;
             bool needDispatch = false;
             bool scheduleShutdown = false;
-            bool wsrmFeb2005 = this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005;
-            bool wsrm11 = this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11;
+            bool wsrmFeb2005 =
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005;
+            bool wsrm11 =
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessaging11;
             Int64 requestSequenceNumber = info.SequenceNumber;
             bool isLast = wsrmFeb2005 && info.LastMessage;
             bool isLastOnly = wsrmFeb2005 && (action == WsrmFeb2005Strings.LastMessageAction);
@@ -1044,7 +1246,11 @@ namespace System.ServiceModel.Channels
 
             lock (this.ThisLock)
             {
-                if (this.Aborted || this.State == CommunicationState.Faulted || this.State == CommunicationState.Closed)
+                if (
+                    this.Aborted
+                    || this.State == CommunicationState.Faulted
+                    || this.State == CommunicationState.Closed
+                )
                 {
                     context.RequestMessage.Close();
                     context.Abort();
@@ -1072,12 +1278,25 @@ namespace System.ServiceModel.Channels
                     if (PerformanceCounters.PerformanceCountersEnabled)
                         PerformanceCounters.MessageDropped(this.perfCounterId);
 
-                    if (!this.requestsByRequestSequenceNumber.TryGetValue(info.SequenceNumber, out reliableContext))
+                    if (
+                        !this.requestsByRequestSequenceNumber.TryGetValue(
+                            info.SequenceNumber,
+                            out reliableContext
+                        )
+                    )
                     {
-                        if ((this.lastReply != null) && (this.lastReply.RequestSequenceNumber == info.SequenceNumber))
+                        if (
+                            (this.lastReply != null)
+                            && (this.lastReply.RequestSequenceNumber == info.SequenceNumber)
+                        )
                             reliableContext = this.lastReply;
                         else
-                            reliableContext = new ReliableRequestContext(context, info.SequenceNumber, this, true);
+                            reliableContext = new ReliableRequestContext(
+                                context,
+                                info.SequenceNumber,
+                                this,
+                                true
+                            );
                     }
 
                     reliableContext.SetAckRanges(this.connection.Ranges);
@@ -1086,9 +1305,11 @@ namespace System.ServiceModel.Channels
                 {
                     if (wsrmFeb2005)
                     {
-                        fault = SequenceTerminatedFault.CreateProtocolFault(this.session.InputID,
+                        fault = SequenceTerminatedFault.CreateProtocolFault(
+                            this.session.InputID,
                             SR.GetString(SR.SequenceTerminatedSessionClosedBeforeDone),
-                            SR.GetString(SR.SessionClosedBeforeDone));
+                            SR.GetString(SR.SessionClosedBeforeDone)
+                        );
                     }
                     else
                     {
@@ -1101,18 +1322,34 @@ namespace System.ServiceModel.Channels
                 // serialized ack size and the amount of memory taken by the ack ranges. In the
                 // ordered case, the delivery strategy MaxTransferWindowSize quota mitigates this
                 // threat.
-                else if (this.deliveryStrategy.CanEnqueue(requestSequenceNumber)
-                    && (this.requestsByReplySequenceNumber.Count < this.listener.MaxTransferWindowSize)
-                    && (this.listener.Ordered || this.connection.CanMerge(requestSequenceNumber)))
+                else if (
+                    this.deliveryStrategy.CanEnqueue(requestSequenceNumber)
+                    && (
+                        this.requestsByReplySequenceNumber.Count
+                        < this.listener.MaxTransferWindowSize
+                    )
+                    && (this.listener.Ordered || this.connection.CanMerge(requestSequenceNumber))
+                )
                 {
                     this.connection.Merge(requestSequenceNumber, isLast);
-                    reliableContext = new ReliableRequestContext(context, info.SequenceNumber, this, false);
+                    reliableContext = new ReliableRequestContext(
+                        context,
+                        info.SequenceNumber,
+                        this,
+                        false
+                    );
                     reliableContext.SetAckRanges(this.connection.Ranges);
 
                     if (!isLastOnly)
                     {
-                        needDispatch = this.deliveryStrategy.Enqueue(reliableContext, requestSequenceNumber);
-                        this.requestsByRequestSequenceNumber.Add(info.SequenceNumber, reliableContext);
+                        needDispatch = this.deliveryStrategy.Enqueue(
+                            reliableContext,
+                            requestSequenceNumber
+                        );
+                        this.requestsByRequestSequenceNumber.Add(
+                            info.SequenceNumber,
+                            reliableContext
+                        );
                     }
                     else
                     {
@@ -1191,15 +1428,19 @@ namespace System.ServiceModel.Channels
 
                 if (isTerminateEarly)
                 {
-                    fault = SequenceTerminatedFault.CreateProtocolFault(this.session.InputID,
+                    fault = SequenceTerminatedFault.CreateProtocolFault(
+                        this.session.InputID,
                         SR.GetString(SR.SequenceTerminatedEarlyTerminateSequence),
-                        SR.GetString(SR.EarlyTerminateSequence));
+                        SR.GetString(SR.EarlyTerminateSequence)
+                    );
                 }
                 else if (!haveAllReplyAcks)
                 {
-                    fault = SequenceTerminatedFault.CreateProtocolFault(this.session.InputID,
+                    fault = SequenceTerminatedFault.CreateProtocolFault(
+                        this.session.InputID,
                         SR.GetString(SR.SequenceTerminatedBeforeReplySequenceAcked),
-                        SR.GetString(SR.EarlyRequestTerminateSequence));
+                        SR.GetString(SR.EarlyRequestTerminateSequence)
+                    );
                 }
 
                 if (fault != null)
@@ -1209,8 +1450,11 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                message = WsrmUtilities.CreateTerminateMessage(this.MessageVersion,
-                    this.listener.ReliableMessagingVersion, this.session.OutputID);
+                message = WsrmUtilities.CreateTerminateMessage(
+                    this.MessageVersion,
+                    this.listener.ReliableMessagingVersion,
+                    this.session.OutputID
+                );
                 this.AddAcknowledgementHeader(message);
 
                 using (message)
@@ -1232,7 +1476,11 @@ namespace System.ServiceModel.Channels
         {
             while (true)
             {
-                IAsyncResult result = this.binder.BeginTryReceive(TimeSpan.MaxValue, onReceiveCompleted, this);
+                IAsyncResult result = this.binder.BeginTryReceive(
+                    TimeSpan.MaxValue,
+                    onReceiveCompleted,
+                    this
+                );
 
                 if (!result.CompletedSynchronously)
                 {
@@ -1286,14 +1534,20 @@ namespace System.ServiceModel.Channels
         {
             bool shouldFault = false;
 
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 if (this.PendingRequestContexts != 0 || this.connection.Ranges.Count > 1)
                 {
                     shouldFault = true;
                 }
             }
-            else if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
+            else if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessaging11
+            )
             {
                 if (this.PendingRequestContexts != 0)
                 {
@@ -1303,8 +1557,11 @@ namespace System.ServiceModel.Channels
 
             if (shouldFault)
             {
-                WsrmFault fault = SequenceTerminatedFault.CreateProtocolFault(this.session.InputID,
-                    SR.GetString(SR.SequenceTerminatedSessionClosedBeforeDone), SR.GetString(SR.SessionClosedBeforeDone));
+                WsrmFault fault = SequenceTerminatedFault.CreateProtocolFault(
+                    this.session.InputID,
+                    SR.GetString(SR.SequenceTerminatedSessionClosedBeforeDone),
+                    SR.GetString(SR.SessionClosedBeforeDone)
+                );
                 this.session.OnLocalFault(null, fault, null);
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(fault.CreateException());
             }
@@ -1314,7 +1571,10 @@ namespace System.ServiceModel.Channels
         {
             this.AbortContexts();
 
-            if (this.listener.ReliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.listener.ReliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 this.messagingCompleteWaitObject.Fault(this);
             }
@@ -1336,9 +1596,7 @@ namespace System.ServiceModel.Channels
         class CloseOutputCompletedAsyncResult : CompletedAsyncResult
         {
             public CloseOutputCompletedAsyncResult(AsyncCallback callback, object state)
-                : base(callback, state)
-            {
-            }
+                : base(callback, state) { }
         }
 
         class ReliableRequestContext : RequestContextBase
@@ -1352,8 +1610,17 @@ namespace System.ServiceModel.Channels
             Int64 requestSequenceNumber;
             Int64 replySequenceNumber;
 
-            public ReliableRequestContext(RequestContext context, Int64 requestSequenceNumber, ReliableReplySessionChannel channel, bool outcome)
-                : base(context.RequestMessage, channel.DefaultCloseTimeout, channel.DefaultSendTimeout)
+            public ReliableRequestContext(
+                RequestContext context,
+                Int64 requestSequenceNumber,
+                ReliableReplySessionChannel channel,
+                bool outcome
+            )
+                : base(
+                    context.RequestMessage,
+                    channel.DefaultCloseTimeout,
+                    channel.DefaultSendTimeout
+                )
             {
                 this.channel = channel;
                 this.requestSequenceNumber = requestSequenceNumber;
@@ -1375,18 +1642,12 @@ namespace System.ServiceModel.Channels
 
             public bool HasReply
             {
-                get
-                {
-                    return (this.bufferedReply != null);
-                }
+                get { return (this.bufferedReply != null); }
             }
 
             public Int64 RequestSequenceNumber
             {
-                get
-                {
-                    return this.requestSequenceNumber;
-                }
+                get { return this.requestSequenceNumber; }
             }
 
             void AbortInnerContexts()
@@ -1399,7 +1660,12 @@ namespace System.ServiceModel.Channels
                 this.innerContexts.Clear();
             }
 
-            internal IAsyncResult BeginReplyInternal(Message reply, TimeSpan timeout, AsyncCallback callback, object state)
+            internal IAsyncResult BeginReplyInternal(
+                Message reply,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 bool needAbort = true;
                 bool needReply = true;
@@ -1416,7 +1682,11 @@ namespace System.ServiceModel.Channels
                         if (this.Aborted)
                         {
                             needAbort = false;
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationObjectAbortedException(SR.GetString(SR.RequestContextAborted)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationObjectAbortedException(
+                                    SR.GetString(SR.RequestContextAborted)
+                                )
+                            );
                         }
 
                         if (this.outcomeKnown)
@@ -1500,19 +1770,26 @@ namespace System.ServiceModel.Channels
 
                 if (this.channel.ContainsRequest(this.requestSequenceNumber))
                 {
-                    Exception e = new ProtocolException(SR.GetString(SR.ReliableRequestContextAborted));
+                    Exception e = new ProtocolException(
+                        SR.GetString(SR.ReliableRequestContextAborted)
+                    );
                     this.channel.session.OnLocalFault(e, (Message)null, null);
                 }
             }
 
-            protected override IAsyncResult OnBeginReply(Message reply, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginReply(
+                Message reply,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.BeginReplyInternal(reply, timeout, callback, state);
             }
 
             protected override void OnClose(TimeSpan timeout)
             {
-                // ReliableRequestContext.Close() relies on base.Close() to call reply if reply is not initiated. 
+                // ReliableRequestContext.Close() relies on base.Close() to call reply if reply is not initiated.
                 if (!this.ReplyInitiated)
                     this.OnReply(null, timeout);
             }
@@ -1543,7 +1820,11 @@ namespace System.ServiceModel.Channels
                         if (this.Aborted)
                         {
                             needAbort = false;
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationObjectAbortedException(SR.GetString(SR.RequestContextAborted)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new CommunicationObjectAbortedException(
+                                    SR.GetString(SR.RequestContextAborted)
+                                )
+                            );
                         }
 
                         if (this.outcomeKnown)
@@ -1591,7 +1872,12 @@ namespace System.ServiceModel.Channels
                 this.replySequenceNumber = sequenceNumber;
                 this.isLastReply = true;
                 if (this.bufferedReply == null)
-                    this.bufferedReply = Message.CreateMessage(this.channel.MessageVersion, WsrmFeb2005Strings.LastMessageAction).CreateBufferedCopy(int.MaxValue);
+                    this.bufferedReply = Message
+                        .CreateMessage(
+                            this.channel.MessageVersion,
+                            WsrmFeb2005Strings.LastMessageAction
+                        )
+                        .CreateBufferedCopy(int.MaxValue);
             }
 
             public void SendReply(RequestContext context, MaskingMode maskingMode)
@@ -1600,7 +1886,11 @@ namespace System.ServiceModel.Channels
                 SendReply(context, maskingMode, ref timeoutHelper);
             }
 
-            void SendReply(RequestContext context, MaskingMode maskingMode, ref TimeoutHelper timeoutHelper)
+            void SendReply(
+                RequestContext context,
+                MaskingMode maskingMode,
+                ref TimeoutHelper timeoutHelper
+            )
             {
                 Message reply;
 
@@ -1612,7 +1902,12 @@ namespace System.ServiceModel.Channels
                 if (this.bufferedReply != null)
                 {
                     reply = this.bufferedReply.CreateMessage();
-                    this.channel.PrepareReplyMessage(this.replySequenceNumber, this.isLastReply, this.ranges, reply);
+                    this.channel.PrepareReplyMessage(
+                        this.replySequenceNumber,
+                        this.isLastReply,
+                        this.ranges,
+                        reply
+                    );
                 }
                 else
                 {
@@ -1635,9 +1930,7 @@ namespace System.ServiceModel.Channels
             class ReplyCompletedAsyncResult : CompletedAsyncResult
             {
                 public ReplyCompletedAsyncResult(AsyncCallback callback, object state)
-                    : base(callback, state)
-                {
-                }
+                    : base(callback, state) { }
             }
 
             class ReplyAsyncResult : AsyncResult
@@ -1646,9 +1939,16 @@ namespace System.ServiceModel.Channels
                 int currentContext;
                 Message reply;
                 TimeoutHelper timeoutHelper;
-                static AsyncCallback replyCompleteStatic = Fx.ThunkCallback(new AsyncCallback(ReplyCompleteStatic));
+                static AsyncCallback replyCompleteStatic = Fx.ThunkCallback(
+                    new AsyncCallback(ReplyCompleteStatic)
+                );
 
-                public ReplyAsyncResult(ReliableRequestContext thisContext, TimeSpan timeout, AsyncCallback callback, object state)
+                public ReplyAsyncResult(
+                    ReliableRequestContext thisContext,
+                    TimeSpan timeout,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.timeoutHelper = new TimeoutHelper(timeout);
@@ -1666,7 +1966,9 @@ namespace System.ServiceModel.Channels
 
                 void HandleReplyComplete(IAsyncResult result)
                 {
-                    RequestContext thisInnerContext = this.context.innerContexts[this.currentContext];
+                    RequestContext thisInnerContext = this.context.innerContexts[
+                        this.currentContext
+                    ];
 
                     try
                     {
@@ -1716,18 +2018,33 @@ namespace System.ServiceModel.Channels
                         {
                             this.reply = this.context.bufferedReply.CreateMessage();
                             this.context.channel.PrepareReplyMessage(
-                                this.context.replySequenceNumber, this.context.isLastReply,
-                                this.context.ranges, this.reply);
+                                this.context.replySequenceNumber,
+                                this.context.isLastReply,
+                                this.context.ranges,
+                                this.reply
+                            );
                         }
                         else
                         {
-                            this.reply = this.context.channel.CreateAcknowledgement(this.context.ranges);
+                            this.reply = this.context.channel.CreateAcknowledgement(
+                                this.context.ranges
+                            );
                         }
 
-                        RequestContext thisInnerContext = this.context.innerContexts[this.currentContext];
-                        this.context.channel.binder.SetMaskingMode(thisInnerContext, MaskingMode.Handled);
+                        RequestContext thisInnerContext = this.context.innerContexts[
+                            this.currentContext
+                        ];
+                        this.context.channel.binder.SetMaskingMode(
+                            thisInnerContext,
+                            MaskingMode.Handled
+                        );
 
-                        IAsyncResult result = thisInnerContext.BeginReply(this.reply, this.timeoutHelper.RemainingTime(), replyCompleteStatic, this);
+                        IAsyncResult result = thisInnerContext.BeginReply(
+                            this.reply,
+                            this.timeoutHelper.RemainingTime(),
+                            replyCompleteStatic,
+                            this
+                        );
 
                         if (!result.CompletedSynchronously)
                             return false;
@@ -1750,8 +2067,11 @@ namespace System.ServiceModel.Channels
             bool throwTimeoutOnWait;
             InterruptibleWaitObject waitHandle;
 
-            internal ReplyHelper(ReliableReplySessionChannel channel, ReplyProvider replyProvider,
-                bool throwTimeoutOnWait)
+            internal ReplyHelper(
+                ReliableReplySessionChannel channel,
+                ReplyProvider replyProvider,
+                bool throwTimeoutOnWait
+            )
             {
                 this.channel = channel;
                 this.replyProvider = replyProvider;
@@ -1791,7 +2111,12 @@ namespace System.ServiceModel.Channels
                 this.Cleanup(false);
             }
 
-            internal void Reply(RequestContext context, WsrmMessageInfo info, TimeSpan timeout, MaskingMode maskingMode)
+            internal void Reply(
+                RequestContext context,
+                WsrmMessageInfo info,
+                TimeSpan timeout,
+                MaskingMode maskingMode
+            )
             {
                 using (Message message = this.replyProvider.Provide(this.channel, info))
                 {
@@ -1818,8 +2143,12 @@ namespace System.ServiceModel.Channels
                 try
                 {
                     this.channel.binder.SetMaskingMode(this.requestContext, MaskingMode.Handled);
-                    IAsyncResult result = this.requestContext.BeginReply(this.asyncMessage, timeout,
-                        callback, state);
+                    IAsyncResult result = this.requestContext.BeginReply(
+                        this.asyncMessage,
+                        timeout,
+                        callback,
+                        state
+                    );
                     throwing = false;
                     return result;
                 }
@@ -1855,7 +2184,10 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            internal bool TransferRequestContext(RequestContext requestContext, WsrmMessageInfo info)
+            internal bool TransferRequestContext(
+                RequestContext requestContext,
+                WsrmMessageInfo info
+            )
             {
                 RequestContext oldContext = null;
                 WsrmMessageInfo oldInfo = null;
@@ -1906,24 +2238,40 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                this.Reply(this.requestContext, this.info, timeoutHelper.RemainingTime(),
-                    MaskingMode.Handled);
+                this.Reply(
+                    this.requestContext,
+                    this.info,
+                    timeoutHelper.RemainingTime(),
+                    MaskingMode.Handled
+                );
             }
 
-            internal IAsyncResult BeginWaitAndReply(TimeSpan timeout, AsyncCallback callback, object state)
+            internal IAsyncResult BeginWaitAndReply(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                OperationWithTimeoutBeginCallback[] beginOperations = new OperationWithTimeoutBeginCallback[] {
-                    new OperationWithTimeoutBeginCallback (this.waitHandle.BeginWait),
-                    new OperationWithTimeoutBeginCallback (this.BeginReply),
-                };
+                OperationWithTimeoutBeginCallback[] beginOperations =
+                    new OperationWithTimeoutBeginCallback[]
+                    {
+                        new OperationWithTimeoutBeginCallback(this.waitHandle.BeginWait),
+                        new OperationWithTimeoutBeginCallback(this.BeginReply),
+                    };
 
-                OperationEndCallback[] endOperations = new OperationEndCallback[] {
-                    new OperationEndCallback (this.waitHandle.EndWait),
+                OperationEndCallback[] endOperations = new OperationEndCallback[]
+                {
+                    new OperationEndCallback(this.waitHandle.EndWait),
                     new OperationEndCallback(this.EndReply),
                 };
 
-                return OperationWithTimeoutComposer.BeginComposeAsyncOperations(timeout, beginOperations,
-                    endOperations, callback, state);
+                return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
+                    timeout,
+                    beginOperations,
+                    endOperations,
+                    callback,
+                    state
+                );
             }
 
             internal void EndWaitAndReply(IAsyncResult result)
@@ -1934,9 +2282,7 @@ namespace System.ServiceModel.Channels
             class ReplyCompletedAsyncResult : CompletedAsyncResult
             {
                 internal ReplyCompletedAsyncResult(AsyncCallback callback, object state)
-                    : base(callback, state)
-                {
-                }
+                    : base(callback, state) { }
 
                 public void End()
                 {
@@ -1947,18 +2293,19 @@ namespace System.ServiceModel.Channels
 
         abstract class ReplyProvider
         {
-            internal abstract Message Provide(ReliableReplySessionChannel channel, WsrmMessageInfo info);
+            internal abstract Message Provide(
+                ReliableReplySessionChannel channel,
+                WsrmMessageInfo info
+            );
         }
 
         class CloseSequenceReplyProvider : ReplyProvider
         {
             static CloseSequenceReplyProvider instance = new CloseSequenceReplyProvider();
 
-            CloseSequenceReplyProvider()
-            {
-            }
+            CloseSequenceReplyProvider() { }
 
-            static internal ReplyProvider Instance
+            internal static ReplyProvider Instance
             {
                 get
                 {
@@ -1971,10 +2318,16 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            internal override Message Provide(ReliableReplySessionChannel channel, WsrmMessageInfo requestInfo)
+            internal override Message Provide(
+                ReliableReplySessionChannel channel,
+                WsrmMessageInfo requestInfo
+            )
             {
-                Message message = WsrmUtilities.CreateCloseSequenceResponse(channel.MessageVersion,
-                   requestInfo.CloseSequenceInfo.MessageId, channel.session.InputID);
+                Message message = WsrmUtilities.CreateCloseSequenceResponse(
+                    channel.MessageVersion,
+                    requestInfo.CloseSequenceInfo.MessageId,
+                    channel.session.InputID
+                );
                 channel.AddAcknowledgementHeader(message);
                 return message;
             }
@@ -1984,11 +2337,9 @@ namespace System.ServiceModel.Channels
         {
             static TerminateSequenceReplyProvider instance = new TerminateSequenceReplyProvider();
 
-            TerminateSequenceReplyProvider()
-            {
-            }
+            TerminateSequenceReplyProvider() { }
 
-            static internal ReplyProvider Instance
+            internal static ReplyProvider Instance
             {
                 get
                 {
@@ -2001,10 +2352,16 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            internal override Message Provide(ReliableReplySessionChannel channel, WsrmMessageInfo requestInfo)
+            internal override Message Provide(
+                ReliableReplySessionChannel channel,
+                WsrmMessageInfo requestInfo
+            )
             {
-                Message message = WsrmUtilities.CreateTerminateResponseMessage(channel.MessageVersion,
-                   requestInfo.TerminateSequenceInfo.MessageId, channel.session.InputID);
+                Message message = WsrmUtilities.CreateTerminateResponseMessage(
+                    channel.MessageVersion,
+                    requestInfo.TerminateSequenceInfo.MessageId,
+                    channel.session.InputID
+                );
                 channel.AddAcknowledgementHeader(message);
                 return message;
             }

@@ -196,7 +196,9 @@ namespace System.Linq
                     return count == -1 ? -1 : count + _appendCount + _prependCount;
                 }
 
-                return !onlyIfCheap || _source is ICollection<TSource> ? _source.Count() + _appendCount + _prependCount : -1;
+                return !onlyIfCheap || _source is ICollection<TSource>
+                    ? _source.Count() + _appendCount + _prependCount
+                    : -1;
             }
         }
     }

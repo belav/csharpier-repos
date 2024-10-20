@@ -10,9 +10,7 @@ namespace System.ServiceModel.Syndication
         where TCollectionItem : class
     {
         public NullNotAllowedCollection()
-            : base()
-        {
-        }
+            : base() { }
 
         protected override void InsertItem(int index, TCollectionItem item)
         {

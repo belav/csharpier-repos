@@ -9,25 +9,26 @@ namespace Microsoft.Diagnostics.NETCore.Client
 {
     internal enum DiagnosticsServerCommandSet : byte
     {
-        Dump           = 0x01,
-        EventPipe      = 0x02,
-        Profiler       = 0x03,
-        Process        = 0x04,
+        Dump = 0x01,
+        EventPipe = 0x02,
+        Profiler = 0x03,
+        Process = 0x04,
 
-        Server         = 0xFF,
+        Server = 0xFF,
     }
 
     internal enum DiagnosticsServerResponseId : byte
     {
-        OK            = 0x00,
+        OK = 0x00,
+
         // future
-        Error         = 0xFF,
+        Error = 0xFF,
     }
 
     internal enum EventPipeCommandId : byte
     {
-        StopTracing     = 0x01,
-        CollectTracing  = 0x02,
+        StopTracing = 0x01,
+        CollectTracing = 0x02,
         CollectTracing2 = 0x03,
     }
 
@@ -47,10 +48,10 @@ namespace Microsoft.Diagnostics.NETCore.Client
     internal enum ProcessCommandId : byte
     {
         GetProcessInfo = 0x00,
-        ResumeRuntime  = 0x01,
+        ResumeRuntime = 0x01,
         GetProcessEnvironment = 0x02,
         SetEnvironmentVariable = 0x03,
         GetProcessInfo2 = 0x04,
-        ApplyStartupHook = 0x07
+        ApplyStartupHook = 0x07,
     }
 }

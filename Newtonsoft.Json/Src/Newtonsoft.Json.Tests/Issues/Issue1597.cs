@@ -50,7 +50,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test()
         {
-            string json = @"{
+            string json =
+                @"{
     ""wish"": 264,
     ""collect"": 7498,
     ""doing"": 385,
@@ -58,7 +59,9 @@ namespace Newtonsoft.Json.Tests.Issues
     ""dropped"": 221
 }";
 
-            IReadOnlyDictionary<CollectionStatus, int> o = JsonConvert.DeserializeObject<IReadOnlyDictionary<CollectionStatus, int>>(json);
+            IReadOnlyDictionary<CollectionStatus, int> o = JsonConvert.DeserializeObject<
+                IReadOnlyDictionary<CollectionStatus, int>
+            >(json);
 
             Assert.AreEqual(264, o[CollectionStatus.Wish]);
             Assert.AreEqual(7498, o[CollectionStatus.Collect]);
@@ -70,7 +73,8 @@ namespace Newtonsoft.Json.Tests.Issues
         [Test]
         public void Test_WithNumbers()
         {
-            string json = @"{
+            string json =
+                @"{
     ""0"": 264,
     ""1"": 7498,
     ""2"": 385,
@@ -78,7 +82,9 @@ namespace Newtonsoft.Json.Tests.Issues
     ""4"": 221
 }";
 
-            IReadOnlyDictionary<CollectionStatus, int> o = JsonConvert.DeserializeObject<IReadOnlyDictionary<CollectionStatus, int>>(json);
+            IReadOnlyDictionary<CollectionStatus, int> o = JsonConvert.DeserializeObject<
+                IReadOnlyDictionary<CollectionStatus, int>
+            >(json);
 
             Assert.AreEqual(264, o[CollectionStatus.Wish]);
             Assert.AreEqual(7498, o[CollectionStatus.Collect]);
@@ -100,14 +106,17 @@ namespace Newtonsoft.Json.Tests.Issues
 
             string json = JsonConvert.SerializeObject(o, Formatting.Indented);
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Wish"": 264,
   ""Collect"": 7498,
   ""Doing"": 385,
   ""on_hold"": 285,
   ""Dropped"": 221,
   ""2147483647"": 2147483647
-}", json);
+}",
+                json
+            );
         }
 
         public enum CollectionStatus
@@ -115,9 +124,10 @@ namespace Newtonsoft.Json.Tests.Issues
             Wish,
             Collect,
             Doing,
+
             [EnumMember(Value = "on_hold")]
             OnHold,
-            Dropped
+            Dropped,
         }
     }
 }

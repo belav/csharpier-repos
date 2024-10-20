@@ -26,7 +26,9 @@ namespace System.Web.Mvc
         {
             ControllerType = controllerType;
 
-            var allMethods = ControllerType.GetMethods(BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public);
+            var allMethods = ControllerType.GetMethods(
+                BindingFlags.InvokeMethod | BindingFlags.Instance | BindingFlags.Public
+            );
             ActionMethods = Array.FindAll(allMethods, IsValidActionMethod);
 
             // The attribute routing mapper will remove methods from this set as they are mapped.
@@ -50,12 +52,9 @@ namespace System.Web.Mvc
         /// Methods which have ActionNameSelectorAttributes - these methods have dynamic functionality
         /// and might choose to opt-in to any request.
         /// </summary>
-        public MethodInfo[] AliasedMethods 
-        { 
-            get 
-            {
-                return StandardRouteCache.AliasedMethods;
-            }
+        public MethodInfo[] AliasedMethods
+        {
+            get { return StandardRouteCache.AliasedMethods; }
         }
 
         /// <summary>
@@ -63,10 +62,7 @@ namespace System.Web.Mvc
         /// </summary>
         public ILookup<string, MethodInfo> NonAliasedMethods
         {
-            get
-            {
-                return StandardRouteCache.NonAliasedMethods;
-            }
+            get { return StandardRouteCache.NonAliasedMethods; }
         }
 
         private StandardRouteActionMethodCache StandardRouteCache
@@ -83,19 +79,35 @@ namespace System.Web.Mvc
             }
         }
 
-        protected AmbiguousMatchException CreateAmbiguousActionMatchException(IEnumerable<MethodInfo> ambiguousMethods, string actionName)
+        protected AmbiguousMatchException CreateAmbiguousActionMatchException(
+            IEnumerable<MethodInfo> ambiguousMethods,
+            string actionName
+        )
         {
             string ambiguityList = CreateAmbiguousMatchList(ambiguousMethods);
-            string message = String.Format(CultureInfo.CurrentCulture, MvcResources.ActionMethodSelector_AmbiguousMatch,
-                                           actionName, ControllerType.Name, ambiguityList);
+            string message = String.Format(
+                CultureInfo.CurrentCulture,
+                MvcResources.ActionMethodSelector_AmbiguousMatch,
+                actionName,
+                ControllerType.Name,
+                ambiguityList
+            );
             return new AmbiguousMatchException(message);
         }
 
-        protected AmbiguousMatchException CreateAmbiguousMethodMatchException(IEnumerable<MethodInfo> ambiguousMethods, string methodName)
+        protected AmbiguousMatchException CreateAmbiguousMethodMatchException(
+            IEnumerable<MethodInfo> ambiguousMethods,
+            string methodName
+        )
         {
             string ambiguityList = CreateAmbiguousMatchList(ambiguousMethods);
-            string message = String.Format(CultureInfo.CurrentCulture, MvcResources.AsyncActionMethodSelector_AmbiguousMethodMatch,
-                                           methodName, ControllerType.Name, ambiguityList);
+            string message = String.Format(
+                CultureInfo.CurrentCulture,
+                MvcResources.AsyncActionMethodSelector_AmbiguousMethodMatch,
+                methodName,
+                ControllerType.Name,
+                ambiguityList
+            );
             return new AmbiguousMatchException(message);
         }
 
@@ -108,7 +120,12 @@ namespace System.Web.Mvc
                 string controllerType = methodInfo.DeclaringType.FullName;
 
                 exceptionMessageBuilder.AppendLine();
-                exceptionMessageBuilder.AppendFormat(CultureInfo.CurrentCulture, MvcResources.ActionMethodSelector_AmbiguousMatchType, controllerAction, controllerType);
+                exceptionMessageBuilder.AppendFormat(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.ActionMethodSelector_AmbiguousMatchType,
+                    controllerAction,
+                    controllerType
+                );
             }
 
             return exceptionMessageBuilder.ToString();
@@ -116,7 +133,10 @@ namespace System.Web.Mvc
 
         private static bool IsMethodDecoratedWithAliasingAttribute(MethodInfo methodInfo)
         {
-            return methodInfo.IsDefined(typeof(ActionNameSelectorAttribute), true /* inherit */);
+            return methodInfo.IsDefined(
+                typeof(ActionNameSelectorAttribute),
+                true /* inherit */
+            );
         }
 
         protected abstract bool IsValidActionMethod(MethodInfo methodInfo);
@@ -131,7 +151,9 @@ namespace System.Web.Mvc
         private StandardRouteActionMethodCache CreateStandardRouteCache()
         {
             var cache = new StandardRouteActionMethodCache();
-            cache.AliasedMethods = StandardRouteMethods.Where(IsMethodDecoratedWithAliasingAttribute).ToArray();
+            cache.AliasedMethods = StandardRouteMethods
+                .Where(IsMethodDecoratedWithAliasingAttribute)
+                .ToArray();
             cache.NonAliasedMethods = StandardRouteMethods
                 .Except(cache.AliasedMethods)
                 .ToLookup(GetCanonicalMethodName, StringComparer.OrdinalIgnoreCase);
@@ -139,7 +161,10 @@ namespace System.Web.Mvc
             return cache;
         }
 
-        protected List<MethodInfo> FindActionMethods(ControllerContext controllerContext, string actionName)
+        protected List<MethodInfo> FindActionMethods(
+            ControllerContext controllerContext,
+            string actionName
+        )
         {
             List<MethodInfo> matches = new List<MethodInfo>();
 
@@ -159,11 +184,16 @@ namespace System.Web.Mvc
             return matches;
         }
 
-        protected static bool IsMatchingAliasedMethod(MethodInfo method, ControllerContext controllerContext, string actionName)
+        protected static bool IsMatchingAliasedMethod(
+            MethodInfo method,
+            ControllerContext controllerContext,
+            string actionName
+        )
         {
             // return if aliased method is opting in to this request
             // to opt in, all attributes defined on the method must return true
-            ReadOnlyCollection<ActionNameSelectorAttribute> attributes = ReflectedAttributeCache.GetActionNameSelectorAttributes(method);
+            ReadOnlyCollection<ActionNameSelectorAttribute> attributes =
+                ReflectedAttributeCache.GetActionNameSelectorAttributes(method);
             // Caching count is faster for ReadOnlyCollection
             int attributeCount = attributes.Count;
             // Performance sensitive, so avoid foreach
@@ -177,7 +207,11 @@ namespace System.Web.Mvc
             return true;
         }
 
-        protected static bool IsValidMethodSelector(ReadOnlyCollection<ActionMethodSelectorAttribute> attributes, ControllerContext controllerContext, MethodInfo method)
+        protected static bool IsValidMethodSelector(
+            ReadOnlyCollection<ActionMethodSelectorAttribute> attributes,
+            ControllerContext controllerContext,
+            MethodInfo method
+        )
         {
             int attributeCount = attributes.Count;
             Contract.Assert(attributeCount > 0);
@@ -191,7 +225,10 @@ namespace System.Web.Mvc
             return true;
         }
 
-        protected static void RunSelectionFilters(ControllerContext controllerContext, List<MethodInfo> methodInfos)
+        protected static void RunSelectionFilters(
+            ControllerContext controllerContext,
+            List<MethodInfo> methodInfos
+        )
         {
             // Filter depending on the selection attribute.
             // Methods with valid selection attributes override all others.
@@ -202,7 +239,8 @@ namespace System.Web.Mvc
             for (int i = methodInfos.Count - 1; i >= 0; i--)
             {
                 MethodInfo methodInfo = methodInfos[i];
-                ReadOnlyCollection<ActionMethodSelectorAttribute> attrs = ReflectedAttributeCache.GetActionMethodSelectorAttributesCollection(methodInfo);
+                ReadOnlyCollection<ActionMethodSelectorAttribute> attrs =
+                    ReflectedAttributeCache.GetActionMethodSelectorAttributesCollection(methodInfo);
                 if (attrs.Count == 0)
                 {
                     // case 1: this method does not have a MethodSelectionAttribute
@@ -239,11 +277,14 @@ namespace System.Web.Mvc
             }
         }
 
-        // Get the action name for the method.         
+        // Get the action name for the method.
         public string GetActionName(MethodInfo methodInfo)
         {
             // Check for ActionName attribute
-            object[] nameAttributes = methodInfo.GetCustomAttributes(typeof(ActionNameAttribute), inherit: true);
+            object[] nameAttributes = methodInfo.GetCustomAttributes(
+                typeof(ActionNameAttribute),
+                inherit: true
+            );
             if (nameAttributes.Length > 0)
             {
                 ActionNameAttribute nameAttribute = nameAttributes[0] as ActionNameAttribute;

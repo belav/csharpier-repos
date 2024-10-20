@@ -9,7 +9,11 @@ using Microsoft.CodeAnalysis.TaskList;
 namespace Microsoft.CodeAnalysis.Editor.TaskList
 {
     internal sealed class TaskListUpdatedArgs(
-        object id, Solution solution, DocumentId documentId, ImmutableArray<TaskListItem> items) : UpdatedEventArgs(id, solution.Workspace, documentId.ProjectId, documentId)
+        object id,
+        Solution solution,
+        DocumentId documentId,
+        ImmutableArray<TaskListItem> items
+    ) : UpdatedEventArgs(id, solution.Workspace, documentId.ProjectId, documentId)
     {
         /// <summary>
         /// Solution this task items are associated with

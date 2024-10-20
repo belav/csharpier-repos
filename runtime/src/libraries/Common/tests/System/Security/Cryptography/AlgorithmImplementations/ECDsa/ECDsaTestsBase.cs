@@ -18,8 +18,10 @@ namespace System.Security.Cryptography.EcDsa.Tests
 #if NETCOREAPP
         internal static void Verify256(ECDsa e, bool expected)
         {
-            byte[] sig = ("998791331eb2e1f4259297f5d9cb82fa20dec98e1cb0900e6b8f014a406c3d02cbdbf5238bde471c3155fc25565524301429"
-                        + "d8713dad9a67eb0a5c355e9e23dc").HexToByteArray();
+            byte[] sig = (
+                "998791331eb2e1f4259297f5d9cb82fa20dec98e1cb0900e6b8f014a406c3d02cbdbf5238bde471c3155fc25565524301429"
+                + "d8713dad9a67eb0a5c355e9e23dc"
+            ).HexToByteArray();
             bool verified = e.VerifyHash(EccTestData.s_hashSha512, sig);
             Assert.Equal(expected, verified);
         }
@@ -28,18 +30,12 @@ namespace System.Security.Cryptography.EcDsa.Tests
         // probe for this capability before depending on it.
         internal static bool ECDsa224Available
         {
-            get
-            {
-                return ECDsaFactory.IsCurveValid(new Oid(ECDSA_P224_OID_VALUE));
-            }
+            get { return ECDsaFactory.IsCurveValid(new Oid(ECDSA_P224_OID_VALUE)); }
         }
 
         internal static bool ECExplicitCurvesSupported
         {
-            get
-            {
-                return ECDsaFactory.ExplicitCurvesSupported;
-            }
+            get { return ECDsaFactory.ExplicitCurvesSupported; }
         }
 #endif
     }
@@ -56,7 +52,6 @@ namespace System.Security.Cryptography.EcDsa.Tests
             byte[] sig = e.SignData(data, 0, data.Length, HashAlgorithmName.SHA1);
             bool verified = e.VerifyData(data, sig, HashAlgorithmName.SHA1);
             Assert.True(verified);
-
             unchecked
             {
                 sig[sig.Length - 1]++;

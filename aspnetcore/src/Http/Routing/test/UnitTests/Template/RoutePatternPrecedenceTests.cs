@@ -26,14 +26,16 @@ public class RoutePatternPrecedenceTests : RoutePrecedenceTestsBase
     [Fact]
     public void InboundPrecedence_ParameterWithRequiredValue_HasPrecedence()
     {
-        var parameterPrecedence = RoutePatternFactory.Parse(
-            "{controller}").InboundPrecedence;
+        var parameterPrecedence = RoutePatternFactory.Parse("{controller}").InboundPrecedence;
 
-        var requiredValueParameterPrecedence = RoutePatternFactory.Parse(
-            "{controller}",
-            defaults: null,
-            parameterPolicies: null,
-            requiredValues: new { controller = "Home" }).InboundPrecedence;
+        var requiredValueParameterPrecedence = RoutePatternFactory
+            .Parse(
+                "{controller}",
+                defaults: null,
+                parameterPolicies: null,
+                requiredValues: new { controller = "Home" }
+            )
+            .InboundPrecedence;
 
         Assert.True(requiredValueParameterPrecedence < parameterPrecedence);
     }

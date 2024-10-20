@@ -18,10 +18,18 @@ internal sealed class NumericClientModelValidator : IClientModelValidator
         ArgumentNullException.ThrowIfNull(context);
 
         MergeAttribute(context.Attributes, "data-val", "true");
-        MergeAttribute(context.Attributes, "data-val-number", GetErrorMessage(context.ModelMetadata));
+        MergeAttribute(
+            context.Attributes,
+            "data-val-number",
+            GetErrorMessage(context.ModelMetadata)
+        );
     }
 
-    private static void MergeAttribute(IDictionary<string, string> attributes, string key, string value)
+    private static void MergeAttribute(
+        IDictionary<string, string> attributes,
+        string key,
+        string value
+    )
     {
         if (!attributes.ContainsKey(key))
         {

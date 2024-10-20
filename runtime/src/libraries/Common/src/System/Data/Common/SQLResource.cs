@@ -29,7 +29,8 @@ namespace System.Data.SqlTypes
 
         internal static string ConcatDiffCollationMessage => SR.SqlMisc_ConcatDiffCollationMessage;
 
-        internal static string CompareDiffCollationMessage => SR.SqlMisc_CompareDiffCollationMessage;
+        internal static string CompareDiffCollationMessage =>
+            SR.SqlMisc_CompareDiffCollationMessage;
 
         internal static string InvalidFlagMessage => SR.SqlMisc_InvalidFlagMessage;
 

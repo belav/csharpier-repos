@@ -16,7 +16,8 @@ namespace System.Linq.Parallel
     /// <summary>
     /// An inlined min/max aggregation and its enumerator, for Nullable{Int64}s.
     /// </summary>
-    internal sealed class NullableLongMinMaxAggregationOperator : InlinedAggregationOperator<long?, long?, long?>
+    internal sealed class NullableLongMinMaxAggregationOperator
+        : InlinedAggregationOperator<long?, long?, long?>
     {
         private readonly int _sign; // The sign (-1 for min, 1 for max).
 
@@ -24,7 +25,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a min/max associative operator.
         //
 
-        internal NullableLongMinMaxAggregationOperator(IEnumerable<long?> child, int sign) : base(child)
+        internal NullableLongMinMaxAggregationOperator(IEnumerable<long?> child, int sign)
+            : base(child)
         {
             Debug.Assert(sign == -1 || sign == 1, "invalid sign");
             _sign = sign;
@@ -44,7 +46,12 @@ namespace System.Linq.Parallel
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<long?> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<long?> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Just return null right away for empty results.
                 if (!enumerator.MoveNext())
@@ -87,10 +94,19 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<long?, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<long?, TKey> source, object? sharedData,
-            CancellationToken cancellationToken)
+            int index,
+            int count,
+            QueryOperatorEnumerator<long?, TKey> source,
+            object? sharedData,
+            CancellationToken cancellationToken
+        )
         {
-            return new NullableLongMinMaxAggregationOperatorEnumerator<TKey>(source, index, _sign, cancellationToken);
+            return new NullableLongMinMaxAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                _sign,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -98,7 +114,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private sealed class NullableLongMinMaxAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<long?>
+        private sealed class NullableLongMinMaxAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<long?>
         {
             private readonly QueryOperatorEnumerator<long?, TKey> _source; // The source data.
             private readonly int _sign; // The sign for comparisons (-1 means min, 1 means max).
@@ -107,9 +124,13 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal NullableLongMinMaxAggregationOperatorEnumerator(QueryOperatorEnumerator<long?, TKey> source, int partitionIndex, int sign,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal NullableLongMinMaxAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<long?, TKey> source,
+                int partitionIndex,
+                int sign,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Debug.Assert(source != null);
                 _source = source;

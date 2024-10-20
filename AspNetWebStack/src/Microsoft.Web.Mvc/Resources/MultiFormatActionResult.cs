@@ -17,7 +17,12 @@ namespace Microsoft.Web.Mvc.Resources
     /// as a HTML view, XML and JSON.
     /// If the response format requested is not supported, then the NotAcceptable status code is returned
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Multi", Justification = "FxCop won't accept this in the custom dictionary, so we're suppressing it in source")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Multi",
+        Justification = "FxCop won't accept this in the custom dictionary, so we're suppressing it in source"
+    )]
     public class MultiFormatActionResult : ActionResult
     {
         private object _model;
@@ -25,11 +30,13 @@ namespace Microsoft.Web.Mvc.Resources
         private HttpStatusCode _statusCode;
 
         public MultiFormatActionResult(object model, ContentType responseFormat)
-            : this(model, responseFormat, HttpStatusCode.OK)
-        {
-        }
+            : this(model, responseFormat, HttpStatusCode.OK) { }
 
-        public MultiFormatActionResult(object model, ContentType responseFormat, HttpStatusCode statusCode)
+        public MultiFormatActionResult(
+            object model,
+            ContentType responseFormat,
+            HttpStatusCode statusCode
+        )
         {
             _model = model;
             _responseFormat = responseFormat;
@@ -40,11 +47,22 @@ namespace Microsoft.Web.Mvc.Resources
         {
             if (!TryExecuteResult(context, this._model, this._responseFormat))
             {
-                throw new HttpException((int)HttpStatusCode.NotAcceptable, String.Format(CultureInfo.CurrentCulture, MvcResources.Resources_UnsupportedFormat, this._responseFormat));
+                throw new HttpException(
+                    (int)HttpStatusCode.NotAcceptable,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.Resources_UnsupportedFormat,
+                        this._responseFormat
+                    )
+                );
             }
         }
 
-        public virtual bool TryExecuteResult(ControllerContext context, object model, ContentType responseFormat)
+        public virtual bool TryExecuteResult(
+            ControllerContext context,
+            object model,
+            ContentType responseFormat
+        )
         {
             if (!FormatManager.Current.CanSerialize(responseFormat))
             {

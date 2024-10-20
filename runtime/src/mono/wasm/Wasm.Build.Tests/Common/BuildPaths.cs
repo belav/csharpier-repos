@@ -4,4 +4,5 @@
 #nullable enable
 
 namespace Wasm.Build.Tests;
+
 public record BuildPaths(string ObjWasmDir, string ObjDir, string BinDir, string BundleDir);

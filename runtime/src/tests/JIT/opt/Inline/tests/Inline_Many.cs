@@ -17,8 +17,6 @@ public class MainApp
         return ret;
     }
 
-
-
     public static int TestNewInline_C_Inline(int v)
     {
         int ret = TestNewInline_D_Inline(v + 3) * 3;
@@ -26,7 +24,6 @@ public class MainApp
         Console.WriteLine(ret);
         return ret;
     }
-
 
     public static int TestNewInline_B_Inline(int v)
     {
@@ -66,5 +63,3 @@ public class MainApp
         }
     }
 }
-
-

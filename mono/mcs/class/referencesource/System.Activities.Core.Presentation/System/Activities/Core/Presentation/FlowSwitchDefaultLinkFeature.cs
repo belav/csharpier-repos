@@ -16,10 +16,18 @@ namespace System.Activities.Core.Presentation
     {
         public override void Initialize(EditingContext context, Type modelType)
         {
-            if (context.Services.GetService<DesignerConfigurationService>().TargetFrameworkName.IsLessThan45())
+            if (
+                context
+                    .Services.GetService<DesignerConfigurationService>()
+                    .TargetFrameworkName.IsLessThan45()
+            )
             {
                 AttributeTableBuilder builder = new AttributeTableBuilder();
-                builder.AddCustomAttributes(typeof(FlowSwitchDefaultLink<>), "DefaultCaseDisplayName", BrowsableAttribute.No);
+                builder.AddCustomAttributes(
+                    typeof(FlowSwitchDefaultLink<>),
+                    "DefaultCaseDisplayName",
+                    BrowsableAttribute.No
+                );
                 MetadataStore.AddAttributeTable(builder.CreateTable());
             }
         }

@@ -13,16 +13,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// Represents a reference to a generic type instantiation that is nested in a non-generic type.
     /// e.g. A.B{int}
     /// </summary>
-    internal sealed class GenericNestedTypeInstanceReference : GenericTypeInstanceReference, Cci.INestedTypeReference
+    internal sealed class GenericNestedTypeInstanceReference
+        : GenericTypeInstanceReference,
+            Cci.INestedTypeReference
     {
         public GenericNestedTypeInstanceReference(NamedTypeSymbol underlyingNamedType)
-            : base(underlyingNamedType)
-        {
-        }
+            : base(underlyingNamedType) { }
 
         Cci.ITypeReference Cci.ITypeMemberReference.GetContainingType(EmitContext context)
         {
-            return ((PEModuleBuilder)context.Module).Translate(UnderlyingNamedType.ContainingType, syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode, diagnostics: context.Diagnostics);
+            return ((PEModuleBuilder)context.Module).Translate(
+                UnderlyingNamedType.ContainingType,
+                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                diagnostics: context.Diagnostics
+            );
         }
 
         public override Cci.IGenericTypeInstanceReference AsGenericTypeInstanceReference

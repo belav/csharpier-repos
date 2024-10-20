@@ -71,7 +71,7 @@ public class EntityFrameworkCoreXmlRepository<TContext> : IXmlRepository
             var newKey = new DataProtectionKey()
             {
                 FriendlyName = friendlyName,
-                Xml = element.ToString(SaveOptions.DisableFormatting)
+                Xml = element.ToString(SaveOptions.DisableFormatting),
             };
 
             context.DataProtectionKeys.Add(newKey);

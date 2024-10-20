@@ -20,14 +20,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void LineSpanDirective_SingleLine()
         {
-            string sourceA =
-@"         A1(); A2(); A3(); //123
+            string sourceA = @"         A1(); A2(); A3(); //123
 //4567890
 ".NormalizeLineEndings();
             var textA = SourceText.From(sourceA);
 
-            string sourceB =
-@"class Program
+            string sourceB = @"class Program
 {
     static void Main()
     {
@@ -65,15 +63,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void LineSpanDirective_MultiLine()
         {
-            string sourceA =
-@"         A1(); A2(); A3(); //123
+            string sourceA = @"         A1(); A2(); A3(); //123
 //4567890
 //ABCDEF
 ".NormalizeLineEndings();
             var textA = SourceText.From(sourceA);
 
-            string sourceB =
-@"class Program
+            string sourceB = @"class Program
 {
     static void Main()
     {
@@ -99,10 +95,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var actualTextSpans = statements.SelectAsArray(s => GetTextMapping(textA, treeB, s));
             var expectedTextSpans = new[]
             {
-                (@"B1();", @"[|A2(); A3(); //123
+                (
+                    @"B1();",
+                    @"[|A2(); A3(); //123
 //4567890
 //ABCDEF
-|]".NormalizeLineEndings()),
+|]".NormalizeLineEndings()
+                ),
                 (@"A2();", @"[|A2();|]"),
                 (@"A3();", @"[|A3();|]"),
                 (@"B4();", @"[|//123|]"),
@@ -114,8 +113,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void InvalidSpans()
         {
-            string source =
-@"class Program
+            string source = @"class Program
 {
     static void Main()
     {
@@ -136,10 +134,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             comp.VerifyDiagnostics(
                 // (9,18): error CS8939: The #line directive end position must be greater than or equal to the start position
                 // #line (10, 20) - (9, 20) "C"
-                Diagnostic(ErrorCode.ERR_LineSpanDirectiveEndLessThanStart, "(9, 20)").WithLocation(9, 18),
+                Diagnostic(ErrorCode.ERR_LineSpanDirectiveEndLessThanStart, "(9, 20)")
+                    .WithLocation(9, 18),
                 // A(11,18): error CS8939: The #line directive end position must be greater than or equal to the start position
                 // #line (10, 20) - (10, 19) "B"
-                Diagnostic(ErrorCode.ERR_LineSpanDirectiveEndLessThanStart, "(10, 19)").WithLocation(11, 18));
+                Diagnostic(ErrorCode.ERR_LineSpanDirectiveEndLessThanStart, "(10, 19)")
+                    .WithLocation(11, 18)
+            );
 
             var actualLineMappings = GetLineMappings(tree);
             var expectedLineMappings = new[]
@@ -158,15 +159,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void LineSpanDirective_Example1()
         {
-            string sourceA =
-@"         A();B(
+            string sourceA = @"         A();B(
 );C();
     D();
 ".NormalizeLineEndings();
             var textA = SourceText.From(sourceA);
 
-            string sourceB =
-@"class Program
+            string sourceB = @"class Program
 {
  static void Main() {
 #line (1,10)-(1,15) 2 ""a"" // 3
@@ -196,8 +195,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var expectedTextSpans = new[]
             {
                 (@"A();", @"[|A();|]"),
-                (@"B(              // 4...", @"[|B(
-);|]".NormalizeLineEndings()),
+                (
+                    @"B(              // 4...",
+                    @"[|B(
+);|]".NormalizeLineEndings()
+                ),
                 (@"C();", @"[|C();|]"),
                 (@"D();", @"[|D();|]"),
             };
@@ -209,15 +211,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void LineSpanDirective_Example2()
         {
-            string sourceA =
-@"@page ""/""
+            string sourceA = @"@page ""/""
 @F(() => 1+1,
    () => 2+2
 )".NormalizeLineEndings();
             var textA = SourceText.From(sourceA);
 
-            string sourceB =
-@"#line hidden
+            string sourceB = @"#line hidden
 class Page
 {
 void Render()
@@ -243,7 +243,9 @@ void Render()
             AssertEx.Equal(expectedLineMappings, actualLineMappings);
 
             var textB = SourceText.From(sourceB);
-            var actualVisibility = textB.Lines.Select(line => treeB.GetLineVisibility(line.Start)).ToImmutableArray();
+            var actualVisibility = textB
+                .Lines.Select(line => treeB.GetLineVisibility(line.Start))
+                .ToImmutableArray();
             var expectedVisibility = new[]
             {
                 LineVisibility.BeforeFirstLineDirective,
@@ -265,9 +267,12 @@ void Render()
             var actualTextSpans = statements.SelectAsArray(s => GetTextMapping(textA, treeB, s));
             var expectedTextSpans = new[]
             {
-                (@"_builder.Add(F(() => 1+1,       // 5...", @"[|F(() => 1+1,
+                (
+                    @"_builder.Add(F(() => 1+1,       // 5...",
+                    @"[|F(() => 1+1,
    () => 2+2
-)|]".NormalizeLineEndings()),
+)|]".NormalizeLineEndings()
+                ),
                 (@"1+1", @"[|1+1|]"),
                 (@"2+2", @"[|2+2|]"),
             };
@@ -279,14 +284,12 @@ void Render()
         [Fact]
         public void LineSpanDirective_Example3()
         {
-            string sourceA =
-@"@page ""/""
+            string sourceA = @"@page ""/""
 Time: @DateTime.Now
 ".NormalizeLineEndings();
             var textA = SourceText.From(sourceA);
 
-            string sourceB =
-@"#line hidden
+            string sourceB = @"#line hidden
 class Page
 {
 void Render()
@@ -325,8 +328,7 @@ void Render()
         [Fact]
         public void LineSpanDirective_Example4()
         {
-            string sourceA =
-@"@page ""/""
+            string sourceA = @"@page ""/""
 @JsonToHtml(@""
 {
   """"key1"""": """"value1"""",
@@ -334,8 +336,7 @@ void Render()
 }"")".NormalizeLineEndings();
             var textA = SourceText.From(sourceA);
 
-            string sourceB =
-@"#line hidden
+            string sourceB = @"#line hidden
 class Page
 {
 void Render()
@@ -366,11 +367,14 @@ void Render()
             var actualTextSpans = statements.SelectAsArray(s => GetTextMapping(textA, treeB, s));
             var expectedTextSpans = new[]
             {
-                (@"_builder.Add(JsonToHtml(@""...", @"[|JsonToHtml(@""
+                (
+                    @"_builder.Add(JsonToHtml(@""...",
+                    @"[|JsonToHtml(@""
 {
   """"key1"""": """"value1"""",
   """"key2"""": """"value2""""
-}"")|]".NormalizeLineEndings()),
+}"")|]".NormalizeLineEndings()
+                ),
             };
             AssertEx.Equal(expectedTextSpans, actualTextSpans);
         }
@@ -380,16 +384,14 @@ void Render()
         [Fact]
         public void LineSpanDirective_Example5i()
         {
-            string sourceA =
-@"@Html.Helper(() =>
+            string sourceA = @"@Html.Helper(() =>
 {
     <p>Hello World</p>
     @DateTime.Now
 })".NormalizeLineEndings();
             var textA = SourceText.From(sourceA);
 
-            string sourceB =
-@"using System;
+            string sourceB = @"using System;
 class Page
 {
     Builder _builder;
@@ -427,11 +429,14 @@ class Page
             var actualTextSpans = statements.SelectAsArray(s => GetTextMapping(textA, treeB, s));
             var expectedTextSpans = new[]
             {
-                (@"_builder.Add(Html.Helper(() =>...", @"[|Html.Helper(() =>
+                (
+                    @"_builder.Add(Html.Helper(() =>...",
+                    @"[|Html.Helper(() =>
 {
     <p>Hello World</p>
     @DateTime.Now
-})|]".NormalizeLineEndings()),
+})|]".NormalizeLineEndings()
+                ),
                 (@"_builder.Add(DateTime.Now);", @"[|DateTime.Now|]"),
             };
             AssertEx.Equal(expectedTextSpans, actualTextSpans);
@@ -460,7 +465,9 @@ class Page
 
         private static ImmutableArray<string> GetLineMappings(SyntaxTree tree)
         {
-            var directives = tree.GetRoot().DescendantNodesAndSelf(descendIntoTrivia: true).OfType<DirectiveTriviaSyntax>();
+            var directives = tree.GetRoot()
+                .DescendantNodesAndSelf(descendIntoTrivia: true)
+                .OfType<DirectiveTriviaSyntax>();
             foreach (var directive in directives)
             {
                 Assert.NotEqual(SyntaxKind.None, directive.DirectiveNameToken.Kind());
@@ -468,7 +475,11 @@ class Page
             return tree.GetLineMappings().Select(mapping => mapping.ToString()!).ToImmutableArray();
         }
 
-        private static (string, string) GetTextMapping(SourceText mappedText, SyntaxTree unmappedText, SyntaxNode syntax)
+        private static (string, string) GetTextMapping(
+            SourceText mappedText,
+            SyntaxTree unmappedText,
+            SyntaxNode syntax
+        )
         {
             return (getDescription(syntax), getMapping(mappedText, unmappedText, syntax));
 
@@ -476,21 +487,29 @@ class Page
             {
                 var description = syntax.ToString();
                 int index = description.IndexOfAny(new[] { '\r', '\n' });
-                return index < 0 ?
-                    description :
-                    description.Substring(0, index) + "...";
+                return index < 0 ? description : description.Substring(0, index) + "...";
             }
 
-            static string getMapping(SourceText mappedText, SyntaxTree unmappedText, SyntaxNode syntax)
+            static string getMapping(
+                SourceText mappedText,
+                SyntaxTree unmappedText,
+                SyntaxNode syntax
+            )
             {
-                var mappedLineAndPositionSpan = unmappedText.GetMappedLineSpanAndVisibility(syntax.Span, out _);
+                var mappedLineAndPositionSpan = unmappedText.GetMappedLineSpanAndVisibility(
+                    syntax.Span,
+                    out _
+                );
                 var span = getTextSpan(mappedText.Lines, mappedLineAndPositionSpan.Span);
                 return $"[|{mappedText.GetSubText(span)}|]";
             }
 
             static TextSpan getTextSpan(TextLineCollection lines, LinePositionSpan span)
             {
-                return TextSpan.FromBounds(getTextPosition(lines, span.Start), getTextPosition(lines, span.End));
+                return TextSpan.FromBounds(
+                    getTextPosition(lines, span.Start),
+                    getTextPosition(lines, span.End)
+                );
             }
 
             static int getTextPosition(TextLineCollection lines, LinePosition position)
@@ -507,8 +526,7 @@ class Page
         [Fact]
         public void Diagnostics_01()
         {
-            var source =
-@"class Program
+            var source = @"class Program
 {
     static void Main()
     {
@@ -524,20 +542,26 @@ class Page
             comp.VerifyDiagnostics(
                 // b.txt(1,9): error CS0103: The name 'C' does not exist in the current context
                 //         C();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "C").WithArguments("C").WithLocation(1, 9),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "C")
+                    .WithArguments("C")
+                    .WithLocation(1, 9),
                 // a.txt(3,3): error CS0103: The name 'A' does not exist in the current context
                 //         A();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "A").WithArguments("A").WithLocation(3, 3),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "A")
+                    .WithArguments("A")
+                    .WithLocation(3, 3),
                 // (8,9): error CS0103: The name 'B' does not exist in the current context
                 //         B();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "B").WithArguments("B").WithLocation(8, 9));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "B")
+                    .WithArguments("B")
+                    .WithLocation(8, 9)
+            );
         }
 
         [Fact]
         public void Diagnostics_02()
         {
-            var source =
-@"class Program
+            var source = @"class Program
 {
     static void Main()
     {
@@ -557,16 +581,23 @@ class Page
                 Diagnostic(ErrorCode.ERR_LineSpanDirectiveInvalidValue, ")").WithLocation(5, 24),
                 // (6,9): error CS0103: The name 'A' does not exist in the current context
                 //         A();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "A").WithArguments("A").WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "A")
+                    .WithArguments("A")
+                    .WithLocation(6, 9),
                 // (10,9): error CS0103: The name 'C' does not exist in the current context
                 //         C();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "C").WithArguments("C").WithLocation(10, 9),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "C")
+                    .WithArguments("C")
+                    .WithLocation(10, 9),
                 // b.txt(200,7): error CS0103: The name 'B' does not exist in the current context
                 //         B();
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "B").WithArguments("B").WithLocation(200, 7),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "B")
+                    .WithArguments("B")
+                    .WithLocation(200, 7),
                 // b.txt(201,29): error CS1578: Quoted file name, single-line comment or end-of-line expected
                 // #line (300, 1) - (300, 100) x "c.txt"
-                Diagnostic(ErrorCode.ERR_MissingPPFile, "x").WithLocation(201, 29));
+                Diagnostic(ErrorCode.ERR_MissingPPFile, "x").WithLocation(201, 29)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var actualLineMappings = GetLineMappings(tree);
@@ -575,7 +606,7 @@ class Page
                 "(0,0)-(3,7) -> : (0,0)-(3,7)",
                 "(5,0)-(5,14) -> : (5,0)-(5,14)",
                 "(7,0)-(7,14),2 -> b.txt: (199,0)-(199,100)",
-                "(9,0)-(11,1) -> : (9,0)-(11,1)"
+                "(9,0)-(11,1) -> : (9,0)-(11,1)",
             };
             AssertEx.Equal(expectedLineMappings, actualLineMappings);
         }
@@ -583,8 +614,7 @@ class Page
         [Fact, WorkItem("https://github.com/dotnet/razor/issues/9051")]
         public void Diagnostics_03()
         {
-            var source =
-@"class Program
+            var source = @"class Program
 {
     static void Main()
     {
@@ -600,20 +630,26 @@ A(); // 1
             comp.VerifyDiagnostics(
                 // a.txt(3,3): error CS0103: The name 'A' does not exist in the current context
                 // A(); // 1
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "A").WithArguments("A").WithLocation(3, 3),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "A")
+                    .WithArguments("A")
+                    .WithLocation(3, 3),
                 // a.txt(3,3): error CS0103: The name 'A' does not exist in the current context
                 //         A(); // 2
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "A").WithArguments("A").WithLocation(3, 3),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "A")
+                    .WithArguments("A")
+                    .WithLocation(3, 3),
                 // (3,3): error CS0103: The name 'A' does not exist in the current context
                 //   A(); // 3
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "A").WithArguments("A").WithLocation(3, 3));
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "A")
+                    .WithArguments("A")
+                    .WithLocation(3, 3)
+            );
         }
 
         [Fact]
         public void SequencePoints()
         {
-            var source =
-@"class Program
+            var source = @"class Program
 {
     static void Main()
     {
@@ -632,8 +668,10 @@ A(); // 1
     static void D() { }
 }".NormalizeLineEndings();
             var verifier = CompileAndVerify(source, options: TestOptions.DebugDll);
-            verifier.VerifyIL("Program.Main", sequencePoints: "Program.Main", expectedIL:
-@"{
+            verifier.VerifyIL(
+                "Program.Main",
+                sequencePoints: "Program.Main",
+                expectedIL: @"{
   // Code size       26 (0x1a)
   .maxstack  0
  -IL_0000:  nop
@@ -646,9 +684,11 @@ A(); // 1
  -IL_0013:  call       ""void Program.D()""
   IL_0018:  nop
  -IL_0019:  ret
-}");
-            verifier.VerifyPdb("Program.Main", expectedPdb:
-@"<symbols>
+}"
+            );
+            verifier.VerifyPdb(
+                "Program.Main",
+                expectedPdb: @"<symbols>
   <files>
     <file id=""1"" name="""" language=""C#"" />
     <file id=""2"" name=""a.txt"" language=""C#"" />
@@ -672,7 +712,8 @@ A(); // 1
     </method>
   </methods>
 </symbols>
-");
+"
+            );
         }
     }
 }

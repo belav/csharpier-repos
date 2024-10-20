@@ -22,7 +22,8 @@ namespace System.Reflection.TypeLoading
         public sealed override string? Name => null;
         public sealed override ParameterAttributes Attributes => ParameterAttributes.None;
 
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => Array.Empty<CustomAttributeData>();
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            Array.Empty<CustomAttributeData>();
 
         public sealed override int MetadataToken => 0x08000000; // nil ParamDef token
 

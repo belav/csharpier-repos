@@ -1,52 +1,36 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 // Note: If you add a new ctor overloads you need to update ParameterInfo.RawDefaultValue
 
-using System.Reflection;
-using System.Diagnostics.Contracts;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Reflection;
 
 namespace System.Runtime.CompilerServices
 {
     [Serializable]
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited=false)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class DecimalConstantAttribute : Attribute
     {
         [CLSCompliant(false)]
-        public DecimalConstantAttribute(
-            byte scale,
-            byte sign,
-            uint hi,
-            uint mid,
-            uint low
-        )
+        public DecimalConstantAttribute(byte scale, byte sign, uint hi, uint mid, uint low)
         {
-            dec = new System.Decimal((int) low, (int)mid, (int)hi, (sign != 0), scale);
+            dec = new System.Decimal((int)low, (int)mid, (int)hi, (sign != 0), scale);
         }
 
-        public DecimalConstantAttribute(
-            byte scale,
-            byte sign,
-            int hi,
-            int mid,
-            int low
-        )
+        public DecimalConstantAttribute(byte scale, byte sign, int hi, int mid, int low)
         {
             dec = new System.Decimal(low, mid, hi, (sign != 0), scale);
         }
 
-
         public System.Decimal Value
         {
-            get
-            {
-                return dec;
-            }
+            get { return dec; }
         }
 
         internal static Decimal GetRawDecimalConstant(CustomAttributeData attr)
@@ -58,7 +42,10 @@ namespace System.Runtime.CompilerServices
                 if (namedArgument.MemberInfo.Name.Equals("Value"))
                 {
                     // This is not possible because Decimal cannot be represented directly in the metadata.
-                    Contract.Assert(false, "Decimal cannot be represented directly in the metadata.");
+                    Contract.Assert(
+                        false,
+                        "Decimal cannot be represented directly in the metadata."
+                    );
                     return (Decimal)namedArgument.TypedValue.Value;
                 }
             }
@@ -66,7 +53,8 @@ namespace System.Runtime.CompilerServices
             ParameterInfo[] parameters = attr.Constructor.GetParameters();
             Contract.Assert(parameters.Length == 5);
 
-            System.Collections.Generic.IList<CustomAttributeTypedArgument> args = attr.ConstructorArguments;
+            System.Collections.Generic.IList<CustomAttributeTypedArgument> args =
+                attr.ConstructorArguments;
             Contract.Assert(args.Count == 5);
 
             if (parameters[2].ParameterType == typeof(uint))
@@ -96,4 +84,3 @@ namespace System.Runtime.CompilerServices
         private System.Decimal dec;
     }
 }
-

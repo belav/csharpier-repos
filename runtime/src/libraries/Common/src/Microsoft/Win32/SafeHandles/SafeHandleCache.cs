@@ -10,7 +10,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     /// <summary>Provides a cache for special instances of SafeHandles.</summary>
     /// <typeparam name="T">Specifies the type of SafeHandle.</typeparam>
-    internal static class SafeHandleCache<T> where T : SafeHandle
+    internal static class SafeHandleCache<T>
+        where T : SafeHandle
     {
         private static T? s_invalidHandle;
 
@@ -46,8 +47,14 @@ namespace Microsoft.Win32.SafeHandles
         internal static bool IsCachedInvalidHandle(SafeHandle handle)
         {
             Debug.Assert(handle != null);
-            bool isCachedInvalidHandle = ReferenceEquals(handle, Volatile.Read(ref s_invalidHandle));
-            Debug.Assert(!isCachedInvalidHandle || handle.IsInvalid, "The cached invalid handle must still be invalid.");
+            bool isCachedInvalidHandle = ReferenceEquals(
+                handle,
+                Volatile.Read(ref s_invalidHandle)
+            );
+            Debug.Assert(
+                !isCachedInvalidHandle || handle.IsInvalid,
+                "The cached invalid handle must still be invalid."
+            );
             return isCachedInvalidHandle;
         }
     }

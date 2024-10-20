@@ -6,12 +6,12 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Reflection;
-    using System.IO;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
     using System.Runtime;
+    using System.Text;
 
     internal class ResolveAssemblyHelper
     {
@@ -23,24 +23,23 @@ namespace Microsoft.Build.Tasks.Xaml
             this.references = references;
         }
 
-        public Dictionary<string, Assembly> ReferencedAssemblies
-        { 
-            get;
-            internal set; 
-        }
+        public Dictionary<string, Assembly> ReferencedAssemblies { get; internal set; }
 
         // We are storing the file not found in this static variable so that
         // later on we can print out the file name for the
-        // filenotfound exception thrown by CLR. 
-        // Ok to use static here as there will be only one instance of this 
+        // filenotfound exception thrown by CLR.
+        // Ok to use static here as there will be only one instance of this
         // process per app domain.
         internal static string FileNotFound
         {
             get { return fileNotfound; }
         }
 
-        [SuppressMessage(FxCop.Category.Reliability, FxCop.Rule.AvoidCallingProblematicMethods,
-            Justification = "Using LoadFrom to avoid loading through Fusion and load from the exact path specified")]
+        [SuppressMessage(
+            FxCop.Category.Reliability,
+            FxCop.Rule.AvoidCallingProblematicMethods,
+            Justification = "Using LoadFrom to avoid loading through Fusion and load from the exact path specified"
+        )]
         public Assembly ResolveLocalProjectReferences(object sender, ResolveEventArgs args)
         {
             // Currently we are return the assembly just by matching the short name
@@ -63,7 +62,13 @@ namespace Microsoft.Build.Tasks.Xaml
 
             foreach (string reference in this.references)
             {
-                if (string.Equals(targetName, Path.GetFileNameWithoutExtension(reference), StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        targetName,
+                        Path.GetFileNameWithoutExtension(reference),
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     Assembly assembly = Assembly.LoadFrom(reference);
                     if (assembly != null)
@@ -71,7 +76,9 @@ namespace Microsoft.Build.Tasks.Xaml
                         targetAssembly = assembly;
                         if (this.ReferencedAssemblies == null)
                         {
-                            this.ReferencedAssemblies = new Dictionary<string, Assembly>(StringComparer.OrdinalIgnoreCase);
+                            this.ReferencedAssemblies = new Dictionary<string, Assembly>(
+                                StringComparer.OrdinalIgnoreCase
+                            );
                         }
                         this.ReferencedAssemblies.Add(targetName, assembly);
                     }

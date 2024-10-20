@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -18,16 +18,17 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Dynamic.Utils;
 using System.Runtime.CompilerServices;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast {
+namespace Microsoft.Scripting.Ast
+{
     using Microsoft.Scripting.Utils;
 #else
-namespace System.Linq.Expressions {
+namespace System.Linq.Expressions
+{
 #endif
 
     /// <summary>
@@ -38,13 +39,12 @@ namespace System.Linq.Expressions {
     /// classes whose functionality requires traversing, examining or copying
     /// an expression tree.
     /// </remarks>
-    public abstract class ExpressionVisitor {
-
+    public abstract class ExpressionVisitor
+    {
         /// <summary>
         /// Initializes a new instance of <see cref="ExpressionVisitor"/>.
         /// </summary>
-        protected ExpressionVisitor() {
-        }
+        protected ExpressionVisitor() { }
 
         /// <summary>
         /// Dispatches the expression to one of the more specialized visit methods in this class.
@@ -52,8 +52,10 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        public virtual Expression Visit(Expression node) {
-            if (node != null) {
+        public virtual Expression Visit(Expression node)
+        {
+            if (node != null)
+            {
                 return node.Accept(this);
             }
             return null;
@@ -65,38 +67,51 @@ namespace System.Linq.Expressions {
         /// <param name="nodes">The expressions to visit.</param>
         /// <returns>The modified expression list, if any of the elements were modified;
         /// otherwise, returns the original expression list.</returns>
-        public ReadOnlyCollection<Expression> Visit(ReadOnlyCollection<Expression> nodes) {
+        public ReadOnlyCollection<Expression> Visit(ReadOnlyCollection<Expression> nodes)
+        {
             Expression[] newNodes = null;
-            for (int i = 0, n = nodes.Count; i < n; i++) {
+            for (int i = 0, n = nodes.Count; i < n; i++)
+            {
                 Expression node = Visit(nodes[i]);
 
-                if (newNodes != null) {
+                if (newNodes != null)
+                {
                     newNodes[i] = node;
-                } else if (!object.ReferenceEquals(node, nodes[i])) {
+                }
+                else if (!object.ReferenceEquals(node, nodes[i]))
+                {
                     newNodes = new Expression[n];
-                    for (int j = 0; j < i; j++) {
+                    for (int j = 0; j < i; j++)
+                    {
                         newNodes[j] = nodes[j];
                     }
                     newNodes[i] = node;
                 }
             }
-            if (newNodes == null) {
+            if (newNodes == null)
+            {
                 return nodes;
             }
             return new TrueReadOnlyCollection<Expression>(newNodes);
         }
 
-        internal Expression[] VisitArguments(IArgumentProvider nodes) {
+        internal Expression[] VisitArguments(IArgumentProvider nodes)
+        {
             Expression[] newNodes = null;
-            for (int i = 0, n = nodes.ArgumentCount; i < n; i++) {
+            for (int i = 0, n = nodes.ArgumentCount; i < n; i++)
+            {
                 Expression curNode = nodes.GetArgument(i);
                 Expression node = Visit(curNode);
 
-                if (newNodes != null) {
+                if (newNodes != null)
+                {
                     newNodes[i] = node;
-                } else if (!object.ReferenceEquals(node, curNode)) {
+                }
+                else if (!object.ReferenceEquals(node, curNode))
+                {
                     newNodes = new Expression[n];
-                    for (int j = 0; j < i; j++) {
+                    for (int j = 0; j < i; j++)
+                    {
                         newNodes[j] = nodes.GetArgument(j);
                     }
                     newNodes[i] = node;
@@ -114,21 +129,31 @@ namespace System.Linq.Expressions {
         /// optionally replacing it with a new element.</param>
         /// <returns>The modified node list, if any of the elements were modified;
         /// otherwise, returns the original node list.</returns>
-        public static ReadOnlyCollection<T> Visit<T>(ReadOnlyCollection<T> nodes, Func<T, T> elementVisitor) {
+        public static ReadOnlyCollection<T> Visit<T>(
+            ReadOnlyCollection<T> nodes,
+            Func<T, T> elementVisitor
+        )
+        {
             T[] newNodes = null;
-            for (int i = 0, n = nodes.Count; i < n; i++) {
+            for (int i = 0, n = nodes.Count; i < n; i++)
+            {
                 T node = elementVisitor(nodes[i]);
-                if (newNodes != null) {
+                if (newNodes != null)
+                {
                     newNodes[i] = node;
-                } else if (!object.ReferenceEquals(node, nodes[i])) {
+                }
+                else if (!object.ReferenceEquals(node, nodes[i]))
+                {
                     newNodes = new T[n];
-                    for (int j = 0; j < i; j++) {
+                    for (int j = 0; j < i; j++)
+                    {
                         newNodes[j] = nodes[j];
                     }
                     newNodes[i] = node;
                 }
             }
-            if (newNodes == null) {
+            if (newNodes == null)
+            {
                 return nodes;
             }
             return new TrueReadOnlyCollection<T>(newNodes);
@@ -143,12 +168,16 @@ namespace System.Linq.Expressions {
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
         /// <exception cref="InvalidOperationException">The visit method for this node returned a different type.</exception>
-        public T VisitAndConvert<T>(T node, string callerName) where T : Expression {
-            if (node == null) {
+        public T VisitAndConvert<T>(T node, string callerName)
+            where T : Expression
+        {
+            if (node == null)
+            {
                 return null;
             }
             node = Visit(node) as T;
-            if (node == null) {
+            if (node == null)
+            {
                 throw Error.MustRewriteToSameNode(callerName, typeof(T), callerName);
             }
             return node;
@@ -163,25 +192,37 @@ namespace System.Linq.Expressions {
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
         /// <exception cref="InvalidOperationException">The visit method for this node returned a different type.</exception>
-        public ReadOnlyCollection<T> VisitAndConvert<T>(ReadOnlyCollection<T> nodes, string callerName) where T : Expression {
+        public ReadOnlyCollection<T> VisitAndConvert<T>(
+            ReadOnlyCollection<T> nodes,
+            string callerName
+        )
+            where T : Expression
+        {
             T[] newNodes = null;
-            for (int i = 0, n = nodes.Count; i < n; i++) {
+            for (int i = 0, n = nodes.Count; i < n; i++)
+            {
                 T node = Visit(nodes[i]) as T;
-                if (node == null) {
+                if (node == null)
+                {
                     throw Error.MustRewriteToSameNode(callerName, typeof(T), callerName);
                 }
 
-                if (newNodes != null) {
+                if (newNodes != null)
+                {
                     newNodes[i] = node;
-                } else if (!object.ReferenceEquals(node, nodes[i])) {
+                }
+                else if (!object.ReferenceEquals(node, nodes[i]))
+                {
                     newNodes = new T[n];
-                    for (int j = 0; j < i; j++) {
+                    for (int j = 0; j < i; j++)
+                    {
                         newNodes[j] = nodes[j];
                     }
                     newNodes[i] = node;
                 }
             }
-            if (newNodes == null) {
+            if (newNodes == null)
+            {
                 return nodes;
             }
             return new TrueReadOnlyCollection<T>(newNodes);
@@ -193,7 +234,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitBinary(BinaryExpression node) {
+        protected internal virtual Expression VisitBinary(BinaryExpression node)
+        {
             // Walk children in evaluation order: left, conversion, right
             return ValidateBinary(
                 node,
@@ -211,15 +253,19 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitBlock(BlockExpression node) {
+        protected internal virtual Expression VisitBlock(BlockExpression node)
+        {
             int count = node.ExpressionCount;
             Expression[] nodes = null;
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 Expression oldNode = node.GetExpression(i);
                 Expression newNode = Visit(oldNode);
 
-                if (oldNode != newNode) {
-                    if (nodes == null) {
+                if (oldNode != newNode)
+                {
+                    if (nodes == null)
+                    {
                         nodes = new Expression[count];
                     }
                     nodes[i] = newNode;
@@ -227,11 +273,16 @@ namespace System.Linq.Expressions {
             }
             var v = VisitAndConvert(node.Variables, "VisitBlock");
 
-            if (v == node.Variables && nodes == null) {
+            if (v == node.Variables && nodes == null)
+            {
                 return node;
-            } else {
-                for (int i = 0; i < count; i++) {
-                    if (nodes[i] == null) {
+            }
+            else
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if (nodes[i] == null)
+                    {
                         nodes[i] = node.GetExpression(i);
                     }
                 }
@@ -246,7 +297,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitConditional(ConditionalExpression node) {
+        protected internal virtual Expression VisitConditional(ConditionalExpression node)
+        {
             return node.Update(Visit(node.Test), Visit(node.IfTrue), Visit(node.IfFalse));
         }
 
@@ -256,7 +308,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitConstant(ConstantExpression node) {
+        protected internal virtual Expression VisitConstant(ConstantExpression node)
+        {
             return node;
         }
 
@@ -266,7 +319,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitDebugInfo(DebugInfoExpression node) {
+        protected internal virtual Expression VisitDebugInfo(DebugInfoExpression node)
+        {
             return node;
         }
 
@@ -276,9 +330,11 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitDynamic(DynamicExpression node) {
+        protected internal virtual Expression VisitDynamic(DynamicExpression node)
+        {
             Expression[] a = VisitArguments((IArgumentProvider)node);
-            if (a == null) {
+            if (a == null)
+            {
                 return node;
             }
 
@@ -291,7 +347,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitDefault(DefaultExpression node) {
+        protected internal virtual Expression VisitDefault(DefaultExpression node)
+        {
             return node;
         }
 
@@ -307,7 +364,8 @@ namespace System.Linq.Expressions {
         /// which gives the node a chance to walk its children. By default,
         /// <see cref="Expression.VisitChildren" /> will try to reduce the node.
         /// </remarks>
-        protected internal virtual Expression VisitExtension(Expression node) {
+        protected internal virtual Expression VisitExtension(Expression node)
+        {
             return node.VisitChildren(this);
         }
 
@@ -317,7 +375,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitGoto(GotoExpression node) {
+        protected internal virtual Expression VisitGoto(GotoExpression node)
+        {
             return node.Update(VisitLabelTarget(node.Target), Visit(node.Value));
         }
 
@@ -327,10 +386,12 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitInvocation(InvocationExpression node) {
+        protected internal virtual Expression VisitInvocation(InvocationExpression node)
+        {
             Expression e = Visit(node.Expression);
             Expression[] a = VisitArguments(node);
-            if (e == node.Expression && a == null) {
+            if (e == node.Expression && a == null)
+            {
                 return node;
             }
 
@@ -343,7 +404,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected virtual LabelTarget VisitLabelTarget(LabelTarget node) {
+        protected virtual LabelTarget VisitLabelTarget(LabelTarget node)
+        {
             return node;
         }
 
@@ -353,7 +415,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitLabel(LabelExpression node) {
+        protected internal virtual Expression VisitLabel(LabelExpression node)
+        {
             return node.Update(VisitLabelTarget(node.Target), Visit(node.DefaultValue));
         }
 
@@ -364,7 +427,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitLambda<T>(Expression<T> node) {
+        protected internal virtual Expression VisitLambda<T>(Expression<T> node)
+        {
             return node.Update(Visit(node.Body), VisitAndConvert(node.Parameters, "VisitLambda"));
         }
 
@@ -374,8 +438,13 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitLoop(LoopExpression node) {
-            return node.Update(VisitLabelTarget(node.BreakLabel), VisitLabelTarget(node.ContinueLabel), Visit(node.Body));
+        protected internal virtual Expression VisitLoop(LoopExpression node)
+        {
+            return node.Update(
+                VisitLabelTarget(node.BreakLabel),
+                VisitLabelTarget(node.ContinueLabel),
+                Visit(node.Body)
+            );
         }
 
         /// <summary>
@@ -384,7 +453,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitMember(MemberExpression node) {
+        protected internal virtual Expression VisitMember(MemberExpression node)
+        {
             return node.Update(Visit(node.Expression));
         }
 
@@ -394,10 +464,12 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitIndex(IndexExpression node) {
+        protected internal virtual Expression VisitIndex(IndexExpression node)
+        {
             Expression o = Visit(node.Object);
             Expression[] a = VisitArguments(node);
-            if (o == node.Object && a == null) {
+            if (o == node.Object && a == null)
+            {
                 return node;
             }
 
@@ -410,10 +482,12 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitMethodCall(MethodCallExpression node) {
+        protected internal virtual Expression VisitMethodCall(MethodCallExpression node)
+        {
             Expression o = Visit(node.Object);
             Expression[] a = VisitArguments((IArgumentProvider)node);
-            if (o == node.Object && a == null) {
+            if (o == node.Object && a == null)
+            {
                 return node;
             }
 
@@ -426,7 +500,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitNewArray(NewArrayExpression node) {
+        protected internal virtual Expression VisitNewArray(NewArrayExpression node)
+        {
             return node.Update(Visit(node.Expressions));
         }
 
@@ -436,8 +511,12 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        protected internal virtual Expression VisitNew(NewExpression node) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1711:IdentifiersShouldNotHaveIncorrectSuffix"
+        )]
+        protected internal virtual Expression VisitNew(NewExpression node)
+        {
             return node.Update(Visit(node.Arguments));
         }
 
@@ -447,7 +526,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitParameter(ParameterExpression node) {
+        protected internal virtual Expression VisitParameter(ParameterExpression node)
+        {
             return node;
         }
 
@@ -457,7 +537,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitRuntimeVariables(RuntimeVariablesExpression node) {
+        protected internal virtual Expression VisitRuntimeVariables(RuntimeVariablesExpression node)
+        {
             return node.Update(VisitAndConvert(node.Variables, "VisitRuntimeVariables"));
         }
 
@@ -467,7 +548,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected virtual SwitchCase VisitSwitchCase(SwitchCase node) {
+        protected virtual SwitchCase VisitSwitchCase(SwitchCase node)
+        {
             return node.Update(Visit(node.TestValues), Visit(node.Body));
         }
 
@@ -477,7 +559,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitSwitch(SwitchExpression node) {
+        protected internal virtual Expression VisitSwitch(SwitchExpression node)
+        {
             return ValidateSwitch(
                 node,
                 node.Update(
@@ -494,8 +577,13 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected virtual CatchBlock VisitCatchBlock(CatchBlock node) {
-            return node.Update(VisitAndConvert(node.Variable, "VisitCatchBlock"), Visit(node.Filter), Visit(node.Body));
+        protected virtual CatchBlock VisitCatchBlock(CatchBlock node)
+        {
+            return node.Update(
+                VisitAndConvert(node.Variable, "VisitCatchBlock"),
+                Visit(node.Filter),
+                Visit(node.Body)
+            );
         }
 
         /// <summary>
@@ -504,7 +592,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitTry(TryExpression node) {
+        protected internal virtual Expression VisitTry(TryExpression node)
+        {
             return node.Update(
                 Visit(node.Body),
                 Visit(node.Handlers, VisitCatchBlock),
@@ -519,7 +608,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitTypeBinary(TypeBinaryExpression node) {
+        protected internal virtual Expression VisitTypeBinary(TypeBinaryExpression node)
+        {
             return node.Update(Visit(node.Expression));
         }
 
@@ -529,7 +619,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitUnary(UnaryExpression node) {
+        protected internal virtual Expression VisitUnary(UnaryExpression node)
+        {
             return ValidateUnary(node, node.Update(Visit(node.Operand)));
         }
 
@@ -539,7 +630,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitMemberInit(MemberInitExpression node) {
+        protected internal virtual Expression VisitMemberInit(MemberInitExpression node)
+        {
             return node.Update(
                 VisitAndConvert(node.NewExpression, "VisitMemberInit"),
                 Visit(node.Bindings, VisitMemberBinding)
@@ -552,7 +644,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal virtual Expression VisitListInit(ListInitExpression node) {
+        protected internal virtual Expression VisitListInit(ListInitExpression node)
+        {
             return node.Update(
                 VisitAndConvert(node.NewExpression, "VisitListInit"),
                 Visit(node.Initializers, VisitElementInit)
@@ -565,7 +658,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected virtual ElementInit VisitElementInit(ElementInit node) {
+        protected virtual ElementInit VisitElementInit(ElementInit node)
+        {
             return node.Update(Visit(node.Arguments));
         }
 
@@ -575,8 +669,10 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected virtual MemberBinding VisitMemberBinding(MemberBinding node) {
-            switch (node.BindingType) {
+        protected virtual MemberBinding VisitMemberBinding(MemberBinding node)
+        {
+            switch (node.BindingType)
+            {
                 case MemberBindingType.Assignment:
                     return VisitMemberAssignment((MemberAssignment)node);
                 case MemberBindingType.MemberBinding:
@@ -594,7 +690,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment node) {
+        protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment node)
+        {
             return node.Update(Visit(node.Expression));
         }
 
@@ -604,7 +701,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding node) {
+        protected virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding node)
+        {
             return node.Update(Visit(node.Bindings, VisitMemberBinding));
         }
 
@@ -614,10 +712,10 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding node) {
+        protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding node)
+        {
             return node.Update(Visit(node.Initializers, VisitElementInit));
         }
-
 
         //
         // Prevent some common cases of invalid rewrites.
@@ -627,23 +725,33 @@ namespace System.Linq.Expressions {
         // require derived classes to be explicit about what they want to do if
         // types change.
         //
-        private static UnaryExpression ValidateUnary(UnaryExpression before, UnaryExpression after) {
-            if (before != after && before.Method == null) {
-                if (after.Method != null) {
+        private static UnaryExpression ValidateUnary(UnaryExpression before, UnaryExpression after)
+        {
+            if (before != after && before.Method == null)
+            {
+                if (after.Method != null)
+                {
                     throw Error.MustRewriteWithoutMethod(after.Method, "VisitUnary");
                 }
 
                 // rethrow has null operand
-                if (before.Operand != null && after.Operand != null) {
+                if (before.Operand != null && after.Operand != null)
+                {
                     ValidateChildType(before.Operand.Type, after.Operand.Type, "VisitUnary");
                 }
             }
             return after;
         }
 
-        private static BinaryExpression ValidateBinary(BinaryExpression before, BinaryExpression after) {
-            if (before != after && before.Method == null) {
-                if (after.Method != null) {
+        private static BinaryExpression ValidateBinary(
+            BinaryExpression before,
+            BinaryExpression after
+        )
+        {
+            if (before != after && before.Method == null)
+            {
+                if (after.Method != null)
+                {
                     throw Error.MustRewriteWithoutMethod(after.Method, "VisitBinary");
                 }
 
@@ -654,10 +762,15 @@ namespace System.Linq.Expressions {
         }
 
         // We wouldn't need this if switch didn't infer the method.
-        private static SwitchExpression ValidateSwitch(SwitchExpression before, SwitchExpression after) {
+        private static SwitchExpression ValidateSwitch(
+            SwitchExpression before,
+            SwitchExpression after
+        )
+        {
             // If we did not have a method, we don't want to bind to one,
             // it might not be the right thing.
-            if (before.Comparison == null && after.Comparison != null) {
+            if (before.Comparison == null && after.Comparison != null)
+            {
                 throw Error.MustRewriteWithoutMethod(after.Comparison, "VisitSwitch");
             }
             return after;
@@ -665,13 +778,18 @@ namespace System.Linq.Expressions {
 
         // Value types must stay as the same type, otherwise it's now a
         // different operation, e.g. adding two doubles vs adding two ints.
-        private static void ValidateChildType(Type before, Type after, string methodName) {
-            if (before.IsValueType) {
-                if (TypeUtils.AreEquivalent(before, after)) {
+        private static void ValidateChildType(Type before, Type after, string methodName)
+        {
+            if (before.IsValueType)
+            {
+                if (TypeUtils.AreEquivalent(before, after))
+                {
                     // types are the same value type
                     return;
                 }
-            } else if (!after.IsValueType) {
+            }
+            else if (!after.IsValueType)
+            {
                 // both are reference types
                 return;
             }
@@ -690,13 +808,12 @@ namespace System.Linq.Expressions {
     /// classes whose functionality requires traversing, examining or copying
     /// a dynamic expression tree.
     /// </remarks>
-    public abstract class DynamicExpressionVisitor : ExpressionVisitor {
-
+    public abstract class DynamicExpressionVisitor : ExpressionVisitor
+    {
         /// <summary>
         /// Initializes a new instance of <see cref="DynamicExpressionVisitor"/>.
         /// </summary>
-        protected DynamicExpressionVisitor() {
-        }
+        protected DynamicExpressionVisitor() { }
 
         /// <summary>
         /// Visits the children of the <see cref="DynamicExpression" />.
@@ -704,7 +821,8 @@ namespace System.Linq.Expressions {
         /// <param name="node">The expression to visit.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        protected internal override Expression VisitDynamic(DynamicExpression node) {
+        protected internal override Expression VisitDynamic(DynamicExpression node)
+        {
             return base.VisitDynamic(node);
         }
     }

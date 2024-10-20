@@ -13,17 +13,31 @@ namespace System.Runtime.Loader.Tests
             return Assembly.Load(assemblyName);
         }
 
-        public static Assembly GetRefEmitAssembly(string assemblyNameStr, AssemblyBuilderAccess builderType)
+        public static Assembly GetRefEmitAssembly(
+            string assemblyNameStr,
+            AssemblyBuilderAccess builderType
+        )
         {
             var assemblyName = new AssemblyName(assemblyNameStr);
 
-            AssemblyBuilder builder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, builderType);
+            AssemblyBuilder builder = AssemblyBuilder.DefineDynamicAssembly(
+                assemblyName,
+                builderType
+            );
             ModuleBuilder moduleBuilder = builder.DefineDynamicModule("RefEmitModule");
 
-            TypeBuilder typeBuilder = moduleBuilder.DefineType("RefEmitTestType", TypeAttributes.Public);
+            TypeBuilder typeBuilder = moduleBuilder.DefineType(
+                "RefEmitTestType",
+                TypeAttributes.Public
+            );
 
             // Define "Assembly LoadStaticAssembly(string)" method that will load a static assembly
-            MethodBuilder methodBuilder = typeBuilder.DefineMethod("LoadStaticAssembly", MethodAttributes.Public|MethodAttributes.Static, typeof(Assembly), new Type[]{typeof(string)});
+            MethodBuilder methodBuilder = typeBuilder.DefineMethod(
+                "LoadStaticAssembly",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(Assembly),
+                new Type[] { typeof(string) }
+            );
             ILGenerator ilGenerator = methodBuilder.GetILGenerator();
 
             // Generate the following code:
@@ -36,7 +50,10 @@ namespace System.Runtime.Loader.Tests
             LocalBuilder localAssembly = ilGenerator.DeclareLocal(typeof(Assembly));
 
             // Fetch reference to AssemblyName ctor we want to invoke
-            ConstructorInfo ctorAssemblyName = TypeExtensions.GetConstructor(typeof(System.Reflection.AssemblyName), new Type[] {typeof(string)});
+            ConstructorInfo ctorAssemblyName = TypeExtensions.GetConstructor(
+                typeof(System.Reflection.AssemblyName),
+                new Type[] { typeof(string) }
+            );
 
             // Load incoming assemblyname string
             ilGenerator.Emit(OpCodes.Ldarg_0);
@@ -47,7 +64,11 @@ namespace System.Runtime.Loader.Tests
             // "this" for assemblyname instance is already at the top of evaluation stack.
             //
             // Invoke Assembly.Load
-            MethodInfo miAssemblyLoad = TypeExtensions.GetMethod(typeof(System.Reflection.Assembly), "Load", new Type[] {typeof(System.Reflection.AssemblyName)});
+            MethodInfo miAssemblyLoad = TypeExtensions.GetMethod(
+                typeof(System.Reflection.Assembly),
+                "Load",
+                new Type[] { typeof(System.Reflection.AssemblyName) }
+            );
             ilGenerator.Emit(OpCodes.Call, miAssemblyLoad);
 
             // Return the reference to the loaded assembly

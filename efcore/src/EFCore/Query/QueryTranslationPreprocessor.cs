@@ -27,7 +27,8 @@ public class QueryTranslationPreprocessor
     /// <param name="queryCompilationContext">The query compilation context object to use.</param>
     public QueryTranslationPreprocessor(
         QueryTranslationPreprocessorDependencies dependencies,
-        QueryCompilationContext queryCompilationContext)
+        QueryCompilationContext queryCompilationContext
+    )
     {
         Dependencies = dependencies;
         QueryCompilationContext = queryCompilationContext;
@@ -54,13 +55,15 @@ public class QueryTranslationPreprocessor
         query = NormalizeQueryableMethod(query);
         query = new CallForwardingExpressionVisitor().Visit(query);
         query = new NullCheckRemovingExpressionVisitor().Visit(query);
-        query = new SubqueryMemberPushdownExpressionVisitor(QueryCompilationContext.Model).Visit(query);
+        query = new SubqueryMemberPushdownExpressionVisitor(QueryCompilationContext.Model).Visit(
+            query
+        );
         query = new NavigationExpandingExpressionVisitor(
-                this,
-                QueryCompilationContext,
-                Dependencies.EvaluatableExpressionFilter,
-                Dependencies.NavigationExpansionExtensibilityHelper)
-            .Expand(query);
+            this,
+            QueryCompilationContext,
+            Dependencies.EvaluatableExpressionFilter,
+            Dependencies.NavigationExpansionExtensibilityHelper
+        ).Expand(query);
         query = new QueryOptimizingExpressionVisitor().Visit(query);
         query = new NullCheckRemovingExpressionVisitor().Visit(query);
 
@@ -79,7 +82,9 @@ public class QueryTranslationPreprocessor
     /// <returns>A query expression after normalization has been done.</returns>
     public virtual Expression NormalizeQueryableMethod(Expression expression)
     {
-        expression = new QueryableMethodNormalizingExpressionVisitor(QueryCompilationContext).Normalize(expression);
+        expression = new QueryableMethodNormalizingExpressionVisitor(
+            QueryCompilationContext
+        ).Normalize(expression);
         expression = ProcessQueryRoots(expression);
 
         return expression;
@@ -90,6 +95,6 @@ public class QueryTranslationPreprocessor
     /// </summary>
     /// <param name="expression">The query expression to process.</param>
     /// <returns>A query expression after query roots have been added.</returns>
-    protected virtual Expression ProcessQueryRoots(Expression expression)
-        => new QueryRootProcessor(Dependencies, QueryCompilationContext).Visit(expression);
+    protected virtual Expression ProcessQueryRoots(Expression expression) =>
+        new QueryRootProcessor(Dependencies, QueryCompilationContext).Visit(expression);
 }

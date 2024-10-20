@@ -17,11 +17,9 @@ namespace System.Text.Json.SourceGeneration.Tests.NETStandard
         private int PrivateValue { get; set; } = 4;
         protected int ProtectedValue { get; set; } = 8;
         private protected int PrivateProtectedValue { get; set; } = 16;
-        internal protected int InternalProtectedValue { get; set; } = 32;
+        protected internal int InternalProtectedValue { get; set; } = 32;
     }
 
     [JsonSerializable(typeof(MyPoco))]
-    public partial class NETStandardSerializerContext : JsonSerializerContext
-    {
-    }
+    public partial class NETStandardSerializerContext : JsonSerializerContext { }
 }

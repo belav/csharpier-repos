@@ -12,7 +12,12 @@ namespace System
     public abstract partial class Enum
     {
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "Enum_GetValuesAndNames")]
-        private static partial void GetEnumValuesAndNames(QCallTypeHandle enumType, ObjectHandleOnStack values, ObjectHandleOnStack names, Interop.BOOL getNames);
+        private static partial void GetEnumValuesAndNames(
+            QCallTypeHandle enumType,
+            ObjectHandleOnStack values,
+            ObjectHandleOnStack names,
+            Interop.BOOL getNames
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern object InternalBoxEnum(RuntimeType enumType, long value);
@@ -24,7 +29,9 @@ namespace System
         private static unsafe CorElementType InternalGetCorElementType(RuntimeType rt)
         {
             Debug.Assert(rt.IsActualEnum);
-            CorElementType elementType = InternalGetCorElementType((MethodTable*)rt.GetUnderlyingNativeHandle());
+            CorElementType elementType = InternalGetCorElementType(
+                (MethodTable*)rt.GetUnderlyingNativeHandle()
+            );
             GC.KeepAlive(rt);
             return elementType;
         }
@@ -32,7 +39,9 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private unsafe CorElementType InternalGetCorElementType()
         {
-            CorElementType elementType = InternalGetCorElementType(RuntimeHelpers.GetMethodTable(this));
+            CorElementType elementType = InternalGetCorElementType(
+                RuntimeHelpers.GetMethodTable(this)
+            );
             GC.KeepAlive(this);
             return elementType;
         }
@@ -65,7 +74,7 @@ namespace System
             null,
             null,
             (RuntimeType)typeof(nint),
-            (RuntimeType)typeof(nuint)
+            (RuntimeType)typeof(nuint),
         };
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -74,7 +83,9 @@ namespace System
             // Sanity check the last element in the table
             Debug.Assert(s_underlyingTypes[(int)CorElementType.ELEMENT_TYPE_U] == typeof(nuint));
 
-            RuntimeType? underlyingType = s_underlyingTypes[(int)InternalGetCorElementType((MethodTable*)enumType.GetUnderlyingNativeHandle())];
+            RuntimeType? underlyingType = s_underlyingTypes[
+                (int)InternalGetCorElementType((MethodTable*)enumType.GetUnderlyingNativeHandle())
+            ];
             GC.KeepAlive(enumType);
 
             Debug.Assert(underlyingType != null);
@@ -82,17 +93,29 @@ namespace System
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static EnumInfo<TStorage> GetEnumInfo<TStorage>(RuntimeType enumType, bool getNames = true)
+        private static EnumInfo<TStorage> GetEnumInfo<TStorage>(
+            RuntimeType enumType,
+            bool getNames = true
+        )
             where TStorage : struct, INumber<TStorage>
         {
             Debug.Assert(
-                typeof(TStorage) == typeof(byte) || typeof(TStorage) == typeof(ushort) || typeof(TStorage) == typeof(uint) || typeof(TStorage) == typeof(ulong) ||
-                typeof(TStorage) == typeof(nuint) || typeof(TStorage) == typeof(float) || typeof(TStorage) == typeof(double) || typeof(TStorage) == typeof(char),
-                $"Unexpected {nameof(TStorage)} == {typeof(TStorage)}");
+                typeof(TStorage) == typeof(byte)
+                    || typeof(TStorage) == typeof(ushort)
+                    || typeof(TStorage) == typeof(uint)
+                    || typeof(TStorage) == typeof(ulong)
+                    || typeof(TStorage) == typeof(nuint)
+                    || typeof(TStorage) == typeof(float)
+                    || typeof(TStorage) == typeof(double)
+                    || typeof(TStorage) == typeof(char),
+                $"Unexpected {nameof(TStorage)} == {typeof(TStorage)}"
+            );
 
-            return enumType.GenericCache is EnumInfo<TStorage> info && (!getNames || info.Names is not null) ?
-                info :
-                InitializeEnumInfo(enumType, getNames);
+            return
+                enumType.GenericCache is EnumInfo<TStorage> info
+                && (!getNames || info.Names is not null)
+                ? info
+                : InitializeEnumInfo(enumType, getNames);
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             static EnumInfo<TStorage> InitializeEnumInfo(RuntimeType enumType, bool getNames)
@@ -104,7 +127,8 @@ namespace System
                     new QCallTypeHandle(ref enumType),
                     ObjectHandleOnStack.Create(ref values),
                     ObjectHandleOnStack.Create(ref names),
-                    getNames ? Interop.BOOL.TRUE : Interop.BOOL.FALSE);
+                    getNames ? Interop.BOOL.TRUE : Interop.BOOL.FALSE
+                );
 
                 Debug.Assert(values!.GetType() == typeof(TStorage[]));
                 Debug.Assert(!getNames || names!.GetType() == typeof(string[]));

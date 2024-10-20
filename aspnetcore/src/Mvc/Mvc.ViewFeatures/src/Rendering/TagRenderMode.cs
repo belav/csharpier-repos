@@ -26,5 +26,5 @@ public enum TagRenderMode
     /// <summary>
     /// Self closing mode.
     /// </summary>
-    SelfClosing
+    SelfClosing,
 }

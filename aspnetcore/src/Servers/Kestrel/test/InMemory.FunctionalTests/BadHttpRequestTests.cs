@@ -4,11 +4,11 @@
 using System.Diagnostics;
 using System.Text;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
@@ -24,10 +24,7 @@ public class BadHttpRequestTests : LoggedTest
     [MemberData(nameof(InvalidRequestLineData))]
     public Task TestInvalidRequestLines(string request, string expectedExceptionMessage)
     {
-        return TestBadRequest(
-            request,
-            "400 Bad Request",
-            expectedExceptionMessage);
+        return TestBadRequest(request, "400 Bad Request", expectedExceptionMessage);
     }
 
     [Theory]
@@ -37,7 +34,8 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             $"GET / {httpVersion}\r\n",
             "505 HTTP Version Not Supported",
-            CoreStrings.FormatBadRequest_UnrecognizedHTTPVersion(httpVersion));
+            CoreStrings.FormatBadRequest_UnrecognizedHTTPVersion(httpVersion)
+        );
     }
 
     [Theory]
@@ -47,23 +45,38 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             $"GET / HTTP/1.1\r\n{rawHeaders}",
             "400 Bad Request",
-            expectedExceptionMessage);
+            expectedExceptionMessage
+        );
     }
 
-    public static Dictionary<string, (string header, string errorMessage)> BadHeaderData => new Dictionary<string, (string, string)>
+    public static Dictionary<string, (string header, string errorMessage)> BadHeaderData =>
+        new Dictionary<string, (string, string)>
         {
-            { "Hea\0der: value".EscapeNonPrintable(), ("Hea\0der: value", "Invalid characters in header name.") },
-            { "Header: va\0lue".EscapeNonPrintable(), ("Header: va\0lue", "Malformed request: invalid headers.") },
-            { "Head\x80r: value".EscapeNonPrintable(), ("Head\x80r: value", "Invalid characters in header name.") },
-            { "Header: valu\x80".EscapeNonPrintable(), ("Header: valu\x80", "Malformed request: invalid headers.") },
+            {
+                "Hea\0der: value".EscapeNonPrintable(),
+                ("Hea\0der: value", "Invalid characters in header name.")
+            },
+            {
+                "Header: va\0lue".EscapeNonPrintable(),
+                ("Header: va\0lue", "Malformed request: invalid headers.")
+            },
+            {
+                "Head\x80r: value".EscapeNonPrintable(),
+                ("Head\x80r: value", "Invalid characters in header name.")
+            },
+            {
+                "Header: valu\x80".EscapeNonPrintable(),
+                ("Header: valu\x80", "Malformed request: invalid headers.")
+            },
         };
 
-    public static TheoryData<string> BadHeaderDataNames => new TheoryData<string>
+    public static TheoryData<string> BadHeaderDataNames =>
+        new TheoryData<string>
         {
             "Hea\0der: value".EscapeNonPrintable(),
             "Header: va\0lue".EscapeNonPrintable(),
             "Head\x80r: value".EscapeNonPrintable(),
-            "Header: valu\x80".EscapeNonPrintable()
+            "Header: valu\x80".EscapeNonPrintable(),
         };
 
     [Theory]
@@ -77,7 +90,8 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             $"GET / HTTP/1.1\r\n{header}\r\n\r\n",
             "400 Bad Request",
-            errorMessage);
+            errorMessage
+        );
     }
 
     [Theory]
@@ -88,7 +102,8 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             $"{method} / HTTP/1.0\r\n\r\n",
             "400 Bad Request",
-            CoreStrings.FormatBadRequest_LengthRequiredHttp10(method));
+            CoreStrings.FormatBadRequest_LengthRequiredHttp10(method)
+        );
     }
 
     [Theory]
@@ -99,7 +114,8 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             $"POST / HTTP/1.1\r\nHost:\r\nContent-Length: {contentLength}\r\n\r\n",
             "400 Bad Request",
-            CoreStrings.FormatBadRequest_InvalidContentLength_Detail(contentLength));
+            CoreStrings.FormatBadRequest_InvalidContentLength_Detail(contentLength)
+        );
     }
 
     [Theory]
@@ -111,7 +127,8 @@ public class BadHttpRequestTests : LoggedTest
             $"{request} HTTP/1.1\r\n",
             "405 Method Not Allowed",
             CoreStrings.BadRequest_MethodNotAllowed,
-            $"Allow: {allowedMethod}");
+            $"Allow: {allowedMethod}"
+        );
     }
 
     [Fact]
@@ -120,15 +137,18 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             "GET / HTTP/1.1\r\n\r\n",
             "400 Bad Request",
-            CoreStrings.BadRequest_MissingHostHeader);
+            CoreStrings.BadRequest_MissingHostHeader
+        );
     }
 
     [Fact]
     public Task BadRequestIfMultipleHostHeaders()
     {
-        return TestBadRequest("GET / HTTP/1.1\r\nHost: localhost\r\nHost: localhost\r\n\r\n",
+        return TestBadRequest(
+            "GET / HTTP/1.1\r\nHost: localhost\r\nHost: localhost\r\n\r\n",
             "400 Bad Request",
-            CoreStrings.BadRequest_MultipleHostHeaders);
+            CoreStrings.BadRequest_MultipleHostHeaders
+        );
     }
 
     [Theory]
@@ -138,7 +158,8 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             $"{requestTarget} HTTP/1.1\r\nHost: {host}\r\n\r\n",
             "400 Bad Request",
-            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(host.Trim()));
+            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail(host.Trim())
+        );
     }
 
     [Theory]
@@ -147,17 +168,17 @@ public class BadHttpRequestTests : LoggedTest
     public async Task CanOptOutOfBadRequestIfHostHeaderDoesNotMatchRequestTarget(string hostHeader)
     {
         var receivedHost = StringValues.Empty;
-        await using var server = new TestServer(context =>
-        {
-            receivedHost = context.Request.Headers.Host;
-            return Task.CompletedTask;
-        }, new TestServiceContext(LoggerFactory)
-        {
-            ServerOptions = new KestrelServerOptions()
+        await using var server = new TestServer(
+            context =>
             {
-                AllowHostHeaderOverride = true,
+                receivedHost = context.Request.Headers.Host;
+                return Task.CompletedTask;
+            },
+            new TestServiceContext(LoggerFactory)
+            {
+                ServerOptions = new KestrelServerOptions() { AllowHostHeaderOverride = true },
             }
-        });
+        );
         using var client = server.CreateConnection();
 
         await client.SendAll($"GET http://www.foo.com/api/data HTTP/1.1\r\n{hostHeader}\r\n\r\n");
@@ -173,7 +194,8 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             $"GET / HTTP/1.0\r\nHost: a=b\r\n\r\n",
             "400 Bad Request",
-            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b"));
+            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b")
+        );
     }
 
     [Fact]
@@ -182,41 +204,57 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             $"GET / HTTP/1.1\r\nHost: a=b\r\n\r\n",
             "400 Bad Request",
-            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b"));
+            CoreStrings.FormatBadRequest_InvalidHostHeader_Detail("a=b")
+        );
     }
 
     [Fact]
     public async Task BadRequestLogsAreNotHigherThanDebug()
     {
-        await using (var server = new TestServer(async context =>
-        {
-            await context.Request.Body.ReadAsync(new byte[1], 0, 1);
-        }, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    await context.Request.Body.ReadAsync(new byte[1], 0, 1);
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.SendAll(
-                    "GET ? HTTP/1.1",
-                    "",
-                    "");
-                await ReceiveBadRequestResponse(connection, "400 Bad Request", server.Context.DateHeaderValue);
+                await connection.SendAll("GET ? HTTP/1.1", "", "");
+                await ReceiveBadRequestResponse(
+                    connection,
+                    "400 Bad Request",
+                    server.Context.DateHeaderValue
+                );
             }
         }
 
-        Assert.All(TestSink.Writes.Where(w => w.LoggerName != "Microsoft.Hosting.Lifetime"), w => Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Debug));
+        Assert.All(
+            TestSink.Writes.Where(w => w.LoggerName != "Microsoft.Hosting.Lifetime"),
+            w => Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Debug)
+        );
         Assert.Contains(TestSink.Writes, w => w.EventId.Id == 17);
     }
 
     [Fact]
     public async Task TestRequestSplitting()
     {
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var client = server.CreateConnection())
             {
                 await client.SendAll(
                     "GET /\x0D\0x0ALocation:http://www.contoso.com/ HTTP/1.1",
-                    "Host:\r\n\r\n");
+                    "Host:\r\n\r\n"
+                );
 
                 await client.Receive("HTTP/1.1 400");
             }
@@ -226,11 +264,18 @@ public class BadHttpRequestTests : LoggedTest
     [Fact]
     public async Task BadRequestForHttp2()
     {
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var client = server.CreateConnection())
             {
-                await client.Stream.WriteAsync(Core.Internal.Http2.Http2Connection.ClientPreface.ToArray()).DefaultTimeout();
+                await client
+                    .Stream.WriteAsync(Core.Internal.Http2.Http2Connection.ClientPreface.ToArray())
+                    .DefaultTimeout();
 
                 var data = await client.Stream.ReadAtLeastLengthAsync(17);
 
@@ -246,7 +291,10 @@ public class BadHttpRequestTests : LoggedTest
         return TestBadRequest(
             $"GET http://localhost/ÿÿÿ HTTP/1.1\r\n",
             "400 Bad Request",
-            CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail("http://localhost/\\xFF\\xFF\\xFF"));
+            CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail(
+                "http://localhost/\\xFF\\xFF\\xFF"
+            )
+        );
     }
 
     private class BadRequestEventListener : IObserver<KeyValuePair<string, object>>, IDisposable
@@ -256,33 +304,50 @@ public class BadHttpRequestTests : LoggedTest
 
         public bool EventFired { get; set; }
 
-        public BadRequestEventListener(DiagnosticListener diagnosticListener, Action<KeyValuePair<string, object>> callback)
+        public BadRequestEventListener(
+            DiagnosticListener diagnosticListener,
+            Action<KeyValuePair<string, object>> callback
+        )
         {
             _subscription = diagnosticListener.Subscribe(this, IsEnabled);
             _callback = callback;
         }
-        private static readonly Predicate<string> IsEnabled = (provider) => provider switch
-        {
-            "Microsoft.AspNetCore.Server.Kestrel.BadRequest" => true,
-            _ => false
-        };
+
+        private static readonly Predicate<string> IsEnabled = (provider) =>
+            provider switch
+            {
+                "Microsoft.AspNetCore.Server.Kestrel.BadRequest" => true,
+                _ => false,
+            };
+
         public void OnNext(KeyValuePair<string, object> pair)
         {
             EventFired = true;
             _callback(pair);
         }
+
         public void OnError(Exception error) { }
+
         public void OnCompleted() { }
+
         public virtual void Dispose() => _subscription.Dispose();
     }
 
-    private async Task TestBadRequest(string request, string expectedResponseStatusCode, string expectedExceptionMessage, string expectedAllowHeader = null)
+    private async Task TestBadRequest(
+        string request,
+        string expectedResponseStatusCode,
+        string expectedExceptionMessage,
+        string expectedAllowHeader = null
+    )
     {
         BadHttpRequestException loggedException = null;
 
         TestSink.MessageLogged += context =>
         {
-            if (context.EventId.Name == "ConnectionBadRequest" && context.Exception is BadHttpRequestException ex)
+            if (
+                context.EventId.Name == "ConnectionBadRequest"
+                && context.Exception is BadHttpRequestException ex
+            )
             {
                 loggedException = ex;
             }
@@ -292,23 +357,36 @@ public class BadHttpRequestTests : LoggedTest
         var diagListener = new DiagnosticListener("BadRequestTestsDiagListener");
         string eventProviderName = "";
         string exceptionString = "";
-        var badRequestEventListener = new BadRequestEventListener(diagListener, (pair) =>
-        {
-            eventProviderName = pair.Key;
-            var featureCollection = pair.Value as IFeatureCollection;
-            if (featureCollection is not null)
+        var badRequestEventListener = new BadRequestEventListener(
+            diagListener,
+            (pair) =>
             {
-                var badRequestFeature = featureCollection.Get<IBadRequestExceptionFeature>();
-                exceptionString = badRequestFeature.Error.ToString();
+                eventProviderName = pair.Key;
+                var featureCollection = pair.Value as IFeatureCollection;
+                if (featureCollection is not null)
+                {
+                    var badRequestFeature = featureCollection.Get<IBadRequestExceptionFeature>();
+                    exceptionString = badRequestFeature.Error.ToString();
+                }
             }
-        });
+        );
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory) { DiagnosticSource = diagListener }))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory) { DiagnosticSource = diagListener }
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
                 await connection.SendAll(request);
-                await ReceiveBadRequestResponse(connection, expectedResponseStatusCode, server.Context.DateHeaderValue, expectedAllowHeader);
+                await ReceiveBadRequestResponse(
+                    connection,
+                    expectedResponseStatusCode,
+                    server.Context.DateHeaderValue,
+                    expectedAllowHeader
+                );
             }
         }
 
@@ -335,7 +413,10 @@ public class BadHttpRequestTests : LoggedTest
 
         TestSink.MessageLogged += context =>
         {
-            if (context.EventId.Name == "ConnectionBadRequest" && context.Exception is BadHttpRequestException ex)
+            if (
+                context.EventId.Name == "ConnectionBadRequest"
+                && context.Exception is BadHttpRequestException ex
+            )
             {
                 loggedException = ex;
             }
@@ -345,7 +426,12 @@ public class BadHttpRequestTests : LoggedTest
         var diagListener = new DiagnosticListener("NotBadRequestTestsDiagListener");
         var badRequestEventListener = new BadRequestEventListener(diagListener, (pair) => { });
 
-        await using (var server = new TestServer(context => context.Request.Body.DrainAsync(default), new TestServiceContext(LoggerFactory) { DiagnosticSource = diagListener }))
+        await using (
+            var server = new TestServer(
+                context => context.Request.Body.DrainAsync(default),
+                new TestServiceContext(LoggerFactory) { DiagnosticSource = diagListener }
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -355,28 +441,32 @@ public class BadHttpRequestTests : LoggedTest
                     "Content-Length: 5",
                     "",
                     "funny",
-                    extraLines);
+                    extraLines
+                );
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 await connection.SendAll(
                     "POST / HTTP/1.1",
                     "Host:",
                     "Content-Length: 5",
                     "",
-                    "funny");
+                    "funny"
+                );
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 connection.ShutdownSend();
 
@@ -396,7 +486,10 @@ public class BadHttpRequestTests : LoggedTest
 
         TestSink.MessageLogged += context =>
         {
-            if (context.EventId.Name == "ConnectionBadRequest" && context.Exception is BadHttpRequestException ex)
+            if (
+                context.EventId.Name == "ConnectionBadRequest"
+                && context.Exception is BadHttpRequestException ex
+            )
             {
                 loggedException = ex;
             }
@@ -406,7 +499,12 @@ public class BadHttpRequestTests : LoggedTest
         var diagListener = new DiagnosticListener("NotBadRequestTestsDiagListener");
         var badRequestEventListener = new BadRequestEventListener(diagListener, (pair) => { });
 
-        await using (var server = new TestServer(context => context.Request.Body.DrainAsync(default), new TestServiceContext(LoggerFactory) { DiagnosticSource = diagListener }))
+        await using (
+            var server = new TestServer(
+                context => context.Request.Body.DrainAsync(default),
+                new TestServiceContext(LoggerFactory) { DiagnosticSource = diagListener }
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -419,28 +517,26 @@ public class BadHttpRequestTests : LoggedTest
                     "",
                     "",
                     "",
-                    "POST /"); // Split the request line
+                    "POST /"
+                ); // Split the request line
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
-                await connection.SendAll(
-                    " HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "funny");
+                await connection.SendAll(" HTTP/1.1", "Host:", "Content-Length: 5", "", "funny");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 connection.ShutdownSend();
 
@@ -466,7 +562,10 @@ public class BadHttpRequestTests : LoggedTest
 
         TestSink.MessageLogged += context =>
         {
-            if (context.EventId.Name == "ConnectionBadRequest" && context.Exception is BadHttpRequestException ex)
+            if (
+                context.EventId.Name == "ConnectionBadRequest"
+                && context.Exception is BadHttpRequestException ex
+            )
             {
                 loggedException = ex;
             }
@@ -476,7 +575,12 @@ public class BadHttpRequestTests : LoggedTest
         var diagListener = new DiagnosticListener("NotBadRequestTestsDiagListener");
         var badRequestEventListener = new BadRequestEventListener(diagListener, (pair) => { });
 
-        await using (var server = new TestServer(context => context.Request.Body.DrainAsync(default), new TestServiceContext(LoggerFactory) { DiagnosticSource = diagListener }))
+        await using (
+            var server = new TestServer(
+                context => context.Request.Body.DrainAsync(default),
+                new TestServiceContext(LoggerFactory) { DiagnosticSource = diagListener }
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -486,14 +590,16 @@ public class BadHttpRequestTests : LoggedTest
                     "Content-Length: 5",
                     "",
                     "funny",
-                    extraLines);
+                    extraLines
+                );
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 connection.ShutdownSend();
 
@@ -506,18 +612,23 @@ public class BadHttpRequestTests : LoggedTest
         Assert.False(badRequestEventListener.EventFired);
     }
 
-    private async Task ReceiveBadRequestResponse(InMemoryConnection connection, string expectedResponseStatusCode, string expectedDateHeaderValue, string expectedAllowHeader = null)
+    private async Task ReceiveBadRequestResponse(
+        InMemoryConnection connection,
+        string expectedResponseStatusCode,
+        string expectedDateHeaderValue,
+        string expectedAllowHeader = null
+    )
     {
         var lines = new[]
         {
-                $"HTTP/1.1 {expectedResponseStatusCode}",
-                "Content-Length: 0",
-                "Connection: close",
-                $"Date: {expectedDateHeaderValue}",
-                expectedAllowHeader,
-                "",
-                ""
-            };
+            $"HTTP/1.1 {expectedResponseStatusCode}",
+            "Content-Length: 0",
+            "Connection: close",
+            $"Date: {expectedDateHeaderValue}",
+            expectedAllowHeader,
+            "",
+            "",
+        };
 
         await connection.ReceiveEnd(lines.Where(f => f != null).ToArray());
     }
@@ -530,28 +641,47 @@ public class BadHttpRequestTests : LoggedTest
 
             foreach (var requestLine in HttpParsingData.RequestLineInvalidData)
             {
-                data.Add(requestLine, CoreStrings.FormatBadRequest_InvalidRequestLine_Detail(requestLine[..^1].EscapeNonPrintable()));
+                data.Add(
+                    requestLine,
+                    CoreStrings.FormatBadRequest_InvalidRequestLine_Detail(
+                        requestLine[..^1].EscapeNonPrintable()
+                    )
+                );
             }
 
             foreach (var target in HttpParsingData.TargetWithEncodedNullCharData)
             {
-                data.Add($"GET {target} HTTP/1.1\r\n", CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail(target.EscapeNonPrintable()));
+                data.Add(
+                    $"GET {target} HTTP/1.1\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail(
+                        target.EscapeNonPrintable()
+                    )
+                );
             }
 
             foreach (var target in HttpParsingData.TargetWithNullCharData)
             {
-                data.Add($"GET {target} HTTP/1.1\r\n", CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail(target.EscapeNonPrintable()));
+                data.Add(
+                    $"GET {target} HTTP/1.1\r\n",
+                    CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail(
+                        target.EscapeNonPrintable()
+                    )
+                );
             }
 
             return data;
         }
     }
 
-    public static TheoryData<string> UnrecognizedHttpVersionData => HttpParsingData.UnrecognizedHttpVersionData;
+    public static TheoryData<string> UnrecognizedHttpVersionData =>
+        HttpParsingData.UnrecognizedHttpVersionData;
 
-    public static IEnumerable<object[]> InvalidRequestHeaderData => HttpParsingData.RequestHeaderInvalidData;
+    public static IEnumerable<object[]> InvalidRequestHeaderData =>
+        HttpParsingData.RequestHeaderInvalidData;
 
-    public static IEnumerable<object[]> InvalidRequestHeaderDataLineFeedTerminator => HttpParsingData.RequestHeaderInvalidDataLineFeedTerminator;
+    public static IEnumerable<object[]> InvalidRequestHeaderDataLineFeedTerminator =>
+        HttpParsingData.RequestHeaderInvalidDataLineFeedTerminator;
 
-    public static TheoryData<string, string> InvalidHostHeaderData => HttpParsingData.HostHeaderInvalidData;
+    public static TheoryData<string, string> InvalidHostHeaderData =>
+        HttpParsingData.HostHeaderInvalidData;
 }

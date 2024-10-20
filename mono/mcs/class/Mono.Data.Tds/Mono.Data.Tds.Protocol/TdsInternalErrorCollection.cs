@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,55 +31,57 @@
 using System;
 using System.Collections;
 
-namespace Mono.Data.Tds.Protocol {
-	public sealed class TdsInternalErrorCollection : IEnumerable 
-	{
-		#region Fields
+namespace Mono.Data.Tds.Protocol
+{
+    public sealed class TdsInternalErrorCollection : IEnumerable
+    {
+        #region Fields
 
-		ArrayList list;
+        ArrayList list;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		public TdsInternalErrorCollection ()
-		{
-			list = new ArrayList ();
-		}
+        public TdsInternalErrorCollection()
+        {
+            list = new ArrayList();
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public int Count {
-			get { return list.Count; }
-		}
+        public int Count
+        {
+            get { return list.Count; }
+        }
 
-		public TdsInternalError this [int index] {
-			get { return (TdsInternalError) list[index]; }
-			set { list[index] = value; }
-		}
+        public TdsInternalError this[int index]
+        {
+            get { return (TdsInternalError)list[index]; }
+            set { list[index] = value; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public int Add (TdsInternalError error)
-		{
-			return list.Add (error);
-		}
+        public int Add(TdsInternalError error)
+        {
+            return list.Add(error);
+        }
 
-		public void Clear ()
-		{
-			list.Clear ();
-		}
+        public void Clear()
+        {
+            list.Clear();
+        }
 
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }
-

@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,77 +33,99 @@
 
 using System;
 using System.ComponentModel;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Drawing.Imaging;
 
 namespace System.Drawing
 {
-	/// <summary>
-	/// Summary description for ImageConverter.
-	/// </summary>
-	public class ImageConverter : TypeConverter
-	{		
-		public ImageConverter ()
-		{
-		}
-		
-		public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-		{
-			if (sourceType == typeof (System.Byte []))
-				return true;
-			else
-				return false; 
-		}
+    /// <summary>
+    /// Summary description for ImageConverter.
+    /// </summary>
+    public class ImageConverter : TypeConverter
+    {
+        public ImageConverter() { }
 
-		public override bool CanConvertTo (ITypeDescriptorContext context, Type destinationType)
-		{
-			if ((destinationType == typeof (System.Byte [])) || (destinationType == typeof (System.String)))
-				return true;
-			else
-				return false;
-		}
-		
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-		{
-			byte [] bytes = value as byte [];
-			if (bytes == null)
-				return base.ConvertFrom (context, culture, value);
-			
-			MemoryStream ms = new MemoryStream (bytes);
-			
-			return Image.FromStream (ms);	
-		}
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
+            if (sourceType == typeof(System.Byte[]))
+                return true;
+            else
+                return false;
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
-		{
-			if (value == null)
-				return "(none)";
+        public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+        {
+            if (
+                (destinationType == typeof(System.Byte[]))
+                || (destinationType == typeof(System.String))
+            )
+                return true;
+            else
+                return false;
+        }
 
-			if (value is System.Drawing.Image) {
-				if (destinationType == typeof (string)) {
-					return value.ToString ();
-				} else if (CanConvertTo (null, destinationType)) {
-					//came here means destinationType is byte array ;
-					using (MemoryStream ms = new MemoryStream ()) {
-						((Image)value).Save (ms, ((Image)value).RawFormat);
-						return ms.ToArray ();
-					}
-				}
-			}
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
+        {
+            byte[] bytes = value as byte[];
+            if (bytes == null)
+                return base.ConvertFrom(context, culture, value);
 
-			string msg = Locale.GetText ("ImageConverter can not convert from type '{0}'.", value.GetType ());
-			throw new NotSupportedException (msg);
-		}
+            MemoryStream ms = new MemoryStream(bytes);
 
-		public override PropertyDescriptorCollection GetProperties (ITypeDescriptorContext context, object value, Attribute[] attributes)
-		{
-			return TypeDescriptor.GetProperties (typeof (Image), attributes);
-		}
+            return Image.FromStream(ms);
+        }
 
-		public override bool GetPropertiesSupported (ITypeDescriptorContext context )
-		{
-			return true; 
-		}
-	}
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if (value == null)
+                return "(none)";
+
+            if (value is System.Drawing.Image)
+            {
+                if (destinationType == typeof(string))
+                {
+                    return value.ToString();
+                }
+                else if (CanConvertTo(null, destinationType))
+                {
+                    //came here means destinationType is byte array ;
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        ((Image)value).Save(ms, ((Image)value).RawFormat);
+                        return ms.ToArray();
+                    }
+                }
+            }
+
+            string msg = Locale.GetText(
+                "ImageConverter can not convert from type '{0}'.",
+                value.GetType()
+            );
+            throw new NotSupportedException(msg);
+        }
+
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
+        {
+            return TypeDescriptor.GetProperties(typeof(Image), attributes);
+        }
+
+        public override bool GetPropertiesSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
+    }
 }

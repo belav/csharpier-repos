@@ -15,11 +15,19 @@ public interface IHubCallerClients : IHubCallerClients<IClientProxy>
     /// </summary>
     /// <param name="connectionId">The connection ID.</param>
     /// <returns>A client caller.</returns>
-    new ISingleClientProxy Client(string connectionId) => new NonInvokingSingleClientProxy(((IHubCallerClients<IClientProxy>)this).Client(connectionId), "IHubCallerClients.Client(string connectionId)");
+    new ISingleClientProxy Client(string connectionId) =>
+        new NonInvokingSingleClientProxy(
+            ((IHubCallerClients<IClientProxy>)this).Client(connectionId),
+            "IHubCallerClients.Client(string connectionId)"
+        );
 
     /// <summary>
     /// Gets a proxy that can be used to invoke methods on the calling client and receive results.
     /// </summary>
     /// <returns>A client caller.</returns>
-    new ISingleClientProxy Caller => new NonInvokingSingleClientProxy(((IHubCallerClients<IClientProxy>)this).Caller, "IHubCallerClients.Caller");
+    new ISingleClientProxy Caller =>
+        new NonInvokingSingleClientProxy(
+            ((IHubCallerClients<IClientProxy>)this).Caller,
+            "IHubCallerClients.Caller"
+        );
 }

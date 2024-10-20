@@ -67,7 +67,9 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_setter == null)
                 {
-                    _setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(_memberInfo);
+                    _setter = ExpressionReflectionDelegateFactory.Instance.CreateSet<object>(
+                        _memberInfo
+                    );
                 }
 
 #if DEBUG
@@ -75,14 +77,33 @@ namespace Newtonsoft.Json.Serialization
                 // add this check for unit tests
                 if (value == null)
                 {
-                    if (!ReflectionUtils.IsNullable(ReflectionUtils.GetMemberUnderlyingType(_memberInfo)))
+                    if (
+                        !ReflectionUtils.IsNullable(
+                            ReflectionUtils.GetMemberUnderlyingType(_memberInfo)
+                        )
+                    )
                     {
-                        throw new JsonSerializationException("Incompatible value. Cannot set {0} to null.".FormatWith(CultureInfo.InvariantCulture, _memberInfo));
+                        throw new JsonSerializationException(
+                            "Incompatible value. Cannot set {0} to null.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                _memberInfo
+                            )
+                        );
                     }
                 }
-                else if (!ReflectionUtils.GetMemberUnderlyingType(_memberInfo).IsAssignableFrom(value.GetType()))
+                else if (
+                    !ReflectionUtils
+                        .GetMemberUnderlyingType(_memberInfo)
+                        .IsAssignableFrom(value.GetType())
+                )
                 {
-                    throw new JsonSerializationException("Incompatible value. Cannot set {0} to type {1}.".FormatWith(CultureInfo.InvariantCulture, _memberInfo, value.GetType()));
+                    throw new JsonSerializationException(
+                        "Incompatible value. Cannot set {0} to type {1}.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            _memberInfo,
+                            value.GetType()
+                        )
+                    );
                 }
 #endif
 
@@ -90,7 +111,14 @@ namespace Newtonsoft.Json.Serialization
             }
             catch (Exception ex)
             {
-                throw new JsonSerializationException("Error setting value to '{0}' on '{1}'.".FormatWith(CultureInfo.InvariantCulture, _memberInfo.Name, target.GetType()), ex);
+                throw new JsonSerializationException(
+                    "Error setting value to '{0}' on '{1}'.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        _memberInfo.Name,
+                        target.GetType()
+                    ),
+                    ex
+                );
             }
         }
 
@@ -105,14 +133,23 @@ namespace Newtonsoft.Json.Serialization
             {
                 if (_getter == null)
                 {
-                    _getter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(_memberInfo);
+                    _getter = ExpressionReflectionDelegateFactory.Instance.CreateGet<object>(
+                        _memberInfo
+                    );
                 }
 
                 return _getter(target);
             }
             catch (Exception ex)
             {
-                throw new JsonSerializationException("Error getting value from '{0}' on '{1}'.".FormatWith(CultureInfo.InvariantCulture, _memberInfo.Name, target.GetType()), ex);
+                throw new JsonSerializationException(
+                    "Error getting value from '{0}' on '{1}'.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        _memberInfo.Name,
+                        target.GetType()
+                    ),
+                    ex
+                );
             }
         }
     }

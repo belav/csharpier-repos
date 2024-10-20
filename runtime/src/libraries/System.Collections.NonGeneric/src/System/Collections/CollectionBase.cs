@@ -26,13 +26,9 @@ namespace System.Collections
             _list = new ArrayList(capacity);
         }
 
-
         protected ArrayList InnerList
         {
-            get
-            {
-                return _list;
-            }
+            get { return _list; }
         }
 
         protected IList List
@@ -42,23 +38,13 @@ namespace System.Collections
 
         public int Capacity
         {
-            get
-            {
-                return InnerList.Capacity;
-            }
-            set
-            {
-                InnerList.Capacity = value;
-            }
+            get { return InnerList.Capacity; }
+            set { InnerList.Capacity = value; }
         }
-
 
         public int Count
         {
-            get
-            {
-                return _list.Count;
-            }
+            get { return _list.Count; }
         }
 
         public void Clear()
@@ -71,7 +57,10 @@ namespace System.Collections
         public void RemoveAt(int index)
         {
             if (index < 0 || index >= Count)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             object? temp = InnerList[index];
             OnValidate(temp!);
             OnRemove(index, temp);
@@ -117,13 +106,19 @@ namespace System.Collections
             get
             {
                 if (index < 0 || index >= Count)
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexMustBeLess
+                    );
                 return InnerList[index];
             }
             set
             {
                 if (index < 0 || index >= Count)
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexMustBeLess
+                    );
                 OnValidate(value!);
                 object? temp = InnerList[index];
                 OnSet(index, temp, value);
@@ -162,12 +157,12 @@ namespace System.Collections
             return index;
         }
 
-
         void IList.Remove(object? value)
         {
             OnValidate(value!);
             int index = InnerList.IndexOf(value);
-            if (index < 0) throw new ArgumentException(SR.Arg_RemoveArgNotFound);
+            if (index < 0)
+                throw new ArgumentException(SR.Arg_RemoveArgNotFound);
             OnRemove(index, value);
             InnerList.RemoveAt(index);
             try
@@ -189,7 +184,10 @@ namespace System.Collections
         void IList.Insert(int index, object? value)
         {
             if (index < 0 || index > Count)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLessOrEqual);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLessOrEqual
+                );
             OnValidate(value!);
             OnInsert(index, value);
             InnerList.Insert(index, value);
@@ -209,41 +207,25 @@ namespace System.Collections
             return InnerList.GetEnumerator();
         }
 
-        protected virtual void OnSet(int index, object? oldValue, object? newValue)
-        {
-        }
+        protected virtual void OnSet(int index, object? oldValue, object? newValue) { }
 
-        protected virtual void OnInsert(int index, object? value)
-        {
-        }
+        protected virtual void OnInsert(int index, object? value) { }
 
-        protected virtual void OnClear()
-        {
-        }
+        protected virtual void OnClear() { }
 
-        protected virtual void OnRemove(int index, object? value)
-        {
-        }
+        protected virtual void OnRemove(int index, object? value) { }
 
         protected virtual void OnValidate(object value)
         {
             ArgumentNullException.ThrowIfNull(value);
         }
 
-        protected virtual void OnSetComplete(int index, object? oldValue, object? newValue)
-        {
-        }
+        protected virtual void OnSetComplete(int index, object? oldValue, object? newValue) { }
 
-        protected virtual void OnInsertComplete(int index, object? value)
-        {
-        }
+        protected virtual void OnInsertComplete(int index, object? value) { }
 
-        protected virtual void OnClearComplete()
-        {
-        }
+        protected virtual void OnClearComplete() { }
 
-        protected virtual void OnRemoveComplete(int index, object? value)
-        {
-        }
+        protected virtual void OnRemoveComplete(int index, object? value) { }
     }
 }

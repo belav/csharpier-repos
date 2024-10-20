@@ -1,7 +1,7 @@
 //
-// System.Web.HttpWriter.cs 
+// System.Web.HttpWriter.cs
 //
-// 
+//
 // Author:
 //	Miguel de Icaza (miguel@novell.com)
 //
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,169 +28,173 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.IO;
-using System.Text;
-using System.Threading;
 using System.Globalization;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-	
+using System.Text;
+using System.Threading;
+
 namespace System.Web
-{	
-	// CAS - no InheritanceDemand here as the class is sealed
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class HttpWriter : TextWriter
-	{
-		const long MAX_TOTAL_BUFFERS_SIZE = 4 * 1024 * 1024;
-		const uint SINGLE_BUFFER_SIZE = 128 * 1024;
-		const uint MIN_SINGLE_BUFFER_SIZE = 32 * 1024;
-		
-		HttpResponseStream output_stream;
-		HttpResponse response;
-		Encoding encoding;
+{
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class HttpWriter : TextWriter
+    {
+        const long MAX_TOTAL_BUFFERS_SIZE = 4 * 1024 * 1024;
+        const uint SINGLE_BUFFER_SIZE = 128 * 1024;
+        const uint MIN_SINGLE_BUFFER_SIZE = 32 * 1024;
 
-		[ThreadStatic]
-		static byte [] _bytebuffer;
-		static readonly uint byteBufferSize;
-		
-		static HttpWriter ()
-		{
-			int workerThreads, completionPortThreads;
+        HttpResponseStream output_stream;
+        HttpResponse response;
+        Encoding encoding;
 
-			ThreadPool.GetMinThreads (out workerThreads, out completionPortThreads);
-			workerThreads *= 3;
+        [ThreadStatic]
+        static byte[] _bytebuffer;
+        static readonly uint byteBufferSize;
 
-			uint bufferSize = (uint)(MAX_TOTAL_BUFFERS_SIZE / workerThreads);
-			byteBufferSize = Math.Min (SINGLE_BUFFER_SIZE, bufferSize);
-			if (byteBufferSize < MIN_SINGLE_BUFFER_SIZE)
-				byteBufferSize = MIN_SINGLE_BUFFER_SIZE;
-		}
-		
-		internal HttpWriter (HttpResponse response)
-		{
-			this.response = response;
-			encoding = response.ContentEncoding;
-			output_stream = response.output_stream;
-		}
+        static HttpWriter()
+        {
+            int workerThreads,
+                completionPortThreads;
 
-		byte [] GetByteBuffer (int length)
-		{
-			if (_bytebuffer == null)
-				_bytebuffer = new byte [byteBufferSize];
-			
-			// We will reuse the buffer if its size is < 32K
-			if (byteBufferSize >= length)
-				return _bytebuffer;
-			else
-				return new byte [length];
-		}
+            ThreadPool.GetMinThreads(out workerThreads, out completionPortThreads);
+            workerThreads *= 3;
 
-		public override Encoding Encoding {
-			get {
-				return encoding;
-			}
-		}
+            uint bufferSize = (uint)(MAX_TOTAL_BUFFERS_SIZE / workerThreads);
+            byteBufferSize = Math.Min(SINGLE_BUFFER_SIZE, bufferSize);
+            if (byteBufferSize < MIN_SINGLE_BUFFER_SIZE)
+                byteBufferSize = MIN_SINGLE_BUFFER_SIZE;
+        }
 
-		internal void SetEncoding (Encoding new_encoding)
-		{
-			encoding = new_encoding;
-		}
+        internal HttpWriter(HttpResponse response)
+        {
+            this.response = response;
+            encoding = response.ContentEncoding;
+            output_stream = response.output_stream;
+        }
 
-		public Stream OutputStream {
-			get {
-				return output_stream;
-			}
-		}
+        byte[] GetByteBuffer(int length)
+        {
+            if (_bytebuffer == null)
+                _bytebuffer = new byte[byteBufferSize];
 
-		internal HttpResponse Response {
-			get { return response; }
-		}
-		//
-		// Flush data, and closes socket
-		//
-		public override void Close ()
-		{
-			output_stream.Close ();
-		}
+            // We will reuse the buffer if its size is < 32K
+            if (byteBufferSize >= length)
+                return _bytebuffer;
+            else
+                return new byte[length];
+        }
 
-		public override void Flush ()
-		{
-			output_stream.Flush ();
-		}
+        public override Encoding Encoding
+        {
+            get { return encoding; }
+        }
 
-		char [] chars = new char [1];
-		public override void Write (char ch)
-		{
-			chars [0] = ch;
-			Write (chars, 0, 1);
-		}
+        internal void SetEncoding(Encoding new_encoding)
+        {
+            encoding = new_encoding;
+        }
 
-		public override void Write (object obj)
-		{
-			if (obj == null)
-				return;
-			
-			Write (obj.ToString ());
-		}
-		
-		public override void Write (string s)
-		{
-			if (s != null)
-				WriteString (s, 0, s.Length);
-		}
-		
-		public override void Write (char [] buffer, int index, int count)
-		{
-			if (buffer == null || index < 0 || count < 0 || (buffer.Length - index) < count)
-				throw new ArgumentOutOfRangeException ();
-			int length = encoding.GetMaxByteCount (count);
-			byte [] bytebuffer = GetByteBuffer (length);
-			int realLength = encoding.GetBytes (buffer, index, count, bytebuffer, 0);
-			output_stream.Write (bytebuffer, 0, realLength);
-			if (response.buffer)
-				return;
+        public Stream OutputStream
+        {
+            get { return output_stream; }
+        }
 
-			response.Flush ();
-		}
+        internal HttpResponse Response
+        {
+            get { return response; }
+        }
 
-		static char [] newline = new char [2] { '\r', '\n' };
-		
-		public override void WriteLine ()
-		{
-			Write (newline, 0, 2);
-		}
+        //
+        // Flush data, and closes socket
+        //
+        public override void Close()
+        {
+            output_stream.Close();
+        }
 
-		public void WriteString (string s, int index, int count)
-		{
-			if (s == null)
-				return;
+        public override void Flush()
+        {
+            output_stream.Flush();
+        }
 
-			if (index < 0 || count < 0 || ((index + count > s.Length)))
-				throw new ArgumentOutOfRangeException ();
-			int length = encoding.GetMaxByteCount (count);
-			byte [] bytebuffer = GetByteBuffer (length);
-			int realLength = encoding.GetBytes (s, index, count, bytebuffer, 0);
-			output_stream.Write (bytebuffer, 0, realLength);
-			if (response.buffer)
-				return;
+        char[] chars = new char[1];
 
-			response.Flush ();
-		}
+        public override void Write(char ch)
+        {
+            chars[0] = ch;
+            Write(chars, 0, 1);
+        }
 
-		internal void WriteUTF8Ptr (IntPtr ptr, int length)
-		{
-			output_stream.WritePtr (ptr, length);
-		}
+        public override void Write(object obj)
+        {
+            if (obj == null)
+                return;
 
-		public void WriteBytes (byte [] buffer, int index, int count)
-		{
-			output_stream.Write (buffer, index, count);
+            Write(obj.ToString());
+        }
 
-			if (response.buffer)
-				return;
+        public override void Write(string s)
+        {
+            if (s != null)
+                WriteString(s, 0, s.Length);
+        }
 
-			response.Flush ();
-		}
-	}
+        public override void Write(char[] buffer, int index, int count)
+        {
+            if (buffer == null || index < 0 || count < 0 || (buffer.Length - index) < count)
+                throw new ArgumentOutOfRangeException();
+            int length = encoding.GetMaxByteCount(count);
+            byte[] bytebuffer = GetByteBuffer(length);
+            int realLength = encoding.GetBytes(buffer, index, count, bytebuffer, 0);
+            output_stream.Write(bytebuffer, 0, realLength);
+            if (response.buffer)
+                return;
+
+            response.Flush();
+        }
+
+        static char[] newline = new char[2] { '\r', '\n' };
+
+        public override void WriteLine()
+        {
+            Write(newline, 0, 2);
+        }
+
+        public void WriteString(string s, int index, int count)
+        {
+            if (s == null)
+                return;
+
+            if (index < 0 || count < 0 || ((index + count > s.Length)))
+                throw new ArgumentOutOfRangeException();
+            int length = encoding.GetMaxByteCount(count);
+            byte[] bytebuffer = GetByteBuffer(length);
+            int realLength = encoding.GetBytes(s, index, count, bytebuffer, 0);
+            output_stream.Write(bytebuffer, 0, realLength);
+            if (response.buffer)
+                return;
+
+            response.Flush();
+        }
+
+        internal void WriteUTF8Ptr(IntPtr ptr, int length)
+        {
+            output_stream.WritePtr(ptr, length);
+        }
+
+        public void WriteBytes(byte[] buffer, int index, int count)
+        {
+            output_stream.Write(buffer, index, count);
+
+            if (response.buffer)
+                return;
+
+            response.Flush();
+        }
+    }
 }
-

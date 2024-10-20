@@ -19,7 +19,8 @@ internal sealed class MvcDataAnnotationsMvcOptionsSetup : IConfigureOptions<MvcO
 
     public MvcDataAnnotationsMvcOptionsSetup(
         IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
-        IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions)
+        IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(validationAttributeAdapterProvider);
         ArgumentNullException.ThrowIfNull(dataAnnotationLocalizationOptions);
@@ -31,7 +32,8 @@ internal sealed class MvcDataAnnotationsMvcOptionsSetup : IConfigureOptions<MvcO
     public MvcDataAnnotationsMvcOptionsSetup(
         IValidationAttributeAdapterProvider validationAttributeAdapterProvider,
         IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions,
-        IStringLocalizerFactory stringLocalizerFactory)
+        IStringLocalizerFactory stringLocalizerFactory
+    )
         : this(validationAttributeAdapterProvider, dataAnnotationLocalizationOptions)
     {
         _stringLocalizerFactory = stringLocalizerFactory;
@@ -41,14 +43,20 @@ internal sealed class MvcDataAnnotationsMvcOptionsSetup : IConfigureOptions<MvcO
     {
         ArgumentNullException.ThrowIfNull(options);
 
-        options.ModelMetadataDetailsProviders.Add(new DataAnnotationsMetadataProvider(
-            options,
-            _dataAnnotationLocalizationOptions,
-            _stringLocalizerFactory));
+        options.ModelMetadataDetailsProviders.Add(
+            new DataAnnotationsMetadataProvider(
+                options,
+                _dataAnnotationLocalizationOptions,
+                _stringLocalizerFactory
+            )
+        );
 
-        options.ModelValidatorProviders.Add(new DataAnnotationsModelValidatorProvider(
-            _validationAttributeAdapterProvider,
-            _dataAnnotationLocalizationOptions,
-            _stringLocalizerFactory));
+        options.ModelValidatorProviders.Add(
+            new DataAnnotationsModelValidatorProvider(
+                _validationAttributeAdapterProvider,
+                _dataAnnotationLocalizationOptions,
+                _stringLocalizerFactory
+            )
+        );
     }
 }

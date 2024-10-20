@@ -5,14 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-
 using ILLink.Shared.DataFlow;
 using Internal.IL;
 using Internal.TypeSystem;
-
 using HoistedLocalState = ILLink.Shared.DataFlow.DefaultValueDictionary<
     ILCompiler.Dataflow.HoistedLocalKey,
-    ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>>;
+    ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>
+>;
 using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.SingleValue>;
 
 #nullable enable
@@ -20,10 +19,11 @@ using MultiValue = ILLink.Shared.DataFlow.ValueSet<ILLink.Shared.DataFlow.Single
 namespace ILCompiler.Dataflow
 {
     // Wrapper that implements IEquatable for MethodIL.
-    internal readonly record struct MethodBodyValue(MethodIL MethodBody) : IEquatable<MethodBodyValue>
+    internal readonly record struct MethodBodyValue(MethodIL MethodBody)
+        : IEquatable<MethodBodyValue>
     {
-        bool IEquatable<MethodBodyValue>.Equals(ILCompiler.Dataflow.MethodBodyValue other)
-            => other.MethodBody.OwningMethod == MethodBody.OwningMethod;
+        bool IEquatable<MethodBodyValue>.Equals(ILCompiler.Dataflow.MethodBodyValue other) =>
+            other.MethodBody.OwningMethod == MethodBody.OwningMethod;
 
         public override int GetHashCode() => MethodBody.OwningMethod.GetHashCode();
     }
@@ -39,19 +39,29 @@ namespace ILCompiler.Dataflow
         public HoistedLocalState HoistedLocals;
         private readonly InterproceduralStateLattice lattice;
 
-        public InterproceduralState(ILProvider ilProvider, ValueSet<MethodBodyValue> methodBodies, HoistedLocalState hoistedLocals, InterproceduralStateLattice lattice)
-            => (_ilProvider, MethodBodies, HoistedLocals, this.lattice) = (ilProvider, methodBodies, hoistedLocals, lattice);
+        public InterproceduralState(
+            ILProvider ilProvider,
+            ValueSet<MethodBodyValue> methodBodies,
+            HoistedLocalState hoistedLocals,
+            InterproceduralStateLattice lattice
+        ) =>
+            (_ilProvider, MethodBodies, HoistedLocals, this.lattice) = (
+                ilProvider,
+                methodBodies,
+                hoistedLocals,
+                lattice
+            );
 
-        public bool Equals(InterproceduralState other)
-            => MethodBodies.Equals(other.MethodBodies) && HoistedLocals.Equals(other.HoistedLocals);
+        public bool Equals(InterproceduralState other) =>
+            MethodBodies.Equals(other.MethodBodies) && HoistedLocals.Equals(other.HoistedLocals);
 
-        public override bool Equals(object? obj)
-            => obj is InterproceduralState state && Equals(state);
+        public override bool Equals(object? obj) =>
+            obj is InterproceduralState state && Equals(state);
 
         public override int GetHashCode() => base.GetHashCode();
 
-        public InterproceduralState Clone()
-            => new(_ilProvider, MethodBodies.DeepCopy(), HoistedLocals.Clone(), lattice);
+        public InterproceduralState Clone() =>
+            new(_ilProvider, MethodBodies.DeepCopy(), HoistedLocals.Clone(), lattice);
 
         public void TrackMethod(MethodDesc method)
         {
@@ -67,18 +77,25 @@ namespace ILCompiler.Dataflow
             methodBody = GetInstantiatedMethodIL(methodBody);
 
             // Work around the fact that ValueSet is readonly
-            Debug.Assert (!MethodBodies.IsUnknown ());
-            var methodsList = new List<MethodBodyValue>(MethodBodies.GetKnownValues ());
+            Debug.Assert(!MethodBodies.IsUnknown());
+            var methodsList = new List<MethodBodyValue>(MethodBodies.GetKnownValues());
             methodsList.Add(new MethodBodyValue(methodBody));
 
             // For state machine methods, also scan the state machine members.
             // Simplification: assume that all generated methods of the state machine type are
             // reached at the point where the state machine method is reached.
-            if (CompilerGeneratedState.TryGetStateMachineType(methodBody.OwningMethod, out MetadataType? stateMachineType))
+            if (
+                CompilerGeneratedState.TryGetStateMachineType(
+                    methodBody.OwningMethod,
+                    out MetadataType? stateMachineType
+                )
+            )
             {
                 foreach (var stateMachineMethod in stateMachineType.GetMethods())
                 {
-                    Debug.Assert(!CompilerGeneratedNames.IsLambdaOrLocalFunction(stateMachineMethod.Name));
+                    Debug.Assert(
+                        !CompilerGeneratedNames.IsLambdaOrLocalFunction(stateMachineMethod.Name)
+                    );
                     if (TryGetMethodBody(stateMachineMethod, out MethodIL? stateMachineMethodBody))
                     {
                         stateMachineMethodBody = GetInstantiatedMethodIL(stateMachineMethodBody);
@@ -91,7 +108,10 @@ namespace ILCompiler.Dataflow
 
             static MethodIL GetInstantiatedMethodIL(MethodIL methodIL)
             {
-                if (methodIL.OwningMethod.HasInstantiation || methodIL.OwningMethod.OwningType.HasInstantiation)
+                if (
+                    methodIL.OwningMethod.HasInstantiation
+                    || methodIL.OwningMethod.OwningType.HasInstantiation
+                )
                 {
                     // We instantiate the body over the generic parameters.
                     //
@@ -119,15 +139,18 @@ namespace ILCompiler.Dataflow
             // For hoisted locals, we track the entire set of assigned values seen
             // in the closure of a method, so setting a hoisted local value meets
             // it with any existing value.
-            HoistedLocals.Set(key,
-                lattice.HoistedLocalsLattice.ValueLattice.Meet(
-                    HoistedLocals.Get(key), value));
+            HoistedLocals.Set(
+                key,
+                lattice.HoistedLocalsLattice.ValueLattice.Meet(HoistedLocals.Get(key), value)
+            );
         }
 
-        public MultiValue GetHoistedLocal(HoistedLocalKey key)
-            => HoistedLocals.Get(key);
+        public MultiValue GetHoistedLocal(HoistedLocalKey key) => HoistedLocals.Get(key);
 
-        private bool TryGetMethodBody(MethodDesc method, [NotNullWhen(true)] out MethodIL? methodBody)
+        private bool TryGetMethodBody(
+            MethodDesc method,
+            [NotNullWhen(true)] out MethodIL? methodBody
+        )
         {
             methodBody = null;
 
@@ -147,21 +170,41 @@ namespace ILCompiler.Dataflow
     {
         private readonly ILProvider _ilProvider;
         public readonly ValueSetLattice<MethodBodyValue> MethodBodyLattice;
-        public readonly DictionaryLattice<HoistedLocalKey, MultiValue, ValueSetLattice<SingleValue>> HoistedLocalsLattice;
+        public readonly DictionaryLattice<
+            HoistedLocalKey,
+            MultiValue,
+            ValueSetLattice<SingleValue>
+        > HoistedLocalsLattice;
 
         public InterproceduralStateLattice(
             ILProvider ilProvider,
             ValueSetLattice<MethodBodyValue> methodBodyLattice,
-            DictionaryLattice<HoistedLocalKey, MultiValue, ValueSetLattice<SingleValue>> hoistedLocalsLattice)
-            => (_ilProvider, MethodBodyLattice, HoistedLocalsLattice) = (ilProvider, methodBodyLattice, hoistedLocalsLattice);
+            DictionaryLattice<
+                HoistedLocalKey,
+                MultiValue,
+                ValueSetLattice<SingleValue>
+            > hoistedLocalsLattice
+        ) =>
+            (_ilProvider, MethodBodyLattice, HoistedLocalsLattice) = (
+                ilProvider,
+                methodBodyLattice,
+                hoistedLocalsLattice
+            );
 
-        public InterproceduralState Top => new InterproceduralState(_ilProvider, MethodBodyLattice.Top, HoistedLocalsLattice.Top, this);
+        public InterproceduralState Top =>
+            new InterproceduralState(
+                _ilProvider,
+                MethodBodyLattice.Top,
+                HoistedLocalsLattice.Top,
+                this
+            );
 
-        public InterproceduralState Meet(InterproceduralState left, InterproceduralState right)
-            => new(
+        public InterproceduralState Meet(InterproceduralState left, InterproceduralState right) =>
+            new(
                 _ilProvider,
                 MethodBodyLattice.Meet(left.MethodBodies, right.MethodBodies),
                 HoistedLocalsLattice.Meet(left.HoistedLocals, right.HoistedLocals),
-                this);
+                this
+            );
     }
 }

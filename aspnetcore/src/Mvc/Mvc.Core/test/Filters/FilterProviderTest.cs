@@ -16,10 +16,12 @@ public class DefaultFilterProviderTest
         // Arrange
         var filter = Mock.Of<IFilterMetadata>();
 
-        var context = CreateFilterContext(new List<FilterItem>()
+        var context = CreateFilterContext(
+            new List<FilterItem>()
             {
                 new FilterItem(new FilterDescriptor(filter, FilterScope.Global)),
-            });
+            }
+        );
 
         var provider = CreateProvider();
 
@@ -43,14 +45,14 @@ public class DefaultFilterProviderTest
         var filter = Mock.Of<IFilterMetadata>();
 
         var filterFactory = new Mock<IFilterFactory>();
-        filterFactory
-            .Setup(ff => ff.CreateInstance(It.IsAny<IServiceProvider>()))
-            .Returns(filter);
+        filterFactory.Setup(ff => ff.CreateInstance(It.IsAny<IServiceProvider>())).Returns(filter);
 
-        var context = CreateFilterContext(new List<FilterItem>()
+        var context = CreateFilterContext(
+            new List<FilterItem>()
             {
                 new FilterItem(new FilterDescriptor(filterFactory.Object, FilterScope.Global)),
-            });
+            }
+        );
 
         var provider = CreateProvider();
 
@@ -74,16 +76,16 @@ public class DefaultFilterProviderTest
         var filter = Mock.Of<IFilterMetadata>();
 
         var filterFactory = new Mock<IFilterFactory>();
-        filterFactory
-            .Setup(ff => ff.CreateInstance(It.IsAny<IServiceProvider>()))
-            .Returns(filter);
+        filterFactory.Setup(ff => ff.CreateInstance(It.IsAny<IServiceProvider>())).Returns(filter);
 
         filterFactory.As<IOrderedFilter>().SetupGet(ff => ff.Order).Returns(17);
 
-        var context = CreateFilterContext(new List<FilterItem>()
+        var context = CreateFilterContext(
+            new List<FilterItem>()
             {
                 new FilterItem(new FilterDescriptor(filterFactory.Object, FilterScope.Global)),
-            });
+            }
+        );
 
         var provider = CreateProvider();
 
@@ -111,10 +113,12 @@ public class DefaultFilterProviderTest
             .Setup(ff => ff.CreateInstance(It.IsAny<IServiceProvider>()))
             .Returns(filter.As<IFilterMetadata>().Object);
 
-        var context = CreateFilterContext(new List<FilterItem>()
+        var context = CreateFilterContext(
+            new List<FilterItem>()
             {
                 new FilterItem(new FilterDescriptor(filterFactory.Object, FilterScope.Global)),
-            });
+            }
+        );
 
         var provider = CreateProvider();
 
@@ -140,7 +144,8 @@ public class DefaultFilterProviderTest
     {
         var actionContext = CreateActionContext();
         actionContext.ActionDescriptor.FilterDescriptors = new List<FilterDescriptor>(
-            items.Select(item => item.Descriptor));
+            items.Select(item => item.Descriptor)
+        );
 
         return new FilterProviderContext(actionContext, items);
     }

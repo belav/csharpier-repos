@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class EmptyDefaultValueProvider : LookupOrFallbackDefaultValueProvider
@@ -30,7 +29,7 @@ namespace Moq
         sealed class EmptyDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     */
     /// <summary>
-    /// A <see cref="DefaultValueProvider"/> that returns an empty default value 
+    /// A <see cref="DefaultValueProvider"/> that returns an empty default value
     /// for invocations that do not have setups or return values, with loose mocks.
     /// This is the default behavior for a mock.
     /// </summary>
@@ -46,7 +45,6 @@ namespace Moq
         }
 
         internal override DefaultValue Kind => DefaultValue.Empty;
-
 
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
@@ -180,7 +178,8 @@ namespace Moq
             var elementType = type.GetGenericArguments()[0];
             var array = Array.CreateInstance(elementType, 0);
 
-            return typeof(Queryable).GetMethods("AsQueryable")
+            return typeof(Queryable)
+                .GetMethods("AsQueryable")
                 .Single(x => x.IsGenericMethod)
                 .MakeGenericMethod(elementType)
                 .Invoke(null, new[] { array });

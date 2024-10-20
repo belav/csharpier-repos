@@ -14,10 +14,10 @@ public class MemberExpressionCacheKeyTest
         // Arrange
         var expected = new[]
         {
-                typeof(TestModel3).GetProperty(nameof(TestModel3.Value)),
-                typeof(TestModel2).GetProperty(nameof(TestModel2.TestModel3)),
-                typeof(TestModel).GetProperty(nameof(TestModel.TestModel2)),
-            };
+            typeof(TestModel3).GetProperty(nameof(TestModel3.Value)),
+            typeof(TestModel2).GetProperty(nameof(TestModel2.TestModel3)),
+            typeof(TestModel).GetProperty(nameof(TestModel.TestModel2)),
+        };
 
         var key = GetKey(m => m.TestModel2.TestModel3.Value);
 
@@ -34,10 +34,10 @@ public class MemberExpressionCacheKeyTest
         // Arrange
         var expected = new[]
         {
-                typeof(DateTime).GetProperty(nameof(DateTime.Ticks)),
-                typeof(DateTime?).GetProperty(nameof(Nullable<DateTime>.Value)),
-                typeof(TestModel).GetProperty(nameof(TestModel.NullableDateTime)),
-            };
+            typeof(DateTime).GetProperty(nameof(DateTime.Ticks)),
+            typeof(DateTime?).GetProperty(nameof(Nullable<DateTime>.Value)),
+            typeof(TestModel).GetProperty(nameof(TestModel.NullableDateTime)),
+        };
 
         var key = GetKey(m => m.NullableDateTime.Value.Ticks);
 
@@ -54,9 +54,9 @@ public class MemberExpressionCacheKeyTest
         // Arrange
         var expected = new[]
         {
-                typeof(DateTime).GetProperty(nameof(DateTime.Ticks)),
-                typeof(TestModel).GetProperty(nameof(TestModel.DateTime)),
-            };
+            typeof(DateTime).GetProperty(nameof(DateTime.Ticks)),
+            typeof(TestModel).GetProperty(nameof(TestModel.DateTime)),
+        };
 
         var key = GetKey(m => m.DateTime.Ticks);
 
@@ -67,7 +67,9 @@ public class MemberExpressionCacheKeyTest
         Assert.Equal(expected, actual);
     }
 
-    private static MemberExpressionCacheKey GetKey<TResult>(Expression<Func<TestModel, TResult>> expression)
+    private static MemberExpressionCacheKey GetKey<TResult>(
+        Expression<Func<TestModel, TResult>> expression
+    )
     {
         var memberExpression = Assert.IsAssignableFrom<MemberExpression>(expression.Body);
         return new MemberExpressionCacheKey(typeof(TestModel), memberExpression);

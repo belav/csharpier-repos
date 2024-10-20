@@ -23,15 +23,20 @@ namespace System.Net.Http
         [Fact]
         public void Constructor_SetsDefaultMediaType()
         {
-            Action<Stream, HttpContent, TransportContext> streamAction = new MockStreamAction().Action;
+            Action<Stream, HttpContent, TransportContext> streamAction =
+                new MockStreamAction().Action;
             PushStreamContent content = new PushStreamContent(streamAction);
-            Assert.Equal(MediaTypeConstants.ApplicationOctetStreamMediaType, content.Headers.ContentType);
+            Assert.Equal(
+                MediaTypeConstants.ApplicationOctetStreamMediaType,
+                content.Headers.ContentType
+            );
         }
 
         [Fact]
         public void Constructor_SetsMediaTypeFromString()
         {
-            Action<Stream, HttpContent, TransportContext> streamAction = new MockStreamAction().Action;
+            Action<Stream, HttpContent, TransportContext> streamAction =
+                new MockStreamAction().Action;
             PushStreamContent content = new PushStreamContent(streamAction, "text/xml");
             Assert.Equal(MediaTypeConstants.TextXmlMediaType, content.Headers.ContentType);
         }
@@ -39,8 +44,12 @@ namespace System.Net.Http
         [Fact]
         public void Constructor_SetsMediaType()
         {
-            Action<Stream, HttpContent, TransportContext> streamAction = new MockStreamAction().Action;
-            PushStreamContent content = new PushStreamContent(streamAction, MediaTypeConstants.TextXmlMediaType);
+            Action<Stream, HttpContent, TransportContext> streamAction =
+                new MockStreamAction().Action;
+            PushStreamContent content = new PushStreamContent(
+                streamAction,
+                MediaTypeConstants.TextXmlMediaType
+            );
             Assert.Equal(MediaTypeConstants.TextXmlMediaType, content.Headers.ContentType);
         }
 
@@ -50,7 +59,9 @@ namespace System.Net.Http
             // Arrange
             MemoryStream outputStream = new MemoryStream();
             MockStreamAction streamAction = new MockStreamAction(close: true);
-            PushStreamContent content = new PushStreamContent((Action<Stream, HttpContent, TransportContext>)streamAction.Action);
+            PushStreamContent content = new PushStreamContent(
+                (Action<Stream, HttpContent, TransportContext>)streamAction.Action
+            );
 
             // Act
             await content.CopyToAsync(outputStream);
@@ -70,7 +81,9 @@ namespace System.Net.Http
             // Arrange
             MemoryStream outputStream = new MemoryStream();
             MockStreamAction streamAction = new MockStreamAction(throwException: true);
-            PushStreamContent content = new PushStreamContent((Action<Stream, HttpContent, TransportContext>)streamAction.Action);
+            PushStreamContent content = new PushStreamContent(
+                (Action<Stream, HttpContent, TransportContext>)streamAction.Action
+            );
 
             // Act & Assert
             await Assert.ThrowsAsync<ApplicationException>(() => content.CopyToAsync(outputStream));
@@ -86,13 +99,18 @@ namespace System.Net.Http
             // Arrange
             Mock<Stream> mockInnerStream = new Mock<Stream>() { CallBase = true };
             TaskCompletionSource<bool> serializeToStreamTask = new TaskCompletionSource<bool>();
-            MockCompleteTaskOnCloseStream mockStream = new MockCompleteTaskOnCloseStream(mockInnerStream.Object, serializeToStreamTask);
+            MockCompleteTaskOnCloseStream mockStream = new MockCompleteTaskOnCloseStream(
+                mockInnerStream.Object,
+                serializeToStreamTask
+            );
 
             // Act
             mockStream.Dispose();
 
             // Assert
-            mockInnerStream.Protected().Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
+            mockInnerStream
+                .Protected()
+                .Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
             Assert.Equal(TaskStatus.RanToCompletion, serializeToStreamTask.Task.Status);
             Assert.True(await serializeToStreamTask.Task);
         }
@@ -103,13 +121,18 @@ namespace System.Net.Http
             // Arrange
             Mock<Stream> mockInnerStream = new Mock<Stream>() { CallBase = true };
             TaskCompletionSource<bool> serializeToStreamTask = new TaskCompletionSource<bool>();
-            MockCompleteTaskOnCloseStream mockStream = new MockCompleteTaskOnCloseStream(mockInnerStream.Object, serializeToStreamTask);
+            MockCompleteTaskOnCloseStream mockStream = new MockCompleteTaskOnCloseStream(
+                mockInnerStream.Object,
+                serializeToStreamTask
+            );
 
             // Act
             mockStream.Dispose();
 
             // Assert
-            mockInnerStream.Protected().Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
+            mockInnerStream
+                .Protected()
+                .Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
             mockInnerStream.Verify(s => s.Close(), Times.Never());
             Assert.Equal(TaskStatus.RanToCompletion, serializeToStreamTask.Task.Status);
             Assert.True(await serializeToStreamTask.Task);
@@ -121,13 +144,18 @@ namespace System.Net.Http
             // Arrange
             Mock<Stream> mockInnerStream = new Mock<Stream>() { CallBase = true };
             TaskCompletionSource<bool> serializeToStreamTask = new TaskCompletionSource<bool>();
-            MockCompleteTaskOnCloseStream mockStream = new MockCompleteTaskOnCloseStream(mockInnerStream.Object, serializeToStreamTask);
+            MockCompleteTaskOnCloseStream mockStream = new MockCompleteTaskOnCloseStream(
+                mockInnerStream.Object,
+                serializeToStreamTask
+            );
 
             // Act
             mockStream.Close();
 
             // Assert
-            mockInnerStream.Protected().Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
+            mockInnerStream
+                .Protected()
+                .Verify("Dispose", Times.Never(), exactParameterMatch: true, args: true);
             mockInnerStream.Verify(s => s.Close(), Times.Never());
             Assert.Equal(TaskStatus.RanToCompletion, serializeToStreamTask.Task.Status);
             Assert.True(await serializeToStreamTask.Task);
@@ -140,11 +168,13 @@ namespace System.Net.Http
             // Arrange
             bool faulted = false;
             Exception exception = new ApplicationException();
-            PushStreamContent content = new PushStreamContent(async (s, c, tc) =>
-            {
-                await Task.FromResult(42);
-                throw exception;
-            });
+            PushStreamContent content = new PushStreamContent(
+                async (s, c, tc) =>
+                {
+                    await Task.FromResult(42);
+                    throw exception;
+                }
+            );
             MemoryStream stream = new MemoryStream();
 
             try
@@ -172,15 +202,20 @@ namespace System.Net.Http
             {
                 // We mock the client, so this doesn't actually hit the web. This client will just echo back
                 // the body content we give it.
-                using (var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:30000/"))
+                using (
+                    var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:30000/")
+                )
                 {
-                    request.Content = new PushStreamContent((stream, content, context) =>
-                    {
-                        using (var writer = new StreamWriter(stream))
+                    request.Content = new PushStreamContent(
+                        (stream, content, context) =>
                         {
-                            writer.Write(expected);
-                        }
-                    }, "text/plain");
+                            using (var writer = new StreamWriter(stream))
+                            {
+                                writer.Write(expected);
+                            }
+                        },
+                        "text/plain"
+                    );
 
                     // Act
                     using (var response = await client.SendAsync(request, CancellationToken.None))
@@ -238,15 +273,19 @@ namespace System.Net.Http
 
         internal class MockCompleteTaskOnCloseStream : PushStreamContent.CompleteTaskOnCloseStream
         {
-            public MockCompleteTaskOnCloseStream(Stream innerStream, TaskCompletionSource<bool> serializeToStreamTask)
-                : base(innerStream, serializeToStreamTask)
-            {
-            }
+            public MockCompleteTaskOnCloseStream(
+                Stream innerStream,
+                TaskCompletionSource<bool> serializeToStreamTask
+            )
+                : base(innerStream, serializeToStreamTask) { }
         }
 
         private class MockHttpClient : HttpClient
         {
-            public override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, Threading.CancellationToken cancellationToken)
+            public override async Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                Threading.CancellationToken cancellationToken
+            )
             {
                 var stream = new MemoryStream();
                 await request.Content.CopyToAsync(stream);

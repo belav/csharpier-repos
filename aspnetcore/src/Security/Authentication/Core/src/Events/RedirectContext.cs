@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Context passed for redirect events.
 /// </summary>
-public class RedirectContext<TOptions> : PropertiesContext<TOptions> where TOptions : AuthenticationSchemeOptions
+public class RedirectContext<TOptions> : PropertiesContext<TOptions>
+    where TOptions : AuthenticationSchemeOptions
 {
     /// <summary>
     /// Creates a new context object.
@@ -23,7 +24,8 @@ public class RedirectContext<TOptions> : PropertiesContext<TOptions> where TOpti
         AuthenticationScheme scheme,
         TOptions options,
         AuthenticationProperties properties,
-        string redirectUri)
+        string redirectUri
+    )
         : base(context, scheme, options, properties)
     {
         Properties = properties;

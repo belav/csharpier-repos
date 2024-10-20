@@ -16,24 +16,38 @@ using Microsoft.CodeAnalysis.RemoveUnusedVariable;
 
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedVariable
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveUnusedVariable), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.RemoveUnusedVariable
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.AddImport)]
-    internal partial class CSharpRemoveUnusedVariableCodeFixProvider : AbstractRemoveUnusedVariableCodeFixProvider<LocalDeclarationStatementSyntax, VariableDeclaratorSyntax, VariableDeclarationSyntax>
+    internal partial class CSharpRemoveUnusedVariableCodeFixProvider
+        : AbstractRemoveUnusedVariableCodeFixProvider<
+            LocalDeclarationStatementSyntax,
+            VariableDeclaratorSyntax,
+            VariableDeclarationSyntax
+        >
     {
         public const string CS0168 = nameof(CS0168);
         public const string CS0219 = nameof(CS0219);
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpRemoveUnusedVariableCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpRemoveUnusedVariableCodeFixProvider() { }
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(CS0168, CS0219);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS0168, CS0219);
 
-        protected override bool IsCatchDeclarationIdentifier(SyntaxToken token)
-            => token.Parent is CatchDeclarationSyntax catchDeclaration && catchDeclaration.Identifier == token;
+        protected override bool IsCatchDeclarationIdentifier(SyntaxToken token) =>
+            token.Parent is CatchDeclarationSyntax catchDeclaration
+            && catchDeclaration.Identifier == token;
 
         protected override SyntaxNode GetNodeToRemoveOrReplace(SyntaxNode node)
         {
@@ -54,7 +68,11 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedVariable
             return null;
         }
 
-        protected override void RemoveOrReplaceNode(SyntaxEditor editor, SyntaxNode node, IBlockFactsService blockFacts)
+        protected override void RemoveOrReplaceNode(
+            SyntaxEditor editor,
+            SyntaxNode node,
+            IBlockFactsService blockFacts
+        )
         {
             switch (node.Kind())
             {
@@ -62,15 +80,23 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedVariable
                     editor.ReplaceNode(node, ((AssignmentExpressionSyntax)node).Right);
                     return;
                 default:
-                    RemoveNode(editor, node.IsParentKind(SyntaxKind.GlobalStatement) ? node.Parent : node, blockFacts);
+                    RemoveNode(
+                        editor,
+                        node.IsParentKind(SyntaxKind.GlobalStatement) ? node.Parent : node,
+                        blockFacts
+                    );
                     return;
             }
         }
 
-        protected override SeparatedSyntaxList<SyntaxNode> GetVariables(LocalDeclarationStatementSyntax localDeclarationStatement)
-            => localDeclarationStatement.Declaration.Variables;
+        protected override SeparatedSyntaxList<SyntaxNode> GetVariables(
+            LocalDeclarationStatementSyntax localDeclarationStatement
+        ) => localDeclarationStatement.Declaration.Variables;
 
-        protected override bool ShouldOfferFixForLocalDeclaration(IBlockFactsService blockFacts, SyntaxNode node)
+        protected override bool ShouldOfferFixForLocalDeclaration(
+            IBlockFactsService blockFacts,
+            SyntaxNode node
+        )
         {
             // If the fix location is not for a local declaration then we can allow it (eg, when inside a for
             // or catch).
@@ -79,8 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedVariable
 
             // Local declarations must be parented by an executable block, or global statement, otherwise
             // removing them would be invalid (and more than likely crash the fixer)
-            return localDeclaration.Parent is GlobalStatementSyntax ||
-                blockFacts.IsExecutableBlock(localDeclaration.Parent);
+            return localDeclaration.Parent is GlobalStatementSyntax
+                || blockFacts.IsExecutableBlock(localDeclaration.Parent);
         }
     }
 }

@@ -9,7 +9,9 @@ public class StartupWithComplexParentValidation
     {
         services
             .AddControllers(options => options.ValidateComplexTypesIfChildValidationFails = true)
-            .AddNewtonsoftJson(options => options.SerializerSettings.Converters.Insert(0, new IModelConverter()));
+            .AddNewtonsoftJson(options =>
+                options.SerializerSettings.Converters.Insert(0, new IModelConverter())
+            );
     }
 
     public void Configure(IApplicationBuilder app)

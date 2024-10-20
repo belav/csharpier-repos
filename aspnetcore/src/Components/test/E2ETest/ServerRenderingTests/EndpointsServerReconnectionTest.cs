@@ -12,18 +12,17 @@ using Xunit.Abstractions;
 namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;
 
 [CollectionDefinition(nameof(InteractivityTest), DisableParallelization = true)]
-public class EndpointsServerReconnectionTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
+public class EndpointsServerReconnectionTest
+    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
 {
     public EndpointsServerReconnectionTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
-    public override Task InitializeAsync()
-        => InitializeAsync(BrowserFixture.StreamingContext);
+    public override Task InitializeAsync() => InitializeAsync(BrowserFixture.StreamingContext);
 
     [Fact]
     public void ReconnectUI_Displays_OnFirstReconnect()
@@ -38,8 +37,14 @@ public class EndpointsServerReconnectionTest : ServerTestBase<BasicTestAppServer
         var javascript = (IJavaScriptExecutor)Browser;
 
         javascript.ExecuteScript("Blazor._internal.forceCloseConnection()");
-        Browser.Equal("block", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
-        Browser.Equal("none", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
+        Browser.Equal(
+            "block",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
+        Browser.Equal(
+            "none",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
         Browser.Exists(By.Id("increment-0")).Click();
         Browser.Equal("1", () => Browser.Exists(By.Id("count-0")).Text);
     }
@@ -58,8 +63,14 @@ public class EndpointsServerReconnectionTest : ServerTestBase<BasicTestAppServer
 
         // Perform the first reconnect
         javascript.ExecuteScript("Blazor._internal.forceCloseConnection()");
-        Browser.Equal("block", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
-        Browser.Equal("none", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
+        Browser.Equal(
+            "block",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
+        Browser.Equal(
+            "none",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
         Browser.Exists(By.Id("increment-0")).Click();
         Browser.Equal("1", () => Browser.Exists(By.Id("count-0")).Text);
 
@@ -69,8 +80,14 @@ public class EndpointsServerReconnectionTest : ServerTestBase<BasicTestAppServer
 
         // Perform the second reconnect
         javascript.ExecuteScript("Blazor._internal.forceCloseConnection()");
-        Browser.Equal("block", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
-        Browser.Equal("none", () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display"));
+        Browser.Equal(
+            "block",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
+        Browser.Equal(
+            "none",
+            () => Browser.Exists(By.Id("components-reconnect-modal")).GetCssValue("display")
+        );
         Browser.Exists(By.Id("increment-0")).Click();
         Browser.Equal("3", () => Browser.Exists(By.Id("count-0")).Text);
     }
@@ -176,12 +193,18 @@ public class EndpointsServerReconnectionTest : ServerTestBase<BasicTestAppServer
         AssertBrowserLogContainsMessage($"Counter 1 was disposed");
     }
 
-    private static void RemoveReconnectModal(IJavaScriptExecutor javascript, IWebElement reconnectModal)
+    private static void RemoveReconnectModal(
+        IJavaScriptExecutor javascript,
+        IWebElement reconnectModal
+    )
     {
-        javascript.ExecuteScript("""
+        javascript.ExecuteScript(
+            """
             window.reconnectModal = arguments[0];
             window.reconnectModal.remove();
-            """, reconnectModal);
+            """,
+            reconnectModal
+        );
     }
 
     private static string GetRemovedReconnectModalDisplay(IJavaScriptExecutor javascript)
@@ -189,11 +212,11 @@ public class EndpointsServerReconnectionTest : ServerTestBase<BasicTestAppServer
         return (string)javascript.ExecuteScript("return window.reconnectModal.style.display;");
     }
 
-    private void AssertBrowserLogContainsMessage(string message)
-        => Browser.True(() => DoesBrowserLogContainMessage(message));
+    private void AssertBrowserLogContainsMessage(string message) =>
+        Browser.True(() => DoesBrowserLogContainMessage(message));
 
-    private void AssertBrowserLogDoesNotContainMessage(string message)
-        => Browser.False(() => DoesBrowserLogContainMessage(message));
+    private void AssertBrowserLogDoesNotContainMessage(string message) =>
+        Browser.False(() => DoesBrowserLogContainMessage(message));
 
     private bool DoesBrowserLogContainMessage(string message)
     {

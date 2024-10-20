@@ -24,7 +24,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Returns <see cref="DocumentId"/> of the unmapped document containing the active statement (i.e. the document that has the #line directive mapping the statement to one of the specified <paramref name="documentIds"/>),
         /// or null the unmapped document has not been determined (the active statement has not changed from the baseline).
         /// </remarks>
-        ValueTask<ImmutableArray<ImmutableArray<ActiveStatementSpan>>> GetBaseActiveStatementSpansAsync(Solution solution, ImmutableArray<DocumentId> documentIds, CancellationToken cancellationToken);
+        ValueTask<
+            ImmutableArray<ImmutableArray<ActiveStatementSpan>>
+        > GetBaseActiveStatementSpansAsync(
+            Solution solution,
+            ImmutableArray<DocumentId> documentIds,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns adjusted active statements in the specified mapped <paramref name="document"/> snapshot.
@@ -33,6 +39,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <see langword="default"/> if called outside of an edit session, or active statements for the document can't be determined for some reason
         /// (e.g. the document has syntax errors or is out-of-sync).
         /// </returns>
-        ValueTask<ImmutableArray<ActiveStatementSpan>> GetAdjustedActiveStatementSpansAsync(TextDocument document, ActiveStatementSpanProvider activeStatementSpanProvider, CancellationToken cancellationToken);
+        ValueTask<ImmutableArray<ActiveStatementSpan>> GetAdjustedActiveStatementSpansAsync(
+            TextDocument document,
+            ActiveStatementSpanProvider activeStatementSpanProvider,
+            CancellationToken cancellationToken
+        );
     }
 }

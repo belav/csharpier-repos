@@ -21,17 +21,21 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConditionalExpressionPlacement
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConditionalExpressionPlacement), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConditionalExpressionPlacement
+        ),
+        Shared
+    ]
     internal sealed class ConditionalExpressionPlacementCodeFixProvider : CodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConditionalExpressionPlacementCodeFixProvider()
-        {
-        }
+        public ConditionalExpressionPlacementCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.ConditionalExpressionPlacementDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.ConditionalExpressionPlacementDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -41,16 +45,23 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConditionalExpressionPlacement
                 CodeAction.Create(
                     CSharpCodeFixesResources.Place_token_on_following_line,
                     c => UpdateDocumentAsync(document, ImmutableArray.Create(diagnostic), c),
-                    nameof(CSharpCodeFixesResources.Place_token_on_following_line)),
-                context.Diagnostics);
+                    nameof(CSharpCodeFixesResources.Place_token_on_following_line)
+                ),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
         private static async Task<Document> UpdateDocumentAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            CancellationToken cancellationToken
+        )
         {
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             using var _ = ArrayBuilder<TextChange>.GetInstance(out var edits);
 
             foreach (var diagnostic in diagnostics)
@@ -72,11 +83,12 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConditionalExpressionPlacement
             SourceText text,
             SyntaxToken token,
             ExpressionSyntax nextExpression,
-            ArrayBuilder<TextChange> edits)
+            ArrayBuilder<TextChange> edits
+        )
         {
             // Cases to consider
             // x ?
-            // x ? 
+            // x ?
             // x ? /* comment */
             // x /* comment */ ?
             // x /* comment */ ? /* comment */
@@ -101,7 +113,11 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConditionalExpressionPlacement
             edits.Add(new TextChange(new TextSpan(nextExpression.SpanStart, 0), token.Text + " "));
         }
 
-        public override FixAllProvider? GetFixAllProvider()
-            => FixAllProvider.Create(async (context, document, diagnostics) => await UpdateDocumentAsync(document, diagnostics, context.CancellationToken).ConfigureAwait(false));
+        public override FixAllProvider? GetFixAllProvider() =>
+            FixAllProvider.Create(
+                async (context, document, diagnostics) =>
+                    await UpdateDocumentAsync(document, diagnostics, context.CancellationToken)
+                        .ConfigureAwait(false)
+            );
     }
 }

@@ -35,7 +35,8 @@ internal sealed partial class ActionSelector : IActionSelector
     public ActionSelector(
         IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
         ActionConstraintCache actionConstraintCache,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
         _logger = loggerFactory.CreateLogger<ActionSelector>();
@@ -76,7 +77,10 @@ internal sealed partial class ActionSelector : IActionSelector
         return matches;
     }
 
-    public ActionDescriptor? SelectBestCandidate(RouteContext context, IReadOnlyList<ActionDescriptor> candidates)
+    public ActionDescriptor? SelectBestCandidate(
+        RouteContext context,
+        IReadOnlyList<ActionDescriptor> candidates
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(candidates);
@@ -97,12 +101,14 @@ internal sealed partial class ActionSelector : IActionSelector
         {
             var actionNames = string.Join(
                 Environment.NewLine,
-                finalMatches.Select(a => a.DisplayName));
+                finalMatches.Select(a => a.DisplayName)
+            );
             Log.AmbiguousActions(_logger, actionNames);
 
             var message = Resources.FormatDefaultActionSelector_AmbiguousActions(
                 Environment.NewLine,
-                actionNames);
+                actionNames
+            );
 
             throw new AmbiguousActionException(message);
         }
@@ -110,7 +116,8 @@ internal sealed partial class ActionSelector : IActionSelector
 
     private IReadOnlyList<ActionDescriptor>? EvaluateActionConstraints(
         RouteContext context,
-        IReadOnlyList<ActionDescriptor> actions)
+        IReadOnlyList<ActionDescriptor> actions
+    )
     {
         var actionsCount = actions.Count;
         var candidates = new List<ActionSelectorCandidate>(actionsCount);
@@ -119,7 +126,10 @@ internal sealed partial class ActionSelector : IActionSelector
         for (var i = 0; i < actionsCount; i++)
         {
             var action = actions[i];
-            var constraints = _actionConstraintCache.GetActionConstraints(context.HttpContext, action);
+            var constraints = _actionConstraintCache.GetActionConstraints(
+                context.HttpContext,
+                action
+            );
             candidates.Add(new ActionSelectorCandidate(action, constraints));
         }
 
@@ -144,7 +154,8 @@ internal sealed partial class ActionSelector : IActionSelector
     private IReadOnlyList<ActionSelectorCandidate>? EvaluateActionConstraintsCore(
         RouteContext context,
         IReadOnlyList<ActionSelectorCandidate> candidates,
-        int? startingOrder)
+        int? startingOrder
+    )
     {
         // Find the next group of constraints to process. This will be the lowest value of
         // order that is higher than startingOrder.
@@ -159,8 +170,10 @@ internal sealed partial class ActionSelector : IActionSelector
                 for (var j = 0; j < candidate.Constraints.Count; j++)
                 {
                     var constraint = candidate.Constraints[j];
-                    if ((startingOrder == null || constraint.Order > startingOrder) &&
-                        (order == null || constraint.Order < order))
+                    if (
+                        (startingOrder == null || constraint.Order > startingOrder)
+                        && (order == null || constraint.Order < order)
+                    )
                     {
                         order = constraint.Order;
                     }
@@ -182,7 +195,7 @@ internal sealed partial class ActionSelector : IActionSelector
         var constraintContext = new ActionConstraintContext
         {
             Candidates = candidates,
-            RouteContext = context
+            RouteContext = context,
         };
 
         // Perf: Avoid allocations
@@ -209,7 +222,8 @@ internal sealed partial class ActionSelector : IActionSelector
                                 _logger,
                                 candidate.Action.DisplayName,
                                 candidate.Action.Id,
-                                constraint);
+                                constraint
+                            );
                             break;
                         }
                     }
@@ -249,10 +263,25 @@ internal sealed partial class ActionSelector : IActionSelector
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Error, "Request matched multiple actions resulting in ambiguity. Matching actions: {AmbiguousActions}", EventName = "AmbiguousActions")]
+        [LoggerMessage(
+            1,
+            LogLevel.Error,
+            "Request matched multiple actions resulting in ambiguity. Matching actions: {AmbiguousActions}",
+            EventName = "AmbiguousActions"
+        )]
         public static partial void AmbiguousActions(ILogger logger, string ambiguousActions);
 
-        [LoggerMessage(2, LogLevel.Debug, "Action '{ActionName}' with id '{ActionId}' did not match the constraint '{ActionConstraint}'", EventName = "ConstraintMismatch")]
-        public static partial void ConstraintMismatch(ILogger logger, string? actionName, string actionId, IActionConstraint actionConstraint);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Action '{ActionName}' with id '{ActionId}' did not match the constraint '{ActionConstraint}'",
+            EventName = "ConstraintMismatch"
+        )]
+        public static partial void ConstraintMismatch(
+            ILogger logger,
+            string? actionName,
+            string actionId,
+            IActionConstraint actionConstraint
+        );
     }
 }

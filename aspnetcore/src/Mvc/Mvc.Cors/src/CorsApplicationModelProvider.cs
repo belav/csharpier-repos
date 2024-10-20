@@ -39,40 +39,57 @@ internal sealed class CorsApplicationModelProvider : IApplicationModelProvider
 
     private static void ConfigureCorsFilters(ApplicationModelProviderContext context)
     {
-        var isCorsEnabledGlobally = context.Result.Filters.OfType<ICorsAuthorizationFilter>().Any() ||
-                        context.Result.Filters.OfType<CorsAuthorizationFilterFactory>().Any();
+        var isCorsEnabledGlobally =
+            context.Result.Filters.OfType<ICorsAuthorizationFilter>().Any()
+            || context.Result.Filters.OfType<CorsAuthorizationFilterFactory>().Any();
 
         foreach (var controllerModel in context.Result.Controllers)
         {
-            var enableCors = controllerModel.Attributes.OfType<IEnableCorsAttribute>().FirstOrDefault();
+            var enableCors = controllerModel
+                .Attributes.OfType<IEnableCorsAttribute>()
+                .FirstOrDefault();
             if (enableCors != null)
             {
-                controllerModel.Filters.Add(new CorsAuthorizationFilterFactory(enableCors.PolicyName));
+                controllerModel.Filters.Add(
+                    new CorsAuthorizationFilterFactory(enableCors.PolicyName)
+                );
             }
 
-            var disableCors = controllerModel.Attributes.OfType<IDisableCorsAttribute>().FirstOrDefault();
+            var disableCors = controllerModel
+                .Attributes.OfType<IDisableCorsAttribute>()
+                .FirstOrDefault();
             if (disableCors != null)
             {
                 controllerModel.Filters.Add(new DisableCorsAuthorizationFilter());
             }
 
-            var corsOnController = enableCors != null || disableCors != null || controllerModel.Filters.OfType<ICorsAuthorizationFilter>().Any();
+            var corsOnController =
+                enableCors != null
+                || disableCors != null
+                || controllerModel.Filters.OfType<ICorsAuthorizationFilter>().Any();
 
             foreach (var actionModel in controllerModel.Actions)
             {
                 enableCors = actionModel.Attributes.OfType<IEnableCorsAttribute>().FirstOrDefault();
                 if (enableCors != null)
                 {
-                    actionModel.Filters.Add(new CorsAuthorizationFilterFactory(enableCors.PolicyName));
+                    actionModel.Filters.Add(
+                        new CorsAuthorizationFilterFactory(enableCors.PolicyName)
+                    );
                 }
 
-                disableCors = actionModel.Attributes.OfType<IDisableCorsAttribute>().FirstOrDefault();
+                disableCors = actionModel
+                    .Attributes.OfType<IDisableCorsAttribute>()
+                    .FirstOrDefault();
                 if (disableCors != null)
                 {
                     actionModel.Filters.Add(new DisableCorsAuthorizationFilter());
                 }
 
-                var corsOnAction = enableCors != null || disableCors != null || actionModel.Filters.OfType<ICorsAuthorizationFilter>().Any();
+                var corsOnAction =
+                    enableCors != null
+                    || disableCors != null
+                    || actionModel.Filters.OfType<ICorsAuthorizationFilter>().Any();
 
                 if (isCorsEnabledGlobally || corsOnController || corsOnAction)
                 {
@@ -104,5 +121,4 @@ internal sealed class CorsApplicationModelProvider : IApplicationModelProvider
             }
         }
     }
-
 }

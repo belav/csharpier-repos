@@ -6,4 +6,8 @@ using System.Reflection;
 
 [assembly: AssemblyTitle("System.Web.Cors")]
 [assembly: AssemblyDescription("")]
-[assembly: SuppressMessage("Microsoft.Design", "CA2210:AssembliesShouldHaveValidStrongNames", Justification = "This assembly is delay-signed.")]
+[assembly: SuppressMessage(
+    "Microsoft.Design",
+    "CA2210:AssembliesShouldHaveValidStrongNames",
+    Justification = "This assembly is delay-signed."
+)]

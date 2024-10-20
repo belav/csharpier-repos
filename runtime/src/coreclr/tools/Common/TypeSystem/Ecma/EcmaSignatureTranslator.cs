@@ -14,7 +14,11 @@ namespace Internal.TypeSystem.Ecma
 
         private Func<int, int> _getAlternateStreamToken;
 
-        public EcmaSignatureTranslator(BlobReader input, BlobBuilder output, Func<int, int> getAlternateStreamToken)
+        public EcmaSignatureTranslator(
+            BlobReader input,
+            BlobBuilder output,
+            Func<int, int> getAlternateStreamToken
+        )
         {
             _input = input;
             _output = output;
@@ -71,7 +75,10 @@ namespace Internal.TypeSystem.Ecma
         public void ParseMethodSignature()
         {
             byte sigHeader = ParseByte();
-            if (((int)sigHeader & (int)SignatureAttributes.Generic) == (int)SignatureAttributes.Generic)
+            if (
+                ((int)sigHeader & (int)SignatureAttributes.Generic)
+                == (int)SignatureAttributes.Generic
+            )
             {
                 // Parse arity
                 ParseCompressedInt();
@@ -113,7 +120,9 @@ namespace Internal.TypeSystem.Ecma
         {
             int token = MetadataTokens.GetToken(_input.ReadTypeHandle());
             int newToken = _getAlternateStreamToken(token);
-            int newEncodedHandle = CodedIndex.TypeDefOrRefOrSpec(MetadataTokens.EntityHandle(newToken));
+            int newEncodedHandle = CodedIndex.TypeDefOrRefOrSpec(
+                MetadataTokens.EntityHandle(newToken)
+            );
             _output.WriteCompressedInteger(newEncodedHandle);
         }
 
@@ -171,37 +180,37 @@ namespace Internal.TypeSystem.Ecma
                 case SignatureTypeCode.SZArray:
                 case SignatureTypeCode.ByReference:
                 case SignatureTypeCode.Pointer:
-                    {
-                        ParseType();
-                        break;
-                    }
+                {
+                    ParseType();
+                    break;
+                }
                 case SignatureTypeCode.Array:
-                    {
-                        ParseType();
-                        /*var rank = */ParseCompressedInt();
+                {
+                    ParseType();
+                    /*var rank = */ParseCompressedInt();
 
-                        var boundsCount = ParseCompressedInt();
-                        for (int i = 0; i < boundsCount; i++)
-                            ParseCompressedInt();
-                        var lowerBoundsCount = ParseCompressedInt();
-                        for (int j = 0; j < lowerBoundsCount; j++)
-                            ParseCompressedSignedInt();
-                        break;
-                    }
+                    var boundsCount = ParseCompressedInt();
+                    for (int i = 0; i < boundsCount; i++)
+                        ParseCompressedInt();
+                    var lowerBoundsCount = ParseCompressedInt();
+                    for (int j = 0; j < lowerBoundsCount; j++)
+                        ParseCompressedSignedInt();
+                    break;
+                }
                 case SignatureTypeCode.GenericTypeParameter:
                 case SignatureTypeCode.GenericMethodParameter:
                     ParseCompressedInt();
                     break;
                 case SignatureTypeCode.GenericTypeInstance:
+                {
+                    ParseType();
+                    int instanceLength = ParseCompressedInt();
+                    for (int i = 0; i < instanceLength; i++)
                     {
                         ParseType();
-                        int instanceLength = ParseCompressedInt();
-                        for (int i = 0; i < instanceLength; i++)
-                        {
-                            ParseType();
-                        }
-                        break;
                     }
+                    break;
+                }
 
                 case SignatureTypeCode.FunctionPointer:
                     ParseMethodSignature();

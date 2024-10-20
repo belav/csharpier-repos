@@ -14,7 +14,11 @@ namespace System.Runtime
         }
     }
 
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Constructor,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public sealed class TargetedPatchingOptOutAttribute : Attribute
     {
         public string Reason { get; }

@@ -1,5 +1,5 @@
 //
-// OraclePermissionAttribute.cs 
+// OraclePermissionAttribute.cs
 //
 // Part of the Mono class libraries at
 // mcs/class/System.Data.OracleClient/System.Data.OracleClient
@@ -21,31 +21,34 @@ using System.Data.Common;
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Data.OracleClient {
+namespace System.Data.OracleClient
+{
+    [Serializable]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    public sealed class OraclePermissionAttribute : DBDataPermissionAttribute
+    {
+        #region Constructors
 
-	[Serializable]
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class | 
-			 AttributeTargets.Struct | AttributeTargets.Constructor | 
-			 AttributeTargets.Method, AllowMultiple=true,
-			 Inherited=false)]
-	public sealed class OraclePermissionAttribute : DBDataPermissionAttribute {
+        public OraclePermissionAttribute(SecurityAction action)
+            : base(action) { }
 
-		#region Constructors
+        #endregion // Constructors
 
-		public OraclePermissionAttribute (SecurityAction action) 
-			: base (action)
-		{
-		}
+        #region Methods
 
-		#endregion // Constructors
+        public override IPermission CreatePermission()
+        {
+            return new OraclePermission(this);
+        }
 
-		#region Methods
-
-		public override IPermission CreatePermission ()
-		{
-			return new OraclePermission (this);
-		}
-
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

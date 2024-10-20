@@ -7,7 +7,6 @@ using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Shared.Extensions;
 using Roslyn.Utilities;
-
 using static Microsoft.CodeAnalysis.Shared.Utilities.EditorBrowsableHelpers;
 
 namespace Microsoft.CodeAnalysis.Completion.Providers
@@ -41,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             string language,
             ImmutableArray<TypeImportCompletionItemInfo> items,
             int publicItemCount,
-            bool hasEnumBaseTypes)
+            bool hasEnumBaseTypes
+        )
         {
             AssemblySymbolKey = assemblySymbolKey;
             Checksum = checksum;
@@ -59,16 +59,22 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             bool isAttributeContext,
             bool isEnumBaseListContext,
             bool isCaseSensitive,
-            bool hideAdvancedMembers)
+            bool hideAdvancedMembers
+        )
         {
-            if (AssemblySymbolKey.Resolve(originCompilation).Symbol is not IAssemblySymbol assemblySymbol)
+            if (
+                AssemblySymbolKey.Resolve(originCompilation).Symbol
+                is not IAssemblySymbol assemblySymbol
+            )
                 return ImmutableArray<CompletionItem>.Empty;
 
             if (isEnumBaseListContext && !HasEnumBaseTypes)
                 return ImmutableArray<CompletionItem>.Empty;
 
             var isSameLanguage = Language == language;
-            var isInternalsVisible = originCompilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(assemblySymbol);
+            var isInternalsVisible = originCompilation.Assembly.IsSameAssemblyOrHasFriendAccessTo(
+                assemblySymbol
+            );
             using var _ = ArrayBuilder<CompletionItem>.GetInstance(out var builder);
 
             // PERF: try set the capacity upfront to avoid allocation from Resize
@@ -123,7 +129,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 if (!isSameLanguage && info.IsGeneric)
                 {
                     // We don't want to cache this item.
-                    item = ImportCompletionItem.CreateItemWithGenericDisplaySuffix(item, genericTypeSuffix);
+                    item = ImportCompletionItem.CreateItemWithGenericDisplaySuffix(
+                        item,
+                        genericTypeSuffix
+                    );
                 }
 
                 builder.Add(item);
@@ -131,19 +140,37 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
             return builder.ToImmutable();
 
-            static CompletionItem GetAppropriateAttributeItem(CompletionItem attributeItem, bool isCaseSensitive)
+            static CompletionItem GetAppropriateAttributeItem(
+                CompletionItem attributeItem,
+                bool isCaseSensitive
+            )
             {
-                if (attributeItem.DisplayText.TryGetWithoutAttributeSuffix(isCaseSensitive: isCaseSensitive, out var attributeNameWithoutSuffix))
+                if (
+                    attributeItem.DisplayText.TryGetWithoutAttributeSuffix(
+                        isCaseSensitive: isCaseSensitive,
+                        out var attributeNameWithoutSuffix
+                    )
+                )
                 {
                     // We don't want to cache this item.
-                    return ImportCompletionItem.CreateAttributeItemWithoutSuffix(attributeItem, attributeNameWithoutSuffix, CompletionItemFlags.Expanded);
+                    return ImportCompletionItem.CreateAttributeItemWithoutSuffix(
+                        attributeItem,
+                        attributeNameWithoutSuffix,
+                        CompletionItemFlags.Expanded
+                    );
                 }
 
                 return attributeItem;
             }
         }
 
-        public class Builder(SymbolKey assemblySymbolKey, Checksum checksum, string language, string genericTypeSuffix, EditorBrowsableInfo editorBrowsableInfo) : IDisposable
+        public class Builder(
+            SymbolKey assemblySymbolKey,
+            Checksum checksum,
+            string language,
+            string genericTypeSuffix,
+            EditorBrowsableInfo editorBrowsableInfo
+        ) : IDisposable
         {
             private readonly SymbolKey _assemblySymbolKey = assemblySymbolKey;
             private readonly string _language = language;
@@ -154,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             private int _publicItemCount;
             private bool _hasEnumBaseTypes;
 
-            private readonly ArrayBuilder<TypeImportCompletionItemInfo> _itemsBuilder = ArrayBuilder<TypeImportCompletionItemInfo>.GetInstance();
+            private readonly ArrayBuilder<TypeImportCompletionItemInfo> _itemsBuilder =
+                ArrayBuilder<TypeImportCompletionItemInfo>.GetInstance();
 
             public TypeImportCompletionCacheEntry ToReferenceCacheEntry()
             {
@@ -164,16 +192,19 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     _language,
                     _itemsBuilder.ToImmutable(),
                     _publicItemCount,
-                    _hasEnumBaseTypes);
+                    _hasEnumBaseTypes
+                );
             }
 
             public void AddItem(INamedTypeSymbol symbol, string containingNamespace, bool isPublic)
             {
                 // We want to cache items with EditorBrowsableState == Advanced regardless of current "hide adv members" option value
-                var (isBrowsable, isEditorBrowsableStateAdvanced) = symbol.IsEditorBrowsableWithState(
-                    hideAdvancedMembers: false,
-                    _editorBrowsableInfo.Compilation,
-                    _editorBrowsableInfo);
+                var (isBrowsable, isEditorBrowsableStateAdvanced) =
+                    symbol.IsEditorBrowsableWithState(
+                        hideAdvancedMembers: false,
+                        _editorBrowsableInfo.Compilation,
+                        _editorBrowsableInfo
+                    );
 
                 if (!isBrowsable)
                 {
@@ -183,15 +214,19 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
                 var isGeneric = symbol.Arity > 0;
 
-                // Need to determine if a type is an attribute up front since we want to filter out 
-                // non-attribute types when in attribute context. We can't do this lazily since we don't hold 
-                // on to symbols. However, the cost of calling `IsAttribute` on every top-level type symbols 
-                // is prohibitively high, so we opt for the heuristic that would do the simple textual "Attribute" 
+                // Need to determine if a type is an attribute up front since we want to filter out
+                // non-attribute types when in attribute context. We can't do this lazily since we don't hold
+                // on to symbols. However, the cost of calling `IsAttribute` on every top-level type symbols
+                // is prohibitively high, so we opt for the heuristic that would do the simple textual "Attribute"
                 // suffix check first, then the more expensive symbolic check. As a result, all unimported
                 // attribute types that don't have "Attribute" suffix would be filtered out when in attribute context.
-                var isAttribute = symbol.Name.HasAttributeSuffix(isCaseSensitive: false) && symbol.IsAttribute();
+                var isAttribute =
+                    symbol.Name.HasAttributeSuffix(isCaseSensitive: false) && symbol.IsAttribute();
 
-                var isEnumBaseType = symbol.SpecialType is >= SpecialType.System_SByte and <= SpecialType.System_UInt64;
+                var isEnumBaseType =
+                    symbol.SpecialType
+                        is >= SpecialType.System_SByte
+                            and <= SpecialType.System_UInt64;
                 _hasEnumBaseTypes |= isEnumBaseType;
 
                 var item = ImportCompletionItem.Create(
@@ -201,42 +236,59 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                     symbol.GetGlyph(),
                     _genericTypeSuffix,
                     CompletionItemFlags.CachedAndExpanded,
-                    extensionMethodData: null);
+                    extensionMethodData: null
+                );
 
                 if (isPublic)
                     _publicItemCount++;
 
-                _itemsBuilder.Add(new TypeImportCompletionItemInfo(item, isPublic, isGeneric, isAttribute, isEditorBrowsableStateAdvanced, isEnumBaseType));
+                _itemsBuilder.Add(
+                    new TypeImportCompletionItemInfo(
+                        item,
+                        isPublic,
+                        isGeneric,
+                        isAttribute,
+                        isEditorBrowsableStateAdvanced,
+                        isEnumBaseType
+                    )
+                );
             }
 
-            public void Dispose()
-                => _itemsBuilder.Free();
+            public void Dispose() => _itemsBuilder.Free();
         }
 
-        private readonly struct TypeImportCompletionItemInfo(CompletionItem item, bool isPublic, bool isGeneric, bool isAttribute, bool isEditorBrowsableStateAdvanced, bool isEnumBaseType)
+        private readonly struct TypeImportCompletionItemInfo(
+            CompletionItem item,
+            bool isPublic,
+            bool isGeneric,
+            bool isAttribute,
+            bool isEditorBrowsableStateAdvanced,
+            bool isEnumBaseType
+        )
         {
-            private readonly ItemPropertyKind _properties = (isPublic ? ItemPropertyKind.IsPublic : 0)
-                            | (isGeneric ? ItemPropertyKind.IsGeneric : 0)
-                            | (isAttribute ? ItemPropertyKind.IsAttribute : 0)
-                            | (isEnumBaseType ? ItemPropertyKind.IsEnumBaseType : 0)
-                            | (isEditorBrowsableStateAdvanced ? ItemPropertyKind.IsEditorBrowsableStateAdvanced : 0);
+            private readonly ItemPropertyKind _properties =
+                (isPublic ? ItemPropertyKind.IsPublic : 0)
+                | (isGeneric ? ItemPropertyKind.IsGeneric : 0)
+                | (isAttribute ? ItemPropertyKind.IsAttribute : 0)
+                | (isEnumBaseType ? ItemPropertyKind.IsEnumBaseType : 0)
+                | (
+                    isEditorBrowsableStateAdvanced
+                        ? ItemPropertyKind.IsEditorBrowsableStateAdvanced
+                        : 0
+                );
 
             public CompletionItem Item { get; } = item;
 
-            public bool IsPublic
-                => (_properties & ItemPropertyKind.IsPublic) != 0;
+            public bool IsPublic => (_properties & ItemPropertyKind.IsPublic) != 0;
 
-            public bool IsGeneric
-                => (_properties & ItemPropertyKind.IsGeneric) != 0;
+            public bool IsGeneric => (_properties & ItemPropertyKind.IsGeneric) != 0;
 
-            public bool IsAttribute
-                => (_properties & ItemPropertyKind.IsAttribute) != 0;
+            public bool IsAttribute => (_properties & ItemPropertyKind.IsAttribute) != 0;
 
-            public bool IsEnumBaseType
-                => (_properties & ItemPropertyKind.IsEnumBaseType) != 0;
+            public bool IsEnumBaseType => (_properties & ItemPropertyKind.IsEnumBaseType) != 0;
 
-            public bool IsEditorBrowsableStateAdvanced
-                => (_properties & ItemPropertyKind.IsEditorBrowsableStateAdvanced) != 0;
+            public bool IsEditorBrowsableStateAdvanced =>
+                (_properties & ItemPropertyKind.IsEditorBrowsableStateAdvanced) != 0;
 
             [Flags]
             private enum ItemPropertyKind : byte
@@ -245,7 +297,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 IsGeneric = 2,
                 IsAttribute = 4,
                 IsEnumBaseType = 8,
-                IsEditorBrowsableStateAdvanced = 16
+                IsEditorBrowsableStateAdvanced = 16,
             }
         }
     }

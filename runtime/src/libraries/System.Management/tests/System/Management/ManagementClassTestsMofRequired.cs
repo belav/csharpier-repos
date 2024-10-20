@@ -9,12 +9,18 @@ namespace System.Management.Tests
     public class ManagementClassTestsMofRequired
     {
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsElevatedAndSupportsWmi))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Create_Modify_Delete_Static_Class()
         {
             using (var newClass = new ManagementClass(WmiTestHelper.Namespace))
             {
-                const string NewClassName = "CoreFX_Create_Modify_Delete_Static_Class\uEE68\uD79D\u1659";
+                const string NewClassName =
+                    "CoreFX_Create_Modify_Delete_Static_Class\uEE68\uD79D\u1659";
                 const string PropertyName = "Key";
                 const int PropertyValue = 10;
 
@@ -34,13 +40,20 @@ namespace System.Management.Tests
                 // If any of the steps below fail it is likely that the new class was not deleted, likely it will have to
                 // be deleted via a tool like wbemtest.
                 newClass.Delete();
-                ManagementException managementException = Assert.Throws<ManagementException>(() => targetClass.Get());
+                ManagementException managementException = Assert.Throws<ManagementException>(
+                    () => targetClass.Get()
+                );
                 Assert.Equal(ManagementStatus.NotFound, managementException.ErrorCode);
             }
         }
 
         [ConditionalFact(typeof(WmiTestHelper), nameof(WmiTestHelper.IsElevatedAndSupportsWmi))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34689", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34689",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Create_Modify_Delete_Static_And_Instance()
         {
             using (var newClass = new ManagementClass(WmiTestHelper.Namespace))
@@ -64,7 +77,10 @@ namespace System.Management.Tests
                 newInstance.Put();
 
                 var targetInstance = new ManagementObject(
-                    WmiTestHelper.Namespace, $"{NewClassName}.{KeyPropertyName}='{KeyPropertyValue}'", null);
+                    WmiTestHelper.Namespace,
+                    $"{NewClassName}.{KeyPropertyName}='{KeyPropertyValue}'",
+                    null
+                );
                 targetInstance.Get();
                 Assert.Equal(OldMovieValue, targetInstance[MoviePropertyName].ToString());
 
@@ -78,7 +94,9 @@ namespace System.Management.Tests
                 // If any of the steps below fail it is likely that the new class was not deleted, likely it will have to
                 // be deleted via a tool like wbemtest.
                 newInstance.Delete();
-                ManagementException managementException = Assert.Throws<ManagementException>(() => targetInstance.Get());
+                ManagementException managementException = Assert.Throws<ManagementException>(
+                    () => targetInstance.Get()
+                );
                 Assert.Equal(ManagementStatus.NotFound, managementException.ErrorCode);
 
                 // If any of the steps below fail it is likely that the new class was not deleted, likely it will have to

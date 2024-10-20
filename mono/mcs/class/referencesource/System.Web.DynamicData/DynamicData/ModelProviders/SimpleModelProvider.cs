@@ -1,29 +1,33 @@
-﻿namespace System.Web.DynamicData.ModelProviders {
+﻿namespace System.Web.DynamicData.ModelProviders
+{
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
 
-    internal class SimpleDataModelProvider : DataModelProvider {
+    internal class SimpleDataModelProvider : DataModelProvider
+    {
         private List<TableProvider> _tables = new List<TableProvider>();
-        
-        public SimpleDataModelProvider(Type entityType) {
+
+        public SimpleDataModelProvider(Type entityType)
+        {
             _tables.Add(new SimpleTableProvider(this, entityType));
         }
 
-        public SimpleDataModelProvider(ICustomTypeDescriptor typeDescriptor) {
+        public SimpleDataModelProvider(ICustomTypeDescriptor typeDescriptor)
+        {
             _tables.Add(new SimpleTableProvider(this, typeDescriptor));
         }
 
-        public override ReadOnlyCollection<TableProvider> Tables {
-            get {
-                return _tables.AsReadOnly();
-            }
+        public override ReadOnlyCollection<TableProvider> Tables
+        {
+            get { return _tables.AsReadOnly(); }
         }
 
-        public override object CreateContext() {
+        public override object CreateContext()
+        {
             throw new NotSupportedException();
         }
     }

@@ -38,7 +38,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(DataObjectAttribute attribute, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            DataObjectAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
         }

@@ -9,7 +9,5 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Required by <see cref="SymbolDisplayPartKind"/>.
     /// </summary>
-    internal static class IErrorTypeSymbol
-    {
-    }
+    internal static class IErrorTypeSymbol { }
 }

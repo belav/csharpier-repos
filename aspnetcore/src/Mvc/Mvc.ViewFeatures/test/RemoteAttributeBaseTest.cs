@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
@@ -22,14 +22,7 @@ public class RemoteAttributeBaseTest
     // Null or empty property names are invalid. (Those containing just whitespace are legal.)
     public static TheoryData<string> NullOrEmptyNames
     {
-        get
-        {
-            return new TheoryData<string>
-                {
-                    null,
-                    string.Empty,
-                };
-        }
+        get { return new TheoryData<string> { null, string.Empty }; }
     }
 
     [Fact]
@@ -96,7 +89,7 @@ public class RemoteAttributeBaseTest
         var attribute = new TestableRemoteAttributeBase()
         {
             ErrorMessageResourceName = nameof(Resources.RemoteAttribute_Error),
-            ErrorMessageResourceType = typeof(Resources)
+            ErrorMessageResourceType = typeof(Resources),
         };
 
         // Act
@@ -108,7 +101,9 @@ public class RemoteAttributeBaseTest
 
     [Theory]
     [MemberData(nameof(NullOrEmptyNames))]
-    public void FormatAdditionalFieldsForClientValidation_WithInvalidPropertyName_Throws(string property)
+    public void FormatAdditionalFieldsForClientValidation_WithInvalidPropertyName_Throws(
+        string property
+    )
     {
         // Arrange
         var attribute = new TestableRemoteAttributeBase();
@@ -118,17 +113,15 @@ public class RemoteAttributeBaseTest
         ExceptionAssert.ThrowsArgument(
             () => attribute.FormatAdditionalFieldsForClientValidation(property),
             "property",
-            expectedMessage);
+            expectedMessage
+        );
     }
 
     [Fact]
     public void FormatAdditionalFieldsForClientValidation_WillFormat_AdditionalFields()
     {
         // Arrange
-        var attribute = new TestableRemoteAttributeBase
-        {
-            AdditionalFields = "FieldOne, FieldTwo"
-        };
+        var attribute = new TestableRemoteAttributeBase { AdditionalFields = "FieldOne, FieldTwo" };
 
         // Act
         var actual = attribute.FormatAdditionalFieldsForClientValidation("Property");
@@ -149,7 +142,8 @@ public class RemoteAttributeBaseTest
         ExceptionAssert.ThrowsArgument(
             () => RemoteAttributeBase.FormatPropertyForClientValidation(property),
             "property",
-            expected);
+            expected
+        );
     }
 
     [Fact]
@@ -171,7 +165,11 @@ public class RemoteAttributeBaseTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
             kvp =>
             {
                 Assert.Equal("data-val-remote", kvp.Key);
@@ -182,8 +180,17 @@ public class RemoteAttributeBaseTest
                 Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                 Assert.Equal("*.Length", kvp.Value);
             },
-            kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-type", kvp.Key);
+                Assert.Equal("POST", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-url", kvp.Key);
+                Assert.Equal(url, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -206,7 +213,11 @@ public class RemoteAttributeBaseTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
             kvp =>
             {
                 // IStringLocalizerFactory existence alone is insufficient to change error message.
@@ -218,8 +229,17 @@ public class RemoteAttributeBaseTest
                 Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                 Assert.Equal("*.Length", kvp.Value);
             },
-            kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-type", kvp.Key);
+                Assert.Equal("POST", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-url", kvp.Key);
+                Assert.Equal(url, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -235,8 +255,9 @@ public class RemoteAttributeBaseTest
             ErrorMessage = "Error about '{0}' from override.",
         };
 
-        var options = context.ActionContext.HttpContext.RequestServices
-            .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+        var options = context.ActionContext.HttpContext.RequestServices.GetRequiredService<
+            IOptions<MvcDataAnnotationsLocalizationOptions>
+        >();
         var localizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
         options.Value.DataAnnotationLocalizerProvider = (type, factory) => localizer.Object;
 
@@ -246,7 +267,11 @@ public class RemoteAttributeBaseTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
             kvp =>
             {
                 // Non-null DataAnnotationLocalizerProvider alone is insufficient to change error message.
@@ -258,8 +283,17 @@ public class RemoteAttributeBaseTest
                 Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                 Assert.Equal("*.Length", kvp.Value);
             },
-            kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-type", kvp.Key);
+                Assert.Equal("POST", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-url", kvp.Key);
+                Assert.Equal(url, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -282,8 +316,9 @@ public class RemoteAttributeBaseTest
             .Setup(l => l["Error about '{0}' from override.", "Length"])
             .Returns(localizedString)
             .Verifiable();
-        var options = context.ActionContext.HttpContext.RequestServices
-            .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+        var options = context.ActionContext.HttpContext.RequestServices.GetRequiredService<
+            IOptions<MvcDataAnnotationsLocalizationOptions>
+        >();
         options.Value.DataAnnotationLocalizerProvider = (type, factory) => localizer.Object;
 
         // Act
@@ -294,7 +329,11 @@ public class RemoteAttributeBaseTest
 
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
             kvp =>
             {
                 Assert.Equal("data-val-remote", kvp.Key);
@@ -305,8 +344,17 @@ public class RemoteAttributeBaseTest
                 Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                 Assert.Equal("*.Length", kvp.Value);
             },
-            kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-type", kvp.Key);
+                Assert.Equal("POST", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-url", kvp.Key);
+                Assert.Equal(url, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -327,8 +375,9 @@ public class RemoteAttributeBaseTest
         var context = GetValidationContext(localizerFactory);
 
         var localizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
-        var options = context.ActionContext.HttpContext.RequestServices
-            .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+        var options = context.ActionContext.HttpContext.RequestServices.GetRequiredService<
+            IOptions<MvcDataAnnotationsLocalizationOptions>
+        >();
         options.Value.DataAnnotationLocalizerProvider = (type, factory) => localizer.Object;
 
         // Act
@@ -337,7 +386,11 @@ public class RemoteAttributeBaseTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
             kvp =>
             {
                 // Configuring the attribute using ErrorMessageResource* trumps available IStringLocalizer etc.
@@ -349,8 +402,17 @@ public class RemoteAttributeBaseTest
                 Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                 Assert.Equal("*.Length", kvp.Value);
             },
-            kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-type", kvp.Key);
+                Assert.Equal("POST", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-url", kvp.Key);
+                Assert.Equal(url, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -364,7 +426,10 @@ public class RemoteAttributeBaseTest
         metadataProvider
             .ForProperty(typeof(string), nameof(string.Length))
             .DisplayDetails(d => d.DisplayName = () => "Display Length");
-        var context = GetValidationContext(localizerFactory: null, metadataProvider: metadataProvider);
+        var context = GetValidationContext(
+            localizerFactory: null,
+            metadataProvider: metadataProvider
+        );
 
         var attribute = new TestableRemoteAttributeBase(dummyGetUrlReturnValue: url)
         {
@@ -378,7 +443,11 @@ public class RemoteAttributeBaseTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
             kvp =>
             {
                 Assert.Equal("data-val-remote", kvp.Key);
@@ -389,8 +458,17 @@ public class RemoteAttributeBaseTest
                 Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                 Assert.Equal("*.Length", kvp.Value);
             },
-            kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-type", kvp.Key);
+                Assert.Equal("POST", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-url", kvp.Key);
+                Assert.Equal(url, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -419,8 +497,9 @@ public class RemoteAttributeBaseTest
             .Setup(l => l["Error about '{0}' from override.", "Display Length"])
             .Returns(localizedString)
             .Verifiable();
-        var options = context.ActionContext.HttpContext.RequestServices
-            .GetRequiredService<IOptions<MvcDataAnnotationsLocalizationOptions>>();
+        var options = context.ActionContext.HttpContext.RequestServices.GetRequiredService<
+            IOptions<MvcDataAnnotationsLocalizationOptions>
+        >();
         options.Value.DataAnnotationLocalizerProvider = (type, factory) => localizer.Object;
 
         // Act
@@ -431,7 +510,11 @@ public class RemoteAttributeBaseTest
 
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
             kvp =>
             {
                 Assert.Equal("data-val-remote", kvp.Key);
@@ -442,8 +525,17 @@ public class RemoteAttributeBaseTest
                 Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                 Assert.Equal("*.Length", kvp.Value);
             },
-            kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-type", kvp.Key);
+                Assert.Equal("POST", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-url", kvp.Key);
+                Assert.Equal(url, kvp.Value);
+            }
+        );
     }
 
     [Fact]
@@ -455,7 +547,7 @@ public class RemoteAttributeBaseTest
         {
             HttpMethod = "POST",
             AdditionalFields = "Password,ConfirmPassword",
-            ErrorMessage = "Error"
+            ErrorMessage = "Error",
         };
         var context = GetValidationContext();
 
@@ -465,20 +557,38 @@ public class RemoteAttributeBaseTest
         // Assert
         Assert.Collection(
             context.Attributes,
-            kvp => { Assert.Equal("data-val", kvp.Key); Assert.Equal("true", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote", kvp.Key); Assert.Equal("Error", kvp.Value); },
+            kvp =>
+            {
+                Assert.Equal("data-val", kvp.Key);
+                Assert.Equal("true", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote", kvp.Key);
+                Assert.Equal("Error", kvp.Value);
+            },
             kvp =>
             {
                 Assert.Equal("data-val-remote-additionalfields", kvp.Key);
                 Assert.Equal("*.Length,*.Password,*.ConfirmPassword", kvp.Value);
             },
-            kvp => { Assert.Equal("data-val-remote-type", kvp.Key); Assert.Equal("POST", kvp.Value); },
-            kvp => { Assert.Equal("data-val-remote-url", kvp.Key); Assert.Equal(url, kvp.Value); });
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-type", kvp.Key);
+                Assert.Equal("POST", kvp.Value);
+            },
+            kvp =>
+            {
+                Assert.Equal("data-val-remote-url", kvp.Key);
+                Assert.Equal(url, kvp.Value);
+            }
+        );
     }
 
     private static ClientModelValidationContext GetValidationContext(
         IStringLocalizerFactory localizerFactory = null,
-        IModelMetadataProvider metadataProvider = null)
+        IModelMetadataProvider metadataProvider = null
+    )
     {
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddOptions();
@@ -489,15 +599,13 @@ public class RemoteAttributeBaseTest
 
         var serviceProvider = serviceCollection.BuildServiceProvider();
 
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = serviceProvider,
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
 
         var actionContext = new ActionContext(
             httpContext,
             routeData: new Mock<RouteData>().Object,
-            actionDescriptor: new ActionDescriptor());
+            actionDescriptor: new ActionDescriptor()
+        );
 
         var emptyMetadataProvider = new EmptyModelMetadataProvider();
 
@@ -508,21 +616,22 @@ public class RemoteAttributeBaseTest
 
         var metadata = metadataProvider.GetMetadataForProperty(
             containerType: typeof(string),
-            propertyName: nameof(string.Length));
+            propertyName: nameof(string.Length)
+        );
 
         return new ClientModelValidationContext(
             actionContext,
             metadata,
             metadataProvider,
-            new AttributeDictionary());
+            new AttributeDictionary()
+        );
     }
 
     private class TestableRemoteAttributeBase : RemoteAttributeBase
     {
         private readonly string _dummyGetUrlReturnValue;
 
-        public TestableRemoteAttributeBase()
-        { }
+        public TestableRemoteAttributeBase() { }
 
         public TestableRemoteAttributeBase(string dummyGetUrlReturnValue)
         {

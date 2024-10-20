@@ -35,7 +35,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_MultidimensionalArray_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new ArrayWithOffset(new int[1, 2], 2));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new ArrayWithOffset(new int[1, 2], 2)
+            );
         }
 
         [Theory]
@@ -64,13 +67,43 @@ namespace System.Runtime.InteropServices.Tests
         public static IEnumerable<object[]> Equals_TestData()
         {
             int[] array = new int[2];
-            yield return new object[] { new ArrayWithOffset(array, 0), new ArrayWithOffset(array, 0), true };
-            yield return new object[] { new ArrayWithOffset(array, 0), new ArrayWithOffset(new int[2], 0), false };
-            yield return new object[] { new ArrayWithOffset(array, 0), new ArrayWithOffset(null, 0), false };
-            yield return new object[] { new ArrayWithOffset(array, 0), new ArrayWithOffset(array, 1), false };
+            yield return new object[]
+            {
+                new ArrayWithOffset(array, 0),
+                new ArrayWithOffset(array, 0),
+                true,
+            };
+            yield return new object[]
+            {
+                new ArrayWithOffset(array, 0),
+                new ArrayWithOffset(new int[2], 0),
+                false,
+            };
+            yield return new object[]
+            {
+                new ArrayWithOffset(array, 0),
+                new ArrayWithOffset(null, 0),
+                false,
+            };
+            yield return new object[]
+            {
+                new ArrayWithOffset(array, 0),
+                new ArrayWithOffset(array, 1),
+                false,
+            };
 
-            yield return new object[] { new ArrayWithOffset(null, 0), new ArrayWithOffset(null, 0), true };
-            yield return new object[] { new ArrayWithOffset(null, 0), new ArrayWithOffset(new int[2], 0), false };
+            yield return new object[]
+            {
+                new ArrayWithOffset(null, 0),
+                new ArrayWithOffset(null, 0),
+                true,
+            };
+            yield return new object[]
+            {
+                new ArrayWithOffset(null, 0),
+                new ArrayWithOffset(new int[2], 0),
+                false,
+            };
 
             yield return new object[] { new ArrayWithOffset(array, 0), new object(), false };
             yield return new object[] { new ArrayWithOffset(array, 0), null, false };
@@ -78,7 +111,11 @@ namespace System.Runtime.InteropServices.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(ArrayWithOffset arrayWithOffset, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            ArrayWithOffset arrayWithOffset,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, arrayWithOffset.Equals(other));
             if (other is ArrayWithOffset otherArrayWithOffset)

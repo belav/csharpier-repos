@@ -5,7 +5,9 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net
 {
-    [Obsolete("GlobalProxySelection has been deprecated. Use WebRequest.DefaultWebProxy instead to access and set the global default proxy. Use 'null' instead of GetEmptyWebProxy.")]
+    [Obsolete(
+        "GlobalProxySelection has been deprecated. Use WebRequest.DefaultWebProxy instead to access and set the global default proxy. Use 'null' instead of GetEmptyWebProxy."
+    )]
     public class GlobalProxySelection
     {
         // This defers to WebRequest.DefaultWebProxy, but returns EmptyWebProxy instead of null.

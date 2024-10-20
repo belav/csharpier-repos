@@ -26,7 +26,7 @@ namespace System.Text.RegularExpressions.Symbolic
 
             using StreamWriter sw = new StreamWriter($"{Path.Combine(path, classname)}.cs");
             sw.WriteLine(
-$@"// Licensed to the .NET Foundation under one or more agreements.
+                $@"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // This is a programmatically generated file from Regex.GenerateUnicodeTables.
@@ -37,7 +37,8 @@ using System.Globalization;
 namespace {namespacename}
 {{
     internal static class {classname}
-    {{");
+    {{"
+            );
             var catMap = new Dictionary<UnicodeCategory, Ranges>();
             foreach (UnicodeCategory c in Enum.GetValues<UnicodeCategory>())
             {
@@ -58,9 +59,14 @@ namespace {namespacename}
 
             var charSetSolver = new CharSetSolver();
 
-            sw.WriteLine("        /// <summary>Serialized BDD representation of the set of all whitespace characters.</summary>");
+            sw.WriteLine(
+                "        /// <summary>Serialized BDD representation of the set of all whitespace characters.</summary>"
+            );
             sw.Write($"        public static ReadOnlySpan<byte> SerializedWhitespaceBDD => ");
-            WriteByteArrayInitSyntax(sw, charSetSolver.CreateBDDFromRanges(whitespace.ranges).SerializeToBytes());
+            WriteByteArrayInitSyntax(
+                sw,
+                charSetSolver.CreateBDDFromRanges(whitespace.ranges).SerializeToBytes()
+            );
             sw.WriteLine(";");
 
             // Generate a BDD representation of each UnicodeCategory.
@@ -71,8 +77,12 @@ namespace {namespacename}
             }
 
             sw.WriteLine();
-            sw.WriteLine("        /// <summary>Gets the serialized BDD representations of any defined UnicodeCategory.</summary>");
-            sw.WriteLine("        public static ReadOnlySpan<byte> GetSerializedCategory(UnicodeCategory category) =>");
+            sw.WriteLine(
+                "        /// <summary>Gets the serialized BDD representations of any defined UnicodeCategory.</summary>"
+            );
+            sw.WriteLine(
+                "        public static ReadOnlySpan<byte> GetSerializedCategory(UnicodeCategory category) =>"
+            );
             sw.WriteLine("            (int)category switch");
             sw.WriteLine("            {");
             for (int i = 0; i < catBDDs.Length; i++)
@@ -85,14 +95,20 @@ namespace {namespacename}
             for (int i = 0; i < catBDDs.Length; i++)
             {
                 sw.WriteLine();
-                sw.WriteLine($"        /// <summary>Serialized BDD representation of the set of all characters in UnicodeCategory.{(UnicodeCategory)i}.</summary>");
-                sw.Write($"        private static ReadOnlySpan<byte> SerializedCategory{i}_{(UnicodeCategory)i} => ");
+                sw.WriteLine(
+                    $"        /// <summary>Serialized BDD representation of the set of all characters in UnicodeCategory.{(UnicodeCategory)i}.</summary>"
+                );
+                sw.Write(
+                    $"        private static ReadOnlySpan<byte> SerializedCategory{i}_{(UnicodeCategory)i} => "
+                );
                 WriteByteArrayInitSyntax(sw, catBDDs[i].SerializeToBytes());
                 sw.WriteLine(";");
             }
 
-            sw.WriteLine($@"    }}
-}}");
+            sw.WriteLine(
+                $@"    }}
+}}"
+            );
 
             static void WriteByteArrayInitSyntax(StreamWriter sw, byte[] values)
             {
@@ -108,7 +124,8 @@ namespace {namespacename}
         /// <summary>Used internally for creating a collection of ranges for serialization.</summary>
         private sealed class Ranges
         {
-            public readonly List<(char Lower, char Upper)> ranges = new List<(char Lower, char Upper)>();
+            public readonly List<(char Lower, char Upper)> ranges =
+                new List<(char Lower, char Upper)>();
 
             public void Add(char n)
             {

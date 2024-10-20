@@ -130,10 +130,7 @@ public class FormTagHelper : TagHelper
 
             return _routeValues;
         }
-        set
-        {
-            _routeValues = value;
-        }
+        set { _routeValues = value; }
     }
 
     /// <inheritdoc />
@@ -156,14 +153,15 @@ public class FormTagHelper : TagHelper
         }
 
         var antiforgeryDefault = true;
-        var routeableParametersProvided = Action != null ||
-            Controller != null ||
-            Area != null ||
-            Page != null ||
-            PageHandler != null ||
-            Fragment != null ||
-            Route != null ||
-            (_routeValues != null && _routeValues.Count > 0);
+        var routeableParametersProvided =
+            Action != null
+            || Controller != null
+            || Area != null
+            || Page != null
+            || PageHandler != null
+            || Fragment != null
+            || Route != null
+            || (_routeValues != null && _routeValues.Count > 0);
 
         // If "action" is already set, it means the user is attempting to use a normal <form>.
         if (output.Attributes.TryGetAttribute(HtmlActionAttributeName, out var actionAttribute))
@@ -182,7 +180,9 @@ public class FormTagHelper : TagHelper
                         AreaAttributeName,
                         RouteAttributeName,
                         PageAttributeName,
-                        PageHandlerAttributeName));
+                        PageHandlerAttributeName
+                    )
+                );
             }
 
             string attributeValue = null;
@@ -229,7 +229,8 @@ public class FormTagHelper : TagHelper
                     Resources.FormatCannotDetermineAttributeFor(HtmlActionAttributeName, "<form>"),
                     RouteAttributeName,
                     ControllerAttributeName + ", " + ActionAttributeName,
-                    PageAttributeName);
+                    PageAttributeName
+                );
 
                 throw new InvalidOperationException(message);
             }
@@ -252,10 +253,13 @@ public class FormTagHelper : TagHelper
             }
 
             TagBuilder tagBuilder = null;
-            if (!routeableParametersProvided &&
-                _routeValues == null &&
+            if (
+                !routeableParametersProvided
+                && _routeValues == null
+                &&
                 // Antiforgery will sometime be set globally via TagHelper Initializers, verify it was provided in the cshtml.
-                !context.AllAttributes.ContainsName(AntiforgeryAttributeName))
+                !context.AllAttributes.ContainsName(AntiforgeryAttributeName)
+            )
             {
                 // A <form> tag that doesn't utilize asp-* attributes. Let it flow to the output.
                 Method = Method ?? "get";
@@ -269,7 +273,8 @@ public class FormTagHelper : TagHelper
                     routeValues,
                     Fragment,
                     method: null,
-                    htmlAttributes: null);
+                    htmlAttributes: null
+                );
             }
             else if (routeLink)
             {
@@ -279,7 +284,8 @@ public class FormTagHelper : TagHelper
                     routeValues,
                     Fragment,
                     method: null,
-                    htmlAttributes: null);
+                    htmlAttributes: null
+                );
             }
             else
             {
@@ -290,7 +296,8 @@ public class FormTagHelper : TagHelper
                     Fragment,
                     routeValues,
                     method: null,
-                    htmlAttributes: null);
+                    htmlAttributes: null
+                );
             }
 
             if (tagBuilder != null)

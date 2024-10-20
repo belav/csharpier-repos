@@ -1,12 +1,12 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 namespace System.Data.Services.Client
@@ -25,7 +25,7 @@ namespace System.Data.Services.Client
     {
         None,
 
-        AutoChangeTracking
+        AutoChangeTracking,
     }
 
     public class DataServiceCollection<T> : ObservableCollection<T>
@@ -53,43 +53,47 @@ namespace System.Data.Services.Client
         #endregion Private fields.
 
         public DataServiceCollection()
-            : this(null, null, TrackingMode.AutoChangeTracking, null, null, null)
-        {
-        }
+            : this(null, null, TrackingMode.AutoChangeTracking, null, null, null) { }
 
         public DataServiceCollection(IEnumerable<T> items)
-            : this(null, items, TrackingMode.AutoChangeTracking, null, null, null)
-        {
-        }
+            : this(null, items, TrackingMode.AutoChangeTracking, null, null, null) { }
 
         public DataServiceCollection(IEnumerable<T> items, TrackingMode trackingMode)
-            : this(null, items, trackingMode, null, null, null)
-        {
-        }
+            : this(null, items, trackingMode, null, null, null) { }
 
         public DataServiceCollection(DataServiceContext context)
-            : this(context, null, TrackingMode.AutoChangeTracking, null, null, null)
-        {
-        }
+            : this(context, null, TrackingMode.AutoChangeTracking, null, null, null) { }
 
         public DataServiceCollection(
-            DataServiceContext context, 
-            string entitySetName, 
-            Func<EntityChangedParams, bool> entityChangedCallback, 
-            Func<EntityCollectionChangedParams, bool> collectionChangedCallback)
-            : this(context, null, TrackingMode.AutoChangeTracking, entitySetName, entityChangedCallback, collectionChangedCallback)
-        {
-        }
+            DataServiceContext context,
+            string entitySetName,
+            Func<EntityChangedParams, bool> entityChangedCallback,
+            Func<EntityCollectionChangedParams, bool> collectionChangedCallback
+        )
+            : this(
+                context,
+                null,
+                TrackingMode.AutoChangeTracking,
+                entitySetName,
+                entityChangedCallback,
+                collectionChangedCallback
+            ) { }
 
         public DataServiceCollection(
-            IEnumerable<T> items, 
-            TrackingMode trackingMode, 
-            string entitySetName, 
-            Func<EntityChangedParams, bool> entityChangedCallback, 
-            Func<EntityCollectionChangedParams, bool> collectionChangedCallback)
-            : this(null, items, trackingMode, entitySetName, entityChangedCallback, collectionChangedCallback)
-        {
-        }
+            IEnumerable<T> items,
+            TrackingMode trackingMode,
+            string entitySetName,
+            Func<EntityChangedParams, bool> entityChangedCallback,
+            Func<EntityCollectionChangedParams, bool> collectionChangedCallback
+        )
+            : this(
+                null,
+                items,
+                trackingMode,
+                entitySetName,
+                entityChangedCallback,
+                collectionChangedCallback
+            ) { }
 
         public DataServiceCollection(
             DataServiceContext context,
@@ -97,7 +101,8 @@ namespace System.Data.Services.Client
             TrackingMode trackingMode,
             string entitySetName,
             Func<EntityChangedParams, bool> entityChangedCallback,
-            Func<EntityCollectionChangedParams, bool> collectionChangedCallback)
+            Func<EntityCollectionChangedParams, bool> collectionChangedCallback
+        )
         {
             if (trackingMode == TrackingMode.AutoChangeTracking)
             {
@@ -124,7 +129,13 @@ namespace System.Data.Services.Client
                         DataServiceCollection<T>.ValidateIteratorParameter(items);
                     }
 
-                    this.StartTracking(context, items, entitySetName, entityChangedCallback, collectionChangedCallback);
+                    this.StartTracking(
+                        context,
+                        items,
+                        entitySetName,
+                        entityChangedCallback,
+                        collectionChangedCallback
+                    );
                 }
             }
             else if (items != null)
@@ -133,7 +144,11 @@ namespace System.Data.Services.Client
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1800", Justification = "Constructor and debug-only code can't reuse cast.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800",
+            Justification = "Constructor and debug-only code can't reuse cast."
+        )]
         internal DataServiceCollection(
             object atomMaterializer,
             DataServiceContext context,
@@ -141,14 +156,16 @@ namespace System.Data.Services.Client
             TrackingMode trackingMode,
             string entitySetName,
             Func<EntityChangedParams, bool> entityChangedCallback,
-            Func<EntityCollectionChangedParams, bool> collectionChangedCallback)
+            Func<EntityCollectionChangedParams, bool> collectionChangedCallback
+        )
             : this(
-                context != null ? context : ((AtomMaterializer)atomMaterializer).Context, 
-                items, 
-                trackingMode, 
-                entitySetName, 
-                entityChangedCallback, 
-                collectionChangedCallback)
+                context != null ? context : ((AtomMaterializer)atomMaterializer).Context,
+                items,
+                trackingMode,
+                entitySetName,
+                entityChangedCallback,
+                collectionChangedCallback
+            )
         {
             Debug.Assert(atomMaterializer != null, "atomMaterializer != null");
             Debug.Assert(((AtomMaterializer)atomMaterializer).Context != null, "Context != null");
@@ -166,18 +183,22 @@ namespace System.Data.Services.Client
             get { return this.continuation; }
             set { this.continuation = value; }
         }
-        
+
         internal BindingObserver Observer
         {
-            get
-            {
-                return this.observer;
-            }
-        
+            get { return this.observer; }
             set
             {
-                Debug.Assert(!this.rootCollection, "Must be a child collection to have the Observer setter called.");
-                Debug.Assert(typeof(System.ComponentModel.INotifyPropertyChanged).IsAssignableFrom(typeof(T)), "The entity type must be trackable (by implementing INotifyPropertyChanged interface)");
+                Debug.Assert(
+                    !this.rootCollection,
+                    "Must be a child collection to have the Observer setter called."
+                );
+                Debug.Assert(
+                    typeof(System.ComponentModel.INotifyPropertyChanged).IsAssignableFrom(
+                        typeof(T)
+                    ),
+                    "The entity type must be trackable (by implementing INotifyPropertyChanged interface)"
+                );
                 this.observer = value;
             }
         }
@@ -186,7 +207,7 @@ namespace System.Data.Services.Client
         {
             get { return this.observer != null; }
         }
-        
+
         #endregion
 
         public void Load(IEnumerable<T> items)
@@ -199,7 +220,13 @@ namespace System.Data.Services.Client
 
                 this.trackingOnLoad = false;
 
-                this.StartTracking(context, items, this.entitySetName, this.entityChangedCallback, this.collectionChangedCallback);
+                this.StartTracking(
+                    context,
+                    items,
+                    this.entitySetName,
+                    this.entityChangedCallback,
+                    this.collectionChangedCallback
+                );
             }
             else
             {
@@ -224,68 +251,90 @@ namespace System.Data.Services.Client
             DataServiceQuery<T> dsq = query as DataServiceQuery<T>;
             if (dsq == null)
             {
-                throw new ArgumentException(Strings.DataServiceCollection_LoadAsyncRequiresDataServiceQuery, "query");
+                throw new ArgumentException(
+                    Strings.DataServiceCollection_LoadAsyncRequiresDataServiceQuery,
+                    "query"
+                );
             }
 
             if (this.asyncOperationInProgress)
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_MultipleLoadAsyncOperationsAtTheSameTime);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_MultipleLoadAsyncOperationsAtTheSameTime
+                );
             }
 
             if (this.trackingOnLoad)
             {
-                this.StartTracking(((DataServiceQueryProvider)dsq.Provider).Context,
-                                   null,
-                                   this.entitySetName,
-                                   this.entityChangedCallback,
-                                   this.collectionChangedCallback);
+                this.StartTracking(
+                    ((DataServiceQueryProvider)dsq.Provider).Context,
+                    null,
+                    this.entitySetName,
+                    this.entityChangedCallback,
+                    this.collectionChangedCallback
+                );
                 this.trackingOnLoad = false;
             }
 
             BeginLoadAsyncOperation(
                 asyncCallback => dsq.BeginExecute(asyncCallback, null),
-                asyncResult => 
-                    {
-                        QueryOperationResponse<T> response = (QueryOperationResponse<T>)dsq.EndExecute(asyncResult);
-                        this.Load(response);
-                        return response;
-                    });
+                asyncResult =>
+                {
+                    QueryOperationResponse<T> response =
+                        (QueryOperationResponse<T>)dsq.EndExecute(asyncResult);
+                    this.Load(response);
+                    return response;
+                }
+            );
         }
 
         public void LoadAsync()
         {
             if (!this.IsTracking)
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_OperationForTrackedOnly);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_OperationForTrackedOnly
+                );
             }
 
             object parent;
             string property;
             if (!this.observer.LookupParent(this, out parent, out property))
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_LoadAsyncNoParamsWithoutParentEntity);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_LoadAsyncNoParamsWithoutParentEntity
+                );
             }
 
             if (this.asyncOperationInProgress)
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_MultipleLoadAsyncOperationsAtTheSameTime);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_MultipleLoadAsyncOperationsAtTheSameTime
+                );
             }
 
             BeginLoadAsyncOperation(
-                asyncCallback => this.observer.Context.BeginLoadProperty(parent, property, asyncCallback, null),
-                asyncResult => (QueryOperationResponse)this.observer.Context.EndLoadProperty(asyncResult));
+                asyncCallback =>
+                    this.observer.Context.BeginLoadProperty(parent, property, asyncCallback, null),
+                asyncResult =>
+                    (QueryOperationResponse)this.observer.Context.EndLoadProperty(asyncResult)
+            );
         }
 
         public bool LoadNextPartialSetAsync()
         {
             if (!this.IsTracking)
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_OperationForTrackedOnly);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_OperationForTrackedOnly
+                );
             }
 
             if (this.asyncOperationInProgress)
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_MultipleLoadAsyncOperationsAtTheSameTime);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_MultipleLoadAsyncOperationsAtTheSameTime
+                );
             }
 
             if (this.Continuation == null)
@@ -296,19 +345,21 @@ namespace System.Data.Services.Client
                 }
                 return false;
             }
-            
+
             BeginLoadAsyncOperation(
-                asyncCallback => this.observer.Context.BeginExecute(this.Continuation, asyncCallback, null),
+                asyncCallback =>
+                    this.observer.Context.BeginExecute(this.Continuation, asyncCallback, null),
                 asyncResult =>
-                    {
-                        QueryOperationResponse<T> response = (QueryOperationResponse<T>)this.observer.Context.EndExecute<T>(asyncResult);
-                        this.Load(response);
-                        return response;
-                    });
+                {
+                    QueryOperationResponse<T> response =
+                        (QueryOperationResponse<T>)this.observer.Context.EndExecute<T>(asyncResult);
+                    this.Load(response);
+                    return response;
+                }
+            );
 
             return true;
         }
-
 #endif
 
         public void Load(T item)
@@ -336,7 +387,9 @@ namespace System.Data.Services.Client
         {
             if (!this.IsTracking)
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_OperationForTrackedOnly);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_OperationForTrackedOnly
+                );
             }
 
             if (!stopTracking)
@@ -345,7 +398,10 @@ namespace System.Data.Services.Client
             }
             else
             {
-                Debug.Assert(this.observer.Context != null, "Must have valid context when the collection is being observed.");
+                Debug.Assert(
+                    this.observer.Context != null,
+                    "Must have valid context when the collection is being observed."
+                );
                 try
                 {
                     this.observer.DetachBehavior = true;
@@ -357,22 +413,26 @@ namespace System.Data.Services.Client
                 }
             }
         }
-        
+
         public void Detach()
         {
             if (!this.IsTracking)
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_OperationForTrackedOnly);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_OperationForTrackedOnly
+                );
             }
 
             if (!this.rootCollection)
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_CannotStopTrackingChildCollection);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_CannotStopTrackingChildCollection
+                );
             }
-            
+
             this.observer.StopTracking();
             this.observer = null;
-            
+
             this.rootCollection = false;
         }
 
@@ -384,7 +444,9 @@ namespace System.Data.Services.Client
                 INotifyPropertyChanged notify = item as INotifyPropertyChanged;
                 if (notify == null)
                 {
-                    throw new InvalidOperationException(Strings.DataBinding_NotifyPropertyChangedNotImpl(item.GetType()));
+                    throw new InvalidOperationException(
+                        Strings.DataBinding_NotifyPropertyChangedNotImpl(item.GetType())
+                    );
                 }
             }
             base.Add(item);
@@ -395,7 +457,9 @@ namespace System.Data.Services.Client
         {
             if (this.trackingOnLoad)
             {
-                throw new InvalidOperationException(Strings.DataServiceCollection_InsertIntoTrackedButNotLoadedCollection);
+                throw new InvalidOperationException(
+                    Strings.DataServiceCollection_InsertIntoTrackedButNotLoadedCollection
+                );
             }
 
             base.InsertItem(index, item);
@@ -408,7 +472,9 @@ namespace System.Data.Services.Client
             DataServiceQuery<T> dsq = items as DataServiceQuery<T>;
             if (dsq != null)
             {
-                throw new ArgumentException(Strings.DataServiceCollection_DataServiceQueryCanNotBeEnumerated);
+                throw new ArgumentException(
+                    Strings.DataServiceCollection_DataServiceQueryCanNotBeEnumerated
+                );
             }
 #endif
         }
@@ -420,8 +486,12 @@ namespace System.Data.Services.Client
             DataServiceQuery<T> dataServiceQuery = items as DataServiceQuery<T>;
             if (dataServiceQuery != null)
             {
-                DataServiceQueryProvider queryProvider = dataServiceQuery.Provider as DataServiceQueryProvider;
-                Debug.Assert(queryProvider != null, "Got DataServiceQuery with unknown query provider.");
+                DataServiceQueryProvider queryProvider =
+                    dataServiceQuery.Provider as DataServiceQueryProvider;
+                Debug.Assert(
+                    queryProvider != null,
+                    "Got DataServiceQuery with unknown query provider."
+                );
                 DataServiceContext context = queryProvider.Context;
                 Debug.Assert(context != null, "Query provider must always have valid context.");
                 return context;
@@ -430,13 +500,18 @@ namespace System.Data.Services.Client
             QueryOperationResponse queryOperationResponse = items as QueryOperationResponse;
             if (queryOperationResponse != null)
             {
-                Debug.Assert(queryOperationResponse.Results != null, "Got QueryOperationResponse without valid results.");
+                Debug.Assert(
+                    queryOperationResponse.Results != null,
+                    "Got QueryOperationResponse without valid results."
+                );
                 DataServiceContext context = queryOperationResponse.Results.Context;
                 Debug.Assert(context != null, "Materializer must always have valid context.");
                 return context;
             }
 
-            throw new ArgumentException(Strings.DataServiceCollection_CannotDetermineContextFromItems);
+            throw new ArgumentException(
+                Strings.DataServiceCollection_CannotDetermineContextFromItems
+            );
         }
 
         private void InternalLoadCollection(IEnumerable<T> items)
@@ -449,7 +524,10 @@ namespace System.Data.Services.Client
                 items = query.Execute() as QueryOperationResponse<T>;
             }
 #else
-            Debug.Assert(!(items is DataServiceQuery), "SL Client using DSQ as items...should have been caught by ValidateIteratorParameter.");
+            Debug.Assert(
+                !(items is DataServiceQuery),
+                "SL Client using DSQ as items...should have been caught by ValidateIteratorParameter."
+            );
 #endif
 
             foreach (T item in items)
@@ -477,7 +555,9 @@ namespace System.Data.Services.Client
             {
                 if (this.observer.Context == null)
                 {
-                    throw new InvalidOperationException(Strings.DataServiceCollection_LoadRequiresTargetCollectionObserved);
+                    throw new InvalidOperationException(
+                        Strings.DataServiceCollection_LoadRequiresTargetCollectionObserved
+                    );
                 }
 
                 this.observer.AttachBehavior = true;
@@ -497,10 +577,14 @@ namespace System.Data.Services.Client
             IEnumerable<T> items,
             String entitySet,
             Func<EntityChangedParams, bool> entityChanged,
-            Func<EntityCollectionChangedParams, bool> collectionChanged)
+            Func<EntityCollectionChangedParams, bool> collectionChanged
+        )
         {
             Debug.Assert(context != null, "Must have a valid context to initialize.");
-            Debug.Assert(this.observer == null, "Must have no observer which implies Initialize should only be called once.");
+            Debug.Assert(
+                this.observer == null,
+                "Must have no observer which implies Initialize should only be called once."
+            );
 
             if (items != null)
             {
@@ -517,15 +601,19 @@ namespace System.Data.Services.Client
 #if ASTORIA_LIGHT
         private void BeginLoadAsyncOperation(
             Func<AsyncCallback, IAsyncResult> beginCall,
-            Func<IAsyncResult, QueryOperationResponse> endCall)
+            Func<IAsyncResult, QueryOperationResponse> endCall
+        )
         {
-            Debug.Assert(!this.asyncOperationInProgress, "Trying to start a new LoadAsync while another is still in progress. We should have thrown.");
+            Debug.Assert(
+                !this.asyncOperationInProgress,
+                "Trying to start a new LoadAsync while another is still in progress. We should have thrown."
+            );
 
             this.asyncOperationInProgress = true;
             try
             {
-                IAsyncResult asyncResult = beginCall(
-                    ar => System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+                IAsyncResult asyncResult = beginCall(ar =>
+                    System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {
                         try
                         {
@@ -544,7 +632,8 @@ namespace System.Data.Services.Client
                                 this.LoadCompleted(this, new LoadCompletedEventArgs(null, ex));
                             }
                         }
-                    }));
+                    })
+                );
             }
             catch (Exception)
             {

@@ -55,8 +55,8 @@
 //
 //---------------------------------------------------------------------------
 using System;
-using System.Reflection;
 using System.Configuration;
+using System.Reflection;
 
 namespace RabbitMQ.Client
 {
@@ -76,7 +76,7 @@ namespace RabbitMQ.Client
     {
         // Hide the constructor - no instances of Protocols needed.
         // We'd make this class static, but for MS's .NET 1.1 compilers
-        private Protocols() {}
+        private Protocols() { }
 
         ///<summary>The default App.config appSettings key used by
         ///FromConfiguration and FromEnvironment. At the time of
@@ -93,11 +93,13 @@ namespace RabbitMQ.Client
         {
             get { return new RabbitMQ.Client.Framing.v0_8.Protocol(); }
         }
+
         ///<summary>Protocol version 0-8, as modified by QPid.</summary>
         public static IProtocol AMQP_0_8_QPID
         {
             get { return new RabbitMQ.Client.Framing.v0_8qpid.Protocol(); }
         }
+
         ///<summary>Protocol version 0-9 as standardised (omitting
         ///sections marked "WIP", "work in progress", including in
         ///particular the Message class of operations).</summary>
@@ -130,9 +132,10 @@ namespace RabbitMQ.Client
         ///</remarks>
         public static IProtocol Lookup(string name)
         {
-            PropertyInfo pi = typeof(Protocols).GetProperty(name,
-                                                            BindingFlags.Public |
-                                                            BindingFlags.Static);
+            PropertyInfo pi = typeof(Protocols).GetProperty(
+                name,
+                BindingFlags.Public | BindingFlags.Static
+            );
             if (pi == null)
             {
                 return null;
@@ -228,7 +231,8 @@ namespace RabbitMQ.Client
             // obsolete. Use ConfigurationManager.AppSettings once we
             // decide that supporting .NET 1.1 is no longer required.
             string name = ConfigurationSettings.AppSettings[appSettingsKey];
-            if (name == null) {
+            if (name == null)
+            {
                 name = ReadEnvironmentVariable();
             }
             return SafeLookup(name);

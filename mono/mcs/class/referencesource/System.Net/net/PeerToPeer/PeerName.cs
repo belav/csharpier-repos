@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------
 // <copyright file="PeerName.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 namespace System.Net.PeerToPeer
 {
-
     using System;
-    using System.Globalization;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Threading;
-    using System.Text.RegularExpressions;
-    using System.Runtime.InteropServices;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Threading;
     using Microsoft.Win32;
+
     /// <remarks>
     /// The PeerName class represents the native PeerName construct.
     /// </remarks>
@@ -30,7 +30,8 @@ namespace System.Net.PeerToPeer
         private const int PEER_MAX_CLASSIFIER_LENGTH = 149;
         private const int SECURE_AUTHORITY_LENGTH = 40;
         private const int INSECURE_AUTHORITY_LENGTH = 1;
-        private const int PEER_MAX_PEERNAME_LENGTH = SECURE_AUTHORITY_LENGTH + 1 + PEER_MAX_CLASSIFIER_LENGTH;
+        private const int PEER_MAX_PEERNAME_LENGTH =
+            SECURE_AUTHORITY_LENGTH + 1 + PEER_MAX_CLASSIFIER_LENGTH;
         private const string PEERNAME_UNSECURED_AUTHORITY = "0";
 
         //===================================================
@@ -57,23 +58,24 @@ namespace System.Net.PeerToPeer
         }
 
         /// <summary>
-        /// We use this constructor to create an PeerName 
+        /// We use this constructor to create an PeerName
         /// for internal implementation
         /// </summary>
-        private PeerName(string peerName, string authority, string classifier) {
+        private PeerName(string peerName, string authority, string classifier)
+        {
             m_PeerName = peerName;
             m_Classifier = classifier;
             m_Authority = authority;
         }
 
         /// <summary>
-        /// This constructor is to create a peername from an 
-        /// arbitrary string. The Identity is not necessarily 
+        /// This constructor is to create a peername from an
+        /// arbitrary string. The Identity is not necessarily
         /// the same as the current user
         /// </summary>
         /// <param name="peerName">string form of the peer name</param>
         /// <remarks>
-        ///     1. We assume that the peername is already normalized according to the 
+        ///     1. We assume that the peername is already normalized according to the
         ///         Unicode rules
         ///     2. The PeerName given has nothig to do with the default Identity
         ///         It is just a way to create a PeerName instance given a string
@@ -89,15 +91,23 @@ namespace System.Net.PeerToPeer
             //-------------------------------------------------
             //Check PeerName format
             //NOTE: Currentlt thre is no native API to check
-            //the format of the PeerName string. The 
+            //the format of the PeerName string. The
             //StrongParsePeerName implements the logic
             //-------------------------------------------------
             string authority;
             string classifier;
             if (!StrongParsePeerName(remotePeerName, out authority, out classifier))
             {
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "PeerName string {0} failed the check for a valid peer name", remotePeerName);
-                throw new ArgumentException(SR.GetString(SR.Pnrp_InvalidPeerName), "remotePeerName");
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "PeerName string {0} failed the check for a valid peer name",
+                    remotePeerName
+                );
+                throw new ArgumentException(
+                    SR.GetString(SR.Pnrp_InvalidPeerName),
+                    "remotePeerName"
+                );
             }
             //authrority would have been lower cased
             //so we must ste the m_PeerName to authority + classifier
@@ -107,7 +117,14 @@ namespace System.Net.PeerToPeer
                 m_PeerName = authority;
             m_Authority = authority;
             m_Classifier = classifier;
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "PeerName instance created - PeerName {0} Authority {1} Classfier {2}", m_PeerName, m_Authority, ((m_Classifier == null)? "null" : m_Classifier));
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "PeerName instance created - PeerName {0} Authority {1} Classfier {2}",
+                m_PeerName,
+                m_Authority,
+                ((m_Classifier == null) ? "null" : m_Classifier)
+            );
         }
 
         /// <summary>
@@ -130,8 +147,10 @@ namespace System.Net.PeerToPeer
             //-------------------------------------------------
             //Check arguments
             //-------------------------------------------------
-            if ((classifier == null || classifier.Length == 0)&& 
-                peerNameType == PeerNameType.Unsecured)
+            if (
+                (classifier == null || classifier.Length == 0)
+                && peerNameType == PeerNameType.Unsecured
+            )
             {
                 throw new ArgumentNullException("classifier");
             }
@@ -139,9 +158,9 @@ namespace System.Net.PeerToPeer
             {
                 throw new ArgumentException(SR.GetString(SR.Pnrp_InvalidClassifier), "classifier");
             }
-			//--------------------------------------------------
-			//Normalize using NFC
-			//--------------------------------------------------
+            //--------------------------------------------------
+            //Normalize using NFC
+            //--------------------------------------------------
             if (classifier != null && classifier.Length > 0)
             {
                 classifier = classifier.Normalize(NormalizationForm.FormC);
@@ -156,10 +175,17 @@ namespace System.Net.PeerToPeer
             {
                 if (peerNameType == PeerNameType.Unsecured)
                 {
-                    result = UnsafeP2PNativeMethods.PeerCreatePeerName((string)null, classifier, out shNewPeerName);
+                    result = UnsafeP2PNativeMethods.PeerCreatePeerName(
+                        (string)null,
+                        classifier,
+                        out shNewPeerName
+                    );
                     if (result != 0)
                     {
-                        throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotCreateUnsecuredPeerName), result);
+                        throw PeerToPeerException.CreateFromHr(
+                            SR.GetString(SR.Pnrp_CouldNotCreateUnsecuredPeerName),
+                            result
+                        );
                     }
                     m_Authority = PEERNAME_UNSECURED_AUTHORITY;
                 }
@@ -168,15 +194,25 @@ namespace System.Net.PeerToPeer
                     result = UnsafeP2PNativeMethods.PeerIdentityGetDefault(out shDefaultIdentity);
                     if (result != 0)
                     {
-                        throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotGetDefaultIdentity), result);
+                        throw PeerToPeerException.CreateFromHr(
+                            SR.GetString(SR.Pnrp_CouldNotGetDefaultIdentity),
+                            result
+                        );
                     }
-                    m_Authority = shDefaultIdentity.UnicodeString;              
+                    m_Authority = shDefaultIdentity.UnicodeString;
                     //}
 
-                    result = UnsafeP2PNativeMethods.PeerCreatePeerName(m_Authority, classifier, out shNewPeerName);
+                    result = UnsafeP2PNativeMethods.PeerCreatePeerName(
+                        m_Authority,
+                        classifier,
+                        out shNewPeerName
+                    );
                     if (result != 0)
                     {
-                        throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotCreateSecuredPeerName), result);
+                        throw PeerToPeerException.CreateFromHr(
+                            SR.GetString(SR.Pnrp_CouldNotCreateSecuredPeerName),
+                            result
+                        );
                     }
                 }
                 m_PeerName = shNewPeerName.UnicodeString;
@@ -184,10 +220,19 @@ namespace System.Net.PeerToPeer
             }
             finally
             {
-                if (shNewPeerName != null) shNewPeerName.Dispose();
-                if (shDefaultIdentity != null) shDefaultIdentity.Dispose();
+                if (shNewPeerName != null)
+                    shNewPeerName.Dispose();
+                if (shDefaultIdentity != null)
+                    shDefaultIdentity.Dispose();
             }
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "PeerName instance created - PeerName {0} Authority {1} Classfier {2}", m_PeerName, m_Authority, m_Classifier);
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "PeerName instance created - PeerName {0} Authority {1} Classfier {2}",
+                m_PeerName,
+                m_Authority,
+                m_Classifier
+            );
         }
 
         /// <summary>
@@ -212,35 +257,53 @@ namespace System.Net.PeerToPeer
             if (peerHostName == null)
                 throw new ArgumentNullException("peerHostName");
             if (peerHostName.Length == 0)
-                throw new ArgumentException(SR.GetString(SR.Pnrp_InvalidPeerHostName), "peerHostName");
+                throw new ArgumentException(
+                    SR.GetString(SR.Pnrp_InvalidPeerHostName),
+                    "peerHostName"
+                );
 
             Int32 result;
             SafePeerData shPeerName = null;
             string peerName = null;
             try
             {
-                result = UnsafeP2PNativeMethods.PeerHostNameToPeerName(peerHostName, out shPeerName);
+                result = UnsafeP2PNativeMethods.PeerHostNameToPeerName(
+                    peerHostName,
+                    out shPeerName
+                );
                 if (result != 0)
                 {
-                    throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotGetPeerNameFromPeerHostName), result);
+                    throw PeerToPeerException.CreateFromHr(
+                        SR.GetString(SR.Pnrp_CouldNotGetPeerNameFromPeerHostName),
+                        result
+                    );
                 }
                 peerName = shPeerName.UnicodeString;
             }
             finally
             {
-                if (shPeerName != null) shPeerName.Dispose();
+                if (shPeerName != null)
+                    shPeerName.Dispose();
             }
 
             string authority;
             string classifier;
             WeakParsePeerName(peerName, out authority, out classifier);
             PeerName p = new PeerName(peerName, authority, classifier);
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "PeerName created from PeerHostName - PeerHostName {0} to PeerName PeerName {1} Authority {2} Classfier {3}", peerHostName, peerName, authority, classifier);
-            return p; 
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "PeerName created from PeerHostName - PeerHostName {0} to PeerName PeerName {1} Authority {2} Classfier {3}",
+                peerHostName,
+                peerName,
+                authority,
+                classifier
+            );
+            return p;
         }
-          
+
         /// <summary>
-        /// Given a PeerName, change the classifier. 
+        /// Given a PeerName, change the classifier.
         /// This is simply replacing the classifier, but we will
         /// let the native APIs do the right thing since they
         /// might change the concept in future
@@ -256,16 +319,17 @@ namespace System.Net.PeerToPeer
         // <ReferencesCritical Name="Method: SafePeerData.get_UnicodeString():System.String" Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
-        public static PeerName CreateRelativePeerName(
-                                        PeerName peerName,
-                                        string classifier)
+        public static PeerName CreateRelativePeerName(PeerName peerName, string classifier)
         {
             //-------------------------------------------------
             //Check arguments
             //-------------------------------------------------
             if (peerName == null)
             {
-                throw new ArgumentNullException("peerName", SR.GetString(SR.Pnrp_PeerNameCantBeNull));
+                throw new ArgumentNullException(
+                    "peerName",
+                    SR.GetString(SR.Pnrp_PeerNameCantBeNull)
+                );
             }
             if (!peerName.IsSecured && (classifier == null || classifier.Length == 0))
             {
@@ -276,9 +340,9 @@ namespace System.Net.PeerToPeer
                 throw new ArgumentException(SR.GetString(SR.Pnrp_InvalidClassifier), "classifier");
             }
 
-			//--------------------------------------------------
-			//Normalize using NFC
-			//--------------------------------------------------
+            //--------------------------------------------------
+            //Normalize using NFC
+            //--------------------------------------------------
             if (classifier != null && classifier.Length > 0)
             {
                 classifier = classifier.Normalize(NormalizationForm.FormC);
@@ -289,30 +353,45 @@ namespace System.Net.PeerToPeer
             string newPeerName = null;
             try
             {
-                //Here there is change made on the native side 
-                //when passing secured peer names, it takes string of the form [40hexdigits].claasisifer and a newclassifier 
+                //Here there is change made on the native side
+                //when passing secured peer names, it takes string of the form [40hexdigits].claasisifer and a newclassifier
                 //returns [40hexdigits.newclassifier]
-                //But for unsecured peer names it does not take 0.clasfier and newclassfier to return 0.newclassfier. 
-                //It expects NULL as the first param. To satisfy this broken finctionality, we are passing null if the 
-                //peer name is unsecured. 
-                result = UnsafeP2PNativeMethods.PeerCreatePeerName(peerName.IsSecured? peerName.m_PeerName : null, classifier, out shNewPeerName);
+                //But for unsecured peer names it does not take 0.clasfier and newclassfier to return 0.newclassfier.
+                //It expects NULL as the first param. To satisfy this broken finctionality, we are passing null if the
+                //peer name is unsecured.
+                result = UnsafeP2PNativeMethods.PeerCreatePeerName(
+                    peerName.IsSecured ? peerName.m_PeerName : null,
+                    classifier,
+                    out shNewPeerName
+                );
                 if (result != 0)
                 {
-                    throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotCreateRelativePeerName), result);
+                    throw PeerToPeerException.CreateFromHr(
+                        SR.GetString(SR.Pnrp_CouldNotCreateRelativePeerName),
+                        result
+                    );
                 }
                 newPeerName = shNewPeerName.UnicodeString;
             }
             finally
             {
-                if (shNewPeerName != null) shNewPeerName.Dispose();
+                if (shNewPeerName != null)
+                    shNewPeerName.Dispose();
             }
 
             string authority;
             string newClassifier;
             WeakParsePeerName(newPeerName, out authority, out newClassifier);
             PeerName p = new PeerName(newPeerName, authority, newClassifier);
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "A new PeerName created from existing PeerName with a new classfier. Existing PeerName {0} Classifier {1} New PeerName {2}", peerName, classifier, p);
-            return p; 
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "A new PeerName created from existing PeerName with a new classfier. Existing PeerName {0} Classifier {1} New PeerName {2}",
+                peerName,
+                classifier,
+                p
+            );
+            return p;
         }
 
         /// <summary>
@@ -331,18 +410,21 @@ namespace System.Net.PeerToPeer
         /// <returns></returns>
         public bool Equals(PeerName other)
         {
-            if(other == null) return false;
+            if (other == null)
+                return false;
             return string.Compare(other.m_PeerName, m_PeerName, StringComparison.Ordinal) == 0;
         }
 
         public override bool Equals(object obj)
         {
-            if (obj == null) return false;
+            if (obj == null)
+                return false;
             PeerName other = obj as PeerName;
-            if (other == null) return false;
+            if (other == null)
+                return false;
             return Equals(other);
-      
         }
+
         /// <summary>
         /// Hash code comes from m_PeerName since the others are just components of this
         /// </summary>
@@ -357,20 +439,15 @@ namespace System.Net.PeerToPeer
         /// </summary>
         public string Authority
         {
-            get
-            {
-                return m_Authority;
-            }
+            get { return m_Authority; }
         }
+
         /// <summary>
         /// Classifier
         /// </summary>
         public string Classifier
         {
-            get
-            {
-                return m_Classifier;
-            }
+            get { return m_Classifier; }
         }
 
         /// <summary>
@@ -394,22 +471,35 @@ namespace System.Net.PeerToPeer
                     SafePeerData shPeerHostName = null;
                     try
                     {
-						//This API gives HRESULT > 0 for success instead of S_OK == 0
-						//WINDOWS OS 
+                        //This API gives HRESULT > 0 for success instead of S_OK == 0
+                        //WINDOWS OS
 
-                        result = UnsafeP2PNativeMethods.PeerNameToPeerHostName( m_PeerName, out shPeerHostName);
+                        result = UnsafeP2PNativeMethods.PeerNameToPeerHostName(
+                            m_PeerName,
+                            out shPeerHostName
+                        );
                         if (result < 0)
                         {
-                            throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotGetPeerHostNameFromPeerName), result);
+                            throw PeerToPeerException.CreateFromHr(
+                                SR.GetString(SR.Pnrp_CouldNotGetPeerHostNameFromPeerName),
+                                result
+                            );
                         }
                         m_PeerHostName = shPeerHostName.UnicodeString;
                     }
                     finally
                     {
-                        if (shPeerHostName != null) shPeerHostName.Dispose();
+                        if (shPeerHostName != null)
+                            shPeerHostName.Dispose();
                     }
                 }
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "PeerHostName created for PeerName PeerHostName {0} PeerName {1}", m_PeerHostName, this);
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "PeerHostName created for PeerName PeerHostName {0} PeerName {1}",
+                    m_PeerHostName,
+                    this
+                );
                 return m_PeerHostName;
             }
         }
@@ -419,46 +509,51 @@ namespace System.Net.PeerToPeer
         /// </summary>
         public bool IsSecured
         {
-            get
-            {
-                return m_Authority != PEERNAME_UNSECURED_AUTHORITY;
-            }
+            get { return m_Authority != PEERNAME_UNSECURED_AUTHORITY; }
         }
-
 
         // ===================================================
         // Private methods
         // ===================================================
         /// <summary>
-        /// I have considered using regular expressions. However, the regular expressions offer 
-        /// poor performance and or startup cost. Really there is no substiture for custom 
-        /// parsing logic. I decided to write this piece of code to parse the peername for now 
+        /// I have considered using regular expressions. However, the regular expressions offer
+        /// poor performance and or startup cost. Really there is no substiture for custom
+        /// parsing logic. I decided to write this piece of code to parse the peername for now
         /// - Microsoft 6/6/2005
         /// </summary>
         /// <param name="peerName"></param>
         /// <param name="authority"></param>
         /// <param name="classifier"></param>
         /// <returns></returns>
-        private static bool StrongParsePeerName(string peerName, out string authority, out string classifier)
+        private static bool StrongParsePeerName(
+            string peerName,
+            out string authority,
+            out string classifier
+        )
         {
             authority = null;
             classifier = null;
-            
+
             //Rule 0. The max length must not be exeeded
-            if (peerName == null ||
-                peerName.Length == 0 ||
-                peerName.Length > PEER_MAX_PEERNAME_LENGTH) return false;
+            if (
+                peerName == null
+                || peerName.Length == 0
+                || peerName.Length > PEER_MAX_PEERNAME_LENGTH
+            )
+                return false;
 
             //Rule 1. The length of the string must be at least 3
             //as in 0.C for unsecured PeerName with classifier "C"
-            if (peerName.Length < 3) return false;
+            if (peerName.Length < 3)
+                return false;
 
             string tempAuthority = null;
             int IndexOfPeriod = peerName.IndexOf('.');
-            if (IndexOfPeriod == 0) return false;
+            if (IndexOfPeriod == 0)
+                return false;
             if (IndexOfPeriod < 0)
             {
-                //Rule 2. Secure PeerNames can have just the authority 
+                //Rule 2. Secure PeerNames can have just the authority
                 //or Authority. or Authority.Classifier
                 //if there is no period, we have to treat the entire string as the authority
                 tempAuthority = peerName;
@@ -477,19 +572,26 @@ namespace System.Net.PeerToPeer
             }
 
             //Rule 3. Authority is either SECURE_AUTHORITY_LENGTH hex characters or "0"
-            if (tempAuthority.Length != SECURE_AUTHORITY_LENGTH &&
-                tempAuthority.Length != INSECURE_AUTHORITY_LENGTH) return false;
+            if (
+                tempAuthority.Length != SECURE_AUTHORITY_LENGTH
+                && tempAuthority.Length != INSECURE_AUTHORITY_LENGTH
+            )
+                return false;
 
             //Rule 4. If it is length 1 it must be 0
-            if (tempAuthority.Length == INSECURE_AUTHORITY_LENGTH && tempAuthority != PEERNAME_UNSECURED_AUTHORITY)
+            if (
+                tempAuthority.Length == INSECURE_AUTHORITY_LENGTH
+                && tempAuthority != PEERNAME_UNSECURED_AUTHORITY
+            )
                 return false;
 
             //Rule 5. the authority must be 40 hex characters
-            if(tempAuthority.Length == SECURE_AUTHORITY_LENGTH)
+            if (tempAuthority.Length == SECURE_AUTHORITY_LENGTH)
             {
                 foreach (char c in tempAuthority)
                 {
-                    if (!IsHexDigit(c)) return false;
+                    if (!IsHexDigit(c))
+                        return false;
                 }
             }
             //Rule 6. The maximum length of the classfier is PEER_MAX_CLASSIFIER_LENGTH
@@ -498,13 +600,15 @@ namespace System.Net.PeerToPeer
             {
                 tempClassifier = peerName.Substring(IndexOfPeriod + 1);
             }
-            if (tempClassifier != null && tempClassifier.Length > PEER_MAX_CLASSIFIER_LENGTH) return false;
+            if (tempClassifier != null && tempClassifier.Length > PEER_MAX_CLASSIFIER_LENGTH)
+                return false;
 
             //Finish
             authority = tempAuthority.ToLower(CultureInfo.InvariantCulture); //Safe for Hex digits
             classifier = tempClassifier;
             return true;
         }
+
         private static bool IsHexDigit(char character)
         {
             return ((character >= '0') && (character <= '9'))
@@ -513,15 +617,19 @@ namespace System.Net.PeerToPeer
         }
 
         /// <summary>
-        /// WARNING: Don't call this unless you are sure that 
-        /// the PeerName is a valid string. This is invoked only when 
+        /// WARNING: Don't call this unless you are sure that
+        /// the PeerName is a valid string. This is invoked only when
         /// we are sure that the peername is valid and we need to components
         /// </summary>
         /// <param name="peerName">in: peerName to parse</param>
         /// <param name="authority">out: parsed authority value</param>
         /// <param name="classifier">out: parsed classfier value</param>
         /// <returns>none</returns>
-        private static void WeakParsePeerName(string peerName, out string authority, out string classifier)
+        private static void WeakParsePeerName(
+            string peerName,
+            out string authority,
+            out string classifier
+        )
         {
             authority = null;
             classifier = null;
@@ -548,11 +656,14 @@ namespace System.Net.PeerToPeer
         }
 
         /// <summary>
-        /// Constructor to enable serialization 
+        /// Constructor to enable serialization
         /// </summary>
         /// <param name="serializationInfo"></param>
         /// <param name="streamingContext"></param>
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
         protected PeerName(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
@@ -564,13 +675,20 @@ namespace System.Net.PeerToPeer
             m_Classifier = info.GetString("_Classifier");
         }
 
-
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="GetObjectData(SerializationInfo, StreamingContext):Void" />
         // </SecurityKernel>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.Net.dll is still using pre-v4 security model and needs this demand")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.Net.dll is still using pre-v4 security model and needs this demand"
+        )]
         [System.Security.SecurityCritical]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter, SerializationFormatter = true)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             GetObjectData(info, context);
@@ -588,6 +706,5 @@ namespace System.Net.PeerToPeer
             info.AddValue("_Authority", m_Authority);
             info.AddValue("_Classifier", m_Classifier);
         }
-		
     }
 }

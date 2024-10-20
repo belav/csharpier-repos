@@ -7,9 +7,6 @@ namespace Microsoft.Extensions.DependencyInjection.Tests.Fakes
 {
     public class ClassDependsOnPrivateConstructorClass
     {
-        public ClassDependsOnPrivateConstructorClass(ClassWithPrivateCtor value)
-        {
-
-        }
+        public ClassDependsOnPrivateConstructorClass(ClassWithPrivateCtor value) { }
     }
 }

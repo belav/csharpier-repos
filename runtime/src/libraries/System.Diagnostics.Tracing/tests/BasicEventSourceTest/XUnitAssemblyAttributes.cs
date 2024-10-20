@@ -4,4 +4,8 @@
 using Xunit;
 
 // Most of our EventSource tests reuse an EventSource, which will cause errors if they run in parallel.
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true, MaxParallelThreads = 1)]
+[assembly: CollectionBehavior(
+    CollectionBehavior.CollectionPerAssembly,
+    DisableTestParallelization = true,
+    MaxParallelThreads = 1
+)]

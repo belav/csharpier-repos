@@ -51,14 +51,23 @@ namespace Newtonsoft.Json.Tests.Converters
     {
         public class DoubleDoubleConverter : JsonConverter
         {
-            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            public override void WriteJson(
+                JsonWriter writer,
+                object value,
+                JsonSerializer serializer
+            )
             {
                 double d = (double)value;
 
                 writer.WriteValue(d * 2);
             }
 
-            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            public override object ReadJson(
+                JsonReader reader,
+                Type objectType,
+                object existingValue,
+                JsonSerializer serializer
+            )
             {
                 double d = (double)reader.Value;
 
@@ -74,7 +83,10 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void SerializeUnionWithConverter()
         {
-            string json = JsonConvert.SerializeObject(Shape.NewRectangle(10.0, 5.0), new DoubleDoubleConverter());
+            string json = JsonConvert.SerializeObject(
+                Shape.NewRectangle(10.0, 5.0),
+                new DoubleDoubleConverter()
+            );
 
             Assert.AreEqual(@"{""Case"":""Rectangle"",""Fields"":[20.0,10.0]}", json);
 
@@ -101,7 +113,7 @@ namespace Newtonsoft.Json.Tests.Converters
             List<Shape> values = new List<Shape>
             {
                 Shape.NewRectangle(10.0, 5.0),
-                Shape.NewCircle(7.5)
+                Shape.NewCircle(7.5),
             };
 
             string json = JsonConvert.SerializeObject(values, Formatting.Indented);
@@ -122,7 +134,8 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializePerformance()
         {
-            string json = @"[
+            string json =
+                @"[
   {""Case"":""Rectangle"",""Fields"":[10.0,5.0]},
   {""Case"":""Rectangle"",""Fields"":[10.0,5.0]},
   {""Case"":""Rectangle"",""Fields"":[10.0,5.0]},
@@ -169,7 +182,9 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeUnionWithFields()
         {
-            Shape c = JsonConvert.DeserializeObject<Shape>(@"{""Case"":""Rectangle"",""Fields"":[10.0,5.0]}");
+            Shape c = JsonConvert.DeserializeObject<Shape>(
+                @"{""Case"":""Rectangle"",""Fields"":[10.0,5.0]}"
+            );
             Assert.AreEqual(true, c.IsRectangle);
 
             Shape.Rectangle r = (Shape.Rectangle)c;
@@ -208,8 +223,10 @@ namespace Newtonsoft.Json.Tests.Converters
                 unionCase.Tag = unionCaseInfo.Tag;
                 unionCase.Name = unionCaseInfo.Name;
                 unionCase.Fields = unionCaseInfo.GetFields();
-                unionCase.FieldReader = (s) => FSharpValue.PreComputeUnionReader(unionCaseInfo, null).Invoke(s);
-                unionCase.Constructor = (s) => FSharpValue.PreComputeUnionConstructor(unionCaseInfo, null).Invoke(s);
+                unionCase.FieldReader = (s) =>
+                    FSharpValue.PreComputeUnionReader(unionCaseInfo, null).Invoke(s);
+                unionCase.Constructor = (s) =>
+                    FSharpValue.PreComputeUnionConstructor(unionCaseInfo, null).Invoke(s);
 
                 u.Cases.Add(unionCase);
             }
@@ -241,12 +258,13 @@ namespace Newtonsoft.Json.Tests.Converters
 
             UnionCase caseInfo = union.Cases.Single(c => c.Name == "Rectangle");
 
-            Shape.Rectangle value = (Shape.Rectangle)caseInfo.Constructor.Invoke(new object[]
-            {
-                10.0, 5.0
-            });
+            Shape.Rectangle value = (Shape.Rectangle)
+                caseInfo.Constructor.Invoke(new object[] { 10.0, 5.0 });
 
-            Assert.AreEqual("Newtonsoft.Json.Tests.TestObjects.GeometricForms.Shape+Rectangle", value.ToString());
+            Assert.AreEqual(
+                "Newtonsoft.Json.Tests.TestObjects.GeometricForms.Shape+Rectangle",
+                value.ToString()
+            );
             Assert.AreEqual(10, value.width);
             Assert.AreEqual(5, value.length);
         }
@@ -254,47 +272,71 @@ namespace Newtonsoft.Json.Tests.Converters
         [Test]
         public void DeserializeBasicUnion_NoMatch()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<Currency>(@"{""Case"":""abcdefg"",""Fields"":[]}"), "No union type found with the name 'abcdefg'. Path 'Case', line 1, position 17.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () =>
+                    JsonConvert.DeserializeObject<Currency>(
+                        @"{""Case"":""abcdefg"",""Fields"":[]}"
+                    ),
+                "No union type found with the name 'abcdefg'. Path 'Case', line 1, position 17."
+            );
         }
 
         [Test]
         public void DeserializeBasicUnion_MismatchedFieldCount()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<Currency>(@"{""Case"":""AUD"",""Fields"":[1]}"), "The number of field values does not match the number of properties defined by union 'AUD'. Path '', line 1, position 27.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.DeserializeObject<Currency>(@"{""Case"":""AUD"",""Fields"":[1]}"),
+                "The number of field values does not match the number of properties defined by union 'AUD'. Path '', line 1, position 27."
+            );
         }
 
         [Test]
         public void DeserializeBasicUnion_NoCaseName()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<Currency>(@"{""Fields"":[1]}"), "No 'Case' property with union name found. Path '', line 1, position 14.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.DeserializeObject<Currency>(@"{""Fields"":[1]}"),
+                "No 'Case' property with union name found. Path '', line 1, position 14."
+            );
         }
 
         [Test]
         public void DeserializeBasicUnion_UnexpectedEnd()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<Currency>(@"{""Case"":"), "Unexpected end when reading JSON. Path 'Case', line 1, position 8.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.DeserializeObject<Currency>(@"{""Case"":"),
+                "Unexpected end when reading JSON. Path 'Case', line 1, position 8."
+            );
         }
 
         [Test]
         public void DeserializeBasicUnion_FieldsObject()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<Currency>(@"{""Case"":""AUD"",""Fields"":{}}"), "Union fields must been an array. Path 'Fields', line 1, position 24.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.DeserializeObject<Currency>(@"{""Case"":""AUD"",""Fields"":{}}"),
+                "Union fields must been an array. Path 'Fields', line 1, position 24."
+            );
         }
 
         [Test]
         public void DeserializeBasicUnion_UnexpectedProperty()
         {
-            ExceptionAssert.Throws<JsonSerializationException>(() => JsonConvert.DeserializeObject<Currency>(@"{""Case123"":""AUD""}"), "Unexpected property 'Case123' found when reading union. Path 'Case123', line 1, position 11.");
+            ExceptionAssert.Throws<JsonSerializationException>(
+                () => JsonConvert.DeserializeObject<Currency>(@"{""Case123"":""AUD""}"),
+                "Unexpected property 'Case123' found when reading union. Path 'Case123', line 1, position 11."
+            );
         }
 
         [Test]
         public void SerializeUnionWithTypeNameHandlingAndReferenceTracking()
         {
-            string json = JsonConvert.SerializeObject(Shape.NewRectangle(10.0, 5.0), new JsonSerializerSettings
-            {
-                PreserveReferencesHandling = PreserveReferencesHandling.All,
-                TypeNameHandling = TypeNameHandling.All
-            });
+            string json = JsonConvert.SerializeObject(
+                Shape.NewRectangle(10.0, 5.0),
+                new JsonSerializerSettings
+                {
+                    PreserveReferencesHandling = PreserveReferencesHandling.All,
+                    TypeNameHandling = TypeNameHandling.All,
+                }
+            );
 
             Assert.AreEqual(@"{""Case"":""Rectangle"",""Fields"":[10.0,5.0]}", json);
 

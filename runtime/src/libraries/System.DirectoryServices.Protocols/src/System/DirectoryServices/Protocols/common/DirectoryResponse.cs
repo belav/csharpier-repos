@@ -8,7 +8,13 @@ namespace System.DirectoryServices.Protocols
         private readonly DirectoryControl[] _directoryControls;
         internal Uri[] _directoryReferral;
 
-        internal DirectoryResponse(string dn, DirectoryControl[] controls, ResultCode result, string message, Uri[] referral)
+        internal DirectoryResponse(
+            string dn,
+            DirectoryControl[] controls,
+            ResultCode result,
+            string message,
+            Uri[] referral
+        )
         {
             MatchedDN = dn;
             _directoryControls = controls;
@@ -33,7 +39,12 @@ namespace System.DirectoryServices.Protocols
                 DirectoryControl[] tempControls = new DirectoryControl[_directoryControls.Length];
                 for (int i = 0; i < _directoryControls.Length; i++)
                 {
-                    tempControls[i] = new DirectoryControl(_directoryControls[i].Type, _directoryControls[i].GetValue(), _directoryControls[i].IsCritical, _directoryControls[i].ServerSide);
+                    tempControls[i] = new DirectoryControl(
+                        _directoryControls[i].Type,
+                        _directoryControls[i].GetValue(),
+                        _directoryControls[i].IsCritical,
+                        _directoryControls[i].ServerSide
+                    );
                 }
                 DirectoryControl.TransformControls(tempControls);
                 return tempControls;
@@ -65,34 +76,76 @@ namespace System.DirectoryServices.Protocols
 
     public class DeleteResponse : DirectoryResponse
     {
-        internal DeleteResponse(string dn, DirectoryControl[] controls, ResultCode result, string message, Uri[] referral) : base(dn, controls, result, message, referral) { }
+        internal DeleteResponse(
+            string dn,
+            DirectoryControl[] controls,
+            ResultCode result,
+            string message,
+            Uri[] referral
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class AddResponse : DirectoryResponse
     {
-        internal AddResponse(string dn, DirectoryControl[] controls, ResultCode result, string message, Uri[] referral) : base(dn, controls, result, message, referral) { }
+        internal AddResponse(
+            string dn,
+            DirectoryControl[] controls,
+            ResultCode result,
+            string message,
+            Uri[] referral
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class ModifyResponse : DirectoryResponse
     {
-        internal ModifyResponse(string dn, DirectoryControl[] controls, ResultCode result, string message, Uri[] referral) : base(dn, controls, result, message, referral) { }
+        internal ModifyResponse(
+            string dn,
+            DirectoryControl[] controls,
+            ResultCode result,
+            string message,
+            Uri[] referral
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class ModifyDNResponse : DirectoryResponse
     {
-        internal ModifyDNResponse(string dn, DirectoryControl[] controls, ResultCode result, string message, Uri[] referral) : base(dn, controls, result, message, referral) { }
+        internal ModifyDNResponse(
+            string dn,
+            DirectoryControl[] controls,
+            ResultCode result,
+            string message,
+            Uri[] referral
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class CompareResponse : DirectoryResponse
     {
-        internal CompareResponse(string dn, DirectoryControl[] controls, ResultCode result, string message, Uri[] referral) : base(dn, controls, result, message, referral) { }
+        internal CompareResponse(
+            string dn,
+            DirectoryControl[] controls,
+            ResultCode result,
+            string message,
+            Uri[] referral
+        )
+            : base(dn, controls, result, message, referral) { }
     }
 
     public class ExtendedResponse : DirectoryResponse
     {
         private byte[] _value;
 
-        internal ExtendedResponse(string dn, DirectoryControl[] controls, ResultCode result, string message, Uri[] referral) : base(dn, controls, result, message, referral) { }
+        internal ExtendedResponse(
+            string dn,
+            DirectoryControl[] controls,
+            ResultCode result,
+            string message,
+            Uri[] referral
+        )
+            : base(dn, controls, result, message, referral) { }
 
         public string ResponseName { get; internal set; }
 
@@ -118,10 +171,19 @@ namespace System.DirectoryServices.Protocols
 
     public class SearchResponse : DirectoryResponse
     {
-        private SearchResultReferenceCollection _referenceCollection = new SearchResultReferenceCollection();
+        private SearchResultReferenceCollection _referenceCollection =
+            new SearchResultReferenceCollection();
         private SearchResultEntryCollection _entryCollection = new SearchResultEntryCollection();
         internal bool searchDone;
-        internal SearchResponse(string dn, DirectoryControl[] controls, ResultCode result, string message, Uri[] referral) : base(dn, controls, result, message, referral) { }
+
+        internal SearchResponse(
+            string dn,
+            DirectoryControl[] controls,
+            ResultCode result,
+            string message,
+            Uri[] referral
+        )
+            : base(dn, controls, result, message, referral) { }
 
         public SearchResultReferenceCollection References
         {

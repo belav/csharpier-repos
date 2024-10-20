@@ -38,9 +38,8 @@ namespace Newtonsoft.Json.Linq
 
         private Dictionary<string, JToken>? _dictionary;
 
-        public JPropertyKeyedCollection() : base(new List<JToken>())
-        {
-        }
+        public JPropertyKeyedCollection()
+            : base(new List<JToken>()) { }
 
         private void AddKey(string key, JToken item)
         {
@@ -52,7 +51,9 @@ namespace Newtonsoft.Json.Linq
         {
             if (!ContainsItem(item))
             {
-                throw new ArgumentException("The specified item does not exist in this KeyedCollection.");
+                throw new ArgumentException(
+                    "The specified item does not exist in this KeyedCollection."
+                );
             }
 
             string keyForItem = GetKeyForItem(item);
@@ -191,7 +192,7 @@ namespace Newtonsoft.Json.Linq
             }
         }
 
-        public bool TryGetValue(string key, [NotNullWhen(true)]out JToken? value)
+        public bool TryGetValue(string key, [NotNullWhen(true)] out JToken? value)
         {
             if (_dictionary == null)
             {

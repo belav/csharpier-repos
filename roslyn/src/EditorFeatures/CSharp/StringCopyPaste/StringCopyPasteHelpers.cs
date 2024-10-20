@@ -23,14 +23,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 {
     internal static class StringCopyPasteHelpers
     {
-        public static bool HasNewLine(TextLine line)
-            => line.Span.End != line.SpanIncludingLineBreak.End;
+        public static bool HasNewLine(TextLine line) =>
+            line.Span.End != line.SpanIncludingLineBreak.End;
 
         /// <summary>
-        /// Gets the character at the requested position, or <c>\0</c> if out of bounds. 
+        /// Gets the character at the requested position, or <c>\0</c> if out of bounds.
         /// </summary>
-        public static char SafeCharAt(SourceText text, int index)
-            => index >= 0 && index < text.Length ? text[index] : '\0';
+        public static char SafeCharAt(SourceText text, int index) =>
+            index >= 0 && index < text.Length ? text[index] : '\0';
 
         /// <summary>
         /// True if the string literal contains an error diagnostic that indicates a parsing problem with it. For
@@ -51,7 +51,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                 }
 
                 // we don't care about errors in holes.  Only errors in the content portions of the string.
-                for (int i = 0, n = interpolatedString.Contents.Count; i < n && errors.Count > 0; i++)
+                for (
+                    int i = 0, n = interpolatedString.Contents.Count;
+                    i < n && errors.Count > 0;
+                    i++
+                )
                 {
                     if (interpolatedString.Contents[i] is InterpolatedStringTextSyntax text)
                     {
@@ -150,24 +154,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             return (value[..start], value[start..]);
         }
 
-        public static bool IsVerbatimStringExpression(ExpressionSyntax stringExpression)
-            => stringExpression is LiteralExpressionSyntax literalExpression && literalExpression.Token.IsVerbatimStringLiteral() ||
-               stringExpression is InterpolatedStringExpressionSyntax { StringStartToken.RawKind: (int)SyntaxKind.InterpolatedVerbatimStringStartToken };
+        public static bool IsVerbatimStringExpression(ExpressionSyntax stringExpression) =>
+            stringExpression is LiteralExpressionSyntax literalExpression
+                && literalExpression.Token.IsVerbatimStringLiteral()
+            || stringExpression
+                is InterpolatedStringExpressionSyntax
+                {
+                    StringStartToken.RawKind: (int)SyntaxKind.InterpolatedVerbatimStringStartToken
+                };
 
-        public static bool IsAnyRawStringExpression(ExpressionSyntax expression)
-            => expression is LiteralExpressionSyntax literal
+        public static bool IsAnyRawStringExpression(ExpressionSyntax expression) =>
+            expression is LiteralExpressionSyntax literal
                 ? IsRawStringLiteral(literal)
                 : IsRawStringLiteral((InterpolatedStringExpressionSyntax)expression);
 
-        public static bool IsAnyMultiLineRawStringExpression(ExpressionSyntax expression)
-            => expression is LiteralExpressionSyntax { Token.RawKind: (int)SyntaxKind.MultiLineRawStringLiteralToken } or
-                             InterpolatedStringExpressionSyntax { StringStartToken.RawKind: (int)SyntaxKind.InterpolatedMultiLineRawStringStartToken };
+        public static bool IsAnyMultiLineRawStringExpression(ExpressionSyntax expression) =>
+            expression
+                is LiteralExpressionSyntax
+                    {
+                        Token.RawKind: (int)SyntaxKind.MultiLineRawStringLiteralToken
+                    }
+                    or InterpolatedStringExpressionSyntax
+                    {
+                        StringStartToken.RawKind: (int)
+                            SyntaxKind.InterpolatedMultiLineRawStringStartToken
+                    };
 
-        public static bool IsRawStringLiteral(InterpolatedStringExpressionSyntax interpolatedString)
-            => interpolatedString.StringStartToken.Kind() is SyntaxKind.InterpolatedSingleLineRawStringStartToken or SyntaxKind.InterpolatedMultiLineRawStringStartToken;
+        public static bool IsRawStringLiteral(
+            InterpolatedStringExpressionSyntax interpolatedString
+        ) =>
+            interpolatedString.StringStartToken.Kind()
+                is SyntaxKind.InterpolatedSingleLineRawStringStartToken
+                    or SyntaxKind.InterpolatedMultiLineRawStringStartToken;
 
-        public static bool IsRawStringLiteral(LiteralExpressionSyntax literal)
-            => literal.Token.Kind() is SyntaxKind.SingleLineRawStringLiteralToken or SyntaxKind.MultiLineRawStringLiteralToken;
+        public static bool IsRawStringLiteral(LiteralExpressionSyntax literal) =>
+            literal.Token.Kind()
+                is SyntaxKind.SingleLineRawStringLiteralToken
+                    or SyntaxKind.MultiLineRawStringLiteralToken;
 
         public static int SkipU8Suffix(SourceText text, int end)
         {
@@ -183,24 +206,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         /// determine if a raw string literal needs to grow its delimiters to ensure that the quote sequence will no
         /// longer be a problem.
         /// </summary>
-        public static int GetLongestQuoteSequence(SourceText text, TextSpan span)
-            => GetLongestCharacterSequence(text, span, '"');
+        public static int GetLongestQuoteSequence(SourceText text, TextSpan span) =>
+            GetLongestCharacterSequence(text, span, '"');
 
-        public static int GetLongestOpenBraceSequence(SourceText text, TextSpan span)
-            => GetLongestCharacterSequence(text, span, '{');
+        public static int GetLongestOpenBraceSequence(SourceText text, TextSpan span) =>
+            GetLongestCharacterSequence(text, span, '{');
 
-        public static int GetLongestCloseBraceSequence(SourceText text, TextSpan span)
-            => GetLongestCharacterSequence(text, span, '}');
+        public static int GetLongestCloseBraceSequence(SourceText text, TextSpan span) =>
+            GetLongestCharacterSequence(text, span, '}');
 
         /// <summary>
         /// Given a section of a document, finds the longest sequence of of a given <paramref name="character"/> in it.
         /// Used to determine if a raw string literal needs to grow its delimiters to ensure that the sequence
         /// will no longer be a problem.
         /// </summary>
-        private static int GetLongestCharacterSequence(SourceText text, TextSpan span, char character)
+        private static int GetLongestCharacterSequence(
+            SourceText text,
+            TextSpan span,
+            char character
+        )
         {
             var longestCount = 0;
-            for (int currentIndex = span.Start, contentEnd = span.End; currentIndex < contentEnd;)
+            for (int currentIndex = span.Start, contentEnd = span.End; currentIndex < contentEnd; )
             {
                 if (text[currentIndex] == character)
                 {
@@ -222,15 +249,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
         /// <summary>
         /// Given a set of selections, finds the innermost string-literal/interpolation that they are all contained in.
-        /// If no such literal/interpolation exists, this returns null. 
+        /// If no such literal/interpolation exists, this returns null.
         /// </summary>
         public static ExpressionSyntax? FindCommonContainingStringExpression(
-            SyntaxNode root, NormalizedSnapshotSpanCollection selectionsBeforePaste)
+            SyntaxNode root,
+            NormalizedSnapshotSpanCollection selectionsBeforePaste
+        )
         {
             ExpressionSyntax? expression = null;
             foreach (var snapshotSpan in selectionsBeforePaste)
             {
-                var container = FindContainingSupportedStringExpression(root, snapshotSpan.Start.Position);
+                var container = FindContainingSupportedStringExpression(
+                    root,
+                    snapshotSpan.Start.Position
+                );
                 if (container == null)
                     return null;
 
@@ -242,16 +274,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             return expression;
         }
 
-        public static ExpressionSyntax? FindContainingSupportedStringExpression(SyntaxNode root, int position)
+        public static ExpressionSyntax? FindContainingSupportedStringExpression(
+            SyntaxNode root,
+            int position
+        )
         {
             var node = root.FindToken(position).Parent;
             for (var current = node; current != null; current = current.Parent)
             {
                 if (current is LiteralExpressionSyntax literalExpression)
-                    return IsSupportedStringExpression(literalExpression) ? literalExpression : null;
+                    return IsSupportedStringExpression(literalExpression)
+                        ? literalExpression
+                        : null;
 
                 if (current is InterpolatedStringExpressionSyntax interpolatedString)
-                    return IsSupportedStringExpression(interpolatedString) ? interpolatedString : null;
+                    return IsSupportedStringExpression(interpolatedString)
+                        ? interpolatedString
+                        : null;
             }
 
             return null;
@@ -263,24 +302,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             // types of strings supported, downstream code can know exactly what forms they should be looking for and
             // that nothing else may flow down to them.
 
-            if (expression is LiteralExpressionSyntax
+            if (
+                expression is LiteralExpressionSyntax
                 {
                     RawKind: (int)SyntaxKind.StringLiteralExpression,
-                    Token.RawKind: (int)SyntaxKind.StringLiteralToken or
-                                   (int)SyntaxKind.SingleLineRawStringLiteralToken or
-                                   (int)SyntaxKind.MultiLineRawStringLiteralToken,
-                })
+                    Token.RawKind: (int)SyntaxKind.StringLiteralToken
+                        or (int)SyntaxKind.SingleLineRawStringLiteralToken
+                        or (int)SyntaxKind.MultiLineRawStringLiteralToken,
+                }
+            )
             {
                 return true;
             }
 
-            if (expression is InterpolatedStringExpressionSyntax
+            if (
+                expression is InterpolatedStringExpressionSyntax
                 {
-                    StringStartToken.RawKind: (int)SyntaxKind.InterpolatedStringStartToken or
-                                              (int)SyntaxKind.InterpolatedVerbatimStringStartToken or
-                                              (int)SyntaxKind.InterpolatedSingleLineRawStringStartToken or
-                                              (int)SyntaxKind.InterpolatedMultiLineRawStringStartToken,
-                })
+                    StringStartToken.RawKind: (int)SyntaxKind.InterpolatedStringStartToken
+                        or (int)SyntaxKind.InterpolatedVerbatimStringStartToken
+                        or (int)SyntaxKind.InterpolatedSingleLineRawStringStartToken
+                        or (int)SyntaxKind.InterpolatedMultiLineRawStringStartToken,
+                }
+            )
             {
                 return true;
             }
@@ -288,10 +331,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             return false;
         }
 
-        public static string EscapeForNonRawStringLiteral_DoNotCallDirectly(bool isVerbatim, bool isInterpolated, bool trySkipExistingEscapes, string value)
+        public static string EscapeForNonRawStringLiteral_DoNotCallDirectly(
+            bool isVerbatim,
+            bool isInterpolated,
+            bool trySkipExistingEscapes,
+            string value
+        )
         {
             if (isVerbatim)
-                return EscapeForNonRawVerbatimStringLiteral(isInterpolated, trySkipExistingEscapes, value);
+                return EscapeForNonRawVerbatimStringLiteral(
+                    isInterpolated,
+                    trySkipExistingEscapes,
+                    value
+                );
 
             // Standard strings have a much larger set of cases to consider.
             using var _ = PooledStringBuilder.GetInstance(out var builder);
@@ -411,7 +463,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             }
         }
 
-        private static string EscapeForNonRawVerbatimStringLiteral(bool isInterpolated, bool trySkipExistingEscapes, string value)
+        private static string EscapeForNonRawVerbatimStringLiteral(
+            bool isInterpolated,
+            bool trySkipExistingEscapes,
+            string value
+        )
         {
             using var _ = PooledStringBuilder.GetInstance(out var builder);
 
@@ -425,7 +481,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             // trySkipExistingEscapes to false.  That will prevent calling back into this check and it means whatever we
             // run into we will escape.
             if (trySkipExistingEscapes && WillEscapeAnyCharacters(isInterpolated, value))
-                return EscapeForNonRawVerbatimStringLiteral(isInterpolated, trySkipExistingEscapes: false, value);
+                return EscapeForNonRawVerbatimStringLiteral(
+                    isInterpolated,
+                    trySkipExistingEscapes: false,
+                    value
+                );
 
             for (var i = 0; i < value.Length; i++)
             {
@@ -496,7 +556,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
         /// lines as they're also very common, but are clearly not a way of indicating indentation indent for the normal
         /// lines.
         /// </summary>
-        public static string? GetCommonIndentationPrefix(INormalizedTextChangeCollection textChanges)
+        public static string? GetCommonIndentationPrefix(
+            INormalizedTextChangeCollection textChanges
+        )
         {
             string? commonIndentPrefix = null;
             var first = true;
@@ -514,14 +576,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
                     var nonWhitespaceIndex = GetFirstNonWhitespaceIndex(text, line);
                     if (nonWhitespaceIndex >= 0)
-                        commonIndentPrefix = GetCommonIndentationPrefix(commonIndentPrefix, text, TextSpan.FromBounds(line.Start, nonWhitespaceIndex));
+                        commonIndentPrefix = GetCommonIndentationPrefix(
+                            commonIndentPrefix,
+                            text,
+                            TextSpan.FromBounds(line.Start, nonWhitespaceIndex)
+                        );
                 }
             }
 
             return commonIndentPrefix;
         }
 
-        private static string? GetCommonIndentationPrefix(string? commonIndentPrefix, SourceText text, TextSpan lineWhitespaceSpan)
+        private static string? GetCommonIndentationPrefix(
+            string? commonIndentPrefix,
+            SourceText text,
+            TextSpan lineWhitespaceSpan
+        )
         {
             // first line with indentation whitespace we're seeing.  Just keep track of that.
             if (commonIndentPrefix == null)
@@ -530,19 +600,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             // we have indentation whitespace from a previous line.  Figure out the max commonality between it and the
             // line we're currently looking at.
             var commonPrefixLength = 0;
-            for (var n = Math.Min(commonIndentPrefix.Length, lineWhitespaceSpan.Length); commonPrefixLength < n; commonPrefixLength++)
+            for (
+                var n = Math.Min(commonIndentPrefix.Length, lineWhitespaceSpan.Length);
+                commonPrefixLength < n;
+                commonPrefixLength++
+            )
             {
-                if (commonIndentPrefix[commonPrefixLength] != text[lineWhitespaceSpan.Start + commonPrefixLength])
+                if (
+                    commonIndentPrefix[commonPrefixLength]
+                    != text[lineWhitespaceSpan.Start + commonPrefixLength]
+                )
                     break;
             }
 
             return commonIndentPrefix[..commonPrefixLength];
         }
 
-        public static TextSpan MapSpan(TextSpan span, ITextSnapshot from, ITextSnapshot to)
-            => from.CreateTrackingSpan(span.ToSpan(), SpanTrackingMode.EdgeInclusive).GetSpan(to).Span.ToTextSpan();
+        public static TextSpan MapSpan(TextSpan span, ITextSnapshot from, ITextSnapshot to) =>
+            from.CreateTrackingSpan(span.ToSpan(), SpanTrackingMode.EdgeInclusive)
+                .GetSpan(to)
+                .Span.ToTextSpan();
 
-        public static bool RawContentMustBeMultiLine(SourceText text, ImmutableArray<TextSpan> spans)
+        public static bool RawContentMustBeMultiLine(
+            SourceText text,
+            ImmutableArray<TextSpan> spans
+        )
         {
             Contract.ThrowIfTrue(spans.Length == 0);
 
@@ -550,7 +632,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             if (spans is [{ IsEmpty: true }])
                 return true;
 
-            // Or if it starts/ends with a quote 
+            // Or if it starts/ends with a quote
             if (spans.First().Length > 0 && text[spans.First().Start] == '"')
                 return true;
 

@@ -4,7 +4,6 @@
 using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
-
 #if NETCOREAPP
 using System.Runtime.Intrinsics.X86;
 #endif
@@ -34,7 +33,8 @@ namespace System.Text.Encodings.Web
             ScalarEscaperBase scalarEscaper,
             in AllowedBmpCodePointsBitmap allowedCodePointsBmp,
             bool forbidHtmlSensitiveCharacters = true,
-            ReadOnlySpan<char> extraCharactersToEscape = default)
+            ReadOnlySpan<char> extraCharactersToEscape = default
+        )
         {
             Debug.Assert(scalarEscaper != null);
 
@@ -73,15 +73,24 @@ namespace System.Text.Encodings.Web
             _allowedAsciiCodePoints.PopulateAllowedCodePoints(_allowedBmpCodePoints);
         }
 
-        [Obsolete("FindFirstCharacterToEncode has been deprecated. It should only be used by the TextEncoder adapter.")]
+        [Obsolete(
+            "FindFirstCharacterToEncode has been deprecated. It should only be used by the TextEncoder adapter."
+        )]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public unsafe int FindFirstCharacterToEncode(char* text, int textLength)
         {
             return GetIndexOfFirstCharToEncode(new ReadOnlySpan<char>(text, textLength)); // performs bounds checking
         }
 
-        [Obsolete("TryEncodeUnicodeScalar has been deprecated. It should only be used by the TextEncoder adapter.")]
-        public unsafe bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten)
+        [Obsolete(
+            "TryEncodeUnicodeScalar has been deprecated. It should only be used by the TextEncoder adapter."
+        )]
+        public unsafe bool TryEncodeUnicodeScalar(
+            int unicodeScalar,
+            char* buffer,
+            int bufferLength,
+            out int numberOfCharactersWritten
+        )
         {
             Span<char> destination = new Span<char>(buffer, bufferLength);
 
@@ -99,7 +108,10 @@ namespace System.Text.Encodings.Web
             }
             else
             {
-                int innerCharsWritten = _scalarEscaper.EncodeUtf16(new Rune(unicodeScalar), destination);
+                int innerCharsWritten = _scalarEscaper.EncodeUtf16(
+                    new Rune(unicodeScalar),
+                    destination
+                );
                 Debug.Assert(innerCharsWritten <= bufferLength, "Mustn't overflow the buffer.");
                 Debug.Assert(innerCharsWritten != 0, "Inner escaper succeeded with 0-char output?");
                 if (innerCharsWritten >= 0)
@@ -114,7 +126,13 @@ namespace System.Text.Encodings.Web
             return false;
         }
 
-        public OperationStatus Encode(ReadOnlySpan<char> source, Span<char> destination, out int charsConsumed, out int charsWritten, bool isFinalBlock)
+        public OperationStatus Encode(
+            ReadOnlySpan<char> source,
+            Span<char> destination,
+            out int charsConsumed,
+            out int charsWritten,
+            bool isFinalBlock
+        )
         {
             _AssertThisNotNull(); // hoist "this != null" check out of hot loop below
 
@@ -166,7 +184,7 @@ namespace System.Text.Encodings.Web
                 srcIdx++;
                 continue;
 
-            NotAscii:
+                NotAscii:
 
                 if (!Rune.TryCreate(thisChar, out Rune scalarValue))
                 {
@@ -187,11 +205,16 @@ namespace System.Text.Encodings.Web
                     goto MustEncodeNonAscii;
                 }
 
-            CheckWhetherScalarValueAllowed:
+                CheckWhetherScalarValueAllowed:
 
                 if (IsScalarValueAllowed(scalarValue))
                 {
-                    if (!scalarValue.TryEncodeToUtf16(destination.Slice(dstIdx), out int utf16CodeUnitCount))
+                    if (
+                        !scalarValue.TryEncodeToUtf16(
+                            destination.Slice(dstIdx),
+                            out int utf16CodeUnitCount
+                        )
+                    )
                     {
                         goto DestTooSmall;
                     }
@@ -201,11 +224,14 @@ namespace System.Text.Encodings.Web
                     continue;
                 }
 
-            MustEncodeNonAscii:
+                MustEncodeNonAscii:
 
                 // At this point, we know we need to encode.
 
-                int charsWrittenJustNow = _scalarEscaper.EncodeUtf16(scalarValue, destination.Slice(dstIdx));
+                int charsWrittenJustNow = _scalarEscaper.EncodeUtf16(
+                    scalarValue,
+                    destination.Slice(dstIdx)
+                );
                 if (charsWrittenJustNow < 0)
                 {
                     goto DestTooSmall;
@@ -219,21 +245,27 @@ namespace System.Text.Encodings.Web
 
             OperationStatus retVal = OperationStatus.Done;
 
-        CommonReturn:
+            CommonReturn:
             charsConsumed = srcIdx;
             charsWritten = dstIdx;
             return retVal;
 
-        DestTooSmall:
+            DestTooSmall:
             retVal = OperationStatus.DestinationTooSmall;
             goto CommonReturn;
 
-        NeedMoreData:
+            NeedMoreData:
             retVal = OperationStatus.NeedMoreData;
             goto CommonReturn;
         }
 
-        public OperationStatus EncodeUtf8(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesConsumed, out int bytesWritten, bool isFinalBlock)
+        public OperationStatus EncodeUtf8(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesConsumed,
+            out int bytesWritten,
+            bool isFinalBlock
+        )
         {
             _AssertThisNotNull(); // hoist "this != null" check out of hot loop below
 
@@ -283,9 +315,13 @@ namespace System.Text.Encodings.Web
                 srcIdx++;
                 continue;
 
-            NotAscii:
+                NotAscii:
 
-                OperationStatus runeDecodeStatus = Rune.DecodeFromUtf8(source.Slice(srcIdx), out Rune scalarValue, out int bytesConsumedJustNow);
+                OperationStatus runeDecodeStatus = Rune.DecodeFromUtf8(
+                    source.Slice(srcIdx),
+                    out Rune scalarValue,
+                    out int bytesConsumedJustNow
+                );
                 if (runeDecodeStatus != OperationStatus.Done)
                 {
                     if (!isFinalBlock && runeDecodeStatus == OperationStatus.NeedMoreData)
@@ -299,7 +335,12 @@ namespace System.Text.Encodings.Web
 
                 if (IsScalarValueAllowed(scalarValue))
                 {
-                    if (!scalarValue.TryEncodeToUtf8(destination.Slice(dstIdx), out int utf8CodeUnitCount))
+                    if (
+                        !scalarValue.TryEncodeToUtf8(
+                            destination.Slice(dstIdx),
+                            out int utf8CodeUnitCount
+                        )
+                    )
                     {
                         goto DestTooSmall;
                     }
@@ -308,11 +349,14 @@ namespace System.Text.Encodings.Web
                     continue;
                 }
 
-            MustEncodeNonAscii:
+                MustEncodeNonAscii:
 
                 // At this point, we know we need to encode.
 
-                int bytesWrittenJustNow = _scalarEscaper.EncodeUtf8(scalarValue, destination.Slice(dstIdx));
+                int bytesWrittenJustNow = _scalarEscaper.EncodeUtf8(
+                    scalarValue,
+                    destination.Slice(dstIdx)
+                );
                 if (bytesWrittenJustNow < 0)
                 {
                     goto DestTooSmall;
@@ -326,16 +370,16 @@ namespace System.Text.Encodings.Web
 
             OperationStatus retVal = OperationStatus.Done;
 
-        CommonReturn:
+            CommonReturn:
             bytesConsumed = srcIdx;
             bytesWritten = dstIdx;
             return retVal;
 
-        DestTooSmall:
+            DestTooSmall:
             retVal = OperationStatus.DestinationTooSmall;
             goto CommonReturn;
 
-        NeedMoreData:
+            NeedMoreData:
             retVal = OperationStatus.NeedMoreData;
             goto CommonReturn;
         }
@@ -358,14 +402,23 @@ namespace System.Text.Encodings.Web
                         nuint asciiBytesSkippedNInt;
                         if (AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian)
                         {
-                            asciiBytesSkippedNInt = GetIndexOfFirstByteToEncodeAdvSimd64(pData, (uint)dataOriginalLength);
+                            asciiBytesSkippedNInt = GetIndexOfFirstByteToEncodeAdvSimd64(
+                                pData,
+                                (uint)dataOriginalLength
+                            );
                         }
                         else
                         {
                             Debug.Assert(Ssse3.IsSupported, "#ifdef was ill-formed.");
-                            asciiBytesSkippedNInt = GetIndexOfFirstByteToEncodeSsse3(pData, (uint)dataOriginalLength);
+                            asciiBytesSkippedNInt = GetIndexOfFirstByteToEncodeSsse3(
+                                pData,
+                                (uint)dataOriginalLength
+                            );
                         }
-                        Debug.Assert(0 <= asciiBytesSkippedNInt && asciiBytesSkippedNInt <= (uint)dataOriginalLength);
+                        Debug.Assert(
+                            0 <= asciiBytesSkippedNInt
+                                && asciiBytesSkippedNInt <= (uint)dataOriginalLength
+                        );
                         asciiBytesSkipped = (int)asciiBytesSkippedNInt;
                     }
                 }
@@ -394,12 +447,25 @@ namespace System.Text.Encodings.Web
 
             while (!data.IsEmpty)
             {
-                OperationStatus opStatus = Rune.DecodeFromUtf8(data, out Rune scalarValue, out int bytesConsumed);
-                if (opStatus != OperationStatus.Done) { break; } // bad data found, must escape
-                if (bytesConsumed >= 4) { break; } // found supplementary code point, must escape
+                OperationStatus opStatus = Rune.DecodeFromUtf8(
+                    data,
+                    out Rune scalarValue,
+                    out int bytesConsumed
+                );
+                if (opStatus != OperationStatus.Done)
+                {
+                    break;
+                } // bad data found, must escape
+                if (bytesConsumed >= 4)
+                {
+                    break;
+                } // found supplementary code point, must escape
 
                 UnicodeDebug.AssertIsBmpCodePoint((uint)scalarValue.Value);
-                if (!_allowedBmpCodePoints.IsCharAllowed((char)scalarValue.Value)) { break; } // disallowed code point
+                if (!_allowedBmpCodePoints.IsCharAllowed((char)scalarValue.Value))
+                {
+                    break;
+                } // disallowed code point
                 data = data.Slice(bytesConsumed);
             }
 
@@ -440,28 +506,55 @@ namespace System.Text.Encodings.Web
                     for (; lengthInChars - idx >= 8; idx += 8)
                     {
                         loopIter = -1;
-                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)])) { goto BrokeInUnrolledLoop; }
-                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)])) { goto BrokeInUnrolledLoop; }
-                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)])) { goto BrokeInUnrolledLoop; }
-                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)])) { goto BrokeInUnrolledLoop; }
-                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)])) { goto BrokeInUnrolledLoop; }
-                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)])) { goto BrokeInUnrolledLoop; }
-                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)])) { goto BrokeInUnrolledLoop; }
-                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)])) { goto BrokeInUnrolledLoop; }
+                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)]))
+                        {
+                            goto BrokeInUnrolledLoop;
+                        }
+                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)]))
+                        {
+                            goto BrokeInUnrolledLoop;
+                        }
+                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)]))
+                        {
+                            goto BrokeInUnrolledLoop;
+                        }
+                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)]))
+                        {
+                            goto BrokeInUnrolledLoop;
+                        }
+                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)]))
+                        {
+                            goto BrokeInUnrolledLoop;
+                        }
+                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)]))
+                        {
+                            goto BrokeInUnrolledLoop;
+                        }
+                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)]))
+                        {
+                            goto BrokeInUnrolledLoop;
+                        }
+                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx + (nuint)(++loopIter)]))
+                        {
+                            goto BrokeInUnrolledLoop;
+                        }
                     }
 
                     for (; idx < lengthInChars; idx++)
                     {
-                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx])) { break; }
+                        if (!_allowedBmpCodePoints.IsCharAllowed(pData[idx]))
+                        {
+                            break;
+                        }
                     }
 
                     goto Return;
 
-                BrokeInUnrolledLoop:
+                    BrokeInUnrolledLoop:
                     idx += (nuint)loopIter;
                 }
 
-            Return:
+                Return:
 
                 Debug.Assert(0 <= idx && idx <= lengthInChars);
                 int idx32 = (int)idx;
@@ -487,7 +580,9 @@ namespace System.Text.Encodings.Web
         private void _AssertThisNotNull()
         {
             // Used for hoisting "'this' is not null" assertions outside hot loops.
-            if (GetType() == typeof(OptimizedInboxTextEncoder)) { /* intentionally left blank */ }
+            if (GetType() == typeof(OptimizedInboxTextEncoder))
+            { /* intentionally left blank */
+            }
         }
     }
 }

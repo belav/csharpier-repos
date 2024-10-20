@@ -35,7 +35,9 @@ internal sealed class WebViewScrollToLocationHash : IScrollToLocationHash
         {
             var elementId = locationAbsolute[(hashIndex + 1)..];
 
-            await _jsRuntime.InvokeVoidAsync("Blazor._internal.navigationManager.scrollToElement", elementId).AsTask();
+            await _jsRuntime
+                .InvokeVoidAsync("Blazor._internal.navigationManager.scrollToElement", elementId)
+                .AsTask();
         }
     }
 }

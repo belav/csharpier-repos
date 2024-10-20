@@ -1,9 +1,9 @@
 #pragma warning disable 1634, 1691
 using System;
-using System.Diagnostics;
-using System.Transactions;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Transactions;
 using System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime
@@ -16,11 +16,11 @@ namespace System.Workflow.Runtime
     {
         Usable,
         Merged,
-        Completed
+        Completed,
     }
 
     /// <summary>
-    /// Summary description for Work Batching. 
+    /// Summary description for Work Batching.
     /// </summary>
     internal sealed class WorkBatch : IWorkBatch, IDisposable
     {
@@ -29,9 +29,7 @@ namespace System.Workflow.Runtime
         private WorkBatchState _state;
         private WorkBatchCollection _collection = null;
 
-        private WorkBatch()
-        {
-        }
+        private WorkBatch() { }
 
         internal WorkBatch(WorkBatchCollection workBackCollection)
         {
@@ -63,9 +61,16 @@ namespace System.Workflow.Runtime
 
             lock (this.mutex)
             {
-                System.Diagnostics.Debug.Assert(this._state == WorkBatchState.Usable, "Trying to add to unusable batch.");
+                System.Diagnostics.Debug.Assert(
+                    this._state == WorkBatchState.Usable,
+                    "Trying to add to unusable batch."
+                );
 
-                _pendingWorkCollection.Add(work, _collection.GetNextWorkItemOrderId(work), workItem);
+                _pendingWorkCollection.Add(
+                    work,
+                    _collection.GetNextWorkItemOrderId(work),
+                    workItem
+                );
             }
         }
         #endregion
@@ -74,13 +79,11 @@ namespace System.Workflow.Runtime
 
         internal bool IsDirty
         {
-            get
-            {
-                return this._pendingWorkCollection.IsDirty;
-            }
+            get { return this._pendingWorkCollection.IsDirty; }
         }
+
         /// <summary>
-        /// This one commits all the pending work and its items 
+        /// This one commits all the pending work and its items
         /// added so far in this batch.
         /// </summary>
         /// <param name="transaction"></param>
@@ -91,7 +94,6 @@ namespace System.Workflow.Runtime
                 _pendingWorkCollection.Commit(transaction);
             }
         }
-
 
         /// <summary>
         /// This one completes the pending work
@@ -111,7 +113,7 @@ namespace System.Workflow.Runtime
         }
 
         /// <summary>
-        /// API for Runtime to call to do Merge Operation: Right now 
+        /// API for Runtime to call to do Merge Operation: Right now
         /// we dont use this because we dont support incoming work collection.
         /// </summary>
         /// <param name="batch"></param>
@@ -127,7 +129,11 @@ namespace System.Workflow.Runtime
             {
                 lock (batch.mutex)
                 {
-                    foreach (KeyValuePair<IPendingWork, SortedList<long, object>> item in batch._pendingWorkCollection.WorkItems)
+                    foreach (
+                        KeyValuePair<IPendingWork, SortedList<long, object>> item in batch
+                            ._pendingWorkCollection
+                            .WorkItems
+                    )
                     {
                         //_pendingWorkCollection.AddRange(item.Key, item.Value);
                         SortedList<long, object> newItems = item.Value;
@@ -175,18 +181,12 @@ namespace System.Workflow.Runtime
 
             internal Dictionary<IPendingWork, SortedList<long, object>> WorkItems
             {
-                get
-                {
-                    return Items;
-                }
+                get { return Items; }
             }
 
             internal bool IsUsable
             {
-                get
-                {
-                    return this.Items != null;
-                }
+                get { return this.Items != null; }
             }
 
             internal bool IsDirty
@@ -199,7 +199,12 @@ namespace System.Workflow.Runtime
                     //
                     // Loop through all pending work items in the collection
                     // If any of them assert that they need to commit than the batch is dirty
-                    foreach (KeyValuePair<IPendingWork, SortedList<long, object>> workItem in this.WorkItems)
+                    foreach (
+                        KeyValuePair<
+                            IPendingWork,
+                            SortedList<long, object>
+                        > workItem in this.WorkItems
+                    )
                     {
                         try
                         {
@@ -236,9 +241,22 @@ namespace System.Workflow.Runtime
                     workItems = new SortedList<long, object>();
                     Items.Add(work, workItems);
                 }
-                Debug.Assert(!workItems.ContainsKey(orderId), string.Format(System.Globalization.CultureInfo.InvariantCulture, "List already contains key {0}", orderId));
+                Debug.Assert(
+                    !workItems.ContainsKey(orderId),
+                    string.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        "List already contains key {0}",
+                        orderId
+                    )
+                );
                 workItems.Add(orderId, workItem);
-                WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "pending work hc {0} added workItem hc {1}", work.GetHashCode(), workItem.GetHashCode());
+                WorkflowTrace.Runtime.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "pending work hc {0} added workItem hc {1}",
+                    work.GetHashCode(),
+                    workItem.GetHashCode()
+                );
             }
 
             //Commit All Pending Work
@@ -272,7 +290,12 @@ namespace System.Workflow.Runtime
                         }
                         else
                         {
-                            WorkflowTrace.Runtime.TraceEvent(TraceEventType.Warning, 0, "Work Item {0} threw exception on complete notification", workItem.GetType());
+                            WorkflowTrace.Runtime.TraceEvent(
+                                TraceEventType.Warning,
+                                0,
+                                "Work Item {0} threw exception on complete notification",
+                                workItem.GetType()
+                            );
                         }
                     }
                 }
@@ -310,19 +333,20 @@ namespace System.Workflow.Runtime
     {
         object transientBatchID = new object();
         private object mutex = new object();
+
         //
         // All access must be through Interlocked.* methods
         private long _workItemOrderId = 0;
 
         internal long WorkItemOrderId
         {
-            get
-            {
-                return Threading.Interlocked.Read(ref _workItemOrderId);
-            }
+            get { return Threading.Interlocked.Read(ref _workItemOrderId); }
             set
             {
-                Debug.Assert(value >= _workItemOrderId, "New value for WorkItemOrderId must be greater than the current value");
+                Debug.Assert(
+                    value >= _workItemOrderId,
+                    "New value for WorkItemOrderId must be greater than the current value"
+                );
                 lock (mutex)
                 {
                     _workItemOrderId = value;
@@ -334,6 +358,7 @@ namespace System.Workflow.Runtime
         {
             return Threading.Interlocked.Increment(ref _workItemOrderId);
         }
+
         /// <summary>
         /// A new batch is created per atomic scope or any
         /// required sub batches. An example of an optional sub batch

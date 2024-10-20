@@ -10,11 +10,11 @@ public class ModelValidatorProviderExtensionsTest
     {
         // Arrange
         var list = new List<IModelValidatorProvider>
-            {
-                new FooModelValidatorProvider(),
-                new BarModelValidatorProvider(),
-                new FooModelValidatorProvider()
-            };
+        {
+            new FooModelValidatorProvider(),
+            new BarModelValidatorProvider(),
+            new FooModelValidatorProvider(),
+        };
 
         // Act
         list.RemoveType(typeof(FooModelValidatorProvider));
@@ -29,11 +29,11 @@ public class ModelValidatorProviderExtensionsTest
     {
         // Arrange
         var list = new List<IModelValidatorProvider>
-            {
-                new FooModelValidatorProvider(),
-                new BarModelValidatorProvider(),
-                new FooModelValidatorProvider()
-            };
+        {
+            new FooModelValidatorProvider(),
+            new BarModelValidatorProvider(),
+            new FooModelValidatorProvider(),
+        };
 
         // Act
         list.RemoveType<FooModelValidatorProvider>();

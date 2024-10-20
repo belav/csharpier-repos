@@ -29,16 +29,20 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             private MethodsToGen_CoreBindingHelper _methodsToGen;
             private bool _emitConfigurationKeyCaches;
 
-            private readonly Dictionary<MethodsToGen_CoreBindingHelper, HashSet<TypeSpec>> _typesForGen = new();
+            private readonly Dictionary<
+                MethodsToGen_CoreBindingHelper,
+                HashSet<TypeSpec>
+            > _typesForGen = new();
 
-            private readonly SortedSet<string> _namespaces = new()
-            {
-                "System",
-                "System.CodeDom.Compiler",
-                "System.Globalization",
-                "System.Runtime.CompilerServices",
-                "Microsoft.Extensions.Configuration",
-            };
+            private readonly SortedSet<string> _namespaces =
+                new()
+                {
+                    "System",
+                    "System.CodeDom.Compiler",
+                    "System.Globalization",
+                    "System.Runtime.CompilerServices",
+                    "Microsoft.Extensions.Configuration",
+                };
 
             public BindingHelperInfo ToIncrementalValue()
             {
@@ -48,15 +52,30 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     EmitConfigurationKeyCaches = _emitConfigurationKeyCaches,
 
                     MethodsToGen = _methodsToGen,
-                    TypesForGen_GetCore = GetTypesForGen_CoreBindingHelper<TypeSpec>(MethodsToGen_CoreBindingHelper.GetCore),
-                    TypesForGen_BindCoreMain = GetTypesForGen_CoreBindingHelper<ComplexTypeSpec>(MethodsToGen_CoreBindingHelper.BindCoreMain),
-                    TypesForGen_GetValueCore = GetTypesForGen_CoreBindingHelper<TypeSpec>(MethodsToGen_CoreBindingHelper.GetValueCore),
-                    TypesForGen_BindCore = GetTypesForGen_CoreBindingHelper<ComplexTypeSpec>(MethodsToGen_CoreBindingHelper.BindCore),
-                    TypesForGen_Initialize = GetTypesForGen_CoreBindingHelper<ObjectSpec>(MethodsToGen_CoreBindingHelper.Initialize),
-                    TypesForGen_ParsePrimitive = GetTypesForGen_CoreBindingHelper<ParsableFromStringSpec>(MethodsToGen_CoreBindingHelper.ParsePrimitive)
+                    TypesForGen_GetCore = GetTypesForGen_CoreBindingHelper<TypeSpec>(
+                        MethodsToGen_CoreBindingHelper.GetCore
+                    ),
+                    TypesForGen_BindCoreMain = GetTypesForGen_CoreBindingHelper<ComplexTypeSpec>(
+                        MethodsToGen_CoreBindingHelper.BindCoreMain
+                    ),
+                    TypesForGen_GetValueCore = GetTypesForGen_CoreBindingHelper<TypeSpec>(
+                        MethodsToGen_CoreBindingHelper.GetValueCore
+                    ),
+                    TypesForGen_BindCore = GetTypesForGen_CoreBindingHelper<ComplexTypeSpec>(
+                        MethodsToGen_CoreBindingHelper.BindCore
+                    ),
+                    TypesForGen_Initialize = GetTypesForGen_CoreBindingHelper<ObjectSpec>(
+                        MethodsToGen_CoreBindingHelper.Initialize
+                    ),
+                    TypesForGen_ParsePrimitive =
+                        GetTypesForGen_CoreBindingHelper<ParsableFromStringSpec>(
+                            MethodsToGen_CoreBindingHelper.ParsePrimitive
+                        ),
                 };
 
-                ImmutableEquatableArray<TSpec>? GetTypesForGen_CoreBindingHelper<TSpec>(MethodsToGen_CoreBindingHelper overload)
+                ImmutableEquatableArray<TSpec>? GetTypesForGen_CoreBindingHelper<TSpec>(
+                    MethodsToGen_CoreBindingHelper overload
+                )
                     where TSpec : TypeSpec, IEquatable<TSpec>
                 {
                     _typesForGen.TryGetValue(overload, out HashSet<TypeSpec>? typesAsBase);
@@ -66,16 +85,18 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         return null;
                     }
 
-                    IEnumerable<TSpec> types = typeof(TSpec) == typeof(TypeSpec)
-                        ? (HashSet<TSpec>)(object)typesAsBase
-                        : typesAsBase.Select(t => (TSpec)t);
+                    IEnumerable<TSpec> types =
+                        typeof(TSpec) == typeof(TypeSpec)
+                            ? (HashSet<TSpec>)(object)typesAsBase
+                            : typesAsBase.Select(t => (TSpec)t);
 
                     return GetTypesForGen(types);
                 }
 
-                static ImmutableEquatableArray<TSpec> GetTypesForGen<TSpec>(IEnumerable<TSpec> types)
-                    where TSpec : TypeSpec, IEquatable<TSpec> =>
-                            types.ToImmutableEquatableArray();
+                static ImmutableEquatableArray<TSpec> GetTypesForGen<TSpec>(
+                    IEnumerable<TSpec> types
+                )
+                    where TSpec : TypeSpec, IEquatable<TSpec> => types.ToImmutableEquatableArray();
             }
 
             public bool TryRegisterTypeForGetGen(TypeSpec type)
@@ -92,7 +113,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
             public bool TryRegisterTypeForGetValueGen(TypeSpec typeSpec)
             {
-                ParsableFromStringSpec effectiveType = (ParsableFromStringSpec)_typeIndex.GetEffectiveTypeSpec(typeSpec);
+                ParsableFromStringSpec effectiveType = (ParsableFromStringSpec)
+                    _typeIndex.GetEffectiveTypeSpec(typeSpec);
                 RegisterTypeForMethodGen(MethodsToGen_CoreBindingHelper.GetValueCore, typeSpec);
                 RegisterStringParsableTypeIfApplicable(effectiveType);
                 return true;
@@ -121,71 +143,92 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     switch (_typeIndex.GetTypeSpec(typeRef))
                     {
                         case NullableSpec nullableSpec:
-                            {
-                                return TryRegisterTransitiveTypesForMethodGen(nullableSpec.EffectiveTypeRef);
-                            }
+                        {
+                            return TryRegisterTransitiveTypesForMethodGen(
+                                nullableSpec.EffectiveTypeRef
+                            );
+                        }
                         case ParsableFromStringSpec stringParsableSpec:
-                            {
-                                RegisterStringParsableTypeIfApplicable(stringParsableSpec);
-                                return true;
-                            }
+                        {
+                            RegisterStringParsableTypeIfApplicable(stringParsableSpec);
+                            return true;
+                        }
                         case DictionarySpec dictionarySpec:
+                        {
+                            bool shouldRegister =
+                                _typeIndex.CanBindTo(typeRef)
+                                && TryRegisterTransitiveTypesForMethodGen(dictionarySpec.KeyTypeRef)
+                                && TryRegisterTransitiveTypesForMethodGen(
+                                    dictionarySpec.ElementTypeRef
+                                )
+                                && TryRegisterTypeForBindCoreGen(dictionarySpec);
+
+                            if (
+                                shouldRegister
+                                && dictionarySpec.InstantiationStrategy
+                                    is CollectionInstantiationStrategy.LinqToDictionary
+                            )
                             {
-                                bool shouldRegister = _typeIndex.CanBindTo(typeRef) &&
-                                    TryRegisterTransitiveTypesForMethodGen(dictionarySpec.KeyTypeRef) &&
-                                    TryRegisterTransitiveTypesForMethodGen(dictionarySpec.ElementTypeRef) &&
-                                    TryRegisterTypeForBindCoreGen(dictionarySpec);
-
-                                if (shouldRegister && dictionarySpec.InstantiationStrategy is CollectionInstantiationStrategy.LinqToDictionary)
-                                {
-                                    _namespaces.Add("System.Linq");
-                                }
-
-                                return shouldRegister;
+                                _namespaces.Add("System.Linq");
                             }
+
+                            return shouldRegister;
+                        }
                         case CollectionSpec collectionSpec:
-                            {
-                                return TryRegisterTransitiveTypesForMethodGen(collectionSpec.ElementTypeRef) &&
-                                    TryRegisterTypeForBindCoreGen(collectionSpec);
-                            }
+                        {
+                            return TryRegisterTransitiveTypesForMethodGen(
+                                    collectionSpec.ElementTypeRef
+                                ) && TryRegisterTypeForBindCoreGen(collectionSpec);
+                        }
                         case ObjectSpec objectSpec:
+                        {
+                            // Base case to avoid stack overflow for recursive object graphs.
+                            // Register all object types for gen; we need to throw runtime exceptions in some cases.
+                            bool shouldRegister = true;
+                            _seenTransitiveTypes.Add(typeRef, shouldRegister);
+
+                            // List<string> is used in generated code as a temp holder for formatting
+                            // an error for config properties that don't map to object properties.
+                            _namespaces.Add("System.Collections.Generic");
+
+                            if (_typeIndex.HasBindableMembers(objectSpec))
                             {
-                                // Base case to avoid stack overflow for recursive object graphs.
-                                // Register all object types for gen; we need to throw runtime exceptions in some cases.
-                                bool shouldRegister = true;
-                                _seenTransitiveTypes.Add(typeRef, shouldRegister);
-
-                                // List<string> is used in generated code as a temp holder for formatting
-                                // an error for config properties that don't map to object properties.
-                                _namespaces.Add("System.Collections.Generic");
-
-                                if (_typeIndex.HasBindableMembers(objectSpec))
+                                foreach (PropertySpec property in objectSpec.Properties!)
                                 {
-                                    foreach (PropertySpec property in objectSpec.Properties!)
+                                    TryRegisterTransitiveTypesForMethodGen(property.TypeRef);
+
+                                    if (_typeIndex.GetTypeSpec(property.TypeRef) is ComplexTypeSpec)
                                     {
-                                        TryRegisterTransitiveTypesForMethodGen(property.TypeRef);
-
-                                        if (_typeIndex.GetTypeSpec(property.TypeRef) is ComplexTypeSpec)
-                                        {
-                                            RegisterForGen_AsConfigWithChildrenHelper();
-                                        }
-                                    }
-
-                                    bool registeredForBindCore = TryRegisterTypeForBindCoreGen(objectSpec);
-                                    Debug.Assert(registeredForBindCore);
-
-                                    if (objectSpec is { InstantiationStrategy: ObjectInstantiationStrategy.ParameterizedConstructor, InitExceptionMessage: null })
-                                    {
-                                        RegisterTypeForMethodGen(MethodsToGen_CoreBindingHelper.Initialize, objectSpec);
+                                        RegisterForGen_AsConfigWithChildrenHelper();
                                     }
                                 }
 
-                                return true;
+                                bool registeredForBindCore = TryRegisterTypeForBindCoreGen(
+                                    objectSpec
+                                );
+                                Debug.Assert(registeredForBindCore);
+
+                                if (
+                                    objectSpec is
+                                    {
+                                        InstantiationStrategy: ObjectInstantiationStrategy.ParameterizedConstructor,
+                                        InitExceptionMessage: null
+                                    }
+                                )
+                                {
+                                    RegisterTypeForMethodGen(
+                                        MethodsToGen_CoreBindingHelper.Initialize,
+                                        objectSpec
+                                    );
+                                }
                             }
+
+                            return true;
+                        }
                         default:
-                            {
-                                return true;
-                            }
+                        {
+                            return true;
+                        }
                     }
                 }
             }
@@ -204,7 +247,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 return false;
             }
 
-            private void RegisterTypeForMethodGen(MethodsToGen_CoreBindingHelper method, TypeSpec type)
+            private void RegisterTypeForMethodGen(
+                MethodsToGen_CoreBindingHelper method,
+                TypeSpec type
+            )
             {
                 if (!_typesForGen.TryGetValue(method, out HashSet<TypeSpec>? types))
                 {
@@ -219,14 +265,17 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
             private void RegisterStringParsableTypeIfApplicable(ParsableFromStringSpec type)
             {
-                if (type.StringParsableTypeKind is not StringParsableTypeKind.AssignFromSectionValue)
+                if (
+                    type.StringParsableTypeKind is not StringParsableTypeKind.AssignFromSectionValue
+                )
                 {
                     _methodsToGen |= MethodsToGen_CoreBindingHelper.ParsePrimitive;
                     RegisterTypeForMethodGen(MethodsToGen_CoreBindingHelper.ParsePrimitive, type);
                 }
             }
 
-            private void RegisterForGen_AsConfigWithChildrenHelper() => _methodsToGen |= MethodsToGen_CoreBindingHelper.AsConfigWithChildren;
+            private void RegisterForGen_AsConfigWithChildrenHelper() =>
+                _methodsToGen |= MethodsToGen_CoreBindingHelper.AsConfigWithChildren;
         }
     }
 }

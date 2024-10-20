@@ -20,7 +20,8 @@ public class HeaderPropagationMessageHandlerEntry
     /// </param>
     public HeaderPropagationMessageHandlerEntry(
         string capturedHeaderName,
-        string outboundHeaderName)
+        string outboundHeaderName
+    )
     {
         ArgumentNullException.ThrowIfNull(capturedHeaderName);
         ArgumentNullException.ThrowIfNull(outboundHeaderName);

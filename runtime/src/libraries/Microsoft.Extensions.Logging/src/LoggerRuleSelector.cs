@@ -7,7 +7,13 @@ namespace Microsoft.Extensions.Logging
 {
     internal static class LoggerRuleSelector
     {
-        public static void Select(LoggerFilterOptions options, Type providerType, string category, out LogLevel? minLevel, out Func<string?, string?, LogLevel, bool>? filter)
+        public static void Select(
+            LoggerFilterOptions options,
+            Type providerType,
+            string category,
+            out LogLevel? minLevel,
+            out Func<string?, string?, LogLevel, bool>? filter
+        )
         {
             filter = null;
             minLevel = options.MinLevel;
@@ -24,8 +30,13 @@ namespace Microsoft.Extensions.Logging
             LoggerFilterRule? current = null;
             foreach (LoggerFilterRule rule in options.RulesInternal)
             {
-                if (IsBetter(rule, current, providerType.FullName, category)
-                    || (!string.IsNullOrEmpty(providerAlias) && IsBetter(rule, current, providerAlias, category)))
+                if (
+                    IsBetter(rule, current, providerType.FullName, category)
+                    || (
+                        !string.IsNullOrEmpty(providerAlias)
+                        && IsBetter(rule, current, providerAlias, category)
+                    )
+                )
                 {
                     current = rule;
                 }
@@ -38,7 +49,12 @@ namespace Microsoft.Extensions.Logging
             }
         }
 
-        private static bool IsBetter(LoggerFilterRule rule, LoggerFilterRule? current, string? logger, string category)
+        private static bool IsBetter(
+            LoggerFilterRule rule,
+            LoggerFilterRule? current,
+            string? logger,
+            string category
+        )
         {
             // Skip rules with inapplicable type or category
             if (rule.ProviderName != null && rule.ProviderName != logger)
@@ -52,13 +68,16 @@ namespace Microsoft.Extensions.Logging
                 const char WildcardChar = '*';
 
                 int wildcardIndex = categoryName.IndexOf(WildcardChar);
-                if (wildcardIndex != -1 &&
-                    categoryName.IndexOf(WildcardChar, wildcardIndex + 1) != -1)
+                if (
+                    wildcardIndex != -1
+                    && categoryName.IndexOf(WildcardChar, wildcardIndex + 1) != -1
+                )
                 {
                     throw new InvalidOperationException(SR.MoreThanOneWildcard);
                 }
 
-                ReadOnlySpan<char> prefix, suffix;
+                ReadOnlySpan<char> prefix,
+                    suffix;
                 if (wildcardIndex == -1)
                 {
                     prefix = categoryName.AsSpan();
@@ -70,8 +89,10 @@ namespace Microsoft.Extensions.Logging
                     suffix = categoryName.AsSpan(wildcardIndex + 1);
                 }
 
-                if (!category.AsSpan().StartsWith(prefix, StringComparison.OrdinalIgnoreCase) ||
-                    !category.AsSpan().EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
+                if (
+                    !category.AsSpan().StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+                    || !category.AsSpan().EndsWith(suffix, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return false;
                 }

@@ -43,7 +43,9 @@ namespace System.IO.Pipelines
             _inner.Complete(exception);
         }
 
-        public override async ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default)
+        public override async ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             LastReadResult = await _inner.ReadAsync(cancellationToken);
             return LastReadResult;

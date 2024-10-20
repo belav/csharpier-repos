@@ -16,18 +16,11 @@ namespace System.Activities
             this.Owner = application;
         }
 
-        internal WorkflowApplication Owner
-        {
-            get;
-            private set;
-        }
+        internal WorkflowApplication Owner { get; private set; }
 
         public Guid InstanceId
         {
-            get
-            {
-                return this.Owner.Id;
-            }
+            get { return this.Owner.Id; }
         }
 
         public IEnumerable<T> GetInstanceExtensions<T>()

@@ -14,8 +14,9 @@ public class KeyPerFileConfigurationSource : IConfigurationSource
     /// <summary>
     /// Constructor;
     /// </summary>
-    public KeyPerFileConfigurationSource()
-        => IgnoreCondition = s => IgnorePrefix != null && s.StartsWith(IgnorePrefix, StringComparison.Ordinal);
+    public KeyPerFileConfigurationSource() =>
+        IgnoreCondition = s =>
+            IgnorePrefix != null && s.StartsWith(IgnorePrefix, StringComparison.Ordinal);
 
     /// <summary>
     /// The FileProvider whos root "/" directory files will be used as configuration data.
@@ -61,6 +62,6 @@ public class KeyPerFileConfigurationSource : IConfigurationSource
     /// </summary>
     /// <param name="builder">The <see cref="IConfigurationBuilder"/>.</param>
     /// <returns>A <see cref="KeyPerFileConfigurationProvider"/></returns>
-    public IConfigurationProvider Build(IConfigurationBuilder builder)
-        => new KeyPerFileConfigurationProvider(this);
+    public IConfigurationProvider Build(IConfigurationBuilder builder) =>
+        new KeyPerFileConfigurationProvider(this);
 }

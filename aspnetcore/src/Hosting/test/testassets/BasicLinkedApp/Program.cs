@@ -3,10 +3,10 @@
 
 using System;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 
 namespace BasicLinkedApp;
 
@@ -21,26 +21,26 @@ public class Program
     private static IHostBuilder CreateWebHostBuilder(string[] args)
     {
         return new HostBuilder()
-                .ConfigureHostConfiguration(config =>
-                {
-                    config.AddCommandLine(args);
-                })
-                .ConfigureLogging(logging =>
-                {
-                    logging.AddConsole();
-                    logging.SetMinimumLevel(LogLevel.Debug);
-                })
-                .ConfigureWebHost(webHostBuilder =>
-                {
-                    webHostBuilder.UseKestrel(o =>
+            .ConfigureHostConfiguration(config =>
+            {
+                config.AddCommandLine(args);
+            })
+            .ConfigureLogging(logging =>
+            {
+                logging.AddConsole();
+                logging.SetMinimumLevel(LogLevel.Debug);
+            })
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(o =>
                     {
                         o.ConfigureEndpointDefaults(lo =>
                         {
                             lo.UseConnectionLogging();
                         });
-
-                    }).UseStartup<Startup>();
-                });
+                    })
+                    .UseStartup<Startup>();
+            });
     }
 }
-

@@ -25,10 +25,7 @@ public class SerializableErrorWrapperTests
     public void WrappedSerializableErrorInstance_ReturnedFromProperty()
     {
         // Arrange
-        var serializableError = new SerializableError
-            {
-                { "key1", "key1-error" }
-            };
+        var serializableError = new SerializableError { { "key1", "key1-error" } };
 
         // Act
         var wrapper = new SerializableErrorWrapper(serializableError);
@@ -45,7 +42,9 @@ public class SerializableErrorWrapperTests
     public void GetSchema_Returns_Null()
     {
         // Arrange
-        var serializableError = new SerializableErrorWrapper(new SerializableError(new ModelStateDictionary()));
+        var serializableError = new SerializableErrorWrapper(
+            new SerializableError(new ModelStateDictionary())
+        );
 
         // Act & Assert
         Assert.Null(serializableError.GetSchema());
@@ -55,16 +54,17 @@ public class SerializableErrorWrapperTests
     public void ReadXml_ReadsSerializableErrorXml()
     {
         // Arrange
-        var serializableErrorXml = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-            "<Error><MVC-Empty>Test error 0</MVC-Empty>" +
-            "<key1>Test Error 1 Test Error 2</key1>" +
-            "<key2>Test Error 3</key2>" +
-            "<list_x005B_3_x005D_.key3>Test Error 4</list_x005B_3_x005D_.key3></Error>";
+        var serializableErrorXml =
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            + "<Error><MVC-Empty>Test error 0</MVC-Empty>"
+            + "<key1>Test Error 1 Test Error 2</key1>"
+            + "<key2>Test Error 3</key2>"
+            + "<list_x005B_3_x005D_.key3>Test Error 4</list_x005B_3_x005D_.key3></Error>";
         var serializer = new DataContractSerializer(typeof(SerializableErrorWrapper));
 
         // Act
-        var wrapper = (SerializableErrorWrapper)serializer.ReadObject(
-            new MemoryStream(Encoding.UTF8.GetBytes(serializableErrorXml)));
+        var wrapper = (SerializableErrorWrapper)
+            serializer.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(serializableErrorXml)));
         var errors = wrapper.SerializableError;
 
         // Assert
@@ -89,7 +89,8 @@ public class SerializableErrorWrapperTests
             {
                 Assert.Equal("list[3].key3", kvp.Key);
                 Assert.Equal("Test Error 4", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -104,17 +105,23 @@ public class SerializableErrorWrapperTests
         modelState.AddModelError("list[3].key3", "Test Error 4");
         var serializableError = new SerializableError(modelState);
         var outputStream = new MemoryStream();
-        var expectedContent = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-            "<Error><MVC-Empty>Test error 0</MVC-Empty>" +
-            "<key1>Test Error 1 Test Error 2</key1>" +
-            "<key2>Test Error 3</key2>" +
-            "<list_x005B_3_x005D_.key3>Test Error 4</list_x005B_3_x005D_.key3></Error>";
+        var expectedContent =
+            "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+            + "<Error><MVC-Empty>Test error 0</MVC-Empty>"
+            + "<key1>Test Error 1 Test Error 2</key1>"
+            + "<key2>Test Error 3</key2>"
+            + "<list_x005B_3_x005D_.key3>Test Error 4</list_x005B_3_x005D_.key3></Error>";
 
         // Act
         using (var xmlWriter = XmlWriter.Create(outputStream))
         {
-            var dataContractSerializer = new DataContractSerializer(typeof(SerializableErrorWrapper));
-            dataContractSerializer.WriteObject(xmlWriter, new SerializableErrorWrapper(serializableError));
+            var dataContractSerializer = new DataContractSerializer(
+                typeof(SerializableErrorWrapper)
+            );
+            dataContractSerializer.WriteObject(
+                xmlWriter,
+                new SerializableErrorWrapper(serializableError)
+            );
         }
         outputStream.Position = 0;
         var res = new StreamReader(outputStream, Encoding.UTF8).ReadToEnd();

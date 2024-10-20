@@ -61,7 +61,11 @@ namespace System.ServiceModel.Activities
             return this.returnValue;
         }
 
-        internal IAsyncResult BeginGetResponse(TimeSpan timeout, AsyncCallback callback, object state)
+        internal IAsyncResult BeginGetResponse(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(this.responseWaitHandle != null, "this.responseWaitHandle must not be null!");
             return GetResponseAsyncResult.Create(this, timeout, callback, state);
@@ -74,12 +78,20 @@ namespace System.ServiceModel.Activities
 
         class GetResponseAsyncResult : AsyncResult
         {
-            static Action<object, TimeoutException> handleEndWait = new Action<object, TimeoutException>(HandleEndWait);
+            static Action<object, TimeoutException> handleEndWait = new Action<
+                object,
+                TimeoutException
+            >(HandleEndWait);
 
             WorkflowHostingResponseContext context;
 
-            GetResponseAsyncResult(WorkflowHostingResponseContext context, TimeSpan timeout, AsyncCallback callback, object state)
-               : base(callback, state)
+            GetResponseAsyncResult(
+                WorkflowHostingResponseContext context,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
+                : base(callback, state)
             {
                 this.context = context;
                 if (context.responseWaitHandle.WaitAsync(handleEndWait, this, timeout))
@@ -88,7 +100,12 @@ namespace System.ServiceModel.Activities
                 }
             }
 
-            public static GetResponseAsyncResult Create(WorkflowHostingResponseContext context, TimeSpan timeout, AsyncCallback callback, object state)
+            public static GetResponseAsyncResult Create(
+                WorkflowHostingResponseContext context,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new GetResponseAsyncResult(context, timeout, callback, state);
             }

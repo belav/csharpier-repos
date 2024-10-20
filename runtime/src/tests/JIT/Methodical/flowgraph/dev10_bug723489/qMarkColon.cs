@@ -8,26 +8,27 @@
 
 using System;
 using Xunit;
+
 namespace Test_qMarkColon_cs
 {
-public class Repro
-{
-    public static bool MyEquals(object obj1, object obj2)
+    public class Repro
     {
-        return ((obj1 as Version) == (obj2 as Version));
-    }
+        public static bool MyEquals(object obj1, object obj2)
+        {
+            return ((obj1 as Version) == (obj2 as Version));
+        }
 
-    [Fact]
-    public static int TestEntryPoint()
-    {
-        Version ver0 = null;
-        Version ver1 = null;
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            Version ver0 = null;
+            Version ver1 = null;
 
-        bool result = MyEquals(ver0, ver1);
-        if (result)
-            return 100;
-        else
-            return 101;
+            bool result = MyEquals(ver0, ver1);
+            if (result)
+                return 100;
+            else
+                return 101;
+        }
     }
-}
 }

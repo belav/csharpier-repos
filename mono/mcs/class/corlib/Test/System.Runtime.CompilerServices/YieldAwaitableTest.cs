@@ -29,158 +29,166 @@
 
 using System;
 using System.Collections.Generic;
-using NUnit.Framework;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.System.Runtime.CompilerServices
 {
-	[TestFixture]
-	public class YieldAwaitableTest
-	{
-		class MyScheduler : TaskScheduler
-		{
-			protected override IEnumerable<Task> GetScheduledTasks ()
-			{
-				throw new NotImplementedException ();
-			}
+    [TestFixture]
+    public class YieldAwaitableTest
+    {
+        class MyScheduler : TaskScheduler
+        {
+            protected override IEnumerable<Task> GetScheduledTasks()
+            {
+                throw new NotImplementedException();
+            }
 
-			protected override void QueueTask (Task task)
-			{
-				TryExecuteTask (task);
-			}
+            protected override void QueueTask(Task task)
+            {
+                TryExecuteTask(task);
+            }
 
-			protected override bool TryExecuteTaskInline (Task task, bool taskWasPreviouslyQueued)
-			{
-				throw new NotImplementedException ();
-			}
-		}
+            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued)
+            {
+                throw new NotImplementedException();
+            }
+        }
 
-		class MyContext : SynchronizationContext
-		{
-			public int Started;
-			public int Completed;
-			public int PostCounter;
-			public int SendCounter;
+        class MyContext : SynchronizationContext
+        {
+            public int Started;
+            public int Completed;
+            public int PostCounter;
+            public int SendCounter;
 
-			public override void OperationStarted ()
-			{
-				++Started;
-				base.OperationStarted ();
-			}
+            public override void OperationStarted()
+            {
+                ++Started;
+                base.OperationStarted();
+            }
 
-			public override void OperationCompleted ()
-			{
-				++Completed;
-				base.OperationCompleted ();
-			}
+            public override void OperationCompleted()
+            {
+                ++Completed;
+                base.OperationCompleted();
+            }
 
-			public override void Post (SendOrPostCallback d, object state)
-			{
-				++PostCounter;
-				base.Post (d, state);
-			}
+            public override void Post(SendOrPostCallback d, object state)
+            {
+                ++PostCounter;
+                base.Post(d, state);
+            }
 
-			public override void Send (SendOrPostCallback d, object state)
-			{
-				++SendCounter;
-				base.Send (d, state);
-			}
-		}
+            public override void Send(SendOrPostCallback d, object state)
+            {
+                ++SendCounter;
+                base.Send(d, state);
+            }
+        }
 
-		YieldAwaitable.YieldAwaiter a;
-		SynchronizationContext sc;
+        YieldAwaitable.YieldAwaiter a;
+        SynchronizationContext sc;
 
-		[SetUp]
-		public void Setup ()
-		{
-			sc = SynchronizationContext.Current;
-			a = new YieldAwaitable ().GetAwaiter ();
-		}
+        [SetUp]
+        public void Setup()
+        {
+            sc = SynchronizationContext.Current;
+            a = new YieldAwaitable().GetAwaiter();
+        }
 
-		[TearDown]
-		public void TearDown ()
-		{
-			SynchronizationContext.SetSynchronizationContext (sc);
-		}
+        [TearDown]
+        public void TearDown()
+        {
+            SynchronizationContext.SetSynchronizationContext(sc);
+        }
 
-		[Test]
-		public void IsCompleted ()
-		{
-			Assert.IsFalse (a.IsCompleted, "#1");
-			a.GetResult ();
-			Assert.IsFalse (a.IsCompleted, "#1");
-		}
+        [Test]
+        public void IsCompleted()
+        {
+            Assert.IsFalse(a.IsCompleted, "#1");
+            a.GetResult();
+            Assert.IsFalse(a.IsCompleted, "#1");
+        }
 
-		[Test]
-		public void OnCompleted_1 ()
-		{
-			try {
-				a.OnCompleted (null);
-				Assert.Fail ("#1");
-			} catch (ArgumentException) {
-			}
-		}
+        [Test]
+        public void OnCompleted_1()
+        {
+            try
+            {
+                a.OnCompleted(null);
+                Assert.Fail("#1");
+            }
+            catch (ArgumentException) { }
+        }
 
-		[Test]
-		[Category ("MultiThreaded")]
-		public void OnCompleted_2 ()
-		{
-			TaskScheduler scheduler = null;
-			SynchronizationContext.SetSynchronizationContext (null);
+        [Test]
+        [Category("MultiThreaded")]
+        public void OnCompleted_2()
+        {
+            TaskScheduler scheduler = null;
+            SynchronizationContext.SetSynchronizationContext(null);
 
-			var mre = new ManualResetEvent (false);
+            var mre = new ManualResetEvent(false);
 
-			a.OnCompleted (() => {
-				scheduler = TaskScheduler.Current;
-				mre.Set ();
-			});
+            a.OnCompleted(() =>
+            {
+                scheduler = TaskScheduler.Current;
+                mre.Set();
+            });
 
-			Assert.IsTrue (mre.WaitOne (1000), "#1");
-			Assert.AreEqual (TaskScheduler.Current, scheduler, "#2");
-		}
+            Assert.IsTrue(mre.WaitOne(1000), "#1");
+            Assert.AreEqual(TaskScheduler.Current, scheduler, "#2");
+        }
 
-		[Test]
-		public void OnCompleted_3 ()
-		{
-			var scheduler = new MyScheduler ();
-			TaskScheduler ran_scheduler = null;
-			SynchronizationContext.SetSynchronizationContext (null);			
+        [Test]
+        public void OnCompleted_3()
+        {
+            var scheduler = new MyScheduler();
+            TaskScheduler ran_scheduler = null;
+            SynchronizationContext.SetSynchronizationContext(null);
 
-			var t = Task.Factory.StartNew (() => {
-				var mre = new ManualResetEvent (false);
+            var t = Task.Factory.StartNew(
+                () =>
+                {
+                    var mre = new ManualResetEvent(false);
 
-				a.OnCompleted (() => {
-					ran_scheduler = TaskScheduler.Current;
-					mre.Set ();
-				});
+                    a.OnCompleted(() =>
+                    {
+                        ran_scheduler = TaskScheduler.Current;
+                        mre.Set();
+                    });
 
-				mre.WaitOne (1000);
+                    mre.WaitOne(1000);
+                },
+                CancellationToken.None,
+                TaskCreationOptions.None,
+                scheduler
+            );
 
-			}, CancellationToken.None, TaskCreationOptions.None, scheduler);
+            Assert.IsTrue(t.Wait(1000), "#1");
+            Assert.AreEqual(scheduler, ran_scheduler, "#2");
+        }
 
-			Assert.IsTrue (t.Wait (1000), "#1");
-			Assert.AreEqual (scheduler, ran_scheduler, "#2");
-		}
+        [Test]
+        [Category("MultiThreaded")]
+        public void OnCompleted_4()
+        {
+            SynchronizationContext context_ran = null;
+            var mre = new ManualResetEvent(false);
 
-		[Test]
-		[Category ("MultiThreaded")]
-		public void OnCompleted_4 ()
-		{
-			SynchronizationContext context_ran = null;
-			var mre = new ManualResetEvent (false);
+            var context = new MyContext();
+            SynchronizationContext.SetSynchronizationContext(context);
+            a.OnCompleted(() =>
+            {
+                context_ran = SynchronizationContext.Current;
+                mre.Set();
+            });
 
-			var context = new MyContext ();
-			SynchronizationContext.SetSynchronizationContext (context);
-			a.OnCompleted (() => {
-				context_ran = SynchronizationContext.Current;
-				mre.Set ();
-			});
-
-			Assert.IsTrue (mre.WaitOne (1000), "#1");
-			Assert.IsNull (context_ran, "#2");
-		}
-	}
+            Assert.IsTrue(mre.WaitOne(1000), "#1");
+            Assert.IsNull(context_ran, "#2");
+        }
+    }
 }
-

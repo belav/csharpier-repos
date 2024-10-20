@@ -45,7 +45,5 @@ public sealed record RelationalSqlGenerationHelperDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public RelationalSqlGenerationHelperDependencies()
-    {
-    }
+    public RelationalSqlGenerationHelperDependencies() { }
 }

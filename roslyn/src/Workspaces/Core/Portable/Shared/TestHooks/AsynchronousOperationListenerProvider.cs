@@ -25,22 +25,28 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
     [Shared]
     [Export(typeof(IAsynchronousOperationListenerProvider))]
     [Export(typeof(AsynchronousOperationListenerProvider))]
-    internal sealed partial class AsynchronousOperationListenerProvider : IAsynchronousOperationListenerProvider
+    internal sealed partial class AsynchronousOperationListenerProvider
+        : IAsynchronousOperationListenerProvider
     {
-        public static readonly IAsynchronousOperationListenerProvider NullProvider = new NullListenerProvider();
-        public static readonly IAsynchronousOperationListener NullListener = new NullOperationListener();
+        public static readonly IAsynchronousOperationListenerProvider NullProvider =
+            new NullListenerProvider();
+        public static readonly IAsynchronousOperationListener NullListener =
+            new NullOperationListener();
 
         /// <summary>
         /// indicate whether asynchronous listener is enabled or not.
         /// it is tri-state since we want to retrieve this value, if never explicitly set, from environment variable
         /// and then cache it.
         /// we read value from environment variable (RoslynWaiterEnabled) because we want team, that doesn't have
-        /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well. 
+        /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well.
         /// those team can enable this without using <see cref="AsynchronousOperationListenerProvider.Enable(bool)" /> API
         /// </summary>
         public static bool? s_enabled = null;
 
-        private readonly ConcurrentDictionary<string, AsynchronousOperationListener> _singletonListeners;
+        private readonly ConcurrentDictionary<
+            string,
+            AsynchronousOperationListener
+        > _singletonListeners;
         private readonly Func<string, AsynchronousOperationListener> _createCallback;
 
         /// <summary>
@@ -48,7 +54,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// it is tri-state since we want to retrieve this value, if never explicitly set, from environment variable
         /// and then cache it.
         /// we read value from environment variable (RoslynWaiterDiagnosticTokenEnabled) because we want team, that doesn't have
-        /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well. 
+        /// access to Roslyn code (InternalVisibleTo), can use this listener/waiter framework as well.
         /// those team can enable this without using <see cref="AsynchronousOperationListenerProvider.EnableDiagnosticTokens(bool)" /> API
         /// </summary>
         private bool? _enableDiagnosticTokens;
@@ -58,8 +64,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// </summary>
         private static bool? s_enableDiagnosticTokens;
 
-        public static void Enable(bool enable)
-            => Enable(enable, diagnostics: null);
+        public static void Enable(bool enable) => Enable(enable, diagnostics: null);
 
         public static void Enable(bool enable, bool? diagnostics)
         {
@@ -73,8 +78,14 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public AsynchronousOperationListenerProvider()
         {
-            _singletonListeners = new ConcurrentDictionary<string, AsynchronousOperationListener>(concurrencyLevel: 2, capacity: 20);
-            _createCallback = name => new AsynchronousOperationListener(name, DiagnosticTokensEnabled);
+            _singletonListeners = new ConcurrentDictionary<string, AsynchronousOperationListener>(
+                concurrencyLevel: 2,
+                capacity: 20
+            );
+            _createCallback = name => new AsynchronousOperationListener(
+                name,
+                DiagnosticTokensEnabled
+            );
         }
 
         public IAsynchronousOperationListener GetListener(string featureName)
@@ -100,45 +111,74 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// <summary>
         /// Get Waiters for listeners for test
         /// </summary>
-        public IAsynchronousOperationWaiter GetWaiter(string featureName)
-            => (IAsynchronousOperationWaiter)GetListener(featureName);
+        public IAsynchronousOperationWaiter GetWaiter(string featureName) =>
+            (IAsynchronousOperationWaiter)GetListener(featureName);
 
         /// <summary>
         /// Wait for all of the <see cref="IAsynchronousOperationWaiter"/> instances to finish their
         /// work.
         /// </summary>
         /// <remarks>
-        /// This is a very handy method for debugging hangs in the unit test.  Set a break point in the 
-        /// loop, dig into the waiters and see all of the active <see cref="IAsyncToken"/> values 
+        /// This is a very handy method for debugging hangs in the unit test.  Set a break point in the
+        /// loop, dig into the waiters and see all of the active <see cref="IAsyncToken"/> values
         /// representing the remaining work.
         /// </remarks>
-        public async Task WaitAllAsync(Workspace? workspace, string[]? featureNames = null, Action? eventProcessingAction = null, TimeSpan? timeout = null)
+        public async Task WaitAllAsync(
+            Workspace? workspace,
+            string[]? featureNames = null,
+            Action? eventProcessingAction = null,
+            TimeSpan? timeout = null
+        )
         {
             var startTime = Stopwatch.StartNew();
             var smallTimeout = TimeSpan.FromMilliseconds(10);
 
             RemoteHostClient? remoteHostClient = null;
-            if (workspace?.Services.GetService<IRemoteHostClientProvider>() is { } remoteHostClientProvider)
+            if (
+                workspace?.Services.GetService<IRemoteHostClientProvider>() is
+                { } remoteHostClientProvider
+            )
             {
-                remoteHostClient = await remoteHostClientProvider.TryGetRemoteHostClientAsync(CancellationToken.None).ConfigureAwait(false);
+                remoteHostClient = await remoteHostClientProvider
+                    .TryGetRemoteHostClientAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
             }
 
             List<Task>? tasks = null;
             while (true)
             {
                 var waiters = GetCandidateWaiters(featureNames);
-                tasks = waiters.Select(x => x.ExpeditedWaitAsync()).Where(t => !t.IsCompleted).ToList();
+                tasks = waiters
+                    .Select(x => x.ExpeditedWaitAsync())
+                    .Where(t => !t.IsCompleted)
+                    .ToList();
 
                 if (remoteHostClient is not null)
                 {
-                    var isCompleted = await remoteHostClient.TryInvokeAsync<IRemoteAsynchronousOperationListenerService, bool>(
-                        (service, cancellationToken) => service.IsCompletedAsync(featureNames.ToImmutableArrayOrEmpty(), cancellationToken),
-                        CancellationToken.None).ConfigureAwait(false);
+                    var isCompleted = await remoteHostClient
+                        .TryInvokeAsync<IRemoteAsynchronousOperationListenerService, bool>(
+                            (service, cancellationToken) =>
+                                service.IsCompletedAsync(
+                                    featureNames.ToImmutableArrayOrEmpty(),
+                                    cancellationToken
+                                ),
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false);
                     if (isCompleted.HasValue && !isCompleted.Value)
                     {
-                        tasks.Add(remoteHostClient.TryInvokeAsync<IRemoteAsynchronousOperationListenerService>(
-                            (service, cancellationToken) => service.ExpeditedWaitAsync(featureNames.ToImmutableArrayOrEmpty(), cancellationToken),
-                            CancellationToken.None).AsTask());
+                        tasks.Add(
+                            remoteHostClient
+                                .TryInvokeAsync<IRemoteAsynchronousOperationListenerService>(
+                                    (service, cancellationToken) =>
+                                        service.ExpeditedWaitAsync(
+                                            featureNames.ToImmutableArrayOrEmpty(),
+                                            cancellationToken
+                                        ),
+                                    CancellationToken.None
+                                )
+                                .AsTask()
+                        );
                     }
                 }
 
@@ -194,8 +234,11 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         /// <summary>
         /// Get all saved DiagnosticAsyncToken to investigate tests failure easier
         /// </summary>
-        public List<AsynchronousOperationListener.DiagnosticAsyncToken> GetTokens()
-            => _singletonListeners.Values.Where(l => l.TrackActiveTokens).SelectMany(l => l.ActiveDiagnosticTokens).ToList();
+        public List<AsynchronousOperationListener.DiagnosticAsyncToken> GetTokens() =>
+            _singletonListeners
+                .Values.Where(l => l.TrackActiveTokens)
+                .SelectMany(l => l.ActiveDiagnosticTokens)
+                .ToList();
 
         internal static bool IsEnabled
         {
@@ -205,7 +248,9 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                 {
                     // if s_enabled has never been set, check environment variable to see whether it should be enabled.
                     var enabled = Environment.GetEnvironmentVariable("RoslynWaiterEnabled");
-                    s_enabled = string.Equals(enabled, "1", StringComparison.OrdinalIgnoreCase) || string.Equals(enabled, "True", StringComparison.OrdinalIgnoreCase);
+                    s_enabled =
+                        string.Equals(enabled, "1", StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(enabled, "True", StringComparison.OrdinalIgnoreCase);
                 }
 
                 return s_enabled.Value;
@@ -225,8 +270,12 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                     else
                     {
                         // if _enableDiagnosticTokens has never been set, check environment variable to see whether it should be enabled.
-                        var enabled = Environment.GetEnvironmentVariable("RoslynWaiterDiagnosticTokenEnabled");
-                        _enableDiagnosticTokens = string.Equals(enabled, "1", StringComparison.OrdinalIgnoreCase) || string.Equals(enabled, "True", StringComparison.OrdinalIgnoreCase);
+                        var enabled = Environment.GetEnvironmentVariable(
+                            "RoslynWaiterDiagnosticTokenEnabled"
+                        );
+                        _enableDiagnosticTokens =
+                            string.Equals(enabled, "1", StringComparison.OrdinalIgnoreCase)
+                            || string.Equals(enabled, "True", StringComparison.OrdinalIgnoreCase);
                     }
                 }
 
@@ -234,14 +283,18 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             }
         }
 
-        private IEnumerable<IAsynchronousOperationWaiter> GetCandidateWaiters(string[]? featureNames)
+        private IEnumerable<IAsynchronousOperationWaiter> GetCandidateWaiters(
+            string[]? featureNames
+        )
         {
             if (featureNames == null || featureNames.Length == 0)
             {
                 return _singletonListeners.Values.Cast<IAsynchronousOperationWaiter>();
             }
 
-            return _singletonListeners.Where(kv => featureNames.Contains(kv.Key)).Select(kv => (IAsynchronousOperationWaiter)kv.Value);
+            return _singletonListeners
+                .Where(kv => featureNames.Contains(kv.Key))
+                .Select(kv => (IAsynchronousOperationWaiter)kv.Value);
         }
     }
 }

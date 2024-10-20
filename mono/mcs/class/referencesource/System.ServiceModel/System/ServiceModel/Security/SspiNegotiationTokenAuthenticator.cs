@@ -19,20 +19,18 @@ namespace System.ServiceModel.Security
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security.Tokens;
     using System.Xml;
-
     using CanonicalizationDriver = System.IdentityModel.CanonicalizationDriver;
     using Psha1DerivedKeyGenerator = System.IdentityModel.Psha1DerivedKeyGenerator;
 
-    abstract class SspiNegotiationTokenAuthenticator : NegotiationTokenAuthenticator<SspiNegotiationTokenAuthenticatorState>
+    abstract class SspiNegotiationTokenAuthenticator
+        : NegotiationTokenAuthenticator<SspiNegotiationTokenAuthenticatorState>
     {
         ExtendedProtectionPolicy extendedProtectionPolicy;
         string defaultServiceBinding;
         Object thisLock = new Object();
 
         protected SspiNegotiationTokenAuthenticator()
-            : base()
-        {
-        }
+            : base() { }
 
         public ExtendedProtectionPolicy ExtendedProtectionPolicy
         {
@@ -47,7 +45,7 @@ namespace System.ServiceModel.Security
 
         public string DefaultServiceBinding
         {
-            get 
+            get
             {
                 if (this.defaultServiceBinding == null)
                 {
@@ -56,8 +54,9 @@ namespace System.ServiceModel.Security
                         if (this.defaultServiceBinding == null)
                         {
                             this.defaultServiceBinding = SecurityUtils.GetSpnFromIdentity(
-                                                            SecurityUtils.CreateWindowsIdentity(),
-                                                            new EndpointAddress(ListenUri));
+                                SecurityUtils.CreateWindowsIdentity(),
+                                new EndpointAddress(ListenUri)
+                            );
                         }
                     }
                 }
@@ -69,12 +68,22 @@ namespace System.ServiceModel.Security
 
         // abstract methods
         public abstract XmlDictionaryString NegotiationValueType { get; }
-        protected abstract ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(ISspiNegotiation sspiNegotiation);
-        protected abstract SspiNegotiationTokenAuthenticatorState CreateSspiState(byte[] incomingBlob, string incomingValueTypeUri);
+        protected abstract ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(
+            ISspiNegotiation sspiNegotiation
+        );
+        protected abstract SspiNegotiationTokenAuthenticatorState CreateSspiState(
+            byte[] incomingBlob,
+            string incomingValueTypeUri
+        );
 
         // helpers
-        protected virtual void IssueServiceToken(SspiNegotiationTokenAuthenticatorState sspiState, ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies, out SecurityContextSecurityToken serviceToken, out WrappedKeySecurityToken proofToken,
-            out int issuedKeySize)
+        protected virtual void IssueServiceToken(
+            SspiNegotiationTokenAuthenticatorState sspiState,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies,
+            out SecurityContextSecurityToken serviceToken,
+            out WrappedKeySecurityToken proofToken,
+            out int issuedKeySize
+        )
         {
             UniqueId contextId = SecurityUtils.GenerateUniqueId();
             string id = SecurityUtils.GenerateId();
@@ -90,7 +99,15 @@ namespace System.ServiceModel.Security
             CryptoHelper.FillRandomBytes(key);
             DateTime effectiveTime = DateTime.UtcNow;
             DateTime expirationTime = TimeoutHelper.Add(effectiveTime, this.ServiceTokenLifetime);
-            serviceToken = IssueSecurityContextToken(contextId, id, key, effectiveTime, expirationTime, authorizationPolicies, this.EncryptStateInServiceToken);
+            serviceToken = IssueSecurityContextToken(
+                contextId,
+                id,
+                key,
+                effectiveTime,
+                expirationTime,
+                authorizationPolicies,
+                this.EncryptStateInServiceToken
+            );
             proofToken = new WrappedKeySecurityToken(string.Empty, key, sspiState.SspiNegotiation);
         }
 
@@ -98,12 +115,17 @@ namespace System.ServiceModel.Security
         {
             if (incomingNego == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToReceive)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToReceive))
+                );
             }
             incomingNego.Validate(this.NegotiationValueType);
         }
 
-        protected virtual BinaryNegotiation GetOutgoingBinaryNegotiation(ISspiNegotiation sspiNegotiation, byte[] outgoingBlob)
+        protected virtual BinaryNegotiation GetOutgoingBinaryNegotiation(
+            ISspiNegotiation sspiNegotiation,
+            byte[] outgoingBlob
+        )
         {
             return new BinaryNegotiation(this.NegotiationValueType, outgoingBlob);
         }
@@ -117,11 +139,20 @@ namespace System.ServiceModel.Security
             byte[] canonicalizedData = canonicalizer.GetBytes();
             lock (negotiationDigest)
             {
-                negotiationDigest.TransformBlock(canonicalizedData, 0, canonicalizedData.Length, canonicalizedData, 0);
+                negotiationDigest.TransformBlock(
+                    canonicalizedData,
+                    0,
+                    canonicalizedData.Length,
+                    canonicalizedData,
+                    0
+                );
             }
         }
 
-        static void AddToDigest(SspiNegotiationTokenAuthenticatorState sspiState, RequestSecurityToken rst)
+        static void AddToDigest(
+            SspiNegotiationTokenAuthenticatorState sspiState,
+            RequestSecurityToken rst
+        )
         {
             MemoryStream stream = new MemoryStream();
             XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(stream);
@@ -130,7 +161,11 @@ namespace System.ServiceModel.Security
             AddToDigest(sspiState.NegotiationDigest, stream);
         }
 
-        static void AddToDigest(SspiNegotiationTokenAuthenticatorState sspiState, RequestSecurityTokenResponse rstr, bool wasReceived)
+        static void AddToDigest(
+            SspiNegotiationTokenAuthenticatorState sspiState,
+            RequestSecurityTokenResponse rstr,
+            bool wasReceived
+        )
         {
             MemoryStream stream = new MemoryStream();
             XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(stream);
@@ -146,7 +181,10 @@ namespace System.ServiceModel.Security
             AddToDigest(sspiState.NegotiationDigest, stream);
         }
 
-        static byte[] ComputeAuthenticator(SspiNegotiationTokenAuthenticatorState sspiState, byte[] key)
+        static byte[] ComputeAuthenticator(
+            SspiNegotiationTokenAuthenticatorState sspiState,
+            byte[] key
+        )
         {
             byte[] negotiationHash;
             lock (sspiState.NegotiationDigest)
@@ -155,16 +193,18 @@ namespace System.ServiceModel.Security
                 negotiationHash = sspiState.NegotiationDigest.Hash;
             }
             Psha1DerivedKeyGenerator generator = new Psha1DerivedKeyGenerator(key);
-            return generator.GenerateDerivedKey(SecurityUtils.CombinedHashLabel, negotiationHash, SecurityNegotiationConstants.NegotiationAuthenticatorSize, 0);
+            return generator.GenerateDerivedKey(
+                SecurityUtils.CombinedHashLabel,
+                negotiationHash,
+                SecurityNegotiationConstants.NegotiationAuthenticatorSize,
+                0
+            );
         }
 
         // overrides
         protected override bool IsMultiLegNegotiation
         {
-            get 
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override Binding GetNegotiationBinding(Binding binding)
@@ -177,7 +217,11 @@ namespace System.ServiceModel.Security
             return new SspiNegotiationFilter(this);
         }
 
-        protected override BodyWriter ProcessRequestSecurityToken(Message request, RequestSecurityToken requestSecurityToken, out SspiNegotiationTokenAuthenticatorState negotiationState)
+        protected override BodyWriter ProcessRequestSecurityToken(
+            Message request,
+            RequestSecurityToken requestSecurityToken,
+            out SspiNegotiationTokenAuthenticatorState negotiationState
+        )
         {
             if (request == null)
             {
@@ -187,40 +231,74 @@ namespace System.ServiceModel.Security
             {
                 throw TraceUtility.ThrowHelperArgumentNull("requestSecurityToken", request);
             }
-            if (requestSecurityToken.RequestType != null && requestSecurityToken.RequestType != this.StandardsManager.TrustDriver.RequestTypeIssue)
+            if (
+                requestSecurityToken.RequestType != null
+                && requestSecurityToken.RequestType
+                    != this.StandardsManager.TrustDriver.RequestTypeIssue
+            )
             {
-                throw TraceUtility.ThrowHelperWarning(new SecurityNegotiationException(SR.GetString(SR.InvalidRstRequestType, requestSecurityToken.RequestType)), request);
+                throw TraceUtility.ThrowHelperWarning(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.InvalidRstRequestType, requestSecurityToken.RequestType)
+                    ),
+                    request
+                );
             }
             BinaryNegotiation incomingNego = requestSecurityToken.GetBinaryNegotiation();
             ValidateIncomingBinaryNegotiation(incomingNego);
-            negotiationState = CreateSspiState(incomingNego.GetNegotiationData(), incomingNego.ValueTypeUri);
+            negotiationState = CreateSspiState(
+                incomingNego.GetNegotiationData(),
+                incomingNego.ValueTypeUri
+            );
             AddToDigest(negotiationState, requestSecurityToken);
             negotiationState.Context = requestSecurityToken.Context;
             if (requestSecurityToken.KeySize != 0)
             {
-                WSTrust.Driver.ValidateRequestedKeySize(requestSecurityToken.KeySize, this.SecurityAlgorithmSuite);
+                WSTrust.Driver.ValidateRequestedKeySize(
+                    requestSecurityToken.KeySize,
+                    this.SecurityAlgorithmSuite
+                );
             }
             negotiationState.RequestedKeySize = requestSecurityToken.KeySize;
             string appliesToName;
             string appliesToNamespace;
             requestSecurityToken.GetAppliesToQName(out appliesToName, out appliesToNamespace);
-            if (appliesToName == AddressingStrings.EndpointReference && appliesToNamespace == request.Version.Addressing.Namespace)
+            if (
+                appliesToName == AddressingStrings.EndpointReference
+                && appliesToNamespace == request.Version.Addressing.Namespace
+            )
             {
                 DataContractSerializer serializer;
                 if (request.Version.Addressing == AddressingVersion.WSAddressing10)
                 {
-                    serializer = DataContractSerializerDefaults.CreateSerializer(typeof(EndpointAddress10), DataContractSerializerDefaults.MaxItemsInObjectGraph);
-                    negotiationState.AppliesTo = requestSecurityToken.GetAppliesTo<EndpointAddress10>(serializer).ToEndpointAddress();
+                    serializer = DataContractSerializerDefaults.CreateSerializer(
+                        typeof(EndpointAddress10),
+                        DataContractSerializerDefaults.MaxItemsInObjectGraph
+                    );
+                    negotiationState.AppliesTo = requestSecurityToken
+                        .GetAppliesTo<EndpointAddress10>(serializer)
+                        .ToEndpointAddress();
                 }
                 else if (request.Version.Addressing == AddressingVersion.WSAddressingAugust2004)
                 {
-                    serializer = DataContractSerializerDefaults.CreateSerializer(typeof(EndpointAddressAugust2004), DataContractSerializerDefaults.MaxItemsInObjectGraph);
-                    negotiationState.AppliesTo = requestSecurityToken.GetAppliesTo<EndpointAddressAugust2004>(serializer).ToEndpointAddress();
+                    serializer = DataContractSerializerDefaults.CreateSerializer(
+                        typeof(EndpointAddressAugust2004),
+                        DataContractSerializerDefaults.MaxItemsInObjectGraph
+                    );
+                    negotiationState.AppliesTo = requestSecurityToken
+                        .GetAppliesTo<EndpointAddressAugust2004>(serializer)
+                        .ToEndpointAddress();
                 }
                 else
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ProtocolException(SR.GetString(SR.AddressingVersionNotSupported, request.Version.Addressing)));
+                        new ProtocolException(
+                            SR.GetString(
+                                SR.AddressingVersionNotSupported,
+                                request.Version.Addressing
+                            )
+                        )
+                    );
                 }
 
                 negotiationState.AppliesToSerializer = serializer;
@@ -228,7 +306,11 @@ namespace System.ServiceModel.Security
             return ProcessNegotiation(negotiationState, request, incomingNego);
         }
 
-        protected override BodyWriter ProcessRequestSecurityTokenResponse(SspiNegotiationTokenAuthenticatorState negotiationState, Message request, RequestSecurityTokenResponse requestSecurityTokenResponse)
+        protected override BodyWriter ProcessRequestSecurityTokenResponse(
+            SspiNegotiationTokenAuthenticatorState negotiationState,
+            Message request,
+            RequestSecurityTokenResponse requestSecurityTokenResponse
+        )
         {
             if (request == null)
             {
@@ -240,7 +322,12 @@ namespace System.ServiceModel.Security
             }
             if (requestSecurityTokenResponse.Context != negotiationState.Context)
             {
-                throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.BadSecurityNegotiationContext)), request);
+                throw TraceUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.BadSecurityNegotiationContext)
+                    ),
+                    request
+                );
             }
             AddToDigest(negotiationState, requestSecurityTokenResponse, true);
             BinaryNegotiation incomingNego = requestSecurityTokenResponse.GetBinaryNegotiation();
@@ -248,27 +335,42 @@ namespace System.ServiceModel.Security
             return ProcessNegotiation(negotiationState, request, incomingNego);
         }
 
-        BodyWriter ProcessNegotiation(SspiNegotiationTokenAuthenticatorState negotiationState, Message incomingMessage, BinaryNegotiation incomingNego)
+        BodyWriter ProcessNegotiation(
+            SspiNegotiationTokenAuthenticatorState negotiationState,
+            Message incomingMessage,
+            BinaryNegotiation incomingNego
+        )
         {
             ISspiNegotiation sspiNegotiation = negotiationState.SspiNegotiation;
-            
-            byte[] outgoingBlob = sspiNegotiation.GetOutgoingBlob(incomingNego.GetNegotiationData(), 
-                                                            SecurityUtils.GetChannelBindingFromMessage(incomingMessage), 
-                                                            this.extendedProtectionPolicy);
+
+            byte[] outgoingBlob = sspiNegotiation.GetOutgoingBlob(
+                incomingNego.GetNegotiationData(),
+                SecurityUtils.GetChannelBindingFromMessage(incomingMessage),
+                this.extendedProtectionPolicy
+            );
 
             if (sspiNegotiation.IsValidContext == false)
             {
-                throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation)), incomingMessage);
+                throw TraceUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation)),
+                    incomingMessage
+                );
             }
             // if there is no blob to send back the nego must be complete from the server side
             if (outgoingBlob == null && sspiNegotiation.IsCompleted == false)
             {
-                throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToSend)), incomingMessage);
+                throw TraceUtility.ThrowHelperError(
+                    new SecurityNegotiationException(SR.GetString(SR.NoBinaryNegoToSend)),
+                    incomingMessage
+                );
             }
             BinaryNegotiation outgoingBinaryNegotiation;
             if (outgoingBlob != null)
             {
-                outgoingBinaryNegotiation = GetOutgoingBinaryNegotiation(sspiNegotiation, outgoingBlob); 
+                outgoingBinaryNegotiation = GetOutgoingBinaryNegotiation(
+                    sspiNegotiation,
+                    outgoingBlob
+                );
             }
             else
             {
@@ -277,17 +379,34 @@ namespace System.ServiceModel.Security
             BodyWriter replyBody;
             if (sspiNegotiation.IsCompleted)
             {
-                ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = ValidateSspiNegotiation(sspiNegotiation);
+                ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies =
+                    ValidateSspiNegotiation(sspiNegotiation);
                 SecurityContextSecurityToken serviceToken;
                 WrappedKeySecurityToken proofToken;
                 int issuedKeySize;
-                IssueServiceToken(negotiationState, authorizationPolicies, out serviceToken, out proofToken, out issuedKeySize);
+                IssueServiceToken(
+                    negotiationState,
+                    authorizationPolicies,
+                    out serviceToken,
+                    out proofToken,
+                    out issuedKeySize
+                );
                 negotiationState.SetServiceToken(serviceToken);
-                
-                SecurityKeyIdentifierClause externalTokenReference = this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(serviceToken, SecurityTokenReferenceStyle.External);
-                SecurityKeyIdentifierClause internalTokenReference = this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(serviceToken, SecurityTokenReferenceStyle.Internal);
 
-                RequestSecurityTokenResponse dummyRstr = new RequestSecurityTokenResponse(this.StandardsManager);
+                SecurityKeyIdentifierClause externalTokenReference =
+                    this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(
+                        serviceToken,
+                        SecurityTokenReferenceStyle.External
+                    );
+                SecurityKeyIdentifierClause internalTokenReference =
+                    this.IssuedSecurityTokenParameters.CreateKeyIdentifierClause(
+                        serviceToken,
+                        SecurityTokenReferenceStyle.Internal
+                    );
+
+                RequestSecurityTokenResponse dummyRstr = new RequestSecurityTokenResponse(
+                    this.StandardsManager
+                );
                 dummyRstr.Context = negotiationState.Context;
                 dummyRstr.KeySize = issuedKeySize;
                 dummyRstr.TokenType = this.SecurityContextTokenUri;
@@ -302,25 +421,40 @@ namespace System.ServiceModel.Security
                 {
                     if (incomingMessage.Version.Addressing == AddressingVersion.WSAddressing10)
                     {
-                        dummyRstr.SetAppliesTo<EndpointAddress10>(EndpointAddress10.FromEndpointAddress(
-                            negotiationState.AppliesTo), 
-                            negotiationState.AppliesToSerializer);
+                        dummyRstr.SetAppliesTo<EndpointAddress10>(
+                            EndpointAddress10.FromEndpointAddress(negotiationState.AppliesTo),
+                            negotiationState.AppliesToSerializer
+                        );
                     }
-                    else if (incomingMessage.Version.Addressing == AddressingVersion.WSAddressingAugust2004)
+                    else if (
+                        incomingMessage.Version.Addressing
+                        == AddressingVersion.WSAddressingAugust2004
+                    )
                     {
-                        dummyRstr.SetAppliesTo<EndpointAddressAugust2004>(EndpointAddressAugust2004.FromEndpointAddress(
-                            negotiationState.AppliesTo), 
-                            negotiationState.AppliesToSerializer);
+                        dummyRstr.SetAppliesTo<EndpointAddressAugust2004>(
+                            EndpointAddressAugust2004.FromEndpointAddress(
+                                negotiationState.AppliesTo
+                            ),
+                            negotiationState.AppliesToSerializer
+                        );
                     }
                     else
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(SR.GetString(SR.AddressingVersionNotSupported, incomingMessage.Version.Addressing)));
+                            new ProtocolException(
+                                SR.GetString(
+                                    SR.AddressingVersionNotSupported,
+                                    incomingMessage.Version.Addressing
+                                )
+                            )
+                        );
                     }
                 }
                 dummyRstr.MakeReadOnly();
                 AddToDigest(negotiationState, dummyRstr, false);
-                RequestSecurityTokenResponse negotiationRstr = new RequestSecurityTokenResponse(this.StandardsManager);
+                RequestSecurityTokenResponse negotiationRstr = new RequestSecurityTokenResponse(
+                    this.StandardsManager
+                );
                 negotiationRstr.RequestedSecurityToken = serviceToken;
 
                 negotiationRstr.RequestedProofToken = proofToken;
@@ -338,38 +472,61 @@ namespace System.ServiceModel.Security
                     if (incomingMessage.Version.Addressing == AddressingVersion.WSAddressing10)
                     {
                         negotiationRstr.SetAppliesTo<EndpointAddress10>(
-                            EndpointAddress10.FromEndpointAddress(negotiationState.AppliesTo), 
-                            negotiationState.AppliesToSerializer);
+                            EndpointAddress10.FromEndpointAddress(negotiationState.AppliesTo),
+                            negotiationState.AppliesToSerializer
+                        );
                     }
-                    else if (incomingMessage.Version.Addressing == AddressingVersion.WSAddressingAugust2004)
+                    else if (
+                        incomingMessage.Version.Addressing
+                        == AddressingVersion.WSAddressingAugust2004
+                    )
                     {
                         negotiationRstr.SetAppliesTo<EndpointAddressAugust2004>(
-                            EndpointAddressAugust2004.FromEndpointAddress(negotiationState.AppliesTo), 
-                            negotiationState.AppliesToSerializer);
+                            EndpointAddressAugust2004.FromEndpointAddress(
+                                negotiationState.AppliesTo
+                            ),
+                            negotiationState.AppliesToSerializer
+                        );
                     }
                     else
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new ProtocolException(SR.GetString(SR.AddressingVersionNotSupported, incomingMessage.Version.Addressing)));
+                            new ProtocolException(
+                                SR.GetString(
+                                    SR.AddressingVersionNotSupported,
+                                    incomingMessage.Version.Addressing
+                                )
+                            )
+                        );
                     }
                 }
                 negotiationRstr.MakeReadOnly();
 
-                byte[] authenticator = ComputeAuthenticator(negotiationState, serviceToken.GetKeyBytes());
-                RequestSecurityTokenResponse authenticatorRstr = new RequestSecurityTokenResponse(this.StandardsManager);
+                byte[] authenticator = ComputeAuthenticator(
+                    negotiationState,
+                    serviceToken.GetKeyBytes()
+                );
+                RequestSecurityTokenResponse authenticatorRstr = new RequestSecurityTokenResponse(
+                    this.StandardsManager
+                );
                 authenticatorRstr.Context = negotiationState.Context;
                 authenticatorRstr.SetAuthenticator(authenticator);
                 authenticatorRstr.MakeReadOnly();
 
-                List<RequestSecurityTokenResponse> rstrList = new List<RequestSecurityTokenResponse>(2);
+                List<RequestSecurityTokenResponse> rstrList =
+                    new List<RequestSecurityTokenResponse>(2);
                 rstrList.Add(negotiationRstr);
                 rstrList.Add(authenticatorRstr);
-                replyBody = new RequestSecurityTokenResponseCollection(rstrList, this.StandardsManager);
-               
+                replyBody = new RequestSecurityTokenResponseCollection(
+                    rstrList,
+                    this.StandardsManager
+                );
             }
             else
             {
-                RequestSecurityTokenResponse rstr = new RequestSecurityTokenResponse(this.StandardsManager);
+                RequestSecurityTokenResponse rstr = new RequestSecurityTokenResponse(
+                    this.StandardsManager
+                );
                 rstr.Context = negotiationState.Context;
                 rstr.SetBinaryNegotiation(outgoingBinaryNegotiation);
                 rstr.MakeReadOnly();
@@ -383,7 +540,7 @@ namespace System.ServiceModel.Security
         class SspiNegotiationFilter : HeaderFilter
         {
             SspiNegotiationTokenAuthenticator authenticator;
-            
+
             public SspiNegotiationFilter(SspiNegotiationTokenAuthenticator authenticator)
             {
                 this.authenticator = authenticator;
@@ -391,8 +548,11 @@ namespace System.ServiceModel.Security
 
             public override bool Match(Message message)
             {
-                if (message.Headers.Action == authenticator.RequestSecurityTokenAction.Value
-                    || message.Headers.Action == authenticator.RequestSecurityTokenResponseAction.Value)
+                if (
+                    message.Headers.Action == authenticator.RequestSecurityTokenAction.Value
+                    || message.Headers.Action
+                        == authenticator.RequestSecurityTokenResponseAction.Value
+                )
                 {
                     return !SecurityVersion.Default.DoesMessageContainSecurityHeader(message);
                 }

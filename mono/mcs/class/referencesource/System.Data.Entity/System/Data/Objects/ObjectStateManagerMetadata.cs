@@ -9,17 +9,17 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.Metadata.Edm;
 using System.Data.Mapping;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 
 namespace System.Data.Objects
 {
-
     internal struct EntitySetQualifiedType : IEqualityComparer<EntitySetQualifiedType>
     {
-        internal static readonly IEqualityComparer<EntitySetQualifiedType> EqualityComparer = new EntitySetQualifiedType();        
-        
+        internal static readonly IEqualityComparer<EntitySetQualifiedType> EqualityComparer =
+            new EntitySetQualifiedType();
+
         internal readonly Type ClrType;
         internal readonly EntitySet EntitySet;
 
@@ -35,16 +35,24 @@ namespace System.Data.Objects
 
         public bool Equals(EntitySetQualifiedType x, EntitySetQualifiedType y)
         {
-            return (Object.ReferenceEquals(x.ClrType, y.ClrType) &&
-                    Object.ReferenceEquals(x.EntitySet, y.EntitySet));
+            return (
+                Object.ReferenceEquals(x.ClrType, y.ClrType)
+                && Object.ReferenceEquals(x.EntitySet, y.EntitySet)
+            );
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2303", Justification="ClrType is not expected to be an Embedded Interop Type.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA2303",
+            Justification = "ClrType is not expected to be an Embedded Interop Type."
+        )]
         public int GetHashCode(EntitySetQualifiedType obj)
         {
-            return unchecked(obj.ClrType.GetHashCode() +
-                             obj.EntitySet.Name.GetHashCode() +
-                             obj.EntitySet.EntityContainer.Name.GetHashCode());
+            return unchecked(
+                obj.ClrType.GetHashCode()
+                + obj.EntitySet.Name.GetHashCode()
+                + obj.EntitySet.EntityContainer.Name.GetHashCode()
+            );
         }
     }
 
@@ -55,7 +63,11 @@ namespace System.Data.Objects
         private readonly bool _isPartOfKey;
         private readonly bool _isComplexType;
 
-        internal StateManagerMemberMetadata(ObjectPropertyMapping memberMap, EdmProperty memberMetadata, bool isPartOfKey)
+        internal StateManagerMemberMetadata(
+            ObjectPropertyMapping memberMap,
+            EdmProperty memberMetadata,
+            bool isPartOfKey
+        )
         {
             // if memberMap is null, then this is a shadowstate
             Debug.Assert(null != memberMap, "shadowstate not supported");
@@ -63,16 +75,15 @@ namespace System.Data.Objects
             _clrProperty = memberMap.ClrProperty;
             _edmProperty = memberMetadata;
             _isPartOfKey = isPartOfKey;
-            _isComplexType = (Helper.IsEntityType(_edmProperty.TypeUsage.EdmType) ||
-                             Helper.IsComplexType(_edmProperty.TypeUsage.EdmType));
+            _isComplexType = (
+                Helper.IsEntityType(_edmProperty.TypeUsage.EdmType)
+                || Helper.IsComplexType(_edmProperty.TypeUsage.EdmType)
+            );
         }
 
         internal string CLayerName
         {
-            get
-            {
-                return _edmProperty.Name;
-            }
+            get { return _edmProperty.Name; }
         }
 
         internal Type ClrType
@@ -90,17 +101,11 @@ namespace System.Data.Objects
         }
         internal bool IsComplex
         {
-            get
-            {
-                return _isComplexType;
-            }
+            get { return _isComplexType; }
         }
         internal EdmProperty CdmMetadata
         {
-            get
-            {
-                return _edmProperty;
-            }
+            get { return _edmProperty; }
         }
         internal EdmProperty ClrMetadata
         {
@@ -112,17 +117,16 @@ namespace System.Data.Objects
         }
         internal bool IsPartOfKey
         {
-            get
-            {
-                return _isPartOfKey;
-            }
+            get { return _isPartOfKey; }
         }
+
         public object GetValue(object userObject) // wrapp it in cacheentry
         {
             Debug.Assert(null != _clrProperty, "shadowstate not supported");
             object dataObject = LightweightCodeGenerator.GetValue(_clrProperty, userObject);
             return dataObject;
         }
+
         public void SetValue(object userObject, object value) // if record , unwrapp to object, use materializer in cacheentry
         {
             Debug.Assert(null != _clrProperty, "shadowstate not supported");
@@ -150,12 +154,15 @@ namespace System.Data.Objects
         internal StateManagerTypeMetadata(EdmType edmType, ObjectTypeMapping mapping)
         {
             Debug.Assert(null != edmType, "null EdmType");
-            Debug.Assert(Helper.IsEntityType(edmType) ||
-                         Helper.IsComplexType(edmType),
-                         "not Complex or EntityType");
-            Debug.Assert(Object.ReferenceEquals(mapping, null) ||
-                         Object.ReferenceEquals(mapping.EdmType, edmType),
-                         "different EdmType instance");
+            Debug.Assert(
+                Helper.IsEntityType(edmType) || Helper.IsComplexType(edmType),
+                "not Complex or EntityType"
+            );
+            Debug.Assert(
+                Object.ReferenceEquals(mapping, null)
+                    || Object.ReferenceEquals(mapping.EdmType, edmType),
+                "different EdmType instance"
+            );
 
             _typeUsage = TypeUsage.Create(edmType);
             _recordInfo = new DataRecordInfo(_typeUsage);
@@ -188,16 +195,17 @@ namespace System.Data.Objects
                 _cLayerNameToOrdinal.Add(member.Name, i); // clayer name
 
                 // Determine whether this member is part of the identity of the entity.
-                _members[i] = new StateManagerMemberMetadata(memberMap, member, ((null != keyMembers) && keyMembers.Contains(member)));
+                _members[i] = new StateManagerMemberMetadata(
+                    memberMap,
+                    member,
+                    ((null != keyMembers) && keyMembers.Contains(member))
+                );
             }
         }
 
         internal TypeUsage CdmMetadata
         {
-            get
-            {
-                return _typeUsage;
-            }
+            get { return _typeUsage; }
         }
         internal DataRecordInfo DataRecordInfo
         {
@@ -206,10 +214,7 @@ namespace System.Data.Objects
 
         internal int FieldCount
         {
-            get
-            {
-                return _members.Length;
-            }
+            get { return _members.Length; }
         }
 
         internal Type GetFieldType(int ordinal)
@@ -235,6 +240,7 @@ namespace System.Data.Objects
         {
             return Member(ordinal).CLayerName;
         }
+
         internal int GetOrdinalforOLayerMemberName(string name)
         {
             int ordinal;
@@ -244,6 +250,7 @@ namespace System.Data.Objects
             }
             return ordinal;
         }
+
         internal int GetOrdinalforCLayerMemberName(string name)
         {
             int ordinal;
@@ -253,14 +260,17 @@ namespace System.Data.Objects
             }
             return ordinal;
         }
+
         internal bool IsMemberPartofShadowState(int ordinal)
         {
-            // 
+            //
 
 
-            Debug.Assert(Member(ordinal) != null,
-                "The only case where Member(ordinal) can be null is if the property is in shadow state.  " +
-                "When shadow state support is added, this assert should never fire.");
+            Debug.Assert(
+                Member(ordinal) != null,
+                "The only case where Member(ordinal) can be null is if the property is in shadow state.  "
+                    + "When shadow state support is added, this assert should never fire."
+            );
             return (null == Member(ordinal).ClrMetadata);
         }
     }

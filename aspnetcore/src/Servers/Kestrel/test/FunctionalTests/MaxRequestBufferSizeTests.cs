@@ -13,16 +13,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Xunit;
 
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests;
+
 #else
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
+
 #endif
 
 public class MaxRequestBufferSizeTests : LoggedTest
@@ -59,7 +61,7 @@ public class MaxRequestBufferSizeTests : LoggedTest
         "POST / HTTP/1.1\r\n",
         "Host: \r\n",
         $"Content-Length: {_dataLength}\r\n",
-        "\r\n"
+        "\r\n",
     };
 
     public static IEnumerable<object[]> LargeUploadData
@@ -73,65 +75,74 @@ public class MaxRequestBufferSizeTests : LoggedTest
                 totalHeaderSize += _requestLines[i].Length;
             }
 
-            var maxRequestBufferSizeValues = new Tuple<long?, bool>[] {
+            var maxRequestBufferSizeValues = new Tuple<long?, bool>[]
+            {
                 // Smallest buffer that can hold the test request headers without causing
                 // the server to hang waiting for the end of the request line or
                 // a header line.
                 Tuple.Create((long?)totalHeaderSize, true),
-
                 // Small buffer, but large enough to hold all request headers.
                 Tuple.Create((long?)16 * 1024, true),
-
                 // Default buffer.
                 Tuple.Create((long?)1024 * 1024, true),
-
                 // Larger than default, but still significantly lower than data, so client should be paused.
                 Tuple.Create((long?)5 * 1024 * 1024, true),
-
                 // Even though maxRequestBufferSize < _dataLength, client should not be paused since the
                 // OS-level buffers in client and/or server will handle the overflow.
                 Tuple.Create((long?)_dataLength - 1, false),
-
                 // Buffer is exactly the same size as data.  Exposed race condition where
                 // the connection was resumed after socket was disconnected.
                 Tuple.Create((long?)_dataLength, false),
-
                 // Largest possible buffer, should never trigger backpressure.
                 Tuple.Create((long?)long.MaxValue, false),
-
                 // Disables all code related to computing and limiting the size of the input buffer.
-                Tuple.Create((long?)null, false)
+                Tuple.Create((long?)null, false),
             };
             var sslValues = new[] { true, false };
 
             return from maxRequestBufferSize in maxRequestBufferSizeValues
-                   from ssl in sslValues
-                   select new object[]
-                   {
-                        maxRequestBufferSize.Item1,
-                        ssl,
-                        maxRequestBufferSize.Item2
-                    };
+                from ssl in sslValues
+                select new object[] { maxRequestBufferSize.Item1, ssl, maxRequestBufferSize.Item2 };
         }
     }
+
     [Theory]
     [MemberData(nameof(LargeUploadData))]
     // This is inherently flaky and is relying on helix retry to pass consistently
-    public async Task LargeUpload(long? maxRequestBufferSize, bool connectionAdapter, bool expectPause)
+    public async Task LargeUpload(
+        long? maxRequestBufferSize,
+        bool connectionAdapter,
+        bool expectPause
+    )
     {
         // Parameters
         var data = new byte[_dataLength];
         var bytesWrittenTimeout = TimeSpan.FromMilliseconds(100);
-        var bytesWrittenPollingInterval = TimeSpan.FromMilliseconds(bytesWrittenTimeout.TotalMilliseconds / 10);
+        var bytesWrittenPollingInterval = TimeSpan.FromMilliseconds(
+            bytesWrittenTimeout.TotalMilliseconds / 10
+        );
         var maxSendSize = 4096;
 
-        var startReadingRequestBody = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientFinishedSendingRequestBody = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startReadingRequestBody = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var clientFinishedSendingRequestBody = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var lastBytesWritten = DateTime.MaxValue;
 
         var memoryPoolFactory = new DiagnosticMemoryPoolFactory(allowLateReturn: true);
 
-        using (var host = await StartHost(maxRequestBufferSize, data, connectionAdapter, startReadingRequestBody, clientFinishedSendingRequestBody, memoryPoolFactory.Create))
+        using (
+            var host = await StartHost(
+                maxRequestBufferSize,
+                data,
+                connectionAdapter,
+                startReadingRequestBody,
+                clientFinishedSendingRequestBody,
+                memoryPoolFactory.Create
+            )
+        )
         {
             var port = host.GetPort();
             using (var socket = CreateSocket(port))
@@ -177,14 +188,20 @@ public class MaxRequestBufferSizeTests : LoggedTest
                     // If the send task is paused before the expected number of bytes have been
                     // written, keep waiting since the pause may have been caused by something else
                     // like a slow machine.
-                    while ((DateTime.Now - lastBytesWritten) < bytesWrittenTimeout ||
-                            bytesWritten < minimumExpectedBytesWritten)
+                    while (
+                        (DateTime.Now - lastBytesWritten) < bytesWrittenTimeout
+                        || bytesWritten < minimumExpectedBytesWritten
+                    )
                     {
                         await Task.Delay(bytesWrittenPollingInterval);
                     }
 
                     // Verify the number of bytes written before the client was paused.
-                    Assert.InRange(bytesWritten, minimumExpectedBytesWritten, maximumExpectedBytesWritten);
+                    Assert.InRange(
+                        bytesWritten,
+                        minimumExpectedBytesWritten,
+                        maximumExpectedBytesWritten
+                    );
 
                     // Tell server to start reading request body
                     startReadingRequestBody.TrySetResult();
@@ -215,16 +232,31 @@ public class MaxRequestBufferSizeTests : LoggedTest
         // Parameters
         var data = new byte[_dataLength];
         var bytesWrittenTimeout = TimeSpan.FromMilliseconds(100);
-        var bytesWrittenPollingInterval = TimeSpan.FromMilliseconds(bytesWrittenTimeout.TotalMilliseconds / 10);
+        var bytesWrittenPollingInterval = TimeSpan.FromMilliseconds(
+            bytesWrittenTimeout.TotalMilliseconds / 10
+        );
         var maxSendSize = 4096;
 
-        var startReadingRequestBody = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientFinishedSendingRequestBody = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var startReadingRequestBody = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var clientFinishedSendingRequestBody = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var lastBytesWritten = DateTime.MaxValue;
 
         var memoryPoolFactory = new DiagnosticMemoryPoolFactory(allowLateReturn: true);
 
-        using (var host = await StartHost(16 * 1024, data, false, startReadingRequestBody, clientFinishedSendingRequestBody, memoryPoolFactory.Create))
+        using (
+            var host = await StartHost(
+                16 * 1024,
+                data,
+                false,
+                startReadingRequestBody,
+                clientFinishedSendingRequestBody,
+                memoryPoolFactory.Create
+            )
+        )
         {
             var port = host.GetPort();
             using (var socket = CreateSocket(port))
@@ -267,14 +299,20 @@ public class MaxRequestBufferSizeTests : LoggedTest
                 // If the send task is paused before the expected number of bytes have been
                 // written, keep waiting since the pause may have been caused by something else
                 // like a slow machine.
-                while ((DateTime.Now - lastBytesWritten) < bytesWrittenTimeout ||
-                        bytesWritten < minimumExpectedBytesWritten)
+                while (
+                    (DateTime.Now - lastBytesWritten) < bytesWrittenTimeout
+                    || bytesWritten < minimumExpectedBytesWritten
+                )
                 {
                     await Task.Delay(bytesWrittenPollingInterval);
                 }
 
                 // Verify the number of bytes written before the client was paused.
-                Assert.InRange(bytesWritten, minimumExpectedBytesWritten, maximumExpectedBytesWritten);
+                Assert.InRange(
+                    bytesWritten,
+                    minimumExpectedBytesWritten,
+                    maximumExpectedBytesWritten
+                );
 
                 // Dispose host prior to closing connection to verify the server doesn't throw during shutdown
                 // if a connection no longer has alloc and read callbacks configured.
@@ -283,10 +321,7 @@ public class MaxRequestBufferSizeTests : LoggedTest
                     await host.StopAsync();
                 }
                 // Remove when https://github.com/dotnet/runtime/issues/40290 is fixed
-                catch (OperationCanceledException)
-                {
-
-                }
+                catch (OperationCanceledException) { }
                 host.Dispose();
             }
         }
@@ -296,37 +331,48 @@ public class MaxRequestBufferSizeTests : LoggedTest
         await memoryPoolFactory.WhenAllBlocksReturned(TestConstants.DefaultTimeout);
     }
 
-    private async Task<IHost> StartHost(long? maxRequestBufferSize,
+    private async Task<IHost> StartHost(
+        long? maxRequestBufferSize,
         byte[] expectedBody,
         bool useConnectionAdapter,
         TaskCompletionSource startReadingRequestBody,
         TaskCompletionSource clientFinishedSendingRequestBody,
-        Func<MemoryPool<byte>> memoryPoolFactory = null)
+        Func<MemoryPool<byte>> memoryPoolFactory = null
+    )
     {
-        var host = TransportSelector.GetHostBuilder(memoryPoolFactory, maxRequestBufferSize)
+        var host = TransportSelector
+            .GetHostBuilder(memoryPoolFactory, maxRequestBufferSize)
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(new IPEndPoint(IPAddress.Loopback, 0), listenOptions =>
-                        {
-                            if (useConnectionAdapter)
+                        options.Listen(
+                            new IPEndPoint(IPAddress.Loopback, 0),
+                            listenOptions =>
                             {
-                                listenOptions.UsePassThrough();
+                                if (useConnectionAdapter)
+                                {
+                                    listenOptions.UsePassThrough();
+                                }
                             }
-                        });
+                        );
 
                         options.Limits.MaxRequestBufferSize = maxRequestBufferSize;
 
-                        if (maxRequestBufferSize.HasValue &&
-                            maxRequestBufferSize.Value < options.Limits.MaxRequestLineSize)
+                        if (
+                            maxRequestBufferSize.HasValue
+                            && maxRequestBufferSize.Value < options.Limits.MaxRequestLineSize
+                        )
                         {
                             options.Limits.MaxRequestLineSize = (int)maxRequestBufferSize;
                         }
 
-                        if (maxRequestBufferSize.HasValue &&
-                            maxRequestBufferSize.Value < options.Limits.MaxRequestHeadersTotalSize)
+                        if (
+                            maxRequestBufferSize.HasValue
+                            && maxRequestBufferSize.Value
+                                < options.Limits.MaxRequestHeadersTotalSize
+                        )
                         {
                             options.Limits.MaxRequestHeadersTotalSize = (int)maxRequestBufferSize;
                         }
@@ -336,29 +382,42 @@ public class MaxRequestBufferSizeTests : LoggedTest
                         options.Limits.MaxRequestBodySize = _dataLength;
                     })
                     .UseContentRoot(Directory.GetCurrentDirectory())
-                    .Configure(app => app.Run(async context =>
-                    {
-                        await startReadingRequestBody.Task.TimeoutAfter(TimeSpan.FromSeconds(120));
-
-                        var buffer = new byte[expectedBody.Length];
-                        var bytesRead = 0;
-                        while (bytesRead < buffer.Length)
+                    .Configure(app =>
+                        app.Run(async context =>
                         {
-                            bytesRead += await context.Request.Body.ReadAsync(buffer, bytesRead, buffer.Length - bytesRead);
-                        }
+                            await startReadingRequestBody.Task.TimeoutAfter(
+                                TimeSpan.FromSeconds(120)
+                            );
 
-                        await clientFinishedSendingRequestBody.Task.TimeoutAfter(TimeSpan.FromSeconds(120));
+                            var buffer = new byte[expectedBody.Length];
+                            var bytesRead = 0;
+                            while (bytesRead < buffer.Length)
+                            {
+                                bytesRead += await context.Request.Body.ReadAsync(
+                                    buffer,
+                                    bytesRead,
+                                    buffer.Length - bytesRead
+                                );
+                            }
 
-                        // Verify client didn't send extra bytes
-                        if (await context.Request.Body.ReadAsync(new byte[1], 0, 1) != 0)
-                        {
-                            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                            await context.Response.WriteAsync("Client sent more bytes than expectedBody.Length");
-                            return;
-                        }
+                            await clientFinishedSendingRequestBody.Task.TimeoutAfter(
+                                TimeSpan.FromSeconds(120)
+                            );
 
-                        await context.Response.WriteAsync($"bytesRead: {bytesRead}");
-                    }));
+                            // Verify client didn't send extra bytes
+                            if (await context.Request.Body.ReadAsync(new byte[1], 0, 1) != 0)
+                            {
+                                context.Response.StatusCode =
+                                    StatusCodes.Status500InternalServerError;
+                                await context.Response.WriteAsync(
+                                    "Client sent more bytes than expectedBody.Length"
+                                );
+                                return;
+                            }
+
+                            await context.Response.WriteAsync($"bytesRead: {bytesRead}");
+                        })
+                    );
             })
             .ConfigureServices(AddTestLogging)
             .Build();
@@ -383,7 +442,9 @@ public class MaxRequestBufferSizeTests : LoggedTest
 
     private static async Task WritePostRequestHeaders(Stream stream, int contentLength)
     {
-        using (var writer = new StreamWriter(stream, Encoding.ASCII, bufferSize: 1024, leaveOpen: true))
+        using (
+            var writer = new StreamWriter(stream, Encoding.ASCII, bufferSize: 1024, leaveOpen: true)
+        )
         {
             foreach (var line in _requestLines)
             {
@@ -404,7 +465,9 @@ public class MaxRequestBufferSizeTests : LoggedTest
 
         while (matchedChars < exptectedLength)
         {
-            var count = await stream.ReadAsync(responseBuffer, 0, exptectedLength - matchedChars).DefaultTimeout();
+            var count = await stream
+                .ReadAsync(responseBuffer, 0, exptectedLength - matchedChars)
+                .DefaultTimeout();
 
             if (count == 0)
             {

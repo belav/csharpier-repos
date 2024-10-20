@@ -7,13 +7,27 @@ namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
 internal static class CompletionTestHelpers
 {
-    public static async Task<CompletionResult> GetCompletionsAndServiceAsync(TestDiagnosticAnalyzerRunner runner, string source, CompletionTrigger? completionTrigger = null)
+    public static async Task<CompletionResult> GetCompletionsAndServiceAsync(
+        TestDiagnosticAnalyzerRunner runner,
+        string source,
+        CompletionTrigger? completionTrigger = null
+    )
     {
-        MarkupTestFile.GetPositionAndSpans(source, out var output, out int cursorPosition, out var textSpans);
+        MarkupTestFile.GetPositionAndSpans(
+            source,
+            out var output,
+            out int cursorPosition,
+            out var textSpans
+        );
 
-        var results = completionTrigger != null
-            ? await runner.GetCompletionsAndServiceAsync(cursorPosition, completionTrigger.Value, output)
-            : await runner.GetCompletionsAndServiceAsync(cursorPosition, output);
+        var results =
+            completionTrigger != null
+                ? await runner.GetCompletionsAndServiceAsync(
+                    cursorPosition,
+                    completionTrigger.Value,
+                    output
+                )
+                : await runner.GetCompletionsAndServiceAsync(cursorPosition, output);
 
         if (results.ShouldTriggerCompletion)
         {

@@ -12,7 +12,7 @@ namespace System.Reflection.Emit.Tests
         {
             Red = 0,
             Green = 1,
-            Blue = 2
+            Blue = 2,
         }
 
         public static IEnumerable<object[]> SetConstant_TestData()
@@ -35,7 +35,7 @@ namespace System.Reflection.Emit.Tests
             yield return new object[] { typeof(char), 'a' };
             yield return new object[] { typeof(string), "a" };
 
-            yield return new object[] { typeof(Colors), Colors.Blue  };
+            yield return new object[] { typeof(Colors), Colors.Blue };
             yield return new object[] { typeof(object), null };
             yield return new object[] { typeof(object), "a" };
         }
@@ -45,16 +45,31 @@ namespace System.Reflection.Emit.Tests
         [MemberData(nameof(SetConstant_TestData))]
         public void SetConstant(Type returnType, object defaultValue)
         {
-            MethodAttributes getMethodAttributes = MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
-            BindingFlags bindingAttributes = BindingFlags.Public | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Static;
+            MethodAttributes getMethodAttributes =
+                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
+            BindingFlags bindingAttributes =
+                BindingFlags.Public
+                | BindingFlags.Instance
+                | BindingFlags.NonPublic
+                | BindingFlags.Static;
             Type[] paramTypes = new Type[0];
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
 
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.HasDefault, returnType, null);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.HasDefault,
+                returnType,
+                null
+            );
             property.SetConstant(defaultValue);
 
-            MethodBuilder method = type.DefineMethod("TestMethod", getMethodAttributes, returnType, paramTypes);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                getMethodAttributes,
+                returnType,
+                paramTypes
+            );
             ILGenerator methodILGenerator = method.GetILGenerator();
             methodILGenerator.Emit(OpCodes.Ldarg_0);
             methodILGenerator.Emit(OpCodes.Ret);
@@ -62,7 +77,10 @@ namespace System.Reflection.Emit.Tests
             property.SetGetMethod(method);
 
             Type createdType = type.CreateType();
-            PropertyInfo createdProperty = createdType.GetProperty("TestProperty", bindingAttributes);
+            PropertyInfo createdProperty = createdType.GetProperty(
+                "TestProperty",
+                bindingAttributes
+            );
             Assert.Equal(defaultValue, createdProperty.GetConstantValue());
         }
 
@@ -70,8 +88,19 @@ namespace System.Reflection.Emit.Tests
         public void SetConstant_TypeAlreadyCreated_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.None, typeof(int), new Type[0]);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public, CallingConventions.HasThis, typeof(int), new Type[] { typeof(int) });
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.None,
+                typeof(int),
+                new Type[0]
+            );
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public,
+                CallingConventions.HasThis,
+                typeof(int),
+                new Type[] { typeof(int) }
+            );
 
             ILGenerator methodILGenerator = method.GetILGenerator();
             methodILGenerator.Emit(OpCodes.Ldarg_0);
@@ -88,8 +117,16 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
 
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.HasDefault, typeof(decimal), null);
-            AssertExtensions.Throws<ArgumentException>(null, () => property.SetConstant((decimal)10));
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.HasDefault,
+                typeof(decimal),
+                null
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => property.SetConstant((decimal)10)
+            );
         }
     }
 }

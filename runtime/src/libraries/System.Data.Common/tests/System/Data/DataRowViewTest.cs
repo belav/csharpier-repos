@@ -43,34 +43,43 @@ namespace System.Data.Tests
         [Fact]
         public void CreateChildViewNullStringArg()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-           {
-               DataView dv = CreateTestView();
-               DataRowView dvr = dv[0];
-               dvr.CreateChildView((string)null);
-           });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataView dv = CreateTestView();
+                    DataRowView dvr = dv[0];
+                    dvr.CreateChildView((string)null);
+                }
+            );
         }
 
         [Fact]
         public void CreateChildViewNullDataRelationArg()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataView dv = CreateTestView();
-                DataRowView dvr = dv[0];
-                dvr.CreateChildView((DataRelation)null);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataView dv = CreateTestView();
+                    DataRowView dvr = dv[0];
+                    dvr.CreateChildView((DataRelation)null);
+                }
+            );
         }
 
         [Fact]
         public void CreateChildViewNonExistentName()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataView dv = CreateTestView();
-                DataRowView dvr = dv[0];
-                dvr.CreateChildView("nothing");
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    DataView dv = CreateTestView();
+                    DataRowView dvr = dv[0];
+                    dvr.CreateChildView("nothing");
+                }
+            );
         }
 
         [Fact]
@@ -133,16 +142,16 @@ namespace System.Data.Tests
         public void ItemException()
         {
             Assert.Throws<RowNotInTableException>(() =>
-           {
-               DataTable dt = new DataTable("table");
-               dt.Columns.Add("col");
-               dt.Rows.Add((new object[] { "val" }));
-               DataView dv = new DataView(dt);
-               DataRowView drv = dv.AddNew();
-               drv.Row["col"] = "test";
-               drv.Row.CancelEdit();
-               object o = drv["col"];
-           });
+            {
+                DataTable dt = new DataTable("table");
+                dt.Columns.Add("col");
+                dt.Rows.Add((new object[] { "val" }));
+                DataView dv = new DataView(dt);
+                DataRowView drv = dv.AddNew();
+                drv.Row["col"] = "test";
+                drv.Row.CancelEdit();
+                object o = drv["col"];
+            });
         }
 
         [Fact]

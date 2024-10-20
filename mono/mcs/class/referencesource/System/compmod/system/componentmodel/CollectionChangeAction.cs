@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------
 // <copyright file="CollectionChangeAction.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-    using System.ComponentModel;
-
-    using System.Diagnostics;
-
+namespace System.ComponentModel
+{
     using System;
+    using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Specifies how the collection is changed.</para>
     /// </devdoc>
-    public enum CollectionChangeAction {
+    public enum CollectionChangeAction
+    {
         /// <devdoc>
         ///    <para> Specifies that an element is added to the collection.</para>
         /// </devdoc>
@@ -28,6 +28,6 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>Specifies that the entire collection has changed.</para>
         /// </devdoc>
-        Refresh = 3
+        Refresh = 3,
     }
 }

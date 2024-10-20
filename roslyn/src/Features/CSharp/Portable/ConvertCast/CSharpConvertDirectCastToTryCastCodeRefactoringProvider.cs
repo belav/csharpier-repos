@@ -19,25 +19,39 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
     /// Into:
     ///     var o = 1 as object;
     /// </summary>
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertDirectCastToTryCast), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertDirectCastToTryCast
+        ),
+        Shared
+    ]
     internal partial class CSharpConvertDirectCastToTryCastCodeRefactoringProvider
-        : AbstractConvertCastCodeRefactoringProvider<TypeSyntax, CastExpressionSyntax, BinaryExpressionSyntax>
+        : AbstractConvertCastCodeRefactoringProvider<
+            TypeSyntax,
+            CastExpressionSyntax,
+            BinaryExpressionSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpConvertDirectCastToTryCastCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpConvertDirectCastToTryCastCodeRefactoringProvider() { }
 
-        protected override string GetTitle()
-            => CSharpFeaturesResources.Change_to_as_expression;
+        protected override string GetTitle() => CSharpFeaturesResources.Change_to_as_expression;
 
         protected override int FromKind => (int)SyntaxKind.CastExpression;
 
-        protected override TypeSyntax GetTypeNode(CastExpressionSyntax from)
-            => from.Type;
+        protected override TypeSyntax GetTypeNode(CastExpressionSyntax from) => from.Type;
 
-        protected override BinaryExpressionSyntax ConvertExpression(CastExpressionSyntax castExpression, NullableContext nullableContext, bool isReferenceType)
+        protected override BinaryExpressionSyntax ConvertExpression(
+            CastExpressionSyntax castExpression,
+            NullableContext nullableContext,
+            bool isReferenceType
+        )
         {
             var typeNode = castExpression.Type;
             var expression = castExpression.Expression;
@@ -54,9 +68,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
             // If #1 is present a new line is added after "as" because of elastic trivia on "as"
             // #3 is kept with the expression and moves
             typeNode = typeNode.WithLeadingTrivia(castExpression.OpenParenToken.TrailingTrivia);
-            var middleTrivia = castExpression.CloseParenToken.TrailingTrivia.SkipInitialWhitespace();
+            var middleTrivia =
+                castExpression.CloseParenToken.TrailingTrivia.SkipInitialWhitespace();
             var newLeadingTrivia = castExpression.GetLeadingTrivia().AddRange(middleTrivia);
-            var newTrailingTrivia = typeNode.GetTrailingTrivia().WithoutLeadingBlankLines().AddRange(expression.GetTrailingTrivia().WithoutLeadingBlankLines());
+            var newTrailingTrivia = typeNode
+                .GetTrailingTrivia()
+                .WithoutLeadingBlankLines()
+                .AddRange(expression.GetTrailingTrivia().WithoutLeadingBlankLines());
             expression = expression.WithoutTrailingTrivia();
             typeNode = typeNode.WithoutTrailingTrivia();
 

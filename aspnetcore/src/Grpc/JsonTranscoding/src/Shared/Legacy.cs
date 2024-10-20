@@ -48,16 +48,44 @@ namespace Grpc.Shared;
 // Most of this code will be replaced over time with optimized implementations.
 internal static class Legacy
 {
-    private static readonly Regex TimestampRegex = new Regex(@"^(?<datetime>[0-9]{4}-[01][0-9]-[0-3][0-9]T[012][0-9]:[0-5][0-9]:[0-5][0-9])(?<subseconds>\.[0-9]{1,9})?(?<offset>(Z|[+-][0-1][0-9]:[0-5][0-9]))$", RegexOptions.Compiled);
-    private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    private static readonly Regex TimestampRegex = new Regex(
+        @"^(?<datetime>[0-9]{4}-[01][0-9]-[0-3][0-9]T[012][0-9]:[0-5][0-9]:[0-5][0-9])(?<subseconds>\.[0-9]{1,9})?(?<offset>(Z|[+-][0-1][0-9]:[0-5][0-9]))$",
+        RegexOptions.Compiled
+    );
+    private static readonly DateTime UnixEpoch = new DateTime(
+        1970,
+        1,
+        1,
+        0,
+        0,
+        0,
+        DateTimeKind.Utc
+    );
+
     // Constants determined programmatically, but then hard-coded so they can be constant expressions.
     private const long BclSecondsAtUnixEpoch = 62135596800;
     internal const long UnixSecondsAtBclMaxValue = 253402300799;
     internal const long UnixSecondsAtBclMinValue = -BclSecondsAtUnixEpoch;
     internal const int MaxNanos = Duration.NanosecondsPerSecond - 1;
-    private static readonly int[] SubsecondScalingFactors = { 0, 100000000, 100000000, 10000000, 1000000, 100000, 10000, 1000, 100, 10, 1 };
+    private static readonly int[] SubsecondScalingFactors =
+    {
+        0,
+        100000000,
+        100000000,
+        10000000,
+        1000000,
+        100000,
+        10000,
+        1000,
+        100,
+        10,
+        1,
+    };
 
-    private static readonly Regex DurationRegex = new Regex(@"^(?<sign>-)?(?<int>[0-9]{1,12})(?<subseconds>\.[0-9]{1,9})?s$", RegexOptions.Compiled);
+    private static readonly Regex DurationRegex = new Regex(
+        @"^(?<sign>-)?(?<int>[0-9]{1,12})(?<subseconds>\.[0-9]{1,9})?s$",
+        RegexOptions.Compiled
+    );
 
     public static (long seconds, int nanos) ParseTimestamp(string value)
     {
@@ -76,7 +104,8 @@ internal static class Legacy
                 dateTime,
                 "yyyy-MM-dd'T'HH:mm:ss",
                 CultureInfo.InvariantCulture,
-                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal);
+                DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal
+            );
             // TODO: It would be nice not to have to create all these objects... easy to optimize later though.
             Timestamp timestamp = Timestamp.FromDateTime(parsed);
             int nanosToAdd = 0;
@@ -117,7 +146,10 @@ internal static class Legacy
                 timestamp += new Duration { Nanos = nanosToAdd, Seconds = secondsToAdd };
                 // The resulting timestamp after offset change would be out of our expected range. Currently the Timestamp message doesn't validate this
                 // anywhere, but we shouldn't parse it.
-                if (timestamp.Seconds < UnixSecondsAtBclMinValue || timestamp.Seconds > UnixSecondsAtBclMaxValue)
+                if (
+                    timestamp.Seconds < UnixSecondsAtBclMinValue
+                    || timestamp.Seconds > UnixSecondsAtBclMaxValue
+                )
                 {
                     throw new InvalidOperationException($"Invalid Timestamp value: {value}");
                 }
@@ -132,10 +164,10 @@ internal static class Legacy
     }
 
     private static bool IsNormalized(long seconds, int nanoseconds) =>
-        nanoseconds >= 0 &&
-        nanoseconds <= MaxNanos &&
-        seconds >= UnixSecondsAtBclMinValue &&
-        seconds <= UnixSecondsAtBclMaxValue;
+        nanoseconds >= 0
+        && nanoseconds <= MaxNanos
+        && seconds >= UnixSecondsAtBclMinValue
+        && seconds <= UnixSecondsAtBclMaxValue;
 
     public static string GetTimestampText(int nanos, long seconds)
     {
@@ -144,7 +176,9 @@ internal static class Legacy
             // Use .NET's formatting for the value down to the second, including an opening double quote (as it's a string value)
             DateTime dateTime = UnixEpoch.AddSeconds(seconds);
             var builder = new StringBuilder();
-            builder.Append(dateTime.ToString("yyyy'-'MM'-'dd'T'HH:mm:ss", CultureInfo.InvariantCulture));
+            builder.Append(
+                dateTime.ToString("yyyy'-'MM'-'dd'T'HH:mm:ss", CultureInfo.InvariantCulture)
+            );
 
             if (nanos != 0)
             {
@@ -274,7 +308,7 @@ internal static class Legacy
         var builder = new StringBuilder(text.Length * 2);
         // Note: this is probably unnecessary now, but currently retained to be as close as possible to the
         // C++, whilst still throwing an exception on underscores.
-        bool wasNotUnderscore = false;  // Initialize to false for case 1 (below)
+        bool wasNotUnderscore = false; // Initialize to false for case 1 (below)
         bool wasNotCap = false;
 
         for (int i = 0; i < text.Length; i++)
@@ -291,12 +325,21 @@ internal static class Legacy
                 //    (e.g. "GoogleLAB" => "google_lab")
                 // 4) Followed by a lowercase: "...ABc..." => "...a_bc..."
                 //    (e.g. "GBike" => "g_bike")
-                if (wasNotUnderscore &&               //            case 1 out
-                    (wasNotCap ||                     // case 2 in, case 3 out
-                     (i + 1 < text.Length &&         //            case 3 out
-                      (text[i + 1] >= 'a' && text[i + 1] <= 'z')))) // ascii_islower(text[i + 1])
-                {  // case 4 in
-                   // We add an underscore for case 2 and case 4.
+                if (
+                    wasNotUnderscore
+                    && //            case 1 out
+                    (
+                        wasNotCap
+                        || // case 2 in, case 3 out
+                        (
+                            i + 1 < text.Length
+                            && //            case 3 out
+                            (text[i + 1] >= 'a' && text[i + 1] <= 'z')
+                        )
+                    )
+                ) // ascii_islower(text[i + 1])
+                { // case 4 in
+                    // We add an underscore for case 2 and case 4.
                     builder.Append('_');
                 }
                 // ascii_tolower, but we already know that c *is* an upper case ASCII character...
@@ -371,8 +414,10 @@ internal static class Legacy
     // The need for this is unfortunate, as is its unbounded size, but realistically it shouldn't cause issues.
     internal static class OriginalEnumValueHelper
     {
-        private static readonly ConcurrentDictionary<Type, Dictionary<object, string>> _dictionaries
-            = new ConcurrentDictionary<Type, Dictionary<object, string>>();
+        private static readonly ConcurrentDictionary<
+            Type,
+            Dictionary<object, string>
+        > _dictionaries = new ConcurrentDictionary<Type, Dictionary<object, string>>();
 
         internal static string? GetOriginalName(object value)
         {
@@ -394,15 +439,21 @@ internal static class Legacy
 
         private static Dictionary<object, string> GetNameMapping(Type enumType)
         {
-            return enumType.GetTypeInfo().DeclaredFields
-                .Where(f => f.IsStatic)
-                .Where(f => f.GetCustomAttributes<OriginalNameAttribute>()
-                             .FirstOrDefault()?.PreferredAlias ?? true)
-                .ToDictionary(f => f.GetValue(null)!,
-                              f => f.GetCustomAttributes<OriginalNameAttribute>()
-                                    .FirstOrDefault()
-                                    // If the attribute hasn't been applied, fall back to the name of the field.
-                                    ?.Name ?? f.Name);
+            return enumType
+                .GetTypeInfo()
+                .DeclaredFields.Where(f => f.IsStatic)
+                .Where(f =>
+                    f.GetCustomAttributes<OriginalNameAttribute>().FirstOrDefault()?.PreferredAlias
+                    ?? true
+                )
+                .ToDictionary(
+                    f => f.GetValue(null)!,
+                    f =>
+                        f.GetCustomAttributes<OriginalNameAttribute>()
+                            .FirstOrDefault()
+                            // If the attribute hasn't been applied, fall back to the name of the field.
+                            ?.Name ?? f.Name
+                );
         }
     }
 }

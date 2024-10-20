@@ -15,34 +15,61 @@ public class CosmosTransactionManagerTest
 
         Assert.Equal(
             CosmosStrings.TransactionsNotSupported,
-            Assert.Throws<NotSupportedException>(() => transactionManager.BeginTransaction()).Message);
+            Assert
+                .Throws<NotSupportedException>(() => transactionManager.BeginTransaction())
+                .Message
+        );
 
         Assert.Equal(
             CosmosStrings.TransactionsNotSupported,
-            (await Assert.ThrowsAsync<NotSupportedException>(async () => await transactionManager.BeginTransactionAsync())).Message);
+            (
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    async () => await transactionManager.BeginTransactionAsync()
+                )
+            ).Message
+        );
 
         Assert.Equal(
             CosmosStrings.TransactionsNotSupported,
-            Assert.Throws<NotSupportedException>(() => transactionManager.CommitTransaction()).Message);
+            Assert
+                .Throws<NotSupportedException>(() => transactionManager.CommitTransaction())
+                .Message
+        );
 
         Assert.Equal(
             CosmosStrings.TransactionsNotSupported,
-            (await Assert.ThrowsAsync<NotSupportedException>(async () => await transactionManager.CommitTransactionAsync())).Message);
+            (
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    async () => await transactionManager.CommitTransactionAsync()
+                )
+            ).Message
+        );
 
         Assert.Equal(
             CosmosStrings.TransactionsNotSupported,
-            Assert.Throws<NotSupportedException>(() => transactionManager.RollbackTransaction()).Message);
+            Assert
+                .Throws<NotSupportedException>(() => transactionManager.RollbackTransaction())
+                .Message
+        );
 
         Assert.Equal(
             CosmosStrings.TransactionsNotSupported,
-            (await Assert.ThrowsAsync<NotSupportedException>(async () => await transactionManager.RollbackTransactionAsync())).Message);
+            (
+                await Assert.ThrowsAsync<NotSupportedException>(
+                    async () => await transactionManager.RollbackTransactionAsync()
+                )
+            ).Message
+        );
 
         Assert.Null(transactionManager.CurrentTransaction);
         Assert.Null(transactionManager.EnlistedTransaction);
 
         Assert.Equal(
             CosmosStrings.TransactionsNotSupported,
-            Assert.Throws<NotSupportedException>(() => transactionManager.EnlistTransaction(null)).Message);
+            Assert
+                .Throws<NotSupportedException>(() => transactionManager.EnlistTransaction(null))
+                .Message
+        );
 
         transactionManager.ResetState();
         await transactionManager.ResetStateAsync();

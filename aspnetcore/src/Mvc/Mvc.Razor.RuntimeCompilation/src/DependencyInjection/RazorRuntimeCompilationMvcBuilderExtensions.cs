@@ -29,7 +29,10 @@ public static class RazorRuntimeCompilationMvcBuilderExtensions
     /// <param name="builder">The <see cref="IMvcBuilder" />.</param>
     /// <param name="setupAction">An action to configure the <see cref="MvcRazorRuntimeCompilationOptions"/>.</param>
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
-    public static IMvcBuilder AddRazorRuntimeCompilation(this IMvcBuilder builder, Action<MvcRazorRuntimeCompilationOptions> setupAction)
+    public static IMvcBuilder AddRazorRuntimeCompilation(
+        this IMvcBuilder builder,
+        Action<MvcRazorRuntimeCompilationOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(setupAction);

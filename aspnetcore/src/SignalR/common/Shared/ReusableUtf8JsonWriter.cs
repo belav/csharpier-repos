@@ -21,13 +21,14 @@ internal sealed class ReusableUtf8JsonWriter
 
     public ReusableUtf8JsonWriter(IBufferWriter<byte> stream)
     {
-        _writer = new Utf8JsonWriter(stream, new JsonWriterOptions()
-        {
+        _writer = new Utf8JsonWriter(
+            stream,
+            new JsonWriterOptions() {
 #if !DEBUG
-            SkipValidation = true,
+                SkipValidation = true,
 #endif
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-        });
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }
+        );
     }
 
     public static ReusableUtf8JsonWriter Get(IBufferWriter<byte> stream)

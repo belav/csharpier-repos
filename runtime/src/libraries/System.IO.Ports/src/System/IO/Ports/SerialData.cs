@@ -9,6 +9,6 @@ namespace System.IO.Ports
         Chars = 0x01,
 
         // EV_RXFLAG
-        Eof = 0x02
+        Eof = 0x02,
     }
 }

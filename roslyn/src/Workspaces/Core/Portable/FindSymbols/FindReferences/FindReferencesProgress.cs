@@ -12,36 +12,20 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     {
         public static readonly IFindReferencesProgress Instance = new NoOpFindReferencesProgress();
 
-        private NoOpFindReferencesProgress()
-        {
-        }
+        private NoOpFindReferencesProgress() { }
 
-        public void ReportProgress(int current, int maximum)
-        {
-        }
+        public void ReportProgress(int current, int maximum) { }
 
-        public void OnCompleted()
-        {
-        }
+        public void OnCompleted() { }
 
-        public void OnStarted()
-        {
-        }
+        public void OnStarted() { }
 
-        public void OnDefinitionFound(ISymbol symbol)
-        {
-        }
+        public void OnDefinitionFound(ISymbol symbol) { }
 
-        public void OnReferenceFound(ISymbol symbol, ReferenceLocation location)
-        {
-        }
+        public void OnReferenceFound(ISymbol symbol, ReferenceLocation location) { }
 
-        public void OnFindInDocumentStarted(Document document)
-        {
-        }
+        public void OnFindInDocumentStarted(Document document) { }
 
-        public void OnFindInDocumentCompleted(Document document)
-        {
-        }
+        public void OnFindInDocumentCompleted(Document document) { }
     }
 }

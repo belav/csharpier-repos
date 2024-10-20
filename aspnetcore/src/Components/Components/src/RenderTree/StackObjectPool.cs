@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Components.RenderTree;
 // balanced as in a stack. It retains up to 'maxPreservedItems' instances in
 // memory, then for any further requests it supplies untracked instances.
 
-internal sealed class StackObjectPool<T> where T : class
+internal sealed class StackObjectPool<T>
+    where T : class
 {
     private readonly int _maxPreservedItems;
     private readonly Func<T> _instanceFactory;
@@ -18,7 +19,8 @@ internal sealed class StackObjectPool<T> where T : class
     public StackObjectPool(int maxPreservedItems, Func<T> instanceFactory)
     {
         _maxPreservedItems = maxPreservedItems;
-        _instanceFactory = instanceFactory ?? throw new ArgumentNullException(nameof(instanceFactory));
+        _instanceFactory =
+            instanceFactory ?? throw new ArgumentNullException(nameof(instanceFactory));
         _contents = new T[_maxPreservedItems];
     }
 
@@ -61,7 +63,9 @@ internal sealed class StackObjectPool<T> where T : class
             var expectedInstance = _contents[_numSuppliedItems - 1];
             if (!ReferenceEquals(instance, expectedInstance))
             {
-                throw new ArgumentException($"Attempting to return wrong pooled instance. {nameof(Get)}/{nameof(Return)} calls must form a stack.");
+                throw new ArgumentException(
+                    $"Attempting to return wrong pooled instance. {nameof(Get)}/{nameof(Return)} calls must form a stack."
+                );
             }
         }
 

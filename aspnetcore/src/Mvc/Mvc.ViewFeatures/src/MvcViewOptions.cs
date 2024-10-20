@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.Mvc;
 /// </summary>
 public class MvcViewOptions : IEnumerable<ICompatibilitySwitch>
 {
-    private readonly IReadOnlyList<ICompatibilitySwitch> _switches = Array.Empty<ICompatibilitySwitch>();
+    private readonly IReadOnlyList<ICompatibilitySwitch> _switches =
+        Array.Empty<ICompatibilitySwitch>();
     private HtmlHelperOptions _htmlHelperOptions = new HtmlHelperOptions();
 
     /// <summary>
@@ -44,7 +45,8 @@ public class MvcViewOptions : IEnumerable<ICompatibilitySwitch>
     public IList<IClientModelValidatorProvider> ClientModelValidatorProviders { get; } =
         new List<IClientModelValidatorProvider>();
 
-    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() => _switches.GetEnumerator();
+    IEnumerator<ICompatibilitySwitch> IEnumerable<ICompatibilitySwitch>.GetEnumerator() =>
+        _switches.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => _switches.GetEnumerator();
 }

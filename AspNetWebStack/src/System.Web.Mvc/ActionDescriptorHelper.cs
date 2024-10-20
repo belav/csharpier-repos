@@ -10,15 +10,33 @@ namespace System.Web.Mvc
     {
         public static ICollection<ActionSelector> GetSelectors(MethodInfo methodInfo)
         {
-            ActionMethodSelectorAttribute[] attrs = (ActionMethodSelectorAttribute[])methodInfo.GetCustomAttributes(typeof(ActionMethodSelectorAttribute), inherit: true);
-            ActionSelector[] selectors = Array.ConvertAll(attrs, attr => (ActionSelector)(controllerContext => attr.IsValidForRequest(controllerContext, methodInfo)));
+            ActionMethodSelectorAttribute[] attrs = (ActionMethodSelectorAttribute[])
+                methodInfo.GetCustomAttributes(
+                    typeof(ActionMethodSelectorAttribute),
+                    inherit: true
+                );
+            ActionSelector[] selectors = Array.ConvertAll(
+                attrs,
+                attr =>
+                    (ActionSelector)(
+                        controllerContext => attr.IsValidForRequest(controllerContext, methodInfo)
+                    )
+            );
             return selectors;
         }
 
         public static ICollection<ActionNameSelector> GetNameSelectors(MethodInfo methodInfo)
         {
-            ActionNameSelectorAttribute[] attrs = (ActionNameSelectorAttribute[])methodInfo.GetCustomAttributes(typeof(ActionNameSelectorAttribute), inherit: true);
-            ActionNameSelector[] selectors = Array.ConvertAll(attrs, attr => (ActionNameSelector)((controllerContext, actionName) => attr.IsValidName(controllerContext, actionName, methodInfo)));
+            ActionNameSelectorAttribute[] attrs = (ActionNameSelectorAttribute[])
+                methodInfo.GetCustomAttributes(typeof(ActionNameSelectorAttribute), inherit: true);
+            ActionNameSelector[] selectors = Array.ConvertAll(
+                attrs,
+                attr =>
+                    (ActionNameSelector)(
+                        (controllerContext, actionName) =>
+                            attr.IsValidName(controllerContext, actionName, methodInfo)
+                    )
+            );
             return selectors;
         }
 
@@ -32,27 +50,49 @@ namespace System.Web.Mvc
             return methodInfo.GetCustomAttributes(inherit);
         }
 
-        public static object[] GetCustomAttributes(MemberInfo methodInfo, Type attributeType, bool inherit)
+        public static object[] GetCustomAttributes(
+            MemberInfo methodInfo,
+            Type attributeType,
+            bool inherit
+        )
         {
             return methodInfo.GetCustomAttributes(attributeType, inherit);
         }
 
-        public static ParameterDescriptor[] GetParameters(ActionDescriptor actionDescriptor, MethodInfo methodInfo, ref ParameterDescriptor[] parametersCache)
+        public static ParameterDescriptor[] GetParameters(
+            ActionDescriptor actionDescriptor,
+            MethodInfo methodInfo,
+            ref ParameterDescriptor[] parametersCache
+        )
         {
-            ParameterDescriptor[] parameters = LazilyFetchParametersCollection(actionDescriptor, methodInfo, ref parametersCache);
+            ParameterDescriptor[] parameters = LazilyFetchParametersCollection(
+                actionDescriptor,
+                methodInfo,
+                ref parametersCache
+            );
 
             // need to clone array so that user modifications aren't accidentally stored
             return (ParameterDescriptor[])parameters.Clone();
         }
 
-        private static ParameterDescriptor[] LazilyFetchParametersCollection(ActionDescriptor actionDescriptor, MethodInfo methodInfo, ref ParameterDescriptor[] parametersCache)
+        private static ParameterDescriptor[] LazilyFetchParametersCollection(
+            ActionDescriptor actionDescriptor,
+            MethodInfo methodInfo,
+            ref ParameterDescriptor[] parametersCache
+        )
         {
             // Frequently called, so ensure the delegates remain static
             return DescriptorUtil.LazilyFetchOrCreateDescriptors(
                 cacheLocation: ref parametersCache,
                 initializer: (CreateDescriptorState state) => state.MethodInfo.GetParameters(),
-                converter: (ParameterInfo parameterInfo, CreateDescriptorState state) => new ReflectedParameterDescriptor(parameterInfo, state.ActionDescriptor),
-                state: new CreateDescriptorState() { ActionDescriptor = actionDescriptor, MethodInfo = methodInfo });
+                converter: (ParameterInfo parameterInfo, CreateDescriptorState state) =>
+                    new ReflectedParameterDescriptor(parameterInfo, state.ActionDescriptor),
+                state: new CreateDescriptorState()
+                {
+                    ActionDescriptor = actionDescriptor,
+                    MethodInfo = methodInfo,
+                }
+            );
         }
 
         // Used to pass generic arguments to frequently called delegates, so keep as a struct to prevent heap allocation

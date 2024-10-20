@@ -16,7 +16,8 @@ public partial class RoutePatternHighlighterTests
     public async Task AfterLiteral_NoHighlight()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -30,14 +31,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task AfterParameterStart_NoHighlight()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -51,14 +54,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task BeforeParameterName_CompleteParameter_HighlightName()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -72,14 +77,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task BeforeParameterName_ParameterWithConstraint_HighlightName()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -93,14 +100,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task MiddleParameterName_CompleteParameter_HighlightName()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -114,14 +123,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task MiddleConstraint_ParameterWithConstraint_NoHighlight()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System.Diagnostics.CodeAnalysis;
 
 class Program
@@ -135,14 +146,16 @@ class Program
     {
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_ExtensionMethod_MatchingDelegate_HighlightParameter()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -156,14 +169,16 @@ class Program
         builder.MapGet(@""{$$[|id|]}"", (string [|id|]) => $""{[|id|]}"");
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_ExtensionMethod_MatchingDelegate_RouteMetadataWithoutName_HighlightParameter()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -178,14 +193,16 @@ class Program
         builder.MapGet(@""{$$[|id|]}"", ([FromRoute]string [|id|]) => $""{[|id|]}"");
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_ExtensionMethod_MatchingDelegate_RouteMetadataWithName_HighlightParameter()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -200,14 +217,16 @@ class Program
         builder.MapGet(@""{$$[|id|]}"", ([FromRoute(Name = ""id"")]string [|id1|]) => $""{[|id1|]}"");
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_ExtensionMethod_MatchingDelegate_RouteMetadataWithName_MultipleMatches_HighlightParameter()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -222,14 +241,16 @@ class Program
         builder.MapGet(@""{$$[|id|]}"", ([FromRoute(Name = ""id"")]string [|id1|], string [|id|]) => $""{[|id1|]}"");
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_MatchingDelegate_HighlightParameter()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -241,14 +262,16 @@ class Program
         EndpointRouteBuilderExtensions.MapGet(null, @""{$$[|id|]}"", (string [|id|]) => $""{[|id|]}"");
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_MatchingDelegate_AsParameters_HighlightProperty()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -272,14 +295,16 @@ public class PageData
     public int PageNumber { get; set; }
     public int PageIndex { get; set; }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_MatchingDelegate_AsParameters_DontHighlightArgument()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -303,14 +328,16 @@ public class PageData
     public int PageNumber { get; set; }
     public int PageIndex { get; set; }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_MatchingMethod_HighlightParameter()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -327,14 +354,16 @@ class Program
         return $""{[|id|]}"";
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_MatchingAction_HighlightParameter()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -355,14 +384,16 @@ public class TestController
         return null;
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_MatchingActionWithNamespace_HighlightParameter()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -386,14 +417,16 @@ namespace Test
         }
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_NestedControllerMatchingAction_NoHighlight()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -417,14 +450,16 @@ public class OuterClass
         }
     }
 }
-");
+"
+        );
     }
 
     [Fact]
     public async Task InParameterName_MatchingDelegateWithConflictingIdentifer_DontHighlightConflict()
     {
         // Arrange & Act & Assert
-        await TestHighlightingAsync(@"
+        await TestHighlightingAsync(
+            @"
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Builder;
@@ -447,12 +482,18 @@ class Program
         id;
     }
 }
-");
+"
+        );
     }
 
     private async Task TestHighlightingAsync(string source)
     {
-        MarkupTestFile.GetPositionAndSpans(source, out var output, out int cursorPosition, out var spans);
+        MarkupTestFile.GetPositionAndSpans(
+            source,
+            out var output,
+            out int cursorPosition,
+            out var spans
+        );
 
         var tempSpans = spans.ToList();
         var highlightSpans = await Runner.GetHighlightingAsync(cursorPosition, output);
@@ -466,7 +507,9 @@ class Program
 
         if (tempSpans.Count > 0)
         {
-            throw new Exception($"Unmatched highlight spans in document: {string.Join(", ", tempSpans)}");
+            throw new Exception(
+                $"Unmatched highlight spans in document: {string.Join(", ", tempSpans)}"
+            );
         }
     }
 }

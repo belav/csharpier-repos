@@ -13,12 +13,13 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///     application or database provider code. If this is a problem for your application or provider, then please file
 ///     an issue at <see href="https://github.com/dotnet/efcore">github.com/dotnet/efcore</see>.
 /// </remarks>
-public sealed class TableExpression : TableExpressionBase, IClonableTableExpressionBase, ITableBasedExpression
+public sealed class TableExpression
+    : TableExpressionBase,
+        IClonableTableExpressionBase,
+        ITableBasedExpression
 {
     internal TableExpression(ITableBase table)
-        : this(table, annotations: null)
-    {
-    }
+        : this(table, annotations: null) { }
 
     private TableExpression(ITableBase table, IEnumerable<IAnnotation>? annotations)
         : base(alias: table.Name[..1].ToLowerInvariant(), annotations)
@@ -54,12 +55,12 @@ public sealed class TableExpression : TableExpressionBase, IClonableTableExpress
     public ITableBase Table { get; }
 
     /// <inheritdoc />
-    protected override TableExpressionBase CreateWithAnnotations(IEnumerable<IAnnotation> annotations)
-        => new TableExpression(Table, annotations) { Alias = Alias };
+    protected override TableExpressionBase CreateWithAnnotations(
+        IEnumerable<IAnnotation> annotations
+    ) => new TableExpression(Table, annotations) { Alias = Alias };
 
     /// <inheritdoc />
-    ITableBase ITableBasedExpression.Table
-        => Table;
+    ITableBase ITableBasedExpression.Table => Table;
 
     /// <inheritdoc />
     protected override void Print(ExpressionPrinter expressionPrinter)
@@ -76,15 +77,14 @@ public sealed class TableExpression : TableExpressionBase, IClonableTableExpress
     }
 
     /// <inheritdoc />
-    public TableExpressionBase Clone()
-        => CreateWithAnnotations(GetAnnotations());
+    public TableExpressionBase Clone() => CreateWithAnnotations(GetAnnotations());
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
         // This should be reference equal only.
-        => obj != null && ReferenceEquals(this, obj);
+        =>
+        obj != null && ReferenceEquals(this, obj);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Name, Schema);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Name, Schema);
 }

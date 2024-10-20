@@ -1,5 +1,5 @@
-// 
-// System.Xml.Serialization.KeyHelper.cs 
+//
+// System.Xml.Serialization.KeyHelper.cs
 //
 // Author:
 //   Lluis Sanchez Gual (lluis@ximian.com)
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,49 +32,52 @@ using System.Collections;
 using System.Globalization;
 using System.Text;
 
-namespace System.Xml.Serialization 
+namespace System.Xml.Serialization
 {
-	internal class KeyHelper
-	{
-		public static void AddField (StringBuilder sb, int n, string val)
-		{
-			AddField (sb, n, val, null);
-		}
-		
-		public static void AddField (StringBuilder sb, int n, string val, string def)
-		{
-			if (val != def) {
-				sb.Append (n.ToString());
-				sb.Append (val.Length.ToString(CultureInfo.InvariantCulture));
-				sb.Append (val);
-			}
-		}
-		
-		public static void AddField (StringBuilder sb, int n, bool val)
-		{
-			AddField (sb, n, val, false);
-		}
-		
-		public static void AddField (StringBuilder sb, int n, bool val, bool def)
-		{
-			if (val != def)
-				sb.Append (n.ToString());
-		}
-		
-		public static void AddField (StringBuilder sb, int n, int val, int def)
-		{
-			if (val != def) {
-				sb.Append (n.ToString());
-				sb.Append (val.ToString(CultureInfo.InvariantCulture));
-			}
-		}
-		
-		public static void AddField (StringBuilder sb, int n, Type val)
-		{
-			if (val != null) {
-				sb.Append (n.ToString(CultureInfo.InvariantCulture));
-				sb.Append (val.ToString());
-			}
-		}
-	}
+    internal class KeyHelper
+    {
+        public static void AddField(StringBuilder sb, int n, string val)
+        {
+            AddField(sb, n, val, null);
+        }
+
+        public static void AddField(StringBuilder sb, int n, string val, string def)
+        {
+            if (val != def)
+            {
+                sb.Append(n.ToString());
+                sb.Append(val.Length.ToString(CultureInfo.InvariantCulture));
+                sb.Append(val);
+            }
+        }
+
+        public static void AddField(StringBuilder sb, int n, bool val)
+        {
+            AddField(sb, n, val, false);
+        }
+
+        public static void AddField(StringBuilder sb, int n, bool val, bool def)
+        {
+            if (val != def)
+                sb.Append(n.ToString());
+        }
+
+        public static void AddField(StringBuilder sb, int n, int val, int def)
+        {
+            if (val != def)
+            {
+                sb.Append(n.ToString());
+                sb.Append(val.ToString(CultureInfo.InvariantCulture));
+            }
+        }
+
+        public static void AddField(StringBuilder sb, int n, Type val)
+        {
+            if (val != null)
+            {
+                sb.Append(n.ToString(CultureInfo.InvariantCulture));
+                sb.Append(val.ToString());
+            }
+        }
+    }
 }

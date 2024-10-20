@@ -14,7 +14,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Snippets
 {
     [ExportSnippetProvider(nameof(ISnippetProvider), LanguageNames.CSharp), Shared]
-    internal sealed class CSharpReversedForLoopSnippetProvider : AbstractCSharpForLoopSnippetProvider
+    internal sealed class CSharpReversedForLoopSnippetProvider
+        : AbstractCSharpForLoopSnippetProvider
     {
         public override string Identifier => "forr";
 
@@ -26,20 +27,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpReversedForLoopSnippetProvider()
+        public CSharpReversedForLoopSnippetProvider() { }
+
+        protected override ExpressionSyntax GenerateInitializerValue(
+            SyntaxGenerator generator,
+            SyntaxNode? inlineExpression
+        )
         {
+            var subtractFrom =
+                inlineExpression?.WithoutLeadingTrivia() ?? generator.IdentifierName("length");
+            return (ExpressionSyntax)
+                generator.SubtractExpression(subtractFrom, generator.LiteralExpression(1));
         }
 
-        protected override ExpressionSyntax GenerateInitializerValue(SyntaxGenerator generator, SyntaxNode? inlineExpression)
-        {
-            var subtractFrom = inlineExpression?.WithoutLeadingTrivia() ?? generator.IdentifierName("length");
-            return (ExpressionSyntax)generator.SubtractExpression(subtractFrom, generator.LiteralExpression(1));
-        }
+        protected override ExpressionSyntax GenerateRightSideOfCondition(
+            SyntaxGenerator generator,
+            SyntaxNode? inlineExpression
+        ) => (ExpressionSyntax)generator.LiteralExpression(0);
 
-        protected override ExpressionSyntax GenerateRightSideOfCondition(SyntaxGenerator generator, SyntaxNode? inlineExpression)
-            => (ExpressionSyntax)generator.LiteralExpression(0);
-
-        protected override void AddSpecificPlaceholders(MultiDictionary<string, int> placeholderBuilder, ExpressionSyntax initializer, ExpressionSyntax rightOfCondition)
+        protected override void AddSpecificPlaceholders(
+            MultiDictionary<string, int> placeholderBuilder,
+            ExpressionSyntax initializer,
+            ExpressionSyntax rightOfCondition
+        )
         {
             if (!ConstructedFromInlineExpression)
             {

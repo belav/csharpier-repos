@@ -13,11 +13,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class ManyToManyJoinEntityTypeConvention :
-    ISkipNavigationAddedConvention,
-    ISkipNavigationInverseChangedConvention,
-    ISkipNavigationForeignKeyChangedConvention,
-    ISkipNavigationRemovedConvention
+public class ManyToManyJoinEntityTypeConvention
+    : ISkipNavigationAddedConvention,
+        ISkipNavigationInverseChangedConvention,
+        ISkipNavigationForeignKeyChangedConvention,
+        ISkipNavigationRemovedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="ManyToManyJoinEntityTypeConvention" />.
@@ -36,32 +36,37 @@ public class ManyToManyJoinEntityTypeConvention :
     /// <inheritdoc />
     public virtual void ProcessSkipNavigationAdded(
         IConventionSkipNavigationBuilder skipNavigationBuilder,
-        IConventionContext<IConventionSkipNavigationBuilder> context)
-        => TryCreateJoinEntityType(skipNavigationBuilder);
+        IConventionContext<IConventionSkipNavigationBuilder> context
+    ) => TryCreateJoinEntityType(skipNavigationBuilder);
 
     /// <inheritdoc />
     public virtual void ProcessSkipNavigationInverseChanged(
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         IConventionSkipNavigation? inverse,
         IConventionSkipNavigation? oldInverse,
-        IConventionContext<IConventionSkipNavigation> context)
-        => TryCreateJoinEntityType(skipNavigationBuilder);
+        IConventionContext<IConventionSkipNavigation> context
+    ) => TryCreateJoinEntityType(skipNavigationBuilder);
 
     /// <inheritdoc />
     public virtual void ProcessSkipNavigationForeignKeyChanged(
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         IConventionForeignKey? foreignKey,
         IConventionForeignKey? oldForeignKey,
-        IConventionContext<IConventionForeignKey> context)
+        IConventionContext<IConventionForeignKey> context
+    )
     {
         var joinEntityType = oldForeignKey?.DeclaringEntityType;
         var navigation = skipNavigationBuilder.Metadata;
-        if (joinEntityType is not null
+        if (
+            joinEntityType is not null
             && joinEntityType.IsInModel
             && navigation.IsCollection
-            && navigation.ForeignKey?.DeclaringEntityType != joinEntityType)
+            && navigation.ForeignKey?.DeclaringEntityType != joinEntityType
+        )
         {
-            ((InternalModelBuilder)joinEntityType.Model.Builder).RemoveImplicitJoinEntity((EntityType)joinEntityType);
+            ((InternalModelBuilder)joinEntityType.Model.Builder).RemoveImplicitJoinEntity(
+                (EntityType)joinEntityType
+            );
         }
     }
 
@@ -69,14 +74,15 @@ public class ManyToManyJoinEntityTypeConvention :
     public virtual void ProcessSkipNavigationRemoved(
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionSkipNavigation navigation,
-        IConventionContext<IConventionSkipNavigation> context)
+        IConventionContext<IConventionSkipNavigation> context
+    )
     {
         var joinEntityType = navigation.ForeignKey?.DeclaringEntityType;
-        if (joinEntityType is not null
-            && joinEntityType.IsInModel
-            && navigation.IsCollection)
+        if (joinEntityType is not null && joinEntityType.IsInModel && navigation.IsCollection)
         {
-            ((InternalModelBuilder)joinEntityType.Model.Builder).RemoveImplicitJoinEntity((EntityType)joinEntityType);
+            ((InternalModelBuilder)joinEntityType.Model.Builder).RemoveImplicitJoinEntity(
+                (EntityType)joinEntityType
+            );
         }
     }
 
@@ -112,7 +118,8 @@ public class ManyToManyJoinEntityTypeConvention :
         var inverseSkipNavigation = skipNavigation.Inverse;
         Check.DebugAssert(
             inverseSkipNavigation?.Inverse == skipNavigation,
-            "Inverse's inverse should be the original skip navigation");
+            "Inverse's inverse should be the original skip navigation"
+        );
 
         var declaringEntityType = skipNavigation.DeclaringEntityType;
         var inverseEntityType = inverseSkipNavigation.DeclaringEntityType;
@@ -123,9 +130,10 @@ public class ManyToManyJoinEntityTypeConvention :
         var inverseName = !inverseEntityType.HasSharedClrType
             ? inverseEntityType.ClrType.ShortDisplayName()
             : inverseEntityType.ShortName();
-        joinEntityTypeName = StringComparer.Ordinal.Compare(joinEntityTypeName, inverseName) < 0
-            ? joinEntityTypeName + inverseName
-            : inverseName + joinEntityTypeName;
+        joinEntityTypeName =
+            StringComparer.Ordinal.Compare(joinEntityTypeName, inverseName) < 0
+                ? joinEntityTypeName + inverseName
+                : inverseName + joinEntityTypeName;
 
         if (model.FindEntityType(joinEntityTypeName) != null)
         {
@@ -133,7 +141,8 @@ public class ManyToManyJoinEntityTypeConvention :
             joinEntityTypeName = Uniquifier.Uniquify(
                 joinEntityTypeName,
                 otherIdentifiers,
-                int.MaxValue);
+                int.MaxValue
+            );
         }
 
         return joinEntityTypeName;
@@ -146,11 +155,15 @@ public class ManyToManyJoinEntityTypeConvention :
     /// <param name="skipNavigation">The target skip navigation.</param>
     protected virtual void CreateJoinEntityType(
         string joinEntityTypeName,
-        IConventionSkipNavigation skipNavigation)
+        IConventionSkipNavigation skipNavigation
+    )
     {
         var model = skipNavigation.DeclaringEntityType.Model;
 
-        var joinEntityTypeBuilder = model.Builder.SharedTypeEntity(joinEntityTypeName, Model.DefaultPropertyBagType)!;
+        var joinEntityTypeBuilder = model.Builder.SharedTypeEntity(
+            joinEntityTypeName,
+            Model.DefaultPropertyBagType
+        )!;
 
         var inverseSkipNavigation = skipNavigation.Inverse!;
         CreateSkipNavigationForeignKey(skipNavigation, joinEntityTypeBuilder);
@@ -165,14 +178,16 @@ public class ManyToManyJoinEntityTypeConvention :
     /// <returns>The created foreign key.</returns>
     protected virtual IConventionForeignKey CreateSkipNavigationForeignKey(
         IConventionSkipNavigation skipNavigation,
-        IConventionEntityTypeBuilder joinEntityTypeBuilder)
+        IConventionEntityTypeBuilder joinEntityTypeBuilder
+    )
     {
         var foreignKey = ((InternalEntityTypeBuilder)joinEntityTypeBuilder)
             .HasRelationship(
                 (EntityType)skipNavigation.DeclaringEntityType,
                 ConfigurationSource.Convention,
                 required: true,
-                skipNavigation.Inverse!.Name)!
+                skipNavigation.Inverse!.Name
+            )!
             .IsUnique(false, ConfigurationSource.Convention)!
             .Metadata;
 

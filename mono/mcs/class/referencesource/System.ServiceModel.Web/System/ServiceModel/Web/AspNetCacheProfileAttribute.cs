@@ -19,36 +19,49 @@ namespace System.ServiceModel.Web
             this.cacheProfileName = cacheProfileName;
         }
 
-        public string CacheProfileName 
+        public string CacheProfileName
         {
             get { return this.cacheProfileName; }
         }
-                
-        public void AddBindingParameters(OperationDescription operationDescription, BindingParameterCollection bindingParameters)
-        {
-        } //  do nothing 
 
-        public void ApplyClientBehavior(OperationDescription operationDescription, ClientOperation clientOperation)
-        {
-        } // do nothing
+        public void AddBindingParameters(
+            OperationDescription operationDescription,
+            BindingParameterCollection bindingParameters
+        ) { } //  do nothing
 
-        public void ApplyDispatchBehavior(OperationDescription operationDescription, DispatchOperation dispatchOperation)
+        public void ApplyClientBehavior(
+            OperationDescription operationDescription,
+            ClientOperation clientOperation
+        ) { } // do nothing
+
+        public void ApplyDispatchBehavior(
+            OperationDescription operationDescription,
+            DispatchOperation dispatchOperation
+        )
         {
             if (!AspNetEnvironment.Current.AspNetCompatibilityEnabled)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.CacheProfileOnlySupportedInAspNetCompatibilityMode));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR2.CacheProfileOnlySupportedInAspNetCompatibilityMode
+                    )
+                );
             }
-            
+
             if (operationDescription.Behaviors.Find<WebGetAttribute>() == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.CacheProfileAttributeOnlyWithGet));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR2.CacheProfileAttributeOnlyWithGet)
+                );
             }
-            dispatchOperation.ParameterInspectors.Add(new CachingParameterInspector(this.cacheProfileName));
+            dispatchOperation.ParameterInspectors.Add(
+                new CachingParameterInspector(this.cacheProfileName)
+            );
         }
 
         public void Validate(OperationDescription operationDescription)
         {
-          // validation happens in ApplyDispatchBehavior because it is dispatcher specific
+            // validation happens in ApplyDispatchBehavior because it is dispatcher specific
         }
     }
 }

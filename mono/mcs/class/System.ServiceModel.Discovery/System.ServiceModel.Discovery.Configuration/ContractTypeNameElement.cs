@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,46 +29,68 @@ using System.ServiceModel.Configuration;
 
 namespace System.ServiceModel.Discovery.Configuration
 {
-	public sealed class ContractTypeNameElement : ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty name, @namespace;
-		
-		static ContractTypeNameElement ()
-		{
-			name = new ConfigurationProperty ("name", typeof (string), null, null, new StringValidator (0), ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			@namespace = new ConfigurationProperty ("namespace", typeof (string), "http://tempuri.org/", null, null, ConfigurationPropertyOptions.IsKey);
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (name);
-			properties.Add (@namespace);
-		}
-		
-		public ContractTypeNameElement ()
-		{
-		}
-		
-		public ContractTypeNameElement (string name, string ns)
-		{
-			Name = name;
-			Namespace = ns;
-		}
-		
-		[ConfigurationProperty ("name", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		[StringValidator (MinLength = 0)]
-		public string Name {
-			get { return (string) base [name]; }
-			set { base [name] = value; }
-		}
+    public sealed class ContractTypeNameElement : ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty name,
+            @namespace;
 
-		[ConfigurationProperty ("namespace", DefaultValue = "http://tempuri.org/", Options = ConfigurationPropertyOptions.IsKey)]
-		public string Namespace {
-			get { return (string) base [@namespace]; }
-			set { base [@namespace] = value; }
-		}
-		
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        static ContractTypeNameElement()
+        {
+            name = new ConfigurationProperty(
+                "name",
+                typeof(string),
+                null,
+                null,
+                new StringValidator(0),
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            @namespace = new ConfigurationProperty(
+                "namespace",
+                typeof(string),
+                "http://tempuri.org/",
+                null,
+                null,
+                ConfigurationPropertyOptions.IsKey
+            );
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(name);
+            properties.Add(@namespace);
+        }
+
+        public ContractTypeNameElement() { }
+
+        public ContractTypeNameElement(string name, string ns)
+        {
+            Name = name;
+            Namespace = ns;
+        }
+
+        [ConfigurationProperty(
+            "name",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        [StringValidator(MinLength = 0)]
+        public string Name
+        {
+            get { return (string)base[name]; }
+            set { base[name] = value; }
+        }
+
+        [ConfigurationProperty(
+            "namespace",
+            DefaultValue = "http://tempuri.org/",
+            Options = ConfigurationPropertyOptions.IsKey
+        )]
+        public string Namespace
+        {
+            get { return (string)base[@namespace]; }
+            set { base[@namespace] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

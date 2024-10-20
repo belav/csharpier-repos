@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore.TestModels.StoreValueGenerationModel;
 
 namespace Microsoft.EntityFrameworkCore.Update;
 
-public abstract class StoreValueGenerationWithoutOutputSqlServerFixture : StoreValueGenerationSqlServerFixtureBase
+public abstract class StoreValueGenerationWithoutOutputSqlServerFixture
+    : StoreValueGenerationSqlServerFixtureBase
 {
     protected override void Seed(StoreValueGenerationContext context)
     {
@@ -22,7 +23,8 @@ FOR INSERT, UPDATE, DELETE AS
 BEGIN
 	IF @@ROWCOUNT = 0
 		return
-END");
+END"
+            );
         }
     }
 

@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Diagnostics.Tracing;
 using System.Collections.Generic;
-using Tracing.Tests.Common;
+using System.Diagnostics.Tracing;
 using Microsoft.Diagnostics.NETCore.Client;
+using Tracing.Tests.Common;
 using Xunit;
 
 namespace Tracing.Tests.ExceptionThrown_V1
@@ -19,25 +19,41 @@ namespace Tracing.Tests.ExceptionThrown_V1
             {
                 new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Verbose),
                 //ExceptionKeyword (0x8000): 0b1000_0000_0000_0000
-                new EventPipeProvider("Microsoft-Windows-DotNETRuntime", EventLevel.Warning, 0b1000_0000_0000_0000)
+                new EventPipeProvider(
+                    "Microsoft-Windows-DotNETRuntime",
+                    EventLevel.Warning,
+                    0b1000_0000_0000_0000
+                ),
             };
 
-            bool enableRundown = TestLibrary.Utilities.IsNativeAot? false: true;
-            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary.Utilities.IsNativeAot? _expectedEventCountsNativeAOT: _expectedEventCountsCoreCLR;
+            bool enableRundown = TestLibrary.Utilities.IsNativeAot ? false : true;
+            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary
+                .Utilities
+                .IsNativeAot
+                ? _expectedEventCountsNativeAOT
+                : _expectedEventCountsCoreCLR;
 
-            return IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024, enableRundownProvider:enableRundown);
+            return IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024,
+                enableRundownProvider: enableRundown
+            );
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCountsCoreCLR = new Dictionary<string, ExpectedEventCount>()
-        {
-            { "Microsoft-Windows-DotNETRuntime", new ExpectedEventCount(1000, 0.2f) },
-            { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
-            { "Microsoft-DotNETCore-SampleProfiler", -1 }
-        };
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCountsNativeAOT = new Dictionary<string, ExpectedEventCount>()
-        {
-            { "Microsoft-Windows-DotNETRuntime", new ExpectedEventCount(1000, 0.2f) }
-        };
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCountsCoreCLR =
+            new Dictionary<string, ExpectedEventCount>()
+            {
+                { "Microsoft-Windows-DotNETRuntime", new ExpectedEventCount(1000, 0.2f) },
+                { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
+                { "Microsoft-DotNETCore-SampleProfiler", -1 },
+            };
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCountsNativeAOT =
+            new Dictionary<string, ExpectedEventCount>()
+            {
+                { "Microsoft-Windows-DotNETRuntime", new ExpectedEventCount(1000, 0.2f) },
+            };
         private static Action _eventGeneratingAction = () =>
         {
             for (int i = 0; i < 1000; i++)

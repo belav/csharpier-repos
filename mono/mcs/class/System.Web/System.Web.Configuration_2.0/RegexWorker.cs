@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,28 +31,22 @@
 using System;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public class RegexWorker
+    {
+        public RegexWorker(HttpBrowserCapabilities browserCaps) { }
 
-namespace System.Web.Configuration {
+        [MonoTODO("Mono does not currently need this routine.  Always returns false.")]
+        public bool ProcessRegex(string target, string regexExpression)
+        {
+            return false;
+        }
 
-	public class RegexWorker
-	{
-		public RegexWorker (HttpBrowserCapabilities browserCaps)
-		{
-		}
-
-		[MonoTODO ("Mono does not currently need this routine.  Always returns false.")]
-		public bool ProcessRegex (string target, string regexExpression)
-		{
-			return false;
-		}
-
-		[MonoTODO ("Mono does not currently need this routine. Not implemented.")]
-		public string this [string key] {
-			get { throw new NotImplementedException (); }
-		}
-
-	}
-
+        [MonoTODO("Mono does not currently need this routine. Not implemented.")]
+        public string this[string key]
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }
-
-

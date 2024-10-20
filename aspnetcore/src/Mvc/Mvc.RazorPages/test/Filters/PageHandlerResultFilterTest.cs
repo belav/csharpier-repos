@@ -15,29 +15,39 @@ public class PageHandlerResultFilterTest
     public async Task OnResultExecutionAsync_ExecutesAsyncFilters()
     {
         // Arrange
-        var pageContext = new PageContext(new ActionContext(
-            new DefaultHttpContext(),
-            new RouteData(),
-            new PageActionDescriptor(),
-            new ModelStateDictionary()));
+        var pageContext = new PageContext(
+            new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new PageActionDescriptor(),
+                new ModelStateDictionary()
+            )
+        );
         var model = new Mock<PageModel>();
 
         var modelAsFilter = model.As<IAsyncResultFilter>();
         modelAsFilter
-            .Setup(f => f.OnResultExecutionAsync(It.IsAny<ResultExecutingContext>(), It.IsAny<ResultExecutionDelegate>()))
+            .Setup(f =>
+                f.OnResultExecutionAsync(
+                    It.IsAny<ResultExecutingContext>(),
+                    It.IsAny<ResultExecutionDelegate>()
+                )
+            )
             .Returns(Task.CompletedTask)
             .Verifiable();
 
         var resultExecutingContext = new ResultExecutingContext(
-           pageContext,
-           Array.Empty<IFilterMetadata>(),
-           new PageResult(),
-           model.Object);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new PageResult(),
+            model.Object
+        );
         var resultExecutedContext = new ResultExecutedContext(
             pageContext,
             Array.Empty<IFilterMetadata>(),
             resultExecutingContext.Result,
-            model.Object);
+            model.Object
+        );
         ResultExecutionDelegate next = () => Task.FromResult(resultExecutedContext);
 
         var pageHandlerResultFilter = new PageHandlerResultFilter();
@@ -53,11 +63,14 @@ public class PageHandlerResultFilterTest
     public async Task OnResultExecutionAsync_ExecutesSyncFilters()
     {
         // Arrange
-        var pageContext = new PageContext(new ActionContext(
-            new DefaultHttpContext(),
-            new RouteData(),
-            new PageActionDescriptor(),
-            new ModelStateDictionary()));
+        var pageContext = new PageContext(
+            new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new PageActionDescriptor(),
+                new ModelStateDictionary()
+            )
+        );
         var model = new Mock<object>();
 
         var modelAsFilter = model.As<IResultFilter>();
@@ -70,15 +83,17 @@ public class PageHandlerResultFilterTest
             .Verifiable();
 
         var resultExecutingContext = new ResultExecutingContext(
-           pageContext,
-           Array.Empty<IFilterMetadata>(),
-           new PageResult(),
-           model.Object);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new PageResult(),
+            model.Object
+        );
         var resultExecutedContext = new ResultExecutedContext(
             pageContext,
             Array.Empty<IFilterMetadata>(),
             resultExecutingContext.Result,
-            model.Object);
+            model.Object
+        );
         ResultExecutionDelegate next = () => Task.FromResult(resultExecutedContext);
 
         var pageHandlerResultFilter = new PageHandlerResultFilter();
@@ -94,11 +109,14 @@ public class PageHandlerResultFilterTest
     public async Task OnPageHandlerExecutionAsync_DoesNotInvokeResultExecuted_IfCancelled()
     {
         // Arrange
-        var pageContext = new PageContext(new ActionContext(
-            new DefaultHttpContext(),
-            new RouteData(),
-            new PageActionDescriptor(),
-            new ModelStateDictionary()));
+        var pageContext = new PageContext(
+            new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new PageActionDescriptor(),
+                new ModelStateDictionary()
+            )
+        );
         var model = new Mock<object>();
 
         var modelAsFilter = model.As<IResultFilter>();
@@ -112,15 +130,17 @@ public class PageHandlerResultFilterTest
             .Throws(new Exception("Shouldn't be called"));
 
         var resultExecutingContext = new ResultExecutingContext(
-           pageContext,
-           Array.Empty<IFilterMetadata>(),
-           new PageResult(),
-           model.Object);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new PageResult(),
+            model.Object
+        );
         var resultExecutedContext = new ResultExecutedContext(
             pageContext,
             Array.Empty<IFilterMetadata>(),
             resultExecutingContext.Result,
-            model.Object);
+            model.Object
+        );
         ResultExecutionDelegate next = () => Task.FromResult(resultExecutedContext);
 
         var pageHandlerResultFilter = new PageHandlerResultFilter();
@@ -136,23 +156,28 @@ public class PageHandlerResultFilterTest
     public async Task OnPageHandlerExecutionAsync_InvokesNextDelegateIfHandlerDoesNotImplementFilter()
     {
         // Arrange
-        var pageContext = new PageContext(new ActionContext(
-            new DefaultHttpContext(),
-            new RouteData(),
-            new PageActionDescriptor(),
-            new ModelStateDictionary()));
+        var pageContext = new PageContext(
+            new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new PageActionDescriptor(),
+                new ModelStateDictionary()
+            )
+        );
         var model = new object();
 
         var resultExecutingContext = new ResultExecutingContext(
-           pageContext,
-           Array.Empty<IFilterMetadata>(),
-           new PageResult(),
-           model);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new PageResult(),
+            model
+        );
         var resultExecutedContext = new ResultExecutedContext(
             pageContext,
             Array.Empty<IFilterMetadata>(),
             resultExecutingContext.Result,
-            model);
+            model
+        );
         var invoked = false;
         ResultExecutionDelegate next = () =>
         {

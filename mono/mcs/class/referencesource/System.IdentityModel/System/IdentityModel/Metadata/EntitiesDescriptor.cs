@@ -20,9 +20,7 @@ namespace System.IdentityModel.Metadata
         /// The empty constructor.
         /// </summary>
         public EntitiesDescriptor()
-            : this(new Collection<EntityDescriptor>(), new Collection<EntitiesDescriptor>())
-        {
-        }
+            : this(new Collection<EntityDescriptor>(), new Collection<EntitiesDescriptor>()) { }
 
         /// <summary>
         /// Constructs an entities descriptor with a collection of <see cref="EntitiesDescriptor"/>.
@@ -48,7 +46,10 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="entityList">The entity descriptor collection.</param>
         /// <param name="entityGroupList">The entities descriptor collection.</param>
-        public EntitiesDescriptor(Collection<EntityDescriptor> entityList, Collection<EntitiesDescriptor> entityGroupList)
+        public EntitiesDescriptor(
+            Collection<EntityDescriptor> entityList,
+            Collection<EntitiesDescriptor> entityGroupList
+        )
         {
             this.entityCollection = entityList;
             this.entityGroupCollection = entityGroupList;

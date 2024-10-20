@@ -20,10 +20,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly ImmutableArray<FunctionPointerParameterSymbol> _parameters;
         private ImmutableHashSet<CustomModifier>? _lazyCallingConventionModifiers;
 
-        public static FunctionPointerMethodSymbol CreateFromSource(FunctionPointerTypeSyntax syntax, Binder typeBinder, BindingDiagnosticBag diagnostics, ConsList<TypeSymbol> basesBeingResolved, bool suppressUseSiteDiagnostics)
+        public static FunctionPointerMethodSymbol CreateFromSource(
+            FunctionPointerTypeSyntax syntax,
+            Binder typeBinder,
+            BindingDiagnosticBag diagnostics,
+            ConsList<TypeSymbol> basesBeingResolved,
+            bool suppressUseSiteDiagnostics
+        )
         {
-            ArrayBuilder<CustomModifier> customModifiers = ArrayBuilder<CustomModifier>.GetInstance();
-            CallingConvention callingConvention = getCallingConvention(typeBinder.Compilation, syntax.CallingConvention, customModifiers, diagnostics);
+            ArrayBuilder<CustomModifier> customModifiers =
+                ArrayBuilder<CustomModifier>.GetInstance();
+            CallingConvention callingConvention = getCallingConvention(
+                typeBinder.Compilation,
+                syntax.CallingConvention,
+                customModifiers,
+                diagnostics
+            );
 
             RefKind refKind = RefKind.None;
             TypeWithAnnotations returnType;
@@ -34,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                FunctionPointerParameterSyntax? returnTypeParameter = syntax.ParameterList.Parameters[^1];
+                FunctionPointerParameterSyntax? returnTypeParameter = syntax
+                    .ParameterList
+                    .Parameters[^1];
                 SyntaxTokenList modifiers = returnTypeParameter.Modifiers;
                 for (int i = 0; i < modifiers.Count; i++)
                 {
@@ -42,11 +56,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     switch (modifier.Kind())
                     {
                         case SyntaxKind.RefKeyword when refKind == RefKind.None:
-                            if (modifiers.Count > i + 1 && modifiers[i + 1].Kind() == SyntaxKind.ReadOnlyKeyword)
+                            if (
+                                modifiers.Count > i + 1
+                                && modifiers[i + 1].Kind() == SyntaxKind.ReadOnlyKeyword
+                            )
                             {
                                 i++;
                                 refKind = RefKind.RefReadOnly;
-                                customModifiers.AddRange(ParameterHelpers.CreateInModifiers(typeBinder, diagnostics, returnTypeParameter));
+                                customModifiers.AddRange(
+                                    ParameterHelpers.CreateInModifiers(
+                                        typeBinder,
+                                        diagnostics,
+                                        returnTypeParameter
+                                    )
+                                );
                             }
                             else
                             {
@@ -58,17 +81,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         case SyntaxKind.RefKeyword:
                             Debug.Assert(refKind != RefKind.None);
                             // A return type can only have one '{0}' modifier.
-                            diagnostics.Add(ErrorCode.ERR_DupReturnTypeMod, modifier.GetLocation(), modifier.Text);
+                            diagnostics.Add(
+                                ErrorCode.ERR_DupReturnTypeMod,
+                                modifier.GetLocation(),
+                                modifier.Text
+                            );
                             break;
 
                         default:
                             // '{0}' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
-                            diagnostics.Add(ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier, modifier.GetLocation(), modifier.Text);
+                            diagnostics.Add(
+                                ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier,
+                                modifier.GetLocation(),
+                                modifier.Text
+                            );
                             break;
                     }
                 }
 
-                returnType = typeBinder.BindType(returnTypeParameter.Type, diagnostics, basesBeingResolved, suppressUseSiteDiagnostics);
+                returnType = typeBinder.BindType(
+                    returnTypeParameter.Type,
+                    diagnostics,
+                    basesBeingResolved,
+                    suppressUseSiteDiagnostics
+                );
 
                 if (returnType.IsVoidType() && refKind != RefKind.None)
                 {
@@ -76,11 +112,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else if (returnType.IsStatic)
                 {
-                    diagnostics.Add(ErrorFacts.GetStaticClassReturnCode(useWarning: false), returnTypeParameter.Location, returnType);
+                    diagnostics.Add(
+                        ErrorFacts.GetStaticClassReturnCode(useWarning: false),
+                        returnTypeParameter.Location,
+                        returnType
+                    );
                 }
                 else if (returnType.IsRestrictedType(ignoreSpanLikeTypes: true))
                 {
-                    diagnostics.Add(ErrorCode.ERR_MethodReturnCantBeRefAny, returnTypeParameter.Location, returnType);
+                    diagnostics.Add(
+                        ErrorCode.ERR_MethodReturnCantBeRefAny,
+                        returnTypeParameter.Location,
+                        returnType
+                    );
                 }
             }
 
@@ -103,9 +147,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 typeBinder,
                 diagnostics,
                 suppressUseSiteDiagnostics,
-                useUpdatedEscapeRules: typeBinder.UseUpdatedEscapeRules);
+                useUpdatedEscapeRules: typeBinder.UseUpdatedEscapeRules
+            );
 
-            static CallingConvention getCallingConvention(CSharpCompilation compilation, FunctionPointerCallingConventionSyntax? callingConventionSyntax, ArrayBuilder<CustomModifier> customModifiers, BindingDiagnosticBag diagnostics)
+            static CallingConvention getCallingConvention(
+                CSharpCompilation compilation,
+                FunctionPointerCallingConventionSyntax? callingConventionSyntax,
+                ArrayBuilder<CustomModifier> customModifiers,
+                BindingDiagnosticBag diagnostics
+            )
             {
                 switch (callingConventionSyntax?.ManagedOrUnmanagedKeyword.Kind())
                 {
@@ -114,9 +164,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     case SyntaxKind.ManagedKeyword:
                         // Possible if we get a node not constructed by the parser
-                        if (callingConventionSyntax.UnmanagedCallingConventionList is object && !callingConventionSyntax.ContainsDiagnostics)
+                        if (
+                            callingConventionSyntax.UnmanagedCallingConventionList is object
+                            && !callingConventionSyntax.ContainsDiagnostics
+                        )
                         {
-                            diagnostics.Add(ErrorCode.ERR_CannotSpecifyManagedWithUnmanagedSpecifiers, callingConventionSyntax.UnmanagedCallingConventionList.GetLocation());
+                            diagnostics.Add(
+                                ErrorCode.ERR_CannotSpecifyManagedWithUnmanagedSpecifiers,
+                                callingConventionSyntax.UnmanagedCallingConventionList.GetLocation()
+                            );
                         }
                         return CallingConvention.Default;
 
@@ -142,7 +198,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         switch (callingConventionSyntax.UnmanagedCallingConventionList)
                         {
                             case null:
-                                checkUnmanagedSupport(compilation, callingConventionSyntax.ManagedOrUnmanagedKeyword.GetLocation(), diagnostics);
+                                checkUnmanagedSupport(
+                                    compilation,
+                                    callingConventionSyntax.ManagedOrUnmanagedKeyword.GetLocation(),
+                                    diagnostics
+                                );
                                 return CallingConvention.Unmanaged;
 
                             case { CallingConventions: { Count: 1 } specifiers }:
@@ -155,7 +215,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     { ValueText: "Fastcall" } => CallingConvention.FastCall,
 
                                     // Unknown identifier case
-                                    _ => handleSingleConvention(specifiers[0], compilation, customModifiers, diagnostics)
+                                    _ => handleSingleConvention(
+                                        specifiers[0],
+                                        compilation,
+                                        customModifiers,
+                                        diagnostics
+                                    ),
                                 };
 
                             case { CallingConventions: { Count: 0 } } unmanagedList:
@@ -163,16 +228,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 // so diagnostic quality isn't hugely important
                                 if (!unmanagedList.ContainsDiagnostics)
                                 {
-                                    diagnostics.Add(ErrorCode.ERR_InvalidFunctionPointerCallingConvention, unmanagedList.OpenBracketToken.GetLocation(), "");
+                                    diagnostics.Add(
+                                        ErrorCode.ERR_InvalidFunctionPointerCallingConvention,
+                                        unmanagedList.OpenBracketToken.GetLocation(),
+                                        ""
+                                    );
                                 }
                                 return CallingConvention.Default;
 
                             case { CallingConventions: var specifiers }:
                                 // More than one identifier case
-                                checkUnmanagedSupport(compilation, callingConventionSyntax.ManagedOrUnmanagedKeyword.GetLocation(), diagnostics);
-                                foreach (FunctionPointerUnmanagedCallingConventionSyntax? specifier in specifiers)
+                                checkUnmanagedSupport(
+                                    compilation,
+                                    callingConventionSyntax.ManagedOrUnmanagedKeyword.GetLocation(),
+                                    diagnostics
+                                );
+                                foreach (
+                                    FunctionPointerUnmanagedCallingConventionSyntax? specifier in specifiers
+                                )
                                 {
-                                    CustomModifier? modifier = handleIndividualUnrecognizedSpecifier(specifier, compilation, diagnostics);
+                                    CustomModifier? modifier =
+                                        handleIndividualUnrecognizedSpecifier(
+                                            specifier,
+                                            compilation,
+                                            diagnostics
+                                        );
                                     if (modifier is object)
                                     {
                                         customModifiers.Add(modifier);
@@ -186,10 +266,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         throw ExceptionUtilities.UnexpectedValue(unexpected);
                 }
 
-                static CallingConvention handleSingleConvention(FunctionPointerUnmanagedCallingConventionSyntax specifier, CSharpCompilation compilation, ArrayBuilder<CustomModifier> customModifiers, BindingDiagnosticBag diagnostics)
+                static CallingConvention handleSingleConvention(
+                    FunctionPointerUnmanagedCallingConventionSyntax specifier,
+                    CSharpCompilation compilation,
+                    ArrayBuilder<CustomModifier> customModifiers,
+                    BindingDiagnosticBag diagnostics
+                )
                 {
                     checkUnmanagedSupport(compilation, specifier.GetLocation(), diagnostics);
-                    CustomModifier? modifier = handleIndividualUnrecognizedSpecifier(specifier, compilation, diagnostics);
+                    CustomModifier? modifier = handleIndividualUnrecognizedSpecifier(
+                        specifier,
+                        compilation,
+                        diagnostics
+                    );
                     if (modifier is object)
                     {
                         customModifiers.Add(modifier);
@@ -197,7 +286,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return CallingConvention.Unmanaged;
                 }
 
-                static CustomModifier? handleIndividualUnrecognizedSpecifier(FunctionPointerUnmanagedCallingConventionSyntax specifier, CSharpCompilation compilation, BindingDiagnosticBag diagnostics)
+                static CustomModifier? handleIndividualUnrecognizedSpecifier(
+                    FunctionPointerUnmanagedCallingConventionSyntax specifier,
+                    CSharpCompilation compilation,
+                    BindingDiagnosticBag diagnostics
+                )
                 {
                     string specifierText = specifier.Name.ValueText;
                     if (string.IsNullOrEmpty(specifierText))
@@ -206,19 +299,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
 
                     string typeName = "CallConv" + specifierText;
-                    var metadataName = MetadataTypeName.FromNamespaceAndTypeName("System.Runtime.CompilerServices", typeName, useCLSCompliantNameArityEncoding: true, forcedArity: 0);
+                    var metadataName = MetadataTypeName.FromNamespaceAndTypeName(
+                        "System.Runtime.CompilerServices",
+                        typeName,
+                        useCLSCompliantNameArityEncoding: true,
+                        forcedArity: 0
+                    );
                     NamedTypeSymbol? specifierType;
-                    specifierType = compilation.Assembly.CorLibrary.LookupDeclaredTopLevelMetadataType(ref metadataName);
+                    specifierType =
+                        compilation.Assembly.CorLibrary.LookupDeclaredTopLevelMetadataType(
+                            ref metadataName
+                        );
                     Debug.Assert(specifierType?.IsErrorType() != true);
-                    Debug.Assert(specifierType is null || ReferenceEquals(specifierType.ContainingAssembly, compilation.Assembly.CorLibrary));
+                    Debug.Assert(
+                        specifierType is null
+                            || ReferenceEquals(
+                                specifierType.ContainingAssembly,
+                                compilation.Assembly.CorLibrary
+                            )
+                    );
 
                     if (specifierType is null)
                     {
-                        specifierType = new MissingMetadataTypeSymbol.TopLevel(compilation.Assembly.CorLibrary.Modules[0], ref metadataName, new CSDiagnosticInfo(ErrorCode.ERR_TypeNotFound, typeName));
+                        specifierType = new MissingMetadataTypeSymbol.TopLevel(
+                            compilation.Assembly.CorLibrary.Modules[0],
+                            ref metadataName,
+                            new CSDiagnosticInfo(ErrorCode.ERR_TypeNotFound, typeName)
+                        );
                     }
                     else if (specifierType.DeclaredAccessibility != Accessibility.Public)
                     {
-                        diagnostics.Add(ErrorCode.ERR_TypeMustBePublic, specifier.GetLocation(), specifierType);
+                        diagnostics.Add(
+                            ErrorCode.ERR_TypeMustBePublic,
+                            specifier.GetLocation(),
+                            specifierType
+                        );
                     }
 
                     diagnostics.Add(specifierType.GetUseSiteInfo(), specifier);
@@ -226,11 +341,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return CSharpCustomModifier.CreateOptional(specifierType);
                 }
 
-                static void checkUnmanagedSupport(CSharpCompilation compilation, Location errorLocation, BindingDiagnosticBag diagnostics)
+                static void checkUnmanagedSupport(
+                    CSharpCompilation compilation,
+                    Location errorLocation,
+                    BindingDiagnosticBag diagnostics
+                )
                 {
                     if (!compilation.Assembly.RuntimeSupportsUnmanagedSignatureCallingConvention)
                     {
-                        diagnostics.Add(ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv, errorLocation);
+                        diagnostics.Add(
+                            ErrorCode.ERR_RuntimeDoesNotSupportUnmanagedDefaultCallConv,
+                            errorLocation
+                        );
                     }
                 }
             }
@@ -248,7 +370,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeWithAnnotations> parameterTypes,
             ImmutableArray<ImmutableArray<CustomModifier>> parameterRefCustomModifiers,
             ImmutableArray<RefKind> parameterRefKinds,
-            CSharpCompilation compilation)
+            CSharpCompilation compilation
+        )
         {
             return new FunctionPointerMethodSymbol(
                 callingConvention,
@@ -258,7 +381,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 parameterTypes,
                 parameterRefCustomModifiers,
                 parameterRefKinds,
-                compilation);
+                compilation
+            );
         }
 
         /// <summary>
@@ -271,7 +395,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             RefKind returnRefKind,
             ImmutableArray<TypeWithAnnotations> parameterTypes,
             ImmutableArray<RefKind> parameterRefKinds,
-            CSharpCompilation compilation)
+            CSharpCompilation compilation
+        )
         {
             var modifiersBuilder = ArrayBuilder<CustomModifier>.GetInstance();
 
@@ -285,11 +410,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (returnRefKind == RefKind.None)
             {
                 refCustomModifiers = ImmutableArray<CustomModifier>.Empty;
-                returnTypeWithAnnotations = returnTypeWithAnnotations.WithModifiers(modifiersBuilder.ToImmutableAndFree());
+                returnTypeWithAnnotations = returnTypeWithAnnotations.WithModifiers(
+                    modifiersBuilder.ToImmutableAndFree()
+                );
             }
             else
             {
-                if (GetCustomModifierForRefKind(returnRefKind, compilation) is CustomModifier modifier)
+                if (
+                    GetCustomModifierForRefKind(returnRefKind, compilation)
+                    is CustomModifier modifier
+                )
                 {
                     modifiersBuilder.Add(modifier);
                 }
@@ -304,18 +434,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 parameterTypes,
                 parameterRefCustomModifiers: default,
                 parameterRefKinds,
-                compilation);
+                compilation
+            );
         }
 
-        private static CustomModifier? GetCustomModifierForRefKind(RefKind refKind, CSharpCompilation compilation)
+        private static CustomModifier? GetCustomModifierForRefKind(
+            RefKind refKind,
+            CSharpCompilation compilation
+        )
         {
             Debug.Assert(refKind is RefKind.None or RefKind.In or RefKind.Ref or RefKind.Out);
 
             var attributeType = refKind switch
             {
-                RefKind.In => compilation.GetWellKnownType(WellKnownType.System_Runtime_InteropServices_InAttribute),
-                RefKind.Out => compilation.GetWellKnownType(WellKnownType.System_Runtime_InteropServices_OutAttribute),
-                _ => null
+                RefKind.In => compilation.GetWellKnownType(
+                    WellKnownType.System_Runtime_InteropServices_InAttribute
+                ),
+                RefKind.Out => compilation.GetWellKnownType(
+                    WellKnownType.System_Runtime_InteropServices_OutAttribute
+                ),
+                _ => null,
             };
 
             if (attributeType is null)
@@ -327,15 +465,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return CSharpCustomModifier.CreateRequired(attributeType);
         }
 
-        public static FunctionPointerMethodSymbol CreateFromMetadata(ModuleSymbol containingModule, CallingConvention callingConvention, ImmutableArray<ParamInfo<TypeSymbol>> retAndParamTypes)
-            => new FunctionPointerMethodSymbol(callingConvention, retAndParamTypes, useUpdatedEscapeRules: containingModule.UseUpdatedEscapeRules);
+        public static FunctionPointerMethodSymbol CreateFromMetadata(
+            ModuleSymbol containingModule,
+            CallingConvention callingConvention,
+            ImmutableArray<ParamInfo<TypeSymbol>> retAndParamTypes
+        ) =>
+            new FunctionPointerMethodSymbol(
+                callingConvention,
+                retAndParamTypes,
+                useUpdatedEscapeRules: containingModule.UseUpdatedEscapeRules
+            );
 
         public FunctionPointerMethodSymbol SubstituteParameterSymbols(
             TypeWithAnnotations substitutedReturnType,
             ImmutableArray<TypeWithAnnotations> substitutedParameterTypes,
             ImmutableArray<CustomModifier> refCustomModifiers = default,
-            ImmutableArray<ImmutableArray<CustomModifier>> paramRefCustomModifiers = default)
-            => new FunctionPointerMethodSymbol(
+            ImmutableArray<ImmutableArray<CustomModifier>> paramRefCustomModifiers = default
+        ) =>
+            new FunctionPointerMethodSymbol(
                 this.CallingConvention,
                 this.RefKind,
                 substitutedReturnType,
@@ -343,19 +490,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 this.Parameters,
                 substitutedParameterTypes,
                 paramRefCustomModifiers,
-                this.UseUpdatedEscapeRules);
+                this.UseUpdatedEscapeRules
+            );
 
-        internal FunctionPointerMethodSymbol MergeEquivalentTypes(FunctionPointerMethodSymbol signature, VarianceKind variance)
+        internal FunctionPointerMethodSymbol MergeEquivalentTypes(
+            FunctionPointerMethodSymbol signature,
+            VarianceKind variance
+        )
         {
             Debug.Assert(RefKind == signature.RefKind);
             var returnVariance = RefKind == RefKind.None ? variance : VarianceKind.None;
-            var mergedReturnType = ReturnTypeWithAnnotations.MergeEquivalentTypes(signature.ReturnTypeWithAnnotations, returnVariance);
+            var mergedReturnType = ReturnTypeWithAnnotations.MergeEquivalentTypes(
+                signature.ReturnTypeWithAnnotations,
+                returnVariance
+            );
 
             var mergedParameterTypes = ImmutableArray<TypeWithAnnotations>.Empty;
             bool hasParamChanges = false;
             if (_parameters.Length > 0)
             {
-                var paramMergedTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(_parameters.Length);
+                var paramMergedTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
+                    _parameters.Length
+                );
                 for (int i = 0; i < _parameters.Length; i++)
                 {
                     var thisParam = _parameters[i];
@@ -368,7 +524,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         _ => VarianceKind.None,
                     };
 
-                    var mergedParameterType = thisParam.TypeWithAnnotations.MergeEquivalentTypes(otherParam.TypeWithAnnotations, paramVariance);
+                    var mergedParameterType = thisParam.TypeWithAnnotations.MergeEquivalentTypes(
+                        otherParam.TypeWithAnnotations,
+                        paramVariance
+                    );
                     paramMergedTypesBuilder.Add(mergedParameterType);
                     if (!mergedParameterType.IsSameAs(thisParam.TypeWithAnnotations))
                     {
@@ -397,7 +556,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        public FunctionPointerMethodSymbol SetNullabilityForReferenceTypes(Func<TypeWithAnnotations, TypeWithAnnotations> transform)
+        public FunctionPointerMethodSymbol SetNullabilityForReferenceTypes(
+            Func<TypeWithAnnotations, TypeWithAnnotations> transform
+        )
         {
             var transformedReturn = transform(ReturnTypeWithAnnotations);
 
@@ -405,7 +566,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             bool hasParamChanges = false;
             if (_parameters.Length > 0)
             {
-                var paramTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(_parameters.Length);
+                var paramTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
+                    _parameters.Length
+                );
                 foreach (var param in _parameters)
                 {
                     var transformedType = transform(param.TypeWithAnnotations);
@@ -425,7 +588,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     paramTypesBuilder.Free();
                     transformedParameterTypes = ParameterTypesWithAnnotations;
                 }
-
             }
 
             if (hasParamChanges || !transformedReturn.IsSameAs(ReturnTypeWithAnnotations))
@@ -446,10 +608,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<ParameterSymbol> originalParameters,
             ImmutableArray<TypeWithAnnotations> substitutedParameterTypes,
             ImmutableArray<ImmutableArray<CustomModifier>> substitutedRefCustomModifiers,
-            bool useUpdatedEscapeRules)
+            bool useUpdatedEscapeRules
+        )
         {
             Debug.Assert(originalParameters.Length == substitutedParameterTypes.Length);
-            Debug.Assert(substitutedRefCustomModifiers.IsDefault || originalParameters.Length == substitutedRefCustomModifiers.Length);
+            Debug.Assert(
+                substitutedRefCustomModifiers.IsDefault
+                    || originalParameters.Length == substitutedRefCustomModifiers.Length
+            );
             RefCustomModifiers = refCustomModifiers;
             CallingConvention = callingConvention;
             RefKind = refKind;
@@ -458,18 +624,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (originalParameters.Length > 0)
             {
-                var paramsBuilder = ArrayBuilder<FunctionPointerParameterSymbol>.GetInstance(originalParameters.Length);
+                var paramsBuilder = ArrayBuilder<FunctionPointerParameterSymbol>.GetInstance(
+                    originalParameters.Length
+                );
                 for (int i = 0; i < originalParameters.Length; i++)
                 {
                     var originalParam = originalParameters[i];
                     var substitutedType = substitutedParameterTypes[i];
-                    var customModifiers = substitutedRefCustomModifiers.IsDefault ? originalParam.RefCustomModifiers : substitutedRefCustomModifiers[i];
-                    paramsBuilder.Add(new FunctionPointerParameterSymbol(
-                        substitutedType,
-                        originalParam.RefKind,
-                        originalParam.Ordinal,
-                        containingSymbol: this,
-                        customModifiers));
+                    var customModifiers = substitutedRefCustomModifiers.IsDefault
+                        ? originalParam.RefCustomModifiers
+                        : substitutedRefCustomModifiers[i];
+                    paramsBuilder.Add(
+                        new FunctionPointerParameterSymbol(
+                            substitutedType,
+                            originalParam.RefKind,
+                            originalParam.Ordinal,
+                            containingSymbol: this,
+                            customModifiers
+                        )
+                    );
                 }
 
                 _parameters = paramsBuilder.ToImmutableAndFree();
@@ -491,27 +664,53 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ImmutableArray<TypeWithAnnotations> parameterTypes,
             ImmutableArray<ImmutableArray<CustomModifier>> parameterRefCustomModifiers,
             ImmutableArray<RefKind> parameterRefKinds,
-            CSharpCompilation compilation)
+            CSharpCompilation compilation
+        )
         {
             Debug.Assert(refKind != RefKind.Out);
             Debug.Assert(refCustomModifiers.IsDefaultOrEmpty || refKind != RefKind.None);
-            Debug.Assert(parameterRefCustomModifiers.IsDefault || parameterRefCustomModifiers.Length == parameterTypes.Length);
-            RefCustomModifiers = refCustomModifiers.IsDefault ? getCustomModifierArrayForRefKind(refKind, compilation) : refCustomModifiers;
+            Debug.Assert(
+                parameterRefCustomModifiers.IsDefault
+                    || parameterRefCustomModifiers.Length == parameterTypes.Length
+            );
+            RefCustomModifiers = refCustomModifiers.IsDefault
+                ? getCustomModifierArrayForRefKind(refKind, compilation)
+                : refCustomModifiers;
             RefKind = refKind;
             CallingConvention = callingConvention;
             ReturnTypeWithAnnotations = returnTypeWithAnnotations;
             UseUpdatedEscapeRules = compilation.SourceModule.UseUpdatedEscapeRules;
 
-            _parameters = parameterTypes.ZipAsArray(parameterRefKinds, (Method: this, Comp: compilation, ParamRefCustomModifiers: parameterRefCustomModifiers),
+            _parameters = parameterTypes.ZipAsArray(
+                parameterRefKinds,
+                (
+                    Method: this,
+                    Comp: compilation,
+                    ParamRefCustomModifiers: parameterRefCustomModifiers
+                ),
                 (type, refKind, i, arg) =>
                 {
-                    var refCustomModifiers = arg.ParamRefCustomModifiers.IsDefault ? getCustomModifierArrayForRefKind(refKind, arg.Comp) : arg.ParamRefCustomModifiers[i];
+                    var refCustomModifiers = arg.ParamRefCustomModifiers.IsDefault
+                        ? getCustomModifierArrayForRefKind(refKind, arg.Comp)
+                        : arg.ParamRefCustomModifiers[i];
                     Debug.Assert(refCustomModifiers.IsEmpty || refKind != RefKind.None);
-                    return new FunctionPointerParameterSymbol(type, refKind, i, arg.Method, refCustomModifiers: refCustomModifiers);
-                });
+                    return new FunctionPointerParameterSymbol(
+                        type,
+                        refKind,
+                        i,
+                        arg.Method,
+                        refCustomModifiers: refCustomModifiers
+                    );
+                }
+            );
 
-            static ImmutableArray<CustomModifier> getCustomModifierArrayForRefKind(RefKind refKind, CSharpCompilation compilation)
-                => GetCustomModifierForRefKind(refKind, compilation) is { } modifier ? ImmutableArray.Create(modifier) : ImmutableArray<CustomModifier>.Empty;
+            static ImmutableArray<CustomModifier> getCustomModifierArrayForRefKind(
+                RefKind refKind,
+                CSharpCompilation compilation
+            ) =>
+                GetCustomModifierForRefKind(refKind, compilation) is { } modifier
+                    ? ImmutableArray.Create(modifier)
+                    : ImmutableArray<CustomModifier>.Empty;
         }
 
         private FunctionPointerMethodSymbol(
@@ -523,51 +722,91 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Binder typeBinder,
             BindingDiagnosticBag diagnostics,
             bool suppressUseSiteDiagnostics,
-            bool useUpdatedEscapeRules)
+            bool useUpdatedEscapeRules
+        )
         {
             RefCustomModifiers = refCustomModifiers;
             CallingConvention = callingConvention;
             RefKind = refKind;
             ReturnTypeWithAnnotations = returnType;
             UseUpdatedEscapeRules = useUpdatedEscapeRules;
-            _parameters = syntax.ParameterList.Parameters.Count > 1
-                ? ParameterHelpers.MakeFunctionPointerParameters(
-                    typeBinder,
-                    this,
-                    syntax.ParameterList.Parameters,
-                    diagnostics,
-                    suppressUseSiteDiagnostics)
-                : ImmutableArray<FunctionPointerParameterSymbol>.Empty;
+            _parameters =
+                syntax.ParameterList.Parameters.Count > 1
+                    ? ParameterHelpers.MakeFunctionPointerParameters(
+                        typeBinder,
+                        this,
+                        syntax.ParameterList.Parameters,
+                        diagnostics,
+                        suppressUseSiteDiagnostics
+                    )
+                    : ImmutableArray<FunctionPointerParameterSymbol>.Empty;
         }
 
-        private FunctionPointerMethodSymbol(CallingConvention callingConvention, ImmutableArray<ParamInfo<TypeSymbol>> retAndParamTypes, bool useUpdatedEscapeRules)
+        private FunctionPointerMethodSymbol(
+            CallingConvention callingConvention,
+            ImmutableArray<ParamInfo<TypeSymbol>> retAndParamTypes,
+            bool useUpdatedEscapeRules
+        )
         {
             Debug.Assert(retAndParamTypes.Length > 0);
 
             ParamInfo<TypeSymbol> retInfo = retAndParamTypes[0];
-            var returnType = TypeWithAnnotations.Create(retInfo.Type, customModifiers: CSharpCustomModifier.Convert(retInfo.CustomModifiers));
+            var returnType = TypeWithAnnotations.Create(
+                retInfo.Type,
+                customModifiers: CSharpCustomModifier.Convert(retInfo.CustomModifiers)
+            );
 
             RefCustomModifiers = CSharpCustomModifier.Convert(retInfo.RefCustomModifiers);
             CallingConvention = callingConvention;
             ReturnTypeWithAnnotations = returnType;
-            RefKind = getRefKind(retInfo, RefCustomModifiers, RefKind.RefReadOnly, RefKind.Ref, requiresLocationAllowed: false);
+            RefKind = getRefKind(
+                retInfo,
+                RefCustomModifiers,
+                RefKind.RefReadOnly,
+                RefKind.Ref,
+                requiresLocationAllowed: false
+            );
             Debug.Assert(RefKind != RefKind.Out);
             UseUpdatedEscapeRules = useUpdatedEscapeRules;
             _parameters = makeParametersFromMetadata(retAndParamTypes.AsSpan()[1..], this);
 
-            static ImmutableArray<FunctionPointerParameterSymbol> makeParametersFromMetadata(ReadOnlySpan<ParamInfo<TypeSymbol>> parameterTypes, FunctionPointerMethodSymbol parent)
+            static ImmutableArray<FunctionPointerParameterSymbol> makeParametersFromMetadata(
+                ReadOnlySpan<ParamInfo<TypeSymbol>> parameterTypes,
+                FunctionPointerMethodSymbol parent
+            )
             {
                 if (parameterTypes.Length > 0)
                 {
-                    var paramsBuilder = ArrayBuilder<FunctionPointerParameterSymbol>.GetInstance(parameterTypes.Length);
+                    var paramsBuilder = ArrayBuilder<FunctionPointerParameterSymbol>.GetInstance(
+                        parameterTypes.Length
+                    );
 
                     for (int i = 0; i < parameterTypes.Length; i++)
                     {
                         ParamInfo<TypeSymbol> param = parameterTypes[i];
-                        var paramRefCustomMods = CSharpCustomModifier.Convert(param.RefCustomModifiers);
-                        var paramType = TypeWithAnnotations.Create(param.Type, customModifiers: CSharpCustomModifier.Convert(param.CustomModifiers));
-                        RefKind paramRefKind = getRefKind(param, paramRefCustomMods, RefKind.In, RefKind.Out, requiresLocationAllowed: true);
-                        paramsBuilder.Add(new FunctionPointerParameterSymbol(paramType, paramRefKind, i, parent, paramRefCustomMods));
+                        var paramRefCustomMods = CSharpCustomModifier.Convert(
+                            param.RefCustomModifiers
+                        );
+                        var paramType = TypeWithAnnotations.Create(
+                            param.Type,
+                            customModifiers: CSharpCustomModifier.Convert(param.CustomModifiers)
+                        );
+                        RefKind paramRefKind = getRefKind(
+                            param,
+                            paramRefCustomMods,
+                            RefKind.In,
+                            RefKind.Out,
+                            requiresLocationAllowed: true
+                        );
+                        paramsBuilder.Add(
+                            new FunctionPointerParameterSymbol(
+                                paramType,
+                                paramRefKind,
+                                i,
+                                parent,
+                                paramRefCustomMods
+                            )
+                        );
                     }
 
                     return paramsBuilder.ToImmutableAndFree();
@@ -578,14 +817,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            static RefKind getRefKind(ParamInfo<TypeSymbol> param, ImmutableArray<CustomModifier> paramRefCustomMods, RefKind hasInRefKind, RefKind hasOutRefKind, bool requiresLocationAllowed)
+            static RefKind getRefKind(
+                ParamInfo<TypeSymbol> param,
+                ImmutableArray<CustomModifier> paramRefCustomMods,
+                RefKind hasInRefKind,
+                RefKind hasOutRefKind,
+                bool requiresLocationAllowed
+            )
             {
                 return param.IsByRef switch
                 {
                     false => RefKind.None,
-                    true when CustomModifierUtils.HasInAttributeModifier(paramRefCustomMods) => hasInRefKind,
-                    true when CustomModifierUtils.HasOutAttributeModifier(paramRefCustomMods) => hasOutRefKind,
-                    true when requiresLocationAllowed && CustomModifierUtils.HasRequiresLocationAttributeModifier(paramRefCustomMods) => RefKind.RefReadOnlyParameter,
+                    true when CustomModifierUtils.HasInAttributeModifier(paramRefCustomMods) =>
+                        hasInRefKind,
+                    true when CustomModifierUtils.HasOutAttributeModifier(paramRefCustomMods) =>
+                        hasOutRefKind,
+                    true
+                        when requiresLocationAllowed
+                            && CustomModifierUtils.HasRequiresLocationAttributeModifier(
+                                paramRefCustomMods
+                            ) => RefKind.RefReadOnlyParameter,
                     true => RefKind.Ref,
                 };
             }
@@ -600,17 +851,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal FunctionPointerMethodSymbol ApplyNullableTransforms(byte defaultTransformFlag, ImmutableArray<byte> transforms, ref int position)
+        internal FunctionPointerMethodSymbol ApplyNullableTransforms(
+            byte defaultTransformFlag,
+            ImmutableArray<byte> transforms,
+            ref int position
+        )
         {
-            bool madeChanges = ReturnTypeWithAnnotations.ApplyNullableTransforms(defaultTransformFlag, transforms, ref position, out var newReturnType);
+            bool madeChanges = ReturnTypeWithAnnotations.ApplyNullableTransforms(
+                defaultTransformFlag,
+                transforms,
+                ref position,
+                out var newReturnType
+            );
             var newParamTypes = ImmutableArray<TypeWithAnnotations>.Empty;
             if (!Parameters.IsEmpty)
             {
-                var paramTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(Parameters.Length);
+                var paramTypesBuilder = ArrayBuilder<TypeWithAnnotations>.GetInstance(
+                    Parameters.Length
+                );
                 bool madeParamChanges = false;
                 foreach (var param in Parameters)
                 {
-                    madeParamChanges |= param.TypeWithAnnotations.ApplyNullableTransforms(defaultTransformFlag, transforms, ref position, out var newParamType);
+                    madeParamChanges |= param.TypeWithAnnotations.ApplyNullableTransforms(
+                        defaultTransformFlag,
+                        transforms,
+                        ref position,
+                        out var newParamType
+                    );
                     paramTypesBuilder.Add(newParamType);
                 }
 
@@ -645,7 +912,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     return ImmutableArray<NamedTypeSymbol>.Empty;
                 }
 
-                var modifiersToSearch = RefKind != RefKind.None ? RefCustomModifiers : ReturnTypeWithAnnotations.CustomModifiers;
+                var modifiersToSearch =
+                    RefKind != RefKind.None
+                        ? RefCustomModifiers
+                        : ReturnTypeWithAnnotations.CustomModifiers;
                 if (modifiersToSearch.IsEmpty)
                 {
                     return ImmutableArray<NamedTypeSymbol>.Empty;
@@ -654,7 +924,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var builder = ArrayBuilder<NamedTypeSymbol>.GetInstance(modifiersToSearch.Length);
                 foreach (CSharpCustomModifier modifier in modifiersToSearch)
                 {
-                    if (FunctionPointerTypeSymbol.IsCallingConventionModifier(modifier.ModifierSymbol))
+                    if (
+                        FunctionPointerTypeSymbol.IsCallingConventionModifier(
+                            modifier.ModifierSymbol
+                        )
+                    )
                     {
                         builder.Add(modifier.ModifierSymbol);
                     }
@@ -668,7 +942,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (_lazyCallingConventionModifiers is null)
             {
-                var modifiersToSearch = RefKind != RefKind.None ? RefCustomModifiers : ReturnTypeWithAnnotations.CustomModifiers;
+                var modifiersToSearch =
+                    RefKind != RefKind.None
+                        ? RefCustomModifiers
+                        : ReturnTypeWithAnnotations.CustomModifiers;
                 if (modifiersToSearch.IsEmpty || CallingConvention != CallingConvention.Unmanaged)
                 {
                     _lazyCallingConventionModifiers = ImmutableHashSet<CustomModifier>.Empty;
@@ -678,7 +955,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     var builder = PooledHashSet<CustomModifier>.GetInstance();
                     foreach (var modifier in modifiersToSearch)
                     {
-                        if (FunctionPointerTypeSymbol.IsCallingConventionModifier(((CSharpCustomModifier)modifier).ModifierSymbol))
+                        if (
+                            FunctionPointerTypeSymbol.IsCallingConventionModifier(
+                                ((CSharpCustomModifier)modifier).ModifierSymbol
+                            )
+                        )
                         {
                             builder.Add(modifier);
                         }
@@ -712,17 +993,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal bool Equals(FunctionPointerMethodSymbol other, TypeCompareKind compareKind)
         {
-            return ReferenceEquals(this, other) ||
-                (EqualsNoParameters(other, compareKind)
-                 && _parameters.SequenceEqual(other._parameters, compareKind,
-                     (param1, param2, compareKind) => param1.MethodEqualityChecks(param2, compareKind)));
+            return ReferenceEquals(this, other)
+                || (
+                    EqualsNoParameters(other, compareKind)
+                    && _parameters.SequenceEqual(
+                        other._parameters,
+                        compareKind,
+                        (param1, param2, compareKind) =>
+                            param1.MethodEqualityChecks(param2, compareKind)
+                    )
+                );
         }
 
-        private bool EqualsNoParameters(FunctionPointerMethodSymbol other, TypeCompareKind compareKind)
+        private bool EqualsNoParameters(
+            FunctionPointerMethodSymbol other,
+            TypeCompareKind compareKind
+        )
         {
-            if (CallingConvention != other.CallingConvention
+            if (
+                CallingConvention != other.CallingConvention
                 || !FunctionPointerTypeSymbol.RefKindEquals(compareKind, RefKind, other.RefKind)
-                || !ReturnTypeWithAnnotations.Equals(other.ReturnTypeWithAnnotations, compareKind))
+                || !ReturnTypeWithAnnotations.Equals(other.ReturnTypeWithAnnotations, compareKind)
+            )
             {
                 return false;
             }
@@ -731,10 +1023,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // custom modifiers bit is set. If the bit is not set, then no need to do anything as it will be compared
             // with the rest of the modifiers. Order is significant in metadata, but at the type level ordering/duplication
             // is not significant for these modifiers
-            if ((compareKind & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds) != 0)
+            if (
+                (compareKind & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds)
+                != 0
+            )
             {
-                if (CallingConvention.IsCallingConvention(CallingConvention.Unmanaged)
-                    && !GetCallingConventionModifiers().SetEqualsWithoutIntermediateHashSet(other.GetCallingConventionModifiers()))
+                if (
+                    CallingConvention.IsCallingConvention(CallingConvention.Unmanaged)
+                    && !GetCallingConventionModifiers()
+                        .SetEqualsWithoutIntermediateHashSet(other.GetCallingConventionModifiers())
+                )
                 {
                     return false;
                 }
@@ -757,8 +1055,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return currentHash;
         }
 
-        internal int GetHashCodeNoParameters()
-            => Hash.Combine(ReturnType, Hash.Combine(((int)CallingConvention).GetHashCode(), ((int)FunctionPointerTypeSymbol.GetRefKindForHashCode(RefKind)).GetHashCode()));
+        internal int GetHashCodeNoParameters() =>
+            Hash.Combine(
+                ReturnType,
+                Hash.Combine(
+                    ((int)CallingConvention).GetHashCode(),
+                    ((int)FunctionPointerTypeSymbol.GetRefKindForHashCode(RefKind)).GetHashCode()
+                )
+            );
 
         internal override CallingConvention CallingConvention { get; }
         internal override bool UseUpdatedEscapeRules { get; }
@@ -778,7 +1082,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (CallingConvention.IsCallingConvention(CallingConvention.ExtraArguments))
             {
-                MergeUseSiteInfo(ref info, new UseSiteInfo<AssemblySymbol>(new CSDiagnosticInfo(ErrorCode.ERR_UnsupportedCallingConvention, this)));
+                MergeUseSiteInfo(
+                    ref info,
+                    new UseSiteInfo<AssemblySymbol>(
+                        new CSDiagnosticInfo(ErrorCode.ERR_UnsupportedCallingConvention, this)
+                    )
+                );
             }
 
             // Check for `modopt(RequiresLocation)` combined with any required modifier.
@@ -786,10 +1095,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 foreach (var parameter in this.Parameters)
                 {
-                    if (CustomModifierUtils.HasRequiresLocationAttributeModifier(parameter.RefCustomModifiers) &&
-                        parameter.RefCustomModifiers.Any(static m => !m.IsOptional))
+                    if (
+                        CustomModifierUtils.HasRequiresLocationAttributeModifier(
+                            parameter.RefCustomModifiers
+                        ) && parameter.RefCustomModifiers.Any(static m => !m.IsOptional)
+                    )
                     {
-                        MergeUseSiteInfo(ref info, new UseSiteInfo<AssemblySymbol>(new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, this)));
+                        MergeUseSiteInfo(
+                            ref info,
+                            new UseSiteInfo<AssemblySymbol>(
+                                new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, this)
+                            )
+                        );
                     }
                 }
             }
@@ -797,34 +1114,58 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return info;
         }
 
-        internal bool GetUnificationUseSiteDiagnosticRecursive(ref DiagnosticInfo? result, Symbol owner, ref HashSet<TypeSymbol> checkedTypes)
+        internal bool GetUnificationUseSiteDiagnosticRecursive(
+            ref DiagnosticInfo? result,
+            Symbol owner,
+            ref HashSet<TypeSymbol> checkedTypes
+        )
         {
-            return ReturnType.GetUnificationUseSiteDiagnosticRecursive(ref result, owner, ref checkedTypes)
-                || GetUnificationUseSiteDiagnosticRecursive(ref result, RefCustomModifiers, owner, ref checkedTypes)
-                || GetUnificationUseSiteDiagnosticRecursive(ref result, Parameters, owner, ref checkedTypes);
+            return ReturnType.GetUnificationUseSiteDiagnosticRecursive(
+                    ref result,
+                    owner,
+                    ref checkedTypes
+                )
+                || GetUnificationUseSiteDiagnosticRecursive(
+                    ref result,
+                    RefCustomModifiers,
+                    owner,
+                    ref checkedTypes
+                )
+                || GetUnificationUseSiteDiagnosticRecursive(
+                    ref result,
+                    Parameters,
+                    owner,
+                    ref checkedTypes
+                );
         }
 
         public override bool IsVararg
         {
             get
             {
-                var isVararg = CallingConvention.IsCallingConvention(CallingConvention.ExtraArguments);
+                var isVararg = CallingConvention.IsCallingConvention(
+                    CallingConvention.ExtraArguments
+                );
                 Debug.Assert(!isVararg || HasUseSiteError);
                 return isVararg;
             }
         }
 
         public override Symbol? ContainingSymbol => null;
+
         // Function pointers cannot have type parameters
         public override int Arity => 0;
-        public override ImmutableArray<TypeParameterSymbol> TypeParameters => ImmutableArray<TypeParameterSymbol>.Empty;
+        public override ImmutableArray<TypeParameterSymbol> TypeParameters =>
+            ImmutableArray<TypeParameterSymbol>.Empty;
         public override bool IsExtensionMethod => false;
         public override bool HidesBaseMethodsByName => false;
         public override bool IsAsync => false;
-        public override ImmutableArray<MethodSymbol> ExplicitInterfaceImplementations => ImmutableArray<MethodSymbol>.Empty;
+        public override ImmutableArray<MethodSymbol> ExplicitInterfaceImplementations =>
+            ImmutableArray<MethodSymbol>.Empty;
         public override Symbol? AssociatedSymbol => null;
         public override ImmutableArray<Location> Locations => ImmutableArray<Location>.Empty;
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => ImmutableArray<SyntaxReference>.Empty;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            ImmutableArray<SyntaxReference>.Empty;
         public override Accessibility DeclaredAccessibility => Accessibility.NotApplicable;
         public override bool IsStatic => false;
         public override bool IsVirtual => false;
@@ -833,34 +1174,63 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public override bool IsSealed => false;
         public override bool IsExtern => false;
         public override bool IsImplicitlyDeclared => true;
-        public override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations => ImmutableArray<TypeWithAnnotations>.Empty;
+        public override ImmutableArray<TypeWithAnnotations> TypeArgumentsWithAnnotations =>
+            ImmutableArray<TypeWithAnnotations>.Empty;
         internal override bool HasSpecialName => false;
         internal override MethodImplAttributes ImplementationAttributes => default;
         internal override bool HasDeclarativeSecurity => false;
-        internal override MarshalPseudoCustomAttributeData? ReturnValueMarshallingInformation => null;
+        internal override MarshalPseudoCustomAttributeData? ReturnValueMarshallingInformation =>
+            null;
         internal override bool RequiresSecurityObject => false;
         internal override bool IsDeclaredReadOnly => false;
         internal override bool IsInitOnly => false;
-        internal override ImmutableArray<string> GetAppliedConditionalSymbols() => ImmutableArray<string>.Empty;
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
-        public override FlowAnalysisAnnotations FlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
-        internal override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false) => false;
-        internal override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false) => false;
-        internal sealed override UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(bool forceComplete) => null;
+
+        internal override ImmutableArray<string> GetAppliedConditionalSymbols() =>
+            ImmutableArray<string>.Empty;
+
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
+        public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
+
+        internal override bool IsMetadataNewSlot(
+            bool ignoreInterfaceImplementationChanges = false
+        ) => false;
+
+        internal override bool IsMetadataVirtual(
+            bool ignoreInterfaceImplementationChanges = false
+        ) => false;
+
+        internal sealed override UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(
+            bool forceComplete
+        ) => null;
 
         internal override bool GenerateDebugInfo => throw ExceptionUtilities.Unreachable();
-        internal override ObsoleteAttributeData? ObsoleteAttributeData => throw ExceptionUtilities.Unreachable();
+        internal override ObsoleteAttributeData? ObsoleteAttributeData =>
+            throw ExceptionUtilities.Unreachable();
 
         public override bool AreLocalsZeroed => throw ExceptionUtilities.Unreachable();
+
         public override DllImportData GetDllImportData() => throw ExceptionUtilities.Unreachable();
-        internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree) => throw ExceptionUtilities.Unreachable();
-        internal override IEnumerable<SecurityAttribute> GetSecurityInformation() => throw ExceptionUtilities.Unreachable();
-        internal sealed override bool IsNullableAnalysisEnabled() => throw ExceptionUtilities.Unreachable();
-        protected sealed override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable();
+
+        internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree) =>
+            throw ExceptionUtilities.Unreachable();
+
+        internal override IEnumerable<SecurityAttribute> GetSecurityInformation() =>
+            throw ExceptionUtilities.Unreachable();
+
+        internal sealed override bool IsNullableAnalysisEnabled() =>
+            throw ExceptionUtilities.Unreachable();
+
+        protected sealed override bool HasSetsRequiredMembersImpl =>
+            throw ExceptionUtilities.Unreachable();
         internal sealed override bool HasUnscopedRefAttribute => false;
 
-        internal sealed override bool HasAsyncMethodBuilderAttribute(out TypeSymbol? builderArgument)
+        internal sealed override bool HasAsyncMethodBuilderAttribute(
+            out TypeSymbol? builderArgument
+        )
         {
             builderArgument = null;
             return false;

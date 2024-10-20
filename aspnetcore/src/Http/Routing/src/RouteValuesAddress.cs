@@ -4,6 +4,7 @@
 #nullable enable
 
 using System.Linq;
+
 namespace Microsoft.AspNetCore.Routing;
 
 /// <summary>
@@ -12,6 +13,7 @@ namespace Microsoft.AspNetCore.Routing;
 public class RouteValuesAddress
 {
     private string? _toString;
+
     /// <summary>
     /// Gets or sets the route name.
     /// </summary>
@@ -30,7 +32,8 @@ public class RouteValuesAddress
     /// <inheritdoc />
     public override string? ToString()
     {
-        _toString ??= $"{RouteName}({string.Join(',', ExplicitValues.Select(kv => $"{kv.Key}=[{kv.Value}]"))})";
+        _toString ??=
+            $"{RouteName}({string.Join(',', ExplicitValues.Select(kv => $"{kv.Key}=[{kv.Value}]"))})";
         return _toString;
     }
 }

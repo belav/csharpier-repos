@@ -12,8 +12,13 @@ namespace System.Net.Sockets
     {
         private const uint WindowsDefaultTimeMs = 7200000u;
         private const uint WindowsDefaultIntervalMs = 1000u;
-        private static readonly bool s_supportsKeepAliveViaSocketOption = SupportsKeepAliveViaSocketOption();
-        private static readonly ConditionalWeakTable<SafeSocketHandle, IOControlKeepAlive> s_socketKeepAliveTable = new ConditionalWeakTable<SafeSocketHandle, IOControlKeepAlive>();
+        private static readonly bool s_supportsKeepAliveViaSocketOption =
+            SupportsKeepAliveViaSocketOption();
+        private static readonly ConditionalWeakTable<
+            SafeSocketHandle,
+            IOControlKeepAlive
+        > s_socketKeepAliveTable = new ConditionalWeakTable<SafeSocketHandle, IOControlKeepAlive>();
+
         [ThreadStatic]
         private static byte[]? s_keepAliveValuesBuffer;
 
@@ -22,10 +27,17 @@ namespace System.Net.Sockets
 
         public static bool IsNeeded => !s_supportsKeepAliveViaSocketOption;
 
-        public static SocketError Get(SafeSocketHandle handle, SocketOptionName optionName, byte[] optionValueSeconds, ref int optionLength)
+        public static SocketError Get(
+            SafeSocketHandle handle,
+            SocketOptionName optionName,
+            byte[] optionValueSeconds,
+            ref int optionLength
+        )
         {
-            if (optionValueSeconds == null ||
-                !BitConverter.TryWriteBytes(optionValueSeconds.AsSpan(), Get(handle, optionName)))
+            if (
+                optionValueSeconds == null
+                || !BitConverter.TryWriteBytes(optionValueSeconds.AsSpan(), Get(handle, optionName))
+            )
             {
                 return SocketError.Fault;
             }
@@ -36,22 +48,30 @@ namespace System.Net.Sockets
 
         public static int Get(SafeSocketHandle handle, SocketOptionName optionName)
         {
-            if (s_socketKeepAliveTable.TryGetValue(handle, out IOControlKeepAlive? ioControlKeepAlive))
+            if (
+                s_socketKeepAliveTable.TryGetValue(
+                    handle,
+                    out IOControlKeepAlive? ioControlKeepAlive
+                )
+            )
             {
-                return optionName == SocketOptionName.TcpKeepAliveTime ?
-                    MillisecondsToSeconds(ioControlKeepAlive._timeMs) :
-                    MillisecondsToSeconds(ioControlKeepAlive._intervalMs);
+                return optionName == SocketOptionName.TcpKeepAliveTime
+                    ? MillisecondsToSeconds(ioControlKeepAlive._timeMs)
+                    : MillisecondsToSeconds(ioControlKeepAlive._intervalMs);
             }
 
-            return optionName == SocketOptionName.TcpKeepAliveTime ?
-                MillisecondsToSeconds(WindowsDefaultTimeMs) :
-                MillisecondsToSeconds(WindowsDefaultIntervalMs);
+            return optionName == SocketOptionName.TcpKeepAliveTime
+                ? MillisecondsToSeconds(WindowsDefaultTimeMs)
+                : MillisecondsToSeconds(WindowsDefaultIntervalMs);
         }
 
-        public static SocketError Set(SafeSocketHandle handle, SocketOptionName optionName, byte[] optionValueSeconds)
+        public static SocketError Set(
+            SafeSocketHandle handle,
+            SocketOptionName optionName,
+            byte[] optionValueSeconds
+        )
         {
-            if (optionValueSeconds == null ||
-                optionValueSeconds.Length < sizeof(int))
+            if (optionValueSeconds == null || optionValueSeconds.Length < sizeof(int))
             {
                 return SocketError.Fault;
             }
@@ -59,9 +79,16 @@ namespace System.Net.Sockets
             return Set(handle, optionName, BitConverter.ToInt32(optionValueSeconds, 0));
         }
 
-        public static SocketError Set(SafeSocketHandle handle, SocketOptionName optionName, int optionValueSeconds)
+        public static SocketError Set(
+            SafeSocketHandle handle,
+            SocketOptionName optionName,
+            int optionValueSeconds
+        )
         {
-            IOControlKeepAlive ioControlKeepAlive = s_socketKeepAliveTable.GetValue(handle, (SafeSocketHandle handle) => new IOControlKeepAlive());
+            IOControlKeepAlive ioControlKeepAlive = s_socketKeepAliveTable.GetValue(
+                handle,
+                (SafeSocketHandle handle) => new IOControlKeepAlive()
+            );
             if (optionName == SocketOptionName.TcpKeepAliveTime)
             {
                 ioControlKeepAlive._timeMs = SecondsToMilliseconds(optionValueSeconds);
@@ -75,12 +102,20 @@ namespace System.Net.Sockets
             ioControlKeepAlive.Fill(buffer);
             int realOptionLength = 0;
             Debug.Assert(OperatingSystem.IsWindows());
-            return SocketPal.WindowsIoctl(handle, unchecked((int)IOControlCode.KeepAliveValues), buffer, null, out realOptionLength);
+            return SocketPal.WindowsIoctl(
+                handle,
+                unchecked((int)IOControlCode.KeepAliveValues),
+                buffer,
+                null,
+                out realOptionLength
+            );
         }
 
         private static bool SupportsKeepAliveViaSocketOption()
         {
-            AddressFamily addressFamily = Socket.OSSupportsIPv4 ? AddressFamily.InterNetwork : AddressFamily.InterNetworkV6;
+            AddressFamily addressFamily = Socket.OSSupportsIPv4
+                ? AddressFamily.InterNetwork
+                : AddressFamily.InterNetworkV6;
             using (Socket socket = new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp))
             {
                 int time = MillisecondsToSeconds(WindowsDefaultTimeMs);
@@ -89,7 +124,8 @@ namespace System.Net.Sockets
                     SocketOptionLevel.Tcp,
                     SocketOptionName.TcpKeepAliveTime,
                     ref time,
-                    sizeof(int));
+                    sizeof(int)
+                );
 
                 int interval = MillisecondsToSeconds(WindowsDefaultIntervalMs);
                 SocketError intervalErrCode = Interop.Winsock.setsockopt(
@@ -97,11 +133,10 @@ namespace System.Net.Sockets
                     SocketOptionLevel.Tcp,
                     SocketOptionName.TcpKeepAliveInterval,
                     ref interval,
-                    sizeof(int));
+                    sizeof(int)
+                );
 
-                return
-                    timeErrCode == SocketError.Success &&
-                    intervalErrCode == SocketError.Success;
+                return timeErrCode == SocketError.Success && intervalErrCode == SocketError.Success;
             }
         }
 
@@ -116,9 +151,9 @@ namespace System.Net.Sockets
 
             const uint OnOff = 1u;
             bool written =
-                BitConverter.TryWriteBytes(buffer.AsSpan(), OnOff) &
-                BitConverter.TryWriteBytes(buffer.AsSpan(sizeof(uint)), _timeMs) &
-                BitConverter.TryWriteBytes(buffer.AsSpan(sizeof(uint) * 2), _intervalMs);
+                BitConverter.TryWriteBytes(buffer.AsSpan(), OnOff)
+                & BitConverter.TryWriteBytes(buffer.AsSpan(sizeof(uint)), _timeMs)
+                & BitConverter.TryWriteBytes(buffer.AsSpan(sizeof(uint) * 2), _intervalMs);
             Debug.Assert(written);
         }
     }

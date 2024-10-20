@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         None = 0x00,
         Hidden = 0x01,
-        Info = 0x10
+        Info = 0x10,
     }
 
     internal static class SeverityFilterExtensions
@@ -26,11 +26,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 ReportDiagnostic.Hidden => (severityFilter & SeverityFilter.Hidden) != 0,
                 ReportDiagnostic.Info => (severityFilter & SeverityFilter.Info) != 0,
-                _ => false
+                _ => false,
             };
         }
 
-        internal static DiagnosticSeverity GetMinimumUnfilteredSeverity(this SeverityFilter severityFilter)
+        internal static DiagnosticSeverity GetMinimumUnfilteredSeverity(
+            this SeverityFilter severityFilter
+        )
         {
             if (!severityFilter.Contains(ReportDiagnostic.Hidden))
             {

@@ -28,21 +28,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyType is null)
                 {
-                    Interlocked.CompareExchange(ref _lazyType, _underlying.TypeWithAnnotations.GetPublicSymbol(), null);
+                    Interlocked.CompareExchange(
+                        ref _lazyType,
+                        _underlying.TypeWithAnnotations.GetPublicSymbol(),
+                        null
+                    );
                 }
 
                 return _lazyType;
             }
         }
 
-        CodeAnalysis.NullableAnnotation ILocalSymbol.NullableAnnotation => _underlying.TypeWithAnnotations.ToPublicAnnotation();
+        CodeAnalysis.NullableAnnotation ILocalSymbol.NullableAnnotation =>
+            _underlying.TypeWithAnnotations.ToPublicAnnotation();
 
         bool ILocalSymbol.IsFunctionValue
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         bool ILocalSymbol.IsConst => _underlying.IsConst;
@@ -75,7 +77,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitLocal(this);
         }
 
-        protected override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitLocal(this, argument);
         }

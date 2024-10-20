@@ -13,7 +13,13 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.DataProvider.CodeStyle
 {
-    [ExportLanguageServiceFactory(typeof(ILanguageSettingsProviderFactory<CodeStyleSetting>), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageServiceFactory(
+            typeof(ILanguageSettingsProviderFactory<CodeStyleSetting>),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
     internal sealed class CSharpCodeStyleSettingsLanguageServiceFactory : ILanguageServiceFactory
     {
         private readonly IGlobalOptionService _globalOptions;

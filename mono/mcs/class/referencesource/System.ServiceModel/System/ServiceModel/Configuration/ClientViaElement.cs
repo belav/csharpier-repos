@@ -9,9 +9,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ClientViaElement : BehaviorExtensionElement
     {
-        public ClientViaElement()
-        {
-        }
+        public ClientViaElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.ViaUri)]
         public Uri ViaUri
@@ -40,6 +38,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

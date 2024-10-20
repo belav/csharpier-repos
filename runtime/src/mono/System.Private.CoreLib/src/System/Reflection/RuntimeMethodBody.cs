@@ -6,8 +6,14 @@ namespace System.Reflection
     internal sealed partial class RuntimeMethodBody : MethodBody
     {
         // Called by the runtime
-        internal RuntimeMethodBody(ExceptionHandlingClause[] clauses, LocalVariableInfo[] locals,
-                                    byte[] il, bool init_locals, int sig_token, int max_stack)
+        internal RuntimeMethodBody(
+            ExceptionHandlingClause[] clauses,
+            LocalVariableInfo[] locals,
+            byte[] il,
+            bool init_locals,
+            int sig_token,
+            int max_stack
+        )
         {
             _exceptionHandlingClauses = clauses;
             _localVariables = locals;

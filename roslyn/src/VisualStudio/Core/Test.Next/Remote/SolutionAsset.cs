@@ -14,7 +14,7 @@ internal readonly struct SolutionAsset
 {
     /// <summary>
     /// Indicates what kind of object it.
-    /// 
+    ///
     /// Used in transportation framework and deserialization service to hand shake how to send over data and
     /// deserialize serialized data.
     /// </summary>

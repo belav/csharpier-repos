@@ -95,9 +95,7 @@ namespace System.Data.Common
                 _index = -1;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {
@@ -106,18 +104,12 @@ namespace System.Data.Common
 
             public K Current
             {
-                get
-                {
-                    return _items[_index];
-                }
+                get { return _items[_index]; }
             }
 
             object? System.Collections.IEnumerator.Current
             {
-                get
-                {
-                    return _items[_index];
-                }
+                get { return _items[_index]; }
             }
 
             void System.Collections.IEnumerator.Reset()
@@ -135,16 +127,28 @@ namespace System.Data.Common
             string? svalue = (value as string);
             if (null != svalue)
             {
-                if (StringComparer.OrdinalIgnoreCase.Equals(svalue, "true") || StringComparer.OrdinalIgnoreCase.Equals(svalue, "yes"))
+                if (
+                    StringComparer.OrdinalIgnoreCase.Equals(svalue, "true")
+                    || StringComparer.OrdinalIgnoreCase.Equals(svalue, "yes")
+                )
                     return true;
-                else if (StringComparer.OrdinalIgnoreCase.Equals(svalue, "false") || StringComparer.OrdinalIgnoreCase.Equals(svalue, "no"))
+                else if (
+                    StringComparer.OrdinalIgnoreCase.Equals(svalue, "false")
+                    || StringComparer.OrdinalIgnoreCase.Equals(svalue, "no")
+                )
                     return false;
                 else
                 {
-                    string tmp = svalue.Trim();  // Remove leading & trailing white space.
-                    if (StringComparer.OrdinalIgnoreCase.Equals(tmp, "true") || StringComparer.OrdinalIgnoreCase.Equals(tmp, "yes"))
+                    string tmp = svalue.Trim(); // Remove leading & trailing white space.
+                    if (
+                        StringComparer.OrdinalIgnoreCase.Equals(tmp, "true")
+                        || StringComparer.OrdinalIgnoreCase.Equals(tmp, "yes")
+                    )
                         return true;
-                    else if (StringComparer.OrdinalIgnoreCase.Equals(tmp, "false") || StringComparer.OrdinalIgnoreCase.Equals(tmp, "no"))
+                    else if (
+                        StringComparer.OrdinalIgnoreCase.Equals(tmp, "false")
+                        || StringComparer.OrdinalIgnoreCase.Equals(tmp, "no")
+                    )
                         return false;
                 }
                 return bool.Parse(svalue);
@@ -188,7 +192,11 @@ namespace System.Data.Common
     {
         // OleDb
         internal const string FileName = "";
-        internal const int OleDbServices = ~(/*DBPROPVAL_OS_AGR_AFTERSESSION*/0x00000008 | /*DBPROPVAL_OS_CLIENTCURSOR*/0x00000004); // -13
+        internal const int OleDbServices = ~( /*DBPROPVAL_OS_AGR_AFTERSESSION*/
+            0x00000008
+            | /*DBPROPVAL_OS_CLIENTCURSOR*/
+            0x00000004
+        ); // -13
         internal const string Provider = "";
 
         internal const int ConnectTimeout = 15;

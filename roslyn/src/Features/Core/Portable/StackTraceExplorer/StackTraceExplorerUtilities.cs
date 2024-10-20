@@ -15,21 +15,26 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 {
     internal static class StackTraceExplorerUtilities
     {
-        // Order is important here. Resolution should happen from most specific to least specific. 
+        // Order is important here. Resolution should happen from most specific to least specific.
         private static readonly AbstractStackTraceSymbolResolver[] _resolvers =
-            [
-                new StackFrameLocalMethodResolver(),
-                new StackFrameMethodSymbolResolver(),
-            ];
+        [
+            new StackFrameLocalMethodResolver(),
+            new StackFrameMethodSymbolResolver(),
+        ];
 
-        public static async Task<DefinitionItem?> GetDefinitionAsync(Solution solution, StackFrameCompilationUnit compilationUnit, StackFrameSymbolPart symbolPart, CancellationToken cancellationToken)
+        public static async Task<DefinitionItem?> GetDefinitionAsync(
+            Solution solution,
+            StackFrameCompilationUnit compilationUnit,
+            StackFrameSymbolPart symbolPart,
+            CancellationToken cancellationToken
+        )
         {
-            // MemberAccessExpression is [Expression].[Identifier], and Identifier is the 
+            // MemberAccessExpression is [Expression].[Identifier], and Identifier is the
             // method name.
             var typeExpression = compilationUnit.MethodDeclaration.MemberAccessExpression.Left;
 
             // typeExpression.ToString() returns the full expression (or identifier)
-            // including arity for generic types. 
+            // including arity for generic types.
             var fullyQualifiedTypeName = typeExpression.ToString();
 
             var typeName = typeExpression is StackFrameQualifiedNameNode qualifiedName
@@ -43,9 +48,11 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             var methodArguments = compilationUnit.MethodDeclaration.ArgumentList;
 
             //
-            // Do a first pass to find projects with the type name to check first 
+            // Do a first pass to find projects with the type name to check first
             //
-            using var _ = PooledObjects.ArrayBuilder<Project>.GetInstance(out var candidateProjects);
+            using var _ = PooledObjects.ArrayBuilder<Project>.GetInstance(
+                out var candidateProjects
+            );
             foreach (var project in solution.Projects)
             {
                 if (!project.SupportsCompilation)
@@ -53,14 +60,21 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
                     continue;
                 }
 
-                var containsSymbol = await project.ContainsSymbolsWithNameAsync(
-                    typeName,
-                    SymbolFilter.Type,
-                    cancellationToken).ConfigureAwait(false);
+                var containsSymbol = await project
+                    .ContainsSymbolsWithNameAsync(typeName, SymbolFilter.Type, cancellationToken)
+                    .ConfigureAwait(false);
 
                 if (containsSymbol)
                 {
-                    var method = await TryGetBestMatchAsync(project, fullyQualifiedTypeName, methodNode, methodArguments, methodTypeArguments, cancellationToken).ConfigureAwait(false);
+                    var method = await TryGetBestMatchAsync(
+                            project,
+                            fullyQualifiedTypeName,
+                            methodNode,
+                            methodArguments,
+                            methodTypeArguments,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (method is not null)
                     {
                         return GetDefinition(method);
@@ -78,7 +92,15 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             //
             foreach (var project in candidateProjects)
             {
-                var method = await TryGetBestMatchAsync(project, fullyQualifiedTypeName, methodNode, methodArguments, methodTypeArguments, cancellationToken).ConfigureAwait(false);
+                var method = await TryGetBestMatchAsync(
+                        project,
+                        fullyQualifiedTypeName,
+                        methodNode,
+                        methodArguments,
+                        methodTypeArguments,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (method is not null)
                 {
                     return GetDefinition(method);
@@ -101,14 +123,27 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 
                 return symbol.ToNonClassifiedDefinitionItem(
                     solution,
-                    FindReferencesSearchOptions.Default with { UnidirectionalHierarchyCascade = true },
-                    includeHiddenLocations: true);
+                    FindReferencesSearchOptions.Default with
+                    {
+                        UnidirectionalHierarchyCascade = true,
+                    },
+                    includeHiddenLocations: true
+                );
             }
         }
 
-        private static async Task<IMethodSymbol?> TryGetBestMatchAsync(Project project, string fullyQualifiedTypeName, StackFrameSimpleNameNode methodNode, StackFrameParameterList methodArguments, StackFrameTypeArgumentList? methodTypeArguments, CancellationToken cancellationToken)
+        private static async Task<IMethodSymbol?> TryGetBestMatchAsync(
+            Project project,
+            string fullyQualifiedTypeName,
+            StackFrameSimpleNameNode methodNode,
+            StackFrameParameterList methodArguments,
+            StackFrameTypeArgumentList? methodTypeArguments,
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await project
+                .GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             var type = compilation.GetTypeByMetadataName(fullyQualifiedTypeName);
             if (type is null)
             {
@@ -117,7 +152,16 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
 
             foreach (var resolver in _resolvers)
             {
-                var matchingMethod = await resolver.TryGetBestMatchAsync(project, type, methodNode, methodArguments, methodTypeArguments, cancellationToken).ConfigureAwait(false);
+                var matchingMethod = await resolver
+                    .TryGetBestMatchAsync(
+                        project,
+                        type,
+                        methodNode,
+                        methodArguments,
+                        methodTypeArguments,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (matchingMethod is not null)
                 {
                     return matchingMethod;

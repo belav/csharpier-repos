@@ -23,9 +23,7 @@ public class KeyManagementOptions
     /// <summary>
     /// Initializes a new instance of <see cref="KeyManagementOptions"/>.
     /// </summary>
-    public KeyManagementOptions()
-    {
-    }
+    public KeyManagementOptions() { }
 
     // copy ctor
     internal KeyManagementOptions(KeyManagementOptions other)
@@ -111,10 +109,7 @@ public class KeyManagementOptions
     /// </remarks>
     internal static TimeSpan MaxServerClockSkew
     {
-        get
-        {
-            return _maxServerClockSkew;
-        }
+        get { return _maxServerClockSkew; }
     }
 
     /// <summary>
@@ -127,15 +122,15 @@ public class KeyManagementOptions
     /// </remarks>
     public TimeSpan NewKeyLifetime
     {
-        get
-        {
-            return _newKeyLifetime;
-        }
+        get { return _newKeyLifetime; }
         set
         {
             if (value < TimeSpan.FromDays(7))
             {
-                throw new ArgumentOutOfRangeException(nameof(value), Resources.KeyManagementOptions_MinNewKeyLifetimeViolated);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    Resources.KeyManagementOptions_MinNewKeyLifetimeViolated
+                );
             }
             _newKeyLifetime = value;
         }
@@ -166,5 +161,6 @@ public class KeyManagementOptions
     /// The list of <see cref="IAuthenticatedEncryptorFactory"/> that will be used for creating
     /// <see cref="IAuthenticatedEncryptor"/>s.
     /// </summary>
-    public IList<IAuthenticatedEncryptorFactory> AuthenticatedEncryptorFactories { get; } = new List<IAuthenticatedEncryptorFactory>();
+    public IList<IAuthenticatedEncryptorFactory> AuthenticatedEncryptorFactories { get; } =
+        new List<IAuthenticatedEncryptorFactory>();
 }

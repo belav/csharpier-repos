@@ -24,15 +24,15 @@ public class TagHelperExecutionContext
     /// Internal for testing purposes only.
     /// </summary>
     internal TagHelperExecutionContext(string tagName, TagMode tagMode)
-        : this(tagName,
-               tagMode,
-               items: new Dictionary<object, object>(),
-               uniqueId: string.Empty,
-               executeChildContentAsync: () => Task.CompletedTask,
-               startTagHelperWritingScope: _ => { },
-               endTagHelperWritingScope: () => new DefaultTagHelperContent())
-    {
-    }
+        : this(
+            tagName,
+            tagMode,
+            items: new Dictionary<object, object>(),
+            uniqueId: string.Empty,
+            executeChildContentAsync: () => Task.CompletedTask,
+            startTagHelperWritingScope: _ => { },
+            endTagHelperWritingScope: () => new DefaultTagHelperContent()
+        ) { }
 
     /// <summary>
     /// Instantiates a new <see cref="TagHelperExecutionContext"/>.
@@ -55,7 +55,8 @@ public class TagHelperExecutionContext
         string uniqueId,
         Func<Task> executeChildContentAsync,
         Action<HtmlEncoder> startTagHelperWritingScope,
-        Func<TagHelperContent> endTagHelperWritingScope)
+        Func<TagHelperContent> endTagHelperWritingScope
+    )
     {
         ArgumentNullException.ThrowIfNull(startTagHelperWritingScope);
         ArgumentNullException.ThrowIfNull(endTagHelperWritingScope);
@@ -66,7 +67,7 @@ public class TagHelperExecutionContext
         Context = new TagHelperContext(tagName, _allAttributes, items, uniqueId);
         Output = new TagHelperOutput(tagName, new TagHelperAttributeList(), GetChildContentAsync)
         {
-            TagMode = tagMode
+            TagMode = tagMode,
         };
 
         Reinitialize(tagName, tagMode, items, uniqueId, executeChildContentAsync);
@@ -178,7 +179,8 @@ public class TagHelperExecutionContext
         TagMode tagMode,
         IDictionary<object, object> items,
         string uniqueId,
-        Func<Task> executeChildContentAsync)
+        Func<Task> executeChildContentAsync
+    )
     {
         ArgumentNullException.ThrowIfNull(tagName);
         ArgumentNullException.ThrowIfNull(items);
@@ -224,7 +226,10 @@ public class TagHelperExecutionContext
     }
 
     // Internal for testing.
-    internal async Task<TagHelperContent> GetChildContentAsync(bool useCachedResult, HtmlEncoder encoder)
+    internal async Task<TagHelperContent> GetChildContentAsync(
+        bool useCachedResult,
+        HtmlEncoder encoder
+    )
     {
         // Get cached content for this encoder.
         TagHelperContent childContent;

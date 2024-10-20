@@ -6,8 +6,8 @@ namespace System.Activities
 {
     using System;
     using System.Activities.Expressions;
-    using System.Activities.XamlIntegration;
     using System.Activities.Runtime;
+    using System.Activities.XamlIntegration;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq.Expressions;
@@ -21,9 +21,15 @@ namespace System.Activities
             this.Direction = ArgumentDirection.InOut;
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Subclass needed to enforce rules about which directions can be referenced.")]
-        public static InOutArgument CreateReference(InOutArgument argumentToReference, string referencedArgumentName)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Subclass needed to enforce rules about which directions can be referenced."
+        )]
+        public static InOutArgument CreateReference(
+            InOutArgument argumentToReference,
+            string referencedArgumentName
+        )
         {
             if (argumentToReference == null)
             {
@@ -35,7 +41,12 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNullOrEmpty("referencedArgumentName");
             }
 
-            return (InOutArgument)ActivityUtilities.CreateReferenceArgument(argumentToReference.ArgumentType, ArgumentDirection.InOut, referencedArgumentName);
+            return (InOutArgument)
+                ActivityUtilities.CreateReferenceArgument(
+                    argumentToReference.ArgumentType,
+                    ArgumentDirection.InOut,
+                    referencedArgumentName
+                );
         }
     }
 
@@ -84,18 +95,11 @@ namespace System.Activities
         }
 
         [DefaultValue(null)]
-        public new Activity<Location<T>> Expression
-        {
-            get;
-            set;
-        }
+        public new Activity<Location<T>> Expression { get; set; }
 
         internal override ActivityWithResult ExpressionCore
         {
-            get
-            {
-                return this.Expression;
-            }
+            get { return this.Expression; }
             set
             {
                 if (value == null)
@@ -129,13 +133,16 @@ namespace System.Activities
             return FromExpression(expression);
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
-            Justification = "Generic needed for type inference")]    
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.ConsiderPassingBaseTypesAsParameters,
+            Justification = "Generic needed for type inference"
+        )]
         public static InOutArgument<T> FromVariable(Variable<T> variable)
         {
             return new InOutArgument<T>
             {
-                Expression = new VariableReference<T> { Variable = variable }
+                Expression = new VariableReference<T> { Variable = variable },
             };
         }
 
@@ -146,10 +153,7 @@ namespace System.Activities
                 throw FxTrace.Exception.ArgumentNull("expression");
             }
 
-            return new InOutArgument<T>
-            {
-                Expression = expression
-            };
+            return new InOutArgument<T> { Expression = expression };
         }
 
         // Soft-Link: This method is referenced through reflection by
@@ -192,24 +196,49 @@ namespace System.Activities
             return Argument.CreateLocation<T>();
         }
 
-        internal override void Declare(LocationEnvironment targetEnvironment, ActivityInstance activityInstance)
+        internal override void Declare(
+            LocationEnvironment targetEnvironment,
+            ActivityInstance activityInstance
+        )
         {
-            targetEnvironment.DeclareTemporaryLocation<Location<T>>(this.RuntimeArgument, activityInstance, false);
+            targetEnvironment.DeclareTemporaryLocation<Location<T>>(
+                this.RuntimeArgument,
+                activityInstance,
+                false
+            );
         }
 
-        internal override bool TryPopulateValue(LocationEnvironment targetEnvironment, ActivityInstance targetActivityInstance, ActivityExecutor executor)
+        internal override bool TryPopulateValue(
+            LocationEnvironment targetEnvironment,
+            ActivityInstance targetActivityInstance,
+            ActivityExecutor executor
+        )
         {
-            Fx.Assert(this.Expression != null, "This should only be called for non-empty bindings.");
+            Fx.Assert(
+                this.Expression != null,
+                "This should only be called for non-empty bindings."
+            );
 
             if (this.Expression.UseOldFastPath)
             {
-                Location<T> argumentValue = executor.ExecuteInResolutionContext<Location<T>>(targetActivityInstance, this.Expression);
-                targetEnvironment.Declare(this.RuntimeArgument, argumentValue.CreateReference(false), targetActivityInstance);
+                Location<T> argumentValue = executor.ExecuteInResolutionContext<Location<T>>(
+                    targetActivityInstance,
+                    this.Expression
+                );
+                targetEnvironment.Declare(
+                    this.RuntimeArgument,
+                    argumentValue.CreateReference(false),
+                    targetActivityInstance
+                );
                 return true;
             }
             else
             {
-                targetEnvironment.DeclareTemporaryLocation<Location<T>>(this.RuntimeArgument, targetActivityInstance, false);
+                targetEnvironment.DeclareTemporaryLocation<Location<T>>(
+                    this.RuntimeArgument,
+                    targetActivityInstance,
+                    false
+                );
                 return false;
             }
         }

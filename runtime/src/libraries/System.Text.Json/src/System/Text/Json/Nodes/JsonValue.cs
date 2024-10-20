@@ -13,10 +13,13 @@ namespace System.Text.Json.Nodes
     /// </summary>
     public abstract partial class JsonValue : JsonNode
     {
-        internal const string CreateUnreferencedCodeMessage = "Creating JsonValue instances with non-primitive types is not compatible with trimming. It can result in non-primitive types being serialized, which may have their members trimmed.";
-        internal const string CreateDynamicCodeMessage = "Creating JsonValue instances with non-primitive types requires generating code at runtime.";
+        internal const string CreateUnreferencedCodeMessage =
+            "Creating JsonValue instances with non-primitive types is not compatible with trimming. It can result in non-primitive types being serialized, which may have their members trimmed.";
+        internal const string CreateDynamicCodeMessage =
+            "Creating JsonValue instances with non-primitive types requires generating code at runtime.";
 
-        private protected JsonValue(JsonNodeOptions? options = null) : base(options) { }
+        private protected JsonValue(JsonNodeOptions? options = null)
+            : base(options) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonValue"/> class that contains the specified value.
@@ -28,7 +31,10 @@ namespace System.Text.Json.Nodes
         /// <param name="value">The value to create.</param>
         /// <param name="options">Options to control the behavior.</param>
         /// <returns>The new instance of the <see cref="JsonValue"/> class that contains the specified value.</returns>
-        [RequiresUnreferencedCode(CreateUnreferencedCodeMessage + " Use the overload that takes a JsonTypeInfo, or make sure all of the required types are preserved.")]
+        [RequiresUnreferencedCode(
+            CreateUnreferencedCodeMessage
+                + " Use the overload that takes a JsonTypeInfo, or make sure all of the required types are preserved."
+        )]
         [RequiresDynamicCode(CreateDynamicCodeMessage)]
         public static JsonValue? Create<T>(T? value, JsonNodeOptions? options = null)
         {
@@ -46,10 +52,15 @@ namespace System.Text.Json.Nodes
 
                 VerifyJsonElementIsNotArrayOrObject(ref element);
 
-                return new JsonValuePrimitive<JsonElement>(element, JsonMetadataServices.JsonElementConverter, options);
+                return new JsonValuePrimitive<JsonElement>(
+                    element,
+                    JsonMetadataServices.JsonElementConverter,
+                    options
+                );
             }
 
-            var jsonTypeInfo = (JsonTypeInfo<T>)JsonSerializerOptions.Default.GetTypeInfo(typeof(T));
+            var jsonTypeInfo =
+                (JsonTypeInfo<T>)JsonSerializerOptions.Default.GetTypeInfo(typeof(T));
             return new JsonValueCustomized<T>(value, jsonTypeInfo, options);
         }
 
@@ -64,7 +75,11 @@ namespace System.Text.Json.Nodes
         /// <param name="jsonTypeInfo">The <see cref="JsonTypeInfo"/> that will be used to serialize the value.</param>
         /// <param name="options">Options to control the behavior.</param>
         /// <returns>The new instance of the <see cref="JsonValue"/> class that contains the specified value.</returns>
-        public static JsonValue? Create<T>(T? value, JsonTypeInfo<T> jsonTypeInfo, JsonNodeOptions? options = null)
+        public static JsonValue? Create<T>(
+            T? value,
+            JsonTypeInfo<T> jsonTypeInfo,
+            JsonNodeOptions? options = null
+        )
         {
             if (jsonTypeInfo is null)
             {

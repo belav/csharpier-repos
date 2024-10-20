@@ -73,8 +73,20 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public async Task Dispose_WhileInUse_DisposeDelayed()
         {
-            using (var listen = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var listen = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
@@ -82,17 +94,25 @@ namespace System.Net.Sockets.Tests
                 Task<Socket> acceptTask = listen.AcceptAsync();
                 await Task.WhenAll(
                     acceptTask,
-                    client.ConnectAsync(new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)));
+                    client.ConnectAsync(
+                        new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)
+                    )
+                );
 
                 using (Socket server = await acceptTask)
                 using (var receiveSaea = new SocketAsyncEventArgs())
                 {
                     var tcs = new TaskCompletionSource();
                     receiveSaea.SetBuffer(new byte[1], 0, 1);
-                    receiveSaea.Completed += delegate { tcs.SetResult(); };
+                    receiveSaea.Completed += delegate
+                    {
+                        tcs.SetResult();
+                    };
 
                     Assert.True(client.ReceiveAsync(receiveSaea));
-                    Assert.Throws<InvalidOperationException>(() => client.ReceiveAsync(receiveSaea)); // already in progress
+                    Assert.Throws<InvalidOperationException>(
+                        () => client.ReceiveAsync(receiveSaea)
+                    ); // already in progress
 
                     receiveSaea.Dispose();
 
@@ -109,8 +129,20 @@ namespace System.Net.Sockets.Tests
         [InlineData(true)]
         public async Task ExecutionContext_FlowsIfNotSuppressed(bool suppressed)
         {
-            using (var listen = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var listen = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
@@ -118,7 +150,10 @@ namespace System.Net.Sockets.Tests
                 Task<Socket> acceptTask = listen.AcceptAsync();
                 await Task.WhenAll(
                     acceptTask,
-                    client.ConnectAsync(new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)));
+                    client.ConnectAsync(
+                        new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)
+                    )
+                );
 
                 using (Socket server = await acceptTask)
                 using (var receiveSaea = new SocketAsyncEventArgs())
@@ -149,21 +184,44 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public async Task ExecutionContext_SocketAsyncEventArgs_Ctor_Default_FlowIsNotSuppressed()
         {
-            await ExecutionContext_SocketAsyncEventArgs_Ctors(() => new SocketAsyncEventArgs(), false);
+            await ExecutionContext_SocketAsyncEventArgs_Ctors(
+                () => new SocketAsyncEventArgs(),
+                false
+            );
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task ExecutionContext_SocketAsyncEventArgs_Ctor_UnsafeSuppressExecutionContextFlow(bool suppressed)
+        public async Task ExecutionContext_SocketAsyncEventArgs_Ctor_UnsafeSuppressExecutionContextFlow(
+            bool suppressed
+        )
         {
-            await ExecutionContext_SocketAsyncEventArgs_Ctors(() => new SocketAsyncEventArgs(suppressed), suppressed);
+            await ExecutionContext_SocketAsyncEventArgs_Ctors(
+                () => new SocketAsyncEventArgs(suppressed),
+                suppressed
+            );
         }
 
-        private async Task ExecutionContext_SocketAsyncEventArgs_Ctors(Func<SocketAsyncEventArgs> saeaFactory, bool suppressed)
+        private async Task ExecutionContext_SocketAsyncEventArgs_Ctors(
+            Func<SocketAsyncEventArgs> saeaFactory,
+            bool suppressed
+        )
         {
-            using (var listen = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var listen = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
@@ -171,15 +229,15 @@ namespace System.Net.Sockets.Tests
                 Task<Socket> acceptTask = listen.AcceptAsync();
                 await Task.WhenAll(
                     acceptTask,
-                    client.ConnectAsync(new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)));
+                    client.ConnectAsync(
+                        new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)
+                    )
+                );
 
                 using (Socket server = await acceptTask)
                 using (SocketAsyncEventArgs receiveSaea = saeaFactory())
                 {
-                    var local = new AsyncLocal<int>
-                    {
-                        Value = 42
-                    };
+                    var local = new AsyncLocal<int> { Value = 42 };
                     int threadId = Environment.CurrentManagedThreadId;
 
                     var mres = new ManualResetEventSlim();
@@ -203,17 +261,44 @@ namespace System.Net.Sockets.Tests
         {
             using (var saea = new SocketAsyncEventArgs())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => saea.SetBuffer(new byte[1], -1, 0));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => saea.SetBuffer(new byte[1], 2, 0));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => saea.SetBuffer(new byte[1], 0, -1));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => saea.SetBuffer(new byte[1], 0, 2));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => saea.SetBuffer(new byte[1], 1, 2));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "offset",
+                    () => saea.SetBuffer(new byte[1], -1, 0)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "offset",
+                    () => saea.SetBuffer(new byte[1], 2, 0)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "count",
+                    () => saea.SetBuffer(new byte[1], 0, -1)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "count",
+                    () => saea.SetBuffer(new byte[1], 0, 2)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "count",
+                    () => saea.SetBuffer(new byte[1], 1, 2)
+                );
 
                 saea.SetBuffer(new byte[2], 0, 2);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => saea.SetBuffer(-1, 2));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => saea.SetBuffer(3, 2));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => saea.SetBuffer(0, -1));
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => saea.SetBuffer(0, 3));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "offset",
+                    () => saea.SetBuffer(-1, 2)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "offset",
+                    () => saea.SetBuffer(3, 2)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "count",
+                    () => saea.SetBuffer(0, -1)
+                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "count",
+                    () => saea.SetBuffer(0, 3)
+                );
             }
         }
 
@@ -241,11 +326,17 @@ namespace System.Net.Sockets.Tests
         {
             using (var saea = new SocketAsyncEventArgs())
             {
-                var bufferList = new List<ArraySegment<byte>> { new ArraySegment<byte>(new byte[1]) };
+                var bufferList = new List<ArraySegment<byte>>
+                {
+                    new ArraySegment<byte>(new byte[1]),
+                };
 
                 byte[] buffer = new byte[1];
                 saea.SetBuffer(buffer, 0, 1);
-                AssertExtensions.Throws<ArgumentException>(null, () => saea.BufferList = bufferList);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => saea.BufferList = bufferList
+                );
                 Assert.Same(buffer, saea.Buffer);
                 Assert.Null(saea.BufferList);
 
@@ -259,9 +350,15 @@ namespace System.Net.Sockets.Tests
         {
             using (var saea = new SocketAsyncEventArgs())
             {
-                var bufferList = new List<ArraySegment<byte>> { new ArraySegment<byte>(new byte[1]) };
+                var bufferList = new List<ArraySegment<byte>>
+                {
+                    new ArraySegment<byte>(new byte[1]),
+                };
                 saea.BufferList = bufferList;
-                AssertExtensions.Throws<ArgumentException>(null, () => saea.SetBuffer(new byte[1], 0, 1));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => saea.SetBuffer(new byte[1], 0, 1)
+                );
                 Assert.Same(bufferList, saea.BufferList);
                 Assert.Null(saea.Buffer);
 
@@ -279,14 +376,20 @@ namespace System.Net.Sockets.Tests
                 saea.BufferList = null;
                 Assert.Null(saea.BufferList);
 
-                var bufferList1 = new List<ArraySegment<byte>> { new ArraySegment<byte>(new byte[1]) };
+                var bufferList1 = new List<ArraySegment<byte>>
+                {
+                    new ArraySegment<byte>(new byte[1]),
+                };
                 saea.BufferList = bufferList1;
                 Assert.Same(bufferList1, saea.BufferList);
 
                 saea.BufferList = bufferList1;
                 Assert.Same(bufferList1, saea.BufferList);
 
-                var bufferList2 = new List<ArraySegment<byte>> { new ArraySegment<byte>(new byte[1]) };
+                var bufferList2 = new List<ArraySegment<byte>>
+                {
+                    new ArraySegment<byte>(new byte[1]),
+                };
                 saea.BufferList = bufferList2;
                 Assert.Same(bufferList2, saea.BufferList);
             }
@@ -319,19 +422,40 @@ namespace System.Net.Sockets.Tests
         {
             using (var e = new SocketAsyncEventArgs())
             {
-                ArraySegment<byte> invalidBuffer = new FakeArraySegment { Array = new byte[length], Offset = offset, Count = count }.ToActual();
-                Assert.Throws<ArgumentOutOfRangeException>(() => e.BufferList = new List<ArraySegment<byte>> { invalidBuffer });
+                ArraySegment<byte> invalidBuffer = new FakeArraySegment
+                {
+                    Array = new byte[length],
+                    Offset = offset,
+                    Count = count,
+                }.ToActual();
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => e.BufferList = new List<ArraySegment<byte>> { invalidBuffer }
+                );
 
                 ArraySegment<byte> validBuffer = new ArraySegment<byte>(new byte[1]);
-                Assert.Throws<ArgumentOutOfRangeException>(() => e.BufferList = new List<ArraySegment<byte>> { validBuffer, invalidBuffer });
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    () => e.BufferList = new List<ArraySegment<byte>> { validBuffer, invalidBuffer }
+                );
             }
         }
 
         [Fact]
         public async Task Completed_RegisterThenInvoked_UnregisterThenNotInvoked()
         {
-            using (var listen = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var listen = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
@@ -339,13 +463,17 @@ namespace System.Net.Sockets.Tests
                 Task<Socket> acceptTask = listen.AcceptAsync();
                 await Task.WhenAll(
                     acceptTask,
-                    client.ConnectAsync(new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)));
+                    client.ConnectAsync(
+                        new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)
+                    )
+                );
 
                 using (Socket server = await acceptTask)
                 using (var receiveSaea = new SocketAsyncEventArgs())
                 {
                     receiveSaea.SetBuffer(new byte[1], 0, 1);
-                    TaskCompletionSource tcs1 = null, tcs2 = null;
+                    TaskCompletionSource tcs1 = null,
+                        tcs2 = null;
 
                     EventHandler<SocketAsyncEventArgs> handler1 = (_, __) => tcs1.SetResult();
                     EventHandler<SocketAsyncEventArgs> handler2 = (_, __) => tcs2.SetResult();
@@ -377,18 +505,34 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void CancelConnectAsync_InstanceConnect_CancelsInProgressConnect()
         {
-            using (var listen = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var listen = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 using (var connectSaea = new SocketAsyncEventArgs())
                 {
                     var tcs = new TaskCompletionSource<SocketError>();
                     connectSaea.Completed += (s, e) => tcs.SetResult(e.SocketError);
-                    connectSaea.RemoteEndPoint = new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port);
+                    connectSaea.RemoteEndPoint = new IPEndPoint(
+                        IPAddress.Loopback,
+                        ((IPEndPoint)listen.LocalEndPoint).Port
+                    );
 
                     bool pending = client.ConnectAsync(connectSaea);
-                    if (!pending) tcs.SetResult(connectSaea.SocketError);
+                    if (!pending)
+                        tcs.SetResult(connectSaea.SocketError);
                     if (tcs.Task.IsCompleted)
                     {
                         Assert.NotEqual(SocketError.Success, tcs.Task.Result);
@@ -403,17 +547,31 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void CancelConnectAsync_StaticConnect_CancelsInProgressConnect()
         {
-            using (var listen = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var listen = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 using (var connectSaea = new SocketAsyncEventArgs())
                 {
                     var tcs = new TaskCompletionSource<SocketError>();
                     connectSaea.Completed += (s, e) => tcs.SetResult(e.SocketError);
-                    connectSaea.RemoteEndPoint = new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port);
+                    connectSaea.RemoteEndPoint = new IPEndPoint(
+                        IPAddress.Loopback,
+                        ((IPEndPoint)listen.LocalEndPoint).Port
+                    );
 
-                    bool pending = Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, connectSaea);
-                    if (!pending) tcs.SetResult(connectSaea.SocketError);
+                    bool pending = Socket.ConnectAsync(
+                        SocketType.Stream,
+                        ProtocolType.Tcp,
+                        connectSaea
+                    );
+                    if (!pending)
+                        tcs.SetResult(connectSaea.SocketError);
                     if (tcs.Task.IsCompleted)
                     {
                         Assert.NotEqual(SocketError.Success, tcs.Task.Result);
@@ -427,8 +585,20 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public async Task ReuseSocketAsyncEventArgs_SameInstance_MultipleSockets()
         {
-            using (var listen = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var listen = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
@@ -436,7 +606,10 @@ namespace System.Net.Sockets.Tests
                 Task<Socket> acceptTask = listen.AcceptAsync();
                 await Task.WhenAll(
                     acceptTask,
-                    client.ConnectAsync(new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)));
+                    client.ConnectAsync(
+                        new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)
+                    )
+                );
 
                 using (Socket server = await acceptTask)
                 {
@@ -473,8 +646,20 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public async Task ReuseSocketAsyncEventArgs_MutateBufferList()
         {
-            using (var listen = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-            using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var listen = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
+            using (
+                var client = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listen.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listen.Listen(1);
@@ -482,7 +667,10 @@ namespace System.Net.Sockets.Tests
                 Task<Socket> acceptTask = listen.AcceptAsync();
                 await Task.WhenAll(
                     acceptTask,
-                    client.ConnectAsync(new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)));
+                    client.ConnectAsync(
+                        new IPEndPoint(IPAddress.Loopback, ((IPEndPoint)listen.LocalEndPoint).Port)
+                    )
+                );
 
                 using (Socket server = await acceptTask)
                 {
@@ -543,14 +731,20 @@ namespace System.Net.Sockets.Tests
 
         [OuterLoop]
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Unix platforms don't yet support receiving data with AcceptAsync.
+        [PlatformSpecific(TestPlatforms.Windows)] // Unix platforms don't yet support receiving data with AcceptAsync.
         public void AcceptAsync_WithReceiveBuffer_Success()
         {
             Assert.True(Capability.IPv4Support());
 
             AutoResetEvent accepted = new AutoResetEvent(false);
 
-            using (Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket server = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 int port = server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
@@ -569,28 +763,46 @@ namespace System.Net.Sockets.Tests
 
                 Assert.True(server.AcceptAsync(acceptArgs));
 
-                using (Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                using (
+                    Socket client = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                )
                 {
                     client.Connect(IPAddress.Loopback, port);
                     client.Send(sendBuffer);
                     client.Shutdown(SocketShutdown.Both);
                 }
 
-                Assert.True(accepted.WaitOne(TestSettings.PassingTestTimeout), "Test completed in allotted time");
+                Assert.True(
+                    accepted.WaitOne(TestSettings.PassingTestTimeout),
+                    "Test completed in allotted time"
+                );
 
                 Assert.Equal(SocketError.Success, acceptArgs.SocketError);
 
                 Assert.Equal(acceptBufferDataSize, acceptArgs.BytesTransferred);
 
-                AssertExtensions.SequenceEqual(sendBuffer, acceptArgs.Buffer.AsSpan(0, acceptArgs.BytesTransferred));
+                AssertExtensions.SequenceEqual(
+                    sendBuffer,
+                    acceptArgs.Buffer.AsSpan(0, acceptArgs.BytesTransferred)
+                );
             }
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Unix platforms don't yet support receiving data with AcceptAsync.
+        [PlatformSpecific(TestPlatforms.Windows)] // Unix platforms don't yet support receiving data with AcceptAsync.
         public void AcceptAsync_WithTooSmallReceiveBuffer_Failure()
         {
-            using (Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket server = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 int port = server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
@@ -602,18 +814,27 @@ namespace System.Net.Sockets.Tests
                 byte[] buffer = new byte[1];
                 acceptArgs.SetBuffer(buffer, 0, buffer.Length);
 
-                AssertExtensions.Throws<ArgumentException>("Count", () => server.AcceptAsync(acceptArgs));
+                AssertExtensions.Throws<ArgumentException>(
+                    "Count",
+                    () => server.AcceptAsync(acceptArgs)
+                );
             }
         }
 
         [OuterLoop]
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Unix platforms don't yet support receiving data with AcceptAsync.
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Unix platforms don't yet support receiving data with AcceptAsync.
         public void AcceptAsync_WithReceiveBuffer_Failure()
         {
             Assert.True(Capability.IPv4Support());
 
-            using (Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                Socket server = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 int port = server.BindToAnonymousPort(IPAddress.Loopback);
                 server.Listen(1);
@@ -634,25 +855,54 @@ namespace System.Net.Sockets.Tests
         {
             var e = new SocketAsyncEventArgs();
 
-            foreach (DnsEndPoint dns in new[] { new DnsEndPoint("::0", 80), new DnsEndPoint("0.0.0.0", 80) })
+            foreach (
+                DnsEndPoint dns in new[]
+                {
+                    new DnsEndPoint("::0", 80),
+                    new DnsEndPoint("0.0.0.0", 80),
+                }
+            )
             {
                 e.RemoteEndPoint = dns;
 
-                AssertExtensions.Throws<ArgumentException>("hostName", () => Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, e));
-                using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                AssertExtensions.Throws<ArgumentException>(
+                    "hostName",
+                    () => Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, e)
+                );
+                using (
+                    var client = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                )
                 {
-                    AssertExtensions.Throws<ArgumentException>("hostName", () => client.ConnectAsync(e));
+                    AssertExtensions.Throws<ArgumentException>(
+                        "hostName",
+                        () => client.ConnectAsync(e)
+                    );
                 }
             }
 
-            using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var listener = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                 listener.Listen(1);
                 e.RemoteEndPoint = listener.LocalEndPoint;
 
-                var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-                e.Completed += delegate { tcs.SetResult(); };
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+                e.Completed += delegate
+                {
+                    tcs.SetResult();
+                };
 
                 Task<Socket> acceptTask = listener.AcceptAsync();
                 if (Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, e))
@@ -703,7 +953,9 @@ namespace System.Net.Sockets.Tests
                 byte[] array = new byte[42];
 
                 saea.SetBuffer(array, 0, array.Length);
-                Assert.True(MemoryMarshal.TryGetArray(saea.MemoryBuffer, out ArraySegment<byte> result));
+                Assert.True(
+                    MemoryMarshal.TryGetArray(saea.MemoryBuffer, out ArraySegment<byte> result)
+                );
                 Assert.Same(array, result.Array);
                 Assert.Same(saea.Buffer, array);
                 Assert.Equal(0, result.Offset);
@@ -746,11 +998,17 @@ namespace System.Net.Sockets.Tests
         {
             using (var saea = new SocketAsyncEventArgs())
             {
-                var bufferList = new List<ArraySegment<byte>> { new ArraySegment<byte>(new byte[1]) };
+                var bufferList = new List<ArraySegment<byte>>
+                {
+                    new ArraySegment<byte>(new byte[1]),
+                };
                 Memory<byte> buffer = new byte[1];
 
                 saea.SetBuffer(buffer);
-                AssertExtensions.Throws<ArgumentException>(null, () => saea.BufferList = bufferList);
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => saea.BufferList = bufferList
+                );
                 Assert.True(buffer.Equals(saea.MemoryBuffer));
                 Assert.Equal(0, saea.Offset);
                 Assert.Equal(buffer.Length, saea.Count);
@@ -766,7 +1024,10 @@ namespace System.Net.Sockets.Tests
         {
             using (var saea = new SocketAsyncEventArgs())
             {
-                var bufferList = new List<ArraySegment<byte>> { new ArraySegment<byte>(new byte[1]) };
+                var bufferList = new List<ArraySegment<byte>>
+                {
+                    new ArraySegment<byte>(new byte[1]),
+                };
                 saea.BufferList = bufferList;
 
                 saea.SetBuffer(Memory<byte>.Empty); // nop
@@ -848,7 +1109,10 @@ namespace System.Net.Sockets.Tests
         }
 
         [OuterLoop("Involves GC and finalization")]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPreciseGcSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPreciseGcSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void Finalizer_InvokedWhenNoLongerReferenced(bool afterAsyncOperation)
@@ -866,12 +1130,24 @@ namespace System.Net.Sockets.Tests
 
                     if (afterAsyncOperation)
                     {
-                        using (Socket listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                        using (
+                            Socket listener = new Socket(
+                                AddressFamily.InterNetwork,
+                                SocketType.Stream,
+                                ProtocolType.Tcp
+                            )
+                        )
                         {
                             listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                             listener.Listen(1);
 
-                            using (Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                            using (
+                                Socket client = new Socket(
+                                    AddressFamily.InterNetwork,
+                                    SocketType.Stream,
+                                    ProtocolType.Tcp
+                                )
+                            )
                             {
                                 saea.RemoteEndPoint = listener.LocalEndPoint;
                                 using (var mres = new ManualResetEventSlim())
@@ -888,12 +1164,17 @@ namespace System.Net.Sockets.Tests
                 }
             }
 
-            Assert.True(SpinWait.SpinUntil(() =>
-            {
-                GC.Collect();
-                GC.WaitForPendingFinalizers();
-                return cwt.Count() == 0; // validate that the cwt becomes empty
-            }, 30_000));
+            Assert.True(
+                SpinWait.SpinUntil(
+                    () =>
+                    {
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
+                        return cwt.Count() == 0; // validate that the cwt becomes empty
+                    },
+                    30_000
+                )
+            );
         }
     }
 }

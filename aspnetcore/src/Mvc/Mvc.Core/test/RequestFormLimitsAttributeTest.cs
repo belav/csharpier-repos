@@ -40,12 +40,16 @@ public class RequestFormLimitsAttributeTest
         foreach (var formOptionsProperty in formOptionsProperties)
         {
             var formLimitsAttributeProperty = formLimitsAttributeProperties
-                .Where(pi => pi.Name == formOptionsProperty.Name && pi.PropertyType == formOptionsProperty.PropertyType)
+                .Where(pi =>
+                    pi.Name == formOptionsProperty.Name
+                    && pi.PropertyType == formOptionsProperty.PropertyType
+                )
                 .SingleOrDefault();
 
             Assert.Equal(
                 formOptionsProperty.GetValue(formOptions),
-                formLimitsAttributeProperty.GetValue(requestFormLimitsAttribute));
+                formLimitsAttributeProperty.GetValue(requestFormLimitsAttribute)
+            );
         }
     }
 

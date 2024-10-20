@@ -12,18 +12,23 @@ public class CosmosMetadataExtensionsTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>().Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         Assert.Equal(nameof(Customer), entityType.GetContainer());
 
         ((IConventionEntityType)entityType).SetContainer("Customizer");
         Assert.Equal("Customizer", entityType.GetContainer());
-        Assert.Equal(ConfigurationSource.Convention, ((IConventionEntityType)entityType).GetContainerConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.Convention,
+            ((IConventionEntityType)entityType).GetContainerConfigurationSource()
+        );
 
         entityType.SetContainer("Customizer");
         Assert.Equal("Customizer", entityType.GetContainer());
-        Assert.Equal(ConfigurationSource.Explicit, ((IConventionEntityType)entityType).GetContainerConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.Explicit,
+            ((IConventionEntityType)entityType).GetContainerConfigurationSource()
+        );
 
         entityType.SetContainer(null);
         Assert.Equal(nameof(Customer), entityType.GetContainer());
@@ -38,24 +43,29 @@ public class CosmosMetadataExtensionsTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>().Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         Assert.Null(entityType.GetPartitionKeyPropertyName());
 
         ((IConventionEntityType)entityType).SetPartitionKeyPropertyName("pk");
         Assert.Equal("pk", entityType.GetPartitionKeyPropertyName());
         Assert.Equal(
-            ConfigurationSource.Convention, ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource());
+            ConfigurationSource.Convention,
+            ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource()
+        );
 
         entityType.SetPartitionKeyPropertyName("pk");
         Assert.Equal("pk", entityType.GetPartitionKeyPropertyName());
         Assert.Equal(
-            ConfigurationSource.Explicit, ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource());
+            ConfigurationSource.Explicit,
+            ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource()
+        );
 
         entityType.SetPartitionKeyPropertyName(null);
         Assert.Null(entityType.GetPartitionKeyPropertyName());
-        Assert.Null(((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource());
+        Assert.Null(
+            ((IConventionEntityType)entityType).GetPartitionKeyPropertyNameConfigurationSource()
+        );
     }
 
     [ConditionalFact]
@@ -63,28 +73,30 @@ public class CosmosMetadataExtensionsTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        var entityType = modelBuilder
-            .Entity<Customer>().Metadata;
+        var entityType = modelBuilder.Entity<Customer>().Metadata;
 
         Assert.Null(entityType.GetETagPropertyName());
 
         ((IConventionEntityType)entityType).SetETagPropertyName("etag");
         Assert.Equal("etag", entityType.GetETagPropertyName());
         Assert.Equal(
-            ConfigurationSource.Convention, ((IConventionEntityType)entityType).GetETagPropertyNameConfigurationSource());
+            ConfigurationSource.Convention,
+            ((IConventionEntityType)entityType).GetETagPropertyNameConfigurationSource()
+        );
 
         entityType.SetETagPropertyName("etag");
         Assert.Equal("etag", entityType.GetETagPropertyName());
         Assert.Equal(
-            ConfigurationSource.Explicit, ((IConventionEntityType)entityType).GetETagPropertyNameConfigurationSource());
+            ConfigurationSource.Explicit,
+            ((IConventionEntityType)entityType).GetETagPropertyNameConfigurationSource()
+        );
 
         entityType.SetETagPropertyName(null);
         Assert.Null(entityType.GetETagPropertyName());
         Assert.Null(((IConventionEntityType)entityType).GetETagPropertyNameConfigurationSource());
     }
 
-    private static ModelBuilder CreateModelBuilder()
-        => new();
+    private static ModelBuilder CreateModelBuilder() => new();
 
     private class Customer
     {

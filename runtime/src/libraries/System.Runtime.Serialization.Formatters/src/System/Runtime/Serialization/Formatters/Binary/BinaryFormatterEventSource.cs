@@ -7,7 +7,8 @@ using System.Diagnostics.Tracing;
 namespace System.Runtime.Serialization.Formatters.Binary
 {
     [EventSource(
-        Name = "System.Runtime.Serialization.Formatters.Binary.BinaryFormatterEventSource")]
+        Name = "System.Runtime.Serialization.Formatters.Binary.BinaryFormatterEventSource"
+    )]
     internal sealed class BinaryFormatterEventSource : EventSource
     {
         private const int EventId_SerializationStart = 10;
@@ -19,11 +20,15 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
         public static readonly BinaryFormatterEventSource Log = new BinaryFormatterEventSource();
 
-        private BinaryFormatterEventSource()
-        {
-        }
+        private BinaryFormatterEventSource() { }
 
-        [Event(EventId_SerializationStart, Opcode = EventOpcode.Start, Keywords = Keywords.Serialization, Level = EventLevel.Informational, ActivityOptions = EventActivityOptions.Recursive)]
+        [Event(
+            EventId_SerializationStart,
+            Opcode = EventOpcode.Start,
+            Keywords = Keywords.Serialization,
+            Level = EventLevel.Informational,
+            ActivityOptions = EventActivityOptions.Recursive
+        )]
         public void SerializationStart()
         {
             if (IsEnabled(EventLevel.Informational, Keywords.Serialization))
@@ -32,7 +37,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
         }
 
-        [Event(EventId_SerializationStop, Opcode = EventOpcode.Stop, Keywords = Keywords.Serialization, Level = EventLevel.Informational)]
+        [Event(
+            EventId_SerializationStop,
+            Opcode = EventOpcode.Stop,
+            Keywords = Keywords.Serialization,
+            Level = EventLevel.Informational
+        )]
         public void SerializationStop()
         {
             if (IsEnabled(EventLevel.Informational, Keywords.Serialization))
@@ -52,13 +62,23 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
         }
 
-        [Event(EventId_SerializingObject, Keywords = Keywords.Serialization, Level = EventLevel.Informational)]
+        [Event(
+            EventId_SerializingObject,
+            Keywords = Keywords.Serialization,
+            Level = EventLevel.Informational
+        )]
         private void SerializingObject(string? typeName)
         {
             WriteEvent(EventId_SerializingObject, typeName);
         }
 
-        [Event(EventId_DeserializationStart, Opcode = EventOpcode.Start, Keywords = Keywords.Deserialization, Level = EventLevel.Informational, ActivityOptions = EventActivityOptions.Recursive)]
+        [Event(
+            EventId_DeserializationStart,
+            Opcode = EventOpcode.Start,
+            Keywords = Keywords.Deserialization,
+            Level = EventLevel.Informational,
+            ActivityOptions = EventActivityOptions.Recursive
+        )]
         public void DeserializationStart()
         {
             if (IsEnabled(EventLevel.Informational, Keywords.Deserialization))
@@ -67,7 +87,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
         }
 
-        [Event(EventId_DeserializationStop, Opcode = EventOpcode.Stop, Keywords = Keywords.Deserialization, Level = EventLevel.Informational)]
+        [Event(
+            EventId_DeserializationStop,
+            Opcode = EventOpcode.Stop,
+            Keywords = Keywords.Deserialization,
+            Level = EventLevel.Informational
+        )]
         public void DeserializationStop()
         {
             if (IsEnabled(EventLevel.Informational, Keywords.Deserialization))
@@ -87,7 +112,11 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
         }
 
-        [Event(EventId_DeserializingObject, Keywords = Keywords.Deserialization, Level = EventLevel.Informational)]
+        [Event(
+            EventId_DeserializingObject,
+            Keywords = Keywords.Deserialization,
+            Level = EventLevel.Informational
+        )]
         private void DeserializingObject(string? typeName)
         {
             WriteEvent(EventId_DeserializingObject, typeName);

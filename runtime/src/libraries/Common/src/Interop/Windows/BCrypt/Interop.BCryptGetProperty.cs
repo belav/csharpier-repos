@@ -3,7 +3,6 @@
 
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -17,9 +16,13 @@ internal static partial class Interop
             void* pbOutput,
             int cbOutput,
             out int pcbResult,
-            int dwFlags);
+            int dwFlags
+        );
 
-        internal static unsafe int BCryptGetDWordProperty(SafeBCryptHandle hObject, string pszProperty)
+        internal static unsafe int BCryptGetDWordProperty(
+            SafeBCryptHandle hObject,
+            string pszProperty
+        )
         {
             int ret = 0;
 
@@ -29,7 +32,8 @@ internal static partial class Interop
                 &ret,
                 sizeof(int),
                 out int written,
-                0);
+                0
+            );
 
             if (status != NTSTATUS.STATUS_SUCCESS)
             {

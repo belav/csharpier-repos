@@ -27,29 +27,42 @@ public class AuthenticationBuilder
     /// </summary>
     public virtual IServiceCollection Services { get; }
 
-    private AuthenticationBuilder AddSchemeHelper<TOptions, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler>(string authenticationScheme, string? displayName, Action<TOptions>? configureOptions)
+    private AuthenticationBuilder AddSchemeHelper<
+        TOptions,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
+    >(string authenticationScheme, string? displayName, Action<TOptions>? configureOptions)
         where TOptions : AuthenticationSchemeOptions, new()
         where THandler : class, IAuthenticationHandler
     {
         Services.Configure<AuthenticationOptions>(o =>
         {
-            o.AddScheme(authenticationScheme, scheme =>
-            {
-                scheme.HandlerType = typeof(THandler);
-                scheme.DisplayName = displayName;
-            });
+            o.AddScheme(
+                authenticationScheme,
+                scheme =>
+                {
+                    scheme.HandlerType = typeof(THandler);
+                    scheme.DisplayName = displayName;
+                }
+            );
         });
         if (configureOptions != null)
         {
             Services.Configure(authenticationScheme, configureOptions);
         }
-        Services.AddOptions<TOptions>(authenticationScheme).Validate(o =>
-        {
-            o.Validate(authenticationScheme);
-            return true;
-        });
+        Services
+            .AddOptions<TOptions>(authenticationScheme)
+            .Validate(o =>
+            {
+                o.Validate(authenticationScheme);
+                return true;
+            });
         Services.AddTransient<THandler>();
-        Services.TryAddEnumerable(ServiceDescriptor.Singleton<IPostConfigureOptions<TOptions>, PostConfigureAuthenticationSchemeOptions<TOptions>>());
+        Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IPostConfigureOptions<TOptions>,
+                PostConfigureAuthenticationSchemeOptions<TOptions>
+            >()
+        );
         return this;
     }
 
@@ -62,10 +75,13 @@ public class AuthenticationBuilder
     /// <param name="displayName">The display name of this scheme.</param>
     /// <param name="configureOptions">Used to configure the scheme options.</param>
     /// <returns>The builder.</returns>
-    public virtual AuthenticationBuilder AddScheme<TOptions, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler>(string authenticationScheme, string? displayName, Action<TOptions>? configureOptions)
+    public virtual AuthenticationBuilder AddScheme<
+        TOptions,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
+    >(string authenticationScheme, string? displayName, Action<TOptions>? configureOptions)
         where TOptions : AuthenticationSchemeOptions, new()
-        where THandler : AuthenticationHandler<TOptions>
-        => AddSchemeHelper<TOptions, THandler>(authenticationScheme, displayName, configureOptions);
+        where THandler : AuthenticationHandler<TOptions> =>
+        AddSchemeHelper<TOptions, THandler>(authenticationScheme, displayName, configureOptions);
 
     /// <summary>
     /// Adds a <see cref="AuthenticationScheme"/> which can be used by <see cref="IAuthenticationService"/>.
@@ -75,10 +91,17 @@ public class AuthenticationBuilder
     /// <param name="authenticationScheme">The name of this scheme.</param>
     /// <param name="configureOptions">Used to configure the scheme options.</param>
     /// <returns>The builder.</returns>
-    public virtual AuthenticationBuilder AddScheme<TOptions, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler>(string authenticationScheme, Action<TOptions>? configureOptions)
+    public virtual AuthenticationBuilder AddScheme<
+        TOptions,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
+    >(string authenticationScheme, Action<TOptions>? configureOptions)
         where TOptions : AuthenticationSchemeOptions, new()
-        where THandler : AuthenticationHandler<TOptions>
-        => AddScheme<TOptions, THandler>(authenticationScheme, displayName: null, configureOptions: configureOptions);
+        where THandler : AuthenticationHandler<TOptions> =>
+        AddScheme<TOptions, THandler>(
+            authenticationScheme,
+            displayName: null,
+            configureOptions: configureOptions
+        );
 
     /// <summary>
     /// Adds a <see cref="RemoteAuthenticationHandler{TOptions}"/> based <see cref="AuthenticationScheme"/> that supports remote authentication
@@ -90,12 +113,24 @@ public class AuthenticationBuilder
     /// <param name="displayName">The display name of this scheme.</param>
     /// <param name="configureOptions">Used to configure the scheme options.</param>
     /// <returns>The builder.</returns>
-    public virtual AuthenticationBuilder AddRemoteScheme<TOptions, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler>(string authenticationScheme, string? displayName, Action<TOptions>? configureOptions)
+    public virtual AuthenticationBuilder AddRemoteScheme<
+        TOptions,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler
+    >(string authenticationScheme, string? displayName, Action<TOptions>? configureOptions)
         where TOptions : RemoteAuthenticationOptions, new()
         where THandler : RemoteAuthenticationHandler<TOptions>
     {
-        Services.TryAddEnumerable(ServiceDescriptor.Singleton<IPostConfigureOptions<TOptions>, EnsureSignInScheme<TOptions>>());
-        return AddScheme<TOptions, THandler>(authenticationScheme, displayName, configureOptions: configureOptions);
+        Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<
+                IPostConfigureOptions<TOptions>,
+                EnsureSignInScheme<TOptions>
+            >()
+        );
+        return AddScheme<TOptions, THandler>(
+            authenticationScheme,
+            displayName,
+            configureOptions: configureOptions
+        );
     }
 
     /// <summary>
@@ -106,11 +141,20 @@ public class AuthenticationBuilder
     /// <param name="displayName">The display name of this scheme.</param>
     /// <param name="configureOptions">Used to configure the scheme options.</param>
     /// <returns>The builder.</returns>
-    public virtual AuthenticationBuilder AddPolicyScheme(string authenticationScheme, string? displayName, Action<PolicySchemeOptions> configureOptions)
-        => AddSchemeHelper<PolicySchemeOptions, PolicySchemeHandler>(authenticationScheme, displayName, configureOptions);
+    public virtual AuthenticationBuilder AddPolicyScheme(
+        string authenticationScheme,
+        string? displayName,
+        Action<PolicySchemeOptions> configureOptions
+    ) =>
+        AddSchemeHelper<PolicySchemeOptions, PolicySchemeHandler>(
+            authenticationScheme,
+            displayName,
+            configureOptions
+        );
 
     // Used to ensure that there's always a default sign in scheme that's not itself
-    private sealed class EnsureSignInScheme<TOptions> : IPostConfigureOptions<TOptions> where TOptions : RemoteAuthenticationOptions
+    private sealed class EnsureSignInScheme<TOptions> : IPostConfigureOptions<TOptions>
+        where TOptions : RemoteAuthenticationOptions
     {
         private readonly AuthenticationOptions _authOptions;
 
@@ -126,7 +170,8 @@ public class AuthenticationBuilder
     }
 
     // Set TimeProvider from DI on all options instances, if not already set by tests.
-    private sealed class PostConfigureAuthenticationSchemeOptions<TOptions> : IPostConfigureOptions<TOptions>
+    private sealed class PostConfigureAuthenticationSchemeOptions<TOptions>
+        : IPostConfigureOptions<TOptions>
         where TOptions : AuthenticationSchemeOptions
     {
         public PostConfigureAuthenticationSchemeOptions(TimeProvider timeProvider)

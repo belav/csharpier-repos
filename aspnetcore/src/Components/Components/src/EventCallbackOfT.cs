@@ -13,7 +13,10 @@ public readonly struct EventCallback<TValue> : IEventCallback
     /// <summary>
     /// Gets an empty <see cref="EventCallback{TValue}"/>.
     /// </summary>
-    public static readonly EventCallback<TValue> Empty = new EventCallback<TValue>(null, (Action)(() => { }));
+    public static readonly EventCallback<TValue> Empty = new EventCallback<TValue>(
+        null,
+        (Action)(() => { })
+    );
 
     internal readonly MulticastDelegate? Delegate;
     internal readonly IHandleEvent? Receiver;
@@ -37,7 +40,8 @@ public readonly struct EventCallback<TValue> : IEventCallback
     // This is a hint to the runtime that Receiver is a different object than what
     // Delegate.Target points to. This allows us to avoid boxing the command object
     // when building the render tree. See logic where this is used.
-    internal bool RequiresExplicitReceiver => Receiver != null && !object.ReferenceEquals(Receiver, Delegate?.Target);
+    internal bool RequiresExplicitReceiver =>
+        Receiver != null && !object.ReferenceEquals(Receiver, Delegate?.Target);
 
     /// <summary>
     /// Invokes the delegate associated with this binding and dispatches an event notification to the
@@ -73,12 +77,15 @@ public readonly struct EventCallback<TValue> : IEventCallback
     }
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(RuntimeHelpers.GetHashCode(Receiver), RuntimeHelpers.GetHashCode(Delegate));
+    public override int GetHashCode() =>
+        HashCode.Combine(
+            RuntimeHelpers.GetHashCode(Receiver),
+            RuntimeHelpers.GetHashCode(Delegate)
+        );
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is EventCallback<TValue> other
+    public override bool Equals(object? obj) =>
+        obj is EventCallback<TValue> other
         && ReferenceEquals(Receiver, other.Receiver)
         && ReferenceEquals(Delegate, other.Delegate);
 }

@@ -1,18 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="DocumentCollection.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
-    using Microsoft.Win32;
+namespace System.ComponentModel.Design
+{
     using System.Collections;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
@@ -20,9 +21,16 @@ namespace System.ComponentModel.Design {
     ///    </para>
     /// </devdoc>
     [HostProtection(SharedState = true)]
-    [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.InheritanceDemand, Name = "FullTrust")]
-    [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Name="FullTrust")]
-    public class DesignerCollection : ICollection {
+    [System.Security.Permissions.PermissionSetAttribute(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Name = "FullTrust"
+    )]
+    [System.Security.Permissions.PermissionSetAttribute(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Name = "FullTrust"
+    )]
+    public class DesignerCollection : ICollection
+    {
         private IList designers;
 
         /// <devdoc>
@@ -32,11 +40,14 @@ namespace System.ComponentModel.Design {
         ///       for each document in the collection.
         ///    </para>
         /// </devdoc>
-        public DesignerCollection(IDesignerHost[] designers) {
-            if (designers != null) {
+        public DesignerCollection(IDesignerHost[] designers)
+        {
+            if (designers != null)
+            {
                 this.designers = new ArrayList(designers);
             }
-            else {
+            else
+            {
                 this.designers = new ArrayList();
             }
         }
@@ -48,7 +59,8 @@ namespace System.ComponentModel.Design {
         ///       for each document in the collection.
         ///    </para>
         /// </devdoc>
-        public DesignerCollection(IList designers) {
+        public DesignerCollection(IList designers)
+        {
             this.designers = designers;
         }
 
@@ -57,59 +69,56 @@ namespace System.ComponentModel.Design {
         ///       sets the number
         ///       of documents in the collection.</para>
         /// </devdoc>
-        public int Count {
-            get {
-                return designers.Count;
-            }
+        public int Count
+        {
+            get { return designers.Count; }
         }
 
         /// <devdoc>
         ///    <para> Gets
         ///       or sets the document at the specified index.</para>
         /// </devdoc>
-        public virtual IDesignerHost this[int index] {
-            get {
-                return (IDesignerHost)designers[index];
-            }
+        public virtual IDesignerHost this[int index]
+        {
+            get { return (IDesignerHost)designers[index]; }
         }
 
         /// <devdoc>
         ///    <para>Creates and retrieves a new enumerator for this collection.</para>
         /// </devdoc>
-        public IEnumerator GetEnumerator() {
+        public IEnumerator GetEnumerator()
+        {
             return designers.GetEnumerator();
         }
 
         /// <internalonly/>
-        int ICollection.Count {
-            get {
-                return Count;
-            }
-        }
-      
-        /// <internalonly/>
-        bool ICollection.IsSynchronized {
-            get {
-                return false;
-            }
+        int ICollection.Count
+        {
+            get { return Count; }
         }
 
         /// <internalonly/>
-        object ICollection.SyncRoot {
-            get {
-                return null;
-            }
+        bool ICollection.IsSynchronized
+        {
+            get { return false; }
         }
 
         /// <internalonly/>
-        void ICollection.CopyTo(Array array, int index) {
+        object ICollection.SyncRoot
+        {
+            get { return null; }
+        }
+
+        /// <internalonly/>
+        void ICollection.CopyTo(Array array, int index)
+        {
             designers.CopyTo(array, index);
         }
 
         /// <internalonly/>
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return GetEnumerator();
         }
     }
 }
-

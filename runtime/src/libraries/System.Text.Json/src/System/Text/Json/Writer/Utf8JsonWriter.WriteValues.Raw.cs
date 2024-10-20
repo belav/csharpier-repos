@@ -31,7 +31,10 @@ namespace System.Text.Json
         ///
         /// The <see cref="JsonWriterOptions.Indented"/> and <see cref="JsonWriterOptions.Encoder"/> values for the writer instance are not applied when using this method.
         /// </remarks>
-        public void WriteRawValue([StringSyntax(StringSyntaxAttribute.Json)] string json, bool skipInputValidation = false)
+        public void WriteRawValue(
+            [StringSyntax(StringSyntaxAttribute.Json)] string json,
+            bool skipInputValidation = false
+        )
         {
             if (!_options.SkipValidation)
             {
@@ -67,7 +70,10 @@ namespace System.Text.Json
         ///
         /// The <see cref="JsonWriterOptions.Indented"/> and <see cref="JsonWriterOptions.Encoder"/> values for the writer instance are not applied when using this method.
         /// </remarks>
-        public void WriteRawValue([StringSyntax(StringSyntaxAttribute.Json)] ReadOnlySpan<char> json, bool skipInputValidation = false)
+        public void WriteRawValue(
+            [StringSyntax(StringSyntaxAttribute.Json)] ReadOnlySpan<char> json,
+            bool skipInputValidation = false
+        )
         {
             if (!_options.SkipValidation)
             {
@@ -164,7 +170,8 @@ namespace System.Text.Json
             {
                 // Utilize reader validation.
                 Utf8JsonReader reader = new(utf8Json);
-                while (reader.Read());
+                while (reader.Read())
+                    ;
                 _tokenType = reader.TokenType;
             }
 
@@ -203,12 +210,21 @@ namespace System.Text.Json
             byte[]? tempArray = null;
 
             // For performance, avoid obtaining actual byte count unless memory usage is higher than the threshold.
-            Span<byte> utf8Json = json.Length <= (JsonConstants.ArrayPoolMaxSizeBeforeUsingNormalAlloc / JsonConstants.MaxExpansionFactorWhileTranscoding) ?
-                // Use a pooled alloc.
-                tempArray = ArrayPool<byte>.Shared.Rent(json.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) :
-                // Use a normal alloc since the pool would create a normal alloc anyway based on the threshold (per current implementation)
-                // and by using a normal alloc we can avoid the Clear().
-                new byte[JsonReaderHelper.GetUtf8ByteCount(json)];
+            Span<byte> utf8Json =
+                json.Length
+                <= (
+                    JsonConstants.ArrayPoolMaxSizeBeforeUsingNormalAlloc
+                    / JsonConstants.MaxExpansionFactorWhileTranscoding
+                )
+                    ?
+                    // Use a pooled alloc.
+                    tempArray = ArrayPool<byte>.Shared.Rent(
+                        json.Length * JsonConstants.MaxExpansionFactorWhileTranscoding
+                    )
+                    :
+                    // Use a normal alloc since the pool would create a normal alloc anyway based on the threshold (per current implementation)
+                    // and by using a normal alloc we can avoid the Clear().
+                    new byte[JsonReaderHelper.GetUtf8ByteCount(json)];
 
             try
             {
@@ -253,7 +269,8 @@ namespace System.Text.Json
             {
                 // Utilize reader validation.
                 Utf8JsonReader reader = new(utf8Json);
-                while (reader.Read());
+                while (reader.Read())
+                    ;
                 _tokenType = reader.TokenType;
             }
 

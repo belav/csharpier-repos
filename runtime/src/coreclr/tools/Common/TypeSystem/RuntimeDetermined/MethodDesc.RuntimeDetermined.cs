@@ -21,7 +21,9 @@ namespace Internal.TypeSystem
                 if (sharedRuntimeOwningType != owningType)
                 {
                     result = Context.GetMethodForInstantiatedType(
-                        GetTypicalMethodDefinition(), (InstantiatedType)sharedRuntimeOwningType);
+                        GetTypicalMethodDefinition(),
+                        (InstantiatedType)sharedRuntimeOwningType
+                    );
                 }
 
                 // Now convert the method instantiation to the shared runtime form
@@ -30,14 +32,21 @@ namespace Internal.TypeSystem
                     MethodDesc uninstantiatedMethod = result.GetMethodDefinition();
 
                     bool changed;
-                    Instantiation sharedInstantiation = RuntimeDeterminedTypeUtilities.ConvertInstantiationToSharedRuntimeForm(
-                        Instantiation, uninstantiatedMethod.Instantiation, out changed);
+                    Instantiation sharedInstantiation =
+                        RuntimeDeterminedTypeUtilities.ConvertInstantiationToSharedRuntimeForm(
+                            Instantiation,
+                            uninstantiatedMethod.Instantiation,
+                            out changed
+                        );
 
                     // If either the instantiation changed, or we switched the owning type, we need to find the matching
                     // instantiated method.
                     if (changed || result != this)
                     {
-                        result = Context.GetInstantiatedMethod(uninstantiatedMethod, sharedInstantiation);
+                        result = Context.GetInstantiatedMethod(
+                            uninstantiatedMethod,
+                            sharedInstantiation
+                        );
                     }
                 }
             }
@@ -63,10 +72,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsSharedByGenericInstantiations
         {
-            get
-            {
-                return IsCanonicalMethod(CanonicalFormKind.Any);
-            }
+            get { return IsCanonicalMethod(CanonicalFormKind.Any); }
         }
 
         /// <summary>
@@ -98,7 +104,10 @@ namespace Internal.TypeSystem
             }
         }
 
-        public virtual MethodDesc GetNonRuntimeDeterminedMethodFromRuntimeDeterminedMethodViaSubstitution(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public virtual MethodDesc GetNonRuntimeDeterminedMethodFromRuntimeDeterminedMethodViaSubstitution(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             Instantiation instantiation = Instantiation;
             TypeDesc[] clone = null;
@@ -106,7 +115,11 @@ namespace Internal.TypeSystem
             for (int i = 0; i < instantiation.Length; i++)
             {
                 TypeDesc uninst = instantiation[i];
-                TypeDesc inst = uninst.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(typeInstantiation, methodInstantiation);
+                TypeDesc inst =
+                    uninst.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+                        typeInstantiation,
+                        methodInstantiation
+                    );
                 if (inst != uninst)
                 {
                     if (clone == null)
@@ -124,15 +137,27 @@ namespace Internal.TypeSystem
             MethodDesc method = this;
 
             TypeDesc owningType = method.OwningType;
-            TypeDesc instantiatedOwningType = owningType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(typeInstantiation, methodInstantiation);
+            TypeDesc instantiatedOwningType =
+                owningType.GetNonRuntimeDeterminedTypeFromRuntimeDeterminedSubtypeViaSubstitution(
+                    typeInstantiation,
+                    methodInstantiation
+                );
             if (owningType != instantiatedOwningType)
             {
-                method = Context.GetMethodForInstantiatedType(method.GetTypicalMethodDefinition(), (InstantiatedType)instantiatedOwningType);
+                method = Context.GetMethodForInstantiatedType(
+                    method.GetTypicalMethodDefinition(),
+                    (InstantiatedType)instantiatedOwningType
+                );
                 if (clone == null && instantiation.Length != 0)
                     return Context.GetInstantiatedMethod(method, instantiation);
             }
 
-            return (clone == null) ? method : Context.GetInstantiatedMethod(method.GetMethodDefinition(), new Instantiation(clone));
+            return (clone == null)
+                ? method
+                : Context.GetInstantiatedMethod(
+                    method.GetMethodDefinition(),
+                    new Instantiation(clone)
+                );
         }
     }
 }

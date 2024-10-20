@@ -4,16 +4,18 @@ namespace System.Workflow.ComponentModel.Compiler
     using System;
     using System.CodeDom;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Diagnostics;
-    using System.Resources;
-    using System.Reflection;
     using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Resources;
     using System.Text.RegularExpressions;
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class TypeProvider : ITypeProvider, IServiceProvider, IDisposable
     {
         internal static readonly char[] nameSeparators = new char[] { '.', '+' };
@@ -27,7 +29,7 @@ namespace System.Workflow.ComponentModel.Compiler
         private Hashtable hashOfRTTypes = new Hashtable();
         private Hashtable hashOfDTTypes = new Hashtable();
 
-        // these variables will cache all the information which is passed to 
+        // these variables will cache all the information which is passed to
         private List<string> addedAssemblies = null;
         private List<CodeCompileUnit> addedCompileUnits = null;
         private Dictionary<CodeCompileUnit, EventHandler> needRefreshCompileUnits = null;
@@ -58,18 +60,29 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 try
                 {
-                    rawAssemblyLoaders[assembly] = new AssemblyLoader(this, assembly, this.localAssembly == assembly);
+                    rawAssemblyLoaders[assembly] = new AssemblyLoader(
+                        this,
+                        assembly,
+                        this.localAssembly == assembly
+                    );
                     if (this.TypesChanged != null)
-                        FireEventsNoThrow(this.TypesChanged, new object[] { this, EventArgs.Empty });
+                        FireEventsNoThrow(
+                            this.TypesChanged,
+                            new object[] { this, EventArgs.Empty }
+                        );
                 }
                 catch (Exception e)
                 {
                     this.typeLoadErrors[assembly.FullName] = e;
                     if (this.TypeLoadErrorsChanged != null)
-                        FireEventsNoThrow(this.TypeLoadErrorsChanged, new object[] { this, EventArgs.Empty });
+                        FireEventsNoThrow(
+                            this.TypeLoadErrorsChanged,
+                            new object[] { this, EventArgs.Empty }
+                        );
                 }
             }
         }
+
         public void RemoveAssembly(Assembly assembly)
         {
             if (assembly == null)
@@ -91,9 +104,11 @@ namespace System.Workflow.ComponentModel.Compiler
             if (path == null)
                 throw new ArgumentNullException("path");
 
-            if (File.Exists(path) &&
-                !this.assemblyLoaders.ContainsKey(path) &&
-                (this.addedAssemblies == null || !this.addedAssemblies.Contains(path)))
+            if (
+                File.Exists(path)
+                && !this.assemblyLoaders.ContainsKey(path)
+                && (this.addedAssemblies == null || !this.addedAssemblies.Contains(path))
+            )
             {
                 // lets put these changes into our cache
                 if (this.addedAssemblies == null)
@@ -104,6 +119,7 @@ namespace System.Workflow.ComponentModel.Compiler
                     FireEventsNoThrow(this.TypesChanged, new object[] { this, EventArgs.Empty });
             }
         }
+
         public void RemoveAssemblyReference(string path)
         {
             if (path == null)
@@ -123,30 +139,47 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 this.typeLoadErrors.Remove(path);
                 if (this.TypeLoadErrorsChanged != null)
-                    FireEventsNoThrow(this.TypeLoadErrorsChanged, new object[] { this, EventArgs.Empty });
+                    FireEventsNoThrow(
+                        this.TypeLoadErrorsChanged,
+                        new object[] { this, EventArgs.Empty }
+                    );
             }
 
             if (this.TypesChanged != null)
                 FireEventsNoThrow(this.TypesChanged, new object[] { this, EventArgs.Empty });
         }
+
         public void AddCodeCompileUnit(CodeCompileUnit codeCompileUnit)
         {
             if (codeCompileUnit == null)
                 throw new ArgumentNullException("codeCompileUnit");
 
-            if (this.compileUnitLoaders.ContainsKey(codeCompileUnit) || (this.addedCompileUnits != null && this.addedCompileUnits.Contains(codeCompileUnit)))
-                throw new ArgumentException(TypeSystemSR.GetString("Error_DuplicateCodeCompileUnit"), "codeCompileUnit");
+            if (
+                this.compileUnitLoaders.ContainsKey(codeCompileUnit)
+                || (
+                    this.addedCompileUnits != null
+                    && this.addedCompileUnits.Contains(codeCompileUnit)
+                )
+            )
+                throw new ArgumentException(
+                    TypeSystemSR.GetString("Error_DuplicateCodeCompileUnit"),
+                    "codeCompileUnit"
+                );
 
             // lets put these changes into our cache
             if (this.addedCompileUnits == null)
                 this.addedCompileUnits = new List<CodeCompileUnit>();
             this.addedCompileUnits.Add(codeCompileUnit);
-            if (this.needRefreshCompileUnits != null && this.needRefreshCompileUnits.ContainsKey(codeCompileUnit))
+            if (
+                this.needRefreshCompileUnits != null
+                && this.needRefreshCompileUnits.ContainsKey(codeCompileUnit)
+            )
                 this.needRefreshCompileUnits.Remove(codeCompileUnit);
 
             if (this.TypesChanged != null)
                 FireEventsNoThrow(this.TypesChanged, new object[] { this, EventArgs.Empty });
         }
+
         public void RemoveCodeCompileUnit(CodeCompileUnit codeCompileUnit)
         {
             if (codeCompileUnit == null)
@@ -162,26 +195,42 @@ namespace System.Workflow.ComponentModel.Compiler
 
             if (this.addedCompileUnits != null && this.addedCompileUnits.Contains(codeCompileUnit))
                 this.addedCompileUnits.Remove(codeCompileUnit);
-            if (this.needRefreshCompileUnits != null && this.needRefreshCompileUnits.ContainsKey(codeCompileUnit))
+            if (
+                this.needRefreshCompileUnits != null
+                && this.needRefreshCompileUnits.ContainsKey(codeCompileUnit)
+            )
                 this.needRefreshCompileUnits.Remove(codeCompileUnit);
 
             if (this.typeLoadErrors.ContainsKey(codeCompileUnit))
             {
                 this.typeLoadErrors.Remove(codeCompileUnit);
                 if (this.TypeLoadErrorsChanged != null)
-                    FireEventsNoThrow(this.TypeLoadErrorsChanged, new object[] { this, EventArgs.Empty });
+                    FireEventsNoThrow(
+                        this.TypeLoadErrorsChanged,
+                        new object[] { this, EventArgs.Empty }
+                    );
             }
 
             if (this.TypesChanged != null)
                 FireEventsNoThrow(this.TypesChanged, new object[] { this, EventArgs.Empty });
         }
+
         public void RefreshCodeCompileUnit(CodeCompileUnit codeCompileUnit, EventHandler refresher)
         {
             if (codeCompileUnit == null)
                 throw new ArgumentNullException("codeCompileUnit");
 
-            if (!this.compileUnitLoaders.Contains(codeCompileUnit) && (this.addedCompileUnits != null && !this.addedCompileUnits.Contains(codeCompileUnit)))
-                throw new ArgumentException(TypeSystemSR.GetString("Error_NoCodeCompileUnit"), "codeCompileUnit");
+            if (
+                !this.compileUnitLoaders.Contains(codeCompileUnit)
+                && (
+                    this.addedCompileUnits != null
+                    && !this.addedCompileUnits.Contains(codeCompileUnit)
+                )
+            )
+                throw new ArgumentException(
+                    TypeSystemSR.GetString("Error_NoCodeCompileUnit"),
+                    "codeCompileUnit"
+                );
 
             if (this.needRefreshCompileUnits == null)
                 this.needRefreshCompileUnits = new Dictionary<CodeCompileUnit, EventHandler>();
@@ -199,22 +248,15 @@ namespace System.Workflow.ComponentModel.Compiler
         // Specifically this func is set by Microsoft.Workflow.VSDesigner when running within VS
         // The func encapsulates VS multi-targeting functionality so that System.Workflow.ComponentModel
         // does not need to take a dependency on VS bits.
-        public Func<Type, string> AssemblyNameResolver
-        {
-            get;
-            set;
-        }
-        public Func<PropertyInfo, object, bool> IsSupportedPropertyResolver
-        {
-            get;
-            set;
-        }
+        public Func<Type, string> AssemblyNameResolver { get; set; }
+        public Func<PropertyInfo, object, bool> IsSupportedPropertyResolver { get; set; }
+
         //
         // VS multi-targeting uses LMR which, unlike reflection, does not cache
         // Caching in the caller (here) is critical for performance
-        // GetAssemblyName, IsSupportedProperty provide both default behavior 
+        // GetAssemblyName, IsSupportedProperty provide both default behavior
         // if *Resolver is null and a cache over the LMR methods behind the Resolvers
-        // Caches rely on a single Type universe and object equality however due to issues in reflection it is 
+        // Caches rely on a single Type universe and object equality however due to issues in reflection it is
         // possible to get redundant items in the cache.  This is because reflection may return different instances
         // of PropertyInfo depending on what API is called.  This is rare but it can happen.  Worst case is
         // redundant entries in the cache; this will not cause incorrect behavior.
@@ -318,7 +360,15 @@ namespace System.Workflow.ComponentModel.Compiler
             string[] parameters = null;
             string elementDecorator = string.Empty;
 
-            if (ParseHelpers.ParseTypeName(name, ParseHelpers.ParseTypeNameLanguage.NetFramework, out typeName, out parameters, out elementDecorator))
+            if (
+                ParseHelpers.ParseTypeName(
+                    name,
+                    ParseHelpers.ParseTypeNameLanguage.NetFramework,
+                    out typeName,
+                    out parameters,
+                    out elementDecorator
+                )
+            )
             {
                 if ((parameters != null) && (parameters.Length > 0))
                 {
@@ -344,7 +394,9 @@ namespace System.Workflow.ComponentModel.Compiler
                     {
                         // first we verify the name is formated well (AssemblyQualifiedName for generic
                         // parameters + no spaces in array brackets)
-                        System.Text.StringBuilder nameBuilder = new System.Text.StringBuilder(elementType.FullName);
+                        System.Text.StringBuilder nameBuilder = new System.Text.StringBuilder(
+                            elementType.FullName
+                        );
                         for (int loop = 0; loop < elementDecorator.Length; loop++)
                             if (elementDecorator[loop] != ' ')
                                 nameBuilder.Append(elementDecorator[loop]);
@@ -390,8 +442,17 @@ namespace System.Workflow.ComponentModel.Compiler
                         {
                             foreach (DictionaryEntry dictionaryEntry in this.rawAssemblyLoaders)
                             {
-                                AssemblyLoader assemblyLoader = dictionaryEntry.Value as AssemblyLoader;
-                                if ((assemblyName.Length == 0) || (ParseHelpers.AssemblyNameEquals(assemblyLoader.AssemblyName, assemblyName)))
+                                AssemblyLoader assemblyLoader =
+                                    dictionaryEntry.Value as AssemblyLoader;
+                                if (
+                                    (assemblyName.Length == 0)
+                                    || (
+                                        ParseHelpers.AssemblyNameEquals(
+                                            assemblyLoader.AssemblyName,
+                                            assemblyName
+                                        )
+                                    )
+                                )
                                 {
                                     try
                                     {
@@ -404,7 +465,7 @@ namespace System.Workflow.ComponentModel.Compiler
                                             this.typeLoadErrors[dictionaryEntry.Key] = e;
                                             hasTypeLoadErrors = true;
                                         }
-                                        // bubble up exceptions only when appropiate 
+                                        // bubble up exceptions only when appropiate
                                         if (throwOnError)
                                             throw e;
                                     }
@@ -418,8 +479,17 @@ namespace System.Workflow.ComponentModel.Compiler
                         {
                             foreach (DictionaryEntry dictionaryEntry in this.assemblyLoaders)
                             {
-                                AssemblyLoader assemblyLoader = dictionaryEntry.Value as AssemblyLoader;
-                                if ((assemblyName.Length == 0) || (ParseHelpers.AssemblyNameEquals(assemblyLoader.AssemblyName, assemblyName)))
+                                AssemblyLoader assemblyLoader =
+                                    dictionaryEntry.Value as AssemblyLoader;
+                                if (
+                                    (assemblyName.Length == 0)
+                                    || (
+                                        ParseHelpers.AssemblyNameEquals(
+                                            assemblyLoader.AssemblyName,
+                                            assemblyName
+                                        )
+                                    )
+                                )
                                 {
                                     try
                                     {
@@ -432,7 +502,7 @@ namespace System.Workflow.ComponentModel.Compiler
                                             this.typeLoadErrors[dictionaryEntry.Key] = e;
                                             hasTypeLoadErrors = true;
                                         }
-                                        // bubble up exceptions only when appropiate 
+                                        // bubble up exceptions only when appropiate
                                         if (throwOnError)
                                             throw e;
                                     }
@@ -445,10 +515,17 @@ namespace System.Workflow.ComponentModel.Compiler
                         if (hasTypeLoadErrors)
                         {
                             if (this.TypeLoadErrorsChanged != null)
-                                FireEventsNoThrow(this.TypeLoadErrorsChanged, new object[] { this, EventArgs.Empty });
+                                FireEventsNoThrow(
+                                    this.TypeLoadErrorsChanged,
+                                    new object[] { this, EventArgs.Empty }
+                                );
                         }
 
-                        if (returnType == null && this.localAssembly != null && assemblyName == this.localAssembly.FullName)
+                        if (
+                            returnType == null
+                            && this.localAssembly != null
+                            && assemblyName == this.localAssembly.FullName
+                        )
                             returnType = this.localAssembly.GetType(typeName);
                     }
                 }
@@ -457,19 +534,30 @@ namespace System.Workflow.ComponentModel.Compiler
             if (returnType == null)
             {
                 if (throwOnError)
-                    throw new Exception(TypeSystemSR.GetString(CultureInfo.CurrentCulture, "Error_TypeResolution", name));
+                    throw new Exception(
+                        TypeSystemSR.GetString(
+                            CultureInfo.CurrentCulture,
+                            "Error_TypeResolution",
+                            name
+                        )
+                    );
                 else
                     return null;
             }
 
             // replace the System.Type with RTTypeWrapper for generic types.
             // WinOE Bug 16560: The type provider may be used at runtime.  No RTTypeWrapper should ever be returned
-            // at runtime.  
-            // At design time, we need to wrap all generic types even if the parameter types are not 
+            // at runtime.
+            // At design time, we need to wrap all generic types even if the parameter types are not
             // design time types.  This is because our parsing function creates a base generic type before it binds
-            // all the parameters.  The RTTypeWrapper.MakeGenericType override will then take care of binding to 
+            // all the parameters.  The RTTypeWrapper.MakeGenericType override will then take care of binding to
             // design time types.
-            if (this.designTimeTypes != null && this.designTimeTypes.Count > 0 && returnType.Assembly != null && returnType.IsGenericTypeDefinition)
+            if (
+                this.designTimeTypes != null
+                && this.designTimeTypes.Count > 0
+                && returnType.Assembly != null
+                && returnType.IsGenericTypeDefinition
+            )
             {
                 if (this.hashOfRTTypes.Contains(returnType))
                 {
@@ -507,7 +595,8 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
                 catch (Exception e)
                 {
-                    ReflectionTypeLoadException typeLoadException = e as ReflectionTypeLoadException;
+                    ReflectionTypeLoadException typeLoadException =
+                        e as ReflectionTypeLoadException;
                     if (typeLoadException != null)
                     {
                         //we should at least add the types that did get loaded
@@ -536,7 +625,8 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
                 catch (Exception e)
                 {
-                    ReflectionTypeLoadException typeLoadException = e as ReflectionTypeLoadException;
+                    ReflectionTypeLoadException typeLoadException =
+                        e as ReflectionTypeLoadException;
                     if (typeLoadException != null)
                     {
                         //we should at least add the types that did get loaded
@@ -558,7 +648,10 @@ namespace System.Workflow.ComponentModel.Compiler
             if (hasTypeLoadErrors)
             {
                 if (this.TypeLoadErrorsChanged != null)
-                    FireEventsNoThrow(this.TypeLoadErrorsChanged, new object[] { this, EventArgs.Empty });
+                    FireEventsNoThrow(
+                        this.TypeLoadErrorsChanged,
+                        new object[] { this, EventArgs.Empty }
+                    );
             }
 
             return typeList.ToArray();
@@ -581,9 +674,15 @@ namespace System.Workflow.ComponentModel.Compiler
                         string typeLoadError = null;
 
                         if (entry.Key is CodeCompileUnit)
-                            typeLoadError = TypeSystemSR.GetString("Error_CodeCompileUnitNotLoaded", new object[] { e.Message });
+                            typeLoadError = TypeSystemSR.GetString(
+                                "Error_CodeCompileUnitNotLoaded",
+                                new object[] { e.Message }
+                            );
                         else if (entry.Key is String)
-                            typeLoadError = TypeSystemSR.GetString("Error_AssemblyRefNotLoaded", new object[] { entry.Key.ToString(), e.Message });
+                            typeLoadError = TypeSystemSR.GetString(
+                                "Error_AssemblyRefNotLoaded",
+                                new object[] { entry.Key.ToString(), e.Message }
+                            );
 
                         //wrap the original exception with a new one with a custom error message
                         if (typeLoadError != null)
@@ -599,10 +698,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public Assembly LocalAssembly
         {
-            get
-            {
-                return this.localAssembly;
-            }
+            get { return this.localAssembly; }
         }
         public event EventHandler TypeLoadErrorsChanged;
         public event EventHandler TypesChanged;
@@ -672,7 +768,11 @@ namespace System.Workflow.ComponentModel.Compiler
             return true;
         }
 
-        internal static bool IsAssignable(Type toType, Type fromType, bool equalBasedOnSameTypeRepresenting)
+        internal static bool IsAssignable(
+            Type toType,
+            Type fromType,
+            bool equalBasedOnSameTypeRepresenting
+        )
         {
             if (toType == null || fromType == null)
                 return false;
@@ -699,7 +799,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (!(toType is RTTypeWrapper) && !(toType is DesignTimeType))
                 {
 #pragma warning suppress 56506
-                    ITypeProvider provider = fromType is RTTypeWrapper ? (fromType as RTTypeWrapper).Provider : (fromType as DesignTimeType).Provider;
+                    ITypeProvider provider =
+                        fromType is RTTypeWrapper
+                            ? (fromType as RTTypeWrapper).Provider
+                            : (fromType as DesignTimeType).Provider;
                     if (provider != null)
                         toType = provider.GetType(toType.FullName);
                 }
@@ -709,7 +812,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (!(fromType is RTTypeWrapper) && !(fromType is DesignTimeType))
                 {
 #pragma warning suppress 56506
-                    ITypeProvider provider = toType is RTTypeWrapper ? (toType as RTTypeWrapper).Provider : (toType as DesignTimeType).Provider;
+                    ITypeProvider provider =
+                        toType is RTTypeWrapper
+                            ? (toType as RTTypeWrapper).Provider
+                            : (toType as DesignTimeType).Provider;
                     if (provider != null)
                         fromType = provider.GetType(fromType.FullName);
                 }
@@ -753,10 +859,12 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return false;
         }
+
         public static bool IsAssignable(Type toType, Type fromType)
         {
             return IsAssignable(toType, fromType, false);
         }
+
         public static bool IsSubclassOf(Type subclass, Type superClass)
         {
             if (superClass == subclass)
@@ -778,6 +886,7 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return false;
         }
+
         public static bool IsEnum(Type type)
         {
             if (type == null)
@@ -785,6 +894,7 @@ namespace System.Workflow.ComponentModel.Compiler
 
             return TypeProvider.IsSubclassOf(type, typeof(Enum));
         }
+
         public static string[] GetEnumNames(Type enumType)
         {
             if (enumType == null)
@@ -801,8 +911,6 @@ namespace System.Workflow.ComponentModel.Compiler
 
             names.Sort();
             return names.ToArray();
-
-
         }
         #endregion
 
@@ -872,16 +980,31 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (this.needRefreshCompileUnits != null)
                 {
                     // cache it to local variable
-                    Dictionary<CodeCompileUnit, EventHandler> needRefreshCompileUnits2 = new Dictionary<CodeCompileUnit, EventHandler>();
-                    foreach (KeyValuePair<CodeCompileUnit, EventHandler> entry in this.needRefreshCompileUnits)
+                    Dictionary<CodeCompileUnit, EventHandler> needRefreshCompileUnits2 =
+                        new Dictionary<CodeCompileUnit, EventHandler>();
+                    foreach (
+                        KeyValuePair<
+                            CodeCompileUnit,
+                            EventHandler
+                        > entry in this.needRefreshCompileUnits
+                    )
                         needRefreshCompileUnits2.Add(entry.Key, entry.Value);
                     this.needRefreshCompileUnits = null;
 
-                    foreach (KeyValuePair<CodeCompileUnit, EventHandler> entry in needRefreshCompileUnits2)
+                    foreach (
+                        KeyValuePair<
+                            CodeCompileUnit,
+                            EventHandler
+                        > entry in needRefreshCompileUnits2
+                    )
                     {
-                        CodeDomLoader codeDomLoader = this.compileUnitLoaders[entry.Key] as CodeDomLoader;
+                        CodeDomLoader codeDomLoader =
+                            this.compileUnitLoaders[entry.Key] as CodeDomLoader;
 
-                        Debug.Assert(codeDomLoader != null, "How come we don't have CodeDOMLoader for the guy who needs refresh?");
+                        Debug.Assert(
+                            codeDomLoader != null,
+                            "How come we don't have CodeDOMLoader for the guy who needs refresh?"
+                        );
                         if (codeDomLoader != null)
                         {
                             try
@@ -900,7 +1023,10 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (hasTypeLoadErrors)
                 {
                     if (this.TypeLoadErrorsChanged != null)
-                        FireEventsNoThrow(this.TypeLoadErrorsChanged, new object[] { this, EventArgs.Empty });
+                        FireEventsNoThrow(
+                            this.TypeLoadErrorsChanged,
+                            new object[] { this, EventArgs.Empty }
+                        );
                 }
             }
             finally
@@ -922,7 +1048,10 @@ namespace System.Workflow.ComponentModel.Compiler
             foreach (Type type in types)
             {
                 string typeName = type.FullName;
-                Debug.Assert(this.designTimeTypes.Contains(typeName), "How come you are removing type which you did not push in.");
+                Debug.Assert(
+                    this.designTimeTypes.Contains(typeName),
+                    "How come you are removing type which you did not push in."
+                );
 
                 // collect all related cashed types (arrays, ref etc') to be deleted.
                 // Note: we gather the names first as types might be dependant on each other.
@@ -958,7 +1087,10 @@ namespace System.Workflow.ComponentModel.Compiler
                     }
                     catch (Exception e)
                     {
-                        Debug.Assert(false, "One of the event listener threw an Exception. \n" + e.ToString());
+                        Debug.Assert(
+                            false,
+                            "One of the event listener threw an Exception. \n" + e.ToString()
+                        );
                     }
                 }
             }
@@ -1013,10 +1145,15 @@ namespace System.Workflow.ComponentModel.Compiler
     {
         static TypeSystemSR loader = null;
         ResourceManager resources;
+
         internal TypeSystemSR()
         {
-            resources = new ResourceManager("System.Workflow.ComponentModel.Compiler.StringResources", Assembly.GetExecutingAssembly());
+            resources = new ResourceManager(
+                "System.Workflow.ComponentModel.Compiler.StringResources",
+                Assembly.GetExecutingAssembly()
+            );
         }
+
         private static TypeSystemSR GetLoader()
         {
             if (loader == null)
@@ -1024,14 +1161,21 @@ namespace System.Workflow.ComponentModel.Compiler
 
             return loader;
         }
+
         private static CultureInfo Culture
         {
-            get { return null/*use ResourceManager default, CultureInfo.CurrentUICulture*/; }
+            get
+            {
+                return null /*use ResourceManager default, CultureInfo.CurrentUICulture*/
+                ;
+            }
         }
+
         internal static string GetString(string name, params object[] args)
         {
             return GetString(TypeSystemSR.Culture, name, args);
         }
+
         internal static string GetString(CultureInfo culture, string name, params object[] args)
         {
             TypeSystemSR sys = GetLoader();
@@ -1050,10 +1194,12 @@ namespace System.Workflow.ComponentModel.Compiler
                 return res;
             }
         }
+
         internal static string GetString(string name)
         {
             return GetString(TypeSystemSR.Culture, name);
         }
+
         internal static string GetString(CultureInfo culture, string name)
         {
             TypeSystemSR sys = GetLoader();

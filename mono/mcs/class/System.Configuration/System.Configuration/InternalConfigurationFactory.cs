@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,49 +30,63 @@ using System;
 using System.Collections;
 using System.Configuration.Internal;
 
-namespace System.Configuration {
+namespace System.Configuration
+{
+    class InternalConfigurationFactory : IInternalConfigConfigurationFactory
+    {
+        public Configuration Create(
+            Type typeConfigHost,
+            params object[] hostInitConfigurationParams
+        )
+        {
+            InternalConfigurationSystem system = new InternalConfigurationSystem();
+            system.Init(typeConfigHost, hostInitConfigurationParams);
+            return new Configuration(system, null);
+        }
 
-	class InternalConfigurationFactory: IInternalConfigConfigurationFactory
-	{
-		public Configuration Create (Type typeConfigHost, params object[] hostInitConfigurationParams)
-		{
-			InternalConfigurationSystem system = new InternalConfigurationSystem ();
-			system.Init (typeConfigHost, hostInitConfigurationParams);
-			return new Configuration (system, null);
-		}
-		
-		public string NormalizeLocationSubPath (string subPath, IConfigErrorInfo errorInfo)
-		{
-			return subPath;
-		}
-	}
-	
-	class InternalConfigurationSystem: IConfigSystem
-	{
-		IInternalConfigHost host;
-		IInternalConfigRoot root;
-		object[] hostInitParams;
-		
-		public void Init (Type typeConfigHost, params object[] hostInitParams)
-		{
-			this.hostInitParams = hostInitParams;
-			host = (IInternalConfigHost) Activator.CreateInstance (typeConfigHost);
-			root = new InternalConfigurationRoot ();
-			root.Init (host, false);
-		}
-		
-		public void InitForConfiguration (ref string locationConfigPath, out string parentConfigPath, out string parentLocationConfigPath)
-		{
-			host.InitForConfiguration (ref locationConfigPath, out parentConfigPath, out parentLocationConfigPath, root, hostInitParams);
-		}
-		
-		public IInternalConfigHost Host {
-			get { return host; }
-		}
-		
-		public IInternalConfigRoot Root {
-			get { return root; }
-		}
-	}
+        public string NormalizeLocationSubPath(string subPath, IConfigErrorInfo errorInfo)
+        {
+            return subPath;
+        }
+    }
+
+    class InternalConfigurationSystem : IConfigSystem
+    {
+        IInternalConfigHost host;
+        IInternalConfigRoot root;
+        object[] hostInitParams;
+
+        public void Init(Type typeConfigHost, params object[] hostInitParams)
+        {
+            this.hostInitParams = hostInitParams;
+            host = (IInternalConfigHost)Activator.CreateInstance(typeConfigHost);
+            root = new InternalConfigurationRoot();
+            root.Init(host, false);
+        }
+
+        public void InitForConfiguration(
+            ref string locationConfigPath,
+            out string parentConfigPath,
+            out string parentLocationConfigPath
+        )
+        {
+            host.InitForConfiguration(
+                ref locationConfigPath,
+                out parentConfigPath,
+                out parentLocationConfigPath,
+                root,
+                hostInitParams
+            );
+        }
+
+        public IInternalConfigHost Host
+        {
+            get { return host; }
+        }
+
+        public IInternalConfigRoot Root
+        {
+            get { return root; }
+        }
+    }
 }
-

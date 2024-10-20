@@ -5,7 +5,8 @@ using Microsoft.Extensions.ObjectPool;
 
 namespace Microsoft.AspNetCore.Antiforgery;
 
-internal sealed class AntiforgerySerializationContextPooledObjectPolicy : IPooledObjectPolicy<AntiforgerySerializationContext>
+internal sealed class AntiforgerySerializationContextPooledObjectPolicy
+    : IPooledObjectPolicy<AntiforgerySerializationContext>
 {
     public AntiforgerySerializationContext Create()
     {

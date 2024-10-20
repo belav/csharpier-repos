@@ -41,8 +41,8 @@ public class UnmappedOrder
     [MaxLength(15)]
     public string ShipCountry { get; set; }
 
-    public static UnmappedOrder FromOrder(Order order)
-        => new()
+    public static UnmappedOrder FromOrder(Order order) =>
+        new()
         {
             OrderID = order.OrderID,
             CustomerID = order.CustomerID,

@@ -9,7 +9,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
 {
     internal static class StreamExtensions
     {
-        public static async Task<byte[]> ReadBytesAsync(this Stream stream, int length, CancellationToken cancellationToken)
+        public static async Task<byte[]> ReadBytesAsync(
+            this Stream stream,
+            int length,
+            CancellationToken cancellationToken
+        )
         {
             byte[] buffer = new byte[length];
 

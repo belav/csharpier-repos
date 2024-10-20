@@ -30,83 +30,86 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web
 {
-	public class HttpApplicationState_AllKeys
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class HttpApplicationState_AllKeys : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, EventArgs e)
-		{
-			HtmlForm form1 = (HtmlForm) (HtmlForm)this.FindControl("Form1");
-			this.GHTTestBegin(form1);
-			this.GHTSubTestBegin("GHTSubTest1");
-			try
-			{
-				this.Application.Clear();
-				this.Application.Add("var1", "variable1");
-				this.Application.Add("var2", "variable2");
-				this.Application.Add("var3", "variable3");
-				string[] textArray1 = new string[this.Application.Count + 1];
-				string[] textArray4 = this.Application.AllKeys;
-				for (int num2 = 0; num2 < textArray4.Length; num2++)
-				{
-					string text1 = textArray4[num2];
-					this.GHTSubTestAddResult((string)("(\"" + text1 + "\") = " + this.Application[text1]));
-				}
-			}
-			catch (Exception exception3)
-			{
-				// ProjectData.SetProjectError(exception3);
-				Exception exception1 = exception3;
-				this.GHTSubTestUnexpectedExceptionCaught(exception1);
-				// ProjectData.ClearProjectError();
-			}
-			this.GHTSubTestEnd();
-			this.GHTSubTestBegin("GHTSubTest2");
-			try
-			{
-				this.Application.Add("var4", "");
-				this.Application.Add("", "variable5");
-				string[] textArray2 = new string[3];
-				string[] textArray3 = this.Application.AllKeys;
-				for (int num1 = 0; num1 < textArray3.Length; num1++)
-				{
-					string text2 = textArray3[num1];
-					this.GHTSubTestAddResult((string)("(\"" + text2 + "\") = " + this.Application[text2]));
-				}
-			}
-			catch (Exception exception4)
-			{
-				// ProjectData.SetProjectError(exception4);
-				Exception exception2 = exception4;
-				this.GHTSubTestUnexpectedExceptionCaught(exception2);
-				// ProjectData.ClearProjectError();
-			}
-			this.GHTSubTestEnd();
-			this.GHTTestEnd();
-		}
-	}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
+
+        private void Page_Load(object sender, EventArgs e)
+        {
+            HtmlForm form1 = (HtmlForm)(HtmlForm)this.FindControl("Form1");
+            this.GHTTestBegin(form1);
+            this.GHTSubTestBegin("GHTSubTest1");
+            try
+            {
+                this.Application.Clear();
+                this.Application.Add("var1", "variable1");
+                this.Application.Add("var2", "variable2");
+                this.Application.Add("var3", "variable3");
+                string[] textArray1 = new string[this.Application.Count + 1];
+                string[] textArray4 = this.Application.AllKeys;
+                for (int num2 = 0; num2 < textArray4.Length; num2++)
+                {
+                    string text1 = textArray4[num2];
+                    this.GHTSubTestAddResult(
+                        (string)("(\"" + text1 + "\") = " + this.Application[text1])
+                    );
+                }
+            }
+            catch (Exception exception3)
+            {
+                // ProjectData.SetProjectError(exception3);
+                Exception exception1 = exception3;
+                this.GHTSubTestUnexpectedExceptionCaught(exception1);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+            this.GHTSubTestBegin("GHTSubTest2");
+            try
+            {
+                this.Application.Add("var4", "");
+                this.Application.Add("", "variable5");
+                string[] textArray2 = new string[3];
+                string[] textArray3 = this.Application.AllKeys;
+                for (int num1 = 0; num1 < textArray3.Length; num1++)
+                {
+                    string text2 = textArray3[num1];
+                    this.GHTSubTestAddResult(
+                        (string)("(\"" + text2 + "\") = " + this.Application[text2])
+                    );
+                }
+            }
+            catch (Exception exception4)
+            {
+                // ProjectData.SetProjectError(exception4);
+                Exception exception2 = exception4;
+                this.GHTSubTestUnexpectedExceptionCaught(exception2);
+                // ProjectData.ClearProjectError();
+            }
+            this.GHTSubTestEnd();
+            this.GHTTestEnd();
+        }
+    }
 }

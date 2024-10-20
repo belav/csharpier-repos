@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource;
 /// <param name="GenerationOptions">Options to use to prettify the generated document.</param>
 [DataContract]
 internal readonly record struct MetadataAsSourceOptions(
-    [property: DataMember] CleanCodeGenerationOptions GenerationOptions)
+    [property: DataMember] CleanCodeGenerationOptions GenerationOptions
+)
 {
     /// <summary>
     /// <see langword="false"/> to disallow decompiling code, which may
@@ -38,6 +39,6 @@ internal readonly record struct MetadataAsSourceOptions(
     [DataMember]
     public bool NavigateToSourceLinkAndEmbeddedSources { get; init; } = true;
 
-    public static MetadataAsSourceOptions GetDefault(LanguageServices languageServices)
-        => new(GenerationOptions: CleanCodeGenerationOptions.GetDefault(languageServices));
+    public static MetadataAsSourceOptions GetDefault(LanguageServices languageServices) =>
+        new(GenerationOptions: CleanCodeGenerationOptions.GetDefault(languageServices));
 }

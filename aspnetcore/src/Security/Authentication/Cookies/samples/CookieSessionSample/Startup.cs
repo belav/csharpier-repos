@@ -12,14 +12,20 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         // This can be removed after https://github.com/aspnet/IISIntegration/issues/371
-        services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        }).AddCookie();
+        services
+            .AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme =
+                    CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie();
 
         services.AddSingleton<ITicketStore, MemoryCacheTicketStore>();
-        services.AddOptions<CookieAuthenticationOptions>(CookieAuthenticationDefaults.AuthenticationScheme)
+        services
+            .AddOptions<CookieAuthenticationOptions>(
+                CookieAuthenticationDefaults.AuthenticationScheme
+            )
             .Configure<ITicketStore>((o, ticketStore) => o.SessionStore = ticketStore);
     }
 
@@ -36,11 +42,26 @@ public class Startup
                 claims.Add(new Claim(ClaimTypes.Name, "bob"));
                 for (int i = 0; i < 1000; i++)
                 {
-                    claims.Add(new Claim(ClaimTypes.Role, "SomeRandomGroup" + i, ClaimValueTypes.String, "IssuedByBob", "OriginalIssuerJoe"));
+                    claims.Add(
+                        new Claim(
+                            ClaimTypes.Role,
+                            "SomeRandomGroup" + i,
+                            ClaimValueTypes.String,
+                            "IssuedByBob",
+                            "OriginalIssuerJoe"
+                        )
+                    );
                 }
 
-                await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme)));
+                await context.SignInAsync(
+                    CookieAuthenticationDefaults.AuthenticationScheme,
+                    new ClaimsPrincipal(
+                        new ClaimsIdentity(
+                            claims,
+                            CookieAuthenticationDefaults.AuthenticationScheme
+                        )
+                    )
+                );
 
                 context.Response.ContentType = "text/plain";
                 await context.Response.WriteAsync("Hello First timer");

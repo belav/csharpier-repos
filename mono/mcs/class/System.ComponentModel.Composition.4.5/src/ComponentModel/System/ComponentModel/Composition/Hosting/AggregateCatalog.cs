@@ -14,7 +14,7 @@ using Microsoft.Internal;
 namespace System.ComponentModel.Composition.Hosting
 {
     /// <summary>
-    ///     A mutable collection of <see cref="ComposablePartCatalog"/>s.  
+    ///     A mutable collection of <see cref="ComposablePartCatalog"/>s.
     /// </summary>
     /// <remarks>
     ///     This type is thread safe.
@@ -28,16 +28,14 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class.
         /// </summary>
         public AggregateCatalog()
-            : this((IEnumerable<ComposablePartCatalog>)null)
-        {
-        }
+            : this((IEnumerable<ComposablePartCatalog>)null) { }
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class 
+        ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class
         ///     with the specified catalogs.
         /// </summary>
         /// <param name="catalogs">
-        ///     An <see cref="Array"/> of <see cref="ComposablePartCatalog"/> objects to add to the 
+        ///     An <see cref="Array"/> of <see cref="ComposablePartCatalog"/> objects to add to the
         ///     <see cref="AggregateCatalog"/>.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -47,9 +45,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <paramref name="catalogs"/> contains an element that is <see langword="null"/>.
         /// </exception>
         public AggregateCatalog(params ComposablePartCatalog[] catalogs)
-            : this((IEnumerable<ComposablePartCatalog>)catalogs)
-        {
-        }
+            : this((IEnumerable<ComposablePartCatalog>)catalogs) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="AggregateCatalog"/> class
@@ -57,7 +53,7 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         /// <param name="catalogs">
         ///     An <see cref="IEnumerable{T}"/> of <see cref="ComposablePartCatalog"/> objects to add
-        ///     to the <see cref="AggregateCatalog"/>; or <see langword="null"/> to 
+        ///     to the <see cref="AggregateCatalog"/>; or <see langword="null"/> to
         ///     create an <see cref="AggregateCatalog"/> that is empty.
         /// </param>
         /// <exception cref="ArgumentException">
@@ -67,7 +63,11 @@ namespace System.ComponentModel.Composition.Hosting
         {
             Requires.NullOrNotNullElements(catalogs, "catalogs");
 
-            this._catalogs = new ComposablePartCatalogCollection(catalogs, this.OnChanged, this.OnChanging);
+            this._catalogs = new ComposablePartCatalogCollection(
+                catalogs,
+                this.OnChanged,
+                this.OnChanging
+            );
         }
 
         /// <summary>
@@ -75,14 +75,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         public event EventHandler<ComposablePartCatalogChangeEventArgs> Changed
         {
-            add
-            {
-                this._catalogs.Changed += value;
-            }
-            remove
-            {
-                this._catalogs.Changed -= value;
-            }
+            add { this._catalogs.Changed += value; }
+            remove { this._catalogs.Changed -= value; }
         }
 
         /// <summary>
@@ -90,27 +84,21 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         public event EventHandler<ComposablePartCatalogChangeEventArgs> Changing
         {
-            add
-            {
-                this._catalogs.Changing += value;
-            }
-            remove
-            {
-                this._catalogs.Changing -= value;
-            }
+            add { this._catalogs.Changing += value; }
+            remove { this._catalogs.Changing -= value; }
         }
 
         /// <summary>
         ///     Returns the export definitions that match the constraint defined by the specified definition.
         /// </summary>
         /// <param name="definition">
-        ///     The <see cref="ImportDefinition"/> that defines the conditions of the 
+        ///     The <see cref="ImportDefinition"/> that defines the conditions of the
         ///     <see cref="ExportDefinition"/> objects to return.
         /// </param>
         /// <returns>
-        ///     An <see cref="IEnumerable{T}"/> of <see cref="Tuple{T1, T2}"/> containing the 
-        ///     <see cref="ExportDefinition"/> objects and their associated 
-        ///     <see cref="ComposablePartDefinition"/> for objects that match the constraint defined 
+        ///     An <see cref="IEnumerable{T}"/> of <see cref="Tuple{T1, T2}"/> containing the
+        ///     <see cref="ExportDefinition"/> objects and their associated
+        ///     <see cref="ComposablePartDefinition"/> for objects that match the constraint defined
         ///     by <paramref name="definition"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -119,7 +107,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="AggregateCatalog"/> has been disposed of.
         /// </exception>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             this.ThrowIfDisposed();
 
@@ -208,7 +198,11 @@ namespace System.ComponentModel.Composition.Hosting
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void ThrowIfDisposed()
         {
             if (this._isDisposed == 1)

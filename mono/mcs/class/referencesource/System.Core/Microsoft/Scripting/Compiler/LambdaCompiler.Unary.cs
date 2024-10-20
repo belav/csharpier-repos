@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -19,51 +19,60 @@ using System.Dynamic.Utils;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast.Compiler {
+namespace Microsoft.Scripting.Ast.Compiler
+{
 #else
-namespace System.Linq.Expressions.Compiler {
+namespace System.Linq.Expressions.Compiler
+{
 #endif
-    partial class LambdaCompiler {
-
-        private void EmitQuoteUnaryExpression(Expression expr) {
+    partial class LambdaCompiler
+    {
+        private void EmitQuoteUnaryExpression(Expression expr)
+        {
             EmitQuote((UnaryExpression)expr);
         }
 
-
-        private void EmitQuote(UnaryExpression quote) {
+        private void EmitQuote(UnaryExpression quote)
+        {
             // emit the quoted expression as a runtime constant
             EmitConstant(quote.Operand, quote.Type);
 
             // Heuristic: only emit the tree rewrite logic if we have hoisted
             // locals.
-            if (_scope.NearestHoistedLocals != null) {
+            if (_scope.NearestHoistedLocals != null)
+            {
                 // HoistedLocals is internal so emit as System.Object
                 EmitConstant(_scope.NearestHoistedLocals, typeof(object));
                 _scope.EmitGet(_scope.NearestHoistedLocals.SelfVariable);
                 _ilg.Emit(OpCodes.Call, typeof(RuntimeOps).GetMethod("Quote"));
 
-                if (quote.Type != typeof(Expression)) {
+                if (quote.Type != typeof(Expression))
+                {
                     _ilg.Emit(OpCodes.Castclass, quote.Type);
                 }
             }
         }
 
-        private void EmitThrowUnaryExpression(Expression expr) {
+        private void EmitThrowUnaryExpression(Expression expr)
+        {
             EmitThrow((UnaryExpression)expr, CompilationFlags.EmitAsDefaultType);
         }
 
-        private void EmitThrow(UnaryExpression expr, CompilationFlags flags) {
-            if (expr.Operand == null) {
+        private void EmitThrow(UnaryExpression expr, CompilationFlags flags)
+        {
+            if (expr.Operand == null)
+            {
                 CheckRethrow();
 
                 _ilg.Emit(OpCodes.Rethrow);
-            } else {
+            }
+            else
+            {
                 EmitExpression(expr.Operand);
                 _ilg.Emit(OpCodes.Throw);
             }
@@ -71,14 +80,22 @@ namespace System.Linq.Expressions.Compiler {
             EmitUnreachable(expr, flags);
         }
 
-        private void EmitUnaryExpression(Expression expr, CompilationFlags flags) {
+        private void EmitUnaryExpression(Expression expr, CompilationFlags flags)
+        {
             EmitUnary((UnaryExpression)expr, flags);
         }
 
-        private void EmitUnary(UnaryExpression node, CompilationFlags flags) {
-            if (node.Method != null) {
+        private void EmitUnary(UnaryExpression node, CompilationFlags flags)
+        {
+            if (node.Method != null)
+            {
                 EmitUnaryMethod(node, flags);
-            } else if (node.NodeType == ExpressionType.NegateChecked && TypeUtils.IsInteger(node.Operand.Type)) {
+            }
+            else if (
+                node.NodeType == ExpressionType.NegateChecked
+                && TypeUtils.IsInteger(node.Operand.Type)
+            )
+            {
                 EmitExpression(node.Operand);
                 LocalBuilder loc = GetLocal(node.Operand.Type);
                 _ilg.Emit(OpCodes.Stloc, loc);
@@ -86,55 +103,72 @@ namespace System.Linq.Expressions.Compiler {
                 _ilg.EmitConvertToType(typeof(int), node.Operand.Type, false);
                 _ilg.Emit(OpCodes.Ldloc, loc);
                 FreeLocal(loc);
-                EmitBinaryOperator(ExpressionType.SubtractChecked, node.Operand.Type, node.Operand.Type, node.Type, false);
-            } else {
+                EmitBinaryOperator(
+                    ExpressionType.SubtractChecked,
+                    node.Operand.Type,
+                    node.Operand.Type,
+                    node.Type,
+                    false
+                );
+            }
+            else
+            {
                 EmitExpression(node.Operand);
                 EmitUnaryOperator(node.NodeType, node.Operand.Type, node.Type);
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        private void EmitUnaryOperator(ExpressionType op, Type operandType, Type resultType) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity"
+        )]
+        private void EmitUnaryOperator(ExpressionType op, Type operandType, Type resultType)
+        {
             bool operandIsNullable = TypeUtils.IsNullableType(operandType);
 
-            if (op == ExpressionType.ArrayLength) {
+            if (op == ExpressionType.ArrayLength)
+            {
                 _ilg.Emit(OpCodes.Ldlen);
                 return;
             }
 
-            if (operandIsNullable) {
-                switch (op) {
-                    case ExpressionType.Not: {
-                            if (operandType != typeof(bool?)) {
-                                goto case ExpressionType.Negate;
-                            }
-                            Label labEnd = _ilg.DefineLabel();
-                            LocalBuilder loc = GetLocal(operandType);
-
-                            // store values (reverse order since they are already on the stack)
-                            _ilg.Emit(OpCodes.Stloc, loc);
-
-                            // test for null
-                            _ilg.Emit(OpCodes.Ldloca, loc);
-                            _ilg.EmitHasValue(operandType);
-                            _ilg.Emit(OpCodes.Brfalse_S, labEnd);
-
-                            // do op on non-null value
-                            _ilg.Emit(OpCodes.Ldloca, loc);
-                            _ilg.EmitGetValueOrDefault(operandType);
-                            Type nnOperandType = TypeUtils.GetNonNullableType(operandType);
-                            EmitUnaryOperator(op, nnOperandType, typeof(bool));
-
-                            // construct result
-                            ConstructorInfo ci = resultType.GetConstructor(new Type[] { typeof(bool) });
-                            _ilg.Emit(OpCodes.Newobj, ci);
-                            _ilg.Emit(OpCodes.Stloc, loc);
-
-                            _ilg.MarkLabel(labEnd);
-                            _ilg.Emit(OpCodes.Ldloc, loc);
-                            FreeLocal(loc);
-                            return;
+            if (operandIsNullable)
+            {
+                switch (op)
+                {
+                    case ExpressionType.Not:
+                    {
+                        if (operandType != typeof(bool?))
+                        {
+                            goto case ExpressionType.Negate;
                         }
+                        Label labEnd = _ilg.DefineLabel();
+                        LocalBuilder loc = GetLocal(operandType);
+
+                        // store values (reverse order since they are already on the stack)
+                        _ilg.Emit(OpCodes.Stloc, loc);
+
+                        // test for null
+                        _ilg.Emit(OpCodes.Ldloca, loc);
+                        _ilg.EmitHasValue(operandType);
+                        _ilg.Emit(OpCodes.Brfalse_S, labEnd);
+
+                        // do op on non-null value
+                        _ilg.Emit(OpCodes.Ldloca, loc);
+                        _ilg.EmitGetValueOrDefault(operandType);
+                        Type nnOperandType = TypeUtils.GetNonNullableType(operandType);
+                        EmitUnaryOperator(op, nnOperandType, typeof(bool));
+
+                        // construct result
+                        ConstructorInfo ci = resultType.GetConstructor(new Type[] { typeof(bool) });
+                        _ilg.Emit(OpCodes.Newobj, ci);
+                        _ilg.Emit(OpCodes.Stloc, loc);
+
+                        _ilg.MarkLabel(labEnd);
+                        _ilg.Emit(OpCodes.Ldloc, loc);
+                        FreeLocal(loc);
+                        return;
+                    }
                     case ExpressionType.UnaryPlus:
                     case ExpressionType.NegateChecked:
                     case ExpressionType.Negate:
@@ -142,57 +176,67 @@ namespace System.Linq.Expressions.Compiler {
                     case ExpressionType.Decrement:
                     case ExpressionType.OnesComplement:
                     case ExpressionType.IsFalse:
-                    case ExpressionType.IsTrue: {
-                            Debug.Assert(TypeUtils.AreEquivalent(operandType, resultType));
-                            Label labIfNull = _ilg.DefineLabel();
-                            Label labEnd = _ilg.DefineLabel();
-                            LocalBuilder loc = GetLocal(operandType);
+                    case ExpressionType.IsTrue:
+                    {
+                        Debug.Assert(TypeUtils.AreEquivalent(operandType, resultType));
+                        Label labIfNull = _ilg.DefineLabel();
+                        Label labEnd = _ilg.DefineLabel();
+                        LocalBuilder loc = GetLocal(operandType);
 
-                            // check for null
-                            _ilg.Emit(OpCodes.Stloc, loc);
-                            _ilg.Emit(OpCodes.Ldloca, loc);
-                            _ilg.EmitHasValue(operandType);
-                            _ilg.Emit(OpCodes.Brfalse_S, labIfNull);
+                        // check for null
+                        _ilg.Emit(OpCodes.Stloc, loc);
+                        _ilg.Emit(OpCodes.Ldloca, loc);
+                        _ilg.EmitHasValue(operandType);
+                        _ilg.Emit(OpCodes.Brfalse_S, labIfNull);
 
-                            // apply operator to non-null value
-                            _ilg.Emit(OpCodes.Ldloca, loc);
-                            _ilg.EmitGetValueOrDefault(operandType);
-                            Type nnOperandType = TypeUtils.GetNonNullableType(resultType);
-                            EmitUnaryOperator(op, nnOperandType, nnOperandType);
+                        // apply operator to non-null value
+                        _ilg.Emit(OpCodes.Ldloca, loc);
+                        _ilg.EmitGetValueOrDefault(operandType);
+                        Type nnOperandType = TypeUtils.GetNonNullableType(resultType);
+                        EmitUnaryOperator(op, nnOperandType, nnOperandType);
 
-                            // construct result
-                            ConstructorInfo ci = resultType.GetConstructor(new Type[] { nnOperandType });
-                            _ilg.Emit(OpCodes.Newobj, ci);
-                            _ilg.Emit(OpCodes.Stloc, loc);
-                            _ilg.Emit(OpCodes.Br_S, labEnd);
+                        // construct result
+                        ConstructorInfo ci = resultType.GetConstructor(
+                            new Type[] { nnOperandType }
+                        );
+                        _ilg.Emit(OpCodes.Newobj, ci);
+                        _ilg.Emit(OpCodes.Stloc, loc);
+                        _ilg.Emit(OpCodes.Br_S, labEnd);
 
-                            // if null then create a default one
-                            _ilg.MarkLabel(labIfNull);
-                            _ilg.Emit(OpCodes.Ldloca, loc);
-                            _ilg.Emit(OpCodes.Initobj, resultType);
+                        // if null then create a default one
+                        _ilg.MarkLabel(labIfNull);
+                        _ilg.Emit(OpCodes.Ldloca, loc);
+                        _ilg.Emit(OpCodes.Initobj, resultType);
 
-                            _ilg.MarkLabel(labEnd);
-                            _ilg.Emit(OpCodes.Ldloc, loc);
-                            FreeLocal(loc);
-                            return;
-                        }
+                        _ilg.MarkLabel(labEnd);
+                        _ilg.Emit(OpCodes.Ldloc, loc);
+                        FreeLocal(loc);
+                        return;
+                    }
                     case ExpressionType.TypeAs:
                         _ilg.Emit(OpCodes.Box, operandType);
                         _ilg.Emit(OpCodes.Isinst, resultType);
-                        if (TypeUtils.IsNullableType(resultType)) {
+                        if (TypeUtils.IsNullableType(resultType))
+                        {
                             _ilg.Emit(OpCodes.Unbox_Any, resultType);
                         }
                         return;
                     default:
                         throw Error.UnhandledUnary(op);
                 }
-            } else {
-                switch (op) {
+            }
+            else
+            {
+                switch (op)
+                {
                     case ExpressionType.Not:
-                        if (operandType == typeof(bool)) {
+                        if (operandType == typeof(bool))
+                        {
                             _ilg.Emit(OpCodes.Ldc_I4_0);
                             _ilg.Emit(OpCodes.Ceq);
-                        } else {
+                        }
+                        else
+                        {
                             _ilg.Emit(OpCodes.Not);
                         }
                         break;
@@ -217,11 +261,13 @@ namespace System.Linq.Expressions.Compiler {
                         _ilg.Emit(OpCodes.Neg);
                         break;
                     case ExpressionType.TypeAs:
-                        if (operandType.IsValueType) {
+                        if (operandType.IsValueType)
+                        {
                             _ilg.Emit(OpCodes.Box, operandType);
                         }
                         _ilg.Emit(OpCodes.Isinst, resultType);
-                        if (TypeUtils.IsNullableType(resultType)) {
+                        if (TypeUtils.IsNullableType(resultType))
+                        {
                             _ilg.Emit(OpCodes.Unbox_Any, resultType);
                         }
                         // Not an arithmetic operation -> no conversion
@@ -242,8 +288,10 @@ namespace System.Linq.Expressions.Compiler {
             }
         }
 
-        private void EmitConstantOne(Type type) {
-            switch (Type.GetTypeCode(type)) {
+        private void EmitConstantOne(Type type)
+        {
+            switch (Type.GetTypeCode(type))
+            {
                 case TypeCode.UInt16:
                 case TypeCode.UInt32:
                 case TypeCode.Int16:
@@ -267,7 +315,8 @@ namespace System.Linq.Expressions.Compiler {
             }
         }
 
-        private void EmitUnboxUnaryExpression(Expression expr) {
+        private void EmitUnboxUnaryExpression(Expression expr)
+        {
             var node = (UnaryExpression)expr;
             Debug.Assert(node.Type.IsValueType && !TypeUtils.IsNullableType(node.Type));
 
@@ -276,12 +325,15 @@ namespace System.Linq.Expressions.Compiler {
             _ilg.Emit(OpCodes.Unbox_Any, node.Type);
         }
 
-        private void EmitConvertUnaryExpression(Expression expr, CompilationFlags flags) {
+        private void EmitConvertUnaryExpression(Expression expr, CompilationFlags flags)
+        {
             EmitConvert((UnaryExpression)expr, flags);
         }
 
-        private void EmitConvert(UnaryExpression node, CompilationFlags flags) {
-            if (node.Method != null) {
+        private void EmitConvert(UnaryExpression node, CompilationFlags flags)
+        {
+            if (node.Method != null)
+            {
                 // User-defined conversions are only lifted if both source and
                 // destination types are value types.  The C# compiler gets this wrong.
                 // In C#, if you have an implicit conversion from int->MyClass and you
@@ -298,11 +350,13 @@ namespace System.Linq.Expressions.Compiler {
                 // an expression tree and then compiling it.  We can live with this
                 // discrepancy however.
 
-                if (node.IsLifted && (!node.Type.IsValueType || !node.Operand.Type.IsValueType)) {
+                if (node.IsLifted && (!node.Type.IsValueType || !node.Operand.Type.IsValueType))
+                {
                     ParameterInfo[] pis = node.Method.GetParametersCached();
                     Debug.Assert(pis != null && pis.Length == 1);
                     Type paramType = pis[0].ParameterType;
-                    if (paramType.IsByRef) {
+                    if (paramType.IsByRef)
+                    {
                         paramType = paramType.GetElementType();
                     }
 
@@ -315,32 +369,57 @@ namespace System.Linq.Expressions.Compiler {
                     );
 
                     EmitConvert(e, flags);
-                } else {
+                }
+                else
+                {
                     EmitUnaryMethod(node, flags);
                 }
-            } else if (node.Type == typeof(void)) {
+            }
+            else if (node.Type == typeof(void))
+            {
                 EmitExpressionAsVoid(node.Operand, flags);
-            } else {
-                if (TypeUtils.AreEquivalent(node.Operand.Type, node.Type)) {
+            }
+            else
+            {
+                if (TypeUtils.AreEquivalent(node.Operand.Type, node.Type))
+                {
                     EmitExpression(node.Operand, flags);
-                } else {
+                }
+                else
+                {
                     // A conversion is emitted after emitting the operand, no tail call is emitted
                     EmitExpression(node.Operand);
-                    _ilg.EmitConvertToType(node.Operand.Type, node.Type, node.NodeType == ExpressionType.ConvertChecked);
+                    _ilg.EmitConvertToType(
+                        node.Operand.Type,
+                        node.Type,
+                        node.NodeType == ExpressionType.ConvertChecked
+                    );
                 }
             }
         }
 
-
-        private void EmitUnaryMethod(UnaryExpression node, CompilationFlags flags) {
-            if (node.IsLifted) {
-                ParameterExpression v = Expression.Variable(TypeUtils.GetNonNullableType(node.Operand.Type), null);
+        private void EmitUnaryMethod(UnaryExpression node, CompilationFlags flags)
+        {
+            if (node.IsLifted)
+            {
+                ParameterExpression v = Expression.Variable(
+                    TypeUtils.GetNonNullableType(node.Operand.Type),
+                    null
+                );
                 MethodCallExpression mc = Expression.Call(node.Method, v);
 
                 Type resultType = TypeUtils.GetNullableType(mc.Type);
-                EmitLift(node.NodeType, resultType, mc, new ParameterExpression[] { v }, new Expression[] { node.Operand });
+                EmitLift(
+                    node.NodeType,
+                    resultType,
+                    mc,
+                    new ParameterExpression[] { v },
+                    new Expression[] { node.Operand }
+                );
                 _ilg.EmitConvertToType(resultType, node.Type, false);
-            } else {
+            }
+            else
+            {
                 EmitMethodCallExpression(Expression.Call(node.Method, node.Operand), flags);
             }
         }

@@ -22,15 +22,39 @@ namespace System.ServiceModel.Syndication.Tests
         {
             yield return new object[] { null, UriKind.Absolute, null };
             yield return new object[] { "", UriKind.RelativeOrAbsolute, new XmlQualifiedName() };
-            yield return new object[] { "htp://microsoft.com", UriKind.Absolute, new XmlQualifiedName("name") };
-            yield return new object[] { "/relative", UriKind.Relative, new XmlQualifiedName("name") };
-            yield return new object[] { "/relative", UriKind.RelativeOrAbsolute - 1, new XmlQualifiedName("name") };
-            yield return new object[] { "/relative", UriKind.Relative + 1, new XmlQualifiedName("name") };
+            yield return new object[]
+            {
+                "htp://microsoft.com",
+                UriKind.Absolute,
+                new XmlQualifiedName("name"),
+            };
+            yield return new object[]
+            {
+                "/relative",
+                UriKind.Relative,
+                new XmlQualifiedName("name"),
+            };
+            yield return new object[]
+            {
+                "/relative",
+                UriKind.RelativeOrAbsolute - 1,
+                new XmlQualifiedName("name"),
+            };
+            yield return new object[]
+            {
+                "/relative",
+                UriKind.Relative + 1,
+                new XmlQualifiedName("name"),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_String_UriKind_XmlQualifiedName_TestData))]
-        public void Ctor_String_UriKind_XmlQualifiedName(string uriString, UriKind uriKind, XmlQualifiedName elementQualifiedName)
+        public void Ctor_String_UriKind_XmlQualifiedName(
+            string uriString,
+            UriKind uriKind,
+            XmlQualifiedName elementQualifiedName
+        )
         {
             var data = new XmlUriData(uriString, uriKind, elementQualifiedName);
             Assert.Equal(uriString, data.UriString);

@@ -9,14 +9,14 @@ namespace System.ServiceModel.Dispatcher
     using System.Collections.Specialized;
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Security;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.Threading;
     using System.Transactions;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Runtime.Diagnostics;
-    using System.Security;
 
     class ImmutableDispatchRuntime
     {
@@ -60,10 +60,12 @@ namespace System.ServiceModel.Dispatcher
         readonly MessageRpcProcessor processMessageCleanup;
         readonly MessageRpcProcessor processMessageCleanupError;
 
-        static AsyncCallback onFinalizeCorrelationCompleted =
-            Fx.ThunkCallback(new AsyncCallback(OnFinalizeCorrelationCompletedCallback));
-        static AsyncCallback onReplyCompleted =
-            Fx.ThunkCallback(new AsyncCallback(OnReplyCompletedCallback));
+        static AsyncCallback onFinalizeCorrelationCompleted = Fx.ThunkCallback(
+            new AsyncCallback(OnFinalizeCorrelationCompletedCallback)
+        );
+        static AsyncCallback onReplyCompleted = Fx.ThunkCallback(
+            new AsyncCallback(OnReplyCompletedCallback)
+        );
 
         bool didTraceProcessMessage1 = false;
         bool didTraceProcessMessage2 = false;
@@ -79,14 +81,19 @@ namespace System.ServiceModel.Dispatcher
             this.concurrency = new ConcurrencyBehavior(dispatch);
             this.error = new ErrorBehavior(dispatch.ChannelDispatcher);
             this.enableFaults = dispatch.EnableFaults;
-            this.inputSessionShutdownHandlers = EmptyArray<IInputSessionShutdown>.ToArray(dispatch.InputSessionShutdownHandlers);
+            this.inputSessionShutdownHandlers = EmptyArray<IInputSessionShutdown>.ToArray(
+                dispatch.InputSessionShutdownHandlers
+            );
             this.instance = new InstanceBehavior(dispatch, this);
             this.isOnServer = dispatch.IsOnServer;
             this.manualAddressing = dispatch.ManualAddressing;
-            this.messageInspectors = EmptyArray<IDispatchMessageInspector>.ToArray(dispatch.MessageInspectors);
+            this.messageInspectors = EmptyArray<IDispatchMessageInspector>.ToArray(
+                dispatch.MessageInspectors
+            );
             this.requestReplyCorrelator = new RequestReplyCorrelator();
             this.securityImpersonation = SecurityImpersonationBehavior.CreateIfNecessary(dispatch);
-            this.requireClaimsPrincipalOnOperationContext = dispatch.RequireClaimsPrincipalOnOperationContext;
+            this.requireClaimsPrincipalOnOperationContext =
+                dispatch.RequireClaimsPrincipalOnOperationContext;
             this.impersonateOnSerializingReply = dispatch.ImpersonateOnSerializingReply;
             this.terminate = TerminatingOperationBehavior.CreateIfNecessary(dispatch);
             this.thread = new ThreadBehavior(dispatch);
@@ -95,11 +102,16 @@ namespace System.ServiceModel.Dispatcher
             this.transaction = TransactionBehavior.CreateIfNeeded(dispatch);
             this.receiveContextEnabledChannel = dispatch.ChannelDispatcher.ReceiveContextEnabled;
             this.sendAsynchronously = dispatch.ChannelDispatcher.SendAsynchronously;
-            this.parameterInspectorCorrelationOffset = (dispatch.MessageInspectors.Count +
-                dispatch.MaxCallContextInitializers);
-            this.correlationCount = this.parameterInspectorCorrelationOffset + dispatch.MaxParameterInspectors;
+            this.parameterInspectorCorrelationOffset = (
+                dispatch.MessageInspectors.Count + dispatch.MaxCallContextInitializers
+            );
+            this.correlationCount =
+                this.parameterInspectorCorrelationOffset + dispatch.MaxParameterInspectors;
 
-            DispatchOperationRuntime unhandled = new DispatchOperationRuntime(dispatch.UnhandledDispatchOperation, this);
+            DispatchOperationRuntime unhandled = new DispatchOperationRuntime(
+                dispatch.UnhandledDispatchOperation,
+                this
+            );
 
             if (dispatch.OperationSelector == null)
             {
@@ -107,7 +119,10 @@ namespace System.ServiceModel.Dispatcher
                 for (int i = 0; i < dispatch.Operations.Count; i++)
                 {
                     DispatchOperation operation = dispatch.Operations[i];
-                    DispatchOperationRuntime operationRuntime = new DispatchOperationRuntime(operation, this);
+                    DispatchOperationRuntime operationRuntime = new DispatchOperationRuntime(
+                        operation,
+                        this
+                    );
                     demuxer.Add(operation.Action, operationRuntime);
                 }
 
@@ -120,7 +135,10 @@ namespace System.ServiceModel.Dispatcher
                 for (int i = 0; i < dispatch.Operations.Count; i++)
                 {
                     DispatchOperation operation = dispatch.Operations[i];
-                    DispatchOperationRuntime operationRuntime = new DispatchOperationRuntime(operation, this);
+                    DispatchOperationRuntime operationRuntime = new DispatchOperationRuntime(
+                        operation,
+                        this
+                    );
                     demuxer.Add(operation.Name, operationRuntime);
                 }
 
@@ -141,7 +159,9 @@ namespace System.ServiceModel.Dispatcher
             this.processMessage8 = new MessageRpcProcessor(this.ProcessMessage8);
             this.processMessage9 = new MessageRpcProcessor(this.ProcessMessage9);
             this.processMessageCleanup = new MessageRpcProcessor(this.ProcessMessageCleanup);
-            this.processMessageCleanupError = new MessageRpcProcessor(this.ProcessMessageCleanupError);
+            this.processMessageCleanupError = new MessageRpcProcessor(
+                this.ProcessMessageCleanupError
+            );
         }
 
         internal int CallContextCorrelationOffset
@@ -240,6 +260,7 @@ namespace System.ServiceModel.Dispatcher
                 AfterReceiveRequestCore(ref rpc);
             }
         }
+
         internal void AfterReceiveRequestCore(ref MessageRpc rpc)
         {
             int offset = this.MessageInspectorCorrelationOffset;
@@ -247,10 +268,18 @@ namespace System.ServiceModel.Dispatcher
             {
                 for (int i = 0; i < this.messageInspectors.Length; i++)
                 {
-                    rpc.Correlation[offset + i] = this.messageInspectors[i].AfterReceiveRequest(ref rpc.Request, (IClientChannel)rpc.Channel.Proxy, rpc.InstanceContext);
+                    rpc.Correlation[offset + i] = this.messageInspectors[i]
+                        .AfterReceiveRequest(
+                            ref rpc.Request,
+                            (IClientChannel)rpc.Channel.Proxy,
+                            rpc.InstanceContext
+                        );
                     if (TD.MessageInspectorAfterReceiveInvokedIsEnabled())
                     {
-                        TD.MessageInspectorAfterReceiveInvoked(rpc.EventTraceActivity, this.messageInspectors[i].GetType().FullName);
+                        TD.MessageInspectorAfterReceiveInvoked(
+                            rpc.EventTraceActivity,
+                            this.messageInspectors[i].GetType().FullName
+                        );
                     }
                 }
             }
@@ -268,7 +297,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        void BeforeSendReply(ref MessageRpc rpc, ref Exception exception, ref bool thereIsAnUnhandledException)
+        void BeforeSendReply(
+            ref MessageRpc rpc,
+            ref Exception exception,
+            ref bool thereIsAnUnhandledException
+        )
         {
             if (this.messageInspectors.Length > 0)
             {
@@ -276,7 +309,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal void BeforeSendReplyCore(ref MessageRpc rpc, ref Exception exception, ref bool thereIsAnUnhandledException)
+        internal void BeforeSendReplyCore(
+            ref MessageRpc rpc,
+            ref Exception exception,
+            ref bool thereIsAnUnhandledException
+        )
         {
             int offset = this.MessageInspectorCorrelationOffset;
             for (int i = 0; i < this.messageInspectors.Length; i++)
@@ -286,15 +323,23 @@ namespace System.ServiceModel.Dispatcher
                     Message originalReply = rpc.Reply;
                     Message reply = originalReply;
 
-                    this.messageInspectors[i].BeforeSendReply(ref reply, rpc.Correlation[offset + i]);
+                    this.messageInspectors[i]
+                        .BeforeSendReply(ref reply, rpc.Correlation[offset + i]);
                     if (TD.MessageInspectorBeforeSendInvokedIsEnabled())
                     {
-                        TD.MessageInspectorBeforeSendInvoked(rpc.EventTraceActivity, this.messageInspectors[i].GetType().FullName);
+                        TD.MessageInspectorBeforeSendInvoked(
+                            rpc.EventTraceActivity,
+                            this.messageInspectors[i].GetType().FullName
+                        );
                     }
 
                     if ((reply == null) && (originalReply != null))
                     {
-                        string message = SR.GetString(SR.SFxNullReplyFromExtension2, this.messageInspectors[i].GetType().ToString(), (rpc.Operation.Name ?? ""));
+                        string message = SR.GetString(
+                            SR.SFxNullReplyFromExtension2,
+                            this.messageInspectors[i].GetType().ToString(),
+                            (rpc.Operation.Name ?? "")
+                        );
                         ErrorBehavior.ThrowAndCatch(new InvalidOperationException(message));
                     }
                     rpc.Reply = reply;
@@ -314,7 +359,8 @@ namespace System.ServiceModel.Dispatcher
                     {
                         exception = e;
                     }
-                    thereIsAnUnhandledException = (!this.error.HandleError(e)) || thereIsAnUnhandledException;
+                    thereIsAnUnhandledException =
+                        (!this.error.HandleError(e)) || thereIsAnUnhandledException;
                 }
             }
         }
@@ -325,8 +371,12 @@ namespace System.ServiceModel.Dispatcher
 
             if (reply != null && rpc.Error == null)
             {
-                if (rpc.transaction != null && rpc.transaction.Current != null &&
-                    rpc.transaction.Current.TransactionInformation.Status != TransactionStatus.Active)
+                if (
+                    rpc.transaction != null
+                    && rpc.transaction.Current != null
+                    && rpc.transaction.Current.TransactionInformation.Status
+                        != TransactionStatus.Active
+                )
                 {
                     return;
                 }
@@ -342,8 +392,10 @@ namespace System.ServiceModel.Dispatcher
                             rpc.RequestContextThrewOnReply = true;
                             rpc.CorrelationCallback = callback;
 
-                            rpc.Reply = rpc.CorrelationCallback.FinalizeCorrelation(reply,
-                                rpc.ReplyTimeoutHelper.RemainingTime());
+                            rpc.Reply = rpc.CorrelationCallback.FinalizeCorrelation(
+                                reply,
+                                rpc.ReplyTimeoutHelper.RemainingTime()
+                            );
                         }
                         catch (Exception e)
                         {
@@ -361,8 +413,13 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        rpc.CorrelationCallback = new RpcCorrelationCallbackMessageProperty(callback, this, ref rpc);
-                        reply.Properties[CorrelationCallbackMessageProperty.Name] = rpc.CorrelationCallback;
+                        rpc.CorrelationCallback = new RpcCorrelationCallbackMessageProperty(
+                            callback,
+                            this,
+                            ref rpc
+                        );
+                        reply.Properties[CorrelationCallbackMessageProperty.Name] =
+                            rpc.CorrelationCallback;
                     }
                 }
             }
@@ -374,8 +431,12 @@ namespace System.ServiceModel.Dispatcher
 
             if (reply != null && rpc.Error == null)
             {
-                if (rpc.transaction != null && rpc.transaction.Current != null &&
-                    rpc.transaction.Current.TransactionInformation.Status != TransactionStatus.Active)
+                if (
+                    rpc.transaction != null
+                    && rpc.transaction.Current != null
+                    && rpc.transaction.Current.TransactionInformation.Status
+                        != TransactionStatus.Active
+                )
                 {
                     return;
                 }
@@ -394,8 +455,12 @@ namespace System.ServiceModel.Dispatcher
                             rpc.CorrelationCallback = callback;
 
                             IResumeMessageRpc resume = rpc.Pause();
-                            rpc.AsyncResult = rpc.CorrelationCallback.BeginFinalizeCorrelation(reply,
-                                rpc.ReplyTimeoutHelper.RemainingTime(), onFinalizeCorrelationCompleted, resume);
+                            rpc.AsyncResult = rpc.CorrelationCallback.BeginFinalizeCorrelation(
+                                reply,
+                                rpc.ReplyTimeoutHelper.RemainingTime(),
+                                onFinalizeCorrelationCompleted,
+                                resume
+                            );
                             success = true;
 
                             if (rpc.AsyncResult.CompletedSynchronously)
@@ -426,8 +491,13 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        rpc.CorrelationCallback = new RpcCorrelationCallbackMessageProperty(callback, this, ref rpc);
-                        reply.Properties[CorrelationCallbackMessageProperty.Name] = rpc.CorrelationCallback;
+                        rpc.CorrelationCallback = new RpcCorrelationCallbackMessageProperty(
+                            callback,
+                            this,
+                            ref rpc
+                        );
+                        reply.Properties[CorrelationCallbackMessageProperty.Name] =
+                            rpc.CorrelationCallback;
                     }
                 }
             }
@@ -466,9 +536,13 @@ namespace System.ServiceModel.Dispatcher
 
                 if (DiagnosticUtility.ShouldTraceError)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.ServiceOperationExceptionOnReply,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Error,
+                        TraceCode.ServiceOperationExceptionOnReply,
                         SR.GetString(SR.TraceCodeServiceOperationExceptionOnReply),
-                        this, e);
+                        this,
+                        e
+                    );
                 }
 
                 if (!this.error.HandleError(e))
@@ -487,8 +561,12 @@ namespace System.ServiceModel.Dispatcher
             {
                 IResumeMessageRpc resume = rpc.Pause();
 
-                rpc.AsyncResult = rpc.RequestContext.BeginReply(rpc.Reply, rpc.ReplyTimeoutHelper.RemainingTime(),
-                    onReplyCompleted, resume);
+                rpc.AsyncResult = rpc.RequestContext.BeginReply(
+                    rpc.Reply,
+                    rpc.ReplyTimeoutHelper.RemainingTime(),
+                    onReplyCompleted,
+                    resume
+                );
                 success = true;
 
                 if (rpc.AsyncResult.CompletedSynchronously)
@@ -513,10 +591,13 @@ namespace System.ServiceModel.Dispatcher
 
                 if (DiagnosticUtility.ShouldTraceError)
                 {
-                    TraceUtility.TraceEvent(System.Diagnostics.TraceEventType.Error,
+                    TraceUtility.TraceEvent(
+                        System.Diagnostics.TraceEventType.Error,
                         TraceCode.ServiceOperationExceptionOnReply,
                         SR.GetString(SR.TraceCodeServiceOperationExceptionOnReply),
-                        this, e);
+                        this,
+                        e
+                    );
                 }
 
                 if (!this.error.HandleError(e))
@@ -666,7 +747,7 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        static internal void GotDynamicInstanceContext(object state)
+        internal static void GotDynamicInstanceContext(object state)
         {
             bool alreadyResumedNoLock;
             ((IResumeMessageRpc)state).Resume(out alreadyResumedNoLock);
@@ -677,7 +758,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        void AddMessageProperties(Message message, OperationContext context, ServiceChannel replyChannel)
+        void AddMessageProperties(
+            Message message,
+            OperationContext context,
+            ServiceChannel replyChannel
+        )
         {
             if (context.InternalServiceChannel == replyChannel)
             {
@@ -704,7 +789,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (resume == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxInvalidAsyncResultState0));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.SFxInvalidAsyncResultState0)
+                );
             }
 
             resume.Resume(result);
@@ -721,7 +808,9 @@ namespace System.ServiceModel.Dispatcher
 
             if (resume == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxInvalidAsyncResultState0));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.SFxInvalidAsyncResultState0)
+                );
             }
 
             resume.Resume(result);
@@ -743,17 +832,29 @@ namespace System.ServiceModel.Dispatcher
                     // or you accidentally close the context so we can't return your message.
                     if ((rpc.Reply == null) && (context != null))
                     {
-                        TraceUtility.TraceEvent(System.Diagnostics.TraceEventType.Warning,
+                        TraceUtility.TraceEvent(
+                            System.Diagnostics.TraceEventType.Warning,
                             TraceCode.ServiceOperationMissingReply,
-                            SR.GetString(SR.TraceCodeServiceOperationMissingReply, rpc.Operation.Name ?? String.Empty),
-                            null, null);
+                            SR.GetString(
+                                SR.TraceCodeServiceOperationMissingReply,
+                                rpc.Operation.Name ?? String.Empty
+                            ),
+                            null,
+                            null
+                        );
                     }
                     else if ((context == null) && (rpc.Reply != null))
                     {
-                        TraceUtility.TraceEvent(System.Diagnostics.TraceEventType.Warning,
+                        TraceUtility.TraceEvent(
+                            System.Diagnostics.TraceEventType.Warning,
                             TraceCode.ServiceOperationMissingReplyContext,
-                            SR.GetString(SR.TraceCodeServiceOperationMissingReplyContext, rpc.Operation.Name ?? String.Empty),
-                            null, null);
+                            SR.GetString(
+                                SR.TraceCodeServiceOperationMissingReplyContext,
+                                rpc.Operation.Name ?? String.Empty
+                            ),
+                            null,
+                            null
+                        );
                     }
                 }
 
@@ -769,7 +870,8 @@ namespace System.ServiceModel.Dispatcher
                         {
                             throw;
                         }
-                        thereIsAnUnhandledException = (!this.error.HandleError(e)) || thereIsAnUnhandledException;
+                        thereIsAnUnhandledException =
+                            (!this.error.HandleError(e)) || thereIsAnUnhandledException;
                         exception = e;
                     }
                 }
@@ -821,12 +923,18 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (!object.ReferenceEquals(rpc.RequestID, null))
                 {
-                    System.ServiceModel.Channels.RequestReplyCorrelator.PrepareReply(rpc.Reply, rpc.RequestID);
+                    System.ServiceModel.Channels.RequestReplyCorrelator.PrepareReply(
+                        rpc.Reply,
+                        rpc.RequestID
+                    );
                 }
 
                 if (!rpc.Channel.HasSession)
                 {
-                    canSendReply = System.ServiceModel.Channels.RequestReplyCorrelator.AddressReply(rpc.Reply, rpc.ReplyToInfo);
+                    canSendReply = System.ServiceModel.Channels.RequestReplyCorrelator.AddressReply(
+                        rpc.Reply,
+                        rpc.ReplyToInfo
+                    );
                 }
             }
 
@@ -857,16 +965,23 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.ProcessMessage11(ref rpc);
             }
-            else if (this.isOnServer && DiagnosticUtility.ShouldTraceInformation && !this.didTraceProcessMessage1)
+            else if (
+                this.isOnServer
+                && DiagnosticUtility.ShouldTraceInformation
+                && !this.didTraceProcessMessage1
+            )
             {
                 this.didTraceProcessMessage1 = true;
 
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,
                     TraceCode.MessageProcessingPaused,
-                    SR.GetString(SR.TraceCodeProcessMessage31Paused,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress));
+                    SR.GetString(
+                        SR.TraceCodeProcessMessage31Paused,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress
+                    )
+                );
             }
         }
 
@@ -881,11 +996,15 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                if (!rpc.Channel.IsReplyChannel &&
-                    ((object)rpc.RequestID == null) &&
-                    (rpc.Operation.Action != MessageHeaders.WildcardAction))
+                if (
+                    !rpc.Channel.IsReplyChannel
+                    && ((object)rpc.RequestID == null)
+                    && (rpc.Operation.Action != MessageHeaders.WildcardAction)
+                )
                 {
-                    CommunicationException error = new CommunicationException(SR.GetString(SR.SFxOneWayMessageToTwoWayMethod0));
+                    CommunicationException error = new CommunicationException(
+                        SR.GetString(SR.SFxOneWayMessageToTwoWayMethod0)
+                    );
                     throw TraceUtility.ThrowHelperError(error, rpc.Request);
                 }
 
@@ -894,7 +1013,9 @@ namespace System.ServiceModel.Dispatcher
                     EndpointAddress replyTo = rpc.ReplyToInfo.ReplyTo;
                     if (replyTo != null && replyTo.IsNone && rpc.Channel.IsReplyChannel)
                     {
-                        CommunicationException error = new CommunicationException(SR.GetString(SR.SFxRequestReplyNone));
+                        CommunicationException error = new CommunicationException(
+                            SR.GetString(SR.SFxRequestReplyNone)
+                        );
                         throw TraceUtility.ThrowHelperError(error, rpc.Request);
                     }
 
@@ -906,27 +1027,50 @@ namespace System.ServiceModel.Dispatcher
                             MessageHeaders headers = rpc.Request.Headers;
                             Uri remoteUri = remoteAddress.Uri;
 
-                            if ((replyTo != null) && !replyTo.IsAnonymous && (remoteUri != replyTo.Uri))
+                            if (
+                                (replyTo != null)
+                                && !replyTo.IsAnonymous
+                                && (remoteUri != replyTo.Uri)
+                            )
                             {
-                                string text = SR.GetString(SR.SFxRequestHasInvalidReplyToOnServer, replyTo.Uri, remoteUri);
+                                string text = SR.GetString(
+                                    SR.SFxRequestHasInvalidReplyToOnServer,
+                                    replyTo.Uri,
+                                    remoteUri
+                                );
                                 Exception error = new InvalidOperationException(text);
                                 throw TraceUtility.ThrowHelperError(error, rpc.Request);
                             }
 
                             EndpointAddress faultTo = headers.FaultTo;
-                            if ((faultTo != null) && !faultTo.IsAnonymous && (remoteUri != faultTo.Uri))
+                            if (
+                                (faultTo != null)
+                                && !faultTo.IsAnonymous
+                                && (remoteUri != faultTo.Uri)
+                            )
                             {
-                                string text = SR.GetString(SR.SFxRequestHasInvalidFaultToOnServer, faultTo.Uri, remoteUri);
+                                string text = SR.GetString(
+                                    SR.SFxRequestHasInvalidFaultToOnServer,
+                                    faultTo.Uri,
+                                    remoteUri
+                                );
                                 Exception error = new InvalidOperationException(text);
                                 throw TraceUtility.ThrowHelperError(error, rpc.Request);
                             }
 
-                            if (rpc.RequestVersion.Addressing == AddressingVersion.WSAddressingAugust2004)
+                            if (
+                                rpc.RequestVersion.Addressing
+                                == AddressingVersion.WSAddressingAugust2004
+                            )
                             {
                                 EndpointAddress from = headers.From;
                                 if ((from != null) && !from.IsAnonymous && (remoteUri != from.Uri))
                                 {
-                                    string text = SR.GetString(SR.SFxRequestHasInvalidFromOnServer, from.Uri, remoteUri);
+                                    string text = SR.GetString(
+                                        SR.SFxRequestHasInvalidFromOnServer,
+                                        from.Uri,
+                                        remoteUri
+                                    );
                                     Exception error = new InvalidOperationException(text);
                                     throw TraceUtility.ThrowHelperError(error, rpc.Request);
                                 }
@@ -981,16 +1125,23 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.ProcessMessage3(ref rpc);
             }
-            else if (this.isOnServer && DiagnosticUtility.ShouldTraceInformation && !this.didTraceProcessMessage2)
+            else if (
+                this.isOnServer
+                && DiagnosticUtility.ShouldTraceInformation
+                && !this.didTraceProcessMessage2
+            )
             {
                 this.didTraceProcessMessage2 = true;
 
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,
                     TraceCode.MessageProcessingPaused,
-                    SR.GetString(SR.TraceCodeProcessMessage2Paused,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress));
+                    SR.GetString(
+                        SR.TraceCodeProcessMessage2Paused,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress
+                    )
+                );
             }
         }
 
@@ -1015,16 +1166,23 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.ProcessMessage31(ref rpc);
             }
-            else if (this.isOnServer && DiagnosticUtility.ShouldTraceInformation && !this.didTraceProcessMessage3)
+            else if (
+                this.isOnServer
+                && DiagnosticUtility.ShouldTraceInformation
+                && !this.didTraceProcessMessage3
+            )
             {
                 this.didTraceProcessMessage3 = true;
 
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,
                     TraceCode.MessageProcessingPaused,
-                    SR.GetString(SR.TraceCodeProcessMessage3Paused,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress));
+                    SR.GetString(
+                        SR.TraceCodeProcessMessage3Paused,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress
+                    )
+                );
             }
         }
 
@@ -1041,7 +1199,12 @@ namespace System.ServiceModel.Dispatcher
                     if (receiveContext != null)
                     {
                         rpc.ReceiveContext = null;
-                        receiveContext.Complete(this, ref rpc, TimeSpan.MaxValue, rpc.Transaction.Current);
+                        receiveContext.Complete(
+                            this,
+                            ref rpc,
+                            TimeSpan.MaxValue,
+                            rpc.Transaction.Current
+                        );
                     }
                 }
             }
@@ -1049,16 +1212,23 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.ProcessMessage4(ref rpc);
             }
-            else if (this.isOnServer && DiagnosticUtility.ShouldTraceInformation && !this.didTraceProcessMessage31)
+            else if (
+                this.isOnServer
+                && DiagnosticUtility.ShouldTraceInformation
+                && !this.didTraceProcessMessage31
+            )
             {
                 this.didTraceProcessMessage31 = true;
 
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,
                     TraceCode.MessageProcessingPaused,
-                    SR.GetString(SR.TraceCodeProcessMessage31Paused,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress));
+                    SR.GetString(
+                        SR.TraceCodeProcessMessage31Paused,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress
+                    )
+                );
             }
         }
 
@@ -1083,18 +1253,24 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.ProcessMessage41(ref rpc);
             }
-            else if (this.isOnServer && DiagnosticUtility.ShouldTraceInformation && !this.didTraceProcessMessage4)
+            else if (
+                this.isOnServer
+                && DiagnosticUtility.ShouldTraceInformation
+                && !this.didTraceProcessMessage4
+            )
             {
                 this.didTraceProcessMessage4 = true;
 
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,
                     TraceCode.MessageProcessingPaused,
-                    SR.GetString(SR.TraceCodeProcessMessage4Paused,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress));
+                    SR.GetString(
+                        SR.TraceCodeProcessMessage4Paused,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress
+                    )
+                );
             }
-
         }
 
         void ProcessMessage41(ref MessageRpc rpc)
@@ -1109,7 +1285,10 @@ namespace System.ServiceModel.Dispatcher
             // that running on UI thread should guarantee in-order delivery if
             // the SynchronizationContext is single threaded.
             // Note: for IManualConcurrencyOperationInvoker, the invoke assumes full control over pumping.
-            if (this.concurrency.IsConcurrent(ref rpc) && !(rpc.Operation.Invoker is IManualConcurrencyOperationInvoker))
+            if (
+                this.concurrency.IsConcurrent(ref rpc)
+                && !(rpc.Operation.Invoker is IManualConcurrencyOperationInvoker)
+            )
             {
                 rpc.EnsureReceive();
             }
@@ -1120,16 +1299,23 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.ProcessMessage5(ref rpc);
             }
-            else if (this.isOnServer && DiagnosticUtility.ShouldTraceInformation && !this.didTraceProcessMessage41)
+            else if (
+                this.isOnServer
+                && DiagnosticUtility.ShouldTraceInformation
+                && !this.didTraceProcessMessage41
+            )
             {
                 this.didTraceProcessMessage41 = true;
 
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,
                     TraceCode.MessageProcessingPaused,
-                    SR.GetString(SR.TraceCodeProcessMessage4Paused,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
-                    rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress));
+                    SR.GetString(
+                        SR.TraceCodeProcessMessage4Paused,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.ContractName,
+                        rpc.Channel.DispatchRuntime.EndpointDispatcher.EndpointAddress
+                    )
+                );
             }
         }
 
@@ -1173,7 +1359,7 @@ namespace System.ServiceModel.Dispatcher
                         {
                             if (!rpc.Operation.IsSynchronous && rpc.IsPaused)
                             {
-                                // Check if the callback produced the async result and set it back on the RPC on this stack 
+                                // Check if the callback produced the async result and set it back on the RPC on this stack
                                 // and proceed only if the gate was signaled by the callback and completed synchronously
                                 if (rpc.UnlockInvokeContinueGate(out rpc.AsyncResult))
                                 {
@@ -1213,9 +1399,8 @@ namespace System.ServiceModel.Dispatcher
 
         void ProcessMessage6(ref MessageRpc rpc)
         {
-            rpc.NextProcessor = (rpc.Operation.IsSynchronous) ?
-                this.processMessage8 :
-                this.processMessage7;
+            rpc.NextProcessor =
+                (rpc.Operation.IsSynchronous) ? this.processMessage8 : this.processMessage7;
 
             try
             {
@@ -1411,7 +1596,8 @@ namespace System.ServiceModel.Dispatcher
         {
             Fx.Assert(
                 !object.ReferenceEquals(rpc.ErrorProcessor, this.processMessageCleanupError),
-                "ProcessMessageCleanup run twice on the same MessageRpc!");
+                "ProcessMessageCleanup run twice on the same MessageRpc!"
+            );
             rpc.ErrorProcessor = this.processMessageCleanupError;
 
             bool replyWasSent = false;
@@ -1463,7 +1649,8 @@ namespace System.ServiceModel.Dispatcher
                 }
 
                 // for wf, wf owns the lifetime of the request message. So in that case, we should not dispose the inputs
-                IManualConcurrencyOperationInvoker manualInvoker = rpc.Operation.Invoker as IManualConcurrencyOperationInvoker;
+                IManualConcurrencyOperationInvoker manualInvoker =
+                    rpc.Operation.Invoker as IManualConcurrencyOperationInvoker;
                 rpc.DisposeParameters(manualInvoker != null && manualInvoker.OwnsFormatter); //Dispose all input/output/return parameters
 
                 if (rpc.FaultInfo.IsConsideredUnhandled)
@@ -1492,7 +1679,6 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
 
-
                 if ((rpc.Reply != null) && (rpc.Reply != rpc.ReturnParameter))
                 {
                     try
@@ -1509,7 +1695,10 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
 
-                if ((rpc.FaultInfo.Fault != null) && (rpc.FaultInfo.Fault.State != MessageState.Closed))
+                if (
+                    (rpc.FaultInfo.Fault != null)
+                    && (rpc.FaultInfo.Fault.State != MessageState.Closed)
+                )
                 {
                     // maybe ProvideFault gave a Message, but then BeforeSendReply replaced it
                     // in that case, we need to close the one from ProvideFault
@@ -1596,7 +1785,10 @@ namespace System.ServiceModel.Dispatcher
             }
             finally
             {
-                if (rpc.MessageRpcOwnsInstanceContextThrottle && rpc.channelHandler.InstanceContextServiceThrottle != null)
+                if (
+                    rpc.MessageRpcOwnsInstanceContextThrottle
+                    && rpc.channelHandler.InstanceContextServiceThrottle != null
+                )
                 {
                     rpc.channelHandler.InstanceContextServiceThrottle.DeactivateInstanceContext();
                 }
@@ -1650,12 +1842,13 @@ namespace System.ServiceModel.Dispatcher
                     }
                     this.error.HandleError(e);
                 }
-
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls security critical method to set the ActivityId on the thread",
-            Safe = "Set the ActivityId only when MessageRpc is available")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls security critical method to set the ActivityId on the thread",
+            Safe = "Set the ActivityId only when MessageRpc is available"
+        )]
         [SecuritySafeCritical]
         void SetActivityIdOnThread(ref MessageRpc rpc)
         {
@@ -1675,8 +1868,10 @@ namespace System.ServiceModel.Dispatcher
                 ChannelDispatcher channelDispatcher = rpc.Channel.ChannelDispatcher;
                 IInstanceContextProvider provider = this.instance.InstanceContextProvider;
 
-                if (!InstanceContextProviderBase.IsProviderSessionful(provider) &&
-                    !InstanceContextProviderBase.IsProviderSingleton(provider))
+                if (
+                    !InstanceContextProviderBase.IsProviderSessionful(provider)
+                    && !InstanceContextProviderBase.IsProviderSingleton(provider)
+                )
                 {
                     IChannel proxy = rpc.Channel.Proxy as IChannel;
                     if (!rpc.InstanceContext.IncomingChannels.Contains(proxy))
@@ -1708,8 +1903,18 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (map.Contains(action))
                 {
-                    DispatchOperationRuntime existingOperation = (DispatchOperationRuntime)map[action];
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxActionDemuxerDuplicate, existingOperation.Name, operation.Name, action)));
+                    DispatchOperationRuntime existingOperation = (DispatchOperationRuntime)
+                        map[action];
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxActionDemuxerDuplicate,
+                                existingOperation.Name,
+                                operation.Name,
+                                action
+                            )
+                        )
+                    );
                 }
                 this.map.Add(action, operation);
             }
@@ -1782,8 +1987,11 @@ namespace System.ServiceModel.Dispatcher
 
             // This constructor should be used when creating the RPCCorrelationMessageproperty the first time
             // Here we copy the data & the needed data from the original callback
-            public RpcCorrelationCallbackMessageProperty(CorrelationCallbackMessageProperty innerCallback,
-                ImmutableDispatchRuntime runtime, ref MessageRpc rpc)
+            public RpcCorrelationCallbackMessageProperty(
+                CorrelationCallbackMessageProperty innerCallback,
+                ImmutableDispatchRuntime runtime,
+                ref MessageRpc rpc
+            )
                 : base(innerCallback)
             {
                 this.innerCallback = innerCallback;
@@ -1792,7 +2000,9 @@ namespace System.ServiceModel.Dispatcher
             }
 
             // This constructor should be used when we are making a copy from the already initialized RPCCorrelationCallbackMessageProperty
-            public RpcCorrelationCallbackMessageProperty(RpcCorrelationCallbackMessageProperty rpcCallbackMessageProperty)
+            public RpcCorrelationCallbackMessageProperty(
+                RpcCorrelationCallbackMessageProperty rpcCallbackMessageProperty
+            )
                 : base(rpcCallbackMessageProperty)
             {
                 this.innerCallback = rpcCallbackMessageProperty.innerCallback;
@@ -1805,8 +2015,12 @@ namespace System.ServiceModel.Dispatcher
                 return new RpcCorrelationCallbackMessageProperty(this);
             }
 
-            protected override IAsyncResult OnBeginFinalizeCorrelation(Message message, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginFinalizeCorrelation(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 bool success = false;
 
@@ -1814,7 +2028,12 @@ namespace System.ServiceModel.Dispatcher
 
                 try
                 {
-                    IAsyncResult result = this.innerCallback.BeginFinalizeCorrelation(message, timeout, callback, state);
+                    IAsyncResult result = this.innerCallback.BeginFinalizeCorrelation(
+                        message,
+                        timeout,
+                        callback,
+                        state
+                    );
                     success = true;
                     return result;
                 }

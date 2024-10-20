@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -12,8 +12,8 @@
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 using System.Collections.Generic;
-using System.Threading;
 using System.Diagnostics.Contracts;
+using System.Threading;
 
 namespace System.Linq.Parallel
 {
@@ -24,8 +24,8 @@ namespace System.Linq.Parallel
     /// <typeparam name="TInputOutput">The kind of elements.</typeparam>
     /// <typeparam name="THashKey">The key used to distribute elements.</typeparam>
     /// <typeparam name="TIgnoreKey">The kind of keys found in the source (ignored).</typeparam>
-    internal class HashRepartitionEnumerator<TInputOutput, THashKey, TIgnoreKey> : QueryOperatorEnumerator<Pair<TInputOutput, THashKey>, int>
-
+    internal class HashRepartitionEnumerator<TInputOutput, THashKey, TIgnoreKey>
+        : QueryOperatorEnumerator<Pair<TInputOutput, THashKey>, int>
     {
         private const int ENUMERATION_NOT_STARTED = -1; // Sentinel to note we haven't begun enumerating yet.
 
@@ -65,17 +65,31 @@ namespace System.Linq.Parallel
         //
 
         internal HashRepartitionEnumerator(
-            QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source, int partitionCount, int partitionIndex,
-            Func<TInputOutput, THashKey> keySelector, HashRepartitionStream<TInputOutput, THashKey, int> repartitionStream,
-            CountdownEvent barrier, ListChunk<Pair<TInputOutput, THashKey>>[,] valueExchangeMatrix, CancellationToken cancellationToken)
+            QueryOperatorEnumerator<TInputOutput, TIgnoreKey> source,
+            int partitionCount,
+            int partitionIndex,
+            Func<TInputOutput, THashKey> keySelector,
+            HashRepartitionStream<TInputOutput, THashKey, int> repartitionStream,
+            CountdownEvent barrier,
+            ListChunk<Pair<TInputOutput, THashKey>>[,] valueExchangeMatrix,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(source != null);
-            Contract.Assert(keySelector != null || typeof(THashKey) == typeof(NoKeyMemoizationRequired));
+            Contract.Assert(
+                keySelector != null || typeof(THashKey) == typeof(NoKeyMemoizationRequired)
+            );
             Contract.Assert(repartitionStream != null);
             Contract.Assert(barrier != null);
             Contract.Assert(valueExchangeMatrix != null);
-            Contract.Assert(valueExchangeMatrix.GetLength(0) == partitionCount, "expected square matrix of buffers (NxN)");
-            Contract.Assert(valueExchangeMatrix.GetLength(1) == partitionCount, "expected square matrix of buffers (NxN)");
+            Contract.Assert(
+                valueExchangeMatrix.GetLength(0) == partitionCount,
+                "expected square matrix of buffers (NxN)"
+            );
+            Contract.Assert(
+                valueExchangeMatrix.GetLength(1) == partitionCount,
+                "expected square matrix of buffers (NxN)"
+            );
             Contract.Assert(0 <= partitionIndex && partitionIndex < partitionCount);
 
             m_source = source;
@@ -104,7 +118,10 @@ namespace System.Linq.Parallel
         // anyway, so having the repartitioning operator do so isn't complicating matters much at all.
         //
 
-        internal override bool MoveNext(ref Pair<TInputOutput, THashKey> currentElement, ref int currentKey)
+        internal override bool MoveNext(
+            ref Pair<TInputOutput, THashKey> currentElement,
+            ref int currentKey
+        )
         {
             if (m_partitionCount == 1)
             {
@@ -117,7 +134,9 @@ namespace System.Linq.Parallel
                 if (m_source.MoveNext(ref current, ref keyUnused))
                 {
                     currentElement = new Pair<TInputOutput, THashKey>(
-                        current, m_keySelector == null ? default(THashKey) : m_keySelector(current));
+                        current,
+                        m_keySelector == null ? default(THashKey) : m_keySelector(current)
+                    );
                     return true;
                 }
                 return false;
@@ -155,7 +174,9 @@ namespace System.Linq.Parallel
                         // If the chunk is empty, advance to the next one (if any).
                         mutables.m_currentIndex = ENUMERATION_NOT_STARTED;
                         mutables.m_currentBuffer = mutables.m_currentBuffer.Next;
-                        Contract.Assert(mutables.m_currentBuffer == null || mutables.m_currentBuffer.Count > 0);
+                        Contract.Assert(
+                            mutables.m_currentBuffer == null || mutables.m_currentBuffer.Count > 0
+                        );
                         continue; // Go back around and invoke this same logic.
                     }
                 }
@@ -183,7 +204,10 @@ namespace System.Linq.Parallel
                 // Assuming we're within bounds, retrieve the next buffer object.
                 if (mutables.m_currentBufferIndex < m_partitionCount)
                 {
-                    mutables.m_currentBuffer = m_valueExchangeMatrix[mutables.m_currentBufferIndex, m_partitionIndex];
+                    mutables.m_currentBuffer = m_valueExchangeMatrix[
+                        mutables.m_currentBufferIndex,
+                        m_partitionIndex
+                    ];
                 }
             }
 
@@ -201,7 +225,9 @@ namespace System.Linq.Parallel
             Mutables mutables = m_mutables;
             Contract.Assert(mutables != null);
 
-            ListChunk<Pair<TInputOutput, THashKey>>[] privateBuffers = new ListChunk<Pair<TInputOutput, THashKey>>[m_partitionCount];
+            ListChunk<Pair<TInputOutput, THashKey>>[] privateBuffers = new ListChunk<
+                Pair<TInputOutput, THashKey>
+            >[m_partitionCount];
 
             TInputOutput element = default(TInputOutput);
             TIgnoreKey ignoreKey = default(TIgnoreKey);
@@ -210,7 +236,7 @@ namespace System.Linq.Parallel
             {
                 if ((loopCount++ & CancellationState.POLL_INTERVAL) == 0)
                     CancellationState.ThrowIfCanceled(m_cancellationToken);
-                
+
                 // Calculate the element's destination partition index, placing it into the
                 // appropriate buffer from which partitions will later enumerate.
                 int destinationIndex;
@@ -218,7 +244,8 @@ namespace System.Linq.Parallel
                 if (m_keySelector != null)
                 {
                     elementHashKey = m_keySelector(element);
-                    destinationIndex = m_repartitionStream.GetHashCode(elementHashKey) % m_partitionCount;
+                    destinationIndex =
+                        m_repartitionStream.GetHashCode(elementHashKey) % m_partitionCount;
                 }
                 else
                 {
@@ -226,8 +253,10 @@ namespace System.Linq.Parallel
                     destinationIndex = m_repartitionStream.GetHashCode(element) % m_partitionCount;
                 }
 
-                Contract.Assert(0 <= destinationIndex && destinationIndex < m_partitionCount,
-                                "destination partition outside of the legal range of partitions");
+                Contract.Assert(
+                    0 <= destinationIndex && destinationIndex < m_partitionCount,
+                    "destination partition outside of the legal range of partitions"
+                );
 
                 // Get the buffer for the destnation partition, lazily allocating if needed.  We maintain
                 // this list in our own private cache so that we avoid accessing shared memory locations
@@ -238,7 +267,9 @@ namespace System.Linq.Parallel
                 if (buffer == null)
                 {
                     const int INITIAL_PRIVATE_BUFFER_SIZE = 128;
-                    privateBuffers[destinationIndex] = buffer = new ListChunk<Pair<TInputOutput, THashKey>>(INITIAL_PRIVATE_BUFFER_SIZE);
+                    privateBuffers[destinationIndex] = buffer = new ListChunk<
+                        Pair<TInputOutput, THashKey>
+                    >(INITIAL_PRIVATE_BUFFER_SIZE);
                 }
 
                 buffer.Add(new Pair<TInputOutput, THashKey>(element, elementHashKey));
@@ -267,7 +298,10 @@ namespace System.Linq.Parallel
             {
                 // Since this enumerator is being disposed, we will decrement the barrier,
                 // in case other enumerators will wait on the barrier.
-                if (m_mutables == null || (m_mutables.m_currentBufferIndex == ENUMERATION_NOT_STARTED))
+                if (
+                    m_mutables == null
+                    || (m_mutables.m_currentBufferIndex == ENUMERATION_NOT_STARTED)
+                )
                 {
                     m_barrier.Signal();
                     m_barrier = null;

@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExpressionBodyDiagnosticAnalyzer,
-        UseExpressionBodyCodeFixProvider>;
+        UseExpressionBodyCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
     public class UseExpressionBodyForOperatorsAnalyzerTests
@@ -25,7 +26,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, ExpressionBodyPreference.WhenPossible } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                        ExpressionBodyPreference.WhenPossible
+                    },
+                },
             }.RunAsync();
         }
 
@@ -35,7 +42,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedOperators, ExpressionBodyPreference.Never } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
+                        ExpressionBodyPreference.Never
+                    },
+                },
             }.RunAsync();
         }
 

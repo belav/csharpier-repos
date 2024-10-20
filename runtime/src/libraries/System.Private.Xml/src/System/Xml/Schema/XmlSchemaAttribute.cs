@@ -91,7 +91,9 @@ namespace System.Xml.Schema
         }
 
         [XmlIgnore]
-        [Obsolete("XmlSchemaAttribute.AttributeType has been deprecated. Use the AttributeSchemaType property that returns a strongly typed attribute type instead.")]
+        [Obsolete(
+            "XmlSchemaAttribute.AttributeType has been deprecated. Use the AttributeSchemaType property that returns a strongly typed attribute type instead."
+        )]
         public object? AttributeType
         {
             get
@@ -114,7 +116,12 @@ namespace System.Xml.Schema
         }
 
         [return: NotNullIfNotNull(nameof(schemaSet))]
-        internal XmlReader? Validate(XmlReader reader, XmlResolver? resolver, XmlSchemaSet schemaSet, ValidationEventHandler valEventHandler)
+        internal XmlReader? Validate(
+            XmlReader reader,
+            XmlResolver? resolver,
+            XmlSchemaSet schemaSet,
+            ValidationEventHandler valEventHandler
+        )
         {
             if (schemaSet != null)
             {

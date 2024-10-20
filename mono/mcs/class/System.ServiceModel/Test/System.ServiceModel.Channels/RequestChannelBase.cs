@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,44 +37,51 @@ using System.ServiceModel.Security;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	public abstract class RequestChannelBase : ChannelBase, IRequestChannel
-	{
-		ChannelFactoryBase channel_factory;
+    public abstract class RequestChannelBase : ChannelBase, IRequestChannel
+    {
+        ChannelFactoryBase channel_factory;
 
-		public RequestChannelBase (ChannelFactoryBase factory)
-			: base (factory)
-		{
-			this.channel_factory = factory;
-		}
+        public RequestChannelBase(ChannelFactoryBase factory)
+            : base(factory)
+        {
+            this.channel_factory = factory;
+        }
 
-		protected override TimeSpan DefaultCloseTimeout {
-			get { return TimeSpan.FromSeconds (5); }
-		}
+        protected override TimeSpan DefaultCloseTimeout
+        {
+            get { return TimeSpan.FromSeconds(5); }
+        }
 
-		protected override TimeSpan DefaultOpenTimeout {
-			get { return TimeSpan.FromSeconds (5); }
-		}
+        protected override TimeSpan DefaultOpenTimeout
+        {
+            get { return TimeSpan.FromSeconds(5); }
+        }
 
-		public abstract EndpointAddress RemoteAddress { get; }
+        public abstract EndpointAddress RemoteAddress { get; }
 
-		public abstract Uri Via { get; }
+        public abstract Uri Via { get; }
 
-		// Request
+        // Request
 
-		public Message Request (Message message)
-		{
-			return Request (message, DefaultSendTimeout);
-		}
+        public Message Request(Message message)
+        {
+            return Request(message, DefaultSendTimeout);
+        }
 
-		public abstract Message Request (Message message, TimeSpan timeout);
+        public abstract Message Request(Message message, TimeSpan timeout);
 
-		public IAsyncResult BeginRequest (Message message, AsyncCallback callback, object state)
-		{
-			return BeginRequest (message, DefaultSendTimeout, callback, state);
-		}
+        public IAsyncResult BeginRequest(Message message, AsyncCallback callback, object state)
+        {
+            return BeginRequest(message, DefaultSendTimeout, callback, state);
+        }
 
-		public abstract IAsyncResult BeginRequest (Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
-		public abstract Message EndRequest (IAsyncResult result);
-	}
+        public abstract Message EndRequest(IAsyncResult result);
+    }
 }

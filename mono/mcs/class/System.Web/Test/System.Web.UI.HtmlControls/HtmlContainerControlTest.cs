@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,116 +32,119 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.HtmlControls {
+namespace MonoTests.System.Web.UI.HtmlControls
+{
+    public class TestHtmlContainerControl : HtmlContainerControl
+    {
+        public string Render()
+        {
+            HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+            base.Render(writer);
+            return writer.InnerWriter.ToString();
+        }
+    }
 
-	public class TestHtmlContainerControl : HtmlContainerControl {
+    [TestFixture]
+    public class HtmlContainerControlTest
+    {
+        [Test]
+        public void DefaultProperties()
+        {
+            TestHtmlContainerControl cc = new TestHtmlContainerControl();
+            Assert.AreEqual(0, cc.Attributes.Count, "Attributes.Count");
 
-		public string Render ()
-		{
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
-	}
+            Assert.AreEqual(String.Empty, cc.InnerHtml, "InnerHtml");
+            Assert.AreEqual(String.Empty, cc.InnerText, "InnerText");
 
-	[TestFixture]
-	public class HtmlContainerControlTest {
+            Assert.AreEqual("span", cc.TagName, "TagName");
+            Assert.AreEqual(0, cc.Attributes.Count, "Attributes.Count-2");
+        }
 
-		[Test]
-		public void DefaultProperties ()
-		{
-			TestHtmlContainerControl cc = new TestHtmlContainerControl ();
-			Assert.AreEqual (0, cc.Attributes.Count, "Attributes.Count");
+        [Test]
+        public void InnerText()
+        {
+            HtmlButton c = new HtmlButton();
+            DataBoundLiteralControl db = new DataBoundLiteralControl(1, 0);
+            db.SetStaticString(0, "FFF");
+            c.Controls.Add(db);
+            Assert.AreEqual("FFF", c.InnerText);
+        }
 
-			Assert.AreEqual (String.Empty, cc.InnerHtml, "InnerHtml");
-			Assert.AreEqual (String.Empty, cc.InnerText, "InnerText");
+        [Test]
+        [ExpectedException(typeof(HttpException))]
+        public void InnerText2()
+        {
+            HtmlButton c = new HtmlButton();
+            DesignerDataBoundLiteralControl x = new DesignerDataBoundLiteralControl();
+            x.Text = "FFF";
+            c.Controls.Add(x);
+            string s = c.InnerText;
+        }
 
-			Assert.AreEqual ("span", cc.TagName, "TagName");
-			Assert.AreEqual (0, cc.Attributes.Count, "Attributes.Count-2");
-		}
+        [Test]
+        public void InnerText3()
+        {
+            HtmlButton c = new HtmlButton();
+            LiteralControl x = new LiteralControl();
+            x.Text = "FFF";
+            c.Controls.Add(x);
+            Assert.AreEqual("FFF", c.InnerText);
+        }
 
-		[Test]
-		public void InnerText () {
-			HtmlButton c = new HtmlButton ();
-			DataBoundLiteralControl db = new DataBoundLiteralControl (1, 0);
-			db.SetStaticString (0, "FFF");
-			c.Controls.Add (db);
-			Assert.AreEqual ("FFF", c.InnerText);
-		}
+        [Test]
+        [ExpectedException(typeof(HttpException))]
+        public void InnerText4()
+        {
+            HtmlButton c = new HtmlButton();
+            LiteralControl x = new LiteralControl();
+            x.Text = "FFF";
+            c.Controls.Add(x);
+            LiteralControl x2 = new LiteralControl();
+            x2.Text = "BBB";
+            c.Controls.Add(x2);
 
-		[Test]
-		[ExpectedException (typeof (HttpException))]
-		public void InnerText2 () {
-			HtmlButton c = new HtmlButton ();
-			DesignerDataBoundLiteralControl x = new DesignerDataBoundLiteralControl ();
-			x.Text = "FFF";
-			c.Controls.Add (x);
-			string s = c.InnerText;
-		}
+            string s = c.InnerText;
+        }
 
-		[Test]
-		public void InnerText3 () {
-			HtmlButton c = new HtmlButton ();
-			LiteralControl x = new LiteralControl ();
-			x.Text = "FFF";
-			c.Controls.Add (x);
-			Assert.AreEqual("FFF", c.InnerText);
-		}
+        [Test]
+        public void NullProperties()
+        {
+            TestHtmlContainerControl cc = new TestHtmlContainerControl();
+            cc.InnerHtml = null;
+            Assert.AreEqual(String.Empty, cc.InnerHtml, "InnerHtml");
+            cc.InnerText = null;
+            Assert.AreEqual(String.Empty, cc.InnerText, "InnerText");
 
-		[Test]
-		[ExpectedException (typeof (HttpException))]
-		public void InnerText4 () {
-			HtmlButton c = new HtmlButton ();
-			LiteralControl x = new LiteralControl ();
-			x.Text = "FFF";
-			c.Controls.Add (x);
-			LiteralControl x2 = new LiteralControl ();
-			x2.Text = "BBB";
-			c.Controls.Add (x2);
+            Assert.AreEqual(0, cc.Attributes.Count, "Attributes.Count");
+        }
 
-			string s = c.InnerText;
-		}
+        [Test]
+        public void CleanProperties()
+        {
+            TestHtmlContainerControl cc = new TestHtmlContainerControl();
+            cc.InnerHtml = "mono";
+            Assert.AreEqual("mono", cc.InnerHtml, "InnerHtml");
+            Assert.AreEqual("mono", cc.InnerText, "InnerText");
+            cc.InnerText = "go mono";
+            Assert.AreEqual("go mono", cc.InnerHtml, "InnerHtml");
+            Assert.AreEqual("go mono", cc.InnerText, "InnerText");
 
-		[Test]
-		public void NullProperties ()
-		{
-			TestHtmlContainerControl cc = new TestHtmlContainerControl ();
-			cc.InnerHtml = null;
-			Assert.AreEqual (String.Empty, cc.InnerHtml, "InnerHtml");
-			cc.InnerText = null;
-			Assert.AreEqual (String.Empty, cc.InnerText, "InnerText");
+            cc.InnerHtml = null;
+            Assert.AreEqual(String.Empty, cc.InnerHtml, "InnerHtml");
+            cc.InnerText = null;
+            Assert.AreEqual(String.Empty, cc.InnerText, "InnerText");
 
-			Assert.AreEqual (0, cc.Attributes.Count, "Attributes.Count");
-		}
+            Assert.AreEqual(0, cc.Attributes.Count, "Attributes.Count");
+        }
 
-		[Test]
-		public void CleanProperties ()
-		{
-			TestHtmlContainerControl cc = new TestHtmlContainerControl ();
-			cc.InnerHtml = "mono";
-			Assert.AreEqual ("mono", cc.InnerHtml, "InnerHtml");
-			Assert.AreEqual ("mono", cc.InnerText, "InnerText");
-			cc.InnerText = "go mono";
-			Assert.AreEqual ("go mono", cc.InnerHtml, "InnerHtml");
-			Assert.AreEqual ("go mono", cc.InnerText, "InnerText");
-
-			cc.InnerHtml = null;
-			Assert.AreEqual (String.Empty, cc.InnerHtml, "InnerHtml");
-			cc.InnerText = null;
-			Assert.AreEqual (String.Empty, cc.InnerText, "InnerText");
-
-			Assert.AreEqual (0, cc.Attributes.Count, "Attributes.Count");
-		}
-
-		[Test]
-		public void Render ()
-		{
-			TestHtmlContainerControl cc = new TestHtmlContainerControl ();
-			cc.InnerHtml = "mono";
-			Assert.AreEqual ("<span>mono</span>", cc.Render ());
-		}
-	}
+        [Test]
+        public void Render()
+        {
+            TestHtmlContainerControl cc = new TestHtmlContainerControl();
+            cc.InnerHtml = "mono";
+            Assert.AreEqual("<span>mono</span>", cc.Render());
+        }
+    }
 }

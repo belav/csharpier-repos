@@ -17,23 +17,37 @@ internal sealed class SetCacheKeyPrefixPolicy : IOutputCachePolicy
     /// </summary>
     public SetCacheKeyPrefixPolicy(Func<HttpContext, CancellationToken, ValueTask<string>> varyBy)
     {
-        _varyByAsync = async (context, rules, cancellationToken) => rules.CacheKeyPrefix = await varyBy(context, cancellationToken);
+        _varyByAsync = async (context, rules, cancellationToken) =>
+            rules.CacheKeyPrefix = await varyBy(context, cancellationToken);
     }
 
     /// <inheritdoc/>
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return _varyByAsync.Invoke(context.HttpContext, context.CacheVaryByRules, cancellationToken);
+        return _varyByAsync.Invoke(
+            context.HttpContext,
+            context.CacheVaryByRules,
+            cancellationToken
+        );
     }
 
     /// <inheritdoc/>
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc/>
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }

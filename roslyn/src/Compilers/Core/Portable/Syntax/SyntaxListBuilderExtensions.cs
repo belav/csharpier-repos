@@ -39,7 +39,10 @@ namespace Microsoft.CodeAnalysis.Syntax
             return new SyntaxList<TNode>(listNode.CreateRed());
         }
 
-        public static SeparatedSyntaxList<TNode> ToSeparatedList<TNode>(this SyntaxListBuilder? builder) where TNode : SyntaxNode
+        public static SeparatedSyntaxList<TNode> ToSeparatedList<TNode>(
+            this SyntaxListBuilder? builder
+        )
+            where TNode : SyntaxNode
         {
             var listNode = builder?.ToListNode();
             if (listNode is null)
@@ -47,7 +50,9 @@ namespace Microsoft.CodeAnalysis.Syntax
                 return default;
             }
 
-            return new SeparatedSyntaxList<TNode>(new SyntaxNodeOrTokenList(listNode.CreateRed(), 0));
+            return new SeparatedSyntaxList<TNode>(
+                new SyntaxNodeOrTokenList(listNode.CreateRed(), 0)
+            );
         }
     }
 }

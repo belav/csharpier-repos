@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.ContractSearchPattern.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,42 +29,42 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Discovery {
-	public sealed class ContractSearchPattern : DiscoverySearchPattern {
+namespace System.Web.Services.Discovery
+{
+    public sealed class ContractSearchPattern : DiscoverySearchPattern
+    {
+        #region Fields
 
-		#region Fields
+        private string pattern = "*.asmx";
 
-		private string pattern = "*.asmx";
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public ContractSearchPattern() { }
 
-		public ContractSearchPattern () 
-		{
-		}
-		
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public override string Pattern {
-			get { return pattern; }
-		}
+        public override string Pattern
+        {
+            get { return pattern; }
+        }
 
-		#endregion // Properties
+        #endregion // Properties
 
-		#region Methods
+        #region Methods
 
-		public override DiscoveryReference GetDiscoveryReference (string filename)
-		{
-			ContractReference refe = new ContractReference ();
-			refe.Url = filename;
-			refe.Ref = filename;
-			refe.DocRef = filename;
-			return refe;
-		}
+        public override DiscoveryReference GetDiscoveryReference(string filename)
+        {
+            ContractReference refe = new ContractReference();
+            refe.Url = filename;
+            refe.Ref = filename;
+            refe.DocRef = filename;
+            return refe;
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

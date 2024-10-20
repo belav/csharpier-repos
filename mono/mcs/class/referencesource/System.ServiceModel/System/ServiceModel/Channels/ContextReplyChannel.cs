@@ -12,7 +12,11 @@ namespace System.ServiceModel.Channels
     {
         ContextExchangeMechanism contextExchangeMechanism;
 
-        public ContextReplyChannel(ChannelManagerBase channelManager, IReplyChannel innerChannel, ContextExchangeMechanism contextExchangeMechanism)
+        public ContextReplyChannel(
+            ChannelManagerBase channelManager,
+            IReplyChannel innerChannel,
+            ContextExchangeMechanism contextExchangeMechanism
+        )
             : base(channelManager, innerChannel)
         {
             this.contextExchangeMechanism = contextExchangeMechanism;
@@ -23,7 +27,11 @@ namespace System.ServiceModel.Channels
             get { return this.InnerChannel.LocalAddress; }
         }
 
-        public IAsyncResult BeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginReceiveRequest(timeout, callback, state);
         }
@@ -33,12 +41,20 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.BeginReceiveRequest(callback, state);
         }
 
-        public IAsyncResult BeginTryReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTryReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginTryReceiveRequest(timeout, callback, state);
         }
 
-        public IAsyncResult BeginWaitForRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginWaitForRequest(timeout, callback, state);
         }
@@ -127,9 +143,15 @@ namespace System.ServiceModel.Channels
 
         ContextChannelRequestContext CreateContextChannelRequestContext(RequestContext innerContext)
         {
-            ServiceContextProtocol contextProtocol = new ServiceContextProtocol(this.contextExchangeMechanism);
+            ServiceContextProtocol contextProtocol = new ServiceContextProtocol(
+                this.contextExchangeMechanism
+            );
             contextProtocol.OnIncomingMessage(innerContext.RequestMessage);
-            return new ContextChannelRequestContext(innerContext, contextProtocol, this.DefaultSendTimeout);
+            return new ContextChannelRequestContext(
+                innerContext,
+                contextProtocol,
+                this.DefaultSendTimeout
+            );
         }
     }
 }

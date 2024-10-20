@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,35 +31,36 @@ using System.Security.Principal;
 
 namespace System.ServiceModel.Security
 {
-	public sealed class WindowsClientCredential
-	{
-		internal WindowsClientCredential ()
-		{
-		}
+    public sealed class WindowsClientCredential
+    {
+        internal WindowsClientCredential() { }
 
-		bool allow_ntlm = true;
-		TokenImpersonationLevel impersonation_level = TokenImpersonationLevel.Identification;
-		NetworkCredential client_credential = new NetworkCredential ();
-		
-		internal WindowsClientCredential Clone ()
-		{
-			return (WindowsClientCredential) MemberwiseClone ();
-		}
+        bool allow_ntlm = true;
+        TokenImpersonationLevel impersonation_level = TokenImpersonationLevel.Identification;
+        NetworkCredential client_credential = new NetworkCredential();
 
-		public TokenImpersonationLevel AllowedImpersonationLevel {
-			get { return impersonation_level; }
-			set { impersonation_level = value; }
-		}
+        internal WindowsClientCredential Clone()
+        {
+            return (WindowsClientCredential)MemberwiseClone();
+        }
 
-		public bool AllowNtlm {
-			get { return allow_ntlm; }
-			set { allow_ntlm = value; }
-		}
+        public TokenImpersonationLevel AllowedImpersonationLevel
+        {
+            get { return impersonation_level; }
+            set { impersonation_level = value; }
+        }
 
-		[MonoTODO]
-		public NetworkCredential ClientCredential {
-			get { return client_credential; }
-			set { client_credential = value; }
-		}
-	}
+        public bool AllowNtlm
+        {
+            get { return allow_ntlm; }
+            set { allow_ntlm = value; }
+        }
+
+        [MonoTODO]
+        public NetworkCredential ClientCredential
+        {
+            get { return client_credential; }
+            set { client_credential = value; }
+        }
+    }
 }

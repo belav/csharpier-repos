@@ -26,11 +26,17 @@ namespace System.IO.Pipelines.Tests
 
             Assert.True(task1.IsCompleted);
             Assert.True(task1.IsFaulted);
-            Assert.Equal("Concurrent reads or writes are not supported.", task1.Exception.InnerExceptions[0].Message);
+            Assert.Equal(
+                "Concurrent reads or writes are not supported.",
+                task1.Exception.InnerExceptions[0].Message
+            );
 
             Assert.True(task2.IsCompleted);
             Assert.True(task2.IsFaulted);
-            Assert.Equal("Concurrent reads or writes are not supported.", task2.Exception.InnerExceptions[0].Message);
+            Assert.Equal(
+                "Concurrent reads or writes are not supported.",
+                task2.Exception.InnerExceptions[0].Message
+            );
         }
 
         [Fact]
@@ -49,7 +55,9 @@ namespace System.IO.Pipelines.Tests
             Pipe.Writer.Complete(new InvalidOperationException());
             Pipe.Writer.Complete(new Exception());
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await Pipe.Reader.ReadAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await Pipe.Reader.ReadAsync()
+            );
         }
 
         [Fact]
@@ -58,7 +66,9 @@ namespace System.IO.Pipelines.Tests
             Pipe.Writer.Complete(new InvalidOperationException());
             Pipe.Writer.Complete();
 
-            await Assert.ThrowsAsync<InvalidOperationException>(async () => await Pipe.Reader.ReadAsync());
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                async () => await Pipe.Reader.ReadAsync()
+            );
         }
     }
 }

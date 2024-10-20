@@ -15,12 +15,22 @@ namespace Microsoft.CodeAnalysis.FindUsages
         /// Finds the references for the symbol at the specific position in the document,
         /// pushing the results into the context instance.
         /// </summary>
-        Task FindReferencesAsync(IFindUsagesContext context, Document document, int position, CancellationToken cancellationToken);
+        Task FindReferencesAsync(
+            IFindUsagesContext context,
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Finds the implementations for the symbol at the specific position in the document,
         /// pushing the results into the context instance.
         /// </summary>
-        Task FindImplementationsAsync(IFindUsagesContext context, Document document, int position, CancellationToken cancellationToken);
+        Task FindImplementationsAsync(
+            IFindUsagesContext context,
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

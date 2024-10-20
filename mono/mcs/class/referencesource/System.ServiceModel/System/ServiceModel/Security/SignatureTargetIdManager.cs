@@ -8,9 +8,7 @@ namespace System.ServiceModel.Security
 
     abstract class SignatureTargetIdManager
     {
-        protected SignatureTargetIdManager()
-        {
-        }
+        protected SignatureTargetIdManager() { }
 
         public abstract string DefaultIdNamespacePrefix { get; }
 

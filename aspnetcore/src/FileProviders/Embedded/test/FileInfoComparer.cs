@@ -22,11 +22,11 @@ internal class FileInfoComparer : IEqualityComparer<IFileInfo>
             return false;
         }
 
-        return x.Exists == y.Exists &&
-            x.IsDirectory == y.IsDirectory &&
-            x.Length == y.Length &&
-            string.Equals(x.Name, y.Name, StringComparison.Ordinal) &&
-            string.Equals(x.PhysicalPath, y.PhysicalPath, StringComparison.Ordinal);
+        return x.Exists == y.Exists
+            && x.IsDirectory == y.IsDirectory
+            && x.Length == y.Length
+            && string.Equals(x.Name, y.Name, StringComparison.Ordinal)
+            && string.Equals(x.PhysicalPath, y.PhysicalPath, StringComparison.Ordinal);
     }
 
     public int GetHashCode(IFileInfo obj) => 0;

@@ -21,17 +21,24 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 {
     public static readonly IVirtualCharService Instance = new CSharpVirtualCharService();
 
-    protected CSharpVirtualCharService()
-    {
-    }
+    protected CSharpVirtualCharService() { }
 
     protected override bool IsMultiLineRawStringToken(SyntaxToken token)
     {
-        if (token.Kind() is SyntaxKind.MultiLineRawStringLiteralToken or SyntaxKind.Utf8MultiLineRawStringLiteralToken)
+        if (
+            token.Kind()
+            is SyntaxKind.MultiLineRawStringLiteralToken
+                or SyntaxKind.Utf8MultiLineRawStringLiteralToken
+        )
         {
             return true;
         }
-        if (token.Parent?.Parent is InterpolatedStringExpressionSyntax { StringStartToken.RawKind: (int)SyntaxKind.InterpolatedMultiLineRawStringStartToken })
+        if (
+            token.Parent?.Parent is InterpolatedStringExpressionSyntax
+            {
+                StringStartToken.RawKind: (int)SyntaxKind.InterpolatedMultiLineRawStringStartToken
+            }
+        )
         {
             return true;
         }
@@ -64,12 +71,22 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 
             case SyntaxKind.StringLiteralToken:
                 return token.IsVerbatimStringLiteral()
-                    ? TryConvertVerbatimStringToVirtualChars(token, "@\"", "\"", escapeBraces: false)
+                    ? TryConvertVerbatimStringToVirtualChars(
+                        token,
+                        "@\"",
+                        "\"",
+                        escapeBraces: false
+                    )
                     : TryConvertStringToVirtualChars(token, "\"", "\"", escapeBraces: false);
 
             case SyntaxKind.Utf8StringLiteralToken:
                 return token.IsVerbatimStringLiteral()
-                    ? TryConvertVerbatimStringToVirtualChars(token, "@\"", "\"u8", escapeBraces: false)
+                    ? TryConvertVerbatimStringToVirtualChars(
+                        token,
+                        "@\"",
+                        "\"u8",
+                        escapeBraces: false
+                    )
                     : TryConvertStringToVirtualChars(token, "\"", "\"u8", escapeBraces: false);
 
             case SyntaxKind.SingleLineRawStringLiteralToken:
@@ -79,33 +96,49 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
             case SyntaxKind.MultiLineRawStringLiteralToken:
             case SyntaxKind.Utf8MultiLineRawStringLiteralToken:
                 return token.GetRequiredParent() is LiteralExpressionSyntax literalExpression
-                    ? TryConvertMultiLineRawStringToVirtualChars(token, literalExpression, tokenIncludeDelimiters: true)
+                    ? TryConvertMultiLineRawStringToVirtualChars(
+                        token,
+                        literalExpression,
+                        tokenIncludeDelimiters: true
+                    )
                     : default;
 
             case SyntaxKind.InterpolatedStringTextToken:
+            {
+                var parent = token.GetRequiredParent();
+                var isFormatClause = parent is InterpolationFormatClauseSyntax;
+                if (isFormatClause)
                 {
-                    var parent = token.GetRequiredParent();
-                    var isFormatClause = parent is InterpolationFormatClauseSyntax;
-                    if (isFormatClause)
-                    {
-                        parent = parent.GetRequiredParent();
-                    }
-
-                    var interpolatedString = (InterpolatedStringExpressionSyntax)parent.GetRequiredParent();
-
-                    return interpolatedString.StringStartToken.Kind() switch
-                    {
-                        SyntaxKind.InterpolatedStringStartToken => TryConvertStringToVirtualChars(token, "", "", escapeBraces: true),
-                        SyntaxKind.InterpolatedVerbatimStringStartToken => TryConvertVerbatimStringToVirtualChars(token, "", "", escapeBraces: true),
-                        SyntaxKind.InterpolatedSingleLineRawStringStartToken => TryConvertSingleLineRawStringToVirtualChars(token),
-                        SyntaxKind.InterpolatedMultiLineRawStringStartToken
-                            // Format clauses must be single line, even when in a multi-line interpolation.
-                            => isFormatClause
-                                ? TryConvertSingleLineRawStringToVirtualChars(token)
-                                : TryConvertMultiLineRawStringToVirtualChars(token, interpolatedString, tokenIncludeDelimiters: false),
-                        _ => default,
-                    };
+                    parent = parent.GetRequiredParent();
                 }
+
+                var interpolatedString = (InterpolatedStringExpressionSyntax)
+                    parent.GetRequiredParent();
+
+                return interpolatedString.StringStartToken.Kind() switch
+                {
+                    SyntaxKind.InterpolatedStringStartToken => TryConvertStringToVirtualChars(
+                        token,
+                        "",
+                        "",
+                        escapeBraces: true
+                    ),
+                    SyntaxKind.InterpolatedVerbatimStringStartToken =>
+                        TryConvertVerbatimStringToVirtualChars(token, "", "", escapeBraces: true),
+                    SyntaxKind.InterpolatedSingleLineRawStringStartToken =>
+                        TryConvertSingleLineRawStringToVirtualChars(token),
+                    SyntaxKind.InterpolatedMultiLineRawStringStartToken
+                        // Format clauses must be single line, even when in a multi-line interpolation.
+                        => isFormatClause
+                            ? TryConvertSingleLineRawStringToVirtualChars(token)
+                            : TryConvertMultiLineRawStringToVirtualChars(
+                                token,
+                                interpolatedString,
+                                tokenIncludeDelimiters: false
+                            ),
+                    _ => default,
+                };
+            }
         }
 
         return default;
@@ -126,10 +159,16 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
         return false;
     }
 
-    private static VirtualCharSequence TryConvertVerbatimStringToVirtualChars(SyntaxToken token, string startDelimiter, string endDelimiter, bool escapeBraces)
-        => TryConvertSimpleDoubleQuoteString(token, startDelimiter, endDelimiter, escapeBraces);
+    private static VirtualCharSequence TryConvertVerbatimStringToVirtualChars(
+        SyntaxToken token,
+        string startDelimiter,
+        string endDelimiter,
+        bool escapeBraces
+    ) => TryConvertSimpleDoubleQuoteString(token, startDelimiter, endDelimiter, escapeBraces);
 
-    private static VirtualCharSequence TryConvertSingleLineRawStringToVirtualChars(SyntaxToken token)
+    private static VirtualCharSequence TryConvertSingleLineRawStringToVirtualChars(
+        SyntaxToken token
+    )
     {
         var tokenText = token.Text;
         var offset = token.SpanStart;
@@ -144,7 +183,11 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
             endIndexExclusive -= "u8".Length;
         }
 
-        if (token.Kind() is SyntaxKind.SingleLineRawStringLiteralToken or SyntaxKind.Utf8SingleLineRawStringLiteralToken)
+        if (
+            token.Kind()
+            is SyntaxKind.SingleLineRawStringLiteralToken
+                or SyntaxKind.Utf8SingleLineRawStringLiteralToken
+        )
         {
             if (!(tokenText[0] == '"'))
             {
@@ -163,12 +206,18 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
             }
         }
 
-        for (var index = startIndexInclusive; index < endIndexExclusive;)
+        for (var index = startIndexInclusive; index < endIndexExclusive; )
         {
             index += ConvertTextAtIndexToRune(tokenText, index, result, offset);
         }
 
-        return CreateVirtualCharSequence(tokenText, offset, startIndexInclusive, endIndexExclusive, result);
+        return CreateVirtualCharSequence(
+            tokenText,
+            offset,
+            startIndexInclusive,
+            endIndexExclusive,
+            result
+        );
     }
 
     /// <summary>
@@ -181,14 +230,18 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
     /// delimiters inside of it or not.  If so, then those quotes will need to be skipped when determining the
     /// content</param>
     private static VirtualCharSequence TryConvertMultiLineRawStringToVirtualChars(
-        SyntaxToken token, ExpressionSyntax parentExpression, bool tokenIncludeDelimiters)
+        SyntaxToken token,
+        ExpressionSyntax parentExpression,
+        bool tokenIncludeDelimiters
+    )
     {
         // if this is the first text content chunk of the multi-line literal.  The first chunk contains the leading
         // indentation of the line it's on (which thus must be trimmed), while all subsequent chunks do not (because
         // they start right after some `{...}` interpolation
         var isFirstChunk =
-            parentExpression is LiteralExpressionSyntax ||
-            parentExpression is InterpolatedStringExpressionSyntax { Contents: var contents } && contents.First() == token.GetRequiredParent();
+            parentExpression is LiteralExpressionSyntax
+            || parentExpression is InterpolatedStringExpressionSyntax { Contents: var contents }
+                && contents.First() == token.GetRequiredParent();
 
         if (parentExpression.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error))
         {
@@ -197,7 +250,10 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 
         // Use the parent multi-line expression to determine what whitespace to remove from the start of each line.
         var parentSourceText = parentExpression.SyntaxTree.GetText();
-        var indentationLength = parentSourceText.Lines.GetLineFromPosition(parentExpression.Span.End).GetFirstNonWhitespaceOffset() ?? 0;
+        var indentationLength =
+            parentSourceText
+                .Lines.GetLineFromPosition(parentExpression.Span.End)
+                .GetFirstNonWhitespaceOffset() ?? 0;
 
         // Create a source-text view over the token.  This makes it very easy to treat the token as a set of lines
         // that can be processed sensibly.
@@ -209,7 +265,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 
         // Similarly, if we're on the very last chunk of hte multi-line raw string literal, then we don't want to
         // include the line contents for the line that has the final `    """` on it.
-        var lastLineExclusive = tokenIncludeDelimiters ? tokenSourceText.Lines.Count - 1 : tokenSourceText.Lines.Count;
+        var lastLineExclusive = tokenIncludeDelimiters
+            ? tokenSourceText.Lines.Count - 1
+            : tokenSourceText.Lines.Count;
 
         var result = ImmutableList.CreateBuilder<VirtualChar>();
         for (var lineNumber = startLineInclusive; lineNumber < lastLineExclusive; lineNumber++)
@@ -222,17 +280,21 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
             // do this for the first line of the first chunk as that will contain the initial leading whitespace.
             if (isFirstChunk || lineNumber > startLineInclusive)
             {
-                lineStart = lineSpan.Length > indentationLength
-                    ? lineSpan.Start + indentationLength
-                    : lineSpan.End;
+                lineStart =
+                    lineSpan.Length > indentationLength
+                        ? lineSpan.Start + indentationLength
+                        : lineSpan.End;
             }
 
             // The last line of the last chunk does not include the final newline on the line.
-            var lineEnd = lineNumber == lastLineExclusive - 1 ? currentLine.End : currentLine.EndIncludingLineBreak;
+            var lineEnd =
+                lineNumber == lastLineExclusive - 1
+                    ? currentLine.End
+                    : currentLine.EndIncludingLineBreak;
 
             // Now that we've found the start and end portions of that line, convert all the characters within to
             // virtual chars and return.
-            for (var i = lineStart; i < lineEnd;)
+            for (var i = lineStart; i < lineEnd; )
             {
                 i += ConvertTextAtIndexToRune(tokenSourceText, i, result, token.SpanStart);
             }
@@ -242,18 +304,32 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
     }
 
     private static VirtualCharSequence TryConvertStringToVirtualChars(
-        SyntaxToken token, string startDelimiter, string endDelimiter, bool escapeBraces)
+        SyntaxToken token,
+        string startDelimiter,
+        string endDelimiter,
+        bool escapeBraces
+    )
     {
         var tokenText = token.Text;
-        if (startDelimiter.Length > 0 && !tokenText.StartsWith(startDelimiter, StringComparison.Ordinal))
+        if (
+            startDelimiter.Length > 0
+            && !tokenText.StartsWith(startDelimiter, StringComparison.Ordinal)
+        )
         {
-            Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+            Debug.Fail(
+                "This should not be reachable as long as the compiler added no diagnostics."
+            );
             return default;
         }
 
-        if (endDelimiter.Length > 0 && !tokenText.EndsWith(endDelimiter, StringComparison.OrdinalIgnoreCase))
+        if (
+            endDelimiter.Length > 0
+            && !tokenText.EndsWith(endDelimiter, StringComparison.OrdinalIgnoreCase)
+        )
         {
-            Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+            Debug.Fail(
+                "This should not be reachable as long as the compiler added no diagnostics."
+            );
             return default;
         }
 
@@ -268,7 +344,7 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 
         // First pass, just convert everything in the string (i.e. escapes) to plain 16-bit characters.
         var offset = token.SpanStart;
-        for (var index = startIndexInclusive; index < endIndexExclusive;)
+        for (var index = startIndexInclusive; index < endIndexExclusive; )
         {
             var ch = tokenText[index];
             if (ch == '\\')
@@ -297,23 +373,43 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
             }
         }
 
-        return CreateVirtualCharSequence(tokenText, offset, startIndexInclusive, endIndexExclusive, charResults);
+        return CreateVirtualCharSequence(
+            tokenText,
+            offset,
+            startIndexInclusive,
+            endIndexExclusive,
+            charResults
+        );
     }
 
     private static VirtualCharSequence CreateVirtualCharSequence(
-        string tokenText, int offset, int startIndexInclusive, int endIndexExclusive, List<(char ch, TextSpan span)> charResults)
+        string tokenText,
+        int offset,
+        int startIndexInclusive,
+        int endIndexExclusive,
+        List<(char ch, TextSpan span)> charResults
+    )
     {
         // Second pass.  Convert those characters to Runes.
         var runeResults = ImmutableList.CreateBuilder<VirtualChar>();
 
         ConvertCharactersToRunes(charResults, runeResults);
 
-        return CreateVirtualCharSequence(tokenText, offset, startIndexInclusive, endIndexExclusive, runeResults);
+        return CreateVirtualCharSequence(
+            tokenText,
+            offset,
+            startIndexInclusive,
+            endIndexExclusive,
+            runeResults
+        );
     }
 
-    private static void ConvertCharactersToRunes(List<(char ch, TextSpan span)> charResults, ImmutableList<VirtualChar>.Builder runeResults)
+    private static void ConvertCharactersToRunes(
+        List<(char ch, TextSpan span)> charResults,
+        ImmutableList<VirtualChar>.Builder runeResults
+    )
     {
-        for (var i = 0; i < charResults.Count;)
+        for (var i = 0; i < charResults.Count; )
         {
             var (ch, span) = charResults[i];
 
@@ -331,7 +427,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
                 var (nextCh, nextSpan) = charResults[i + 1];
                 if (Rune.TryCreate(ch, nextCh, out rune))
                 {
-                    runeResults.Add(VirtualChar.Create(rune, TextSpan.FromBounds(span.Start, nextSpan.End)));
+                    runeResults.Add(
+                        VirtualChar.Create(rune, TextSpan.FromBounds(span.Start, nextSpan.End))
+                    );
                     i += 2;
                     continue;
                 }
@@ -345,20 +443,28 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
     }
 
     private static bool TryAddEscape(
-        List<(char ch, TextSpan span)> result, string tokenText, int offset, int index)
+        List<(char ch, TextSpan span)> result,
+        string tokenText,
+        int offset,
+        int index
+    )
     {
         // Copied from Lexer.ScanEscapeSequence.
         Debug.Assert(tokenText[index] == '\\');
 
-        return TryAddSingleCharacterEscape(result, tokenText, offset, index) ||
-               TryAddMultiCharacterEscape(result, tokenText, offset, index);
+        return TryAddSingleCharacterEscape(result, tokenText, offset, index)
+            || TryAddMultiCharacterEscape(result, tokenText, offset, index);
     }
 
-    public override bool TryGetEscapeCharacter(VirtualChar ch, out char escapedChar)
-        => ch.TryGetEscapeCharacter(out escapedChar);
+    public override bool TryGetEscapeCharacter(VirtualChar ch, out char escapedChar) =>
+        ch.TryGetEscapeCharacter(out escapedChar);
 
     private static bool TryAddSingleCharacterEscape(
-        List<(char ch, TextSpan span)> result, string tokenText, int offset, int index)
+        List<(char ch, TextSpan span)> result,
+        string tokenText,
+        int offset,
+        int index
+    )
     {
         // Copied from Lexer.ScanEscapeSequence.
         Debug.Assert(tokenText[index] == '\\');
@@ -374,14 +480,30 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
             case '\\':
                 break;
             // translate escapes as per C# spec 2.4.4.4
-            case '0': ch = '\0'; break;
-            case 'a': ch = '\a'; break;
-            case 'b': ch = '\b'; break;
-            case 'f': ch = '\f'; break;
-            case 'n': ch = '\n'; break;
-            case 'r': ch = '\r'; break;
-            case 't': ch = '\t'; break;
-            case 'v': ch = '\v'; break;
+            case '0':
+                ch = '\0';
+                break;
+            case 'a':
+                ch = '\a';
+                break;
+            case 'b':
+                ch = '\b';
+                break;
+            case 'f':
+                ch = '\f';
+                break;
+            case 'n':
+                ch = '\n';
+                break;
+            case 'r':
+                ch = '\r';
+                break;
+            case 't':
+                ch = '\t';
+                break;
+            case 'v':
+                ch = '\v';
+                break;
             default:
                 return false;
         }
@@ -391,7 +513,11 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
     }
 
     private static bool TryAddMultiCharacterEscape(
-        List<(char ch, TextSpan span)> result, string tokenText, int offset, int index)
+        List<(char ch, TextSpan span)> result,
+        string tokenText,
+        int offset,
+        int index
+    )
     {
         // Copied from Lexer.ScanEscapeSequence.
         Debug.Assert(tokenText[index] == '\\');
@@ -404,13 +530,20 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
             case 'U':
                 return TryAddMultiCharacterEscape(result, tokenText, offset, index, ch);
             default:
-                Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                Debug.Fail(
+                    "This should not be reachable as long as the compiler added no diagnostics."
+                );
                 return false;
         }
     }
 
     private static bool TryAddMultiCharacterEscape(
-        List<(char ch, TextSpan span)> result, string tokenText, int offset, int index, char character)
+        List<(char ch, TextSpan span)> result,
+        string tokenText,
+        int offset,
+        int index,
+        char character
+    )
     {
         var startIndex = index;
         Debug.Assert(tokenText[index] == '\\');
@@ -424,7 +557,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 
             if (!IsHexDigit(tokenText[index]))
             {
-                Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                Debug.Fail(
+                    "This should not be reachable as long as the compiler added no diagnostics."
+                );
                 return false;
             }
 
@@ -433,7 +568,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
                 character = tokenText[index + i];
                 if (!IsHexDigit(character))
                 {
-                    Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                    Debug.Fail(
+                        "This should not be reachable as long as the compiler added no diagnostics."
+                    );
                     return false;
                 }
 
@@ -444,7 +581,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 
             if (uintChar > 0x0010FFFF)
             {
-                Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                Debug.Fail(
+                    "This should not be reachable as long as the compiler added no diagnostics."
+                );
                 return false;
             }
 
@@ -476,7 +615,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
             var intChar = 0;
             if (!IsHexDigit(tokenText[index]))
             {
-                Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                Debug.Fail(
+                    "This should not be reachable as long as the compiler added no diagnostics."
+                );
                 return false;
             }
 
@@ -485,7 +626,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
                 var ch2 = tokenText[index + i];
                 if (!IsHexDigit(ch2))
                 {
-                    Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                    Debug.Fail(
+                        "This should not be reachable as long as the compiler added no diagnostics."
+                    );
                     return false;
                 }
 
@@ -504,7 +647,9 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
             var intChar = 0;
             if (!IsHexDigit(tokenText[index]))
             {
-                Debug.Fail("This should not be reachable as long as the compiler added no diagnostics.");
+                Debug.Fail(
+                    "This should not be reachable as long as the compiler added no diagnostics."
+                );
                 return false;
             }
 
@@ -536,8 +681,6 @@ internal class CSharpVirtualCharService : AbstractVirtualCharService
 
     private static bool IsHexDigit(char c)
     {
-        return c is >= '0' and <= '9' or
-               >= 'A' and <= 'F' or
-               >= 'a' and <= 'f';
+        return c is >= '0' and <= '9' or >= 'A' and <= 'F' or >= 'a' and <= 'f';
     }
 }

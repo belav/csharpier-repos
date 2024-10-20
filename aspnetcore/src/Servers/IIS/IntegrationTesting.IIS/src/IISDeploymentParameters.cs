@@ -7,23 +7,19 @@ namespace Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
 
 public class IISDeploymentParameters : DeploymentParameters
 {
-    public IISDeploymentParameters() : base()
-    {
-    }
+    public IISDeploymentParameters()
+        : base() { }
 
     public IISDeploymentParameters(TestVariant variant)
-        : base(variant)
-    {
-    }
+        : base(variant) { }
 
     public IISDeploymentParameters(
         string applicationPath,
         ServerType serverType,
         RuntimeFlavor runtimeFlavor,
-        RuntimeArchitecture runtimeArchitecture)
-        : base(applicationPath, serverType, runtimeFlavor, runtimeArchitecture)
-    {
-    }
+        RuntimeArchitecture runtimeArchitecture
+    )
+        : base(applicationPath, serverType, runtimeFlavor, runtimeArchitecture) { }
 
     public IISDeploymentParameters(DeploymentParameters parameters)
         : base(parameters)
@@ -37,11 +33,15 @@ public class IISDeploymentParameters : DeploymentParameters
         }
     }
 
-    public IList<Action<XElement, string>> WebConfigActionList { get; } = new List<Action<XElement, string>>();
+    public IList<Action<XElement, string>> WebConfigActionList { get; } =
+        new List<Action<XElement, string>>();
 
-    public IList<Action<XElement, string>> ServerConfigActionList { get; } = new List<Action<XElement, string>>();
+    public IList<Action<XElement, string>> ServerConfigActionList { get; } =
+        new List<Action<XElement, string>>();
 
-    public IDictionary<string, string> WebConfigBasedEnvironmentVariables { get; set; } = new Dictionary<string, string>();
+    public IDictionary<string, string> WebConfigBasedEnvironmentVariables { get; set; } =
+        new Dictionary<string, string>();
 
-    public IDictionary<string, string> HandlerSettings { get; set; } = new Dictionary<string, string>();
+    public IDictionary<string, string> HandlerSettings { get; set; } =
+        new Dictionary<string, string>();
 }

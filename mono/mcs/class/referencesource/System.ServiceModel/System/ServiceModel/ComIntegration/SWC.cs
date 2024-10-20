@@ -4,8 +4,8 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Runtime.InteropServices;
+    using System.ServiceModel.Channels;
 
     [Serializable]
     [ComVisible(false)]
@@ -14,7 +14,7 @@ namespace System.ServiceModel.ComIntegration
         None = 0,
         Inherit = 1,
         STA = 2,
-        MTA = 3
+        MTA = 3,
     }
 
     [Serializable]
@@ -22,7 +22,7 @@ namespace System.ServiceModel.ComIntegration
     enum BindingOption
     {
         NoBinding = 0,
-        BindingToPoolThread = 1
+        BindingToPoolThread = 1,
     }
 
     [Serializable]
@@ -31,7 +31,7 @@ namespace System.ServiceModel.ComIntegration
     {
         Ignore = 0,
         Inherit = 1,
-        New = 2
+        New = 2,
     }
 
     [Serializable]
@@ -40,7 +40,7 @@ namespace System.ServiceModel.ComIntegration
     {
         Ignore = 0,
         Inherit = 1,
-        New = 2
+        New = 2,
     }
 
     [Serializable]
@@ -50,7 +50,7 @@ namespace System.ServiceModel.ComIntegration
         NoTransaction = 0,
         IfContainerIsTransactional = 1,
         CreateTransactionIfNecessary = 2,
-        NewTransaction = 3
+        NewTransaction = 3,
     }
 
     [Serializable]
@@ -59,7 +59,7 @@ namespace System.ServiceModel.ComIntegration
     {
         CSC_NoSxs = 0,
         CSC_InheritSxs = 1,
-        CSC_NewSxs = 2
+        CSC_NewSxs = 2,
     }
 
     [ComImport]
@@ -71,15 +71,13 @@ namespace System.ServiceModel.ComIntegration
         void SetBindingInfo(BindingOption binding);
     }
 
-
     [ComImport]
     [Guid("80182d03-5ea4-4831-ae97-55beffc2e590")]
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     interface IServicePartitionConfig
     {
         void PartitionConfig(PartitionOption partitionConfig);
-        void PartitionID(
-            [In, MarshalAs(UnmanagedType.LPStruct)] Guid guidPartitionID);
+        void PartitionID([In, MarshalAs(UnmanagedType.LPStruct)] Guid guidPartitionID);
     }
 
     [ComImport]
@@ -121,7 +119,6 @@ namespace System.ServiceModel.ComIntegration
         void ConfigureBYOT(IntPtr pITxByot);
     }
 
-
     [ComImport]
     [Guid("ecabb0c8-7f19-11d2-978e-0000f8757e2a")]
     class CServiceConfig { }
@@ -133,7 +130,6 @@ namespace System.ServiceModel.ComIntegration
     {
         void OnCall();
     }
-
 
     [ComImport]
     [Guid("67532E0C-9E2F-4450-A354-035633944E17")]
@@ -154,17 +150,22 @@ namespace System.ServiceModel.ComIntegration
         void GetCurrentApartmentType(out uint aptType);
         void GetCurrentThreadType(out uint threadType);
         void GetCurrentLogicalThreadId(out Guid guidLogicalThreadID);
-        void SetCurrentLogicalThreadId([In, MarshalAs(UnmanagedType.LPStruct)] Guid guidLogicalThreadID);
+        void SetCurrentLogicalThreadId(
+            [In, MarshalAs(UnmanagedType.LPStruct)] Guid guidLogicalThreadID
+        );
     };
 
-    [ComImport,
-     Guid("75B52DDB-E8ED-11D1-93AD-00AA00BA3258"),
-     InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport,
+        Guid("75B52DDB-E8ED-11D1-93AD-00AA00BA3258"),
+        InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface IObjectContextInfo
     {
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Bool)]
         bool IsInTransaction();
+
         [PreserveSig]
         [return: MarshalAs(UnmanagedType.Interface)]
         Object GetTransaction();
@@ -172,5 +173,4 @@ namespace System.ServiceModel.ComIntegration
         void GetActivityId(out Guid guid);
         void GetContextId(out Guid guid);
     }
-
 }

@@ -6,9 +6,11 @@
 
 using System;
 
-namespace System.Web.UI.WebControls {
-    public enum ListViewCancelMode {
+namespace System.Web.UI.WebControls
+{
+    public enum ListViewCancelMode
+    {
         CancelingEdit,
-        CancelingInsert
+        CancelingInsert,
     }
 }

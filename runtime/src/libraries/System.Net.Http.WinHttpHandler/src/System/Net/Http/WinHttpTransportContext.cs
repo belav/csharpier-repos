@@ -3,7 +3,6 @@
 
 using System;
 using System.Security.Authentication.ExtendedProtection;
-
 using SafeWinHttpHandle = Interop.WinHttp.SafeWinHttpHandle;
 
 namespace System.Net.Http
@@ -12,9 +11,7 @@ namespace System.Net.Http
     {
         private WinHttpChannelBinding? _channelBinding;
 
-        internal WinHttpTransportContext()
-        {
-        }
+        internal WinHttpTransportContext() { }
 
         public override ChannelBinding? GetChannelBinding(ChannelBindingKind kind)
         {

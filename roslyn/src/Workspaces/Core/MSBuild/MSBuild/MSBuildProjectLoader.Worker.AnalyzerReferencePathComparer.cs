@@ -18,11 +18,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
                 private AnalyzerReferencePathComparer() { }
 
-                public bool Equals(AnalyzerReference? x, AnalyzerReference? y)
-                    => string.Equals(x?.FullPath, y?.FullPath, StringComparison.OrdinalIgnoreCase);
+                public bool Equals(AnalyzerReference? x, AnalyzerReference? y) =>
+                    string.Equals(x?.FullPath, y?.FullPath, StringComparison.OrdinalIgnoreCase);
 
-                public int GetHashCode(AnalyzerReference? obj)
-                    => obj?.FullPath?.GetHashCode() ?? 0;
+                public int GetHashCode(AnalyzerReference? obj) => obj?.FullPath?.GetHashCode() ?? 0;
             }
         }
     }

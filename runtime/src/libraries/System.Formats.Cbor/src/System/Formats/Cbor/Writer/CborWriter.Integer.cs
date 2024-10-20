@@ -29,7 +29,8 @@ namespace System.Formats.Cbor
         {
             if (value < 0)
             {
-                ulong unsignedRepresentation = (value == long.MinValue) ? (ulong)long.MaxValue : (ulong)(-value) - 1;
+                ulong unsignedRepresentation =
+                    (value == long.MinValue) ? (ulong)long.MaxValue : (ulong)(-value) - 1;
                 WriteUnsignedInteger(CborMajorType.NegativeInteger, unsignedRepresentation);
             }
             else

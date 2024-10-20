@@ -6,9 +6,9 @@ namespace System.ServiceModel.Activation
 {
     using System;
     using System.IO;
-    using System.Runtime.Serialization;
     using System.Net;
     using System.Net.Sockets;
+    using System.Runtime.Serialization;
 
     [DataContract]
     [KnownType(typeof(IPEndPoint))]
@@ -25,10 +25,7 @@ namespace System.ServiceModel.Activation
 
         public SocketInformation SocketInformation
         {
-            get
-            {
-                return this.socketInformation;
-            }
+            get { return this.socketInformation; }
         }
     }
 }

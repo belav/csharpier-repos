@@ -4,53 +4,62 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
-    using System.IO;
-    using System.Text;
-    using System.Web.Util;
-    using System.Web.Compilation;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.Globalization;
+    using System.IO;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Compilation;
+    using System.Web.Util;
+    using System.Xml;
 
-    public sealed class HttpHandlersSection : ConfigurationSection {
+    public sealed class HttpHandlersSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propHandlers =
-            new ConfigurationProperty(null, typeof(HttpHandlerActionCollection), null, ConfigurationPropertyOptions.IsDefaultCollection);
+        private static readonly ConfigurationProperty _propHandlers = new ConfigurationProperty(
+            null,
+            typeof(HttpHandlerActionCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
 
         private bool _validated;
 
-        static HttpHandlersSection() {
+        static HttpHandlersSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propHandlers);
         }
 
-        public HttpHandlersSection() {
-        }
+        public HttpHandlersSection() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("", IsDefaultCollection = true)]
-        public HttpHandlerActionCollection Handlers {
-            get {
-                return (HttpHandlerActionCollection)base[_propHandlers];
-            }
+        public HttpHandlerActionCollection Handlers
+        {
+            get { return (HttpHandlerActionCollection)base[_propHandlers]; }
         }
 
-        internal bool ValidateHandlers() {
-            if (!_validated) {
-                lock (this) {
-                    if (!_validated) {
-                        foreach (HttpHandlerAction ha in Handlers) {
+        internal bool ValidateHandlers()
+        {
+            if (!_validated)
+            {
+                lock (this)
+                {
+                    if (!_validated)
+                    {
+                        foreach (HttpHandlerAction ha in Handlers)
+                        {
                             ha.InitValidateInternal();
                         }
 
@@ -62,13 +71,16 @@ namespace System.Web.Configuration {
             return _validated;
         }
 
-        internal HttpHandlerAction FindMapping(String verb, VirtualPath path) {
+        internal HttpHandlerAction FindMapping(String verb, VirtualPath path)
+        {
             ValidateHandlers();
 
-            for (int i = 0; i < Handlers.Count; i++) {
+            for (int i = 0; i < Handlers.Count; i++)
+            {
                 HttpHandlerAction m = (HttpHandlerAction)Handlers[i];
 
-                if (m.IsMatch(verb, path)) {
+                if (m.IsMatch(verb, path))
+                {
                     return m;
                 }
             }
@@ -77,4 +89,3 @@ namespace System.Web.Configuration {
         }
     }
 }
-

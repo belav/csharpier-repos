@@ -9,6 +9,6 @@ namespace System.ServiceProcess
         Automatic = Interop.Advapi32.ServiceStartModes.START_TYPE_AUTO,
         Disabled = Interop.Advapi32.ServiceStartModes.START_TYPE_DISABLED,
         Boot = Interop.Advapi32.ServiceStartModes.START_TYPE_BOOT,
-        System = Interop.Advapi32.ServiceStartModes.START_TYPE_SYSTEM
+        System = Interop.Advapi32.ServiceStartModes.START_TYPE_SYSTEM,
     }
 }

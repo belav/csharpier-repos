@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,130 +29,156 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Web.Script.Serialization;
 using System.Collections.Specialized;
 using System.IO;
-using System.Web.SessionState;
 using System.Reflection;
+using System.Text;
+using System.Web.Script.Serialization;
+using System.Web.SessionState;
 
 namespace System.Web.Script.Services
 {
-	sealed class RestHandler : IHttpHandler
-	{
-		#region SessionWrappers
+    sealed class RestHandler : IHttpHandler
+    {
+        #region SessionWrappers
 
-		class SessionWrapperHandler : IHttpHandler, IRequiresSessionState
-		{
-			readonly IHttpHandler _handler;
+        class SessionWrapperHandler : IHttpHandler, IRequiresSessionState
+        {
+            readonly IHttpHandler _handler;
 
-			public SessionWrapperHandler (IHttpHandler handler) {
-				_handler = handler;
-			}
+            public SessionWrapperHandler(IHttpHandler handler)
+            {
+                _handler = handler;
+            }
 
-			public bool IsReusable {
-				get { return _handler.IsReusable; }
-			}
+            public bool IsReusable
+            {
+                get { return _handler.IsReusable; }
+            }
 
-			public void ProcessRequest (HttpContext context) {
-				_handler.ProcessRequest (context);
-			}
-		}
+            public void ProcessRequest(HttpContext context)
+            {
+                _handler.ProcessRequest(context);
+            }
+        }
 
-		sealed class ReadOnlySessionWrapperHandler : SessionWrapperHandler, IReadOnlySessionState
-		{
-			public ReadOnlySessionWrapperHandler (IHttpHandler handler) : base (handler) { }
-		}
+        sealed class ReadOnlySessionWrapperHandler : SessionWrapperHandler, IReadOnlySessionState
+        {
+            public ReadOnlySessionWrapperHandler(IHttpHandler handler)
+                : base(handler) { }
+        }
 
-		#endregion
+        #endregion
 
-		#region ExceptionSerializer
+        #region ExceptionSerializer
 
-		sealed class ExceptionSerializer
-		{
-			readonly Exception _e;
-			public ExceptionSerializer (Exception e) {
-				_e = e;
-			}
+        sealed class ExceptionSerializer
+        {
+            readonly Exception _e;
 
-			public string Message {
-				get { return _e.Message; }
-			}
+            public ExceptionSerializer(Exception e)
+            {
+                _e = e;
+            }
 
-			public string StackTrace {
-				get { return _e.StackTrace; }
-			}
+            public string Message
+            {
+                get { return _e.Message; }
+            }
 
-			public string ExceptionType {
-				get { return _e.GetType ().FullName; }
-			}			
-		}
+            public string StackTrace
+            {
+                get { return _e.StackTrace; }
+            }
 
-		#endregion
+            public string ExceptionType
+            {
+                get { return _e.GetType().FullName; }
+            }
+        }
 
-		readonly LogicalTypeInfo.LogicalMethodInfo _logicalMethodInfo;
+        #endregion
 
-		private RestHandler (HttpContext context, Type type, string filePath) {
-			LogicalTypeInfo logicalTypeInfo = LogicalTypeInfo.GetLogicalTypeInfo (type, filePath);
-			HttpRequest request = context.Request;
-			string methodName = request.PathInfo.Substring (1);
-			if (logicalTypeInfo == null || String.IsNullOrEmpty(methodName))
-				ThrowInvalidOperationException (methodName);
+        readonly LogicalTypeInfo.LogicalMethodInfo _logicalMethodInfo;
 
-			_logicalMethodInfo = logicalTypeInfo [methodName];
-			if (_logicalMethodInfo == null)
-				ThrowInvalidOperationException (methodName);
-		}
+        private RestHandler(HttpContext context, Type type, string filePath)
+        {
+            LogicalTypeInfo logicalTypeInfo = LogicalTypeInfo.GetLogicalTypeInfo(type, filePath);
+            HttpRequest request = context.Request;
+            string methodName = request.PathInfo.Substring(1);
+            if (logicalTypeInfo == null || String.IsNullOrEmpty(methodName))
+                ThrowInvalidOperationException(methodName);
 
-		static void ThrowInvalidOperationException (string pathInfo) {
-			throw new InvalidOperationException (
-					string.Format ("Request format is unrecognized unexpectedly ending in '{0}'.", pathInfo));
-		}
+            _logicalMethodInfo = logicalTypeInfo[methodName];
+            if (_logicalMethodInfo == null)
+                ThrowInvalidOperationException(methodName);
+        }
 
-		static readonly Type IRequiresSessionStateType = typeof (IRequiresSessionState);
-		static readonly Type IReadOnlySessionStateType = typeof (IReadOnlySessionState);
-		public static IHttpHandler GetHandler (HttpContext context, Type type, string filePath) {
-			RestHandler handler = new RestHandler (context, type, filePath);
-			LogicalTypeInfo.LogicalMethodInfo mi = handler._logicalMethodInfo;
-			if (mi.MethodInfo.IsStatic) {
-				if (IRequiresSessionStateType.IsAssignableFrom (type))
-					return IReadOnlySessionStateType.IsAssignableFrom (type) ?
-						new ReadOnlySessionWrapperHandler (handler) : new SessionWrapperHandler (handler);
-			}
-			else
-				if (mi.EnableSession)
-					return new SessionWrapperHandler (handler);
+        static void ThrowInvalidOperationException(string pathInfo)
+        {
+            throw new InvalidOperationException(
+                string.Format(
+                    "Request format is unrecognized unexpectedly ending in '{0}'.",
+                    pathInfo
+                )
+            );
+        }
 
-			return handler;
+        static readonly Type IRequiresSessionStateType = typeof(IRequiresSessionState);
+        static readonly Type IReadOnlySessionStateType = typeof(IReadOnlySessionState);
 
-		}
-		#region IHttpHandler Members
+        public static IHttpHandler GetHandler(HttpContext context, Type type, string filePath)
+        {
+            RestHandler handler = new RestHandler(context, type, filePath);
+            LogicalTypeInfo.LogicalMethodInfo mi = handler._logicalMethodInfo;
+            if (mi.MethodInfo.IsStatic)
+            {
+                if (IRequiresSessionStateType.IsAssignableFrom(type))
+                    return IReadOnlySessionStateType.IsAssignableFrom(type)
+                        ? new ReadOnlySessionWrapperHandler(handler)
+                        : new SessionWrapperHandler(handler);
+            }
+            else if (mi.EnableSession)
+                return new SessionWrapperHandler(handler);
 
-		public bool IsReusable {
-			get { return false; }
-		}
-		
-		public void ProcessRequest (HttpContext context) {
-			HttpRequest request = context.Request;
-			HttpResponse response = context.Response;
-			response.ContentType =
-				_logicalMethodInfo.ResponseFormat == ResponseFormat.Json ?
-				"application/json" : "text/xml";
-			response.Cache.SetCacheability (HttpCacheability.Private);
-			response.Cache.SetMaxAge (TimeSpan.Zero);
+            return handler;
+        }
 
-			try {
-				_logicalMethodInfo.Invoke (request, response);
-			}
-			catch (TargetInvocationException e) {
-				response.AddHeader ("jsonerror", "true");
-				response.ContentType = "application/json";
-				response.StatusCode = 500;
-				JavaScriptSerializer.DefaultSerializer.Serialize (new ExceptionSerializer (e.GetBaseException ()), response.Output);
-				response.End ();
-			}
-		}
-		
-		#endregion
-	}
+        #region IHttpHandler Members
+
+        public bool IsReusable
+        {
+            get { return false; }
+        }
+
+        public void ProcessRequest(HttpContext context)
+        {
+            HttpRequest request = context.Request;
+            HttpResponse response = context.Response;
+            response.ContentType =
+                _logicalMethodInfo.ResponseFormat == ResponseFormat.Json
+                    ? "application/json"
+                    : "text/xml";
+            response.Cache.SetCacheability(HttpCacheability.Private);
+            response.Cache.SetMaxAge(TimeSpan.Zero);
+
+            try
+            {
+                _logicalMethodInfo.Invoke(request, response);
+            }
+            catch (TargetInvocationException e)
+            {
+                response.AddHeader("jsonerror", "true");
+                response.ContentType = "application/json";
+                response.StatusCode = 500;
+                JavaScriptSerializer.DefaultSerializer.Serialize(
+                    new ExceptionSerializer(e.GetBaseException()),
+                    response.Output
+                );
+                response.End();
+            }
+        }
+
+        #endregion
+    }
 }

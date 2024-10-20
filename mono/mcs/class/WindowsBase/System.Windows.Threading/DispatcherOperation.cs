@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,126 +31,131 @@ using System.Security;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace System.Windows.Threading {
+namespace System.Windows.Threading
+{
+    public sealed class DispatcherOperation
+    {
+        DispatcherOperationStatus status;
+        DispatcherPriority priority;
+        Dispatcher dispatcher;
+        object result;
+        Delegate delegate_method;
+        object[] delegate_args;
 
-	public sealed class DispatcherOperation {
-		DispatcherOperationStatus status;
-		DispatcherPriority priority;
-		Dispatcher dispatcher;
-		object result;
-		Delegate delegate_method;
-		object [] delegate_args;
+        internal DispatcherOperation(Dispatcher dis, DispatcherPriority prio)
+        {
+            dispatcher = dis;
+            priority = prio;
+            if (Dispatcher.HasShutdownFinished)
+                status = DispatcherOperationStatus.Aborted;
+            else
+                status = DispatcherOperationStatus.Pending;
+        }
 
-		internal DispatcherOperation (Dispatcher dis, DispatcherPriority prio)
-		{
-			dispatcher = dis;
-			priority = prio;
-			if (Dispatcher.HasShutdownFinished)
-				status = DispatcherOperationStatus.Aborted;
-			else
-				status = DispatcherOperationStatus.Pending;
-		}
-		
-		internal DispatcherOperation (Dispatcher dis, DispatcherPriority prio, Delegate d)
-			: this (dis, prio)
-		{
-			delegate_method = d;
-		}
+        internal DispatcherOperation(Dispatcher dis, DispatcherPriority prio, Delegate d)
+            : this(dis, prio)
+        {
+            delegate_method = d;
+        }
 
-		internal DispatcherOperation (Dispatcher dis, DispatcherPriority prio, Delegate d, object arg)
-			: this (dis, prio)
-		{
-			delegate_method = d;
-			delegate_args = new object [1];
-			delegate_args [0] = arg;
-		}
+        internal DispatcherOperation(
+            Dispatcher dis,
+            DispatcherPriority prio,
+            Delegate d,
+            object arg
+        )
+            : this(dis, prio)
+        {
+            delegate_method = d;
+            delegate_args = new object[1];
+            delegate_args[0] = arg;
+        }
 
-		internal DispatcherOperation (Dispatcher dis, DispatcherPriority prio, Delegate d, object arg, object [] args)
-			: this (dis, prio)
-		{
-			delegate_method = d;
-			delegate_args = new object [args.Length + 1];
-			delegate_args [0] = arg;
-			Array.Copy (args, 0, delegate_args, 1, args.Length);
-		}
+        internal DispatcherOperation(
+            Dispatcher dis,
+            DispatcherPriority prio,
+            Delegate d,
+            object arg,
+            object[] args
+        )
+            : this(dis, prio)
+        {
+            delegate_method = d;
+            delegate_args = new object[args.Length + 1];
+            delegate_args[0] = arg;
+            Array.Copy(args, 0, delegate_args, 1, args.Length);
+        }
 
-		internal void Invoke ()
-		{
-			status = DispatcherOperationStatus.Executing;
-			result = delegate_method.DynamicInvoke (delegate_args);
-				
-			status = DispatcherOperationStatus.Completed;
+        internal void Invoke()
+        {
+            status = DispatcherOperationStatus.Executing;
+            result = delegate_method.DynamicInvoke(delegate_args);
 
-			if (Completed != null)
-				Completed (this, EventArgs.Empty);
-		}
-		
-		public bool Abort ()
-		{
-			status = DispatcherOperationStatus.Aborted;
-			throw new NotImplementedException ();
-		}
+            status = DispatcherOperationStatus.Completed;
 
-		public Task Task {
-			get {
-				throw new NotImplementedException();
-			}
-		}
+            if (Completed != null)
+                Completed(this, EventArgs.Empty);
+        }
 
-		public DispatcherOperationStatus Status {
-			get {
-				return status;
-			}
+        public bool Abort()
+        {
+            status = DispatcherOperationStatus.Aborted;
+            throw new NotImplementedException();
+        }
 
-			internal set {
-				status = value;
-			}
-		}
+        public Task Task
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public Dispatcher Dispatcher {
-			get {
-				return dispatcher;
-			}
-		}
+        public DispatcherOperationStatus Status
+        {
+            get { return status; }
+            internal set { status = value; }
+        }
 
-		public DispatcherPriority Priority {
-			get {
-				return priority;
-			}
+        public Dispatcher Dispatcher
+        {
+            get { return dispatcher; }
+        }
 
-			set {
-				if (priority != value){
-					DispatcherPriority old = priority;
-					priority = value;
-					dispatcher.Reprioritize (this, old);
-				}
-			}
-		}
+        public DispatcherPriority Priority
+        {
+            get { return priority; }
+            set
+            {
+                if (priority != value)
+                {
+                    DispatcherPriority old = priority;
+                    priority = value;
+                    dispatcher.Reprioritize(this, old);
+                }
+            }
+        }
 
-		public object Result {
-			get {
-				return result;
-			}
-		}
+        public object Result
+        {
+            get { return result; }
+        }
 
-		public DispatcherOperationStatus Wait ()
-		{
-			if (status == DispatcherOperationStatus.Executing)
-				throw new InvalidOperationException ("Already executing");
+        public DispatcherOperationStatus Wait()
+        {
+            if (status == DispatcherOperationStatus.Executing)
+                throw new InvalidOperationException("Already executing");
 
-			throw new NotImplementedException ();
-		}
+            throw new NotImplementedException();
+        }
 
-		[SecurityCritical]
-		public DispatcherOperationStatus Wait (TimeSpan timeout)
-		{
-			if (status == DispatcherOperationStatus.Executing)
-				throw new InvalidOperationException ("Already executing");
+        [SecurityCritical]
+        public DispatcherOperationStatus Wait(TimeSpan timeout)
+        {
+            if (status == DispatcherOperationStatus.Executing)
+                throw new InvalidOperationException("Already executing");
 
-			throw new NotImplementedException ();
-		}
-		
-		public event EventHandler Aborted;
-		public event EventHandler Completed;
-	}
+            throw new NotImplementedException();
+        }
+
+        public event EventHandler Aborted;
+        public event EventHandler Completed;
+    }
 }

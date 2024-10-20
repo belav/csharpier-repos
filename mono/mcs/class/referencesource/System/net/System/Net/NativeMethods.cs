@@ -11,18 +11,15 @@
 // PInvoke declaration in this bucket, until it remains empty
 // it would just be waisting space to compile it.
 //
-namespace System.Net {
+namespace System.Net
+{
     using System.Runtime.InteropServices;
 
-    internal class NclNativeMethods {
+    internal class NclNativeMethods
+    {
         //
         // this should remain empty
         //
-
     }; // class NclNativeMethods
-
-
 } // namespace System.Net
-
 #endif // #if ENABLE_NclNativeMethods
-

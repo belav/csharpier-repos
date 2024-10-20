@@ -116,7 +116,10 @@ namespace System.Xml.Xsl.IlGen
             Debug.Assert(seqEmpty != null, "Field `Empty` could not be found");
             SeqEmpty = seqEmpty;
             SeqReuse = sequenceType.GetMethod("CreateOrReuse", new[] { sequenceType })!;
-            SeqReuseSgl = sequenceType.GetMethod("CreateOrReuse", new[] { sequenceType, storageType })!;
+            SeqReuseSgl = sequenceType.GetMethod(
+                "CreateOrReuse",
+                new[] { sequenceType, storageType }
+            )!;
             SeqSortByKeys = sequenceType.GetMethod("SortByKeys")!;
             SeqType = sequenceType;
 
@@ -144,7 +147,9 @@ namespace System.Xml.Xsl.IlGen
             if (storageType == typeof(byte[]))
                 ToAtomicValue = typeof(XmlILStorageConverter).GetMethod("BytesToAtomicValue");
             else if (storageType != typeof(XPathItem) && storageType != typeof(XPathNavigator))
-                ToAtomicValue = typeof(XmlILStorageConverter).GetMethod($"{storageType.Name}ToAtomicValue");
+                ToAtomicValue = typeof(XmlILStorageConverter).GetMethod(
+                    $"{storageType.Name}ToAtomicValue"
+                );
         }
     }
 
@@ -153,14 +158,28 @@ namespace System.Xml.Xsl.IlGen
     /// </summary>
     internal static class XmlILConstructors
     {
-        public static readonly ConstructorInfo DecFromParts = typeof(decimal).GetConstructor(new[] { typeof(int), typeof(int), typeof(int), typeof(bool), typeof(byte) })!;
-        public static readonly ConstructorInfo DecFromInt32 = typeof(decimal).GetConstructor(new[] { typeof(int) })!;
-        public static readonly ConstructorInfo DecFromInt64 = typeof(decimal).GetConstructor(new[] { typeof(long) })!;
-        public static readonly ConstructorInfo Debuggable = typeof(DebuggableAttribute).GetConstructor(new[] { typeof(DebuggableAttribute.DebuggingModes) })!;
-        public static readonly ConstructorInfo NonUserCode = typeof(DebuggerNonUserCodeAttribute).GetConstructor(Type.EmptyTypes)!;
-        public static readonly ConstructorInfo QName = typeof(XmlQualifiedName).GetConstructor(new[] { typeof(string), typeof(string) })!;
-        public static readonly ConstructorInfo StepThrough = typeof(DebuggerStepThroughAttribute).GetConstructor(Type.EmptyTypes)!;
-        public static readonly ConstructorInfo Transparent = typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes)!;
+        public static readonly ConstructorInfo DecFromParts = typeof(decimal).GetConstructor(
+            new[] { typeof(int), typeof(int), typeof(int), typeof(bool), typeof(byte) }
+        )!;
+        public static readonly ConstructorInfo DecFromInt32 = typeof(decimal).GetConstructor(
+            new[] { typeof(int) }
+        )!;
+        public static readonly ConstructorInfo DecFromInt64 = typeof(decimal).GetConstructor(
+            new[] { typeof(long) }
+        )!;
+        public static readonly ConstructorInfo Debuggable =
+            typeof(DebuggableAttribute).GetConstructor(
+                new[] { typeof(DebuggableAttribute.DebuggingModes) }
+            )!;
+        public static readonly ConstructorInfo NonUserCode =
+            typeof(DebuggerNonUserCodeAttribute).GetConstructor(Type.EmptyTypes)!;
+        public static readonly ConstructorInfo QName = typeof(XmlQualifiedName).GetConstructor(
+            new[] { typeof(string), typeof(string) }
+        )!;
+        public static readonly ConstructorInfo StepThrough =
+            typeof(DebuggerStepThroughAttribute).GetConstructor(Type.EmptyTypes)!;
+        public static readonly ConstructorInfo Transparent =
+            typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes)!;
     }
 
     /// <summary>
@@ -172,144 +191,373 @@ namespace System.Xml.Xsl.IlGen
         // Iterators
         public static readonly MethodInfo AncCreate = typeof(AncestorIterator).GetMethod("Create")!;
         public static readonly MethodInfo AncNext = typeof(AncestorIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo AncCurrent = typeof(AncestorIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo AncDOCreate = typeof(AncestorDocOrderIterator).GetMethod("Create")!;
-        public static readonly MethodInfo AncDONext = typeof(AncestorDocOrderIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo AncDOCurrent = typeof(AncestorDocOrderIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo AttrContentCreate = typeof(AttributeContentIterator).GetMethod("Create")!;
-        public static readonly MethodInfo AttrContentNext = typeof(AttributeContentIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo AttrContentCurrent = typeof(AttributeContentIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo AttrCreate = typeof(AttributeIterator).GetMethod("Create")!;
-        public static readonly MethodInfo AttrNext = typeof(AttributeIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo AttrCurrent = typeof(AttributeIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo ContentCreate = typeof(ContentIterator).GetMethod("Create")!;
-        public static readonly MethodInfo ContentNext = typeof(ContentIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo ContentCurrent = typeof(ContentIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo ContentMergeCreate = typeof(ContentMergeIterator).GetMethod("Create")!;
-        public static readonly MethodInfo ContentMergeNext = typeof(ContentMergeIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo ContentMergeCurrent = typeof(ContentMergeIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo DescCreate = typeof(DescendantIterator).GetMethod("Create")!;
-        public static readonly MethodInfo DescNext = typeof(DescendantIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo DescCurrent = typeof(DescendantIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo DescMergeCreate = typeof(DescendantMergeIterator).GetMethod("Create")!;
-        public static readonly MethodInfo DescMergeNext = typeof(DescendantMergeIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo DescMergeCurrent = typeof(DescendantMergeIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo DiffCreate = typeof(DifferenceIterator).GetMethod("Create")!;
-        public static readonly MethodInfo DiffNext = typeof(DifferenceIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo DiffCurrent = typeof(DifferenceIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo DodMergeCreate = typeof(DodSequenceMerge).GetMethod("Create")!;
-        public static readonly MethodInfo DodMergeAdd = typeof(DodSequenceMerge).GetMethod("AddSequence")!;
-        public static readonly MethodInfo DodMergeSeq = typeof(DodSequenceMerge).GetMethod("MergeSequences")!;
-        public static readonly MethodInfo ElemContentCreate = typeof(ElementContentIterator).GetMethod("Create")!;
-        public static readonly MethodInfo ElemContentNext = typeof(ElementContentIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo ElemContentCurrent = typeof(ElementContentIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo FollSibCreate = typeof(FollowingSiblingIterator).GetMethod("Create")!;
-        public static readonly MethodInfo FollSibNext = typeof(FollowingSiblingIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo FollSibCurrent = typeof(FollowingSiblingIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo FollSibMergeCreate = typeof(FollowingSiblingMergeIterator).GetMethod("Create")!;
-        public static readonly MethodInfo FollSibMergeNext = typeof(FollowingSiblingMergeIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo FollSibMergeCurrent = typeof(FollowingSiblingMergeIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo AncCurrent = typeof(AncestorIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo AncDOCreate = typeof(AncestorDocOrderIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo AncDONext = typeof(AncestorDocOrderIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo AncDOCurrent = typeof(AncestorDocOrderIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo AttrContentCreate =
+            typeof(AttributeContentIterator).GetMethod("Create")!;
+        public static readonly MethodInfo AttrContentNext =
+            typeof(AttributeContentIterator).GetMethod("MoveNext")!;
+        public static readonly MethodInfo AttrContentCurrent =
+            typeof(AttributeContentIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo AttrCreate = typeof(AttributeIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo AttrNext = typeof(AttributeIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo AttrCurrent = typeof(AttributeIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo ContentCreate = typeof(ContentIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo ContentNext = typeof(ContentIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo ContentCurrent = typeof(ContentIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo ContentMergeCreate =
+            typeof(ContentMergeIterator).GetMethod("Create")!;
+        public static readonly MethodInfo ContentMergeNext = typeof(ContentMergeIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo ContentMergeCurrent =
+            typeof(ContentMergeIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo DescCreate = typeof(DescendantIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo DescNext = typeof(DescendantIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo DescCurrent = typeof(DescendantIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo DescMergeCreate =
+            typeof(DescendantMergeIterator).GetMethod("Create")!;
+        public static readonly MethodInfo DescMergeNext = typeof(DescendantMergeIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo DescMergeCurrent =
+            typeof(DescendantMergeIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo DiffCreate = typeof(DifferenceIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo DiffNext = typeof(DifferenceIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo DiffCurrent = typeof(DifferenceIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo DodMergeCreate = typeof(DodSequenceMerge).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo DodMergeAdd = typeof(DodSequenceMerge).GetMethod(
+            "AddSequence"
+        )!;
+        public static readonly MethodInfo DodMergeSeq = typeof(DodSequenceMerge).GetMethod(
+            "MergeSequences"
+        )!;
+        public static readonly MethodInfo ElemContentCreate =
+            typeof(ElementContentIterator).GetMethod("Create")!;
+        public static readonly MethodInfo ElemContentNext =
+            typeof(ElementContentIterator).GetMethod("MoveNext")!;
+        public static readonly MethodInfo ElemContentCurrent =
+            typeof(ElementContentIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo FollSibCreate =
+            typeof(FollowingSiblingIterator).GetMethod("Create")!;
+        public static readonly MethodInfo FollSibNext = typeof(FollowingSiblingIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo FollSibCurrent =
+            typeof(FollowingSiblingIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo FollSibMergeCreate =
+            typeof(FollowingSiblingMergeIterator).GetMethod("Create")!;
+        public static readonly MethodInfo FollSibMergeNext =
+            typeof(FollowingSiblingMergeIterator).GetMethod("MoveNext")!;
+        public static readonly MethodInfo FollSibMergeCurrent =
+            typeof(FollowingSiblingMergeIterator).GetMethod("get_Current")!;
         public static readonly MethodInfo IdCreate = typeof(IdIterator).GetMethod("Create")!;
         public static readonly MethodInfo IdNext = typeof(IdIterator).GetMethod("MoveNext")!;
         public static readonly MethodInfo IdCurrent = typeof(IdIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo InterCreate = typeof(IntersectIterator).GetMethod("Create")!;
-        public static readonly MethodInfo InterNext = typeof(IntersectIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo InterCurrent = typeof(IntersectIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo KindContentCreate = typeof(NodeKindContentIterator).GetMethod("Create")!;
-        public static readonly MethodInfo KindContentNext = typeof(NodeKindContentIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo KindContentCurrent = typeof(NodeKindContentIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo NmspCreate = typeof(NamespaceIterator).GetMethod("Create")!;
-        public static readonly MethodInfo NmspNext = typeof(NamespaceIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo NmspCurrent = typeof(NamespaceIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo NodeRangeCreate = typeof(NodeRangeIterator).GetMethod("Create")!;
-        public static readonly MethodInfo NodeRangeNext = typeof(NodeRangeIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo NodeRangeCurrent = typeof(NodeRangeIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo ParentCreate = typeof(ParentIterator).GetMethod("Create")!;
-        public static readonly MethodInfo ParentNext = typeof(ParentIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo ParentCurrent = typeof(ParentIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo PrecCreate = typeof(PrecedingIterator).GetMethod("Create")!;
-        public static readonly MethodInfo PrecNext = typeof(PrecedingIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo PrecCurrent = typeof(PrecedingIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo PreSibCreate = typeof(PrecedingSiblingIterator).GetMethod("Create")!;
-        public static readonly MethodInfo PreSibNext = typeof(PrecedingSiblingIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo PreSibCurrent = typeof(PrecedingSiblingIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo PreSibDOCreate = typeof(PrecedingSiblingDocOrderIterator).GetMethod("Create")!;
-        public static readonly MethodInfo PreSibDONext = typeof(PrecedingSiblingDocOrderIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo PreSibDOCurrent = typeof(PrecedingSiblingDocOrderIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo SortKeyCreate = typeof(XmlSortKeyAccumulator).GetMethod("Create")!;
-        public static readonly MethodInfo SortKeyDateTime = typeof(XmlSortKeyAccumulator).GetMethod("AddDateTimeSortKey")!;
-        public static readonly MethodInfo SortKeyDecimal = typeof(XmlSortKeyAccumulator).GetMethod("AddDecimalSortKey")!;
-        public static readonly MethodInfo SortKeyDouble = typeof(XmlSortKeyAccumulator).GetMethod("AddDoubleSortKey")!;
-        public static readonly MethodInfo SortKeyEmpty = typeof(XmlSortKeyAccumulator).GetMethod("AddEmptySortKey")!;
-        public static readonly MethodInfo SortKeyFinish = typeof(XmlSortKeyAccumulator).GetMethod("FinishSortKeys")!;
-        public static readonly MethodInfo SortKeyInt = typeof(XmlSortKeyAccumulator).GetMethod("AddIntSortKey")!;
-        public static readonly MethodInfo SortKeyInteger = typeof(XmlSortKeyAccumulator).GetMethod("AddIntegerSortKey")!;
-        public static readonly MethodInfo SortKeyKeys = typeof(XmlSortKeyAccumulator).GetMethod("get_Keys")!;
-        public static readonly MethodInfo SortKeyString = typeof(XmlSortKeyAccumulator).GetMethod("AddStringSortKey")!;
+        public static readonly MethodInfo InterCreate = typeof(IntersectIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo InterNext = typeof(IntersectIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo InterCurrent = typeof(IntersectIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo KindContentCreate =
+            typeof(NodeKindContentIterator).GetMethod("Create")!;
+        public static readonly MethodInfo KindContentNext =
+            typeof(NodeKindContentIterator).GetMethod("MoveNext")!;
+        public static readonly MethodInfo KindContentCurrent =
+            typeof(NodeKindContentIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo NmspCreate = typeof(NamespaceIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo NmspNext = typeof(NamespaceIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo NmspCurrent = typeof(NamespaceIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo NodeRangeCreate = typeof(NodeRangeIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo NodeRangeNext = typeof(NodeRangeIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo NodeRangeCurrent = typeof(NodeRangeIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo ParentCreate = typeof(ParentIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo ParentNext = typeof(ParentIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo ParentCurrent = typeof(ParentIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo PrecCreate = typeof(PrecedingIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo PrecNext = typeof(PrecedingIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo PrecCurrent = typeof(PrecedingIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo PreSibCreate = typeof(PrecedingSiblingIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo PreSibNext = typeof(PrecedingSiblingIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo PreSibCurrent =
+            typeof(PrecedingSiblingIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo PreSibDOCreate =
+            typeof(PrecedingSiblingDocOrderIterator).GetMethod("Create")!;
+        public static readonly MethodInfo PreSibDONext =
+            typeof(PrecedingSiblingDocOrderIterator).GetMethod("MoveNext")!;
+        public static readonly MethodInfo PreSibDOCurrent =
+            typeof(PrecedingSiblingDocOrderIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo SortKeyCreate = typeof(XmlSortKeyAccumulator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo SortKeyDateTime = typeof(XmlSortKeyAccumulator).GetMethod(
+            "AddDateTimeSortKey"
+        )!;
+        public static readonly MethodInfo SortKeyDecimal = typeof(XmlSortKeyAccumulator).GetMethod(
+            "AddDecimalSortKey"
+        )!;
+        public static readonly MethodInfo SortKeyDouble = typeof(XmlSortKeyAccumulator).GetMethod(
+            "AddDoubleSortKey"
+        )!;
+        public static readonly MethodInfo SortKeyEmpty = typeof(XmlSortKeyAccumulator).GetMethod(
+            "AddEmptySortKey"
+        )!;
+        public static readonly MethodInfo SortKeyFinish = typeof(XmlSortKeyAccumulator).GetMethod(
+            "FinishSortKeys"
+        )!;
+        public static readonly MethodInfo SortKeyInt = typeof(XmlSortKeyAccumulator).GetMethod(
+            "AddIntSortKey"
+        )!;
+        public static readonly MethodInfo SortKeyInteger = typeof(XmlSortKeyAccumulator).GetMethod(
+            "AddIntegerSortKey"
+        )!;
+        public static readonly MethodInfo SortKeyKeys = typeof(XmlSortKeyAccumulator).GetMethod(
+            "get_Keys"
+        )!;
+        public static readonly MethodInfo SortKeyString = typeof(XmlSortKeyAccumulator).GetMethod(
+            "AddStringSortKey"
+        )!;
         public static readonly MethodInfo UnionCreate = typeof(UnionIterator).GetMethod("Create")!;
         public static readonly MethodInfo UnionNext = typeof(UnionIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo UnionCurrent = typeof(UnionIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo XPFollCreate = typeof(XPathFollowingIterator).GetMethod("Create")!;
-        public static readonly MethodInfo XPFollNext = typeof(XPathFollowingIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo XPFollCurrent = typeof(XPathFollowingIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo XPFollMergeCreate = typeof(XPathFollowingMergeIterator).GetMethod("Create")!;
-        public static readonly MethodInfo XPFollMergeNext = typeof(XPathFollowingMergeIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo XPFollMergeCurrent = typeof(XPathFollowingMergeIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo XPPrecCreate = typeof(XPathPrecedingIterator).GetMethod("Create")!;
-        public static readonly MethodInfo XPPrecNext = typeof(XPathPrecedingIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo XPPrecCurrent = typeof(XPathPrecedingIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo XPPrecDOCreate = typeof(XPathPrecedingDocOrderIterator).GetMethod("Create")!;
-        public static readonly MethodInfo XPPrecDONext = typeof(XPathPrecedingDocOrderIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo XPPrecDOCurrent = typeof(XPathPrecedingDocOrderIterator).GetMethod("get_Current")!;
-        public static readonly MethodInfo XPPrecMergeCreate = typeof(XPathPrecedingMergeIterator).GetMethod("Create")!;
-        public static readonly MethodInfo XPPrecMergeNext = typeof(XPathPrecedingMergeIterator).GetMethod("MoveNext")!;
-        public static readonly MethodInfo XPPrecMergeCurrent = typeof(XPathPrecedingMergeIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo UnionCurrent = typeof(UnionIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo XPFollCreate = typeof(XPathFollowingIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo XPFollNext = typeof(XPathFollowingIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo XPFollCurrent = typeof(XPathFollowingIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo XPFollMergeCreate =
+            typeof(XPathFollowingMergeIterator).GetMethod("Create")!;
+        public static readonly MethodInfo XPFollMergeNext =
+            typeof(XPathFollowingMergeIterator).GetMethod("MoveNext")!;
+        public static readonly MethodInfo XPFollMergeCurrent =
+            typeof(XPathFollowingMergeIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo XPPrecCreate = typeof(XPathPrecedingIterator).GetMethod(
+            "Create"
+        )!;
+        public static readonly MethodInfo XPPrecNext = typeof(XPathPrecedingIterator).GetMethod(
+            "MoveNext"
+        )!;
+        public static readonly MethodInfo XPPrecCurrent = typeof(XPathPrecedingIterator).GetMethod(
+            "get_Current"
+        )!;
+        public static readonly MethodInfo XPPrecDOCreate =
+            typeof(XPathPrecedingDocOrderIterator).GetMethod("Create")!;
+        public static readonly MethodInfo XPPrecDONext =
+            typeof(XPathPrecedingDocOrderIterator).GetMethod("MoveNext")!;
+        public static readonly MethodInfo XPPrecDOCurrent =
+            typeof(XPathPrecedingDocOrderIterator).GetMethod("get_Current")!;
+        public static readonly MethodInfo XPPrecMergeCreate =
+            typeof(XPathPrecedingMergeIterator).GetMethod("Create")!;
+        public static readonly MethodInfo XPPrecMergeNext =
+            typeof(XPathPrecedingMergeIterator).GetMethod("MoveNext")!;
+        public static readonly MethodInfo XPPrecMergeCurrent =
+            typeof(XPathPrecedingMergeIterator).GetMethod("get_Current")!;
 
         // XmlQueryRuntime
-        public static readonly MethodInfo AddNewIndex = typeof(XmlQueryRuntime).GetMethod("AddNewIndex")!;
-        public static readonly MethodInfo ChangeTypeXsltArg = typeof(XmlQueryRuntime).GetMethod("ChangeTypeXsltArgument", new[] { typeof(int), typeof(object), typeof(Type) })!;
-        public static readonly MethodInfo ChangeTypeXsltResult = typeof(XmlQueryRuntime).GetMethod("ChangeTypeXsltResult")!;
-        public static readonly MethodInfo CompPos = typeof(XmlQueryRuntime).GetMethod("ComparePosition")!;
-        public static readonly MethodInfo Context = typeof(XmlQueryRuntime).GetMethod("get_ExternalContext")!;
-        public static readonly MethodInfo CreateCollation = typeof(XmlQueryRuntime).GetMethod("CreateCollation")!;
-        public static readonly MethodInfo DocOrder = typeof(XmlQueryRuntime).GetMethod("DocOrderDistinct")!;
-        public static readonly MethodInfo EndRtfConstr = typeof(XmlQueryRuntime).GetMethod("EndRtfConstruction")!;
-        public static readonly MethodInfo EndSeqConstr = typeof(XmlQueryRuntime).GetMethod("EndSequenceConstruction")!;
-        public static readonly MethodInfo FindIndex = typeof(XmlQueryRuntime).GetMethod("FindIndex")!;
+        public static readonly MethodInfo AddNewIndex = typeof(XmlQueryRuntime).GetMethod(
+            "AddNewIndex"
+        )!;
+        public static readonly MethodInfo ChangeTypeXsltArg = typeof(XmlQueryRuntime).GetMethod(
+            "ChangeTypeXsltArgument",
+            new[] { typeof(int), typeof(object), typeof(Type) }
+        )!;
+        public static readonly MethodInfo ChangeTypeXsltResult = typeof(XmlQueryRuntime).GetMethod(
+            "ChangeTypeXsltResult"
+        )!;
+        public static readonly MethodInfo CompPos = typeof(XmlQueryRuntime).GetMethod(
+            "ComparePosition"
+        )!;
+        public static readonly MethodInfo Context = typeof(XmlQueryRuntime).GetMethod(
+            "get_ExternalContext"
+        )!;
+        public static readonly MethodInfo CreateCollation = typeof(XmlQueryRuntime).GetMethod(
+            "CreateCollation"
+        )!;
+        public static readonly MethodInfo DocOrder = typeof(XmlQueryRuntime).GetMethod(
+            "DocOrderDistinct"
+        )!;
+        public static readonly MethodInfo EndRtfConstr = typeof(XmlQueryRuntime).GetMethod(
+            "EndRtfConstruction"
+        )!;
+        public static readonly MethodInfo EndSeqConstr = typeof(XmlQueryRuntime).GetMethod(
+            "EndSequenceConstruction"
+        )!;
+        public static readonly MethodInfo FindIndex = typeof(XmlQueryRuntime).GetMethod(
+            "FindIndex"
+        )!;
         public static readonly MethodInfo GenId = typeof(XmlQueryRuntime).GetMethod("GenerateId")!;
-        public static readonly MethodInfo GetAtomizedName = typeof(XmlQueryRuntime).GetMethod("GetAtomizedName")!;
-        public static readonly MethodInfo GetCollation = typeof(XmlQueryRuntime).GetMethod("GetCollation")!;
-        public static readonly MethodInfo GetEarly = typeof(XmlQueryRuntime).GetMethod("GetEarlyBoundObject")!;
-        public static readonly MethodInfo GetNameFilter = typeof(XmlQueryRuntime).GetMethod("GetNameFilter")!;
-        public static readonly MethodInfo GetOutput = typeof(XmlQueryRuntime).GetMethod("get_Output")!;
-        public static readonly MethodInfo GetGlobalValue = typeof(XmlQueryRuntime).GetMethod("GetGlobalValue")!;
-        public static readonly MethodInfo GetTypeFilter = typeof(XmlQueryRuntime).GetMethod("GetTypeFilter")!;
-        public static readonly MethodInfo GlobalComputed = typeof(XmlQueryRuntime).GetMethod("IsGlobalComputed")!;
-        public static readonly MethodInfo ItemMatchesCode = typeof(XmlQueryRuntime).GetMethod("MatchesXmlType", new[] { typeof(XPathItem), typeof(XmlTypeCode) })!;
-        public static readonly MethodInfo ItemMatchesType = typeof(XmlQueryRuntime).GetMethod("MatchesXmlType", new[] { typeof(XPathItem), typeof(int) })!;
-        public static readonly MethodInfo QNameEqualLit = typeof(XmlQueryRuntime).GetMethod("IsQNameEqual", new[] { typeof(XPathNavigator), typeof(int), typeof(int) })!;
-        public static readonly MethodInfo QNameEqualNav = typeof(XmlQueryRuntime).GetMethod("IsQNameEqual", new[] { typeof(XPathNavigator), typeof(XPathNavigator) })!;
-        public static readonly MethodInfo RtfConstr = typeof(XmlQueryRuntime).GetMethod("TextRtfConstruction")!;
-        public static readonly MethodInfo SendMessage = typeof(XmlQueryRuntime).GetMethod("SendMessage")!;
-        public static readonly MethodInfo SeqMatchesCode = typeof(XmlQueryRuntime).GetMethod("MatchesXmlType", new[] { typeof(IList<XPathItem>), typeof(XmlTypeCode) })!;
-        public static readonly MethodInfo SeqMatchesType = typeof(XmlQueryRuntime).GetMethod("MatchesXmlType", new[] { typeof(IList<XPathItem>), typeof(int) })!;
-        public static readonly MethodInfo SetGlobalValue = typeof(XmlQueryRuntime).GetMethod("SetGlobalValue")!;
-        public static readonly MethodInfo StartRtfConstr = typeof(XmlQueryRuntime).GetMethod("StartRtfConstruction")!;
-        public static readonly MethodInfo StartSeqConstr = typeof(XmlQueryRuntime).GetMethod("StartSequenceConstruction")!;
-        public static readonly MethodInfo TagAndMappings = typeof(XmlQueryRuntime).GetMethod("ParseTagName", new[] { typeof(string), typeof(int) })!;
-        public static readonly MethodInfo TagAndNamespace = typeof(XmlQueryRuntime).GetMethod("ParseTagName", new[] { typeof(string), typeof(string) })!;
-        public static readonly MethodInfo ThrowException = typeof(XmlQueryRuntime).GetMethod("ThrowException")!;
-        public static readonly MethodInfo XsltLib = typeof(XmlQueryRuntime).GetMethod("get_XsltFunctions")!;
+        public static readonly MethodInfo GetAtomizedName = typeof(XmlQueryRuntime).GetMethod(
+            "GetAtomizedName"
+        )!;
+        public static readonly MethodInfo GetCollation = typeof(XmlQueryRuntime).GetMethod(
+            "GetCollation"
+        )!;
+        public static readonly MethodInfo GetEarly = typeof(XmlQueryRuntime).GetMethod(
+            "GetEarlyBoundObject"
+        )!;
+        public static readonly MethodInfo GetNameFilter = typeof(XmlQueryRuntime).GetMethod(
+            "GetNameFilter"
+        )!;
+        public static readonly MethodInfo GetOutput = typeof(XmlQueryRuntime).GetMethod(
+            "get_Output"
+        )!;
+        public static readonly MethodInfo GetGlobalValue = typeof(XmlQueryRuntime).GetMethod(
+            "GetGlobalValue"
+        )!;
+        public static readonly MethodInfo GetTypeFilter = typeof(XmlQueryRuntime).GetMethod(
+            "GetTypeFilter"
+        )!;
+        public static readonly MethodInfo GlobalComputed = typeof(XmlQueryRuntime).GetMethod(
+            "IsGlobalComputed"
+        )!;
+        public static readonly MethodInfo ItemMatchesCode = typeof(XmlQueryRuntime).GetMethod(
+            "MatchesXmlType",
+            new[] { typeof(XPathItem), typeof(XmlTypeCode) }
+        )!;
+        public static readonly MethodInfo ItemMatchesType = typeof(XmlQueryRuntime).GetMethod(
+            "MatchesXmlType",
+            new[] { typeof(XPathItem), typeof(int) }
+        )!;
+        public static readonly MethodInfo QNameEqualLit = typeof(XmlQueryRuntime).GetMethod(
+            "IsQNameEqual",
+            new[] { typeof(XPathNavigator), typeof(int), typeof(int) }
+        )!;
+        public static readonly MethodInfo QNameEqualNav = typeof(XmlQueryRuntime).GetMethod(
+            "IsQNameEqual",
+            new[] { typeof(XPathNavigator), typeof(XPathNavigator) }
+        )!;
+        public static readonly MethodInfo RtfConstr = typeof(XmlQueryRuntime).GetMethod(
+            "TextRtfConstruction"
+        )!;
+        public static readonly MethodInfo SendMessage = typeof(XmlQueryRuntime).GetMethod(
+            "SendMessage"
+        )!;
+        public static readonly MethodInfo SeqMatchesCode = typeof(XmlQueryRuntime).GetMethod(
+            "MatchesXmlType",
+            new[] { typeof(IList<XPathItem>), typeof(XmlTypeCode) }
+        )!;
+        public static readonly MethodInfo SeqMatchesType = typeof(XmlQueryRuntime).GetMethod(
+            "MatchesXmlType",
+            new[] { typeof(IList<XPathItem>), typeof(int) }
+        )!;
+        public static readonly MethodInfo SetGlobalValue = typeof(XmlQueryRuntime).GetMethod(
+            "SetGlobalValue"
+        )!;
+        public static readonly MethodInfo StartRtfConstr = typeof(XmlQueryRuntime).GetMethod(
+            "StartRtfConstruction"
+        )!;
+        public static readonly MethodInfo StartSeqConstr = typeof(XmlQueryRuntime).GetMethod(
+            "StartSequenceConstruction"
+        )!;
+        public static readonly MethodInfo TagAndMappings = typeof(XmlQueryRuntime).GetMethod(
+            "ParseTagName",
+            new[] { typeof(string), typeof(int) }
+        )!;
+        public static readonly MethodInfo TagAndNamespace = typeof(XmlQueryRuntime).GetMethod(
+            "ParseTagName",
+            new[] { typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo ThrowException = typeof(XmlQueryRuntime).GetMethod(
+            "ThrowException"
+        )!;
+        public static readonly MethodInfo XsltLib = typeof(XmlQueryRuntime).GetMethod(
+            "get_XsltFunctions"
+        )!;
 
         // XmlQueryContext
-        public static readonly MethodInfo GetDataSource = typeof(XmlQueryContext).GetMethod("GetDataSource")!;
-        public static readonly MethodInfo GetDefaultDataSource = typeof(XmlQueryContext).GetMethod("get_DefaultDataSource")!;
-        public static readonly MethodInfo GetParam = typeof(XmlQueryContext).GetMethod("GetParameter")!;
+        public static readonly MethodInfo GetDataSource = typeof(XmlQueryContext).GetMethod(
+            "GetDataSource"
+        )!;
+        public static readonly MethodInfo GetDefaultDataSource = typeof(XmlQueryContext).GetMethod(
+            "get_DefaultDataSource"
+        )!;
+        public static readonly MethodInfo GetParam = typeof(XmlQueryContext).GetMethod(
+            "GetParameter"
+        )!;
         public static readonly MethodInfo InvokeXsltLate = GetInvokeXsltLateBoundFunction();
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Suppressing warning about not having the RequiresUnreferencedCode attribute since this code path " +
-            "will only be emitting IL that will later be called by Transform() method which is already annotated as RequiresUnreferencedCode")]
-        private static MethodInfo GetInvokeXsltLateBoundFunction() => typeof(XmlQueryContext).GetMethod("InvokeXsltLateBoundFunction")!;
+
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Suppressing warning about not having the RequiresUnreferencedCode attribute since this code path "
+                + "will only be emitting IL that will later be called by Transform() method which is already annotated as RequiresUnreferencedCode"
+        )]
+        private static MethodInfo GetInvokeXsltLateBoundFunction() =>
+            typeof(XmlQueryContext).GetMethod("InvokeXsltLateBoundFunction")!;
 
         // XmlILIndex
         public static readonly MethodInfo IndexAdd = typeof(XmlILIndex).GetMethod("Add")!;
@@ -318,156 +566,365 @@ namespace System.Xml.Xsl.IlGen
         // XPathItem
         public static readonly MethodInfo ItemIsNode = typeof(XPathItem).GetMethod("get_IsNode")!;
         public static readonly MethodInfo Value = typeof(XPathItem).GetMethod("get_Value")!;
-        public static readonly MethodInfo ValueAsAny = typeof(XPathItem).GetMethod("ValueAs", new[] { typeof(Type), typeof(IXmlNamespaceResolver) })!;
+        public static readonly MethodInfo ValueAsAny = typeof(XPathItem).GetMethod(
+            "ValueAs",
+            new[] { typeof(Type), typeof(IXmlNamespaceResolver) }
+        )!;
 
         // XPathNavigator
         public static readonly MethodInfo NavClone = typeof(XPathNavigator).GetMethod("Clone")!;
-        public static readonly MethodInfo NavLocalName = typeof(XPathNavigator).GetMethod("get_LocalName")!;
-        public static readonly MethodInfo NavMoveAttr = typeof(XPathNavigator).GetMethod("MoveToAttribute", new[] { typeof(string), typeof(string) })!;
+        public static readonly MethodInfo NavLocalName = typeof(XPathNavigator).GetMethod(
+            "get_LocalName"
+        )!;
+        public static readonly MethodInfo NavMoveAttr = typeof(XPathNavigator).GetMethod(
+            "MoveToAttribute",
+            new[] { typeof(string), typeof(string) }
+        )!;
         public static readonly MethodInfo NavMoveId = typeof(XPathNavigator).GetMethod("MoveToId")!;
-        public static readonly MethodInfo NavMoveParent = typeof(XPathNavigator).GetMethod("MoveToParent")!;
-        public static readonly MethodInfo NavMoveRoot = typeof(XPathNavigator).GetMethod("MoveToRoot")!;
+        public static readonly MethodInfo NavMoveParent = typeof(XPathNavigator).GetMethod(
+            "MoveToParent"
+        )!;
+        public static readonly MethodInfo NavMoveRoot = typeof(XPathNavigator).GetMethod(
+            "MoveToRoot"
+        )!;
         public static readonly MethodInfo NavMoveTo = typeof(XPathNavigator).GetMethod("MoveTo")!;
-        public static readonly MethodInfo NavNmsp = typeof(XPathNavigator).GetMethod("get_NamespaceURI")!;
-        public static readonly MethodInfo NavPrefix = typeof(XPathNavigator).GetMethod("get_Prefix")!;
-        public static readonly MethodInfo NavSamePos = typeof(XPathNavigator).GetMethod("IsSamePosition")!;
-        public static readonly MethodInfo NavType = typeof(XPathNavigator).GetMethod("get_NodeType")!;
+        public static readonly MethodInfo NavNmsp = typeof(XPathNavigator).GetMethod(
+            "get_NamespaceURI"
+        )!;
+        public static readonly MethodInfo NavPrefix = typeof(XPathNavigator).GetMethod(
+            "get_Prefix"
+        )!;
+        public static readonly MethodInfo NavSamePos = typeof(XPathNavigator).GetMethod(
+            "IsSamePosition"
+        )!;
+        public static readonly MethodInfo NavType = typeof(XPathNavigator).GetMethod(
+            "get_NodeType"
+        )!;
 
         // XmlQueryOutput methods
-        public static readonly MethodInfo StartElemLitName = typeof(XmlQueryOutput).GetMethod("WriteStartElement", new[] { typeof(string), typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StartElemLocName = typeof(XmlQueryOutput).GetMethod("WriteStartElementLocalName", new[] { typeof(string) })!;
-        public static readonly MethodInfo EndElemStackName = typeof(XmlQueryOutput).GetMethod("WriteEndElement")!;
-        public static readonly MethodInfo StartAttrLitName = typeof(XmlQueryOutput).GetMethod("WriteStartAttribute", new[] { typeof(string), typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StartAttrLocName = typeof(XmlQueryOutput).GetMethod("WriteStartAttributeLocalName", new[] { typeof(string) })!;
-        public static readonly MethodInfo EndAttr = typeof(XmlQueryOutput).GetMethod("WriteEndAttribute")!;
+        public static readonly MethodInfo StartElemLitName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartElement",
+            new[] { typeof(string), typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StartElemLocName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartElementLocalName",
+            new[] { typeof(string) }
+        )!;
+        public static readonly MethodInfo EndElemStackName = typeof(XmlQueryOutput).GetMethod(
+            "WriteEndElement"
+        )!;
+        public static readonly MethodInfo StartAttrLitName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartAttribute",
+            new[] { typeof(string), typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StartAttrLocName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartAttributeLocalName",
+            new[] { typeof(string) }
+        )!;
+        public static readonly MethodInfo EndAttr = typeof(XmlQueryOutput).GetMethod(
+            "WriteEndAttribute"
+        )!;
         public static readonly MethodInfo Text = typeof(XmlQueryOutput).GetMethod("WriteString")!;
-        public static readonly MethodInfo NoEntText = typeof(XmlQueryOutput).GetMethod("WriteRaw", new[] { typeof(string) })!;
+        public static readonly MethodInfo NoEntText = typeof(XmlQueryOutput).GetMethod(
+            "WriteRaw",
+            new[] { typeof(string) }
+        )!;
 
-        public static readonly MethodInfo StartTree = typeof(XmlQueryOutput).GetMethod("StartTree")!;
+        public static readonly MethodInfo StartTree = typeof(XmlQueryOutput).GetMethod(
+            "StartTree"
+        )!;
         public static readonly MethodInfo EndTree = typeof(XmlQueryOutput).GetMethod("EndTree")!;
 
-        public static readonly MethodInfo StartElemLitNameUn = typeof(XmlQueryOutput).GetMethod("WriteStartElementUnchecked", new[] { typeof(string), typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StartElemLocNameUn = typeof(XmlQueryOutput).GetMethod("WriteStartElementUnchecked", new[] { typeof(string) })!;
-        public static readonly MethodInfo StartContentUn = typeof(XmlQueryOutput).GetMethod("StartElementContentUnchecked")!;
-        public static readonly MethodInfo EndElemLitNameUn = typeof(XmlQueryOutput).GetMethod("WriteEndElementUnchecked", new[] { typeof(string), typeof(string), typeof(string) })!;
-        public static readonly MethodInfo EndElemLocNameUn = typeof(XmlQueryOutput).GetMethod("WriteEndElementUnchecked", new[] { typeof(string) })!;
-        public static readonly MethodInfo StartAttrLitNameUn = typeof(XmlQueryOutput).GetMethod("WriteStartAttributeUnchecked", new[] { typeof(string), typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StartAttrLocNameUn = typeof(XmlQueryOutput).GetMethod("WriteStartAttributeUnchecked", new[] { typeof(string) })!;
-        public static readonly MethodInfo EndAttrUn = typeof(XmlQueryOutput).GetMethod("WriteEndAttributeUnchecked")!;
-        public static readonly MethodInfo NamespaceDeclUn = typeof(XmlQueryOutput).GetMethod("WriteNamespaceDeclarationUnchecked")!;
-        public static readonly MethodInfo TextUn = typeof(XmlQueryOutput).GetMethod("WriteStringUnchecked")!;
-        public static readonly MethodInfo NoEntTextUn = typeof(XmlQueryOutput).GetMethod("WriteRawUnchecked")!;
+        public static readonly MethodInfo StartElemLitNameUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartElementUnchecked",
+            new[] { typeof(string), typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StartElemLocNameUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartElementUnchecked",
+            new[] { typeof(string) }
+        )!;
+        public static readonly MethodInfo StartContentUn = typeof(XmlQueryOutput).GetMethod(
+            "StartElementContentUnchecked"
+        )!;
+        public static readonly MethodInfo EndElemLitNameUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteEndElementUnchecked",
+            new[] { typeof(string), typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo EndElemLocNameUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteEndElementUnchecked",
+            new[] { typeof(string) }
+        )!;
+        public static readonly MethodInfo StartAttrLitNameUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartAttributeUnchecked",
+            new[] { typeof(string), typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StartAttrLocNameUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartAttributeUnchecked",
+            new[] { typeof(string) }
+        )!;
+        public static readonly MethodInfo EndAttrUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteEndAttributeUnchecked"
+        )!;
+        public static readonly MethodInfo NamespaceDeclUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteNamespaceDeclarationUnchecked"
+        )!;
+        public static readonly MethodInfo TextUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteStringUnchecked"
+        )!;
+        public static readonly MethodInfo NoEntTextUn = typeof(XmlQueryOutput).GetMethod(
+            "WriteRawUnchecked"
+        )!;
 
-        public static readonly MethodInfo StartRoot = typeof(XmlQueryOutput).GetMethod("WriteStartRoot")!;
-        public static readonly MethodInfo EndRoot = typeof(XmlQueryOutput).GetMethod("WriteEndRoot")!;
-        public static readonly MethodInfo StartElemCopyName = typeof(XmlQueryOutput).GetMethod("WriteStartElementComputed", new[] { typeof(XPathNavigator) })!;
-        public static readonly MethodInfo StartElemMapName = typeof(XmlQueryOutput).GetMethod("WriteStartElementComputed", new[] { typeof(string), typeof(int) })!;
-        public static readonly MethodInfo StartElemNmspName = typeof(XmlQueryOutput).GetMethod("WriteStartElementComputed", new[] { typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StartElemQName = typeof(XmlQueryOutput).GetMethod("WriteStartElementComputed", new[] { typeof(XmlQualifiedName) })!;
-        public static readonly MethodInfo StartAttrCopyName = typeof(XmlQueryOutput).GetMethod("WriteStartAttributeComputed", new[] { typeof(XPathNavigator) })!;
-        public static readonly MethodInfo StartAttrMapName = typeof(XmlQueryOutput).GetMethod("WriteStartAttributeComputed", new[] { typeof(string), typeof(int) })!;
-        public static readonly MethodInfo StartAttrNmspName = typeof(XmlQueryOutput).GetMethod("WriteStartAttributeComputed", new[] { typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StartAttrQName = typeof(XmlQueryOutput).GetMethod("WriteStartAttributeComputed", new[] { typeof(XmlQualifiedName) })!;
-        public static readonly MethodInfo NamespaceDecl = typeof(XmlQueryOutput).GetMethod("WriteNamespaceDeclaration")!;
-        public static readonly MethodInfo StartComment = typeof(XmlQueryOutput).GetMethod("WriteStartComment")!;
-        public static readonly MethodInfo CommentText = typeof(XmlQueryOutput).GetMethod("WriteCommentString")!;
-        public static readonly MethodInfo EndComment = typeof(XmlQueryOutput).GetMethod("WriteEndComment")!;
-        public static readonly MethodInfo StartPI = typeof(XmlQueryOutput).GetMethod("WriteStartProcessingInstruction")!;
-        public static readonly MethodInfo PIText = typeof(XmlQueryOutput).GetMethod("WriteProcessingInstructionString")!;
-        public static readonly MethodInfo EndPI = typeof(XmlQueryOutput).GetMethod("WriteEndProcessingInstruction")!;
-        public static readonly MethodInfo WriteItem = typeof(XmlQueryOutput).GetMethod("WriteItem")!;
+        public static readonly MethodInfo StartRoot = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartRoot"
+        )!;
+        public static readonly MethodInfo EndRoot = typeof(XmlQueryOutput).GetMethod(
+            "WriteEndRoot"
+        )!;
+        public static readonly MethodInfo StartElemCopyName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartElementComputed",
+            new[] { typeof(XPathNavigator) }
+        )!;
+        public static readonly MethodInfo StartElemMapName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartElementComputed",
+            new[] { typeof(string), typeof(int) }
+        )!;
+        public static readonly MethodInfo StartElemNmspName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartElementComputed",
+            new[] { typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StartElemQName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartElementComputed",
+            new[] { typeof(XmlQualifiedName) }
+        )!;
+        public static readonly MethodInfo StartAttrCopyName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartAttributeComputed",
+            new[] { typeof(XPathNavigator) }
+        )!;
+        public static readonly MethodInfo StartAttrMapName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartAttributeComputed",
+            new[] { typeof(string), typeof(int) }
+        )!;
+        public static readonly MethodInfo StartAttrNmspName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartAttributeComputed",
+            new[] { typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StartAttrQName = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartAttributeComputed",
+            new[] { typeof(XmlQualifiedName) }
+        )!;
+        public static readonly MethodInfo NamespaceDecl = typeof(XmlQueryOutput).GetMethod(
+            "WriteNamespaceDeclaration"
+        )!;
+        public static readonly MethodInfo StartComment = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartComment"
+        )!;
+        public static readonly MethodInfo CommentText = typeof(XmlQueryOutput).GetMethod(
+            "WriteCommentString"
+        )!;
+        public static readonly MethodInfo EndComment = typeof(XmlQueryOutput).GetMethod(
+            "WriteEndComment"
+        )!;
+        public static readonly MethodInfo StartPI = typeof(XmlQueryOutput).GetMethod(
+            "WriteStartProcessingInstruction"
+        )!;
+        public static readonly MethodInfo PIText = typeof(XmlQueryOutput).GetMethod(
+            "WriteProcessingInstructionString"
+        )!;
+        public static readonly MethodInfo EndPI = typeof(XmlQueryOutput).GetMethod(
+            "WriteEndProcessingInstruction"
+        )!;
+        public static readonly MethodInfo WriteItem = typeof(XmlQueryOutput).GetMethod(
+            "WriteItem"
+        )!;
         public static readonly MethodInfo CopyOf = typeof(XmlQueryOutput).GetMethod("XsltCopyOf")!;
-        public static readonly MethodInfo StartCopy = typeof(XmlQueryOutput).GetMethod("StartCopy")!;
+        public static readonly MethodInfo StartCopy = typeof(XmlQueryOutput).GetMethod(
+            "StartCopy"
+        )!;
         public static readonly MethodInfo EndCopy = typeof(XmlQueryOutput).GetMethod("EndCopy")!;
 
         // Datatypes
         public static readonly MethodInfo DecAdd = typeof(decimal).GetMethod("Add")!;
-        public static readonly MethodInfo DecCmp = typeof(decimal).GetMethod("Compare", new[] { typeof(decimal), typeof(decimal) })!;
-        public static readonly MethodInfo DecEq = typeof(decimal).GetMethod("Equals", new[] { typeof(decimal), typeof(decimal) })!;
+        public static readonly MethodInfo DecCmp = typeof(decimal).GetMethod(
+            "Compare",
+            new[] { typeof(decimal), typeof(decimal) }
+        )!;
+        public static readonly MethodInfo DecEq = typeof(decimal).GetMethod(
+            "Equals",
+            new[] { typeof(decimal), typeof(decimal) }
+        )!;
         public static readonly MethodInfo DecSub = typeof(decimal).GetMethod("Subtract")!;
         public static readonly MethodInfo DecMul = typeof(decimal).GetMethod("Multiply")!;
         public static readonly MethodInfo DecDiv = typeof(decimal).GetMethod("Divide")!;
         public static readonly MethodInfo DecRem = typeof(decimal).GetMethod("Remainder")!;
         public static readonly MethodInfo DecNeg = typeof(decimal).GetMethod("Negate")!;
         public static readonly MethodInfo QNameEq = typeof(XmlQualifiedName).GetMethod("Equals")!;
-        public static readonly MethodInfo StrEq = typeof(string).GetMethod("Equals", new[] { typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StrCat2 = typeof(string).GetMethod("Concat", new[] { typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StrCat3 = typeof(string).GetMethod("Concat", new[] { typeof(string), typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StrCat4 = typeof(string).GetMethod("Concat", new[] { typeof(string), typeof(string), typeof(string), typeof(string) })!;
-        public static readonly MethodInfo StrCmp = typeof(string).GetMethod("CompareOrdinal", new[] { typeof(string), typeof(string) })!;
+        public static readonly MethodInfo StrEq = typeof(string).GetMethod(
+            "Equals",
+            new[] { typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StrCat2 = typeof(string).GetMethod(
+            "Concat",
+            new[] { typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StrCat3 = typeof(string).GetMethod(
+            "Concat",
+            new[] { typeof(string), typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StrCat4 = typeof(string).GetMethod(
+            "Concat",
+            new[] { typeof(string), typeof(string), typeof(string), typeof(string) }
+        )!;
+        public static readonly MethodInfo StrCmp = typeof(string).GetMethod(
+            "CompareOrdinal",
+            new[] { typeof(string), typeof(string) }
+        )!;
         public static readonly MethodInfo StrLen = typeof(string).GetMethod("get_Length")!;
 
         // XsltConvert
-        public static readonly MethodInfo DblToDec = typeof(XsltConvert).GetMethod("ToDecimal", new[] { typeof(double) })!;
-        public static readonly MethodInfo DblToInt = typeof(XsltConvert).GetMethod("ToInt", new[] { typeof(double) })!;
-        public static readonly MethodInfo DblToLng = typeof(XsltConvert).GetMethod("ToLong", new[] { typeof(double) })!;
-        public static readonly MethodInfo DblToStr = typeof(XsltConvert).GetMethod("ToString", new[] { typeof(double) })!;
-        public static readonly MethodInfo DecToDbl = typeof(XsltConvert).GetMethod("ToDouble", new[] { typeof(decimal) })!;
-        public static readonly MethodInfo DTToStr = typeof(XsltConvert).GetMethod("ToString", new[] { typeof(DateTime) })!;
-        public static readonly MethodInfo IntToDbl = typeof(XsltConvert).GetMethod("ToDouble", new[] { typeof(int) })!;
-        public static readonly MethodInfo LngToDbl = typeof(XsltConvert).GetMethod("ToDouble", new[] { typeof(long) })!;
-        public static readonly MethodInfo StrToDbl = typeof(XsltConvert).GetMethod("ToDouble", new[] { typeof(string) })!;
-        public static readonly MethodInfo StrToDT = typeof(XsltConvert).GetMethod("ToDateTime", new[] { typeof(string) })!;
+        public static readonly MethodInfo DblToDec = typeof(XsltConvert).GetMethod(
+            "ToDecimal",
+            new[] { typeof(double) }
+        )!;
+        public static readonly MethodInfo DblToInt = typeof(XsltConvert).GetMethod(
+            "ToInt",
+            new[] { typeof(double) }
+        )!;
+        public static readonly MethodInfo DblToLng = typeof(XsltConvert).GetMethod(
+            "ToLong",
+            new[] { typeof(double) }
+        )!;
+        public static readonly MethodInfo DblToStr = typeof(XsltConvert).GetMethod(
+            "ToString",
+            new[] { typeof(double) }
+        )!;
+        public static readonly MethodInfo DecToDbl = typeof(XsltConvert).GetMethod(
+            "ToDouble",
+            new[] { typeof(decimal) }
+        )!;
+        public static readonly MethodInfo DTToStr = typeof(XsltConvert).GetMethod(
+            "ToString",
+            new[] { typeof(DateTime) }
+        )!;
+        public static readonly MethodInfo IntToDbl = typeof(XsltConvert).GetMethod(
+            "ToDouble",
+            new[] { typeof(int) }
+        )!;
+        public static readonly MethodInfo LngToDbl = typeof(XsltConvert).GetMethod(
+            "ToDouble",
+            new[] { typeof(long) }
+        )!;
+        public static readonly MethodInfo StrToDbl = typeof(XsltConvert).GetMethod(
+            "ToDouble",
+            new[] { typeof(string) }
+        )!;
+        public static readonly MethodInfo StrToDT = typeof(XsltConvert).GetMethod(
+            "ToDateTime",
+            new[] { typeof(string) }
+        )!;
 
-        public static readonly MethodInfo ItemToBool = typeof(XsltConvert).GetMethod("ToBoolean", new[] { typeof(XPathItem) })!;
-        public static readonly MethodInfo ItemToDbl = typeof(XsltConvert).GetMethod("ToDouble", new[] { typeof(XPathItem) })!;
-        public static readonly MethodInfo ItemToStr = typeof(XsltConvert).GetMethod("ToString", new[] { typeof(XPathItem) })!;
-        public static readonly MethodInfo ItemToNode = typeof(XsltConvert).GetMethod("ToNode", new[] { typeof(XPathItem) })!;
-        public static readonly MethodInfo ItemToNodes = typeof(XsltConvert).GetMethod("ToNodeSet", new[] { typeof(XPathItem) })!;
+        public static readonly MethodInfo ItemToBool = typeof(XsltConvert).GetMethod(
+            "ToBoolean",
+            new[] { typeof(XPathItem) }
+        )!;
+        public static readonly MethodInfo ItemToDbl = typeof(XsltConvert).GetMethod(
+            "ToDouble",
+            new[] { typeof(XPathItem) }
+        )!;
+        public static readonly MethodInfo ItemToStr = typeof(XsltConvert).GetMethod(
+            "ToString",
+            new[] { typeof(XPathItem) }
+        )!;
+        public static readonly MethodInfo ItemToNode = typeof(XsltConvert).GetMethod(
+            "ToNode",
+            new[] { typeof(XPathItem) }
+        )!;
+        public static readonly MethodInfo ItemToNodes = typeof(XsltConvert).GetMethod(
+            "ToNodeSet",
+            new[] { typeof(XPathItem) }
+        )!;
 
-        public static readonly MethodInfo ItemsToBool = typeof(XsltConvert).GetMethod("ToBoolean", new[] { typeof(IList<XPathItem>) })!;
-        public static readonly MethodInfo ItemsToDbl = typeof(XsltConvert).GetMethod("ToDouble", new[] { typeof(IList<XPathItem>) })!;
-        public static readonly MethodInfo ItemsToNode = typeof(XsltConvert).GetMethod("ToNode", new[] { typeof(IList<XPathItem>) })!;
-        public static readonly MethodInfo ItemsToNodes = typeof(XsltConvert).GetMethod("ToNodeSet", new[] { typeof(IList<XPathItem>) })!;
-        public static readonly MethodInfo ItemsToStr = typeof(XsltConvert).GetMethod("ToString", new[] { typeof(IList<XPathItem>) })!;
+        public static readonly MethodInfo ItemsToBool = typeof(XsltConvert).GetMethod(
+            "ToBoolean",
+            new[] { typeof(IList<XPathItem>) }
+        )!;
+        public static readonly MethodInfo ItemsToDbl = typeof(XsltConvert).GetMethod(
+            "ToDouble",
+            new[] { typeof(IList<XPathItem>) }
+        )!;
+        public static readonly MethodInfo ItemsToNode = typeof(XsltConvert).GetMethod(
+            "ToNode",
+            new[] { typeof(IList<XPathItem>) }
+        )!;
+        public static readonly MethodInfo ItemsToNodes = typeof(XsltConvert).GetMethod(
+            "ToNodeSet",
+            new[] { typeof(IList<XPathItem>) }
+        )!;
+        public static readonly MethodInfo ItemsToStr = typeof(XsltConvert).GetMethod(
+            "ToString",
+            new[] { typeof(IList<XPathItem>) }
+        )!;
 
         // StringConcat
         public static readonly MethodInfo StrCatCat = typeof(StringConcat).GetMethod("Concat")!;
         public static readonly MethodInfo StrCatClear = typeof(StringConcat).GetMethod("Clear")!;
-        public static readonly MethodInfo StrCatResult = typeof(StringConcat).GetMethod("GetResult")!;
-        public static readonly MethodInfo StrCatDelim = typeof(StringConcat).GetMethod("set_Delimiter")!;
+        public static readonly MethodInfo StrCatResult = typeof(StringConcat).GetMethod(
+            "GetResult"
+        )!;
+        public static readonly MethodInfo StrCatDelim = typeof(StringConcat).GetMethod(
+            "set_Delimiter"
+        )!;
 
         // XmlILStorageConverter
-        public static readonly MethodInfo NavsToItems = typeof(XmlILStorageConverter).GetMethod("NavigatorsToItems")!;
-        public static readonly MethodInfo ItemsToNavs = typeof(XmlILStorageConverter).GetMethod("ItemsToNavigators")!;
+        public static readonly MethodInfo NavsToItems = typeof(XmlILStorageConverter).GetMethod(
+            "NavigatorsToItems"
+        )!;
+        public static readonly MethodInfo ItemsToNavs = typeof(XmlILStorageConverter).GetMethod(
+            "ItemsToNavigators"
+        )!;
 
         // XmlQueryNodeSequence
-        public static readonly MethodInfo SetDod = typeof(XmlQueryNodeSequence).GetMethod("set_IsDocOrderDistinct")!;
+        public static readonly MethodInfo SetDod = typeof(XmlQueryNodeSequence).GetMethod(
+            "set_IsDocOrderDistinct"
+        )!;
 
         // Miscellaneous
-        public static readonly MethodInfo GetTypeFromHandle = typeof(Type).GetMethod("GetTypeFromHandle")!;
-        public static readonly MethodInfo InitializeArray = typeof(System.Runtime.CompilerServices.RuntimeHelpers).GetMethod("InitializeArray")!;
-        public static readonly Dictionary<Type, XmlILStorageMethods> StorageMethods = new Dictionary<Type, XmlILStorageMethods>(13)
-        {
-            { typeof(string), new XmlILStorageMethods(typeof(string)) },
-            { typeof(bool), new XmlILStorageMethods(typeof(bool)) },
-            { typeof(int), new XmlILStorageMethods(typeof(int)) },
-            { typeof(long), new XmlILStorageMethods(typeof(long)) },
-            { typeof(decimal), new XmlILStorageMethods(typeof(decimal)) },
-            { typeof(double), new XmlILStorageMethods(typeof(double)) },
-            { typeof(float), new XmlILStorageMethods(typeof(float)) },
-            { typeof(DateTime), new XmlILStorageMethods(typeof(DateTime)) },
-            { typeof(byte[]), new XmlILStorageMethods(typeof(byte[])) },
-            { typeof(XmlQualifiedName), new XmlILStorageMethods(typeof(XmlQualifiedName)) },
-            { typeof(TimeSpan), new XmlILStorageMethods(typeof(TimeSpan)) },
-            { typeof(XPathItem), new XmlILStorageMethods(typeof(XPathItem)) },
-            { typeof(XPathNavigator), new XmlILStorageMethods(typeof(XPathNavigator)) },
-        };
+        public static readonly MethodInfo GetTypeFromHandle = typeof(Type).GetMethod(
+            "GetTypeFromHandle"
+        )!;
+        public static readonly MethodInfo InitializeArray =
+            typeof(System.Runtime.CompilerServices.RuntimeHelpers).GetMethod("InitializeArray")!;
+        public static readonly Dictionary<Type, XmlILStorageMethods> StorageMethods =
+            new Dictionary<Type, XmlILStorageMethods>(13)
+            {
+                { typeof(string), new XmlILStorageMethods(typeof(string)) },
+                { typeof(bool), new XmlILStorageMethods(typeof(bool)) },
+                { typeof(int), new XmlILStorageMethods(typeof(int)) },
+                { typeof(long), new XmlILStorageMethods(typeof(long)) },
+                { typeof(decimal), new XmlILStorageMethods(typeof(decimal)) },
+                { typeof(double), new XmlILStorageMethods(typeof(double)) },
+                { typeof(float), new XmlILStorageMethods(typeof(float)) },
+                { typeof(DateTime), new XmlILStorageMethods(typeof(DateTime)) },
+                { typeof(byte[]), new XmlILStorageMethods(typeof(byte[])) },
+                { typeof(XmlQualifiedName), new XmlILStorageMethods(typeof(XmlQualifiedName)) },
+                { typeof(TimeSpan), new XmlILStorageMethods(typeof(TimeSpan)) },
+                { typeof(XPathItem), new XmlILStorageMethods(typeof(XPathItem)) },
+                { typeof(XPathNavigator), new XmlILStorageMethods(typeof(XPathNavigator)) },
+            };
     }
-
 
     /// <summary>
     /// When named nodes are constructed, there are several possible ways for their names to be created.
     /// </summary>
     internal enum GenerateNameType
     {
-        LiteralLocalName,       // Local name is a literal string; namespace is null
-        LiteralName,            // All parts of the name are literal strings
-        CopiedName,             // Name should be copied from a navigator
-        TagNameAndMappings,     // Tagname contains prefix:localName and prefix is mapped to a namespace
-        TagNameAndNamespace,    // Tagname contains prefix:localName and namespace is provided
-        QName,                  // Name is computed QName (no prefix available)
-        StackName,              // Element name has already been pushed onto XmlQueryOutput stack
+        LiteralLocalName, // Local name is a literal string; namespace is null
+        LiteralName, // All parts of the name are literal strings
+        CopiedName, // Name should be copied from a navigator
+        TagNameAndMappings, // Tagname contains prefix:localName and prefix is mapped to a namespace
+        TagNameAndNamespace, // Tagname contains prefix:localName and namespace is provided
+        QName, // Name is computed QName (no prefix available)
+        StackName, // Element name has already been pushed onto XmlQueryOutput stack
     }
 
     /// <summary>
@@ -597,7 +1054,6 @@ namespace System.Xml.Xsl.IlGen
                 DebugEndScope();
         }
 
-
         //-----------------------------------------------
         // Helper Global Methods
         //-----------------------------------------------
@@ -625,7 +1081,6 @@ namespace System.Xml.Xsl.IlGen
             get { return _staticData; }
         }
 
-
         //-----------------------------------------------
         // Constants
         //-----------------------------------------------
@@ -648,7 +1103,6 @@ namespace System.Xml.Xsl.IlGen
             Emit(OpCodes.Ldtoken, clrTyp);
             Call(XmlILMethods.GetTypeFromHandle);
         }
-
 
         //-----------------------------------------------
         // Local variables
@@ -692,7 +1146,6 @@ namespace System.Xml.Xsl.IlGen
         {
             Emit(OpCodes.Ldloc, _locXOut!);
         }
-
 
         //-----------------------------------------------
         // Parameters
@@ -740,7 +1193,6 @@ namespace System.Xml.Xsl.IlGen
             }
             MarkLabel(lblMark);
         }
-
 
         //-----------------------------------------------
         // Comparison
@@ -793,7 +1245,6 @@ namespace System.Xml.Xsl.IlGen
             MarkLabel(lblDone);
         }
 
-
         //-----------------------------------------------
         // Frequently used method and function calls
         //-----------------------------------------------
@@ -829,7 +1280,10 @@ namespace System.Xml.Xsl.IlGen
                     retType = meth.ReturnType.Name;
                 }
 
-                _writerDump!.WriteLine("  {0, -10} {1} {2}({3})", new object?[] { opcode.Name, retType, meth.Name, strBldr.ToString() });
+                _writerDump!.WriteLine(
+                    "  {0, -10} {1} {2}({3})",
+                    new object?[] { opcode.Name, retType, meth.Name, strBldr.ToString() }
+                );
             }
 #endif
         }
@@ -893,13 +1347,19 @@ namespace System.Xml.Xsl.IlGen
             if (clrTypeSrc.IsValueType)
             {
                 // If source is a value type, then destination may only be typeof(object), so box
-                Debug.Assert(clrTypeDst == typeof(object), "Invalid cast, since value types do not allow inheritance.");
+                Debug.Assert(
+                    clrTypeDst == typeof(object),
+                    "Invalid cast, since value types do not allow inheritance."
+                );
                 Emit(OpCodes.Box, clrTypeSrc);
             }
             else if (clrTypeDst.IsValueType)
             {
                 // If destination type is value type, then source may only be typeof(object), so unbox
-                Debug.Assert(clrTypeSrc == typeof(object), "Invalid cast, since value types do not allow inheritance.");
+                Debug.Assert(
+                    clrTypeSrc == typeof(object),
+                    "Invalid cast, since value types do not allow inheritance."
+                );
                 Emit(OpCodes.Unbox, clrTypeDst);
                 Emit(OpCodes.Ldobj, clrTypeDst);
             }
@@ -907,12 +1367,14 @@ namespace System.Xml.Xsl.IlGen
             {
                 // If source is not a value type, and destination type is typeof(object), then no-op
                 // Otherwise, use Castclass to change the static type
-                Debug.Assert(clrTypeSrc.IsAssignableFrom(clrTypeDst) || clrTypeDst.IsAssignableFrom(clrTypeSrc),
-                             "Invalid cast, since source type and destination type are not in same inheritance hierarchy.");
+                Debug.Assert(
+                    clrTypeSrc.IsAssignableFrom(clrTypeDst)
+                        || clrTypeDst.IsAssignableFrom(clrTypeSrc),
+                    "Invalid cast, since source type and destination type are not in same inheritance hierarchy."
+                );
                 Emit(OpCodes.Castclass, clrTypeDst);
             }
         }
-
 
         //-----------------------------------------------
         // Datatype methods
@@ -920,7 +1382,11 @@ namespace System.Xml.Xsl.IlGen
 
         public void ConstructLiteralDecimal(decimal dec)
         {
-            if (dec >= (decimal)int.MinValue && dec <= (decimal)int.MaxValue && decimal.Truncate(dec) == dec)
+            if (
+                dec >= (decimal)int.MinValue
+                && dec <= (decimal)int.MaxValue
+                && decimal.Truncate(dec) == dec
+            )
             {
                 // Decimal can be constructed from a 32-bit integer
                 LoadInteger((int)dec);
@@ -958,33 +1424,63 @@ namespace System.Xml.Xsl.IlGen
                 case XmlTypeCode.Float:
                     switch (opType)
                     {
-                        case QilNodeType.Add: Emit(OpCodes.Add); break;
-                        case QilNodeType.Subtract: Emit(OpCodes.Sub); break;
-                        case QilNodeType.Multiply: Emit(OpCodes.Mul); break;
-                        case QilNodeType.Divide: Emit(OpCodes.Div); break;
-                        case QilNodeType.Modulo: Emit(OpCodes.Rem); break;
-                        case QilNodeType.Negate: Emit(OpCodes.Neg); break;
-                        default: Debug.Fail($"{opType} must be an arithmetic operation."); break;
+                        case QilNodeType.Add:
+                            Emit(OpCodes.Add);
+                            break;
+                        case QilNodeType.Subtract:
+                            Emit(OpCodes.Sub);
+                            break;
+                        case QilNodeType.Multiply:
+                            Emit(OpCodes.Mul);
+                            break;
+                        case QilNodeType.Divide:
+                            Emit(OpCodes.Div);
+                            break;
+                        case QilNodeType.Modulo:
+                            Emit(OpCodes.Rem);
+                            break;
+                        case QilNodeType.Negate:
+                            Emit(OpCodes.Neg);
+                            break;
+                        default:
+                            Debug.Fail($"{opType} must be an arithmetic operation.");
+                            break;
                     }
                     break;
 
                 case XmlTypeCode.Decimal:
                     switch (opType)
                     {
-                        case QilNodeType.Add: meth = XmlILMethods.DecAdd; break;
-                        case QilNodeType.Subtract: meth = XmlILMethods.DecSub; break;
-                        case QilNodeType.Multiply: meth = XmlILMethods.DecMul; break;
-                        case QilNodeType.Divide: meth = XmlILMethods.DecDiv; break;
-                        case QilNodeType.Modulo: meth = XmlILMethods.DecRem; break;
-                        case QilNodeType.Negate: meth = XmlILMethods.DecNeg; break;
-                        default: Debug.Fail($"{opType} must be an arithmetic operation."); break;
+                        case QilNodeType.Add:
+                            meth = XmlILMethods.DecAdd;
+                            break;
+                        case QilNodeType.Subtract:
+                            meth = XmlILMethods.DecSub;
+                            break;
+                        case QilNodeType.Multiply:
+                            meth = XmlILMethods.DecMul;
+                            break;
+                        case QilNodeType.Divide:
+                            meth = XmlILMethods.DecDiv;
+                            break;
+                        case QilNodeType.Modulo:
+                            meth = XmlILMethods.DecRem;
+                            break;
+                        case QilNodeType.Negate:
+                            meth = XmlILMethods.DecNeg;
+                            break;
+                        default:
+                            Debug.Fail($"{opType} must be an arithmetic operation.");
+                            break;
                     }
 
                     Call(meth);
                     break;
 
                 default:
-                    Debug.Fail($"The {opType} arithmetic operation cannot be performed on values of type {code}.");
+                    Debug.Fail(
+                        $"The {opType} arithmetic operation cannot be performed on values of type {code}."
+                    );
                     break;
             }
         }
@@ -995,9 +1491,15 @@ namespace System.Xml.Xsl.IlGen
 
             switch (code)
             {
-                case XmlTypeCode.String: meth = XmlILMethods.StrEq; break;
-                case XmlTypeCode.QName: meth = XmlILMethods.QNameEq; break;
-                case XmlTypeCode.Decimal: meth = XmlILMethods.DecEq; break;
+                case XmlTypeCode.String:
+                    meth = XmlILMethods.StrEq;
+                    break;
+                case XmlTypeCode.QName:
+                    meth = XmlILMethods.QNameEq;
+                    break;
+                case XmlTypeCode.Decimal:
+                    meth = XmlILMethods.DecEq;
+                    break;
                 default:
                     Debug.Fail($"Type {code} does not support the equals operation.");
                     break;
@@ -1012,8 +1514,12 @@ namespace System.Xml.Xsl.IlGen
 
             switch (code)
             {
-                case XmlTypeCode.String: meth = XmlILMethods.StrCmp; break;
-                case XmlTypeCode.Decimal: meth = XmlILMethods.DecCmp; break;
+                case XmlTypeCode.String:
+                    meth = XmlILMethods.StrCmp;
+                    break;
+                case XmlTypeCode.Decimal:
+                    meth = XmlILMethods.DecCmp;
+                    break;
                 default:
                     Debug.Fail($"Type {code} does not support the equals operation.");
                     break;
@@ -1021,7 +1527,6 @@ namespace System.Xml.Xsl.IlGen
 
             Call(meth);
         }
-
 
         //-----------------------------------------------
         // XmlQueryRuntime function calls
@@ -1134,7 +1639,6 @@ namespace System.Xml.Xsl.IlGen
             Debug.Assert(_locXOut != null);
         }
 
-
         //-----------------------------------------------
         // XmlQueryContext function calls
         //-----------------------------------------------
@@ -1188,13 +1692,27 @@ namespace System.Xml.Xsl.IlGen
                 // Then call XmlQueryOutput.WriteStartElement
                 switch (nameType)
                 {
-                    case GenerateNameType.LiteralLocalName: meth = XmlILMethods.StartElemLocName; break;
-                    case GenerateNameType.LiteralName: meth = XmlILMethods.StartElemLitName; break;
-                    case GenerateNameType.CopiedName: meth = XmlILMethods.StartElemCopyName; break;
-                    case GenerateNameType.TagNameAndMappings: meth = XmlILMethods.StartElemMapName; break;
-                    case GenerateNameType.TagNameAndNamespace: meth = XmlILMethods.StartElemNmspName; break;
-                    case GenerateNameType.QName: meth = XmlILMethods.StartElemQName; break;
-                    default: Debug.Fail($"{nameType} is invalid here."); break;
+                    case GenerateNameType.LiteralLocalName:
+                        meth = XmlILMethods.StartElemLocName;
+                        break;
+                    case GenerateNameType.LiteralName:
+                        meth = XmlILMethods.StartElemLitName;
+                        break;
+                    case GenerateNameType.CopiedName:
+                        meth = XmlILMethods.StartElemCopyName;
+                        break;
+                    case GenerateNameType.TagNameAndMappings:
+                        meth = XmlILMethods.StartElemMapName;
+                        break;
+                    case GenerateNameType.TagNameAndNamespace:
+                        meth = XmlILMethods.StartElemNmspName;
+                        break;
+                    case GenerateNameType.QName:
+                        meth = XmlILMethods.StartElemQName;
+                        break;
+                    default:
+                        Debug.Fail($"{nameType} is invalid here.");
+                        break;
                 }
             }
             else
@@ -1202,9 +1720,15 @@ namespace System.Xml.Xsl.IlGen
                 // Else call XmlQueryOutput.WriteStartElementUnchecked
                 switch (nameType)
                 {
-                    case GenerateNameType.LiteralLocalName: meth = XmlILMethods.StartElemLocNameUn; break;
-                    case GenerateNameType.LiteralName: meth = XmlILMethods.StartElemLitNameUn; break;
-                    default: Debug.Fail($"{nameType} is invalid here."); break;
+                    case GenerateNameType.LiteralLocalName:
+                        meth = XmlILMethods.StartElemLocNameUn;
+                        break;
+                    case GenerateNameType.LiteralName:
+                        meth = XmlILMethods.StartElemLitNameUn;
+                        break;
+                    default:
+                        Debug.Fail($"{nameType} is invalid here.");
+                        break;
                 }
             }
 
@@ -1226,9 +1750,15 @@ namespace System.Xml.Xsl.IlGen
                 // Else call XmlQueryOutput.WriteEndElementUnchecked
                 switch (nameType)
                 {
-                    case GenerateNameType.LiteralLocalName: meth = XmlILMethods.EndElemLocNameUn; break;
-                    case GenerateNameType.LiteralName: meth = XmlILMethods.EndElemLitNameUn; break;
-                    default: Debug.Fail($"{nameType} is invalid here."); break;
+                    case GenerateNameType.LiteralLocalName:
+                        meth = XmlILMethods.EndElemLocNameUn;
+                        break;
+                    case GenerateNameType.LiteralName:
+                        meth = XmlILMethods.EndElemLitNameUn;
+                        break;
+                    default:
+                        Debug.Fail($"{nameType} is invalid here.");
+                        break;
                 }
             }
 
@@ -1251,13 +1781,27 @@ namespace System.Xml.Xsl.IlGen
                 // Then call XmlQueryOutput.WriteStartAttribute
                 switch (nameType)
                 {
-                    case GenerateNameType.LiteralLocalName: meth = XmlILMethods.StartAttrLocName; break;
-                    case GenerateNameType.LiteralName: meth = XmlILMethods.StartAttrLitName; break;
-                    case GenerateNameType.CopiedName: meth = XmlILMethods.StartAttrCopyName; break;
-                    case GenerateNameType.TagNameAndMappings: meth = XmlILMethods.StartAttrMapName; break;
-                    case GenerateNameType.TagNameAndNamespace: meth = XmlILMethods.StartAttrNmspName; break;
-                    case GenerateNameType.QName: meth = XmlILMethods.StartAttrQName; break;
-                    default: Debug.Fail($"{nameType} is invalid here."); break;
+                    case GenerateNameType.LiteralLocalName:
+                        meth = XmlILMethods.StartAttrLocName;
+                        break;
+                    case GenerateNameType.LiteralName:
+                        meth = XmlILMethods.StartAttrLitName;
+                        break;
+                    case GenerateNameType.CopiedName:
+                        meth = XmlILMethods.StartAttrCopyName;
+                        break;
+                    case GenerateNameType.TagNameAndMappings:
+                        meth = XmlILMethods.StartAttrMapName;
+                        break;
+                    case GenerateNameType.TagNameAndNamespace:
+                        meth = XmlILMethods.StartAttrNmspName;
+                        break;
+                    case GenerateNameType.QName:
+                        meth = XmlILMethods.StartAttrQName;
+                        break;
+                    default:
+                        Debug.Fail($"{nameType} is invalid here.");
+                        break;
                 }
             }
             else
@@ -1265,9 +1809,15 @@ namespace System.Xml.Xsl.IlGen
                 // Else call XmlQueryOutput.WriteStartAttributeUnchecked
                 switch (nameType)
                 {
-                    case GenerateNameType.LiteralLocalName: meth = XmlILMethods.StartAttrLocNameUn; break;
-                    case GenerateNameType.LiteralName: meth = XmlILMethods.StartAttrLitNameUn; break;
-                    default: Debug.Fail($"{nameType} is invalid here."); break;
+                    case GenerateNameType.LiteralLocalName:
+                        meth = XmlILMethods.StartAttrLocNameUn;
+                        break;
+                    case GenerateNameType.LiteralName:
+                        meth = XmlILMethods.StartAttrLitNameUn;
+                        break;
+                    default:
+                        Debug.Fail($"{nameType} is invalid here.");
+                        break;
                 }
             }
 
@@ -1350,7 +1900,6 @@ namespace System.Xml.Xsl.IlGen
             Call(XmlILMethods.EndComment);
         }
 
-
         //-----------------------------------------------
         // Item caching methods
         //-----------------------------------------------
@@ -1365,7 +1914,6 @@ namespace System.Xml.Xsl.IlGen
         {
             Call(XmlILMethods.StorageMethods[itemStorageType].IListItem);
         }
-
 
         //-----------------------------------------------
         // XPathItem properties and methods
@@ -1393,7 +1941,6 @@ namespace System.Xml.Xsl.IlGen
             }
         }
 
-
         //-----------------------------------------------
         // XmlSortKeyAccumulator methods
         //-----------------------------------------------
@@ -1412,13 +1959,27 @@ namespace System.Xml.Xsl.IlGen
 
                 switch (keyType.TypeCode)
                 {
-                    case XmlTypeCode.String: meth = XmlILMethods.SortKeyString; break;
-                    case XmlTypeCode.Decimal: meth = XmlILMethods.SortKeyDecimal; break;
-                    case XmlTypeCode.Integer: meth = XmlILMethods.SortKeyInteger; break;
-                    case XmlTypeCode.Int: meth = XmlILMethods.SortKeyInt; break;
-                    case XmlTypeCode.Boolean: meth = XmlILMethods.SortKeyInt; break;
-                    case XmlTypeCode.Double: meth = XmlILMethods.SortKeyDouble; break;
-                    case XmlTypeCode.DateTime: meth = XmlILMethods.SortKeyDateTime; break;
+                    case XmlTypeCode.String:
+                        meth = XmlILMethods.SortKeyString;
+                        break;
+                    case XmlTypeCode.Decimal:
+                        meth = XmlILMethods.SortKeyDecimal;
+                        break;
+                    case XmlTypeCode.Integer:
+                        meth = XmlILMethods.SortKeyInteger;
+                        break;
+                    case XmlTypeCode.Int:
+                        meth = XmlILMethods.SortKeyInt;
+                        break;
+                    case XmlTypeCode.Boolean:
+                        meth = XmlILMethods.SortKeyInt;
+                        break;
+                    case XmlTypeCode.Double:
+                        meth = XmlILMethods.SortKeyDouble;
+                        break;
+                    case XmlTypeCode.DateTime:
+                        meth = XmlILMethods.SortKeyDateTime;
+                        break;
 
                     case XmlTypeCode.None:
                         // Empty sequence, so this path will never actually be taken
@@ -1438,7 +1999,6 @@ namespace System.Xml.Xsl.IlGen
 
             Call(meth);
         }
-
 
         //-----------------------------------------------
         // Debugging information output
@@ -1520,7 +2080,13 @@ namespace System.Xml.Xsl.IlGen
                         _sourceFile = sourceFile;
                         _writerDump!.WriteLine("// Source File '{0}'", _sourceFile);
                     }
-                    _writerDump!.WriteLine("//[{0},{1} -- {2},{3}]", sourceInfo.Start.Line, sourceInfo.Start.Pos, sourceInfo.End.Line, sourceInfo.End.Pos);
+                    _writerDump!.WriteLine(
+                        "//[{0},{1} -- {2},{3}]",
+                        sourceInfo.Start.Line,
+                        sourceInfo.Start.Pos,
+                        sourceInfo.End.Line,
+                        sourceInfo.End.Pos
+                    );
                 }
             }
 #endif
@@ -1528,7 +2094,6 @@ namespace System.Xml.Xsl.IlGen
             //this.ilgen.MarkSequencePoint(symDoc, sourceInfo.Start.Line, sourceInfo.Start.Pos, sourceInfo.End.Line, sourceInfo.End.Pos);
             _lastSourceInfo = sourceInfo;
         }
-
 
         //-----------------------------------------------
         // Pass through to ILGenerator
@@ -1610,7 +2175,10 @@ namespace System.Xml.Xsl.IlGen
 
         public void Emit(OpCode opcode, int intVal)
         {
-            Debug.Assert(opcode.OperandType == OperandType.InlineI || opcode.OperandType == OperandType.InlineVar);
+            Debug.Assert(
+                opcode.OperandType == OperandType.InlineI
+                    || opcode.OperandType == OperandType.InlineVar
+            );
 #if DEBUG
             if (XmlILTrace.IsEnabled)
                 _writerDump!.WriteLine("  {0, -10} {1}", opcode.Name, intVal);
@@ -1630,7 +2198,10 @@ namespace System.Xml.Xsl.IlGen
 
         public void Emit(OpCode opcode, Label lblVal)
         {
-            Debug.Assert(!opcode.Equals(OpCodes.Br) && !opcode.Equals(OpCodes.Br_S), "Use EmitUnconditionalBranch and be careful not to emit unverifiable code.");
+            Debug.Assert(
+                !opcode.Equals(OpCodes.Br) && !opcode.Equals(OpCodes.Br_S),
+                "Use EmitUnconditionalBranch and be careful not to emit unverifiable code."
+            );
 #if DEBUG
             if (XmlILTrace.IsEnabled)
                 _writerDump!.WriteLine("  {0, -10} Label {1}", opcode.Name, _symbols![lblVal]);
@@ -1643,7 +2214,11 @@ namespace System.Xml.Xsl.IlGen
 #if DEBUG
             if (XmlILTrace.IsEnabled)
             {
-                _writerDump!.Write("  {0, -10} (Label {1}", opcode.Name, arrLabels.Length != 0 ? _symbols![arrLabels[0]]!.ToString() : "");
+                _writerDump!.Write(
+                    "  {0, -10} (Label {1}",
+                    opcode.Name,
+                    arrLabels.Length != 0 ? _symbols![arrLabels[0]]!.ToString() : ""
+                );
                 for (int i = 1; i < arrLabels.Length; i++)
                 {
                     _writerDump.Write(", Label {0}", _symbols![arrLabels[i]]);
@@ -1658,7 +2233,12 @@ namespace System.Xml.Xsl.IlGen
         {
 #if DEBUG
             if (XmlILTrace.IsEnabled)
-                _writerDump!.WriteLine("  {0, -10} {1} ({2})", opcode.Name, _symbols![locBldr], locBldr.LocalType.Name);
+                _writerDump!.WriteLine(
+                    "  {0, -10} {1} ({2})",
+                    opcode.Name,
+                    _symbols![locBldr],
+                    locBldr.LocalType.Name
+                );
 #endif
             _ilgen!.Emit(opcode, locBldr);
         }
@@ -1731,8 +2311,12 @@ namespace System.Xml.Xsl.IlGen
         {
             if (!opcode.Equals(OpCodes.Br) && !opcode.Equals(OpCodes.Br_S))
             {
-                Debug.Assert(opcode.Equals(OpCodes.Brtrue) || opcode.Equals(OpCodes.Brtrue_S) ||
-                             opcode.Equals(OpCodes.Brfalse) || opcode.Equals(OpCodes.Brfalse_S));
+                Debug.Assert(
+                    opcode.Equals(OpCodes.Brtrue)
+                        || opcode.Equals(OpCodes.Brtrue_S)
+                        || opcode.Equals(OpCodes.Brfalse)
+                        || opcode.Equals(OpCodes.Brfalse_S)
+                );
                 Emit(OpCodes.Ldc_I4_1);
             }
 
@@ -1742,7 +2326,10 @@ namespace System.Xml.Xsl.IlGen
 #endif
             _ilgen!.Emit(opcode, lblTarget);
 
-            if (_lastSourceInfo != null && (opcode.Equals(OpCodes.Br) || opcode.Equals(OpCodes.Br_S)))
+            if (
+                _lastSourceInfo != null
+                && (opcode.Equals(OpCodes.Br) || opcode.Equals(OpCodes.Br_S))
+            )
             {
                 // Emit a "no source" sequence point, otherwise the following label will be preceded
                 // with a dead Nop operation, which may lead to unverifiable code (SQLBUDT 423393).

@@ -19,7 +19,8 @@ public class ContextInformation
         _factory = factory;
     }
 
-    public IDictionary<IPage, PageInformation> Pages { get; } = new Dictionary<IPage, PageInformation>();
+    public IDictionary<IPage, PageInformation> Pages { get; } =
+        new Dictionary<IPage, PageInformation>();
 
     internal void Attach(IBrowserContext context)
     {
@@ -49,7 +50,9 @@ public class ContextInformation
         }
     }
 
-    internal BrowserNewContextOptions ConfigureUniqueHarPath(BrowserNewContextOptions browserContextOptions)
+    internal BrowserNewContextOptions ConfigureUniqueHarPath(
+        BrowserNewContextOptions browserContextOptions
+    )
     {
         var uploadDir = Environment.GetEnvironmentVariable("HELIX_WORKITEM_UPLOAD_ROOT");
         if (browserContextOptions?.RecordHarPath != null)
@@ -57,7 +60,8 @@ public class ContextInformation
             var identifier = Guid.NewGuid().ToString("N");
             browserContextOptions.RecordHarPath = Path.Combine(
                 string.IsNullOrEmpty(uploadDir) ? browserContextOptions.RecordHarPath : uploadDir,
-                $"{identifier}.har");
+                $"{identifier}.har"
+            );
             _harPath = browserContextOptions.RecordHarPath;
         }
 

@@ -18,9 +18,7 @@ public class NoContent : IResult, IEndpointMetadataProvider, IStatusCodeHttpResu
     /// <summary>
     /// Initializes a new instance of the <see cref="NoContent"/> class.
     /// </summary>
-    internal NoContent()
-    {
-    }
+    internal NoContent() { }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status204NoContent"/>
@@ -46,11 +44,16 @@ public class NoContent : IResult, IEndpointMetadataProvider, IStatusCodeHttpResu
     }
 
     /// <inheritdoc/>
-    static void IEndpointMetadataProvider.PopulateMetadata(MethodInfo method, EndpointBuilder builder)
+    static void IEndpointMetadataProvider.PopulateMetadata(
+        MethodInfo method,
+        EndpointBuilder builder
+    )
     {
         ArgumentNullException.ThrowIfNull(method);
         ArgumentNullException.ThrowIfNull(builder);
 
-        builder.Metadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status204NoContent, typeof(void)));
+        builder.Metadata.Add(
+            new ProducesResponseTypeMetadata(StatusCodes.Status204NoContent, typeof(void))
+        );
     }
 }

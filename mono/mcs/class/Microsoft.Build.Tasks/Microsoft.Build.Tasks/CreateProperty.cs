@@ -29,31 +29,31 @@
 using System;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public class CreateProperty : TaskExtension {
-	
-		string[] value;
-	
-		public CreateProperty ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public class CreateProperty : TaskExtension
+    {
+        string[] value;
 
-		public override bool Execute ()
-		{
-			return true;
-		}
+        public CreateProperty() { }
 
-		[Output]
-		public string[] Value {
-			get { return this.@value; }
-			set { this.@value = value; }
-		}
+        public override bool Execute()
+        {
+            return true;
+        }
 
-		[MonoTODO]
-		[Output]
-		public string[] ValueSetByTask {
-			get { return @value; }
-		}
-	}
+        [Output]
+        public string[] Value
+        {
+            get { return this.@value; }
+            set { this.@value = value; }
+        }
+
+        [MonoTODO]
+        [Output]
+        public string[] ValueSetByTask
+        {
+            get { return @value; }
+        }
+    }
 }
-

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
         TConditionalExpressionSyntax,
         TBinaryExpressionSyntax,
         TMemberAccessExpression,
-        TPrefixUnaryExpressionSyntax> : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+        TPrefixUnaryExpressionSyntax
+    > : AbstractBuiltInCodeStyleDiagnosticAnalyzer
         where TSyntaxKind : struct
         where TExpressionSyntax : SyntaxNode
         where TConditionalExpressionSyntax : TExpressionSyntax
@@ -28,25 +29,39 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
         where TPrefixUnaryExpressionSyntax : TExpressionSyntax
     {
         protected AbstractUseCoalesceExpressionForNullableTernaryConditionalCheckDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseCoalesceExpressionForNullableTernaryConditionalCheckDiagnosticId,
-                   EnforceOnBuildValues.UseCoalesceExpressionForNullable,
-                   CodeStyleOptions2.PreferCoalesceExpression,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Use_coalesce_expression), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Null_check_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseCoalesceExpressionForNullableTernaryConditionalCheckDiagnosticId,
+                EnforceOnBuildValues.UseCoalesceExpressionForNullable,
+                CodeStyleOptions2.PreferCoalesceExpression,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_coalesce_expression),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Null_check_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected abstract ISyntaxFacts GetSyntaxFacts();
-        protected abstract bool IsTargetTyped(SemanticModel semanticModel, TConditionalExpressionSyntax conditional, System.Threading.CancellationToken cancellationToken);
+        protected abstract bool IsTargetTyped(
+            SemanticModel semanticModel,
+            TConditionalExpressionSyntax conditional,
+            System.Threading.CancellationToken cancellationToken
+        );
 
         protected override void InitializeWorker(AnalysisContext context)
         {
             var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
-            context.RegisterSyntaxNodeAction(AnalyzeSyntax,
-                syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.TernaryConditionalExpression));
+            context.RegisterSyntaxNodeAction(
+                AnalyzeSyntax,
+                syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.TernaryConditionalExpression)
+            );
         }
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
@@ -61,7 +76,11 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
 
             var syntaxFacts = GetSyntaxFacts();
             syntaxFacts.GetPartsOfConditionalExpression(
-                conditionalExpression, out var conditionNode, out var whenTrueNodeHigh, out var whenFalseNodeHigh);
+                conditionalExpression,
+                out var conditionNode,
+                out var whenTrueNodeHigh,
+                out var whenFalseNodeHigh
+            );
 
             conditionNode = syntaxFacts.WalkDownParentheses(conditionNode);
             var whenTrueNodeLow = syntaxFacts.WalkDownParentheses(whenTrueNodeHigh);
@@ -77,8 +96,16 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             if (conditionNode is not TMemberAccessExpression conditionMemberAccess)
                 return;
 
-            syntaxFacts.GetPartsOfMemberAccessExpression(conditionMemberAccess, out var conditionExpression, out var conditionSimpleName);
-            syntaxFacts.GetNameAndArityOfSimpleName(conditionSimpleName, out var conditionName, out _);
+            syntaxFacts.GetPartsOfMemberAccessExpression(
+                conditionMemberAccess,
+                out var conditionExpression,
+                out var conditionSimpleName
+            );
+            syntaxFacts.GetNameAndArityOfSimpleName(
+                conditionSimpleName,
+                out var conditionName,
+                out _
+            );
 
             if (conditionName != nameof(Nullable<int>.HasValue))
                 return;
@@ -87,8 +114,16 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             if (whenPartToCheck is not TMemberAccessExpression whenPartMemberAccess)
                 return;
 
-            syntaxFacts.GetPartsOfMemberAccessExpression(whenPartMemberAccess, out var whenPartExpression, out var whenPartSimpleName);
-            syntaxFacts.GetNameAndArityOfSimpleName(whenPartSimpleName, out var whenPartName, out _);
+            syntaxFacts.GetPartsOfMemberAccessExpression(
+                whenPartMemberAccess,
+                out var whenPartExpression,
+                out var whenPartSimpleName
+            );
+            syntaxFacts.GetNameAndArityOfSimpleName(
+                whenPartSimpleName,
+                out var whenPartName,
+                out _
+            );
 
             if (whenPartName != nameof(Nullable<int>.Value))
                 return;
@@ -103,10 +138,12 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             if (IsTargetTyped(semanticModel, conditionalExpression, cancellationToken))
                 return;
 
-            // Syntactically this looks like something we can simplify.  Make sure we're 
-            // actually looking at something Nullable (and not some type that uses a similar 
+            // Syntactically this looks like something we can simplify.  Make sure we're
+            // actually looking at something Nullable (and not some type that uses a similar
             // syntactic pattern).
-            var nullableType = semanticModel.Compilation.GetTypeByMetadataName(typeof(Nullable<>).FullName!);
+            var nullableType = semanticModel.Compilation.GetTypeByMetadataName(
+                typeof(Nullable<>).FullName!
+            );
             if (nullableType == null)
                 return;
 
@@ -119,14 +156,18 @@ namespace Microsoft.CodeAnalysis.UseCoalesceExpression
             var locations = ImmutableArray.Create(
                 conditionalExpression.GetLocation(),
                 conditionExpression.GetLocation(),
-                whenPartToKeep.GetLocation());
+                whenPartToKeep.GetLocation()
+            );
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                conditionalExpression.GetLocation(),
-                option.Notification,
-                locations,
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    conditionalExpression.GetLocation(),
+                    option.Notification,
+                    locations,
+                    properties: null
+                )
+            );
         }
     }
 }

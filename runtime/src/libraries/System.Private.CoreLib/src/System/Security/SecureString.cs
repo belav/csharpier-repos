@@ -52,7 +52,10 @@ namespace System.Security
 
         private SecureString(SecureString str)
         {
-            Debug.Assert(str._buffer != null, "Expected other SecureString's buffer to be non-null");
+            Debug.Assert(
+                str._buffer != null,
+                "Expected other SecureString's buffer to be non-null"
+            );
             Debug.Assert(str._encrypted, "Expected to be used only on encrypted SecureStrings");
 
             _buffer = UnmanagedBuffer.Allocate((int)str._buffer.ByteLength);
@@ -76,7 +79,10 @@ namespace System.Security
         {
             if (capacity > MaxLength)
             {
-                throw new ArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_Capacity);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    SR.ArgumentOutOfRange_Capacity
+                );
             }
 
             Debug.Assert(_buffer != null);
@@ -174,7 +180,10 @@ namespace System.Security
             {
                 if (index < 0 || index > _decryptedLength)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexString);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexString
+                    );
                 }
 
                 EnsureNotDisposed();
@@ -221,7 +230,10 @@ namespace System.Security
             {
                 if (index < 0 || index >= _decryptedLength)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexString);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexString
+                    );
                 }
 
                 EnsureNotDisposed();
@@ -253,7 +265,10 @@ namespace System.Security
             {
                 if (index < 0 || index >= _decryptedLength)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexString);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_IndexString
+                    );
                 }
 
                 EnsureNotDisposed();
@@ -376,7 +391,10 @@ namespace System.Security
 
                     if (unicode)
                     {
-                        Span<char> resultSpan = new Span<char>((void*)ptr, byteLength / sizeof(char));
+                        Span<char> resultSpan = new Span<char>(
+                            (void*)ptr,
+                            byteLength / sizeof(char)
+                        );
                         span.CopyTo(resultSpan);
                         resultSpan[resultSpan.Length - 1] = '\0';
                     }
@@ -419,7 +437,8 @@ namespace System.Security
             private int _byteLength;
 
 #pragma warning disable CA1419 // not intended for use with P/Invoke
-            private UnmanagedBuffer() : base(true) { }
+            private UnmanagedBuffer()
+                : base(true) { }
 #pragma warning restore CA1419
 
             public static UnmanagedBuffer Allocate(int byteLength)
@@ -432,14 +451,19 @@ namespace System.Security
                 return buffer;
             }
 
-            internal static unsafe void Copy(UnmanagedBuffer source, UnmanagedBuffer destination, ulong bytesLength)
+            internal static unsafe void Copy(
+                UnmanagedBuffer source,
+                UnmanagedBuffer destination,
+                ulong bytesLength
+            )
             {
                 if (bytesLength == 0)
                 {
                     return;
                 }
 
-                byte* srcPtr = null, dstPtr = null;
+                byte* srcPtr = null,
+                    dstPtr = null;
                 try
                 {
                     source.AcquirePointer(ref srcPtr);

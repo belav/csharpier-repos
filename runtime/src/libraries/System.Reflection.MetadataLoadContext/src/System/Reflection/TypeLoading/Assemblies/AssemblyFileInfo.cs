@@ -21,7 +21,7 @@ namespace System.Reflection.TypeLoading
         }
 
         public string Name { get; }
-        public int RowIndex { get; }  // 0 for manifest modoule - 1..N for other modules.
+        public int RowIndex { get; } // 0 for manifest modoule - 1..N for other modules.
         public bool ContainsMetadata { get; }
     }
 }

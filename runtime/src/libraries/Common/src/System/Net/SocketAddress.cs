@@ -25,18 +25,12 @@ namespace System.Net
 
         public AddressFamily Family
         {
-            get
-            {
-                return SocketAddressPal.GetAddressFamily(_buffer);
-            }
+            get { return SocketAddressPal.GetAddressFamily(_buffer); }
         }
 
         public int Size
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
             set
             {
                 ArgumentOutOfRangeException.ThrowIfGreaterThan(value, _buffer.Length);
@@ -69,17 +63,17 @@ namespace System.Net
             }
         }
 
-        public static int GetMaximumAddressSize(AddressFamily addressFamily) => addressFamily switch
-        {
-            AddressFamily.InterNetwork => IPv4AddressSize,
-            AddressFamily.InterNetworkV6 => IPv6AddressSize,
-            AddressFamily.Unix => UdsAddressSize,
-            _ => MaxAddressSize
-        };
+        public static int GetMaximumAddressSize(AddressFamily addressFamily) =>
+            addressFamily switch
+            {
+                AddressFamily.InterNetwork => IPv4AddressSize,
+                AddressFamily.InterNetworkV6 => IPv6AddressSize,
+                AddressFamily.Unix => UdsAddressSize,
+                _ => MaxAddressSize,
+            };
 
-        public SocketAddress(AddressFamily family) : this(family, GetMaximumAddressSize(family))
-        {
-        }
+        public SocketAddress(AddressFamily family)
+            : this(family, GetMaximumAddressSize(family)) { }
 
         public SocketAddress(AddressFamily family, int size)
         {
@@ -93,10 +87,15 @@ namespace System.Net
         }
 
         internal SocketAddress(IPAddress ipAddress)
-            : this(ipAddress.AddressFamily,
-                ((ipAddress.AddressFamily == AddressFamily.InterNetwork) ? IPv4AddressSize : IPv6AddressSize))
+            : this(
+                ipAddress.AddressFamily,
+                (
+                    (ipAddress.AddressFamily == AddressFamily.InterNetwork)
+                        ? IPv4AddressSize
+                        : IPv6AddressSize
+                )
+            )
         {
-
             // No Port.
             SocketAddressPal.SetPort(_buffer, 0);
 
@@ -131,17 +130,14 @@ namespace System.Net
         /// </remarks>
         public Memory<byte> Buffer
         {
-            get
-            {
-                return new Memory<byte>(_buffer);
-            }
+            get { return new Memory<byte>(_buffer); }
         }
-
 
         public override bool Equals(object? comparand) =>
             comparand is SocketAddress other && Equals(other);
 
-        public bool Equals(SocketAddress? comparand) => comparand != null && Buffer.Span.SequenceEqual(comparand.Buffer.Span);
+        public bool Equals(SocketAddress? comparand) =>
+            comparand != null && Buffer.Span.SequenceEqual(comparand.Buffer.Span);
 
         public override int GetHashCode()
         {
@@ -158,16 +154,23 @@ namespace System.Net
 
             // Determine the maximum length needed to format.
             int maxLength =
-                familyString.Length + // AddressFamily
-                1 + // :
-                10 + // Size (max length for a positive Int32)
-                2 + // :{
-                (Size - DataOffset) * 4 + // at most ','+3digits per byte
+                familyString.Length
+                + // AddressFamily
+                1
+                + // :
+                10
+                + // Size (max length for a positive Int32)
+                2
+                + // :{
+                (Size - DataOffset) * 4
+                + // at most ','+3digits per byte
                 1; // }
 
-            Span<char> result = maxLength <= 256 ? // arbitrary limit that should be large enough for the vast majority of cases
-                stackalloc char[256] :
-                new char[maxLength];
+            Span<char> result =
+                maxLength <= 256
+                    ? // arbitrary limit that should be large enough for the vast majority of cases
+                    stackalloc char[256]
+                    : new char[maxLength];
 
             familyString.CopyTo(result);
             int length = familyString.Length;

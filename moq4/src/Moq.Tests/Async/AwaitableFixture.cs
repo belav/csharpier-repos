@@ -4,9 +4,7 @@
 namespace Moq.Tests.Async
 {
     using System.Threading.Tasks;
-
     using Moq.Async;
-
     using Xunit;
 
     public class AwaitableFixture

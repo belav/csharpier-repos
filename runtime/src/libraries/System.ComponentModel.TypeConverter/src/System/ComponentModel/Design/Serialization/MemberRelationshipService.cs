@@ -26,7 +26,8 @@ namespace System.ComponentModel.Design.Serialization
     /// </summary>
     public abstract class MemberRelationshipService
     {
-        private readonly Dictionary<RelationshipEntry, RelationshipEntry> _relationships = new Dictionary<RelationshipEntry, RelationshipEntry>();
+        private readonly Dictionary<RelationshipEntry, RelationshipEntry> _relationships =
+            new Dictionary<RelationshipEntry, RelationshipEntry>();
 
         /// <summary>
         /// Returns the current relationship associated with the source, or MemberRelationship.Empty if
@@ -43,7 +44,10 @@ namespace System.ComponentModel.Design.Serialization
                 // and not the other as the main constructor performs argument validation.
                 if (source.Owner == null)
                 {
-                    throw new ArgumentException(SR.Format(SR.InvalidNullArgument, "source.Owner"), nameof(source));
+                    throw new ArgumentException(
+                        SR.Format(SR.InvalidNullArgument, "source.Owner"),
+                        nameof(source)
+                    );
                 }
 
                 Debug.Assert(source.Member != null);
@@ -56,7 +60,10 @@ namespace System.ComponentModel.Design.Serialization
                 // and not the other as the main constructor performs argument validation.
                 if (source.Owner == null)
                 {
-                    throw new ArgumentException(SR.Format(SR.InvalidNullArgument, "source.Owner"), nameof(source));
+                    throw new ArgumentException(
+                        SR.Format(SR.InvalidNullArgument, "source.Owner"),
+                        nameof(source)
+                    );
                 }
 
                 Debug.Assert(source.Member != null);
@@ -93,7 +100,12 @@ namespace System.ComponentModel.Design.Serialization
         /// </summary>
         protected virtual MemberRelationship GetRelationship(MemberRelationship source)
         {
-            if (_relationships.TryGetValue(new RelationshipEntry(source), out RelationshipEntry retVal) && retVal._owner.IsAlive)
+            if (
+                _relationships.TryGetValue(
+                    new RelationshipEntry(source),
+                    out RelationshipEntry retVal
+                ) && retVal._owner.IsAlive
+            )
             {
                 return new MemberRelationship(retVal._owner.Target!, retVal._member);
             }
@@ -106,7 +118,10 @@ namespace System.ComponentModel.Design.Serialization
         /// relationship in a table. Relationships are stored weakly, so they do not keep an object alive. Empty can be
         /// passed in for relationship to remove the relationship.
         /// </summary>
-        protected virtual void SetRelationship(MemberRelationship source, MemberRelationship relationship)
+        protected virtual void SetRelationship(
+            MemberRelationship source,
+            MemberRelationship relationship
+        )
         {
             if (!relationship.IsEmpty && !SupportsRelationship(source, relationship))
             {
@@ -116,19 +131,39 @@ namespace System.ComponentModel.Design.Serialization
             _relationships[new RelationshipEntry(source)] = new RelationshipEntry(relationship);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "GetComponentName is only used to create a nice exception message, and has a fallback when null is returned.")]
-        private static void ThrowRelationshipNotSupported(MemberRelationship source, MemberRelationship relationship)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "GetComponentName is only used to create a nice exception message, and has a fallback when null is returned."
+        )]
+        private static void ThrowRelationshipNotSupported(
+            MemberRelationship source,
+            MemberRelationship relationship
+        )
         {
-            string? sourceName = TypeDescriptor.GetComponentName(source.Owner!) ?? source.Owner!.ToString();
-            string? relName = TypeDescriptor.GetComponentName(relationship.Owner!) ?? relationship.Owner!.ToString();
-            throw new ArgumentException(SR.Format(SR.MemberRelationshipService_RelationshipNotSupported, sourceName, source.Member.Name, relName, relationship.Member.Name));
+            string? sourceName =
+                TypeDescriptor.GetComponentName(source.Owner!) ?? source.Owner!.ToString();
+            string? relName =
+                TypeDescriptor.GetComponentName(relationship.Owner!)
+                ?? relationship.Owner!.ToString();
+            throw new ArgumentException(
+                SR.Format(
+                    SR.MemberRelationshipService_RelationshipNotSupported,
+                    sourceName,
+                    source.Member.Name,
+                    relName,
+                    relationship.Member.Name
+                )
+            );
         }
 
         /// <summary>
         /// Returns true if the provided relationship is supported.
         /// </summary>
-        public abstract bool SupportsRelationship(MemberRelationship source, MemberRelationship relationship);
+        public abstract bool SupportsRelationship(
+            MemberRelationship source,
+            MemberRelationship relationship
+        );
 
         /// <summary>
         /// Used as storage in our relationship table
@@ -148,7 +183,10 @@ namespace System.ComponentModel.Design.Serialization
 
             public override bool Equals([NotNullWhen(true)] object? o)
             {
-                Debug.Assert(o is RelationshipEntry, "This is only called indirectly from a dictionary only containing RelationshipEntry structs.");
+                Debug.Assert(
+                    o is RelationshipEntry,
+                    "This is only called indirectly from a dictionary only containing RelationshipEntry structs."
+                );
                 return Equals((RelationshipEntry)o);
             }
 
@@ -159,9 +197,11 @@ namespace System.ComponentModel.Design.Serialization
                 return owner1 == owner2 && _member.Equals(other._member);
             }
 
-            public static bool operator ==(RelationshipEntry re1, RelationshipEntry re2) => re1.Equals(re2);
+            public static bool operator ==(RelationshipEntry re1, RelationshipEntry re2) =>
+                re1.Equals(re2);
 
-            public static bool operator !=(RelationshipEntry re1, RelationshipEntry re2) => !re1.Equals(re2);
+            public static bool operator !=(RelationshipEntry re1, RelationshipEntry re2) =>
+                !re1.Equals(re2);
 
             public override int GetHashCode() => _hashCode;
         }
@@ -204,26 +244,31 @@ namespace System.ComponentModel.Design.Serialization
         /// <summary>
         /// Infrastructure support to make this a first class struct
         /// </summary>
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is MemberRelationship rel && Equals(rel);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is MemberRelationship rel && Equals(rel);
 
         /// <summary>
         /// Infrastructure support to make this a first class struct
         /// </summary>
-        public bool Equals(MemberRelationship other) => other.Owner == Owner && other.Member == Member;
+        public bool Equals(MemberRelationship other) =>
+            other.Owner == Owner && other.Member == Member;
 
         /// <summary>
         /// Infrastructure support to make this a first class struct
         /// </summary>
-        public override int GetHashCode() => Owner is null ? base.GetHashCode() : Owner.GetHashCode() ^ Member.GetHashCode();
+        public override int GetHashCode() =>
+            Owner is null ? base.GetHashCode() : Owner.GetHashCode() ^ Member.GetHashCode();
 
         /// <summary>
         /// Infrastructure support to make this a first class struct
         /// </summary>
-        public static bool operator ==(MemberRelationship left, MemberRelationship right) => left.Equals(right);
+        public static bool operator ==(MemberRelationship left, MemberRelationship right) =>
+            left.Equals(right);
 
         /// <summary>
         /// Infrastructure support to make this a first class struct
         /// </summary>
-        public static bool operator !=(MemberRelationship left, MemberRelationship right) => !left.Equals(right);
+        public static bool operator !=(MemberRelationship left, MemberRelationship right) =>
+            !left.Equals(right);
     }
 }

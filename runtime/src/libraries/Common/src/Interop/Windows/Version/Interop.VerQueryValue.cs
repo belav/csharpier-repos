@@ -8,8 +8,17 @@ internal static partial class Interop
 {
     internal static partial class Version
     {
-        [LibraryImport(Libraries.Version, EntryPoint = "VerQueryValueW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Version,
+            EntryPoint = "VerQueryValueW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static unsafe partial bool VerQueryValue(void* pBlock, string lpSubBlock, out void* lplpBuffer, out uint puLen);
+        internal static unsafe partial bool VerQueryValue(
+            void* pBlock,
+            string lpSubBlock,
+            out void* lplpBuffer,
+            out uint puLen
+        );
     }
 }

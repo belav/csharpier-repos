@@ -32,10 +32,11 @@ internal partial class AbstractAsynchronousTaggerProvider<TTag>
             remove => _tagSource.TagsChanged -= value;
         }
 
-        public override void Dispose()
-            => _tagSource.OnTaggerDisposed(this);
+        public override void Dispose() => _tagSource.OnTaggerDisposed(this);
 
-        public override void AddTags(NormalizedSnapshotSpanCollection spans, SegmentedList<ITagSpan<TTag>> tags)
-            => _tagSource.AddTags(spans, tags);
+        public override void AddTags(
+            NormalizedSnapshotSpanCollection spans,
+            SegmentedList<ITagSpan<TTag>> tags
+        ) => _tagSource.AddTags(spans, tags);
     }
 }

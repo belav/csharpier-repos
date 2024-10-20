@@ -13,6 +13,7 @@ namespace Microsoft.Extensions.Hosting.Systemd
         /// </summary>
         /// <param name="state">The <see cref="ServiceState"/> to notify.</param>
         void Notify(ServiceState state);
+
         /// <summary>
         /// Returns whether systemd is configured to receive service notifications.
         /// </summary>

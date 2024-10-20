@@ -20,33 +20,50 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
 {
-    [ExportLanguageService(typeof(IGenerateParameterizedMemberService), LanguageNames.CSharp), Shared]
-    internal sealed class CSharpGenerateMethodService :
-        AbstractGenerateMethodService<CSharpGenerateMethodService, SimpleNameSyntax, ExpressionSyntax, InvocationExpressionSyntax>
+    [
+        ExportLanguageService(typeof(IGenerateParameterizedMemberService), LanguageNames.CSharp),
+        Shared
+    ]
+    internal sealed class CSharpGenerateMethodService
+        : AbstractGenerateMethodService<
+            CSharpGenerateMethodService,
+            SimpleNameSyntax,
+            ExpressionSyntax,
+            InvocationExpressionSyntax
+        >
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpGenerateMethodService()
-        {
-        }
+        public CSharpGenerateMethodService() { }
 
-        protected override bool IsExplicitInterfaceGeneration(SyntaxNode node)
-            => node is MethodDeclarationSyntax;
+        protected override bool IsExplicitInterfaceGeneration(SyntaxNode node) =>
+            node is MethodDeclarationSyntax;
 
-        protected override bool IsSimpleNameGeneration(SyntaxNode node)
-            => node is SimpleNameSyntax;
+        protected override bool IsSimpleNameGeneration(SyntaxNode node) => node is SimpleNameSyntax;
 
-        protected override bool ContainingTypesOrSelfHasUnsafeKeyword(INamedTypeSymbol containingType)
-            => containingType.ContainingTypesOrSelfHasUnsafeKeyword();
+        protected override bool ContainingTypesOrSelfHasUnsafeKeyword(
+            INamedTypeSymbol containingType
+        ) => containingType.ContainingTypesOrSelfHasUnsafeKeyword();
 
-        protected override AbstractInvocationInfo CreateInvocationMethodInfo(SemanticDocument document, AbstractGenerateParameterizedMemberService<CSharpGenerateMethodService, SimpleNameSyntax, ExpressionSyntax, InvocationExpressionSyntax>.State state)
-            => new CSharpGenerateParameterizedMemberService<CSharpGenerateMethodService>.InvocationExpressionInfo(document, state);
+        protected override AbstractInvocationInfo CreateInvocationMethodInfo(
+            SemanticDocument document,
+            AbstractGenerateParameterizedMemberService<
+                CSharpGenerateMethodService,
+                SimpleNameSyntax,
+                ExpressionSyntax,
+                InvocationExpressionSyntax
+            >.State state
+        ) =>
+            new CSharpGenerateParameterizedMemberService<CSharpGenerateMethodService>.InvocationExpressionInfo(
+                document,
+                state
+            );
 
-        protected override bool AreSpecialOptionsActive(SemanticModel semanticModel)
-            => CSharpCommonGenerationServiceMethods.AreSpecialOptionsActive();
+        protected override bool AreSpecialOptionsActive(SemanticModel semanticModel) =>
+            CSharpCommonGenerationServiceMethods.AreSpecialOptionsActive();
 
-        protected override bool IsValidSymbol(ISymbol symbol, SemanticModel semanticModel)
-            => CSharpCommonGenerationServiceMethods.IsValidSymbol();
+        protected override bool IsValidSymbol(ISymbol symbol, SemanticModel semanticModel) =>
+            CSharpCommonGenerationServiceMethods.IsValidSymbol();
 
         protected override bool TryInitializeExplicitInterfaceState(
             SemanticDocument document,
@@ -54,20 +71,29 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
             CancellationToken cancellationToken,
             out SyntaxToken identifierToken,
             out IMethodSymbol methodSymbol,
-            out INamedTypeSymbol typeToGenerateIn)
+            out INamedTypeSymbol typeToGenerateIn
+        )
         {
             var methodDeclaration = (MethodDeclarationSyntax)node;
             identifierToken = methodDeclaration.Identifier;
 
-            if (methodDeclaration.ExplicitInterfaceSpecifier != null &&
-                !methodDeclaration.ParameterList.OpenParenToken.IsMissing &&
-                !methodDeclaration.ParameterList.CloseParenToken.IsMissing)
+            if (
+                methodDeclaration.ExplicitInterfaceSpecifier != null
+                && !methodDeclaration.ParameterList.OpenParenToken.IsMissing
+                && !methodDeclaration.ParameterList.CloseParenToken.IsMissing
+            )
             {
                 var semanticModel = document.SemanticModel;
-                methodSymbol = semanticModel.GetDeclaredSymbol(methodDeclaration, cancellationToken);
+                methodSymbol = semanticModel.GetDeclaredSymbol(
+                    methodDeclaration,
+                    cancellationToken
+                );
                 if (methodSymbol != null && !methodSymbol.ExplicitInterfaceImplementations.Any())
                 {
-                    var semanticInfo = semanticModel.GetTypeInfo(methodDeclaration.ExplicitInterfaceSpecifier.Name, cancellationToken);
+                    var semanticInfo = semanticModel.GetTypeInfo(
+                        methodDeclaration.ExplicitInterfaceSpecifier.Name,
+                        cancellationToken
+                    );
                     typeToGenerateIn = semanticInfo.Type as INamedTypeSymbol;
                     return typeToGenerateIn != null;
                 }
@@ -86,12 +112,14 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
             out SyntaxToken identifierToken,
             out ExpressionSyntax simpleNameOrMemberAccessExpression,
             out InvocationExpressionSyntax invocationExpressionOpt,
-            out bool isInConditionalAccessExpression)
+            out bool isInConditionalAccessExpression
+        )
         {
             identifierToken = simpleName.Identifier;
 
             var memberAccess = simpleName?.Parent as MemberAccessExpressionSyntax;
-            var conditionalMemberAccess = simpleName?.Parent?.Parent?.Parent as ConditionalAccessExpressionSyntax;
+            var conditionalMemberAccess =
+                simpleName?.Parent?.Parent?.Parent as ConditionalAccessExpressionSyntax;
             var inConditionalMemberAccess = conditionalMemberAccess != null;
             if (memberAccess != null)
             {
@@ -108,7 +136,12 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
 
             if (memberAccess == null || memberAccess.Name == simpleName)
             {
-                if (simpleNameOrMemberAccessExpression.IsParentKind(SyntaxKind.InvocationExpression, out invocationExpressionOpt))
+                if (
+                    simpleNameOrMemberAccessExpression.IsParentKind(
+                        SyntaxKind.InvocationExpression,
+                        out invocationExpressionOpt
+                    )
+                )
                 {
                     isInConditionalAccessExpression = inConditionalMemberAccess;
                     return !invocationExpressionOpt.ArgumentList.CloseParenToken.IsMissing;
@@ -118,12 +151,21 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
                 //    ->  InvocationExpressionSyntax
                 //          ->   MemberBindingExpressionSyntax
                 // and that the name at the end of this expression matches the simple name we were given
-                else if ((((simpleNameOrMemberAccessExpression as ConditionalAccessExpressionSyntax)
-                           ?.WhenNotNull as InvocationExpressionSyntax)
-                                ?.Expression as MemberBindingExpressionSyntax)
-                                    ?.Name == simpleName)
+                else if (
+                    (
+                        (
+                            (
+                                simpleNameOrMemberAccessExpression
+                                as ConditionalAccessExpressionSyntax
+                            )?.WhenNotNull as InvocationExpressionSyntax
+                        )?.Expression as MemberBindingExpressionSyntax
+                    )?.Name == simpleName
+                )
                 {
-                    invocationExpressionOpt = (InvocationExpressionSyntax)((ConditionalAccessExpressionSyntax)simpleNameOrMemberAccessExpression).WhenNotNull;
+                    invocationExpressionOpt = (InvocationExpressionSyntax)
+                        (
+                            (ConditionalAccessExpressionSyntax)simpleNameOrMemberAccessExpression
+                        ).WhenNotNull;
                     isInConditionalAccessExpression = inConditionalMemberAccess;
                     return !invocationExpressionOpt.ArgumentList.CloseParenToken.IsMissing;
                 }
@@ -155,11 +197,23 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateMember.GenerateMethod
             ITypeInferenceService typeInferenceService,
             SemanticModel semanticModel,
             ExpressionSyntax expression,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            if (semanticModel.SyntaxTree.IsNameOfContext(expression.SpanStart, semanticModel, cancellationToken))
+            if (
+                semanticModel.SyntaxTree.IsNameOfContext(
+                    expression.SpanStart,
+                    semanticModel,
+                    cancellationToken
+                )
+            )
             {
-                return typeInferenceService.InferType(semanticModel, expression, true, cancellationToken);
+                return typeInferenceService.InferType(
+                    semanticModel,
+                    expression,
+                    true,
+                    cancellationToken
+                );
             }
 
             return null;

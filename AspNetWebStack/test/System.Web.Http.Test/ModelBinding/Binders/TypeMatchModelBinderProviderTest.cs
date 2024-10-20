@@ -16,7 +16,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = GetBindingContext();
             bindingContext.ValueProvider = new SimpleHttpValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             TypeMatchModelBinderProvider provider = new TypeMatchModelBinderProvider();
@@ -34,10 +34,7 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             // Arrange
             ModelBindingContext bindingContext = GetBindingContext();
-            bindingContext.ValueProvider = new SimpleHttpValueProvider
-            {
-                { "theModelName", 42 }
-            };
+            bindingContext.ValueProvider = new SimpleHttpValueProvider { { "theModelName", 42 } };
 
             TypeMatchModelBinderProvider provider = new TypeMatchModelBinderProvider();
 
@@ -57,8 +54,11 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             return new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, modelType),
-                ModelName = "theModelName"
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    modelType
+                ),
+                ModelName = "theModelName",
             };
         }
     }

@@ -15,7 +15,6 @@ using System;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Versioning;
-
 using Internal.Runtime.CompilerServices;
 
 namespace System.Threading
@@ -24,14 +23,20 @@ namespace System.Threading
     {
         #region Object->Lock/Condition mapping
 
-        private static readonly ConditionalWeakTable<object, Condition> s_conditionTable = new ConditionalWeakTable<object, Condition>();
-        private static readonly ConditionalWeakTable<object, Condition>.CreateValueCallback s_createCondition = (o) => new Condition(ObjectHeader.GetLockObject(o));
+        private static readonly ConditionalWeakTable<object, Condition> s_conditionTable =
+            new ConditionalWeakTable<object, Condition>();
+        private static readonly ConditionalWeakTable<
+            object,
+            Condition
+        >.CreateValueCallback s_createCondition = (o) =>
+            new Condition(ObjectHeader.GetLockObject(o));
 
         private static Condition GetCondition(object obj)
         {
             Debug.Assert(
                 !(obj is Condition || obj is Lock),
-                "Do not use Monitor.Pulse or Wait on a Lock or Condition instance; use the methods on Condition instead.");
+                "Do not use Monitor.Pulse or Wait on a Lock or Condition instance; use the methods on Condition instead."
+            );
             return s_conditionTable.GetValue(obj, s_createCondition);
         }
         #endregion
@@ -46,9 +51,10 @@ namespace System.Threading
             if (resultOrIndex < 0)
                 return;
 
-            Lock lck = resultOrIndex == 0 ?
-                ObjectHeader.GetLockObject(obj) :
-                SyncTable.GetLockObject(resultOrIndex);
+            Lock lck =
+                resultOrIndex == 0
+                    ? ObjectHeader.GetLockObject(obj)
+                    : SyncTable.GetLockObject(resultOrIndex);
 
             lck.TryEnterSlow(Timeout.Infinite, currentThreadID);
         }
@@ -105,13 +111,18 @@ namespace System.Threading
             if (resultOrIndex < 0)
                 return true;
 
-            Lock lck = resultOrIndex == 0 ?
-                ObjectHeader.GetLockObject(obj) :
-                SyncTable.GetLockObject(resultOrIndex);
+            Lock lck =
+                resultOrIndex == 0
+                    ? ObjectHeader.GetLockObject(obj)
+                    : SyncTable.GetLockObject(resultOrIndex);
 
             // The one-shot fast path is not covered by the slow path below for a zero timeout when the thread ID is
             // initialized, so cover it here in case it wasn't already done
-            if (millisecondsTimeout == 0 && currentThreadID != 0 && lck.TryEnterOneShot(currentThreadID))
+            if (
+                millisecondsTimeout == 0
+                && currentThreadID != 0
+                && lck.TryEnterOneShot(currentThreadID)
+            )
                 return true;
 
             return lck.TryEnterSlow(millisecondsTimeout, currentThreadID);

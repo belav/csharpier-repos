@@ -18,7 +18,7 @@ namespace System.Data.Mapping.Update.Internal
     /// </summary>
     /// <remarks>
     /// This is not a general purpose class. It is tailored to the needs of the update pipeline.
-    /// 
+    ///
     /// All virtual methods throw NotSupportedException (must be explicitly overridden by each visitor).
     /// </remarks>
     /// <typeparam name="TReturn">Return type for the visitor</typeparam>
@@ -27,10 +27,7 @@ namespace System.Data.Mapping.Update.Internal
         /// <summary>
         /// Gets the name of this visitor for debugging and tracing purposes.
         /// </summary>
-        protected abstract string VisitorName
-        {
-            get;
-        }
+        protected abstract string VisitorName { get; }
 
         /// <summary>
         /// Utility method to generate an exception when unsupported node types are encountered.
@@ -39,11 +36,11 @@ namespace System.Data.Mapping.Update.Internal
         /// <returns>Not supported exception</returns>
         protected NotSupportedException ConstructNotSupportedException(DbExpression node)
         {
-            string nodeKind = null == node ? null :
-                node.ExpressionKind.ToString();
+            string nodeKind = null == node ? null : node.ExpressionKind.ToString();
 
             return EntityUtil.NotSupported(
-                System.Data.Entity.Strings.Update_UnsupportedExpressionKind(nodeKind, VisitorName));
+                System.Data.Entity.Strings.Update_UnsupportedExpressionKind(nodeKind, VisitorName)
+            );
         }
 
         #region IExpressionVisitor<TReturn> Members

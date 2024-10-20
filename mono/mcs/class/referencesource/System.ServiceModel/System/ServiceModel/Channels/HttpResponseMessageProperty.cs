@@ -18,9 +18,7 @@ namespace System.ServiceModel.Channels
         bool initialCopyPerformed;
 
         public HttpResponseMessageProperty()
-            : this((WebHeaderCollection)null)
-        {
-        }
+            : this((WebHeaderCollection)null) { }
 
         internal HttpResponseMessageProperty(WebHeaderCollection originalHeaders)
         {
@@ -43,9 +41,9 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    this.httpBackedProperty.Headers :
-                    this.traditionalProperty.Headers;
+                return this.useHttpBackedProperty
+                    ? this.httpBackedProperty.Headers
+                    : this.traditionalProperty.Headers;
             }
         }
 
@@ -53,18 +51,22 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    this.httpBackedProperty.StatusCode :
-                    this.traditionalProperty.StatusCode;
+                return this.useHttpBackedProperty
+                    ? this.httpBackedProperty.StatusCode
+                    : this.traditionalProperty.StatusCode;
             }
-
             set
             {
                 int valueInt = (int)value;
                 if (valueInt < 100 || valueInt > 599)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.ValueMustBeInRange, 100, 599)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeInRange, 100, 599)
+                        )
+                    );
                 }
 
                 if (this.useHttpBackedProperty)
@@ -82,9 +84,9 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    true :
-                    this.traditionalProperty.HasStatusCodeBeenSet;
+                return this.useHttpBackedProperty
+                    ? true
+                    : this.traditionalProperty.HasStatusCodeBeenSet;
             }
         }
 
@@ -92,11 +94,10 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    this.httpBackedProperty.StatusDescription :
-                    this.traditionalProperty.StatusDescription;
+                return this.useHttpBackedProperty
+                    ? this.httpBackedProperty.StatusDescription
+                    : this.traditionalProperty.StatusDescription;
             }
-
             set
             {
                 if (this.useHttpBackedProperty)
@@ -114,11 +115,10 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    this.httpBackedProperty.SuppressEntityBody :
-                    this.traditionalProperty.SuppressEntityBody;
+                return this.useHttpBackedProperty
+                    ? this.httpBackedProperty.SuppressEntityBody
+                    : this.traditionalProperty.SuppressEntityBody;
             }
-
             set
             {
                 if (this.useHttpBackedProperty)
@@ -136,11 +136,10 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                return this.useHttpBackedProperty ?
-                    false :
-                    this.traditionalProperty.SuppressPreamble;
+                return this.useHttpBackedProperty
+                    ? false
+                    : this.traditionalProperty.SuppressPreamble;
             }
-
             set
             {
                 if (!this.useHttpBackedProperty)
@@ -167,7 +166,10 @@ namespace System.ServiceModel.Channels
         {
             HttpResponseMessage httpResponseMessage = null;
 
-            HttpResponseMessageProperty property = message.Properties.GetValue<HttpResponseMessageProperty>(HttpResponseMessageProperty.Name);
+            HttpResponseMessageProperty property =
+                message.Properties.GetValue<HttpResponseMessageProperty>(
+                    HttpResponseMessageProperty.Name
+                );
             if (property != null)
             {
                 httpResponseMessage = property.HttpResponseMessage;
@@ -183,8 +185,7 @@ namespace System.ServiceModel.Channels
 
         IMessageProperty IMessageProperty.CreateCopy()
         {
-            if (!this.useHttpBackedProperty ||
-                !this.initialCopyPerformed)
+            if (!this.useHttpBackedProperty || !this.initialCopyPerformed)
             {
                 this.initialCopyPerformed = true;
                 return this;
@@ -197,18 +198,21 @@ namespace System.ServiceModel.Channels
         {
             // The ImmutableDispatchRuntime will merge MessageProperty instances from the
             //  OperationContext (that were created before the response message was created) with
-            //  MessageProperty instances on the message itself.  The message's version of the 
-            //  HttpResponseMessageProperty may hold a reference to an HttpResponseMessage, and this 
-            //  cannot be discarded, so values from the OperationContext's property must be set on 
+            //  MessageProperty instances on the message itself.  The message's version of the
+            //  HttpResponseMessageProperty may hold a reference to an HttpResponseMessage, and this
+            //  cannot be discarded, so values from the OperationContext's property must be set on
             //  the message's version without completely replacing the message's property.
             if (this.useHttpBackedProperty)
             {
-                HttpResponseMessageProperty responseProperty = propertyToMerge as HttpResponseMessageProperty;
+                HttpResponseMessageProperty responseProperty =
+                    propertyToMerge as HttpResponseMessageProperty;
                 if (responseProperty != null)
                 {
                     if (!responseProperty.useHttpBackedProperty)
                     {
-                        this.httpBackedProperty.MergeWithTraditionalProperty(responseProperty.traditionalProperty);
+                        this.httpBackedProperty.MergeWithTraditionalProperty(
+                            responseProperty.traditionalProperty
+                        );
                         responseProperty.traditionalProperty = null;
                         responseProperty.httpBackedProperty = this.httpBackedProperty;
                         responseProperty.useHttpBackedProperty = true;
@@ -217,7 +221,7 @@ namespace System.ServiceModel.Channels
                     return true;
                 }
             }
-                
+
             return false;
         }
 
@@ -257,11 +261,7 @@ namespace System.ServiceModel.Channels
 
             public HttpStatusCode StatusCode
             {
-                get
-                {
-                    return this.statusCode;
-                }
-
+                get { return this.statusCode; }
                 set
                 {
                     this.statusCode = value;
@@ -284,7 +284,10 @@ namespace System.ServiceModel.Channels
 
             public HttpResponseMessageBackedProperty(HttpResponseMessage httpResponseMessage)
             {
-                Fx.Assert(httpResponseMessage != null, "The 'httpResponseMessage' property should never be null.");
+                Fx.Assert(
+                    httpResponseMessage != null,
+                    "The 'httpResponseMessage' property should never be null."
+                );
 
                 this.HttpResponseMessage = httpResponseMessage;
             }
@@ -306,28 +309,14 @@ namespace System.ServiceModel.Channels
 
             public HttpStatusCode StatusCode
             {
-                get
-                {
-                    return this.HttpResponseMessage.StatusCode;
-                }
-
-                set
-                {
-                    this.HttpResponseMessage.StatusCode = value;
-                }
+                get { return this.HttpResponseMessage.StatusCode; }
+                set { this.HttpResponseMessage.StatusCode = value; }
             }
 
             public string StatusDescription
             {
-                get
-                {
-                    return this.HttpResponseMessage.ReasonPhrase;
-                }
-
-                set
-                {
-                    this.HttpResponseMessage.ReasonPhrase = value;
-                }
+                get { return this.HttpResponseMessage.ReasonPhrase; }
+                set { this.HttpResponseMessage.ReasonPhrase = value; }
             }
 
             public bool SuppressEntityBody
@@ -339,8 +328,10 @@ namespace System.ServiceModel.Channels
                     {
                         long? contentLength = content.Headers.ContentLength;
 
-                        if (!contentLength.HasValue ||
-                            (contentLength.HasValue && contentLength.Value > 0))
+                        if (
+                            !contentLength.HasValue
+                            || (contentLength.HasValue && contentLength.Value > 0)
+                        )
                         {
                             return false;
                         }
@@ -348,16 +339,22 @@ namespace System.ServiceModel.Channels
 
                     return true;
                 }
-
                 set
                 {
                     HttpContent content = this.HttpResponseMessage.Content;
-                    if (value && content != null &&
-                        (!content.Headers.ContentLength.HasValue ||
-                        content.Headers.ContentLength.Value > 0))
+                    if (
+                        value
+                        && content != null
+                        && (
+                            !content.Headers.ContentLength.HasValue
+                            || content.Headers.ContentLength.Value > 0
+                        )
+                    )
                     {
                         HttpContent newContent = new ByteArrayContent(EmptyArray<byte>.Instance);
-                        foreach (KeyValuePair<string, IEnumerable<string>> header in content.Headers)
+                        foreach (
+                            KeyValuePair<string, IEnumerable<string>> header in content.Headers
+                        )
                         {
                             newContent.Headers.AddHeaderWithoutValidation(header);
                         }
@@ -367,7 +364,9 @@ namespace System.ServiceModel.Channels
                     }
                     else if (!value && content == null)
                     {
-                        this.HttpResponseMessage.Content = new ByteArrayContent(EmptyArray<byte>.Instance); 
+                        this.HttpResponseMessage.Content = new ByteArrayContent(
+                            EmptyArray<byte>.Instance
+                        );
                     }
                 }
             }
@@ -389,14 +388,19 @@ namespace System.ServiceModel.Channels
                 return copiedProperty;
             }
 
-            public void MergeWithTraditionalProperty(TraditionalHttpResponseMessageProperty propertyToMerge)
+            public void MergeWithTraditionalProperty(
+                TraditionalHttpResponseMessageProperty propertyToMerge
+            )
             {
                 if (propertyToMerge.HasStatusCodeBeenSet)
                 {
                     this.StatusCode = propertyToMerge.StatusCode;
                 }
 
-                if (propertyToMerge.StatusDescription != TraditionalHttpResponseMessageProperty.DefaultStatusDescription)
+                if (
+                    propertyToMerge.StatusDescription
+                    != TraditionalHttpResponseMessageProperty.DefaultStatusDescription
+                )
                 {
                     this.StatusDescription = propertyToMerge.StatusDescription;
                 }
@@ -412,4 +416,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

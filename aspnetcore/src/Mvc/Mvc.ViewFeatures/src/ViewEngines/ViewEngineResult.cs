@@ -22,7 +22,8 @@ public class ViewEngineResult
     /// <summary>
     /// The list of locations searched.
     /// </summary>
-    public IEnumerable<string> SearchedLocations { get; private init; } = Enumerable.Empty<string>();
+    public IEnumerable<string> SearchedLocations { get; private init; } =
+        Enumerable.Empty<string>();
 
     /// <summary>
     /// The <see cref="IView"/>.
@@ -46,17 +47,12 @@ public class ViewEngineResult
     /// <param name="viewName">The name of the view.</param>
     /// <param name="searchedLocations">The locations searched.</param>
     /// <returns>The not found result.</returns>
-    public static ViewEngineResult NotFound(
-        string viewName,
-        IEnumerable<string> searchedLocations)
+    public static ViewEngineResult NotFound(string viewName, IEnumerable<string> searchedLocations)
     {
         ArgumentNullException.ThrowIfNull(viewName);
         ArgumentNullException.ThrowIfNull(searchedLocations);
 
-        return new ViewEngineResult(viewName)
-        {
-            SearchedLocations = searchedLocations,
-        };
+        return new ViewEngineResult(viewName) { SearchedLocations = searchedLocations };
     }
 
     /// <summary>
@@ -70,10 +66,7 @@ public class ViewEngineResult
         ArgumentNullException.ThrowIfNull(viewName);
         ArgumentNullException.ThrowIfNull(view);
 
-        return new ViewEngineResult(viewName)
-        {
-            View = view,
-        };
+        return new ViewEngineResult(viewName) { View = view };
     }
 
     /// <summary>
@@ -95,15 +88,19 @@ public class ViewEngineResult
             var locations = string.Empty;
             if (originalLocations != null && originalLocations.Any())
             {
-                locations = Environment.NewLine + string.Join(Environment.NewLine, originalLocations);
+                locations =
+                    Environment.NewLine + string.Join(Environment.NewLine, originalLocations);
             }
 
             if (SearchedLocations.Any())
             {
-                locations += Environment.NewLine + string.Join(Environment.NewLine, SearchedLocations);
+                locations +=
+                    Environment.NewLine + string.Join(Environment.NewLine, SearchedLocations);
             }
 
-            throw new InvalidOperationException(Resources.FormatViewEngine_ViewNotFound(ViewName, locations));
+            throw new InvalidOperationException(
+                Resources.FormatViewEngine_ViewNotFound(ViewName, locations)
+            );
         }
 
         return this;

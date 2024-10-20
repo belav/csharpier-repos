@@ -11,7 +11,10 @@ namespace Microsoft.AspNetCore.Mvc;
 /// Specifies what HTTP methods an action supports.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-public sealed class AcceptVerbsAttribute : Attribute, IActionHttpMethodProvider, IRouteTemplateProvider
+public sealed class AcceptVerbsAttribute
+    : Attribute,
+        IActionHttpMethodProvider,
+        IRouteTemplateProvider
 {
     private readonly List<string> _httpMethods;
 

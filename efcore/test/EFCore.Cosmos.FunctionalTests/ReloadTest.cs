@@ -7,7 +7,11 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class ReloadTest
 {
-    public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { true }, new object[] { false } };
+    public static IEnumerable<object[]> IsAsyncData = new[]
+    {
+        new object[] { true },
+        new object[] { false },
+    };
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -51,17 +55,15 @@ public class ReloadTest
             _name = testStore.Name;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseCosmos(
-                    _connectionUri,
-                    _authToken,
-                    _name,
-                    b => b.ApplyConfiguration());
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseCosmos(
+                _connectionUri,
+                _authToken,
+                _name,
+                b => b.ApplyConfiguration()
+            );
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
 
         public DbSet<Item> Items { get; set; }
     }

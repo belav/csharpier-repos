@@ -16,7 +16,13 @@ namespace System.Reflection.Runtime.Dispensers
         //
         // Note: If your K is a valuetype, use CreateDispenserV() instead. Some algorithms will not be available for use.
         //
-        public static Dispenser<K, V> CreateDispenser<K, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]V>(DispenserScenario scenario, Func<K, V> factory)
+        public static Dispenser<K, V> CreateDispenser<
+            K,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                V
+        >(DispenserScenario scenario, Func<K, V> factory)
             where K : class, IEquatable<K>
             where V : class
         {
@@ -29,19 +35,23 @@ namespace System.Reflection.Runtime.Dispensers
             throw new Exception();
         }
 
-
         //
         // This is similar to CreateDispenser() except it doesn't constrain the key to be a reference type.
         // As a result, some algorithms will not be available for use.
         //
-        public static Dispenser<K, V> CreateDispenserV<K, V>(DispenserScenario scenario, Func<K, V> factory)
+        public static Dispenser<K, V> CreateDispenserV<K, V>(
+            DispenserScenario scenario,
+            Func<K, V> factory
+        )
             where K : IEquatable<K>
             where V : class
         {
             DispenserAlgorithm algorithm = s_dispenserPolicy.GetAlgorithm(scenario);
 
-            Debug.Assert(algorithm != DispenserAlgorithm.ReuseAsLongAsKeyIsAlive,
-                "Use CreateDispenser() if you want to use this algorithm. The key must not be a valuetype.");
+            Debug.Assert(
+                algorithm != DispenserAlgorithm.ReuseAsLongAsKeyIsAlive,
+                "Use CreateDispenser() if you want to use this algorithm. The key must not be a valuetype."
+            );
 
             if (algorithm == DispenserAlgorithm.CreateAlways)
                 return new DispenserThatAlwaysCreates<K, V>(factory);
@@ -53,7 +63,7 @@ namespace System.Reflection.Runtime.Dispensers
             throw new Exception();
         }
 
-
-        private static readonly DefaultDispenserPolicy s_dispenserPolicy = new DefaultDispenserPolicy();
+        private static readonly DefaultDispenserPolicy s_dispenserPolicy =
+            new DefaultDispenserPolicy();
     }
 }

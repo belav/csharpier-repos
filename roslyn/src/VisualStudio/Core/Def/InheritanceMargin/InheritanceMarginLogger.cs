@@ -10,35 +10,47 @@ namespace Microsoft.VisualStudio.LanguageServices.InheritanceMargin
     internal static class InheritanceMarginLogger
     {
         // 1 sec per bucket, and if it takes more than 1 min, then this log is considered as time-out in the last bucket.
-        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator = new(1000, 60000);
+        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator =
+            new(1000, 60000);
 
         private enum ActionInfo
         {
             GetInheritanceMarginMembers,
         }
 
-        public static void LogGenerateBackgroundInheritanceInfo(TimeSpan elapsedTime)
-            => s_histogramLogAggregator.LogTime(
-                ActionInfo.GetInheritanceMarginMembers, elapsedTime);
+        public static void LogGenerateBackgroundInheritanceInfo(TimeSpan elapsedTime) =>
+            s_histogramLogAggregator.LogTime(ActionInfo.GetInheritanceMarginMembers, elapsedTime);
 
-        public static void LogInheritanceTargetsMenuOpen()
-            => Logger.Log(FunctionId.InheritanceMargin_TargetsMenuOpen, KeyValueLogMessage.Create(LogType.UserAction));
+        public static void LogInheritanceTargetsMenuOpen() =>
+            Logger.Log(
+                FunctionId.InheritanceMargin_TargetsMenuOpen,
+                KeyValueLogMessage.Create(LogType.UserAction)
+            );
 
-        public static void LogNavigateToTarget()
-            => Logger.Log(FunctionId.InheritanceMargin_NavigateToTarget, KeyValueLogMessage.Create(LogType.UserAction));
+        public static void LogNavigateToTarget() =>
+            Logger.Log(
+                FunctionId.InheritanceMargin_NavigateToTarget,
+                KeyValueLogMessage.Create(LogType.UserAction)
+            );
 
         public static void ReportTelemetry()
         {
-            Logger.Log(FunctionId.InheritanceMargin_GetInheritanceMemberItems,
-                KeyValueLogMessage.Create(
-                m =>
+            Logger.Log(
+                FunctionId.InheritanceMargin_GetInheritanceMemberItems,
+                KeyValueLogMessage.Create(m =>
                 {
-                    var histogramLogAggragator = s_histogramLogAggregator.GetValue(ActionInfo.GetInheritanceMarginMembers);
+                    var histogramLogAggragator = s_histogramLogAggregator.GetValue(
+                        ActionInfo.GetInheritanceMarginMembers
+                    );
                     if (histogramLogAggragator != null)
                     {
-                        histogramLogAggragator.WriteTelemetryPropertiesTo(m, nameof(ActionInfo.GetInheritanceMarginMembers) + ".");
+                        histogramLogAggragator.WriteTelemetryPropertiesTo(
+                            m,
+                            nameof(ActionInfo.GetInheritanceMarginMembers) + "."
+                        );
                     }
-                }));
+                })
+            );
         }
     }
 }

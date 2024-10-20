@@ -16,8 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class NamedParameterCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(NamedParameterCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(NamedParameterCompletionProvider);
 
         [Fact]
         public async Task SendEnterThroughToEditorTest()
@@ -35,9 +35,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                 }
                 """;
 
-            await VerifySendEnterThroughToEnterAsync(markup, "a:", sendThroughEnterOption: EnterKeyRule.Never, expected: false);
-            await VerifySendEnterThroughToEnterAsync(markup, "a:", sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord, expected: true);
-            await VerifySendEnterThroughToEnterAsync(markup, "a:", sendThroughEnterOption: EnterKeyRule.Always, expected: true);
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "a:",
+                sendThroughEnterOption: EnterKeyRule.Never,
+                expected: false
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "a:",
+                sendThroughEnterOption: EnterKeyRule.AfterFullyTypedWord,
+                expected: true
+            );
+            await VerifySendEnterThroughToEnterAsync(
+                markup,
+                "a:",
+                sendThroughEnterOption: EnterKeyRule.Always,
+                expected: true
+            );
         }
 
         [Fact]
@@ -409,8 +424,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
                     { }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "obj", displayTextSuffix: ":",
-                expectedDescriptionOrNull: $"({FeaturesResources.parameter}) Class1 obj = default(Class1)");
+            await VerifyItemExistsAsync(
+                markup,
+                "obj",
+                displayTextSuffix: ":",
+                expectedDescriptionOrNull: $"({FeaturesResources.parameter}) Class1 obj = default(Class1)"
+            );
         }
 
         [Fact]

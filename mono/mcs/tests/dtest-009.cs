@@ -1,18 +1,16 @@
 partial class B
 {
-	static partial void Test (int a);
+    static partial void Test(int a);
 
-	static partial void Test (int x)
-	{
-	}
+    static partial void Test(int x) { }
 
-	public static int Main ()
-	{
-		Test (a: 5);
+    public static int Main()
+    {
+        Test(a: 5);
 
-		dynamic d = -1;
-		Test (a: d);
+        dynamic d = -1;
+        Test(a: d);
 
-		return 0;
-	}
+        return 0;
+    }
 }

@@ -32,18 +32,24 @@ public class TestApplicationErrorLogger : ILogger
 
     public int TotalErrorsLogged => Messages.Count(message => message.LogLevel == LogLevel.Error);
 
-    public int CriticalErrorsLogged => Messages.Count(message => message.LogLevel == LogLevel.Critical);
+    public int CriticalErrorsLogged =>
+        Messages.Count(message => message.LogLevel == LogLevel.Critical);
 
-    public int ApplicationErrorsLogged => Messages.Count(message => message.EventId.Id == ApplicationErrorEventId);
+    public int ApplicationErrorsLogged =>
+        Messages.Count(message => message.EventId.Id == ApplicationErrorEventId);
 
     public Task<LogMessage> WaitForMessage(Func<LogMessage, bool> messageFilter)
     {
         if (_messageFilterTcs != null)
         {
-            throw new InvalidOperationException($"{nameof(WaitForMessage)} cannot be called concurrently.");
+            throw new InvalidOperationException(
+                $"{nameof(WaitForMessage)} cannot be called concurrently."
+            );
         }
 
-        _messageFilterTcs = new TaskCompletionSource<LogMessage>(TaskCreationOptions.RunContinuationsAsynchronously);
+        _messageFilterTcs = new TaskCompletionSource<LogMessage>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         _messageFilter = messageFilter;
 
         return _messageFilterTcs.Task;
@@ -53,7 +59,10 @@ public class TestApplicationErrorLogger : ILogger
     {
         Scopes.Enqueue(state);
 
-        return new Disposable(() => { Scopes.TryDequeue(out _); });
+        return new Disposable(() =>
+        {
+            Scopes.TryDequeue(out _);
+        });
     }
 
     public bool IsEnabled(LogLevel logLevel)
@@ -61,7 +70,13 @@ public class TestApplicationErrorLogger : ILogger
         return true;
     }
 
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+    public void Log<TState>(
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception exception,
+        Func<TState, Exception, string> formatter
+    )
     {
         var exceptionIsIgnored = IgnoredExceptions.Contains(exception?.GetType());
 
@@ -78,9 +93,19 @@ public class TestApplicationErrorLogger : ILogger
         }
 
         // Fail tests where not all the connections close during server shutdown.
-        if (ThrowOnUngracefulShutdown &&
-            ((eventId.Id == 16 && eventId.Name == nameof(KestrelTrace.NotAllConnectionsClosedGracefully)) ||
-             (eventId.Id == 21 && eventId.Name == nameof(KestrelTrace.NotAllConnectionsAborted))))
+        if (
+            ThrowOnUngracefulShutdown
+            && (
+                (
+                    eventId.Id == 16
+                    && eventId.Name == nameof(KestrelTrace.NotAllConnectionsClosedGracefully)
+                )
+                || (
+                    eventId.Id == 21
+                    && eventId.Name == nameof(KestrelTrace.NotAllConnectionsAborted)
+                )
+            )
+        )
         {
             var log = $"Log {logLevel}[{eventId}]: {formatter(state, exception)} {exception}";
             throw new Exception($"Shutdown failure. {log}");
@@ -99,7 +124,7 @@ public class TestApplicationErrorLogger : ILogger
             LogLevel = logLevel,
             EventId = eventId,
             Exception = exception,
-            Message = formatter(state, exception)
+            Message = formatter(state, exception),
         };
 
         Messages.Enqueue(logMessage);

@@ -3,7 +3,6 @@
 
 using System;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -220,7 +219,8 @@ namespace Moq.Tests
         public void ReturnsAsyncFunc_onEachInvocation_RefReturnTypeLazyEvaluation()
         {
             var mock = new Mock<IAsyncInterface>();
-            mock.Setup(x => x.ValueParameterRefReturnType(36)).ReturnsAsync(() => new string(new[] { 'M', 'o', 'q', '4' }));
+            mock.Setup(x => x.ValueParameterRefReturnType(36))
+                .ReturnsAsync(() => new string(new[] { 'M', 'o', 'q', '4' }));
 
             string firstEvaluationResult = mock.Object.ValueParameterRefReturnType(36).Result;
             string secondEvaluationResult = mock.Object.ValueParameterRefReturnType(36).Result;
@@ -350,7 +350,8 @@ namespace Moq.Tests
             var longEnoughForAnyBuildServer = TimeSpan.FromSeconds(5);
 
             var mock = new Mock<IAsyncInterface>();
-            mock.Setup(x => x.RefParameterValueReturnType("test")).ReturnsAsync(5, longEnoughForAnyBuildServer);
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
+                .ReturnsAsync(5, longEnoughForAnyBuildServer);
 
             var task = mock.Object.RefParameterValueReturnType("test");
 
@@ -365,9 +366,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IAsyncInterface>();
 
-            Action setup = () => mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
-                .ReturnsAsync(5, TimeSpan.FromTicks(ticks));
+            Action setup = () =>
+                mock.Setup(x => x.RefParameterValueReturnType("test"))
+                    .ReturnsAsync(5, TimeSpan.FromTicks(ticks));
 
             if (mustThrow)
                 Assert.Throws<ArgumentException>(setup);
@@ -379,7 +380,8 @@ namespace Moq.Tests
         public async Task ReturnsAsyncWithDelayReturnsValue()
         {
             var mock = new Mock<IAsyncInterface>();
-            mock.Setup(x => x.RefParameterValueReturnType("test")).ReturnsAsync(5, TimeSpan.FromMilliseconds(1));
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
+                .ReturnsAsync(5, TimeSpan.FromMilliseconds(1));
 
             var value = await mock.Object.RefParameterValueReturnType("test");
 
@@ -390,7 +392,8 @@ namespace Moq.Tests
         public async Task ReturnsAsyncWithMinAndMaxDelayReturnsValue()
         {
             var mock = new Mock<IAsyncInterface>();
-            mock.Setup(x => x.RefParameterValueReturnType("test")).ReturnsAsync(5, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(2));
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
+                .ReturnsAsync(5, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(2));
 
             var value = await mock.Object.RefParameterValueReturnType("test");
 
@@ -401,7 +404,13 @@ namespace Moq.Tests
         public async Task ReturnsAsyncWithMinAndMaxDelayAndOwnRandomGeneratorReturnsValue()
         {
             var mock = new Mock<IAsyncInterface>();
-            mock.Setup(x => x.RefParameterValueReturnType("test")).ReturnsAsync(5, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(2), new Random());
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
+                .ReturnsAsync(
+                    5,
+                    TimeSpan.FromMilliseconds(1),
+                    TimeSpan.FromMilliseconds(2),
+                    new Random()
+                );
 
             var value = await mock.Object.RefParameterValueReturnType("test");
 
@@ -413,9 +422,14 @@ namespace Moq.Tests
         {
             var mock = new Mock<IAsyncInterface>();
 
-            Action setup = () => mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
-                .ReturnsAsync(5, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(2), null);
+            Action setup = () =>
+                mock.Setup(x => x.RefParameterValueReturnType("test"))
+                    .ReturnsAsync(
+                        5,
+                        TimeSpan.FromMilliseconds(1),
+                        TimeSpan.FromMilliseconds(2),
+                        null
+                    );
 
             var paramName = Assert.Throws<ArgumentNullException>(setup).ParamName;
             Assert.Equal("random", paramName);
@@ -426,8 +440,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IAsyncInterface>();
 
-            mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
                 .ThrowsAsync(new ArithmeticException("yikes"), TimeSpan.FromMilliseconds(1));
 
             Func<Task<int>> test = () => mock.Object.RefParameterValueReturnType("test");
@@ -444,8 +457,7 @@ namespace Moq.Tests
             var minDelay = TimeSpan.FromMilliseconds(1);
             var maxDelay = TimeSpan.FromMilliseconds(2);
 
-            mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
                 .ThrowsAsync(new ArithmeticException("yikes"), minDelay, maxDelay);
 
             Func<Task<int>> test = () => mock.Object.RefParameterValueReturnType("test");
@@ -462,8 +474,7 @@ namespace Moq.Tests
             var minDelay = TimeSpan.FromMilliseconds(1);
             var maxDelay = TimeSpan.FromMilliseconds(2);
 
-            mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
                 .ThrowsAsync(new ArithmeticException("yikes"), minDelay, maxDelay, new Random());
 
             Func<Task<int>> test = () => mock.Object.RefParameterValueReturnType("test");
@@ -483,8 +494,7 @@ namespace Moq.Tests
                 var minDelay = TimeSpan.FromMilliseconds(1);
                 var maxDelay = TimeSpan.FromMilliseconds(2);
 
-                mock
-                    .Setup(x => x.RefParameterValueReturnType("test"))
+                mock.Setup(x => x.RefParameterValueReturnType("test"))
                     .ThrowsAsync(anyException, minDelay, maxDelay, null);
             };
 
@@ -666,7 +676,8 @@ namespace Moq.Tests
         public void ValueTaskReturnsAsyncFunc_onEachInvocation_RefReturnTypeLazyEvaluation()
         {
             var mock = new Mock<IValueTaskAsyncInterface>();
-            mock.Setup(x => x.ValueParameterRefReturnType(36)).ReturnsAsync(() => new string(new[] { 'M', 'o', 'q', '4' }));
+            mock.Setup(x => x.ValueParameterRefReturnType(36))
+                .ReturnsAsync(() => new string(new[] { 'M', 'o', 'q', '4' }));
 
             var firstTask = mock.Object.ValueParameterRefReturnType(36);
             var secondTask = mock.Object.ValueParameterRefReturnType(36);
@@ -780,7 +791,8 @@ namespace Moq.Tests
             var longEnoughForAnyBuildServer = TimeSpan.FromSeconds(5);
 
             var mock = new Mock<IValueTaskAsyncInterface>();
-            mock.Setup(x => x.RefParameterValueReturnType("test")).ReturnsAsync(5, longEnoughForAnyBuildServer);
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
+                .ReturnsAsync(5, longEnoughForAnyBuildServer);
 
             var task = mock.Object.RefParameterValueReturnType("test");
 
@@ -796,9 +808,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IValueTaskAsyncInterface>();
 
-            Action setup = () => mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
-                .ReturnsAsync(5, TimeSpan.FromTicks(ticks));
+            Action setup = () =>
+                mock.Setup(x => x.RefParameterValueReturnType("test"))
+                    .ReturnsAsync(5, TimeSpan.FromTicks(ticks));
 
             if (mustThrow)
                 Assert.Throws<ArgumentException>(setup);
@@ -810,7 +822,8 @@ namespace Moq.Tests
         public async Task ValueTaskReturnsAsyncWithDelayReturnsValue()
         {
             var mock = new Mock<IValueTaskAsyncInterface>();
-            mock.Setup(x => x.RefParameterValueReturnType("test")).ReturnsAsync(5, TimeSpan.FromMilliseconds(1));
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
+                .ReturnsAsync(5, TimeSpan.FromMilliseconds(1));
 
             var task = mock.Object.RefParameterValueReturnType("test");
             var value = await Assert.IsType<ValueTask<int>>(task);
@@ -822,7 +835,8 @@ namespace Moq.Tests
         public async Task ValueTaskReturnsAsyncWithMinAndMaxDelayReturnsValue()
         {
             var mock = new Mock<IValueTaskAsyncInterface>();
-            mock.Setup(x => x.RefParameterValueReturnType("test")).ReturnsAsync(5, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(2));
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
+                .ReturnsAsync(5, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(2));
 
             var task = mock.Object.RefParameterValueReturnType("test");
             var value = await Assert.IsType<ValueTask<int>>(task);
@@ -834,7 +848,13 @@ namespace Moq.Tests
         public async Task ValueTaskReturnsAsyncWithMinAndMaxDelayAndOwnRandomGeneratorReturnsValue()
         {
             var mock = new Mock<IValueTaskAsyncInterface>();
-            mock.Setup(x => x.RefParameterValueReturnType("test")).ReturnsAsync(5, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(2), new Random());
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
+                .ReturnsAsync(
+                    5,
+                    TimeSpan.FromMilliseconds(1),
+                    TimeSpan.FromMilliseconds(2),
+                    new Random()
+                );
 
             var task = mock.Object.RefParameterValueReturnType("test");
             var value = await Assert.IsType<ValueTask<int>>(task);
@@ -847,9 +867,14 @@ namespace Moq.Tests
         {
             var mock = new Mock<IValueTaskAsyncInterface>();
 
-            Action setup = () => mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
-                .ReturnsAsync(5, TimeSpan.FromMilliseconds(1), TimeSpan.FromMilliseconds(2), null);
+            Action setup = () =>
+                mock.Setup(x => x.RefParameterValueReturnType("test"))
+                    .ReturnsAsync(
+                        5,
+                        TimeSpan.FromMilliseconds(1),
+                        TimeSpan.FromMilliseconds(2),
+                        null
+                    );
 
             var paramName = Assert.Throws<ArgumentNullException>(setup).ParamName;
             Assert.Equal("random", paramName);
@@ -860,8 +885,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IValueTaskAsyncInterface>();
 
-            mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
                 .ThrowsAsync(new ArithmeticException("yikes"), TimeSpan.FromMilliseconds(1));
 
             Func<ValueTask<int>> test = () => mock.Object.RefParameterValueReturnType("test");
@@ -878,8 +902,7 @@ namespace Moq.Tests
             var minDelay = TimeSpan.FromMilliseconds(1);
             var maxDelay = TimeSpan.FromMilliseconds(2);
 
-            mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
                 .ThrowsAsync(new ArithmeticException("yikes"), minDelay, maxDelay);
 
             Func<ValueTask<int>> test = () => mock.Object.RefParameterValueReturnType("test");
@@ -896,8 +919,7 @@ namespace Moq.Tests
             var minDelay = TimeSpan.FromMilliseconds(1);
             var maxDelay = TimeSpan.FromMilliseconds(2);
 
-            mock
-                .Setup(x => x.RefParameterValueReturnType("test"))
+            mock.Setup(x => x.RefParameterValueReturnType("test"))
                 .ThrowsAsync(new ArithmeticException("yikes"), minDelay, maxDelay, new Random());
 
             Func<ValueTask<int>> test = () => mock.Object.RefParameterValueReturnType("test");
@@ -917,8 +939,7 @@ namespace Moq.Tests
                 var minDelay = TimeSpan.FromMilliseconds(1);
                 var maxDelay = TimeSpan.FromMilliseconds(2);
 
-                mock
-                    .Setup(x => x.RefParameterValueReturnType("test"))
+                mock.Setup(x => x.RefParameterValueReturnType("test"))
                     .ThrowsAsync(anyException, minDelay, maxDelay, null);
             };
 

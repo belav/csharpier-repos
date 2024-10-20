@@ -86,7 +86,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// </list>
 /// </para>
 /// </remarks>
-public class FileNameRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class FileNameRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class FileNameRouteConstraint : IRouteConstraint
 #endif
@@ -98,10 +101,10 @@ internal class FileNameRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);

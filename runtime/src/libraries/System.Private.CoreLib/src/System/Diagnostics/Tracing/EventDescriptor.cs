@@ -13,28 +13,30 @@ namespace System.Diagnostics.Tracing
         #region private
         [FieldOffset(0)]
         private readonly int m_traceloggingId;
+
         [FieldOffset(0)]
         private readonly ushort m_id;
+
         [FieldOffset(2)]
         private readonly byte m_version;
+
         [FieldOffset(3)]
         private readonly byte m_channel;
+
         [FieldOffset(4)]
         private readonly byte m_level;
+
         [FieldOffset(5)]
         private readonly byte m_opcode;
+
         [FieldOffset(6)]
         private readonly ushort m_task;
+
         [FieldOffset(8)]
         private readonly long m_keywords;
         #endregion
 
-        public EventDescriptor(
-                int traceloggingId,
-                byte level,
-                byte opcode,
-                long keywords
-                )
+        public EventDescriptor(int traceloggingId, byte level, byte opcode, long keywords)
         {
             this.m_id = 0;
             this.m_version = 0;
@@ -47,20 +49,23 @@ namespace System.Diagnostics.Tracing
         }
 
         public EventDescriptor(
-                int id,
-                byte version,
-                byte channel,
-                byte level,
-                byte opcode,
-                int task,
-                long keywords
-                )
+            int id,
+            byte version,
+            byte channel,
+            byte level,
+            byte opcode,
+            int task,
+            long keywords
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegative(id);
 
             if (id > ushort.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(id), SR.Format(SR.ArgumentOutOfRange_NeedValidId, 1, ushort.MaxValue));
+                throw new ArgumentOutOfRangeException(
+                    nameof(id),
+                    SR.Format(SR.ArgumentOutOfRange_NeedValidId, 1, ushort.MaxValue)
+                );
             }
 
             m_traceloggingId = 0;
@@ -75,7 +80,10 @@ namespace System.Diagnostics.Tracing
 
             if (task > ushort.MaxValue)
             {
-                throw new ArgumentOutOfRangeException(nameof(task), SR.Format(SR.ArgumentOutOfRange_NeedValidId, 1, ushort.MaxValue));
+                throw new ArgumentOutOfRangeException(
+                    nameof(task),
+                    SR.Format(SR.ArgumentOutOfRange_NeedValidId, 1, ushort.MaxValue)
+                );
             }
 
             m_task = (ushort)task;
@@ -98,13 +106,13 @@ namespace System.Diagnostics.Tracing
             m_id ^ m_version ^ m_channel ^ m_level ^ m_opcode ^ m_task ^ (int)m_keywords;
 
         public bool Equals(EventDescriptor other) =>
-            m_id == other.m_id &&
-            m_version == other.m_version &&
-            m_channel == other.m_channel &&
-            m_level == other.m_level &&
-            m_opcode == other.m_opcode &&
-            m_task == other.m_task &&
-            m_keywords == other.m_keywords;
+            m_id == other.m_id
+            && m_version == other.m_version
+            && m_channel == other.m_channel
+            && m_level == other.m_level
+            && m_opcode == other.m_opcode
+            && m_task == other.m_task
+            && m_keywords == other.m_keywords;
 
         public static bool operator ==(EventDescriptor event1, EventDescriptor event2) =>
             event1.Equals(event2);

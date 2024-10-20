@@ -38,8 +38,12 @@ internal partial class SolutionAssetStorage
         {
             if (!_checksumToScope.TryGetValue(solutionChecksum, out var scope))
             {
-                Debug.Fail($"Request for solution-checksum '{solutionChecksum}' that was not pinned on the host side.");
-                throw new InvalidOperationException($"Request for solution-checksum '{solutionChecksum}' that was not pinned on the host side.");
+                Debug.Fail(
+                    $"Request for solution-checksum '{solutionChecksum}' that was not pinned on the host side."
+                );
+                throw new InvalidOperationException(
+                    $"Request for solution-checksum '{solutionChecksum}' that was not pinned on the host side."
+                );
             }
 
             return scope;
@@ -49,23 +53,36 @@ internal partial class SolutionAssetStorage
     /// <summary>
     /// Adds given snapshot into the storage. This snapshot will be available within the returned <see cref="Scope"/>.
     /// </summary>
-    public ValueTask<Scope> StoreAssetsAsync(Solution solution, CancellationToken cancellationToken)
-        => StoreAssetsAsync(solution.State, cancellationToken);
+    public ValueTask<Scope> StoreAssetsAsync(
+        Solution solution,
+        CancellationToken cancellationToken
+    ) => StoreAssetsAsync(solution.State, cancellationToken);
 
     /// <inheritdoc cref="StoreAssetsAsync(Solution, CancellationToken)"/>
-    public ValueTask<Scope> StoreAssetsAsync(Project project, CancellationToken cancellationToken)
-        => StoreAssetsAsync(project.Solution.State, project.Id, cancellationToken);
+    public ValueTask<Scope> StoreAssetsAsync(
+        Project project,
+        CancellationToken cancellationToken
+    ) => StoreAssetsAsync(project.Solution.State, project.Id, cancellationToken);
 
     /// <inheritdoc cref="StoreAssetsAsync(Solution, CancellationToken)"/>
-    public ValueTask<Scope> StoreAssetsAsync(SolutionState solution, CancellationToken cancellationToken)
-        => StoreAssetsAsync(solution, projectId: null, cancellationToken);
+    public ValueTask<Scope> StoreAssetsAsync(
+        SolutionState solution,
+        CancellationToken cancellationToken
+    ) => StoreAssetsAsync(solution, projectId: null, cancellationToken);
 
     /// <inheritdoc cref="StoreAssetsAsync(Solution, CancellationToken)"/>
-    public async ValueTask<Scope> StoreAssetsAsync(SolutionState solutionState, ProjectId? projectId, CancellationToken cancellationToken)
+    public async ValueTask<Scope> StoreAssetsAsync(
+        SolutionState solutionState,
+        ProjectId? projectId,
+        CancellationToken cancellationToken
+    )
     {
-        var checksum = projectId == null
-            ? await solutionState.GetChecksumAsync(cancellationToken).ConfigureAwait(false)
-            : await solutionState.GetChecksumAsync(projectId, cancellationToken).ConfigureAwait(false);
+        var checksum =
+            projectId == null
+                ? await solutionState.GetChecksumAsync(cancellationToken).ConfigureAwait(false)
+                : await solutionState
+                    .GetChecksumAsync(projectId, cancellationToken)
+                    .ConfigureAwait(false);
 
         lock (_gate)
         {
@@ -104,8 +121,7 @@ internal partial class SolutionAssetStorage
         scope.ReplicationContext.Dispose();
     }
 
-    internal TestAccessor GetTestAccessor()
-        => new(this);
+    internal TestAccessor GetTestAccessor() => new(this);
 
     internal readonly struct TestAccessor
     {
@@ -116,17 +132,24 @@ internal partial class SolutionAssetStorage
             _solutionAssetStorage = solutionAssetStorage;
         }
 
-        public async ValueTask<object> GetRequiredAssetAsync(Checksum checksum, CancellationToken cancellationToken)
+        public async ValueTask<object> GetRequiredAssetAsync(
+            Checksum checksum,
+            CancellationToken cancellationToken
+        )
         {
-            return await _solutionAssetStorage._checksumToScope.Single().Value.GetTestAccessor().GetAssetAsync(checksum, cancellationToken).ConfigureAwait(false);
+            return await _solutionAssetStorage
+                ._checksumToScope.Single()
+                .Value.GetTestAccessor()
+                .GetAssetAsync(checksum, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         public bool IsPinned(Checksum checksum)
         {
             lock (_solutionAssetStorage._gate)
             {
-                return _solutionAssetStorage._checksumToScope.TryGetValue(checksum, out var scope) &&
-                    scope.RefCount >= 1;
+                return _solutionAssetStorage._checksumToScope.TryGetValue(checksum, out var scope)
+                    && scope.RefCount >= 1;
             }
         }
 

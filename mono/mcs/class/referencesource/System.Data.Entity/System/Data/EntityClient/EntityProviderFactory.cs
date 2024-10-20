@@ -7,33 +7,39 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
 using System.Data;
 using System.Data.Common;
+using System.Diagnostics.CodeAnalysis;
 using System.Security;
 using System.Security.Permissions;
+using System.Text;
 
 namespace System.Data.EntityClient
 {
     /// <summary>
     /// Class representing a provider factory for the entity client provider
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2302", Justification="We don't expect serviceType to be an Embedded Interop Types.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Usage",
+        "CA2302",
+        Justification = "We don't expect serviceType to be an Embedded Interop Types."
+    )]
     public sealed class EntityProviderFactory : DbProviderFactory, IServiceProvider
     {
         /// <summary>
         /// A singleton object for the entity client provider factory object
         /// </summary>
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "EntityProviderFactory implements the singleton pattern and it's stateless.  This is needed in order to work with DbProviderFactories.")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "EntityProviderFactory implements the singleton pattern and it's stateless.  This is needed in order to work with DbProviderFactories."
+        )]
         public static readonly EntityProviderFactory Instance = new EntityProviderFactory();
 
         /// <summary>
         /// Constructs the EntityProviderFactory object, this is private as users shouldn't create it directly
         /// </summary>
-        private EntityProviderFactory()
-        {
-        }
+        private EntityProviderFactory() { }
 
         /// <summary>
         /// Creates a EntityCommand object and returns it
@@ -102,18 +108,21 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Extension mechanism for additional services;  
+        /// Extension mechanism for additional services;
         /// </summary>
         /// <returns>requested service provider or null.</returns>
-        object IServiceProvider.GetService(Type serviceType) {
+        object IServiceProvider.GetService(Type serviceType)
+        {
             object result = null;
-            if (serviceType == typeof(DbProviderServices)) {
+            if (serviceType == typeof(DbProviderServices))
+            {
                 result = EntityProviderServices.Instance;
             }
-            else if (serviceType == typeof(IEntityAdapter)) {
+            else if (serviceType == typeof(IEntityAdapter))
+            {
                 result = new EntityAdapter();
             }
             return result;
-        }    
+        }
     }
 }

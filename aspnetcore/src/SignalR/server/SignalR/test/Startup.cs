@@ -21,7 +21,9 @@ namespace Microsoft.AspNetCore.SignalR.Tests;
 
 public class Startup
 {
-    private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(SHA256.HashData(Guid.NewGuid().ToByteArray()));
+    private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(
+        SHA256.HashData(Guid.NewGuid().ToByteArray())
+    );
     private readonly JwtSecurityTokenHandler JwtTokenHandler = new JwtSecurityTokenHandler();
 
     public void ConfigureServices(IServiceCollection services)
@@ -32,38 +34,45 @@ public class Startup
             options.EnableDetailedErrors = true;
         });
 
-        services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(options =>
-        {
-            options.TokenValidationParameters =
-                new TokenValidationParameters
+        services
+            .AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    LifetimeValidator = (before, expires, token, parameters) => expires > DateTime.UtcNow,
+                    LifetimeValidator = (before, expires, token, parameters) =>
+                        expires > DateTime.UtcNow,
                     ValidateAudience = false,
                     ValidateIssuer = false,
                     ValidateActor = false,
                     ValidateLifetime = true,
-                    IssuerSigningKey = SecurityKey
+                    IssuerSigningKey = SecurityKey,
                 };
 
-            options.Events = new JwtBearerEvents
-            {
-                OnMessageReceived = context =>
+                options.Events = new JwtBearerEvents
                 {
-                    var accessToken = context.Request.Query["access_token"];
-
-                    if (!string.IsNullOrEmpty(accessToken) &&
-                        (context.HttpContext.WebSockets.IsWebSocketRequest || context.Request.Headers["Accept"] == "text/event-stream"))
+                    OnMessageReceived = context =>
                     {
-                        context.Token = context.Request.Query["access_token"];
-                    }
-                    return Task.CompletedTask;
-                }
-            };
-        });
+                        var accessToken = context.Request.Query["access_token"];
+
+                        if (
+                            !string.IsNullOrEmpty(accessToken)
+                            && (
+                                context.HttpContext.WebSockets.IsWebSocketRequest
+                                || context.Request.Headers["Accept"] == "text/event-stream"
+                            )
+                        )
+                        {
+                            context.Token = context.Request.Query["access_token"];
+                        }
+                        return Task.CompletedTask;
+                    },
+                };
+            });
 
         services.AddAuthorization();
 
@@ -95,18 +104,30 @@ public class Startup
             endpoints.MapConnectionHandler<HttpHeaderConnectionHandler>("/httpheader");
             endpoints.MapConnectionHandler<AuthConnectionHandler>("/auth");
 
-            endpoints.MapGet("/generatetoken", context =>
-            {
-                return context.Response.WriteAsync(GenerateToken(context));
-            });
+            endpoints.MapGet(
+                "/generatetoken",
+                context =>
+                {
+                    return context.Response.WriteAsync(GenerateToken(context));
+                }
+            );
         });
     }
 
     private string GenerateToken(HttpContext httpContext)
     {
-        var claims = new[] { new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"]) };
+        var claims = new[]
+        {
+            new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"]),
+        };
         var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
-        var token = new JwtSecurityToken("SignalRTestServer", "SignalRTests", claims, expires: DateTime.UtcNow.AddMinutes(1), signingCredentials: credentials);
+        var token = new JwtSecurityToken(
+            "SignalRTestServer",
+            "SignalRTests",
+            claims,
+            expires: DateTime.UtcNow.AddMinutes(1),
+            signingCredentials: credentials
+        );
         return JwtTokenHandler.WriteToken(token);
     }
 }

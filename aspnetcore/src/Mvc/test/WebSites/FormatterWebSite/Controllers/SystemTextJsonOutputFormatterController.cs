@@ -12,12 +12,13 @@ namespace FormatterWebSite.Controllers;
 public class SystemTextJsonOutputFormatterController : ControllerBase
 {
     [HttpGet]
-    public ActionResult<SimpleModel> PolymorphicResult() => new DerivedModel
-    {
-        Id = 10,
-        Name = "test",
-        Address = "Some address",
-    };
+    public ActionResult<SimpleModel> PolymorphicResult() =>
+        new DerivedModel
+        {
+            Id = 10,
+            Name = "test",
+            Address = "Some address",
+        };
 
     [JsonPolymorphic]
     [JsonDerivedType(typeof(DerivedModel), nameof(DerivedModel))]

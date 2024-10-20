@@ -16,15 +16,18 @@ public interface IGoo
 
 public class A
 {
-    public void Goo() { Console.WriteLine("A.Goo"); }
+    public void Goo()
+    {
+        Console.WriteLine("A.Goo");
+    }
 }
 
-public class B : A, IGoo
-{
-}
+public class B : A, IGoo { }
 
 public class C : B
 {
-    public new void Goo() { Console.WriteLine("C.Goo"); }
+    public new void Goo()
+    {
+        Console.WriteLine("C.Goo");
+    }
 }
-

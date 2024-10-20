@@ -12,23 +12,26 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void MultiSegmentBytesReaderNumbers()
         {
-            ReadOnlySequence<byte> bytes = SequenceFactory.Create(new byte[][] {
-                new byte[] { 0          },
-                new byte[] { 1, 2       },
-                new byte[] { 3, 4       },
-                new byte[] { 5, 6, 7, 8 },
-                new byte[] { 8, 0       },
-                new byte[] { 1,         },
-                new byte[] { 0, 2,      },
-                new byte[] { 1, 2, 3, 4 },
-                new byte[] { 5, 6       },
-                new byte[] { 7, 8, 9,   },
-                new byte[] { 0, 1, 2, 3 },
-                new byte[] { 4, 5       },
-                new byte[] { 6, 7, 8, 9 },
-                new byte[] { 0, 1, 2, 3 },
-                new byte[] { 4          },
-            });
+            ReadOnlySequence<byte> bytes = SequenceFactory.Create(
+                new byte[][]
+                {
+                    new byte[] { 0 },
+                    new byte[] { 1, 2 },
+                    new byte[] { 3, 4 },
+                    new byte[] { 5, 6, 7, 8 },
+                    new byte[] { 8, 0 },
+                    new byte[] { 1 },
+                    new byte[] { 0, 2 },
+                    new byte[] { 1, 2, 3, 4 },
+                    new byte[] { 5, 6 },
+                    new byte[] { 7, 8, 9 },
+                    new byte[] { 0, 1, 2, 3 },
+                    new byte[] { 4, 5 },
+                    new byte[] { 6, 7, 8, 9 },
+                    new byte[] { 0, 1, 2, 3 },
+                    new byte[] { 4 },
+                }
+            );
 
             SequenceReader<byte> reader = new SequenceReader<byte>(bytes);
 

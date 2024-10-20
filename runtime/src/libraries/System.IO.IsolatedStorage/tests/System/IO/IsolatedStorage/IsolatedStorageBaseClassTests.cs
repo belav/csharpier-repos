@@ -15,8 +15,14 @@ namespace System.IO.IsolatedStorage
                 throw new NotImplementedException();
             }
 
-            public char TestSeparatorExternal { get { return SeparatorExternal; } }
-            public char TestSeparatorInternal { get { return SeparatorInternal; } }
+            public char TestSeparatorExternal
+            {
+                get { return SeparatorExternal; }
+            }
+            public char TestSeparatorInternal
+            {
+                get { return SeparatorInternal; }
+            }
         }
 
         [Fact]

@@ -19,9 +19,7 @@ internal sealed class PageLoaderMatcherPolicy : MatcherPolicy, IEndpointSelector
     /// until we need to load a page in the body of <see cref="ApplyAsync(HttpContext, CandidateSet)"/>.
     /// </remarks>
     public PageLoaderMatcherPolicy()
-        : this(loader: null)
-    {
-    }
+        : this(loader: null) { }
 
     public PageLoaderMatcherPolicy(PageLoader? loader)
     {
@@ -92,7 +90,12 @@ internal sealed class PageLoaderMatcherPolicy : MatcherPolicy, IEndpointSelector
         return Task.CompletedTask;
     }
 
-    private static async Task ApplyAsyncAwaited(PageLoader pageLoader, CandidateSet candidates, Task<CompiledPageActionDescriptor> actionDescriptorTask, int index)
+    private static async Task ApplyAsyncAwaited(
+        PageLoader pageLoader,
+        CandidateSet candidates,
+        Task<CompiledPageActionDescriptor> actionDescriptorTask,
+        int index
+    )
     {
         var compiled = await actionDescriptorTask;
 

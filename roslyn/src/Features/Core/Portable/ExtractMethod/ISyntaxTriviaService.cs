@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         BeforeBeginningOfSpan = 0,
         AfterBeginningOfSpan,
         BeforeEndOfSpan,
-        AfterEndOfSpan
+        AfterEndOfSpan,
     }
 
     internal struct PreviousNextTokenPair
@@ -30,8 +30,16 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         public IEnumerable<SyntaxTrivia> TrailingTrivia { get; set; }
     }
 
-    internal delegate SyntaxToken AnnotationResolver(SyntaxNode root, TriviaLocation location, SyntaxAnnotation annotation);
-    internal delegate IEnumerable<SyntaxTrivia> TriviaResolver(TriviaLocation location, PreviousNextTokenPair tokenPair, Dictionary<SyntaxToken, LeadingTrailingTriviaPair> triviaMap);
+    internal delegate SyntaxToken AnnotationResolver(
+        SyntaxNode root,
+        TriviaLocation location,
+        SyntaxAnnotation annotation
+    );
+    internal delegate IEnumerable<SyntaxTrivia> TriviaResolver(
+        TriviaLocation location,
+        PreviousNextTokenPair tokenPair,
+        Dictionary<SyntaxToken, LeadingTrailingTriviaPair> triviaMap
+    );
 
     /// <summary>
     /// contains information to restore trivia later on to the annotated tree
@@ -50,7 +58,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         /// <param name="annotationResolver">it provides a custom way of resolving annotations to retrieve right tokens to attach trivia</param>
         /// <param name="triviaResolver">it provides a custom way of creating trivia list between two tokens</param>
         /// <returns>root node to a trivia restored tree</returns>
-        SyntaxNode RestoreTrivia(SyntaxNode root, AnnotationResolver annotationResolver = null, TriviaResolver triviaResolver = null);
+        SyntaxNode RestoreTrivia(
+            SyntaxNode root,
+            AnnotationResolver annotationResolver = null,
+            TriviaResolver triviaResolver = null
+        );
     }
 
     /// <summary>

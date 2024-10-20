@@ -40,6 +40,6 @@ namespace Newtonsoft.Json.Linq
         Replace = 2,
 
         /// <summary>Merge array items together, matched by index.</summary>
-        Merge = 3
+        Merge = 3,
     }
 }

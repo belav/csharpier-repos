@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// if the specified <paramref name="functionId"/> was explicitly enabled.
         /// Instead it checks if the <see cref="RoslynEventSource"/> was enabled at <see cref="EventLevel.Informational"/> level.
         /// </summary>
-        public static LogBlock LogInformationalBlock(FunctionId functionId, object entity, CancellationToken cancellationToken)
-            => LogBlock.Create(functionId, entity, EventLevel.Informational, cancellationToken);
+        public static LogBlock LogInformationalBlock(
+            FunctionId functionId,
+            object entity,
+            CancellationToken cancellationToken
+        ) => LogBlock.Create(functionId, entity, EventLevel.Informational, cancellationToken);
 
         /// <summary>
         /// Logs an informational message block with the given <paramref name="message"/>> and specified <paramref name="functionId"/>.
@@ -29,8 +32,11 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// if the specified <paramref name="functionId"/> was explicitly enabled.
         /// Instead it checks if the <see cref="RoslynEventSource"/> was enabled at <see cref="EventLevel.Informational"/> level.
         /// </summary>
-        public static LogBlock LogInformationalBlock(FunctionId functionId, string message, CancellationToken cancellationToken)
-            => LogBlock.Create(functionId, message, EventLevel.Informational, cancellationToken);
+        public static LogBlock LogInformationalBlock(
+            FunctionId functionId,
+            string message,
+            CancellationToken cancellationToken
+        ) => LogBlock.Create(functionId, message, EventLevel.Informational, cancellationToken);
 
         /// <summary>
         /// This tracks the logged message. On instantiation, it logs 'Started block' with other event data.
@@ -59,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 object? entityForMessage,
                 EventLevel eventLevel,
                 int blockId,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(message != null || entityForMessage != null);
 
@@ -77,10 +84,18 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 FunctionId functionId,
                 object entityForMessage,
                 EventLevel eventLevel,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var blockId = GetNextUniqueBlockId();
-                var logBlock = new LogBlock(functionId, message: null, entityForMessage, eventLevel, blockId, cancellationToken);
+                var logBlock = new LogBlock(
+                    functionId,
+                    message: null,
+                    entityForMessage,
+                    eventLevel,
+                    blockId,
+                    cancellationToken
+                );
                 logBlock.OnStart();
                 return logBlock;
             }
@@ -89,10 +104,18 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 FunctionId functionId,
                 string message,
                 EventLevel eventLevel,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var blockId = GetNextUniqueBlockId();
-                var logBlock = new LogBlock(functionId, message, entityForMessage: null, eventLevel, blockId, cancellationToken);
+                var logBlock = new LogBlock(
+                    functionId,
+                    message,
+                    entityForMessage: null,
+                    eventLevel,
+                    blockId,
+                    cancellationToken
+                );
                 logBlock.OnStart();
                 return logBlock;
             }
@@ -100,8 +123,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             /// <summary>
             /// return next unique pair id
             /// </summary>
-            private static int GetNextUniqueBlockId()
-                => Interlocked.Increment(ref s_lastUniqueBlockId);
+            private static int GetNextUniqueBlockId() =>
+                Interlocked.Increment(ref s_lastUniqueBlockId);
 
             private void OnStart()
             {

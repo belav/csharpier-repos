@@ -16,7 +16,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// </summary>
         /// <param name="matcher">The matcher to which the exclude patterns are added</param>
         /// <param name="excludePatternsGroups">A list of globbing patterns</param>
-        public static void AddExcludePatterns(this Matcher matcher, params IEnumerable<string>[] excludePatternsGroups)
+        public static void AddExcludePatterns(
+            this Matcher matcher,
+            params IEnumerable<string>[] excludePatternsGroups
+        )
         {
             foreach (IEnumerable<string> group in excludePatternsGroups)
             {
@@ -32,7 +35,10 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// </summary>
         /// <param name="matcher">The matcher to which the include patterns are added</param>
         /// <param name="includePatternsGroups">A list of globbing patterns</param>
-        public static void AddIncludePatterns(this Matcher matcher, params IEnumerable<string>[] includePatternsGroups)
+        public static void AddIncludePatterns(
+            this Matcher matcher,
+            params IEnumerable<string>[] includePatternsGroups
+        )
         {
             foreach (IEnumerable<string> group in includePatternsGroups)
             {
@@ -49,10 +55,17 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// <param name="matcher">The matcher</param>
         /// <param name="directoryPath">The root directory for the search</param>
         /// <returns>Absolute file paths of all files matched. Empty enumerable if no files matched given patterns.</returns>
-        public static IEnumerable<string> GetResultsInFullPath(this Matcher matcher, string directoryPath)
+        public static IEnumerable<string> GetResultsInFullPath(
+            this Matcher matcher,
+            string directoryPath
+        )
         {
-            IEnumerable<FilePatternMatch> matches = matcher.Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath))).Files;
-            string[] result = matches.Select(match => Path.GetFullPath(Path.Combine(directoryPath, match.Path))).ToArray();
+            IEnumerable<FilePatternMatch> matches = matcher
+                .Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath)))
+                .Files;
+            string[] result = matches
+                .Select(match => Path.GetFullPath(Path.Combine(directoryPath, match.Path)))
+                .ToArray();
 
             return result;
         }
@@ -98,7 +111,11 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// <param name="rootDir">The root directory for the matcher to match the files from.</param>
         /// <param name="files">The files to run the matcher against.</param>
         /// <returns>The match results.</returns>
-        public static PatternMatchingResult Match(this Matcher matcher, string rootDir, IEnumerable<string>? files)
+        public static PatternMatchingResult Match(
+            this Matcher matcher,
+            string rootDir,
+            IEnumerable<string>? files
+        )
         {
             ThrowHelper.ThrowIfNull(matcher);
 

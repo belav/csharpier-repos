@@ -12,6 +12,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
 {
     internal interface IFSharpNavigationBarItemService
     {
-        Task<IList<FSharpNavigationBarItem>> GetItemsAsync(Document document, CancellationToken cancellationToken);
+        Task<IList<FSharpNavigationBarItem>> GetItemsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        );
     }
 }

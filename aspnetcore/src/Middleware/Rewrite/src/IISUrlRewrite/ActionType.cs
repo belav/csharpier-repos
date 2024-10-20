@@ -9,5 +9,5 @@ internal enum ActionType
     Rewrite,
     Redirect,
     CustomResponse,
-    AbortRequest
+    AbortRequest,
 }

@@ -33,7 +33,11 @@ namespace System.Reflection.Metadata
 
         public bool IsForwarder
         {
-            get { return Attributes.IsForwarder() && Implementation.Kind == HandleKind.AssemblyReference; }
+            get
+            {
+                return Attributes.IsForwarder()
+                    && Implementation.Kind == HandleKind.AssemblyReference;
+            }
         }
 
         /// <summary>
@@ -49,10 +53,7 @@ namespace System.Reflection.Metadata
         /// </summary>
         public StringHandle Namespace
         {
-            get
-            {
-                return reader.ExportedTypeTable.GetTypeNamespaceString(rowId);
-            }
+            get { return reader.ExportedTypeTable.GetTypeNamespaceString(rowId); }
         }
 
         /// <summary>
@@ -80,10 +81,7 @@ namespace System.Reflection.Metadata
         /// </returns>
         public EntityHandle Implementation
         {
-            get
-            {
-                return reader.ExportedTypeTable.GetImplementation(rowId);
-            }
+            get { return reader.ExportedTypeTable.GetImplementation(rowId); }
         }
 
         public CustomAttributeHandleCollection GetCustomAttributes()

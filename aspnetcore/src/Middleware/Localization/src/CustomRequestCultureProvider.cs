@@ -24,7 +24,9 @@ public class CustomRequestCultureProvider : RequestCultureProvider
     }
 
     /// <inheritdoc />
-    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext)
+    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
+        HttpContext httpContext
+    )
     {
         ArgumentNullException.ThrowIfNull(httpContext);
 

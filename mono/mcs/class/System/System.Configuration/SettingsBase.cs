@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,152 +32,173 @@ using System.ComponentModel;
 
 namespace System.Configuration
 {
+    public abstract class SettingsBase
+    {
+        protected SettingsBase() { }
 
-	public abstract class SettingsBase
-	{
-		protected SettingsBase ()
-		{
-		}
+        public void Initialize(
+            SettingsContext context,
+            SettingsPropertyCollection properties,
+            SettingsProviderCollection providers
+        )
+        {
+            this.context = context;
+            this.properties = properties;
+            this.providers = providers;
+            // values do not seem to be reset here!! (otherwise one of the SettingsBaseTest will fail)
+        }
 
-		public void Initialize (SettingsContext context,
-					SettingsPropertyCollection properties,
-					SettingsProviderCollection providers)
-		{
-			this.context = context;
-			this.properties = properties;
-			this.providers = providers;
-			// values do not seem to be reset here!! (otherwise one of the SettingsBaseTest will fail)
-		}
+        public virtual void Save()
+        {
+            if (sync)
+                lock (this)
+                    SaveCore();
+            else
+                SaveCore();
+        }
 
-		public virtual void Save ()
-		{
-			if (sync)
-				lock (this)
-					SaveCore ();
-			else
-				SaveCore ();
-		}
-
-		void SaveCore ()
-		{
-			//
-			// Copied from ApplicationSettingsBase
-			//
+        void SaveCore()
+        {
+            //
+            // Copied from ApplicationSettingsBase
+            //
 #if (CONFIGURATION_DEP)
-			/* ew.. this needs to be more efficient */
-			foreach (SettingsProvider provider in Providers) {
-				SettingsPropertyValueCollection cache = new SettingsPropertyValueCollection ();
+            /* ew.. this needs to be more efficient */
+            foreach (SettingsProvider provider in Providers)
+            {
+                SettingsPropertyValueCollection cache = new SettingsPropertyValueCollection();
 
-				foreach (SettingsPropertyValue val in PropertyValues) {
-					if (val.Property.Provider == provider)
-						cache.Add (val);
-				}
+                foreach (SettingsPropertyValue val in PropertyValues)
+                {
+                    if (val.Property.Provider == provider)
+                        cache.Add(val);
+                }
 
-				if (cache.Count > 0)
-					provider.SetPropertyValues (Context, cache);
-			}
+                if (cache.Count > 0)
+                    provider.SetPropertyValues(Context, cache);
+            }
 #endif
-		}
+        }
 
-		public static SettingsBase Synchronized (SettingsBase settingsBase)
-		{
-			settingsBase.sync = true;
-			return settingsBase;
-		}
+        public static SettingsBase Synchronized(SettingsBase settingsBase)
+        {
+            settingsBase.sync = true;
+            return settingsBase;
+        }
 
-		public virtual SettingsContext Context {
-			get { return context; }
-		}
+        public virtual SettingsContext Context
+        {
+            get { return context; }
+        }
 
-		[Browsable (false)]
-		public bool IsSynchronized {
-			get { return sync; }
-		}
+        [Browsable(false)]
+        public bool IsSynchronized
+        {
+            get { return sync; }
+        }
 
-		public virtual object this [ string propertyName ] {
-			get
-			{
-				if (sync)
-					lock (this) {
-						return GetPropertyValue (propertyName);
-					}
-				else
-					return GetPropertyValue (propertyName);
-			}
-			set
-			{
-				if (sync)
-					lock (this) {
-						SetPropertyValue (propertyName, value);
-					}
-				else
-					SetPropertyValue (propertyName, value);
-			}
-		}
+        public virtual object this[string propertyName]
+        {
+            get
+            {
+                if (sync)
+                    lock (this)
+                    {
+                        return GetPropertyValue(propertyName);
+                    }
+                else
+                    return GetPropertyValue(propertyName);
+            }
+            set
+            {
+                if (sync)
+                    lock (this)
+                    {
+                        SetPropertyValue(propertyName, value);
+                    }
+                else
+                    SetPropertyValue(propertyName, value);
+            }
+        }
 
-		public virtual SettingsPropertyCollection Properties {
-			get {
-				// It seems that Properties.IsSynchronized is
-				// nothing to do with this.IsSynchronized.
-				return properties;
-			}
-		}
+        public virtual SettingsPropertyCollection Properties
+        {
+            get
+            {
+                // It seems that Properties.IsSynchronized is
+                // nothing to do with this.IsSynchronized.
+                return properties;
+            }
+        }
 
-		public virtual SettingsPropertyValueCollection PropertyValues {
-			get {
-				if (sync) {
-					lock (this) {
-						return values;
-					}
-				} else {
-					return values;
-				}
-			}
-		}
+        public virtual SettingsPropertyValueCollection PropertyValues
+        {
+            get
+            {
+                if (sync)
+                {
+                    lock (this)
+                    {
+                        return values;
+                    }
+                }
+                else
+                {
+                    return values;
+                }
+            }
+        }
 
-		public virtual SettingsProviderCollection Providers {
-			get {
-				return providers;
-			}
-		}
+        public virtual SettingsProviderCollection Providers
+        {
+            get { return providers; }
+        }
 
-		object GetPropertyValue (string propertyName)
-		{
-			SettingsProperty prop = null;
-			if (Properties == null || (prop = Properties [propertyName]) == null)
-				throw new SettingsPropertyNotFoundException (
-					string.Format ("The settings property '{0}' was not found", propertyName));
+        object GetPropertyValue(string propertyName)
+        {
+            SettingsProperty prop = null;
+            if (Properties == null || (prop = Properties[propertyName]) == null)
+                throw new SettingsPropertyNotFoundException(
+                    string.Format("The settings property '{0}' was not found", propertyName)
+                );
 
-			if (values [propertyName] == null)
-				foreach (SettingsPropertyValue v in prop.Provider.GetPropertyValues (Context, Properties))
-					values.Add (v);
+            if (values[propertyName] == null)
+                foreach (
+                    SettingsPropertyValue v in prop.Provider.GetPropertyValues(Context, Properties)
+                )
+                    values.Add(v);
 
-			return PropertyValues [propertyName].PropertyValue;
-		}
+            return PropertyValues[propertyName].PropertyValue;
+        }
 
-		void SetPropertyValue (string propertyName, object value)
-		{
-			SettingsProperty prop = null;
-			if (Properties == null || (prop = Properties [propertyName]) == null)
-				throw new SettingsPropertyNotFoundException (
-					string.Format ("The settings property '{0}' was not found", propertyName));
+        void SetPropertyValue(string propertyName, object value)
+        {
+            SettingsProperty prop = null;
+            if (Properties == null || (prop = Properties[propertyName]) == null)
+                throw new SettingsPropertyNotFoundException(
+                    string.Format("The settings property '{0}' was not found", propertyName)
+                );
 
-			if (prop.IsReadOnly)
-				throw new SettingsPropertyIsReadOnlyException (
-					string.Format ("The settings property '{0}' is read only", propertyName));
+            if (prop.IsReadOnly)
+                throw new SettingsPropertyIsReadOnlyException(
+                    string.Format("The settings property '{0}' is read only", propertyName)
+                );
 
-			if (prop.PropertyType != value.GetType ())
-				throw new SettingsPropertyWrongTypeException (
-					string.Format ("The value supplied is of a type incompatible with the settings property '{0}'", propertyName));
+            if (prop.PropertyType != value.GetType())
+                throw new SettingsPropertyWrongTypeException(
+                    string.Format(
+                        "The value supplied is of a type incompatible with the settings property '{0}'",
+                        propertyName
+                    )
+                );
 
-			PropertyValues [propertyName].PropertyValue = value;
-		}
+            PropertyValues[propertyName].PropertyValue = value;
+        }
 
-		bool sync;
-		SettingsContext context;
-		SettingsPropertyCollection properties;
-		SettingsProviderCollection providers;
-		SettingsPropertyValueCollection values = new SettingsPropertyValueCollection ();
-	}
+        bool sync;
+        SettingsContext context;
+        SettingsPropertyCollection properties;
+        SettingsProviderCollection providers;
+        SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
+    }
 }
-

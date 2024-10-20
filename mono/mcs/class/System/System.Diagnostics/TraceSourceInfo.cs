@@ -1,7 +1,7 @@
 //
 // TraceSourceInfo.cs
 //
-// Author: 
+// Author:
 //	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // (C) 2007 Novell, Inc.  http://www.novell.com
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,38 +32,40 @@ using System.Diagnostics;
 
 namespace System.Diagnostics
 {
-	internal class TraceSourceInfo
-	{
-		string name;
-		SourceLevels levels;
-		TraceListenerCollection listeners;
+    internal class TraceSourceInfo
+    {
+        string name;
+        SourceLevels levels;
+        TraceListenerCollection listeners;
 
-		public TraceSourceInfo (string name, SourceLevels levels)
-		{
-			this.name = name;
-			this.levels = levels;
-			this.listeners = new TraceListenerCollection ();
-		}
+        public TraceSourceInfo(string name, SourceLevels levels)
+        {
+            this.name = name;
+            this.levels = levels;
+            this.listeners = new TraceListenerCollection();
+        }
 
-		internal TraceSourceInfo (string name, SourceLevels levels, TraceImplSettings settings)
-		{
-			this.name = name;
-			this.levels = levels;
-			this.listeners = new TraceListenerCollection ();
-			this.listeners.Add (new DefaultTraceListener() { IndentSize = settings.IndentSize });
-		}
+        internal TraceSourceInfo(string name, SourceLevels levels, TraceImplSettings settings)
+        {
+            this.name = name;
+            this.levels = levels;
+            this.listeners = new TraceListenerCollection();
+            this.listeners.Add(new DefaultTraceListener() { IndentSize = settings.IndentSize });
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		public SourceLevels Levels {
-			get { return levels; }
-		}
+        public SourceLevels Levels
+        {
+            get { return levels; }
+        }
 
-		public TraceListenerCollection Listeners {
-			get { return listeners; }
-		}
-	}
+        public TraceListenerCollection Listeners
+        {
+            get { return listeners; }
+        }
+    }
 }
-

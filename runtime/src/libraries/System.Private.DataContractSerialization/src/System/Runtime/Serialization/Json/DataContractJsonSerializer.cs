@@ -14,8 +14,10 @@ using System.Runtime.Serialization.DataContracts;
 using System.Security;
 using System.Text;
 using System.Xml;
-
-using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, System.Runtime.Serialization.DataContracts.DataContract>;
+using DataContractDictionary = System.Collections.Generic.Dictionary<
+    System.Xml.XmlQualifiedName,
+    System.Runtime.Serialization.DataContracts.DataContract
+>;
 
 namespace System.Runtime.Serialization.Json
 {
@@ -39,44 +41,47 @@ namespace System.Runtime.Serialization.Json
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public DataContractJsonSerializer(Type type)
-            : this(type, (IEnumerable<Type>?)null)
-        {
-        }
+            : this(type, (IEnumerable<Type>?)null) { }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public DataContractJsonSerializer(Type type, string? rootName)
-            : this(type, rootName, null)
-        {
-        }
+            : this(type, rootName, null) { }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public DataContractJsonSerializer(Type type, XmlDictionaryString? rootName)
-            : this(type, rootName, null)
-        {
-        }
+            : this(type, rootName, null) { }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public DataContractJsonSerializer(Type type, IEnumerable<Type>? knownTypes)
-            : this(type, null, knownTypes, int.MaxValue, false, false)
-        {
-        }
+            : this(type, null, knownTypes, int.MaxValue, false, false) { }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public DataContractJsonSerializer(Type type, string? rootName, IEnumerable<Type>? knownTypes)
-            : this(type, new DataContractJsonSerializerSettings() { RootName = rootName, KnownTypes = knownTypes })
-        {
-        }
+        public DataContractJsonSerializer(
+            Type type,
+            string? rootName,
+            IEnumerable<Type>? knownTypes
+        )
+            : this(
+                type,
+                new DataContractJsonSerializerSettings()
+                {
+                    RootName = rootName,
+                    KnownTypes = knownTypes,
+                }
+            ) { }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public DataContractJsonSerializer(Type type, XmlDictionaryString? rootName, IEnumerable<Type>? knownTypes)
-            : this(type, rootName, knownTypes, int.MaxValue, false, false)
-        {
-        }
+        public DataContractJsonSerializer(
+            Type type,
+            XmlDictionaryString? rootName,
+            IEnumerable<Type>? knownTypes
+        )
+            : this(type, rootName, knownTypes, int.MaxValue, false, false) { }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -84,22 +89,46 @@ namespace System.Runtime.Serialization.Json
         {
             settings ??= new DataContractJsonSerializerSettings();
 
-            XmlDictionaryString? rootName = (settings.RootName == null) ? null : new XmlDictionary(1).Add(settings.RootName);
-            Initialize(type, rootName, settings.KnownTypes, settings.MaxItemsInObjectGraph, settings.IgnoreExtensionDataObject,
-                settings.EmitTypeInformation, settings.SerializeReadOnlyTypes, settings.DateTimeFormat, settings.UseSimpleDictionaryFormat);
+            XmlDictionaryString? rootName =
+                (settings.RootName == null) ? null : new XmlDictionary(1).Add(settings.RootName);
+            Initialize(
+                type,
+                rootName,
+                settings.KnownTypes,
+                settings.MaxItemsInObjectGraph,
+                settings.IgnoreExtensionDataObject,
+                settings.EmitTypeInformation,
+                settings.SerializeReadOnlyTypes,
+                settings.DateTimeFormat,
+                settings.UseSimpleDictionaryFormat
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal DataContractJsonSerializer(Type type,
+        internal DataContractJsonSerializer(
+            Type type,
             XmlDictionaryString? rootName,
             IEnumerable<Type>? knownTypes,
             int maxItemsInObjectGraph,
             bool ignoreExtensionDataObject,
-            bool alwaysEmitTypeInformation)
+            bool alwaysEmitTypeInformation
+        )
         {
-            EmitTypeInformation emitTypeInformation = alwaysEmitTypeInformation ? EmitTypeInformation.Always : EmitTypeInformation.AsNeeded;
-            Initialize(type, rootName, knownTypes, maxItemsInObjectGraph, ignoreExtensionDataObject, emitTypeInformation, false, null, false);
+            EmitTypeInformation emitTypeInformation = alwaysEmitTypeInformation
+                ? EmitTypeInformation.Always
+                : EmitTypeInformation.AsNeeded;
+            Initialize(
+                type,
+                rootName,
+                knownTypes,
+                maxItemsInObjectGraph,
+                ignoreExtensionDataObject,
+                emitTypeInformation,
+                false,
+                null,
+                false
+            );
         }
 
         internal ISerializationSurrogateProvider? SerializationSurrogateProvider
@@ -118,9 +147,9 @@ namespace System.Runtime.Serialization.Json
             get
             {
                 return _knownTypeCollection ??=
-                    knownTypeList != null ?
-                        new ReadOnlyCollection<Type>(knownTypeList) :
-                        ReadOnlyCollection<Type>.Empty;
+                    knownTypeList != null
+                        ? new ReadOnlyCollection<Type>(knownTypeList)
+                        : ReadOnlyCollection<Type>.Empty;
             }
         }
 
@@ -136,7 +165,10 @@ namespace System.Runtime.Serialization.Json
                     // It's safe, however, because at worse a new (and identical) dictionary of
                     // data contracts will be created and re-assigned to this field.  Introduction
                     // of a lock here could lead to deadlocks.
-                    this.knownDataContracts = XmlObjectSerializerContext.GetDataContractsForKnownTypes(this.knownTypeList);
+                    this.knownDataContracts =
+                        XmlObjectSerializerContext.GetDataContractsForKnownTypes(
+                            this.knownTypeList
+                        );
                 }
                 return this.knownDataContracts;
             }
@@ -149,35 +181,22 @@ namespace System.Runtime.Serialization.Json
 
         public DateTimeFormat? DateTimeFormat
         {
-            get
-            {
-                return _dateTimeFormat;
-            }
+            get { return _dateTimeFormat; }
         }
 
         public EmitTypeInformation EmitTypeInformation
         {
-            get
-            {
-                return _emitTypeInformation;
-            }
+            get { return _emitTypeInformation; }
         }
 
         public bool SerializeReadOnlyTypes
         {
-            get
-            {
-                return _serializeReadOnlyTypes;
-            }
+            get { return _serializeReadOnlyTypes; }
         }
-
 
         public bool UseSimpleDictionaryFormat
         {
-            get
-            {
-                return _useSimpleDictionaryFormat;
-            }
+            get { return _useSimpleDictionaryFormat; }
         }
 
         private DataContract RootContract
@@ -197,10 +216,7 @@ namespace System.Runtime.Serialization.Json
 
         private XmlDictionaryString RootName
         {
-            get
-            {
-                return _rootName ?? JsonGlobals.rootDictionaryString;
-            }
+            get { return _rootName ?? JsonGlobals.rootDictionaryString; }
         }
 
         // These Get/Set methods mirror the extensions that were added to DCS in the early days of Core, which allowed
@@ -238,35 +254,49 @@ namespace System.Runtime.Serialization.Json
         {
             ArgumentNullException.ThrowIfNull(stream);
 
-            return ReadObject(JsonReaderWriterFactory.CreateJsonReader(stream, XmlDictionaryReaderQuotas.Max));
+            return ReadObject(
+                JsonReaderWriterFactory.CreateJsonReader(stream, XmlDictionaryReaderQuotas.Max)
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override object? ReadObject(XmlReader reader)
         {
-            return ReadObjectHandleExceptions(new JsonReaderDelegator(reader, this.DateTimeFormat), true);
+            return ReadObjectHandleExceptions(
+                new JsonReaderDelegator(reader, this.DateTimeFormat),
+                true
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override object? ReadObject(XmlReader reader, bool verifyObjectName)
         {
-            return ReadObjectHandleExceptions(new JsonReaderDelegator(reader, this.DateTimeFormat), verifyObjectName);
+            return ReadObjectHandleExceptions(
+                new JsonReaderDelegator(reader, this.DateTimeFormat),
+                verifyObjectName
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override object? ReadObject(XmlDictionaryReader reader)
         {
-            return ReadObjectHandleExceptions(new JsonReaderDelegator(reader, this.DateTimeFormat), true); // verifyObjectName
+            return ReadObjectHandleExceptions(
+                new JsonReaderDelegator(reader, this.DateTimeFormat),
+                true
+            ); // verifyObjectName
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override object? ReadObject(XmlDictionaryReader reader, bool verifyObjectName)
         {
-            return ReadObjectHandleExceptions(new JsonReaderDelegator(reader, this.DateTimeFormat), verifyObjectName);
+            return ReadObjectHandleExceptions(
+                new JsonReaderDelegator(reader, this.DateTimeFormat),
+                verifyObjectName
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
@@ -291,7 +321,11 @@ namespace System.Runtime.Serialization.Json
         {
             ArgumentNullException.ThrowIfNull(stream);
 
-            XmlDictionaryWriter jsonWriter = JsonReaderWriterFactory.CreateJsonWriter(stream, Encoding.UTF8, false); //  ownsStream
+            XmlDictionaryWriter jsonWriter = JsonReaderWriterFactory.CreateJsonWriter(
+                stream,
+                Encoding.UTF8,
+                false
+            ); //  ownsStream
             WriteObject(jsonWriter, graph);
             jsonWriter.Flush();
         }
@@ -300,28 +334,40 @@ namespace System.Runtime.Serialization.Json
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteObject(XmlWriter writer, object? graph)
         {
-            WriteObjectHandleExceptions(new JsonWriterDelegator(writer, this.DateTimeFormat), graph);
+            WriteObjectHandleExceptions(
+                new JsonWriterDelegator(writer, this.DateTimeFormat),
+                graph
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteObject(XmlDictionaryWriter writer, object? graph)
         {
-            WriteObjectHandleExceptions(new JsonWriterDelegator(writer, this.DateTimeFormat), graph);
+            WriteObjectHandleExceptions(
+                new JsonWriterDelegator(writer, this.DateTimeFormat),
+                graph
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteObjectContent(XmlWriter writer, object? graph)
         {
-            WriteObjectContentHandleExceptions(new JsonWriterDelegator(writer, this.DateTimeFormat), graph);
+            WriteObjectContentHandleExceptions(
+                new JsonWriterDelegator(writer, this.DateTimeFormat),
+                graph
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteObjectContent(XmlDictionaryWriter writer, object? graph)
         {
-            WriteObjectContentHandleExceptions(new JsonWriterDelegator(writer, this.DateTimeFormat), graph);
+            WriteObjectContentHandleExceptions(
+                new JsonWriterDelegator(writer, this.DateTimeFormat),
+                graph
+            );
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
@@ -367,7 +413,9 @@ namespace System.Runtime.Serialization.Json
 
         internal static bool CheckIfXmlNameRequiresMapping(string xmlName)
         {
-            return (xmlName == null) ? false : CheckIfJsonNameRequiresMapping(ConvertXmlNameToJsonName(xmlName));
+            return (xmlName == null)
+                ? false
+                : CheckIfJsonNameRequiresMapping(ConvertXmlNameToJsonName(xmlName));
         }
 
         internal static bool CheckIfXmlNameRequiresMapping(XmlDictionaryString xmlName)
@@ -383,7 +431,9 @@ namespace System.Runtime.Serialization.Json
         [return: NotNullIfNotNull(nameof(xmlName))]
         internal static XmlDictionaryString? ConvertXmlNameToJsonName(XmlDictionaryString? xmlName)
         {
-            return (xmlName == null) ? null : new XmlDictionary().Add(ConvertXmlNameToJsonName(xmlName.Value));
+            return (xmlName == null)
+                ? null
+                : new XmlDictionary().Add(ConvertXmlNameToJsonName(xmlName.Value));
         }
 
         internal static bool IsJsonLocalName(XmlReaderDelegator reader, string elementName)
@@ -398,7 +448,11 @@ namespace System.Runtime.Serialization.Json
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static object? ReadJsonValue(DataContract contract, XmlReaderDelegator reader, XmlObjectSerializerReadContextComplexJson? context)
+        internal static object? ReadJsonValue(
+            DataContract contract,
+            XmlReaderDelegator reader,
+            XmlObjectSerializerReadContextComplexJson? context
+        )
         {
             return JsonDataContract.GetJsonDataContract(contract).ReadJsonValue(reader, context);
         }
@@ -410,7 +464,13 @@ namespace System.Runtime.Serialization.Json
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static void WriteJsonValue(JsonDataContract contract, XmlWriterDelegator writer, object graph, XmlObjectSerializerWriteContextComplexJson? context, RuntimeTypeHandle declaredTypeHandle)
+        internal static void WriteJsonValue(
+            JsonDataContract contract,
+            XmlWriterDelegator writer,
+            object graph,
+            XmlObjectSerializerWriteContextComplexJson? context,
+            RuntimeTypeHandle declaredTypeHandle
+        )
         {
             contract.WriteJsonValue(writer, graph, context, declaredTypeHandle);
         }
@@ -439,32 +499,44 @@ namespace System.Runtime.Serialization.Json
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal override object? InternalReadObject(XmlReaderDelegator xmlReader, bool verifyObjectName)
+        internal override object? InternalReadObject(
+            XmlReaderDelegator xmlReader,
+            bool verifyObjectName
+        )
         {
             if (MaxItemsInObjectGraph == 0)
             {
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
+                );
             }
 
             if (verifyObjectName)
             {
                 if (!InternalIsStartObject(xmlReader))
                 {
-                    throw XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(SR.Format(SR.ExpectingElement, XmlDictionaryString.Empty, RootName), xmlReader);
+                    throw XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
+                        SR.Format(SR.ExpectingElement, XmlDictionaryString.Empty, RootName),
+                        xmlReader
+                    );
                 }
             }
             else if (!IsStartElement(xmlReader))
             {
-                throw XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(SR.Format(SR.ExpectingElementAtDeserialize, XmlNodeType.Element), xmlReader);
+                throw XmlObjectSerializer.CreateSerializationExceptionWithReaderDetails(
+                    SR.Format(SR.ExpectingElementAtDeserialize, XmlNodeType.Element),
+                    xmlReader
+                );
             }
 
             DataContract contract = RootContract;
-            if (contract.IsPrimitive && object.ReferenceEquals(contract.UnderlyingType, _rootType))// handle Nullable<T> differently
+            if (contract.IsPrimitive && object.ReferenceEquals(contract.UnderlyingType, _rootType)) // handle Nullable<T> differently
             {
                 return DataContractJsonSerializer.ReadJsonValue(contract, xmlReader, null);
             }
 
-            XmlObjectSerializerReadContextComplexJson context = XmlObjectSerializerReadContextComplexJson.CreateContext(this, contract);
+            XmlObjectSerializerReadContextComplexJson context =
+                XmlObjectSerializerReadContextComplexJson.CreateContext(this, contract);
             return context.InternalDeserialize(xmlReader, _rootType, contract, null, null);
         }
 
@@ -490,7 +562,9 @@ namespace System.Runtime.Serialization.Json
         {
             if (MaxItemsInObjectGraph == 0)
             {
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph));
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(SR.ExceededMaxItemsQuota, MaxItemsInObjectGraph)
+                );
             }
 
             DataContract contract = RootContract;
@@ -499,7 +573,12 @@ namespace System.Runtime.Serialization.Json
 
             if (_serializationSurrogateProvider != null)
             {
-                graph = DataContractSerializer.SurrogateToDataContractType(_serializationSurrogateProvider, graph, declaredType, ref graphType);
+                graph = DataContractSerializer.SurrogateToDataContractType(
+                    _serializationSurrogateProvider,
+                    graph,
+                    declaredType,
+                    ref graphType
+                );
             }
 
             if (graph == null)
@@ -512,27 +591,61 @@ namespace System.Runtime.Serialization.Json
                 {
                     if (contract.CanContainReferences)
                     {
-                        XmlObjectSerializerWriteContextComplexJson context = XmlObjectSerializerWriteContextComplexJson.CreateContext(this, contract);
+                        XmlObjectSerializerWriteContextComplexJson context =
+                            XmlObjectSerializerWriteContextComplexJson.CreateContext(
+                                this,
+                                contract
+                            );
                         context.OnHandleReference(writer, graph, true); //  canContainReferences
-                        context.SerializeWithoutXsiType(contract, writer, graph, declaredType.TypeHandle);
+                        context.SerializeWithoutXsiType(
+                            contract,
+                            writer,
+                            graph,
+                            declaredType.TypeHandle
+                        );
                     }
                     else
                     {
-                        DataContractJsonSerializer.WriteJsonValue(JsonDataContract.GetJsonDataContract(contract), writer, graph, null, declaredType.TypeHandle); //  XmlObjectSerializerWriteContextComplexJson
+                        DataContractJsonSerializer.WriteJsonValue(
+                            JsonDataContract.GetJsonDataContract(contract),
+                            writer,
+                            graph,
+                            null,
+                            declaredType.TypeHandle
+                        ); //  XmlObjectSerializerWriteContextComplexJson
                     }
                 }
                 else
                 {
-                    XmlObjectSerializerWriteContextComplexJson context = XmlObjectSerializerWriteContextComplexJson.CreateContext(this, RootContract);
-                    contract = DataContractJsonSerializer.GetDataContract(contract, declaredType, graphType);
+                    XmlObjectSerializerWriteContextComplexJson context =
+                        XmlObjectSerializerWriteContextComplexJson.CreateContext(
+                            this,
+                            RootContract
+                        );
+                    contract = DataContractJsonSerializer.GetDataContract(
+                        contract,
+                        declaredType,
+                        graphType
+                    );
                     if (contract.CanContainReferences)
                     {
                         context.OnHandleReference(writer, graph, true); //  canContainCyclicReference
-                        context.SerializeWithXsiTypeAtTopLevel(contract, writer, graph, declaredType.TypeHandle, graphType);
+                        context.SerializeWithXsiTypeAtTopLevel(
+                            contract,
+                            writer,
+                            graph,
+                            declaredType.TypeHandle,
+                            graphType
+                        );
                     }
                     else
                     {
-                        context.SerializeWithoutXsiType(contract, writer, graph, declaredType.TypeHandle);
+                        context.SerializeWithoutXsiType(
+                            contract,
+                            writer,
+                            graph,
+                            declaredType.TypeHandle
+                        );
                     }
                 }
             }
@@ -561,9 +674,14 @@ namespace System.Runtime.Serialization.Json
             Type typeToCheck = knownType;
             while (CollectionDataContract.IsCollection(typeToCheck, out itemType))
             {
-                if (itemType.IsGenericType && (itemType.GetGenericTypeDefinition() == Globals.TypeOfKeyValue))
+                if (
+                    itemType.IsGenericType
+                    && (itemType.GetGenericTypeDefinition() == Globals.TypeOfKeyValue)
+                )
                 {
-                    itemType = Globals.TypeOfKeyValuePair.MakeGenericType(itemType.GenericTypeArguments);
+                    itemType = Globals.TypeOfKeyValuePair.MakeGenericType(
+                        itemType.GenericTypeArguments
+                    );
                 }
                 this.knownTypeList!.Add(itemType);
                 typeToCheck = itemType;
@@ -573,14 +691,16 @@ namespace System.Runtime.Serialization.Json
         [MemberNotNull(nameof(_rootType))]
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        private void Initialize(Type type,
+        private void Initialize(
+            Type type,
             IEnumerable<Type>? knownTypes,
             int maxItemsInObjectGraph,
             bool ignoreExtensionDataObject,
             EmitTypeInformation emitTypeInformation,
             bool serializeReadOnlyTypes,
             DateTimeFormat? dateTimeFormat,
-            bool useSimpleDictionaryFormat)
+            bool useSimpleDictionaryFormat
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -611,7 +731,8 @@ namespace System.Runtime.Serialization.Json
         [MemberNotNull(nameof(_rootType))]
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        private void Initialize(Type type,
+        private void Initialize(
+            Type type,
             XmlDictionaryString? rootName,
             IEnumerable<Type>? knownTypes,
             int maxItemsInObjectGraph,
@@ -619,9 +740,19 @@ namespace System.Runtime.Serialization.Json
             EmitTypeInformation emitTypeInformation,
             bool serializeReadOnlyTypes,
             DateTimeFormat? dateTimeFormat,
-            bool useSimpleDictionaryFormat)
+            bool useSimpleDictionaryFormat
+        )
         {
-            Initialize(type, knownTypes, maxItemsInObjectGraph, ignoreExtensionDataObject, emitTypeInformation, serializeReadOnlyTypes, dateTimeFormat, useSimpleDictionaryFormat);
+            Initialize(
+                type,
+                knownTypes,
+                maxItemsInObjectGraph,
+                ignoreExtensionDataObject,
+                emitTypeInformation,
+                serializeReadOnlyTypes,
+                dateTimeFormat,
+                useSimpleDictionaryFormat
+            );
             _rootName = ConvertXmlNameToJsonName(rootName);
             _rootNameRequiresMapping = CheckIfJsonNameRequiresMapping(_rootName);
         }
@@ -630,18 +761,29 @@ namespace System.Runtime.Serialization.Json
         {
             if (dataContract.IsReference)
             {
-                throw XmlObjectSerializer.CreateSerializationException(SR.Format(
+                throw XmlObjectSerializer.CreateSerializationException(
+                    SR.Format(
                         SR.JsonUnsupportedForIsReference,
                         DataContract.GetClrTypeFullName(dataContract.UnderlyingType),
-                        dataContract.IsReference));
+                        dataContract.IsReference
+                    )
+                );
             }
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        internal static DataContract GetDataContract(DataContract declaredTypeContract, Type declaredType, Type objectType)
+        internal static DataContract GetDataContract(
+            DataContract declaredTypeContract,
+            Type declaredType,
+            Type objectType
+        )
         {
-            DataContract contract = DataContractSerializer.GetDataContract(declaredTypeContract, declaredType, objectType);
+            DataContract contract = DataContractSerializer.GetDataContract(
+                declaredTypeContract,
+                declaredType,
+                objectType
+            );
             CheckIfTypeIsReference(contract);
             return contract;
         }

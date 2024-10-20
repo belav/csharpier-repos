@@ -3,12 +3,12 @@
 //
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Reflection;
-using System.IO;
 
 public static class Assert
 {
@@ -48,27 +48,33 @@ public class MyClass : IMyInterface
 #if V2
     public static Object StaticObjectField2;
 
-    [ThreadStatic] public static String ThreadStaticStringField2;
+    [ThreadStatic]
+    public static String ThreadStaticStringField2;
 
-    [ThreadStatic] public static int ThreadStaticIntField;
+    [ThreadStatic]
+    public static int ThreadStaticIntField;
 
     public static Nullable<Guid> StaticNullableGuidField;
 
     public static Object StaticObjectField;
 
-    [ThreadStatic] public static int ThreadStaticIntField2;
+    [ThreadStatic]
+    public static int ThreadStaticIntField2;
 
     public static long StaticLongField;
 
-    [ThreadStatic] public static DateTime ThreadStaticDateTimeField2;
+    [ThreadStatic]
+    public static DateTime ThreadStaticDateTimeField2;
 
     public static long StaticLongField2;
 
-    [ThreadStatic] public static DateTime ThreadStaticDateTimeField;
+    [ThreadStatic]
+    public static DateTime ThreadStaticDateTimeField;
 
     public static Nullable<Guid> StaticNullableGuidField2;
 
-    [ThreadStatic] public static String ThreadStaticStringField;
+    [ThreadStatic]
+    public static String ThreadStaticStringField;
 #else
     public static Object StaticObjectField;
 
@@ -76,59 +82,58 @@ public class MyClass : IMyInterface
 
     public static Nullable<Guid> StaticNullableGuidField;
 
-    [ThreadStatic] public static String ThreadStaticStringField;
+    [ThreadStatic]
+    public static String ThreadStaticStringField;
 
-    [ThreadStatic] public static int ThreadStaticIntField;
+    [ThreadStatic]
+    public static int ThreadStaticIntField;
 
-    [ThreadStatic] public static DateTime ThreadStaticDateTimeField;
+    [ThreadStatic]
+    public static DateTime ThreadStaticDateTimeField;
 #endif
 
-   public MyClass()
-   {
-   }
+    public MyClass() { }
 
 #if V2
-   public virtual void NewVirtualMethod()
-   {
-   }
+    public virtual void NewVirtualMethod() { }
 
-   public virtual void NewInterfaceMethod()
-   {
-       throw new Exception();
-   }
+    public virtual void NewInterfaceMethod()
+    {
+        throw new Exception();
+    }
 #endif
 
-   public virtual string VirtualMethod()
-   {
-       return "Virtual method result";
-   }
+    public virtual string VirtualMethod()
+    {
+        return "Virtual method result";
+    }
 
-   public virtual string InterfaceMethod(string s)
-   {
-       return "Interface" + s + "result";
-   }
+    public virtual string InterfaceMethod(string s)
+    {
+        return "Interface" + s + "result";
+    }
 
-   public static string TestInterfaceMethod(IMyInterface i, string s)
-   {
-       return i.InterfaceMethod(s);
-   }
+    public static string TestInterfaceMethod(IMyInterface i, string s)
+    {
+        return i.InterfaceMethod(s);
+    }
 
-   public static void TestStaticFields()
-   {
-       StaticObjectField = (int)StaticObjectField + 12345678;
+    public static void TestStaticFields()
+    {
+        StaticObjectField = (int)StaticObjectField + 12345678;
 
-       StaticLongField *= 456;
+        StaticLongField *= 456;
 
-       Assert.AreEqual(StaticNullableGuidField, new Guid("0D7E505F-E767-4FEF-AEEC-3243A3005673"));
-       StaticNullableGuidField = null;
+        Assert.AreEqual(StaticNullableGuidField, new Guid("0D7E505F-E767-4FEF-AEEC-3243A3005673"));
+        StaticNullableGuidField = null;
 
-       ThreadStaticStringField += "World";
+        ThreadStaticStringField += "World";
 
-       ThreadStaticIntField /= 78;
+        ThreadStaticIntField /= 78;
 
-       ThreadStaticDateTimeField = ThreadStaticDateTimeField + new TimeSpan(123);
+        ThreadStaticDateTimeField = ThreadStaticDateTimeField + new TimeSpan(123);
 
-       MyGeneric<int,int>.ThreadStatic = new Object();
+        MyGeneric<int, int>.ThreadStatic = new Object();
 
 #if false // TODO: Enable once LDFTN is supported
        // Do some operations on static fields on a different thread to verify that we are not mixing thread-static and non-static
@@ -146,15 +151,15 @@ public class MyClass : IMyInterface
 
         }).Wait();
 #endif
-   }
+    }
 
-   [DllImport("nativelibrary")]
-   public extern static int NativeMethod();
+    [DllImport("nativelibrary")]
+    public static extern int NativeMethod();
 
-   static public void TestInterop()
-   {
+    public static void TestInterop()
+    {
         NativeMethod();
-   }
+    }
 
 #if V2
     public string MovedToBaseClass()
@@ -169,19 +174,16 @@ public class MyClass : IMyInterface
         return null;
     }
 #else
-   public string ChangedToVirtual()
-   {
-       return "ChangedToVirtual";
-   }
+    public string ChangedToVirtual()
+    {
+        return "ChangedToVirtual";
+    }
 #endif
-
 }
 
 public class MyChildClass : MyClass
 {
-    public MyChildClass()
-    {
-    }
+    public MyChildClass() { }
 
 #if !V2
     public string MovedToBaseClass()
@@ -198,23 +200,18 @@ public class MyChildClass : MyClass
 #endif
 }
 
-
 public struct MyStruct : IDisposable
 {
-   int x;
+    int x;
 
 #if V2
-   void IDisposable.Dispose()
-   {
-   }
+    void IDisposable.Dispose() { }
 #else
-   public void Dispose()
-   {
-   }
+    public void Dispose() { }
 #endif
 }
 
-public class MyGeneric<T,U>
+public class MyGeneric<T, U>
 {
 #if V2
     public object m_unused1;
@@ -226,37 +223,39 @@ public class MyGeneric<T,U>
     public object m_unused3;
     public List<T> m_Field3;
 
-    static public object m_unused4;
-    static public KeyValuePair<T, int> m_Field4;
+    public static object m_unused4;
+    public static KeyValuePair<T, int> m_Field4;
 
-    static public object m_unused5;
-    static public int m_Field5;
+    public static object m_unused5;
+    public static int m_Field5;
 
     public object m_unused6;
-    static public object m_unused7;
+    public static object m_unused7;
 #else
     public string m_Field1;
     public T m_Field2;
     public List<T> m_Field3;
-    static public KeyValuePair<T, int> m_Field4;
-    static public int m_Field5;
+    public static KeyValuePair<T, int> m_Field4;
+    public static int m_Field5;
 #endif
 
-    [ThreadStatic] public static Object ThreadStatic;
+    [ThreadStatic]
+    public static Object ThreadStatic;
 
-    public MyGeneric()
-    {
-    }
+    public MyGeneric() { }
 
-    public virtual string GenericVirtualMethod<V,W>()
+    public virtual string GenericVirtualMethod<V, W>()
     {
-        return typeof(T).ToString() + typeof(U).ToString() + typeof(V).ToString() + typeof(W).ToString();
+        return typeof(T).ToString()
+            + typeof(U).ToString()
+            + typeof(V).ToString()
+            + typeof(W).ToString();
     }
 
 #if V2
     public string MovedToBaseClass<W>()
     {
-        typeof(Dictionary<W,W>).ToString();
+        typeof(Dictionary<W, W>).ToString();
         return typeof(List<W>).ToString();
     }
 #endif
@@ -279,11 +278,9 @@ public class MyGeneric<T,U>
     }
 }
 
-public class MyChildGeneric<T> : MyGeneric<T,T>
+public class MyChildGeneric<T> : MyGeneric<T, T>
 {
-    public MyChildGeneric()
-    {
-    }
+    public MyChildGeneric() { }
 
 #if !V2
     public string MovedToBaseClass<W>()
@@ -363,6 +360,7 @@ public struct MyChangingHFAStruct
     int x;
     int y;
 #endif
+
     static public MyChangingHFAStruct Construct()
     {
         return new MyChangingHFAStruct() { x = 12, y = 23 };
@@ -397,6 +395,7 @@ public class ByteBaseClass : List<byte>
 {
     public byte BaseByte;
 }
+
 public class ByteChildClass : ByteBaseClass
 {
     public byte ChildByte;
@@ -412,7 +411,7 @@ public enum MyEnum
 {
     Apple = 1,
     Banana = 2,
-    Orange = 3
+    Orange = 3,
 }
 
 public class ILInliningTest
@@ -428,7 +427,7 @@ public class ILInliningTest
     }
 }
 
-public class NonGenericClass{}
+public class NonGenericClass { }
 
 static class OpenClosedDelegateExtensionTest
 {
@@ -487,23 +486,25 @@ public class ILInliningVersioningTest<T>
         public int x;
     }
 
-
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void TestVirtualMethodCalls()
     {
-         var o = new MyClass();
-         Assert.AreEqual(o.VirtualMethod(), "Virtual method result");
+        var o = new MyClass();
+        Assert.AreEqual(o.VirtualMethod(), "Virtual method result");
 
-         var iface = (IMyInterface)o;
-         Assert.AreEqual(iface.InterfaceMethod(" "), "Interface result");
-         Assert.AreEqual(MyClass.TestInterfaceMethod(iface, "+"), "Interface+result");
+        var iface = (IMyInterface)o;
+        Assert.AreEqual(iface.InterfaceMethod(" "), "Interface result");
+        Assert.AreEqual(MyClass.TestInterfaceMethod(iface, "+"), "Interface+result");
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void TestVirtualMethodCallsOnStruct()
     {
         // V2 adds override of ToString
-        if (typeof(MyStructWithVirtuals).GetMethod("ToString").DeclaringType == typeof(MyStructWithVirtuals))
+        if (
+            typeof(MyStructWithVirtuals).GetMethod("ToString").DeclaringType
+            == typeof(MyStructWithVirtuals)
+        )
         {
             // Make sure the constrained call to ToString doesn't box
             var mystruct = new MyStructWithVirtuals();
@@ -550,7 +551,7 @@ public class ILInliningVersioningTest<T>
     {
         using (MyStruct s = new MyStruct())
         {
-             ((Object)s).ToString();
+            ((Object)s).ToString();
         }
     }
 
@@ -598,12 +599,23 @@ public class ILInliningVersioningTest<T>
         }).Wait();
 #endif
 
-        Assert.AreEqual(MyClass.StaticObjectField, 894 + 12345678 /* + 1234 */);
-        Assert.AreEqual(MyClass.StaticLongField, (long)(4392854 * 456 /* * 45 */));
+        Assert.AreEqual(
+            MyClass.StaticObjectField,
+            894 + 12345678 /* + 1234 */
+        );
+        Assert.AreEqual(
+            MyClass.StaticLongField,
+            (long)(
+                4392854 * 456 /* * 45 */
+            )
+        );
         Assert.AreEqual(MyClass.StaticNullableGuidField, null);
         Assert.AreEqual(MyClass.ThreadStaticStringField, "HelloWorld");
-        Assert.AreEqual(MyClass.ThreadStaticIntField, 735/78);
-        Assert.AreEqual(MyClass.ThreadStaticDateTimeField, new DateTime(2011, 1, 1) + new TimeSpan(123));
+        Assert.AreEqual(MyClass.ThreadStaticIntField, 735 / 78);
+        Assert.AreEqual(
+            MyClass.ThreadStaticDateTimeField,
+            new DateTime(2011, 1, 1) + new TimeSpan(123)
+        );
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -612,24 +624,27 @@ public class ILInliningVersioningTest<T>
         var a = new int[] { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
 
         int sum = 0;
-        foreach (var e in a) sum += e;
+        foreach (var e in a)
+            sum += e;
         Assert.AreEqual(sum, 1023);
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void TestMultiDimmArray()
     {
-       var a = new int[2,3,4];
-       a[0,1,2] = a[0,0,0] + a[1,1,1];
-       a.ToString();
+        var a = new int[2, 3, 4];
+        a[0, 1, 2] = a[0, 0, 0] + a[1, 1, 1];
+        a.ToString();
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void TestGenericVirtualMethod()
     {
         var o = new MyGeneric<String, Object>();
-        Assert.AreEqual(o.GenericVirtualMethod<NonGenericClass, IEnumerable<String>>(),
-            "System.StringSystem.ObjectNonGenericClassSystem.Collections.Generic.IEnumerable`1[System.String]");
+        Assert.AreEqual(
+            o.GenericVirtualMethod<NonGenericClass, IEnumerable<String>>(),
+            "System.StringSystem.ObjectNonGenericClassSystem.Collections.Generic.IEnumerable`1[System.String]"
+        );
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -637,11 +652,15 @@ public class ILInliningVersioningTest<T>
     {
         var o = new MyChildGeneric<Object>();
 
-        Assert.AreEqual(o.MovedToBaseClass<WeakReference>(), typeof(List<WeakReference>).ToString());
-        Assert.AreEqual(o.ChangedToVirtual<WeakReference>(), typeof(List<WeakReference>).ToString());
+        Assert.AreEqual(
+            o.MovedToBaseClass<WeakReference>(),
+            typeof(List<WeakReference>).ToString()
+        );
+        Assert.AreEqual(
+            o.ChangedToVirtual<WeakReference>(),
+            typeof(List<WeakReference>).ToString()
+        );
     }
-
-
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void TestMovedGenericVirtualMethodOnNullReference()
@@ -684,12 +703,20 @@ public class ILInliningVersioningTest<T>
     static void TestGenericOverStruct()
     {
         var o1 = new MyGeneric<String, MyGrowingStruct>();
-        Assert.AreEqual(o1.GenericVirtualMethod < MyChangingStruct, IEnumerable<NonGenericClass>>(),
-            "System.StringMyGrowingStructMyChangingStructSystem.Collections.Generic.IEnumerable`1[NonGenericClass]");
+        Assert.AreEqual(
+            o1.GenericVirtualMethod<MyChangingStruct, IEnumerable<NonGenericClass>>(),
+            "System.StringMyGrowingStructMyChangingStructSystem.Collections.Generic.IEnumerable`1[NonGenericClass]"
+        );
 
         var o2 = new MyChildGeneric<MyChangingStruct>();
-        Assert.AreEqual(o2.MovedToBaseClass<MyGrowingStruct>(), typeof(List<MyGrowingStruct>).ToString());
-        Assert.AreEqual(o2.ChangedToVirtual<MyGrowingStruct>(), typeof(List<MyGrowingStruct>).ToString());
+        Assert.AreEqual(
+            o2.MovedToBaseClass<MyGrowingStruct>(),
+            typeof(List<MyGrowingStruct>).ToString()
+        );
+        Assert.AreEqual(
+            o2.ChangedToVirtual<MyGrowingStruct>(),
+            typeof(List<MyGrowingStruct>).ToString()
+        );
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -711,7 +738,10 @@ public class ILInliningVersioningTest<T>
         var t = new InstanceFieldTestWithLayout();
         t.Value = 123;
 
-        Assert.AreEqual(typeof(InstanceFieldTestWithLayout).GetRuntimeField("Value").GetValue(t), 123);
+        Assert.AreEqual(
+            typeof(InstanceFieldTestWithLayout).GetRuntimeField("Value").GetValue(t),
+            123
+        );
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -795,13 +825,20 @@ public class ILInliningVersioningTest<T>
     {
         // If running in a collectible context, make the MyLoadContext collectible too so that it doesn't prevent
         // unloading.
-        public MyLoadContext() : base(System.Runtime.Loader.AssemblyLoadContext.GetLoadContext(Assembly.GetExecutingAssembly()).IsCollectible)
-        {
-        }
+        public MyLoadContext()
+            : base(
+                System
+                    .Runtime.Loader.AssemblyLoadContext.GetLoadContext(
+                        Assembly.GetExecutingAssembly()
+                    )
+                    .IsCollectible
+            ) { }
 
         public void TestMultipleLoads()
         {
-            Assembly a = LoadFromAssemblyPath(Path.Combine(Directory.GetCurrentDirectory(), "test.dll"));
+            Assembly a = LoadFromAssemblyPath(
+                Path.Combine(Directory.GetCurrentDirectory(), "test.dll")
+            );
             Assert.AreEqual(System.Runtime.Loader.AssemblyLoadContext.GetLoadContext(a), this);
         }
 
@@ -834,7 +871,8 @@ public class ILInliningVersioningTest<T>
         // This test is verifying the fixups for open vs. closed delegate created against the same target
         // method are encoded correctly.
 
-        Func<string, string, object> idOpen = OpenClosedDelegateExtensionTest.OpenClosedDelegateTarget;
+        Func<string, string, object> idOpen =
+            OpenClosedDelegateExtensionTest.OpenClosedDelegateTarget;
         Assert.AreEqual(idOpen("World", "foo"), "World, foo");
 
         Func<string, object> idClosed = "World".OpenClosedDelegateTarget;
@@ -844,27 +882,60 @@ public class ILInliningVersioningTest<T>
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void TestGenericLdtokenFields()
     {
-        Func<FieldInfo, string> FieldFullName = (fi) => fi.FieldType + " " + fi.DeclaringType.ToString() + "::" + fi.Name;
+        Func<FieldInfo, string> FieldFullName = (fi) =>
+            fi.FieldType + " " + fi.DeclaringType.ToString() + "::" + fi.Name;
 
         IFieldGetter getter1 = new FieldGetter<string>();
         IFieldGetter getter2 = new FieldGetter<object>();
         IFieldGetter getter3 = new FieldGetter<int>();
 
-        foreach (var instArg in new Type[]{typeof(String), typeof(object), typeof(int)})
+        foreach (var instArg in new Type[] { typeof(String), typeof(object), typeof(int) })
         {
-            IFieldGetter getter = (IFieldGetter)Activator.CreateInstance(typeof(FieldGetter<>).MakeGenericType(instArg));
+            IFieldGetter getter = (IFieldGetter)
+                Activator.CreateInstance(typeof(FieldGetter<>).MakeGenericType(instArg));
 
-            string expectedField1 = "System.Int32 Gen`1[???]::m_Field1".Replace("???", instArg.ToString());
-            string expectedField2 = "System.String Gen`1[???]::m_Field2".Replace("???", instArg.ToString());
+            string expectedField1 = "System.Int32 Gen`1[???]::m_Field1".Replace(
+                "???",
+                instArg.ToString()
+            );
+            string expectedField2 = "System.String Gen`1[???]::m_Field2".Replace(
+                "???",
+                instArg.ToString()
+            );
             string expectedField3 = "??? Gen`1[???]::m_Field3".Replace("???", instArg.ToString());
-            string expectedField4 = "System.Collections.Generic.List`1[???] Gen`1[???]::m_Field4".Replace("???", instArg.ToString());
-            string expectedField5 = "System.Collections.Generic.KeyValuePair`2[???,System.Int32] Gen`1[???]::m_Field5".Replace("???", instArg.ToString());
+            string expectedField4 =
+                "System.Collections.Generic.List`1[???] Gen`1[???]::m_Field4".Replace(
+                    "???",
+                    instArg.ToString()
+                );
+            string expectedField5 =
+                "System.Collections.Generic.KeyValuePair`2[???,System.Int32] Gen`1[???]::m_Field5".Replace(
+                    "???",
+                    instArg.ToString()
+                );
 
-            string expectedDllField1 = "System.String MyGeneric`2[???,???]::m_Field1".Replace("???", instArg.ToString());
-            string expectedDllField2 = "??? MyGeneric`2[???,???]::m_Field2".Replace("???", instArg.ToString());
-            string expectedDllField3 = "System.Collections.Generic.List`1[???] MyGeneric`2[???,???]::m_Field3".Replace("???", instArg.ToString());
-            string expectedDllField4 = "System.Collections.Generic.KeyValuePair`2[???,System.Int32] MyGeneric`2[???,???]::m_Field4".Replace("???", instArg.ToString());
-            string expectedDllField5 = "System.Int32 MyGeneric`2[???,???]::m_Field5".Replace("???", instArg.ToString());
+            string expectedDllField1 = "System.String MyGeneric`2[???,???]::m_Field1".Replace(
+                "???",
+                instArg.ToString()
+            );
+            string expectedDllField2 = "??? MyGeneric`2[???,???]::m_Field2".Replace(
+                "???",
+                instArg.ToString()
+            );
+            string expectedDllField3 =
+                "System.Collections.Generic.List`1[???] MyGeneric`2[???,???]::m_Field3".Replace(
+                    "???",
+                    instArg.ToString()
+                );
+            string expectedDllField4 =
+                "System.Collections.Generic.KeyValuePair`2[???,System.Int32] MyGeneric`2[???,???]::m_Field4".Replace(
+                    "???",
+                    instArg.ToString()
+                );
+            string expectedDllField5 = "System.Int32 MyGeneric`2[???,???]::m_Field5".Replace(
+                "???",
+                instArg.ToString()
+            );
 
             Assert.AreEqual(expectedField1, FieldFullName(getter.GetGenT_Field1()));
             Assert.AreEqual(expectedField2, FieldFullName(getter.GetGenT_Field2()));
@@ -891,12 +962,19 @@ public class ILInliningVersioningTest<T>
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static void TestILBodyChange()
     {
-        int actualMethodCallResult = (int)typeof(ILInliningTest).GetMethod("TestDifferentIntValue").Invoke(null, new object[]{});
+        int actualMethodCallResult = (int)
+            typeof(ILInliningTest)
+                .GetMethod("TestDifferentIntValue")
+                .Invoke(null, new object[] { });
         Console.WriteLine(actualMethodCallResult);
         Assert.AreEqual(ILInliningTest.TestDifferentIntValue(), actualMethodCallResult);
     }
 
-    private static void ValidateTestHasCrossModuleImplementation(string testName, List<string> testMethodData, bool expectedToBePresent = true)
+    private static void ValidateTestHasCrossModuleImplementation(
+        string testName,
+        List<string> testMethodData,
+        bool expectedToBePresent = true
+    )
     {
         Console.WriteLine(testName);
         bool found = false;
@@ -934,98 +1012,192 @@ public class ILInliningVersioningTest<T>
             Console.WriteLine(s);
         }
 
-        ValidateTestHasCrossModuleImplementation("TestVirtualMethodCalls", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestVirtualMethodCalls",
+            linesWithILInliningVersioningTest
+        );
         TestVirtualMethodCalls();
 
-        ValidateTestHasCrossModuleImplementation("TestVirtualMethodCallsOnStruct", linesWithILInliningVersioningTest, expectedToBePresent: false /* To protect against type level changes, R2R currently does not allow these calls. Fixing this requires an additional fixup to ensure that the constrained dispatch will be resolved correctly. */);
+        ValidateTestHasCrossModuleImplementation(
+            "TestVirtualMethodCallsOnStruct",
+            linesWithILInliningVersioningTest,
+            expectedToBePresent: false /* To protect against type level changes, R2R currently does not allow these calls. Fixing this requires an additional fixup to ensure that the constrained dispatch will be resolved correctly. */
+        );
         TestVirtualMethodCallsOnStruct();
 
-        ValidateTestHasCrossModuleImplementation("TestMovedVirtualMethods", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestMovedVirtualMethods",
+            linesWithILInliningVersioningTest
+        );
         TestMovedVirtualMethods();
 
-        ValidateTestHasCrossModuleImplementation("TestMovedVirtualMethodsOnNullReference", linesWithILInliningVersioningTest, expectedToBePresent: false /* EH catch clauses cannot be inlined across modules,  Fixing this requires an adjustment to the EH data for inlined methods to allow pulling the tokens from somewhere. */);
+        ValidateTestHasCrossModuleImplementation(
+            "TestMovedVirtualMethodsOnNullReference",
+            linesWithILInliningVersioningTest,
+            expectedToBePresent: false /* EH catch clauses cannot be inlined across modules,  Fixing this requires an adjustment to the EH data for inlined methods to allow pulling the tokens from somewhere. */
+        );
         TestMovedVirtualMethodsOnNullReference();
 
-        ValidateTestHasCrossModuleImplementation("TestConstrainedMethodCalls", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestConstrainedMethodCalls",
+            linesWithILInliningVersioningTest
+        );
         TestConstrainedMethodCalls();
 
-        ValidateTestHasCrossModuleImplementation("TestConstrainedMethodCallsOnEnum", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestConstrainedMethodCallsOnEnum",
+            linesWithILInliningVersioningTest
+        );
         TestConstrainedMethodCallsOnEnum();
 
-        ValidateTestHasCrossModuleImplementation("TestConstrainedMethodCalls_Unsupported", linesWithILInliningVersioningTest, expectedToBePresent: false /* constrained dispatch of these forms not supported in R2R at this time. */);
+        ValidateTestHasCrossModuleImplementation(
+            "TestConstrainedMethodCalls_Unsupported",
+            linesWithILInliningVersioningTest,
+            expectedToBePresent: false /* constrained dispatch of these forms not supported in R2R at this time. */
+        );
         TestConstrainedMethodCalls_Unsupported();
 
         ValidateTestHasCrossModuleImplementation("TestInterop", linesWithILInliningVersioningTest);
         TestInterop();
 
-        ValidateTestHasCrossModuleImplementation("TestStaticFields", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestStaticFields",
+            linesWithILInliningVersioningTest
+        );
         TestStaticFields();
 
-        ValidateTestHasCrossModuleImplementation("TestPreInitializedArray", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestPreInitializedArray",
+            linesWithILInliningVersioningTest
+        );
         TestPreInitializedArray();
 
-        ValidateTestHasCrossModuleImplementation("TestMultiDimmArray", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestMultiDimmArray",
+            linesWithILInliningVersioningTest
+        );
         TestMultiDimmArray();
 
-        ValidateTestHasCrossModuleImplementation("TestGenericVirtualMethod", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestGenericVirtualMethod",
+            linesWithILInliningVersioningTest
+        );
         TestGenericVirtualMethod();
-        ValidateTestHasCrossModuleImplementation("TestMovedGenericVirtualMethod", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestMovedGenericVirtualMethod",
+            linesWithILInliningVersioningTest
+        );
         TestMovedGenericVirtualMethod();
-        ValidateTestHasCrossModuleImplementation("TestMovedGenericVirtualMethodOnNullReference", linesWithILInliningVersioningTest, expectedToBePresent: false /* EH catch clauses cannot be inlined across modules */);
+        ValidateTestHasCrossModuleImplementation(
+            "TestMovedGenericVirtualMethodOnNullReference",
+            linesWithILInliningVersioningTest,
+            expectedToBePresent: false /* EH catch clauses cannot be inlined across modules */
+        );
         TestMovedGenericVirtualMethodOnNullReference();
-        ValidateTestHasCrossModuleImplementation("TestGenericNonVirtualMethod", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestGenericNonVirtualMethod",
+            linesWithILInliningVersioningTest
+        );
         TestGenericNonVirtualMethod();
 
-        ValidateTestHasCrossModuleImplementation("TestGenericOverStruct", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestGenericOverStruct",
+            linesWithILInliningVersioningTest
+        );
         TestGenericOverStruct();
 
-        ValidateTestHasCrossModuleImplementation("TestInstanceFields", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestInstanceFields",
+            linesWithILInliningVersioningTest
+        );
         TestInstanceFields();
 
-        ValidateTestHasCrossModuleImplementation("TestInstanceFieldsWithLayout", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestInstanceFieldsWithLayout",
+            linesWithILInliningVersioningTest
+        );
         TestInstanceFieldsWithLayout();
 
-        ValidateTestHasCrossModuleImplementation("TestInheritingFromGrowingBase", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestInheritingFromGrowingBase",
+            linesWithILInliningVersioningTest
+        );
         TestInheritingFromGrowingBase();
 
-        ValidateTestHasCrossModuleImplementation("TestGrowingStruct", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestGrowingStruct",
+            linesWithILInliningVersioningTest
+        );
         TestGrowingStruct();
-        ValidateTestHasCrossModuleImplementation("TestChangingStruct", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestChangingStruct",
+            linesWithILInliningVersioningTest
+        );
         TestChangingStruct();
-        ValidateTestHasCrossModuleImplementation("TestChangingHFAStruct", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestChangingHFAStruct",
+            linesWithILInliningVersioningTest
+        );
         TestChangingHFAStruct();
 
         ValidateTestHasCrossModuleImplementation("TestGetType", linesWithILInliningVersioningTest);
         TestGetType();
 
-        ValidateTestHasCrossModuleImplementation("TestMultipleLoads", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestMultipleLoads",
+            linesWithILInliningVersioningTest
+        );
         TestMultipleLoads();
 
-        ValidateTestHasCrossModuleImplementation("TestFieldLayoutNGenMixAndMatch", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestFieldLayoutNGenMixAndMatch",
+            linesWithILInliningVersioningTest
+        );
         TestFieldLayoutNGenMixAndMatch();
 
-        ValidateTestHasCrossModuleImplementation("TestStaticBaseCSE", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestStaticBaseCSE",
+            linesWithILInliningVersioningTest
+        );
         TestStaticBaseCSE();
 
-        ValidateTestHasCrossModuleImplementation("TestIsInstCSE", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestIsInstCSE",
+            linesWithILInliningVersioningTest
+        );
         TestIsInstCSE();
 
-        ValidateTestHasCrossModuleImplementation("TestCastClassCSE", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestCastClassCSE",
+            linesWithILInliningVersioningTest
+        );
         TestCastClassCSE();
 
-        ValidateTestHasCrossModuleImplementation("TestRangeCheckElimination", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestRangeCheckElimination",
+            linesWithILInliningVersioningTest
+        );
         TestRangeCheckElimination();
 
-        ValidateTestHasCrossModuleImplementation("TestOpenClosedDelegate", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestOpenClosedDelegate",
+            linesWithILInliningVersioningTest
+        );
         TestOpenClosedDelegate();
 
-        ValidateTestHasCrossModuleImplementation("TestGenericLdtokenFields", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestGenericLdtokenFields",
+            linesWithILInliningVersioningTest
+        );
         TestGenericLdtokenFields();
 
         ValidateTestHasCrossModuleImplementation("TestRVAField", linesWithILInliningVersioningTest);
         TestRVAField();
 
-        ValidateTestHasCrossModuleImplementation("TestILBodyChange", linesWithILInliningVersioningTest);
+        ValidateTestHasCrossModuleImplementation(
+            "TestILBodyChange",
+            linesWithILInliningVersioningTest
+        );
         TestILBodyChange();
     }
 

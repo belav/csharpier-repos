@@ -15,6 +15,6 @@ namespace System.Web.Profile
         //None = 0,
         Anonymous = 0,
         Authenticated = 1,
-        All = 2
+        All = 2,
     }
 }

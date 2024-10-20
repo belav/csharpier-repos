@@ -17,12 +17,8 @@ public class ObjectAdapter : IObjectAdapterWithTest
     /// </summary>
     /// <param name="contractResolver">The <see cref="IContractResolver"/>.</param>
     /// <param name="logErrorAction">The <see cref="Action"/> for logging <see cref="JsonPatchError"/>.</param>
-    public ObjectAdapter(
-        IContractResolver contractResolver,
-        Action<JsonPatchError> logErrorAction) :
-        this(contractResolver, logErrorAction, Adapters.AdapterFactory.Default)
-    {
-    }
+    public ObjectAdapter(IContractResolver contractResolver, Action<JsonPatchError> logErrorAction)
+        : this(contractResolver, logErrorAction, Adapters.AdapterFactory.Default) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="ObjectAdapter"/>.
@@ -31,11 +27,13 @@ public class ObjectAdapter : IObjectAdapterWithTest
     /// <param name="logErrorAction">The <see cref="Action"/> for logging <see cref="JsonPatchError"/>.</param>
     /// <param name="adapterFactory">The <see cref="IAdapterFactory"/> to use when creating adaptors.</param>
     public ObjectAdapter(
-       IContractResolver contractResolver,
-       Action<JsonPatchError> logErrorAction,
-       IAdapterFactory adapterFactory)
+        IContractResolver contractResolver,
+        Action<JsonPatchError> logErrorAction,
+        IAdapterFactory adapterFactory
+    )
     {
-        ContractResolver = contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
+        ContractResolver =
+            contractResolver ?? throw new ArgumentNullException(nameof(contractResolver));
         LogErrorAction = logErrorAction;
         AdapterFactory = adapterFactory ?? throw new ArgumentNullException(nameof(adapterFactory));
     }
@@ -67,11 +65,7 @@ public class ObjectAdapter : IObjectAdapterWithTest
     /// Add is used by various operations (eg: add, copy, ...), yet through different operations;
     /// This method allows code reuse yet reporting the correct operation on error
     /// </summary>
-    private void Add(
-        string path,
-        object value,
-        object objectToApplyTo,
-        Operation operation)
+    private void Add(string path, object value, object objectToApplyTo, Operation operation)
     {
         ArgumentNullThrowHelper.ThrowIfNull(path);
         ArgumentNullThrowHelper.ThrowIfNull(objectToApplyTo);
@@ -88,7 +82,15 @@ public class ObjectAdapter : IObjectAdapterWithTest
             return;
         }
 
-        if (!adapter.TryAdd(target, parsedPath.LastSegment, ContractResolver, value, out errorMessage))
+        if (
+            !adapter.TryAdd(
+                target,
+                parsedPath.LastSegment,
+                ContractResolver,
+                value,
+                out errorMessage
+            )
+        )
         {
             var error = CreateOperationFailedError(objectToApplyTo, path, operation, errorMessage);
             ErrorReporter(error);
@@ -108,10 +110,7 @@ public class ObjectAdapter : IObjectAdapterWithTest
             Remove(operation.from, objectToApplyTo, operation);
 
             // add that value to the path location
-            Add(operation.path,
-                propertyValue,
-                objectToApplyTo,
-                operation);
+            Add(operation.path, propertyValue, objectToApplyTo, operation);
         }
     }
 
@@ -138,14 +137,24 @@ public class ObjectAdapter : IObjectAdapterWithTest
         var target = objectToApplyTo;
         if (!visitor.TryVisit(ref target, out var adapter, out var errorMessage))
         {
-            var error = CreatePathNotFoundError(objectToApplyTo, path, operationToReport, errorMessage);
+            var error = CreatePathNotFoundError(
+                objectToApplyTo,
+                path,
+                operationToReport,
+                errorMessage
+            );
             ErrorReporter(error);
             return;
         }
 
         if (!adapter.TryRemove(target, parsedPath.LastSegment, ContractResolver, out errorMessage))
         {
-            var error = CreateOperationFailedError(objectToApplyTo, path, operationToReport, errorMessage);
+            var error = CreateOperationFailedError(
+                objectToApplyTo,
+                path,
+                operationToReport,
+                errorMessage
+            );
             ErrorReporter(error);
             return;
         }
@@ -162,14 +171,32 @@ public class ObjectAdapter : IObjectAdapterWithTest
         var target = objectToApplyTo;
         if (!visitor.TryVisit(ref target, out var adapter, out var errorMessage))
         {
-            var error = CreatePathNotFoundError(objectToApplyTo, operation.path, operation, errorMessage);
+            var error = CreatePathNotFoundError(
+                objectToApplyTo,
+                operation.path,
+                operation,
+                errorMessage
+            );
             ErrorReporter(error);
             return;
         }
 
-        if (!adapter.TryReplace(target, parsedPath.LastSegment, ContractResolver, operation.value, out errorMessage))
+        if (
+            !adapter.TryReplace(
+                target,
+                parsedPath.LastSegment,
+                ContractResolver,
+                operation.value,
+                out errorMessage
+            )
+        )
         {
-            var error = CreateOperationFailedError(objectToApplyTo, operation.path, operation, errorMessage);
+            var error = CreateOperationFailedError(
+                objectToApplyTo,
+                operation.path,
+                operation,
+                errorMessage
+            );
             ErrorReporter(error);
             return;
         }
@@ -184,17 +211,22 @@ public class ObjectAdapter : IObjectAdapterWithTest
         if (TryGetValue(operation.from, objectToApplyTo, operation, out var propertyValue))
         {
             // Create deep copy
-            var copyResult = ConversionResultProvider.CopyTo(propertyValue, propertyValue?.GetType());
+            var copyResult = ConversionResultProvider.CopyTo(
+                propertyValue,
+                propertyValue?.GetType()
+            );
             if (copyResult.CanBeConverted)
             {
-                Add(operation.path,
-                    copyResult.ConvertedInstance,
-                    objectToApplyTo,
-                    operation);
+                Add(operation.path, copyResult.ConvertedInstance, objectToApplyTo, operation);
             }
             else
             {
-                var error = CreateOperationFailedError(objectToApplyTo, operation.path, operation, Resources.FormatCannotCopyProperty(operation.from));
+                var error = CreateOperationFailedError(
+                    objectToApplyTo,
+                    operation.path,
+                    operation,
+                    Resources.FormatCannotCopyProperty(operation.from)
+                );
                 ErrorReporter(error);
                 return;
             }
@@ -212,14 +244,32 @@ public class ObjectAdapter : IObjectAdapterWithTest
         var target = objectToApplyTo;
         if (!visitor.TryVisit(ref target, out var adapter, out var errorMessage))
         {
-            var error = CreatePathNotFoundError(objectToApplyTo, operation.path, operation, errorMessage);
+            var error = CreatePathNotFoundError(
+                objectToApplyTo,
+                operation.path,
+                operation,
+                errorMessage
+            );
             ErrorReporter(error);
             return;
         }
 
-        if (!adapter.TryTest(target, parsedPath.LastSegment, ContractResolver, operation.value, out errorMessage))
+        if (
+            !adapter.TryTest(
+                target,
+                parsedPath.LastSegment,
+                ContractResolver,
+                operation.value,
+                out errorMessage
+            )
+        )
         {
-            var error = CreateOperationFailedError(objectToApplyTo, operation.path, operation, errorMessage);
+            var error = CreateOperationFailedError(
+                objectToApplyTo,
+                operation.path,
+                operation,
+                errorMessage
+            );
             ErrorReporter(error);
             return;
         }
@@ -229,7 +279,8 @@ public class ObjectAdapter : IObjectAdapterWithTest
         string fromLocation,
         object objectToGetValueFrom,
         Operation operation,
-        out object propertyValue)
+        out object propertyValue
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(fromLocation);
         ArgumentNullThrowHelper.ThrowIfNull(objectToGetValueFrom);
@@ -243,14 +294,32 @@ public class ObjectAdapter : IObjectAdapterWithTest
         var target = objectToGetValueFrom;
         if (!visitor.TryVisit(ref target, out var adapter, out var errorMessage))
         {
-            var error = CreatePathNotFoundError(objectToGetValueFrom, fromLocation, operation, errorMessage);
+            var error = CreatePathNotFoundError(
+                objectToGetValueFrom,
+                fromLocation,
+                operation,
+                errorMessage
+            );
             ErrorReporter(error);
             return false;
         }
 
-        if (!adapter.TryGet(target, parsedPath.LastSegment, ContractResolver, out propertyValue, out errorMessage))
+        if (
+            !adapter.TryGet(
+                target,
+                parsedPath.LastSegment,
+                ContractResolver,
+                out propertyValue,
+                out errorMessage
+            )
+        )
         {
-            var error = CreateOperationFailedError(objectToGetValueFrom, fromLocation, operation, errorMessage);
+            var error = CreateOperationFailedError(
+                objectToGetValueFrom,
+                fromLocation,
+                operation,
+                errorMessage
+            );
             ErrorReporter(error);
             return false;
         }
@@ -260,25 +329,34 @@ public class ObjectAdapter : IObjectAdapterWithTest
 
     private Action<JsonPatchError> ErrorReporter
     {
-        get
-        {
-            return LogErrorAction ?? Internal.ErrorReporter.Default;
-        }
+        get { return LogErrorAction ?? Internal.ErrorReporter.Default; }
     }
 
-    private static JsonPatchError CreateOperationFailedError(object target, string path, Operation operation, string errorMessage)
+    private static JsonPatchError CreateOperationFailedError(
+        object target,
+        string path,
+        Operation operation,
+        string errorMessage
+    )
     {
         return new JsonPatchError(
             target,
             operation,
-            errorMessage ?? Resources.FormatCannotPerformOperation(operation.op, path));
+            errorMessage ?? Resources.FormatCannotPerformOperation(operation.op, path)
+        );
     }
 
-    private static JsonPatchError CreatePathNotFoundError(object target, string path, Operation operation, string errorMessage)
+    private static JsonPatchError CreatePathNotFoundError(
+        object target,
+        string path,
+        Operation operation,
+        string errorMessage
+    )
     {
         return new JsonPatchError(
             target,
             operation,
-            errorMessage ?? Resources.FormatTargetLocationNotFound(operation.op, path));
+            errorMessage ?? Resources.FormatTargetLocationNotFound(operation.op, path)
+        );
     }
 }

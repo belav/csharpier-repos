@@ -12,14 +12,18 @@ using RoutingWebSite;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class ControllerEndpointFiltersTest : IClassFixture<MvcTestFixture<StartupForEndpointFilters>>
+public class ControllerEndpointFiltersTest
+    : IClassFixture<MvcTestFixture<StartupForEndpointFilters>>
 {
     public ControllerEndpointFiltersTest(MvcTestFixture<StartupForEndpointFilters> fixture)
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
     }
 
-    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<StartupForEndpointFilters>();
+    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+        builder.UseStartup<StartupForEndpointFilters>();
 
     public WebApplicationFactory<StartupForEndpointFilters> Factory { get; }
 
@@ -45,7 +49,12 @@ public class ControllerEndpointFiltersTest : IClassFixture<MvcTestFixture<Startu
         var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.True(content.TryGetValue(nameof(EndpointFilterFactoryContext.MethodInfo.Name), out var methodInfo));
+        Assert.True(
+            content.TryGetValue(
+                nameof(EndpointFilterFactoryContext.MethodInfo.Name),
+                out var methodInfo
+            )
+        );
         Assert.Equal("Index", ((JsonElement)methodInfo).GetString());
     }
 
@@ -70,7 +79,9 @@ public class ControllerEndpointFiltersTest : IClassFixture<MvcTestFixture<Startu
         var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
 
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.True(content.TryGetValue(nameof(EndpointFilterInvocationContext.Arguments), out var argument));
+        Assert.True(
+            content.TryGetValue(nameof(EndpointFilterInvocationContext.Arguments), out var argument)
+        );
         Assert.Equal("foobar", ((JsonElement)argument).GetString());
     }
 }

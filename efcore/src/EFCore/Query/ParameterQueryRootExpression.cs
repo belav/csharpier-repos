@@ -28,7 +28,8 @@ public class ParameterQueryRootExpression : QueryRootExpression
     public ParameterQueryRootExpression(
         IAsyncQueryProvider asyncQueryProvider,
         Type elementType,
-        ParameterExpression parameterExpression)
+        ParameterExpression parameterExpression
+    )
         : base(asyncQueryProvider, elementType)
     {
         ParameterExpression = parameterExpression;
@@ -46,8 +47,8 @@ public class ParameterQueryRootExpression : QueryRootExpression
     }
 
     /// <inheritdoc />
-    public override Expression DetachQueryProvider()
-        => new ParameterQueryRootExpression(ElementType, ParameterExpression);
+    public override Expression DetachQueryProvider() =>
+        new ParameterQueryRootExpression(ElementType, ParameterExpression);
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -60,6 +61,6 @@ public class ParameterQueryRootExpression : QueryRootExpression
     }
 
     /// <inheritdoc />
-    protected override void Print(ExpressionPrinter expressionPrinter)
-        => expressionPrinter.Visit(ParameterExpression);
+    protected override void Print(ExpressionPrinter expressionPrinter) =>
+        expressionPrinter.Visit(ParameterExpression);
 }

@@ -54,12 +54,12 @@ public class ControllerActionDescriptor : ActionDescriptor
                     "{0}.{1} ({2})",
                     TypeNameHelper.GetTypeDisplayName(ControllerTypeInfo),
                     MethodInfo.Name,
-                    ControllerTypeInfo.Assembly.GetName().Name);
+                    ControllerTypeInfo.Assembly.GetName().Name
+                );
             }
 
             return base.DisplayName!;
         }
-
         set
         {
             ArgumentNullException.ThrowIfNull(value);

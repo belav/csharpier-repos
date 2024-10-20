@@ -11,32 +11,18 @@ namespace System.ServiceModel.Discovery
         EndpointDiscoveryMetadata endpointDiscoveryMetadata;
         DiscoveryMessageSequence messageSequence;
 
-        internal ResolveResponse()
-        {
-        }
+        internal ResolveResponse() { }
 
         public EndpointDiscoveryMetadata EndpointDiscoveryMetadata
         {
-            get
-            {
-                return this.endpointDiscoveryMetadata;
-            }
-            internal set
-            {
-                this.endpointDiscoveryMetadata = value;
-            }
+            get { return this.endpointDiscoveryMetadata; }
+            internal set { this.endpointDiscoveryMetadata = value; }
         }
 
         public DiscoveryMessageSequence MessageSequence
         {
-            get
-            {
-                return this.messageSequence;
-            }
-            internal set
-            {
-                this.messageSequence = value;
-            }
+            get { return this.messageSequence; }
+            internal set { this.messageSequence = value; }
         }
     }
 }

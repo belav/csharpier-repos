@@ -10,4 +10,5 @@ namespace Microsoft.CodeAnalysis.Remote.ProjectSystem;
 [DataContract]
 internal readonly record struct SourceFileInfo(
     [property: DataMember(Order = 0)] string FilePath,
-    [property: DataMember(Order = 1)] IReadOnlyList<string> FolderNames);
+    [property: DataMember(Order = 1)] IReadOnlyList<string> FolderNames
+);

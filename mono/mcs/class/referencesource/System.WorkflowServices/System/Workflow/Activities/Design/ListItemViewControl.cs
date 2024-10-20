@@ -43,10 +43,6 @@ namespace System.Workflow.Activities.Design
             set { serviceProvider = value; }
         }
 
-        public virtual void UpdateView()
-        {
-        }
-
+        public virtual void UpdateView() { }
     }
-
 }

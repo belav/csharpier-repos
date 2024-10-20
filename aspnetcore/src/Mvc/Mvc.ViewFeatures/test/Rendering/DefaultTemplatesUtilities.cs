@@ -31,6 +31,7 @@ public class DefaultTemplatesUtilities
         }
 
         public string Property1 { get; set; }
+
         [Display(Name = "Prop2")]
         public string Property2 { get; set; }
         public object ComplexInnerModel { get; set; }
@@ -63,7 +64,8 @@ public class DefaultTemplatesUtilities
             model: null,
             urlHelper: urlHelper,
             viewEngine: CreateViewEngine(),
-            provider: TestModelMetadataProvider.CreateDefaultProvider());
+            provider: TestModelMetadataProvider.CreateDefaultProvider()
+        );
     }
 
     public static HtmlHelper<ObjectTemplateModel> GetHtmlHelper(IHtmlGenerator htmlGenerator)
@@ -77,7 +79,8 @@ public class DefaultTemplatesUtilities
             localizerFactory: null,
             innerHelperWrapper: null,
             htmlGenerator: htmlGenerator,
-            idAttributeDotReplacement: null);
+            idAttributeDotReplacement: null
+        );
     }
 
     public static HtmlHelper<TModel> GetHtmlHelper<TModel>(ViewDataDictionary<TModel> viewData)
@@ -90,12 +93,14 @@ public class DefaultTemplatesUtilities
             localizerFactory: null,
             innerHelperWrapper: null,
             htmlGenerator: null,
-            idAttributeDotReplacement: null);
+            idAttributeDotReplacement: null
+        );
     }
 
     public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
         ViewDataDictionary<TModel> viewData,
-        string idAttributeDotReplacement)
+        string idAttributeDotReplacement
+    )
     {
         return GetHtmlHelper(
             viewData,
@@ -105,7 +110,8 @@ public class DefaultTemplatesUtilities
             localizerFactory: null,
             innerHelperWrapper: null,
             htmlGenerator: null,
-            idAttributeDotReplacement: idAttributeDotReplacement);
+            idAttributeDotReplacement: idAttributeDotReplacement
+        );
     }
 
     public static HtmlHelper<TModel> GetHtmlHelper<TModel>(TModel model)
@@ -113,7 +119,10 @@ public class DefaultTemplatesUtilities
         return GetHtmlHelper(model, CreateViewEngine());
     }
 
-    public static HtmlHelper<TModel> GetHtmlHelper<TModel>(TModel model, string idAttributeDotReplacement)
+    public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
+        TModel model,
+        string idAttributeDotReplacement
+    )
     {
         var provider = TestModelMetadataProvider.CreateDefaultProvider();
         var viewData = new ViewDataDictionary<TModel>(provider);
@@ -127,7 +136,8 @@ public class DefaultTemplatesUtilities
             localizerFactory: null,
             innerHelperWrapper: null,
             htmlGenerator: null,
-            idAttributeDotReplacement: idAttributeDotReplacement);
+            idAttributeDotReplacement: idAttributeDotReplacement
+        );
     }
 
     public static HtmlHelper<IEnumerable<TModel>> GetHtmlHelperForEnumerable<TModel>(TModel model)
@@ -146,12 +156,16 @@ public class DefaultTemplatesUtilities
     }
 
     public static HtmlHelper<IEnumerable<ObjectTemplateModel>> GetHtmlHelperForEnumerable(
-        IModelMetadataProvider provider)
+        IModelMetadataProvider provider
+    )
     {
         return GetHtmlHelper<IEnumerable<ObjectTemplateModel>>(model: null, provider: provider);
     }
 
-    public static HtmlHelper<TModel> GetHtmlHelper<TModel>(TModel model, IModelMetadataProvider provider)
+    public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
+        TModel model,
+        IModelMetadataProvider provider
+    )
     {
         return GetHtmlHelper(model, CreateUrlHelper(), CreateViewEngine(), provider);
     }
@@ -159,20 +173,23 @@ public class DefaultTemplatesUtilities
     public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
         TModel model,
         ICompositeViewEngine viewEngine,
-        IStringLocalizerFactory stringLocalizerFactory = null)
+        IStringLocalizerFactory stringLocalizerFactory = null
+    )
     {
         return GetHtmlHelper(
             model,
             CreateUrlHelper(),
             viewEngine,
             TestModelMetadataProvider.CreateDefaultProvider(stringLocalizerFactory),
-            stringLocalizerFactory);
+            stringLocalizerFactory
+        );
     }
 
     public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
         TModel model,
         ICompositeViewEngine viewEngine,
-        Func<IHtmlHelper, IHtmlHelper> innerHelperWrapper)
+        Func<IHtmlHelper, IHtmlHelper> innerHelperWrapper
+    )
     {
         return GetHtmlHelper(
             model,
@@ -180,7 +197,8 @@ public class DefaultTemplatesUtilities
             viewEngine,
             TestModelMetadataProvider.CreateDefaultProvider(),
             localizerFactory: null,
-            innerHelperWrapper);
+            innerHelperWrapper
+        );
     }
 
     public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
@@ -188,9 +206,17 @@ public class DefaultTemplatesUtilities
         IUrlHelper urlHelper,
         ICompositeViewEngine viewEngine,
         IModelMetadataProvider provider,
-        IStringLocalizerFactory localizerFactory = null)
+        IStringLocalizerFactory localizerFactory = null
+    )
     {
-        return GetHtmlHelper(model, urlHelper, viewEngine, provider, localizerFactory, innerHelperWrapper: null);
+        return GetHtmlHelper(
+            model,
+            urlHelper,
+            viewEngine,
+            provider,
+            localizerFactory,
+            innerHelperWrapper: null
+        );
     }
 
     public static HtmlHelper<TModel> GetHtmlHelper<TModel>(
@@ -199,7 +225,8 @@ public class DefaultTemplatesUtilities
         ICompositeViewEngine viewEngine,
         IModelMetadataProvider provider,
         IStringLocalizerFactory localizerFactory,
-        Func<IHtmlHelper, IHtmlHelper> innerHelperWrapper)
+        Func<IHtmlHelper, IHtmlHelper> innerHelperWrapper
+    )
     {
         var viewData = new ViewDataDictionary<TModel>(provider);
         viewData.Model = model;
@@ -212,7 +239,8 @@ public class DefaultTemplatesUtilities
             localizerFactory,
             innerHelperWrapper,
             htmlGenerator: null,
-            idAttributeDotReplacement: null);
+            idAttributeDotReplacement: null
+        );
     }
 
     private static HtmlHelper<TModel> GetHtmlHelper<TModel>(
@@ -223,7 +251,8 @@ public class DefaultTemplatesUtilities
         IStringLocalizerFactory localizerFactory,
         Func<IHtmlHelper, IHtmlHelper> innerHelperWrapper,
         IHtmlGenerator htmlGenerator,
-        string idAttributeDotReplacement)
+        string idAttributeDotReplacement
+    )
     {
         var httpContext = new DefaultHttpContext();
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
@@ -237,29 +266,36 @@ public class DefaultTemplatesUtilities
         var localizationOptions = new MvcDataAnnotationsLocalizationOptions();
         var localizationOptionsAccesor = Options.Create(localizationOptions);
 
-        options.ClientModelValidatorProviders.Add(new DataAnnotationsClientModelValidatorProvider(
-            new ValidationAttributeAdapterProvider(),
-            localizationOptionsAccesor,
-            localizerFactory));
+        options.ClientModelValidatorProviders.Add(
+            new DataAnnotationsClientModelValidatorProvider(
+                new ValidationAttributeAdapterProvider(),
+                localizationOptionsAccesor,
+                localizerFactory
+            )
+        );
 
         var urlHelperFactory = new Mock<IUrlHelperFactory>();
-        urlHelperFactory
-            .Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>()))
-            .Returns(urlHelper);
+        urlHelperFactory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>())).Returns(urlHelper);
 
         if (htmlGenerator == null)
         {
-            htmlGenerator = HtmlGeneratorUtilities.GetHtmlGenerator(provider, urlHelperFactory.Object, options);
+            htmlGenerator = HtmlGeneratorUtilities.GetHtmlGenerator(
+                provider,
+                urlHelperFactory.Object,
+                options
+            );
         }
 
         // TemplateRenderer will Contextualize this transient service.
-        var innerHelper = (IHtmlHelper)new HtmlHelper(
-            htmlGenerator,
-            viewEngine,
-            provider,
-            new TestViewBufferScope(),
-            new HtmlTestEncoder(),
-            UrlEncoder.Default);
+        var innerHelper = (IHtmlHelper)
+            new HtmlHelper(
+                htmlGenerator,
+                viewEngine,
+                provider,
+                new TestViewBufferScope(),
+                new HtmlTestEncoder(),
+                UrlEncoder.Default
+            );
 
         if (innerHelperWrapper != null)
         {
@@ -267,12 +303,12 @@ public class DefaultTemplatesUtilities
         }
 
         var serviceProvider = new ServiceCollection()
-           .AddSingleton(viewEngine)
-           .AddSingleton(urlHelperFactory.Object)
-           .AddSingleton(Mock.Of<IViewComponentHelper>())
-           .AddSingleton(innerHelper)
-           .AddSingleton<IViewBufferScope, TestViewBufferScope>()
-           .BuildServiceProvider();
+            .AddSingleton(viewEngine)
+            .AddSingleton(urlHelperFactory.Object)
+            .AddSingleton(Mock.Of<IViewComponentHelper>())
+            .AddSingleton(innerHelper)
+            .AddSingleton<IViewBufferScope, TestViewBufferScope>()
+            .BuildServiceProvider();
 
         httpContext.RequestServices = serviceProvider;
 
@@ -283,17 +319,17 @@ public class DefaultTemplatesUtilities
             new TestViewBufferScope(),
             new HtmlTestEncoder(),
             UrlEncoder.Default,
-            new ModelExpressionProvider(provider));
+            new ModelExpressionProvider(provider)
+        );
 
         var viewContext = new ViewContext(
             actionContext,
             Mock.Of<IView>(),
             viewData,
-            new TempDataDictionary(
-                httpContext,
-                Mock.Of<ITempDataProvider>()),
+            new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>()),
             new StringWriter(),
-            options.HtmlHelperOptions);
+            options.HtmlHelperOptions
+        );
 
         htmlHelper.Contextualize(viewContext);
 
@@ -303,22 +339,35 @@ public class DefaultTemplatesUtilities
     private static ICompositeViewEngine CreateViewEngine()
     {
         var view = new Mock<IView>();
-        view
-            .Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
-            .Callback(async (ViewContext v) =>
-            {
-                view.ToString();
-                await v.Writer.WriteAsync(FormatOutput(v.ViewData.ModelExplorer));
-            })
+        view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
+            .Callback(
+                async (ViewContext v) =>
+                {
+                    view.ToString();
+                    await v.Writer.WriteAsync(FormatOutput(v.ViewData.ModelExplorer));
+                }
+            )
             .Returns(Task.FromResult(0));
 
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
-            .Setup(v => v.GetView(/*executingFilePath*/ null, It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.GetView( /*executingFilePath*/
+                    null,
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound("MyView", Enumerable.Empty<string>()))
             .Verifiable();
         viewEngine
-            .Setup(v => v.FindView(It.IsAny<ActionContext>(), It.IsAny<string>(), /*isMainPage*/ false))
+            .Setup(v =>
+                v.FindView(
+                    It.IsAny<ActionContext>(),
+                    It.IsAny<string>(), /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.Found("MyView", view.Object))
             .Verifiable();
 
@@ -340,7 +389,8 @@ public class DefaultTemplatesUtilities
             modelExplorer.Model ?? "(null)",
             metadata.ModelType == null ? "(null)" : metadata.ModelType.FullName,
             metadata.PropertyName ?? "(null)",
-            modelExplorer.GetSimpleDisplayText() ?? "(null)");
+            modelExplorer.GetSimpleDisplayText() ?? "(null)"
+        );
     }
 
     private static IUrlHelper CreateUrlHelper()

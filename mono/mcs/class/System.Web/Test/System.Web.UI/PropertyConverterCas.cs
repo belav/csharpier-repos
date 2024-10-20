@@ -1,5 +1,5 @@
 //
-// PropertyConverterCas.cs 
+// PropertyConverterCas.cs
 //	- CAS unit tests for System.Web.UI.PropertyConverter
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,42 +27,57 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class PropertyConverterCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void StaticMethods_Deny_Unrestricted()
+        {
+            Assert.AreEqual(
+                SecurityAction.Demand,
+                PropertyConverter.EnumFromString(typeof(SecurityAction), "Demand"),
+                "EnumFromString"
+            );
+            Assert.AreEqual(
+                "Demand",
+                PropertyConverter.EnumToString(typeof(SecurityAction), SecurityAction.Demand),
+                "EnumToString"
+            );
+            Assert.AreEqual(
+                String.Empty,
+                PropertyConverter.ObjectFromString(typeof(string), null, String.Empty),
+                "ObjectFromString"
+            );
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PropertyConverterCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void StaticMethods_Deny_Unrestricted ()
-		{
-			Assert.AreEqual (SecurityAction.Demand, PropertyConverter.EnumFromString (typeof (SecurityAction), "Demand"), "EnumFromString");
-			Assert.AreEqual ("Demand", PropertyConverter.EnumToString (typeof (SecurityAction), SecurityAction.Demand), "EnumToString");
-			Assert.AreEqual (String.Empty, PropertyConverter.ObjectFromString (typeof (string), null, String.Empty), "ObjectFromString");
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            // static class 2.0 / no public ctor before (1.x)
+            MethodInfo mi = this.Type.GetMethod("EnumToString");
+            Assert.IsNotNull(mi, "EnumToString");
+            return mi.Invoke(null, new object[2] { typeof(SecurityAction), SecurityAction.Demand });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			// static class 2.0 / no public ctor before (1.x)
-			MethodInfo mi = this.Type.GetMethod ("EnumToString");
-			Assert.IsNotNull (mi, "EnumToString");
-			return mi.Invoke (null, new object[2] { typeof(SecurityAction), SecurityAction.Demand });
-		}
-
-		public override Type Type {
-			get { return typeof (PropertyConverter); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(PropertyConverter); }
+        }
+    }
 }

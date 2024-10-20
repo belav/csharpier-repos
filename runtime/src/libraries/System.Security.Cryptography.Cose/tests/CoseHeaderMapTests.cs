@@ -1,10 +1,10 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
-using System.Formats.Cbor;
 using System.Collections.Generic;
+using System.Formats.Cbor;
 using System.Linq;
+using Xunit;
 using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
 
 namespace System.Security.Cryptography.Cose.Tests
@@ -13,33 +13,58 @@ namespace System.Security.Cryptography.Cose.Tests
     {
         [Theory]
         [MemberData(nameof(SetValueGetValueData))]
-        public void SetValue_GetValue_KnownCoseHeaderLabel(SetValueMethod setMethod, GetValueMethod getMethod)
+        public void SetValue_GetValue_KnownCoseHeaderLabel(
+            SetValueMethod setMethod,
+            GetValueMethod getMethod
+        )
         {
             var map = new CoseHeaderMap();
             SetValue(map, CoseHeaderLabel.Algorithm, (int)ECDsaAlgorithm.ES256, setMethod);
 
             if (setMethod != SetValueMethod.AddShortcut)
             {
-                SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, GetDummyCritHeaderValue(), setMethod);
+                SetEncodedValue(
+                    map,
+                    CoseHeaderLabel.CriticalHeaders,
+                    GetDummyCritHeaderValue(),
+                    setMethod
+                );
             }
 
             SetValue(map, CoseHeaderLabel.ContentType, ContentTypeDummyValue, setMethod);
             SetValue(map, CoseHeaderLabel.KeyIdentifier, s_sampleContent, setMethod);
 
-            Assert.Equal((int)ECDsaAlgorithm.ES256, GetValue<int>(map, CoseHeaderLabel.Algorithm, getMethod));
+            Assert.Equal(
+                (int)ECDsaAlgorithm.ES256,
+                GetValue<int>(map, CoseHeaderLabel.Algorithm, getMethod)
+            );
 
             if (getMethod != GetValueMethod.GetValueShortcut)
             {
-                AssertExtensions.SequenceEqual(GetDummyCritHeaderValue(), GetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, getMethod));
+                AssertExtensions.SequenceEqual(
+                    GetDummyCritHeaderValue(),
+                    GetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, getMethod)
+                );
             }
 
-            Assert.Equal(ContentTypeDummyValue, GetValue<string>(map, CoseHeaderLabel.ContentType, getMethod));
-            AssertExtensions.SequenceEqual(s_sampleContent, GetValue<byte[]>(map, CoseHeaderLabel.KeyIdentifier, getMethod));
+            Assert.Equal(
+                ContentTypeDummyValue,
+                GetValue<string>(map, CoseHeaderLabel.ContentType, getMethod)
+            );
+            AssertExtensions.SequenceEqual(
+                s_sampleContent,
+                GetValue<byte[]>(map, CoseHeaderLabel.KeyIdentifier, getMethod)
+            );
         }
 
         [Theory]
         [MemberData(nameof(KnownHeadersEncodedValues_TestData))]
-        public void SetEncodedValue_GetEncodedValue_KnownCoseHeaderLabel(int knownHeader, byte[] encodedValue, SetValueMethod setMethod, GetValueMethod getMethod)
+        public void SetEncodedValue_GetEncodedValue_KnownCoseHeaderLabel(
+            int knownHeader,
+            byte[] encodedValue,
+            SetValueMethod setMethod,
+            GetValueMethod getMethod
+        )
         {
             var map = new CoseHeaderMap();
             var label = new CoseHeaderLabel(knownHeader);
@@ -57,13 +82,26 @@ namespace System.Security.Cryptography.Cose.Tests
         {
             var map = new CoseHeaderMap();
             // only accepts int or tstr
-            Assert.Throws<ArgumentException>("value", () => SetValue(map, CoseHeaderLabel.Algorithm, ReadOnlySpan<byte>.Empty, method));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () => SetValue(map, CoseHeaderLabel.Algorithm, ReadOnlySpan<byte>.Empty, method)
+            );
             // [ +label ] (non-empty array)
-            Assert.Throws<ArgumentException>("value", () => SetValue(map, CoseHeaderLabel.CriticalHeaders, ReadOnlySpan<byte>.Empty, method));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () =>
+                    SetValue(map, CoseHeaderLabel.CriticalHeaders, ReadOnlySpan<byte>.Empty, method)
+            );
             // tstr / uint
-            Assert.Throws<ArgumentException>("value", () => SetValue(map, CoseHeaderLabel.ContentType, -1, method));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () => SetValue(map, CoseHeaderLabel.ContentType, -1, method)
+            );
             // bstr
-            Assert.Throws<ArgumentException>("value", () => SetValue(map, CoseHeaderLabel.KeyIdentifier, "foo", method));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () => SetValue(map, CoseHeaderLabel.KeyIdentifier, "foo", method)
+            );
         }
 
         [Theory]
@@ -81,40 +119,66 @@ namespace System.Security.Cryptography.Cose.Tests
 
             var map = new CoseHeaderMap();
             // only accepts int or tstr
-            Assert.Throws<ArgumentException>("value", () => SetEncodedValue(map, CoseHeaderLabel.Algorithm, encodedNullValue, method));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () => SetEncodedValue(map, CoseHeaderLabel.Algorithm, encodedNullValue, method)
+            );
             // [ +label ] (non-empty array)
-            Assert.Throws<ArgumentException>("value", () => SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, encodedNullValue, method));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () =>
+                    SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, encodedNullValue, method)
+            );
             writer.Reset();
             writer.WriteStartArray(0);
             writer.WriteEndArray();
-            Assert.Throws<ArgumentException>("value", () => SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, writer.Encode(), method));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () => SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, writer.Encode(), method)
+            );
             // tstr / uint
-            Assert.Throws<ArgumentException>("value", () => SetEncodedValue(map, CoseHeaderLabel.ContentType, encodedNullValue, method));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () => SetEncodedValue(map, CoseHeaderLabel.ContentType, encodedNullValue, method)
+            );
             // bstr
-            Assert.Throws<ArgumentException>("value", () => SetEncodedValue(map, CoseHeaderLabel.KeyIdentifier, encodedNullValue, method));
+            Assert.Throws<ArgumentException>(
+                "value",
+                () => SetEncodedValue(map, CoseHeaderLabel.KeyIdentifier, encodedNullValue, method)
+            );
         }
 
         [Fact]
         public void SetValue_InvalidCoseHeaderValue()
         {
-            CoseHeaderLabel[] labelsToTest = {
+            CoseHeaderLabel[] labelsToTest =
+            {
                 new CoseHeaderLabel("foo"),
                 new CoseHeaderLabel(42),
                 CoseHeaderLabel.Algorithm,
                 CoseHeaderLabel.ContentType,
                 CoseHeaderLabel.CriticalHeaders,
-                CoseHeaderLabel.KeyIdentifier
+                CoseHeaderLabel.KeyIdentifier,
             };
 
             foreach (CoseHeaderLabel label in labelsToTest)
             {
                 var map = new CoseHeaderMap();
 
-                Assert.Throws<ArgumentException>("value", () => map.Add(label, new CoseHeaderValue()));
+                Assert.Throws<ArgumentException>(
+                    "value",
+                    () => map.Add(label, new CoseHeaderValue())
+                );
                 Assert.Throws<ArgumentException>("value", () => map[label] = new CoseHeaderValue());
 
-                Assert.Throws<ArgumentException>("value", () => map.Add(label, default(CoseHeaderValue)));
-                Assert.Throws<ArgumentException>("value", () => map[label] = default(CoseHeaderValue));
+                Assert.Throws<ArgumentException>(
+                    "value",
+                    () => map.Add(label, default(CoseHeaderValue))
+                );
+                Assert.Throws<ArgumentException>(
+                    "value",
+                    () => map[label] = default(CoseHeaderValue)
+                );
             }
         }
 
@@ -122,9 +186,24 @@ namespace System.Security.Cryptography.Cose.Tests
         public void Enumerate()
         {
             var map = new CoseHeaderMap();
-            SetValue(map, CoseHeaderLabel.Algorithm, (int)ECDsaAlgorithm.ES256, default(SetValueMethod));
-            SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, GetDummyCritHeaderValue(), default(SetValueMethod));
-            SetValue(map ,CoseHeaderLabel.ContentType, ContentTypeDummyValue, default(SetValueMethod));
+            SetValue(
+                map,
+                CoseHeaderLabel.Algorithm,
+                (int)ECDsaAlgorithm.ES256,
+                default(SetValueMethod)
+            );
+            SetEncodedValue(
+                map,
+                CoseHeaderLabel.CriticalHeaders,
+                GetDummyCritHeaderValue(),
+                default(SetValueMethod)
+            );
+            SetValue(
+                map,
+                CoseHeaderLabel.ContentType,
+                ContentTypeDummyValue,
+                default(SetValueMethod)
+            );
             SetValue(map, CoseHeaderLabel.KeyIdentifier, s_sampleContent, default(SetValueMethod));
 
             var writer = new CborWriter();
@@ -141,7 +220,7 @@ namespace System.Security.Cryptography.Cose.Tests
                     KnownHeaderCrit => GetDummyCritHeaderValue(),
                     KnownHeaderContentType => EncodeString(ContentTypeDummyValue, writer),
                     KnownHeaderKid => EncodeBytes(s_sampleContent, writer),
-                    _ => throw new InvalidOperationException()
+                    _ => throw new InvalidOperationException(),
                 };
                 AssertExtensions.SequenceEqual(expectedValue.Span, value.EncodedValue.Span);
                 currentHeader++;
@@ -177,7 +256,10 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void DecodedProtectedMapShouldBeReadOnly()
         {
-            byte[] encodedMessage = CoseSign1Message.SignEmbedded(s_sampleContent, GetCoseSigner(DefaultKey, DefaultHash));
+            byte[] encodedMessage = CoseSign1Message.SignEmbedded(
+                s_sampleContent,
+                GetCoseSigner(DefaultKey, DefaultHash)
+            );
             CoseSign1Message message = CoseMessage.DecodeSign1(encodedMessage);
             Assert.True(message.ProtectedHeaders.IsReadOnly, "message.ProtectedHeaders.IsReadOnly");
         }
@@ -188,7 +270,10 @@ namespace System.Security.Cryptography.Cose.Tests
         [InlineData(GetValueMethod.GetValueShortcut)]
         public void GetValueFromReadOnlyProtectedMap(GetValueMethod getMethod)
         {
-            byte[] encodedMessage = CoseSign1Message.SignEmbedded(s_sampleContent, GetCoseSigner(DefaultKey, DefaultHash));
+            byte[] encodedMessage = CoseSign1Message.SignEmbedded(
+                s_sampleContent,
+                GetCoseSigner(DefaultKey, DefaultHash)
+            );
             CoseSign1Message message = CoseMessage.DecodeSign1(encodedMessage);
             CoseHeaderMap protectedHeaders = message.ProtectedHeaders;
 
@@ -200,15 +285,25 @@ namespace System.Security.Cryptography.Cose.Tests
 
             if (getMethod != GetValueMethod.GetValueShortcut)
             {
-                ReadOnlySpan<byte> encodedAlgorithm = GetEncodedValue(protectedHeaders, CoseHeaderLabel.Algorithm, getMethod);
-                Assert.Equal(expectedAlgorithm, new CborReader(encodedAlgorithm.ToArray()).ReadInt32());
+                ReadOnlySpan<byte> encodedAlgorithm = GetEncodedValue(
+                    protectedHeaders,
+                    CoseHeaderLabel.Algorithm,
+                    getMethod
+                );
+                Assert.Equal(
+                    expectedAlgorithm,
+                    new CborReader(encodedAlgorithm.ToArray()).ReadInt32()
+                );
             }
         }
 
         [Fact]
         public void SetValueAndRemoveAndClearThrowIfProtectedMapIsReadOnly()
         {
-            byte[] encodedMessage = CoseSign1Message.SignEmbedded(s_sampleContent, GetCoseSigner(DefaultKey, DefaultHash));
+            byte[] encodedMessage = CoseSign1Message.SignEmbedded(
+                s_sampleContent,
+                GetCoseSigner(DefaultKey, DefaultHash)
+            );
             CoseSign1Message message = CoseMessage.DecodeSign1(encodedMessage);
             Assert.True(message.ProtectedHeaders.IsReadOnly, "message.ProtectedHeaders.IsReadOnly");
 
@@ -221,7 +316,10 @@ namespace System.Security.Cryptography.Cose.Tests
             VerifyThrows(protectedHeaders, CoseHeaderLabel.Algorithm);
 
             // Verify existing value was not overwritten even after throwing.
-            Assert.Equal((int)ECDsaAlgorithm.ES256, GetValue<int>(protectedHeaders, CoseHeaderLabel.Algorithm, default(GetValueMethod)));
+            Assert.Equal(
+                (int)ECDsaAlgorithm.ES256,
+                GetValue<int>(protectedHeaders, CoseHeaderLabel.Algorithm, default(GetValueMethod))
+            );
 
             // Non-readonly header works correctly.
             CoseHeaderMap unprotectedHeaders = message.UnprotectedHeaders;
@@ -236,7 +334,9 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 foreach (SetValueMethod setMethod in Enum.GetValues(typeof(SetValueMethod)))
                 {
-                    Assert.Throws<InvalidOperationException>(() => SetValue(map, label, 42, setMethod));
+                    Assert.Throws<InvalidOperationException>(
+                        () => SetValue(map, label, 42, setMethod)
+                    );
                 }
                 Assert.Throws<InvalidOperationException>(() => map.Remove(label));
                 Assert.Throws<InvalidOperationException>(() => map.Clear());
@@ -316,7 +416,9 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 CoseHeaderMap map = new();
                 CoseHeaderValue value = CoseHeaderValue.FromEncodedValue(writer.Encode());
-                Assert.Throws<ArgumentException>(() => map[CoseHeaderLabel.CriticalHeaders] = value);
+                Assert.Throws<ArgumentException>(
+                    () => map[CoseHeaderLabel.CriticalHeaders] = value
+                );
             }
         }
 
@@ -326,7 +428,9 @@ namespace System.Security.Cryptography.Cose.Tests
             byte[] encodedValue = GetDummyCritHeaderValue(useIndefiniteLength: true);
 
             CoseHeaderMap map = new();
-            CoseHeaderValue value = CoseHeaderValue.FromEncodedValue(encodedValue.AsSpan(0, encodedValue.Length - 1));
+            CoseHeaderValue value = CoseHeaderValue.FromEncodedValue(
+                encodedValue.AsSpan(0, encodedValue.Length - 1)
+            );
             Assert.Throws<ArgumentException>(() => map[CoseHeaderLabel.CriticalHeaders] = value);
         }
 
@@ -337,7 +441,12 @@ namespace System.Security.Cryptography.Cose.Tests
             AddShortcut,
         }
 
-        private static void SetValue(CoseHeaderMap map, CoseHeaderLabel label, ReadOnlySpan<byte> value, SetValueMethod method)
+        private static void SetValue(
+            CoseHeaderMap map,
+            CoseHeaderLabel label,
+            ReadOnlySpan<byte> value,
+            SetValueMethod method
+        )
         {
             if (method == SetValueMethod.ItemSet)
             {
@@ -354,7 +463,12 @@ namespace System.Security.Cryptography.Cose.Tests
             }
         }
 
-        private static void SetValue<T>(CoseHeaderMap map, CoseHeaderLabel label, T value, SetValueMethod method)
+        private static void SetValue<T>(
+            CoseHeaderMap map,
+            CoseHeaderLabel label,
+            T value,
+            SetValueMethod method
+        )
         {
             if (method == SetValueMethod.ItemSet)
             {
@@ -384,7 +498,12 @@ namespace System.Security.Cryptography.Cose.Tests
             }
         }
 
-        private static void SetEncodedValue(CoseHeaderMap map, CoseHeaderLabel label, ReadOnlySpan<byte> encodedValue, SetValueMethod method)
+        private static void SetEncodedValue(
+            CoseHeaderMap map,
+            CoseHeaderLabel label,
+            ReadOnlySpan<byte> encodedValue,
+            SetValueMethod method
+        )
         {
             if (method == SetValueMethod.AddShortcut) // there's no shortcut for encoded values.
                 throw new InvalidOperationException();
@@ -409,7 +528,11 @@ namespace System.Security.Cryptography.Cose.Tests
             GetValueShortcut,
         }
 
-        private static T GetValue<T>(CoseHeaderMap map, CoseHeaderLabel label, GetValueMethod method)
+        private static T GetValue<T>(
+            CoseHeaderMap map,
+            CoseHeaderLabel label,
+            GetValueMethod method
+        )
         {
             CoseHeaderValue value;
 
@@ -449,7 +572,11 @@ namespace System.Security.Cryptography.Cose.Tests
             return FromCoseHeaderValue<T>(value);
         }
 
-        private static byte[] GetEncodedValue(CoseHeaderMap map, CoseHeaderLabel label, GetValueMethod method)
+        private static byte[] GetEncodedValue(
+            CoseHeaderMap map,
+            CoseHeaderLabel label,
+            GetValueMethod method
+        )
         {
             if (method == GetValueMethod.ItemGet)
             {
@@ -473,7 +600,7 @@ namespace System.Security.Cryptography.Cose.Tests
                 int intValue => CoseHeaderValue.FromInt32(intValue),
                 string stringValue => CoseHeaderValue.FromString(stringValue),
                 byte[] bytesValue => CoseHeaderValue.FromBytes(bytesValue),
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
         }
 
@@ -502,7 +629,7 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 new object[] { SetValueMethod.ItemSet },
                 new object[] { SetValueMethod.Add },
-                new object[] { SetValueMethod.AddShortcut }
+                new object[] { SetValueMethod.AddShortcut },
             };
 
         public static IEnumerable<object[]> SetValueGetValueData =>
@@ -510,7 +637,7 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 new object[] { SetValueMethod.ItemSet, GetValueMethod.ItemGet },
                 new object[] { SetValueMethod.Add, GetValueMethod.TryGetValue },
-                new object[] { SetValueMethod.AddShortcut, GetValueMethod.GetValueShortcut }
+                new object[] { SetValueMethod.AddShortcut, GetValueMethod.GetValueShortcut },
             };
 
         public static IEnumerable<object[]> KnownHeadersEncodedValues_TestData()
@@ -531,18 +658,27 @@ namespace System.Security.Cryptography.Cose.Tests
                 WriteDummyCritHeaderValue(writer, useIndefiniteLength: false);
                 yield return ReturnDataAndReset(KnownHeaderCrit, writer, setMethod, getMethod);
 
-
                 WriteDummyCritHeaderValue(writer, useIndefiniteLength: true);
                 yield return ReturnDataAndReset(KnownHeaderCrit, writer, setMethod, getMethod);
 
                 writer.WriteTextString(ContentTypeDummyValue);
-                yield return ReturnDataAndReset(KnownHeaderContentType, writer, setMethod, getMethod);
+                yield return ReturnDataAndReset(
+                    KnownHeaderContentType,
+                    writer,
+                    setMethod,
+                    getMethod
+                );
 
                 writer.WriteByteString(new byte[] { 0x42, 0x31, 0x31 });
                 yield return ReturnDataAndReset(KnownHeaderKid, writer, setMethod, getMethod);
             }
 
-            static object[] ReturnDataAndReset(int knownHeader, CborWriter w, SetValueMethod setMethod, GetValueMethod getMethod)
+            static object[] ReturnDataAndReset(
+                int knownHeader,
+                CborWriter w,
+                SetValueMethod setMethod,
+                GetValueMethod getMethod
+            )
             {
                 byte[] encodedValue = w.Encode();
                 w.Reset();

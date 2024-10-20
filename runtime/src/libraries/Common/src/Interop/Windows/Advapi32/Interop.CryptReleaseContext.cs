@@ -10,8 +10,6 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool CryptReleaseContext(
-            IntPtr hProv,
-            int dwFlags);
+        public static partial bool CryptReleaseContext(IntPtr hProv, int dwFlags);
     }
 }

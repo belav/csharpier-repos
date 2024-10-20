@@ -11,12 +11,17 @@ namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
 public partial class HubConnectionTests
 {
-    private static HubConnection CreateHubConnection(TestConnection connection, IHubProtocol protocol = null, ILoggerFactory loggerFactory = null)
+    private static HubConnection CreateHubConnection(
+        TestConnection connection,
+        IHubProtocol protocol = null,
+        ILoggerFactory loggerFactory = null
+    )
     {
         var builder = new HubConnectionBuilder().WithUrl("http://example.com");
 
-        var delegateConnectionFactory = new DelegateConnectionFactory(
-            endPoint => connection.StartAsync());
+        var delegateConnectionFactory = new DelegateConnectionFactory(endPoint =>
+            connection.StartAsync()
+        );
 
         builder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 

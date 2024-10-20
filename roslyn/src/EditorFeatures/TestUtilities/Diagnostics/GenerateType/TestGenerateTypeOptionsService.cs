@@ -15,7 +15,11 @@ using Microsoft.CodeAnalysis.ProjectManagement;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
 {
-    [ExportWorkspaceService(typeof(IGenerateTypeOptionsService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(IGenerateTypeOptionsService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal class TestGenerateTypeOptionsService : IGenerateTypeOptionsService
     {
         public Accessibility Accessibility = Accessibility.NotApplicable;
@@ -33,9 +37,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestGenerateTypeOptionsService()
-        {
-        }
+        public TestGenerateTypeOptionsService() { }
 
         // Actual input
         public string ClassName { get; private set; }
@@ -47,12 +49,16 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             Document document,
             INotificationService notificationService,
             IProjectManagementService projectManagementService,
-            ISyntaxFactsService syntaxFactsService)
+            ISyntaxFactsService syntaxFactsService
+        )
         {
             // Storing the actual values
             ClassName = className;
             GenerateTypeDialogOptions = generateTypeDialogOptions;
-            DefaultNamespace ??= projectManagementService.GetDefaultNamespace(Project, Project?.Solution.Workspace);
+            DefaultNamespace ??= projectManagementService.GetDefaultNamespace(
+                Project,
+                Project?.Solution.Workspace
+            );
 
             return new GenerateTypeOptionsResult(
                 accessibility: Accessibility,
@@ -66,7 +72,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
                 existingDocument: ExistingDocument,
                 areFoldersValidIdentifiers: AreFoldersValidIdentifiers,
                 defaultNamespace: DefaultNamespace,
-                isCancelled: IsCancelled);
+                isCancelled: IsCancelled
+            );
         }
 
         public void SetGenerateTypeOptions(
@@ -81,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
             Document existingDocument = null,
             bool areFoldersValidIdentifiers = true,
             string defaultNamespace = null,
-            bool isCancelled = false)
+            bool isCancelled = false
+        )
         {
             Accessibility = accessibility;
             TypeKind = typeKind;

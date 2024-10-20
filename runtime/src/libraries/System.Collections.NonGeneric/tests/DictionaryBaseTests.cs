@@ -137,7 +137,10 @@ namespace System.Collections.Tests
         public static void Indexer_Set_NullKey_ThrowsArgumentNullException()
         {
             var dictBase = new MyDictionary();
-            AssertExtensions.Throws<ArgumentNullException>("key", () => dictBase[null] = new FooValue());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "key",
+                () => dictBase[null] = new FooValue()
+            );
         }
 
         [Fact]
@@ -183,12 +186,25 @@ namespace System.Collections.Tests
             MyDictionary dictBase = CreateDictionary(100);
             AssertExtensions.Throws<ArgumentNullException>("array", () => dictBase.CopyTo(null, 0)); // Array is null
 
-            AssertExtensions.Throws<ArgumentException>("array", null, () => dictBase.CopyTo(new object[100, 100], 0)); // Array is multidimensional
+            AssertExtensions.Throws<ArgumentException>(
+                "array",
+                null,
+                () => dictBase.CopyTo(new object[100, 100], 0)
+            ); // Array is multidimensional
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("arrayIndex", () => dictBase.CopyTo(new DictionaryEntry[100], -1)); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "arrayIndex",
+                () => dictBase.CopyTo(new DictionaryEntry[100], -1)
+            ); // Index < 0
 
-            AssertExtensions.Throws<ArgumentException>(null, () => dictBase.CopyTo(new DictionaryEntry[100], 100)); // Index >= count
-            AssertExtensions.Throws<ArgumentException>(null, () => dictBase.CopyTo(new DictionaryEntry[100], 50)); // Index + array.Count >= count
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => dictBase.CopyTo(new DictionaryEntry[100], 100)
+            ); // Index >= count
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => dictBase.CopyTo(new DictionaryEntry[100], 50)
+            ); // Index + array.Count >= count
         }
 
         [Fact]
@@ -230,7 +246,8 @@ namespace System.Collections.Tests
             Assert.Throws<InvalidOperationException>(() => enumerator.Value);
 
             // Index > dictionary.Count
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
             Assert.False(enumerator.MoveNext());
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
             Assert.Throws<InvalidOperationException>(() => enumerator.Entry);
@@ -276,7 +293,8 @@ namespace System.Collections.Tests
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
 
             // Index >= dictionary.Count
-            while (enumerator.MoveNext()) ;
+            while (enumerator.MoveNext())
+                ;
             Assert.Throws<InvalidOperationException>(() => enumerator.Current);
             Assert.False(enumerator.MoveNext());
 
@@ -579,9 +597,7 @@ namespace System.Collections.Tests
 
         private class FooKey : IComparable
         {
-            public FooKey()
-            {
-            }
+            public FooKey() { }
 
             public FooKey(int i, string str)
             {
@@ -600,7 +616,7 @@ namespace System.Collections.Tests
                 return foo.IntValue == IntValue && foo.StringValue == StringValue;
             }
 
-            public override int GetHashCode() =>IntValue;
+            public override int GetHashCode() => IntValue;
 
             public int CompareTo(object obj)
             {
@@ -611,9 +627,7 @@ namespace System.Collections.Tests
 
         private class FooValue : IComparable
         {
-            public FooValue()
-            {
-            }
+            public FooValue() { }
 
             public FooValue(int intValue, string stringValue)
             {

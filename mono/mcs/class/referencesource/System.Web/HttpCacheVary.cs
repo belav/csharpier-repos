@@ -1,37 +1,40 @@
 //------------------------------------------------------------------------------
 // <copyright file="HttpCacheVary.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * Cache Vary class.  Wraps Vary header
- * 
+ *
  * Copyright (c) 1998 Microsoft Corporation
  */
 
-namespace System.Web {
-    using System.Text;
+namespace System.Web
+{
     using System.Runtime.InteropServices;
-    using System.Web.Util;
     using System.Security.Permissions;
-
+    using System.Text;
+    using System.Web.Util;
 
     /// <devdoc>
-    ///    <para>Indicates that a cache should contain multiple 
+    ///    <para>Indicates that a cache should contain multiple
     ///       representations for a particular Uri. This class is an encapsulation that
     ///       provides a rich, type-safe way to set the Vary header.</para>
     /// </devdoc>
-    public sealed class HttpCacheVaryByHeaders {
-        bool            _isModified;
-        bool            _varyStar;
-        HttpDictionary  _headers;
+    public sealed class HttpCacheVaryByHeaders
+    {
+        bool _isModified;
+        bool _varyStar;
+        HttpDictionary _headers;
 
-        public HttpCacheVaryByHeaders() {
+        public HttpCacheVaryByHeaders()
+        {
             Reset();
         }
 
-        internal void Reset() {
+        internal void Reset()
+        {
             _isModified = false;
             _varyStar = false;
             _headers = null;
@@ -41,54 +44,67 @@ namespace System.Web {
         /// Set the Headers in Cache Vary
         /// </summary>
         /// <param name="headers"></param>
-        public void SetHeaders(string[] headers) {
+        public void SetHeaders(string[] headers)
+        {
+            int i,
+                n;
 
-            int i, n;
-
-            if (headers == null) {
+            if (headers == null)
+            {
                 _isModified = false;
                 _varyStar = false;
                 _headers = null;
             }
-            else {           
+            else
+            {
                 _isModified = true;
-                if (headers[0].Equals("*")) {
+                if (headers[0].Equals("*"))
+                {
                     Debug.Assert(headers.Length == 1, "headers.Length == 1");
 
                     _varyStar = true;
                     _headers = null;
                 }
-                else {
+                else
+                {
                     _varyStar = false;
                     _headers = new HttpDictionary();
-                    for (i = 0, n = headers.Length; i < n; i++) {
+                    for (i = 0, n = headers.Length; i < n; i++)
+                    {
                         _headers.SetValue(headers[i], headers[i]);
                     }
                 }
             }
         }
 
-        internal bool IsModified() {
+        internal bool IsModified()
+        {
             return _isModified;
         }
 
         /*
          * Construct header value string
          */
-        internal String ToHeaderString() {
-            StringBuilder   s;
-            Object          item;
-            int             i, n;
+        internal String ToHeaderString()
+        {
+            StringBuilder s;
+            Object item;
+            int i,
+                n;
 
-            if (_varyStar) {
+            if (_varyStar)
+            {
                 return "*";
             }
-            else if (_headers != null) {
+            else if (_headers != null)
+            {
                 s = new StringBuilder();
 
-                for (i = 0, n = _headers.Size; i < n; i++) {
+                for (i = 0, n = _headers.Size; i < n; i++)
+                {
                     item = _headers.GetValue(i);
-                    if (item != null) {
+                    if (item != null)
+                    {
                         HttpCachePolicy.AppendValueToHeader(s, (String)item);
                     }
                 }
@@ -99,37 +115,48 @@ namespace System.Web {
 
             return null;
         }
- 
+
         /// <summary>
         /// Get the Headers in Cache Vary
         /// </summary>
         /// <returns></returns>
-        public string[] GetHeaders() {
-            string[]    s = null;
+        public string[] GetHeaders()
+        {
+            string[] s = null;
 
-            Object      item;
-            int         i, j, c, n;
+            Object item;
+            int i,
+                j,
+                c,
+                n;
 
-            if (_varyStar) {
-                return new string[1] {"*"};
+            if (_varyStar)
+            {
+                return new string[1] { "*" };
             }
-            else if (_headers != null) {
+            else if (_headers != null)
+            {
                 n = _headers.Size;
                 c = 0;
-                for (i = 0; i < n; i++) {
+                for (i = 0; i < n; i++)
+                {
                     item = _headers.GetValue(i);
-                    if (item != null) {
+                    if (item != null)
+                    {
                         c++;
                     }
                 }
 
-                if (c > 0) {
+                if (c > 0)
+                {
                     s = new string[c];
                     j = 0;
-                    for (i = 0; i < n; i++) {
+                    for (i = 0; i < n; i++)
+                    {
                         item = _headers.GetValue(i);
-                        if (item != null) {
-                            s[j] = (string) item;
+                        if (item != null)
+                        {
+                            s[j] = (string)item;
                             j++;
                         }
                     }
@@ -140,7 +167,7 @@ namespace System.Web {
 
             return s;
         }
-  
+
         //
         // Public methods and properties
         //
@@ -150,13 +177,15 @@ namespace System.Web {
         ///    <para>Sets the "Vary: *" header and causes all other Vary:
         ///       header information to be dropped.</para>
         /// </devdoc>
-        public void VaryByUnspecifiedParameters() {
+        public void VaryByUnspecifiedParameters()
+        {
             _isModified = true;
             _varyStar = true;
             _headers = null;
         }
 
-        internal bool GetVaryByUnspecifiedParameters() {
+        internal bool GetVaryByUnspecifiedParameters()
+        {
             return _varyStar;
         }
 
@@ -168,14 +197,13 @@ namespace System.Web {
         ///    <para>Retrieves or assigns a value indicating whether the cache should vary by Accept types. This causes the
         ///       Vary: header to include an Accept field.</para>
         /// </devdoc>
-        public bool AcceptTypes {
-            get { 
-                return this["Accept"]; 
-            }
-
-            set {         
+        public bool AcceptTypes
+        {
+            get { return this["Accept"]; }
+            set
+            {
                 _isModified = true;
-                this["Accept"] = value; 
+                this["Accept"] = value;
             }
         }
 
@@ -187,14 +215,13 @@ namespace System.Web {
         ///    <para> Retrieves or assigns a Boolean value indicating whether
         ///       the cache should vary by user language.</para>
         /// </devdoc>
-        public bool UserLanguage {
-            get { 
-                return this["Accept-Language"]; 
-            }
-
-            set { 
+        public bool UserLanguage
+        {
+            get { return this["Accept-Language"]; }
+            set
+            {
                 _isModified = true;
-                this["Accept-Language"] = value; 
+                this["Accept-Language"] = value;
             }
         }
 
@@ -206,14 +233,13 @@ namespace System.Web {
         ///    <para> Retrieves or assigns a Boolean value indicating whether
         ///       the cache should vary by user agent.</para>
         /// </devdoc>
-        public bool UserAgent {
-            get {   
-                return this["User-Agent"]; 
-            }
-
-            set { 
+        public bool UserAgent
+        {
+            get { return this["User-Agent"]; }
+            set
+            {
                 _isModified = true;
-                this["User-Agent"] = value; 
+                this["User-Agent"] = value;
             }
         }
 
@@ -225,14 +251,13 @@ namespace System.Web {
         ///    <para> Retrieves or assigns a value indicating whether the
         ///       cache should vary by browser character set.</para>
         /// </devdoc>
-        public bool UserCharSet {
-            get { 
-                return this["Accept-Charset"]; 
-            }
-
-            set { 
+        public bool UserCharSet
+        {
+            get { return this["Accept-Charset"]; }
+            set
+            {
                 _isModified = true;
-                this["Accept-Charset"] = value; 
+                this["Accept-Charset"] = value;
             }
         }
 
@@ -247,21 +272,26 @@ namespace System.Web {
         /// </devdoc>
         public bool this[String header]
         {
-            get {
-                if (header == null) {
+            get
+            {
+                if (header == null)
+                {
                     throw new ArgumentNullException("header");
                 }
 
-                if (header.Equals("*")) {
+                if (header.Equals("*"))
+                {
                     return _varyStar;
                 }
-                else {
+                else
+                {
                     return (_headers != null && _headers.GetValue(header) != null);
                 }
             }
-
-            set {
-                if (header == null) {
+            set
+            {
+                if (header == null)
+                {
                     throw new ArgumentNullException("header");
                 }
 
@@ -270,19 +300,24 @@ namespace System.Web {
                  * want components to be able to set a Vary header to false
                  * if another component has set it to true.
                  */
-                if (value == false) {
+                if (value == false)
+                {
                     return;
                 }
 
                 _isModified = true;
 
-                if (header.Equals("*")) {
+                if (header.Equals("*"))
+                {
                     VaryByUnspecifiedParameters();
                 }
-                else {
+                else
+                {
                     // set value to header if true or null if false
-                    if (!_varyStar) {
-                        if (_headers == null) {
+                    if (!_varyStar)
+                    {
+                        if (_headers == null)
+                        {
                             _headers = new HttpDictionary();
                         }
 

@@ -54,19 +54,17 @@ namespace System.IdentityModel.Tokens
                 this.values.Add(value);
             }
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the Saml2Attribute class.
         /// </summary>
         /// <param name="name">The name of the attribute.</param>
         /// <param name="value">The value of the attribute.</param>
         public Saml2Attribute(string name, string value)
-            : this(name, new string[] { value })
-        {
-        }
+            : this(name, new string[] { value }) { }
 
         /// <summary>
-        /// Gets or sets a string that provides a more human-readable form of the attribute's 
+        /// Gets or sets a string that provides a more human-readable form of the attribute's
         /// name. [Saml2Core, 2.7.3.1]
         /// </summary>
         public string FriendlyName
@@ -80,16 +78,14 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public string Name
         {
-            get 
-            { 
-                return this.name; 
-            }
-
+            get { return this.name; }
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 }
 
                 this.name = StringUtil.OptimizeString(value);
@@ -97,21 +93,20 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets a URI reference representing the classification of the attribute 
+        /// Gets or sets a URI reference representing the classification of the attribute
         /// name for the purposes of interpreting the name. [Saml2Core, 2.7.3.1]
         /// </summary>
         public Uri NameFormat
         {
-            get 
-            { 
-                return this.nameFormat; 
-            }
-
+            get { return this.nameFormat; }
             set
             {
                 if (null != value && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("error", SR.GetString(SR.ID0013));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "error",
+                        SR.GetString(SR.ID0013)
+                    );
                 }
 
                 this.nameFormat = value;
@@ -123,16 +118,15 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public string OriginalIssuer
         {
-            get 
-            { 
-                return this.originalIssuer; 
-            }
-
+            get { return this.originalIssuer; }
             set
             {
                 if (value == String.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID4251));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID4251)
+                    );
                 }
 
                 this.originalIssuer = StringUtil.OptimizeString(value);
@@ -144,34 +138,42 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public string AttributeValueXsiType
         {
-            get 
-            {
-                return this.attributeValueXsiType;
-            }
-
+            get { return this.attributeValueXsiType; }
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID4254));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID4254)
+                    );
                 }
 
                 int indexOfHash = value.IndexOf('#');
                 if (indexOfHash == -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID4254));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID4254)
+                    );
                 }
 
                 string prefix = value.Substring(0, indexOfHash);
                 if (prefix.Length == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID4254));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID4254)
+                    );
                 }
 
                 string suffix = value.Substring(indexOfHash + 1);
                 if (suffix.Length == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID4254));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID4254)
+                    );
                 }
 
                 this.attributeValueXsiType = value;

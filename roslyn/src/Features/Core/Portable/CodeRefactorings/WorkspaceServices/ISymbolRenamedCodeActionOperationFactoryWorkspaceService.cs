@@ -10,6 +10,11 @@ namespace Microsoft.CodeAnalysis.CodeActions.WorkspaceServices
 {
     internal interface ISymbolRenamedCodeActionOperationFactoryWorkspaceService : IWorkspaceService
     {
-        CodeActionOperation CreateSymbolRenamedOperation(ISymbol symbol, string newName, Solution startingSolution, Solution updatedSolution);
+        CodeActionOperation CreateSymbolRenamedOperation(
+            ISymbol symbol,
+            string newName,
+            Solution startingSolution,
+            Solution updatedSolution
+        );
     }
 }

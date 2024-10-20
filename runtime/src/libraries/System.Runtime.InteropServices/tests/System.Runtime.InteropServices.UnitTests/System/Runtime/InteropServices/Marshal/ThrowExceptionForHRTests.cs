@@ -34,12 +34,18 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.NotEmpty(ex.Message);
 
                 string sourceMaybe = PlatformDetection.IsNetCore
-                        ? "System.Private.CoreLib"
-                        : "mscorlib";
+                    ? "System.Private.CoreLib"
+                    : "mscorlib";
 
                 // If the ThrowExceptionForHR is inlined by the JIT, the source could be the test assembly
-                Assert.Contains(ex.Source, new string[]{ sourceMaybe, Assembly.GetExecutingAssembly().GetName().Name });
-                Assert.Contains(nameof(ThrowExceptionForHR_NoErrorInfo_ReturnsValidException), ex.StackTrace);
+                Assert.Contains(
+                    ex.Source,
+                    new string[] { sourceMaybe, Assembly.GetExecutingAssembly().GetName().Name }
+                );
+                Assert.Contains(
+                    nameof(ThrowExceptionForHR_NoErrorInfo_ReturnsValidException),
+                    ex.StackTrace
+                );
                 Assert.Contains(nameof(Marshal.ThrowExceptionForHR), ex.TargetSite.Name);
             }
 
@@ -57,7 +63,10 @@ namespace System.Runtime.InteropServices.Tests
         [Theory]
         [ActiveIssue("https://github.com/mono/mono/issues/15093", TestRuntimes.Mono)]
         [MemberData(nameof(ThrowExceptionForHR_ErrorInfo_TestData))]
-        public void ThrowExceptionForHR_ErrorInfo_ReturnsValidException(int errorCode, IntPtr errorInfo)
+        public void ThrowExceptionForHR_ErrorInfo_ReturnsValidException(
+            int errorCode,
+            IntPtr errorInfo
+        )
         {
             ClearCurrentIErrorInfo();
 
@@ -77,12 +86,18 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.NotEmpty(ex.Message);
 
                 string sourceMaybe = PlatformDetection.IsNetCore
-                        ? "System.Private.CoreLib"
-                        : "mscorlib";
+                    ? "System.Private.CoreLib"
+                    : "mscorlib";
 
                 // If the ThrowExceptionForHR is inlined by the JIT, the source could be the test assembly
-                Assert.Contains(ex.Source, new string[]{ sourceMaybe, Assembly.GetExecutingAssembly().GetName().Name });
-                Assert.Contains(nameof(ThrowExceptionForHR_ErrorInfo_ReturnsValidException), ex.StackTrace);
+                Assert.Contains(
+                    ex.Source,
+                    new string[] { sourceMaybe, Assembly.GetExecutingAssembly().GetName().Name }
+                );
+                Assert.Contains(
+                    nameof(ThrowExceptionForHR_ErrorInfo_ReturnsValidException),
+                    ex.StackTrace
+                );
                 Assert.Contains(nameof(Marshal.ThrowExceptionForHR), ex.TargetSite.Name);
             }
 

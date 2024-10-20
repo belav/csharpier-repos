@@ -22,14 +22,25 @@ namespace Microsoft.Web.Mvc.Test
             // Arrange
             var attribute = new FileExtensionsAttribute { Extensions = " FoO, .bar,baz " };
             var provider = new Mock<ModelMetadataProvider>();
-            var metadata = new ModelMetadata(provider.Object, null, null, typeof(string), "PropertyName");
+            var metadata = new ModelMetadata(
+                provider.Object,
+                null,
+                null,
+                typeof(string),
+                "PropertyName"
+            );
 
             // Act
-            ModelClientValidationRule clientRule = attribute.GetClientValidationRules(metadata, null).Single();
+            ModelClientValidationRule clientRule = attribute
+                .GetClientValidationRules(metadata, null)
+                .Single();
 
             // Assert
             Assert.Equal("extension", clientRule.ValidationType);
-            Assert.Equal("The PropertyName field only accepts files with the following extensions: .foo, .bar, .baz", clientRule.ErrorMessage);
+            Assert.Equal(
+                "The PropertyName field only accepts files with the following extensions: .foo, .bar, .baz",
+                clientRule.ErrorMessage
+            );
             Assert.Single(clientRule.ValidationParameters);
             Assert.Equal("foo,bar,baz", clientRule.ValidationParameters["extension"]);
         }

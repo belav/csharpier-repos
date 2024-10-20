@@ -54,7 +54,9 @@ namespace System.Text
                 for (; start < value.Length; start++)
                 {
                     uint elementValue = uint.CreateTruncating(value[start]);
-                    if ((elementValue > 0x20) || ((TrimMask & (1u << ((int)elementValue - 1))) == 0))
+                    if (
+                        (elementValue > 0x20) || ((TrimMask & (1u << ((int)elementValue - 1))) == 0)
+                    )
                     {
                         break;
                     }
@@ -67,7 +69,9 @@ namespace System.Text
                 for (; start <= end; end--)
                 {
                     uint elementValue = uint.CreateTruncating(value[end]);
-                    if ((elementValue > 0x20) || ((TrimMask & (1u << ((int)elementValue - 1))) == 0))
+                    if (
+                        (elementValue > 0x20) || ((TrimMask & (1u << ((int)elementValue - 1))) == 0)
+                    )
                     {
                         break;
                     }

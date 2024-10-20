@@ -41,11 +41,15 @@ namespace Microsoft.NETCore.Platforms
                 }
 
                 string[] importedRids = rid.GetMetadata("Imports").Split(';');
-                runtimes.Add(rid.ItemSpec, new JObject(new JProperty("#import", new JArray(importedRids))));
+                runtimes.Add(
+                    rid.ItemSpec,
+                    new JObject(new JProperty("#import", new JArray(importedRids)))
+                );
             }
 
             using StreamWriter streamWriter = File.CreateText(OutputFile!);
-            using JsonTextWriter jsonWriter = new(streamWriter) { Formatting = Formatting.Indented };
+            using JsonTextWriter jsonWriter =
+                new(streamWriter) { Formatting = Formatting.Indented };
             json.WriteTo(jsonWriter);
 
             return true;

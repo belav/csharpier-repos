@@ -67,5 +67,6 @@ public class SocketConnectionFactoryOptions
     /// </remarks>
     public bool UnsafePreferInlineScheduling { get; set; }
 
-    internal Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } = PinnedBlockMemoryPoolFactory.Create;
+    internal Func<MemoryPool<byte>> MemoryPoolFactory { get; set; } =
+        PinnedBlockMemoryPoolFactory.Create;
 }

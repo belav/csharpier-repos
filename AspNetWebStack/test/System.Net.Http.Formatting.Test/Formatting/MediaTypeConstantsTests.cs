@@ -9,7 +9,11 @@ namespace System.Net.Http
 {
     public class MediaTypeConstantsTests
     {
-        private static void ValidateClones(MediaTypeHeaderValue clone1, MediaTypeHeaderValue clone2, string charset)
+        private static void ValidateClones(
+            MediaTypeHeaderValue clone1,
+            MediaTypeHeaderValue clone2,
+            string charset
+        )
         {
             Assert.NotNull(clone1);
             Assert.NotNull(clone2);
@@ -22,39 +26,61 @@ namespace System.Net.Http
         [Fact]
         public void ApplicationOctetStreamMediaType_ReturnsClone()
         {
-            ValidateClones(MediaTypeConstants.ApplicationOctetStreamMediaType, MediaTypeConstants.ApplicationOctetStreamMediaType, null);
+            ValidateClones(
+                MediaTypeConstants.ApplicationOctetStreamMediaType,
+                MediaTypeConstants.ApplicationOctetStreamMediaType,
+                null
+            );
         }
 
         [Fact]
         public void ApplicationXmlMediaType_ReturnsClone()
         {
-            ValidateClones(MediaTypeConstants.ApplicationXmlMediaType, MediaTypeConstants.ApplicationXmlMediaType, null);
+            ValidateClones(
+                MediaTypeConstants.ApplicationXmlMediaType,
+                MediaTypeConstants.ApplicationXmlMediaType,
+                null
+            );
         }
 
         [Fact]
         public void ApplicationJsonMediaType_ReturnsClone()
         {
-            ValidateClones(MediaTypeConstants.ApplicationJsonMediaType, MediaTypeConstants.ApplicationJsonMediaType, null);
+            ValidateClones(
+                MediaTypeConstants.ApplicationJsonMediaType,
+                MediaTypeConstants.ApplicationJsonMediaType,
+                null
+            );
         }
 
         [Fact]
         public void TextXmlMediaType_ReturnsClone()
         {
-            ValidateClones(MediaTypeConstants.TextXmlMediaType, MediaTypeConstants.TextXmlMediaType, null);
+            ValidateClones(
+                MediaTypeConstants.TextXmlMediaType,
+                MediaTypeConstants.TextXmlMediaType,
+                null
+            );
         }
 
         [Fact]
         public void TextJsonMediaType_ReturnsClone()
         {
-            ValidateClones(MediaTypeConstants.TextJsonMediaType, MediaTypeConstants.TextJsonMediaType, null);
+            ValidateClones(
+                MediaTypeConstants.TextJsonMediaType,
+                MediaTypeConstants.TextJsonMediaType,
+                null
+            );
         }
 
         [Fact]
         public void ApplicationFormUrlEncodedMediaType_ReturnsClone()
         {
-            ValidateClones(MediaTypeConstants.ApplicationFormUrlEncodedMediaType, MediaTypeConstants.ApplicationFormUrlEncodedMediaType, null);
+            ValidateClones(
+                MediaTypeConstants.ApplicationFormUrlEncodedMediaType,
+                MediaTypeConstants.ApplicationFormUrlEncodedMediaType,
+                null
+            );
         }
-
-
     }
 }

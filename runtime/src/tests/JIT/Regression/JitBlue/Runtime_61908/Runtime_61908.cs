@@ -2,9 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Runtime_61908
 {
     public static bool s_3;
+
     [Fact]
     public static int TestEntryPoint()
     {

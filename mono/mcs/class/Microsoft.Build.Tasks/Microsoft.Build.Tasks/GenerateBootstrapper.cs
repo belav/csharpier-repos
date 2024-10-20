@@ -29,110 +29,123 @@
 using System;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public sealed class GenerateBootstrapper : TaskExtension {
-	
-		string		applicationFile;
-		string		applicationName;
-		string		applicationUrl;
-		string[]	bootstrapperComponentFiles;
-		ITaskItem[]	bootstrapperItems;
-		string		bootstrapperKeyFile;
-		string		componentsLocation;
-		string		componentsUrl;
-		bool		copyComponents;
-		string		culture;
-		string		fallbackCulture;
-		string		outputPath;
-		string		path;
-		string		supportUrl;
-		bool		validate;
-	
-		public GenerateBootstrapper ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public sealed class GenerateBootstrapper : TaskExtension
+    {
+        string applicationFile;
+        string applicationName;
+        string applicationUrl;
+        string[] bootstrapperComponentFiles;
+        ITaskItem[] bootstrapperItems;
+        string bootstrapperKeyFile;
+        string componentsLocation;
+        string componentsUrl;
+        bool copyComponents;
+        string culture;
+        string fallbackCulture;
+        string outputPath;
+        string path;
+        string supportUrl;
+        bool validate;
 
-		public override bool Execute ()
-		{
-			return false;
-		}
-		
-		public string ApplicationFile {
-			get { return applicationFile; }
-			set { applicationFile = value; }
-		}
-		
-		public string ApplicationName {
-			get { return applicationName; }
-			set { applicationName = value; }
-		}
-		
-		public string ApplicationUrl {
-			get { return applicationUrl; }
-			set { applicationUrl = value; }
-		}
-		
-		[Output]
-		public string[] BootstrapperComponentFiles {
-			get { return bootstrapperComponentFiles; }
-			set { bootstrapperComponentFiles = value; }
-		}
-		
-		public ITaskItem[] BootstrapperItems {
-			get { return bootstrapperItems; }
-			set { bootstrapperItems = value; }
-		}
-		
-		[Output]
-		public string BootstrapperKeyFile {
-			get { return bootstrapperKeyFile; }
-			set { bootstrapperKeyFile = value; }
-		}
-		
-		public string ComponentsLocation {
-			get { return componentsLocation; }
-			set { componentsLocation = value; }
-		}
-		
-		public string ComponentsUrl {
-			get { return componentsUrl; }
-			set { componentsUrl = value; }
-		}
-		
-		public bool CopyComponents {
-			get { return copyComponents; }
-			set { copyComponents = value; }
-		}
-		
-		public string Culture {
-			get { return culture; }
-			set { culture = value; }
-		}
-		
-		public string FallbackCulture {
-			get { return fallbackCulture; }
-			set { fallbackCulture = value; }
-		}
-		
-		public string OutputPath {
-			get { return outputPath; }
-			set { outputPath = value; }
-		}
-		
-		public string Path {
-			get { return path; }
-			set { path = value; }
-		}
-		
-		public string SupportUrl {
-			get { return supportUrl; }
-			set { supportUrl = value; }
-		}
-		
-		public bool Validate {
-			get { return validate; }
-			set { validate = value; }
-		}
-	}
+        public GenerateBootstrapper() { }
+
+        public override bool Execute()
+        {
+            return false;
+        }
+
+        public string ApplicationFile
+        {
+            get { return applicationFile; }
+            set { applicationFile = value; }
+        }
+
+        public string ApplicationName
+        {
+            get { return applicationName; }
+            set { applicationName = value; }
+        }
+
+        public string ApplicationUrl
+        {
+            get { return applicationUrl; }
+            set { applicationUrl = value; }
+        }
+
+        [Output]
+        public string[] BootstrapperComponentFiles
+        {
+            get { return bootstrapperComponentFiles; }
+            set { bootstrapperComponentFiles = value; }
+        }
+
+        public ITaskItem[] BootstrapperItems
+        {
+            get { return bootstrapperItems; }
+            set { bootstrapperItems = value; }
+        }
+
+        [Output]
+        public string BootstrapperKeyFile
+        {
+            get { return bootstrapperKeyFile; }
+            set { bootstrapperKeyFile = value; }
+        }
+
+        public string ComponentsLocation
+        {
+            get { return componentsLocation; }
+            set { componentsLocation = value; }
+        }
+
+        public string ComponentsUrl
+        {
+            get { return componentsUrl; }
+            set { componentsUrl = value; }
+        }
+
+        public bool CopyComponents
+        {
+            get { return copyComponents; }
+            set { copyComponents = value; }
+        }
+
+        public string Culture
+        {
+            get { return culture; }
+            set { culture = value; }
+        }
+
+        public string FallbackCulture
+        {
+            get { return fallbackCulture; }
+            set { fallbackCulture = value; }
+        }
+
+        public string OutputPath
+        {
+            get { return outputPath; }
+            set { outputPath = value; }
+        }
+
+        public string Path
+        {
+            get { return path; }
+            set { path = value; }
+        }
+
+        public string SupportUrl
+        {
+            get { return supportUrl; }
+            set { supportUrl = value; }
+        }
+
+        public bool Validate
+        {
+            get { return validate; }
+            set { validate = value; }
+        }
+    }
 }
-

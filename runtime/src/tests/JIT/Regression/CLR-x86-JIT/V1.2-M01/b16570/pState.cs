@@ -3,12 +3,14 @@
 
 using System;
 using Xunit;
+
 public class test
 {
     public struct VT
     {
         public double a1;
         public float a4;
+
         public VT(int i)
         {
             a1 = 1;
@@ -39,17 +41,40 @@ public class test
         asgop0 -= (0.484375F);
         if (((vtstatic.a4 * clstatic.a5)) <= (vtstatic.a4))
         {
-            return Convert.ToDouble((((vtstatic.a4 * clstatic.a5) + (asgop0 - (0.25F - 0.235290527F))) / (cl.arr3d[4, 0, 3] - (vt.a1))));
+            return Convert.ToDouble(
+                (
+                    ((vtstatic.a4 * clstatic.a5) + (asgop0 - (0.25F - 0.235290527F)))
+                    / (cl.arr3d[4, 0, 3] - (vt.a1))
+                )
+            );
         }
         else
         {
-            if ((cl.arr3d[4, 0, 3]) < ((((vtstatic.a4 * clstatic.a5) + (asgop0 - (0.25F - 0.235290527F))) / (cl.arr3d[4, 0, 3] - (vt.a1)))))
+            if (
+                (cl.arr3d[4, 0, 3])
+                < (
+                    (
+                        ((vtstatic.a4 * clstatic.a5) + (asgop0 - (0.25F - 0.235290527F)))
+                        / (cl.arr3d[4, 0, 3] - (vt.a1))
+                    )
+                )
+            )
             {
-                double if0_1retval = Convert.ToDouble((((vtstatic.a4 * clstatic.a5) + (asgop0 - (0.25F - 0.235290527F))) / (cl.arr3d[4, 0, 3] - (vt.a1))));
+                double if0_1retval = Convert.ToDouble(
+                    (
+                        ((vtstatic.a4 * clstatic.a5) + (asgop0 - (0.25F - 0.235290527F)))
+                        / (cl.arr3d[4, 0, 3] - (vt.a1))
+                    )
+                );
                 return if0_1retval;
             }
         }
-        return Convert.ToDouble((((vtstatic.a4 * clstatic.a5) + (asgop0 - (0.25F - 0.235290527F))) / (cl.arr3d[4, 0, 3] - (vt.a1))));
+        return Convert.ToDouble(
+            (
+                ((vtstatic.a4 * clstatic.a5) + (asgop0 - (0.25F - 0.235290527F)))
+                / (cl.arr3d[4, 0, 3] - (vt.a1))
+            )
+        );
     }
 
     [Fact]

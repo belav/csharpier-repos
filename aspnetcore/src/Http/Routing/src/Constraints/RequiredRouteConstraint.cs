@@ -21,7 +21,8 @@ public class RequiredRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         ArgumentNullException.ThrowIfNull(routeKey);
         ArgumentNullException.ThrowIfNull(values);

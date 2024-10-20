@@ -13,7 +13,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         public static ExpressionSyntax GetLeftSideOfDot(this SimpleNameSyntax name)
         {
-            Debug.Assert(name.IsSimpleMemberAccessExpressionName() || name.IsMemberBindingExpressionName() || name.IsRightSideOfQualifiedName() || name.IsParentKind(SyntaxKind.NameMemberCref));
+            Debug.Assert(
+                name.IsSimpleMemberAccessExpressionName()
+                    || name.IsMemberBindingExpressionName()
+                    || name.IsRightSideOfQualifiedName()
+                    || name.IsParentKind(SyntaxKind.NameMemberCref)
+            );
             if (name.IsSimpleMemberAccessExpressionName())
             {
                 return ((MemberAccessExpressionSyntax)name.Parent).Expression;
@@ -49,15 +54,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             }
 
             // type names can't be invoked.
-            if (simpleName?.Parent is InvocationExpressionSyntax invocation &&
-                invocation.Expression == simpleName)
+            if (
+                simpleName?.Parent is InvocationExpressionSyntax invocation
+                && invocation.Expression == simpleName
+            )
             {
                 return false;
             }
 
             // type names can't be indexed into.
-            if (simpleName?.Parent is ElementAccessExpressionSyntax elementAccess &&
-                elementAccess.Expression == simpleName)
+            if (
+                simpleName?.Parent is ElementAccessExpressionSyntax elementAccess
+                && elementAccess.Expression == simpleName
+            )
             {
                 return false;
             }
@@ -65,12 +74,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (simpleName.Identifier.CouldBeKeyword())
             {
                 // Something that looks like a keyword is almost certainly not intended to be a
-                // "Standalone type name".  
+                // "Standalone type name".
                 //
                 // 1. Users are not going to name types the same name as C# keywords (contextual or otherwise).
                 // 2. Types in .NET are virtually always start with a Uppercase. While keywords are lowercase)
                 //
-                // Having a lowercase identifier which matches a c# keyword is enough of a signal 
+                // Having a lowercase identifier which matches a c# keyword is enough of a signal
                 // to just not treat this as a standalone type name (even though for some identifiers
                 // it could be according to the language).
                 return false;

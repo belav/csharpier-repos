@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
@@ -16,12 +16,11 @@ namespace Microsoft.Win32.SafeHandles
     /// <summary>
     ///     Handle to a VM PEFile *
     /// </summary>
-    [SecurityCritical] 
+    [SecurityCritical]
     internal sealed class SafePEFileHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        private SafePEFileHandle() : base(true)
-        {
-        }
+        private SafePEFileHandle()
+            : base(true) { }
 
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]

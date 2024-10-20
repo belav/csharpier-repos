@@ -27,13 +27,22 @@ namespace System.Data.Odbc.Tests
             quotedTestString = commandBuilder.QuoteIdentifier($"Test identifier{qs}", connection);
             Assert.Equal($"{qs}Test identifier{qs}{qs}{qs}", quotedTestString);
             // 'Test''' -> Test'
-            Assert.Equal($"Test identifier{qs}", commandBuilder.UnquoteIdentifier(quotedTestString, connection));
+            Assert.Equal(
+                $"Test identifier{qs}",
+                commandBuilder.UnquoteIdentifier(quotedTestString, connection)
+            );
 
             // Needs an active connection
-            Assert.Throws<InvalidOperationException>(() => commandBuilder.QuoteIdentifier("Test", null));
+            Assert.Throws<InvalidOperationException>(
+                () => commandBuilder.QuoteIdentifier("Test", null)
+            );
             Assert.Throws<InvalidOperationException>(() => commandBuilder.QuoteIdentifier("Test"));
-            Assert.Throws<InvalidOperationException>(() => commandBuilder.UnquoteIdentifier("Test", null));
-            Assert.Throws<InvalidOperationException>(() => commandBuilder.UnquoteIdentifier("Test"));
+            Assert.Throws<InvalidOperationException>(
+                () => commandBuilder.UnquoteIdentifier("Test", null)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => commandBuilder.UnquoteIdentifier("Test")
+            );
         }
 
         [ConditionalFact]

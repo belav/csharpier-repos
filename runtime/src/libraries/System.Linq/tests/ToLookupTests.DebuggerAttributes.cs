@@ -11,11 +11,17 @@ namespace System.Linq.Tests
 {
     public partial class ToLookupTests : EnumerableTests
     {
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         [MemberData(nameof(DebuggerAttributesValid_Data))]
         public void DebuggerAttributesValid<TKey, TElement>(ILookup<TKey, TElement> lookup)
         {
-            Assert.Equal($"Count = {lookup.Count}", DebuggerAttributes.ValidateDebuggerDisplayReferences(lookup));
+            Assert.Equal(
+                $"Count = {lookup.Count}",
+                DebuggerAttributes.ValidateDebuggerDisplayReferences(lookup)
+            );
 
             object proxyObject = DebuggerAttributes.GetProxyObject(lookup);
 
@@ -23,19 +29,29 @@ namespace System.Linq.Tests
             Assert.Empty(DebuggerAttributes.GetDebuggerVisibleFields(proxyObject.GetType()));
 
             // Validate proxy properties
-            IEnumerable<PropertyInfo> properties = DebuggerAttributes.GetDebuggerVisibleProperties(proxyObject.GetType());
+            IEnumerable<PropertyInfo> properties = DebuggerAttributes.GetDebuggerVisibleProperties(
+                proxyObject.GetType()
+            );
             Assert.Equal(1, properties.Count());
 
             // Groupings
-            PropertyInfo groupingsProperty = properties.Single(property => property.Name == "Groupings");
-            Assert.Equal(DebuggerBrowsableState.RootHidden, DebuggerAttributes.GetDebuggerBrowsableState(groupingsProperty));
+            PropertyInfo groupingsProperty = properties.Single(property =>
+                property.Name == "Groupings"
+            );
+            Assert.Equal(
+                DebuggerBrowsableState.RootHidden,
+                DebuggerAttributes.GetDebuggerBrowsableState(groupingsProperty)
+            );
             var groupings = (IGrouping<TKey, TElement>[])groupingsProperty.GetValue(proxyObject);
             Assert.IsType<IGrouping<TKey, TElement>[]>(groupings); // Arrays can be covariant / of assignment-compatible types
 
-            Assert.All(groupings.Zip(lookup, (l, r) => Tuple.Create(l, r)), tuple =>
-            {
-                Assert.Same(tuple.Item1, tuple.Item2);
-            });
+            Assert.All(
+                groupings.Zip(lookup, (l, r) => Tuple.Create(l, r)),
+                tuple =>
+                {
+                    Assert.Same(tuple.Item1, tuple.Item2);
+                }
+            );
 
             Assert.Same(groupings, groupingsProperty.GetValue(proxyObject)); // The result should be cached, as Lookup is immutable.
         }

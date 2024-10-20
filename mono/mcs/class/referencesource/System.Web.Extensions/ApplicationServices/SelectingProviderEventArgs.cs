@@ -13,12 +13,14 @@ namespace System.Web.ApplicationServices
     public class SelectingProviderEventArgs : EventArgs
     {
         private IPrincipal _user;
-        public IPrincipal User {
+        public IPrincipal User
+        {
             get { return _user; }
         }
 
         private string _providerName;
-        public string ProviderName {
+        public string ProviderName
+        {
             get { return _providerName; }
             set { _providerName = value; }
         }

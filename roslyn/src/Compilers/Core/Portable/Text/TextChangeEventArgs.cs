@@ -21,7 +21,11 @@ namespace Microsoft.CodeAnalysis.Text
         /// <param name="oldText">The text before the change.</param>
         /// <param name="newText">The text after the change.</param>
         /// <param name="changes">A set of ranges for the change.</param>
-        public TextChangeEventArgs(SourceText oldText, SourceText newText, IEnumerable<TextChangeRange> changes)
+        public TextChangeEventArgs(
+            SourceText oldText,
+            SourceText newText,
+            IEnumerable<TextChangeRange> changes
+        )
         {
             if (changes == null)
             {
@@ -39,10 +43,12 @@ namespace Microsoft.CodeAnalysis.Text
         /// <param name="oldText">The text before the change.</param>
         /// <param name="newText">The text after the change.</param>
         /// <param name="changes">A set of ranges for the change.</param>
-        public TextChangeEventArgs(SourceText oldText, SourceText newText, params TextChangeRange[] changes)
-            : this(oldText, newText, (IEnumerable<TextChangeRange>)changes)
-        {
-        }
+        public TextChangeEventArgs(
+            SourceText oldText,
+            SourceText newText,
+            params TextChangeRange[] changes
+        )
+            : this(oldText, newText, (IEnumerable<TextChangeRange>)changes) { }
 
         /// <summary>
         /// Gets the text before the change.

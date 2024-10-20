@@ -62,7 +62,7 @@ namespace strswitch_strswitchfinal_cs
             s_testLog.StartRecording();
             for (int i = 0; i < s.Length; i++)
             {
-            beginloop:
+                beginloop:
                 try
                 {
                     try
@@ -127,7 +127,7 @@ namespace strswitch_strswitchfinal_cs
                                                     }
                                                     break;
                                             }
-                                        label:
+                                            label:
                                             Console.WriteLine("Unreached");
                                             throw new Exception();
                                         }
@@ -135,7 +135,7 @@ namespace strswitch_strswitchfinal_cs
                                         {
                                             Console.WriteLine("After after three");
                                         }
-                                    label2:
+                                        label2:
                                         Console.WriteLine("Unreached");
                                     }
                                     goto continueloop;
@@ -146,9 +146,7 @@ namespace strswitch_strswitchfinal_cs
                                         try
                                         {
                                             Console.WriteLine("s == " + s[s.Length]);
-                                            try
-                                            {
-                                            }
+                                            try { }
                                             finally
                                             {
                                                 Console.WriteLine("Unreached");
@@ -157,9 +155,9 @@ namespace strswitch_strswitchfinal_cs
                                         catch (Exception e)
                                         {
                                             goto test;
-                                        rethrowex:
+                                            rethrowex:
                                             throw;
-                                        test:
+                                            test:
                                             if (e is System.ArithmeticException)
                                             {
                                                 try
@@ -182,7 +180,7 @@ namespace strswitch_strswitchfinal_cs
                                     {
                                         Console.WriteLine("In four's finally");
                                     }
-                                finishfour:
+                                    finishfour:
                                     break;
                                 case "five":
                                     try
@@ -222,7 +220,8 @@ namespace strswitch_strswitchfinal_cs
                                     {
                                         Console.WriteLine("in six's finally");
                                     }
-                            };
+                            }
+                            ;
                             continue;
                         }
                         finally
@@ -267,10 +266,10 @@ namespace strswitch_strswitchfinal_cs
                     Console.WriteLine("In outer finally\n");
                 }
 
-            continueloop:
+                continueloop:
                 Console.WriteLine("Continuing");
             }
-        finish:
+            finish:
             s_testLog.StopRecording();
 
             return s_testLog.VerifyOutput();

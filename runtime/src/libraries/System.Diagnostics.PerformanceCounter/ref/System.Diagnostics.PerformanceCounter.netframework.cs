@@ -25,6 +25,8 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.PerformanceData.CounterData))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.PerformanceData.CounterSet))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.PerformanceData.CounterSetInstance))]
-[assembly: TypeForwardedTo(typeof(System.Diagnostics.PerformanceData.CounterSetInstanceCounterDataSet))]
+[assembly: TypeForwardedTo(
+    typeof(System.Diagnostics.PerformanceData.CounterSetInstanceCounterDataSet)
+)]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.PerformanceData.CounterSetInstanceType))]
 [assembly: TypeForwardedTo(typeof(System.Diagnostics.PerformanceData.CounterType))]

@@ -8,13 +8,12 @@ namespace Microsoft.AspNetCore.OutputCaching.StackExchangeRedis;
 
 internal sealed class RedisOutputCacheStoreImpl : RedisOutputCacheStore
 {
-    public RedisOutputCacheStoreImpl(IOptions<RedisOutputCacheOptions> optionsAccessor, ILogger<RedisOutputCacheStore> logger)
-        : base(optionsAccessor, logger)
-    {
-    }
+    public RedisOutputCacheStoreImpl(
+        IOptions<RedisOutputCacheOptions> optionsAccessor,
+        ILogger<RedisOutputCacheStore> logger
+    )
+        : base(optionsAccessor, logger) { }
 
     public RedisOutputCacheStoreImpl(IOptions<RedisOutputCacheOptions> optionsAccessor)
-        : base(optionsAccessor)
-    {
-    }
+        : base(optionsAccessor) { }
 }

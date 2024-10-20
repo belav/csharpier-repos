@@ -25,30 +25,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 _simplifyDefaultExpression = SimplifyDefaultExpression;
             }
 
-            private readonly Func<DefaultExpressionSyntax, SemanticModel, CSharpSimplifierOptions, CancellationToken, SyntaxNode> _simplifyDefaultExpression;
+            private readonly Func<
+                DefaultExpressionSyntax,
+                SemanticModel,
+                CSharpSimplifierOptions,
+                CancellationToken,
+                SyntaxNode
+            > _simplifyDefaultExpression;
 
             private SyntaxNode SimplifyDefaultExpression(
                 DefaultExpressionSyntax node,
                 SemanticModel semanticModel,
                 CSharpSimplifierOptions options,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var preferSimpleDefaultExpression = options.PreferSimpleDefaultExpression.Value;
 
-                if (node.CanReplaceWithDefaultLiteral(ParseOptions, preferSimpleDefaultExpression, semanticModel, cancellationToken))
+                if (
+                    node.CanReplaceWithDefaultLiteral(
+                        ParseOptions,
+                        preferSimpleDefaultExpression,
+                        semanticModel,
+                        cancellationToken
+                    )
+                )
                 {
-                    return SyntaxFactory.LiteralExpression(SyntaxKind.DefaultLiteralExpression)
-                                        .WithTriviaFrom(node);
+                    return SyntaxFactory
+                        .LiteralExpression(SyntaxKind.DefaultLiteralExpression)
+                        .WithTriviaFrom(node);
                 }
 
                 return node;
             }
 
-            public override SyntaxNode VisitDefaultExpression(DefaultExpressionSyntax node)
-                => SimplifyNode(
+            public override SyntaxNode VisitDefaultExpression(DefaultExpressionSyntax node) =>
+                SimplifyNode(
                     node,
                     newNode: base.VisitDefaultExpression(node),
-                    simplifier: _simplifyDefaultExpression);
+                    simplifier: _simplifyDefaultExpression
+                );
         }
     }
 }

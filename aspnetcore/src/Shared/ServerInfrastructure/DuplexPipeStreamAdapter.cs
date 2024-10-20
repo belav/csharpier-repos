@@ -12,18 +12,27 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 /// A helper for wrapping a Stream decorator from an <see cref="IDuplexPipe"/>.
 /// </summary>
 /// <typeparam name="TStream"></typeparam>
-internal class DuplexPipeStreamAdapter<TStream> : DuplexPipeStream, IDuplexPipe where TStream : Stream
+internal class DuplexPipeStreamAdapter<TStream> : DuplexPipeStream, IDuplexPipe
+    where TStream : Stream
 {
     private bool _disposed;
     private readonly object _disposeLock = new object();
 
-    public DuplexPipeStreamAdapter(IDuplexPipe duplexPipe, Func<Stream, TStream> createStream) :
-        this(duplexPipe, new StreamPipeReaderOptions(leaveOpen: true), new StreamPipeWriterOptions(leaveOpen: true), createStream)
-    {
-    }
+    public DuplexPipeStreamAdapter(IDuplexPipe duplexPipe, Func<Stream, TStream> createStream)
+        : this(
+            duplexPipe,
+            new StreamPipeReaderOptions(leaveOpen: true),
+            new StreamPipeWriterOptions(leaveOpen: true),
+            createStream
+        ) { }
 
-    public DuplexPipeStreamAdapter(IDuplexPipe duplexPipe, StreamPipeReaderOptions readerOptions, StreamPipeWriterOptions writerOptions, Func<Stream, TStream> createStream) :
-        base(duplexPipe.Input, duplexPipe.Output)
+    public DuplexPipeStreamAdapter(
+        IDuplexPipe duplexPipe,
+        StreamPipeReaderOptions readerOptions,
+        StreamPipeWriterOptions writerOptions,
+        Func<Stream, TStream> createStream
+    )
+        : base(duplexPipe.Input, duplexPipe.Output)
     {
         var stream = createStream(this);
         Stream = stream;
@@ -57,4 +66,3 @@ internal class DuplexPipeStreamAdapter<TStream> : DuplexPipeStream, IDuplexPipe 
         throw new NotSupportedException();
     }
 }
-

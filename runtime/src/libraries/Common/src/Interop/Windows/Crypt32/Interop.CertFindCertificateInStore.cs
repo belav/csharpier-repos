@@ -15,6 +15,7 @@ internal static partial class Interop
             CertFindFlags dwFindFlags,
             CertFindType dwFindType,
             void* pvFindPara,
-            CERT_CONTEXT* pPrevCertContext);
+            CERT_CONTEXT* pPrevCertContext
+        );
     }
 }

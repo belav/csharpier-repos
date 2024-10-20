@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,34 +26,32 @@
 using System.Globalization;
 using System.Windows.Markup;
 
-namespace System.Windows.Converters {
+namespace System.Windows.Converters
+{
+    public class VectorValueSerializer : ValueSerializer
+    {
+        public override bool CanConvertFromString(string value, IValueSerializerContext context)
+        {
+            return true;
+        }
 
-	public class VectorValueSerializer : ValueSerializer
-	{
-		public override bool CanConvertFromString (string value, IValueSerializerContext context)
-		{
-			return true;
-		}
+        public override bool CanConvertToString(object value, IValueSerializerContext context)
+        {
+            return value is Vector;
+        }
 
-		public override bool CanConvertToString (object value, IValueSerializerContext context)
-		{
-			return value is Vector;
-		}
+        public override object ConvertFromString(string value, IValueSerializerContext context)
+        {
+            if (value == null)
+                throw new NotSupportedException("value != null");
+            return Vector.Parse(value);
+        }
 
-		public override object ConvertFromString (string value, IValueSerializerContext context)
-		{
-			if (value == null)
-				throw new NotSupportedException ("value != null");
-			return Vector.Parse (value);
-		}
-
-		public override string ConvertToString (object value, IValueSerializerContext context)
-		{
-			if (value is Vector vector)
-				return vector.ToString (CultureInfo.InvariantCulture);
-			return base.ConvertToString (value, context);
-		}
-	}
-
+        public override string ConvertToString(object value, IValueSerializerContext context)
+        {
+            if (value is Vector vector)
+                return vector.ToString(CultureInfo.InvariantCulture);
+            return base.ConvertToString(value, context);
+        }
+    }
 }
-

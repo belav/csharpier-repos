@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Internal.Text;
 using Internal.ReadyToRunConstants;
+using Internal.Text;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -25,7 +25,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 dataBuilder.AddSymbol(this);
 
-                dataBuilder.EmitFixup(factory, ReadyToRunFixupKind.StringHandle, _token.Module, factory.SignatureContext);
+                dataBuilder.EmitFixup(
+                    factory,
+                    ReadyToRunFixupKind.StringHandle,
+                    _token.Module,
+                    factory.SignatureContext
+                );
                 dataBuilder.EmitUInt(_token.TokenRid);
             }
 

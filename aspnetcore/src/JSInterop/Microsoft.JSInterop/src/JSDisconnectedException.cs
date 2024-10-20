@@ -12,7 +12,6 @@ public sealed class JSDisconnectedException : Exception
     /// Constructs an instance of <see cref="JSDisconnectedException"/>.
     /// </summary>
     /// <param name="message">The exception message.</param>
-    public JSDisconnectedException(string message) : base(message)
-    {
-    }
+    public JSDisconnectedException(string message)
+        : base(message) { }
 }

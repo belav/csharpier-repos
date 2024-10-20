@@ -7,7 +7,8 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.Server;
 
-internal sealed class CircuitOptionsJSInteropDetailedErrorsConfiguration : IConfigureOptions<CircuitOptions>
+internal sealed class CircuitOptionsJSInteropDetailedErrorsConfiguration
+    : IConfigureOptions<CircuitOptions>
 {
     public CircuitOptionsJSInteropDetailedErrorsConfiguration(IConfiguration configuration)
     {
@@ -19,7 +20,8 @@ internal sealed class CircuitOptionsJSInteropDetailedErrorsConfiguration : IConf
     public void Configure(CircuitOptions options)
     {
         var value = Configuration[WebHostDefaults.DetailedErrorsKey];
-        options.DetailedErrors = string.Equals(value, "true", StringComparison.OrdinalIgnoreCase) ||
-            string.Equals(value, "1", StringComparison.OrdinalIgnoreCase);
+        options.DetailedErrors =
+            string.Equals(value, "true", StringComparison.OrdinalIgnoreCase)
+            || string.Equals(value, "1", StringComparison.OrdinalIgnoreCase);
     }
 }

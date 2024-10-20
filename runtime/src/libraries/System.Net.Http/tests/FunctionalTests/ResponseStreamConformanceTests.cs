@@ -9,9 +9,11 @@ using Xunit;
 
 namespace System.Net.Http.Functional.Tests
 {
-    public sealed class Http1CloseResponseStreamConformanceTests : ResponseConnectedStreamConformanceTests
+    public sealed class Http1CloseResponseStreamConformanceTests
+        : ResponseConnectedStreamConformanceTests
     {
-        protected override string GetResponseHeaders() => "HTTP/1.1 200 OK\r\nConnection: close\r\n\r\n";
+        protected override string GetResponseHeaders() =>
+            "HTTP/1.1 200 OK\r\nConnection: close\r\n\r\n";
 
         protected override async Task<StreamPair> CreateConnectedStreamsAsync()
         {
@@ -26,7 +28,9 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(100)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/72586")]
 #pragma warning disable xUnit1026 // unused parameter
-        public override Task ReadAsync_CancelPendingTask_ThrowsCancellationException(int cancellationDelay)
+        public override Task ReadAsync_CancelPendingTask_ThrowsCancellationException(
+            int cancellationDelay
+        )
         {
             return Task.CompletedTask;
         }
@@ -37,16 +41,20 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(100)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/72586")]
 #pragma warning disable xUnit1026 // unused parameter
-        public override Task ReadAsync_CancelPendingValueTask_ThrowsCancellationException(int cancellationDelay)
+        public override Task ReadAsync_CancelPendingValueTask_ThrowsCancellationException(
+            int cancellationDelay
+        )
         {
             return Task.CompletedTask;
         }
 #pragma warning restore xUnit1026
     }
 
-    public sealed class Http1RawResponseStreamConformanceTests : ResponseConnectedStreamConformanceTests
+    public sealed class Http1RawResponseStreamConformanceTests
+        : ResponseConnectedStreamConformanceTests
     {
-        protected override string GetResponseHeaders() => "HTTP/1.1 101 Switching Protocols\r\n\r\n";
+        protected override string GetResponseHeaders() =>
+            "HTTP/1.1 101 Switching Protocols\r\n\r\n";
 
         protected override async Task<StreamPair> CreateConnectedStreamsAsync()
         {
@@ -61,31 +69,43 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(100)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/72586")]
 #pragma warning disable xUnit1026 // unused parameter
-        public override Task ReadAsync_CancelPendingTask_ThrowsCancellationException(int cancellationDelay)
+        public override Task ReadAsync_CancelPendingTask_ThrowsCancellationException(
+            int cancellationDelay
+        )
         {
             return Task.CompletedTask;
         }
 #pragma warning restore xUnit1026
     }
 
-    public sealed class Http1ContentLengthResponseStreamConformanceTests : ResponseStandaloneStreamConformanceTests
+    public sealed class Http1ContentLengthResponseStreamConformanceTests
+        : ResponseStandaloneStreamConformanceTests
     {
         protected override async Task WriteResponseAsync(Stream responseStream, byte[] bodyData)
         {
-            await responseStream.WriteAsync(Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nContent-Length: {bodyData.Length}\r\n\r\n"));
+            await responseStream.WriteAsync(
+                Encoding.ASCII.GetBytes(
+                    $"HTTP/1.1 200 OK\r\nContent-Length: {bodyData.Length}\r\n\r\n"
+                )
+            );
             await responseStream.WriteAsync(bodyData);
         }
     }
 
-    public sealed class Http1SingleChunkResponseStreamConformanceTests : ResponseStandaloneStreamConformanceTests
+    public sealed class Http1SingleChunkResponseStreamConformanceTests
+        : ResponseStandaloneStreamConformanceTests
     {
         protected override async Task WriteResponseAsync(Stream responseStream, byte[] bodyData)
         {
-            await responseStream.WriteAsync(Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n"));
+            await responseStream.WriteAsync(
+                Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n")
+            );
             if (bodyData.Length > 0)
             {
                 // One chunk for the whole response body
-                await responseStream.WriteAsync(Encoding.ASCII.GetBytes($"{bodyData.Length:X}\r\n"));
+                await responseStream.WriteAsync(
+                    Encoding.ASCII.GetBytes($"{bodyData.Length:X}\r\n")
+                );
                 await responseStream.WriteAsync(bodyData);
                 await responseStream.WriteAsync("\r\n"u8.ToArray());
             }
@@ -93,11 +113,14 @@ namespace System.Net.Http.Functional.Tests
         }
     }
 
-    public sealed class Http1MultiChunkResponseStreamConformanceTests : ResponseStandaloneStreamConformanceTests
+    public sealed class Http1MultiChunkResponseStreamConformanceTests
+        : ResponseStandaloneStreamConformanceTests
     {
         protected override async Task WriteResponseAsync(Stream responseStream, byte[] bodyData)
         {
-            await responseStream.WriteAsync(Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n"));
+            await responseStream.WriteAsync(
+                Encoding.ASCII.GetBytes($"HTTP/1.1 200 OK\r\nTransfer-Encoding: chunked\r\n\r\n")
+            );
             for (int i = 0; i < bodyData.Length; i++)
             {
                 // One chunk per byte of the response body
@@ -119,10 +142,24 @@ namespace System.Net.Http.Functional.Tests
 
         protected override async Task<StreamPair> CreateConnectedStreamsAsync()
         {
-            (Stream httpConnection, Stream server) = ConnectedStreams.CreateBidirectional(4096, int.MaxValue);
+            (Stream httpConnection, Stream server) = ConnectedStreams.CreateBidirectional(
+                4096,
+                int.MaxValue
+            );
 
-            using var hc = new HttpClient(new SocketsHttpHandler() { ConnectCallback = delegate { return ValueTask.FromResult(httpConnection); } });
-            Task<HttpResponseMessage> clientTask = hc.SendAsync(new HttpRequestMessage(HttpMethod.Get, $"http://doesntmatter:12345/"), HttpCompletionOption.ResponseHeadersRead);
+            using var hc = new HttpClient(
+                new SocketsHttpHandler()
+                {
+                    ConnectCallback = delegate
+                    {
+                        return ValueTask.FromResult(httpConnection);
+                    },
+                }
+            );
+            Task<HttpResponseMessage> clientTask = hc.SendAsync(
+                new HttpRequestMessage(HttpMethod.Get, $"http://doesntmatter:12345/"),
+                HttpCompletionOption.ResponseHeadersRead
+            );
 
             await ReadHeadersAsync(server);
 
@@ -156,7 +193,8 @@ namespace System.Net.Http.Functional.Tests
         }
     }
 
-    public abstract class ResponseStandaloneStreamConformanceTests : StandaloneStreamConformanceTests
+    public abstract class ResponseStandaloneStreamConformanceTests
+        : StandaloneStreamConformanceTests
     {
         protected override bool CanSeek => false;
 
@@ -164,9 +202,20 @@ namespace System.Net.Http.Functional.Tests
 
         protected override async Task<Stream> CreateReadOnlyStreamCore(byte[] initialData)
         {
-            (Stream httpConnection, Stream server) = ConnectedStreams.CreateBidirectional(4096, int.MaxValue);
+            (Stream httpConnection, Stream server) = ConnectedStreams.CreateBidirectional(
+                4096,
+                int.MaxValue
+            );
 
-            using var hc = new HttpClient(new SocketsHttpHandler() { ConnectCallback = delegate { return ValueTask.FromResult(httpConnection); } });
+            using var hc = new HttpClient(
+                new SocketsHttpHandler()
+                {
+                    ConnectCallback = delegate
+                    {
+                        return ValueTask.FromResult(httpConnection);
+                    },
+                }
+            );
             Task<Stream> clientTask = hc.GetStreamAsync($"http://doesntmatter:12345/");
 
             await ResponseConnectedStreamConformanceTests.ReadHeadersAsync(server);
@@ -178,8 +227,11 @@ namespace System.Net.Http.Functional.Tests
             return await clientTask;
         }
 
-        protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) => Task.FromResult<Stream>(null);
-        protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) => Task.FromResult<Stream>(null);
+        protected override Task<Stream> CreateReadWriteStreamCore(byte[] initialData) =>
+            Task.FromResult<Stream>(null);
+
+        protected override Task<Stream> CreateWriteOnlyStreamCore(byte[] initialData) =>
+            Task.FromResult<Stream>(null);
 
         public override Task Disposed_ThrowsObjectDisposedException() =>
             // The HTTP response streams don't throw ObjectDisposedException upon disposal.

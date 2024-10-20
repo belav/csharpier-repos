@@ -16,7 +16,10 @@ namespace ComInterfaceGenerator.Tests
 {
     public unsafe partial class IGetIntArrayTests
     {
-        [LibraryImport(NativeExportsNE.NativeExportsNE_Binary, EntryPoint = "new_get_and_set_int_array")]
+        [LibraryImport(
+            NativeExportsNE.NativeExportsNE_Binary,
+            EntryPoint = "new_get_and_set_int_array"
+        )]
         public static partial void* NewNativeObject();
 
         [Fact]

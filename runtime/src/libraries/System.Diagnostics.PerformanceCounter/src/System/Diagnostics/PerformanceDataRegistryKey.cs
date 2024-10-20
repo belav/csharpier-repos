@@ -24,7 +24,11 @@ namespace System.Diagnostics
         public static PerformanceDataRegistryKey OpenRemoteBaseKey(string machineName)
         {
             // connect to the specified remote registry
-            int ret = Interop.Advapi32.RegConnectRegistry(machineName, new IntPtr(PerformanceData), out SafeRegistryHandle foreignHKey);
+            int ret = Interop.Advapi32.RegConnectRegistry(
+                machineName,
+                new IntPtr(PerformanceData),
+                out SafeRegistryHandle foreignHKey
+            );
             if (ret == 0 && !foreignHKey.IsInvalid)
             {
                 return new PerformanceDataRegistryKey(foreignHKey);
@@ -61,7 +65,19 @@ namespace System.Diagnostics
             int ret;
             int type = 0;
             byte[] data = CreateBlob(size, usePool);
-            while (Interop.Errors.ERROR_MORE_DATA == (ret = Interop.Advapi32.RegQueryValueEx(_hkey, name, lpReserved: null, ref type, data, ref sizeInput)))
+            while (
+                Interop.Errors.ERROR_MORE_DATA
+                == (
+                    ret = Interop.Advapi32.RegQueryValueEx(
+                        _hkey,
+                        name,
+                        lpReserved: null,
+                        ref type,
+                        data,
+                        ref sizeInput
+                    )
+                )
+            )
             {
                 if (size == int.MaxValue)
                 {
@@ -114,20 +130,19 @@ namespace System.Diagnostics
 
         private static byte[] CreateBlob(int size, in bool usePool)
         {
-            return usePool
-                ? ArrayPool<byte>.Shared.Rent(size)
-                : new byte[size];
+            return usePool ? ArrayPool<byte>.Shared.Rent(size) : new byte[size];
         }
 
         private static void Win32Error(in int errorCode, string name)
         {
             if (errorCode == Interop.Errors.ERROR_ACCESS_DENIED)
             {
-                throw new UnauthorizedAccessException(SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, name));
+                throw new UnauthorizedAccessException(
+                    SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, name)
+                );
             }
 
             throw new IOException(Interop.Kernel32.GetMessage(errorCode), errorCode);
         }
-
     }
 }

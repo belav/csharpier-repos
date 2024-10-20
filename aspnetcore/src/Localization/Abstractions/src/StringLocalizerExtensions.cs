@@ -18,9 +18,7 @@ public static class StringLocalizerExtensions
     /// <param name="stringLocalizer">The <see cref="IStringLocalizer"/>.</param>
     /// <param name="name">The name of the string resource.</param>
     /// <returns>The string resource as a <see cref="LocalizedString"/>.</returns>
-    public static LocalizedString GetString(
-        this IStringLocalizer stringLocalizer,
-        string name)
+    public static LocalizedString GetString(this IStringLocalizer stringLocalizer, string name)
     {
         ArgumentNullThrowHelper.ThrowIfNull(stringLocalizer);
         ArgumentNullThrowHelper.ThrowIfNull(name);
@@ -38,7 +36,8 @@ public static class StringLocalizerExtensions
     public static LocalizedString GetString(
         this IStringLocalizer stringLocalizer,
         string name,
-        params object[] arguments)
+        params object[] arguments
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(stringLocalizer);
         ArgumentNullThrowHelper.ThrowIfNull(name);

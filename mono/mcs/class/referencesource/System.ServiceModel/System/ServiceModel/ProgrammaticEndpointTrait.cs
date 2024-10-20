@@ -15,9 +15,11 @@ namespace System.ServiceModel
         Binding binding;
         InstanceContext callbackInstance;
 
-        public ProgrammaticEndpointTrait(Binding binding,
+        public ProgrammaticEndpointTrait(
+            Binding binding,
             EndpointAddress remoteAddress,
-            InstanceContext callbackInstance)
+            InstanceContext callbackInstance
+        )
             : base()
         {
             this.binding = binding;
@@ -28,7 +30,8 @@ namespace System.ServiceModel
         public override bool Equals(object obj)
         {
             ProgrammaticEndpointTrait<TChannel> trait1 = obj as ProgrammaticEndpointTrait<TChannel>;
-            if (trait1 == null) return false;
+            if (trait1 == null)
+                return false;
 
             if (!object.ReferenceEquals(this.callbackInstance, trait1.callbackInstance))
                 return false;
@@ -54,7 +57,6 @@ namespace System.ServiceModel
             Fx.Assert(this.remoteAddress != null, "remoteAddress should not be null.");
             hashCode ^= this.remoteAddress.GetHashCode();
 
-
             Fx.Assert(this.binding != null, "binding should not be null.");
             hashCode ^= this.binding.GetHashCode();
 
@@ -74,7 +76,11 @@ namespace System.ServiceModel
             Fx.Assert(this.remoteAddress != null, "remoteAddress should not be null.");
             Fx.Assert(this.binding != null, "binding should not be null.");
 
-            return new DuplexChannelFactory<TChannel>(this.callbackInstance, this.binding, this.remoteAddress);
+            return new DuplexChannelFactory<TChannel>(
+                this.callbackInstance,
+                this.binding,
+                this.remoteAddress
+            );
         }
 
         ChannelFactory<TChannel> CreateSimplexFactory()

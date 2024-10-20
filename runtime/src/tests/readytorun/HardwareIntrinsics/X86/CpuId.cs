@@ -4,11 +4,11 @@
 
 using System;
 using System.Numerics;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
-using System.Reflection;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace XarchHardwareIntrinsicTest._CpuId
@@ -19,7 +19,7 @@ namespace XarchHardwareIntrinsicTest._CpuId
         const int Fail = 0;
 
         [Fact]
-        public unsafe static int TestEntryPoint()
+        public static unsafe int TestEntryPoint()
         {
             int testResult = Pass;
 
@@ -46,7 +46,9 @@ namespace XarchHardwareIntrinsicTest._CpuId
                 // POPCNT and didn't actually implement LZCNT and begin using the LZCNT bit until 2013. So
                 // while everything happens to line up today, it doesn't always and may not always do so.
 
-                Console.WriteLine($"Unrecognized CPU vendor: EBX: {ebx:X8}, ECX: {ecx:X8}, EDX: {edx:X8}");
+                Console.WriteLine(
+                    $"Unrecognized CPU vendor: EBX: {ebx:X8}, ECX: {ecx:X8}, EDX: {edx:X8}"
+                );
                 testResult = Fail;
             }
 
@@ -64,69 +66,168 @@ namespace XarchHardwareIntrinsicTest._CpuId
 
             int xarchCpuInfo = eax;
 
-            if (IsBitIncorrect(edx, 25, typeof(Sse), Sse.IsSupported, "SSE", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    edx,
+                    25,
+                    typeof(Sse),
+                    Sse.IsSupported,
+                    "SSE",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            if (IsBitIncorrect(edx, 26, typeof(Sse2), Sse2.IsSupported, "SSE2", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    edx,
+                    26,
+                    typeof(Sse2),
+                    Sse2.IsSupported,
+                    "SSE2",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
             bool isSse2HierarchyDisabled = isHierarchyDisabled;
 
-            if (IsBitIncorrect(ecx, 25, typeof(Aes), Aes.IsSupported, "AES", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    25,
+                    typeof(Aes),
+                    Aes.IsSupported,
+                    "AES",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
             isHierarchyDisabled = isSse2HierarchyDisabled;
 
-            if (IsBitIncorrect(ecx, 1, typeof(Pclmulqdq), Pclmulqdq.IsSupported, "PCLMULQDQ", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    1,
+                    typeof(Pclmulqdq),
+                    Pclmulqdq.IsSupported,
+                    "PCLMULQDQ",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
             isHierarchyDisabled = isSse2HierarchyDisabled | !GetDotnetEnable("SSE3_4");
 
-            if (IsBitIncorrect(ecx, 0, typeof(Sse3), Sse3.IsSupported, "SSE3", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    0,
+                    typeof(Sse3),
+                    Sse3.IsSupported,
+                    "SSE3",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            if (IsBitIncorrect(ecx, 9, typeof(Ssse3), Ssse3.IsSupported, "SSSE3", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    9,
+                    typeof(Ssse3),
+                    Ssse3.IsSupported,
+                    "SSSE3",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            if (IsBitIncorrect(ecx, 19, typeof(Sse41), Sse41.IsSupported, "SSE41", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    19,
+                    typeof(Sse41),
+                    Sse41.IsSupported,
+                    "SSE41",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            if (IsBitIncorrect(ecx, 20, typeof(Sse42), Sse42.IsSupported, "SSE42", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    20,
+                    typeof(Sse42),
+                    Sse42.IsSupported,
+                    "SSE42",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
             bool isSse42HierarchyDisabled = isHierarchyDisabled;
 
-            if (IsBitIncorrect(ecx, 23, typeof(Popcnt), Popcnt.IsSupported, "POPCNT", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    23,
+                    typeof(Popcnt),
+                    Popcnt.IsSupported,
+                    "POPCNT",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
             isHierarchyDisabled = isSse42HierarchyDisabled;
 
-            if (IsBitIncorrect(ecx, 28, typeof(Avx), Avx.IsSupported, "AVX", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    28,
+                    typeof(Avx),
+                    Avx.IsSupported,
+                    "AVX",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
             bool isAvxHierarchyDisabled = isHierarchyDisabled;
 
-            if (IsBitIncorrect(ecx, 12, typeof(Fma), Fma.IsSupported, "FMA", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    12,
+                    typeof(Fma),
+                    Fma.IsSupported,
+                    "FMA",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
@@ -142,7 +243,16 @@ namespace XarchHardwareIntrinsicTest._CpuId
 
             isHierarchyDisabled = isAvxHierarchyDisabled;
 
-            if (IsBitIncorrect(ebx, 5, typeof(Avx2), Avx2.IsSupported, "AVX2", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ebx,
+                    5,
+                    typeof(Avx2),
+                    Avx2.IsSupported,
+                    "AVX2",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
@@ -151,19 +261,38 @@ namespace XarchHardwareIntrinsicTest._CpuId
 
             isHierarchyDisabled = isAvxHierarchyDisabled;
 
-            if (IsBitIncorrect(ebx, 3, typeof(Bmi1), Bmi1.IsSupported, "BMI1", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ebx,
+                    3,
+                    typeof(Bmi1),
+                    Bmi1.IsSupported,
+                    "BMI1",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
             isHierarchyDisabled = isAvxHierarchyDisabled;
 
-            if (IsBitIncorrect(ebx, 8, typeof(Bmi2), Bmi2.IsSupported, "BMI2", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ebx,
+                    8,
+                    typeof(Bmi2),
+                    Bmi2.IsSupported,
+                    "BMI2",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            isHierarchyDisabled = isAvx2HierarchyDisabled | isFmaHierarchyDisabled | OperatingSystem.IsMacOS();
+            isHierarchyDisabled =
+                isAvx2HierarchyDisabled | isFmaHierarchyDisabled | OperatingSystem.IsMacOS();
 
             for (int i = 0; i < 2; i++)
             {
@@ -171,42 +300,114 @@ namespace XarchHardwareIntrinsicTest._CpuId
                 // are supported. To handle this we simple check them all twice so that if any of them are disabled
                 // the first time around, we'll then assert that they are all actually disabled the second time around
 
-                if (IsBitIncorrect(ebx, 16, typeof(Avx512F), Avx512F.IsSupported, "AVX512F", ref isHierarchyDisabled))
+                if (
+                    IsBitIncorrect(
+                        ebx,
+                        16,
+                        typeof(Avx512F),
+                        Avx512F.IsSupported,
+                        "AVX512F",
+                        ref isHierarchyDisabled
+                    )
+                )
                 {
                     testResult = Fail;
                 }
 
-                if (IsBitIncorrect(ebx, 31, typeof(Avx512F.VL), Avx512F.VL.IsSupported, "AVX512F_VL", ref isHierarchyDisabled))
+                if (
+                    IsBitIncorrect(
+                        ebx,
+                        31,
+                        typeof(Avx512F.VL),
+                        Avx512F.VL.IsSupported,
+                        "AVX512F_VL",
+                        ref isHierarchyDisabled
+                    )
+                )
                 {
                     testResult = Fail;
                 }
 
-                if (IsBitIncorrect(ebx, 30, typeof(Avx512BW), Avx512BW.IsSupported, "AVX512BW", ref isHierarchyDisabled))
+                if (
+                    IsBitIncorrect(
+                        ebx,
+                        30,
+                        typeof(Avx512BW),
+                        Avx512BW.IsSupported,
+                        "AVX512BW",
+                        ref isHierarchyDisabled
+                    )
+                )
                 {
                     testResult = Fail;
                 }
 
-                if (IsBitIncorrect(ebx, 30, typeof(Avx512BW.VL), Avx512BW.VL.IsSupported, "AVX512BW_VL", ref isHierarchyDisabled))
+                if (
+                    IsBitIncorrect(
+                        ebx,
+                        30,
+                        typeof(Avx512BW.VL),
+                        Avx512BW.VL.IsSupported,
+                        "AVX512BW_VL",
+                        ref isHierarchyDisabled
+                    )
+                )
                 {
                     testResult = Fail;
                 }
 
-                if (IsBitIncorrect(ebx, 28, typeof(Avx512CD), Avx512CD.IsSupported, "AVX512CD", ref isHierarchyDisabled))
+                if (
+                    IsBitIncorrect(
+                        ebx,
+                        28,
+                        typeof(Avx512CD),
+                        Avx512CD.IsSupported,
+                        "AVX512CD",
+                        ref isHierarchyDisabled
+                    )
+                )
                 {
                     testResult = Fail;
                 }
 
-                if (IsBitIncorrect(ebx, 28, typeof(Avx512CD.VL), Avx512CD.VL.IsSupported, "AVX512CD_VL", ref isHierarchyDisabled))
+                if (
+                    IsBitIncorrect(
+                        ebx,
+                        28,
+                        typeof(Avx512CD.VL),
+                        Avx512CD.VL.IsSupported,
+                        "AVX512CD_VL",
+                        ref isHierarchyDisabled
+                    )
+                )
                 {
                     testResult = Fail;
                 }
 
-                if (IsBitIncorrect(ebx, 17, typeof(Avx512DQ), Avx512DQ.IsSupported, "AVX512DQ", ref isHierarchyDisabled))
+                if (
+                    IsBitIncorrect(
+                        ebx,
+                        17,
+                        typeof(Avx512DQ),
+                        Avx512DQ.IsSupported,
+                        "AVX512DQ",
+                        ref isHierarchyDisabled
+                    )
+                )
                 {
                     testResult = Fail;
                 }
 
-                if (IsBitIncorrect(ebx, 17, typeof(Avx512DQ.VL), Avx512DQ.VL.IsSupported, "AVX512DQ_VL", ref isHierarchyDisabled))
+                if (
+                    IsBitIncorrect(
+                        ebx,
+                        17,
+                        typeof(Avx512DQ.VL),
+                        Avx512DQ.VL.IsSupported,
+                        "AVX512DQ_VL",
+                        ref isHierarchyDisabled
+                    )
+                )
                 {
                     testResult = Fail;
                 }
@@ -214,7 +415,8 @@ namespace XarchHardwareIntrinsicTest._CpuId
 
             bool isAvx512HierarchyDisabled = isHierarchyDisabled;
 
-            int preferredVectorBitWidth = (GetDotnetEnvVar("PreferredVectorBitWidth", defaultValue: 0) / 128) * 128;
+            int preferredVectorBitWidth =
+                (GetDotnetEnvVar("PreferredVectorBitWidth", defaultValue: 0) / 128) * 128;
             int preferredVectorByteLength = preferredVectorBitWidth / 8;
 
             if (preferredVectorByteLength == 0)
@@ -263,19 +465,46 @@ namespace XarchHardwareIntrinsicTest._CpuId
                 }
             }
 
-            if (IsBitIncorrect(ecx, 1, typeof(Avx512Vbmi), Avx512Vbmi.IsSupported, "AVX512VBMI", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    1,
+                    typeof(Avx512Vbmi),
+                    Avx512Vbmi.IsSupported,
+                    "AVX512VBMI",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            if (IsBitIncorrect(ecx, 1, typeof(Avx512Vbmi.VL), Avx512Vbmi.VL.IsSupported, "AVX512VBMI_VL", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    1,
+                    typeof(Avx512Vbmi.VL),
+                    Avx512Vbmi.VL.IsSupported,
+                    "AVX512VBMI_VL",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
             isHierarchyDisabled = isX86BaseDisabled;
 
-            if (IsBitIncorrect(edx, 14, typeof(X86Serialize), X86Serialize.IsSupported, "SERIALIZE", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    edx,
+                    14,
+                    typeof(X86Serialize),
+                    X86Serialize.IsSupported,
+                    "SERIALIZE",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
@@ -285,7 +514,16 @@ namespace XarchHardwareIntrinsicTest._CpuId
             isHierarchyDisabled = isAvx2HierarchyDisabled;
 
 #pragma warning disable CA2252 // No need to opt into preview feature for an internal test
-            if (IsBitIncorrect(eax, 4, typeof(AvxVnni), AvxVnni.IsSupported, "AVXVNNI", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    eax,
+                    4,
+                    typeof(AvxVnni),
+                    AvxVnni.IsSupported,
+                    "AVXVNNI",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
@@ -304,27 +542,60 @@ namespace XarchHardwareIntrinsicTest._CpuId
 
             isHierarchyDisabled = isX86BaseDisabled;
 
-            if (IsBitIncorrect(ecx, 5, typeof(Lzcnt), Lzcnt.IsSupported, "LZCNT", ref isHierarchyDisabled))
+            if (
+                IsBitIncorrect(
+                    ecx,
+                    5,
+                    typeof(Lzcnt),
+                    Lzcnt.IsSupported,
+                    "LZCNT",
+                    ref isHierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            if (IsIncorrect(typeof(Vector64), Vector64.IsHardwareAccelerated, isHierarchyDisabled: true))
+            if (
+                IsIncorrect(
+                    typeof(Vector64),
+                    Vector64.IsHardwareAccelerated,
+                    isHierarchyDisabled: true
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            if (IsIncorrect(typeof(Vector128), Vector128.IsHardwareAccelerated, isSse2HierarchyDisabled))
+            if (
+                IsIncorrect(
+                    typeof(Vector128),
+                    Vector128.IsHardwareAccelerated,
+                    isSse2HierarchyDisabled
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            if (IsIncorrect(typeof(Vector256), Vector256.IsHardwareAccelerated, isAvx2HierarchyDisabled || (preferredVectorByteLength < 32)))
+            if (
+                IsIncorrect(
+                    typeof(Vector256),
+                    Vector256.IsHardwareAccelerated,
+                    isAvx2HierarchyDisabled || (preferredVectorByteLength < 32)
+                )
+            )
             {
                 testResult = Fail;
             }
 
-            if (IsIncorrect(typeof(Vector512), Vector512.IsHardwareAccelerated, isAvx512HierarchyDisabled || (preferredVectorByteLength < 64)))
+            if (
+                IsIncorrect(
+                    typeof(Vector512),
+                    Vector512.IsHardwareAccelerated,
+                    isAvx512HierarchyDisabled || (preferredVectorByteLength < 64)
+                )
+            )
             {
                 testResult = Fail;
             }
@@ -338,7 +609,9 @@ namespace XarchHardwareIntrinsicTest._CpuId
             {
                 if (!isAvx2HierarchyDisabled)
                 {
-                    Console.WriteLine($"{typeof(Vector).FullName}.Count returned 16 but the hardware returned 32");
+                    Console.WriteLine(
+                        $"{typeof(Vector).FullName}.Count returned 16 but the hardware returned 32"
+                    );
                     testResult = Fail;
                 }
             }
@@ -346,26 +619,42 @@ namespace XarchHardwareIntrinsicTest._CpuId
             {
                 if (isAvx2HierarchyDisabled)
                 {
-                    Console.WriteLine($"{typeof(Vector).FullName}.Count returned 32 but the hardware returned 16");
+                    Console.WriteLine(
+                        $"{typeof(Vector).FullName}.Count returned 32 but the hardware returned 16"
+                    );
                     testResult = Fail;
                 }
             }
             else
             {
-                Console.WriteLine($"{typeof(Vector).FullName}.Count returned {Vector<byte>.Count} which is unexpected");
+                Console.WriteLine(
+                    $"{typeof(Vector).FullName}.Count returned {Vector<byte>.Count} which is unexpected"
+                );
                 testResult = Fail;
             }
 
-            if (Vector<byte>.Count != (int)typeof(Vector<byte>).GetProperty("Count")!.GetValue(null)!)
+            if (
+                Vector<byte>.Count
+                != (int)typeof(Vector<byte>).GetProperty("Count")!.GetValue(null)!
+            )
             {
-                Console.WriteLine($"{typeof(Vector).FullName}.Count returned a different result when called via reflection");
+                Console.WriteLine(
+                    $"{typeof(Vector).FullName}.Count returned a different result when called via reflection"
+                );
                 testResult = Fail;
             }
 
             return testResult;
         }
 
-        static bool IsBitIncorrect(int register, int bitNumber, Type isa, bool isSupported, string name, ref bool isHierarchyDisabled)
+        static bool IsBitIncorrect(
+            int register,
+            int bitNumber,
+            Type isa,
+            bool isSupported,
+            string name,
+            ref bool isHierarchyDisabled
+        )
         {
             bool isSupportedByHardware = (register & (1 << bitNumber)) != 0;
             isHierarchyDisabled |= (!isSupported || !GetDotnetEnable(name));
@@ -374,13 +663,17 @@ namespace XarchHardwareIntrinsicTest._CpuId
             {
                 if (!isSupportedByHardware)
                 {
-                    Console.WriteLine($"{isa.FullName}.IsSupported returned true but the hardware returned false");
+                    Console.WriteLine(
+                        $"{isa.FullName}.IsSupported returned true but the hardware returned false"
+                    );
                     return true;
                 }
 
                 if (isHierarchyDisabled)
                 {
-                    Console.WriteLine($"{isa.FullName}.IsSupported returned true but the runtime returned false");
+                    Console.WriteLine(
+                        $"{isa.FullName}.IsSupported returned true but the runtime returned false"
+                    );
                     return true;
                 }
             }
@@ -388,7 +681,9 @@ namespace XarchHardwareIntrinsicTest._CpuId
             {
                 if (!isHierarchyDisabled)
                 {
-                    Console.WriteLine($"{isa.FullName}.IsSupported returned false but the hardware and runtime returned true");
+                    Console.WriteLine(
+                        $"{isa.FullName}.IsSupported returned false but the hardware and runtime returned true"
+                    );
                     return true;
                 }
             }
@@ -400,7 +695,9 @@ namespace XarchHardwareIntrinsicTest._CpuId
 
             if (isSupported != (bool)isa.GetProperty("IsSupported")!.GetValue(null)!)
             {
-                Console.WriteLine($"{isa.FullName}.IsSupported returned a different result when called via reflection");
+                Console.WriteLine(
+                    $"{isa.FullName}.IsSupported returned a different result when called via reflection"
+                );
                 return true;
             }
 
@@ -413,19 +710,28 @@ namespace XarchHardwareIntrinsicTest._CpuId
             {
                 if (isHierarchyDisabled)
                 {
-                    Console.WriteLine($"{isa.FullName}.IsHardwareAccelerated returned true but the runtime returned false");
+                    Console.WriteLine(
+                        $"{isa.FullName}.IsHardwareAccelerated returned true but the runtime returned false"
+                    );
                     return true;
                 }
             }
             else if (!isHierarchyDisabled)
             {
-                Console.WriteLine($"{isa.FullName}.IsHardwareAccelerated returned false but the hardware and runtime returned true");
+                Console.WriteLine(
+                    $"{isa.FullName}.IsHardwareAccelerated returned false but the hardware and runtime returned true"
+                );
                 return true;
             }
 
-            if (isHardwareAccelerated != (bool)isa.GetProperty("IsHardwareAccelerated")!.GetValue(null)!)
+            if (
+                isHardwareAccelerated
+                != (bool)isa.GetProperty("IsHardwareAccelerated")!.GetValue(null)!
+            )
             {
-                Console.WriteLine($"{isa.FullName}.IsHardwareAccelerated returned a different result when called via reflection");
+                Console.WriteLine(
+                    $"{isa.FullName}.IsHardwareAccelerated returned a different result when called via reflection"
+                );
                 return true;
             }
 

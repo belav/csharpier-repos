@@ -32,7 +32,11 @@ public interface IConventionKeyBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     An <see cref="IConventionKeyBuilder" /> to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionKeyBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionKeyBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -49,7 +53,8 @@ public interface IConventionKeyBuilder : IConventionAnnotatableBuilder
     new IConventionKeyBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.

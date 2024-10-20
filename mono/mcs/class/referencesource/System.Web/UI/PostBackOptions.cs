@@ -9,15 +9,15 @@
  *
  * Copyright (c) 2003 Microsoft Corporation
  */
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.ComponentModel;
-    using System.Text;
     using System.Security.Permissions;
+    using System.Text;
 
-    public sealed class PostBackOptions {
-
+    public sealed class PostBackOptions
+    {
         private string _actionUrl;
         private string _argument;
         private string _validationGroup;
@@ -30,20 +30,24 @@ namespace System.Web.UI {
 
         private Control _targetControl;
 
+        public PostBackOptions(Control targetControl)
+            : this(targetControl, null, null, false, false, false, true, false, null) { }
 
-        public PostBackOptions(Control targetControl) :
-            this(targetControl, null, null, false, false, false, true, false, null) {
-        }
+        public PostBackOptions(Control targetControl, string argument)
+            : this(targetControl, argument, null, false, false, false, true, false, null) { }
 
-
-        public PostBackOptions(Control targetControl, string argument) :
-            this(targetControl, argument, null, false, false, false, true, false, null) {
-        }
-
-
-        public PostBackOptions(Control targetControl, string argument, string actionUrl, bool autoPostBack,
-             bool requiresJavaScriptProtocol, bool trackFocus, bool clientSubmit, bool performValidation, string validationGroup) {
-
+        public PostBackOptions(
+            Control targetControl,
+            string argument,
+            string actionUrl,
+            bool autoPostBack,
+            bool requiresJavaScriptProtocol,
+            bool trackFocus,
+            bool clientSubmit,
+            bool performValidation,
+            string validationGroup
+        )
+        {
             if (targetControl == null)
                 throw new ArgumentNullException("targetControl");
 
@@ -58,100 +62,66 @@ namespace System.Web.UI {
             _validationGroup = validationGroup;
         }
 
-
         [DefaultValue("")]
-        public string ActionUrl {
-            get {
-                return _actionUrl;
-            }
-            set {
-                _actionUrl = value;
-            }
+        public string ActionUrl
+        {
+            get { return _actionUrl; }
+            set { _actionUrl = value; }
         }
 
-
         [DefaultValue("")]
-        public string Argument {
-            get {
-                return _argument;
-            }
-            set {
-                _argument = value;
-            }
+        public string Argument
+        {
+            get { return _argument; }
+            set { _argument = value; }
         }
-
 
         [DefaultValue(false)]
-        public bool AutoPostBack {
-            get {
-                return _autoPostBack;
-            }
-            set {
-                _autoPostBack = value;
-            }
+        public bool AutoPostBack
+        {
+            get { return _autoPostBack; }
+            set { _autoPostBack = value; }
         }
-
 
         [DefaultValue(true)]
-        public bool ClientSubmit {
-            get {
-                return _clientSubmit;
-            }
-            set {
-                _clientSubmit = value;
-            }
+        public bool ClientSubmit
+        {
+            get { return _clientSubmit; }
+            set { _clientSubmit = value; }
         }
-
 
         [DefaultValue(true)]
-        public bool RequiresJavaScriptProtocol {
-            get {
-                return _requiresJavaScriptProtocol;
-            }
-            set {
-                _requiresJavaScriptProtocol = value;
-            }
+        public bool RequiresJavaScriptProtocol
+        {
+            get { return _requiresJavaScriptProtocol; }
+            set { _requiresJavaScriptProtocol = value; }
         }
-
 
         [DefaultValue(false)]
-        public bool PerformValidation {
-            get {
-                return _performValidation;
-            }
-            set {
-                _performValidation = value;
-            }
+        public bool PerformValidation
+        {
+            get { return _performValidation; }
+            set { _performValidation = value; }
         }
-
 
         [DefaultValue("")]
-        public string ValidationGroup {
-            get {
-                return _validationGroup;
-            }
-            set {
-                _validationGroup = value;
-            }
+        public string ValidationGroup
+        {
+            get { return _validationGroup; }
+            set { _validationGroup = value; }
         }
-
 
         [DefaultValue(null)]
-        public Control TargetControl {
-            get {
-                return _targetControl;
-            }
+        public Control TargetControl
+        {
+            get { return _targetControl; }
         }
 
-
         [DefaultValue(false)]
-        public bool TrackFocus {
-            get {
-                return _trackFocus;
-            }
-            set {
-                _trackFocus = value;
-            }
+        public bool TrackFocus
+        {
+            get { return _trackFocus; }
+            set { _trackFocus = value; }
         }
     }
 }

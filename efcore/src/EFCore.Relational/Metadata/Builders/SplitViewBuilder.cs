@@ -19,28 +19,33 @@ public class SplitViewBuilder : IInfrastructure<EntityTypeBuilder>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public SplitViewBuilder(in StoreObjectIdentifier storeObject, EntityTypeBuilder entityTypeBuilder)
+    public SplitViewBuilder(
+        in StoreObjectIdentifier storeObject,
+        EntityTypeBuilder entityTypeBuilder
+    )
     {
         Check.DebugAssert(
             storeObject.StoreObjectType == StoreObjectType.View,
-            "StoreObjectType should be View, not " + storeObject.StoreObjectType);
+            "StoreObjectType should be View, not " + storeObject.StoreObjectType
+        );
 
         MappingFragment = EntityTypeMappingFragment.GetOrCreate(
-            entityTypeBuilder.Metadata, storeObject, ConfigurationSource.Explicit);
+            entityTypeBuilder.Metadata,
+            storeObject,
+            ConfigurationSource.Explicit
+        );
         EntityTypeBuilder = entityTypeBuilder;
     }
 
     /// <summary>
     ///     The specified view name.
     /// </summary>
-    public virtual string Name
-        => MappingFragment.StoreObject.Name;
+    public virtual string Name => MappingFragment.StoreObject.Name;
 
     /// <summary>
     ///     The specified view schema.
     /// </summary>
-    public virtual string? Schema
-        => MappingFragment.StoreObject.Schema;
+    public virtual string? Schema => MappingFragment.StoreObject.Schema;
 
     /// <summary>
     ///     The mapping fragment being configured.
@@ -55,8 +60,8 @@ public class SplitViewBuilder : IInfrastructure<EntityTypeBuilder>
     /// </summary>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ViewColumnBuilder Property(string propertyName)
-        => new(MappingFragment.StoreObject, EntityTypeBuilder.Property(propertyName));
+    public virtual ViewColumnBuilder Property(string propertyName) =>
+        new(MappingFragment.StoreObject, EntityTypeBuilder.Property(propertyName));
 
     /// <summary>
     ///     Maps the property to a column on the current view and returns an object that can be used
@@ -65,8 +70,8 @@ public class SplitViewBuilder : IInfrastructure<EntityTypeBuilder>
     /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
     /// <param name="propertyName">The name of the property to be configured.</param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(string propertyName)
-        => new(MappingFragment.StoreObject, EntityTypeBuilder.Property<TProperty>(propertyName));
+    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(string propertyName) =>
+        new(MappingFragment.StoreObject, EntityTypeBuilder.Property<TProperty>(propertyName));
 
     /// <summary>
     ///     Adds or updates an annotation on the view. If an annotation with the key specified in <paramref name="annotation" />
@@ -79,13 +84,16 @@ public class SplitViewBuilder : IInfrastructure<EntityTypeBuilder>
     {
         Check.NotEmpty(annotation, nameof(annotation));
 
-        ((EntityTypeMappingFragment)MappingFragment).Builder.HasAnnotation(annotation, value, ConfigurationSource.Explicit);
+        ((EntityTypeMappingFragment)MappingFragment).Builder.HasAnnotation(
+            annotation,
+            value,
+            ConfigurationSource.Explicit
+        );
 
         return this;
     }
 
-    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance
-        => EntityTypeBuilder;
+    EntityTypeBuilder IInfrastructure<EntityTypeBuilder>.Instance => EntityTypeBuilder;
 
     #region Hidden System.Object members
 
@@ -94,8 +102,7 @@ public class SplitViewBuilder : IInfrastructure<EntityTypeBuilder>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -103,16 +110,14 @@ public class SplitViewBuilder : IInfrastructure<EntityTypeBuilder>
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

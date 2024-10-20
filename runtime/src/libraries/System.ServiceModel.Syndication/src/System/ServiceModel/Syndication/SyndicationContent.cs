@@ -12,9 +12,7 @@ namespace System.ServiceModel.Syndication
     {
         private Dictionary<XmlQualifiedName, string> _attributeExtensions;
 
-        protected SyndicationContent()
-        {
-        }
+        protected SyndicationContent() { }
 
         protected SyndicationContent(SyndicationContent source) => CopyAttributeExtensions(source);
 
@@ -47,12 +45,23 @@ namespace System.ServiceModel.Syndication
 
         public static XmlSyndicationContent CreateXmlContent(object dataContractObject)
         {
-            return new XmlSyndicationContent(Atom10Constants.XmlMediaType, dataContractObject, (DataContractSerializer)null);
+            return new XmlSyndicationContent(
+                Atom10Constants.XmlMediaType,
+                dataContractObject,
+                (DataContractSerializer)null
+            );
         }
 
-        public static XmlSyndicationContent CreateXmlContent(object dataContractObject, XmlObjectSerializer dataContractSerializer)
+        public static XmlSyndicationContent CreateXmlContent(
+            object dataContractObject,
+            XmlObjectSerializer dataContractSerializer
+        )
         {
-            return new XmlSyndicationContent(Atom10Constants.XmlMediaType, dataContractObject, dataContractSerializer);
+            return new XmlSyndicationContent(
+                Atom10Constants.XmlMediaType,
+                dataContractObject,
+                dataContractSerializer
+            );
         }
 
         public static XmlSyndicationContent CreateXmlContent(XmlReader xmlReader)
@@ -60,9 +69,16 @@ namespace System.ServiceModel.Syndication
             return new XmlSyndicationContent(xmlReader);
         }
 
-        public static XmlSyndicationContent CreateXmlContent(object xmlSerializerObject, XmlSerializer serializer)
+        public static XmlSyndicationContent CreateXmlContent(
+            object xmlSerializerObject,
+            XmlSerializer serializer
+        )
         {
-            return new XmlSyndicationContent(Atom10Constants.XmlMediaType, xmlSerializerObject, serializer);
+            return new XmlSyndicationContent(
+                Atom10Constants.XmlMediaType,
+                xmlSerializerObject,
+                serializer
+            );
         }
 
         public abstract SyndicationContent Clone();
@@ -76,7 +92,10 @@ namespace System.ServiceModel.Syndication
 
             if (string.IsNullOrEmpty(outerElementName))
             {
-                throw new ArgumentException(SR.OuterElementNameNotSpecified, nameof(outerElementName));
+                throw new ArgumentException(
+                    SR.OuterElementNameNotSpecified,
+                    nameof(outerElementName)
+                );
             }
 
             writer.WriteStartElement(outerElementName, outerElementNamespace);

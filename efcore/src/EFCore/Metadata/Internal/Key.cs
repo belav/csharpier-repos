@@ -43,7 +43,11 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<Property> Properties { [DebuggerStepThrough] get; }
+    public virtual IReadOnlyList<Property> Properties
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -66,8 +70,11 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     public virtual InternalKeyBuilder Builder
     {
         [DebuggerStepThrough]
-        get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(
-            Property.Format(Properties.Select(p => p.Name))));
+        get =>
+            _builder
+            ?? throw new InvalidOperationException(
+                CoreStrings.ObjectRemovedFromModel(Property.Format(Properties.Select(p => p.Name)))
+            );
     }
 
     /// <summary>
@@ -76,9 +83,7 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null
-            && DeclaringEntityType.IsInModel;
+    public virtual bool IsInModel => _builder is not null && DeclaringEntityType.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -86,8 +91,7 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -95,8 +99,7 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => DeclaringEntityType.Model.IsReadOnly;
+    public override bool IsReadOnly => DeclaringEntityType.Model.IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -105,8 +108,7 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    public virtual ConfigurationSource GetConfigurationSource()
-        => _configurationSource;
+    public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -133,8 +135,14 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     protected override IConventionAnnotation? OnAnnotationSet(
         string name,
         IConventionAnnotation? annotation,
-        IConventionAnnotation? oldAnnotation)
-        => Builder.ModelBuilder.Metadata.ConventionDispatcher.OnKeyAnnotationChanged(Builder, name, annotation, oldAnnotation);
+        IConventionAnnotation? oldAnnotation
+    ) =>
+        Builder.ModelBuilder.Metadata.ConventionDispatcher.OnKeyAnnotationChanged(
+            Builder,
+            name,
+            annotation,
+            oldAnnotation
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -142,8 +150,8 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<ForeignKey> GetReferencingForeignKeys()
-        => ReferencingForeignKeys ?? Enumerable.Empty<ForeignKey>();
+    public virtual IEnumerable<ForeignKey> GetReferencingForeignKeys() =>
+        ReferencingForeignKeys ?? Enumerable.Empty<ForeignKey>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -151,15 +159,19 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Func<bool, IIdentityMap> IdentityMapFactory
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _identityMapFactory, this, static key =>
+    public virtual Func<bool, IIdentityMap> IdentityMapFactory =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _identityMapFactory,
+            this,
+            static key =>
             {
                 key.EnsureReadOnly();
                 return new IdentityMapFactoryFactory().Create(key);
-            });
+            }
+        );
 
-    private static readonly MethodInfo _createPrincipalKeyValueFactoryMethod = typeof(Key).GetTypeInfo()
+    private static readonly MethodInfo _createPrincipalKeyValueFactoryMethod = typeof(Key)
+        .GetTypeInfo()
         .GetDeclaredMethod(nameof(CreatePrincipalKeyValueFactory))!;
 
     [UsedImplicitly]
@@ -184,8 +196,8 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -193,10 +205,11 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyKey)this).ToDebugString(),
-            () => ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -325,8 +338,8 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlyForeignKey> IReadOnlyKey.GetReferencingForeignKeys()
-        => ReferencingForeignKeys ?? Enumerable.Empty<IReadOnlyForeignKey>();
+    IEnumerable<IReadOnlyForeignKey> IReadOnlyKey.GetReferencingForeignKeys() =>
+        ReferencingForeignKeys ?? Enumerable.Empty<IReadOnlyForeignKey>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -335,16 +348,24 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    Func<bool, IIdentityMap> IRuntimeKey.GetIdentityMapFactory()
-        => IdentityMapFactory;
+    Func<bool, IIdentityMap> IRuntimeKey.GetIdentityMapFactory() => IdentityMapFactory;
 
-    IPrincipalKeyValueFactory<TKey> IKey.GetPrincipalKeyValueFactory<TKey>()
-        => (IPrincipalKeyValueFactory<TKey>)NonCapturingLazyInitializer.EnsureInitialized(
-            ref _principalKeyValueFactory, this, static key => key.CreatePrincipalKeyValueFactory<TKey>());
+    IPrincipalKeyValueFactory<TKey> IKey.GetPrincipalKeyValueFactory<TKey>() =>
+        (IPrincipalKeyValueFactory<TKey>)
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _principalKeyValueFactory,
+                this,
+                static key => key.CreatePrincipalKeyValueFactory<TKey>()
+            );
 
-    IPrincipalKeyValueFactory IKey.GetPrincipalKeyValueFactory()
-        => (IPrincipalKeyValueFactory)NonCapturingLazyInitializer.EnsureInitialized(
-            ref _principalKeyValueFactory, (IKey)this, static key => _createPrincipalKeyValueFactoryMethod
-                .MakeGenericMethod(key.GetKeyType())
-                .Invoke(key, new object[0])!);
+    IPrincipalKeyValueFactory IKey.GetPrincipalKeyValueFactory() =>
+        (IPrincipalKeyValueFactory)
+            NonCapturingLazyInitializer.EnsureInitialized(
+                ref _principalKeyValueFactory,
+                (IKey)this,
+                static key =>
+                    _createPrincipalKeyValueFactoryMethod
+                        .MakeGenericMethod(key.GetKeyType())
+                        .Invoke(key, new object[0])!
+            );
 }
