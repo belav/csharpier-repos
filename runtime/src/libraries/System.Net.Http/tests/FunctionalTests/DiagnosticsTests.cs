@@ -81,8 +81,9 @@ namespace System.Net.Http.Functional.Tests
                         bool exceptionLogged = false;
                         bool activityLogged = false;
 
-                        TaskCompletionSource responseLoggedTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource responseLoggedTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
                         {
@@ -294,8 +295,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Exception exceptionLogged = null;
 
-                        TaskCompletionSource responseLoggedTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource responseLoggedTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
                         {
@@ -344,10 +346,12 @@ namespace System.Net.Http.Functional.Tests
                 .Invoke(
                     async (useVersion, testAsync) =>
                     {
-                        TaskCompletionSource responseLoggedTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
-                        TaskCompletionSource activityStopTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource responseLoggedTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
+                        TaskCompletionSource activityStopTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
                         {
@@ -427,8 +431,9 @@ namespace System.Net.Http.Functional.Tests
                         HttpRequestMessage activityStopRequestLogged = null;
                         HttpResponseMessage activityStopResponseLogged = null;
 
-                        TaskCompletionSource activityStopTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource activityStopTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         Activity parentActivity = new Activity("parent");
                         parentActivity.SetIdFormat(idFormat);
@@ -551,8 +556,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         bool exceptionLogged = false;
 
-                        TaskCompletionSource activityStopTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource activityStopTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         Activity parentActivity = new Activity("parent");
                         parentActivity.SetIdFormat(ActivityIdFormat.Hierarchical);
@@ -637,8 +643,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         bool activityStartLogged = false;
 
-                        TaskCompletionSource activityStopTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource activityStopTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         Activity parentActivity = new Activity("parent");
                         parentActivity.SetIdFormat(ActivityIdFormat.Hierarchical);
@@ -719,8 +726,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         bool activityStartLogged = false;
 
-                        TaskCompletionSource activityStopTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource activityStopTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         Activity parentActivity = new Activity("parent");
                         parentActivity.SetParentId(
@@ -866,8 +874,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Exception exceptionLogged = null;
 
-                        TaskCompletionSource activityStopTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource activityStopTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
                         {
@@ -919,8 +928,9 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Exception exceptionLogged = null;
 
-                        TaskCompletionSource activityStopTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource activityStopTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
                         {
@@ -1010,8 +1020,9 @@ namespace System.Net.Http.Functional.Tests
                         bool activityStartLogged = false;
                         bool activityStopLogged = false;
 
-                        TaskCompletionSource responseLoggedTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource responseLoggedTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
                         {
@@ -1074,8 +1085,9 @@ namespace System.Net.Http.Functional.Tests
                         bool activityLogged = false;
                         Exception exceptionLogged = null;
 
-                        TaskCompletionSource exceptionLoggedTcs =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource exceptionLoggedTcs = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         var diagnosticListenerObserver = new FakeDiagnosticListenerObserver(kvp =>
                         {

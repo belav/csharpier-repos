@@ -29,16 +29,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseImplicit
             Workspace workspace
         ) => (new CSharpUseImplicitTypeDiagnosticAnalyzer(), new UseImplicitTypeCodeFixProvider());
 
-        private static readonly CodeStyleOption2<bool> onWithSilent =
-            new(true, NotificationOption2.Silent);
-        private static readonly CodeStyleOption2<bool> onWithInfo =
-            new(true, NotificationOption2.Suggestion);
-        private static readonly CodeStyleOption2<bool> offWithInfo =
-            new(false, NotificationOption2.Suggestion);
-        private static readonly CodeStyleOption2<bool> onWithWarning =
-            new(true, NotificationOption2.Warning);
-        private static readonly CodeStyleOption2<bool> onWithError =
-            new(true, NotificationOption2.Error);
+        private static readonly CodeStyleOption2<bool> onWithSilent = new(
+            true,
+            NotificationOption2.Silent
+        );
+        private static readonly CodeStyleOption2<bool> onWithInfo = new(
+            true,
+            NotificationOption2.Suggestion
+        );
+        private static readonly CodeStyleOption2<bool> offWithInfo = new(
+            false,
+            NotificationOption2.Suggestion
+        );
+        private static readonly CodeStyleOption2<bool> onWithWarning = new(
+            true,
+            NotificationOption2.Warning
+        );
+        private static readonly CodeStyleOption2<bool> onWithError = new(
+            true,
+            NotificationOption2.Error
+        );
 
         // specify all options explicitly to override defaults.
         internal OptionsCollection ImplicitTypeEverywhere() =>

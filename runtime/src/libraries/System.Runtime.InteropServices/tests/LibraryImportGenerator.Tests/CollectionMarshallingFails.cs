@@ -538,12 +538,11 @@ namespace LibraryImportGenerator.IntegrationTests
     )]
     static class BoolStructArrayMarshaller
     {
-        public static FailingMarshaller<BoolStruct[], nint> Marshaller =
-            new(
-                _ => 0xa1fa1fa,
-                _ => throw new NotImplementedException(),
-                (nint unmanaged, int index) => unmanaged == 0xa1fa1fa
-            );
+        public static FailingMarshaller<BoolStruct[], nint> Marshaller = new(
+            _ => 0xa1fa1fa,
+            _ => throw new NotImplementedException(),
+            (nint unmanaged, int index) => unmanaged == 0xa1fa1fa
+        );
 
         public static nint ConvertToUnmanaged(BoolStruct[] managed) =>
             Marshaller.ConvertToUnmanaged(managed);
@@ -557,12 +556,11 @@ namespace LibraryImportGenerator.IntegrationTests
     [CustomMarshaller(typeof(BoolStruct), MarshalMode.ElementOut, typeof(BoolStructOutMarshaller))]
     public static class BoolStructOutMarshaller
     {
-        public static FailingMarshaller<BoolStruct, BoolStructNative> Marshaller =
-            new(
-                BoolStructMarshaller.ConvertToUnmanaged,
-                BoolStructMarshaller.ConvertToManaged,
-                (BoolStructNative unmanaged, int index) => Marshaller.ExpectedFreedValues != null
-            );
+        public static FailingMarshaller<BoolStruct, BoolStructNative> Marshaller = new(
+            BoolStructMarshaller.ConvertToUnmanaged,
+            BoolStructMarshaller.ConvertToManaged,
+            (BoolStructNative unmanaged, int index) => Marshaller.ExpectedFreedValues != null
+        );
 
         public static BoolStruct ConvertToManaged(BoolStructNative unmanaged) =>
             Marshaller.ConvertToManaged(unmanaged);
@@ -577,12 +575,11 @@ namespace LibraryImportGenerator.IntegrationTests
     [CustomMarshaller(typeof(BoolStruct), MarshalMode.ElementRef, typeof(BoolStructInMarshaller))]
     public static class BoolStructInMarshaller
     {
-        public static FailingMarshaller<BoolStruct, BoolStructNative> Marshaller =
-            new(
-                BoolStructMarshaller.ConvertToUnmanaged,
-                BoolStructMarshaller.ConvertToManaged,
-                (BoolStructNative unmanaged, int index) => Marshaller.ExpectedFreedValues != null
-            );
+        public static FailingMarshaller<BoolStruct, BoolStructNative> Marshaller = new(
+            BoolStructMarshaller.ConvertToUnmanaged,
+            BoolStructMarshaller.ConvertToManaged,
+            (BoolStructNative unmanaged, int index) => Marshaller.ExpectedFreedValues != null
+        );
 
         public static BoolStruct ConvertToManaged(BoolStructNative unmanaged) =>
             Marshaller.ConvertToManaged(unmanaged);
@@ -605,12 +602,11 @@ namespace LibraryImportGenerator.IntegrationTests
     )]
     public static class BoolStructInMarshallerAllowNull
     {
-        public static FailingMarshaller<BoolStruct, BoolStructNative> Marshaller =
-            new(
-                BoolStructMarshaller.ConvertToUnmanaged,
-                BoolStructMarshaller.ConvertToManaged,
-                (BoolStructNative unmanaged, int index) => true
-            );
+        public static FailingMarshaller<BoolStruct, BoolStructNative> Marshaller = new(
+            BoolStructMarshaller.ConvertToUnmanaged,
+            BoolStructMarshaller.ConvertToManaged,
+            (BoolStructNative unmanaged, int index) => true
+        );
 
         public static BoolStruct ConvertToManaged(BoolStructNative unmanaged) =>
             Marshaller.ConvertToManaged(unmanaged);
@@ -628,12 +624,11 @@ namespace LibraryImportGenerator.IntegrationTests
     )]
     public static class FillRangeArrayMarshaller
     {
-        public static FailingMarshaller<IntStructWrapper, int> Marshaller =
-            new(
-                IntStructWrapperMarshaller.ConvertToUnmanaged,
-                IntStructWrapperMarshaller.ConvertToManaged,
-                (int unmanaged, int i) => unmanaged == i
-            );
+        public static FailingMarshaller<IntStructWrapper, int> Marshaller = new(
+            IntStructWrapperMarshaller.ConvertToUnmanaged,
+            IntStructWrapperMarshaller.ConvertToManaged,
+            (int unmanaged, int i) => unmanaged == i
+        );
 
         public static IntStructWrapper ConvertToManaged(int unmanaged) =>
             Marshaller.ConvertToManaged(unmanaged);

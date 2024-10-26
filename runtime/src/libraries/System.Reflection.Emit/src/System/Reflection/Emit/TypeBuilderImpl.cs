@@ -319,8 +319,15 @@ namespace System.Reflection.Emit
         {
             ThrowIfCreated();
 
-            MethodBuilderImpl methodBuilder =
-                new(name, attributes, callingConvention, returnType, parameterTypes, _module, this);
+            MethodBuilderImpl methodBuilder = new(
+                name,
+                attributes,
+                callingConvention,
+                returnType,
+                parameterTypes,
+                _module,
+                this
+            );
             _methodDefinitions.Add(methodBuilder);
             return methodBuilder;
         }

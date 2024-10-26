@@ -15,8 +15,9 @@ public class RequestBodyPipeFeature : IRequestBodyPipeFeature
     private readonly HttpContext _context;
 
     // We want to use zero byte reads for the request body
-    private static readonly StreamPipeReaderOptions _defaultReaderOptions =
-        new(useZeroByteReads: true);
+    private static readonly StreamPipeReaderOptions _defaultReaderOptions = new(
+        useZeroByteReads: true
+    );
 
     /// <summary>
     /// Initializes a new instance of <see cref="IRequestBodyPipeFeature"/>.

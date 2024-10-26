@@ -1079,8 +1079,10 @@ public class Managed
                     );
 
                     {
-                        InlineArrayWithWrappedIntClassificationTest inlineArrayTest =
-                            new() { f = 56.789f };
+                        InlineArrayWithWrappedIntClassificationTest inlineArrayTest = new()
+                        {
+                            f = 56.789f,
+                        };
                         inlineArrayTest.arr[0] = new(123456);
                         inlineArrayTest.arr[1] = new(78910);
                         inlineArrayTest.arr[2] = new(1234);

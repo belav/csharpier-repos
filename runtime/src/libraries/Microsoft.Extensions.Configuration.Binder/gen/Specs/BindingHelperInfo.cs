@@ -34,15 +34,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 HashSet<TypeSpec>
             > _typesForGen = new();
 
-            private readonly SortedSet<string> _namespaces =
-                new()
-                {
-                    "System",
-                    "System.CodeDom.Compiler",
-                    "System.Globalization",
-                    "System.Runtime.CompilerServices",
-                    "Microsoft.Extensions.Configuration",
-                };
+            private readonly SortedSet<string> _namespaces = new()
+            {
+                "System",
+                "System.CodeDom.Compiler",
+                "System.Globalization",
+                "System.Runtime.CompilerServices",
+                "Microsoft.Extensions.Configuration",
+            };
 
             public BindingHelperInfo ToIncrementalValue()
             {

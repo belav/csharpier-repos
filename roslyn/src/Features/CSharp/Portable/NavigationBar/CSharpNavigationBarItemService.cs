@@ -29,20 +29,19 @@ namespace Microsoft.CodeAnalysis.CSharp.NavigationBar
                 SymbolDisplayGenericsOptions.IncludeVariance
             );
 
-        private static readonly SymbolDisplayFormat s_memberFormat =
-            new(
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeType
-                    | SymbolDisplayParameterOptions.IncludeName
-                    | SymbolDisplayParameterOptions.IncludeDefaultValue
-                    | SymbolDisplayParameterOptions.IncludeParamsRefOut,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                    | SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
-                    | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-            );
+        private static readonly SymbolDisplayFormat s_memberFormat = new(
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeName
+                | SymbolDisplayParameterOptions.IncludeDefaultValue
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

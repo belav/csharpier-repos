@@ -36,15 +36,14 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// The rule used when no rule is specified when constructing a <see cref="CompletionItem"/>.
         /// </summary>
-        public static CompletionItemRules Default =
-            new(
-                filterCharacterRules: default,
-                commitCharacterRules: default,
-                enterKeyRule: EnterKeyRule.Default,
-                formatOnCommit: false,
-                matchPriority: Completion.MatchPriority.Default,
-                selectionBehavior: CompletionItemSelectionBehavior.Default
-            );
+        public static CompletionItemRules Default = new(
+            filterCharacterRules: default,
+            commitCharacterRules: default,
+            enterKeyRule: EnterKeyRule.Default,
+            formatOnCommit: false,
+            matchPriority: Completion.MatchPriority.Default,
+            selectionBehavior: CompletionItemSelectionBehavior.Default
+        );
 
         /// <summary>
         /// Rules that modify the set of characters that can be typed to filter the list of completion items.

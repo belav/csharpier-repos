@@ -20,18 +20,17 @@ namespace Sample
         static bool JsonResults = false;
         static List<Regex> exclusionPatterns = new();
 
-        List<BenchTask> tasks =
-            new()
-            {
-                new AppStartTask(),
-                new ExceptionsTask(),
-                new JsonTask(),
-                new SpanTask(),
-                new StringTask(),
-                new VectorTask(),
-                new JSInteropTask(),
-                new WebSocketTask(),
-            };
+        List<BenchTask> tasks = new()
+        {
+            new AppStartTask(),
+            new ExceptionsTask(),
+            new JsonTask(),
+            new SpanTask(),
+            new StringTask(),
+            new VectorTask(),
+            new JSInteropTask(),
+            new WebSocketTask(),
+        };
         public static Test Instance = new Test();
         Formatter formatter = new HTMLFormatter();
 

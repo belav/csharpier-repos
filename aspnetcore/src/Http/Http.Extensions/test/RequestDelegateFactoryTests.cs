@@ -1774,8 +1774,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         get
         {
-            JsonTodoChild originalTodo =
-                new() { Name = "Write even more tests!", Child = "With type hierarchies!" };
+            JsonTodoChild originalTodo = new()
+            {
+                Name = "Write even more tests!",
+                Child = "With type hierarchies!",
+            };
 
             JsonTodo TestAction() => originalTodo;
 
@@ -4086,31 +4089,30 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         RequestDelegate initialRequestDelegate = static (context) => Task.CompletedTask;
         var invokeCount = 0;
 
-        RequestDelegateFactoryOptions options =
-            new()
-            {
-                EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
-                    new List<
-                        Func<
-                            EndpointFilterFactoryContext,
-                            EndpointFilterDelegate,
-                            EndpointFilterDelegate
-                        >
-                    >()
+        RequestDelegateFactoryOptions options = new()
+        {
+            EndpointBuilder = CreateEndpointBuilderFromFilterFactories(
+                new List<
+                    Func<
+                        EndpointFilterFactoryContext,
+                        EndpointFilterDelegate,
+                        EndpointFilterDelegate
+                    >
+                >()
+                {
+                    (routeHandlerContext, next) =>
                     {
-                        (routeHandlerContext, next) =>
-                        {
-                            invokeCount++;
-                            return next;
-                        },
-                        (routeHandlerContext, next) =>
-                        {
-                            invokeCount++;
-                            return next;
-                        },
-                    }
-                ),
-            };
+                        invokeCount++;
+                        return next;
+                    },
+                    (routeHandlerContext, next) =>
+                    {
+                        invokeCount++;
+                        return next;
+                    },
+                }
+            ),
+        };
 
         var result = RequestDelegateFactory.Create(initialRequestDelegate, options);
         Assert.Same(initialRequestDelegate, result.RequestDelegate);
@@ -4122,15 +4124,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     {
         RequestDelegate requestDelegate = static context => Task.CompletedTask;
 
-        RequestDelegateFactoryOptions options =
-            new()
-            {
-                EndpointBuilder = new RouteEndpointBuilder(
-                    null,
-                    RoutePatternFactory.Parse("/"),
-                    order: 0
-                ),
-            };
+        RequestDelegateFactoryOptions options = new()
+        {
+            EndpointBuilder = new RouteEndpointBuilder(
+                null,
+                RoutePatternFactory.Parse("/"),
+                order: 0
+            ),
+        };
 
         var result = RequestDelegateFactory.Create(requestDelegate, options);
 

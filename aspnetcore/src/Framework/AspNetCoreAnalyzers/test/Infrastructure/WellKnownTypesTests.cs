@@ -100,15 +100,14 @@ class Program
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     private class TestAnalyzer : DiagnosticAnalyzer
     {
-        internal static readonly DiagnosticDescriptor SuccessDescriptor =
-            new(
-                "TEST001",
-                "Success result",
-                "Success result",
-                "Usage",
-                DiagnosticSeverity.Info,
-                isEnabledByDefault: true
-            );
+        internal static readonly DiagnosticDescriptor SuccessDescriptor = new(
+            "TEST001",
+            "Success result",
+            "Success result",
+            "Usage",
+            DiagnosticSeverity.Info,
+            isEnabledByDefault: true
+        );
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
             ImmutableArray.Create(new[] { SuccessDescriptor });

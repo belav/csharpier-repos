@@ -52,28 +52,28 @@ public class SqlServerDatabaseModelFactory : DatabaseModelFactory
     private const string NamePartRegex =
         @"(?:(?:\[(?<part{0}>(?:(?:\]\])|[^\]])+)\])|(?<part{0}>[^\.\[\]]+))";
 
-    private static readonly Regex PartExtractor =
-        new(
-            string.Format(
-                CultureInfo.InvariantCulture,
-                @"^{0}(?:\.{1})?$",
-                string.Format(CultureInfo.InvariantCulture, NamePartRegex, 1),
-                string.Format(CultureInfo.InvariantCulture, NamePartRegex, 2)
-            ),
-            RegexOptions.Compiled,
-            TimeSpan.FromMilliseconds(1000)
-        );
+    private static readonly Regex PartExtractor = new(
+        string.Format(
+            CultureInfo.InvariantCulture,
+            @"^{0}(?:\.{1})?$",
+            string.Format(CultureInfo.InvariantCulture, NamePartRegex, 1),
+            string.Format(CultureInfo.InvariantCulture, NamePartRegex, 2)
+        ),
+        RegexOptions.Compiled,
+        TimeSpan.FromMilliseconds(1000)
+    );
 
     // see https://msdn.microsoft.com/en-us/library/ff878091.aspx
     // decimal/numeric are excluded because default value varies based on the precision.
-    private static readonly Dictionary<string, long[]> DefaultSequenceMinMax =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            { "tinyint", new[] { 0L, 255L } },
-            { "smallint", new[] { -32768L, 32767L } },
-            { "int", new[] { -2147483648L, 2147483647L } },
-            { "bigint", new[] { -9223372036854775808L, 9223372036854775807L } },
-        };
+    private static readonly Dictionary<string, long[]> DefaultSequenceMinMax = new(
+        StringComparer.OrdinalIgnoreCase
+    )
+    {
+        { "tinyint", new[] { 0L, 255L } },
+        { "smallint", new[] { -32768L, 32767L } },
+        { "int", new[] { -2147483648L, 2147483647L } },
+        { "bigint", new[] { -9223372036854775808L, 9223372036854775807L } },
+    };
 
     private byte? _compatibilityLevel;
     private EngineEdition? _engineEdition;

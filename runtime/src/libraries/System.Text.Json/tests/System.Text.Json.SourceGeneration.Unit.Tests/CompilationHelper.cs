@@ -63,31 +63,28 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             CSharpParseOptions? parseOptions = null
         )
         {
-            List<MetadataReference> references =
-                new()
-                {
-                    MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(Type).Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(KeyValuePair<,>).Assembly.Location),
-                    MetadataReference.CreateFromFile(
-                        typeof(ContractNamespaceAttribute).Assembly.Location
-                    ),
-                    MetadataReference.CreateFromFile(typeof(JavaScriptEncoder).Assembly.Location),
-                    MetadataReference.CreateFromFile(
-                        typeof(GeneratedCodeAttribute).Assembly.Location
-                    ),
-                    MetadataReference.CreateFromFile(typeof(ReadOnlySpan<>).Assembly.Location),
-                    MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
+            List<MetadataReference> references = new()
+            {
+                MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Type).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(KeyValuePair<,>).Assembly.Location),
+                MetadataReference.CreateFromFile(
+                    typeof(ContractNamespaceAttribute).Assembly.Location
+                ),
+                MetadataReference.CreateFromFile(typeof(JavaScriptEncoder).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(GeneratedCodeAttribute).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(ReadOnlySpan<>).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(Console).Assembly.Location),
 #if NETCOREAPP
-                    MetadataReference.CreateFromFile(typeof(LinkedList<>).Assembly.Location),
-                    MetadataReference.CreateFromFile(systemRuntimeAssembly.Location),
+                MetadataReference.CreateFromFile(typeof(LinkedList<>).Assembly.Location),
+                MetadataReference.CreateFromFile(systemRuntimeAssembly.Location),
 #else
-                    MetadataReference.CreateFromFile(
-                        typeof(System.Runtime.CompilerServices.Unsafe).Assembly.Location
-                    ),
+                MetadataReference.CreateFromFile(
+                    typeof(System.Runtime.CompilerServices.Unsafe).Assembly.Location
+                ),
 #endif
-                };
+            };
 
             if (includeSTJ)
             {
@@ -849,14 +846,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         )
         {
             HashSet<DiagnosticData> expectedSet = new(expectedDiags);
-            HashSet<DiagnosticData> actualSet =
-                new(
-                    actualDiags.Select(d => new DiagnosticData(
-                        d.Severity,
-                        d.Location,
-                        d.GetMessage()
-                    ))
-                );
+            HashSet<DiagnosticData> actualSet = new(
+                actualDiags.Select(d => new DiagnosticData(d.Severity, d.Location, d.GetMessage()))
+            );
             AssertExtensions.Equal(expectedSet, actualSet);
         }
 

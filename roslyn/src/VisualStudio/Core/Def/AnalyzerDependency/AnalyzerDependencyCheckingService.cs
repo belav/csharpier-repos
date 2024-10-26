@@ -57,25 +57,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             StringComparer.OrdinalIgnoreCase
         );
 
-        private static readonly DiagnosticDescriptor s_missingAnalyzerReferenceRule =
-            new(
-                id: IDEDiagnosticIds.MissingAnalyzerReferenceId,
-                title: ServicesVSResources.MissingAnalyzerReference,
-                messageFormat: ServicesVSResources.Analyzer_assembly_0_depends_on_1_but_it_was_not_found_Analyzers_may_not_run_correctly_unless_the_missing_assembly_is_added_as_an_analyzer_reference_as_well,
-                category: FeaturesResources.Roslyn_HostError,
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true
-            );
+        private static readonly DiagnosticDescriptor s_missingAnalyzerReferenceRule = new(
+            id: IDEDiagnosticIds.MissingAnalyzerReferenceId,
+            title: ServicesVSResources.MissingAnalyzerReference,
+            messageFormat: ServicesVSResources.Analyzer_assembly_0_depends_on_1_but_it_was_not_found_Analyzers_may_not_run_correctly_unless_the_missing_assembly_is_added_as_an_analyzer_reference_as_well,
+            category: FeaturesResources.Roslyn_HostError,
+            defaultSeverity: DiagnosticSeverity.Warning,
+            isEnabledByDefault: true
+        );
 
-        private static readonly DiagnosticDescriptor s_analyzerDependencyConflictRule =
-            new(
-                id: IDEDiagnosticIds.AnalyzerDependencyConflictId,
-                title: ServicesVSResources.AnalyzerDependencyConflict,
-                messageFormat: ServicesVSResources.Analyzer_assemblies_0_and_1_both_have_identity_2_but_different_contents_Only_one_will_be_loaded_and_analyzers_using_these_assemblies_may_not_run_correctly,
-                category: FeaturesResources.Roslyn_HostError,
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true
-            );
+        private static readonly DiagnosticDescriptor s_analyzerDependencyConflictRule = new(
+            id: IDEDiagnosticIds.AnalyzerDependencyConflictId,
+            title: ServicesVSResources.AnalyzerDependencyConflict,
+            messageFormat: ServicesVSResources.Analyzer_assemblies_0_and_1_both_have_identity_2_but_different_contents_Only_one_will_be_loaded_and_analyzers_using_these_assemblies_may_not_run_correctly,
+            category: FeaturesResources.Roslyn_HostError,
+            defaultSeverity: DiagnosticSeverity.Warning,
+            isEnabledByDefault: true
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

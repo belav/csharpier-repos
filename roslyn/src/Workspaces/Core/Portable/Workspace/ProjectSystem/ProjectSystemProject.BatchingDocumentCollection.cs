@@ -35,8 +35,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
             /// The map of file paths to the underlying <see cref="DocumentId"/>. This document may exist in <see cref="_documentsAddedInBatch"/> or has been
             /// pushed to the actual workspace.
             /// </summary>
-            private readonly Dictionary<string, DocumentId> _documentPathsToDocumentIds =
-                new(StringComparer.OrdinalIgnoreCase);
+            private readonly Dictionary<string, DocumentId> _documentPathsToDocumentIds = new(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             /// <summary>
             /// A map of explicitly-added "always open" <see cref="SourceTextContainer"/> and their associated <see cref="DocumentId"/>. This does not contain

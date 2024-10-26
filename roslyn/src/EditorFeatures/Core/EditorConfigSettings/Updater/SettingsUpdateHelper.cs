@@ -162,8 +162,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         /// <para>             "[*]    ; Optional comment"</para>
         /// <para>             "[ConsoleApp/Program.cs]"</para>
         /// </summary>
-        private static readonly Regex s_headerPattern =
-            new(@"\[(\*|[^ #;\[\]]+\.({[^ #;{}\.\[\]]+}|[^ #;{}\.\[\]]+))\]\s*([#;].*)?");
+        private static readonly Regex s_headerPattern = new(
+            @"\[(\*|[^ #;\[\]]+\.({[^ #;{}\.\[\]]+}|[^ #;{}\.\[\]]+))\]\s*([#;].*)?"
+        );
 
         /// <summary>
         /// <para>Regular expression for .editorconfig code style option entry.</para>
@@ -179,8 +180,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
         /// <para> 3. Optional severity suffix in option value, i.e. ':severity' suffix</para>
         /// <para>4. Optional comment suffix</para>
         /// </summary>
-        private static readonly Regex s_optionEntryPattern =
-            new($@"(.*)=([\w, ]*)(:[\w]+)?([ ]*[;#].*)?");
+        private static readonly Regex s_optionEntryPattern = new(
+            $@"(.*)=([\w, ]*)(:[\w]+)?([ ]*[;#].*)?"
+        );
 
         private static (
             SourceText? newText,

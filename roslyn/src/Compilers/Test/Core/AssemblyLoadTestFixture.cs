@@ -663,8 +663,10 @@ public class Analyzer : DiagnosticAnalyzer
             params MetadataReference[] additionalReferences
         )
         {
-            CSharpCompilationOptions options =
-                new(OutputKind.DynamicallyLinkedLibrary, warningLevel: Diagnostic.MaxWarningLevel);
+            CSharpCompilationOptions options = new(
+                OutputKind.DynamicallyLinkedLibrary,
+                warningLevel: Diagnostic.MaxWarningLevel
+            );
 
             if (!publicKeyOpt.IsDefault)
             {

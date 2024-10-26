@@ -18,30 +18,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 
         public T Symbol { get; }
 
-        private static readonly SymbolDisplayFormat s_symbolDisplayFormat =
-            new(
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeType
-                    | SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                    | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-            );
+        private static readonly SymbolDisplayFormat s_symbolDisplayFormat = new(
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+        );
 
-        private static readonly SymbolDisplayFormat s_symbolAutomationFormat =
-            new(
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeType
-                    | SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
-                kindOptions: SymbolDisplayKindOptions.IncludeTypeKeyword,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                    | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-            );
+        private static readonly SymbolDisplayFormat s_symbolAutomationFormat = new(
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
+            kindOptions: SymbolDisplayKindOptions.IncludeTypeKeyword,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+        );
 
         public SymbolViewModel(T symbol, IGlyphService glyphService)
         {

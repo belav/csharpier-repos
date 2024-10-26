@@ -430,14 +430,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             return container.ToDisplayString(DottedNameFormat);
         }
 
-        private static readonly SymbolDisplayFormat DottedNameFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                delegateStyle: SymbolDisplayDelegateStyle.NameOnly,
-                extensionMethodStyle: SymbolDisplayExtensionMethodStyle.StaticMethod,
-                propertyStyle: SymbolDisplayPropertyStyle.NameOnly
-            );
+        private static readonly SymbolDisplayFormat DottedNameFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            delegateStyle: SymbolDisplayDelegateStyle.NameOnly,
+            extensionMethodStyle: SymbolDisplayExtensionMethodStyle.StaticMethod,
+            propertyStyle: SymbolDisplayPropertyStyle.NameOnly
+        );
 
         #endregion
     }

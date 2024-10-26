@@ -14,17 +14,16 @@ namespace System.Text.Json.Serialization.Tests
         [MemberData(nameof(GetTestData))]
         public static void RoundtripValues<T>(string expectedValueAsString, T value)
         {
-            JsonSerializerOptions options =
-                new()
+            JsonSerializerOptions options = new()
+            {
+                Converters =
                 {
-                    Converters =
-                    {
-                        new Int128Converter(),
-                        new UInt128Converter(),
-                        new HalfConverter(),
-                        new BigIntegerConverter(),
-                    },
-                };
+                    new Int128Converter(),
+                    new UInt128Converter(),
+                    new HalfConverter(),
+                    new BigIntegerConverter(),
+                },
+            };
 
             ClassWithProperty<T> wrappedValue = new() { Property = value };
 

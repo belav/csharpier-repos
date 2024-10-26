@@ -51,68 +51,64 @@ namespace Microsoft.CodeAnalysis.Remote
         private const string SuffixServerGC = "S";
         private const string SuffixCoreClr = "Core";
 
-        public static readonly ServiceDescriptors Instance =
-            new(
-                ComponentName,
-                GetFeatureDisplayName,
-                RemoteSerializationOptions.Default,
-                new (Type, Type?)[]
-                {
-                    (typeof(IRemoteAssetSynchronizationService), null),
-                    (typeof(IRemoteAsynchronousOperationListenerService), null),
-                    (typeof(IRemoteTaskListService), null),
-                    (
-                        typeof(IRemoteDesignerAttributeDiscoveryService),
-                        typeof(IRemoteDesignerAttributeDiscoveryService.ICallback)
-                    ),
-                    (typeof(IRemoteDiagnosticAnalyzerService), null),
-                    (typeof(IRemoteSemanticClassificationService), null),
-                    (typeof(IRemoteDocumentHighlightsService), null),
-                    (
-                        typeof(IRemoteEncapsulateFieldService),
-                        typeof(IRemoteEncapsulateFieldService.ICallback)
-                    ),
-                    (typeof(IRemoteKeepAliveService), null),
-                    (typeof(IRemoteRenamerService), typeof(IRemoteRenamerService.ICallback)),
-                    (
-                        typeof(IRemoteConvertTupleToStructCodeRefactoringService),
-                        typeof(IRemoteConvertTupleToStructCodeRefactoringService.ICallback)
-                    ),
-                    (
-                        typeof(IRemoteSymbolFinderService),
-                        typeof(IRemoteSymbolFinderService.ICallback)
-                    ),
-                    (typeof(IRemoteFindUsagesService), typeof(IRemoteFindUsagesService.ICallback)),
-                    (typeof(IRemoteFullyQualifyService), null),
-                    (
-                        typeof(IRemoteNavigateToSearchService),
-                        typeof(IRemoteNavigateToSearchService.ICallback)
-                    ),
-                    (typeof(IRemoteNavigationBarItemService), null),
-                    (
-                        typeof(IRemoteMissingImportDiscoveryService),
-                        typeof(IRemoteMissingImportDiscoveryService.ICallback)
-                    ),
-                    (typeof(IRemoteSymbolSearchUpdateService), null),
-                    (typeof(IRemoteExtensionMethodImportCompletionService), null),
-                    (typeof(IRemoteDependentTypeFinderService), null),
-                    (typeof(IRemoteGlobalNotificationDeliveryService), null),
-                    (typeof(IRemoteCodeLensReferencesService), null),
-                    (
-                        typeof(IRemoteEditAndContinueService),
-                        typeof(IRemoteEditAndContinueService.ICallback)
-                    ),
-                    (typeof(IRemoteValueTrackingService), null),
-                    (typeof(IRemoteInheritanceMarginService), null),
-                    (typeof(IRemoteUnusedReferenceAnalysisService), null),
-                    (typeof(IRemoteProcessTelemetryService), null),
-                    (typeof(IRemoteCompilationAvailableService), null),
-                    (typeof(IRemoteLegacySolutionEventsAggregationService), null),
-                    (typeof(IRemoteStackTraceExplorerService), null),
-                    (typeof(IRemoteUnitTestingSearchService), null),
-                    (typeof(IRemoteSourceGenerationService), null),
-                }
-            );
+        public static readonly ServiceDescriptors Instance = new(
+            ComponentName,
+            GetFeatureDisplayName,
+            RemoteSerializationOptions.Default,
+            new (Type, Type?)[]
+            {
+                (typeof(IRemoteAssetSynchronizationService), null),
+                (typeof(IRemoteAsynchronousOperationListenerService), null),
+                (typeof(IRemoteTaskListService), null),
+                (
+                    typeof(IRemoteDesignerAttributeDiscoveryService),
+                    typeof(IRemoteDesignerAttributeDiscoveryService.ICallback)
+                ),
+                (typeof(IRemoteDiagnosticAnalyzerService), null),
+                (typeof(IRemoteSemanticClassificationService), null),
+                (typeof(IRemoteDocumentHighlightsService), null),
+                (
+                    typeof(IRemoteEncapsulateFieldService),
+                    typeof(IRemoteEncapsulateFieldService.ICallback)
+                ),
+                (typeof(IRemoteKeepAliveService), null),
+                (typeof(IRemoteRenamerService), typeof(IRemoteRenamerService.ICallback)),
+                (
+                    typeof(IRemoteConvertTupleToStructCodeRefactoringService),
+                    typeof(IRemoteConvertTupleToStructCodeRefactoringService.ICallback)
+                ),
+                (typeof(IRemoteSymbolFinderService), typeof(IRemoteSymbolFinderService.ICallback)),
+                (typeof(IRemoteFindUsagesService), typeof(IRemoteFindUsagesService.ICallback)),
+                (typeof(IRemoteFullyQualifyService), null),
+                (
+                    typeof(IRemoteNavigateToSearchService),
+                    typeof(IRemoteNavigateToSearchService.ICallback)
+                ),
+                (typeof(IRemoteNavigationBarItemService), null),
+                (
+                    typeof(IRemoteMissingImportDiscoveryService),
+                    typeof(IRemoteMissingImportDiscoveryService.ICallback)
+                ),
+                (typeof(IRemoteSymbolSearchUpdateService), null),
+                (typeof(IRemoteExtensionMethodImportCompletionService), null),
+                (typeof(IRemoteDependentTypeFinderService), null),
+                (typeof(IRemoteGlobalNotificationDeliveryService), null),
+                (typeof(IRemoteCodeLensReferencesService), null),
+                (
+                    typeof(IRemoteEditAndContinueService),
+                    typeof(IRemoteEditAndContinueService.ICallback)
+                ),
+                (typeof(IRemoteValueTrackingService), null),
+                (typeof(IRemoteInheritanceMarginService), null),
+                (typeof(IRemoteUnusedReferenceAnalysisService), null),
+                (typeof(IRemoteProcessTelemetryService), null),
+                (typeof(IRemoteCompilationAvailableService), null),
+                (typeof(IRemoteLegacySolutionEventsAggregationService), null),
+                (typeof(IRemoteStackTraceExplorerService), null),
+                (typeof(IRemoteUnitTestingSearchService), null),
+                (typeof(IRemoteSourceGenerationService), null),
+            }
+        );
 
         internal readonly RemoteSerializationOptions Options;
         private readonly ImmutableDictionary<

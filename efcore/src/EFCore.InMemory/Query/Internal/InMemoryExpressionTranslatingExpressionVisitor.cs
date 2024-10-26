@@ -21,24 +21,23 @@ public class InMemoryExpressionTranslatingExpressionVisitor : ExpressionVisitor
     private const string RuntimeParameterPrefix =
         QueryCompilationContext.QueryParameterPrefix + "entity_equality_";
 
-    private static readonly List<MethodInfo> SingleResultMethodInfos =
-        new()
-        {
-            QueryableMethods.FirstWithPredicate,
-            QueryableMethods.FirstWithoutPredicate,
-            QueryableMethods.FirstOrDefaultWithPredicate,
-            QueryableMethods.FirstOrDefaultWithoutPredicate,
-            QueryableMethods.SingleWithPredicate,
-            QueryableMethods.SingleWithoutPredicate,
-            QueryableMethods.SingleOrDefaultWithPredicate,
-            QueryableMethods.SingleOrDefaultWithoutPredicate,
-            QueryableMethods.LastWithPredicate,
-            QueryableMethods.LastWithoutPredicate,
-            QueryableMethods.LastOrDefaultWithPredicate,
-            QueryableMethods.LastOrDefaultWithoutPredicate,
-            //QueryableMethodProvider.ElementAtMethodInfo,
-            //QueryableMethodProvider.ElementAtOrDefaultMethodInfo
-        };
+    private static readonly List<MethodInfo> SingleResultMethodInfos = new()
+    {
+        QueryableMethods.FirstWithPredicate,
+        QueryableMethods.FirstWithoutPredicate,
+        QueryableMethods.FirstOrDefaultWithPredicate,
+        QueryableMethods.FirstOrDefaultWithoutPredicate,
+        QueryableMethods.SingleWithPredicate,
+        QueryableMethods.SingleWithoutPredicate,
+        QueryableMethods.SingleOrDefaultWithPredicate,
+        QueryableMethods.SingleOrDefaultWithoutPredicate,
+        QueryableMethods.LastWithPredicate,
+        QueryableMethods.LastWithoutPredicate,
+        QueryableMethods.LastOrDefaultWithPredicate,
+        QueryableMethods.LastOrDefaultWithoutPredicate,
+        //QueryableMethodProvider.ElementAtMethodInfo,
+        //QueryableMethodProvider.ElementAtOrDefaultMethodInfo
+    };
 
     private static readonly MemberInfo ValueBufferIsEmpty = typeof(ValueBuffer).GetMember(
         nameof(ValueBuffer.IsEmpty)

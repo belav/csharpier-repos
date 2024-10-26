@@ -596,12 +596,20 @@ namespace System.Formats.Tar.Tests
         )
         {
             await using MemoryStream internalDataStream = new();
-            await using WrappedStream unseekableDataStream =
-                new(internalDataStream, canRead: true, canWrite: false, canSeek: false);
+            await using WrappedStream unseekableDataStream = new(
+                internalDataStream,
+                canRead: true,
+                canWrite: false,
+                canSeek: false
+            );
 
             await using MemoryStream internalArchiveStream = new();
-            await using WrappedStream unseekableArchiveStream =
-                new(internalArchiveStream, canRead: true, canWrite: true, canSeek: false);
+            await using WrappedStream unseekableArchiveStream = new(
+                internalArchiveStream,
+                canRead: true,
+                canWrite: true,
+                canSeek: false
+            );
 
             await using TarWriter writer = new(unseekableArchiveStream);
             TarEntry entry = InvokeTarEntryCreationConstructor(
@@ -633,8 +641,12 @@ namespace System.Formats.Tar.Tests
                 entryFormat
             );
 
-            await using WrappedStream unseekableDataStream1 =
-                new(internalDataStream1, canRead: true, canWrite: false, canSeek: false);
+            await using WrappedStream unseekableDataStream1 = new(
+                internalDataStream1,
+                canRead: true,
+                canWrite: false,
+                canSeek: false
+            );
             TarEntry entry1 = InvokeTarEntryCreationConstructor(
                 entryFormat,
                 fileEntryType,
@@ -646,8 +658,12 @@ namespace System.Formats.Tar.Tests
             await internalDataStream2.WriteAsync(expectedBytes.AsMemory());
             internalDataStream2.Position = 0;
 
-            await using WrappedStream unseekableDataStream2 =
-                new(internalDataStream2, canRead: true, canWrite: false, canSeek: false);
+            await using WrappedStream unseekableDataStream2 = new(
+                internalDataStream2,
+                canRead: true,
+                canWrite: false,
+                canSeek: false
+            );
             TarEntry entry2 = InvokeTarEntryCreationConstructor(
                 entryFormat,
                 fileEntryType,

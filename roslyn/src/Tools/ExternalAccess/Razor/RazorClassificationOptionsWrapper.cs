@@ -8,8 +8,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     internal readonly struct RazorClassificationOptionsWrapper
     {
-        public static RazorClassificationOptionsWrapper Default =
-            new(ClassificationOptions.Default);
+        public static RazorClassificationOptionsWrapper Default = new(
+            ClassificationOptions.Default
+        );
 
         internal readonly ClassificationOptions UnderlyingObject;
 

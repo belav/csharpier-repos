@@ -48,8 +48,10 @@ namespace Microsoft.NETCore.Platforms
             }
 
             using StreamWriter streamWriter = File.CreateText(OutputFile!);
-            using JsonTextWriter jsonWriter =
-                new(streamWriter) { Formatting = Formatting.Indented };
+            using JsonTextWriter jsonWriter = new(streamWriter)
+            {
+                Formatting = Formatting.Indented,
+            };
             json.WriteTo(jsonWriter);
 
             return true;

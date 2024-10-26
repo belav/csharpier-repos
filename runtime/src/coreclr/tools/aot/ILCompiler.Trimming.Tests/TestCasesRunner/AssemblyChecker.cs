@@ -53,19 +53,18 @@ namespace Mono.Linker.Tests.TestCasesRunner
         private bool checkNames;
 
         // Note: It's enough to exclude the type name, all of its members will also be excluded then
-        private static readonly HashSet<string> ExcludeDisplayNames =
-            new()
-            {
-                // Ignore compiler injected attributes to describe language version
-                "Microsoft.CodeAnalysis.EmbeddedAttribute",
-                "System.Runtime.CompilerServices.RefSafetyRulesAttribute",
-                // Ignore NativeAOT injected members
-                "<Module>.StartupCodeMain(Int32,IntPtr)",
-                "<Module>.MainMethodWrapper()",
-                "<Module>.MainMethodWrapper(String[])",
-                // Ignore compiler generated code which can't be reasonably matched to the source method
-                "<PrivateImplementationDetails>",
-            };
+        private static readonly HashSet<string> ExcludeDisplayNames = new()
+        {
+            // Ignore compiler injected attributes to describe language version
+            "Microsoft.CodeAnalysis.EmbeddedAttribute",
+            "System.Runtime.CompilerServices.RefSafetyRulesAttribute",
+            // Ignore NativeAOT injected members
+            "<Module>.StartupCodeMain(Int32,IntPtr)",
+            "<Module>.MainMethodWrapper()",
+            "<Module>.MainMethodWrapper(String[])",
+            // Ignore compiler generated code which can't be reasonably matched to the source method
+            "<PrivateImplementationDetails>",
+        };
 
         public AssemblyChecker(
             BaseAssemblyResolver originalsResolver,

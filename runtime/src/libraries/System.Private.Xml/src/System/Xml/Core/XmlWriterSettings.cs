@@ -40,8 +40,10 @@ namespace System.Xml
     // XmlWriterSettings class specifies basic features of an XmlWriter.
     public sealed class XmlWriterSettings
     {
-        internal static readonly XmlWriterSettings s_defaultWriterSettings =
-            new() { ReadOnly = true };
+        internal static readonly XmlWriterSettings s_defaultWriterSettings = new()
+        {
+            ReadOnly = true,
+        };
         private bool _useAsync;
         private Encoding _encoding;
         private bool _omitXmlDecl;

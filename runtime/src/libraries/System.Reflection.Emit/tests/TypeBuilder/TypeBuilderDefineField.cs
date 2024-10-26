@@ -308,8 +308,10 @@ namespace System.Reflection.Emit.Tests
             );
 
             // Define type to be ByRefLike
-            CustomAttributeBuilder ca =
-                new(typeof(IsByRefLikeAttribute).GetConstructors()[0], new object[] { });
+            CustomAttributeBuilder ca = new(
+                typeof(IsByRefLikeAttribute).GetConstructors()[0],
+                new object[] { }
+            );
             type.SetCustomAttribute(ca);
 
             type.DefineField("Name", typeof(int).MakeByRefType(), FieldAttributes.Public);
@@ -330,8 +332,10 @@ namespace System.Reflection.Emit.Tests
             );
 
             // Define type to be ByRefLike
-            CustomAttributeBuilder ca =
-                new(typeof(IsByRefLikeAttribute).GetConstructors()[0], new object[] { });
+            CustomAttributeBuilder ca = new(
+                typeof(IsByRefLikeAttribute).GetConstructors()[0],
+                new object[] { }
+            );
             type.SetCustomAttribute(ca);
 
             var field = type.DefineField(

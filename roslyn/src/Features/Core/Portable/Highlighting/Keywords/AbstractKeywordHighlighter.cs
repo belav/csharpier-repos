@@ -31,10 +31,12 @@ namespace Microsoft.CodeAnalysis.Highlighting
 
     internal abstract class AbstractKeywordHighlighter : IHighlighter
     {
-        private static readonly ObjectPool<List<TextSpan>> s_textSpanListPool =
-            new(() => new List<TextSpan>());
-        private static readonly ObjectPool<List<SyntaxToken>> s_tokenListPool =
-            new(() => new List<SyntaxToken>());
+        private static readonly ObjectPool<List<TextSpan>> s_textSpanListPool = new(
+            () => new List<TextSpan>()
+        );
+        private static readonly ObjectPool<List<SyntaxToken>> s_tokenListPool = new(
+            () => new List<SyntaxToken>()
+        );
 
         protected abstract bool IsHighlightableNode(SyntaxNode node);
 

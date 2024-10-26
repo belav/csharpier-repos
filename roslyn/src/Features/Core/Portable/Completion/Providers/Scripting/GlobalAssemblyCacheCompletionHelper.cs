@@ -20,8 +20,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal sealed class GlobalAssemblyCacheCompletionHelper
     {
-        private static readonly Lazy<List<string>> s_lazyAssemblySimpleNames =
-            new(() => GlobalAssemblyCache.Instance.GetAssemblySimpleNames().ToList());
+        private static readonly Lazy<List<string>> s_lazyAssemblySimpleNames = new(
+            () => GlobalAssemblyCache.Instance.GetAssemblySimpleNames().ToList()
+        );
 
         private readonly CompletionItemRules _itemRules;
 

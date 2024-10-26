@@ -12,12 +12,11 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
 public class RemoteJSDataStreamTest
 {
-    private static readonly TestRemoteJSRuntime _jsRuntime =
-        new(
-            Options.Create(new CircuitOptions()),
-            Options.Create(new HubOptions<ComponentHub>()),
-            Mock.Of<ILogger<RemoteJSRuntime>>()
-        );
+    private static readonly TestRemoteJSRuntime _jsRuntime = new(
+        Options.Create(new CircuitOptions()),
+        Options.Create(new HubOptions<ComponentHub>()),
+        Mock.Of<ILogger<RemoteJSRuntime>>()
+    );
 
     [Fact]
     public async Task CreateRemoteJSDataStreamAsync_CreatesStream()

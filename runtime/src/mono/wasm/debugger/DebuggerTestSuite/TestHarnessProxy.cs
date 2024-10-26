@@ -50,16 +50,15 @@ namespace DebuggerTests
             string locale = "en-US"
         )
         {
-            TestHarnessOptions options =
-                new()
-                {
-                    AppPath = appPath,
-                    PagePath = pagePath,
-                    DevToolsUrl = new Uri(url),
-                    WebServerUseCors = false,
-                    WebServerUseCrossOriginPolicy = true,
-                    Locale = locale,
-                };
+            TestHarnessOptions options = new()
+            {
+                AppPath = appPath,
+                PagePath = pagePath,
+                DevToolsUrl = new Uri(url),
+                WebServerUseCors = false,
+                WebServerUseCrossOriginPolicy = true,
+                Locale = locale,
+            };
 
             lock (proxyLock)
             {

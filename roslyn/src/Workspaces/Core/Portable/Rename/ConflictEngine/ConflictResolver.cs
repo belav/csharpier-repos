@@ -25,24 +25,23 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 {
     internal static partial class ConflictResolver
     {
-        private static readonly SymbolDisplayFormat s_metadataSymbolDisplayFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Included,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints
-                    | SymbolDisplayGenericsOptions.IncludeTypeParameters
-                    | SymbolDisplayGenericsOptions.IncludeVariance,
-                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
-                    | SymbolDisplayMemberOptions.IncludeModifiers
-                    | SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeType,
-                delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
-                extensionMethodStyle: SymbolDisplayExtensionMethodStyle.StaticMethod,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeType,
-                propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-            );
+        private static readonly SymbolDisplayFormat s_metadataSymbolDisplayFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Included,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeConstraints
+                | SymbolDisplayGenericsOptions.IncludeTypeParameters
+                | SymbolDisplayGenericsOptions.IncludeVariance,
+            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+                | SymbolDisplayMemberOptions.IncludeModifiers
+                | SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeType,
+            delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
+            extensionMethodStyle: SymbolDisplayExtensionMethodStyle.StaticMethod,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeType,
+            propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+        );
 
         private const string s_metadataNameSeparators = " .,:<`>()\r\n";
 

@@ -15,15 +15,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 {
     internal class NewTypeDestinationSelectionViewModel : AbstractNotifyPropertyChanged
     {
-        public static NewTypeDestinationSelectionViewModel Default =
-            new(
-                string.Empty,
-                LanguageNames.CSharp,
-                string.Empty,
-                string.Empty,
-                ImmutableArray<string>.Empty,
-                null
-            );
+        public static NewTypeDestinationSelectionViewModel Default = new(
+            string.Empty,
+            LanguageNames.CSharp,
+            string.Empty,
+            string.Empty,
+            ImmutableArray<string>.Empty,
+            null
+        );
 
         private readonly string _fileExtension;
         private readonly string _defaultNamespace;

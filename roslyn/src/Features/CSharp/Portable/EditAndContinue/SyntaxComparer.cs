@@ -38,10 +38,20 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             compareStatementSyntax
         )
     {
-        internal static readonly SyntaxComparer TopLevel =
-            new(null, null, null, null, compareStatementSyntax: false);
-        internal static readonly SyntaxComparer Statement =
-            new(null, null, null, null, compareStatementSyntax: true);
+        internal static readonly SyntaxComparer TopLevel = new(
+            null,
+            null,
+            null,
+            null,
+            compareStatementSyntax: false
+        );
+        internal static readonly SyntaxComparer Statement = new(
+            null,
+            null,
+            null,
+            null,
+            compareStatementSyntax: true
+        );
 
         protected override bool IsLambdaBodyStatementOrExpression(SyntaxNode node) =>
             LambdaUtilities.IsLambdaBodyStatementOrExpression(node);

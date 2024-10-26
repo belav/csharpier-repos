@@ -292,8 +292,9 @@ namespace Microsoft.Extensions.Configuration
             File.WriteAllText(filePath, @"{ ""some"": ""value"" }");
 
             PhysicalFileProvider fileProvider = new(Path.GetDirectoryName(filePath));
-            JsonConfigurationProvider configurationProvider =
-                new(new JsonConfigurationSource() { Path = filePath, FileProvider = fileProvider });
+            JsonConfigurationProvider configurationProvider = new(
+                new JsonConfigurationSource() { Path = filePath, FileProvider = fileProvider }
+            );
             IConfigurationRoot config = new ConfigurationBuilder()
                 .AddJsonFile(
                     configurationProvider.Source.FileProvider,

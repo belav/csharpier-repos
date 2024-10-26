@@ -197,14 +197,13 @@ namespace Wasm.Build.Tests
             );
             _testOutput.WriteLine($"Binlog path: {logFilePath}");
 
-            List<string> commandLineArgs =
-                new()
-                {
-                    buildType,
-                    $"-bl:{logFilePath}",
-                    $"-p:Configuration={config}",
-                    "-nr:false",
-                };
+            List<string> commandLineArgs = new()
+            {
+                buildType,
+                $"-bl:{logFilePath}",
+                $"-p:Configuration={config}",
+                "-nr:false",
+            };
             commandLineArgs.AddRange(extraArgs);
 
             if (buildProjectOptions.Publish && buildProjectOptions.BuildOnlyAfterPublish)

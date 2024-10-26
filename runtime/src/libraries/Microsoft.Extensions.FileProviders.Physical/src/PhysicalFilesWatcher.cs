@@ -31,10 +31,12 @@ namespace Microsoft.Extensions.FileProviders.Physical
 
         internal static TimeSpan DefaultPollingInterval = TimeSpan.FromSeconds(4);
 
-        private readonly ConcurrentDictionary<string, ChangeTokenInfo> _filePathTokenLookup =
-            new(StringComparer.OrdinalIgnoreCase);
-        private readonly ConcurrentDictionary<string, ChangeTokenInfo> _wildcardTokenLookup =
-            new(StringComparer.OrdinalIgnoreCase);
+        private readonly ConcurrentDictionary<string, ChangeTokenInfo> _filePathTokenLookup = new(
+            StringComparer.OrdinalIgnoreCase
+        );
+        private readonly ConcurrentDictionary<string, ChangeTokenInfo> _wildcardTokenLookup = new(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         private readonly FileSystemWatcher? _fileWatcher;
         private readonly object _fileWatcherLock = new();

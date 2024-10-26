@@ -42,8 +42,11 @@ namespace System.CommandLine.Tests
             CliCommand command = new("the-command");
             command.SetAction((_, __) => throw new OperationCanceledException());
 
-            CliConfiguration config =
-                new(command) { Output = new StringWriter(), Error = new StringWriter() };
+            CliConfiguration config = new(command)
+            {
+                Output = new StringWriter(),
+                Error = new StringWriter(),
+            };
 
             int resultCode = await config.InvokeAsync("the-command");
 
@@ -60,8 +63,11 @@ namespace System.CommandLine.Tests
             CliCommand command = new("the-command");
             command.SetAction((_, __) => throw expectedException);
 
-            CliConfiguration config =
-                new(command) { Error = new StringWriter(), EnableDefaultExceptionHandler = false };
+            CliConfiguration config = new(command)
+            {
+                Error = new StringWriter(),
+                EnableDefaultExceptionHandler = false,
+            };
 
             ParseResult parseResult = command.Parse("the-command", config);
 

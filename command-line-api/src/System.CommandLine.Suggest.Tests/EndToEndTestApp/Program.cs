@@ -15,8 +15,13 @@ namespace EndToEndTestApp
             CliOption<string> cherryOption = new("--cherry");
             CliOption<string> durianOption = new("--durian");
 
-            CliRootCommand rootCommand =
-                new() { appleOption, bananaOption, cherryOption, durianOption };
+            CliRootCommand rootCommand = new()
+            {
+                appleOption,
+                bananaOption,
+                cherryOption,
+                durianOption,
+            };
 
             rootCommand.SetAction(
                 (ParseResult ctx, CancellationToken cancellationToken) =>

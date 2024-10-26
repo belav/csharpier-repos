@@ -324,121 +324,117 @@ public partial class ModelBindingCommandHandlerTests
             _boundValues.TryGetValue(context, out var value) ? value : null;
     }
 
-    internal static readonly BindingTestSet BindingCases =
-        new()
-        {
-            BindingTestCase.Create<int>("123", o => o.Should().Be(123)),
-            BindingTestCase.Create<string>("123", o => o.Should().Be("123")),
-            BindingTestCase.Create<bool>("true", o => o.Should().BeTrue()),
-            BindingTestCase.Create<ClassWithCtorParameter<int>>(
-                "123",
-                o => o.Value.Should().Be(123)
-            ),
-            BindingTestCase.Create<ClassWithSetter<int>>("123", o => o.Value.Should().Be(123)),
-            BindingTestCase.Create<ClassWithCtorParameter<string>>(
-                "123",
-                o => o.Value.Should().Be("123")
-            ),
-            BindingTestCase.Create<ClassWithSetter<string>>("123", o => o.Value.Should().Be("123")),
-            BindingTestCase.Create<FileInfo>(
+    internal static readonly BindingTestSet BindingCases = new()
+    {
+        BindingTestCase.Create<int>("123", o => o.Should().Be(123)),
+        BindingTestCase.Create<string>("123", o => o.Should().Be("123")),
+        BindingTestCase.Create<bool>("true", o => o.Should().BeTrue()),
+        BindingTestCase.Create<ClassWithCtorParameter<int>>("123", o => o.Value.Should().Be(123)),
+        BindingTestCase.Create<ClassWithSetter<int>>("123", o => o.Value.Should().Be(123)),
+        BindingTestCase.Create<ClassWithCtorParameter<string>>(
+            "123",
+            o => o.Value.Should().Be("123")
+        ),
+        BindingTestCase.Create<ClassWithSetter<string>>("123", o => o.Value.Should().Be("123")),
+        BindingTestCase.Create<FileInfo>(
+            Path.Combine(ExistingDirectory(), "file1.txt"),
+            o => o.FullName.Should().Be(Path.Combine(ExistingDirectory(), "file1.txt"))
+        ),
+        BindingTestCase.Create<FileInfo[]>(
+            new[]
+            {
                 Path.Combine(ExistingDirectory(), "file1.txt"),
-                o => o.FullName.Should().Be(Path.Combine(ExistingDirectory(), "file1.txt"))
-            ),
-            BindingTestCase.Create<FileInfo[]>(
-                new[]
-                {
-                    Path.Combine(ExistingDirectory(), "file1.txt"),
-                    Path.Combine(ExistingDirectory(), "file2.txt"),
-                },
-                o =>
-                    o.Select(f => f.FullName)
-                        .Should()
-                        .BeEquivalentTo(
-                            new[]
-                            {
-                                Path.Combine(ExistingDirectory(), "file1.txt"),
-                                Path.Combine(ExistingDirectory(), "file2.txt"),
-                            }
-                        )
-            ),
-            BindingTestCase.Create<DirectoryInfo>(
-                ExistingDirectory(),
-                fsi =>
-                    fsi.Should()
-                        .BeOfType<DirectoryInfo>()
-                        .Which.FullName.Should()
-                        .Be(ExistingDirectory())
-            ),
-            BindingTestCase.Create<DirectoryInfo[]>(
-                new[] { ExistingDirectory(), ExistingDirectory() },
-                fsi =>
-                    fsi.Should()
-                        .BeAssignableTo<IEnumerable<DirectoryInfo>>()
-                        .Which.Select(d => d.FullName)
-                        .Should()
-                        .BeEquivalentTo(new[] { ExistingDirectory(), ExistingDirectory() })
-            ),
-            BindingTestCase.Create<FileSystemInfo>(
-                ExistingFile(),
-                fsi => fsi.Should().BeOfType<FileInfo>().Which.FullName.Should().Be(ExistingFile()),
-                variationName: nameof(ExistingFile)
-            ),
-            BindingTestCase.Create<FileSystemInfo>(
-                ExistingDirectory(),
-                fsi =>
-                    fsi.Should()
-                        .BeOfType<DirectoryInfo>()
-                        .Which.FullName.Should()
-                        .Be(ExistingDirectory()),
-                variationName: nameof(ExistingDirectory)
-            ),
-            BindingTestCase.Create<FileSystemInfo>(
-                NonexistentPathWithTrailingSlash(),
-                fsi =>
-                    fsi.Should()
-                        .BeOfType<DirectoryInfo>()
-                        .Which.FullName.Should()
-                        .Be(NonexistentPathWithTrailingSlash()),
-                variationName: nameof(NonexistentPathWithTrailingSlash)
-            ),
-            BindingTestCase.Create<FileSystemInfo>(
-                NonexistentPathWithTrailingAltSlash(),
-                fsi =>
-                    fsi.Should()
-                        .BeOfType<DirectoryInfo>()
-                        .Which.FullName.Should()
-                        .Be(
-                            NonexistentPathWithTrailingSlash(),
-                            "DirectoryInfo replaces Path.AltDirectorySeparatorChar with Path.DirectorySeparatorChar on Windows"
-                        ),
-                variationName: nameof(NonexistentPathWithTrailingAltSlash)
-            ),
-            BindingTestCase.Create<FileSystemInfo>(
-                NonexistentPathWithoutTrailingSlash(),
-                fsi =>
-                    fsi.Should()
-                        .BeOfType<FileInfo>()
-                        .Which.FullName.Should()
-                        .Be(NonexistentPathWithoutTrailingSlash()),
-                variationName: nameof(NonexistentPathWithoutTrailingSlash)
-            ),
-            BindingTestCase.Create<string[]>(
-                new[] { "one", "two" },
-                o => o.Should().BeEquivalentTo(new[] { "one", "two" })
-            ),
-            BindingTestCase.Create<List<string>>(
-                new[] { "one", "two" },
-                o => o.Should().BeEquivalentTo(new List<string> { "one", "two" })
-            ),
-            BindingTestCase.Create<int[]>(
-                new[] { "1", "2" },
-                o => o.Should().BeEquivalentTo(new[] { 1, 2 })
-            ),
-            BindingTestCase.Create<List<int>>(
-                new[] { "1", "2" },
-                o => o.Should().BeEquivalentTo(new List<int> { 1, 2 })
-            ),
-        };
+                Path.Combine(ExistingDirectory(), "file2.txt"),
+            },
+            o =>
+                o.Select(f => f.FullName)
+                    .Should()
+                    .BeEquivalentTo(
+                        new[]
+                        {
+                            Path.Combine(ExistingDirectory(), "file1.txt"),
+                            Path.Combine(ExistingDirectory(), "file2.txt"),
+                        }
+                    )
+        ),
+        BindingTestCase.Create<DirectoryInfo>(
+            ExistingDirectory(),
+            fsi =>
+                fsi.Should()
+                    .BeOfType<DirectoryInfo>()
+                    .Which.FullName.Should()
+                    .Be(ExistingDirectory())
+        ),
+        BindingTestCase.Create<DirectoryInfo[]>(
+            new[] { ExistingDirectory(), ExistingDirectory() },
+            fsi =>
+                fsi.Should()
+                    .BeAssignableTo<IEnumerable<DirectoryInfo>>()
+                    .Which.Select(d => d.FullName)
+                    .Should()
+                    .BeEquivalentTo(new[] { ExistingDirectory(), ExistingDirectory() })
+        ),
+        BindingTestCase.Create<FileSystemInfo>(
+            ExistingFile(),
+            fsi => fsi.Should().BeOfType<FileInfo>().Which.FullName.Should().Be(ExistingFile()),
+            variationName: nameof(ExistingFile)
+        ),
+        BindingTestCase.Create<FileSystemInfo>(
+            ExistingDirectory(),
+            fsi =>
+                fsi.Should()
+                    .BeOfType<DirectoryInfo>()
+                    .Which.FullName.Should()
+                    .Be(ExistingDirectory()),
+            variationName: nameof(ExistingDirectory)
+        ),
+        BindingTestCase.Create<FileSystemInfo>(
+            NonexistentPathWithTrailingSlash(),
+            fsi =>
+                fsi.Should()
+                    .BeOfType<DirectoryInfo>()
+                    .Which.FullName.Should()
+                    .Be(NonexistentPathWithTrailingSlash()),
+            variationName: nameof(NonexistentPathWithTrailingSlash)
+        ),
+        BindingTestCase.Create<FileSystemInfo>(
+            NonexistentPathWithTrailingAltSlash(),
+            fsi =>
+                fsi.Should()
+                    .BeOfType<DirectoryInfo>()
+                    .Which.FullName.Should()
+                    .Be(
+                        NonexistentPathWithTrailingSlash(),
+                        "DirectoryInfo replaces Path.AltDirectorySeparatorChar with Path.DirectorySeparatorChar on Windows"
+                    ),
+            variationName: nameof(NonexistentPathWithTrailingAltSlash)
+        ),
+        BindingTestCase.Create<FileSystemInfo>(
+            NonexistentPathWithoutTrailingSlash(),
+            fsi =>
+                fsi.Should()
+                    .BeOfType<FileInfo>()
+                    .Which.FullName.Should()
+                    .Be(NonexistentPathWithoutTrailingSlash()),
+            variationName: nameof(NonexistentPathWithoutTrailingSlash)
+        ),
+        BindingTestCase.Create<string[]>(
+            new[] { "one", "two" },
+            o => o.Should().BeEquivalentTo(new[] { "one", "two" })
+        ),
+        BindingTestCase.Create<List<string>>(
+            new[] { "one", "two" },
+            o => o.Should().BeEquivalentTo(new List<string> { "one", "two" })
+        ),
+        BindingTestCase.Create<int[]>(
+            new[] { "1", "2" },
+            o => o.Should().BeEquivalentTo(new[] { 1, 2 })
+        ),
+        BindingTestCase.Create<List<int>>(
+            new[] { "1", "2" },
+            o => o.Should().BeEquivalentTo(new List<int> { 1, 2 })
+        ),
+    };
 
     internal static string NonexistentPathWithoutTrailingSlash()
     {

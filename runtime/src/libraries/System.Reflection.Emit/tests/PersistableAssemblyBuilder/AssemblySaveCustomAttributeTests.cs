@@ -274,27 +274,26 @@ namespace System.Reflection.Emit.Tests
             using (TempFile file = TempFile.Create())
             {
                 Type type = typeof(StructWithFields);
-                List<CustomAttributeBuilder> typeAttributes =
-                    new()
-                    {
-                        new CustomAttributeBuilder(
-                            typeof(SerializableAttribute).GetConstructor(Type.EmptyTypes),
-                            new object[] { }
+                List<CustomAttributeBuilder> typeAttributes = new()
+                {
+                    new CustomAttributeBuilder(
+                        typeof(SerializableAttribute).GetConstructor(Type.EmptyTypes),
+                        new object[] { }
+                    ),
+                    new CustomAttributeBuilder(
+                        typeof(StructLayoutAttribute).GetConstructor(
+                            new Type[] { typeof(LayoutKind) }
                         ),
-                        new CustomAttributeBuilder(
-                            typeof(StructLayoutAttribute).GetConstructor(
-                                new Type[] { typeof(LayoutKind) }
-                            ),
-                            new object[] { LayoutKind.Explicit },
-                            typeof(StructLayoutAttribute).GetFields(),
-                            new object[] { 32, 64, CharSet.Unicode }
-                        ),
-                        new CustomAttributeBuilder(s_guidPair.con, s_guidPair.args),
-                        new CustomAttributeBuilder(
-                            typeof(SpecialNameAttribute).GetConstructor(Type.EmptyTypes),
-                            new object[] { }
-                        ),
-                    };
+                        new object[] { LayoutKind.Explicit },
+                        typeof(StructLayoutAttribute).GetFields(),
+                        new object[] { 32, 64, CharSet.Unicode }
+                    ),
+                    new CustomAttributeBuilder(s_guidPair.con, s_guidPair.args),
+                    new CustomAttributeBuilder(
+                        typeof(SpecialNameAttribute).GetConstructor(Type.EmptyTypes),
+                        new object[] { }
+                    ),
+                };
                 CustomAttributeBuilder[] fieldAttributes = new[]
                 {
                     new CustomAttributeBuilder(
@@ -409,93 +408,82 @@ namespace System.Reflection.Emit.Tests
             {
                 Type dllType = typeof(DllImportAttribute);
                 Type type = typeof(IMultipleMethod);
-                List<CustomAttributeBuilder> typeAttributes =
-                    new()
-                    {
-                        new CustomAttributeBuilder(
-                            typeof(ComImportAttribute).GetConstructor(Type.EmptyTypes),
-                            new object[] { }
+                List<CustomAttributeBuilder> typeAttributes = new()
+                {
+                    new CustomAttributeBuilder(
+                        typeof(ComImportAttribute).GetConstructor(Type.EmptyTypes),
+                        new object[] { }
+                    ),
+                    new CustomAttributeBuilder(
+                        typeof(SuppressUnmanagedCodeSecurityAttribute).GetConstructor(
+                            Type.EmptyTypes
                         ),
-                        new CustomAttributeBuilder(
-                            typeof(SuppressUnmanagedCodeSecurityAttribute).GetConstructor(
-                                Type.EmptyTypes
-                            ),
-                            new object[] { }
+                        new object[] { }
+                    ),
+                    new CustomAttributeBuilder(s_guidPair.con, s_guidPair.args),
+                };
+                List<CustomAttributeBuilder> methodAttributes = new()
+                {
+                    new CustomAttributeBuilder(
+                        typeof(PreserveSigAttribute).GetConstructor(Type.EmptyTypes),
+                        new object[] { }
+                    ),
+                    new CustomAttributeBuilder(
+                        typeof(SuppressUnmanagedCodeSecurityAttribute).GetConstructor(
+                            Type.EmptyTypes
                         ),
-                        new CustomAttributeBuilder(s_guidPair.con, s_guidPair.args),
-                    };
-                List<CustomAttributeBuilder> methodAttributes =
-                    new()
-                    {
-                        new CustomAttributeBuilder(
-                            typeof(PreserveSigAttribute).GetConstructor(Type.EmptyTypes),
-                            new object[] { }
+                        new object[] { }
+                    ),
+                    new CustomAttributeBuilder(
+                        typeof(SpecialNameAttribute).GetConstructor(Type.EmptyTypes),
+                        new object[] { }
+                    ),
+                    new CustomAttributeBuilder(s_guidPair.con, s_guidPair.args),
+                    new CustomAttributeBuilder(
+                        typeof(MethodImplAttribute).GetConstructor(
+                            new Type[] { typeof(MethodImplOptions) }
                         ),
-                        new CustomAttributeBuilder(
-                            typeof(SuppressUnmanagedCodeSecurityAttribute).GetConstructor(
-                                Type.EmptyTypes
-                            ),
-                            new object[] { }
-                        ),
-                        new CustomAttributeBuilder(
-                            typeof(SpecialNameAttribute).GetConstructor(Type.EmptyTypes),
-                            new object[] { }
-                        ),
-                        new CustomAttributeBuilder(s_guidPair.con, s_guidPair.args),
-                        new CustomAttributeBuilder(
-                            typeof(MethodImplAttribute).GetConstructor(
-                                new Type[] { typeof(MethodImplOptions) }
-                            ),
-                            new object[]
-                            {
-                                MethodImplOptions.NoInlining
-                                    | MethodImplOptions.AggressiveOptimization,
-                            }
-                        ),
-                        new CustomAttributeBuilder(
-                            dllType.GetConstructor(new Type[] { typeof(string) }),
-                            new object[] { "test.dll" },
-                            new FieldInfo[]
-                            {
-                                dllType.GetField("CharSet"),
-                                dllType.GetField("SetLastError"),
-                                dllType.GetField("CallingConvention"),
-                                dllType.GetField("BestFitMapping"),
-                                dllType.GetField("ThrowOnUnmappableChar"),
-                            },
-                            new object[]
-                            {
-                                CharSet.Ansi,
-                                true,
-                                CallingConvention.FastCall,
-                                true,
-                                false,
-                            }
-                        ),
-                    };
-                List<CustomAttributeBuilder> parameterAttributes =
-                    new()
-                    {
-                        new CustomAttributeBuilder(
-                            typeof(InAttribute).GetConstructor(Type.EmptyTypes),
-                            new object[] { }
-                        ),
-                        new CustomAttributeBuilder(
-                            typeof(OutAttribute).GetConstructor(Type.EmptyTypes),
-                            new object[] { }
-                        ),
-                        new CustomAttributeBuilder(
-                            typeof(OptionalAttribute).GetConstructor(Type.EmptyTypes),
-                            new object[] { }
-                        ),
-                        new CustomAttributeBuilder(s_guidPair.con, s_guidPair.args),
-                        new CustomAttributeBuilder(
-                            marshalAsEnumCtor,
-                            new object[] { UnmanagedType.CustomMarshaler },
-                            new FieldInfo[] { typeof(MarshalAsAttribute).GetField("MarshalType") },
-                            new object[] { typeof(EmptyTestClass).AssemblyQualifiedName }
-                        ),
-                    };
+                        new object[]
+                        {
+                            MethodImplOptions.NoInlining | MethodImplOptions.AggressiveOptimization,
+                        }
+                    ),
+                    new CustomAttributeBuilder(
+                        dllType.GetConstructor(new Type[] { typeof(string) }),
+                        new object[] { "test.dll" },
+                        new FieldInfo[]
+                        {
+                            dllType.GetField("CharSet"),
+                            dllType.GetField("SetLastError"),
+                            dllType.GetField("CallingConvention"),
+                            dllType.GetField("BestFitMapping"),
+                            dllType.GetField("ThrowOnUnmappableChar"),
+                        },
+                        new object[] { CharSet.Ansi, true, CallingConvention.FastCall, true, false }
+                    ),
+                };
+                List<CustomAttributeBuilder> parameterAttributes = new()
+                {
+                    new CustomAttributeBuilder(
+                        typeof(InAttribute).GetConstructor(Type.EmptyTypes),
+                        new object[] { }
+                    ),
+                    new CustomAttributeBuilder(
+                        typeof(OutAttribute).GetConstructor(Type.EmptyTypes),
+                        new object[] { }
+                    ),
+                    new CustomAttributeBuilder(
+                        typeof(OptionalAttribute).GetConstructor(Type.EmptyTypes),
+                        new object[] { }
+                    ),
+                    new CustomAttributeBuilder(s_guidPair.con, s_guidPair.args),
+                    new CustomAttributeBuilder(
+                        marshalAsEnumCtor,
+                        new object[] { UnmanagedType.CustomMarshaler },
+                        new FieldInfo[] { typeof(MarshalAsAttribute).GetField("MarshalType") },
+                        new object[] { typeof(EmptyTestClass).AssemblyQualifiedName }
+                    ),
+                };
 
                 AssemblyBuilder ab = AssemblySaveTools.PopulateAssemblyBuilderAndSaveMethod(
                     PopulateAssemblyName(),

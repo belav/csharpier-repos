@@ -20,28 +20,32 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     private readonly QueryCompilationContext _queryCompilationContext;
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
-    private static readonly HashSet<string> DateTimeDataTypes =
-        new() { "time", "date", "datetime", "datetime2", "datetimeoffset" };
+    private static readonly HashSet<string> DateTimeDataTypes = new()
+    {
+        "time",
+        "date",
+        "datetime",
+        "datetime2",
+        "datetimeoffset",
+    };
 
-    private static readonly HashSet<Type> DateTimeClrTypes =
-        new()
-        {
-            typeof(TimeOnly),
-            typeof(DateOnly),
-            typeof(TimeSpan),
-            typeof(DateTime),
-            typeof(DateTimeOffset),
-        };
+    private static readonly HashSet<Type> DateTimeClrTypes = new()
+    {
+        typeof(TimeOnly),
+        typeof(DateOnly),
+        typeof(TimeSpan),
+        typeof(DateTime),
+        typeof(DateTimeOffset),
+    };
 
-    private static readonly HashSet<ExpressionType> ArithmeticOperatorTypes =
-        new()
-        {
-            ExpressionType.Add,
-            ExpressionType.Subtract,
-            ExpressionType.Multiply,
-            ExpressionType.Divide,
-            ExpressionType.Modulo,
-        };
+    private static readonly HashSet<ExpressionType> ArithmeticOperatorTypes = new()
+    {
+        ExpressionType.Add,
+        ExpressionType.Subtract,
+        ExpressionType.Multiply,
+        ExpressionType.Divide,
+        ExpressionType.Modulo,
+    };
 
     private static readonly MethodInfo StringStartsWithMethodInfo = typeof(string).GetRuntimeMethod(
         nameof(string.StartsWith),

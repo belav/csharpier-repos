@@ -8,8 +8,10 @@ namespace Microsoft.AspNetCore.Authorization.Policy;
 /// </summary>
 public class PolicyAuthorizationResult
 {
-    private static readonly PolicyAuthorizationResult _challengedResult =
-        new() { Challenged = true };
+    private static readonly PolicyAuthorizationResult _challengedResult = new()
+    {
+        Challenged = true,
+    };
     private static readonly PolicyAuthorizationResult _forbiddenResult = new() { Forbidden = true };
     private static readonly PolicyAuthorizationResult _succeededResult = new() { Succeeded = true };
 

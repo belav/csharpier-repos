@@ -57,19 +57,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
             }.RunAsync();
         }
 
-        private static readonly OptionsCollection PreferImplicitTypeAlways =
-            new(LanguageNames.CSharp)
+        private static readonly OptionsCollection PreferImplicitTypeAlways = new(
+            LanguageNames.CSharp
+        )
+        {
             {
-                {
-                    CSharpCodeStyleOptions.VarWhenTypeIsApparent,
-                    CodeStyleOption2.TrueWithSilentEnforcement
-                },
-                { CSharpCodeStyleOptions.VarElsewhere, CodeStyleOption2.TrueWithSilentEnforcement },
-                {
-                    CSharpCodeStyleOptions.VarForBuiltInTypes,
-                    CodeStyleOption2.TrueWithSilentEnforcement
-                },
-            };
+                CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                CodeStyleOption2.TrueWithSilentEnforcement
+            },
+            { CSharpCodeStyleOptions.VarElsewhere, CodeStyleOption2.TrueWithSilentEnforcement },
+            {
+                CSharpCodeStyleOptions.VarForBuiltInTypes,
+                CodeStyleOption2.TrueWithSilentEnforcement
+            },
+        };
 
         [Fact]
         public async Task TestOnSimpleAssignment()

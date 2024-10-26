@@ -15,128 +15,165 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 /// </summary>
 public class SqlServerTypeMappingSource : RelationalTypeMappingSource
 {
-    private static readonly SqlServerFloatTypeMapping RealAlias =
-        new("placeholder", storeTypePostfix: StoreTypePostfix.None);
+    private static readonly SqlServerFloatTypeMapping RealAlias = new(
+        "placeholder",
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerByteArrayTypeMapping Rowversion =
-        new(
-            "rowversion",
-            size: 8,
-            comparer: new ValueComparer<byte[]>(
-                (v1, v2) => StructuralComparisons.StructuralEqualityComparer.Equals(v1, v2),
-                v => StructuralComparisons.StructuralEqualityComparer.GetHashCode(v),
-                v => v.ToArray()
-            ),
-            storeTypePostfix: StoreTypePostfix.None
-        );
+    private static readonly SqlServerByteArrayTypeMapping Rowversion = new(
+        "rowversion",
+        size: 8,
+        comparer: new ValueComparer<byte[]>(
+            (v1, v2) => StructuralComparisons.StructuralEqualityComparer.Equals(v1, v2),
+            v => StructuralComparisons.StructuralEqualityComparer.GetHashCode(v),
+            v => v.ToArray()
+        ),
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerLongTypeMapping LongRowversion =
-        new(
-            "rowversion",
-            converter: new NumberToBytesConverter<long>(),
-            providerValueComparer: new ValueComparer<byte[]>(
-                (v1, v2) => StructuralComparisons.StructuralEqualityComparer.Equals(v1, v2),
-                v => StructuralComparisons.StructuralEqualityComparer.GetHashCode(v),
-                v => v.ToArray()
-            ),
-            dbType: DbType.Binary
-        );
+    private static readonly SqlServerLongTypeMapping LongRowversion = new(
+        "rowversion",
+        converter: new NumberToBytesConverter<long>(),
+        providerValueComparer: new ValueComparer<byte[]>(
+            (v1, v2) => StructuralComparisons.StructuralEqualityComparer.Equals(v1, v2),
+            v => StructuralComparisons.StructuralEqualityComparer.GetHashCode(v),
+            v => v.ToArray()
+        ),
+        dbType: DbType.Binary
+    );
 
-    private static readonly SqlServerLongTypeMapping UlongRowversion =
-        new(
-            "rowversion",
-            converter: new NumberToBytesConverter<ulong>(),
-            providerValueComparer: new ValueComparer<byte[]>(
-                (v1, v2) => StructuralComparisons.StructuralEqualityComparer.Equals(v1, v2),
-                v => StructuralComparisons.StructuralEqualityComparer.GetHashCode(v),
-                v => v.ToArray()
-            ),
-            dbType: DbType.Binary
-        );
+    private static readonly SqlServerLongTypeMapping UlongRowversion = new(
+        "rowversion",
+        converter: new NumberToBytesConverter<ulong>(),
+        providerValueComparer: new ValueComparer<byte[]>(
+            (v1, v2) => StructuralComparisons.StructuralEqualityComparer.Equals(v1, v2),
+            v => StructuralComparisons.StructuralEqualityComparer.GetHashCode(v),
+            v => v.ToArray()
+        ),
+        dbType: DbType.Binary
+    );
 
-    private static readonly SqlServerStringTypeMapping FixedLengthUnicodeString =
-        new(unicode: true, fixedLength: true);
+    private static readonly SqlServerStringTypeMapping FixedLengthUnicodeString = new(
+        unicode: true,
+        fixedLength: true
+    );
 
-    private static readonly SqlServerStringTypeMapping TextUnicodeString =
-        new(
-            "ntext",
-            unicode: true,
-            sqlDbType: SqlDbType.NText,
-            storeTypePostfix: StoreTypePostfix.None
-        );
+    private static readonly SqlServerStringTypeMapping TextUnicodeString = new(
+        "ntext",
+        unicode: true,
+        sqlDbType: SqlDbType.NText,
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerStringTypeMapping VariableLengthUnicodeString =
-        new(unicode: true);
+    private static readonly SqlServerStringTypeMapping VariableLengthUnicodeString = new(
+        unicode: true
+    );
 
-    private static readonly SqlServerStringTypeMapping VariableLengthMaxUnicodeString =
-        new("nvarchar(max)", unicode: true, storeTypePostfix: StoreTypePostfix.None);
+    private static readonly SqlServerStringTypeMapping VariableLengthMaxUnicodeString = new(
+        "nvarchar(max)",
+        unicode: true,
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerStringTypeMapping FixedLengthAnsiString =
-        new(fixedLength: true);
+    private static readonly SqlServerStringTypeMapping FixedLengthAnsiString = new(
+        fixedLength: true
+    );
 
-    private static readonly SqlServerStringTypeMapping TextAnsiString =
-        new("text", sqlDbType: SqlDbType.Text, storeTypePostfix: StoreTypePostfix.None);
+    private static readonly SqlServerStringTypeMapping TextAnsiString = new(
+        "text",
+        sqlDbType: SqlDbType.Text,
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerStringTypeMapping VariableLengthMaxAnsiString =
-        new("varchar(max)", storeTypePostfix: StoreTypePostfix.None);
+    private static readonly SqlServerStringTypeMapping VariableLengthMaxAnsiString = new(
+        "varchar(max)",
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerByteArrayTypeMapping ImageBinary =
-        new("image", sqlDbType: SqlDbType.Image);
+    private static readonly SqlServerByteArrayTypeMapping ImageBinary = new(
+        "image",
+        sqlDbType: SqlDbType.Image
+    );
 
-    private static readonly SqlServerByteArrayTypeMapping VariableLengthMaxBinary =
-        new("varbinary(max)", storeTypePostfix: StoreTypePostfix.None);
+    private static readonly SqlServerByteArrayTypeMapping VariableLengthMaxBinary = new(
+        "varbinary(max)",
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerByteArrayTypeMapping FixedLengthBinary =
-        new(fixedLength: true);
+    private static readonly SqlServerByteArrayTypeMapping FixedLengthBinary = new(
+        fixedLength: true
+    );
 
     private static readonly SqlServerDateTimeTypeMapping DateAsDateTime = new("date", DbType.Date);
 
-    private static readonly SqlServerDateTimeTypeMapping SmallDatetime =
-        new("smalldatetime", DbType.DateTime, SqlDbType.SmallDateTime);
+    private static readonly SqlServerDateTimeTypeMapping SmallDatetime = new(
+        "smalldatetime",
+        DbType.DateTime,
+        SqlDbType.SmallDateTime
+    );
 
-    private static readonly SqlServerDateTimeTypeMapping Datetime =
-        new("datetime", DbType.DateTime);
+    private static readonly SqlServerDateTimeTypeMapping Datetime = new(
+        "datetime",
+        DbType.DateTime
+    );
 
-    private static readonly SqlServerDateTimeTypeMapping Datetime2Alias =
-        new("placeholder", DbType.DateTime2, null, StoreTypePostfix.None);
+    private static readonly SqlServerDateTimeTypeMapping Datetime2Alias = new(
+        "placeholder",
+        DbType.DateTime2,
+        null,
+        StoreTypePostfix.None
+    );
 
     private static readonly DoubleTypeMapping DoubleAlias = new SqlServerDoubleTypeMapping(
         "placeholder",
         storeTypePostfix: StoreTypePostfix.None
     );
 
-    private static readonly SqlServerDateTimeOffsetTypeMapping DatetimeoffsetAlias =
-        new("placeholder", DbType.DateTimeOffset, StoreTypePostfix.None);
+    private static readonly SqlServerDateTimeOffsetTypeMapping DatetimeoffsetAlias = new(
+        "placeholder",
+        DbType.DateTimeOffset,
+        StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerDecimalTypeMapping Decimal =
-        new("decimal", precision: 18, scale: 0);
+    private static readonly SqlServerDecimalTypeMapping Decimal = new(
+        "decimal",
+        precision: 18,
+        scale: 0
+    );
 
-    private static readonly SqlServerDecimalTypeMapping DecimalAlias =
-        new("placeholder", precision: 18, scale: 2, storeTypePostfix: StoreTypePostfix.None);
+    private static readonly SqlServerDecimalTypeMapping DecimalAlias = new(
+        "placeholder",
+        precision: 18,
+        scale: 2,
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerDecimalTypeMapping Money =
-        new(
-            "money",
-            DbType.Currency,
-            sqlDbType: SqlDbType.Money,
-            storeTypePostfix: StoreTypePostfix.None
-        );
+    private static readonly SqlServerDecimalTypeMapping Money = new(
+        "money",
+        DbType.Currency,
+        sqlDbType: SqlDbType.Money,
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerDecimalTypeMapping SmallMoney =
-        new(
-            "smallmoney",
-            DbType.Currency,
-            sqlDbType: SqlDbType.SmallMoney,
-            storeTypePostfix: StoreTypePostfix.None
-        );
+    private static readonly SqlServerDecimalTypeMapping SmallMoney = new(
+        "smallmoney",
+        DbType.Currency,
+        sqlDbType: SqlDbType.SmallMoney,
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
-    private static readonly SqlServerTimeOnlyTypeMapping TimeAlias =
-        new("placeholder", StoreTypePostfix.None);
+    private static readonly SqlServerTimeOnlyTypeMapping TimeAlias = new(
+        "placeholder",
+        StoreTypePostfix.None
+    );
 
     private static readonly GuidTypeMapping Uniqueidentifier = new("uniqueidentifier");
 
-    private static readonly SqlServerStringTypeMapping Xml =
-        new("xml", unicode: true, storeTypePostfix: StoreTypePostfix.None);
+    private static readonly SqlServerStringTypeMapping Xml = new(
+        "xml",
+        unicode: true,
+        storeTypePostfix: StoreTypePostfix.None
+    );
 
     private static readonly Dictionary<Type, RelationalTypeMapping> _clrTypeMappings;
 
@@ -424,18 +461,17 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
         return null;
     }
 
-    private static readonly List<string> NameBasesUsingPrecision =
-        new()
-        {
-            "decimal",
-            "dec",
-            "numeric",
-            "datetime2",
-            "datetimeoffset",
-            "double precision",
-            "float",
-            "time",
-        };
+    private static readonly List<string> NameBasesUsingPrecision = new()
+    {
+        "decimal",
+        "dec",
+        "numeric",
+        "datetime2",
+        "datetimeoffset",
+        "double precision",
+        "float",
+        "time",
+    };
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

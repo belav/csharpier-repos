@@ -77,8 +77,10 @@ namespace Microsoft.CodeAnalysis.Telemetry
             }
         }
 
-        private readonly ConcurrentDictionary<int, object> _pendingScopes =
-            new(concurrencyLevel: 2, capacity: 10);
+        private readonly ConcurrentDictionary<int, object> _pendingScopes = new(
+            concurrencyLevel: 2,
+            capacity: 10
+        );
 
         private const string EventPrefix = "vs/ide/vbcs/";
         private const string PropertyPrefix = "vs.ide.vbcs.";

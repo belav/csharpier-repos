@@ -69,14 +69,13 @@ namespace System.IO.Compression
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(destinationFileName);
 
-            FileStreamOptions fileStreamOptions =
-                new()
-                {
-                    Access = FileAccess.Write,
-                    Mode = overwrite ? FileMode.Create : FileMode.CreateNew,
-                    Share = FileShare.None,
-                    BufferSize = 0x1000,
-                };
+            FileStreamOptions fileStreamOptions = new()
+            {
+                Access = FileAccess.Write,
+                Mode = overwrite ? FileMode.Create : FileMode.CreateNew,
+                Share = FileShare.None,
+                BufferSize = 0x1000,
+            };
 
             const UnixFileMode OwnershipPermissions =
                 UnixFileMode.UserRead

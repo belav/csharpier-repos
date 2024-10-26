@@ -20,8 +20,9 @@ namespace System.Threading.RateLimiting
         // TODO: Look at ConcurrentDictionary to try and avoid a global lock
         private readonly Dictionary<TKey, Lazy<RateLimiter>> _limiters;
         private bool _disposed;
-        private readonly TaskCompletionSource<object?> _disposeComplete =
-            new(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource<object?> _disposeComplete = new(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         // Used by the Timer to call TryRelenish on ReplenishingRateLimiters
         // We use a separate list to avoid running TryReplenish (which might be user code) inside our lock

@@ -99,8 +99,10 @@ namespace Microsoft.CodeAnalysis
                 : "";
         }
 
-        private static readonly XmlReaderSettings s_xmlSettings =
-            new() { DtdProcessing = DtdProcessing.Prohibit };
+        private static readonly XmlReaderSettings s_xmlSettings = new()
+        {
+            DtdProcessing = DtdProcessing.Prohibit,
+        };
 
         private sealed class ContentBasedXmlDocumentationProvider : XmlDocumentationProvider
         {

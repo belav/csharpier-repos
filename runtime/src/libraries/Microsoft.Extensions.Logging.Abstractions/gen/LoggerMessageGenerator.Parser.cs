@@ -1103,8 +1103,9 @@ namespace Microsoft.Extensions.Logging.Generators
         {
             public readonly List<LoggerParameter> AllParameters = new();
             public readonly List<LoggerParameter> TemplateParameters = new();
-            public readonly Dictionary<string, string> TemplateMap =
-                new(StringComparer.OrdinalIgnoreCase);
+            public readonly Dictionary<string, string> TemplateMap = new(
+                StringComparer.OrdinalIgnoreCase
+            );
             public readonly List<string> TemplateList = new();
             public string Name = string.Empty;
             public string UniqueName = string.Empty;

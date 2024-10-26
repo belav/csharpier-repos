@@ -780,8 +780,9 @@ namespace System.Net.Http.Json.Functional.Tests
         [InlineData(false, false)]
         public async Task GetFromJsonAsync_EnforcesTimeout(bool useDeleteAsync, bool slowHeaders)
         {
-            TaskCompletionSource<byte> exceptionThrown =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource<byte> exceptionThrown = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             await LoopbackServer.CreateClientAndServerAsync(
                 async uri =>
@@ -838,8 +839,9 @@ namespace System.Net.Http.Json.Functional.Tests
         [InlineData(false)]
         public async Task GetFromJsonAsAsyncEnumerable_EnforcesTimeout(bool slowHeaders)
         {
-            TaskCompletionSource<byte> exceptionThrown =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource<byte> exceptionThrown = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             await LoopbackServer.CreateClientAndServerAsync(
                 async uri =>

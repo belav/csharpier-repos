@@ -23,19 +23,17 @@ namespace Microsoft.AspNetCore.Http.RequestDelegateGenerator;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class RequestDelegateGeneratorSuppressor : DiagnosticSuppressor
 {
-    private static readonly SuppressionDescriptor SuppressRUCDiagnostic =
-        new(
-            id: "RDGS001",
-            suppressedDiagnosticId: "IL2026",
-            justification: "The target method has been intercepted by a statically generated variant."
-        );
+    private static readonly SuppressionDescriptor SuppressRUCDiagnostic = new(
+        id: "RDGS001",
+        suppressedDiagnosticId: "IL2026",
+        justification: "The target method has been intercepted by a statically generated variant."
+    );
 
-    private static readonly SuppressionDescriptor SuppressRDCDiagnostic =
-        new(
-            id: "RDGS002",
-            suppressedDiagnosticId: "IL3050",
-            justification: "The target method has been intercepted by a statically generated variant."
-        );
+    private static readonly SuppressionDescriptor SuppressRDCDiagnostic = new(
+        id: "RDGS002",
+        suppressedDiagnosticId: "IL3050",
+        justification: "The target method has been intercepted by a statically generated variant."
+    );
 
     public override void ReportSuppressions(SuppressionAnalysisContext context)
     {

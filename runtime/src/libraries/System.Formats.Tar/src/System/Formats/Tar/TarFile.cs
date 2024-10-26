@@ -498,13 +498,12 @@ namespace System.Formats.Tar
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            FileStreamOptions options =
-                new()
-                {
-                    Access = FileAccess.Write,
-                    Mode = FileMode.CreateNew,
-                    Options = FileOptions.Asynchronous,
-                };
+            FileStreamOptions options = new()
+            {
+                Access = FileAccess.Write,
+                Mode = FileMode.CreateNew,
+                Options = FileOptions.Asynchronous,
+            };
             // Throws if the destination file exists
             FileStream archive = new(destinationFileName, options);
             await using (archive.ConfigureAwait(false))
@@ -670,13 +669,12 @@ namespace System.Formats.Tar
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            FileStreamOptions options =
-                new()
-                {
-                    Access = FileAccess.Read,
-                    Mode = FileMode.Open,
-                    Options = FileOptions.Asynchronous,
-                };
+            FileStreamOptions options = new()
+            {
+                Access = FileAccess.Read,
+                Mode = FileMode.Open,
+                Options = FileOptions.Asynchronous,
+            };
             FileStream archive = new(sourceFileName, options);
             await using (archive.ConfigureAwait(false))
             {

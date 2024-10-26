@@ -303,8 +303,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void CustomJsonConverterFactoryThatReturnsJsonConverterFactoryFail()
         {
-            JsonSerializerOptions options =
-                new() { Converters = { new ConverterFactoryThatReturnsJsonConverterFactory() } };
+            JsonSerializerOptions options = new()
+            {
+                Converters = { new ConverterFactoryThatReturnsJsonConverterFactory() },
+            };
 
             InvalidOperationException ex = Assert.Throws<InvalidOperationException>(
                 () => JsonSerializer.Serialize(1, options)

@@ -20,13 +20,12 @@ namespace Microsoft.Interop.Analyzers
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(ConvertToGeneratedComInterface);
 
-        private static readonly HashSet<string> s_unsupportedTypeNames =
-            new()
-            {
-                "global::System.Runtime.InteropServices.CriticalHandle",
-                "global::System.Runtime.InteropServices.HandleRef",
-                "global::System.Text.StringBuilder",
-            };
+        private static readonly HashSet<string> s_unsupportedTypeNames = new()
+        {
+            "global::System.Runtime.InteropServices.CriticalHandle",
+            "global::System.Runtime.InteropServices.HandleRef",
+            "global::System.Text.StringBuilder",
+        };
 
         public override void Initialize(AnalysisContext context)
         {
@@ -96,16 +95,15 @@ namespace Microsoft.Interop.Analyzers
                             // Use  the method signature to do some of the work the generator will do after conversion.
                             // If any diagnostics or failures to marshal are reported, then mark this diagnostic with a property signifying that it may require
                             // later user work.
-                            GeneratorDiagnosticsBag diagnostics =
-                                new(
-                                    new DiagnosticDescriptorProvider(),
-                                    new MethodSignatureDiagnosticLocations(
-                                        (MethodDeclarationSyntax)
-                                            method.DeclaringSyntaxReferences[0].GetSyntax()
-                                    ),
-                                    SR.ResourceManager,
-                                    typeof(FxResources.Microsoft.Interop.ComInterfaceGenerator.SR)
-                                );
+                            GeneratorDiagnosticsBag diagnostics = new(
+                                new DiagnosticDescriptorProvider(),
+                                new MethodSignatureDiagnosticLocations(
+                                    (MethodDeclarationSyntax)
+                                        method.DeclaringSyntaxReferences[0].GetSyntax()
+                                ),
+                                SR.ResourceManager,
+                                typeof(FxResources.Microsoft.Interop.ComInterfaceGenerator.SR)
+                            );
                             AttributeData comImportAttribute = type.GetAttributes()
                                 .First(attr =>
                                     attr.AttributeClass.ToDisplayString()

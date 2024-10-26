@@ -28,8 +28,9 @@ namespace Microsoft.VisualStudio.LanguageServices
         /// </summary>
         public const string CSharpProjectExistsInWorkspaceUIContextString =
             "CA719A03-D55C-48F9-85DE-D934346E7F70";
-        public static readonly Guid CSharpProjectExistsInWorkspaceUIContext =
-            new(CSharpProjectExistsInWorkspaceUIContextString);
+        public static readonly Guid CSharpProjectExistsInWorkspaceUIContext = new(
+            CSharpProjectExistsInWorkspaceUIContextString
+        );
 
         public const string CSharpProjectRootIdString = "C7FEDB89-B36D-4a62-93F4-DC7A95999921";
 
@@ -40,8 +41,9 @@ namespace Microsoft.VisualStudio.LanguageServices
         public static readonly Guid CSharpProjectId = new(CSharpProjectIdString);
         public static readonly Guid CSharpLanguageServiceId = new(CSharpLanguageServiceIdString);
         public static readonly Guid CSharpEditorFactoryId = new(CSharpEditorFactoryIdString);
-        public static readonly Guid CSharpCodePageEditorFactoryId =
-            new(CSharpCodePageEditorFactoryIdString);
+        public static readonly Guid CSharpCodePageEditorFactoryId = new(
+            CSharpCodePageEditorFactoryIdString
+        );
         public static readonly Guid CSharpCommandSetId = new(CSharpCommandSetIdString); // guidCSharpCmdId
         public static readonly Guid CSharpGroupId = new(CSharpGroupIdString); // guidCSharpGrpId
         public static readonly Guid CSharpRefactorIconId = new(CSharpRefactorIconIdString); // guidCSharpRefactorIcon
@@ -97,25 +99,31 @@ namespace Microsoft.VisualStudio.LanguageServices
         /// </summary>
         public const string VisualBasicProjectExistsInWorkspaceUIContextString =
             "EEC3DF0D-6D3F-4544-ABF9-8E26E6A90275";
-        public static readonly Guid VisualBasicProjectExistsInWorkspaceUIContext =
-            new(VisualBasicProjectExistsInWorkspaceUIContextString);
+        public static readonly Guid VisualBasicProjectExistsInWorkspaceUIContext = new(
+            VisualBasicProjectExistsInWorkspaceUIContextString
+        );
 
         public static readonly Guid VisualBasicPackageId = new(VisualBasicPackageIdString);
-        public static readonly Guid VisualBasicCompilerServiceId =
-            new(VisualBasicCompilerServiceIdString);
-        public static readonly Guid VisualBasicLanguageServiceId =
-            new(VisualBasicLanguageServiceIdString);
-        public static readonly Guid VisualBasicEditorFactoryId =
-            new(VisualBasicEditorFactoryIdString);
-        public static readonly Guid VisualBasicCodePageEditorFactoryId =
-            new(VisualBasicCodePageEditorFactoryIdString);
+        public static readonly Guid VisualBasicCompilerServiceId = new(
+            VisualBasicCompilerServiceIdString
+        );
+        public static readonly Guid VisualBasicLanguageServiceId = new(
+            VisualBasicLanguageServiceIdString
+        );
+        public static readonly Guid VisualBasicEditorFactoryId = new(
+            VisualBasicEditorFactoryIdString
+        );
+        public static readonly Guid VisualBasicCodePageEditorFactoryId = new(
+            VisualBasicCodePageEditorFactoryIdString
+        );
         public static readonly Guid VisualBasicLibraryId = new(VisualBasicLibraryIdString);
 
         public static readonly Guid VisualBasicProjectId = new(VisualBasicProjectIdString);
 
         // from debugger\idl\makeapi\guid.c
-        public static readonly Guid VisualBasicDebuggerLanguageId =
-            new(VisualBasicDebuggerLanguageIdString);
+        public static readonly Guid VisualBasicDebuggerLanguageId = new(
+            VisualBasicDebuggerLanguageIdString
+        );
 
         // option page guid from setupauthoring\vb\components\vblanguageservice.pkgdef
         public const string VisualBasicOptionPageVBSpecificIdString =
@@ -156,27 +164,32 @@ namespace Microsoft.VisualStudio.LanguageServices
 
         public const string ValueTrackingToolWindowIdString =
             "60a19d42-2dd7-43f3-be90-c7a9cb7d28f4";
-        public static readonly Guid ValueTrackingToolWindowId =
-            new(ValueTrackingToolWindowIdString);
+        public static readonly Guid ValueTrackingToolWindowId = new(
+            ValueTrackingToolWindowIdString
+        );
 
         public const string StackTraceExplorerToolWindowIdString =
             "7FF2AB69-0A20-4BF5-BAEF-24D9EB6969E1";
-        public static readonly Guid StackTraceExplorerToolWindowId =
-            new(StackTraceExplorerToolWindowIdString);
+        public static readonly Guid StackTraceExplorerToolWindowId = new(
+            StackTraceExplorerToolWindowIdString
+        );
         public const string StackTraceExplorerCommandIdString =
             "FB190424-4DFF-43DB-8CCA-E32D1CE8A5CA";
-        public static readonly Guid StackTraceExplorerCommandId =
-            new(StackTraceExplorerCommandIdString);
+        public static readonly Guid StackTraceExplorerCommandId = new(
+            StackTraceExplorerCommandIdString
+        );
 
         public const string DocumentOutlineSearchCategoryIdString =
             "C80E47CF-B95A-46D4-8BE4-6ADA02888333";
-        public static readonly Guid DocumentOutlineSearchCategoryId =
-            new(DocumentOutlineSearchCategoryIdString);
+        public static readonly Guid DocumentOutlineSearchCategoryId = new(
+            DocumentOutlineSearchCategoryIdString
+        );
 
         /// <summary>
         /// The package GUID for GlobalHubClientPackage, which proffers ServiceHub brokered services in Visual Studio.
         /// </summary>
-        public static readonly Guid GlobalHubClientPackageGuid =
-            new("11AD60FC-6D87-4674-8F88-9ABE79176CBE");
+        public static readonly Guid GlobalHubClientPackageGuid = new(
+            "11AD60FC-6D87-4674-8F88-9ABE79176CBE"
+        );
     }
 }

@@ -1084,13 +1084,12 @@ namespace System.CommandLine.Tests
         )
         {
             CliRootCommand rootCommand = new();
-            CliCommand subcommand =
-                new("vstest")
-                {
-                    new CliOption<string>("--Platform"),
-                    new CliOption<string>("--Framework"),
-                    new CliOption<string[]>("--logger"),
-                };
+            CliCommand subcommand = new("vstest")
+            {
+                new CliOption<string>("--Platform"),
+                new CliOption<string>("--Framework"),
+                new CliOption<string[]>("--logger"),
+            };
             subcommand.TreatUnmatchedTokensAsErrors = treatUnmatchedTokensAsErrors;
             rootCommand.Subcommands.Add(subcommand);
 
@@ -1115,13 +1114,12 @@ namespace System.CommandLine.Tests
         {
             CliRootCommand rootCommand = new();
             rootCommand.TreatUnmatchedTokensAsErrors = false;
-            CliCommand subcommand =
-                new("vstest")
-                {
-                    new CliOption<string>("--Platform"),
-                    new CliOption<string>("--Framework"),
-                    new CliOption<string[]>("--logger"),
-                };
+            CliCommand subcommand = new("vstest")
+            {
+                new CliOption<string>("--Platform"),
+                new CliOption<string>("--Framework"),
+                new CliOption<string[]>("--logger"),
+            };
             subcommand.TreatUnmatchedTokensAsErrors = true; // the default, set to true to make it explicit
             rootCommand.Subcommands.Add(subcommand);
 

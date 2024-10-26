@@ -30,8 +30,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
 
         private static readonly string s_dummyThreeLineTitle =
             "A" + Environment.NewLine + "A" + Environment.NewLine + "A";
-        private static readonly Size s_infiniteSize =
-            new(double.PositiveInfinity, double.PositiveInfinity);
+        private static readonly Size s_infiniteSize = new(
+            double.PositiveInfinity,
+            double.PositiveInfinity
+        );
 
         private readonly string _id;
         private readonly bool _logIdVerbatimInTelemetry;

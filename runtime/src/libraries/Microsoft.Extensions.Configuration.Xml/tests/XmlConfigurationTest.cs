@@ -1016,8 +1016,9 @@ namespace Microsoft.Extensions.Configuration.Xml.Test
             File.WriteAllText(filePath, @"<settings><My><Nice>Settings</Nice></My></settings>");
 
             PhysicalFileProvider fileProvider = new(Path.GetDirectoryName(filePath));
-            XmlConfigurationProvider configurationProvider =
-                new(new XmlConfigurationSource() { Path = filePath, FileProvider = fileProvider });
+            XmlConfigurationProvider configurationProvider = new(
+                new XmlConfigurationSource() { Path = filePath, FileProvider = fileProvider }
+            );
             IConfigurationRoot config = new ConfigurationBuilder()
                 .AddXmlFile(
                     configurationProvider.Source.FileProvider,

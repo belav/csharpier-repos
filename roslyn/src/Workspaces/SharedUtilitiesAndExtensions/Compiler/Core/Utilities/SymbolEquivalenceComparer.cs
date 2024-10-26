@@ -38,30 +38,27 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         private readonly ImmutableArray<EquivalenceVisitor> _equivalenceVisitors;
         private readonly ImmutableArray<GetHashCodeVisitor> _getHashCodeVisitors;
 
-        public static readonly SymbolEquivalenceComparer Instance =
-            new(
-                SimpleNameAssemblyComparer.Instance,
-                distinguishRefFromOut: false,
-                tupleNamesMustMatch: false,
-                ignoreNullableAnnotations: true,
-                objectAndDynamicCompareEqually: true
-            );
-        public static readonly SymbolEquivalenceComparer TupleNamesMustMatchInstance =
-            new(
-                SimpleNameAssemblyComparer.Instance,
-                distinguishRefFromOut: false,
-                tupleNamesMustMatch: true,
-                ignoreNullableAnnotations: true,
-                objectAndDynamicCompareEqually: true
-            );
-        public static readonly SymbolEquivalenceComparer IgnoreAssembliesInstance =
-            new(
-                assemblyComparerOpt: null,
-                distinguishRefFromOut: false,
-                tupleNamesMustMatch: false,
-                ignoreNullableAnnotations: true,
-                objectAndDynamicCompareEqually: true
-            );
+        public static readonly SymbolEquivalenceComparer Instance = new(
+            SimpleNameAssemblyComparer.Instance,
+            distinguishRefFromOut: false,
+            tupleNamesMustMatch: false,
+            ignoreNullableAnnotations: true,
+            objectAndDynamicCompareEqually: true
+        );
+        public static readonly SymbolEquivalenceComparer TupleNamesMustMatchInstance = new(
+            SimpleNameAssemblyComparer.Instance,
+            distinguishRefFromOut: false,
+            tupleNamesMustMatch: true,
+            ignoreNullableAnnotations: true,
+            objectAndDynamicCompareEqually: true
+        );
+        public static readonly SymbolEquivalenceComparer IgnoreAssembliesInstance = new(
+            assemblyComparerOpt: null,
+            distinguishRefFromOut: false,
+            tupleNamesMustMatch: false,
+            ignoreNullableAnnotations: true,
+            objectAndDynamicCompareEqually: true
+        );
 
         private readonly IEqualityComparer<IAssemblySymbol>? _assemblyComparerOpt;
         private readonly bool _tupleNamesMustMatch;

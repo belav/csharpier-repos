@@ -496,18 +496,26 @@ namespace System.Reflection
             void* pByRefStorage = (ByReference*)(pStorage + argCount);
 #pragma warning restore 8500
 
-            GCFrameRegistration regArgStorage =
-                new((void**)pStorage, (uint)argCount, areByRefs: false);
-            GCFrameRegistration regByRefStorage =
-                new((void**)pByRefStorage, (uint)argCount, areByRefs: true);
+            GCFrameRegistration regArgStorage = new(
+                (void**)pStorage,
+                (uint)argCount,
+                areByRefs: false
+            );
+            GCFrameRegistration regByRefStorage = new(
+                (void**)pByRefStorage,
+                (uint)argCount,
+                areByRefs: true
+            );
 
             try
             {
                 RuntimeImports.RhRegisterForGCReporting(&regArgStorage);
                 RuntimeImports.RhRegisterForGCReporting(&regByRefStorage);
 
-                Span<object?> copyOfParameters =
-                    new(ref Unsafe.As<IntPtr, object?>(ref *pStorage), argCount);
+                Span<object?> copyOfParameters = new(
+                    ref Unsafe.As<IntPtr, object?>(ref *pStorage),
+                    argCount
+                );
                 CheckArguments(copyOfParameters, pByRefStorage, parameters, binderBundle);
 
                 try
@@ -560,18 +568,26 @@ namespace System.Reflection
             void* pByRefStorage = (ByReference*)(pStorage + argCount);
 #pragma warning restore 8500
 
-            GCFrameRegistration regArgStorage =
-                new((void**)pStorage, (uint)argCount, areByRefs: false);
-            GCFrameRegistration regByRefStorage =
-                new((void**)pByRefStorage, (uint)argCount, areByRefs: true);
+            GCFrameRegistration regArgStorage = new(
+                (void**)pStorage,
+                (uint)argCount,
+                areByRefs: false
+            );
+            GCFrameRegistration regByRefStorage = new(
+                (void**)pByRefStorage,
+                (uint)argCount,
+                areByRefs: true
+            );
 
             try
             {
                 RuntimeImports.RhRegisterForGCReporting(&regArgStorage);
                 RuntimeImports.RhRegisterForGCReporting(&regByRefStorage);
 
-                Span<object?> copyOfParameters =
-                    new(ref Unsafe.As<IntPtr, object?>(ref *pStorage), argCount);
+                Span<object?> copyOfParameters = new(
+                    ref Unsafe.As<IntPtr, object?>(ref *pStorage),
+                    argCount
+                );
                 CheckArguments(copyOfParameters, pByRefStorage, parameters);
 
                 ret = ref RawCalliHelper.Call(

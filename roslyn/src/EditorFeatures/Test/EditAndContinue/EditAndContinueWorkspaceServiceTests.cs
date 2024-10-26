@@ -50,8 +50,9 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         private static readonly Guid s_defaultProjectTelemetryId = Guid.Parse(
             "00000000-AAAA-AAAA-AAAA-111111111111"
         );
-        private static readonly Regex s_timePropertiesRegex =
-            new("[|](EmitDifferenceMilliseconds|TotalAnalysisMilliseconds)=[0-9]+");
+        private static readonly Regex s_timePropertiesRegex = new(
+            "[|](EmitDifferenceMilliseconds|TotalAnalysisMilliseconds)=[0-9]+"
+        );
 
         private static readonly ActiveStatementSpanProvider s_noActiveSpans = (_, _, _) =>
             new(ImmutableArray<ActiveStatementSpan>.Empty);

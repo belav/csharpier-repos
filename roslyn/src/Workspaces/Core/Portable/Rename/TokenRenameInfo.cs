@@ -31,11 +31,10 @@ namespace Microsoft.CodeAnalysis.Rename
             );
         }
 
-        public static TokenRenameInfo NoSymbolsTokenInfo =
-            new(
-                hasSymbols: false,
-                isMemberGroup: false,
-                symbols: SpecializedCollections.EmptyEnumerable<ISymbol>()
-            );
+        public static TokenRenameInfo NoSymbolsTokenInfo = new(
+            hasSymbols: false,
+            isMemberGroup: false,
+            symbols: SpecializedCollections.EmptyEnumerable<ISymbol>()
+        );
     }
 }

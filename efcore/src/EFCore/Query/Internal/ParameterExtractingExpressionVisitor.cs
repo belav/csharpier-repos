@@ -23,8 +23,9 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     private readonly EvaluatableExpressionFindingExpressionVisitor _evaluatableExpressionFindingExpressionVisitor;
     private readonly ContextParameterReplacingExpressionVisitor _contextParameterReplacingExpressionVisitor;
 
-    private readonly Dictionary<Expression, EvaluatedValues> _evaluatedValues =
-        new(ExpressionEqualityComparer.Instance);
+    private readonly Dictionary<Expression, EvaluatedValues> _evaluatedValues = new(
+        ExpressionEqualityComparer.Instance
+    );
 
     private IDictionary<Expression, bool> _evaluatableExpressions;
     private IQueryProvider? _currentQueryProvider;

@@ -15,8 +15,10 @@ namespace ILLink.Shared.TrimAnalysis
     {
         // In the analyzer there's no stateful data the flow annotations need to store
         // so we just create a singleton on demand.
-        static readonly Lazy<FlowAnnotations> _instance =
-            new(() => new FlowAnnotations(), isThreadSafe: true);
+        static readonly Lazy<FlowAnnotations> _instance = new(
+            () => new FlowAnnotations(),
+            isThreadSafe: true
+        );
 
         public static FlowAnnotations Instance
         {

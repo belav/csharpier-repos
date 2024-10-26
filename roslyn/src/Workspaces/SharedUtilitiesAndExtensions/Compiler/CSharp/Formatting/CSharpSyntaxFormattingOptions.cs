@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static readonly CodeStyleOption2<NamespaceDeclarationPreference> s_defaultNamespaceDeclarations =
             new(NamespaceDeclarationPreference.BlockScoped, NotificationOption2.Silent);
 
-        private static readonly CodeStyleOption2<bool> s_trueWithSilentEnforcement =
-            new(value: true, notification: NotificationOption2.Silent);
+        private static readonly CodeStyleOption2<bool> s_trueWithSilentEnforcement = new(
+            value: true,
+            notification: NotificationOption2.Silent
+        );
 
         public const SpacePlacement SpacingDefault =
             SpacePlacement.AfterControlFlowStatementKeyword

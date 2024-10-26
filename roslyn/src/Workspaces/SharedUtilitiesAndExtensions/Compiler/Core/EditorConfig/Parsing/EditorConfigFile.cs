@@ -19,8 +19,9 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
     internal record class EditorConfigFile<T>(string? FilePath, ImmutableArray<T> Options)
         where T : EditorConfigOption
     {
-        private readonly Lazy<ImmutableArray<Section>> _sections =
-            new(() => Options.SelectAsArray(x => x.Section).Distinct());
+        private readonly Lazy<ImmutableArray<Section>> _sections = new(
+            () => Options.SelectAsArray(x => x.Section).Distinct()
+        );
 
         public ImmutableArray<Section> Sections => _sections.Value;
 

@@ -181,8 +181,10 @@ namespace System.CommandLine.Tests.Invocation
         public void Terminating_option_action_short_circuits_command_action()
         {
             bool optionActionWasCalled = false;
-            SynchronousTestAction optionAction =
-                new(_ => optionActionWasCalled = true, terminating: true);
+            SynchronousTestAction optionAction = new(
+                _ => optionActionWasCalled = true,
+                terminating: true
+            );
             bool commandActionWasCalled = false;
 
             CliOption<bool> option = new("--test") { Action = optionAction };
@@ -207,8 +209,10 @@ namespace System.CommandLine.Tests.Invocation
         public void Nonterminating_option_action_does_not_short_circuit_command_action()
         {
             bool optionActionWasCalled = false;
-            SynchronousTestAction optionAction =
-                new(_ => optionActionWasCalled = true, terminating: false);
+            SynchronousTestAction optionAction = new(
+                _ => optionActionWasCalled = true,
+                terminating: false
+            );
             bool commandActionWasCalled = false;
 
             CliOption<bool> option = new("--test") { Action = optionAction };
@@ -262,12 +266,11 @@ namespace System.CommandLine.Tests.Invocation
 
             var directive = new CliDirective("directive") { Action = directiveAction };
 
-            CliRootCommand command =
-                new("cmd")
-                {
-                    new CliOption<bool>("-x") { Action = optionAction },
-                    directive,
-                };
+            CliRootCommand command = new("cmd")
+            {
+                new CliOption<bool>("-x") { Action = optionAction },
+                directive,
+            };
 
             ParseResult parseResult = command.Parse(
                 "[directive] cmd -x",

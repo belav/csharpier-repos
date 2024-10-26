@@ -13,18 +13,11 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteCharMethodTranslator : IMethodCallTranslator
 {
-    private static readonly Dictionary<MethodInfo, string> SupportedMethods =
-        new()
-        {
-            {
-                typeof(char).GetRuntimeMethod(nameof(char.ToLower), new[] { typeof(char) })!,
-                "lower"
-            },
-            {
-                typeof(char).GetRuntimeMethod(nameof(char.ToUpper), new[] { typeof(char) })!,
-                "upper"
-            },
-        };
+    private static readonly Dictionary<MethodInfo, string> SupportedMethods = new()
+    {
+        { typeof(char).GetRuntimeMethod(nameof(char.ToLower), new[] { typeof(char) })!, "lower" },
+        { typeof(char).GetRuntimeMethod(nameof(char.ToUpper), new[] { typeof(char) })!, "upper" },
+    };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 

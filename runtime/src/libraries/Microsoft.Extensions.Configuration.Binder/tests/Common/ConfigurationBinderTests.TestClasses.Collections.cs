@@ -35,17 +35,19 @@ namespace Microsoft.Extensions
                 AlreadyInitializedDictionary = ExistingDictionary;
             }
 
-            public List<string> ListUsedInIEnumerableFieldAndShouldNotBeTouched =
-                new() { "This was here too", "Don't touch me!" };
+            public List<string> ListUsedInIEnumerableFieldAndShouldNotBeTouched = new()
+            {
+                "This was here too",
+                "Don't touch me!",
+            };
 
-            public static ReadOnlyDictionary<string, string> ExistingDictionary =
-                new(
-                    new Dictionary<string, string>
-                    {
-                        { "existing_key_1", "val_1" },
-                        { "existing_key_2", "val_2" },
-                    }
-                );
+            public static ReadOnlyDictionary<string, string> ExistingDictionary = new(
+                new Dictionary<string, string>
+                {
+                    { "existing_key_1", "val_1" },
+                    { "existing_key_2", "val_2" },
+                }
+            );
 
             public IEnumerable<string> AlreadyInitializedIEnumerableInterface { get; set; }
 
@@ -290,8 +292,11 @@ namespace Microsoft.Extensions
 
         public class ConfigWithInstantiatedIReadOnlyDictionary
         {
-            public static Dictionary<string, int> _existingDictionary =
-                new() { { "existing-item1", 1 }, { "existing-item2", 2 } };
+            public static Dictionary<string, int> _existingDictionary = new()
+            {
+                { "existing-item1", 1 },
+                { "existing-item2", 2 },
+            };
 
             public IReadOnlyDictionary<string, int> Dictionary { get; set; } = _existingDictionary;
         }
@@ -303,8 +308,11 @@ namespace Microsoft.Extensions
 
         public class ConfigWithInstantiatedConcreteDictionary
         {
-            public static Dictionary<string, int> _existingDictionary =
-                new() { { "existing-item1", 1 }, { "existing-item2", 2 } };
+            public static Dictionary<string, int> _existingDictionary = new()
+            {
+                { "existing-item1", 1 },
+                { "existing-item2", 2 },
+            };
 
             public Dictionary<string, int> Dictionary { get; set; } = _existingDictionary;
         }

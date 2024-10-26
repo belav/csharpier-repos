@@ -20,13 +20,12 @@ internal sealed record class VisualBasicIdeCodeStyleOptions
     private static readonly CodeStyleOption2<UnusedValuePreference> s_unusedLocalVariableWithSuggestionEnforcement =
         new(UnusedValuePreference.UnusedLocalVariable, NotificationOption2.Suggestion);
 
-    private static readonly CodeStyleOption2<string> s_defaultModifierOrder =
-        new(
-            "Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,"
-                + "Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,"
-                + "Dim,Const,WithEvents,Widening,Narrowing,Custom,Async,Iterator",
-            NotificationOption2.Silent
-        );
+    private static readonly CodeStyleOption2<string> s_defaultModifierOrder = new(
+        "Partial,Default,Private,Protected,Public,Friend,NotOverridable,Overridable,MustOverride,"
+            + "Overloads,Overrides,MustInherit,NotInheritable,Static,Shared,Shadows,ReadOnly,WriteOnly,"
+            + "Dim,Const,WithEvents,Widening,Narrowing,Custom,Async,Iterator",
+        NotificationOption2.Silent
+    );
 
     public static readonly VisualBasicIdeCodeStyleOptions Default = new();
 

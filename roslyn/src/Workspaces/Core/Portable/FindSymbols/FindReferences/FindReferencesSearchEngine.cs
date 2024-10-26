@@ -43,8 +43,9 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// them in the case of linked files across projects.  This allows references to be found to any of the unified
         /// symbols, while the user only gets a single reported group back that corresponds to that entire set.
         /// </summary>
-        private readonly ConcurrentDictionary<ISymbol, SymbolGroup> _symbolToGroup =
-            new(MetadataUnifyingEquivalenceComparer.Instance);
+        private readonly ConcurrentDictionary<ISymbol, SymbolGroup> _symbolToGroup = new(
+            MetadataUnifyingEquivalenceComparer.Instance
+        );
 
         public FindReferencesSearchEngine(
             Solution solution,

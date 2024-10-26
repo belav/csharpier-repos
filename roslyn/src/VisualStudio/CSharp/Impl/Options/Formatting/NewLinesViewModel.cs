@@ -22,8 +22,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
         private static readonly Conversions<
             NewLineBeforeOpenBracePlacement,
             int
-        > s_newLinesForBracesConversions =
-            new(v => (int)v, v => (NewLineBeforeOpenBracePlacement)v);
+        > s_newLinesForBracesConversions = new(
+            v => (int)v,
+            v => (NewLineBeforeOpenBracePlacement)v
+        );
 
         private const string s_previewText =
             @"//[

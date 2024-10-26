@@ -60,33 +60,28 @@ internal static class IdeAnalyzerOptionsStorage
         };
     }
 
-    public static readonly Option2<bool> CrashOnAnalyzerException =
-        new(
-            "dotnet_crash_on_analyzer_exception",
-            IdeAnalyzerOptions.CommonDefault.CrashOnAnalyzerException
-        );
+    public static readonly Option2<bool> CrashOnAnalyzerException = new(
+        "dotnet_crash_on_analyzer_exception",
+        IdeAnalyzerOptions.CommonDefault.CrashOnAnalyzerException
+    );
 
-    public static PerLanguageOption2<bool> ReportInvalidPlaceholdersInStringDotFormatCalls =
-        new(
-            "dotnet_report_invalid_placeholders_in_string_dot_format_calls",
-            IdeAnalyzerOptions.CommonDefault.ReportInvalidPlaceholdersInStringDotFormatCalls
-        );
+    public static PerLanguageOption2<bool> ReportInvalidPlaceholdersInStringDotFormatCalls = new(
+        "dotnet_report_invalid_placeholders_in_string_dot_format_calls",
+        IdeAnalyzerOptions.CommonDefault.ReportInvalidPlaceholdersInStringDotFormatCalls
+    );
 
-    public static PerLanguageOption2<bool> ReportInvalidRegexPatterns =
-        new(
-            "dotnet_report_invalid_regex_patterns",
-            IdeAnalyzerOptions.CommonDefault.ReportInvalidRegexPatterns
-        );
+    public static PerLanguageOption2<bool> ReportInvalidRegexPatterns = new(
+        "dotnet_report_invalid_regex_patterns",
+        IdeAnalyzerOptions.CommonDefault.ReportInvalidRegexPatterns
+    );
 
-    public static PerLanguageOption2<bool> ReportInvalidJsonPatterns =
-        new(
-            "dotnet_report_invalid_json_patterns",
-            IdeAnalyzerOptions.CommonDefault.ReportInvalidJsonPatterns
-        );
+    public static PerLanguageOption2<bool> ReportInvalidJsonPatterns = new(
+        "dotnet_report_invalid_json_patterns",
+        IdeAnalyzerOptions.CommonDefault.ReportInvalidJsonPatterns
+    );
 
-    public static PerLanguageOption2<bool> DetectAndOfferEditorFeaturesForProbableJsonStrings =
-        new(
-            "dotnet_detect_and_offer_editor_features_for_probable_json_strings",
-            IdeAnalyzerOptions.CommonDefault.DetectAndOfferEditorFeaturesForProbableJsonStrings
-        );
+    public static PerLanguageOption2<bool> DetectAndOfferEditorFeaturesForProbableJsonStrings = new(
+        "dotnet_detect_and_offer_editor_features_for_probable_json_strings",
+        IdeAnalyzerOptions.CommonDefault.DetectAndOfferEditorFeaturesForProbableJsonStrings
+    );
 }

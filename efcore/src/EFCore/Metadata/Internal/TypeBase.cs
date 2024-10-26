@@ -20,10 +20,12 @@ public abstract class TypeBase
         ITypeBase
 {
     private readonly SortedDictionary<string, Property> _properties;
-    private readonly SortedDictionary<string, ComplexProperty> _complexProperties =
-        new(StringComparer.Ordinal);
-    private readonly Dictionary<string, ConfigurationSource> _ignoredMembers =
-        new(StringComparer.Ordinal);
+    private readonly SortedDictionary<string, ComplexProperty> _complexProperties = new(
+        StringComparer.Ordinal
+    );
+    private readonly Dictionary<string, ConfigurationSource> _ignoredMembers = new(
+        StringComparer.Ordinal
+    );
 
     private TypeBase? _baseType;
     private readonly SortedSet<TypeBase> _directlyDerivedTypes = new(TypeBaseNameComparer.Instance);

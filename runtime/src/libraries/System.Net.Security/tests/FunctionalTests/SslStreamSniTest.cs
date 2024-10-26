@@ -354,17 +354,16 @@ namespace System.Net.Security.Tests
                     ),
                 };
 
-                SslClientAuthenticationOptions clientOptions =
-                    new()
+                SslClientAuthenticationOptions clientOptions = new()
+                {
+                    TargetHost = rawHostname,
+                    CertificateChainPolicy = new X509ChainPolicy()
                     {
-                        TargetHost = rawHostname,
-                        CertificateChainPolicy = new X509ChainPolicy()
-                        {
-                            RevocationMode = X509RevocationMode.NoCheck,
-                            TrustMode = X509ChainTrustMode.CustomRootTrust,
-                            CustomTrustStore = { serverChain[serverChain.Count - 1] },
-                        },
-                    };
+                        RevocationMode = X509RevocationMode.NoCheck,
+                        TrustMode = X509ChainTrustMode.CustomRootTrust,
+                        CustomTrustStore = { serverChain[serverChain.Count - 1] },
+                    },
+                };
 
                 (SslStream client, SslStream server) = TestHelper.GetConnectedSslStreams();
 

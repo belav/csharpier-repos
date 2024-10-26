@@ -23,19 +23,17 @@ namespace Microsoft.CodeAnalysis.Analyzers.MatchFolderAndNamespace
         where TSyntaxKind : struct
         where TNamespaceSyntax : SyntaxNode
     {
-        private static readonly LocalizableResourceString s_localizableTitle =
-            new(
-                nameof(AnalyzersResources.Namespace_does_not_match_folder_structure),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            );
+        private static readonly LocalizableResourceString s_localizableTitle = new(
+            nameof(AnalyzersResources.Namespace_does_not_match_folder_structure),
+            AnalyzersResources.ResourceManager,
+            typeof(AnalyzersResources)
+        );
 
-        private static readonly LocalizableResourceString s_localizableInsideMessage =
-            new(
-                nameof(AnalyzersResources.Namespace_0_does_not_match_folder_structure_expected_1),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            );
+        private static readonly LocalizableResourceString s_localizableInsideMessage = new(
+            nameof(AnalyzersResources.Namespace_0_does_not_match_folder_structure_expected_1),
+            AnalyzersResources.ResourceManager,
+            typeof(AnalyzersResources)
+        );
 
         private static readonly SymbolDisplayFormat s_namespaceDisplayFormat =
             SymbolDisplayFormat.FullyQualifiedFormat.WithGlobalNamespaceStyle(

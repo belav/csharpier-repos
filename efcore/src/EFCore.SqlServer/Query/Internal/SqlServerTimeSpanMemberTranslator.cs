@@ -13,14 +13,13 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerTimeSpanMemberTranslator : IMemberTranslator
 {
-    private static readonly Dictionary<string, string> DatePartMappings =
-        new()
-        {
-            { nameof(TimeSpan.Hours), "hour" },
-            { nameof(TimeSpan.Minutes), "minute" },
-            { nameof(TimeSpan.Seconds), "second" },
-            { nameof(TimeSpan.Milliseconds), "millisecond" },
-        };
+    private static readonly Dictionary<string, string> DatePartMappings = new()
+    {
+        { nameof(TimeSpan.Hours), "hour" },
+        { nameof(TimeSpan.Minutes), "minute" },
+        { nameof(TimeSpan.Seconds), "second" },
+        { nameof(TimeSpan.Milliseconds), "millisecond" },
+    };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 

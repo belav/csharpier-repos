@@ -253,14 +253,13 @@ public partial class GetChromeVersions : MBU.Task
 
         string foundV8Version = await FindV8VersionFromChromeVersion(foundRelease.version)
             .ConfigureAwait(false);
-        ChromeVersionSpec versionSpec =
-            new(
-                os: foundRelease.platform,
-                channel: Channel,
-                version: foundRelease.version,
-                branch_base_position: foundRelease.chromium_main_branch_position.ToString(),
-                v8_version: foundV8Version
-            );
+        ChromeVersionSpec versionSpec = new(
+            os: foundRelease.platform,
+            channel: Channel,
+            version: foundRelease.version,
+            branch_base_position: foundRelease.chromium_main_branch_position.ToString(),
+            v8_version: foundV8Version
+        );
         string? baseSnapshotUrl = await FindSnapshotUrlFromBasePositionAsync(
                 versionSpec,
                 throwIfNotFound: true

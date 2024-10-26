@@ -35,19 +35,18 @@ namespace Microsoft.CodeAnalysis.Debugging
         // Ctrl+B, but it would seem that a better solution to this problem would be to simply
         // enable setting breakpoints on all accessors by setting a breakpoint on the property
         // declaration (same as C# behavior).
-        private static readonly SymbolDisplayFormat s_vsDebugNameFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
-                    | SymbolDisplayMemberOptions.IncludeParameters,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeOptionalBrackets
-                    | SymbolDisplayParameterOptions.IncludeType,
-                propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat s_vsDebugNameFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+                | SymbolDisplayMemberOptions.IncludeParameters,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeOptionalBrackets
+                | SymbolDisplayParameterOptions.IncludeType,
+            propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         protected readonly string Text;
         private readonly string _language;

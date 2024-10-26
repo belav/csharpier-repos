@@ -66,13 +66,12 @@ public abstract class AppTestBase : BlazorWasmTestBase
         List<string> consoleOutput = new();
         Regex exitRegex = new Regex("WASM EXIT (?<exitCode>[0-9]+)$");
 
-        BlazorRunOptions blazorRunOptions =
-            new(
-                CheckCounter: false,
-                Config: options.Configuration,
-                OnConsoleMessage: OnConsoleMessage,
-                QueryString: queryString
-            );
+        BlazorRunOptions blazorRunOptions = new(
+            CheckCounter: false,
+            Config: options.Configuration,
+            OnConsoleMessage: OnConsoleMessage,
+            QueryString: queryString
+        );
 
         await BlazorRunForBuildWithDotnetRun(blazorRunOptions);
 

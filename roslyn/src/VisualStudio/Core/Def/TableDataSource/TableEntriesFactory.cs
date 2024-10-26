@@ -24,8 +24,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 
         private readonly AbstractTableDataSource<TItem, TData> _tableSource;
         private readonly AggregatedEntriesSource _entriesSources;
-        private readonly WeakReference<ITableEntriesSnapshot> _lastSnapshotWeakReference =
-            new(null!);
+        private readonly WeakReference<ITableEntriesSnapshot> _lastSnapshotWeakReference = new(
+            null!
+        );
 
         private int _lastVersion = 0;
 

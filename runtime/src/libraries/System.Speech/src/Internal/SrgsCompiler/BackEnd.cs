@@ -347,17 +347,16 @@ namespace System.Speech.Internal.SrgsCompiler
 
             int idString;
             int cImportedRule = 0;
-            Rule rule =
-                new(
-                    this,
-                    name,
-                    _symbols.Add(name, out idString),
-                    attributes,
-                    _ruleIndex,
-                    0,
-                    _grammarOptions & GrammarOptions.TagFormat,
-                    ref cImportedRule
-                );
+            Rule rule = new(
+                this,
+                name,
+                _symbols.Add(name, out idString),
+                attributes,
+                _ruleIndex,
+                0,
+                _grammarOptions & GrammarOptions.TagFormat,
+                ref cImportedRule
+            );
 
             rule._iSerialize2 = _ruleIndex++;
 
@@ -509,17 +508,16 @@ namespace System.Speech.Internal.SrgsCompiler
             }
 
             bool fNeedWeightTable = false;
-            Arc arc =
-                new(
-                    null,
-                    ruleToTransitionTo,
-                    _words,
-                    flWeight,
-                    '\0',
-                    specialRuleTrans,
-                    MatchMode.AllWords,
-                    ref fNeedWeightTable
-                );
+            Arc arc = new(
+                null,
+                ruleToTransitionTo,
+                _words,
+                flWeight,
+                '\0',
+                specialRuleTrans,
+                MatchMode.AllWords,
+                ref fNeedWeightTable
+            );
 
             AddArc(arc);
 
@@ -1249,15 +1247,14 @@ namespace System.Speech.Internal.SrgsCompiler
                     _symbols.Find(header.pszSymbols.FromOffset(cfgRule._nameOffset))
                 );
 
-                Rule rule =
-                    new(
-                        this,
-                        _symbols.FromOffset(cfgRule._nameOffset),
-                        cfgRule,
-                        i + previousCfgLastRules,
-                        _grammarOptions & GrammarOptions.TagFormat,
-                        ref _cImportedRules
-                    );
+                Rule rule = new(
+                    this,
+                    _symbols.FromOffset(cfgRule._nameOffset),
+                    cfgRule,
+                    i + previousCfgLastRules,
+                    _grammarOptions & GrammarOptions.TagFormat,
+                    ref _cImportedRules
+                );
 
                 rule._firstState = _states.CreateNewState(rule);
                 _rules.Add(rule);
@@ -1428,17 +1425,16 @@ namespace System.Speech.Internal.SrgsCompiler
 
         private Arc AddSingleWordTransition(string s, float flWeight, int requiredConfidence)
         {
-            Arc arc =
-                new(
-                    s,
-                    null,
-                    _words,
-                    flWeight,
-                    requiredConfidence,
-                    null,
-                    MatchMode.AllWords,
-                    ref _fNeedWeightTable
-                );
+            Arc arc = new(
+                s,
+                null,
+                _words,
+                flWeight,
+                requiredConfidence,
+                null,
+                MatchMode.AllWords,
+                ref _fNeedWeightTable
+            );
             AddArc(arc);
             return arc;
         }

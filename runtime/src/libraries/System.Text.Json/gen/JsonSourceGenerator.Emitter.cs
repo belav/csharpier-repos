@@ -1120,10 +1120,9 @@ namespace System.Text.Json.SourceGeneration
 
                 const string ArgsVarName = "args";
 
-                StringBuilder sb =
-                    new(
-                        $"static {ArgsVarName} => new {typeGenerationSpec.TypeRef.FullyQualifiedName}("
-                    );
+                StringBuilder sb = new(
+                    $"static {ArgsVarName} => new {typeGenerationSpec.TypeRef.FullyQualifiedName}("
+                );
 
                 if (parameters.Count > 0)
                 {

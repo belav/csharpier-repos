@@ -35,8 +35,9 @@ internal sealed class LspServices : ILspServices
     /// Gates access to <see cref="_servicesToDispose"/>.
     /// </summary>
     private readonly object _gate = new();
-    private readonly HashSet<IDisposable> _servicesToDispose =
-        new(ReferenceEqualityComparer.Instance);
+    private readonly HashSet<IDisposable> _servicesToDispose = new(
+        ReferenceEqualityComparer.Instance
+    );
 
     public LspServices(
         ImmutableArray<Lazy<ILspService, LspServiceMetadataView>> mefLspServices,

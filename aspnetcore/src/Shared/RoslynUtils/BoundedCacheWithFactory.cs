@@ -18,15 +18,14 @@ internal class BoundedCacheWithFactory<TKey, TValue>
 {
     // Bounded weak reference cache.
     // Size 5 is an arbitrarily chosen bound, which can be tuned in future as required.
-    private readonly List<WeakReference<Entry?>> _weakReferencedEntries =
-        new()
-        {
-            new WeakReference<Entry?>(null),
-            new WeakReference<Entry?>(null),
-            new WeakReference<Entry?>(null),
-            new WeakReference<Entry?>(null),
-            new WeakReference<Entry?>(null),
-        };
+    private readonly List<WeakReference<Entry?>> _weakReferencedEntries = new()
+    {
+        new WeakReference<Entry?>(null),
+        new WeakReference<Entry?>(null),
+        new WeakReference<Entry?>(null),
+        new WeakReference<Entry?>(null),
+        new WeakReference<Entry?>(null),
+    };
 
     public TValue GetOrCreateValue(TKey key, Func<TKey, TValue> valueFactory)
     {

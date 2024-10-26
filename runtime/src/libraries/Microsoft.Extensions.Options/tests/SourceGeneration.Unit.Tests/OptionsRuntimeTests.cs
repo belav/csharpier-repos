@@ -17,38 +17,38 @@ namespace Microsoft.Gen.OptionsValidation.Unit.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
         public void TestValidationSuccessResults()
         {
-            MyOptions options =
-                new()
+            MyOptions options = new()
+            {
+                Name = "T",
+                Phone = "P",
+                Age = 30,
+                Nested = new()
                 {
-                    Name = "T",
-                    Phone = "P",
-                    Age = 30,
-                    Nested = new()
+                    Tall = 10,
+                    Id = "1",
+                    Children1 = new()
                     {
-                        Tall = 10,
-                        Id = "1",
-                        Children1 = new()
-                        {
-                            new ChildOptions() { Name = "C1-1" },
-                            new ChildOptions() { Name = "C1-2" },
-                        },
-                        Children2 = new List<ChildOptions>()
-                        {
-                            new ChildOptions() { Name = "C2-1" },
-                            new ChildOptions() { Name = "C2-2" },
-                        },
-                        NestedList = new()
-                        {
-                            new NestedOptions() { Tall = 5, Id = "1" },
-                            new NestedOptions() { Tall = 6, Id = "2" },
-                            new NestedOptions() { Tall = 7, Id = "3" },
-                        },
+                        new ChildOptions() { Name = "C1-1" },
+                        new ChildOptions() { Name = "C1-2" },
                     },
-                };
+                    Children2 = new List<ChildOptions>()
+                    {
+                        new ChildOptions() { Name = "C2-1" },
+                        new ChildOptions() { Name = "C2-2" },
+                    },
+                    NestedList = new()
+                    {
+                        new NestedOptions() { Tall = 5, Id = "1" },
+                        new NestedOptions() { Tall = 6, Id = "2" },
+                        new NestedOptions() { Tall = 7, Id = "3" },
+                    },
+                },
+            };
 
             MySourceGenOptionsValidator sourceGenOptionsValidator = new();
-            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions =
-                new("MyOptions");
+            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions = new(
+                "MyOptions"
+            );
 
             ValidateOptionsResult result = sourceGenOptionsValidator.Validate("MyOptions", options);
             Assert.True(result.Succeeded);
@@ -63,8 +63,9 @@ namespace Microsoft.Gen.OptionsValidation.Unit.Test
             MyOptions options = new();
 
             MySourceGenOptionsValidator sourceGenOptionsValidator = new();
-            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions =
-                new("MyOptions");
+            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions = new(
+                "MyOptions"
+            );
 
             ValidateOptionsResult result1 = sourceGenOptionsValidator.Validate(
                 "MyOptions",
@@ -100,18 +101,18 @@ namespace Microsoft.Gen.OptionsValidation.Unit.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
         public void TestValidationWithNestedTypes()
         {
-            MyOptions options =
-                new()
-                {
-                    Name = "T",
-                    Phone = "P",
-                    Age = 30,
-                    Nested = new() { Tall = 20 },
-                };
+            MyOptions options = new()
+            {
+                Name = "T",
+                Phone = "P",
+                Age = 30,
+                Nested = new() { Tall = 20 },
+            };
 
             MySourceGenOptionsValidator sourceGenOptionsValidator = new();
-            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions =
-                new("MyOptions");
+            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions = new(
+                "MyOptions"
+            );
 
             ValidateOptionsResult result1 = sourceGenOptionsValidator.Validate(
                 "MyOptions",
@@ -145,34 +146,34 @@ namespace Microsoft.Gen.OptionsValidation.Unit.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
         public void TestValidationWithEnumeration()
         {
-            MyOptions options =
-                new()
+            MyOptions options = new()
+            {
+                Name = "T",
+                Phone = "P",
+                Age = 30,
+                Nested = new()
                 {
-                    Name = "T",
-                    Phone = "P",
-                    Age = 30,
-                    Nested = new()
+                    Tall = 10,
+                    Id = "1",
+                    Children1 = new()
                     {
-                        Tall = 10,
-                        Id = "1",
-                        Children1 = new()
-                        {
-                            new ChildOptions(),
-                            new ChildOptions(),
-                            new ChildOptions(),
-                        },
-                        Children2 = new List<ChildOptions>()
-                        {
-                            new ChildOptions(),
-                            new ChildOptions(),
-                            new ChildOptions(),
-                        },
+                        new ChildOptions(),
+                        new ChildOptions(),
+                        new ChildOptions(),
                     },
-                };
+                    Children2 = new List<ChildOptions>()
+                    {
+                        new ChildOptions(),
+                        new ChildOptions(),
+                        new ChildOptions(),
+                    },
+                },
+            };
 
             MySourceGenOptionsValidator sourceGenOptionsValidator = new();
-            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions =
-                new("MyOptions");
+            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions = new(
+                "MyOptions"
+            );
 
             ValidateOptionsResult result1 = sourceGenOptionsValidator.Validate(
                 "MyOptions",
@@ -214,8 +215,9 @@ namespace Microsoft.Gen.OptionsValidation.Unit.Test
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
         public void TestObjectsWithIndexerProperties()
         {
-            DataAnnotationValidateOptions<MyDictionaryOptions> dataAnnotationValidateOptions1 =
-                new("MyDictionaryOptions");
+            DataAnnotationValidateOptions<MyDictionaryOptions> dataAnnotationValidateOptions1 = new(
+                "MyDictionaryOptions"
+            );
             MyDictionaryOptionsOptionsValidator sourceGenOptionsValidator1 = new();
 
             var options1 = new MyDictionaryOptions();
@@ -248,14 +250,13 @@ namespace Microsoft.Gen.OptionsValidation.Unit.Test
         {
             NestedOptions nestedOptions = new() { Tall = 10, Id = "2" };
 
-            MyOptions options =
-                new()
-                {
-                    Name = "T",
-                    Phone = "P",
-                    Age = 30,
-                    Nested = nestedOptions,
-                };
+            MyOptions options = new()
+            {
+                Name = "T",
+                Phone = "P",
+                Age = 30,
+                Nested = nestedOptions,
+            };
 
             nestedOptions.NestedList = new()
             {
@@ -267,8 +268,9 @@ namespace Microsoft.Gen.OptionsValidation.Unit.Test
             };
 
             MySourceGenOptionsValidator sourceGenOptionsValidator = new();
-            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions =
-                new("MyOptions");
+            DataAnnotationValidateOptions<MyOptions> dataAnnotationValidateOptions = new(
+                "MyOptions"
+            );
 
             ValidateOptionsResult result1 = sourceGenOptionsValidator.Validate(
                 "MyOptions",
@@ -289,15 +291,14 @@ namespace Microsoft.Gen.OptionsValidation.Unit.Test
         {
             NewAttributesValidator sourceGenValidator = new();
 
-            OptionsUsingNewAttributes validOptions =
-                new()
-                {
-                    P1 = "123456",
-                    P2 = 2,
-                    P3 = 4,
-                    P4 = "c",
-                    P5 = "d",
-                };
+            OptionsUsingNewAttributes validOptions = new()
+            {
+                P1 = "123456",
+                P2 = 2,
+                P3 = 4,
+                P4 = "c",
+                P5 = "d",
+            };
 
             ValidateOptionsResult result = sourceGenValidator.Validate(
                 "OptionsUsingNewAttributes",
@@ -305,15 +306,14 @@ namespace Microsoft.Gen.OptionsValidation.Unit.Test
             );
             Assert.True(result.Succeeded);
 
-            OptionsUsingNewAttributes invalidOptions =
-                new()
-                {
-                    P1 = "123",
-                    P2 = 4,
-                    P3 = 1,
-                    P4 = "e",
-                    P5 = "c",
-                };
+            OptionsUsingNewAttributes invalidOptions = new()
+            {
+                P1 = "123",
+                P2 = 4,
+                P3 = 1,
+                P4 = "e",
+                P5 = "c",
+            };
 
             result = sourceGenValidator.Validate("OptionsUsingNewAttributes", invalidOptions);
 

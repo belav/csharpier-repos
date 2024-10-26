@@ -1265,8 +1265,9 @@ namespace LibraryImportGenerator.UnitTests
             };
 
             // Custom type marshalling with invalid members
-            CustomStructMarshallingCodeSnippets customStructMarshallingCodeSnippets =
-                new(new CodeSnippets());
+            CustomStructMarshallingCodeSnippets customStructMarshallingCodeSnippets = new(
+                new CodeSnippets()
+            );
             yield return new object[]
             {
                 ID(),
@@ -1494,8 +1495,9 @@ namespace LibraryImportGenerator.UnitTests
             };
 
             // Generic collection marshaller has different arity than collection.
-            CustomCollectionMarshallingCodeSnippets customCollectionMarshallingCodeSnippets =
-                new(new CodeSnippets());
+            CustomCollectionMarshallingCodeSnippets customCollectionMarshallingCodeSnippets = new(
+                new CodeSnippets()
+            );
             yield return new object[]
             {
                 ID(),
@@ -1734,20 +1736,19 @@ namespace LibraryImportGenerator.UnitTests
 
             const string AdditionalProjectName = "AdditionalProject";
 
-            VerifyCS.Test test =
-                new(referenceAncillaryInterop: false)
+            VerifyCS.Test test = new(referenceAncillaryInterop: false)
+            {
+                TestState =
                 {
-                    TestState =
+                    Sources = { testSource },
+                    AdditionalProjectReferences = { AdditionalProjectName },
+                    AdditionalProjects =
                     {
-                        Sources = { testSource },
-                        AdditionalProjectReferences = { AdditionalProjectName },
-                        AdditionalProjects =
-                        {
-                            [AdditionalProjectName] = { Sources = { assemblySource } },
-                        },
+                        [AdditionalProjectName] = { Sources = { assemblySource } },
                     },
-                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                };
+                },
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+            };
 
             test.TestState.AdditionalProjects[AdditionalProjectName]
                 .AdditionalReferences.AddRange(test.TestState.AdditionalReferences);

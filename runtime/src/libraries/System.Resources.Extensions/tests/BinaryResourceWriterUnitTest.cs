@@ -780,15 +780,14 @@ namespace System.Resources.Extensions.Tests
             bool useEnumeratorEntry
         )
         {
-            ResourceManager manager =
-                new(
-                    typeof(TestData).FullName,
-                    typeof(TestData).Assembly,
-                    typeof(DeserializingResourceReader).Assembly.GetType(
-                        "System.Resources.Extensions.RuntimeResourceSet",
-                        throwOnError: true
-                    )
-                );
+            ResourceManager manager = new(
+                typeof(TestData).FullName,
+                typeof(TestData).Assembly,
+                typeof(DeserializingResourceReader).Assembly.GetType(
+                    "System.Resources.Extensions.RuntimeResourceSet",
+                    throwOnError: true
+                )
+            );
 
             const int Threads = 10;
             using Barrier barrier = new(Threads);

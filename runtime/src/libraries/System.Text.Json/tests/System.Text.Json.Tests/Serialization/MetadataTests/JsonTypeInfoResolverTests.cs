@@ -104,20 +104,19 @@ namespace System.Text.Json.Serialization.Tests
             JsonTypeInfo t3 = JsonTypeInfo.CreateJsonTypeInfo(typeof(string), options);
 
             // we return same instance for easier comparison
-            TestResolver resolver =
-                new(
-                    (t, o) =>
-                    {
-                        Assert.Same(o, options);
-                        if (t == typeof(int))
-                            return t1;
-                        if (t == typeof(uint))
-                            return t2;
-                        if (t == typeof(string))
-                            return t3;
-                        return null;
-                    }
-                );
+            TestResolver resolver = new(
+                (t, o) =>
+                {
+                    Assert.Same(o, options);
+                    if (t == typeof(int))
+                        return t1;
+                    if (t == typeof(uint))
+                        return t2;
+                    if (t == typeof(string))
+                        return t3;
+                    return null;
+                }
+            );
 
             IJsonTypeInfoResolver combined = JsonTypeInfoResolver.Combine(resolver);
 
@@ -139,44 +138,41 @@ namespace System.Text.Json.Serialization.Tests
             int resolverId = 1;
 
             // we return same instance for easier comparison
-            TestResolver r1 =
-                new(
-                    (t, o) =>
-                    {
-                        Assert.Equal(1, resolverId);
-                        Assert.Same(o, options);
-                        if (t == typeof(int))
-                            return t1;
-                        resolverId++;
-                        return null;
-                    }
-                );
+            TestResolver r1 = new(
+                (t, o) =>
+                {
+                    Assert.Equal(1, resolverId);
+                    Assert.Same(o, options);
+                    if (t == typeof(int))
+                        return t1;
+                    resolverId++;
+                    return null;
+                }
+            );
 
-            TestResolver r2 =
-                new(
-                    (t, o) =>
-                    {
-                        Assert.Equal(2, resolverId);
-                        Assert.Same(o, options);
-                        if (t == typeof(uint))
-                            return t2;
-                        resolverId++;
-                        return null;
-                    }
-                );
+            TestResolver r2 = new(
+                (t, o) =>
+                {
+                    Assert.Equal(2, resolverId);
+                    Assert.Same(o, options);
+                    if (t == typeof(uint))
+                        return t2;
+                    resolverId++;
+                    return null;
+                }
+            );
 
-            TestResolver r3 =
-                new(
-                    (t, o) =>
-                    {
-                        Assert.Equal(3, resolverId);
-                        Assert.Same(o, options);
-                        if (t == typeof(string))
-                            return t3;
-                        resolverId++;
-                        return null;
-                    }
-                );
+            TestResolver r3 = new(
+                (t, o) =>
+                {
+                    Assert.Equal(3, resolverId);
+                    Assert.Same(o, options);
+                    if (t == typeof(string))
+                        return t3;
+                    resolverId++;
+                    return null;
+                }
+            );
 
             IJsonTypeInfoResolver combined = JsonTypeInfoResolver.Combine(r1, r2, r3);
 

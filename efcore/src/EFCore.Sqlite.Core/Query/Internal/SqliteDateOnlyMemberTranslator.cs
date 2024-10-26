@@ -13,15 +13,14 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteDateOnlyMemberTranslator : IMemberTranslator
 {
-    private static readonly Dictionary<string, string> DatePartMapping =
-        new()
-        {
-            { nameof(DateOnly.Year), "%Y" },
-            { nameof(DateOnly.Month), "%m" },
-            { nameof(DateOnly.DayOfYear), "%j" },
-            { nameof(DateOnly.Day), "%d" },
-            { nameof(DateOnly.DayOfWeek), "%w" },
-        };
+    private static readonly Dictionary<string, string> DatePartMapping = new()
+    {
+        { nameof(DateOnly.Year), "%Y" },
+        { nameof(DateOnly.Month), "%m" },
+        { nameof(DateOnly.DayOfYear), "%j" },
+        { nameof(DateOnly.Day), "%d" },
+        { nameof(DateOnly.DayOfWeek), "%w" },
+    };
 
     private readonly SqliteSqlExpressionFactory _sqlExpressionFactory;
 

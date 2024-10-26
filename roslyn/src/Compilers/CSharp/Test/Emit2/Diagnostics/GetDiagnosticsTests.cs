@@ -2351,8 +2351,11 @@ internal class TestAttribute : Attribute
         private sealed class DiagnosticSuppressorForCS0657 : DiagnosticSuppressor
         {
             internal const string SuppressionId = "SPR0001";
-            private readonly SuppressionDescriptor _descriptor =
-                new(SuppressionId, "CS0657", "Justification");
+            private readonly SuppressionDescriptor _descriptor = new(
+                SuppressionId,
+                "CS0657",
+                "Justification"
+            );
             public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
                 ImmutableArray.Create(_descriptor);
 

@@ -1269,12 +1269,11 @@ namespace ComInterfaceGenerator.Unit.Tests
         )
         {
             _ = id;
-            VerifyComInterfaceGenerator.Test test =
-                new(referenceAncillaryInterop: false)
-                {
-                    TestCode = source,
-                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                };
+            VerifyComInterfaceGenerator.Test test = new(referenceAncillaryInterop: false)
+            {
+                TestCode = source,
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+            };
             test.DisabledDiagnostics.Remove(
                 GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
             );

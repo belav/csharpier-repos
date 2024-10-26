@@ -56,8 +56,9 @@ namespace Microsoft.CodeAnalysis.FindUsages
 
     internal static class DefinitionItemExtensions
     {
-        private static readonly SymbolDisplayFormat s_namePartsFormat =
-            new(memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
+        private static readonly SymbolDisplayFormat s_namePartsFormat = new(
+            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+        );
 
         public static DefinitionItem ToNonClassifiedDefinitionItem(
             this ISymbol definition,

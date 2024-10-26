@@ -15,29 +15,28 @@ public class SqlServerObjectToStringTranslator : IMethodCallTranslator
 {
     private const int DefaultLength = 100;
 
-    private static readonly Dictionary<Type, string> TypeMapping =
-        new()
-        {
-            { typeof(sbyte), "varchar(4)" },
-            { typeof(byte), "varchar(3)" },
-            { typeof(short), "varchar(6)" },
-            { typeof(ushort), "varchar(5)" },
-            { typeof(int), "varchar(11)" },
-            { typeof(uint), "varchar(10)" },
-            { typeof(long), "varchar(20)" },
-            { typeof(ulong), "varchar(20)" },
-            { typeof(float), $"varchar({DefaultLength})" },
-            { typeof(double), $"varchar({DefaultLength})" },
-            { typeof(decimal), $"varchar({DefaultLength})" },
-            { typeof(char), "varchar(1)" },
-            { typeof(DateTime), $"varchar({DefaultLength})" },
-            { typeof(DateOnly), $"varchar({DefaultLength})" },
-            { typeof(TimeOnly), $"varchar({DefaultLength})" },
-            { typeof(DateTimeOffset), $"varchar({DefaultLength})" },
-            { typeof(TimeSpan), $"varchar({DefaultLength})" },
-            { typeof(Guid), "varchar(36)" },
-            { typeof(byte[]), $"varchar({DefaultLength})" },
-        };
+    private static readonly Dictionary<Type, string> TypeMapping = new()
+    {
+        { typeof(sbyte), "varchar(4)" },
+        { typeof(byte), "varchar(3)" },
+        { typeof(short), "varchar(6)" },
+        { typeof(ushort), "varchar(5)" },
+        { typeof(int), "varchar(11)" },
+        { typeof(uint), "varchar(10)" },
+        { typeof(long), "varchar(20)" },
+        { typeof(ulong), "varchar(20)" },
+        { typeof(float), $"varchar({DefaultLength})" },
+        { typeof(double), $"varchar({DefaultLength})" },
+        { typeof(decimal), $"varchar({DefaultLength})" },
+        { typeof(char), "varchar(1)" },
+        { typeof(DateTime), $"varchar({DefaultLength})" },
+        { typeof(DateOnly), $"varchar({DefaultLength})" },
+        { typeof(TimeOnly), $"varchar({DefaultLength})" },
+        { typeof(DateTimeOffset), $"varchar({DefaultLength})" },
+        { typeof(TimeSpan), $"varchar({DefaultLength})" },
+        { typeof(Guid), "varchar(36)" },
+        { typeof(byte[]), $"varchar({DefaultLength})" },
+    };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 

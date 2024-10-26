@@ -307,8 +307,10 @@ namespace System.Text.Json.Tests
             void RunTest(bool skipInputValidation)
             {
                 using MemoryStream ms = new();
-                using Utf8JsonWriter writer =
-                    new(ms, new JsonWriterOptions { SkipValidation = skipValidation });
+                using Utf8JsonWriter writer = new(
+                    ms,
+                    new JsonWriterOptions { SkipValidation = skipValidation }
+                );
 
                 writer.WriteStartObject();
 

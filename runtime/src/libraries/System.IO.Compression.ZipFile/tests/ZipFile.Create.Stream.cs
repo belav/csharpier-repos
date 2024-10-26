@@ -202,8 +202,12 @@ public class ZipFile_Create_Stream : ZipFileTestBase
             entryEncoding
         );
 
-        using ZipArchive archive =
-            new(destination, ZipArchiveMode.Read, leaveOpen: false, entryEncoding);
+        using ZipArchive archive = new(
+            destination,
+            ZipArchiveMode.Read,
+            leaveOpen: false,
+            entryEncoding
+        );
         Assert.Equal(1, archive.Entries.Count);
         Assert.StartsWith("empty1", archive.Entries[0].FullName);
     }

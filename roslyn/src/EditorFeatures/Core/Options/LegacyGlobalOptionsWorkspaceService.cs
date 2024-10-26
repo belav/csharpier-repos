@@ -22,17 +22,25 @@ namespace Microsoft.CodeAnalysis.Options
     {
         private readonly IGlobalOptionService _globalOptions = globalOptions;
 
-        private static readonly Option2<bool> s_generateOverridesOption =
-            new("dotnet_generate_overrides_for_all_members", defaultValue: true);
+        private static readonly Option2<bool> s_generateOverridesOption = new(
+            "dotnet_generate_overrides_for_all_members",
+            defaultValue: true
+        );
 
-        private static readonly PerLanguageOption2<bool> s_generateOperators =
-            new("dotnet_generate_equality_operators", defaultValue: false);
+        private static readonly PerLanguageOption2<bool> s_generateOperators = new(
+            "dotnet_generate_equality_operators",
+            defaultValue: false
+        );
 
-        private static readonly PerLanguageOption2<bool> s_implementIEquatable =
-            new("dotnet_generate_iequatable_implementation", defaultValue: false);
+        private static readonly PerLanguageOption2<bool> s_implementIEquatable = new(
+            "dotnet_generate_iequatable_implementation",
+            defaultValue: false
+        );
 
-        internal static readonly PerLanguageOption2<bool> s_addNullChecks =
-            new("dotnet_generate_constructor_parameter_null_checks", defaultValue: false);
+        internal static readonly PerLanguageOption2<bool> s_addNullChecks = new(
+            "dotnet_generate_constructor_parameter_null_checks",
+            defaultValue: false
+        );
 
         public bool GenerateOverrides
         {

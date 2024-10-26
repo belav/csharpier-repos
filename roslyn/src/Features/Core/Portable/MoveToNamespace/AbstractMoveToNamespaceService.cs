@@ -461,11 +461,10 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
             return $"{targetNamespace}.{symbol.ToDisplayString()[offset..]}";
         }
 
-        private static readonly SymbolDisplayFormat QualifiedNamespaceFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
-            );
+        private static readonly SymbolDisplayFormat QualifiedNamespaceFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+        );
 
         protected static string GetQualifiedName(INamespaceSymbol namespaceSymbol) =>
             namespaceSymbol.ToDisplayString(QualifiedNamespaceFormat);

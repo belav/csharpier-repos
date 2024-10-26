@@ -210,45 +210,44 @@ namespace Microsoft.Interop
                             Token(SyntaxKind.VolatileKeyword)
                         )
                 );
-            List<StatementSyntax> vtableInitializationBlock =
-                new()
-                {
-                    // ComInterfaceEntry* vtables = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(<ClassInfoTypeName>), sizeof(ComInterfaceEntry) * <numInterfaces>);
-                    Declare(
+            List<StatementSyntax> vtableInitializationBlock = new()
+            {
+                // ComInterfaceEntry* vtables = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(<ClassInfoTypeName>), sizeof(ComInterfaceEntry) * <numInterfaces>);
+                Declare(
+                    PointerType(
+                        TypeSyntaxes.System_Runtime_InteropServices_ComWrappers_ComInterfaceEntry
+                    ),
+                    vtablesLocal,
+                    CastExpression(
                         PointerType(
                             TypeSyntaxes.System_Runtime_InteropServices_ComWrappers_ComInterfaceEntry
                         ),
-                        vtablesLocal,
-                        CastExpression(
-                            PointerType(
-                                TypeSyntaxes.System_Runtime_InteropServices_ComWrappers_ComInterfaceEntry
-                            ),
-                            MethodInvocation(
-                                TypeSyntaxes.System_Runtime_CompilerServices_RuntimeHelpers,
-                                IdentifierName("AllocateTypeAssociatedMemory"),
-                                Argument(TypeOfExpression(IdentifierName(ClassInfoTypeName))),
-                                Argument(
-                                    BinaryExpression(
-                                        SyntaxKind.MultiplyExpression,
-                                        SizeOfExpression(
-                                            TypeSyntaxes.System_Runtime_InteropServices_ComWrappers_ComInterfaceEntry
-                                        ),
-                                        LiteralExpression(
-                                            SyntaxKind.NumericLiteralExpression,
-                                            Literal(implementedInterfaces.Length)
-                                        )
+                        MethodInvocation(
+                            TypeSyntaxes.System_Runtime_CompilerServices_RuntimeHelpers,
+                            IdentifierName("AllocateTypeAssociatedMemory"),
+                            Argument(TypeOfExpression(IdentifierName(ClassInfoTypeName))),
+                            Argument(
+                                BinaryExpression(
+                                    SyntaxKind.MultiplyExpression,
+                                    SizeOfExpression(
+                                        TypeSyntaxes.System_Runtime_InteropServices_ComWrappers_ComInterfaceEntry
+                                    ),
+                                    LiteralExpression(
+                                        SyntaxKind.NumericLiteralExpression,
+                                        Literal(implementedInterfaces.Length)
                                     )
                                 )
                             )
                         )
-                    ),
-                    // IIUnknownDerivedDetails details;
-                    Declare(
-                        TypeSyntaxes.IIUnknownDerivedDetails,
-                        detailsTempLocal,
-                        initializeToDefault: false
-                    ),
-                };
+                    )
+                ),
+                // IIUnknownDerivedDetails details;
+                Declare(
+                    TypeSyntaxes.IIUnknownDerivedDetails,
+                    detailsTempLocal,
+                    initializeToDefault: false
+                ),
+            };
             for (int i = 0; i < implementedInterfaces.Length; i++)
             {
                 string ifaceName = implementedInterfaces[i];

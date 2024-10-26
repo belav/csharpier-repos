@@ -2655,8 +2655,10 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(1, obj.Prop[0]);
 
             // First with numbers
-            JsonSerializerOptions options =
-                new() { Converters = { new AdaptableInt32Converter() } };
+            JsonSerializerOptions options = new()
+            {
+                Converters = { new AdaptableInt32Converter() },
+            };
 
             obj = new PlainClassWithList() { Prop = new List<int>() { 1 } };
             json = await Serializer.SerializeWrapper(obj, options);

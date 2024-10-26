@@ -23,8 +23,11 @@ public partial class RemoteAuthenticatorViewCore<
     private string? _lastHandledAction;
     private InteractiveRequestOptions? _cachedRequest;
 
-    private static readonly NavigationOptions AuthenticationNavigationOptions =
-        new() { ReplaceHistoryEntry = true, ForceLoad = false };
+    private static readonly NavigationOptions AuthenticationNavigationOptions = new()
+    {
+        ReplaceHistoryEntry = true,
+        ForceLoad = false,
+    };
 
     /// <summary>
     /// Gets or sets the <see cref="RemoteAuthenticationActions"/> action the component needs to handle.

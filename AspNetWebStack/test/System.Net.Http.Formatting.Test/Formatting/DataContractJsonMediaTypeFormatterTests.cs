@@ -25,8 +25,12 @@ namespace System.Net.Http.Formatting
     public class DataContractJsonMediaTypeFormatterTests
         : MediaTypeFormatterTestBase<DataContractJsonMediaTypeFormatter>
     {
-        public static readonly TheoryDataSet<Type> AFewValidTypes =
-            new() { typeof(bool), typeof(int), typeof(string) };
+        public static readonly TheoryDataSet<Type> AFewValidTypes = new()
+        {
+            typeof(bool),
+            typeof(int),
+            typeof(string),
+        };
 
         public override IEnumerable<MediaTypeHeaderValue> ExpectedSupportedMediaTypes
         {

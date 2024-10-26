@@ -91,14 +91,13 @@ public abstract class JsonSerializerApiValidation
 
     private static JsonTypeInfo<MyPoco> GetTypeInfo()
     {
-        JsonObjectInfoValues<MyPoco> objectInfo =
-            new()
-            {
-                ObjectCreator = static () => throw new NotImplementedException(),
-                SerializeHandler = (Utf8JsonWriter writer, MyPoco value) =>
-                    throw new NotImplementedException(),
-                PropertyMetadataInitializer = (ctx) => new JsonPropertyInfo[0],
-            };
+        JsonObjectInfoValues<MyPoco> objectInfo = new()
+        {
+            ObjectCreator = static () => throw new NotImplementedException(),
+            SerializeHandler = (Utf8JsonWriter writer, MyPoco value) =>
+                throw new NotImplementedException(),
+            PropertyMetadataInitializer = (ctx) => new JsonPropertyInfo[0],
+        };
 
         var options = new JsonSerializerOptions();
         options.AddContext<MyDummyContext>();

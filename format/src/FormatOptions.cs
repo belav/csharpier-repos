@@ -25,26 +25,25 @@ namespace Microsoft.CodeAnalysis.Tools
         bool IncludeGeneratedFiles
     )
     {
-        public static FormatOptions Instance =
-            new(
-                WorkspaceFilePath: null!, // must be supplied
-                WorkspaceType: default, // must be supplied
-                NoRestore: false,
-                LogLevel: LogLevel.Warning,
-                FixCategory: default, // must be supplied
-                CodeStyleSeverity: DiagnosticSeverity.Warning,
-                AnalyzerSeverity: DiagnosticSeverity.Warning,
-                Diagnostics: ImmutableHashSet<string>.Empty,
-                ExcludeDiagnostics: ImmutableHashSet<string>.Empty,
-                SaveFormattedFiles: true,
-                ChangesAreErrors: false,
-                FileMatcher: SourceFileMatcher.CreateMatcher(
-                    Array.Empty<string>(),
-                    Array.Empty<string>()
-                ),
-                ReportPath: null,
-                BinaryLogPath: null,
-                IncludeGeneratedFiles: false
-            );
+        public static FormatOptions Instance = new(
+            WorkspaceFilePath: null!, // must be supplied
+            WorkspaceType: default, // must be supplied
+            NoRestore: false,
+            LogLevel: LogLevel.Warning,
+            FixCategory: default, // must be supplied
+            CodeStyleSeverity: DiagnosticSeverity.Warning,
+            AnalyzerSeverity: DiagnosticSeverity.Warning,
+            Diagnostics: ImmutableHashSet<string>.Empty,
+            ExcludeDiagnostics: ImmutableHashSet<string>.Empty,
+            SaveFormattedFiles: true,
+            ChangesAreErrors: false,
+            FileMatcher: SourceFileMatcher.CreateMatcher(
+                Array.Empty<string>(),
+                Array.Empty<string>()
+            ),
+            ReportPath: null,
+            BinaryLogPath: null,
+            IncludeGeneratedFiles: false
+        );
     }
 }

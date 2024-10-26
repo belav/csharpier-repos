@@ -1219,8 +1219,9 @@ namespace Microsoft.Extensions.Configuration.Test
             private readonly ManualResetEventSlim _mre;
             private readonly TimeSpan _timeout;
 
-            private readonly TaskCompletionSource<object> _loadStartedTcs =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            private readonly TaskCompletionSource<object> _loadStartedTcs = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             public BlockLoadOnMREProvider(ManualResetEventSlim mre, TimeSpan timeout)
             {
@@ -1242,8 +1243,9 @@ namespace Microsoft.Extensions.Configuration.Test
             private readonly ManualResetEventSlim _mre;
             private readonly TimeSpan _timeout;
 
-            private readonly TaskCompletionSource<object> _readStartedTcs =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            private readonly TaskCompletionSource<object> _readStartedTcs = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             public BlockReadOnMREProvider(ManualResetEventSlim mre, TimeSpan timeout)
             {

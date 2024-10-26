@@ -12,10 +12,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     {
         private class ExpressionSyntaxGeneratorVisitor : SymbolVisitor<ExpressionSyntax>
         {
-            private static readonly ExpressionSyntaxGeneratorVisitor NameOnlyInstance =
-                new(nameOnly: true);
-            private static readonly ExpressionSyntaxGeneratorVisitor NotNameOnlyInstance =
-                new(nameOnly: false);
+            private static readonly ExpressionSyntaxGeneratorVisitor NameOnlyInstance = new(
+                nameOnly: true
+            );
+            private static readonly ExpressionSyntaxGeneratorVisitor NotNameOnlyInstance = new(
+                nameOnly: false
+            );
 
             private readonly bool _nameOnly;
 

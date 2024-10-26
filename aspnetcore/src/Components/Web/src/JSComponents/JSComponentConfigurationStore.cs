@@ -21,8 +21,9 @@ public sealed class JSComponentConfigurationStore
     // without needing any changes on the downstream code that implements IJSComponentConfiguration,
     // and without exposing any of the configuration storage across layers.
 
-    private readonly Dictionary<string, Type> _jsComponentTypesByIdentifier =
-        new(StringComparer.Ordinal);
+    private readonly Dictionary<string, Type> _jsComponentTypesByIdentifier = new(
+        StringComparer.Ordinal
+    );
     internal Dictionary<string, JSComponentParameter[]> JSComponentParametersByIdentifier { get; } =
         new(StringComparer.Ordinal);
     internal Dictionary<string, List<string>> JSComponentIdentifiersByInitializer { get; } =

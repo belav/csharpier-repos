@@ -67,25 +67,24 @@ namespace Microsoft.CodeAnalysis.FindUsages
                 : s_definitionFormat;
         }
 
-        private static readonly SymbolDisplayFormat s_definitionFormat =
-            new(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeType,
-                propertyStyle: SymbolDisplayPropertyStyle.ShowReadWriteDescriptor,
-                delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
-                kindOptions: SymbolDisplayKindOptions.IncludeMemberKeyword
-                    | SymbolDisplayKindOptions.IncludeNamespaceKeyword
-                    | SymbolDisplayKindOptions.IncludeTypeKeyword,
-                localOptions: SymbolDisplayLocalOptions.IncludeType,
-                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
-                    | SymbolDisplayMemberOptions.IncludeModifiers
-                    | SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat s_definitionFormat = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType,
+            propertyStyle: SymbolDisplayPropertyStyle.ShowReadWriteDescriptor,
+            delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
+            kindOptions: SymbolDisplayKindOptions.IncludeMemberKeyword
+                | SymbolDisplayKindOptions.IncludeNamespaceKeyword
+                | SymbolDisplayKindOptions.IncludeTypeKeyword,
+            localOptions: SymbolDisplayLocalOptions.IncludeType,
+            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                | SymbolDisplayMemberOptions.IncludeModifiers
+                | SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeType,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         private static readonly SymbolDisplayFormat s_parameterDefinitionFormat =
             s_definitionFormat.AddParameterOptions(SymbolDisplayParameterOptions.IncludeName);

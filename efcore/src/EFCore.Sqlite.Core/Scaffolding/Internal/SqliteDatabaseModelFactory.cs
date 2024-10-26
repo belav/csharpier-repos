@@ -19,60 +19,94 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Scaffolding.Internal;
 /// </summary>
 public class SqliteDatabaseModelFactory : DatabaseModelFactory
 {
-    private static readonly HashSet<Type?> _defaultClrTypes =
-        new() { typeof(long), typeof(string), typeof(byte[]), typeof(double) };
+    private static readonly HashSet<Type?> _defaultClrTypes = new()
+    {
+        typeof(long),
+        typeof(string),
+        typeof(byte[]),
+        typeof(double),
+    };
 
-    private static readonly HashSet<string> _boolTypes =
-        new(StringComparer.OrdinalIgnoreCase) { "BIT", "BOOL", "BOOLEAN", "LOGICAL", "YESNO" };
+    private static readonly HashSet<string> _boolTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "BIT",
+        "BOOL",
+        "BOOLEAN",
+        "LOGICAL",
+        "YESNO",
+    };
 
-    private static readonly HashSet<string> _uintTypes =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            "MEDIUMUINT",
-            "UINT",
-            "UINT32",
-            "UNSIGNEDINTEGER32",
-        };
+    private static readonly HashSet<string> _uintTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "MEDIUMUINT",
+        "UINT",
+        "UINT32",
+        "UNSIGNEDINTEGER32",
+    };
 
-    private static readonly HashSet<string> _ulongTypes =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            "BIGUINT",
-            "UINT64",
-            "ULONG",
-            "UNSIGNEDINTEGER",
-            "UNSIGNEDINTEGER64",
-        };
+    private static readonly HashSet<string> _ulongTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "BIGUINT",
+        "UINT64",
+        "ULONG",
+        "UNSIGNEDINTEGER",
+        "UNSIGNEDINTEGER64",
+    };
 
-    private static readonly HashSet<string> _byteTypes =
-        new(StringComparer.OrdinalIgnoreCase) { "BYTE", "TINYINT", "UINT8", "UNSIGNEDINTEGER8" };
+    private static readonly HashSet<string> _byteTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "BYTE",
+        "TINYINT",
+        "UINT8",
+        "UNSIGNEDINTEGER8",
+    };
 
-    private static readonly HashSet<string> _shortTypes =
-        new(StringComparer.OrdinalIgnoreCase) { "INT16", "INTEGER16", "SHORT", "SMALLINT" };
+    private static readonly HashSet<string> _shortTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "INT16",
+        "INTEGER16",
+        "SHORT",
+        "SMALLINT",
+    };
 
-    private static readonly HashSet<string> _longTypes =
-        new(StringComparer.OrdinalIgnoreCase) { "BIGINT", "INT64", "INTEGER64", "LONG" };
+    private static readonly HashSet<string> _longTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "BIGINT",
+        "INT64",
+        "INTEGER64",
+        "LONG",
+    };
 
-    private static readonly HashSet<string> _sbyteTypes =
-        new(StringComparer.OrdinalIgnoreCase) { "INT8", "INTEGER8", "SBYTE", "TINYSINT" };
+    private static readonly HashSet<string> _sbyteTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "INT8",
+        "INTEGER8",
+        "SBYTE",
+        "TINYSINT",
+    };
 
-    private static readonly HashSet<string> _floatTypes =
-        new(StringComparer.OrdinalIgnoreCase) { "SINGLE" };
+    private static readonly HashSet<string> _floatTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "SINGLE",
+    };
 
-    private static readonly HashSet<string> _decimalTypes =
-        new(StringComparer.OrdinalIgnoreCase) { "DECIMAL" };
+    private static readonly HashSet<string> _decimalTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "DECIMAL",
+    };
 
-    private static readonly HashSet<string> _ushortTypes =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            "SMALLUINT",
-            "UINT16",
-            "UNSIGNEDINTEGER16",
-            "USHORT",
-        };
+    private static readonly HashSet<string> _ushortTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "SMALLUINT",
+        "UINT16",
+        "UNSIGNEDINTEGER16",
+        "USHORT",
+    };
 
-    private static readonly HashSet<string> _timeOnlyTypes =
-        new(StringComparer.OrdinalIgnoreCase) { "TIMEONLY" };
+    private static readonly HashSet<string> _timeOnlyTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "TIMEONLY",
+    };
 
     private static readonly Dictionary<string, Type> _typesByName = new Dictionary<string, Type>
     {

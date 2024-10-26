@@ -23,10 +23,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         {
             private readonly bool _nameOnly;
 
-            private static readonly TypeSyntaxGeneratorVisitor NameOnlyInstance =
-                new(nameOnly: true);
-            private static readonly TypeSyntaxGeneratorVisitor NotNameOnlyInstance =
-                new(nameOnly: false);
+            private static readonly TypeSyntaxGeneratorVisitor NameOnlyInstance = new(
+                nameOnly: true
+            );
+            private static readonly TypeSyntaxGeneratorVisitor NotNameOnlyInstance = new(
+                nameOnly: false
+            );
 
             private TypeSyntaxGeneratorVisitor(bool nameOnly) => _nameOnly = nameOnly;
 

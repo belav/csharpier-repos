@@ -267,17 +267,13 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static readonly BidirectionalMap<
             string,
             UnusedParametersPreference
-        > s_unusedParametersPreferenceMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "non_public",
-                        UnusedParametersPreference.NonPublicMethods
-                    ),
-                    KeyValuePairUtil.Create("all", UnusedParametersPreference.AllMethods),
-                }
-            );
+        > s_unusedParametersPreferenceMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create("non_public", UnusedParametersPreference.NonPublicMethods),
+                KeyValuePairUtil.Create("all", UnusedParametersPreference.AllMethods),
+            }
+        );
 
         internal static readonly PerLanguageOption2<
             CodeStyleOption2<UnusedParametersPreference>
@@ -320,28 +316,21 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static readonly BidirectionalMap<
             string,
             AccessibilityModifiersRequired
-        > s_accessibilityModifiersRequiredMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "never",
-                        CodeStyle.AccessibilityModifiersRequired.Never
-                    ),
-                    KeyValuePairUtil.Create(
-                        "always",
-                        CodeStyle.AccessibilityModifiersRequired.Always
-                    ),
-                    KeyValuePairUtil.Create(
-                        "for_non_interface_members",
-                        CodeStyle.AccessibilityModifiersRequired.ForNonInterfaceMembers
-                    ),
-                    KeyValuePairUtil.Create(
-                        "omit_if_default",
-                        CodeStyle.AccessibilityModifiersRequired.OmitIfDefault
-                    ),
-                }
-            );
+        > s_accessibilityModifiersRequiredMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create("never", CodeStyle.AccessibilityModifiersRequired.Never),
+                KeyValuePairUtil.Create("always", CodeStyle.AccessibilityModifiersRequired.Always),
+                KeyValuePairUtil.Create(
+                    "for_non_interface_members",
+                    CodeStyle.AccessibilityModifiersRequired.ForNonInterfaceMembers
+                ),
+                KeyValuePairUtil.Create(
+                    "omit_if_default",
+                    CodeStyle.AccessibilityModifiersRequired.OmitIfDefault
+                ),
+            }
+        );
 
         internal static readonly PerLanguageOption2<
             CodeStyleOption2<AccessibilityModifiersRequired>
@@ -406,20 +395,19 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static readonly BidirectionalMap<
             string,
             ParenthesesPreference
-        > s_parenthesesPreferenceMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "always_for_clarity",
-                        ParenthesesPreference.AlwaysForClarity
-                    ),
-                    KeyValuePairUtil.Create(
-                        "never_if_unnecessary",
-                        ParenthesesPreference.NeverIfUnnecessary
-                    ),
-                }
-            );
+        > s_parenthesesPreferenceMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create(
+                    "always_for_clarity",
+                    ParenthesesPreference.AlwaysForClarity
+                ),
+                KeyValuePairUtil.Create(
+                    "never_if_unnecessary",
+                    ParenthesesPreference.NeverIfUnnecessary
+                ),
+            }
+        );
 
         private static PerLanguageOption2<
             CodeStyleOption2<ParenthesesPreference>
@@ -497,17 +485,16 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static readonly BidirectionalMap<
             string,
             ForEachExplicitCastInSourcePreference
-        > s_forEachExplicitCastInSourcePreferencePreferenceMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create("always", ForEachExplicitCastInSourcePreference.Always),
-                    KeyValuePairUtil.Create(
-                        "when_strongly_typed",
-                        ForEachExplicitCastInSourcePreference.WhenStronglyTyped
-                    ),
-                }
-            );
+        > s_forEachExplicitCastInSourcePreferencePreferenceMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create("always", ForEachExplicitCastInSourcePreference.Always),
+                KeyValuePairUtil.Create(
+                    "when_strongly_typed",
+                    ForEachExplicitCastInSourcePreference.WhenStronglyTyped
+                ),
+            }
+        );
 
         internal static readonly Option2<
             CodeStyleOption2<ForEachExplicitCastInSourcePreference>
@@ -599,78 +586,71 @@ namespace Microsoft.CodeAnalysis.CodeStyle
 
     internal static class CodeStyleOptionGroups
     {
-        public static readonly OptionGroup CodeStyle =
-            new(name: "code_style", description: "", priority: 1);
+        public static readonly OptionGroup CodeStyle = new(
+            name: "code_style",
+            description: "",
+            priority: 1
+        );
 
-        public static readonly OptionGroup Usings =
-            new(
-                "usings",
-                description: CompilerExtensionsResources.Organize_usings,
-                priority: 1,
-                parent: CodeStyle
-            );
-        public static readonly OptionGroup ThisOrMe =
-            new(
-                "this_or_me",
-                description: CompilerExtensionsResources.this_dot_and_Me_dot_preferences,
-                priority: 2,
-                parent: CodeStyle
-            );
-        public static readonly OptionGroup PredefinedTypeNameUsage =
-            new(
-                "predefined_type_name_usage",
-                description: CompilerExtensionsResources.Language_keywords_vs_BCL_types_preferences,
-                priority: 3,
-                parent: CodeStyle
-            );
-        public static readonly OptionGroup Parentheses =
-            new(
-                "parentheses",
-                description: CompilerExtensionsResources.Parentheses_preferences,
-                priority: 4,
-                parent: CodeStyle
-            );
-        public static readonly OptionGroup Modifier =
-            new(
-                "modifier",
-                description: CompilerExtensionsResources.Modifier_preferences,
-                priority: 5,
-                parent: CodeStyle
-            );
-        public static readonly OptionGroup ExpressionLevelPreferences =
-            new(
-                "expression_level_preferences",
-                description: CompilerExtensionsResources.Expression_level_preferences,
-                priority: 7,
-                parent: CodeStyle
-            );
-        public static readonly OptionGroup Field =
-            new(
-                "field",
-                description: CompilerExtensionsResources.Field_preferences,
-                priority: 8,
-                parent: CodeStyle
-            );
-        public static readonly OptionGroup Parameter =
-            new(
-                "parameter",
-                description: CompilerExtensionsResources.Parameter_preferences,
-                priority: 9,
-                parent: CodeStyle
-            );
-        public static readonly OptionGroup Suppressions =
-            new(
-                "suppressions",
-                description: CompilerExtensionsResources.Suppression_preferences,
-                priority: 10,
-                parent: CodeStyle
-            );
-        public static readonly OptionGroup NewLinePreferences =
-            new(
-                "new_line_preferences",
-                description: CompilerExtensionsResources.New_line_preferences,
-                priority: 11,
-                parent: CodeStyle
-            );
+        public static readonly OptionGroup Usings = new(
+            "usings",
+            description: CompilerExtensionsResources.Organize_usings,
+            priority: 1,
+            parent: CodeStyle
+        );
+        public static readonly OptionGroup ThisOrMe = new(
+            "this_or_me",
+            description: CompilerExtensionsResources.this_dot_and_Me_dot_preferences,
+            priority: 2,
+            parent: CodeStyle
+        );
+        public static readonly OptionGroup PredefinedTypeNameUsage = new(
+            "predefined_type_name_usage",
+            description: CompilerExtensionsResources.Language_keywords_vs_BCL_types_preferences,
+            priority: 3,
+            parent: CodeStyle
+        );
+        public static readonly OptionGroup Parentheses = new(
+            "parentheses",
+            description: CompilerExtensionsResources.Parentheses_preferences,
+            priority: 4,
+            parent: CodeStyle
+        );
+        public static readonly OptionGroup Modifier = new(
+            "modifier",
+            description: CompilerExtensionsResources.Modifier_preferences,
+            priority: 5,
+            parent: CodeStyle
+        );
+        public static readonly OptionGroup ExpressionLevelPreferences = new(
+            "expression_level_preferences",
+            description: CompilerExtensionsResources.Expression_level_preferences,
+            priority: 7,
+            parent: CodeStyle
+        );
+        public static readonly OptionGroup Field = new(
+            "field",
+            description: CompilerExtensionsResources.Field_preferences,
+            priority: 8,
+            parent: CodeStyle
+        );
+        public static readonly OptionGroup Parameter = new(
+            "parameter",
+            description: CompilerExtensionsResources.Parameter_preferences,
+            priority: 9,
+            parent: CodeStyle
+        );
+        public static readonly OptionGroup Suppressions = new(
+            "suppressions",
+            description: CompilerExtensionsResources.Suppression_preferences,
+            priority: 10,
+            parent: CodeStyle
+        );
+        public static readonly OptionGroup NewLinePreferences = new(
+            "new_line_preferences",
+            description: CompilerExtensionsResources.New_line_preferences,
+            priority: 11,
+            parent: CodeStyle
+        );
     }
 }

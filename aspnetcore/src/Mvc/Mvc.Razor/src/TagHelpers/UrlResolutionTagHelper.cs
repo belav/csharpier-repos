@@ -65,33 +65,34 @@ public class UrlResolutionTagHelper : TagHelper
         '\r',
         ' ',
     };
-    private static readonly Dictionary<string, string[]> ElementAttributeLookups =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            { "a", new[] { "href" } },
-            { "applet", new[] { "archive" } },
-            { "area", new[] { "href" } },
-            { "audio", new[] { "src" } },
-            { "base", new[] { "href" } },
-            { "blockquote", new[] { "cite" } },
-            { "button", new[] { "formaction" } },
-            { "del", new[] { "cite" } },
-            { "embed", new[] { "src" } },
-            { "form", new[] { "action" } },
-            { "html", new[] { "manifest" } },
-            { "iframe", new[] { "src" } },
-            { "img", new[] { "src", "srcset" } },
-            { "input", new[] { "src", "formaction" } },
-            { "ins", new[] { "cite" } },
-            { "link", new[] { "href" } },
-            { "menuitem", new[] { "icon" } },
-            { "object", new[] { "archive", "data" } },
-            { "q", new[] { "cite" } },
-            { "script", new[] { "src" } },
-            { "source", new[] { "src", "srcset" } },
-            { "track", new[] { "src" } },
-            { "video", new[] { "poster", "src" } },
-        };
+    private static readonly Dictionary<string, string[]> ElementAttributeLookups = new(
+        StringComparer.OrdinalIgnoreCase
+    )
+    {
+        { "a", new[] { "href" } },
+        { "applet", new[] { "archive" } },
+        { "area", new[] { "href" } },
+        { "audio", new[] { "src" } },
+        { "base", new[] { "href" } },
+        { "blockquote", new[] { "cite" } },
+        { "button", new[] { "formaction" } },
+        { "del", new[] { "cite" } },
+        { "embed", new[] { "src" } },
+        { "form", new[] { "action" } },
+        { "html", new[] { "manifest" } },
+        { "iframe", new[] { "src" } },
+        { "img", new[] { "src", "srcset" } },
+        { "input", new[] { "src", "formaction" } },
+        { "ins", new[] { "cite" } },
+        { "link", new[] { "href" } },
+        { "menuitem", new[] { "icon" } },
+        { "object", new[] { "archive", "data" } },
+        { "q", new[] { "cite" } },
+        { "script", new[] { "src" } },
+        { "source", new[] { "src", "srcset" } },
+        { "track", new[] { "src" } },
+        { "video", new[] { "poster", "src" } },
+    };
 
     /// <summary>
     /// Creates a new <see cref="UrlResolutionTagHelper"/>.

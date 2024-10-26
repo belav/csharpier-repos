@@ -282,15 +282,14 @@ internal sealed class OletxResourceManager
         bool undecidedEnlistmentsIncremented = false;
 
         // Create our enlistment object.
-        OletxEnlistment enlistment =
-            new(
-                canDoSinglePhase,
-                enlistmentNotification,
-                oletxTransaction.RealTransaction.TxGuid,
-                enlistmentOptions,
-                this,
-                oletxTransaction
-            );
+        OletxEnlistment enlistment = new(
+            canDoSinglePhase,
+            enlistmentNotification,
+            oletxTransaction.RealTransaction.TxGuid,
+            enlistmentOptions,
+            this,
+            oletxTransaction
+        );
 
         bool enlistmentSucceeded = false;
 

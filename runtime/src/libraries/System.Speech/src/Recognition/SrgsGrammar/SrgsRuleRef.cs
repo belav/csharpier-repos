@@ -118,8 +118,9 @@ namespace System.Speech.Recognition.SrgsGrammar
         // the next rule match, the next token or until the end of spoken input.
         public static readonly SrgsRuleRef Garbage = new(SpecialRuleRefType.Garbage);
         public static readonly SrgsRuleRef Dictation = new(new Uri("grammar:dictation"));
-        public static readonly SrgsRuleRef MnemonicSpelling =
-            new(new Uri("grammar:dictation#spelling"));
+        public static readonly SrgsRuleRef MnemonicSpelling = new(
+            new Uri("grammar:dictation#spelling")
+        );
 
         #endregion
 

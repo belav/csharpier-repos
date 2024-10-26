@@ -383,8 +383,10 @@ public partial class HelpBuilderTests
         [Fact]
         public void Help_sections_can_be_supplemented()
         {
-            CliConfiguration config =
-                new(new CliRootCommand("hello")) { Output = new StringWriter() };
+            CliConfiguration config = new(new CliRootCommand("hello"))
+            {
+                Output = new StringWriter(),
+            };
 
             var defaultHelp = GetDefaultHelp(config.RootCommand);
 
@@ -471,16 +473,15 @@ public partial class HelpBuilderTests
         [Fact]
         public void Help_default_sections_can_be_wrapped()
         {
-            CliCommand command =
-                new("test")
+            CliCommand command = new("test")
+            {
+                new CliOption<string>("--option")
                 {
-                    new CliOption<string>("--option")
-                    {
-                        Description = "option description",
-                        HelpName = "option",
-                    },
-                    new HelpOption { Action = new HelpAction { Builder = new HelpBuilder(30) } },
-                };
+                    Description = "option description",
+                    HelpName = "option",
+                },
+                new HelpOption { Action = new HelpAction { Builder = new HelpBuilder(30) } },
+            };
 
             CliConfiguration config = new(command) { Output = new StringWriter() };
 

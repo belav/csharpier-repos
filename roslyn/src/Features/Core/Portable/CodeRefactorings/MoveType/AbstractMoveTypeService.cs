@@ -28,8 +28,9 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
         /// <summary>
         /// Annotation to mark the namespace encapsulating the type that has been moved
         /// </summary>
-        public static SyntaxAnnotation NamespaceScopeMovedAnnotation =
-            new(nameof(MoveTypeOperationKind.MoveTypeNamespaceScope));
+        public static SyntaxAnnotation NamespaceScopeMovedAnnotation = new(
+            nameof(MoveTypeOperationKind.MoveTypeNamespaceScope)
+        );
 
         public abstract Task<Solution> GetModifiedSolutionAsync(
             Document document,

@@ -70,16 +70,15 @@ namespace Microsoft.CodeAnalysis
         ///    shouldn't be calculated until reverse reference information is requested. Once this information
         ///    has been calculated, forks of this PDG will calculate their new reverse references in a non-lazy fashion.
         /// </remarks>
-        internal static readonly ProjectDependencyGraph Empty =
-            new(
-                ImmutableHashSet<ProjectId>.Empty,
-                ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>.Empty,
-                reverseReferencesMap: null,
-                ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>.Empty,
-                ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>.Empty,
-                ImmutableArray<ProjectId>.Empty,
-                ImmutableArray<IEnumerable<ProjectId>>.Empty
-            );
+        internal static readonly ProjectDependencyGraph Empty = new(
+            ImmutableHashSet<ProjectId>.Empty,
+            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>.Empty,
+            reverseReferencesMap: null,
+            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>.Empty,
+            ImmutableDictionary<ProjectId, ImmutableHashSet<ProjectId>>.Empty,
+            ImmutableArray<ProjectId>.Empty,
+            ImmutableArray<IEnumerable<ProjectId>>.Empty
+        );
 
         internal ProjectDependencyGraph(
             ImmutableHashSet<ProjectId> projectIds,

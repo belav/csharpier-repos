@@ -17,12 +17,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
     internal sealed class TaskCenterSolutionAnalysisProgressReporter
     {
         private static readonly TimeSpan s_minimumInterval = TimeSpan.FromMilliseconds(200);
-        private static readonly TaskHandlerOptions _options =
-            new()
-            {
-                Title = ServicesVSResources.Running_low_priority_background_processes,
-                ActionsAfterCompletion = CompletionActions.None,
-            };
+        private static readonly TaskHandlerOptions _options = new()
+        {
+            Title = ServicesVSResources.Running_low_priority_background_processes,
+            ActionsAfterCompletion = CompletionActions.None,
+        };
 
         private IVsTaskStatusCenterService? _taskCenterService;
 

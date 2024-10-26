@@ -6,8 +6,9 @@ namespace AutoMapper.Execution;
 public static class ObjectFactory
 {
     static readonly Expression EmptyString = Constant(string.Empty);
-    static readonly LockingConcurrentDictionary<Type, Func<object>> CtorCache =
-        new(GenerateConstructor);
+    static readonly LockingConcurrentDictionary<Type, Func<object>> CtorCache = new(
+        GenerateConstructor
+    );
 
     public static object CreateInstance(Type type) => CtorCache.GetOrAdd(type)();
 

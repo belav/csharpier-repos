@@ -59,13 +59,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     _rawSamples.Add(bb, 0);
             }
 
-            FlowSmoothing<BasicBlock> flowSmooth =
-                new(
-                    _rawSamples,
-                    FlowGraph.Lookup(0),
-                    bb => bb.Targets,
-                    (bb, isForward) => bb.Size * (isForward ? 1 : 50) + 2
-                );
+            FlowSmoothing<BasicBlock> flowSmooth = new(
+                _rawSamples,
+                FlowGraph.Lookup(0),
+                bb => bb.Targets,
+                (bb, isForward) => bb.Size * (isForward ? 1 : 50) + 2
+            );
             flowSmooth.Perform();
             _smoothedSamples = flowSmooth.NodeResults;
             _smoothedEdgeSamples = flowSmooth.EdgeResults;

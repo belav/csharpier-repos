@@ -19,8 +19,9 @@ internal sealed class DeferredHostBuilder : IHostBuilder
 
     // This task represents a call to IHost.Start, we create it here preemptively in case the application
     // exits due to an exception or because it didn't wait for the shutdown signal
-    private readonly TaskCompletionSource _hostStartTcs =
-        new(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _hostStartTcs = new(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
 
     public DeferredHostBuilder()
     {

@@ -258,34 +258,33 @@ namespace Microsoft.Data.Sqlite
             }
         }
 
-        private static readonly Dictionary<Type, SqliteType> _sqliteTypeMapping =
-            new()
-            {
-                { typeof(bool), SqliteType.Integer },
-                { typeof(byte), SqliteType.Integer },
-                { typeof(byte[]), SqliteType.Blob },
-                { typeof(char), SqliteType.Text },
-                { typeof(DateTime), SqliteType.Text },
-                { typeof(DateTimeOffset), SqliteType.Text },
+        private static readonly Dictionary<Type, SqliteType> _sqliteTypeMapping = new()
+        {
+            { typeof(bool), SqliteType.Integer },
+            { typeof(byte), SqliteType.Integer },
+            { typeof(byte[]), SqliteType.Blob },
+            { typeof(char), SqliteType.Text },
+            { typeof(DateTime), SqliteType.Text },
+            { typeof(DateTimeOffset), SqliteType.Text },
 #if NET6_0_OR_GREATER
-                { typeof(DateOnly), SqliteType.Text },
-                { typeof(TimeOnly), SqliteType.Text },
+            { typeof(DateOnly), SqliteType.Text },
+            { typeof(TimeOnly), SqliteType.Text },
 #endif
-                { typeof(DBNull), SqliteType.Text },
-                { typeof(decimal), SqliteType.Text },
-                { typeof(double), SqliteType.Real },
-                { typeof(float), SqliteType.Real },
-                { typeof(Guid), SqliteType.Text },
-                { typeof(int), SqliteType.Integer },
-                { typeof(long), SqliteType.Integer },
-                { typeof(sbyte), SqliteType.Integer },
-                { typeof(short), SqliteType.Integer },
-                { typeof(string), SqliteType.Text },
-                { typeof(TimeSpan), SqliteType.Text },
-                { typeof(uint), SqliteType.Integer },
-                { typeof(ulong), SqliteType.Integer },
-                { typeof(ushort), SqliteType.Integer },
-            };
+            { typeof(DBNull), SqliteType.Text },
+            { typeof(decimal), SqliteType.Text },
+            { typeof(double), SqliteType.Real },
+            { typeof(float), SqliteType.Real },
+            { typeof(Guid), SqliteType.Text },
+            { typeof(int), SqliteType.Integer },
+            { typeof(long), SqliteType.Integer },
+            { typeof(sbyte), SqliteType.Integer },
+            { typeof(short), SqliteType.Integer },
+            { typeof(string), SqliteType.Text },
+            { typeof(TimeSpan), SqliteType.Text },
+            { typeof(uint), SqliteType.Integer },
+            { typeof(ulong), SqliteType.Integer },
+            { typeof(ushort), SqliteType.Integer },
+        };
 
         internal static SqliteType GetSqliteType(object? value)
         {

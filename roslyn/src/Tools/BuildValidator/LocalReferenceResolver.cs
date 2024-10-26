@@ -41,8 +41,9 @@ namespace BuildValidator
         /// for that file name. It's useful for diagnostic purposes to see where we may have missed a
         /// reference lookup.
         /// </summary>
-        private readonly Dictionary<string, List<AssemblyInfo>> _nameMap =
-            new(FileNameEqualityComparer.StringComparer);
+        private readonly Dictionary<string, List<AssemblyInfo>> _nameMap = new(
+            FileNameEqualityComparer.StringComparer
+        );
         private readonly HashSet<DirectoryInfo> _indexDirectories = new();
         private readonly ILogger _logger;
 

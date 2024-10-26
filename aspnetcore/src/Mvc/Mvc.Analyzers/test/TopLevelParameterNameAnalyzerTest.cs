@@ -13,8 +13,9 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers;
 
 public class TopLevelParameterNameAnalyzerTest
 {
-    private static readonly DiagnosticResult Diagnostic =
-        new(DiagnosticDescriptors.MVC1004_ParameterNameCollidesWithTopLevelProperty);
+    private static readonly DiagnosticResult Diagnostic = new(
+        DiagnosticDescriptors.MVC1004_ParameterNameCollidesWithTopLevelProperty
+    );
 
     [Fact]
     public Task DiagnosticsAreReturned_ForControllerActionsWithParametersThatMatchProperties()

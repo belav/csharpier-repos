@@ -320,18 +320,17 @@ namespace System.Text.Json.Serialization.Tests
         public static void TypeInfoOfWrongTypeOnObject(Type expectedType, Type actualType)
         {
             DefaultJsonTypeInfoResolver dr = new();
-            TestResolver r =
-                new(
-                    (type, options) =>
+            TestResolver r = new(
+                (type, options) =>
+                {
+                    if (type == expectedType)
                     {
-                        if (type == expectedType)
-                        {
-                            return dr.GetTypeInfo(actualType, options);
-                        }
-
-                        return dr.GetTypeInfo(type, options);
+                        return dr.GetTypeInfo(actualType, options);
                     }
-                );
+
+                    return dr.GetTypeInfo(type, options);
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -346,18 +345,17 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonSerializerOptions wrongOptions = new();
             DefaultJsonTypeInfoResolver dr = new();
-            TestResolver r =
-                new(
-                    (type, options) =>
+            TestResolver r = new(
+                (type, options) =>
+                {
+                    if (type == typeof(int))
                     {
-                        if (type == typeof(int))
-                        {
-                            return dr.GetTypeInfo(type, wrongOptions);
-                        }
-
-                        return dr.GetTypeInfo(type, options);
+                        return dr.GetTypeInfo(type, wrongOptions);
                     }
-                );
+
+                    return dr.GetTypeInfo(type, options);
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -376,18 +374,17 @@ namespace System.Text.Json.Serialization.Tests
         public static void TypeInfoOfWrongTypeDirectCall(Type expectedType, Type actualType)
         {
             DefaultJsonTypeInfoResolver dr = new();
-            TestResolver r =
-                new(
-                    (type, options) =>
+            TestResolver r = new(
+                (type, options) =>
+                {
+                    if (type == expectedType)
                     {
-                        if (type == expectedType)
-                        {
-                            return dr.GetTypeInfo(actualType, options);
-                        }
-
-                        return dr.GetTypeInfo(type, options);
+                        return dr.GetTypeInfo(actualType, options);
                     }
-                );
+
+                    return dr.GetTypeInfo(type, options);
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -405,20 +402,19 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonTypeInfo untyped = null;
             DefaultJsonTypeInfoResolver dr = new();
-            TestResolver r =
-                new(
-                    (typeToResolve, options) =>
+            TestResolver r = new(
+                (typeToResolve, options) =>
+                {
+                    var ret = dr.GetTypeInfo(typeToResolve, options);
+                    if (typeToResolve == typeof(T))
                     {
-                        var ret = dr.GetTypeInfo(typeToResolve, options);
-                        if (typeToResolve == typeof(T))
-                        {
-                            Assert.Null(untyped);
-                            untyped = ret;
-                        }
-
-                        return ret;
+                        Assert.Null(untyped);
+                        untyped = ret;
                     }
-                );
+
+                    return ret;
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = r;
@@ -808,37 +804,36 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void AddRecursiveJsonPropertyInfoFromMetadataServices()
         {
-            JsonSerializerOptions options =
-                new()
+            JsonSerializerOptions options = new()
+            {
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver
                 {
-                    TypeInfoResolver = new DefaultJsonTypeInfoResolver
+                    Modifiers =
                     {
-                        Modifiers =
+                        static typeInfo =>
                         {
-                            static typeInfo =>
+                            if (typeInfo.Type != typeof(SomeClass))
                             {
-                                if (typeInfo.Type != typeof(SomeClass))
-                                {
-                                    return;
-                                }
+                                return;
+                            }
 
-                                typeInfo.Properties.Clear();
-                                JsonPropertyInfo propertyInfo =
-                                    JsonMetadataServices.CreatePropertyInfo<SomeClass>(
-                                        typeInfo.Options,
-                                        new JsonPropertyInfoValues<SomeClass>()
-                                        {
-                                            DeclaringType = typeof(SomeClass),
-                                            PropertyName = "Next",
-                                        }
-                                    );
+                            typeInfo.Properties.Clear();
+                            JsonPropertyInfo propertyInfo =
+                                JsonMetadataServices.CreatePropertyInfo<SomeClass>(
+                                    typeInfo.Options,
+                                    new JsonPropertyInfoValues<SomeClass>()
+                                    {
+                                        DeclaringType = typeof(SomeClass),
+                                        PropertyName = "Next",
+                                    }
+                                );
 
-                                typeInfo.Properties.Add(propertyInfo);
-                                Assert.Equal(JsonTypeInfoKind.Object, typeInfo.Kind);
-                            },
+                            typeInfo.Properties.Add(propertyInfo);
+                            Assert.Equal(JsonTypeInfoKind.Object, typeInfo.Kind);
                         },
                     },
-                };
+                },
+            };
 
             JsonTypeInfo<SomeClass> jsonTypeInfo = Assert.IsAssignableFrom<JsonTypeInfo<SomeClass>>(
                 options.GetTypeInfo(typeof(SomeClass))
@@ -984,8 +979,10 @@ namespace System.Text.Json.Serialization.Tests
                 Func<JsonSerializerOptions, JsonTypeInfo<T>> getTypeInfo
             )
             {
-                JsonSerializerOptions o =
-                    new() { TypeInfoResolver = new DefaultJsonTypeInfoResolver() };
+                JsonSerializerOptions o = new()
+                {
+                    TypeInfoResolver = new DefaultJsonTypeInfoResolver(),
+                };
                 TestCreateJsonTypeInfoInstance(o, getTypeInfo(o));
 
                 o = new JsonSerializerOptions()
@@ -1262,63 +1259,61 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void PropertyOrderIsRespected()
         {
-            JsonSerializerOptions options =
-                new()
+            JsonSerializerOptions options = new()
+            {
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
                 {
-                    TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+                    Modifiers =
                     {
-                        Modifiers =
+                        ti =>
                         {
-                            ti =>
+                            if (ti.Type == typeof(ClassWithExplicitOrderOfProperties))
                             {
-                                if (ti.Type == typeof(ClassWithExplicitOrderOfProperties))
-                                {
-                                    Assert.Equal(5, ti.Properties.Count);
+                                Assert.Equal(5, ti.Properties.Count);
 
-                                    Assert.Equal("A", ti.Properties[0].Name);
-                                    Assert.Equal("B", ti.Properties[1].Name);
-                                    Assert.Equal("C", ti.Properties[2].Name);
-                                    Assert.Equal("D", ti.Properties[3].Name);
-                                    Assert.Equal("E", ti.Properties[4].Name);
+                                Assert.Equal("A", ti.Properties[0].Name);
+                                Assert.Equal("B", ti.Properties[1].Name);
+                                Assert.Equal("C", ti.Properties[2].Name);
+                                Assert.Equal("D", ti.Properties[3].Name);
+                                Assert.Equal("E", ti.Properties[4].Name);
 
-                                    Assert.Equal(-2, ti.Properties[0].Order);
-                                    Assert.Equal(-1, ti.Properties[1].Order);
-                                    Assert.Equal(0, ti.Properties[2].Order);
-                                    Assert.Equal(1, ti.Properties[3].Order);
-                                    Assert.Equal(2, ti.Properties[4].Order);
+                                Assert.Equal(-2, ti.Properties[0].Order);
+                                Assert.Equal(-1, ti.Properties[1].Order);
+                                Assert.Equal(0, ti.Properties[2].Order);
+                                Assert.Equal(1, ti.Properties[3].Order);
+                                Assert.Equal(2, ti.Properties[4].Order);
 
-                                    // swapping A,B order values
-                                    (ti.Properties[0].Order, ti.Properties[1].Order) = (
-                                        ti.Properties[1].Order,
-                                        ti.Properties[0].Order
-                                    );
+                                // swapping A,B order values
+                                (ti.Properties[0].Order, ti.Properties[1].Order) = (
+                                    ti.Properties[1].Order,
+                                    ti.Properties[0].Order
+                                );
 
-                                    // swapping E,C order values
-                                    (ti.Properties[2].Order, ti.Properties[4].Order) = (
-                                        ti.Properties[4].Order,
-                                        ti.Properties[2].Order
-                                    );
+                                // swapping E,C order values
+                                (ti.Properties[2].Order, ti.Properties[4].Order) = (
+                                    ti.Properties[4].Order,
+                                    ti.Properties[2].Order
+                                );
 
-                                    // swapping B,D properties (has no effect on contract)
-                                    (ti.Properties[1], ti.Properties[3]) = (
-                                        ti.Properties[3],
-                                        ti.Properties[1]
-                                    );
-                                }
-                            },
+                                // swapping B,D properties (has no effect on contract)
+                                (ti.Properties[1], ti.Properties[3]) = (
+                                    ti.Properties[3],
+                                    ti.Properties[1]
+                                );
+                            }
                         },
                     },
-                };
+                },
+            };
 
-            ClassWithExplicitOrderOfProperties obj =
-                new()
-                {
-                    A = "a",
-                    B = "b",
-                    C = "c",
-                    D = "d",
-                    E = "e",
-                };
+            ClassWithExplicitOrderOfProperties obj = new()
+            {
+                A = "a",
+                B = "b",
+                C = "c",
+                D = "d",
+                E = "e",
+            };
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"B":"b","A":"a","E":"e","D":"d","C":"c"}""", json);

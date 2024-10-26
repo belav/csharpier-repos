@@ -16,30 +16,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class OutVariableArgumentProviderTests : AbstractCSharpArgumentProviderTests
     {
-        private static readonly OptionsCollection s_useExplicitTypeOptions =
-            new(LanguageNames.CSharp)
-            {
-                { CSharpCodeStyleOptions.VarForBuiltInTypes, false },
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, false },
-                { CSharpCodeStyleOptions.VarElsewhere, false },
-            };
+        private static readonly OptionsCollection s_useExplicitTypeOptions = new(
+            LanguageNames.CSharp
+        )
+        {
+            { CSharpCodeStyleOptions.VarForBuiltInTypes, false },
+            { CSharpCodeStyleOptions.VarWhenTypeIsApparent, false },
+            { CSharpCodeStyleOptions.VarElsewhere, false },
+        };
 
-        private static readonly OptionsCollection s_useExplicitMetadataTypeOptions =
-            new(LanguageNames.CSharp)
-            {
-                { CSharpCodeStyleOptions.VarForBuiltInTypes, false },
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, false },
-                { CSharpCodeStyleOptions.VarElsewhere, false },
-                { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false },
-            };
+        private static readonly OptionsCollection s_useExplicitMetadataTypeOptions = new(
+            LanguageNames.CSharp
+        )
+        {
+            { CSharpCodeStyleOptions.VarForBuiltInTypes, false },
+            { CSharpCodeStyleOptions.VarWhenTypeIsApparent, false },
+            { CSharpCodeStyleOptions.VarElsewhere, false },
+            { CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration, false },
+        };
 
-        private static readonly OptionsCollection s_useImplicitTypeOptions =
-            new(LanguageNames.CSharp)
-            {
-                { CSharpCodeStyleOptions.VarForBuiltInTypes, true },
-                { CSharpCodeStyleOptions.VarWhenTypeIsApparent, true },
-                { CSharpCodeStyleOptions.VarElsewhere, true },
-            };
+        private static readonly OptionsCollection s_useImplicitTypeOptions = new(
+            LanguageNames.CSharp
+        )
+        {
+            { CSharpCodeStyleOptions.VarForBuiltInTypes, true },
+            { CSharpCodeStyleOptions.VarWhenTypeIsApparent, true },
+            { CSharpCodeStyleOptions.VarElsewhere, true },
+        };
 
         internal override Type GetArgumentProviderType() => typeof(OutVariableArgumentProvider);
 

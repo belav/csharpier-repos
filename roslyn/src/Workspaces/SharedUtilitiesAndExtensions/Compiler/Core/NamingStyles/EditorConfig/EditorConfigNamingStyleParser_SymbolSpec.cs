@@ -393,12 +393,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Analyzers.NamingStyles
             return (ImmutableArray<ModifierKind>.Empty, defaultValue());
         }
 
-        private static readonly ModifierKind s_abstractModifierKind =
-            new(ModifierKindEnum.IsAbstract);
+        private static readonly ModifierKind s_abstractModifierKind = new(
+            ModifierKindEnum.IsAbstract
+        );
         private static readonly ModifierKind s_asyncModifierKind = new(ModifierKindEnum.IsAsync);
         private static readonly ModifierKind s_constModifierKind = new(ModifierKindEnum.IsConst);
-        private static readonly ModifierKind s_readonlyModifierKind =
-            new(ModifierKindEnum.IsReadOnly);
+        private static readonly ModifierKind s_readonlyModifierKind = new(
+            ModifierKindEnum.IsReadOnly
+        );
         private static readonly ModifierKind s_staticModifierKind = new(ModifierKindEnum.IsStatic);
         private static readonly ImmutableArray<ModifierKind> _allModifierKind =
             ImmutableArray.Create(

@@ -209,15 +209,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
         private sealed class CSharpSyntaxAnalyzer : DiagnosticAnalyzer
         {
             public const string RuleId = "SYN0001";
-            private readonly DiagnosticDescriptor _descriptor =
-                new(
-                    RuleId,
-                    "Title",
-                    "Message",
-                    "Category",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true
-                );
+            private readonly DiagnosticDescriptor _descriptor = new(
+                RuleId,
+                "Title",
+                "Message",
+                "Category",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(_descriptor);
@@ -238,15 +237,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
         private sealed class CSharpSemanticAnalyzer : DiagnosticAnalyzer
         {
             public const string RuleId = "SEM0001";
-            private readonly DiagnosticDescriptor _descriptor =
-                new(
-                    RuleId,
-                    "Title",
-                    "Message",
-                    "Category",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true
-                );
+            private readonly DiagnosticDescriptor _descriptor = new(
+                RuleId,
+                "Title",
+                "Message",
+                "Category",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(_descriptor);

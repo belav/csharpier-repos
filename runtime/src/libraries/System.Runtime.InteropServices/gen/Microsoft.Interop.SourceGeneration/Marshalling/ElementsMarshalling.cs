@@ -738,11 +738,10 @@ namespace Microsoft.Interop
                     is PointerTypeSyntax elementNativeType
                 )
                 {
-                    PointerNativeTypeAssignmentRewriter rewriter =
-                        new(
-                            elementSetupSubContext.GetIdentifiers(localElementInfo).native,
-                            elementNativeType
-                        );
+                    PointerNativeTypeAssignmentRewriter rewriter = new(
+                        elementSetupSubContext.GetIdentifiers(localElementInfo).native,
+                        elementNativeType
+                    );
                     marshallingStatement = (StatementSyntax)rewriter.Visit(marshallingStatement);
                 }
 

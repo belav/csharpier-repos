@@ -28,16 +28,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UseExplicit
             Workspace workspace
         ) => (new CSharpUseExplicitTypeDiagnosticAnalyzer(), new UseExplicitTypeCodeFixProvider());
 
-        private readonly CodeStyleOption2<bool> offWithSilent =
-            new(false, NotificationOption2.Silent);
-        private readonly CodeStyleOption2<bool> onWithInfo =
-            new(true, NotificationOption2.Suggestion);
-        private readonly CodeStyleOption2<bool> offWithInfo =
-            new(false, NotificationOption2.Suggestion);
-        private readonly CodeStyleOption2<bool> offWithWarning =
-            new(false, NotificationOption2.Warning);
-        private readonly CodeStyleOption2<bool> offWithError =
-            new(false, NotificationOption2.Error);
+        private readonly CodeStyleOption2<bool> offWithSilent = new(
+            false,
+            NotificationOption2.Silent
+        );
+        private readonly CodeStyleOption2<bool> onWithInfo = new(
+            true,
+            NotificationOption2.Suggestion
+        );
+        private readonly CodeStyleOption2<bool> offWithInfo = new(
+            false,
+            NotificationOption2.Suggestion
+        );
+        private readonly CodeStyleOption2<bool> offWithWarning = new(
+            false,
+            NotificationOption2.Warning
+        );
+        private readonly CodeStyleOption2<bool> offWithError = new(
+            false,
+            NotificationOption2.Error
+        );
 
         // specify all options explicitly to override defaults.
         private OptionsCollection ExplicitTypeEverywhere() =>

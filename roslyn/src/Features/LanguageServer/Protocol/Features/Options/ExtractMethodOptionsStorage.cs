@@ -43,9 +43,8 @@ internal static class ExtractMethodOptionsStorage
             cancellationToken
         );
 
-    public static readonly PerLanguageOption2<bool> DoNotPutOutOrRefOnStruct =
-        new(
-            "dotnet_extract_method_no_ref_or_out_structs",
-            ExtractMethodOptions.Default.DoNotPutOutOrRefOnStruct
-        );
+    public static readonly PerLanguageOption2<bool> DoNotPutOutOrRefOnStruct = new(
+        "dotnet_extract_method_no_ref_or_out_structs",
+        ExtractMethodOptions.Default.DoNotPutOutOrRefOnStruct
+    );
 }

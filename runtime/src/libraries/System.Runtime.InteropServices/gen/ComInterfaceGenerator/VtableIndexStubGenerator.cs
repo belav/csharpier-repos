@@ -26,13 +26,12 @@ namespace Microsoft.Interop
             public const string GenerateNativeToManagedStub = nameof(GenerateNativeToManagedStub);
         }
 
-        private static readonly ContainingSyntax NativeTypeContainingSyntax =
-            new(
-                TokenList(Token(SyntaxKind.InternalKeyword), Token(SyntaxKind.PartialKeyword)),
-                SyntaxKind.InterfaceDeclaration,
-                Identifier("Native"),
-                null
-            );
+        private static readonly ContainingSyntax NativeTypeContainingSyntax = new(
+            TokenList(Token(SyntaxKind.InternalKeyword), Token(SyntaxKind.PartialKeyword)),
+            SyntaxKind.InterfaceDeclaration,
+            Identifier("Native"),
+            null
+        );
 
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {

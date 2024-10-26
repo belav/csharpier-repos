@@ -44,8 +44,12 @@ namespace System.Net.Http.Formatting
                     }
             );
 
-        public static readonly TheoryDataSet<Type> AFewValidTypes =
-            new() { typeof(bool), typeof(int), typeof(string) };
+        public static readonly TheoryDataSet<Type> AFewValidTypes = new()
+        {
+            typeof(bool),
+            typeof(int),
+            typeof(string),
+        };
 
         public static IEnumerable<TestData> BunchOfTypedObjectsTestDataCollection
         {

@@ -241,21 +241,20 @@ namespace System.Tests
 
             Assert.True(currentOSCheck());
 
-            Dictionary<string, bool> allResults =
-                new()
-                {
-                    { "IsBrowser", OperatingSystem.IsBrowser() },
-                    { "IsLinux", OperatingSystem.IsLinux() },
-                    { "IsFreeBSD", OperatingSystem.IsFreeBSD() },
-                    { "IsAndroid", OperatingSystem.IsAndroid() },
-                    { "IsIOS", OperatingSystem.IsIOS() },
-                    { "IsMacCatalyst", OperatingSystem.IsMacCatalyst() },
-                    { "IsMacOS", OperatingSystem.IsMacOS() },
-                    { "IsTvOS", OperatingSystem.IsTvOS() },
-                    { "IsWatchOS", OperatingSystem.IsWatchOS() },
-                    { "IsWindows", OperatingSystem.IsWindows() },
-                    { "IsWasi", OperatingSystem.IsWasi() },
-                };
+            Dictionary<string, bool> allResults = new()
+            {
+                { "IsBrowser", OperatingSystem.IsBrowser() },
+                { "IsLinux", OperatingSystem.IsLinux() },
+                { "IsFreeBSD", OperatingSystem.IsFreeBSD() },
+                { "IsAndroid", OperatingSystem.IsAndroid() },
+                { "IsIOS", OperatingSystem.IsIOS() },
+                { "IsMacCatalyst", OperatingSystem.IsMacCatalyst() },
+                { "IsMacOS", OperatingSystem.IsMacOS() },
+                { "IsTvOS", OperatingSystem.IsTvOS() },
+                { "IsWatchOS", OperatingSystem.IsWatchOS() },
+                { "IsWindows", OperatingSystem.IsWindows() },
+                { "IsWasi", OperatingSystem.IsWasi() },
+            };
 
             // MacCatalyst is a special case since it also returns true for iOS
             if (currentOSName == "MacCatalyst")

@@ -24,8 +24,9 @@ namespace Microsoft.CodeAnalysis.Highlighting
     {
         private readonly List<Lazy<IHighlighter, LanguageMetadata>> _highlighters =
             highlighters.ToList();
-        private static readonly PooledObjects.ObjectPool<List<TextSpan>> s_listPool =
-            new(() => new List<TextSpan>());
+        private static readonly PooledObjects.ObjectPool<List<TextSpan>> s_listPool = new(
+            () => new List<TextSpan>()
+        );
 
         public void AddHighlights(
             SyntaxNode root,

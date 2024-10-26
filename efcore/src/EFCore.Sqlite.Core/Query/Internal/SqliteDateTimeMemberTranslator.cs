@@ -13,18 +13,17 @@ namespace Microsoft.EntityFrameworkCore.Sqlite.Query.Internal;
 /// </summary>
 public class SqliteDateTimeMemberTranslator : IMemberTranslator
 {
-    private static readonly Dictionary<string, string> DatePartMapping =
-        new()
-        {
-            { nameof(DateTime.Year), "%Y" },
-            { nameof(DateTime.Month), "%m" },
-            { nameof(DateTime.DayOfYear), "%j" },
-            { nameof(DateTime.Day), "%d" },
-            { nameof(DateTime.Hour), "%H" },
-            { nameof(DateTime.Minute), "%M" },
-            { nameof(DateTime.Second), "%S" },
-            { nameof(DateTime.DayOfWeek), "%w" },
-        };
+    private static readonly Dictionary<string, string> DatePartMapping = new()
+    {
+        { nameof(DateTime.Year), "%Y" },
+        { nameof(DateTime.Month), "%m" },
+        { nameof(DateTime.DayOfYear), "%j" },
+        { nameof(DateTime.Day), "%d" },
+        { nameof(DateTime.Hour), "%H" },
+        { nameof(DateTime.Minute), "%M" },
+        { nameof(DateTime.Second), "%S" },
+        { nameof(DateTime.DayOfWeek), "%w" },
+    };
 
     private readonly SqliteSqlExpressionFactory _sqlExpressionFactory;
 

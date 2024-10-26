@@ -38,8 +38,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateVariable
             Workspace workspace
         ) => (null, new CSharpGenerateVariableCodeFixProvider());
 
-        private readonly CodeStyleOption2<bool> onWithInfo =
-            new(true, NotificationOption2.Suggestion);
+        private readonly CodeStyleOption2<bool> onWithInfo = new(
+            true,
+            NotificationOption2.Suggestion
+        );
 
         // specify all options explicitly to override defaults.
         private OptionsCollection ImplicitTypingEverywhere() =>

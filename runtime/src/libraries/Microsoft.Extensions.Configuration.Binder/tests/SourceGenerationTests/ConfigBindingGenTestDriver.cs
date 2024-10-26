@@ -50,8 +50,10 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                     }
                 );
 
-                ConfigurationBindingGenerator generator =
-                    new() { OnSourceEmitting = spec => _genSpec = spec };
+                ConfigurationBindingGenerator generator = new()
+                {
+                    OnSourceEmitting = spec => _genSpec = spec,
+                };
                 _generatorDriver = CSharpGeneratorDriver.Create(
                     new ISourceGenerator[] { generator.AsSourceGenerator() },
                     parseOptions: _parseOptions,

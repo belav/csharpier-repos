@@ -105,8 +105,10 @@ namespace Microsoft.Interop
 
         public const TypePositionInfo UnspecifiedParam = null;
 
-        public static readonly SizeAndParamIndexInfo Unspecified =
-            new(UnspecifiedConstSize, UnspecifiedParam);
+        public static readonly SizeAndParamIndexInfo Unspecified = new(
+            UnspecifiedConstSize,
+            UnspecifiedParam
+        );
     }
 
     /// <summary>

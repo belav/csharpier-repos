@@ -474,8 +474,10 @@ public class CircuitHostTest
             serviceScope: new ServiceCollection().BuildServiceProvider().CreateAsyncScope()
         );
         var expectedMessage = "Hello, world!";
-        Dictionary<string, object> parameters =
-            new() { [nameof(DynamicallyAddedComponent.Message)] = expectedMessage };
+        Dictionary<string, object> parameters = new()
+        {
+            [nameof(DynamicallyAddedComponent.Message)] = expectedMessage,
+        };
 
         // Act
         await AddComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, parameters);
@@ -499,8 +501,10 @@ public class CircuitHostTest
         await AddComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, null, componentKey);
 
         var expectedMessage = "Updated message";
-        Dictionary<string, object> parameters =
-            new() { [nameof(DynamicallyAddedComponent.Message)] = expectedMessage };
+        Dictionary<string, object> parameters = new()
+        {
+            [nameof(DynamicallyAddedComponent.Message)] = expectedMessage,
+        };
 
         // Act
         await UpdateComponentAsync<DynamicallyAddedComponent>(
@@ -528,8 +532,10 @@ public class CircuitHostTest
         await AddComponentAsync<DynamicallyAddedComponent>(circuitHost, 1);
 
         var expectedMessage = "Updated message";
-        Dictionary<string, object> parameters =
-            new() { [nameof(DynamicallyAddedComponent.Message)] = expectedMessage };
+        Dictionary<string, object> parameters = new()
+        {
+            [nameof(DynamicallyAddedComponent.Message)] = expectedMessage,
+        };
 
         // Act
         await UpdateComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, parameters);
@@ -565,8 +571,10 @@ public class CircuitHostTest
 
         await AddComponentAsync<TestComponent>(circuitHost, 2, []);
 
-        Dictionary<string, object> parameters =
-            new() { [nameof(DynamicallyAddedComponent.Message)] = "Updated message" };
+        Dictionary<string, object> parameters = new()
+        {
+            [nameof(DynamicallyAddedComponent.Message)] = "Updated message",
+        };
 
         // Act
         var evt = await Assert.RaisesAsync<UnhandledExceptionEventArgs>(
@@ -611,8 +619,10 @@ public class CircuitHostTest
             originalKey
         );
 
-        Dictionary<string, object> parameters =
-            new() { [nameof(DynamicallyAddedComponent.Message)] = "Updated message" };
+        Dictionary<string, object> parameters = new()
+        {
+            [nameof(DynamicallyAddedComponent.Message)] = "Updated message",
+        };
 
         // Act
         var evt = await Assert.RaisesAsync<UnhandledExceptionEventArgs>(
@@ -649,8 +659,10 @@ public class CircuitHostTest
         );
         var expectedMessage = "Updated message";
 
-        Dictionary<string, object> parameters =
-            new() { [nameof(DynamicallyAddedComponent.Message)] = expectedMessage };
+        Dictionary<string, object> parameters = new()
+        {
+            [nameof(DynamicallyAddedComponent.Message)] = expectedMessage,
+        };
         await AddComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, parameters);
 
         // Act

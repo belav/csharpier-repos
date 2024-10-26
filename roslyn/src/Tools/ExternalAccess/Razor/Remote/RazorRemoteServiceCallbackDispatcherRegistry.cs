@@ -12,8 +12,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     internal sealed class RazorRemoteServiceCallbackDispatcherRegistry
         : IRemoteServiceCallbackDispatcherProvider
     {
-        public static readonly RazorRemoteServiceCallbackDispatcherRegistry Empty =
-            new(Array.Empty<(Type, RazorRemoteServiceCallbackDispatcher)>());
+        public static readonly RazorRemoteServiceCallbackDispatcherRegistry Empty = new(
+            Array.Empty<(Type, RazorRemoteServiceCallbackDispatcher)>()
+        );
 
         private readonly ImmutableDictionary<
             Type,

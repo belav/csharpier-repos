@@ -72,8 +72,10 @@ public class IdValueGeneratorTest
 
     private class IntClass
     {
-        public static readonly ValueConverter<IntClass, int> Converter =
-            new(v => v.Value, v => new IntClass(v));
+        public static readonly ValueConverter<IntClass, int> Converter = new(
+            v => v.Value,
+            v => new IntClass(v)
+        );
 
         public IntClass(int value)
         {
@@ -97,8 +99,10 @@ public class IdValueGeneratorTest
 
     private struct IntStruct
     {
-        public static readonly ValueConverter<IntStruct, int> Converter =
-            new(v => v.Value, v => new IntStruct(v));
+        public static readonly ValueConverter<IntStruct, int> Converter = new(
+            v => v.Value,
+            v => new IntStruct(v)
+        );
 
         public IntStruct(int value)
         {
@@ -115,8 +119,10 @@ public class IdValueGeneratorTest
 
     private struct BytesStruct
     {
-        public static readonly ValueConverter<BytesStruct, byte[]> Converter =
-            new(v => v.Value, v => new BytesStruct(v));
+        public static readonly ValueConverter<BytesStruct, byte[]> Converter = new(
+            v => v.Value,
+            v => new BytesStruct(v)
+        );
 
         public BytesStruct(byte[] value)
         {

@@ -298,8 +298,9 @@ internal sealed partial class ObjectReader : IDisposable
     {
         private readonly SegmentedList<T> _values;
 
-        private static readonly ObjectPool<SegmentedList<T>> s_objectListPool =
-            new(() => new SegmentedList<T>(20));
+        private static readonly ObjectPool<SegmentedList<T>> s_objectListPool = new(
+            () => new SegmentedList<T>(20)
+        );
 
         private ReaderReferenceMap(SegmentedList<T> values) => _values = values;
 

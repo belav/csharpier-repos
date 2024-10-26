@@ -12,8 +12,10 @@ namespace Microsoft.CodeAnalysis.Completion.Log
         private static readonly StatisticLogAggregator<ActionInfo> s_statisticLogAggregator = new();
         private static readonly CountLogAggregator<ActionInfo> s_countLogAggregator = new();
 
-        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator =
-            new(bucketSize: 50, maxBucketValue: 1000);
+        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator = new(
+            bucketSize: 50,
+            maxBucketValue: 1000
+        );
 
         internal enum ActionInfo
         {

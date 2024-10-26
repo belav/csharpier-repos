@@ -14,24 +14,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 /// </summary>
 public class QueryOptimizingExpressionVisitor : ExpressionVisitor
 {
-    private static readonly List<MethodInfo> SingleResultMethodInfos =
-        new()
-        {
-            QueryableMethods.FirstWithPredicate,
-            QueryableMethods.FirstWithoutPredicate,
-            QueryableMethods.FirstOrDefaultWithPredicate,
-            QueryableMethods.FirstOrDefaultWithoutPredicate,
-            QueryableMethods.SingleWithPredicate,
-            QueryableMethods.SingleWithoutPredicate,
-            QueryableMethods.SingleOrDefaultWithPredicate,
-            QueryableMethods.SingleOrDefaultWithoutPredicate,
-            QueryableMethods.LastWithPredicate,
-            QueryableMethods.LastWithoutPredicate,
-            QueryableMethods.LastOrDefaultWithPredicate,
-            QueryableMethods.LastOrDefaultWithoutPredicate,
-            //QueryableMethodProvider.ElementAtMethodInfo,
-            //QueryableMethodProvider.ElementAtOrDefaultMethodInfo
-        };
+    private static readonly List<MethodInfo> SingleResultMethodInfos = new()
+    {
+        QueryableMethods.FirstWithPredicate,
+        QueryableMethods.FirstWithoutPredicate,
+        QueryableMethods.FirstOrDefaultWithPredicate,
+        QueryableMethods.FirstOrDefaultWithoutPredicate,
+        QueryableMethods.SingleWithPredicate,
+        QueryableMethods.SingleWithoutPredicate,
+        QueryableMethods.SingleOrDefaultWithPredicate,
+        QueryableMethods.SingleOrDefaultWithoutPredicate,
+        QueryableMethods.LastWithPredicate,
+        QueryableMethods.LastWithoutPredicate,
+        QueryableMethods.LastOrDefaultWithPredicate,
+        QueryableMethods.LastOrDefaultWithoutPredicate,
+        //QueryableMethodProvider.ElementAtMethodInfo,
+        //QueryableMethodProvider.ElementAtOrDefaultMethodInfo
+    };
 
     private static readonly MethodInfo StringCompareWithComparisonMethod =
         typeof(string).GetRuntimeMethod(

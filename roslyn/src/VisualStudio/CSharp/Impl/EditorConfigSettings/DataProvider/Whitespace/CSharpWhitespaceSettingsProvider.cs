@@ -24,13 +24,17 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.EditorConfigSettings.Da
         private static readonly Conversions<
             SpacePlacementWithinParentheses,
             int
-        > s_spaceBetweenParenthesesConversions =
-            new(v => (int)v, v => (SpacePlacementWithinParentheses)v);
+        > s_spaceBetweenParenthesesConversions = new(
+            v => (int)v,
+            v => (SpacePlacementWithinParentheses)v
+        );
         private static readonly Conversions<
             NewLineBeforeOpenBracePlacement,
             int
-        > s_newLinesForBracesConversions =
-            new(v => (int)v, v => (NewLineBeforeOpenBracePlacement)v);
+        > s_newLinesForBracesConversions = new(
+            v => (int)v,
+            v => (NewLineBeforeOpenBracePlacement)v
+        );
 
         public CSharpWhitespaceSettingsProvider(
             string filePath,

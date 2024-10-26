@@ -210,21 +210,20 @@ public class InteractivityTest
     private const string AddWebAssemblyPrerenderedId = "add-webassembly-counter-prerendered-link";
     private const string AddAutoPrerenderedId = "add-auto-counter-prerendered-link";
 
-    public static readonly TheoryData<string[]> AddCounterLinkSequences =
-        new()
+    public static readonly TheoryData<string[]> AddCounterLinkSequences = new()
+    {
+        // One component
+        new[] { AddServerPrerenderedId },
+        new[] { AddWebAssemblyPrerenderedId },
+        // Multiple components, mixing all combinations of Server/WebAssembly and prerendered/non-prerendered
+        new[]
         {
-            // One component
-            new[] { AddServerPrerenderedId },
-            new[] { AddWebAssemblyPrerenderedId },
-            // Multiple components, mixing all combinations of Server/WebAssembly and prerendered/non-prerendered
-            new[]
-            {
-                AddServerPrerenderedId,
-                AddWebAssemblyId,
-                AddWebAssemblyPrerenderedId,
-                AddServerId,
-            },
-        };
+            AddServerPrerenderedId,
+            AddWebAssemblyId,
+            AddWebAssemblyPrerenderedId,
+            AddServerId,
+        },
+    };
 
     [Theory]
     [InlineData(AddServerId)]

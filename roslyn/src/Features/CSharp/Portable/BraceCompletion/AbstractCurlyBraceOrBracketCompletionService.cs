@@ -25,10 +25,12 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
         /// Annotation used to find the closing brace location after formatting changes are applied.
         /// The closing brace location is then used as the caret location.
         /// </summary>
-        private static readonly SyntaxAnnotation s_closingBraceFormatAnnotation =
-            new(nameof(s_closingBraceFormatAnnotation));
-        private static readonly SyntaxAnnotation s_closingBraceNewlineAnnotation =
-            new(nameof(s_closingBraceNewlineAnnotation));
+        private static readonly SyntaxAnnotation s_closingBraceFormatAnnotation = new(
+            nameof(s_closingBraceFormatAnnotation)
+        );
+        private static readonly SyntaxAnnotation s_closingBraceNewlineAnnotation = new(
+            nameof(s_closingBraceNewlineAnnotation)
+        );
 
         protected abstract ImmutableArray<AbstractFormattingRule> GetBraceFormattingIndentationRulesAfterReturn(
             IndentationOptions options

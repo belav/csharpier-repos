@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
 {
     internal class AnalyzerReferenceInformationProvider : IAnalyzerInformationProvider
     {
-        private static readonly Dictionary<string, Assembly> s_pathsToAssemblies =
-            new(StringComparer.OrdinalIgnoreCase);
-        private static readonly Dictionary<string, Assembly> s_namesToAssemblies =
-            new(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<string, Assembly> s_pathsToAssemblies = new(
+            StringComparer.OrdinalIgnoreCase
+        );
+        private static readonly Dictionary<string, Assembly> s_namesToAssemblies = new(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         private static readonly object s_guard = new();
 

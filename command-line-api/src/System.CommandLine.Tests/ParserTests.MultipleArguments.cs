@@ -192,8 +192,10 @@ namespace System.CommandLine.Tests
             public void Unsatisfied_subsequent_argument_with_min_arity_1_parses_as_default_value()
             {
                 CliArgument<string> arg1 = new(name: "arg1");
-                CliArgument<string> arg2 =
-                    new(name: "arg2") { DefaultValueFactory = (_) => "the-default" };
+                CliArgument<string> arg2 = new(name: "arg2")
+                {
+                    DefaultValueFactory = (_) => "the-default",
+                };
 
                 var rootCommand = new CliRootCommand { arg1, arg2 };
 

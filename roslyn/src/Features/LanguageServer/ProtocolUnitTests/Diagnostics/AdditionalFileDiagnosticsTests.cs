@@ -197,16 +197,15 @@ public class AdditionalFileDiagnosticsTests : AbstractPullDiagnosticTestsBase
     private class MockAdditionalFileDiagnosticAnalyzer : DiagnosticAnalyzer
     {
         public const string Id = "MockAdditionalDiagnostic";
-        private readonly DiagnosticDescriptor _descriptor =
-            new(
-                Id,
-                "MockAdditionalDiagnostic",
-                "MockAdditionalDiagnostic",
-                "InternalCategory",
-                DiagnosticSeverity.Warning,
-                isEnabledByDefault: true,
-                helpLinkUri: "https://github.com/dotnet/roslyn"
-            );
+        private readonly DiagnosticDescriptor _descriptor = new(
+            Id,
+            "MockAdditionalDiagnostic",
+            "MockAdditionalDiagnostic",
+            "InternalCategory",
+            DiagnosticSeverity.Warning,
+            isEnabledByDefault: true,
+            helpLinkUri: "https://github.com/dotnet/roslyn"
+        );
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(_descriptor);

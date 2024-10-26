@@ -73,13 +73,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             )
         ).WithPublicOption(PublicFeatureName, "NewLine");
 
-        internal static Option2<bool> InsertFinalNewLine =
-            new(
-                "insert_final_newline",
-                DocumentFormattingOptions.Default.InsertFinalNewLine,
-                FormattingOptionGroups.NewLine,
-                isEditorConfigOption: true
-            );
+        internal static Option2<bool> InsertFinalNewLine = new(
+            "insert_final_newline",
+            DocumentFormattingOptions.Default.InsertFinalNewLine,
+            FormattingOptionGroups.NewLine,
+            isEditorConfigOption: true
+        );
 
         public static PerLanguageOption2<IndentStyle> SmartIndent =
             new PerLanguageOption2<IndentStyle>(
@@ -106,21 +105,22 @@ namespace Microsoft.CodeAnalysis.Formatting
 
     internal static class FormattingOptionGroups
     {
-        public static readonly OptionGroup FormattingOptionGroup =
-            new(name: "formatting", description: "", parent: CodeStyleOptionGroups.CodeStyle);
-        public static readonly OptionGroup IndentationAndSpacing =
-            new(
-                name: "indentation_and_spacing",
-                description: WorkspacesResources.Indentation_and_spacing,
-                priority: 1,
-                parent: FormattingOptionGroup
-            );
-        public static readonly OptionGroup NewLine =
-            new(
-                name: "new_line",
-                description: WorkspacesResources.New_line_preferences,
-                priority: 2,
-                parent: FormattingOptionGroup
-            );
+        public static readonly OptionGroup FormattingOptionGroup = new(
+            name: "formatting",
+            description: "",
+            parent: CodeStyleOptionGroups.CodeStyle
+        );
+        public static readonly OptionGroup IndentationAndSpacing = new(
+            name: "indentation_and_spacing",
+            description: WorkspacesResources.Indentation_and_spacing,
+            priority: 1,
+            parent: FormattingOptionGroup
+        );
+        public static readonly OptionGroup NewLine = new(
+            name: "new_line",
+            description: WorkspacesResources.New_line_preferences,
+            priority: 2,
+            parent: FormattingOptionGroup
+        );
     }
 }

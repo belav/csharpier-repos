@@ -19,8 +19,11 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
 {
     internal class ProjectBuildManager
     {
-        private static readonly XmlReaderSettings s_xmlReaderSettings =
-            new() { DtdProcessing = DtdProcessing.Prohibit, XmlResolver = null };
+        private static readonly XmlReaderSettings s_xmlReaderSettings = new()
+        {
+            DtdProcessing = DtdProcessing.Prohibit,
+            XmlResolver = null,
+        };
 
         private static readonly ImmutableDictionary<string, string> s_defaultGlobalProperties =
             new Dictionary<string, string>()

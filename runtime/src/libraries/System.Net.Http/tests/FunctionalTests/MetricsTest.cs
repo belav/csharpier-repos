@@ -354,8 +354,10 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<long> recorder = SetupInstrumentRecorder<long>(
                         InstrumentNames.ActiveRequests
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
                     HttpResponseMessage response = await SendAsync(client, request);
                     response.Dispose(); // Make sure disposal doesn't interfere with recording by enforcing early disposal.
@@ -401,14 +403,18 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> unrelatedRecorder =
                         SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
 
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
                     Task<HttpResponseMessage> clientTask = Task.Run(
                         () => SendAsync(client, request)
                     );
                     await connectionStarted.Task;
-                    using InstrumentRecorder<long> recorder =
-                        new(Handler.MeterFactory, InstrumentNames.ActiveRequests);
+                    using InstrumentRecorder<long> recorder = new(
+                        Handler.MeterFactory,
+                        InstrumentNames.ActiveRequests
+                    );
                     using HttpResponseMessage response = await clientTask;
 
                     Assert.Empty(recorder.GetMeasurements());
@@ -432,8 +438,10 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
                         InstrumentNames.RequestDuration
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Parse(method), uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Parse(method), uri)
+                    {
+                        Version = UseVersion,
+                    };
 
                     using HttpResponseMessage response = await SendAsync(client, request);
 
@@ -457,8 +465,10 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
                         InstrumentNames.RequestDuration
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
                     HttpMetricsEnrichmentContext.AddCallback(
                         request,
@@ -510,25 +520,24 @@ namespace System.Net.Http.Functional.Tests
             string eventName
         )
         {
-            FakeDiagnosticListenerObserver diagnosticListenerObserver =
-                new(kv =>
+            FakeDiagnosticListenerObserver diagnosticListenerObserver = new(kv =>
+            {
+                if (kv.Key == eventName)
                 {
-                    if (kv.Key == eventName)
-                    {
-                        HttpRequestMessage request = GetProperty<HttpRequestMessage>(
-                            kv.Value,
-                            "Request"
-                        );
-                        HttpMetricsEnrichmentContext.AddCallback(
-                            request,
-                            static ctx =>
-                            {
-                                ctx.AddCustomTag("observed?", "observed!");
-                                Assert.NotNull(ctx.Response);
-                            }
-                        );
-                    }
-                });
+                    HttpRequestMessage request = GetProperty<HttpRequestMessage>(
+                        kv.Value,
+                        "Request"
+                    );
+                    HttpMetricsEnrichmentContext.AddCallback(
+                        request,
+                        static ctx =>
+                        {
+                            ctx.AddCustomTag("observed?", "observed!");
+                            Assert.NotNull(ctx.Response);
+                        }
+                    );
+                }
+            });
 
             using IDisposable subscription = DiagnosticListener.AllListeners.Subscribe(
                 diagnosticListenerObserver
@@ -542,8 +551,10 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
                         InstrumentNames.RequestDuration
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
                     HttpMetricsEnrichmentContext.AddCallback(
                         request,
                         static ctx =>
@@ -620,8 +631,10 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
                         InstrumentNames.RequestDuration
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
                     using HttpResponseMessage response = await client.SendAsync(
                         TestAsync,
                         request,
@@ -695,8 +708,10 @@ namespace System.Net.Http.Functional.Tests
                             using InstrumentRecorder<long> recorder = SetupInstrumentRecorder<long>(
                                 InstrumentNames.ActiveRequests
                             );
-                            using HttpRequestMessage request =
-                                new(HttpMethod.Get, originalUri) { Version = UseVersion };
+                            using HttpRequestMessage request = new(HttpMethod.Get, originalUri)
+                            {
+                                Version = UseVersion,
+                            };
 
                             Task clientTask = SendAsync(client, request);
                             Task serverTask = originalServer.HandleRequestAsync(
@@ -766,8 +781,10 @@ namespace System.Net.Http.Functional.Tests
                         InstrumentNames.TimeInQueue
                     );
 
-                    using HttpRequestMessage request =
-                        new(new HttpMethod(method), uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(new HttpMethod(method), uri)
+                    {
+                        Version = UseVersion,
+                    };
                     if (expectedMethodTag == "CONNECT")
                     {
                         request.Headers.Host = "localhost";
@@ -798,10 +815,12 @@ namespace System.Net.Http.Functional.Tests
         [ConditionalFact(typeof(SocketsHttpHandler), nameof(SocketsHttpHandler.IsSupported))]
         public async Task AllSocketsHttpHandlerCounters_Success_Recorded()
         {
-            TaskCompletionSource clientWaitingTcs =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
-            TaskCompletionSource clientDisposedTcs =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientWaitingTcs = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            TaskCompletionSource clientDisposedTcs = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 async uri =>
@@ -812,8 +831,10 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Handler.MeterFactory = _meterFactory;
 
-                        using HttpRequestMessage request =
-                            new(HttpMethod.Get, uri) { Version = UseVersion };
+                        using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                        {
+                            Version = UseVersion,
+                        };
                         Task<HttpResponseMessage> sendAsyncTask = SendAsync(invoker, request);
                         clientWaitingTcs.SetResult();
                         using HttpResponseMessage response = await sendAsyncTask;
@@ -947,10 +968,12 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public async Task RequestDuration_RequestCancelled_ErrorReasonIsExceptionType()
         {
-            TaskCompletionSource clientCompleted =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
-            TaskCompletionSource requestReceived =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientCompleted = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            TaskCompletionSource requestReceived = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 async uri =>
@@ -959,8 +982,10 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
                         InstrumentNames.RequestDuration
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
                     using CancellationTokenSource requestCts = new();
 
                     Task clientTask = SendAsync(client, request, requestCts.Token);
@@ -1121,8 +1146,10 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
                         InstrumentNames.RequestDuration
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
                     if (TestHttpMessageInvoker)
                     {
@@ -1161,8 +1188,10 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
                         InstrumentNames.RequestDuration
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
                     using HttpResponseMessage response = await SendAsync(client, request);
 
@@ -1197,8 +1226,10 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
                         InstrumentNames.RequestDuration
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, uri) { Version = UseVersion };
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
                     Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () =>
                     {
@@ -1263,12 +1294,11 @@ namespace System.Net.Http.Functional.Tests
                     using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
                         InstrumentNames.RequestDuration
                     );
-                    using HttpRequestMessage request =
-                        new(HttpMethod.Get, server.Address)
-                        {
-                            Version = HttpVersion.Version20,
-                            VersionPolicy = HttpVersionPolicy.RequestVersionOrLower,
-                        };
+                    using HttpRequestMessage request = new(HttpMethod.Get, server.Address)
+                    {
+                        Version = HttpVersion.Version20,
+                        VersionPolicy = HttpVersionPolicy.RequestVersionOrLower,
+                    };
 
                     Task<HttpResponseMessage> clientTask = SendAsync(client, request);
 
@@ -1353,11 +1383,13 @@ namespace System.Net.Http.Functional.Tests
                                         SetupInstrumentRecorder<double>(
                                             InstrumentNames.RequestDuration
                                         );
-                                    using HttpRequestMessage request =
-                                        new(HttpMethod.Get, originalUri)
-                                        {
-                                            Version = HttpVersion.Version20,
-                                        };
+                                    using HttpRequestMessage request = new(
+                                        HttpMethod.Get,
+                                        originalUri
+                                    )
+                                    {
+                                        Version = HttpVersion.Version20,
+                                    };
 
                                     Task clientTask = SendAsync(client, request);
                                     Task serverTask = originalServer.HandleRequestAsync(
@@ -1420,8 +1452,10 @@ namespace System.Net.Http.Functional.Tests
                 InstrumentNames.RequestDuration
             );
 
-            using HttpRequestMessage request =
-                new(HttpMethod.Get, server.Address) { Version = HttpVersion.Version20 };
+            using HttpRequestMessage request = new(HttpMethod.Get, server.Address)
+            {
+                Version = HttpVersion.Version20,
+            };
             Task<HttpResponseMessage> sendTask = SendAsync(client, request);
 
             Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
@@ -1491,8 +1525,10 @@ namespace System.Net.Http.Functional.Tests
                             using InstrumentRecorder<long> recorder = new InstrumentRecorder<long>(
                                 InstrumentNames.ActiveRequests
                             );
-                            using HttpRequestMessage request =
-                                new(HttpMethod.Get, uri) { Version = test.UseVersion };
+                            using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                            {
+                                Version = test.UseVersion,
+                            };
 
                             HttpResponseMessage response = await client.SendAsync(request);
                             response.Dispose(); // Make sure disposal doesn't interfere with recording by enforcing early disposal.
@@ -1521,8 +1557,9 @@ namespace System.Net.Http.Functional.Tests
             RemoteExecutor
                 .Invoke(static async Task () =>
                 {
-                    TaskCompletionSource clientWaitingTcs =
-                        new(TaskCreationOptions.RunContinuationsAsynchronously);
+                    TaskCompletionSource clientWaitingTcs = new(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
 
                     using HttpMetricsTest_DefaultMeter test = new(null);
                     await test.LoopbackServerFactory.CreateClientAndServerAsync(
@@ -1532,8 +1569,10 @@ namespace System.Net.Http.Functional.Tests
 
                             using (HttpClient client = test.CreateHttpClient())
                             {
-                                using HttpRequestMessage request =
-                                    new(HttpMethod.Get, uri) { Version = test.UseVersion };
+                                using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                                {
+                                    Version = test.UseVersion,
+                                };
                                 Task<HttpResponseMessage> sendAsyncTask = client.SendAsync(request);
                                 clientWaitingTcs.SetResult();
                                 using HttpResponseMessage response = await sendAsyncTask;
@@ -1676,8 +1715,10 @@ namespace System.Net.Http.Functional.Tests
                             using HttpClient client = test.CreateHttpClient();
                             using InstrumentRecorder<double> recorder =
                                 new InstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                            using HttpRequestMessage request =
-                                new(HttpMethod.Get, uri) { Version = test.UseVersion };
+                            using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                            {
+                                Version = test.UseVersion,
+                            };
 
                             using HttpResponseMessage response = await client.SendAsync(request);
                             Measurement<double> m = Assert.Single(recorder.GetMeasurements());

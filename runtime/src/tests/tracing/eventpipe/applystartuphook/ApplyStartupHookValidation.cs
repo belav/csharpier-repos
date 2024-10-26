@@ -100,15 +100,14 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         IpcAdvertise advertise = IpcAdvertise.Parse(stream);
                         Logger.logger.Log($"IpcAdvertise: {advertise}");
 
-                        SessionConfiguration config =
-                            new(
-                                circularBufferSizeMB: 1000,
-                                format: EventPipeSerializationFormat.NetTrace,
-                                providers: new List<Provider>
-                                {
-                                    new Provider(AppEventSource.SourceName, 0, EventLevel.Verbose),
-                                }
-                            );
+                        SessionConfiguration config = new(
+                            circularBufferSizeMB: 1000,
+                            format: EventPipeSerializationFormat.NetTrace,
+                            providers: new List<Provider>
+                            {
+                                new Provider(AppEventSource.SourceName, 0, EventLevel.Verbose),
+                            }
+                        );
 
                         Logger.logger.Log("Starting EventPipeSession over standard connection");
                         using Stream eventStream = EventPipeClient.CollectTracing(
@@ -121,8 +120,9 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                         );
 
                         using EventPipeEventSource source = new(eventStream);
-                        TaskCompletionSource completionSource =
-                            new(TaskCreationOptions.RunContinuationsAsynchronously);
+                        TaskCompletionSource completionSource = new(
+                            TaskCreationOptions.RunContinuationsAsynchronously
+                        );
 
                         source.Dynamic.All += (TraceEvent traceEvent) =>
                         {

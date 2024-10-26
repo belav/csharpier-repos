@@ -31,18 +31,17 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         HashSet<string> UnnamedLabelNames
     );
 
-    private readonly Stack<StackFrame> _stack =
-        new(
-            new[]
-            {
-                new StackFrame(
-                    new Dictionary<ParameterExpression, string>(),
-                    new HashSet<string>(),
-                    new Dictionary<LabelTarget, string>(),
-                    new HashSet<string>()
-                ),
-            }
-        );
+    private readonly Stack<StackFrame> _stack = new(
+        new[]
+        {
+            new StackFrame(
+                new Dictionary<ParameterExpression, string>(),
+                new HashSet<string>(),
+                new Dictionary<LabelTarget, string>(),
+                new HashSet<string>()
+            ),
+        }
+    );
 
     private int _unnamedParameterCounter;
 
@@ -53,13 +52,12 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         List<LocalDeclarationStatementSyntax> UnassignedVariableDeclarations
     );
 
-    private LiftedState _liftedState =
-        new(
-            new List<StatementSyntax>(),
-            new Dictionary<ParameterExpression, string>(),
-            new HashSet<string>(),
-            new List<LocalDeclarationStatementSyntax>()
-        );
+    private LiftedState _liftedState = new(
+        new List<StatementSyntax>(),
+        new Dictionary<ParameterExpression, string>(),
+        new HashSet<string>(),
+        new List<LocalDeclarationStatementSyntax>()
+    );
 
     private ExpressionContext _context;
     private bool _onLastLambdaLine;

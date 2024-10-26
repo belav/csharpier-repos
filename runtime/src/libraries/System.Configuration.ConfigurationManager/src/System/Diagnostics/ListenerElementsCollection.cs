@@ -91,22 +91,24 @@ namespace System.Diagnostics
 
     internal sealed class ListenerElement : TypedElement
     {
-        private static readonly ConfigurationProperty s_propFilter =
-            new("filter", typeof(FilterElement), null, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty s_propName =
-            new(
-                "name",
-                typeof(string),
-                null,
-                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
-            );
-        private static readonly ConfigurationProperty s_propOutputOpts =
-            new(
-                "traceOutputOptions",
-                typeof(TraceOptions),
-                TraceOptions.None,
-                ConfigurationPropertyOptions.None
-            );
+        private static readonly ConfigurationProperty s_propFilter = new(
+            "filter",
+            typeof(FilterElement),
+            null,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty s_propName = new(
+            "name",
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        );
+        private static readonly ConfigurationProperty s_propOutputOpts = new(
+            "traceOutputOptions",
+            typeof(TraceOptions),
+            TraceOptions.None,
+            ConfigurationPropertyOptions.None
+        );
 
         private readonly ConfigurationProperty _propListenerTypeName;
         private readonly bool _allowReferences;

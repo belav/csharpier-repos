@@ -1868,13 +1868,12 @@ public class EmitterTests
         LanguageVersion languageVersion = LanguageVersion.Preview
     )
     {
-        List<Assembly> refAssemblies =
-            new()
-            {
-                Assembly.GetAssembly(typeof(RequiredAttribute)),
-                Assembly.GetAssembly(typeof(OptionsValidatorAttribute)),
-                Assembly.GetAssembly(typeof(IValidateOptions<object>)),
-            };
+        List<Assembly> refAssemblies = new()
+        {
+            Assembly.GetAssembly(typeof(RequiredAttribute)),
+            Assembly.GetAssembly(typeof(OptionsValidatorAttribute)),
+            Assembly.GetAssembly(typeof(IValidateOptions<object>)),
+        };
 
         if (refAssembly is not null)
         {

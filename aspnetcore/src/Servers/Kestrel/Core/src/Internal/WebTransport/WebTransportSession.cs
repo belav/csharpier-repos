@@ -31,17 +31,16 @@ internal sealed class WebTransportSession : IWebTransportSession
     private readonly Http3Stream _connectStream = default!;
     private bool _isClosing;
 
-    private static readonly ReadOnlyMemory<byte> OutputStreamHeader =
-        new(
-            new byte[]
-            {
-                0x40 /*quic variable-length integer length*/
-                ,
-                (byte)Http3StreamType.WebTransportUnidirectional,
-                0x00 /*body*/
-                ,
-            }
-        );
+    private static readonly ReadOnlyMemory<byte> OutputStreamHeader = new(
+        new byte[]
+        {
+            0x40 /*quic variable-length integer length*/
+            ,
+            (byte)Http3StreamType.WebTransportUnidirectional,
+            0x00 /*body*/
+            ,
+        }
+    );
 
     internal const string WebTransportProtocolValue = "webtransport";
     internal const string VersionEnabledIndicator = "1";

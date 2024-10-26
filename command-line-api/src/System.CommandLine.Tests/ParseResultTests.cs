@@ -49,8 +49,10 @@ namespace System.CommandLine.Tests
         [Fact]
         public void GetResult_can_be_used_for_root_command_itself()
         {
-            CliRootCommand rootCommand =
-                new() { new CliCommand("the-command") { new CliOption<int>("-c") } };
+            CliRootCommand rootCommand = new()
+            {
+                new CliCommand("the-command") { new CliOption<int>("-c") },
+            };
 
             var result = rootCommand.Parse("the-command -c 123");
 

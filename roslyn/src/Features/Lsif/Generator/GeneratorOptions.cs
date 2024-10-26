@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
         BlockStructureOptions BlockStructureOptions
     )
     {
-        public static readonly GeneratorOptions Default =
-            new(SymbolDescriptionOptions.Default, BlockStructureOptions.Default);
+        public static readonly GeneratorOptions Default = new(
+            SymbolDescriptionOptions.Default,
+            BlockStructureOptions.Default
+        );
     }
 }

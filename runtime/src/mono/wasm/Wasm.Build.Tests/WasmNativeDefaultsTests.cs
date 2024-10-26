@@ -26,16 +26,15 @@ namespace Wasm.Build.Tests
             bool
         > SettingDifferentFromValuesInRuntimePack(bool forPublish)
         {
-            List<(string propertyName, bool defaultValueInRuntimePack)> defaults =
-                new()
-                {
-                    ("WasmEnableLegacyJsInterop", true),
-                    ("WasmEnableSIMD", true),
-                    ("WasmEnableExceptionHandling", true),
-                    ("InvariantTimezone", false),
-                    ("InvariantGlobalization", false),
-                    // ("WasmNativeStrip", true) -- tested separately because it has special handling in targets
-                };
+            List<(string propertyName, bool defaultValueInRuntimePack)> defaults = new()
+            {
+                ("WasmEnableLegacyJsInterop", true),
+                ("WasmEnableSIMD", true),
+                ("WasmEnableExceptionHandling", true),
+                ("InvariantTimezone", false),
+                ("InvariantGlobalization", false),
+                // ("WasmNativeStrip", true) -- tested separately because it has special handling in targets
+            };
 
             TheoryData<string, string, bool, bool, bool> data = new();
 
@@ -79,30 +78,29 @@ namespace Wasm.Build.Tests
 
         public static TheoryData<string, string, bool, bool, bool> DefaultsTestData(bool forPublish)
         {
-            TheoryData<string, string, bool, bool, bool> data =
-                new()
+            TheoryData<string, string, bool, bool, bool> data = new()
+            {
+                /* relink by default for publish+Release */
                 {
-                    /* relink by default for publish+Release */
-                    {
-                        "Release",
-                        "", /*aot*/
-                        false, /*build*/
-                        false, /*publish*/
-                        true
-                    },
-                    /* NO relink by default for publish+Release, when not trimming */
-                    {
-                        "Release",
-                        "<PublishTrimmed>false</PublishTrimmed>", /*aot*/
-                        false, /*build*/
-                        false, /*publish*/
-                        false
-                    },
+                    "Release",
+                    "", /*aot*/
+                    false, /*build*/
+                    false, /*publish*/
+                    true
+                },
+                /* NO relink by default for publish+Release, when not trimming */
+                {
+                    "Release",
+                    "<PublishTrimmed>false</PublishTrimmed>", /*aot*/
+                    false, /*build*/
+                    false, /*publish*/
+                    false
+                },
 
-                    /* When not trimming, and no-aot, we don't relink. But WasmNativeStrip=false should still trigger it*/
-                    // { "Release",   "<WasmNativeStrip>false</WasmNativeStrip><PublishTrimmed>false</PublishTrimmed>",
-                    //    /*aot*/ false,   /*build*/ true,  /*publish*/      true }
-                };
+                /* When not trimming, and no-aot, we don't relink. But WasmNativeStrip=false should still trigger it*/
+                // { "Release",   "<WasmNativeStrip>false</WasmNativeStrip><PublishTrimmed>false</PublishTrimmed>",
+                //    /*aot*/ false,   /*build*/ true,  /*publish*/      true }
+            };
 
             if (!forPublish)
             {
@@ -421,8 +419,13 @@ namespace Wasm.Build.Tests
                 )
                 + "</Target>";
 
-            BuildArgs buildArgs =
-                new(ProjectName: projectName, Config: config, AOT: aot, string.Empty, null);
+            BuildArgs buildArgs = new(
+                ProjectName: projectName,
+                Config: config,
+                AOT: aot,
+                string.Empty,
+                null
+            );
             buildArgs = ExpandBuildArgs(
                 buildArgs,
                 extraProperties: extraProperties,

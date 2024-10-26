@@ -36,8 +36,13 @@ public class WasmSdkBasedProjectProvider : ProjectProviderBase
         AssertBundleOptionsBase assertOptions
     )
     {
-        SortedSet<string> res =
-            new() { "dotnet.js", "dotnet.native.wasm", "dotnet.native.js", "dotnet.runtime.js" };
+        SortedSet<string> res = new()
+        {
+            "dotnet.js",
+            "dotnet.native.wasm",
+            "dotnet.native.js",
+            "dotnet.runtime.js",
+        };
         if (assertOptions.RuntimeType is RuntimeVariant.MultiThreaded)
         {
             res.Add("dotnet.native.worker.js");

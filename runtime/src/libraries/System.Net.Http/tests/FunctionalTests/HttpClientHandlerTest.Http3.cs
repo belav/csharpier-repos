@@ -80,14 +80,13 @@ namespace System.Net.Http.Functional.Tests
                 handler.MaxResponseHeadersLength = headerSizeLimit;
 
                 using HttpClient client = CreateHttpClient(handler);
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
                 using HttpResponseMessage response = await client.SendAsync(request);
             });
 
@@ -122,14 +121,13 @@ namespace System.Net.Http.Functional.Tests
 
                 for (int i = 0; i < streamLimit + 1; ++i)
                 {
-                    HttpRequestMessage request =
-                        new()
-                        {
-                            Method = HttpMethod.Get,
-                            RequestUri = server.Address,
-                            Version = HttpVersion30,
-                            VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        };
+                    HttpRequestMessage request = new()
+                    {
+                        Method = HttpMethod.Get,
+                        RequestUri = server.Address,
+                        Version = HttpVersion30,
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    };
                     using var response = await client
                         .SendAsync(request)
                         .WaitAsync(TimeSpan.FromSeconds(10));
@@ -171,14 +169,13 @@ namespace System.Net.Http.Functional.Tests
                     streamLimit,
                     i =>
                     {
-                        HttpRequestMessage request =
-                            new()
-                            {
-                                Method = HttpMethod.Get,
-                                RequestUri = server.Address,
-                                Version = HttpVersion30,
-                                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                            };
+                        HttpRequestMessage request = new()
+                        {
+                            Method = HttpMethod.Get,
+                            RequestUri = server.Address,
+                            Version = HttpVersion30,
+                            VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                        };
 
                         tasks[i] = client.SendAsync(request);
                     }
@@ -255,24 +252,23 @@ namespace System.Net.Http.Functional.Tests
                     streamLimit,
                     i =>
                     {
-                        HttpRequestMessage request =
-                            new()
-                            {
-                                Method = HttpMethod.Post,
-                                RequestUri = server.Address,
-                                Version = HttpVersion30,
-                                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                                Content = new StreamContent(
-                                    new DelegateStream(
-                                        canReadFunc: () => true,
-                                        readFunc: (buffer, offset, count) =>
-                                        {
-                                            countdown.Signal();
-                                            return 0;
-                                        }
-                                    )
-                                ),
-                            };
+                        HttpRequestMessage request = new()
+                        {
+                            Method = HttpMethod.Post,
+                            RequestUri = server.Address,
+                            Version = HttpVersion30,
+                            VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                            Content = new StreamContent(
+                                new DelegateStream(
+                                    canReadFunc: () => true,
+                                    readFunc: (buffer, offset, count) =>
+                                    {
+                                        countdown.Signal();
+                                        return 0;
+                                    }
+                                )
+                            ),
+                        };
 
                         tasks[i] = client.SendAsync(request);
                     }
@@ -282,24 +278,23 @@ namespace System.Net.Http.Functional.Tests
                 countdown.Wait();
 
                 // Fire out the last request, that should wait until the server fully handles at least one request.
-                HttpRequestMessage last =
-                    new()
-                    {
-                        Method = HttpMethod.Post,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = new StreamContent(
-                            new DelegateStream(
-                                canReadFunc: () => true,
-                                readFunc: (buffer, offset, count) =>
-                                {
-                                    lastRequestContentStarted.SetResult();
-                                    return 0;
-                                }
-                            )
-                        ),
-                    };
+                HttpRequestMessage last = new()
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    Content = new StreamContent(
+                        new DelegateStream(
+                            canReadFunc: () => true,
+                            readFunc: (buffer, offset, count) =>
+                            {
+                                lastRequestContentStarted.SetResult();
+                                return 0;
+                            }
+                        )
+                    ),
+                };
                 var lastTask = client.SendAsync(last);
 
                 // Wait for all requests to finish. Whether the last request was pending is checked on the server side.
@@ -346,14 +341,13 @@ namespace System.Net.Http.Functional.Tests
             Task clientTask = Task.Run(async () =>
             {
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 await AssertProtocolErrorAsync(
                     UnexpectedFrameErrorCode,
@@ -384,14 +378,13 @@ namespace System.Net.Http.Functional.Tests
             Task clientTask = Task.Run(async () =>
             {
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 await AssertProtocolErrorAsync(
                     GeneralProtocolError,
@@ -425,14 +418,13 @@ namespace System.Net.Http.Functional.Tests
             Task clientTask = Task.Run(async () =>
             {
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 await AssertProtocolErrorAsync(
                     GeneralProtocolError,
@@ -479,14 +471,13 @@ namespace System.Net.Http.Functional.Tests
             Task clientTask = Task.Run(async () =>
             {
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
             });
@@ -519,14 +510,13 @@ namespace System.Net.Http.Functional.Tests
             Task clientTask = Task.Run(async () =>
             {
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 var response = await client.SendAsync(
                     request,
@@ -583,14 +573,13 @@ namespace System.Net.Http.Functional.Tests
             Task clientTask = Task.Run(async () =>
             {
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 var response = await client.SendAsync(
                     request,
@@ -634,15 +623,14 @@ namespace System.Net.Http.Functional.Tests
             {
                 StreamingHttpContent requestContent = new StreamingHttpContent();
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    Content = requestContent,
+                };
 
                 var responseTask = client.SendAsync(
                     request,
@@ -703,20 +691,19 @@ namespace System.Net.Http.Functional.Tests
             Task clientTask = Task.Run(async () =>
             {
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = new ByteAtATimeContent(
-                            60 * 4,
-                            Task.CompletedTask,
-                            new TaskCompletionSource<bool>(),
-                            250
-                        ),
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    Content = new ByteAtATimeContent(
+                        60 * 4,
+                        Task.CompletedTask,
+                        new TaskCompletionSource<bool>(),
+                        250
+                    ),
+                };
 
                 var response = await client.SendAsync(
                     request,
@@ -815,15 +802,14 @@ namespace System.Net.Http.Functional.Tests
                 StreamingHttpContent requestContent = new StreamingHttpContent();
 
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Post,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    Content = requestContent,
+                };
 
                 Task<HttpResponseMessage> responseTask = client.SendAsync(request);
 
@@ -860,14 +846,13 @@ namespace System.Net.Http.Functional.Tests
             Task clientTask = Task.Run(async () =>
             {
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 using HttpResponseMessage response = await client.SendAsync(request);
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -1075,14 +1060,13 @@ namespace System.Net.Http.Functional.Tests
             {
                 using HttpClient client = CreateHttpClient();
 
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
                 HttpResponseMessage response = await client
                     .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                     .WaitAsync(TimeSpan.FromSeconds(10));
@@ -1181,14 +1165,13 @@ namespace System.Net.Http.Functional.Tests
             {
                 using HttpClient client = CreateHttpClient();
 
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
                 HttpResponseMessage response = await client
                     .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                     .WaitAsync(TimeSpan.FromSeconds(20));
@@ -1247,14 +1230,13 @@ namespace System.Net.Http.Functional.Tests
             });
 
             using HttpClient client = CreateHttpClient();
-            using HttpRequestMessage request =
-                new()
-                {
-                    Method = HttpMethod.Get,
-                    RequestUri = server.Address,
-                    Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                };
+            using HttpRequestMessage request = new()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = server.Address,
+                Version = HttpVersion30,
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+            };
             HttpResponseMessage response = await client
                 .SendAsync(request)
                 .WaitAsync(TimeSpan.FromSeconds(10));
@@ -1310,27 +1292,25 @@ namespace System.Net.Http.Functional.Tests
                         },
                     }
                 );
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(
                     async () => await client.SendAsync(request, cts.Token)
                 );
 
                 // Next call must succeed
-                using HttpRequestMessage request2 =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request2 = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
                 await client.SendAsync(request2);
             });
 
@@ -1355,14 +1335,13 @@ namespace System.Net.Http.Functional.Tests
             });
 
             using HttpClient client = CreateHttpClient();
-            using HttpRequestMessage request =
-                new()
-                {
-                    Method = HttpMethod.Get,
-                    RequestUri = server.Address,
-                    Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                };
+            using HttpRequestMessage request = new()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = server.Address,
+                Version = HttpVersion30,
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+            };
 
             HttpResponseMessage response = await client
                 .SendAsync(request)
@@ -1392,14 +1371,13 @@ namespace System.Net.Http.Functional.Tests
             {
                 using HttpClient client = CreateHttpClient();
 
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
                     () => client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
@@ -1420,22 +1398,20 @@ namespace System.Net.Http.Functional.Tests
             using Http3LoopbackServer server = CreateHttp3LoopbackServer(options);
 
             using HttpClient client = CreateHttpClient();
-            using HttpRequestMessage request =
-                new()
-                {
-                    Method = HttpMethod.Get,
-                    RequestUri = server.Address,
-                    Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                };
-            using HttpRequestMessage request2 =
-                new()
-                {
-                    Method = HttpMethod.Get,
-                    RequestUri = server.Address,
-                    Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                };
+            using HttpRequestMessage request = new()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = server.Address,
+                Version = HttpVersion30,
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+            };
+            using HttpRequestMessage request2 = new()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = server.Address,
+                Version = HttpVersion30,
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+            };
             HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
                 () => client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
             );
@@ -1491,14 +1467,13 @@ namespace System.Net.Http.Functional.Tests
             });
 
             using HttpClient client = CreateHttpClient();
-            using HttpRequestMessage request =
-                new()
-                {
-                    Method = HttpMethod.Get,
-                    RequestUri = server.Address,
-                    Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                };
+            using HttpRequestMessage request = new()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = server.Address,
+                Version = HttpVersion30,
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+            };
             HttpResponseMessage response = await client
                 .SendAsync(request)
                 .WaitAsync(TimeSpan.FromSeconds(10));
@@ -1558,15 +1533,14 @@ namespace System.Net.Http.Functional.Tests
             StreamingHttpContent requestContent = new StreamingHttpContent();
 
             using HttpClient client = CreateHttpClient();
-            using HttpRequestMessage request =
-                new()
-                {
-                    Method = HttpMethod.Post,
-                    RequestUri = server.Address,
-                    Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = requestContent,
-                };
+            using HttpRequestMessage request = new()
+            {
+                Method = HttpMethod.Post,
+                RequestUri = server.Address,
+                Version = HttpVersion30,
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                Content = requestContent,
+            };
 
             var responseTask = client
                 .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
@@ -1644,15 +1618,14 @@ namespace System.Net.Http.Functional.Tests
 
                 using HttpClient client = CreateHttpClient();
                 client.Timeout = TimeSpan.FromSeconds(10); // set some timeout; big enough to send headers and first chunk of content
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Post,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    Content = requestContent,
+                };
 
                 var responseTask = client.SendAsync(request);
 
@@ -1720,15 +1693,14 @@ namespace System.Net.Http.Functional.Tests
                 StreamingHttpContent requestContent = new StreamingHttpContent();
 
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Post,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    Content = requestContent,
+                };
 
                 var cts = new CancellationTokenSource();
 
@@ -1808,15 +1780,14 @@ namespace System.Net.Http.Functional.Tests
                 StreamingHttpContent requestContent = new StreamingHttpContent();
 
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Post,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    Content = requestContent,
+                };
 
                 var cts = new CancellationTokenSource();
 
@@ -1903,15 +1874,14 @@ namespace System.Net.Http.Functional.Tests
                 StreamingHttpContent requestContent = new StreamingHttpContent();
 
                 using HttpClient client = CreateHttpClient();
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Post,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    Content = requestContent,
+                };
 
                 var cts = new CancellationTokenSource();
 
@@ -1993,14 +1963,13 @@ namespace System.Net.Http.Functional.Tests
             {
                 using HttpClient client = CreateHttpClient();
 
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 using HttpResponseMessage response = await client.SendAsync(request);
 
@@ -2081,14 +2050,13 @@ namespace System.Net.Http.Functional.Tests
             {
                 using HttpClient client = CreateHttpClient();
 
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 await AssertProtocolErrorAsync(
                     Http3LoopbackConnection.H3_CLOSED_CRITICAL_STREAM,
@@ -2128,14 +2096,13 @@ namespace System.Net.Http.Functional.Tests
             {
                 using HttpClient client = CreateHttpClient();
 
-                using HttpRequestMessage request =
-                    new()
-                    {
-                        Method = HttpMethod.Get,
-                        RequestUri = server.Address,
-                        Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    };
+                using HttpRequestMessage request = new()
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = server.Address,
+                    Version = HttpVersion30,
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                };
 
                 await AssertProtocolErrorAsync(
                     Http3LoopbackConnection.H3_CLOSED_CRITICAL_STREAM,

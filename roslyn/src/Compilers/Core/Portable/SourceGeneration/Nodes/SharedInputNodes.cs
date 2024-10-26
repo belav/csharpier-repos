@@ -19,11 +19,10 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray.Create(b.Compilation)
         );
 
-        public static readonly InputNode<CompilationOptions> CompilationOptions =
-            new(
-                b => ImmutableArray.Create(b.Compilation.Options),
-                ReferenceEqualityComparer.Instance
-            );
+        public static readonly InputNode<CompilationOptions> CompilationOptions = new(
+            b => ImmutableArray.Create(b.Compilation.Options),
+            ReferenceEqualityComparer.Instance
+        );
 
         public static readonly InputNode<ParseOptions> ParseOptions = new InputNode<ParseOptions>(
             b => ImmutableArray.Create(b.DriverState.ParseOptions)

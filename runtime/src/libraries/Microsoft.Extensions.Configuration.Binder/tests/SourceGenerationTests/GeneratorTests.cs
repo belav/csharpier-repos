@@ -242,17 +242,16 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
                 }
                 """;
 
-            HashSet<Type> exclusions =
-                new()
-                {
-                    typeof(CultureInfo),
-                    typeof(IServiceCollection),
-                    typeof(IDictionary),
-                    typeof(ServiceCollection),
-                    typeof(OptionsBuilder<>),
-                    typeof(OptionsConfigurationServiceCollectionExtensions),
-                    typeof(Uri),
-                };
+            HashSet<Type> exclusions = new()
+            {
+                typeof(CultureInfo),
+                typeof(IServiceCollection),
+                typeof(IDictionary),
+                typeof(ServiceCollection),
+                typeof(OptionsBuilder<>),
+                typeof(OptionsConfigurationServiceCollectionExtensions),
+                typeof(Uri),
+            };
 
             await Test(expectOutput: true);
 

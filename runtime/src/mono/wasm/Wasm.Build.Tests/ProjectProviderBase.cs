@@ -373,19 +373,18 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
         bool unchanged
     )
     {
-        List<string> files =
-            new()
-            {
-                Path.Combine(paths.BinDir, "publish", $"{buildArgs.ProjectName}.dll"),
-                Path.Combine(paths.ObjWasmDir, "driver.o"),
-                Path.Combine(paths.ObjWasmDir, "corebindings.o"),
-                Path.Combine(paths.ObjWasmDir, "pinvoke.o"),
-                Path.Combine(paths.ObjWasmDir, "icall-table.h"),
-                Path.Combine(paths.ObjWasmDir, "pinvoke-table.h"),
-                Path.Combine(paths.ObjWasmDir, "driver-gen.c"),
-                Path.Combine(paths.BundleDir, "_framework", "dotnet.native.wasm"),
-                Path.Combine(paths.BundleDir, "_framework", "dotnet.native.js"),
-            };
+        List<string> files = new()
+        {
+            Path.Combine(paths.BinDir, "publish", $"{buildArgs.ProjectName}.dll"),
+            Path.Combine(paths.ObjWasmDir, "driver.o"),
+            Path.Combine(paths.ObjWasmDir, "corebindings.o"),
+            Path.Combine(paths.ObjWasmDir, "pinvoke.o"),
+            Path.Combine(paths.ObjWasmDir, "icall-table.h"),
+            Path.Combine(paths.ObjWasmDir, "pinvoke-table.h"),
+            Path.Combine(paths.ObjWasmDir, "driver-gen.c"),
+            Path.Combine(paths.BundleDir, "_framework", "dotnet.native.wasm"),
+            Path.Combine(paths.BundleDir, "_framework", "dotnet.native.js"),
+        };
 
         if (buildArgs.AOT)
         {

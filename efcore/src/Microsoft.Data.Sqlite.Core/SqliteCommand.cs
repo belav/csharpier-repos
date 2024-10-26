@@ -28,8 +28,9 @@ namespace Microsoft.Data.Sqlite
     {
         private SqliteParameterCollection? _parameters;
 
-        private readonly List<(sqlite3_stmt Statement, int ParamCount)> _preparedStatements =
-            new(1);
+        private readonly List<(sqlite3_stmt Statement, int ParamCount)> _preparedStatements = new(
+            1
+        );
         private SqliteConnection? _connection;
         private string _commandText = string.Empty;
         private bool _prepared;

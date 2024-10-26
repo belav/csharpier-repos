@@ -17,23 +17,25 @@ namespace Microsoft.CodeAnalysis.Options
         private static string UnescapeLineBreaks(string str) =>
             str.Replace("\r", "\\r").Replace("\n", "\\n");
 
-        private static readonly EditorConfigValueSerializer<bool> s_bool =
-            new(parseValue: ParseBoolean, serializeValue: SerializeBoolean);
+        private static readonly EditorConfigValueSerializer<bool> s_bool = new(
+            parseValue: ParseBoolean,
+            serializeValue: SerializeBoolean
+        );
 
-        private static readonly EditorConfigValueSerializer<int> s_int32 =
-            new(
-                parseValue: str => int.TryParse(str, out var result) ? result : new Optional<int>(),
-                serializeValue: StringExtensions.GetNumeral
-            );
+        private static readonly EditorConfigValueSerializer<int> s_int32 = new(
+            parseValue: str => int.TryParse(str, out var result) ? result : new Optional<int>(),
+            serializeValue: StringExtensions.GetNumeral
+        );
 
-        private static readonly EditorConfigValueSerializer<string> s_string =
-            new(parseValue: str => EscapeLineBreaks(str), serializeValue: UnescapeLineBreaks);
+        private static readonly EditorConfigValueSerializer<string> s_string = new(
+            parseValue: str => EscapeLineBreaks(str),
+            serializeValue: UnescapeLineBreaks
+        );
 
-        private static readonly EditorConfigValueSerializer<bool?> s_nullableBoolean =
-            new(
-                parseValue: ParseNullableBoolean,
-                serializeValue: value => value == null ? "null" : SerializeBoolean(value.Value)
-            );
+        private static readonly EditorConfigValueSerializer<bool?> s_nullableBoolean = new(
+            parseValue: ParseNullableBoolean,
+            serializeValue: value => value == null ? "null" : SerializeBoolean(value.Value)
+        );
 
         private static Optional<bool> ParseBoolean(string str) =>
             bool.TryParse(str, out var result) ? result : new Optional<bool>();

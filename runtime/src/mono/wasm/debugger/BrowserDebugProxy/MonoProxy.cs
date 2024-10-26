@@ -2005,18 +2005,17 @@ namespace Microsoft.WebAssembly.Diagnostics
                 }
                 string bpId =
                     $"auto:{method.StartLocation.Line}:{method.StartLocation.Column}:{sourceFile.DotNetUrlEscaped}";
-                BreakpointRequest request =
-                    new(
-                        bpId,
-                        JObject.FromObject(
-                            new
-                            {
-                                lineNumber = method.StartLocation.Line,
-                                columnNumber = method.StartLocation.Column,
-                                url = sourceFile.Url,
-                            }
-                        )
-                    );
+                BreakpointRequest request = new(
+                    bpId,
+                    JObject.FromObject(
+                        new
+                        {
+                            lineNumber = method.StartLocation.Line,
+                            columnNumber = method.StartLocation.Column,
+                            url = sourceFile.Url,
+                        }
+                    )
+                );
                 context.BreakpointRequests[bpId] = request;
                 if (request.TryResolve(sourceFile))
                     await SetBreakpoint(

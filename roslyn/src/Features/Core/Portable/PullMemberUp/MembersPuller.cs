@@ -32,10 +32,12 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp
         /// Annotation used to mark imports that we move over, so that we can remove these imports if they are unnecessary
         /// (and so we don't remove any other unnecessary imports)
         /// </summary>
-        private static readonly SyntaxAnnotation s_removableImportAnnotation =
-            new("PullMemberRemovableImport");
-        private static readonly SyntaxAnnotation s_destinationNodeAnnotation =
-            new("DestinationNode");
+        private static readonly SyntaxAnnotation s_removableImportAnnotation = new(
+            "PullMemberRemovableImport"
+        );
+        private static readonly SyntaxAnnotation s_destinationNodeAnnotation = new(
+            "DestinationNode"
+        );
 
         public static CodeAction TryComputeCodeAction(
             Document document,

@@ -144,13 +144,12 @@ namespace System.Formats.Tar.Tests
 
             List<TarEntry> entries = new List<TarEntry>();
 
-            FileStreamOptions readOptions =
-                new()
-                {
-                    Access = FileAccess.Read,
-                    Mode = FileMode.Open,
-                    Options = FileOptions.Asynchronous,
-                };
+            FileStreamOptions readOptions = new()
+            {
+                Access = FileAccess.Read,
+                Mode = FileMode.Open,
+                Options = FileOptions.Asynchronous,
+            };
 
             await using (FileStream fileStream = File.Open(destinationArchiveFileName, readOptions))
             {
@@ -214,13 +213,12 @@ namespace System.Formats.Tar.Tests
                     includeBaseDirectory: true
                 );
 
-                FileStreamOptions readOptions =
-                    new()
-                    {
-                        Access = FileAccess.Read,
-                        Mode = FileMode.Open,
-                        Options = FileOptions.Asynchronous,
-                    };
+                FileStreamOptions readOptions = new()
+                {
+                    Access = FileAccess.Read,
+                    Mode = FileMode.Open,
+                    Options = FileOptions.Asynchronous,
+                };
 
                 await using (
                     FileStream fileStream = File.Open(destinationArchiveFileName, readOptions)
@@ -262,13 +260,12 @@ namespace System.Formats.Tar.Tests
                     includeBaseDirectory
                 );
 
-                FileStreamOptions readOptions =
-                    new()
-                    {
-                        Access = FileAccess.Read,
-                        Mode = FileMode.Open,
-                        Options = FileOptions.Asynchronous,
-                    };
+                FileStreamOptions readOptions = new()
+                {
+                    Access = FileAccess.Read,
+                    Mode = FileMode.Open,
+                    Options = FileOptions.Asynchronous,
+                };
 
                 await using (
                     FileStream fileStream = File.Open(destinationArchiveFileName, readOptions)

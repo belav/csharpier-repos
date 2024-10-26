@@ -19,8 +19,9 @@ namespace Microsoft.AspNetCore.SignalR.Internal;
 internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub>
     where THub : Hub
 {
-    private readonly Dictionary<string, HubMethodDescriptor> _methods =
-        new(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, HubMethodDescriptor> _methods = new(
+        StringComparer.OrdinalIgnoreCase
+    );
     private readonly Utf8HashLookup _cachedMethodNames = new();
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly IHubContext<THub> _hubContext;

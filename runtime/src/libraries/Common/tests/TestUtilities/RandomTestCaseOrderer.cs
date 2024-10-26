@@ -17,8 +17,10 @@ public class RandomTestCaseOrderer : ITestCaseOrderer
 {
     public const string RandomSeedEnvironmentVariableName = "XUNIT_RANDOM_ORDER_SEED";
 
-    public static readonly Lazy<int> LazySeed =
-        new(GetSeed, LazyThreadSafetyMode.ExecutionAndPublication);
+    public static readonly Lazy<int> LazySeed = new(
+        GetSeed,
+        LazyThreadSafetyMode.ExecutionAndPublication
+    );
     private readonly IMessageSink _diagnosticMessageSink;
 
     private static int GetSeed()

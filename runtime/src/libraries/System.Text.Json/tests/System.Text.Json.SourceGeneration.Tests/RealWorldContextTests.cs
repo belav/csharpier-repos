@@ -273,8 +273,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             const string ExpectedJson = "{\"Property\":42}";
 
-            ClassWithCustomConverterProperty obj =
-                new() { Property = new ClassWithCustomConverterProperty.NestedPoco { Value = 42 } };
+            ClassWithCustomConverterProperty obj = new()
+            {
+                Property = new ClassWithCustomConverterProperty.NestedPoco { Value = 42 },
+            };
 
             // Types with properties in custom converters do not support fast path serialization.
             Assert.True(DefaultContext.ClassWithCustomConverterProperty.SerializeHandler is null);
@@ -393,8 +395,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             const string ExpectedJson = "{\"Property\":42}";
 
-            StructWithCustomConverterProperty obj =
-                new() { Property = new ClassWithCustomConverterProperty.NestedPoco { Value = 42 } };
+            StructWithCustomConverterProperty obj = new()
+            {
+                Property = new ClassWithCustomConverterProperty.NestedPoco { Value = 42 },
+            };
 
             // Types with properties in custom converters do not support fast path serialization.
             Assert.True(DefaultContext.StructWithCustomConverterProperty.SerializeHandler is null);
@@ -430,8 +434,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             const string Json = "{\"MyEnum\":\"One\"}";
 
-            ClassWithCustomConverterFactoryProperty obj =
-                new() { MyEnum = SourceGenSampleEnum.One };
+            ClassWithCustomConverterFactoryProperty obj = new()
+            {
+                MyEnum = SourceGenSampleEnum.One,
+            };
 
             if (DefaultContext.JsonSourceGenerationMode == JsonSourceGenerationMode.Serialization)
             {
@@ -477,8 +483,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             const string Json = "{\"MyEnum\":\"One\"}";
 
-            StructWithCustomConverterFactoryProperty obj =
-                new() { MyEnum = SourceGenSampleEnum.One };
+            StructWithCustomConverterFactoryProperty obj = new()
+            {
+                MyEnum = SourceGenSampleEnum.One,
+            };
 
             if (DefaultContext.JsonSourceGenerationMode == JsonSourceGenerationMode.Serialization)
             {
@@ -883,8 +891,10 @@ namespace System.Text.Json.SourceGeneration.Tests
             IndexViewModel index = CreateIndexViewModel();
             CampaignSummaryViewModel campaignSummary = CreateCampaignSummaryViewModel();
 
-            JsonSerializerOptions options =
-                new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            JsonSerializerOptions options = new()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
             ITestContext context = _contextCreator(options);
 
             string json = JsonSerializer.Serialize(
@@ -911,8 +921,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public virtual void SerializeObjectArray_SimpleTypes_WithCustomOptions()
         {
-            JsonSerializerOptions options =
-                new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            JsonSerializerOptions options = new()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
             ITestContext context = _contextCreator(options);
 
             string json = JsonSerializer.Serialize(
@@ -976,8 +988,11 @@ namespace System.Text.Json.SourceGeneration.Tests
         public void ConstructingFromOptionsKeepsReference()
         {
             JsonStringEnumConverter converter = new();
-            JsonSerializerOptions options =
-                new() { PropertyNameCaseInsensitive = true, Converters = { converter } };
+            JsonSerializerOptions options = new()
+            {
+                PropertyNameCaseInsensitive = true,
+                Converters = { converter },
+            };
 
             JsonSerializerContext context = (JsonSerializerContext)_contextCreator(options);
             Assert.Same(options, context.Options);

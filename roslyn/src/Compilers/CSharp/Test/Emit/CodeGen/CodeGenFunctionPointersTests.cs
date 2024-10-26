@@ -13284,19 +13284,14 @@ public unsafe class C
 "
             );
 
-            List<DiagnosticDescription> diagnostics =
-                new()
-                {
-                    // (10,39): error CS8786: Calling convention of 'C.M()' is not compatible with 'Default'.
-                    //         delegate*<void> ptrManaged = &M;
-                    Diagnostic(
-                            ErrorCode.ERR_WrongFuncPtrCallingConvention,
-                            "M",
-                            isSuppressed: false
-                        )
-                        .WithArguments("C.M()", "Default")
-                        .WithLocation(10, 39),
-                };
+            List<DiagnosticDescription> diagnostics = new()
+            {
+                // (10,39): error CS8786: Calling convention of 'C.M()' is not compatible with 'Default'.
+                //         delegate*<void> ptrManaged = &M;
+                Diagnostic(ErrorCode.ERR_WrongFuncPtrCallingConvention, "M", isSuppressed: false)
+                    .WithArguments("C.M()", "Default")
+                    .WithLocation(10, 39),
+            };
 
             if (diagnosticToSkip != 1)
             {

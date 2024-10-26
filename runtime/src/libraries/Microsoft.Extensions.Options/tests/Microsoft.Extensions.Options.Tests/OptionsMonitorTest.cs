@@ -518,16 +518,15 @@ namespace Microsoft.Extensions.Options.Tests
         {
             using AutoResetEvent @event = new(initialState: false);
 
-            OptionsMonitor<FakeOptions> monitor =
-                new(
-                    // WaitHandleConfigureOptions makes instance configuration slow enough to force a race condition
-                    new OptionsFactory<FakeOptions>(
-                        new[] { new WaitHandleConfigureOptions(@event) },
-                        Enumerable.Empty<IPostConfigureOptions<FakeOptions>>()
-                    ),
-                    Enumerable.Empty<IOptionsChangeTokenSource<FakeOptions>>(),
-                    new OptionsCache<FakeOptions>()
-                );
+            OptionsMonitor<FakeOptions> monitor = new(
+                // WaitHandleConfigureOptions makes instance configuration slow enough to force a race condition
+                new OptionsFactory<FakeOptions>(
+                    new[] { new WaitHandleConfigureOptions(@event) },
+                    Enumerable.Empty<IPostConfigureOptions<FakeOptions>>()
+                ),
+                Enumerable.Empty<IOptionsChangeTokenSource<FakeOptions>>(),
+                new OptionsCache<FakeOptions>()
+            );
 
             using Barrier barrier = new(participantCount: 2);
             Task<FakeOptions>[] instanceTasks = Enumerable

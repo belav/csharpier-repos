@@ -501,15 +501,11 @@ namespace System.IO.Pipes.Tests
         )
         {
             AnonymousPipeServerStream server = new(serverDirection);
-            FileStream client =
-                new(
-                    new SafeFileHandle(
-                        nint.Parse(server.GetClientHandleAsString()),
-                        ownsHandle: true
-                    ),
-                    clientAccess,
-                    0
-                );
+            FileStream client = new(
+                new SafeFileHandle(nint.Parse(server.GetClientHandleAsString()), ownsHandle: true),
+                clientAccess,
+                0
+            );
 
             return (server, client);
         }
@@ -525,8 +521,13 @@ namespace System.IO.Pipes.Tests
         {
             PipeOptions options = asyncHandles ? PipeOptions.Asynchronous : PipeOptions.None;
             string pipeName = PipeStreamConformanceTests.GetUniquePipeName();
-            NamedPipeServerStream server =
-                new(pipeName, serverDirection, 1, PipeTransmissionMode.Byte, options);
+            NamedPipeServerStream server = new(
+                pipeName,
+                serverDirection,
+                1,
+                PipeTransmissionMode.Byte,
+                options
+            );
             NamedPipeClientStream client = new(".", pipeName, clientDirection, options);
 
             await Task.WhenAll(client.ConnectAsync(), server.WaitForConnectionAsync());
@@ -552,17 +553,21 @@ namespace System.IO.Pipes.Tests
                     ? FileOptions.Asynchronous
                     : FileOptions.None;
                 string pipeName = PipeStreamConformanceTests.GetUniquePipeName();
-                NamedPipeServerStream server =
-                    new(pipeName, serverDirection, 1, PipeTransmissionMode.Byte, pipeOptions);
-                FileStream client =
-                    new(
-                        $@"\\.\pipe\{pipeName}",
-                        FileMode.Open,
-                        clientAccess,
-                        FileShare.None,
-                        0,
-                        fileOptions
-                    );
+                NamedPipeServerStream server = new(
+                    pipeName,
+                    serverDirection,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    pipeOptions
+                );
+                FileStream client = new(
+                    $@"\\.\pipe\{pipeName}",
+                    FileMode.Open,
+                    clientAccess,
+                    FileShare.None,
+                    0,
+                    fileOptions
+                );
 
                 await server.WaitForConnectionAsync();
 
@@ -577,16 +582,15 @@ namespace System.IO.Pipes.Tests
                         clientAccess == FileAccess.Read ? PipeDirection.In : PipeDirection.Out
                     );
 
-                FileStream fileStreamClient =
-                    new(
-                        new SafeFileHandle(
-                            namedPipeClient.SafePipeHandle.DangerousGetHandle(),
-                            ownsHandle: true
-                        ),
-                        clientAccess,
-                        bufferSize: 0,
-                        isAsync: false
-                    );
+                FileStream fileStreamClient = new(
+                    new SafeFileHandle(
+                        namedPipeClient.SafePipeHandle.DangerousGetHandle(),
+                        ownsHandle: true
+                    ),
+                    clientAccess,
+                    bufferSize: 0,
+                    isAsync: false
+                );
 
                 namedPipeClient.SafePipeHandle.SetHandleAsInvalid();
 

@@ -89,8 +89,11 @@ internal sealed class WasiEngineHost
 
         args.AddRange(_args.AppArgs);
 
-        ProcessStartInfo psi =
-            new() { FileName = engineBinary, WorkingDirectory = _args.CommonConfig.AppPath };
+        ProcessStartInfo psi = new()
+        {
+            FileName = engineBinary,
+            WorkingDirectory = _args.CommonConfig.AppPath,
+        };
 
         foreach (string? arg in args)
             psi.ArgumentList.Add(arg!);

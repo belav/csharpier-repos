@@ -95,8 +95,9 @@ namespace Microsoft.Interop.Analyzers
                     );
                 }
 
-                Dictionary<INamedTypeSymbol, INamedTypeSymbol> partiallyUpdatedSymbols =
-                    new(SymbolEqualityComparer.Default);
+                Dictionary<INamedTypeSymbol, INamedTypeSymbol> partiallyUpdatedSymbols = new(
+                    SymbolEqualityComparer.Default
+                );
 
                 SymbolEditor symbolEditor = SymbolEditor.Create(fixAllContext.Solution);
 
@@ -383,10 +384,14 @@ namespace Microsoft.Interop.Analyzers
                 marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
 
             // Use a lazy factory for the type syntaxes to avoid re-checking the various methods and reconstructing the syntax.
-            Lazy<SyntaxNode> unmanagedTypeSyntax =
-                new(CreateUnmanagedTypeSyntax, isThreadSafe: false);
-            Lazy<ITypeSymbol> managedElementTypeSymbol =
-                new(CreateManagedElementTypeSymbol, isThreadSafe: false);
+            Lazy<SyntaxNode> unmanagedTypeSyntax = new(
+                CreateUnmanagedTypeSyntax,
+                isThreadSafe: false
+            );
+            Lazy<ITypeSymbol> managedElementTypeSymbol = new(
+                CreateManagedElementTypeSymbol,
+                isThreadSafe: false
+            );
 
             List<SyntaxNode> newMembers = new();
 
@@ -721,10 +726,14 @@ namespace Microsoft.Interop.Analyzers
                 marshallerType.GetAllTypeArgumentsIncludingInContainingTypes();
 
             // Use a lazy factory for the type syntaxes to avoid re-checking the various methods and reconstructing the syntax.
-            Lazy<SyntaxNode> unmanagedTypeSyntax =
-                new(CreateUnmanagedTypeSyntax, isThreadSafe: false);
-            Lazy<ITypeSymbol> managedElementTypeSymbol =
-                new(CreateManagedElementTypeSymbol, isThreadSafe: false);
+            Lazy<SyntaxNode> unmanagedTypeSyntax = new(
+                CreateUnmanagedTypeSyntax,
+                isThreadSafe: false
+            );
+            Lazy<ITypeSymbol> managedElementTypeSymbol = new(
+                CreateManagedElementTypeSymbol,
+                isThreadSafe: false
+            );
 
             List<SyntaxNode> newMembers = new();
 

@@ -26,30 +26,28 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Progression
     [ExportLanguageService(typeof(IProgressionLanguageService), LanguageNames.CSharp), Shared]
     internal partial class CSharpProgressionLanguageService : IProgressionLanguageService
     {
-        private static readonly SymbolDisplayFormat s_descriptionFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeContainingType,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeType
-                    | SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat s_descriptionFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeContainingType,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
-        private static readonly SymbolDisplayFormat s_labelFormat =
-            new(
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeType
-                    | SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
-                delegateStyle: SymbolDisplayDelegateStyle.NameAndParameters,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat s_labelFormat = new(
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
+            delegateStyle: SymbolDisplayDelegateStyle.NameAndParameters,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

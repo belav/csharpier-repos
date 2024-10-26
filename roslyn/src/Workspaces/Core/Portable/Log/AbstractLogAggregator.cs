@@ -26,8 +26,10 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         /// types is they prevent the runtime from sharing the same JITted code for each different generic instantiation. In this case,
         /// the cost of boxing is cheaper than the cost of the extra JIT.
         /// </remarks>
-        private readonly ConcurrentDictionary<object, TValue> _map =
-            new(concurrencyLevel: 2, capacity: 2);
+        private readonly ConcurrentDictionary<object, TValue> _map = new(
+            concurrencyLevel: 2,
+            capacity: 2
+        );
         private readonly Func<object, TValue> _createCounter;
 
         protected AbstractLogAggregator()

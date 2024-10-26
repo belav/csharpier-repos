@@ -20,8 +20,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
     )
     {
         private readonly EmbeddedLanguageInfo Info = info;
-        private readonly HashSet<string> LanguageIdentifiers =
-            new(languageIdentifiers, StringComparer.OrdinalIgnoreCase);
+        private readonly HashSet<string> LanguageIdentifiers = new(
+            languageIdentifiers,
+            StringComparer.OrdinalIgnoreCase
+        );
         private readonly EmbeddedLanguageCommentDetector _commentDetector = commentDetector;
 
         /// <summary>

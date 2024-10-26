@@ -498,8 +498,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         /// any bug by a project adding the wrong output path means we could end up with some duplication.
         /// In that case, we'll temporarily have two until (hopefully) somebody removes it.
         /// </summary>
-        private readonly Dictionary<string, List<ProjectId>> _projectsByOutputPath =
-            new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, List<ProjectId>> _projectsByOutputPath = new(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public void AddProjectOutputPath_NoLock(
             SolutionChangeAccumulator solutionChanges,

@@ -250,10 +250,13 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
 
     public class SqlServerStringsTypeMappingSource : RelationalTypeMappingSource
     {
-        private readonly SqlServerStringTypeMapping _fixedLengthUnicodeString =
-            new(unicode: true, fixedLength: true);
-        private readonly SqlServerStringTypeMapping _variableLengthUnicodeString =
-            new(unicode: true);
+        private readonly SqlServerStringTypeMapping _fixedLengthUnicodeString = new(
+            unicode: true,
+            fixedLength: true
+        );
+        private readonly SqlServerStringTypeMapping _variableLengthUnicodeString = new(
+            unicode: true
+        );
         private readonly SqlServerStringTypeMapping _fixedLengthAnsiString = new(fixedLength: true);
         private readonly SqlServerStringTypeMapping _variableLengthAnsiString = new();
         private readonly Dictionary<string, RelationalTypeMapping> _storeTypeMappings;

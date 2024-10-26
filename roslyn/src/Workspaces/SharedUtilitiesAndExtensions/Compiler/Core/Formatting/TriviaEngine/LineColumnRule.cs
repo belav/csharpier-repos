@@ -38,15 +38,14 @@ namespace Microsoft.CodeAnalysis.Formatting
                 indentation == null ? Indentation : indentation.Value
             );
 
-        public static readonly LineColumnRule Preserve =
-            new(
-                SpaceOperations.Preserve,
-                LineOperations.Preserve,
-                IndentationOperations.Preserve,
-                lines: 0,
-                spaces: 0,
-                indentation: 0
-            );
+        public static readonly LineColumnRule Preserve = new(
+            SpaceOperations.Preserve,
+            LineOperations.Preserve,
+            IndentationOperations.Preserve,
+            lines: 0,
+            spaces: 0,
+            indentation: 0
+        );
 
         public static LineColumnRule PreserveWithGivenSpaces(int spaces) =>
             new(
@@ -91,15 +90,14 @@ namespace Microsoft.CodeAnalysis.Formatting
                 indentation
             );
 
-        public static readonly LineColumnRule PreserveLinesWithFollowingPrecedingIndentation =
-            new(
-                SpaceOperations.Preserve,
-                LineOperations.Preserve,
-                IndentationOperations.Follow,
-                lines: -1,
-                spaces: 0,
-                indentation: -1
-            );
+        public static readonly LineColumnRule PreserveLinesWithFollowingPrecedingIndentation = new(
+            SpaceOperations.Preserve,
+            LineOperations.Preserve,
+            IndentationOperations.Follow,
+            lines: -1,
+            spaces: 0,
+            indentation: -1
+        );
 
         public static LineColumnRule ForceSpaces(int spaces) =>
             new(

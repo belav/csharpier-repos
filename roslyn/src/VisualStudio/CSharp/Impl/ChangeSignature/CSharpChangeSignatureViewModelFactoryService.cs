@@ -25,8 +25,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ChangeSignature
     internal class CSharpChangeSignatureViewModelFactoryService
         : ChangeSignatureViewModelFactoryService
     {
-        private static readonly CSharpParseOptions s_langVersionLatestParseOptions =
-            new(LanguageVersion.Preview);
+        private static readonly CSharpParseOptions s_langVersionLatestParseOptions = new(
+            LanguageVersion.Preview
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

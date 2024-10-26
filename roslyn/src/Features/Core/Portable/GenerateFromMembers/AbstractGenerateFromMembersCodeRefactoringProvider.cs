@@ -154,13 +154,12 @@ namespace Microsoft.CodeAnalysis.GenerateFromMembers
             return parameters.ToImmutable();
         }
 
-        protected static readonly SymbolDisplayFormat SimpleFormat =
-            new(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        protected static readonly SymbolDisplayFormat SimpleFormat = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeType,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
     }
 }

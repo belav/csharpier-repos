@@ -236,8 +236,11 @@ namespace System.IO.Compression.Tests
             using (var tempFolder = new TempDirectory())
             {
                 string filename = Path.Combine(tempFolder.Path, Path.GetRandomFileName());
-                FileStreamOptions fileStreamOptions =
-                    new() { Access = FileAccess.Write, Mode = FileMode.CreateNew };
+                FileStreamOptions fileStreamOptions = new()
+                {
+                    Access = FileAccess.Write,
+                    Mode = FileMode.CreateNew,
+                };
                 if (expectedPermissions != null)
                 {
                     fileStreamOptions.UnixCreateMode = (UnixFileMode)

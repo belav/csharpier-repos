@@ -480,18 +480,17 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Values_can_be_correctly_converted_to_Uri_when_custom_parser_is_provided()
         {
-            CliOption<Uri> option =
-                new("-x")
-                {
-                    CustomParser = (argumentResult) =>
-                        Uri.TryCreate(
-                            argumentResult.Tokens.Last().Value,
-                            UriKind.RelativeOrAbsolute,
-                            out var uri
-                        )
-                            ? uri
-                            : null,
-                };
+            CliOption<Uri> option = new("-x")
+            {
+                CustomParser = (argumentResult) =>
+                    Uri.TryCreate(
+                        argumentResult.Tokens.Last().Value,
+                        UriKind.RelativeOrAbsolute,
+                        out var uri
+                    )
+                        ? uri
+                        : null,
+            };
 
             GetValue(option, "-x http://example.com")
                 .Should()
@@ -548,12 +547,11 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Values_can_be_correctly_converted_to_ipaddress_when_custom_parser_is_provided()
         {
-            CliOption<IPAddress> option =
-                new("-us")
-                {
-                    CustomParser = (argumentResult) =>
-                        IPAddress.Parse(argumentResult.Tokens.Last().Value),
-                };
+            CliOption<IPAddress> option = new("-us")
+            {
+                CustomParser = (argumentResult) =>
+                    IPAddress.Parse(argumentResult.Tokens.Last().Value),
+            };
 
             GetValue(option, "-us 1.2.3.4").Should().Be(IPAddress.Parse("1.2.3.4"));
         }
@@ -562,12 +560,11 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Values_can_be_correctly_converted_to_ipendpoint_when_custom_parser_is_provided()
         {
-            CliOption<IPEndPoint> option =
-                new("-us")
-                {
-                    CustomParser = (argumentResult) =>
-                        IPEndPoint.Parse(argumentResult.Tokens.Last().Value),
-                };
+            CliOption<IPEndPoint> option = new("-us")
+            {
+                CustomParser = (argumentResult) =>
+                    IPEndPoint.Parse(argumentResult.Tokens.Last().Value),
+            };
 
             GetValue(option, "-us 1.2.3.4:56").Should().Be(IPEndPoint.Parse("1.2.3.4:56"));
         }

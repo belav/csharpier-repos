@@ -154,21 +154,20 @@ internal static class DiagnosticDescriptors
         )
     );
 
-    public static readonly DiagnosticDescriptor ComponentParametersShouldBeAutoProperties =
-        new(
-            "BL0007",
-            new LocalizableResourceString(
-                nameof(Resources.ComponentParametersShouldBeAutoProperties_Title),
-                Resources.ResourceManager,
-                typeof(Resources)
-            ),
-            new LocalizableResourceString(
-                nameof(Resources.ComponentParametersShouldBeAutoProperties_Message),
-                Resources.ResourceManager,
-                typeof(Resources)
-            ),
-            "Usage",
-            DiagnosticSeverity.Warning,
-            isEnabledByDefault: true
-        );
+    public static readonly DiagnosticDescriptor ComponentParametersShouldBeAutoProperties = new(
+        "BL0007",
+        new LocalizableResourceString(
+            nameof(Resources.ComponentParametersShouldBeAutoProperties_Title),
+            Resources.ResourceManager,
+            typeof(Resources)
+        ),
+        new LocalizableResourceString(
+            nameof(Resources.ComponentParametersShouldBeAutoProperties_Message),
+            Resources.ResourceManager,
+            typeof(Resources)
+        ),
+        "Usage",
+        DiagnosticSeverity.Warning,
+        isEnabledByDefault: true
+    );
 }

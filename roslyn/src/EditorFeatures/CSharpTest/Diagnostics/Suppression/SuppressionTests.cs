@@ -1243,15 +1243,14 @@ class Class
             {
                 private class UserDiagnosticAnalyzer : DiagnosticAnalyzer
                 {
-                    public static readonly DiagnosticDescriptor Descriptor =
-                        new(
-                            "InfoDiagnostic",
-                            "InfoDiagnostic",
-                            "InfoDiagnostic",
-                            "InfoDiagnostic",
-                            DiagnosticSeverity.Info,
-                            isEnabledByDefault: true
-                        );
+                    public static readonly DiagnosticDescriptor Descriptor = new(
+                        "InfoDiagnostic",
+                        "InfoDiagnostic",
+                        "InfoDiagnostic",
+                        "InfoDiagnostic",
+                        DiagnosticSeverity.Info,
+                        isEnabledByDefault: true
+                    );
 
                     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
                     {
@@ -2330,15 +2329,14 @@ using System.Diagnostics.CodeAnalysis;
             {
                 private class UserDiagnosticAnalyzer : DiagnosticAnalyzer
                 {
-                    private readonly DiagnosticDescriptor _descriptor =
-                        new(
-                            "InfoDiagnostic",
-                            "InfoDiagnostic",
-                            "InfoDiagnostic",
-                            "InfoDiagnostic",
-                            DiagnosticSeverity.Info,
-                            isEnabledByDefault: true
-                        );
+                    private readonly DiagnosticDescriptor _descriptor = new(
+                        "InfoDiagnostic",
+                        "InfoDiagnostic",
+                        "InfoDiagnostic",
+                        "InfoDiagnostic",
+                        DiagnosticSeverity.Info,
+                        isEnabledByDefault: true
+                    );
 
                     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                         ImmutableArray.Create(_descriptor);
@@ -2780,15 +2778,14 @@ namespace ClassLibrary10
         {
             private class UserDiagnosticAnalyzer : DiagnosticAnalyzer
             {
-                public static readonly DiagnosticDescriptor Descriptor =
-                    new(
-                        "NoLocationDiagnostic",
-                        "NoLocationDiagnostic",
-                        "NoLocationDiagnostic",
-                        "NoLocationDiagnostic",
-                        DiagnosticSeverity.Info,
-                        isEnabledByDefault: true
-                    );
+                public static readonly DiagnosticDescriptor Descriptor = new(
+                    "NoLocationDiagnostic",
+                    "NoLocationDiagnostic",
+                    "NoLocationDiagnostic",
+                    "NoLocationDiagnostic",
+                    DiagnosticSeverity.Info,
+                    isEnabledByDefault: true
+                );
 
                 public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                     ImmutableArray.Create(Descriptor);

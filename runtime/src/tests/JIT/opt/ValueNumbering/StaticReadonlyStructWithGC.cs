@@ -34,18 +34,17 @@ public class StaticReadonlyStructWithGC
             throw new Exception("Test9 failed");
     }
 
-    static readonly MyStruct MyStructFld =
-        new()
-        {
-            A = "A",
-            B = 111111.ToString(), // non-literal
-            C = new MyStruct2 { A = "AA" },
-            D = typeof(int),
-            E = () => 42,
-            F = new MyStruct3 { A = typeof(double), B = typeof(string) },
-            G = new int[0],
-            H = null,
-        };
+    static readonly MyStruct MyStructFld = new()
+    {
+        A = "A",
+        B = 111111.ToString(), // non-literal
+        C = new MyStruct2 { A = "AA" },
+        D = typeof(int),
+        E = () => 42,
+        F = new MyStruct3 { A = typeof(double), B = typeof(string) },
+        G = new int[0],
+        H = null,
+    };
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool Test1() => MyStructFld.A == "A";

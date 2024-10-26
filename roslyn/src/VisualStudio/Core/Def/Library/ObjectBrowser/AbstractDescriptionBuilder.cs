@@ -22,8 +22,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private readonly ObjectListItem _listItem;
         private readonly Project _project;
 
-        private static readonly SymbolDisplayFormat s_typeDisplay =
-            new(miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+        private static readonly SymbolDisplayFormat s_typeDisplay = new(
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         protected AbstractDescriptionBuilder(
             IVsObjectBrowserDescription3 description,

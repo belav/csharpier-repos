@@ -26,17 +26,16 @@ internal class ChromeProvider : WasmHostProvider
     static readonly Regex s_parseConnection = new(@"listening on (ws?s://[^\s]*)");
     private WebSocket? _ideWebSocket;
     private DebuggerProxy? _debuggerProxy;
-    private static readonly Lazy<string> s_browserPath =
-        new(() =>
-        {
-            string artifactsBinDir = Path.Combine(
-                Path.GetDirectoryName(typeof(ChromeProvider).Assembly.Location)!,
-                "..",
-                "..",
-                ".."
-            );
-            return BrowserLocator.FindChrome(artifactsBinDir, "BROWSER_PATH_FOR_TESTS");
-        });
+    private static readonly Lazy<string> s_browserPath = new(() =>
+    {
+        string artifactsBinDir = Path.Combine(
+            Path.GetDirectoryName(typeof(ChromeProvider).Assembly.Location)!,
+            "..",
+            "..",
+            ".."
+        );
+        return BrowserLocator.FindChrome(artifactsBinDir, "BROWSER_PATH_FOR_TESTS");
+    });
     private static readonly string[] s_messagesToFilterOut = new[]
     {
         "Received unexpected number of handles",

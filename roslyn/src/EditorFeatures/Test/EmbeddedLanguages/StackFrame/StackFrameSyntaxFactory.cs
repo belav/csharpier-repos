@@ -121,8 +121,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.EmbeddedLanguages.StackFrame
         );
 
         public static readonly StackFrameConstructorNode Constructor = new(ConstructorToken);
-        public static readonly StackFrameConstructorNode StaticConstructor =
-            new(StaticConstructorToken);
+        public static readonly StackFrameConstructorNode StaticConstructor = new(
+            StaticConstructorToken
+        );
 
         public static readonly StackFrameParameterList EmptyParams = ParameterList(
             OpenParenToken,

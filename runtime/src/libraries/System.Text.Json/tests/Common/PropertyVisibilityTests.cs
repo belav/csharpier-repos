@@ -3415,18 +3415,17 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task JsonIgnoreCondition_Polymorphic()
         {
-            ConcreteDerivedClass obj =
-                new()
-                {
-                    Abstract_Ignored_Property = -1,
-                    Virtual_Ignored_Property = -1,
-                    Abstract_IgnoredOnConcrete_Property = -1,
-                    Virtual_IgnoredOnConcrete_Property = -1,
-                    Abstract_IgnoredOnBase_Property = 1,
-                    Virtual_IgnoredOnBase_Property = 2,
-                    Abstract_Property = 3,
-                    Virtual_Property = 4,
-                };
+            ConcreteDerivedClass obj = new()
+            {
+                Abstract_Ignored_Property = -1,
+                Virtual_Ignored_Property = -1,
+                Abstract_IgnoredOnConcrete_Property = -1,
+                Virtual_IgnoredOnConcrete_Property = -1,
+                Abstract_IgnoredOnBase_Property = 1,
+                Virtual_IgnoredOnBase_Property = 2,
+                Abstract_Property = 3,
+                Virtual_Property = 4,
+            };
 
             // Verify properties work as expected.
             Assert.Equal(-1, obj.Abstract_Ignored_Property);

@@ -186,8 +186,11 @@ namespace ILLink.RoslynAnalyzer
                 {
                     foreach (var operationBlock in context.OperationBlocks)
                     {
-                        TrimDataFlowAnalysis trimDataFlowAnalysis =
-                            new(context, dataFlowAnalyzerContext, operationBlock);
+                        TrimDataFlowAnalysis trimDataFlowAnalysis = new(
+                            context,
+                            dataFlowAnalyzerContext,
+                            operationBlock
+                        );
                         trimDataFlowAnalysis.InterproceduralAnalyze();
                         foreach (var diagnostic in trimDataFlowAnalysis.CollectDiagnostics())
                             context.ReportDiagnostic(diagnostic);

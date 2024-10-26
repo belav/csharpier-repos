@@ -291,8 +291,11 @@ namespace System.Reflection
                 copyOfArgs = new(ref Unsafe.AsRef<object?>(pStorage), _argCount);
                 regArgStorage = new((void**)pStorage, (uint)_argCount, areByRefs: false);
                 IntPtr* pByRefStorage = pStorage + _argCount;
-                GCFrameRegistration regByRefStorage =
-                    new((void**)pByRefStorage, (uint)_argCount, areByRefs: true);
+                GCFrameRegistration regByRefStorage = new(
+                    (void**)pByRefStorage,
+                    (uint)_argCount,
+                    areByRefs: true
+                );
                 shouldCopyBack = new Span<bool>(pStorage + _argCount * 2, _argCount);
 
                 try

@@ -18,21 +18,20 @@ public class TokenReplacementTests
 
         string receivedToken = null;
 
-        CliConfiguration config =
-            new(command)
+        CliConfiguration config = new(command)
+        {
+            ResponseFileTokenReplacer = (
+                string tokenToReplace,
+                out IReadOnlyList<string> tokens,
+                out string message
+            ) =>
             {
-                ResponseFileTokenReplacer = (
-                    string tokenToReplace,
-                    out IReadOnlyList<string> tokens,
-                    out string message
-                ) =>
-                {
-                    receivedToken = tokenToReplace;
-                    tokens = null;
-                    message = "oops!";
-                    return false;
-                },
-            };
+                receivedToken = tokenToReplace;
+                tokens = null;
+                message = "oops!";
+                return false;
+            },
+        };
 
         command.Parse("@replace-me", config);
 
@@ -46,20 +45,19 @@ public class TokenReplacementTests
 
         var command = new CliRootCommand { argument };
 
-        CliConfiguration config =
-            new(command)
+        CliConfiguration config = new(command)
+        {
+            ResponseFileTokenReplacer = (
+                string tokenToReplace,
+                out IReadOnlyList<string> tokens,
+                out string message
+            ) =>
             {
-                ResponseFileTokenReplacer = (
-                    string tokenToReplace,
-                    out IReadOnlyList<string> tokens,
-                    out string message
-                ) =>
-                {
-                    tokens = new[] { "123" };
-                    message = null;
-                    return true;
-                },
-            };
+                tokens = new[] { "123" };
+                message = null;
+                return true;
+            },
+        };
 
         var result = command.Parse("@replace-me", config);
 
@@ -75,20 +73,19 @@ public class TokenReplacementTests
 
         var command = new CliRootCommand { option };
 
-        CliConfiguration config =
-            new(command)
+        CliConfiguration config = new(command)
+        {
+            ResponseFileTokenReplacer = (
+                string tokenToReplace,
+                out IReadOnlyList<string> tokens,
+                out string message
+            ) =>
             {
-                ResponseFileTokenReplacer = (
-                    string tokenToReplace,
-                    out IReadOnlyList<string> tokens,
-                    out string message
-                ) =>
-                {
-                    tokens = new[] { "123" };
-                    message = null;
-                    return true;
-                },
-            };
+                tokens = new[] { "123" };
+                message = null;
+                return true;
+            },
+        };
 
         var result = command.Parse("-x @replace-me", config);
 
@@ -104,20 +101,19 @@ public class TokenReplacementTests
 
         var command = new CliRootCommand { new CliCommand("subcommand") { option } };
 
-        CliConfiguration config =
-            new(command)
+        CliConfiguration config = new(command)
+        {
+            ResponseFileTokenReplacer = (
+                string tokenToReplace,
+                out IReadOnlyList<string> tokens,
+                out string message
+            ) =>
             {
-                ResponseFileTokenReplacer = (
-                    string tokenToReplace,
-                    out IReadOnlyList<string> tokens,
-                    out string message
-                ) =>
-                {
-                    tokens = new[] { "subcommand", "-x", "123" };
-                    message = null;
-                    return true;
-                },
-            };
+                tokens = new[] { "subcommand", "-x", "123" };
+                message = null;
+                return true;
+            },
+        };
 
         var result = command.Parse("@replace-me", config);
 
@@ -133,20 +129,19 @@ public class TokenReplacementTests
 
         var command = new CliRootCommand { argument };
 
-        CliConfiguration config =
-            new(command)
+        CliConfiguration config = new(command)
+        {
+            ResponseFileTokenReplacer = (
+                string tokenToReplace,
+                out IReadOnlyList<string> tokens,
+                out string message
+            ) =>
             {
-                ResponseFileTokenReplacer = (
-                    string tokenToReplace,
-                    out IReadOnlyList<string> tokens,
-                    out string message
-                ) =>
-                {
-                    tokens = new[] { "one two three" };
-                    message = null;
-                    return true;
-                },
-            };
+                tokens = new[] { "one two three" };
+                message = null;
+                return true;
+            },
+        };
 
         var result = command.Parse("@replace-me", config);
 
@@ -160,20 +155,19 @@ public class TokenReplacementTests
 
         var command = new CliRootCommand { argument };
 
-        CliConfiguration config =
-            new(command)
+        CliConfiguration config = new(command)
+        {
+            ResponseFileTokenReplacer = (
+                string tokenToReplace,
+                out IReadOnlyList<string> tokens,
+                out string message
+            ) =>
             {
-                ResponseFileTokenReplacer = (
-                    string tokenToReplace,
-                    out IReadOnlyList<string> tokens,
-                    out string message
-                ) =>
-                {
-                    tokens = null;
-                    message = "oops!";
-                    return false;
-                },
-            };
+                tokens = null;
+                message = "oops!";
+                return false;
+            },
+        };
 
         var result = command.Parse("@replace-me", config);
 
@@ -187,20 +181,19 @@ public class TokenReplacementTests
 
         var command = new CliRootCommand { argument };
 
-        CliConfiguration config =
-            new(command)
+        CliConfiguration config = new(command)
+        {
+            ResponseFileTokenReplacer = (
+                string tokenToReplace,
+                out IReadOnlyList<string> tokens,
+                out string message
+            ) =>
             {
-                ResponseFileTokenReplacer = (
-                    string tokenToReplace,
-                    out IReadOnlyList<string> tokens,
-                    out string message
-                ) =>
-                {
-                    tokens = null;
-                    message = null;
-                    return false;
-                },
-            };
+                tokens = null;
+                message = null;
+                return false;
+            },
+        };
 
         var result = command.Parse("@replace-me", config);
 
@@ -216,20 +209,19 @@ public class TokenReplacementTests
 
         var command = new CliRootCommand { argument };
 
-        CliConfiguration config =
-            new(command)
+        CliConfiguration config = new(command)
+        {
+            ResponseFileTokenReplacer = (
+                string tokenToReplace,
+                out IReadOnlyList<string> tokens,
+                out string message
+            ) =>
             {
-                ResponseFileTokenReplacer = (
-                    string tokenToReplace,
-                    out IReadOnlyList<string> tokens,
-                    out string message
-                ) =>
-                {
-                    tokens = null;
-                    message = null;
-                    return true;
-                },
-            };
+                tokens = null;
+                message = null;
+                return true;
+            },
+        };
 
         var result = command.Parse("@replace-me", config);
 
@@ -245,20 +237,19 @@ public class TokenReplacementTests
 
         var command = new CliRootCommand { argument };
 
-        CliConfiguration config =
-            new(command)
+        CliConfiguration config = new(command)
+        {
+            ResponseFileTokenReplacer = (
+                string tokenToReplace,
+                out IReadOnlyList<string> tokens,
+                out string message
+            ) =>
             {
-                ResponseFileTokenReplacer = (
-                    string tokenToReplace,
-                    out IReadOnlyList<string> tokens,
-                    out string message
-                ) =>
-                {
-                    tokens = Array.Empty<string>();
-                    message = null;
-                    return true;
-                },
-            };
+                tokens = Array.Empty<string>();
+                message = null;
+                return true;
+            },
+        };
 
         var result = command.Parse("@replace-me", config);
 

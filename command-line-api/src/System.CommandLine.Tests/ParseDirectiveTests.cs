@@ -112,12 +112,11 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task When_there_are_errors_then_diagram_directive_sets_exit_code_to_custom_value()
         {
-            CliRootCommand command =
-                new()
-                {
-                    new CliOption<int>("-x"),
-                    new DiagramDirective { ParseErrorReturnValue = 42 },
-                };
+            CliRootCommand command = new()
+            {
+                new CliOption<int>("-x"),
+                new DiagramDirective { ParseErrorReturnValue = 42 },
+            };
 
             CliConfiguration config = new(command) { Output = new StringWriter() };
 

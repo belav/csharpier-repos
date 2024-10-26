@@ -27,8 +27,9 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
     /// </summary>
     public static readonly int DefaultOrder = 10000;
 
-    private static readonly ParameterBindingMethodCache ParameterBindingMethodCache =
-        new(throwOnInvalidMethod: false);
+    private static readonly ParameterBindingMethodCache ParameterBindingMethodCache = new(
+        throwOnInvalidMethod: false
+    );
 
     private int? _hashCode;
     private IReadOnlyList<ModelMetadata>? _boundProperties;
