@@ -1,20 +1,19 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 namespace System.Data.Services.Client
 {
     using System;
     using System.Diagnostics;
-
-#if !ASTORIA_LIGHT    
+#if !ASTORIA_LIGHT
     using System.Net;
 #else
     using System.Data.Services.Http;
@@ -59,7 +58,13 @@ namespace System.Data.Services.Client
             this.userState = state;
         }
 
-        internal delegate TResult Func<T1, T2, T3, T4, T5, TResult>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, T5 arg5);
+        internal delegate TResult Func<T1, T2, T3, T4, T5, TResult>(
+            T1 arg1,
+            T2 arg2,
+            T3 arg3,
+            T4 arg4,
+            T5 arg5
+        );
 
         #region IAsyncResult implmentation - AsyncState, AsyncWaitHandle, CompletedSynchronously, IsCompleted
 
@@ -74,10 +79,16 @@ namespace System.Data.Services.Client
             get
             {
                 if (null == this.asyncWait)
-                {                    System.Threading.Interlocked.CompareExchange(ref this.asyncWait, new System.Threading.ManualResetEvent(this.IsCompleted), null);
+                {
+                    System.Threading.Interlocked.CompareExchange(
+                        ref this.asyncWait,
+                        new System.Threading.ManualResetEvent(this.IsCompleted),
+                        null
+                    );
 
                     if (this.IsCompleted)
-                    {                        this.SetAsyncWaitHandle();
+                    {
+                        this.SetAsyncWaitHandle();
                     }
                 }
 
@@ -110,16 +121,13 @@ namespace System.Data.Services.Client
 
         internal WebRequest Abortable
         {
-            get
-            {
-                return this.abortable;
-            }
-
+            get { return this.abortable; }
             set
             {
                 this.abortable = value;
                 if ((null != value) && this.IsAborted)
-                {                    value.Abort();
+                {
+                    value.Abort();
                 }
             }
         }
@@ -129,7 +137,8 @@ namespace System.Data.Services.Client
             get { return this.failure; }
         }
 
-        internal static T EndExecute<T>(object source, string method, IAsyncResult asyncResult) where T : BaseAsyncResult
+        internal static T EndExecute<T>(object source, string method, IAsyncResult asyncResult)
+            where T : BaseAsyncResult
         {
             Util.CheckArgumentNull(asyncResult, "asyncResult");
 
@@ -139,10 +148,15 @@ namespace System.Data.Services.Client
                 throw Error.Argument(Strings.Context_DidNotOriginateAsync, "asyncResult");
             }
 
-            Debug.Assert((result.CompletedSynchronously && result.IsCompleted) || !result.CompletedSynchronously, "CompletedSynchronously && !IsCompleted");
+            Debug.Assert(
+                (result.CompletedSynchronously && result.IsCompleted)
+                    || !result.CompletedSynchronously,
+                "CompletedSynchronously && !IsCompleted"
+            );
 
             if (!result.IsCompleted)
-            {                result.AsyncWaitHandle.WaitOne();
+            {
+                result.AsyncWaitHandle.WaitOne();
 
                 Debug.Assert(result.IsCompleted, "not completed after waiting");
             }
@@ -154,7 +168,11 @@ namespace System.Data.Services.Client
 
             if (null != result.asyncWait)
             {
-                System.Threading.Interlocked.CompareExchange(ref result.asyncWaitDisposeLock, new object(), null);
+                System.Threading.Interlocked.CompareExchange(
+                    ref result.asyncWaitDisposeLock,
+                    new object(),
+                    null
+                );
                 lock (result.asyncWaitDisposeLock)
                 {
                     result.asyncWaitDisposed = true;
@@ -174,29 +192,56 @@ namespace System.Data.Services.Client
                     throw result.Failure;
                 }
 
-                throw Error.InvalidOperation(Strings.DataServiceException_GeneralError, result.Failure);
+                throw Error.InvalidOperation(
+                    Strings.DataServiceException_GeneralError,
+                    result.Failure
+                );
             }
 
             return result;
         }
 
-        internal static IAsyncResult InvokeAsync(Func<AsyncCallback, object, IAsyncResult> asyncAction, AsyncCallback callback, object state)
+        internal static IAsyncResult InvokeAsync(
+            Func<AsyncCallback, object, IAsyncResult> asyncAction,
+            AsyncCallback callback,
+            object state
+        )
         {
-            IAsyncResult asyncResult = asyncAction(BaseAsyncResult.GetDataServiceAsyncCallback(callback), state);
+            IAsyncResult asyncResult = asyncAction(
+                BaseAsyncResult.GetDataServiceAsyncCallback(callback),
+                state
+            );
             return PostInvokeAsync(asyncResult, callback);
         }
 
-        internal static IAsyncResult InvokeAsync(Func<byte[], int, int, AsyncCallback, object, IAsyncResult> asyncAction, byte[] buffer, int offset, int length, AsyncCallback callback, object state)
+        internal static IAsyncResult InvokeAsync(
+            Func<byte[], int, int, AsyncCallback, object, IAsyncResult> asyncAction,
+            byte[] buffer,
+            int offset,
+            int length,
+            AsyncCallback callback,
+            object state
+        )
         {
-            IAsyncResult asyncResult = asyncAction(buffer, offset, length, BaseAsyncResult.GetDataServiceAsyncCallback(callback), state);
+            IAsyncResult asyncResult = asyncAction(
+                buffer,
+                offset,
+                length,
+                BaseAsyncResult.GetDataServiceAsyncCallback(callback),
+                state
+            );
             return PostInvokeAsync(asyncResult, callback);
         }
 
         internal void HandleCompleted()
         {
-            if (this.IsCompletedInternally && (System.Threading.Interlocked.Exchange(ref this.userNotified, 1) == 0))
+            if (
+                this.IsCompletedInternally
+                && (System.Threading.Interlocked.Exchange(ref this.userNotified, 1) == 0)
+            )
             {
-                this.abortable = null;                try
+                this.abortable = null;
+                try
                 {
                     if (!Util.DoNotHandleException(this.Failure))
                     {
@@ -216,8 +261,13 @@ namespace System.Data.Services.Client
 
                     this.SetAsyncWaitHandle();
 
-                    if ((null != this.userCallback) && !(this.Failure is System.Threading.ThreadAbortException) && !(this.Failure is System.StackOverflowException))
-                    {                        this.userCallback(this);
+                    if (
+                        (null != this.userCallback)
+                        && !(this.Failure is System.Threading.ThreadAbortException)
+                        && !(this.Failure is System.StackOverflowException)
+                    )
+                    {
+                        this.userCallback(this);
                     }
                 }
             }
@@ -242,7 +292,10 @@ namespace System.Data.Services.Client
 
         protected abstract void CompletedRequest();
 
-        private static IAsyncResult PostInvokeAsync(IAsyncResult asyncResult, AsyncCallback callback)
+        private static IAsyncResult PostInvokeAsync(
+            IAsyncResult asyncResult,
+            AsyncCallback callback
+        )
         {
             Debug.Assert(asyncResult != null, "asyncResult != null");
             if (asyncResult.CompletedSynchronously)
@@ -258,7 +311,10 @@ namespace System.Data.Services.Client
         {
             return (asyncResult) =>
             {
-                Debug.Assert(asyncResult != null && asyncResult.IsCompleted, "asyncResult != null && asyncResult.IsCompleted");
+                Debug.Assert(
+                    asyncResult != null && asyncResult.IsCompleted,
+                    "asyncResult != null && asyncResult.IsCompleted"
+                );
                 if (asyncResult.CompletedSynchronously)
                 {
                     return;
@@ -272,7 +328,11 @@ namespace System.Data.Services.Client
         {
             if (null != this.asyncWait)
             {
-                System.Threading.Interlocked.CompareExchange(ref this.asyncWaitDisposeLock, new object(), null);
+                System.Threading.Interlocked.CompareExchange(
+                    ref this.asyncWaitDisposeLock,
+                    new object(),
+                    null
+                );
                 lock (this.asyncWaitDisposeLock)
                 {
                     if (!this.asyncWaitDisposed)

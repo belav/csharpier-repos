@@ -4,13 +4,13 @@
 using System.Collections;
 using System.ComponentModel;
 using System.Configuration;
-#if DEBUG
-using System.Diagnostics;
-#endif
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Xml.Schema;
 using System.Xml.Serialization.Configuration;
+#if DEBUG
+using System.Diagnostics;
+#endif
 
 namespace System.Xml.Serialization
 {
@@ -26,7 +26,11 @@ namespace System.Xml.Serialization
         private NameTable? _groupsInUse;
 
         [RequiresUnreferencedCode("calls SetCache")]
-        internal SchemaImporter(XmlSchemas schemas, CodeGenerationOptions options, ImportContext context)
+        internal SchemaImporter(
+            XmlSchemas schemas,
+            CodeGenerationOptions options,
+            ImportContext context
+        )
         {
             if (!schemas.Contains(XmlSchema.Namespace))
             {
@@ -75,7 +79,11 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode("calls GetTypeDesc")]
-        internal void MakeDerived(StructMapping structMapping, Type? baseType, bool baseTypeCanBeIndirect)
+        internal void MakeDerived(
+            StructMapping structMapping,
+            Type? baseType,
+            bool baseTypeCanBeIndirect
+        )
         {
             structMapping.ReferencedByTopLevelElement = true;
             TypeDesc baseTypeDesc;
@@ -89,11 +97,24 @@ namespace System.Xml.Serialization
                     {
                         // if baseTypeCanBeIndirect is true, we apply the supplied baseType to the top of the
                         // inheritance chain, not necessarily directly to the imported type.
-                        while (typeDescToChange.BaseTypeDesc != null && typeDescToChange.BaseTypeDesc != baseTypeDesc)
+                        while (
+                            typeDescToChange.BaseTypeDesc != null
+                            && typeDescToChange.BaseTypeDesc != baseTypeDesc
+                        )
                             typeDescToChange = typeDescToChange.BaseTypeDesc;
                     }
-                    if (typeDescToChange.BaseTypeDesc != null && typeDescToChange.BaseTypeDesc != baseTypeDesc)
-                        throw new InvalidOperationException(SR.Format(SR.XmlInvalidBaseType, structMapping.TypeDesc!.FullName, baseType.FullName, typeDescToChange.BaseTypeDesc.FullName));
+                    if (
+                        typeDescToChange.BaseTypeDesc != null
+                        && typeDescToChange.BaseTypeDesc != baseTypeDesc
+                    )
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.XmlInvalidBaseType,
+                                structMapping.TypeDesc!.FullName,
+                                baseType.FullName,
+                                typeDescToChange.BaseTypeDesc.FullName
+                            )
+                        );
                     typeDescToChange.BaseTypeDesc = baseTypeDesc;
                 }
             }
@@ -142,7 +163,9 @@ namespace System.Xml.Serialization
                 return;
             if (references[name] != null)
             {
-                throw new InvalidOperationException(string.Format(error, name.Name, name.Namespace));
+                throw new InvalidOperationException(
+                    string.Format(error, name.Name, name.Namespace)
+                );
             }
             references[name] = name;
         }

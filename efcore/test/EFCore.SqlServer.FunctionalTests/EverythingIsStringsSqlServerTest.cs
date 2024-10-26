@@ -7,13 +7,11 @@ using Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 namespace Microsoft.EntityFrameworkCore;
 
 [SqlServerCondition(SqlServerCondition.IsNotSqlAzure)]
-public class EverythingIsStringsSqlServerTest : BuiltInDataTypesTestBase<
-    EverythingIsStringsSqlServerTest.EverythingIsStringsSqlServerFixture>
+public class EverythingIsStringsSqlServerTest
+    : BuiltInDataTypesTestBase<EverythingIsStringsSqlServerTest.EverythingIsStringsSqlServerFixture>
 {
     public EverythingIsStringsSqlServerTest(EverythingIsStringsSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void Columns_have_expected_data_types()
@@ -25,10 +23,10 @@ public class EverythingIsStringsSqlServerTest : BuiltInDataTypesTestBase<
             nameof(NonNullableBackedDataTypes),
             nameof(Animal),
             nameof(AnimalDetails),
-            nameof(AnimalIdentification));
+            nameof(AnimalIdentification)
+        );
 
-        const string expected =
-            """
+        const string expected = """
 BinaryForeignKeyDataType.BinaryKeyDataTypeId ---> [nullable nvarchar] [MaxLength = 450]
 BinaryForeignKeyDataType.Id ---> [nvarchar] [MaxLength = 64]
 BinaryKeyDataType.Ex ---> [nullable nvarchar] [MaxLength = -1]
@@ -198,41 +196,30 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
 
     public class EverythingIsStringsSqlServerFixture : BuiltInDataTypesFixtureBase
     {
-        public override bool StrictEquality
-            => true;
+        public override bool StrictEquality => true;
 
-        public override bool SupportsAnsi
-            => true;
+        public override bool SupportsAnsi => true;
 
-        public override bool SupportsUnicodeToAnsiConversion
-            => true;
+        public override bool SupportsUnicodeToAnsiConversion => true;
 
-        public override bool SupportsLargeStringComparisons
-            => true;
+        public override bool SupportsLargeStringComparisons => true;
 
-        public override bool PreservesDateTimeKind
-            => false;
+        public override bool PreservesDateTimeKind => false;
 
-        protected override string StoreName
-            => "EverythingIsStrings";
+        protected override string StoreName => "EverythingIsStrings";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerStringsTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory =>
+            SqlServerStringsTestStoreFactory.Instance;
 
-        public override bool SupportsBinaryKeys
-            => true;
+        public override bool SupportsBinaryKeys => true;
 
-        public override bool SupportsDecimalComparisons
-            => true;
+        public override bool SupportsDecimalComparisons => true;
 
-        public override DateTime DefaultDateTime
-            => new();
+        public override DateTime DefaultDateTime => new();
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base
-                .AddOptions(builder)
-                .ConfigureWarnings(
-                    c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
@@ -250,44 +237,55 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
     {
         public static new SqlServerStringsTestStoreFactory Instance { get; } = new();
 
-        public override IServiceCollection AddProviderServices(IServiceCollection serviceCollection)
-            => base.AddProviderServices(
-                serviceCollection.AddSingleton<IRelationalTypeMappingSource, SqlServerStringsTypeMappingSource>());
+        public override IServiceCollection AddProviderServices(
+            IServiceCollection serviceCollection
+        ) =>
+            base.AddProviderServices(
+                serviceCollection.AddSingleton<
+                    IRelationalTypeMappingSource,
+                    SqlServerStringsTypeMappingSource
+                >()
+            );
     }
 
     public class SqlServerStringsTypeMappingSource : RelationalTypeMappingSource
     {
-        private readonly SqlServerStringTypeMapping _fixedLengthUnicodeString = new(unicode: true, fixedLength: true);
-        private readonly SqlServerStringTypeMapping _variableLengthUnicodeString = new(unicode: true);
+        private readonly SqlServerStringTypeMapping _fixedLengthUnicodeString =
+            new(unicode: true, fixedLength: true);
+        private readonly SqlServerStringTypeMapping _variableLengthUnicodeString =
+            new(unicode: true);
         private readonly SqlServerStringTypeMapping _fixedLengthAnsiString = new(fixedLength: true);
         private readonly SqlServerStringTypeMapping _variableLengthAnsiString = new();
         private readonly Dictionary<string, RelationalTypeMapping> _storeTypeMappings;
 
         public SqlServerStringsTypeMappingSource(
             TypeMappingSourceDependencies dependencies,
-            RelationalTypeMappingSourceDependencies relationalDependencies)
+            RelationalTypeMappingSourceDependencies relationalDependencies
+        )
             : base(dependencies, relationalDependencies)
         {
-            _storeTypeMappings
-                = new Dictionary<string, RelationalTypeMapping>(StringComparer.OrdinalIgnoreCase)
-                {
-                    { "char varying", _variableLengthAnsiString },
-                    { "char", _fixedLengthAnsiString },
-                    { "character varying", _variableLengthAnsiString },
-                    { "character", _fixedLengthAnsiString },
-                    { "national char varying", _variableLengthUnicodeString },
-                    { "national character varying", _variableLengthUnicodeString },
-                    { "national character", _fixedLengthUnicodeString },
-                    { "nchar", _fixedLengthUnicodeString },
-                    { "ntext", _variableLengthUnicodeString },
-                    { "nvarchar", _variableLengthUnicodeString },
-                    { "text", _variableLengthAnsiString },
-                    { "varchar", _variableLengthAnsiString }
-                };
+            _storeTypeMappings = new Dictionary<string, RelationalTypeMapping>(
+                StringComparer.OrdinalIgnoreCase
+            )
+            {
+                { "char varying", _variableLengthAnsiString },
+                { "char", _fixedLengthAnsiString },
+                { "character varying", _variableLengthAnsiString },
+                { "character", _fixedLengthAnsiString },
+                { "national char varying", _variableLengthUnicodeString },
+                { "national character varying", _variableLengthUnicodeString },
+                { "national character", _fixedLengthUnicodeString },
+                { "nchar", _fixedLengthUnicodeString },
+                { "ntext", _variableLengthUnicodeString },
+                { "nvarchar", _variableLengthUnicodeString },
+                { "text", _variableLengthAnsiString },
+                { "varchar", _variableLengthAnsiString },
+            };
         }
 
-        protected override RelationalTypeMapping FindMapping(in RelationalTypeMappingInfo mappingInfo)
-            => FindRawMapping(mappingInfo)?.WithTypeMappingInfo(mappingInfo);
+        protected override RelationalTypeMapping FindMapping(
+            in RelationalTypeMappingInfo mappingInfo
+        ) => FindRawMapping(mappingInfo)?.WithTypeMappingInfo(mappingInfo);
 
         private RelationalTypeMapping FindRawMapping(RelationalTypeMappingInfo mappingInfo)
         {
@@ -297,13 +295,12 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
 
             if (storeTypeName != null)
             {
-                if (_storeTypeMappings.TryGetValue(storeTypeName, out var mapping)
-                    || _storeTypeMappings.TryGetValue(storeTypeNameBase, out mapping))
+                if (
+                    _storeTypeMappings.TryGetValue(storeTypeName, out var mapping)
+                    || _storeTypeMappings.TryGetValue(storeTypeNameBase, out mapping)
+                )
                 {
-                    return clrType == null
-                        || mapping.ClrType == clrType
-                            ? mapping
-                            : null;
+                    return clrType == null || mapping.ClrType == clrType ? mapping : null;
                 }
             }
 
@@ -314,7 +311,15 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
                 var baseName = isAnsi ? "varchar" : "nvarchar";
                 var maxSize = isAnsi ? 8000 : 4000;
 
-                var size = mappingInfo.Size ?? (mappingInfo.IsKeyOrIndex ? isAnsi ? 900 : 450 : null);
+                var size =
+                    mappingInfo.Size
+                    ?? (
+                        mappingInfo.IsKeyOrIndex
+                            ? isAnsi
+                                ? 900
+                                : 450
+                            : null
+                    );
                 if (size > maxSize)
                 {
                     size = isFixedLength ? maxSize : null;
@@ -325,7 +330,8 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
                     !isAnsi,
                     size,
                     isFixedLength,
-                    storeTypePostfix: size == null ? StoreTypePostfix.None : null);
+                    storeTypePostfix: size == null ? StoreTypePostfix.None : null
+                );
             }
 
             return null;

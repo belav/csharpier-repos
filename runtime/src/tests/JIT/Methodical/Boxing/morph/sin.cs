@@ -5,7 +5,6 @@
 using System;
 using Xunit;
 
-
 namespace SinCalc_sin_morph_cs
 {
     public class SinCalc
@@ -14,7 +13,10 @@ namespace SinCalc_sin_morph_cs
 
         protected static object mySin(object Angle)
         {
-            object powX, sumOfTerms, term, fact = 1.0;
+            object powX,
+                sumOfTerms,
+                term,
+                fact = 1.0;
 
             powX = term = Angle;
             sumOfTerms = 0.0;
@@ -34,7 +36,8 @@ namespace SinCalc_sin_morph_cs
         {
             object i;
             object Angle;
-            object Result1, Result2;
+            object Result1,
+                Result2;
             object[] testresults = new object[10];
             testresults[0] = 0.000000000d;
             testresults[1] = 0.309016994d;

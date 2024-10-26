@@ -1,13 +1,13 @@
-﻿using Xunit;
-using System.Threading.Tasks;
-using VerifyCS = IntrinsicsInSystemPrivateCoreLib.Test.CSharpAnalyzerVerifier<
-    IntrinsicsInSystemPrivateCoreLib.IntrinsicsInSystemPrivateCoreLibAnalyzer>;
+﻿using System.Threading.Tasks;
+using Xunit;
+using VerifyCS = IntrinsicsInSystemPrivateCoreLib.Test.CSharpAnalyzerVerifier<IntrinsicsInSystemPrivateCoreLib.IntrinsicsInSystemPrivateCoreLibAnalyzer>;
 
 namespace IntrinsicsInSystemPrivateCoreLib.Test
 {
     public class IntrinsicsInSystemPrivateCoreLibUnitTest
     {
-        string BoilerPlate = @"
+        string BoilerPlate =
+            @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,10 +88,13 @@ namespace System.Runtime.Intrinsics.Wasm
 }
 
 ";
+
         [Fact]
         public async Task TestMethodUnprotectedUse()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -103,14 +106,19 @@ namespace System.Runtime.Intrinsics.Wasm
         }
     }";
 
-            var expected = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLib").WithLocation(0).WithArguments("System.Runtime.Intrinsics.X86.Avx2");
+            var expected = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLib")
+                .WithLocation(0)
+                .WithArguments("System.Runtime.Intrinsics.X86.Avx2");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
 
         [Fact]
         public async Task TestMethodUnprotectedUseWithIntrinsicsHelperAttribute()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
 
 namespace ConsoleApplication1
 {
@@ -130,7 +138,9 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TestMethodUnprotectedUseWithIntrinsicsHelperAttributeComplex()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
 
 namespace ConsoleApplication1
 {
@@ -155,7 +165,9 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TestMethodUnprotectedUseInLocalFunctionWithIntrinsicsHelperAttributeNotOnLocalFunction()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
 namespace ConsoleApplication1
 {
     class TypeName
@@ -173,14 +185,19 @@ namespace ConsoleApplication1
     }
 }";
 
-            var expected = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLib").WithLocation(0).WithArguments("System.Runtime.Intrinsics.X86.Avx2");
+            var expected = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLib")
+                .WithLocation(0)
+                .WithArguments("System.Runtime.Intrinsics.X86.Avx2");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
 
         [Fact]
         public async Task TestMethodUnprotectedUseInLambdaWithIntrinsicsHelperAttributeOnOuterFunction()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
 
 namespace ConsoleApplication1
 {
@@ -198,14 +215,19 @@ namespace ConsoleApplication1
     }
 }";
 
-            var expected = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLib").WithLocation(0).WithArguments("System.Runtime.Intrinsics.X86.Avx2");
+            var expected = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLib")
+                .WithLocation(0)
+                .WithArguments("System.Runtime.Intrinsics.X86.Avx2");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
 
         [Fact]
         public async Task TestMethodUnprotectedUseInLocalFunctionWithIntrinsicsHelperAttributeOnLocalFunction()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
 namespace ConsoleApplication1
 {
     class TypeName
@@ -230,7 +252,9 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TestMethodUnprotectedNestedTypeUse()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -242,14 +266,19 @@ namespace ConsoleApplication1
         }
     }";
 
-            var expected = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLib").WithLocation(0).WithArguments("System.Runtime.Intrinsics.X86.Avx2.X64");
+            var expected = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLib")
+                .WithLocation(0)
+                .WithArguments("System.Runtime.Intrinsics.X86.Avx2.X64");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
 
         [Fact]
         public async Task TestMethodWithIfStatement()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -265,11 +294,12 @@ namespace ConsoleApplication1
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
 
-
         [Fact]
         public async Task TestMethodWithIfStatementButWithInadequateHelperMethodAttribute()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -283,14 +313,19 @@ namespace ConsoleApplication1
         }
     }";
 
-            var expected = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough").WithLocation(0).WithArguments("System.Runtime.Intrinsics.X86.Avx");
+            var expected = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough")
+                .WithLocation(0)
+                .WithArguments("System.Runtime.Intrinsics.X86.Avx");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
 
         [Fact]
         public async Task TestMethodWithIfStatementButWithAdequateHelperMethodAttribute()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -310,7 +345,9 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TestMethodWithIfStatementWithNestedAndBaseTypeLookupRequired()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -329,7 +366,9 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TestMethodWithTernaryOperator()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -347,7 +386,9 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TestMethodWithIfStatementWithOrOperationCase()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -376,7 +417,9 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TestMethodWithIfStatementWithOrOperationCaseWithImplicationProcessingRequired()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -405,7 +448,9 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TestMethodWithIfStatementAroundLocalFunctionDefinition()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
 
     namespace ConsoleApplication1
     {
@@ -427,14 +472,19 @@ namespace ConsoleApplication1
         }
     }";
 
-            var expected = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLib").WithLocation(0).WithArguments("System.Runtime.Intrinsics.X86.Avx2");
+            var expected = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLib")
+                .WithLocation(0)
+                .WithArguments("System.Runtime.Intrinsics.X86.Avx2");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
 
         [Fact]
         public async Task TestMethodWithIfStatementAroundLambdaFunctionDefinition()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -453,14 +503,19 @@ namespace ConsoleApplication1
         }
     }";
 
-            var expected = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLib").WithLocation(0).WithArguments("System.Runtime.Intrinsics.X86.Avx2");
+            var expected = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLib")
+                .WithLocation(0)
+                .WithArguments("System.Runtime.Intrinsics.X86.Avx2");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
 
         [Fact]
         public async Task TestHelperMethodsCanOnlyBeCalledWithAppropriateIsSupportedChecksError()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -500,17 +555,41 @@ namespace ConsoleApplication1
         }
     }";
 
-            var expected = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper").WithLocation(0).WithArguments("ConsoleApplication1.TypeName.FuncHelper()");
-            var expected2 = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper").WithLocation(1).WithArguments("ConsoleApplication1.TypeName.FuncHelper()");
-            var expected3 = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper").WithLocation(2).WithArguments("ConsoleApplication1.TypeName.FuncHelper2()");
-            var expected4 = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLibConditionParsing").WithLocation(3);
-            var expected5 = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper").WithLocation(4).WithArguments("ConsoleApplication1.TypeName.FuncHelper()");
-            await VerifyCS.VerifyAnalyzerAsync(test, expected, expected2, expected3, expected4, expected5);
+            var expected = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper")
+                .WithLocation(0)
+                .WithArguments("ConsoleApplication1.TypeName.FuncHelper()");
+            var expected2 = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper")
+                .WithLocation(1)
+                .WithArguments("ConsoleApplication1.TypeName.FuncHelper()");
+            var expected3 = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper")
+                .WithLocation(2)
+                .WithArguments("ConsoleApplication1.TypeName.FuncHelper2()");
+            var expected4 = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLibConditionParsing")
+                .WithLocation(3);
+            var expected5 = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper")
+                .WithLocation(4)
+                .WithArguments("ConsoleApplication1.TypeName.FuncHelper()");
+            await VerifyCS.VerifyAnalyzerAsync(
+                test,
+                expected,
+                expected2,
+                expected3,
+                expected4,
+                expected5
+            );
         }
+
         [Fact]
         public async Task TestHelperMethodsCanOnlyBeCalledWithAppropriateIsSupportedChecksSuccess()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -550,7 +629,9 @@ namespace ConsoleApplication1
         [Fact]
         public async Task TestHelperMethodsUnrelatedPropertyDoesntHelp()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -573,14 +654,19 @@ namespace ConsoleApplication1
         }
     }";
 
-            var expected = VerifyCS.Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper").WithLocation(0).WithArguments("ConsoleApplication1.TypeName.FuncHelper()");
+            var expected = VerifyCS
+                .Diagnostic("IntrinsicsInSystemPrivateCoreLibHelper")
+                .WithLocation(0)
+                .WithArguments("ConsoleApplication1.TypeName.FuncHelper()");
             await VerifyCS.VerifyAnalyzerAsync(test, expected);
         }
 
         [Fact]
         public async Task TestHelperMethodsWithHelperProperty()
         {
-            var test = BoilerPlate + @"
+            var test =
+                BoilerPlate
+                + @"
     namespace ConsoleApplication1
     {
         class TypeName
@@ -606,11 +692,11 @@ namespace ConsoleApplication1
             await VerifyCS.VerifyAnalyzerAsync(test);
         }
 
-
         [Fact]
         public async Task TestMethodUseOfIntrinsicsFromWithinOtherMethodOnIntrinsicType()
         {
-            var test = @"
+            var test =
+                @"
 namespace System.Runtime.Intrinsics.X86
 {
     class Sse

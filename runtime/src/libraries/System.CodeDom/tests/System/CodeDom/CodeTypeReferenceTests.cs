@@ -25,14 +25,26 @@ namespace System.CodeDom.Tests
             yield return new object[] { typeof(int), typeof(int).FullName };
             yield return new object[] { typeof(int[]), typeof(int).FullName };
             yield return new object[] { typeof(int[,]), typeof(int).FullName };
-            yield return new object[] { typeof(int).MakeByRefType(), typeof(int).MakeByRefType().FullName };
-            yield return new object[] { typeof(int).MakePointerType(), typeof(int).MakePointerType().FullName };
+            yield return new object[]
+            {
+                typeof(int).MakeByRefType(),
+                typeof(int).MakeByRefType().FullName,
+            };
+            yield return new object[]
+            {
+                typeof(int).MakePointerType(),
+                typeof(int).MakePointerType().FullName,
+            };
             yield return new object[] { typeof(List<int>), typeof(List<>).FullName };
             yield return new object[] { typeof(List<>), typeof(List<>).FullName };
             yield return new object[] { typeof(List<>).GetGenericArguments()[0], "T" };
             yield return new object[] { typeof(void), typeof(void).FullName };
             yield return new object[] { typeof(NestedClass), typeof(NestedClass).FullName };
-            yield return new object[] { typeof(ClassWithoutNamespace), typeof(ClassWithoutNamespace).FullName };
+            yield return new object[]
+            {
+                typeof(ClassWithoutNamespace),
+                typeof(ClassWithoutNamespace).FullName,
+            };
             yield return new object[] { typeof(Nullable), typeof(Nullable).FullName };
         }
 
@@ -43,8 +55,18 @@ namespace System.CodeDom.Tests
             var typeReference = new CodeTypeReference(type);
             string expectedArrayElementType = type.IsArray ? type.GetElementType().FullName : null;
             int expectedArrayRank = type.IsArray ? type.GetArrayRank() : 0;
-            string[] expectedTypeArguments = type.GenericTypeArguments.Select(arg => arg.IsGenericType ? arg.GetGenericTypeDefinition().FullName : arg.FullName).ToArray();
-            VerifyCodeTypeReference(typeReference, expectedBaseType, expectedArrayElementType, expectedArrayRank, expectedTypeArguments);
+            string[] expectedTypeArguments = type
+                .GenericTypeArguments.Select(arg =>
+                    arg.IsGenericType ? arg.GetGenericTypeDefinition().FullName : arg.FullName
+                )
+                .ToArray();
+            VerifyCodeTypeReference(
+                typeReference,
+                expectedBaseType,
+                expectedArrayElementType,
+                expectedArrayRank,
+                expectedTypeArguments
+            );
         }
 
         [Theory]
@@ -52,7 +74,10 @@ namespace System.CodeDom.Tests
         [InlineData(typeof(object), (CodeTypeReferenceOptions)0)]
         [InlineData(typeof(void), CodeTypeReferenceOptions.GenericTypeParameter)]
         [InlineData(typeof(string), CodeTypeReferenceOptions.GenericTypeParameter + 1)]
-        public void Ctor_Type_CodeReferenceTypeOptions_TestData(Type type, CodeTypeReferenceOptions options)
+        public void Ctor_Type_CodeReferenceTypeOptions_TestData(
+            Type type,
+            CodeTypeReferenceOptions options
+        )
         {
             var typeReference = new CodeTypeReference(type, options);
             Assert.Equal(type.FullName, typeReference.BaseType);
@@ -62,26 +87,89 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new CodeTypeReference((Type)null));
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new CodeTypeReference((Type)null, CodeTypeReferenceOptions.GenericTypeParameter));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new CodeTypeReference((Type)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () =>
+                    new CodeTypeReference((Type)null, CodeTypeReferenceOptions.GenericTypeParameter)
+            );
         }
 
         public static IEnumerable<object[]> Ctor_String_TestData()
         {
             // Basic
-            yield return new object[] { "System.Int32", typeof(int).FullName, null, 0, new string[0] };
-            yield return new object[] { "System.Int32*", typeof(int).MakePointerType().FullName, null, 0, new string[0] };
-            yield return new object[] { "System.Int32&", typeof(int).MakeByRefType().FullName, null, 0, new string[0] };
+            yield return new object[]
+            {
+                "System.Int32",
+                typeof(int).FullName,
+                null,
+                0,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                "System.Int32*",
+                typeof(int).MakePointerType().FullName,
+                null,
+                0,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                "System.Int32&",
+                typeof(int).MakeByRefType().FullName,
+                null,
+                0,
+                new string[0],
+            };
             yield return new object[] { "NoSuchType", "NoSuchType", null, 0, new string[0] };
 
             // Arrays
-            yield return new object[] { "System.Int32[]", typeof(int).FullName, typeof(int).FullName, 1, new string[0] };
-            yield return new object[] { "System.Int32[,]", typeof(int).FullName, typeof(int).FullName, 2, new string[0] };
-            yield return new object[] { "System.Int32[][]", typeof(int).FullName, typeof(int).FullName, 1, new string[0] };
+            yield return new object[]
+            {
+                "System.Int32[]",
+                typeof(int).FullName,
+                typeof(int).FullName,
+                1,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                "System.Int32[,]",
+                typeof(int).FullName,
+                typeof(int).FullName,
+                2,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                "System.Int32[][]",
+                typeof(int).FullName,
+                typeof(int).FullName,
+                1,
+                new string[0],
+            };
 
             // Generic
-            yield return new object[] { "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version = 2.0.0.0, Culture = neutral, PublicKeyToken = b77a5c561934e089], [System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]", typeof(Dictionary<,>).FullName, null, 0, new string[] { "System.String", "System.Collections.Generic.List`1" } };
-            yield return new object[] { "[System.Collections.Generic.List[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral,PublicKeyToken=b77a5c561934e089]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]", "System.Collections.Generic.List", null, 0, new string[] { "System.String" } };
+            yield return new object[]
+            {
+                "System.Collections.Generic.Dictionary`2[[System.String, mscorlib, Version = 2.0.0.0, Culture = neutral, PublicKeyToken = b77a5c561934e089], [System.Collections.Generic.List`1[[System.Int32, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]",
+                typeof(Dictionary<,>).FullName,
+                null,
+                0,
+                new string[] { "System.String", "System.Collections.Generic.List`1" },
+            };
+            yield return new object[]
+            {
+                "[System.Collections.Generic.List[[System.String, mscorlib, Version=2.0.0.0, Culture=neutral,PublicKeyToken=b77a5c561934e089]], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]",
+                "System.Collections.Generic.List",
+                null,
+                0,
+                new string[] { "System.String" },
+            };
 
             // Empty
             yield return new object[] { null, typeof(void).FullName, null, 0, new string[0] };
@@ -97,21 +185,68 @@ namespace System.CodeDom.Tests
             yield return new object[] { "[", "[", null, 0, new string[0] };
             yield return new object[] { "[,,,,]", "", null, 0, new string[0] };
             yield return new object[] { "[a,b,c,d,e]", "a", null, 0, new string[0] };
-            yield return new object[] { "[System.Int32,b,c,d,e]", typeof(int).FullName, null, 0, new string[0] };
+            yield return new object[]
+            {
+                "[System.Int32,b,c,d,e]",
+                typeof(int).FullName,
+                null,
+                0,
+                new string[0],
+            };
 
             // Invalid generic
-            yield return new object[] { "System.Collections.Generic.Dictionary`2", "System.Collections.Generic.Dictionary`2", null, 0, new string[0] };
-            yield return new object[] { "System.Collections.Generic.Dictionary`2[System.String]", "System.Collections.Generic.Dictionary`2", null, 0, new string[] { "System.String" } };
-            yield return new object[] { "System.Collections.Generic.Dictionary`2[System.String,", "System.Collections.Generic.Dictionary`2[System.String,", null, 0, new string[0] };
-            yield return new object[] { "System.Collections.Generic.Dictionary`2[System.String,]", "System.Collections.Generic.Dictionary`2", null, 0, new string[] { "System.String" } };
+            yield return new object[]
+            {
+                "System.Collections.Generic.Dictionary`2",
+                "System.Collections.Generic.Dictionary`2",
+                null,
+                0,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                "System.Collections.Generic.Dictionary`2[System.String]",
+                "System.Collections.Generic.Dictionary`2",
+                null,
+                0,
+                new string[] { "System.String" },
+            };
+            yield return new object[]
+            {
+                "System.Collections.Generic.Dictionary`2[System.String,",
+                "System.Collections.Generic.Dictionary`2[System.String,",
+                null,
+                0,
+                new string[0],
+            };
+            yield return new object[]
+            {
+                "System.Collections.Generic.Dictionary`2[System.String,]",
+                "System.Collections.Generic.Dictionary`2",
+                null,
+                0,
+                new string[] { "System.String" },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_String_TestData))]
-        public void Ctor_String(string type, string expectedBaseType, string expectedArrayElementType, int expectedArrayRank, string[] expectedTypeArguments)
+        public void Ctor_String(
+            string type,
+            string expectedBaseType,
+            string expectedArrayElementType,
+            int expectedArrayRank,
+            string[] expectedTypeArguments
+        )
         {
             var typeReference = new CodeTypeReference(type);
-            VerifyCodeTypeReference(typeReference, expectedBaseType, expectedArrayElementType, expectedArrayRank, expectedTypeArguments);
+            VerifyCodeTypeReference(
+                typeReference,
+                expectedBaseType,
+                expectedArrayElementType,
+                expectedArrayRank,
+                expectedTypeArguments
+            );
         }
 
         [Theory]
@@ -119,8 +254,16 @@ namespace System.CodeDom.Tests
         [InlineData("System.Object", (CodeTypeReferenceOptions)0, "System.Object")]
         [InlineData("System.Void", CodeTypeReferenceOptions.GenericTypeParameter, "System.Void")]
         [InlineData(null, (CodeTypeReferenceOptions)0, "System.Void")]
-        [InlineData("System.String", CodeTypeReferenceOptions.GenericTypeParameter + 1, "System.String")]
-        public void Ctor_String_CodeReferenceTypeOptions(string type, CodeTypeReferenceOptions options, string expectedBaseType)
+        [InlineData(
+            "System.String",
+            CodeTypeReferenceOptions.GenericTypeParameter + 1,
+            "System.String"
+        )]
+        public void Ctor_String_CodeReferenceTypeOptions(
+            string type,
+            CodeTypeReferenceOptions options,
+            string expectedBaseType
+        )
         {
             var typeReference = new CodeTypeReference(type, options);
             Assert.Equal(expectedBaseType, typeReference.BaseType);
@@ -137,7 +280,11 @@ namespace System.CodeDom.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_CodeTypeReference_Int_TestData))]
-        public void Ctor_CodeTypeReference_Int(CodeTypeReference type, int rank, string expectedBaseType)
+        public void Ctor_CodeTypeReference_Int(
+            CodeTypeReference type,
+            int rank,
+            string expectedBaseType
+        )
         {
             var typeReference = new CodeTypeReference(type, rank);
             Assert.Equal(expectedBaseType, typeReference.BaseType);
@@ -161,23 +308,38 @@ namespace System.CodeDom.Tests
         {
             yield return new object[] { "System.String", null, "System.String" };
             yield return new object[] { "System.Void", new CodeTypeReference[0], "System.Void" };
-            yield return new object[] { "System.Int32", new CodeTypeReference[] { new CodeTypeReference("System.String") }, "System.Int32`1" };
+            yield return new object[]
+            {
+                "System.Int32",
+                new CodeTypeReference[] { new CodeTypeReference("System.String") },
+                "System.Int32`1",
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_String_ParamsCodeTypeReference_TestData))]
-        public void Ctor_String_ParamsCodeTypeReference(string name, CodeTypeReference[] typeArguments, string expectedBaseType)
+        public void Ctor_String_ParamsCodeTypeReference(
+            string name,
+            CodeTypeReference[] typeArguments,
+            string expectedBaseType
+        )
         {
             var typeReference = new CodeTypeReference(name, typeArguments);
             Assert.Equal(expectedBaseType, typeReference.BaseType);
-            Assert.Equal(typeArguments ?? new CodeTypeReference[0], typeReference.TypeArguments.Cast<CodeTypeReference>());
+            Assert.Equal(
+                typeArguments ?? new CodeTypeReference[0],
+                typeReference.TypeArguments.Cast<CodeTypeReference>()
+            );
         }
 
         [Fact]
         public void Ctor_NullObjectInTypeArguments_ThrowsArgumentNullException()
         {
             CodeTypeReference[] typeArguments = new CodeTypeReference[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeTypeReference("System.Int32", typeArguments));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeTypeReference("System.Int32", typeArguments)
+            );
         }
 
         public static IEnumerable<object[]> Ctor_CodeTypeParameter_TestData()
@@ -193,7 +355,10 @@ namespace System.CodeDom.Tests
         public void Ctor_CodeTypeParameter(CodeTypeParameter parameter)
         {
             var typeReference = new CodeTypeReference(parameter);
-            Assert.Equal(string.IsNullOrEmpty(parameter?.Name) ? "System.Void" : parameter.Name, typeReference.BaseType);
+            Assert.Equal(
+                string.IsNullOrEmpty(parameter?.Name) ? "System.Void" : parameter.Name,
+                typeReference.BaseType
+            );
             Assert.Equal(CodeTypeReferenceOptions.GenericTypeParameter, typeReference.Options);
         }
 
@@ -235,14 +400,26 @@ namespace System.CodeDom.Tests
 
             CodeTypeReference type1 = new CodeTypeReference(typeof(int));
             codeTypeReference.TypeArguments.Add(type1);
-            Assert.Equal(new CodeTypeReference[] { type1 }, codeTypeReference.TypeArguments.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1 },
+                codeTypeReference.TypeArguments.Cast<CodeTypeReference>()
+            );
 
             CodeTypeReference type2 = new CodeTypeReference(typeof(char));
             codeTypeReference.TypeArguments.Add(type2);
-            Assert.Equal(new CodeTypeReference[] { type1, type2 }, codeTypeReference.TypeArguments.Cast<CodeTypeReference>());
+            Assert.Equal(
+                new CodeTypeReference[] { type1, type2 },
+                codeTypeReference.TypeArguments.Cast<CodeTypeReference>()
+            );
         }
 
-        private static void VerifyCodeTypeReference(CodeTypeReference typeReference, string expectedBaseType, string expectedArrayElementType, int expectedArrayRank, string[] expectedTypeArguments)
+        private static void VerifyCodeTypeReference(
+            CodeTypeReference typeReference,
+            string expectedBaseType,
+            string expectedArrayElementType,
+            int expectedArrayRank,
+            string[] expectedTypeArguments
+        )
         {
             Assert.Equal(expectedBaseType, typeReference.BaseType);
 
@@ -252,7 +429,9 @@ namespace System.CodeDom.Tests
 
             Assert.Equal((CodeTypeReferenceOptions)0, typeReference.Options);
 
-            CodeTypeReference[] actualTypeArguments = typeReference.TypeArguments.Cast<CodeTypeReference>().ToArray();
+            CodeTypeReference[] actualTypeArguments = typeReference
+                .TypeArguments.Cast<CodeTypeReference>()
+                .ToArray();
             Assert.Equal(expectedTypeArguments.Length, actualTypeArguments.Length);
             for (int i = 0; i < expectedTypeArguments.Length; i++)
             {

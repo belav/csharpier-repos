@@ -15,8 +15,8 @@ public class SqlServerObjectToStringTranslator : IMethodCallTranslator
 {
     private const int DefaultLength = 100;
 
-    private static readonly Dictionary<Type, string> TypeMapping
-        = new()
+    private static readonly Dictionary<Type, string> TypeMapping =
+        new()
         {
             { typeof(sbyte), "varchar(4)" },
             { typeof(byte), "varchar(3)" },
@@ -36,7 +36,7 @@ public class SqlServerObjectToStringTranslator : IMethodCallTranslator
             { typeof(DateTimeOffset), $"varchar({DefaultLength})" },
             { typeof(TimeSpan), $"varchar({DefaultLength})" },
             { typeof(Guid), "varchar(36)" },
-            { typeof(byte[]), $"varchar({DefaultLength})" }
+            { typeof(byte[]), $"varchar({DefaultLength})" },
         };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -62,7 +62,8 @@ public class SqlServerObjectToStringTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (instance == null || method.Name != nameof(ToString) || arguments.Count != 0)
         {
@@ -82,23 +83,37 @@ public class SqlServerObjectToStringTranslator : IMethodCallTranslator
                     new[]
                     {
                         new CaseWhenClause(
-                            _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
-                            _sqlExpressionFactory.Constant(false.ToString())),
+                            _sqlExpressionFactory.Equal(
+                                instance,
+                                _sqlExpressionFactory.Constant(false)
+                            ),
+                            _sqlExpressionFactory.Constant(false.ToString())
+                        ),
                         new CaseWhenClause(
-                            _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(true)),
-                            _sqlExpressionFactory.Constant(true.ToString()))
+                            _sqlExpressionFactory.Equal(
+                                instance,
+                                _sqlExpressionFactory.Constant(true)
+                            ),
+                            _sqlExpressionFactory.Constant(true.ToString())
+                        ),
                     },
-                    _sqlExpressionFactory.Constant(null));
+                    _sqlExpressionFactory.Constant(null)
+                );
             }
 
             return _sqlExpressionFactory.Case(
                 new[]
                 {
                     new CaseWhenClause(
-                        _sqlExpressionFactory.Equal(instance, _sqlExpressionFactory.Constant(false)),
-                        _sqlExpressionFactory.Constant(false.ToString()))
+                        _sqlExpressionFactory.Equal(
+                            instance,
+                            _sqlExpressionFactory.Constant(false)
+                        ),
+                        _sqlExpressionFactory.Constant(false.ToString())
+                    ),
                 },
-                _sqlExpressionFactory.Constant(true.ToString()));
+                _sqlExpressionFactory.Constant(true.ToString())
+            );
         }
 
         return TypeMapping.TryGetValue(instance.Type, out var storeType)
@@ -107,7 +122,8 @@ public class SqlServerObjectToStringTranslator : IMethodCallTranslator
                 new[] { _sqlExpressionFactory.Fragment(storeType), instance },
                 nullable: true,
                 argumentsPropagateNullability: new[] { false, true },
-                typeof(string))
+                typeof(string)
+            )
             : null;
     }
 }

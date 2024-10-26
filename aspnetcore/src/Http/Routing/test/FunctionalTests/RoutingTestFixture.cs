@@ -17,9 +17,7 @@ public class RoutingTestFixture<TStartup> : IDisposable
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                    .UseStartup(typeof(TStartup))
-                    .UseTestServer();
+                webHostBuilder.UseStartup(typeof(TStartup)).UseTestServer();
             })
             .Build();
 

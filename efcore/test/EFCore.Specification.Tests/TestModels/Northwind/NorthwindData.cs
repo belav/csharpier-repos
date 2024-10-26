@@ -18,17 +18,18 @@ public partial class NorthwindData : ISetSource
     public OrderQuery[] OrderQueries { get; }
     public OrderDetail[] OrderDetails { get; }
 
-    private readonly Dictionary<int, string> _categoryNameMap = new()
-    {
-        { 1, "Beverages" },
-        { 2, "Condiments" },
-        { 3, "Confections" },
-        { 4, "Dairy Products" },
-        { 5, "Grains/Cereals" },
-        { 6, "Meat/Poultry" },
-        { 7, "Produce" },
-        { 8, "Seafood" },
-    };
+    private readonly Dictionary<int, string> _categoryNameMap =
+        new()
+        {
+            { 1, "Beverages" },
+            { 2, "Condiments" },
+            { 3, "Confections" },
+            { 4, "Dairy Products" },
+            { 5, "Grains/Cereals" },
+            { 6, "Meat/Poultry" },
+            { 7, "Produce" },
+            { 8, "Seafood" },
+        };
 
     public NorthwindData()
     {
@@ -51,8 +52,9 @@ public partial class NorthwindData : ISetSource
                     City = customer.City,
                     CompanyName = customer.CompanyName,
                     ContactName = customer.ContactName,
-                    ContactTitle = customer.ContactTitle
-                });
+                    ContactTitle = customer.ContactTitle,
+                }
+            );
         }
 
         CustomerQueries = customerQueries.ToArray();
@@ -71,16 +73,18 @@ public partial class NorthwindData : ISetSource
                     {
                         CategoryName = "Food",
                         ProductID = product.ProductID,
-                        ProductName = product.ProductName
-                    });
+                        ProductName = product.ProductName,
+                    }
+                );
 
                 productViews.Add(
                     new ProductView
                     {
                         CategoryName = _categoryNameMap[product.CategoryID.Value],
                         ProductID = product.ProductID,
-                        ProductName = product.ProductName
-                    });
+                        ProductName = product.ProductName,
+                    }
+                );
             }
         }
 
@@ -98,7 +102,8 @@ public partial class NorthwindData : ISetSource
             customer.Orders.Add(order);
 
             orderQueries.Add(
-                new OrderQuery { CustomerID = order.CustomerID, Customer = order.Customer });
+                new OrderQuery { CustomerID = order.CustomerID, Customer = order.Customer }
+            );
         }
 
         OrderQueries = orderQueries.ToArray();
@@ -111,8 +116,9 @@ public partial class NorthwindData : ISetSource
                 {
                     CompanyName = customer.CompanyName,
                     SearchTerm = "A",
-                    OrderCount = customer.Orders.Count
-                });
+                    OrderCount = customer.Orders.Count,
+                }
+            );
         }
 
         CustomerQueriesWithQueryFilter = customerQueriesWithQueryFilter.ToArray();
@@ -143,7 +149,8 @@ public partial class NorthwindData : ISetSource
         Product[] products,
         ProductQuery[] productQueries,
         Order[] orders,
-        OrderDetail[] orderDetails)
+        OrderDetail[] orderDetails
+    )
     {
         Customers = customers;
         CustomerQueries = customerQueries;

@@ -27,7 +27,14 @@ namespace System.Web.Razor.Text
 
         public SourceLocation EndLocation
         {
-            get { return new SourceLocation(Length, _lines.Count - 1, _lines[_lines.Count - 1].Length); }
+            get
+            {
+                return new SourceLocation(
+                    Length,
+                    _lines.Count - 1,
+                    _lines[_lines.Count - 1].Length
+                );
+            }
         }
 
         public void Append(string content)
@@ -38,7 +45,10 @@ namespace System.Web.Razor.Text
 
                 // \r on it's own: Start a new line, otherwise wait for \n
                 // Other Newline: Start a new line
-                if ((content[i] == '\r' && (i + 1 == content.Length || content[i + 1] != '\n')) || (content[i] != '\r' && ParserHelpers.IsNewLine(content[i])))
+                if (
+                    (content[i] == '\r' && (i + 1 == content.Length || content[i + 1] != '\n'))
+                    || (content[i] != '\r' && ParserHelpers.IsNewLine(content[i]))
+                )
                 {
                     PushNewLine();
                 }
@@ -53,7 +63,10 @@ namespace System.Web.Razor.Text
                 throw new ArgumentOutOfRangeException("absoluteIndex");
             }
             int idx = absoluteIndex - line.Start;
-            return new CharacterReference(line.Content[idx], new SourceLocation(absoluteIndex, line.Index, idx));
+            return new CharacterReference(
+                line.Content[idx],
+                new SourceLocation(absoluteIndex, line.Index, idx)
+            );
         }
 
         private void PushNewLine()
@@ -79,7 +92,10 @@ namespace System.Web.Razor.Text
                     // This index is on the last read line
                     selected = _currentLine;
                 }
-                else if (absoluteIndex > _currentLine.Index && _currentLine.Index + 1 < _lines.Count)
+                else if (
+                    absoluteIndex > _currentLine.Index
+                    && _currentLine.Index + 1 < _lines.Count
+                )
                 {
                     // This index is ahead of the last read line
                     selected = ScanLines(absoluteIndex, _currentLine.Index);

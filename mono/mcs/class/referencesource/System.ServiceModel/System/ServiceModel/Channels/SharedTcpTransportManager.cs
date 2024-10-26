@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Activation;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.ServiceModel;
-    using System.Threading;
+    using System.ServiceModel.Activation;
     using System.ServiceModel.Diagnostics;
+    using System.Threading;
 
     class SharedTcpTransportManager : TcpTransportManager, ITransportManagerRegistration
     {
@@ -48,10 +48,7 @@ namespace System.ServiceModel.Channels
 
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get
-            {
-                return this.hostNameComparisonMode;
-            }
+            get { return this.hostNameComparisonMode; }
             set
             {
                 HostNameComparisonModeHelper.Validate(value);
@@ -65,10 +62,7 @@ namespace System.ServiceModel.Channels
 
         public Uri ListenUri
         {
-            get
-            {
-                return this.listenUri;
-            }
+            get { return this.listenUri; }
         }
 
         internal override void OnOpen()
@@ -97,8 +91,11 @@ namespace System.ServiceModel.Channels
                     if (listener == null)
                     {
                         // The listener has been stopped.
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationObjectAbortedException(
-                            SR.GetString(SR.Sharing_ListenerProxyStopped)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new CommunicationObjectAbortedException(
+                                SR.GetString(SR.Sharing_ListenerProxyStopped)
+                            )
+                        );
                     }
 
                     if (!demuxerCreated)
@@ -114,19 +111,31 @@ namespace System.ServiceModel.Channels
 
         void CreateConnectionDemuxer()
         {
-            IConnectionListener connectionListener = new BufferedConnectionListener(listener, MaxOutputDelay, ConnectionBufferSize);
+            IConnectionListener connectionListener = new BufferedConnectionListener(
+                listener,
+                MaxOutputDelay,
+                ConnectionBufferSize
+            );
             if (DiagnosticUtility.ShouldUseActivity)
             {
-                connectionListener = new TracingConnectionListener(connectionListener, this.ListenUri);
+                connectionListener = new TracingConnectionListener(
+                    connectionListener,
+                    this.ListenUri
+                );
             }
 
-            connectionDemuxer = new ConnectionDemuxer(connectionListener,
-                MaxPendingAccepts, MaxPendingConnections, ChannelInitializationTimeout,
-                IdleTimeout, MaxPooledConnections,
+            connectionDemuxer = new ConnectionDemuxer(
+                connectionListener,
+                MaxPendingAccepts,
+                MaxPendingConnections,
+                ChannelInitializationTimeout,
+                IdleTimeout,
+                MaxPooledConnections,
                 OnGetTransportFactorySettings,
                 OnGetSingletonMessageHandler,
                 OnHandleServerSessionPreamble,
-                OnDemuxerError);
+                OnDemuxerError
+            );
             connectionDemuxer.StartDemuxing(this.GetOnViaCallback());
         }
 
@@ -137,14 +146,22 @@ namespace System.ServiceModel.Channels
                 this.queueId = queueId;
                 this.token = token;
 
-                BaseUriWithWildcard path = new BaseUriWithWildcard(this.ListenUri, this.HostNameComparisonMode);
+                BaseUriWithWildcard path = new BaseUriWithWildcard(
+                    this.ListenUri,
+                    this.HostNameComparisonMode
+                );
 
                 if (this.onDuplicatedViaCallback == null)
                 {
                     this.onDuplicatedViaCallback = new Func<Uri, int>(OnDuplicatedVia);
                 }
 
-                listener = new SharedConnectionListener(path, queueId, token, this.onDuplicatedViaCallback);
+                listener = new SharedConnectionListener(
+                    path,
+                    queueId,
+                    token,
+                    this.onDuplicatedViaCallback
+                );
 
                 // Delay the creation of the demuxer on the first request.
             }
@@ -180,7 +197,10 @@ namespace System.ServiceModel.Channels
 
         void Unregister()
         {
-            TcpChannelListener.StaticTransportManagerTable.UnregisterUri(this.ListenUri, this.HostNameComparisonMode);
+            TcpChannelListener.StaticTransportManagerTable.UnregisterUri(
+                this.ListenUri,
+                this.HostNameComparisonMode
+            );
         }
 
         internal override void OnAbort()
@@ -196,11 +216,11 @@ namespace System.ServiceModel.Channels
             Unregister();
         }
 
-        protected virtual void OnSelecting(TcpChannelListener channelListener)
-        {
-        }
+        protected virtual void OnSelecting(TcpChannelListener channelListener) { }
 
-        IList<TransportManager> ITransportManagerRegistration.Select(TransportChannelListener channelListener)
+        IList<TransportManager> ITransportManagerRegistration.Select(
+            TransportChannelListener channelListener
+        )
         {
             if (!channelListener.IsScopeIdCompatible(this.hostNameComparisonMode, this.listenUri))
             {

@@ -12,9 +12,8 @@ namespace System.IO.Pipelines.Tests
 {
     public class PipeWriterTests : PipeTest
     {
-        public PipeWriterTests() : base(0, 0)
-        {
-        }
+        public PipeWriterTests()
+            : base(0, 0) { }
 
         private byte[] Read()
         {
@@ -237,7 +236,9 @@ namespace System.IO.Pipelines.Tests
         public void ThrowsOnAdvanceOverMemorySize()
         {
             Memory<byte> buffer = Pipe.Writer.GetMemory(1);
-            Assert.Throws<ArgumentOutOfRangeException>(() => Pipe.Writer.Advance(buffer.Length + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => Pipe.Writer.Advance(buffer.Length + 1)
+            );
         }
 
         [Fact]
@@ -294,7 +295,11 @@ namespace System.IO.Pipelines.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91547", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91547",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public async Task CompleteWithLargeWriteThrows()
         {
             var completeDelay = TimeSpan.FromMilliseconds(10);

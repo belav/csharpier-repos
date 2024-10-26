@@ -11,14 +11,15 @@ namespace Microsoft.AspNetCore.Http.Connections.Client.Internal;
 
 internal static class Constants
 {
-    public static readonly string UserAgent = OperatingSystem.IsBrowser() ? "X-SignalR-User-Agent" : "User-Agent";
+    public static readonly string UserAgent = OperatingSystem.IsBrowser()
+        ? "X-SignalR-User-Agent"
+        : "User-Agent";
     public static readonly string UserAgentHeader = GetUserAgentHeader();
 
     private static string GetUserAgentHeader()
     {
         var assemblyVersion = typeof(Constants)
-            .Assembly
-            .GetCustomAttributes<AssemblyInformationalVersionAttribute>()
+            .Assembly.GetCustomAttributes<AssemblyInformationalVersionAttribute>()
             .FirstOrDefault();
 
         Debug.Assert(assemblyVersion != null);
@@ -26,7 +27,13 @@ internal static class Constants
         var runtime = ".NET";
         var runtimeVersion = RuntimeInformation.FrameworkDescription;
 
-        return ConstructUserAgent(typeof(Constants).Assembly.GetName().Version!, assemblyVersion.InformationalVersion, GetOS(), runtime, runtimeVersion);
+        return ConstructUserAgent(
+            typeof(Constants).Assembly.GetName().Version!,
+            assemblyVersion.InformationalVersion,
+            GetOS(),
+            runtime,
+            runtimeVersion
+        );
     }
 
     private static string GetOS()
@@ -49,7 +56,13 @@ internal static class Constants
         }
     }
 
-    public static string ConstructUserAgent(Version version, string detailedVersion, string os, string runtime, string runtimeVersion)
+    public static string ConstructUserAgent(
+        Version version,
+        string detailedVersion,
+        string os,
+        string runtime,
+        string runtimeVersion
+    )
     {
         var userAgent = $"Microsoft SignalR/{version.Major}.{version.Minor} (";
 

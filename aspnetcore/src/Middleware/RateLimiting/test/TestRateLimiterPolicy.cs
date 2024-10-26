@@ -5,6 +5,7 @@ using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.RateLimiting;
+
 internal class TestRateLimiterPolicy : IRateLimiterPolicy<string>
 {
     private readonly string _key;
@@ -23,13 +24,21 @@ internal class TestRateLimiterPolicy : IRateLimiterPolicy<string>
         };
     }
 
-    public Func<OnRejectedContext, CancellationToken, ValueTask> OnRejected { get => _onRejected; }
+    public Func<OnRejectedContext, CancellationToken, ValueTask> OnRejected
+    {
+        get => _onRejected;
+    }
 
     public RateLimitPartition<string> GetPartition(HttpContext httpContext)
     {
-        return RateLimitPartition.Get<string>(_key, (key =>
-        {
-            return new TestRateLimiter(_alwaysAccept);
-        }));
+        return RateLimitPartition.Get<string>(
+            _key,
+            (
+                key =>
+                {
+                    return new TestRateLimiter(_alwaysAccept);
+                }
+            )
+        );
     }
 }

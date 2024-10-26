@@ -17,7 +17,11 @@ public class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices);
 
-        var methodHander = handlerProvider.GetMethodHandler(TestMethodHandler.Name, TestMethodHandler.RequestType, TestMethodHandler.ResponseType);
+        var methodHander = handlerProvider.GetMethodHandler(
+            TestMethodHandler.Name,
+            TestMethodHandler.RequestType,
+            TestMethodHandler.ResponseType
+        );
         Assert.Same(TestMethodHandler.Instance, methodHander);
     }
 
@@ -27,7 +31,11 @@ public class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices);
 
-        var methodHander = handlerProvider.GetMethodHandler(TestParameterlessMethodHandler.Name, requestType: null, TestParameterlessMethodHandler.ResponseType);
+        var methodHander = handlerProvider.GetMethodHandler(
+            TestParameterlessMethodHandler.Name,
+            requestType: null,
+            TestParameterlessMethodHandler.ResponseType
+        );
         Assert.Same(TestParameterlessMethodHandler.Instance, methodHander);
     }
 
@@ -37,7 +45,11 @@ public class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices);
 
-        var methodHander = handlerProvider.GetMethodHandler(TestNotificationHandler.Name, TestNotificationHandler.RequestType, responseType: null);
+        var methodHander = handlerProvider.GetMethodHandler(
+            TestNotificationHandler.Name,
+            TestNotificationHandler.RequestType,
+            responseType: null
+        );
         Assert.Same(TestNotificationHandler.Instance, methodHander);
     }
 
@@ -47,7 +59,11 @@ public class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices);
 
-        var methodHander = handlerProvider.GetMethodHandler(TestParameterlessNotificationHandler.Name, requestType: null, responseType: null);
+        var methodHander = handlerProvider.GetMethodHandler(
+            TestParameterlessNotificationHandler.Name,
+            requestType: null,
+            responseType: null
+        );
         Assert.Same(TestParameterlessNotificationHandler.Instance, methodHander);
     }
 
@@ -56,7 +72,14 @@ public class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices: false);
 
-        Assert.Throws<InvalidOperationException>(() => handlerProvider.GetMethodHandler("UndefinedMethod", TestMethodHandler.RequestType, TestMethodHandler.ResponseType));
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                handlerProvider.GetMethodHandler(
+                    "UndefinedMethod",
+                    TestMethodHandler.RequestType,
+                    TestMethodHandler.ResponseType
+                )
+        );
     }
 
     [Fact]
@@ -64,7 +87,14 @@ public class HandlerProviderTests
     {
         var handlerProvider = GetHandlerProvider(supportsGetRegisteredServices: false);
 
-        Assert.Throws<InvalidOperationException>(() => handlerProvider.GetMethodHandler(TestMethodHandler.Name, TestMethodHandler.RequestType, responseType: typeof(long)));
+        Assert.Throws<InvalidOperationException>(
+            () =>
+                handlerProvider.GetMethodHandler(
+                    TestMethodHandler.Name,
+                    TestMethodHandler.RequestType,
+                    responseType: typeof(long)
+                )
+        );
     }
 
     [Theory]
@@ -75,15 +105,17 @@ public class HandlerProviderTests
 
         var registeredMethods = handlerProvider.GetRegisteredMethods().OrderBy(m => m.MethodName);
 
-        Assert.Collection(registeredMethods,
+        Assert.Collection(
+            registeredMethods,
             r => Assert.Equal(TestMethodHandler.Name, r.MethodName),
             r => Assert.Equal(TestNotificationHandler.Name, r.MethodName),
             r => Assert.Equal(TestParameterlessMethodHandler.Name, r.MethodName),
-            r => Assert.Equal(TestParameterlessNotificationHandler.Name, r.MethodName));
+            r => Assert.Equal(TestParameterlessNotificationHandler.Name, r.MethodName)
+        );
     }
 
-    private static HandlerProvider GetHandlerProvider(bool supportsGetRegisteredServices)
-        => new(GetLspServices(supportsGetRegisteredServices));
+    private static HandlerProvider GetHandlerProvider(bool supportsGetRegisteredServices) =>
+        new(GetLspServices(supportsGetRegisteredServices));
 
     private static TestLspServices GetLspServices(bool supportsGetRegisteredServices)
     {

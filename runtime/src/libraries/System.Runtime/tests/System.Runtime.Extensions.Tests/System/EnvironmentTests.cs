@@ -21,35 +21,48 @@ namespace System.Tests
         [Fact]
         public void CurrentDirectory_Null_Path_Throws_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => Environment.CurrentDirectory = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => Environment.CurrentDirectory = null
+            );
         }
 
         [Fact]
         public void CurrentDirectory_Empty_Path_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("value", null, () => Environment.CurrentDirectory = string.Empty);
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                null,
+                () => Environment.CurrentDirectory = string.Empty
+            );
         }
 
         [Fact]
         public void CurrentDirectory_SetToNonExistentDirectory_ThrowsDirectoryNotFoundException()
         {
-            Assert.Throws<DirectoryNotFoundException>(() => Environment.CurrentDirectory = GetTestFilePath());
+            Assert.Throws<DirectoryNotFoundException>(
+                () => Environment.CurrentDirectory = GetTestFilePath()
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void CurrentDirectory_SetToValidOtherDirectory()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                Environment.CurrentDirectory = TestDirectory;
-                Assert.Equal(Directory.GetCurrentDirectory(), Environment.CurrentDirectory);
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    Environment.CurrentDirectory = TestDirectory;
+                    Assert.Equal(Directory.GetCurrentDirectory(), Environment.CurrentDirectory);
 
-                // If the temp directory is symlink, setting the current directory to a symlinked path will result
-                // in GetCurrentDirectory returning the absolute path that followed the symlink. We can only verify
-                // the test directory name in that case.
-                Assert.Equal(Path.GetFileName(TestDirectory), Path.GetFileName(Environment.CurrentDirectory));
-
-            }).Dispose();
+                    // If the temp directory is symlink, setting the current directory to a symlinked path will result
+                    // in GetCurrentDirectory returning the absolute path that followed the symlink. We can only verify
+                    // the test directory name in that case.
+                    Assert.Equal(
+                        Path.GetFileName(TestDirectory),
+                        Path.GetFileName(Environment.CurrentDirectory)
+                    );
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -63,13 +76,23 @@ namespace System.Tests
         {
             var ids = new HashSet<int>();
             Barrier b = new Barrier(10);
-            Task.WaitAll((from i in Enumerable.Range(0, b.ParticipantCount)
-                          select Task.Factory.StartNew(() =>
-                          {
-                              b.SignalAndWait();
-                              lock (ids) ids.Add(Environment.CurrentManagedThreadId);
-                              b.SignalAndWait();
-                          }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default)).ToArray());
+            Task.WaitAll(
+                (
+                    from i in Enumerable.Range(0, b.ParticipantCount)
+                    select Task.Factory.StartNew(
+                        () =>
+                        {
+                            b.SignalAndWait();
+                            lock (ids)
+                                ids.Add(Environment.CurrentManagedThreadId);
+                            b.SignalAndWait();
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
+                ).ToArray()
+            );
             Assert.Equal(b.ParticipantCount, ids.Count);
         }
 
@@ -83,7 +106,13 @@ namespace System.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ProcessId_MatchesExpectedValue()
         {
-            using RemoteInvokeHandle handle = RemoteExecutor.Invoke(() => Console.WriteLine(Environment.ProcessId), new RemoteInvokeOptions { StartInfo = new ProcessStartInfo { RedirectStandardOutput = true } });
+            using RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                () => Console.WriteLine(Environment.ProcessId),
+                new RemoteInvokeOptions
+                {
+                    StartInfo = new ProcessStartInfo { RedirectStandardOutput = true },
+                }
+            );
             Assert.Equal(handle.Process.Id, int.Parse(handle.Process.StandardOutput.ReadToEnd()));
         }
 
@@ -97,7 +126,9 @@ namespace System.Tests
         [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "Throws PNSE")]
         public void ProcessPath_MatchesExpectedValue()
         {
-            string expectedProcessPath = PlatformDetection.IsBrowser ? null : Process.GetCurrentProcess().MainModule.FileName;
+            string expectedProcessPath = PlatformDetection.IsBrowser
+                ? null
+                : Process.GetCurrentProcess().MainModule.FileName;
             Assert.Equal(expectedProcessPath, Environment.ProcessPath);
         }
 
@@ -123,7 +154,7 @@ namespace System.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Tests OS-specific environment
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Tests OS-specific environment
         public void Is64BitOperatingSystem_Unix_TrueIff64BitProcess()
         {
             Assert.Equal(Environment.Is64BitProcess, Environment.Is64BitOperatingSystem);
@@ -139,7 +170,10 @@ namespace System.Tests
         public void OSVersion_MatchesPlatform()
         {
             PlatformID id = Environment.OSVersion.Platform;
-            PlatformID expected = OperatingSystem.IsWindows() ? PlatformID.Win32NT : OperatingSystem.IsBrowser() ? PlatformID.Other : PlatformID.Unix;
+            PlatformID expected =
+                OperatingSystem.IsWindows() ? PlatformID.Win32NT
+                : OperatingSystem.IsBrowser() ? PlatformID.Other
+                : PlatformID.Unix;
             Assert.Equal(expected, id);
         }
 
@@ -149,33 +183,63 @@ namespace System.Tests
             Version version = Environment.OSVersion.Version;
             string versionString = Environment.OSVersion.VersionString;
 
-            Assert.False(string.IsNullOrWhiteSpace(versionString), "Expected non-empty version string");
+            Assert.False(
+                string.IsNullOrWhiteSpace(versionString),
+                "Expected non-empty version string"
+            );
             Assert.True(version.Major > 0);
 
             Assert.Contains(version.ToString(2), versionString);
 
-            string expectedOS = OperatingSystem.IsWindows() ? "Windows " : OperatingSystem.IsBrowser() ? "Other " : "Unix ";
+            string expectedOS =
+                OperatingSystem.IsWindows() ? "Windows "
+                : OperatingSystem.IsBrowser() ? "Other "
+                : "Unix ";
             Assert.Contains(expectedOS, versionString);
         }
 
         // On non-OSX Unix, we must parse the version from uname -r
         [Theory]
-        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.OSX & ~TestPlatforms.Browser & ~TestPlatforms.iOS & ~TestPlatforms.tvOS & ~TestPlatforms.MacCatalyst)]
+        [PlatformSpecific(
+            TestPlatforms.AnyUnix
+                & ~TestPlatforms.OSX
+                & ~TestPlatforms.Browser
+                & ~TestPlatforms.iOS
+                & ~TestPlatforms.tvOS
+                & ~TestPlatforms.MacCatalyst
+        )]
         [InlineData("2.6.19-1.2895.fc6", 2, 6, 19, 1)]
         [InlineData("xxx1yyy2zzz3aaa4bbb", 1, 2, 3, 4)]
-        [InlineData("2147483647.2147483647.2147483647.2147483647", int.MaxValue, int.MaxValue, int.MaxValue, int.MaxValue)]
+        [InlineData(
+            "2147483647.2147483647.2147483647.2147483647",
+            int.MaxValue,
+            int.MaxValue,
+            int.MaxValue,
+            int.MaxValue
+        )]
         [InlineData("0.0.0.0", 0, 0, 0, 0)]
         [InlineData("-1.-1.-1.-1", 1, 1, 1, 1)]
         [InlineData("nelknet 4.15.0-10000000000-generic", 4, 15, 0, int.MaxValue)] // integer overflow
         [InlineData("nelknet 4.15.0-24201807041620-generic", 4, 15, 0, int.MaxValue)] // integer overflow
         [InlineData("", 0, 0, 0, 0)]
         [InlineData("1abc", 1, 0, 0, 0)]
-        public void OSVersion_ParseVersion(string input, int major, int minor, int build, int revision)
+        public void OSVersion_ParseVersion(
+            string input,
+            int major,
+            int minor,
+            int build,
+            int revision
+        )
         {
-            var getOSMethod = typeof(Environment).GetMethod("GetOperatingSystem", BindingFlags.Static | BindingFlags.NonPublic);
+            var getOSMethod = typeof(Environment).GetMethod(
+                "GetOperatingSystem",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
 
             var expected = new Version(major, minor, build, revision);
-            var actual = ((OperatingSystem)getOSMethod.Invoke(null, new object[] { input })).Version;
+            var actual = (
+                (OperatingSystem)getOSMethod.Invoke(null, new object[] { input })
+            ).Version;
 
             Assert.Equal(expected, actual);
         }
@@ -230,7 +294,11 @@ namespace System.Tests
         [Fact]
         public void WorkingSet_Valid()
         {
-            if (PlatformDetection.IsBrowser || (PlatformDetection.IsiOS && !PlatformDetection.IsMacCatalyst) || PlatformDetection.IstvOS)
+            if (
+                PlatformDetection.IsBrowser
+                || (PlatformDetection.IsiOS && !PlatformDetection.IsMacCatalyst)
+                || PlatformDetection.IstvOS
+            )
                 Assert.Equal(0, Environment.WorkingSet);
             else
                 Assert.True(Environment.WorkingSet > 0, "Expected positive WorkingSet value");
@@ -241,7 +309,11 @@ namespace System.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void FailFast_ExpectFailureExitCode()
         {
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(() => Environment.FailFast("message")))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    () => Environment.FailFast("message")
+                )
+            )
             {
                 Process p = handle.Process;
                 handle.Process = null;
@@ -249,7 +321,11 @@ namespace System.Tests
                 Assert.NotEqual(RemoteExecutor.SuccessExitCode, p.ExitCode);
             }
 
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(() => Environment.FailFast("message", new Exception("uh oh"))))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    () => Environment.FailFast("message", new Exception("uh oh"))
+                )
+            )
             {
                 Process p = handle.Process;
                 handle.Process = null;
@@ -266,9 +342,12 @@ namespace System.Tests
             psi.RedirectStandardError = true;
             psi.RedirectStandardOutput = true;
 
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(
-                () => Environment.FailFast("message", new ArgumentException("bad arg")),
-                new RemoteInvokeOptions { StartInfo = psi }))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    () => Environment.FailFast("message", new ArgumentException("bad arg")),
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+            )
             {
                 Process p = handle.Process;
                 handle.Process = null;
@@ -288,9 +367,13 @@ namespace System.Tests
             psi.RedirectStandardError = true;
             psi.RedirectStandardOutput = true;
 
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(
-                () => Environment.FailFast("message", new StackOverflowException("SO exception")),
-                new RemoteInvokeOptions { StartInfo = psi }))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    () =>
+                        Environment.FailFast("message", new StackOverflowException("SO exception")),
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+            )
             {
                 Process p = handle.Process;
                 handle.Process = null;
@@ -310,9 +393,19 @@ namespace System.Tests
             psi.RedirectStandardError = true;
             psi.RedirectStandardOutput = true;
 
-            using (RemoteInvokeHandle handle = RemoteExecutor.Invoke(
-                () => Environment.FailFast("message", new ArgumentException("first exception", new NullReferenceException("inner exception"))),
-                new RemoteInvokeOptions { StartInfo = psi }))
+            using (
+                RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                    () =>
+                        Environment.FailFast(
+                            "message",
+                            new ArgumentException(
+                                "first exception",
+                                new NullReferenceException("inner exception")
+                            )
+                        ),
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+            )
             {
                 Process p = handle.Process;
                 handle.Process = null;
@@ -329,27 +422,46 @@ namespace System.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix | TestPlatforms.Browser)]
         public void GetFolderPath_Unix_UserProfileExists()
         {
-            Assert.True(Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)));
+            Assert.True(
+                Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile))
+            );
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix | TestPlatforms.Browser)]  // Tests OS-specific environment
+        [PlatformSpecific(TestPlatforms.AnyUnix | TestPlatforms.Browser)] // Tests OS-specific environment
         public void GetFolderPath_Unix_PersonalIsDocumentsAndUserProfile()
         {
-            if (!PlatformDetection.IsiOS && !PlatformDetection.IstvOS && !PlatformDetection.IsMacCatalyst)
+            if (
+                !PlatformDetection.IsiOS
+                && !PlatformDetection.IstvOS
+                && !PlatformDetection.IsMacCatalyst
+            )
             {
-                Assert.Equal(Path.Combine(Environment.GetEnvironmentVariable("HOME"), "Documents"),
-                             Environment.GetFolderPath(Environment.SpecialFolder.Personal,  Environment.SpecialFolderOption.DoNotVerify));
-                Assert.Equal(Path.Combine(Environment.GetEnvironmentVariable("HOME"), "Documents"),
-                             Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments,  Environment.SpecialFolderOption.DoNotVerify));
+                Assert.Equal(
+                    Path.Combine(Environment.GetEnvironmentVariable("HOME"), "Documents"),
+                    Environment.GetFolderPath(
+                        Environment.SpecialFolder.Personal,
+                        Environment.SpecialFolderOption.DoNotVerify
+                    )
+                );
+                Assert.Equal(
+                    Path.Combine(Environment.GetEnvironmentVariable("HOME"), "Documents"),
+                    Environment.GetFolderPath(
+                        Environment.SpecialFolder.MyDocuments,
+                        Environment.SpecialFolderOption.DoNotVerify
+                    )
+                );
             }
 
-            Assert.Equal(Environment.GetEnvironmentVariable("HOME"), Environment.GetFolderPath(Environment.SpecialFolder.UserProfile));
+            Assert.Equal(
+                Environment.GetEnvironmentVariable("HOME"),
+                Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)
+            );
         }
 
         [Theory]
         [OuterLoop]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Tests OS-specific environment
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Tests OS-specific environment
         [InlineData(Environment.SpecialFolder.ApplicationData)]
         [InlineData(Environment.SpecialFolder.Desktop)]
         [InlineData(Environment.SpecialFolder.DesktopDirectory)]
@@ -359,10 +471,18 @@ namespace System.Tests
         [InlineData(Environment.SpecialFolder.MyPictures)]
         [InlineData(Environment.SpecialFolder.MyVideos)]
         [InlineData(Environment.SpecialFolder.Templates)]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.Android | TestPlatforms.Browser, "Not supported on iOS/tvOS/Android/Browser.")]
-        public void GetFolderPath_Unix_SpecialFolderDoesNotExist_CreatesSuccessfully(Environment.SpecialFolder folder)
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.Android | TestPlatforms.Browser,
+            "Not supported on iOS/tvOS/Android/Browser."
+        )]
+        public void GetFolderPath_Unix_SpecialFolderDoesNotExist_CreatesSuccessfully(
+            Environment.SpecialFolder folder
+        )
         {
-            string path = Environment.GetFolderPath(folder, Environment.SpecialFolderOption.DoNotVerify);
+            string path = Environment.GetFolderPath(
+                folder,
+                Environment.SpecialFolderOption.DoNotVerify
+            );
             if (Directory.Exists(path))
                 return;
             path = Environment.GetFolderPath(folder, Environment.SpecialFolderOption.Create);
@@ -373,28 +493,61 @@ namespace System.Tests
         [Fact]
         public void GetSystemDirectory()
         {
-            Assert.Equal(Environment.GetFolderPath(Environment.SpecialFolder.System), Environment.SystemDirectory);
+            Assert.Equal(
+                Environment.GetFolderPath(Environment.SpecialFolder.System),
+                Environment.SystemDirectory
+            );
         }
 
         [Theory]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Tests OS-specific environment
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Tests OS-specific environment
         [InlineData(Environment.SpecialFolder.UserProfile, Environment.SpecialFolderOption.None)]
-        [InlineData(Environment.SpecialFolder.MyDocuments, Environment.SpecialFolderOption.DoNotVerify)] // MyDocuments == Personal
-        [InlineData(Environment.SpecialFolder.CommonApplicationData, Environment.SpecialFolderOption.None)]
-        [InlineData(Environment.SpecialFolder.CommonTemplates, Environment.SpecialFolderOption.DoNotVerify)]
-        [InlineData(Environment.SpecialFolder.ApplicationData, Environment.SpecialFolderOption.DoNotVerify)]
-        [InlineData(Environment.SpecialFolder.LocalApplicationData, Environment.SpecialFolderOption.DoNotVerify)]
+        [InlineData(
+            Environment.SpecialFolder.MyDocuments,
+            Environment.SpecialFolderOption.DoNotVerify
+        )] // MyDocuments == Personal
+        [InlineData(
+            Environment.SpecialFolder.CommonApplicationData,
+            Environment.SpecialFolderOption.None
+        )]
+        [InlineData(
+            Environment.SpecialFolder.CommonTemplates,
+            Environment.SpecialFolderOption.DoNotVerify
+        )]
+        [InlineData(
+            Environment.SpecialFolder.ApplicationData,
+            Environment.SpecialFolderOption.DoNotVerify
+        )]
+        [InlineData(
+            Environment.SpecialFolder.LocalApplicationData,
+            Environment.SpecialFolderOption.DoNotVerify
+        )]
         [InlineData(Environment.SpecialFolder.Desktop, Environment.SpecialFolderOption.DoNotVerify)]
-        [InlineData(Environment.SpecialFolder.DesktopDirectory, Environment.SpecialFolderOption.DoNotVerify)]
+        [InlineData(
+            Environment.SpecialFolder.DesktopDirectory,
+            Environment.SpecialFolderOption.DoNotVerify
+        )]
         // Not set on Unix (amongst others)
         //[InlineData(Environment.SpecialFolder.System, Environment.SpecialFolderOption.DoNotVerify)]
-        [InlineData(Environment.SpecialFolder.Templates, Environment.SpecialFolderOption.DoNotVerify)]
-        [InlineData(Environment.SpecialFolder.MyVideos, Environment.SpecialFolderOption.DoNotVerify)]
+        [InlineData(
+            Environment.SpecialFolder.Templates,
+            Environment.SpecialFolderOption.DoNotVerify
+        )]
+        [InlineData(
+            Environment.SpecialFolder.MyVideos,
+            Environment.SpecialFolderOption.DoNotVerify
+        )]
         [InlineData(Environment.SpecialFolder.MyMusic, Environment.SpecialFolderOption.DoNotVerify)]
-        [InlineData(Environment.SpecialFolder.MyPictures, Environment.SpecialFolderOption.DoNotVerify)]
+        [InlineData(
+            Environment.SpecialFolder.MyPictures,
+            Environment.SpecialFolderOption.DoNotVerify
+        )]
         [InlineData(Environment.SpecialFolder.Fonts, Environment.SpecialFolderOption.DoNotVerify)]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/49868", TestPlatforms.Android)]
-        public void GetFolderPath_Unix_NonEmptyFolderPaths(Environment.SpecialFolder folder, Environment.SpecialFolderOption option)
+        public void GetFolderPath_Unix_NonEmptyFolderPaths(
+            Environment.SpecialFolder folder,
+            Environment.SpecialFolderOption option
+        )
         {
             Assert.NotEmpty(Environment.GetFolderPath(folder, option));
             if (option == Environment.SpecialFolderOption.None)
@@ -404,12 +557,21 @@ namespace System.Tests
         }
 
         [Theory]
-        [PlatformSpecific(TestPlatforms.OSX)]  // Tests OS-specific environment
-        [InlineData(Environment.SpecialFolder.Favorites, Environment.SpecialFolderOption.DoNotVerify)]
-        [InlineData(Environment.SpecialFolder.InternetCache, Environment.SpecialFolderOption.DoNotVerify)]
+        [PlatformSpecific(TestPlatforms.OSX)] // Tests OS-specific environment
+        [InlineData(
+            Environment.SpecialFolder.Favorites,
+            Environment.SpecialFolderOption.DoNotVerify
+        )]
+        [InlineData(
+            Environment.SpecialFolder.InternetCache,
+            Environment.SpecialFolderOption.DoNotVerify
+        )]
         [InlineData(Environment.SpecialFolder.ProgramFiles, Environment.SpecialFolderOption.None)]
         [InlineData(Environment.SpecialFolder.System, Environment.SpecialFolderOption.None)]
-        public void GetFolderPath_OSX_NonEmptyFolderPaths(Environment.SpecialFolder folder, Environment.SpecialFolderOption option)
+        public void GetFolderPath_OSX_NonEmptyFolderPaths(
+            Environment.SpecialFolder folder,
+            Environment.SpecialFolderOption option
+        )
         {
             Assert.NotEmpty(Environment.GetFolderPath(folder, option));
             if (option == Environment.SpecialFolderOption.None)
@@ -419,7 +581,11 @@ namespace System.Tests
         }
 
         // Requires recent RS3 builds and needs to run inside AppContainer
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows10Version1709OrGreater), nameof(PlatformDetection.IsInAppContainer))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows10Version1709OrGreater),
+            nameof(PlatformDetection.IsInAppContainer)
+        )]
         [InlineData(Environment.SpecialFolder.LocalApplicationData)]
         [InlineData(Environment.SpecialFolder.Cookies)]
         [InlineData(Environment.SpecialFolder.History)]
@@ -435,7 +601,11 @@ namespace System.Tests
         }
 
         // Requires recent RS3 builds and needs to run inside AppContainer
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows10Version1709OrGreater), nameof(PlatformDetection.IsInAppContainer))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows10Version1709OrGreater),
+            nameof(PlatformDetection.IsInAppContainer)
+        )]
         [InlineData(Environment.SpecialFolder.ApplicationData)]
         [InlineData(Environment.SpecialFolder.MyMusic)]
         [InlineData(Environment.SpecialFolder.MyPictures)]
@@ -473,7 +643,10 @@ namespace System.Tests
                 Assert.Fail($"error {error} getting attributes for {path}");
             }
 
-            Assert.True((attributes & FileAttributes.Directory) == FileAttributes.Directory, $"not a directory: {path}");
+            Assert.True(
+                (attributes & FileAttributes.Directory) == FileAttributes.Directory,
+                $"not a directory: {path}"
+            );
         }
 
         public static IEnumerable<object[]> GetFolderPath_WindowsTestData
@@ -527,9 +700,12 @@ namespace System.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer))] // https://github.com/dotnet/runtime/issues/21430
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )] // https://github.com/dotnet/runtime/issues/21430
         [MemberData(nameof(GetFolderPath_WindowsTestData))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Tests OS-specific environment
+        [PlatformSpecific(TestPlatforms.Windows)] // Tests OS-specific environment
         public unsafe void GetFolderPath_Windows(Environment.SpecialFolder folder)
         {
             string knownFolder = Environment.GetFolderPath(folder);
@@ -544,8 +720,11 @@ namespace System.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/60586", TestPlatforms.iOS | TestPlatforms.tvOS)]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // Uses P/Invokes
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/60586",
+            TestPlatforms.iOS | TestPlatforms.tvOS
+        )]
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // Uses P/Invokes
         public void GetLogicalDrives_Unix_AtLeastOneIsRoot()
         {
             string[] drives = Environment.GetLogicalDrives();
@@ -556,7 +735,7 @@ namespace System.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes
         public void GetLogicalDrives_Windows_MatchesExpectedLetters()
         {
             string[] drives = Environment.GetLogicalDrives();
@@ -577,15 +756,26 @@ namespace System.Tests
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern int GetLogicalDrives();
 
-        [DllImport("shell32.dll", SetLastError = false, BestFitMapping = false, ExactSpelling = true)]
+        [DllImport(
+            "shell32.dll",
+            SetLastError = false,
+            BestFitMapping = false,
+            ExactSpelling = true
+        )]
         internal static extern unsafe int SHGetFolderPathW(
             IntPtr hwndOwner,
             int nFolder,
             IntPtr hToken,
             uint dwFlags,
-            char* pszPath);
+            char* pszPath
+        );
 
-        [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Unicode, ExactSpelling = true)]
+        [DllImport(
+            "kernel32.dll",
+            SetLastError = true,
+            CharSet = CharSet.Unicode,
+            ExactSpelling = true
+        )]
         internal static extern FileAttributes GetFileAttributesW(string lpFileName);
 
         public static IEnumerable<object[]> EnvironmentVariableTargets

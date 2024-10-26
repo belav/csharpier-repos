@@ -17,9 +17,7 @@ namespace Microsoft.VisualBasic.Tests
             {
                 FileSystem.FileClose(0); // close all files
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
             base.Dispose(disposing);
         }
 
@@ -33,7 +31,10 @@ namespace Microsoft.VisualBasic.Tests
             // If the test directory has symlinks, setting the current directory to a symlinked path will result
             // in GetCurrentDirectory returning the absolute path that followed the symlink. We can only verify
             // the test directory name in that case.
-            Assert.Equal(System.IO.Path.GetFileName(TestDirectory), System.IO.Path.GetFileName(System.IO.Directory.GetCurrentDirectory()));
+            Assert.Equal(
+                System.IO.Path.GetFileName(TestDirectory),
+                System.IO.Path.GetFileName(System.IO.Directory.GetCurrentDirectory())
+            );
 
             FileSystem.ChDir(savedDirectory);
             Assert.Equal(savedDirectory, System.IO.Directory.GetCurrentDirectory());
@@ -49,25 +50,28 @@ namespace Microsoft.VisualBasic.Tests
             var fileName1 = GetTestFilePath();
             var fileName2 = GetTestFilePath();
 
-            RemoteExecutor.Invoke(
-                (fileName1, fileName2) =>
-                {
-                    putStringNoClose(fileName1, "abc");
-                    putStringNoClose(fileName2, "123");
-
-                    // ProjectData.EndApp() should close all open files.
-                    Microsoft.VisualBasic.CompilerServices.ProjectData.EndApp();
-
-                    static void putStringNoClose(string fileName, string str)
+            RemoteExecutor
+                .Invoke(
+                    (fileName1, fileName2) =>
                     {
-                        int fileNumber = FileSystem.FreeFile();
-                        FileSystem.FileOpen(fileNumber, fileName, OpenMode.Random);
-                        FileSystem.FilePut(fileNumber, str);
-                    }
-                },
-                fileName1,
-                fileName2,
-                new RemoteInvokeOptions() { ExpectedExitCode = 0 }).Dispose();
+                        putStringNoClose(fileName1, "abc");
+                        putStringNoClose(fileName2, "123");
+
+                        // ProjectData.EndApp() should close all open files.
+                        Microsoft.VisualBasic.CompilerServices.ProjectData.EndApp();
+
+                        static void putStringNoClose(string fileName, string str)
+                        {
+                            int fileNumber = FileSystem.FreeFile();
+                            FileSystem.FileOpen(fileNumber, fileName, OpenMode.Random);
+                            FileSystem.FilePut(fileNumber, str);
+                        }
+                    },
+                    fileName1,
+                    fileName2,
+                    new RemoteInvokeOptions() { ExpectedExitCode = 0 }
+                )
+                .Dispose();
 
             // Verify all text was written to the files.
             Assert.Equal("abc", getString(fileName1));
@@ -110,7 +114,10 @@ namespace Microsoft.VisualBasic.Tests
 
             for (int i = 0; i < n; i++)
             {
-                System.IO.File.WriteAllText(System.IO.Path.Combine(TestDirectory, fileNames[i]), i.ToString());
+                System.IO.File.WriteAllText(
+                    System.IO.Path.Combine(TestDirectory, fileNames[i]),
+                    i.ToString()
+                );
             }
 
             // Get all files.
@@ -150,7 +157,9 @@ namespace Microsoft.VisualBasic.Tests
             }
             else
             {
-                AssertThrows<PlatformNotSupportedException>(() => FileSystem.Dir(TestDirectory, FileAttribute.Volume));
+                AssertThrows<PlatformNotSupportedException>(
+                    () => FileSystem.Dir(TestDirectory, FileAttribute.Volume)
+                );
             }
         }
 
@@ -180,7 +189,12 @@ namespace Microsoft.VisualBasic.Tests
         //   public static OpenMode FileAttr(int FileNumber){ throw null; }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/53815", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/53815",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         public void FileClose()
         {
             int fileNumber = FileSystem.FreeFile();
@@ -375,7 +389,12 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/53815", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/53815",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         public void FileOpen()
         {
             // OpenMode.Append:
@@ -393,7 +412,9 @@ namespace Microsoft.VisualBasic.Tests
             // OpenMode.Input:
             fileNumber = FileSystem.FreeFile();
             fileName = GetTestFilePath();
-            AssertThrows<System.IO.FileNotFoundException>(() => FileSystem.FileOpen(fileNumber, fileName, OpenMode.Input));
+            AssertThrows<System.IO.FileNotFoundException>(
+                () => FileSystem.FileOpen(fileNumber, fileName, OpenMode.Input)
+            );
             System.IO.File.WriteAllText(fileName, "abc123");
             FileSystem.FileOpen(fileNumber, fileName, OpenMode.Input);
             FileSystem.FileClose(fileNumber);
@@ -414,11 +435,15 @@ namespace Microsoft.VisualBasic.Tests
             fileNumber = FileSystem.FreeFile();
             fileName = GetTestFilePath();
             FileSystem.FileOpen(fileNumber, fileName, OpenMode.Append);
-            AssertThrows<System.IO.IOException>(() => FileSystem.FileOpen(fileNumber, fileName, OpenMode.Append));
+            AssertThrows<System.IO.IOException>(
+                () => FileSystem.FileOpen(fileNumber, fileName, OpenMode.Append)
+            );
             FileSystem.FileClose(fileNumber);
 
             // Open an invalid fileNumber.
-            AssertThrows<System.IO.IOException>(() => FileSystem.FileOpen(256, GetTestFilePath(), OpenMode.Append));
+            AssertThrows<System.IO.IOException>(
+                () => FileSystem.FileOpen(256, GetTestFilePath(), OpenMode.Append)
+            );
         }
 
         // Not tested:
@@ -490,7 +515,12 @@ namespace Microsoft.VisualBasic.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34362", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34362",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void Input_Object_Write()
         {
             int fileNumber = FileSystem.FreeFile();
@@ -601,25 +631,33 @@ namespace Microsoft.VisualBasic.Tests
 
             static void remoteWrite(string fileName, string text)
             {
-                RemoteExecutor.Invoke(
-                    (fileName, text) =>
-                    {
-                        using (var stream = System.IO.File.Open(fileName, System.IO.FileMode.Append, System.IO.FileAccess.Write, System.IO.FileShare.ReadWrite))
+                RemoteExecutor
+                    .Invoke(
+                        (fileName, text) =>
                         {
-                            try
+                            using (
+                                var stream = System.IO.File.Open(
+                                    fileName,
+                                    System.IO.FileMode.Append,
+                                    System.IO.FileAccess.Write,
+                                    System.IO.FileShare.ReadWrite
+                                )
+                            )
                             {
-                                using (var writer = new System.IO.StreamWriter(stream))
+                                try
                                 {
-                                    writer.Write(text);
+                                    using (var writer = new System.IO.StreamWriter(stream))
+                                    {
+                                        writer.Write(text);
+                                    }
                                 }
+                                catch (System.IO.IOException) { }
                             }
-                            catch (System.IO.IOException)
-                            {
-                            }
-                        }
-                    },
-                    fileName,
-                    text).Dispose();
+                        },
+                        fileName,
+                        text
+                    )
+                    .Dispose();
             }
         }
 
@@ -669,7 +707,9 @@ namespace Microsoft.VisualBasic.Tests
             }
             else
             {
-                AssertThrows<PlatformNotSupportedException>(() => FileSystem.Rename(sourceName, destName));
+                AssertThrows<PlatformNotSupportedException>(
+                    () => FileSystem.Rename(sourceName, destName)
+                );
                 Assert.True(System.IO.File.Exists(sourceName));
                 Assert.False(System.IO.File.Exists(destName));
                 Assert.Equal("abc", System.IO.File.ReadAllText(sourceName));
@@ -686,7 +726,9 @@ namespace Microsoft.VisualBasic.Tests
             }
             else
             {
-                AssertThrows<PlatformNotSupportedException>(() => FileSystem.Rename(sourceName, destName));
+                AssertThrows<PlatformNotSupportedException>(
+                    () => FileSystem.Rename(sourceName, destName)
+                );
             }
             Assert.True(System.IO.File.Exists(sourceName));
             Assert.True(System.IO.File.Exists(destName));
@@ -705,7 +747,12 @@ namespace Microsoft.VisualBasic.Tests
         //   public static void WriteLine(int FileNumber, params object[] Output) { }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/53815", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/53815",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         public void Write_ArgumentException()
         {
             int fileNumber = FileSystem.FreeFile();
@@ -719,7 +766,8 @@ namespace Microsoft.VisualBasic.Tests
         // file numbers) because AssemblyData instances are associated with the calling assembly, and
         // in RELEASE builds, the calling assembly of a lambda invoked from XUnit.Assert.Throws<T>()
         // is corelib rather than this assembly, so file numbers created outside the lambda will be invalid.
-        private static void AssertThrows<TException>(Action action) where TException : Exception
+        private static void AssertThrows<TException>(Action action)
+            where TException : Exception
         {
             TException ex = null;
             try

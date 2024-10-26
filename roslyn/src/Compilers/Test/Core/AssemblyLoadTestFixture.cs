@@ -158,15 +158,21 @@ namespace AnalyzerWithLoc
 
             AnalyzerWithLoc = GenerateDll("AnalyzerWithLoc", _directory, AnalyzerWithLocSource);
 
-            const string AnalyzerWithLocResourceEnGBSource = @"
+            const string AnalyzerWithLocResourceEnGBSource =
+                @"
 [assembly: System.Reflection.AssemblyTitle(""AnalyzerWithLoc"")]
 [assembly: System.Reflection.AssemblyVersion(""1.0.0.0"")]
 [assembly: System.Reflection.AssemblyCulture(""en-GB"")]
 ";
 
-            AnalyzerWithLocResourceEnGB = GenerateDll("AnalyzerWithLoc.resources", _directory.CreateDirectory("en-GB"), AnalyzerWithLocResourceEnGBSource);
+            AnalyzerWithLocResourceEnGB = GenerateDll(
+                "AnalyzerWithLoc.resources",
+                _directory.CreateDirectory("en-GB"),
+                AnalyzerWithLocResourceEnGBSource
+            );
 
-            const string Delta1Source = @"
+            const string Delta1Source =
+                @"
 using System.Text;
 
 [assembly: System.Reflection.AssemblyTitle(""Delta"")]
@@ -187,9 +193,15 @@ namespace Delta
             Delta1 = GenerateDll("Delta", _directory, Delta1Source);
 
             var delta1Reference = MetadataReference.CreateFromFile(Delta1);
-            DeltaPublicSigned1 = GenerateDll("DeltaPublicSigned", _directory.CreateDirectory("Delta1PublicSigned"), Delta1Source, publicKeyOpt: SigningTestHelpers.PublicKey);
+            DeltaPublicSigned1 = GenerateDll(
+                "DeltaPublicSigned",
+                _directory.CreateDirectory("Delta1PublicSigned"),
+                Delta1Source,
+                publicKeyOpt: SigningTestHelpers.PublicKey
+            );
 
-            const string GammaSource = @"
+            const string GammaSource =
+                @"
 using System.Text;
 using Delta;
 
@@ -207,10 +219,18 @@ namespace Gamma
 }
 ";
             Gamma = GenerateDll("Gamma", _directory, GammaSource, delta1Reference);
-            GammaReferencingPublicSigned = GenerateDll("GammaReferencingPublicSigned", _directory.CreateDirectory("GammaReferencingPublicSigned"), GammaSource, MetadataReference.CreateFromFile(DeltaPublicSigned1));
+            GammaReferencingPublicSigned = GenerateDll(
+                "GammaReferencingPublicSigned",
+                _directory.CreateDirectory("GammaReferencingPublicSigned"),
+                GammaSource,
+                MetadataReference.CreateFromFile(DeltaPublicSigned1)
+            );
 
             var gammaReference = MetadataReference.CreateFromFile(Gamma);
-            Beta = GenerateDll("Beta", _directory, @"
+            Beta = GenerateDll(
+                "Beta",
+                _directory,
+                @"
 using System.Text;
 using Gamma;
 
@@ -226,9 +246,14 @@ namespace Beta
         }
     }
 }
-", gammaReference);
+",
+                gammaReference
+            );
 
-            Alpha = GenerateDll("Alpha", _directory, @"
+            Alpha = GenerateDll(
+                "Alpha",
+                _directory,
+                @"
 using System.Text;
 using Gamma;
 
@@ -243,9 +268,12 @@ namespace Alpha
         }
     }
 }
-", gammaReference);
+",
+                gammaReference
+            );
 
-            const string Delta2Source = @"
+            const string Delta2Source =
+                @"
 using System.Text;
 
 [assembly: System.Reflection.AssemblyTitle(""Delta"")]
@@ -266,11 +294,17 @@ namespace Delta
             var v2Directory = _directory.CreateDirectory("Version2");
             Delta2 = GenerateDll("Delta", v2Directory, Delta2Source);
             var v2PublicSignedDirectory = _directory.CreateDirectory("Version2PublicSigned");
-            DeltaPublicSigned2 = GenerateDll("DeltaPublicSigned", v2PublicSignedDirectory, Delta2Source, publicKeyOpt: SigningTestHelpers.PublicKey);
+            DeltaPublicSigned2 = GenerateDll(
+                "DeltaPublicSigned",
+                v2PublicSignedDirectory,
+                Delta2Source,
+                publicKeyOpt: SigningTestHelpers.PublicKey
+            );
 
             var delta2Reference = MetadataReference.CreateFromFile(Delta2);
 
-            const string EpsilonSource = @"
+            const string EpsilonSource =
+                @"
 using System.Text;
 using Delta;
 
@@ -288,10 +322,18 @@ namespace Epsilon
 }
 ";
             Epsilon = GenerateDll("Epsilon", v2Directory, EpsilonSource, delta2Reference);
-            EpsilonReferencingPublicSigned = GenerateDll("EpsilonReferencingPublicSigned", v2PublicSignedDirectory, EpsilonSource, MetadataReference.CreateFromFile(DeltaPublicSigned2));
+            EpsilonReferencingPublicSigned = GenerateDll(
+                "EpsilonReferencingPublicSigned",
+                v2PublicSignedDirectory,
+                EpsilonSource,
+                MetadataReference.CreateFromFile(DeltaPublicSigned2)
+            );
 
             var v2BDirectory = _directory.CreateDirectory("Version2B");
-            Delta2B = GenerateDll("Delta", v2BDirectory, @"
+            Delta2B = GenerateDll(
+                "Delta",
+                v2BDirectory,
+                @"
 using System.Text;
 
 [assembly: System.Reflection.AssemblyTitle(""Delta"")]
@@ -307,10 +349,14 @@ namespace Delta
         }
     }
 }
-");
+"
+            );
 
             var v3Directory = _directory.CreateDirectory("Version3");
-            Delta3 = GenerateDll("Delta", v3Directory, @"
+            Delta3 = GenerateDll(
+                "Delta",
+                v3Directory,
+                @"
 using System.Text;
 
 [assembly: System.Reflection.AssemblyTitle(""Delta"")]
@@ -326,12 +372,18 @@ namespace Delta
         }
     }
 }
-");
+"
+            );
 
             var sciUserDirectory = _directory.CreateDirectory("SCIUser");
-            var compilerReference = MetadataReference.CreateFromFile(typeof(Microsoft.CodeAnalysis.SyntaxNode).Assembly.Location);
+            var compilerReference = MetadataReference.CreateFromFile(
+                typeof(Microsoft.CodeAnalysis.SyntaxNode).Assembly.Location
+            );
 
-            UserSystemCollectionsImmutable = GenerateDll("System.Collections.Immutable", sciUserDirectory, @"
+            UserSystemCollectionsImmutable = GenerateDll(
+                "System.Collections.Immutable",
+                sciUserDirectory,
+                @"
 namespace System.Collections.Immutable
 {
     public static class ImmutableArray
@@ -346,10 +398,17 @@ namespace System.Collections.Immutable
         public static int MyMethod() => 42;
     }
 }
-", compilerReference);
+",
+                compilerReference
+            );
 
-            var userSystemCollectionsImmutableReference = MetadataReference.CreateFromFile(UserSystemCollectionsImmutable);
-            AnalyzerReferencesSystemCollectionsImmutable1 = GenerateDll("AnalyzerUsesSystemCollectionsImmutable1", sciUserDirectory, @"
+            var userSystemCollectionsImmutableReference = MetadataReference.CreateFromFile(
+                UserSystemCollectionsImmutable
+            );
+            AnalyzerReferencesSystemCollectionsImmutable1 = GenerateDll(
+                "AnalyzerUsesSystemCollectionsImmutable1",
+                sciUserDirectory,
+                @"
 using System.Text;
 using System.Collections.Immutable;
 
@@ -360,9 +419,15 @@ public class Analyzer
         sb.Append(ImmutableArray<object>.MyMethod());
     }
 }
-", userSystemCollectionsImmutableReference, compilerReference);
+",
+                userSystemCollectionsImmutableReference,
+                compilerReference
+            );
 
-            AnalyzerReferencesSystemCollectionsImmutable2 = GenerateDll("AnalyzerUsesSystemCollectionsImmutable2", sciUserDirectory, @"
+            AnalyzerReferencesSystemCollectionsImmutable2 = GenerateDll(
+                "AnalyzerUsesSystemCollectionsImmutable2",
+                sciUserDirectory,
+                @"
 using System.Text;
 using System.Collections.Immutable;
 
@@ -373,12 +438,22 @@ public class Analyzer
         sb.Append(ImmutableArray.Create(""a"").Length);
     }
 }
-", userSystemCollectionsImmutableReference, compilerReference);
+",
+                userSystemCollectionsImmutableReference,
+                compilerReference
+            );
 
-            var analyzerReferencesDelta1Directory = _directory.CreateDirectory("AnalyzerReferencesDelta1");
-            var delta1InAnalyzerReferencesDelta1 = analyzerReferencesDelta1Directory.CopyFile(Delta1);
+            var analyzerReferencesDelta1Directory = _directory.CreateDirectory(
+                "AnalyzerReferencesDelta1"
+            );
+            var delta1InAnalyzerReferencesDelta1 = analyzerReferencesDelta1Directory.CopyFile(
+                Delta1
+            );
 
-            AnalyzerReferencesDelta1 = GenerateDll("AnalyzerReferencesDelta1", _directory, @"
+            AnalyzerReferencesDelta1 = GenerateDll(
+                "AnalyzerReferencesDelta1",
+                _directory,
+                @"
 using System.Text;
 using Delta;
 
@@ -390,10 +465,16 @@ public class Analyzer
         d.Write(sb, ""Hello"");
     }
 }
-", MetadataReference.CreateFromFile(delta1InAnalyzerReferencesDelta1.Path), compilerReference);
+",
+                MetadataReference.CreateFromFile(delta1InAnalyzerReferencesDelta1.Path),
+                compilerReference
+            );
 
             var faultyAnalyzerDirectory = _directory.CreateDirectory("FaultyAnalyzer");
-            FaultyAnalyzer = GenerateDll("FaultyAnalyzer", faultyAnalyzerDirectory, @"
+            FaultyAnalyzer = GenerateDll(
+                "FaultyAnalyzer",
+                faultyAnalyzerDirectory,
+                @"
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
@@ -401,11 +482,20 @@ using Microsoft.CodeAnalysis.Diagnostics;
 public abstract class TestAnalyzer : DiagnosticAnalyzer
 {
 }
-", compilerReference);
+",
+                compilerReference
+            );
 
-            var realSciReference = MetadataReference.CreateFromFile(typeof(ImmutableArray).Assembly.Location);
-            var analyzerWithDependencyDirectory = _directory.CreateDirectory("AnalyzerWithDependency");
-            AnalyzerDependency = GenerateDll("AnalyzerDependency", analyzerWithDependencyDirectory, @"
+            var realSciReference = MetadataReference.CreateFromFile(
+                typeof(ImmutableArray).Assembly.Location
+            );
+            var analyzerWithDependencyDirectory = _directory.CreateDirectory(
+                "AnalyzerWithDependency"
+            );
+            AnalyzerDependency = GenerateDll(
+                "AnalyzerDependency",
+                analyzerWithDependencyDirectory,
+                @"
 using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
@@ -417,9 +507,15 @@ public abstract class AbstractTestAnalyzer : DiagnosticAnalyzer
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get { throw new NotImplementedException(); } }
     public override void Initialize(AnalysisContext context) { throw new NotImplementedException(); }
 }
-", realSciReference, compilerReference);
+",
+                realSciReference,
+                compilerReference
+            );
 
-            AnalyzerWithDependency = GenerateDll("Analyzer", analyzerWithDependencyDirectory, @"
+            AnalyzerWithDependency = GenerateDll(
+                "Analyzer",
+                analyzerWithDependencyDirectory,
+                @"
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Diagnostics;
 
@@ -427,9 +523,16 @@ using Microsoft.CodeAnalysis.Diagnostics;
 public sealed class TestAnalyzer : AbstractTestAnalyzer
 {
     private static string SomeString2 = AbstractTestAnalyzer.SomeString;
-}", realSciReference, compilerReference, MetadataReference.CreateFromFile(AnalyzerDependency));
+}",
+                realSciReference,
+                compilerReference,
+                MetadataReference.CreateFromFile(AnalyzerDependency)
+            );
 
-            AnalyzerWithNativeDependency = GenerateDll("AnalyzerWithNativeDependency", _directory, @"
+            AnalyzerWithNativeDependency = GenerateDll(
+                "AnalyzerWithNativeDependency",
+                _directory,
+                @"
 using System;
 using System.Runtime.InteropServices;
 
@@ -444,10 +547,20 @@ public class Class1
     }
 }
 
-");
+"
+            );
 
-            var analyzerWithFakeCompilerDependencyDirectory = _directory.CreateDirectory("AnalyzerWithFakeCompilerDependency");
-            var fakeCompilerAssembly = GenerateDll("Microsoft.CodeAnalysis", analyzerWithFakeCompilerDependencyDirectory, publicKeyOpt: typeof(SyntaxNode).Assembly.GetName().GetPublicKey()?.ToImmutableArray() ?? default, csSource: @"
+            var analyzerWithFakeCompilerDependencyDirectory = _directory.CreateDirectory(
+                "AnalyzerWithFakeCompilerDependency"
+            );
+            var fakeCompilerAssembly = GenerateDll(
+                "Microsoft.CodeAnalysis",
+                analyzerWithFakeCompilerDependencyDirectory,
+                publicKeyOpt: typeof(SyntaxNode)
+                    .Assembly.GetName()
+                    .GetPublicKey()
+                    ?.ToImmutableArray() ?? default,
+                csSource: @"
 using System;
 using System.Reflection;
 
@@ -464,18 +577,33 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
     }
 }
-");
+"
+            );
             var fakeCompilerReference = MetadataReference.CreateFromFile(fakeCompilerAssembly);
-            AnalyzerWithFakeCompilerDependency = GenerateDll("AnalyzerWithFakeCompilerDependency", analyzerWithFakeCompilerDependencyDirectory, @"
+            AnalyzerWithFakeCompilerDependency = GenerateDll(
+                "AnalyzerWithFakeCompilerDependency",
+                analyzerWithFakeCompilerDependencyDirectory,
+                @"
 using Microsoft.CodeAnalysis.Diagnostics;
 
 [DiagnosticAnalyzer(""C#"")]
 public class Analyzer : DiagnosticAnalyzer
 {
-}", fakeCompilerReference);
+}",
+                fakeCompilerReference
+            );
 
-            var analyzerWithLaterFakeCompileDirectory = _directory.CreateDirectory("AnalyzerWithLaterFakeCompilerDependency");
-            var laterFakeCompilerAssembly = GenerateDll("Microsoft.CodeAnalysis", analyzerWithLaterFakeCompileDirectory, publicKeyOpt: typeof(SyntaxNode).Assembly.GetName().GetPublicKey()?.ToImmutableArray() ?? default, csSource: @"
+            var analyzerWithLaterFakeCompileDirectory = _directory.CreateDirectory(
+                "AnalyzerWithLaterFakeCompilerDependency"
+            );
+            var laterFakeCompilerAssembly = GenerateDll(
+                "Microsoft.CodeAnalysis",
+                analyzerWithLaterFakeCompileDirectory,
+                publicKeyOpt: typeof(SyntaxNode)
+                    .Assembly.GetName()
+                    .GetPublicKey()
+                    ?.ToImmutableArray() ?? default,
+                csSource: @"
 using System;
 using System.Reflection;
 
@@ -492,25 +620,51 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
     }
 }
-");
-            var laterCompilerReference = MetadataReference.CreateFromFile(laterFakeCompilerAssembly);
-            AnalyzerWithLaterFakeCompilerDependency = GenerateDll("AnalyzerWithLaterFakeCompilerDependency", analyzerWithLaterFakeCompileDirectory, @"
+"
+            );
+            var laterCompilerReference = MetadataReference.CreateFromFile(
+                laterFakeCompilerAssembly
+            );
+            AnalyzerWithLaterFakeCompilerDependency = GenerateDll(
+                "AnalyzerWithLaterFakeCompilerDependency",
+                analyzerWithLaterFakeCompileDirectory,
+                @"
 using Microsoft.CodeAnalysis.Diagnostics;
 
 [DiagnosticAnalyzer(""C#"")]
 public class Analyzer : DiagnosticAnalyzer
 {
-}", laterCompilerReference);
+}",
+                laterCompilerReference
+            );
         }
 
-        private static string GenerateDll(string assemblyName, TempDirectory directory, string csSource, params MetadataReference[] additionalReferences)
+        private static string GenerateDll(
+            string assemblyName,
+            TempDirectory directory,
+            string csSource,
+            params MetadataReference[] additionalReferences
+        )
         {
-            return GenerateDll(assemblyName, directory, csSource, publicKeyOpt: default, additionalReferences);
+            return GenerateDll(
+                assemblyName,
+                directory,
+                csSource,
+                publicKeyOpt: default,
+                additionalReferences
+            );
         }
 
-        private static string GenerateDll(string assemblyName, TempDirectory directory, string csSource, ImmutableArray<byte> publicKeyOpt, params MetadataReference[] additionalReferences)
+        private static string GenerateDll(
+            string assemblyName,
+            TempDirectory directory,
+            string csSource,
+            ImmutableArray<byte> publicKeyOpt,
+            params MetadataReference[] additionalReferences
+        )
         {
-            CSharpCompilationOptions options = new(OutputKind.DynamicallyLinkedLibrary, warningLevel: Diagnostic.MaxWarningLevel);
+            CSharpCompilationOptions options =
+                new(OutputKind.DynamicallyLinkedLibrary, warningLevel: Diagnostic.MaxWarningLevel);
 
             if (!publicKeyOpt.IsDefault)
             {
@@ -519,20 +673,28 @@ public class Analyzer : DiagnosticAnalyzer
 
             var analyzerDependencyCompilation = CSharpCompilation.Create(
                 assemblyName: assemblyName,
-                syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(SourceText.From(csSource, encoding: null, SourceHashAlgorithms.Default)) },
-                references: (new MetadataReference[]
+                syntaxTrees: new SyntaxTree[]
                 {
-                    NetStandard20.mscorlib,
-                    NetStandard20.netstandard,
-                    NetStandard20.SystemRuntime
-                }).Concat(additionalReferences),
-                options: options);
+                    SyntaxFactory.ParseSyntaxTree(
+                        SourceText.From(csSource, encoding: null, SourceHashAlgorithms.Default)
+                    ),
+                },
+                references: (
+                    new MetadataReference[]
+                    {
+                        NetStandard20.mscorlib,
+                        NetStandard20.netstandard,
+                        NetStandard20.SystemRuntime,
+                    }
+                ).Concat(additionalReferences),
+                options: options
+            );
 
             var tempFile = directory.CreateFile($"{assemblyName}.dll");
             tempFile.WriteAllBytes(analyzerDependencyCompilation.EmitToArray());
 
             // Mark the file as read only to prevent mutations. The output of this type is frequently used across
-            // unit tests boundaries. Need a guardrail to make sure one test doesn't pollute the output of 
+            // unit tests boundaries. Need a guardrail to make sure one test doesn't pollute the output of
             // another test.
             var fileInfo = new FileInfo(tempFile.Path);
             fileInfo.IsReadOnly = true;

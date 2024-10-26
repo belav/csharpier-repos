@@ -49,8 +49,16 @@ namespace System.ServiceModel.Syndication.Tests
 
         public static IEnumerable<object[]> Ctor_TextSyndicationContent_Uri_TestData()
         {
-            yield return new object[] { new TextSyndicationContent(""), new Uri("http://microsoft.com") };
-            yield return new object[] { new TextSyndicationContent("title", TextSyndicationContentKind.Html), new Uri("/relative", UriKind.Relative) };
+            yield return new object[]
+            {
+                new TextSyndicationContent(""),
+                new Uri("http://microsoft.com"),
+            };
+            yield return new object[]
+            {
+                new TextSyndicationContent("title", TextSyndicationContentKind.Html),
+                new Uri("/relative", UriKind.Relative),
+            };
         }
 
         [Theory]
@@ -69,20 +77,75 @@ namespace System.ServiceModel.Syndication.Tests
 
         public static IEnumerable<object[]> Ctor_TextSyndicationContent_Uri_Categories_Bool_TestData()
         {
-            yield return new object[] { new TextSyndicationContent(""), new Uri("http://microsoft.com"), null, true };
-            yield return new object[] { new TextSyndicationContent(""), new Uri("http://microsoft.com"), null, false };
-            yield return new object[] { new TextSyndicationContent("title", TextSyndicationContentKind.Html), new Uri("/relative", UriKind.Relative), new CategoriesDocument[0], true };
-            yield return new object[] { new TextSyndicationContent("title", TextSyndicationContentKind.Html), new Uri("/relative", UriKind.Relative), new CategoriesDocument[0], false };
-            yield return new object[] { new TextSyndicationContent("title", TextSyndicationContentKind.Html), new Uri("/relative", UriKind.Relative), new CategoriesDocument[] { CategoriesDocument.Create(new Uri("http://microsoft.com")) }, true };
-            yield return new object[] { new TextSyndicationContent("title", TextSyndicationContentKind.Html), new Uri("/relative", UriKind.Relative), new CategoriesDocument[] { CategoriesDocument.Create(new Uri("http://microsoft.com")) }, false };
+            yield return new object[]
+            {
+                new TextSyndicationContent(""),
+                new Uri("http://microsoft.com"),
+                null,
+                true,
+            };
+            yield return new object[]
+            {
+                new TextSyndicationContent(""),
+                new Uri("http://microsoft.com"),
+                null,
+                false,
+            };
+            yield return new object[]
+            {
+                new TextSyndicationContent("title", TextSyndicationContentKind.Html),
+                new Uri("/relative", UriKind.Relative),
+                new CategoriesDocument[0],
+                true,
+            };
+            yield return new object[]
+            {
+                new TextSyndicationContent("title", TextSyndicationContentKind.Html),
+                new Uri("/relative", UriKind.Relative),
+                new CategoriesDocument[0],
+                false,
+            };
+            yield return new object[]
+            {
+                new TextSyndicationContent("title", TextSyndicationContentKind.Html),
+                new Uri("/relative", UriKind.Relative),
+                new CategoriesDocument[]
+                {
+                    CategoriesDocument.Create(new Uri("http://microsoft.com")),
+                },
+                true,
+            };
+            yield return new object[]
+            {
+                new TextSyndicationContent("title", TextSyndicationContentKind.Html),
+                new Uri("/relative", UriKind.Relative),
+                new CategoriesDocument[]
+                {
+                    CategoriesDocument.Create(new Uri("http://microsoft.com")),
+                },
+                false,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_TextSyndicationContent_Uri_Categories_Bool_TestData))]
-        public void Ctor_TextSyndicationContent_Uri_Categories_Bool(TextSyndicationContent title, Uri link, IEnumerable<CategoriesDocument> categories, bool allowsNewEntries)
+        public void Ctor_TextSyndicationContent_Uri_Categories_Bool(
+            TextSyndicationContent title,
+            Uri link,
+            IEnumerable<CategoriesDocument> categories,
+            bool allowsNewEntries
+        )
         {
-            var collectionInfo = new ResourceCollectionInfo(title, link, categories, allowsNewEntries);
-            Assert.Equal(allowsNewEntries ? new string[0] : new string[] { "" }, collectionInfo.Accepts);
+            var collectionInfo = new ResourceCollectionInfo(
+                title,
+                link,
+                categories,
+                allowsNewEntries
+            );
+            Assert.Equal(
+                allowsNewEntries ? new string[0] : new string[] { "" },
+                collectionInfo.Accepts
+            );
             Assert.Empty(collectionInfo.AttributeExtensions);
             Assert.Null(collectionInfo.BaseUri);
             Assert.Equal(categories?.Count() ?? 0, collectionInfo.Categories.Count);
@@ -93,14 +156,40 @@ namespace System.ServiceModel.Syndication.Tests
 
         public static IEnumerable<object[]> Ctor_TextSyndicationContent_Uri_Categories_Accepts_TestData()
         {
-            yield return new object[] { new TextSyndicationContent(""), new Uri("http://microsoft.com"), null, null };
-            yield return new object[] { new TextSyndicationContent("title", TextSyndicationContentKind.Html), new Uri("/relative", UriKind.Relative), new CategoriesDocument[0], new string[0] };
-            yield return new object[] { new TextSyndicationContent("title", TextSyndicationContentKind.Html), new Uri("/relative", UriKind.Relative), new CategoriesDocument[] { CategoriesDocument.Create(new Uri("http://microsoft.com")) }, new string[] { "accepts" } };
+            yield return new object[]
+            {
+                new TextSyndicationContent(""),
+                new Uri("http://microsoft.com"),
+                null,
+                null,
+            };
+            yield return new object[]
+            {
+                new TextSyndicationContent("title", TextSyndicationContentKind.Html),
+                new Uri("/relative", UriKind.Relative),
+                new CategoriesDocument[0],
+                new string[0],
+            };
+            yield return new object[]
+            {
+                new TextSyndicationContent("title", TextSyndicationContentKind.Html),
+                new Uri("/relative", UriKind.Relative),
+                new CategoriesDocument[]
+                {
+                    CategoriesDocument.Create(new Uri("http://microsoft.com")),
+                },
+                new string[] { "accepts" },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_TextSyndicationContent_Uri_Categories_Accepts_TestData))]
-        public void Ctor_TextSyndicationContent_Uri_Categories_Accepts(TextSyndicationContent title, Uri link, IEnumerable<CategoriesDocument> categories, IEnumerable<string> accepts)
+        public void Ctor_TextSyndicationContent_Uri_Categories_Accepts(
+            TextSyndicationContent title,
+            Uri link,
+            IEnumerable<CategoriesDocument> categories,
+            IEnumerable<string> accepts
+        )
         {
             var collectionInfo = new ResourceCollectionInfo(title, link, categories, accepts);
             Assert.Equal(accepts ?? new string[0], collectionInfo.Accepts);
@@ -115,34 +204,113 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullTitle_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("title", () => new ResourceCollectionInfo((string)null, new Uri("http://microsoft.com")));
-            AssertExtensions.Throws<ArgumentNullException>("title", () => new ResourceCollectionInfo((TextSyndicationContent)null, new Uri("http://microsoft.com")));
-            AssertExtensions.Throws<ArgumentNullException>("title", () => new ResourceCollectionInfo(null, new Uri("http://microsoft.com"), new CategoriesDocument[0], true));
-            AssertExtensions.Throws<ArgumentNullException>("title", () => new ResourceCollectionInfo(null, new Uri("http://microsoft.com"), new CategoriesDocument[0], new string[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "title",
+                () => new ResourceCollectionInfo((string)null, new Uri("http://microsoft.com"))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "title",
+                () =>
+                    new ResourceCollectionInfo(
+                        (TextSyndicationContent)null,
+                        new Uri("http://microsoft.com")
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "title",
+                () =>
+                    new ResourceCollectionInfo(
+                        null,
+                        new Uri("http://microsoft.com"),
+                        new CategoriesDocument[0],
+                        true
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "title",
+                () =>
+                    new ResourceCollectionInfo(
+                        null,
+                        new Uri("http://microsoft.com"),
+                        new CategoriesDocument[0],
+                        new string[0]
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_NullLink_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("link", () => new ResourceCollectionInfo("title", null));
-            AssertExtensions.Throws<ArgumentNullException>("link", () => new ResourceCollectionInfo(new TextSyndicationContent("title"), null));
-            AssertExtensions.Throws<ArgumentNullException>("link", () => new ResourceCollectionInfo(new TextSyndicationContent("title"), null, new CategoriesDocument[0], true));
-            AssertExtensions.Throws<ArgumentNullException>("link", () => new ResourceCollectionInfo(new TextSyndicationContent("title"), null, new CategoriesDocument[0], new string[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "link",
+                () => new ResourceCollectionInfo("title", null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "link",
+                () => new ResourceCollectionInfo(new TextSyndicationContent("title"), null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "link",
+                () =>
+                    new ResourceCollectionInfo(
+                        new TextSyndicationContent("title"),
+                        null,
+                        new CategoriesDocument[0],
+                        true
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "link",
+                () =>
+                    new ResourceCollectionInfo(
+                        new TextSyndicationContent("title"),
+                        null,
+                        new CategoriesDocument[0],
+                        new string[0]
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_NullValueInCategories_ThrowsArgumentNullException()
         {
             var categories = new CategoriesDocument[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("item", () => new ResourceCollectionInfo(new TextSyndicationContent("title"), new Uri("http://microsoft.com"), categories, true));
-            AssertExtensions.Throws<ArgumentNullException>("item", () => new ResourceCollectionInfo(new TextSyndicationContent("title"), new Uri("http://microsoft.com"), categories, new string[0]));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "item",
+                () =>
+                    new ResourceCollectionInfo(
+                        new TextSyndicationContent("title"),
+                        new Uri("http://microsoft.com"),
+                        categories,
+                        true
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "item",
+                () =>
+                    new ResourceCollectionInfo(
+                        new TextSyndicationContent("title"),
+                        new Uri("http://microsoft.com"),
+                        categories,
+                        new string[0]
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_NullValueInAccepts_ThrowsArgumentNullException()
         {
             var accepts = new string[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("item", () => new ResourceCollectionInfo(new TextSyndicationContent("title"), new Uri("http://microsoft.com"), new CategoriesDocument[0], accepts));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "item",
+                () =>
+                    new ResourceCollectionInfo(
+                        new TextSyndicationContent("title"),
+                        new Uri("http://microsoft.com"),
+                        new CategoriesDocument[0],
+                        accepts
+                    )
+            );
         }
 
         [Fact]
@@ -218,7 +386,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateInlineCategoriesDocument_Invoke_ReturnsExpected()
         {
             var workspace = new ResourceCollectionInfoSubclass();
-            InlineCategoriesDocument document = workspace.CreateInlineCategoriesDocumentEntryPoint();
+            InlineCategoriesDocument document =
+                workspace.CreateInlineCategoriesDocumentEntryPoint();
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.Categories);
@@ -232,7 +401,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void CreateReferencedCategoriesDocument_Invoke_ReturnsExpected()
         {
             var workspace = new ResourceCollectionInfoSubclass();
-            ReferencedCategoriesDocument document = workspace.CreateReferencedCategoriesDocumentEntryPoint();
+            ReferencedCategoriesDocument document =
+                workspace.CreateReferencedCategoriesDocumentEntryPoint();
             Assert.Empty(document.AttributeExtensions);
             Assert.Null(document.BaseUri);
             Assert.Empty(document.ElementExtensions);
@@ -248,7 +418,12 @@ namespace System.ServiceModel.Syndication.Tests
         [InlineData("name", "http://www.w3.org/2000/xmlns/", "value", "version")]
         [InlineData("type", "ns", "value", "version")]
         [InlineData("name", "http://www.w3.org/2001/XMLSchema-instance", "value", "version")]
-        public void TryParseAttribute_Invoke_ReturnsFalse(string name, string ns, string value, string version)
+        public void TryParseAttribute_Invoke_ReturnsFalse(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             var collectionInfo = new ResourceCollectionInfoSubclass();
             Assert.False(collectionInfo.TryParseAttributeEntryPoint(name, ns, value, version));
@@ -276,19 +451,28 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Invoke_ReturnsExpected(string version)
         {
             var collectionInfo = new ResourceCollectionInfoSubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => collectionInfo.WriteAttributeExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => collectionInfo.WriteAttributeExtensionsEntryPoint(writer, version)
+            );
 
             collectionInfo.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
             collectionInfo.AttributeExtensions.Add(new XmlQualifiedName("name2", "namespace"), "");
             collectionInfo.AttributeExtensions.Add(new XmlQualifiedName("name3"), null);
-            CompareHelper.AssertEqualWriteOutput(@"name1=""value"" d0p1:name2="""" name3=""""", writer => collectionInfo.WriteAttributeExtensionsEntryPoint(writer, "version"));
+            CompareHelper.AssertEqualWriteOutput(
+                @"name1=""value"" d0p1:name2="""" name3=""""",
+                writer => collectionInfo.WriteAttributeExtensionsEntryPoint(writer, "version")
+            );
         }
 
         [Fact]
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var collectionInfo = new ResourceCollectionInfoSubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => collectionInfo.WriteAttributeExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => collectionInfo.WriteAttributeExtensionsEntryPoint(null, "version")
+            );
         }
 
         [Theory]
@@ -298,39 +482,57 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Invoke_ReturnsExpected(string version)
         {
             var collectionInfo = new ResourceCollectionInfoSubclass();
-            CompareHelper.AssertEqualWriteOutput("", writer => collectionInfo.WriteElementExtensionsEntryPoint(writer, version));
+            CompareHelper.AssertEqualWriteOutput(
+                "",
+                writer => collectionInfo.WriteElementExtensionsEntryPoint(writer, version)
+            );
 
             collectionInfo.ElementExtensions.Add(new ExtensionObject { Value = 10 });
             collectionInfo.ElementExtensions.Add(new ExtensionObject { Value = 11 });
             CompareHelper.AssertEqualWriteOutput(
-@"<ResourceCollectionInfoTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
+                @"<ResourceCollectionInfoTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>10</Value>
 </ResourceCollectionInfoTests.ExtensionObject>
 <ResourceCollectionInfoTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
     <Value>11</Value>
-</ResourceCollectionInfoTests.ExtensionObject>", writer => collectionInfo.WriteElementExtensionsEntryPoint(writer, version));
+</ResourceCollectionInfoTests.ExtensionObject>",
+                writer => collectionInfo.WriteElementExtensionsEntryPoint(writer, version)
+            );
         }
 
         [Fact]
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var collectionInfo = new ResourceCollectionInfoSubclass();
-            AssertExtensions.Throws<ArgumentNullException>("writer", () => collectionInfo.WriteElementExtensionsEntryPoint(null, "version"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "writer",
+                () => collectionInfo.WriteElementExtensionsEntryPoint(null, "version")
+            );
         }
 
         public class ResourceCollectionInfoSubclass : ResourceCollectionInfo
         {
-            public InlineCategoriesDocument CreateInlineCategoriesDocumentEntryPoint() => CreateInlineCategoriesDocument();
+            public InlineCategoriesDocument CreateInlineCategoriesDocumentEntryPoint() =>
+                CreateInlineCategoriesDocument();
 
-            public ReferencedCategoriesDocument CreateReferencedCategoriesDocumentEntryPoint() => CreateReferencedCategoriesDocument();
+            public ReferencedCategoriesDocument CreateReferencedCategoriesDocumentEntryPoint() =>
+                CreateReferencedCategoriesDocument();
 
-            public bool TryParseAttributeEntryPoint(string name, string ns, string value, string version) => TryParseAttribute(name, ns, value, version);
+            public bool TryParseAttributeEntryPoint(
+                string name,
+                string ns,
+                string value,
+                string version
+            ) => TryParseAttribute(name, ns, value, version);
 
-            public bool TryParseElementEntryPoint(XmlReader reader, string version) => TryParseElement(reader, version);
+            public bool TryParseElementEntryPoint(XmlReader reader, string version) =>
+                TryParseElement(reader, version);
 
-            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) => WriteAttributeExtensions(writer, version);
+            public void WriteAttributeExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteAttributeExtensions(writer, version);
 
-            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) => WriteElementExtensions(writer, version);
+            public void WriteElementExtensionsEntryPoint(XmlWriter writer, string version) =>
+                WriteElementExtensions(writer, version);
         }
 
         [DataContract]

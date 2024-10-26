@@ -9,4 +9,5 @@ public enum RuntimeArchitecture
     x64,
     x86,
     ppc64le //Power Architecture
+    ,
 }

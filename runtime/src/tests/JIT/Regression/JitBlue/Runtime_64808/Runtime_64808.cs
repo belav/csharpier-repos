@@ -11,9 +11,9 @@ using Xunit;
 // Reduced from 66.2 KiB to 1.0 KiB in 00:04:27
 // Hits JIT assert in Release:
 // Assertion failed 'compiler->opts.IsOSR() || ((genInitStkLclCnt > 0) == hasUntrLcl)' in 'Program:M8():S0' during 'Generate code' (IL size 110)
-// 
+//
 //     File: /__w/1/s/src/coreclr/jit/codegencommon.cpp Line: 7256
-// 
+//
 
 public class C0
 {
@@ -25,9 +25,9 @@ public class C0
 public struct S0
 {
     public int F0;
-    public S0(int f0): this()
-    {
-    }
+
+    public S0(int f0)
+        : this() { }
 }
 
 public class Runtime_64808
@@ -36,6 +36,7 @@ public class Runtime_64808
     public static long[] s_16;
     public static bool s_23;
     public static int s_result;
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -50,13 +51,13 @@ public class Runtime_64808
     {
         try
         {
-            var vr0 = new ushort[]{0};
+            var vr0 = new ushort[] { 0 };
             C0[] vr3 = default(C0[]);
             return M15(vr0, ref s_23, vr3);
         }
         finally
         {
-            var vr2 = new S0[]{new S0(0), new S0(0), new S0(0), new S0(0), new S0(0), new S0(0)};
+            var vr2 = new S0[] { new S0(0), new S0(0), new S0(0), new S0(0), new S0(0), new S0(0) };
         }
     }
 

@@ -38,12 +38,30 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
             // Arrange
             _fixture.CleanupCertificates();
 
-            const string CertificateName = nameof(EnsureCreateHttpsCertificate_CreatesACertificate_WhenThereAreNoHttpsCertificates) + ".cer";
+            const string CertificateName =
+                nameof(
+                    EnsureCreateHttpsCertificate_CreatesACertificate_WhenThereAreNoHttpsCertificates
+                ) + ".cer";
 
             // Act
             var now = DateTimeOffset.UtcNow;
-            now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
-            var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), CertificateName, trust: false, isInteractive: false);
+            now = new DateTimeOffset(
+                now.Year,
+                now.Month,
+                now.Day,
+                now.Hour,
+                now.Minute,
+                now.Second,
+                0,
+                now.Offset
+            );
+            var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+                now,
+                now.AddYears(1),
+                CertificateName,
+                trust: false,
+                isInteractive: false
+            );
 
             // Assert
             Assert.Equal(EnsureCertificateResult.Succeeded, result);
@@ -53,8 +71,15 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
             Assert.NotNull(exportedCertificate);
             Assert.False(exportedCertificate.HasPrivateKey);
 
-            var httpsCertificates = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false);
-            var httpsCertificate = Assert.Single(httpsCertificates, c => c.Subject == TestCertificateSubject);
+            var httpsCertificates = _manager.ListCertificates(
+                StoreName.My,
+                StoreLocation.CurrentUser,
+                isValid: false
+            );
+            var httpsCertificate = Assert.Single(
+                httpsCertificates,
+                c => c.Subject == TestCertificateSubject
+            );
             Assert.True(httpsCertificate.HasPrivateKey);
             Assert.Equal(TestCertificateSubject, httpsCertificate.Subject);
             Assert.Equal(TestCertificateSubject, httpsCertificate.Issuer);
@@ -65,40 +90,51 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
             Assert.Equal(now.AddYears(1).LocalDateTime, httpsCertificate.NotAfter);
             Assert.Contains(
                 httpsCertificate.Extensions.OfType<X509Extension>(),
-                e => e is X509BasicConstraintsExtension basicConstraints &&
-                    basicConstraints.Critical == true &&
-                    basicConstraints.CertificateAuthority == false &&
-                    basicConstraints.HasPathLengthConstraint == false &&
-                    basicConstraints.PathLengthConstraint == 0);
+                e =>
+                    e is X509BasicConstraintsExtension basicConstraints
+                    && basicConstraints.Critical == true
+                    && basicConstraints.CertificateAuthority == false
+                    && basicConstraints.HasPathLengthConstraint == false
+                    && basicConstraints.PathLengthConstraint == 0
+            );
 
             Assert.Contains(
                 httpsCertificate.Extensions.OfType<X509Extension>(),
-                e => e is X509KeyUsageExtension keyUsage &&
-                    keyUsage.Critical == true &&
-                    keyUsage.KeyUsages == (X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DigitalSignature));
+                e =>
+                    e is X509KeyUsageExtension keyUsage
+                    && keyUsage.Critical == true
+                    && keyUsage.KeyUsages
+                        == (X509KeyUsageFlags.KeyEncipherment | X509KeyUsageFlags.DigitalSignature)
+            );
 
             Assert.Contains(
                 httpsCertificate.Extensions.OfType<X509Extension>(),
-                e => e is X509EnhancedKeyUsageExtension enhancedKeyUsage &&
-                    enhancedKeyUsage.Critical == true &&
-                    enhancedKeyUsage.EnhancedKeyUsages.OfType<Oid>().Single() is Oid keyUsage &&
-                    keyUsage.Value == "1.3.6.1.5.5.7.3.1");
+                e =>
+                    e is X509EnhancedKeyUsageExtension enhancedKeyUsage
+                    && enhancedKeyUsage.Critical == true
+                    && enhancedKeyUsage.EnhancedKeyUsages.OfType<Oid>().Single() is Oid keyUsage
+                    && keyUsage.Value == "1.3.6.1.5.5.7.3.1"
+            );
 
             // Subject alternative name
             Assert.Contains(
                 httpsCertificate.Extensions.OfType<X509Extension>(),
-                e => e.Critical == true &&
-                    e.Oid.Value == "2.5.29.17");
+                e => e.Critical == true && e.Oid.Value == "2.5.29.17"
+            );
 
             // ASP.NET HTTPS Development certificate extension
             Assert.Contains(
                 httpsCertificate.Extensions.OfType<X509Extension>(),
-                e => e.Critical == false &&
-                    e.Oid.Value == CertificateManager.AspNetHttpsOid &&
-                    e.RawData[0] == _manager.AspNetHttpsCertificateVersion);
+                e =>
+                    e.Critical == false
+                    && e.Oid.Value == CertificateManager.AspNetHttpsOid
+                    && e.RawData[0] == _manager.AspNetHttpsCertificateVersion
+            );
 
-            Assert.Equal(httpsCertificate.GetCertHashString(), exportedCertificate.GetCertHashString());
-
+            Assert.Equal(
+                httpsCertificate.GetCertHashString(),
+                exportedCertificate.GetCertHashString()
+            );
         }
         catch (Exception e)
         {
@@ -116,7 +152,9 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
             var certificates = store.Certificates;
             foreach (var certificate in certificates)
             {
-                Output.WriteLine($"Certificate: '{Convert.ToBase64String(certificate.Export(X509ContentType.Cert))}'.");
+                Output.WriteLine(
+                    $"Certificate: '{Convert.ToBase64String(certificate.Export(X509ContentType.Cert))}'."
+                );
                 certificate.Dispose();
             }
 
@@ -129,26 +167,57 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
     public void EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates()
     {
         // Arrange
-        const string CertificateName = nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates) + ".pfx";
+        const string CertificateName =
+            nameof(
+                EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
+            ) + ".pfx";
         var certificatePassword = Guid.NewGuid().ToString();
 
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
-        var httpsCertificate = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false).Single(c => c.Subject == TestCertificateSubject);
+        var httpsCertificate = _manager
+            .ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false)
+            .Single(c => c.Subject == TestCertificateSubject);
         // Act
-        var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), CertificateName, trust: false, includePrivateKey: true, password: certificatePassword, isInteractive: false);
+        var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            CertificateName,
+            trust: false,
+            includePrivateKey: true,
+            password: certificatePassword,
+            isInteractive: false
+        );
 
         // Assert
         Assert.Equal(EnsureCertificateResult.ValidCertificatePresent, result);
         Assert.True(File.Exists(CertificateName));
 
-        var exportedCertificate = new X509Certificate2(File.ReadAllBytes(CertificateName), certificatePassword);
+        var exportedCertificate = new X509Certificate2(
+            File.ReadAllBytes(CertificateName),
+            certificatePassword
+        );
         Assert.NotNull(exportedCertificate);
         Assert.True(exportedCertificate.HasPrivateKey);
 
@@ -161,32 +230,79 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
     {
         // Arrange
         var message = "plaintext";
-        const string CertificateName = nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates) + ".pem";
+        const string CertificateName =
+            nameof(
+                EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
+            ) + ".pem";
         var certificatePassword = Guid.NewGuid().ToString();
 
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
-        var httpsCertificate = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false).Single(c => c.Subject == TestCertificateSubject);
+        var httpsCertificate = _manager
+            .ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false)
+            .Single(c => c.Subject == TestCertificateSubject);
 
         // Act
-        var result = _manager
-            .EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), CertificateName, trust: false, includePrivateKey: true, password: certificatePassword, keyExportFormat: CertificateKeyExportFormat.Pem, isInteractive: false);
+        var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            CertificateName,
+            trust: false,
+            includePrivateKey: true,
+            password: certificatePassword,
+            keyExportFormat: CertificateKeyExportFormat.Pem,
+            isInteractive: false
+        );
 
         // Assert
         Assert.Equal(EnsureCertificateResult.ValidCertificatePresent, result);
         Assert.True(File.Exists(CertificateName));
 
-        var exportedCertificate = X509Certificate2.CreateFromEncryptedPemFile(CertificateName, certificatePassword, Path.ChangeExtension(CertificateName, "key"));
+        var exportedCertificate = X509Certificate2.CreateFromEncryptedPemFile(
+            CertificateName,
+            certificatePassword,
+            Path.ChangeExtension(CertificateName, "key")
+        );
         Assert.NotNull(exportedCertificate);
         Assert.True(exportedCertificate.HasPrivateKey);
 
-        Assert.Equal("plaintext", Encoding.ASCII.GetString(exportedCertificate.GetRSAPrivateKey().Decrypt(exportedCertificate.GetRSAPrivateKey().Encrypt(Encoding.ASCII.GetBytes(message), RSAEncryptionPadding.OaepSHA256), RSAEncryptionPadding.OaepSHA256)));
+        Assert.Equal(
+            "plaintext",
+            Encoding.ASCII.GetString(
+                exportedCertificate
+                    .GetRSAPrivateKey()
+                    .Decrypt(
+                        exportedCertificate
+                            .GetRSAPrivateKey()
+                            .Encrypt(
+                                Encoding.ASCII.GetBytes(message),
+                                RSAEncryptionPadding.OaepSHA256
+                            ),
+                        RSAEncryptionPadding.OaepSHA256
+                    )
+            )
+        );
         Assert.Equal(httpsCertificate.GetCertHashString(), exportedCertificate.GetCertHashString());
     }
 
@@ -195,21 +311,49 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
     public void EnsureCreateHttpsCertificate_CanExportTheCertInPemFormat_WithoutKey()
     {
         // Arrange
-        const string CertificateName = nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates) + ".pem";
+        const string CertificateName =
+            nameof(
+                EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
+            ) + ".pem";
 
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
-        var httpsCertificate = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false).Single(c => c.Subject == TestCertificateSubject);
+        var httpsCertificate = _manager
+            .ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false)
+            .Single(c => c.Subject == TestCertificateSubject);
 
         // Act
-        var result = _manager
-            .EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), CertificateName, trust: false, includePrivateKey: false, password: null, keyExportFormat: CertificateKeyExportFormat.Pem, isInteractive: false);
+        var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            CertificateName,
+            trust: false,
+            includePrivateKey: false,
+            password: null,
+            keyExportFormat: CertificateKeyExportFormat.Pem,
+            isInteractive: false
+        );
 
         // Assert
         Assert.Equal(EnsureCertificateResult.ValidCertificatePresent, result);
@@ -225,21 +369,48 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
     public void EnsureCreateHttpsCertificate_CanImport_ExportedPfx()
     {
         // Arrange
-        const string CertificateName = nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates) + ".pfx";
+        const string CertificateName =
+            nameof(
+                EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
+            ) + ".pfx";
         var certificatePassword = Guid.NewGuid().ToString();
 
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
-        var httpsCertificate = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false).Single(c => c.Subject == TestCertificateSubject);
+        var httpsCertificate = _manager
+            .ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false)
+            .Single(c => c.Subject == TestCertificateSubject);
 
-        _manager
-            .EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), CertificateName, trust: false, includePrivateKey: true, password: certificatePassword, isInteractive: false);
+        _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            CertificateName,
+            trust: false,
+            includePrivateKey: true,
+            password: certificatePassword,
+            isInteractive: false
+        );
 
         _manager.CleanupHttpsCertificates();
 
@@ -248,7 +419,9 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
 
         // Assert
         Assert.Equal(ImportCertificateResult.Succeeded, result);
-        var importedCertificate = Assert.Single(_manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false));
+        var importedCertificate = Assert.Single(
+            _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false)
+        );
 
         Assert.Equal(httpsCertificate.GetCertHashString(), importedCertificate.GetCertHashString());
     }
@@ -258,20 +431,48 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
     public void EnsureCreateHttpsCertificate_CanImport_ExportedPfx_FailsIfThereAreCertificatesPresent()
     {
         // Arrange
-        const string CertificateName = nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates) + ".pfx";
+        const string CertificateName =
+            nameof(
+                EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
+            ) + ".pfx";
         var certificatePassword = Guid.NewGuid().ToString();
 
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
-        var httpsCertificate = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false).Single(c => c.Subject == TestCertificateSubject);
+        var httpsCertificate = _manager
+            .ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false)
+            .Single(c => c.Subject == TestCertificateSubject);
 
-        _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), CertificateName, trust: false, includePrivateKey: true, password: certificatePassword, isInteractive: false);
+        _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            CertificateName,
+            trust: false,
+            includePrivateKey: true,
+            password: certificatePassword,
+            isInteractive: false
+        );
 
         // Act
         var result = _manager.ImportCertificate(CertificateName, certificatePassword);
@@ -286,28 +487,75 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
     {
         // Arrange
         var message = "plaintext";
-        const string CertificateName = nameof(EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates) + ".pem";
+        const string CertificateName =
+            nameof(
+                EnsureCreateHttpsCertificate_DoesNotCreateACertificate_WhenThereIsAnExistingHttpsCertificates
+            ) + ".pem";
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
-        var httpsCertificate = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false).Single(c => c.Subject == TestCertificateSubject);
+        var httpsCertificate = _manager
+            .ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: false)
+            .Single(c => c.Subject == TestCertificateSubject);
         // Act
-        var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), CertificateName, trust: false, includePrivateKey: true, password: null, keyExportFormat: CertificateKeyExportFormat.Pem, isInteractive: false);
+        var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            CertificateName,
+            trust: false,
+            includePrivateKey: true,
+            password: null,
+            keyExportFormat: CertificateKeyExportFormat.Pem,
+            isInteractive: false
+        );
 
         // Assert
         Assert.Equal(EnsureCertificateResult.ValidCertificatePresent, result);
         Assert.True(File.Exists(CertificateName));
 
-        var exportedCertificate = X509Certificate2.CreateFromPemFile(CertificateName, Path.ChangeExtension(CertificateName, "key"));
+        var exportedCertificate = X509Certificate2.CreateFromPemFile(
+            CertificateName,
+            Path.ChangeExtension(CertificateName, "key")
+        );
         Assert.NotNull(exportedCertificate);
         Assert.True(exportedCertificate.HasPrivateKey);
 
-        Assert.Equal("plaintext", Encoding.ASCII.GetString(exportedCertificate.GetRSAPrivateKey().Decrypt(exportedCertificate.GetRSAPrivateKey().Encrypt(Encoding.ASCII.GetBytes(message), RSAEncryptionPadding.OaepSHA256), RSAEncryptionPadding.OaepSHA256)));
+        Assert.Equal(
+            "plaintext",
+            Encoding.ASCII.GetString(
+                exportedCertificate
+                    .GetRSAPrivateKey()
+                    .Decrypt(
+                        exportedCertificate
+                            .GetRSAPrivateKey()
+                            .Encrypt(
+                                Encoding.ASCII.GetBytes(message),
+                                RSAEncryptionPadding.OaepSHA256
+                            ),
+                        RSAEncryptionPadding.OaepSHA256
+                    )
+            )
+        );
         Assert.Equal(httpsCertificate.GetCertHashString(), exportedCertificate.GetCertHashString());
     }
 
@@ -317,14 +565,33 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
         _manager.AspNetHttpsCertificateVersion = 2;
 
-        var httpsCertificateList = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true);
+        var httpsCertificateList = _manager.ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: true
+        );
         Assert.Empty(httpsCertificateList);
     }
 
@@ -334,15 +601,34 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
         _manager.AspNetHttpsCertificateVersion = 0;
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
         _manager.AspNetHttpsCertificateVersion = 1;
 
-        var httpsCertificateList = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true);
+        var httpsCertificateList = _manager.ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: true
+        );
         Assert.Empty(httpsCertificateList);
     }
 
@@ -353,13 +639,32 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
         _manager.AspNetHttpsCertificateVersion = 0;
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
-        var httpsCertificateList = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true);
+        var httpsCertificateList = _manager.ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: true
+        );
         Assert.NotEmpty(httpsCertificateList);
     }
 
@@ -370,14 +675,33 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
         _manager.AspNetHttpsCertificateVersion = 2;
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
         _manager.AspNetHttpsCertificateVersion = 1;
-        var httpsCertificateList = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true);
+        var httpsCertificateList = _manager.ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: true
+        );
         Assert.NotEmpty(httpsCertificateList);
     }
 
@@ -388,19 +712,44 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
         _fixture.CleanupCertificates();
 
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
         _manager.AspNetHttpsCertificateVersion = 1;
-        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        var creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
         _manager.AspNetHttpsCertificateVersion = 2;
-        creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), path: null, trust: false, isInteractive: false);
+        creation = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            path: null,
+            trust: false,
+            isInteractive: false
+        );
         Output.WriteLine(creation.ToString());
         ListCertificates();
 
         _manager.AspNetHttpsCertificateVersion = 1;
-        var httpsCertificateList = _manager.ListCertificates(StoreName.My, StoreLocation.CurrentUser, isValid: true);
+        var httpsCertificateList = _manager.ListCertificates(
+            StoreName.My,
+            StoreLocation.CurrentUser,
+            isValid: true
+        );
         Assert.Equal(2, httpsCertificateList.Count);
 
         var firstCertificate = httpsCertificateList[0];
@@ -408,38 +757,70 @@ public class CertificateManagerTests : IClassFixture<CertFixture>
 
         Assert.Contains(
             firstCertificate.Extensions.OfType<X509Extension>(),
-            e => e.Critical == false &&
-                e.Oid.Value == CertificateManager.AspNetHttpsOid &&
-                e.RawData[0] == 2);
+            e =>
+                e.Critical == false
+                && e.Oid.Value == CertificateManager.AspNetHttpsOid
+                && e.RawData[0] == 2
+        );
 
         Assert.Contains(
             secondCertificate.Extensions.OfType<X509Extension>(),
-            e => e.Critical == false &&
-                e.Oid.Value == CertificateManager.AspNetHttpsOid &&
-                e.RawData[0] == 1);
+            e =>
+                e.Critical == false
+                && e.Oid.Value == CertificateManager.AspNetHttpsOid
+                && e.RawData[0] == 1
+        );
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Windows, SkipReason = "UnixFileMode is not supported on Windows.")]
-    [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "https://github.com/dotnet/aspnetcore/issues/6720")]
+    [OSSkipCondition(
+        OperatingSystems.Windows,
+        SkipReason = "UnixFileMode is not supported on Windows."
+    )]
+    [OSSkipCondition(
+        OperatingSystems.MacOSX,
+        SkipReason = "https://github.com/dotnet/aspnetcore/issues/6720"
+    )]
     public void EnsureCreateHttpsCertificate_CreatesFilesWithUserOnlyUnixFileMode()
     {
         _fixture.CleanupCertificates();
 
-        const string CertificateName = nameof(EnsureCreateHttpsCertificate_CreatesFilesWithUserOnlyUnixFileMode) + ".pem";
-        const string KeyName = nameof(EnsureCreateHttpsCertificate_CreatesFilesWithUserOnlyUnixFileMode) + ".key";
+        const string CertificateName =
+            nameof(EnsureCreateHttpsCertificate_CreatesFilesWithUserOnlyUnixFileMode) + ".pem";
+        const string KeyName =
+            nameof(EnsureCreateHttpsCertificate_CreatesFilesWithUserOnlyUnixFileMode) + ".key";
 
         var certificatePassword = Guid.NewGuid().ToString();
         var now = DateTimeOffset.UtcNow;
-        now = new DateTimeOffset(now.Year, now.Month, now.Day, now.Hour, now.Minute, now.Second, 0, now.Offset);
+        now = new DateTimeOffset(
+            now.Year,
+            now.Month,
+            now.Day,
+            now.Hour,
+            now.Minute,
+            now.Second,
+            0,
+            now.Offset
+        );
 
-        var result = _manager
-            .EnsureAspNetCoreHttpsDevelopmentCertificate(now, now.AddYears(1), CertificateName, trust: false, includePrivateKey: true, password: certificatePassword, keyExportFormat: CertificateKeyExportFormat.Pem, isInteractive: false);
+        var result = _manager.EnsureAspNetCoreHttpsDevelopmentCertificate(
+            now,
+            now.AddYears(1),
+            CertificateName,
+            trust: false,
+            includePrivateKey: true,
+            password: certificatePassword,
+            keyExportFormat: CertificateKeyExportFormat.Pem,
+            isInteractive: false
+        );
 
         Assert.Equal(EnsureCertificateResult.Succeeded, result);
 
         Assert.True(File.Exists(CertificateName));
-        Assert.Equal(UnixFileMode.UserRead | UnixFileMode.UserWrite, File.GetUnixFileMode(CertificateName));
+        Assert.Equal(
+            UnixFileMode.UserRead | UnixFileMode.UserWrite,
+            File.GetUnixFileMode(CertificateName)
+        );
 
         Assert.True(File.Exists(KeyName));
         Assert.Equal(UnixFileMode.UserRead | UnixFileMode.UserWrite, File.GetUnixFileMode(KeyName));
@@ -452,11 +833,12 @@ public class CertFixture : IDisposable
 
     public CertFixture()
     {
-        Manager = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
-        new WindowsCertificateManager(TestCertificateSubject, 1) :
-        RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ?
-            new MacOSCertificateManager(TestCertificateSubject, 1) as CertificateManager :
-            new UnixCertificateManager(TestCertificateSubject, 1);
+        Manager =
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? new WindowsCertificateManager(TestCertificateSubject, 1)
+            : RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+                ? new MacOSCertificateManager(TestCertificateSubject, 1) as CertificateManager
+            : new UnixCertificateManager(TestCertificateSubject, 1);
 
         CleanupCertificates();
     }

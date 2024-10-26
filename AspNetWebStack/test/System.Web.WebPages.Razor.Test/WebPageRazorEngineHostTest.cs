@@ -19,9 +19,18 @@ namespace System.Web.WebPages.Razor.Test
         public void ConstructorRequiresNonNullOrEmptyVirtualPath()
         {
             Assert.ThrowsArgumentNullOrEmptyString(() => new WebPageRazorHost(null), "virtualPath");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new WebPageRazorHost(String.Empty), "virtualPath");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new WebPageRazorHost(null, "foo"), "virtualPath");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new WebPageRazorHost(String.Empty, "foo"), "virtualPath");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new WebPageRazorHost(String.Empty),
+                "virtualPath"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new WebPageRazorHost(null, "foo"),
+                "virtualPath"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new WebPageRazorHost(String.Empty, "foo"),
+                "virtualPath"
+            );
         }
 
         [Fact]
@@ -49,13 +58,17 @@ namespace System.Web.WebPages.Razor.Test
                 "TestClass",
                 "TestNs",
                 "TestFile.cshtml",
-                shouldGenerateLinePragmas: true);
+                shouldGenerateLinePragmas: true
+            );
 
             // Act
             host.PostProcessGeneratedCode(context);
 
             // Assert
-            Assert.Contains(context.Namespace.Imports.OfType<CodeNamespaceImport>(), import => String.Equals("Foo.Bar", import.Namespace));
+            Assert.Contains(
+                context.Namespace.Imports.OfType<CodeNamespaceImport>(),
+                import => String.Equals("Foo.Bar", import.Namespace)
+            );
         }
 
         [Fact]
@@ -63,16 +76,21 @@ namespace System.Web.WebPages.Razor.Test
         {
             string expectedPropertyCode =
                 Environment.NewLine
-              + "protected Foo.Bar ApplicationInstance {" + Environment.NewLine
-              + "    get {" + Environment.NewLine
-              + "        return ((Foo.Bar)(Context.ApplicationInstance));" + Environment.NewLine
-              + "    }" + Environment.NewLine
-              + "}" + Environment.NewLine;
+                + "protected Foo.Bar ApplicationInstance {"
+                + Environment.NewLine
+                + "    get {"
+                + Environment.NewLine
+                + "        return ((Foo.Bar)(Context.ApplicationInstance));"
+                + Environment.NewLine
+                + "    }"
+                + Environment.NewLine
+                + "}"
+                + Environment.NewLine;
 
             // Arrange
             WebPageRazorHost host = new WebPageRazorHost("Foo.cshtml")
             {
-                GlobalAsaxTypeName = "Foo.Bar"
+                GlobalAsaxTypeName = "Foo.Bar",
             };
             CodeGeneratorContext context = CodeGeneratorContext.Create(
                 host,
@@ -80,7 +98,8 @@ namespace System.Web.WebPages.Razor.Test
                 "TestClass",
                 "TestNs",
                 "TestFile.cshtml",
-                shouldGenerateLinePragmas: true);
+                shouldGenerateLinePragmas: true
+            );
 
             // Act
             host.PostProcessGeneratedCode(context);

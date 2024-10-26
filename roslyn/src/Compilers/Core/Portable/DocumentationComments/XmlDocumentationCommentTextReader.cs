@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Used by the DocumentationCommentCompiler(s) to check doc comments for XML parse errors.
     /// As a performance optimization, this class tries to re-use the same underlying <see cref="XmlReader"/> instance
-    /// when possible. 
+    /// when possible.
     /// </summary>
     internal partial class XmlDocumentationCommentTextReader
     {
@@ -21,7 +21,10 @@ namespace Microsoft.CodeAnalysis
         private readonly Reader _textReader = new Reader();
 
         private static readonly ObjectPool<XmlDocumentationCommentTextReader> s_pool =
-            new ObjectPool<XmlDocumentationCommentTextReader>(() => new XmlDocumentationCommentTextReader(), size: 2);
+            new ObjectPool<XmlDocumentationCommentTextReader>(
+                () => new XmlDocumentationCommentTextReader(),
+                size: 2
+            );
 
         public static XmlException ParseAndGetException(string text)
         {
@@ -31,7 +34,10 @@ namespace Microsoft.CodeAnalysis
             return retVal;
         }
 
-        private static readonly XmlReaderSettings s_xmlSettings = new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit };
+        private static readonly XmlReaderSettings s_xmlSettings = new XmlReaderSettings
+        {
+            DtdProcessing = DtdProcessing.Prohibit,
+        };
 
         // internal for testing
         internal XmlException ParseInternal(string text)
@@ -48,8 +54,7 @@ namespace Microsoft.CodeAnalysis
                 do
                 {
                     _reader.Read();
-                }
-                while (!Reader.ReachedEnd(_reader));
+                } while (!Reader.ReachedEnd(_reader));
 
                 if (_textReader.Eof)
                 {

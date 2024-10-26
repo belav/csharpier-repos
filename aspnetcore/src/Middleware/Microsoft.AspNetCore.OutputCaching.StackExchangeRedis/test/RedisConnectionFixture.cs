@@ -8,6 +8,7 @@ namespace Microsoft.AspNetCore.OutputCaching.StackExchangeRedis.Tests;
 public class RedisConnectionFixture : IDisposable
 {
     private readonly ConnectionMultiplexer _muxer;
+
     public RedisConnectionFixture()
     {
         var options = new RedisOutputCacheOptions

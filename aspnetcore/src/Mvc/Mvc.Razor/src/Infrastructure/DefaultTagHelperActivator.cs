@@ -23,8 +23,12 @@ internal sealed class DefaultTagHelperActivator : ITagHelperActivator
 
     private static class Cache<TTagHelper>
     {
-        private static readonly ObjectFactory _objectFactory = ActivatorUtilities.CreateFactory(typeof(TTagHelper), Type.EmptyTypes);
+        private static readonly ObjectFactory _objectFactory = ActivatorUtilities.CreateFactory(
+            typeof(TTagHelper),
+            Type.EmptyTypes
+        );
 
-        public static TTagHelper Create(IServiceProvider serviceProvider) => (TTagHelper)_objectFactory(serviceProvider, arguments: null);
+        public static TTagHelper Create(IServiceProvider serviceProvider) =>
+            (TTagHelper)_objectFactory(serviceProvider, arguments: null);
     }
 }

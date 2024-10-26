@@ -21,7 +21,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing;
 /// </summary>
 /// <typeparam name="TEntryPoint">A type in the entry point assembly of the application.
 /// Typically the Startup or Program classes can be used.</typeparam>
-public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable where TEntryPoint : class
+public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable
+    where TEntryPoint : class
 {
     private bool _disposed;
     private bool _disposedAsync;
@@ -96,12 +97,14 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
     /// by further customizing the <see cref="IWebHostBuilder"/> when calling
     /// <see cref="WebApplicationFactory{TEntryPoint}.WithWebHostBuilder(Action{IWebHostBuilder})"/>.
     /// </summary>
-    public IReadOnlyList<WebApplicationFactory<TEntryPoint>> Factories => _derivedFactories.AsReadOnly();
+    public IReadOnlyList<WebApplicationFactory<TEntryPoint>> Factories =>
+        _derivedFactories.AsReadOnly();
 
     /// <summary>
     /// Gets the <see cref="WebApplicationFactoryClientOptions"/> used by <see cref="CreateClient()"/>.
     /// </summary>
-    public WebApplicationFactoryClientOptions ClientOptions { get; private set; } = new WebApplicationFactoryClientOptions();
+    public WebApplicationFactoryClientOptions ClientOptions { get; private set; } =
+        new WebApplicationFactoryClientOptions();
 
     /// <summary>
     /// Creates a new <see cref="WebApplicationFactory{TEntryPoint}"/> with a <see cref="IWebHostBuilder"/>
@@ -111,10 +114,13 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
     /// An <see cref="Action{IWebHostBuilder}"/> to configure the <see cref="IWebHostBuilder"/>.
     /// </param>
     /// <returns>A new <see cref="WebApplicationFactory{TEntryPoint}"/>.</returns>
-    public WebApplicationFactory<TEntryPoint> WithWebHostBuilder(Action<IWebHostBuilder> configuration) =>
-        WithWebHostBuilderCore(configuration);
+    public WebApplicationFactory<TEntryPoint> WithWebHostBuilder(
+        Action<IWebHostBuilder> configuration
+    ) => WithWebHostBuilderCore(configuration);
 
-    internal virtual WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(Action<IWebHostBuilder> configuration)
+    internal virtual WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(
+        Action<IWebHostBuilder> configuration
+    )
     {
         var factory = new DelegatedWebApplicationFactory(
             ClientOptions,
@@ -128,7 +134,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
             {
                 _configuration(builder);
                 configuration(builder);
-            });
+            }
+        );
 
         _derivedFactories.Add(factory);
 
@@ -157,22 +164,28 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
         {
             var deferredHostBuilder = new DeferredHostBuilder();
             deferredHostBuilder.UseEnvironment(Environments.Development);
-            // There's no helper for UseApplicationName, but we need to 
-            // set the application name to the target entry point 
+            // There's no helper for UseApplicationName, but we need to
+            // set the application name to the target entry point
             // assembly name.
             deferredHostBuilder.ConfigureHostConfiguration(config =>
             {
-                config.AddInMemoryCollection(new Dictionary<string, string?>
-                {
-                        { HostDefaults.ApplicationKey, typeof(TEntryPoint).Assembly.GetName()?.Name ?? string.Empty }
-                });
+                config.AddInMemoryCollection(
+                    new Dictionary<string, string?>
+                    {
+                        {
+                            HostDefaults.ApplicationKey,
+                            typeof(TEntryPoint).Assembly.GetName()?.Name ?? string.Empty
+                        },
+                    }
+                );
             });
             // This helper call does the hard work to determine if we can fallback to diagnostic source events to get the host instance
             var factory = HostFactoryResolver.ResolveHostFactory(
                 typeof(TEntryPoint).Assembly,
                 stopApplication: false,
                 configureHostBuilder: deferredHostBuilder.ConfigureHostBuilder,
-                entrypointCompleted: deferredHostBuilder.EntryPointCompleted);
+                entrypointCompleted: deferredHostBuilder.EntryPointCompleted
+            );
 
             if (factory is not null)
             {
@@ -184,13 +197,16 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
                 return;
             }
 
-            throw new InvalidOperationException(Resources.FormatMissingBuilderMethod(
-                nameof(IHostBuilder),
-                nameof(IWebHostBuilder),
-                typeof(TEntryPoint).Assembly.EntryPoint!.DeclaringType!.FullName,
-                typeof(WebApplicationFactory<TEntryPoint>).Name,
-                nameof(CreateHostBuilder),
-                nameof(CreateWebHostBuilder)));
+            throw new InvalidOperationException(
+                Resources.FormatMissingBuilderMethod(
+                    nameof(IHostBuilder),
+                    nameof(IWebHostBuilder),
+                    typeof(TEntryPoint).Assembly.EntryPoint!.DeclaringType!.FullName,
+                    typeof(WebApplicationFactory<TEntryPoint>).Name,
+                    nameof(CreateHostBuilder),
+                    nameof(CreateWebHostBuilder)
+                )
+            );
         }
         else
         {
@@ -221,7 +237,9 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
         }
 
         var fromFile = File.Exists("MvcTestingAppManifest.json");
-        var contentRoot = fromFile ? GetContentRootFromFile("MvcTestingAppManifest.json") : GetContentRootFromAssembly();
+        var contentRoot = fromFile
+            ? GetContentRootFromFile("MvcTestingAppManifest.json")
+            : GetContentRootFromAssembly();
 
         if (contentRoot != null)
         {
@@ -235,7 +253,9 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
 
     private static string? GetContentRootFromFile(string file)
     {
-        var data = JsonSerializer.Deserialize<IDictionary<string, string>>(File.ReadAllBytes(file))!;
+        var data = JsonSerializer.Deserialize<IDictionary<string, string>>(
+            File.ReadAllBytes(file)
+        )!;
         var key = typeof(TEntryPoint).Assembly.GetName().FullName;
 
         // If the `ContentRoot` is not provided in the app manifest, then return null
@@ -252,7 +272,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
     {
         var metadataAttributes = GetContentRootMetadataAttributes(
             typeof(TEntryPoint).Assembly.FullName!,
-            typeof(TEntryPoint).Assembly.GetName().Name!);
+            typeof(TEntryPoint).Assembly.GetName().Name!
+        );
 
         string? contentRoot = null;
         for (var i = 0; i < metadataAttributes.Length; i++)
@@ -260,11 +281,13 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
             var contentRootAttribute = metadataAttributes[i];
             var contentRootCandidate = Path.Combine(
                 AppContext.BaseDirectory,
-                contentRootAttribute.ContentRootPath);
+                contentRootAttribute.ContentRootPath
+            );
 
             var contentRootMarker = Path.Combine(
                 contentRootCandidate,
-                Path.GetFileName(contentRootAttribute.ContentRootTest));
+                Path.GetFileName(contentRootAttribute.ContentRootTest)
+            );
 
             if (File.Exists(contentRootMarker))
             {
@@ -296,13 +319,20 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
 
     private WebApplicationFactoryContentRootAttribute[] GetContentRootMetadataAttributes(
         string tEntryPointAssemblyFullName,
-        string tEntryPointAssemblyName)
+        string tEntryPointAssemblyName
+    )
     {
         var testAssembly = GetTestAssemblies();
         var metadataAttributes = testAssembly
             .SelectMany(a => a.GetCustomAttributes<WebApplicationFactoryContentRootAttribute>())
-            .Where(a => string.Equals(a.Key, tEntryPointAssemblyFullName, StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(a.Key, tEntryPointAssemblyName, StringComparison.OrdinalIgnoreCase))
+            .Where(a =>
+                string.Equals(
+                    a.Key,
+                    tEntryPointAssemblyFullName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                || string.Equals(a.Key, tEntryPointAssemblyName, StringComparison.OrdinalIgnoreCase)
+            )
             .OrderBy(a => a.Priority)
             .ToArray();
 
@@ -328,8 +358,11 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
                 return new[] { Assembly.Load(AppDomain.CurrentDomain.FriendlyName) };
             }
 
-            var runtimeProjectLibraries = context.RuntimeLibraries
-                .ToDictionary(r => r.Name, r => r, StringComparer.Ordinal);
+            var runtimeProjectLibraries = context.RuntimeLibraries.ToDictionary(
+                r => r.Name,
+                r => r,
+                StringComparer.Ordinal
+            );
 
             // Find the list of projects
             var projects = context.CompileLibraries.Where(l => l.Type == "project");
@@ -337,8 +370,11 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
             var entryPointAssemblyName = typeof(TEntryPoint).Assembly.GetName().Name;
 
             // Find the list of projects referencing TEntryPoint.
-            var candidates = context.CompileLibraries
-                .Where(library => library.Dependencies.Any(d => string.Equals(d.Name, entryPointAssemblyName, StringComparison.Ordinal)));
+            var candidates = context.CompileLibraries.Where(library =>
+                library.Dependencies.Any(d =>
+                    string.Equals(d.Name, entryPointAssemblyName, StringComparison.Ordinal)
+                )
+            );
 
             var testAssemblies = new List<Assembly>();
             foreach (var candidate in candidates)
@@ -352,9 +388,7 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
 
             return testAssemblies;
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
 
         return Array.Empty<Assembly>();
     }
@@ -363,16 +397,21 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
     {
         if (typeof(TEntryPoint).Assembly.EntryPoint == null)
         {
-            throw new InvalidOperationException(Resources.FormatInvalidAssemblyEntryPoint(typeof(TEntryPoint).Name));
+            throw new InvalidOperationException(
+                Resources.FormatInvalidAssemblyEntryPoint(typeof(TEntryPoint).Name)
+            );
         }
 
         var depsFileName = $"{typeof(TEntryPoint).Assembly.GetName().Name}.deps.json";
         var depsFile = new FileInfo(Path.Combine(AppContext.BaseDirectory, depsFileName));
         if (!depsFile.Exists)
         {
-            throw new InvalidOperationException(Resources.FormatMissingDepsFile(
-                depsFile.FullName,
-                Path.GetFileName(depsFile.FullName)));
+            throw new InvalidOperationException(
+                Resources.FormatMissingDepsFile(
+                    depsFile.FullName,
+                    Path.GetFileName(depsFile.FullName)
+                )
+            );
         }
     }
 
@@ -387,7 +426,9 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
     /// <returns>A <see cref="IHostBuilder"/> instance.</returns>
     protected virtual IHostBuilder? CreateHostBuilder()
     {
-        var hostBuilder = HostFactoryResolver.ResolveHostBuilderFactory<IHostBuilder>(typeof(TEntryPoint).Assembly)?.Invoke(Array.Empty<string>());
+        var hostBuilder = HostFactoryResolver
+            .ResolveHostBuilderFactory<IHostBuilder>(typeof(TEntryPoint).Assembly)
+            ?.Invoke(Array.Empty<string>());
 
         hostBuilder?.UseEnvironment(Environments.Development);
         return hostBuilder;
@@ -404,7 +445,9 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
     /// <returns>A <see cref="IWebHostBuilder"/> instance.</returns>
     protected virtual IWebHostBuilder? CreateWebHostBuilder()
     {
-        var builder = WebHostBuilderFactory.CreateFromTypesAssemblyEntryPoint<TEntryPoint>(Array.Empty<string>());
+        var builder = WebHostBuilderFactory.CreateFromTypesAssemblyEntryPoint<TEntryPoint>(
+            Array.Empty<string>()
+        );
 
         if (builder is not null)
         {
@@ -442,17 +485,14 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
     /// Gives a fixture an opportunity to configure the application before it gets built.
     /// </summary>
     /// <param name="builder">The <see cref="IWebHostBuilder"/> for the application.</param>
-    protected virtual void ConfigureWebHost(IWebHostBuilder builder)
-    {
-    }
+    protected virtual void ConfigureWebHost(IWebHostBuilder builder) { }
 
     /// <summary>
     /// Creates an instance of <see cref="HttpClient"/> that automatically follows
     /// redirects and handles cookies.
     /// </summary>
     /// <returns>The <see cref="HttpClient"/>.</returns>
-    public HttpClient CreateClient() =>
-        CreateClient(ClientOptions);
+    public HttpClient CreateClient() => CreateClient(ClientOptions);
 
     /// <summary>
     /// Creates an instance of <see cref="HttpClient"/> that automatically follows
@@ -551,11 +591,7 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
         {
             if (!_disposedAsync)
             {
-                DisposeAsync()
-                    .AsTask()
-                    .ConfigureAwait(false)
-                    .GetAwaiter()
-                    .GetResult();
+                DisposeAsync().AsTask().ConfigureAwait(false).GetAwaiter().GetResult();
             }
         }
 
@@ -617,7 +653,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
             Func<IHostBuilder?> createHostBuilder,
             Func<IEnumerable<Assembly>> getTestAssemblies,
             Action<HttpClient> configureClient,
-            Action<IWebHostBuilder> configureWebHost)
+            Action<IWebHostBuilder> configureWebHost
+        )
         {
             ClientOptions = new WebApplicationFactoryClientOptions(options);
             _createServer = createServer;
@@ -629,7 +666,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
             _configuration = configureWebHost;
         }
 
-        protected override TestServer CreateServer(IWebHostBuilder builder) => _createServer(builder);
+        protected override TestServer CreateServer(IWebHostBuilder builder) =>
+            _createServer(builder);
 
         protected override IHost CreateHost(IHostBuilder builder) => _createHost(builder);
 
@@ -639,11 +677,14 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
 
         protected override IEnumerable<Assembly> GetTestAssemblies() => _getTestAssemblies();
 
-        protected override void ConfigureWebHost(IWebHostBuilder builder) => _configuration(builder);
+        protected override void ConfigureWebHost(IWebHostBuilder builder) =>
+            _configuration(builder);
 
         protected override void ConfigureClient(HttpClient client) => _configureClient(client);
 
-        internal override WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(Action<IWebHostBuilder> configuration)
+        internal override WebApplicationFactory<TEntryPoint> WithWebHostBuilderCore(
+            Action<IWebHostBuilder> configuration
+        )
         {
             return new DelegatedWebApplicationFactory(
                 ClientOptions,
@@ -657,7 +698,8 @@ public class WebApplicationFactory<TEntryPoint> : IDisposable, IAsyncDisposable 
                 {
                     _configuration(builder);
                     configuration(builder);
-                });
+                }
+            );
         }
     }
 }

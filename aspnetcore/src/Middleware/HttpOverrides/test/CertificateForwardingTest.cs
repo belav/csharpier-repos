@@ -20,7 +20,9 @@ public class CertificateForwardingTests
         var services = new ServiceCollection()
             .AddOptions()
             .AddCertificateForwarding(o => o.CertificateHeader = null);
-        var options = services.BuildServiceProvider().GetRequiredService<IOptions<CertificateForwardingOptions>>();
+        var options = services
+            .BuildServiceProvider()
+            .GetRequiredService<IOptions<CertificateForwardingOptions>>();
         Assert.Throws<OptionsValidationException>(() => options.Value);
     }
 
@@ -30,7 +32,9 @@ public class CertificateForwardingTests
         var services = new ServiceCollection()
             .AddOptions()
             .AddCertificateForwarding(o => o.CertificateHeader = "");
-        var options = services.BuildServiceProvider().GetRequiredService<IOptions<CertificateForwardingOptions>>();
+        var options = services
+            .BuildServiceProvider()
+            .GetRequiredService<IOptions<CertificateForwardingOptions>>();
         Assert.Throws<OptionsValidationException>(() => options.Value);
     }
 
@@ -41,26 +45,34 @@ public class CertificateForwardingTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddCertificateForwarding(options => { });
-                })
-                .Configure(app =>
-                {
-                    app.Use(async (context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        Assert.Null(context.Connection.ClientCertificate);
-                        await next(context);
-                    });
-                    app.UseCertificateForwarding();
-                    app.Use(async (context, next) =>
+                        services.AddCertificateForwarding(options => { });
+                    })
+                    .Configure(app =>
                     {
-                        Assert.Equal(context.Connection.ClientCertificate, Certificates.SelfSignedValidWithNoEku);
-                        await next(context);
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Null(context.Connection.ClientCertificate);
+                                await next(context);
+                            }
+                        );
+                        app.UseCertificateForwarding();
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Equal(
+                                    context.Connection.ClientCertificate,
+                                    Certificates.SelfSignedValidWithNoEku
+                                );
+                                await next(context);
+                            }
+                        );
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -68,7 +80,9 @@ public class CertificateForwardingTests
 
         var context = await server.SendAsync(c =>
         {
-            c.Request.Headers["X-Client-Cert"] = Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData);
+            c.Request.Headers["X-Client-Cert"] = Convert.ToBase64String(
+                Certificates.SelfSignedValidWithNoEku.RawData
+            );
         });
     }
 
@@ -79,27 +93,36 @@ public class CertificateForwardingTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddCertificateForwarding(options => { });
-                })
-                .Configure(app =>
-                {
-                    app.Use(async (context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        Assert.Null(context.Connection.ClientCertificate);
-                        context.Connection.ClientCertificate = Certificates.SelfSignedNotYetValid;
-                        await next(context);
-                    });
-                    app.UseCertificateForwarding();
-                    app.Use(async (context, next) =>
+                        services.AddCertificateForwarding(options => { });
+                    })
+                    .Configure(app =>
                     {
-                        Assert.Equal(context.Connection.ClientCertificate, Certificates.SelfSignedValidWithNoEku);
-                        await next(context);
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Null(context.Connection.ClientCertificate);
+                                context.Connection.ClientCertificate =
+                                    Certificates.SelfSignedNotYetValid;
+                                await next(context);
+                            }
+                        );
+                        app.UseCertificateForwarding();
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Equal(
+                                    context.Connection.ClientCertificate,
+                                    Certificates.SelfSignedValidWithNoEku
+                                );
+                                await next(context);
+                            }
+                        );
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -107,7 +130,9 @@ public class CertificateForwardingTests
 
         var context = await server.SendAsync(c =>
         {
-            c.Request.Headers["X-Client-Cert"] = Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData);
+            c.Request.Headers["X-Client-Cert"] = Convert.ToBase64String(
+                Certificates.SelfSignedValidWithNoEku.RawData
+            );
         });
     }
 
@@ -118,26 +143,36 @@ public class CertificateForwardingTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddCertificateForwarding(options => options.CertificateHeader = "X-ARR-ClientCert");
-                })
-                .Configure(app =>
-                {
-                    app.Use(async (context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        Assert.Null(context.Connection.ClientCertificate);
-                        await next(context);
-                    });
-                    app.UseCertificateForwarding();
-                    app.Use(async (context, next) =>
+                        services.AddCertificateForwarding(options =>
+                            options.CertificateHeader = "X-ARR-ClientCert"
+                        );
+                    })
+                    .Configure(app =>
                     {
-                        Assert.Equal(context.Connection.ClientCertificate, Certificates.SelfSignedValidWithNoEku);
-                        await next(context);
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Null(context.Connection.ClientCertificate);
+                                await next(context);
+                            }
+                        );
+                        app.UseCertificateForwarding();
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Equal(
+                                    context.Connection.ClientCertificate,
+                                    Certificates.SelfSignedValidWithNoEku
+                                );
+                                await next(context);
+                            }
+                        );
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -145,7 +180,9 @@ public class CertificateForwardingTests
 
         var context = await server.SendAsync(c =>
         {
-            c.Request.Headers["X-ARR-ClientCert"] = Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData);
+            c.Request.Headers["X-ARR-ClientCert"] = Convert.ToBase64String(
+                Certificates.SelfSignedValidWithNoEku.RawData
+            );
         });
     }
 
@@ -156,26 +193,33 @@ public class CertificateForwardingTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddCertificateForwarding(options => options.CertificateHeader = "some-random-header");
-                })
-                .Configure(app =>
-                {
-                    app.Use(async (context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        Assert.Null(context.Connection.ClientCertificate);
-                        await next(context);
-                    });
-                    app.UseCertificateForwarding();
-                    app.Use(async (context, next) =>
+                        services.AddCertificateForwarding(options =>
+                            options.CertificateHeader = "some-random-header"
+                        );
+                    })
+                    .Configure(app =>
                     {
-                        Assert.Null(context.Connection.ClientCertificate);
-                        await next(context);
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Null(context.Connection.ClientCertificate);
+                                await next(context);
+                            }
+                        );
+                        app.UseCertificateForwarding();
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Null(context.Connection.ClientCertificate);
+                                await next(context);
+                            }
+                        );
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -183,7 +227,9 @@ public class CertificateForwardingTests
 
         var context = await server.SendAsync(c =>
         {
-            c.Request.Headers["not-the-right-header"] = Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData);
+            c.Request.Headers["not-the-right-header"] = Convert.ToBase64String(
+                Certificates.SelfSignedValidWithNoEku.RawData
+            );
         });
     }
 
@@ -194,26 +240,31 @@ public class CertificateForwardingTests
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .ConfigureServices(services =>
-                {
-                    services.AddCertificateForwarding(options => { });
-                })
-                .Configure(app =>
-                {
-                    app.Use(async (context, next) =>
+                    .UseTestServer()
+                    .ConfigureServices(services =>
                     {
-                        Assert.Null(context.Connection.ClientCertificate);
-                        await next(context);
-                    });
-                    app.UseCertificateForwarding();
-                    app.Use(async (context, next) =>
+                        services.AddCertificateForwarding(options => { });
+                    })
+                    .Configure(app =>
                     {
-                        Assert.Null(context.Connection.ClientCertificate);
-                        await next(context);
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Null(context.Connection.ClientCertificate);
+                                await next(context);
+                            }
+                        );
+                        app.UseCertificateForwarding();
+                        app.Use(
+                            async (context, next) =>
+                            {
+                                Assert.Null(context.Connection.ClientCertificate);
+                                await next(context);
+                            }
+                        );
                     });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -221,7 +272,8 @@ public class CertificateForwardingTests
 
         var context = await server.SendAsync(c =>
         {
-            c.Request.Headers["X-Client-Cert"] = "OOPS" + Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData);
+            c.Request.Headers["X-Client-Cert"] =
+                "OOPS" + Convert.ToBase64String(Certificates.SelfSignedValidWithNoEku.RawData);
         });
     }
 }

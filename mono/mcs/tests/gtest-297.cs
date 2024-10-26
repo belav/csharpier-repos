@@ -3,15 +3,14 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly: RuntimeCompatibility (WrapNonExceptionThrows=false)]
+[assembly: RuntimeCompatibility(WrapNonExceptionThrows = false)]
 
 public class Test
 {
-	public static void Main ()
-	{
-		try {
-		} catch (Exception) {
-		} catch {
-		}
-	}
+    public static void Main()
+    {
+        try { }
+        catch (Exception) { }
+        catch { }
+    }
 }

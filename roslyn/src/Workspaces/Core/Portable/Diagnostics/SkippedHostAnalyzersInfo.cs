@@ -5,7 +5,6 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis.PooledObjects;
-
 #if !NETCOREAPP
 using Roslyn.Utilities;
 #endif
@@ -18,9 +17,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     /// </summary>
     internal readonly struct SkippedHostAnalyzersInfo
     {
-        public static readonly SkippedHostAnalyzersInfo Empty = new(
-            ImmutableHashSet<DiagnosticAnalyzer>.Empty,
-            ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<string>>.Empty);
+        public static readonly SkippedHostAnalyzersInfo Empty =
+            new(
+                ImmutableHashSet<DiagnosticAnalyzer>.Empty,
+                ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<string>>.Empty
+            );
 
         /// <summary>
         /// Analyzers supplied by the host (IDE), which can be completely skipped for the corresponding project
@@ -34,11 +35,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// This includes the analyzers supplied by the host (IDE), such that project's analyzer references (from NuGet)
         /// has equivalent analyzer(s) reporting subset of diagnostic IDs reported by these analyzers.
         /// </summary>
-        public ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<string>> FilteredDiagnosticIdsForAnalyzers { get; }
+        public ImmutableDictionary<
+            DiagnosticAnalyzer,
+            ImmutableArray<string>
+        > FilteredDiagnosticIdsForAnalyzers { get; }
 
         private SkippedHostAnalyzersInfo(
             ImmutableHashSet<DiagnosticAnalyzer> skippedHostAnalyzers,
-            ImmutableDictionary<DiagnosticAnalyzer, ImmutableArray<string>> filteredDiagnosticIdsForAnalyzers)
+            ImmutableDictionary<
+                DiagnosticAnalyzer,
+                ImmutableArray<string>
+            > filteredDiagnosticIdsForAnalyzers
+        )
         {
             SkippedAnalyzers = skippedHostAnalyzers;
             FilteredDiagnosticIdsForAnalyzers = filteredDiagnosticIdsForAnalyzers;
@@ -48,13 +56,24 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             HostDiagnosticAnalyzers hostAnalyzers,
             IReadOnlyList<AnalyzerReference> projectAnalyzerReferences,
             string language,
-            DiagnosticAnalyzerInfoCache analyzerInfoCache)
+            DiagnosticAnalyzerInfoCache analyzerInfoCache
+        )
         {
             using var _1 = PooledHashSet<object>.GetInstance(out var projectAnalyzerIds);
             using var _2 = PooledHashSet<string>.GetInstance(out var projectAnalyzerDiagnosticIds);
-            using var _3 = PooledHashSet<string>.GetInstance(out var projectSuppressedDiagnosticIds);
+            using var _3 = PooledHashSet<string>.GetInstance(
+                out var projectSuppressedDiagnosticIds
+            );
 
-            foreach (var (analyzerId, analyzers) in hostAnalyzers.CreateProjectDiagnosticAnalyzersPerReference(projectAnalyzerReferences, language))
+            foreach (
+                var (
+                    analyzerId,
+                    analyzers
+                ) in hostAnalyzers.CreateProjectDiagnosticAnalyzersPerReference(
+                    projectAnalyzerReferences,
+                    language
+                )
+            )
             {
                 projectAnalyzerIds.Add(analyzerId);
 
@@ -67,7 +86,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                     if (analyzer is DiagnosticSuppressor suppressor)
                     {
-                        foreach (var descriptor in analyzerInfoCache.GetDiagnosticSuppressions(suppressor))
+                        foreach (
+                            var descriptor in analyzerInfoCache.GetDiagnosticSuppressions(
+                                suppressor
+                            )
+                        )
                         {
                             projectSuppressedDiagnosticIds.Add(descriptor.SuppressedDiagnosticId);
                         }
@@ -80,10 +103,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return Empty;
             }
 
-            var fullySkippedHostAnalyzersBuilder = ImmutableHashSet.CreateBuilder<DiagnosticAnalyzer>();
-            var partiallySkippedHostAnalyzersBuilder = ImmutableDictionary.CreateBuilder<DiagnosticAnalyzer, ImmutableArray<string>>();
+            var fullySkippedHostAnalyzersBuilder =
+                ImmutableHashSet.CreateBuilder<DiagnosticAnalyzer>();
+            var partiallySkippedHostAnalyzersBuilder = ImmutableDictionary.CreateBuilder<
+                DiagnosticAnalyzer,
+                ImmutableArray<string>
+            >();
 
-            foreach (var (hostAnalyzerId, analyzers) in hostAnalyzers.GetOrCreateHostDiagnosticAnalyzersPerReference(language))
+            foreach (
+                var (
+                    hostAnalyzerId,
+                    analyzers
+                ) in hostAnalyzers.GetOrCreateHostDiagnosticAnalyzersPerReference(language)
+            )
             {
                 foreach (var hostAnalyzer in analyzers)
                 {
@@ -95,33 +127,49 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         continue;
                     }
 
-                    if (!ShouldIncludeHostAnalyzer(hostAnalyzer, projectAnalyzerDiagnosticIds, projectSuppressedDiagnosticIds, analyzerInfoCache, out var skippedIdsForAnalyzer))
+                    if (
+                        !ShouldIncludeHostAnalyzer(
+                            hostAnalyzer,
+                            projectAnalyzerDiagnosticIds,
+                            projectSuppressedDiagnosticIds,
+                            analyzerInfoCache,
+                            out var skippedIdsForAnalyzer
+                        )
+                    )
                     {
                         fullySkippedHostAnalyzersBuilder.Add(hostAnalyzer);
                     }
                     else if (skippedIdsForAnalyzer.Length > 0)
                     {
-                        partiallySkippedHostAnalyzersBuilder.Add(hostAnalyzer, skippedIdsForAnalyzer);
+                        partiallySkippedHostAnalyzersBuilder.Add(
+                            hostAnalyzer,
+                            skippedIdsForAnalyzer
+                        );
                     }
                 }
             }
 
             var fullySkippedHostAnalyzers = fullySkippedHostAnalyzersBuilder.ToImmutable();
-            var filteredDiagnosticIdsForAnalyzers = partiallySkippedHostAnalyzersBuilder.ToImmutable();
+            var filteredDiagnosticIdsForAnalyzers =
+                partiallySkippedHostAnalyzersBuilder.ToImmutable();
 
             if (fullySkippedHostAnalyzers.IsEmpty && filteredDiagnosticIdsForAnalyzers.IsEmpty)
             {
                 return Empty;
             }
 
-            return new SkippedHostAnalyzersInfo(fullySkippedHostAnalyzers, filteredDiagnosticIdsForAnalyzers);
+            return new SkippedHostAnalyzersInfo(
+                fullySkippedHostAnalyzers,
+                filteredDiagnosticIdsForAnalyzers
+            );
 
             static bool ShouldIncludeHostAnalyzer(
                 DiagnosticAnalyzer hostAnalyzer,
                 HashSet<string> projectAnalyzerDiagnosticIds,
                 HashSet<string> projectSuppressedDiagnosticIds,
                 DiagnosticAnalyzerInfoCache analyzerInfoCache,
-                out ImmutableArray<string> skippedDiagnosticIdsForAnalyzer)
+                out ImmutableArray<string> skippedDiagnosticIdsForAnalyzer
+            )
             {
                 // Include only those host (VSIX) analyzers that report at least one unique diagnostic ID
                 // which is not reported by any project (NuGet) analyzer.
@@ -149,10 +197,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                     // Only execute host suppressor if it does not suppress any diagnostic ID reported by project analyzer
                     // and does not share any suppression ID with a project suppressor.
-                    foreach (var descriptor in analyzerInfoCache.GetDiagnosticSuppressions(suppressor))
+                    foreach (
+                        var descriptor in analyzerInfoCache.GetDiagnosticSuppressions(suppressor)
+                    )
                     {
-                        if (projectAnalyzerDiagnosticIds.Contains(descriptor.SuppressedDiagnosticId) ||
-                            projectSuppressedDiagnosticIds.Contains(descriptor.SuppressedDiagnosticId))
+                        if (
+                            projectAnalyzerDiagnosticIds.Contains(descriptor.SuppressedDiagnosticId)
+                            || projectSuppressedDiagnosticIds.Contains(
+                                descriptor.SuppressedDiagnosticId
+                            )
+                        )
                         {
                             return false;
                         }

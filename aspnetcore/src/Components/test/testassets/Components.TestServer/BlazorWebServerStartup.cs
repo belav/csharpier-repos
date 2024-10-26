@@ -21,8 +21,7 @@ public class BlazorWebServerStartup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddRazorComponents()
-            .AddInteractiveServerComponents();
+        services.AddRazorComponents().AddInteractiveServerComponents();
 
         // Since tests run in parallel, we use an ephemeral key provider to avoid filesystem
         // contention issues.
@@ -30,7 +29,11 @@ public class BlazorWebServerStartup
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env, ResourceRequestLog resourceRequestLog)
+    public virtual void Configure(
+        IApplicationBuilder app,
+        IWebHostEnvironment env,
+        ResourceRequestLog resourceRequestLog
+    )
     {
         if (env.IsDevelopment())
         {
@@ -38,14 +41,16 @@ public class BlazorWebServerStartup
         }
 
         // Mount the server-side Blazor app on /subdir
-        app.Map("/subdir", app =>
-        {
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
+        app.Map(
+            "/subdir",
+            app =>
             {
-                endpoints.MapRazorComponents<Root>()
-                    .AddInteractiveServerRenderMode();
-            });
-        });
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapRazorComponents<Root>().AddInteractiveServerRenderMode();
+                });
+            }
+        );
     }
 }

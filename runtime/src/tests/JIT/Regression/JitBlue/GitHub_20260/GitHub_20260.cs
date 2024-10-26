@@ -12,7 +12,7 @@ namespace GitHub_20260
     {
         [Fact]
         public static int TestEntryPoint()
-        {         
+        {
             // The jit will devirtualize the call to ToString and then undo the box.
             // Make sure that happens properly for vectors.
 

@@ -1,6 +1,6 @@
 //-------------------------------------------------------------
-// <copyright company=’Microsoft Corporation’>
-//   Copyright © Microsoft Corporation. All Rights Reserved.
+// <copyright company=ï¿½Microsoft Corporationï¿½>
+//   Copyright ï¿½ Microsoft Corporation. All Rights Reserved.
 // </copyright>
 //-------------------------------------------------------------
 // @owner=alexgor, deliant
@@ -11,9 +11,9 @@
 //
 //	Classes:	DataFormula
 //
-//  Purpose:	DataFormula class provides properties and methods, 
-//				which prepare series data for technical analyses 
-//				and time series and forecasting formulas and prepare 
+//  Purpose:	DataFormula class provides properties and methods,
+//				which prepare series data for technical analyses
+//				and time series and forecasting formulas and prepare
 //				output data to be displayed as a chart.
 //
 //	Reviewed:	GS - August 6, 2002
@@ -24,10 +24,10 @@
 
 #region Used Namespace
 using System;
-using System.Drawing;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Collections.Generic;
+using System.Drawing;
 #endregion
 
 #if Microsoft_CONTROL
@@ -36,7 +36,7 @@ using System.Windows.Forms.DataVisualization.Charting.Formulas;
 namespace System.Windows.Forms.DataVisualization.Charting
 #else
 using System.Web.UI.DataVisualization.Charting.Formulas;
-    
+
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
@@ -48,30 +48,34 @@ namespace System.Web.UI.DataVisualization.Charting
     public enum FinancialFormula
     {
         /// <summary>
-        /// Accumulation Distribution formula. This indicator uses a relationship 
-        /// between volume and prices to estimate the strength of price movements, 
+        /// Accumulation Distribution formula. This indicator uses a relationship
+        /// between volume and prices to estimate the strength of price movements,
         /// and if volume is increased, there is a high probability that prices will go up.
         /// </summary>
         AccumulationDistribution,
 
         /// <summary>
-        /// Average True Range indicator.  It measures commitment and compares 
-        /// the range between the High, Low and Close prices. 
+        /// Average True Range indicator.  It measures commitment and compares
+        /// the range between the High, Low and Close prices.
         /// </summary>
         AverageTrueRange,
 
         /// <summary>
-        /// Bollinger Bands indicators.  They are plotted at standard deviation levels 
+        /// Bollinger Bands indicators.  They are plotted at standard deviation levels
         /// above and below a simple moving average.
         /// </summary>
         BollingerBands,
 
         /// <summary>
-        /// Chaikin Oscillator indicator. It is the difference between a 3-day 
-        /// exponential moving average and a 10-day exponential moving average 
+        /// Chaikin Oscillator indicator. It is the difference between a 3-day
+        /// exponential moving average and a 10-day exponential moving average
         /// applied to the Accumulation Distribution.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chaikin")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Chaikin"
+        )]
         ChaikinOscillator,
 
         /// <summary>
@@ -80,26 +84,30 @@ namespace System.Web.UI.DataVisualization.Charting
         CommodityChannelIndex,
 
         /// <summary>
-        /// Detrended Price Oscillator.  It attempts to remove trend from prices. 
+        /// Detrended Price Oscillator.  It attempts to remove trend from prices.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Detrended")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Detrended"
+        )]
         DetrendedPriceOscillator,
 
         /// <summary>
-        /// Ease of Movement deals with the relationship between volume and price change, 
+        /// Ease of Movement deals with the relationship between volume and price change,
         /// and uses volume to indicate how strong a trend is for prices.
         /// </summary>
         EaseOfMovement,
 
         /// <summary>
-        /// Envelopes are plotted above and below a moving average using a specified percentage 
+        /// Envelopes are plotted above and below a moving average using a specified percentage
         /// as the shift.
         /// </summary>
         Envelopes,
 
         /// <summary>
-        /// An Exponential Moving Average is an average of data calculated over a period of time 
-        /// where the most recent days have more weight.  
+        /// An Exponential Moving Average is an average of data calculated over a period of time
+        /// where the most recent days have more weight.
         /// </summary>
         ExponentialMovingAverage,
 
@@ -109,32 +117,32 @@ namespace System.Web.UI.DataVisualization.Charting
         Forecasting,
 
         /// <summary>
-        /// Moving Average Convergence/Divergence indicator.  It compares two 
-        /// moving averages of prices and is used with a 9-day Exponential 
+        /// Moving Average Convergence/Divergence indicator.  It compares two
+        /// moving averages of prices and is used with a 9-day Exponential
         /// Moving average as a signal, which indicates buying and selling moments.
         /// </summary>
         MovingAverageConvergenceDivergence,
 
         /// <summary>
-        /// The Mass Index is used to predict trend reversal by comparing the 
-        /// difference and range between High and Low prices. 
+        /// The Mass Index is used to predict trend reversal by comparing the
+        /// difference and range between High and Low prices.
         /// </summary>
         MassIndex,
 
         /// <summary>
-        /// Median prices are mid-point values of daily prices and can be used 
-        /// as a filter for trend indicators. 
+        /// Median prices are mid-point values of daily prices and can be used
+        /// as a filter for trend indicators.
         /// </summary>
         MedianPrice,
 
         /// <summary>
         /// The Money Flow indicator compares upward changes and downward changes
-        /// of volume-weighted typical prices. 
+        /// of volume-weighted typical prices.
         /// </summary>
         MoneyFlow,
 
         /// <summary>
-        /// The Negative Volume Index should be used together with the Positive Volume index, 
+        /// The Negative Volume Index should be used together with the Positive Volume index,
         /// and the Negative Volume Index only changes if the volume decreases from the previous day.
         /// </summary>
         NegativeVolumeIndex,
@@ -145,45 +153,45 @@ namespace System.Web.UI.DataVisualization.Charting
         OnBalanceVolume,
 
         /// <summary>
-        /// The Performance indicator compares a current closing price (or any other price) with 
+        /// The Performance indicator compares a current closing price (or any other price) with
         /// the first closing value (from the first time period).
         /// </summary>
         Performance,
 
         /// <summary>
-        /// The Positive Volume Index should be used together with the Negative Volume index. 
-        /// The Positive volume index only changes if the volume decreases from the previous day. 
+        /// The Positive Volume Index should be used together with the Negative Volume index.
+        /// The Positive volume index only changes if the volume decreases from the previous day.
         /// </summary>
         PositiveVolumeIndex,
 
         /// <summary>
-        /// The Price Volume Trend is a cumulative volume total that is calculated using 
-        /// relative changes of the closing price, and should be used with other indicators.  
+        /// The Price Volume Trend is a cumulative volume total that is calculated using
+        /// relative changes of the closing price, and should be used with other indicators.
         /// </summary>
         PriceVolumeTrend,
 
         /// <summary>
-        /// The Rate of Change indicator compares a specified closing price with the current price. 
+        /// The Rate of Change indicator compares a specified closing price with the current price.
         /// </summary>
         RateOfChange,
 
         /// <summary>
-        /// The Relative Strength Index is a momentum oscillator that compares upward movements 
+        /// The Relative Strength Index is a momentum oscillator that compares upward movements
         /// of the closing price with downward movements, and results in values that range from 0 to 100.
         /// </summary>
         RelativeStrengthIndex,
 
         /// <summary>
-        /// A Simple Moving Average is an average of data calculated over a period of time. 
-        /// The moving average is the most popular price indicator used in technical analysis, 
-        /// and can be used with any price (e.g. Hi, Low, Open and Close) 
-        /// or it can be applied to other indicators. 
+        /// A Simple Moving Average is an average of data calculated over a period of time.
+        /// The moving average is the most popular price indicator used in technical analysis,
+        /// and can be used with any price (e.g. Hi, Low, Open and Close)
+        /// or it can be applied to other indicators.
         /// </summary>
         MovingAverage,
 
         /// <summary>
-        /// Standard deviation is used to indicate volatility, and measures 
-        /// the difference between values (e.g. closing price) and their moving average.  
+        /// Standard deviation is used to indicate volatility, and measures
+        /// the difference between values (e.g. closing price) and their moving average.
         /// </summary>
         StandardDeviation,
 
@@ -195,15 +203,15 @@ namespace System.Web.UI.DataVisualization.Charting
         StochasticIndicator,
 
         /// <summary>
-        /// A Triangular Moving Average is an average of data calculated over a period of time 
+        /// A Triangular Moving Average is an average of data calculated over a period of time
         /// where the middle portion of data has more weight.
         /// </summary>
         TriangularMovingAverage,
 
         /// <summary>
         /// The Triple Exponential Moving Average is based on a triple moving average of the closing Price.
-        /// Its purpose is to eliminate short cycles.  This indicator keeps the closing price 
-        /// in trends that are shorter than the specified period. 
+        /// Its purpose is to eliminate short cycles.  This indicator keeps the closing price
+        /// in trends that are shorter than the specified period.
         /// </summary>
         TripleExponentialMovingAverage,
 
@@ -213,47 +221,57 @@ namespace System.Web.UI.DataVisualization.Charting
         TypicalPrice,
 
         /// <summary>
-        /// The Volatility Chaikins indicator measures the difference between High and Low prices, 
+        /// The Volatility Chaikins indicator measures the difference between High and Low prices,
         /// and is used to indicate tops or bottoms of the market.
         /// </summary>
-        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Chaikins")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Chaikins"
+        )]
         VolatilityChaikins,
 
         /// <summary>
-        /// The Volume oscillator attempts to identify trends in volume by comparing two moving averages: 
+        /// The Volume oscillator attempts to identify trends in volume by comparing two moving averages:
         /// one with a short period and another with a longer period.
         /// </summary>
         VolumeOscillator,
 
         /// <summary>
-        /// The Weighted Close formula calculates the average value of daily prices. 
-        /// The only difference between Typical Price and the Weighted Close is that the closing price 
-        /// has extra weight, and is considered the most important price. 
+        /// The Weighted Close formula calculates the average value of daily prices.
+        /// The only difference between Typical Price and the Weighted Close is that the closing price
+        /// has extra weight, and is considered the most important price.
         /// </summary>
         WeightedClose,
 
         /// <summary>
-        /// A Weighted Moving Average is an average of data calculated over a period of time, 
-        /// where greater weight is attached to the most recent data. 
+        /// A Weighted Moving Average is an average of data calculated over a period of time,
+        /// where greater weight is attached to the most recent data.
         /// </summary>
         WeightedMovingAverage,
 
         /// <summary>
-        /// William's %R is a momentum indicator, and is used to measure overbought and oversold levels. 
+        /// William's %R is a momentum indicator, and is used to measure overbought and oversold levels.
         /// </summary>
-        WilliamsR
+        WilliamsR,
     }
 
     #endregion  // Financial Formula Name enumeration
 
     /// <summary>
-    /// The DataFormula class provides properties and methods, which prepare series 
-    /// data for technical analysis, apply formulas on the series data 
+    /// The DataFormula class provides properties and methods, which prepare series
+    /// data for technical analysis, apply formulas on the series data
     /// and prepare output data to be displayed as a chart.
     /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-        [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public class DataFormula
     {
@@ -283,7 +301,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         internal CommonElements Common;
 
-
         #endregion
 
         #region Data Formulas methods
@@ -300,15 +317,20 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This method calls a method from a formula module with 
+        /// This method calls a method from a formula module with
         /// specified name.
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
         /// <param name="parameters">Formula parameters</param>
         /// <param name="inputSeries">Comma separated input data series names and optional X and Y values names.</param>
         /// <param name="outputSeries">Comma separated output data series names and optional X and Y values names.</param>
-        internal void Formula(string formulaName, string parameters, string inputSeries, string outputSeries)
-        {            
+        internal void Formula(
+            string formulaName,
+            string parameters,
+            string inputSeries,
+            string outputSeries
+        )
+        {
             // Array of series
             Series[] inSeries;
             Series[] outSeries;
@@ -334,7 +356,7 @@ namespace System.Web.UI.DataVisualization.Charting
             // Split comma separated parameter list in the array of strings.
             SplitParameters(parameters, out parameterList);
 
-            // Split comma separated series and Y values list in the array of 
+            // Split comma separated series and Y values list in the array of
             // Series and indexes to Y values.
             ConvertToArrays(inputSeries, out inSeries, out inValueIndexes, true);
             ConvertToArrays(outputSeries, out outSeries, out outValueIndexes, false);
@@ -342,7 +364,7 @@ namespace System.Web.UI.DataVisualization.Charting
             // Create indexes if all x values are 0
             //ConvertZeroXToIndex( ref inSeries );
 
-            // Set X value AxisName for output series. 
+            // Set X value AxisName for output series.
             foreach (Series outSeriesItem in outSeries)
             {
                 if (inSeries[0] != null)
@@ -351,7 +373,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 }
             }
 
-            // This method will convert array of Series and array of Y value 
+            // This method will convert array of Series and array of Y value
             // indexes to matrix of double values.
             GetDoubleArray(inSeries, inValueIndexes, out inValues);
 
@@ -370,7 +392,16 @@ namespace System.Web.UI.DataVisualization.Charting
             for (int module = 0; module < Common.FormulaRegistry.Count; module++)
             {
                 moduleName = Common.FormulaRegistry.GetModuleName(module);
-                Common.FormulaRegistry.GetFormulaModule(moduleName).Formula(formulaName, inNoEmptyValues, out outValues, parameterList, _extraParameters, out outLabels);
+                Common
+                    .FormulaRegistry.GetFormulaModule(moduleName)
+                    .Formula(
+                        formulaName,
+                        inNoEmptyValues,
+                        out outValues,
+                        parameterList,
+                        _extraParameters,
+                        out outLabels
+                    );
 
                 // Commented out as InsertEmptyDataPoints is currently commented out (see next block).
                 // It set the statisticalFormulas field that was used to test whether to insert empty data points. (krisztb 4/29/08)
@@ -383,7 +414,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 //    break;
                 //}
 
-                // Check if formula was found by detecting output 
+                // Check if formula was found by detecting output
                 if (outValues != null)
                 {
                     // Exit the loop
@@ -416,9 +447,17 @@ namespace System.Web.UI.DataVisualization.Charting
                 {
                     if (series.Points.Count > 0)
                     {
-                        // get the last xValue: the formula processing is 
+                        // get the last xValue: the formula processing is
                         double topXValue = series.Points[series.Points.Count - 1].XValue;
-                        this.Common.Chart.DataManipulator.InsertEmptyPoints(1, IntervalType.Number, 0, IntervalType.Number, 1, topXValue, series);
+                        this.Common.Chart.DataManipulator.InsertEmptyPoints(
+                            1,
+                            IntervalType.Number,
+                            0,
+                            IntervalType.Number,
+                            1,
+                            topXValue,
+                            series
+                        );
                         foreach (DataPoint point in series.Points)
                         {
                             point.XValue = 0;
@@ -426,12 +465,12 @@ namespace System.Web.UI.DataVisualization.Charting
                     }
                 }
             }
-            // Copy axis labels from the original series into the calculated series            
+            // Copy axis labels from the original series into the calculated series
             CopyAxisLabels(inSeries, outSeries);
         }
 
         /// <summary>
-        /// Copy axis labels from the original series into the calculated series 
+        /// Copy axis labels from the original series into the calculated series
         /// </summary>
         /// <param name="inSeries">array of input series</param>
         /// <param name="outSeries">array of output series</param>
@@ -446,12 +485,12 @@ namespace System.Web.UI.DataVisualization.Charting
 
                 //Depending on whether or not the source series has X Values we need to use two different search algorithms
                 if (_zeroXValues)
-                {   //If we have the empty XValues then the source series should have all the AxisLabels
-                    // -- set the indexed series labels source 
+                { //If we have the empty XValues then the source series should have all the AxisLabels
+                    // -- set the indexed series labels source
                     outputSeries[DataFormula.IndexedSeriesLabelsSourceAttr] = inputSeries.Name;
                 }
                 else
-                {   //If the source series has XValues - loop through the input series points looking for the points with AxisLabels set
+                { //If the source series has XValues - loop through the input series points looking for the points with AxisLabels set
                     int outIndex = 0;
                     foreach (DataPoint inputPoint in inputSeries.Points)
                     {
@@ -459,8 +498,11 @@ namespace System.Web.UI.DataVisualization.Charting
                         {
                             //If the Axis label is set we need to find the corresponding point by the X value
                             //Most probably the points are in the same order so lets first try the corresponding point in the output series
-                            if (outIndex < outputSeries.Points.Count && inputPoint.XValue == outputSeries.Points[outIndex].XValue)
-                            {   // Yes, the corresponding point in the outputSeries has the same XValue as inputPoint -> copy axis label
+                            if (
+                                outIndex < outputSeries.Points.Count
+                                && inputPoint.XValue == outputSeries.Points[outIndex].XValue
+                            )
+                            { // Yes, the corresponding point in the outputSeries has the same XValue as inputPoint -> copy axis label
                                 outputSeries.Points[outIndex].AxisLabel = inputPoint.AxisLabel;
                             }
                             else
@@ -470,7 +512,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                 foreach (DataPoint outputPoint in outputSeries.Points)
                                 {
                                     if (inputPoint.XValue == outputPoint.XValue)
-                                    {   //Found the point with the same XValue - copy axis label and break
+                                    { //Found the point with the same XValue - copy axis label and break
                                         outputPoint.AxisLabel = inputPoint.AxisLabel;
                                         break;
                                     }
@@ -486,16 +528,20 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-
         /// <summary>
-        /// This method will set series X and Y values from matrix of 
+        /// This method will set series X and Y values from matrix of
         /// double values.
         /// </summary>
         /// <param name="outputSeries">Array of output series</param>
         /// <param name="valueIndex">Array of Y value indexes</param>
         /// <param name="outputValues">Array of doubles which will be used to fill series</param>
         /// <param name="outputLabels">Array of labels</param>
-        internal void SetDoubleArray(Series[] outputSeries, int[] valueIndex, double[][] outputValues, string[][] outputLabels)
+        internal void SetDoubleArray(
+            Series[] outputSeries,
+            int[] valueIndex,
+            double[][] outputValues,
+            string[][] outputLabels
+        )
         {
             // Validation
             if (outputSeries.Length != valueIndex.Length)
@@ -506,7 +552,9 @@ namespace System.Web.UI.DataVisualization.Charting
             // Number of output series is not correct
             if (outputSeries.Length < outputValues.Length - 1)
             {
-                throw new ArgumentException(SR.ExceptionFormulaDataOutputSeriesNumberYValuesIncorrect);
+                throw new ArgumentException(
+                    SR.ExceptionFormulaDataOutputSeriesNumberYValuesIncorrect
+                );
             }
 
             int seriesIndex = 0;
@@ -548,14 +596,20 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (Double.IsNaN(outputValues[seriesIndex + 1][pointIndex]))
                             series.Points[pointIndex].IsEmpty = true;
                         else
-                            series.Points[pointIndex].YValues[valueIndex[seriesIndex] - 1] = outputValues[seriesIndex + 1][pointIndex];
+                            series.Points[pointIndex].YValues[valueIndex[seriesIndex] - 1] =
+                                outputValues[seriesIndex + 1][pointIndex];
                     }
                     // Use existing series and set Y values.
                     else
                     {
-                        if (series.Points[pointIndex].XValue != outputValues[0][pointIndex] && !_zeroXValues)
+                        if (
+                            series.Points[pointIndex].XValue != outputValues[0][pointIndex]
+                            && !_zeroXValues
+                        )
                         {
-                            throw new InvalidOperationException(SR.ExceptionFormulaXValuesNotAligned);
+                            throw new InvalidOperationException(
+                                SR.ExceptionFormulaXValuesNotAligned
+                            );
                         }
 
                         // Set empty data points or Y values
@@ -563,12 +617,15 @@ namespace System.Web.UI.DataVisualization.Charting
                             series.Points[pointIndex].IsEmpty = true;
                         else
                         {
-                            series.Points[pointIndex].YValues[valueIndex[seriesIndex] - 1] = outputValues[seriesIndex + 1][pointIndex];
+                            series.Points[pointIndex].YValues[valueIndex[seriesIndex] - 1] =
+                                outputValues[seriesIndex + 1][pointIndex];
 
                             // Set Labels
                             if (outputLabels != null)
                             {
-                                series.Points[pointIndex].Label = outputLabels[seriesIndex][pointIndex];
+                                series.Points[pointIndex].Label = outputLabels[seriesIndex][
+                                    pointIndex
+                                ];
                             }
                         }
                     }
@@ -578,17 +635,22 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This method will convert a string with information about 
-        /// series and y values to two arrays. The first array will 
-        /// contain series and the second array will contain 
-        /// corresponding indexes to y values for every series. 
+        /// This method will convert a string with information about
+        /// series and y values to two arrays. The first array will
+        /// contain series and the second array will contain
+        /// corresponding indexes to y values for every series.
         /// The arrays have to have the same number of items.
         /// </summary>
         /// <param name="inputString">A string with information about series and Y values</param>
         /// <param name="seiesArray">Array of Data Series</param>
         /// <param name="valueArray">Array of Y value indexes</param>
         /// <param name="inputSeries">Do not create new series if input series are used</param>
-        private void ConvertToArrays(string inputString, out Series[] seiesArray, out int[] valueArray, bool inputSeries)
+        private void ConvertToArrays(
+            string inputString,
+            out Series[] seiesArray,
+            out int[] valueArray,
+            bool inputSeries
+        )
         {
             // Split string by comma
             string[] subStrings = inputString.Split(',');
@@ -604,7 +666,6 @@ namespace System.Web.UI.DataVisualization.Charting
             foreach (string str in subStrings)
             {
                 string[] parts = str.Split(':');
-
 
                 // There must be at least one and no more than two result strings
                 if (parts.Length < 1 && parts.Length > 2)
@@ -631,17 +692,24 @@ namespace System.Web.UI.DataVisualization.Charting
                             // Try to convert the rest of the string to integer
                             try
                             {
-                                valueIndex = Int32.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture);
+                                valueIndex = Int32.Parse(
+                                    parts[1],
+                                    System.Globalization.CultureInfo.InvariantCulture
+                                );
                             }
                             catch (System.Exception)
                             {
-                                throw (new ArgumentException(SR.ExceptionFormulaDataFormatInvalid(str)));
+                                throw (
+                                    new ArgumentException(SR.ExceptionFormulaDataFormatInvalid(str))
+                                );
                             }
                         }
                     }
                     else
                     {
-                        throw (new ArgumentException(SR.ExceptionFormulaDataSeriesNameNotFound(str)));
+                        throw (
+                            new ArgumentException(SR.ExceptionFormulaDataSeriesNameNotFound(str))
+                        );
                     }
                 }
 
@@ -663,17 +731,20 @@ namespace System.Web.UI.DataVisualization.Charting
                         seiesArray[index] = Common.DataManager.Series[parts[0]];
                     }
                     else
-                        throw (new ArgumentException(SR.ExceptionFormulaDataSeriesNameNotFoundInCollection(str)));
+                        throw (
+                            new ArgumentException(
+                                SR.ExceptionFormulaDataSeriesNameNotFoundInCollection(str)
+                            )
+                        );
                 }
                 index++;
             }
         }
 
-
         /// <summary>
-        /// Returns Jagged Arrays of doubles from array of series. 
+        /// Returns Jagged Arrays of doubles from array of series.
         /// A jagged array is merely an array of arrays and
-        /// it doesn't have to be square. The first item is array of 
+        /// it doesn't have to be square. The first item is array of
         /// X values from the first series
         /// </summary>
         /// <param name="inputSeries">Array of Data Series</param>
@@ -685,16 +756,21 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Returns Jagged Arrays of doubles from array of series. 
+        /// Returns Jagged Arrays of doubles from array of series.
         /// A jagged array is merely an array of arrays and
-        /// it doesn't have to be square. The first item is array of 
+        /// it doesn't have to be square. The first item is array of
         /// X values from the first series
         /// </summary>
         /// <param name="inputSeries">Array of Data Series</param>
         /// <param name="valueIndex">Array with indexes which represent value from data point: 0 = X, 1 = Y, 2 = Y2, 3 = Y3</param>
         /// <param name="output">Jagged Arrays of doubles</param>
         /// <param name="ignoreZeroX">Ignore Zero X values</param>
-        private void GetDoubleArray(Series[] inputSeries, int[] valueIndex, out double[][] output, bool ignoreZeroX)
+        private void GetDoubleArray(
+            Series[] inputSeries,
+            int[] valueIndex,
+            out double[][] output,
+            bool ignoreZeroX
+        )
         {
             // Allocate a memory.
             output = new double[inputSeries.Length + 1][];
@@ -739,7 +815,6 @@ namespace System.Web.UI.DataVisualization.Charting
                 CheckXValuesAlignment(inputSeries);
             }
 
-
             // Data point index
             int indexPoint = 0;
 
@@ -780,7 +855,9 @@ namespace System.Web.UI.DataVisualization.Charting
                     {
                         try
                         {
-                            output[indexSeries][indexPoint] = point.YValues[valueIndex[indexSeries - 1] - 1];
+                            output[indexSeries][indexPoint] = point.YValues[
+                                valueIndex[indexSeries - 1] - 1
+                            ];
                         }
                         catch (System.Exception)
                         {
@@ -797,7 +874,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Merge, split or move Y values of the series. 
+        /// Merge, split or move Y values of the series.
         /// </summary>
         /// <param name="inputSeries">Comma separated list of input data series names and optional X and Y values names.</param>
         /// <param name="outputSeries">Comma separated list of output data series names and optional X and Y values names.</param>
@@ -815,7 +892,7 @@ namespace System.Web.UI.DataVisualization.Charting
             double[][] inValues;
             double[][] outValues;
 
-            // Convert string with information about series and Y values 
+            // Convert string with information about series and Y values
             // to array of series and indexes to Y values.
             ConvertToArrays(inputSeries, out inSeries, out inValueIndexes, true);
             ConvertToArrays(outputSeries, out outSeries, out outValueIndexes, false);
@@ -826,7 +903,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 throw new ArgumentException(SR.ExceptionFormulaInputOutputSeriesMismatch);
             }
 
-            // Check if output series points exist. If they do not exist 
+            // Check if output series points exist. If they do not exist
             // create data points which are copy of Input series data points
             for (int indexSeries = 0; indexSeries < inSeries.Length; indexSeries++)
             {
@@ -891,13 +968,12 @@ namespace System.Web.UI.DataVisualization.Charting
             SetDoubleArray(outSeries, outValueIndexes, outValues, null);
         }
 
-
         /// <summary>
-        /// This method will first copy input matrix to output matrix 
-        /// then will remove columns, which have 
-        /// one or more empty values (NaN) from the output matrix. This 
-        /// method will set all values from column of input matrix 
-        /// to be empty (NaN) if one or more values of that column 
+        /// This method will first copy input matrix to output matrix
+        /// then will remove columns, which have
+        /// one or more empty values (NaN) from the output matrix. This
+        /// method will set all values from column of input matrix
+        /// to be empty (NaN) if one or more values of that column
         /// are empty.
         /// </summary>
         /// <param name="input">Input matrix with empty values</param>
@@ -959,17 +1035,16 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-
         /*
-		/// <summary>
-		/// This method will compare a input matrix with empty data 
-		/// points and output matrix without empty data points and 
-		/// add empty data points to output matrix according to 
-		/// input matrix empty data point positions.
-		/// </summary>
-		/// <param name="input">Matrix With input data</param>
-		/// <param name="inputWithoutEmpty">Matrix without empty data points</param>
-		/// <param name="output">New Matrix with inserted data points</param>
+        /// <summary>
+        /// This method will compare a input matrix with empty data
+        /// points and output matrix without empty data points and
+        /// add empty data points to output matrix according to
+        /// input matrix empty data point positions.
+        /// </summary>
+        /// <param name="input">Matrix With input data</param>
+        /// <param name="inputWithoutEmpty">Matrix without empty data points</param>
+        /// <param name="output">New Matrix with inserted data points</param>
          */
         //private void InsertEmptyDataPoints( double [][] input, double [][] inputWithoutEmpty, out double [][] output )
         //{
@@ -994,15 +1069,15 @@ namespace System.Web.UI.DataVisualization.Charting
         // NOTE: Inserting empty points in the result data after applying the formula
         // causes issues. The algorithm below do not cover most of the common spzces
         // and as a result the formula data is completly destroyed.
-        // 
-        // By removing this code the result data set will have "missing" points instaed 
-        // of empty. 
+        //
+        // By removing this code the result data set will have "missing" points instaed
+        // of empty.
         //   - AG
         //
 
         /*
 
-        // Input matrix can have only empty rows. If one value 
+        // Input matrix can have only empty rows. If one value
         // is empty all values from a row have to be empty.
 
         // Find the number of empty rows
@@ -1073,7 +1148,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
 
         /// <summary>
-        /// This method splits a string with comma separated 
+        /// This method splits a string with comma separated
         /// parameters to the array of strings with parameters.
         /// </summary>
         /// <param name="parameters">a string with comma separated parameters</param>
@@ -1087,7 +1162,6 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 parameterList[i] = parameterList[i].Trim();
             }
-
         }
 
         /// <summary>
@@ -1108,7 +1182,7 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This method will check if X values from different series 
+        /// This method will check if X values from different series
         /// are aligned.
         /// </summary>
         /// <param name="series">Array of series</param>
@@ -1123,53 +1197,71 @@ namespace System.Web.UI.DataVisualization.Charting
                     // Check the number of data points
                     if (series[seriesIndex].Points.Count != series[seriesIndex + 1].Points.Count)
                     {
-                        throw new ArgumentException(SR.ExceptionFormulaDataSeriesAreNotAlignedDifferentDataPoints(series[seriesIndex].Name, series[seriesIndex + 1].Name));
+                        throw new ArgumentException(
+                            SR.ExceptionFormulaDataSeriesAreNotAlignedDifferentDataPoints(
+                                series[seriesIndex].Name,
+                                series[seriesIndex + 1].Name
+                            )
+                        );
                     }
 
                     // Data points loop
-                    for (int pointIndex = 0; pointIndex < series[seriesIndex].Points.Count; pointIndex++)
+                    for (
+                        int pointIndex = 0;
+                        pointIndex < series[seriesIndex].Points.Count;
+                        pointIndex++
+                    )
                     {
                         // Check X values.
-                        if (series[seriesIndex].Points[pointIndex].XValue != series[seriesIndex + 1].Points[pointIndex].XValue)
-                            throw new ArgumentException(SR.ExceptionFormulaDataSeriesAreNotAlignedDifferentXValues(series[seriesIndex].Name, series[seriesIndex + 1].Name));
-
+                        if (
+                            series[seriesIndex].Points[pointIndex].XValue
+                            != series[seriesIndex + 1].Points[pointIndex].XValue
+                        )
+                            throw new ArgumentException(
+                                SR.ExceptionFormulaDataSeriesAreNotAlignedDifferentXValues(
+                                    series[seriesIndex].Name,
+                                    series[seriesIndex + 1].Name
+                                )
+                            );
                     }
                 }
             }
         }
 
-
         #endregion
 
         #region Data Formulas Financial methods
         /// <summary>
-        /// This method calls a method from a formula module with 
+        /// This method calls a method from a formula module with
         /// specified name.
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
         /// <param name="inputSeries">Input series</param>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
-        public void FinancialFormula(FinancialFormula formulaName, Series inputSeries)        
+        public void FinancialFormula(FinancialFormula formulaName, Series inputSeries)
         {
             FinancialFormula(formulaName, inputSeries, inputSeries);
         }
 
         /// <summary>
-        /// This method calls a method from a formula module with 
+        /// This method calls a method from a formula module with
         /// specified name.
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
         /// <param name="inputSeries">Input series</param>
         /// <param name="outputSeries">Output series</param>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
-        public void FinancialFormula(FinancialFormula formulaName, Series inputSeries, Series outputSeries)
+        public void FinancialFormula(
+            FinancialFormula formulaName,
+            Series inputSeries,
+            Series outputSeries
+        )
         {
             FinancialFormula(formulaName, "", inputSeries, outputSeries);
         }
 
-
         /// <summary>
-        /// This method calls a method from a formula module with 
+        /// This method calls a method from a formula module with
         /// specified name.
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
@@ -1177,7 +1269,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="inputSeries">Input series</param>
         /// <param name="outputSeries">Output series</param>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
-        public void FinancialFormula(FinancialFormula formulaName, string parameters, Series inputSeries, Series outputSeries)
+        public void FinancialFormula(
+            FinancialFormula formulaName,
+            string parameters,
+            Series inputSeries,
+            Series outputSeries
+        )
         {
             if (inputSeries == null)
                 throw new ArgumentNullException("inputSeries");
@@ -1186,9 +1283,8 @@ namespace System.Web.UI.DataVisualization.Charting
             FinancialFormula(formulaName, parameters, inputSeries.Name, outputSeries.Name);
         }
 
-
         /// <summary>
-        /// This method calls a method from a formula module with 
+        /// This method calls a method from a formula module with
         /// specified name.
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
@@ -1199,29 +1295,37 @@ namespace System.Web.UI.DataVisualization.Charting
             FinancialFormula(formulaName, inputSeries, inputSeries);
         }
 
-
         /// <summary>
-        /// This method calls a method from a formula module with 
+        /// This method calls a method from a formula module with
         /// specified name.
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
         /// <param name="inputSeries">Comma separated list of input series names and optional X and Y values names.</param>
         /// <param name="outputSeries">Comma separated list of output series names and optional X and Y values names.</param>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
-        public void FinancialFormula(FinancialFormula formulaName, string inputSeries, string outputSeries)
+        public void FinancialFormula(
+            FinancialFormula formulaName,
+            string inputSeries,
+            string outputSeries
+        )
         {
             FinancialFormula(formulaName, "", inputSeries, outputSeries);
         }
 
         /// <summary>
-        /// This method calls a method from a formula module with 
+        /// This method calls a method from a formula module with
         /// specified name.
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
         /// <param name="parameters">Formula parameters</param>
         /// <param name="inputSeries">Comma separated list of input series names and optional X and Y values names.</param>
         /// <param name="outputSeries">Comma separated list of output series names and optional X and Y values names.</param>
-        public void FinancialFormula(FinancialFormula formulaName, string parameters, string inputSeries, string outputSeries)
+        public void FinancialFormula(
+            FinancialFormula formulaName,
+            string parameters,
+            string inputSeries,
+            string outputSeries
+        )
         {
             if (inputSeries == null)
                 throw new ArgumentNullException("inputSeries");
@@ -1236,17 +1340,27 @@ namespace System.Web.UI.DataVisualization.Charting
             {
                 parameters = formulaInfo.SaveParametersToString();
             }
-            else 
+            else
             {
                 formulaInfo.CheckParameterString(parameters);
             }
 
             // Fix the InputSeries and Outputseries for cases when the series field names are not provided
-            SeriesFieldList inputFields = SeriesFieldList.FromString(this.Common.Chart, inputSeries, formulaInfo.InputFields);
-            SeriesFieldList outputFields = SeriesFieldList.FromString(this.Common.Chart, outputSeries, formulaInfo.OutputFields);
+            SeriesFieldList inputFields = SeriesFieldList.FromString(
+                this.Common.Chart,
+                inputSeries,
+                formulaInfo.InputFields
+            );
+            SeriesFieldList outputFields = SeriesFieldList.FromString(
+                this.Common.Chart,
+                outputSeries,
+                formulaInfo.OutputFields
+            );
 
-            if (inputFields != null) inputSeries = inputFields.ToString();
-            if (outputFields != null) outputSeries = outputFields.ToString();
+            if (inputFields != null)
+                inputSeries = inputFields.ToString();
+            if (outputFields != null)
+                outputSeries = outputFields.ToString();
 
             Formula(formulaName.ToString(), parameters, inputSeries, outputSeries);
         }
@@ -1255,40 +1369,33 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Data Formulas properties
 
         /// <summary>
-        /// Gets or sets a flag which indicates whether 
-        /// empty points are ignored while performing calculations; 
-        /// otherwise, empty points are treated as zeros. 
+        /// Gets or sets a flag which indicates whether
+        /// empty points are ignored while performing calculations;
+        /// otherwise, empty points are treated as zeros.
         /// </summary>
         public bool IsEmptyPointIgnored
         {
-            get
-            {
-                return _isEmptyPointIgnored;
-            }
-            set
-            {
-                _isEmptyPointIgnored = value;
-            }
+            get { return _isEmptyPointIgnored; }
+            set { _isEmptyPointIgnored = value; }
         }
 
-
-
         /// <summary>
-        /// Gets or sets a flag which indicates whether 
+        /// Gets or sets a flag which indicates whether
         /// to start formulas like rolling average from zero.
         /// </summary>
         public bool IsStartFromFirst
         {
-            get
-            {
-                return bool.Parse(_extraParameters[0]);
-            }
+            get { return bool.Parse(_extraParameters[0]); }
             set
             {
                 if (value)
-                    _extraParameters[0] = true.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    _extraParameters[0] = true.ToString(
+                        System.Globalization.CultureInfo.InvariantCulture
+                    );
                 else
-                    _extraParameters[0] = false.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    _extraParameters[0] = false.ToString(
+                        System.Globalization.CultureInfo.InvariantCulture
+                    );
             }
         }
 
@@ -1297,16 +1404,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public StatisticFormula Statistics
         {
-            get
-            {
-                return _statistics;
-            }
+            get { return _statistics; }
         }
-
 
         #endregion
     }
-
-
-
 }

@@ -10,7 +10,8 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
-public class PathSchemeSelectionTests : IClassFixture<WebApplicationFactory<PathSchemeSelection.Startup>>
+public class PathSchemeSelectionTests
+    : IClassFixture<WebApplicationFactory<PathSchemeSelection.Startup>>
 {
     public PathSchemeSelectionTests(WebApplicationFactory<PathSchemeSelection.Startup> fixture)
     {
@@ -50,7 +51,10 @@ public class PathSchemeSelectionTests : IClassFixture<WebApplicationFactory<Path
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("http://localhost/account/login?ReturnUrl=%2FHome%2FMyClaims", response.RequestMessage.RequestUri.ToString());
+        Assert.Equal(
+            "http://localhost/account/login?ReturnUrl=%2FHome%2FMyClaims",
+            response.RequestMessage.RequestUri.ToString()
+        );
     }
 
     [Fact]
@@ -108,11 +112,16 @@ public class PathSchemeSelectionTests : IClassFixture<WebApplicationFactory<Path
         var signIn = await TestAssert.IsHtmlDocumentAsync(goToSignIn);
 
         var form = TestAssert.HasForm(signIn);
-        await Client.SendAsync(form, new Dictionary<string, string>()
-        {
-            ["username"] = userName,
-            ["password"] = userName // this test doesn't care what the password is
-        });
+        await Client.SendAsync(
+            form,
+            new Dictionary<string, string>()
+            {
+                ["username"] = userName,
+                ["password"] =
+                    userName // this test doesn't care what the password is
+                ,
+            }
+        );
 
         Assert.Equal(HttpStatusCode.OK, signIn.StatusCode);
     }

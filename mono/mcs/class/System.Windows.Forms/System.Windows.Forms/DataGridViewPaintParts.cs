@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,19 +24,19 @@
 //
 
 
-namespace System.Windows.Forms {
-
-	[FlagsAttribute()]
-	public enum DataGridViewPaintParts {
-		None = 0,
-		Background = 1,
-		Border = 2,
-		ContentBackground = 4,
-		ContentForeground = 8,
-		ErrorIcon = 16,
-		Focus = 32,
-		SelectionBackground = 64,
-		All = 127
-	}
-
+namespace System.Windows.Forms
+{
+    [FlagsAttribute()]
+    public enum DataGridViewPaintParts
+    {
+        None = 0,
+        Background = 1,
+        Border = 2,
+        ContentBackground = 4,
+        ContentForeground = 8,
+        ErrorIcon = 16,
+        Focus = 32,
+        SelectionBackground = 64,
+        All = 127,
+    }
 }

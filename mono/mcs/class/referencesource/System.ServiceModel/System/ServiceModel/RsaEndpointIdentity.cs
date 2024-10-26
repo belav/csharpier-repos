@@ -31,7 +31,9 @@ namespace System.ServiceModel
 #pragma warning suppress 56506 // A Certificate Public key can never be null.
             RSA rsa = certificate.PublicKey.Key as RSA;
             if (rsa == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.PublicKeyNotRSA)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.PublicKeyNotRSA))
+                );
 
             base.Initialize(Claim.CreateRsaClaim(rsa));
         }
@@ -44,16 +46,35 @@ namespace System.ServiceModel
             // PreSharp Bug: Parameter 'identity.ClaimType' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506 // Claim.ClaimType will never return null
             if (!identity.ClaimType.Equals(ClaimTypes.Rsa))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.UnrecognizedClaimTypeForIdentity, identity.ClaimType, ClaimTypes.Rsa));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(
+                        SR.UnrecognizedClaimTypeForIdentity,
+                        identity.ClaimType,
+                        ClaimTypes.Rsa
+                    )
+                );
 
             base.Initialize(identity);
         }
 
         internal RsaEndpointIdentity(XmlDictionaryReader reader)
         {
-            reader.ReadStartElement(XD.XmlSignatureDictionary.RsaKeyValue, XD.XmlSignatureDictionary.Namespace);
-            byte[] modulus = Convert.FromBase64String(reader.ReadElementString(XD.XmlSignatureDictionary.Modulus.Value, XD.XmlSignatureDictionary.Namespace.Value));
-            byte[] exponent = Convert.FromBase64String(reader.ReadElementString(XD.XmlSignatureDictionary.Exponent.Value, XD.XmlSignatureDictionary.Namespace.Value));
+            reader.ReadStartElement(
+                XD.XmlSignatureDictionary.RsaKeyValue,
+                XD.XmlSignatureDictionary.Namespace
+            );
+            byte[] modulus = Convert.FromBase64String(
+                reader.ReadElementString(
+                    XD.XmlSignatureDictionary.Modulus.Value,
+                    XD.XmlSignatureDictionary.Namespace.Value
+                )
+            );
+            byte[] exponent = Convert.FromBase64String(
+                reader.ReadElementString(
+                    XD.XmlSignatureDictionary.Exponent.Value,
+                    XD.XmlSignatureDictionary.Namespace.Value
+                )
+            );
             reader.ReadEndElement();
             RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
             RSAParameters parameters = new RSAParameters();
@@ -68,12 +89,30 @@ namespace System.ServiceModel
             if (writer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
-            writer.WriteStartElement(XD.XmlSignatureDictionary.Prefix.Value, XD.XmlSignatureDictionary.KeyInfo, XD.XmlSignatureDictionary.Namespace);
-            writer.WriteStartElement(XD.XmlSignatureDictionary.Prefix.Value, XD.XmlSignatureDictionary.RsaKeyValue, XD.XmlSignatureDictionary.Namespace);
+            writer.WriteStartElement(
+                XD.XmlSignatureDictionary.Prefix.Value,
+                XD.XmlSignatureDictionary.KeyInfo,
+                XD.XmlSignatureDictionary.Namespace
+            );
+            writer.WriteStartElement(
+                XD.XmlSignatureDictionary.Prefix.Value,
+                XD.XmlSignatureDictionary.RsaKeyValue,
+                XD.XmlSignatureDictionary.Namespace
+            );
             RSA rsa = (RSA)this.IdentityClaim.Resource;
             RSAParameters parameters = rsa.ExportParameters(false);
-            writer.WriteElementString(XD.XmlSignatureDictionary.Prefix.Value, XD.XmlSignatureDictionary.Modulus, XD.XmlSignatureDictionary.Namespace, Convert.ToBase64String(parameters.Modulus));
-            writer.WriteElementString(XD.XmlSignatureDictionary.Prefix.Value, XD.XmlSignatureDictionary.Exponent, XD.XmlSignatureDictionary.Namespace, Convert.ToBase64String(parameters.Exponent));
+            writer.WriteElementString(
+                XD.XmlSignatureDictionary.Prefix.Value,
+                XD.XmlSignatureDictionary.Modulus,
+                XD.XmlSignatureDictionary.Namespace,
+                Convert.ToBase64String(parameters.Modulus)
+            );
+            writer.WriteElementString(
+                XD.XmlSignatureDictionary.Prefix.Value,
+                XD.XmlSignatureDictionary.Exponent,
+                XD.XmlSignatureDictionary.Namespace,
+                Convert.ToBase64String(parameters.Exponent)
+            );
             writer.WriteEndElement();
             writer.WriteEndElement();
         }

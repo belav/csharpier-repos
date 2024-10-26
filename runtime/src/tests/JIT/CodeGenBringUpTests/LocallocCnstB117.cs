@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_LocallocCnstB117
 {
     const int Pass = 100;
@@ -13,7 +14,8 @@ public class BringUpTest_LocallocCnstB117
 
     // Reduce all values to byte
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static unsafe bool CHECK(byte check, byte expected) {
+    public static unsafe bool CHECK(byte check, byte expected)
+    {
         return check == expected;
     }
 
@@ -23,12 +25,13 @@ public class BringUpTest_LocallocCnstB117
         byte* a = stackalloc byte[117];
         for (int i = 0; i < 117; i++)
         {
-            a[i] = (byte) i;
+            a[i] = (byte)i;
         }
 
         for (int i = 0; i < 117; i++)
         {
-            if (!CHECK(a[i], (byte) i)) return i;
+            if (!CHECK(a[i], (byte)i))
+                return i;
         }
 
         return -1;
@@ -40,7 +43,8 @@ public class BringUpTest_LocallocCnstB117
         int ret;
 
         ret = LocallocCnstB117();
-        if (ret != -1) {
+        if (ret != -1)
+        {
             Console.WriteLine("LocallocCnstB117: Failed on index: " + ret);
             return Fail;
         }

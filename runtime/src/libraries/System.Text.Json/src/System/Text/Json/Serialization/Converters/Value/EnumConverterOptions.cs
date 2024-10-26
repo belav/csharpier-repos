@@ -14,6 +14,6 @@ namespace System.Text.Json.Serialization.Converters
         /// <summary>
         /// Allow number values.
         /// </summary>
-        AllowNumbers = 0b0010
+        AllowNumbers = 0b0010,
     }
 }

@@ -20,16 +20,12 @@ namespace System.Activities.Statements
             this.toConfirmToken = new Variable<CompensationToken>();
 
             this.body = new InternalConfirm()
-                {
-                    Target = new InArgument<CompensationToken>(toConfirmToken),
-                };
+            {
+                Target = new InArgument<CompensationToken>(toConfirmToken),
+            };
         }
 
-        public InArgument<CompensationToken> Target
-        {
-            get;
-            set;
-        }
+        public InArgument<CompensationToken> Target { get; set; }
 
         Activity Body
         {
@@ -38,11 +34,17 @@ namespace System.Activities.Statements
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument targetArgument = new RuntimeArgument("Target", typeof(CompensationToken), ArgumentDirection.In);
+            RuntimeArgument targetArgument = new RuntimeArgument(
+                "Target",
+                typeof(CompensationToken),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.Target, targetArgument);
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { targetArgument });
 
-            metadata.SetImplementationVariablesCollection(new Collection<Variable> { this.toConfirmToken });
+            metadata.SetImplementationVariablesCollection(
+                new Collection<Variable> { this.toConfirmToken }
+            );
 
             Fx.Assert(this.Body != null, "Body must be valid");
             metadata.SetImplementationChildrenCollection(new Collection<Activity> { this.Body });
@@ -55,14 +57,20 @@ namespace System.Activities.Statements
 
         void InternalExecute(NativeActivityContext context, ActivityInstance completedInstance)
         {
-            CompensationExtension compensationExtension = context.GetExtension<CompensationExtension>();
+            CompensationExtension compensationExtension =
+                context.GetExtension<CompensationExtension>();
             if (compensationExtension == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ConfirmWithoutCompensableActivity(this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.ConfirmWithoutCompensableActivity(this.DisplayName)
+                    )
+                );
             }
 
             CompensationToken token = Target.Get(context);
-            CompensationTokenData tokenData = token == null ? null : compensationExtension.Get(token.CompensationId);
+            CompensationTokenData tokenData =
+                token == null ? null : compensationExtension.Get(token.CompensationId);
 
             Fx.Assert(tokenData != null, "CompensationTokenData must be valid");
 
@@ -73,7 +81,10 @@ namespace System.Activities.Statements
                     this.onChildConfirmed = new CompletionCallback(InternalExecute);
                 }
 
-                this.toConfirmToken.Set(context, new CompensationToken(tokenData.ExecutionTracker.Get()));
+                this.toConfirmToken.Set(
+                    context,
+                    new CompensationToken(tokenData.ExecutionTracker.Get())
+                );
 
                 Fx.Assert(Body != null, "Body must be valid");
                 context.ScheduleActivity(Body, this.onChildConfirmed);
@@ -82,9 +93,7 @@ namespace System.Activities.Statements
 
         protected override void Cancel(NativeActivityContext context)
         {
-            // Suppress Cancel   
+            // Suppress Cancel
         }
     }
-
 }
-

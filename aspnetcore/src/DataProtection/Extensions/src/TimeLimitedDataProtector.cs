@@ -16,7 +16,8 @@ namespace Microsoft.AspNetCore.DataProtection;
 /// </summary>
 internal sealed class TimeLimitedDataProtector : ITimeLimitedDataProtector
 {
-    private const string MyPurposeString = "Microsoft.AspNetCore.DataProtection.TimeLimitedDataProtector.v1";
+    private const string MyPurposeString =
+        "Microsoft.AspNetCore.DataProtection.TimeLimitedDataProtector.v1";
 
     private readonly IDataProtector _innerProtector;
     private IDataProtector? _innerProtectorWithTimeLimitedPurpose; // created on-demand
@@ -40,7 +41,12 @@ internal sealed class TimeLimitedDataProtector : ITimeLimitedDataProtector
         if (retVal == null)
         {
             var newValue = _innerProtector.CreateProtector(MyPurposeString); // we always append our purpose to the end of the chain
-            retVal = Interlocked.CompareExchange(ref _innerProtectorWithTimeLimitedPurpose, newValue, null) ?? newValue;
+            retVal =
+                Interlocked.CompareExchange(
+                    ref _innerProtectorWithTimeLimitedPurpose,
+                    newValue,
+                    null
+                ) ?? newValue;
         }
         return retVal;
     }
@@ -64,13 +70,18 @@ internal sealed class TimeLimitedDataProtector : ITimeLimitedDataProtector
         return UnprotectCore(protectedData, DateTimeOffset.UtcNow, out expiration);
     }
 
-    internal byte[] UnprotectCore(byte[] protectedData, DateTimeOffset now, out DateTimeOffset expiration)
+    internal byte[] UnprotectCore(
+        byte[] protectedData,
+        DateTimeOffset now,
+        out DateTimeOffset expiration
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(protectedData);
 
         try
         {
-            byte[] plaintextWithHeader = GetInnerProtectorWithTimeLimitedPurpose().Unprotect(protectedData);
+            byte[] plaintextWithHeader = GetInnerProtectorWithTimeLimitedPurpose()
+                .Unprotect(protectedData);
             if (plaintextWithHeader.Length < 8)
             {
                 // header isn't present
@@ -79,12 +90,17 @@ internal sealed class TimeLimitedDataProtector : ITimeLimitedDataProtector
 
             // Read expiration time back out of the payload
             ulong utcTicksExpiration = BitHelpers.ReadUInt64(plaintextWithHeader, 0);
-            DateTimeOffset embeddedExpiration = new DateTimeOffset(checked((long)utcTicksExpiration), TimeSpan.Zero /* UTC */);
+            DateTimeOffset embeddedExpiration = new DateTimeOffset(
+                checked((long)utcTicksExpiration),
+                TimeSpan.Zero /* UTC */
+            );
 
             // Are we expired?
             if (now > embeddedExpiration)
             {
-                throw new CryptographicException(Resources.FormatTimeLimitedDataProtector_PayloadExpired(embeddedExpiration));
+                throw new CryptographicException(
+                    Resources.FormatTimeLimitedDataProtector_PayloadExpired(embeddedExpiration)
+                );
             }
 
             // Not expired - split and return payload

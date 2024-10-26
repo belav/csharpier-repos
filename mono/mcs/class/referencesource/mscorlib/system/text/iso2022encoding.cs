@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 //  ISO2022Encoding.cs
@@ -20,7 +20,7 @@
 // Regarding Normalization for ISO-2022-JP (50220, 50221, 50222), its the same rules as EUCJP
 //  Forms KC & KD are precluded because of things like halfwidth Katakana that has compatibility mappings
 //  Form D is precluded because of 0x00a8, which changes to space + dierises.
-// 
+//
 // Note: I think that IsAlwaysNormalized should probably return true for form C for Japanese 20932 based CPs.
 //
 // For ISO-2022-KR
@@ -36,15 +36,14 @@
 #if FEATURE_CODEPAGES_FILE // requires BaseCodePageEncooding
 namespace System.Text
 {
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
-    using System.Text;
-    using System.Runtime.InteropServices;
     using System;
-    using System.Security;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-
+    using System.Security;
+    using System.Text;
 
     /*=================================ISO2022Encoding============================
     **
@@ -55,64 +54,72 @@ namespace System.Text
     [Serializable]
     internal class ISO2022Encoding : DBCSCodePageEncoding
     {
-        const byte SHIFT_OUT            = (byte)0x0E;
-        const byte SHIFT_IN             = (byte)0x0F;
-        const byte ESCAPE               = 0x1B;
-        const byte LEADBYTE_HALFWIDTH   = 0x10;
+        const byte SHIFT_OUT = (byte)0x0E;
+        const byte SHIFT_IN = (byte)0x0F;
+        const byte ESCAPE = 0x1B;
+        const byte LEADBYTE_HALFWIDTH = 0x10;
 
         // We have to load the 936 code page tables, so impersonate 936 as our base
         // This pretends to be other code pages as far as memory sections are concerned.
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ISO2022Encoding(int codePage) : base(codePage, tableBaseCodePages[codePage % 10])
+        [System.Security.SecurityCritical] // auto-generated
+        internal ISO2022Encoding(int codePage)
+            : base(codePage, tableBaseCodePages[codePage % 10])
         {
             this.m_bUseMlangTypeForSerialization = true;
         }
 
         // Constructor called by serialization.
         // Note:  We use the base GetObjectData however
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ISO2022Encoding(SerializationInfo info, StreamingContext context) : base(info, context)
+        [System.Security.SecurityCritical] // auto-generated
+        internal ISO2022Encoding(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             // Actually this can't ever get called, CodePageEncoding is our proxy
-            Contract.Assert(false, "Didn't expect to make it to DBCSCodePageEncoding serialization constructor");
-            throw new ArgumentException(Environment.GetResourceString("Arg_ExecutionEngineException"));
+            Contract.Assert(
+                false,
+                "Didn't expect to make it to DBCSCodePageEncoding serialization constructor"
+            );
+            throw new ArgumentException(
+                Environment.GetResourceString("Arg_ExecutionEngineException")
+            );
         }
 
         static int[] tableBaseCodePages =
         {
-            932,    // 50220  ISO-2022-JP, No halfwidth Katakana, convert to full width
-            932,    // 50221  ISO-2022-JP, Use escape sequence for half width Katakana
-            932,    // 50222  ISO-2022-JP, Use shift-in/shift-out for half width Katakana
+            932, // 50220  ISO-2022-JP, No halfwidth Katakana, convert to full width
+            932, // 50221  ISO-2022-JP, Use escape sequence for half width Katakana
+            932, // 50222  ISO-2022-JP, Use shift-in/shift-out for half width Katakana
             0,
             0,
-            949,    // 50225  ISO-2022-KR, Korean
-            936,    // 52936  HZ-GB2312, 936 might be better source
+            949, // 50225  ISO-2022-KR, Korean
+            936, // 52936  HZ-GB2312, 936 might be better source
             0, //20936,    // 50227  ISO-2022-CN, Note: This is just the same as CP 936 in Everett.
             0,
             // 50229 is currently unsupported, CP 20000 is currently not built in .nlp file
             0, //20000,    // 50229  ISO-2022-CN, ModeCNS11643_1
             0, //20000,    // 50229  ISO-2022-CN, ModeCNS11643_2
-            0         //                     ModeASCII
+            0 //                     ModeASCII
+            ,
         };
 
         internal enum ISO2022Modes
         {
-            ModeHalfwidthKatakana   = 0,
-            ModeJIS0208             = 1,
-            ModeKR                  = 5,
-            ModeHZ                  = 6,
-            ModeGB2312              = 7,
-            ModeCNS11643_1          = 9,
-            ModeCNS11643_2          = 10,
-            ModeASCII               = 11,
+            ModeHalfwidthKatakana = 0,
+            ModeJIS0208 = 1,
+            ModeKR = 5,
+            ModeHZ = 6,
+            ModeGB2312 = 7,
+            ModeCNS11643_1 = 9,
+            ModeCNS11643_2 = 10,
+            ModeASCII = 11,
 
-            ModeIncompleteEscape    = -1,
-            ModeInvalidEscape       = -2,
-            ModeNOOP                = -3
+            ModeIncompleteEscape = -1,
+            ModeInvalidEscape = -2,
+            ModeNOOP = -3,
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        protected unsafe override String GetMemorySectionName()
+        [System.Security.SecurityCritical] // auto-generated
+        protected override unsafe String GetMemorySectionName()
         {
             int iUseCodePage = this.bFlagDataTable ? dataTableCodePage : CodePage;
 
@@ -132,14 +139,24 @@ namespace System.Text
                     strFormat = "CodePage_{0}_{1}_{2}_{3}_{4}_HZ";
                     break;
                 default:
-                    Contract.Assert(false, "[ISO2022Encoding.GetMemorySectionName] Don't expect to get here for code page " + this.CodePage);
+                    Contract.Assert(
+                        false,
+                        "[ISO2022Encoding.GetMemorySectionName] Don't expect to get here for code page "
+                            + this.CodePage
+                    );
                     strFormat = "CodePage_{0}_{1}_{2}_{3}_{4}";
                     break;
             }
 
-            String strName = String.Format(CultureInfo.InvariantCulture, strFormat,
-                iUseCodePage, this.pCodePage->VersionMajor, this.pCodePage->VersionMinor,
-                this.pCodePage->VersionRevision, this.pCodePage->VersionBuild);
+            String strName = String.Format(
+                CultureInfo.InvariantCulture,
+                strFormat,
+                iUseCodePage,
+                this.pCodePage->VersionMajor,
+                this.pCodePage->VersionMinor,
+                this.pCodePage->VersionRevision,
+                this.pCodePage->VersionBuild
+            );
 
             return strName;
         }
@@ -162,29 +179,29 @@ namespace System.Text
                         // (ported from mlang)
                         if (bytes >= 0xfa40 && bytes <= 0xfc4b)
                         {
-                            if ( bytes >= 0xfa40 && bytes <= 0xfa5b )
+                            if (bytes >= 0xfa40 && bytes <= 0xfa5b)
                             {
-                                if ( bytes <= 0xfa49 )
-                                    bytes = bytes - 0x0b51 ;
-                                else if ( bytes >= 0xfa4a && bytes <= 0xfa53 )
-                                    bytes = bytes - 0x072f6 ;
-                                else if ( bytes >= 0xfa54 && bytes <= 0xfa57 )
-                                    bytes = bytes - 0x0b5b ;
-                                else if ( bytes == 0xfa58 )
-                                    bytes = 0x878a ;
-                                else if ( bytes == 0xfa59 )
-                                    bytes = 0x8782 ;
-                                else if ( bytes == 0xfa5a )
-                                    bytes = 0x8784 ;
-                                else if ( bytes == 0xfa5b )
-                                    bytes = 0x879a ;
+                                if (bytes <= 0xfa49)
+                                    bytes = bytes - 0x0b51;
+                                else if (bytes >= 0xfa4a && bytes <= 0xfa53)
+                                    bytes = bytes - 0x072f6;
+                                else if (bytes >= 0xfa54 && bytes <= 0xfa57)
+                                    bytes = bytes - 0x0b5b;
+                                else if (bytes == 0xfa58)
+                                    bytes = 0x878a;
+                                else if (bytes == 0xfa59)
+                                    bytes = 0x8782;
+                                else if (bytes == 0xfa5a)
+                                    bytes = 0x8784;
+                                else if (bytes == 0xfa5b)
+                                    bytes = 0x879a;
                             }
-                            else if ( bytes >= 0xfa5c && bytes <= 0xfc4b )
+                            else if (bytes >= 0xfa5c && bytes <= 0xfc4b)
                             {
                                 byte tc = unchecked((byte)bytes);
-                                if ( tc < 0x5c )
+                                if (tc < 0x5c)
                                     bytes = bytes - 0x0d5f;
-                                else if ( tc >= 0x80 && tc <= 0x9B )
+                                else if (tc >= 0x80 && tc <= 0x9B)
                                     bytes = bytes - 0x0d1d;
                                 else
                                     bytes = bytes - 0x0d1c;
@@ -216,9 +233,9 @@ namespace System.Text
                         // All DBCS lead and trail bytes should be >= 0x21 and <= 0x7e
                         // This is commented out because Everett/Mlang had illegal PUA
                         // mappings to ISO2022 code pages that we're maintaining.
-//                        if ((bytes & 0xFF00) < 0x2100 || (bytes & 0xFF00) > 0x7e00 ||
-  //                          (bytes & 0xFF) < 0x21 || (bytes & 0xFF) > 0x7e)
-    //                        return false;
+                        //                        if ((bytes & 0xFF00) < 0x2100 || (bytes & 0xFF00) > 0x7e00 ||
+                        //                          (bytes & 0xFF) < 0x21 || (bytes & 0xFF) > 0x7e)
+                        //                        return false;
                     }
                     else
                     {
@@ -229,9 +246,7 @@ namespace System.Text
                         // 0x81-0x9f and 0xe0-0xfc CP 932
                         // 0x8e and 0xa1-0xfe      CP 20932 (we don't use 8e though)
                         // b0-df is 1/2 Katakana
-                        if (bytes >= 0x81 &&
-                            (bytes <= 0x9f ||
-                             (bytes >= 0xe0 && bytes <= 0xfc)))
+                        if (bytes >= 0x81 && (bytes <= 0x9f || (bytes >= 0xe0 && bytes <= 0xfc)))
                         {
                             // Don't do lead bytes, we use escape sequences instead.
                             return false;
@@ -247,10 +262,16 @@ namespace System.Text
                         return false;
 
                     // Ignore characters out of range (a1-7f)
-                    if (bytes >= 0x100 &&
-                        ((bytes & 0xff) < 0xa1 || (bytes & 0xff) == 0xff ||
-                         (bytes & 0xff00) < 0xa100 || (bytes & 0xff00) == 0xff00))
-                         return false;
+                    if (
+                        bytes >= 0x100
+                        && (
+                            (bytes & 0xff) < 0xa1
+                            || (bytes & 0xff) == 0xff
+                            || (bytes & 0xff00) < 0xa100
+                            || (bytes & 0xff00) == 0xff00
+                        )
+                    )
+                        return false;
 
                     // May as well get them into our 7 bit range
                     bytes &= 0x7f7f;
@@ -272,7 +293,7 @@ namespace System.Text
         }
 
         // GetByteCount
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal override unsafe int GetByteCount(char* chars, int count, EncoderNLS baseEncoder)
         {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
@@ -283,9 +304,14 @@ namespace System.Text
             return GetBytes(chars, count, null, 0, baseEncoder);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal override unsafe int GetBytes(char* chars, int charCount,
-                                                byte* bytes, int byteCount, EncoderNLS baseEncoder)
+        [System.Security.SecurityCritical] // auto-generated
+        internal override unsafe int GetBytes(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            EncoderNLS baseEncoder
+        )
         {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Contract.Assert(chars != null, "[ISO2022Encoding.GetBytes]chars is null");
@@ -293,7 +319,10 @@ namespace System.Text
             Contract.Assert(charCount >= 0, "[ISO2022Encoding.GetBytes]charCount is negative");
 
             // Assert because we shouldn't be able to have a null encoder.
-            Contract.Assert(encoderFallback != null, "[ISO2022Encoding.GetBytes]Attempting to use null encoder fallback");
+            Contract.Assert(
+                encoderFallback != null,
+                "[ISO2022Encoding.GetBytes]Attempting to use null encoder fallback"
+            );
 
             // Fix our encoder
             ISO2022Encoder encoder = (ISO2022Encoder)baseEncoder;
@@ -301,23 +330,23 @@ namespace System.Text
             // Our return value
             int iCount = 0;
 
-            switch(CodePage)
+            switch (CodePage)
             {
                 case 50220:
                 case 50221:
                 case 50222:
-                    iCount = GetBytesCP5022xJP( chars, charCount, bytes, byteCount, encoder );
+                    iCount = GetBytesCP5022xJP(chars, charCount, bytes, byteCount, encoder);
                     break;
                 case 50225:
-                    iCount = GetBytesCP50225KR( chars, charCount, bytes, byteCount, encoder );
+                    iCount = GetBytesCP50225KR(chars, charCount, bytes, byteCount, encoder);
                     break;
-// Everett had 50227 the same as 936
-/*              case 50227:
-                    iCount = GetBytesCP50227CN( chars, charCount, bytes, byteCount, encoder );
-                    break;
-*/
+                // Everett had 50227 the same as 936
+                /*              case 50227:
+                                    iCount = GetBytesCP50227CN( chars, charCount, bytes, byteCount, encoder );
+                                    break;
+                */
                 case 52936:
-                    iCount = GetBytesCP52936( chars, charCount, bytes, byteCount, encoder );
+                    iCount = GetBytesCP52936(chars, charCount, bytes, byteCount, encoder);
                     break;
             }
 
@@ -325,7 +354,7 @@ namespace System.Text
         }
 
         // This is internal and called by something else,
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal override unsafe int GetCharCount(byte* bytes, int count, DecoderNLS baseDecoder)
         {
             // Just assert, we're called internally so these should be safe, checked already
@@ -336,9 +365,14 @@ namespace System.Text
             return GetChars(bytes, count, null, 0, baseDecoder);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal override unsafe int GetChars(byte* bytes, int byteCount,
-                                                char* chars, int charCount, DecoderNLS baseDecoder)
+        [System.Security.SecurityCritical] // auto-generated
+        internal override unsafe int GetChars(
+            byte* bytes,
+            int byteCount,
+            char* chars,
+            int charCount,
+            DecoderNLS baseDecoder
+        )
         {
             // Just need to ASSERT, this is called by something else internal that checked parameters already
             Contract.Assert(bytes != null, "[ISO2022Encoding.GetChars]bytes is null");
@@ -354,17 +388,17 @@ namespace System.Text
                 case 50220:
                 case 50221:
                 case 50222:
-                    iCount = GetCharsCP5022xJP( bytes, byteCount, chars, charCount, decoder);
+                    iCount = GetCharsCP5022xJP(bytes, byteCount, chars, charCount, decoder);
                     break;
                 case 50225:
-                    iCount = GetCharsCP50225KR( bytes, byteCount, chars, charCount, decoder);
+                    iCount = GetCharsCP50225KR(bytes, byteCount, chars, charCount, decoder);
                     break;
-                    // Currently 50227 is the same as 936
-//                case 50227:
-  //                  iCount = GetCharsCP50227CN( bytes, byteCount, chars, charCount, decoder);
-    //                break;
+                // Currently 50227 is the same as 936
+                //                case 50227:
+                //                  iCount = GetCharsCP50227CN( bytes, byteCount, chars, charCount, decoder);
+                //                break;
                 case 52936:
-                    iCount = GetCharsCP52936( bytes, byteCount, chars, charCount, decoder);
+                    iCount = GetCharsCP52936(bytes, byteCount, chars, charCount, decoder);
                     break;
                 default:
                     Contract.Assert(false, "[ISO2022Encoding.GetChars] had unexpected code page");
@@ -408,17 +442,28 @@ namespace System.Text
         // undefined, so we maintain that behavior when decoding.  We will never generate characters using
         // that technique, but the decoder will process them.
         //
-        [System.Security.SecurityCritical]  // auto-generated
-        private unsafe int GetBytesCP5022xJP(char* chars, int charCount,
-                                                  byte* bytes, int byteCount, ISO2022Encoder encoder)
+        [System.Security.SecurityCritical] // auto-generated
+        private unsafe int GetBytesCP5022xJP(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            ISO2022Encoder encoder
+        )
         {
             // prepare our helpers
             Encoding.EncodingByteBuffer buffer = new Encoding.EncodingByteBuffer(
-                this, encoder, bytes, byteCount, chars, charCount);
+                this,
+                encoder,
+                bytes,
+                byteCount,
+                chars,
+                charCount
+            );
 
             // Get our mode
-            ISO2022Modes currentMode = ISO2022Modes.ModeASCII;      // Mode
-            ISO2022Modes shiftInMode = ISO2022Modes.ModeASCII;      // Mode that shift in will go back to (only used by CP 50222)
+            ISO2022Modes currentMode = ISO2022Modes.ModeASCII; // Mode
+            ISO2022Modes shiftInMode = ISO2022Modes.ModeASCII; // Mode that shift in will go back to (only used by CP 50222)
 
             // Check our encoder
             if (encoder != null)
@@ -431,7 +476,10 @@ namespace System.Text
                 // We may have a left over character from last time, try and process it.
                 if (charLeftOver > 0)
                 {
-                    Contract.Assert(Char.IsHighSurrogate(charLeftOver), "[ISO2022Encoding.GetBytesCP5022xJP]leftover character should be high surrogate");
+                    Contract.Assert(
+                        Char.IsHighSurrogate(charLeftOver),
+                        "[ISO2022Encoding.GetBytesCP5022xJP]leftover character should be high surrogate"
+                    );
 
                     // It has to be a high surrogate, which we don't support, so it has to be a fallback
                     buffer.Fallback(charLeftOver);
@@ -458,14 +506,19 @@ namespace System.Text
                     {
                         // CodePage 50220 doesn't use halfwidth Katakana, convert to fullwidth
                         // See if its out of range, fallback if so, throws if recursive fallback
-                        if (bTrailByte < 0x21 || bTrailByte >= 0x21 + HalfToFullWidthKanaTable.Length)
+                        if (
+                            bTrailByte < 0x21
+                            || bTrailByte >= 0x21 + HalfToFullWidthKanaTable.Length
+                        )
                         {
                             buffer.Fallback(ch);
                             continue;
                         }
 
                         // Get the full width katakana char to use.
-                        iBytes = unchecked((ushort)(HalfToFullWidthKanaTable[bTrailByte - 0x21] & 0x7F7F));
+                        iBytes = unchecked(
+                            (ushort)(HalfToFullWidthKanaTable[bTrailByte - 0x21] & 0x7F7F)
+                        );
 
                         // May have to do all sorts of fun stuff for mode, go back to start convert
                         goto StartConvert;
@@ -481,7 +534,7 @@ namespace System.Text
                         {
                             // Shift Out
                             if (!buffer.AddByte(SHIFT_OUT))
-                                break;  // convert out of space, stop
+                                break; // convert out of space, stop
 
                             // Don't change modes until after AddByte in case it fails for convert
                             // We get to shift out to Katakana, make sure we'll go back to the right mode
@@ -492,11 +545,14 @@ namespace System.Text
                         else
                         {
                             // 50221 does halfwidth katakana by escape sequence
-                            Contract.Assert(CodePage == 50221, "[ISO2022Encoding.GetBytesCP5022xJP]Expected Code Page 50221");
+                            Contract.Assert(
+                                CodePage == 50221,
+                                "[ISO2022Encoding.GetBytesCP5022xJP]Expected Code Page 50221"
+                            );
 
                             // Add our escape sequence
                             if (!buffer.AddByte(ESCAPE, unchecked((byte)'('), unchecked((byte)'I')))
-                                break;  // convert out of space, stop
+                                break; // convert out of space, stop
 
                             currentMode = ISO2022Modes.ModeHalfwidthKatakana;
                         }
@@ -505,7 +561,7 @@ namespace System.Text
                     // We know we're in Katakana mode now, so add it.
                     // Go ahead and add the Katakana byte.  Our table tail bytes are 0x80 too big.
                     if (!buffer.AddByte(unchecked((byte)(bTrailByte & 0x7F))))
-                        break;  // convert out of space, stop
+                        break; // convert out of space, stop
 
                     // Done with this one
                     continue;
@@ -521,7 +577,7 @@ namespace System.Text
                     {
                         // Shift In
                         if (!buffer.AddByte(SHIFT_IN))
-                            break;    // convert out of space, stop
+                            break; // convert out of space, stop
 
                         // Need to shift in from katakana.  (Still might not be right, but won't be shifted out anyway)
                         currentMode = shiftInMode;
@@ -535,13 +591,15 @@ namespace System.Text
                     {
                         // Escape sequence, we can fail after this, mode will be correct for convert
                         if (!buffer.AddByte(ESCAPE, unchecked((byte)'$'), unchecked((byte)'B')))
-                            break;  // Convert out of space, stop
+                            break; // Convert out of space, stop
 
                         currentMode = ISO2022Modes.ModeJIS0208;
                     }
 
                     // Add our double bytes
-                    if (!buffer.AddByte(unchecked((byte)(bLeadByte)), unchecked((byte)(bTrailByte))))
+                    if (
+                        !buffer.AddByte(unchecked((byte)(bLeadByte)), unchecked((byte)(bTrailByte)))
+                    )
                         break; // Convert out of space, stop
                     continue;
                 }
@@ -562,7 +620,7 @@ namespace System.Text
                     // Its a single byte character, switch to ASCII if we have to
                     if (currentMode != ISO2022Modes.ModeASCII)
                     {
-                        if (!buffer.AddByte(ESCAPE,unchecked((byte)'('), unchecked((byte)'B')))
+                        if (!buffer.AddByte(ESCAPE, unchecked((byte)'('), unchecked((byte)'B')))
                             break; // convert ran out of room
 
                         currentMode = ISO2022Modes.ModeASCII;
@@ -579,8 +637,7 @@ namespace System.Text
             }
 
             // Switch back to ASCII if MustFlush or no encoder
-            if (currentMode != ISO2022Modes.ModeASCII &&
-                (encoder == null || encoder.MustFlush))
+            if (currentMode != ISO2022Modes.ModeASCII && (encoder == null || encoder.MustFlush))
             {
                 // If we're CP 50222 we may have to shift in from Katakana mode first
                 if (CodePage == 50222 && currentMode == ISO2022Modes.ModeHalfwidthKatakana)
@@ -596,8 +653,10 @@ namespace System.Text
                 }
 
                 // switch back to ASCII to finish neatly
-                if (currentMode != ISO2022Modes.ModeASCII &&
-                    (CodePage != 50222 || currentMode != ISO2022Modes.ModeHalfwidthKatakana))
+                if (
+                    currentMode != ISO2022Modes.ModeASCII
+                    && (CodePage != 50222 || currentMode != ISO2022Modes.ModeHalfwidthKatakana)
+                )
                 {
                     // only shift if it was successful
                     if (buffer.AddByte(ESCAPE, unchecked((byte)'('), unchecked((byte)'B')))
@@ -651,17 +710,28 @@ namespace System.Text
         // Also Mlang always assumed KR mode, even if the designator wasn't found yet, so we do that as
         // well.  So basically we just ignore <ESC>$)C when decoding.
         //
-        [System.Security.SecurityCritical]  // auto-generated
-        private unsafe int GetBytesCP50225KR(char* chars, int charCount,
-                                                    byte* bytes, int byteCount, ISO2022Encoder encoder)
+        [System.Security.SecurityCritical] // auto-generated
+        private unsafe int GetBytesCP50225KR(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            ISO2022Encoder encoder
+        )
         {
             // prepare our helpers
             Encoding.EncodingByteBuffer buffer = new Encoding.EncodingByteBuffer(
-                this, encoder, bytes, byteCount, chars, charCount);
+                this,
+                encoder,
+                bytes,
+                byteCount,
+                chars,
+                charCount
+            );
 
             // Get our mode
-            ISO2022Modes currentMode = ISO2022Modes.ModeASCII;      // Mode
-            ISO2022Modes shiftOutMode = ISO2022Modes.ModeASCII;     // ModeKR if already stamped lead bytes
+            ISO2022Modes currentMode = ISO2022Modes.ModeASCII; // Mode
+            ISO2022Modes shiftOutMode = ISO2022Modes.ModeASCII; // ModeKR if already stamped lead bytes
 
             // Check our encoder
             if (encoder != null)
@@ -674,7 +744,10 @@ namespace System.Text
                 // We may have a l left over character from last time, try and process it.
                 if (charLeftOver > 0)
                 {
-                    Contract.Assert(Char.IsHighSurrogate(charLeftOver), "[ISO2022Encoding.GetBytesCP50225KR]leftover character should be high surrogate");
+                    Contract.Assert(
+                        Char.IsHighSurrogate(charLeftOver),
+                        "[ISO2022Encoding.GetBytesCP50225KR]leftover character should be high surrogate"
+                    );
 
                     // It has to be a high surrogate, which we don't support, so it has to be a fallback
                     buffer.Fallback(charLeftOver);
@@ -703,7 +776,14 @@ namespace System.Text
                     if (shiftOutMode != ISO2022Modes.ModeKR)
                     {
                         // Add our code page designator sequence
-                        if (!buffer.AddByte(ESCAPE, unchecked((byte)'$'), unchecked((byte)')'), unchecked((byte)'C')))
+                        if (
+                            !buffer.AddByte(
+                                ESCAPE,
+                                unchecked((byte)'$'),
+                                unchecked((byte)')'),
+                                unchecked((byte)'C')
+                            )
+                        )
                             break; // No room during convert.
 
                         shiftOutMode = ISO2022Modes.ModeKR;
@@ -745,8 +825,7 @@ namespace System.Text
             }
 
             // Switch back to ASCII if MustFlush or no encoder
-            if (currentMode != ISO2022Modes.ModeASCII &&
-                (encoder == null || encoder.MustFlush))
+            if (currentMode != ISO2022Modes.ModeASCII && (encoder == null || encoder.MustFlush))
             {
                 // Get back to ASCII to be safe.  Only do it if it success.
                 if (buffer.AddByte(SHIFT_IN))
@@ -765,17 +844,19 @@ namespace System.Text
                 {
                     encoder.charLeftOver = (char)0;
                 }
-                
+
                 // This is ASCII if we had to flush
                 encoder.currentMode = currentMode;
 
-                // We don't use shift out mode, but if we've flushed we need to reset it so it doesn't 
+                // We don't use shift out mode, but if we've flushed we need to reset it so it doesn't
                 // get output again.
                 if (!encoder.MustFlush || encoder.charLeftOver != (char)0)
                 {
                     // We should be not flushing or converting
-                    Contract.Assert(!encoder.MustFlush || !encoder.m_throwOnOverflow,
-                        "[ISO2022Encoding.GetBytesCP50225KR]Expected no left over data or not flushing or not converting");
+                    Contract.Assert(
+                        !encoder.MustFlush || !encoder.m_throwOnOverflow,
+                        "[ISO2022Encoding.GetBytesCP50225KR]Expected no left over data or not flushing or not converting"
+                    );
                     encoder.shiftInOutMode = shiftOutMode;
                 }
                 else
@@ -802,13 +883,24 @@ namespace System.Text
         //
         // This encoding is designed for transmission by e-mail and news.  No bytes should have high bit set.
         // (all bytes <= 0x7f)
-        [System.Security.SecurityCritical]  // auto-generated
-        private unsafe int GetBytesCP52936(char* chars, int charCount,
-                                           byte* bytes, int byteCount, ISO2022Encoder encoder)
+        [System.Security.SecurityCritical] // auto-generated
+        private unsafe int GetBytesCP52936(
+            char* chars,
+            int charCount,
+            byte* bytes,
+            int byteCount,
+            ISO2022Encoder encoder
+        )
         {
             // prepare our helpers
             Encoding.EncodingByteBuffer buffer = new Encoding.EncodingByteBuffer(
-                this, encoder, bytes, byteCount, chars, charCount);
+                this,
+                encoder,
+                bytes,
+                byteCount,
+                chars,
+                charCount
+            );
 
             // Mode
             ISO2022Modes currentMode = ISO2022Modes.ModeASCII;
@@ -822,7 +914,10 @@ namespace System.Text
                 // We may have a left over character from last time, try and process it.
                 if (charLeftOver > 0)
                 {
-                    Contract.Assert(Char.IsHighSurrogate(charLeftOver), "[ISO2022Encoding.GetBytesCP52936]leftover character should be high surrogate");
+                    Contract.Assert(
+                        Char.IsHighSurrogate(charLeftOver),
+                        "[ISO2022Encoding.GetBytesCP52936]leftover character should be high surrogate"
+                    );
 
                     // It has to be a high surrogate, which we don't support, so it has to be a fallback
                     buffer.Fallback(charLeftOver);
@@ -852,9 +947,17 @@ namespace System.Text
 
                 // If its a double byte, it has to fit in the lead byte 0xa1 - 0xf7, trail byte 0xa1 - 0xfe range
                 // (including the 0x8080 that our codepage or's to the value)
-                if ((bLeadByte != 0 &&
-                     (bLeadByte < 0xa1 || bLeadByte > 0xf7 || bTrailByte < 0xa1 || bTrailByte > 0xfe)) ||
-                    (bLeadByte == 0 && bTrailByte > 0x80 && bTrailByte != 0xff))
+                if (
+                    (
+                        bLeadByte != 0
+                        && (
+                            bLeadByte < 0xa1
+                            || bLeadByte > 0xf7
+                            || bTrailByte < 0xa1
+                            || bTrailByte > 0xfe
+                        )
+                    ) || (bLeadByte == 0 && bTrailByte > 0x80 && bTrailByte != 0xff)
+                )
                 {
                     // Illegal character, in 936 code page, but not in HZ subset, get fallback for it
                     buffer.Fallback(ch);
@@ -869,14 +972,19 @@ namespace System.Text
                     {
                         // Need to add the double byte mode marker
                         if (!buffer.AddByte((byte)'~', (byte)'{', 2))
-                            break;                                      // Stop if no buffer space in convert
+                            break; // Stop if no buffer space in convert
 
                         currentMode = ISO2022Modes.ModeHZ;
                     }
 
                     // Go ahead and add the 2 bytes
-                    if (!buffer.AddByte(unchecked((byte)(bLeadByte & 0x7f)), unchecked((byte)(bTrailByte & 0x7f))))
-                        break;                                      // Stop if no buffer space in convert
+                    if (
+                        !buffer.AddByte(
+                            unchecked((byte)(bLeadByte & 0x7f)),
+                            unchecked((byte)(bTrailByte & 0x7f))
+                        )
+                    )
+                        break; // Stop if no buffer space in convert
                 }
                 else
                 {
@@ -885,7 +993,7 @@ namespace System.Text
                     {
                         // Need to add the ASCII mode marker
                         // Will have 1 more byte (or 2 if ~)
-                        if (!buffer.AddByte((byte)'~', (byte)'}', bTrailByte == '~' ? 2:1))
+                        if (!buffer.AddByte((byte)'~', (byte)'}', bTrailByte == '~' ? 2 : 1))
                             break;
 
                         currentMode = ISO2022Modes.ModeASCII;
@@ -906,12 +1014,11 @@ namespace System.Text
             }
 
             // Add ASCII shift out if we're at end of decoder
-            if (currentMode != ISO2022Modes.ModeASCII &&
-                (encoder == null || encoder.MustFlush))
+            if (currentMode != ISO2022Modes.ModeASCII && (encoder == null || encoder.MustFlush))
             {
                 // Need to add the ASCII mode marker
                 // Only turn off other mode if this works
-                if (buffer.AddByte((byte)'~',(byte)'}'))
+                if (buffer.AddByte((byte)'~', (byte)'}'))
                     currentMode = ISO2022Modes.ModeASCII;
                 else
                     // If not successful, convert will maintain state for next time, also
@@ -937,17 +1044,28 @@ namespace System.Text
             return buffer.Count;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private unsafe int GetCharsCP5022xJP(byte* bytes, int byteCount,
-                                                  char* chars, int charCount, ISO2022Decoder decoder)
+        [System.Security.SecurityCritical] // auto-generated
+        private unsafe int GetCharsCP5022xJP(
+            byte* bytes,
+            int byteCount,
+            char* chars,
+            int charCount,
+            ISO2022Decoder decoder
+        )
         {
             // Get our info.
             Encoding.EncodingCharBuffer buffer = new Encoding.EncodingCharBuffer(
-                this, decoder, chars, charCount, bytes, byteCount);
+                this,
+                decoder,
+                chars,
+                charCount,
+                bytes,
+                byteCount
+            );
 
             // No mode information yet
-            ISO2022Modes currentMode = ISO2022Modes.ModeASCII;      // Our current Mode
-            ISO2022Modes shiftInMode = ISO2022Modes.ModeASCII;      // Mode that we'll shift in to
+            ISO2022Modes currentMode = ISO2022Modes.ModeASCII; // Our current Mode
+            ISO2022Modes shiftInMode = ISO2022Modes.ModeASCII; // Mode that we'll shift in to
             byte[] escapeBytes = new byte[4];
             int escapeCount = 0;
 
@@ -987,8 +1105,10 @@ namespace System.Text
                             escapeBytes[escapeCount++] = buffer.GetNextByte();
 
                             // We have an escape sequence
-                            ISO2022Modes modeReturn =
-                                CheckEscapeSequenceJP(escapeBytes, escapeCount);
+                            ISO2022Modes modeReturn = CheckEscapeSequenceJP(
+                                escapeBytes,
+                                escapeCount
+                            );
 
                             if (modeReturn != ISO2022Modes.ModeInvalidEscape)
                             {
@@ -1035,14 +1155,14 @@ namespace System.Text
 
                 if (ch == SHIFT_OUT)
                 {
-                   shiftInMode = currentMode;
-                   currentMode = ISO2022Modes.ModeHalfwidthKatakana;
-                   continue;
+                    shiftInMode = currentMode;
+                    currentMode = ISO2022Modes.ModeHalfwidthKatakana;
+                    continue;
                 }
                 else if (ch == SHIFT_IN)
                 {
-                   currentMode = shiftInMode;
-                   continue;
+                    currentMode = shiftInMode;
+                    continue;
                 }
 
                 // Get our full character
@@ -1099,17 +1219,17 @@ namespace System.Text
                     if ((b2Bytes == true) && ((iBytes & 0xff00) == 0x2a00))
                     {
                         iBytes = (ushort)(iBytes & 0xff);
-                        iBytes |= (LEADBYTE_HALFWIDTH << 8);   // Put us in the halfwidth katakana range
+                        iBytes |= (LEADBYTE_HALFWIDTH << 8); // Put us in the halfwidth katakana range
                     }
                 }
                 else if (iBytes >= 0xA1 && iBytes <= 0xDF)
                 {
                     // Everett accidentally mapped Katakana like shift-jis (932),
                     // even though this is a 7 bit code page.  We keep that mapping
-                    iBytes |= (LEADBYTE_HALFWIDTH << 8);    // Map to halfwidth katakana range
-                    iBytes &= 0xff7f;                       // remove extra 0x80
+                    iBytes |= (LEADBYTE_HALFWIDTH << 8); // Map to halfwidth katakana range
+                    iBytes &= 0xff7f; // remove extra 0x80
                 }
-                else if (currentMode == ISO2022Modes.ModeHalfwidthKatakana )
+                else if (currentMode == ISO2022Modes.ModeHalfwidthKatakana)
                 {
                     // Add 0x10 lead byte that our encoding expects for Katakana:
                     iBytes |= (LEADBYTE_HALFWIDTH << 8);
@@ -1136,7 +1256,7 @@ namespace System.Text
                 else
                 {
                     // If we were JIS 0208, then we consumed an extra byte
-                    if (!buffer.AddChar(c, b2Bytes ? 2:1))
+                    if (!buffer.AddChar(c, b2Bytes ? 2 : 1))
                         break;
                 }
             }
@@ -1148,9 +1268,11 @@ namespace System.Text
                 if (!decoder.MustFlush || escapeCount != 0)
                 {
                     // Either not flushing or had state (from convert)
-                    Contract.Assert(!decoder.MustFlush || !decoder.m_throwOnOverflow,
-                        "[ISO2022Encoding.GetCharsCP5022xJP]Expected no state or not converting or not flushing");
-                                        
+                    Contract.Assert(
+                        !decoder.MustFlush || !decoder.m_throwOnOverflow,
+                        "[ISO2022Encoding.GetCharsCP5022xJP]Expected no state or not converting or not flushing"
+                    );
+
                     decoder.currentMode = currentMode;
                     decoder.shiftInOutMode = shiftInMode;
 
@@ -1175,7 +1297,7 @@ namespace System.Text
         }
 
         // We know we have an escape sequence, so check it starting with the byte after the escape
-        private ISO2022Modes CheckEscapeSequenceJP( byte[] bytes, int escapeCount )
+        private ISO2022Modes CheckEscapeSequenceJP(byte[] bytes, int escapeCount)
         {
             // Have an escape sequence
             if (bytes[0] != ESCAPE)
@@ -1186,31 +1308,34 @@ namespace System.Text
 
             if (bytes[1] == '(')
             {
-                if (bytes[2] == 'B')       // <esc>(B
+                if (bytes[2] == 'B') // <esc>(B
                 {
                     return ISO2022Modes.ModeASCII;
                 }
-                else if (bytes[2] == 'H')  // <esc>(H
+                else if (bytes[2] == 'H') // <esc>(H
                 {
                     // Actually this is supposed to be Swedish
                     // We treat it like ASCII though.
                     return ISO2022Modes.ModeASCII;
                 }
-                else if (bytes[2] == 'J')  // <esc>(J
+                else if (bytes[2] == 'J') // <esc>(J
                 {
                     // Actually this is supposed to be Roman
                     // 2 characters are different, but historically we treat it as ascii
                     return ISO2022Modes.ModeASCII;
                 }
-                else if (bytes[2] == 'I')  // <esc>(I
+                else if (bytes[2] == 'I') // <esc>(I
                 {
                     return ISO2022Modes.ModeHalfwidthKatakana;
                 }
             }
             else if (bytes[1] == '$')
             {
-                if (bytes[2] == '@' ||   // <esc>$@
-                    bytes[2] == 'B')     // <esc>$B
+                if (
+                    bytes[2] == '@'
+                    || // <esc>$@
+                    bytes[2] == 'B'
+                ) // <esc>$B
                 {
                     return ISO2022Modes.ModeJIS0208;
                 }
@@ -1229,7 +1354,7 @@ namespace System.Text
             }
             else if (bytes[1] == '&')
             {
-                if (bytes[2] == '@')            // <esc>&@
+                if (bytes[2] == '@') // <esc>&@
                 {
                     // Ignore ESC & @ (prefix to <esc>$B)
                     return ISO2022Modes.ModeNOOP;
@@ -1253,7 +1378,7 @@ namespace System.Text
             // Move them down one.
             for (int i = 0; i < count; i++)
             {
-                bytes[i] = bytes[i+1];
+                bytes[i] = bytes[i + 1];
             }
 
             // Clear out the last byte
@@ -1265,16 +1390,27 @@ namespace System.Text
 
         // Note that in DBCS mode mlang passed through ' ', '\t' and '\n' as SBCS characters
         // probably to allow mailer formatting without too much extra work.
-        [System.Security.SecurityCritical]  // auto-generated
-        private unsafe int GetCharsCP50225KR(byte* bytes, int byteCount,
-                                                   char* chars, int charCount, ISO2022Decoder decoder)
+        [System.Security.SecurityCritical] // auto-generated
+        private unsafe int GetCharsCP50225KR(
+            byte* bytes,
+            int byteCount,
+            char* chars,
+            int charCount,
+            ISO2022Decoder decoder
+        )
         {
             // Get our info.
             Encoding.EncodingCharBuffer buffer = new Encoding.EncodingCharBuffer(
-                this, decoder, chars, charCount, bytes, byteCount);
+                this,
+                decoder,
+                chars,
+                charCount,
+                bytes,
+                byteCount
+            );
 
             // No mode information yet
-            ISO2022Modes currentMode = ISO2022Modes.ModeASCII;      // Our current Mode
+            ISO2022Modes currentMode = ISO2022Modes.ModeASCII; // Our current Mode
 
             byte[] escapeBytes = new byte[4];
             int escapeCount = 0;
@@ -1314,8 +1450,10 @@ namespace System.Text
                             escapeBytes[escapeCount++] = buffer.GetNextByte();
 
                             // We have an escape sequence
-                            ISO2022Modes modeReturn =
-                                CheckEscapeSequenceKR(escapeBytes, escapeCount);
+                            ISO2022Modes modeReturn = CheckEscapeSequenceKR(
+                                escapeBytes,
+                                escapeCount
+                            );
 
                             if (modeReturn != ISO2022Modes.ModeInvalidEscape)
                             {
@@ -1360,13 +1498,13 @@ namespace System.Text
 
                 if (ch == SHIFT_OUT)
                 {
-                   currentMode = ISO2022Modes.ModeKR;
-                   continue;
+                    currentMode = ISO2022Modes.ModeKR;
+                    continue;
                 }
                 else if (ch == SHIFT_IN)
                 {
-                   currentMode = ISO2022Modes.ModeASCII;
-                   continue;
+                    currentMode = ISO2022Modes.ModeASCII;
+                    continue;
                 }
 
                 // Get our full character
@@ -1438,7 +1576,7 @@ namespace System.Text
                 }
                 else
                 {
-                    if (!buffer.AddChar(c, b2Bytes ? 2:1))
+                    if (!buffer.AddChar(c, b2Bytes ? 2 : 1))
                         break;
                 }
             }
@@ -1450,9 +1588,11 @@ namespace System.Text
                 if (!decoder.MustFlush || escapeCount != 0)
                 {
                     // Either not flushing or had state (from convert)
-                    Contract.Assert(!decoder.MustFlush || !decoder.m_throwOnOverflow,
-                        "[ISO2022Encoding.GetCharsCP50225KR]Expected no state or not converting or not flushing");
-                    
+                    Contract.Assert(
+                        !decoder.MustFlush || !decoder.m_throwOnOverflow,
+                        "[ISO2022Encoding.GetCharsCP50225KR]Expected no state or not converting or not flushing"
+                    );
+
                     decoder.currentMode = currentMode;
 
                     // Remember escape buffer
@@ -1475,7 +1615,7 @@ namespace System.Text
         }
 
         // We know we have an escape sequence, so check it starting with the byte after the escape
-        private ISO2022Modes CheckEscapeSequenceKR( byte[] bytes, int escapeCount )
+        private ISO2022Modes CheckEscapeSequenceKR(byte[] bytes, int escapeCount)
         {
             // Have an escape sequence
             if (bytes[0] != ESCAPE)
@@ -1505,16 +1645,27 @@ namespace System.Text
         //
         // This encoding is designed for transmission by e-mail and news.  No bytes should have high bit set.
         // (all bytes <= 0x7f)
-        [System.Security.SecurityCritical]  // auto-generated
-        private unsafe int GetCharsCP52936(byte* bytes, int byteCount,
-                                                char* chars, int charCount, ISO2022Decoder decoder)
+        [System.Security.SecurityCritical] // auto-generated
+        private unsafe int GetCharsCP52936(
+            byte* bytes,
+            int byteCount,
+            char* chars,
+            int charCount,
+            ISO2022Decoder decoder
+        )
         {
-            Contract.Assert(byteCount >=0, "[ISO2022Encoding.GetCharsCP52936]count >=0");
-            Contract.Assert(bytes!=null, "[ISO2022Encoding.GetCharsCP52936]bytes!=null");
+            Contract.Assert(byteCount >= 0, "[ISO2022Encoding.GetCharsCP52936]count >=0");
+            Contract.Assert(bytes != null, "[ISO2022Encoding.GetCharsCP52936]bytes!=null");
 
             // Get our info.
             Encoding.EncodingCharBuffer buffer = new Encoding.EncodingCharBuffer(
-                this, decoder, chars, charCount, bytes, byteCount);
+                this,
+                decoder,
+                chars,
+                charCount,
+                bytes,
+                byteCount
+            );
 
             // No mode information yet
             ISO2022Modes currentMode = ISO2022Modes.ModeASCII;
@@ -1526,7 +1677,7 @@ namespace System.Text
                 currentMode = decoder.currentMode;
                 // See if we have leftover decoder buffer to use
                 // Don't want to mess up decoder if we're counting or throw an exception
-                if (decoder.bytesLeftOverCount != 0 )
+                if (decoder.bytesLeftOverCount != 0)
                 {
                     // Load our bytesLeftOver
                     byteLeftOver = decoder.bytesLeftOver[0];
@@ -1621,7 +1772,10 @@ namespace System.Text
                 if (currentMode != ISO2022Modes.ModeASCII)
                 {
                     // Should be ModeHZ
-                    Contract.Assert(currentMode == ISO2022Modes.ModeHZ, "[ISO2022Encoding.GetCharsCP52936]Expected ModeHZ");
+                    Contract.Assert(
+                        currentMode == ISO2022Modes.ModeHZ,
+                        "[ISO2022Encoding.GetCharsCP52936]Expected ModeHZ"
+                    );
                     char cm;
 
                     // Everett allowed characters < 0x20 to be passed as if they were ASCII
@@ -1671,9 +1825,12 @@ namespace System.Text
                     }
 
                     // Bytes should be in range: lead byte 0x21-0x77, trail byte: 0x21 - 0x7e
-                    if ((ch < 0x21 || ch > 0x77 || ch2 < 0x21 || ch2 > 0x7e) &&
-                    // Everett allowed high bit mappings for same characters (but only if both bits set)
-                        (ch < 0xa1 || ch > 0xf7 || ch2 < 0xa1 || ch2 > 0xfe))
+                    if (
+                        (ch < 0x21 || ch > 0x77 || ch2 < 0x21 || ch2 > 0x7e)
+                        &&
+                        // Everett allowed high bit mappings for same characters (but only if both bits set)
+                        (ch < 0xa1 || ch > 0xf7 || ch2 < 0xa1 || ch2 > 0xfe)
+                    )
                     {
                         // For some reason Everett allowed XX20 to become unicode 3000... (ideo sp)
                         if (ch2 == 0x20 && 0x21 <= ch && ch <= 0x7d)
@@ -1683,7 +1840,7 @@ namespace System.Text
                         }
 
                         // Illegal char, use fallback.  If lead byte is 0 have to do it special and do it first
-                        if (!buffer.Fallback((byte)(iBytes>>8), (byte)(iBytes)))
+                        if (!buffer.Fallback((byte)(iBytes >> 8), (byte)(iBytes)))
                             break;
                         continue;
                     }
@@ -1701,13 +1858,13 @@ namespace System.Text
                     if (cm == UNKNOWN_CHAR_FLAG && iBytes != 0)
                     {
                         // Fall back the unknown stuff
-                        if (!buffer.Fallback((byte)(iBytes>>8), (byte)(iBytes)))
+                        if (!buffer.Fallback((byte)(iBytes >> 8), (byte)(iBytes)))
                             break;
                         continue;
                     }
 
                     if (!buffer.AddChar(cm, 2))
-                        break;              // convert ran out of buffer, stop
+                        break; // convert ran out of buffer, stop
                     continue;
                 }
 
@@ -1727,7 +1884,7 @@ namespace System.Text
 
                 // Go ahead and add our ASCII character
                 if (!buffer.AddChar(c))
-                    break;                  // convert ran out of buffer, stop
+                    break; // convert ran out of buffer, stop
             }
 
             // Need to remember our state, IF we're not counting
@@ -1746,9 +1903,11 @@ namespace System.Text
                 else
                 {
                     // Either not flushing or had state (from convert)
-                    Contract.Assert(!decoder.MustFlush || !decoder.m_throwOnOverflow,
-                        "[ISO2022Encoding.GetCharsCP52936]Expected no state or not converting or not flushing");
-                                        
+                    Contract.Assert(
+                        !decoder.MustFlush || !decoder.m_throwOnOverflow,
+                        "[ISO2022Encoding.GetCharsCP52936]Expected no state or not converting or not flushing"
+                    );
+
                     decoder.currentMode = currentMode;
                 }
                 decoder.m_bytesUsed = buffer.BytesUsed;
@@ -1763,8 +1922,10 @@ namespace System.Text
         public override int GetMaxByteCount(int charCount)
         {
             if (charCount < 0)
-               throw new ArgumentOutOfRangeException("charCount",
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "charCount",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
 
             // Characters would be # of characters + 1 in case high surrogate is ? * max fallback
@@ -1783,25 +1944,25 @@ namespace System.Text
                 case 50220:
                 case 50221:
                     // 2 bytes per char + 3 bytes switch to JIS 0208 or 1 byte + 3 bytes switch to 1 byte CP
-                    perChar = 5;        // 5 max (4.5 average)
-                    extraEnd = 3;       // 3 bytes to shift back to ASCII
+                    perChar = 5; // 5 max (4.5 average)
+                    extraEnd = 3; // 3 bytes to shift back to ASCII
                     break;
                 case 50222:
                     // 2 bytes per char + 3 bytes switch to JIS 0208 or 1 byte + 3 bytes switch to 1 byte CP
-                    perChar = 5;        // 5 max (4.5 average)
-                    extraEnd = 4;       // 1 byte to shift from Katakana -> DBCS, 3 bytes to shift back to ASCII from DBCS
+                    perChar = 5; // 5 max (4.5 average)
+                    extraEnd = 4; // 1 byte to shift from Katakana -> DBCS, 3 bytes to shift back to ASCII from DBCS
                     break;
                 case 50225:
                     // 2 bytes per char + 1 byte SO, or 1 byte per char + 1 byte SI.
-                    perChar = 3;        // 3 max, (2.5 average)
-                    extraStart = 4;     // EUC-KR marker appears at beginning of file.
-                    extraEnd = 1;       // 1 byte to shift back to ascii if necessary.
+                    perChar = 3; // 3 max, (2.5 average)
+                    extraStart = 4; // EUC-KR marker appears at beginning of file.
+                    extraEnd = 1; // 1 byte to shift back to ascii if necessary.
                     break;
                 case 52936:
                     // 2 bytes per char + 2 byte shift, or 1 byte + 1 byte shift
                     // Worst case: left over surrogate with no low surrogate is extra ?, could have to switch to ASCII, then could have HZ and flush to ASCII mode
-                    perChar = 4;        // 4 max, (3.5 average if every other char is HZ/ASCII)
-                    extraEnd = 2;       // 2 if we have to shift back to ASCII
+                    perChar = 4; // 4 max, (3.5 average if every other char is HZ/ASCII)
+                    extraEnd = 2; // 2 if we have to shift back to ASCII
                     break;
             }
 
@@ -1810,7 +1971,10 @@ namespace System.Text
             byteCount += extraStart + extraEnd;
 
             if (byteCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException("charCount", Environment.GetResourceString("ArgumentOutOfRange_GetByteCountOverflow"));
+                throw new ArgumentOutOfRangeException(
+                    "charCount",
+                    Environment.GetResourceString("ArgumentOutOfRange_GetByteCountOverflow")
+                );
 
             return (int)byteCount;
         }
@@ -1818,8 +1982,10 @@ namespace System.Text
         public override int GetMaxCharCount(int byteCount)
         {
             if (byteCount < 0)
-               throw new ArgumentOutOfRangeException("byteCount",
-                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "byteCount",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
 
             int perChar = 1;
@@ -1831,12 +1997,12 @@ namespace System.Text
                 case 50221:
                 case 50222:
                 case 50225:
-                    perChar = 1;        // Worst case all ASCII
-                    extraDecoder = 3;   // Could have left over 3 chars of 4 char escape sequence, that all become ?
+                    perChar = 1; // Worst case all ASCII
+                    extraDecoder = 3; // Could have left over 3 chars of 4 char escape sequence, that all become ?
                     break;
                 case 52936:
-                    perChar = 1;        // Worst case all ASCII
-                    extraDecoder = 1;   // sequences are 2 chars, so if next one is illegal, then previous 1 could be ?
+                    perChar = 1; // Worst case all ASCII
+                    extraDecoder = 1; // sequences are 2 chars, so if next one is illegal, then previous 1 could be ?
                     break;
             }
 
@@ -1848,7 +2014,10 @@ namespace System.Text
                 charCount *= DecoderFallback.MaxCharCount;
 
             if (charCount > 0x7fffffff)
-                throw new ArgumentOutOfRangeException("byteCount", Environment.GetResourceString("ArgumentOutOfRange_GetCharCountOverflow"));
+                throw new ArgumentOutOfRangeException(
+                    "byteCount",
+                    Environment.GetResourceString("ArgumentOutOfRange_GetCharCountOverflow")
+                );
 
             return (int)charCount;
         }
@@ -1869,7 +2038,8 @@ namespace System.Text
             internal ISO2022Modes currentMode;
             internal ISO2022Modes shiftInOutMode;
 
-            internal ISO2022Encoder(EncodingNLS encoding) : base(encoding)
+            internal ISO2022Encoder(EncodingNLS encoding)
+                : base(encoding)
             {
                 // base calls reset
             }
@@ -1881,7 +2051,7 @@ namespace System.Text
                 shiftInOutMode = ISO2022Modes.ModeASCII;
                 charLeftOver = (char)0;
                 if (m_fallbackBuffer != null)
-                    m_fallbackBuffer.Reset();                
+                    m_fallbackBuffer.Reset();
             }
 
             // Anything left in our encoder?
@@ -1890,8 +2060,7 @@ namespace System.Text
                 get
                 {
                     // Don't check shift-out mode, it may be ascii (JP) or not (KR)
-                    return (this.charLeftOver != (char)0 ||
-                            currentMode != ISO2022Modes.ModeASCII);
+                    return (this.charLeftOver != (char)0 || currentMode != ISO2022Modes.ModeASCII);
                 }
             }
         }
@@ -1904,7 +2073,8 @@ namespace System.Text
             internal ISO2022Modes currentMode;
             internal ISO2022Modes shiftInOutMode;
 
-            internal ISO2022Decoder(EncodingNLS encoding) : base(encoding)
+            internal ISO2022Decoder(EncodingNLS encoding)
+                : base(encoding)
             {
                 // base calls reset
             }
@@ -1917,7 +2087,7 @@ namespace System.Text
                 currentMode = ISO2022Modes.ModeASCII;
                 shiftInOutMode = ISO2022Modes.ModeASCII;
                 if (m_fallbackBuffer != null)
-                    m_fallbackBuffer.Reset();                
+                    m_fallbackBuffer.Reset();
             }
 
             // Anything left in our decoder?
@@ -1926,8 +2096,7 @@ namespace System.Text
                 get
                 {
                     // If have bytes left over or not shifted back to ASCII then have problem
-                    return (this.bytesLeftOverCount != 0 ||
-                            currentMode != ISO2022Modes.ModeASCII);
+                    return (this.bytesLeftOverCount != 0 || currentMode != ISO2022Modes.ModeASCII);
                 }
             }
         }
@@ -1996,9 +2165,9 @@ namespace System.Text
             0xa5ef, // 0x8edc : Halfwidth Katakana Wa
             0xa5f3, // 0x8edd : Halfwidth Katakana N
             0xa1ab, // 0x8ede : Halfwidth Katakana Voiced Sound Mark
-            0xa1ac  // 0x8edf : Halfwidth Katakana Semi-Voiced Sound Mark
+            0xa1ac // 0x8edf : Halfwidth Katakana Semi-Voiced Sound Mark
+            ,
         };
     }
 }
 #endif // FEATURE_CODEPAGES_FILE
-

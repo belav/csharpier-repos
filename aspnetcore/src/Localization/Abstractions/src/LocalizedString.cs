@@ -18,9 +18,7 @@ public class LocalizedString
     /// <param name="name">The name of the string in the resource it was loaded from.</param>
     /// <param name="value">The actual string.</param>
     public LocalizedString(string name, string value)
-        : this(name, value, resourceNotFound: false)
-    {
-    }
+        : this(name, value, resourceNotFound: false) { }
 
     /// <summary>
     /// Creates a new <see cref="LocalizedString"/>.
@@ -29,9 +27,7 @@ public class LocalizedString
     /// <param name="value">The actual string.</param>
     /// <param name="resourceNotFound">Whether the string was not found in a resource. Set this to <c>true</c> to indicate an alternate string value was used.</param>
     public LocalizedString(string name, string value, bool resourceNotFound)
-        : this(name, value, resourceNotFound, searchedLocation: null)
-    {
-    }
+        : this(name, value, resourceNotFound, searchedLocation: null) { }
 
     /// <summary>
     /// Creates a new <see cref="LocalizedString"/>.
@@ -40,7 +36,12 @@ public class LocalizedString
     /// <param name="value">The actual string.</param>
     /// <param name="resourceNotFound">Whether the string was not found in a resource. Set this to <c>true</c> to indicate an alternate string value was used.</param>
     /// <param name="searchedLocation">The location which was searched for a localization value.</param>
-    public LocalizedString(string name, string value, bool resourceNotFound, string? searchedLocation)
+    public LocalizedString(
+        string name,
+        string value,
+        bool resourceNotFound,
+        string? searchedLocation
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(name);
         ArgumentNullThrowHelper.ThrowIfNull(value);

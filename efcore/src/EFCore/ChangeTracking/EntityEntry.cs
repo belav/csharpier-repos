@@ -24,7 +24,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 [DebuggerDisplay("{" + nameof(InternalEntry) + ",nq}")]
 public class EntityEntry : IInfrastructure<InternalEntityEntry>
 {
-    private static readonly int MaxEntityState = Enum.GetValues(typeof(EntityState)).Cast<int>().Max();
+    private static readonly int MaxEntityState = Enum.GetValues(typeof(EntityState))
+        .Cast<int>()
+        .Max();
     private IEntityFinder? _finder;
 
     /// <summary>
@@ -34,7 +36,11 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalEntityEntry InternalEntry { [DebuggerStepThrough] get; }
+    protected virtual InternalEntityEntry InternalEntry
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -51,8 +57,7 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     /// <summary>
     ///     Gets the entity being tracked by this entry.
     /// </summary>
-    public virtual object Entity
-        => InternalEntry.Entity;
+    public virtual object Entity => InternalEntry.Entity;
 
     /// <summary>
     ///     Gets or sets that state that this entity is being tracked in.
@@ -80,10 +85,11 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
         get => InternalEntry.EntityState;
         set
         {
-            if (value < 0
-                || (int)value > MaxEntityState)
+            if (value < 0 || (int)value > MaxEntityState)
             {
-                throw new ArgumentException(CoreStrings.InvalidEnumValue(value, nameof(value), typeof(EntityState)));
+                throw new ArgumentException(
+                    CoreStrings.InvalidEnumValue(value, nameof(value), typeof(EntityState))
+                );
             }
 
             InternalEntry.SetEntityState(value);
@@ -114,20 +120,17 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance
-        => InternalEntry;
+    InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance => InternalEntry;
 
     /// <summary>
     ///     Gets the context that is tracking the entity.
     /// </summary>
-    public virtual DbContext Context
-        => InternalEntry.Context;
+    public virtual DbContext Context => InternalEntry.Context;
 
     /// <summary>
     ///     Gets the metadata about the shape of the entity, its relationships to other entities, and how it maps to the database.
     /// </summary>
-    public virtual IEntityType Metadata
-        => InternalEntry.EntityType;
+    public virtual IEntityType Metadata => InternalEntry.EntityType;
 
     /// <summary>
     ///     Provides access to change tracking information and operations for a given property or navigation of this entity.
@@ -145,12 +148,19 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
         return propertyBase switch
         {
             IProperty property => new PropertyEntry(InternalEntry, property),
-            IComplexProperty complexProperty => new ComplexPropertyEntry(InternalEntry, complexProperty),
+            IComplexProperty complexProperty => new ComplexPropertyEntry(
+                InternalEntry,
+                complexProperty
+            ),
             INavigationBase navigation => navigation.IsCollection
                 ? new CollectionEntry(InternalEntry, navigation)
                 : new ReferenceEntry(InternalEntry, (INavigation)navigation),
             _ => throw new InvalidOperationException(
-                CoreStrings.PropertyNotFound(propertyBase.Name, InternalEntry.EntityType.DisplayName()))
+                CoreStrings.PropertyNotFound(
+                    propertyBase.Name,
+                    InternalEntry.EntityType.DisplayName()
+                )
+            ),
         };
     }
 
@@ -180,7 +190,8 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
             return new ComplexPropertyEntry(InternalEntry, complexProperty);
         }
 
-        var navigation = (INavigationBase?)InternalEntry.EntityType.FindNavigation(propertyName)
+        var navigation =
+            (INavigationBase?)InternalEntry.EntityType.FindNavigation(propertyName)
             ?? InternalEntry.EntityType.FindSkipNavigation(propertyName);
         if (navigation != null)
         {
@@ -190,7 +201,8 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
         }
 
         throw new InvalidOperationException(
-            CoreStrings.PropertyNotFound(propertyName, InternalEntry.EntityType.DisplayName()));
+            CoreStrings.PropertyNotFound(propertyName, InternalEntry.EntityType.DisplayName())
+        );
     }
 
     /// <summary>
@@ -200,8 +212,8 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
     ///     examples.
     /// </remarks>
-    public virtual IEnumerable<MemberEntry> Members
-        => Properties.Cast<MemberEntry>().Concat(ComplexProperties).Concat(Navigations);
+    public virtual IEnumerable<MemberEntry> Members =>
+        Properties.Cast<MemberEntry>().Concat(ComplexProperties).Concat(Navigations);
 
     /// <summary>
     ///     Provides access to change tracking information and operations for a given navigation of this entity.
@@ -236,7 +248,8 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     {
         Check.NotEmpty(propertyName, nameof(propertyName));
 
-        var navigation = (INavigationBase?)InternalEntry.EntityType.FindNavigation(propertyName)
+        var navigation =
+            (INavigationBase?)InternalEntry.EntityType.FindNavigation(propertyName)
             ?? InternalEntry.EntityType.FindSkipNavigation(propertyName);
 
         if (navigation != null)
@@ -246,17 +259,25 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
                 : new ReferenceEntry(InternalEntry, propertyName);
         }
 
-        if (InternalEntry.EntityType.FindProperty(propertyName) != null
-            || InternalEntry.EntityType.FindComplexProperty(propertyName) != null)
+        if (
+            InternalEntry.EntityType.FindProperty(propertyName) != null
+            || InternalEntry.EntityType.FindComplexProperty(propertyName) != null
+        )
         {
             throw new InvalidOperationException(
                 CoreStrings.NavigationIsProperty(
-                    propertyName, InternalEntry.EntityType.DisplayName(),
-                    nameof(Reference), nameof(Collection), nameof(Property)));
+                    propertyName,
+                    InternalEntry.EntityType.DisplayName(),
+                    nameof(Reference),
+                    nameof(Collection),
+                    nameof(Property)
+                )
+            );
         }
 
         throw new InvalidOperationException(
-            CoreStrings.PropertyNotFound(propertyName, InternalEntry.EntityType.DisplayName()));
+            CoreStrings.PropertyNotFound(propertyName, InternalEntry.EntityType.DisplayName())
+        );
     }
 
     /// <summary>
@@ -273,12 +294,14 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
         get
         {
             var entityType = InternalEntry.EntityType;
-            return entityType.GetNavigations()
+            return entityType
+                .GetNavigations()
                 .Concat<INavigationBase>(entityType.GetSkipNavigations())
-                .Select(
-                    navigation => navigation.IsCollection
+                .Select(navigation =>
+                    navigation.IsCollection
                         ? (NavigationEntry)new CollectionEntry(InternalEntry, navigation.Name)
-                        : new ReferenceEntry(InternalEntry, navigation.Name));
+                        : new ReferenceEntry(InternalEntry, navigation.Name)
+                );
         }
     }
 
@@ -322,8 +345,10 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
     ///     examples.
     /// </remarks>
-    public virtual IEnumerable<PropertyEntry> Properties
-        => InternalEntry.EntityType.GetProperties().Select(property => new PropertyEntry(InternalEntry, property));
+    public virtual IEnumerable<PropertyEntry> Properties =>
+        InternalEntry
+            .EntityType.GetProperties()
+            .Select(property => new PropertyEntry(InternalEntry, property));
 
     /// <summary>
     ///     Provides access to change tracking information and operations for a given property of a complex type on this entity.
@@ -364,8 +389,10 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
     ///     examples.
     /// </remarks>
-    public virtual IEnumerable<ComplexPropertyEntry> ComplexProperties
-        => Metadata.GetComplexProperties().Select(property => new ComplexPropertyEntry(InternalEntry, property));
+    public virtual IEnumerable<ComplexPropertyEntry> ComplexProperties =>
+        Metadata
+            .GetComplexProperties()
+            .Select(property => new ComplexPropertyEntry(InternalEntry, property));
 
     /// <summary>
     ///     Provides access to change tracking and loading information for a reference (i.e. non-collection)
@@ -416,8 +443,10 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     and <see href="https://aka.ms/efcore-docs-changing-relationships">Changing foreign keys and navigations</see>
     ///     for more information and examples.
     /// </remarks>
-    public virtual IEnumerable<ReferenceEntry> References
-        => InternalEntry.EntityType.GetNavigations().Where(n => !n.IsCollection)
+    public virtual IEnumerable<ReferenceEntry> References =>
+        InternalEntry
+            .EntityType.GetNavigations()
+            .Where(n => !n.IsCollection)
             .Select(navigation => new ReferenceEntry(InternalEntry, navigation));
 
     /// <summary>
@@ -475,7 +504,8 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
         get
         {
             var entityType = InternalEntry.EntityType;
-            return entityType.GetNavigations()
+            return entityType
+                .GetNavigations()
                 .Concat<INavigationBase>(entityType.GetSkipNavigations())
                 .Where(navigation => navigation.IsCollection)
                 .Select(navigation => new CollectionEntry(InternalEntry, navigation.Name));
@@ -499,8 +529,7 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///         See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public virtual bool IsKeySet
-        => InternalEntry.IsKeySet.IsSet;
+    public virtual bool IsKeySet => InternalEntry.IsKeySet.IsSet;
 
     /// <summary>
     ///     Gets the current property values for this entity.
@@ -584,9 +613,13 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///     or <see langword="null" /> if the entity does not exist in the database.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual async Task<PropertyValues?> GetDatabaseValuesAsync(CancellationToken cancellationToken = default)
+    public virtual async Task<PropertyValues?> GetDatabaseValuesAsync(
+        CancellationToken cancellationToken = default
+    )
     {
-        var values = await Finder.GetDatabaseValuesAsync(InternalEntry, cancellationToken).ConfigureAwait(false);
+        var values = await Finder
+            .GetDatabaseValuesAsync(InternalEntry, cancellationToken)
+            .ConfigureAwait(false);
 
         return values == null ? null : new ArrayPropertyValues(InternalEntry, values);
     }
@@ -607,8 +640,7 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///         examples.
     ///     </para>
     /// </remarks>
-    public virtual void Reload()
-        => Reload(GetDatabaseValues());
+    public virtual void Reload() => Reload(GetDatabaseValues());
 
     /// <summary>
     ///     Reloads the entity from the database overwriting any property values with values from the database.
@@ -629,8 +661,8 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual async Task ReloadAsync(CancellationToken cancellationToken = default)
-        => Reload(await GetDatabaseValuesAsync(cancellationToken).ConfigureAwait(false));
+    public virtual async Task ReloadAsync(CancellationToken cancellationToken = default) =>
+        Reload(await GetDatabaseValuesAsync(cancellationToken).ConfigureAwait(false));
 
     private void Reload(PropertyValues? storeValues)
     {
@@ -650,15 +682,14 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
         }
     }
 
-    private IEntityFinder Finder
-        => _finder ??= InternalEntry.StateManager.CreateEntityFinder(InternalEntry.EntityType);
+    private IEntityFinder Finder =>
+        _finder ??= InternalEntry.StateManager.CreateEntityFinder(InternalEntry.EntityType);
 
     /// <summary>
     ///     Returns a string that represents the current object.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString()
-        => InternalEntry.ToString();
+    public override string ToString() => InternalEntry.ToString();
 
     /// <summary>
     ///     <para>
@@ -675,10 +706,11 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     ///         <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => InternalEntry.ToDebugString(ChangeTrackerDebugStringOptions.ShortDefault),
-            () => InternalEntry.ToDebugString());
+            () => InternalEntry.ToDebugString()
+        );
 
     #region Hidden System.Object members
 
@@ -688,16 +720,14 @@ public class EntityEntry : IInfrastructure<InternalEntityEntry>
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

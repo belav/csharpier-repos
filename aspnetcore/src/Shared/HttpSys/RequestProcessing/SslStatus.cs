@@ -7,5 +7,5 @@ internal enum SslStatus : byte
 {
     Insecure,
     NoClientCert,
-    ClientCert
+    ClientCert,
 }

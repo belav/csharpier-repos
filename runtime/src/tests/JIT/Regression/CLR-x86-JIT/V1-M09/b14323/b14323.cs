@@ -5,7 +5,6 @@
 using System;
 using Xunit;
 
-
 namespace DefaultNamespace
 {
     public class AppStarter
@@ -19,4 +18,3 @@ namespace DefaultNamespace
         }
     };
 }
-

@@ -14,11 +14,7 @@ public class WebEventDescriptorReaderTest
         // Arrange
         var args = new WebEventDescriptor
         {
-            EventFieldInfo = new EventFieldInfo
-            {
-                ComponentId = 89,
-                FieldValue = "field1",
-            },
+            EventFieldInfo = new EventFieldInfo { ComponentId = 89, FieldValue = "field1" },
             EventHandlerId = 897,
             EventName = "test1",
         };
@@ -42,11 +38,7 @@ public class WebEventDescriptorReaderTest
         // Arrange
         var args = new WebEventDescriptor
         {
-            EventFieldInfo = new EventFieldInfo
-            {
-                ComponentId = 89,
-                FieldValue = value,
-            },
+            EventFieldInfo = new EventFieldInfo { ComponentId = 89, FieldValue = value },
             EventHandlerId = 897,
             EventName = "test1",
         };

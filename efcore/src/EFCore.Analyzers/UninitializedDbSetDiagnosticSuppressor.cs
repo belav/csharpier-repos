@@ -11,14 +11,16 @@ namespace Microsoft.EntityFrameworkCore;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public sealed class UninitializedDbSetDiagnosticSuppressor : DiagnosticSuppressor
 {
-    private static readonly SuppressionDescriptor SuppressUninitializedDbSetRule = new(
-        id: "EFSPR1001",
-        suppressedDiagnosticId: "CS8618",
-        justification: AnalyzerStrings.UninitializedDbSetWarningSuppressionJustification);
+    private static readonly SuppressionDescriptor SuppressUninitializedDbSetRule =
+        new(
+            id: "EFSPR1001",
+            suppressedDiagnosticId: "CS8618",
+            justification: AnalyzerStrings.UninitializedDbSetWarningSuppressionJustification
+        );
 
     /// <inheritdoc />
-    public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions { get; }
-        = ImmutableArray.Create(SuppressUninitializedDbSetRule);
+    public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions { get; } =
+        ImmutableArray.Create(SuppressUninitializedDbSetRule);
 
     /// <inheritdoc />
     public override void ReportSuppressions(SuppressionAnalysisContext context)
@@ -34,23 +36,30 @@ public sealed class UninitializedDbSetDiagnosticSuppressor : DiagnosticSuppresso
             // the diagnostic main Location points to the constructor rather than to the uninitialized property.
             // The AdditionalLocations was added in 7.0.0-preview.3, fall back to the main location just in case and older compiler is
             // being used (the check below for PropertyDeclarationSyntax will filter out the diagnostic if it's pointing to a constructor).
-            var location = diagnostic.AdditionalLocations.Count > 0
-                ? diagnostic.AdditionalLocations[0]
-                : diagnostic.Location;
+            var location =
+                diagnostic.AdditionalLocations.Count > 0
+                    ? diagnostic.AdditionalLocations[0]
+                    : diagnostic.Location;
 
             // Get the node, and make sure it's a property whose type syntactically contains DbSet (fast check before getting the semantic
             // model, which is heavier).
-            if (location.SourceTree is not { } sourceTree
-                || sourceTree.GetRoot().FindNode(location.SourceSpan) is not PropertyDeclarationSyntax propertyDeclarationSyntax
-                || !propertyDeclarationSyntax.Type.ToString().Contains("DbSet"))
+            if (
+                location.SourceTree is not { } sourceTree
+                || sourceTree.GetRoot().FindNode(location.SourceSpan)
+                    is not PropertyDeclarationSyntax propertyDeclarationSyntax
+                || !propertyDeclarationSyntax.Type.ToString().Contains("DbSet")
+            )
             {
                 continue;
             }
 
             // Get the semantic symbol and do some basic checks
-            if (context.GetSemanticModel(sourceTree).GetDeclaredSymbol(propertyDeclarationSyntax) is not IPropertySymbol propertySymbol
+            if (
+                context.GetSemanticModel(sourceTree).GetDeclaredSymbol(propertyDeclarationSyntax)
+                    is not IPropertySymbol propertySymbol
                 || propertySymbol.IsStatic
-                || propertySymbol.IsReadOnly)
+                || propertySymbol.IsReadOnly
+            )
             {
                 continue;
             }
@@ -67,10 +76,16 @@ public sealed class UninitializedDbSetDiagnosticSuppressor : DiagnosticSuppresso
             }
 
             // Check that the property is actually a DbSet<T>, and that its containing type inherits from DbContext
-            if (propertySymbol.Type.OriginalDefinition.Equals(dbSetTypeSymbol, SymbolEqualityComparer.Default)
-                && InheritsFrom(propertySymbol.ContainingType, dbContextTypeSymbol))
+            if (
+                propertySymbol.Type.OriginalDefinition.Equals(
+                    dbSetTypeSymbol,
+                    SymbolEqualityComparer.Default
+                ) && InheritsFrom(propertySymbol.ContainingType, dbContextTypeSymbol)
+            )
             {
-                context.ReportSuppression(Suppression.Create(SuppressUninitializedDbSetRule, diagnostic));
+                context.ReportSuppression(
+                    Suppression.Create(SuppressUninitializedDbSetRule, diagnostic)
+                );
             }
 
             static bool InheritsFrom(ITypeSymbol typeSymbol, ITypeSymbol baseTypeSymbol)

@@ -17,7 +17,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T">Type of the marshaled value.</typeparam>
         /// <param name="arg">The low-level argument representation.</param>
         /// <param name="value">The value to be marshaled.</param>
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.ComponentModel.EditorBrowsableAttribute(
+            System.ComponentModel.EditorBrowsableState.Never
+        )]
         public delegate void ArgumentToManagedCallback<T>(ref JSMarshalerArgument arg, out T value);
 
         /// <summary>
@@ -27,7 +29,9 @@ namespace System.Runtime.InteropServices.JavaScript
         /// <typeparam name="T">Type of the marshaled value.</typeparam>
         /// <param name="arg">The low-level argument representation.</param>
         /// <param name="value">The value to be marshaled.</param>
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
+        [System.ComponentModel.EditorBrowsableAttribute(
+            System.ComponentModel.EditorBrowsableState.Never
+        )]
         public delegate void ArgumentToJSCallback<T>(ref JSMarshalerArgument arg, T value);
 
         /// <summary>
@@ -49,7 +53,11 @@ namespace System.Runtime.InteropServices.JavaScript
             {
                 if (arguments_buffer == null)
                 {
-                    tcs.TrySetException(new TaskCanceledException("WebWorker which is origin of the Promise is being terminated."));
+                    tcs.TrySetException(
+                        new TaskCanceledException(
+                            "WebWorker which is origin of the Promise is being terminated."
+                        )
+                    );
                     return;
                 }
                 ref JSMarshalerArgument arg_2 = ref arguments_buffer[3]; // set by caller when this is SetException call
@@ -90,7 +98,11 @@ namespace System.Runtime.InteropServices.JavaScript
             {
                 if (arguments_buffer == null)
                 {
-                    tcs.TrySetException(new TaskCanceledException("WebWorker which is origin of the Promise is being terminated."));
+                    tcs.TrySetException(
+                        new TaskCanceledException(
+                            "WebWorker which is origin of the Promise is being terminated."
+                        )
+                    );
                     return;
                 }
 
@@ -99,7 +111,8 @@ namespace System.Runtime.InteropServices.JavaScript
                 if (arg_2.slot.Type != MarshalerType.None)
                 {
                     arg_2.ToManaged(out Exception? fail);
-                    if (fail == null) throw new InvalidOperationException(SR.FailedToMarshalException);
+                    if (fail == null)
+                        throw new InvalidOperationException(SR.FailedToMarshalException);
                     tcs.SetException(fail);
                 }
                 else
@@ -165,7 +178,11 @@ namespace System.Runtime.InteropServices.JavaScript
             var taskHolder = new JSObject(slot.JSHandle);
 
 #if FEATURE_WASM_THREADS
-            task.ContinueWith(Complete, taskHolder, TaskScheduler.FromCurrentSynchronizationContext());
+            task.ContinueWith(
+                Complete,
+                taskHolder,
+                TaskScheduler.FromCurrentSynchronizationContext()
+            );
 #else
             task.ContinueWith(Complete, taskHolder, TaskScheduler.Current);
 #endif
@@ -234,7 +251,11 @@ namespace System.Runtime.InteropServices.JavaScript
             var taskHolder = new JSObject(slot.JSHandle);
 
 #if FEATURE_WASM_THREADS
-            task.ContinueWith(Complete, taskHolder, TaskScheduler.FromCurrentSynchronizationContext());
+            task.ContinueWith(
+                Complete,
+                taskHolder,
+                TaskScheduler.FromCurrentSynchronizationContext()
+            );
 #else
             task.ContinueWith(Complete, taskHolder, TaskScheduler.Current);
 #endif
@@ -294,9 +315,17 @@ namespace System.Runtime.InteropServices.JavaScript
             var taskHolder = new JSObject(slot.JSHandle);
 
 #if FEATURE_WASM_THREADS
-            task.ContinueWith(Complete, new HolderAndMarshaler<T>(taskHolder, marshaler), TaskScheduler.FromCurrentSynchronizationContext());
+            task.ContinueWith(
+                Complete,
+                new HolderAndMarshaler<T>(taskHolder, marshaler),
+                TaskScheduler.FromCurrentSynchronizationContext()
+            );
 #else
-            task.ContinueWith(Complete, new HolderAndMarshaler<T>(taskHolder, marshaler), TaskScheduler.Current);
+            task.ContinueWith(
+                Complete,
+                new HolderAndMarshaler<T>(taskHolder, marshaler),
+                TaskScheduler.Current
+            );
 #endif
 
             static void Complete(Task<T> task, object? thm)
@@ -314,7 +343,10 @@ namespace System.Runtime.InteropServices.JavaScript
             }
         }
 
-        private sealed record HolderAndMarshaler<T>(JSObject TaskHolder, ArgumentToJSCallback<T> Marshaler);
+        private sealed record HolderAndMarshaler<T>(
+            JSObject TaskHolder,
+            ArgumentToJSCallback<T> Marshaler
+        );
 
         private static void RejectPromise(JSObject holder, Exception ex)
         {
@@ -365,7 +397,11 @@ namespace System.Runtime.InteropServices.JavaScript
             holder.DisposeLocal();
         }
 
-        private static void ResolvePromise<T>(JSObject holder, T value, ArgumentToJSCallback<T> marshaler)
+        private static void ResolvePromise<T>(
+            JSObject holder,
+            T value,
+            ArgumentToJSCallback<T> marshaler
+        )
         {
             holder.AssertNotDisposed();
 

@@ -53,10 +53,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public static readonly Verification Skipped = new() { Status = VerificationStatus.Skipped };
         public static readonly Verification Passes = new() { Status = VerificationStatus.Passes };
-        public static readonly Verification FailsPEVerify = new() { Status = VerificationStatus.FailsPEVerify };
-        public static readonly Verification FailsILVerify = new() { Status = VerificationStatus.FailsILVerify };
+        public static readonly Verification FailsPEVerify =
+            new() { Status = VerificationStatus.FailsPEVerify };
+        public static readonly Verification FailsILVerify =
+            new() { Status = VerificationStatus.FailsILVerify };
         public static readonly Verification Fails = new() { Status = VerificationStatus.Fails };
-        public static readonly Verification PassesOrFailFast = new() { Status = VerificationStatus.PassesOrFailFast };
+        public static readonly Verification PassesOrFailFast =
+            new() { Status = VerificationStatus.PassesOrFailFast };
     }
 
 #nullable disable
@@ -81,13 +84,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             int? expectedReturnCode = null,
             string[] args = null,
             EmitOptions emitOptions = null,
-            Verification verify = default)
+            Verification verify = default
+        )
         {
             Assert.NotNull(compilation);
 
-            Assert.True(expectedOutput == null ||
-                (compilation.Options.OutputKind == OutputKind.ConsoleApplication || compilation.Options.OutputKind == OutputKind.WindowsApplication),
-                "Compilation must be executable if output is expected.");
+            Assert.True(
+                expectedOutput == null
+                    || (
+                        compilation.Options.OutputKind == OutputKind.ConsoleApplication
+                        || compilation.Options.OutputKind == OutputKind.WindowsApplication
+                    ),
+                "Compilation must be executable if output is expected."
+            );
 
             if (sourceSymbolValidator != null)
             {
@@ -97,18 +106,20 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             CompilationVerifier result = null;
 
-            var verifier = Emit(compilation,
-                                dependencies,
-                                manifestResources,
-                                expectedSignatures,
-                                expectedOutput,
-                                trimOutput,
-                                expectedReturnCode,
-                                args ?? Array.Empty<string>(),
-                                assemblyValidator,
-                                symbolValidator,
-                                emitOptions,
-                                verify);
+            var verifier = Emit(
+                compilation,
+                dependencies,
+                manifestResources,
+                expectedSignatures,
+                expectedOutput,
+                trimOutput,
+                expectedReturnCode,
+                args ?? Array.Empty<string>(),
+                assemblyValidator,
+                symbolValidator,
+                emitOptions,
+                verify
+            );
 
             if (result == null)
             {
@@ -127,24 +138,48 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             return result;
         }
 
-        internal CompilationVerifier CompileAndVerifyFieldMarshalCommon(Compilation compilation, Dictionary<string, byte[]> expectedBlobs, bool isField = true)
+        internal CompilationVerifier CompileAndVerifyFieldMarshalCommon(
+            Compilation compilation,
+            Dictionary<string, byte[]> expectedBlobs,
+            bool isField = true
+        )
         {
             return CompileAndVerifyFieldMarshalCommon(
                 compilation,
                 (s, _omitted1) =>
                 {
-                    Assert.True(expectedBlobs.ContainsKey(s), "Expecting marshalling blob for " + (isField ? "field " : "parameter ") + s);
+                    Assert.True(
+                        expectedBlobs.ContainsKey(s),
+                        "Expecting marshalling blob for " + (isField ? "field " : "parameter ") + s
+                    );
                     return expectedBlobs[s];
                 },
-                isField);
+                isField
+            );
         }
 
-        internal CompilationVerifier CompileAndVerifyFieldMarshalCommon(Compilation compilation, Func<string, PEAssembly, byte[]> getExpectedBlob, bool isField = true)
+        internal CompilationVerifier CompileAndVerifyFieldMarshalCommon(
+            Compilation compilation,
+            Func<string, PEAssembly, byte[]> getExpectedBlob,
+            bool isField = true
+        )
         {
-            return CompileAndVerifyCommon(compilation, assemblyValidator: (assembly) => MetadataValidation.MarshalAsMetadataValidator(assembly, getExpectedBlob, isField));
+            return CompileAndVerifyCommon(
+                compilation,
+                assemblyValidator: (assembly) =>
+                    MetadataValidation.MarshalAsMetadataValidator(
+                        assembly,
+                        getExpectedBlob,
+                        isField
+                    )
+            );
         }
 
-        internal static void RunValidators(CompilationVerifier verifier, Action<PEAssembly> assemblyValidator, Action<IModuleSymbol> symbolValidator)
+        internal static void RunValidators(
+            CompilationVerifier verifier,
+            Action<PEAssembly> assemblyValidator,
+            Action<IModuleSymbol> symbolValidator
+        )
         {
             Assert.True(assemblyValidator != null || symbolValidator != null);
 
@@ -160,11 +195,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (symbolValidator != null)
             {
-                var reference = emittedMetadata.Kind == MetadataImageKind.Assembly
-                    ? ((AssemblyMetadata)emittedMetadata).GetReference()
-                    : ((ModuleMetadata)emittedMetadata).GetReference();
+                var reference =
+                    emittedMetadata.Kind == MetadataImageKind.Assembly
+                        ? ((AssemblyMetadata)emittedMetadata).GetReference()
+                        : ((ModuleMetadata)emittedMetadata).GetReference();
 
-                var moduleSymbol = verifier.GetSymbolFromMetadata(reference, verifier.Compilation.Options.MetadataImportOptions);
+                var moduleSymbol = verifier.GetSymbolFromMetadata(
+                    reference,
+                    verifier.Compilation.Options.MetadataImportOptions
+                );
                 symbolValidator(moduleSymbol);
             }
         }
@@ -181,11 +220,21 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             Action<PEAssembly> assemblyValidator,
             Action<IModuleSymbol> symbolValidator,
             EmitOptions emitOptions,
-            Verification verify)
+            Verification verify
+        )
         {
             var verifier = new CompilationVerifier(compilation, VisualizeRealIL, dependencies);
 
-            verifier.Emit(expectedOutput, trimOutput, expectedReturnCode, args, manifestResources, emitOptions, verify, expectedSignatures);
+            verifier.Emit(
+                expectedOutput,
+                trimOutput,
+                expectedReturnCode,
+                args,
+                manifestResources,
+                emitOptions,
+                verify,
+                expectedSignatures
+            );
 
             if (assemblyValidator != null || symbolValidator != null)
             {
@@ -213,9 +262,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool includePdb,
             out ImmutableArray<byte> assemblyBytes,
             out ImmutableArray<byte> pdbBytes,
-            bool autoInherit = true)
+            bool autoInherit = true
+        )
         {
-            IlasmUtilities.IlasmTempAssembly(ilSource, appendDefaultHeader, includePdb, autoInherit, out var assemblyPath, out var pdbPath);
+            IlasmUtilities.IlasmTempAssembly(
+                ilSource,
+                appendDefaultHeader,
+                includePdb,
+                autoInherit,
+                out var assemblyPath,
+                out var pdbPath
+            );
 
             Assert.NotNull(assemblyPath);
             Assert.Equal(pdbPath != null, includePdb);
@@ -238,15 +295,38 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
         }
 
-        internal static MetadataReference CompileIL(string ilSource, bool prependDefaultHeader = true, bool embedInteropTypes = false, bool autoInherit = true)
+        internal static MetadataReference CompileIL(
+            string ilSource,
+            bool prependDefaultHeader = true,
+            bool embedInteropTypes = false,
+            bool autoInherit = true
+        )
         {
-            EmitILToArray(ilSource, prependDefaultHeader, includePdb: false, assemblyBytes: out var assemblyBytes, pdbBytes: out var pdbBytes, autoInherit: autoInherit);
-            return AssemblyMetadata.CreateFromImage(assemblyBytes).GetReference(embedInteropTypes: embedInteropTypes);
+            EmitILToArray(
+                ilSource,
+                prependDefaultHeader,
+                includePdb: false,
+                assemblyBytes: out var assemblyBytes,
+                pdbBytes: out var pdbBytes,
+                autoInherit: autoInherit
+            );
+            return AssemblyMetadata
+                .CreateFromImage(assemblyBytes)
+                .GetReference(embedInteropTypes: embedInteropTypes);
         }
 
-        internal static MetadataReference GetILModuleReference(string ilSource, bool prependDefaultHeader = true)
+        internal static MetadataReference GetILModuleReference(
+            string ilSource,
+            bool prependDefaultHeader = true
+        )
         {
-            EmitILToArray(ilSource, prependDefaultHeader, includePdb: false, assemblyBytes: out var assemblyBytes, pdbBytes: out var pdbBytes);
+            EmitILToArray(
+                ilSource,
+                prependDefaultHeader,
+                includePdb: false,
+                assemblyBytes: out var assemblyBytes,
+                pdbBytes: out var pdbBytes
+            );
             return ModuleMetadata.CreateFromImage(assemblyBytes).GetReference();
         }
 
@@ -259,9 +339,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpParseOptions parseOptions = null,
             CSharp.CSharpCompilationOptions compilationOptions = null,
             string assemblyName = null,
-            IEnumerable<MetadataReference> referencedAssemblies = null)
+            IEnumerable<MetadataReference> referencedAssemblies = null
+        )
         {
-            return CreateCSharpCompilation(assemblyName, code, parseOptions, compilationOptions, referencedAssemblies, referencedCompilations: null);
+            return CreateCSharpCompilation(
+                assemblyName,
+                code,
+                parseOptions,
+                compilationOptions,
+                referencedAssemblies,
+                referencedCompilations: null
+            );
         }
 
         protected CSharp.CSharpCompilation CreateCSharpCompilation(
@@ -270,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpParseOptions parseOptions = null,
             CSharp.CSharpCompilationOptions compilationOptions = null,
             IEnumerable<MetadataReference> referencedAssemblies = null,
-            IEnumerable<Compilation> referencedCompilations = null)
+            IEnumerable<Compilation> referencedCompilations = null
+        )
         {
             return CreateCSharpCompilation(
                 assemblyName,
@@ -278,7 +367,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 parseOptions,
                 compilationOptions,
                 referencedAssemblies,
-                referencedCompilations);
+                referencedCompilations
+            );
         }
 
         protected VisualBasic.VisualBasicCompilation CreateVisualBasicCompilation(
@@ -286,9 +376,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             VisualBasic.VisualBasicParseOptions parseOptions = null,
             VisualBasic.VisualBasicCompilationOptions compilationOptions = null,
             string assemblyName = null,
-            IEnumerable<MetadataReference> referencedAssemblies = null)
+            IEnumerable<MetadataReference> referencedAssemblies = null
+        )
         {
-            return CreateVisualBasicCompilation(assemblyName, code, parseOptions, compilationOptions, referencedAssemblies, referencedCompilations: null);
+            return CreateVisualBasicCompilation(
+                assemblyName,
+                code,
+                parseOptions,
+                compilationOptions,
+                referencedAssemblies,
+                referencedCompilations: null
+            );
         }
 
         protected VisualBasic.VisualBasicCompilation CreateVisualBasicCompilation(
@@ -297,7 +395,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             VisualBasic.VisualBasicParseOptions parseOptions = null,
             VisualBasic.VisualBasicCompilationOptions compilationOptions = null,
             IEnumerable<MetadataReference> referencedAssemblies = null,
-            IEnumerable<Compilation> referencedCompilations = null)
+            IEnumerable<Compilation> referencedCompilations = null
+        )
         {
             return CreateVisualBasicCompilation(
                 assemblyName,
@@ -305,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 parseOptions,
                 compilationOptions,
                 referencedAssemblies,
-                referencedCompilations);
+                referencedCompilations
+            );
         }
 
         protected CSharp.CSharpCompilation CreateCSharpCompilation(
@@ -313,9 +413,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpParseOptions parseOptions = null,
             CSharp.CSharpCompilationOptions compilationOptions = null,
             string assemblyName = null,
-            IEnumerable<MetadataReference> referencedAssemblies = null)
+            IEnumerable<MetadataReference> referencedAssemblies = null
+        )
         {
-            return CreateCSharpCompilation(assemblyName, code, parseOptions, compilationOptions, referencedAssemblies, referencedCompilations: null);
+            return CreateCSharpCompilation(
+                assemblyName,
+                code,
+                parseOptions,
+                compilationOptions,
+                referencedAssemblies,
+                referencedCompilations: null
+            );
         }
 
         protected CSharp.CSharpCompilation CreateCSharpCompilation(
@@ -324,9 +432,18 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpParseOptions parseOptions = null,
             CSharp.CSharpCompilationOptions compilationOptions = null,
             IEnumerable<MetadataReference> referencedAssemblies = null,
-            IEnumerable<Compilation> referencedCompilations = null)
+            IEnumerable<Compilation> referencedCompilations = null
+        )
         {
-            return CreateCSharpCompilation(assemblyName, assemblyIdentity: null, code, parseOptions, compilationOptions, referencedAssemblies, referencedCompilations);
+            return CreateCSharpCompilation(
+                assemblyName,
+                assemblyIdentity: null,
+                code,
+                parseOptions,
+                compilationOptions,
+                referencedAssemblies,
+                referencedCompilations
+            );
         }
 
         protected CSharp.CSharpCompilation CreateCSharpCompilation(
@@ -335,9 +452,18 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpParseOptions parseOptions = null,
             CSharp.CSharpCompilationOptions compilationOptions = null,
             IEnumerable<MetadataReference> referencedAssemblies = null,
-            IEnumerable<Compilation> referencedCompilations = null)
+            IEnumerable<Compilation> referencedCompilations = null
+        )
         {
-            return CreateCSharpCompilation(assemblyName: null, assemblyIdentity, code, parseOptions, compilationOptions, referencedAssemblies, referencedCompilations);
+            return CreateCSharpCompilation(
+                assemblyName: null,
+                assemblyIdentity,
+                code,
+                parseOptions,
+                compilationOptions,
+                referencedAssemblies,
+                referencedCompilations
+            );
         }
 
         private CSharp.CSharpCompilation CreateCSharpCompilation(
@@ -347,9 +473,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             CSharp.CSharpParseOptions parseOptions = null,
             CSharp.CSharpCompilationOptions compilationOptions = null,
             IEnumerable<MetadataReference> referencedAssemblies = null,
-            IEnumerable<Compilation> referencedCompilations = null)
+            IEnumerable<Compilation> referencedCompilations = null
+        )
         {
-            Debug.Assert(assemblyName == null || assemblyIdentity == null || assemblyIdentity.Name == assemblyName);
+            Debug.Assert(
+                assemblyName == null
+                    || assemblyIdentity == null
+                    || assemblyIdentity.Name == assemblyName
+            );
             if (assemblyName == null)
             {
                 assemblyName = assemblyIdentity?.Name ?? GetUniqueName();
@@ -357,12 +488,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (parseOptions == null)
             {
-                parseOptions = CSharp.CSharpParseOptions.Default.WithLanguageVersion(CSharp.LanguageVersion.Default).WithDocumentationMode(DocumentationMode.None);
+                parseOptions = CSharp
+                    .CSharpParseOptions.Default.WithLanguageVersion(CSharp.LanguageVersion.Default)
+                    .WithDocumentationMode(DocumentationMode.None);
             }
 
             if (compilationOptions == null)
             {
-                compilationOptions = new CSharp.CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
+                compilationOptions = new CSharp.CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary
+                );
             }
 
             var references = new List<MetadataReference>();
@@ -382,13 +517,22 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             AddReferencedCompilations(referencedCompilations, references);
 
-            var tree = CSharp.SyntaxFactory.ParseSyntaxTree(SourceText.From(code, encoding: null, SourceHashAlgorithms.Default), options: parseOptions);
+            var tree = CSharp.SyntaxFactory.ParseSyntaxTree(
+                SourceText.From(code, encoding: null, SourceHashAlgorithms.Default),
+                options: parseOptions
+            );
 
-            var compilation = CSharp.CSharpCompilation.Create(assemblyName, new[] { tree }, references, compilationOptions);
+            var compilation = CSharp.CSharpCompilation.Create(
+                assemblyName,
+                new[] { tree },
+                references,
+                compilationOptions
+            );
 
             if (assemblyIdentity != null)
             {
-                ((SourceAssemblySymbol)compilation.Assembly).lazyAssemblyIdentity = assemblyIdentity;
+                ((SourceAssemblySymbol)compilation.Assembly).lazyAssemblyIdentity =
+                    assemblyIdentity;
             }
 
             return compilation;
@@ -399,9 +543,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             VisualBasic.VisualBasicParseOptions parseOptions = null,
             VisualBasic.VisualBasicCompilationOptions compilationOptions = null,
             string assemblyName = null,
-            IEnumerable<MetadataReference> referencedAssemblies = null)
+            IEnumerable<MetadataReference> referencedAssemblies = null
+        )
         {
-            return CreateVisualBasicCompilation(assemblyName, code, parseOptions, compilationOptions, referencedAssemblies, referencedCompilations: null);
+            return CreateVisualBasicCompilation(
+                assemblyName,
+                code,
+                parseOptions,
+                compilationOptions,
+                referencedAssemblies,
+                referencedCompilations: null
+            );
         }
 
         protected VisualBasic.VisualBasicCompilation CreateVisualBasicCompilation(
@@ -409,9 +561,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             VisualBasic.VisualBasicParseOptions parseOptions = null,
             VisualBasic.VisualBasicCompilationOptions compilationOptions = null,
             string assemblyName = null,
-            IEnumerable<MetadataReference> referencedAssemblies = null)
+            IEnumerable<MetadataReference> referencedAssemblies = null
+        )
         {
-            return CreateVisualBasicCompilation(assemblyName, files, parseOptions, compilationOptions, referencedAssemblies, referencedCompilations: null);
+            return CreateVisualBasicCompilation(
+                assemblyName,
+                files,
+                parseOptions,
+                compilationOptions,
+                referencedAssemblies,
+                referencedCompilations: null
+            );
         }
 
         protected VisualBasic.VisualBasicCompilation CreateVisualBasicCompilation(
@@ -422,8 +582,18 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IEnumerable<MetadataReference> referencedAssemblies = null,
             IEnumerable<Compilation> referencedCompilations = null,
             Encoding encoding = null,
-            string sourceFileName = null)
-            => CreateVisualBasicCompilation(assemblyName, new[] { code }, parseOptions, compilationOptions, referencedAssemblies, referencedCompilations, encoding, new[] { sourceFileName });
+            string sourceFileName = null
+        ) =>
+            CreateVisualBasicCompilation(
+                assemblyName,
+                new[] { code },
+                parseOptions,
+                compilationOptions,
+                referencedAssemblies,
+                referencedCompilations,
+                encoding,
+                new[] { sourceFileName }
+            );
 
         protected VisualBasic.VisualBasicCompilation CreateVisualBasicCompilation(
             string assemblyName,
@@ -433,7 +603,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             IEnumerable<MetadataReference> referencedAssemblies = null,
             IEnumerable<Compilation> referencedCompilations = null,
             Encoding encoding = null,
-            string[] sourceFileNames = null)
+            string[] sourceFileNames = null
+        )
         {
             Debug.Assert(sourceFileNames == null || sourceFileNames.Length == files.Length);
             if (assemblyName == null)
@@ -448,7 +619,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (compilationOptions == null)
             {
-                compilationOptions = new VisualBasic.VisualBasicCompilationOptions(OutputKind.DynamicallyLinkedLibrary);
+                compilationOptions = new VisualBasic.VisualBasicCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary
+                );
             }
 
             compilationOptions = compilationOptions.WithParseOptions(parseOptions);
@@ -472,13 +645,25 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             var trees = new SyntaxTree[files.Length];
             for (int i = 0; i < files.Length; i++)
             {
-                trees[i] = VisualBasic.VisualBasicSyntaxTree.ParseText(SourceText.From(files[i], encoding, SourceHashAlgorithms.Default), options: parseOptions, path: sourceFileNames?[i]);
+                trees[i] = VisualBasic.VisualBasicSyntaxTree.ParseText(
+                    SourceText.From(files[i], encoding, SourceHashAlgorithms.Default),
+                    options: parseOptions,
+                    path: sourceFileNames?[i]
+                );
             }
 
-            return VisualBasic.VisualBasicCompilation.Create(assemblyName, trees, references, compilationOptions);
+            return VisualBasic.VisualBasicCompilation.Create(
+                assemblyName,
+                trees,
+                references,
+                compilationOptions
+            );
         }
 
-        private void AddReferencedCompilations(IEnumerable<Compilation> referencedCompilations, List<MetadataReference> references)
+        private void AddReferencedCompilations(
+            IEnumerable<Compilation> referencedCompilations,
+            List<MetadataReference> references
+        )
         {
             if (referencedCompilations != null)
             {
@@ -489,19 +674,29 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
         }
 
-        internal static MetadataReference AsReference(Compilation comp, bool useCompilationReference)
+        internal static MetadataReference AsReference(
+            Compilation comp,
+            bool useCompilationReference
+        )
         {
-            return useCompilationReference ? comp.ToMetadataReference() : comp.EmitToImageReference();
+            return useCompilationReference
+                ? comp.ToMetadataReference()
+                : comp.EmitToImageReference();
         }
 
-        public static string WithWindowsLineBreaks(string source)
-            => source.Replace(Environment.NewLine, "\r\n");
+        public static string WithWindowsLineBreaks(string source) =>
+            source.Replace(Environment.NewLine, "\r\n");
 
         #endregion
 
         #region IL Verification
 
-        internal abstract string VisualizeRealIL(IModuleSymbol peModule, CompilationTestData.MethodData methodData, IReadOnlyDictionary<int, string> markers, bool areLocalsZeroed);
+        internal abstract string VisualizeRealIL(
+            IModuleSymbol peModule,
+            CompilationTestData.MethodData methodData,
+            IReadOnlyDictionary<int, string> markers,
+            bool areLocalsZeroed
+        );
 
         #endregion
 
@@ -521,19 +716,30 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 sizeOfHeapCommit: Cci.ModulePropertiesForSerialization.DefaultSizeOfHeapCommit32Bit,
                 sizeOfStackReserve: Cci.ModulePropertiesForSerialization.DefaultSizeOfStackReserve32Bit,
                 sizeOfStackCommit: Cci.ModulePropertiesForSerialization.DefaultSizeOfStackCommit32Bit,
-                dllCharacteristics: Compilation.GetDllCharacteristics(enableHighEntropyVA: true, configureToExecuteInAppContainer: false),
+                dllCharacteristics: Compilation.GetDllCharacteristics(
+                    enableHighEntropyVA: true,
+                    configureToExecuteInAppContainer: false
+                ),
                 subsystem: Subsystem.WindowsCui,
                 imageCharacteristics: Characteristics.Dll,
                 majorSubsystemVersion: 0,
                 minorSubsystemVersion: 0,
                 linkerMajorVersion: 0,
-                linkerMinorVersion: 0);
+                linkerMinorVersion: 0
+            );
         }
 
-        internal void AssertDeclaresType(PEModuleSymbol peModule, WellKnownType type, Accessibility expectedAccessibility)
+        internal void AssertDeclaresType(
+            PEModuleSymbol peModule,
+            WellKnownType type,
+            Accessibility expectedAccessibility
+        )
         {
             var name = MetadataTypeName.FromFullName(type.GetMetadataName());
-            Assert.Equal(expectedAccessibility, peModule.LookupTopLevelMetadataType(ref name).DeclaredAccessibility);
+            Assert.Equal(
+                expectedAccessibility,
+                peModule.LookupTopLevelMetadataType(ref name).DeclaredAccessibility
+            );
         }
 
         #endregion
@@ -558,13 +764,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// Skip this argument to get an error message that shows all available signatures for specified member
         /// </param>
         /// <returns>Instance of SignatureDescription for specified member</returns>
-        internal static SignatureDescription Signature(string fullyQualifiedTypeName, string memberName, string expectedSignature = "")
+        internal static SignatureDescription Signature(
+            string fullyQualifiedTypeName,
+            string memberName,
+            string expectedSignature = ""
+        )
         {
             return new SignatureDescription()
             {
                 FullyQualifiedTypeName = fullyQualifiedTypeName,
                 MemberName = memberName,
-                ExpectedSignature = expectedSignature
+                ExpectedSignature = expectedSignature,
             };
         }
 
@@ -589,7 +799,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
         }
 
-        private static Dictionary<IOperation, IOperation> GetParentOperationsMap(SemanticModel model)
+        private static Dictionary<IOperation, IOperation> GetParentOperationsMap(
+            SemanticModel model
+        )
         {
             // get top operations first
             var topOperations = new HashSet<IOperation>();
@@ -610,7 +822,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             return map;
         }
 
-        private static void CollectParentOperations(IOperation operation, Dictionary<IOperation, IOperation> map)
+        private static void CollectParentOperations(
+            IOperation operation,
+            Dictionary<IOperation, IOperation> map
+        )
         {
             // walk down to collect all parent operation map for this tree
             foreach (var child in operation.ChildOperations)
@@ -621,7 +836,11 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
         }
 
-        private static void CollectTopOperations(SemanticModel model, SyntaxNode node, HashSet<IOperation> topOperations)
+        private static void CollectTopOperations(
+            SemanticModel model,
+            SyntaxNode node,
+            HashSet<IOperation> topOperations
+        )
         {
             foreach (var child in node.ChildNodes())
             {
@@ -655,11 +874,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 Assert.Same(model, operation.SemanticModel);
                 Assert.Same(model, clonedOperation.SemanticModel);
                 Assert.NotSame(model, ((Operation)operation).OwningSemanticModel);
-                Assert.Same(((Operation)operation).OwningSemanticModel, ((Operation)clonedOperation).OwningSemanticModel);
+                Assert.Same(
+                    ((Operation)operation).OwningSemanticModel,
+                    ((Operation)clonedOperation).OwningSemanticModel
+                );
 
                 // check whether cloned IOperation is same as original one
                 var original = OperationTreeVerifier.GetOperationTree(model.Compilation, operation);
-                var cloned = OperationTreeVerifier.GetOperationTree(model.Compilation, clonedOperation);
+                var cloned = OperationTreeVerifier.GetOperationTree(
+                    model.Compilation,
+                    clonedOperation
+                );
 
                 Assert.Equal(original, cloned);
 
@@ -689,7 +914,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         }
 
         private static void VerifyOperationTreeSpine(
-            SemanticModel semanticModel, HashSet<IOperation> set, SyntaxNode node)
+            SemanticModel semanticModel,
+            HashSet<IOperation> set,
+            SyntaxNode node
+        )
         {
             while (node != semanticModel.Root)
             {
@@ -716,14 +944,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     return new List<object[]>()
                     {
                         new object[] { DebugInformationFormat.Pdb },
-                        new object[] { DebugInformationFormat.PortablePdb }
+                        new object[] { DebugInformationFormat.PortablePdb },
                     };
                 }
                 else
                 {
                     return new List<object[]>()
                     {
-                        new object[] { DebugInformationFormat.PortablePdb }
+                        new object[] { DebugInformationFormat.PortablePdb },
                     };
                 }
             }
@@ -732,7 +960,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static IEnumerable<object[]> PdbFormats =>
             new List<object[]>(ExternalPdbFormats)
             {
-                new object[] { DebugInformationFormat.Embedded }
+                new object[] { DebugInformationFormat.Embedded },
             };
 
         #endregion

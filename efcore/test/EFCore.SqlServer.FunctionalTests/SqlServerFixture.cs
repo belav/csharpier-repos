@@ -5,18 +5,19 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class SqlServerFixture : ServiceProviderFixtureBase
 {
-    public static IServiceProvider DefaultServiceProvider { get; }
-        = new ServiceCollection().AddEntityFrameworkSqlServer().BuildServiceProvider(validateScopes: true);
+    public static IServiceProvider DefaultServiceProvider { get; } =
+        new ServiceCollection()
+            .AddEntityFrameworkSqlServer()
+            .BuildServiceProvider(validateScopes: true);
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
+    public TestSqlLoggerFactory TestSqlLoggerFactory =>
+        (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
 
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-            w =>
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(w =>
             {
                 w.Log(SqlServerEventId.ByteIdentityColumnWarning);
                 w.Log(SqlServerEventId.DecimalTypeKeyWarning);

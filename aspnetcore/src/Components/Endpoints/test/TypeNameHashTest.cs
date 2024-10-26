@@ -73,9 +73,13 @@ public class TypeNameHashTest
 
         // Act/Assert
         var ex = Assert.Throws<InvalidOperationException>(() => TypeNameHash.Compute(type));
-        Assert.Equal($"Cannot compute a hash for a type without a {nameof(Type.FullName)}.", ex.Message);
+        Assert.Equal(
+            $"Cannot compute a hash for a type without a {nameof(Type.FullName)}.",
+            ex.Message
+        );
     }
 
     class ClassWithBasicName;
+
     class ClássWïthMûltibyteÇharacters;
 }

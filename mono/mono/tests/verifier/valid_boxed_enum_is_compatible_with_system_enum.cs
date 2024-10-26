@@ -1,13 +1,18 @@
 using System;
 
-public enum TestEnum {
-	A, B, C
+public enum TestEnum
+{
+    A,
+    B,
+    C,
 }
 
-class Driver {
-	public static int Main (string[] args) {
-		TestEnum te = TestEnum.A;
-		te.ToString ();
-		return 1;
-	}
+class Driver
+{
+    public static int Main(string[] args)
+    {
+        TestEnum te = TestEnum.A;
+        te.ToString();
+        return 1;
+    }
 }

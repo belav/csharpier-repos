@@ -40,7 +40,13 @@ namespace System.Xml
                     }
 
                     // encode the left-over buffer and write out
-                    int leftOverChars = Convert.ToBase64CharArray(_leftOverBytes!, 0, 3, _charsLine, 0);
+                    int leftOverChars = Convert.ToBase64CharArray(
+                        _leftOverBytes!,
+                        0,
+                        3,
+                        _charsLine,
+                        0
+                    );
                     await WriteCharsAsync(_charsLine, 0, leftOverChars).ConfigureAwait(false);
                 }
 
@@ -65,7 +71,13 @@ namespace System.Xml
                     {
                         chunkSize = endIndex - index;
                     }
-                    int charCount = Convert.ToBase64CharArray(buffer, index, chunkSize, _charsLine, 0);
+                    int charCount = Convert.ToBase64CharArray(
+                        buffer,
+                        index,
+                        chunkSize,
+                        _charsLine,
+                        0
+                    );
                     await WriteCharsAsync(_charsLine, 0, charCount).ConfigureAwait(false);
 
                     index += chunkSize;
@@ -77,7 +89,13 @@ namespace System.Xml
         {
             if (_leftOverBytesCount > 0)
             {
-                int leftOverChars = Convert.ToBase64CharArray(_leftOverBytes!, 0, _leftOverBytesCount, _charsLine, 0);
+                int leftOverChars = Convert.ToBase64CharArray(
+                    _leftOverBytes!,
+                    0,
+                    _leftOverBytesCount,
+                    _charsLine,
+                    0
+                );
                 await WriteCharsAsync(_charsLine, 0, leftOverChars).ConfigureAwait(false);
                 _leftOverBytesCount = 0;
             }

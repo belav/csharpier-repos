@@ -4,7 +4,6 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using Xunit;
 
 // Regression test for https://github.com/dotnet/runtime/issues/93778
@@ -27,7 +26,9 @@ public enum SlotConstants : int
 public class X
 {
     public static X Singleton = new();
-    private X() {
+
+    private X()
+    {
         Z.Singleton.Ping();
         Y.Singleton?.Pong();
     }
@@ -38,24 +39,26 @@ public class X
 public class Y
 {
     public static Y Singleton = new();
-    private Y() {
-            Z.Singleton.Ping();
-            X.Singleton?.Pong();
-        }
+
+    private Y()
+    {
+        Z.Singleton.Ping();
+        X.Singleton?.Pong();
+    }
 
     public void Pong() => Coordinator.Note(SlotConstants.YInitedFromX);
 }
 
 public class Z
 {
-        public static Z Singleton = new();
+    public static Z Singleton = new();
 
-    private Z() {
+    private Z()
+    {
         Coordinator.Note(SlotConstants.ZInited);
     }
 
     public void Ping() { }
-        
 }
 
 public class Coordinator
@@ -71,10 +74,11 @@ public class Coordinator
         return c | t_threadTag;
     }
 
-    public static void Note(SlotConstants s) {
+    public static void Note(SlotConstants s)
+    {
         int idx = Interlocked.Increment(ref s_NextNote);
         idx--;
-        Notes[idx] = DecorateWithThread (s);
+        Notes[idx] = DecorateWithThread(s);
     }
 
     public static Coordinator CreateThread(bool xThenY, SlotConstants threadTag)
@@ -83,11 +87,12 @@ public class Coordinator
     }
 
     public readonly Thread Thread;
-    private static readonly Barrier s_barrier = new (3);
+    private static readonly Barrier s_barrier = new(3);
 
     private Coordinator(bool xThenY, SlotConstants threadTag)
     {
-        var t = new Thread(() => {
+        var t = new Thread(() =>
+        {
             t_threadTag = threadTag;
             // Log("started");
             NextPhase();
@@ -100,14 +105,20 @@ public class Coordinator
         t.Start();
     }
 
-    public static void NextPhase() { s_barrier.SignalAndWait(); }
+    public static void NextPhase()
+    {
+        s_barrier.SignalAndWait();
+    }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static void DoConstructions(bool xThenY)
     {
-        if (xThenY) {
+        if (xThenY)
+        {
             XCreate();
-        } else {
+        }
+        else
+        {
             YCreate();
         }
     }
@@ -126,7 +137,7 @@ public class Coordinator
 
     public static void Log(string msg)
     {
-        Console.WriteLine ($"{Thread.CurrentThread.ManagedThreadId}: {msg}");
+        Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}: {msg}");
     }
 
     [Fact]
@@ -157,8 +168,10 @@ public class Coordinator
     private static int CountNotes(SlotConstants mask)
     {
         int found = 0;
-        foreach (var note in Notes) {
-            if ((note & mask) != (SlotConstants)0) {
+        foreach (var note in Notes)
+        {
+            if ((note & mask) != (SlotConstants)0)
+            {
                 found++;
             }
         }
@@ -168,15 +181,17 @@ public class Coordinator
     private static int Count2Notes(SlotConstants mask1, SlotConstants mask2)
     {
         int found = 0;
-        foreach (var note in Notes) {
-            if ((note & mask1) != (SlotConstants)0) {
+        foreach (var note in Notes)
+        {
+            if ((note & mask1) != (SlotConstants)0)
+            {
                 found++;
             }
-            if ((note & mask2) != (SlotConstants)0) {
+            if ((note & mask2) != (SlotConstants)0)
+            {
                 found++;
             }
         }
         return found;
     }
-    
 }

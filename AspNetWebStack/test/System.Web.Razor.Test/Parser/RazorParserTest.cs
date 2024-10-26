@@ -17,13 +17,19 @@ namespace System.Web.Razor.Test.Parser
         [Fact]
         public void ConstructorRequiresNonNullCodeParser()
         {
-            Assert.ThrowsArgumentNull(() => new RazorParser(null, new HtmlMarkupParser()), "codeParser");
+            Assert.ThrowsArgumentNull(
+                () => new RazorParser(null, new HtmlMarkupParser()),
+                "codeParser"
+            );
         }
 
         [Fact]
         public void ConstructorRequiresNonNullMarkupParser()
         {
-            Assert.ThrowsArgumentNull(() => new RazorParser(new CSharpCodeParser(), null), "markupParser");
+            Assert.ThrowsArgumentNull(
+                () => new RazorParser(new CSharpCodeParser(), null),
+                "markupParser"
+            );
         }
 
         [Fact]
@@ -35,15 +41,20 @@ namespace System.Web.Razor.Test.Parser
             RazorParser parser = new RazorParser(new CSharpCodeParser(), new HtmlMarkupParser());
 
             // Act/Assert
-            ParserTestBase.EvaluateResults(parser.Parse(new StringReader("foo @bar baz")),
+            ParserTestBase.EvaluateResults(
+                parser.Parse(new StringReader("foo @bar baz")),
                 new MarkupBlock(
                     factory.Markup("foo "),
                     new ExpressionBlock(
                         factory.CodeTransition(),
-                        factory.Code("bar")
-                               .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                    factory.Markup(" baz")));
+                        factory
+                            .Code("bar")
+                            .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    factory.Markup(" baz")
+                )
+            );
         }
 
         [Fact]
@@ -58,10 +69,18 @@ namespace System.Web.Razor.Test.Parser
             parser.Parse(new StringReader("foo @bar baz"), visitor.Object);
 
             // Assert
-            visitor.Verify(v => v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Markup && s.Content == "foo ")));
-            visitor.Verify(v => v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Transition && s.Content == "@")));
-            visitor.Verify(v => v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Code && s.Content == "bar")));
-            visitor.Verify(v => v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Markup && s.Content == " baz")));
+            visitor.Verify(v =>
+                v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Markup && s.Content == "foo "))
+            );
+            visitor.Verify(v =>
+                v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Transition && s.Content == "@"))
+            );
+            visitor.Verify(v =>
+                v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Code && s.Content == "bar"))
+            );
+            visitor.Verify(v =>
+                v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Markup && s.Content == " baz"))
+            );
         }
 
         [Fact]
@@ -78,10 +97,18 @@ namespace System.Web.Razor.Test.Parser
             await task;
 
             // Assert
-            visitor.Verify(v => v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Markup && s.Content == "foo ")));
-            visitor.Verify(v => v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Transition && s.Content == "@")));
-            visitor.Verify(v => v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Code && s.Content == "bar")));
-            visitor.Verify(v => v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Markup && s.Content == " baz")));
+            visitor.Verify(v =>
+                v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Markup && s.Content == "foo "))
+            );
+            visitor.Verify(v =>
+                v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Transition && s.Content == "@"))
+            );
+            visitor.Verify(v =>
+                v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Code && s.Content == "bar"))
+            );
+            visitor.Verify(v =>
+                v.VisitSpan(It.Is<Span>(s => s.Kind == SpanKind.Markup && s.Content == " baz"))
+            );
         }
 
         [Fact]
@@ -95,15 +122,17 @@ namespace System.Web.Razor.Test.Parser
             var visited = false;
 
             // Act
-            var task = parser.CreateParseTask(new StringReader("foo @bar baz"),
-                                              (span) =>
-                                              {
-                                                  visited = true;
-                                                  Assert.Equal("foo ", span.Content);
-                                                  cancelTokenSource.Cancel();
-                                              },
-                                              errorCallback: null,
-                                              cancelToken: cancelTokenSource.Token);
+            var task = parser.CreateParseTask(
+                new StringReader("foo @bar baz"),
+                (span) =>
+                {
+                    visited = true;
+                    Assert.Equal("foo ", span.Content);
+                    cancelTokenSource.Cancel();
+                },
+                errorCallback: null,
+                cancelToken: cancelTokenSource.Token
+            );
             task.Start();
             await task;
 
@@ -123,15 +152,20 @@ namespace System.Web.Razor.Test.Parser
             ParserResults results = parser.Parse(new StringReader("foo @bar baz"));
 
             // Assert
-            ParserTestBase.EvaluateResults(results,
+            ParserTestBase.EvaluateResults(
+                results,
                 new MarkupBlock(
                     factory.Markup("foo "),
                     new ExpressionBlock(
                         factory.CodeTransition(),
-                        factory.Code("bar")
-                               .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
-                               .Accepts(AcceptedCharacters.NonWhiteSpace)),
-                    factory.Markup(" baz")));
+                        factory
+                            .Code("bar")
+                            .AsImplicitExpression(CSharpCodeParser.DefaultKeywords)
+                            .Accepts(AcceptedCharacters.NonWhiteSpace)
+                    ),
+                    factory.Markup(" baz")
+                )
+            );
         }
 
         [Fact]
@@ -163,31 +197,25 @@ namespace System.Web.Razor.Test.Parser
         {
             public override bool IsMarkupParser
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override void ParseDocument()
             {
-                using (Context.StartBlock(BlockType.Markup))
-                {
-                }
+                using (Context.StartBlock(BlockType.Markup)) { }
             }
 
-            public override void ParseSection(Tuple<string, string> nestingSequences, bool caseSensitive = true)
+            public override void ParseSection(
+                Tuple<string, string> nestingSequences,
+                bool caseSensitive = true
+            )
             {
-                using (Context.StartBlock(BlockType.Markup))
-                {
-                }
+                using (Context.StartBlock(BlockType.Markup)) { }
             }
 
             public override void ParseBlock()
             {
-                using (Context.StartBlock(BlockType.Markup))
-                {
-                }
+                using (Context.StartBlock(BlockType.Markup)) { }
             }
 
             protected override ParserBase OtherParser
@@ -195,7 +223,11 @@ namespace System.Web.Razor.Test.Parser
                 get { return Context.CodeParser; }
             }
 
-            public override void BuildSpan(SpanBuilder span, Razor.Text.SourceLocation start, string content)
+            public override void BuildSpan(
+                SpanBuilder span,
+                Razor.Text.SourceLocation start,
+                string content
+            )
             {
                 throw new NotImplementedException();
             }

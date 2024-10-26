@@ -72,10 +72,7 @@ namespace System.Speech.Internal.Synthesis
             _site.VoiceRate = _defaultRate = (int)GetDefaultRate();
 
             // Start the worker thread
-            _workerThread = new Thread(new ThreadStart(ThreadProc))
-            {
-                IsBackground = true
-            };
+            _workerThread = new Thread(new ThreadStart(ThreadProc)) { IsBackground = true };
             _workerThread.Start();
 
             // Default TTS engines events to be notified
@@ -101,7 +98,10 @@ namespace System.Speech.Internal.Synthesis
         internal void Speak(Prompt prompt)
         {
             bool done = false;
-            EventHandler<StateChangedEventArgs> eventHandler = delegate (object sender, StateChangedEventArgs args)
+            EventHandler<StateChangedEventArgs> eventHandler = delegate(
+                object sender,
+                StateChangedEventArgs args
+            )
             {
                 if (prompt.IsCompleted && args.State == SynthesizerState.Ready)
                 {
@@ -138,6 +138,7 @@ namespace System.Speech.Internal.Synthesis
                 _stateChanged -= eventHandler;
             }
         }
+
         internal void SpeakAsync(Prompt prompt)
         {
             QueuePrompt(prompt);
@@ -165,7 +166,11 @@ namespace System.Speech.Internal.Synthesis
         internal void OnSpeakCompleted(SpeakCompletedEventArgs e)
         {
             e.Prompt.IsCompleted = true;
-            _asyncWorkerUI.PostOperation(new EventHandler<SpeakCompletedEventArgs>(FireSpeakCompleted), _speechSyntesizer.Target, e);
+            _asyncWorkerUI.PostOperation(
+                new EventHandler<SpeakCompletedEventArgs>(FireSpeakCompleted),
+                _speechSyntesizer.Target,
+                e
+            );
         }
 
         internal void OnSpeakProgress(SpeakProgressEventArgs e)
@@ -176,7 +181,12 @@ namespace System.Speech.Internal.Synthesis
                 if (e.Prompt._media == SynthesisMediaType.Ssml)
                 {
                     int length = e.CharacterCount;
-                    text = RemoveEscapeString(e.Prompt._text, e.CharacterPosition, length, out length);
+                    text = RemoveEscapeString(
+                        e.Prompt._text,
+                        e.CharacterPosition,
+                        length,
+                        out length
+                    );
                     e.CharacterCount = length;
                 }
                 else
@@ -210,7 +220,10 @@ namespace System.Speech.Internal.Synthesis
                 for (int i = 0; i < _xmlEscapeStrings.Length; i++)
                 {
                     int idx;
-                    if ((idx = text.IndexOf(_xmlEscapeStrings[i], curPos, StringComparison.Ordinal)) >= 0)
+                    if (
+                        (idx = text.IndexOf(_xmlEscapeStrings[i], curPos, StringComparison.Ordinal))
+                        >= 0
+                    )
                     {
                         if (pos > idx)
                         {
@@ -247,8 +260,7 @@ namespace System.Speech.Internal.Synthesis
                     pos += lenEscape;
                 }
                 curPos = pos;
-            }
-            while (start + length > sb.Length);
+            } while (start + length > sb.Length);
             return sb.ToString().Substring(start, length);
         }
 
@@ -297,7 +309,12 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        internal void AddEvent<T>(TtsEventId ttsEvent, ref EventHandler<T> internalEventHandler, EventHandler<T> eventHandler) where T : PromptEventArgs
+        internal void AddEvent<T>(
+            TtsEventId ttsEvent,
+            ref EventHandler<T> internalEventHandler,
+            EventHandler<T> eventHandler
+        )
+            where T : PromptEventArgs
         {
             lock (_thisObjectLock)
             {
@@ -316,7 +333,12 @@ namespace System.Speech.Internal.Synthesis
             }
         }
 
-        internal void RemoveEvent<T>(TtsEventId ttsEvent, ref EventHandler<T> internalEventHandler, EventHandler<T> eventHandler) where T : EventArgs
+        internal void RemoveEvent<T>(
+            TtsEventId ttsEvent,
+            ref EventHandler<T> internalEventHandler,
+            EventHandler<T> eventHandler
+        )
+            where T : EventArgs
         {
             lock (_thisObjectLock)
             {
@@ -349,14 +371,19 @@ namespace System.Speech.Internal.Synthesis
 
                 if (State == SynthesizerState.Paused)
                 {
-                    throw new InvalidOperationException(SR.Get(SRID.SynthesizerSyncSetOutputWhilePaused));
+                    throw new InvalidOperationException(
+                        SR.Get(SRID.SynthesizerSyncSetOutputWhilePaused)
+                    );
                 }
 
                 lock (_processingSpeakLock)
                 {
                     if (stream == null)
                     {
-                        _waveOut = new AudioDeviceOut(SAPICategories.DefaultDeviceOut(), _asyncWorker);
+                        _waveOut = new AudioDeviceOut(
+                            SAPICategories.DefaultDeviceOut(),
+                            _asyncWorker
+                        );
                     }
                     else
                     {
@@ -392,7 +419,9 @@ namespace System.Speech.Internal.Synthesis
                         ParametersSpeak paramSpeak = parameter._parameter as ParametersSpeak;
                         if (paramSpeak != null)
                         {
-                            paramSpeak._prompt.Exception = new OperationCanceledException(SR.Get(SRID.PromptAsyncOperationCancelled));
+                            paramSpeak._prompt.Exception = new OperationCanceledException(
+                                SR.Get(SRID.PromptAsyncOperationCancelled)
+                            );
                         }
                     }
                     // Restart the worker thread
@@ -417,7 +446,9 @@ namespace System.Speech.Internal.Synthesis
                     ParametersSpeak paramSpeak = parameters._parameter as ParametersSpeak;
                     if (paramSpeak._prompt == prompt)
                     {
-                        paramSpeak._prompt.Exception = new OperationCanceledException(SR.Get(SRID.PromptAsyncOperationCancelled));
+                        paramSpeak._prompt.Exception = new OperationCanceledException(
+                            SR.Get(SRID.PromptAsyncOperationCancelled)
+                        );
                         found = true;
                         break;
                     }
@@ -435,9 +466,7 @@ namespace System.Speech.Internal.Synthesis
                         }
                     }
                     // Wait for completion
-                    lock (_processingSpeakLock)
-                    {
-                    }
+                    lock (_processingSpeakLock) { }
                 }
             }
         }
@@ -528,11 +557,27 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// This method is used to create the Engine voice and initialize the culture
         /// </summary>
-        internal TTSVoice GetEngine(string name, CultureInfo culture, VoiceGender gender, VoiceAge age, int variant, bool switchContext)
+        internal TTSVoice GetEngine(
+            string name,
+            CultureInfo culture,
+            VoiceGender gender,
+            VoiceAge age,
+            int variant,
+            bool switchContext
+        )
         {
             TTSVoice defaultVoice = _currentVoice ?? GetVoice(switchContext);
 
-            return GetEngineWithVoice(defaultVoice, null, name, culture, gender, age, variant, switchContext);
+            return GetEngineWithVoice(
+                defaultVoice,
+                null,
+                name,
+                culture,
+                gender,
+                age,
+                variant,
+                switchContext
+            );
         }
 
         /// <summary>
@@ -578,32 +623,17 @@ namespace System.Speech.Internal.Synthesis
         }
         internal SynthesizerState State
         {
-            get
-            {
-                return _synthesizerState;
-            }
+            get { return _synthesizerState; }
         }
         internal int Rate
         {
-            get
-            {
-                return _site.VoiceRate;
-            }
-            set
-            {
-                _site.VoiceRate = _defaultRate = value;
-            }
+            get { return _site.VoiceRate; }
+            set { _site.VoiceRate = _defaultRate = value; }
         }
         internal int Volume
         {
-            get
-            {
-                return _site.VoiceVolume;
-            }
-            set
-            {
-                _site.VoiceVolume = value;
-            }
+            get { return _site.VoiceVolume; }
+            set { _site.VoiceVolume = value; }
         }
 
         /// <summary>
@@ -646,6 +676,7 @@ namespace System.Speech.Internal.Synthesis
 
         // Internal event handlers
         internal EventHandler<StateChangedEventArgs> _stateChanged;
+
         // Internal event handlers
         internal EventHandler<SpeakStartedEventArgs> _speakStarted;
         internal EventHandler<SpeakCompletedEventArgs> _speakCompleted;
@@ -722,7 +753,9 @@ namespace System.Speech.Internal.Synthesis
                                 {
                                     _pendingVoice = null;
                                     _pendingException = null;
-                                    _pendingVoice = GetProxyEngine((VoiceInfo)parameters._parameter);
+                                    _pendingVoice = GetProxyEngine(
+                                        (VoiceInfo)parameters._parameter
+                                    );
                                 }
 #pragma warning disable 6500
                                 catch (Exception e)
@@ -744,7 +777,12 @@ namespace System.Speech.Internal.Synthesis
                                 ParametersSpeak paramSpeak = (ParametersSpeak)parameters._parameter;
                                 try
                                 {
-                                    InjectEvent(TtsEventId.StartInputStream, paramSpeak._prompt, paramSpeak._prompt.Exception, null);
+                                    InjectEvent(
+                                        TtsEventId.StartInputStream,
+                                        paramSpeak._prompt,
+                                        paramSpeak._prompt.Exception,
+                                        null
+                                    );
 
                                     if (paramSpeak._prompt.Exception == null)
                                     {
@@ -765,18 +803,35 @@ namespace System.Speech.Internal.Synthesis
                                                 FragmentState fragmentState = new();
                                                 fragmentState.Action = TtsEngineAction.Speak;
                                                 fragmentState.Prosody = new Prosody();
-                                                TextFragment textFragment = new(fragmentState, paramSpeak._textToSpeak);
+                                                TextFragment textFragment =
+                                                    new(fragmentState, paramSpeak._textToSpeak);
                                                 speakInfo.AddText(voice, textFragment);
                                             }
                                             else
                                             {
-                                                TextFragmentEngine engine = new(speakInfo, paramSpeak._textToSpeak, _pexml, _resourceLoader, lexicons);
-                                                SsmlParser.Parse(paramSpeak._textToSpeak, engine, speakInfo.Voice);
+                                                TextFragmentEngine engine =
+                                                    new(
+                                                        speakInfo,
+                                                        paramSpeak._textToSpeak,
+                                                        _pexml,
+                                                        _resourceLoader,
+                                                        lexicons
+                                                    );
+                                                SsmlParser.Parse(
+                                                    paramSpeak._textToSpeak,
+                                                    engine,
+                                                    speakInfo.Voice
+                                                );
                                             }
                                         }
                                         else
                                         {
-                                            speakInfo.AddAudio(new AudioData(paramSpeak._audioFile, _resourceLoader));
+                                            speakInfo.AddAudio(
+                                                new AudioData(
+                                                    paramSpeak._audioFile,
+                                                    _resourceLoader
+                                                )
+                                            );
                                         }
 
                                         // Add the global synthesizer lexicon
@@ -785,9 +840,11 @@ namespace System.Speech.Internal.Synthesis
                                         System.Diagnostics.Debug.Assert(speakInfo != null);
                                         SpeakText(speakInfo, paramSpeak._prompt, lexicons);
                                     }
-                                    ChangeStateToReady(paramSpeak._prompt, paramSpeak._prompt.Exception);
+                                    ChangeStateToReady(
+                                        paramSpeak._prompt,
+                                        paramSpeak._prompt.Exception
+                                    );
                                 }
-
 #pragma warning disable 6500
 
                                 catch (Exception e)
@@ -852,7 +909,7 @@ namespace System.Speech.Internal.Synthesis
             VoiceInfo currentVoiceId = null;
 
             //=== Main processing loop ===========================================
-            for (SpeechSeg speechSeg; (speechSeg = speakInfo.RemoveFirst()) != null;)
+            for (SpeechSeg speechSeg; (speechSeg = speakInfo.RemoveFirst()) != null; )
             {
                 TTSVoice voice;
 
@@ -860,7 +917,10 @@ namespace System.Speech.Internal.Synthesis
                 voice = speechSeg.Voice;
 
                 // Fire the voice change object token if necessary
-                if (voice != null && (currentVoiceId == null || !currentVoiceId.Equals(voice.VoiceInfo)))
+                if (
+                    voice != null
+                    && (currentVoiceId == null || !currentVoiceId.Equals(voice.VoiceInfo))
+                )
                 {
                     currentVoiceId = voice.VoiceInfo;
                     InjectEvent(TtsEventId.VoiceChange, prompt, null, currentVoiceId);
@@ -877,7 +937,9 @@ namespace System.Speech.Internal.Synthesis
                             {
                                 _waveOut.IsAborted = false;
                                 //--- Always inject the end of stream and complete event on failure
-                                throw new OperationCanceledException(SR.Get(SRID.PromptAsyncOperationCancelled));
+                                throw new OperationCanceledException(
+                                    SR.Get(SRID.PromptAsyncOperationCancelled)
+                                );
                             }
                             _site.InitRun(_waveOut, _defaultRate, prompt);
                             _waveOut.Begin(voice.WaveFormat(_waveOut.WaveFormat));
@@ -897,9 +959,16 @@ namespace System.Speech.Internal.Synthesis
                             ITtsEngineProxy engineProxy = voice.TtsEngine;
 
                             // Set the events specific to the desktop
-                            if ((_ttsInterest & (1 << (int)TtsEventId.Phoneme)) != 0 && engineProxy.EngineAlphabet != AlphabetType.Ipa)
+                            if (
+                                (_ttsInterest & (1 << (int)TtsEventId.Phoneme)) != 0
+                                && engineProxy.EngineAlphabet != AlphabetType.Ipa
+                            )
                             {
-                                _site.EventMapper = new PhonemeEventMapper(_site, PhonemeEventMapper.PhonemeConversion.SapiToIpa, engineProxy.AlphabetConverter);
+                                _site.EventMapper = new PhonemeEventMapper(
+                                    _site,
+                                    PhonemeEventMapper.PhonemeConversion.SapiToIpa,
+                                    engineProxy.AlphabetConverter
+                                );
                             }
                             else
                             {
@@ -942,7 +1011,9 @@ namespace System.Speech.Internal.Synthesis
                                 ExceptionDispatchInfo.Throw(lastException);
                             }
                             //--- Always inject the end of stream and complete event on failure
-                            throw new OperationCanceledException(SR.Get(SRID.PromptAsyncOperationCancelled));
+                            throw new OperationCanceledException(
+                                SR.Get(SRID.PromptAsyncOperationCancelled)
+                            );
                         }
                     }
                 }
@@ -956,14 +1027,23 @@ namespace System.Speech.Internal.Synthesis
         {
             //--- Read the current user's default rate
             uint lCurrRateAd = 0;
-            using (ObjectTokenCategory category = ObjectTokenCategory.Create(SAPICategories.CurrentUserVoices))
+            using (
+                ObjectTokenCategory category = ObjectTokenCategory.Create(
+                    SAPICategories.CurrentUserVoices
+                )
+            )
             {
                 category?.TryGetDWORD(defaultVoiceRate, ref lCurrRateAd);
             }
             return lCurrRateAd;
         }
 
-        private void InjectEvent(TtsEventId evtId, Prompt prompt, Exception exception, VoiceInfo voiceInfo)
+        private void InjectEvent(
+            TtsEventId evtId,
+            Prompt prompt,
+            Exception exception,
+            VoiceInfo voiceInfo
+        )
         {
             // If the prompt is terminated, release it ASAP
             if (evtId == TtsEventId.EndInputStream)
@@ -994,7 +1074,10 @@ namespace System.Speech.Internal.Synthesis
                 // Fire the events
                 if (_eventStateChanged != null)
                 {
-                    _asyncWorker.PostOperation(_eventStateChanged, new StateChangedEventArgs(state, previousState));
+                    _asyncWorker.PostOperation(
+                        _eventStateChanged,
+                        new StateChangedEventArgs(state, previousState)
+                    );
                 }
             }
         }
@@ -1013,7 +1096,9 @@ namespace System.Speech.Internal.Synthesis
                     if (_pendingSpeakQueue.Count == 0)
                     {
                         _currentPrompt = null;
-                        System.Diagnostics.Debug.Assert(State == SynthesizerState.Speaking || State == SynthesizerState.Paused);
+                        System.Diagnostics.Debug.Assert(
+                            State == SynthesizerState.Speaking || State == SynthesizerState.Paused
+                        );
 
                         if (State != SynthesizerState.Paused)
                         {
@@ -1025,7 +1110,10 @@ namespace System.Speech.Internal.Synthesis
                             InjectEvent(TtsEventId.EndInputStream, prompt, exception, null);
                             if (_eventStateChanged != null)
                             {
-                                _asyncWorker.PostOperation(_eventStateChanged, new StateChangedEventArgs(_synthesizerState, previousState));
+                                _asyncWorker.PostOperation(
+                                    _eventStateChanged,
+                                    new StateChangedEventArgs(_synthesizerState, previousState)
+                                );
                             }
                         }
                         else
@@ -1089,7 +1177,16 @@ namespace System.Speech.Internal.Synthesis
             _evtPendingGetProxy.WaitOne();
         }
 
-        private TTSVoice GetEngineWithVoice(TTSVoice defaultVoice, VoiceInfo defaultVoiceId, string name, CultureInfo culture, VoiceGender gender, VoiceAge age, int variant, bool switchContext)
+        private TTSVoice GetEngineWithVoice(
+            TTSVoice defaultVoice,
+            VoiceInfo defaultVoiceId,
+            string name,
+            CultureInfo culture,
+            VoiceGender gender,
+            VoiceAge age,
+            int variant,
+            bool switchContext
+        )
         {
             TTSVoice voice = null;
 
@@ -1112,12 +1209,24 @@ namespace System.Speech.Internal.Synthesis
                     if (defaultVoice != null || defaultVoiceId != null)
                     {
                         // try to select the default voice
-                        viDefault = InstalledVoice.Find(_installedVoices, defaultVoice != null ? defaultVoice.VoiceInfo : defaultVoiceId);
+                        viDefault = InstalledVoice.Find(
+                            _installedVoices,
+                            defaultVoice != null ? defaultVoice.VoiceInfo : defaultVoiceId
+                        );
 
                         if (viDefault != null && viDefault.Enabled && variant == 1)
                         {
                             VoiceInfo vi = viDefault.VoiceInfo;
-                            if (viDefault.Enabled && vi.Culture.Equals(culture) && (gender == VoiceGender.NotSet || gender == VoiceGender.Neutral || gender == vi.Gender) && (age == VoiceAge.NotSet || age == vi.Age))
+                            if (
+                                viDefault.Enabled
+                                && vi.Culture.Equals(culture)
+                                && (
+                                    gender == VoiceGender.NotSet
+                                    || gender == VoiceGender.Neutral
+                                    || gender == vi.Gender
+                                )
+                                && (age == VoiceAge.NotSet || age == vi.Age)
+                            )
                             {
                                 voice = defaultVoice;
                             }
@@ -1127,11 +1236,21 @@ namespace System.Speech.Internal.Synthesis
                     // Pick the first one in the list as the backup default
                     while (voice == null && _installedVoices.Count > 0)
                     {
-                        viDefault ??= InstalledVoice.FirstEnabled(_installedVoices, CultureInfo.CurrentUICulture);
+                        viDefault ??= InstalledVoice.FirstEnabled(
+                            _installedVoices,
+                            CultureInfo.CurrentUICulture
+                        );
 
                         if (viDefault != null)
                         {
-                            voice = MatchVoice(culture, gender, age, variant, switchContext, ref viDefault);
+                            voice = MatchVoice(
+                                culture,
+                                gender,
+                                age,
+                                variant,
+                                switchContext,
+                                ref viDefault
+                            );
                         }
                         else
                         {
@@ -1169,10 +1288,21 @@ namespace System.Speech.Internal.Synthesis
             foreach (InstalledVoice sysVoice in _installedVoices)
             {
                 int firstCharacter;
-                if (sysVoice.Enabled && (firstCharacter = name.IndexOf(sysVoice.VoiceInfo.Name, StringComparison.Ordinal)) >= 0)
+                if (
+                    sysVoice.Enabled
+                    && (
+                        firstCharacter = name.IndexOf(
+                            sysVoice.VoiceInfo.Name,
+                            StringComparison.Ordinal
+                        )
+                    ) >= 0
+                )
                 {
                     int lastCharacter = firstCharacter + sysVoice.VoiceInfo.Name.Length;
-                    if ((firstCharacter == 0 || name[firstCharacter - 1] == ' ') && (lastCharacter == name.Length || name[lastCharacter] == ' '))
+                    if (
+                        (firstCharacter == 0 || name[firstCharacter - 1] == ' ')
+                        && (lastCharacter == name.Length || name[lastCharacter] == ' ')
+                    )
                     {
                         voiceInfo = sysVoice.VoiceInfo;
                         if (cVariant-- == 1)
@@ -1192,7 +1322,14 @@ namespace System.Speech.Internal.Synthesis
             return voice;
         }
 
-        private TTSVoice MatchVoice(CultureInfo culture, VoiceGender gender, VoiceAge age, int variant, bool switchContext, ref InstalledVoice viDefault)
+        private TTSVoice MatchVoice(
+            CultureInfo culture,
+            VoiceGender gender,
+            VoiceAge age,
+            int variant,
+            bool switchContext,
+            ref InstalledVoice viDefault
+        )
         {
             TTSVoice voice = null;
 
@@ -1209,9 +1346,16 @@ namespace System.Speech.Internal.Synthesis
             }
 
             // Try to select the best available voice
-            for (; voice == null && tokens.Count > 0;)
+            for (; voice == null && tokens.Count > 0; )
             {
-                InstalledVoice sysVoice = MatchVoice(viDefault, culture, gender, age, variant, tokens);
+                InstalledVoice sysVoice = MatchVoice(
+                    viDefault,
+                    culture,
+                    gender,
+                    age,
+                    variant,
+                    tokens
+                );
                 if (sysVoice != null)
                 {
                     // Find a voice and a match engine!
@@ -1234,7 +1378,14 @@ namespace System.Speech.Internal.Synthesis
             return voice;
         }
 
-        private static InstalledVoice MatchVoice(InstalledVoice defaultTokenInfo, CultureInfo culture, VoiceGender gender, VoiceAge age, int variant, List<InstalledVoice> tokensInfo)
+        private static InstalledVoice MatchVoice(
+            InstalledVoice defaultTokenInfo,
+            CultureInfo culture,
+            VoiceGender gender,
+            VoiceAge age,
+            int variant,
+            List<InstalledVoice> tokensInfo
+        )
         {
             // Set the default return value
             InstalledVoice sysVoice = defaultTokenInfo;
@@ -1280,7 +1431,10 @@ namespace System.Speech.Internal.Synthesis
                 {
                     foreach (InstalledVoice ti in tokensInfo)
                     {
-                        if (ti.Enabled && CalcMatchValue(culture, gender, age, ti.VoiceInfo) == bestMatch)
+                        if (
+                            ti.Enabled
+                            && CalcMatchValue(culture, gender, age, ti.VoiceInfo) == bestMatch
+                        )
                         {
                             // If we are looking for a variant and are matching the best match, switch voice
                             --variant;
@@ -1297,13 +1451,17 @@ namespace System.Speech.Internal.Synthesis
                     {
                         variant = requestedVariant % (requestedVariant - variant);
                     }
-                }
-                while (variant > 0);
+                } while (variant > 0);
             }
             return sysVoice;
         }
 
-        private static int CalcMatchValue(CultureInfo culture, VoiceGender gender, VoiceAge age, VoiceInfo voiceInfo)
+        private static int CalcMatchValue(
+            CultureInfo culture,
+            VoiceGender gender,
+            VoiceAge age,
+            VoiceInfo voiceInfo
+        )
         {
             int matchValue;
 
@@ -1367,7 +1525,10 @@ namespace System.Speech.Internal.Synthesis
             try
             {
                 Assembly assembly;
-                if (!string.IsNullOrEmpty(voiceInfo.AssemblyName) && (assembly = Assembly.Load(voiceInfo.AssemblyName)) != null)
+                if (
+                    !string.IsNullOrEmpty(voiceInfo.AssemblyName)
+                    && (assembly = Assembly.Load(voiceInfo.AssemblyName)) != null
+                )
                 {
                     Type[] types = assembly.GetTypes();
                     TtsEngineSsml ssmlEngine = null;
@@ -1376,7 +1537,16 @@ namespace System.Speech.Internal.Synthesis
                         if (type.IsSubclassOf(typeof(TtsEngineSsml)))
                         {
                             string[] args = new string[] { voiceInfo.Clsid };
-                            ssmlEngine = assembly.CreateInstance(type.ToString(), false, BindingFlags.Default, null, args, CultureInfo.CurrentUICulture, null) as TtsEngineSsml;
+                            ssmlEngine =
+                                assembly.CreateInstance(
+                                    type.ToString(),
+                                    false,
+                                    BindingFlags.Default,
+                                    null,
+                                    args,
+                                    CultureInfo.CurrentUICulture,
+                                    null
+                                ) as TtsEngineSsml;
                             break;
                         }
                     }
@@ -1387,15 +1557,9 @@ namespace System.Speech.Internal.Synthesis
                     }
                 }
             }
-            catch (ArgumentException)
-            {
-            }
-            catch (IOException)
-            {
-            }
-            catch (BadImageFormatException)
-            {
-            }
+            catch (ArgumentException) { }
+            catch (IOException) { }
+            catch (BadImageFormatException) { }
             return engineProxy;
         }
 
@@ -1414,26 +1578,20 @@ namespace System.Speech.Internal.Synthesis
                         ITtsEngine iTtsEngine = engine as ITtsEngine;
                         if (iTtsEngine != null)
                         {
-                            engineProxy = new TtsProxySapi(iTtsEngine, ComEngineSite, voiceInfo.Culture.LCID);
+                            engineProxy = new TtsProxySapi(
+                                iTtsEngine,
+                                ComEngineSite,
+                                voiceInfo.Culture.LCID
+                            );
                         }
                     }
                 }
             }
-            catch (ArgumentException)
-            {
-            }
-            catch (IOException)
-            {
-            }
-            catch (BadImageFormatException)
-            {
-            }
-            catch (COMException)
-            {
-            }
-            catch (FormatException)
-            {
-            }
+            catch (ArgumentException) { }
+            catch (IOException) { }
+            catch (BadImageFormatException) { }
+            catch (COMException) { }
+            catch (FormatException) { }
             return engineProxy;
         }
 
@@ -1454,10 +1612,25 @@ namespace System.Speech.Internal.Synthesis
                         // Try to load a default voice from the default token parameters
                         VoiceGender gender = VoiceGender.NotSet;
                         VoiceAge age = VoiceAge.NotSet;
-                        SsmlParserHelpers.TryConvertGender(defaultVoice.Gender.ToLowerInvariant(), out gender);
-                        SsmlParserHelpers.TryConvertAge(defaultVoice.Age.ToLowerInvariant(), out age);
+                        SsmlParserHelpers.TryConvertGender(
+                            defaultVoice.Gender.ToLowerInvariant(),
+                            out gender
+                        );
+                        SsmlParserHelpers.TryConvertAge(
+                            defaultVoice.Age.ToLowerInvariant(),
+                            out age
+                        );
 
-                        _defaultVoice = GetEngineWithVoice(null, new VoiceInfo(defaultVoice), defaultVoice.TokenName(), defaultVoice.Culture, gender, age, 1, switchContext);
+                        _defaultVoice = GetEngineWithVoice(
+                            null,
+                            new VoiceInfo(defaultVoice),
+                            defaultVoice.TokenName(),
+                            defaultVoice.Culture,
+                            gender,
+                            age,
+                            1,
+                            switchContext
+                        );
 
                         // If failed to get the default, then reset the default token to null.
                         defaultVoice = null;
@@ -1466,8 +1639,18 @@ namespace System.Speech.Internal.Synthesis
                     if (_defaultVoice == null)
                     {
                         // Try to find a default voice that matches the current UI culture
-                        VoiceInfo defaultInfo = defaultVoice != null ? new VoiceInfo(defaultVoice) : null;
-                        _defaultVoice = GetEngineWithVoice(null, defaultInfo, null, CultureInfo.CurrentUICulture, VoiceGender.NotSet, VoiceAge.NotSet, 1, switchContext);
+                        VoiceInfo defaultInfo =
+                            defaultVoice != null ? new VoiceInfo(defaultVoice) : null;
+                        _defaultVoice = GetEngineWithVoice(
+                            null,
+                            defaultInfo,
+                            null,
+                            CultureInfo.CurrentUICulture,
+                            VoiceGender.NotSet,
+                            VoiceAge.NotSet,
+                            1,
+                            switchContext
+                        );
                     }
                     _defaultVoiceInitialized = true;
                     _currentVoice = _defaultVoice;
@@ -1489,7 +1672,9 @@ namespace System.Speech.Internal.Synthesis
                     {
                         if (voiceToken != null && voiceToken.Attributes != null)
                         {
-                            voices.Add(new InstalledVoice(voiceSynthesizer, new VoiceInfo(voiceToken)));
+                            voices.Add(
+                                new InstalledVoice(voiceSynthesizer, new VoiceInfo(voiceToken))
+                            );
                         }
                     }
                 }
@@ -1549,12 +1734,25 @@ namespace System.Speech.Internal.Synthesis
 
                 case TtsEventId.WordBoundary:
                     // SpeakProgressChanged
-                    OnSpeakProgress(new SpeakProgressEventArgs(prompt, ttsEvent.AudioPosition, (int)ttsEvent.LParam, (int)ttsEvent.WParam));
+                    OnSpeakProgress(
+                        new SpeakProgressEventArgs(
+                            prompt,
+                            ttsEvent.AudioPosition,
+                            (int)ttsEvent.LParam,
+                            (int)ttsEvent.WParam
+                        )
+                    );
                     break;
 
                 case TtsEventId.Bookmark:
                     // BookmarkDetected
-                    OnBookmarkReached(new BookmarkReachedEventArgs(prompt, ttsEvent.Bookmark, ttsEvent.AudioPosition));
+                    OnBookmarkReached(
+                        new BookmarkReachedEventArgs(
+                            prompt,
+                            ttsEvent.Bookmark,
+                            ttsEvent.AudioPosition
+                        )
+                    );
                     break;
 
                 case TtsEventId.VoiceChange:
@@ -1564,24 +1762,30 @@ namespace System.Speech.Internal.Synthesis
 
                 case TtsEventId.Phoneme:
                     // SynthesizePhoneme
-                    OnPhonemeReached(new PhonemeReachedEventArgs(
-                        prompt,                                             // Prompt
-                        ttsEvent.Phoneme,                                   // Current phoneme
-                        ttsEvent.AudioPosition,                             // audioPosition
-                        ttsEvent.PhonemeDuration,
-                        ttsEvent.PhonemeEmphasis,
-                        ttsEvent.NextPhoneme));                             // next phoneme
+                    OnPhonemeReached(
+                        new PhonemeReachedEventArgs(
+                            prompt, // Prompt
+                            ttsEvent.Phoneme, // Current phoneme
+                            ttsEvent.AudioPosition, // audioPosition
+                            ttsEvent.PhonemeDuration,
+                            ttsEvent.PhonemeEmphasis,
+                            ttsEvent.NextPhoneme
+                        )
+                    ); // next phoneme
                     break;
 
                 case TtsEventId.Viseme:
                     // SynthesizeViseme
-                    OnVisemeReached(new VisemeReachedEventArgs(
-                        prompt,                                             // Prompt
-                        (int)ttsEvent.LParam & 0xFFFF,                   // currentViseme
-                        ttsEvent.AudioPosition,                             // audioPosition
-                        TimeSpan.FromMilliseconds(ttsEvent.WParam >> 16),  // duration
-                        (SynthesizerEmphasis)((uint)ttsEvent.LParam >> 16),      // Emphasis
-                        (int)(ttsEvent.WParam & 0xFFFF)));                 // nextViseme
+                    OnVisemeReached(
+                        new VisemeReachedEventArgs(
+                            prompt, // Prompt
+                            (int)ttsEvent.LParam & 0xFFFF, // currentViseme
+                            ttsEvent.AudioPosition, // audioPosition
+                            TimeSpan.FromMilliseconds(ttsEvent.WParam >> 16), // duration
+                            (SynthesizerEmphasis)((uint)ttsEvent.LParam >> 16), // Emphasis
+                            (int)(ttsEvent.WParam & 0xFFFF)
+                        )
+                    ); // nextViseme
                     break;
 
                 default:
@@ -1635,6 +1839,7 @@ namespace System.Speech.Internal.Synthesis
                 }
             }
         }
+
         private void QueuePrompt(Prompt prompt)
         {
             // Call Sapi Speak with the appropriate flags based on mediaType
@@ -1673,14 +1878,22 @@ namespace System.Speech.Internal.Synthesis
             }
 
             //--- Add the Speak info to the pending TTS rendering list
-            AddSpeakParameters(new Parameters(Action.SpeakText, new ParametersSpeak(textToSpeak, prompt, fIsXml, null)));
+            AddSpeakParameters(
+                new Parameters(
+                    Action.SpeakText,
+                    new ParametersSpeak(textToSpeak, prompt, fIsXml, null)
+                )
+            );
         }
 
         private void SpeakStream(Uri audio, Prompt prompt)
         {
             //--- Add the Speak info to the pending TTS rendering list
-            AddSpeakParameters(new Parameters(Action.SpeakText, new ParametersSpeak(null, prompt, false, audio)));
+            AddSpeakParameters(
+                new Parameters(Action.SpeakText, new ParametersSpeak(null, prompt, false, audio))
+            );
         }
+
         private void SetInterest(int ttsInterest)
         {
             _ttsInterest = ttsInterest;
@@ -1807,7 +2020,8 @@ namespace System.Speech.Internal.Synthesis
 
         private const string defaultVoiceRate = "DefaultTTSRate";
 
-        private AsyncSerializedWorker _asyncWorker, _asyncWorkerUI;
+        private AsyncSerializedWorker _asyncWorker,
+            _asyncWorkerUI;
 
         // Prompt Engine
         private const bool _pexml = false;
@@ -1815,7 +2029,8 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Could be a phrase of an SSML doc or a file reference
         /// </summary>
-        private int _ttsEvents = (1 << (int)TtsEventId.StartInputStream) | (1 << (int)TtsEventId.EndInputStream);
+        private int _ttsEvents =
+            (1 << (int)TtsEventId.StartInputStream) | (1 << (int)TtsEventId.EndInputStream);
 
         // make sure the object is always in safe state
         private object _thisObjectLock = new();
@@ -1824,7 +2039,14 @@ namespace System.Speech.Internal.Synthesis
 
         private WeakReference _speechSyntesizer;
 
-        private readonly string[] _xmlEscapeStrings = new string[] { "&quot;", "&apos;", "&amp;", "&lt;", "&gt;" };
+        private readonly string[] _xmlEscapeStrings = new string[]
+        {
+            "&quot;",
+            "&apos;",
+            "&amp;",
+            "&lt;",
+            "&gt;",
+        };
         private readonly char[] _xmlEscapeChars = new char[] { '"', '\'', '&', '<', '>' };
 
         #endregion

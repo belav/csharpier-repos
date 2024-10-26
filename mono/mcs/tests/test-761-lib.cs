@@ -2,7 +2,7 @@
 
 using System;
 
-public class DerivedAttribute : BaseAttribute {}
+public class DerivedAttribute : BaseAttribute { }
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-public class BaseAttribute : System.Attribute {}
+public class BaseAttribute : System.Attribute { }

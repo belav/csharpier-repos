@@ -80,7 +80,8 @@ public class TicketSerializerTests
     [ConditionalFact]
     [FrameworkSkipCondition(
         RuntimeFrameworks.Mono,
-        SkipReason = "Test fails with Mono 4.0.4. Build rarely reaches testing with Mono 4.2.1")]
+        SkipReason = "Test fails with Mono 4.0.4. Build rarely reaches testing with Mono 4.2.1"
+    )]
     public void CanRoundTripClaimProperties()
     {
         var serializer = new TicketSerializer();

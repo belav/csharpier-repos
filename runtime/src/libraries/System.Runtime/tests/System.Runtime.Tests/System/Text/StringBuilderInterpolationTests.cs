@@ -12,7 +12,8 @@ namespace System.Text.Tests
         public void Append_Nop()
         {
             var sb = new StringBuilder();
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(1, 2, sb);
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(1, 2, sb);
 
             Assert.Same(sb, sb.Append(ref iab));
             Assert.Same(sb, sb.Append(CultureInfo.InvariantCulture, ref iab));
@@ -24,7 +25,8 @@ namespace System.Text.Tests
         public void AppendLine_AppendsNewLine()
         {
             var sb = new StringBuilder();
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(1, 2, sb);
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(1, 2, sb);
 
             Assert.Same(sb, sb.AppendLine(ref iab));
             Assert.Same(sb, sb.AppendLine(CultureInfo.InvariantCulture, ref iab));
@@ -45,9 +47,24 @@ namespace System.Text.Tests
 
             new StringBuilder.AppendInterpolatedStringHandler(baseLength, holeCount, sb);
 
-            foreach (IFormatProvider provider in new IFormatProvider[] { null, new ConcatFormatter(), CultureInfo.InvariantCulture, CultureInfo.CurrentCulture, new CultureInfo("en-US"), new CultureInfo("fr-FR") })
+            foreach (
+                IFormatProvider provider in new IFormatProvider[]
+                {
+                    null,
+                    new ConcatFormatter(),
+                    CultureInfo.InvariantCulture,
+                    CultureInfo.CurrentCulture,
+                    new CultureInfo("en-US"),
+                    new CultureInfo("fr-FR"),
+                }
+            )
             {
-                new StringBuilder.AppendInterpolatedStringHandler(baseLength, holeCount, sb, provider);
+                new StringBuilder.AppendInterpolatedStringHandler(
+                    baseLength,
+                    holeCount,
+                    sb,
+                    provider
+                );
             }
         }
 
@@ -56,7 +73,8 @@ namespace System.Text.Tests
         {
             var expected = new StringBuilder();
             var actual = new StringBuilder();
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
 
             foreach (string s in new[] { "", "a", "bc", "def", "this is a long string", "!" })
             {
@@ -74,7 +92,8 @@ namespace System.Text.Tests
         {
             var expected = new StringBuilder();
             var actual = new StringBuilder();
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
 
             foreach (string s in new[] { "", "a", "bc", "def", "this is a longer string", "!" })
             {
@@ -89,11 +108,17 @@ namespace System.Text.Tests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // span, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        s
+                    );
                     iab.AppendFormatted((ReadOnlySpan<char>)s, alignment);
 
                     // span, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        s
+                    );
                     iab.AppendFormatted((ReadOnlySpan<char>)s, alignment, "X2");
                 }
             }
@@ -108,9 +133,12 @@ namespace System.Text.Tests
         {
             var expected = new StringBuilder();
             var actual = new StringBuilder();
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
 
-            foreach (string s in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" })
+            foreach (
+                string s in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" }
+            )
             {
                 // string
                 expected.AppendFormat("{0}", s);
@@ -123,11 +151,17 @@ namespace System.Text.Tests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // string, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        s
+                    );
                     iab.AppendFormatted(s, alignment);
 
                     // string, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", s);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        s
+                    );
                     iab.AppendFormatted(s, alignment, "X2");
                 }
             }
@@ -144,7 +178,8 @@ namespace System.Text.Tests
 
             var expected = new StringBuilder();
             var actual = new StringBuilder();
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual, provider);
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual, provider);
 
             foreach (string s in new[] { null, "", "a" })
             {
@@ -175,17 +210,34 @@ namespace System.Text.Tests
         {
             var expected = new StringBuilder();
             var actual = new StringBuilder();
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
 
-            foreach (string rawInput in new[] { null, "", "a", "bc", "def", "this is a longer string", "!" })
-            {
-                foreach (object o in new object[]
+            foreach (
+                string rawInput in new[]
                 {
-                    rawInput, // raw string directly; ToString will return itself
-                    new StringWrapper(rawInput), // wrapper object that returns string from ToString
-                    new FormattableStringWrapper(rawInput), // IFormattable wrapper around string
-                    new SpanFormattableStringWrapper(rawInput) // ISpanFormattable wrapper around string
-                })
+                    null,
+                    "",
+                    "a",
+                    "bc",
+                    "def",
+                    "this is a longer string",
+                    "!",
+                }
+            )
+            {
+                foreach (
+                    object o in new object[]
+                    {
+                        rawInput, // raw string directly; ToString will return itself
+                        new StringWrapper(rawInput), // wrapper object that returns string from ToString
+                        new FormattableStringWrapper(rawInput), // IFormattable wrapper around string
+                        new SpanFormattableStringWrapper(
+                            rawInput
+                        ) // ISpanFormattable wrapper around string
+                        ,
+                    }
+                )
                 {
                     // object
                     expected.AppendFormat("{0}", o);
@@ -208,7 +260,10 @@ namespace System.Text.Tests
                     foreach (int alignment in new[] { 0, 3, -3 })
                     {
                         // object, alignment
-                        expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", o);
+                        expected.AppendFormat(
+                            "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                            o
+                        );
                         iab.AppendFormatted(o, alignment);
                         if (o is IHasToStringState tss3)
                         {
@@ -217,7 +272,10 @@ namespace System.Text.Tests
                         }
 
                         // object, alignment, format
-                        expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", o);
+                        expected.AppendFormat(
+                            "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                            o
+                        );
                         iab.AppendFormatted(o, alignment, "X2");
                         if (o is IHasToStringState tss4)
                         {
@@ -238,9 +296,16 @@ namespace System.Text.Tests
         {
             var provider = new CultureInfo("en-US");
             var sb = new StringBuilder();
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(1, 2, sb, provider);
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(1, 2, sb, provider);
 
-            foreach (IHasToStringState tss in new IHasToStringState[] { new FormattableStringWrapper("hello"), new SpanFormattableStringWrapper("hello") })
+            foreach (
+                IHasToStringState tss in new IHasToStringState[]
+                {
+                    new FormattableStringWrapper("hello"),
+                    new SpanFormattableStringWrapper("hello"),
+                }
+            )
             {
                 iab.AppendFormatted(tss);
                 Assert.Same(provider, tss.ToStringState.LastProvider);
@@ -265,17 +330,27 @@ namespace System.Text.Tests
 
             var expected = new StringBuilder();
             var actual = new StringBuilder();
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual, provider);
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual, provider);
 
             foreach (string s in new[] { null, "", "a" })
             {
-                foreach (IHasToStringState tss in new IHasToStringState[] { new FormattableStringWrapper(s), new SpanFormattableStringWrapper(s) })
+                foreach (
+                    IHasToStringState tss in new IHasToStringState[]
+                    {
+                        new FormattableStringWrapper(s),
+                        new SpanFormattableStringWrapper(s),
+                    }
+                )
                 {
                     void AssertTss(IHasToStringState tss, string format)
                     {
                         Assert.Equal(format, tss.ToStringState.LastFormat);
                         Assert.Same(provider, tss.ToStringState.LastProvider);
-                        Assert.Equal(ToStringMode.ICustomFormatterFormat, tss.ToStringState.ToStringMode);
+                        Assert.Equal(
+                            ToStringMode.ICustomFormatterFormat,
+                            tss.ToStringState.ToStringMode
+                        );
                     }
 
                     // object
@@ -312,7 +387,8 @@ namespace System.Text.Tests
             {
                 var expected = new StringBuilder();
                 var actual = new StringBuilder();
-                StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
+                StringBuilder.AppendInterpolatedStringHandler iab =
+                    new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual);
 
                 // struct
                 expected.AppendFormat("{0}", t);
@@ -329,13 +405,21 @@ namespace System.Text.Tests
                 foreach (int alignment in new[] { 0, 3, -3 })
                 {
                     // struct, alignment
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}", t);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + "}",
+                        t
+                    );
                     iab.AppendFormatted(t, alignment);
-                    Assert.True(string.IsNullOrEmpty(((IHasToStringState)t).ToStringState.LastFormat));
+                    Assert.True(
+                        string.IsNullOrEmpty(((IHasToStringState)t).ToStringState.LastFormat)
+                    );
                     AssertModeMatchesType(((IHasToStringState)t));
 
                     // struct, alignment, format
-                    expected.AppendFormat("{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}", t);
+                    expected.AppendFormat(
+                        "{0," + alignment.ToString(CultureInfo.InvariantCulture) + ":X2}",
+                        t
+                    );
                     iab.AppendFormatted(t, alignment, "X2");
                     Assert.Equal("X2", ((IHasToStringState)t).ToStringState.LastFormat);
                     AssertModeMatchesType(((IHasToStringState)t));
@@ -359,7 +443,8 @@ namespace System.Text.Tests
             {
                 var provider = new CultureInfo("en-US");
                 var sb = new StringBuilder();
-                StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(1, 2, sb, provider);
+                StringBuilder.AppendInterpolatedStringHandler iab =
+                    new StringBuilder.AppendInterpolatedStringHandler(1, 2, sb, provider);
 
                 iab.AppendFormatted(t);
                 Assert.Same(provider, ((IHasToStringState)t).ToStringState.LastProvider);
@@ -393,12 +478,16 @@ namespace System.Text.Tests
                 {
                     Assert.Equal(format, ((IHasToStringState)tss).ToStringState.LastFormat);
                     Assert.Same(provider, ((IHasToStringState)tss).ToStringState.LastProvider);
-                    Assert.Equal(ToStringMode.ICustomFormatterFormat, ((IHasToStringState)tss).ToStringState.ToStringMode);
+                    Assert.Equal(
+                        ToStringMode.ICustomFormatterFormat,
+                        ((IHasToStringState)tss).ToStringState.ToStringMode
+                    );
                 }
 
                 var expected = new StringBuilder();
                 var actual = new StringBuilder();
-                StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual, provider);
+                StringBuilder.AppendInterpolatedStringHandler iab =
+                    new StringBuilder.AppendInterpolatedStringHandler(0, 0, actual, provider);
 
                 // struct
                 expected.AppendFormat(provider, "{0}", t);
@@ -436,27 +525,39 @@ namespace System.Text.Tests
         [InlineData(true)]
         public void AppendFormatted_InvalidTryFormatCharsWritten_Throws(bool tooBig) // vs tooSmall
         {
-            StringBuilder.AppendInterpolatedStringHandler iab = new StringBuilder.AppendInterpolatedStringHandler(0, 0, new StringBuilder());
-            Assert.Throws<FormatException>(() => iab.AppendFormatted(new InvalidCharsWritten(tooBig)));
+            StringBuilder.AppendInterpolatedStringHandler iab =
+                new StringBuilder.AppendInterpolatedStringHandler(0, 0, new StringBuilder());
+            Assert.Throws<FormatException>(
+                () => iab.AppendFormatted(new InvalidCharsWritten(tooBig))
+            );
         }
 
-        private static void AssertModeMatchesType<T>(T tss) where T : IHasToStringState
+        private static void AssertModeMatchesType<T>(T tss)
+            where T : IHasToStringState
         {
             ToStringMode expected =
-                tss is ISpanFormattable ? ToStringMode.ISpanFormattableTryFormat :
-                tss is IFormattable ? ToStringMode.IFormattableToString :
-                ToStringMode.ObjectToString;
+                tss is ISpanFormattable ? ToStringMode.ISpanFormattableTryFormat
+                : tss is IFormattable ? ToStringMode.IFormattableToString
+                : ToStringMode.ObjectToString;
             Assert.Equal(expected, tss.ToStringState.ToStringMode);
         }
 
-        private sealed class SpanFormattableStringWrapper : IFormattable, ISpanFormattable, IHasToStringState
+        private sealed class SpanFormattableStringWrapper
+            : IFormattable,
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly string _value;
             public ToStringState ToStringState { get; } = new ToStringState();
 
             public SpanFormattableStringWrapper(string value) => _value = value;
 
-            public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider provider)
+            public bool TryFormat(
+                Span<char> destination,
+                out int charsWritten,
+                ReadOnlySpan<char> format,
+                IFormatProvider provider
+            )
             {
                 ToStringState.LastFormat = format.ToString();
                 ToStringState.LastProvider = provider;
@@ -496,7 +597,10 @@ namespace System.Text.Tests
             }
         }
 
-        private struct SpanFormattableInt32Wrapper : IFormattable, ISpanFormattable, IHasToStringState
+        private struct SpanFormattableInt32Wrapper
+            : IFormattable,
+                ISpanFormattable,
+                IHasToStringState
         {
             private readonly int _value;
             public ToStringState ToStringState { get; }
@@ -507,7 +611,12 @@ namespace System.Text.Tests
                 _value = value;
             }
 
-            public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider provider)
+            public bool TryFormat(
+                Span<char> destination,
+                out int charsWritten,
+                ReadOnlySpan<char> format,
+                IFormatProvider provider
+            )
             {
                 ToStringState.LastFormat = format.ToString();
                 ToStringState.LastProvider = provider;
@@ -616,7 +725,8 @@ namespace System.Text.Tests
 
         private sealed class ConcatFormatter : IFormatProvider, ICustomFormatter
         {
-            public object GetFormat(Type formatType) => formatType == typeof(ICustomFormatter) ? this : null;
+            public object GetFormat(Type formatType) =>
+                formatType == typeof(ICustomFormatter) ? this : null;
 
             public string Format(string format, object arg, IFormatProvider formatProvider)
             {
@@ -640,7 +750,12 @@ namespace System.Text.Tests
 
             public InvalidCharsWritten(bool tooBig) => _tooBig = tooBig;
 
-            public bool TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider provider)
+            public bool TryFormat(
+                Span<char> destination,
+                out int charsWritten,
+                ReadOnlySpan<char> format,
+                IFormatProvider provider
+            )
             {
                 charsWritten = _tooBig ? destination.Length + 1 : -1;
                 return true;

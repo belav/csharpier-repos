@@ -6,16 +6,15 @@
 
 namespace System.IdentityModel
 {
-    using System.Xml;
-    using System.Diagnostics;
-
     using System.Collections.Generic;
-    using System.IdentityModel.Tokens;
-    using System.IdentityModel.Selectors;
-    using System.Xml.Schema;
-    using System.Text;
-    using System.IO;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Schema;
 
     // Merged System.IdentityModel.XmlUtil with Microsoft.IdentityModel.XmlUtil by porting methods from the Microsoft.IdentityModel.XmlUtil to this.
     static class XmlUtil
@@ -26,7 +25,6 @@ namespace System.IdentityModel
         public const string LanguagePrefix = "xml";
         public const string LanguageLocalname = "lang";
         public const string LanguageAttribute = LanguagePrefix + ":" + LanguageLocalname;
-
 
         //public static string GetXmlLangAttribute(XmlReader reader)
         //{
@@ -56,7 +54,8 @@ namespace System.IdentityModel
         public static string TrimEnd(string s)
         {
             int i;
-            for (i = s.Length; i > 0 && IsWhitespace(s[i - 1]); i--);
+            for (i = s.Length; i > 0 && IsWhitespace(s[i - 1]); i--)
+                ;
 
             if (i != s.Length)
             {
@@ -69,7 +68,8 @@ namespace System.IdentityModel
         public static string TrimStart(string s)
         {
             int i;
-            for (i = 0; i < s.Length && IsWhitespace(s[i]); i++);
+            for (i = 0; i < s.Length && IsWhitespace(s[i]); i++)
+                ;
 
             if (i != 0)
             {
@@ -82,14 +82,16 @@ namespace System.IdentityModel
         public static string Trim(string s)
         {
             int i;
-            for (i = 0; i < s.Length && IsWhitespace(s[i]); i++);
+            for (i = 0; i < s.Length && IsWhitespace(s[i]); i++)
+                ;
             if (i >= s.Length)
             {
                 return string.Empty;
             }
 
             int j;
-            for (j = s.Length; j > 0 && IsWhitespace(s[j - 1]); j--);
+            for (j = s.Length; j > 0 && IsWhitespace(s[j - 1]); j--)
+                ;
             DiagnosticUtility.DebugAssert(j > i, "Logic error in XmlUtil.Trim().");
 
             if (i != 0 || j != s.Length)
@@ -135,7 +137,11 @@ namespace System.IdentityModel
             return ResolveQName(reader, xsiType);
         }
 
-        public static bool EqualsQName(XmlQualifiedName qname, string localName, string namespaceUri)
+        public static bool EqualsQName(
+            XmlQualifiedName qname,
+            string localName,
+            string namespaceUri
+        )
         {
             return null != qname
                 && StringComparer.Ordinal.Equals(localName, qname.Name)
@@ -171,12 +177,21 @@ namespace System.IdentityModel
             return new XmlQualifiedName(name, ns);
         }
 
-        public static void ValidateXsiType(XmlReader reader, string expectedTypeName, string expectedTypeNamespace)
+        public static void ValidateXsiType(
+            XmlReader reader,
+            string expectedTypeName,
+            string expectedTypeNamespace
+        )
         {
             ValidateXsiType(reader, expectedTypeName, expectedTypeNamespace, false);
         }
 
-        public static void ValidateXsiType(XmlReader reader, string expectedTypeName, string expectedTypeNamespace, bool requireDeclaration)
+        public static void ValidateXsiType(
+            XmlReader reader,
+            string expectedTypeName,
+            string expectedTypeNamespace,
+            bool requireDeclaration
+        )
         {
             XmlQualifiedName declaredType = GetXsiType(reader);
 
@@ -184,19 +199,36 @@ namespace System.IdentityModel
             {
                 if (requireDeclaration)
                 {
-                    throw DiagnosticUtility.ThrowHelperXml(reader,
-                        SR.GetString(SR.ID4104, reader.LocalName, reader.NamespaceURI));
+                    throw DiagnosticUtility.ThrowHelperXml(
+                        reader,
+                        SR.GetString(SR.ID4104, reader.LocalName, reader.NamespaceURI)
+                    );
                 }
             }
-            else if (!(StringComparer.Ordinal.Equals(expectedTypeNamespace, declaredType.Namespace)
-                && StringComparer.Ordinal.Equals(expectedTypeName, declaredType.Name)))
+            else if (
+                !(
+                    StringComparer.Ordinal.Equals(expectedTypeNamespace, declaredType.Namespace)
+                    && StringComparer.Ordinal.Equals(expectedTypeName, declaredType.Name)
+                )
+            )
             {
-                throw DiagnosticUtility.ThrowHelperXml(reader,
-                    SR.GetString(SR.ID4102, expectedTypeName, expectedTypeNamespace, declaredType.Name, declaredType.Namespace));
+                throw DiagnosticUtility.ThrowHelperXml(
+                    reader,
+                    SR.GetString(
+                        SR.ID4102,
+                        expectedTypeName,
+                        expectedTypeNamespace,
+                        declaredType.Name,
+                        declaredType.Namespace
+                    )
+                );
             }
         }
 
-        public static string SerializeSecurityKeyIdentifier(SecurityKeyIdentifier ski, SecurityTokenSerializer tokenSerializer)
+        public static string SerializeSecurityKeyIdentifier(
+            SecurityKeyIdentifier ski,
+            SecurityTokenSerializer tokenSerializer
+        )
         {
             StringBuilder sb = new StringBuilder();
             using (StringWriter stringWriter = new StringWriter(sb, CultureInfo.InvariantCulture))
@@ -220,19 +252,32 @@ namespace System.IdentityModel
             }
 
             // The first character of the ID should be a letter, '_' or ':'
-            return (((val[0] >= 'A') && (val[0] <= 'Z')) ||
-                ((val[0] >= 'a') && (val[0] <= 'z')) ||
-                (val[0] == '_') || (val[0] == ':'));
+            return (
+                ((val[0] >= 'A') && (val[0] <= 'Z'))
+                || ((val[0] >= 'a') && (val[0] <= 'z'))
+                || (val[0] == '_')
+                || (val[0] == ':')
+            );
         }
 
-        public static void WriteElementStringAsUniqueId(XmlDictionaryWriter writer, XmlDictionaryString localName, XmlDictionaryString ns, string id)
+        public static void WriteElementStringAsUniqueId(
+            XmlDictionaryWriter writer,
+            XmlDictionaryString localName,
+            XmlDictionaryString ns,
+            string id
+        )
         {
             writer.WriteStartElement(localName, ns);
             writer.WriteValue(id);
             writer.WriteEndElement();
         }
 
-        public static void WriteElementContentAsInt64(XmlDictionaryWriter writer, XmlDictionaryString localName, XmlDictionaryString ns, Int64 value)
+        public static void WriteElementContentAsInt64(
+            XmlDictionaryWriter writer,
+            XmlDictionaryString localName,
+            XmlDictionaryString ns,
+            Int64 value
+        )
         {
             writer.WriteStartElement(localName, ns);
             writer.WriteValue(value);

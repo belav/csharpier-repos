@@ -10,5 +10,5 @@ public enum BrowserKind
 {
     Chromium = 1,
     Firefox = 2,
-    Webkit = 4
+    Webkit = 4,
 }

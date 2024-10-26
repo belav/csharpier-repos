@@ -124,7 +124,8 @@ namespace System.Text.Json
         /// <summary>
         /// Whether the current frame needs to write out any metadata.
         /// </summary>
-        public readonly bool CurrentContainsMetadata => NewReferenceId != null || PolymorphicTypeDiscriminator != null;
+        public readonly bool CurrentContainsMetadata =>
+            NewReferenceId != null || PolymorphicTypeDiscriminator != null;
 
         private void EnsurePushCapacity()
         {
@@ -142,9 +143,13 @@ namespace System.Text.Json
             JsonTypeInfo jsonTypeInfo,
             object? rootValueBoxed = null,
             bool supportContinuation = false,
-            bool supportAsync = false)
+            bool supportAsync = false
+        )
         {
-            Debug.Assert(!supportAsync || supportContinuation, "supportAsync must imply supportContinuation");
+            Debug.Assert(
+                !supportAsync || supportContinuation,
+                "supportAsync must imply supportContinuation"
+            );
             Debug.Assert(!IsContinuation);
             Debug.Assert(CurrentDepth == 0);
 
@@ -160,8 +165,11 @@ namespace System.Text.Json
                 Debug.Assert(options.ReferenceHandler != null);
                 ReferenceResolver = options.ReferenceHandler.CreateResolver(writing: true);
 
-                if (options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.IgnoreCycles &&
-                    rootValueBoxed is not null && jsonTypeInfo.Type.IsValueType)
+                if (
+                    options.ReferenceHandlingStrategy == ReferenceHandlingStrategy.IgnoreCycles
+                    && rootValueBoxed is not null
+                    && jsonTypeInfo.Type.IsValueType
+                )
                 {
                     // Root object is a boxed value type, we need to push it to the reference stack before starting the serializer.
                     ReferenceResolver.PushReferenceForCycleDetection(rootValueBoxed);
@@ -174,7 +182,10 @@ namespace System.Text.Json
         /// </summary>
         public readonly JsonTypeInfo PeekNestedJsonTypeInfo()
         {
-            Debug.Assert(Current.PolymorphicSerializationState != PolymorphicSerializationState.PolymorphicReEntryStarted);
+            Debug.Assert(
+                Current.PolymorphicSerializationState
+                    != PolymorphicSerializationState.PolymorphicReEntryStarted
+            );
             return _count == 0 ? Current.JsonTypeInfo : Current.JsonPropertyInfo!.JsonTypeInfo;
         }
 
@@ -182,9 +193,15 @@ namespace System.Text.Json
         {
             if (_continuationCount == 0)
             {
-                Debug.Assert(Current.PolymorphicSerializationState != PolymorphicSerializationState.PolymorphicReEntrySuspended);
+                Debug.Assert(
+                    Current.PolymorphicSerializationState
+                        != PolymorphicSerializationState.PolymorphicReEntrySuspended
+                );
 
-                if (_count == 0 && Current.PolymorphicSerializationState == PolymorphicSerializationState.None)
+                if (
+                    _count == 0
+                    && Current.PolymorphicSerializationState == PolymorphicSerializationState.None
+                )
                 {
                     // Perf enhancement: do not create a new stackframe on the first push operation
                     // unless the converter has primed the current frame for polymorphic dispatch.
@@ -204,7 +221,8 @@ namespace System.Text.Json
                     Current.JsonTypeInfo = jsonTypeInfo;
                     Current.JsonPropertyInfo = jsonTypeInfo.PropertyInfoForTypeInfo;
                     // Allow number handling on property to win over handling on type.
-                    Current.NumberHandling = numberHandling ?? Current.JsonPropertyInfo.EffectiveNumberHandling;
+                    Current.NumberHandling =
+                        numberHandling ?? Current.JsonPropertyInfo.EffectiveNumberHandling;
                 }
             }
             else
@@ -271,8 +289,8 @@ namespace System.Text.Json
             }
         }
 
-        public void AddCompletedAsyncDisposable(IAsyncDisposable asyncDisposable)
-            => (CompletedAsyncDisposables ??= new List<IAsyncDisposable>()).Add(asyncDisposable);
+        public void AddCompletedAsyncDisposable(IAsyncDisposable asyncDisposable) =>
+            (CompletedAsyncDisposables ??= new List<IAsyncDisposable>()).Add(asyncDisposable);
 
         // Asynchronously dispose of any AsyncDisposables that have been scheduled for disposal
         public async ValueTask DisposeCompletedAsyncDisposables()
@@ -347,12 +365,22 @@ namespace System.Text.Json
         {
             Exception? exception = null;
 
-            exception = await DisposeFrame(Current.CollectionEnumerator, Current.AsyncDisposable, exception).ConfigureAwait(false);
+            exception = await DisposeFrame(
+                    Current.CollectionEnumerator,
+                    Current.AsyncDisposable,
+                    exception
+                )
+                .ConfigureAwait(false);
 
             int stackSize = Math.Max(_count, _continuationCount);
             for (int i = 0; i < stackSize - 1; i++)
             {
-                exception = await DisposeFrame(_stack[i].CollectionEnumerator, _stack[i].AsyncDisposable, exception).ConfigureAwait(false);
+                exception = await DisposeFrame(
+                        _stack[i].CollectionEnumerator,
+                        _stack[i].AsyncDisposable,
+                        exception
+                    )
+                    .ConfigureAwait(false);
             }
 
             if (exception is not null)
@@ -360,7 +388,11 @@ namespace System.Text.Json
                 ExceptionDispatchInfo.Capture(exception).Throw();
             }
 
-            static async ValueTask<Exception?> DisposeFrame(IEnumerator? collectionEnumerator, IAsyncDisposable? asyncDisposable, Exception? exception)
+            static async ValueTask<Exception?> DisposeFrame(
+                IEnumerator? collectionEnumerator,
+                IAsyncDisposable? asyncDisposable,
+                Exception? exception
+            )
             {
                 Debug.Assert(!(collectionEnumerator is not null && asyncDisposable is not null));
 
@@ -395,7 +427,11 @@ namespace System.Text.Json
             {
                 0 => (_count - 1, true), // Not a continuation, report previous frames and Current.
                 1 => (0, true), // Continuation of depth 1, just report Current frame.
-                int c => (c, false) // Continuation of depth > 1, report the entire stack.
+                int c => (
+                    c,
+                    false
+                ) // Continuation of depth > 1, report the entire stack.
+                ,
             };
 
             for (int i = 1; i <= frameCount; i++)
@@ -414,8 +450,7 @@ namespace System.Text.Json
             {
                 // Append the property name. Or attempt to get the JSON property name from the property name specified in re-entry.
                 string? propertyName =
-                    frame.JsonPropertyInfo?.MemberName ??
-                    frame.JsonPropertyNameAsString;
+                    frame.JsonPropertyInfo?.MemberName ?? frame.JsonPropertyNameAsString;
 
                 AppendPropertyName(sb, propertyName);
             }
@@ -440,6 +475,7 @@ namespace System.Text.Json
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => $"Path = {PropertyPath()} Current = ConverterStrategy.{Current.JsonPropertyInfo?.EffectiveConverter.ConverterStrategy}, {Current.JsonTypeInfo?.Type.Name}";
+        private string DebuggerDisplay =>
+            $"Path = {PropertyPath()} Current = ConverterStrategy.{Current.JsonPropertyInfo?.EffectiveConverter.ConverterStrategy}, {Current.JsonTypeInfo?.Type.Name}";
     }
 }

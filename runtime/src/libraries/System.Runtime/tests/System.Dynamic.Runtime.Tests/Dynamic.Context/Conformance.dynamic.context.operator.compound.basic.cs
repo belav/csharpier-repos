@@ -46,6 +46,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -53,28 +54,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public dynamic this[object o]
         {
-            get
-            {
-                return o;
-            }
+            get { return o; }
         }
 
         public static long LongPro
         {
-            protected get
-            {
-                return 1L;
-            }
-
-            set
-            {
-            }
+            protected get { return 1L; }
+            set { }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.field02.field02
 {
@@ -88,7 +78,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public delegate int MyDel(int i);
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -122,6 +111,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -129,34 +119,24 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public dynamic this[object o]
         {
-            get
-            {
-                return o;
-            }
+            get { return o; }
         }
 
         public long LongPro
         {
-            protected get
-            {
-                return 1L;
-            }
-
-            set
-            {
-            }
+            protected get { return 1L; }
+            set { }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.field03.field03
 {
     public class Test
     {
         public static dynamic count1 = 1;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -172,8 +152,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.property01.property01
 {
@@ -207,11 +185,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             return 0;
         }
 
-        public string StringProp
-        {
-            get;
-            set;
-        }
+        public string StringProp { get; set; }
 
         public int Method(int i)
         {
@@ -220,16 +194,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public dynamic this[object o]
         {
-            get
-            {
-                return o;
-            }
+            get { return o; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.property02.property02
 {
@@ -243,7 +212,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/55117", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/55117",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -267,11 +239,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             return 0;
         }
 
-        public string StringProp
-        {
-            get;
-            set;
-        }
+        public string StringProp { get; set; }
 
         public int Method(int i)
         {
@@ -280,16 +248,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public dynamic this[object o]
         {
-            get
-            {
-                return o;
-            }
+            get { return o; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.property03.property03
 {
@@ -302,11 +265,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
     public class C
     {
-        public dynamic P
-        {
-            get;
-            set;
-        }
+        public dynamic P { get; set; }
 
         public static dynamic operator +(C lhs, int rhs)
         {
@@ -325,20 +284,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public static int MainMethod()
         {
-            C c = new C()
-            {
-                P = 0
-            }
-
-            ;
+            C c = new C() { P = 0 };
             c += 2;
             return c.P == 2 ? 0 : 1;
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.indexer01.indexer01
 {
@@ -385,15 +337,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         private long _field = 10;
         public long this[dynamic d]
         {
-            get
-            {
-                return _field;
-            }
-
-            set
-            {
-                _field = value;
-            }
+            get { return _field; }
+            set { _field = value; }
         }
 
         public static int Method(int i)
@@ -403,28 +348,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public dynamic this[object o, string m]
         {
-            get
-            {
-                return o;
-            }
+            get { return o; }
         }
 
         public static long LongPro
         {
-            protected get
-            {
-                return 1L;
-            }
-
-            set
-            {
-            }
+            protected get { return 1L; }
+            set { }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.indexer02.indexer02
 {
@@ -474,15 +408,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         private long _field = 10;
         public long this[dynamic d]
         {
-            get
-            {
-                return _field;
-            }
-
-            set
-            {
-                _field = value;
-            }
+            get { return _field; }
+            set { _field = value; }
         }
 
         public static int Method(int i)
@@ -492,28 +419,17 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public dynamic this[object o, string m]
         {
-            get
-            {
-                return o;
-            }
+            get { return o; }
         }
 
         public static long LongPro
         {
-            protected get
-            {
-                return 1L;
-            }
-
-            set
-            {
-            }
+            protected get { return 1L; }
+            set { }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.order01.order01
 {
@@ -546,8 +462,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.order02.order02
 {
     // <Title> Compound operator execute orders.</Title>
@@ -559,7 +473,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod(null));
@@ -581,21 +494,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public short myProvalue;
         public short MyPro
         {
-            internal get
-            {
-                return myProvalue;
-            }
-
-            set
-            {
-                myProvalue = value;
-            }
+            internal get { return myProvalue; }
+            set { myProvalue = value; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.order03.order03
 {
@@ -627,21 +531,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         public dynamic myvalue = 10;
         public dynamic this[object o]
         {
-            get
-            {
-                return myvalue;
-            }
-
-            set
-            {
-                this.myvalue = value;
-            }
+            get { return myvalue; }
+            set { this.myvalue = value; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.order04.order04
 {
@@ -655,6 +550,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public delegate int MyDel(int i);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -672,6 +568,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -680,35 +577,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         private long _this0 = 8;
         public long this[object o]
         {
-            get
-            {
-                return _this0;
-            }
-
-            set
-            {
-                _this0 = value;
-            }
+            get { return _this0; }
+            set { _this0 = value; }
         }
 
         private long _longvalue = 9;
         public long LongPro
         {
-            protected get
-            {
-                return _longvalue;
-            }
-
-            set
-            {
-                _longvalue = value;
-            }
+            protected get { return _longvalue; }
+            set { _longvalue = value; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.order05.order05
 {
@@ -722,6 +603,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public delegate int MyDel(int i);
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -739,6 +621,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -747,35 +630,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         private dynamic _this0 = 8;
         public dynamic this[object o]
         {
-            get
-            {
-                return _this0;
-            }
-
-            set
-            {
-                _this0 = value;
-            }
+            get { return _this0; }
+            set { _this0 = value; }
         }
 
         private long _longvalue = 0;
         public long LongPro
         {
-            protected get
-            {
-                return _longvalue;
-            }
-
-            set
-            {
-                _longvalue = value;
-            }
+            protected get { return _longvalue; }
+            set { _longvalue = value; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.order06.order06
 {
@@ -789,7 +656,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     public class Test
     {
         public delegate int MyDel(int i);
-
 
         public static void DynamicCSharpRunTest()
         {
@@ -807,6 +673,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public long field = 10;
+
         public static int Method(int i)
         {
             return i;
@@ -815,35 +682,19 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         private dynamic _this0 = 8;
         public dynamic this[object o]
         {
-            get
-            {
-                return _this0;
-            }
-
-            set
-            {
-                _this0 = value;
-            }
+            get { return _this0; }
+            set { _this0 = value; }
         }
 
         private long _longvalue = 0;
         public long LongPro
         {
-            protected get
-            {
-                return _longvalue;
-            }
-
-            set
-            {
-                _longvalue = value;
-            }
+            protected get { return _longvalue; }
+            set { _longvalue = value; }
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.context01.context01
 {
@@ -856,7 +707,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
     public class Test
     {
-
         public static void DynamicCSharpRunTest()
         {
             Assert.Equal(0, MainMethod());
@@ -885,9 +735,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             v3 = obj[v2 %= (s_field *= 3.4)] + 100;
             dynamic arr = new[]
             {
-            v1 <<= (int)(v1 >>= 10), v2 *= v2 *= 2, v3 *= v1 * (v1 -= s_field)}
-
-            ;
+                v1 <<= (int)(v1 >>= 10),
+                v2 *= v2 *= 2,
+                v3 *= v1 * (v1 -= s_field),
+            };
             // System.Console.WriteLine("{0}, {1}, {2}", arr[0], arr[1], arr[2]);
             ret &= 3400 == arr[0];
             ret &= (468.18 - arr[1]) < double.Epsilon;
@@ -899,11 +750,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             {
                 a1 = v3 -= v1 += v2,
                 a2 = v1 *= v2 + 1,
-                a3 = v3 /= 1.1f
-            }
-
-            ;
-            System.Console.WriteLine("{0}, {1}, {2}", (object)arr.a1, (object)arr.a2, (object)arr.a3);
+                a3 = v3 /= 1.1f,
+            };
+            System.Console.WriteLine(
+                "{0}, {1}, {2}",
+                (object)arr.a1,
+                (object)arr.a2,
+                (object)arr.a3
+            );
             ret &= (6.6 - arr.a1) < 0.0000001f; // delta ~ 0.00000009f
             ret &= (1.23 - arr.a2) < double.Epsilon;
             ret &= (6 - arr.a3) < double.Epsilon;
@@ -914,14 +768,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         private static dynamic s_field = 10;
         public dynamic Prop
         {
-            get
-            {
-                return 100L;
-            }
-
-            set
-            {
-            }
+            get { return 100L; }
+            set { }
         }
 
         public dynamic Method(short i)
@@ -931,15 +779,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public dynamic this[object o]
         {
-            get
-            {
-                return o;
-            }
+            get { return o; }
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.context02b.context02b
 {
@@ -948,8 +791,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {
@@ -978,25 +821,26 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public dynamic RunTest()
         {
-            dynamic[] darr = new[]
-            {
-            "X", "0", "Y"
-            }
-
-            ;
+            dynamic[] darr = new[] { "X", "0", "Y" };
             List<dynamic> list = new List<dynamic>();
             list.AddRange(darr);
             bool ret = "X0X0Y" == Method()(list[0] += list[1], list[2]);
             ret &= "YX" == this[list[2]](null, darr[0]);
             var va = new List<dynamic>
             {
-            new MySt(null), new MySt(3), new MySt(5), new MySt(7), new MySt(11), new MySt(13)}
-
-            ;
+                new MySt(null),
+                new MySt(3),
+                new MySt(5),
+                new MySt(7),
+                new MySt(11),
+                new MySt(13),
+            };
             var q =
                 from i in new[]
                 {
-                va[1].field *= 11, va[2].field *= va[2].field %= 19, va[3].field += va[4].field *= va[5].field
+                    va[1].field *= 11,
+                    va[2].field *= va[2].field %= 19,
+                    va[3].field += va[4].field *= va[5].field,
                 }
 
                 where (0 < (va[5].field += va[3].field -= 2))
@@ -1027,15 +871,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public delegate dynamic MyDel(dynamic p1, dynamic p2 = default(object), long p3 = 100);
+
         public dynamic Method()
         {
-            MyDel md = delegate (dynamic d, object o, long n)
+            MyDel md = delegate(dynamic d, object o, long n)
             {
                 d += d += o;
                 return d;
-            }
-
-            ;
+            };
             return md;
         }
 
@@ -1043,18 +886,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         {
             get
             {
-                return new MyDel((x, y, z) =>
-                {
-                    return o + y;
-                }
-
+                return new MyDel(
+                    (x, y, z) =>
+                    {
+                        return o + y;
+                    }
                 );
             }
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.context02c.context02c
 {
@@ -1063,8 +904,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {
@@ -1093,25 +934,26 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public dynamic RunTest()
         {
-            dynamic[] darr = new[]
-            {
-            "X", "0", "Y"
-            }
-
-            ;
+            dynamic[] darr = new[] { "X", "0", "Y" };
             List<dynamic> list = new List<dynamic>();
             list.AddRange(darr);
             bool ret = "X0YY" == Method()(list[0] += list[1], list[2]);
             ret &= "YX" == this[list[2]](null, darr[0]);
             var va = new List<dynamic>
             {
-            new MySt(null), new MySt(3), new MySt(5), new MySt(7), new MySt(11), new MySt(13)}
-
-            ;
+                new MySt(null),
+                new MySt(3),
+                new MySt(5),
+                new MySt(7),
+                new MySt(11),
+                new MySt(13),
+            };
             var q =
                 from i in new[]
                 {
-                va[1].field *= 11, va[2].field *= va[2].field %= 19, va[3].field += va[4].field *= va[5].field
+                    va[1].field *= 11,
+                    va[2].field *= va[2].field %= 19,
+                    va[3].field += va[4].field *= va[5].field,
                 }
 
                 where (0 < (va[5].field += va[3].field -= 2))
@@ -1142,15 +984,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
 
         public delegate dynamic MyDel(dynamic p1, dynamic p2 = default(object), long p3 = 100);
+
         public dynamic Method()
         {
-            MyDel md = delegate (dynamic d, dynamic o, long n)
+            MyDel md = delegate(dynamic d, dynamic o, long n)
             {
                 d += o += o;
                 return d;
-            }
-
-            ;
+            };
             return md;
         }
 
@@ -1158,18 +999,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         {
             get
             {
-                return new MyDel((x, y, z) =>
-                {
-                    return o + y;
-                }
-
+                return new MyDel(
+                    (x, y, z) =>
+                    {
+                        return o + y;
+                    }
                 );
             }
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.context03.context03
 {
@@ -1189,30 +1028,22 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
 
         public static int MainMethod()
         {
-            dynamic[] da = new[]
-            {
-            "X", "Y"
-            }
-
-            ;
+            dynamic[] da = new[] { "X", "Y" };
             var v = M()(da[0] += "Z");
             return (v == "XZ") ? 0 : 1;
         }
 
         public delegate string MyDel(string s);
+
         public static MyDel M()
         {
             return new MyDel(x =>
             {
                 return x;
-            }
-
-            );
+            });
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.bug741491array.bug741491array
 {
@@ -1226,26 +1057,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     {
         public dynamic this[int i]
         {
-            get
-            {
-                return 0;
-            }
-
-            set
-            {
-            }
+            get { return 0; }
+            set { }
         }
 
         public int this[int i, int j]
         {
-            get
-            {
-                return i + j;
-            }
-
-            set
-            {
-            }
+            get { return i + j; }
+            set { }
         }
 
         [Fact]
@@ -1274,12 +1093,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         private bool Test01()
         {
             bool ret = true;
-            dynamic[] dary = new dynamic[]
-            {
-            100, 200, 300
-            }
-
-            ;
+            dynamic[] dary = new dynamic[] { 100, 200, 300 };
             dary[0]++;
             ret &= 101 == dary[0];
             dary[1]--;
@@ -1292,12 +1106,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         private bool Test02()
         {
             bool ret = true;
-            dynamic[] dary = new dynamic[]
-            {
-            0, -1, 1
-            }
-
-            ;
+            dynamic[] dary = new dynamic[] { 0, -1, 1 };
             dary[0] += null;
             dary[1] += 2;
             ret &= 1 == dary[1];
@@ -1311,12 +1120,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         private bool Test03()
         {
             bool ret = true;
-            int[] iary = new[]
-            {
-            -1, -2, -3
-            }
-
-            ;
+            int[] iary = new[] { -1, -2, -3 };
             dynamic d = 3;
             iary[0] += d;
             ret &= 2 == iary[0];
@@ -1328,8 +1132,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compound.basic.using01.using01
 {
@@ -1370,8 +1172,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
             return 0;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

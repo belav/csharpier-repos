@@ -12,9 +12,8 @@ public static class HelloAppBuilderExtensions
     {
         ArgumentNullException.ThrowIfNull(app);
 
-        return app.UseMiddleware<HelloMiddleware>(Options.Create(new HelloOptions
-        {
-            Greeter = greeter
-        }));
+        return app.UseMiddleware<HelloMiddleware>(
+            Options.Create(new HelloOptions { Greeter = greeter })
+        );
     }
 }

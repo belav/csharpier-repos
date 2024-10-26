@@ -9,12 +9,17 @@ internal static partial class Interop
 {
     internal static partial class Winsock
     {
-        [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Interop.Libraries.Ws2_32,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static unsafe partial int GetAddrInfoW(
             string pNameName,
             string? pServiceName,
             AddressInfo* pHints,
-            AddressInfo** ppResult);
+            AddressInfo** ppResult
+        );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static unsafe partial void FreeAddrInfoW(AddressInfo* info);
@@ -27,9 +32,9 @@ internal static partial class Interop
             internal int ai_socktype;
             internal int ai_protocol;
             internal nuint ai_addrlen;
-            internal sbyte* ai_canonname;   // Ptr to the canonical name - check for NULL
-            internal byte* ai_addr;         // Ptr to the sockaddr structure
-            internal AddressInfo* ai_next;  // Ptr to the next AddressInfo structure
+            internal sbyte* ai_canonname; // Ptr to the canonical name - check for NULL
+            internal byte* ai_addr; // Ptr to the sockaddr structure
+            internal AddressInfo* ai_next; // Ptr to the next AddressInfo structure
         }
     }
 }

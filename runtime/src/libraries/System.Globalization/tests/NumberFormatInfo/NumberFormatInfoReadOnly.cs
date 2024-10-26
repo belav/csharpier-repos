@@ -13,7 +13,11 @@ namespace System.Globalization.Tests
             yield return new object[] { new NumberFormatInfo(), false };
             yield return new object[] { new CultureInfo("en-US").NumberFormat, false };
             yield return new object[] { NumberFormatInfo.InvariantInfo, true };
-            yield return new object[] { NumberFormatInfo.ReadOnly(new CultureInfo("en-US").NumberFormat), true };
+            yield return new object[]
+            {
+                NumberFormatInfo.ReadOnly(new CultureInfo("en-US").NumberFormat),
+                true,
+            };
         }
 
         [Theory]
@@ -36,7 +40,10 @@ namespace System.Globalization.Tests
         [Fact]
         public void ReadOnly_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("nfi", () => NumberFormatInfo.ReadOnly(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "nfi",
+                () => NumberFormatInfo.ReadOnly(null)
+            );
         }
     }
 }

@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
+namespace System.Net
+{
     using System.Threading;
 
     /// <devdoc>
@@ -12,7 +13,8 @@ namespace System.Net {
     ///       Specifies the status of a network request.
     ///    </para>
     /// </devdoc>
-    public enum WebExceptionStatus {
+    public enum WebExceptionStatus
+    {
         /// <devdoc>
         ///    <para>
         ///       No error was encountered.
@@ -155,7 +157,7 @@ namespace System.Net {
 
         internal static string GetWebStatusString(WebExceptionStatus status)
         {
-            int statusInt = (int) status;
+            int statusInt = (int)status;
             if (statusInt >= s_Mapping.Length || statusInt < 0)
             {
                 throw new InternalException();

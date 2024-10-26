@@ -6,8 +6,8 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Common {
-
+namespace System.Data.Common
+{
     using System;
     using System.Collections;
     using System.Configuration;
@@ -17,7 +17,7 @@ namespace System.Data.Common {
     using System.Xml;
 
     // VSTFDevDiv # 624213: System.Data.Common.DbProviderFactories.GetFactoryClasses() still gets OracleClient provider in ClientSku environment.
-    // NOTES: As part of this bug fix, the decision was taken to make it consistent and to remove all the framework 
+    // NOTES: As part of this bug fix, the decision was taken to make it consistent and to remove all the framework
     //      providers from the list in the machine.config file. The DbProviderFactories section of the machine.config will contain only
     //      custom providers names and details.
     internal enum DbProvidersIndex : int
@@ -27,6 +27,7 @@ namespace System.Data.Common {
         OracleClient,
         SqlClient,
         DbProvidersIndexCount // As enums are 0-based index, the DbProvidersIndexCount will hold the maximum count of the enum objects;
+        ,
     }
 
     internal class DbProviderFactoryConfigSection
@@ -37,7 +38,11 @@ namespace System.Data.Common {
         string description;
         string assemblyQualifiedName;
 
-        public DbProviderFactoryConfigSection(Type FactoryType, string FactoryName, string FactoryDescription)
+        public DbProviderFactoryConfigSection(
+            Type FactoryType,
+            string FactoryName,
+            string FactoryDescription
+        )
         {
             try
             {
@@ -47,7 +52,7 @@ namespace System.Data.Common {
                 description = FactoryDescription;
                 assemblyQualifiedName = factType.AssemblyQualifiedName.ToString();
             }
-            catch 
+            catch
             {
                 factType = null;
                 name = string.Empty;
@@ -57,7 +62,12 @@ namespace System.Data.Common {
             }
         }
 
-        public DbProviderFactoryConfigSection(string FactoryName, string FactoryInvariantName, string FactoryDescription, string FactoryAssemblyQualifiedName)
+        public DbProviderFactoryConfigSection(
+            string FactoryName,
+            string FactoryInvariantName,
+            string FactoryDescription,
+            string FactoryAssemblyQualifiedName
+        )
         {
             factType = null;
             name = FactoryName;
@@ -107,7 +117,8 @@ namespace System.Data.Common {
     //     </DbProviderFactories>
     // </system.data>
     // this class is delayed created, use ConfigurationSettings.GetSection("system.data") to obtain
-    public class DbProviderFactoriesConfigurationHandler : IConfigurationSectionHandler { // V1.2.3300
+    public class DbProviderFactoriesConfigurationHandler : IConfigurationSectionHandler
+    { // V1.2.3300
         internal const string sectionName = "system.data";
         internal const string providerGroup = "DbProviderFactories";
 
@@ -120,53 +131,69 @@ namespace System.Data.Common {
 
         internal const string oracleclientProviderName = "OracleClient Data Provider";
         internal const string oracleclientProviderNamespace = "System.Data.OracleClient";
-        internal const string oracleclientProviderDescription = ".Net Framework Data Provider for Oracle";
+        internal const string oracleclientProviderDescription =
+            ".Net Framework Data Provider for Oracle";
 
         internal const string sqlclientProviderName = "SqlClient Data Provider";
-        internal const string sqlclientProviderDescription = ".Net Framework Data Provider for SqlServer";
+        internal const string sqlclientProviderDescription =
+            ".Net Framework Data Provider for SqlServer";
 
-        internal const string sqlclientPartialAssemblyQualifiedName = "System.Data.SqlClient.SqlClientFactory, System.Data,";
-        internal const string oracleclientPartialAssemblyQualifiedName = "System.Data.OracleClient.OracleClientFactory, System.Data.OracleClient,";
+        internal const string sqlclientPartialAssemblyQualifiedName =
+            "System.Data.SqlClient.SqlClientFactory, System.Data,";
+        internal const string oracleclientPartialAssemblyQualifiedName =
+            "System.Data.OracleClient.OracleClientFactory, System.Data.OracleClient,";
 
-        public DbProviderFactoriesConfigurationHandler() { // V1.2.3300
+        public DbProviderFactoriesConfigurationHandler()
+        { // V1.2.3300
         }
 
-        virtual public object Create(object parent, object configContext, XmlNode section) { // V1.2.3300
+        public virtual object Create(object parent, object configContext, XmlNode section)
+        { // V1.2.3300
 #if DEBUG
-            try {
+            try
+            {
 #endif
                 return CreateStatic(parent, configContext, section);
 #if DEBUG
             }
-            catch(Exception e) {
+            catch (Exception e)
+            {
                 ADP.TraceExceptionWithoutRethrow(e); // it will be rethrown
                 throw;
             }
 #endif
         }
 
-        static internal object CreateStatic(object parent, object configContext, XmlNode section) {            
+        internal static object CreateStatic(object parent, object configContext, XmlNode section)
+        {
             object config = parent;
-            if (null != section) {
+            if (null != section)
+            {
                 config = HandlerBase.CloneParent(parent as DataSet, false);
                 bool foundFactories = false;
 
                 HandlerBase.CheckForUnrecognizedAttributes(section);
-                foreach (XmlNode child in section.ChildNodes) {
-                    if (HandlerBase.IsIgnorableAlsoCheckForNonElement(child)) {
+                foreach (XmlNode child in section.ChildNodes)
+                {
+                    if (HandlerBase.IsIgnorableAlsoCheckForNonElement(child))
+                    {
                         continue;
                     }
                     string sectionGroup = child.Name;
-                    switch(sectionGroup) {
-                    case DbProviderFactoriesConfigurationHandler.providerGroup:
-                        if (foundFactories) {
-                            throw ADP.ConfigSectionsUnique(DbProviderFactoriesConfigurationHandler.providerGroup);
-                        }
-                        foundFactories = true;
-                        HandleProviders(config as DataSet, configContext, child, sectionGroup);
-                        break;
-                    default:
-                        throw ADP.ConfigUnrecognizedElement(child);
+                    switch (sectionGroup)
+                    {
+                        case DbProviderFactoriesConfigurationHandler.providerGroup:
+                            if (foundFactories)
+                            {
+                                throw ADP.ConfigSectionsUnique(
+                                    DbProviderFactoriesConfigurationHandler.providerGroup
+                                );
+                            }
+                            foundFactories = true;
+                            HandleProviders(config as DataSet, configContext, child, sectionGroup);
+                            break;
+                        default:
+                            throw ADP.ConfigUnrecognizedElement(child);
                     }
                 }
             }
@@ -174,18 +201,30 @@ namespace System.Data.Common {
         }
 
         // sectionName - i.e. "providerconfiguration"
-        private static void HandleProviders(DataSet config, object configContext, XmlNode section, string sectionName) {
+        private static void HandleProviders(
+            DataSet config,
+            object configContext,
+            XmlNode section,
+            string sectionName
+        )
+        {
             DataTableCollection tables = config.Tables;
             DataTable dataTable = tables[sectionName];
             bool tableExisted = (null != dataTable);
-            dataTable = DbProviderDictionarySectionHandler.CreateStatic(dataTable, configContext, section);
-            if (!tableExisted) {
+            dataTable = DbProviderDictionarySectionHandler.CreateStatic(
+                dataTable,
+                configContext,
+                section
+            );
+            if (!tableExisted)
+            {
                 tables.Add(dataTable);
             }
         }
 
         // based off of DictionarySectionHandler
-        private static class DbProviderDictionarySectionHandler/* : IConfigurationSectionHandler*/ {
+        private static class DbProviderDictionarySectionHandler /* : IConfigurationSectionHandler*/
+        {
             /*
             internal DbProviderDictionarySectionHandler() {
             }
@@ -195,38 +234,50 @@ namespace System.Data.Common {
             }
             */
 
-            static internal DataTable CreateStatic(DataTable config, Object context, XmlNode section) {
-                if (null != section) {
+            static internal DataTable CreateStatic(
+                DataTable config,
+                Object context,
+                XmlNode section
+            )
+            {
+                if (null != section)
+                {
                     HandlerBase.CheckForUnrecognizedAttributes(section);
-                    
-                    if (null == config) {
+
+                    if (null == config)
+                    {
                         config = DbProviderFactoriesConfigurationHandler.CreateProviderDataTable();
                     }
                     // else already copied via DataSet.Copy
 
-                    foreach (XmlNode child in section.ChildNodes) {
-                        if (HandlerBase.IsIgnorableAlsoCheckForNonElement(child)) {
+                    foreach (XmlNode child in section.ChildNodes)
+                    {
+                        if (HandlerBase.IsIgnorableAlsoCheckForNonElement(child))
+                        {
                             continue;
                         }
-                        switch(child.Name) {
-                        case "add":
-                            HandleAdd(child, config);
-                            break;
-                        case "remove":
-                            HandleRemove(child, config);
-                            break;
-                        case "clear":
-                            HandleClear(child, config);
-                            break;
-                        default:
-                            throw ADP.ConfigUnrecognizedElement(child);
+                        switch (child.Name)
+                        {
+                            case "add":
+                                HandleAdd(child, config);
+                                break;
+                            case "remove":
+                                HandleRemove(child, config);
+                                break;
+                            case "clear":
+                                HandleClear(child, config);
+                                break;
+                            default:
+                                throw ADP.ConfigUnrecognizedElement(child);
                         }
                     }
                     config.AcceptChanges();
                 }
                 return config;
             }
-            static private void HandleAdd(XmlNode child, DataTable config) {
+
+            private static void HandleAdd(XmlNode child, DataTable config)
+            {
                 HandlerBase.CheckForChildNodes(child);
                 DataRow values = config.NewRow();
                 values[0] = HandlerBase.RemoveAttribute(child, "name", true, false);
@@ -237,27 +288,33 @@ namespace System.Data.Common {
                 // because beta shipped recognizing "support=hex#", need to give
                 // more time for other providers to remove it from the .config files
                 HandlerBase.RemoveAttribute(child, "support", false, false);
-                
+
                 HandlerBase.CheckForUnrecognizedAttributes(child);
                 config.Rows.Add(values);
             }
-            static private void HandleRemove(XmlNode child, DataTable config) {
-                HandlerBase.CheckForChildNodes(child);                
-                String invr = HandlerBase.RemoveAttribute(child, "invariant", true, false);                
+
+            private static void HandleRemove(XmlNode child, DataTable config)
+            {
+                HandlerBase.CheckForChildNodes(child);
+                String invr = HandlerBase.RemoveAttribute(child, "invariant", true, false);
                 HandlerBase.CheckForUnrecognizedAttributes(child);
                 DataRow row = config.Rows.Find(invr);
-                if (null != row) { // ignore invariants that don't exist
+                if (null != row)
+                { // ignore invariants that don't exist
                     row.Delete();
                 }
             }
-            static private void HandleClear(XmlNode child, DataTable config) {
+
+            private static void HandleClear(XmlNode child, DataTable config)
+            {
                 HandlerBase.CheckForChildNodes(child);
                 HandlerBase.CheckForUnrecognizedAttributes(child);
                 config.Clear();
             }
         }
-        
-        internal static DataTable CreateProviderDataTable() {
+
+        internal static DataTable CreateProviderDataTable()
+        {
             DataColumn frme = new DataColumn("Name", typeof(string));
             frme.ReadOnly = true;
             DataColumn desc = new DataColumn("Description", typeof(string));
@@ -268,7 +325,7 @@ namespace System.Data.Common {
             qual.ReadOnly = true;
 
             DataColumn[] primaryKey = new DataColumn[] { invr };
-            DataColumn[] columns = new DataColumn[] {frme, desc, invr, qual };
+            DataColumn[] columns = new DataColumn[] { frme, desc, invr, qual };
             DataTable table = new DataTable(DbProviderFactoriesConfigurationHandler.providerGroup);
             table.Locale = CultureInfo.InvariantCulture;
             table.Columns.AddRange(columns);
@@ -277,4 +334,3 @@ namespace System.Data.Common {
         }
     }
 }
-

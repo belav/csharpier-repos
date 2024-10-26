@@ -10,17 +10,24 @@ namespace Microsoft.AspNetCore.Authorization.Policy;
 internal sealed class AuthorizationPolicyCache : IDisposable
 {
     // Caches AuthorizationPolicy instances
-    private readonly DataSourceDependentCache<ConcurrentDictionary<Endpoint, AuthorizationPolicy>> _policyCache;
+    private readonly DataSourceDependentCache<
+        ConcurrentDictionary<Endpoint, AuthorizationPolicy>
+    > _policyCache;
 
     public AuthorizationPolicyCache(EndpointDataSource dataSource)
     {
         // We cache AuthorizationPolicy instances per-Endpoint for performance, but we want to wipe out
         // that cache if the endpoints change so that we don't allow unbounded memory growth.
-        _policyCache = new DataSourceDependentCache<ConcurrentDictionary<Endpoint, AuthorizationPolicy>>(dataSource, (_) =>
-        {
-            // We don't eagerly fill this cache because there's no real reason to.
-            return new ConcurrentDictionary<Endpoint, AuthorizationPolicy>();
-        });
+        _policyCache = new DataSourceDependentCache<
+            ConcurrentDictionary<Endpoint, AuthorizationPolicy>
+        >(
+            dataSource,
+            (_) =>
+            {
+                // We don't eagerly fill this cache because there's no real reason to.
+                return new ConcurrentDictionary<Endpoint, AuthorizationPolicy>();
+            }
+        );
         _policyCache.EnsureInitialized();
     }
 

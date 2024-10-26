@@ -17,7 +17,12 @@ internal static class StreamCopyOperationInternal
     /// <param name="destination">The stream to which the contents of the current stream will be copied.</param>
     /// <param name="count">The count of bytes to be copied.</param>
     /// <param name="cancel">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
-    public static Task CopyToAsync(Stream source, Stream destination, long? count, CancellationToken cancel)
+    public static Task CopyToAsync(
+        Stream source,
+        Stream destination,
+        long? count,
+        CancellationToken cancel
+    )
     {
         return CopyToAsync(source, destination, count, DefaultBufferSize, cancel);
     }
@@ -29,7 +34,13 @@ internal static class StreamCopyOperationInternal
     /// <param name="count">The count of bytes to be copied.</param>
     /// <param name="bufferSize">The size, in bytes, of the buffer. This value must be greater than zero. The default size is 4096.</param>
     /// <param name="cancel">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
-    public static async Task CopyToAsync(Stream source, Stream destination, long? count, int bufferSize, CancellationToken cancel)
+    public static async Task CopyToAsync(
+        Stream source,
+        Stream destination,
+        long? count,
+        int bufferSize,
+        CancellationToken cancel
+    )
     {
         var bytesRemaining = count;
 
@@ -54,7 +65,8 @@ internal static class StreamCopyOperationInternal
                 var readLength = buffer.Length;
                 if (bytesRemaining.HasValue)
                 {
-                    readLength = (int)Math.Min(bytesRemaining.GetValueOrDefault(), (long)readLength);
+                    readLength = (int)
+                        Math.Min(bytesRemaining.GetValueOrDefault(), (long)readLength);
                 }
                 var read = await source.ReadAsync(buffer.AsMemory(0, readLength), cancel);
 

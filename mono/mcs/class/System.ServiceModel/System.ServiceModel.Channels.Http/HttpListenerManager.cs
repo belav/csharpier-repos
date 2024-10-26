@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -41,187 +41,232 @@ using System.Threading;
 
 namespace System.ServiceModel.Channels.Http
 {
-	internal abstract class HttpListenerManager
-	{
-		protected HttpListenerManager ()
-		{
-			Entries = new List<HttpChannelListenerEntry> ();
-		}
+    internal abstract class HttpListenerManager
+    {
+        protected HttpListenerManager()
+        {
+            Entries = new List<HttpChannelListenerEntry>();
+        }
 
-		protected List<HttpChannelListenerEntry> Entries { get; private set; }
-		object entries_lock = new object ();
+        protected List<HttpChannelListenerEntry> Entries { get; private set; }
+        object entries_lock = new object();
 
-		public abstract void RegisterListener (ChannelDispatcher channel, HttpTransportBindingElement element, TimeSpan timeout);
-		public abstract void UnregisterListener (ChannelDispatcher channel, TimeSpan timeout);
+        public abstract void RegisterListener(
+            ChannelDispatcher channel,
+            HttpTransportBindingElement element,
+            TimeSpan timeout
+        );
+        public abstract void UnregisterListener(ChannelDispatcher channel, TimeSpan timeout);
 
-		protected void RegisterListenerCommon (ChannelDispatcher channel, TimeSpan timeout)
-		{
-			lock (entries_lock) {
-				Entries.Add (new HttpChannelListenerEntry (channel, new AutoResetEvent (false)));
+        protected void RegisterListenerCommon(ChannelDispatcher channel, TimeSpan timeout)
+        {
+            lock (entries_lock)
+            {
+                Entries.Add(new HttpChannelListenerEntry(channel, new AutoResetEvent(false)));
 
-				Entries.Sort (HttpChannelListenerEntry.CompareEntries);
-			}
-		}
+                Entries.Sort(HttpChannelListenerEntry.CompareEntries);
+            }
+        }
 
-		protected void UnregisterListenerCommon (ChannelDispatcher channel, TimeSpan timeout)
-		{
-			lock (entries_lock) {
-				var entry = Entries.First (e => e.ChannelDispatcher == channel);
-				Entries.Remove (entry);
+        protected void UnregisterListenerCommon(ChannelDispatcher channel, TimeSpan timeout)
+        {
+            lock (entries_lock)
+            {
+                var entry = Entries.First(e => e.ChannelDispatcher == channel);
+                Entries.Remove(entry);
 
-				entry.WaitHandle.Set (); // make sure to finish pending requests.
-			}
-		}
+                entry.WaitHandle.Set(); // make sure to finish pending requests.
+            }
+        }
 
-		public void ProcessNewContext (HttpContextInfo ctxi)
-		{
-			var ce = SelectChannel (ctxi);
-			if (ce == null)
-				throw new InvalidOperationException ("HttpListenerContext does not match any of the registered channels");
-			ce.ContextQueue.Enqueue (ctxi);
-			ce.WaitHandle.Set ();
-		}
+        public void ProcessNewContext(HttpContextInfo ctxi)
+        {
+            var ce = SelectChannel(ctxi);
+            if (ce == null)
+                throw new InvalidOperationException(
+                    "HttpListenerContext does not match any of the registered channels"
+                );
+            ce.ContextQueue.Enqueue(ctxi);
+            ce.WaitHandle.Set();
+        }
 
-		HttpChannelListenerEntry SelectChannel (HttpContextInfo ctx)
-		{
-			lock (entries_lock) {
-				foreach (var e in Entries)
-					if (e.FilterHttpContext (ctx))
-						return e;
-			}
-			return null;
-		}
+        HttpChannelListenerEntry SelectChannel(HttpContextInfo ctx)
+        {
+            lock (entries_lock)
+            {
+                foreach (var e in Entries)
+                    if (e.FilterHttpContext(ctx))
+                        return e;
+            }
+            return null;
+        }
 
-		public bool TryDequeueRequest (ChannelDispatcher channel, TimeSpan timeout, out HttpContextInfo context)
-		{
-			DateTime start = DateTime.UtcNow;
+        public bool TryDequeueRequest(
+            ChannelDispatcher channel,
+            TimeSpan timeout,
+            out HttpContextInfo context
+        )
+        {
+            DateTime start = DateTime.UtcNow;
 
-			context = null;
-			HttpChannelListenerEntry ce = null;
-			lock (entries_lock) {
-				ce = Entries.FirstOrDefault (e => e.ChannelDispatcher == channel);
-			}
-			if (ce == null)
-				return false;
-			lock (ce.RetrieverLock) {
-				var q = ce.ContextQueue;
-				if (q.Count == 0) {
-					if (timeout.TotalMilliseconds < 0) return false;
-					TimeSpan waitTimeout = timeout;
-					if (timeout == TimeSpan.MaxValue)
-						waitTimeout = TimeSpan.FromMilliseconds (int.MaxValue);
-					bool ret = ce.WaitHandle.WaitOne (waitTimeout);
-					return ret && TryDequeueRequest (channel, waitTimeout - (DateTime.UtcNow - start), out context); // recurse, am lazy :/
-				}
-				context = q.Dequeue ();
-				return true;
-			}
-		}
-	}
+            context = null;
+            HttpChannelListenerEntry ce = null;
+            lock (entries_lock)
+            {
+                ce = Entries.FirstOrDefault(e => e.ChannelDispatcher == channel);
+            }
+            if (ce == null)
+                return false;
+            lock (ce.RetrieverLock)
+            {
+                var q = ce.ContextQueue;
+                if (q.Count == 0)
+                {
+                    if (timeout.TotalMilliseconds < 0)
+                        return false;
+                    TimeSpan waitTimeout = timeout;
+                    if (timeout == TimeSpan.MaxValue)
+                        waitTimeout = TimeSpan.FromMilliseconds(int.MaxValue);
+                    bool ret = ce.WaitHandle.WaitOne(waitTimeout);
+                    return ret
+                        && TryDequeueRequest(
+                            channel,
+                            waitTimeout - (DateTime.UtcNow - start),
+                            out context
+                        ); // recurse, am lazy :/
+                }
+                context = q.Dequeue();
+                return true;
+            }
+        }
+    }
 
-	internal class HttpStandaloneListenerManager : HttpListenerManager
-	{
-		public HttpStandaloneListenerManager (Uri uri, HttpTransportBindingElement element)
-		{
-			var l = new HttpListener ();
+    internal class HttpStandaloneListenerManager : HttpListenerManager
+    {
+        public HttpStandaloneListenerManager(Uri uri, HttpTransportBindingElement element)
+        {
+            var l = new HttpListener();
 
-			string uriString = element.HostNameComparisonMode == HostNameComparisonMode.Exact ? uri.ToString () : uri.Scheme + "://*" + uri.GetComponents (UriComponents.Port | UriComponents.Path, UriFormat.SafeUnescaped);
-			if (!uriString.EndsWith ("/", StringComparison.Ordinal))
-				uriString += "/"; // HttpListener requires this mess.
+            string uriString =
+                element.HostNameComparisonMode == HostNameComparisonMode.Exact
+                    ? uri.ToString()
+                    : uri.Scheme
+                        + "://*"
+                        + uri.GetComponents(
+                            UriComponents.Port | UriComponents.Path,
+                            UriFormat.SafeUnescaped
+                        );
+            if (!uriString.EndsWith("/", StringComparison.Ordinal))
+                uriString += "/"; // HttpListener requires this mess.
 
-			l.Prefixes.Add (uriString);
+            l.Prefixes.Add(uriString);
 
-			this.listener = l;
-		}
-		
-		HttpListener listener;
+            this.listener = l;
+        }
 
-		Thread loop;
+        HttpListener listener;
 
-		// FIXME: use timeout
-		public override void RegisterListener (ChannelDispatcher channel, HttpTransportBindingElement element, TimeSpan timeout)
-		{
-			RegisterListenerCommon (channel, timeout);
+        Thread loop;
 
-			if (Entries.Count != 1)
-				return;
+        // FIXME: use timeout
+        public override void RegisterListener(
+            ChannelDispatcher channel,
+            HttpTransportBindingElement element,
+            TimeSpan timeout
+        )
+        {
+            RegisterListenerCommon(channel, timeout);
 
-			if (element != null) {
-				var l = listener;
-				l.AuthenticationSchemeSelectorDelegate = delegate (HttpListenerRequest req) {
-					return element.AuthenticationScheme;
-				};
-				l.Realm = element.Realm;
-				l.UnsafeConnectionNtlmAuthentication = element.UnsafeConnectionNtlmAuthentication;
-			}
+            if (Entries.Count != 1)
+                return;
 
-			// Start here. It is shared between channel listeners
-			// that share the same listen Uri. So there is no other appropriate place.
+            if (element != null)
+            {
+                var l = listener;
+                l.AuthenticationSchemeSelectorDelegate = delegate(HttpListenerRequest req)
+                {
+                    return element.AuthenticationScheme;
+                };
+                l.Realm = element.Realm;
+                l.UnsafeConnectionNtlmAuthentication = element.UnsafeConnectionNtlmAuthentication;
+            }
+
+            // Start here. It is shared between channel listeners
+            // that share the same listen Uri. So there is no other appropriate place.
 #if USE_SEPARATE_LOOP // this cannot be enabled because it causes infinite loop when ChannelDispatcher is not involved.
-			loop = new Thread (new ThreadStart (delegate {
-				listener.Start ();
-				try {
-					while (true)
-						ProcessNewContext (listener.GetContext ());
-				} catch (ThreadAbortException) {
-					Thread.ResetAbort ();
-				}
-				listener.Stop ();
-			}));
-			loop.Start ();
+            loop = new Thread(
+                new ThreadStart(
+                    delegate
+                    {
+                        listener.Start();
+                        try
+                        {
+                            while (true)
+                                ProcessNewContext(listener.GetContext());
+                        }
+                        catch (ThreadAbortException)
+                        {
+                            Thread.ResetAbort();
+                        }
+                        listener.Stop();
+                    }
+                )
+            );
+            loop.Start();
 #else
-			listener.Start ();
-			listener.BeginGetContext (GetContextCompleted, null);
+            listener.Start();
+            listener.BeginGetContext(GetContextCompleted, null);
 #endif
-		}
+        }
 
-		// FIXME: use timeout
-		public override void UnregisterListener (ChannelDispatcher channel, TimeSpan timeout)
-		{
-			UnregisterListenerCommon (channel, timeout);
+        // FIXME: use timeout
+        public override void UnregisterListener(ChannelDispatcher channel, TimeSpan timeout)
+        {
+            UnregisterListenerCommon(channel, timeout);
 
-			// stop the server if there is no more registered listener.
-			if (Entries.Count > 0)
-				return;
+            // stop the server if there is no more registered listener.
+            if (Entries.Count > 0)
+                return;
 
 #if USE_SEPARATE_LOOP
-			loop.Abort ();
+            loop.Abort();
 #else
-			this.listener.Stop ();
+            this.listener.Stop();
 #endif
-		}
-		
-		void GetContextCompleted (IAsyncResult result)
-		{
-			var ctx = listener.EndGetContext (result);
-			ProcessNewContext (ctx);
-			// start another listening
-			listener.BeginGetContext (GetContextCompleted, null);
-		}
+        }
 
-		void ProcessNewContext (HttpListenerContext ctx)
-		{
-			if (ctx == null)
-				return;
-			ProcessNewContext (new HttpStandaloneContextInfo (ctx));
-		}
-	}
+        void GetContextCompleted(IAsyncResult result)
+        {
+            var ctx = listener.EndGetContext(result);
+            ProcessNewContext(ctx);
+            // start another listening
+            listener.BeginGetContext(GetContextCompleted, null);
+        }
 
-	internal class AspNetHttpListenerManager : HttpListenerManager
-	{
-		public AspNetHttpListenerManager (Uri uri)
-		{
-		}
+        void ProcessNewContext(HttpListenerContext ctx)
+        {
+            if (ctx == null)
+                return;
+            ProcessNewContext(new HttpStandaloneContextInfo(ctx));
+        }
+    }
 
-		public override void RegisterListener (ChannelDispatcher channel, HttpTransportBindingElement element, TimeSpan timeout)
-		{
-			RegisterListenerCommon (channel, timeout);
-		}
+    internal class AspNetHttpListenerManager : HttpListenerManager
+    {
+        public AspNetHttpListenerManager(Uri uri) { }
 
-		public override void UnregisterListener (ChannelDispatcher channel, TimeSpan timeout)
-		{
-			UnregisterListenerCommon (channel, timeout);
-		}
-	}
+        public override void RegisterListener(
+            ChannelDispatcher channel,
+            HttpTransportBindingElement element,
+            TimeSpan timeout
+        )
+        {
+            RegisterListenerCommon(channel, timeout);
+        }
+
+        public override void UnregisterListener(ChannelDispatcher channel, TimeSpan timeout)
+        {
+            UnregisterListenerCommon(channel, timeout);
+        }
+    }
 }
-

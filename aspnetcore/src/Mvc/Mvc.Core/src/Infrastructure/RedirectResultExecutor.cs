@@ -48,8 +48,9 @@ public partial class RedirectResultExecutor : IActionResultExecutor<RedirectResu
 
         if (result.PreserveMethod)
         {
-            context.HttpContext.Response.StatusCode = result.Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            context.HttpContext.Response.StatusCode = result.Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             context.HttpContext.Response.Headers.Location = destinationUrl;
         }
         else
@@ -62,7 +63,12 @@ public partial class RedirectResultExecutor : IActionResultExecutor<RedirectResu
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing RedirectResult, redirecting to {Destination}.", EventName = "RedirectResultExecuting")]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing RedirectResult, redirecting to {Destination}.",
+            EventName = "RedirectResultExecuting"
+        )]
         public static partial void RedirectResultExecuting(ILogger logger, string destination);
     }
 }

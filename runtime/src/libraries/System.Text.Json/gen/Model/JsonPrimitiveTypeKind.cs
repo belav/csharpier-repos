@@ -9,6 +9,6 @@ namespace System.Text.Json.SourceGeneration
         Boolean,
         ByteArray,
         Char,
-        Number
+        Number,
     }
 }

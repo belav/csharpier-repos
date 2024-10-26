@@ -3,12 +3,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
+using System.Diagnostics;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics;
-using System.Threading;
 
 namespace Microsoft.WebAssembly.AppHost;
 
@@ -23,10 +23,12 @@ internal sealed class WasiEngineHost
         _logger = logger;
     }
 
-    public static async Task<int> InvokeAsync(CommonConfiguration commonArgs,
-                                              ILoggerFactory _,
-                                              ILogger logger,
-                                              CancellationToken _1)
+    public static async Task<int> InvokeAsync(
+        CommonConfiguration commonArgs,
+        ILoggerFactory _,
+        ILogger logger,
+        CancellationToken _1
+    )
     {
         var args = new WasiEngineArguments(commonArgs);
         args.Validate();
@@ -40,10 +42,16 @@ internal sealed class WasiEngineHost
         string engineBinary = _args.Host switch
         {
             WasmHost.Wasmtime => "wasmtime",
-            _ => throw new CommandLineException($"Unsupported engine {_args.Host}")
+            _ => throw new CommandLineException($"Unsupported engine {_args.Host}"),
         };
 
-        if (!FileUtils.TryFindExecutableInPATH(engineBinary, out string? engineBinaryPath, out string? errorMessage))
+        if (
+            !FileUtils.TryFindExecutableInPATH(
+                engineBinary,
+                out string? engineBinaryPath,
+                out string? errorMessage
+            )
+        )
             throw new CommandLineException($"Cannot find host {engineBinary}: {errorMessage}");
 
         if (_args.CommonConfig.Debugging)
@@ -58,37 +66,49 @@ internal sealed class WasiEngineHost
         if (!_args.IsSingleFileBundle)
         {
             args.AddRange(["--dir", "."]);
-        };
+        }
+        ;
 
         args.AddRange(engineArgs);
         args.Add("--");
 
         if (_args.IsSingleFileBundle)
         {
-            args.Add($"{Path.GetFileNameWithoutExtension(_args.CommonConfig.HostProperties.MainAssembly)}.wasm");
+            args.Add(
+                $"{Path.GetFileNameWithoutExtension(_args.CommonConfig.HostProperties.MainAssembly)}.wasm"
+            );
         }
         else
         {
             // FIXME: maybe move the assembly name to a config file
             args.Add("dotnet.wasm");
-            args.Add(Path.GetFileNameWithoutExtension(_args.CommonConfig.HostProperties.MainAssembly));
+            args.Add(
+                Path.GetFileNameWithoutExtension(_args.CommonConfig.HostProperties.MainAssembly)
+            );
         }
 
         args.AddRange(_args.AppArgs);
 
-        ProcessStartInfo psi = new()
-        {
-            FileName = engineBinary,
-            WorkingDirectory = _args.CommonConfig.AppPath
-        };
+        ProcessStartInfo psi =
+            new() { FileName = engineBinary, WorkingDirectory = _args.CommonConfig.AppPath };
 
         foreach (string? arg in args)
             psi.ArgumentList.Add(arg!);
 
-        int exitCode = await Utils.TryRunProcess(psi,
-                                    _logger,
-                                    msg => { if (msg != null) _logger.LogInformation(msg); },
-                                    msg => { if (msg != null) _logger.LogInformation(msg); });
+        int exitCode = await Utils.TryRunProcess(
+            psi,
+            _logger,
+            msg =>
+            {
+                if (msg != null)
+                    _logger.LogInformation(msg);
+            },
+            msg =>
+            {
+                if (msg != null)
+                    _logger.LogInformation(msg);
+            }
+        );
 
         return exitCode;
     }

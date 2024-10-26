@@ -13,12 +13,13 @@ internal sealed class DefaultPolicy : IOutputCachePolicy
 {
     public static readonly DefaultPolicy Instance = new();
 
-    private DefaultPolicy()
-    {
-    }
+    private DefaultPolicy() { }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.CacheRequestAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.CacheRequestAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         var attemptOutputCaching = AttemptOutputCaching(context);
         context.EnableOutputCaching = true;
@@ -33,13 +34,19 @@ internal sealed class DefaultPolicy : IOutputCachePolicy
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeFromCacheAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeFromCacheAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         return ValueTask.CompletedTask;
     }
 
     /// <inheritdoc />
-    ValueTask IOutputCachePolicy.ServeResponseAsync(OutputCacheContext context, CancellationToken cancellationToken)
+    ValueTask IOutputCachePolicy.ServeResponseAsync(
+        OutputCacheContext context,
+        CancellationToken cancellationToken
+    )
     {
         var response = context.HttpContext.Response;
 
@@ -73,7 +80,10 @@ internal sealed class DefaultPolicy : IOutputCachePolicy
         }
 
         // Verify existence of authorization headers
-        if (!StringValues.IsNullOrEmpty(request.Headers.Authorization) || request.HttpContext.User?.Identity?.IsAuthenticated == true)
+        if (
+            !StringValues.IsNullOrEmpty(request.Headers.Authorization)
+            || request.HttpContext.User?.Identity?.IsAuthenticated == true
+        )
         {
             return false;
         }

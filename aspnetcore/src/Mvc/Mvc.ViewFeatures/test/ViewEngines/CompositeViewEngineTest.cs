@@ -33,8 +33,9 @@ public class CompositeViewEngineTest
     public void FindView_IsMainPage_Throws_WhenNoViewEnginesAreRegistered()
     {
         // Arrange
-        var expected = $"'{typeof(MvcViewOptions).FullName}.{nameof(MvcViewOptions.ViewEngines)}' must not be " +
-            $"empty. At least one '{typeof(IViewEngine).FullName}' is required to locate a view for rendering.";
+        var expected =
+            $"'{typeof(MvcViewOptions).FullName}.{nameof(MvcViewOptions.ViewEngines)}' must not be "
+            + $"empty. At least one '{typeof(IViewEngine).FullName}' is required to locate a view for rendering.";
         var viewName = "test-view";
         var actionContext = GetActionContext();
         var optionsAccessor = Options.Create(new MvcViewOptions());
@@ -42,7 +43,8 @@ public class CompositeViewEngineTest
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => compositeViewEngine.FindView(actionContext, viewName, isMainPage: true));
+            () => compositeViewEngine.FindView(actionContext, viewName, isMainPage: true)
+        );
         Assert.Equal(expected, exception.Message);
     }
 
@@ -53,7 +55,13 @@ public class CompositeViewEngineTest
         var viewName = "test-view";
         var engine = new Mock<IViewEngine>(MockBehavior.Strict);
         engine
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ true))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    true
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, new[] { "controller/test-view" }));
         var optionsAccessor = Options.Create(new MvcViewOptions());
         optionsAccessor.Value.ViewEngines.Add(engine.Object);
@@ -75,7 +83,13 @@ public class CompositeViewEngineTest
         var engine = new Mock<IViewEngine>(MockBehavior.Strict);
         var view = Mock.Of<IView>();
         engine
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ true))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    true
+                )
+            )
             .Returns(ViewEngineResult.Found(viewName, view));
         var optionsAccessor = Options.Create(new MvcViewOptions());
         optionsAccessor.Value.ViewEngines.Add(engine.Object);
@@ -100,13 +114,31 @@ public class CompositeViewEngineTest
         var view2 = Mock.Of<IView>();
         var view3 = Mock.Of<IView>();
         engine1
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ true))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    true
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, Enumerable.Empty<string>()));
         engine2
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ true))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    true
+                )
+            )
             .Returns(ViewEngineResult.Found(viewName, view2));
         engine3
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ true))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    true
+                )
+            )
             .Returns(ViewEngineResult.Found(viewName, view3));
 
         var optionsAccessor = Options.Create(new MvcViewOptions());
@@ -133,13 +165,31 @@ public class CompositeViewEngineTest
         var engine2 = new Mock<IViewEngine>(MockBehavior.Strict);
         var engine3 = new Mock<IViewEngine>(MockBehavior.Strict);
         engine1
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ true))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    true
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, new[] { "1", "2" }));
         engine2
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ true))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    true
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, new[] { "3" }));
         engine3
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ true))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    true
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, new[] { "4", "5" }));
 
         var optionsAccessor = Options.Create(new MvcViewOptions());
@@ -162,15 +212,17 @@ public class CompositeViewEngineTest
     public void GetView_ReturnsNotFoundResult_WhenNoViewEnginesAreRegistered(bool isMainPage)
     {
         // Arrange
-        var expected = $"'{typeof(MvcViewOptions).FullName}.{nameof(MvcViewOptions.ViewEngines)}' must not be " +
-            $"empty. At least one '{typeof(IViewEngine).FullName}' is required to locate a view for rendering.";
+        var expected =
+            $"'{typeof(MvcViewOptions).FullName}.{nameof(MvcViewOptions.ViewEngines)}' must not be "
+            + $"empty. At least one '{typeof(IViewEngine).FullName}' is required to locate a view for rendering.";
         var viewName = "test-view.cshtml";
         var optionsAccessor = Options.Create(new MvcViewOptions());
         var compositeViewEngine = new CompositeViewEngine(optionsAccessor);
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
-            () => compositeViewEngine.GetView("~/Index.html", viewName, isMainPage));
+            () => compositeViewEngine.GetView("~/Index.html", viewName, isMainPage)
+        );
         Assert.Equal(expected, exception.Message);
     }
 
@@ -178,7 +230,8 @@ public class CompositeViewEngineTest
     [InlineData(false)]
     [InlineData(true)]
     public void GetView_ReturnsNotFoundResult_WhenExactlyOneViewEngineIsRegisteredWhichReturnsNotFoundResult(
-        bool isMainPage)
+        bool isMainPage
+    )
     {
         // Arrange
         var viewName = "test-view.cshtml";
@@ -202,7 +255,9 @@ public class CompositeViewEngineTest
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public void GetView_ReturnsView_WhenExactlyOneViewEngineIsRegisteredWhichReturnsAFoundResult(bool isMainPage)
+    public void GetView_ReturnsView_WhenExactlyOneViewEngineIsRegisteredWhichReturnsAFoundResult(
+        bool isMainPage
+    )
     {
         // Arrange
         var viewName = "test-view.cshtml";
@@ -301,15 +356,17 @@ public class CompositeViewEngineTest
     public void FindView_ReturnsNotFoundResult_WhenNoViewEnginesAreRegistered()
     {
         // Arrange
-        var expected = $"'{typeof(MvcViewOptions).FullName}.{nameof(MvcViewOptions.ViewEngines)}' must not be " +
-            $"empty. At least one '{typeof(IViewEngine).FullName}' is required to locate a view for rendering.";
+        var expected =
+            $"'{typeof(MvcViewOptions).FullName}.{nameof(MvcViewOptions.ViewEngines)}' must not be "
+            + $"empty. At least one '{typeof(IViewEngine).FullName}' is required to locate a view for rendering.";
         var viewName = "my-partial-view";
         var optionsAccessor = Options.Create(new MvcViewOptions());
         var compositeViewEngine = new CompositeViewEngine(optionsAccessor);
 
         // Act & AssertS
         var exception = Assert.Throws<InvalidOperationException>(
-            () => compositeViewEngine.FindView(GetActionContext(), viewName, isMainPage: false));
+            () => compositeViewEngine.FindView(GetActionContext(), viewName, isMainPage: false)
+        );
         Assert.Equal(expected, exception.Message);
     }
 
@@ -320,7 +377,13 @@ public class CompositeViewEngineTest
         var viewName = "partial-view";
         var engine = new Mock<IViewEngine>(MockBehavior.Strict);
         engine
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ false))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, new[] { "Shared/partial-view" }));
         var optionsAccessor = Options.Create(new MvcViewOptions());
         optionsAccessor.Value.ViewEngines.Add(engine.Object);
@@ -342,7 +405,13 @@ public class CompositeViewEngineTest
         var engine = new Mock<IViewEngine>(MockBehavior.Strict);
         var view = Mock.Of<IView>();
         engine
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ false))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.Found(viewName, view));
         var optionsAccessor = Options.Create(new MvcViewOptions());
         optionsAccessor.Value.ViewEngines.Add(engine.Object);
@@ -367,13 +436,31 @@ public class CompositeViewEngineTest
         var view2 = Mock.Of<IView>();
         var view3 = Mock.Of<IView>();
         engine1
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ false))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, Enumerable.Empty<string>()));
         engine2
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ false))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.Found(viewName, view2));
         engine3
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ false))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.Found(viewName, view3));
 
         var optionsAccessor = Options.Create(new MvcViewOptions());
@@ -400,13 +487,31 @@ public class CompositeViewEngineTest
         var engine2 = new Mock<IViewEngine>(MockBehavior.Strict);
         var engine3 = new Mock<IViewEngine>(MockBehavior.Strict);
         engine1
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ false))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, new[] { "1", "2" }));
         engine2
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ false))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, new[] { "3" }));
         engine3
-            .Setup(e => e.FindView(It.IsAny<ActionContext>(), viewName, /*isMainPage*/ false))
+            .Setup(e =>
+                e.FindView(
+                    It.IsAny<ActionContext>(),
+                    viewName, /*isMainPage*/
+                    false
+                )
+            )
             .Returns(ViewEngineResult.NotFound(viewName, new[] { "4", "5" }));
 
         var optionsAccessor = Options.Create(new MvcViewOptions());
@@ -448,7 +553,5 @@ public class CompositeViewEngineTest
         }
     }
 
-    public interface ITestService
-    {
-    }
+    public interface ITestService { }
 }

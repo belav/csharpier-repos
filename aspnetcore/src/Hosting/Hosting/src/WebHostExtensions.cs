@@ -42,7 +42,10 @@ public static class WebHostExtensions
     /// <param name="host">The running <see cref="IWebHost"/>.</param>
     /// <param name="token">The token to trigger shutdown.</param>
     /// <returns>A <see cref="Task"/> that completes when shutdown is triggered via Ctrl+C or SIGTERM.</returns>
-    public static async Task WaitForShutdownAsync(this IWebHost host, CancellationToken token = default)
+    public static async Task WaitForShutdownAsync(
+        this IWebHost host,
+        CancellationToken token = default
+    )
     {
         var done = new ManualResetEventSlim(false);
         using (var cts = CancellationTokenSource.CreateLinkedTokenSource(token))
@@ -89,12 +92,19 @@ public static class WebHostExtensions
         var done = new ManualResetEventSlim(false);
         using (var cts = new CancellationTokenSource())
         {
-            var shutdownMessage = host.Services.GetRequiredService<WebHostOptions>().SuppressStatusMessages ? string.Empty : "Application is shutting down...";
+            var shutdownMessage = host
+                .Services.GetRequiredService<WebHostOptions>()
+                .SuppressStatusMessages
+                ? string.Empty
+                : "Application is shutting down...";
             using (var lifetime = new WebHostLifetime(cts, done, shutdownMessage: shutdownMessage))
             {
                 try
                 {
-                    await host.RunAsync(cts.Token, "Application started. Press Ctrl+C to shut down.");
+                    await host.RunAsync(
+                        cts.Token,
+                        "Application started. Press Ctrl+C to shut down."
+                    );
                     lifetime.SetExitedGracefully();
                 }
                 finally
@@ -105,7 +115,11 @@ public static class WebHostExtensions
         }
     }
 
-    private static async Task RunAsync(this IWebHost host, CancellationToken token, string? startupMessage)
+    private static async Task RunAsync(
+        this IWebHost host,
+        CancellationToken token,
+        string? startupMessage
+    )
     {
         try
         {
@@ -149,18 +163,26 @@ public static class WebHostExtensions
         }
     }
 
-    private static async Task WaitForTokenShutdownAsync(this IWebHost host, CancellationToken cancellationToken)
+    private static async Task WaitForTokenShutdownAsync(
+        this IWebHost host,
+        CancellationToken cancellationToken
+    )
     {
         var applicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 
-        cancellationToken.Register(state =>
-        {
-            ((IHostApplicationLifetime)state!).StopApplication();
-        },
-        applicationLifetime);
+        cancellationToken.Register(
+            state =>
+            {
+                ((IHostApplicationLifetime)state!).StopApplication();
+            },
+            applicationLifetime
+        );
 
         await Task.Delay(Timeout.Infinite, applicationLifetime.ApplicationStopping)
-            .ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing | ConfigureAwaitOptions.ContinueOnCapturedContext);
+            .ConfigureAwait(
+                ConfigureAwaitOptions.SuppressThrowing
+                    | ConfigureAwaitOptions.ContinueOnCapturedContext
+            );
 
         // WebHost will use its default ShutdownTimeout if none is specified.
 #pragma warning disable CA2016 // Forward the 'CancellationToken' parameter to methods. StopAsync should not be canceled by the token to RunAsync.

@@ -57,14 +57,23 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void DestroyStructure_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.DestroyStructure<TestStruct>(IntPtr.Zero));
-            AssertExtensions.Throws<ArgumentNullException>("ptr", () => Marshal.DestroyStructure(IntPtr.Zero, typeof(TestStruct)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () => Marshal.DestroyStructure<TestStruct>(IntPtr.Zero)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "ptr",
+                () => Marshal.DestroyStructure(IntPtr.Zero, typeof(TestStruct))
+            );
         }
 
         [Fact]
         public void DestroyStructure_NullStructureType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("structuretype", () => Marshal.DestroyStructure((IntPtr)1, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "structuretype",
+                () => Marshal.DestroyStructure((IntPtr)1, null)
+            );
         }
 
         public static IEnumerable<object[]> DestroyStructure_InvalidType_TestData()
@@ -82,11 +91,17 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(IGenericInterface<>) };
             yield return new object[] { typeof(IGenericInterface<string>) };
 
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0] };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
+            };
 
             if (PlatformDetection.IsReflectionEmitSupported)
             {
-                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("Assembly"),
+                    AssemblyBuilderAccess.Run
+                );
                 ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
                 TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
                 yield return new object[] { typeBuilder };
@@ -94,20 +109,37 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75666", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75666",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/15087", TestRuntimes.Mono)]
         [MemberData(nameof(DestroyStructure_InvalidType_TestData))]
         public void DestroyStructure_NonRuntimeType_ThrowsArgumentException(Type invalidType)
         {
-            AssertExtensions.Throws<ArgumentException>("structuretype", () => Marshal.DestroyStructure((IntPtr)1, invalidType));
+            AssertExtensions.Throws<ArgumentException>(
+                "structuretype",
+                () => Marshal.DestroyStructure((IntPtr)1, invalidType)
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75666", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75666",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         public void DestroyStructure_AutoLayout_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("structuretype", () => Marshal.DestroyStructure<AutoLayoutStruct>((IntPtr)1));
-            AssertExtensions.Throws<ArgumentException>("structuretype", () => Marshal.DestroyStructure((IntPtr)1, typeof(AutoLayoutStruct)));
+            AssertExtensions.Throws<ArgumentException>(
+                "structuretype",
+                () => Marshal.DestroyStructure<AutoLayoutStruct>((IntPtr)1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "structuretype",
+                () => Marshal.DestroyStructure((IntPtr)1, typeof(AutoLayoutStruct))
+            );
         }
 
         [Fact]
@@ -156,6 +188,7 @@ namespace System.Runtime.InteropServices.Tests
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
             internal byte[] Data4;
         }
+
         [StructLayout(LayoutKind.Sequential)]
         internal struct WINTRUST_BLOB_INFO
         {
@@ -163,6 +196,7 @@ namespace System.Runtime.InteropServices.Tests
 
             /// GUID->_GUID
             internal GUID gSubject;
+
             //[MarshalAs(UnmanagedType.Struct)]
             //internal Guid gSubject;
 

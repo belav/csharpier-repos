@@ -54,9 +54,9 @@
 //   Contributor(s): ______________________________________.
 //
 //---------------------------------------------------------------------------
+using System;
 using RabbitMQ.Client;
 using RabbitMQ.Util;
-using System;
 
 namespace RabbitMQ.Client.Impl
 {

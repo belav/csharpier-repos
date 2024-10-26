@@ -22,7 +22,8 @@ namespace System.Diagnostics
                 _columnNumber = monoStackFrame.columnNumber;
             }
 
-            _isLastFrameFromForeignExceptionStackTrace = monoStackFrame.isLastFrameFromForeignException;
+            _isLastFrameFromForeignExceptionStackTrace =
+                monoStackFrame.isLastFrameFromForeignException;
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -35,9 +36,16 @@ namespace System.Diagnostics
 
             MethodBase? method = null;
             string? fileName = null;
-            bool success = GetFrameInfo(skipFrames + SystemDiagnosticsStackDepth, needFileInfo,
-                                        ObjectHandleOnStack.Create (ref method), ObjectHandleOnStack.Create (ref fileName),
-                                        out int ilOffset, out int nativeOffset, out int line, out int column);
+            bool success = GetFrameInfo(
+                skipFrames + SystemDiagnosticsStackDepth,
+                needFileInfo,
+                ObjectHandleOnStack.Create(ref method),
+                ObjectHandleOnStack.Create(ref fileName),
+                out int ilOffset,
+                out int nativeOffset,
+                out int line,
+                out int column
+            );
             if (!success)
                 return;
 
@@ -58,8 +66,15 @@ namespace System.Diagnostics
 #pragma warning restore IDE0060
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern bool GetFrameInfo(int skipFrames, bool needFileInfo,
-                                                ObjectHandleOnStack out_method, ObjectHandleOnStack out_file,
-                                                out int ilOffset, out int nativeOffset, out int line, out int column);
+        private static extern bool GetFrameInfo(
+            int skipFrames,
+            bool needFileInfo,
+            ObjectHandleOnStack out_method,
+            ObjectHandleOnStack out_file,
+            out int ilOffset,
+            out int nativeOffset,
+            out int line,
+            out int column
+        );
     }
 }

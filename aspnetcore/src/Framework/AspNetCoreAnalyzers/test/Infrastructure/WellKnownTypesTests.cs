@@ -21,14 +21,16 @@ public partial class WellKnownTypesTests
     public async Task ResolveAllWellKnownTypes()
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 class Program
 {
     static void Main()
     {
     }
 }
-");
+"
+        );
         // Act
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
@@ -43,25 +45,34 @@ class Program
     public async Task ResolveAllWellKnownTypes_ToleratesDuplicateTypeNames(string assemblyName)
     {
         // Arrange
-        var source = TestSource.Read(@"
+        var source = TestSource.Read(
+            @"
 class Program
 {
     static void Main()
     {
     }
 }
-");
+"
+        );
         var referenceSource = """
-  namespace Microsoft.AspNetCore.Builder
-  {
-      public static class EndpointRouteBuilderExtensions
-      {
-      }
-  }
-  """;
+            namespace Microsoft.AspNetCore.Builder
+            {
+                public static class EndpointRouteBuilderExtensions
+                {
+                }
+            }
+            """;
         // Act
-        var project = TestDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, source.Source);
-        Stream assemblyStream = GetInMemoryAssemblyStreamForCode(referenceSource, assemblyName, project.MetadataReferences.ToArray());
+        var project = TestDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            source.Source
+        );
+        Stream assemblyStream = GetInMemoryAssemblyStreamForCode(
+            referenceSource,
+            assemblyName,
+            project.MetadataReferences.ToArray()
+        );
         project = project.AddMetadataReference(MetadataReference.CreateFromStream(assemblyStream));
         var diagnostics = await Runner.GetDiagnosticsAsync(project);
 
@@ -69,7 +80,11 @@ class Program
         Assert.Collection(diagnostics, d => Assert.Equal("TEST001", d.Id));
     }
 
-    private static Stream GetInMemoryAssemblyStreamForCode(string code, string assemblyName, params MetadataReference[] references)
+    private static Stream GetInMemoryAssemblyStreamForCode(
+        string code,
+        string assemblyName,
+        params MetadataReference[] references
+    )
     {
         var tree = CSharpSyntaxTree.ParseText(code);
         var trees = ImmutableArray.Create(tree);
@@ -85,18 +100,18 @@ class Program
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     private class TestAnalyzer : DiagnosticAnalyzer
     {
-        internal static readonly DiagnosticDescriptor SuccessDescriptor = new(
-            "TEST001",
-            "Success result",
-            "Success result",
-            "Usage",
-            DiagnosticSeverity.Info,
-            isEnabledByDefault: true);
+        internal static readonly DiagnosticDescriptor SuccessDescriptor =
+            new(
+                "TEST001",
+                "Success result",
+                "Success result",
+                "Usage",
+                DiagnosticSeverity.Info,
+                isEnabledByDefault: true
+            );
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(new[]
-        {
-            SuccessDescriptor
-        });
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+            ImmutableArray.Create(new[] { SuccessDescriptor });
 
         public override void Initialize(AnalysisContext context)
         {
@@ -118,9 +133,7 @@ class Program
                 wellKnownTypes.Get(key);
             }
 
-            context.ReportDiagnostic(Diagnostic.Create(
-                SuccessDescriptor,
-                location: null));
+            context.ReportDiagnostic(Diagnostic.Create(SuccessDescriptor, location: null));
         }
     }
 }

@@ -10,5 +10,8 @@ namespace Microsoft.CodeAnalysis.Simplification;
 internal interface ISimplification
 {
     SimplifierOptions DefaultOptions { get; }
-    SimplifierOptions GetSimplifierOptions(IOptionsReader options, SimplifierOptions? fallbackOptions);
+    SimplifierOptions GetSimplifierOptions(
+        IOptionsReader options,
+        SimplifierOptions? fallbackOptions
+    );
 }

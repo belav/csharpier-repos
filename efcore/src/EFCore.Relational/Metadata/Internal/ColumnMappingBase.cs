@@ -21,10 +21,7 @@ public class ColumnMappingBase : Annotatable, IColumnMappingBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public ColumnMappingBase(
-        IProperty property,
-        IColumnBase column,
-        ITableMappingBase tableMapping)
+    public ColumnMappingBase(IProperty property, IColumnBase column, ITableMappingBase tableMapping)
     {
         Property = property;
         Column = column;
@@ -38,9 +35,12 @@ public class ColumnMappingBase : Annotatable, IColumnMappingBase
     public virtual IColumnBase Column { get; }
 
     /// <inheritdoc />
-    public virtual RelationalTypeMapping TypeMapping
-        => NonCapturingLazyInitializer.EnsureInitialized(
-            ref _typeMapping, this, static mapping => mapping.GetTypeMapping());
+    public virtual RelationalTypeMapping TypeMapping =>
+        NonCapturingLazyInitializer.EnsureInitialized(
+            ref _typeMapping,
+            this,
+            static mapping => mapping.GetTypeMapping()
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,8 +48,7 @@ public class ColumnMappingBase : Annotatable, IColumnMappingBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual RelationalTypeMapping GetTypeMapping()
-        => Property.GetRelationalTypeMapping();
+    protected virtual RelationalTypeMapping GetTypeMapping() => Property.GetRelationalTypeMapping();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -65,8 +64,7 @@ public class ColumnMappingBase : Annotatable, IColumnMappingBase
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => ((AnnotatableBase)TableMapping).IsReadOnly;
+    public override bool IsReadOnly => ((AnnotatableBase)TableMapping).IsReadOnly;
 
     /// <inheritdoc />
     ITableMappingBase IColumnMappingBase.TableMapping

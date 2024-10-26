@@ -18,10 +18,9 @@ public class WebAssemblyICUShardingTest : ServerTestBase<ToggleExecutionModeServ
     public WebAssemblyICUShardingTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     [Fact]
     public void LoadingApp_FrenchLanguage_Works()
@@ -43,10 +42,15 @@ public class WebAssemblyICUShardingTest : ServerTestBase<ToggleExecutionModeServ
 
     [Theory]
     [InlineData("ko", "ko", "2020. 9. 2. 오전 12:00:00", "안녕하세요")] // ko exists in the CJK data set.
-    [InlineData("ko-KR", "ko-KR", "2020. 9. 2. 오전 12:00:00", "안녕하세요")]// ko-KR exists in the CJK data set.
+    [InlineData("ko-KR", "ko-KR", "2020. 9. 2. 오전 12:00:00", "안녕하세요")] // ko-KR exists in the CJK data set.
     [InlineData("ko-KO", "ko-KO", "2020. 9. 2. 00:00:00", "안녕하세요")] // ko-KO is custom culture and doesn't exist in the CJK data set.
     [InlineData("ja-JP", "ja-JP", "2020/09/02 0:00:00", "Hello")] // ja-JP exists in the CJK data set, but it doesn't have "Hello" defined in resx file.
-    public void LoadingApp_KoreanLanguage_Works(string code, string expectedCurrentCulture, string expectedDate, string expectedText)
+    public void LoadingApp_KoreanLanguage_Works(
+        string code,
+        string expectedCurrentCulture,
+        string expectedDate,
+        string expectedText
+    )
     {
         // Arrange
         // This verifies the CJK icu data set.
@@ -111,10 +115,13 @@ public class WebAssemblyICUShardingTest : ServerTestBase<ToggleExecutionModeServ
         var errorUi = Browser.Exists(By.Id("blazor-error-ui"));
         Browser.Equal("block", () => errorUi.GetCssValue("display"));
 
-        var expected = "Blazor detected a change in the application's culture that is not supported with the current project configuration.";
+        var expected =
+            "Blazor detected a change in the application's culture that is not supported with the current project configuration.";
         var logs = Browser.GetBrowserLogs(LogLevel.Severe).Select(l => l.Message);
-        Assert.True(logs.Any(l => l.Contains(expected)),
-            $"Expected to see globalization error message in the browser logs: {string.Join(Environment.NewLine, logs)}.");
+        Assert.True(
+            logs.Any(l => l.Contains(expected)),
+            $"Expected to see globalization error message in the browser logs: {string.Join(Environment.NewLine, logs)}."
+        );
     }
 
     private void Initialize(CultureInfo culture)

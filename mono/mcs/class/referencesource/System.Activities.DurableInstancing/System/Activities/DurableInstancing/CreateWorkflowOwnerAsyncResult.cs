@@ -20,13 +20,16 @@ namespace System.Activities.DurableInstancing
 
     sealed class CreateWorkflowOwnerAsyncResult : WorkflowOwnerAsyncResult
     {
-        static readonly string commandText = string.Format(CultureInfo.InvariantCulture, "{0}.[CreateLockOwner]", SqlWorkflowInstanceStoreConstants.DefaultSchema);
+        static readonly string commandText = string.Format(
+            CultureInfo.InvariantCulture,
+            "{0}.[CreateLockOwner]",
+            SqlWorkflowInstanceStoreConstants.DefaultSchema
+        );
         bool fireActivatableInstancesEvent;
         bool fireRunnableInstancesEvent;
         Guid lockOwnerId;
 
-        public CreateWorkflowOwnerAsyncResult
-            (
+        public CreateWorkflowOwnerAsyncResult(
             InstancePersistenceContext context,
             InstancePersistenceCommand command,
             SqlWorkflowInstanceStore store,
@@ -35,10 +38,9 @@ namespace System.Activities.DurableInstancing
             TimeSpan timeout,
             AsyncCallback callback,
             object state
-            ) :
-            base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
-        {
-        }
+        )
+            : base(context, command, store, storeLock, currentTransaction, timeout, callback, state)
+        { }
 
         protected override string ConnectionString
         {
@@ -47,7 +49,9 @@ namespace System.Activities.DurableInstancing
                 // by making CreateWorkflowOwnerAsyncResult to use the same Connection Pool as the PersistenceTasks(LockRenewalTask, etc),
                 // we can prevent unbound bloating of new threads created for task dispatching blocked on the busy Connection Pool.
                 // If the Connection Pool is too busy to handle pending tasks, then any incoming CreateWorkflowOwnerAsyncResult will also block on the Connection Pool too.
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(base.Store.CachedConnectionString);
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(
+                    base.Store.CachedConnectionString
+                );
                 builder.ApplicationName = SqlWorkflowInstanceStore.CommonConnectionPoolName;
                 return builder.ToString();
             }
@@ -59,50 +63,166 @@ namespace System.Activities.DurableInstancing
 
             if (base.StoreLock.IsValid)
             {
-                throw FxTrace.Exception.AsError(new InstancePersistenceCommandException(SR.MultipleLockOwnersNotSupported));
+                throw FxTrace.Exception.AsError(
+                    new InstancePersistenceCommandException(SR.MultipleLockOwnersNotSupported)
+                );
             }
 
             bool withIdentity;
-            IDictionary<XName, InstanceValue> commandMetadata = GetCommandMetadata(out withIdentity);
+            IDictionary<XName, InstanceValue> commandMetadata = GetCommandMetadata(
+                out withIdentity
+            );
             SqlParameterCollection parameters = sqlCommand.Parameters;
             double lockTimeout = base.Store.BufferedHostLockRenewalPeriod.TotalSeconds;
             this.lockOwnerId = Guid.NewGuid();
             ExtractWorkflowHostType(commandMetadata);
 
             InstanceValue instanceValue;
-            if (commandMetadata.TryGetValue(PersistenceMetadataNamespace.ActivationType, out instanceValue))
+            if (
+                commandMetadata.TryGetValue(
+                    PersistenceMetadataNamespace.ActivationType,
+                    out instanceValue
+                )
+            )
             {
                 if (withIdentity)
                 {
-                    throw FxTrace.Exception.AsError(new InstancePersistenceCommandException(SR.IdentityNotSupportedWithActivation));
+                    throw FxTrace.Exception.AsError(
+                        new InstancePersistenceCommandException(
+                            SR.IdentityNotSupportedWithActivation
+                        )
+                    );
                 }
                 if (!PersistenceMetadataNamespace.ActivationTypes.WAS.Equals(instanceValue.Value))
                 {
-                    throw FxTrace.Exception.AsError(new InstancePersistenceCommandException(SR.NonWASActivationNotSupported));
+                    throw FxTrace.Exception.AsError(
+                        new InstancePersistenceCommandException(SR.NonWASActivationNotSupported)
+                    );
                 }
                 this.fireActivatableInstancesEvent = true;
             }
 
-            ArraySegment<byte>[] properties = SerializationUtilities.SerializePropertyBag(commandMetadata, base.Store.InstanceEncodingOption);
+            ArraySegment<byte>[] properties = SerializationUtilities.SerializePropertyBag(
+                commandMetadata,
+                base.Store.InstanceEncodingOption
+            );
 
-            parameters.Add(new SqlParameter { ParameterName = "@lockTimeout", SqlDbType = SqlDbType.Int, Value = lockTimeout });
-            parameters.Add(new SqlParameter { ParameterName = "@lockOwnerId", SqlDbType = SqlDbType.UniqueIdentifier, Value = this.lockOwnerId });
-            parameters.Add(new SqlParameter { ParameterName = "@workflowHostType", SqlDbType = SqlDbType.UniqueIdentifier, Value = (base.Store.WorkflowHostType != Guid.Empty) ? base.Store.WorkflowHostType : (object) DBNull.Value });
-            parameters.Add(new SqlParameter { ParameterName = "@enqueueCommand", SqlDbType = SqlDbType.Bit, Value = base.Store.EnqueueRunCommands });
-            parameters.Add(new SqlParameter { ParameterName = "@deleteInstanceOnCompletion", SqlDbType = SqlDbType.Bit, Value = (base.Store.InstanceCompletionAction == InstanceCompletionAction.DeleteAll) });
-            parameters.Add(new SqlParameter { ParameterName = "@primitiveLockOwnerData", SqlDbType = SqlDbType.VarBinary, Size = properties[0].Count, Value = (object)(properties[0].Array) ?? DBNull.Value });
-            parameters.Add(new SqlParameter { ParameterName = "@complexLockOwnerData", SqlDbType = SqlDbType.VarBinary, Size = properties[1].Count, Value = (object)(properties[1].Array) ?? DBNull.Value });
-            parameters.Add(new SqlParameter { ParameterName = "@writeOnlyPrimitiveLockOwnerData", SqlDbType = SqlDbType.VarBinary, Size = properties[2].Count, Value = (object)(properties[2].Array) ?? DBNull.Value });
-            parameters.Add(new SqlParameter { ParameterName = "@writeOnlyComplexLockOwnerData", SqlDbType = SqlDbType.VarBinary, Size = properties[3].Count, Value = (object)(properties[3].Array) ?? DBNull.Value });
-            parameters.Add(new SqlParameter { ParameterName = "@encodingOption", SqlDbType = SqlDbType.TinyInt, Value = base.Store.InstanceEncodingOption });
-            parameters.Add(new SqlParameter { ParameterName = "@machineName", SqlDbType = SqlDbType.NVarChar, Value = SqlWorkflowInstanceStoreConstants.MachineName });
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@lockTimeout",
+                    SqlDbType = SqlDbType.Int,
+                    Value = lockTimeout,
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@lockOwnerId",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value = this.lockOwnerId,
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@workflowHostType",
+                    SqlDbType = SqlDbType.UniqueIdentifier,
+                    Value =
+                        (base.Store.WorkflowHostType != Guid.Empty)
+                            ? base.Store.WorkflowHostType
+                            : (object)DBNull.Value,
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@enqueueCommand",
+                    SqlDbType = SqlDbType.Bit,
+                    Value = base.Store.EnqueueRunCommands,
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@deleteInstanceOnCompletion",
+                    SqlDbType = SqlDbType.Bit,
+                    Value = (
+                        base.Store.InstanceCompletionAction == InstanceCompletionAction.DeleteAll
+                    ),
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@primitiveLockOwnerData",
+                    SqlDbType = SqlDbType.VarBinary,
+                    Size = properties[0].Count,
+                    Value = (object)(properties[0].Array) ?? DBNull.Value,
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@complexLockOwnerData",
+                    SqlDbType = SqlDbType.VarBinary,
+                    Size = properties[1].Count,
+                    Value = (object)(properties[1].Array) ?? DBNull.Value,
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@writeOnlyPrimitiveLockOwnerData",
+                    SqlDbType = SqlDbType.VarBinary,
+                    Size = properties[2].Count,
+                    Value = (object)(properties[2].Array) ?? DBNull.Value,
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@writeOnlyComplexLockOwnerData",
+                    SqlDbType = SqlDbType.VarBinary,
+                    Size = properties[3].Count,
+                    Value = (object)(properties[3].Array) ?? DBNull.Value,
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@encodingOption",
+                    SqlDbType = SqlDbType.TinyInt,
+                    Value = base.Store.InstanceEncodingOption,
+                }
+            );
+            parameters.Add(
+                new SqlParameter
+                {
+                    ParameterName = "@machineName",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Value = SqlWorkflowInstanceStoreConstants.MachineName,
+                }
+            );
 
             if (withIdentity)
             {
-                Fx.Assert(base.Store.DatabaseVersion >= StoreUtilities.Version45, "Should never get here if the db version isn't 4.5 or higher");
+                Fx.Assert(
+                    base.Store.DatabaseVersion >= StoreUtilities.Version45,
+                    "Should never get here if the db version isn't 4.5 or higher"
+                );
 
-                string identityMetadataXml = SerializationUtilities.GetIdentityMetadataXml(base.InstancePersistenceCommand);
-                parameters.Add(new SqlParameter { ParameterName = "@identityMetadata", SqlDbType = SqlDbType.Xml, Value = identityMetadataXml });
+                string identityMetadataXml = SerializationUtilities.GetIdentityMetadataXml(
+                    base.InstancePersistenceCommand
+                );
+                parameters.Add(
+                    new SqlParameter
+                    {
+                        ParameterName = "@identityMetadata",
+                        SqlDbType = SqlDbType.Xml,
+                        Value = identityMetadataXml,
+                    }
+                );
             }
         }
 
@@ -118,11 +238,17 @@ namespace System.Activities.DurableInstancing
 
         protected override Exception ProcessSqlResult(SqlDataReader reader)
         {
-            Exception exception = StoreUtilities.GetNextResultSet(this.InstancePersistenceCommand.Name, reader);
+            Exception exception = StoreUtilities.GetNextResultSet(
+                this.InstancePersistenceCommand.Name,
+                reader
+            );
 
             if (exception == null)
             {
-                base.InstancePersistenceContext.BindInstanceOwner(this.lockOwnerId, this.lockOwnerId);
+                base.InstancePersistenceContext.BindInstanceOwner(
+                    this.lockOwnerId,
+                    this.lockOwnerId
+                );
                 long surrogateLockOwnerId = reader.GetInt64(1);
 
                 // Activatable takes precendence over Runnable.  (Activation owners cannot run instances.)
@@ -135,7 +261,13 @@ namespace System.Activities.DurableInstancing
                     base.InstancePersistenceContext.BindEvent(HasRunnableWorkflowEvent.Value);
                 }
 
-                base.StoreLock.MarkInstanceOwnerCreated(this.lockOwnerId, surrogateLockOwnerId, base.InstancePersistenceContext.InstanceHandle, this.fireRunnableInstancesEvent, this.fireActivatableInstancesEvent);
+                base.StoreLock.MarkInstanceOwnerCreated(
+                    this.lockOwnerId,
+                    surrogateLockOwnerId,
+                    base.InstancePersistenceContext.InstanceHandle,
+                    this.fireRunnableInstancesEvent,
+                    this.fireActivatableInstancesEvent
+                );
             }
 
             return exception;
@@ -150,18 +282,30 @@ namespace System.Activities.DurableInstancing
 
                 if (workflowHostType == null)
                 {
-                    throw FxTrace.Exception.AsError(new InstancePersistenceCommandException(SR.InvalidMetadataValue(WorkflowNamespace.WorkflowHostType, typeof(XName).Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InstancePersistenceCommandException(
+                            SR.InvalidMetadataValue(
+                                WorkflowNamespace.WorkflowHostType,
+                                typeof(XName).Name
+                            )
+                        )
+                    );
                 }
 
-                byte[] workflowHostTypeBuffer = Encoding.Unicode.GetBytes(workflowHostType.ToString());
-                base.Store.WorkflowHostType = new Guid(HashHelper.ComputeHash(workflowHostTypeBuffer));
+                byte[] workflowHostTypeBuffer = Encoding.Unicode.GetBytes(
+                    workflowHostType.ToString()
+                );
+                base.Store.WorkflowHostType = new Guid(
+                    HashHelper.ComputeHash(workflowHostTypeBuffer)
+                );
                 this.fireRunnableInstancesEvent = true;
             }
         }
 
         IDictionary<XName, InstanceValue> GetCommandMetadata(out bool withIdentity)
         {
-            CreateWorkflowOwnerWithIdentityCommand createOwnerWithIdentityCommand = base.InstancePersistenceCommand as CreateWorkflowOwnerWithIdentityCommand;
+            CreateWorkflowOwnerWithIdentityCommand createOwnerWithIdentityCommand =
+                base.InstancePersistenceCommand as CreateWorkflowOwnerWithIdentityCommand;
             if (createOwnerWithIdentityCommand != null)
             {
                 withIdentity = true;
@@ -169,7 +313,8 @@ namespace System.Activities.DurableInstancing
             }
             else
             {
-                CreateWorkflowOwnerCommand createOwnerCommand = (CreateWorkflowOwnerCommand)base.InstancePersistenceCommand;
+                CreateWorkflowOwnerCommand createOwnerCommand = (CreateWorkflowOwnerCommand)
+                    base.InstancePersistenceCommand;
                 withIdentity = false;
                 return createOwnerCommand.InstanceOwnerMetadata;
             }

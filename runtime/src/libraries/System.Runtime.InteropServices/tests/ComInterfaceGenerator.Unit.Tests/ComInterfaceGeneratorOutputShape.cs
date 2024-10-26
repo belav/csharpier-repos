@@ -17,7 +17,6 @@ using Microsoft.Interop;
 using Microsoft.Interop.UnitTests;
 using SourceGenerators.Tests;
 using Xunit;
-
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpSourceGeneratorVerifier<Microsoft.Interop.ComInterfaceGenerator>;
 
 namespace ComInterfaceGenerator.Unit.Tests
@@ -49,7 +48,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string source = $$"""
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [GeneratedComInterface]
                 [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
                 partial interface I
@@ -75,7 +74,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string source = $$"""
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [GeneratedComInterface]
                 [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
                 partial interface I
@@ -106,7 +105,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             string source = $$"""
                 using System.Runtime.InteropServices;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [GeneratedComInterface]
                 [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
                 partial interface I
@@ -130,30 +129,31 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task InheritingComInterfacesGenerateShadowingMethodsWithDefaultImplementations()
         {
             string source = $$"""
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
-       
-               [GeneratedComInterface]
-               [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
-               partial interface I
-               {
-                   void Method();
-                   void Method2();
-               }
-               [GeneratedComInterface]
-               [Guid("734AFCEC-8862-43CB-AB29-5A7954929E23")]
-               partial interface J : I
-               {
-                   void MethodA();
-                   void MethodB();
-               }
-               """;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+
+                [GeneratedComInterface]
+                [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
+                partial interface I
+                {
+                    void Method();
+                    void Method2();
+                }
+                [GeneratedComInterface]
+                [Guid("734AFCEC-8862-43CB-AB29-5A7954929E23")]
+                partial interface J : I
+                {
+                    void MethodA();
+                    void MethodB();
+                }
+                """;
 
             var test = new VerifyCompilationTest<Microsoft.Interop.ComInterfaceGenerator>(false)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
-                CompilationVerifier = VerifyCompilation
+                TestBehaviors =
+                    TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
+                CompilationVerifier = VerifyCompilation,
             };
             await test.RunAsync();
 
@@ -174,35 +174,36 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task InheritingComInterfacesGenerateShadowingMethodsWithDefaultImplementations_LongInheritanceChain()
         {
             string source = $$"""
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
-       
-               [GeneratedComInterface]
-               [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
-               partial interface I
-               {
-                   void Method();
-               }
-               [GeneratedComInterface]
-               [Guid("734AFCEC-8862-43CB-AB29-5A7954929E23")]
-               partial interface J : I
-               {
-                   void Method2();
-               }
-               [GeneratedComInterface]
-               [Guid("0DB41042-0255-4CDD-B73A-9C5D5F31303D")]
-               partial interface K : J
-               {
-                   void MethodA();
-                   void MethodB();
-               }
-               """;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+
+                [GeneratedComInterface]
+                [Guid("9D3FD745-3C90-4C10-B140-FAFB01E3541D")]
+                partial interface I
+                {
+                    void Method();
+                }
+                [GeneratedComInterface]
+                [Guid("734AFCEC-8862-43CB-AB29-5A7954929E23")]
+                partial interface J : I
+                {
+                    void Method2();
+                }
+                [GeneratedComInterface]
+                [Guid("0DB41042-0255-4CDD-B73A-9C5D5F31303D")]
+                partial interface K : J
+                {
+                    void MethodA();
+                    void MethodB();
+                }
+                """;
 
             var test = new VerifyCompilationTest<Microsoft.Interop.ComInterfaceGenerator>(false)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
-                CompilationVerifier = VerifyCompilation
+                TestBehaviors =
+                    TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
+                CompilationVerifier = VerifyCompilation,
             };
             await test.RunAsync();
 
@@ -226,7 +227,9 @@ namespace ComInterfaceGenerator.Unit.Tests
             Assert.False(method.IsAbstract);
             Assert.True(method.IsVirtual);
 
-            var syntax = Assert.IsType<MethodDeclarationSyntax>(Assert.Single(method.DeclaringSyntaxReferences).GetSyntax());
+            var syntax = Assert.IsType<MethodDeclarationSyntax>(
+                Assert.Single(method.DeclaringSyntaxReferences).GetSyntax()
+            );
             Assert.Contains(syntax.Modifiers, token => token.IsKind(SyntaxKind.NewKeyword));
         }
 
@@ -234,54 +237,63 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task ValidateAttributesAreCopiedToShadowingMethods()
         {
             var source = $$"""
-                using System;
-                using System.Runtime.InteropServices;
-                using System.Runtime.InteropServices.Marshalling;
+                    using System;
+                    using System.Runtime.InteropServices;
+                    using System.Runtime.InteropServices.Marshalling;
 
-                namespace Test
-                {
-                    [GeneratedComInterface]
-                    [Guid("EA4319EA-AE9A-4261-B42D-BB027AD81F5F")]
-                    partial interface IFoo
+                    namespace Test
                     {
-                        [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute("message")]
-                        void Bar();
-                    }
+                        [GeneratedComInterface]
+                        [Guid("EA4319EA-AE9A-4261-B42D-BB027AD81F5F")]
+                        partial interface IFoo
+                        {
+                            [System.Diagnostics.CodeAnalysis.RequiresUnreferencedCodeAttribute("message")]
+                            void Bar();
+                        }
 
-                    [GeneratedComInterface]
-                    [Guid("8A501001-02CA-490A-AA23-0ECC646F07A3")]
-                    partial interface IDerivedIface : IFoo
-                    {
+                        [GeneratedComInterface]
+                        [Guid("8A501001-02CA-490A-AA23-0ECC646F07A3")]
+                        partial interface IDerivedIface : IFoo
+                        {
+                        }
                     }
-                }
-            """;
+                """;
 
             var test = new VerifyCompilationTest<Microsoft.Interop.ComInterfaceGenerator>(false)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
-                CompilationVerifier = VerifyCompilation
+                TestBehaviors =
+                    TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
+                CompilationVerifier = VerifyCompilation,
             };
             await test.RunAsync();
 
             static void VerifyCompilation(Compilation comp)
             {
-                Assert.True(comp.GetTypeByMetadataName("Test.IDerivedIface")
-                    ?.GetMembers()
-                    .Where(m => m.Kind == SymbolKind.Method && m.Name == "Bar")
-                    .SingleOrDefault()
-                    ?.GetAttributes()
-                    .Any(att => att.AttributeClass?.Name == nameof(RequiresUnreferencedCodeAttribute)));
+                Assert.True(
+                    comp.GetTypeByMetadataName("Test.IDerivedIface")
+                        ?.GetMembers()
+                        .Where(m => m.Kind == SymbolKind.Method && m.Name == "Bar")
+                        .SingleOrDefault()
+                        ?.GetAttributes()
+                        .Any(att =>
+                            att.AttributeClass?.Name == nameof(RequiresUnreferencedCodeAttribute)
+                        )
+                );
             }
         }
 
-        private static async Task VerifyGeneratedTypeShapes(string source, params string[] typeNames)
+        private static async Task VerifyGeneratedTypeShapes(
+            string source,
+            params string[] typeNames
+        )
         {
-            GeneratedShapeTest test = new(typeNames)
-            {
-                TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
-            };
+            GeneratedShapeTest test =
+                new(typeNames)
+                {
+                    TestCode = source,
+                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+                };
 
             await test.RunAsync();
         }
@@ -299,39 +311,80 @@ namespace ComInterfaceGenerator.Unit.Tests
             protected override void VerifyFinalCompilation(Compilation compilation)
             {
                 // Generate one source file per attributed interface.
-                Assert.Equal(TestState.Sources.Count + _typeNames.Length, compilation.SyntaxTrees.Count());
+                Assert.Equal(
+                    TestState.Sources.Count + _typeNames.Length,
+                    compilation.SyntaxTrees.Count()
+                );
                 Assert.All(_typeNames, name => VerifyShape(compilation, name));
             }
 
-            private static void VerifyShape(Compilation comp, string userDefinedInterfaceMetadataName)
+            private static void VerifyShape(
+                Compilation comp,
+                string userDefinedInterfaceMetadataName
+            )
             {
-                INamedTypeSymbol? userDefinedInterface = comp.Assembly.GetTypeByMetadataName(userDefinedInterfaceMetadataName);
+                INamedTypeSymbol? userDefinedInterface = comp.Assembly.GetTypeByMetadataName(
+                    userDefinedInterfaceMetadataName
+                );
                 Assert.NotNull(userDefinedInterface);
 
-                INamedTypeSymbol? iUnknownDerivedAttributeType = comp.GetTypeByMetadataName("System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2");
+                INamedTypeSymbol? iUnknownDerivedAttributeType = comp.GetTypeByMetadataName(
+                    "System.Runtime.InteropServices.Marshalling.IUnknownDerivedAttribute`2"
+                );
 
                 Assert.NotNull(iUnknownDerivedAttributeType);
 
                 AttributeData iUnknownDerivedAttribute = Assert.Single(
                     userDefinedInterface.GetAttributes(),
-                    attr => SymbolEqualityComparer.Default.Equals(attr.AttributeClass?.OriginalDefinition, iUnknownDerivedAttributeType));
+                    attr =>
+                        SymbolEqualityComparer.Default.Equals(
+                            attr.AttributeClass?.OriginalDefinition,
+                            iUnknownDerivedAttributeType
+                        )
+                );
 
-                Assert.Collection(Assert.IsAssignableFrom<INamedTypeSymbol>(iUnknownDerivedAttribute.AttributeClass).TypeArguments,
+                Assert.Collection(
+                    Assert
+                        .IsAssignableFrom<INamedTypeSymbol>(iUnknownDerivedAttribute.AttributeClass)
+                        .TypeArguments,
                     infoType =>
                     {
-                        Assert.True(Assert.IsAssignableFrom<INamedTypeSymbol>(infoType).IsFileLocal);
+                        Assert.True(
+                            Assert.IsAssignableFrom<INamedTypeSymbol>(infoType).IsFileLocal
+                        );
                     },
                     implementationType =>
                     {
-                        Assert.True(Assert.IsAssignableFrom<INamedTypeSymbol>(implementationType).IsFileLocal);
-                        Assert.Contains(userDefinedInterface, implementationType.Interfaces, SymbolEqualityComparer.Default);
-                        Assert.Contains(implementationType.GetAttributes(), attr => attr.AttributeClass?.ToDisplayString() == typeof(DynamicInterfaceCastableImplementationAttribute).FullName);
-                        Assert.All(userDefinedInterface.GetMembers().OfType<IMethodSymbol>().Where(method => method.IsAbstract && !method.IsStatic),
+                        Assert.True(
+                            Assert
+                                .IsAssignableFrom<INamedTypeSymbol>(implementationType)
+                                .IsFileLocal
+                        );
+                        Assert.Contains(
+                            userDefinedInterface,
+                            implementationType.Interfaces,
+                            SymbolEqualityComparer.Default
+                        );
+                        Assert.Contains(
+                            implementationType.GetAttributes(),
+                            attr =>
+                                attr.AttributeClass?.ToDisplayString()
+                                == typeof(DynamicInterfaceCastableImplementationAttribute).FullName
+                        );
+                        Assert.All(
+                            userDefinedInterface
+                                .GetMembers()
+                                .OfType<IMethodSymbol>()
+                                .Where(method => method.IsAbstract && !method.IsStatic),
                             method =>
                             {
-                                Assert.NotNull(implementationType.FindImplementationForInterfaceMember(method));
-                            });
-                    });
+                                Assert.NotNull(
+                                    implementationType.FindImplementationForInterfaceMember(method)
+                                );
+                            }
+                        );
+                    }
+                );
             }
         }
     }

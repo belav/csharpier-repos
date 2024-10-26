@@ -20,13 +20,17 @@ public class ByteArrayInterop
     }
 
     [JSInvokable]
-    public static ByteArrayWrapper RoundTripByteArrayWrapperObject(ByteArrayWrapper byteArrayWrapper)
+    public static ByteArrayWrapper RoundTripByteArrayWrapperObject(
+        ByteArrayWrapper byteArrayWrapper
+    )
     {
         return byteArrayWrapper;
     }
 
     [JSInvokable]
-    public static Task<ByteArrayWrapper> RoundTripByteArrayWrapperObjectAsync(ByteArrayWrapper byteArrayWrapper)
+    public static Task<ByteArrayWrapper> RoundTripByteArrayWrapperObjectAsync(
+        ByteArrayWrapper byteArrayWrapper
+    )
     {
         return Task.FromResult(byteArrayWrapper);
     }

@@ -15,58 +15,83 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
         {
             Assert.NotNull(RuntimeInformation.RuntimeIdentifier);
             Assert.Same(RuntimeInformation.RuntimeIdentifier, RuntimeInformation.RuntimeIdentifier);
-            Assert.EndsWith(RuntimeInformation.ProcessArchitecture.ToString(), RuntimeInformation.RuntimeIdentifier, StringComparison.OrdinalIgnoreCase);
+            Assert.EndsWith(
+                RuntimeInformation.ProcessArchitecture.ToString(),
+                RuntimeInformation.RuntimeIdentifier,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void VerifyEnvironmentVariable()
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions();
-            options.StartInfo.EnvironmentVariables.Add("DOTNET_RUNTIME_ID", "overriddenFromEnv-rid");
+            options.StartInfo.EnvironmentVariables.Add(
+                "DOTNET_RUNTIME_ID",
+                "overriddenFromEnv-rid"
+            );
 
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.Equal("overriddenFromEnv-rid", RuntimeInformation.RuntimeIdentifier);
-            }, options).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    () =>
+                    {
+                        Assert.Equal("overriddenFromEnv-rid", RuntimeInformation.RuntimeIdentifier);
+                    },
+                    options
+                )
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void VerifyAppContextVariable()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", "overridden-rid");
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", "overridden-rid");
 
-                Assert.Equal("overridden-rid", RuntimeInformation.RuntimeIdentifier);
-            }).Dispose();
+                    Assert.Equal("overridden-rid", RuntimeInformation.RuntimeIdentifier);
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void VerifyAppContextVariableUnknown()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", null);
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", null);
 
-                Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
-            }).Dispose();
+                    Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
+                })
+                .Dispose();
 
-            RemoteExecutor.Invoke(() =>
-            {
-                AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", new object());
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetData("RUNTIME_IDENTIFIER", new object());
 
-                Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
-            }).Dispose();
+                    Assert.Equal("unknown", RuntimeInformation.RuntimeIdentifier);
+                })
+                .Dispose();
         }
 
         [Fact, PlatformSpecific(TestPlatforms.Windows)]
         public void VerifyWindowsRid()
         {
-            Assert.StartsWith("win", RuntimeInformation.RuntimeIdentifier, StringComparison.OrdinalIgnoreCase);
+            Assert.StartsWith(
+                "win",
+                RuntimeInformation.RuntimeIdentifier,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         [Fact, PlatformSpecific(TestPlatforms.Linux)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "Bionic is not normal Linux, has no LSB /etc/os-release")]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "Bionic is not normal Linux, has no LSB /etc/os-release"
+        )]
         public void VerifyLinuxRid()
         {
             string expectedOSName = File.ReadAllLines("/etc/os-release")
@@ -75,20 +100,36 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
                 .Trim('\"', '\'');
 
             // Should either start with linux (portable builds or NativeAOT) or the OS name (source builds)
-            Assert.True(RuntimeInformation.RuntimeIdentifier.StartsWith("linux", StringComparison.OrdinalIgnoreCase)
-                || RuntimeInformation.RuntimeIdentifier.StartsWith(expectedOSName, StringComparison.OrdinalIgnoreCase));
+            Assert.True(
+                RuntimeInformation.RuntimeIdentifier.StartsWith(
+                    "linux",
+                    StringComparison.OrdinalIgnoreCase
+                )
+                    || RuntimeInformation.RuntimeIdentifier.StartsWith(
+                        expectedOSName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+            );
         }
 
         [Fact, PlatformSpecific(TestPlatforms.FreeBSD)]
         public void VerifyFreeBSDRid()
         {
-            Assert.StartsWith("freebsd", RuntimeInformation.RuntimeIdentifier, StringComparison.OrdinalIgnoreCase);
+            Assert.StartsWith(
+                "freebsd",
+                RuntimeInformation.RuntimeIdentifier,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         [Fact, PlatformSpecific(TestPlatforms.OSX)]
         public void VerifyOSXRid()
         {
-            Assert.StartsWith("osx", RuntimeInformation.RuntimeIdentifier, StringComparison.OrdinalIgnoreCase);
+            Assert.StartsWith(
+                "osx",
+                RuntimeInformation.RuntimeIdentifier,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
     }
 }

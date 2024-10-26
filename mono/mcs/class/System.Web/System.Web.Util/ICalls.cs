@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,26 +30,31 @@
 
 using System.Reflection;
 using System.Runtime.CompilerServices;
+
 namespace System.Web.Util
 {
-	class ICalls
-	{
-		ICalls () {}
+    class ICalls
+    {
+        ICalls() { }
 
 #if TARGET_DOTNET
-		static public string GetMachineConfigPath () {
-			return System.Runtime.InteropServices.RuntimeEnvironment.SystemConfigurationFile;
-		}
+        static public string GetMachineConfigPath()
+        {
+            return System.Runtime.InteropServices.RuntimeEnvironment.SystemConfigurationFile;
+        }
 #else
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static public string GetMachineConfigPath ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern string GetMachineConfigPath();
 #endif
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static public string GetMachineInstallDirectory ();
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern string GetMachineInstallDirectory();
 
-		[MethodImplAttribute(MethodImplOptions.InternalCall)]
-		extern static public bool GetUnmanagedResourcesPtr (Assembly assembly, out IntPtr ptr, out int length);
-	}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        public static extern bool GetUnmanagedResourcesPtr(
+            Assembly assembly,
+            out IntPtr ptr,
+            out int length
+        );
+    }
 }
-

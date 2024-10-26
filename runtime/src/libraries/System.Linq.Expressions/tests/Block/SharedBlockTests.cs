@@ -13,6 +13,7 @@ namespace System.Linq.Expressions.Tests
             yield return "Hello";
             yield return new Uri("http://example.net/");
         }
+
         private static IEnumerable<object> ConstantValues()
         {
             yield return 42;
@@ -29,16 +30,14 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> ConstantValuesAndSizes()
         {
-            return
-                from size in Enumerable.Range(1, 6)
+            return from size in Enumerable.Range(1, 6)
                 from value in ConstantValues()
                 select new object[] { value, size };
         }
 
         public static IEnumerable<object[]> ObjectAssignableConstantValuesAndSizes()
         {
-            return
-                from size in Enumerable.Range(1, 6)
+            return from size in Enumerable.Range(1, 6)
                 from value in ObjectAssignableConstantValues()
                 select new object[] { value, size };
         }
@@ -50,7 +49,8 @@ namespace System.Linq.Expressions.Tests
 
         protected static IEnumerable<Expression> PadBlock(int padCount, Expression tailExpression)
         {
-            while (padCount-- != 0) yield return Expression.Empty();
+            while (padCount-- != 0)
+                yield return Expression.Empty();
             yield return tailExpression;
         }
 
@@ -68,7 +68,10 @@ namespace System.Linq.Expressions.Tests
 
             protected override Expression VisitParameter(ParameterExpression node)
             {
-                return Expression.Parameter(node.Type.IsByRef ? node.Type.MakeByRefType() : node.Type, node.Name);
+                return Expression.Parameter(
+                    node.Type.IsByRef ? node.Type.MakeByRefType() : node.Type,
+                    node.Name
+                );
             }
         }
 
@@ -82,10 +85,7 @@ namespace System.Linq.Expressions.Tests
 
         protected static Expression UnreadableExpression
         {
-            get
-            {
-                return Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            }
+            get { return Expression.Property(null, typeof(Unreadable<int>), "WriteOnly"); }
         }
     }
 }

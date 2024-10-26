@@ -30,25 +30,43 @@ namespace System.Net.Tests
         public async Task AddHeader_NullOrEmptyName_ThrowsArgumentNullException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => response.AddHeader(null, ""));
-            AssertExtensions.Throws<ArgumentNullException>("name", () => response.AddHeader("", ""));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => response.AddHeader(null, "")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => response.AddHeader("", "")
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/22696", TargetFrameworkMonikers.Netcoreapp)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/22696",
+            TargetFrameworkMonikers.Netcoreapp
+        )]
         public async Task AddHeader_LongName_ThrowsArgumentOutOfRangeException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => response.AddHeader("name", s_longString));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => response.AddHeader("name", s_longString)
+            );
         }
 
         [Fact]
         public async Task AddHeader_InvalidNameOrValue_ThrowsArgumentException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentException>("name", () => response.AddHeader("\r \t \n", ""));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => response.AddHeader("\r \t \n", "")
+            );
             AssertExtensions.Throws<ArgumentException>("name", () => response.AddHeader("(", ""));
-            AssertExtensions.Throws<ArgumentException>("value", () => response.AddHeader("name", "value1\rvalue2\r"));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => response.AddHeader("name", "value1\rvalue2\r")
+            );
         }
 
         [Fact]
@@ -67,7 +85,10 @@ namespace System.Net.Tests
         public async Task AppendHeader_NullName_ThrowsArgumentNullException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => response.AppendHeader(null, ""));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => response.AppendHeader(null, "")
+            );
         }
 
         [Fact]
@@ -78,20 +99,35 @@ namespace System.Net.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/22696", TargetFrameworkMonikers.Netcoreapp)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/22696",
+            TargetFrameworkMonikers.Netcoreapp
+        )]
         public async Task AppendHeader_LongName_ThrowsArgumentOutOfRangeException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => response.AppendHeader("name", s_longString));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => response.AppendHeader("name", s_longString)
+            );
         }
 
         [Fact]
         public async Task AppendHeader_InvalidNameOrValue_ThrowsArgumentException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentException>("name", () => response.AppendHeader("\r \t \n", ""));
-            AssertExtensions.Throws<ArgumentException>("name", () => response.AppendHeader("(", ""));
-            AssertExtensions.Throws<ArgumentException>("value", () => response.AppendHeader("name", "value1\rvalue2\r"));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => response.AppendHeader("\r \t \n", "")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => response.AppendHeader("(", "")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => response.AppendHeader("name", "value1\rvalue2\r")
+            );
         }
 
         [Fact]
@@ -142,7 +178,10 @@ namespace System.Net.Tests
         [InlineData("application/json", 152)]
         [InlineData("  applICATion/jSOn   ", 152)]
         [InlineData("garbage", 143)]
-        public async Task ContentType_SetAndSend_Success(string contentType, int expectedNumberOfBytes)
+        public async Task ContentType_SetAndSend_Success(
+            string contentType,
+            int expectedNumberOfBytes
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -159,7 +198,10 @@ namespace System.Net.Tests
         [InlineData(null, null)]
         [InlineData("", null)]
         [InlineData("\r \t \n", "")]
-        public async Task ContentType_SetNullEmptyOrWhitespace_ResetsContentType(string contentType, string expectedContentType)
+        public async Task ContentType_SetNullEmptyOrWhitespace_ResetsContentType(
+            string contentType,
+            string expectedContentType
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -215,13 +257,19 @@ namespace System.Net.Tests
         [InlineData("  http://MICROSOFT.com   ", 152)]
         [InlineData("garbage", 139)]
         [InlineData("http://domain:-1", 148)]
-        public async Task RedirectLocation_SetAndSend_Success(string redirectLocation, int expectedNumberOfBytes)
+        public async Task RedirectLocation_SetAndSend_Success(
+            string redirectLocation,
+            int expectedNumberOfBytes
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
                 response.RedirectLocation = redirectLocation;
                 Assert.Equal(redirectLocation.Trim(), response.RedirectLocation);
-                Assert.Equal(redirectLocation.Trim(), response.Headers[HttpResponseHeader.Location]);
+                Assert.Equal(
+                    redirectLocation.Trim(),
+                    response.Headers[HttpResponseHeader.Location]
+                );
             }
 
             string clientResponse = GetClientResponse(expectedNumberOfBytes);
@@ -232,7 +280,10 @@ namespace System.Net.Tests
         [InlineData(null, null)]
         [InlineData("", null)]
         [InlineData("\r \t \n", "")]
-        public async Task RedirectLocation_SetNullOrEmpty_ResetsRedirectLocation(string redirectLocation, string expectedRedirectLocation)
+        public async Task RedirectLocation_SetNullOrEmpty_ResetsRedirectLocation(
+            string redirectLocation,
+            string expectedRedirectLocation
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -241,7 +292,10 @@ namespace System.Net.Tests
 
                 response.RedirectLocation = redirectLocation;
                 Assert.Equal(expectedRedirectLocation, response.RedirectLocation);
-                Assert.Equal(expectedRedirectLocation, response.Headers[HttpResponseHeader.Location]);
+                Assert.Equal(
+                    expectedRedirectLocation,
+                    response.Headers[HttpResponseHeader.Location]
+                );
 
                 // Setting RedirectLocation doesn't set the Redirect (302) status code.
                 Assert.Equal(200, response.StatusCode);
@@ -257,7 +311,9 @@ namespace System.Net.Tests
             HttpListenerResponse response = await GetResponse();
             response.Close();
 
-            Assert.Throws<ObjectDisposedException>(() => response.RedirectLocation = "http://microsoft.com");
+            Assert.Throws<ObjectDisposedException>(
+                () => response.RedirectLocation = "http://microsoft.com"
+            );
             Assert.Null(response.RedirectLocation);
         }
 
@@ -282,7 +338,11 @@ namespace System.Net.Tests
         [InlineData(404, "HTTP/1.1 404 Not Found", 127)]
         [InlineData(401, "HTTP/1.1 401 Unauthorized", 130)]
         [InlineData(999, "HTTP/1.1 999 ", 118)]
-        public async Task StatusCode_SetAndSend_Success(int statusCode, string startLine, int expectedNumberOfBytes)
+        public async Task StatusCode_SetAndSend_Success(
+            int statusCode,
+            string startLine,
+            int expectedNumberOfBytes
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -383,7 +443,10 @@ namespace System.Net.Tests
         [InlineData(505, "Http Version Not Supported")]
         [InlineData(507, "Insufficient Storage")]
         [InlineData(999, "")]
-        public async Task StatusDescription_GetWithCustomStatusCode_ReturnsExpected(int statusCode, string expectedDescription)
+        public async Task StatusDescription_GetWithCustomStatusCode_ReturnsExpected(
+            int statusCode,
+            string expectedDescription
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -404,7 +467,11 @@ namespace System.Net.Tests
         [InlineData("A !#\t1\u1234", "A !#\t14", 125)] //
         [InlineData("StatusDescription", "StatusDescription", 135)]
         [InlineData("  StatusDescription  ", "  StatusDescription  ", 139)]
-        public async Task StatusDescription_SetCustom_Success(string statusDescription, string expectedStatusDescription, int expectedNumberOfBytes)
+        public async Task StatusDescription_SetCustom_Success(
+            string statusDescription,
+            string expectedStatusDescription,
+            int expectedNumberOfBytes
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
@@ -421,7 +488,10 @@ namespace System.Net.Tests
         {
             using (HttpListenerResponse response = await GetResponse())
             {
-                AssertExtensions.Throws<ArgumentNullException>("value", () => response.StatusDescription = null);
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "value",
+                    () => response.StatusDescription = null
+                );
                 Assert.Equal("OK", response.StatusDescription);
             }
         }
@@ -431,11 +501,16 @@ namespace System.Net.Tests
         [InlineData("\u007F")]
         [InlineData("\r")]
         [InlineData("\n")]
-        public async Task StatusDescription_SetInvalid_ThrowsArgumentException(string statusDescription)
+        public async Task StatusDescription_SetInvalid_ThrowsArgumentException(
+            string statusDescription
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
-                AssertExtensions.Throws<ArgumentException>("value", () => response.StatusDescription = statusDescription);
+                AssertExtensions.Throws<ArgumentException>(
+                    "value",
+                    () => response.StatusDescription = statusDescription
+                );
                 Assert.Equal("OK", response.StatusDescription);
             }
         }
@@ -469,7 +544,10 @@ namespace System.Net.Tests
         [Theory]
         [InlineData(true, 120)]
         [InlineData(false, 106)]
-        public async Task SendChunked_GetSet_ReturnsExpected(bool sendChunked, int expectedNumberOfBytes)
+        public async Task SendChunked_GetSet_ReturnsExpected(
+            bool sendChunked,
+            int expectedNumberOfBytes
+        )
         {
             HttpListenerResponse response = await GetResponse();
             try
@@ -488,7 +566,10 @@ namespace System.Net.Tests
             }
 
             // The Transfer-Encoding: chunked header should be added to the list of headers if SendChunked == true.
-            Assert.Equal(sendChunked ? "chunked" : null, response.Headers[HttpResponseHeader.TransferEncoding]);
+            Assert.Equal(
+                sendChunked ? "chunked" : null,
+                response.Headers[HttpResponseHeader.TransferEncoding]
+            );
 
             string clientResponse = GetClientResponse(expectedNumberOfBytes);
             if (sendChunked)
@@ -549,7 +630,10 @@ namespace System.Net.Tests
         [Theory]
         [InlineData(true, 120)]
         [InlineData(false, 139)]
-        public async Task KeepAlive_GetSet_ReturnsExpected(bool keepAlive, int expectedNumberOfBytes)
+        public async Task KeepAlive_GetSet_ReturnsExpected(
+            bool keepAlive,
+            int expectedNumberOfBytes
+        )
         {
             HttpListenerResponse response = await GetResponse();
             try
@@ -569,7 +653,10 @@ namespace System.Net.Tests
             }
 
             // The Connection: close header should be added to the list of headers if KeepAlive == false.
-            Assert.Equal(keepAlive ? null : "close", response.Headers[HttpResponseHeader.Connection]);
+            Assert.Equal(
+                keepAlive ? null : "close",
+                response.Headers[HttpResponseHeader.Connection]
+            );
             Assert.Null(response.Headers[HttpResponseHeader.KeepAlive]);
 
             string clientResponse = GetClientResponse(expectedNumberOfBytes);
@@ -651,7 +738,10 @@ namespace System.Net.Tests
         [Theory]
         [InlineData(0, 106)]
         [InlineData(10, 117)]
-        public async Task ContentLength64_GetSet_ReturnsExpected(int contentLength64, int expectedNumberOfBytes)
+        public async Task ContentLength64_GetSet_ReturnsExpected(
+            int contentLength64,
+            int expectedNumberOfBytes
+        )
         {
             HttpListenerResponse response = await GetResponse();
             try
@@ -671,7 +761,10 @@ namespace System.Net.Tests
             }
 
             // The "Content-Length: contentLength64" header should be added to the list of headers if there is a Content-Length specified.
-            Assert.Equal(contentLength64.ToString(), response.Headers[HttpResponseHeader.ContentLength]);
+            Assert.Equal(
+                contentLength64.ToString(),
+                response.Headers[HttpResponseHeader.ContentLength]
+            );
 
             string clientResponse = GetClientResponse(expectedNumberOfBytes);
             Assert.DoesNotContain("Transfer-Encoding", clientResponse);
@@ -685,7 +778,11 @@ namespace System.Net.Tests
         [InlineData(205, 0, 117)]
         [InlineData(304, 0, 116)]
         [InlineData(200, -1, 120)]
-        public async Task ContentLength64_NotSetAndGetAfterSendingHeaders_ReturnValueDependsOnStatusCode(int statusCode, int expectedContentLength64, int expectedNumberOfBytes)
+        public async Task ContentLength64_NotSetAndGetAfterSendingHeaders_ReturnValueDependsOnStatusCode(
+            int statusCode,
+            int expectedContentLength64,
+            int expectedNumberOfBytes
+        )
         {
             HttpListenerResponse response = await GetResponse();
             response.StatusCode = statusCode;
@@ -701,7 +798,10 @@ namespace System.Net.Tests
             }
             else
             {
-                Assert.Contains($"\r\nContent-Length: {expectedContentLength64}\r\n", clientResponse);
+                Assert.Contains(
+                    $"\r\nContent-Length: {expectedContentLength64}\r\n",
+                    clientResponse
+                );
                 Assert.DoesNotContain("Transfer-Encoding", clientResponse);
             }
         }
@@ -781,7 +881,10 @@ namespace System.Net.Tests
         {
             using (HttpListenerResponse response = await GetResponse())
             {
-                AssertExtensions.Throws<ArgumentNullException>("value", () => response.ProtocolVersion = null);
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "value",
+                    () => response.ProtocolVersion = null
+                );
                 Assert.Equal(new Version(1, 1), response.ProtocolVersion);
             }
         }
@@ -790,11 +893,17 @@ namespace System.Net.Tests
         [InlineData(0, 0)]
         [InlineData(1, 2)]
         [InlineData(2, 0)]
-        public async Task ProtocolVersion_SetInvalid_ThrowsArgumentNullException(int major, int minor)
+        public async Task ProtocolVersion_SetInvalid_ThrowsArgumentNullException(
+            int major,
+            int minor
+        )
         {
             using (HttpListenerResponse response = await GetResponse())
             {
-                AssertExtensions.Throws<ArgumentException>("value", () => response.ProtocolVersion = new Version(major, minor));
+                AssertExtensions.Throws<ArgumentException>(
+                    "value",
+                    () => response.ProtocolVersion = new Version(major, minor)
+                );
                 Assert.Equal(new Version(1, 1), response.ProtocolVersion);
             }
         }
@@ -811,7 +920,7 @@ namespace System.Net.Tests
                 {
                     { "Name1", "Value1" },
                     { "Name2", "Value2" },
-                    { "Name3", "" }
+                    { "Name3", "" },
                 };
                 response.Headers = headers;
                 Assert.Equal(headers, response.Headers);
@@ -828,22 +937,28 @@ namespace System.Net.Tests
             HttpListenerResponse response = await GetResponse();
             response.Headers.Add("name", "value");
 
-            var headers = new WebHeaderCollection
-            {
-                { HttpRequestHeader.Accept, "value" }
-            };
+            var headers = new WebHeaderCollection { { HttpRequestHeader.Accept, "value" } };
             response.Headers = headers;
             Assert.Equal("value", response.Headers["accept"]);
         }
 
         [Theory]
         [InlineData("Transfer-Encoding")]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/22696", TargetFrameworkMonikers.Netcoreapp)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/22696",
+            TargetFrameworkMonikers.Netcoreapp
+        )]
         public async Task Headers_SetRestricted_ThrowsArgumentException(string name)
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentException>("name", () => response.Headers.Add(name, "value"));
-            AssertExtensions.Throws<ArgumentException>("name", () => response.Headers.Add($"{name}:value"));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => response.Headers.Add(name, "value")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => response.Headers.Add($"{name}:value")
+            );
         }
 
         [Fact]
@@ -859,27 +974,58 @@ namespace System.Net.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/22696", TargetFrameworkMonikers.Netcoreapp)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/22696",
+            TargetFrameworkMonikers.Netcoreapp
+        )]
         public async Task Headers_SetLongName_ThrowsArgumentOutOfRangeException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => response.Headers["name"] = s_longString);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => response.Headers.Set("name", s_longString));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => response.Headers.Add("name", s_longString));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => response.Headers.Add($"name:{s_longString}"));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => response.Headers.Add(HttpResponseHeader.Age, s_longString));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => response.Headers["name"] = s_longString
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => response.Headers.Set("name", s_longString)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => response.Headers.Add("name", s_longString)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => response.Headers.Add($"name:{s_longString}")
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => response.Headers.Add(HttpResponseHeader.Age, s_longString)
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/22696", TargetFrameworkMonikers.Netcoreapp)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/22696",
+            TargetFrameworkMonikers.Netcoreapp
+        )]
         public async Task Headers_SetRequestHeader_ThrowsInvalidOperationException()
         {
             HttpListenerResponse response = await GetResponse();
-            Assert.Throws<InvalidOperationException>(() => response.Headers[HttpRequestHeader.Accept]);
-            Assert.Throws<InvalidOperationException>(() => response.Headers[HttpRequestHeader.Accept] = "value");
-            Assert.Throws<InvalidOperationException>(() => response.Headers.Set(HttpRequestHeader.Accept, "value"));
-            Assert.Throws<InvalidOperationException>(() => response.Headers.Add(HttpRequestHeader.Accept, "value"));
-            Assert.Throws<InvalidOperationException>(() => response.Headers.Remove(HttpRequestHeader.Accept));
+            Assert.Throws<InvalidOperationException>(
+                () => response.Headers[HttpRequestHeader.Accept]
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => response.Headers[HttpRequestHeader.Accept] = "value"
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => response.Headers.Set(HttpRequestHeader.Accept, "value")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => response.Headers.Add(HttpRequestHeader.Accept, "value")
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => response.Headers.Remove(HttpRequestHeader.Accept)
+            );
         }
     }
 }

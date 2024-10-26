@@ -7,14 +7,14 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.CommandTrees;
 using System.Collections.Generic;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Data.Common.Utils;
 using System.Data.Metadata.Edm;
 using System.Diagnostics;
-using System.Data.Common.Utils;
-using System.Linq;
 using System.Globalization;
-using System.Data.Common.CommandTrees.ExpressionBuilder;
+using System.Linq;
 
 namespace System.Data.Common.CommandTrees.Internal
 {
@@ -42,7 +42,7 @@ namespace System.Data.Common.CommandTrees.Internal
             /// <summary>
             /// Stop all rule processing and return the result expression as the final result expression
             /// </summary>
-            Stop
+            Stop,
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace System.Data.Common.CommandTrees.Internal
         /// <param name="expression">The <see cref="DbExpression"/> that the rule should inspect and determine if processing is possible</param>
         /// <returns><c>true</c> if the rule can attempt processing of the expression via the <see cref="TryProcess"/> method; otherwise <c>false</c></returns>
         internal abstract bool ShouldProcess(DbExpression expression);
-        
+
         /// <summary>
         /// Attempts to process the input <paramref name="expression"/> to produce a <paramref name="result"/> <see cref="DbExpression"/>.
         /// </summary>
@@ -59,7 +59,7 @@ namespace System.Data.Common.CommandTrees.Internal
         /// <param name="result">The result expression produced by the rule if processing was successful</param>
         /// <returns><c>true</c> if the rule was able to successfully process the input expression and produce a result expression; otherwise <c>false</c></returns>
         internal abstract bool TryProcess(DbExpression expression, out DbExpression result);
-        
+
         /// <summary>
         /// Indicates what action - as a <see cref="ProcessedAction"/> value - the rule processor should take if <see cref="TryProcess"/> returns true.
         /// </summary>
@@ -76,7 +76,10 @@ namespace System.Data.Common.CommandTrees.Internal
 
         protected abstract IEnumerable<DbExpressionRule> GetRules();
 
-        private static Tuple<DbExpression, DbExpressionRule.ProcessedAction> ProcessRules(DbExpression expression, List<DbExpressionRule> rules)
+        private static Tuple<DbExpression, DbExpressionRule.ProcessedAction> ProcessRules(
+            DbExpression expression,
+            List<DbExpressionRule> rules
+        )
         {
             // Considering each rule in the rule set in turn, if the rule indicates that it can process the
             // input expression, call TryProcess to attempt processing. If successful, take the action specified
@@ -91,7 +94,10 @@ namespace System.Data.Common.CommandTrees.Internal
                     DbExpression result;
                     if (currentRule.TryProcess(expression, out result))
                     {
-                        if (currentRule.OnExpressionProcessed != DbExpressionRule.ProcessedAction.Continue)
+                        if (
+                            currentRule.OnExpressionProcessed
+                            != DbExpressionRule.ProcessedAction.Continue
+                        )
                         {
                             return Tuple.Create(result, currentRule.OnExpressionProcessed);
                         }

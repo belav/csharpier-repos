@@ -19,9 +19,13 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
         public static async Task<HostServices> CreateHostServicesAsync()
         {
-            var discovery = new AttributedPartDiscovery(Resolver.DefaultInstance, isNonPublicSupported: true);
+            var discovery = new AttributedPartDiscovery(
+                Resolver.DefaultInstance,
+                isNonPublicSupported: true
+            );
 
-            var catalog = ComposableCatalog.Create(Resolver.DefaultInstance)
+            var catalog = ComposableCatalog
+                .Create(Resolver.DefaultInstance)
                 .AddParts(await discovery.CreatePartsAsync(MefCompositionAssemblies))
                 .WithCompositionService(); // Makes an ICompositionService export available to MEF parts to import
 

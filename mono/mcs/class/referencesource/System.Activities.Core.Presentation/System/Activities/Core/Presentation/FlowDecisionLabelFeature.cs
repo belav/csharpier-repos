@@ -14,8 +14,16 @@ namespace System.Activities.Core.Presentation
         {
             get
             {
-                yield return new AttachedPropertyInfo<string> { PropertyName = "TrueLabel", DefaultValue = SR.FCFlowDecisionTrueMarker };
-                yield return new AttachedPropertyInfo<string> { PropertyName = "FalseLabel", DefaultValue = SR.FCFlowDecisionFalseMarker };
+                yield return new AttachedPropertyInfo<string>
+                {
+                    PropertyName = "TrueLabel",
+                    DefaultValue = SR.FCFlowDecisionTrueMarker,
+                };
+                yield return new AttachedPropertyInfo<string>
+                {
+                    PropertyName = "FalseLabel",
+                    DefaultValue = SR.FCFlowDecisionFalseMarker,
+                };
             }
         }
     }

@@ -21,6 +21,6 @@ namespace System.Activities.DurableInstancing
         CleanupInProgress = 13,
         InstanceAlreadyLockedToOwner = 14,
         IdentityNotFound = 15,
-        Unknown = 99
+        Unknown = 99,
     };
 }

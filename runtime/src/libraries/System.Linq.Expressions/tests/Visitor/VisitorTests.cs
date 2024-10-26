@@ -37,23 +37,17 @@ namespace System.Linq.Expressions.Tests
                 {
                     return TryFinally(
                         Body,
-                        Call(
-                            Disposable,
-                            typeof(IDisposable).GetMethod(nameof(IDisposable.Dispose))
-                            )
-                        );
+                        Call(Disposable, typeof(IDisposable).GetMethod(nameof(IDisposable.Dispose)))
+                    );
                 }
 
                 return TryFinally(
                     Body,
                     IfThen(
                         ReferenceNotEqual(Disposable, Constant(null)),
-                        Call(
-                            Disposable,
-                            typeof(IDisposable).GetMethod(nameof(IDisposable.Dispose))
-                            )
-                        )
-                    );
+                        Call(Disposable, typeof(IDisposable).GetMethod(nameof(IDisposable.Dispose)))
+                    )
+                );
             }
 
             public override Type Type => Body.Type;
@@ -63,7 +57,11 @@ namespace System.Linq.Expressions.Tests
 
         private class ForEachExpression : Expression
         {
-            public ForEachExpression(ParameterExpression item, Expression enumerable, Expression body)
+            public ForEachExpression(
+                ParameterExpression item,
+                Expression enumerable,
+                Expression body
+            )
             {
                 ItemVariable = item;
                 Enumerable = enumerable;
@@ -88,45 +86,61 @@ namespace System.Linq.Expressions.Tests
                 ParameterExpression enumerator = Variable(enType);
                 LabelTarget breakLabel = Label();
                 return Block(
-                    new[] {ItemVariable, enumerator},
-                    Assign(enumerator, Call(Enumerable, typeof(IEnumerable<>).MakeGenericType(ItemVariable.Type).GetMethod(nameof(IEnumerable.GetEnumerator)))),
+                    new[] { ItemVariable, enumerator },
+                    Assign(
+                        enumerator,
+                        Call(
+                            Enumerable,
+                            typeof(IEnumerable<>)
+                                .MakeGenericType(ItemVariable.Type)
+                                .GetMethod(nameof(IEnumerable.GetEnumerator))
+                        )
+                    ),
                     new UsingExpression(
                         enumerator,
                         Loop(
                             Block(
                                 IfThen(
                                     IsFalse(
-                                        Call(enumerator, typeof(IEnumerator).GetMethod(nameof(IEnumerator.MoveNext)))
-                                        ),
-                                    Break(breakLabel)
+                                        Call(
+                                            enumerator,
+                                            typeof(IEnumerator).GetMethod(
+                                                nameof(IEnumerator.MoveNext)
+                                            )
+                                        )
                                     ),
-                                Assign(ItemVariable, Property(enumerator, enType.GetProperty(nameof(IEnumerator.Current)))),
-                                Body
+                                    Break(breakLabel)
                                 ),
+                                Assign(
+                                    ItemVariable,
+                                    Property(
+                                        enumerator,
+                                        enType.GetProperty(nameof(IEnumerator.Current))
+                                    )
+                                ),
+                                Body
+                            ),
                             breakLabel
-                            )
                         )
-                    );
+                    )
+                );
             }
         }
 
-        private class DefaultVisitor : ExpressionVisitor
-        {
-        }
+        private class DefaultVisitor : ExpressionVisitor { }
 
         private class ConstantRefreshingVisitor : ExpressionVisitor
         {
-            protected override Expression VisitConstant(ConstantExpression node)
-                => Expression.Constant(node.Value, node.Type);
+            protected override Expression VisitConstant(ConstantExpression node) =>
+                Expression.Constant(node.Value, node.Type);
         }
 
-        private class ResultExpression : Expression
-        {
-        }
+        private class ResultExpression : Expression { }
 
         private class SourceExpression : Expression
         {
-            protected override Expression Accept(ExpressionVisitor visitor) => new ResultExpression();
+            protected override Expression Accept(ExpressionVisitor visitor) =>
+                new ResultExpression();
         }
 
         private class NullBecomingExpression : Expression
@@ -166,19 +180,32 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitNullCollection()
         {
-            AssertExtensions.Throws<ArgumentNullException>("nodes", () => new DefaultVisitor().Visit(default(ReadOnlyCollection<Expression>)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "nodes",
+                () => new DefaultVisitor().Visit(default(ReadOnlyCollection<Expression>))
+            );
         }
 
         [Fact]
         public void VisitNullCollectionWithVisitorFunction()
         {
-            AssertExtensions.Throws<ArgumentNullException>("nodes", () => ExpressionVisitor.Visit(null, (Expression i) => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "nodes",
+                () => ExpressionVisitor.Visit(null, (Expression i) => i)
+            );
         }
 
         [Fact]
         public void VisitCollectionVisitorWithNullFunction()
         {
-            AssertExtensions.Throws<ArgumentNullException>("elementVisitor", () => ExpressionVisitor.Visit(new List<Expression> { Expression.Empty() }.AsReadOnly(), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "elementVisitor",
+                () =>
+                    ExpressionVisitor.Visit(
+                        new List<Expression> { Expression.Empty() }.AsReadOnly(),
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -190,13 +217,25 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitAndConvertNullCollection()
         {
-            AssertExtensions.Throws<ArgumentNullException>("nodes", () => new DefaultVisitor().VisitAndConvert(default(ReadOnlyCollection<Expression>), ""));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "nodes",
+                () =>
+                    new DefaultVisitor().VisitAndConvert(
+                        default(ReadOnlyCollection<Expression>),
+                        ""
+                    )
+            );
         }
 
         [Fact]
         public void VisitCollectionReturnSameIfChildrenUnchanged()
         {
-            ReadOnlyCollection<Expression> collection = new List<Expression> { Expression.Constant(0), Expression.Constant(2), Expression.DebugInfo(Expression.SymbolDocument("fileName"), 1, 1, 1, 1) }.AsReadOnly();
+            ReadOnlyCollection<Expression> collection = new List<Expression>
+            {
+                Expression.Constant(0),
+                Expression.Constant(2),
+                Expression.DebugInfo(Expression.SymbolDocument("fileName"), 1, 1, 1, 1),
+            }.AsReadOnly();
             Assert.Same(collection, new DefaultVisitor().Visit(collection));
         }
 
@@ -204,8 +243,13 @@ namespace System.Linq.Expressions.Tests
         public void VisitCollectionDifferOnFirst()
         {
             string value = new string(new[] { 'a', 'b', 'c' });
-            ReadOnlyCollection<Expression> collection = new List<Expression> { Expression.Constant(value) }.AsReadOnly();
-            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor().Visit(collection);
+            ReadOnlyCollection<Expression> collection = new List<Expression>
+            {
+                Expression.Constant(value),
+            }.AsReadOnly();
+            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor().Visit(
+                collection
+            );
             Assert.NotSame(collection, visited);
             Assert.NotSame(collection[0], visited[0]);
             Assert.Same(value, ((ConstantExpression)visited[0]).Value);
@@ -215,8 +259,14 @@ namespace System.Linq.Expressions.Tests
         public void VisitCollectionDifferOnLater()
         {
             string value = new string(new[] { 'a', 'b', 'c' });
-            ReadOnlyCollection<Expression> collection = new List<Expression> { Expression.Empty(), Expression.Constant(value) }.AsReadOnly();
-            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor().Visit(collection);
+            ReadOnlyCollection<Expression> collection = new List<Expression>
+            {
+                Expression.Empty(),
+                Expression.Constant(value),
+            }.AsReadOnly();
+            ReadOnlyCollection<Expression> visited = new ConstantRefreshingVisitor().Visit(
+                collection
+            );
             Assert.NotSame(collection, visited);
             Assert.Same(collection[0], visited[0]);
             Assert.NotSame(collection[1], visited[1]);
@@ -226,7 +276,12 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitCollectionNullNodes()
         {
-            ReadOnlyCollection<Expression> collection = new List<Expression> { null, null, null }.AsReadOnly();
+            ReadOnlyCollection<Expression> collection = new List<Expression>
+            {
+                null,
+                null,
+                null,
+            }.AsReadOnly();
             Assert.Same(collection, new DefaultVisitor().Visit(collection));
         }
 
@@ -241,7 +296,10 @@ namespace System.Linq.Expressions.Tests
         public void VisitCollectionWithElementVisitorDifferOnFirst()
         {
             ReadOnlyCollection<string> collection = new List<string> { "abc" }.AsReadOnly();
-            ReadOnlyCollection<string> visited = ExpressionVisitor.Visit(collection, UpperCaseIfNotAlready);
+            ReadOnlyCollection<string> visited = ExpressionVisitor.Visit(
+                collection,
+                UpperCaseIfNotAlready
+            );
             Assert.NotSame(collection, visited);
             Assert.NotSame(collection[0], visited[0]);
         }
@@ -249,8 +307,17 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitCollectionWithElementVisitorDifferOnLater()
         {
-            ReadOnlyCollection<string> collection = new List<string> { "ABC", "def", "GHI", "jkl" }.AsReadOnly();
-            ReadOnlyCollection<string> visited = ExpressionVisitor.Visit(collection, UpperCaseIfNotAlready);
+            ReadOnlyCollection<string> collection = new List<string>
+            {
+                "ABC",
+                "def",
+                "GHI",
+                "jkl",
+            }.AsReadOnly();
+            ReadOnlyCollection<string> visited = ExpressionVisitor.Visit(
+                collection,
+                UpperCaseIfNotAlready
+            );
             Assert.NotSame(collection, visited);
             Assert.Same(collection[0], visited[0]);
             Assert.NotSame(collection[1], visited[1]);
@@ -261,7 +328,12 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VisitCollectionWithElementVisitorNullNodes()
         {
-            ReadOnlyCollection<string> collection = new List<string> { null, null, null }.AsReadOnly();
+            ReadOnlyCollection<string> collection = new List<string>
+            {
+                null,
+                null,
+                null,
+            }.AsReadOnly();
             Assert.Same(collection, ExpressionVisitor.Visit(collection, UpperCaseIfNotAlready));
         }
 
@@ -277,7 +349,11 @@ namespace System.Linq.Expressions.Tests
         public void VisitAndConvertThrowsIfVisitReturnsNull()
         {
             string slug = "Won't be found by chance 3f8d0006-32f9-4622-9ff4-c88e95c9babc";
-            string errMsg = Assert.Throws<InvalidOperationException>(() => new DefaultVisitor().VisitAndConvert(new NullBecomingExpression(), slug)).Message;
+            string errMsg = Assert
+                .Throws<InvalidOperationException>(
+                    () => new DefaultVisitor().VisitAndConvert(new NullBecomingExpression(), slug)
+                )
+                .Message;
             Assert.Contains(slug, errMsg);
         }
 
@@ -285,7 +361,11 @@ namespace System.Linq.Expressions.Tests
         public void VisitAndConvertThrowsIfVisitChangesType()
         {
             string slug = "Won't be found by chance 5154E15C-A475-49B0-B596-8F822D7ACFC4";
-            string errMsg = Assert.Throws<InvalidOperationException>(() => new DefaultVisitor().VisitAndConvert(new SourceExpression(), slug)).Message;
+            string errMsg = Assert
+                .Throws<InvalidOperationException>(
+                    () => new DefaultVisitor().VisitAndConvert(new SourceExpression(), slug)
+                )
+                .Message;
             Assert.Contains(slug, errMsg);
         }
 
@@ -293,20 +373,27 @@ namespace System.Linq.Expressions.Tests
         public void VisitAndConvertNullName()
         {
             new DefaultVisitor().VisitAndConvert(Expression.Constant(0), null);
-            Assert.Throws<InvalidOperationException>(() => new DefaultVisitor().VisitAndConvert(new SourceExpression(), null));
+            Assert.Throws<InvalidOperationException>(
+                () => new DefaultVisitor().VisitAndConvert(new SourceExpression(), null)
+            );
         }
 
         [Fact]
         public void VisitAndConvertReturnsIfForcedToCommonBase()
         {
-            Assert.IsNotType<SourceExpression>(new DefaultVisitor().VisitAndConvert<Expression>(new SourceExpression(), ""));
+            Assert.IsNotType<SourceExpression>(
+                new DefaultVisitor().VisitAndConvert<Expression>(new SourceExpression(), "")
+            );
         }
 
         [Fact]
         public void VisitAndConvertSameResultAsVisit()
         {
             ConstantExpression constant = Expression.Constant(0);
-            ConstantExpression visited = new ConstantRefreshingVisitor().VisitAndConvert(constant, "");
+            ConstantExpression visited = new ConstantRefreshingVisitor().VisitAndConvert(
+                constant,
+                ""
+            );
             Assert.NotSame(constant, visited);
             Assert.Equal(0, visited.Value);
         }
@@ -324,8 +411,8 @@ namespace System.Linq.Expressions.Tests
                     typeof(List<int>).GetMethod(nameof(List<int>.Insert)),
                     Expression.Constant(0),
                     intVar
-                    )
-                );
+                )
+            );
 
             // Check that not only has the visitor reduced the foreach into a block
             // but the using within that block into a try...finally.
@@ -342,7 +429,13 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void Visit_DebugInfoExpression_DoesNothing()
         {
-            DebugInfoExpression expression = Expression.DebugInfo(Expression.SymbolDocument("fileName"), 1, 1, 1, 1);
+            DebugInfoExpression expression = Expression.DebugInfo(
+                Expression.SymbolDocument("fileName"),
+                1,
+                1,
+                1,
+                1
+            );
             Assert.Same(expression, new DefaultVisitor().Visit(expression));
         }
     }

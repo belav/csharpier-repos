@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -11,9 +11,9 @@
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 #if SILVERLIGHT
 using System.Core; // for System.Core.SR
 #endif
@@ -77,18 +77,19 @@ namespace System.Linq.Parallel
 
         internal int QueryId
         {
-            get
-            {
-                return m_queryId;
-            }
+            get { return m_queryId; }
         }
 
         //-----------------------------------------------------------------------------------
         // Constructs a new settings structure.
         //
-        internal QuerySettings(TaskScheduler taskScheduler, int? degreeOfParallelism, 
-            CancellationToken externalCancellationToken, ParallelExecutionMode? executionMode,
-            ParallelMergeOptions? mergeOptions)
+        internal QuerySettings(
+            TaskScheduler taskScheduler,
+            int? degreeOfParallelism,
+            CancellationToken externalCancellationToken,
+            ParallelExecutionMode? executionMode,
+            ParallelMergeOptions? mergeOptions
+        )
         {
             m_taskScheduler = taskScheduler;
             m_degreeOfParallelism = degreeOfParallelism;
@@ -107,7 +108,9 @@ namespace System.Linq.Parallel
         {
             if (this.TaskScheduler != null && settings2.TaskScheduler != null)
             {
-                throw new InvalidOperationException(SR.GetString(SR.ParallelQuery_DuplicateTaskScheduler));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ParallelQuery_DuplicateTaskScheduler)
+                );
             }
 
             if (this.DegreeOfParallelism != null && settings2.DegreeOfParallelism != null)
@@ -115,28 +118,53 @@ namespace System.Linq.Parallel
                 throw new InvalidOperationException(SR.GetString(SR.ParallelQuery_DuplicateDOP));
             }
 
-            if (this.CancellationState.ExternalCancellationToken.CanBeCanceled && settings2.CancellationState.ExternalCancellationToken.CanBeCanceled)
+            if (
+                this.CancellationState.ExternalCancellationToken.CanBeCanceled
+                && settings2.CancellationState.ExternalCancellationToken.CanBeCanceled
+            )
             {
-                throw new InvalidOperationException(SR.GetString(SR.ParallelQuery_DuplicateWithCancellation));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ParallelQuery_DuplicateWithCancellation)
+                );
             }
-            
+
             if (this.ExecutionMode != null && settings2.ExecutionMode != null)
             {
-                throw new InvalidOperationException(SR.GetString(SR.ParallelQuery_DuplicateExecutionMode));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ParallelQuery_DuplicateExecutionMode)
+                );
             }
-            
+
             if (this.MergeOptions != null && settings2.MergeOptions != null)
             {
-                throw new InvalidOperationException(SR.GetString(SR.ParallelQuery_DuplicateMergeOptions));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.ParallelQuery_DuplicateMergeOptions)
+                );
             }
-            
-            TaskScheduler tm = (this.TaskScheduler == null) ? settings2.TaskScheduler : this.TaskScheduler;
-            int? dop = this.DegreeOfParallelism.HasValue ? this.DegreeOfParallelism : settings2.DegreeOfParallelism;
-            CancellationToken externalCancellationToken = (this.CancellationState.ExternalCancellationToken.CanBeCanceled) ? this.CancellationState.ExternalCancellationToken : settings2.CancellationState.ExternalCancellationToken;
-            ParallelExecutionMode? executionMode = this.ExecutionMode.HasValue ? this.ExecutionMode : settings2.ExecutionMode;
-            ParallelMergeOptions? mergeOptions = this.MergeOptions.HasValue ? this.MergeOptions : settings2.MergeOptions;
-            
-            return new QuerySettings(tm, dop, externalCancellationToken, executionMode, mergeOptions);
+
+            TaskScheduler tm =
+                (this.TaskScheduler == null) ? settings2.TaskScheduler : this.TaskScheduler;
+            int? dop = this.DegreeOfParallelism.HasValue
+                ? this.DegreeOfParallelism
+                : settings2.DegreeOfParallelism;
+            CancellationToken externalCancellationToken =
+                (this.CancellationState.ExternalCancellationToken.CanBeCanceled)
+                    ? this.CancellationState.ExternalCancellationToken
+                    : settings2.CancellationState.ExternalCancellationToken;
+            ParallelExecutionMode? executionMode = this.ExecutionMode.HasValue
+                ? this.ExecutionMode
+                : settings2.ExecutionMode;
+            ParallelMergeOptions? mergeOptions = this.MergeOptions.HasValue
+                ? this.MergeOptions
+                : settings2.MergeOptions;
+
+            return new QuerySettings(
+                tm,
+                dop,
+                externalCancellationToken,
+                executionMode,
+                mergeOptions
+            );
         }
 
         internal QuerySettings WithPerExecutionSettings()
@@ -144,23 +172,39 @@ namespace System.Linq.Parallel
             return WithPerExecutionSettings(new CancellationTokenSource(), new Shared<bool>(false));
         }
 
-        internal QuerySettings WithPerExecutionSettings(CancellationTokenSource topLevelCancellationTokenSource, Shared<bool> topLevelDisposedFlag)
+        internal QuerySettings WithPerExecutionSettings(
+            CancellationTokenSource topLevelCancellationTokenSource,
+            Shared<bool> topLevelDisposedFlag
+        )
         {
             //Initialize a new QuerySettings structure and copy in the current settings.
-            //Note: this has the very important effect of newing a fresh CancellationSettings, 
-            //      and _not_ copying in the current internalCancellationSource or topLevelDisposedFlag which should not be 
+            //Note: this has the very important effect of newing a fresh CancellationSettings,
+            //      and _not_ copying in the current internalCancellationSource or topLevelDisposedFlag which should not be
             //      propogated to internal query executions. (This affects SelectMany execution and specifically fixes bug:535510)
             //      The fresh toplevel parameters are used instead.
-            QuerySettings settings = new QuerySettings(TaskScheduler, DegreeOfParallelism, CancellationState.ExternalCancellationToken, ExecutionMode, MergeOptions);
+            QuerySettings settings = new QuerySettings(
+                TaskScheduler,
+                DegreeOfParallelism,
+                CancellationState.ExternalCancellationToken,
+                ExecutionMode,
+                MergeOptions
+            );
 
-            Contract.Assert(topLevelCancellationTokenSource != null, "There should always be a top-level cancellation signal specified.");
-            settings.CancellationState.InternalCancellationTokenSource = topLevelCancellationTokenSource;
+            Contract.Assert(
+                topLevelCancellationTokenSource != null,
+                "There should always be a top-level cancellation signal specified."
+            );
+            settings.CancellationState.InternalCancellationTokenSource =
+                topLevelCancellationTokenSource;
 
             //Merge internal and external tokens to form the combined token
-             settings.CancellationState.MergedCancellationTokenSource =
-                    CancellationTokenSource.CreateLinkedTokenSource(settings.CancellationState.InternalCancellationTokenSource.Token, settings.CancellationState.ExternalCancellationToken);
- 
-            // and copy in the topLevelDisposedFlag 
+            settings.CancellationState.MergedCancellationTokenSource =
+                CancellationTokenSource.CreateLinkedTokenSource(
+                    settings.CancellationState.InternalCancellationTokenSource.Token,
+                    settings.CancellationState.ExternalCancellationToken
+                );
+
+            // and copy in the topLevelDisposedFlag
             settings.CancellationState.TopLevelDisposedFlag = topLevelDisposedFlag;
 
             Contract.Assert(settings.CancellationState.InternalCancellationTokenSource != null);
@@ -208,7 +252,10 @@ namespace System.Linq.Parallel
 
             Contract.Assert(settings.TaskScheduler != null);
             Contract.Assert(settings.DegreeOfParallelism.HasValue);
-            Contract.Assert(settings.DegreeOfParallelism.Value >= 1 && settings.DegreeOfParallelism <= Scheduling.MAX_SUPPORTED_DOP);
+            Contract.Assert(
+                settings.DegreeOfParallelism.Value >= 1
+                    && settings.DegreeOfParallelism <= Scheduling.MAX_SUPPORTED_DOP
+            );
             Contract.Assert(settings.ExecutionMode != null);
             Contract.Assert(settings.MergeOptions != null);
 
@@ -218,7 +265,8 @@ namespace System.Linq.Parallel
         }
 
         // Returns the default settings
-        internal static QuerySettings Empty {
+        internal static QuerySettings Empty
+        {
             get { return new QuerySettings(null, null, new CancellationToken(), null, null); }
         }
 

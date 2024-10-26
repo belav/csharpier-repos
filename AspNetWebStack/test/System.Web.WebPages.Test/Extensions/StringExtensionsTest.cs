@@ -188,7 +188,10 @@ namespace System.Web.WebPages.Test
             using (new CultureReplacer("en-US"))
             {
                 Assert.Equal(DateTime.Parse("1/14/1979"), "1/14/1979".AsDateTime());
-                Assert.Equal(DateTime.Parse("Sat, 01 Nov 2008 19:35:00 GMT"), "Sat, 01 Nov 2008 19:35:00 GMT".AsDateTime());
+                Assert.Equal(
+                    DateTime.Parse("Sat, 01 Nov 2008 19:35:00 GMT"),
+                    "Sat, 01 Nov 2008 19:35:00 GMT".AsDateTime()
+                );
             }
         }
 

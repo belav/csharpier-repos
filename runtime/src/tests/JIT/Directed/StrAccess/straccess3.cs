@@ -6,8 +6,8 @@
 //IndexOutOfRangeException
 
 using System;
-using Xunit;
 using System.Runtime.CompilerServices;
+using Xunit;
 
 internal struct VT
 {
@@ -25,9 +25,10 @@ public class StrAccess1
     public const int DefaultSeed = 20010415;
     public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
     {
-        string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+        string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+            new Random().Next(),
         string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-        _ => DefaultSeed
+        _ => DefaultSeed,
     };
 
     public static Random rand = new Random(Seed);
@@ -88,7 +89,11 @@ public class StrAccess1
         for (int j = 0; j < len; j++)
             str1darr[j] = Convert.ToString(teststr[j]);
 
-        char b0, b1, b2, b3, b4;
+        char b0,
+            b1,
+            b2,
+            b3,
+            b4;
         try
         {
             passed = false;
@@ -210,7 +215,3 @@ public class StrAccess1
         }
     }
 }
-
-
-
-

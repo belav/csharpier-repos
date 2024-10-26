@@ -12,12 +12,20 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
 {
     internal sealed partial class DifferenceViewerPreview
     {
-        private sealed class NavigationalCommandTarget(ITextView textView, IEditorOperations editorOperations) : IOleCommandTarget
+        private sealed class NavigationalCommandTarget(
+            ITextView textView,
+            IEditorOperations editorOperations
+        ) : IOleCommandTarget
         {
             private readonly ITextView _textView = textView;
             private readonly IEditorOperations _editorOperations = editorOperations;
 
-            public int QueryStatus(ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText)
+            public int QueryStatus(
+                ref Guid pguidCmdGroup,
+                uint cCmds,
+                OLECMD[] prgCmds,
+                IntPtr pCmdText
+            )
             {
                 if (IsCommandAllowed(pguidCmdGroup, prgCmds[0].cmdID))
                 {
@@ -28,7 +36,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                 return (int)Constants.OLECMDERR_E_UNKNOWNGROUP;
             }
 
-            public int Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
+            public int Exec(
+                ref Guid pguidCmdGroup,
+                uint nCmdID,
+                uint nCmdexecopt,
+                IntPtr pvaIn,
+                IntPtr pvaOut
+            )
             {
                 if (pguidCmdGroup == VSConstants.VSStd2K)
                 {
@@ -40,7 +54,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                         case VSConstants.VSStd2KCmdID.UP_EXT:
                             if (this._textView.Selection.IsEmpty)
                             {
-                                this._textView.Caret.MoveTo(this._textView.Caret.Position.VirtualBufferPosition);
+                                this._textView.Caret.MoveTo(
+                                    this._textView.Caret.Position.VirtualBufferPosition
+                                );
                             }
                             this._editorOperations.MoveLineUp(true);
                             return VSConstants.S_OK;
@@ -50,7 +66,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                         case VSConstants.VSStd2KCmdID.DOWN_EXT:
                             if (this._textView.Selection.IsEmpty)
                             {
-                                this._textView.Caret.MoveTo(this._textView.Caret.Position.VirtualBufferPosition);
+                                this._textView.Caret.MoveTo(
+                                    this._textView.Caret.Position.VirtualBufferPosition
+                                );
                             }
                             this._editorOperations.MoveLineDown(true);
                             return VSConstants.S_OK;

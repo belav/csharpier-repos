@@ -32,14 +32,14 @@ public class Runtime_1104
         int sum = 0;
 
         // our range check optimizer is very naive, so if you don't have
-        // i < 10, then it thinks `i` can overflow and doesn't bother 
+        // i < 10, then it thinks `i` can overflow and doesn't bother
         // calling `Widen` at all.
         //
         while (j >= 0 && i < 10)
         {
             --j;
             --i;
-            sum += arr[i];  // range check will use 9 as lower bound.
+            sum += arr[i]; // range check will use 9 as lower bound.
 
             Console.WriteLine("i = " + i + ", j = " + j);
         }

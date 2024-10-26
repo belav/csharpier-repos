@@ -16,7 +16,8 @@ public class Runtime_74774
     private static long Problem(MultiRegStruct a)
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static long Call(MultiRegStruct a, MultiRegStruct b, MultiRegStruct c, MultiRegStruct d) => d.FirstLngValue + d.SecondLngValue;
+        static long Call(MultiRegStruct a, MultiRegStruct b, MultiRegStruct c, MultiRegStruct d) =>
+            d.FirstLngValue + d.SecondLngValue;
 
         return Call(default, default, default, a);
     }

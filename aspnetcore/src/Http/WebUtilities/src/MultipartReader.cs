@@ -35,9 +35,7 @@ public class MultipartReader
     /// <param name="boundary">The multipart boundary.</param>
     /// <param name="stream">The <see cref="Stream"/> containing multipart data.</param>
     public MultipartReader(string boundary, Stream stream)
-        : this(boundary, stream, DefaultBufferSize)
-    {
-    }
+        : this(boundary, stream, DefaultBufferSize) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="MultipartReader"/>.
@@ -52,14 +50,22 @@ public class MultipartReader
 
         if (bufferSize < boundary.Length + 8) // Size of the boundary + leading and trailing CRLF + leading and trailing '--' markers.
         {
-            throw new ArgumentOutOfRangeException(nameof(bufferSize), bufferSize, "Insufficient buffer space, the buffer must be larger than the boundary: " + boundary);
+            throw new ArgumentOutOfRangeException(
+                nameof(bufferSize),
+                bufferSize,
+                "Insufficient buffer space, the buffer must be larger than the boundary: "
+                    + boundary
+            );
         }
         _stream = new BufferedReadStream(stream, bufferSize);
         boundary = HeaderUtilities.RemoveQuotes(new StringSegment(boundary)).ToString();
         _boundary = new MultipartBoundary(boundary, false);
         // This stream will drain any preamble data and remove the first boundary marker.
         // TODO: HeadersLengthLimit can't be modified until after the constructor.
-        _currentStream = new MultipartReaderStream(_stream, _boundary) { LengthLimit = HeadersLengthLimit };
+        _currentStream = new MultipartReaderStream(_stream, _boundary)
+        {
+            LengthLimit = HeadersLengthLimit,
+        };
     }
 
     /// <summary>
@@ -84,7 +90,9 @@ public class MultipartReader
     /// <param name="cancellationToken">The token to monitor for cancellation requests.
     /// The default value is <see cref="CancellationToken.None"/>.</param>
     /// <returns></returns>
-    public async Task<MultipartSection?> ReadNextSectionAsync(CancellationToken cancellationToken = new CancellationToken())
+    public async Task<MultipartSection?> ReadNextSectionAsync(
+        CancellationToken cancellationToken = new CancellationToken()
+    )
     {
         // Drain the prior section.
         await _currentStream.DrainAsync(cancellationToken);
@@ -97,12 +105,22 @@ public class MultipartReader
         }
         var headers = await ReadHeadersAsync(cancellationToken);
         _boundary.ExpectLeadingCrlf();
-        _currentStream = new MultipartReaderStream(_stream, _boundary) { LengthLimit = BodyLengthLimit };
+        _currentStream = new MultipartReaderStream(_stream, _boundary)
+        {
+            LengthLimit = BodyLengthLimit,
+        };
         long? baseStreamOffset = _stream.CanSeek ? (long?)_stream.Position : null;
-        return new MultipartSection() { Headers = headers, Body = _currentStream, BaseStreamOffset = baseStreamOffset };
+        return new MultipartSection()
+        {
+            Headers = headers,
+            Body = _currentStream,
+            BaseStreamOffset = baseStreamOffset,
+        };
     }
 
-    private async Task<Dictionary<string, StringValues>> ReadHeadersAsync(CancellationToken cancellationToken)
+    private async Task<Dictionary<string, StringValues>> ReadHeadersAsync(
+        CancellationToken cancellationToken
+    )
     {
         int totalSize = 0;
         var accumulator = new KeyValueAccumulator();
@@ -111,7 +129,9 @@ public class MultipartReader
         {
             if (HeadersLengthLimit - totalSize < line.Length)
             {
-                throw new InvalidDataException($"Multipart headers length limit {HeadersLengthLimit} exceeded.");
+                throw new InvalidDataException(
+                    $"Multipart headers length limit {HeadersLengthLimit} exceeded."
+                );
             }
             totalSize += line.Length;
             int splitIndex = line.IndexOf(':');
@@ -125,7 +145,9 @@ public class MultipartReader
             accumulator.Append(name, value);
             if (accumulator.KeyCount > HeadersCountLimit)
             {
-                throw new InvalidDataException($"Multipart headers count limit {HeadersCountLimit} exceeded.");
+                throw new InvalidDataException(
+                    $"Multipart headers count limit {HeadersCountLimit} exceeded."
+                );
             }
 
             line = await _stream.ReadLineAsync(HeadersLengthLimit - totalSize, cancellationToken);

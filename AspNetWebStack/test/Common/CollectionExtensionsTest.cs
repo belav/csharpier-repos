@@ -58,7 +58,9 @@ namespace System.Collections.Generic
         {
             Collection<object> collection = new Collection<object>() { new object(), new object() };
 
-            Collection<object> collectionAsCollection = ((IEnumerable<object>)collection).AsCollection();
+            Collection<object> collectionAsCollection = (
+                (IEnumerable<object>)collection
+            ).AsCollection();
 
             Assert.Same(collection, collectionAsCollection);
         }
@@ -66,9 +68,13 @@ namespace System.Collections.Generic
         [Fact]
         public void AsCollection_Enumerable_Copies()
         {
-            IEnumerable<object> enumerable = new LinkedList<object>(new object[] { new object(), new object() });
+            IEnumerable<object> enumerable = new LinkedList<object>(
+                new object[] { new object(), new object() }
+            );
 
-            Collection<object> enumerableAsCollection = ((IEnumerable<object>)enumerable).AsCollection();
+            Collection<object> enumerableAsCollection = (
+                (IEnumerable<object>)enumerable
+            ).AsCollection();
 
             Assert.Equal(enumerable, ((IEnumerable<object>)enumerableAsCollection));
         }
@@ -206,7 +212,9 @@ namespace System.Collections.Generic
                 throw new InvalidOperationException();
             };
 
-            Assert.Throws<InvalidOperationException>(() => multiple.SingleDefaultOrError(errorAction, errorArgument));
+            Assert.Throws<InvalidOperationException>(
+                () => multiple.SingleDefaultOrError(errorAction, errorArgument)
+            );
         }
 
         [Fact]
@@ -219,7 +227,12 @@ namespace System.Collections.Generic
                 throw new InvalidOperationException();
             };
 
-            Assert.Null(noMatch.SingleOfTypeDefaultOrError<object, string, object>(errorAction, errorArgument));
+            Assert.Null(
+                noMatch.SingleOfTypeDefaultOrError<object, string, object>(
+                    errorAction,
+                    errorArgument
+                )
+            );
         }
 
         [Fact]
@@ -232,13 +245,25 @@ namespace System.Collections.Generic
                 throw new InvalidOperationException();
             };
 
-            Assert.Equal("Match", singleMatch.SingleOfTypeDefaultOrError<object, string, object>(errorAction, errorArgument));
+            Assert.Equal(
+                "Match",
+                singleMatch.SingleOfTypeDefaultOrError<object, string, object>(
+                    errorAction,
+                    errorArgument
+                )
+            );
         }
 
         [Fact]
         public void SingleOfTypeDefaultOrErrorIListMultipleMatchesThrows()
         {
-            IList<object> multipleMatch = new List<object>() { new object(), "Match1", new object(), "Match2" };
+            IList<object> multipleMatch = new List<object>()
+            {
+                new object(),
+                "Match1",
+                new object(),
+                "Match2",
+            };
             object errorArgument = new object();
             Action<object> errorAction = (object argument) =>
             {
@@ -246,7 +271,13 @@ namespace System.Collections.Generic
                 throw new InvalidOperationException();
             };
 
-            Assert.Throws<InvalidOperationException>(() => multipleMatch.SingleOfTypeDefaultOrError<object, string, object>(errorAction, errorArgument));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    multipleMatch.SingleOfTypeDefaultOrError<object, string, object>(
+                        errorAction,
+                        errorArgument
+                    )
+            );
         }
 
         [Fact]
@@ -274,8 +305,8 @@ namespace System.Collections.Generic
         [Fact]
         public void ToDictionaryFastArray2Element()
         {
-            string[] input = new string[] {"AA", "BB"};
-            var expectedOutput = new Dictionary<string, string>() { { "A", "AA"}, {"B", "BB"}};
+            string[] input = new string[] { "AA", "BB" };
+            var expectedOutput = new Dictionary<string, string>() { { "A", "AA" }, { "B", "BB" } };
             Func<string, string> keySelector = (string value) => value.Substring(1);
 
             var result = input.ToDictionaryFast(keySelector, StringComparer.OrdinalIgnoreCase);
@@ -287,12 +318,15 @@ namespace System.Collections.Generic
         [Fact]
         public void ToDictionaryFastIListList2Element()
         {
-            string[] input = new string[] {"AA", "BB"};
-            var expectedOutput = new Dictionary<string, string>() { { "A", "AA"}, {"B", "BB"}};
+            string[] input = new string[] { "AA", "BB" };
+            var expectedOutput = new Dictionary<string, string>() { { "A", "AA" }, { "B", "BB" } };
             Func<string, string> keySelector = (string value) => value.Substring(1);
             List<string> listInput = new List<string>(input);
 
-            var listResult = listInput.ToDictionaryFast(keySelector, StringComparer.OrdinalIgnoreCase);
+            var listResult = listInput.ToDictionaryFast(
+                keySelector,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             Assert.Equal(expectedOutput, listResult);
             Assert.Equal(StringComparer.OrdinalIgnoreCase, listResult.Comparer);
@@ -306,7 +340,10 @@ namespace System.Collections.Generic
             Func<string, string> keySelector = (string value) => value.Substring(1);
             IList<string> arrayAsList = input;
 
-            var arrayResult = arrayAsList.ToDictionaryFast(keySelector, StringComparer.OrdinalIgnoreCase);
+            var arrayResult = arrayAsList.ToDictionaryFast(
+                keySelector,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             Assert.Equal(expectedOutput, arrayResult);
             Assert.Equal(StringComparer.OrdinalIgnoreCase, arrayResult.Comparer);
@@ -315,11 +352,14 @@ namespace System.Collections.Generic
         [Fact]
         public void ToDictionaryFastIEnumerableArray2Element()
         {
-            string[] input = new string[] {"AA", "BB"};
-            var expectedOutput = new Dictionary<string, string>() { { "A", "AA"}, {"B", "BB"}};
+            string[] input = new string[] { "AA", "BB" };
+            var expectedOutput = new Dictionary<string, string>() { { "A", "AA" }, { "B", "BB" } };
             Func<string, string> keySelector = (string value) => value.Substring(1);
 
-            var arrayResult = ((IEnumerable<string>)input).ToDictionaryFast(keySelector, StringComparer.OrdinalIgnoreCase);
+            var arrayResult = ((IEnumerable<string>)input).ToDictionaryFast(
+                keySelector,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             Assert.Equal(expectedOutput, arrayResult);
             Assert.Equal(StringComparer.OrdinalIgnoreCase, arrayResult.Comparer);
@@ -333,7 +373,10 @@ namespace System.Collections.Generic
             Func<string, string> keySelector = (string value) => value.Substring(1);
             List<string> listInput = new List<string>(input);
 
-            var listResult = ((IEnumerable<string>)listInput).ToDictionaryFast(keySelector, StringComparer.OrdinalIgnoreCase);
+            var listResult = ((IEnumerable<string>)listInput).ToDictionaryFast(
+                keySelector,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             Assert.Equal(expectedOutput, listResult);
             Assert.Equal(StringComparer.OrdinalIgnoreCase, listResult.Comparer);
@@ -347,7 +390,10 @@ namespace System.Collections.Generic
             Func<string, string> keySelector = (string value) => value.Substring(1);
             LinkedList<string> linkedListInput = new LinkedList<string>(input);
 
-            var enumerableResult = ((IEnumerable<string>)linkedListInput).ToDictionaryFast(keySelector, StringComparer.OrdinalIgnoreCase);
+            var enumerableResult = ((IEnumerable<string>)linkedListInput).ToDictionaryFast(
+                keySelector,
+                StringComparer.OrdinalIgnoreCase
+            );
 
             Assert.Equal(expectedOutput, enumerableResult);
             Assert.Equal(StringComparer.OrdinalIgnoreCase, enumerableResult.Comparer);

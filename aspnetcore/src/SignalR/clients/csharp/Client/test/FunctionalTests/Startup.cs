@@ -24,43 +24,52 @@ namespace Microsoft.AspNetCore.SignalR.Client.FunctionalTests;
 
 public class Startup
 {
-    private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(SHA256.HashData(Guid.NewGuid().ToByteArray()));
+    private readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(
+        SHA256.HashData(Guid.NewGuid().ToByteArray())
+    );
     private readonly JwtSecurityTokenHandler JwtTokenHandler = new JwtSecurityTokenHandler();
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddSignalR(options => options.EnableDetailedErrors = true)
-                .AddMessagePackProtocol();
+        services
+            .AddSignalR(options => options.EnableDetailedErrors = true)
+            .AddMessagePackProtocol();
 
         services.AddSingleton<IUserIdProvider, HeaderUserIdProvider>();
         services.AddAuthorization(options =>
         {
-            options.AddPolicy(JwtBearerDefaults.AuthenticationScheme, policy =>
-            {
-                policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
-                policy.RequireClaim(ClaimTypes.NameIdentifier);
-            });
-            options.AddPolicy(NegotiateDefaults.AuthenticationScheme, policy =>
-            {
-                policy.AddAuthenticationSchemes(NegotiateDefaults.AuthenticationScheme);
-                policy.RequireClaim(ClaimTypes.Name);
-            });
+            options.AddPolicy(
+                JwtBearerDefaults.AuthenticationScheme,
+                policy =>
+                {
+                    policy.AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireClaim(ClaimTypes.NameIdentifier);
+                }
+            );
+            options.AddPolicy(
+                NegotiateDefaults.AuthenticationScheme,
+                policy =>
+                {
+                    policy.AddAuthenticationSchemes(NegotiateDefaults.AuthenticationScheme);
+                    policy.RequireClaim(ClaimTypes.Name);
+                }
+            );
         });
 
         services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
-        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
+        services
+            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
                 {
-                    options.TokenValidationParameters =
-                        new TokenValidationParameters
-                        {
-                            ValidateAudience = false,
-                            ValidateIssuer = false,
-                            ValidateActor = false,
-                            ValidateLifetime = true,
-                            IssuerSigningKey = SecurityKey
-                        };
-                });
+                    ValidateAudience = false,
+                    ValidateIssuer = false,
+                    ValidateActor = false,
+                    ValidateLifetime = true,
+                    IssuerSigningKey = SecurityKey,
+                };
+            });
 
         // Since tests run in parallel, it's possible multiple servers will startup,
         // we use an ephemeral key provider and repository to avoid filesystem contention issues
@@ -97,36 +106,63 @@ public class Startup
             endpoints.MapHub<DynamicTestHub>("/dynamic");
             endpoints.MapHub<TestHubT>("/hubT");
             endpoints.MapHub<HubWithAuthorization>("/authorizedhub");
-            endpoints.MapHub<HubWithAuthorization2>("/authorizedhub2")
-                  .RequireAuthorization(new AuthorizeAttribute(JwtBearerDefaults.AuthenticationScheme));
-            endpoints.MapHub<HubWithAuthorization2>("/windowsauthhub")
-                  .RequireAuthorization(new AuthorizeAttribute(NegotiateDefaults.AuthenticationScheme));
+            endpoints
+                .MapHub<HubWithAuthorization2>("/authorizedhub2")
+                .RequireAuthorization(
+                    new AuthorizeAttribute(JwtBearerDefaults.AuthenticationScheme)
+                );
+            endpoints
+                .MapHub<HubWithAuthorization2>("/windowsauthhub")
+                .RequireAuthorization(
+                    new AuthorizeAttribute(NegotiateDefaults.AuthenticationScheme)
+                );
 
-            endpoints.MapHub<TestHub>("/default-nowebsockets", options => options.Transports = HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents);
+            endpoints.MapHub<TestHub>(
+                "/default-nowebsockets",
+                options =>
+                    options.Transports =
+                        HttpTransportType.LongPolling | HttpTransportType.ServerSentEvents
+            );
 
-            endpoints.MapHub<TestHub>("/negotiateProtocolVersion12", options =>
-            {
-                options.MinimumProtocolVersion = 12;
-            });
-
-            endpoints.MapHub<TestHub>("/negotiateProtocolVersionNegative", options =>
-            {
-                options.MinimumProtocolVersion = -1;
-            });
-
-            endpoints.MapGet("/generateJwtToken/{name?}", (HttpContext context, string name) =>
-            {
-                return context.Response.WriteAsync(GenerateJwtToken(name ?? "testuser"));
-            });
-
-            endpoints.Map("/redirect/{*anything}", context =>
-            {
-                return context.Response.WriteAsync(JsonConvert.SerializeObject(new
+            endpoints.MapHub<TestHub>(
+                "/negotiateProtocolVersion12",
+                options =>
                 {
-                    url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
-                    accessToken = GenerateJwtToken()
-                }));
-            });
+                    options.MinimumProtocolVersion = 12;
+                }
+            );
+
+            endpoints.MapHub<TestHub>(
+                "/negotiateProtocolVersionNegative",
+                options =>
+                {
+                    options.MinimumProtocolVersion = -1;
+                }
+            );
+
+            endpoints.MapGet(
+                "/generateJwtToken/{name?}",
+                (HttpContext context, string name) =>
+                {
+                    return context.Response.WriteAsync(GenerateJwtToken(name ?? "testuser"));
+                }
+            );
+
+            endpoints.Map(
+                "/redirect/{*anything}",
+                context =>
+                {
+                    return context.Response.WriteAsync(
+                        JsonConvert.SerializeObject(
+                            new
+                            {
+                                url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
+                                accessToken = GenerateJwtToken(),
+                            }
+                        )
+                    );
+                }
+            );
         });
     }
 
@@ -134,7 +170,13 @@ public class Startup
     {
         var claims = new[] { new Claim(ClaimTypes.NameIdentifier, name) };
         var credentials = new SigningCredentials(SecurityKey, SecurityAlgorithms.HmacSha256);
-        var token = new JwtSecurityToken("SignalRTestServer", "SignalRTests", claims, expires: DateTime.Now.AddSeconds(5), signingCredentials: credentials);
+        var token = new JwtSecurityToken(
+            "SignalRTestServer",
+            "SignalRTests",
+            claims,
+            expires: DateTime.Now.AddSeconds(5),
+            signingCredentials: credentials
+        );
         return JwtTokenHandler.WriteToken(token);
     }
 }

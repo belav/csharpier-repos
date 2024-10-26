@@ -16,10 +16,12 @@ namespace System.ServiceModel.Activities.Description
     {
         internal static bool IsDefined(WorkflowUnhandledExceptionAction value)
         {
-            return (value == WorkflowUnhandledExceptionAction.Abandon ||
-                value == WorkflowUnhandledExceptionAction.Cancel ||
-                value == WorkflowUnhandledExceptionAction.Terminate ||
-                value == WorkflowUnhandledExceptionAction.AbandonAndSuspend);
+            return (
+                value == WorkflowUnhandledExceptionAction.Abandon
+                || value == WorkflowUnhandledExceptionAction.Cancel
+                || value == WorkflowUnhandledExceptionAction.Terminate
+                || value == WorkflowUnhandledExceptionAction.AbandonAndSuspend
+            );
         }
     }
 }

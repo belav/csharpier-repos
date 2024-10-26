@@ -12,7 +12,11 @@ namespace System.Runtime.InteropServices.Tests.Common
         // Doesn't represent a real interface. The value is only used to support a call to QueryInterface for testing.
         public const string IID_TestQueryInterface = "1F906666-B388-4729-B78C-826BC5FD4245";
 
-        protected unsafe override ComInterfaceEntry* ComputeVtables(object obj, CreateComInterfaceFlags flags, out int count)
+        protected override unsafe ComInterfaceEntry* ComputeVtables(
+            object obj,
+            CreateComInterfaceFlags flags,
+            out int count
+        )
         {
             Assert.Equal(CreateComInterfaceFlags.None, flags);
 
@@ -21,12 +25,20 @@ namespace System.Runtime.InteropServices.Tests.Common
             IntPtr fpRelease = default;
             ComWrappers.GetIUnknownImpl(out fpQueryInterface, out fpAddRef, out fpRelease);
 
-            var vtblRaw = (IntPtr*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ComWrappersImpl), IntPtr.Size * 3);
+            var vtblRaw = (IntPtr*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(ComWrappersImpl),
+                    IntPtr.Size * 3
+                );
             vtblRaw[0] = fpQueryInterface;
             vtblRaw[1] = fpAddRef;
             vtblRaw[2] = fpRelease;
 
-            var entryRaw = (ComInterfaceEntry*)RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(ComWrappersImpl), sizeof(ComInterfaceEntry));
+            var entryRaw = (ComInterfaceEntry*)
+                RuntimeHelpers.AllocateTypeAssociatedMemory(
+                    typeof(ComWrappersImpl),
+                    sizeof(ComInterfaceEntry)
+                );
             entryRaw->IID = new Guid(IID_TestQueryInterface);
             entryRaw->Vtable = (IntPtr)vtblRaw;
 
@@ -34,10 +46,10 @@ namespace System.Runtime.InteropServices.Tests.Common
             return entryRaw;
         }
 
-        protected override object CreateObject(IntPtr externalComObject, CreateObjectFlags flag)
-            => throw new NotImplementedException();
+        protected override object CreateObject(IntPtr externalComObject, CreateObjectFlags flag) =>
+            throw new NotImplementedException();
 
-        protected override void ReleaseObjects(IEnumerable objects)
-            => throw new NotImplementedException();
+        protected override void ReleaseObjects(IEnumerable objects) =>
+            throw new NotImplementedException();
     }
 }

@@ -5,6 +5,7 @@
 
 using System.Collections;
 using System.Collections.ObjectModel;
+
 namespace Microsoft.EntityFrameworkCore;
 
 public class TypeExtensionsTest
@@ -46,14 +47,10 @@ public class TypeExtensionsTest
 
     public class CtorFixture
     {
-        public CtorFixture()
-        {
-        }
+        public CtorFixture() { }
 
         // ReSharper disable once UnusedParameter.Local
-        public CtorFixture(int frob)
-        {
-        }
+        public CtorFixture(int frob) { }
     }
 
     [ConditionalFact]
@@ -66,8 +63,8 @@ public class TypeExtensionsTest
     }
 
     [ConditionalFact]
-    public void GetDeclaredConstructor_returns_null_when_no_match()
-        => Assert.Null(typeof(CtorFixture).GetDeclaredConstructor(new[] { typeof(string) }));
+    public void GetDeclaredConstructor_returns_null_when_no_match() =>
+        Assert.Null(typeof(CtorFixture).GetDeclaredConstructor(new[] { typeof(string) }));
 
     [ConditionalFact]
     public void GetDeclaredConstructor_finds_ctor_args()
@@ -88,61 +85,197 @@ public class TypeExtensionsTest
     }
 
     [ConditionalFact]
-    public void Element_type_should_return_input_type_when_not_sequence_type()
-        => Assert.Equal(typeof(string), typeof(string));
+    public void Element_type_should_return_input_type_when_not_sequence_type() =>
+        Assert.Equal(typeof(string), typeof(string));
 
     [ConditionalFact]
     public void Get_any_property_returns_any_property()
     {
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("ElDiabloEnElOjo").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("ANightIn").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("MySister").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("TinyTears").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("SnowyInFSharpMinor").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("Seaweed").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("VertrauenII").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("TalkToMe").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("NoMoreAffairs").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("Singing").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("TravellingLight").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("CherryBlossoms").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("ShesGone").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("Mistakes").DeclaringType);
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("ElDiabloEnElOjo").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("ANightIn").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("MySister").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("TinyTears").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("SnowyInFSharpMinor").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("Seaweed").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("VertrauenII").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("TalkToMe").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("NoMoreAffairs").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("Singing").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("TravellingLight").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("CherryBlossoms").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("ShesGone").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("Mistakes").DeclaringType
+        );
         Assert.Null(typeof(TindersticksII).GetAnyProperty("VertrauenIII"));
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksII).GetAnyProperty("SleepySong").DeclaringType);
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksII).GetAnyProperty("SleepySong").DeclaringType
+        );
 
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("ElDiabloEnElOjo").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("ANightIn").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("MySister").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("TinyTears").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("SnowyInFSharpMinor").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("Seaweed").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("VertrauenII").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("TalkToMe").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("NoMoreAffairs").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("Singing").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("TravellingLight").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("CherryBlossoms").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("ShesGone").DeclaringType);
-        Assert.Same(typeof(TindersticksII), typeof(TindersticksIIVinyl).GetAnyProperty("Mistakes").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIIVinyl).GetAnyProperty("VertrauenIII").DeclaringType);
-        Assert.Throws<AmbiguousMatchException>(() => typeof(TindersticksIICd).GetAnyProperty("SleepySong"));
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("ElDiabloEnElOjo").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("ANightIn").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("MySister").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("TinyTears").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("SnowyInFSharpMinor").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("Seaweed").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("VertrauenII").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("TalkToMe").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("NoMoreAffairs").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("Singing").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("TravellingLight").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("CherryBlossoms").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("ShesGone").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksII),
+            typeof(TindersticksIIVinyl).GetAnyProperty("Mistakes").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIIVinyl).GetAnyProperty("VertrauenIII").DeclaringType
+        );
+        Assert.Throws<AmbiguousMatchException>(
+            () => typeof(TindersticksIICd).GetAnyProperty("SleepySong")
+        );
 
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("ANightIn").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("MySister").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("TinyTears").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("SnowyInFSharpMinor").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("Seaweed").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("VertrauenII").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("TalkToMe").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("NoMoreAffairs").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("Singing").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("TravellingLight").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("CherryBlossoms").DeclaringType);
-        Assert.Same(typeof(TindersticksIIVinyl), typeof(TindersticksIICd).GetAnyProperty("ShesGone").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("Mistakes").DeclaringType);
-        Assert.Same(typeof(TindersticksIICd), typeof(TindersticksIICd).GetAnyProperty("VertrauenIII").DeclaringType);
-        Assert.Throws<AmbiguousMatchException>(() => typeof(TindersticksIICd).GetAnyProperty("SleepySong"));
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("ANightIn").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("MySister").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("TinyTears").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("SnowyInFSharpMinor").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("Seaweed").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("VertrauenII").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("TalkToMe").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("NoMoreAffairs").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("Singing").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("TravellingLight").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("CherryBlossoms").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIIVinyl),
+            typeof(TindersticksIICd).GetAnyProperty("ShesGone").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("Mistakes").DeclaringType
+        );
+        Assert.Same(
+            typeof(TindersticksIICd),
+            typeof(TindersticksIICd).GetAnyProperty("VertrauenIII").DeclaringType
+        );
+        Assert.Throws<AmbiguousMatchException>(
+            () => typeof(TindersticksIICd).GetAnyProperty("SleepySong")
+        );
     }
 
     public class TindersticksII
@@ -159,8 +292,7 @@ public class TypeExtensionsTest
         public virtual int VertrauenII { get; protected set; }
         public virtual int TalkToMe { protected get; set; }
 
-        public virtual int NoMoreAffairs
-            => 1995;
+        public virtual int NoMoreAffairs => 1995;
 
         public virtual int Singing
         {
@@ -182,8 +314,7 @@ public class TypeExtensionsTest
         private int MySister { get; set; }
         protected override int TinyTears { get; set; }
 
-        public override int SnowyInFSharpMinor
-            => 1995;
+        public override int SnowyInFSharpMinor => 1995;
 
         public override int Seaweed
         {
@@ -193,8 +324,7 @@ public class TypeExtensionsTest
         public override int VertrauenII { get; protected set; }
         public override int TalkToMe { protected get; set; }
 
-        public override int NoMoreAffairs
-            => 1995;
+        public override int NoMoreAffairs => 1995;
 
         public override int Singing
         {
@@ -214,8 +344,7 @@ public class TypeExtensionsTest
         private int MySister { get; set; }
         protected override int TinyTears { get; set; }
 
-        public override int SnowyInFSharpMinor
-            => 1995;
+        public override int SnowyInFSharpMinor => 1995;
 
         public override int Seaweed
         {
@@ -225,8 +354,7 @@ public class TypeExtensionsTest
         public override int VertrauenII { get; protected set; }
         public override int TalkToMe { protected get; set; }
 
-        public override int NoMoreAffairs
-            => 1995;
+        public override int NoMoreAffairs => 1995;
 
         public override int Singing
         {
@@ -243,24 +371,38 @@ public class TypeExtensionsTest
     [ConditionalFact]
     public void TryGetElementType_returns_element_type_for_given_interface()
     {
-        Assert.Same(typeof(string), typeof(ICollection<string>).TryGetElementType(typeof(ICollection<>)));
-        Assert.Same(typeof(Random), typeof(IObservable<Random>).TryGetElementType(typeof(IObservable<>)));
+        Assert.Same(
+            typeof(string),
+            typeof(ICollection<string>).TryGetElementType(typeof(ICollection<>))
+        );
+        Assert.Same(
+            typeof(Random),
+            typeof(IObservable<Random>).TryGetElementType(typeof(IObservable<>))
+        );
         Assert.Same(typeof(int), typeof(List<int>).TryGetElementType(typeof(IList<>)));
         Assert.Same(
-            typeof(Random), typeof(MultipleImplementor<Random, string>).TryGetElementType(typeof(IObservable<>)));
-        Assert.Same(typeof(string), typeof(MultipleImplementor<Random, string>).TryGetElementType(typeof(IEnumerable<>)));
+            typeof(Random),
+            typeof(MultipleImplementor<Random, string>).TryGetElementType(typeof(IObservable<>))
+        );
+        Assert.Same(
+            typeof(string),
+            typeof(MultipleImplementor<Random, string>).TryGetElementType(typeof(IEnumerable<>))
+        );
     }
 
     [ConditionalFact]
     public void TryGetElementType_returns_element_type_for_given_class()
     {
-        Assert.Same(typeof(string), typeof(Collection<string>).TryGetElementType(typeof(Collection<>)));
+        Assert.Same(
+            typeof(string),
+            typeof(Collection<string>).TryGetElementType(typeof(Collection<>))
+        );
         Assert.Same(typeof(int), typeof(List<int>).TryGetElementType(typeof(List<>)));
     }
 
     [ConditionalFact]
-    public void TryGetElementType_returns_null_if_type_is_generic_type_definition()
-        => Assert.Null(typeof(ICollection<>).TryGetElementType(typeof(ICollection<>)));
+    public void TryGetElementType_returns_null_if_type_is_generic_type_definition() =>
+        Assert.Null(typeof(ICollection<>).TryGetElementType(typeof(ICollection<>)));
 
     [ConditionalFact]
     public void TryGetElementType_returns_null_if_type_doesnt_implement_interface()
@@ -278,20 +420,20 @@ public class TypeExtensionsTest
 
     // CodePlex 2014
     [ConditionalFact]
-    public void TryGetElementType_returns_null_when_ICollection_implemented_more_than_once()
-        => Assert.Null(typeof(RoleCollection2014).TryGetElementType(typeof(ICollection<>)));
+    public void TryGetElementType_returns_null_when_ICollection_implemented_more_than_once() =>
+        Assert.Null(typeof(RoleCollection2014).TryGetElementType(typeof(ICollection<>)));
 
-    private class MultipleImplementor<TRandom, TElement> : IObservable<TRandom>, IEnumerable<TElement>
+    private class MultipleImplementor<TRandom, TElement>
+        : IObservable<TRandom>,
+            IEnumerable<TElement>
         where TRandom : Random
     {
-        public IEnumerator<TElement> GetEnumerator()
-            => throw new NotImplementedException();
+        public IEnumerator<TElement> GetEnumerator() => throw new NotImplementedException();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IDisposable Subscribe(IObserver<TRandom> observer)
-            => throw new NotImplementedException();
+        public IDisposable Subscribe(IObserver<TRandom> observer) =>
+            throw new NotImplementedException();
     }
 
     private interface IRole2014
@@ -299,27 +441,21 @@ public class TypeExtensionsTest
         string Permissions { get; set; }
     }
 
-    private interface IRoleCollection2014 : ICollection<IRole2014>
-    {
-    }
+    private interface IRoleCollection2014 : ICollection<IRole2014> { }
 
 #pragma warning disable CA1061 // Do not hide base class methods
     private class RoleCollection2014 : List<Role2014>, IRoleCollection2014
     {
-        public new IEnumerator<IRole2014> GetEnumerator()
-            => throw new NotImplementedException();
+        public new IEnumerator<IRole2014> GetEnumerator() => throw new NotImplementedException();
 
-        public void Add(IRole2014 item)
-            => throw new NotImplementedException();
+        public void Add(IRole2014 item) => throw new NotImplementedException();
 
-        public bool Contains(IRole2014 item)
-            => throw new NotImplementedException();
+        public bool Contains(IRole2014 item) => throw new NotImplementedException();
 
-        public void CopyTo(IRole2014[] array, int arrayIndex)
-            => throw new NotImplementedException();
+        public void CopyTo(IRole2014[] array, int arrayIndex) =>
+            throw new NotImplementedException();
 
-        public bool Remove(IRole2014 item)
-            => throw new NotImplementedException();
+        public bool Remove(IRole2014 item) => throw new NotImplementedException();
 
         public bool IsReadOnly { get; }
     }
@@ -341,20 +477,14 @@ public class TypeExtensionsTest
     }
 
     [ConditionalFact]
-    public void GetBaseTypes_return_empty_if_no_base_type_exists()
-        => Assert.False(typeof(object).GetBaseTypes().Any());
+    public void GetBaseTypes_return_empty_if_no_base_type_exists() =>
+        Assert.False(typeof(object).GetBaseTypes().Any());
 
-    private class MultipleHierarchy : Some
-    {
-    }
+    private class MultipleHierarchy : Some { }
 
-    private class Some : Base
-    {
-    }
+    private class Some : Base { }
 
-    private class Base
-    {
-    }
+    private class Base { }
 
     // ReSharper restore InconsistentNaming
 
@@ -408,7 +538,7 @@ public class TypeExtensionsTest
 
     private enum SomeEnum
     {
-        Default
+        Default,
     }
 
     [ConditionalFact]
@@ -418,7 +548,8 @@ public class TypeExtensionsTest
             typeof(SomeAbstractClass),
             typeof(SomeGenericClass<>),
             typeof(SomeGenericClass<int>),
-            typeof(SomeTypeWithoutDefaultCtor));
+            typeof(SomeTypeWithoutDefaultCtor)
+        );
 
         var types = assembly.GetConstructibleTypes().Select(t => t.AsType()).ToList();
 
@@ -428,19 +559,13 @@ public class TypeExtensionsTest
         Assert.Contains(typeof(SomeTypeWithoutDefaultCtor), types);
     }
 
-    private abstract class SomeAbstractClass
-    {
-    }
+    private abstract class SomeAbstractClass { }
 
-    private class SomeGenericClass<T>
-    {
-    }
+    private class SomeGenericClass<T> { }
 
     private class SomeTypeWithoutDefaultCtor
     {
-        public SomeTypeWithoutDefaultCtor(int value)
-        {
-        }
+        public SomeTypeWithoutDefaultCtor(int value) { }
     }
 
     [ConditionalFact]
@@ -449,70 +574,105 @@ public class TypeExtensionsTest
         // Predefined Types
         Assert.Empty(typeof(int).GetNamespaces().ToArray());
         Assert.Equal(new[] { "System" }, typeof(Guid).GetNamespaces().ToArray());
-        Assert.Equal(new[] { "System.Collections.Generic", "System" }, typeof(List<Guid>).GetNamespaces().ToArray());
+        Assert.Equal(
+            new[] { "System.Collections.Generic", "System" },
+            typeof(List<Guid>).GetNamespaces().ToArray()
+        );
 
-        Assert.Equal(new[] { "Microsoft.EntityFrameworkCore" }, typeof(A).GetNamespaces().ToArray());
+        Assert.Equal(
+            new[] { "Microsoft.EntityFrameworkCore" },
+            typeof(A).GetNamespaces().ToArray()
+        );
         Assert.Equal(
             new[] { "System.Collections.Generic", "Microsoft.EntityFrameworkCore" },
-            typeof(List<A>).GetNamespaces().ToArray());
+            typeof(List<A>).GetNamespaces().ToArray()
+        );
         Assert.Equal(
-            new[] { "System.Collections.Generic", "System", "System.Collections.Generic", "Microsoft.EntityFrameworkCore" },
-            typeof(Dictionary<Version, List<A>>).GetNamespaces().ToArray());
+            new[]
+            {
+                "System.Collections.Generic",
+                "System",
+                "System.Collections.Generic",
+                "Microsoft.EntityFrameworkCore",
+            },
+            typeof(Dictionary<Version, List<A>>).GetNamespaces().ToArray()
+        );
 
-        Assert.Equal(new[] { "Microsoft.EntityFrameworkCore", "System" }, typeof(Outer<Guid>).GetNamespaces().ToArray());
+        Assert.Equal(
+            new[] { "Microsoft.EntityFrameworkCore", "System" },
+            typeof(Outer<Guid>).GetNamespaces().ToArray()
+        );
         Assert.Equal(
             new[] { "Microsoft.EntityFrameworkCore", "System.Collections.Generic", "System" },
-            typeof(Outer<List<Guid>>).GetNamespaces().ToArray());
+            typeof(Outer<List<Guid>>).GetNamespaces().ToArray()
+        );
     }
 
     [ConditionalTheory]
     // Predefined Types
     [InlineData(typeof(int), "int")]
     [InlineData(typeof(List<int>), "System.Collections.Generic.List<int>")]
-    [InlineData(typeof(Dictionary<int, string>), "System.Collections.Generic.Dictionary<int, string>")]
     [InlineData(
-        typeof(Dictionary<int, List<string>>), "System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<string>>")]
-    [InlineData(typeof(List<List<string>>), "System.Collections.Generic.List<System.Collections.Generic.List<string>>")]
+        typeof(Dictionary<int, string>),
+        "System.Collections.Generic.Dictionary<int, string>"
+    )]
+    [InlineData(
+        typeof(Dictionary<int, List<string>>),
+        "System.Collections.Generic.Dictionary<int, System.Collections.Generic.List<string>>"
+    )]
+    [InlineData(
+        typeof(List<List<string>>),
+        "System.Collections.Generic.List<System.Collections.Generic.List<string>>"
+    )]
     // Classes inside NonGeneric class
-    [InlineData(
-        typeof(A),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+A")]
-    [InlineData(
-        typeof(B<int>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+B<int>")]
+    [InlineData(typeof(A), "Microsoft.EntityFrameworkCore.TypeExtensionsTest+A")]
+    [InlineData(typeof(B<int>), "Microsoft.EntityFrameworkCore.TypeExtensionsTest+B<int>")]
     [InlineData(
         typeof(C<int, string>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+C<int, string>")]
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+C<int, string>"
+    )]
     [InlineData(
         typeof(B<B<string>>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+B<Microsoft.EntityFrameworkCore.TypeExtensionsTest+B<string>>")]
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+B<Microsoft.EntityFrameworkCore.TypeExtensionsTest+B<string>>"
+    )]
     [InlineData(
         typeof(C<int, B<string>>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+C<int, Microsoft.EntityFrameworkCore.TypeExtensionsTest+B<string>>")]
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+C<int, Microsoft.EntityFrameworkCore.TypeExtensionsTest+B<string>>"
+    )]
     // Classes inside Generic class
     [InlineData(
         typeof(Outer<int>.D),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+D")]
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+D"
+    )]
     [InlineData(
         typeof(Outer<int>.E<int>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+E<int>")]
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+E<int>"
+    )]
     [InlineData(
         typeof(Outer<int>.F<int, string>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+F<int, string>")]
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+F<int, string>"
+    )]
     [InlineData(
         typeof(Level1<int>.Level2<bool>.Level3<int>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Level1<int>+Level2<bool>+Level3<int>")]
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Level1<int>+Level2<bool>+Level3<int>"
+    )]
     [InlineData(
         typeof(Outer<int>.E<Outer<int>.E<string>>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+E<Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+E<string>>")]
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+E<Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+E<string>>"
+    )]
     [InlineData(
         typeof(Outer<int>.F<int, Outer<int>.E<string>>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+F<int, Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+E<string>>")]
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+F<int, Microsoft.EntityFrameworkCore.TypeExtensionsTest+Outer<int>+E<string>>"
+    )]
     [InlineData(
-        typeof(OuterGeneric<int>.InnerNonGeneric.InnerGeneric<int, string>.InnerGenericLeafNode<bool>),
-        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+OuterGeneric<int>+InnerNonGeneric+InnerGeneric<int, string>+InnerGenericLeafNode<bool>")]
-    public void Can_pretty_print_CLR_full_name(Type type, string expected)
-        => Assert.Equal(expected, type.DisplayName());
+        typeof(OuterGeneric<int>.InnerNonGeneric.InnerGeneric<
+            int,
+            string
+        >.InnerGenericLeafNode<bool>),
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+OuterGeneric<int>+InnerNonGeneric+InnerGeneric<int, string>+InnerGenericLeafNode<bool>"
+    )]
+    public void Can_pretty_print_CLR_full_name(Type type, string expected) =>
+        Assert.Equal(expected, type.DisplayName());
 
     [ConditionalTheory]
     // Predefined Types
@@ -534,9 +694,14 @@ public class TypeExtensionsTest
     [InlineData(typeof(Outer<int>.F<int, Outer<int>.E<string>>), "F<int, E<string>>")]
     [InlineData(typeof(Outer<int>.E<Outer<int>.E<string>>), "E<E<string>>")]
     [InlineData(
-        typeof(OuterGeneric<int>.InnerNonGeneric.InnerGeneric<int, string>.InnerGenericLeafNode<bool>), "InnerGenericLeafNode<bool>")]
-    public void Can_pretty_print_CLR_name(Type type, string expected)
-        => Assert.Equal(expected, type.ShortDisplayName());
+        typeof(OuterGeneric<int>.InnerNonGeneric.InnerGeneric<
+            int,
+            string
+        >.InnerGenericLeafNode<bool>),
+        "InnerGenericLeafNode<bool>"
+    )]
+    public void Can_pretty_print_CLR_name(Type type, string expected) =>
+        Assert.Equal(expected, type.ShortDisplayName());
 
     [ConditionalTheory]
     [InlineData(typeof(bool), "bool")]
@@ -555,19 +720,23 @@ public class TypeExtensionsTest
     [InlineData(typeof(ulong), "ulong")]
     [InlineData(typeof(ushort), "ushort")]
     [InlineData(typeof(void), "void")]
-    public void Returns_common_name_for_built_in_types(Type type, string expected)
-        => Assert.Equal(expected, type.DisplayName());
+    public void Returns_common_name_for_built_in_types(Type type, string expected) =>
+        Assert.Equal(expected, type.DisplayName());
 
     [ConditionalTheory]
     [InlineData(typeof(int[]), true, "int[]")]
     [InlineData(typeof(string[][]), true, "string[][]")]
     [InlineData(typeof(int[,]), true, "int[,]")]
     [InlineData(typeof(bool[,,,]), true, "bool[,,,]")]
-    [InlineData(typeof(A[,][,,]), true, "Microsoft.EntityFrameworkCore.TypeExtensionsTest+A[,][,,]")]
+    [InlineData(
+        typeof(A[,][,,]),
+        true,
+        "Microsoft.EntityFrameworkCore.TypeExtensionsTest+A[,][,,]"
+    )]
     [InlineData(typeof(List<int[,][,,]>), true, "System.Collections.Generic.List<int[,][,,]>")]
     [InlineData(typeof(List<int[,,][,]>[,][,,]), false, "List<int[,,][,]>[,][,,]")]
-    public void Can_pretty_print_array_name(Type type, bool fullName, string expected)
-        => Assert.Equal(expected, type.DisplayName(fullName));
+    public void Can_pretty_print_array_name(Type type, bool fullName, string expected) =>
+        Assert.Equal(expected, type.DisplayName(fullName));
 
     public static TheoryData OpenGenericsTestData { get; } = CreateOpenGenericsTestData();
 
@@ -581,7 +750,8 @@ public class TypeExtensionsTest
         var genArgsLevel = openLevelType.GetGenericArguments();
         genArgsLevel[1] = typeof(string);
         var closedLevelType = openLevelType.MakeGenericType(genArgsLevel);
-        var openInnerType = typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<,>.InnerGenericLeafNode<>);
+        var openInnerType =
+            typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<,>.InnerGenericLeafNode<>);
         var genArgsInnerType = openInnerType.GetGenericArguments();
         genArgsInnerType[3] = typeof(bool);
         var closedInnerType = openInnerType.MakeGenericType(genArgsInnerType);
@@ -592,23 +762,35 @@ public class TypeExtensionsTest
             { typeof(List<>), true, "System.Collections.Generic.List<>" },
             { typeof(Dictionary<,>), true, "System.Collections.Generic.Dictionary<,>" },
             {
-                typeof(Level1<>.Level2<>.Level3<>), true,
+                typeof(Level1<>.Level2<>.Level3<>),
+                true,
                 "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Level1<>+Level2<>+Level3<>"
             },
-            { typeof(PartiallyClosedGeneric<>).BaseType, true, "Microsoft.EntityFrameworkCore.TypeExtensionsTest+C<, int>" },
             {
-                typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<,>.InnerGenericLeafNode<>), true,
+                typeof(PartiallyClosedGeneric<>).BaseType,
+                true,
+                "Microsoft.EntityFrameworkCore.TypeExtensionsTest+C<, int>"
+            },
+            {
+                typeof(OuterGeneric<>.InnerNonGeneric.InnerGeneric<,>.InnerGenericLeafNode<>),
+                true,
                 "Microsoft.EntityFrameworkCore.TypeExtensionsTest+OuterGeneric<>+InnerNonGeneric+InnerGeneric<,>+InnerGenericLeafNode<>"
             },
             {
-                closedDictionaryType, true,
+                closedDictionaryType,
+                true,
                 "System.Collections.Generic.Dictionary<Microsoft.EntityFrameworkCore.TypeExtensionsTest+B<>,>"
             },
-            { closedLevelType, true, "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Level1<>+Level2<string>+Level3<>" },
             {
-                closedInnerType, true,
+                closedLevelType,
+                true,
+                "Microsoft.EntityFrameworkCore.TypeExtensionsTest+Level1<>+Level2<string>+Level3<>"
+            },
+            {
+                closedInnerType,
+                true,
                 "Microsoft.EntityFrameworkCore.TypeExtensionsTest+OuterGeneric<>+InnerNonGeneric+InnerGeneric<,>+InnerGenericLeafNode<bool>"
-            }
+            },
         };
     }
 
@@ -625,35 +807,21 @@ public class TypeExtensionsTest
         }
     }
 
-    private class A
-    {
-    }
+    private class A { }
 
-    private class B<T>
-    {
-    }
+    private class B<T> { }
 
-    private class C<T1, T2>
-    {
-    }
+    private class C<T1, T2> { }
 
-    private class PartiallyClosedGeneric<T> : C<T, int>
-    {
-    }
+    private class PartiallyClosedGeneric<T> : C<T, int> { }
 
     private static class Outer<T>
     {
-        public class D
-        {
-        }
+        public class D { }
 
-        public class E<T1>
-        {
-        }
+        public class E<T1> { }
 
-        public class F<T1, T2>
-        {
-        }
+        public class F<T1, T2> { }
     }
 
     private static class OuterGeneric<T1>
@@ -662,13 +830,9 @@ public class TypeExtensionsTest
         {
             public static class InnerGeneric<T2, T3>
             {
-                public class InnerGenericLeafNode<T4>
-                {
-                }
+                public class InnerGenericLeafNode<T4> { }
 
-                public class InnerLeafNode
-                {
-                }
+                public class InnerLeafNode { }
             }
         }
     }
@@ -677,9 +841,7 @@ public class TypeExtensionsTest
     {
         public static class Level2<T2>
         {
-            public class Level3<T3>
-            {
-            }
+            public class Level3<T3> { }
         }
     }
 }

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DiagnosticsFilteredInMethodBody()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -43,7 +44,15 @@ class C
             var compilation = CreateCompilationWithMscorlib45(source);
             var model = compilation.GetSemanticModel(compilation.SyntaxTrees.Single());
 
-            DiagnosticsHelper.VerifyDiagnostics(model, source, @"(?s)^.*$", "CS1646", "CS1024", "CS1525", "CS1002");
+            DiagnosticsHelper.VerifyDiagnostics(
+                model,
+                source,
+                @"(?s)^.*$",
+                "CS1646",
+                "CS1024",
+                "CS1525",
+                "CS1002"
+            );
             DiagnosticsHelper.VerifyDiagnostics(model, source, @"\s*(?=@)", "CS1646");
             DiagnosticsHelper.VerifyDiagnostics(model, source, @"#", "CS1024");
             DiagnosticsHelper.VerifyDiagnostics(model, source, @"(?<=\!)", "CS1525", "CS1002");
@@ -52,7 +61,8 @@ class C
         [Fact]
         public void DiagnosticsFilteredInMethodBodyInsideNamespace()
         {
-            var source = @"
+            var source =
+                @"
 namespace N
 {
     class C
@@ -85,7 +95,8 @@ class D
         [Fact]
         public void DiagnosticsFilteredForIntersectingIntervals()
         {
-            var source = @"
+            var source =
+                @"
 class C : Abracadabra
 {
 }
@@ -105,7 +116,8 @@ class C : Abracadabra
         [Fact, WorkItem(1066483, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1066483")]
         public void TestDiagnosticWithSeverity()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public void Goo()
@@ -144,7 +156,8 @@ class C
         [Fact, WorkItem(7446, "https://github.com/dotnet/roslyn/issues/7446")]
         public void TestCompilationEventQueueWithSemanticModelGetDiagnostics()
         {
-            var source1 = @"
+            var source1 =
+                @"
 namespace N1
 {
     partial class Class
@@ -153,7 +166,8 @@ namespace N1
     }
 } 
 ";
-            var source2 = @"
+            var source2 =
+                @"
 namespace N1
 {
     partial class Class
@@ -166,7 +180,8 @@ namespace N1
             var tree1 = CSharpSyntaxTree.ParseText(source1, path: "file1");
             var tree2 = CSharpSyntaxTree.ParseText(source2, path: "file2");
             var eventQueue = new AsyncQueue<CompilationEvent>();
-            var compilation = CreateCompilationWithMscorlib45(new[] { tree1, tree2 }).WithEventQueue(eventQueue);
+            var compilation = CreateCompilationWithMscorlib45(new[] { tree1, tree2 })
+                .WithEventQueue(eventQueue);
 
             // Invoke SemanticModel.GetDiagnostics to force populate the event queue for symbols in the first source file.
             var model = compilation.GetSemanticModel(tree1);
@@ -174,8 +189,16 @@ namespace N1
 
             Assert.True(eventQueue.Count > 0);
             bool compilationStartedFired;
-            HashSet<string> declaredSymbolNames, completedCompilationUnits;
-            Assert.True(DequeueCompilationEvents(eventQueue, out compilationStartedFired, out declaredSymbolNames, out completedCompilationUnits));
+            HashSet<string> declaredSymbolNames,
+                completedCompilationUnits;
+            Assert.True(
+                DequeueCompilationEvents(
+                    eventQueue,
+                    out compilationStartedFired,
+                    out declaredSymbolNames,
+                    out completedCompilationUnits
+                )
+            );
 
             // Verify symbol declared events fired for all symbols declared in the first source file.
             Assert.True(compilationStartedFired);
@@ -189,7 +212,8 @@ namespace N1
         [Fact, WorkItem(7477, "https://github.com/dotnet/roslyn/issues/7477")]
         public void TestCompilationEventsForPartialMethod()
         {
-            var source1 = @"
+            var source1 =
+                @"
 namespace N1
 {
     partial class Class
@@ -201,7 +225,8 @@ namespace N1
     }
 } 
 ";
-            var source2 = @"
+            var source2 =
+                @"
 namespace N1
 {
     partial class Class
@@ -215,7 +240,8 @@ namespace N1
             var tree1 = CSharpSyntaxTree.ParseText(source1, path: "file1");
             var tree2 = CSharpSyntaxTree.ParseText(source2, path: "file2");
             var eventQueue = new AsyncQueue<CompilationEvent>();
-            var compilation = CreateCompilationWithMscorlib45(new[] { tree1, tree2 }).WithEventQueue(eventQueue);
+            var compilation = CreateCompilationWithMscorlib45(new[] { tree1, tree2 })
+                .WithEventQueue(eventQueue);
 
             // Invoke SemanticModel.GetDiagnostics to force populate the event queue for symbols in the first source file.
             var model = compilation.GetSemanticModel(tree1);
@@ -223,8 +249,16 @@ namespace N1
 
             Assert.True(eventQueue.Count > 0);
             bool compilationStartedFired;
-            HashSet<string> declaredSymbolNames, completedCompilationUnits;
-            Assert.True(DequeueCompilationEvents(eventQueue, out compilationStartedFired, out declaredSymbolNames, out completedCompilationUnits));
+            HashSet<string> declaredSymbolNames,
+                completedCompilationUnits;
+            Assert.True(
+                DequeueCompilationEvents(
+                    eventQueue,
+                    out compilationStartedFired,
+                    out declaredSymbolNames,
+                    out completedCompilationUnits
+                )
+            );
 
             // Verify symbol declared events fired for all symbols declared in the first source file.
             Assert.True(compilationStartedFired);
@@ -241,7 +275,8 @@ namespace N1
         [Fact, WorkItem(8178, "https://github.com/dotnet/roslyn/issues/8178")]
         public void TestEarlyCancellation()
         {
-            var source = @"
+            var source =
+                @"
 namespace N1
 {
     partial class Class
@@ -253,13 +288,19 @@ namespace N1
 ";
             var tree = CSharpSyntaxTree.ParseText(source, path: "file1");
             var eventQueue = new AsyncQueue<CompilationEvent>();
-            var compilation = CreateCompilationWithMscorlib45(new[] { tree }).WithEventQueue(eventQueue);
+            var compilation = CreateCompilationWithMscorlib45(new[] { tree })
+                .WithEventQueue(eventQueue);
             eventQueue.TryComplete(); // complete the queue before the compiler is finished with it
             var model = compilation.GetSemanticModel(tree);
             model.GetDiagnostics(tree.GetRoot().FullSpan);
         }
 
-        private static bool DequeueCompilationEvents(AsyncQueue<CompilationEvent> eventQueue, out bool compilationStartedFired, out HashSet<string> declaredSymbolNames, out HashSet<string> completedCompilationUnits)
+        private static bool DequeueCompilationEvents(
+            AsyncQueue<CompilationEvent> eventQueue,
+            out bool compilationStartedFired,
+            out HashSet<string> declaredSymbolNames,
+            out HashSet<string> completedCompilationUnits
+        )
         {
             compilationStartedFired = false;
             declaredSymbolNames = new HashSet<string>();
@@ -274,7 +315,10 @@ namespace N1
             {
                 if (compEvent is CompilationStartedEvent)
                 {
-                    Assert.False(compilationStartedFired, "Unexpected multiple compilation stated events");
+                    Assert.False(
+                        compilationStartedFired,
+                        "Unexpected multiple compilation stated events"
+                    );
                     compilationStartedFired = true;
                 }
                 else
@@ -289,9 +333,13 @@ namespace N1
                             var method = symbol.GetSymbol() as Symbols.MethodSymbol;
                             Assert.NotNull(method);
 
-                            var isPartialMethod = method.PartialDefinitionPart != null ||
-                                                  method.PartialImplementationPart != null;
-                            Assert.True(isPartialMethod, "Unexpected multiple symbol declared events for symbol " + symbol);
+                            var isPartialMethod =
+                                method.PartialDefinitionPart != null
+                                || method.PartialImplementationPart != null;
+                            Assert.True(
+                                isPartialMethod,
+                                "Unexpected multiple symbol declared events for symbol " + symbol
+                            );
                         }
                     }
                     else
@@ -299,7 +347,11 @@ namespace N1
                         var compilationCompletedEvent = compEvent as CompilationUnitCompletedEvent;
                         if (compilationCompletedEvent != null)
                         {
-                            Assert.True(completedCompilationUnits.Add(compilationCompletedEvent.CompilationUnit.FilePath));
+                            Assert.True(
+                                completedCompilationUnits.Add(
+                                    compilationCompletedEvent.CompilationUnit.FilePath
+                                )
+                            );
                         }
                     }
                 }
@@ -311,7 +363,8 @@ namespace N1
         [Fact]
         public void TestEventQueueCompletionForEmptyCompilation()
         {
-            var compilation = CreateCompilationWithMscorlib45(CSharpTestSource.None).WithEventQueue(new AsyncQueue<CompilationEvent>());
+            var compilation = CreateCompilationWithMscorlib45(CSharpTestSource.None)
+                .WithEventQueue(new AsyncQueue<CompilationEvent>());
 
             // Force complete compilation event queue
             var unused = compilation.GetDiagnostics();
@@ -322,67 +375,111 @@ namespace N1
         [Fact]
         public void CompilingCodeWithInvalidPreProcessorSymbolsShouldProvideDiagnostics()
         {
-            var compilation = CreateEmptyCompilation(string.Empty, parseOptions: new CSharpParseOptions().WithPreprocessorSymbols(new[] { "1" }));
+            var compilation = CreateEmptyCompilation(
+                string.Empty,
+                parseOptions: new CSharpParseOptions().WithPreprocessorSymbols(new[] { "1" })
+            );
 
             compilation.VerifyDiagnostics(
                 // (1,1): error CS8301: Invalid name for a preprocessing symbol; '1' is not a valid identifier
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "").WithArguments("1").WithLocation(1, 1));
+                //
+                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "")
+                    .WithArguments("1")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void CompilingCodeWithInvalidSourceCodeKindShouldProvideDiagnostics()
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            var compilation = CreateCompilationWithMscorlib45(string.Empty, parseOptions: new CSharpParseOptions().WithKind(SourceCodeKind.Interactive));
+            var compilation = CreateCompilationWithMscorlib45(
+                string.Empty,
+                parseOptions: new CSharpParseOptions().WithKind(SourceCodeKind.Interactive)
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
 
             compilation.VerifyDiagnostics(
                 // (1,1): error CS8190: Provided source code kind is unsupported or invalid: 'Interactive'
-                // 
-                Diagnostic(ErrorCode.ERR_BadSourceCodeKind, "").WithArguments("Interactive").WithLocation(1, 1));
+                //
+                Diagnostic(ErrorCode.ERR_BadSourceCodeKind, "")
+                    .WithArguments("Interactive")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void CompilingCodeWithInvalidLanguageVersionShouldProvideDiagnostics()
         {
-            var compilation = CreateEmptyCompilation(string.Empty, parseOptions: new CSharpParseOptions().WithLanguageVersion((LanguageVersion)10000));
+            var compilation = CreateEmptyCompilation(
+                string.Empty,
+                parseOptions: new CSharpParseOptions().WithLanguageVersion((LanguageVersion)10000)
+            );
             compilation.VerifyDiagnostics(
                 // (1,1): error CS8192: Provided language version is unsupported or invalid: '10000'.
-                // 
-                Diagnostic(ErrorCode.ERR_BadLanguageVersion, "").WithArguments("10000").WithLocation(1, 1));
+                //
+                Diagnostic(ErrorCode.ERR_BadLanguageVersion, "")
+                    .WithArguments("10000")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void CompilingCodeWithInvalidDocumentationModeShouldProvideDiagnostics()
         {
-            var compilation = CreateEmptyCompilation(string.Empty, parseOptions: new CSharpParseOptions().WithDocumentationMode(unchecked((DocumentationMode)100)));
+            var compilation = CreateEmptyCompilation(
+                string.Empty,
+                parseOptions: new CSharpParseOptions().WithDocumentationMode(
+                    unchecked((DocumentationMode)100)
+                )
+            );
             compilation.VerifyDiagnostics(
                 // (1,1): error CS8191: Provided documentation mode is unsupported or invalid: '100'.
-                // 
-                Diagnostic(ErrorCode.ERR_BadDocumentationMode, "").WithArguments("100").WithLocation(1, 1));
+                //
+                Diagnostic(ErrorCode.ERR_BadDocumentationMode, "")
+                    .WithArguments("100")
+                    .WithLocation(1, 1)
+            );
         }
 
         [Fact]
         public void CompilingCodeWithInvalidParseOptionsInMultipleSyntaxTreesShouldReportThemAll()
         {
-            var syntaxTree1 = Parse(string.Empty, options: new CSharpParseOptions().WithPreprocessorSymbols(new[] { "1" }));
-            var syntaxTree2 = Parse(string.Empty, options: new CSharpParseOptions().WithPreprocessorSymbols(new[] { "2" }));
-            var syntaxTree3 = Parse(string.Empty, options: new CSharpParseOptions().WithPreprocessorSymbols(new[] { "3" }));
+            var syntaxTree1 = Parse(
+                string.Empty,
+                options: new CSharpParseOptions().WithPreprocessorSymbols(new[] { "1" })
+            );
+            var syntaxTree2 = Parse(
+                string.Empty,
+                options: new CSharpParseOptions().WithPreprocessorSymbols(new[] { "2" })
+            );
+            var syntaxTree3 = Parse(
+                string.Empty,
+                options: new CSharpParseOptions().WithPreprocessorSymbols(new[] { "3" })
+            );
 
-            var compilation = CreateEmptyCompilation(new[] { syntaxTree1, syntaxTree2, syntaxTree3 });
+            var compilation = CreateEmptyCompilation(
+                new[] { syntaxTree1, syntaxTree2, syntaxTree3 }
+            );
             var diagnostics = compilation.GetDiagnostics();
 
             diagnostics.Verify(
                 // (1,1): error CS8301: Invalid name for a preprocessing symbol; '1' is not a valid identifier
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "").WithArguments("1").WithLocation(1, 1),
+                //
+                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "")
+                    .WithArguments("1")
+                    .WithLocation(1, 1),
                 // (1,1): error CS8301: Invalid name for a preprocessing symbol; '2' is not a valid identifier
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "").WithArguments("2").WithLocation(1, 1),
+                //
+                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "")
+                    .WithArguments("2")
+                    .WithLocation(1, 1),
                 // (1,1): error CS8301: Invalid name for a preprocessing symbol; '3' is not a valid identifier
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "").WithArguments("3").WithLocation(1, 1));
+                //
+                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "")
+                    .WithArguments("3")
+                    .WithLocation(1, 1)
+            );
 
             Assert.True(diagnostics[0].Location.SourceTree.Equals(syntaxTree1));
             Assert.True(diagnostics[1].Location.SourceTree.Equals(syntaxTree2));
@@ -404,11 +501,16 @@ namespace N1
 
             diagnostics.Verify(
                 // (1,1): error CS8301: Invalid name for a preprocessing symbol; '1' is not a valid identifier
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "").WithArguments("1").WithLocation(1, 1),
+                //
+                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "")
+                    .WithArguments("1")
+                    .WithLocation(1, 1),
                 // (1,1): error CS8301: Invalid name for a preprocessing symbol; '2' is not a valid identifier
-                // 
-                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "").WithArguments("2").WithLocation(1, 1));
+                //
+                Diagnostic(ErrorCode.ERR_InvalidPreprocessingSymbol, "")
+                    .WithArguments("2")
+                    .WithLocation(1, 1)
+            );
 
             Assert.True(diagnostics[0].Location.SourceTree.Equals(syntaxTree1));
             Assert.True(diagnostics[1].Location.SourceTree.Equals(syntaxTree2));
@@ -435,7 +537,8 @@ namespace N1
         [WorkItem(39094, "https://github.com/dotnet/roslyn/issues/39094")]
         public void TestSuppressMessageAttributeDoesNotSuppressCompilerDiagnostics()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("""", ""CS0168"", Justification = """", Scope = ""type"", Target = ""~T:C"")]
@@ -452,12 +555,17 @@ class C
             // Verify unsuppressed CS0168 in 'Compilation.GetDiagnostics'
             var compilation = CreateCompilation(source);
             var diagnostics = compilation.GetDiagnostics();
-            var expected = Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(11, 13);
+            var expected = Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                .WithArguments("x")
+                .WithLocation(11, 13);
             diagnostics.Verify(expected);
             Assert.False(diagnostics.Single().IsSuppressed);
 
             // Verify 'GetEffectiveDiagnostics' does not apply SuppressMessage suppression to compiler diagnostics.
-            var effectiveDiagnostics = CompilationWithAnalyzers.GetEffectiveDiagnostics(diagnostics, compilation);
+            var effectiveDiagnostics = CompilationWithAnalyzers.GetEffectiveDiagnostics(
+                diagnostics,
+                compilation
+            );
             effectiveDiagnostics.Verify(expected);
             Assert.False(effectiveDiagnostics.Single().IsSuppressed);
 
@@ -473,7 +581,8 @@ class C
         [WorkItem(42116, "https://github.com/dotnet/roslyn/issues/42116")]
         public async Task TestAnalyzerConfigurationDoesNotAffectCompilerDiagnostics()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -489,24 +598,43 @@ class C
             verifyDiagnostics(compilerDiagnostics);
 
             // Verify CS0168 reported from 'CSharpCompilerDiagnosticAnalyzer', i.e. the diagnostic analyzer used in the IDE layer to report live compiler diagnostics.
-            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer());
-            var compilationWithAnalyzers = compilation.WithAnalyzers(analyzers, new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty));
+            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
+                new CSharpCompilerDiagnosticAnalyzer()
+            );
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                analyzers,
+                new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty)
+            );
             var analyzerDiagnostics = await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync();
             verifyDiagnostics(analyzerDiagnostics);
 
             // Verify CS0168 reported by CSharpCompilerDiagnosticAnalyzer is not affected by "dotnet_analyzer_diagnostic = none"
-            var analyzerConfigOptions = new DictionaryAnalyzerConfigOptions(ImmutableDictionary<string, string>.Empty.Add("dotnet_analyzer_diagnostic.severity", "none"));
+            var analyzerConfigOptions = new DictionaryAnalyzerConfigOptions(
+                ImmutableDictionary<string, string>.Empty.Add(
+                    "dotnet_analyzer_diagnostic.severity",
+                    "none"
+                )
+            );
             var analyzerConfigOptionsProvider = new CompilerAnalyzerConfigOptionsProvider(
-                ImmutableDictionary<object, AnalyzerConfigOptions>.Empty.Add(compilation.SyntaxTrees.Single(), analyzerConfigOptions),
-                DictionaryAnalyzerConfigOptions.Empty);
-            var analyzerOptions = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty, analyzerConfigOptionsProvider);
+                ImmutableDictionary<object, AnalyzerConfigOptions>.Empty.Add(
+                    compilation.SyntaxTrees.Single(),
+                    analyzerConfigOptions
+                ),
+                DictionaryAnalyzerConfigOptions.Empty
+            );
+            var analyzerOptions = new AnalyzerOptions(
+                ImmutableArray<AdditionalText>.Empty,
+                analyzerConfigOptionsProvider
+            );
             compilationWithAnalyzers = compilation.WithAnalyzers(analyzers, analyzerOptions);
             analyzerDiagnostics = await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync();
             verifyDiagnostics(analyzerDiagnostics);
 
             static void verifyDiagnostics(ImmutableArray<Diagnostic> diagnostics)
             {
-                var expected = Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x").WithLocation(7, 13);
+                var expected = Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
+                    .WithArguments("x")
+                    .WithLocation(7, 13);
                 diagnostics.Verify(expected);
 
                 var diagnostic = diagnostics.Single();
@@ -525,36 +653,72 @@ class C
             compilation.VerifyDiagnostics();
 
             // Verify 'NonConfigurable' analyzer diagnostic without any analyzer config options.
-            var analyzer = new NamedTypeAnalyzer(NamedTypeAnalyzer.AnalysisKind.Symbol, configurable: false);
+            var analyzer = new NamedTypeAnalyzer(
+                NamedTypeAnalyzer.AnalysisKind.Symbol,
+                configurable: false
+            );
             await verifyDiagnosticsAsync(compilation, analyzer, options: null);
 
             // Verify 'NonConfigurable' analyzer diagnostic is not affected by category based configuration.
-            await verifyDiagnosticsAsync(compilation, analyzer, options: ($"dotnet_analyzer_diagnostic.category-{NamedTypeAnalyzer.RuleCategory}.severity", "none"));
+            await verifyDiagnosticsAsync(
+                compilation,
+                analyzer,
+                options: (
+                    $"dotnet_analyzer_diagnostic.category-{NamedTypeAnalyzer.RuleCategory}.severity",
+                    "none"
+                )
+            );
 
             // Verify 'NonConfigurable' analyzer diagnostic is not affected by all analyzers bulk configuration.
-            await verifyDiagnosticsAsync(compilation, analyzer, options: ("dotnet_analyzer_diagnostic.severity", "none"));
+            await verifyDiagnosticsAsync(
+                compilation,
+                analyzer,
+                options: ("dotnet_analyzer_diagnostic.severity", "none")
+            );
 
             return;
 
-            static async Task verifyDiagnosticsAsync(Compilation compilation, DiagnosticAnalyzer analyzer, (string key, string value)? options)
+            static async Task verifyDiagnosticsAsync(
+                Compilation compilation,
+                DiagnosticAnalyzer analyzer,
+                (string key, string value)? options
+            )
             {
                 AnalyzerOptions analyzerOptions;
                 if (options.HasValue)
                 {
-                    var analyzerConfigOptions = new DictionaryAnalyzerConfigOptions(ImmutableDictionary<string, string>.Empty.Add(options.Value.key, options.Value.value));
+                    var analyzerConfigOptions = new DictionaryAnalyzerConfigOptions(
+                        ImmutableDictionary<string, string>.Empty.Add(
+                            options.Value.key,
+                            options.Value.value
+                        )
+                    );
                     var analyzerConfigOptionsProvider = new CompilerAnalyzerConfigOptionsProvider(
-                        ImmutableDictionary<object, AnalyzerConfigOptions>.Empty.Add(compilation.SyntaxTrees.Single(), analyzerConfigOptions),
-                        DictionaryAnalyzerConfigOptions.Empty);
-                    analyzerOptions = new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty, analyzerConfigOptionsProvider);
+                        ImmutableDictionary<object, AnalyzerConfigOptions>.Empty.Add(
+                            compilation.SyntaxTrees.Single(),
+                            analyzerConfigOptions
+                        ),
+                        DictionaryAnalyzerConfigOptions.Empty
+                    );
+                    analyzerOptions = new AnalyzerOptions(
+                        ImmutableArray<AdditionalText>.Empty,
+                        analyzerConfigOptionsProvider
+                    );
                 }
                 else
                 {
                     analyzerOptions = null;
                 }
 
-                var compilationWithAnalyzers = compilation.WithAnalyzers(ImmutableArray.Create(analyzer), analyzerOptions);
-                var analyzerDiagnostics = await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync();
-                var expected = Diagnostic(NamedTypeAnalyzer.RuleId, "C").WithArguments("C").WithLocation(1, 7);
+                var compilationWithAnalyzers = compilation.WithAnalyzers(
+                    ImmutableArray.Create(analyzer),
+                    analyzerOptions
+                );
+                var analyzerDiagnostics =
+                    await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync();
+                var expected = Diagnostic(NamedTypeAnalyzer.RuleId, "C")
+                    .WithArguments("C")
+                    .WithLocation(1, 7);
                 analyzerDiagnostics.Verify(expected);
 
                 var diagnostic = analyzerDiagnostics.Single();
@@ -566,7 +730,8 @@ class C
         [Fact]
         public async Task TestConcurrentGetAnalyzerDiagnostics()
         {
-            var source1 = @"
+            var source1 =
+                @"
 partial class C
 {
     void M1()
@@ -576,7 +741,8 @@ partial class C
     }
 }
 ";
-            var source2 = @"
+            var source2 =
+                @"
 partial class C
 {
     void M2()
@@ -586,7 +752,8 @@ partial class C
     }
 }
 ";
-            var source3 = @"
+            var source3 =
+                @"
 class C3
 {
     void M2()
@@ -599,20 +766,32 @@ class C3
             var compilation = CreateCompilation(new[] { source1, source2, source3 });
             compilation = compilation.WithOptions(compilation.Options.WithConcurrentBuild(true));
 
-            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer());
-            var compilationWithAnalyzers = compilation.WithAnalyzers(analyzers,
+            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
+                new CSharpCompilerDiagnosticAnalyzer()
+            );
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                analyzers,
                 new CompilationWithAnalyzersOptions(
                     new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty),
                     onAnalyzerException: null,
                     concurrentAnalysis: true,
-                    logAnalyzerExecutionTime: false));
+                    logAnalyzerExecutionTime: false
+                )
+            );
 
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree, true);
             var tasks = new Task[10];
             for (var i = 0; i < 10; i++)
             {
-                tasks[i] = Task.Run(() => compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(model, null, CancellationToken.None));
+                tasks[i] = Task.Run(
+                    () =>
+                        compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(
+                            model,
+                            null,
+                            CancellationToken.None
+                        )
+                );
             }
 
             await Task.WhenAll(tasks);
@@ -621,13 +800,16 @@ class C3
         [Theory, WorkItem(46874, "https://github.com/dotnet/roslyn/pull/46874")]
         [InlineData(2)]
         [InlineData(50)]
-        public async Task TestConcurrentGetAnalyzerDiagnostics_SymbolStartAnalyzer(int partialDeclarationCount)
+        public async Task TestConcurrentGetAnalyzerDiagnostics_SymbolStartAnalyzer(
+            int partialDeclarationCount
+        )
         {
             var sources = new string[partialDeclarationCount + 1];
 
             for (var i = 0; i < partialDeclarationCount; i++)
             {
-                sources[i] = $@"
+                sources[i] =
+                    $@"
 partial class C
 {{
     void M{i}()
@@ -639,7 +821,8 @@ partial class C
 ";
             }
 
-            sources[partialDeclarationCount] = @"
+            sources[partialDeclarationCount] =
+                @"
 class C3
 {
     void M2()
@@ -652,20 +835,36 @@ class C3
             var compilation = CreateCompilation(sources);
             compilation = compilation.WithOptions(compilation.Options.WithConcurrentBuild(true));
 
-            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(new SymbolStartAnalyzer(topLevelAction: false, SymbolKind.NamedType, OperationKind.VariableDeclaration));
-            var compilationWithAnalyzers = compilation.WithAnalyzers(analyzers,
+            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
+                new SymbolStartAnalyzer(
+                    topLevelAction: false,
+                    SymbolKind.NamedType,
+                    OperationKind.VariableDeclaration
+                )
+            );
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                analyzers,
                 new CompilationWithAnalyzersOptions(
                     new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty),
                     onAnalyzerException: null,
                     concurrentAnalysis: true,
-                    logAnalyzerExecutionTime: false));
+                    logAnalyzerExecutionTime: false
+                )
+            );
 
             var tree = compilation.SyntaxTrees.First();
             var model = compilation.GetSemanticModel(tree, true);
             var tasks = new Task[10];
             for (var i = 0; i < 10; i++)
             {
-                tasks[i] = Task.Run(() => compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(model, null, CancellationToken.None));
+                tasks[i] = Task.Run(
+                    () =>
+                        compilationWithAnalyzers.GetAnalyzerSemanticDiagnosticsAsync(
+                            model,
+                            null,
+                            CancellationToken.None
+                        )
+                );
             }
 
             await Task.WhenAll(tasks);
@@ -677,23 +876,37 @@ class C3
         {
             var source = @"class C { }";
             var compilation = CreateCompilation(source);
-            compilation = compilation.WithOptions(compilation.Options.WithConcurrentBuild(concurrent));
+            compilation = compilation.WithOptions(
+                compilation.Options.WithConcurrentBuild(concurrent)
+            );
             var tree = compilation.SyntaxTrees.First();
 
             var analyzer = new RegisterSyntaxTreeCancellationAnalyzer();
             var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(analyzer);
-            var compilationWithAnalyzers = compilation.WithAnalyzers(analyzers,
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                analyzers,
                 new CompilationWithAnalyzersOptions(
                     new AnalyzerOptions(ImmutableArray<AdditionalText>.Empty),
                     onAnalyzerException: null,
                     concurrentAnalysis: concurrent,
-                    logAnalyzerExecutionTime: false));
+                    logAnalyzerExecutionTime: false
+                )
+            );
 
             // First call into analyzer mimics cancellation.
-            await Assert.ThrowsAsync<OperationCanceledException>(() => compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(tree, analyzer.CancellationToken));
+            await Assert.ThrowsAsync<OperationCanceledException>(
+                () =>
+                    compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(
+                        tree,
+                        analyzer.CancellationToken
+                    )
+            );
 
             // Second call into analyzer reports diagnostic.
-            var diagnostics = await compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(tree, CancellationToken.None);
+            var diagnostics = await compilationWithAnalyzers.GetAnalyzerSyntaxDiagnosticsAsync(
+                tree,
+                CancellationToken.None
+            );
             var diagnostic = Assert.Single(diagnostics);
             Assert.Equal(RegisterSyntaxTreeCancellationAnalyzer.DiagnosticId, diagnostic.Id);
         }
@@ -701,7 +914,8 @@ class C3
         [Fact]
         public async Task TestEventQueuePartialCompletionForSpanBasedQuery()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M1()
@@ -719,11 +933,24 @@ class C
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
             // Get analyzer diagnostics for a span within "M1".
-            var localDecl = syntaxTree.GetRoot().DescendantNodes().OfType<LocalDeclarationStatementSyntax>().First();
+            var localDecl = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<LocalDeclarationStatementSyntax>()
+                .First();
             var span = localDecl.Span;
-            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer());
-            var compilationWithAnalyzers = compilation.WithAnalyzers(analyzers, AnalyzerOptions.Empty);
-            _ = await compilationWithAnalyzers.GetAnalysisResultAsync(semanticModel, span, CancellationToken.None);
+            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
+                new CSharpCompilerDiagnosticAnalyzer()
+            );
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                analyzers,
+                AnalyzerOptions.Empty
+            );
+            _ = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                semanticModel,
+                span,
+                CancellationToken.None
+            );
 
             // Verify only required compilation events are generated in the event queue.
             // Event queue should not be completed as we are requesting diagnostics for a span within "M1"
@@ -732,14 +959,23 @@ class C
             Assert.False(eventQueue.IsCompleted);
 
             // Now fetch diagnostics for entire tree and verify event queue is completed.
-            _ = await compilationWithAnalyzers.GetAnalysisResultAsync(semanticModel, filterSpan: null, CancellationToken.None);
+            _ = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                semanticModel,
+                filterSpan: null,
+                CancellationToken.None
+            );
             Assert.True(eventQueue.IsCompleted);
         }
 
-        [Theory, CombinatorialData, WorkItem(67310, "https://github.com/dotnet/roslyn/issues/67310")]
+        [
+            Theory,
+            CombinatorialData,
+            WorkItem(67310, "https://github.com/dotnet/roslyn/issues/67310")
+        ]
         public async Task TestBlockStartAnalyzer(bool testCodeBlockStart)
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class C
@@ -775,8 +1011,13 @@ class D
             var syntaxTree = compilation.SyntaxTrees[0];
 
             var analyzer = new BlockStartAnalyzer(testCodeBlockStart);
-            var compilationWithAnalyzers = compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer), AnalyzerOptions.Empty);
-            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(CancellationToken.None);
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                ImmutableArray.Create<DiagnosticAnalyzer>(analyzer),
+                AnalyzerOptions.Empty
+            );
+            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                CancellationToken.None
+            );
 
             var semanticDiagnostics = result.SemanticDiagnostics[syntaxTree][analyzer];
             var group1 = semanticDiagnostics.Where(d => d.Id == "ID0001");
@@ -790,7 +1031,8 @@ class D
                 Diagnostic("ID0001", "M2").WithArguments("M2").WithLocation(28, 9),
                 Diagnostic("ID0001", "D").WithArguments(".ctor").WithLocation(29, 5),
                 Diagnostic("ID0001", "D").WithArguments("Finalize").WithLocation(30, 6),
-                Diagnostic("ID0001", "-").WithArguments("op_UnaryNegation").WithLocation(31, 32));
+                Diagnostic("ID0001", "-").WithArguments("op_UnaryNegation").WithLocation(31, 32)
+            );
 
             Assert.Equal(22, group2.Length);
             if (testCodeBlockStart)
@@ -807,7 +1049,8 @@ class D
                     Diagnostic("ID0002", "int M1() => 0;").WithLocation(14, 5),
                     Diagnostic("ID0002", "C() => _field = 0;").WithLocation(15, 5),
                     Diagnostic("ID0002", "~C() => _field = 0;").WithLocation(16, 5),
-                    Diagnostic("ID0002", "public static int operator +(C p) => 0;").WithLocation(17, 5),
+                    Diagnostic("ID0002", "public static int operator +(C p) => 0;")
+                        .WithLocation(17, 5),
                     Diagnostic("ID0002", "get { return 0; }").WithLocation(25, 14),
                     Diagnostic("ID0002", "set { value = 0; }").WithLocation(25, 32),
                     Diagnostic("ID0002", "get { return 0; }").WithLocation(26, 24),
@@ -817,7 +1060,9 @@ class D
                     Diagnostic("ID0002", "int M2() { return 0; }").WithLocation(28, 5),
                     Diagnostic("ID0002", "D() { _field = 0; }").WithLocation(29, 5),
                     Diagnostic("ID0002", "~D() { _field = 0; }").WithLocation(30, 5),
-                    Diagnostic("ID0002", "public static int operator -(D p) { return 0; }").WithLocation(31, 5));
+                    Diagnostic("ID0002", "public static int operator -(D p) { return 0; }")
+                        .WithLocation(31, 5)
+                );
             }
             else
             {
@@ -843,24 +1088,28 @@ class D
                     Diagnostic("ID0002", "{ return 0; }").WithLocation(28, 14),
                     Diagnostic("ID0002", "{ _field = 0; }").WithLocation(29, 9),
                     Diagnostic("ID0002", "{ _field = 0; }").WithLocation(30, 10),
-                    Diagnostic("ID0002", "{ return 0; }").WithLocation(31, 39));
+                    Diagnostic("ID0002", "{ return 0; }").WithLocation(31, 39)
+                );
             }
 
-            result.CompilationDiagnostics[analyzer].Verify(
-                Diagnostic("ID0001", "P1").WithArguments("get_P1").WithLocation(9, 9),
-                Diagnostic("ID0001", "P2").WithArguments("get_P2").WithLocation(10, 9),
-                Diagnostic("ID0001", "P2").WithArguments("set_P2").WithLocation(10, 9),
-                Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(11, 9),
-                Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(12, 9),
-                Diagnostic("ID0001", "this").WithArguments("set_Item").WithLocation(12, 9),
-                Diagnostic("ID0001", "E1").WithArguments("add_E1").WithLocation(13, 24),
-                Diagnostic("ID0001", "E1").WithArguments("remove_E1").WithLocation(13, 24),
-                Diagnostic("ID0001", "P3").WithArguments("get_P3").WithLocation(25, 9),
-                Diagnostic("ID0001", "P3").WithArguments("set_P3").WithLocation(25, 9),
-                Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(26, 9),
-                Diagnostic("ID0001", "this").WithArguments("set_Item").WithLocation(26, 9),
-                Diagnostic("ID0001", "E2").WithArguments("remove_E2").WithLocation(27, 24),
-                Diagnostic("ID0001", "E2").WithArguments("add_E2").WithLocation(27, 24));
+            result
+                .CompilationDiagnostics[analyzer]
+                .Verify(
+                    Diagnostic("ID0001", "P1").WithArguments("get_P1").WithLocation(9, 9),
+                    Diagnostic("ID0001", "P2").WithArguments("get_P2").WithLocation(10, 9),
+                    Diagnostic("ID0001", "P2").WithArguments("set_P2").WithLocation(10, 9),
+                    Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(11, 9),
+                    Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(12, 9),
+                    Diagnostic("ID0001", "this").WithArguments("set_Item").WithLocation(12, 9),
+                    Diagnostic("ID0001", "E1").WithArguments("add_E1").WithLocation(13, 24),
+                    Diagnostic("ID0001", "E1").WithArguments("remove_E1").WithLocation(13, 24),
+                    Diagnostic("ID0001", "P3").WithArguments("get_P3").WithLocation(25, 9),
+                    Diagnostic("ID0001", "P3").WithArguments("set_P3").WithLocation(25, 9),
+                    Diagnostic("ID0001", "this").WithArguments("get_Item").WithLocation(26, 9),
+                    Diagnostic("ID0001", "this").WithArguments("set_Item").WithLocation(26, 9),
+                    Diagnostic("ID0001", "E2").WithArguments("remove_E2").WithLocation(27, 24),
+                    Diagnostic("ID0001", "E2").WithArguments("add_E2").WithLocation(27, 24)
+                );
 
             Assert.Empty(result.SyntaxDiagnostics);
         }
@@ -874,22 +1123,26 @@ class D
                 "{0}",
                 "Category",
                 defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public static readonly DiagnosticDescriptor DescriptorForBlockEnd = new DiagnosticDescriptor(
-                "ID0002",
-                "Title",
-                "Message",
-                "Category",
-                defaultSeverity: DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor DescriptorForBlockEnd =
+                new DiagnosticDescriptor(
+                    "ID0002",
+                    "Title",
+                    "Message",
+                    "Category",
+                    defaultSeverity: DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
             private readonly bool _testCodeBlockStart;
 
-            public BlockStartAnalyzer(bool testCodeBlockStart)
-                => _testCodeBlockStart = testCodeBlockStart;
+            public BlockStartAnalyzer(bool testCodeBlockStart) =>
+                _testCodeBlockStart = testCodeBlockStart;
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor, DescriptorForBlockEnd);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor, DescriptorForBlockEnd);
 
             public override void Initialize(AnalysisContext context)
             {
@@ -903,15 +1156,28 @@ class D
                         context.RegisterCodeBlockStartAction<SyntaxKind>(context =>
                         {
                             context.RegisterSyntaxNodeAction(
-                                context => analyzeNode(context.Node, context.ContainingSymbol, context.ReportDiagnostic),
-                                SyntaxKind.NumericLiteralExpression);
+                                context =>
+                                    analyzeNode(
+                                        context.Node,
+                                        context.ContainingSymbol,
+                                        context.ReportDiagnostic
+                                    ),
+                                SyntaxKind.NumericLiteralExpression
+                            );
 
                             context.RegisterCodeBlockEndAction(blockEndContext =>
                             {
-                                blockEndContext.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(DescriptorForBlockEnd, blockEndContext.CodeBlock.GetLocation()));
+                                blockEndContext.ReportDiagnostic(
+                                    CodeAnalysis.Diagnostic.Create(
+                                        DescriptorForBlockEnd,
+                                        blockEndContext.CodeBlock.GetLocation()
+                                    )
+                                );
 
                                 if (blockEndContext.CodeBlock is BasePropertyDeclarationSyntax)
-                                    throw new Exception($"Unexpected topmost node for code block '{context.CodeBlock.Kind()}'");
+                                    throw new Exception(
+                                        $"Unexpected topmost node for code block '{context.CodeBlock.Kind()}'"
+                                    );
                             });
                         });
                     }
@@ -920,17 +1186,34 @@ class D
                         context.RegisterOperationBlockStartAction(context =>
                         {
                             context.RegisterOperationAction(
-                                context => analyzeNode(context.Operation.Syntax, context.ContainingSymbol, context.ReportDiagnostic),
-                                OperationKind.Literal);
+                                context =>
+                                    analyzeNode(
+                                        context.Operation.Syntax,
+                                        context.ContainingSymbol,
+                                        context.ReportDiagnostic
+                                    ),
+                                OperationKind.Literal
+                            );
 
                             context.RegisterOperationBlockEndAction(blockEndContext =>
                             {
                                 foreach (var operationBlock in blockEndContext.OperationBlocks)
                                 {
-                                    blockEndContext.ReportDiagnostic(CodeAnalysis.Diagnostic.Create(DescriptorForBlockEnd, operationBlock.Syntax.GetLocation()));
+                                    blockEndContext.ReportDiagnostic(
+                                        CodeAnalysis.Diagnostic.Create(
+                                            DescriptorForBlockEnd,
+                                            operationBlock.Syntax.GetLocation()
+                                        )
+                                    );
 
-                                    if (operationBlock.Syntax is PropertyDeclarationSyntax or IndexerDeclarationSyntax)
-                                        throw new Exception($"Unexpected topmost node for operation block '{operationBlock.Syntax.Kind()}'");
+                                    if (
+                                        operationBlock.Syntax
+                                        is PropertyDeclarationSyntax
+                                            or IndexerDeclarationSyntax
+                                    )
+                                        throw new Exception(
+                                            $"Unexpected topmost node for operation block '{operationBlock.Syntax.Kind()}'"
+                                        );
                                 }
                             });
                         });
@@ -938,37 +1221,59 @@ class D
 
                     var uniqueCallbacks = new HashSet<SyntaxNode>();
 
-                    context.RegisterSyntaxNodeAction(context =>
-                    {
-                        // Ensure that we do not get duplicate callbacks for
-                        // PropertyDeclarationSyntax/IndexerDeclarationSyntax/EventDeclarationSyntax/MethodDeclarationSyntax nodes.
-                        // Below exception will translate into an unexpected AD0001 diagnostic.
-                        if (!uniqueCallbacks.Add(context.Node))
-                            throw new Exception($"Multiple callbacks for {context.Node}");
-                    }, SyntaxKind.PropertyDeclaration, SyntaxKind.IndexerDeclaration, SyntaxKind.EventDeclaration, SyntaxKind.MethodDeclaration);
+                    context.RegisterSyntaxNodeAction(
+                        context =>
+                        {
+                            // Ensure that we do not get duplicate callbacks for
+                            // PropertyDeclarationSyntax/IndexerDeclarationSyntax/EventDeclarationSyntax/MethodDeclarationSyntax nodes.
+                            // Below exception will translate into an unexpected AD0001 diagnostic.
+                            if (!uniqueCallbacks.Add(context.Node))
+                                throw new Exception($"Multiple callbacks for {context.Node}");
+                        },
+                        SyntaxKind.PropertyDeclaration,
+                        SyntaxKind.IndexerDeclaration,
+                        SyntaxKind.EventDeclaration,
+                        SyntaxKind.MethodDeclaration
+                    );
                 });
 
-                static void analyzeNode(SyntaxNode node, ISymbol containingSymbol, Action<Diagnostic> reportDiagnostic)
+                static void analyzeNode(
+                    SyntaxNode node,
+                    ISymbol containingSymbol,
+                    Action<Diagnostic> reportDiagnostic
+                )
                 {
                     Location location;
-                    if (node.FirstAncestorOrSelf<BasePropertyDeclarationSyntax>() is { } basePropertyDecl)
+                    if (
+                        node.FirstAncestorOrSelf<BasePropertyDeclarationSyntax>() is
+                        { } basePropertyDecl
+                    )
                     {
                         location = basePropertyDecl switch
                         {
-                            PropertyDeclarationSyntax propertyDecl => propertyDecl.Identifier.GetLocation(),
-                            IndexerDeclarationSyntax indexerDecl => indexerDecl.ThisKeyword.GetLocation(),
+                            PropertyDeclarationSyntax propertyDecl =>
+                                propertyDecl.Identifier.GetLocation(),
+                            IndexerDeclarationSyntax indexerDecl =>
+                                indexerDecl.ThisKeyword.GetLocation(),
                             EventDeclarationSyntax eventDecl => eventDecl.Identifier.GetLocation(),
                             _ => throw ExceptionUtilities.UnexpectedValue(basePropertyDecl.Kind()),
                         };
                     }
-                    else if (node.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>() is { } baseMethodDecl)
+                    else if (
+                        node.FirstAncestorOrSelf<BaseMethodDeclarationSyntax>() is
+                        { } baseMethodDecl
+                    )
                     {
                         location = baseMethodDecl switch
                         {
-                            MethodDeclarationSyntax methodDecl => methodDecl.Identifier.GetLocation(),
-                            OperatorDeclarationSyntax operatorDecl => operatorDecl.OperatorToken.GetLocation(),
-                            ConstructorDeclarationSyntax constructorDecl => constructorDecl.Identifier.GetLocation(),
-                            DestructorDeclarationSyntax destructorDecl => destructorDecl.Identifier.GetLocation(),
+                            MethodDeclarationSyntax methodDecl =>
+                                methodDecl.Identifier.GetLocation(),
+                            OperatorDeclarationSyntax operatorDecl =>
+                                operatorDecl.OperatorToken.GetLocation(),
+                            ConstructorDeclarationSyntax constructorDecl =>
+                                constructorDecl.Identifier.GetLocation(),
+                            DestructorDeclarationSyntax destructorDecl =>
+                                destructorDecl.Identifier.GetLocation(),
                             _ => throw ExceptionUtilities.UnexpectedValue(baseMethodDecl.Kind()),
                         };
                     }
@@ -977,7 +1282,9 @@ class D
                         return;
                     }
 
-                    reportDiagnostic(CodeAnalysis.Diagnostic.Create(Descriptor, location, containingSymbol.Name));
+                    reportDiagnostic(
+                        CodeAnalysis.Diagnostic.Create(Descriptor, location, containingSymbol.Name)
+                    );
                 }
             }
         }
@@ -985,7 +1292,8 @@ class D
         [Fact, WorkItem(56843, "https://github.com/dotnet/roslyn/issues/56843")]
         public async Task TestCompilerAnalyzerForSpanBasedSemanticDiagnostics()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M1()
@@ -998,36 +1306,68 @@ class C
             var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
             // Get compiler analyzer diagnostics for a span within "M1".
-            var localDecl = syntaxTree.GetRoot().DescendantNodes().OfType<LocalDeclarationStatementSyntax>().First();
+            var localDecl = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<LocalDeclarationStatementSyntax>()
+                .First();
             var span = localDecl.Span;
             var compilerAnalyzer = new CSharpCompilerDiagnosticAnalyzer();
-            var compilationWithAnalyzers = compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(compilerAnalyzer), AnalyzerOptions.Empty);
-            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(semanticModel, span, CancellationToken.None);
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                ImmutableArray.Create<DiagnosticAnalyzer>(compilerAnalyzer),
+                AnalyzerOptions.Empty
+            );
+            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                semanticModel,
+                span,
+                CancellationToken.None
+            );
             var diagnostics = result.SemanticDiagnostics[syntaxTree][compilerAnalyzer];
             diagnostics.Verify(
                 // (6,13): warning CS0219: The variable 'x1' is assigned but its value is never used
                 //         int x1 = 0; // CS0219 (unused variable)
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x1").WithArguments("x1").WithLocation(6, 13));
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(6, 13)
+            );
 
             // Verify compiler analyzer diagnostics for entire tree
-            result = await compilationWithAnalyzers.GetAnalysisResultAsync(semanticModel, filterSpan: null, CancellationToken.None);
+            result = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                semanticModel,
+                filterSpan: null,
+                CancellationToken.None
+            );
             diagnostics = result.SemanticDiagnostics[syntaxTree][compilerAnalyzer];
             diagnostics.Verify(
                 // (6,13): warning CS0219: The variable 'x1' is assigned but its value is never used
                 //         int x1 = 0; // CS0219 (unused variable)
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x1").WithArguments("x1").WithLocation(6, 13));
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(6, 13)
+            );
 
             // Verify no diagnostics with a span outside the local decl
             span = localDecl.GetLastToken().GetNextToken().Span;
-            result = await compilationWithAnalyzers.GetAnalysisResultAsync(semanticModel, span, CancellationToken.None);
+            result = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                semanticModel,
+                span,
+                CancellationToken.None
+            );
             var diagnosticsByAnalyzerMap = result.SemanticDiagnostics[syntaxTree];
             Assert.Empty(diagnosticsByAnalyzerMap);
         }
 
-        [Theory, CombinatorialData, WorkItem(66968, "https://github.com/dotnet/roslyn/issues/66968")]
-        public async Task TestAnalyzerLocalAndNonLocalDiagnostics(LocalNonLocalDiagnosticsAnalyzer.ActionKind actionKind)
+        [
+            Theory,
+            CombinatorialData,
+            WorkItem(66968, "https://github.com/dotnet/roslyn/issues/66968")
+        ]
+        public async Task TestAnalyzerLocalAndNonLocalDiagnostics(
+            LocalNonLocalDiagnosticsAnalyzer.ActionKind actionKind
+        )
         {
-            var source1 = @"
+            var source1 =
+                @"
 class C
 {
     void M1()
@@ -1049,7 +1389,8 @@ class D
         int x3 = 0;
     }
 }";
-            var source2 = @"
+            var source2 =
+                @"
 class E
 {
     void M4()
@@ -1061,27 +1402,61 @@ class E
             var tree1 = compilation.SyntaxTrees[0];
             var tree2 = compilation.SyntaxTrees[1];
             var analyzer = new LocalNonLocalDiagnosticsAnalyzer(actionKind);
-            var compilationWithAnalyzers = compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer), AnalyzerOptions.Empty);
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                ImmutableArray.Create<DiagnosticAnalyzer>(analyzer),
+                AnalyzerOptions.Empty
+            );
 
-            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(CancellationToken.None);
+            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                CancellationToken.None
+            );
 
             // Verify syntax diagnostics.
             if (actionKind == LocalNonLocalDiagnosticsAnalyzer.ActionKind.SyntaxTreeAction)
             {
-                result.SyntaxDiagnostics[tree1][analyzer].Verify(
-                    Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxTreeAction(File1)").WithLocation(6, 9),
-                    Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxTreeAction(File1)").WithLocation(7, 9),
-                    Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxTreeAction(File1)").WithLocation(12, 9),
-                    Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxTreeAction(File1)").WithLocation(20, 9));
-                result.SyntaxDiagnostics[tree2][analyzer].Verify(
-                    Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSyntaxTreeAction(File2)").WithLocation(6, 9));
+                result
+                    .SyntaxDiagnostics[tree1][analyzer]
+                    .Verify(
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(20, 9)
+                    );
+                result
+                    .SyntaxDiagnostics[tree2][analyzer]
+                    .Verify(
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(6, 9)
+                    );
 
-                result.CompilationDiagnostics[analyzer].Verify(
-                    Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSyntaxTreeAction(File1)").WithLocation(6, 9),
-                    Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxTreeAction(File2)").WithLocation(6, 9),
-                    Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxTreeAction(File2)").WithLocation(7, 9),
-                    Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxTreeAction(File2)").WithLocation(12, 9),
-                    Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxTreeAction(File2)").WithLocation(20, 9));
+                result
+                    .CompilationDiagnostics[analyzer]
+                    .Verify(
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSyntaxTreeAction(File2)")
+                            .WithLocation(20, 9)
+                    );
 
                 Assert.Empty(result.SemanticDiagnostics);
 
@@ -1099,251 +1474,804 @@ class E
             {
                 case LocalNonLocalDiagnosticsAnalyzer.ActionKind.SemanticModelAction:
                     localSemanticDiagnostics_1.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSemanticModelAction(File1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSemanticModelAction(File1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSemanticModelAction(File1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSemanticModelAction(File1)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File1)")
+                            .WithLocation(20, 9)
+                    );
                     localSemanticDiagnostics_2.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSemanticModelAction(File2)").WithLocation(6, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File2)")
+                            .WithLocation(6, 9)
+                    );
                     nonLocalSemanticDiagnostics.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSemanticModelAction(File1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSemanticModelAction(File2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSemanticModelAction(File2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSemanticModelAction(File2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSemanticModelAction(File2)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File2)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File2)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSemanticModelAction(File2)")
+                            .WithLocation(20, 9)
+                    );
                     break;
 
                 case LocalNonLocalDiagnosticsAnalyzer.ActionKind.SymbolAction:
                     localSemanticDiagnostics_1.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSymbolAction(C)(File1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSymbolAction(M1)(File1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSymbolAction(C)(File1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSymbolAction(M1)(File1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSymbolAction(C)(File1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSymbolAction(M2)(File1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSymbolAction(D)(File1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSymbolAction(M3)(File1)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSymbolAction(C)(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSymbolAction(M1)(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSymbolAction(C)(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSymbolAction(M1)(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSymbolAction(C)(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSymbolAction(M2)(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSymbolAction(D)(File1)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSymbolAction(M3)(File1)")
+                            .WithLocation(20, 9)
+                    );
                     localSemanticDiagnostics_2.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSymbolAction(E)(File2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSymbolAction(M4)(File2)").WithLocation(6, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSymbolAction(E)(File2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSymbolAction(M4)(File2)")
+                            .WithLocation(6, 9)
+                    );
                     nonLocalSemanticDiagnostics.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSymbolAction(D)(File1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSymbolAction(D)(File1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSymbolAction(D)(File1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSymbolAction(C)(File1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSymbolAction(M1)(File1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSymbolAction(M1)(File1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSymbolAction(M3)(File1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSymbolAction(M3)(File1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSymbolAction(M3)(File1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSymbolAction(M2)(File1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSymbolAction(M2)(File1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSymbolAction(M2)(File1)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSymbolAction(D)(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSymbolAction(D)(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSymbolAction(D)(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSymbolAction(C)(File1)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSymbolAction(M1)(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSymbolAction(M1)(File1)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSymbolAction(M3)(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSymbolAction(M3)(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSymbolAction(M3)(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSymbolAction(M2)(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSymbolAction(M2)(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSymbolAction(M2)(File1)")
+                            .WithLocation(20, 9)
+                    );
                     break;
 
                 case LocalNonLocalDiagnosticsAnalyzer.ActionKind.OperationAction:
                     localSemanticDiagnostics_1.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x1a = 0;)(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x1b = 0;)(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x2 = 0;)(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x3 = 0;)(M3)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationAction(int x1a = 0;)(M1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationAction(int x1b = 0;)(M1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationAction(int x2 = 0;)(M2)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationAction(int x3 = 0;)(M3)")
+                            .WithLocation(20, 9)
+                    );
                     localSemanticDiagnostics_2.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterOperationAction(int x4 = 0;)(M4)").WithLocation(6, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterOperationAction(int x4 = 0;)(M4)")
+                            .WithLocation(6, 9)
+                    );
                     nonLocalSemanticDiagnostics.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x2 = 0;)(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x1b = 0;)(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x3 = 0;)(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x1a = 0;)(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x2 = 0;)(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x3 = 0;)(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x1a = 0;)(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x1b = 0;)(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x3 = 0;)(M3)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x1a = 0;)(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x2 = 0;)(M2)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x1b = 0;)(M1)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationAction(int x2 = 0;)(M2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationAction(int x1b = 0;)(M1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationAction(int x3 = 0;)(M3)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationAction(int x1a = 0;)(M1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationAction(int x2 = 0;)(M2)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationAction(int x3 = 0;)(M3)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationAction(int x1a = 0;)(M1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationAction(int x1b = 0;)(M1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationAction(int x3 = 0;)(M3)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationAction(int x1a = 0;)(M1)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationAction(int x2 = 0;)(M2)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationAction(int x1b = 0;)(M1)")
+                            .WithLocation(20, 9)
+                    );
                     break;
 
                 case LocalNonLocalDiagnosticsAnalyzer.ActionKind.OperationBlockAction:
                     localSemanticDiagnostics_1.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationBlockAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationBlockAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationBlockAction(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationBlockAction(M3)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M2)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M3)")
+                            .WithLocation(20, 9)
+                    );
                     localSemanticDiagnostics_2.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterOperationBlockAction(M4)").WithLocation(6, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M4)")
+                            .WithLocation(6, 9)
+                    );
                     nonLocalSemanticDiagnostics.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationBlockAction(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationBlockAction(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationBlockAction(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationBlockAction(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationBlockAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationBlockAction(M3)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationBlockAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationBlockAction(M2)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M3)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M2)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M3)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M3)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M1)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationBlockAction(M2)")
+                            .WithLocation(20, 9)
+                    );
                     break;
 
                 case LocalNonLocalDiagnosticsAnalyzer.ActionKind.OperationBlockStartEndAction:
                     localSemanticDiagnostics_1.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x1a = 0;) in RegisterOperationBlockStartAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x1b = 0;) in RegisterOperationBlockStartAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationBlockEndAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x1a = 0;) in RegisterOperationBlockStartAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x1b = 0;) in RegisterOperationBlockStartAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationBlockEndAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x2 = 0;) in RegisterOperationBlockStartAction(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationBlockEndAction(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x3 = 0;) in RegisterOperationBlockStartAction(M3)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationBlockEndAction(M3)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1a = 0;) in RegisterOperationBlockStartAction(M1)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1b = 0;) in RegisterOperationBlockStartAction(M1)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1a = 0;) in RegisterOperationBlockStartAction(M1)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1b = 0;) in RegisterOperationBlockStartAction(M1)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x2 = 0;) in RegisterOperationBlockStartAction(M2)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M2)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x3 = 0;) in RegisterOperationBlockStartAction(M3)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M3)")
+                            .WithLocation(20, 9)
+                    );
                     localSemanticDiagnostics_2.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterOperationAction(int x4 = 0;) in RegisterOperationBlockStartAction(M4)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterOperationBlockEndAction(M4)").WithLocation(6, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x4 = 0;) in RegisterOperationBlockStartAction(M4)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M4)")
+                            .WithLocation(6, 9)
+                    );
                     nonLocalSemanticDiagnostics.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x2 = 0;) in RegisterOperationBlockStartAction(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationBlockEndAction(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x3 = 0;) in RegisterOperationBlockStartAction(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationBlockEndAction(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x2 = 0;) in RegisterOperationBlockStartAction(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationBlockEndAction(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x3 = 0;) in RegisterOperationBlockStartAction(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationBlockEndAction(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x3 = 0;) in RegisterOperationBlockStartAction(M3)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x1a = 0;) in RegisterOperationBlockStartAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationBlockEndAction(M3)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x1b = 0;) in RegisterOperationBlockStartAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationBlockEndAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x2 = 0;) in RegisterOperationBlockStartAction(M2)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationBlockEndAction(M2)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x1a = 0;) in RegisterOperationBlockStartAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x1b = 0;) in RegisterOperationBlockStartAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationBlockEndAction(M1)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x2 = 0;) in RegisterOperationBlockStartAction(M2)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x3 = 0;) in RegisterOperationBlockStartAction(M3)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M3)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x2 = 0;) in RegisterOperationBlockStartAction(M2)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M2)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x3 = 0;) in RegisterOperationBlockStartAction(M3)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M3)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x3 = 0;) in RegisterOperationBlockStartAction(M3)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1a = 0;) in RegisterOperationBlockStartAction(M1)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M3)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1b = 0;) in RegisterOperationBlockStartAction(M1)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x2 = 0;) in RegisterOperationBlockStartAction(M2)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M2)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1a = 0;) in RegisterOperationBlockStartAction(M1)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1b = 0;) in RegisterOperationBlockStartAction(M1)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterOperationBlockEndAction(M1)")
+                            .WithLocation(20, 9)
+                    );
                     break;
 
                 case LocalNonLocalDiagnosticsAnalyzer.ActionKind.SyntaxNodeAction:
                     localSemanticDiagnostics_1.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;)(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;)(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;)(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;)(M3)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x1a = 0;)(M1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x1b = 0;)(M1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x2 = 0;)(M2)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x3 = 0;)(M3)")
+                            .WithLocation(20, 9)
+                    );
                     localSemanticDiagnostics_2.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSyntaxNodeAction(int x4 = 0;)(M4)").WithLocation(6, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x4 = 0;)(M4)")
+                            .WithLocation(6, 9)
+                    );
                     nonLocalSemanticDiagnostics.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;)(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;)(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;)(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;)(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;)(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;)(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;)(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;)(M3)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;)(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;)(M2)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;)(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;)(M1)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x2 = 0;)(M2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x3 = 0;)(M3)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x1b = 0;)(M1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x2 = 0;)(M2)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x1a = 0;)(M1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x3 = 0;)(M3)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x1a = 0;)(M1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x3 = 0;)(M3)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x1b = 0;)(M1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x2 = 0;)(M2)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x1a = 0;)(M1)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSyntaxNodeAction(int x1b = 0;)(M1)")
+                            .WithLocation(20, 9)
+                    );
                     break;
 
                 case LocalNonLocalDiagnosticsAnalyzer.ActionKind.CodeBlockAction:
                     localSemanticDiagnostics_1.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterCodeBlockAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterCodeBlockAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterCodeBlockAction(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterCodeBlockAction(M3)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M2)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M3)")
+                            .WithLocation(20, 9)
+                    );
                     localSemanticDiagnostics_2.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterCodeBlockAction(M4)").WithLocation(6, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M4)")
+                            .WithLocation(6, 9)
+                    );
                     nonLocalSemanticDiagnostics.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterCodeBlockAction(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterCodeBlockAction(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterCodeBlockAction(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterCodeBlockAction(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterCodeBlockAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterCodeBlockAction(M3)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterCodeBlockAction(M2)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterCodeBlockAction(M1)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M3)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M2)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M3)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M3)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M2)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterCodeBlockAction(M1)")
+                            .WithLocation(20, 9)
+                    );
                     break;
 
                 case LocalNonLocalDiagnosticsAnalyzer.ActionKind.CodeBlockStartEndAction:
                     localSemanticDiagnostics_1.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;) in RegisterCodeBlockStartAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;) in RegisterCodeBlockStartAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterCodeBlockEndAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;) in RegisterCodeBlockStartAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;) in RegisterCodeBlockStartAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterCodeBlockEndAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;) in RegisterCodeBlockStartAction(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterCodeBlockEndAction(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;) in RegisterCodeBlockStartAction(M3)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterCodeBlockEndAction(M3)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1a = 0;) in RegisterCodeBlockStartAction(M1)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1b = 0;) in RegisterCodeBlockStartAction(M1)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1a = 0;) in RegisterCodeBlockStartAction(M1)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1b = 0;) in RegisterCodeBlockStartAction(M1)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x2 = 0;) in RegisterCodeBlockStartAction(M2)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M2)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x3 = 0;) in RegisterCodeBlockStartAction(M3)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M3)")
+                            .WithLocation(20, 9)
+                    );
                     localSemanticDiagnostics_2.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSyntaxNodeAction(int x4 = 0;) in RegisterCodeBlockStartAction(M4)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterCodeBlockEndAction(M4)").WithLocation(6, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x4 = 0;) in RegisterCodeBlockStartAction(M4)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M4)")
+                            .WithLocation(6, 9)
+                    );
                     nonLocalSemanticDiagnostics.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;) in RegisterCodeBlockStartAction(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;) in RegisterCodeBlockStartAction(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;) in RegisterCodeBlockStartAction(M2)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;) in RegisterCodeBlockStartAction(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;) in RegisterCodeBlockStartAction(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;) in RegisterCodeBlockStartAction(M3)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;) in RegisterCodeBlockStartAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;) in RegisterCodeBlockStartAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;) in RegisterCodeBlockStartAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;) in RegisterCodeBlockStartAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterCodeBlockEndAction(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterCodeBlockEndAction(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterCodeBlockEndAction(M2)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterCodeBlockEndAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterCodeBlockEndAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterCodeBlockEndAction(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterCodeBlockEndAction(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterCodeBlockEndAction(M3)").WithLocation(12, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x2 = 0;) in RegisterCodeBlockStartAction(M2)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x2 = 0;) in RegisterCodeBlockStartAction(M2)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x2 = 0;) in RegisterCodeBlockStartAction(M2)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x3 = 0;) in RegisterCodeBlockStartAction(M3)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x3 = 0;) in RegisterCodeBlockStartAction(M3)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x3 = 0;) in RegisterCodeBlockStartAction(M3)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1a = 0;) in RegisterCodeBlockStartAction(M1)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1a = 0;) in RegisterCodeBlockStartAction(M1)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1b = 0;) in RegisterCodeBlockStartAction(M1)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1b = 0;) in RegisterCodeBlockStartAction(M1)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M2)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M2)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M2)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M1)")
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M3)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M3)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterCodeBlockEndAction(M3)")
+                            .WithLocation(12, 9)
+                    );
                     break;
 
                 case LocalNonLocalDiagnosticsAnalyzer.ActionKind.SymbolStartEndAction:
                     localSemanticDiagnostics_1.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;) in RegisterSymbolStartAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;) in RegisterSymbolStartAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x1a = 0;) in RegisterSymbolStartAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x1b = 0;) in RegisterSymbolStartAction(M1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSymbolEndAction(C)(File1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;) in RegisterSymbolStartAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;) in RegisterSymbolStartAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x1a = 0;) in RegisterSymbolStartAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x1b = 0;) in RegisterSymbolStartAction(M1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSymbolEndAction(C)(File1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;) in RegisterSymbolStartAction(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x2 = 0;) in RegisterSymbolStartAction(M2)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSymbolEndAction(C)(File1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;) in RegisterSymbolStartAction(M3)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x3 = 0;) in RegisterSymbolStartAction(M3)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSymbolEndAction(D)(File1)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1a = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1b = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1a = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1b = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSymbolEndAction(C)(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1a = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1b = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1a = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1b = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSymbolEndAction(C)(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x2 = 0;) in RegisterSymbolStartAction(M2)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x2 = 0;) in RegisterSymbolStartAction(M2)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSymbolEndAction(C)(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x3 = 0;) in RegisterSymbolStartAction(M3)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x3 = 0;) in RegisterSymbolStartAction(M3)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSymbolEndAction(D)(File1)")
+                            .WithLocation(20, 9)
+                    );
                     localSemanticDiagnostics_2.Verify(
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSyntaxNodeAction(int x4 = 0;) in RegisterSymbolStartAction(M4)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterOperationAction(int x4 = 0;) in RegisterSymbolStartAction(M4)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x4 = 0;").WithArguments("RegisterSymbolEndAction(E)(File2)").WithLocation(6, 9));
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x4 = 0;) in RegisterSymbolStartAction(M4)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x4 = 0;) in RegisterSymbolStartAction(M4)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x4 = 0;")
+                            .WithArguments("RegisterSymbolEndAction(E)(File2)")
+                            .WithLocation(6, 9)
+                    );
                     nonLocalSemanticDiagnostics.Verify(
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;) in RegisterSymbolStartAction(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;) in RegisterSymbolStartAction(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x2 = 0;) in RegisterSymbolStartAction(M2)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterOperationAction(int x3 = 0;) in RegisterSymbolStartAction(M3)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1a = 0;").WithArguments("RegisterSymbolEndAction(D)(File1)").WithLocation(6, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;) in RegisterSymbolStartAction(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;) in RegisterSymbolStartAction(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x2 = 0;) in RegisterSymbolStartAction(M2)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterOperationAction(int x3 = 0;) in RegisterSymbolStartAction(M3)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x1b = 0;").WithArguments("RegisterSymbolEndAction(D)(File1)").WithLocation(7, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x3 = 0;) in RegisterSymbolStartAction(M3)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;) in RegisterSymbolStartAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;) in RegisterSymbolStartAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x1a = 0;) in RegisterSymbolStartAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x1b = 0;) in RegisterSymbolStartAction(M1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterOperationAction(int x3 = 0;) in RegisterSymbolStartAction(M3)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x2 = 0;").WithArguments("RegisterSymbolEndAction(D)(File1)").WithLocation(12, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x2 = 0;) in RegisterSymbolStartAction(M2)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1a = 0;) in RegisterSymbolStartAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSyntaxNodeAction(int x1b = 0;) in RegisterSymbolStartAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x2 = 0;) in RegisterSymbolStartAction(M2)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x1a = 0;) in RegisterSymbolStartAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterOperationAction(int x1b = 0;) in RegisterSymbolStartAction(M1)").WithLocation(20, 9),
-                        Diagnostic("ID0001", "int x3 = 0;").WithArguments("RegisterSymbolEndAction(C)(File1)").WithLocation(20, 9));
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x3 = 0;) in RegisterSymbolStartAction(M3)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x2 = 0;) in RegisterSymbolStartAction(M2)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x2 = 0;) in RegisterSymbolStartAction(M2)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x3 = 0;) in RegisterSymbolStartAction(M3)"
+                            )
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1a = 0;")
+                            .WithArguments("RegisterSymbolEndAction(D)(File1)")
+                            .WithLocation(6, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x3 = 0;) in RegisterSymbolStartAction(M3)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x2 = 0;) in RegisterSymbolStartAction(M2)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x2 = 0;) in RegisterSymbolStartAction(M2)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x3 = 0;) in RegisterSymbolStartAction(M3)"
+                            )
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x1b = 0;")
+                            .WithArguments("RegisterSymbolEndAction(D)(File1)")
+                            .WithLocation(7, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x3 = 0;) in RegisterSymbolStartAction(M3)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1a = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1b = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1a = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1b = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x3 = 0;) in RegisterSymbolStartAction(M3)"
+                            )
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x2 = 0;")
+                            .WithArguments("RegisterSymbolEndAction(D)(File1)")
+                            .WithLocation(12, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x2 = 0;) in RegisterSymbolStartAction(M2)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1a = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterSyntaxNodeAction(int x1b = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x2 = 0;) in RegisterSymbolStartAction(M2)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1a = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments(
+                                "RegisterOperationAction(int x1b = 0;) in RegisterSymbolStartAction(M1)"
+                            )
+                            .WithLocation(20, 9),
+                        Diagnostic("ID0001", "int x3 = 0;")
+                            .WithArguments("RegisterSymbolEndAction(C)(File1)")
+                            .WithLocation(20, 9)
+                    );
                     break;
 
                 default:
@@ -1355,7 +2283,8 @@ class E
         [WorkItem(63923, "https://github.com/dotnet/roslyn/issues/63923")]
         public async Task TestEqualityForCompilerAnalyzerDiagnosticWithPropertyBag()
         {
-            var source = @"using System;
+            var source =
+                @"using System;
 
 public class SomeClass
 {
@@ -1372,10 +2301,15 @@ internal class TestAttribute : Attribute
             compilationDiagnostics.Verify(
                 // (5,6): warning CS0657: 'property' is not a valid attribute location for this declaration. Valid attribute locations for this declaration are 'field'. All attributes in this block will be ignored.
                 //     [property: Test]
-                Diagnostic(ErrorCode.WRN_AttributeLocationOnBadDeclaration, "property").WithArguments("property", "field").WithLocation(5, 6));
+                Diagnostic(ErrorCode.WRN_AttributeLocationOnBadDeclaration, "property")
+                    .WithArguments("property", "field")
+                    .WithLocation(5, 6)
+            );
             var compilationDiagnostic = compilationDiagnostics.Single();
 
-            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer());
+            var analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
+                new CSharpCompilerDiagnosticAnalyzer()
+            );
             var compilationWithAnalyzers = compilation.WithAnalyzers(analyzers);
             var analyzerDiagnostics = await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync();
             var analyzerDiagnostic = analyzerDiagnostics.Single();
@@ -1394,9 +2328,17 @@ internal class TestAttribute : Attribute
 
             // Verify that CS0657 can be suppressed with a DiagnosticSuppressor
             var suppressor = new DiagnosticSuppressorForCS0657();
-            analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(new CSharpCompilerDiagnosticAnalyzer(), suppressor);
-            var options = new CompilationWithAnalyzersOptions(AnalyzerOptions.Empty, onAnalyzerException: null,
-                concurrentAnalysis: false, logAnalyzerExecutionTime: false, reportSuppressedDiagnostics: true);
+            analyzers = ImmutableArray.Create<DiagnosticAnalyzer>(
+                new CSharpCompilerDiagnosticAnalyzer(),
+                suppressor
+            );
+            var options = new CompilationWithAnalyzersOptions(
+                AnalyzerOptions.Empty,
+                onAnalyzerException: null,
+                concurrentAnalysis: false,
+                logAnalyzerExecutionTime: false,
+                reportSuppressedDiagnostics: true
+            );
             compilationWithAnalyzers = compilation.WithAnalyzers(analyzers, options);
             analyzerDiagnostics = await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync();
             analyzerDiagnostic = analyzerDiagnostics.Single();
@@ -1409,8 +2351,10 @@ internal class TestAttribute : Attribute
         private sealed class DiagnosticSuppressorForCS0657 : DiagnosticSuppressor
         {
             internal const string SuppressionId = "SPR0001";
-            private readonly SuppressionDescriptor _descriptor = new(SuppressionId, "CS0657", "Justification");
-            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions => ImmutableArray.Create(_descriptor);
+            private readonly SuppressionDescriptor _descriptor =
+                new(SuppressionId, "CS0657", "Justification");
+            public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+                ImmutableArray.Create(_descriptor);
 
             public override void ReportSuppressions(SuppressionAnalysisContext context)
             {
@@ -1421,10 +2365,20 @@ internal class TestAttribute : Attribute
             }
         }
 
-        [Theory, CombinatorialData, WorkItem(66968, "https://github.com/dotnet/roslyn/issues/66968")]
-        public async Task TestAnalyzerCallbacksForSpanBasedDiagnostics(bool testSyntaxTreeAction, bool testSemanticModelAction, bool testSymbolStartAction, bool testBlockActions)
+        [
+            Theory,
+            CombinatorialData,
+            WorkItem(66968, "https://github.com/dotnet/roslyn/issues/66968")
+        ]
+        public async Task TestAnalyzerCallbacksForSpanBasedDiagnostics(
+            bool testSyntaxTreeAction,
+            bool testSemanticModelAction,
+            bool testSymbolStartAction,
+            bool testBlockActions
+        )
         {
-            var source1 = @"
+            var source1 =
+                @"
 partial class C
 {
     void M1()
@@ -1440,7 +2394,8 @@ partial class C
     }
 }";
 
-            var source2 = @"
+            var source2 =
+                @"
 partial class C
 {
     void M3()
@@ -1455,13 +2410,24 @@ partial class C
             var tree2 = compilation.SyntaxTrees[1];
             var model1 = compilation.GetSemanticModel(tree1);
 
-            var analyzer = new AllActionsAnalyzer(testSyntaxTreeAction, testSemanticModelAction, testSymbolStartAction, testBlockActions);
-            var compilationWithAnalyzers = compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer), AnalyzerOptions.Empty);
+            var analyzer = new AllActionsAnalyzer(
+                testSyntaxTreeAction,
+                testSemanticModelAction,
+                testSymbolStartAction,
+                testBlockActions
+            );
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                ImmutableArray.Create<DiagnosticAnalyzer>(analyzer),
+                AnalyzerOptions.Empty
+            );
 
             if (testSyntaxTreeAction)
             {
                 // Verify only SyntaxTree action callback with GetAnalysisResultAsync(tree).
-                var syntaxResult = await compilationWithAnalyzers.GetAnalysisResultAsync(tree1, CancellationToken.None);
+                var syntaxResult = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                    tree1,
+                    CancellationToken.None
+                );
                 Assert.Empty(syntaxResult.GetAllDiagnostics());
 
                 var analyzedTree = Assert.Single(analyzer.AnalyzedTrees);
@@ -1486,11 +2452,19 @@ partial class C
             }
 
             // Get analyzer semantic diagnostics for first local declaration's span within "M1".
-            var localDecl = tree1.GetRoot().DescendantNodes().OfType<LocalDeclarationStatementSyntax>().First();
+            var localDecl = tree1
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<LocalDeclarationStatementSyntax>()
+                .First();
             Assert.Equal("int x11 = 0;", localDecl.ToString());
 
             // Verify analyzer callbacks for computing semantic diagnostics for the span.
-            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(model1, filterSpan: localDecl.Span, CancellationToken.None);
+            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                model1,
+                filterSpan: localDecl.Span,
+                CancellationToken.None
+            );
             Assert.Empty(result.GetAllDiagnostics());
 
             // Verify no syntax tree action callbacks
@@ -1569,54 +2543,115 @@ partial class C
 
             // Verify symbol callbacks
             Assert.Equal(expectedSymbolCallbacks.Count, analyzer.AnalyzedSymbols.Count);
-            AssertEx.SetEqual(expectedSymbolCallbacks, analyzer.AnalyzedSymbols.Select(s => s.Name).ToHashSet());
+            AssertEx.SetEqual(
+                expectedSymbolCallbacks,
+                analyzer.AnalyzedSymbols.Select(s => s.Name).ToHashSet()
+            );
 
             // Verify syntax node callbacks
             Assert.Equal(expectedSyntaxNodeCallbacks.Count, analyzer.AnalyzedSyntaxNodes.Count);
-            AssertEx.All(analyzer.AnalyzedSyntaxNodes, node => node.IsKind(SyntaxKind.LocalDeclarationStatement));
-            AssertEx.SetEqual(expectedSyntaxNodeCallbacks, analyzer.AnalyzedSyntaxNodes.Select(s => s.ToString()).ToHashSet());
+            AssertEx.All(
+                analyzer.AnalyzedSyntaxNodes,
+                node => node.IsKind(SyntaxKind.LocalDeclarationStatement)
+            );
+            AssertEx.SetEqual(
+                expectedSyntaxNodeCallbacks,
+                analyzer.AnalyzedSyntaxNodes.Select(s => s.ToString()).ToHashSet()
+            );
 
-            Assert.Equal(expectedSyntaxNodeInsideBlockCallbacks.Count, analyzer.AnalyzedSyntaxNodesInsideCodeBlock.Count);
-            AssertEx.All(analyzer.AnalyzedSyntaxNodesInsideCodeBlock, node => node.IsKind(SyntaxKind.LocalDeclarationStatement));
-            AssertEx.SetEqual(expectedSyntaxNodeInsideBlockCallbacks, analyzer.AnalyzedSyntaxNodesInsideCodeBlock.Select(s => s.ToString()).ToHashSet());
+            Assert.Equal(
+                expectedSyntaxNodeInsideBlockCallbacks.Count,
+                analyzer.AnalyzedSyntaxNodesInsideCodeBlock.Count
+            );
+            AssertEx.All(
+                analyzer.AnalyzedSyntaxNodesInsideCodeBlock,
+                node => node.IsKind(SyntaxKind.LocalDeclarationStatement)
+            );
+            AssertEx.SetEqual(
+                expectedSyntaxNodeInsideBlockCallbacks,
+                analyzer.AnalyzedSyntaxNodesInsideCodeBlock.Select(s => s.ToString()).ToHashSet()
+            );
 
             // Verify operation callbacks
             Assert.Equal(expectedOperationCallbacks.Count, analyzer.AnalyzedOperations.Count);
-            AssertEx.All(analyzer.AnalyzedOperations, operation => operation.Kind == OperationKind.VariableDeclaration);
-            AssertEx.SetEqual(expectedOperationCallbacks, analyzer.AnalyzedOperations.Select(op => op.Syntax.ToString()).ToHashSet());
+            AssertEx.All(
+                analyzer.AnalyzedOperations,
+                operation => operation.Kind == OperationKind.VariableDeclaration
+            );
+            AssertEx.SetEqual(
+                expectedOperationCallbacks,
+                analyzer.AnalyzedOperations.Select(op => op.Syntax.ToString()).ToHashSet()
+            );
 
-            Assert.Equal(expectedOperationInsideBlockCallbacks.Count, analyzer.AnalyzedOperationsInsideOperationBlock.Count);
-            AssertEx.All(analyzer.AnalyzedOperationsInsideOperationBlock, operation => operation.Kind == OperationKind.VariableDeclaration);
-            AssertEx.SetEqual(expectedOperationInsideBlockCallbacks, analyzer.AnalyzedOperationsInsideOperationBlock.Select(op => op.Syntax.ToString()).ToHashSet());
+            Assert.Equal(
+                expectedOperationInsideBlockCallbacks.Count,
+                analyzer.AnalyzedOperationsInsideOperationBlock.Count
+            );
+            AssertEx.All(
+                analyzer.AnalyzedOperationsInsideOperationBlock,
+                operation => operation.Kind == OperationKind.VariableDeclaration
+            );
+            AssertEx.SetEqual(
+                expectedOperationInsideBlockCallbacks,
+                analyzer
+                    .AnalyzedOperationsInsideOperationBlock.Select(op => op.Syntax.ToString())
+                    .ToHashSet()
+            );
 
             // Verify operation and code block callbacks
             var actualBlockSymbolCallbacksArray = new[]
             {
-                analyzer.AnalyzedCodeBlockSymbols, analyzer.AnalyzedCodeBlockStartSymbols, analyzer.AnalyzedCodeBlockEndSymbols,
-                analyzer.AnalyzedOperationBlockSymbols, analyzer.AnalyzedOperationBlockStartSymbols, analyzer.AnalyzedOperationBlockEndSymbols
+                analyzer.AnalyzedCodeBlockSymbols,
+                analyzer.AnalyzedCodeBlockStartSymbols,
+                analyzer.AnalyzedCodeBlockEndSymbols,
+                analyzer.AnalyzedOperationBlockSymbols,
+                analyzer.AnalyzedOperationBlockStartSymbols,
+                analyzer.AnalyzedOperationBlockEndSymbols,
             };
 
             foreach (var actualBlockSymbolCallbacks in actualBlockSymbolCallbacksArray)
             {
                 Assert.Equal(expectedBlockSymbolCallbacks.Count, actualBlockSymbolCallbacks.Count);
-                AssertEx.SetEqual(expectedBlockSymbolCallbacks, actualBlockSymbolCallbacks.Select(s => s.Name).ToHashSet());
+                AssertEx.SetEqual(
+                    expectedBlockSymbolCallbacks,
+                    actualBlockSymbolCallbacks.Select(s => s.Name).ToHashSet()
+                );
             }
 
             // Verify SymbolStart/End callbacks
-            Assert.Equal(expectedSymbolStartSymbolCallbacks.Count, analyzer.AnalyzedSymbolStartSymbols.Count);
-            AssertEx.SetEqual(expectedSymbolStartSymbolCallbacks, analyzer.AnalyzedSymbolStartSymbols.Select(s => s.Name).ToHashSet());
-            Assert.Equal(expectedSymbolStartSymbolCallbacks.Count, analyzer.AnalyzedSymbolEndSymbols.Count);
-            AssertEx.SetEqual(expectedSymbolStartSymbolCallbacks, analyzer.AnalyzedSymbolEndSymbols.Select(s => s.Name).ToHashSet());
+            Assert.Equal(
+                expectedSymbolStartSymbolCallbacks.Count,
+                analyzer.AnalyzedSymbolStartSymbols.Count
+            );
+            AssertEx.SetEqual(
+                expectedSymbolStartSymbolCallbacks,
+                analyzer.AnalyzedSymbolStartSymbols.Select(s => s.Name).ToHashSet()
+            );
+            Assert.Equal(
+                expectedSymbolStartSymbolCallbacks.Count,
+                analyzer.AnalyzedSymbolEndSymbols.Count
+            );
+            AssertEx.SetEqual(
+                expectedSymbolStartSymbolCallbacks,
+                analyzer.AnalyzedSymbolEndSymbols.Select(s => s.Name).ToHashSet()
+            );
 
             // Verify SemanticModel callbacks
-            Assert.Equal(expectedSemanticModelTreeCallbacks.Count, analyzer.AnalyzedSemanticModels.Count);
-            AssertEx.SetEqual(expectedSemanticModelTreeCallbacks, analyzer.AnalyzedSemanticModels.Select(s => s.SyntaxTree).ToHashSet());
+            Assert.Equal(
+                expectedSemanticModelTreeCallbacks.Count,
+                analyzer.AnalyzedSemanticModels.Count
+            );
+            AssertEx.SetEqual(
+                expectedSemanticModelTreeCallbacks,
+                analyzer.AnalyzedSemanticModels.Select(s => s.SyntaxTree).ToHashSet()
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/68654")]
         public async Task TestAnalyzerLocalDiagnosticsWhenReportedOnEnumFieldSymbol()
         {
-            var source = @"
+            var source =
+                @"
 public class Outer
 {
     public enum E1
@@ -1635,13 +2670,19 @@ public enum E2
 
             var tree = compilation.SyntaxTrees[0];
             var analyzer = new EnumTypeFieldSymbolAnalyzer();
-            var compilationWithAnalyzers = compilation.WithAnalyzers(ImmutableArray.Create<DiagnosticAnalyzer>(analyzer), AnalyzerOptions.Empty);
-            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(CancellationToken.None);
+            var compilationWithAnalyzers = compilation.WithAnalyzers(
+                ImmutableArray.Create<DiagnosticAnalyzer>(analyzer),
+                AnalyzerOptions.Empty
+            );
+            var result = await compilationWithAnalyzers.GetAnalysisResultAsync(
+                CancellationToken.None
+            );
 
             var localSemanticDiagnostics = result.SemanticDiagnostics[tree][analyzer];
             localSemanticDiagnostics.Verify(
                 Diagnostic("ID0001", "A1 = 0").WithLocation(6, 9),
-                Diagnostic("ID0001", "A2 = 0").WithLocation(12, 5));
+                Diagnostic("ID0001", "A2 = 0").WithLocation(12, 5)
+            );
 
             Assert.Empty(result.CompilationDiagnostics);
         }
@@ -1649,26 +2690,39 @@ public enum E2
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
         private class EnumTypeFieldSymbolAnalyzer : DiagnosticAnalyzer
         {
-            public static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor("ID0001", "Title", "Message", "Category", defaultSeverity: DiagnosticSeverity.Warning, isEnabledByDefault: true);
+            public static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
+                "ID0001",
+                "Title",
+                "Message",
+                "Category",
+                defaultSeverity: DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Descriptor);
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterSymbolAction(symbolContext =>
-                {
-                    var namedType = (INamedTypeSymbol)symbolContext.Symbol;
-                    foreach (var field in namedType.GetMembers().OfType<IFieldSymbol>())
+                context.RegisterSymbolAction(
+                    symbolContext =>
                     {
-                        if (!field.IsImplicitlyDeclared)
+                        var namedType = (INamedTypeSymbol)symbolContext.Symbol;
+                        foreach (var field in namedType.GetMembers().OfType<IFieldSymbol>())
                         {
-                            var diag = CodeAnalysis.Diagnostic.Create(Descriptor, field.DeclaringSyntaxReferences[0].GetLocation());
-                            symbolContext.ReportDiagnostic(diag);
+                            if (!field.IsImplicitlyDeclared)
+                            {
+                                var diag = CodeAnalysis.Diagnostic.Create(
+                                    Descriptor,
+                                    field.DeclaringSyntaxReferences[0].GetLocation()
+                                );
+                                symbolContext.ReportDiagnostic(diag);
+                            }
                         }
-                    }
-                }, SymbolKind.NamedType);
+                    },
+                    SymbolKind.NamedType
+                );
             }
         }
     }
 }
-

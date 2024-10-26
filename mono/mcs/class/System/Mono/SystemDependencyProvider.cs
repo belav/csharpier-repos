@@ -28,47 +28,49 @@ using System.Threading;
 
 namespace Mono
 {
-	/*
-	 * The purpose of this class is to allow code in `corlib.dll` to access `System.dll` APIs.
-	 */
-	class SystemDependencyProvider : ISystemDependencyProvider
-	{
-		static SystemDependencyProvider instance;
-		static object syncRoot = new object ();
+    /*
+     * The purpose of this class is to allow code in `corlib.dll` to access `System.dll` APIs.
+     */
+    class SystemDependencyProvider : ISystemDependencyProvider
+    {
+        static SystemDependencyProvider instance;
+        static object syncRoot = new object();
 
-		public static SystemDependencyProvider Instance {
-			get {
-				Initialize ();
-				return instance;
-			}
-		}
+        public static SystemDependencyProvider Instance
+        {
+            get
+            {
+                Initialize();
+                return instance;
+            }
+        }
 
-		internal static void Initialize ()
-		{
-			lock (syncRoot) {
-				if (instance != null)
-					return;
+        internal static void Initialize()
+        {
+            lock (syncRoot)
+            {
+                if (instance != null)
+                    return;
 
-				instance = new SystemDependencyProvider ();
-			}
-		}
+                instance = new SystemDependencyProvider();
+            }
+        }
 
-		ISystemCertificateProvider ISystemDependencyProvider.CertificateProvider => CertificateProvider;
+        ISystemCertificateProvider ISystemDependencyProvider.CertificateProvider =>
+            CertificateProvider;
 
-		public SystemCertificateProvider CertificateProvider {
-			get;
-		}
+        public SystemCertificateProvider CertificateProvider { get; }
 
-		public X509PalImpl X509Pal => CertificateProvider.X509Pal;
+        public X509PalImpl X509Pal => CertificateProvider.X509Pal;
 
-		SystemDependencyProvider ()
-		{
-			CertificateProvider = new SystemCertificateProvider ();
+        SystemDependencyProvider()
+        {
+            CertificateProvider = new SystemCertificateProvider();
 
-			/*
-			 * Register ourselves with corlib's `DependencyInjector`.
-			 */
-			DependencyInjector.Register (this);
-		}
-	}
+            /*
+             * Register ourselves with corlib's `DependencyInjector`.
+             */
+            DependencyInjector.Register(this);
+        }
+    }
 }

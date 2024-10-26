@@ -10,27 +10,22 @@ namespace System.Runtime
     [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.NonBlocking)]
     class SignalGate
     {
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         int state;
 
-        public SignalGate()
-        {
-        }
+        public SignalGate() { }
 
         internal bool IsLocked
         {
-            get
-            {
-                return this.state == GateState.Locked;
-            }
+            get { return this.state == GateState.Locked; }
         }
 
         internal bool IsSignalled
         {
-            get
-            {
-                return this.state == GateState.Signalled;
-            }
+            get { return this.state == GateState.Signalled; }
         }
 
         // Returns true if this brings the gate to the Signalled state.
@@ -41,7 +36,11 @@ namespace System.Runtime
             int lastState = this.state;
             if (lastState == GateState.Locked)
             {
-                lastState = Interlocked.CompareExchange(ref this.state, GateState.SignalPending, GateState.Locked);
+                lastState = Interlocked.CompareExchange(
+                    ref this.state,
+                    GateState.SignalPending,
+                    GateState.Locked
+                );
             }
             if (lastState == GateState.Unlocked)
             {
@@ -57,7 +56,7 @@ namespace System.Runtime
         }
 
         // Returns true if this brings the gate to the Signalled state.
-        // Transitions - SignalPending -> Signaled | return the AsyncResult since the callback already 
+        // Transitions - SignalPending -> Signaled | return the AsyncResult since the callback already
         //                                         | completed and provided the result on its thread
         //               Locked -> Unlocked
         public bool Unlock()
@@ -65,7 +64,11 @@ namespace System.Runtime
             int lastState = this.state;
             if (lastState == GateState.Locked)
             {
-                lastState = Interlocked.CompareExchange(ref this.state, GateState.Unlocked, GateState.Locked);
+                lastState = Interlocked.CompareExchange(
+                    ref this.state,
+                    GateState.Unlocked,
+                    GateState.Locked
+                );
             }
             if (lastState == GateState.SignalPending)
             {
@@ -83,7 +86,9 @@ namespace System.Runtime
         // This is factored out to allow Signal and Unlock to be inlined.
         void ThrowInvalidSignalGateState()
         {
-            throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.InvalidSemaphoreExit));
+            throw Fx.Exception.AsError(
+                new InvalidOperationException(InternalSR.InvalidSemaphoreExit)
+            );
         }
 
         static class GateState
@@ -101,9 +106,7 @@ namespace System.Runtime
         T result;
 
         public SignalGate()
-            : base()
-        {
-        }
+            : base() { }
 
         public bool Signal(T result)
         {

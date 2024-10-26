@@ -11,16 +11,19 @@ namespace System.Net.WebSockets
     {
         public static string? GetProtocol(JSObject? webSocket)
         {
-            if (webSocket == null || webSocket.IsDisposed) return null;
+            if (webSocket == null || webSocket.IsDisposed)
+                return null;
             string? protocol = webSocket.GetPropertyAsString("protocol");
             return protocol;
         }
 
         public static int GetReadyState(JSObject? webSocket)
         {
-            if (webSocket == null || webSocket.IsDisposed) return -1;
+            if (webSocket == null || webSocket.IsDisposed)
+                return -1;
             int? readyState = webSocket.GetPropertyAsInt32("readyState");
-            if (!readyState.HasValue) return -1;
+            if (!readyState.HasValue)
+                return -1;
             return readyState.Value;
         }
 
@@ -29,20 +32,23 @@ namespace System.Net.WebSockets
             string uri,
             string?[]? subProtocols,
             IntPtr responseStatusPtr,
-            [JSMarshalAs<JSType.Function<JSType.Number, JSType.String>>] Action<int, string> onClosed);
+            [JSMarshalAs<JSType.Function<JSType.Number, JSType.String>>]
+                Action<int, string> onClosed
+        );
 
         public static unsafe JSObject UnsafeCreate(
             string uri,
             string?[]? subProtocols,
             MemoryHandle responseHandle,
-            [JSMarshalAs<JSType.Function<JSType.Number, JSType.String>>] Action<int, string> onClosed)
+            [JSMarshalAs<JSType.Function<JSType.Number, JSType.String>>]
+                Action<int, string> onClosed
+        )
         {
             return WebSocketCreate(uri, subProtocols, (IntPtr)responseHandle.Pointer, onClosed);
         }
 
         [JSImport("INTERNAL.ws_wasm_open")]
-        public static partial Task WebSocketOpen(
-            JSObject webSocket);
+        public static partial Task WebSocketOpen(JSObject webSocket);
 
         [JSImport("INTERNAL.ws_wasm_send")]
         public static partial Task? WebSocketSend(
@@ -50,9 +56,15 @@ namespace System.Net.WebSockets
             IntPtr bufferPtr,
             int bufferLength,
             int messageType,
-            bool endOfMessage);
+            bool endOfMessage
+        );
 
-        public static unsafe Task? UnsafeSendSync(JSObject jsWs, ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage)
+        public static unsafe Task? UnsafeSendSync(
+            JSObject jsWs,
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage
+        )
         {
             if (buffer.Count == 0)
             {
@@ -63,7 +75,13 @@ namespace System.Net.WebSockets
             // we can do this because the bytes in the buffer are always consumed synchronously (not later with Task resolution)
             fixed (void* spanPtr = span)
             {
-                return WebSocketSend(jsWs, (IntPtr)spanPtr, buffer.Count, (int)messageType, endOfMessage);
+                return WebSocketSend(
+                    jsWs,
+                    (IntPtr)spanPtr,
+                    buffer.Count,
+                    (int)messageType,
+                    endOfMessage
+                );
             }
         }
 
@@ -71,9 +89,14 @@ namespace System.Net.WebSockets
         public static partial Task? WebSocketReceive(
             JSObject webSocket,
             IntPtr bufferPtr,
-            int bufferLength);
+            int bufferLength
+        );
 
-        public static unsafe Task? ReceiveUnsafeSync(JSObject jsWs, MemoryHandle pinBuffer, int length)
+        public static unsafe Task? ReceiveUnsafeSync(
+            JSObject jsWs,
+            MemoryHandle pinBuffer,
+            int length
+        )
         {
             return WebSocketReceive(jsWs, (IntPtr)pinBuffer.Pointer, length);
         }
@@ -83,11 +106,10 @@ namespace System.Net.WebSockets
             JSObject webSocket,
             int code,
             string? reason,
-            bool waitForCloseReceived);
+            bool waitForCloseReceived
+        );
 
         [JSImport("INTERNAL.ws_wasm_abort")]
-        public static partial void WebSocketAbort(
-            JSObject webSocket);
-
+        public static partial void WebSocketAbort(JSObject webSocket);
     }
 }

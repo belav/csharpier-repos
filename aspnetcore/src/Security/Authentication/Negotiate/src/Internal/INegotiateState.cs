@@ -22,5 +22,5 @@ internal enum BlobErrorType
     None,
     CredentialError,
     ClientError,
-    Other
+    Other,
 }

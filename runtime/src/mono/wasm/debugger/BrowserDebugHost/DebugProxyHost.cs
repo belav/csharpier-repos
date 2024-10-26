@@ -18,12 +18,15 @@ namespace Microsoft.WebAssembly.Diagnostics;
 
 public static class DebugProxyHost
 {
-    public static async Task RunDebugProxyAsync(ProxyOptions options, string[] args, ILoggerFactory loggerFactory, CancellationToken token)
+    public static async Task RunDebugProxyAsync(
+        ProxyOptions options,
+        string[] args,
+        ILoggerFactory loggerFactory,
+        CancellationToken token
+    )
     {
-        List<Task> tasks = new(capacity: 2)
-        {
-            RunDevToolsProxyAsync(options, args, loggerFactory, token)
-        };
+        List<Task> tasks =
+            new(capacity: 2) { RunDevToolsProxyAsync(options, args, loggerFactory, token) };
         if (!options.RunningForBlazor || options.IsFirefoxDebugging)
             tasks.Add(RunFirefoxServerLoopAsync(options, args, loggerFactory, token));
 
@@ -32,15 +35,27 @@ public static class DebugProxyHost
             ExceptionDispatchInfo.Capture(completedTask.Exception!).Throw();
     }
 
-    public static Task RunFirefoxServerLoopAsync(ProxyOptions options, string[] args, ILoggerFactory loggerFactory, CancellationToken token)
-        => FirefoxDebuggerProxy.RunServerLoopAsync(browserPort: options.FirefoxDebugPort,
-                                                   proxyPort: options.FirefoxProxyPort,
-                                                   loggerFactory,
-                                                   loggerFactory.CreateLogger("FirefoxMonoProxy"),
-                                                   token,
-                                                   options);
+    public static Task RunFirefoxServerLoopAsync(
+        ProxyOptions options,
+        string[] args,
+        ILoggerFactory loggerFactory,
+        CancellationToken token
+    ) =>
+        FirefoxDebuggerProxy.RunServerLoopAsync(
+            browserPort: options.FirefoxDebugPort,
+            proxyPort: options.FirefoxProxyPort,
+            loggerFactory,
+            loggerFactory.CreateLogger("FirefoxMonoProxy"),
+            token,
+            options
+        );
 
-    public static async Task RunDevToolsProxyAsync(ProxyOptions options, string[] args, ILoggerFactory loggerFactory, CancellationToken token)
+    public static async Task RunDevToolsProxyAsync(
+        ProxyOptions options,
+        string[] args,
+        ILoggerFactory loggerFactory,
+        CancellationToken token
+    )
     {
         string proxyUrl = $"http://127.0.0.1:{options.DevToolsProxyPort}";
         IWebHost host = new WebHostBuilder()
@@ -51,14 +66,18 @@ public static class DebugProxyHost
             .ConfigureServices(services =>
             {
                 services.AddSingleton(loggerFactory);
-                services.AddLogging(configure => configure.AddSimpleConsole().AddFilter(null, LogLevel.Information));
+                services.AddLogging(configure =>
+                    configure.AddSimpleConsole().AddFilter(null, LogLevel.Information)
+                );
                 services.AddSingleton(Options.Create(options));
                 services.AddRouting();
             })
-            .ConfigureAppConfiguration((hostingContext, config) =>
-            {
-                config.AddCommandLine(args);
-            })
+            .ConfigureAppConfiguration(
+                (hostingContext, config) =>
+                {
+                    config.AddCommandLine(args);
+                }
+            )
             .UseUrls(proxyUrl)
             .Build();
 

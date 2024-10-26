@@ -33,7 +33,10 @@ namespace System.Collections.Tests
                 var operation = item.Item1;
                 var keyBase64 = item.Item2;
 
-                var key = keyBase64.Length > 0 ? GetString(Convert.FromBase64String(keyBase64)) : string.Empty;
+                var key =
+                    keyBase64.Length > 0
+                        ? GetString(Convert.FromBase64String(keyBase64))
+                        : string.Empty;
 
                 if (operation == InputAction.Add)
                     dictionary[key] = key;
@@ -45,10 +48,22 @@ namespace System.Collections.Tests
         [Fact]
         public static void ComparerImplementations_Dictionary_WithWellKnownStringComparers()
         {
-            Type nonRandomizedOrdinalComparerType = typeof(object).Assembly.GetType("System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer", throwOnError: true);
-            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType("System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer", throwOnError: true);
-            Type randomizedOrdinalComparerType = typeof(object).Assembly.GetType("System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer", throwOnError: true);
-            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType("System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer", throwOnError: true);
+            Type nonRandomizedOrdinalComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer",
+                throwOnError: true
+            );
+            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
+                throwOnError: true
+            );
+            Type randomizedOrdinalComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer",
+                throwOnError: true
+            );
+            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
+                throwOnError: true
+            );
 
             // null comparer
 
@@ -56,7 +71,8 @@ namespace System.Collections.Tests
                 equalityComparer: null,
                 expectedInternalComparerTypeBeforeCollisionThreshold: nonRandomizedOrdinalComparerType,
                 expectedPublicComparerBeforeCollisionThreshold: EqualityComparer<string>.Default,
-                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType);
+                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType
+            );
 
             // EqualityComparer<string>.Default comparer
 
@@ -64,7 +80,8 @@ namespace System.Collections.Tests
                 equalityComparer: EqualityComparer<string>.Default,
                 expectedInternalComparerTypeBeforeCollisionThreshold: nonRandomizedOrdinalComparerType,
                 expectedPublicComparerBeforeCollisionThreshold: EqualityComparer<string>.Default,
-                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType);
+                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType
+            );
 
             // Ordinal comparer
 
@@ -72,7 +89,8 @@ namespace System.Collections.Tests
                 equalityComparer: StringComparer.Ordinal,
                 expectedInternalComparerTypeBeforeCollisionThreshold: nonRandomizedOrdinalComparerType,
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.Ordinal,
-                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType);
+                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType
+            );
 
             // OrdinalIgnoreCase comparer
 
@@ -80,7 +98,8 @@ namespace System.Collections.Tests
                 equalityComparer: StringComparer.OrdinalIgnoreCase,
                 expectedInternalComparerTypeBeforeCollisionThreshold: nonRandomizedOrdinalIgnoreCaseComparerType,
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.OrdinalIgnoreCase,
-                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalIgnoreCaseComparerType);
+                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalIgnoreCaseComparerType
+            );
 
             // linguistic comparer (not optimized)
 
@@ -88,24 +107,28 @@ namespace System.Collections.Tests
                 equalityComparer: StringComparer.InvariantCulture,
                 expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer.InvariantCulture.GetType(),
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer.InvariantCulture.GetType());
+                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer.InvariantCulture.GetType()
+            );
 
             // CollectionsMarshal.GetValueRefOrAddDefault
 
             RunCollectionTestCommon(
                 () => new Dictionary<string, object>(StringComparer.Ordinal),
-                (dictionary, key) => CollectionsMarshal.GetValueRefOrAddDefault(dictionary, key, out _) = null,
+                (dictionary, key) =>
+                    CollectionsMarshal.GetValueRefOrAddDefault(dictionary, key, out _) = null,
                 (dictionary, key) => dictionary.ContainsKey(key),
                 dictionary => dictionary.Comparer,
                 expectedInternalComparerTypeBeforeCollisionThreshold: nonRandomizedOrdinalComparerType,
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.Ordinal,
-                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType);
+                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType
+            );
 
             static void RunDictionaryTest(
                 IEqualityComparer<string> equalityComparer,
                 Type expectedInternalComparerTypeBeforeCollisionThreshold,
                 IEqualityComparer<string> expectedPublicComparerBeforeCollisionThreshold,
-                Type expectedInternalComparerTypeAfterCollisionThreshold)
+                Type expectedInternalComparerTypeAfterCollisionThreshold
+            )
             {
                 RunCollectionTestCommon(
                     () => new Dictionary<string, object>(equalityComparer),
@@ -114,17 +137,30 @@ namespace System.Collections.Tests
                     dictionary => dictionary.Comparer,
                     expectedInternalComparerTypeBeforeCollisionThreshold,
                     expectedPublicComparerBeforeCollisionThreshold,
-                    expectedInternalComparerTypeAfterCollisionThreshold);
+                    expectedInternalComparerTypeAfterCollisionThreshold
+                );
             }
         }
 
         [Fact]
         public static void ComparerImplementations_HashSet_WithWellKnownStringComparers()
         {
-            Type nonRandomizedOrdinalComparerType = typeof(object).Assembly.GetType("System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer", throwOnError: true);
-            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType("System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer", throwOnError: true);
-            Type randomizedOrdinalComparerType = typeof(object).Assembly.GetType("System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer", throwOnError: true);
-            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType("System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer", throwOnError: true);
+            Type nonRandomizedOrdinalComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalComparer",
+                throwOnError: true
+            );
+            Type nonRandomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.NonRandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
+                throwOnError: true
+            );
+            Type randomizedOrdinalComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalComparer",
+                throwOnError: true
+            );
+            Type randomizedOrdinalIgnoreCaseComparerType = typeof(object).Assembly.GetType(
+                "System.Collections.Generic.RandomizedStringEqualityComparer+OrdinalIgnoreCaseComparer",
+                throwOnError: true
+            );
 
             // null comparer
 
@@ -132,7 +168,8 @@ namespace System.Collections.Tests
                 equalityComparer: null,
                 expectedInternalComparerTypeBeforeCollisionThreshold: nonRandomizedOrdinalComparerType,
                 expectedPublicComparerBeforeCollisionThreshold: EqualityComparer<string>.Default,
-                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType);
+                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType
+            );
 
             // EqualityComparer<string>.Default comparer
 
@@ -140,7 +177,8 @@ namespace System.Collections.Tests
                 equalityComparer: EqualityComparer<string>.Default,
                 expectedInternalComparerTypeBeforeCollisionThreshold: nonRandomizedOrdinalComparerType,
                 expectedPublicComparerBeforeCollisionThreshold: EqualityComparer<string>.Default,
-                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType);
+                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType
+            );
 
             // Ordinal comparer
 
@@ -148,7 +186,8 @@ namespace System.Collections.Tests
                 equalityComparer: StringComparer.Ordinal,
                 expectedInternalComparerTypeBeforeCollisionThreshold: nonRandomizedOrdinalComparerType,
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.Ordinal,
-                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType);
+                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalComparerType
+            );
 
             // OrdinalIgnoreCase comparer
 
@@ -156,7 +195,8 @@ namespace System.Collections.Tests
                 equalityComparer: StringComparer.OrdinalIgnoreCase,
                 expectedInternalComparerTypeBeforeCollisionThreshold: nonRandomizedOrdinalIgnoreCaseComparerType,
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.OrdinalIgnoreCase,
-                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalIgnoreCaseComparerType);
+                expectedInternalComparerTypeAfterCollisionThreshold: randomizedOrdinalIgnoreCaseComparerType
+            );
 
             // linguistic comparer (not optimized)
 
@@ -164,13 +204,15 @@ namespace System.Collections.Tests
                 equalityComparer: StringComparer.InvariantCulture,
                 expectedInternalComparerTypeBeforeCollisionThreshold: StringComparer.InvariantCulture.GetType(),
                 expectedPublicComparerBeforeCollisionThreshold: StringComparer.InvariantCulture,
-                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer.InvariantCulture.GetType());
+                expectedInternalComparerTypeAfterCollisionThreshold: StringComparer.InvariantCulture.GetType()
+            );
 
             static void RunHashSetTest(
                 IEqualityComparer<string> equalityComparer,
                 Type expectedInternalComparerTypeBeforeCollisionThreshold,
                 IEqualityComparer<string> expectedPublicComparerBeforeCollisionThreshold,
-                Type expectedInternalComparerTypeAfterCollisionThreshold)
+                Type expectedInternalComparerTypeAfterCollisionThreshold
+            )
             {
                 RunCollectionTestCommon(
                     () => new HashSet<string>(equalityComparer),
@@ -179,7 +221,8 @@ namespace System.Collections.Tests
                     set => set.Comparer,
                     expectedInternalComparerTypeBeforeCollisionThreshold,
                     expectedPublicComparerBeforeCollisionThreshold,
-                    expectedInternalComparerTypeAfterCollisionThreshold);
+                    expectedInternalComparerTypeAfterCollisionThreshold
+                );
             }
         }
 
@@ -190,7 +233,8 @@ namespace System.Collections.Tests
             Func<TCollection, IEqualityComparer<string>> getComparerCallback,
             Type expectedInternalComparerTypeBeforeCollisionThreshold,
             IEqualityComparer<string> expectedPublicComparerBeforeCollisionThreshold,
-            Type expectedInternalComparerTypeAfterCollisionThreshold)
+            Type expectedInternalComparerTypeAfterCollisionThreshold
+        )
         {
             TCollection collection = collectionFactory();
             List<string> allKeys = new List<string>();
@@ -204,14 +248,26 @@ namespace System.Collections.Tests
                 allKeys.Add(newKey);
             }
 
-            FieldInfo internalComparerField = collection.GetType().GetField("_comparer", BindingFlags.NonPublic | BindingFlags.Instance);
+            FieldInfo internalComparerField = collection
+                .GetType()
+                .GetField("_comparer", BindingFlags.NonPublic | BindingFlags.Instance);
             Assert.NotNull(internalComparerField);
 
-            IEqualityComparer<string> actualInternalComparerBeforeCollisionThreshold = (IEqualityComparer<string>)internalComparerField.GetValue(collection);
-            ValidateBehaviorOfInternalComparerVsPublicComparer(actualInternalComparerBeforeCollisionThreshold, expectedPublicComparerBeforeCollisionThreshold);
+            IEqualityComparer<string> actualInternalComparerBeforeCollisionThreshold =
+                (IEqualityComparer<string>)internalComparerField.GetValue(collection);
+            ValidateBehaviorOfInternalComparerVsPublicComparer(
+                actualInternalComparerBeforeCollisionThreshold,
+                expectedPublicComparerBeforeCollisionThreshold
+            );
 
-            Assert.Equal(expectedInternalComparerTypeBeforeCollisionThreshold, actualInternalComparerBeforeCollisionThreshold?.GetType());
-            Assert.Equal(expectedPublicComparerBeforeCollisionThreshold, getComparerCallback(collection));
+            Assert.Equal(
+                expectedInternalComparerTypeBeforeCollisionThreshold,
+                actualInternalComparerBeforeCollisionThreshold?.GetType()
+            );
+            Assert.Equal(
+                expectedPublicComparerBeforeCollisionThreshold,
+                getComparerCallback(collection)
+            );
 
             // Now exceed the collision threshold, which should rebucket entries.
             // Continue adding a few more entries to ensure we didn't corrupt internal state.
@@ -220,17 +276,30 @@ namespace System.Collections.Tests
             {
                 string newKey = _collidingStrings[i];
                 Assert.Equal(0, _lazyGetNonRandomizedHashCodeDel.Value(newKey)); // ensure has a zero hash code Ordinal
-                Assert.Equal(0x24716ca0, _lazyGetNonRandomizedOrdinalIgnoreCaseHashCodeDel.Value(newKey)); // ensure has a zero hash code OrdinalIgnoreCase
+                Assert.Equal(
+                    0x24716ca0,
+                    _lazyGetNonRandomizedOrdinalIgnoreCaseHashCodeDel.Value(newKey)
+                ); // ensure has a zero hash code OrdinalIgnoreCase
 
                 addKeyCallback(collection, newKey);
                 allKeys.Add(newKey);
             }
 
-            IEqualityComparer<string> actualInternalComparerAfterCollisionThreshold = (IEqualityComparer<string>)internalComparerField.GetValue(collection);
-            ValidateBehaviorOfInternalComparerVsPublicComparer(actualInternalComparerAfterCollisionThreshold, expectedPublicComparerBeforeCollisionThreshold);
+            IEqualityComparer<string> actualInternalComparerAfterCollisionThreshold =
+                (IEqualityComparer<string>)internalComparerField.GetValue(collection);
+            ValidateBehaviorOfInternalComparerVsPublicComparer(
+                actualInternalComparerAfterCollisionThreshold,
+                expectedPublicComparerBeforeCollisionThreshold
+            );
 
-            Assert.Equal(expectedInternalComparerTypeAfterCollisionThreshold, actualInternalComparerAfterCollisionThreshold?.GetType());
-            Assert.Equal(expectedPublicComparerBeforeCollisionThreshold, getComparerCallback(collection)); // shouldn't change this return value after collision threshold met
+            Assert.Equal(
+                expectedInternalComparerTypeAfterCollisionThreshold,
+                actualInternalComparerAfterCollisionThreshold?.GetType()
+            );
+            Assert.Equal(
+                expectedPublicComparerBeforeCollisionThreshold,
+                getComparerCallback(collection)
+            ); // shouldn't change this return value after collision threshold met
 
             // And validate that all strings are present in the dictionary.
 
@@ -242,18 +311,24 @@ namespace System.Collections.Tests
             // Also make sure we didn't accidentally put the internal comparer in the serialized object data.
 
             collection = collectionFactory();
-            SerializationInfo si = new SerializationInfo(collection.GetType(), new FormatterConverter());
+            SerializationInfo si = new SerializationInfo(
+                collection.GetType(),
+                new FormatterConverter()
+            );
             ((ISerializable)collection).GetObjectData(si, new StreamingContext());
 
             object serializedComparer = si.GetValue("Comparer", typeof(IEqualityComparer<string>));
             Assert.Equal(expectedPublicComparerBeforeCollisionThreshold, serializedComparer);
         }
 
-        private static Lazy<Func<string, int>> _lazyGetNonRandomizedHashCodeDel = new Lazy<Func<string, int>>(
-            () => GetStringHashCodeOpenDelegate("GetNonRandomizedHashCode"));
+        private static Lazy<Func<string, int>> _lazyGetNonRandomizedHashCodeDel = new Lazy<
+            Func<string, int>
+        >(() => GetStringHashCodeOpenDelegate("GetNonRandomizedHashCode"));
 
-        private static Lazy<Func<string, int>> _lazyGetNonRandomizedOrdinalIgnoreCaseHashCodeDel = new Lazy<Func<string, int>>(
-            () => GetStringHashCodeOpenDelegate("GetNonRandomizedHashCodeOrdinalIgnoreCase"));
+        private static Lazy<Func<string, int>> _lazyGetNonRandomizedOrdinalIgnoreCaseHashCodeDel =
+            new Lazy<Func<string, int>>(
+                () => GetStringHashCodeOpenDelegate("GetNonRandomizedHashCodeOrdinalIgnoreCase")
+            );
 
         // n.b., must be initialized *after* delegate fields above
         private static readonly List<string> _collidingStrings = GenerateCollidingStrings(110);
@@ -270,7 +345,9 @@ namespace System.Collections.Tests
             {
                 if (currentSeed > ushort.MaxValue)
                 {
-                    throw new Exception($"Couldn't create enough colliding strings? Created {collidingStrings.Count}, needed {count}.");
+                    throw new Exception(
+                        $"Couldn't create enough colliding strings? Created {collidingStrings.Count}, needed {count}."
+                    );
                 }
 
                 string candidate = GenerateCollidingStringCandidate(currentSeed);
@@ -278,7 +355,8 @@ namespace System.Collections.Tests
                 int ordinalHashCode = _lazyGetNonRandomizedHashCodeDel.Value(candidate);
                 Assert.Equal(0, ordinalHashCode); // ensure has a zero hash code Ordinal
 
-                int ordinalIgnoreCaseHashCode = _lazyGetNonRandomizedOrdinalIgnoreCaseHashCodeDel.Value(candidate);
+                int ordinalIgnoreCaseHashCode =
+                    _lazyGetNonRandomizedOrdinalIgnoreCaseHashCodeDel.Value(candidate);
                 if (ordinalIgnoreCaseHashCode == 0x24716ca0) // ensure has a zero hash code OrdinalIgnoreCase (might not have one)
                 {
                     collidingStrings.Add(candidate); // success!
@@ -296,33 +374,43 @@ namespace System.Collections.Tests
             // Caller must check OrdinalIgnoreCase hash code to ensure correctness.
             static string GenerateCollidingStringCandidate(int seed)
             {
-                return string.Create(8, seed, (span, seed) =>
-                {
-                    Span<byte> asBytes = MemoryMarshal.AsBytes(span);
+                return string.Create(
+                    8,
+                    seed,
+                    (span, seed) =>
+                    {
+                        Span<byte> asBytes = MemoryMarshal.AsBytes(span);
 
-                    uint hash1 = (5381 << 16) + 5381;
-                    uint hash2 = BitOperations.RotateLeft(hash1, 5) + hash1;
+                        uint hash1 = (5381 << 16) + 5381;
+                        uint hash2 = BitOperations.RotateLeft(hash1, 5) + hash1;
 
-                    MemoryMarshal.Write(asBytes, in seed);
-                    MemoryMarshal.Write(asBytes.Slice(4), in hash2); // set hash2 := 0 (for Ordinal)
+                        MemoryMarshal.Write(asBytes, in seed);
+                        MemoryMarshal.Write(asBytes.Slice(4), in hash2); // set hash2 := 0 (for Ordinal)
 
-                    hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1) ^ (uint)seed;
-                    hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1);
+                        hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1) ^ (uint)seed;
+                        hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1);
 
-                    MemoryMarshal.Write(asBytes.Slice(8), in hash1); // set hash1 := 0 (for Ordinal)
-                });
+                        MemoryMarshal.Write(asBytes.Slice(8), in hash1); // set hash1 := 0 (for Ordinal)
+                    }
+                );
             }
         }
 
         private static Func<string, int> GetStringHashCodeOpenDelegate(string methodName)
         {
-            MethodInfo method = typeof(string).GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic);
+            MethodInfo method = typeof(string).GetMethod(
+                methodName,
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             Assert.NotNull(method);
 
             return method.CreateDelegate<Func<string, int>>(target: null); // create open delegate unbound to 'this'
         }
 
-        private static void ValidateBehaviorOfInternalComparerVsPublicComparer(IEqualityComparer<string> internalComparer, IEqualityComparer<string> publicComparer)
+        private static void ValidateBehaviorOfInternalComparerVsPublicComparer(
+            IEqualityComparer<string> internalComparer,
+            IEqualityComparer<string> publicComparer
+        )
         {
             // This helper ensures that when we substitute one of our internal comparers
             // in place of the expected public comparer, the internal comparer's Equals
@@ -337,19 +425,30 @@ namespace System.Collections.Tests
                 publicComparer = EqualityComparer<string>.Default;
             }
 
-            foreach (var pair in new[] {
-                ("Hello", "Hello"), // exactly equal
-                ("Hello", "Goodbye"), // not equal at all
-                ("Hello", "hello"), // case-insensitive equal
-                ("Hello", "He\u200dllo"), // equal under linguistic comparer
-                ("Hello", "HE\u200dLLO"), // equal under case-insensitive linguistic comparer
-                ("\u0430\u0431\u0432\u0433\u0434\u0435\u0451\u0436\u0437\u0438\u0439\u043A\u043B\u043C\u043D\u043E\u043F\u0440\u0441\u0442\u0443\u0444\u0445\u0446\u0447\u0448\u0449\u044C\u044B\u044A\u044D\u044E\u044F", "\u0410\u0411\u0412\u0413\u0414\u0415\u0401\u0416\u0417\u0418\u0419\u041A\u041B\u041C\u041D\u041E\u041F\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0427\u0428\u0429\u042C\u042B\u042A\u042D\u042E\u042F"), // Cyrillic, case-insensitive equal
-            })
+            foreach (
+                var pair in new[]
+                {
+                    ("Hello", "Hello"), // exactly equal
+                    ("Hello", "Goodbye"), // not equal at all
+                    ("Hello", "hello"), // case-insensitive equal
+                    ("Hello", "He\u200dllo"), // equal under linguistic comparer
+                    ("Hello", "HE\u200dLLO"), // equal under case-insensitive linguistic comparer
+                    (
+                        "\u0430\u0431\u0432\u0433\u0434\u0435\u0451\u0436\u0437\u0438\u0439\u043A\u043B\u043C\u043D\u043E\u043F\u0440\u0441\u0442\u0443\u0444\u0445\u0446\u0447\u0448\u0449\u044C\u044B\u044A\u044D\u044E\u044F",
+                        "\u0410\u0411\u0412\u0413\u0414\u0415\u0401\u0416\u0417\u0418\u0419\u041A\u041B\u041C\u041D\u041E\u041F\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0427\u0428\u0429\u042C\u042B\u042A\u042D\u042E\u042F"
+                    ), // Cyrillic, case-insensitive equal
+                }
+            )
             {
                 bool arePairElementsExpectedEqual = publicComparer.Equals(pair.Item1, pair.Item2);
-                Assert.Equal(arePairElementsExpectedEqual, internalComparer.Equals(pair.Item1, pair.Item2));
+                Assert.Equal(
+                    arePairElementsExpectedEqual,
+                    internalComparer.Equals(pair.Item1, pair.Item2)
+                );
 
-                bool areInternalHashCodesEqual = internalComparer.GetHashCode(pair.Item1) == internalComparer.GetHashCode(pair.Item2);
+                bool areInternalHashCodesEqual =
+                    internalComparer.GetHashCode(pair.Item1)
+                    == internalComparer.GetHashCode(pair.Item2);
                 if (arePairElementsExpectedEqual)
                 {
                     Assert.True(areInternalHashCodesEqual);

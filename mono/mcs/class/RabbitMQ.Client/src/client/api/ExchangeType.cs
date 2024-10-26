@@ -70,22 +70,20 @@ namespace RabbitMQ.Client
     {
         ///<summary>Exchange type used for AMQP fanout exchanges.</summary>
         public const string Fanout = "fanout";
+
         ///<summary>Exchange type used for AMQP direct exchanges.</summary>
         public const string Direct = "direct";
+
         ///<summary>Exchange type used for AMQP topic exchanges.</summary>
         public const string Topic = "topic";
 
         ///<summary>Private constructor - this class has no instances</summary>
-        private ExchangeType() {}
+        private ExchangeType() { }
 
         ///<summary>Retrieve a collection containing all defined exchange types.</summary>
         public static ICollection All()
         {
-            return new string[] {
-                Fanout,
-                Direct,
-                Topic
-            };
+            return new string[] { Fanout, Direct, Topic };
         }
     }
 }

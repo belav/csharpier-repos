@@ -27,7 +27,11 @@ namespace Microsoft.CodeAnalysis.Telemetry
                 LogDelta = logDelta;
             }
 
-            public static new Implementation Create(TelemetrySession session, bool logDelta, IAsynchronousOperationListenerProvider asyncListenerProvider)
+            public static new Implementation Create(
+                TelemetrySession session,
+                bool logDelta,
+                IAsynchronousOperationListenerProvider asyncListenerProvider
+            )
             {
                 var logger = new Implementation(session, logDelta);
                 var asyncListener = asyncListenerProvider.GetListener(FeatureAttribute.Telemetry);
@@ -41,26 +45,25 @@ namespace Microsoft.CodeAnalysis.Telemetry
 
             protected override bool LogDelta { get; }
 
-            public override bool IsEnabled(FunctionId functionId)
-                => _session.IsOptedIn;
+            public override bool IsEnabled(FunctionId functionId) => _session.IsOptedIn;
 
-            protected override void PostEvent(TelemetryEvent telemetryEvent)
-                => _session.PostEvent(telemetryEvent);
+            protected override void PostEvent(TelemetryEvent telemetryEvent) =>
+                _session.PostEvent(telemetryEvent);
 
-            protected override object Start(string eventName, LogType type)
-                => type switch
+            protected override object Start(string eventName, LogType type) =>
+                type switch
                 {
                     LogType.Trace => _session.StartOperation(eventName),
                     LogType.UserAction => _session.StartUserTask(eventName),
                     _ => throw ExceptionUtilities.UnexpectedValue(type),
                 };
 
-            protected override TelemetryEvent GetEndEvent(object scope)
-                => scope switch
+            protected override TelemetryEvent GetEndEvent(object scope) =>
+                scope switch
                 {
                     TelemetryScope<OperationEvent> operation => operation.EndEvent,
                     TelemetryScope<UserTaskEvent> userTask => userTask.EndEvent,
-                    _ => throw ExceptionUtilities.UnexpectedValue(scope)
+                    _ => throw ExceptionUtilities.UnexpectedValue(scope),
                 };
 
             protected override void End(object scope, TelemetryResult result)
@@ -74,29 +77,43 @@ namespace Microsoft.CodeAnalysis.Telemetry
             }
         }
 
-        private readonly ConcurrentDictionary<int, object> _pendingScopes = new(concurrencyLevel: 2, capacity: 10);
+        private readonly ConcurrentDictionary<int, object> _pendingScopes =
+            new(concurrencyLevel: 2, capacity: 10);
 
         private const string EventPrefix = "vs/ide/vbcs/";
         private const string PropertyPrefix = "vs.ide.vbcs.";
 
-        // these don't have concurrency limit on purpose to reduce chance of lock contention. 
+        // these don't have concurrency limit on purpose to reduce chance of lock contention.
         // if that becomes a problem - by showing up in our perf investigation, then we will consider adding concurrency limit.
         private static readonly ConcurrentDictionary<FunctionId, string> s_eventMap = new();
-        private static readonly ConcurrentDictionary<(FunctionId id, string name), string> s_propertyMap = new();
+        private static readonly ConcurrentDictionary<
+            (FunctionId id, string name),
+            string
+        > s_propertyMap = new();
 
         protected abstract bool LogDelta { get; }
 
-        internal static string GetEventName(FunctionId id)
-             => s_eventMap.GetOrAdd(id, id => EventPrefix + GetTelemetryName(id, separator: '/'));
+        internal static string GetEventName(FunctionId id) =>
+            s_eventMap.GetOrAdd(id, id => EventPrefix + GetTelemetryName(id, separator: '/'));
 
-        internal static string GetPropertyName(FunctionId id, string name)
-            => s_propertyMap.GetOrAdd((id, name), key => PropertyPrefix + GetTelemetryName(id, separator: '.') + "." + key.name.ToLowerInvariant());
+        internal static string GetPropertyName(FunctionId id, string name) =>
+            s_propertyMap.GetOrAdd(
+                (id, name),
+                key =>
+                    PropertyPrefix
+                    + GetTelemetryName(id, separator: '.')
+                    + "."
+                    + key.name.ToLowerInvariant()
+            );
 
-        private static string GetTelemetryName(FunctionId id, char separator)
-            => Enum.GetName(typeof(FunctionId), id)!.Replace('_', separator).ToLowerInvariant();
+        private static string GetTelemetryName(FunctionId id, char separator) =>
+            Enum.GetName(typeof(FunctionId), id)!.Replace('_', separator).ToLowerInvariant();
 
-        public static TelemetryLogger Create(TelemetrySession session, bool logDelta, IAsynchronousOperationListenerProvider asyncListenerProvider)
-            => Implementation.Create(session, logDelta, asyncListenerProvider);
+        public static TelemetryLogger Create(
+            TelemetrySession session,
+            bool logDelta,
+            IAsynchronousOperationListenerProvider asyncListenerProvider
+        ) => Implementation.Create(session, logDelta, asyncListenerProvider);
 
         public abstract bool IsEnabled(FunctionId functionId);
         protected abstract void PostEvent(TelemetryEvent telemetryEvent);
@@ -118,12 +135,15 @@ namespace Microsoft.CodeAnalysis.Telemetry
             {
                 PostEvent(telemetryEvent);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        public void LogBlockStart(FunctionId functionId, LogMessage logMessage, int blockId, CancellationToken cancellationToken)
+        public void LogBlockStart(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int blockId,
+            CancellationToken cancellationToken
+        )
         {
             if (IgnoreMessage(logMessage))
             {
@@ -137,12 +157,16 @@ namespace Microsoft.CodeAnalysis.Telemetry
             {
                 _pendingScopes[blockId] = Start(eventName, kind);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        public void LogBlockEnd(FunctionId functionId, LogMessage logMessage, int blockId, int delta, CancellationToken cancellationToken)
+        public void LogBlockEnd(
+            FunctionId functionId,
+            LogMessage logMessage,
+            int blockId,
+            int delta,
+            CancellationToken cancellationToken
+        )
         {
             if (IgnoreMessage(logMessage))
             {
@@ -154,30 +178,35 @@ namespace Microsoft.CodeAnalysis.Telemetry
             var endEvent = GetEndEvent(scope);
             SetProperties(endEvent, functionId, logMessage, LogDelta ? delta : null);
 
-            var result = cancellationToken.IsCancellationRequested ? TelemetryResult.UserCancel : TelemetryResult.Success;
+            var result = cancellationToken.IsCancellationRequested
+                ? TelemetryResult.UserCancel
+                : TelemetryResult.Success;
 
             try
             {
                 End(scope, result);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        private static bool IgnoreMessage(LogMessage logMessage)
-            => logMessage.LogLevel < LogLevel.Information;
+        private static bool IgnoreMessage(LogMessage logMessage) =>
+            logMessage.LogLevel < LogLevel.Information;
 
-        private static LogType GetKind(LogMessage logMessage)
-            => logMessage is KeyValueLogMessage kvLogMessage
-                                ? kvLogMessage.Kind
-                                : logMessage.LogLevel switch
-                                {
-                                    >= LogLevel.Information => LogType.UserAction,
-                                    _ => LogType.Trace
-                                };
+        private static LogType GetKind(LogMessage logMessage) =>
+            logMessage is KeyValueLogMessage kvLogMessage
+                ? kvLogMessage.Kind
+                : logMessage.LogLevel switch
+                {
+                    >= LogLevel.Information => LogType.UserAction,
+                    _ => LogType.Trace,
+                };
 
-        private static void SetProperties(TelemetryEvent telemetryEvent, FunctionId functionId, LogMessage logMessage, int? delta = null)
+        private static void SetProperties(
+            TelemetryEvent telemetryEvent,
+            FunctionId functionId,
+            LogMessage logMessage,
+            int? delta = null
+        )
         {
             if (logMessage is KeyValueLogMessage kvLogMessage)
             {
@@ -200,21 +229,32 @@ namespace Microsoft.CodeAnalysis.Telemetry
             }
         }
 
-        private static void AppendProperties(TelemetryEvent telemetryEvent, FunctionId functionId, KeyValueLogMessage logMessage)
+        private static void AppendProperties(
+            TelemetryEvent telemetryEvent,
+            FunctionId functionId,
+            KeyValueLogMessage logMessage
+        )
         {
             foreach (var (name, value) in logMessage.Properties)
             {
                 // call SetProperty. VS telemetry will take care of finding correct
                 // API based on given object type for us.
-                // 
+                //
                 // numeric data will show up in ES with measurement prefix.
 
-                telemetryEvent.Properties.Add(GetPropertyName(functionId, name), value switch
-                {
-                    PiiValue pii => new TelemetryPiiProperty(pii.Value),
-                    IEnumerable<object> items => new TelemetryComplexProperty(items.Select(item => (item is PiiValue pii) ? new TelemetryPiiProperty(pii.Value) : item)),
-                    _ => value
-                });
+                telemetryEvent.Properties.Add(
+                    GetPropertyName(functionId, name),
+                    value switch
+                    {
+                        PiiValue pii => new TelemetryPiiProperty(pii.Value),
+                        IEnumerable<object> items => new TelemetryComplexProperty(
+                            items.Select(item =>
+                                (item is PiiValue pii) ? new TelemetryPiiProperty(pii.Value) : item
+                            )
+                        ),
+                        _ => value,
+                    }
+                );
             }
         }
     }

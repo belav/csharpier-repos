@@ -8,6 +8,7 @@ op1 and op2 can be static, local, class/struct member, function retval, 1D/2D/3D
 
 using System;
 using Xunit;
+
 public class r4rem
 {
     private static float s_f_s_op1 = 9;
@@ -26,6 +27,7 @@ public class r4rem
         else
             return 6;
     }
+
     public static uint ui_f(String s)
     {
         if (s == "op1")
@@ -33,6 +35,7 @@ public class r4rem
         else
             return 6;
     }
+
     public static long l_f(String s)
     {
         if (s == "op1")
@@ -40,6 +43,7 @@ public class r4rem
         else
             return 6;
     }
+
     public static ulong ul_f(String s)
     {
         if (s == "op1")
@@ -47,6 +51,7 @@ public class r4rem
         else
             return 6;
     }
+
     public static float f_f(String s)
     {
         if (s == "op1")
@@ -54,6 +59,7 @@ public class r4rem
         else
             return 6;
     }
+
     public static double d_f(String s)
     {
         if (s == "op1")
@@ -61,6 +67,7 @@ public class r4rem
         else
             return 6;
     }
+
     public static decimal m_f(String s)
     {
         if (s == "op1")
@@ -68,6 +75,7 @@ public class r4rem
         else
             return 6;
     }
+
     private class CL
     {
         public float f_cl_op1 = 9;
@@ -110,32 +118,116 @@ public class r4rem
         vt1.m_vt_op2 = 6;
 
         float[] f_arr1d_op1 = { 0, 9 };
-        float[,] f_arr2d_op1 = { { 0, 9 }, { 1, 1 } };
-        float[,,] f_arr3d_op1 = { { { 0, 9 }, { 1, 1 } } };
+        float[,] f_arr2d_op1 =
+        {
+            { 0, 9 },
+            { 1, 1 },
+        };
+        float[,,] f_arr3d_op1 =
+        {
+            {
+                { 0, 9 },
+                { 1, 1 },
+            },
+        };
 
         int[] i_arr1d_op2 = { 6, 0, 1 };
-        int[,] i_arr2d_op2 = { { 0, 6 }, { 1, 1 } };
-        int[,,] i_arr3d_op2 = { { { 0, 6 }, { 1, 1 } } };
+        int[,] i_arr2d_op2 =
+        {
+            { 0, 6 },
+            { 1, 1 },
+        };
+        int[,,] i_arr3d_op2 =
+        {
+            {
+                { 0, 6 },
+                { 1, 1 },
+            },
+        };
         uint[] ui_arr1d_op2 = { 6, 0, 1 };
-        uint[,] ui_arr2d_op2 = { { 0, 6 }, { 1, 1 } };
-        uint[,,] ui_arr3d_op2 = { { { 0, 6 }, { 1, 1 } } };
+        uint[,] ui_arr2d_op2 =
+        {
+            { 0, 6 },
+            { 1, 1 },
+        };
+        uint[,,] ui_arr3d_op2 =
+        {
+            {
+                { 0, 6 },
+                { 1, 1 },
+            },
+        };
         long[] l_arr1d_op2 = { 6, 0, 1 };
-        long[,] l_arr2d_op2 = { { 0, 6 }, { 1, 1 } };
-        long[,,] l_arr3d_op2 = { { { 0, 6 }, { 1, 1 } } };
+        long[,] l_arr2d_op2 =
+        {
+            { 0, 6 },
+            { 1, 1 },
+        };
+        long[,,] l_arr3d_op2 =
+        {
+            {
+                { 0, 6 },
+                { 1, 1 },
+            },
+        };
         ulong[] ul_arr1d_op2 = { 6, 0, 1 };
-        ulong[,] ul_arr2d_op2 = { { 0, 6 }, { 1, 1 } };
-        ulong[,,] ul_arr3d_op2 = { { { 0, 6 }, { 1, 1 } } };
+        ulong[,] ul_arr2d_op2 =
+        {
+            { 0, 6 },
+            { 1, 1 },
+        };
+        ulong[,,] ul_arr3d_op2 =
+        {
+            {
+                { 0, 6 },
+                { 1, 1 },
+            },
+        };
         float[] f_arr1d_op2 = { 6, 0, 1 };
-        float[,] f_arr2d_op2 = { { 0, 6 }, { 1, 1 } };
-        float[,,] f_arr3d_op2 = { { { 0, 6 }, { 1, 1 } } };
+        float[,] f_arr2d_op2 =
+        {
+            { 0, 6 },
+            { 1, 1 },
+        };
+        float[,,] f_arr3d_op2 =
+        {
+            {
+                { 0, 6 },
+                { 1, 1 },
+            },
+        };
         double[] d_arr1d_op2 = { 6, 0, 1 };
-        double[,] d_arr2d_op2 = { { 0, 6 }, { 1, 1 } };
-        double[,,] d_arr3d_op2 = { { { 0, 6 }, { 1, 1 } } };
+        double[,] d_arr2d_op2 =
+        {
+            { 0, 6 },
+            { 1, 1 },
+        };
+        double[,,] d_arr3d_op2 =
+        {
+            {
+                { 0, 6 },
+                { 1, 1 },
+            },
+        };
         decimal[] m_arr1d_op2 = { 6, 0, 1 };
-        decimal[,] m_arr2d_op2 = { { 0, 6 }, { 1, 1 } };
-        decimal[,,] m_arr3d_op2 = { { { 0, 6 }, { 1, 1 } } };
+        decimal[,] m_arr2d_op2 =
+        {
+            { 0, 6 },
+            { 1, 1 },
+        };
+        decimal[,,] m_arr3d_op2 =
+        {
+            {
+                { 0, 6 },
+                { 1, 1 },
+            },
+        };
 
-        int[,] index = { { 0, 0 }, { 1, 1 } };
+        int[,] index =
+        {
+            { 0, 0 },
+            { 1, 1 },
+        };
 
         {
             float f_l_op1 = 9;
@@ -146,322 +238,1537 @@ public class r4rem
             float f_l_op2 = 6;
             double d_l_op2 = 6;
             decimal m_l_op2 = 6;
-            if ((f_l_op1 % i_l_op2 != f_l_op1 % ui_l_op2) || (f_l_op1 % ui_l_op2 != f_l_op1 % l_l_op2) || (f_l_op1 % l_l_op2 != f_l_op1 % ul_l_op2) || (f_l_op1 % ul_l_op2 != f_l_op1 % f_l_op2) || (f_l_op1 % f_l_op2 != f_l_op1 % d_l_op2) || (f_l_op1 % d_l_op2 != f_l_op1 % (float)m_l_op2) || (f_l_op1 % (float)m_l_op2 != f_l_op1 % i_l_op2) || (f_l_op1 % i_l_op2 != 3))
+            if (
+                (f_l_op1 % i_l_op2 != f_l_op1 % ui_l_op2)
+                || (f_l_op1 % ui_l_op2 != f_l_op1 % l_l_op2)
+                || (f_l_op1 % l_l_op2 != f_l_op1 % ul_l_op2)
+                || (f_l_op1 % ul_l_op2 != f_l_op1 % f_l_op2)
+                || (f_l_op1 % f_l_op2 != f_l_op1 % d_l_op2)
+                || (f_l_op1 % d_l_op2 != f_l_op1 % (float)m_l_op2)
+                || (f_l_op1 % (float)m_l_op2 != f_l_op1 % i_l_op2)
+                || (f_l_op1 % i_l_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 1 failed");
                 passed = false;
             }
-            if ((f_l_op1 % s_i_s_op2 != f_l_op1 % s_ui_s_op2) || (f_l_op1 % s_ui_s_op2 != f_l_op1 % s_l_s_op2) || (f_l_op1 % s_l_s_op2 != f_l_op1 % s_ul_s_op2) || (f_l_op1 % s_ul_s_op2 != f_l_op1 % s_f_s_op2) || (f_l_op1 % s_f_s_op2 != f_l_op1 % s_d_s_op2) || (f_l_op1 % s_d_s_op2 != f_l_op1 % (float)s_m_s_op2) || (f_l_op1 % (float)s_m_s_op2 != f_l_op1 % s_i_s_op2) || (f_l_op1 % s_i_s_op2 != 3))
+            if (
+                (f_l_op1 % s_i_s_op2 != f_l_op1 % s_ui_s_op2)
+                || (f_l_op1 % s_ui_s_op2 != f_l_op1 % s_l_s_op2)
+                || (f_l_op1 % s_l_s_op2 != f_l_op1 % s_ul_s_op2)
+                || (f_l_op1 % s_ul_s_op2 != f_l_op1 % s_f_s_op2)
+                || (f_l_op1 % s_f_s_op2 != f_l_op1 % s_d_s_op2)
+                || (f_l_op1 % s_d_s_op2 != f_l_op1 % (float)s_m_s_op2)
+                || (f_l_op1 % (float)s_m_s_op2 != f_l_op1 % s_i_s_op2)
+                || (f_l_op1 % s_i_s_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 2 failed");
                 passed = false;
             }
-            if ((f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2")) || (f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2")) || (f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2")) || (f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2")) || (f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2")) || (f_l_op1 % f_f("op2") != f_l_op1 % (float)f_f("op2")) || (f_l_op1 % (float)f_f("op2") != f_l_op1 % f_f("op2")) || (f_l_op1 % f_f("op2") != 3))
+            if (
+                (f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2"))
+                || (f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2"))
+                || (f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2"))
+                || (f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2"))
+                || (f_l_op1 % f_f("op2") != f_l_op1 % f_f("op2"))
+                || (f_l_op1 % f_f("op2") != f_l_op1 % (float)f_f("op2"))
+                || (f_l_op1 % (float)f_f("op2") != f_l_op1 % f_f("op2"))
+                || (f_l_op1 % f_f("op2") != 3)
+            )
             {
                 Console.WriteLine("testcase 3 failed");
                 passed = false;
             }
-            if ((f_l_op1 % cl1.i_cl_op2 != f_l_op1 % cl1.ui_cl_op2) || (f_l_op1 % cl1.ui_cl_op2 != f_l_op1 % cl1.l_cl_op2) || (f_l_op1 % cl1.l_cl_op2 != f_l_op1 % cl1.ul_cl_op2) || (f_l_op1 % cl1.ul_cl_op2 != f_l_op1 % cl1.f_cl_op2) || (f_l_op1 % cl1.f_cl_op2 != f_l_op1 % cl1.d_cl_op2) || (f_l_op1 % cl1.d_cl_op2 != f_l_op1 % (float)cl1.m_cl_op2) || (f_l_op1 % (float)cl1.m_cl_op2 != f_l_op1 % cl1.i_cl_op2) || (f_l_op1 % cl1.i_cl_op2 != 3))
+            if (
+                (f_l_op1 % cl1.i_cl_op2 != f_l_op1 % cl1.ui_cl_op2)
+                || (f_l_op1 % cl1.ui_cl_op2 != f_l_op1 % cl1.l_cl_op2)
+                || (f_l_op1 % cl1.l_cl_op2 != f_l_op1 % cl1.ul_cl_op2)
+                || (f_l_op1 % cl1.ul_cl_op2 != f_l_op1 % cl1.f_cl_op2)
+                || (f_l_op1 % cl1.f_cl_op2 != f_l_op1 % cl1.d_cl_op2)
+                || (f_l_op1 % cl1.d_cl_op2 != f_l_op1 % (float)cl1.m_cl_op2)
+                || (f_l_op1 % (float)cl1.m_cl_op2 != f_l_op1 % cl1.i_cl_op2)
+                || (f_l_op1 % cl1.i_cl_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 4 failed");
                 passed = false;
             }
-            if ((f_l_op1 % vt1.i_vt_op2 != f_l_op1 % vt1.ui_vt_op2) || (f_l_op1 % vt1.ui_vt_op2 != f_l_op1 % vt1.l_vt_op2) || (f_l_op1 % vt1.l_vt_op2 != f_l_op1 % vt1.ul_vt_op2) || (f_l_op1 % vt1.ul_vt_op2 != f_l_op1 % vt1.f_vt_op2) || (f_l_op1 % vt1.f_vt_op2 != f_l_op1 % vt1.d_vt_op2) || (f_l_op1 % vt1.d_vt_op2 != f_l_op1 % (float)vt1.m_vt_op2) || (f_l_op1 % (float)vt1.m_vt_op2 != f_l_op1 % vt1.i_vt_op2) || (f_l_op1 % vt1.i_vt_op2 != 3))
+            if (
+                (f_l_op1 % vt1.i_vt_op2 != f_l_op1 % vt1.ui_vt_op2)
+                || (f_l_op1 % vt1.ui_vt_op2 != f_l_op1 % vt1.l_vt_op2)
+                || (f_l_op1 % vt1.l_vt_op2 != f_l_op1 % vt1.ul_vt_op2)
+                || (f_l_op1 % vt1.ul_vt_op2 != f_l_op1 % vt1.f_vt_op2)
+                || (f_l_op1 % vt1.f_vt_op2 != f_l_op1 % vt1.d_vt_op2)
+                || (f_l_op1 % vt1.d_vt_op2 != f_l_op1 % (float)vt1.m_vt_op2)
+                || (f_l_op1 % (float)vt1.m_vt_op2 != f_l_op1 % vt1.i_vt_op2)
+                || (f_l_op1 % vt1.i_vt_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 5 failed");
                 passed = false;
             }
-            if ((f_l_op1 % i_arr1d_op2[0] != f_l_op1 % ui_arr1d_op2[0]) || (f_l_op1 % ui_arr1d_op2[0] != f_l_op1 % l_arr1d_op2[0]) || (f_l_op1 % l_arr1d_op2[0] != f_l_op1 % ul_arr1d_op2[0]) || (f_l_op1 % ul_arr1d_op2[0] != f_l_op1 % f_arr1d_op2[0]) || (f_l_op1 % f_arr1d_op2[0] != f_l_op1 % d_arr1d_op2[0]) || (f_l_op1 % d_arr1d_op2[0] != f_l_op1 % (float)m_arr1d_op2[0]) || (f_l_op1 % (float)m_arr1d_op2[0] != f_l_op1 % i_arr1d_op2[0]) || (f_l_op1 % i_arr1d_op2[0] != 3))
+            if (
+                (f_l_op1 % i_arr1d_op2[0] != f_l_op1 % ui_arr1d_op2[0])
+                || (f_l_op1 % ui_arr1d_op2[0] != f_l_op1 % l_arr1d_op2[0])
+                || (f_l_op1 % l_arr1d_op2[0] != f_l_op1 % ul_arr1d_op2[0])
+                || (f_l_op1 % ul_arr1d_op2[0] != f_l_op1 % f_arr1d_op2[0])
+                || (f_l_op1 % f_arr1d_op2[0] != f_l_op1 % d_arr1d_op2[0])
+                || (f_l_op1 % d_arr1d_op2[0] != f_l_op1 % (float)m_arr1d_op2[0])
+                || (f_l_op1 % (float)m_arr1d_op2[0] != f_l_op1 % i_arr1d_op2[0])
+                || (f_l_op1 % i_arr1d_op2[0] != 3)
+            )
             {
                 Console.WriteLine("testcase 6 failed");
                 passed = false;
             }
-            if ((f_l_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != f_l_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]) || (f_l_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]] != f_l_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]) || (f_l_op1 % l_arr2d_op2[index[0, 1], index[1, 0]] != f_l_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]) || (f_l_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]] != f_l_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]) || (f_l_op1 % f_arr2d_op2[index[0, 1], index[1, 0]] != f_l_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]) || (f_l_op1 % d_arr2d_op2[index[0, 1], index[1, 0]] != f_l_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]) || (f_l_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]] != f_l_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]) || (f_l_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != 3))
+            if (
+                (
+                    f_l_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_l_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_l_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_l_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_l_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_l_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_l_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_l_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_l_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_l_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_l_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_l_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_l_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_l_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (f_l_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != 3)
+            )
             {
                 Console.WriteLine("testcase 7 failed");
                 passed = false;
             }
-            if ((f_l_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_l_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_l_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_l_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_l_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_l_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_l_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_l_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_l_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_l_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_l_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_l_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_l_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_l_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_l_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3))
+            if (
+                (
+                    f_l_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_l_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_l_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_l_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_l_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_l_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_l_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_l_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_l_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_l_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_l_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_l_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_l_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_l_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (f_l_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3)
+            )
             {
                 Console.WriteLine("testcase 8 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 % i_l_op2 != s_f_s_op1 % ui_l_op2) || (s_f_s_op1 % ui_l_op2 != s_f_s_op1 % l_l_op2) || (s_f_s_op1 % l_l_op2 != s_f_s_op1 % ul_l_op2) || (s_f_s_op1 % ul_l_op2 != s_f_s_op1 % f_l_op2) || (s_f_s_op1 % f_l_op2 != s_f_s_op1 % d_l_op2) || (s_f_s_op1 % d_l_op2 != s_f_s_op1 % (float)m_l_op2) || (s_f_s_op1 % (float)m_l_op2 != s_f_s_op1 % i_l_op2) || (s_f_s_op1 % i_l_op2 != 3))
+            if (
+                (s_f_s_op1 % i_l_op2 != s_f_s_op1 % ui_l_op2)
+                || (s_f_s_op1 % ui_l_op2 != s_f_s_op1 % l_l_op2)
+                || (s_f_s_op1 % l_l_op2 != s_f_s_op1 % ul_l_op2)
+                || (s_f_s_op1 % ul_l_op2 != s_f_s_op1 % f_l_op2)
+                || (s_f_s_op1 % f_l_op2 != s_f_s_op1 % d_l_op2)
+                || (s_f_s_op1 % d_l_op2 != s_f_s_op1 % (float)m_l_op2)
+                || (s_f_s_op1 % (float)m_l_op2 != s_f_s_op1 % i_l_op2)
+                || (s_f_s_op1 % i_l_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 9 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 % s_i_s_op2 != s_f_s_op1 % s_ui_s_op2) || (s_f_s_op1 % s_ui_s_op2 != s_f_s_op1 % s_l_s_op2) || (s_f_s_op1 % s_l_s_op2 != s_f_s_op1 % s_ul_s_op2) || (s_f_s_op1 % s_ul_s_op2 != s_f_s_op1 % s_f_s_op2) || (s_f_s_op1 % s_f_s_op2 != s_f_s_op1 % s_d_s_op2) || (s_f_s_op1 % s_d_s_op2 != s_f_s_op1 % (float)s_m_s_op2) || (s_f_s_op1 % (float)s_m_s_op2 != s_f_s_op1 % s_i_s_op2) || (s_f_s_op1 % s_i_s_op2 != 3))
+            if (
+                (s_f_s_op1 % s_i_s_op2 != s_f_s_op1 % s_ui_s_op2)
+                || (s_f_s_op1 % s_ui_s_op2 != s_f_s_op1 % s_l_s_op2)
+                || (s_f_s_op1 % s_l_s_op2 != s_f_s_op1 % s_ul_s_op2)
+                || (s_f_s_op1 % s_ul_s_op2 != s_f_s_op1 % s_f_s_op2)
+                || (s_f_s_op1 % s_f_s_op2 != s_f_s_op1 % s_d_s_op2)
+                || (s_f_s_op1 % s_d_s_op2 != s_f_s_op1 % (float)s_m_s_op2)
+                || (s_f_s_op1 % (float)s_m_s_op2 != s_f_s_op1 % s_i_s_op2)
+                || (s_f_s_op1 % s_i_s_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 10 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2")) || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2")) || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2")) || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2")) || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2")) || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % (float)f_f("op2")) || (s_f_s_op1 % (float)f_f("op2") != s_f_s_op1 % f_f("op2")) || (s_f_s_op1 % f_f("op2") != 3))
+            if (
+                (s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2"))
+                || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2"))
+                || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2"))
+                || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2"))
+                || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % f_f("op2"))
+                || (s_f_s_op1 % f_f("op2") != s_f_s_op1 % (float)f_f("op2"))
+                || (s_f_s_op1 % (float)f_f("op2") != s_f_s_op1 % f_f("op2"))
+                || (s_f_s_op1 % f_f("op2") != 3)
+            )
             {
                 Console.WriteLine("testcase 11 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 % cl1.i_cl_op2 != s_f_s_op1 % cl1.ui_cl_op2) || (s_f_s_op1 % cl1.ui_cl_op2 != s_f_s_op1 % cl1.l_cl_op2) || (s_f_s_op1 % cl1.l_cl_op2 != s_f_s_op1 % cl1.ul_cl_op2) || (s_f_s_op1 % cl1.ul_cl_op2 != s_f_s_op1 % cl1.f_cl_op2) || (s_f_s_op1 % cl1.f_cl_op2 != s_f_s_op1 % cl1.d_cl_op2) || (s_f_s_op1 % cl1.d_cl_op2 != s_f_s_op1 % (float)cl1.m_cl_op2) || (s_f_s_op1 % (float)cl1.m_cl_op2 != s_f_s_op1 % cl1.i_cl_op2) || (s_f_s_op1 % cl1.i_cl_op2 != 3))
+            if (
+                (s_f_s_op1 % cl1.i_cl_op2 != s_f_s_op1 % cl1.ui_cl_op2)
+                || (s_f_s_op1 % cl1.ui_cl_op2 != s_f_s_op1 % cl1.l_cl_op2)
+                || (s_f_s_op1 % cl1.l_cl_op2 != s_f_s_op1 % cl1.ul_cl_op2)
+                || (s_f_s_op1 % cl1.ul_cl_op2 != s_f_s_op1 % cl1.f_cl_op2)
+                || (s_f_s_op1 % cl1.f_cl_op2 != s_f_s_op1 % cl1.d_cl_op2)
+                || (s_f_s_op1 % cl1.d_cl_op2 != s_f_s_op1 % (float)cl1.m_cl_op2)
+                || (s_f_s_op1 % (float)cl1.m_cl_op2 != s_f_s_op1 % cl1.i_cl_op2)
+                || (s_f_s_op1 % cl1.i_cl_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 12 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 % vt1.i_vt_op2 != s_f_s_op1 % vt1.ui_vt_op2) || (s_f_s_op1 % vt1.ui_vt_op2 != s_f_s_op1 % vt1.l_vt_op2) || (s_f_s_op1 % vt1.l_vt_op2 != s_f_s_op1 % vt1.ul_vt_op2) || (s_f_s_op1 % vt1.ul_vt_op2 != s_f_s_op1 % vt1.f_vt_op2) || (s_f_s_op1 % vt1.f_vt_op2 != s_f_s_op1 % vt1.d_vt_op2) || (s_f_s_op1 % vt1.d_vt_op2 != s_f_s_op1 % (float)vt1.m_vt_op2) || (s_f_s_op1 % (float)vt1.m_vt_op2 != s_f_s_op1 % vt1.i_vt_op2) || (s_f_s_op1 % vt1.i_vt_op2 != 3))
+            if (
+                (s_f_s_op1 % vt1.i_vt_op2 != s_f_s_op1 % vt1.ui_vt_op2)
+                || (s_f_s_op1 % vt1.ui_vt_op2 != s_f_s_op1 % vt1.l_vt_op2)
+                || (s_f_s_op1 % vt1.l_vt_op2 != s_f_s_op1 % vt1.ul_vt_op2)
+                || (s_f_s_op1 % vt1.ul_vt_op2 != s_f_s_op1 % vt1.f_vt_op2)
+                || (s_f_s_op1 % vt1.f_vt_op2 != s_f_s_op1 % vt1.d_vt_op2)
+                || (s_f_s_op1 % vt1.d_vt_op2 != s_f_s_op1 % (float)vt1.m_vt_op2)
+                || (s_f_s_op1 % (float)vt1.m_vt_op2 != s_f_s_op1 % vt1.i_vt_op2)
+                || (s_f_s_op1 % vt1.i_vt_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 13 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 % i_arr1d_op2[0] != s_f_s_op1 % ui_arr1d_op2[0]) || (s_f_s_op1 % ui_arr1d_op2[0] != s_f_s_op1 % l_arr1d_op2[0]) || (s_f_s_op1 % l_arr1d_op2[0] != s_f_s_op1 % ul_arr1d_op2[0]) || (s_f_s_op1 % ul_arr1d_op2[0] != s_f_s_op1 % f_arr1d_op2[0]) || (s_f_s_op1 % f_arr1d_op2[0] != s_f_s_op1 % d_arr1d_op2[0]) || (s_f_s_op1 % d_arr1d_op2[0] != s_f_s_op1 % (float)m_arr1d_op2[0]) || (s_f_s_op1 % (float)m_arr1d_op2[0] != s_f_s_op1 % i_arr1d_op2[0]) || (s_f_s_op1 % i_arr1d_op2[0] != 3))
+            if (
+                (s_f_s_op1 % i_arr1d_op2[0] != s_f_s_op1 % ui_arr1d_op2[0])
+                || (s_f_s_op1 % ui_arr1d_op2[0] != s_f_s_op1 % l_arr1d_op2[0])
+                || (s_f_s_op1 % l_arr1d_op2[0] != s_f_s_op1 % ul_arr1d_op2[0])
+                || (s_f_s_op1 % ul_arr1d_op2[0] != s_f_s_op1 % f_arr1d_op2[0])
+                || (s_f_s_op1 % f_arr1d_op2[0] != s_f_s_op1 % d_arr1d_op2[0])
+                || (s_f_s_op1 % d_arr1d_op2[0] != s_f_s_op1 % (float)m_arr1d_op2[0])
+                || (s_f_s_op1 % (float)m_arr1d_op2[0] != s_f_s_op1 % i_arr1d_op2[0])
+                || (s_f_s_op1 % i_arr1d_op2[0] != 3)
+            )
             {
                 Console.WriteLine("testcase 14 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != s_f_s_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]) || (s_f_s_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]] != s_f_s_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]) || (s_f_s_op1 % l_arr2d_op2[index[0, 1], index[1, 0]] != s_f_s_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]) || (s_f_s_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]] != s_f_s_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]) || (s_f_s_op1 % f_arr2d_op2[index[0, 1], index[1, 0]] != s_f_s_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]) || (s_f_s_op1 % d_arr2d_op2[index[0, 1], index[1, 0]] != s_f_s_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]) || (s_f_s_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]] != s_f_s_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]) || (s_f_s_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != 3))
+            if (
+                (
+                    s_f_s_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != s_f_s_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    s_f_s_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                    != s_f_s_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    s_f_s_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]
+                    != s_f_s_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    s_f_s_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                    != s_f_s_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    s_f_s_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]
+                    != s_f_s_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    s_f_s_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]
+                    != s_f_s_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    s_f_s_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                    != s_f_s_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (s_f_s_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != 3)
+            )
             {
                 Console.WriteLine("testcase 15 failed");
                 passed = false;
             }
-            if ((s_f_s_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != s_f_s_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (s_f_s_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]] != s_f_s_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (s_f_s_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]] != s_f_s_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (s_f_s_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]] != s_f_s_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (s_f_s_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]] != s_f_s_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (s_f_s_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]] != s_f_s_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (s_f_s_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]] != s_f_s_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (s_f_s_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3))
+            if (
+                (
+                    s_f_s_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != s_f_s_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    s_f_s_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != s_f_s_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    s_f_s_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != s_f_s_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    s_f_s_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != s_f_s_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    s_f_s_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != s_f_s_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    s_f_s_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != s_f_s_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    s_f_s_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != s_f_s_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (s_f_s_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3)
+            )
             {
                 Console.WriteLine("testcase 16 failed");
                 passed = false;
             }
-            if ((f_f("op1") % i_l_op2 != f_f("op1") % ui_l_op2) || (f_f("op1") % ui_l_op2 != f_f("op1") % l_l_op2) || (f_f("op1") % l_l_op2 != f_f("op1") % ul_l_op2) || (f_f("op1") % ul_l_op2 != f_f("op1") % f_l_op2) || (f_f("op1") % f_l_op2 != f_f("op1") % d_l_op2) || (f_f("op1") % d_l_op2 != f_f("op1") % (float)m_l_op2) || (f_f("op1") % (float)m_l_op2 != f_f("op1") % i_l_op2) || (f_f("op1") % i_l_op2 != 3))
+            if (
+                (f_f("op1") % i_l_op2 != f_f("op1") % ui_l_op2)
+                || (f_f("op1") % ui_l_op2 != f_f("op1") % l_l_op2)
+                || (f_f("op1") % l_l_op2 != f_f("op1") % ul_l_op2)
+                || (f_f("op1") % ul_l_op2 != f_f("op1") % f_l_op2)
+                || (f_f("op1") % f_l_op2 != f_f("op1") % d_l_op2)
+                || (f_f("op1") % d_l_op2 != f_f("op1") % (float)m_l_op2)
+                || (f_f("op1") % (float)m_l_op2 != f_f("op1") % i_l_op2)
+                || (f_f("op1") % i_l_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 17 failed");
                 passed = false;
             }
-            if ((f_f("op1") % s_i_s_op2 != f_f("op1") % s_ui_s_op2) || (f_f("op1") % s_ui_s_op2 != f_f("op1") % s_l_s_op2) || (f_f("op1") % s_l_s_op2 != f_f("op1") % s_ul_s_op2) || (f_f("op1") % s_ul_s_op2 != f_f("op1") % s_f_s_op2) || (f_f("op1") % s_f_s_op2 != f_f("op1") % s_d_s_op2) || (f_f("op1") % s_d_s_op2 != f_f("op1") % (float)s_m_s_op2) || (f_f("op1") % (float)s_m_s_op2 != f_f("op1") % s_i_s_op2) || (f_f("op1") % s_i_s_op2 != 3))
+            if (
+                (f_f("op1") % s_i_s_op2 != f_f("op1") % s_ui_s_op2)
+                || (f_f("op1") % s_ui_s_op2 != f_f("op1") % s_l_s_op2)
+                || (f_f("op1") % s_l_s_op2 != f_f("op1") % s_ul_s_op2)
+                || (f_f("op1") % s_ul_s_op2 != f_f("op1") % s_f_s_op2)
+                || (f_f("op1") % s_f_s_op2 != f_f("op1") % s_d_s_op2)
+                || (f_f("op1") % s_d_s_op2 != f_f("op1") % (float)s_m_s_op2)
+                || (f_f("op1") % (float)s_m_s_op2 != f_f("op1") % s_i_s_op2)
+                || (f_f("op1") % s_i_s_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 18 failed");
                 passed = false;
             }
-            if ((f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2")) || (f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2")) || (f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2")) || (f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2")) || (f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2")) || (f_f("op1") % f_f("op2") != f_f("op1") % (float)f_f("op2")) || (f_f("op1") % (float)f_f("op2") != f_f("op1") % f_f("op2")) || (f_f("op1") % f_f("op2") != 3))
+            if (
+                (f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2"))
+                || (f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2"))
+                || (f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2"))
+                || (f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2"))
+                || (f_f("op1") % f_f("op2") != f_f("op1") % f_f("op2"))
+                || (f_f("op1") % f_f("op2") != f_f("op1") % (float)f_f("op2"))
+                || (f_f("op1") % (float)f_f("op2") != f_f("op1") % f_f("op2"))
+                || (f_f("op1") % f_f("op2") != 3)
+            )
             {
                 Console.WriteLine("testcase 19 failed");
                 passed = false;
             }
-            if ((f_f("op1") % cl1.i_cl_op2 != f_f("op1") % cl1.ui_cl_op2) || (f_f("op1") % cl1.ui_cl_op2 != f_f("op1") % cl1.l_cl_op2) || (f_f("op1") % cl1.l_cl_op2 != f_f("op1") % cl1.ul_cl_op2) || (f_f("op1") % cl1.ul_cl_op2 != f_f("op1") % cl1.f_cl_op2) || (f_f("op1") % cl1.f_cl_op2 != f_f("op1") % cl1.d_cl_op2) || (f_f("op1") % cl1.d_cl_op2 != f_f("op1") % (float)cl1.m_cl_op2) || (f_f("op1") % (float)cl1.m_cl_op2 != f_f("op1") % cl1.i_cl_op2) || (f_f("op1") % cl1.i_cl_op2 != 3))
+            if (
+                (f_f("op1") % cl1.i_cl_op2 != f_f("op1") % cl1.ui_cl_op2)
+                || (f_f("op1") % cl1.ui_cl_op2 != f_f("op1") % cl1.l_cl_op2)
+                || (f_f("op1") % cl1.l_cl_op2 != f_f("op1") % cl1.ul_cl_op2)
+                || (f_f("op1") % cl1.ul_cl_op2 != f_f("op1") % cl1.f_cl_op2)
+                || (f_f("op1") % cl1.f_cl_op2 != f_f("op1") % cl1.d_cl_op2)
+                || (f_f("op1") % cl1.d_cl_op2 != f_f("op1") % (float)cl1.m_cl_op2)
+                || (f_f("op1") % (float)cl1.m_cl_op2 != f_f("op1") % cl1.i_cl_op2)
+                || (f_f("op1") % cl1.i_cl_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 20 failed");
                 passed = false;
             }
-            if ((f_f("op1") % vt1.i_vt_op2 != f_f("op1") % vt1.ui_vt_op2) || (f_f("op1") % vt1.ui_vt_op2 != f_f("op1") % vt1.l_vt_op2) || (f_f("op1") % vt1.l_vt_op2 != f_f("op1") % vt1.ul_vt_op2) || (f_f("op1") % vt1.ul_vt_op2 != f_f("op1") % vt1.f_vt_op2) || (f_f("op1") % vt1.f_vt_op2 != f_f("op1") % vt1.d_vt_op2) || (f_f("op1") % vt1.d_vt_op2 != f_f("op1") % (float)vt1.m_vt_op2) || (f_f("op1") % (float)vt1.m_vt_op2 != f_f("op1") % vt1.i_vt_op2) || (f_f("op1") % vt1.i_vt_op2 != 3))
+            if (
+                (f_f("op1") % vt1.i_vt_op2 != f_f("op1") % vt1.ui_vt_op2)
+                || (f_f("op1") % vt1.ui_vt_op2 != f_f("op1") % vt1.l_vt_op2)
+                || (f_f("op1") % vt1.l_vt_op2 != f_f("op1") % vt1.ul_vt_op2)
+                || (f_f("op1") % vt1.ul_vt_op2 != f_f("op1") % vt1.f_vt_op2)
+                || (f_f("op1") % vt1.f_vt_op2 != f_f("op1") % vt1.d_vt_op2)
+                || (f_f("op1") % vt1.d_vt_op2 != f_f("op1") % (float)vt1.m_vt_op2)
+                || (f_f("op1") % (float)vt1.m_vt_op2 != f_f("op1") % vt1.i_vt_op2)
+                || (f_f("op1") % vt1.i_vt_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 21 failed");
                 passed = false;
             }
-            if ((f_f("op1") % i_arr1d_op2[0] != f_f("op1") % ui_arr1d_op2[0]) || (f_f("op1") % ui_arr1d_op2[0] != f_f("op1") % l_arr1d_op2[0]) || (f_f("op1") % l_arr1d_op2[0] != f_f("op1") % ul_arr1d_op2[0]) || (f_f("op1") % ul_arr1d_op2[0] != f_f("op1") % f_arr1d_op2[0]) || (f_f("op1") % f_arr1d_op2[0] != f_f("op1") % d_arr1d_op2[0]) || (f_f("op1") % d_arr1d_op2[0] != f_f("op1") % (float)m_arr1d_op2[0]) || (f_f("op1") % (float)m_arr1d_op2[0] != f_f("op1") % i_arr1d_op2[0]) || (f_f("op1") % i_arr1d_op2[0] != 3))
+            if (
+                (f_f("op1") % i_arr1d_op2[0] != f_f("op1") % ui_arr1d_op2[0])
+                || (f_f("op1") % ui_arr1d_op2[0] != f_f("op1") % l_arr1d_op2[0])
+                || (f_f("op1") % l_arr1d_op2[0] != f_f("op1") % ul_arr1d_op2[0])
+                || (f_f("op1") % ul_arr1d_op2[0] != f_f("op1") % f_arr1d_op2[0])
+                || (f_f("op1") % f_arr1d_op2[0] != f_f("op1") % d_arr1d_op2[0])
+                || (f_f("op1") % d_arr1d_op2[0] != f_f("op1") % (float)m_arr1d_op2[0])
+                || (f_f("op1") % (float)m_arr1d_op2[0] != f_f("op1") % i_arr1d_op2[0])
+                || (f_f("op1") % i_arr1d_op2[0] != 3)
+            )
             {
                 Console.WriteLine("testcase 22 failed");
                 passed = false;
             }
-            if ((f_f("op1") % i_arr2d_op2[index[0, 1], index[1, 0]] != f_f("op1") % ui_arr2d_op2[index[0, 1], index[1, 0]]) || (f_f("op1") % ui_arr2d_op2[index[0, 1], index[1, 0]] != f_f("op1") % l_arr2d_op2[index[0, 1], index[1, 0]]) || (f_f("op1") % l_arr2d_op2[index[0, 1], index[1, 0]] != f_f("op1") % ul_arr2d_op2[index[0, 1], index[1, 0]]) || (f_f("op1") % ul_arr2d_op2[index[0, 1], index[1, 0]] != f_f("op1") % f_arr2d_op2[index[0, 1], index[1, 0]]) || (f_f("op1") % f_arr2d_op2[index[0, 1], index[1, 0]] != f_f("op1") % d_arr2d_op2[index[0, 1], index[1, 0]]) || (f_f("op1") % d_arr2d_op2[index[0, 1], index[1, 0]] != f_f("op1") % (float)m_arr2d_op2[index[0, 1], index[1, 0]]) || (f_f("op1") % (float)m_arr2d_op2[index[0, 1], index[1, 0]] != f_f("op1") % i_arr2d_op2[index[0, 1], index[1, 0]]) || (f_f("op1") % i_arr2d_op2[index[0, 1], index[1, 0]] != 3))
+            if (
+                (
+                    f_f("op1") % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_f("op1") % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_f("op1") % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_f("op1") % l_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_f("op1") % l_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_f("op1") % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_f("op1") % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_f("op1") % f_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_f("op1") % f_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_f("op1") % d_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_f("op1") % d_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_f("op1") % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_f("op1") % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_f("op1") % i_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (f_f("op1") % i_arr2d_op2[index[0, 1], index[1, 0]] != 3)
+            )
             {
                 Console.WriteLine("testcase 23 failed");
                 passed = false;
             }
-            if ((f_f("op1") % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_f("op1") % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_f("op1") % ui_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_f("op1") % l_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_f("op1") % l_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_f("op1") % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_f("op1") % ul_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_f("op1") % f_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_f("op1") % f_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_f("op1") % d_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_f("op1") % d_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_f("op1") % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_f("op1") % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_f("op1") % i_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_f("op1") % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3))
+            if (
+                (
+                    f_f("op1") % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_f("op1") % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_f("op1") % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_f("op1") % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_f("op1") % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_f("op1") % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_f("op1") % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_f("op1") % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_f("op1") % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_f("op1") % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_f("op1") % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_f("op1") % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_f("op1") % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_f("op1") % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (f_f("op1") % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3)
+            )
             {
                 Console.WriteLine("testcase 24 failed");
                 passed = false;
             }
-            if ((cl1.f_cl_op1 % i_l_op2 != cl1.f_cl_op1 % ui_l_op2) || (cl1.f_cl_op1 % ui_l_op2 != cl1.f_cl_op1 % l_l_op2) || (cl1.f_cl_op1 % l_l_op2 != cl1.f_cl_op1 % ul_l_op2) || (cl1.f_cl_op1 % ul_l_op2 != cl1.f_cl_op1 % f_l_op2) || (cl1.f_cl_op1 % f_l_op2 != cl1.f_cl_op1 % d_l_op2) || (cl1.f_cl_op1 % d_l_op2 != cl1.f_cl_op1 % (float)m_l_op2) || (cl1.f_cl_op1 % (float)m_l_op2 != cl1.f_cl_op1 % i_l_op2) || (cl1.f_cl_op1 % i_l_op2 != 3))
+            if (
+                (cl1.f_cl_op1 % i_l_op2 != cl1.f_cl_op1 % ui_l_op2)
+                || (cl1.f_cl_op1 % ui_l_op2 != cl1.f_cl_op1 % l_l_op2)
+                || (cl1.f_cl_op1 % l_l_op2 != cl1.f_cl_op1 % ul_l_op2)
+                || (cl1.f_cl_op1 % ul_l_op2 != cl1.f_cl_op1 % f_l_op2)
+                || (cl1.f_cl_op1 % f_l_op2 != cl1.f_cl_op1 % d_l_op2)
+                || (cl1.f_cl_op1 % d_l_op2 != cl1.f_cl_op1 % (float)m_l_op2)
+                || (cl1.f_cl_op1 % (float)m_l_op2 != cl1.f_cl_op1 % i_l_op2)
+                || (cl1.f_cl_op1 % i_l_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 25 failed");
                 passed = false;
             }
-            if ((cl1.f_cl_op1 % s_i_s_op2 != cl1.f_cl_op1 % s_ui_s_op2) || (cl1.f_cl_op1 % s_ui_s_op2 != cl1.f_cl_op1 % s_l_s_op2) || (cl1.f_cl_op1 % s_l_s_op2 != cl1.f_cl_op1 % s_ul_s_op2) || (cl1.f_cl_op1 % s_ul_s_op2 != cl1.f_cl_op1 % s_f_s_op2) || (cl1.f_cl_op1 % s_f_s_op2 != cl1.f_cl_op1 % s_d_s_op2) || (cl1.f_cl_op1 % s_d_s_op2 != cl1.f_cl_op1 % (float)s_m_s_op2) || (cl1.f_cl_op1 % (float)s_m_s_op2 != cl1.f_cl_op1 % s_i_s_op2) || (cl1.f_cl_op1 % s_i_s_op2 != 3))
+            if (
+                (cl1.f_cl_op1 % s_i_s_op2 != cl1.f_cl_op1 % s_ui_s_op2)
+                || (cl1.f_cl_op1 % s_ui_s_op2 != cl1.f_cl_op1 % s_l_s_op2)
+                || (cl1.f_cl_op1 % s_l_s_op2 != cl1.f_cl_op1 % s_ul_s_op2)
+                || (cl1.f_cl_op1 % s_ul_s_op2 != cl1.f_cl_op1 % s_f_s_op2)
+                || (cl1.f_cl_op1 % s_f_s_op2 != cl1.f_cl_op1 % s_d_s_op2)
+                || (cl1.f_cl_op1 % s_d_s_op2 != cl1.f_cl_op1 % (float)s_m_s_op2)
+                || (cl1.f_cl_op1 % (float)s_m_s_op2 != cl1.f_cl_op1 % s_i_s_op2)
+                || (cl1.f_cl_op1 % s_i_s_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 26 failed");
                 passed = false;
             }
-            if ((cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2")) || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2")) || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2")) || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2")) || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2")) || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % (float)f_f("op2")) || (cl1.f_cl_op1 % (float)f_f("op2") != cl1.f_cl_op1 % f_f("op2")) || (cl1.f_cl_op1 % f_f("op2") != 3))
+            if (
+                (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2"))
+                || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2"))
+                || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2"))
+                || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2"))
+                || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % f_f("op2"))
+                || (cl1.f_cl_op1 % f_f("op2") != cl1.f_cl_op1 % (float)f_f("op2"))
+                || (cl1.f_cl_op1 % (float)f_f("op2") != cl1.f_cl_op1 % f_f("op2"))
+                || (cl1.f_cl_op1 % f_f("op2") != 3)
+            )
             {
                 Console.WriteLine("testcase 27 failed");
                 passed = false;
             }
-            if ((cl1.f_cl_op1 % cl1.i_cl_op2 != cl1.f_cl_op1 % cl1.ui_cl_op2) || (cl1.f_cl_op1 % cl1.ui_cl_op2 != cl1.f_cl_op1 % cl1.l_cl_op2) || (cl1.f_cl_op1 % cl1.l_cl_op2 != cl1.f_cl_op1 % cl1.ul_cl_op2) || (cl1.f_cl_op1 % cl1.ul_cl_op2 != cl1.f_cl_op1 % cl1.f_cl_op2) || (cl1.f_cl_op1 % cl1.f_cl_op2 != cl1.f_cl_op1 % cl1.d_cl_op2) || (cl1.f_cl_op1 % cl1.d_cl_op2 != cl1.f_cl_op1 % (float)cl1.m_cl_op2) || (cl1.f_cl_op1 % (float)cl1.m_cl_op2 != cl1.f_cl_op1 % cl1.i_cl_op2) || (cl1.f_cl_op1 % cl1.i_cl_op2 != 3))
+            if (
+                (cl1.f_cl_op1 % cl1.i_cl_op2 != cl1.f_cl_op1 % cl1.ui_cl_op2)
+                || (cl1.f_cl_op1 % cl1.ui_cl_op2 != cl1.f_cl_op1 % cl1.l_cl_op2)
+                || (cl1.f_cl_op1 % cl1.l_cl_op2 != cl1.f_cl_op1 % cl1.ul_cl_op2)
+                || (cl1.f_cl_op1 % cl1.ul_cl_op2 != cl1.f_cl_op1 % cl1.f_cl_op2)
+                || (cl1.f_cl_op1 % cl1.f_cl_op2 != cl1.f_cl_op1 % cl1.d_cl_op2)
+                || (cl1.f_cl_op1 % cl1.d_cl_op2 != cl1.f_cl_op1 % (float)cl1.m_cl_op2)
+                || (cl1.f_cl_op1 % (float)cl1.m_cl_op2 != cl1.f_cl_op1 % cl1.i_cl_op2)
+                || (cl1.f_cl_op1 % cl1.i_cl_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 28 failed");
                 passed = false;
             }
-            if ((cl1.f_cl_op1 % vt1.i_vt_op2 != cl1.f_cl_op1 % vt1.ui_vt_op2) || (cl1.f_cl_op1 % vt1.ui_vt_op2 != cl1.f_cl_op1 % vt1.l_vt_op2) || (cl1.f_cl_op1 % vt1.l_vt_op2 != cl1.f_cl_op1 % vt1.ul_vt_op2) || (cl1.f_cl_op1 % vt1.ul_vt_op2 != cl1.f_cl_op1 % vt1.f_vt_op2) || (cl1.f_cl_op1 % vt1.f_vt_op2 != cl1.f_cl_op1 % vt1.d_vt_op2) || (cl1.f_cl_op1 % vt1.d_vt_op2 != cl1.f_cl_op1 % (float)vt1.m_vt_op2) || (cl1.f_cl_op1 % (float)vt1.m_vt_op2 != cl1.f_cl_op1 % vt1.i_vt_op2) || (cl1.f_cl_op1 % vt1.i_vt_op2 != 3))
+            if (
+                (cl1.f_cl_op1 % vt1.i_vt_op2 != cl1.f_cl_op1 % vt1.ui_vt_op2)
+                || (cl1.f_cl_op1 % vt1.ui_vt_op2 != cl1.f_cl_op1 % vt1.l_vt_op2)
+                || (cl1.f_cl_op1 % vt1.l_vt_op2 != cl1.f_cl_op1 % vt1.ul_vt_op2)
+                || (cl1.f_cl_op1 % vt1.ul_vt_op2 != cl1.f_cl_op1 % vt1.f_vt_op2)
+                || (cl1.f_cl_op1 % vt1.f_vt_op2 != cl1.f_cl_op1 % vt1.d_vt_op2)
+                || (cl1.f_cl_op1 % vt1.d_vt_op2 != cl1.f_cl_op1 % (float)vt1.m_vt_op2)
+                || (cl1.f_cl_op1 % (float)vt1.m_vt_op2 != cl1.f_cl_op1 % vt1.i_vt_op2)
+                || (cl1.f_cl_op1 % vt1.i_vt_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 29 failed");
                 passed = false;
             }
-            if ((cl1.f_cl_op1 % i_arr1d_op2[0] != cl1.f_cl_op1 % ui_arr1d_op2[0]) || (cl1.f_cl_op1 % ui_arr1d_op2[0] != cl1.f_cl_op1 % l_arr1d_op2[0]) || (cl1.f_cl_op1 % l_arr1d_op2[0] != cl1.f_cl_op1 % ul_arr1d_op2[0]) || (cl1.f_cl_op1 % ul_arr1d_op2[0] != cl1.f_cl_op1 % f_arr1d_op2[0]) || (cl1.f_cl_op1 % f_arr1d_op2[0] != cl1.f_cl_op1 % d_arr1d_op2[0]) || (cl1.f_cl_op1 % d_arr1d_op2[0] != cl1.f_cl_op1 % (float)m_arr1d_op2[0]) || (cl1.f_cl_op1 % (float)m_arr1d_op2[0] != cl1.f_cl_op1 % i_arr1d_op2[0]) || (cl1.f_cl_op1 % i_arr1d_op2[0] != 3))
+            if (
+                (cl1.f_cl_op1 % i_arr1d_op2[0] != cl1.f_cl_op1 % ui_arr1d_op2[0])
+                || (cl1.f_cl_op1 % ui_arr1d_op2[0] != cl1.f_cl_op1 % l_arr1d_op2[0])
+                || (cl1.f_cl_op1 % l_arr1d_op2[0] != cl1.f_cl_op1 % ul_arr1d_op2[0])
+                || (cl1.f_cl_op1 % ul_arr1d_op2[0] != cl1.f_cl_op1 % f_arr1d_op2[0])
+                || (cl1.f_cl_op1 % f_arr1d_op2[0] != cl1.f_cl_op1 % d_arr1d_op2[0])
+                || (cl1.f_cl_op1 % d_arr1d_op2[0] != cl1.f_cl_op1 % (float)m_arr1d_op2[0])
+                || (cl1.f_cl_op1 % (float)m_arr1d_op2[0] != cl1.f_cl_op1 % i_arr1d_op2[0])
+                || (cl1.f_cl_op1 % i_arr1d_op2[0] != 3)
+            )
             {
                 Console.WriteLine("testcase 30 failed");
                 passed = false;
             }
-            if ((cl1.f_cl_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != cl1.f_cl_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]) || (cl1.f_cl_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]] != cl1.f_cl_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]) || (cl1.f_cl_op1 % l_arr2d_op2[index[0, 1], index[1, 0]] != cl1.f_cl_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]) || (cl1.f_cl_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]] != cl1.f_cl_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]) || (cl1.f_cl_op1 % f_arr2d_op2[index[0, 1], index[1, 0]] != cl1.f_cl_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]) || (cl1.f_cl_op1 % d_arr2d_op2[index[0, 1], index[1, 0]] != cl1.f_cl_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]) || (cl1.f_cl_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]] != cl1.f_cl_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]) || (cl1.f_cl_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != 3))
+            if (
+                (
+                    cl1.f_cl_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != cl1.f_cl_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    cl1.f_cl_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                    != cl1.f_cl_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    cl1.f_cl_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]
+                    != cl1.f_cl_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    cl1.f_cl_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                    != cl1.f_cl_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    cl1.f_cl_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]
+                    != cl1.f_cl_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    cl1.f_cl_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]
+                    != cl1.f_cl_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    cl1.f_cl_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                    != cl1.f_cl_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (cl1.f_cl_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != 3)
+            )
             {
                 Console.WriteLine("testcase 31 failed");
                 passed = false;
             }
-            if ((cl1.f_cl_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != cl1.f_cl_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (cl1.f_cl_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]] != cl1.f_cl_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (cl1.f_cl_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]] != cl1.f_cl_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (cl1.f_cl_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]] != cl1.f_cl_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (cl1.f_cl_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]] != cl1.f_cl_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (cl1.f_cl_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]] != cl1.f_cl_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (cl1.f_cl_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]] != cl1.f_cl_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (cl1.f_cl_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3))
+            if (
+                (
+                    cl1.f_cl_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != cl1.f_cl_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    cl1.f_cl_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != cl1.f_cl_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    cl1.f_cl_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != cl1.f_cl_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    cl1.f_cl_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != cl1.f_cl_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    cl1.f_cl_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != cl1.f_cl_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    cl1.f_cl_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != cl1.f_cl_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    cl1.f_cl_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != cl1.f_cl_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (cl1.f_cl_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3)
+            )
             {
                 Console.WriteLine("testcase 32 failed");
                 passed = false;
             }
-            if ((vt1.f_vt_op1 % i_l_op2 != vt1.f_vt_op1 % ui_l_op2) || (vt1.f_vt_op1 % ui_l_op2 != vt1.f_vt_op1 % l_l_op2) || (vt1.f_vt_op1 % l_l_op2 != vt1.f_vt_op1 % ul_l_op2) || (vt1.f_vt_op1 % ul_l_op2 != vt1.f_vt_op1 % f_l_op2) || (vt1.f_vt_op1 % f_l_op2 != vt1.f_vt_op1 % d_l_op2) || (vt1.f_vt_op1 % d_l_op2 != vt1.f_vt_op1 % (float)m_l_op2) || (vt1.f_vt_op1 % (float)m_l_op2 != vt1.f_vt_op1 % i_l_op2) || (vt1.f_vt_op1 % i_l_op2 != 3))
+            if (
+                (vt1.f_vt_op1 % i_l_op2 != vt1.f_vt_op1 % ui_l_op2)
+                || (vt1.f_vt_op1 % ui_l_op2 != vt1.f_vt_op1 % l_l_op2)
+                || (vt1.f_vt_op1 % l_l_op2 != vt1.f_vt_op1 % ul_l_op2)
+                || (vt1.f_vt_op1 % ul_l_op2 != vt1.f_vt_op1 % f_l_op2)
+                || (vt1.f_vt_op1 % f_l_op2 != vt1.f_vt_op1 % d_l_op2)
+                || (vt1.f_vt_op1 % d_l_op2 != vt1.f_vt_op1 % (float)m_l_op2)
+                || (vt1.f_vt_op1 % (float)m_l_op2 != vt1.f_vt_op1 % i_l_op2)
+                || (vt1.f_vt_op1 % i_l_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 33 failed");
                 passed = false;
             }
-            if ((vt1.f_vt_op1 % s_i_s_op2 != vt1.f_vt_op1 % s_ui_s_op2) || (vt1.f_vt_op1 % s_ui_s_op2 != vt1.f_vt_op1 % s_l_s_op2) || (vt1.f_vt_op1 % s_l_s_op2 != vt1.f_vt_op1 % s_ul_s_op2) || (vt1.f_vt_op1 % s_ul_s_op2 != vt1.f_vt_op1 % s_f_s_op2) || (vt1.f_vt_op1 % s_f_s_op2 != vt1.f_vt_op1 % s_d_s_op2) || (vt1.f_vt_op1 % s_d_s_op2 != vt1.f_vt_op1 % (float)s_m_s_op2) || (vt1.f_vt_op1 % (float)s_m_s_op2 != vt1.f_vt_op1 % s_i_s_op2) || (vt1.f_vt_op1 % s_i_s_op2 != 3))
+            if (
+                (vt1.f_vt_op1 % s_i_s_op2 != vt1.f_vt_op1 % s_ui_s_op2)
+                || (vt1.f_vt_op1 % s_ui_s_op2 != vt1.f_vt_op1 % s_l_s_op2)
+                || (vt1.f_vt_op1 % s_l_s_op2 != vt1.f_vt_op1 % s_ul_s_op2)
+                || (vt1.f_vt_op1 % s_ul_s_op2 != vt1.f_vt_op1 % s_f_s_op2)
+                || (vt1.f_vt_op1 % s_f_s_op2 != vt1.f_vt_op1 % s_d_s_op2)
+                || (vt1.f_vt_op1 % s_d_s_op2 != vt1.f_vt_op1 % (float)s_m_s_op2)
+                || (vt1.f_vt_op1 % (float)s_m_s_op2 != vt1.f_vt_op1 % s_i_s_op2)
+                || (vt1.f_vt_op1 % s_i_s_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 34 failed");
                 passed = false;
             }
-            if ((vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2")) || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2")) || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2")) || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2")) || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2")) || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % (float)f_f("op2")) || (vt1.f_vt_op1 % (float)f_f("op2") != vt1.f_vt_op1 % f_f("op2")) || (vt1.f_vt_op1 % f_f("op2") != 3))
+            if (
+                (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2"))
+                || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2"))
+                || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2"))
+                || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2"))
+                || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % f_f("op2"))
+                || (vt1.f_vt_op1 % f_f("op2") != vt1.f_vt_op1 % (float)f_f("op2"))
+                || (vt1.f_vt_op1 % (float)f_f("op2") != vt1.f_vt_op1 % f_f("op2"))
+                || (vt1.f_vt_op1 % f_f("op2") != 3)
+            )
             {
                 Console.WriteLine("testcase 35 failed");
                 passed = false;
             }
-            if ((vt1.f_vt_op1 % cl1.i_cl_op2 != vt1.f_vt_op1 % cl1.ui_cl_op2) || (vt1.f_vt_op1 % cl1.ui_cl_op2 != vt1.f_vt_op1 % cl1.l_cl_op2) || (vt1.f_vt_op1 % cl1.l_cl_op2 != vt1.f_vt_op1 % cl1.ul_cl_op2) || (vt1.f_vt_op1 % cl1.ul_cl_op2 != vt1.f_vt_op1 % cl1.f_cl_op2) || (vt1.f_vt_op1 % cl1.f_cl_op2 != vt1.f_vt_op1 % cl1.d_cl_op2) || (vt1.f_vt_op1 % cl1.d_cl_op2 != vt1.f_vt_op1 % (float)cl1.m_cl_op2) || (vt1.f_vt_op1 % (float)cl1.m_cl_op2 != vt1.f_vt_op1 % cl1.i_cl_op2) || (vt1.f_vt_op1 % cl1.i_cl_op2 != 3))
+            if (
+                (vt1.f_vt_op1 % cl1.i_cl_op2 != vt1.f_vt_op1 % cl1.ui_cl_op2)
+                || (vt1.f_vt_op1 % cl1.ui_cl_op2 != vt1.f_vt_op1 % cl1.l_cl_op2)
+                || (vt1.f_vt_op1 % cl1.l_cl_op2 != vt1.f_vt_op1 % cl1.ul_cl_op2)
+                || (vt1.f_vt_op1 % cl1.ul_cl_op2 != vt1.f_vt_op1 % cl1.f_cl_op2)
+                || (vt1.f_vt_op1 % cl1.f_cl_op2 != vt1.f_vt_op1 % cl1.d_cl_op2)
+                || (vt1.f_vt_op1 % cl1.d_cl_op2 != vt1.f_vt_op1 % (float)cl1.m_cl_op2)
+                || (vt1.f_vt_op1 % (float)cl1.m_cl_op2 != vt1.f_vt_op1 % cl1.i_cl_op2)
+                || (vt1.f_vt_op1 % cl1.i_cl_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 36 failed");
                 passed = false;
             }
-            if ((vt1.f_vt_op1 % vt1.i_vt_op2 != vt1.f_vt_op1 % vt1.ui_vt_op2) || (vt1.f_vt_op1 % vt1.ui_vt_op2 != vt1.f_vt_op1 % vt1.l_vt_op2) || (vt1.f_vt_op1 % vt1.l_vt_op2 != vt1.f_vt_op1 % vt1.ul_vt_op2) || (vt1.f_vt_op1 % vt1.ul_vt_op2 != vt1.f_vt_op1 % vt1.f_vt_op2) || (vt1.f_vt_op1 % vt1.f_vt_op2 != vt1.f_vt_op1 % vt1.d_vt_op2) || (vt1.f_vt_op1 % vt1.d_vt_op2 != vt1.f_vt_op1 % (float)vt1.m_vt_op2) || (vt1.f_vt_op1 % (float)vt1.m_vt_op2 != vt1.f_vt_op1 % vt1.i_vt_op2) || (vt1.f_vt_op1 % vt1.i_vt_op2 != 3))
+            if (
+                (vt1.f_vt_op1 % vt1.i_vt_op2 != vt1.f_vt_op1 % vt1.ui_vt_op2)
+                || (vt1.f_vt_op1 % vt1.ui_vt_op2 != vt1.f_vt_op1 % vt1.l_vt_op2)
+                || (vt1.f_vt_op1 % vt1.l_vt_op2 != vt1.f_vt_op1 % vt1.ul_vt_op2)
+                || (vt1.f_vt_op1 % vt1.ul_vt_op2 != vt1.f_vt_op1 % vt1.f_vt_op2)
+                || (vt1.f_vt_op1 % vt1.f_vt_op2 != vt1.f_vt_op1 % vt1.d_vt_op2)
+                || (vt1.f_vt_op1 % vt1.d_vt_op2 != vt1.f_vt_op1 % (float)vt1.m_vt_op2)
+                || (vt1.f_vt_op1 % (float)vt1.m_vt_op2 != vt1.f_vt_op1 % vt1.i_vt_op2)
+                || (vt1.f_vt_op1 % vt1.i_vt_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 37 failed");
                 passed = false;
             }
-            if ((vt1.f_vt_op1 % i_arr1d_op2[0] != vt1.f_vt_op1 % ui_arr1d_op2[0]) || (vt1.f_vt_op1 % ui_arr1d_op2[0] != vt1.f_vt_op1 % l_arr1d_op2[0]) || (vt1.f_vt_op1 % l_arr1d_op2[0] != vt1.f_vt_op1 % ul_arr1d_op2[0]) || (vt1.f_vt_op1 % ul_arr1d_op2[0] != vt1.f_vt_op1 % f_arr1d_op2[0]) || (vt1.f_vt_op1 % f_arr1d_op2[0] != vt1.f_vt_op1 % d_arr1d_op2[0]) || (vt1.f_vt_op1 % d_arr1d_op2[0] != vt1.f_vt_op1 % (float)m_arr1d_op2[0]) || (vt1.f_vt_op1 % (float)m_arr1d_op2[0] != vt1.f_vt_op1 % i_arr1d_op2[0]) || (vt1.f_vt_op1 % i_arr1d_op2[0] != 3))
+            if (
+                (vt1.f_vt_op1 % i_arr1d_op2[0] != vt1.f_vt_op1 % ui_arr1d_op2[0])
+                || (vt1.f_vt_op1 % ui_arr1d_op2[0] != vt1.f_vt_op1 % l_arr1d_op2[0])
+                || (vt1.f_vt_op1 % l_arr1d_op2[0] != vt1.f_vt_op1 % ul_arr1d_op2[0])
+                || (vt1.f_vt_op1 % ul_arr1d_op2[0] != vt1.f_vt_op1 % f_arr1d_op2[0])
+                || (vt1.f_vt_op1 % f_arr1d_op2[0] != vt1.f_vt_op1 % d_arr1d_op2[0])
+                || (vt1.f_vt_op1 % d_arr1d_op2[0] != vt1.f_vt_op1 % (float)m_arr1d_op2[0])
+                || (vt1.f_vt_op1 % (float)m_arr1d_op2[0] != vt1.f_vt_op1 % i_arr1d_op2[0])
+                || (vt1.f_vt_op1 % i_arr1d_op2[0] != 3)
+            )
             {
                 Console.WriteLine("testcase 38 failed");
                 passed = false;
             }
-            if ((vt1.f_vt_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != vt1.f_vt_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]) || (vt1.f_vt_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]] != vt1.f_vt_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]) || (vt1.f_vt_op1 % l_arr2d_op2[index[0, 1], index[1, 0]] != vt1.f_vt_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]) || (vt1.f_vt_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]] != vt1.f_vt_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]) || (vt1.f_vt_op1 % f_arr2d_op2[index[0, 1], index[1, 0]] != vt1.f_vt_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]) || (vt1.f_vt_op1 % d_arr2d_op2[index[0, 1], index[1, 0]] != vt1.f_vt_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]) || (vt1.f_vt_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]] != vt1.f_vt_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]) || (vt1.f_vt_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != 3))
+            if (
+                (
+                    vt1.f_vt_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != vt1.f_vt_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    vt1.f_vt_op1 % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                    != vt1.f_vt_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    vt1.f_vt_op1 % l_arr2d_op2[index[0, 1], index[1, 0]]
+                    != vt1.f_vt_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    vt1.f_vt_op1 % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                    != vt1.f_vt_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    vt1.f_vt_op1 % f_arr2d_op2[index[0, 1], index[1, 0]]
+                    != vt1.f_vt_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    vt1.f_vt_op1 % d_arr2d_op2[index[0, 1], index[1, 0]]
+                    != vt1.f_vt_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    vt1.f_vt_op1 % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                    != vt1.f_vt_op1 % i_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (vt1.f_vt_op1 % i_arr2d_op2[index[0, 1], index[1, 0]] != 3)
+            )
             {
                 Console.WriteLine("testcase 39 failed");
                 passed = false;
             }
-            if ((vt1.f_vt_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != vt1.f_vt_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (vt1.f_vt_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]] != vt1.f_vt_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (vt1.f_vt_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]] != vt1.f_vt_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (vt1.f_vt_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]] != vt1.f_vt_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (vt1.f_vt_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]] != vt1.f_vt_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (vt1.f_vt_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]] != vt1.f_vt_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (vt1.f_vt_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]] != vt1.f_vt_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (vt1.f_vt_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3))
+            if (
+                (
+                    vt1.f_vt_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != vt1.f_vt_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    vt1.f_vt_op1 % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != vt1.f_vt_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    vt1.f_vt_op1 % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != vt1.f_vt_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    vt1.f_vt_op1 % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != vt1.f_vt_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    vt1.f_vt_op1 % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != vt1.f_vt_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    vt1.f_vt_op1 % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != vt1.f_vt_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    vt1.f_vt_op1 % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != vt1.f_vt_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (vt1.f_vt_op1 % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3)
+            )
             {
                 Console.WriteLine("testcase 40 failed");
                 passed = false;
             }
-            if ((f_arr1d_op1[1] % i_l_op2 != f_arr1d_op1[1] % ui_l_op2) || (f_arr1d_op1[1] % ui_l_op2 != f_arr1d_op1[1] % l_l_op2) || (f_arr1d_op1[1] % l_l_op2 != f_arr1d_op1[1] % ul_l_op2) || (f_arr1d_op1[1] % ul_l_op2 != f_arr1d_op1[1] % f_l_op2) || (f_arr1d_op1[1] % f_l_op2 != f_arr1d_op1[1] % d_l_op2) || (f_arr1d_op1[1] % d_l_op2 != f_arr1d_op1[1] % (float)m_l_op2) || (f_arr1d_op1[1] % (float)m_l_op2 != f_arr1d_op1[1] % i_l_op2) || (f_arr1d_op1[1] % i_l_op2 != 3))
+            if (
+                (f_arr1d_op1[1] % i_l_op2 != f_arr1d_op1[1] % ui_l_op2)
+                || (f_arr1d_op1[1] % ui_l_op2 != f_arr1d_op1[1] % l_l_op2)
+                || (f_arr1d_op1[1] % l_l_op2 != f_arr1d_op1[1] % ul_l_op2)
+                || (f_arr1d_op1[1] % ul_l_op2 != f_arr1d_op1[1] % f_l_op2)
+                || (f_arr1d_op1[1] % f_l_op2 != f_arr1d_op1[1] % d_l_op2)
+                || (f_arr1d_op1[1] % d_l_op2 != f_arr1d_op1[1] % (float)m_l_op2)
+                || (f_arr1d_op1[1] % (float)m_l_op2 != f_arr1d_op1[1] % i_l_op2)
+                || (f_arr1d_op1[1] % i_l_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 41 failed");
                 passed = false;
             }
-            if ((f_arr1d_op1[1] % s_i_s_op2 != f_arr1d_op1[1] % s_ui_s_op2) || (f_arr1d_op1[1] % s_ui_s_op2 != f_arr1d_op1[1] % s_l_s_op2) || (f_arr1d_op1[1] % s_l_s_op2 != f_arr1d_op1[1] % s_ul_s_op2) || (f_arr1d_op1[1] % s_ul_s_op2 != f_arr1d_op1[1] % s_f_s_op2) || (f_arr1d_op1[1] % s_f_s_op2 != f_arr1d_op1[1] % s_d_s_op2) || (f_arr1d_op1[1] % s_d_s_op2 != f_arr1d_op1[1] % (float)s_m_s_op2) || (f_arr1d_op1[1] % (float)s_m_s_op2 != f_arr1d_op1[1] % s_i_s_op2) || (f_arr1d_op1[1] % s_i_s_op2 != 3))
+            if (
+                (f_arr1d_op1[1] % s_i_s_op2 != f_arr1d_op1[1] % s_ui_s_op2)
+                || (f_arr1d_op1[1] % s_ui_s_op2 != f_arr1d_op1[1] % s_l_s_op2)
+                || (f_arr1d_op1[1] % s_l_s_op2 != f_arr1d_op1[1] % s_ul_s_op2)
+                || (f_arr1d_op1[1] % s_ul_s_op2 != f_arr1d_op1[1] % s_f_s_op2)
+                || (f_arr1d_op1[1] % s_f_s_op2 != f_arr1d_op1[1] % s_d_s_op2)
+                || (f_arr1d_op1[1] % s_d_s_op2 != f_arr1d_op1[1] % (float)s_m_s_op2)
+                || (f_arr1d_op1[1] % (float)s_m_s_op2 != f_arr1d_op1[1] % s_i_s_op2)
+                || (f_arr1d_op1[1] % s_i_s_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 42 failed");
                 passed = false;
             }
-            if ((f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2")) || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2")) || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2")) || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2")) || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2")) || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % (float)f_f("op2")) || (f_arr1d_op1[1] % (float)f_f("op2") != f_arr1d_op1[1] % f_f("op2")) || (f_arr1d_op1[1] % f_f("op2") != 3))
+            if (
+                (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2"))
+                || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2"))
+                || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2"))
+                || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2"))
+                || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % f_f("op2"))
+                || (f_arr1d_op1[1] % f_f("op2") != f_arr1d_op1[1] % (float)f_f("op2"))
+                || (f_arr1d_op1[1] % (float)f_f("op2") != f_arr1d_op1[1] % f_f("op2"))
+                || (f_arr1d_op1[1] % f_f("op2") != 3)
+            )
             {
                 Console.WriteLine("testcase 43 failed");
                 passed = false;
             }
-            if ((f_arr1d_op1[1] % cl1.i_cl_op2 != f_arr1d_op1[1] % cl1.ui_cl_op2) || (f_arr1d_op1[1] % cl1.ui_cl_op2 != f_arr1d_op1[1] % cl1.l_cl_op2) || (f_arr1d_op1[1] % cl1.l_cl_op2 != f_arr1d_op1[1] % cl1.ul_cl_op2) || (f_arr1d_op1[1] % cl1.ul_cl_op2 != f_arr1d_op1[1] % cl1.f_cl_op2) || (f_arr1d_op1[1] % cl1.f_cl_op2 != f_arr1d_op1[1] % cl1.d_cl_op2) || (f_arr1d_op1[1] % cl1.d_cl_op2 != f_arr1d_op1[1] % (float)cl1.m_cl_op2) || (f_arr1d_op1[1] % (float)cl1.m_cl_op2 != f_arr1d_op1[1] % cl1.i_cl_op2) || (f_arr1d_op1[1] % cl1.i_cl_op2 != 3))
+            if (
+                (f_arr1d_op1[1] % cl1.i_cl_op2 != f_arr1d_op1[1] % cl1.ui_cl_op2)
+                || (f_arr1d_op1[1] % cl1.ui_cl_op2 != f_arr1d_op1[1] % cl1.l_cl_op2)
+                || (f_arr1d_op1[1] % cl1.l_cl_op2 != f_arr1d_op1[1] % cl1.ul_cl_op2)
+                || (f_arr1d_op1[1] % cl1.ul_cl_op2 != f_arr1d_op1[1] % cl1.f_cl_op2)
+                || (f_arr1d_op1[1] % cl1.f_cl_op2 != f_arr1d_op1[1] % cl1.d_cl_op2)
+                || (f_arr1d_op1[1] % cl1.d_cl_op2 != f_arr1d_op1[1] % (float)cl1.m_cl_op2)
+                || (f_arr1d_op1[1] % (float)cl1.m_cl_op2 != f_arr1d_op1[1] % cl1.i_cl_op2)
+                || (f_arr1d_op1[1] % cl1.i_cl_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 44 failed");
                 passed = false;
             }
-            if ((f_arr1d_op1[1] % vt1.i_vt_op2 != f_arr1d_op1[1] % vt1.ui_vt_op2) || (f_arr1d_op1[1] % vt1.ui_vt_op2 != f_arr1d_op1[1] % vt1.l_vt_op2) || (f_arr1d_op1[1] % vt1.l_vt_op2 != f_arr1d_op1[1] % vt1.ul_vt_op2) || (f_arr1d_op1[1] % vt1.ul_vt_op2 != f_arr1d_op1[1] % vt1.f_vt_op2) || (f_arr1d_op1[1] % vt1.f_vt_op2 != f_arr1d_op1[1] % vt1.d_vt_op2) || (f_arr1d_op1[1] % vt1.d_vt_op2 != f_arr1d_op1[1] % (float)vt1.m_vt_op2) || (f_arr1d_op1[1] % (float)vt1.m_vt_op2 != f_arr1d_op1[1] % vt1.i_vt_op2) || (f_arr1d_op1[1] % vt1.i_vt_op2 != 3))
+            if (
+                (f_arr1d_op1[1] % vt1.i_vt_op2 != f_arr1d_op1[1] % vt1.ui_vt_op2)
+                || (f_arr1d_op1[1] % vt1.ui_vt_op2 != f_arr1d_op1[1] % vt1.l_vt_op2)
+                || (f_arr1d_op1[1] % vt1.l_vt_op2 != f_arr1d_op1[1] % vt1.ul_vt_op2)
+                || (f_arr1d_op1[1] % vt1.ul_vt_op2 != f_arr1d_op1[1] % vt1.f_vt_op2)
+                || (f_arr1d_op1[1] % vt1.f_vt_op2 != f_arr1d_op1[1] % vt1.d_vt_op2)
+                || (f_arr1d_op1[1] % vt1.d_vt_op2 != f_arr1d_op1[1] % (float)vt1.m_vt_op2)
+                || (f_arr1d_op1[1] % (float)vt1.m_vt_op2 != f_arr1d_op1[1] % vt1.i_vt_op2)
+                || (f_arr1d_op1[1] % vt1.i_vt_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 45 failed");
                 passed = false;
             }
-            if ((f_arr1d_op1[1] % i_arr1d_op2[0] != f_arr1d_op1[1] % ui_arr1d_op2[0]) || (f_arr1d_op1[1] % ui_arr1d_op2[0] != f_arr1d_op1[1] % l_arr1d_op2[0]) || (f_arr1d_op1[1] % l_arr1d_op2[0] != f_arr1d_op1[1] % ul_arr1d_op2[0]) || (f_arr1d_op1[1] % ul_arr1d_op2[0] != f_arr1d_op1[1] % f_arr1d_op2[0]) || (f_arr1d_op1[1] % f_arr1d_op2[0] != f_arr1d_op1[1] % d_arr1d_op2[0]) || (f_arr1d_op1[1] % d_arr1d_op2[0] != f_arr1d_op1[1] % (float)m_arr1d_op2[0]) || (f_arr1d_op1[1] % (float)m_arr1d_op2[0] != f_arr1d_op1[1] % i_arr1d_op2[0]) || (f_arr1d_op1[1] % i_arr1d_op2[0] != 3))
+            if (
+                (f_arr1d_op1[1] % i_arr1d_op2[0] != f_arr1d_op1[1] % ui_arr1d_op2[0])
+                || (f_arr1d_op1[1] % ui_arr1d_op2[0] != f_arr1d_op1[1] % l_arr1d_op2[0])
+                || (f_arr1d_op1[1] % l_arr1d_op2[0] != f_arr1d_op1[1] % ul_arr1d_op2[0])
+                || (f_arr1d_op1[1] % ul_arr1d_op2[0] != f_arr1d_op1[1] % f_arr1d_op2[0])
+                || (f_arr1d_op1[1] % f_arr1d_op2[0] != f_arr1d_op1[1] % d_arr1d_op2[0])
+                || (f_arr1d_op1[1] % d_arr1d_op2[0] != f_arr1d_op1[1] % (float)m_arr1d_op2[0])
+                || (f_arr1d_op1[1] % (float)m_arr1d_op2[0] != f_arr1d_op1[1] % i_arr1d_op2[0])
+                || (f_arr1d_op1[1] % i_arr1d_op2[0] != 3)
+            )
             {
                 Console.WriteLine("testcase 46 failed");
                 passed = false;
             }
-            if ((f_arr1d_op1[1] % i_arr2d_op2[index[0, 1], index[1, 0]] != f_arr1d_op1[1] % ui_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr1d_op1[1] % ui_arr2d_op2[index[0, 1], index[1, 0]] != f_arr1d_op1[1] % l_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr1d_op1[1] % l_arr2d_op2[index[0, 1], index[1, 0]] != f_arr1d_op1[1] % ul_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr1d_op1[1] % ul_arr2d_op2[index[0, 1], index[1, 0]] != f_arr1d_op1[1] % f_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr1d_op1[1] % f_arr2d_op2[index[0, 1], index[1, 0]] != f_arr1d_op1[1] % d_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr1d_op1[1] % d_arr2d_op2[index[0, 1], index[1, 0]] != f_arr1d_op1[1] % (float)m_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr1d_op1[1] % (float)m_arr2d_op2[index[0, 1], index[1, 0]] != f_arr1d_op1[1] % i_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr1d_op1[1] % i_arr2d_op2[index[0, 1], index[1, 0]] != 3))
+            if (
+                (
+                    f_arr1d_op1[1] % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr1d_op1[1] % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr1d_op1[1] % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr1d_op1[1] % l_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr1d_op1[1] % l_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr1d_op1[1] % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr1d_op1[1] % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr1d_op1[1] % f_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr1d_op1[1] % f_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr1d_op1[1] % d_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr1d_op1[1] % d_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr1d_op1[1] % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr1d_op1[1] % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr1d_op1[1] % i_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (f_arr1d_op1[1] % i_arr2d_op2[index[0, 1], index[1, 0]] != 3)
+            )
             {
                 Console.WriteLine("testcase 47 failed");
                 passed = false;
             }
-            if ((f_arr1d_op1[1] % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr1d_op1[1] % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr1d_op1[1] % ui_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr1d_op1[1] % l_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr1d_op1[1] % l_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr1d_op1[1] % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr1d_op1[1] % ul_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr1d_op1[1] % f_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr1d_op1[1] % f_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr1d_op1[1] % d_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr1d_op1[1] % d_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr1d_op1[1] % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr1d_op1[1] % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr1d_op1[1] % i_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr1d_op1[1] % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3))
+            if (
+                (
+                    f_arr1d_op1[1] % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr1d_op1[1] % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr1d_op1[1] % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr1d_op1[1] % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr1d_op1[1] % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr1d_op1[1] % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr1d_op1[1] % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr1d_op1[1] % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr1d_op1[1] % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr1d_op1[1] % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr1d_op1[1] % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr1d_op1[1] % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr1d_op1[1] % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr1d_op1[1] % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (f_arr1d_op1[1] % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3)
+            )
             {
                 Console.WriteLine("testcase 48 failed");
                 passed = false;
             }
-            if ((f_arr2d_op1[index[0, 1], index[1, 0]] % i_l_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % ui_l_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % ui_l_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % l_l_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % l_l_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % ul_l_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % ul_l_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % f_l_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_l_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % d_l_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % d_l_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_l_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_l_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % i_l_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % i_l_op2 != 3))
+            if (
+                (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % i_l_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % ui_l_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % ui_l_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % l_l_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % l_l_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % ul_l_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % ul_l_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % f_l_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_l_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % d_l_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % d_l_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_l_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_l_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % i_l_op2
+                )
+                || (f_arr2d_op1[index[0, 1], index[1, 0]] % i_l_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 49 failed");
                 passed = false;
             }
-            if ((f_arr2d_op1[index[0, 1], index[1, 0]] % s_i_s_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % s_ui_s_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % s_ui_s_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % s_l_s_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % s_l_s_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % s_ul_s_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % s_ul_s_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % s_f_s_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % s_f_s_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % s_d_s_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % s_d_s_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)s_m_s_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % (float)s_m_s_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % s_i_s_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % s_i_s_op2 != 3))
+            if (
+                (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % s_i_s_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % s_ui_s_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % s_ui_s_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % s_l_s_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % s_l_s_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % s_ul_s_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % s_ul_s_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % s_f_s_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % s_f_s_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % s_d_s_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % s_d_s_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)s_m_s_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % (float)s_m_s_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % s_i_s_op2
+                )
+                || (f_arr2d_op1[index[0, 1], index[1, 0]] % s_i_s_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 50 failed");
                 passed = false;
             }
-            if ((f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2") != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2") != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2") != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2") != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2") != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2") != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)f_f("op2")) || (f_arr2d_op1[index[0, 1], index[1, 0]] % (float)f_f("op2") != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2") != 3))
+            if (
+                (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)f_f("op2")
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % (float)f_f("op2")
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2")
+                )
+                || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_f("op2") != 3)
+            )
             {
                 Console.WriteLine("testcase 51 failed");
                 passed = false;
             }
-            if ((f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.i_cl_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.ui_cl_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.ui_cl_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.l_cl_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.l_cl_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.ul_cl_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.ul_cl_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.f_cl_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.f_cl_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.d_cl_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.d_cl_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)cl1.m_cl_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % (float)cl1.m_cl_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.i_cl_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.i_cl_op2 != 3))
+            if (
+                (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.i_cl_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.ui_cl_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.ui_cl_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.l_cl_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.l_cl_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.ul_cl_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.ul_cl_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.f_cl_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.f_cl_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.d_cl_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.d_cl_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)cl1.m_cl_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % (float)cl1.m_cl_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.i_cl_op2
+                )
+                || (f_arr2d_op1[index[0, 1], index[1, 0]] % cl1.i_cl_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 52 failed");
                 passed = false;
             }
-            if ((f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.i_vt_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.ui_vt_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.ui_vt_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.l_vt_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.l_vt_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.ul_vt_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.ul_vt_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.f_vt_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.f_vt_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.d_vt_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.d_vt_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)vt1.m_vt_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % (float)vt1.m_vt_op2 != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.i_vt_op2) || (f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.i_vt_op2 != 3))
+            if (
+                (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.i_vt_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.ui_vt_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.ui_vt_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.l_vt_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.l_vt_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.ul_vt_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.ul_vt_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.f_vt_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.f_vt_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.d_vt_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.d_vt_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)vt1.m_vt_op2
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % (float)vt1.m_vt_op2
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.i_vt_op2
+                )
+                || (f_arr2d_op1[index[0, 1], index[1, 0]] % vt1.i_vt_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 53 failed");
                 passed = false;
             }
-            if ((f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr1d_op2[0] != f_arr2d_op1[index[0, 1], index[1, 0]] % ui_arr1d_op2[0]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % ui_arr1d_op2[0] != f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr1d_op2[0]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr1d_op2[0] != f_arr2d_op1[index[0, 1], index[1, 0]] % ul_arr1d_op2[0]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % ul_arr1d_op2[0] != f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr1d_op2[0]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr1d_op2[0] != f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr1d_op2[0]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr1d_op2[0] != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_arr1d_op2[0]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_arr1d_op2[0] != f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr1d_op2[0]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr1d_op2[0] != 3))
+            if (
+                (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr1d_op2[0]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % ui_arr1d_op2[0]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % ui_arr1d_op2[0]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr1d_op2[0]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr1d_op2[0]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % ul_arr1d_op2[0]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % ul_arr1d_op2[0]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr1d_op2[0]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr1d_op2[0]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr1d_op2[0]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr1d_op2[0]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_arr1d_op2[0]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_arr1d_op2[0]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr1d_op2[0]
+                )
+                || (f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr1d_op2[0] != 3)
+            )
             {
                 Console.WriteLine("testcase 54 failed");
                 passed = false;
             }
-            if ((f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr2d_op2[index[0, 1], index[1, 0]] != f_arr2d_op1[index[0, 1], index[1, 0]] % ui_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % ui_arr2d_op2[index[0, 1], index[1, 0]] != f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr2d_op2[index[0, 1], index[1, 0]] != f_arr2d_op1[index[0, 1], index[1, 0]] % ul_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % ul_arr2d_op2[index[0, 1], index[1, 0]] != f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr2d_op2[index[0, 1], index[1, 0]] != f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr2d_op2[index[0, 1], index[1, 0]] != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_arr2d_op2[index[0, 1], index[1, 0]] != f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr2d_op2[index[0, 1], index[1, 0]] != 3))
+            if (
+                (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != 3
+                )
+            )
             {
                 Console.WriteLine("testcase 55 failed");
                 passed = false;
             }
-            if ((f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr2d_op1[index[0, 1], index[1, 0]] % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % ui_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr2d_op1[index[0, 1], index[1, 0]] % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % ul_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3))
+            if (
+                (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr2d_op1[index[0, 1], index[1, 0]]
+                        % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr2d_op1[index[0, 1], index[1, 0]] % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != 3
+                )
+            )
             {
                 Console.WriteLine("testcase 56 failed");
                 passed = false;
             }
-            if ((f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_l_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_l_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_l_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_l_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_l_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_l_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_l_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_l_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_l_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_l_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_l_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_l_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_l_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_l_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_l_op2 != 3))
+            if (
+                (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_l_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_l_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_l_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_l_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_l_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_l_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_l_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_l_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_l_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_l_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_l_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_l_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_l_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_l_op2
+                )
+                || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_l_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 57 failed");
                 passed = false;
             }
-            if ((f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_i_s_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_ui_s_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_ui_s_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_l_s_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_l_s_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_ul_s_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_ul_s_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_f_s_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_f_s_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_d_s_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_d_s_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)s_m_s_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)s_m_s_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_i_s_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_i_s_op2 != 3))
+            if (
+                (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_i_s_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_ui_s_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_ui_s_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_l_s_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_l_s_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_ul_s_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_ul_s_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_f_s_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_f_s_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_d_s_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_d_s_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)s_m_s_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)s_m_s_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_i_s_op2
+                )
+                || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % s_i_s_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 58 failed");
                 passed = false;
             }
-            if ((f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2") != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2") != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2") != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2") != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2") != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2") != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)f_f("op2")) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)f_f("op2") != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2") != 3))
+            if (
+                (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)f_f("op2")
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)f_f("op2")
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2")
+                )
+                || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_f("op2") != 3)
+            )
             {
                 Console.WriteLine("testcase 59 failed");
                 passed = false;
             }
-            if ((f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.i_cl_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.ui_cl_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.ui_cl_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.l_cl_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.l_cl_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.ul_cl_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.ul_cl_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.f_cl_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.f_cl_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.d_cl_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.d_cl_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)cl1.m_cl_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)cl1.m_cl_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.i_cl_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.i_cl_op2 != 3))
+            if (
+                (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.i_cl_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.ui_cl_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.ui_cl_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.l_cl_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.l_cl_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.ul_cl_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.ul_cl_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.f_cl_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.f_cl_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.d_cl_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.d_cl_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)cl1.m_cl_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)cl1.m_cl_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.i_cl_op2
+                )
+                || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % cl1.i_cl_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 60 failed");
                 passed = false;
             }
-            if ((f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.i_vt_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.ui_vt_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.ui_vt_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.l_vt_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.l_vt_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.ul_vt_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.ul_vt_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.f_vt_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.f_vt_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.d_vt_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.d_vt_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)vt1.m_vt_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)vt1.m_vt_op2 != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.i_vt_op2) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.i_vt_op2 != 3))
+            if (
+                (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.i_vt_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.ui_vt_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.ui_vt_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.l_vt_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.l_vt_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.ul_vt_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.ul_vt_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.f_vt_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.f_vt_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.d_vt_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.d_vt_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)vt1.m_vt_op2
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)vt1.m_vt_op2
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.i_vt_op2
+                )
+                || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % vt1.i_vt_op2 != 3)
+            )
             {
                 Console.WriteLine("testcase 61 failed");
                 passed = false;
             }
-            if ((f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr1d_op2[0] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_arr1d_op2[0]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_arr1d_op2[0] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_arr1d_op2[0]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_arr1d_op2[0] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_arr1d_op2[0]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_arr1d_op2[0] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_arr1d_op2[0]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_arr1d_op2[0] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_op2[0]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_op2[0] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_arr1d_op2[0]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_arr1d_op2[0] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr1d_op2[0]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr1d_op2[0] != 3))
+            if (
+                (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr1d_op2[0]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_arr1d_op2[0]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_arr1d_op2[0]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_arr1d_op2[0]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_arr1d_op2[0]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_arr1d_op2[0]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_arr1d_op2[0]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_arr1d_op2[0]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_arr1d_op2[0]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_op2[0]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_arr1d_op2[0]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_arr1d_op2[0]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_arr1d_op2[0]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr1d_op2[0]
+                )
+                || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr1d_op2[0] != 3)
+            )
             {
                 Console.WriteLine("testcase 62 failed");
                 passed = false;
             }
-            if ((f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr2d_op2[index[0, 1], index[1, 0]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_arr2d_op2[index[0, 1], index[1, 0]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_arr2d_op2[index[0, 1], index[1, 0]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_arr2d_op2[index[0, 1], index[1, 0]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_arr2d_op2[index[0, 1], index[1, 0]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_arr2d_op2[index[0, 1], index[1, 0]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_arr2d_op2[index[0, 1], index[1, 0]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr2d_op2[index[0, 1], index[1, 0]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr2d_op2[index[0, 1], index[1, 0]] != 3))
+            if (
+                (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % ui_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % l_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % ul_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % f_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % d_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % (float)m_arr2d_op2[index[0, 1], index[1, 0]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % i_arr2d_op2[index[0, 1], index[1, 0]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr2d_op2[index[0, 1], index[1, 0]]
+                    != 3
+                )
+            )
             {
                 Console.WriteLine("testcase 63 failed");
                 passed = false;
             }
-            if ((f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ui_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % l_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % ul_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % f_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % d_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]] != f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr3d_op2[index[0, 0], 0, index[1, 1]]) || (f_arr3d_op1[index[0, 0], 0, index[1, 1]] % i_arr3d_op2[index[0, 0], 0, index[1, 1]] != 3))
+            if (
+                (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % ui_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % l_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % ul_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % f_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % d_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % (float)m_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                )
+                || (
+                    f_arr3d_op1[index[0, 0], 0, index[1, 1]]
+                        % i_arr3d_op2[index[0, 0], 0, index[1, 1]]
+                    != 3
+                )
+            )
             {
                 Console.WriteLine("testcase 64 failed");
                 passed = false;

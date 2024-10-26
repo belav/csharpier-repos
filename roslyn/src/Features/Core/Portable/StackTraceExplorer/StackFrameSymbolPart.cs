@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
     internal enum StackFrameSymbolPart
     {
         /// <summary>
-        /// The intended lookup is to find a method symbol associated 
+        /// The intended lookup is to find a method symbol associated
         /// with a <see cref="ParsedStackFrame"/>
         /// </summary>
         Method,
@@ -21,6 +21,6 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
         /// The intended lookup is to find a type symbol associated
         /// with a <see cref="ParsedStackFrame"/>
         /// </summary>
-        ContainingType
+        ContainingType,
     }
 }

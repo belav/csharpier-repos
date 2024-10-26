@@ -15,14 +15,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 {
     internal class NewTypeDestinationSelectionViewModel : AbstractNotifyPropertyChanged
     {
-        public static NewTypeDestinationSelectionViewModel Default = new(
-            string.Empty,
-            LanguageNames.CSharp,
-            string.Empty,
-            string.Empty,
-            ImmutableArray<string>.Empty,
-            null
-        );
+        public static NewTypeDestinationSelectionViewModel Default =
+            new(
+                string.Empty,
+                LanguageNames.CSharp,
+                string.Empty,
+                string.Empty,
+                ImmutableArray<string>.Empty,
+                null
+            );
 
         private readonly string _fileExtension;
         private readonly string _defaultNamespace;
@@ -38,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             string defaultNamespace,
             string generatedNameTypeParameterSuffix,
             ImmutableArray<string> conflictingNames,
-            ISyntaxFactsService? syntaxFactsService)
+            ISyntaxFactsService? syntaxFactsService
+        )
         {
             _defaultName = defaultName;
             _fileExtension = languageName == LanguageNames.CSharp ? ".cs" : ".vb";
@@ -54,11 +56,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
         private string _typeName;
         public string TypeName
         {
-            get
-            {
-                return _typeName;
-            }
-
+            get { return _typeName; }
             set
             {
                 if (SetProperty(ref _typeName, value))
@@ -75,9 +73,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
             {
                 return string.Format(
                     "{0}{1}{2}",
-                    string.IsNullOrEmpty(_defaultNamespace) ? string.Empty : _defaultNamespace + ".",
+                    string.IsNullOrEmpty(_defaultNamespace)
+                        ? string.Empty
+                        : _defaultNamespace + ".",
                     _typeName.Trim(),
-                    _generatedNameTypeParameterSuffix);
+                    _generatedNameTypeParameterSuffix
+                );
             }
         }
 
@@ -119,14 +120,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
 
             if (!_syntaxFactsService.IsValidIdentifier(trimmedName))
             {
-                message = string.Format(ServicesVSResources.Name_is_not_a_valid_0_identifier, _languageName);
+                message = string.Format(
+                    ServicesVSResources.Name_is_not_a_valid_0_identifier,
+                    _languageName
+                );
                 return false;
             }
 
             var trimmedFileName = FileName.Trim();
-            if (!Path.GetExtension(trimmedFileName).Equals(_fileExtension, StringComparison.OrdinalIgnoreCase))
+            if (
+                !Path.GetExtension(trimmedFileName)
+                    .Equals(_fileExtension, StringComparison.OrdinalIgnoreCase)
+            )
             {
-                message = string.Format(ServicesVSResources.File_name_must_have_the_0_extension, _fileExtension);
+                message = string.Format(
+                    ServicesVSResources.File_name_must_have_the_0_extension,
+                    _fileExtension
+                );
                 return false;
             }
 
@@ -145,6 +155,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CommonControls
     internal enum NewTypeDestination
     {
         CurrentFile,
-        NewFile
+        NewFile,
     };
 }

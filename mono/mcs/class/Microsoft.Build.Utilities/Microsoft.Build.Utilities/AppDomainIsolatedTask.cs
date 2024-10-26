@@ -32,82 +32,66 @@ using Microsoft.Build.Framework;
 
 namespace Microsoft.Build.Utilities
 {
-	[LoadInSeparateAppDomainAttribute]
-	[MonoTODO]
-	public abstract class AppDomainIsolatedTask : MarshalByRefObject, ITask
-	{
-		IBuildEngine		buildEngine;
-		string			helpKeywordPrefix;
-		ITaskHost		hostObject;
-		TaskLoggingHelper	log;
-		ResourceManager		taskResources;
-		
-		protected AppDomainIsolatedTask ()
-			: this (null, null)
-		{
-		}
+    [LoadInSeparateAppDomainAttribute]
+    [MonoTODO]
+    public abstract class AppDomainIsolatedTask : MarshalByRefObject, ITask
+    {
+        IBuildEngine buildEngine;
+        string helpKeywordPrefix;
+        ITaskHost hostObject;
+        TaskLoggingHelper log;
+        ResourceManager taskResources;
 
-		protected AppDomainIsolatedTask (ResourceManager taskResources)
-			: this (taskResources, null)
-		{
-		}
+        protected AppDomainIsolatedTask()
+            : this(null, null) { }
 
-		protected AppDomainIsolatedTask (ResourceManager taskResources,
-						 string helpKeywordPrefix)
-		{
-			this.taskResources = taskResources;
-			this.helpKeywordPrefix = helpKeywordPrefix;
-		}
+        protected AppDomainIsolatedTask(ResourceManager taskResources)
+            : this(taskResources, null) { }
 
-		public abstract bool Execute ();
+        protected AppDomainIsolatedTask(ResourceManager taskResources, string helpKeywordPrefix)
+        {
+            this.taskResources = taskResources;
+            this.helpKeywordPrefix = helpKeywordPrefix;
+        }
 
-		public override object InitializeLifetimeService ()
-		{
-			return null;
-		}
+        public abstract bool Execute();
 
-		public IBuildEngine BuildEngine {
-			get {
-				return buildEngine;
-			}
-			set {
-				buildEngine = value;
-				log = new TaskLoggingHelper (this);
-			}
-		}
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
 
-		protected string HelpKeywordPrefix {
-			get {
-				return helpKeywordPrefix;
-			}
-			set {
-				helpKeywordPrefix = value;
-			}
-		}
+        public IBuildEngine BuildEngine
+        {
+            get { return buildEngine; }
+            set
+            {
+                buildEngine = value;
+                log = new TaskLoggingHelper(this);
+            }
+        }
 
-		public ITaskHost HostObject {
-			get {
-				return hostObject;
-			}
-			set {
-				hostObject = value;
-			}
-		}
+        protected string HelpKeywordPrefix
+        {
+            get { return helpKeywordPrefix; }
+            set { helpKeywordPrefix = value; }
+        }
 
-		public TaskLoggingHelper Log {
-			get {
-				return log;
-			}
-		}
+        public ITaskHost HostObject
+        {
+            get { return hostObject; }
+            set { hostObject = value; }
+        }
 
-		protected ResourceManager TaskResources	{
-			get {
-				return taskResources;
-			}
-			set {
-				taskResources = value;
-			}
-		}
-	}
+        public TaskLoggingHelper Log
+        {
+            get { return log; }
+        }
+
+        protected ResourceManager TaskResources
+        {
+            get { return taskResources; }
+            set { taskResources = value; }
+        }
+    }
 }
-

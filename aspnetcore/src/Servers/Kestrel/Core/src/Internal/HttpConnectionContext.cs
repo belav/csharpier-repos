@@ -22,7 +22,19 @@ internal class HttpConnectionContext : BaseHttpConnectionContext
         MemoryPool<byte> memoryPool,
         IPEndPoint? localEndPoint,
         IPEndPoint? remoteEndPoint,
-        ConnectionMetricsContext metricsContext) : base(connectionId, protocols, altSvcHeader, connectionContext, serviceContext, connectionFeatures, memoryPool, localEndPoint, remoteEndPoint)
+        ConnectionMetricsContext metricsContext
+    )
+        : base(
+            connectionId,
+            protocols,
+            altSvcHeader,
+            connectionContext,
+            serviceContext,
+            connectionFeatures,
+            memoryPool,
+            localEndPoint,
+            remoteEndPoint
+        )
     {
         MetricsContext = metricsContext;
     }

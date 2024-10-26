@@ -112,7 +112,7 @@ internal static class WellKnownTypeData
         Microsoft_AspNetCore_Authorization_AuthorizeAttribute,
         Microsoft_Extensions_DependencyInjection_PolicyServiceCollectionExtensions,
         Microsoft_Extensions_DependencyInjection_FromKeyedServicesAttribute,
-        Microsoft_AspNetCore_Authorization_AuthorizationOptions
+        Microsoft_AspNetCore_Authorization_AuthorizationOptions,
     }
 
     public static string[] WellKnownTypeNames = new[]
@@ -222,6 +222,6 @@ internal static class WellKnownTypeData
         "Microsoft.AspNetCore.Authorization.AuthorizeAttribute",
         "Microsoft.Extensions.DependencyInjection.PolicyServiceCollectionExtensions",
         "Microsoft.Extensions.DependencyInjection.FromKeyedServicesAttribute",
-        "Microsoft.AspNetCore.Authorization.AuthorizationOptions"
+        "Microsoft.AspNetCore.Authorization.AuthorizationOptions",
     };
 }

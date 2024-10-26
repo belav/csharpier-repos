@@ -4,19 +4,18 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
+    using System.Diagnostics;
+    using System.EnterpriseServices;
+    using System.Globalization;
     using System.Runtime.Diagnostics;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
     using System.Security.Principal;
     using System.ServiceModel;
-    using System.Transactions;
-    using System.Diagnostics;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
-    using System.EnterpriseServices;
+    using System.ServiceModel.Dispatcher;
+    using System.Transactions;
     using SR = System.ServiceModel.SR;
-    using System.Globalization;
-
 
     class ComPlusThreadInitializer : ICallContextInitializer
     {
@@ -24,9 +23,11 @@ namespace System.ServiceModel.ComIntegration
         ComPlusAuthorization comAuth;
         Guid iid;
 
-        public ComPlusThreadInitializer(ContractDescription contract,
-                                        DispatchOperation operation,
-                                        ServiceInfo info)
+        public ComPlusThreadInitializer(
+            ContractDescription contract,
+            DispatchOperation operation,
+            ServiceInfo info
+        )
         {
             this.info = info;
             iid = contract.ContractType.GUID;
@@ -57,25 +58,33 @@ namespace System.ServiceModel.ComIntegration
                         if (operationRoleMembers == null)
                         {
                             // Did not find the operation
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(
-                                SR.GetString(SR.ComOperationNotFound,
-                                             contract.Name,
-                                             operation.Name)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                Error.ListenerInitFailed(
+                                    SR.GetString(
+                                        SR.ComOperationNotFound,
+                                        contract.Name,
+                                        operation.Name
+                                    )
+                                )
+                            );
                         }
                         break;
                     }
                 }
 
-                this.comAuth = new ComPlusAuthorization(serviceRoleMembers,
-                                                        contractRoleMembers,
-                                                        operationRoleMembers);
+                this.comAuth = new ComPlusAuthorization(
+                    serviceRoleMembers,
+                    contractRoleMembers,
+                    operationRoleMembers
+                );
             }
         }
 
         public object BeforeInvoke(
             InstanceContext instanceContext,
             IClientChannel channel,
-            Message message)
+            Message message
+        )
         {
             ComPlusServerSecurity serverSecurity = null;
             WindowsImpersonationContext impersonateContext = null;
@@ -94,7 +103,6 @@ namespace System.ServiceModel.ComIntegration
             {
                 try
                 {
-
                     identity = MessageUtil.GetMessageIdentity(message);
 
                     if (message.Headers.From != null)
@@ -104,10 +112,18 @@ namespace System.ServiceModel.ComIntegration
                     instanceID = instance.GetHashCode();
                     action = message.Headers.Action;
 
-
-
-                    ComPlusMethodCallTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationInvokingMethod,
-                        SR.TraceCodeComIntegrationInvokingMethod, this.info, from, action, identity.Name, iid, instanceID, false);
+                    ComPlusMethodCallTrace.Trace(
+                        TraceEventType.Verbose,
+                        TraceCode.ComIntegrationInvokingMethod,
+                        SR.TraceCodeComIntegrationInvokingMethod,
+                        this.info,
+                        from,
+                        action,
+                        identity.Name,
+                        iid,
+                        instanceID,
+                        false
+                    );
 
                     // Security
                     //
@@ -116,7 +132,9 @@ namespace System.ServiceModel.ComIntegration
                     {
                         if (!this.comAuth.IsAuthorizedForOperation(identity))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.CallAccessDenied());
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                Error.CallAccessDenied()
+                            );
                         }
                     }
 
@@ -126,8 +144,7 @@ namespace System.ServiceModel.ComIntegration
                         //       the COM server security thing, so be sure
                         //       to clear it with Dispose() eventually.
                         //
-                        serverSecurity = new ComPlusServerSecurity(identity,
-                                                                   this.info.CheckRoles);
+                        serverSecurity = new ComPlusServerSecurity(identity, this.info.CheckRoles);
                     }
 
                     // Transactions
@@ -149,26 +166,46 @@ namespace System.ServiceModel.ComIntegration
                             }
                             else
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.TransactionMismatch());
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    Error.TransactionMismatch()
+                                );
                             }
-                            ComPlusMethodCallTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationInvokingMethodNewTransaction,
-                            SR.TraceCodeComIntegrationInvokingMethodNewTransaction, this.info, from, action, identity.Name, iid, instanceID, incomingTransactionID);
+                            ComPlusMethodCallTrace.Trace(
+                                TraceEventType.Verbose,
+                                TraceCode.ComIntegrationInvokingMethodNewTransaction,
+                                SR.TraceCodeComIntegrationInvokingMethodNewTransaction,
+                                this.info,
+                                from,
+                                action,
+                                identity.Name,
+                                iid,
+                                instanceID,
+                                incomingTransactionID
+                            );
                         }
                         catch (FaultException e)
                         {
                             Transaction txProxy = proxy.CurrentTransaction;
                             Guid currentTransactionID = Guid.Empty;
                             if (txProxy != null)
-                                currentTransactionID = txProxy.TransactionInformation.DistributedIdentifier;
+                                currentTransactionID = txProxy
+                                    .TransactionInformation
+                                    .DistributedIdentifier;
 
                             string identityName = String.Empty;
 
                             if (null != identity)
                                 identityName = identity.Name;
 
-                            DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
+                            DiagnosticUtility.EventLog.LogEvent(
+                                TraceEventType.Error,
                                 (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
-                                (uint)System.Runtime.Diagnostics.EventLogEventId.ComPlusInvokingMethodFailedMismatchedTransactions,
+                                (uint)
+                                    System
+                                        .Runtime
+                                        .Diagnostics
+                                        .EventLogEventId
+                                        .ComPlusInvokingMethodFailedMismatchedTransactions,
                                 incomingTransactionID.ToString("B").ToUpperInvariant(),
                                 currentTransactionID.ToString("B").ToUpperInvariant(),
                                 from.ToString(),
@@ -177,18 +214,33 @@ namespace System.ServiceModel.ComIntegration
                                 iid.ToString(),
                                 action,
                                 instanceID.ToString(CultureInfo.InvariantCulture),
-                                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(CultureInfo.InvariantCulture),
-                                SafeNativeMethods.GetCurrentThreadId().ToString(CultureInfo.InvariantCulture),
+                                System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(
+                                    CultureInfo.InvariantCulture
+                                ),
+                                SafeNativeMethods
+                                    .GetCurrentThreadId()
+                                    .ToString(CultureInfo.InvariantCulture),
                                 identityName,
-                                e.ToString());
+                                e.ToString()
+                            );
                             errorTraced = true;
                             throw;
                         }
                     }
                     else
                     {
-                        ComPlusMethodCallTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationInvokingMethodContextTransaction,
-                        SR.TraceCodeComIntegrationInvokingMethodContextTransaction, this.info, from, action, identity.Name, iid, instanceID, true);
+                        ComPlusMethodCallTrace.Trace(
+                            TraceEventType.Verbose,
+                            TraceCode.ComIntegrationInvokingMethodContextTransaction,
+                            SR.TraceCodeComIntegrationInvokingMethodContextTransaction,
+                            this.info,
+                            from,
+                            action,
+                            identity.Name,
+                            iid,
+                            instanceID,
+                            true
+                        );
                     }
 
                     // Impersonation
@@ -199,16 +251,17 @@ namespace System.ServiceModel.ComIntegration
                     }
 
                     CorrelationState correlationState;
-                    correlationState = new CorrelationState(impersonateContext,
-                                                            serverSecurity,
-                                                            from,
-                                                            action,
-                                                            identity.Name,
-                                                            instanceID);
+                    correlationState = new CorrelationState(
+                        impersonateContext,
+                        serverSecurity,
+                        from,
+                        action,
+                        identity.Name,
+                        instanceID
+                    );
 
                     impersonateContext = null;
                     serverSecurity = null;
-
 
                     return correlationState;
                 }
@@ -220,7 +273,6 @@ namespace System.ServiceModel.ComIntegration
                     if (serverSecurity != null)
                         ((IDisposable)serverSecurity).Dispose();
                 }
-
             }
             catch (Exception e)
             {
@@ -228,24 +280,34 @@ namespace System.ServiceModel.ComIntegration
                 {
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        DiagnosticUtility.EventLog.LogEvent(TraceEventType.Error,
-                           (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
-                           (uint)System.Runtime.Diagnostics.EventLogEventId.ComPlusInvokingMethodFailed,
-                           from == null ? string.Empty : from.ToString(),
-                           this.info.AppID.ToString("B").ToUpperInvariant(),
-                           this.info.Clsid.ToString("B").ToUpperInvariant(),
-                           iid.ToString("B").ToUpperInvariant(),
-                           action,
-                           instanceID.ToString(CultureInfo.InvariantCulture),
-                           System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(CultureInfo.InvariantCulture),
-                           SafeNativeMethods.GetCurrentThreadId().ToString(CultureInfo.InvariantCulture),
-                           identity.Name,
-                           e.ToString());
+                        DiagnosticUtility.EventLog.LogEvent(
+                            TraceEventType.Error,
+                            (ushort)System.Runtime.Diagnostics.EventLogCategory.ComPlus,
+                            (uint)
+                                System
+                                    .Runtime
+                                    .Diagnostics
+                                    .EventLogEventId
+                                    .ComPlusInvokingMethodFailed,
+                            from == null ? string.Empty : from.ToString(),
+                            this.info.AppID.ToString("B").ToUpperInvariant(),
+                            this.info.Clsid.ToString("B").ToUpperInvariant(),
+                            iid.ToString("B").ToUpperInvariant(),
+                            action,
+                            instanceID.ToString(CultureInfo.InvariantCulture),
+                            System.Threading.Thread.CurrentThread.ManagedThreadId.ToString(
+                                CultureInfo.InvariantCulture
+                            ),
+                            SafeNativeMethods
+                                .GetCurrentThreadId()
+                                .ToString(CultureInfo.InvariantCulture),
+                            identity.Name,
+                            e.ToString()
+                        );
                     }
                 }
                 throw;
             }
-
         }
 
         public void AfterInvoke(object correlationState)
@@ -253,10 +315,19 @@ namespace System.ServiceModel.ComIntegration
             CorrelationState state = (CorrelationState)correlationState;
             if (state != null)
             {
-                ComPlusMethodCallTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationInvokedMethod,
-                    SR.TraceCodeComIntegrationInvokedMethod, this.info, state.From, state.Action, state.CallerIdentity, iid, state.InstanceID, false);
+                ComPlusMethodCallTrace.Trace(
+                    TraceEventType.Verbose,
+                    TraceCode.ComIntegrationInvokedMethod,
+                    SR.TraceCodeComIntegrationInvokedMethod,
+                    this.info,
+                    state.From,
+                    state.Action,
+                    state.CallerIdentity,
+                    iid,
+                    state.InstanceID,
+                    false
+                );
                 state.Cleanup();
-
             }
         }
 
@@ -269,12 +340,14 @@ namespace System.ServiceModel.ComIntegration
             string callerIdentity;
             int instanceID;
 
-            public CorrelationState(WindowsImpersonationContext context,
-                                    ComPlusServerSecurity serverSecurity,
-                                    Uri from,
-                                    string action,
-                                    string callerIdentity,
-                                    int instanceID)
+            public CorrelationState(
+                WindowsImpersonationContext context,
+                ComPlusServerSecurity serverSecurity,
+                Uri from,
+                string action,
+                string callerIdentity,
+                int instanceID
+            )
             {
                 this.impersonationContext = context;
                 this.serverSecurity = serverSecurity;
@@ -283,35 +356,24 @@ namespace System.ServiceModel.ComIntegration
                 this.callerIdentity = callerIdentity;
                 this.instanceID = instanceID;
             }
+
             public Uri From
             {
-                get
-                {
-                    return this.from;
-                }
+                get { return this.from; }
             }
 
             public string Action
             {
-                get
-                {
-                    return this.action;
-                }
+                get { return this.action; }
             }
             public string CallerIdentity
             {
-                get
-                {
-                    return this.callerIdentity;
-                }
+                get { return this.callerIdentity; }
             }
 
             public int InstanceID
             {
-                get
-                {
-                    return this.instanceID;
-                }
+                get { return this.instanceID; }
             }
 
             public void Cleanup()

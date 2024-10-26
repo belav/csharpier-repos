@@ -15,15 +15,23 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
     [ExtensionOrder(After = PredefinedCodeRefactoringProviderNames.ConvertAnonymousTypeToClass)]
     [ExtensionOrder(After = PredefinedCodeRefactoringProviderNames.InvertConditional)]
     [ExtensionOrder(After = PredefinedCodeRefactoringProviderNames.InvertLogical)]
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeRefactoringProviderNames.IntroduceVariable), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.IntroduceVariable
+        ),
+        Shared
+    ]
     internal class IntroduceVariableCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public IntroduceVariableCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public IntroduceVariableCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -32,8 +40,12 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 return;
 
             var service = document.GetRequiredLanguageService<IIntroduceVariableService>();
-            var cleanupOptions = await document.GetCodeCleanupOptionsAsync(context.Options, context.CancellationToken).ConfigureAwait(false);
-            var action = await service.IntroduceVariableAsync(document, textSpan, cleanupOptions, cancellationToken).ConfigureAwait(false);
+            var cleanupOptions = await document
+                .GetCodeCleanupOptionsAsync(context.Options, context.CancellationToken)
+                .ConfigureAwait(false);
+            var action = await service
+                .IntroduceVariableAsync(document, textSpan, cleanupOptions, cancellationToken)
+                .ConfigureAwait(false);
             if (action != null)
                 context.RegisterRefactoring(action, textSpan);
         }

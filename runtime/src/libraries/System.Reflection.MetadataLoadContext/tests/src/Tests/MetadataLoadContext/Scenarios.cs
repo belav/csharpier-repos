@@ -6,7 +6,7 @@ using Xunit;
 
 namespace System.Reflection.Tests
 {
-    using Console = global::System.Reflection.Tests.FakeConsole;  // Must be inside namespace for redirect to work properly.
+    using Console = global::System.Reflection.Tests.FakeConsole; // Must be inside namespace for redirect to work properly.
 
     public static partial class MetadataLoadContextTests
     {
@@ -14,9 +14,15 @@ namespace System.Reflection.Tests
         public static void Scenario_GetAssemblyName()
         {
             // Ensure you can do all this without resolving dependencies.
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
-                Assembly a = lc.LoadFromAssemblyPath(AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly));
+                Assembly a = lc.LoadFromAssemblyPath(
+                    AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly)
+                );
                 AssemblyName assemblyName = a.GetName();
                 Console.WriteLine(assemblyName.FullName);
             }
@@ -26,9 +32,15 @@ namespace System.Reflection.Tests
         public static void Scenario_EnumerateDependencies()
         {
             // Ensure you can do all this without resolving dependencies.
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
-                Assembly a = lc.LoadFromAssemblyPath(AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly));
+                Assembly a = lc.LoadFromAssemblyPath(
+                    AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly)
+                );
                 foreach (AssemblyName name in a.GetReferencedAssemblies())
                 {
                     Console.WriteLine(name.FullName);
@@ -40,12 +52,20 @@ namespace System.Reflection.Tests
         public static void Scenario_FindACoreAssembly()
         {
             // Ensure you can do all this without setting a core assembly.
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
                 Assembly[] candidates =
                 {
-                    lc.LoadFromAssemblyPath(AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly)),
-                    lc.LoadFromAssemblyPath(AssemblyPathHelper.GetAssemblyLocation(typeof(object).Assembly)),
+                    lc.LoadFromAssemblyPath(
+                        AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly)
+                    ),
+                    lc.LoadFromAssemblyPath(
+                        AssemblyPathHelper.GetAssemblyLocation(typeof(object).Assembly)
+                    ),
                 };
 
                 foreach (Assembly candidate in candidates)
@@ -66,9 +86,15 @@ namespace System.Reflection.Tests
         public static void Scenario_EnumerateTypesAndMembers()
         {
             // Ensure you can do all this without resolving dependencies.
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
-                Assembly a = lc.LoadFromAssemblyPath(AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly));
+                Assembly a = lc.LoadFromAssemblyPath(
+                    AssemblyPathHelper.GetAssemblyLocation(typeof(GenericClass1<>).Assembly)
+                );
                 foreach (TypeInfo t in a.DefinedTypes)
                 {
                     Console.WriteLine(t.FullName);

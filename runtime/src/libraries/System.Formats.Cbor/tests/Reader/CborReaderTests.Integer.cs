@@ -102,7 +102,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData((ulong)uint.MaxValue + 1, "1b0000000100000000")]
         [InlineData(long.MaxValue, "1b7fffffffffffffff")]
         [InlineData(ulong.MaxValue, "1bffffffffffffffff")]
-        public static void ReadUInt64_SingleValue_HappyPath(ulong expectedResult, string hexEncoding)
+        public static void ReadUInt64_SingleValue_HappyPath(
+            ulong expectedResult,
+            string hexEncoding
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
@@ -146,7 +149,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(ushort.MaxValue, "39ffff")]
         [InlineData(uint.MaxValue, "3affffffff")]
         [InlineData(ulong.MaxValue, "3bffffffffffffffff")]
-        public static void ReadCborNegativeIntegerRepresentation_SingleValue_HappyPath(ulong expectedResult, string hexEncoding)
+        public static void ReadCborNegativeIntegerRepresentation_SingleValue_HappyPath(
+            ulong expectedResult,
+            string hexEncoding
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data);
@@ -166,7 +172,11 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Strict, "1a0000ffff", ushort.MaxValue)]
         [InlineData(CborConformanceMode.Strict, "1b00000000ffffffff", uint.MaxValue)]
         [InlineData(CborConformanceMode.Strict, "1b0000000000000001", 1)]
-        public static void ReadUInt64_NonCanonicalEncodings_SupportedConformanceMode_ShouldSucceed(CborConformanceMode mode, string hexEncoding, ulong expectedValue)
+        public static void ReadUInt64_NonCanonicalEncodings_SupportedConformanceMode_ShouldSucceed(
+            CborConformanceMode mode,
+            string hexEncoding,
+            ulong expectedValue
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data, mode);
@@ -186,7 +196,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical, "1a0000ffff")]
         [InlineData(CborConformanceMode.Ctap2Canonical, "1b00000000ffffffff")]
         [InlineData(CborConformanceMode.Ctap2Canonical, "1b0000000000000001")]
-        public static void ReadUInt64_NonCanonicalEncodings_UnSupportedConformanceMode_ShouldThrowCborContentException(CborConformanceMode mode, string hexEncoding)
+        public static void ReadUInt64_NonCanonicalEncodings_UnSupportedConformanceMode_ShouldThrowCborContentException(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data, mode);
@@ -205,7 +218,11 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Strict, "3a0000ffff", -1 - ushort.MaxValue)]
         [InlineData(CborConformanceMode.Strict, "3b00000000ffffffff", -1 - uint.MaxValue)]
         [InlineData(CborConformanceMode.Strict, "3b0000000000000000", -1)]
-        public static void ReadInt64_NonCanonicalEncodings_SupportedConformanceMode_ShouldSucceed(CborConformanceMode mode, string hexEncoding, long expectedValue)
+        public static void ReadInt64_NonCanonicalEncodings_SupportedConformanceMode_ShouldSucceed(
+            CborConformanceMode mode,
+            string hexEncoding,
+            long expectedValue
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data, mode);
@@ -225,7 +242,10 @@ namespace System.Formats.Cbor.Tests
         [InlineData(CborConformanceMode.Ctap2Canonical, "3a0000ffff")]
         [InlineData(CborConformanceMode.Ctap2Canonical, "3b00000000ffffffff")]
         [InlineData(CborConformanceMode.Ctap2Canonical, "3b0000000000000001")]
-        public static void ReadInt64_NonCanonicalEncodings_UnSupportedConformanceMode_ShouldThrowCborContentException(CborConformanceMode mode, string hexEncoding)
+        public static void ReadInt64_NonCanonicalEncodings_UnSupportedConformanceMode_ShouldThrowCborContentException(
+            CborConformanceMode mode,
+            string hexEncoding
+        )
         {
             byte[] data = hexEncoding.HexToByteArray();
             var reader = new CborReader(data, mode);
@@ -233,12 +253,13 @@ namespace System.Formats.Cbor.Tests
             Assert.Equal(data.Length, reader.BytesRemaining);
         }
 
-
         [Theory]
         [InlineData("1b8000000000000000")] // long.MaxValue + 1
         [InlineData("3b8000000000000000")] // long.MinValue - 1
         [InlineData("1bffffffffffffffff")] // ulong.MaxValue
-        public static void ReadInt64_OutOfRangeValues_ShouldThrowOverflowException(string hexEncoding)
+        public static void ReadInt64_OutOfRangeValues_ShouldThrowOverflowException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -248,12 +269,14 @@ namespace System.Formats.Cbor.Tests
         }
 
         [Theory]
-        [InlineData("1a80000000")]         // int.MaxValue + 1
-        [InlineData("3a80000000")]         // int.MinValue - 1
+        [InlineData("1a80000000")] // int.MaxValue + 1
+        [InlineData("3a80000000")] // int.MinValue - 1
         [InlineData("1b8000000000000000")] // long.MaxValue + 1
         [InlineData("3a8000000000000000")] // long.MinValue - 1
         [InlineData("1bffffffffffffffff")] // ulong.MaxValue
-        public static void ReadInt32_OutOfRangeValues_ShouldThrowOverflowException(string hexEncoding)
+        public static void ReadInt32_OutOfRangeValues_ShouldThrowOverflowException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -265,7 +288,9 @@ namespace System.Formats.Cbor.Tests
         [Theory]
         [InlineData("20")]
         [InlineData("1b0000000100000000")] // uint.MaxValue + 1
-        public static void ReadUInt32_OutOfRangeValues_ShouldThrowOverflowException(string hexEncoding)
+        public static void ReadUInt32_OutOfRangeValues_ShouldThrowOverflowException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -278,7 +303,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("20")] // -1
         [InlineData("3863")] // -100
         [InlineData("3b7fffffffffffffff")] // long.MinValue
-        public static void ReadUInt64_OutOfRangeValues_ShouldThrowOverflowException(string hexEncoding)
+        public static void ReadUInt64_OutOfRangeValues_ShouldThrowOverflowException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -294,7 +321,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("a0")] // {}
         [InlineData("f97e00")] // NaN
         [InlineData("fb3ff199999999999a")] // 1.1
-        public static void ReadInt64_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadInt64_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -312,7 +341,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("a0")] // {}
         [InlineData("f97e00")] // NaN
         [InlineData("fb3ff199999999999a")] // 1.1
-        public static void ReadInt32_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadInt32_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -330,7 +361,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("a0")] // {}
         [InlineData("f97e00")] // NaN
         [InlineData("fb3ff199999999999a")] // 1.1
-        public static void ReadUInt32_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadUInt32_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -348,7 +381,9 @@ namespace System.Formats.Cbor.Tests
         [InlineData("a0")] // {}
         [InlineData("f97e00")] // NaN
         [InlineData("fb3ff199999999999a")] // 1.1
-        public static void ReadUInt64_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadUInt64_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -368,12 +403,16 @@ namespace System.Formats.Cbor.Tests
         [InlineData("a0")] // {}
         [InlineData("f97e00")] // NaN
         [InlineData("fb3ff199999999999a")] // 1.1
-        public static void ReadCborNegativeIntegerRepresentation_InvalidTypes_ShouldThrowInvalidOperationException(string hexEncoding)
+        public static void ReadCborNegativeIntegerRepresentation_InvalidTypes_ShouldThrowInvalidOperationException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
-            Assert.Throws<InvalidOperationException>(() => reader.ReadCborNegativeIntegerRepresentation());
+            Assert.Throws<InvalidOperationException>(
+                () => reader.ReadCborNegativeIntegerRepresentation()
+            );
 
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
@@ -414,19 +453,25 @@ namespace System.Formats.Cbor.Tests
         [InlineData("3912")]
         [InlineData("3a000000")]
         [InlineData("3b00000000000000")]
-        public static void ReadCborNegativeIntegerRepresentation_InvalidData_ShouldThrowCborContentException(string hexEncoding)
+        public static void ReadCborNegativeIntegerRepresentation_InvalidData_ShouldThrowCborContentException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
 
-            Assert.Throws<CborContentException>(() => reader.ReadCborNegativeIntegerRepresentation());
+            Assert.Throws<CborContentException>(
+                () => reader.ReadCborNegativeIntegerRepresentation()
+            );
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
 
         [Theory]
         [InlineData("1f")]
         [InlineData("3f")]
-        public static void ReadInt64_IndefiniteLengthIntegers_ShouldThrowCborContentException(string hexEncoding)
+        public static void ReadInt64_IndefiniteLengthIntegers_ShouldThrowCborContentException(
+            string hexEncoding
+        )
         {
             byte[] encoding = hexEncoding.HexToByteArray();
             var reader = new CborReader(encoding);
@@ -451,7 +496,9 @@ namespace System.Formats.Cbor.Tests
             byte[] encoding = Array.Empty<byte>();
             var reader = new CborReader(encoding);
 
-            Assert.Throws<CborContentException>(() => reader.ReadCborNegativeIntegerRepresentation());
+            Assert.Throws<CborContentException>(
+                () => reader.ReadCborNegativeIntegerRepresentation()
+            );
             Assert.Equal(encoding.Length, reader.BytesRemaining);
         }
     }

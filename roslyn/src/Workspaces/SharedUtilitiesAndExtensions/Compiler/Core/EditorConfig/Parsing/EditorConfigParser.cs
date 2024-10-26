@@ -13,39 +13,64 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
     internal static class EditorConfigParser
     {
         // Matches EditorConfig section header such as "[*.{js,py}]", see https://editorconfig.org for details
-        private static readonly Regex s_sectionMatcher = new(@"^\s*\[(([^#;]|\\#|\\;)+)\]\s*([#;].*)?$", RegexOptions.Compiled);
+        private static readonly Regex s_sectionMatcher =
+            new(@"^\s*\[(([^#;]|\\#|\\;)+)\]\s*([#;].*)?$", RegexOptions.Compiled);
+
         // Matches EditorConfig property such as "indent_style = space", see https://editorconfig.org for details
-        private static readonly Regex s_propertyMatcher = new(@"^\s*([\w\.\-_]+)\s*[=:]\s*(.*?)\s*([#;].*)?$", RegexOptions.Compiled);
+        private static readonly Regex s_propertyMatcher =
+            new(@"^\s*([\w\.\-_]+)\s*[=:]\s*(.*?)\s*([#;].*)?$", RegexOptions.Compiled);
 
-        private static ImmutableHashSet<string> ReservedKeys { get; }
-            = ImmutableHashSet.CreateRange(AnalyzerConfigOptions.KeyComparer, new[] {
-                "root",
-                "indent_style",
-                "indent_size",
-                "tab_width",
-                "end_of_line",
-                "charset",
-                "trim_trailing_whitespace",
-                "insert_final_newline",
-            });
+        private static ImmutableHashSet<string> ReservedKeys { get; } =
+            ImmutableHashSet.CreateRange(
+                AnalyzerConfigOptions.KeyComparer,
+                new[]
+                {
+                    "root",
+                    "indent_style",
+                    "indent_size",
+                    "tab_width",
+                    "end_of_line",
+                    "charset",
+                    "trim_trailing_whitespace",
+                    "insert_final_newline",
+                }
+            );
 
-        private static ImmutableHashSet<string> ReservedValues { get; }
-            = ImmutableHashSet.CreateRange(CaseInsensitiveComparison.Comparer, new[] { "unset" });
+        private static ImmutableHashSet<string> ReservedValues { get; } =
+            ImmutableHashSet.CreateRange(CaseInsensitiveComparison.Comparer, new[] { "unset" });
 
-        public static TEditorConfigFile Parse<TEditorConfigFile, TResult, TAccumulator>(string text, string? pathToFile, TAccumulator accumulator)
+        public static TEditorConfigFile Parse<TEditorConfigFile, TResult, TAccumulator>(
+            string text,
+            string? pathToFile,
+            TAccumulator accumulator
+        )
             where TAccumulator : IEditorConfigOptionAccumulator<TEditorConfigFile, TResult>
             where TEditorConfigFile : EditorConfigFile<TResult>
             where TResult : EditorConfigOption
         {
-            return Parse<TEditorConfigFile, TResult, TAccumulator>(SourceText.From(text), pathToFile, accumulator);
+            return Parse<TEditorConfigFile, TResult, TAccumulator>(
+                SourceText.From(text),
+                pathToFile,
+                accumulator
+            );
         }
 
-        public static TEditorConfigFile Parse<TEditorConfigFile, TEditorConfigOption, TAccumulator>(SourceText text, string? pathToFile, TAccumulator accumulator)
-            where TAccumulator : IEditorConfigOptionAccumulator<TEditorConfigFile, TEditorConfigOption>
+        public static TEditorConfigFile Parse<TEditorConfigFile, TEditorConfigOption, TAccumulator>(
+            SourceText text,
+            string? pathToFile,
+            TAccumulator accumulator
+        )
+            where TAccumulator : IEditorConfigOptionAccumulator<
+                    TEditorConfigFile,
+                    TEditorConfigOption
+                >
             where TEditorConfigFile : EditorConfigFile<TEditorConfigOption>
             where TEditorConfigOption : EditorConfigOption
         {
-            var activeSectionProperties = ImmutableDictionary.CreateBuilder<string, (string value, TextLine? line)>(AnalyzerConfigOptions.KeyComparer);
+            var activeSectionProperties = ImmutableDictionary.CreateBuilder<
+                string,
+                (string value, TextLine? line)
+            >(AnalyzerConfigOptions.KeyComparer);
             var activeSectionName = "";
             var activeSectionStart = 0;
             var activeSectionEnd = 0;
@@ -120,7 +145,13 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
                 var isGlobal = activeSectionName == "";
                 var fullText = activeLine.ToString();
                 var sectionSpan = new TextSpan(activeSectionStart, activeSectionEnd);
-                var previousSection = new Section(pathToFile, isGlobal, sectionSpan, activeSectionName, fullText);
+                var previousSection = new Section(
+                    pathToFile,
+                    isGlobal,
+                    sectionSpan,
+                    activeSectionName,
+                    fullText
+                );
                 accumulator.ProcessSection(previousSection, activeSectionProperties);
             }
 

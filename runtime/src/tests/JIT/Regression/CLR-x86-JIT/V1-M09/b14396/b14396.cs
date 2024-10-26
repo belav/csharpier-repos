@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -14,8 +15,7 @@ namespace DefaultNamespace
         [Fact]
         public static int TestEntryPoint()
         {
-
-            byte x = 0xFF;		//	ANDREIS: Added cast operator due compiler error SC0031
+            byte x = 0xFF; //	ANDREIS: Added cast operator due compiler error SC0031
             byte tmp = 255;
             if (tmp == (byte)x)
             {

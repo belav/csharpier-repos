@@ -10,7 +10,11 @@ namespace Microsoft.Extensions.Hosting;
 
 internal static class Http2CatIHostBuilderExtensions
 {
-    public static IHostBuilder UseHttp2Cat(this IHostBuilder hostBuilder, string address, Func<Http2Utilities, Task> scenario)
+    public static IHostBuilder UseHttp2Cat(
+        this IHostBuilder hostBuilder,
+        string address,
+        Func<Http2Utilities, Task> scenario
+    )
     {
         hostBuilder.ConfigureServices(services =>
         {

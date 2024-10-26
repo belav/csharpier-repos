@@ -4,22 +4,19 @@ using System;
 
 public class B : FriendClass
 {
-	protected internal override void Test ()
-	{
-	}
-	
-	internal override void Test_2 ()
-	{
-		new FriendClass().Test ();
-	}
+    protected internal override void Test() { }
+
+    internal override void Test_2()
+    {
+        new FriendClass().Test();
+    }
 }
 
 public class Test
 {
-	public static void Main ()
-	{
-		var b = new B ();
-		b.Test_2 ();
-	}
+    public static void Main()
+    {
+        var b = new B();
+        b.Test_2();
+    }
 }
-

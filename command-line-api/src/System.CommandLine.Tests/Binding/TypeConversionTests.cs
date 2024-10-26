@@ -1,13 +1,13 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using FluentAssertions;
 using System.Collections;
 using System.Collections.Generic;
 using System.CommandLine.Utility;
 using System.IO;
 using System.Linq;
 using System.Net;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests.Binding
@@ -31,12 +31,11 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<FileInfo>("--file");
 
-            var file = new FileInfo(Path.Combine(new DirectoryInfo("temp").FullName, "the-file.txt"));
+            var file = new FileInfo(
+                Path.Combine(new DirectoryInfo("temp").FullName, "the-file.txt")
+            );
 
-            GetValue(option, $"--file {file.FullName}")
-                  .Name
-                  .Should()
-                  .Be("the-file.txt");
+            GetValue(option, $"--file {file.FullName}").Name.Should().Be("the-file.txt");
         }
 
         [Fact]
@@ -44,37 +43,25 @@ namespace System.CommandLine.Tests.Binding
         {
             var argument = new CliArgument<FileInfo>("the-arg");
 
-            var command = new CliCommand("the-command")
-            {
-                argument
-            };
+            var command = new CliCommand("the-command") { argument };
 
-            var file = new FileInfo(Path.Combine(new DirectoryInfo("temp").FullName, "the-file.txt"));
+            var file = new FileInfo(
+                Path.Combine(new DirectoryInfo("temp").FullName, "the-file.txt")
+            );
             var result = command.Parse($"{file.FullName}");
 
-            result.GetValue(argument)
-                  .Name
-                  .Should()
-                  .Be("the-file.txt");
+            result.GetValue(argument).Name.Should().Be("the-file.txt");
         }
 
         [Fact]
         public void Command_argument_of_FileInfo_returns_null_when_argument_is_not_provided()
         {
-            var argument = new CliArgument<FileInfo>("the-arg")
-            {
-                Arity = ArgumentArity.ZeroOrOne
-            };
-            var command = new CliCommand("the-command")
-            {
-                argument
-            };
+            var argument = new CliArgument<FileInfo>("the-arg") { Arity = ArgumentArity.ZeroOrOne };
+            var command = new CliCommand("the-command") { argument };
 
             var result = command.Parse("");
 
-            result.GetValue(argument)
-                  .Should()
-                  .BeNull();
+            result.GetValue(argument).Should().BeNull();
         }
 
         [Fact]
@@ -83,13 +70,11 @@ namespace System.CommandLine.Tests.Binding
             var option = new CliOption<FileInfo>("--file");
             var result = new CliRootCommand { option }.Parse(new string[] { "--file", "" });
 
-            result.Errors
-                  .Should()
-                  .ContainSingle()
-                  .Which
-                  .Message
-                  .Should()
-                  .Contain("Cannot parse argument '' for option '--file'");
+            result
+                .Errors.Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Contain("Cannot parse argument '' for option '--file'");
         }
 
         [Fact]
@@ -125,10 +110,7 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Command_Argument_defaults_arity_to_ZeroOrOne_for_nullable_types()
         {
-            var command = new CliCommand("the-command")
-            {
-                new CliArgument<int?>("arg")
-            };
+            var command = new CliCommand("the-command") { new CliArgument<int?>("arg") };
 
             command.Arguments.Single().Arity.Should().BeEquivalentTo(ArgumentArity.ZeroOrOne);
         }
@@ -149,10 +131,7 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
 
-            var command = new CliCommand("something")
-            {
-                option
-            };
+            var command = new CliCommand("something") { option };
 
             var result = command.Parse("something");
 
@@ -164,10 +143,7 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
 
-            var command = new CliCommand("something")
-            {
-                option
-            };
+            var command = new CliCommand("something") { option };
 
             var result = command.Parse("something -x 456");
 
@@ -183,16 +159,9 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<bool>("-x");
 
-            var command = new CliCommand("the-command")
-            {
-                option
-            };
+            var command = new CliCommand("the-command") { option };
 
-            command
-                .Parse(commandLine)
-                .GetValue(option)
-                .Should()
-                .BeTrue();
+            command.Parse(commandLine).GetValue(option).Should().BeTrue();
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/2210
@@ -203,8 +172,7 @@ namespace System.CommandLine.Tests.Binding
             rootCommand.Options.Add(option);
             var result = rootCommand.Parse("--test ouch");
 
-            result.Invoking(r =>  r.GetValue(option))
-                  .Should().NotThrow();
+            result.Invoking(r => r.GetValue(option)).Should().NotThrow();
         }
 
         [Fact] // https://github.com/dotnet/command-line-api/issues/2210
@@ -215,8 +183,7 @@ namespace System.CommandLine.Tests.Binding
             rootCommand.Options.Add(option);
             var result = rootCommand.Parse("--test ouch");
 
-            result.Invoking(r => r.GetValue(option))
-                  .Should().NotThrow();
+            result.Invoking(r => r.GetValue(option)).Should().NotThrow();
         }
 
         [Theory]
@@ -224,40 +191,30 @@ namespace System.CommandLine.Tests.Binding
         [InlineData("the-command -x true")]
         [InlineData("the-command -x:true")]
         [InlineData("the-command -x=true")]
-        public void Nullable_bool_parses_as_true_when_the_option_has_been_applied(string commandLine)
+        public void Nullable_bool_parses_as_true_when_the_option_has_been_applied(
+            string commandLine
+        )
         {
             var option = new CliOption<bool?>("-x");
 
-            var command = new CliCommand("the-command")
-            {
-                option
-            };
+            var command = new CliCommand("the-command") { option };
 
-            command
-                .Parse(commandLine)
-                .GetValue(option)
-                .Should()
-                .BeTrue();
+            command.Parse(commandLine).GetValue(option).Should().BeTrue();
         }
 
         [Theory]
         [InlineData("the-command -x false")]
         [InlineData("the-command -x:false")]
         [InlineData("the-command -x=false")]
-        public void Nullable_bool_parses_as_false_when_the_option_has_been_applied(string commandLine)
+        public void Nullable_bool_parses_as_false_when_the_option_has_been_applied(
+            string commandLine
+        )
         {
             var option = new CliOption<bool?>("-x");
 
-            var command = new CliCommand("the-command")
-            {
-                option
-            };
+            var command = new CliCommand("the-command") { option };
 
-            command
-                .Parse(commandLine)
-                .GetValue(option)
-                .Should()
-                .BeFalse();
+            command.Parse(commandLine).GetValue(option).Should().BeFalse();
         }
 
         [Fact]
@@ -265,9 +222,7 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<bool?>("-x");
 
-            GetValue(option, "")
-                .Should()
-                .Be(null);
+            GetValue(option, "").Should().Be(null);
         }
 
         [Fact]
@@ -275,45 +230,37 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<string>("-x");
 
-            var command = new CliCommand("the-command")
-            {
-                option
-            };
+            var command = new CliCommand("the-command") { option };
 
             var result = command.Parse("the-command -x");
 
             Action getValue = () => result.GetValue(option);
 
-            getValue.Should()
-                    .Throw<InvalidOperationException>()
-                    .Which
-                    .Message
-                    .Should()
-                    .Be("Required argument missing for option: '-x'.");
+            getValue
+                .Should()
+                .Throw<InvalidOperationException>()
+                .Which.Message.Should()
+                .Be("Required argument missing for option: '-x'.");
         }
 
         [Theory]
         [InlineData("c -a o c c")]
         [InlineData("c c -a o c")]
         [InlineData("c c c")]
-        public void When_command_argument_has_arity_greater_than_one_it_captures_arguments_before_and_after_option(string commandLine)
+        public void When_command_argument_has_arity_greater_than_one_it_captures_arguments_before_and_after_option(
+            string commandLine
+        )
         {
             var argument = new CliArgument<string[]>("the-arg")
             {
-                Arity = ArgumentArity.ZeroOrMore
+                Arity = ArgumentArity.ZeroOrMore,
             };
 
-            var command = new CliCommand("the-command")
-            {
-                new CliOption<string>("-a"),
-                argument
-            };
+            var command = new CliCommand("the-command") { new CliOption<string>("-a"), argument };
 
             var result = command.Parse(commandLine);
 
-            result.GetValue(argument)
-                  .Should()
-                  .BeEquivalentTo(new[] { "c", "c", "c" });
+            result.GetValue(argument).Should().BeEquivalentTo(new[] { "c", "c", "c" });
         }
 
         [Fact]
@@ -321,17 +268,11 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<bool>("-x");
 
-            var command =
-                new CliCommand("the-command")
-                {
-                    option
-                };
+            var command = new CliCommand("the-command") { option };
 
             var result = command.Parse("-x");
 
-            result.GetValue(option)
-                  .Should()
-                  .Be(true);
+            result.GetValue(option).Should().Be(true);
         }
 
         [Fact]
@@ -339,16 +280,11 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<bool>("-x");
 
-            var command = new CliCommand("something")
-            {
-                option
-            };
+            var command = new CliCommand("something") { option };
 
             var result = command.Parse("something");
 
-            result.GetValue(option)
-                  .Should()
-                  .Be(false);
+            result.GetValue(option).Should().Be(false);
         }
 
         [Fact]
@@ -356,16 +292,11 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<string>("-x") { DefaultValueFactory = (_) => "123" };
 
-            var command = new CliCommand("something")
-            {
-                option
-            };
+            var command = new CliCommand("something") { option };
 
             var result = command.Parse("something");
 
-            result.GetValue(option)
-                  .Should()
-                  .Be("123");
+            result.GetValue(option).Should().Be("123");
         }
 
         [Fact]
@@ -373,16 +304,11 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<string>("-x") { DefaultValueFactory = (_) => null };
 
-            var command = new CliCommand("something")
-            {
-                option
-            };
+            var command = new CliCommand("something") { option };
 
             var result = command.Parse("something");
 
-            result.GetValue(option)
-                  .Should()
-                  .Be(null);
+            result.GetValue(option).Should().Be(null);
         }
 
         [Fact]
@@ -390,15 +316,9 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
 
-            var command = new CliCommand("something")
-            {
-                option
-            };
+            var command = new CliCommand("something") { option };
 
-            command.Parse("something")
-                   .GetValue(option)
-                   .Should()
-                   .Be(123);
+            command.Parse("something").GetValue(option).Should().Be(123);
         }
 
         [Fact]
@@ -406,12 +326,12 @@ namespace System.CommandLine.Tests.Binding
         {
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
 
-            var option = new CliOption<DirectoryInfo>("-x") { DefaultValueFactory = (_) => directoryInfo };
-
-            var command = new CliCommand("something")
+            var option = new CliOption<DirectoryInfo>("-x")
             {
-                option
+                DefaultValueFactory = (_) => directoryInfo,
             };
+
+            var command = new CliCommand("something") { option };
 
             var result = command.Parse("something");
 
@@ -423,12 +343,12 @@ namespace System.CommandLine.Tests.Binding
         {
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
 
-            var argument = new CliArgument<DirectoryInfo>("the-arg") { DefaultValueFactory = (_) => directoryInfo };
-
-            var command = new CliCommand("something")
+            var argument = new CliArgument<DirectoryInfo>("the-arg")
             {
-                argument
+                DefaultValueFactory = (_) => directoryInfo,
             };
+
+            var command = new CliCommand("something") { argument };
 
             var result = command.Parse("something");
 
@@ -444,10 +364,7 @@ namespace System.CommandLine.Tests.Binding
         {
             var option = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
 
-            var command = new CliCommand("something")
-            {
-                option
-            };
+            var command = new CliCommand("something") { option };
 
             var result = command.Parse("something -x 456");
 
@@ -455,7 +372,6 @@ namespace System.CommandLine.Tests.Binding
 
             value.Should().Be(456);
         }
-
 
         [Fact]
         public void Values_can_be_correctly_converted_to_DateTime_without_the_parser_specifying_a_custom_converter()
@@ -466,7 +382,6 @@ namespace System.CommandLine.Tests.Binding
 
             GetValue(option, $"-x {dateString}").Should().Be(DateTime.Parse(dateString));
         }
-
 
         [Fact]
         public void Values_can_be_correctly_converted_to_nullable_DateTime_without_the_parser_specifying_a_custom_converter()
@@ -499,35 +414,37 @@ namespace System.CommandLine.Tests.Binding
         }
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_decimal_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<decimal>("-x"), "-x 123.456").Should().Be(123.456m);
+        public void Values_can_be_correctly_converted_to_decimal_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<decimal>("-x"), "-x 123.456").Should().Be(123.456m);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_decimal_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<decimal?>("-x"), "-x 123.456").Should().Be(123.456m);
+        public void Values_can_be_correctly_converted_to_nullable_decimal_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<decimal?>("-x"), "-x 123.456").Should().Be(123.456m);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_double_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<double>("-x"), "-x 123.456").Should().Be(123.456d);
+        public void Values_can_be_correctly_converted_to_double_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<double>("-x"), "-x 123.456").Should().Be(123.456d);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_double_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<double?>("-x"), "-x 123.456").Should().Be(123.456d);
+        public void Values_can_be_correctly_converted_to_nullable_double_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<double?>("-x"), "-x 123.456").Should().Be(123.456d);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_float_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<float>("-x"), "-x 123.456").Should().Be(123.456f);
+        public void Values_can_be_correctly_converted_to_float_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<float>("-x"), "-x 123.456").Should().Be(123.456f);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_float_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<float?>("-x"), "-x 123.456").Should().Be(123.456f);
+        public void Values_can_be_correctly_converted_to_nullable_float_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<float?>("-x"), "-x 123.456").Should().Be(123.456f);
 
         [Fact]
         public void Values_can_be_correctly_converted_to_Guid_without_the_parser_specifying_a_custom_converter()
         {
             const string guidString = "75517282-018F-46BB-B15F-1D8DBFE23F6E";
 
-            GetValue(new CliOption<Guid>("-x"), $"-x {guidString}").Should().Be(Guid.Parse(guidString));
+            GetValue(new CliOption<Guid>("-x"), $"-x {guidString}")
+                .Should()
+                .Be(Guid.Parse(guidString));
         }
 
         [Fact]
@@ -535,7 +452,9 @@ namespace System.CommandLine.Tests.Binding
         {
             const string guidString = "75517282-018F-46BB-B15F-1D8DBFE23F6E";
 
-            GetValue(new CliOption<Guid?>("-x"), $"-x {guidString}").Should().Be(Guid.Parse(guidString));
+            GetValue(new CliOption<Guid?>("-x"), $"-x {guidString}")
+                .Should()
+                .Be(Guid.Parse(guidString));
         }
 
         [Fact]
@@ -543,7 +462,9 @@ namespace System.CommandLine.Tests.Binding
         {
             const string timeSpanString = "30";
 
-            GetValue(new CliOption<TimeSpan>("-x"), $"-x {timeSpanString}").Should().Be(TimeSpan.Parse(timeSpanString));
+            GetValue(new CliOption<TimeSpan>("-x"), $"-x {timeSpanString}")
+                .Should()
+                .Be(TimeSpan.Parse(timeSpanString));
         }
 
         [Fact]
@@ -551,18 +472,30 @@ namespace System.CommandLine.Tests.Binding
         {
             const string timeSpanString = "30";
 
-            GetValue(new CliOption<TimeSpan?>("-x"), $"-x {timeSpanString}").Should().Be(TimeSpan.Parse(timeSpanString));
+            GetValue(new CliOption<TimeSpan?>("-x"), $"-x {timeSpanString}")
+                .Should()
+                .Be(TimeSpan.Parse(timeSpanString));
         }
 
         [Fact]
         public void Values_can_be_correctly_converted_to_Uri_when_custom_parser_is_provided()
         {
-            CliOption<Uri> option = new ("-x")
-            {
-                CustomParser = (argumentResult) => Uri.TryCreate(argumentResult.Tokens.Last().Value, UriKind.RelativeOrAbsolute, out var uri) ? uri : null
-            };
+            CliOption<Uri> option =
+                new("-x")
+                {
+                    CustomParser = (argumentResult) =>
+                        Uri.TryCreate(
+                            argumentResult.Tokens.Last().Value,
+                            UriKind.RelativeOrAbsolute,
+                            out var uri
+                        )
+                            ? uri
+                            : null,
+                };
 
-            GetValue(option, "-x http://example.com").Should().BeEquivalentTo(new Uri("http://example.com"));
+            GetValue(option, "-x http://example.com")
+                .Should()
+                .BeEquivalentTo(new Uri("http://example.com"));
         }
 
         [Fact]
@@ -573,52 +506,54 @@ namespace System.CommandLine.Tests.Binding
         }
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_long_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<long>("-x"), "-x 123456790").Should().Be(123456790L);
+        public void Values_can_be_correctly_converted_to_long_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<long>("-x"), "-x 123456790").Should().Be(123456790L);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_long_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<long?>("-x"), "-x 123456790").Should().Be(123456790L);
+        public void Values_can_be_correctly_converted_to_nullable_long_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<long?>("-x"), "-x 123456790").Should().Be(123456790L);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_short_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<short>("-s"), "-s 1234").Should().Be(1234);
+        public void Values_can_be_correctly_converted_to_short_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<short>("-s"), "-s 1234").Should().Be(1234);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_short_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<short?>("-s"), "-s 1234").Should().Be(1234);
+        public void Values_can_be_correctly_converted_to_nullable_short_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<short?>("-s"), "-s 1234").Should().Be(1234);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_ulong_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<ulong>("-x"), "-x 1234").Should().Be(1234);
+        public void Values_can_be_correctly_converted_to_ulong_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<ulong>("-x"), "-x 1234").Should().Be(1234);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_ulong_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<ulong?>("-x"), "-x 1234").Should().Be(1234);
+        public void Values_can_be_correctly_converted_to_nullable_ulong_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<ulong?>("-x"), "-x 1234").Should().Be(1234);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_ushort_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<ushort>("-s"), "-s 1234").Should().Be(1234);
+        public void Values_can_be_correctly_converted_to_ushort_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<ushort>("-s"), "-s 1234").Should().Be(1234);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_ushort_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<ushort?>("-s"), "-s 1234").Should().Be(1234);
+        public void Values_can_be_correctly_converted_to_nullable_ushort_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<ushort?>("-s"), "-s 1234").Should().Be(1234);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_sbyte_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<sbyte>("-us"), "-us 123").Should().Be(123);
+        public void Values_can_be_correctly_converted_to_sbyte_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<sbyte>("-us"), "-us 123").Should().Be(123);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_sbyte_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<sbyte?>("-us"), "-us 123").Should().Be(123);
+        public void Values_can_be_correctly_converted_to_nullable_sbyte_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<sbyte?>("-us"), "-us 123").Should().Be(123);
 
         [Fact]
         public void Values_can_be_correctly_converted_to_ipaddress_when_custom_parser_is_provided()
         {
-            CliOption<IPAddress> option = new ("-us")
-            { 
-                CustomParser = (argumentResult) => IPAddress.Parse(argumentResult.Tokens.Last().Value)
-            };
+            CliOption<IPAddress> option =
+                new("-us")
+                {
+                    CustomParser = (argumentResult) =>
+                        IPAddress.Parse(argumentResult.Tokens.Last().Value),
+                };
 
             GetValue(option, "-us 1.2.3.4").Should().Be(IPAddress.Parse("1.2.3.4"));
         }
@@ -627,10 +562,12 @@ namespace System.CommandLine.Tests.Binding
         [Fact]
         public void Values_can_be_correctly_converted_to_ipendpoint_when_custom_parser_is_provided()
         {
-            CliOption<IPEndPoint> option = new("-us")
-            {
-                CustomParser = (argumentResult) => IPEndPoint.Parse(argumentResult.Tokens.Last().Value)
-            };
+            CliOption<IPEndPoint> option =
+                new("-us")
+                {
+                    CustomParser = (argumentResult) =>
+                        IPEndPoint.Parse(argumentResult.Tokens.Last().Value),
+                };
 
             GetValue(option, "-us 1.2.3.4:56").Should().Be(IPEndPoint.Parse("1.2.3.4:56"));
         }
@@ -638,41 +575,49 @@ namespace System.CommandLine.Tests.Binding
 
 #if NET6_0_OR_GREATER
         [Fact]
-        public void Values_can_be_correctly_converted_to_dateonly_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<DateOnly>("-us"), "-us 2022-03-02").Should().Be(DateOnly.Parse("2022-03-02"));
+        public void Values_can_be_correctly_converted_to_dateonly_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<DateOnly>("-us"), "-us 2022-03-02")
+                .Should()
+                .Be(DateOnly.Parse("2022-03-02"));
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_dateonly_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<DateOnly?>("-x"), "-x 2022-03-02").Should().Be(DateOnly.Parse("2022-03-02"));
+        public void Values_can_be_correctly_converted_to_nullable_dateonly_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<DateOnly?>("-x"), "-x 2022-03-02")
+                .Should()
+                .Be(DateOnly.Parse("2022-03-02"));
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_timeonly_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<TimeOnly>("-us"), "-us 12:34:56").Should().Be(TimeOnly.Parse("12:34:56"));
+        public void Values_can_be_correctly_converted_to_timeonly_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<TimeOnly>("-us"), "-us 12:34:56")
+                .Should()
+                .Be(TimeOnly.Parse("12:34:56"));
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_timeonly_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<TimeOnly?>("-x"), "-x 12:34:56").Should().Be(TimeOnly.Parse("12:34:56"));
+        public void Values_can_be_correctly_converted_to_nullable_timeonly_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<TimeOnly?>("-x"), "-x 12:34:56")
+                .Should()
+                .Be(TimeOnly.Parse("12:34:56"));
 #endif
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_byte_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<byte>("-us"), "-us 123").Should().Be(123);
+        public void Values_can_be_correctly_converted_to_byte_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<byte>("-us"), "-us 123").Should().Be(123);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_byte_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<byte?>("-us"), "-us 123").Should().Be(123);
+        public void Values_can_be_correctly_converted_to_nullable_byte_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<byte?>("-us"), "-us 123").Should().Be(123);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_uint_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<uint>("-us"), "-us 1234").Should().Be(1234);
+        public void Values_can_be_correctly_converted_to_uint_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<uint>("-us"), "-us 1234").Should().Be(1234);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_nullable_uint_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<uint?>("-us"), "-us 1234").Should().Be(1234);
+        public void Values_can_be_correctly_converted_to_nullable_uint_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<uint?>("-us"), "-us 1234").Should().Be(1234);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_array_of_int_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<int[]>("-x"), "-x 1 -x 2 -x 3").Should().BeEquivalentTo(1, 2, 3);
+        public void Values_can_be_correctly_converted_to_array_of_int_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<int[]>("-x"), "-x 1 -x 2 -x 3").Should().BeEquivalentTo(1, 2, 3);
 
         [Theory]
         [InlineData(0, 100_000, typeof(string[]))]
@@ -685,7 +630,6 @@ namespace System.CommandLine.Tests.Binding
         [InlineData(0, 3, typeof(IList<string>))]
         [InlineData(0, 100_000, typeof(ICollection<string>))]
         [InlineData(0, 3, typeof(ICollection<string>))]
-
         [InlineData(1, 100_000, typeof(string[]))]
         [InlineData(1, 3, typeof(string[]))]
         [InlineData(1, 100_000, typeof(IEnumerable<string>))]
@@ -699,37 +643,43 @@ namespace System.CommandLine.Tests.Binding
         public void Max_arity_greater_than_1_converts_to_enumerable_types(
             int minArity,
             int maxArity,
-            Type argumentType)
+            Type argumentType
+        )
         {
             var option = OptionBuilder.CreateOption("--items", valueType: argumentType);
             option.Arity = new ArgumentArity(minArity, maxArity);
 
-            var command = new CliRootCommand
-            {
-                option
-            };
+            var command = new CliRootCommand { option };
 
             var result = command.Parse("--items one --items two --items three");
 
             result.Errors.Should().BeEmpty();
-            result.GetResult(option).GetValueOrDefault<object>().Should().BeAssignableTo(argumentType);
+            result
+                .GetResult(option)
+                .GetValueOrDefault<object>()
+                .Should()
+                .BeAssignableTo(argumentType);
         }
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_List_of_int_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<List<int>>("-x"), "-x 1 -x 2 -x 3").Should().BeEquivalentTo(1, 2, 3);
+        public void Values_can_be_correctly_converted_to_List_of_int_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<List<int>>("-x"), "-x 1 -x 2 -x 3")
+                .Should()
+                .BeEquivalentTo(1, 2, 3);
 
         [Fact]
-        public void Values_can_be_correctly_converted_to_IEnumerable_of_int_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<IEnumerable<int>>("-x"), "-x 1 -x 2 -x 3").Should().BeEquivalentTo(1, 2, 3);
+        public void Values_can_be_correctly_converted_to_IEnumerable_of_int_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<IEnumerable<int>>("-x"), "-x 1 -x 2 -x 3")
+                .Should()
+                .BeEquivalentTo(1, 2, 3);
 
         [Fact]
-        public void Enum_values_can_be_correctly_converted_based_on_enum_value_name_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<DayOfWeek>("-x"), "-x Monday").Should().Be(DayOfWeek.Monday);
+        public void Enum_values_can_be_correctly_converted_based_on_enum_value_name_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<DayOfWeek>("-x"), "-x Monday").Should().Be(DayOfWeek.Monday);
 
         [Fact]
-        public void Nullable_enum_values_can_be_correctly_converted_based_on_enum_value_name_without_the_parser_specifying_a_custom_converter()
-            => GetValue(new CliOption<DayOfWeek?>("-x"), "-x Monday").Should().Be(DayOfWeek.Monday);
+        public void Nullable_enum_values_can_be_correctly_converted_based_on_enum_value_name_without_the_parser_specifying_a_custom_converter() =>
+            GetValue(new CliOption<DayOfWeek?>("-x"), "-x Monday").Should().Be(DayOfWeek.Monday);
 
         [Fact]
         public void Enum_values_that_cannot_be_parsed_result_in_an_informative_error()
@@ -738,13 +688,13 @@ namespace System.CommandLine.Tests.Binding
 
             var value = new CliRootCommand { option }.Parse("-x Notaday");
 
-            value.Errors
-                 .Should()
-                 .ContainSingle()
-                 .Which
-                 .Message
-                 .Should()
-                 .Contain("Cannot parse argument 'Notaday' for option '-x' as expected type 'System.DayOfWeek'.");
+            value
+                .Errors.Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Contain(
+                    "Cannot parse argument 'Notaday' for option '-x' as expected type 'System.DayOfWeek'."
+                );
         }
 
         [Fact]
@@ -756,12 +706,13 @@ namespace System.CommandLine.Tests.Binding
 
             Action getValue = () => result.GetValue(option);
 
-            getValue.Should()
-                    .Throw<InvalidOperationException>()
-                    .Which
-                    .Message
-                    .Should()
-                    .Be("Cannot parse argument 'not-an-int' for option '-x' as expected type 'System.Int32'.");
+            getValue
+                .Should()
+                .Throw<InvalidOperationException>()
+                .Which.Message.Should()
+                .Be(
+                    "Cannot parse argument 'not-an-int' for option '-x' as expected type 'System.Int32'."
+                );
         }
 
         [Fact]
@@ -769,21 +720,20 @@ namespace System.CommandLine.Tests.Binding
         {
             Action getValue = () => GetValue(new CliOption<int[]>("-x"), "-x not-an-int -x 2");
 
-            getValue.Should()
-                    .Throw<InvalidOperationException>()
-                    .Which
-                    .Message
-                    .Should()
-                    .Be("Cannot parse argument 'not-an-int' for option '-x' as expected type 'System.Int32'.");
+            getValue
+                .Should()
+                .Throw<InvalidOperationException>()
+                .Which.Message.Should()
+                .Be(
+                    "Cannot parse argument 'not-an-int' for option '-x' as expected type 'System.Int32'."
+                );
         }
 
         [Fact]
-        public void String_defaults_to_null_when_not_specified_only_for_not_required_arguments()
-            => GetValue(
-                new CliArgument<string>("arg")
-                { 
-                    Arity = ArgumentArity.ZeroOrMore
-                }, "").Should().BeNull();
+        public void String_defaults_to_null_when_not_specified_only_for_not_required_arguments() =>
+            GetValue(new CliArgument<string>("arg") { Arity = ArgumentArity.ZeroOrMore }, "")
+                .Should()
+                .BeNull();
 
         [Theory]
         [InlineData(typeof(List<string>))]
@@ -803,12 +753,15 @@ namespace System.CommandLine.Tests.Binding
         [InlineData(typeof(FileAccess[]))]
         public void Sequence_type_defaults_to_empty_when_not_specified(Type sequenceType)
         {
-            var argument = Activator.CreateInstance(typeof(CliArgument<>).MakeGenericType(sequenceType), new object[] { "argName" });
+            var argument = Activator.CreateInstance(
+                typeof(CliArgument<>).MakeGenericType(sequenceType),
+                new object[] { "argName" }
+            );
 
             AssertParsedValueIsEmpty((dynamic)argument);
         }
 
-        private void AssertParsedValueIsEmpty<T>(CliArgument<T> argument) where T : IEnumerable
-            => GetValue(argument, "").Should().BeEmpty();
+        private void AssertParsedValueIsEmpty<T>(CliArgument<T> argument)
+            where T : IEnumerable => GetValue(argument, "").Should().BeEmpty();
     }
 }

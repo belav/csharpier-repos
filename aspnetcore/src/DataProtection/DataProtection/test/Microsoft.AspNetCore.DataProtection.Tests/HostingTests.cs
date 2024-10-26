@@ -21,7 +21,8 @@ public class HostingTests
     {
         var tcs = new TaskCompletionSource();
         var mockKeyRing = new Mock<IKeyRingProvider>();
-        mockKeyRing.Setup(m => m.GetCurrentKeyRing())
+        mockKeyRing
+            .Setup(m => m.GetCurrentKeyRing())
             .Returns(Mock.Of<IKeyRing>())
             .Callback(() => tcs.TrySetResult());
 
@@ -29,10 +30,18 @@ public class HostingTests
             .UseStartup<TestStartup>()
             .ConfigureServices(s =>
                 s.AddDataProtection()
-                .Services
-                .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                .AddSingleton<IServer>(
-                    new FakeServer(onStart: () => tcs.TrySetException(new InvalidOperationException("Server was started before key ring was initialized")))));
+                    .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                    .AddSingleton<IServer>(
+                        new FakeServer(
+                            onStart: () =>
+                                tcs.TrySetException(
+                                    new InvalidOperationException(
+                                        "Server was started before key ring was initialized"
+                                    )
+                                )
+                        )
+                    )
+            );
 
         using (var host = builder.Build())
         {
@@ -48,17 +57,26 @@ public class HostingTests
     {
         var tcs = new TaskCompletionSource();
         var mockKeyRing = new Mock<IKeyRingProvider>();
-        mockKeyRing.Setup(m => m.GetCurrentKeyRing())
+        mockKeyRing
+            .Setup(m => m.GetCurrentKeyRing())
             .Returns(Mock.Of<IKeyRing>())
             .Callback(() => tcs.TrySetResult());
 
         var builder = new HostBuilder()
             .ConfigureServices(s =>
                 s.AddDataProtection()
-                .Services
-                .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                .AddSingleton<IServer>(
-                    new FakeServer(onStart: () => tcs.TrySetException(new InvalidOperationException("Server was started before key ring was initialized")))))
+                    .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                    .AddSingleton<IServer>(
+                        new FakeServer(
+                            onStart: () =>
+                                tcs.TrySetException(
+                                    new InvalidOperationException(
+                                        "Server was started before key ring was initialized"
+                                    )
+                                )
+                        )
+                    )
+            )
             .ConfigureWebHost(b => b.UseStartup<TestStartup>());
 
         using (var host = builder.Build())
@@ -74,8 +92,13 @@ public class HostingTests
     public async Task StartupContinuesOnFailureToLoadKey()
     {
         var mockKeyRing = new Mock<IKeyRingProvider>();
-        mockKeyRing.Setup(m => m.GetCurrentKeyRing())
-            .Throws(new NotSupportedException("This mock doesn't actually work, but shouldn't kill the server"))
+        mockKeyRing
+            .Setup(m => m.GetCurrentKeyRing())
+            .Throws(
+                new NotSupportedException(
+                    "This mock doesn't actually work, but shouldn't kill the server"
+                )
+            )
             .Verifiable();
 
         var mockServer = new Mock<IServer>();
@@ -84,10 +107,10 @@ public class HostingTests
         var builder = new HostBuilder()
             .ConfigureServices(s =>
                 s.AddDataProtection()
-                .Services
-                .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                .AddSingleton(mockServer.Object))
-                .ConfigureWebHost(b => b.UseStartup<TestStartup>());
+                    .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                    .AddSingleton(mockServer.Object)
+            )
+            .ConfigureWebHost(b => b.UseStartup<TestStartup>());
 
         using (var host = builder.Build())
         {
@@ -99,9 +122,7 @@ public class HostingTests
 
     private class TestStartup
     {
-        public void Configure(IApplicationBuilder app)
-        {
-        }
+        public void Configure(IApplicationBuilder app) { }
     }
 
     public class FakeServer : IServer
@@ -115,7 +136,10 @@ public class HostingTests
 
         public IFeatureCollection Features => new FeatureCollection();
 
-        public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
+        public Task StartAsync<TContext>(
+            IHttpApplication<TContext> application,
+            CancellationToken cancellationToken
+        )
         {
             _onStart();
             return Task.CompletedTask;
@@ -123,8 +147,6 @@ public class HostingTests
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

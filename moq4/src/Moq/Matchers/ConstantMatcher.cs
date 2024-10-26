@@ -8,7 +8,6 @@ using System.Linq;
 
 namespace Moq.Matchers
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal class ConstantMatcher : IMatcher
@@ -30,7 +29,6 @@ namespace Moq.Matchers
         class ConstantMatcher : IMatcher
     */
     class ConstantMatcher : IMatcher
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private object constantValue;
@@ -66,8 +64,12 @@ namespace Moq.Matchers
                 return true;
             }
 
-            if (this.constantValue is IEnumerable && argument is IEnumerable enumerable &&
-                !(this.constantValue is IMocked) && !(argument is IMocked))
+            if (
+                this.constantValue is IEnumerable
+                && argument is IEnumerable enumerable
+                && !(this.constantValue is IMocked)
+                && !(argument is IMocked)
+            )
             // the above checks on the second line are necessary to ensure we have usable
             // implementations of IEnumerable, which might very well not be the case for
             // mocked objects.

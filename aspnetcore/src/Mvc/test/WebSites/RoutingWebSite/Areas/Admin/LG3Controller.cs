@@ -16,9 +16,7 @@ public class LG3Controller : Controller
         _linkGenerator = linkGenerator;
     }
 
-    public void SomeAction()
-    {
-    }
+    public void SomeAction() { }
 
     public string LinkInsideOfArea()
     {
@@ -37,6 +35,7 @@ public class LG3Controller : Controller
             HttpContext,
             action: nameof(SomeAction),
             controller: "LG1",
-            values: new { area = "", });
+            values: new { area = "" }
+        );
     }
 }

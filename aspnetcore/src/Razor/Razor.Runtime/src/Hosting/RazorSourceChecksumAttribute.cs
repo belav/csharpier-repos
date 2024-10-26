@@ -25,7 +25,11 @@ public sealed class RazorSourceChecksumAttribute : Attribute, IRazorSourceChecks
     /// <param name="checksumAlgorithm">The algorithm used to create this checksum.</param>
     /// <param name="checksum">The checksum as a string of hex-encoded bytes.</param>
     /// <param name="identifier">The identifier associated with this thumbprint.</param>
-    public RazorSourceChecksumAttribute(string checksumAlgorithm, string checksum, string identifier)
+    public RazorSourceChecksumAttribute(
+        string checksumAlgorithm,
+        string checksum,
+        string identifier
+    )
     {
         ArgumentNullException.ThrowIfNull(checksumAlgorithm);
         ArgumentNullException.ThrowIfNull(checksum);

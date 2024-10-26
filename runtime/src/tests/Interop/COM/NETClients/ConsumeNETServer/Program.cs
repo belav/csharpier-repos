@@ -2,17 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace NetClient
 {
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-
+    using Server.Contract;
     using TestLibrary;
     using Xunit;
-    using Server.Contract;
-
     using CoClass = Server.Contract.Servers;
 
     public class Program
@@ -116,15 +115,21 @@ namespace NetClient
             // Initialize CoreShim and hostpolicymock
             HostPolicyMock.Initialize(Environment.CurrentDirectory, null);
             Environment.SetEnvironmentVariable("CORESHIM_COMACT_ASSEMBLYNAME", "NETServer");
-            Environment.SetEnvironmentVariable("CORESHIM_COMACT_TYPENAME", "ConsumeNETServerTesting");
+            Environment.SetEnvironmentVariable(
+                "CORESHIM_COMACT_TYPENAME",
+                "ConsumeNETServerTesting"
+            );
 
             try
             {
-                using (HostPolicyMock.Mock_corehost_resolve_component_dependencies(
-                    0,
-                    string.Empty,
-                    string.Empty,
-                    string.Empty))
+                using (
+                    HostPolicyMock.Mock_corehost_resolve_component_dependencies(
+                        0,
+                        string.Empty,
+                        string.Empty,
+                        string.Empty
+                    )
+                )
                 {
                     Validate_Activation();
                     Validate_Activation_CreateInstance();

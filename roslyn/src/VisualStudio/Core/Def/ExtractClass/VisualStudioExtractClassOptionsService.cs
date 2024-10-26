@@ -41,7 +41,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             IThreadingContext threadingContext,
             IGlyphService glyphService,
             IUIThreadOperationExecutor uiThreadOperationExecutor,
-            IGlobalOptionService globalOptions)
+            IGlobalOptionService globalOptions
+        )
         {
             _threadingContext = threadingContext;
             _glyphService = glyphService;
@@ -49,36 +50,61 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
             _globalOptions = globalOptions;
         }
 
-        public async Task<ExtractClassOptions?> GetExtractClassOptionsAsync(Document document, INamedTypeSymbol selectedType, ImmutableArray<ISymbol> selectedMembers, CancellationToken cancellationToken)
+        public async Task<ExtractClassOptions?> GetExtractClassOptionsAsync(
+            Document document,
+            INamedTypeSymbol selectedType,
+            ImmutableArray<ISymbol> selectedMembers,
+            CancellationToken cancellationToken
+        )
         {
-            var notificationService = document.Project.Solution.Services.GetRequiredService<INotificationService>();
+            var notificationService =
+                document.Project.Solution.Services.GetRequiredService<INotificationService>();
 
-            var membersInType = selectedType.GetMembers().
-               WhereAsArray(MemberAndDestinationValidator.IsMemberValid);
+            var membersInType = selectedType
+                .GetMembers()
+                .WhereAsArray(MemberAndDestinationValidator.IsMemberValid);
 
-            var memberViewModels = membersInType
-                .SelectAsArray(member =>
-                    new MemberSymbolViewModel(member, _glyphService)
-                    {
-                        // The member(s) user selected will be checked at the beginning.
-                        IsChecked = selectedMembers.Any(SymbolEquivalenceComparer.Instance.Equals, member),
-                        MakeAbstract = false,
-                        IsMakeAbstractCheckable = !member.IsKind(SymbolKind.Field) && !member.IsAbstract,
-                        IsCheckable = true
-                    });
+            var memberViewModels = membersInType.SelectAsArray(member => new MemberSymbolViewModel(
+                member,
+                _glyphService
+            )
+            {
+                // The member(s) user selected will be checked at the beginning.
+                IsChecked = selectedMembers.Any(SymbolEquivalenceComparer.Instance.Equals, member),
+                MakeAbstract = false,
+                IsMakeAbstractCheckable = !member.IsKind(SymbolKind.Field) && !member.IsAbstract,
+                IsCheckable = true,
+            });
 
-            var memberToDependentsMap = SymbolDependentsBuilder.FindMemberToDependentsMap(membersInType, document.Project, cancellationToken);
+            var memberToDependentsMap = SymbolDependentsBuilder.FindMemberToDependentsMap(
+                membersInType,
+                document.Project,
+                cancellationToken
+            );
 
-            var conflictingTypeNames = selectedType.ContainingNamespace.GetAllTypes(cancellationToken).Select(t => t.Name);
+            var conflictingTypeNames = selectedType
+                .ContainingNamespace.GetAllTypes(cancellationToken)
+                .Select(t => t.Name);
             var candidateName = selectedType.Name + "Base";
-            var defaultTypeName = NameGenerator.GenerateUniqueName(candidateName, name => !conflictingTypeNames.Contains(name));
+            var defaultTypeName = NameGenerator.GenerateUniqueName(
+                candidateName,
+                name => !conflictingTypeNames.Contains(name)
+            );
 
             var containingNamespaceDisplay = selectedType.ContainingNamespace.IsGlobalNamespace
                 ? string.Empty
                 : selectedType.ContainingNamespace.ToDisplayString();
 
-            var formattingOptions = await document.GetSyntaxFormattingOptionsAsync(_globalOptions, cancellationToken).ConfigureAwait(false);
-            var generatedNameTypeParameterSuffix = ExtractTypeHelpers.GetTypeParameterSuffix(document, formattingOptions, selectedType, membersInType, cancellationToken);
+            var formattingOptions = await document
+                .GetSyntaxFormattingOptionsAsync(_globalOptions, cancellationToken)
+                .ConfigureAwait(false);
+            var generatedNameTypeParameterSuffix = ExtractTypeHelpers.GetTypeParameterSuffix(
+                document,
+                formattingOptions,
+                selectedType,
+                membersInType,
+                cancellationToken
+            );
 
             var viewModel = new ExtractClassViewModel(
                 _uiThreadOperationExecutor,
@@ -91,7 +117,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                 document.Project.Language,
                 generatedNameTypeParameterSuffix,
                 conflictingTypeNames.ToImmutableArray(),
-                document.GetRequiredLanguageService<ISyntaxFactsService>());
+                document.GetRequiredLanguageService<ISyntaxFactsService>()
+            );
 
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             var dialog = new ExtractClassDialog(viewModel);
@@ -103,8 +130,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                 return new ExtractClassOptions(
                     viewModel.DestinationViewModel.FileName,
                     viewModel.DestinationViewModel.TypeName,
-                    viewModel.DestinationViewModel.Destination == CommonControls.NewTypeDestination.CurrentFile,
-                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(m => new ExtractClassMemberAnalysisResult(m.Symbol, m.MakeAbstract)));
+                    viewModel.DestinationViewModel.Destination
+                        == CommonControls.NewTypeDestination.CurrentFile,
+                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(
+                        m => new ExtractClassMemberAnalysisResult(m.Symbol, m.MakeAbstract)
+                    )
+                );
             }
 
             return null;

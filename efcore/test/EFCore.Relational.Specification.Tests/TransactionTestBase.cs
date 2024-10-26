@@ -37,10 +37,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         {
             context.Database.AutoTransactionBehavior = AutoTransactionBehavior.Never;
 
-            await context.AddAsync(
-                new TransactionCustomer { Id = -77, Name = "Bobble" });
+            await context.AddAsync(new TransactionCustomer { Id = -77, Name = "Bobble" });
 
-            context.Entry(context.Set<TransactionOrder>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+            context.Entry(context.Set<TransactionOrder>().OrderBy(c => c.Id).Last()).State =
+                EntityState.Added;
 
             if (async)
             {
@@ -54,19 +54,21 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.AutoTransactionBehavior = AutoTransactionBehavior.WhenNeeded;
         }
 
-        Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionStarted);
-        Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionCommitted);
+        Assert.DoesNotContain(
+            Fixture.ListLoggerFactory.Log,
+            l => l.Id == RelationalEventId.TransactionStarted
+        );
+        Assert.DoesNotContain(
+            Fixture.ListLoggerFactory.Log,
+            l => l.Id == RelationalEventId.TransactionCommitted
+        );
 
         using (var context = CreateContext())
         {
             Assert.Equal(
-                new List<int>
-                {
-                    -77,
-                    1,
-                    2,
-                },
-                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList());
+                new List<int> { -77, 1, 2 },
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
+            );
         }
     }
 
@@ -80,10 +82,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         {
             context.Database.AutoTransactionsEnabled = false;
 
-            await context.AddAsync(
-                new TransactionCustomer { Id = -77, Name = "Bobble" });
+            await context.AddAsync(new TransactionCustomer { Id = -77, Name = "Bobble" });
 
-            context.Entry(context.Set<TransactionOrder>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+            context.Entry(context.Set<TransactionOrder>().OrderBy(c => c.Id).Last()).State =
+                EntityState.Added;
 
             if (async)
             {
@@ -97,19 +99,21 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.AutoTransactionBehavior = AutoTransactionBehavior.WhenNeeded;
         }
 
-        Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionStarted);
-        Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionCommitted);
+        Assert.DoesNotContain(
+            Fixture.ListLoggerFactory.Log,
+            l => l.Id == RelationalEventId.TransactionStarted
+        );
+        Assert.DoesNotContain(
+            Fixture.ListLoggerFactory.Log,
+            l => l.Id == RelationalEventId.TransactionCommitted
+        );
 
         using (var context = CreateContext())
         {
             Assert.Equal(
-                new List<int>
-                {
-                    -77,
-                    1,
-                    2,
-                },
-                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList());
+                new List<int> { -77, 1, 2 },
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
+            );
         }
     }
 #pragma warning restore CS0618
@@ -117,16 +121,18 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual async Task SaveChanges_can_be_used_with_AutoTransactionBehavior_Always(bool async)
+    public virtual async Task SaveChanges_can_be_used_with_AutoTransactionBehavior_Always(
+        bool async
+    )
     {
         using (var context = CreateContext())
         {
             context.Database.AutoTransactionBehavior = AutoTransactionBehavior.Always;
 
-            await context.AddAsync(
-                new TransactionCustomer { Id = -77, Name = "Bobble" });
+            await context.AddAsync(new TransactionCustomer { Id = -77, Name = "Bobble" });
 
-            context.Entry(context.Set<TransactionOrder>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+            context.Entry(context.Set<TransactionOrder>().OrderBy(c => c.Id).Last()).State =
+                EntityState.Added;
 
             if (async)
             {
@@ -140,16 +146,17 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.AutoTransactionBehavior = AutoTransactionBehavior.WhenNeeded;
         }
 
-        Assert.Contains(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionStarted);
+        Assert.Contains(
+            Fixture.ListLoggerFactory.Log,
+            l => l.Id == RelationalEventId.TransactionStarted
+        );
 
         using (var context = CreateContext())
         {
             Assert.Equal(
-                new List<int>
-                {
-                    1, 2,
-                },
-                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList());
+                new List<int> { 1, 2 },
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
+            );
         }
     }
 
@@ -160,12 +167,15 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     {
         using (var context = CreateContext())
         {
-            Assert.Equal(AutoTransactionBehavior.WhenNeeded, context.Database.AutoTransactionBehavior);
+            Assert.Equal(
+                AutoTransactionBehavior.WhenNeeded,
+                context.Database.AutoTransactionBehavior
+            );
 
-            await context.AddAsync(
-                new TransactionCustomer { Id = 77, Name = "Bobble" });
+            await context.AddAsync(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
+                EntityState.Added;
 
             if (async)
             {
@@ -187,7 +197,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, AutoTransactionBehavior.WhenNeeded)]
     [InlineData(false, AutoTransactionBehavior.Never)]
     [InlineData(false, AutoTransactionBehavior.Always)]
-    public virtual async Task SaveChanges_uses_enlisted_transaction(bool async, AutoTransactionBehavior autoTransactionBehavior)
+    public virtual async Task SaveChanges_uses_enlisted_transaction(
+        bool async,
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using (var transaction = new CommittableTransaction(TimeSpan.FromMinutes(10)))
         {
@@ -196,10 +209,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 context.Database.EnlistTransaction(transaction);
                 context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
-                await context.AddAsync(
-                    new TransactionCustomer { Id = -77, Name = "Bobble" });
+                await context.AddAsync(new TransactionCustomer { Id = -77, Name = "Bobble" });
 
-                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
+                    EntityState.Added;
 
                 if (async)
                 {
@@ -216,20 +229,29 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             if (AmbientTransactionsSupported)
             {
                 Assert.Equal(
-                    RelationalResources.LogExplicitTransactionEnlisted(new TestLogger<TestRelationalLoggingDefinitions>())
+                    RelationalResources
+                        .LogExplicitTransactionEnlisted(
+                            new TestLogger<TestRelationalLoggingDefinitions>()
+                        )
                         .GenerateMessage("Serializable"),
-                    Fixture.ListLoggerFactory.Log.First().Message);
+                    Fixture.ListLoggerFactory.Log.First().Message
+                );
             }
             else
             {
                 Assert.Equal(
-                    RelationalResources.LogAmbientTransaction(new TestLogger<TestRelationalLoggingDefinitions>()).GenerateMessage(),
-                    Fixture.ListLoggerFactory.Log.First().Message);
+                    RelationalResources
+                        .LogAmbientTransaction(new TestLogger<TestRelationalLoggingDefinitions>())
+                        .GenerateMessage(),
+                    Fixture.ListLoggerFactory.Log.First().Message
+                );
 
                 if (autoTransactionBehavior == AutoTransactionBehavior.Never)
                 {
                     using var context = CreateContext();
-                    context.Entry(context.Set<TransactionCustomer>().Single(c => c.Id == -77)).State = EntityState.Deleted;
+                    context
+                        .Entry(context.Set<TransactionCustomer>().Single(c => c.Id == -77))
+                        .State = EntityState.Deleted;
 
                     if (async)
                     {
@@ -255,7 +277,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, AutoTransactionBehavior.Always)]
     public virtual async Task SaveChanges_uses_enlisted_transaction_after_connection_closed(
         bool async,
-        AutoTransactionBehavior autoTransactionBehavior)
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         if (!AmbientTransactionsSupported)
         {
@@ -269,10 +292,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 context.Database.EnlistTransaction(transaction);
                 context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
-                await context.AddAsync(
-                    new TransactionCustomer { Id = 77, Name = "Bobble" });
+                await context.AddAsync(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
+                    EntityState.Added;
 
                 context.Database.AutoTransactionBehavior = AutoTransactionBehavior.WhenNeeded;
             }
@@ -306,7 +329,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, AutoTransactionBehavior.Always)]
     public virtual async Task SaveChanges_uses_enlisted_transaction_connectionString(
         bool async,
-        AutoTransactionBehavior autoTransactionBehavior)
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         if (!AmbientTransactionsSupported)
         {
@@ -320,10 +344,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.EnlistTransaction(transaction);
             context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
-            await context.AddAsync(
-                new TransactionCustomer { Id = 77, Name = "Bobble" });
+            await context.AddAsync(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
+                EntityState.Added;
 
             if (async)
             {
@@ -349,7 +373,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, AutoTransactionBehavior.WhenNeeded)]
     [InlineData(false, AutoTransactionBehavior.Never)]
     [InlineData(false, AutoTransactionBehavior.Always)]
-    public virtual async Task SaveChanges_uses_ambient_transaction(bool async, AutoTransactionBehavior autoTransactionBehavior)
+    public virtual async Task SaveChanges_uses_ambient_transaction(
+        bool async,
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         if (TestStore.ConnectionState == ConnectionState.Closed)
         {
@@ -362,10 +389,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             {
                 context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
-                await context.AddAsync(
-                    new TransactionCustomer { Id = -77, Name = "Bobble" });
+                await context.AddAsync(new TransactionCustomer { Id = -77, Name = "Bobble" });
 
-                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
+                    EntityState.Added;
 
                 if (async)
                 {
@@ -382,18 +409,26 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             if (AmbientTransactionsSupported)
             {
                 Assert.Equal(
-                    RelationalResources.LogAmbientTransactionEnlisted(new TestLogger<TestRelationalLoggingDefinitions>())
+                    RelationalResources
+                        .LogAmbientTransactionEnlisted(
+                            new TestLogger<TestRelationalLoggingDefinitions>()
+                        )
                         .GenerateMessage("Serializable"),
-                    Fixture.ListLoggerFactory.Log.First().Message);
+                    Fixture.ListLoggerFactory.Log.First().Message
+                );
             }
             else
             {
                 Assert.Equal(
-                    RelationalResources.LogAmbientTransaction(new TestLogger<TestRelationalLoggingDefinitions>()).GenerateMessage(),
-                    Fixture.ListLoggerFactory.Log.First().Message);
+                    RelationalResources
+                        .LogAmbientTransaction(new TestLogger<TestRelationalLoggingDefinitions>())
+                        .GenerateMessage(),
+                    Fixture.ListLoggerFactory.Log.First().Message
+                );
 
                 using var context = CreateContext();
-                context.Entry(context.Set<TransactionCustomer>().Single(c => c.Id == -77)).State = EntityState.Deleted;
+                context.Entry(context.Set<TransactionCustomer>().Single(c => c.Id == -77)).State =
+                    EntityState.Deleted;
 
                 if (async)
                 {
@@ -418,7 +453,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, AutoTransactionBehavior.Always)]
     public virtual async Task SaveChanges_uses_ambient_transaction_with_connectionString(
         bool async,
-        AutoTransactionBehavior autoTransactionBehavior)
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         if (!AmbientTransactionsSupported)
         {
@@ -435,10 +471,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 connection = context.Database.GetDbConnection();
                 Assert.Equal(ConnectionState.Closed, connection.State);
 
-                await context.AddAsync(
-                    new TransactionCustomer { Id = 77, Name = "Bobble" });
+                await context.AddAsync(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
+                    EntityState.Added;
 
                 if (async)
                 {
@@ -463,27 +499,34 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public virtual void SaveChanges_throws_for_suppressed_ambient_transactions(bool connectionString)
+    public virtual void SaveChanges_throws_for_suppressed_ambient_transactions(
+        bool connectionString
+    )
     {
         if (!AmbientTransactionsSupported)
         {
             return;
         }
 
-        using (var context = connectionString ? CreateContextWithConnectionString() : CreateContext())
+        using (
+            var context = connectionString ? CreateContextWithConnectionString() : CreateContext()
+        )
         {
             using (TestUtilities.TestStore.CreateTransactionScope())
             {
-                context.Add(
-                    new TransactionCustomer { Id = 77, Name = "Bobble" });
+                context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
+                    EntityState.Added;
 
                 using (new TransactionScope(TransactionScopeOption.Suppress))
                 {
                     Assert.Equal(
                         RelationalStrings.PendingAmbientTransaction,
-                        Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message);
+                        Assert
+                            .Throws<InvalidOperationException>(() => context.SaveChanges())
+                            .Message
+                    );
                 }
             }
         }
@@ -512,7 +555,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 context.SaveChanges();
                 tr.Complete();
                 TestStore.CloseConnection();
-                using (var nestedTransaction = new TransactionScope(TransactionScopeOption.RequiresNew))
+                using (
+                    var nestedTransaction = new TransactionScope(TransactionScopeOption.RequiresNew)
+                )
                 {
                     context.Add(new TransactionOrder { Id = 300, Name = "Order3" });
                     context.SaveChanges();
@@ -522,21 +567,13 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             }
 
             Assert.Equal(
-                new List<int>
-                {
-                    1,
-                    2,
-                    77
-                },
-                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList());
+                new List<int> { 1, 2, 77 },
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
+            );
             Assert.Equal(
-                new List<int>
-                {
-                    100,
-                    200,
-                    300
-                },
-                context.Set<TransactionOrder>().OrderBy(c => c.Id).Select(e => e.Id).ToList());
+                new List<int> { 100, 200, 300 },
+                context.Set<TransactionOrder>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
+            );
         }
     }
 
@@ -560,7 +597,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
                 context.SaveChanges();
                 TestStore.CloseConnection();
-                using (var nestedTransaction = new TransactionScope(TransactionScopeOption.RequiresNew))
+                using (
+                    var nestedTransaction = new TransactionScope(TransactionScopeOption.RequiresNew)
+                )
                 {
                     context.Add(new TransactionOrder { Id = 300, Name = "Order3" });
                     context.SaveChanges();
@@ -571,15 +610,12 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
 
             Assert.Equal(
                 new List<int> { 1, 2 },
-                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList());
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
+            );
             Assert.Equal(
-                new List<int>
-                {
-                    100,
-                    200,
-                    300
-                },
-                context.Set<TransactionOrder>().OrderBy(c => c.Id).Select(e => e.Id).ToList());
+                new List<int> { 100, 200, 300 },
+                context.Set<TransactionOrder>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
+            );
         }
     }
 
@@ -600,10 +636,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         {
             using (TestUtilities.TestStore.CreateTransactionScope())
             {
-                context.Add(
-                    new TransactionCustomer { Id = 77, Name = "Bobble" });
+                context.Add(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
-                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State = EntityState.Added;
+                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()).State =
+                    EntityState.Added;
             }
 
             using var transaction = new CommittableTransaction(TimeSpan.FromMinutes(10));
@@ -627,8 +663,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
 
             Assert.Equal(ConnectionState.Open, connection.State);
 
-            await context.AddAsync(
-                new TransactionCustomer { Id = 77, Name = "Bobble" });
+            await context.AddAsync(new TransactionCustomer { Id = 77, Name = "Bobble" });
 
             if (async)
             {
@@ -647,13 +682,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (var context = CreateContext())
         {
             Assert.Equal(
-                new List<int>
-                {
-                    1,
-                    2,
-                    77
-                },
-                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList());
+                new List<int> { 1, 2, 77 },
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Select(e => e.Id).ToList()
+            );
         }
     }
 
@@ -666,13 +697,16 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, AutoTransactionBehavior.Always)]
     public virtual async Task SaveChanges_uses_explicit_transaction_without_committing(
         bool async,
-        AutoTransactionBehavior autoTransactionBehavior)
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using (var context = CreateContext())
         {
             context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
-            var firstEntry = context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First());
+            var firstEntry = context.Entry(
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()
+            );
             firstEntry.State = EntityState.Deleted;
 
             if (async)
@@ -707,13 +741,16 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, AutoTransactionBehavior.Always)]
     public virtual async Task SaveChanges_false_uses_explicit_transaction_without_committing_or_accepting_changes(
         bool async,
-        AutoTransactionBehavior autoTransactionBehavior)
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using (var context = CreateContext())
         {
             context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
-            var firstEntry = context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First());
+            var firstEntry = context.Entry(
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()
+            );
             firstEntry.State = EntityState.Deleted;
 
             if (async)
@@ -752,7 +789,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(false, AutoTransactionBehavior.Always)]
     public virtual async Task SaveChanges_uses_explicit_transaction_with_failure_behavior(
         bool async,
-        AutoTransactionBehavior autoTransactionBehavior)
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using (var context = CreateContext())
         {
@@ -760,8 +798,12 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
 
             using var transaction = context.Database.BeginTransaction();
 
-            var firstEntry = context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First());
-            var lastEntry = context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last());
+            var firstEntry = context.Entry(
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()
+            );
+            var lastEntry = context.Entry(
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).Last()
+            );
 
             if (async)
             {
@@ -778,7 +820,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 }
                 else
                 {
-                    await Assert.ThrowsAsync<DbUpdateConcurrencyException>(() => context.SaveChangesAsync());
+                    await Assert.ThrowsAsync<DbUpdateConcurrencyException>(
+                        () => context.SaveChangesAsync()
+                    );
                 }
             }
             else
@@ -811,7 +855,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         {
             using var context = CreateContext();
             Assert.Equal(Customers.Count, context.Set<TransactionCustomer>().Count());
-            Assert.Equal("John", context.Set<TransactionCustomer>().OrderBy(c => c.Id).First().Name);
+            Assert.Equal(
+                "John",
+                context.Set<TransactionCustomer>().OrderBy(c => c.Id).First().Name
+            );
         }
     }
 
@@ -819,7 +866,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(AutoTransactionBehavior.WhenNeeded)]
     [InlineData(AutoTransactionBehavior.Never)]
     [InlineData(AutoTransactionBehavior.Always)]
-    public virtual async Task RelationalTransaction_can_be_committed(AutoTransactionBehavior autoTransactionBehavior)
+    public virtual async Task RelationalTransaction_can_be_committed(
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using (var context = CreateContext())
         {
@@ -827,7 +876,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
 
             using (var transaction = await context.Database.BeginTransactionAsync())
             {
-                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                    EntityState.Deleted;
                 await context.SaveChangesAsync();
                 transaction.Commit();
             }
@@ -845,7 +895,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(AutoTransactionBehavior.WhenNeeded)]
     [InlineData(AutoTransactionBehavior.Never)]
     [InlineData(AutoTransactionBehavior.Always)]
-    public virtual async Task RelationalTransaction_can_be_committed_from_context(AutoTransactionBehavior autoTransactionBehavior)
+    public virtual async Task RelationalTransaction_can_be_committed_from_context(
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using (var context = CreateContext())
         {
@@ -853,7 +905,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
 
             using (await context.Database.BeginTransactionAsync())
             {
-                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+                context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                    EntityState.Deleted;
                 await context.SaveChangesAsync();
                 context.Database.CommitTransaction();
             }
@@ -871,14 +924,17 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(AutoTransactionBehavior.WhenNeeded)]
     [InlineData(AutoTransactionBehavior.Never)]
     [InlineData(AutoTransactionBehavior.Always)]
-    public virtual async Task RelationalTransaction_can_be_rolled_back(AutoTransactionBehavior autoTransactionBehavior)
+    public virtual async Task RelationalTransaction_can_be_rolled_back(
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using var context = CreateContext();
         context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
         using (var transaction = await context.Database.BeginTransactionAsync())
         {
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
             await transaction.RollbackAsync();
 
@@ -892,14 +948,17 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(AutoTransactionBehavior.WhenNeeded)]
     [InlineData(AutoTransactionBehavior.Never)]
     [InlineData(AutoTransactionBehavior.Always)]
-    public virtual async Task RelationalTransaction_can_be_rolled_back_from_context(AutoTransactionBehavior autoTransactionBehavior)
+    public virtual async Task RelationalTransaction_can_be_rolled_back_from_context(
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using var context = CreateContext();
         context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
         using (await context.Database.BeginTransactionAsync())
         {
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
             await context.Database.RollbackTransactionAsync();
 
@@ -913,14 +972,17 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(AutoTransactionBehavior.WhenNeeded)]
     [InlineData(AutoTransactionBehavior.Never)]
     [InlineData(AutoTransactionBehavior.Always)]
-    public virtual void Query_uses_explicit_transaction(AutoTransactionBehavior autoTransactionBehavior)
+    public virtual void Query_uses_explicit_transaction(
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using var context = CreateContext();
         context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
         using (var transaction = context.Database.BeginTransaction())
         {
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             context.SaveChanges();
 
             using (var innerContext = CreateContextWithConnectionString())
@@ -931,7 +993,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     using (innerContext.Database.BeginTransaction(IsolationLevel.ReadUncommitted))
                     {
-                        Assert.Equal(Customers.Count - 1, innerContext.Set<TransactionCustomer>().Count());
+                        Assert.Equal(
+                            Customers.Count - 1,
+                            innerContext.Set<TransactionCustomer>().Count()
+                        );
                     }
                 }
 
@@ -939,7 +1004,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     using (innerContext.Database.BeginTransaction(IsolationLevel.Snapshot))
                     {
-                        Assert.Equal(Customers, innerContext.Set<TransactionCustomer>().OrderBy(c => c.Id).ToList());
+                        Assert.Equal(
+                            Customers,
+                            innerContext.Set<TransactionCustomer>().OrderBy(c => c.Id).ToList()
+                        );
                     }
                 }
 
@@ -964,14 +1032,17 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(AutoTransactionBehavior.WhenNeeded)]
     [InlineData(AutoTransactionBehavior.Never)]
     [InlineData(AutoTransactionBehavior.Always)]
-    public virtual async Task QueryAsync_uses_explicit_transaction(AutoTransactionBehavior autoTransactionBehavior)
+    public virtual async Task QueryAsync_uses_explicit_transaction(
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using var context = CreateContext();
         context.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
         using (var transaction = await context.Database.BeginTransactionAsync())
         {
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
 
             using (var innerContext = CreateContextWithConnectionString())
@@ -980,17 +1051,32 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
 
                 if (DirtyReadsOccur)
                 {
-                    using (await innerContext.Database.BeginTransactionAsync(IsolationLevel.ReadUncommitted))
+                    using (
+                        await innerContext.Database.BeginTransactionAsync(
+                            IsolationLevel.ReadUncommitted
+                        )
+                    )
                     {
-                        Assert.Equal(Customers.Count - 1, await innerContext.Set<TransactionCustomer>().CountAsync());
+                        Assert.Equal(
+                            Customers.Count - 1,
+                            await innerContext.Set<TransactionCustomer>().CountAsync()
+                        );
                     }
                 }
 
                 if (SnapshotSupported)
                 {
-                    using (await innerContext.Database.BeginTransactionAsync(IsolationLevel.Snapshot))
+                    using (
+                        await innerContext.Database.BeginTransactionAsync(IsolationLevel.Snapshot)
+                    )
                     {
-                        Assert.Equal(Customers, await innerContext.Set<TransactionCustomer>().OrderBy(c => c.Id).ToListAsync());
+                        Assert.Equal(
+                            Customers,
+                            await innerContext
+                                .Set<TransactionCustomer>()
+                                .OrderBy(c => c.Id)
+                                .ToListAsync()
+                        );
                     }
                 }
 
@@ -1002,7 +1088,10 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 innerContext.Database.AutoTransactionBehavior = autoTransactionBehavior;
 
                 innerContext.Database.UseTransaction(transaction.GetDbTransaction());
-                Assert.Equal(Customers.Count - 1, await innerContext.Set<TransactionCustomer>().CountAsync());
+                Assert.Equal(
+                    Customers.Count - 1,
+                    await innerContext.Set<TransactionCustomer>().CountAsync()
+                );
 
                 innerContext.Database.AutoTransactionBehavior = AutoTransactionBehavior.WhenNeeded;
             }
@@ -1015,7 +1104,9 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
     [InlineData(AutoTransactionBehavior.WhenNeeded)]
     [InlineData(AutoTransactionBehavior.Never)]
     [InlineData(AutoTransactionBehavior.Always)]
-    public virtual async Task Can_use_open_connection_with_started_transaction(AutoTransactionBehavior autoTransactionBehavior)
+    public virtual async Task Can_use_open_connection_with_started_transaction(
+        AutoTransactionBehavior autoTransactionBehavior
+    )
     {
         using (var transaction = TestStore.BeginTransaction())
         {
@@ -1024,7 +1115,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
 
             context.Database.UseTransaction(transaction);
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
 
             context.Database.AutoTransactionBehavior = AutoTransactionBehavior.WhenNeeded;
@@ -1039,8 +1131,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using var transaction = TestStore.BeginTransaction();
         using var context = CreateContextWithConnectionString();
         var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-                context.Database.UseTransaction(transaction));
+            () => context.Database.UseTransaction(transaction)
+        );
         Assert.Equal(RelationalStrings.TransactionAssociatedWithDifferentConnection, ex.Message);
     }
 
@@ -1066,7 +1158,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             Assert.Same(currentTransaction, newTransaction);
             Assert.Same(transaction, newTransaction!.GetDbTransaction());
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
 
             if (async)
             {
@@ -1106,7 +1199,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             using var transaction = TestStore.BeginTransaction();
             using var context = CreateContextWithConnectionString();
             var ex = Assert.Throws<InvalidOperationException>(
-                () => context.Database.UseTransaction(transaction));
+                () => context.Database.UseTransaction(transaction)
+            );
             Assert.Equal(RelationalStrings.ConflictingAmbientTransaction, ex.Message);
         }
     }
@@ -1127,7 +1221,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         context.Database.EnlistTransaction(t);
 
         var ex = Assert.Throws<InvalidOperationException>(
-            () => context.Database.UseTransaction(transaction));
+            () => context.Database.UseTransaction(transaction)
+        );
         Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
         context.Database.CloseConnection();
     }
@@ -1139,7 +1234,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (context.Database.BeginTransaction())
         {
             var ex = Assert.Throws<InvalidOperationException>(
-                () => context.Database.BeginTransaction());
+                () => context.Database.BeginTransaction()
+            );
             Assert.Equal(RelationalStrings.TransactionAlreadyStarted, ex.Message);
         }
     }
@@ -1156,7 +1252,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         {
             using var context = CreateContextWithConnectionString();
             var ex = Assert.Throws<InvalidOperationException>(
-                () => context.Database.BeginTransaction());
+                () => context.Database.BeginTransaction()
+            );
             Assert.Equal(RelationalStrings.ConflictingAmbientTransaction, ex.Message);
         }
     }
@@ -1176,10 +1273,11 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         context.Database.EnlistTransaction(transaction);
 
         var ex = Assert.Throws<InvalidOperationException>(
-            () => context.Database.BeginTransaction(
-                DirtyReadsOccur
-                    ? IsolationLevel.ReadUncommitted
-                    : IsolationLevel.Unspecified));
+            () =>
+                context.Database.BeginTransaction(
+                    DirtyReadsOccur ? IsolationLevel.ReadUncommitted : IsolationLevel.Unspecified
+                )
+        );
         Assert.Equal(RelationalStrings.ConflictingEnlistedTransaction, ex.Message);
         context.Database.CloseConnection();
     }
@@ -1198,9 +1296,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.OpenConnection();
         }
 
-        using (context.Database.BeginTransaction())
-        {
-        }
+        using (context.Database.BeginTransaction()) { }
 
         context.Database.CloseConnection();
     }
@@ -1221,9 +1317,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.EnlistTransaction(transaction);
         }
 
-        using (context.Database.BeginTransaction())
-        {
-        }
+        using (context.Database.BeginTransaction()) { }
 
         context.Database.CloseConnection();
     }
@@ -1235,9 +1329,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (context.Database.BeginTransaction())
         {
             context.Database.CloseConnection();
-            using (context.Database.BeginTransaction())
-            {
-            }
+            using (context.Database.BeginTransaction()) { }
         }
     }
 
@@ -1257,9 +1349,7 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
 
         context.Database.CloseConnection();
 
-        using (context.Database.BeginTransaction())
-        {
-        }
+        using (context.Database.BeginTransaction()) { }
     }
 
     [ConditionalFact]
@@ -1275,7 +1365,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         using (context.Database.BeginTransaction())
         {
             Assert.Throws<InvalidOperationException>(
-                () => context.Database.EnlistTransaction(transaction));
+                () => context.Database.EnlistTransaction(transaction)
+            );
         }
     }
 
@@ -1294,7 +1385,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
             context.Database.OpenConnection();
 
             Assert.Throws<InvalidOperationException>(
-                () => context.Database.EnlistTransaction(transaction));
+                () => context.Database.EnlistTransaction(transaction)
+            );
 
             context.Database.CloseConnection();
         }
@@ -1440,7 +1532,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         {
             await using var transaction = await context.Database.BeginTransactionAsync();
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
 
             if (async)
@@ -1452,7 +1545,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 transaction.CreateSavepoint("FooSavepoint");
             }
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
 
             if (async)
@@ -1482,7 +1576,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         {
             await using var transaction = await context.Database.BeginTransactionAsync();
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
 
             if (async)
@@ -1494,20 +1589,21 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 transaction.CreateSavepoint("FooSavepoint");
             }
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
 
             if (async)
             {
                 await transaction.ReleaseSavepointAsync("FooSavepoint");
                 await Assert.ThrowsAnyAsync<DbException>(
-                    async () => await transaction.ReleaseSavepointAsync("FooSavepoint"));
+                    async () => await transaction.ReleaseSavepointAsync("FooSavepoint")
+                );
             }
             else
             {
                 transaction.ReleaseSavepoint("FooSavepoint");
-                Assert.ThrowsAny<DbException>(
-                    () => transaction.ReleaseSavepoint("FooSavepoint"));
+                Assert.ThrowsAny<DbException>(() => transaction.ReleaseSavepoint("FooSavepoint"));
             }
 
             await transaction.CommitAsync();
@@ -1528,7 +1624,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         {
             await using var transaction = await context.Database.BeginTransactionAsync();
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
 
             if (async)
@@ -1540,7 +1637,8 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
                 transaction.CreateSavepoint("Name with spaces");
             }
 
-            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State = EntityState.Deleted;
+            context.Entry(context.Set<TransactionCustomer>().OrderBy(c => c.Id).First()).State =
+                EntityState.Deleted;
             await context.SaveChangesAsync();
 
             if (async)
@@ -1567,47 +1665,39 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(Customers, context.Set<TransactionCustomer>().OrderBy(c => c.Id));
     }
 
-    protected RelationalTestStore TestStore
-        => (RelationalTestStore)Fixture.TestStore;
+    protected RelationalTestStore TestStore => (RelationalTestStore)Fixture.TestStore;
 
     protected abstract bool SnapshotSupported { get; }
 
-    protected virtual bool AmbientTransactionsSupported
-        => false;
+    protected virtual bool AmbientTransactionsSupported => false;
 
-    protected virtual bool DirtyReadsOccur
-        => true;
+    protected virtual bool DirtyReadsOccur => true;
 
-    protected virtual bool SavepointsSupported
-        => true;
+    protected virtual bool SavepointsSupported => true;
 
-    protected DbContext CreateContext()
-        => Fixture.CreateContext();
+    protected DbContext CreateContext() => Fixture.CreateContext();
 
     protected abstract DbContext CreateContextWithConnectionString();
 
     public abstract class TransactionFixtureBase : SharedStoreFixtureBase<PoolableDbContext>
     {
-        protected override string StoreName
-            => "TransactionTest";
+        protected override string StoreName => "TransactionTest";
 
-        protected override bool ShouldLogCategory(string logCategory)
-            => logCategory == DbLoggerCategory.Database.Transaction.Name;
+        protected override bool ShouldLogCategory(string logCategory) =>
+            logCategory == DbLoggerCategory.Database.Transaction.Name;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
-            modelBuilder.Entity<TransactionCustomer>(
-                ps =>
-                {
-                    ps.Property(c => c.Id).ValueGeneratedNever();
-                    ps.ToTable("Customers");
-                });
-            modelBuilder.Entity<TransactionOrder>(
-                ps =>
-                {
-                    ps.Property(c => c.Id).ValueGeneratedNever();
-                    ps.ToTable("Orders");
-                });
+            modelBuilder.Entity<TransactionCustomer>(ps =>
+            {
+                ps.Property(c => c.Id).ValueGeneratedNever();
+                ps.ToTable("Customers");
+            });
+            modelBuilder.Entity<TransactionOrder>(ps =>
+            {
+                ps.Property(c => c.Id).ValueGeneratedNever();
+                ps.ToTable("Orders");
+            });
         }
 
         protected override void Seed(PoolableDbContext context)
@@ -1619,14 +1709,17 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         }
     }
 
-    protected static readonly IReadOnlyList<TransactionCustomer> Customers = new List<TransactionCustomer>
-    {
-        new() { Id = 1, Name = "Bob" }, new() { Id = 2, Name = "Dave" }
-    };
+    protected static readonly IReadOnlyList<TransactionCustomer> Customers =
+        new List<TransactionCustomer>
+        {
+            new() { Id = 1, Name = "Bob" },
+            new() { Id = 2, Name = "Dave" },
+        };
 
     protected static readonly IReadOnlyList<TransactionOrder> Orders = new List<TransactionOrder>
     {
-        new() { Id = 100, Name = "Order1" }, new() { Id = 200, Name = "Order2" }
+        new() { Id = 100, Name = "Order1" },
+        new() { Id = 200, Name = "Order2" },
     };
 
     protected abstract class TransactionEntity
@@ -1634,21 +1727,16 @@ public abstract class TransactionTestBase<TFixture> : IClassFixture<TFixture>
         public int Id { get; set; }
         public string Name { get; set; }
 
-        public override bool Equals(object obj)
-            => obj is TransactionCustomer otherCustomer && (Id == otherCustomer.Id && Name == otherCustomer.Name);
+        public override bool Equals(object obj) =>
+            obj is TransactionCustomer otherCustomer
+            && (Id == otherCustomer.Id && Name == otherCustomer.Name);
 
-        public override string ToString()
-            => "Id = " + Id + ", Name = " + Name;
+        public override string ToString() => "Id = " + Id + ", Name = " + Name;
 
-        public override int GetHashCode()
-            => HashCode.Combine(Id, Name);
+        public override int GetHashCode() => HashCode.Combine(Id, Name);
     }
 
-    protected class TransactionCustomer : TransactionEntity
-    {
-    }
+    protected class TransactionCustomer : TransactionEntity { }
 
-    protected class TransactionOrder : TransactionEntity
-    {
-    }
+    protected class TransactionOrder : TransactionEntity { }
 }

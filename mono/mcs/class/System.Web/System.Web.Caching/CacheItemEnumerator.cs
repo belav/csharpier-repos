@@ -32,54 +32,61 @@ using System.Collections.Generic;
 
 namespace System.Web.Caching
 {
-	sealed class CacheItemEnumerator: IDictionaryEnumerator
-	{
-		List <CacheItem> list;
-		int pos = -1;
-		
-		public CacheItemEnumerator (List <CacheItem> list)
-		{
-			this.list = list;
-		}
-		
-		CacheItem Item {
-			get {
-				if (pos < 0 || pos >= list.Count)
-					throw new InvalidOperationException ();
-				return list [pos];
-			}
-		}
-		
-		public DictionaryEntry Entry {
-			get {
-				CacheItem item = Item;
-				if (item == null)
-					return new DictionaryEntry (null, null);
-				
-				return new DictionaryEntry (item.Key, item.Value);
-			}
-		}
-		
-		public object Key {
-			get { return Item.Key; }
-		}
-		
-		public object Value {
-			get { return Item.Value; }
-		}
-		
-		public object Current {
-			get { return Entry; }
-		}
-		
-		public bool MoveNext ()
-		{
-			return (++pos < list.Count);
-		}
-		
-		public void Reset ()
-		{
-			pos = -1;
-		}
-	}
+    sealed class CacheItemEnumerator : IDictionaryEnumerator
+    {
+        List<CacheItem> list;
+        int pos = -1;
+
+        public CacheItemEnumerator(List<CacheItem> list)
+        {
+            this.list = list;
+        }
+
+        CacheItem Item
+        {
+            get
+            {
+                if (pos < 0 || pos >= list.Count)
+                    throw new InvalidOperationException();
+                return list[pos];
+            }
+        }
+
+        public DictionaryEntry Entry
+        {
+            get
+            {
+                CacheItem item = Item;
+                if (item == null)
+                    return new DictionaryEntry(null, null);
+
+                return new DictionaryEntry(item.Key, item.Value);
+            }
+        }
+
+        public object Key
+        {
+            get { return Item.Key; }
+        }
+
+        public object Value
+        {
+            get { return Item.Value; }
+        }
+
+        public object Current
+        {
+            get { return Entry; }
+        }
+
+        public bool MoveNext()
+        {
+            return (++pos < list.Count);
+        }
+
+        public void Reset()
+        {
+            pos = -1;
+        }
+    }
 }

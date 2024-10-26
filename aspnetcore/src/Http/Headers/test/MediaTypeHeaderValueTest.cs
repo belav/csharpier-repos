@@ -37,19 +37,23 @@ public class MediaTypeHeaderValueTest
     }
 
     public static TheoryData<string, string, string?> MediaTypesWithSuffixes =>
-             new TheoryData<string, string, string?>
-             {
-                     // See https://tools.ietf.org/html/rfc6838#section-4.2 for allowed names spec
-                     { "application/json", "json", null },
-                     { "application/json+", "json", "" },
-                     { "application/+json", "", "json" },
-                     { "application/entitytype+json", "entitytype", "json" },
-                     { "applica+tion/entitytype+json", "entitytype", "json" },
-             };
+        new TheoryData<string, string, string?>
+        {
+            // See https://tools.ietf.org/html/rfc6838#section-4.2 for allowed names spec
+            { "application/json", "json", null },
+            { "application/json+", "json", "" },
+            { "application/+json", "", "json" },
+            { "application/entitytype+json", "entitytype", "json" },
+            { "applica+tion/entitytype+json", "entitytype", "json" },
+        };
 
     [Theory]
     [MemberData(nameof(MediaTypesWithSuffixes))]
-    public void Ctor_CanParseSuffixedMediaTypes(string mediaType, string expectedSubTypeWithoutSuffix, string expectedSubTypeSuffix)
+    public void Ctor_CanParseSuffixedMediaTypes(
+        string mediaType,
+        string expectedSubTypeWithoutSuffix,
+        string expectedSubTypeSuffix
+    )
     {
         var result = new MediaTypeHeaderValue(mediaType);
 
@@ -58,19 +62,27 @@ public class MediaTypeHeaderValueTest
     }
 
     public static TheoryData<string, string, string> MediaTypesWithSuffixesAndSpaces =>
-             new TheoryData<string, string, string>
-             {
-                     // See https://tools.ietf.org/html/rfc6838#section-4.2 for allowed names spec
-                     { "    application   /  json+xml", "json", "xml" },
-                     { "  application /  vnd.com-pany.some+entity!.v2+js.#$&^_n  ; q=\"0.3+1\"", "vnd.com-pany.some+entity!.v2", "js.#$&^_n"},
-                     { "   application/    +json", "", "json" },
-                     { "  application/   entitytype+json    ", "entitytype", "json" },
-                     { "  applica+tion/   entitytype+json    ", "entitytype", "json" }
-             };
+        new TheoryData<string, string, string>
+        {
+            // See https://tools.ietf.org/html/rfc6838#section-4.2 for allowed names spec
+            { "    application   /  json+xml", "json", "xml" },
+            {
+                "  application /  vnd.com-pany.some+entity!.v2+js.#$&^_n  ; q=\"0.3+1\"",
+                "vnd.com-pany.some+entity!.v2",
+                "js.#$&^_n"
+            },
+            { "   application/    +json", "", "json" },
+            { "  application/   entitytype+json    ", "entitytype", "json" },
+            { "  applica+tion/   entitytype+json    ", "entitytype", "json" },
+        };
 
     [Theory]
     [MemberData(nameof(MediaTypesWithSuffixesAndSpaces))]
-    public void Parse_CanParseSuffixedMediaTypes(string mediaType, string expectedSubTypeWithoutSuffix, string expectedSubTypeSuffix)
+    public void Parse_CanParseSuffixedMediaTypes(
+        string mediaType,
+        string expectedSubTypeWithoutSuffix,
+        string expectedSubTypeSuffix
+    )
     {
         var result = MediaTypeHeaderValue.Parse(mediaType);
 
@@ -86,7 +98,10 @@ public class MediaTypeHeaderValueTest
     [InlineData("text/*+*", true)]
     [InlineData("text/json+suffix", false)]
     [InlineData("*/json+*", false)]
-    public void MatchesAllSubTypesWithoutSuffix_ReturnsExpectedResult(string value, bool expectedReturnValue)
+    public void MatchesAllSubTypesWithoutSuffix_ReturnsExpectedResult(
+        string value,
+        bool expectedReturnValue
+    )
     {
         // Arrange
         var mediaType = new MediaTypeHeaderValue(value);
@@ -146,7 +161,10 @@ public class MediaTypeHeaderValueTest
 
         Assert.False(mediaType0.IsReadOnly);
         Assert.True(mediaType1.IsReadOnly);
-        Assert.Throws<InvalidOperationException>(() => { mediaType1.MediaType = "some/value"; });
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            mediaType1.MediaType = "some/value";
+        });
     }
 
     [Fact]
@@ -181,8 +199,12 @@ public class MediaTypeHeaderValueTest
         Assert.False(mediaType0.Parameters.IsReadOnly);
         Assert.True(mediaType1.Parameters.IsReadOnly);
         Assert.Equal(mediaType0.Parameters.Count, mediaType1.Parameters.Count);
-        Assert.Throws<NotSupportedException>(() => mediaType1.Parameters.Add(new NameValueHeaderValue("name")));
-        Assert.Throws<NotSupportedException>(() => mediaType1.Parameters.Remove(new NameValueHeaderValue("name")));
+        Assert.Throws<NotSupportedException>(
+            () => mediaType1.Parameters.Add(new NameValueHeaderValue("name"))
+        );
+        Assert.Throws<NotSupportedException>(
+            () => mediaType1.Parameters.Remove(new NameValueHeaderValue("name"))
+        );
         Assert.Throws<NotSupportedException>(() => mediaType1.Parameters.Clear());
 
         var pair0 = mediaType0.Parameters.First();
@@ -313,7 +335,9 @@ public class MediaTypeHeaderValueTest
     [Fact]
     public void Quality_LessThanZero_Throw()
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => new MediaTypeHeaderValue("application/xml", -0.01));
+        Assert.Throws<ArgumentOutOfRangeException>(
+            () => new MediaTypeHeaderValue("application/xml", -0.01)
+        );
     }
 
     [Fact]
@@ -391,10 +415,19 @@ public class MediaTypeHeaderValueTest
         CheckValidParse("\r\n text/plain  ", new MediaTypeHeaderValue("text/plain"));
         CheckValidParse("text/plain", new MediaTypeHeaderValue("text/plain"));
 
-        CheckValidParse("\r\n text   /  plain ;  charset =   utf-8 ", new MediaTypeHeaderValue("text/plain") { Charset = "utf-8" });
-        CheckValidParse("  text/plain;charset=utf-8", new MediaTypeHeaderValue("text/plain") { Charset = "utf-8" });
+        CheckValidParse(
+            "\r\n text   /  plain ;  charset =   utf-8 ",
+            new MediaTypeHeaderValue("text/plain") { Charset = "utf-8" }
+        );
+        CheckValidParse(
+            "  text/plain;charset=utf-8",
+            new MediaTypeHeaderValue("text/plain") { Charset = "utf-8" }
+        );
 
-        CheckValidParse("text/plain; charset=iso-8859-1", new MediaTypeHeaderValue("text/plain") { Charset = "iso-8859-1" });
+        CheckValidParse(
+            "text/plain; charset=iso-8859-1",
+            new MediaTypeHeaderValue("text/plain") { Charset = "iso-8859-1" }
+        );
 
         var expected = new MediaTypeHeaderValue("text/plain") { Charset = "utf-8" };
         expected.Parameters.Add(new NameValueHeaderValue("custom", "value"));
@@ -461,7 +494,9 @@ public class MediaTypeHeaderValueTest
         CheckInvalidParse("text/plain; charset=utf-8,");
         CheckInvalidParse("textplain");
         CheckInvalidParse("text/");
-        CheckInvalidParse(",, , ,,text/plain; charset=iso-8859-1; q=1.0,\r\n */xml; charset=utf-8; q=0.5,,,");
+        CheckInvalidParse(
+            ",, , ,,text/plain; charset=iso-8859-1; q=1.0,\r\n */xml; charset=utf-8; q=0.5,,,"
+        );
         CheckInvalidParse("text/plain; charset=iso-8859-1; q=1.0, */xml; charset=utf-8; q=0.5");
         CheckInvalidParse(" , */xml; charset=utf-8; q=0.5 ");
         CheckInvalidParse("text/plain; charset=iso-8859-1; q=1.0 , ");
@@ -507,7 +542,9 @@ public class MediaTypeHeaderValueTest
         CheckInvalidTryParse("text/plain; charset=utf-8,");
         CheckInvalidTryParse("textplain");
         CheckInvalidTryParse("text/");
-        CheckInvalidTryParse(",, , ,,text/plain; charset=iso-8859-1; q=1.0,\r\n */xml; charset=utf-8; q=0.5,,,");
+        CheckInvalidTryParse(
+            ",, , ,,text/plain; charset=iso-8859-1; q=1.0,\r\n */xml; charset=utf-8; q=0.5,,,"
+        );
         CheckInvalidTryParse("text/plain; charset=iso-8859-1; q=1.0, */xml; charset=utf-8; q=0.5");
         CheckInvalidTryParse(" , */xml; charset=utf-8; q=0.5 ");
         CheckInvalidTryParse("text/plain; charset=iso-8859-1; q=1.0 , ");
@@ -540,17 +577,21 @@ public class MediaTypeHeaderValueTest
     [Fact]
     public void ParseList_SetOfValidValueStrings_ReturnsValues()
     {
-        var inputs = new[] { "text/html,application/xhtml+xml,", "application/xml;q=0.9,image/webp,*/*;q=0.8" };
+        var inputs = new[]
+        {
+            "text/html,application/xhtml+xml,",
+            "application/xml;q=0.9,image/webp,*/*;q=0.8",
+        };
         var results = MediaTypeHeaderValue.ParseList(inputs);
 
         var expectedResults = new[]
         {
-                new MediaTypeHeaderValue("text/html"),
-                new MediaTypeHeaderValue("application/xhtml+xml"),
-                new MediaTypeHeaderValue("application/xml", 0.9),
-                new MediaTypeHeaderValue("image/webp"),
-                new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            new MediaTypeHeaderValue("text/html"),
+            new MediaTypeHeaderValue("application/xhtml+xml"),
+            new MediaTypeHeaderValue("application/xml", 0.9),
+            new MediaTypeHeaderValue("image/webp"),
+            new MediaTypeHeaderValue("*/*", 0.8),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -558,17 +599,21 @@ public class MediaTypeHeaderValueTest
     [Fact]
     public void ParseStrictList_SetOfValidValueStrings_ReturnsValues()
     {
-        var inputs = new[] { "text/html,application/xhtml+xml,", "application/xml;q=0.9,image/webp,*/*;q=0.8" };
+        var inputs = new[]
+        {
+            "text/html,application/xhtml+xml,",
+            "application/xml;q=0.9,image/webp,*/*;q=0.8",
+        };
         var results = MediaTypeHeaderValue.ParseStrictList(inputs);
 
         var expectedResults = new[]
         {
-                new MediaTypeHeaderValue("text/html"),
-                new MediaTypeHeaderValue("application/xhtml+xml"),
-                new MediaTypeHeaderValue("application/xml", 0.9),
-                new MediaTypeHeaderValue("image/webp"),
-                new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            new MediaTypeHeaderValue("text/html"),
+            new MediaTypeHeaderValue("application/xhtml+xml"),
+            new MediaTypeHeaderValue("application/xml", 0.9),
+            new MediaTypeHeaderValue("image/webp"),
+            new MediaTypeHeaderValue("*/*", 0.8),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -576,17 +621,21 @@ public class MediaTypeHeaderValueTest
     [Fact]
     public void TryParseList_SetOfValidValueStrings_ReturnsTrue()
     {
-        var inputs = new[] { "text/html,application/xhtml+xml,", "application/xml;q=0.9,image/webp,*/*;q=0.8" };
+        var inputs = new[]
+        {
+            "text/html,application/xhtml+xml,",
+            "application/xml;q=0.9,image/webp,*/*;q=0.8",
+        };
         Assert.True(MediaTypeHeaderValue.TryParseList(inputs, out var results));
 
         var expectedResults = new[]
         {
-                new MediaTypeHeaderValue("text/html"),
-                new MediaTypeHeaderValue("application/xhtml+xml"),
-                new MediaTypeHeaderValue("application/xml", 0.9),
-                new MediaTypeHeaderValue("image/webp"),
-                new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            new MediaTypeHeaderValue("text/html"),
+            new MediaTypeHeaderValue("application/xhtml+xml"),
+            new MediaTypeHeaderValue("application/xml", 0.9),
+            new MediaTypeHeaderValue("image/webp"),
+            new MediaTypeHeaderValue("*/*", 0.8),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -594,17 +643,21 @@ public class MediaTypeHeaderValueTest
     [Fact]
     public void TryParseStrictList_SetOfValidValueStrings_ReturnsTrue()
     {
-        var inputs = new[] { "text/html,application/xhtml+xml,", "application/xml;q=0.9,image/webp,*/*;q=0.8" };
+        var inputs = new[]
+        {
+            "text/html,application/xhtml+xml,",
+            "application/xml;q=0.9,image/webp,*/*;q=0.8",
+        };
         Assert.True(MediaTypeHeaderValue.TryParseStrictList(inputs, out var results));
 
         var expectedResults = new[]
         {
-                new MediaTypeHeaderValue("text/html"),
-                new MediaTypeHeaderValue("application/xhtml+xml"),
-                new MediaTypeHeaderValue("application/xml", 0.9),
-                new MediaTypeHeaderValue("image/webp"),
-                new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            new MediaTypeHeaderValue("text/html"),
+            new MediaTypeHeaderValue("application/xhtml+xml"),
+            new MediaTypeHeaderValue("application/xml", 0.9),
+            new MediaTypeHeaderValue("image/webp"),
+            new MediaTypeHeaderValue("*/*", 0.8),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -614,20 +667,20 @@ public class MediaTypeHeaderValueTest
     {
         var inputs = new[]
         {
-                "text/html,application/xhtml+xml, ignore-this, ignore/this",
-                "application/xml;q=0.9,image/webp,*/*;q=0.8"
-            };
+            "text/html,application/xhtml+xml, ignore-this, ignore/this",
+            "application/xml;q=0.9,image/webp,*/*;q=0.8",
+        };
         var results = MediaTypeHeaderValue.ParseList(inputs);
 
         var expectedResults = new[]
         {
-                new MediaTypeHeaderValue("text/html"),
-                new MediaTypeHeaderValue("application/xhtml+xml"),
-                new MediaTypeHeaderValue("ignore/this"),
-                new MediaTypeHeaderValue("application/xml", 0.9),
-                new MediaTypeHeaderValue("image/webp"),
-                new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            new MediaTypeHeaderValue("text/html"),
+            new MediaTypeHeaderValue("application/xhtml+xml"),
+            new MediaTypeHeaderValue("ignore/this"),
+            new MediaTypeHeaderValue("application/xml", 0.9),
+            new MediaTypeHeaderValue("image/webp"),
+            new MediaTypeHeaderValue("*/*", 0.8),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -637,9 +690,9 @@ public class MediaTypeHeaderValueTest
     {
         var inputs = new[]
         {
-                "text/html,application/xhtml+xml, ignore-this, ignore/this",
-                "application/xml;q=0.9,image/webp,*/*;q=0.8"
-            };
+            "text/html,application/xhtml+xml, ignore-this, ignore/this",
+            "application/xml;q=0.9,image/webp,*/*;q=0.8",
+        };
         Assert.Throws<FormatException>(() => MediaTypeHeaderValue.ParseStrictList(inputs));
     }
 
@@ -648,21 +701,21 @@ public class MediaTypeHeaderValueTest
     {
         var inputs = new[]
         {
-                "text/html,application/xhtml+xml, ignore-this, ignore/this",
-                "application/xml;q=0.9,image/webp,*/*;q=0.8",
-                "application/xml;q=0 4"
-            };
+            "text/html,application/xhtml+xml, ignore-this, ignore/this",
+            "application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "application/xml;q=0 4",
+        };
         Assert.True(MediaTypeHeaderValue.TryParseList(inputs, out var results));
 
         var expectedResults = new[]
         {
-                new MediaTypeHeaderValue("text/html"),
-                new MediaTypeHeaderValue("application/xhtml+xml"),
-                new MediaTypeHeaderValue("ignore/this"),
-                new MediaTypeHeaderValue("application/xml", 0.9),
-                new MediaTypeHeaderValue("image/webp"),
-                new MediaTypeHeaderValue("*/*", 0.8),
-            }.ToList();
+            new MediaTypeHeaderValue("text/html"),
+            new MediaTypeHeaderValue("application/xhtml+xml"),
+            new MediaTypeHeaderValue("ignore/this"),
+            new MediaTypeHeaderValue("application/xml", 0.9),
+            new MediaTypeHeaderValue("image/webp"),
+            new MediaTypeHeaderValue("*/*", 0.8),
+        }.ToList();
 
         Assert.Equal(expectedResults, results);
     }
@@ -672,10 +725,10 @@ public class MediaTypeHeaderValueTest
     {
         var inputs = new[]
         {
-                "text/html,application/xhtml+xml, ignore-this, ignore/this",
-                "application/xml;q=0.9,image/webp,*/*;q=0.8",
-                "application/xml;q=0 4"
-            };
+            "text/html,application/xhtml+xml, ignore-this, ignore/this",
+            "application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "application/xml;q=0 4",
+        };
         Assert.False(MediaTypeHeaderValue.TryParseStrictList(inputs, out var results));
     }
 
@@ -891,17 +944,25 @@ public class MediaTypeHeaderValueTest
     }
 
     public static TheoryData<string, List<StringSegment>> MediaTypesWithFacets =>
-             new TheoryData<string, List<StringSegment>>
-             {
-                     { "application/vdn.github",
-                         new List<StringSegment>(){ "vdn", "github" } },
-                     { "application/vdn.github+json",
-                         new List<StringSegment>(){ "vdn", "github" } },
-                     { "application/vdn.github.v3+json",
-                         new List<StringSegment>(){ "vdn", "github", "v3" } },
-                     { "application/vdn.github.+json",
-                         new List<StringSegment>(){ "vdn", "github", "" } },
-             };
+        new TheoryData<string, List<StringSegment>>
+        {
+            {
+                "application/vdn.github",
+                new List<StringSegment>() { "vdn", "github" }
+            },
+            {
+                "application/vdn.github+json",
+                new List<StringSegment>() { "vdn", "github" }
+            },
+            {
+                "application/vdn.github.v3+json",
+                new List<StringSegment>() { "vdn", "github", "v3" }
+            },
+            {
+                "application/vdn.github.+json",
+                new List<StringSegment>() { "vdn", "github", "" }
+            },
+        };
 
     [Theory]
     [MemberData(nameof(MediaTypesWithFacets))]

@@ -20,14 +20,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class SyntaxNodeExtensions
     {
-        public static SyntaxNode GetRequiredParent(this SyntaxNode node)
-            => node.Parent ?? throw new InvalidOperationException("Node's parent was null");
+        public static SyntaxNode GetRequiredParent(this SyntaxNode node) =>
+            node.Parent ?? throw new InvalidOperationException("Node's parent was null");
 
-        public static IEnumerable<SyntaxNodeOrToken> DepthFirstTraversal(this SyntaxNode node)
-            => SyntaxNodeOrTokenExtensions.DepthFirstTraversal(node);
+        public static IEnumerable<SyntaxNodeOrToken> DepthFirstTraversal(this SyntaxNode node) =>
+            SyntaxNodeOrTokenExtensions.DepthFirstTraversal(node);
 
-        public static IEnumerable<SyntaxNode> DepthFirstTraversalNodes(this SyntaxNode node)
-            => SyntaxNodeOrTokenExtensions.DepthFirstTraversalNodes(node);
+        public static IEnumerable<SyntaxNode> DepthFirstTraversalNodes(this SyntaxNode node) =>
+            SyntaxNodeOrTokenExtensions.DepthFirstTraversalNodes(node);
 
         public static IEnumerable<SyntaxNode> GetAncestors(this SyntaxNode node)
         {
@@ -101,7 +101,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         public static IEnumerable<TSyntaxNode> Traverse<TSyntaxNode>(
-            this SyntaxNode node, TextSpan searchSpan, Func<SyntaxNode, bool> predicate)
+            this SyntaxNode node,
+            TextSpan searchSpan,
+            Func<SyntaxNode, bool> predicate
+        )
             where TSyntaxNode : SyntaxNode
         {
             Contract.ThrowIfNull(node);
@@ -114,7 +117,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 var currentNode = nodes.First!.Value;
                 nodes.RemoveFirst();
 
-                if (currentNode != null && searchSpan.Contains(currentNode.FullSpan) && predicate(currentNode))
+                if (
+                    currentNode != null
+                    && searchSpan.Contains(currentNode.FullSpan)
+                    && predicate(currentNode)
+                )
                 {
                     if (currentNode is TSyntaxNode tSyntax)
                     {
@@ -126,7 +133,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static bool CheckParent<T>([NotNullWhen(returnValue: true)] this SyntaxNode? node, Func<T, bool> valueChecker) where T : SyntaxNode
+        public static bool CheckParent<T>(
+            [NotNullWhen(returnValue: true)] this SyntaxNode? node,
+            Func<T, bool> valueChecker
+        )
+            where T : SyntaxNode
         {
             if (node?.Parent is not T parentNode)
             {
@@ -142,7 +153,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <typeparam name="TParent">The type of the parent node.</typeparam>
         /// <param name="node">The node that we are testing.</param>
         /// <param name="childGetter">A function that, when given the parent node, returns the child token we are interested in.</param>
-        public static bool IsChildNode<TParent>(this SyntaxNode node, Func<TParent, SyntaxNode?> childGetter)
+        public static bool IsChildNode<TParent>(
+            this SyntaxNode node,
+            Func<TParent, SyntaxNode?> childGetter
+        )
             where TParent : SyntaxNode
         {
             var ancestor = node.GetAncestor<TParent>();
@@ -159,8 +173,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <summary>
         /// Returns true if this node is found underneath the specified child in the given parent.
         /// </summary>
-        public static bool IsFoundUnder<TParent>(this SyntaxNode node, Func<TParent, SyntaxNode?> childGetter)
-           where TParent : SyntaxNode
+        public static bool IsFoundUnder<TParent>(
+            this SyntaxNode node,
+            Func<TParent, SyntaxNode?> childGetter
+        )
+            where TParent : SyntaxNode
         {
             var ancestor = node.GetAncestor<TParent>();
             if (ancestor == null)
@@ -186,14 +203,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return ancestors.First(set.Contains);
         }
 
-        public static int Width(this SyntaxNode node)
-            => node.Span.Length;
+        public static int Width(this SyntaxNode node) => node.Span.Length;
 
-        public static int FullWidth(this SyntaxNode node)
-            => node.FullSpan.Length;
+        public static int FullWidth(this SyntaxNode node) => node.FullSpan.Length;
 
-        public static SyntaxNode? FindInnermostCommonNode(this IEnumerable<SyntaxNode> nodes, Func<SyntaxNode, bool> predicate)
-            => nodes.FindInnermostCommonNode()?.FirstAncestorOrSelf(predicate);
+        public static SyntaxNode? FindInnermostCommonNode(
+            this IEnumerable<SyntaxNode> nodes,
+            Func<SyntaxNode, bool> predicate
+        ) => nodes.FindInnermostCommonNode()?.FirstAncestorOrSelf(predicate);
 
         public static SyntaxNode? FindInnermostCommonNode(this IEnumerable<SyntaxNode> nodes)
         {
@@ -247,8 +264,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // generally quite efficient.  Either we settle on a common node quickly. and don't
                 // need to do work here, or we keep tossing data from our common-ancestor scratch
                 // pad, making further work faster.
-                while (commonAncestorsStack.Count > 0 &&
-                       commonAncestorsStack.Peek() != commonAncestor)
+                while (
+                    commonAncestorsStack.Count > 0 && commonAncestorsStack.Peek() != commonAncestor
+                )
                 {
                     commonAncestorsSet.Remove(commonAncestorsStack.Peek());
                     commonAncestorsStack.Pop();
@@ -272,7 +290,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return commonAncestorsStack.Count == 0 ? null : commonAncestorsStack.Peek();
 
             // local functions
-            static SyntaxNode? FindCommonAncestor(SyntaxNode node, HashSet<SyntaxNode> commonAncestorsSet)
+            static SyntaxNode? FindCommonAncestor(
+                SyntaxNode node,
+                HashSet<SyntaxNode> commonAncestorsSet
+            )
             {
                 foreach (var ancestor in node.ValueAncestorsAndSelf())
                 {
@@ -284,8 +305,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static TSyntaxNode? FindInnermostCommonNode<TSyntaxNode>(this IEnumerable<SyntaxNode> nodes) where TSyntaxNode : SyntaxNode
-            => (TSyntaxNode?)nodes.FindInnermostCommonNode(t => t is TSyntaxNode);
+        public static TSyntaxNode? FindInnermostCommonNode<TSyntaxNode>(
+            this IEnumerable<SyntaxNode> nodes
+        )
+            where TSyntaxNode : SyntaxNode =>
+            (TSyntaxNode?)nodes.FindInnermostCommonNode(t => t is TSyntaxNode);
 
         public static TextSpan GetContainedSpan(this IEnumerable<SyntaxNode> nodes)
         {
@@ -297,19 +321,30 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 fullSpan = TextSpan.FromBounds(
                     Math.Min(fullSpan.Start, node.SpanStart),
-                    Math.Max(fullSpan.End, node.Span.End));
+                    Math.Max(fullSpan.End, node.Span.End)
+                );
             }
 
             return fullSpan;
         }
 
-        public static bool OverlapsHiddenPosition(this SyntaxNode node, CancellationToken cancellationToken)
-            => node.OverlapsHiddenPosition(node.Span, cancellationToken);
+        public static bool OverlapsHiddenPosition(
+            this SyntaxNode node,
+            CancellationToken cancellationToken
+        ) => node.OverlapsHiddenPosition(node.Span, cancellationToken);
 
-        public static bool OverlapsHiddenPosition(this SyntaxNode node, TextSpan span, CancellationToken cancellationToken)
-            => node.SyntaxTree.OverlapsHiddenPosition(span, cancellationToken);
+        public static bool OverlapsHiddenPosition(
+            this SyntaxNode node,
+            TextSpan span,
+            CancellationToken cancellationToken
+        ) => node.SyntaxTree.OverlapsHiddenPosition(span, cancellationToken);
 
-        public static bool OverlapsHiddenPosition(this SyntaxNode declaration, SyntaxNode startNode, SyntaxNode endNode, CancellationToken cancellationToken)
+        public static bool OverlapsHiddenPosition(
+            this SyntaxNode declaration,
+            SyntaxNode startNode,
+            SyntaxNode endNode,
+            CancellationToken cancellationToken
+        )
         {
             var start = startNode.Span.End;
             var end = endNode.SpanStart;
@@ -318,8 +353,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return declaration.OverlapsHiddenPosition(textSpan, cancellationToken);
         }
 
-        public static IEnumerable<T> GetAnnotatedNodes<T>(this SyntaxNode node, SyntaxAnnotation syntaxAnnotation) where T : SyntaxNode
-            => node.GetAnnotatedNodesAndTokens(syntaxAnnotation).Select(n => n.AsNode()).OfType<T>();
+        public static IEnumerable<T> GetAnnotatedNodes<T>(
+            this SyntaxNode node,
+            SyntaxAnnotation syntaxAnnotation
+        )
+            where T : SyntaxNode =>
+            node.GetAnnotatedNodesAndTokens(syntaxAnnotation).Select(n => n.AsNode()).OfType<T>();
 
         /// <summary>
         /// Creates a new tree of nodes from the existing tree with the specified old nodes replaced with a newly computed nodes.
@@ -333,14 +372,25 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static Task<TRootNode> ReplaceNodesAsync<TRootNode>(
             this TRootNode root,
             IEnumerable<SyntaxNode> nodes,
-            Func<SyntaxNode, SyntaxNode, CancellationToken, Task<SyntaxNode>> computeReplacementAsync,
-            CancellationToken cancellationToken) where TRootNode : SyntaxNode
+            Func<
+                SyntaxNode,
+                SyntaxNode,
+                CancellationToken,
+                Task<SyntaxNode>
+            > computeReplacementAsync,
+            CancellationToken cancellationToken
+        )
+            where TRootNode : SyntaxNode
         {
             return root.ReplaceSyntaxAsync(
-                nodes: nodes, computeReplacementNodeAsync: computeReplacementAsync,
-                tokens: null, computeReplacementTokenAsync: null,
-                trivia: null, computeReplacementTriviaAsync: null,
-                cancellationToken: cancellationToken);
+                nodes: nodes,
+                computeReplacementNodeAsync: computeReplacementAsync,
+                tokens: null,
+                computeReplacementTokenAsync: null,
+                trivia: null,
+                computeReplacementTriviaAsync: null,
+                cancellationToken: cancellationToken
+            );
         }
 
         /// <summary>
@@ -355,44 +405,91 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static Task<TRootNode> ReplaceTokensAsync<TRootNode>(
             this TRootNode root,
             IEnumerable<SyntaxToken> tokens,
-            Func<SyntaxToken, SyntaxToken, CancellationToken, Task<SyntaxToken>> computeReplacementAsync,
-            CancellationToken cancellationToken) where TRootNode : SyntaxNode
+            Func<
+                SyntaxToken,
+                SyntaxToken,
+                CancellationToken,
+                Task<SyntaxToken>
+            > computeReplacementAsync,
+            CancellationToken cancellationToken
+        )
+            where TRootNode : SyntaxNode
         {
             return root.ReplaceSyntaxAsync(
-                nodes: null, computeReplacementNodeAsync: null,
-                tokens: tokens, computeReplacementTokenAsync: computeReplacementAsync,
-                trivia: null, computeReplacementTriviaAsync: null,
-                cancellationToken: cancellationToken);
+                nodes: null,
+                computeReplacementNodeAsync: null,
+                tokens: tokens,
+                computeReplacementTokenAsync: computeReplacementAsync,
+                trivia: null,
+                computeReplacementTriviaAsync: null,
+                cancellationToken: cancellationToken
+            );
         }
 
         public static Task<TRoot> ReplaceTriviaAsync<TRoot>(
             this TRoot root,
             IEnumerable<SyntaxTrivia> trivia,
-            Func<SyntaxTrivia, SyntaxTrivia, CancellationToken, Task<SyntaxTrivia>> computeReplacementAsync,
-            CancellationToken cancellationToken) where TRoot : SyntaxNode
+            Func<
+                SyntaxTrivia,
+                SyntaxTrivia,
+                CancellationToken,
+                Task<SyntaxTrivia>
+            > computeReplacementAsync,
+            CancellationToken cancellationToken
+        )
+            where TRoot : SyntaxNode
         {
             return root.ReplaceSyntaxAsync(
-                nodes: null, computeReplacementNodeAsync: null,
-                tokens: null, computeReplacementTokenAsync: null,
-                trivia: trivia, computeReplacementTriviaAsync: computeReplacementAsync,
-                cancellationToken: cancellationToken);
+                nodes: null,
+                computeReplacementNodeAsync: null,
+                tokens: null,
+                computeReplacementTokenAsync: null,
+                trivia: trivia,
+                computeReplacementTriviaAsync: computeReplacementAsync,
+                cancellationToken: cancellationToken
+            );
         }
 
         public static async Task<TRoot> ReplaceSyntaxAsync<TRoot>(
             this TRoot root,
             IEnumerable<SyntaxNode>? nodes,
-            Func<SyntaxNode, SyntaxNode, CancellationToken, Task<SyntaxNode>>? computeReplacementNodeAsync,
+            Func<
+                SyntaxNode,
+                SyntaxNode,
+                CancellationToken,
+                Task<SyntaxNode>
+            >? computeReplacementNodeAsync,
             IEnumerable<SyntaxToken>? tokens,
-            Func<SyntaxToken, SyntaxToken, CancellationToken, Task<SyntaxToken>>? computeReplacementTokenAsync,
+            Func<
+                SyntaxToken,
+                SyntaxToken,
+                CancellationToken,
+                Task<SyntaxToken>
+            >? computeReplacementTokenAsync,
             IEnumerable<SyntaxTrivia>? trivia,
-            Func<SyntaxTrivia, SyntaxTrivia, CancellationToken, Task<SyntaxTrivia>>? computeReplacementTriviaAsync,
-            CancellationToken cancellationToken)
+            Func<
+                SyntaxTrivia,
+                SyntaxTrivia,
+                CancellationToken,
+                Task<SyntaxTrivia>
+            >? computeReplacementTriviaAsync,
+            CancellationToken cancellationToken
+        )
             where TRoot : SyntaxNode
         {
             // index all nodes, tokens and trivia by the full spans they cover
-            var nodesToReplace = nodes != null ? nodes.ToDictionary(n => n.FullSpan) : new Dictionary<TextSpan, SyntaxNode>();
-            var tokensToReplace = tokens != null ? tokens.ToDictionary(t => t.FullSpan) : new Dictionary<TextSpan, SyntaxToken>();
-            var triviaToReplace = trivia != null ? trivia.ToDictionary(t => t.FullSpan) : new Dictionary<TextSpan, SyntaxTrivia>();
+            var nodesToReplace =
+                nodes != null
+                    ? nodes.ToDictionary(n => n.FullSpan)
+                    : new Dictionary<TextSpan, SyntaxNode>();
+            var tokensToReplace =
+                tokens != null
+                    ? tokens.ToDictionary(t => t.FullSpan)
+                    : new Dictionary<TextSpan, SyntaxToken>();
+            var triviaToReplace =
+                trivia != null
+                    ? trivia.ToDictionary(t => t.FullSpan)
+                    : new Dictionary<TextSpan, SyntaxTrivia>();
 
             var nodeReplacements = new Dictionary<SyntaxNode, SyntaxNode>();
             var tokenReplacements = new Dictionary<SyntaxToken, SyntaxToken>();
@@ -400,7 +497,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var retryAnnotations = new AnnotationTable<object>("RetryReplace");
 
-            var spans = new List<TextSpan>(nodesToReplace.Count + tokensToReplace.Count + triviaToReplace.Count);
+            var spans = new List<TextSpan>(
+                nodesToReplace.Count + tokensToReplace.Count + triviaToReplace.Count
+            );
             spans.AddRange(nodesToReplace.Keys);
             spans.AddRange(tokensToReplace.Keys);
             spans.AddRange(triviaToReplace.Keys);
@@ -408,21 +507,23 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             while (spans.Count > 0)
             {
                 // sort the spans of the items to be replaced so we can tell if any overlap
-                spans.Sort((x, y) =>
-                {
-                    // order by end offset, and then by length
-                    var d = x.End - y.End;
-
-                    if (d == 0)
+                spans.Sort(
+                    (x, y) =>
                     {
-                        d = x.Length - y.Length;
-                    }
+                        // order by end offset, and then by length
+                        var d = x.End - y.End;
 
-                    return d;
-                });
+                        if (d == 0)
+                        {
+                            d = x.Length - y.Length;
+                        }
+
+                        return d;
+                    }
+                );
 
                 // compute replacements for all nodes that will go in the same batch
-                // only spans that do not overlap go in the same batch.                
+                // only spans that do not overlap go in the same batch.
                 TextSpan previous = default;
                 foreach (var span in spans)
                 {
@@ -432,20 +533,44 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     {
                         if (nodesToReplace.TryGetValue(span, out var currentNode))
                         {
-                            var original = (SyntaxNode?)retryAnnotations.GetAnnotations(currentNode).SingleOrDefault() ?? currentNode;
-                            var newNode = await computeReplacementNodeAsync!(original, currentNode, cancellationToken).ConfigureAwait(false);
+                            var original =
+                                (SyntaxNode?)
+                                    retryAnnotations.GetAnnotations(currentNode).SingleOrDefault()
+                                ?? currentNode;
+                            var newNode = await computeReplacementNodeAsync!(
+                                original,
+                                currentNode,
+                                cancellationToken
+                            )
+                                .ConfigureAwait(false);
                             nodeReplacements[currentNode] = newNode;
                         }
                         else if (tokensToReplace.TryGetValue(span, out var currentToken))
                         {
-                            var original = (SyntaxToken?)retryAnnotations.GetAnnotations(currentToken).SingleOrDefault() ?? currentToken;
-                            var newToken = await computeReplacementTokenAsync!(original, currentToken, cancellationToken).ConfigureAwait(false);
+                            var original =
+                                (SyntaxToken?)
+                                    retryAnnotations.GetAnnotations(currentToken).SingleOrDefault()
+                                ?? currentToken;
+                            var newToken = await computeReplacementTokenAsync!(
+                                original,
+                                currentToken,
+                                cancellationToken
+                            )
+                                .ConfigureAwait(false);
                             tokenReplacements[currentToken] = newToken;
                         }
                         else if (triviaToReplace.TryGetValue(span, out var currentTrivia))
                         {
-                            var original = (SyntaxTrivia?)retryAnnotations.GetAnnotations(currentTrivia).SingleOrDefault() ?? currentTrivia;
-                            var newTrivia = await computeReplacementTriviaAsync!(original, currentTrivia, cancellationToken).ConfigureAwait(false);
+                            var original =
+                                (SyntaxTrivia?)
+                                    retryAnnotations.GetAnnotations(currentTrivia).SingleOrDefault()
+                                ?? currentTrivia;
+                            var newTrivia = await computeReplacementTriviaAsync!(
+                                original,
+                                currentTrivia,
+                                cancellationToken
+                            )
+                                .ConfigureAwait(false);
                             triviaReplacements[currentTrivia] = newTrivia;
                         }
                     }
@@ -460,45 +585,61 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // replace nodes in batch
                 // submit all nodes so we can annotate the ones we don't replace
                 root = root.ReplaceSyntax(
-                        nodes: nodesToReplace.Values,
-                        computeReplacementNode: (original, rewritten) =>
-                            {
-                                if (rewritten != original || !nodeReplacements.TryGetValue(original, out var replaced))
-                                {
-                                    // the subtree did change, or we didn't have a replacement for it in this batch
-                                    // so we need to add an annotation so we can find this node again for the next batch.
-                                    replaced = retryAnnotations.WithAdditionalAnnotations(rewritten, original);
-                                    retryNodes = true;
-                                }
+                    nodes: nodesToReplace.Values,
+                    computeReplacementNode: (original, rewritten) =>
+                    {
+                        if (
+                            rewritten != original
+                            || !nodeReplacements.TryGetValue(original, out var replaced)
+                        )
+                        {
+                            // the subtree did change, or we didn't have a replacement for it in this batch
+                            // so we need to add an annotation so we can find this node again for the next batch.
+                            replaced = retryAnnotations.WithAdditionalAnnotations(
+                                rewritten,
+                                original
+                            );
+                            retryNodes = true;
+                        }
 
-                                return replaced;
-                            },
-                        tokens: tokensToReplace.Values,
-                        computeReplacementToken: (original, rewritten) =>
-                            {
-                                if (rewritten != original || !tokenReplacements.TryGetValue(original, out var replaced))
-                                {
-                                    // the subtree did change, or we didn't have a replacement for it in this batch
-                                    // so we need to add an annotation so we can find this node again for the next batch.
-                                    replaced = retryAnnotations.WithAdditionalAnnotations(rewritten, original);
-                                    retryTokens = true;
-                                }
+                        return replaced;
+                    },
+                    tokens: tokensToReplace.Values,
+                    computeReplacementToken: (original, rewritten) =>
+                    {
+                        if (
+                            rewritten != original
+                            || !tokenReplacements.TryGetValue(original, out var replaced)
+                        )
+                        {
+                            // the subtree did change, or we didn't have a replacement for it in this batch
+                            // so we need to add an annotation so we can find this node again for the next batch.
+                            replaced = retryAnnotations.WithAdditionalAnnotations(
+                                rewritten,
+                                original
+                            );
+                            retryTokens = true;
+                        }
 
-                                return replaced;
-                            },
-                        trivia: triviaToReplace.Values,
-                        computeReplacementTrivia: (original, rewritten) =>
-                            {
-                                if (!triviaReplacements.TryGetValue(original, out var replaced))
-                                {
-                                    // the subtree did change, or we didn't have a replacement for it in this batch
-                                    // so we need to add an annotation so we can find this node again for the next batch.
-                                    replaced = retryAnnotations.WithAdditionalAnnotations(rewritten, original);
-                                    retryTrivia = true;
-                                }
+                        return replaced;
+                    },
+                    trivia: triviaToReplace.Values,
+                    computeReplacementTrivia: (original, rewritten) =>
+                    {
+                        if (!triviaReplacements.TryGetValue(original, out var replaced))
+                        {
+                            // the subtree did change, or we didn't have a replacement for it in this batch
+                            // so we need to add an annotation so we can find this node again for the next batch.
+                            replaced = retryAnnotations.WithAdditionalAnnotations(
+                                rewritten,
+                                original
+                            );
+                            retryTrivia = true;
+                        }
 
-                                return replaced;
-                            });
+                        return replaced;
+                    }
+                );
 
                 nodesToReplace.Clear();
                 tokensToReplace.Clear();
@@ -508,19 +649,25 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // prepare next batch out of all remaining annotated nodes
                 if (retryNodes)
                 {
-                    nodesToReplace = retryAnnotations.GetAnnotatedNodes(root).ToDictionary(n => n.FullSpan);
+                    nodesToReplace = retryAnnotations
+                        .GetAnnotatedNodes(root)
+                        .ToDictionary(n => n.FullSpan);
                     spans.AddRange(nodesToReplace.Keys);
                 }
 
                 if (retryTokens)
                 {
-                    tokensToReplace = retryAnnotations.GetAnnotatedTokens(root).ToDictionary(t => t.FullSpan);
+                    tokensToReplace = retryAnnotations
+                        .GetAnnotatedTokens(root)
+                        .ToDictionary(t => t.FullSpan);
                     spans.AddRange(tokensToReplace.Keys);
                 }
 
                 if (retryTrivia)
                 {
-                    triviaToReplace = retryAnnotations.GetAnnotatedTrivia(root).ToDictionary(t => t.FullSpan);
+                    triviaToReplace = retryAnnotations
+                        .GetAnnotatedTrivia(root)
+                        .ToDictionary(t => t.FullSpan);
                     spans.AddRange(triviaToReplace.Keys);
                 }
             }
@@ -531,12 +678,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <summary>
         /// Look inside a trivia list for a skipped token that contains the given position.
         /// </summary>
-        private static readonly Func<SyntaxTriviaList, int, SyntaxToken> s_findSkippedTokenForward = FindSkippedTokenForward;
+        private static readonly Func<SyntaxTriviaList, int, SyntaxToken> s_findSkippedTokenForward =
+            FindSkippedTokenForward;
 
         /// <summary>
         /// Look inside a trivia list for a skipped token that contains the given position.
         /// </summary>
-        private static SyntaxToken FindSkippedTokenForward(SyntaxTriviaList triviaList, int position)
+        private static SyntaxToken FindSkippedTokenForward(
+            SyntaxTriviaList triviaList,
+            int position
+        )
         {
             foreach (var trivia in triviaList)
             {
@@ -561,12 +712,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// <summary>
         /// Look inside a trivia list for a skipped token that contains the given position.
         /// </summary>
-        private static readonly Func<SyntaxTriviaList, int, SyntaxToken> s_findSkippedTokenBackward = FindSkippedTokenBackward;
+        private static readonly Func<
+            SyntaxTriviaList,
+            int,
+            SyntaxToken
+        > s_findSkippedTokenBackward = FindSkippedTokenBackward;
 
         /// <summary>
         /// Look inside a trivia list for a skipped token that contains the given position.
         /// </summary>
-        private static SyntaxToken FindSkippedTokenBackward(SyntaxTriviaList triviaList, int position)
+        private static SyntaxToken FindSkippedTokenBackward(
+            SyntaxTriviaList triviaList,
+            int position
+        )
         {
             foreach (var trivia in triviaList.Reverse())
             {
@@ -593,12 +751,26 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             int position,
             bool includeSkipped = false,
             bool includeDirectives = false,
-            bool includeDocumentationComments = false)
+            bool includeDocumentationComments = false
+        )
         {
             return (position < root.FullSpan.End || !(root is ICompilationUnitSyntax))
-                ? root.FindToken(position, includeSkipped || includeDirectives || includeDocumentationComments)
-                : root.GetLastToken(includeZeroWidth: true, includeSkipped: true, includeDirectives: true, includeDocumentationComments: true)
-                      .GetPreviousToken(includeZeroWidth: false, includeSkipped: includeSkipped, includeDirectives: includeDirectives, includeDocumentationComments: includeDocumentationComments);
+                ? root.FindToken(
+                    position,
+                    includeSkipped || includeDirectives || includeDocumentationComments
+                )
+                : root.GetLastToken(
+                        includeZeroWidth: true,
+                        includeSkipped: true,
+                        includeDirectives: true,
+                        includeDocumentationComments: true
+                    )
+                    .GetPreviousToken(
+                        includeZeroWidth: false,
+                        includeSkipped: includeSkipped,
+                        includeDirectives: includeDirectives,
+                        includeDocumentationComments: includeDocumentationComments
+                    );
         }
 
         /// <summary>
@@ -609,11 +781,18 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             int position,
             bool includeSkipped = false,
             bool includeDirectives = false,
-            bool includeDocumentationComments = false)
+            bool includeDocumentationComments = false
+        )
         {
             var findSkippedToken = includeSkipped ? s_findSkippedTokenForward : ((l, p) => default);
 
-            var token = GetInitialToken(root, position, includeSkipped, includeDirectives, includeDocumentationComments);
+            var token = GetInitialToken(
+                root,
+                position,
+                includeSkipped,
+                includeDirectives,
+                includeDocumentationComments
+            );
 
             if (position < token.SpanStart)
             {
@@ -625,11 +804,20 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 do
                 {
                     var skippedToken = findSkippedToken(token.TrailingTrivia, position);
-                    token = skippedToken.RawKind != 0
-                        ? skippedToken
-                        : token.GetNextToken(includeZeroWidth: false, includeSkipped: includeSkipped, includeDirectives: includeDirectives, includeDocumentationComments: includeDocumentationComments);
-                }
-                while (token.RawKind != 0 && token.Span.End <= position && token.Span.End <= root.FullSpan.End);
+                    token =
+                        skippedToken.RawKind != 0
+                            ? skippedToken
+                            : token.GetNextToken(
+                                includeZeroWidth: false,
+                                includeSkipped: includeSkipped,
+                                includeDirectives: includeDirectives,
+                                includeDocumentationComments: includeDocumentationComments
+                            );
+                } while (
+                    token.RawKind != 0
+                    && token.Span.End <= position
+                    && token.Span.End <= root.FullSpan.End
+                );
             }
 
             if (token.Span.Length == 0)
@@ -648,22 +836,36 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             int position,
             bool includeSkipped = false,
             bool includeDirectives = false,
-            bool includeDocumentationComments = false)
+            bool includeDocumentationComments = false
+        )
         {
-            var findSkippedToken = includeSkipped ? s_findSkippedTokenBackward : ((l, p) => default);
+            var findSkippedToken = includeSkipped
+                ? s_findSkippedTokenBackward
+                : ((l, p) => default);
 
-            var token = GetInitialToken(root, position, includeSkipped, includeDirectives, includeDocumentationComments);
+            var token = GetInitialToken(
+                root,
+                position,
+                includeSkipped,
+                includeDirectives,
+                includeDocumentationComments
+            );
 
             if (position <= token.SpanStart)
             {
                 do
                 {
                     var skippedToken = findSkippedToken(token.LeadingTrivia, position);
-                    token = skippedToken.RawKind != 0
-                        ? skippedToken
-                        : token.GetPreviousToken(includeZeroWidth: false, includeSkipped: includeSkipped, includeDirectives: includeDirectives, includeDocumentationComments: includeDocumentationComments);
-                }
-                while (position <= token.SpanStart && root.FullSpan.Start < token.SpanStart);
+                    token =
+                        skippedToken.RawKind != 0
+                            ? skippedToken
+                            : token.GetPreviousToken(
+                                includeZeroWidth: false,
+                                includeSkipped: includeSkipped,
+                                includeDirectives: includeDirectives,
+                                includeDocumentationComments: includeDocumentationComments
+                            );
+                } while (position <= token.SpanStart && root.FullSpan.Start < token.SpanStart);
             }
             else if (token.Span.End < position)
             {
@@ -679,9 +881,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return token;
         }
 
-        public static T WithPrependedLeadingTrivia<T>(
-            this T node,
-            params SyntaxTrivia[] trivia) where T : SyntaxNode
+        public static T WithPrependedLeadingTrivia<T>(this T node, params SyntaxTrivia[] trivia)
+            where T : SyntaxNode
         {
             if (trivia.Length == 0)
             {
@@ -691,9 +892,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return node.WithPrependedLeadingTrivia((IEnumerable<SyntaxTrivia>)trivia);
         }
 
-        public static T WithPrependedLeadingTrivia<T>(
-            this T node,
-            SyntaxTriviaList trivia) where T : SyntaxNode
+        public static T WithPrependedLeadingTrivia<T>(this T node, SyntaxTriviaList trivia)
+            where T : SyntaxNode
         {
             if (trivia.Count == 0)
             {
@@ -703,9 +903,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return node.WithLeadingTrivia(trivia.Concat(node.GetLeadingTrivia()));
         }
 
-        public static T WithPrependedLeadingTrivia<T>(
-            this T node,
-            IEnumerable<SyntaxTrivia> trivia) where T : SyntaxNode
+        public static T WithPrependedLeadingTrivia<T>(this T node, IEnumerable<SyntaxTrivia> trivia)
+            where T : SyntaxNode
         {
             var list = new SyntaxTriviaList();
             list = list.AddRange(trivia);
@@ -713,9 +912,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return node.WithPrependedLeadingTrivia(list);
         }
 
-        public static T WithAppendedTrailingTrivia<T>(
-            this T node,
-            params SyntaxTrivia[] trivia) where T : SyntaxNode
+        public static T WithAppendedTrailingTrivia<T>(this T node, params SyntaxTrivia[] trivia)
+            where T : SyntaxNode
         {
             if (trivia.Length == 0)
             {
@@ -725,9 +923,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return node.WithAppendedTrailingTrivia((IEnumerable<SyntaxTrivia>)trivia);
         }
 
-        public static T WithAppendedTrailingTrivia<T>(
-            this T node,
-            SyntaxTriviaList trivia) where T : SyntaxNode
+        public static T WithAppendedTrailingTrivia<T>(this T node, SyntaxTriviaList trivia)
+            where T : SyntaxNode
         {
             if (trivia.Count == 0)
             {
@@ -737,9 +934,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return node.WithTrailingTrivia(node.GetTrailingTrivia().Concat(trivia));
         }
 
-        public static T WithAppendedTrailingTrivia<T>(
-            this T node,
-            IEnumerable<SyntaxTrivia> trivia) where T : SyntaxNode
+        public static T WithAppendedTrailingTrivia<T>(this T node, IEnumerable<SyntaxTrivia> trivia)
+            where T : SyntaxNode
         {
             var list = new SyntaxTriviaList();
             list = list.AddRange(trivia);
@@ -750,7 +946,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static T With<T>(
             this T node,
             IEnumerable<SyntaxTrivia> leadingTrivia,
-            IEnumerable<SyntaxTrivia> trailingTrivia) where T : SyntaxNode
+            IEnumerable<SyntaxTrivia> trailingTrivia
+        )
+            where T : SyntaxNode
         {
             return node.WithLeadingTrivia(leadingTrivia).WithTrailingTrivia(trailingTrivia);
         }
@@ -775,7 +973,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// Finds the node within the given <paramref name="root"/> corresponding to the given <paramref name="span"/>.
         /// If the <paramref name="span"/> is <see langword="null"/>, then returns the given <paramref name="root"/> node.
         /// </summary>
-        public static SyntaxNode FindNode(this SyntaxNode root, TextSpan? span, bool findInTrivia, bool getInnermostNodeForTie)
+        public static SyntaxNode FindNode(
+            this SyntaxNode root,
+            TextSpan? span,
+            bool findInTrivia,
+            bool getInnermostNodeForTie
+        )
         {
             return span.HasValue
                 ? root.FindNode(span.Value, findInTrivia, getInnermostNodeForTie)
@@ -797,10 +1000,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return parent;
         }
 
-        public static TNode? FirstAncestorOrSelfUntil<TNode>(this SyntaxNode? node, Func<SyntaxNode, bool> predicate)
+        public static TNode? FirstAncestorOrSelfUntil<TNode>(
+            this SyntaxNode? node,
+            Func<SyntaxNode, bool> predicate
+        )
             where TNode : SyntaxNode
         {
-            for (var current = node; current != null; current = current.GetParent(ascendOutOfTrivia: true))
+            for (
+                var current = node;
+                current != null;
+                current = current.GetParent(ascendOutOfTrivia: true)
+            )
             {
                 if (current is TNode tnode)
                 {
@@ -819,41 +1029,49 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         public static DirectiveInfo<TDirectiveTriviaSyntax> GetDirectiveInfoForRoot<TDirectiveTriviaSyntax>(
             SyntaxNode root,
             ISyntaxKinds syntaxKinds,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
             where TDirectiveTriviaSyntax : SyntaxNode
         {
-            return DirectiveTriviaUtilities<TDirectiveTriviaSyntax>.GetDirectiveInfoForRoot(root, syntaxKinds, cancellationToken);
+            return DirectiveTriviaUtilities<TDirectiveTriviaSyntax>.GetDirectiveInfoForRoot(
+                root,
+                syntaxKinds,
+                cancellationToken
+            );
         }
 
         private static class DirectiveTriviaUtilities<TDirectiveTriviaSyntax>
             where TDirectiveTriviaSyntax : SyntaxNode
         {
-            private sealed class DirectiveSyntaxEqualityComparer : IEqualityComparer<TDirectiveTriviaSyntax>
+            private sealed class DirectiveSyntaxEqualityComparer
+                : IEqualityComparer<TDirectiveTriviaSyntax>
             {
                 public static readonly DirectiveSyntaxEqualityComparer Instance = new();
 
-                private DirectiveSyntaxEqualityComparer()
-                {
-                }
+                private DirectiveSyntaxEqualityComparer() { }
 
-                public bool Equals(TDirectiveTriviaSyntax? x, TDirectiveTriviaSyntax? y)
-                    => x?.SpanStart == y?.SpanStart;
+                public bool Equals(TDirectiveTriviaSyntax? x, TDirectiveTriviaSyntax? y) =>
+                    x?.SpanStart == y?.SpanStart;
 
-                public int GetHashCode(TDirectiveTriviaSyntax obj)
-                    => obj.SpanStart;
+                public int GetHashCode(TDirectiveTriviaSyntax obj) => obj.SpanStart;
             }
 
-            private static readonly ObjectPool<Stack<TDirectiveTriviaSyntax>> s_stackPool = new(() => new());
+            private static readonly ObjectPool<Stack<TDirectiveTriviaSyntax>> s_stackPool =
+                new(() => new());
 
             public static DirectiveInfo<TDirectiveTriviaSyntax> GetDirectiveInfoForRoot(
                 SyntaxNode root,
                 ISyntaxKinds syntaxKinds,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var directiveMap = new Dictionary<TDirectiveTriviaSyntax, TDirectiveTriviaSyntax?>(
-                    DirectiveSyntaxEqualityComparer.Instance);
-                var conditionalMap = new Dictionary<TDirectiveTriviaSyntax, ImmutableArray<TDirectiveTriviaSyntax>>(
-                    DirectiveSyntaxEqualityComparer.Instance);
+                    DirectiveSyntaxEqualityComparer.Instance
+                );
+                var conditionalMap = new Dictionary<
+                    TDirectiveTriviaSyntax,
+                    ImmutableArray<TDirectiveTriviaSyntax>
+                >(DirectiveSyntaxEqualityComparer.Instance);
 
                 using var pooledRegionStack = s_stackPool.GetPooledObject();
                 using var pooledIfStack = s_stackPool.GetPooledObject();
@@ -861,7 +1079,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 var regionStack = pooledRegionStack.Object;
                 var ifStack = pooledIfStack.Object;
 
-                foreach (var token in root.DescendantTokens(descendIntoChildren: static node => node.ContainsDirectives))
+                foreach (
+                    var token in root.DescendantTokens(descendIntoChildren: static node =>
+                        node.ContainsDirectives
+                    )
+                )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
@@ -874,9 +1096,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         {
                             regionStack.Push((TDirectiveTriviaSyntax)trivia.GetStructure()!);
                         }
-                        else if (trivia.RawKind == syntaxKinds.IfDirectiveTrivia ||
-                            trivia.RawKind == syntaxKinds.ElifDirectiveTrivia ||
-                            trivia.RawKind == syntaxKinds.ElseDirectiveTrivia)
+                        else if (
+                            trivia.RawKind == syntaxKinds.IfDirectiveTrivia
+                            || trivia.RawKind == syntaxKinds.ElifDirectiveTrivia
+                            || trivia.RawKind == syntaxKinds.ElseDirectiveTrivia
+                        )
                         {
                             ifStack.Push((TDirectiveTriviaSyntax)trivia.GetStructure()!);
                         }
@@ -909,7 +1133,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
                 void FinishIf(TDirectiveTriviaSyntax? directive)
                 {
-                    using var _ = ArrayBuilder<TDirectiveTriviaSyntax>.GetInstance(out var condDirectivesBuilder);
+                    using var _ = ArrayBuilder<TDirectiveTriviaSyntax>.GetInstance(
+                        out var condDirectivesBuilder
+                    );
                     if (directive != null)
                         condDirectivesBuilder.Add(directive);
 
@@ -921,7 +1147,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                             break;
                     }
 
-                    condDirectivesBuilder.Sort(static (n1, n2) => n1.SpanStart.CompareTo(n2.SpanStart));
+                    condDirectivesBuilder.Sort(
+                        static (n1, n2) => n1.SpanStart.CompareTo(n2.SpanStart)
+                    );
                     var condDirectives = condDirectivesBuilder.ToImmutableAndClear();
 
                     foreach (var cond in condDirectives)
@@ -939,15 +1167,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         }
 
         /// <summary>
-        /// Gets a list of ancestor nodes (including this node) 
+        /// Gets a list of ancestor nodes (including this node)
         /// </summary>
-        public static ValueAncestorsAndSelfEnumerable ValueAncestorsAndSelf(this SyntaxNode syntaxNode, bool ascendOutOfTrivia = true)
-            => new(syntaxNode, ascendOutOfTrivia);
+        public static ValueAncestorsAndSelfEnumerable ValueAncestorsAndSelf(
+            this SyntaxNode syntaxNode,
+            bool ascendOutOfTrivia = true
+        ) => new(syntaxNode, ascendOutOfTrivia);
 
-        public readonly struct ValueAncestorsAndSelfEnumerable(SyntaxNode syntaxNode, bool ascendOutOfTrivia)
+        public readonly struct ValueAncestorsAndSelfEnumerable(
+            SyntaxNode syntaxNode,
+            bool ascendOutOfTrivia
+        )
         {
-            public Enumerator GetEnumerator()
-                => new(syntaxNode, ascendOutOfTrivia);
+            public Enumerator GetEnumerator() => new(syntaxNode, ascendOutOfTrivia);
 
             public struct Enumerator(SyntaxNode syntaxNode, bool ascendOutOfTrivia)
             {

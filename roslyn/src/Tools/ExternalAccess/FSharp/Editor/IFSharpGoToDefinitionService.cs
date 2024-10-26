@@ -16,13 +16,21 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         /// <summary>
         /// Finds the definitions for the symbol at the specific position in the document.
         /// </summary>
-        Task<IEnumerable<FSharpNavigableItem>> FindDefinitionsAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<IEnumerable<FSharpNavigableItem>> FindDefinitionsAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
-        /// Finds the definitions for the symbol at the specific position in the document and then 
+        /// Finds the definitions for the symbol at the specific position in the document and then
         /// navigates to them.
         /// </summary>
         /// <returns>True if navigating to the definition of the symbol at the provided position succeeds.  False, otherwise.</returns>
-        bool TryGoToDefinition(Document document, int position, CancellationToken cancellationToken);
+        bool TryGoToDefinition(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

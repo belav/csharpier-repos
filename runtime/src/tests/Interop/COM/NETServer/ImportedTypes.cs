@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
-using System.Security;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
 
 namespace NETServer
 {
@@ -14,7 +14,11 @@ namespace NETServer
     public interface IEnumVARIANT
     {
         [PreserveSig]
-        int Next(int celt, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] object[] rgVar, IntPtr pceltFetched);
+        int Next(
+            int celt,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] object[] rgVar,
+            IntPtr pceltFetched
+        );
 
         [PreserveSig]
         int Skip(int celt);
@@ -24,10 +28,8 @@ namespace NETServer
 
         IEnumVARIANT Clone();
     }
-    
+
     [ComImport]
     [Guid("09799AFB-AD67-11d1-ABCD-00C04FC30936")]
-    public class ContextMenu
-    {
-    }
+    public class ContextMenu { }
 }

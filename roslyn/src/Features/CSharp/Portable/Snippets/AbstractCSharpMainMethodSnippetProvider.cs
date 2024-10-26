@@ -12,29 +12,53 @@ using Microsoft.CodeAnalysis.Snippets.SnippetProviders;
 
 namespace Microsoft.CodeAnalysis.CSharp.Snippets
 {
-    internal abstract class AbstractCSharpMainMethodSnippetProvider : AbstractMainMethodSnippetProvider
+    internal abstract class AbstractCSharpMainMethodSnippetProvider
+        : AbstractMainMethodSnippetProvider
     {
-        protected override async Task<bool> IsValidSnippetLocationAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<bool> IsValidSnippetLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.ReuseExistingSpeculativeModelAsync(position, cancellationToken).ConfigureAwait(false);
-            var syntaxContext = (CSharpSyntaxContext)document.GetRequiredLanguageService<ISyntaxContextService>().CreateContext(document, semanticModel, position, cancellationToken);
+            var semanticModel = await document
+                .ReuseExistingSpeculativeModelAsync(position, cancellationToken)
+                .ConfigureAwait(false);
+            var syntaxContext = (CSharpSyntaxContext)
+                document
+                    .GetRequiredLanguageService<ISyntaxContextService>()
+                    .CreateContext(document, semanticModel, position, cancellationToken);
 
-            if (!syntaxContext.IsMemberDeclarationContext(
-                validModifiers: SyntaxKindSet.AccessibilityModifiers,
-                validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
-                canBePartial: true,
-                cancellationToken: cancellationToken))
+            if (
+                !syntaxContext.IsMemberDeclarationContext(
+                    validModifiers: SyntaxKindSet.AccessibilityModifiers,
+                    validTypeDeclarations: SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
+                    canBePartial: true,
+                    cancellationToken: cancellationToken
+                )
+            )
             {
                 return false;
             }
 
             // Syntactically correct position, now semantic checks
 
-            var enclosingTypeSymbol = semanticModel.GetDeclaredSymbol(syntaxContext.ContainingTypeDeclaration!, cancellationToken);
+            var enclosingTypeSymbol = semanticModel.GetDeclaredSymbol(
+                syntaxContext.ContainingTypeDeclaration!,
+                cancellationToken
+            );
 
             // If there are any members with name `Main` in enclosing type, inserting `Main` method will create an error
-            if (enclosingTypeSymbol is not null &&
-                !semanticModel.LookupSymbols(position, container: enclosingTypeSymbol, name: WellKnownMemberNames.EntryPointMethodName).IsEmpty)
+            if (
+                enclosingTypeSymbol is not null
+                && !semanticModel
+                    .LookupSymbols(
+                        position,
+                        container: enclosingTypeSymbol,
+                        name: WellKnownMemberNames.EntryPointMethodName
+                    )
+                    .IsEmpty
+            )
             {
                 return false;
             }

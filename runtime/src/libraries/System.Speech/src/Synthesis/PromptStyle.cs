@@ -7,17 +7,18 @@ namespace System.Speech.Synthesis
     public class PromptStyle
     {
         #region Constructors
-        public PromptStyle()
-        {
-        }
+        public PromptStyle() { }
+
         public PromptStyle(PromptRate rate)
         {
             Rate = rate;
         }
+
         public PromptStyle(PromptVolume volume)
         {
             Volume = volume;
         }
+
         public PromptStyle(PromptEmphasis emphasis)
         {
             Emphasis = emphasis;
@@ -30,36 +31,18 @@ namespace System.Speech.Synthesis
         // <prosody pitch, contour, range, rate, duration, volume>
         public PromptRate Rate
         {
-            get
-            {
-                return _rate;
-            }
-            set
-            {
-                _rate = value;
-            }
+            get { return _rate; }
+            set { _rate = value; }
         }
         public PromptVolume Volume
         {
-            get
-            {
-                return _volume;
-            }
-            set
-            {
-                _volume = value;
-            }
+            get { return _volume; }
+            set { _volume = value; }
         }
         public PromptEmphasis Emphasis
         {
-            get
-            {
-                return _emphasis;
-            }
-            set
-            {
-                _emphasis = value;
-            }
+            get { return _emphasis; }
+            set { _emphasis = value; }
         }
 
         #endregion
@@ -94,23 +77,26 @@ namespace System.Speech.Synthesis
         Time24,
         Time12,
         Telephone,
-        Text
+        Text,
     }
+
     public enum VoiceGender
     {
         NotSet,
         Male,
         Female,
-        Neutral
+        Neutral,
     }
+
     public enum VoiceAge
     {
         NotSet,
         Child = 10,
         Teen = 15,
         Adult = 30,
-        Senior = 65
+        Senior = 65,
     }
+
     public enum PromptRate
     {
         NotSet,
@@ -118,8 +104,9 @@ namespace System.Speech.Synthesis
         Fast,
         Medium,
         Slow,
-        ExtraSlow
+        ExtraSlow,
     }
+
     public enum PromptVolume
     {
         NotSet,
@@ -129,16 +116,18 @@ namespace System.Speech.Synthesis
         Medium,
         Loud,
         ExtraLoud,
-        Default
+        Default,
     }
+
     public enum PromptEmphasis
     {
         NotSet,
         Strong,
         Moderate,
         None,
-        Reduced
+        Reduced,
     }
+
     public enum PromptBreak
     {
         None,
@@ -146,7 +135,7 @@ namespace System.Speech.Synthesis
         Small,
         Medium,
         Large,
-        ExtraLarge
+        ExtraLarge,
     }
 
     #endregion

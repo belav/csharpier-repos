@@ -6,10 +6,12 @@ using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Logging;
+
 internal class LspLogMessageLoggerProvider : ILoggerProvider
 {
     private readonly ILoggerFactory _fallbackLoggerFactory;
-    private readonly ConcurrentDictionary<string, LspLogMessageLogger> _loggers = new(StringComparer.OrdinalIgnoreCase);
+    private readonly ConcurrentDictionary<string, LspLogMessageLogger> _loggers =
+        new(StringComparer.OrdinalIgnoreCase);
 
     public LspLogMessageLoggerProvider(ILoggerFactory fallbackLoggerFactory)
     {
@@ -18,7 +20,10 @@ internal class LspLogMessageLoggerProvider : ILoggerProvider
 
     public ILogger CreateLogger(string categoryName)
     {
-        return _loggers.GetOrAdd(categoryName, new LspLogMessageLogger(categoryName, _fallbackLoggerFactory));
+        return _loggers.GetOrAdd(
+            categoryName,
+            new LspLogMessageLogger(categoryName, _fallbackLoggerFactory)
+        );
     }
 
     public void Dispose()

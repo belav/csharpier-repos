@@ -9,6 +9,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests;
 internal class TestLoggerProvider : ILoggerProvider
 {
     private readonly ILogger _testLogger;
+
     public TestLoggerProvider(ILogger testLogger)
     {
         _testLogger = testLogger;
@@ -19,7 +20,5 @@ internal class TestLoggerProvider : ILoggerProvider
         return _testLogger;
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

@@ -1,11 +1,11 @@
 ﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,7 +15,6 @@
 namespace Castle.Components.DictionaryAdapter.Xml.Tests
 {
     using System.Threading.Tasks;
-
     using NUnit.Framework;
 
     [TestFixture]
@@ -53,8 +52,11 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             var count = 16;
             var serializers = new XmlTypeSerializer[count];
 
-            Parallel.For(0, count,
-                i => serializers[i] = XmlTypeSerializerCache.Instance[typeof(A)]);
+            Parallel.For(
+                0,
+                count,
+                i => serializers[i] = XmlTypeSerializerCache.Instance[typeof(A)]
+            );
 
             for (var i = 1; i < count; i++)
             {
@@ -62,7 +64,14 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             }
         }
 
-        public class A { public int    X { get; set; } }
-        public class B { public string X { get; set; } }
+        public class A
+        {
+            public int X { get; set; }
+        }
+
+        public class B
+        {
+            public string X { get; set; }
+        }
     }
 }

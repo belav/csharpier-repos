@@ -11,13 +11,17 @@ using Type = System.Type;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.Json;
 
-internal sealed class FieldMaskConverter<TMessage> : SettingsConverterBase<TMessage> where TMessage : IMessage, new()
+internal sealed class FieldMaskConverter<TMessage> : SettingsConverterBase<TMessage>
+    where TMessage : IMessage, new()
 {
-    public FieldMaskConverter(JsonContext context) : base(context)
-    {
-    }
+    public FieldMaskConverter(JsonContext context)
+        : base(context) { }
 
-    public override TMessage? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TMessage? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         var message = new TMessage();
 
@@ -28,7 +32,8 @@ internal sealed class FieldMaskConverter<TMessage> : SettingsConverterBase<TMess
         // TODO: Do we *want* to remove empty entries? Probably okay to treat "" as "no paths", but "foo,,bar"?
         // Note: This logic replicates Google.Protobuf. Should follow their lead.
         var jsonPaths = reader.GetString()!.Split(',', StringSplitOptions.RemoveEmptyEntries);
-        var messagePaths = (IList)message.Descriptor.Fields[FieldMask.PathsFieldNumber].Accessor.GetValue(message);
+        var messagePaths = (IList)
+            message.Descriptor.Fields[FieldMask.PathsFieldNumber].Accessor.GetValue(message);
         foreach (var path in jsonPaths)
         {
             messagePaths.Add(Legacy.ToSnakeCase(path));
@@ -40,7 +45,9 @@ internal sealed class FieldMaskConverter<TMessage> : SettingsConverterBase<TMess
     public override void Write(Utf8JsonWriter writer, TMessage value, JsonSerializerOptions options)
     {
         // Note: This logic replicates Google.Protobuf. Should follow their lead.
-        var paths = (IList<string>)value.Descriptor.Fields[FieldMask.PathsFieldNumber].Accessor.GetValue(value);
+        var paths =
+            (IList<string>)
+                value.Descriptor.Fields[FieldMask.PathsFieldNumber].Accessor.GetValue(value);
         var firstInvalid = paths.FirstOrDefault(p => !Legacy.IsPathValid(p));
         if (firstInvalid == null)
         {
@@ -48,7 +55,9 @@ internal sealed class FieldMaskConverter<TMessage> : SettingsConverterBase<TMess
         }
         else
         {
-            throw new InvalidOperationException($"Invalid field mask to be converted to JSON: {firstInvalid}.");
+            throw new InvalidOperationException(
+                $"Invalid field mask to be converted to JSON: {firstInvalid}."
+            );
         }
     }
 }

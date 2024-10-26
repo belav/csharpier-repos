@@ -10,15 +10,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Metadata.Edm;
 using System.Text;
 using System.Xml;
-using System.Data.Metadata.Edm;
 
-namespace System.Data.Mapping {
+namespace System.Data.Mapping
+{
     /// <summary>
     /// Mapping metadata for all OC member maps.
     /// </summary>
-    internal class ObjectAssociationEndMapping: ObjectMemberMapping
+    internal class ObjectAssociationEndMapping : ObjectMemberMapping
     {
         #region Constructors
         /// <summary>
@@ -26,10 +27,11 @@ namespace System.Data.Mapping {
         /// </summary>
         /// <param name="edmAssociationEnd"></param>
         /// <param name="clrAssociationEnd"></param>
-        internal ObjectAssociationEndMapping(AssociationEndMember edmAssociationEnd, AssociationEndMember clrAssociationEnd)
-            : base(edmAssociationEnd, clrAssociationEnd)
-        {
-        }
+        internal ObjectAssociationEndMapping(
+            AssociationEndMember edmAssociationEnd,
+            AssociationEndMember clrAssociationEnd
+        )
+            : base(edmAssociationEnd, clrAssociationEnd) { }
         #endregion
 
         #region Properties
@@ -39,10 +41,7 @@ namespace System.Data.Mapping {
         /// </summary>
         internal override MemberMappingKind MemberMappingKind
         {
-            get
-            {
-                return MemberMappingKind.AssociationEndMapping;
-            }
+            get { return MemberMappingKind.AssociationEndMapping; }
         }
         #endregion
     }

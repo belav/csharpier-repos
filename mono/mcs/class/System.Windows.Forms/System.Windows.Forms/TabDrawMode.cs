@@ -23,11 +23,11 @@
 //	Jackson Harper (jackson@ximian.com)
 
 
-namespace System.Windows.Forms {
-
-	public enum TabDrawMode {
-		Normal,
-		OwnerDrawFixed
-	}
+namespace System.Windows.Forms
+{
+    public enum TabDrawMode
+    {
+        Normal,
+        OwnerDrawFixed,
+    }
 }
-

@@ -14,17 +14,15 @@ namespace Microsoft.CodeAnalysis.Serialization
 
         private readonly ConcurrentSet<IDisposable> _resources;
 
-        public SolutionReplicationContext()
-            => _resources = s_pool.Allocate();
+        public SolutionReplicationContext() => _resources = s_pool.Allocate();
 
-        public void AddResource(IDisposable resource)
-            => _resources.Add(resource);
+        public void AddResource(IDisposable resource) => _resources.Add(resource);
 
         public void Dispose()
         {
             // TODO: https://github.com/dotnet/roslyn/issues/49973
             // Currently we don't dispose resources, only keep them alive.
-            // Shouldn't we dispose them? 
+            // Shouldn't we dispose them?
             // _resources.All(resource => resource.Dispose());
             s_pool.ClearAndFree(_resources);
         }

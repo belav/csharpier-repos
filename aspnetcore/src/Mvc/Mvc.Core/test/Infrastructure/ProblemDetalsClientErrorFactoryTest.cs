@@ -14,13 +14,17 @@ public class ProblemDetailsClientErrorFactoryTest
     {
         // Arrange
         var clientError = new UnsupportedMediaTypeResult();
-        var problemDetailsFactory = new DefaultProblemDetailsFactory(Options.Create(new ApiBehaviorOptions
-        {
-            ClientErrorMapping =
+        var problemDetailsFactory = new DefaultProblemDetailsFactory(
+            Options.Create(
+                new ApiBehaviorOptions
                 {
-                    [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
-                },
-        }));
+                    ClientErrorMapping =
+                    {
+                        [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                    },
+                }
+            )
+        );
         var factory = new ProblemDetailsClientErrorFactory(problemDetailsFactory);
 
         // Act
@@ -28,7 +32,10 @@ public class ProblemDetailsClientErrorFactoryTest
 
         // Assert
         var objectResult = Assert.IsType<ObjectResult>(result);
-        Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes);
+        Assert.Equal(
+            new[] { "application/problem+json", "application/problem+xml" },
+            objectResult.ContentTypes
+        );
         var problemDetails = Assert.IsType<ProblemDetails>(objectResult.Value);
         Assert.Equal(415, problemDetails.Status);
         Assert.Null(problemDetails.Title);
@@ -41,13 +48,17 @@ public class ProblemDetailsClientErrorFactoryTest
     {
         // Arrange
         var clientError = new UnsupportedMediaTypeResult();
-        var problemDetailsFactory = new DefaultProblemDetailsFactory(Options.Create(new ApiBehaviorOptions
-        {
-            ClientErrorMapping =
+        var problemDetailsFactory = new DefaultProblemDetailsFactory(
+            Options.Create(
+                new ApiBehaviorOptions
                 {
-                    [415] = new ClientErrorData { Link = "Some link", Title = "Summary" },
-                },
-        }));
+                    ClientErrorMapping =
+                    {
+                        [415] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                    },
+                }
+            )
+        );
         var factory = new ProblemDetailsClientErrorFactory(problemDetailsFactory);
 
         // Act
@@ -55,7 +66,10 @@ public class ProblemDetailsClientErrorFactoryTest
 
         // Assert
         var objectResult = Assert.IsType<ObjectResult>(result);
-        Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes);
+        Assert.Equal(
+            new[] { "application/problem+json", "application/problem+xml" },
+            objectResult.ContentTypes
+        );
         var problemDetails = Assert.IsType<ProblemDetails>(objectResult.Value);
         Assert.Equal(415, problemDetails.Status);
         Assert.Equal("Some link", problemDetails.Type);
@@ -71,13 +85,17 @@ public class ProblemDetailsClientErrorFactoryTest
         using (new ActivityReplacer())
         {
             var clientError = new UnsupportedMediaTypeResult();
-            var problemDetailsFactory = new DefaultProblemDetailsFactory(Options.Create(new ApiBehaviorOptions
-            {
-                ClientErrorMapping =
-                {
-                    [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
-                },
-            }));
+            var problemDetailsFactory = new DefaultProblemDetailsFactory(
+                Options.Create(
+                    new ApiBehaviorOptions
+                    {
+                        ClientErrorMapping =
+                        {
+                            [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                        },
+                    }
+                )
+            );
             var factory = new ProblemDetailsClientErrorFactory(problemDetailsFactory);
 
             // Act
@@ -85,7 +103,10 @@ public class ProblemDetailsClientErrorFactoryTest
 
             // Assert
             var objectResult = Assert.IsType<ObjectResult>(result);
-            Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes);
+            Assert.Equal(
+                new[] { "application/problem+json", "application/problem+xml" },
+                objectResult.ContentTypes
+            );
             var problemDetails = Assert.IsType<ProblemDetails>(objectResult.Value);
 
             Assert.Equal(Activity.Current.Id, problemDetails.Extensions["traceId"]);
@@ -97,13 +118,17 @@ public class ProblemDetailsClientErrorFactoryTest
     {
         // Arrange
         var clientError = new UnsupportedMediaTypeResult();
-        var problemDetailsFactory = new DefaultProblemDetailsFactory(Options.Create(new ApiBehaviorOptions
-        {
-            ClientErrorMapping =
+        var problemDetailsFactory = new DefaultProblemDetailsFactory(
+            Options.Create(
+                new ApiBehaviorOptions
                 {
-                    [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
-                },
-        }));
+                    ClientErrorMapping =
+                    {
+                        [405] = new ClientErrorData { Link = "Some link", Title = "Summary" },
+                    },
+                }
+            )
+        );
         var factory = new ProblemDetailsClientErrorFactory(problemDetailsFactory);
 
         // Act
@@ -111,7 +136,10 @@ public class ProblemDetailsClientErrorFactoryTest
 
         // Assert
         var objectResult = Assert.IsType<ObjectResult>(result);
-        Assert.Equal(new[] { "application/problem+json", "application/problem+xml" }, objectResult.ContentTypes);
+        Assert.Equal(
+            new[] { "application/problem+json", "application/problem+xml" },
+            objectResult.ContentTypes
+        );
         var problemDetails = Assert.IsType<ProblemDetails>(objectResult.Value);
 
         Assert.Equal("42", problemDetails.Extensions["traceId"]);
@@ -121,10 +149,7 @@ public class ProblemDetailsClientErrorFactoryTest
     {
         return new ActionContext
         {
-            HttpContext = new DefaultHttpContext
-            {
-                TraceIdentifier = "42",
-            }
+            HttpContext = new DefaultHttpContext { TraceIdentifier = "42" },
         };
     }
 }

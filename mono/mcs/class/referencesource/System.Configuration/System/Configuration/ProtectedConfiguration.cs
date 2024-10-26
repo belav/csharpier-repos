@@ -8,21 +8,28 @@ namespace System.Configuration
 {
     using System.Collections;
     using System.Collections.Specialized;
-    using System.Runtime.Serialization;
     using System.Configuration.Provider;
-    using System.Xml;
-    using System.Security.Permissions;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
+    using System.Xml;
 
     [PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
-    [SuppressMessage("Microsoft.Security", "CA2112:SecuredTypesShouldNotExposeFields", Justification = "The only fields exposed are constant strings, which aren't sensitive information.")]
+    [SuppressMessage(
+        "Microsoft.Security",
+        "CA2112:SecuredTypesShouldNotExposeFields",
+        Justification = "The only fields exposed are constant strings, which aren't sensitive information."
+    )]
     public static class ProtectedConfiguration
     {
         public static ProtectedConfigurationProviderCollection Providers
         {
             get
             {
-                ProtectedConfigurationSection config = PrivilegedConfigurationManager.GetSection(BaseConfigurationRecord.RESERVED_SECTION_PROTECTED_CONFIGURATION) as ProtectedConfigurationSection;
+                ProtectedConfigurationSection config =
+                    PrivilegedConfigurationManager.GetSection(
+                        BaseConfigurationRecord.RESERVED_SECTION_PROTECTED_CONFIGURATION
+                    ) as ProtectedConfigurationSection;
                 if (config == null)
                     return new ProtectedConfigurationProviderCollection();
 
@@ -32,18 +39,23 @@ namespace System.Configuration
 
         public const string RsaProviderName = "RsaProtectedConfigurationProvider";
         public const string DataProtectionProviderName = "DataProtectionConfigurationProvider";
-        public const string ProtectedDataSectionName = BaseConfigurationRecord.RESERVED_SECTION_PROTECTED_CONFIGURATION;
+        public const string ProtectedDataSectionName =
+            BaseConfigurationRecord.RESERVED_SECTION_PROTECTED_CONFIGURATION;
 
-        public static string DefaultProvider {
-            get {
-                ProtectedConfigurationSection config = PrivilegedConfigurationManager.GetSection(BaseConfigurationRecord.RESERVED_SECTION_PROTECTED_CONFIGURATION) as ProtectedConfigurationSection;
+        public static string DefaultProvider
+        {
+            get
+            {
+                ProtectedConfigurationSection config =
+                    PrivilegedConfigurationManager.GetSection(
+                        BaseConfigurationRecord.RESERVED_SECTION_PROTECTED_CONFIGURATION
+                    ) as ProtectedConfigurationSection;
                 if (config != null)
                     return config.DefaultProvider;
 
                 return "";
             }
         }
-
 
         ///////////////////////////////////////////////////////////////////////////
         ///////////////////////////////////////////////////////////////////////////
@@ -59,8 +71,12 @@ namespace System.Configuration
                 if (_Providers != null)
                     return;
 
-                ProtectedConfigurationProviderCollection providers = new ProtectedConfigurationProviderCollection();
-                ProtectedConfigurationSection config = PrivilegedConfigurationManager.GetSection(BaseConfigurationRecord.RESERVED_SECTION_PROTECTED_CONFIGURATION) as ProtectedConfigurationSection;
+                ProtectedConfigurationProviderCollection providers =
+                    new ProtectedConfigurationProviderCollection();
+                ProtectedConfigurationSection config =
+                    PrivilegedConfigurationManager.GetSection(
+                        BaseConfigurationRecord.RESERVED_SECTION_PROTECTED_CONFIGURATION
+                    ) as ProtectedConfigurationSection;
 
                 if (config != null)
                 {
@@ -78,9 +94,9 @@ namespace System.Configuration
                 _Providers = providers;
             }
         }
+
         private static object _Lock = new object();
         private static ProtectedConfigurationProviderCollection _Providers = null;
 #endif
-
     }
 }

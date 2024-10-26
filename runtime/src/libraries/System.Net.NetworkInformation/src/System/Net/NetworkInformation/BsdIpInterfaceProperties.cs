@@ -16,7 +16,8 @@ namespace System.Net.NetworkInformation
         private readonly BsdIPv6InterfaceProperties _ipv6Properties;
         private readonly GatewayIPAddressInformationCollection _gatewayAddresses;
 
-        public BsdIpInterfaceProperties(BsdNetworkInterface oni, int mtu) : base(oni)
+        public BsdIpInterfaceProperties(BsdNetworkInterface oni, int mtu)
+            : base(oni)
         {
             _ipv4Properties = new BsdIPv4InterfaceProperties(oni, mtu);
             _ipv6Properties = new BsdIPv6InterfaceProperties(oni, mtu);
@@ -27,33 +28,66 @@ namespace System.Net.NetworkInformation
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override IPAddressInformationCollection AnycastAddresses { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override IPAddressInformationCollection AnycastAddresses
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override IPAddressCollection DhcpServerAddresses { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override IPAddressCollection DhcpServerAddresses
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override GatewayIPAddressInformationCollection GatewayAddresses { get { return _gatewayAddresses; } }
-
-        [UnsupportedOSPlatform("osx")]
-        [UnsupportedOSPlatform("ios")]
-        [UnsupportedOSPlatform("tvos")]
-        [UnsupportedOSPlatform("freebsd")]
-        public override bool IsDnsEnabled { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
-
-        [UnsupportedOSPlatform("osx")]
-        [UnsupportedOSPlatform("ios")]
-        [UnsupportedOSPlatform("tvos")]
-        [UnsupportedOSPlatform("freebsd")]
-        public override bool IsDynamicDnsEnabled { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override GatewayIPAddressInformationCollection GatewayAddresses
+        {
+            get { return _gatewayAddresses; }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override IPAddressCollection WinsServersAddresses { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsDnsEnabled
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
+
+        [UnsupportedOSPlatform("osx")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("freebsd")]
+        public override bool IsDynamicDnsEnabled
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
+
+        [UnsupportedOSPlatform("osx")]
+        [UnsupportedOSPlatform("ios")]
+        [UnsupportedOSPlatform("tvos")]
+        [UnsupportedOSPlatform("freebsd")]
+        public override IPAddressCollection WinsServersAddresses
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
         public override IPv4InterfaceProperties GetIPv4Properties()
         {
@@ -71,17 +105,26 @@ namespace System.Net.NetworkInformation
             internal HashSet<IPAddress> _addressSet;
         }
 
-        private static unsafe GatewayIPAddressInformationCollection GetGatewayAddresses(int interfaceIndex)
+        private static unsafe GatewayIPAddressInformationCollection GetGatewayAddresses(
+            int interfaceIndex
+        )
         {
             Context context;
             context._interfaceIndex = interfaceIndex;
             context._addressSet = new HashSet<IPAddress>();
-            if (Interop.Sys.EnumerateGatewayAddressesForInterface(&context, (uint)interfaceIndex, &OnGatewayFound) == -1)
+            if (
+                Interop.Sys.EnumerateGatewayAddressesForInterface(
+                    &context,
+                    (uint)interfaceIndex,
+                    &OnGatewayFound
+                ) == -1
+            )
             {
                 throw new NetworkInformationException(SR.net_PInvokeError);
             }
 
-            GatewayIPAddressInformationCollection collection = new GatewayIPAddressInformationCollection();
+            GatewayIPAddressInformationCollection collection =
+                new GatewayIPAddressInformationCollection();
             foreach (IPAddress address in context._addressSet)
             {
                 collection.InternalAdd(new SimpleGatewayIPAddressInformation(address));
@@ -91,11 +134,19 @@ namespace System.Net.NetworkInformation
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void OnGatewayFound(void* pContext, Interop.Sys.IpAddressInfo* gatewayAddressInfo)
+        private static unsafe void OnGatewayFound(
+            void* pContext,
+            Interop.Sys.IpAddressInfo* gatewayAddressInfo
+        )
         {
             Context* context = (Context*)pContext;
 
-            IPAddress ipAddress = new IPAddress(new ReadOnlySpan<byte>(gatewayAddressInfo->AddressBytes, gatewayAddressInfo->NumAddressBytes));
+            IPAddress ipAddress = new IPAddress(
+                new ReadOnlySpan<byte>(
+                    gatewayAddressInfo->AddressBytes,
+                    gatewayAddressInfo->NumAddressBytes
+                )
+            );
             if (ipAddress.IsIPv6LinkLocal)
             {
                 // For Link-Local addresses add ScopeId as that is not part of the route entry.

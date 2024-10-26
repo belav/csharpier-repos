@@ -1,35 +1,35 @@
 //------------------------------------------------------------------------------
 // <copyright file="IHelpService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
-    using System.Runtime.Remoting;
-    using System.ComponentModel;
-
-    using System.Diagnostics;
-
+namespace System.ComponentModel.Design
+{
     using System;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Runtime.Remoting;
 
     /// <devdoc>
-    ///    <para> 
+    ///    <para>
     ///       Provides the Integrated Development Environment (IDE) help
     ///       system with contextual information for the current task.</para>
     /// </devdoc>
-    public interface IHelpService {
+    public interface IHelpService
+    {
         /// <devdoc>
         ///    <para>Adds a context attribute to the document.</para>
         /// </devdoc>
         void AddContextAttribute(string name, string value, HelpKeywordType keywordType);
-        
+
         /// <devdoc>
         ///     Clears all existing context attributes from the document.
         /// </devdoc>
         void ClearContextAttributes();
-        
+
         /// <devdoc>
         ///     Creates a Local IHelpService to manage subcontexts.
         /// </devdoc>
@@ -41,7 +41,7 @@ namespace System.ComponentModel.Design {
         ///    </para>
         /// </devdoc>
         void RemoveContextAttribute(string name, string value);
-        
+
         /// <devdoc>
         ///     Removes a context that was created with CreateLocalContext
         /// </devdoc>

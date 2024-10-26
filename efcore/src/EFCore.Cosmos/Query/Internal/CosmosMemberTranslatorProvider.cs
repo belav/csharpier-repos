@@ -22,15 +22,17 @@ public class CosmosMemberTranslatorProvider : IMemberTranslatorProvider
     /// </summary>
     public CosmosMemberTranslatorProvider(
         ISqlExpressionFactory sqlExpressionFactory,
-        IEnumerable<IMemberTranslatorPlugin> plugins)
+        IEnumerable<IMemberTranslatorPlugin> plugins
+    )
     {
         _plugins.AddRange(plugins.SelectMany(p => p.Translators));
-        _translators
-            .AddRange(
-                new IMemberTranslator[]
-                {
-                    new CosmosStringMemberTranslator(sqlExpressionFactory), new CosmosDateTimeMemberTranslator(sqlExpressionFactory)
-                });
+        _translators.AddRange(
+            new IMemberTranslator[]
+            {
+                new CosmosStringMemberTranslator(sqlExpressionFactory),
+                new CosmosDateTimeMemberTranslator(sqlExpressionFactory),
+            }
+        );
     }
 
     /// <summary>
@@ -43,9 +45,12 @@ public class CosmosMemberTranslatorProvider : IMemberTranslatorProvider
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        => _plugins.Concat(_translators)
-            .Select(t => t.Translate(instance, member, returnType, logger)).FirstOrDefault(t => t != null);
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    ) =>
+        _plugins
+            .Concat(_translators)
+            .Select(t => t.Translate(instance, member, returnType, logger))
+            .FirstOrDefault(t => t != null);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -53,6 +58,6 @@ public class CosmosMemberTranslatorProvider : IMemberTranslatorProvider
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual void AddTranslators(IEnumerable<IMemberTranslator> translators)
-        => _translators.InsertRange(0, translators);
+    protected virtual void AddTranslators(IEnumerable<IMemberTranslator> translators) =>
+        _translators.InsertRange(0, translators);
 }

@@ -74,56 +74,60 @@ namespace Newtonsoft.Json.Bson
             switch (t.Type)
             {
                 case BsonType.Object:
-                {
-                    BsonObject value = (BsonObject)t;
-                    _writer.Write(value.CalculatedSize);
-                    foreach (BsonProperty property in value)
                     {
-                        _writer.Write((sbyte)property.Value.Type);
-                        WriteString((string)property.Name.Value, property.Name.ByteCount, null);
-                        WriteTokenInternal(property.Value);
+                        BsonObject value = (BsonObject)t;
+                        _writer.Write(value.CalculatedSize);
+                        foreach (BsonProperty property in value)
+                        {
+                            _writer.Write((sbyte)property.Value.Type);
+                            WriteString((string)property.Name.Value, property.Name.ByteCount, null);
+                            WriteTokenInternal(property.Value);
+                        }
+                        _writer.Write((byte)0);
                     }
-                    _writer.Write((byte)0);
-                }
                     break;
                 case BsonType.Array:
-                {
-                    BsonArray value = (BsonArray)t;
-                    _writer.Write(value.CalculatedSize);
-                    ulong index = 0;
-                    foreach (BsonToken c in value)
                     {
-                        _writer.Write((sbyte)c.Type);
-                        WriteString(index.ToString(CultureInfo.InvariantCulture), MathUtils.IntLength(index), null);
-                        WriteTokenInternal(c);
-                        index++;
+                        BsonArray value = (BsonArray)t;
+                        _writer.Write(value.CalculatedSize);
+                        ulong index = 0;
+                        foreach (BsonToken c in value)
+                        {
+                            _writer.Write((sbyte)c.Type);
+                            WriteString(
+                                index.ToString(CultureInfo.InvariantCulture),
+                                MathUtils.IntLength(index),
+                                null
+                            );
+                            WriteTokenInternal(c);
+                            index++;
+                        }
+                        _writer.Write((byte)0);
                     }
-                    _writer.Write((byte)0);
-                }
                     break;
                 case BsonType.Integer:
-                {
-                    BsonValue value = (BsonValue)t;
-                    _writer.Write(Convert.ToInt32(value.Value, CultureInfo.InvariantCulture));
-                }
+                    {
+                        BsonValue value = (BsonValue)t;
+                        _writer.Write(Convert.ToInt32(value.Value, CultureInfo.InvariantCulture));
+                    }
                     break;
                 case BsonType.Long:
-                {
-                    BsonValue value = (BsonValue)t;
-                    _writer.Write(Convert.ToInt64(value.Value, CultureInfo.InvariantCulture));
-                }
+                    {
+                        BsonValue value = (BsonValue)t;
+                        _writer.Write(Convert.ToInt64(value.Value, CultureInfo.InvariantCulture));
+                    }
                     break;
                 case BsonType.Number:
-                {
-                    BsonValue value = (BsonValue)t;
-                    _writer.Write(Convert.ToDouble(value.Value, CultureInfo.InvariantCulture));
-                }
+                    {
+                        BsonValue value = (BsonValue)t;
+                        _writer.Write(Convert.ToDouble(value.Value, CultureInfo.InvariantCulture));
+                    }
                     break;
                 case BsonType.String:
-                {
-                    BsonString value = (BsonString)t;
-                    WriteString((string)value.Value, value.ByteCount, value.CalculatedSize - 4);
-                }
+                    {
+                        BsonString value = (BsonString)t;
+                        WriteString((string)value.Value, value.ByteCount, value.CalculatedSize - 4);
+                    }
                     break;
                 case BsonType.Boolean:
                     _writer.Write(t == BsonBoolean.True);
@@ -132,63 +136,72 @@ namespace Newtonsoft.Json.Bson
                 case BsonType.Undefined:
                     break;
                 case BsonType.Date:
-                {
-                    BsonValue value = (BsonValue)t;
-
-                    long ticks = 0;
-
-                    if (value.Value is DateTime dateTime)
                     {
-                        if (DateTimeKindHandling == DateTimeKind.Utc)
-                        {
-                            dateTime = dateTime.ToUniversalTime();
-                        }
-                        else if (DateTimeKindHandling == DateTimeKind.Local)
-                        {
-                            dateTime = dateTime.ToLocalTime();
-                        }
+                        BsonValue value = (BsonValue)t;
 
-                        ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(dateTime, false);
-                    }
+                        long ticks = 0;
+
+                        if (value.Value is DateTime dateTime)
+                        {
+                            if (DateTimeKindHandling == DateTimeKind.Utc)
+                            {
+                                dateTime = dateTime.ToUniversalTime();
+                            }
+                            else if (DateTimeKindHandling == DateTimeKind.Local)
+                            {
+                                dateTime = dateTime.ToLocalTime();
+                            }
+
+                            ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(dateTime, false);
+                        }
 #if HAVE_DATE_TIME_OFFSET
-                    else
-                    {
-                        DateTimeOffset dateTimeOffset = (DateTimeOffset)value.Value;
-                        ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(dateTimeOffset.UtcDateTime, dateTimeOffset.Offset);
-                    }
+                        else
+                        {
+                            DateTimeOffset dateTimeOffset = (DateTimeOffset)value.Value;
+                            ticks = DateTimeUtils.ConvertDateTimeToJavaScriptTicks(
+                                dateTimeOffset.UtcDateTime,
+                                dateTimeOffset.Offset
+                            );
+                        }
 #endif
 
-                    _writer.Write(ticks);
-                }
+                        _writer.Write(ticks);
+                    }
                     break;
                 case BsonType.Binary:
-                {
-                    BsonBinary value = (BsonBinary)t;
+                    {
+                        BsonBinary value = (BsonBinary)t;
 
-                    byte[] data = (byte[])value.Value;
-                    _writer.Write(data.Length);
-                    _writer.Write((byte)value.BinaryType);
-                    _writer.Write(data);
-                }
+                        byte[] data = (byte[])value.Value;
+                        _writer.Write(data.Length);
+                        _writer.Write((byte)value.BinaryType);
+                        _writer.Write(data);
+                    }
                     break;
                 case BsonType.Oid:
-                {
-                    BsonValue value = (BsonValue)t;
+                    {
+                        BsonValue value = (BsonValue)t;
 
-                    byte[] data = (byte[])value.Value;
-                    _writer.Write(data);
-                }
+                        byte[] data = (byte[])value.Value;
+                        _writer.Write(data);
+                    }
                     break;
                 case BsonType.Regex:
-                {
-                    BsonRegex value = (BsonRegex)t;
+                    {
+                        BsonRegex value = (BsonRegex)t;
 
-                    WriteString((string)value.Pattern.Value, value.Pattern.ByteCount, null);
-                    WriteString((string)value.Options.Value, value.Options.ByteCount, null);
-                }
+                        WriteString((string)value.Pattern.Value, value.Pattern.ByteCount, null);
+                        WriteString((string)value.Options.Value, value.Options.ByteCount, null);
+                    }
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(t), "Unexpected token when writing BSON: {0}".FormatWith(CultureInfo.InvariantCulture, t.Type));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(t),
+                        "Unexpected token when writing BSON: {0}".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            t.Type
+                        )
+                    );
             }
         }
 
@@ -233,9 +246,10 @@ namespace Newtonsoft.Json.Bson
 
         private int CalculateSizeWithLength(int stringByteCount, bool includeSize)
         {
-            int baseSize = (includeSize)
-                ? 5 // size bytes + terminator
-                : 1; // terminator
+            int baseSize =
+                (includeSize)
+                    ? 5 // size bytes + terminator
+                    : 1; // terminator
 
             return baseSize + stringByteCount;
         }
@@ -290,7 +304,10 @@ namespace Newtonsoft.Json.Bson
                     BsonString value = (BsonString)t;
                     string s = (string)value.Value;
                     value.ByteCount = (s != null) ? Encoding.GetByteCount(s) : 0;
-                    value.CalculatedSize = CalculateSizeWithLength(value.ByteCount, value.IncludeLength);
+                    value.CalculatedSize = CalculateSizeWithLength(
+                        value.ByteCount,
+                        value.IncludeLength
+                    );
 
                     return value.CalculatedSize;
                 }
@@ -323,7 +340,13 @@ namespace Newtonsoft.Json.Bson
                     return value.CalculatedSize;
                 }
                 default:
-                    throw new ArgumentOutOfRangeException(nameof(t), "Unexpected token when writing BSON: {0}".FormatWith(CultureInfo.InvariantCulture, t.Type));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(t),
+                        "Unexpected token when writing BSON: {0}".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            t.Type
+                        )
+                    );
             }
         }
     }

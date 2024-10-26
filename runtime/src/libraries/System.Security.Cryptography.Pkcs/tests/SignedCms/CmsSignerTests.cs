@@ -18,7 +18,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AssertExtensions.Throws<ArgumentException>(
                 expectedParamName: null,
-                () => signer.SignerIdentifierType = invalidType);
+                () => signer.SignerIdentifierType = invalidType
+            );
         }
 
 #if NETCOREAPP
@@ -29,20 +30,32 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             // Currently we support all RSASignaturePaddings. However we want to make sure we fail properly
             // if an unsupported one is added later, so construct a bogus padding.
-            RSASignaturePadding badPadding = (RSASignaturePadding)typeof(RSASignaturePadding)
-                .GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, new Type[] { typeof(RSASignaturePaddingMode)})
-                .Invoke(new object[] { badMode });
+            RSASignaturePadding badPadding = (RSASignaturePadding)
+                typeof(RSASignaturePadding)
+                    .GetConstructor(
+                        BindingFlags.NonPublic | BindingFlags.Instance,
+                        new Type[] { typeof(RSASignaturePaddingMode) }
+                    )
+                    .Invoke(new object[] { badMode });
 
             // Test setter
             CmsSigner signer = new CmsSigner();
-            AssertExtensions.Throws<ArgumentException>("value", () => signer.SignaturePadding = badPadding);
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => signer.SignaturePadding = badPadding
+            );
 
             // Test ctor
-            AssertExtensions.Throws<ArgumentException>("signaturePadding", () => new CmsSigner(
-                SubjectIdentifierType.IssuerAndSerialNumber,
-                certificate: null,
-                privateKey: null,
-                badPadding));
+            AssertExtensions.Throws<ArgumentException>(
+                "signaturePadding",
+                () =>
+                    new CmsSigner(
+                        SubjectIdentifierType.IssuerAndSerialNumber,
+                        certificate: null,
+                        privateKey: null,
+                        badPadding
+                    )
+            );
         }
 
         [Fact]
@@ -55,7 +68,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
                 SubjectIdentifierType.IssuerAndSerialNumber,
                 certificate: null,
                 privateKey: null,
-                signaturePadding: null); // Assert.NoThrow
+                signaturePadding: null
+            ); // Assert.NoThrow
         }
 #endif
     }

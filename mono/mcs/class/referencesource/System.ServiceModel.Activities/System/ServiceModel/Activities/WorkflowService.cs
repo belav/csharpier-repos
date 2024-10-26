@@ -7,9 +7,9 @@ namespace System.ServiceModel.Activities
     using System.Activities;
     using System.Activities.Debugger;
     using System.Activities.DynamicUpdate;
-    using System.Activities.XamlIntegration;
     using System.Activities.Statements;
     using System.Activities.Validation;
+    using System.Activities.XamlIntegration;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -27,7 +27,7 @@ namespace System.ServiceModel.Activities
     using System.Xml.Linq;
 
     [ContentProperty("Body")]
-    public class WorkflowService : IDebuggableWorkflowTree 
+    public class WorkflowService : IDebuggableWorkflowTree
     {
         Collection<Endpoint> endpoints;
         Collection<Type> implementedContracts;
@@ -42,40 +42,22 @@ namespace System.ServiceModel.Activities
         ServiceDescription serviceDescription;
 
         XName inferedServiceName;
-        
-        public WorkflowService()
-        {
-        }
+
+        public WorkflowService() { }
 
         [DefaultValue(null)]
-        public Activity Body
-        {
-            get;
-            set;
-        }
+        public Activity Body { get; set; }
 
         [Fx.Tag.KnownXamlExternal]
         [DefaultValue(null)]
         [TypeConverter(typeof(ServiceXNameTypeConverter))]
-        public XName Name
-        {
-            get;
-            set;
-        }
+        public XName Name { get; set; }
 
         [DefaultValue(null)]
-        public string ConfigurationName
-        {
-            get;
-            set;
-        }
+        public string ConfigurationName { get; set; }
 
         [DefaultValue(false)]
-        public bool AllowBufferedReceive
-        {
-            get;
-            set;
-        }
+        public bool AllowBufferedReceive { get; set; }
 
         public Collection<Endpoint> Endpoints
         {
@@ -91,12 +73,7 @@ namespace System.ServiceModel.Activities
 
         [Fx.Tag.KnownXamlExternal]
         [DefaultValue(null)]
-        public WorkflowIdentity DefinitionIdentity
-        {
-            get;
-            set;
-        }
-
+        public WorkflowIdentity DefinitionIdentity { get; set; }
 
         public Collection<Type> ImplementedContracts
         {
@@ -116,7 +93,8 @@ namespace System.ServiceModel.Activities
             {
                 if (this.updateMaps == null)
                 {
-                    this.updateMaps = new NullableKeyDictionary<WorkflowIdentity, DynamicUpdateMap>();
+                    this.updateMaps =
+                        new NullableKeyDictionary<WorkflowIdentity, DynamicUpdateMap>();
                 }
                 return this.updateMaps;
             }
@@ -124,19 +102,15 @@ namespace System.ServiceModel.Activities
 
         internal bool HasImplementedContracts
         {
-            get
-            {
-                return this.implementedContracts != null && this.implementedContracts.Count > 0;
-            }
+            get { return this.implementedContracts != null && this.implementedContracts.Count > 0; }
         }
 
         [DefaultValue(null)]
-        internal Dictionary<OperationIdentifier, OperationProperty> OperationProperties
-        {
-            get;
-            set;
-        }
-       
+        internal Dictionary<
+            OperationIdentifier,
+            OperationProperty
+        > OperationProperties { get; set; }
+
         IDictionary<ContractAndOperationNameTuple, OperationInfo> OperationsInfo
         {
             get
@@ -165,10 +139,14 @@ namespace System.ServiceModel.Activities
 
                         if (this.Body.DisplayName.Length == 0)
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.MissingDisplayNameInRootActivity));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(SR.MissingDisplayNameInRootActivity)
+                            );
                         }
 
-                        this.inferedServiceName = XName.Get(XmlConvert.EncodeLocalName(this.Body.DisplayName));
+                        this.inferedServiceName = XName.Get(
+                            XmlConvert.EncodeLocalName(this.Body.DisplayName)
+                        );
                     }
                     return this.inferedServiceName;
                 }
@@ -198,27 +176,35 @@ namespace System.ServiceModel.Activities
                 ServiceDescription result = new ServiceDescription
                 {
                     Name = this.InternalName.LocalName,
-                    Namespace = string.IsNullOrEmpty(this.InternalName.NamespaceName) ? NamingHelper.DefaultNamespace : this.InternalName.NamespaceName,
-                    ConfigurationName = this.ConfigurationName ?? this.InternalName.LocalName
-                };                
+                    Namespace = string.IsNullOrEmpty(this.InternalName.NamespaceName)
+                        ? NamingHelper.DefaultNamespace
+                        : this.InternalName.NamespaceName,
+                    ConfigurationName = this.ConfigurationName ?? this.InternalName.LocalName,
+                };
                 this.serviceDescription = result;
             }
             return this.serviceDescription;
         }
 
-        static void AddAdditionalConstraint(ValidationSettings workflowServiceSettings, Type constraintType, Constraint constraint)
+        static void AddAdditionalConstraint(
+            ValidationSettings workflowServiceSettings,
+            Type constraintType,
+            Constraint constraint
+        )
         {
             IList<Constraint> constraintList;
-            if (workflowServiceSettings.AdditionalConstraints.TryGetValue(constraintType, out constraintList))
+            if (
+                workflowServiceSettings.AdditionalConstraints.TryGetValue(
+                    constraintType,
+                    out constraintList
+                )
+            )
             {
                 constraintList.Add(constraint);
             }
             else
             {
-                constraintList = new List<Constraint>(1)
-                    {
-                        constraint,
-                    };
+                constraintList = new List<Constraint>(1) { constraint };
                 workflowServiceSettings.AdditionalConstraints.Add(constraintType, constraintList);
             }
         }
@@ -233,8 +219,16 @@ namespace System.ServiceModel.Activities
                 this.OperationProperties = CreateOperationProperties(errors);
 
                 // Add additional constraints
-                AddAdditionalConstraint(workflowServiceSettings, typeof(Receive), GetContractFirstValidationReceiveConstraints());
-                AddAdditionalConstraint(workflowServiceSettings, typeof(SendReply), GetContractFirstValidationSendReplyConstraints());
+                AddAdditionalConstraint(
+                    workflowServiceSettings,
+                    typeof(Receive),
+                    GetContractFirstValidationReceiveConstraints()
+                );
+                AddAdditionalConstraint(
+                    workflowServiceSettings,
+                    typeof(SendReply),
+                    GetContractFirstValidationSendReplyConstraints()
+                );
             }
 
             ValidationResults results = null;
@@ -269,21 +263,24 @@ namespace System.ServiceModel.Activities
             return new ValidationResults(errors);
         }
 
-        bool IsContractValid(ContractDescription contractDescription, Collection<ValidationError> validationError)
+        bool IsContractValid(
+            ContractDescription contractDescription,
+            Collection<ValidationError> validationError
+        )
         {
-            bool isValid = true; 
+            bool isValid = true;
             if (contractDescription.IsDuplex())
             {
                 validationError.Add(new ValidationError(SR.DuplexContractsNotSupported));
                 isValid = false;
             }
-            
-            return isValid; 
+
+            return isValid;
         }
 
         ValidationSettings CopyValidationSettions(ValidationSettings source)
         {
-            if ( source == null )
+            if (source == null)
             {
                 return new ValidationSettings();
             }
@@ -297,15 +294,19 @@ namespace System.ServiceModel.Activities
                 Environment = source.Environment,
                 // Retain the same cancellation token. Otherwise we can't cancel the validation of WorkflowService objects
                 // which can make the designer unreponsive if the validation takes a long time.
-                CancellationToken = source.CancellationToken
-
+                CancellationToken = source.CancellationToken,
             };
 
-            foreach (KeyValuePair<Type, IList<Constraint>> constrants in source.AdditionalConstraints)
+            foreach (
+                KeyValuePair<Type, IList<Constraint>> constrants in source.AdditionalConstraints
+            )
             {
                 if (constrants.Key != null && constrants.Value != null)
                 {
-                    clonedSettings.AdditionalConstraints.Add(constrants.Key, new List<Constraint>(constrants.Value));
+                    clonedSettings.AdditionalConstraints.Add(
+                        constrants.Key,
+                        new List<Constraint>(constrants.Value)
+                    );
                 }
             }
 
@@ -316,16 +317,28 @@ namespace System.ServiceModel.Activities
         {
             if (this.HasImplementedContracts)
             {
-                Dictionary<OperationIdentifier, OperationProperty> operationProperties = this.OperationProperties;
+                Dictionary<OperationIdentifier, OperationProperty> operationProperties =
+                    this.OperationProperties;
                 if (operationProperties != null)
                 {
                     foreach (OperationProperty property in operationProperties.Values)
                     {
-                        Fx.Assert(property.Operation != null, "OperationProperty.Operation should not be null!");
+                        Fx.Assert(
+                            property.Operation != null,
+                            "OperationProperty.Operation should not be null!"
+                        );
 
                         if (property.ImplementingReceives.Count < 1)
                         {
-                            errors.Add(new ValidationError(SR.OperationIsNotImplemented(property.Operation.Name, property.Operation.DeclaringContract.Name), true));
+                            errors.Add(
+                                new ValidationError(
+                                    SR.OperationIsNotImplemented(
+                                        property.Operation.Name,
+                                        property.Operation.DeclaringContract.Name
+                                    ),
+                                    true
+                                )
+                            );
                         }
                         else if (!property.Operation.IsOneWay)
                         {
@@ -334,16 +347,28 @@ namespace System.ServiceModel.Activities
                                 if (!property.ImplementingSendRepliesRequests.Contains(recv))
                                 {
                                     // passing the receive activity without a matching SendReply as the SourceDetail
-                                    errors.Add(new ValidationError(SR.TwoWayIsImplementedAsOneWay(property.Operation.Name, property.Operation.DeclaringContract.Name), true, string.Empty, recv));
+                                    errors.Add(
+                                        new ValidationError(
+                                            SR.TwoWayIsImplementedAsOneWay(
+                                                property.Operation.Name,
+                                                property.Operation.DeclaringContract.Name
+                                            ),
+                                            true,
+                                            string.Empty,
+                                            recv
+                                        )
+                                    );
                                 }
-                            }                            
-                        }                        
+                            }
+                        }
                     }
                 }
             }
         }
 
-        Dictionary<OperationIdentifier, OperationProperty> CreateOperationProperties(Collection<ValidationError> validationErrors)
+        Dictionary<OperationIdentifier, OperationProperty> CreateOperationProperties(
+            Collection<ValidationError> validationErrors
+        )
         {
             Dictionary<OperationIdentifier, OperationProperty> operationProperties = null;
 
@@ -356,21 +381,36 @@ namespace System.ServiceModel.Activities
                     try
                     {
                         contract = ContractDescription.GetContract(contractType);
-                                                
+
                         if (contract != null)
                         {
                             if (this.IsContractValid(contract, validationErrors))
                             {
                                 foreach (OperationDescription operation in contract.Operations)
                                 {
-                                    OperationIdentifier id = new OperationIdentifier(operation.DeclaringContract.Name, operation.DeclaringContract.Namespace, operation.Name);
+                                    OperationIdentifier id = new OperationIdentifier(
+                                        operation.DeclaringContract.Name,
+                                        operation.DeclaringContract.Namespace,
+                                        operation.Name
+                                    );
                                     if (operationProperties.ContainsKey(id))
                                     {
-                                        validationErrors.Add(new ValidationError(SR.DuplicatedContract(operation.DeclaringContract.Name, operation.Name), true));
+                                        validationErrors.Add(
+                                            new ValidationError(
+                                                SR.DuplicatedContract(
+                                                    operation.DeclaringContract.Name,
+                                                    operation.Name
+                                                ),
+                                                true
+                                            )
+                                        );
                                     }
                                     else
                                     {
-                                        operationProperties.Add(id, new OperationProperty(operation));
+                                        operationProperties.Add(
+                                            id,
+                                            new OperationProperty(operation)
+                                        );
                                     }
                                 }
                             }
@@ -390,30 +430,42 @@ namespace System.ServiceModel.Activities
 
             return operationProperties;
         }
-        
+
         public virtual IDictionary<XName, ContractDescription> GetContractDescriptions()
         {
             if (this.cachedInferredContracts == null)
             {
                 WalkActivityTree();
 
-                Fx.Assert(this.knownServiceActivities != null && this.receiveAndReplyPairs != null, "Failed to walk the activity tree!");
-                this.correlationQueryByContract = new Dictionary<XName, Collection<CorrelationQuery>>();
+                Fx.Assert(
+                    this.knownServiceActivities != null && this.receiveAndReplyPairs != null,
+                    "Failed to walk the activity tree!"
+                );
+                this.correlationQueryByContract =
+                    new Dictionary<XName, Collection<CorrelationQuery>>();
 
                 // Contract inference
-                IDictionary<XName, ContractDescription> inferredContracts = new Dictionary<XName, ContractDescription>();
-                this.keyedByNameOperationInfo = new Dictionary<ContractAndOperationNameTuple, OperationInfo>();
+                IDictionary<XName, ContractDescription> inferredContracts =
+                    new Dictionary<XName, ContractDescription>();
+                this.keyedByNameOperationInfo =
+                    new Dictionary<ContractAndOperationNameTuple, OperationInfo>();
 
                 foreach (Receive receive in this.knownServiceActivities)
                 {
                     XName contractXName = FixServiceContractName(receive.ServiceContractName);
-                    ContractAndOperationNameTuple tuple = new ContractAndOperationNameTuple(contractXName, receive.OperationName);
+                    ContractAndOperationNameTuple tuple = new ContractAndOperationNameTuple(
+                        contractXName,
+                        receive.OperationName
+                    );
 
                     OperationInfo operationInfo;
                     if (this.keyedByNameOperationInfo.TryGetValue(tuple, out operationInfo))
                     {
                         // All Receives with same ServiceContractName and OperationName need to be validated
-                        ContractValidationHelper.ValidateReceiveWithReceive(receive, operationInfo.Receive);
+                        ContractValidationHelper.ValidateReceiveWithReceive(
+                            receive,
+                            operationInfo.Receive
+                        );
                     }
                     else
                     {
@@ -425,7 +477,10 @@ namespace System.ServiceModel.Activities
                         if (!inferredContracts.TryGetValue(contractXName, out contract))
                         {
                             // Infer Name, Namespace
-                            contract = new ContractDescription(contractXName.LocalName, contractXName.NamespaceName);
+                            contract = new ContractDescription(
+                                contractXName.LocalName,
+                                contractXName.NamespaceName
+                            );
 
                             // We use ServiceContractName.LocalName to bind contract with config
                             contract.ConfigurationName = contractXName.LocalName;
@@ -435,7 +490,8 @@ namespace System.ServiceModel.Activities
                             inferredContracts.Add(contractXName, contract);
                         }
 
-                        OperationDescription operation = ContractInferenceHelper.CreateOperationDescription(receive, contract);
+                        OperationDescription operation =
+                            ContractInferenceHelper.CreateOperationDescription(receive, contract);
                         contract.Operations.Add(operation);
 
                         operationInfo = new OperationInfo(receive, operation);
@@ -444,24 +500,47 @@ namespace System.ServiceModel.Activities
 
                     CorrectOutMessageForOperationWithFault(receive, operationInfo);
 
-                    ContractInferenceHelper.UpdateIsOneWayFlag(receive, operationInfo.OperationDescription);
+                    ContractInferenceHelper.UpdateIsOneWayFlag(
+                        receive,
+                        operationInfo.OperationDescription
+                    );
 
                     // FaultTypes and KnownTypes need to be collected from all Receive activities
-                    ContractInferenceHelper.AddFaultDescription(receive, operationInfo.OperationDescription);
-                    ContractInferenceHelper.AddKnownTypesToOperation(receive, operationInfo.OperationDescription);
+                    ContractInferenceHelper.AddFaultDescription(
+                        receive,
+                        operationInfo.OperationDescription
+                    );
+                    ContractInferenceHelper.AddKnownTypesToOperation(
+                        receive,
+                        operationInfo.OperationDescription
+                    );
 
                     // WorkflowFormatterBehavior should have reference to all the Receive activities
-                    ContractInferenceHelper.AddReceiveToFormatterBehavior(receive, operationInfo.OperationDescription);
+                    ContractInferenceHelper.AddReceiveToFormatterBehavior(
+                        receive,
+                        operationInfo.OperationDescription
+                    );
 
                     Collection<CorrelationQuery> correlationQueries = null;
 
                     // Collect CorrelationQuery from Receive
                     if (receive.HasCorrelatesOn || receive.HasCorrelationInitializers)
                     {
-                        MessageQuerySet select = receive.HasCorrelatesOn ? receive.CorrelatesOn : null;
-                        CorrelationQuery correlationQuery = ContractInferenceHelper.CreateServerCorrelationQuery(select,
-                            receive.CorrelationInitializers, operationInfo.OperationDescription, false);
-                        CollectCorrelationQuery(ref correlationQueries, contractXName, correlationQuery);
+                        MessageQuerySet select = receive.HasCorrelatesOn
+                            ? receive.CorrelatesOn
+                            : null;
+                        CorrelationQuery correlationQuery =
+                            ContractInferenceHelper.CreateServerCorrelationQuery(
+                                select,
+                                receive.CorrelationInitializers,
+                                operationInfo.OperationDescription,
+                                false
+                            );
+                        CollectCorrelationQuery(
+                            ref correlationQueries,
+                            contractXName,
+                            correlationQuery
+                        );
                     }
 
                     // Find all known Receive-Reply pair in the activity tree. Remove them from this.receiveAndReplyPairs
@@ -473,8 +552,12 @@ namespace System.ServiceModel.Activities
                             ReceiveAndReplyTuple pair = new ReceiveAndReplyTuple(receive, reply);
                             this.receiveAndReplyPairs.Remove(pair);
 
-                            CollectCorrelationQueryFromReply(ref correlationQueries, contractXName,
-                                reply, operationInfo.OperationDescription);
+                            CollectCorrelationQueryFromReply(
+                                ref correlationQueries,
+                                contractXName,
+                                reply,
+                                operationInfo.OperationDescription
+                            );
 
                             reply.SetContractName(contractXName);
                         }
@@ -486,14 +569,18 @@ namespace System.ServiceModel.Activities
                             ReceiveAndReplyTuple pair = new ReceiveAndReplyTuple(receive, fault);
                             this.receiveAndReplyPairs.Remove(pair);
 
-                            CollectCorrelationQueryFromReply(ref correlationQueries, contractXName,
-                                fault, operationInfo.OperationDescription);
+                            CollectCorrelationQueryFromReply(
+                                ref correlationQueries,
+                                contractXName,
+                                fault,
+                                operationInfo.OperationDescription
+                            );
                         }
                     }
 
-                    // Have to do this here otherwise message/fault formatters 
+                    // Have to do this here otherwise message/fault formatters
                     // non-WorkflowServiceHost case won't be set. Cannot do this
-                    // during CacheMetadata time because activity order in which 
+                    // during CacheMetadata time because activity order in which
                     // CacheMetadata calls are made doesn't yield the correct result.
                     // Not possible to do it at runtime either because the ToReply and
                     // ToRequest activities that use the formatters do not have access
@@ -501,7 +588,6 @@ namespace System.ServiceModel.Activities
                     // need to call GetContractDescriptions() to get these default formatters
                     // wired up.
                     receive.SetDefaultFormatters(operationInfo.OperationDescription);
-
                 }
 
                 // Check for Receive referenced by SendReply but no longer in the activity tree
@@ -521,7 +607,11 @@ namespace System.ServiceModel.Activities
                         {
                             foreach (OperationDescription operation in contract.Operations)
                             {
-                                TD.InferredOperationDescription(operation.Name, contract.Name, operation.IsOneWay.ToString());
+                                TD.InferredOperationDescription(
+                                    operation.Name,
+                                    contract.Name,
+                                    operation.IsOneWay.ToString()
+                                );
                             }
                         }
                     }
@@ -539,23 +629,39 @@ namespace System.ServiceModel.Activities
             {
                 WalkActivityTree();
             }
-            
+
             foreach (Receive receive in this.knownServiceActivities)
             {
                 XName contractXName = FixServiceContractName(receive.ServiceContractName);
-                ContractAndOperationNameTuple tuple = new ContractAndOperationNameTuple(contractXName, receive.OperationName);
+                ContractAndOperationNameTuple tuple = new ContractAndOperationNameTuple(
+                    contractXName,
+                    receive.OperationName
+                );
 
                 OperationInfo operationInfo;
                 if (baseWorkflowService.OperationsInfo.TryGetValue(tuple, out operationInfo))
                 {
                     // All Receives with same ServiceContractName and OperationName need to be validated
-                    ContractValidationHelper.ValidateReceiveWithReceive(receive, operationInfo.Receive);
-                    ContractInferenceHelper.AddReceiveToFormatterBehavior(receive, operationInfo.OperationDescription);
-                    ContractInferenceHelper.UpdateIsOneWayFlag(receive, operationInfo.OperationDescription);
+                    ContractValidationHelper.ValidateReceiveWithReceive(
+                        receive,
+                        operationInfo.Receive
+                    );
+                    ContractInferenceHelper.AddReceiveToFormatterBehavior(
+                        receive,
+                        operationInfo.OperationDescription
+                    );
+                    ContractInferenceHelper.UpdateIsOneWayFlag(
+                        receive,
+                        operationInfo.OperationDescription
+                    );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new ValidationException(SR.OperationNotFound(contractXName, receive.OperationName)));
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR.OperationNotFound(contractXName, receive.OperationName)
+                        )
+                    );
                 }
             }
         }
@@ -570,12 +676,18 @@ namespace System.ServiceModel.Activities
             foreach (Receive receive in this.knownServiceActivities)
             {
                 XName contractXName = FixServiceContractName(receive.ServiceContractName);
-                ContractAndOperationNameTuple tuple = new ContractAndOperationNameTuple(contractXName, receive.OperationName);
+                ContractAndOperationNameTuple tuple = new ContractAndOperationNameTuple(
+                    contractXName,
+                    receive.OperationName
+                );
 
                 OperationInfo operationInfo;
                 if (baseWorkflowService.OperationsInfo.TryGetValue(tuple, out operationInfo))
-                {   
-                    ContractInferenceHelper.RemoveReceiveFromFormatterBehavior(receive, operationInfo.OperationDescription);
+                {
+                    ContractInferenceHelper.RemoveReceiveFromFormatterBehavior(
+                        receive,
+                        operationInfo.OperationDescription
+                    );
                 }
             }
         }
@@ -590,27 +702,31 @@ namespace System.ServiceModel.Activities
 
             if (this.Body == null)
             {
-                throw FxTrace.Exception.AsError(new ValidationException(SR.MissingBodyInWorkflowService));
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(SR.MissingBodyInWorkflowService)
+                );
             }
 
             // Validate the activity tree
             ValidationResults validationResults = null;
             StringBuilder exceptionMessage = new StringBuilder();
-            bool doesErrorExist = false; 
+            bool doesErrorExist = false;
             try
             {
                 if (this.HasImplementedContracts)
                 {
-                    validationResults = this.Validate(new ValidationSettings() { PrepareForRuntime = true, });
+                    validationResults = this.Validate(
+                        new ValidationSettings() { PrepareForRuntime = true }
+                    );
                 }
                 else
                 {
                     WorkflowInspectionServices.CacheMetadata(this.Body);
-                }                
+                }
             }
             catch (InvalidWorkflowException e)
             {
-                doesErrorExist = true; 
+                doesErrorExist = true;
                 exceptionMessage.AppendLine(e.Message);
             }
 
@@ -618,7 +734,7 @@ namespace System.ServiceModel.Activities
             {
                 if (validationResults.Errors != null && validationResults.Errors.Count > 0)
                 {
-                    doesErrorExist = true; 
+                    doesErrorExist = true;
                     foreach (ValidationError error in validationResults.Errors)
                     {
                         exceptionMessage.AppendLine(error.Message);
@@ -628,7 +744,9 @@ namespace System.ServiceModel.Activities
 
             if (doesErrorExist)
             {
-                throw FxTrace.Exception.AsError(new InvalidWorkflowException(exceptionMessage.ToString()));
+                throw FxTrace.Exception.AsError(
+                    new InvalidWorkflowException(exceptionMessage.ToString())
+                );
             }
 
             this.knownServiceActivities = new List<Receive>();
@@ -649,23 +767,36 @@ namespace System.ServiceModel.Activities
                 Activity parentReceiveScope = queueItem.ParentReceiveScope;
                 Activity rootTransactedReceiveScope = queueItem.RootTransactedReceiveScope;
 
-                if (activity is Receive)  // First, let's see if this is a Receive activity
+                if (activity is Receive) // First, let's see if this is a Receive activity
                 {
                     Receive receive = (Receive)activity;
 
                     if (rootTransactedReceiveScope != null)
                     {
-                        receive.InternalReceive.AdditionalData.IsInsideTransactedReceiveScope = true;
-                        Fx.Assert(parentReceiveScope != null, "Internal error.. TransactedReceiveScope should be valid here");
-                        if (IsFirstTransactedReceive(receive, parentReceiveScope, rootTransactedReceiveScope))
+                        receive.InternalReceive.AdditionalData.IsInsideTransactedReceiveScope =
+                            true;
+                        Fx.Assert(
+                            parentReceiveScope != null,
+                            "Internal error.. TransactedReceiveScope should be valid here"
+                        );
+                        if (
+                            IsFirstTransactedReceive(
+                                receive,
+                                parentReceiveScope,
+                                rootTransactedReceiveScope
+                            )
+                        )
                         {
-                            receive.InternalReceive.AdditionalData.IsFirstReceiveOfTransactedReceiveScopeTree = true;
+                            receive
+                                .InternalReceive
+                                .AdditionalData
+                                .IsFirstReceiveOfTransactedReceiveScopeTree = true;
                         }
                     }
 
                     this.knownServiceActivities.Add(receive);
                 }
-                else if (activity is SendReply)  // Let's see if this is a SendReply
+                else if (activity is SendReply) // Let's see if this is a SendReply
                 {
                     SendReply sendReply = (SendReply)activity;
 
@@ -681,7 +812,10 @@ namespace System.ServiceModel.Activities
                         if (pairedReceive.HasReply)
                         {
                             SendReply followingReply = pairedReceive.FollowingReplies[0];
-                            ContractValidationHelper.ValidateSendReplyWithSendReply(followingReply, sendReply);
+                            ContractValidationHelper.ValidateSendReplyWithSendReply(
+                                followingReply,
+                                sendReply
+                            );
                         }
 
                         pairedReceive.FollowingReplies.Add(sendReply);
@@ -701,9 +835,15 @@ namespace System.ServiceModel.Activities
                     }
                 }
 
-                foreach (Activity childActivity in WorkflowInspectionServices.GetActivities(activity))
+                foreach (
+                    Activity childActivity in WorkflowInspectionServices.GetActivities(activity)
+                )
                 {
-                    QueueItem queueData = new QueueItem(childActivity, parentReceiveScope, rootTransactedReceiveScope);
+                    QueueItem queueData = new QueueItem(
+                        childActivity,
+                        parentReceiveScope,
+                        rootTransactedReceiveScope
+                    );
                     activities.Enqueue(queueData);
                 }
             }
@@ -719,20 +859,34 @@ namespace System.ServiceModel.Activities
             return contractXName;
         }
 
-        static void CorrectOutMessageForOperationWithFault(Receive receive, OperationInfo operationInfo)
+        static void CorrectOutMessageForOperationWithFault(
+            Receive receive,
+            OperationInfo operationInfo
+        )
         {
             Fx.Assert(receive != null && operationInfo != null, "Argument cannot be null!");
 
             Receive prevReceive = operationInfo.Receive;
-            if (receive != prevReceive && receive.HasReply &&
-                !prevReceive.HasReply && prevReceive.HasFault)
+            if (
+                receive != prevReceive
+                && receive.HasReply
+                && !prevReceive.HasReply
+                && prevReceive.HasFault
+            )
             {
-                ContractInferenceHelper.CorrectOutMessageForOperation(receive, operationInfo.OperationDescription);
+                ContractInferenceHelper.CorrectOutMessageForOperation(
+                    receive,
+                    operationInfo.OperationDescription
+                );
                 operationInfo.Receive = receive;
             }
         }
 
-        void CollectCorrelationQuery(ref Collection<CorrelationQuery> queries, XName serviceContractName, CorrelationQuery correlationQuery)
+        void CollectCorrelationQuery(
+            ref Collection<CorrelationQuery> queries,
+            XName serviceContractName,
+            CorrelationQuery correlationQuery
+        )
         {
             Fx.Assert(serviceContractName != null, "Argument cannot be null!");
 
@@ -741,7 +895,10 @@ namespace System.ServiceModel.Activities
                 return;
             }
 
-            if (queries == null && !this.correlationQueryByContract.TryGetValue(serviceContractName, out queries))
+            if (
+                queries == null
+                && !this.correlationQueryByContract.TryGetValue(serviceContractName, out queries)
+            )
             {
                 queries = new Collection<CorrelationQuery>();
                 this.correlationQueryByContract.Add(serviceContractName, queries);
@@ -750,15 +907,28 @@ namespace System.ServiceModel.Activities
             queries.Add(correlationQuery);
         }
 
-        void CollectCorrelationQueryFromReply(ref Collection<CorrelationQuery> correlationQueries, XName serviceContractName,
-            Activity reply, OperationDescription operation)
+        void CollectCorrelationQueryFromReply(
+            ref Collection<CorrelationQuery> correlationQueries,
+            XName serviceContractName,
+            Activity reply,
+            OperationDescription operation
+        )
         {
             SendReply sendReply = reply as SendReply;
             if (sendReply != null)
             {
-                CorrelationQuery correlationQuery = ContractInferenceHelper.CreateServerCorrelationQuery(
-                    null, sendReply.CorrelationInitializers, operation, true);
-                CollectCorrelationQuery(ref correlationQueries, serviceContractName, correlationQuery);
+                CorrelationQuery correlationQuery =
+                    ContractInferenceHelper.CreateServerCorrelationQuery(
+                        null,
+                        sendReply.CorrelationInitializers,
+                        operation,
+                        true
+                    );
+                CollectCorrelationQuery(
+                    ref correlationQueries,
+                    serviceContractName,
+                    correlationQuery
+                );
             }
         }
 
@@ -782,12 +952,18 @@ namespace System.ServiceModel.Activities
 
             return (parent == root && receive == request);
         }
-        
+
         Constraint GetContractFirstValidationReceiveConstraints()
         {
-            DelegateInArgument<Receive> element = new DelegateInArgument<Receive> { Name = "ReceiveElement" };
-            DelegateInArgument<ValidationContext> validationContext = new DelegateInArgument<ValidationContext> { Name = "validationContext" };
-            Variable<IEnumerable<Activity>> parentChainVar = new Variable<IEnumerable<Activity>>("parentChainVar");
+            DelegateInArgument<Receive> element = new DelegateInArgument<Receive>
+            {
+                Name = "ReceiveElement",
+            };
+            DelegateInArgument<ValidationContext> validationContext =
+                new DelegateInArgument<ValidationContext> { Name = "validationContext" };
+            Variable<IEnumerable<Activity>> parentChainVar = new Variable<IEnumerable<Activity>>(
+                "parentChainVar"
+            );
             return new Constraint<Receive>
             {
                 Body = new ActivityAction<Receive, ValidationContext>
@@ -799,27 +975,35 @@ namespace System.ServiceModel.Activities
                         Variables = { parentChainVar },
                         Activities =
                         {
-                            new GetParentChain { ValidationContext = validationContext, Result = parentChainVar },
+                            new GetParentChain
+                            {
+                                ValidationContext = validationContext,
+                                Result = parentChainVar,
+                            },
                             new ValidateReceiveContract()
                             {
                                 DisplayName = "ValidateReceiveContract",
                                 ReceiveActivity = element,
                                 WorkflowService = new InArgument<WorkflowService>()
                                 {
-                                    Expression = new GetWorkflowSerivce(this)
+                                    Expression = new GetWorkflowSerivce(this),
                                 },
                                 ParentChain = parentChainVar,
-                            }
-                        }
-                    }
-                }
+                            },
+                        },
+                    },
+                },
             };
         }
 
         Constraint GetContractFirstValidationSendReplyConstraints()
         {
-            DelegateInArgument<SendReply> element = new DelegateInArgument<SendReply> { Name = "ReceiveElement" };
-            DelegateInArgument<ValidationContext> validationContext = new DelegateInArgument<ValidationContext> { Name = "validationContext" };
+            DelegateInArgument<SendReply> element = new DelegateInArgument<SendReply>
+            {
+                Name = "ReceiveElement",
+            };
+            DelegateInArgument<ValidationContext> validationContext =
+                new DelegateInArgument<ValidationContext> { Name = "validationContext" };
 
             return new Constraint<SendReply>
             {
@@ -837,13 +1021,13 @@ namespace System.ServiceModel.Activities
                                 ReceiveActivity = element,
                                 WorkflowSerivce = new InArgument<WorkflowService>()
                                 {
-                                    Expression = new GetWorkflowSerivce(this)
+                                    Expression = new GetWorkflowSerivce(this),
                                 },
-                                ValidationContext = validationContext
-                            }
-                        }
-                    }
-                }
+                                ValidationContext = validationContext,
+                            },
+                        },
+                    },
+                },
             };
         }
 
@@ -860,7 +1044,8 @@ namespace System.ServiceModel.Activities
 
             public bool Equals(ContractAndOperationNameTuple other)
             {
-                return this.serviceContractXName == other.serviceContractXName && this.operationName == other.operationName; 
+                return this.serviceContractXName == other.serviceContractXName
+                    && this.operationName == other.operationName;
             }
 
             public override int GetHashCode()
@@ -895,7 +1080,7 @@ namespace System.ServiceModel.Activities
 
             public override int GetHashCode()
             {
-                int hash = 0; 
+                int hash = 0;
                 if (this.receive != null)
                 {
                     hash ^= this.receive.GetHashCode();
@@ -943,7 +1128,7 @@ namespace System.ServiceModel.Activities
             {
                 this.activity = element;
                 this.parent = parent;
-                this.rootTransactedReceiveScope = root; 
+                this.rootTransactedReceiveScope = root;
             }
 
             public Activity Activity
@@ -964,7 +1149,8 @@ namespace System.ServiceModel.Activities
 
         class GetWorkflowSerivce : CodeActivity<WorkflowService>
         {
-            WorkflowService workflowService; 
+            WorkflowService workflowService;
+
             public GetWorkflowSerivce(WorkflowService serviceReference)
             {
                 workflowService = serviceReference;
@@ -972,14 +1158,14 @@ namespace System.ServiceModel.Activities
 
             protected override void CacheMetadata(CodeActivityMetadata metadata)
             {
-                RuntimeArgument resultArgument = new RuntimeArgument("Result", typeof(WorkflowService), ArgumentDirection.Out);
+                RuntimeArgument resultArgument = new RuntimeArgument(
+                    "Result",
+                    typeof(WorkflowService),
+                    ArgumentDirection.Out
+                );
                 metadata.Bind(this.Result, resultArgument);
 
-                metadata.SetArgumentsCollection(
-                    new Collection<RuntimeArgument>
-                {
-                    resultArgument
-                });
+                metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { resultArgument });
             }
 
             protected override WorkflowService Execute(CodeActivityContext context)
@@ -990,29 +1176,29 @@ namespace System.ServiceModel.Activities
 
         class ValidateReceiveContract : NativeActivity
         {
-            public InArgument<Receive> ReceiveActivity
-            {
-                get;
-                set;
-            }
+            public InArgument<Receive> ReceiveActivity { get; set; }
 
-            public InArgument<IEnumerable<Activity>> ParentChain
-            {
-                get;
-                set;
-            }
+            public InArgument<IEnumerable<Activity>> ParentChain { get; set; }
 
-            public InArgument<WorkflowService> WorkflowService
-            {
-                get;
-                set; 
-            }
+            public InArgument<WorkflowService> WorkflowService { get; set; }
 
             protected override void CacheMetadata(NativeActivityMetadata metadata)
             {
-                RuntimeArgument receiveActivity = new RuntimeArgument("ReceiveActivity", typeof(Receive), ArgumentDirection.In);
-                RuntimeArgument parentChain = new RuntimeArgument("ParentChain", typeof(IEnumerable<Activity>), ArgumentDirection.In);
-                RuntimeArgument operationProperties = new RuntimeArgument("OperationProperties", typeof(WorkflowService), ArgumentDirection.In);
+                RuntimeArgument receiveActivity = new RuntimeArgument(
+                    "ReceiveActivity",
+                    typeof(Receive),
+                    ArgumentDirection.In
+                );
+                RuntimeArgument parentChain = new RuntimeArgument(
+                    "ParentChain",
+                    typeof(IEnumerable<Activity>),
+                    ArgumentDirection.In
+                );
+                RuntimeArgument operationProperties = new RuntimeArgument(
+                    "OperationProperties",
+                    typeof(WorkflowService),
+                    ArgumentDirection.In
+                );
 
                 if (this.ReceiveActivity == null)
                 {
@@ -1047,31 +1233,49 @@ namespace System.ServiceModel.Activities
                 Receive receiveActivity = this.ReceiveActivity.Get(context);
                 Dictionary<OperationIdentifier, OperationProperty> operationProperties;
 
-                Fx.Assert(receiveActivity != null, "ValidateReceiveContract needs the receive activity to be present");
+                Fx.Assert(
+                    receiveActivity != null,
+                    "ValidateReceiveContract needs the receive activity to be present"
+                );
 
                 if (string.IsNullOrEmpty(receiveActivity.OperationName))
                 {
-                    Constraint.AddValidationError(context, new ValidationError(SR.MissingOperationName(this.DisplayName)));
+                    Constraint.AddValidationError(
+                        context,
+                        new ValidationError(SR.MissingOperationName(this.DisplayName))
+                    );
                 }
                 else
                 {
                     WorkflowService workflowService = this.WorkflowService.Get(context);
                     operationProperties = workflowService.OperationProperties;
-                    XName serviceName = workflowService.FixServiceContractName(receiveActivity.ServiceContractName);
+                    XName serviceName = workflowService.FixServiceContractName(
+                        receiveActivity.ServiceContractName
+                    );
                     // We only do contract first validation if there are contract specified
                     if (operationProperties != null)
                     {
                         string contractName = serviceName.LocalName;
-                        string contractNamespace = string.IsNullOrEmpty(serviceName.NamespaceName) ?
-                            NamingHelper.DefaultNamespace : serviceName.NamespaceName;
-                        string operationXmlName = NamingHelper.XmlName(receiveActivity.OperationName);
+                        string contractNamespace = string.IsNullOrEmpty(serviceName.NamespaceName)
+                            ? NamingHelper.DefaultNamespace
+                            : serviceName.NamespaceName;
+                        string operationXmlName = NamingHelper.XmlName(
+                            receiveActivity.OperationName
+                        );
 
                         OperationProperty property;
-                        OperationIdentifier operationId = new OperationIdentifier(contractName, contractNamespace, operationXmlName);
+                        OperationIdentifier operationId = new OperationIdentifier(
+                            contractName,
+                            contractNamespace,
+                            operationXmlName
+                        );
                         if (operationProperties.TryGetValue(operationId, out property))
                         {
                             property.ImplementingReceives.Add(receiveActivity);
-                            Fx.Assert(property.Operation != null, "OperationProperty.Operation should not be null!");                            
+                            Fx.Assert(
+                                property.Operation != null,
+                                "OperationProperty.Operation should not be null!"
+                            );
                             ValidateContract(context, receiveActivity, property.Operation);
                         }
                         else
@@ -1079,9 +1283,21 @@ namespace System.ServiceModel.Activities
                             // It is OK to add a new contract, but we do not allow adding a new operation to a specified contract.
                             foreach (OperationIdentifier id in operationProperties.Keys)
                             {
-                                if (contractName == id.ContractName && contractNamespace == id.ContractNamespace)
+                                if (
+                                    contractName == id.ContractName
+                                    && contractNamespace == id.ContractNamespace
+                                )
                                 {
-                                    Constraint.AddValidationError(context, new ValidationError(SR.OperationDoesNotExistInContract(receiveActivity.OperationName, contractName, contractNamespace)));
+                                    Constraint.AddValidationError(
+                                        context,
+                                        new ValidationError(
+                                            SR.OperationDoesNotExistInContract(
+                                                receiveActivity.OperationName,
+                                                contractName,
+                                                contractNamespace
+                                            )
+                                        )
+                                    );
                                     break;
                                 }
                             }
@@ -1090,9 +1306,14 @@ namespace System.ServiceModel.Activities
                 }
             }
 
-            void ValidateTransactionBehavior(NativeActivityContext context, Receive receiveActivity, OperationDescription targetOperation)
+            void ValidateTransactionBehavior(
+                NativeActivityContext context,
+                Receive receiveActivity,
+                OperationDescription targetOperation
+            )
             {
-                TransactionFlowAttribute transactionFlowAttribute = targetOperation.Behaviors.Find<TransactionFlowAttribute>();
+                TransactionFlowAttribute transactionFlowAttribute =
+                    targetOperation.Behaviors.Find<TransactionFlowAttribute>();
                 Activity parent = null;
 
                 // we know it's IList<Activity>
@@ -1116,42 +1337,113 @@ namespace System.ServiceModel.Activities
                     {
                         if (targetOperation.IsOneWay)
                         {
-                            Constraint.AddValidationError(context, new ValidationError(SR.TargetContractCannotBeOneWayWithTransactionFlow(targetOperation.Name, targetOperation.DeclaringContract.Name)));
+                            Constraint.AddValidationError(
+                                context,
+                                new ValidationError(
+                                    SR.TargetContractCannotBeOneWayWithTransactionFlow(
+                                        targetOperation.Name,
+                                        targetOperation.DeclaringContract.Name
+                                    )
+                                )
+                            );
                         }
 
                         // Receive has to be in a transacted receive scope
                         if (!isInTransactedReceiveScope)
                         {
-                            Constraint.AddValidationError(context, new ValidationError(SR.ReceiveIsNotInTRS(targetOperation.Name, targetOperation.DeclaringContract.Name)));
+                            Constraint.AddValidationError(
+                                context,
+                                new ValidationError(
+                                    SR.ReceiveIsNotInTRS(
+                                        targetOperation.Name,
+                                        targetOperation.DeclaringContract.Name
+                                    )
+                                )
+                            );
                         }
                     }
-                    else if (transactionFlowAttribute.Transactions == TransactionFlowOption.NotAllowed)
+                    else if (
+                        transactionFlowAttribute.Transactions == TransactionFlowOption.NotAllowed
+                    )
                     {
                         if (isInTransactedReceiveScope)
                         {
-                            Constraint.AddValidationError(context, new ValidationError(SR.ReceiveIsInTRSWhenTransactionFlowNotAllowed(targetOperation.Name, targetOperation.DeclaringContract.Name), true));
+                            Constraint.AddValidationError(
+                                context,
+                                new ValidationError(
+                                    SR.ReceiveIsInTRSWhenTransactionFlowNotAllowed(
+                                        targetOperation.Name,
+                                        targetOperation.DeclaringContract.Name
+                                    ),
+                                    true
+                                )
+                            );
                         }
                     }
                 }
             }
 
-            void ValidateContract(NativeActivityContext context, Receive receiveActivity, OperationDescription targetOperation)
+            void ValidateContract(
+                NativeActivityContext context,
+                Receive receiveActivity,
+                OperationDescription targetOperation
+            )
             {
-                SerializerOption targetSerializerOption = targetOperation.Behaviors.Contains(typeof(XmlSerializerOperationBehavior)) ?
-                    SerializerOption.XmlSerializer : SerializerOption.DataContractSerializer;
+                SerializerOption targetSerializerOption = targetOperation.Behaviors.Contains(
+                    typeof(XmlSerializerOperationBehavior)
+                )
+                    ? SerializerOption.XmlSerializer
+                    : SerializerOption.DataContractSerializer;
                 if (receiveActivity.SerializerOption != targetSerializerOption)
                 {
-                    Constraint.AddValidationError(context, new ValidationError(SR.PropertyMismatch(receiveActivity.SerializerOption.ToString(), "SerializerOption", targetSerializerOption.ToString(), targetOperation.DeclaringContract.Name, targetSerializerOption.ToString())));
+                    Constraint.AddValidationError(
+                        context,
+                        new ValidationError(
+                            SR.PropertyMismatch(
+                                receiveActivity.SerializerOption.ToString(),
+                                "SerializerOption",
+                                targetSerializerOption.ToString(),
+                                targetOperation.DeclaringContract.Name,
+                                targetSerializerOption.ToString()
+                            )
+                        )
+                    );
                 }
 
-                if ((!targetOperation.HasProtectionLevel && receiveActivity.ProtectionLevel.HasValue && receiveActivity.ProtectionLevel != Net.Security.ProtectionLevel.None)
-                    || (receiveActivity.ProtectionLevel.HasValue && receiveActivity.ProtectionLevel.Value != targetOperation.ProtectionLevel)
-                    || (!receiveActivity.ProtectionLevel.HasValue && targetOperation.ProtectionLevel != Net.Security.ProtectionLevel.None))
+                if (
+                    (
+                        !targetOperation.HasProtectionLevel
+                        && receiveActivity.ProtectionLevel.HasValue
+                        && receiveActivity.ProtectionLevel != Net.Security.ProtectionLevel.None
+                    )
+                    || (
+                        receiveActivity.ProtectionLevel.HasValue
+                        && receiveActivity.ProtectionLevel.Value != targetOperation.ProtectionLevel
+                    )
+                    || (
+                        !receiveActivity.ProtectionLevel.HasValue
+                        && targetOperation.ProtectionLevel != Net.Security.ProtectionLevel.None
+                    )
+                )
                 {
-                    string targetProtectionLevelString = targetOperation.HasProtectionLevel ?
-                        targetOperation.ProtectionLevel.ToString() : SR.NotSpecified;
-                    string receiveProtectionLevelString = receiveActivity.ProtectionLevel.HasValue ? receiveActivity.ProtectionLevel.ToString() : SR.NotSpecified;
-                    Constraint.AddValidationError(context, new ValidationError(SR.PropertyMismatch(receiveProtectionLevelString, "ProtectionLevel", targetProtectionLevelString, targetOperation.Name, targetOperation.DeclaringContract.Name)));
+                    string targetProtectionLevelString = targetOperation.HasProtectionLevel
+                        ? targetOperation.ProtectionLevel.ToString()
+                        : SR.NotSpecified;
+                    string receiveProtectionLevelString = receiveActivity.ProtectionLevel.HasValue
+                        ? receiveActivity.ProtectionLevel.ToString()
+                        : SR.NotSpecified;
+                    Constraint.AddValidationError(
+                        context,
+                        new ValidationError(
+                            SR.PropertyMismatch(
+                                receiveProtectionLevelString,
+                                "ProtectionLevel",
+                                targetProtectionLevelString,
+                                targetOperation.Name,
+                                targetOperation.DeclaringContract.Name
+                            )
+                        )
+                    );
                 }
 
                 // We validate that all known types on the contract be present on the activity.
@@ -1164,46 +1456,63 @@ namespace System.ServiceModel.Activities
                     // We expect the number of known types to be small, therefore we choose to use simple iterative search.
                     foreach (Type targetType in targetOperation.KnownTypes)
                     {
-                        if (receiveActivity.KnownTypes == null || !receiveActivity.KnownTypes.Contains(targetType))
+                        if (
+                            receiveActivity.KnownTypes == null
+                            || !receiveActivity.KnownTypes.Contains(targetType)
+                        )
                         {
                             if (targetType != null && targetType != TypeHelper.VoidType)
                             {
-                                Constraint.AddValidationError(context, new ValidationError(SR.MissingKnownTypes(targetType.FullName, targetOperation.Name, targetOperation.DeclaringContract.Name)));
+                                Constraint.AddValidationError(
+                                    context,
+                                    new ValidationError(
+                                        SR.MissingKnownTypes(
+                                            targetType.FullName,
+                                            targetOperation.Name,
+                                            targetOperation.DeclaringContract.Name
+                                        )
+                                    )
+                                );
                             }
                         }
                     }
                 }
 
                 this.ValidateTransactionBehavior(context, receiveActivity, targetOperation);
-                receiveActivity.InternalContent.ValidateContract(context, targetOperation, receiveActivity, MessageDirection.Input);
+                receiveActivity.InternalContent.ValidateContract(
+                    context,
+                    targetOperation,
+                    receiveActivity,
+                    MessageDirection.Input
+                );
             }
         }
 
         class ValidateSendReplyContract : NativeActivity
         {
-            public InArgument<SendReply> ReceiveActivity
-            {
-                get;
-                set;
-            }
+            public InArgument<SendReply> ReceiveActivity { get; set; }
 
-            public InArgument<ValidationContext> ValidationContext
-            {
-                get;
-                set;
-            }
-            
-            public InArgument<WorkflowService> WorkflowSerivce
-            {
-                get;
-                set;
-            }
+            public InArgument<ValidationContext> ValidationContext { get; set; }
+
+            public InArgument<WorkflowService> WorkflowSerivce { get; set; }
 
             protected override void CacheMetadata(NativeActivityMetadata metadata)
             {
-                RuntimeArgument receiveActivity = new RuntimeArgument("ReceiveActivity", typeof(SendReply), ArgumentDirection.In);
-                RuntimeArgument validationContext = new RuntimeArgument("ValidationContext", typeof(ValidationContext), ArgumentDirection.In);
-                RuntimeArgument operationProperties = new RuntimeArgument("OperationProperties", typeof(WorkflowService), ArgumentDirection.In);
+                RuntimeArgument receiveActivity = new RuntimeArgument(
+                    "ReceiveActivity",
+                    typeof(SendReply),
+                    ArgumentDirection.In
+                );
+                RuntimeArgument validationContext = new RuntimeArgument(
+                    "ValidationContext",
+                    typeof(ValidationContext),
+                    ArgumentDirection.In
+                );
+                RuntimeArgument operationProperties = new RuntimeArgument(
+                    "OperationProperties",
+                    typeof(WorkflowService),
+                    ArgumentDirection.In
+                );
 
                 if (this.ReceiveActivity == null)
                 {
@@ -1227,7 +1536,7 @@ namespace System.ServiceModel.Activities
                 {
                     receiveActivity,
                     validationContext,
-                    operationProperties
+                    operationProperties,
                 };
 
                 metadata.SetArgumentsCollection(arguments);
@@ -1240,7 +1549,10 @@ namespace System.ServiceModel.Activities
 
                 if (sendReplyActivity.Request != null)
                 {
-                    if (sendReplyActivity.Request.ServiceContractName != null && sendReplyActivity.Request.OperationName != null)
+                    if (
+                        sendReplyActivity.Request.ServiceContractName != null
+                        && sendReplyActivity.Request.OperationName != null
+                    )
                     {
                         WorkflowService workflowService = this.WorkflowSerivce.Get(context);
                         operationProperties = workflowService.OperationProperties;
@@ -1248,23 +1560,49 @@ namespace System.ServiceModel.Activities
                         {
                             XName contractXName = sendReplyActivity.Request.ServiceContractName;
                             string contractName = contractXName.LocalName;
-                            string contractNamespace = string.IsNullOrEmpty(contractXName.NamespaceName) ?
-                                NamingHelper.DefaultNamespace : contractXName.NamespaceName;
-                            string operationXmlName = NamingHelper.XmlName(sendReplyActivity.Request.OperationName);
+                            string contractNamespace = string.IsNullOrEmpty(
+                                contractXName.NamespaceName
+                            )
+                                ? NamingHelper.DefaultNamespace
+                                : contractXName.NamespaceName;
+                            string operationXmlName = NamingHelper.XmlName(
+                                sendReplyActivity.Request.OperationName
+                            );
 
                             OperationProperty property;
-                            OperationIdentifier id = new OperationIdentifier(contractName, contractNamespace, operationXmlName);
+                            OperationIdentifier id = new OperationIdentifier(
+                                contractName,
+                                contractNamespace,
+                                operationXmlName
+                            );
                             if (operationProperties.TryGetValue(id, out property))
                             {
                                 if (!property.Operation.IsOneWay)
                                 {
-                                    property.ImplementingSendRepliesRequests.Add(sendReplyActivity.Request);
-                                    Fx.Assert(property.Operation != null, "OperationProperty.Operation should not be null!");
-                                    ValidateContract(context, sendReplyActivity, property.Operation);
+                                    property.ImplementingSendRepliesRequests.Add(
+                                        sendReplyActivity.Request
+                                    );
+                                    Fx.Assert(
+                                        property.Operation != null,
+                                        "OperationProperty.Operation should not be null!"
+                                    );
+                                    ValidateContract(
+                                        context,
+                                        sendReplyActivity,
+                                        property.Operation
+                                    );
                                 }
                                 else
                                 {
-                                    Constraint.AddValidationError(context, new ValidationError(SR.OnewayContractIsImplementedAsTwoWay(property.Operation.Name, contractName)));
+                                    Constraint.AddValidationError(
+                                        context,
+                                        new ValidationError(
+                                            SR.OnewayContractIsImplementedAsTwoWay(
+                                                property.Operation.Name,
+                                                contractName
+                                            )
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -1272,9 +1610,18 @@ namespace System.ServiceModel.Activities
                 }
             }
 
-            void ValidateContract(NativeActivityContext context, SendReply sendReply, OperationDescription targetOperation)
+            void ValidateContract(
+                NativeActivityContext context,
+                SendReply sendReply,
+                OperationDescription targetOperation
+            )
             {
-                sendReply.InternalContent.ValidateContract(context, targetOperation, sendReply, MessageDirection.Output);
+                sendReply.InternalContent.ValidateContract(
+                    context,
+                    targetOperation,
+                    sendReply,
+                    MessageDirection.Output
+                );
             }
         }
     }

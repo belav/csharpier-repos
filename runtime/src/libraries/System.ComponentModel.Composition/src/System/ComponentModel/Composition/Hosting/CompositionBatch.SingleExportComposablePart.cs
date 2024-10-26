@@ -43,7 +43,9 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (definition != _export.Definition)
                 {
-                    throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart(nameof(definition));
+                    throw ExceptionBuilder.CreateExportDefinitionNotOnThisComposablePart(
+                        nameof(definition)
+                    );
                 }
 
                 return _export.Value;
@@ -54,7 +56,9 @@ namespace System.ComponentModel.Composition.Hosting
                 Requires.NotNull(definition, nameof(definition));
                 Requires.NotNullOrNullElements(exports, nameof(exports));
 
-                throw ExceptionBuilder.CreateImportDefinitionNotOnThisComposablePart(nameof(definition));
+                throw ExceptionBuilder.CreateImportDefinitionNotOnThisComposablePart(
+                    nameof(definition)
+                );
             }
         }
     }

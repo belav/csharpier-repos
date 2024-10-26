@@ -67,7 +67,11 @@ namespace System.Data.Tests
             Assert.Equal(0, table.Constraints.Count);
 
             // ctor (string, DataColumn, DataColumn
-            ForeignKeyConstraint Constraint = new ForeignKeyConstraint("test", _ds.Tables[0].Columns[2], _ds.Tables[1].Columns[0]);
+            ForeignKeyConstraint Constraint = new ForeignKeyConstraint(
+                "test",
+                _ds.Tables[0].Columns[2],
+                _ds.Tables[1].Columns[0]
+            );
             table = _ds.Tables[1];
             table.Constraints.Add(Constraint);
 
@@ -92,7 +96,10 @@ namespace System.Data.Tests
             Assert.Equal(0, table.Constraints.Count);
 
             // ctor (string, DataColumn, DataColumn
-            ForeignKeyConstraint Constraint = new ForeignKeyConstraint(_ds.Tables[0].Columns[2], _ds.Tables[1].Columns[0]);
+            ForeignKeyConstraint Constraint = new ForeignKeyConstraint(
+                _ds.Tables[0].Columns[2],
+                _ds.Tables[1].Columns[0]
+            );
             table = _ds.Tables[1];
             table.Constraints.Add(Constraint);
 
@@ -196,11 +203,18 @@ namespace System.Data.Tests
 
             // Create a ForeingKeyConstraint Object using the constructor
             // ForeignKeyConstraint (string, string, string[], string[], AcceptRejectRule, Rule, Rule);
-            ForeignKeyConstraint fkc = new ForeignKeyConstraint("hello world", parentTableName, parentColumnNames, childColumnNames, AcceptRejectRule.Cascade, Rule.Cascade, Rule.Cascade);                                                                                                                            // Assert that the Constraint object does not belong to any table yet
+            ForeignKeyConstraint fkc = new ForeignKeyConstraint(
+                "hello world",
+                parentTableName,
+                parentColumnNames,
+                childColumnNames,
+                AcceptRejectRule.Cascade,
+                Rule.Cascade,
+                Rule.Cascade
+            ); // Assert that the Constraint object does not belong to any table yet
 
             Exception ex = Assert.ThrowsAny<Exception>(() => fkc.Table);
             Assert.True(ex is NullReferenceException || ex is InvalidOperationException);
-
 
             Constraint[] constraints = new Constraint[3];
             constraints[0] = new UniqueConstraint(column1);
@@ -212,16 +226,24 @@ namespace System.Data.Tests
 
             // Try to add columns with names which do not exist in the table
             parentColumnNames[2] = "noColumn";
-            ForeignKeyConstraint foreignKeyConstraint = new ForeignKeyConstraint("hello world", parentTableName, parentColumnNames, childColumnNames, AcceptRejectRule.Cascade, Rule.Cascade, Rule.Cascade);
+            ForeignKeyConstraint foreignKeyConstraint = new ForeignKeyConstraint(
+                "hello world",
+                parentTableName,
+                parentColumnNames,
+                childColumnNames,
+                AcceptRejectRule.Cascade,
+                Rule.Cascade,
+                Rule.Cascade
+            );
             constraints[0] = new UniqueConstraint(column1);
             constraints[1] = new UniqueConstraint(column2);
             constraints[2] = foreignKeyConstraint;
 
-            Exception ex2 = Assert.ThrowsAny<Exception>(() => table2.Constraints.AddRange(constraints));
+            Exception ex2 = Assert.ThrowsAny<Exception>(
+                () => table2.Constraints.AddRange(constraints)
+            );
             Assert.True(ex2 is ArgumentException || ex2 is InvalidConstraintException);
         }
-
-
 
         //  If Childs and parents are in same table
         [Fact]
@@ -233,8 +255,11 @@ namespace System.Data.Tests
             Table = _ds.Tables[1];
             Assert.Equal(0, Table.Constraints.Count);
 
-
-            ForeignKeyConstraint Constraint = new ForeignKeyConstraint("Test", _ds.Tables[0].Columns[0], _ds.Tables[0].Columns[2]);
+            ForeignKeyConstraint Constraint = new ForeignKeyConstraint(
+                "Test",
+                _ds.Tables[0].Columns[0],
+                _ds.Tables[0].Columns[2]
+            );
             Table = _ds.Tables[0];
             Table.Constraints.Add(Constraint);
 
@@ -261,10 +286,13 @@ namespace System.Data.Tests
             });
 
             //zero length collection
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                fkc = new ForeignKeyConstraint(new DataColumn[] { }, new DataColumn[] { });
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    fkc = new ForeignKeyConstraint(new DataColumn[] { }, new DataColumn[] { });
+                }
+            );
 
             //different datasets
             Assert.Throws<InvalidOperationException>(() =>
@@ -281,7 +309,10 @@ namespace System.Data.Tests
             // different tables.
             Assert.Throws<InvalidConstraintException>(() =>
             {
-                fkc = new ForeignKeyConstraint(new DataColumn[] { _ds.Tables[0].Columns[0], _ds.Tables[0].Columns[1] }, new DataColumn[] { localTable.Columns[1], _ds.Tables[1].Columns[0] });
+                fkc = new ForeignKeyConstraint(
+                    new DataColumn[] { _ds.Tables[0].Columns[0], _ds.Tables[0].Columns[1] },
+                    new DataColumn[] { localTable.Columns[1], _ds.Tables[1].Columns[0] }
+                );
             });
         }
 
@@ -293,40 +324,53 @@ namespace System.Data.Tests
             ForeignKeyConstraint fkc;
 
             //Columns must belong to a Table
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                fkc = new ForeignKeyConstraint(col, _ds.Tables[0].Columns[0]);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    fkc = new ForeignKeyConstraint(col, _ds.Tables[0].Columns[0]);
+                }
+            );
 
             //Columns must belong to the same table
             //InvalidConstraintException
 
-            DataColumn[] difTable = new DataColumn[] {_ds.Tables[0].Columns[2],
-                                       _ds.Tables[1].Columns[0]};
+            DataColumn[] difTable = new DataColumn[]
+            {
+                _ds.Tables[0].Columns[2],
+                _ds.Tables[1].Columns[0],
+            };
             Assert.Throws<InvalidConstraintException>(() =>
             {
-                fkc = new ForeignKeyConstraint(difTable, new DataColumn[] {
-                                 _ds.Tables[0].Columns[1],
-                                _ds.Tables[0].Columns[0]});
+                fkc = new ForeignKeyConstraint(
+                    difTable,
+                    new DataColumn[] { _ds.Tables[0].Columns[1], _ds.Tables[0].Columns[0] }
+                );
             });
 
             //parent columns and child columns should be the same length
             //ArgumentException
-            DataColumn[] twoCol =
-                new DataColumn[] { _ds.Tables[0].Columns[0], _ds.Tables[0].Columns[1] };
-
-
-            AssertExtensions.Throws<ArgumentException>(null, () =>
+            DataColumn[] twoCol = new DataColumn[]
             {
-                fkc = new ForeignKeyConstraint(twoCol,
-                    new DataColumn[] { _ds.Tables[0].Columns[0] });
-            });
+                _ds.Tables[0].Columns[0],
+                _ds.Tables[0].Columns[1],
+            };
+
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    fkc = new ForeignKeyConstraint(
+                        twoCol,
+                        new DataColumn[] { _ds.Tables[0].Columns[0] }
+                    );
+                }
+            );
 
             //InvalidOperation: Parent and child are the same column.
             Assert.Throws<InvalidOperationException>(() =>
             {
-                fkc = new ForeignKeyConstraint(_ds.Tables[0].Columns[0],
-                    _ds.Tables[0].Columns[0]);
+                fkc = new ForeignKeyConstraint(_ds.Tables[0].Columns[0], _ds.Tables[0].Columns[0]);
             });
         }
 
@@ -338,14 +382,15 @@ namespace System.Data.Tests
 
             ForeignKeyConstraint fkc = new ForeignKeyConstraint(
                 new DataColumn[] { tbl.Columns[0], tbl.Columns[1] },
-                new DataColumn[] { tbl2.Columns[0], tbl2.Columns[1] });
+                new DataColumn[] { tbl2.Columns[0], tbl2.Columns[1] }
+            );
 
             ForeignKeyConstraint fkc2 = new ForeignKeyConstraint(
                 new DataColumn[] { tbl.Columns[0], tbl.Columns[1] },
-                new DataColumn[] { tbl2.Columns[0], tbl2.Columns[1] });
+                new DataColumn[] { tbl2.Columns[0], tbl2.Columns[1] }
+            );
 
-            ForeignKeyConstraint fkcDiff =
-                new ForeignKeyConstraint(tbl.Columns[1], tbl.Columns[2]);
+            ForeignKeyConstraint fkcDiff = new ForeignKeyConstraint(tbl.Columns[1], tbl.Columns[2]);
 
             Assert.True(fkc.Equals(fkc2));
             Assert.True(fkc2.Equals(fkc));
@@ -359,26 +404,29 @@ namespace System.Data.Tests
         [Fact]
         public void ViolationTest()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataTable parent = _ds.Tables[0];
-                DataTable child = _ds.Tables[1];
-
-                parent.Rows.Add(new object[] { 1, 1, 1 });
-                child.Rows.Add(new object[] { 2, 2, 2 });
-
-                try
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
                 {
-                    child.Constraints.Add(new ForeignKeyConstraint(parent.Columns[0],
-                                              child.Columns[0])
-                                   );
+                    DataTable parent = _ds.Tables[0];
+                    DataTable child = _ds.Tables[1];
+
+                    parent.Rows.Add(new object[] { 1, 1, 1 });
+                    child.Rows.Add(new object[] { 2, 2, 2 });
+
+                    try
+                    {
+                        child.Constraints.Add(
+                            new ForeignKeyConstraint(parent.Columns[0], child.Columns[0])
+                        );
+                    }
+                    finally
+                    {
+                        // clear the rows for further testing
+                        _ds.Clear();
+                    }
                 }
-                finally
-                {
-                    // clear the rows for further testing
-                    _ds.Clear();
-                }
-            });
+            );
         }
 
         [Fact]
@@ -393,9 +441,9 @@ namespace System.Data.Tests
             try
             {
                 _ds.EnforceConstraints = false;
-                child.Constraints.Add(new ForeignKeyConstraint(parent.Columns[0],
-                                          child.Columns[0])
-                               );
+                child.Constraints.Add(
+                    new ForeignKeyConstraint(parent.Columns[0], child.Columns[0])
+                );
             }
             finally
             {

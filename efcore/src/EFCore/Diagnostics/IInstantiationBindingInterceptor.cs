@@ -20,5 +20,8 @@ public interface IInstantiationBindingInterceptor : ISingletonInterceptor
     /// <param name="interceptionData">Contextual information about the binding.</param>
     /// <param name="binding">The current binding.</param>
     /// <returns>A new binding.</returns>
-    InstantiationBinding ModifyBinding(InstantiationBindingInterceptionData interceptionData, InstantiationBinding binding);
+    InstantiationBinding ModifyBinding(
+        InstantiationBindingInterceptionData interceptionData,
+        InstantiationBinding binding
+    );
 }

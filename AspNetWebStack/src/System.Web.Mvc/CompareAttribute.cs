@@ -10,9 +10,15 @@ using System.Web.Mvc.Properties;
 
 namespace System.Web.Mvc
 {
-    [Obsolete("The recommended alternative is to use the System.ComponentModel.DataAnnotations.CompareAttribute type, which has the same functionality as this type.")]
+    [Obsolete(
+        "The recommended alternative is to use the System.ComponentModel.DataAnnotations.CompareAttribute type, which has the same functionality as this type."
+    )]
     [AttributeUsage(AttributeTargets.Property)]
-    [SuppressMessage("Microsoft.Performance", "CA1813:AvoidUnsealedAttributes", Justification = "This attribute is designed to be a base class for other attributes.")]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1813:AvoidUnsealedAttributes",
+        Justification = "This attribute is designed to be a base class for other attributes."
+    )]
     public class CompareAttribute : ValidationAttribute, IClientValidatable
     {
         public CompareAttribute(string otherProperty)
@@ -31,23 +37,48 @@ namespace System.Web.Mvc
 
         public override string FormatErrorMessage(string name)
         {
-            return String.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, OtherPropertyDisplayName ?? OtherProperty);
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                ErrorMessageString,
+                name,
+                OtherPropertyDisplayName ?? OtherProperty
+            );
         }
 
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult IsValid(
+            object value,
+            ValidationContext validationContext
+        )
         {
-            PropertyInfo otherPropertyInfo = validationContext.ObjectType.GetProperty(OtherProperty);
+            PropertyInfo otherPropertyInfo = validationContext.ObjectType.GetProperty(
+                OtherProperty
+            );
             if (otherPropertyInfo == null)
             {
-                return new ValidationResult(String.Format(CultureInfo.CurrentCulture, MvcResources.CompareAttribute_UnknownProperty, OtherProperty));
+                return new ValidationResult(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.CompareAttribute_UnknownProperty,
+                        OtherProperty
+                    )
+                );
             }
 
-            object otherPropertyValue = otherPropertyInfo.GetValue(validationContext.ObjectInstance, null);
+            object otherPropertyValue = otherPropertyInfo.GetValue(
+                validationContext.ObjectInstance,
+                null
+            );
             if (!Equals(value, otherPropertyValue))
             {
                 if (OtherPropertyDisplayName == null)
                 {
-                    OtherPropertyDisplayName = ModelMetadataProviders.Current.GetMetadataForProperty(() => validationContext.ObjectInstance, validationContext.ObjectType, OtherProperty).GetDisplayName();
+                    OtherPropertyDisplayName = ModelMetadataProviders
+                        .Current.GetMetadataForProperty(
+                            () => validationContext.ObjectInstance,
+                            validationContext.ObjectType,
+                            OtherProperty
+                        )
+                        .GetDisplayName();
                 }
                 return new ValidationResult(FormatErrorMessage(validationContext.DisplayName));
             }
@@ -63,16 +94,28 @@ namespace System.Web.Mvc
             return "*." + property;
         }
 
-        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+        public IEnumerable<ModelClientValidationRule> GetClientValidationRules(
+            ModelMetadata metadata,
+            ControllerContext context
+        )
         {
             if (metadata.ContainerType != null)
             {
                 if (OtherPropertyDisplayName == null)
                 {
-                    OtherPropertyDisplayName = ModelMetadataProviders.Current.GetMetadataForProperty(() => metadata.Model, metadata.ContainerType, OtherProperty).GetDisplayName();
+                    OtherPropertyDisplayName = ModelMetadataProviders
+                        .Current.GetMetadataForProperty(
+                            () => metadata.Model,
+                            metadata.ContainerType,
+                            OtherProperty
+                        )
+                        .GetDisplayName();
                 }
             }
-            yield return new ModelClientValidationEqualToRule(FormatErrorMessage(metadata.GetDisplayName()), FormatPropertyForClientValidation(OtherProperty));
+            yield return new ModelClientValidationEqualToRule(
+                FormatErrorMessage(metadata.GetDisplayName()),
+                FormatPropertyForClientValidation(OtherProperty)
+            );
         }
     }
 }

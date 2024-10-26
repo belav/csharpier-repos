@@ -2,13 +2,11 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Xunit;
 
 namespace Moq.Tests
 {
     public class Demo
-
     /* Unmerged change from project 'Moq.Tests(net6.0)'
     Before:
             private static string TALISKER = "Talisker";
@@ -45,8 +43,12 @@ namespace Moq.Tests
             var mock = new Mock<IWarehouse>();
 
             //setup - expectations
-            mock.Setup(x => x.HasInventory(It.IsAny<string>(), It.IsInRange(0, 100, Range.Inclusive))).Returns(false);
-            mock.Setup(x => x.Remove(It.IsAny<string>(), It.IsAny<int>())).Throws(new InvalidOperationException());
+            mock.Setup(x =>
+                    x.HasInventory(It.IsAny<string>(), It.IsInRange(0, 100, Range.Inclusive))
+                )
+                .Returns(false);
+            mock.Setup(x => x.Remove(It.IsAny<string>(), It.IsAny<int>()))
+                .Throws(new InvalidOperationException());
 
             //exercise
             order.Fill(mock.Object);
@@ -65,7 +67,10 @@ namespace Moq.Tests
             Assert.Null(presenter.SelectedOrder);
 
             // Finally raise the event with a specific arguments data
-            mockView.Raise(mv => mv.OrderSelected += null, new OrderEventArgs { Order = new Order("moq", 500) });
+            mockView.Raise(
+                mv => mv.OrderSelected += null,
+                new OrderEventArgs { Order = new Order("moq", 500) }
+            );
 
             // Now the presenter reacted to the event, and we have a selected order
             Assert.NotNull(presenter.SelectedOrder);
@@ -90,7 +95,6 @@ namespace Moq.Tests
             }
 
             public Order SelectedOrder { get; private set; }
-
 
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:

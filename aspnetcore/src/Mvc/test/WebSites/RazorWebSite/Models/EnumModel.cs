@@ -9,7 +9,7 @@ public enum ModelEnum
 {
     [Display(Name = "FirstOptionDisplay")]
     FirstOption,
-    SecondOptions
+    SecondOptions,
 }
 
 public class EnumModel

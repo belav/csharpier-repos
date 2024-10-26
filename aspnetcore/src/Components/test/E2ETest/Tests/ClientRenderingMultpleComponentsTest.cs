@@ -11,17 +11,17 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-public class ClientRenderingMultpleComponentsTest : E2ETest.Infrastructure.ServerTestBase<BasicTestAppServerSiteFixture<MultipleComponents>>
+public class ClientRenderingMultpleComponentsTest
+    : E2ETest.Infrastructure.ServerTestBase<BasicTestAppServerSiteFixture<MultipleComponents>>
 {
     private const string MarkerPattern = ".*?<!--Blazor:(.*?)-->.*?";
 
     public ClientRenderingMultpleComponentsTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<MultipleComponents> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     public DateTime LastLogTimeStamp { get; set; } = DateTime.MinValue;
 
@@ -43,7 +43,10 @@ public class ClientRenderingMultpleComponentsTest : E2ETest.Infrastructure.Serve
     {
         Navigate("/Client/multiple-components");
 
-        var greets = Browser.FindElements(By.CssSelector(".greet-wrapper .greet")).Select(e => e.Text).ToArray();
+        var greets = Browser
+            .FindElements(By.CssSelector(".greet-wrapper .greet"))
+            .Select(e => e.Text)
+            .ToArray();
 
         Assert.Equal(7, greets.Length); // 1 statically rendered + 5 prerendered + 1 server prerendered
         Assert.DoesNotContain("Hello Red fish", greets);
@@ -60,7 +63,10 @@ public class ClientRenderingMultpleComponentsTest : E2ETest.Infrastructure.Serve
         BeginInteractivity();
 
         Browser.Exists(By.CssSelector("h3.interactive"));
-        var updatedGreets = Browser.FindElements(By.CssSelector(".greet-wrapper .greet")).Select(e => e.Text).ToArray();
+        var updatedGreets = Browser
+            .FindElements(By.CssSelector(".greet-wrapper .greet"))
+            .Select(e => e.Text)
+            .ToArray();
         Assert.Equal(7, updatedGreets.Where(g => string.Equals("Hello Alfred", g)).Count());
         Assert.Equal(2, updatedGreets.Where(g => g == "Hello Red fish").Count());
         Assert.Equal(2, updatedGreets.Where(g => g == "Hello Blue fish").Count());
@@ -72,12 +78,22 @@ public class ClientRenderingMultpleComponentsTest : E2ETest.Infrastructure.Serve
     {
         content = content.Replace("\r\n", "");
         var matches = Regex.Matches(content, MarkerPattern);
-        var markers = matches.Select(s => JsonSerializer.Deserialize<ComponentMarker>(
-            s.Groups[1].Value,
-            WebAssemblyComponentSerializationSettings.JsonSerializationOptions));
+        var markers = matches.Select(s =>
+            JsonSerializer.Deserialize<ComponentMarker>(
+                s.Groups[1].Value,
+                WebAssemblyComponentSerializationSettings.JsonSerializationOptions
+            )
+        );
 
-        var prerenderMarkers = markers.Where(m => m.PrerenderId != null).GroupBy(p => p.PrerenderId).Select(g => (g.First(), g.Skip(1).First())).ToArray();
-        var nonPrerenderMarkers = markers.Where(m => m.PrerenderId == null).Select(g => (g, (ComponentMarker)default)).ToArray();
+        var prerenderMarkers = markers
+            .Where(m => m.PrerenderId != null)
+            .GroupBy(p => p.PrerenderId)
+            .Select(g => (g.First(), g.Skip(1).First()))
+            .ToArray();
+        var nonPrerenderMarkers = markers
+            .Where(m => m.PrerenderId == null)
+            .Select(g => (g, (ComponentMarker)default))
+            .ToArray();
 
         return prerenderMarkers.Concat(nonPrerenderMarkers).ToArray();
     }

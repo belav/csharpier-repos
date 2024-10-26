@@ -46,8 +46,7 @@ namespace Microsoft.CodeAnalysis.Emit
 
         public bool Equals(MethodImplKey other)
         {
-            return this.ImplementingMethod == other.ImplementingMethod &&
-                this.Index == other.Index;
+            return this.ImplementingMethod == other.ImplementingMethod && this.Index == other.Index;
         }
 
         public override int GetHashCode()
@@ -62,12 +61,15 @@ namespace Microsoft.CodeAnalysis.Emit
     /// </summary>
     public sealed class EmitBaseline
     {
-        private static readonly ImmutableArray<int> s_emptyTableSizes = ImmutableArray.Create(new int[MetadataTokens.TableCount]);
+        private static readonly ImmutableArray<int> s_emptyTableSizes = ImmutableArray.Create(
+            new int[MetadataTokens.TableCount]
+        );
 
         internal sealed class MetadataSymbols(
             SynthesizedTypeMaps synthesizedTypes,
             object metadataDecoder,
-            ImmutableDictionary<AssemblyIdentity, AssemblyIdentity> assemblyReferenceIdentityMap)
+            ImmutableDictionary<AssemblyIdentity, AssemblyIdentity> assemblyReferenceIdentityMap
+        )
         {
             public readonly SynthesizedTypeMaps SynthesizedTypes = synthesizedTypes;
             public readonly object MetadataDecoder = metadataDecoder;
@@ -76,26 +78,37 @@ namespace Microsoft.CodeAnalysis.Emit
             /// A map of the assembly identities of the baseline compilation to the identities of the original metadata AssemblyRefs.
             /// Only includes identities that differ between these two.
             /// </summary>
-            public readonly ImmutableDictionary<AssemblyIdentity, AssemblyIdentity> AssemblyReferenceIdentityMap = assemblyReferenceIdentityMap;
+            public readonly ImmutableDictionary<
+                AssemblyIdentity,
+                AssemblyIdentity
+            > AssemblyReferenceIdentityMap = assemblyReferenceIdentityMap;
         }
-
-        [Obsolete("This overload is no longer supported", error: true)]
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public static EmitBaseline CreateInitialBaseline(ModuleMetadata module, Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> debugInformationProvider)
-            => throw new NotSupportedException();
 
         [Obsolete("This overload is no longer supported", error: true)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public static EmitBaseline CreateInitialBaseline(
             ModuleMetadata module,
-            Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> debugInformationProvider,
+            Func<
+                MethodDefinitionHandle,
+                EditAndContinueMethodDebugInformation
+            > debugInformationProvider
+        ) => throw new NotSupportedException();
+
+        [Obsolete("This overload is no longer supported", error: true)]
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static EmitBaseline CreateInitialBaseline(
+            ModuleMetadata module,
+            Func<
+                MethodDefinitionHandle,
+                EditAndContinueMethodDebugInformation
+            > debugInformationProvider,
             Func<MethodDefinitionHandle, StandaloneSignatureHandle> localSignatureProvider,
-            bool hasPortableDebugInformation)
-            => throw new NotSupportedException();
+            bool hasPortableDebugInformation
+        ) => throw new NotSupportedException();
 
         /// <summary>
         /// Creates an <see cref="EmitBaseline"/> from the metadata of the module before editing
-        /// and from a function that maps from a method to an array of local names. 
+        /// and from a function that maps from a method to an array of local names.
         /// </summary>
         /// <param name="compilation">Initial <see cref="Compilation"/>.</param>
         /// <param name="module">The metadata of the module before editing.</param>
@@ -116,15 +129,15 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <remarks>
         /// Only the initial baseline is created using this method; subsequent baselines are created
         /// automatically when emitting the differences in subsequent compilations.
-        /// 
+        ///
         /// When an active method (one for which a frame is allocated on a stack) is updated the values of its local variables need to be preserved.
-        /// The mapping of local variable names to their slots in the frame is not included in the metadata and thus needs to be provided by 
+        /// The mapping of local variable names to their slots in the frame is not included in the metadata and thus needs to be provided by
         /// <paramref name="debugInformationProvider"/>.
-        /// 
+        ///
         /// The <paramref name="debugInformationProvider"/> is only needed for the initial generation. The mapping for the subsequent generations
         /// is carried over through <see cref="EmitBaseline"/>. The compiler assigns slots to named local variables (including named temporary variables)
-        /// it the order in which they appear in the source code. This property allows the compiler to reconstruct the local variable mapping 
-        /// for the initial generation. A subsequent generation may add a new variable in between two variables of the previous generation. 
+        /// it the order in which they appear in the source code. This property allows the compiler to reconstruct the local variable mapping
+        /// for the initial generation. A subsequent generation may add a new variable in between two variables of the previous generation.
         /// Since the slots of the previous generation variables need to be preserved the only option is to add these new variables to the end.
         /// The slot ordering thus no longer matches the syntax ordering. It is therefore necessary to pass <see cref="EmitDifferenceResult.Baseline"/>
         /// to the next generation (rather than e.g. create new <see cref="EmitBaseline"/>s from scratch based on metadata produced by subsequent compilations).
@@ -138,9 +151,13 @@ namespace Microsoft.CodeAnalysis.Emit
         public static EmitBaseline CreateInitialBaseline(
             Compilation compilation,
             ModuleMetadata module,
-            Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> debugInformationProvider,
+            Func<
+                MethodDefinitionHandle,
+                EditAndContinueMethodDebugInformation
+            > debugInformationProvider,
             Func<MethodDefinitionHandle, StandaloneSignatureHandle> localSignatureProvider,
-            bool hasPortableDebugInformation)
+            bool hasPortableDebugInformation
+        )
         {
             if (compilation == null)
             {
@@ -190,14 +207,21 @@ namespace Microsoft.CodeAnalysis.Emit
                 userStringStreamLengthAdded: 0,
                 guidStreamLengthAdded: 0,
                 synthesizedTypes: SynthesizedTypeMaps.Empty,
-                synthesizedMembers: ImmutableSegmentedDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>>.Empty,
-                deletedMembers: ImmutableSegmentedDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>>.Empty,
+                synthesizedMembers: ImmutableSegmentedDictionary<
+                    ISymbolInternal,
+                    ImmutableArray<ISymbolInternal>
+                >.Empty,
+                deletedMembers: ImmutableSegmentedDictionary<
+                    ISymbolInternal,
+                    ImmutableArray<ISymbolInternal>
+                >.Empty,
                 methodsAddedOrChanged: new Dictionary<int, AddedOrChangedMethodInfo>(),
                 debugInformationProvider: debugInformationProvider,
                 localSignatureProvider: localSignatureProvider,
                 typeToEventMap: CalculateTypeEventMap(reader),
                 typeToPropertyMap: CalculateTypePropertyMap(reader),
-                methodImpls: CalculateMethodImpls(reader));
+                methodImpls: CalculateMethodImpls(reader)
+            );
         }
 
         internal EmitBaseline InitialBaseline { get; }
@@ -245,7 +269,10 @@ namespace Microsoft.CodeAnalysis.Emit
         /// <summary>
         /// Maps a parent handle to a non-empty ordered array of row ids of custom attributes added since the initial baseline.
         /// </summary>
-        internal readonly IReadOnlyDictionary<EntityHandle, ImmutableArray<int>> CustomAttributesAdded;
+        internal readonly IReadOnlyDictionary<
+            EntityHandle,
+            ImmutableArray<int>
+        > CustomAttributesAdded;
 
         internal readonly ImmutableArray<int> TableEntriesAdded;
 
@@ -266,7 +293,10 @@ namespace Microsoft.CodeAnalysis.Emit
         /// The function shall return an empty <see cref="EditAndContinueMethodDebugInformation"/> if the method that corresponds to the specified handle
         /// has no debug information.
         /// </summary>
-        internal readonly Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> DebugInformationProvider;
+        internal readonly Func<
+            MethodDefinitionHandle,
+            EditAndContinueMethodDebugInformation
+        > DebugInformationProvider;
 
         /// <summary>
         /// A function that for a method handle returns the signature of its local variables.
@@ -275,15 +305,24 @@ namespace Microsoft.CodeAnalysis.Emit
         /// The function shall return a nil <see cref="StandaloneSignatureHandle"/> if the method that corresponds to the specified handle
         /// has no local variables.
         /// </summary>
-        internal readonly Func<MethodDefinitionHandle, StandaloneSignatureHandle> LocalSignatureProvider;
+        internal readonly Func<
+            MethodDefinitionHandle,
+            StandaloneSignatureHandle
+        > LocalSignatureProvider;
 
         internal readonly ImmutableArray<int> TableSizes;
         internal readonly IReadOnlyDictionary<int, int> TypeToEventMap;
         internal readonly IReadOnlyDictionary<int, int> TypeToPropertyMap;
         internal readonly IReadOnlyDictionary<MethodImplKey, int> MethodImpls;
         private readonly SynthesizedTypeMaps _synthesizedTypes;
-        internal readonly IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> SynthesizedMembers;
-        internal readonly IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> DeletedMembers;
+        internal readonly IReadOnlyDictionary<
+            ISymbolInternal,
+            ImmutableArray<ISymbolInternal>
+        > SynthesizedMembers;
+        internal readonly IReadOnlyDictionary<
+            ISymbolInternal,
+            ImmutableArray<ISymbolInternal>
+        > DeletedMembers;
 
         private EmitBaseline(
             EmitBaseline? initialBaseline,
@@ -311,14 +350,21 @@ namespace Microsoft.CodeAnalysis.Emit
             int userStringStreamLengthAdded,
             int guidStreamLengthAdded,
             SynthesizedTypeMaps synthesizedTypes,
-            IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> synthesizedMembers,
+            IReadOnlyDictionary<
+                ISymbolInternal,
+                ImmutableArray<ISymbolInternal>
+            > synthesizedMembers,
             IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> deletedMembers,
             IReadOnlyDictionary<int, AddedOrChangedMethodInfo> methodsAddedOrChanged,
-            Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> debugInformationProvider,
+            Func<
+                MethodDefinitionHandle,
+                EditAndContinueMethodDebugInformation
+            > debugInformationProvider,
             Func<MethodDefinitionHandle, StandaloneSignatureHandle> localSignatureProvider,
             IReadOnlyDictionary<int, int> typeToEventMap,
             IReadOnlyDictionary<int, int> typeToPropertyMap,
-            IReadOnlyDictionary<MethodImplKey, int> methodImpls)
+            IReadOnlyDictionary<MethodImplKey, int> methodImpls
+        )
         {
             Debug.Assert(module != null);
             Debug.Assert(ordinal is 0 == (encId == default));
@@ -410,16 +456,35 @@ namespace Microsoft.CodeAnalysis.Emit
             int userStringStreamLengthAdded,
             int guidStreamLengthAdded,
             SynthesizedTypeMaps synthesizedTypes,
-            IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> synthesizedMembers,
+            IReadOnlyDictionary<
+                ISymbolInternal,
+                ImmutableArray<ISymbolInternal>
+            > synthesizedMembers,
             IReadOnlyDictionary<ISymbolInternal, ImmutableArray<ISymbolInternal>> deletedMembers,
             IReadOnlyDictionary<int, AddedOrChangedMethodInfo> addedOrChangedMethods,
-            Func<MethodDefinitionHandle, EditAndContinueMethodDebugInformation> debugInformationProvider,
-            Func<MethodDefinitionHandle, StandaloneSignatureHandle> localSignatureProvider)
+            Func<
+                MethodDefinitionHandle,
+                EditAndContinueMethodDebugInformation
+            > debugInformationProvider,
+            Func<MethodDefinitionHandle, StandaloneSignatureHandle> localSignatureProvider
+        )
         {
-            Debug.Assert(synthesizedTypes.AnonymousTypes.Count >= _synthesizedTypes.AnonymousTypes.Count);
-            Debug.Assert(synthesizedTypes.AnonymousDelegates.Count >= _synthesizedTypes.AnonymousDelegates.Count);
-            Debug.Assert(synthesizedTypes.AnonymousDelegatesWithIndexedNames.Count >= _synthesizedTypes.AnonymousDelegatesWithIndexedNames.Count);
-            Debug.Assert(customAttributesAdded.All(entry => !entry.Value.IsDefaultOrEmpty && entry.Value.IsSorted()));
+            Debug.Assert(
+                synthesizedTypes.AnonymousTypes.Count >= _synthesizedTypes.AnonymousTypes.Count
+            );
+            Debug.Assert(
+                synthesizedTypes.AnonymousDelegates.Count
+                    >= _synthesizedTypes.AnonymousDelegates.Count
+            );
+            Debug.Assert(
+                synthesizedTypes.AnonymousDelegatesWithIndexedNames.Count
+                    >= _synthesizedTypes.AnonymousDelegatesWithIndexedNames.Count
+            );
+            Debug.Assert(
+                customAttributesAdded.All(entry =>
+                    !entry.Value.IsDefaultOrEmpty && entry.Value.IsSorted()
+                )
+            );
 
             return new EmitBaseline(
                 InitialBaseline,
@@ -454,7 +519,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 localSignatureProvider: localSignatureProvider,
                 typeToEventMap: TypeToEventMap,
                 typeToPropertyMap: TypeToPropertyMap,
-                methodImpls: MethodImpls);
+                methodImpls: MethodImpls
+            );
         }
 
         internal SynthesizedTypeMaps SynthesizedTypes
@@ -471,22 +537,24 @@ namespace Microsoft.CodeAnalysis.Emit
             }
         }
 
-        internal MetadataReader MetadataReader
-            => OriginalMetadata.MetadataReader;
+        internal MetadataReader MetadataReader => OriginalMetadata.MetadataReader;
 
-        internal int BlobStreamLength
-            => BlobStreamLengthAdded + MetadataReader.GetHeapSize(HeapIndex.Blob);
+        internal int BlobStreamLength =>
+            BlobStreamLengthAdded + MetadataReader.GetHeapSize(HeapIndex.Blob);
 
-        internal int StringStreamLength
-            => StringStreamLengthAdded + MetadataReader.GetHeapSize(HeapIndex.String);
+        internal int StringStreamLength =>
+            StringStreamLengthAdded + MetadataReader.GetHeapSize(HeapIndex.String);
 
-        internal int UserStringStreamLength
-            => UserStringStreamLengthAdded + MetadataReader.GetHeapSize(HeapIndex.UserString);
+        internal int UserStringStreamLength =>
+            UserStringStreamLengthAdded + MetadataReader.GetHeapSize(HeapIndex.UserString);
 
-        internal int GuidStreamLength
-            => GuidStreamLengthAdded + MetadataReader.GetHeapSize(HeapIndex.Guid);
+        internal int GuidStreamLength =>
+            GuidStreamLengthAdded + MetadataReader.GetHeapSize(HeapIndex.Guid);
 
-        private static ImmutableArray<int> CalculateTableSizes(MetadataReader reader, ImmutableArray<int> delta)
+        private static ImmutableArray<int> CalculateTableSizes(
+            MetadataReader reader,
+            ImmutableArray<int> delta
+        )
         {
             var sizes = new int[MetadataTokens.TableCount];
 
@@ -534,7 +602,9 @@ namespace Microsoft.CodeAnalysis.Emit
             int n = reader.GetTableRowCount(TableIndex.MethodImpl);
             for (int row = 1; row <= n; row++)
             {
-                var methodImpl = reader.GetMethodImplementation(MetadataTokens.MethodImplementationHandle(row));
+                var methodImpl = reader.GetMethodImplementation(
+                    MetadataTokens.MethodImplementationHandle(row)
+                );
                 // Hold on to the implementing method def but use a simple
                 // index for the implemented method ref token. (We do not map
                 // member refs currently, and since we don't allow changes to
@@ -578,7 +648,9 @@ namespace Microsoft.CodeAnalysis.Emit
         internal int GetNextAnonymousDelegateIndex()
         {
             int nextIndex = 0;
-            foreach (var (typeKey, typeValues) in SynthesizedTypes.AnonymousDelegatesWithIndexedNames)
+            foreach (
+                var (typeKey, typeValues) in SynthesizedTypes.AnonymousDelegatesWithIndexedNames
+            )
             {
                 foreach (var typeValue in typeValues)
                 {

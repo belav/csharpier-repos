@@ -27,38 +27,79 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         public abstract string LocalizedErrorMessage { get; }
         public abstract TextSpan TriggerSpan { get; }
         public abstract ImmutableArray<VSTypeScriptDocumentSpan> DefinitionLocations { get; }
-        public abstract Task<VSTypeScriptInlineRenameLocationSet> FindRenameLocationsAsync(bool renameInStrings, bool renameInComments, CancellationToken cancellationToken);
-        public abstract TextSpan? GetConflictEditSpan(VSTypeScriptInlineRenameLocationWrapper location, string replacementText, CancellationToken cancellationToken);
+        public abstract Task<VSTypeScriptInlineRenameLocationSet> FindRenameLocationsAsync(
+            bool renameInStrings,
+            bool renameInComments,
+            CancellationToken cancellationToken
+        );
+        public abstract TextSpan? GetConflictEditSpan(
+            VSTypeScriptInlineRenameLocationWrapper location,
+            string replacementText,
+            CancellationToken cancellationToken
+        );
         public abstract string GetFinalSymbolName(string replacementText);
-        public abstract TextSpan GetReferenceEditSpan(VSTypeScriptInlineRenameLocationWrapper location, CancellationToken cancellationToken);
+        public abstract TextSpan GetReferenceEditSpan(
+            VSTypeScriptInlineRenameLocationWrapper location,
+            CancellationToken cancellationToken
+        );
 
-        bool IInlineRenameInfo.MustRenameOverloads
-            => ForceRenameOverloads;
+        bool IInlineRenameInfo.MustRenameOverloads => ForceRenameOverloads;
 
-        Glyph IInlineRenameInfo.Glyph
-            => VSTypeScriptGlyphHelpers.ConvertTo(Glyph);
+        Glyph IInlineRenameInfo.Glyph => VSTypeScriptGlyphHelpers.ConvertTo(Glyph);
 
-        ImmutableArray<DocumentSpan> IInlineRenameInfo.DefinitionLocations
-            => DefinitionLocations.SelectAsArray(l => new DocumentSpan(l.Document, l.SourceSpan));
+        ImmutableArray<DocumentSpan> IInlineRenameInfo.DefinitionLocations =>
+            DefinitionLocations.SelectAsArray(l => new DocumentSpan(l.Document, l.SourceSpan));
 
-        async Task<IInlineRenameLocationSet> IInlineRenameInfo.FindRenameLocationsAsync(SymbolRenameOptions options, CancellationToken cancellationToken)
-            => await FindRenameLocationsAsync(options.RenameInStrings, options.RenameInComments, cancellationToken).ConfigureAwait(false);
+        async Task<IInlineRenameLocationSet> IInlineRenameInfo.FindRenameLocationsAsync(
+            SymbolRenameOptions options,
+            CancellationToken cancellationToken
+        ) =>
+            await FindRenameLocationsAsync(
+                    options.RenameInStrings,
+                    options.RenameInComments,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-        TextSpan? IInlineRenameInfo.GetConflictEditSpan(InlineRenameLocation location, string triggerText, string replacementText, CancellationToken cancellationToken)
-            => GetConflictEditSpan(new VSTypeScriptInlineRenameLocationWrapper(
-                new InlineRenameLocation(location.Document, location.TextSpan)), replacementText, cancellationToken);
+        TextSpan? IInlineRenameInfo.GetConflictEditSpan(
+            InlineRenameLocation location,
+            string triggerText,
+            string replacementText,
+            CancellationToken cancellationToken
+        ) =>
+            GetConflictEditSpan(
+                new VSTypeScriptInlineRenameLocationWrapper(
+                    new InlineRenameLocation(location.Document, location.TextSpan)
+                ),
+                replacementText,
+                cancellationToken
+            );
 
-        TextSpan IInlineRenameInfo.GetReferenceEditSpan(InlineRenameLocation location, string triggerText, CancellationToken cancellationToken)
-            => GetReferenceEditSpan(new VSTypeScriptInlineRenameLocationWrapper(
-                new InlineRenameLocation(location.Document, location.TextSpan)), cancellationToken);
+        TextSpan IInlineRenameInfo.GetReferenceEditSpan(
+            InlineRenameLocation location,
+            string triggerText,
+            CancellationToken cancellationToken
+        ) =>
+            GetReferenceEditSpan(
+                new VSTypeScriptInlineRenameLocationWrapper(
+                    new InlineRenameLocation(location.Document, location.TextSpan)
+                ),
+                cancellationToken
+            );
 
-        bool IInlineRenameInfo.TryOnAfterGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText)
-            => true;
+        bool IInlineRenameInfo.TryOnAfterGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            string replacementText
+        ) => true;
 
-        bool IInlineRenameInfo.TryOnBeforeGlobalSymbolRenamed(Workspace workspace, IEnumerable<DocumentId> changedDocumentIDs, string replacementText)
-            => true;
+        bool IInlineRenameInfo.TryOnBeforeGlobalSymbolRenamed(
+            Workspace workspace,
+            IEnumerable<DocumentId> changedDocumentIDs,
+            string replacementText
+        ) => true;
 
-        public InlineRenameFileRenameInfo GetFileRenameInfo()
-            => InlineRenameFileRenameInfo.NotAllowed;
+        public InlineRenameFileRenameInfo GetFileRenameInfo() =>
+            InlineRenameFileRenameInfo.NotAllowed;
     }
 }

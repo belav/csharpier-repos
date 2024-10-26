@@ -4,19 +4,19 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Description;
     using System.Configuration;
     using System.Globalization;
+    using System.IO;
     using System.Net.Security;
+    using System.Runtime.Remoting.Messaging;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
-    using System.Runtime.Remoting.Messaging;
     using System.Xml;
-    using System.Collections.ObjectModel;
-    using System.Collections.Generic;
-    using System.IO;
 
     public sealed partial class SecurityElement : SecurityElementBase
     {
@@ -28,7 +28,10 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.SecureConversationBootstrap)]
         public SecurityElementBase SecureConversationBootstrap
         {
-            get { return (SecurityElementBase)base[ConfigurationStrings.SecureConversationBootstrap]; }
+            get
+            {
+                return (SecurityElementBase)base[ConfigurationStrings.SecureConversationBootstrap];
+            }
         }
 
         public override void CopyFrom(ServiceModelExtensionElement from)
@@ -38,7 +41,13 @@ namespace System.ServiceModel.Configuration
             SecurityElement source = (SecurityElement)from;
 
 #pragma warning suppress 56506 //Microsoft; base.CopyFrom() checks for 'from' being null
-            if (PropertyValueOrigin.Default != source.ElementInformation.Properties[ConfigurationStrings.SecureConversationBootstrap].ValueOrigin)
+            if (
+                PropertyValueOrigin.Default
+                != source
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.SecureConversationBootstrap]
+                    .ValueOrigin
+            )
                 this.SecureConversationBootstrap.CopyFrom(source.SecureConversationBootstrap);
         }
 
@@ -48,11 +57,26 @@ namespace System.ServiceModel.Configuration
             if (this.AuthenticationMode == AuthenticationMode.SecureConversation)
             {
                 if (this.SecureConversationBootstrap == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecureConversationNeedsBootstrapSecurity)));
-                if (this.SecureConversationBootstrap.AuthenticationMode == AuthenticationMode.SecureConversation)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecureConversationBootstrapCannotUseSecureConversation)));
-                SecurityBindingElement bootstrapSecurity = (SecurityBindingElement)this.SecureConversationBootstrap.CreateBindingElement(createTemplateOnly);
-                result = SecurityBindingElement.CreateSecureConversationBindingElement(bootstrapSecurity, this.RequireSecurityContextCancellation);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecureConversationNeedsBootstrapSecurity)
+                        )
+                    );
+                if (
+                    this.SecureConversationBootstrap.AuthenticationMode
+                    == AuthenticationMode.SecureConversation
+                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SecureConversationBootstrapCannotUseSecureConversation)
+                        )
+                    );
+                SecurityBindingElement bootstrapSecurity = (SecurityBindingElement)
+                    this.SecureConversationBootstrap.CreateBindingElement(createTemplateOnly);
+                result = SecurityBindingElement.CreateSecureConversationBindingElement(
+                    bootstrapSecurity,
+                    this.RequireSecurityContextCancellation
+                );
             }
             else
             {
@@ -64,31 +88,45 @@ namespace System.ServiceModel.Configuration
             return result;
         }
 
-        protected override void AddBindingTemplates(Dictionary<AuthenticationMode, SecurityBindingElement> bindingTemplates)
+        protected override void AddBindingTemplates(
+            Dictionary<AuthenticationMode, SecurityBindingElement> bindingTemplates
+        )
         {
             base.AddBindingTemplates(bindingTemplates);
             AddBindingTemplate(bindingTemplates, AuthenticationMode.SecureConversation);
         }
-   
-        void InitializeSecureConversationParameters(SecureConversationSecurityTokenParameters sc, bool initializeNestedBindings)
+
+        void InitializeSecureConversationParameters(
+            SecureConversationSecurityTokenParameters sc,
+            bool initializeNestedBindings
+        )
         {
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireSecurityContextCancellation, sc.RequireCancellation);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.RequireSecurityContextCancellation,
+                sc.RequireCancellation
+            );
             this.CanRenewSecurityContextToken = sc.CanRenewSession; // can't use default value optimization here because ApplyConfiguration relies on the runtime default instead, which is the opposite of the config default
             if (sc.BootstrapSecurityBindingElement != null)
             {
-                this.SecureConversationBootstrap.InitializeFrom(sc.BootstrapSecurityBindingElement, initializeNestedBindings);
+                this.SecureConversationBootstrap.InitializeFrom(
+                    sc.BootstrapSecurityBindingElement,
+                    initializeNestedBindings
+                );
             }
         }
 
-        protected override void InitializeNestedTokenParameterSettings(SecurityTokenParameters sp, bool initializeNestedBindings)
+        protected override void InitializeNestedTokenParameterSettings(
+            SecurityTokenParameters sp,
+            bool initializeNestedBindings
+        )
         {
             if (sp is SecureConversationSecurityTokenParameters)
-                this.InitializeSecureConversationParameters((SecureConversationSecurityTokenParameters)sp, initializeNestedBindings);
+                this.InitializeSecureConversationParameters(
+                    (SecureConversationSecurityTokenParameters)sp,
+                    initializeNestedBindings
+                );
             else
                 base.InitializeNestedTokenParameterSettings(sp, initializeNestedBindings);
         }
     }
 }
-
-
-

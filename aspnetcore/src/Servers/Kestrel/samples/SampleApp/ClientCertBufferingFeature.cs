@@ -19,21 +19,29 @@ internal static class ClientCertBufferingExtensions
     // InvalidOperationException: Received data during renegotiation.
     public static IApplicationBuilder UseClientCertBuffering(this IApplicationBuilder builder)
     {
-        return builder.Use((context, next) =>
-        {
-            var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
-            var bodyFeature = context.Features.Get<IHttpRequestBodyDetectionFeature>();
-            var connectionItems = context.Features.Get<IConnectionItemsFeature>();
-
-            // Look for TLS connections that don't already have a client cert, and requests that could have a body.
-            if (tlsFeature != null && tlsFeature.ClientCertificate == null && bodyFeature.CanHaveBody
-            && !connectionItems.Items.TryGetValue("tls.clientcert.negotiated", out var _))
+        return builder.Use(
+            (context, next) =>
             {
-                context.Features.Set<ITlsConnectionFeature>(new ClientCertBufferingFeature(tlsFeature, context));
-            }
+                var tlsFeature = context.Features.Get<ITlsConnectionFeature>();
+                var bodyFeature = context.Features.Get<IHttpRequestBodyDetectionFeature>();
+                var connectionItems = context.Features.Get<IConnectionItemsFeature>();
 
-            return next(context);
-        });
+                // Look for TLS connections that don't already have a client cert, and requests that could have a body.
+                if (
+                    tlsFeature != null
+                    && tlsFeature.ClientCertificate == null
+                    && bodyFeature.CanHaveBody
+                    && !connectionItems.Items.TryGetValue("tls.clientcert.negotiated", out var _)
+                )
+                {
+                    context.Features.Set<ITlsConnectionFeature>(
+                        new ClientCertBufferingFeature(tlsFeature, context)
+                    );
+                }
+
+                return next(context);
+            }
+        );
     }
 }
 
@@ -54,7 +62,9 @@ internal class ClientCertBufferingFeature : ITlsConnectionFeature
         set => _tlsFeature.ClientCertificate = value;
     }
 
-    public async Task<X509Certificate2> GetClientCertificateAsync(CancellationToken cancellationToken)
+    public async Task<X509Certificate2> GetClientCertificateAsync(
+        CancellationToken cancellationToken
+    )
     {
         // Note: This doesn't set its own size limit for the buffering or draining, it relies on the server's
         // 30mb default request size limit.

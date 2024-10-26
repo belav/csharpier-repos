@@ -10,15 +10,19 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Tagging
 {
     internal partial class TaggerEventSources
     {
-        private class DocumentActiveContextChangedEventSource(ITextBuffer subjectBuffer) : AbstractWorkspaceTrackingTaggerEventSource(subjectBuffer)
+        private class DocumentActiveContextChangedEventSource(ITextBuffer subjectBuffer)
+            : AbstractWorkspaceTrackingTaggerEventSource(subjectBuffer)
         {
-            protected override void ConnectToWorkspace(Workspace workspace)
-                => workspace.DocumentActiveContextChanged += OnDocumentActiveContextChanged;
+            protected override void ConnectToWorkspace(Workspace workspace) =>
+                workspace.DocumentActiveContextChanged += OnDocumentActiveContextChanged;
 
-            protected override void DisconnectFromWorkspace(Workspace workspace)
-                => workspace.DocumentActiveContextChanged -= OnDocumentActiveContextChanged;
+            protected override void DisconnectFromWorkspace(Workspace workspace) =>
+                workspace.DocumentActiveContextChanged -= OnDocumentActiveContextChanged;
 
-            private void OnDocumentActiveContextChanged(object? sender, DocumentActiveContextChangedEventArgs e)
+            private void OnDocumentActiveContextChanged(
+                object? sender,
+                DocumentActiveContextChangedEventArgs e
+            )
             {
                 var document = SubjectBuffer.AsTextContainer().GetOpenDocumentInCurrentContext();
 

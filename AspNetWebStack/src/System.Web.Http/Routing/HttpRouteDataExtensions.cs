@@ -9,7 +9,7 @@ namespace System.Web.Http.Routing
     public static class HttpRouteDataExtensions
     {
         /// <summary>
-        /// Remove all optional parameters that do not have a value from the route data. 
+        /// Remove all optional parameters that do not have a value from the route data.
         /// </summary>
         /// <param name="routeData">route data, to be mutated in-place.</param>
         public static void RemoveOptionalRoutingParameters(this IHttpRouteData routeData)
@@ -26,7 +26,9 @@ namespace System.Web.Http.Routing
             }
         }
 
-        private static void RemoveOptionalRoutingParameters(IDictionary<string, object> routeValueDictionary)
+        private static void RemoveOptionalRoutingParameters(
+            IDictionary<string, object> routeValueDictionary
+        )
         {
             Contract.Assert(routeValueDictionary != null);
 
@@ -52,7 +54,7 @@ namespace System.Web.Http.Routing
         }
 
         /// <summary>
-        /// If a route is really a union of other routes, return the set of sub routes. 
+        /// If a route is really a union of other routes, return the set of sub routes.
         /// </summary>
         /// <param name="routeData">a union route data</param>
         /// <returns>set of sub soutes contained within this route</returns>
@@ -74,14 +76,14 @@ namespace System.Web.Http.Routing
             Contract.Assert(routeData != null);
             IEnumerable<IHttpRouteData> subRoutes = routeData.GetSubRoutes();
 
-            // Possible this is being called on a subroute. This can happen after ElevateRouteData. Just chain. 
+            // Possible this is being called on a subroute. This can happen after ElevateRouteData. Just chain.
             if (subRoutes == null)
             {
                 if (routeData.Route == null)
                 {
                     // If the matched route is a System.Web.Routing.Route (in web host) then routeData.Route
                     // will be null. Normally a System.Web.Routing.Route match would go through an MVC handler
-                    // but we can get here through HttpRoutingDispatcher in WebAPI batching. If that happens, 
+                    // but we can get here through HttpRoutingDispatcher in WebAPI batching. If that happens,
                     // then obviously it's not a WebAPI attribute routing match.
                     return null;
                 }

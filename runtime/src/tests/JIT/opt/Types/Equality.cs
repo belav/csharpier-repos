@@ -6,9 +6,9 @@
 using System;
 using Xunit;
 
-struct Wrap1<T> {}
+struct Wrap1<T> { }
 
-struct Wrap2<T> {}
+struct Wrap2<T> { }
 
 public class EqualityTests
 {
@@ -42,12 +42,12 @@ public class EqualityTests
         return (typeof(T) == typeof(string[]));
     }
 
-    static bool IsWrap1<T,U>()
+    static bool IsWrap1<T, U>()
     {
         return (typeof(U) == typeof(Wrap1<T>));
     }
 
-    static bool IsWrap1<T,U>(U u)
+    static bool IsWrap1<T, U>(U u)
     {
         return (u.GetType() == typeof(Wrap1<T>));
     }

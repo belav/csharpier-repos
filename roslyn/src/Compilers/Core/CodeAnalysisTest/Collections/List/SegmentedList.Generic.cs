@@ -50,7 +50,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override bool IsReadOnly => true;
 
-        protected override bool Enumerator_Current_UndefinedOperation_Throws_On_Empty => RuntimeUtilities.IsCoreClr8OrHigherRuntime;
+        protected override bool Enumerator_Current_UndefinedOperation_Throws_On_Empty =>
+            RuntimeUtilities.IsCoreClr8OrHigherRuntime;
 
         protected override IList<string> GenericIListFactory(int setLength)
         {
@@ -62,7 +63,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return GenericListFactory().AsReadOnly();
         }
 
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new SegmentedList<ModifyEnumerable>();
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new SegmentedList<ModifyEnumerable>();
     }
 
     public class SegmentedList_Generic_Tests_int_ReadOnly : SegmentedList_Generic_Tests<int>
@@ -75,7 +78,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         protected override bool IsReadOnly => true;
 
-        protected override bool Enumerator_Current_UndefinedOperation_Throws_On_Empty => RuntimeUtilities.IsCoreClr8OrHigherRuntime;
+        protected override bool Enumerator_Current_UndefinedOperation_Throws_On_Empty =>
+            RuntimeUtilities.IsCoreClr8OrHigherRuntime;
 
         protected override IList<int> GenericIListFactory(int setLength)
         {
@@ -87,6 +91,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return GenericListFactory().AsReadOnly();
         }
 
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new SegmentedList<ModifyEnumerable>();
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new SegmentedList<ModifyEnumerable>();
     }
 }

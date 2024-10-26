@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class LambdaReturnTypeParsingTests : ParsingTests
     {
-        public LambdaReturnTypeParsingTests(ITestOutputHelper output) : base(output) { }
+        public LambdaReturnTypeParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions? options)
         {
@@ -28,10 +29,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             yield return getModifiers("");
             yield return getModifiers("async", SyntaxKind.AsyncKeyword);
             yield return getModifiers("static", SyntaxKind.StaticKeyword);
-            yield return getModifiers("async static", SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword);
-            yield return getModifiers("static async", SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword);
+            yield return getModifiers(
+                "async static",
+                SyntaxKind.AsyncKeyword,
+                SyntaxKind.StaticKeyword
+            );
+            yield return getModifiers(
+                "static async",
+                SyntaxKind.StaticKeyword,
+                SyntaxKind.AsyncKeyword
+            );
 
-            static object[] getModifiers(string modifiers, params SyntaxKind[] modifierKinds) => new object[] { modifiers, modifierKinds };
+            static object[] getModifiers(string modifiers, params SyntaxKind[] modifierKinds) =>
+                new object[] { modifiers, modifierKinds };
         }
 
         [MemberData(nameof(AsyncAndStaticModifiers))]
@@ -205,16 +215,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void IdentifierReturnType_05()
         {
             string source = "T x => y";
-            UsingExpression(source, TestOptions.Regular9,
+            UsingExpression(
+                source,
+                TestOptions.Regular9,
                 // (1,1): error CS1073: Unexpected token 'x'
                 // T x => y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T").WithArguments("x").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T")
+                    .WithArguments("x")
+                    .WithLocation(1, 1)
+            );
             verify();
 
-            UsingExpression(source, TestOptions.RegularPreview,
+            UsingExpression(
+                source,
+                TestOptions.RegularPreview,
                 // (1,1): error CS1073: Unexpected token 'x'
                 // T x => y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T").WithArguments("x").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T")
+                    .WithArguments("x")
+                    .WithLocation(1, 1)
+            );
             verify();
 
             void verify()
@@ -231,10 +251,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamedLambda_01()
         {
             string source = "T F() => default";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'F'
                 // T F() => default
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T").WithArguments("F").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "T")
+                    .WithArguments("F")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.IdentifierName);
             {
@@ -247,10 +271,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamedLambda_02()
         {
             string source = "async T F() => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'T'
                 // async T F() => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "async").WithArguments("T").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "async")
+                    .WithArguments("T")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.IdentifierName);
             {
@@ -263,13 +291,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NamedLambda_03()
         {
             string source = "static T F(int x) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1525: Invalid expression term 'static'
                 // static T F(int x) => { }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "static").WithArguments("static").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "static")
+                    .WithArguments("static")
+                    .WithLocation(1, 1),
                 // (1,1): error CS1073: Unexpected token 'static'
                 // static T F(int x) => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "").WithArguments("static").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "")
+                    .WithArguments("static")
+                    .WithLocation(1, 1)
+            );
 
             M(SyntaxKind.IdentifierName);
             {
@@ -287,13 +321,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             void verify(string source, CSharpParseOptions parseOptions)
             {
-                UsingExpression(source, parseOptions,
+                UsingExpression(
+                    source,
+                    parseOptions,
                     // (1,1): error CS1073: Unexpected token 'T'
                     // delegate T { return default; }
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "delegate ").WithArguments("T").WithLocation(1, 1),
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "delegate ")
+                        .WithArguments("T")
+                        .WithLocation(1, 1),
                     // (1,10): error CS1514: { expected
                     // delegate T { return default; }
-                    Diagnostic(ErrorCode.ERR_LbraceExpected, "T").WithLocation(1, 10));
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, "T").WithLocation(1, 10)
+                );
 
                 N(SyntaxKind.AnonymousMethodExpression);
                 {
@@ -317,13 +356,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             void verify(string source, CSharpParseOptions parseOptions)
             {
-                UsingExpression(source, parseOptions,
+                UsingExpression(
+                    source,
+                    parseOptions,
                     // (1,1): error CS1073: Unexpected token 'int'
                     // delegate int (int x) { return x; }
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "delegate ").WithArguments("int").WithLocation(1, 1),
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "delegate ")
+                        .WithArguments("int")
+                        .WithLocation(1, 1),
                     // (1,10): error CS1514: { expected
                     // delegate int (int x) { return x; }
-                    Diagnostic(ErrorCode.ERR_LbraceExpected, "int").WithLocation(1, 10));
+                    Diagnostic(ErrorCode.ERR_LbraceExpected, "int").WithLocation(1, 10)
+                );
 
                 N(SyntaxKind.AnonymousMethodExpression);
                 {
@@ -695,10 +739,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_02()
         {
             string source = "int? () => x : y";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token ':'
                 // int? () => x : y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "int? () => x").WithArguments(":").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "int? () => x")
+                    .WithArguments(":")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -770,10 +818,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_04()
         {
             string source = "int[]? () => x : y";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token ':'
                 // int[]? () => x : y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "int[]? () => x").WithArguments(":").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "int[]? () => x")
+                    .WithArguments(":")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -815,13 +867,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_05()
         {
             string source = "int.MaxValue? () => null";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,25): error CS1003: Syntax error, ':' expected
                 // int.MaxValue? () => null
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 25),
                 // (1,25): error CS1733: Expected expression
                 // int.MaxValue? () => null
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 25));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 25)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -1111,10 +1165,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_12()
         {
             string source = "T[]? () => x : y";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,3): error CS0443: Syntax error; value expected
                 // T[]? () => x : y
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 3));
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(1, 3)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -1164,13 +1220,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_13()
         {
             string source = "T[0]? () => x";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,14): error CS1003: Syntax error, ':' expected
                 // T[0]? () => x
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 14),
                 // (1,14): error CS1733: Expected expression
                 // T[0]? () => x
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -1353,19 +1411,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_17()
         {
             string source = "int*? () => x";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1525: Invalid expression term 'int'
                 // int*? () => x
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(1, 1),
                 // (1,5): error CS1525: Invalid expression term '?'
                 // int*? () => x
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?").WithArguments("?").WithLocation(1, 5),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?")
+                    .WithArguments("?")
+                    .WithLocation(1, 5),
                 // (1,14): error CS1003: Syntax error, ':' expected
                 // int*? () => x
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 14),
                 // (1,14): error CS1733: Expected expression
                 // int*? () => x
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -1481,13 +1545,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_18()
         {
             string source = "int*? () => x : y";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1525: Invalid expression term 'int'
                 // int*? () => x : y
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int").WithArguments("int").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
+                    .WithArguments("int")
+                    .WithLocation(1, 1),
                 // (1,5): error CS1525: Invalid expression term '?'
                 // int*? () => x : y
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?").WithArguments("?").WithLocation(1, 5));
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "?")
+                    .WithArguments("?")
+                    .WithLocation(1, 5)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -1574,10 +1644,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             string source = "delegate*<void>? () => x : y";
 
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token ':'
                 // delegate*<void>? () => x : y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "delegate*<void>? () => x").WithArguments(":").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "delegate*<void>? () => x")
+                    .WithArguments(":")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1651,10 +1725,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_22()
         {
             string source = "static T? () => x : y";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token ':'
                 // static T? () => x : y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "static T? () => x").WithArguments(":").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "static T? () => x")
+                    .WithArguments(":")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1781,10 +1859,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_26()
         {
             string source = "async T? () => x : y";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'T'
                 // async T? () => x : y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "async").WithArguments("T").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "async")
+                    .WithArguments("T")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.IdentifierName);
             {
@@ -1839,10 +1921,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_28()
         {
             string source = "[A] T? () => x : y";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token ':'
                 // [A] T? () => x : y
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A] T? () => x").WithArguments(":").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A] T? () => x")
+                    .WithArguments(":")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -1884,13 +1970,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableReturnTypeOrConditional_29()
         {
             string source = "b? c? () => x : y";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,18): error CS1003: Syntax error, ':' expected
                 // b? c? () => x : y
                 Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(":").WithLocation(1, 18),
                 // (1,18): error CS1733: Expected expression
                 // b? c? () => x : y
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 18));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 18)
+            );
 
             N(SyntaxKind.ConditionalExpression);
             {
@@ -3669,13 +3757,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void InvocationOrLambda_02()
         {
             string source = "F(a,";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,5): error CS1733: Expected expression
                 // F(a,
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 5),
                 // (1,5): error CS1026: ) expected
                 // F(a,
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 5));
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 5)
+            );
 
             N(SyntaxKind.InvocationExpression);
             {
@@ -3758,13 +3848,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void InvocationOrLambda_04()
         {
             string source = "F(ref a,";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,9): error CS1733: Expected expression
                 // F(ref a,
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 9),
                 // (1,9): error CS1026: ) expected
                 // F(ref a,
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 9)
+            );
 
             N(SyntaxKind.InvocationExpression);
             {
@@ -3801,13 +3893,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void InvocationOrLambda_05()
         {
             string source = "F(A a, B b)";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,5): error CS1003: Syntax error, ',' expected
                 // F(A a, B b)
                 Diagnostic(ErrorCode.ERR_SyntaxError, "a").WithArguments(",").WithLocation(1, 5),
                 // (1,10): error CS1003: Syntax error, ',' expected
                 // F(A a, B b)
-                Diagnostic(ErrorCode.ERR_SyntaxError, "b").WithArguments(",").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "b").WithArguments(",").WithLocation(1, 10)
+            );
 
             N(SyntaxKind.InvocationExpression);
             {
@@ -3859,13 +3953,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void InvocationOrLambda_06()
         {
             string source = "F(ref A a, out B b, in C c)";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,9): error CS1003: Syntax error, ',' expected
                 // F(ref A a, out B b, in C c)
                 Diagnostic(ErrorCode.ERR_SyntaxError, "a").WithArguments(",").WithLocation(1, 9),
                 // (1,26): error CS1003: Syntax error, ',' expected
                 // F(ref A a, out B b, in C c)
-                Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 26));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "c").WithArguments(",").WithLocation(1, 26)
+            );
 
             N(SyntaxKind.InvocationExpression);
             {
@@ -3935,7 +4031,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void InvocationOrLambda_07()
         {
             string source = "F(ref A a,";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,9): error CS1003: Syntax error, ',' expected
                 // F(ref A a,
                 Diagnostic(ErrorCode.ERR_SyntaxError, "a").WithArguments(",").WithLocation(1, 9),
@@ -3944,7 +4041,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11),
                 // (1,11): error CS1026: ) expected
                 // F(ref A a,
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 11)
+            );
 
             N(SyntaxKind.InvocationExpression);
             {
@@ -3989,10 +4087,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void InvocationOrLambda_08()
         {
             string source = "F(a, b) =>";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,11): error CS1733: Expected expression
                 // F(a, b) =>
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 11)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -4027,10 +4127,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void InvocationOrLambda_09()
         {
             string source = "F(a, b) => {";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,13): error CS1513: } expected
                 // F(a, b) => {
-                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -4102,7 +4204,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void InvocationOrLambda_11()
         {
             string source = "F(ref a, out b, in c) => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,8): error CS1001: Identifier expected
                 // F(ref a, out b, in c) => { }
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ",").WithLocation(1, 8),
@@ -4111,7 +4214,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ",").WithLocation(1, 15),
                 // (1,21): error CS1001: Identifier expected
                 // F(ref a, out b, in c) => { }
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 21));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 21)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -4267,13 +4371,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void SwitchExpression_01()
         {
             string source = "x switch { int () => 0 => 1 }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,24): error CS1003: Syntax error, ',' expected
                 // x switch { int () => 0 => 1 }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 24),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
+                    .WithArguments(",")
+                    .WithLocation(1, 24),
                 // (1,24): error CS8504: Pattern missing
                 // x switch { int () => 0 => 1 }
-                Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(1, 24));
+                Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(1, 24)
+            );
 
             N(SyntaxKind.SwitchExpression);
             {
@@ -4328,13 +4436,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void SwitchExpression_02()
         {
             string source = "x switch { T () => { } => 1 }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,20): error CS1525: Invalid expression term '{'
                 // x switch { T () => { } => 1 }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{").WithArguments("{").WithLocation(1, 20),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
+                    .WithArguments("{")
+                    .WithLocation(1, 20),
                 // (1,20): error CS1003: Syntax error, ',' expected
                 // x switch { T () => { } => 1 }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",").WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",").WithLocation(1, 20)
+            );
 
             N(SyntaxKind.SwitchExpression);
             {
@@ -4390,19 +4502,27 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void SwitchExpression_03()
         {
             string source = "x switch { static T? () => { } => 1 }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,12): error CS1525: Invalid expression term 'static'
                 // x switch { static T? () => { } => 1 }
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "static").WithArguments("static").WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, "static")
+                    .WithArguments("static")
+                    .WithLocation(1, 12),
                 // (1,12): error CS1003: Syntax error, '=>' expected
                 // x switch { static T? () => { } => 1 }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "static").WithArguments("=>").WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "static")
+                    .WithArguments("=>")
+                    .WithLocation(1, 12),
                 // (1,32): error CS1003: Syntax error, ',' expected
                 // x switch { static T? () => { } => 1 }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 32),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
+                    .WithArguments(",")
+                    .WithLocation(1, 32),
                 // (1,32): error CS8504: Pattern missing
                 // x switch { static T? () => { } => 1 }
-                Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(1, 32));
+                Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(1, 32)
+            );
 
             N(SyntaxKind.SwitchExpression);
             {
@@ -4683,10 +4803,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Is_01()
         {
             string source = "x is T () => { }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // x is T () => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "x is T ()").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "x is T ()")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.IsPatternExpression);
             {
@@ -4715,10 +4839,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Range_01()
         {
             string source = "s[..x () => { }]";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,10): error CS1003: Syntax error, ',' expected
                 // s[..x () => { }]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 10));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 10)
+            );
 
             N(SyntaxKind.ElementAccessExpression);
             {
@@ -5159,10 +5285,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             void verify(string source, ParseOptions? parseOptions = null)
             {
-                UsingExpression(source, parseOptions,
+                UsingExpression(
+                    source,
+                    parseOptions,
                     // (1,1): error CS1073: Unexpected token 'x'
                     // var x => x
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "var").WithArguments("x").WithLocation(1, 1));
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "var")
+                        .WithArguments("x")
+                        .WithLocation(1, 1)
+                );
 
                 N(SyntaxKind.IdentifierName);
                 {
@@ -5237,10 +5368,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             void verify(string source, ParseOptions? parseOptions = null)
             {
-                UsingExpression(source, parseOptions,
+                UsingExpression(
+                    source,
+                    parseOptions,
                     // (1,7): error CS1003: Syntax error, ',' expected
                     // F(var x => x)
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments(",").WithLocation(1, 7));
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "x")
+                        .WithArguments(",")
+                        .WithLocation(1, 7)
+                );
 
                 N(SyntaxKind.InvocationExpression);
                 {

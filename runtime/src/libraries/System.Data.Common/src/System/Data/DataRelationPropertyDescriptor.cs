@@ -8,7 +8,8 @@ namespace System.Data
 {
     internal sealed class DataRelationPropertyDescriptor : PropertyDescriptor
     {
-        internal DataRelationPropertyDescriptor(DataRelation dataRelation) : base(dataRelation.RelationName, null)
+        internal DataRelationPropertyDescriptor(DataRelation dataRelation)
+            : base(dataRelation.RelationName, null)
         {
             Relation = dataRelation;
         }
@@ -22,8 +23,7 @@ namespace System.Data
         public override Type PropertyType => typeof(IBindingList);
 
         public override bool Equals([NotNullWhen(true)] object? other) =>
-            other is DataRelationPropertyDescriptor descriptor &&
-            descriptor.Relation == Relation;
+            other is DataRelationPropertyDescriptor descriptor && descriptor.Relation == Relation;
 
         public override int GetHashCode() => Relation.GetHashCode();
 

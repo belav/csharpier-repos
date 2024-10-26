@@ -30,5 +30,5 @@ public enum StoreTypePostfix
     /// <summary>
     ///     Append the precision and scale.
     /// </summary>
-    PrecisionAndScale
+    PrecisionAndScale,
 }

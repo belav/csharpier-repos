@@ -50,7 +50,12 @@ namespace System.Net.Http
                         bytesRead = 1;
                         return true;
                     case InitialTwoByteLengthMask:
-                        if (BinaryPrimitives.TryReadUInt16BigEndian(buffer, out ushort serializedShort))
+                        if (
+                            BinaryPrimitives.TryReadUInt16BigEndian(
+                                buffer,
+                                out ushort serializedShort
+                            )
+                        )
                         {
                             value = serializedShort - TwoByteLengthMask;
                             bytesRead = 2;
@@ -67,10 +72,18 @@ namespace System.Net.Http
                         break;
                     default: // InitialEightByteLengthMask
                         Debug.Assert((firstByte & LengthMask) == InitialEightByteLengthMask);
-                        if (BinaryPrimitives.TryReadUInt64BigEndian(buffer, out ulong serializedLong))
+                        if (
+                            BinaryPrimitives.TryReadUInt64BigEndian(
+                                buffer,
+                                out ulong serializedLong
+                            )
+                        )
                         {
                             value = (long)(serializedLong - EightByteLengthMask);
-                            Debug.Assert(value >= 0 && value <= EightByteLimit, "Serialized values are within [0, 2^62).");
+                            Debug.Assert(
+                                value >= 0 && value <= EightByteLimit,
+                                "Serialized values are within [0, 2^62)."
+                            );
 
                             bytesRead = 8;
                             return true;
@@ -102,14 +115,15 @@ namespace System.Net.Http
 
                 if (reader.TryPeek(out byte firstByte))
                 {
-                    int length =
-                        (firstByte & LengthMask) switch
-                        {
-                            InitialOneByteLengthMask => 1,
-                            InitialTwoByteLengthMask => 2,
-                            InitialFourByteLengthMask => 4,
-                            _ => 8 // LengthEightByte
-                        };
+                    int length = (firstByte & LengthMask) switch
+                    {
+                        InitialOneByteLengthMask => 1,
+                        InitialTwoByteLengthMask => 2,
+                        InitialFourByteLengthMask => 4,
+                        _ =>
+                            8 // LengthEightByte
+                        ,
+                    };
 
                     Span<byte> temp = (stackalloc byte[8])[..length];
                     if (reader.TryCopyTo(temp))
@@ -128,7 +142,11 @@ namespace System.Net.Http
             }
         }
 
-        public static long GetInteger(in ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+        public static long GetInteger(
+            in ReadOnlySequence<byte> buffer,
+            out SequencePosition consumed,
+            out SequencePosition examined
+        )
         {
             var reader = new SequenceReader<byte>(buffer);
             if (TryRead(ref reader, out long value))
@@ -160,7 +178,12 @@ namespace System.Net.Http
             }
             else if (longToEncode <= TwoByteLimit)
             {
-                if (BinaryPrimitives.TryWriteUInt16BigEndian(buffer, (ushort)((uint)longToEncode | TwoByteLengthMask)))
+                if (
+                    BinaryPrimitives.TryWriteUInt16BigEndian(
+                        buffer,
+                        (ushort)((uint)longToEncode | TwoByteLengthMask)
+                    )
+                )
                 {
                     bytesWritten = 2;
                     return true;
@@ -168,7 +191,12 @@ namespace System.Net.Http
             }
             else if (longToEncode <= FourByteLimit)
             {
-                if (BinaryPrimitives.TryWriteUInt32BigEndian(buffer, (uint)longToEncode | FourByteLengthMask))
+                if (
+                    BinaryPrimitives.TryWriteUInt32BigEndian(
+                        buffer,
+                        (uint)longToEncode | FourByteLengthMask
+                    )
+                )
                 {
                     bytesWritten = 4;
                     return true;
@@ -176,7 +204,12 @@ namespace System.Net.Http
             }
             else // EightByteLimit
             {
-                if (BinaryPrimitives.TryWriteUInt64BigEndian(buffer, (ulong)longToEncode | EightByteLengthMask))
+                if (
+                    BinaryPrimitives.TryWriteUInt64BigEndian(
+                        buffer,
+                        (ulong)longToEncode | EightByteLengthMask
+                    )
+                )
                 {
                     bytesWritten = 8;
                     return true;
@@ -199,11 +232,10 @@ namespace System.Net.Http
             Debug.Assert(value >= 0);
             Debug.Assert(value <= EightByteLimit);
 
-            return
-                value <= OneByteLimit ? 1 :
-                value <= TwoByteLimit ? 2 :
-                value <= FourByteLimit ? 4 :
-                8; // EightByteLimit
+            return value <= OneByteLimit ? 1
+                : value <= TwoByteLimit ? 2
+                : value <= FourByteLimit ? 4
+                : 8; // EightByteLimit
         }
     }
 }

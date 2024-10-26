@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,50 +29,59 @@
 //
 
 
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class FormsAuthenticationCredentials: ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty passwordFormatProp;
-		static ConfigurationProperty usersProp;
+    public sealed class FormsAuthenticationCredentials : ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty passwordFormatProp;
+        static ConfigurationProperty usersProp;
 
-		static FormsAuthenticationCredentials ()
-		{
-			passwordFormatProp = new ConfigurationProperty ("passwordFormat", typeof (FormsAuthPasswordFormat), FormsAuthPasswordFormat.SHA1,
-									new GenericEnumConverter (typeof (FormsAuthPasswordFormat)), PropertyHelper.DefaultValidator,
-									ConfigurationPropertyOptions.None);
-			usersProp = new ConfigurationProperty ("", typeof (FormsAuthenticationUserCollection), null,
-							       null, PropertyHelper.DefaultValidator,
-							       ConfigurationPropertyOptions.IsDefaultCollection);
+        static FormsAuthenticationCredentials()
+        {
+            passwordFormatProp = new ConfigurationProperty(
+                "passwordFormat",
+                typeof(FormsAuthPasswordFormat),
+                FormsAuthPasswordFormat.SHA1,
+                new GenericEnumConverter(typeof(FormsAuthPasswordFormat)),
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            usersProp = new ConfigurationProperty(
+                "",
+                typeof(FormsAuthenticationUserCollection),
+                null,
+                null,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (passwordFormatProp);
-			properties.Add (usersProp);
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(passwordFormatProp);
+            properties.Add(usersProp);
+        }
 
-		public FormsAuthenticationCredentials ()
-		{
-		}
+        public FormsAuthenticationCredentials() { }
 
-		[ConfigurationProperty ("passwordFormat", DefaultValue = "SHA1")]
-		public FormsAuthPasswordFormat PasswordFormat {
-			get { return (FormsAuthPasswordFormat) base[passwordFormatProp]; }
-			set { base[passwordFormatProp] = value; }
-		}
+        [ConfigurationProperty("passwordFormat", DefaultValue = "SHA1")]
+        public FormsAuthPasswordFormat PasswordFormat
+        {
+            get { return (FormsAuthPasswordFormat)base[passwordFormatProp]; }
+            set { base[passwordFormatProp] = value; }
+        }
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public FormsAuthenticationUserCollection Users {
-			get { return (FormsAuthenticationUserCollection) base[usersProp]; }
-		}
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public FormsAuthenticationUserCollection Users
+        {
+            get { return (FormsAuthenticationUserCollection)base[usersProp]; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-		
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

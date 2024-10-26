@@ -10,10 +10,12 @@ namespace Microsoft.AspNetCore.InternalTesting;
 public class AspNetTestFramework : XunitTestFramework
 {
     public AspNetTestFramework(IMessageSink messageSink)
-        : base(messageSink)
-    {
-    }
+        : base(messageSink) { }
 
-    protected override ITestFrameworkExecutor CreateExecutor(AssemblyName assemblyName)
-        => new AspNetTestFrameworkExecutor(assemblyName, SourceInformationProvider, DiagnosticMessageSink);
+    protected override ITestFrameworkExecutor CreateExecutor(AssemblyName assemblyName) =>
+        new AspNetTestFrameworkExecutor(
+            assemblyName,
+            SourceInformationProvider,
+            DiagnosticMessageSink
+        );
 }

@@ -24,7 +24,8 @@ public class Endpoint
     public Endpoint(
         RequestDelegate? requestDelegate,
         EndpointMetadataCollection? metadata,
-        string? displayName)
+        string? displayName
+    )
     {
         // All are allowed to be null
         RequestDelegate = requestDelegate;

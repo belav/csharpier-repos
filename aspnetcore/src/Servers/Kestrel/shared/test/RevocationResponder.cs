@@ -19,8 +19,8 @@ internal sealed class RevocationResponder : IDisposable
     private readonly Dictionary<string, CertificateAuthority> _aiaPaths =
         new Dictionary<string, CertificateAuthority>();
 
-    private readonly Dictionary<string, CertificateAuthority> _crlPaths
-        = new Dictionary<string, CertificateAuthority>();
+    private readonly Dictionary<string, CertificateAuthority> _crlPaths =
+        new Dictionary<string, CertificateAuthority>();
 
     private readonly List<(string, CertificateAuthority)> _ocspAuthorities =
         new List<(string, CertificateAuthority)>();
@@ -45,21 +45,30 @@ internal sealed class RevocationResponder : IDisposable
 
     internal void AddCertificateAuthority(CertificateAuthority authority)
     {
-        if (authority.AiaHttpUri != null && authority.AiaHttpUri.StartsWith(UriPrefix, StringComparison.OrdinalIgnoreCase))
+        if (
+            authority.AiaHttpUri != null
+            && authority.AiaHttpUri.StartsWith(UriPrefix, StringComparison.OrdinalIgnoreCase)
+        )
         {
             string path = authority.AiaHttpUri.Substring(UriPrefix.Length - 1);
             Trace($"Adding AIA path : {path}");
             _aiaPaths.Add(path, authority);
         }
 
-        if (authority.CdpUri != null && authority.CdpUri.StartsWith(UriPrefix, StringComparison.OrdinalIgnoreCase))
+        if (
+            authority.CdpUri != null
+            && authority.CdpUri.StartsWith(UriPrefix, StringComparison.OrdinalIgnoreCase)
+        )
         {
             string path = authority.CdpUri.Substring(UriPrefix.Length - 1);
             Trace($"Adding CRL path : {path}");
             _crlPaths.Add(path, authority);
         }
 
-        if (authority.OcspUri != null && authority.OcspUri.StartsWith(UriPrefix, StringComparison.OrdinalIgnoreCase))
+        if (
+            authority.OcspUri != null
+            && authority.OcspUri.StartsWith(UriPrefix, StringComparison.OrdinalIgnoreCase)
+        )
         {
             string path = authority.OcspUri.Substring(UriPrefix.Length - 1);
             Trace($"Adding OCSP path : {path}");
@@ -78,7 +87,8 @@ internal sealed class RevocationResponder : IDisposable
                 }
             },
             this,
-            true);
+            true
+        );
     }
 
     internal void HandleRequest()
@@ -89,16 +99,11 @@ internal sealed class RevocationResponder : IDisposable
         {
             context = _listener.GetContext();
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
 
         if (context != null)
         {
-            ThreadPool.QueueUserWorkItem(
-                state => HandleRequest(state),
-                context,
-                true);
+            ThreadPool.QueueUserWorkItem(state => HandleRequest(state), context, true);
         }
     }
 
@@ -110,16 +115,11 @@ internal sealed class RevocationResponder : IDisposable
         {
             context = await _listener.GetContextAsync();
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
 
         if (context != null)
         {
-            ThreadPool.QueueUserWorkItem(
-                state => HandleRequest(state),
-                context,
-                true);
+            ThreadPool.QueueUserWorkItem(state => HandleRequest(state), context, true);
         }
     }
 
@@ -128,7 +128,9 @@ internal sealed class RevocationResponder : IDisposable
         bool responded = false;
         try
         {
-            Trace($"{context.Request.HttpMethod} {context.Request.RawUrl} (HTTP {context.Request.ProtocolVersion})");
+            Trace(
+                $"{context.Request.HttpMethod} {context.Request.RawUrl} (HTTP {context.Request.ProtocolVersion})"
+            );
             HandleRequest(context, ref responded);
         }
         catch (Exception e)
@@ -141,13 +143,13 @@ internal sealed class RevocationResponder : IDisposable
                     context.Response.StatusDescription = "Internal Server Error";
                     context.Response.Close();
 
-                    Trace($"Sent 500 due to exception on {context.Request.HttpMethod} {context.Request.RawUrl}");
+                    Trace(
+                        $"Sent 500 due to exception on {context.Request.HttpMethod} {context.Request.RawUrl}"
+                    );
                     Trace(e.ToString());
                 }
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
 
             return;
         }
@@ -161,9 +163,7 @@ internal sealed class RevocationResponder : IDisposable
                 context.Response.StatusCode = 404;
                 context.Response.Close();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
     }
 
@@ -186,7 +186,9 @@ internal sealed class RevocationResponder : IDisposable
             context.Response.StatusCode = 200;
             context.Response.ContentType = "application/pkix-cert";
             context.Response.Close(certData, willBlock: true);
-            Trace($"Responded with {certData.Length}-byte certificate from {authority.SubjectName}.");
+            Trace(
+                $"Responded with {certData.Length}-byte certificate from {authority.SubjectName}."
+            );
             return;
         }
 
@@ -233,7 +235,9 @@ internal sealed class RevocationResponder : IDisposable
                         return;
                     }
 
-                    byte[] ocspResponse = RespondEmpty ? Array.Empty<byte>() : authority.BuildOcspResponse(certId, nonce);
+                    byte[] ocspResponse = RespondEmpty
+                        ? Array.Empty<byte>()
+                        : authority.BuildOcspResponse(certId, nonce);
 
                     if (DelayedActions.HasFlag(DelayedActionsFlag.Ocsp))
                     {
@@ -249,11 +253,15 @@ internal sealed class RevocationResponder : IDisposable
 
                     if (authority.HasOcspDelegation)
                     {
-                        Trace($"OCSP Response: {ocspResponse.Length} bytes from {authority.SubjectName} delegated to {authority.OcspResponderSubjectName}");
+                        Trace(
+                            $"OCSP Response: {ocspResponse.Length} bytes from {authority.SubjectName} delegated to {authority.OcspResponderSubjectName}"
+                        );
                     }
                     else
                     {
-                        Trace($"OCSP Response: {ocspResponse.Length} bytes from {authority.SubjectName}");
+                        Trace(
+                            $"OCSP Response: {ocspResponse.Length} bytes from {authority.SubjectName}"
+                        );
                     }
 
                     return;
@@ -288,13 +296,15 @@ internal sealed class RevocationResponder : IDisposable
                 Trace($"Listening at {uriPrefix}");
                 return listener;
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 
-    private static bool TryGetOcspRequestBytes(HttpListenerRequest request, string prefix, out byte[] requestBytes)
+    private static bool TryGetOcspRequestBytes(
+        HttpListenerRequest request,
+        string prefix,
+        out byte[] requestBytes
+    )
     {
         requestBytes = null;
         try
@@ -305,7 +315,10 @@ internal sealed class RevocationResponder : IDisposable
                 requestBytes = Convert.FromBase64String(base64);
                 return true;
             }
-            else if (request.HttpMethod == "POST" && request.ContentType == "application/ocsp-request")
+            else if (
+                request.HttpMethod == "POST"
+                && request.ContentType == "application/ocsp-request"
+            )
             {
                 using (System.IO.Stream stream = request.InputStream)
                 {
@@ -327,7 +340,8 @@ internal sealed class RevocationResponder : IDisposable
     private static void DecodeOcspRequest(
         byte[] requestBytes,
         out ReadOnlyMemory<byte> certId,
-        out ReadOnlyMemory<byte> nonceExtension)
+        out ReadOnlyMemory<byte> nonceExtension
+    )
     {
         Asn1Tag context0 = new Asn1Tag(TagClass.ContextSpecific, 0);
         Asn1Tag context1 = new Asn1Tag(TagClass.ContextSpecific, 1);
@@ -369,7 +383,9 @@ internal sealed class RevocationResponder : IDisposable
 
         if (tbsRequest.HasData)
         {
-            AsnReader requestExtensionsWrapper = tbsRequest.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 2));
+            AsnReader requestExtensionsWrapper = tbsRequest.ReadSequence(
+                new Asn1Tag(TagClass.ContextSpecific, 2)
+            );
             requestExtensions = requestExtensionsWrapper.ReadSequence();
             requestExtensionsWrapper.ThrowIfNotEmpty();
         }
@@ -422,5 +438,5 @@ public enum DelayedActionsFlag : byte
     Ocsp = 0b1,
     Crl = 0b10,
     Aia = 0b100,
-    All = 0b11111111
+    All = 0b11111111,
 }

@@ -6,7 +6,6 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using InvalidCSharp;
-
 using Xunit;
 
 public class Validate
@@ -22,10 +21,22 @@ public class Validate
         Console.WriteLine($" -- Instantiate: {Exec.GenericValueType()}");
         Console.WriteLine($" -- Instantiate: {Exec.GenericByRefLike()}");
 
-        Assert.Throws<TypeLoadException>(() => { Exec.GenericClass_Invalid(); });
-        Assert.Throws<TypeLoadException>(() => { Exec.GenericInterface_Invalid(); });
-        Assert.Throws<TypeLoadException>(() => { Exec.GenericValueType_Invalid(); });
-        Assert.Throws<TypeLoadException>(() => { Exec.GenericByRefLike_Invalid(); });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            Exec.GenericClass_Invalid();
+        });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            Exec.GenericInterface_Invalid();
+        });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            Exec.GenericValueType_Invalid();
+        });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            Exec.GenericByRefLike_Invalid();
+        });
     }
 
     [Fact]
@@ -39,8 +50,14 @@ public class Validate
         // to cast an object to a ByRefLike type will always return null or throw an
         // appropriate exception.
         Assert.False(Exec.InstanceOfT(new object()));
-        Assert.Throws<InvalidCastException>(() => { Exec.CastToT(new object()); });
-        Assert.Throws<InvalidCastException>(() => { Exec.UnboxToT(new object()); });
+        Assert.Throws<InvalidCastException>(() =>
+        {
+            Exec.CastToT(new object());
+        });
+        Assert.Throws<InvalidCastException>(() =>
+        {
+            Exec.UnboxToT(new object());
+        });
     }
 
     [Fact]
@@ -64,12 +81,24 @@ public class Validate
         // These methods uses opcodes that are not able to handle ByRefLike type operands.
         // The TypeLoader prevents these invalid types from being constructed. We rely on
         // the failure to construct these invalid types to block opcode usage.
-        Assert.Throws<TypeLoadException>(() => { Exec.AllocArrayOfT_Invalid(); });
-        Assert.Throws<TypeLoadException>(() => { Exec.AllocMultiDimArrayOfT_Invalid(); });
-        Assert.Throws<TypeLoadException>(() => { Exec.GenericClassWithStaticField_Invalid(); });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            Exec.AllocArrayOfT_Invalid();
+        });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            Exec.AllocMultiDimArrayOfT_Invalid();
+        });
+        Assert.Throws<TypeLoadException>(() =>
+        {
+            Exec.GenericClassWithStaticField_Invalid();
+        });
 
         // Test that explicitly tries to box a ByRefLike type.
-        Assert.Throws<InvalidProgramException>(() => { Exec.BoxAsObject(); });
+        Assert.Throws<InvalidProgramException>(() =>
+        {
+            Exec.BoxAsObject();
+        });
     }
 
     [Fact]
@@ -88,7 +117,9 @@ public class Validate
     [SkipOnMono("Mono does not support ByRefLike generics yet")]
     public static void Validate_MemberDiscoveryViaReflection_ForSpanReadOnlySpan()
     {
-        Console.WriteLine($"{nameof(Validate_MemberDiscoveryViaReflection_ForSpanReadOnlySpan)}...");
+        Console.WriteLine(
+            $"{nameof(Validate_MemberDiscoveryViaReflection_ForSpanReadOnlySpan)}..."
+        );
 
         // // Validate specific Span<T> and ReadOnlySpan<T> constructors can be discovered when T is ByRefLike
         // {

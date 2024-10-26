@@ -1,28 +1,28 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // ZoneIdentityPermission.cs
-// 
+//
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 namespace System.Security.Permissions
 {
     using System;
-#if FEATURE_CAS_POLICY
-    using SecurityElement = System.Security.SecurityElement;
-#endif // FEATURE_CAS_POLICY
-    using System.Globalization;
-    using System.Runtime.Serialization;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Runtime.Serialization;
+#if FEATURE_CAS_POLICY
+    using SecurityElement = System.Security.SecurityElement;
+#endif // FEATURE_CAS_POLICY
 
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    sealed public class ZoneIdentityPermission : CodeAccessPermission, IBuiltInPermission
+    public sealed class ZoneIdentityPermission : CodeAccessPermission, IBuiltInPermission
     {
         //------------------------------------------------------
         //
@@ -40,13 +40,14 @@ namespace System.Security.Permissions
         // Untrusted        4         0x10  (1 << 4)
 
         private const uint AllZones = 0x1f;
+
         [OptionalField(VersionAdded = 2)]
         private uint m_zones;
 
 #if FEATURE_REMOTING
         // This field will be populated only for non X-AD scenarios where we create a XML-ised string of the Permission
         [OptionalField(VersionAdded = 2)]
-        private String m_serializedPermission; 
+        private String m_serializedPermission;
 
         //  This field is legacy info from v1.x and is never used in v2.0 and beyond: purely for serialization purposes
         private SecurityZone m_zone = SecurityZone.NoZone;
@@ -54,7 +55,12 @@ namespace System.Security.Permissions
         [OnDeserialized]
         private void OnDeserialized(StreamingContext ctx)
         {
-            if ((ctx.State & ~(StreamingContextStates.Clone|StreamingContextStates.CrossAppDomain)) != 0)
+            if (
+                (
+                    ctx.State
+                    & ~(StreamingContextStates.Clone | StreamingContextStates.CrossAppDomain)
+                ) != 0
+            )
             {
                 // v2.0 and beyond XML case
                 if (m_serializedPermission != null)
@@ -68,25 +74,32 @@ namespace System.Security.Permissions
                     m_zone = SecurityZone.NoZone;
                 }
             }
-
-
         }
 
         [OnSerializing]
         private void OnSerializing(StreamingContext ctx)
         {
-
-            if ((ctx.State & ~(StreamingContextStates.Clone|StreamingContextStates.CrossAppDomain)) != 0)
+            if (
+                (
+                    ctx.State
+                    & ~(StreamingContextStates.Clone | StreamingContextStates.CrossAppDomain)
+                ) != 0
+            )
             {
                 m_serializedPermission = ToXml().ToString(); //for the v2 and beyond case
                 m_zone = SecurityZone;
-                
             }
-        }   
+        }
+
         [OnSerialized]
         private void OnSerialized(StreamingContext ctx)
         {
-            if ((ctx.State & ~(StreamingContextStates.Clone|StreamingContextStates.CrossAppDomain)) != 0)
+            if (
+                (
+                    ctx.State
+                    & ~(StreamingContextStates.Clone | StreamingContextStates.CrossAppDomain)
+                ) != 0
+            )
             {
                 m_serializedPermission = null;
                 m_zone = SecurityZone.NoZone;
@@ -112,16 +125,18 @@ namespace System.Security.Permissions
             }
             else
             {
-                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidPermissionState"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_InvalidPermissionState")
+                );
             }
         }
 
-        public ZoneIdentityPermission( SecurityZone zone )
+        public ZoneIdentityPermission(SecurityZone zone)
         {
             this.SecurityZone = zone;
         }
 
-        internal ZoneIdentityPermission( uint zones )
+        internal ZoneIdentityPermission(uint zones)
         {
             m_zones = (zones & AllZones);
         }
@@ -131,9 +146,9 @@ namespace System.Security.Permissions
         {
             int nEnum = 0;
             uint nFlag;
-            for(nFlag = 1; nFlag < AllZones; nFlag <<= 1)
+            for (nFlag = 1; nFlag < AllZones; nFlag <<= 1)
             {
-                if((m_zones & nFlag) != 0)
+                if ((m_zones & nFlag) != 0)
                 {
                     zoneList.Add((SecurityZone)nEnum);
                 }
@@ -151,23 +166,22 @@ namespace System.Security.Permissions
         {
             set
             {
-                VerifyZone( value );
-                if(value == SecurityZone.NoZone)
+                VerifyZone(value);
+                if (value == SecurityZone.NoZone)
                     m_zones = 0;
                 else
                     m_zones = (uint)1 << (int)value;
             }
-
             get
             {
                 SecurityZone z = SecurityZone.NoZone;
                 int nEnum = 0;
                 uint nFlag;
-                for(nFlag = 1; nFlag < AllZones; nFlag <<= 1)
+                for (nFlag = 1; nFlag < AllZones; nFlag <<= 1)
                 {
-                    if((m_zones & nFlag) != 0)
+                    if ((m_zones & nFlag) != 0)
                     {
-                        if(z == SecurityZone.NoZone)
+                        if (z == SecurityZone.NoZone)
                             z = (SecurityZone)nEnum;
                         else
                             return SecurityZone.NoZone;
@@ -184,15 +198,14 @@ namespace System.Security.Permissions
         //
         //------------------------------------------------------
 
-        private static void VerifyZone( SecurityZone zone )
+        private static void VerifyZone(SecurityZone zone)
         {
             if (zone < SecurityZone.NoZone || zone > SecurityZone.Untrusted)
             {
-                throw new ArgumentException( Environment.GetResourceString("Argument_IllegalZone") );
+                throw new ArgumentException(Environment.GetResourceString("Argument_IllegalZone"));
             }
             Contract.EndContractBlock();
         }
-
 
         //------------------------------------------------------
         //
@@ -219,7 +232,9 @@ namespace System.Security.Permissions
 
             ZoneIdentityPermission that = target as ZoneIdentityPermission;
             if (that == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_WrongType", this.GetType().FullName));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_WrongType", this.GetType().FullName)
+                );
             return (this.m_zones & that.m_zones) == this.m_zones;
         }
 
@@ -230,9 +245,11 @@ namespace System.Security.Permissions
 
             ZoneIdentityPermission that = target as ZoneIdentityPermission;
             if (that == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_WrongType", this.GetType().FullName));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_WrongType", this.GetType().FullName)
+                );
             uint newZones = this.m_zones & that.m_zones;
-            if(newZones == 0)
+            if (newZones == 0)
                 return null;
             return new ZoneIdentityPermission(newZones);
         }
@@ -244,28 +261,36 @@ namespace System.Security.Permissions
 
             ZoneIdentityPermission that = target as ZoneIdentityPermission;
             if (that == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_WrongType", this.GetType().FullName));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_WrongType", this.GetType().FullName)
+                );
             return new ZoneIdentityPermission(this.m_zones | that.m_zones);
         }
 
 #if FEATURE_CAS_POLICY
         public override SecurityElement ToXml()
         {
-            SecurityElement esd = CodeAccessPermission.CreatePermissionElement( this, "System.Security.Permissions.ZoneIdentityPermission" );
+            SecurityElement esd = CodeAccessPermission.CreatePermissionElement(
+                this,
+                "System.Security.Permissions.ZoneIdentityPermission"
+            );
             if (SecurityZone != SecurityZone.NoZone)
             {
-                esd.AddAttribute( "Zone", Enum.GetName( typeof( SecurityZone ), this.SecurityZone ) );
+                esd.AddAttribute("Zone", Enum.GetName(typeof(SecurityZone), this.SecurityZone));
             }
             else
             {
                 int nEnum = 0;
                 uint nFlag;
-                for(nFlag = 1; nFlag < AllZones; nFlag <<= 1)
+                for (nFlag = 1; nFlag < AllZones; nFlag <<= 1)
                 {
-                    if((m_zones & nFlag) != 0)
+                    if ((m_zones & nFlag) != 0)
                     {
                         SecurityElement child = new SecurityElement("Zone");
-                        child.AddAttribute( "Zone", Enum.GetName( typeof( SecurityZone ), (SecurityZone)nEnum ) );
+                        child.AddAttribute(
+                            "Zone",
+                            Enum.GetName(typeof(SecurityZone), (SecurityZone)nEnum)
+                        );
                         esd.AddChild(child);
                     }
                     nEnum++;
@@ -277,17 +302,17 @@ namespace System.Security.Permissions
         public override void FromXml(SecurityElement esd)
         {
             m_zones = 0;
-            CodeAccessPermission.ValidateElement( esd, this );
-            String eZone = esd.Attribute( "Zone" );
+            CodeAccessPermission.ValidateElement(esd, this);
+            String eZone = esd.Attribute("Zone");
             if (eZone != null)
-                SecurityZone = (SecurityZone)Enum.Parse( typeof( SecurityZone ), eZone );
-            if(esd.Children != null)
+                SecurityZone = (SecurityZone)Enum.Parse(typeof(SecurityZone), eZone);
+            if (esd.Children != null)
             {
-                foreach(SecurityElement child in esd.Children)
+                foreach (SecurityElement child in esd.Children)
                 {
-                    eZone = child.Attribute( "Zone" );
-                    int enm = (int)Enum.Parse( typeof( SecurityZone ), eZone );
-                    if(enm == (int)SecurityZone.NoZone)
+                    eZone = child.Attribute("Zone");
+                    int enm = (int)Enum.Parse(typeof(SecurityZone), eZone);
+                    if (enm == (int)SecurityZone.NoZone)
                         continue;
                     m_zones |= ((uint)1 << enm);
                 }
@@ -305,6 +330,5 @@ namespace System.Security.Permissions
         {
             return BuiltInPermissionIndex.ZoneIdentityPermissionIndex;
         }
-
     }
 }

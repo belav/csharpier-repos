@@ -37,7 +37,11 @@ internal sealed partial class WebViewNavigationManager : NavigationManager
         {
             try
             {
-                var shouldContinueNavigation = await NotifyLocationChangingAsync(uri, state, intercepted);
+                var shouldContinueNavigation = await NotifyLocationChangingAsync(
+                    uri,
+                    state,
+                    intercepted
+                );
 
                 if (!shouldContinueNavigation)
                 {
@@ -64,7 +68,11 @@ internal sealed partial class WebViewNavigationManager : NavigationManager
         {
             try
             {
-                var shouldContinueNavigation = await NotifyLocationChangingAsync(uri, options.HistoryEntryState, false);
+                var shouldContinueNavigation = await NotifyLocationChangingAsync(
+                    uri,
+                    options.HistoryEntryState,
+                    false
+                );
 
                 if (!shouldContinueNavigation)
                 {
@@ -90,7 +98,10 @@ internal sealed partial class WebViewNavigationManager : NavigationManager
         _ipcSender.Refresh(forceReload);
     }
 
-    protected override void HandleLocationChangingHandlerException(Exception ex, LocationChangingContext context)
+    protected override void HandleLocationChangingHandlerException(
+        Exception ex,
+        LocationChangingContext context
+    )
     {
         Log.NavigationFailed(_logger, context.TargetLocation, ex);
         _ipcSender.NotifyUnhandledException(ex);
@@ -103,10 +114,24 @@ internal sealed partial class WebViewNavigationManager : NavigationManager
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Navigation canceled when changing the location to {Uri}", EventName = "NavigationCanceled")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Navigation canceled when changing the location to {Uri}",
+            EventName = "NavigationCanceled"
+        )]
         public static partial void NavigationCanceled(ILogger logger, string uri);
 
-        [LoggerMessage(2, LogLevel.Error, "Navigation failed when changing the location to {Uri}", EventName = "NavigationFailed")]
-        public static partial void NavigationFailed(ILogger logger, string uri, Exception exception);
+        [LoggerMessage(
+            2,
+            LogLevel.Error,
+            "Navigation failed when changing the location to {Uri}",
+            EventName = "NavigationFailed"
+        )]
+        public static partial void NavigationFailed(
+            ILogger logger,
+            string uri,
+            Exception exception
+        );
     }
 }

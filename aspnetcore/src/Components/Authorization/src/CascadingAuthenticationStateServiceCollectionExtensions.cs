@@ -17,27 +17,35 @@ public static class CascadingAuthenticationStateServiceCollectionExtensions
     /// </summary>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddCascadingAuthenticationState(this IServiceCollection serviceCollection)
+    public static IServiceCollection AddCascadingAuthenticationState(
+        this IServiceCollection serviceCollection
+    )
     {
         return serviceCollection.AddCascadingValue<Task<AuthenticationState>>(services =>
         {
-            var authenticationStateProvider = services.GetRequiredService<AuthenticationStateProvider>();
+            var authenticationStateProvider =
+                services.GetRequiredService<AuthenticationStateProvider>();
             return new AuthenticationStateCascadingValueSource(authenticationStateProvider);
         });
     }
 
-    private sealed class AuthenticationStateCascadingValueSource : CascadingValueSource<Task<AuthenticationState>>, IDisposable
+    private sealed class AuthenticationStateCascadingValueSource
+        : CascadingValueSource<Task<AuthenticationState>>,
+            IDisposable
     {
         // This is intended to produce identical behavior to having a <CascadingAuthenticationStateProvider>
         // wrapped around the root component.
 
         private readonly AuthenticationStateProvider _authenticationStateProvider;
 
-        public AuthenticationStateCascadingValueSource(AuthenticationStateProvider authenticationStateProvider)
+        public AuthenticationStateCascadingValueSource(
+            AuthenticationStateProvider authenticationStateProvider
+        )
             : base(authenticationStateProvider.GetAuthenticationStateAsync, isFixed: false)
         {
             _authenticationStateProvider = authenticationStateProvider;
-            _authenticationStateProvider.AuthenticationStateChanged += HandleAuthenticationStateChanged;
+            _authenticationStateProvider.AuthenticationStateChanged +=
+                HandleAuthenticationStateChanged;
         }
 
         private void HandleAuthenticationStateChanged(Task<AuthenticationState> newAuthStateTask)
@@ -51,7 +59,8 @@ public static class CascadingAuthenticationStateServiceCollectionExtensions
 
         public void Dispose()
         {
-            _authenticationStateProvider.AuthenticationStateChanged -= HandleAuthenticationStateChanged;
+            _authenticationStateProvider.AuthenticationStateChanged -=
+                HandleAuthenticationStateChanged;
         }
     }
 }

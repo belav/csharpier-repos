@@ -60,29 +60,41 @@ namespace System.IO.Compression
         /// The path is permitted to specify relative or absolute path information.
         /// Relative path information is interpreted as relative to the current working directory.</param>
         /// <param name="overwrite">True to indicate overwrite.</param>
-        public static void ExtractToFile(this ZipArchiveEntry source, string destinationFileName, bool overwrite)
+        public static void ExtractToFile(
+            this ZipArchiveEntry source,
+            string destinationFileName,
+            bool overwrite
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(destinationFileName);
 
-            FileStreamOptions fileStreamOptions = new()
-            {
-                Access = FileAccess.Write,
-                Mode = overwrite ? FileMode.Create : FileMode.CreateNew,
-                Share = FileShare.None,
-                BufferSize = 0x1000
-            };
+            FileStreamOptions fileStreamOptions =
+                new()
+                {
+                    Access = FileAccess.Write,
+                    Mode = overwrite ? FileMode.Create : FileMode.CreateNew,
+                    Share = FileShare.None,
+                    BufferSize = 0x1000,
+                };
 
             const UnixFileMode OwnershipPermissions =
-                UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute |
-                UnixFileMode.GroupRead | UnixFileMode.GroupWrite | UnixFileMode.GroupExecute |
-                UnixFileMode.OtherRead | UnixFileMode.OtherWrite |  UnixFileMode.OtherExecute;
+                UnixFileMode.UserRead
+                | UnixFileMode.UserWrite
+                | UnixFileMode.UserExecute
+                | UnixFileMode.GroupRead
+                | UnixFileMode.GroupWrite
+                | UnixFileMode.GroupExecute
+                | UnixFileMode.OtherRead
+                | UnixFileMode.OtherWrite
+                | UnixFileMode.OtherExecute;
 
             // Restore Unix permissions.
             // For security, limit to ownership permissions, and respect umask (through UnixCreateMode).
             // We don't apply UnixFileMode.None because .zip files created on Windows and .zip files created
             // with previous versions of .NET don't include permissions.
-            UnixFileMode mode = (UnixFileMode)(source.ExternalAttributes >> 16) & OwnershipPermissions;
+            UnixFileMode mode =
+                (UnixFileMode)(source.ExternalAttributes >> 16) & OwnershipPermissions;
             if (mode != UnixFileMode.None && !OperatingSystem.IsWindows())
             {
                 fileStreamOptions.UnixCreateMode = mode;
@@ -97,10 +109,16 @@ namespace System.IO.Compression
             ArchivingUtils.AttemptSetLastWriteTime(destinationFileName, source.LastWriteTime);
         }
 
-        internal static void ExtractRelativeToDirectory(this ZipArchiveEntry source, string destinationDirectoryName) =>
-            ExtractRelativeToDirectory(source, destinationDirectoryName, overwrite: false);
+        internal static void ExtractRelativeToDirectory(
+            this ZipArchiveEntry source,
+            string destinationDirectoryName
+        ) => ExtractRelativeToDirectory(source, destinationDirectoryName, overwrite: false);
 
-        internal static void ExtractRelativeToDirectory(this ZipArchiveEntry source, string destinationDirectoryName, bool overwrite)
+        internal static void ExtractRelativeToDirectory(
+            this ZipArchiveEntry source,
+            string destinationDirectoryName,
+            bool overwrite
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
             ArgumentNullException.ThrowIfNull(destinationDirectoryName);
@@ -111,12 +129,25 @@ namespace System.IO.Compression
             if (!destinationDirectoryFullPath.EndsWith(Path.DirectorySeparatorChar))
             {
                 char sep = Path.DirectorySeparatorChar;
-                destinationDirectoryFullPath = string.Concat(destinationDirectoryFullPath, new ReadOnlySpan<char>(in sep));
+                destinationDirectoryFullPath = string.Concat(
+                    destinationDirectoryFullPath,
+                    new ReadOnlySpan<char>(in sep)
+                );
             }
 
-            string fileDestinationPath = Path.GetFullPath(Path.Combine(destinationDirectoryFullPath, ArchivingUtils.SanitizeEntryFilePath(source.FullName)));
+            string fileDestinationPath = Path.GetFullPath(
+                Path.Combine(
+                    destinationDirectoryFullPath,
+                    ArchivingUtils.SanitizeEntryFilePath(source.FullName)
+                )
+            );
 
-            if (!fileDestinationPath.StartsWith(destinationDirectoryFullPath, PathInternal.StringComparison))
+            if (
+                !fileDestinationPath.StartsWith(
+                    destinationDirectoryFullPath,
+                    PathInternal.StringComparison
+                )
+            )
                 throw new IOException(SR.IO_ExtractingResultsInOutside);
 
             if (Path.GetFileName(fileDestinationPath).Length == 0)

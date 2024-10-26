@@ -26,8 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Signatures {
-
-	internal sealed class Param : InputOutputItem {
-	}
+namespace Mono.Cecil.Signatures
+{
+    internal sealed class Param : InputOutputItem { }
 }

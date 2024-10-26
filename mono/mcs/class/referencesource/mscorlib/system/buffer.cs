@@ -1,54 +1,64 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System {
-    
+namespace System
+{
     //Only contains static methods.  Does not require serialization
-    
+
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
     using System.Security;
-    using System.Runtime;
 
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public static partial class Buffer
     {
 #if !MONO
         // Copies from one primitive array to another primitive array without
-        // respecting types.  This calls memmove internally.  The count and 
+        // respecting types.  This calls memmove internally.  The count and
         // offset parameters here are in bytes.  If you want to use traditional
         // array element indices and counts, use Array.Copy.
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public static extern void BlockCopy(Array src, int srcOffset,
-            Array dst, int dstOffset, int count);
+        public static extern void BlockCopy(
+            Array src,
+            int srcOffset,
+            Array dst,
+            int dstOffset,
+            int count
+        );
 #endif
         // A very simple and efficient memmove that assumes all of the
         // parameter validation has already been done.  The count and offset
         // parameters here are in bytes.  If you want to use traditional
         // array element indices and counts, use Array.Copy.
 #if !MONO
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern bool InternalBlockCopy(Array src, int srcOffsetBytes,
-            Array dst, int dstOffsetBytes, int byteCount);
+        internal static extern bool InternalBlockCopy(
+            Array src,
+            int srcOffsetBytes,
+            Array dst,
+            int dstOffsetBytes,
+            int byteCount
+        );
 
-        // This is ported from the optimized CRT assembly in memchr.asm. The JIT generates 
+        // This is ported from the optimized CRT assembly in memchr.asm. The JIT generates
         // pretty good code here and this ends up being within a couple % of the CRT asm.
         // It is however cross platform as the CRT hasn't ported their fast version to 64-bit
         // platforms.
         //
-        [System.Security.SecurityCritical]  // auto-generated
-        internal unsafe static int IndexOfByte(byte* src, byte value, int index, int count)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static unsafe int IndexOfByte(byte* src, byte value, int index, int count)
         {
             Contract.Assert(src != null, "src should not be null");
 
@@ -60,7 +70,7 @@ namespace System {
                 if (count == 0)
                     return -1;
                 else if (*pByte == value)
-                    return (int) (pByte - src);
+                    return (int)(pByte - src);
 
                 count--;
                 pByte++;
@@ -90,7 +100,7 @@ namespace System {
                 if (t1 != 0)
                 {
                     // We've found a match for value, figure out which position it's in.
-                    int foundIndex = (int) (pByte - src);
+                    int foundIndex = (int)(pByte - src);
                     if (pByte[0] == value)
                         return foundIndex;
                     else if (pByte[1] == value)
@@ -103,14 +113,13 @@ namespace System {
 
                 count -= 4;
                 pByte += 4;
-
             }
 
             // Catch any bytes that might be left at the tail of the buffer
             while (count > 0)
             {
                 if (*pByte == value)
-                    return (int) (pByte - src);
+                    return (int)(pByte - src);
 
                 count--;
                 pByte++;
@@ -122,24 +131,24 @@ namespace System {
 #if !MONO
         // Returns a bool to indicate if the array is of primitive data types
         // or not.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern bool IsPrimitiveTypeArray(Array array);
 #endif
         // Gets a particular byte out of the array.  The array must be an
-        // array of primitives.  
+        // array of primitives.
         //
-        // This essentially does the following: 
+        // This essentially does the following:
         // return ((byte*)array) + index.
         //
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern byte _GetByte(Array array, int index);
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public static byte GetByte(Array array, int index)
         {
             // Is the array present?
@@ -148,7 +157,10 @@ namespace System {
 
             // Is it of primitive types?
             if (!IsPrimitiveTypeArray(array))
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBePrimArray"), "array");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBePrimArray"),
+                    "array"
+                );
 
             // Is the index in valid range of the array?
             if (index < 0 || index >= _ByteLength(array))
@@ -158,18 +170,18 @@ namespace System {
         }
 #endif
         // Sets a particular byte in an the array.  The array must be an
-        // array of primitives.  
+        // array of primitives.
         //
-        // This essentially does the following: 
+        // This essentially does the following:
         // *(((byte*)array) + index) = value.
         //
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void _SetByte(Array array, int index, byte value);
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public static void SetByte(Array array, int index, byte value)
         {
             // Is the array present?
@@ -178,7 +190,10 @@ namespace System {
 
             // Is it of primitive types?
             if (!IsPrimitiveTypeArray(array))
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBePrimArray"), "array");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBePrimArray"),
+                    "array"
+                );
 
             // Is the index in valid range of the array?
             if (index < 0 || index >= _ByteLength(array))
@@ -188,21 +203,21 @@ namespace System {
             _SetByte(array, index, value);
         }
 #endif
-    
         // Gets a particular byte out of the array.  The array must be an
-        // array of primitives.  
+        // array of primitives.
         //
-        // This essentially does the following: 
+        // This essentially does the following:
         // return array.length * sizeof(array.UnderlyingElementType).
         //
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern int _ByteLength(Array array);
+
 #if !MONO
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public static int ByteLength(Array array)
         {
             // Is the array present?
@@ -211,43 +226,68 @@ namespace System {
 
             // Is it of primitive types?
             if (!IsPrimitiveTypeArray(array))
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBePrimArray"), "array");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBePrimArray"),
+                    "array"
+                );
 
             return _ByteLength(array);
         }
 #endif
-        [System.Security.SecurityCritical]  // auto-generated
-        internal unsafe static void ZeroMemory(byte* src, long len)
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal static unsafe void ZeroMemory(byte* src, long len)
         {
-            while(len-- > 0)
+            while (len-- > 0)
                 *(src + len) = 0;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal unsafe static void Memcpy(byte[] dest, int destIndex, byte* src, int srcIndex, int len) {
-            Contract.Assert( (srcIndex >= 0) && (destIndex >= 0) && (len >= 0), "Index and length must be non-negative!");
+        internal static unsafe void Memcpy(
+            byte[] dest,
+            int destIndex,
+            byte* src,
+            int srcIndex,
+            int len
+        )
+        {
+            Contract.Assert(
+                (srcIndex >= 0) && (destIndex >= 0) && (len >= 0),
+                "Index and length must be non-negative!"
+            );
             Contract.Assert(dest.Length - destIndex >= len, "not enough bytes in dest");
-            // If dest has 0 elements, the fixed statement will throw an 
+            // If dest has 0 elements, the fixed statement will throw an
             // IndexOutOfRangeException.  Special-case 0-byte copies.
-            if (len==0)
+            if (len == 0)
                 return;
-            fixed(byte* pDest = dest) {
+            fixed (byte* pDest = dest)
+            {
                 Memcpy(pDest + destIndex, src + srcIndex, len);
             }
         }
 
         [SecurityCritical]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal unsafe static void Memcpy(byte* pDest, int destIndex, byte[] src, int srcIndex, int len)
+        internal static unsafe void Memcpy(
+            byte* pDest,
+            int destIndex,
+            byte[] src,
+            int srcIndex,
+            int len
+        )
         {
-            Contract.Assert( (srcIndex >= 0) && (destIndex >= 0) && (len >= 0), "Index and length must be non-negative!");        
+            Contract.Assert(
+                (srcIndex >= 0) && (destIndex >= 0) && (len >= 0),
+                "Index and length must be non-negative!"
+            );
             Contract.Assert(src.Length - srcIndex >= len, "not enough bytes in src");
-            // If dest has 0 elements, the fixed statement will throw an 
+            // If dest has 0 elements, the fixed statement will throw an
             // IndexOutOfRangeException.  Special-case 0-byte copies.
-            if (len==0)
+            if (len == 0)
                 return;
-            fixed(byte* pSrc = src) {
+            fixed (byte* pSrc = src)
+            {
                 Memcpy(pDest + destIndex, pSrc + srcIndex, len);
             }
         }
@@ -263,14 +303,15 @@ namespace System {
         // 2. It is difficult to get this right for arm and again due to release dates we would like to visit it later.
         [FriendAccessAllowed]
         [System.Security.SecurityCritical]
-        [ResourceExposure(ResourceScope.None)] 
+        [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
 #if ARM
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal unsafe static extern void Memcpy(byte* dest, byte* src, int len);
+        internal static extern unsafe void Memcpy(byte* dest, byte* src, int len);
 #else // ARM
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        internal unsafe static void Memcpy(byte* dest, byte* src, int len) {
+        internal static unsafe void Memcpy(byte* dest, byte* src, int len)
+        {
             Contract.Assert(len >= 0, "Negative length in memcopy!");
             Memmove(dest, src, (uint)len);
         }
@@ -289,9 +330,11 @@ namespace System {
             // P/Invoke into the native version when the buffers are overlapping and the copy needs to be performed backwards
             // This check can produce false positives for lengths greater than Int32.MaxInt. It is fine because we want to use PInvoke path for the large lengths anyway.
 #if WIN64
-            if ((ulong)dest - (ulong)src < len) goto PInvoke;
+            if ((ulong)dest - (ulong)src < len)
+                goto PInvoke;
 #else
-            if (((uint)dest - (uint)src) < len) goto PInvoke;
+            if (((uint)dest - (uint)src) < len)
+                goto PInvoke;
 #endif
             //
             // This is portable version of memcpy. It mirrors what the hand optimized assembly versions of memcpy typically do.
@@ -302,127 +345,128 @@ namespace System {
 
             switch (len)
             {
-            case 0:
-                return;
-            case 1:
-                *dest = *src;
-                return;
-            case 2:
-                *(short *)dest = *(short *)src;
-                return;
-            case 3:
-                *(short *)dest = *(short *)src;
-                *(dest + 2) = *(src + 2);
-                return;
-            case 4:
-                *(int *)dest = *(int *)src;
-                return;
-            case 5:
-                *(int*)dest = *(int*)src;
-                *(dest + 4) = *(src + 4);
-                return;
-            case 6:
-                *(int*)dest = *(int*)src;
-                *(short*)(dest + 4) = *(short*)(src + 4);
-                return;
-            case 7:
-                *(int*)dest = *(int*)src;
-                *(short*)(dest + 4) = *(short*)(src + 4);
-                *(dest + 6) = *(src + 6);
-                return;
-            case 8:
+                case 0:
+                    return;
+                case 1:
+                    *dest = *src;
+                    return;
+                case 2:
+                    *(short*)dest = *(short*)src;
+                    return;
+                case 3:
+                    *(short*)dest = *(short*)src;
+                    *(dest + 2) = *(src + 2);
+                    return;
+                case 4:
+                    *(int*)dest = *(int*)src;
+                    return;
+                case 5:
+                    *(int*)dest = *(int*)src;
+                    *(dest + 4) = *(src + 4);
+                    return;
+                case 6:
+                    *(int*)dest = *(int*)src;
+                    *(short*)(dest + 4) = *(short*)(src + 4);
+                    return;
+                case 7:
+                    *(int*)dest = *(int*)src;
+                    *(short*)(dest + 4) = *(short*)(src + 4);
+                    *(dest + 6) = *(src + 6);
+                    return;
+                case 8:
 #if WIN64
-                *(long*)dest = *(long*)src;
+                    *(long*)dest = *(long*)src;
 #else
-                *(int*)dest = *(int*)src;
-                *(int*)(dest + 4) = *(int*)(src + 4);
+                    *(int*)dest = *(int*)src;
+                    *(int*)(dest + 4) = *(int*)(src + 4);
 #endif
-                return;
-            case 9:
+                    return;
+                case 9:
 #if WIN64
-                *(long*)dest = *(long*)src;
+                    *(long*)dest = *(long*)src;
 #else
-                *(int*)dest = *(int*)src;
-                *(int*)(dest + 4) = *(int*)(src + 4);
+                    *(int*)dest = *(int*)src;
+                    *(int*)(dest + 4) = *(int*)(src + 4);
 #endif
-                *(dest + 8) = *(src + 8);
-                return;
-            case 10:
+                    *(dest + 8) = *(src + 8);
+                    return;
+                case 10:
 #if WIN64
-                *(long*)dest = *(long*)src;
+                    *(long*)dest = *(long*)src;
 #else
-                *(int*)dest = *(int*)src;
-                *(int*)(dest + 4) = *(int*)(src + 4);
+                    *(int*)dest = *(int*)src;
+                    *(int*)(dest + 4) = *(int*)(src + 4);
 #endif
-                *(short*)(dest + 8) = *(short*)(src + 8);
-                return;
-            case 11:
+                    *(short*)(dest + 8) = *(short*)(src + 8);
+                    return;
+                case 11:
 #if WIN64
-                *(long*)dest = *(long*)src;
+                    *(long*)dest = *(long*)src;
 #else
-                *(int*)dest = *(int*)src;
-                *(int*)(dest + 4) = *(int*)(src + 4);
+                    *(int*)dest = *(int*)src;
+                    *(int*)(dest + 4) = *(int*)(src + 4);
 #endif
-                *(short*)(dest + 8) = *(short*)(src + 8);
-                *(dest + 10) = *(src + 10);
-                return;
-            case 12:
+                    *(short*)(dest + 8) = *(short*)(src + 8);
+                    *(dest + 10) = *(src + 10);
+                    return;
+                case 12:
 #if WIN64
-                *(long*)dest = *(long*)src;
+                    *(long*)dest = *(long*)src;
 #else
-                *(int*)dest = *(int*)src;
-                *(int*)(dest + 4) = *(int*)(src + 4);
+                    *(int*)dest = *(int*)src;
+                    *(int*)(dest + 4) = *(int*)(src + 4);
 #endif
-                *(int*)(dest + 8) = *(int*)(src + 8);
-                return;
-            case 13:
+                    *(int*)(dest + 8) = *(int*)(src + 8);
+                    return;
+                case 13:
 #if WIN64
-                *(long*)dest = *(long*)src;
+                    *(long*)dest = *(long*)src;
 #else
-                *(int*)dest = *(int*)src;
-                *(int*)(dest + 4) = *(int*)(src + 4);
+                    *(int*)dest = *(int*)src;
+                    *(int*)(dest + 4) = *(int*)(src + 4);
 #endif
-                *(int*)(dest + 8) = *(int*)(src + 8);
-                *(dest + 12) = *(src + 12);
-                return;
-            case 14:
+                    *(int*)(dest + 8) = *(int*)(src + 8);
+                    *(dest + 12) = *(src + 12);
+                    return;
+                case 14:
 #if WIN64
-                *(long*)dest = *(long*)src;
+                    *(long*)dest = *(long*)src;
 #else
-                *(int*)dest = *(int*)src;
-                *(int*)(dest + 4) = *(int*)(src + 4);
+                    *(int*)dest = *(int*)src;
+                    *(int*)(dest + 4) = *(int*)(src + 4);
 #endif
-                *(int*)(dest + 8) = *(int*)(src + 8);
-                *(short*)(dest + 12) = *(short*)(src + 12);
-                return;
-            case 15:
+                    *(int*)(dest + 8) = *(int*)(src + 8);
+                    *(short*)(dest + 12) = *(short*)(src + 12);
+                    return;
+                case 15:
 #if WIN64
-                *(long*)dest = *(long*)src;
+                    *(long*)dest = *(long*)src;
 #else
-                *(int*)dest = *(int*)src;
-                *(int*)(dest + 4) = *(int*)(src + 4);
+                    *(int*)dest = *(int*)src;
+                    *(int*)(dest + 4) = *(int*)(src + 4);
 #endif
-                *(int*)(dest + 8) = *(int*)(src + 8);
-                *(short*)(dest + 12) = *(short*)(src + 12);
-                *(dest + 14) = *(src + 14);
-                return;
-            case 16:
+                    *(int*)(dest + 8) = *(int*)(src + 8);
+                    *(short*)(dest + 12) = *(short*)(src + 12);
+                    *(dest + 14) = *(src + 14);
+                    return;
+                case 16:
 #if WIN64
-                *(long*)dest = *(long*)src;
-                *(long*)(dest + 8) = *(long*)(src + 8);
+                    *(long*)dest = *(long*)src;
+                    *(long*)(dest + 8) = *(long*)(src + 8);
 #else
-                *(int*)dest = *(int*)src;
-                *(int*)(dest + 4) = *(int*)(src + 4);
-                *(int*)(dest + 8) = *(int*)(src + 8);
-                *(int*)(dest + 12) = *(int*)(src + 12);
+                    *(int*)dest = *(int*)src;
+                    *(int*)(dest + 4) = *(int*)(src + 4);
+                    *(int*)(dest + 8) = *(int*)(src + 8);
+                    *(int*)(dest + 12) = *(int*)(src + 12);
 #endif
-                return;
-            default:
-                break;
+                    return;
+                default:
+                    break;
             }
 
             // P/Invoke into the native version for large lengths
-            if (len >= 512) goto PInvoke;
+            if (len >= 512)
+                goto PInvoke;
 
             if (((int)dest & 3) != 0)
             {
@@ -435,17 +479,18 @@ namespace System {
                     if (((int)dest & 2) == 0)
                         goto Aligned;
                 }
-                *(short *)dest = *(short *)src;
+                *(short*)dest = *(short*)src;
                 src += 2;
                 dest += 2;
                 len -= 2;
-            Aligned: ;
+                Aligned:
+                ;
             }
 
 #if WIN64
             if (((int)dest & 4) != 0)
             {
-                *(int *)dest = *(int *)src;
+                *(int*)dest = *(int*)src;
                 src += 4;
                 dest += 4;
                 len -= 4;
@@ -483,27 +528,26 @@ namespace System {
 #endif
                 dest += 8;
                 src += 8;
-           }
-           if ((len & 4) != 0) 
-           {
+            }
+            if ((len & 4) != 0)
+            {
                 ((int*)dest)[0] = ((int*)src)[0];
                 dest += 4;
                 src += 4;
-           }
-           if ((len & 2) != 0) 
-           {
+            }
+            if ((len & 2) != 0)
+            {
                 ((short*)dest)[0] = ((short*)src)[0];
                 dest += 2;
                 src += 2;
-           }
-           if ((len & 1) != 0)
+            }
+            if ((len & 1) != 0)
                 *dest = *src;
 
             return;
 
             PInvoke:
             _Memmove(dest, src, len);
-
         }
 
         // Non-inlinable wrapper around the QCall that avoids poluting the fast path
@@ -524,7 +568,7 @@ namespace System {
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         [SecurityCritical]
-        [ResourceExposure(ResourceScope.None)]        
+        [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
 #if WIN64
         extern private unsafe static void __Memmove(byte* dest, byte* src, ulong len);
@@ -532,32 +576,40 @@ namespace System {
         extern private unsafe static void __Memmove(byte* dest, byte* src, uint len);
 #endif
 
-
-        // The attributes on this method are chosen for best JIT performance. 
+        // The attributes on this method are chosen for best JIT performance.
         // Please do not edit unless intentional.
         [System.Security.SecurityCritical]
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static unsafe void MemoryCopy(void* source, void* destination, long destinationSizeInBytes, long sourceBytesToCopy)
+        public static unsafe void MemoryCopy(
+            void* source,
+            void* destination,
+            long destinationSizeInBytes,
+            long sourceBytesToCopy
+        )
         {
             if (sourceBytesToCopy > destinationSizeInBytes)
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.sourceBytesToCopy);
             }
 #if WIN64
-            Memmove((byte*)destination, (byte*)source, checked((ulong) sourceBytesToCopy));
+            Memmove((byte*)destination, (byte*)source, checked((ulong)sourceBytesToCopy));
 #else
             Memmove((byte*)destination, (byte*)source, checked((uint)sourceBytesToCopy));
 #endif // WIN64
         }
 
-
-        // The attributes on this method are chosen for best JIT performance. 
+        // The attributes on this method are chosen for best JIT performance.
         // Please do not edit unless intentional.
         [System.Security.SecurityCritical]
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
         [CLSCompliant(false)]
-        public static unsafe void MemoryCopy(void* source, void* destination, ulong destinationSizeInBytes, ulong sourceBytesToCopy)
+        public static unsafe void MemoryCopy(
+            void* source,
+            void* destination,
+            ulong destinationSizeInBytes,
+            ulong sourceBytesToCopy
+        )
         {
             if (sourceBytesToCopy > destinationSizeInBytes)
             {

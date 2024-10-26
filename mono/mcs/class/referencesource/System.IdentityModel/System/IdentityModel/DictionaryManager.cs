@@ -38,7 +38,7 @@ namespace System.IdentityModel
             this.trustFeb2005Dictionary = XD.TrustFeb2005Dictionary;
             this.xmlEncryptionDictionary = XD.XmlEncryptionDictionary;
 
-            // These 3 are factored into a seperate dictionary in ServiceModel under DXD. 
+            // These 3 are factored into a seperate dictionary in ServiceModel under DXD.
             this.secureConversationDec2005Dictionary = XD.SecureConversationDec2005Dictionary;
             this.securityAlgorithmDec2005Dictionary = XD.SecurityAlgorithmDec2005Dictionary;
             this.trustDec2005Dictionary = XD.TrustDec2005Dictionary;
@@ -53,12 +53,14 @@ namespace System.IdentityModel
             this.securityAlgorithmDictionary = new SecurityAlgorithmDictionary(parentDictionary);
             this.securityJan2004Dictionary = new SecurityJan2004Dictionary(parentDictionary);
             this.securityJanXXX2005Dictionary = new SecurityXXX2005Dictionary(parentDictionary);
-            this.secureConversationFeb2005Dictionary = new SecureConversationFeb2005Dictionary(parentDictionary);
+            this.secureConversationFeb2005Dictionary = new SecureConversationFeb2005Dictionary(
+                parentDictionary
+            );
             this.trustFeb2005Dictionary = new TrustFeb2005Dictionary(parentDictionary);
             this.xmlEncryptionDictionary = new XmlEncryptionDictionary(parentDictionary);
             this.parentDictionary = parentDictionary;
 
-            // These 3 are factored into a seperate dictionary in ServiceModel under DXD. 
+            // These 3 are factored into a seperate dictionary in ServiceModel under DXD.
             // ServiceModel should set these seperately using the property setters.
             this.secureConversationDec2005Dictionary = XD.SecureConversationDec2005Dictionary;
             this.securityAlgorithmDec2005Dictionary = XD.SecurityAlgorithmDec2005Dictionary;
@@ -100,7 +102,7 @@ namespace System.IdentityModel
             get { return this.securityAlgorithmDictionary; }
             set { this.securityAlgorithmDictionary = value; }
         }
- 
+
         public SecurityJan2004Dictionary SecurityJan2004Dictionary
         {
             get { return this.securityJan2004Dictionary; }

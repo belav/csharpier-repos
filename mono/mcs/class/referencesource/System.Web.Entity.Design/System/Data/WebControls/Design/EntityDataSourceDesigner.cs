@@ -10,21 +10,24 @@
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing.Design;
-using System.Web.UI.WebControls;
 using System.Web.UI.Design;
-using System.Windows.Forms;
 using System.Web.UI.Design.WebControls.Util;
+using System.Web.UI.WebControls;
+using System.Windows.Forms;
 
 namespace System.Web.UI.Design.WebControls
 {
     public class EntityDataSourceDesigner : DataSourceDesigner
     {
         private EntityDataSourceDesignerHelper _helper;
-        
+
         public override void Initialize(IComponent component)
         {
             base.Initialize(component);
-            _helper = new EntityDataSourceDesignerHelper(component as EntityDataSource, true /*interactiveMode*/);
+            _helper = new EntityDataSourceDesignerHelper(
+                component as EntityDataSource,
+                true /*interactiveMode*/
+            );
             _helper.AddSystemWebEntityReference();
         }
 
@@ -32,10 +35,7 @@ namespace System.Web.UI.Design.WebControls
         // configure it. If there is no metadata available, an error may occur, but you can still try to configure the control.
         public override bool CanConfigure
         {
-            get
-            {                
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool CanRefreshSchema
@@ -43,16 +43,25 @@ namespace System.Web.UI.Design.WebControls
             get
             {
                 // Minimum properties required for schema are ConnectionString and DefaultContainerName, plus EntitySetName or CommandText
-                return (!String.IsNullOrEmpty(_helper.ConnectionString) && !String.IsNullOrEmpty(_helper.DefaultContainerName)) &&
-                    (!String.IsNullOrEmpty(_helper.EntitySetName) || !String.IsNullOrEmpty(_helper.CommandText));                
+                return (
+                        !String.IsNullOrEmpty(_helper.ConnectionString)
+                        && !String.IsNullOrEmpty(_helper.DefaultContainerName)
+                    )
+                    && (
+                        !String.IsNullOrEmpty(_helper.EntitySetName)
+                        || !String.IsNullOrEmpty(_helper.CommandText)
+                    );
             }
         }
 
         public override void Configure()
         {
-            InvokeTransactedChange(Component,
+            InvokeTransactedChange(
+                Component,
                 new TransactedChangeCallback(ConfigureDataSourceChangeCallback),
-                null, Strings.WizardTransactionDescription);
+                null,
+                Strings.WizardTransactionDescription
+            );
         }
 
         private bool ConfigureDataSourceChangeCallback(object context)
@@ -62,7 +71,11 @@ namespace System.Web.UI.Design.WebControls
                 SuppressDataSourceEvents();
 
                 IServiceProvider serviceProvider = Component.Site as IServiceProvider;
-                EntityDataSourceWizardForm form = new EntityDataSourceWizardForm(serviceProvider, _helper.LoadEntityDataSourceState(), this);
+                EntityDataSourceWizardForm form = new EntityDataSourceWizardForm(
+                    serviceProvider,
+                    _helper.LoadEntityDataSourceState(),
+                    this
+                );
                 DialogResult result = UIHelper.ShowDialog(serviceProvider, form);
                 if (result == DialogResult.OK)
                 {
@@ -119,7 +132,10 @@ namespace System.Web.UI.Design.WebControls
             OnSchemaRefreshed(e);
         }
 
-        internal bool InternalViewSchemasEquivalent(IDataSourceViewSchema viewSchema1, IDataSourceViewSchema viewSchema2)
+        internal bool InternalViewSchemasEquivalent(
+            IDataSourceViewSchema viewSchema1,
+            IDataSourceViewSchema viewSchema2
+        )
         {
             return ViewSchemasEquivalent(viewSchema1, viewSchema2);
         }
@@ -137,169 +153,114 @@ namespace System.Web.UI.Design.WebControls
 
         #region Overridden control properties for providing editors and dropdowns in property grid
         [
-        DefaultValue(""),
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_DefaultContainerName),
-        TypeConverter(typeof(EntityDataSourceContainerNameConverter)),
+            DefaultValue(""),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_DefaultContainerName),
+            TypeConverter(typeof(EntityDataSourceContainerNameConverter)),
         ]
         public string DefaultContainerName
         {
-            get
-            {
-                return _helper.DefaultContainerName;
-            }
-            set
-            {
-                _helper.DefaultContainerName = value;
-            }
+            get { return _helper.DefaultContainerName; }
+            set { _helper.DefaultContainerName = value; }
         }
 
-
         [
-        DefaultValue(""),
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_EntitySetName),
-        TypeConverter(typeof(EntityDataSourceEntitySetNameConverter)),
+            DefaultValue(""),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_EntitySetName),
+            TypeConverter(typeof(EntityDataSourceEntitySetNameConverter)),
         ]
         public string EntitySetName
         {
-            get
-            {
-                return _helper.EntitySetName;
-            }
-            set
-            {
-                _helper.EntitySetName = value;
-            }
+            get { return _helper.EntitySetName; }
+            set { _helper.EntitySetName = value; }
         }
 
         [
-        DefaultValue(""),
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_EntityTypeFilter),
-        TypeConverter(typeof(EntityDataSourceEntityTypeFilterConverter)),
+            DefaultValue(""),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_EntityTypeFilter),
+            TypeConverter(typeof(EntityDataSourceEntityTypeFilterConverter)),
         ]
         public string EntityTypeFilter
         {
-            get
-            {
-                return _helper.EntityTypeFilter;
-            }
-            set
-            {
-                _helper.EntityTypeFilter = value;
-            }
+            get { return _helper.EntityTypeFilter; }
+            set { _helper.EntityTypeFilter = value; }
         }
 
         [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_CommandText),
-        DefaultValue(null),
-        Editor(typeof(EntityDataSourceStatementEditor), typeof(UITypeEditor)),
-        MergableProperty(false),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_CommandText),
+            DefaultValue(null),
+            Editor(typeof(EntityDataSourceStatementEditor), typeof(UITypeEditor)),
+            MergableProperty(false),
         ]
         public string CommandText
         {
-            get
-            {
-                return _helper.CommandText;
-            }
-            set
-            {
-                _helper.CommandText = value;
-            }
+            get { return _helper.CommandText; }
+            set { _helper.CommandText = value; }
         }
 
         [
-        DefaultValue(""),
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_ConnectionString)
+            DefaultValue(""),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_ConnectionString)
         ]
         public string ConnectionString
         {
-            get
-            {
-                return _helper.ConnectionString;
-            }
-            set
-            {
-                _helper.ConnectionString = value;
-            }
+            get { return _helper.ConnectionString; }
+            set { _helper.ConnectionString = value; }
         }
 
         [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_OrderBy),
-        DefaultValue(null),
-        Editor(typeof(EntityDataSourceStatementEditor), typeof(UITypeEditor)),
-        MergableProperty(false),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_OrderBy),
+            DefaultValue(null),
+            Editor(typeof(EntityDataSourceStatementEditor), typeof(UITypeEditor)),
+            MergableProperty(false),
         ]
         public string OrderBy
         {
-            get
-            {
-                return _helper.OrderBy;
-            }
-            set
-            {
-                _helper.OrderBy = value;
-            }
+            get { return _helper.OrderBy; }
+            set { _helper.OrderBy = value; }
         }
 
         [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Select),
-        DefaultValue(""),
-        Editor(typeof(EntityDataSourceStatementEditor), typeof(UITypeEditor)),
-        MergableProperty(false),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_Select),
+            DefaultValue(""),
+            Editor(typeof(EntityDataSourceStatementEditor), typeof(UITypeEditor)),
+            MergableProperty(false),
         ]
         public string Select
         {
-            get
-            {
-                return _helper.Select;
-            }
-            set
-            {
-                _helper.Select = value;
-            }
+            get { return _helper.Select; }
+            set { _helper.Select = value; }
         }
 
         [
-        Category("Data"),
-        ResourceDescription(WebControlsRes.PropertyDescription_Where),
-        DefaultValue(null),
-        Editor(typeof(EntityDataSourceStatementEditor), typeof(UITypeEditor)),
-        MergableProperty(false),
+            Category("Data"),
+            ResourceDescription(WebControlsRes.PropertyDescription_Where),
+            DefaultValue(null),
+            Editor(typeof(EntityDataSourceStatementEditor), typeof(UITypeEditor)),
+            MergableProperty(false),
         ]
         public string Where
         {
-            get
-            {
-                return _helper.Where;
-            }
-            set
-            {
-                _helper.Where = value;
-            }
+            get { return _helper.Where; }
+            set { _helper.Where = value; }
         }
         #endregion
 
         #region Helper methods to manage properties and parameters in the statement editor
         internal bool AutoGenerateOrderByClause
         {
-            get
-            {
-                return _helper.AutoGenerateOrderByClause;
-            }
+            get { return _helper.AutoGenerateOrderByClause; }
         }
-        
+
         internal bool AutoGenerateWhereClause
         {
-            get
-            {
-                return _helper.AutoGenerateWhereClause;
-            }
+            get { return _helper.AutoGenerateWhereClause; }
         }
 
         internal ParameterCollection CloneCommandParameters()
@@ -315,13 +276,13 @@ namespace System.Web.UI.Design.WebControls
         internal ParameterCollection CloneSelectParameters()
         {
             return CloneParameterCollection(_helper.SelectParameters);
-        }        
+        }
 
         internal ParameterCollection CloneWhereParameters()
         {
             return CloneParameterCollection(_helper.WhereParameters);
         }
-        
+
         private ParameterCollection CloneParameterCollection(ParameterCollection original)
         {
             ParameterCollection clones = new ParameterCollection();
@@ -329,7 +290,10 @@ namespace System.Web.UI.Design.WebControls
             return clones;
         }
 
-        internal void CloneParameters(ParameterCollection originalParameters, ParameterCollection newParameters)
+        internal void CloneParameters(
+            ParameterCollection originalParameters,
+            ParameterCollection newParameters
+        )
         {
             foreach (ICloneable parameter in originalParameters)
             {
@@ -353,7 +317,7 @@ namespace System.Web.UI.Design.WebControls
         {
             SetParameters(_helper.SelectParameters, newParams);
         }
-        
+
         internal void SetWhereParameterContents(ParameterCollection newParams)
         {
             SetParameters(_helper.WhereParameters, newParams);
@@ -375,26 +339,54 @@ namespace System.Web.UI.Design.WebControls
 
             // Properties that are overridden in the designer because they have custom editors or converters
             Type designerType = GetType();
-            properties["ConnectionString"] = TypeDescriptor.CreateProperty(designerType, "ConnectionString", typeof(string));
-            properties["DefaultContainerName"] = TypeDescriptor.CreateProperty(designerType, "DefaultContainerName", typeof(string));
-            properties["EntitySetName"] = TypeDescriptor.CreateProperty(designerType, "EntitySetName", typeof(string));
-            properties["EntityTypeFilter"] = TypeDescriptor.CreateProperty(designerType, "EntityTypeFilter", typeof(string));
-            properties["CommandText"] = TypeDescriptor.CreateProperty(designerType, "CommandText", typeof(string));
-            properties["OrderBy"] = TypeDescriptor.CreateProperty(designerType, "OrderBy", typeof(string));
-            properties["Select"] = TypeDescriptor.CreateProperty(designerType, "Select", typeof(string));
-            properties["Where"] = TypeDescriptor.CreateProperty(designerType, "Where", typeof(string));
-            
+            properties["ConnectionString"] = TypeDescriptor.CreateProperty(
+                designerType,
+                "ConnectionString",
+                typeof(string)
+            );
+            properties["DefaultContainerName"] = TypeDescriptor.CreateProperty(
+                designerType,
+                "DefaultContainerName",
+                typeof(string)
+            );
+            properties["EntitySetName"] = TypeDescriptor.CreateProperty(
+                designerType,
+                "EntitySetName",
+                typeof(string)
+            );
+            properties["EntityTypeFilter"] = TypeDescriptor.CreateProperty(
+                designerType,
+                "EntityTypeFilter",
+                typeof(string)
+            );
+            properties["CommandText"] = TypeDescriptor.CreateProperty(
+                designerType,
+                "CommandText",
+                typeof(string)
+            );
+            properties["OrderBy"] = TypeDescriptor.CreateProperty(
+                designerType,
+                "OrderBy",
+                typeof(string)
+            );
+            properties["Select"] = TypeDescriptor.CreateProperty(
+                designerType,
+                "Select",
+                typeof(string)
+            );
+            properties["Where"] = TypeDescriptor.CreateProperty(
+                designerType,
+                "Where",
+                typeof(string)
+            );
+
             // Properties that should be browsable in intellisense, but not visible in the designer property grid
             properties.Remove("ContextType");
         }
 
         internal EntityDataSourceDesignerHelper Helper
         {
-            get
-            {
-                return _helper;
-            }
+            get { return _helper; }
         }
-
     }
 }

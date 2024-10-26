@@ -4,16 +4,18 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net {
-
-// Host information
+namespace System.Net
+{
+    // Host information
     /// <devdoc>
     ///    <para>Provides a container class for Internet host address information..</para>
     /// </devdoc>
-    public class IPHostEntry {
+    public class IPHostEntry
+    {
         string hostName;
         string[] aliases;
         IPAddress[] addressList;
+
         // CBT: When doing a DNS resolve, can the resulting host name trusted as an SPN?
         // Only used on Win7Sp1+.  Assume trusted by default.
         internal bool isTrustedHost = true;
@@ -26,13 +28,10 @@ namespace System.Net {
         /// </devdoc>
         /// <devdoc>
         /// </devdoc>
-        public string HostName {
-            get {
-                return hostName;
-            }
-            set {
-                hostName = value;
-            }
+        public string HostName
+        {
+            get { return hostName; }
+            set { hostName = value; }
         }
 
         /// <devdoc>
@@ -44,13 +43,10 @@ namespace System.Net {
         /// </devdoc>
         /// <devdoc>
         /// </devdoc>
-        public string[] Aliases {
-            get {
-                return aliases;
-            }
-            set {
-                aliases = value;
-            }
+        public string[] Aliases
+        {
+            get { return aliases; }
+            set { aliases = value; }
         }
 
         /// <devdoc>
@@ -61,13 +57,10 @@ namespace System.Net {
         /// </devdoc>
         /// <devdoc>
         /// </devdoc>
-        public IPAddress[] AddressList {
-            get {
-                return addressList;
-            }
-            set {
-                addressList = value;
-            }
+        public IPAddress[] AddressList
+        {
+            get { return addressList; }
+            set { addressList = value; }
         }
     } // class IPHostEntry
 } // namespace System.Net

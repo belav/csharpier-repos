@@ -28,24 +28,22 @@
 
 
 using System.Collections.Generic;
-
 using NUnit.Framework;
 
 namespace MonoTests.System.Collections.Generic
 {
-	[TestFixture]
-	public class IListTest
-	{
-		[Test] // bug #80260
-		public void CastToArray ()
-		{
-			IList<string> list = new string[] { "foo", "bar" };
-			string[] array = (string[]) list;
-			Assert.IsNotNull (array, "#1");
-			Assert.AreEqual (2, array.Length, "#2");
-			Assert.AreEqual ("foo", array [0], "#3");
-			Assert.AreEqual ("bar", array [1], "#4");
-		}
-	}
+    [TestFixture]
+    public class IListTest
+    {
+        [Test] // bug #80260
+        public void CastToArray()
+        {
+            IList<string> list = new string[] { "foo", "bar" };
+            string[] array = (string[])list;
+            Assert.IsNotNull(array, "#1");
+            Assert.AreEqual(2, array.Length, "#2");
+            Assert.AreEqual("foo", array[0], "#3");
+            Assert.AreEqual("bar", array[1], "#4");
+        }
+    }
 }
-
