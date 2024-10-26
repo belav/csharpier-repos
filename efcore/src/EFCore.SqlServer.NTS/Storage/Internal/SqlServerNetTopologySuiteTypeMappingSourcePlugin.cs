@@ -14,8 +14,11 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal;
 /// </summary>
 public class SqlServerNetTopologySuiteTypeMappingSourcePlugin : IRelationalTypeMappingSourcePlugin
 {
-    private readonly HashSet<string> _spatialStoreTypes =
-        new(StringComparer.OrdinalIgnoreCase) { "geometry", "geography" };
+    private readonly HashSet<string> _spatialStoreTypes = new(StringComparer.OrdinalIgnoreCase)
+    {
+        "geometry",
+        "geography",
+    };
 
     private readonly NtsGeometryServices _geometryServices;
 

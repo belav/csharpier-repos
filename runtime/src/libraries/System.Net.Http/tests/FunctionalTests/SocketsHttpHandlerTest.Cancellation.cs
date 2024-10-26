@@ -288,10 +288,12 @@ namespace System.Net.Http.Functional.Tests
                 exactVersion: true
             );
 
-            TaskCompletionSource connectCallbackEntered =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
-            TaskCompletionSource connectCallbackGate =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource connectCallbackEntered = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            TaskCompletionSource connectCallbackGate = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             using HttpClientHandler handler = CreateHttpClientHandler();
             handler.MaxConnectionsPerServer = 1;
@@ -551,8 +553,9 @@ namespace System.Net.Http.Functional.Tests
         {
             byte[] postContent = "Hello world"u8.ToArray();
 
-            TaskCompletionSource serverReceivedRequest =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource serverReceivedRequest = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 async uri =>

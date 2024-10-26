@@ -473,8 +473,11 @@ namespace System.Reflection
                 scoped Span<bool> shouldCopyBack = stackalloc bool[_argCount];
 
                 regArgStorage = new((void**)pStorage, (uint)_argCount, areByRefs: false);
-                GCFrameRegistration regByRefStorage =
-                    new((void**)pByRefStorage, (uint)_argCount, areByRefs: true);
+                GCFrameRegistration regByRefStorage = new(
+                    (void**)pByRefStorage,
+                    (uint)_argCount,
+                    areByRefs: true
+                );
 
                 try
                 {

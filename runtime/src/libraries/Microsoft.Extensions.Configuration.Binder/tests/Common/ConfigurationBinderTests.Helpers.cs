@@ -34,8 +34,11 @@ namespace Microsoft.Extensions
     #region // Shared test classes
     public class ComplexOptions
     {
-        private static Dictionary<string, int> _existingDictionary =
-            new() { { "existing-item1", 1 }, { "existing-item2", 2 } };
+        private static Dictionary<string, int> _existingDictionary = new()
+        {
+            { "existing-item1", 1 },
+            { "existing-item2", 2 },
+        };
 
         public ComplexOptions()
         {

@@ -2444,97 +2444,99 @@ mb.RestartSequence(
             o => Assert.Equal("-- I <3 DDL", o.Sql)
         );
 
-    private static readonly LineString _lineString1 =
-        new(
+    private static readonly LineString _lineString1 = new(
+        new[]
+        {
+            new Coordinate(1.1, 2.2),
+            new Coordinate(2.2, 2.2),
+            new Coordinate(2.2, 1.1),
+            new Coordinate(7.1, 7.2),
+        }
+    )
+    {
+        SRID = 4326,
+    };
+
+    private static readonly LineString _lineString2 = new(
+        new[]
+        {
+            new Coordinate(7.1, 7.2),
+            new Coordinate(20.2, 20.2),
+            new Coordinate(20.20, 1.1),
+            new Coordinate(70.1, 70.2),
+        }
+    )
+    {
+        SRID = 4326,
+    };
+
+    private static readonly MultiPoint _multiPoint = new(
+        new[] { new Point(1.1, 2.2), new Point(2.2, 2.2), new Point(2.2, 1.1) }
+    )
+    {
+        SRID = 4326,
+    };
+
+    private static readonly Polygon _polygon1 = new(
+        new LinearRing(
             new[]
             {
                 new Coordinate(1.1, 2.2),
                 new Coordinate(2.2, 2.2),
                 new Coordinate(2.2, 1.1),
-                new Coordinate(7.1, 7.2),
+                new Coordinate(1.1, 2.2),
             }
         )
-        {
-            SRID = 4326,
-        };
+    )
+    {
+        SRID = 4326,
+    };
 
-    private static readonly LineString _lineString2 =
-        new(
+    private static readonly Polygon _polygon2 = new(
+        new LinearRing(
             new[]
             {
-                new Coordinate(7.1, 7.2),
+                new Coordinate(10.1, 20.2),
                 new Coordinate(20.2, 20.2),
-                new Coordinate(20.20, 1.1),
-                new Coordinate(70.1, 70.2),
+                new Coordinate(20.2, 10.1),
+                new Coordinate(10.1, 20.2),
             }
         )
-        {
-            SRID = 4326,
-        };
-
-    private static readonly MultiPoint _multiPoint =
-        new(new[] { new Point(1.1, 2.2), new Point(2.2, 2.2), new Point(2.2, 1.1) })
-        {
-            SRID = 4326,
-        };
-
-    private static readonly Polygon _polygon1 =
-        new(
-            new LinearRing(
-                new[]
-                {
-                    new Coordinate(1.1, 2.2),
-                    new Coordinate(2.2, 2.2),
-                    new Coordinate(2.2, 1.1),
-                    new Coordinate(1.1, 2.2),
-                }
-            )
-        )
-        {
-            SRID = 4326,
-        };
-
-    private static readonly Polygon _polygon2 =
-        new(
-            new LinearRing(
-                new[]
-                {
-                    new Coordinate(10.1, 20.2),
-                    new Coordinate(20.2, 20.2),
-                    new Coordinate(20.2, 10.1),
-                    new Coordinate(10.1, 20.2),
-                }
-            )
-        )
-        {
-            SRID = 4326,
-        };
+    )
+    {
+        SRID = 4326,
+    };
 
     private static readonly Point _point1 = new(1.1, 2.2, 3.3) { SRID = 4326 };
 
-    private static readonly MultiLineString _multiLineString =
-        new(new[] { _lineString1, _lineString2 }) { SRID = 4326 };
+    private static readonly MultiLineString _multiLineString = new(
+        new[] { _lineString1, _lineString2 }
+    )
+    {
+        SRID = 4326,
+    };
 
-    private static readonly MultiPolygon _multiPolygon =
-        new(new[] { _polygon2, _polygon1 }) { SRID = 4326 };
+    private static readonly MultiPolygon _multiPolygon = new(new[] { _polygon2, _polygon1 })
+    {
+        SRID = 4326,
+    };
 
-    private static readonly GeometryCollection _geometryCollection =
-        new(
-            new Geometry[]
-            {
-                _lineString1,
-                _lineString2,
-                _multiPoint,
-                _polygon1,
-                _polygon2,
-                _point1,
-                _multiLineString,
-                _multiPolygon,
-            }
-        )
+    private static readonly GeometryCollection _geometryCollection = new(
+        new Geometry[]
         {
-            SRID = 4326,
-        };
+            _lineString1,
+            _lineString2,
+            _multiPoint,
+            _polygon1,
+            _polygon2,
+            _point1,
+            _multiLineString,
+            _multiPolygon,
+        }
+    )
+    {
+        SRID = 4326,
+    };
 
     [ConditionalFact]
     public void InsertDataOperation_all_args() =>

@@ -2253,8 +2253,10 @@ namespace Microsoft.Extensions
             configurationBuilder.AddInMemoryCollection(dic);
             var config = configurationBuilder.Build();
 
-            TraceSwitch ts =
-                new(displayName: "TraceSwitch", description: "This switch is set via config.");
+            TraceSwitch ts = new(
+                displayName: "TraceSwitch",
+                description: "This switch is set via config."
+            );
             ConfigurationBinder.Bind(config, "TraceSwitch", ts);
             Assert.Equal(TraceLevel.Info, ts.Level);
 #if NETCOREAPP

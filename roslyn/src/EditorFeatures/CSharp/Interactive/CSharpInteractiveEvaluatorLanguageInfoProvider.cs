@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Interactive
 
         private CSharpInteractiveEvaluatorLanguageInfoProvider() { }
 
-        private static readonly CSharpParseOptions s_parseOptions =
-            new(languageVersion: LanguageVersion.Latest, kind: SourceCodeKind.Script);
+        private static readonly CSharpParseOptions s_parseOptions = new(
+            languageVersion: LanguageVersion.Latest,
+            kind: SourceCodeKind.Script
+        );
 
         public override string LanguageName => LanguageNames.CSharp;
 

@@ -29,11 +29,10 @@ internal abstract class AbstractConvertNumericLiteralCodeRefactoringProvider<TNu
         Hexadecimal,
     }
 
-    private readonly Regex _regex =
-        new(
-            $"({hexPrefix}|{binaryPrefix})?([_0-9a-f]+)(.*)",
-            RegexOptions.IgnoreCase | RegexOptions.Compiled
-        );
+    private readonly Regex _regex = new(
+        $"({hexPrefix}|{binaryPrefix})?([_0-9a-f]+)(.*)",
+        RegexOptions.IgnoreCase | RegexOptions.Compiled
+    );
 
     /// <summary>
     /// Converting numbers is a fairly uncommon task.  Put these at the end of the list after more relevant

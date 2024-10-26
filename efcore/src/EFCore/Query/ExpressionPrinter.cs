@@ -22,36 +22,39 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// </remarks>
 public class ExpressionPrinter : ExpressionVisitor
 {
-    private static readonly List<string> SimpleMethods =
-        new() { "get_Item", "TryReadValue", "ReferenceEquals" };
+    private static readonly List<string> SimpleMethods = new()
+    {
+        "get_Item",
+        "TryReadValue",
+        "ReferenceEquals",
+    };
 
     private readonly IndentedStringBuilder _stringBuilder;
     private readonly Dictionary<ParameterExpression, string?> _parametersInScope;
     private readonly List<ParameterExpression> _namelessParameters;
     private readonly List<ParameterExpression> _encounteredParameters;
 
-    private readonly Dictionary<ExpressionType, string> _binaryOperandMap =
-        new()
-        {
-            { ExpressionType.Assign, " = " },
-            { ExpressionType.Equal, " == " },
-            { ExpressionType.NotEqual, " != " },
-            { ExpressionType.GreaterThan, " > " },
-            { ExpressionType.GreaterThanOrEqual, " >= " },
-            { ExpressionType.LessThan, " < " },
-            { ExpressionType.LessThanOrEqual, " <= " },
-            { ExpressionType.OrElse, " || " },
-            { ExpressionType.AndAlso, " && " },
-            { ExpressionType.Coalesce, " ?? " },
-            { ExpressionType.Add, " + " },
-            { ExpressionType.Subtract, " - " },
-            { ExpressionType.Multiply, " * " },
-            { ExpressionType.Divide, " / " },
-            { ExpressionType.Modulo, " % " },
-            { ExpressionType.And, " & " },
-            { ExpressionType.Or, " | " },
-            { ExpressionType.ExclusiveOr, " ^ " },
-        };
+    private readonly Dictionary<ExpressionType, string> _binaryOperandMap = new()
+    {
+        { ExpressionType.Assign, " = " },
+        { ExpressionType.Equal, " == " },
+        { ExpressionType.NotEqual, " != " },
+        { ExpressionType.GreaterThan, " > " },
+        { ExpressionType.GreaterThanOrEqual, " >= " },
+        { ExpressionType.LessThan, " < " },
+        { ExpressionType.LessThanOrEqual, " <= " },
+        { ExpressionType.OrElse, " || " },
+        { ExpressionType.AndAlso, " && " },
+        { ExpressionType.Coalesce, " ?? " },
+        { ExpressionType.Add, " + " },
+        { ExpressionType.Subtract, " - " },
+        { ExpressionType.Multiply, " * " },
+        { ExpressionType.Divide, " / " },
+        { ExpressionType.Modulo, " % " },
+        { ExpressionType.And, " & " },
+        { ExpressionType.Or, " | " },
+        { ExpressionType.ExclusiveOr, " ^ " },
+    };
 
     /// <summary>
     ///     Creates a new instance of the <see cref="ExpressionPrinter" /> class.

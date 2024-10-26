@@ -288,12 +288,11 @@ namespace ComInterfaceGenerator.Unit.Tests
             params string[] typeNames
         )
         {
-            GeneratedShapeTest test =
-                new(typeNames)
-                {
-                    TestCode = source,
-                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                };
+            GeneratedShapeTest test = new(typeNames)
+            {
+                TestCode = source,
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+            };
 
             await test.RunAsync();
         }

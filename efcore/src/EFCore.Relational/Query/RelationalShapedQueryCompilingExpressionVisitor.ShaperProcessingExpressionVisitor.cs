@@ -130,8 +130,9 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
         /// <summary>
         ///     States to materialize only once
         /// </summary>
-        private readonly Dictionary<Expression, Expression> _variableShaperMapping =
-            new(ReferenceEqualityComparer.Instance);
+        private readonly Dictionary<Expression, Expression> _variableShaperMapping = new(
+            ReferenceEqualityComparer.Instance
+        );
 
         /// <summary>
         ///     There are always entity variables to avoid materializing same entity twice

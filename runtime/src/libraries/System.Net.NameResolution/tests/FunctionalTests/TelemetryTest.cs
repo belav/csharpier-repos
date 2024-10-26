@@ -235,10 +235,12 @@ namespace System.Net.NameResolution.Tests
                     );
                     listener.AddActivityTracking();
 
-                    TaskCompletionSource firstResolutionStart =
-                        new(TaskCreationOptions.RunContinuationsAsynchronously);
-                    TaskCompletionSource secondResolutionStop =
-                        new(TaskCreationOptions.RunContinuationsAsynchronously);
+                    TaskCompletionSource firstResolutionStart = new(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
+                    TaskCompletionSource secondResolutionStop = new(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
 
                     List<(string EventName, Guid ActivityId)> events = new();
 

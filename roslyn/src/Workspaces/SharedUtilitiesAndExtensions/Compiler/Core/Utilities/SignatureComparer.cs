@@ -13,8 +13,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     internal sealed class SignatureComparer
     {
         public static readonly SignatureComparer Instance = new(SymbolEquivalenceComparer.Instance);
-        public static readonly SignatureComparer IgnoreAssembliesInstance =
-            new(SymbolEquivalenceComparer.IgnoreAssembliesInstance);
+        public static readonly SignatureComparer IgnoreAssembliesInstance = new(
+            SymbolEquivalenceComparer.IgnoreAssembliesInstance
+        );
 
         private readonly SymbolEquivalenceComparer _symbolEquivalenceComparer;
 

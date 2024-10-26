@@ -209,12 +209,11 @@ internal sealed class RouteEndpointDataSource : EndpointDataSource
         // Add MethodInfo and HttpMethodMetadata (if any) as first metadata items as they are intrinsic to the route much like
         // the pattern or default display name. This gives visibility to conventions like WithOpenApi() to intrinsic route details
         // (namely the MethodInfo) even when applied early as group conventions.
-        RouteEndpointBuilder builder =
-            new(redirectRequestDelegate, pattern, order)
-            {
-                DisplayName = displayName,
-                ApplicationServices = _applicationServices,
-            };
+        RouteEndpointBuilder builder = new(redirectRequestDelegate, pattern, order)
+        {
+            DisplayName = displayName,
+            ApplicationServices = _applicationServices,
+        };
 
         if (isFallback)
         {

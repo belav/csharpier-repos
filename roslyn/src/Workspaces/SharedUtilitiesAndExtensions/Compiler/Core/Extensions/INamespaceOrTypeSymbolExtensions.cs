@@ -18,11 +18,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             List<string>
         > s_namespaceOrTypeToNameMap = new();
 
-        private static readonly SymbolDisplayFormat s_shortNameFormat =
-            new(
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                    | SymbolDisplayMiscellaneousOptions.ExpandNullable
-            );
+        private static readonly SymbolDisplayFormat s_shortNameFormat = new(
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.ExpandNullable
+        );
 
         public static string GetShortName(this INamespaceOrTypeSymbol symbol) =>
             symbol.ToDisplayString(s_shortNameFormat);

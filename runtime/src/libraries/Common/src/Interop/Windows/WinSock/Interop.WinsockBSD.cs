@@ -108,12 +108,11 @@ internal static partial class Interop
 
                     public IPv6MulticastRequest ToManaged()
                     {
-                        IPv6MulticastRequest managed =
-                            new()
-                            {
-                                MulticastAddress = new byte[MulticastAddressLength],
-                                InterfaceIndex = _interfaceIndex,
-                            };
+                        IPv6MulticastRequest managed = new()
+                        {
+                            MulticastAddress = new byte[MulticastAddressLength],
+                            InterfaceIndex = _interfaceIndex,
+                        };
                         MemoryMarshal
                             .CreateReadOnlySpan(ref _multicastAddress[0], MulticastAddressLength)
                             .CopyTo(managed.MulticastAddress);

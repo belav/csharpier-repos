@@ -28,15 +28,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     {
         private const string InsertionTextOnLessThan = nameof(InsertionTextOnLessThan);
 
-        private static readonly SymbolDisplayFormat _symbolFormatWithGenerics =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                    | SymbolDisplayGenericsOptions.IncludeVariance,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat _symbolFormatWithGenerics = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                | SymbolDisplayGenericsOptions.IncludeVariance,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         private static readonly SymbolDisplayFormat _symbolFormatWithoutGenerics =
             _symbolFormatWithGenerics.WithGenericsOptions(SymbolDisplayGenericsOptions.None);

@@ -22,13 +22,12 @@ namespace System.Formats.Tar.Tests
                 File.Create(filePath).Dispose();
 
                 // Create tar.gz archive
-                FileStreamOptions createOptions =
-                    new()
-                    {
-                        Mode = FileMode.CreateNew,
-                        Access = FileAccess.Write,
-                        Options = FileOptions.Asynchronous,
-                    };
+                FileStreamOptions createOptions = new()
+                {
+                    Mode = FileMode.CreateNew,
+                    Access = FileAccess.Write,
+                    Options = FileOptions.Asynchronous,
+                };
 
                 await using (
                     FileStream streamToCompress = new FileStream(archivePath, createOptions)
@@ -53,13 +52,12 @@ namespace System.Formats.Tar.Tests
                 Assert.True(fileInfo.Length > 0);
 
                 // Verify tar.gz archive contents
-                FileStreamOptions readOptions =
-                    new()
-                    {
-                        Mode = FileMode.Open,
-                        Access = FileAccess.Read,
-                        Options = FileOptions.Asynchronous,
-                    };
+                FileStreamOptions readOptions = new()
+                {
+                    Mode = FileMode.Open,
+                    Access = FileAccess.Read,
+                    Options = FileOptions.Asynchronous,
+                };
 
                 await using (FileStream streamToDecompress = File.Open(archivePath, readOptions))
                 {
@@ -99,13 +97,12 @@ namespace System.Formats.Tar.Tests
                 string filePath = Path.Join(sourceDirectory, fileName);
                 File.Create(filePath).Dispose();
 
-                FileStreamOptions createOptions =
-                    new()
-                    {
-                        Mode = FileMode.CreateNew,
-                        Access = FileAccess.Write,
-                        Options = FileOptions.Asynchronous,
-                    };
+                FileStreamOptions createOptions = new()
+                {
+                    Mode = FileMode.CreateNew,
+                    Access = FileAccess.Write,
+                    Options = FileOptions.Asynchronous,
+                };
 
                 await using (FileStream streamToCompress = File.Open(archivePath, createOptions))
                 {
@@ -128,13 +125,12 @@ namespace System.Formats.Tar.Tests
                 Assert.True(fileInfo.Exists);
                 Assert.True(fileInfo.Length > 0);
 
-                FileStreamOptions readOptions =
-                    new()
-                    {
-                        Mode = FileMode.Open,
-                        Access = FileAccess.Read,
-                        Options = FileOptions.Asynchronous,
-                    };
+                FileStreamOptions readOptions = new()
+                {
+                    Mode = FileMode.Open,
+                    Access = FileAccess.Read,
+                    Options = FileOptions.Asynchronous,
+                };
 
                 await using (FileStream streamToDecompress = File.Open(archivePath, readOptions))
                 {

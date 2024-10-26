@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.CSharp
     [ExportLanguageService(typeof(ICompilationFactoryService), LanguageNames.CSharp), Shared]
     internal class CSharpCompilationFactoryService : ICompilationFactoryService
     {
-        private static readonly CSharpCompilationOptions s_defaultOptions =
-            new(OutputKind.ConsoleApplication, concurrentBuild: false);
+        private static readonly CSharpCompilationOptions s_defaultOptions = new(
+            OutputKind.ConsoleApplication,
+            concurrentBuild: false
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

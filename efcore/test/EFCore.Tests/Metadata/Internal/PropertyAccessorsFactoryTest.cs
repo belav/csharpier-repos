@@ -102,8 +102,10 @@ public class PropertyAccessorsFactoryTest
 
     private class IndexedClass
     {
-        private readonly Dictionary<string, object> _internalValues =
-            new() { { "PropertyA", "ValueA" } };
+        private readonly Dictionary<string, object> _internalValues = new()
+        {
+            { "PropertyA", "ValueA" },
+        };
 
         internal int Id { get; set; }
 

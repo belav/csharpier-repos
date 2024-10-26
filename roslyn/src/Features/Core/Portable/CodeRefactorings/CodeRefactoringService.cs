@@ -57,16 +57,15 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         );
         private readonly Lazy<
             ImmutableDictionary<CodeRefactoringProvider, CodeChangeProviderMetadata>
-        > _lazyRefactoringToMetadataMap =
-            new(
-                () =>
-                    providers
-                        .Where(provider => provider.IsValueCreated)
-                        .ToImmutableDictionary(
-                            provider => provider.Value,
-                            provider => provider.Metadata
-                        )
-            );
+        > _lazyRefactoringToMetadataMap = new(
+            () =>
+                providers
+                    .Where(provider => provider.IsValueCreated)
+                    .ToImmutableDictionary(
+                        provider => provider.Value,
+                        provider => provider.Metadata
+                    )
+        );
 
         private ImmutableDictionary<
             CodeRefactoringProvider,

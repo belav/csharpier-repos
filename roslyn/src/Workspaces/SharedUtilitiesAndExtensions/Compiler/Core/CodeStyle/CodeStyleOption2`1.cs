@@ -41,14 +41,22 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// One such default(s), is that the feature is turned on, so that codegen consumes it,
         /// but with silent enforcement, so that the user is not prompted about their usage.
         /// </remarks>
-        public static readonly CodeStyleOption2<bool> TrueWithSilentEnforcement =
-            new(value: true, notification: NotificationOption2.Silent);
-        public static readonly CodeStyleOption2<bool> FalseWithSilentEnforcement =
-            new(value: false, notification: NotificationOption2.Silent);
-        public static readonly CodeStyleOption2<bool> TrueWithSuggestionEnforcement =
-            new(value: true, notification: NotificationOption2.Suggestion);
-        public static readonly CodeStyleOption2<bool> FalseWithSuggestionEnforcement =
-            new(value: false, notification: NotificationOption2.Suggestion);
+        public static readonly CodeStyleOption2<bool> TrueWithSilentEnforcement = new(
+            value: true,
+            notification: NotificationOption2.Silent
+        );
+        public static readonly CodeStyleOption2<bool> FalseWithSilentEnforcement = new(
+            value: false,
+            notification: NotificationOption2.Silent
+        );
+        public static readonly CodeStyleOption2<bool> TrueWithSuggestionEnforcement = new(
+            value: true,
+            notification: NotificationOption2.Suggestion
+        );
+        public static readonly CodeStyleOption2<bool> FalseWithSuggestionEnforcement = new(
+            value: false,
+            notification: NotificationOption2.Suggestion
+        );
 
         /// <summary>
         /// Use singletons for most common values.
@@ -86,8 +94,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         : ICodeStyleOption2,
             IEquatable<CodeStyleOption2<T>?>
     {
-        public static readonly CodeStyleOption2<T> Default =
-            new(default!, NotificationOption2.Silent);
+        public static readonly CodeStyleOption2<T> Default = new(
+            default!,
+            NotificationOption2.Silent
+        );
 
         private const int SerializationVersion = 1;
 

@@ -27,8 +27,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// <summary>
         /// Cancellation tokens controlling background computation of the compilation.
         /// </summary>
-        private readonly ReferenceCountedDisposable<CancellationSeries> _cancellationSeries =
-            new(new CancellationSeries());
+        private readonly ReferenceCountedDisposable<CancellationSeries> _cancellationSeries = new(
+            new CancellationSeries()
+        );
 
         public void Dispose() => _cancellationSeries.Dispose();
 

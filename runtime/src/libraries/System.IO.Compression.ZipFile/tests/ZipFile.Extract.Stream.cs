@@ -248,12 +248,11 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
         using (ZipArchive archive = new(source, ZipArchiveMode.Create, leaveOpen: true))
         {
             using (
-                StreamWriter writer =
-                    new(
-                        archive
-                            .CreateEntry(Path.Combine("..", "entry1"), CompressionLevel.Optimal)
-                            .Open()
-                    )
+                StreamWriter writer = new(
+                    archive
+                        .CreateEntry(Path.Combine("..", "entry1"), CompressionLevel.Optimal)
+                        .Open()
+                )
             )
             {
                 writer.Write("This is a test.");
@@ -270,15 +269,14 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
         using (ZipArchive archive = new(source, ZipArchiveMode.Create, leaveOpen: true))
         {
             using (
-                StreamWriter writer =
-                    new(
-                        archive
-                            .CreateEntry(
-                                "testdir" + Path.DirectorySeparatorChar,
-                                CompressionLevel.Optimal
-                            )
-                            .Open()
-                    )
+                StreamWriter writer = new(
+                    archive
+                        .CreateEntry(
+                            "testdir" + Path.DirectorySeparatorChar,
+                            CompressionLevel.Optimal
+                        )
+                        .Open()
+                )
             )
             {
                 writer.Write("This is a test.");

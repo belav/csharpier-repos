@@ -723,15 +723,14 @@ namespace System.Formats.Tar
 
         private FileStreamOptions CreateFileStreamOptions(bool isAsync)
         {
-            FileStreamOptions fileStreamOptions =
-                new()
-                {
-                    Access = FileAccess.Write,
-                    Mode = FileMode.CreateNew,
-                    Share = FileShare.None,
-                    PreallocationSize = Length,
-                    Options = isAsync ? FileOptions.Asynchronous : FileOptions.None,
-                };
+            FileStreamOptions fileStreamOptions = new()
+            {
+                Access = FileAccess.Write,
+                Mode = FileMode.CreateNew,
+                Share = FileShare.None,
+                PreallocationSize = Length,
+                Options = isAsync ? FileOptions.Asynchronous : FileOptions.None,
+            };
 
             if (!OperatingSystem.IsWindows())
             {

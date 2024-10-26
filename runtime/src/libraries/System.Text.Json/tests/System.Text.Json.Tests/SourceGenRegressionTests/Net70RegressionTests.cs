@@ -184,8 +184,10 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
         {
             JsonTypeInfo<MyLinkedList> jsonTypeInfo = Net70GeneratedContext.Default.MyLinkedList;
 
-            MyLinkedList linkedList =
-                new(value: 0, nested: new(value: 1, nested: new(value: 2, nested: null)));
+            MyLinkedList linkedList = new(
+                value: 0,
+                nested: new(value: 1, nested: new(value: 2, nested: null))
+            );
 
             string json = JsonSerializer.Serialize(linkedList, jsonTypeInfo);
             Assert.Equal(

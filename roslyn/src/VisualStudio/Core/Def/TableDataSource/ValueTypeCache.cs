@@ -29,8 +29,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             private static readonly Func<T, object> s_boxer = v => v;
 
             // this will be never released, must be used only for fixed size set
-            private readonly ConcurrentDictionary<T, object> _map =
-                new(concurrencyLevel: 2, capacity: 5);
+            private readonly ConcurrentDictionary<T, object> _map = new(
+                concurrencyLevel: 2,
+                capacity: 5
+            );
 
             public object GetOrCreate(T value) => _map.GetOrAdd(value, s_boxer);
         }

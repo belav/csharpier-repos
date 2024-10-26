@@ -2397,8 +2397,12 @@ namespace System.IO.MemoryMappedFiles.Tests
         )
         {
             (string pipePath, NamedPipeServerStream? serverStream) = CreatePipe();
-            using FileStream clientStream =
-                new(pipePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            using FileStream clientStream = new(
+                pipePath,
+                FileMode.Open,
+                FileAccess.ReadWrite,
+                FileShare.None
+            );
 
             if (serverStream is not null)
             {

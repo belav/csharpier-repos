@@ -25,8 +25,9 @@ namespace System.Speech.Recognition.SrgsGrammar
             Helpers.ThrowIfNull(outputStream, nameof(outputStream));
 
             using (
-                XmlTextReader reader =
-                    new(new Uri(inputPath, UriKind.RelativeOrAbsolute).ToString())
+                XmlTextReader reader = new(
+                    new Uri(inputPath, UriKind.RelativeOrAbsolute).ToString()
+                )
             )
             {
                 SrgsCompiler.CompileStream(

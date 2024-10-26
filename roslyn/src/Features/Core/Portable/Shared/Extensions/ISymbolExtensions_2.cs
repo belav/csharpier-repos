@@ -317,20 +317,19 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     cancellationToken: c
                 );
 
-        public static readonly SymbolDisplayFormat CrefFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                    | SymbolDisplayGenericsOptions.IncludeVariance,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
-                    | SymbolDisplayMemberOptions.IncludeContainingType,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        public static readonly SymbolDisplayFormat CrefFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                | SymbolDisplayGenericsOptions.IncludeVariance,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                | SymbolDisplayMemberOptions.IncludeContainingType,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeType,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         private static DocumentationComment GetMethodDocumentation(
             this IMethodSymbol method,

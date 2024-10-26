@@ -71,8 +71,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // We might need to handle large amount of items with import completion enabled, so use a dedicated pool to minimize/avoid array allocations
             // (especially in LOH). In practice, the size of pool should be 1 because we don't expect UpdateCompletionListAsync to be called concurrently,
             // which essentially makes the pooled list a singleton, but we still use ObjectPool for concurrency handling just to be robust.
-            private static readonly ObjectPool<List<MatchResult>> s_listOfMatchResultPool =
-                new(factory: () => new());
+            private static readonly ObjectPool<List<MatchResult>> s_listOfMatchResultPool = new(
+                factory: () => new()
+            );
 
             public CompletionListUpdater(
                 ITrackingSpan applicableToSpan,

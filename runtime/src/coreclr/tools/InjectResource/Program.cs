@@ -5,8 +5,10 @@ using System.CommandLine;
 using System.IO;
 
 CliOption<FileInfo> binOption = new("--bin") { Description = "Binary data to attach to the image" };
-CliOption<FileInfo> imageOption =
-    new("--image") { Description = "PE image to add the binary resource into" };
+CliOption<FileInfo> imageOption = new("--image")
+{
+    Description = "PE image to add the binary resource into",
+};
 CliOption<string> nameOption = new("--name") { Description = "Resource name" };
 CliRootCommand rootCommand = new("Inject native resources into a Portable Executable image");
 rootCommand.Options.Add(binOption);

@@ -17,18 +17,16 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
     {
         internal const string DocCommentIdKey = nameof(DocCommentIdKey);
 
-        private static readonly LocalizableResourceString s_localizableTitle =
-            new(
-                nameof(AnalyzersResources.Invalid_global_SuppressMessageAttribute),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            );
-        private static readonly LocalizableResourceString s_localizableInvalidScopeMessage =
-            new(
-                nameof(AnalyzersResources.Invalid_scope_for_SuppressMessageAttribute),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            );
+        private static readonly LocalizableResourceString s_localizableTitle = new(
+            nameof(AnalyzersResources.Invalid_global_SuppressMessageAttribute),
+            AnalyzersResources.ResourceManager,
+            typeof(AnalyzersResources)
+        );
+        private static readonly LocalizableResourceString s_localizableInvalidScopeMessage = new(
+            nameof(AnalyzersResources.Invalid_scope_for_SuppressMessageAttribute),
+            AnalyzersResources.ResourceManager,
+            typeof(AnalyzersResources)
+        );
         private static readonly LocalizableResourceString s_localizableInvalidOrMissingTargetMessage =
             new(
                 nameof(AnalyzersResources.Invalid_or_missing_target_for_SuppressMessageAttribute),
@@ -54,18 +52,16 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                 isUnnecessary: true
             );
 
-        private static readonly LocalizableResourceString s_localizableLegacyFormatTitle =
-            new(
-                nameof(AnalyzersResources.Avoid_legacy_format_target_in_SuppressMessageAttribute),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            );
-        private static readonly LocalizableResourceString s_localizableLegacyFormatMessage =
-            new(
-                nameof(AnalyzersResources.Avoid_legacy_format_target_0_in_SuppressMessageAttribute),
-                AnalyzersResources.ResourceManager,
-                typeof(AnalyzersResources)
-            );
+        private static readonly LocalizableResourceString s_localizableLegacyFormatTitle = new(
+            nameof(AnalyzersResources.Avoid_legacy_format_target_in_SuppressMessageAttribute),
+            AnalyzersResources.ResourceManager,
+            typeof(AnalyzersResources)
+        );
+        private static readonly LocalizableResourceString s_localizableLegacyFormatMessage = new(
+            nameof(AnalyzersResources.Avoid_legacy_format_target_0_in_SuppressMessageAttribute),
+            AnalyzersResources.ResourceManager,
+            typeof(AnalyzersResources)
+        );
         internal static readonly DiagnosticDescriptor LegacyFormatTargetDescriptor =
             CreateDescriptor(
                 IDEDiagnosticIds.LegacyFormatSuppressMessageAttributeDiagnosticId,

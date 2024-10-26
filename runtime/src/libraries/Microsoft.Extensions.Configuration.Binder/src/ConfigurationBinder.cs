@@ -256,8 +256,10 @@ namespace Microsoft.Extensions.Configuration
 
             if (options.ErrorOnUnknownConfiguration)
             {
-                HashSet<string> propertyNames =
-                    new(modelProperties.Select(mp => mp.Name), StringComparer.OrdinalIgnoreCase);
+                HashSet<string> propertyNames = new(
+                    modelProperties.Select(mp => mp.Name),
+                    StringComparer.OrdinalIgnoreCase
+                );
 
                 List<string>? missingPropertyNames = null;
                 foreach (IConfigurationSection cs in configuration.GetChildren())

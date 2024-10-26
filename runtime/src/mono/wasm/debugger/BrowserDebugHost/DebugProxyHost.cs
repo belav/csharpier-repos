@@ -25,8 +25,10 @@ public static class DebugProxyHost
         CancellationToken token
     )
     {
-        List<Task> tasks =
-            new(capacity: 2) { RunDevToolsProxyAsync(options, args, loggerFactory, token) };
+        List<Task> tasks = new(capacity: 2)
+        {
+            RunDevToolsProxyAsync(options, args, loggerFactory, token),
+        };
         if (!options.RunningForBlazor || options.IsFirefoxDebugging)
             tasks.Add(RunFirefoxServerLoopAsync(options, args, loggerFactory, token));
 

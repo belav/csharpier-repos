@@ -514,16 +514,11 @@ namespace System.Text.Json.Serialization.Tests
             options.IncludeFields = true;
             options.TypeInfoResolver = resolver;
 
-            TestClassWithDictionaries originalObj =
-                new()
-                {
-                    DictionaryProperty1 = new Dictionary<string, int>
-                    {
-                        ["test1"] = 2,
-                        ["test2"] = 3,
-                    },
-                    DictionaryProperty2 = new Dictionary<string, int>(),
-                };
+            TestClassWithDictionaries originalObj = new()
+            {
+                DictionaryProperty1 = new Dictionary<string, int> { ["test1"] = 2, ["test2"] = 3 },
+                DictionaryProperty2 = new Dictionary<string, int>(),
+            };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(

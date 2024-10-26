@@ -22,8 +22,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
         private static readonly Conversions<
             SpacePlacementWithinParentheses,
             int
-        > s_spaceBetweenParenthesesConversions =
-            new(v => (int)v, v => (SpacePlacementWithinParentheses)v);
+        > s_spaceBetweenParenthesesConversions = new(
+            v => (int)v,
+            v => (SpacePlacementWithinParentheses)v
+        );
 
         private const string s_methodPreview =
             @"

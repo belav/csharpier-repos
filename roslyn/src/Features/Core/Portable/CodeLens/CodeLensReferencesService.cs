@@ -22,11 +22,10 @@ namespace Microsoft.CodeAnalysis.CodeLens
 {
     internal sealed class CodeLensReferencesService : ICodeLensReferencesService
     {
-        private static readonly SymbolDisplayFormat MethodDisplayFormat =
-            new(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
-            );
+        private static readonly SymbolDisplayFormat MethodDisplayFormat = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+        );
 
         /// <summary>
         /// Set ourselves as an implicit invocation of FindReferences.  This will cause the finding operation to operate

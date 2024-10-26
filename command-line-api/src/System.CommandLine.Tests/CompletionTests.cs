@@ -233,8 +233,10 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Command_GetCompletions_include_recursive_options_of_root_command()
         {
-            CliRootCommand rootCommand =
-                new() { new CliCommand("sub") { new CliOption<int>("--option") } };
+            CliRootCommand rootCommand = new()
+            {
+                new CliCommand("sub") { new CliOption<int>("--option") },
+            };
 
             var result = rootCommand.Parse("sub --option 123 ");
 

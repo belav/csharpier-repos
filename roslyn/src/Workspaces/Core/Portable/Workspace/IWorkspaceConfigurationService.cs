@@ -55,11 +55,10 @@ internal readonly record struct WorkspaceConfigurationOptions(
     /// These values are such that the correctness of remote services is not affected if these options are changed from defaults
     /// to non-defaults while the services have already been executing.
     /// </summary>
-    public static readonly WorkspaceConfigurationOptions RemoteDefault =
-        new(
-            CacheStorage: StorageDatabase.None,
-            EnableOpeningSourceGeneratedFiles: false,
-            DisableRecoverableText: false,
-            RunSourceGeneratorsInSameProcessOnly: false
-        );
+    public static readonly WorkspaceConfigurationOptions RemoteDefault = new(
+        CacheStorage: StorageDatabase.None,
+        EnableOpeningSourceGeneratedFiles: false,
+        DisableRecoverableText: false,
+        RunSourceGeneratorsInSameProcessOnly: false
+    );
 }

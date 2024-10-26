@@ -507,8 +507,10 @@ namespace System.Transactions.Oletx
                         {
                             try
                             {
-                                TransactionTraceIdentifier temp =
-                                    new(RealOletxTransaction.Identifier.ToString(), 0);
+                                TransactionTraceIdentifier temp = new(
+                                    RealOletxTransaction.Identifier.ToString(),
+                                    0
+                                );
                                 Thread.MemoryBarrier();
                                 _traceIdentifier = temp;
                             }

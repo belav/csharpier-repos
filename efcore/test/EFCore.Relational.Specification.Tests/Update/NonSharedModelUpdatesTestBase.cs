@@ -48,8 +48,11 @@ public abstract class NonSharedModelUpdatesTestBase : NonSharedModelTestBase
             async context =>
             {
                 AuthorsClub authorsClubNorth = new() { Name = "AC North" };
-                Author authorOfTheYear2023 =
-                    new() { Name = "Author of the year 2023", AuthorsClub = authorsClubNorth };
+                Author authorOfTheYear2023 = new()
+                {
+                    Name = "Author of the year 2023",
+                    AuthorsClub = authorsClubNorth,
+                };
                 context.Add(authorsClubNorth);
                 context.Add(authorOfTheYear2023);
 

@@ -176,13 +176,12 @@ namespace System.Security.Cryptography.X509Certificates
                 const UnixFileMode UserReadWrite = UnixFileMode.UserRead | UnixFileMode.UserWrite;
 
                 string destinationFilename;
-                FileStreamOptions options =
-                    new()
-                    {
-                        Mode = FileMode.CreateNew,
-                        UnixCreateMode = UserReadWrite,
-                        Access = FileAccess.Write,
-                    };
+                FileStreamOptions options = new()
+                {
+                    Mode = FileMode.CreateNew,
+                    UnixCreateMode = UserReadWrite,
+                    Access = FileAccess.Write,
+                };
 
                 if (existingFilename != null)
                 {

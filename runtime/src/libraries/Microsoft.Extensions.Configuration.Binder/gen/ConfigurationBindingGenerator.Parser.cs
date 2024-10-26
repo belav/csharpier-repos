@@ -24,8 +24,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
             private readonly List<TypeParseInfo> _invocationTypeParseInfo = new();
             private readonly Queue<TypeParseInfo> _typesToParse = new();
-            private readonly Dictionary<ITypeSymbol, TypeSpec> _createdTypeSpecs =
-                new(SymbolEqualityComparer.Default);
+            private readonly Dictionary<ITypeSymbol, TypeSpec> _createdTypeSpecs = new(
+                SymbolEqualityComparer.Default
+            );
 
             private readonly InterceptorInfo.Builder _interceptorInfoBuilder = new();
             private BindingHelperInfo.Builder? _helperInfoBuilder; // Init'ed with type index when registering interceptors, after creating type specs.
@@ -239,8 +240,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 }
                 else if (IsParsableFromString(type, out StringParsableTypeKind specialTypeKind))
                 {
-                    ParsableFromStringSpec stringParsableSpec =
-                        new(type) { StringParsableTypeKind = specialTypeKind };
+                    ParsableFromStringSpec stringParsableSpec = new(type)
+                    {
+                        StringParsableTypeKind = specialTypeKind,
+                    };
                     spec = stringParsableSpec;
                 }
                 else if (type.TypeKind is TypeKind.Array)
@@ -826,11 +829,10 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                                 attributeData?.ConstructorArguments.FirstOrDefault().Value as string
                                 ?? propertyName;
 
-                            PropertySpec spec =
-                                new(property, propertyTypeRef)
-                                {
-                                    ConfigurationKeyName = configKeyName,
-                                };
+                            PropertySpec spec = new(property, propertyTypeRef)
+                            {
+                                ConfigurationKeyName = configKeyName,
+                            };
 
                             (properties ??= new(StringComparer.OrdinalIgnoreCase))[propertyName] =
                                 spec;

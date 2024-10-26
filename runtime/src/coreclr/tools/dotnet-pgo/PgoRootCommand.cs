@@ -65,14 +65,13 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 Description =
                     "The process name within the trace of the process to examine. If this is a multi-process trace, at least one of --pid or --process-name must be specified",
             };
-        public CliOption<List<string>> Reference =
-            new("--reference", "-r")
-            {
-                CustomParser = result => Helpers.BuildPathList(result.Tokens),
-                DefaultValueFactory = result => Helpers.BuildPathList(result.Tokens),
-                Description =
-                    "If a reference is not located on disk at the same location as used in the process, it may be specified with a --reference parameter. Multiple --reference parameters may be specified. The wild cards * and ? are supported by this option",
-            };
+        public CliOption<List<string>> Reference = new("--reference", "-r")
+        {
+            CustomParser = result => Helpers.BuildPathList(result.Tokens),
+            DefaultValueFactory = result => Helpers.BuildPathList(result.Tokens),
+            Description =
+                "If a reference is not located on disk at the same location as used in the process, it may be specified with a --reference parameter. Multiple --reference parameters may be specified. The wild cards * and ? are supported by this option",
+        };
         public CliOption<int> ClrInstanceId { get; } =
             new("--clr-instance-id")
             {
@@ -217,29 +216,31 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         public PgoRootCommand(string[] args)
             : base(".NET PGO Tool")
         {
-            CliCommand createMbicCommand =
-                new("create-mibc", "Transform a trace file into a Mibc profile data file")
-                {
-                    TraceFilePath,
-                    OutputFilePath,
-                    Pid,
-                    ProcessName,
-                    Reference,
-                    ClrInstanceId,
-                    ExcludeEventsBefore,
-                    ExcludeEventsAfter,
-                    ExcludeEventsBeforeJittingMethod,
-                    ExcludeEventsAfterJittingMethod,
-                    IncludeMethods,
-                    ExcludeMethods,
-                    AutomaticReferences,
-                    _verbosity,
-                    Compressed,
-                    PreciseDebugInfoFile,
-                    Spgo,
-                    SpgoMinSamples,
-                    IncludeFullGraphs,
-                };
+            CliCommand createMbicCommand = new(
+                "create-mibc",
+                "Transform a trace file into a Mibc profile data file"
+            )
+            {
+                TraceFilePath,
+                OutputFilePath,
+                Pid,
+                ProcessName,
+                Reference,
+                ClrInstanceId,
+                ExcludeEventsBefore,
+                ExcludeEventsAfter,
+                ExcludeEventsBeforeJittingMethod,
+                ExcludeEventsAfterJittingMethod,
+                IncludeMethods,
+                ExcludeMethods,
+                AutomaticReferences,
+                _verbosity,
+                Compressed,
+                PreciseDebugInfoFile,
+                Spgo,
+                SpgoMinSamples,
+                IncludeFullGraphs,
+            };
 
             createMbicCommand.SetAction(result =>
             {
@@ -260,23 +261,25 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
             JitTraceOptions = JitTraceOptions.none;
 #if DEBUG
-            CliCommand createJitTraceCommand =
-                new("create-jittrace", "Transform a trace file into a jittrace runtime file")
-                {
-                    TraceFilePath,
-                    OutputFilePath,
-                    Pid,
-                    ProcessName,
-                    Reference,
-                    ClrInstanceId,
-                    ExcludeEventsBefore,
-                    ExcludeEventsAfter,
-                    AutomaticReferences,
-                    _verbosity,
-                    _isSorted,
-                    _showTimestamp,
-                    _includeReadyToRun,
-                };
+            CliCommand createJitTraceCommand = new(
+                "create-jittrace",
+                "Transform a trace file into a jittrace runtime file"
+            )
+            {
+                TraceFilePath,
+                OutputFilePath,
+                Pid,
+                ProcessName,
+                Reference,
+                ClrInstanceId,
+                ExcludeEventsBefore,
+                ExcludeEventsAfter,
+                AutomaticReferences,
+                _verbosity,
+                _isSorted,
+                _showTimestamp,
+                _includeReadyToRun,
+            };
 
             createJitTraceCommand.SetAction(result =>
             {
@@ -301,15 +304,17 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             Subcommands.Add(createJitTraceCommand);
 #endif
 
-            CliCommand mergeCommand =
-                new("merge", "Merge multiple Mibc profile data files into one file")
-                {
-                    InputFilesToMerge,
-                    OutputFilePath,
-                    IncludedAssemblies,
-                    _verbosity,
-                    Compressed,
-                };
+            CliCommand mergeCommand = new(
+                "merge",
+                "Merge multiple Mibc profile data files into one file"
+            )
+            {
+                InputFilesToMerge,
+                OutputFilePath,
+                IncludedAssemblies,
+                _verbosity,
+                Compressed,
+            };
 
             mergeCommand.SetAction(result =>
             {
@@ -324,13 +329,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
             Subcommands.Add(mergeCommand);
 
-            CliCommand dumpCommand =
-                new("dump", "Dump the contents of a Mibc file")
-                {
-                    _verbosity,
-                    InputFileToDump,
-                    OutputFilePath,
-                };
+            CliCommand dumpCommand = new("dump", "Dump the contents of a Mibc file")
+            {
+                _verbosity,
+                InputFileToDump,
+                OutputFilePath,
+            };
 
             dumpCommand.SetAction(result =>
             {
@@ -340,13 +344,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 
             Subcommands.Add(dumpCommand);
 
-            CliCommand compareMbicCommand =
-                new("compare-mibc", "Compare two .mibc files")
-                {
-                    InputFilesToCompare,
-                    DumpWorstOverlapGraphs,
-                    DumpWorstOverlapGraphsTo,
-                };
+            CliCommand compareMbicCommand = new("compare-mibc", "Compare two .mibc files")
+            {
+                InputFilesToCompare,
+                DumpWorstOverlapGraphs,
+                DumpWorstOverlapGraphsTo,
+            };
 
             compareMbicCommand.SetAction(result => ExecuteWithContext(result, false));
 

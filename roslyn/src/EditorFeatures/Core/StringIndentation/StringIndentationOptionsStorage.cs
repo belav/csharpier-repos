@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.StringIndentation
 {
     internal static class StringIndentationOptionsStorage
     {
-        public static readonly PerLanguageOption2<bool> StringIdentation =
-            new("dotnet_indent_strings", defaultValue: true);
+        public static readonly PerLanguageOption2<bool> StringIdentation = new(
+            "dotnet_indent_strings",
+            defaultValue: true
+        );
     }
 }

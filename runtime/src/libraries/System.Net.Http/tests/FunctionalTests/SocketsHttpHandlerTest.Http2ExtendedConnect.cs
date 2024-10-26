@@ -35,8 +35,9 @@ namespace System.Net.Http.Functional.Tests
             byte[] clientMessage = new byte[] { 1, 2, 3 };
             byte[] serverMessage = new byte[] { 4, 5, 6, 7 };
 
-            TaskCompletionSource clientCompleted =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientCompleted = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             await Http2LoopbackServerFactory.Singleton.CreateClientAndServerAsync(
                 async uri =>
@@ -107,8 +108,9 @@ namespace System.Net.Http.Functional.Tests
             bool useSsl
         )
         {
-            TaskCompletionSource clientCompleted =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientCompleted = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 async uri =>
@@ -157,8 +159,9 @@ namespace System.Net.Http.Functional.Tests
 
             await server.ListenAsync();
 
-            TaskCompletionSource clientCompleted =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientCompleted = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             Task serverTask = Task.Run(async () =>
             {

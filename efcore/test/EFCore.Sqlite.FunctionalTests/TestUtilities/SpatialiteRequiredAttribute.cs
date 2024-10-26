@@ -9,12 +9,11 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
 public sealed class SpatialiteRequiredAttribute : Attribute, ITestCondition
 {
-    private static readonly Lazy<bool> _loaded =
-        new(() =>
-        {
-            using var connection = new SqliteConnection("Data Source=:memory:");
-            return SpatialiteLoader.TryLoad(connection);
-        });
+    private static readonly Lazy<bool> _loaded = new(() =>
+    {
+        using var connection = new SqliteConnection("Data Source=:memory:");
+        return SpatialiteLoader.TryLoad(connection);
+    });
 
     public ValueTask<bool> IsMetAsync() => new(_loaded.Value);
 

@@ -2583,28 +2583,27 @@ namespace System.Xml.XslCompiledTransformApiTests
                 auditingResolver
             );
 
-            HashSet<Uri> expected =
-                new()
-                {
-                    new Uri(
-                        Path.Combine(
-                            Environment.CurrentDirectory,
-                            FullFilePath(Path.Combine("XmlResolver", "XmlResolverTestMain.xsl"))
-                        )
-                    ),
-                    new Uri(
-                        Path.Combine(
-                            Environment.CurrentDirectory,
-                            FullFilePath(Path.Combine("XmlResolver", "XmlResolverInclude.xsl"))
-                        )
-                    ),
-                    new Uri(
-                        Path.Combine(
-                            Environment.CurrentDirectory,
-                            FullFilePath(Path.Combine("XmlResolver", "XmlResolverImport.xsl"))
-                        )
-                    ),
-                };
+            HashSet<Uri> expected = new()
+            {
+                new Uri(
+                    Path.Combine(
+                        Environment.CurrentDirectory,
+                        FullFilePath(Path.Combine("XmlResolver", "XmlResolverTestMain.xsl"))
+                    )
+                ),
+                new Uri(
+                    Path.Combine(
+                        Environment.CurrentDirectory,
+                        FullFilePath(Path.Combine("XmlResolver", "XmlResolverInclude.xsl"))
+                    )
+                ),
+                new Uri(
+                    Path.Combine(
+                        Environment.CurrentDirectory,
+                        FullFilePath(Path.Combine("XmlResolver", "XmlResolverImport.xsl"))
+                    )
+                ),
+            };
 
             Assert.Equal(expected, auditingResolver.FetchedUris);
         }

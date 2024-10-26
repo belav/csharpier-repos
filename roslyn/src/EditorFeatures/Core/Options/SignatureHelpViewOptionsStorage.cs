@@ -8,6 +8,8 @@ namespace Microsoft.CodeAnalysis.Editor.Options;
 
 internal sealed class SignatureHelpViewOptionsStorage
 {
-    public static readonly PerLanguageOption2<bool> ShowSignatureHelp =
-        new("dotnet_show_signature_help", defaultValue: true);
+    public static readonly PerLanguageOption2<bool> ShowSignatureHelp = new(
+        "dotnet_show_signature_help",
+        defaultValue: true
+    );
 }

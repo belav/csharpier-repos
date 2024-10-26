@@ -12,16 +12,15 @@ public class GetValueByNameTests
     [Fact]
     public void In_case_of_argument_name_conflict_the_value_which_belongs_to_the_last_parsed_command_is_returned()
     {
-        CliRootCommand command =
-            new()
+        CliRootCommand command = new()
+        {
+            new CliArgument<int>("arg"),
+            new CliCommand("inner1")
             {
                 new CliArgument<int>("arg"),
-                new CliCommand("inner1")
-                {
-                    new CliArgument<int>("arg"),
-                    new CliCommand("inner2") { new CliArgument<int>("arg") },
-                },
-            };
+                new CliCommand("inner2") { new CliArgument<int>("arg") },
+            },
+        };
 
         ParseResult parseResult = command.Parse("1 inner1 2 inner2 3");
 
@@ -31,16 +30,15 @@ public class GetValueByNameTests
     [Fact]
     public void In_case_of_option_name_conflict_the_value_which_belongs_to_the_last_parsed_command_is_returned()
     {
-        CliRootCommand command =
-            new()
+        CliRootCommand command = new()
+        {
+            new CliOption<int>("--integer", "-i"),
+            new CliCommand("inner1")
             {
                 new CliOption<int>("--integer", "-i"),
-                new CliCommand("inner1")
-                {
-                    new CliOption<int>("--integer", "-i"),
-                    new CliCommand("inner2") { new CliOption<int>("--integer", "-i") },
-                },
-            };
+                new CliCommand("inner2") { new CliOption<int>("--integer", "-i") },
+            },
+        };
 
         ParseResult parseResult = command.Parse("-i 1 inner1 --integer 2 inner2 -i 3");
 
@@ -60,8 +58,10 @@ public class GetValueByNameTests
     [Fact]
     public void When_option_is_not_provided_then_configured_default_value_is_returned()
     {
-        CliRootCommand command =
-            new() { new CliOption<int>("--integer", "-i") { DefaultValueFactory = _ => 123 } };
+        CliRootCommand command = new()
+        {
+            new CliOption<int>("--integer", "-i") { DefaultValueFactory = _ => 123 },
+        };
 
         ParseResult parseResult = command.Parse("");
 
@@ -71,8 +71,10 @@ public class GetValueByNameTests
     [Fact]
     public void When_optional_argument_is_not_provided_then_default_value_is_returned()
     {
-        CliRootCommand command =
-            new() { new CliArgument<int>("arg") { Arity = ArgumentArity.ZeroOrOne } };
+        CliRootCommand command = new()
+        {
+            new CliArgument<int>("arg") { Arity = ArgumentArity.ZeroOrOne },
+        };
 
         ParseResult parseResult = command.Parse("");
 
@@ -82,15 +84,14 @@ public class GetValueByNameTests
     [Fact]
     public void When_optional_argument_is_not_provided_then_configured_default_value_is_returned()
     {
-        CliRootCommand command =
-            new()
+        CliRootCommand command = new()
+        {
+            new CliArgument<int>("arg")
             {
-                new CliArgument<int>("arg")
-                {
-                    Arity = ArgumentArity.ZeroOrOne,
-                    DefaultValueFactory = _ => 123,
-                },
-            };
+                Arity = ArgumentArity.ZeroOrOne,
+                DefaultValueFactory = _ => 123,
+            },
+        };
 
         ParseResult parseResult = command.Parse("");
 
@@ -117,8 +118,10 @@ public class GetValueByNameTests
     [Fact]
     public void When_required_argument_value_is_not_provided_then_an_exception_is_thrown()
     {
-        CliRootCommand command =
-            new() { new CliArgument<int>("required") { Arity = ArgumentArity.ExactlyOne } };
+        CliRootCommand command = new()
+        {
+            new CliArgument<int>("required") { Arity = ArgumentArity.ExactlyOne },
+        };
 
         ParseResult parseResult = command.Parse("");
 
@@ -155,12 +158,11 @@ public class GetValueByNameTests
     {
         const string sameName = "same";
 
-        CliRootCommand command =
-            new()
-            {
-                new CliArgument<int>(sameName) { Arity = ArgumentArity.ZeroOrOne },
-                new CliOption<int>(sameName),
-            };
+        CliRootCommand command = new()
+        {
+            new CliArgument<int>(sameName) { Arity = ArgumentArity.ZeroOrOne },
+            new CliOption<int>(sameName),
+        };
 
         ParseResult parseResult = command.Parse("");
 
@@ -180,12 +182,11 @@ public class GetValueByNameTests
     {
         const string sameName = "same";
 
-        CliCommand command =
-            new("outer")
-            {
-                new CliArgument<int>(sameName),
-                new CliCommand("inner") { new CliOption<int>(sameName) },
-            };
+        CliCommand command = new("outer")
+        {
+            new CliArgument<int>(sameName),
+            new CliCommand("inner") { new CliOption<int>(sameName) },
+        };
 
         ParseResult parseResult = command.Parse($"outer 123 inner {sameName} 456");
         parseResult.GetValue<int>(sameName).Should().Be(456);
@@ -199,15 +200,14 @@ public class GetValueByNameTests
     {
         const string sameName = "same";
 
-        CliCommand command =
-            new("outer")
+        CliCommand command = new("outer")
+        {
+            new CliArgument<int>(sameName) { DefaultValueFactory = _ => 123 },
+            new CliCommand("inner")
             {
-                new CliArgument<int>(sameName) { DefaultValueFactory = _ => 123 },
-                new CliCommand("inner")
-                {
-                    new CliOption<int>(sameName) { DefaultValueFactory = _ => 456 },
-                },
-            };
+                new CliOption<int>(sameName) { DefaultValueFactory = _ => 456 },
+            },
+        };
 
         ParseResult parseResult = command.Parse("outer inner 456");
         parseResult.GetValue<int>(sameName).Should().Be(456);

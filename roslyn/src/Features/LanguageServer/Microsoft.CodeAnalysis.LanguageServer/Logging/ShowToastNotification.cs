@@ -19,12 +19,11 @@ internal static class ShowToastNotification
 {
     private const string ShowToastNotificationName = "window/_roslyn_showToast";
 
-    public static readonly LSP.Command ShowCSharpLogsCommand =
-        new()
-        {
-            Title = LanguageServerResources.Show_csharp_logs,
-            CommandIdentifier = "csharp.showOutputWindow",
-        };
+    public static readonly LSP.Command ShowCSharpLogsCommand = new()
+    {
+        Title = LanguageServerResources.Show_csharp_logs,
+        CommandIdentifier = "csharp.showOutputWindow",
+    };
 
     public static async Task ShowToastNotificationAsync(
         LSP.MessageType messageType,

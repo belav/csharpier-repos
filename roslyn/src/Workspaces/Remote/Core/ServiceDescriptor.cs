@@ -21,15 +21,14 @@ namespace Microsoft.CodeAnalysis.Remote
         /// </summary>
         internal const string ServiceNameTopLevelPrefix = "Microsoft.VisualStudio.";
 
-        private static readonly JsonRpcTargetOptions s_jsonRpcTargetOptions =
-            new()
-            {
-                // Do not allow JSON-RPC to automatically subscribe to events and remote their calls.
-                NotifyClientOfEvents = false,
+        private static readonly JsonRpcTargetOptions s_jsonRpcTargetOptions = new()
+        {
+            // Do not allow JSON-RPC to automatically subscribe to events and remote their calls.
+            NotifyClientOfEvents = false,
 
-                // Only allow public methods (may be on internal types) to be invoked remotely.
-                AllowNonPublicInvocation = false,
-            };
+            // Only allow public methods (may be on internal types) to be invoked remotely.
+            AllowNonPublicInvocation = false,
+        };
 
         internal readonly string ComponentName;
         internal readonly string SimpleName;

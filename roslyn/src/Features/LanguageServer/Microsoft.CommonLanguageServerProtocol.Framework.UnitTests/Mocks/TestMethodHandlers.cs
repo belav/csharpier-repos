@@ -51,8 +51,11 @@ internal class TestNotificationHandler : INotificationHandler<bool, TestRequestC
 
     public bool MutatesSolutionState => true;
     public static Type RequestType = typeof(bool);
-    public static readonly RequestHandlerMetadata Metadata =
-        new(Name, RequestType, ResponseType: null);
+    public static readonly RequestHandlerMetadata Metadata = new(
+        Name,
+        RequestType,
+        ResponseType: null
+    );
 
     public Task HandleNotificationAsync(
         bool request,
@@ -68,8 +71,11 @@ internal class TestParameterlessNotificationHandler : INotificationHandler<TestR
     public static readonly IMethodHandler Instance = new TestParameterlessNotificationHandler();
 
     public bool MutatesSolutionState => true;
-    public static readonly RequestHandlerMetadata Metadata =
-        new(Name, RequestType: null, ResponseType: null);
+    public static readonly RequestHandlerMetadata Metadata = new(
+        Name,
+        RequestType: null,
+        ResponseType: null
+    );
 
     public Task HandleNotificationAsync(
         TestRequestContext context,
@@ -95,8 +101,11 @@ public class MutatingHandler : IRequestHandler<int, string, TestRequestContext>
 {
     public const string Name = "MutatingMethod";
     public static readonly IMethodHandler Instance = new MutatingHandler();
-    public static readonly RequestHandlerMetadata Metadata =
-        new(Name, RequestType: typeof(int), ResponseType: typeof(string));
+    public static readonly RequestHandlerMetadata Metadata = new(
+        Name,
+        RequestType: typeof(int),
+        ResponseType: typeof(string)
+    );
 
     public MutatingHandler() { }
 
@@ -117,8 +126,11 @@ public class CompletingHandler : IRequestHandler<int, string, TestRequestContext
 {
     public const string Name = "CompletingMethod";
     public static readonly IMethodHandler Instance = new CompletingHandler();
-    public static readonly RequestHandlerMetadata Metadata =
-        new(Name, RequestType: typeof(int), ResponseType: typeof(string));
+    public static readonly RequestHandlerMetadata Metadata = new(
+        Name,
+        RequestType: typeof(int),
+        ResponseType: typeof(string)
+    );
 
     public bool MutatesSolutionState => false;
 
@@ -144,8 +156,11 @@ public class CancellingHandler : IRequestHandler<int, string, TestRequestContext
 {
     public const string Name = "CancellingMethod";
     public static readonly IMethodHandler Instance = new CancellingHandler();
-    public static readonly RequestHandlerMetadata Metadata =
-        new(Name, RequestType: typeof(int), ResponseType: typeof(string));
+    public static readonly RequestHandlerMetadata Metadata = new(
+        Name,
+        RequestType: typeof(int),
+        ResponseType: typeof(string)
+    );
 
     public bool MutatesSolutionState => false;
 
@@ -168,8 +183,11 @@ public class ThrowingHandler : IRequestHandler<int, string, TestRequestContext>
 {
     public const string Name = "ThrowingMethod";
     public static readonly IMethodHandler Instance = new ThrowingHandler();
-    public static readonly RequestHandlerMetadata Metadata =
-        new(Name, RequestType: typeof(int), ResponseType: typeof(string));
+    public static readonly RequestHandlerMetadata Metadata = new(
+        Name,
+        RequestType: typeof(int),
+        ResponseType: typeof(string)
+    );
 
     public bool MutatesSolutionState => false;
 

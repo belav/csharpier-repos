@@ -1244,11 +1244,13 @@ namespace System.Net.Http.Functional.Tests
                                                             useVersionString
                                                         );
 
-                                                        using HttpRequestMessage request =
-                                                            new(HttpMethod.Get, originalUri)
-                                                            {
-                                                                Version = version,
-                                                            };
+                                                        using HttpRequestMessage request = new(
+                                                            HttpMethod.Get,
+                                                            originalUri
+                                                        )
+                                                        {
+                                                            Version = version,
+                                                        };
 
                                                         Task clientTask = client.SendAsync(request);
                                                         Task serverTask =
@@ -1456,8 +1458,9 @@ namespace System.Net.Http.Functional.Tests
                                 },
                                 async server =>
                                 {
-                                    TaskCompletionSource allConnectionsOpen =
-                                        new(TaskCreationOptions.RunContinuationsAsynchronously);
+                                    TaskCompletionSource allConnectionsOpen = new(
+                                        TaskCreationOptions.RunContinuationsAsynchronously
+                                    );
                                     int connectionCounter = 0;
 
                                     Task[] parallelConnectionTasks = Enumerable
@@ -1518,8 +1521,9 @@ namespace System.Net.Http.Functional.Tests
                         .Where(e => e.EventName == "RequestHeadersStart")
                         .ToArray();
                     Assert.Equal(NumParallelRequests, requestHeadersStart.Length);
-                    HashSet<long> connectionIds =
-                        new(Enumerable.Range(0, NumParallelRequests).Select(i => (long)i));
+                    HashSet<long> connectionIds = new(
+                        Enumerable.Range(0, NumParallelRequests).Select(i => (long)i)
+                    );
                     foreach (EventWrittenEventArgs e in requestHeadersStart)
                     {
                         long connectionId = (long)e.Payload.Single();

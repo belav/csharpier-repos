@@ -18,18 +18,17 @@ public partial class NorthwindData : ISetSource
     public OrderQuery[] OrderQueries { get; }
     public OrderDetail[] OrderDetails { get; }
 
-    private readonly Dictionary<int, string> _categoryNameMap =
-        new()
-        {
-            { 1, "Beverages" },
-            { 2, "Condiments" },
-            { 3, "Confections" },
-            { 4, "Dairy Products" },
-            { 5, "Grains/Cereals" },
-            { 6, "Meat/Poultry" },
-            { 7, "Produce" },
-            { 8, "Seafood" },
-        };
+    private readonly Dictionary<int, string> _categoryNameMap = new()
+    {
+        { 1, "Beverages" },
+        { 2, "Condiments" },
+        { 3, "Confections" },
+        { 4, "Dairy Products" },
+        { 5, "Grains/Cereals" },
+        { 6, "Meat/Poultry" },
+        { 7, "Produce" },
+        { 8, "Seafood" },
+    };
 
     public NorthwindData()
     {

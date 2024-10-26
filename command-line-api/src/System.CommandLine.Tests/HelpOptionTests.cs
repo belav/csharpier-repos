@@ -55,8 +55,10 @@ public class HelpOptionTests
     [InlineData("/?")]
     public async Task Help_option_accepts_default_values(string value)
     {
-        CliConfiguration config =
-            new(new CliCommand("command") { new HelpOption() }) { Output = new StringWriter() };
+        CliConfiguration config = new(new CliCommand("command") { new HelpOption() })
+        {
+            Output = new StringWriter(),
+        };
 
         StringWriter console = new();
         config.Output = console;

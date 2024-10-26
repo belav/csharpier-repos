@@ -26,8 +26,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
     internal class TestCSharpCompilationFactoryServiceWithIncrementalGeneratorTracking
         : ICompilationFactoryService
     {
-        private static readonly CSharpCompilationOptions s_defaultOptions =
-            new(OutputKind.ConsoleApplication, concurrentBuild: false);
+        private static readonly CSharpCompilationOptions s_defaultOptions = new(
+            OutputKind.ConsoleApplication,
+            concurrentBuild: false
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

@@ -22,12 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.LanguageServices
     ]
     internal class CSharpEmbeddedLanguagesProvider : AbstractEmbeddedLanguagesProvider
     {
-        public static readonly EmbeddedLanguageInfo Info =
-            new(
-                CSharpSyntaxFacts.Instance,
-                CSharpSemanticFactsService.Instance,
-                CSharpVirtualCharService.Instance
-            );
+        public static readonly EmbeddedLanguageInfo Info = new(
+            CSharpSyntaxFacts.Instance,
+            CSharpSemanticFactsService.Instance,
+            CSharpVirtualCharService.Instance
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]

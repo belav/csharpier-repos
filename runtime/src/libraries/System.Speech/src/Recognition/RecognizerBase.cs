@@ -2339,8 +2339,16 @@ namespace System.Speech.Recognition
             // Otherwise it will be thrown later when SAPI sends the EndStream event.
             if (exception != null || cancelled)
             {
-                RecognizeCompletedEventArgs eventArgs =
-                    new(null, false, false, false, TimeSpan.Zero, exception, cancelled, null);
+                RecognizeCompletedEventArgs eventArgs = new(
+                    null,
+                    false,
+                    false,
+                    false,
+                    TimeSpan.Zero,
+                    exception,
+                    cancelled,
+                    null
+                );
                 _asyncWorkerUI.PostOperation(
                     new WaitCallback(RecognizeAsyncWaitForGrammarsToLoadFailed),
                     eventArgs

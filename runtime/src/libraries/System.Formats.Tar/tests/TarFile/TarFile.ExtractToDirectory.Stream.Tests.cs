@@ -313,8 +313,12 @@ namespace System.Formats.Tar.Tests
                 testFormat,
                 "many_small_files"
             );
-            using WrappedStream sourceUnseekableArchiveStream =
-                new(sourceStream, canRead: true, canWrite: false, canSeek: false);
+            using WrappedStream sourceUnseekableArchiveStream = new(
+                sourceStream,
+                canRead: true,
+                canWrite: false,
+                canSeek: false
+            );
 
             TarFile.ExtractToDirectory(
                 sourceUnseekableArchiveStream,
@@ -323,8 +327,12 @@ namespace System.Formats.Tar.Tests
             );
 
             using MemoryStream destinationStream = new();
-            using WrappedStream destinationUnseekableArchiveStream =
-                new(destinationStream, canRead: true, canWrite: true, canSeek: false);
+            using WrappedStream destinationUnseekableArchiveStream = new(
+                destinationStream,
+                canRead: true,
+                canWrite: true,
+                canSeek: false
+            );
             TarFile.CreateFromDirectory(
                 root.Path,
                 destinationUnseekableArchiveStream,

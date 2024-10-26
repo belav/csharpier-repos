@@ -29,11 +29,17 @@ namespace System.Reflection
             IntPtr* pStorage = stackalloc IntPtr[2 * argCount];
             NativeMemory.Clear(pStorage, (nuint)(2 * argCount) * (nuint)sizeof(IntPtr));
             Span<object?> copyOfArgs = new(ref Unsafe.AsRef<object?>(pStorage), argCount);
-            GCFrameRegistration regArgStorage =
-                new((void**)pStorage, (uint)argCount, areByRefs: false);
+            GCFrameRegistration regArgStorage = new(
+                (void**)pStorage,
+                (uint)argCount,
+                areByRefs: false
+            );
             IntPtr* pByRefStorage = pStorage + argCount;
-            GCFrameRegistration regByRefStorage =
-                new((void**)pByRefStorage, (uint)argCount, areByRefs: true);
+            GCFrameRegistration regByRefStorage = new(
+                (void**)pByRefStorage,
+                (uint)argCount,
+                areByRefs: true
+            );
 
             try
             {

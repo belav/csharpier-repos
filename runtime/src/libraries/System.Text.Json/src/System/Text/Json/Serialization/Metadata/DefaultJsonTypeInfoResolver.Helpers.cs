@@ -330,15 +330,14 @@ namespace System.Text.Json.Serialization.Metadata
                     );
                 }
 
-                JsonParameterInfoValues jsonInfo =
-                    new()
-                    {
-                        Name = reflectionInfo.Name,
-                        ParameterType = reflectionInfo.ParameterType,
-                        Position = reflectionInfo.Position,
-                        HasDefaultValue = reflectionInfo.HasDefaultValue,
-                        DefaultValue = reflectionInfo.GetDefaultValue(),
-                    };
+                JsonParameterInfoValues jsonInfo = new()
+                {
+                    Name = reflectionInfo.Name,
+                    ParameterType = reflectionInfo.ParameterType,
+                    Position = reflectionInfo.Position,
+                    HasDefaultValue = reflectionInfo.HasDefaultValue,
+                    DefaultValue = reflectionInfo.GetDefaultValue(),
+                };
 
                 jsonParameters[i] = jsonInfo;
             }

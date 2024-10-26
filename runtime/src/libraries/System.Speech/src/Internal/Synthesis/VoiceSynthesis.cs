@@ -803,20 +803,21 @@ namespace System.Speech.Internal.Synthesis
                                                 FragmentState fragmentState = new();
                                                 fragmentState.Action = TtsEngineAction.Speak;
                                                 fragmentState.Prosody = new Prosody();
-                                                TextFragment textFragment =
-                                                    new(fragmentState, paramSpeak._textToSpeak);
+                                                TextFragment textFragment = new(
+                                                    fragmentState,
+                                                    paramSpeak._textToSpeak
+                                                );
                                                 speakInfo.AddText(voice, textFragment);
                                             }
                                             else
                                             {
-                                                TextFragmentEngine engine =
-                                                    new(
-                                                        speakInfo,
-                                                        paramSpeak._textToSpeak,
-                                                        _pexml,
-                                                        _resourceLoader,
-                                                        lexicons
-                                                    );
+                                                TextFragmentEngine engine = new(
+                                                    speakInfo,
+                                                    paramSpeak._textToSpeak,
+                                                    _pexml,
+                                                    _resourceLoader,
+                                                    lexicons
+                                                );
                                                 SsmlParser.Parse(
                                                     paramSpeak._textToSpeak,
                                                     engine,

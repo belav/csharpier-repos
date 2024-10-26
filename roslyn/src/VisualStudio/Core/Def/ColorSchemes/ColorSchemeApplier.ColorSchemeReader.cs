@@ -18,8 +18,10 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
     {
         private static class ColorSchemeReader
         {
-            private static readonly XmlReaderSettings s_xmlSettings =
-                new() { DtdProcessing = DtdProcessing.Prohibit };
+            private static readonly XmlReaderSettings s_xmlSettings = new()
+            {
+                DtdProcessing = DtdProcessing.Prohibit,
+            };
             private const string RawColorType = nameof(__VSCOLORTYPE.CT_RAW);
             private const string SystemColorType = nameof(__VSCOLORTYPE.CT_SYSCOLOR);
 

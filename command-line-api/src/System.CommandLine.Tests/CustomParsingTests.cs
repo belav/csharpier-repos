@@ -406,15 +406,14 @@ public class CustomParsingTests
     {
         CliOption<string> firstOptionWithError = new("--first-option-with-error");
         firstOptionWithError.Validators.Add(optionResult => optionResult.AddError("first error"));
-        CliOption<string> secondOptionWithError =
-            new("--second-option-with-error")
+        CliOption<string> secondOptionWithError = new("--second-option-with-error")
+        {
+            CustomParser = r =>
             {
-                CustomParser = r =>
-                {
-                    r.AddError("second error");
-                    return r.Tokens[0].Value;
-                },
-            };
+                r.AddError("second error");
+                return r.Tokens[0].Value;
+            },
+        };
 
         CliCommand command = new("cmd") { firstOptionWithError, secondOptionWithError };
 
@@ -602,21 +601,20 @@ public class CustomParsingTests
     [Fact]
     public void Custom_parser_can_return_null()
     {
-        CliOption<IPAddress> option =
-            new("-ip")
+        CliOption<IPAddress> option = new("-ip")
+        {
+            CustomParser = (argumentResult) =>
             {
-                CustomParser = (argumentResult) =>
+                string value = argumentResult.Tokens.Last().Value;
+                if (IPAddress.TryParse(value, out var address))
                 {
-                    string value = argumentResult.Tokens.Last().Value;
-                    if (IPAddress.TryParse(value, out var address))
-                    {
-                        return address;
-                    }
+                    return address;
+                }
 
-                    argumentResult.AddError($"'{value}' is not a valid value");
-                    return null;
-                },
-            };
+                argumentResult.AddError($"'{value}' is not a valid value");
+                return null;
+            },
+        };
 
         ParseResult parseResult = new CliRootCommand() { option }.Parse("-ip a.b.c.d");
 

@@ -13,26 +13,25 @@ namespace System;
 [DebuggerStepThrough]
 internal static class SharedTypeExtensions
 {
-    private static readonly Dictionary<Type, string> BuiltInTypeNames =
-        new()
-        {
-            { typeof(bool), "bool" },
-            { typeof(byte), "byte" },
-            { typeof(char), "char" },
-            { typeof(decimal), "decimal" },
-            { typeof(double), "double" },
-            { typeof(float), "float" },
-            { typeof(int), "int" },
-            { typeof(long), "long" },
-            { typeof(object), "object" },
-            { typeof(sbyte), "sbyte" },
-            { typeof(short), "short" },
-            { typeof(string), "string" },
-            { typeof(uint), "uint" },
-            { typeof(ulong), "ulong" },
-            { typeof(ushort), "ushort" },
-            { typeof(void), "void" },
-        };
+    private static readonly Dictionary<Type, string> BuiltInTypeNames = new()
+    {
+        { typeof(bool), "bool" },
+        { typeof(byte), "byte" },
+        { typeof(char), "char" },
+        { typeof(decimal), "decimal" },
+        { typeof(double), "double" },
+        { typeof(float), "float" },
+        { typeof(int), "int" },
+        { typeof(long), "long" },
+        { typeof(object), "object" },
+        { typeof(sbyte), "sbyte" },
+        { typeof(short), "short" },
+        { typeof(string), "string" },
+        { typeof(uint), "uint" },
+        { typeof(ulong), "ulong" },
+        { typeof(ushort), "ushort" },
+        { typeof(void), "void" },
+    };
 
     public static Type UnwrapNullableType(this Type type) =>
         Nullable.GetUnderlyingType(type) ?? type;
@@ -393,29 +392,28 @@ internal static class SharedTypeExtensions
         string name
     ) => type.GetMembersInHierarchy().Where(m => m.Name == name);
 
-    private static readonly Dictionary<Type, object> CommonTypeDictionary =
-        new()
-        {
+    private static readonly Dictionary<Type, object> CommonTypeDictionary = new()
+    {
 #pragma warning disable IDE0034 // Simplify 'default' expression - default causes default(object)
-            { typeof(int), default(int) },
-            { typeof(Guid), default(Guid) },
-            { typeof(DateOnly), default(DateOnly) },
-            { typeof(DateTime), default(DateTime) },
-            { typeof(DateTimeOffset), default(DateTimeOffset) },
-            { typeof(TimeOnly), default(TimeOnly) },
-            { typeof(long), default(long) },
-            { typeof(bool), default(bool) },
-            { typeof(double), default(double) },
-            { typeof(short), default(short) },
-            { typeof(float), default(float) },
-            { typeof(byte), default(byte) },
-            { typeof(char), default(char) },
-            { typeof(uint), default(uint) },
-            { typeof(ushort), default(ushort) },
-            { typeof(ulong), default(ulong) },
-            { typeof(sbyte), default(sbyte) }
+        { typeof(int), default(int) },
+        { typeof(Guid), default(Guid) },
+        { typeof(DateOnly), default(DateOnly) },
+        { typeof(DateTime), default(DateTime) },
+        { typeof(DateTimeOffset), default(DateTimeOffset) },
+        { typeof(TimeOnly), default(TimeOnly) },
+        { typeof(long), default(long) },
+        { typeof(bool), default(bool) },
+        { typeof(double), default(double) },
+        { typeof(short), default(short) },
+        { typeof(float), default(float) },
+        { typeof(byte), default(byte) },
+        { typeof(char), default(char) },
+        { typeof(uint), default(uint) },
+        { typeof(ushort), default(ushort) },
+        { typeof(ulong), default(ulong) },
+        { typeof(sbyte), default(sbyte) }
 #pragma warning restore IDE0034 // Simplify 'default' expression
-        };
+    };
 
     public static object? GetDefaultValue(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]

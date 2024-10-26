@@ -435,12 +435,11 @@ namespace LibraryImportGenerator.UnitTests
         )
         {
             _ = id;
-            VerifyCS.Test test =
-                new(referenceAncillaryInterop: false)
-                {
-                    TestCode = source,
-                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                };
+            VerifyCS.Test test = new(referenceAncillaryInterop: false)
+            {
+                TestCode = source,
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+            };
             test.DisabledDiagnostics.Remove(
                 GeneratorDiagnostics.Ids.NotRecommendedGeneratedComInterfaceUsage
             );

@@ -15,15 +15,14 @@ namespace System.IO.FileSystem.Tests
         [Fact]
         public async Task ReadAllBytesOverLimit()
         {
-            using FileStream fs =
-                new(
-                    GetTestFilePath(),
-                    FileMode.Create,
-                    FileAccess.Write,
-                    FileShare.Read,
-                    4096,
-                    FileOptions.DeleteOnClose
-                );
+            using FileStream fs = new(
+                GetTestFilePath(),
+                FileMode.Create,
+                FileAccess.Write,
+                FileShare.Read,
+                4096,
+                FileOptions.DeleteOnClose
+            );
 
             foreach (long lengthOverLimit in new long[] { Array.MaxLength + 1L, int.MaxValue + 1L })
             {
@@ -57,15 +56,14 @@ namespace System.IO.FileSystem.Tests
             }
 
             using (
-                FileStream stream =
-                    new(
-                        filePath,
-                        FileMode.Open,
-                        FileAccess.Read,
-                        FileShare.None,
-                        4096,
-                        FileOptions.DeleteOnClose
-                    )
+                FileStream stream = new(
+                    filePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.None,
+                    4096,
+                    FileOptions.DeleteOnClose
+                )
             )
             {
                 stream.Seek(position1, SeekOrigin.Begin);

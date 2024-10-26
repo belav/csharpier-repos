@@ -61,8 +61,10 @@ namespace ILLink.RoslynAnalyzer.DataFlow
             out LocalStateAndContext<TValue, TContext> entryValue
         )
         {
-            LocalStateAndContextLattice<TValue, TContext, TLattice, TContextLattice> lattice =
-                new(new(new TLattice()), new TContextLattice());
+            LocalStateAndContextLattice<TValue, TContext, TLattice, TContextLattice> lattice = new(
+                new(new TLattice()),
+                new TContextLattice()
+            );
             entryValue = new LocalStateAndContext<TValue, TContext>(
                 default(LocalState<TValue>),
                 initialContext

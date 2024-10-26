@@ -337,8 +337,10 @@ namespace System.Text.Json.Serialization.Tests
                 }
             });
 
-            ClassWithRequiredCustomAttributeAndDataExtensionProperty obj =
-                new() { Data = new Dictionary<string, object>() { ["foo"] = "bar" } };
+            ClassWithRequiredCustomAttributeAndDataExtensionProperty obj = new()
+            {
+                Data = new Dictionary<string, object>() { ["foo"] = "bar" },
+            };
 
             string json = """{"foo":"bar"}""";
             Assert.Equal(
@@ -376,8 +378,10 @@ namespace System.Text.Json.Serialization.Tests
                 }
             });
 
-            ClassWithRequiredCustomAttributeAndDataExtensionProperty obj =
-                new() { Data = new Dictionary<string, object>() { ["foo"] = "bar" } };
+            ClassWithRequiredCustomAttributeAndDataExtensionProperty obj = new()
+            {
+                Data = new Dictionary<string, object>() { ["foo"] = "bar" },
+            };
 
             string json = """{"Data":{"foo":"bar"}}""";
             Assert.Equal(

@@ -38,8 +38,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             /// Weak reference to the last document snapshot for which full document diagnostics
             /// were computed and saved.
             /// </summary>
-            private readonly WeakReference<Document?> _lastDocumentWithCachedDiagnostics =
-                new(null);
+            private readonly WeakReference<Document?> _lastDocumentWithCachedDiagnostics = new(
+                null
+            );
 
             public void UpdateDocumentWithCachedDiagnostics(Document document) =>
                 _lastDocumentWithCachedDiagnostics.SetTarget(document);

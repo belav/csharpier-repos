@@ -117,16 +117,15 @@ End Class",
         private sealed class BuildOnlyAnalyzer : DiagnosticAnalyzer
         {
             public const string Id = "BuildOnly0001";
-            private static readonly DiagnosticDescriptor s_descriptor =
-                new(
-                    Id,
-                    "Title",
-                    "Message",
-                    "Category",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true,
-                    customTags: new[] { WellKnownDiagnosticTags.CompilationEnd }
-                );
+            private static readonly DiagnosticDescriptor s_descriptor = new(
+                Id,
+                "Title",
+                "Message",
+                "Category",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                customTags: new[] { WellKnownDiagnosticTags.CompilationEnd }
+            );
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(s_descriptor);
 
@@ -137,15 +136,14 @@ End Class",
         private sealed class LiveAnalyzer : DiagnosticAnalyzer
         {
             public const string Id = "Live0001";
-            private static readonly DiagnosticDescriptor s_descriptor =
-                new(
-                    Id,
-                    "Title",
-                    "Message",
-                    "Category",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true
-                );
+            private static readonly DiagnosticDescriptor s_descriptor = new(
+                Id,
+                "Title",
+                "Message",
+                "Category",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(s_descriptor);
 

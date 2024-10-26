@@ -577,22 +577,28 @@ public class CurrentValueComparerTest
 
     private struct NotComparable
     {
-        public static readonly ValueConverter<NotComparable, NotComparable> Converter =
-            new(v => new NotComparable(), v => new NotComparable());
+        public static readonly ValueConverter<NotComparable, NotComparable> Converter = new(
+            v => new NotComparable(),
+            v => new NotComparable()
+        );
     }
 
     private struct IntStruct
     {
-        public static readonly ValueConverter<IntStruct, int> Converter =
-            new(v => v.Value, v => new IntStruct { Value = v });
+        public static readonly ValueConverter<IntStruct, int> Converter = new(
+            v => v.Value,
+            v => new IntStruct { Value = v }
+        );
 
         public int Value { get; set; }
     }
 
     private struct BytesStruct
     {
-        public static readonly ValueConverter<BytesStruct, byte[]> Converter =
-            new(v => v.Value, v => new BytesStruct { Value = v });
+        public static readonly ValueConverter<BytesStruct, byte[]> Converter = new(
+            v => v.Value,
+            v => new BytesStruct { Value = v }
+        );
 
         public byte[] Value { get; set; }
 
@@ -617,8 +623,10 @@ public class CurrentValueComparerTest
 
     private struct ComparableIntStruct : IComparable
     {
-        public static readonly ValueConverter<ComparableIntStruct, int> Converter =
-            new(v => v.Value, v => new ComparableIntStruct { Value = v });
+        public static readonly ValueConverter<ComparableIntStruct, int> Converter = new(
+            v => v.Value,
+            v => new ComparableIntStruct { Value = v }
+        );
 
         public int Value { get; set; }
 
@@ -627,8 +635,10 @@ public class CurrentValueComparerTest
 
     private struct ComparableBytesStruct : IComparable
     {
-        public static readonly ValueConverter<ComparableBytesStruct, byte[]> Converter =
-            new(v => v.Value, v => new ComparableBytesStruct { Value = v });
+        public static readonly ValueConverter<ComparableBytesStruct, byte[]> Converter = new(
+            v => v.Value,
+            v => new ComparableBytesStruct { Value = v }
+        );
 
         public byte[] Value { get; set; }
 
@@ -667,8 +677,10 @@ public class CurrentValueComparerTest
 
     private struct GenericComparableIntStruct : IComparable<GenericComparableIntStruct>
     {
-        public static readonly ValueConverter<GenericComparableIntStruct, int> Converter =
-            new(v => v.Value, v => new GenericComparableIntStruct { Value = v });
+        public static readonly ValueConverter<GenericComparableIntStruct, int> Converter = new(
+            v => v.Value,
+            v => new GenericComparableIntStruct { Value = v }
+        );
 
         public int Value { get; set; }
 
@@ -677,8 +689,10 @@ public class CurrentValueComparerTest
 
     private struct GenericComparableBytesStruct : IComparable<GenericComparableBytesStruct>
     {
-        public static readonly ValueConverter<GenericComparableBytesStruct, byte[]> Converter =
-            new(v => v.Value, v => new GenericComparableBytesStruct { Value = v });
+        public static readonly ValueConverter<GenericComparableBytesStruct, byte[]> Converter = new(
+            v => v.Value,
+            v => new GenericComparableBytesStruct { Value = v }
+        );
 
         public byte[] Value { get; set; }
 
@@ -755,8 +769,10 @@ public class CurrentValueComparerTest
 
     private class IntClass
     {
-        public static readonly ValueConverter<IntClass, int> Converter =
-            new(v => v.Value, v => new IntClass { Value = v });
+        public static readonly ValueConverter<IntClass, int> Converter = new(
+            v => v.Value,
+            v => new IntClass { Value = v }
+        );
 
         private bool Equals(IntClass other) => other != null && Value == other.Value;
 
@@ -770,8 +786,10 @@ public class CurrentValueComparerTest
 
     private class ComparableIntClass : IComparable
     {
-        public static readonly ValueConverter<ComparableIntClass, int> Converter =
-            new(v => v.Value, v => new ComparableIntClass { Value = v });
+        public static readonly ValueConverter<ComparableIntClass, int> Converter = new(
+            v => v.Value,
+            v => new ComparableIntClass { Value = v }
+        );
 
         public int Value { get; set; }
 
@@ -787,8 +805,10 @@ public class CurrentValueComparerTest
 
     private class GenericComparableIntClass : IComparable<GenericComparableIntClass>
     {
-        public static readonly ValueConverter<GenericComparableIntClass, int> Converter =
-            new(v => v.Value, v => new GenericComparableIntClass { Value = v });
+        public static readonly ValueConverter<GenericComparableIntClass, int> Converter = new(
+            v => v.Value,
+            v => new GenericComparableIntClass { Value = v }
+        );
 
         public int Value { get; set; }
 

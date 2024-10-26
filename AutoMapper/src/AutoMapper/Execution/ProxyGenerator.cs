@@ -18,8 +18,9 @@ public static class ProxyGenerator
         Type.EmptyTypes
     );
     private static readonly ModuleBuilder ProxyModule = CreateProxyModule();
-    private static readonly LockingConcurrentDictionary<TypeDescription, Type> ProxyTypes =
-        new(EmitProxy);
+    private static readonly LockingConcurrentDictionary<TypeDescription, Type> ProxyTypes = new(
+        EmitProxy
+    );
 
     private static ModuleBuilder CreateProxyModule()
     {

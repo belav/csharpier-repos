@@ -304,12 +304,17 @@ namespace LibraryImportGenerator.UnitTests
             TestTargetFramework targetFramework
         )
         {
-            AttributeAddedTest test =
-                new(typeName, methodName, attributeName, attributeAdded, targetFramework)
-                {
-                    TestCode = source,
-                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                };
+            AttributeAddedTest test = new(
+                typeName,
+                methodName,
+                attributeName,
+                attributeAdded,
+                targetFramework
+            )
+            {
+                TestCode = source,
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+            };
             return test.RunAsync();
         }
 

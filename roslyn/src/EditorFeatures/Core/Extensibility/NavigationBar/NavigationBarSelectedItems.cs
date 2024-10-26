@@ -13,8 +13,10 @@ namespace Microsoft.CodeAnalysis.Editor
         bool showMemberItemGrayed
     ) : IEquatable<NavigationBarSelectedTypeAndMember>
     {
-        public static readonly NavigationBarSelectedTypeAndMember Empty =
-            new(typeItem: null, memberItem: null);
+        public static readonly NavigationBarSelectedTypeAndMember Empty = new(
+            typeItem: null,
+            memberItem: null
+        );
 
         public NavigationBarItem? TypeItem { get; } = typeItem;
         public bool ShowTypeItemGrayed { get; } = showTypeItemGrayed;

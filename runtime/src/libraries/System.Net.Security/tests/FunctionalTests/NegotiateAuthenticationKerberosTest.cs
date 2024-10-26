@@ -32,16 +32,15 @@ namespace System.Net.Security.Tests
             await kerberosExecutor.Invoke(() =>
             {
                 // Do a loopback authentication
-                NegotiateAuthenticationClientOptions clientOptions =
-                    new()
-                    {
-                        Credential = new NetworkCredential(
-                            "user",
-                            KerberosExecutor.DefaultUserPassword,
-                            "LINUX.CONTOSO.COM"
-                        ),
-                        TargetName = $"HTTP/linux.contoso.com",
-                    };
+                NegotiateAuthenticationClientOptions clientOptions = new()
+                {
+                    Credential = new NetworkCredential(
+                        "user",
+                        KerberosExecutor.DefaultUserPassword,
+                        "LINUX.CONTOSO.COM"
+                    ),
+                    TargetName = $"HTTP/linux.contoso.com",
+                };
                 NegotiateAuthenticationServerOptions serverOptions = new() { };
                 NegotiateAuthentication clientNegotiateAuthentication = new(clientOptions);
                 NegotiateAuthentication serverNegotiateAuthentication = new(serverOptions);

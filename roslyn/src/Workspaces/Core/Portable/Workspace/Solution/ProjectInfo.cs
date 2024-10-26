@@ -514,8 +514,10 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// Matches names like: Microsoft.CodeAnalysis.Features (netcoreapp3.1)
             /// </summary>
-            private static readonly Regex s_projectNameAndFlavor =
-                new(@"^(?<name>.*?)\s*\((?<flavor>.*?)\)$", RegexOptions.Compiled);
+            private static readonly Regex s_projectNameAndFlavor = new(
+                @"^(?<name>.*?)\s*\((?<flavor>.*?)\)$",
+                RegexOptions.Compiled
+            );
 
             /// <summary>
             /// The unique Id of the project.

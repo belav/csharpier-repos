@@ -699,13 +699,12 @@ namespace System.Text.Json.Serialization.Tests
                     Options,
                     JsonMetadataServices.StringConverter
                 );
-                JsonCollectionInfoValues<Dictionary<int, string>> info =
-                    new()
-                    {
-                        ObjectCreator = () => new Dictionary<int, string>(),
-                        KeyInfo = keyInfo,
-                        ElementInfo = valueInfo,
-                    };
+                JsonCollectionInfoValues<Dictionary<int, string>> info = new()
+                {
+                    ObjectCreator = () => new Dictionary<int, string>(),
+                    KeyInfo = keyInfo,
+                    ElementInfo = valueInfo,
+                };
 
                 return JsonMetadataServices.CreateDictionaryInfo<
                     Dictionary<int, string>,

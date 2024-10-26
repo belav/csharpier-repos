@@ -183,31 +183,30 @@ namespace System.Text.Json.Serialization.Tests
         {
             try
             {
-                Dto dto =
-                    new()
-                    {
-                        Prop1 = int.MaxValue,
-                        Prop2 = int.MinValue,
-                        Prop3 = "AC",
-                        Prop4 = 500,
-                        Prop5 = int.MaxValue / 2,
-                        Prop6 = 250M,
-                        Prop7 = 250M,
-                        Prop8 = 250M,
-                        Prop9 = 250M,
-                        Prop10 = 250M,
-                        Prop11 = 150M,
-                        Prop12 = 150M,
-                        Prop13 = DateTimeOffset.MaxValue,
-                        Prop14 = DateTimeOffset.MaxValue,
-                        Prop15 = DateTimeOffset.MaxValue,
-                        Prop16 = DateTimeOffset.MaxValue,
-                        Prop17 = 3,
-                        Prop18 = DateTime.MaxValue,
-                        Prop19 = DateTime.MaxValue,
-                        Prop20 = 25000,
-                        Prop21 = DateTime.MaxValue,
-                    };
+                Dto dto = new()
+                {
+                    Prop1 = int.MaxValue,
+                    Prop2 = int.MinValue,
+                    Prop3 = "AC",
+                    Prop4 = 500,
+                    Prop5 = int.MaxValue / 2,
+                    Prop6 = 250M,
+                    Prop7 = 250M,
+                    Prop8 = 250M,
+                    Prop9 = 250M,
+                    Prop10 = 250M,
+                    Prop11 = 150M,
+                    Prop12 = 150M,
+                    Prop13 = DateTimeOffset.MaxValue,
+                    Prop14 = DateTimeOffset.MaxValue,
+                    Prop15 = DateTimeOffset.MaxValue,
+                    Prop16 = DateTimeOffset.MaxValue,
+                    Prop17 = 3,
+                    Prop18 = DateTime.MaxValue,
+                    Prop19 = DateTime.MaxValue,
+                    Prop20 = 25000,
+                    Prop21 = DateTime.MaxValue,
+                };
 
                 // It takes a little over 4,338,000 items to reach a payload size above the Array.MaxLength value.
                 List<Dto> items = Enumerable.Repeat(dto, 4_338_000).ToList();

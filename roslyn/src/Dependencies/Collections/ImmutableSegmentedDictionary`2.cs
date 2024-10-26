@@ -75,8 +75,9 @@ namespace Microsoft.CodeAnalysis.Collections
             IEquatable<ImmutableSegmentedDictionary<TKey, TValue>>
         where TKey : notnull
     {
-        public static readonly ImmutableSegmentedDictionary<TKey, TValue> Empty =
-            new(new SegmentedDictionary<TKey, TValue>());
+        public static readonly ImmutableSegmentedDictionary<TKey, TValue> Empty = new(
+            new SegmentedDictionary<TKey, TValue>()
+        );
 
         private readonly SegmentedDictionary<TKey, TValue> _dictionary;
 

@@ -39,11 +39,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MisplacedUsingDirective
         internal static readonly CodeStyleOption2<AddImportPlacement> InsidePreferPreservationOption =
             new(AddImportPlacement.InsideNamespace, NotificationOption2.None);
 
-        internal static readonly CodeStyleOption2<AddImportPlacement> InsideNamespaceOption =
-            new(AddImportPlacement.InsideNamespace, NotificationOption2.Error);
+        internal static readonly CodeStyleOption2<AddImportPlacement> InsideNamespaceOption = new(
+            AddImportPlacement.InsideNamespace,
+            NotificationOption2.Error
+        );
 
-        internal static readonly CodeStyleOption2<AddImportPlacement> OutsideNamespaceOption =
-            new(AddImportPlacement.OutsideNamespace, NotificationOption2.Error);
+        internal static readonly CodeStyleOption2<AddImportPlacement> OutsideNamespaceOption = new(
+            AddImportPlacement.OutsideNamespace,
+            NotificationOption2.Error
+        );
 
         protected const string ClassDefinition = """
             public class TestClass

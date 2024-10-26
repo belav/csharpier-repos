@@ -1056,8 +1056,9 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 public int GetHashCode(TDirectiveTriviaSyntax obj) => obj.SpanStart;
             }
 
-            private static readonly ObjectPool<Stack<TDirectiveTriviaSyntax>> s_stackPool =
-                new(() => new());
+            private static readonly ObjectPool<Stack<TDirectiveTriviaSyntax>> s_stackPool = new(
+                () => new()
+            );
 
             public static DirectiveInfo<TDirectiveTriviaSyntax> GetDirectiveInfoForRoot(
                 SyntaxNode root,

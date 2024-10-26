@@ -864,13 +864,12 @@ namespace Wasm.Build.Tests
 
             void GenerateSourceFiles(string outputPath, int baseArg)
             {
-                StringBuilder csBuilder =
-                    new(
-                        $@"
+                StringBuilder csBuilder = new(
+                    $@"
                     using System;
                     using System.Runtime.InteropServices;
                 "
-                    );
+                );
 
                 StringBuilder dllImportsBuilder = new();
                 for (int i = 0; i < libraryNames.Length; i++)

@@ -54,8 +54,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 )
             );
 
-        private static readonly EditorOptionKey<bool> s_nonBlockingCompletionEditorOption =
-            new(NonBlockingCompletion);
+        private static readonly EditorOptionKey<bool> s_nonBlockingCompletionEditorOption = new(
+            NonBlockingCompletion
+        );
 
         // Use CWT to cache data needed to create VSCompletionItem, so the table would be cleared when Roslyn completion item cache is cleared.
         private static readonly ConditionalWeakTable<

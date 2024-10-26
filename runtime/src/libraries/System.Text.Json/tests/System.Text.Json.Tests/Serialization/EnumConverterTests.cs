@@ -942,15 +942,16 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void EnumDictionaryKeySerialization()
         {
-            JsonSerializerOptions options =
-                new() { DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower };
+            JsonSerializerOptions options = new()
+            {
+                DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseLower,
+            };
 
-            Dictionary<BindingFlags, int> dict =
-                new()
-                {
-                    [BindingFlags.NonPublic | BindingFlags.Public] = 1,
-                    [BindingFlags.Static] = 2,
-                };
+            Dictionary<BindingFlags, int> dict = new()
+            {
+                [BindingFlags.NonPublic | BindingFlags.Public] = 1,
+                [BindingFlags.Static] = 2,
+            };
 
             string expected =
                 @"{

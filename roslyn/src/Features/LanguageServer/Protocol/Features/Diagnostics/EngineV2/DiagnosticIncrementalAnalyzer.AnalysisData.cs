@@ -20,8 +20,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         /// </summary>
         private readonly struct DocumentAnalysisData
         {
-            public static readonly DocumentAnalysisData Empty =
-                new(VersionStamp.Default, lineCount: 0, ImmutableArray<DiagnosticData>.Empty);
+            public static readonly DocumentAnalysisData Empty = new(
+                VersionStamp.Default,
+                lineCount: 0,
+                ImmutableArray<DiagnosticData>.Empty
+            );
 
             /// <summary>
             /// Version of the diagnostic data.

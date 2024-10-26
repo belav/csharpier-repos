@@ -36,21 +36,36 @@ namespace System.Diagnostics
     internal sealed class SourceElement : ConfigurationElement
     {
         private static readonly ConfigurationPropertyCollection _properties = new();
-        private static readonly ConfigurationProperty _propName =
-            new("name", typeof(string), "", ConfigurationPropertyOptions.IsRequired);
-        private static readonly ConfigurationProperty _propSwitchName =
-            new("switchName", typeof(string), null, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propSwitchValue =
-            new("switchValue", typeof(string), null, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propSwitchType =
-            new("switchType", typeof(string), null, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty _propListeners =
-            new(
-                "listeners",
-                typeof(ListenerElementsCollection),
-                new ListenerElementsCollection(),
-                ConfigurationPropertyOptions.None
-            );
+        private static readonly ConfigurationProperty _propName = new(
+            "name",
+            typeof(string),
+            "",
+            ConfigurationPropertyOptions.IsRequired
+        );
+        private static readonly ConfigurationProperty _propSwitchName = new(
+            "switchName",
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propSwitchValue = new(
+            "switchValue",
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propSwitchType = new(
+            "switchType",
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty _propListeners = new(
+            "listeners",
+            typeof(ListenerElementsCollection),
+            new ListenerElementsCollection(),
+            ConfigurationPropertyOptions.None
+        );
 
         private StringDictionary _attributes;
 

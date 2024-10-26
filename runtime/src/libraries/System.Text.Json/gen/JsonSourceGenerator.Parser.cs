@@ -57,8 +57,9 @@ namespace System.Text.Json.SourceGeneration
             private readonly HashSet<ITypeSymbol> _builtInSupportTypes;
             private readonly Queue<TypeToGenerate> _typesToGenerate = new();
 #pragma warning disable RS1024 // Compare symbols correctly https://github.com/dotnet/roslyn-analyzers/issues/5804
-            private readonly Dictionary<ITypeSymbol, TypeGenerationSpec> _generatedTypes =
-                new(SymbolEqualityComparer.Default);
+            private readonly Dictionary<ITypeSymbol, TypeGenerationSpec> _generatedTypes = new(
+                SymbolEqualityComparer.Default
+            );
 #pragma warning restore
 
             public List<DiagnosticInfo> Diagnostics { get; } = new();
@@ -203,20 +204,19 @@ namespace System.Text.Json.SourceGeneration
 
                 Debug.Assert(_generatedTypes.Count > 0);
 
-                ContextGenerationSpec contextGenSpec =
-                    new()
-                    {
-                        ContextType = new(contextTypeSymbol),
-                        GeneratedTypes = _generatedTypes
-                            .Values.OrderBy(t => t.TypeRef.FullyQualifiedName)
-                            .ToImmutableEquatableArray(),
-                        Namespace = contextTypeSymbol.ContainingNamespace
-                            is { IsGlobalNamespace: false } ns
-                            ? ns.ToDisplayString()
-                            : null,
-                        ContextClassDeclarations = classDeclarationList.ToImmutableEquatableArray(),
-                        GeneratedOptionsSpec = options,
-                    };
+                ContextGenerationSpec contextGenSpec = new()
+                {
+                    ContextType = new(contextTypeSymbol),
+                    GeneratedTypes = _generatedTypes
+                        .Values.OrderBy(t => t.TypeRef.FullyQualifiedName)
+                        .ToImmutableEquatableArray(),
+                    Namespace = contextTypeSymbol.ContainingNamespace
+                        is { IsGlobalNamespace: false } ns
+                        ? ns.ToDisplayString()
+                        : null,
+                    ContextClassDeclarations = classDeclarationList.ToImmutableEquatableArray(),
+                    GeneratedOptionsSpec = options,
+                };
 
                 // Clear the caches of generated metadata between the processing of context classes.
                 _generatedTypes.Clear();
@@ -1366,12 +1366,11 @@ namespace System.Text.Json.SourceGeneration
                 public Dictionary<
                     string,
                     (PropertyGenerationSpec, ISymbol, int index)
-                > AddedProperties =
-                    new(
-                        options?.PropertyNameCaseInsensitive == true
-                            ? StringComparer.OrdinalIgnoreCase
-                            : StringComparer.Ordinal
-                    );
+                > AddedProperties = new(
+                    options?.PropertyNameCaseInsensitive == true
+                        ? StringComparer.OrdinalIgnoreCase
+                        : StringComparer.Ordinal
+                );
                 public Dictionary<string, ISymbol>? IgnoredMembers;
                 public bool IsPropertyOrderSpecified;
                 public bool HasInvalidConfigurationForFastPath;

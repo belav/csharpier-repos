@@ -26,101 +26,84 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         private static readonly BidirectionalMap<
             string,
             SpacePlacementWithinParentheses
-        > s_spacingWithinParenthesisOptionsEditorConfigMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "expressions",
-                        SpacePlacementWithinParentheses.Expressions
-                    ),
-                    KeyValuePairUtil.Create(
-                        "type_casts",
-                        SpacePlacementWithinParentheses.TypeCasts
-                    ),
-                    KeyValuePairUtil.Create(
-                        "control_flow_statements",
-                        SpacePlacementWithinParentheses.ControlFlowStatements
-                    ),
-                }
-            );
+        > s_spacingWithinParenthesisOptionsEditorConfigMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create("expressions", SpacePlacementWithinParentheses.Expressions),
+                KeyValuePairUtil.Create("type_casts", SpacePlacementWithinParentheses.TypeCasts),
+                KeyValuePairUtil.Create(
+                    "control_flow_statements",
+                    SpacePlacementWithinParentheses.ControlFlowStatements
+                ),
+            }
+        );
         private static readonly BidirectionalMap<
             string,
             BinaryOperatorSpacingOptions
-        > s_binaryOperatorSpacingOptionsEditorConfigMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create("ignore", BinaryOperatorSpacingOptions.Ignore),
-                    KeyValuePairUtil.Create("none", BinaryOperatorSpacingOptions.Remove),
-                    KeyValuePairUtil.Create(
-                        "before_and_after",
-                        BinaryOperatorSpacingOptions.Single
-                    ),
-                }
-            );
+        > s_binaryOperatorSpacingOptionsEditorConfigMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create("ignore", BinaryOperatorSpacingOptions.Ignore),
+                KeyValuePairUtil.Create("none", BinaryOperatorSpacingOptions.Remove),
+                KeyValuePairUtil.Create("before_and_after", BinaryOperatorSpacingOptions.Single),
+            }
+        );
         private static readonly BidirectionalMap<
             string,
             LabelPositionOptions
-        > s_labelPositionOptionsEditorConfigMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create("flush_left", LabelPositionOptions.LeftMost),
-                    KeyValuePairUtil.Create("no_change", LabelPositionOptions.NoIndent),
-                    KeyValuePairUtil.Create("one_less_than_current", LabelPositionOptions.OneLess),
-                }
-            );
+        > s_labelPositionOptionsEditorConfigMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create("flush_left", LabelPositionOptions.LeftMost),
+                KeyValuePairUtil.Create("no_change", LabelPositionOptions.NoIndent),
+                KeyValuePairUtil.Create("one_less_than_current", LabelPositionOptions.OneLess),
+            }
+        );
         private static readonly BidirectionalMap<
             string,
             NewLineBeforeOpenBracePlacement
-        > s_legacyNewLineOptionsEditorConfigMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "object_collection_array_initalizers",
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers
-                    ),
-                }
-            );
+        > s_legacyNewLineOptionsEditorConfigMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create(
+                    "object_collection_array_initalizers",
+                    NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers
+                ),
+            }
+        );
         private static readonly BidirectionalMap<
             string,
             NewLineBeforeOpenBracePlacement
-        > s_newLineOptionsEditorConfigMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create("all", NewLineBeforeOpenBracePlacement.All),
-                    KeyValuePairUtil.Create("accessors", NewLineBeforeOpenBracePlacement.Accessors),
-                    KeyValuePairUtil.Create("types", NewLineBeforeOpenBracePlacement.Types),
-                    KeyValuePairUtil.Create("methods", NewLineBeforeOpenBracePlacement.Methods),
-                    KeyValuePairUtil.Create(
-                        "properties",
-                        NewLineBeforeOpenBracePlacement.Properties
-                    ),
-                    KeyValuePairUtil.Create(
-                        "anonymous_methods",
-                        NewLineBeforeOpenBracePlacement.AnonymousMethods
-                    ),
-                    KeyValuePairUtil.Create(
-                        "control_blocks",
-                        NewLineBeforeOpenBracePlacement.ControlBlocks
-                    ),
-                    KeyValuePairUtil.Create(
-                        "anonymous_types",
-                        NewLineBeforeOpenBracePlacement.AnonymousTypes
-                    ),
-                    KeyValuePairUtil.Create(
-                        "object_collection_array_initializers",
-                        NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers
-                    ),
-                    KeyValuePairUtil.Create(
-                        "lambdas",
-                        NewLineBeforeOpenBracePlacement.LambdaExpressionBody
-                    ),
-                }
-            );
+        > s_newLineOptionsEditorConfigMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create("all", NewLineBeforeOpenBracePlacement.All),
+                KeyValuePairUtil.Create("accessors", NewLineBeforeOpenBracePlacement.Accessors),
+                KeyValuePairUtil.Create("types", NewLineBeforeOpenBracePlacement.Types),
+                KeyValuePairUtil.Create("methods", NewLineBeforeOpenBracePlacement.Methods),
+                KeyValuePairUtil.Create("properties", NewLineBeforeOpenBracePlacement.Properties),
+                KeyValuePairUtil.Create(
+                    "anonymous_methods",
+                    NewLineBeforeOpenBracePlacement.AnonymousMethods
+                ),
+                KeyValuePairUtil.Create(
+                    "control_blocks",
+                    NewLineBeforeOpenBracePlacement.ControlBlocks
+                ),
+                KeyValuePairUtil.Create(
+                    "anonymous_types",
+                    NewLineBeforeOpenBracePlacement.AnonymousTypes
+                ),
+                KeyValuePairUtil.Create(
+                    "object_collection_array_initializers",
+                    NewLineBeforeOpenBracePlacement.ObjectCollectionArrayInitializers
+                ),
+                KeyValuePairUtil.Create(
+                    "lambdas",
+                    NewLineBeforeOpenBracePlacement.LambdaExpressionBody
+                ),
+            }
+        );
         #endregion
 
         internal static ImmutableArray<IOption2> AllOptions { get; }
@@ -556,26 +539,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
 
     internal static class CSharpFormattingOptionGroups
     {
-        public static readonly OptionGroup Indentation =
-            new(
-                "csharp_indentation",
-                CSharpWorkspaceResources.Indentation_preferences,
-                priority: 3,
-                parent: FormattingOptionGroups.FormattingOptionGroup
-            );
-        public static readonly OptionGroup Spacing =
-            new(
-                "csharp_spacing",
-                CSharpWorkspaceResources.Space_preferences,
-                priority: 4,
-                parent: FormattingOptionGroups.FormattingOptionGroup
-            );
-        public static readonly OptionGroup Wrapping =
-            new(
-                "csharp_wrapping",
-                CSharpWorkspaceResources.Wrapping_preferences,
-                priority: 5,
-                parent: FormattingOptionGroups.FormattingOptionGroup
-            );
+        public static readonly OptionGroup Indentation = new(
+            "csharp_indentation",
+            CSharpWorkspaceResources.Indentation_preferences,
+            priority: 3,
+            parent: FormattingOptionGroups.FormattingOptionGroup
+        );
+        public static readonly OptionGroup Spacing = new(
+            "csharp_spacing",
+            CSharpWorkspaceResources.Space_preferences,
+            priority: 4,
+            parent: FormattingOptionGroups.FormattingOptionGroup
+        );
+        public static readonly OptionGroup Wrapping = new(
+            "csharp_wrapping",
+            CSharpWorkspaceResources.Wrapping_preferences,
+            priority: 5,
+            parent: FormattingOptionGroups.FormattingOptionGroup
+        );
     }
 }

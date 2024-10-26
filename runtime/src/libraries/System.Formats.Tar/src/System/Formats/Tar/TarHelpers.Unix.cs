@@ -29,15 +29,14 @@ namespace System.Formats.Tar
                 | UnixFileMode.OtherExecute;
 
             string filename = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
-            FileStreamOptions options =
-                new()
-                {
-                    Mode = FileMode.CreateNew,
-                    UnixCreateMode = OwnershipPermissions,
-                    Options = FileOptions.DeleteOnClose,
-                    Access = FileAccess.Write,
-                    BufferSize = 0,
-                };
+            FileStreamOptions options = new()
+            {
+                Mode = FileMode.CreateNew,
+                UnixCreateMode = OwnershipPermissions,
+                Options = FileOptions.DeleteOnClose,
+                Access = FileAccess.Write,
+                BufferSize = 0,
+            };
             using var fs = new FileStream(filename, options);
             UnixFileMode actual = File.GetUnixFileMode(fs.SafeFileHandle);
 

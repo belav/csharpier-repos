@@ -469,8 +469,11 @@ namespace System.Text.Json.SourceGeneration.Tests
 
             options.AddContext<PublicContext>();
 
-            PublicClassWithDifferentAccessibilitiesProperties obj =
-                new() { PublicProperty = new(), PublicField = new() };
+            PublicClassWithDifferentAccessibilitiesProperties obj = new()
+            {
+                PublicProperty = new(),
+                PublicField = new(),
+            };
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"PublicProperty":{},"PublicField":{}}""", json);
@@ -509,13 +512,12 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public void PublicContextAndJsonSerializerOptions()
         {
-            JsonSerializerOptions obj =
-                new()
-                {
-                    DefaultBufferSize = 123,
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                    IncludeFields = true,
-                };
+            JsonSerializerOptions obj = new()
+            {
+                DefaultBufferSize = 123,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                IncludeFields = true,
+            };
 
             string json = JsonSerializer.Serialize(obj, PublicContext.Default.Options);
 

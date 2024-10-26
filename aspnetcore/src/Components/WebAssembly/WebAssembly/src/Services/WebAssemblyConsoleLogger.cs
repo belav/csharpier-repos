@@ -13,8 +13,10 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 internal sealed class WebAssemblyConsoleLogger<T> : ILogger<T>, ILogger
 {
     private const string _loglevelPadding = ": ";
-    private static readonly string _messagePadding =
-        new(' ', GetLogLevelString(LogLevel.Information).Length + _loglevelPadding.Length);
+    private static readonly string _messagePadding = new(
+        ' ',
+        GetLogLevelString(LogLevel.Information).Length + _loglevelPadding.Length
+    );
     private static readonly string _newLineWithMessagePadding =
         Environment.NewLine + _messagePadding;
     private static readonly StringBuilder _logBuilder = new StringBuilder();

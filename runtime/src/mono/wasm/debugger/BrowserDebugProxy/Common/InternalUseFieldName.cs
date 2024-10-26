@@ -18,18 +18,17 @@ internal sealed class InternalUseFieldName
     public static InternalUseFieldName IsBackingField = new(nameof(IsBackingField));
     public static InternalUseFieldName ParentTypeId = new(nameof(ParentTypeId));
 
-    private static readonly HashSet<string> s_names =
-        new()
-        {
-            Hidden.Name,
-            State.Name,
-            Section.Name,
-            Owner.Name,
-            IsStatic.Name,
-            IsNewSlot.Name,
-            IsBackingField.Name,
-            ParentTypeId.Name,
-        };
+    private static readonly HashSet<string> s_names = new()
+    {
+        Hidden.Name,
+        State.Name,
+        Section.Name,
+        Owner.Name,
+        IsStatic.Name,
+        IsNewSlot.Name,
+        IsBackingField.Name,
+        ParentTypeId.Name,
+    };
 
     private InternalUseFieldName(string fieldName) => Name = $"__{fieldName}__";
 

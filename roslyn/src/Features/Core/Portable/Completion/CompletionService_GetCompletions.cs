@@ -527,8 +527,10 @@ namespace Microsoft.CodeAnalysis.Completion
             // number 5 because we don't expect more than a couple of callers at the same time.
             private static readonly ObjectPool<Dictionary<string, object>> s_uniqueSourcesPool =
                 new(factory: () => new Dictionary<string, object>(), size: 5);
-            private static readonly ObjectPool<List<CompletionItem>> s_sortListPool =
-                new(factory: () => new List<CompletionItem>(), size: 5);
+            private static readonly ObjectPool<List<CompletionItem>> s_sortListPool = new(
+                factory: () => new List<CompletionItem>(),
+                size: 5
+            );
 
             private readonly Dictionary<string, object> _displayNameToItemsMap =
                 s_uniqueSourcesPool.Allocate();

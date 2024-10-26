@@ -34,37 +34,35 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// Contains enough information to determine whether two symbols have the same signature.
         /// </summary>
-        private static readonly SymbolDisplayFormat s_unqualifiedMemberDisplayFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                    | SymbolDisplayGenericsOptions.IncludeVariance,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeExtensionThis
-                    | SymbolDisplayParameterOptions.IncludeType
-                    | SymbolDisplayParameterOptions.IncludeName,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat s_unqualifiedMemberDisplayFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
+            propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                | SymbolDisplayGenericsOptions.IncludeVariance,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeExtensionThis
+                | SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeName,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
-        private static readonly SymbolDisplayFormat s_fullyQualifiedMemberDisplayFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                    | SymbolDisplayGenericsOptions.IncludeVariance,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
-                    | SymbolDisplayMemberOptions.IncludeContainingType,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeExtensionThis
-                    | SymbolDisplayParameterOptions.IncludeType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat s_fullyQualifiedMemberDisplayFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                | SymbolDisplayGenericsOptions.IncludeVariance,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                | SymbolDisplayMemberOptions.IncludeContainingType,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeExtensionThis
+                | SymbolDisplayParameterOptions.IncludeType,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         // used by tests to validate correct handlign of unexpected exceptions
         private readonly Action<SyntaxNode>? _testFaultInjector;
@@ -3086,23 +3084,21 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         // Ignore tuple element changes, nullability, dynamic and parameter refkinds. These type changes do not affect runtime type.
         // They only affect custom attributes or metadata flags emitted on the members - all runtimes are expected to accept
         // these updates in metadata deltas, even if they do not have any observable effect.
-        private static readonly SymbolEquivalenceComparer s_runtimeSymbolEqualityComparer =
-            new(
-                AssemblyEqualityComparer.Instance,
-                distinguishRefFromOut: false,
-                tupleNamesMustMatch: false,
-                ignoreNullableAnnotations: true,
-                objectAndDynamicCompareEqually: true
-            );
+        private static readonly SymbolEquivalenceComparer s_runtimeSymbolEqualityComparer = new(
+            AssemblyEqualityComparer.Instance,
+            distinguishRefFromOut: false,
+            tupleNamesMustMatch: false,
+            ignoreNullableAnnotations: true,
+            objectAndDynamicCompareEqually: true
+        );
 
-        private static readonly SymbolEquivalenceComparer s_exactSymbolEqualityComparer =
-            new(
-                AssemblyEqualityComparer.Instance,
-                distinguishRefFromOut: true,
-                tupleNamesMustMatch: true,
-                ignoreNullableAnnotations: false,
-                objectAndDynamicCompareEqually: false
-            );
+        private static readonly SymbolEquivalenceComparer s_exactSymbolEqualityComparer = new(
+            AssemblyEqualityComparer.Instance,
+            distinguishRefFromOut: true,
+            tupleNamesMustMatch: true,
+            ignoreNullableAnnotations: false,
+            objectAndDynamicCompareEqually: false
+        );
 
         protected static bool SymbolsEquivalent(ISymbol oldSymbol, ISymbol newSymbol) =>
             s_exactSymbolEqualityComparer.Equals(oldSymbol, newSymbol);

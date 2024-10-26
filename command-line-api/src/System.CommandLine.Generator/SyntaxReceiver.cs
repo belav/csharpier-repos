@@ -58,8 +58,10 @@ namespace System.CommandLine.Generator
             }
 
             SymbolEqualityComparer symbolEqualityComparer = SymbolEqualityComparer.Default;
-            WellKnownTypes wellKnownTypes =
-                new(context.SemanticModel.Compilation, symbolEqualityComparer);
+            WellKnownTypes wellKnownTypes = new(
+                context.SemanticModel.Compilation,
+                symbolEqualityComparer
+            );
 
             var delegateParameters = Array.Empty<ISymbol>();
 

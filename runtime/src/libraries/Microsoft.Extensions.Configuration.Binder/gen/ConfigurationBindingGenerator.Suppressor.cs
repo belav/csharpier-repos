@@ -25,14 +25,20 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             /// <summary>
             /// Suppression descriptor for IL2026: Members attributed with RequiresUnreferencedCode may break when trimming.
             /// </summary>
-            private static readonly SuppressionDescriptor RUCDiagnostic =
-                new(id: "SYSLIBSUPPRESS0002", suppressedDiagnosticId: "IL2026", Justification);
+            private static readonly SuppressionDescriptor RUCDiagnostic = new(
+                id: "SYSLIBSUPPRESS0002",
+                suppressedDiagnosticId: "IL2026",
+                Justification
+            );
 
             /// <summary>
             /// Suppression descriptor for IL3050: Avoid calling members annotated with 'RequiresDynamicCodeAttribute' when publishing as native AOT.
             /// </summary>
-            private static readonly SuppressionDescriptor RDCDiagnostic =
-                new(id: "SYSLIBSUPPRESS0003", suppressedDiagnosticId: "IL3050", Justification);
+            private static readonly SuppressionDescriptor RDCDiagnostic = new(
+                id: "SYSLIBSUPPRESS0003",
+                suppressedDiagnosticId: "IL3050",
+                Justification
+            );
 
             public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
                 ImmutableArray.Create(RUCDiagnostic, RDCDiagnostic);

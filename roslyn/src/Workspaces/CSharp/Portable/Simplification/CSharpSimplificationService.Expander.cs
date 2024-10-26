@@ -31,16 +31,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             private static readonly SyntaxTrivia s_oneWhitespaceSeparator =
                 SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, " ");
 
-            private static readonly SymbolDisplayFormat s_typeNameFormatWithGenerics =
-                new(
-                    globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Included,
-                    genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                    memberOptions: SymbolDisplayMemberOptions.IncludeContainingType,
-                    localOptions: SymbolDisplayLocalOptions.IncludeType,
-                    miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                        | SymbolDisplayMiscellaneousOptions.ExpandNullable,
-                    typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
-                );
+            private static readonly SymbolDisplayFormat s_typeNameFormatWithGenerics = new(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Included,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType,
+                localOptions: SymbolDisplayLocalOptions.IncludeType,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.ExpandNullable,
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+            );
 
             private readonly SemanticModel _semanticModel;
             private readonly Func<SyntaxNode, bool> _expandInsideNode;

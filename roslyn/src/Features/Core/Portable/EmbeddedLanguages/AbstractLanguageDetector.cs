@@ -254,8 +254,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
     {
         public static readonly ImmutableArray<string> LanguageIdentifiers =
             default(TDetectorInfo).LanguageIdentifiers;
-        public static readonly EmbeddedLanguageCommentDetector CommentDetector =
-            new(LanguageIdentifiers);
+        public static readonly EmbeddedLanguageCommentDetector CommentDetector = new(
+            LanguageIdentifiers
+        );
 
         /// <summary>
         /// Cache so that we can reuse the same TDetector when analyzing a particular compilation model. This saves the

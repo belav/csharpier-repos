@@ -300,15 +300,14 @@ namespace System.IO.Tests
             byte[] expected = RandomNumberGenerator.GetBytes(fileSize);
             File.WriteAllBytes(filePath, expected);
 
-            using FileStream fileStream =
-                new(
-                    filePath,
-                    FileMode.Open,
-                    FileAccess.Read,
-                    FileShare.None,
-                    0,
-                    GetFileOptions(asyncHandle)
-                );
+            using FileStream fileStream = new(
+                filePath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.None,
+                0,
+                GetFileOptions(asyncHandle)
+            );
             using SectorAlignedMemory<byte> buffer = SectorAlignedMemory<byte>.Allocate(
                 Environment.SystemPageSize
             );

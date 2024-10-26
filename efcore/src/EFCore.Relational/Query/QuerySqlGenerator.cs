@@ -17,25 +17,24 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// </summary>
 public class QuerySqlGenerator : SqlExpressionVisitor
 {
-    private static readonly Dictionary<ExpressionType, string> OperatorMap =
-        new()
-        {
-            { ExpressionType.Equal, " = " },
-            { ExpressionType.NotEqual, " <> " },
-            { ExpressionType.GreaterThan, " > " },
-            { ExpressionType.GreaterThanOrEqual, " >= " },
-            { ExpressionType.LessThan, " < " },
-            { ExpressionType.LessThanOrEqual, " <= " },
-            { ExpressionType.AndAlso, " AND " },
-            { ExpressionType.OrElse, " OR " },
-            { ExpressionType.Add, " + " },
-            { ExpressionType.Subtract, " - " },
-            { ExpressionType.Multiply, " * " },
-            { ExpressionType.Divide, " / " },
-            { ExpressionType.Modulo, " % " },
-            { ExpressionType.And, " & " },
-            { ExpressionType.Or, " | " },
-        };
+    private static readonly Dictionary<ExpressionType, string> OperatorMap = new()
+    {
+        { ExpressionType.Equal, " = " },
+        { ExpressionType.NotEqual, " <> " },
+        { ExpressionType.GreaterThan, " > " },
+        { ExpressionType.GreaterThanOrEqual, " >= " },
+        { ExpressionType.LessThan, " < " },
+        { ExpressionType.LessThanOrEqual, " <= " },
+        { ExpressionType.AndAlso, " AND " },
+        { ExpressionType.OrElse, " OR " },
+        { ExpressionType.Add, " + " },
+        { ExpressionType.Subtract, " - " },
+        { ExpressionType.Multiply, " * " },
+        { ExpressionType.Divide, " / " },
+        { ExpressionType.Modulo, " % " },
+        { ExpressionType.And, " & " },
+        { ExpressionType.Or, " | " },
+    };
 
     private readonly IRelationalCommandBuilderFactory _relationalCommandBuilderFactory;
     private readonly ISqlGenerationHelper _sqlGenerationHelper;

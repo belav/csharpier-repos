@@ -31,8 +31,10 @@ namespace Microsoft.CodeAnalysis.ImplementType
                 globalOptions.CreateProvider()
             );
 
-        private static readonly OptionGroup s_implementTypeGroup =
-            new(name: "implement_type", description: "");
+        private static readonly OptionGroup s_implementTypeGroup = new(
+            name: "implement_type",
+            description: ""
+        );
 
         public static readonly PerLanguageOption2<ImplementTypeInsertionBehavior> InsertionBehavior =
             new(

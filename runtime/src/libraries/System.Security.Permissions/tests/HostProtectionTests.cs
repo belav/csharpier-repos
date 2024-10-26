@@ -53,12 +53,11 @@ namespace System.Security.Permissions.Tests
         public static void HostProtectionException_Ctor_String_HostProtectionResource_HostProtectionResource()
         {
             string message = "Created HostProtectionException";
-            HostProtectionException hpe =
-                new(
-                    message,
-                    HostProtectionResource.SecurityInfrastructure,
-                    HostProtectionResource.MayLeakOnAbort
-                );
+            HostProtectionException hpe = new(
+                message,
+                HostProtectionResource.SecurityInfrastructure,
+                HostProtectionResource.MayLeakOnAbort
+            );
             Assert.Equal(message, hpe.Message);
             Assert.Equal(COR_E_HOSTPROTECTION, hpe.HResult);
             Assert.Equal(HostProtectionResource.SecurityInfrastructure, hpe.ProtectedResources);

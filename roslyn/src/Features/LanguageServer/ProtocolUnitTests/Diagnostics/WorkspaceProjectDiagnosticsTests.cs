@@ -124,16 +124,15 @@ public class WorkspaceProjectDiagnosticsTests : AbstractPullDiagnosticTestsBase
     private class MockProjectDiagnosticAnalyzer : DiagnosticAnalyzer
     {
         public const string Id = "MockProjectDiagnostic";
-        private readonly DiagnosticDescriptor _descriptor =
-            new(
-                Id,
-                "MockProjectDiagnostic",
-                "MockProjectDiagnostic",
-                "InternalCategory",
-                DiagnosticSeverity.Warning,
-                isEnabledByDefault: true,
-                helpLinkUri: "https://github.com/dotnet/roslyn"
-            );
+        private readonly DiagnosticDescriptor _descriptor = new(
+            Id,
+            "MockProjectDiagnostic",
+            "MockProjectDiagnostic",
+            "InternalCategory",
+            DiagnosticSeverity.Warning,
+            isEnabledByDefault: true,
+            helpLinkUri: "https://github.com/dotnet/roslyn"
+        );
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
             ImmutableArray.Create(_descriptor);

@@ -31,12 +31,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 )
                 .AddParts(typeof(MockDiagnosticUpdateSourceRegistrationService));
 
-        private static readonly Lazy<MetadataReference> _unconditionalSuppressMessageRef =
-            new(
-                () =>
-                {
-                    const string unconditionalSuppressMessageDef =
-                        @"
+        private static readonly Lazy<MetadataReference> _unconditionalSuppressMessageRef = new(
+            () =>
+            {
+                const string unconditionalSuppressMessageDef =
+                    @"
 namespace System.Diagnostics.CodeAnalysis
 {
     [System.AttributeUsage(System.AttributeTargets.All, AllowMultiple=true, Inherited=false)]
@@ -55,22 +54,20 @@ namespace System.Diagnostics.CodeAnalysis
         public string Justification { get; set; }
     }
 }";
-                    return CSharpCompilation
-                        .Create(
-                            "unconditionalsuppress",
-                            options: new CSharpCompilationOptions(
-                                OutputKind.DynamicallyLinkedLibrary
-                            ),
-                            syntaxTrees: new[]
-                            {
-                                CSharpSyntaxTree.ParseText(unconditionalSuppressMessageDef),
-                            },
-                            references: new[] { TestBase.MscorlibRef }
-                        )
-                        .EmitToImageReference();
-                },
-                LazyThreadSafetyMode.PublicationOnly
-            );
+                return CSharpCompilation
+                    .Create(
+                        "unconditionalsuppress",
+                        options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary),
+                        syntaxTrees: new[]
+                        {
+                            CSharpSyntaxTree.ParseText(unconditionalSuppressMessageDef),
+                        },
+                        references: new[] { TestBase.MscorlibRef }
+                    )
+                    .EmitToImageReference();
+            },
+            LazyThreadSafetyMode.PublicationOnly
+        );
 
         protected override async Task VerifyAsync(
             string source,

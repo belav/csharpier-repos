@@ -17,8 +17,10 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
         private static readonly CountLogAggregator<ActionInfo> s_countLogAggregator = new();
         private static readonly StatisticLogAggregator<ActionInfo> s_statisticLogAggregator = new();
-        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator =
-            new(bucketSize: 1000, maxBucketValue: 30000);
+        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator = new(
+            bucketSize: 1000,
+            maxBucketValue: 30000
+        );
 
         internal enum ActionInfo
         {

@@ -17,8 +17,9 @@ namespace System.Net.Http.Functional.Tests
     {
         private readonly Socket _listener;
         private readonly List<Task> _connectionTasks = new();
-        private readonly TaskCompletionSource _serverStopped =
-            new(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _serverStopped = new(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         public int Port { get; }
 

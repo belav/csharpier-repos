@@ -17,16 +17,15 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
     internal abstract partial class AbstractPartialMethodCompletionProvider
         : AbstractMemberInsertingCompletionProvider
     {
-        protected static readonly SymbolDisplayFormat SignatureDisplayFormat =
-            new(
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeParameters,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeName
-                    | SymbolDisplayParameterOptions.IncludeType
-                    | SymbolDisplayParameterOptions.IncludeParamsRefOut,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        protected static readonly SymbolDisplayFormat SignatureDisplayFormat = new(
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeParameters,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeName
+                | SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         protected AbstractPartialMethodCompletionProvider() { }
 

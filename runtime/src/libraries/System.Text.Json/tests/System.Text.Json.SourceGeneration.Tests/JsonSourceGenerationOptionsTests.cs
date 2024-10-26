@@ -12,11 +12,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public static void ContextWithGeneralSerializerDefaults_GeneratesExpectedOptions()
         {
-            JsonSerializerOptions expected =
-                new(JsonSerializerDefaults.General)
-                {
-                    TypeInfoResolver = ContextWithGeneralSerializerDefaults.Default,
-                };
+            JsonSerializerOptions expected = new(JsonSerializerDefaults.General)
+            {
+                TypeInfoResolver = ContextWithGeneralSerializerDefaults.Default,
+            };
             JsonSerializerOptions options = ContextWithGeneralSerializerDefaults.Default.Options;
 
             JsonTestHelper.AssertOptionsEqual(expected, options);
@@ -29,11 +28,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public static void ContextWithWebSerializerDefaults_GeneratesExpectedOptions()
         {
-            JsonSerializerOptions expected =
-                new(JsonSerializerDefaults.Web)
-                {
-                    TypeInfoResolver = ContextWithWebSerializerDefaults.Default,
-                };
+            JsonSerializerOptions expected = new(JsonSerializerDefaults.Web)
+            {
+                TypeInfoResolver = ContextWithWebSerializerDefaults.Default,
+            };
             JsonSerializerOptions options = ContextWithWebSerializerDefaults.Default.Options;
 
             JsonTestHelper.AssertOptionsEqual(expected, options);
@@ -46,13 +44,11 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public static void ContextWithWebDefaultsAndOverriddenPropertyNamingPolicy_GeneratesExpectedOptions()
         {
-            JsonSerializerOptions expected =
-                new(JsonSerializerDefaults.Web)
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.KebabCaseLower,
-                    TypeInfoResolver =
-                        ContextWithWebDefaultsAndOverriddenPropertyNamingPolicy.Default,
-                };
+            JsonSerializerOptions expected = new(JsonSerializerDefaults.Web)
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.KebabCaseLower,
+                TypeInfoResolver = ContextWithWebDefaultsAndOverriddenPropertyNamingPolicy.Default,
+            };
 
             JsonSerializerOptions options = ContextWithWebDefaultsAndOverriddenPropertyNamingPolicy
                 .Default
@@ -72,33 +68,32 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public static void ContextWithAllOptionsSet_GeneratesExpectedOptions()
         {
-            JsonSerializerOptions expected =
-                new(JsonSerializerDefaults.Web)
+            JsonSerializerOptions expected = new(JsonSerializerDefaults.Web)
+            {
+                AllowTrailingCommas = true,
+                Converters =
                 {
-                    AllowTrailingCommas = true,
-                    Converters =
-                    {
-                        new JsonStringEnumConverter<BindingFlags>(),
-                        new JsonStringEnumConverter<JsonIgnoreCondition>(),
-                    },
-                    DefaultBufferSize = 128,
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-                    DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseUpper,
-                    IgnoreReadOnlyFields = true,
-                    IgnoreReadOnlyProperties = true,
-                    IncludeFields = true,
-                    MaxDepth = 1024,
-                    NumberHandling = JsonNumberHandling.WriteAsString,
-                    PreferredObjectCreationHandling = JsonObjectCreationHandling.Replace,
-                    PropertyNameCaseInsensitive = true,
-                    PropertyNamingPolicy = JsonNamingPolicy.KebabCaseUpper,
-                    ReadCommentHandling = JsonCommentHandling.Skip,
-                    UnknownTypeHandling = JsonUnknownTypeHandling.JsonNode,
-                    UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
-                    WriteIndented = true,
+                    new JsonStringEnumConverter<BindingFlags>(),
+                    new JsonStringEnumConverter<JsonIgnoreCondition>(),
+                },
+                DefaultBufferSize = 128,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
+                DictionaryKeyPolicy = JsonNamingPolicy.SnakeCaseUpper,
+                IgnoreReadOnlyFields = true,
+                IgnoreReadOnlyProperties = true,
+                IncludeFields = true,
+                MaxDepth = 1024,
+                NumberHandling = JsonNumberHandling.WriteAsString,
+                PreferredObjectCreationHandling = JsonObjectCreationHandling.Replace,
+                PropertyNameCaseInsensitive = true,
+                PropertyNamingPolicy = JsonNamingPolicy.KebabCaseUpper,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                UnknownTypeHandling = JsonUnknownTypeHandling.JsonNode,
+                UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow,
+                WriteIndented = true,
 
-                    TypeInfoResolver = ContextWithAllOptionsSet.Default,
-                };
+                TypeInfoResolver = ContextWithAllOptionsSet.Default,
+            };
 
             JsonSerializerOptions options = ContextWithAllOptionsSet.Default.Options;
 

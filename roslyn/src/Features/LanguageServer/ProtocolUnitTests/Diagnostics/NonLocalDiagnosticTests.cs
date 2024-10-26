@@ -113,25 +113,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
         private sealed class NonLocalDiagnosticsAnalyzer : DiagnosticAnalyzer
         {
-            public static readonly DiagnosticDescriptor NonLocalDescriptor =
-                new(
-                    "NonLocal0001",
-                    "Title1",
-                    "NonLocal0001",
-                    "Category",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true
-                );
-            public static readonly DiagnosticDescriptor CompilationEndDescriptor =
-                new(
-                    "NonLocal0002",
-                    "Title2",
-                    "NonLocal0002",
-                    "Category",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true,
-                    customTags: [WellKnownDiagnosticTags.CompilationEnd]
-                );
+            public static readonly DiagnosticDescriptor NonLocalDescriptor = new(
+                "NonLocal0001",
+                "Title1",
+                "NonLocal0001",
+                "Category",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
+            public static readonly DiagnosticDescriptor CompilationEndDescriptor = new(
+                "NonLocal0002",
+                "Title2",
+                "NonLocal0002",
+                "Category",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true,
+                customTags: [WellKnownDiagnosticTags.CompilationEnd]
+            );
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(NonLocalDescriptor, CompilationEndDescriptor);
 

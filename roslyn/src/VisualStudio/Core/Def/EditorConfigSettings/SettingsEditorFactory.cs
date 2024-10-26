@@ -25,8 +25,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
     [Guid(SettingsEditorFactoryGuidString)]
     internal sealed class SettingsEditorFactory : IVsEditorFactory, IVsEditorFactory4, IDisposable
     {
-        public static readonly Guid SettingsEditorFactoryGuid =
-            new(SettingsEditorFactoryGuidString);
+        public static readonly Guid SettingsEditorFactoryGuid = new(
+            SettingsEditorFactoryGuidString
+        );
         public const string SettingsEditorFactoryGuidString =
             "68b46364-d378-42f2-9e72-37d86c5f4468";
         public const string Extension = ".editorconfig";

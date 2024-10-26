@@ -526,8 +526,9 @@ namespace LibraryImportGenerator.UnitTests
             };
 
             // Custom type marshalling
-            CustomStructMarshallingCodeSnippets customStructMarshallingCodeSnippets =
-                new(new CodeSnippets());
+            CustomStructMarshallingCodeSnippets customStructMarshallingCodeSnippets = new(
+                new CodeSnippets()
+            );
             yield return new[]
             {
                 ID(),
@@ -769,8 +770,9 @@ namespace LibraryImportGenerator.UnitTests
         public static IEnumerable<object[]> CustomCollections()
         {
             // Custom collection marshalling
-            CustomCollectionMarshallingCodeSnippets customCollectionMarshallingCodeSnippets =
-                new(new CodeSnippets());
+            CustomCollectionMarshallingCodeSnippets customCollectionMarshallingCodeSnippets = new(
+                new CodeSnippets()
+            );
             yield return new[]
             {
                 ID(),

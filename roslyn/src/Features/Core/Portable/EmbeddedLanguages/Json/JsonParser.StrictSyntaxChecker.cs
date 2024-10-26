@@ -256,16 +256,15 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                   zero = %x30                ; 0
             */
 
-            private static readonly Regex s_validNumberRegex =
-                new(
-                    @"^
+            private static readonly Regex s_validNumberRegex = new(
+                @"^
 -?                 # [ minus ]
 (0|([1-9][0-9]*))  # int
 (\.[0-9]+)?        # [ frac ]
 ([eE][-+]?[0-9]+)? # [ exp ]
 $",
-                    RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace
-                );
+                RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace
+            );
 
             private static EmbeddedDiagnostic? CheckNumber(
                 JsonToken literalToken,

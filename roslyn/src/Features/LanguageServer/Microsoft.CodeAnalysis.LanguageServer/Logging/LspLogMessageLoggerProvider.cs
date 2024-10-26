@@ -10,8 +10,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Logging;
 internal class LspLogMessageLoggerProvider : ILoggerProvider
 {
     private readonly ILoggerFactory _fallbackLoggerFactory;
-    private readonly ConcurrentDictionary<string, LspLogMessageLogger> _loggers =
-        new(StringComparer.OrdinalIgnoreCase);
+    private readonly ConcurrentDictionary<string, LspLogMessageLogger> _loggers = new(
+        StringComparer.OrdinalIgnoreCase
+    );
 
     public LspLogMessageLoggerProvider(ILoggerFactory fallbackLoggerFactory)
     {

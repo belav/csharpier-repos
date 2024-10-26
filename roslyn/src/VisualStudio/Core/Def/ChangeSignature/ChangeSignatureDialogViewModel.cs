@@ -325,32 +325,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             );
         }
 
-        private static readonly SymbolDisplayFormat s_symbolDeclarationDisplayFormat =
-            new(
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                    | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier,
-                extensionMethodStyle: SymbolDisplayExtensionMethodStyle.StaticMethod,
-                memberOptions: SymbolDisplayMemberOptions.IncludeType
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface
-                    | SymbolDisplayMemberOptions.IncludeAccessibility
-                    | SymbolDisplayMemberOptions.IncludeModifiers
-                    | SymbolDisplayMemberOptions.IncludeRef
-            );
+        private static readonly SymbolDisplayFormat s_symbolDeclarationDisplayFormat = new(
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier,
+            extensionMethodStyle: SymbolDisplayExtensionMethodStyle.StaticMethod,
+            memberOptions: SymbolDisplayMemberOptions.IncludeType
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface
+                | SymbolDisplayMemberOptions.IncludeAccessibility
+                | SymbolDisplayMemberOptions.IncludeModifiers
+                | SymbolDisplayMemberOptions.IncludeRef
+        );
 
-        private static readonly SymbolDisplayFormat s_parameterDisplayFormat =
-            new(
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                    | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeType
-                    | SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeDefaultValue
-                    | SymbolDisplayParameterOptions.IncludeExtensionThis
-                    | SymbolDisplayParameterOptions.IncludeName
-            );
+        private static readonly SymbolDisplayFormat s_parameterDisplayFormat = new(
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeDefaultValue
+                | SymbolDisplayParameterOptions.IncludeExtensionThis
+                | SymbolDisplayParameterOptions.IncludeName
+        );
 
         public TextBlock SignatureDisplay
         {

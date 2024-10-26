@@ -5608,15 +5608,14 @@ public class C
                 _testSyntaxNodeAction = testSyntaxNodeAction;
             }
 
-            internal static DiagnosticDescriptor Rule =
-                new(
-                    DiagnosticId,
-                    Title,
-                    MessageFormat,
-                    Category,
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true
-                );
+            internal static DiagnosticDescriptor Rule = new(
+                DiagnosticId,
+                Title,
+                MessageFormat,
+                Category,
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
             {

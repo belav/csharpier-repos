@@ -317,8 +317,9 @@ internal sealed partial class CertificatePathWatcher : IDisposable
     private sealed class FileWatchMetadata(IDisposable disposable) : IDisposable
     {
         public readonly IDisposable Disposable = disposable;
-        public readonly HashSet<CertificateConfig> Configs =
-            new(ReferenceEqualityComparer.Instance);
+        public readonly HashSet<CertificateConfig> Configs = new(
+            ReferenceEqualityComparer.Instance
+        );
 
         public void Dispose() => Disposable.Dispose();
     }

@@ -26,10 +26,12 @@ namespace Microsoft.Extensions.Options.Generators
         private readonly Action<Diagnostic> _reportDiagnostic;
         private readonly SymbolHolder _symbolHolder;
         private readonly OptionsSourceGenContext _optionsSourceGenContext;
-        private readonly Dictionary<ITypeSymbol, ValidatorType> _synthesizedValidators =
-            new(SymbolEqualityComparer.Default);
-        private readonly HashSet<ITypeSymbol> _visitedModelTypes =
-            new(SymbolEqualityComparer.Default);
+        private readonly Dictionary<ITypeSymbol, ValidatorType> _synthesizedValidators = new(
+            SymbolEqualityComparer.Default
+        );
+        private readonly HashSet<ITypeSymbol> _visitedModelTypes = new(
+            SymbolEqualityComparer.Default
+        );
 
         public Parser(
             Compilation compilation,

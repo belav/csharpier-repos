@@ -1442,8 +1442,11 @@ namespace System.Text.Tests
             DecoderFallback.ExceptionFallback
         );
 
-        private static readonly UnicodeEncoding ErrorCheckingUnicodeEncoding =
-            new(bigEndian: false, byteOrderMark: false, throwOnInvalidBytes: true);
+        private static readonly UnicodeEncoding ErrorCheckingUnicodeEncoding = new(
+            bigEndian: false,
+            byteOrderMark: false,
+            throwOnInvalidBytes: true
+        );
 
         // A custom encoder fallback which substitutes unknown chars with "[xxxx]" (the code point as hex)
         private sealed class CustomEncoderFallback : EncoderFallback

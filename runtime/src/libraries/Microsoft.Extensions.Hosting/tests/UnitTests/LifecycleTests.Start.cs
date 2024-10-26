@@ -335,13 +335,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         [InlineData(false)]
         public async Task StartPhasesException_Starting(bool throwAfterAsyncCall)
         {
-            ExceptionImpl impl =
-                new(
-                    throwAfterAsyncCall: throwAfterAsyncCall,
-                    throwOnStarting: true,
-                    throwOnStart: false,
-                    throwOnStarted: false
-                );
+            ExceptionImpl impl = new(
+                throwAfterAsyncCall: throwAfterAsyncCall,
+                throwOnStarting: true,
+                throwOnStart: false,
+                throwOnStarted: false
+            );
 
             var hostBuilder = CreateHostBuilder(services =>
             {
@@ -367,13 +366,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         [InlineData(false)]
         public async Task StartPhasesException_Start(bool throwAfterAsyncCall)
         {
-            ExceptionImpl impl =
-                new(
-                    throwAfterAsyncCall: throwAfterAsyncCall,
-                    throwOnStarting: false,
-                    throwOnStart: true,
-                    throwOnStarted: false
-                );
+            ExceptionImpl impl = new(
+                throwAfterAsyncCall: throwAfterAsyncCall,
+                throwOnStarting: false,
+                throwOnStart: true,
+                throwOnStarted: false
+            );
 
             var hostBuilder = CreateHostBuilder(services =>
             {
@@ -399,13 +397,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         [InlineData(false)]
         public async Task StartPhasesException_Started(bool throwAfterAsyncCall)
         {
-            ExceptionImpl impl =
-                new(
-                    throwAfterAsyncCall: throwAfterAsyncCall,
-                    throwOnStarting: false,
-                    throwOnStart: false,
-                    throwOnStarted: true
-                );
+            ExceptionImpl impl = new(
+                throwAfterAsyncCall: throwAfterAsyncCall,
+                throwOnStarting: false,
+                throwOnStart: false,
+                throwOnStarted: true
+            );
 
             var hostBuilder = CreateHostBuilder(services =>
             {
@@ -429,13 +426,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public async Task ValidateOnStartAbortsChain()
         {
-            ExceptionImpl impl =
-                new(
-                    throwAfterAsyncCall: false,
-                    throwOnStarting: false,
-                    throwOnStart: false,
-                    throwOnStarted: false
-                );
+            ExceptionImpl impl = new(
+                throwAfterAsyncCall: false,
+                throwOnStarting: false,
+                throwOnStart: false,
+                throwOnStarted: false
+            );
             var hostBuilder = CreateHostBuilder(services =>
             {
                 services

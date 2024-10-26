@@ -1506,13 +1506,12 @@ namespace System.Speech.Internal.Synthesis
                             {
                                 localUnknownNamespaces ??= new List<SsmlXmlAttribute>();
 
-                                SsmlXmlAttribute ns =
-                                    new(
-                                        reader.Prefix,
-                                        reader.LocalName,
-                                        reader.Value,
-                                        reader.NamespaceURI
-                                    );
+                                SsmlXmlAttribute ns = new(
+                                    reader.Prefix,
+                                    reader.LocalName,
+                                    reader.Value,
+                                    reader.NamespaceURI
+                                );
                                 localUnknownNamespaces.Add(ns);
                                 ssmlAttributes._unknownNamespaces.Add(ns);
                             }

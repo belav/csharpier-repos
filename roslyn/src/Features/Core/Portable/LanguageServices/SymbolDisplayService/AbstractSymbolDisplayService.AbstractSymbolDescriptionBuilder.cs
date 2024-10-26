@@ -22,66 +22,64 @@ namespace Microsoft.CodeAnalysis.LanguageService
     {
         protected abstract partial class AbstractSymbolDescriptionBuilder
         {
-            private static readonly SymbolDisplayFormat s_typeParameterOwnerFormat =
-                new(
-                    globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                    typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                    genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                        | SymbolDisplayGenericsOptions.IncludeVariance
-                        | SymbolDisplayGenericsOptions.IncludeTypeConstraints,
-                    memberOptions: SymbolDisplayMemberOptions.IncludeContainingType,
-                    parameterOptions: SymbolDisplayParameterOptions.None,
-                    miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                        | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        | SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
-                );
+            private static readonly SymbolDisplayFormat s_typeParameterOwnerFormat = new(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance
+                    | SymbolDisplayGenericsOptions.IncludeTypeConstraints,
+                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType,
+                parameterOptions: SymbolDisplayParameterOptions.None,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    | SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
+            );
 
-            private static readonly SymbolDisplayFormat s_memberSignatureDisplayFormat =
-                new(
-                    globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                    genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                        | SymbolDisplayGenericsOptions.IncludeTypeConstraints,
-                    memberOptions: SymbolDisplayMemberOptions.IncludeRef
-                        | SymbolDisplayMemberOptions.IncludeType
-                        | SymbolDisplayMemberOptions.IncludeParameters
-                        | SymbolDisplayMemberOptions.IncludeContainingType,
-                    kindOptions: SymbolDisplayKindOptions.IncludeMemberKeyword,
-                    propertyStyle: SymbolDisplayPropertyStyle.ShowReadWriteDescriptor,
-                    parameterOptions: SymbolDisplayParameterOptions.IncludeName
-                        | SymbolDisplayParameterOptions.IncludeType
-                        | SymbolDisplayParameterOptions.IncludeParamsRefOut
-                        | SymbolDisplayParameterOptions.IncludeExtensionThis
-                        | SymbolDisplayParameterOptions.IncludeDefaultValue
-                        | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
-                    localOptions: SymbolDisplayLocalOptions.IncludeRef
-                        | SymbolDisplayLocalOptions.IncludeType,
-                    miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                        | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                        | SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
-                        | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-                        | SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
-                        | SymbolDisplayMiscellaneousOptions.CollapseTupleTypes
-                );
+            private static readonly SymbolDisplayFormat s_memberSignatureDisplayFormat = new(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeTypeConstraints,
+                memberOptions: SymbolDisplayMemberOptions.IncludeRef
+                    | SymbolDisplayMemberOptions.IncludeType
+                    | SymbolDisplayMemberOptions.IncludeParameters
+                    | SymbolDisplayMemberOptions.IncludeContainingType,
+                kindOptions: SymbolDisplayKindOptions.IncludeMemberKeyword,
+                propertyStyle: SymbolDisplayPropertyStyle.ShowReadWriteDescriptor,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeName
+                    | SymbolDisplayParameterOptions.IncludeType
+                    | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                    | SymbolDisplayParameterOptions.IncludeExtensionThis
+                    | SymbolDisplayParameterOptions.IncludeDefaultValue
+                    | SymbolDisplayParameterOptions.IncludeOptionalBrackets,
+                localOptions: SymbolDisplayLocalOptions.IncludeRef
+                    | SymbolDisplayLocalOptions.IncludeType,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                    | SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
+                    | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+                    | SymbolDisplayMiscellaneousOptions.AllowDefaultLiteral
+                    | SymbolDisplayMiscellaneousOptions.CollapseTupleTypes
+            );
 
-            private static readonly SymbolDisplayFormat s_descriptionStyle =
-                new(
-                    typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                    delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
-                    genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                        | SymbolDisplayGenericsOptions.IncludeVariance
-                        | SymbolDisplayGenericsOptions.IncludeTypeConstraints,
-                    parameterOptions: SymbolDisplayParameterOptions.IncludeType
-                        | SymbolDisplayParameterOptions.IncludeName
-                        | SymbolDisplayParameterOptions.IncludeParamsRefOut
-                        | SymbolDisplayParameterOptions.IncludeDefaultValue,
-                    miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                        | SymbolDisplayMiscellaneousOptions.CollapseTupleTypes,
-                    kindOptions: SymbolDisplayKindOptions.IncludeNamespaceKeyword
-                        | SymbolDisplayKindOptions.IncludeTypeKeyword
-                );
+            private static readonly SymbolDisplayFormat s_descriptionStyle = new(
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+                delegateStyle: SymbolDisplayDelegateStyle.NameAndSignature,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                    | SymbolDisplayGenericsOptions.IncludeVariance
+                    | SymbolDisplayGenericsOptions.IncludeTypeConstraints,
+                parameterOptions: SymbolDisplayParameterOptions.IncludeType
+                    | SymbolDisplayParameterOptions.IncludeName
+                    | SymbolDisplayParameterOptions.IncludeParamsRefOut
+                    | SymbolDisplayParameterOptions.IncludeDefaultValue,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    | SymbolDisplayMiscellaneousOptions.CollapseTupleTypes,
+                kindOptions: SymbolDisplayKindOptions.IncludeNamespaceKeyword
+                    | SymbolDisplayKindOptions.IncludeTypeKeyword
+            );
 
-            private static readonly SymbolDisplayFormat s_globalNamespaceStyle =
-                new(globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Included);
+            private static readonly SymbolDisplayFormat s_globalNamespaceStyle = new(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Included
+            );
 
             private readonly SemanticModel _semanticModel;
             private readonly int _position;

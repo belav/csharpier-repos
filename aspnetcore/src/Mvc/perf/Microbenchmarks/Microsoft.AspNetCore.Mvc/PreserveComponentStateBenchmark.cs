@@ -18,8 +18,10 @@ namespace Microsoft.AspNetCore.Mvc.Microbenchmarks;
 
 public class PreserveComponentStateBenchmark
 {
-    private readonly PersistComponentStateTagHelper _tagHelper =
-        new() { PersistenceMode = PersistenceMode.WebAssembly };
+    private readonly PersistComponentStateTagHelper _tagHelper = new()
+    {
+        PersistenceMode = PersistenceMode.WebAssembly,
+    };
 
     TagHelperAttributeList _attributes = new();
 

@@ -43,15 +43,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 AppContext.GetData("ReferenceAssemblies.NetCurrent.TargetFramework")!;
             var nugetConfigPath = (string)
                 AppContext.GetData("ReferenceAssemblies.NetCurrent.NuGetConfigPath")!;
-            ReferenceAssemblies netCurrentReferenceAssemblies =
-                new(
-                    netCurrentTargetFramework,
-                    new PackageIdentity(
-                        "Microsoft.NETCore.App.Ref",
-                        netCurrentTargetingPackVersion
-                    ),
-                    Path.Combine("ref", netCurrentTargetFramework)
-                );
+            ReferenceAssemblies netCurrentReferenceAssemblies = new(
+                netCurrentTargetFramework,
+                new PackageIdentity("Microsoft.NETCore.App.Ref", netCurrentTargetingPackVersion),
+                Path.Combine("ref", netCurrentTargetFramework)
+            );
             netCurrentReferenceAssemblies = netCurrentReferenceAssemblies.WithNuGetConfigFilePath(
                 nugetConfigPath
             );

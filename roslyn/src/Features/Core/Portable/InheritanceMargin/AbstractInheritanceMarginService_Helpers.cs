@@ -28,19 +28,18 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
 
     internal abstract partial class AbstractInheritanceMarginService
     {
-        private static readonly SymbolDisplayFormat s_displayFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
-                    | SymbolDisplayMemberOptions.IncludeExplicitInterface,
-                propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-                    | SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
-                    | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
-            );
+        private static readonly SymbolDisplayFormat s_displayFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.OmittedAsContaining,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+                | SymbolDisplayMemberOptions.IncludeExplicitInterface,
+            propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+                | SymbolDisplayMiscellaneousOptions.UseErrorTypeSymbolName
+                | SymbolDisplayMiscellaneousOptions.IncludeNullableReferenceTypeModifier
+        );
 
         private static async ValueTask<
             ImmutableArray<InheritanceMarginItem>

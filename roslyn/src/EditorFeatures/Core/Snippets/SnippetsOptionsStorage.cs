@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.Snippets
 {
     internal static class SnippetsOptionsStorage
     {
-        public static readonly Option2<bool> Snippets =
-            new("dotnet_enable_snippets", defaultValue: true);
+        public static readonly Option2<bool> Snippets = new(
+            "dotnet_enable_snippets",
+            defaultValue: true
+        );
     }
 }

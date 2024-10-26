@@ -39,38 +39,36 @@ public partial class NavigationExpandingExpressionVisitor : ExpressionVisitor
         .GetTypeInfo()
         .GetDeclaredProperty(nameof(QueryContext.Context))!;
 
-    private static readonly Dictionary<MethodInfo, MethodInfo> PredicateLessMethodInfo =
-        new()
+    private static readonly Dictionary<MethodInfo, MethodInfo> PredicateLessMethodInfo = new()
+    {
+        { QueryableMethods.FirstWithPredicate, QueryableMethods.FirstWithoutPredicate },
         {
-            { QueryableMethods.FirstWithPredicate, QueryableMethods.FirstWithoutPredicate },
-            {
-                QueryableMethods.FirstOrDefaultWithPredicate,
-                QueryableMethods.FirstOrDefaultWithoutPredicate
-            },
-            { QueryableMethods.SingleWithPredicate, QueryableMethods.SingleWithoutPredicate },
-            {
-                QueryableMethods.SingleOrDefaultWithPredicate,
-                QueryableMethods.SingleOrDefaultWithoutPredicate
-            },
-            { QueryableMethods.LastWithPredicate, QueryableMethods.LastWithoutPredicate },
-            {
-                QueryableMethods.LastOrDefaultWithPredicate,
-                QueryableMethods.LastOrDefaultWithoutPredicate
-            },
-        };
+            QueryableMethods.FirstOrDefaultWithPredicate,
+            QueryableMethods.FirstOrDefaultWithoutPredicate
+        },
+        { QueryableMethods.SingleWithPredicate, QueryableMethods.SingleWithoutPredicate },
+        {
+            QueryableMethods.SingleOrDefaultWithPredicate,
+            QueryableMethods.SingleOrDefaultWithoutPredicate
+        },
+        { QueryableMethods.LastWithPredicate, QueryableMethods.LastWithoutPredicate },
+        {
+            QueryableMethods.LastOrDefaultWithPredicate,
+            QueryableMethods.LastOrDefaultWithoutPredicate
+        },
+    };
 
-    private static readonly List<MethodInfo> SupportedFilteredIncludeOperations =
-        new()
-        {
-            QueryableMethods.Where,
-            QueryableMethods.OrderBy,
-            QueryableMethods.OrderByDescending,
-            QueryableMethods.ThenBy,
-            QueryableMethods.ThenByDescending,
-            QueryableMethods.Skip,
-            QueryableMethods.Take,
-            QueryableMethods.AsQueryable,
-        };
+    private static readonly List<MethodInfo> SupportedFilteredIncludeOperations = new()
+    {
+        QueryableMethods.Where,
+        QueryableMethods.OrderBy,
+        QueryableMethods.OrderByDescending,
+        QueryableMethods.ThenBy,
+        QueryableMethods.ThenByDescending,
+        QueryableMethods.Skip,
+        QueryableMethods.Take,
+        QueryableMethods.AsQueryable,
+    };
 
     private readonly QueryTranslationPreprocessor _queryTranslationPreprocessor;
     private readonly QueryCompilationContext _queryCompilationContext;

@@ -127,8 +127,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             >? _otherDeletedMembers;
 
             private readonly SymbolComparer _comparer;
-            private readonly ConcurrentDictionary<Symbol, Symbol?> _matches =
-                new(ReferenceEqualityComparer.Instance);
+            private readonly ConcurrentDictionary<Symbol, Symbol?> _matches = new(
+                ReferenceEqualityComparer.Instance
+            );
 
             /// <summary>
             /// A cache of members per type, populated when the first member for a given

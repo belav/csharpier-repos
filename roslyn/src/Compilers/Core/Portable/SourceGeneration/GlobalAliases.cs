@@ -15,8 +15,9 @@ namespace Microsoft.CodeAnalysis.SourceGeneration;
 /// </summary>
 internal sealed class GlobalAliases : IEquatable<GlobalAliases>
 {
-    public static readonly GlobalAliases Empty =
-        new(ImmutableArray<(string aliasName, string symbolName)>.Empty);
+    public static readonly GlobalAliases Empty = new(
+        ImmutableArray<(string aliasName, string symbolName)>.Empty
+    );
 
     public readonly ImmutableArray<(string aliasName, string symbolName)> AliasAndSymbolNames;
 

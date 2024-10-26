@@ -70,45 +70,42 @@ namespace Microsoft.CodeAnalysis.InlineHints
             };
 
         // Note: inlay hints is the term used in LSP, we Want to use the LSP name when communicate with the LSP client.
-        private static readonly OptionGroup s_inlayHintOptionGroup =
-            new(name: "inlay_hints", description: "");
+        private static readonly OptionGroup s_inlayHintOptionGroup = new(
+            name: "inlay_hints",
+            description: ""
+        );
 
         //  Parameter hints
 
-        public static readonly PerLanguageOption2<bool> EnabledForParameters =
-            new(
-                "dotnet_enable_inlay_hints_for_parameters",
-                InlineParameterHintsOptions.Default.EnabledForParameters,
-                group: s_inlayHintOptionGroup
-            );
+        public static readonly PerLanguageOption2<bool> EnabledForParameters = new(
+            "dotnet_enable_inlay_hints_for_parameters",
+            InlineParameterHintsOptions.Default.EnabledForParameters,
+            group: s_inlayHintOptionGroup
+        );
 
-        public static readonly PerLanguageOption2<bool> ForLiteralParameters =
-            new(
-                "dotnet_enable_inlay_hints_for_literal_parameters",
-                InlineParameterHintsOptions.Default.ForLiteralParameters,
-                group: s_inlayHintOptionGroup
-            );
+        public static readonly PerLanguageOption2<bool> ForLiteralParameters = new(
+            "dotnet_enable_inlay_hints_for_literal_parameters",
+            InlineParameterHintsOptions.Default.ForLiteralParameters,
+            group: s_inlayHintOptionGroup
+        );
 
-        public static readonly PerLanguageOption2<bool> ForIndexerParameters =
-            new(
-                "dotnet_enable_inlay_hints_for_indexer_parameters",
-                InlineParameterHintsOptions.Default.ForIndexerParameters,
-                group: s_inlayHintOptionGroup
-            );
+        public static readonly PerLanguageOption2<bool> ForIndexerParameters = new(
+            "dotnet_enable_inlay_hints_for_indexer_parameters",
+            InlineParameterHintsOptions.Default.ForIndexerParameters,
+            group: s_inlayHintOptionGroup
+        );
 
-        public static readonly PerLanguageOption2<bool> ForObjectCreationParameters =
-            new(
-                "dotnet_enable_inlay_hints_for_object_creation_parameters",
-                InlineParameterHintsOptions.Default.ForObjectCreationParameters,
-                group: s_inlayHintOptionGroup
-            );
+        public static readonly PerLanguageOption2<bool> ForObjectCreationParameters = new(
+            "dotnet_enable_inlay_hints_for_object_creation_parameters",
+            InlineParameterHintsOptions.Default.ForObjectCreationParameters,
+            group: s_inlayHintOptionGroup
+        );
 
-        public static readonly PerLanguageOption2<bool> ForOtherParameters =
-            new(
-                "dotnet_enable_inlay_hints_for_other_parameters",
-                InlineParameterHintsOptions.Default.ForOtherParameters,
-                group: s_inlayHintOptionGroup
-            );
+        public static readonly PerLanguageOption2<bool> ForOtherParameters = new(
+            "dotnet_enable_inlay_hints_for_other_parameters",
+            InlineParameterHintsOptions.Default.ForOtherParameters,
+            group: s_inlayHintOptionGroup
+        );
 
         public static readonly PerLanguageOption2<bool> SuppressForParametersThatDifferOnlyBySuffix =
             new(
@@ -133,32 +130,28 @@ namespace Microsoft.CodeAnalysis.InlineHints
 
         // Type Hints
 
-        public static readonly PerLanguageOption2<bool> EnabledForTypes =
-            new(
-                "csharp_enable_inlay_hints_for_types",
-                defaultValue: InlineTypeHintsOptions.Default.EnabledForTypes,
-                group: s_inlayHintOptionGroup
-            );
+        public static readonly PerLanguageOption2<bool> EnabledForTypes = new(
+            "csharp_enable_inlay_hints_for_types",
+            defaultValue: InlineTypeHintsOptions.Default.EnabledForTypes,
+            group: s_inlayHintOptionGroup
+        );
 
-        public static readonly PerLanguageOption2<bool> ForImplicitVariableTypes =
-            new(
-                "csharp_enable_inlay_hints_for_implicit_variable_types",
-                defaultValue: InlineTypeHintsOptions.Default.ForImplicitVariableTypes,
-                group: s_inlayHintOptionGroup
-            );
+        public static readonly PerLanguageOption2<bool> ForImplicitVariableTypes = new(
+            "csharp_enable_inlay_hints_for_implicit_variable_types",
+            defaultValue: InlineTypeHintsOptions.Default.ForImplicitVariableTypes,
+            group: s_inlayHintOptionGroup
+        );
 
-        public static readonly PerLanguageOption2<bool> ForLambdaParameterTypes =
-            new(
-                "csharp_enable_inlay_hints_for_lambda_parameter_types",
-                defaultValue: InlineTypeHintsOptions.Default.ForLambdaParameterTypes,
-                group: s_inlayHintOptionGroup
-            );
+        public static readonly PerLanguageOption2<bool> ForLambdaParameterTypes = new(
+            "csharp_enable_inlay_hints_for_lambda_parameter_types",
+            defaultValue: InlineTypeHintsOptions.Default.ForLambdaParameterTypes,
+            group: s_inlayHintOptionGroup
+        );
 
-        public static readonly PerLanguageOption2<bool> ForImplicitObjectCreation =
-            new(
-                "csharp_enable_inlay_hints_for_implicit_object_creation",
-                defaultValue: InlineTypeHintsOptions.Default.ForImplicitObjectCreation,
-                group: s_inlayHintOptionGroup
-            );
+        public static readonly PerLanguageOption2<bool> ForImplicitObjectCreation = new(
+            "csharp_enable_inlay_hints_for_implicit_object_creation",
+            defaultValue: InlineTypeHintsOptions.Default.ForImplicitObjectCreation,
+            group: s_inlayHintOptionGroup
+        );
     }
 }

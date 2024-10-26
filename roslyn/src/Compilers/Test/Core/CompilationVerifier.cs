@@ -246,10 +246,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             );
         }
 
-        private static readonly Regex s_headerCommentsRegex =
-            new("""^\s*// Header size: [0-9]+\s*$""", RegexOptions.Multiline);
-        private static readonly Regex s_codeSizeCommentsRegex =
-            new("""^\s*// Code size(:) [0-9]+\s*""", RegexOptions.Multiline);
+        private static readonly Regex s_headerCommentsRegex = new(
+            """^\s*// Header size: [0-9]+\s*$""",
+            RegexOptions.Multiline
+        );
+        private static readonly Regex s_codeSizeCommentsRegex = new(
+            """^\s*// Code size(:) [0-9]+\s*""",
+            RegexOptions.Multiline
+        );
 
         private static string RemoveHeaderComments(string value)
         {

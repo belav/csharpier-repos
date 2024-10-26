@@ -265,11 +265,10 @@ namespace Tracing.Tests
         {
             EventCount++;
 
-            KeyValuePair<int, (string SourceName, string Name)> e =
-                new(
-                    eventWrittenEventArgs.EventId,
-                    (eventWrittenEventArgs.EventSource.Name, eventWrittenEventArgs.EventName ?? "")
-                );
+            KeyValuePair<int, (string SourceName, string Name)> e = new(
+                eventWrittenEventArgs.EventId,
+                (eventWrittenEventArgs.EventSource.Name, eventWrittenEventArgs.EventName ?? "")
+            );
 
             EventsLeft -=
                 (

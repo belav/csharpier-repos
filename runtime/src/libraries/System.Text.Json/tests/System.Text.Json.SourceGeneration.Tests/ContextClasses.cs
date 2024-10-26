@@ -98,12 +98,11 @@ namespace System.Text.Json.SourceGeneration.Tests
             {
                 if (_JsonMessage == null)
                 {
-                    JsonObjectInfoValues<JsonMessage> objectInfo =
-                        new()
-                        {
-                            ObjectCreator = static () => new JsonMessage(),
-                            SerializeHandler = JsonMessageSerialize,
-                        };
+                    JsonObjectInfoValues<JsonMessage> objectInfo = new()
+                    {
+                        ObjectCreator = static () => new JsonMessage(),
+                        SerializeHandler = JsonMessageSerialize,
+                    };
 
                     _JsonMessage = JsonMetadataServices.CreateObjectInfo<JsonMessage>(
                         Options,

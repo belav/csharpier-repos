@@ -62,14 +62,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         private const string FunctionsRazor = "functions";
         private const string CodeRazor = "code";
 
-        private static readonly EditOptions s_venusEditOptions =
-            new(
-                new StringDifferenceOptions
-                {
-                    DifferenceType = StringDifferenceTypes.Character,
-                    IgnoreTrimWhiteSpace = false,
-                }
-            );
+        private static readonly EditOptions s_venusEditOptions = new(
+            new StringDifferenceOptions
+            {
+                DifferenceType = StringDifferenceTypes.Character,
+                IgnoreTrimWhiteSpace = false,
+            }
+        );
 
         private static readonly ConcurrentDictionary<
             DocumentId,

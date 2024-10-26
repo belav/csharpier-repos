@@ -8206,16 +8206,20 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
             Id = id;
         }
 
-        public static ValueConverter<IntStructKey, int> Converter =
-            new(v => v.Id, v => new IntStructKey { Id = v });
+        public static ValueConverter<IntStructKey, int> Converter = new(
+            v => v.Id,
+            v => new IntStructKey { Id = v }
+        );
 
         public int Id { get; set; }
     }
 
     protected struct BytesStructKey
     {
-        public static ValueConverter<BytesStructKey, byte[]> Converter =
-            new(v => v.Id, v => new BytesStructKey { Id = v });
+        public static ValueConverter<BytesStructKey, byte[]> Converter = new(
+            v => v.Id,
+            v => new BytesStructKey { Id = v }
+        );
 
         public BytesStructKey(byte[] id)
         {
@@ -8246,8 +8250,10 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected struct ComparableIntStructKey : IComparable
     {
-        public static ValueConverter<ComparableIntStructKey, int> Converter =
-            new(v => v.Id, v => new ComparableIntStructKey { Id = v });
+        public static ValueConverter<ComparableIntStructKey, int> Converter = new(
+            v => v.Id,
+            v => new ComparableIntStructKey { Id = v }
+        );
 
         public ComparableIntStructKey(int id)
         {
@@ -8261,8 +8267,10 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected struct ComparableBytesStructKey : IComparable
     {
-        public static ValueConverter<ComparableBytesStructKey, byte[]> Converter =
-            new(v => v.Id, v => new ComparableBytesStructKey { Id = v });
+        public static ValueConverter<ComparableBytesStructKey, byte[]> Converter = new(
+            v => v.Id,
+            v => new ComparableBytesStructKey { Id = v }
+        );
 
         public ComparableBytesStructKey(byte[] id)
         {
@@ -8307,8 +8315,10 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected struct GenericComparableIntStructKey : IComparable<GenericComparableIntStructKey>
     {
-        public static ValueConverter<GenericComparableIntStructKey, int> Converter =
-            new(v => v.Id, v => new GenericComparableIntStructKey { Id = v });
+        public static ValueConverter<GenericComparableIntStructKey, int> Converter = new(
+            v => v.Id,
+            v => new GenericComparableIntStructKey { Id = v }
+        );
 
         public GenericComparableIntStructKey(int id)
         {
@@ -8322,8 +8332,10 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected struct GenericComparableBytesStructKey : IComparable<GenericComparableBytesStructKey>
     {
-        public static ValueConverter<GenericComparableBytesStructKey, byte[]> Converter =
-            new(v => v.Id, v => new GenericComparableBytesStructKey { Id = v });
+        public static ValueConverter<GenericComparableBytesStructKey, byte[]> Converter = new(
+            v => v.Id,
+            v => new GenericComparableBytesStructKey { Id = v }
+        );
 
         public GenericComparableBytesStructKey(byte[] id)
         {
@@ -8365,8 +8377,10 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected struct StructuralComparableBytesStructKey : IStructuralComparable
     {
-        public static ValueConverter<StructuralComparableBytesStructKey, byte[]> Converter =
-            new(v => v.Id, v => new StructuralComparableBytesStructKey { Id = v });
+        public static ValueConverter<StructuralComparableBytesStructKey, byte[]> Converter = new(
+            v => v.Id,
+            v => new StructuralComparableBytesStructKey { Id = v }
+        );
 
         public StructuralComparableBytesStructKey(byte[] id)
         {
@@ -8414,8 +8428,10 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected class IntClassKey
     {
-        public static ValueConverter<IntClassKey, int> Converter =
-            new(v => v.Id, v => new IntClassKey(v));
+        public static ValueConverter<IntClassKey, int> Converter = new(
+            v => v.Id,
+            v => new IntClassKey(v)
+        );
 
         public IntClassKey(int id)
         {
@@ -8434,15 +8450,16 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected class BareIntClassKey
     {
-        public static ValueConverter<BareIntClassKey, int> Converter =
-            new(v => v.Id, v => new BareIntClassKey(v));
+        public static ValueConverter<BareIntClassKey, int> Converter = new(
+            v => v.Id,
+            v => new BareIntClassKey(v)
+        );
 
-        public static ValueComparer<BareIntClassKey> Comparer =
-            new(
-                (l, r) => (l == null && r == null) || (l != null && r != null && l.Id == r.Id),
-                v => v == null ? 0 : v.Id.GetHashCode(),
-                v => v == null ? null : new BareIntClassKey(v.Id)
-            );
+        public static ValueComparer<BareIntClassKey> Comparer = new(
+            (l, r) => (l == null && r == null) || (l != null && r != null && l.Id == r.Id),
+            v => v == null ? 0 : v.Id.GetHashCode(),
+            v => v == null ? null : new BareIntClassKey(v.Id)
+        );
 
         public BareIntClassKey(int id)
         {
@@ -8454,8 +8471,10 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected class ComparableIntClassKey : IComparable
     {
-        public static ValueConverter<ComparableIntClassKey, int> Converter =
-            new(v => v.Id, v => new ComparableIntClassKey(v));
+        public static ValueConverter<ComparableIntClassKey, int> Converter = new(
+            v => v.Id,
+            v => new ComparableIntClassKey(v)
+        );
 
         public ComparableIntClassKey(int id)
         {
@@ -8476,8 +8495,10 @@ public abstract class KeysWithConvertersTestBase<TFixture> : IClassFixture<TFixt
 
     protected class GenericComparableIntClassKey : IComparable<GenericComparableIntClassKey>
     {
-        public static ValueConverter<GenericComparableIntClassKey, int> Converter =
-            new(v => v.Id, v => new GenericComparableIntClassKey(v));
+        public static ValueConverter<GenericComparableIntClassKey, int> Converter = new(
+            v => v.Id,
+            v => new GenericComparableIntClassKey(v)
+        );
 
         public GenericComparableIntClassKey(int id)
         {

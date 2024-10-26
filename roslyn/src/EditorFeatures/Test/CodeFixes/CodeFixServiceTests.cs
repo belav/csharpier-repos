@@ -874,15 +874,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
 
             public class MockGenerator : ISourceGenerator
             {
-                private readonly DiagnosticDescriptor s_descriptor =
-                    new(
-                        MockFixer.Id,
-                        "Title",
-                        "Message",
-                        "Category",
-                        DiagnosticSeverity.Warning,
-                        isEnabledByDefault: true
-                    );
+                private readonly DiagnosticDescriptor s_descriptor = new(
+                    MockFixer.Id,
+                    "Title",
+                    "Message",
+                    "Category",
+                    DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
                 public void Initialize(GeneratorInitializationContext context) { }
 
@@ -1355,15 +1354,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
         internal sealed class AdditionalFileAnalyzer : DiagnosticAnalyzer
         {
             public const string DiagnosticId = "AFA0001";
-            private readonly DiagnosticDescriptor _descriptor =
-                new(
-                    DiagnosticId,
-                    "AdditionalFileAnalyzer",
-                    "AdditionalFileAnalyzer",
-                    "AdditionalFileAnalyzer",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true
-                );
+            private readonly DiagnosticDescriptor _descriptor = new(
+                DiagnosticId,
+                "AdditionalFileAnalyzer",
+                "AdditionalFileAnalyzer",
+                "AdditionalFileAnalyzer",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                 ImmutableArray.Create(_descriptor);
@@ -1746,15 +1744,14 @@ class C
                 Operation,
             }
 
-            public static readonly DiagnosticDescriptor Descriptor =
-                new(
-                    "ID0001",
-                    "Title",
-                    "Message",
-                    "Category",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true
-                );
+            public static readonly DiagnosticDescriptor Descriptor = new(
+                "ID0001",
+                "Title",
+                "Message",
+                "Category",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
             private readonly ActionKind _actionKind;
 
             public DeprioritizedAnalyzer(ActionKind actionKind)

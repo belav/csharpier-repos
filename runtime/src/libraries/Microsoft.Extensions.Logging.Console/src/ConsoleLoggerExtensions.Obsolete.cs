@@ -210,11 +210,10 @@ namespace Microsoft.Extensions.Logging
             )
             {
                 ConsoleLoggerSettingsAdapter adapter = new(settings);
-                OptionsFactory<ConsoleLoggerOptions> factory =
-                    new(
-                        new IConfigureOptions<ConsoleLoggerOptions>[] { adapter },
-                        Array.Empty<IPostConfigureOptions<ConsoleLoggerOptions>>()
-                    );
+                OptionsFactory<ConsoleLoggerOptions> factory = new(
+                    new IConfigureOptions<ConsoleLoggerOptions>[] { adapter },
+                    Array.Empty<IPostConfigureOptions<ConsoleLoggerOptions>>()
+                );
                 IOptionsChangeTokenSource<ConsoleLoggerOptions>[] sources =
                     new IOptionsChangeTokenSource<ConsoleLoggerOptions>[] { adapter };
                 OptionsCache<ConsoleLoggerOptions> cache = new();

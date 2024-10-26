@@ -13,18 +13,17 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 /// </summary>
 public class SqlServerDateTimeMemberTranslator : IMemberTranslator
 {
-    private static readonly Dictionary<string, string> DatePartMapping =
-        new()
-        {
-            { nameof(DateTime.Year), "year" },
-            { nameof(DateTime.Month), "month" },
-            { nameof(DateTime.DayOfYear), "dayofyear" },
-            { nameof(DateTime.Day), "day" },
-            { nameof(DateTime.Hour), "hour" },
-            { nameof(DateTime.Minute), "minute" },
-            { nameof(DateTime.Second), "second" },
-            { nameof(DateTime.Millisecond), "millisecond" },
-        };
+    private static readonly Dictionary<string, string> DatePartMapping = new()
+    {
+        { nameof(DateTime.Year), "year" },
+        { nameof(DateTime.Month), "month" },
+        { nameof(DateTime.DayOfYear), "dayofyear" },
+        { nameof(DateTime.Day), "day" },
+        { nameof(DateTime.Hour), "hour" },
+        { nameof(DateTime.Minute), "minute" },
+        { nameof(DateTime.Second), "second" },
+        { nameof(DateTime.Millisecond), "millisecond" },
+    };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
     private readonly IRelationalTypeMappingSource _typeMappingSource;

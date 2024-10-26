@@ -1419,8 +1419,9 @@ public partial class NavigationExpandingExpressionVisitor
 
     private sealed class CloningExpressionVisitor : ExpressionVisitor
     {
-        private readonly Dictionary<NavigationTreeNode, NavigationTreeNode> _clonedMap =
-            new(ReferenceEqualityComparer.Instance);
+        private readonly Dictionary<NavigationTreeNode, NavigationTreeNode> _clonedMap = new(
+            ReferenceEqualityComparer.Instance
+        );
 
         public NavigationTreeNode Clone(NavigationTreeNode navigationTreeNode)
         {

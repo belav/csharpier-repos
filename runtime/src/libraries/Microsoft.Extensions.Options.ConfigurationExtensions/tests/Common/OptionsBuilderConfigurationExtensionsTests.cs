@@ -121,14 +121,13 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
         {
             const string messageValue1 = "This is a test";
 
-            FakeConfigurationSource configSource =
-                new()
+            FakeConfigurationSource configSource = new()
+            {
+                InitialData = new Dictionary<string, string?>
                 {
-                    InitialData = new Dictionary<string, string?>
-                    {
-                        [nameof(FakeOptions.Message)] = messageValue1,
-                    },
-                };
+                    [nameof(FakeOptions.Message)] = messageValue1,
+                },
+            };
 
             var services = new ServiceCollection();
             services.AddSingleton<IConfiguration>(
@@ -184,15 +183,14 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
 
             const string customOptionsName = "custom";
 
-            FakeConfigurationSource configSource =
-                new()
+            FakeConfigurationSource configSource = new()
+            {
+                InitialData = new Dictionary<string, string?>
                 {
-                    InitialData = new Dictionary<string, string?>
-                    {
-                        [messageConfigKeyDefaultName] = messageValueDefaultName1,
-                        [messageConfigKeyCustomName] = messageValueCustomName1,
-                    },
-                };
+                    [messageConfigKeyDefaultName] = messageValueDefaultName1,
+                    [messageConfigKeyCustomName] = messageValueCustomName1,
+                },
+            };
 
             var services = new ServiceCollection();
             services.AddSingleton<IConfiguration>(

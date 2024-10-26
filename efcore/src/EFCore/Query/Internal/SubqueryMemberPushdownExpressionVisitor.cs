@@ -11,24 +11,23 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 /// </summary>
 public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
 {
-    private static readonly List<MethodInfo> SupportedMethods =
-        new()
-        {
-            QueryableMethods.FirstWithPredicate,
-            QueryableMethods.FirstWithoutPredicate,
-            QueryableMethods.FirstOrDefaultWithPredicate,
-            QueryableMethods.FirstOrDefaultWithoutPredicate,
-            QueryableMethods.SingleWithPredicate,
-            QueryableMethods.SingleWithoutPredicate,
-            QueryableMethods.SingleOrDefaultWithPredicate,
-            QueryableMethods.SingleOrDefaultWithoutPredicate,
-            QueryableMethods.LastWithPredicate,
-            QueryableMethods.LastWithoutPredicate,
-            QueryableMethods.LastOrDefaultWithPredicate,
-            QueryableMethods.LastOrDefaultWithoutPredicate,
-            QueryableMethods.ElementAt,
-            QueryableMethods.ElementAtOrDefault,
-        };
+    private static readonly List<MethodInfo> SupportedMethods = new()
+    {
+        QueryableMethods.FirstWithPredicate,
+        QueryableMethods.FirstWithoutPredicate,
+        QueryableMethods.FirstOrDefaultWithPredicate,
+        QueryableMethods.FirstOrDefaultWithoutPredicate,
+        QueryableMethods.SingleWithPredicate,
+        QueryableMethods.SingleWithoutPredicate,
+        QueryableMethods.SingleOrDefaultWithPredicate,
+        QueryableMethods.SingleOrDefaultWithoutPredicate,
+        QueryableMethods.LastWithPredicate,
+        QueryableMethods.LastWithoutPredicate,
+        QueryableMethods.LastOrDefaultWithPredicate,
+        QueryableMethods.LastOrDefaultWithoutPredicate,
+        QueryableMethods.ElementAt,
+        QueryableMethods.ElementAtOrDefault,
+    };
 
     private static readonly IDictionary<MethodInfo, MethodInfo> PredicateLessMethodInfo =
         new Dictionary<MethodInfo, MethodInfo>

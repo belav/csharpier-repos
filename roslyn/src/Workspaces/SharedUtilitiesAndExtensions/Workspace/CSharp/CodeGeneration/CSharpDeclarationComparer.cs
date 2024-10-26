@@ -12,59 +12,62 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
 {
     internal class CSharpDeclarationComparer : IComparer<SyntaxNode>
     {
-        private static readonly Dictionary<SyntaxKind, int> s_kindPrecedenceMap =
-            new(SyntaxFacts.EqualityComparer)
-            {
-                { SyntaxKind.FieldDeclaration, 0 },
-                { SyntaxKind.ConstructorDeclaration, 1 },
-                { SyntaxKind.DestructorDeclaration, 2 },
-                { SyntaxKind.IndexerDeclaration, 3 },
-                { SyntaxKind.PropertyDeclaration, 4 },
-                { SyntaxKind.EventFieldDeclaration, 5 },
-                { SyntaxKind.EventDeclaration, 6 },
-                { SyntaxKind.MethodDeclaration, 7 },
-                { SyntaxKind.OperatorDeclaration, 8 },
-                { SyntaxKind.ConversionOperatorDeclaration, 9 },
-                { SyntaxKind.EnumDeclaration, 10 },
-                { SyntaxKind.InterfaceDeclaration, 11 },
-                { SyntaxKind.StructDeclaration, 12 },
-                { SyntaxKind.ClassDeclaration, 13 },
-                { SyntaxKind.RecordDeclaration, 14 },
-                { SyntaxKind.RecordStructDeclaration, 15 },
-                { SyntaxKind.DelegateDeclaration, 16 },
-            };
+        private static readonly Dictionary<SyntaxKind, int> s_kindPrecedenceMap = new(
+            SyntaxFacts.EqualityComparer
+        )
+        {
+            { SyntaxKind.FieldDeclaration, 0 },
+            { SyntaxKind.ConstructorDeclaration, 1 },
+            { SyntaxKind.DestructorDeclaration, 2 },
+            { SyntaxKind.IndexerDeclaration, 3 },
+            { SyntaxKind.PropertyDeclaration, 4 },
+            { SyntaxKind.EventFieldDeclaration, 5 },
+            { SyntaxKind.EventDeclaration, 6 },
+            { SyntaxKind.MethodDeclaration, 7 },
+            { SyntaxKind.OperatorDeclaration, 8 },
+            { SyntaxKind.ConversionOperatorDeclaration, 9 },
+            { SyntaxKind.EnumDeclaration, 10 },
+            { SyntaxKind.InterfaceDeclaration, 11 },
+            { SyntaxKind.StructDeclaration, 12 },
+            { SyntaxKind.ClassDeclaration, 13 },
+            { SyntaxKind.RecordDeclaration, 14 },
+            { SyntaxKind.RecordStructDeclaration, 15 },
+            { SyntaxKind.DelegateDeclaration, 16 },
+        };
 
-        private static readonly Dictionary<SyntaxKind, int> s_operatorPrecedenceMap =
-            new(SyntaxFacts.EqualityComparer)
-            {
-                { SyntaxKind.PlusToken, 0 },
-                { SyntaxKind.MinusToken, 1 },
-                { SyntaxKind.ExclamationToken, 2 },
-                { SyntaxKind.TildeToken, 3 },
-                { SyntaxKind.PlusPlusToken, 4 },
-                { SyntaxKind.MinusMinusToken, 5 },
-                { SyntaxKind.AsteriskToken, 6 },
-                { SyntaxKind.SlashToken, 7 },
-                { SyntaxKind.PercentToken, 8 },
-                { SyntaxKind.AmpersandToken, 9 },
-                { SyntaxKind.BarToken, 10 },
-                { SyntaxKind.CaretToken, 11 },
-                { SyntaxKind.LessThanLessThanToken, 12 },
-                { SyntaxKind.GreaterThanGreaterThanToken, 13 },
-                { SyntaxKind.EqualsEqualsToken, 14 },
-                { SyntaxKind.ExclamationEqualsToken, 15 },
-                { SyntaxKind.LessThanToken, 16 },
-                { SyntaxKind.GreaterThanToken, 17 },
-                { SyntaxKind.LessThanEqualsToken, 18 },
-                { SyntaxKind.GreaterThanEqualsToken, 19 },
-                { SyntaxKind.TrueKeyword, 20 },
-                { SyntaxKind.FalseKeyword, 21 },
-                { SyntaxKind.GreaterThanGreaterThanGreaterThanToken, 22 },
-            };
+        private static readonly Dictionary<SyntaxKind, int> s_operatorPrecedenceMap = new(
+            SyntaxFacts.EqualityComparer
+        )
+        {
+            { SyntaxKind.PlusToken, 0 },
+            { SyntaxKind.MinusToken, 1 },
+            { SyntaxKind.ExclamationToken, 2 },
+            { SyntaxKind.TildeToken, 3 },
+            { SyntaxKind.PlusPlusToken, 4 },
+            { SyntaxKind.MinusMinusToken, 5 },
+            { SyntaxKind.AsteriskToken, 6 },
+            { SyntaxKind.SlashToken, 7 },
+            { SyntaxKind.PercentToken, 8 },
+            { SyntaxKind.AmpersandToken, 9 },
+            { SyntaxKind.BarToken, 10 },
+            { SyntaxKind.CaretToken, 11 },
+            { SyntaxKind.LessThanLessThanToken, 12 },
+            { SyntaxKind.GreaterThanGreaterThanToken, 13 },
+            { SyntaxKind.EqualsEqualsToken, 14 },
+            { SyntaxKind.ExclamationEqualsToken, 15 },
+            { SyntaxKind.LessThanToken, 16 },
+            { SyntaxKind.GreaterThanToken, 17 },
+            { SyntaxKind.LessThanEqualsToken, 18 },
+            { SyntaxKind.GreaterThanEqualsToken, 19 },
+            { SyntaxKind.TrueKeyword, 20 },
+            { SyntaxKind.FalseKeyword, 21 },
+            { SyntaxKind.GreaterThanGreaterThanGreaterThanToken, 22 },
+        };
 
         public static readonly CSharpDeclarationComparer WithNamesInstance = new(includeName: true);
-        public static readonly CSharpDeclarationComparer WithoutNamesInstance =
-            new(includeName: false);
+        public static readonly CSharpDeclarationComparer WithoutNamesInstance = new(
+            includeName: false
+        );
 
         private readonly bool _includeName;
 

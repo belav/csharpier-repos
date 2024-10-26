@@ -1427,15 +1427,14 @@ class Class
             private sealed class NonLocalDiagnosticsAnalyzer : DiagnosticAnalyzer
             {
                 public const string DiagnosticId = "NonLocalDiagnosticId";
-                public static readonly DiagnosticDescriptor Descriptor =
-                    new(
-                        DiagnosticId,
-                        "NonLocalDiagnosticTitle",
-                        "NonLocalDiagnosticMessage",
-                        "NonLocalDiagnosticCategory",
-                        DiagnosticSeverity.Warning,
-                        isEnabledByDefault: true
-                    );
+                public static readonly DiagnosticDescriptor Descriptor = new(
+                    DiagnosticId,
+                    "NonLocalDiagnosticTitle",
+                    "NonLocalDiagnosticMessage",
+                    "NonLocalDiagnosticCategory",
+                    DiagnosticSeverity.Warning,
+                    isEnabledByDefault: true
+                );
 
                 public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
                     ImmutableArray.Create(Descriptor);

@@ -19,11 +19,10 @@ namespace Microsoft.CodeAnalysis.Remote
     /// </summary>
     internal readonly struct RemoteSerializationOptions
     {
-        internal static readonly RemoteSerializationOptions Default =
-            new(
-                ImmutableArray<IMessagePackFormatter>.Empty,
-                ImmutableArray<IFormatterResolver>.Empty
-            );
+        internal static readonly RemoteSerializationOptions Default = new(
+            ImmutableArray<IMessagePackFormatter>.Empty,
+            ImmutableArray<IFormatterResolver>.Empty
+        );
 
         // Enables remote APIs to pass Stream as parameter.
         private static readonly MultiplexingStream.Options s_multiplexingStreamOptions =

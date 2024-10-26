@@ -40,23 +40,31 @@ internal static class SharedPools
     /// <summary>
     /// pool that uses string as element with StringComparer.OrdinalIgnoreCase as element comparer
     /// </summary>
-    public static readonly ObjectPool<HashSet<string>> StringIgnoreCaseHashSet =
-        new(() => new HashSet<string>(StringComparer.OrdinalIgnoreCase), 20);
+    public static readonly ObjectPool<HashSet<string>> StringIgnoreCaseHashSet = new(
+        () => new HashSet<string>(StringComparer.OrdinalIgnoreCase),
+        20
+    );
 
     /// <summary>
     /// pool that uses string as element with StringComparer.Ordinal as element comparer
     /// </summary>
-    public static readonly ObjectPool<HashSet<string>> StringHashSet =
-        new(() => new HashSet<string>(StringComparer.Ordinal), 20);
+    public static readonly ObjectPool<HashSet<string>> StringHashSet = new(
+        () => new HashSet<string>(StringComparer.Ordinal),
+        20
+    );
 
     /// <summary>
     /// Used to reduce the # of temporary byte[]s created to satisfy serialization and
     /// other I/O requests
     /// </summary>
-    public static readonly ObjectPool<byte[]> ByteArray =
-        new(() => new byte[ByteBufferSize], ByteBufferCount);
-    public static readonly ObjectPool<char[]> CharArray =
-        new(() => new char[CharBufferSize], CharBufferCount);
+    public static readonly ObjectPool<byte[]> ByteArray = new(
+        () => new byte[ByteBufferSize],
+        ByteBufferCount
+    );
+    public static readonly ObjectPool<char[]> CharArray = new(
+        () => new char[CharBufferSize],
+        CharBufferCount
+    );
 
     // byte pooled memory : 4K * 512 = 2MB
     public const int ByteBufferSize = 4 * 1024;
@@ -80,7 +88,9 @@ internal static class SharedPools
 
     private static class StringIgnoreCaseDictionaryNormalPool<T>
     {
-        public static readonly ObjectPool<Dictionary<string, T>> Instance =
-            new(() => new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase), 20);
+        public static readonly ObjectPool<Dictionary<string, T>> Instance = new(
+            () => new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase),
+            20
+        );
     }
 }

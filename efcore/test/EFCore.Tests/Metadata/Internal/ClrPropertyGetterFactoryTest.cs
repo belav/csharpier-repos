@@ -242,8 +242,11 @@ public class ClrPropertyGetterFactoryTest
 
     private class IndexedClass
     {
-        private readonly Dictionary<string, object> _internalValues =
-            new() { { "PropertyA", "ValueA" }, { "PropertyB", 123 } };
+        private readonly Dictionary<string, object> _internalValues = new()
+        {
+            { "PropertyA", "ValueA" },
+            { "PropertyB", 123 },
+        };
 
         internal int Id { get; set; }
 

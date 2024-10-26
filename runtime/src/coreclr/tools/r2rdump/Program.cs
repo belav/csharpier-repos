@@ -458,31 +458,30 @@ namespace R2RDump
             bool signatureBinary = Get(_command.SignatureBinary);
             bool raw = Get(_command.Raw);
             bool disasm = Get(_command.Disasm);
-            DumpModel model =
-                new()
+            DumpModel model = new()
+            {
+                DiffHideSameDisasm = Get(_command.DiffHideSameDisasm),
+                Disasm = Get(_command.Disasm),
+                GC = Get(_command.GC),
+                HideOffsets = Get(_command.HideOffsets),
+                HideTransitions = Get(_command.HideTransitions),
+                InlineSignatureBinary = inlineSignatureBinary,
+                Pgo = Get(_command.Pgo),
+                Raw = raw,
+                Naked = naked,
+                Normalize = Get(_command.Normalize),
+                Reference = Get(_command.Reference),
+                ReferencePath = Get(_command.ReferencePath),
+                SignatureBinary = signatureBinary,
+                SectionContents = Get(_command.SectionContents),
+                SignatureFormattingOptions = new()
                 {
-                    DiffHideSameDisasm = Get(_command.DiffHideSameDisasm),
-                    Disasm = Get(_command.Disasm),
-                    GC = Get(_command.GC),
-                    HideOffsets = Get(_command.HideOffsets),
-                    HideTransitions = Get(_command.HideTransitions),
                     InlineSignatureBinary = inlineSignatureBinary,
-                    Pgo = Get(_command.Pgo),
-                    Raw = raw,
                     Naked = naked,
-                    Normalize = Get(_command.Normalize),
-                    Reference = Get(_command.Reference),
-                    ReferencePath = Get(_command.ReferencePath),
                     SignatureBinary = signatureBinary,
-                    SectionContents = Get(_command.SectionContents),
-                    SignatureFormattingOptions = new()
-                    {
-                        InlineSignatureBinary = inlineSignatureBinary,
-                        Naked = naked,
-                        SignatureBinary = signatureBinary,
-                    },
-                    Unwind = Get(_command.Unwind),
-                };
+                },
+                Unwind = Get(_command.Unwind),
+            };
 
             try
             {

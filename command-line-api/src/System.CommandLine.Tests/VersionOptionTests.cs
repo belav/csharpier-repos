@@ -23,8 +23,10 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task When_the_version_option_is_specified_then_the_version_is_written_to_standard_out()
         {
-            CliConfiguration configuration =
-                new(new CliRootCommand()) { Output = new StringWriter() };
+            CliConfiguration configuration = new(new CliRootCommand())
+            {
+                Output = new StringWriter(),
+            };
 
             await configuration.InvokeAsync("--version");
 
@@ -48,8 +50,10 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task Version_option_appears_in_help()
         {
-            CliConfiguration configuration =
-                new(new CliRootCommand()) { Output = new StringWriter() };
+            CliConfiguration configuration = new(new CliRootCommand())
+            {
+                Output = new StringWriter(),
+            };
 
             await configuration.InvokeAsync("--help");
 
@@ -78,8 +82,10 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task When_the_version_option_is_specified_and_there_are_default_arguments_then_the_version_is_written_to_standard_out()
         {
-            CliRootCommand rootCommand =
-                new() { new CliArgument<bool>("x") { DefaultValueFactory = (_) => true } };
+            CliRootCommand rootCommand = new()
+            {
+                new CliArgument<bool>("x") { DefaultValueFactory = (_) => true },
+            };
             rootCommand.SetAction((_) => { });
 
             CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };

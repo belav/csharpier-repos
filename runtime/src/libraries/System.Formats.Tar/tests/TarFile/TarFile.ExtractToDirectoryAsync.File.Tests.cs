@@ -316,14 +316,13 @@ namespace System.Formats.Tar.Tests
                 string archivePath = Path.Join(source.Path, "archive.tar");
                 using (TempDirectory destination = new TempDirectory())
                 {
-                    FileStreamOptions fileOptions =
-                        new()
-                        {
-                            Access = FileAccess.Write,
-                            Mode = FileMode.CreateNew,
-                            Share = FileShare.None,
-                            Options = FileOptions.Asynchronous,
-                        };
+                    FileStreamOptions fileOptions = new()
+                    {
+                        Access = FileAccess.Write,
+                        Mode = FileMode.CreateNew,
+                        Share = FileShare.None,
+                        Options = FileOptions.Asynchronous,
+                    };
 
                     await using (
                         FileStream archiveStream = new FileStream(archivePath, fileOptions)

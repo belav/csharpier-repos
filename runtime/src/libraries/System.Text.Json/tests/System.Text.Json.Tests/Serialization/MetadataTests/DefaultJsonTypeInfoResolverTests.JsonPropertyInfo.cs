@@ -105,8 +105,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void JsonPropertyInfoForDefaultResolverHasNamingPoliciesRulesApplied()
         {
-            JsonSerializerOptions options =
-                new() { TypeInfoResolver = new DefaultJsonTypeInfoResolver() };
+            JsonSerializerOptions options = new()
+            {
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver(),
+            };
             options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
             JsonTypeInfo typeInfo = options.TypeInfoResolver.GetTypeInfo(typeof(MyClass), options);
             Assert.Equal(2, typeInfo.Properties.Count);
@@ -122,8 +124,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void JsonPropertyInfoCustomConverterIsNullWhenUsingCreateJsonPropertyInfo()
         {
-            JsonSerializerOptions options =
-                new() { TypeInfoResolver = JsonSerializerOptions.Default.TypeInfoResolver };
+            JsonSerializerOptions options = new()
+            {
+                TypeInfoResolver = JsonSerializerOptions.Default.TypeInfoResolver,
+            };
             JsonTypeInfo typeInfo = options.TypeInfoResolver.GetTypeInfo(
                 typeof(TestClassWithCustomConverterOnProperty),
                 options
@@ -170,8 +174,10 @@ namespace System.Text.Json.Serialization.Tests
 
             options.TypeInfoResolver = r;
 
-            TestClassWithCustomConverterOnProperty obj =
-                new() { MyClassProperty = new MyClass() { Value = "SomeValue" } };
+            TestClassWithCustomConverterOnProperty obj = new()
+            {
+                MyClassProperty = new MyClass() { Value = "SomeValue" },
+            };
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"MyClassProperty":{"Value":"SomeValue","Thing":null}}""", json);
@@ -199,8 +205,10 @@ namespace System.Text.Json.Serialization.Tests
 
             options.TypeInfoResolver = r;
 
-            TestClassWithCustomConverterOnProperty obj =
-                new() { MyClassProperty = new MyClass() { Value = "SomeValue" } };
+            TestClassWithCustomConverterOnProperty obj = new()
+            {
+                MyClassProperty = new MyClass() { Value = "SomeValue" },
+            };
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"MyClassProperty":"test_SomeValue"}""", json);
@@ -231,8 +239,10 @@ namespace System.Text.Json.Serialization.Tests
 
             options.TypeInfoResolver = r;
 
-            TestClassWithCustomConverterFactoryOnProperty obj =
-                new() { MyClassProperty = new MyClass() { Value = "SomeValue" } };
+            TestClassWithCustomConverterFactoryOnProperty obj = new()
+            {
+                MyClassProperty = new MyClass() { Value = "SomeValue" },
+            };
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"MyClassProperty":"test_SomeValue"}""", json);
@@ -266,8 +276,10 @@ namespace System.Text.Json.Serialization.Tests
 
             options.TypeInfoResolver = r;
 
-            TestClassWithProperty obj =
-                new() { MyClassProperty = new MyClass() { Value = "SomeValue" } };
+            TestClassWithProperty obj = new()
+            {
+                MyClassProperty = new MyClass() { Value = "SomeValue" },
+            };
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"MyClassProperty":"test_SomeValue"}""", json);
@@ -344,8 +356,10 @@ namespace System.Text.Json.Serialization.Tests
 
             options.TypeInfoResolver = r;
 
-            TestClassWithCustomConverterOnProperty obj =
-                new() { MyClassProperty = new MyClass() { Value = "SomeValue" } };
+            TestClassWithCustomConverterOnProperty obj = new()
+            {
+                MyClassProperty = new MyClass() { Value = "SomeValue" },
+            };
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("{}", json);
@@ -361,8 +375,10 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(false)]
         public static void JsonPropertyInfoGetIsRespected(bool useCustomConverter)
         {
-            TestClassWithCustomConverterOnProperty obj =
-                new() { MyClassProperty = new MyClass() { Value = "SomeValue" } };
+            TestClassWithCustomConverterOnProperty obj = new()
+            {
+                MyClassProperty = new MyClass() { Value = "SomeValue" },
+            };
 
             MyClass substitutedValue = new MyClass() { Value = "SomeOtherValue" };
 
@@ -488,8 +504,10 @@ namespace System.Text.Json.Serialization.Tests
 
             options.TypeInfoResolver = r;
 
-            TestClassWithCustomConverterOnProperty obj =
-                new() { MyClassProperty = new MyClass() { Value = "SomeValue" } };
+            TestClassWithCustomConverterOnProperty obj = new()
+            {
+                MyClassProperty = new MyClass() { Value = "SomeValue" },
+            };
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"MyClassProperty":"SomeValue"}""", json);
@@ -504,8 +522,10 @@ namespace System.Text.Json.Serialization.Tests
         [InlineData(false)]
         public static void JsonPropertyInfoSetIsRespected(bool useCustomConverter)
         {
-            TestClassWithCustomConverterOnProperty obj =
-                new() { MyClassProperty = new MyClass() { Value = "SomeValue" } };
+            TestClassWithCustomConverterOnProperty obj = new()
+            {
+                MyClassProperty = new MyClass() { Value = "SomeValue" },
+            };
 
             MyClass substitutedValue = new MyClass() { Value = "SomeOtherValue" };
             bool setterCalled = false;
@@ -991,15 +1011,14 @@ namespace System.Text.Json.Serialization.Tests
             ModifyJsonIgnore modify
         )
         {
-            TestClassWithEveryPossibleJsonIgnore obj =
-                new()
-                {
-                    AlwaysProperty = "Always",
-                    WhenWritingDefaultProperty = 37,
-                    WhenWritingNullProperty = "WhenWritingNull",
-                    NeverProperty = "Never",
-                    Property = "None",
-                };
+            TestClassWithEveryPossibleJsonIgnore obj = new()
+            {
+                AlwaysProperty = "Always",
+                WhenWritingDefaultProperty = 37,
+                WhenWritingNullProperty = "WhenWritingNull",
+                NeverProperty = "Never",
+                Property = "None",
+            };
 
             // sanity check
             bool modifierTestRun = false;
@@ -1975,30 +1994,29 @@ namespace System.Text.Json.Serialization.Tests
         public static void JsonCreationHandlingAttributeIsShownInMetadata()
         {
             bool typeResolved = false;
-            DefaultJsonTypeInfoResolver resolver =
-                new()
+            DefaultJsonTypeInfoResolver resolver = new()
+            {
+                Modifiers =
                 {
-                    Modifiers =
+                    (ti) =>
                     {
-                        (ti) =>
+                        if (ti.Type == typeof(TestClassWithJsonCreationHandlingOnProperty))
                         {
-                            if (ti.Type == typeof(TestClassWithJsonCreationHandlingOnProperty))
-                            {
-                                Assert.Equal(3, ti.Properties.Count);
-                                Assert.Null(ti.Properties[0].ObjectCreationHandling);
-                                Assert.Equal(
-                                    JsonObjectCreationHandling.Replace,
-                                    ti.Properties[1].ObjectCreationHandling
-                                );
-                                Assert.Equal(
-                                    JsonObjectCreationHandling.Populate,
-                                    ti.Properties[2].ObjectCreationHandling
-                                );
-                                typeResolved = true;
-                            }
-                        },
+                            Assert.Equal(3, ti.Properties.Count);
+                            Assert.Null(ti.Properties[0].ObjectCreationHandling);
+                            Assert.Equal(
+                                JsonObjectCreationHandling.Replace,
+                                ti.Properties[1].ObjectCreationHandling
+                            );
+                            Assert.Equal(
+                                JsonObjectCreationHandling.Populate,
+                                ti.Properties[2].ObjectCreationHandling
+                            );
+                            typeResolved = true;
+                        }
                     },
-                };
+                },
+            };
 
             JsonSerializerOptions o = new() { TypeInfoResolver = resolver };
 

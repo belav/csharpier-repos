@@ -15,12 +15,11 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
     private NativeOverlapped* _overlapped;
 
     // mutable struct; do not make this readonly
-    private ManualResetValueTaskSourceCore<RequestContext> _mrvts =
-        new()
-        {
-            // We want to run continuations on the IO threads
-            RunContinuationsAsynchronously = false,
-        };
+    private ManualResetValueTaskSourceCore<RequestContext> _mrvts = new()
+    {
+        // We want to run continuations on the IO threads
+        RunContinuationsAsynchronously = false,
+    };
 
     private RequestContext? _requestContext;
 

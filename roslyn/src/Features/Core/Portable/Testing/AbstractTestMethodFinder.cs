@@ -23,11 +23,10 @@ internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(
     /// Output the method symbol as a fully qualified method name, e.g. Namespace.Class.Method to match what test discovery gives us.
     /// Generics are not applicable here - none of our supported test frameworks allow generic test classes / methods.
     /// </summary>
-    private static readonly SymbolDisplayFormat s_methodSymbolNoParametersDisplayFormat =
-        new(
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
-        );
+    private static readonly SymbolDisplayFormat s_methodSymbolNoParametersDisplayFormat = new(
+        typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+        memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+    );
 
     protected readonly ImmutableArray<ITestFrameworkMetadata> TestFrameworkMetadata =
         testFrameworks.ToImmutableArray();

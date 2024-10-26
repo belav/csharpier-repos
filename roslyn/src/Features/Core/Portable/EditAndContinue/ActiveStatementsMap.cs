@@ -18,11 +18,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     internal sealed class ActiveStatementsMap
     {
-        public static readonly ActiveStatementsMap Empty =
-            new(
-                ImmutableDictionary<string, ImmutableArray<ActiveStatement>>.Empty,
-                ImmutableDictionary<ManagedInstructionId, ActiveStatement>.Empty
-            );
+        public static readonly ActiveStatementsMap Empty = new(
+            ImmutableDictionary<string, ImmutableArray<ActiveStatement>>.Empty,
+            ImmutableDictionary<ManagedInstructionId, ActiveStatement>.Empty
+        );
 
         public static readonly Comparer<ActiveStatement> Comparer =
             Comparer<ActiveStatement>.Create(

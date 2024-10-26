@@ -65,45 +65,43 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         /// A schema for mapping classification type names to VS LSP token names.  This maps a few classification type names
         /// directly to LSP semantic token types, but otherwise generally returns the classification type name as a custom token type.
         /// </summary>
-        private static readonly SemanticTokensSchema s_vsTokenSchema =
-            new(
-                ClassificationTypeNames
-                    .AllTypeNames.Where(classificationTypeName =>
-                        !ClassificationTypeNames.AdditiveTypeNames.Contains(classificationTypeName)
-                    )
-                    .ToImmutableDictionary(
-                        classificationTypeName => classificationTypeName,
-                        classificationTypeName =>
-                            IDictionaryExtensions.GetValueOrDefault(
-                                s_vsDirectTypeMap,
-                                classificationTypeName
-                            ) ?? classificationTypeName
-                    )
-            );
+        private static readonly SemanticTokensSchema s_vsTokenSchema = new(
+            ClassificationTypeNames
+                .AllTypeNames.Where(classificationTypeName =>
+                    !ClassificationTypeNames.AdditiveTypeNames.Contains(classificationTypeName)
+                )
+                .ToImmutableDictionary(
+                    classificationTypeName => classificationTypeName,
+                    classificationTypeName =>
+                        IDictionaryExtensions.GetValueOrDefault(
+                            s_vsDirectTypeMap,
+                            classificationTypeName
+                        ) ?? classificationTypeName
+                )
+        );
 
         /// <summary>
         /// A schema for mapping classification type names to 'pure' LSP token names.  This includes classification type names
         /// that are directly mapped to LSP semantic token types as well as mappings from roslyn classification type names to
         /// LSP compatible custom token type names.
         /// </summary>
-        private static readonly SemanticTokensSchema s_pureLspTokenSchema =
-            new(
-                ClassificationTypeNames
-                    .AllTypeNames.Where(classificationTypeName =>
-                        !ClassificationTypeNames.AdditiveTypeNames.Contains(classificationTypeName)
-                    )
-                    .ToImmutableDictionary(
-                        classificationTypeName => classificationTypeName,
-                        classificationTypeName =>
-                            IDictionaryExtensions.GetValueOrDefault(
-                                s_pureLspDirectTypeMap,
-                                classificationTypeName
-                            )
-                            ?? CustomLspSemanticTokenNames.ClassificationTypeNameToCustomTokenName[
-                                classificationTypeName
-                            ]
-                    )
-            );
+        private static readonly SemanticTokensSchema s_pureLspTokenSchema = new(
+            ClassificationTypeNames
+                .AllTypeNames.Where(classificationTypeName =>
+                    !ClassificationTypeNames.AdditiveTypeNames.Contains(classificationTypeName)
+                )
+                .ToImmutableDictionary(
+                    classificationTypeName => classificationTypeName,
+                    classificationTypeName =>
+                        IDictionaryExtensions.GetValueOrDefault(
+                            s_pureLspDirectTypeMap,
+                            classificationTypeName
+                        )
+                        ?? CustomLspSemanticTokenNames.ClassificationTypeNameToCustomTokenName[
+                            classificationTypeName
+                        ]
+                )
+        );
 
         /// <summary>
         /// Mapping from roslyn <see cref="ClassificationTypeNames"/> to the LSP token name.  This is either a standard

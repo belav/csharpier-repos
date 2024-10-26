@@ -234,20 +234,16 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         private static readonly BidirectionalMap<
             string,
             UnusedValuePreference
-        > s_unusedExpressionAssignmentPreferenceMap =
-            new(
-                new[]
-                {
-                    KeyValuePairUtil.Create(
-                        "discard_variable",
-                        UnusedValuePreference.DiscardVariable
-                    ),
-                    KeyValuePairUtil.Create(
-                        "unused_local_variable",
-                        UnusedValuePreference.UnusedLocalVariable
-                    ),
-                }
-            );
+        > s_unusedExpressionAssignmentPreferenceMap = new(
+            new[]
+            {
+                KeyValuePairUtil.Create("discard_variable", UnusedValuePreference.DiscardVariable),
+                KeyValuePairUtil.Create(
+                    "unused_local_variable",
+                    UnusedValuePreference.UnusedLocalVariable
+                ),
+            }
+        );
 
         internal static EditorConfigValueSerializer<
             CodeStyleOption2<UnusedValuePreference>

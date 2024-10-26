@@ -550,8 +550,10 @@ namespace System.Text.Json.Serialization.Tests
             {
                 using MemoryStream stream = new MemoryStream();
                 using (
-                    Utf8JsonWriter writer =
-                        new(stream, OptionsHelpers.GetWriterOptions(context?.Options))
+                    Utf8JsonWriter writer = new(
+                        stream,
+                        OptionsHelpers.GetWriterOptions(context?.Options)
+                    )
                 )
                 {
                     JsonSerializer.Serialize(writer, value, inputType, context);
@@ -564,8 +566,10 @@ namespace System.Text.Json.Serialization.Tests
             {
                 using MemoryStream stream = new MemoryStream();
                 using (
-                    Utf8JsonWriter writer =
-                        new(stream, OptionsHelpers.GetWriterOptions(jsonTypeInfo?.Options))
+                    Utf8JsonWriter writer = new(
+                        stream,
+                        OptionsHelpers.GetWriterOptions(jsonTypeInfo?.Options)
+                    )
                 )
                 {
                     JsonSerializer.Serialize(writer, value, jsonTypeInfo);
@@ -578,8 +582,10 @@ namespace System.Text.Json.Serialization.Tests
             {
                 using MemoryStream stream = new MemoryStream();
                 using (
-                    Utf8JsonWriter writer =
-                        new(stream, OptionsHelpers.GetWriterOptions(jsonTypeInfo?.Options))
+                    Utf8JsonWriter writer = new(
+                        stream,
+                        OptionsHelpers.GetWriterOptions(jsonTypeInfo?.Options)
+                    )
                 )
                 {
                     JsonSerializer.Serialize(writer, value, jsonTypeInfo);
@@ -593,8 +599,10 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializerOptions options = null
             )
             {
-                Utf8JsonReader reader =
-                    new(Encoding.UTF8.GetBytes(json), OptionsHelpers.GetReaderOptions(options));
+                Utf8JsonReader reader = new(
+                    Encoding.UTF8.GetBytes(json),
+                    OptionsHelpers.GetReaderOptions(options)
+                );
                 return Task.FromResult(JsonSerializer.Deserialize<T>(ref reader, options));
             }
 
@@ -604,28 +612,28 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializerOptions options = null
             )
             {
-                Utf8JsonReader reader =
-                    new(Encoding.UTF8.GetBytes(json), OptionsHelpers.GetReaderOptions(options));
+                Utf8JsonReader reader = new(
+                    Encoding.UTF8.GetBytes(json),
+                    OptionsHelpers.GetReaderOptions(options)
+                );
                 return Task.FromResult(JsonSerializer.Deserialize(ref reader, type, options));
             }
 
             public override Task<T> DeserializeWrapper<T>(string json, JsonTypeInfo<T> jsonTypeInfo)
             {
-                Utf8JsonReader reader =
-                    new(
-                        Encoding.UTF8.GetBytes(json),
-                        OptionsHelpers.GetReaderOptions(jsonTypeInfo?.Options)
-                    );
+                Utf8JsonReader reader = new(
+                    Encoding.UTF8.GetBytes(json),
+                    OptionsHelpers.GetReaderOptions(jsonTypeInfo?.Options)
+                );
                 return Task.FromResult(JsonSerializer.Deserialize(ref reader, jsonTypeInfo));
             }
 
             public override Task<object> DeserializeWrapper(string json, JsonTypeInfo jsonTypeInfo)
             {
-                Utf8JsonReader reader =
-                    new(
-                        Encoding.UTF8.GetBytes(json),
-                        OptionsHelpers.GetReaderOptions(jsonTypeInfo?.Options)
-                    );
+                Utf8JsonReader reader = new(
+                    Encoding.UTF8.GetBytes(json),
+                    OptionsHelpers.GetReaderOptions(jsonTypeInfo?.Options)
+                );
                 return Task.FromResult(JsonSerializer.Deserialize(ref reader, jsonTypeInfo));
             }
 
@@ -635,11 +643,10 @@ namespace System.Text.Json.Serialization.Tests
                 JsonSerializerContext context
             )
             {
-                Utf8JsonReader reader =
-                    new(
-                        Encoding.UTF8.GetBytes(json),
-                        OptionsHelpers.GetReaderOptions(context?.Options)
-                    );
+                Utf8JsonReader reader = new(
+                    Encoding.UTF8.GetBytes(json),
+                    OptionsHelpers.GetReaderOptions(context?.Options)
+                );
                 return Task.FromResult(JsonSerializer.Deserialize(ref reader, type, context));
             }
         }

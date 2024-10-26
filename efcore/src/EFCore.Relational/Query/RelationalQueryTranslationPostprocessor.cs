@@ -124,8 +124,9 @@ public class RelationalQueryTranslationPostprocessor : QueryTranslationPostproce
         private sealed class ScopedVisitor : ExpressionVisitor
         {
             private readonly HashSet<string> _usedAliases = new(StringComparer.OrdinalIgnoreCase);
-            private readonly HashSet<TableExpressionBase> _visitedTableExpressionBases =
-                new(ReferenceEqualityComparer.Instance);
+            private readonly HashSet<TableExpressionBase> _visitedTableExpressionBases = new(
+                ReferenceEqualityComparer.Instance
+            );
 
             public Expression EntryPoint(Expression expression)
             {

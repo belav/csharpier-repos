@@ -39,21 +39,20 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
         private const bool FoldingRangeProvider = true;
         private const bool DiagnosticProvider = false;
 
-        private static readonly LspProtocol.ClientCapabilities LspClientCapabilities =
-            new()
+        private static readonly LspProtocol.ClientCapabilities LspClientCapabilities = new()
+        {
+            TextDocument = new LspProtocol.TextDocumentClientCapabilities()
             {
-                TextDocument = new LspProtocol.TextDocumentClientCapabilities()
+                Hover = new LspProtocol.HoverSetting()
                 {
-                    Hover = new LspProtocol.HoverSetting()
-                    {
-                        ContentFormat =
-                        [
-                            LspProtocol.MarkupKind.PlainText,
-                            LspProtocol.MarkupKind.Markdown,
-                        ],
-                    },
+                    ContentFormat =
+                    [
+                        LspProtocol.MarkupKind.PlainText,
+                        LspProtocol.MarkupKind.Markdown,
+                    ],
                 },
-            };
+            },
+        };
 
         private readonly ILsifJsonWriter _lsifJsonWriter;
         private readonly ILogger _logger;

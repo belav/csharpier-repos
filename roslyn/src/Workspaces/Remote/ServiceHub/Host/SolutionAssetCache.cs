@@ -53,8 +53,10 @@ namespace Microsoft.CodeAnalysis.Remote
         /// </summary>
         private readonly TimeSpan _gcAfterTimeSpan;
 
-        private readonly ConcurrentDictionary<Checksum, Entry> _assets =
-            new(concurrencyLevel: 4, capacity: 10);
+        private readonly ConcurrentDictionary<Checksum, Entry> _assets = new(
+            concurrencyLevel: 4,
+            capacity: 10
+        );
 
         private DateTime _lastGCRun;
         private DateTime _lastActivityTime;

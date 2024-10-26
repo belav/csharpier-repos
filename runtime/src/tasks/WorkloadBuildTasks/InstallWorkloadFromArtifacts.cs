@@ -383,13 +383,12 @@ namespace Microsoft.Workload.Build.Tasks
             )
                 bandVersion = bandVersion.Replace(bandPreleaseVersion, packagePreleaseVersion);
 
-            PackageReference pkgRef =
-                new(
-                    Name: $"{name}.Manifest-{bandVersion}",
-                    Version: version,
-                    OutputDir: outputDir,
-                    relativeSourceDir: "data"
-                );
+            PackageReference pkgRef = new(
+                Name: $"{name}.Manifest-{bandVersion}",
+                Version: version,
+                OutputDir: outputDir,
+                relativeSourceDir: "data"
+            );
 
             if (
                 !PackageInstaller.Install(

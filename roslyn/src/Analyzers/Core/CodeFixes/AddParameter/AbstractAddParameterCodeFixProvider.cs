@@ -616,14 +616,13 @@ namespace Microsoft.CodeAnalysis.AddParameter
             }
         }
 
-        private static readonly SymbolDisplayFormat SimpleFormat =
-            new(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
-                    | SymbolDisplayParameterOptions.IncludeType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat SimpleFormat = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            parameterOptions: SymbolDisplayParameterOptions.IncludeParamsRefOut
+                | SymbolDisplayParameterOptions.IncludeType,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         private static TArgumentSyntax? DetermineFirstArgumentToAdd(
             SemanticModel semanticModel,

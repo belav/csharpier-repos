@@ -195,8 +195,9 @@ namespace System.Net.Http.Functional.Tests
 
         private sealed class SetOnFinalized
         {
-            public readonly TaskCompletionSource CompletedWhenFinalized =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            public readonly TaskCompletionSource CompletedWhenFinalized = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             ~SetOnFinalized() => CompletedWhenFinalized.SetResult();
         }
@@ -1769,8 +1770,9 @@ namespace System.Net.Http.Functional.Tests
                         );
                     };
 
-                    TaskCompletionSource waitingForLastRequest =
-                        new(TaskCreationOptions.RunContinuationsAsynchronously);
+                    TaskCompletionSource waitingForLastRequest = new(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
 
                     await LoopbackServerFactory.CreateClientAndServerAsync(
                         async uri =>
@@ -4558,12 +4560,15 @@ namespace System.Net.Http.Functional.Tests
 
             handler.MaxConnectionsPerServer = 2;
 
-            TaskCompletionSource connectCallbackEntered =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
-            TaskCompletionSource connectCallback1Gate =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
-            TaskCompletionSource connectCallback2Gate =
-                new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource connectCallbackEntered = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            TaskCompletionSource connectCallback1Gate = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            TaskCompletionSource connectCallback2Gate = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
             var uri = new Uri("https://example.com");
             HttpRequestMessage request1 = CreateRequest(
@@ -4694,14 +4699,13 @@ namespace System.Net.Http.Functional.Tests
 
             Task clientTask = Task.Run(async () =>
             {
-                await using NamedPipeClientStream clientStream =
-                    new(
-                        ".",
-                        pipeName: guid,
-                        PipeDirection.InOut,
-                        PipeOptions.WriteThrough | PipeOptions.Asynchronous,
-                        TokenImpersonationLevel.Anonymous
-                    );
+                await using NamedPipeClientStream clientStream = new(
+                    ".",
+                    pipeName: guid,
+                    PipeDirection.InOut,
+                    PipeOptions.WriteThrough | PipeOptions.Asynchronous,
+                    TokenImpersonationLevel.Anonymous
+                );
                 await clientStream.ConnectAsync(TestHelper.PassingTestTimeoutMilliseconds);
 
                 using HttpClientHandler handler = CreateHttpClientHandler(UseVersion);
@@ -4722,14 +4726,13 @@ namespace System.Net.Http.Functional.Tests
 
             Task serverTask = Task.Run(async () =>
             {
-                await using NamedPipeServerStream serverStream =
-                    new(
-                        pipeName: guid,
-                        PipeDirection.InOut,
-                        1,
-                        PipeTransmissionMode.Byte,
-                        PipeOptions.WriteThrough | PipeOptions.Asynchronous
-                    );
+                await using NamedPipeServerStream serverStream = new(
+                    pipeName: guid,
+                    PipeDirection.InOut,
+                    1,
+                    PipeTransmissionMode.Byte,
+                    PipeOptions.WriteThrough | PipeOptions.Asynchronous
+                );
                 await serverStream
                     .WaitForConnectionAsync()
                     .WaitAsync(TestHelper.PassingTestTimeoutMilliseconds);
@@ -5924,12 +5927,11 @@ namespace System.Net.Http.Functional.Tests
         public async Task NameResolutionError()
         {
             using HttpClient client = CreateHttpClient();
-            using HttpRequestMessage message =
-                new(HttpMethod.Get, new Uri("https://BadHost"))
-                {
-                    Version = UseVersion,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                };
+            using HttpRequestMessage message = new(HttpMethod.Get, new Uri("https://BadHost"))
+            {
+                Version = UseVersion,
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+            };
 
             HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
                 () => client.SendAsync(message)
@@ -5945,19 +5947,21 @@ namespace System.Net.Http.Functional.Tests
             {
                 return;
             }
-            using Socket notListening =
-                new(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            using Socket notListening = new(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             notListening.Bind(new IPEndPoint(IPAddress.Loopback, 0));
             int port = ((IPEndPoint)notListening.LocalEndPoint).Port;
             Uri uri = new($"http://localhost:{port}");
 
             using HttpClient client = CreateHttpClient();
-            using HttpRequestMessage message =
-                new(HttpMethod.Get, uri)
-                {
-                    Version = UseVersion,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                };
+            using HttpRequestMessage message = new(HttpMethod.Get, uri)
+            {
+                Version = UseVersion,
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+            };
 
             HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
                 () => client.SendAsync(message)
@@ -5981,12 +5985,11 @@ namespace System.Net.Http.Functional.Tests
                                 return false;
                             },
                         };
-                    using HttpRequestMessage message =
-                        new(HttpMethod.Get, uri)
-                        {
-                            Version = UseVersion,
-                            VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        };
+                    using HttpRequestMessage message = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    };
 
                     HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
                         () => client.SendAsync(message)
@@ -6031,12 +6034,11 @@ namespace System.Net.Http.Functional.Tests
                 async uri =>
                 {
                     using HttpClient client = CreateHttpClient();
-                    using HttpRequestMessage message =
-                        new(HttpMethod.Get, uri)
-                        {
-                            Version = UseVersion,
-                            VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        };
+                    using HttpRequestMessage message = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+                    };
 
                     HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
                         () => client.SendAsync(message)

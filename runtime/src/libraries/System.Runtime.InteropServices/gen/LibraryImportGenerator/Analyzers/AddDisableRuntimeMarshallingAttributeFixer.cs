@@ -30,8 +30,9 @@ namespace Microsoft.Interop.Analyzers
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            List<Diagnostic> fixedDiagnostics =
-                new(context.Diagnostics.Where(IsRequiresDiableRuntimeMarshallingDiagnostic));
+            List<Diagnostic> fixedDiagnostics = new(
+                context.Diagnostics.Where(IsRequiresDiableRuntimeMarshallingDiagnostic)
+            );
 
             if (fixedDiagnostics.Count > 0)
             {

@@ -107,23 +107,20 @@ internal static class BlockStructureOptionsStorage
             BlockStructureOptions.Default.ShowOutliningForDeclarationLevelConstructs
         );
 
-    public static readonly PerLanguageOption2<bool> ShowOutliningForCodeLevelConstructs =
-        new(
-            "dotnet_show_outlining_for_code_level_constructs",
-            BlockStructureOptions.Default.ShowOutliningForCodeLevelConstructs
-        );
+    public static readonly PerLanguageOption2<bool> ShowOutliningForCodeLevelConstructs = new(
+        "dotnet_show_outlining_for_code_level_constructs",
+        BlockStructureOptions.Default.ShowOutliningForCodeLevelConstructs
+    );
 
-    public static readonly PerLanguageOption2<bool> CollapseRegionsWhenFirstOpened =
-        new(
-            "dotnet_collapse_regions_when_first_opened",
-            BlockStructureOptions.Default.CollapseRegionsWhenFirstOpened
-        );
+    public static readonly PerLanguageOption2<bool> CollapseRegionsWhenFirstOpened = new(
+        "dotnet_collapse_regions_when_first_opened",
+        BlockStructureOptions.Default.CollapseRegionsWhenFirstOpened
+    );
 
-    public static readonly PerLanguageOption2<bool> CollapseImportsWhenFirstOpened =
-        new(
-            "dotnet_collapse_imports_when_first_opened",
-            BlockStructureOptions.Default.CollapseImportsWhenFirstOpened
-        );
+    public static readonly PerLanguageOption2<bool> CollapseImportsWhenFirstOpened = new(
+        "dotnet_collapse_imports_when_first_opened",
+        BlockStructureOptions.Default.CollapseImportsWhenFirstOpened
+    );
 
     public static readonly PerLanguageOption2<bool> CollapseSourceLinkEmbeddedDecompiledFilesWhenFirstOpened =
         new(
@@ -149,9 +146,8 @@ internal static class BlockStructureOptionsStorage
             BlockStructureOptions.Default.CollapseLocalFunctionsWhenCollapsingToDefinitions
         );
 
-    public static readonly PerLanguageOption2<int> MaximumBannerLength =
-        new(
-            "dotnet_maximum_block_banner_length",
-            BlockStructureOptions.Default.MaximumBannerLength
-        );
+    public static readonly PerLanguageOption2<int> MaximumBannerLength = new(
+        "dotnet_maximum_block_banner_length",
+        BlockStructureOptions.Default.MaximumBannerLength
+    );
 }

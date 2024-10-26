@@ -19,23 +19,22 @@ public class CustomValueProviderFactory : IValueProviderFactory
         private static readonly Dictionary<
             string,
             Func<ValueProviderFactoryContext, StringValues>
-        > Values =
-            new()
+        > Values = new()
+        {
             {
-                {
-                    "customValueProviderDisplayName",
-                    context => context.ActionContext.ActionDescriptor.DisplayName
-                },
-                { "customValueProviderIntValues", _ => new[] { null, "42", "100", null, "200" } },
-                {
-                    "customValueProviderNullableIntValues",
-                    _ => new[] { null, "42", "", "100", null, "200" }
-                },
-                {
-                    "customValueProviderStringValues",
-                    _ => new[] { null, "foo", "", "bar", null, "baz" }
-                },
-            };
+                "customValueProviderDisplayName",
+                context => context.ActionContext.ActionDescriptor.DisplayName
+            },
+            { "customValueProviderIntValues", _ => new[] { null, "42", "100", null, "200" } },
+            {
+                "customValueProviderNullableIntValues",
+                _ => new[] { null, "42", "", "100", null, "200" }
+            },
+            {
+                "customValueProviderStringValues",
+                _ => new[] { null, "foo", "", "bar", null, "baz" }
+            },
+        };
 
         private readonly ValueProviderFactoryContext _context;
 

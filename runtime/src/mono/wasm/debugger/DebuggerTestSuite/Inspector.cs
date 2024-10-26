@@ -42,24 +42,23 @@ namespace DebuggerTests
         private bool _gotRuntimeReady = false;
         private bool _gotAppReady = false;
 
-        protected static Lazy<ILoggerFactory> s_loggerFactory =
-            new(
-                () =>
-                    LoggerFactory.Create(builder =>
+        protected static Lazy<ILoggerFactory> s_loggerFactory = new(
+            () =>
+                LoggerFactory.Create(builder =>
+                {
+                    if (TestOptions.LogToConsole)
                     {
-                        if (TestOptions.LogToConsole)
-                        {
-                            builder
-                                .AddSimpleConsole(options =>
-                                {
-                                    options.SingleLine = true;
-                                    options.TimestampFormat = "[HH:mm:ss] ";
-                                })
-                                .AddFilter(null, LogLevel.Debug);
-                            // .AddFile(logFilePath, minimumLevel: LogLevel.Debug)
-                        }
-                    })
-            );
+                        builder
+                            .AddSimpleConsole(options =>
+                            {
+                                options.SingleLine = true;
+                                options.TimestampFormat = "[HH:mm:ss] ";
+                            })
+                            .AddFilter(null, LogLevel.Debug);
+                        // .AddFile(logFilePath, minimumLevel: LogLevel.Debug)
+                    }
+                })
+        );
 
         protected ILogger _logger;
         public int Id { get; init; }

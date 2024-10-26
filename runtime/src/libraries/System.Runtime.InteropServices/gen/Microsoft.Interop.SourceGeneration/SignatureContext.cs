@@ -168,14 +168,13 @@ namespace Microsoft.Interop
                 typeInfos.Add(typeInfo);
             }
 
-            TypePositionInfo retTypeInfo =
-                new(
-                    ManagedTypeInfo.CreateTypeInfoForTypeSymbol(method.ReturnType),
-                    marshallingInfoParser.ParseMarshallingInfo(
-                        method.ReturnType,
-                        method.GetReturnTypeAttributes()
-                    )
-                );
+            TypePositionInfo retTypeInfo = new(
+                ManagedTypeInfo.CreateTypeInfoForTypeSymbol(method.ReturnType),
+                marshallingInfoParser.ParseMarshallingInfo(
+                    method.ReturnType,
+                    method.GetReturnTypeAttributes()
+                )
+            );
             retTypeInfo = retTypeInfo with
             {
                 ManagedIndex = TypePositionInfo.ReturnIndex,

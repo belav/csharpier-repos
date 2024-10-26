@@ -20,8 +20,10 @@ namespace Microsoft.CodeAnalysis.Storage
         private string? _reportedExceptionMessage;
 #pragma warning restore IDE0052 // Remove unread private members
 
-        private readonly ConcurrentDictionary<Type, Exception> _set =
-            new(concurrencyLevel: 2, capacity: 10);
+        private readonly ConcurrentDictionary<Type, Exception> _set = new(
+            concurrencyLevel: 2,
+            capacity: 10
+        );
 
         internal static void LogException(Exception ex) => Instance.LogExceptionWorker(ex);
 

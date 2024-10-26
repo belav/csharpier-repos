@@ -1091,12 +1091,11 @@ namespace System.Text.Json.Serialization.Metadata
 
         internal ref struct PropertyHierarchyResolutionState(JsonSerializerOptions options)
         {
-            public Dictionary<string, (JsonPropertyInfo, int index)> AddedProperties =
-                new(
-                    options.PropertyNameCaseInsensitive
-                        ? StringComparer.OrdinalIgnoreCase
-                        : StringComparer.Ordinal
-                );
+            public Dictionary<string, (JsonPropertyInfo, int index)> AddedProperties = new(
+                options.PropertyNameCaseInsensitive
+                    ? StringComparer.OrdinalIgnoreCase
+                    : StringComparer.Ordinal
+            );
             public Dictionary<string, JsonPropertyInfo>? IgnoredProperties;
             public bool IsPropertyOrderSpecified;
         }
@@ -1265,8 +1264,10 @@ namespace System.Text.Json.Serialization.Metadata
 
             foreach (JsonParameterInfoValues parameterInfo in jsonParameters)
             {
-                ParameterLookupKey paramToCheck =
-                    new(parameterInfo.Name, parameterInfo.ParameterType);
+                ParameterLookupKey paramToCheck = new(
+                    parameterInfo.Name,
+                    parameterInfo.ParameterType
+                );
 
                 if (nameLookup.TryGetValue(paramToCheck, out ParameterLookupValue? matchingEntry))
                 {

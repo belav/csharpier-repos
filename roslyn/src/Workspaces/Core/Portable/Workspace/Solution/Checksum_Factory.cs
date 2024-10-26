@@ -20,8 +20,10 @@ namespace Microsoft.CodeAnalysis
     {
         private const int XXHash128SizeBytes = 128 / 8;
 
-        private static readonly ObjectPool<XxHash128> s_incrementalHashPool =
-            new(() => new(), size: 20);
+        private static readonly ObjectPool<XxHash128> s_incrementalHashPool = new(
+            () => new(),
+            size: 20
+        );
 
         public static Checksum Create(IEnumerable<string?> values)
         {

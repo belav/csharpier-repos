@@ -34,8 +34,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         : IWorkspaceService,
             IDisposable
     {
-        private static readonly Guid s_IID_IMetaDataImport =
-            new("7DAC8207-D3AE-4c75-9B67-92801A497D44");
+        private static readonly Guid s_IID_IMetaDataImport = new(
+            "7DAC8207-D3AE-4c75-9B67-92801A497D44"
+        );
 
         private static readonly ConditionalWeakTable<Metadata, object> s_lifetimeMap = new();
 

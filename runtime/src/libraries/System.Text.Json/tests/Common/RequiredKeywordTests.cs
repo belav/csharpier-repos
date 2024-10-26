@@ -811,8 +811,10 @@ namespace System.Text.Json.Serialization.Tests
                 nameof(ClassWithRequiredKeywordAndJsonRequiredCustomAttribute.SomeProperty)
             );
 
-            ClassWithRequiredKeywordAndJsonRequiredCustomAttribute obj =
-                new() { SomeProperty = "foo" };
+            ClassWithRequiredKeywordAndJsonRequiredCustomAttribute obj = new()
+            {
+                SomeProperty = "foo",
+            };
 
             string json = await Serializer.SerializeWrapper(obj, options);
             Assert.Equal("""{"SomeProperty":"foo"}""", json);

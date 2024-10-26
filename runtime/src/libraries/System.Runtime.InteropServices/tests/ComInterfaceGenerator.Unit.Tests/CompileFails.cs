@@ -158,8 +158,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                 .Diagnostic(GeneratorDiagnostics.ReturnTypeNotSupportedWithDetails)
                 .WithLocation(0)
                 .WithArguments(marshallerDoesNotSupportManagedToUnmanaged, "Method");
-            CustomStructMarshallingCodeSnippets customStructMarshallingCodeSnippets =
-                new(new CodeSnippets.Bidirectional(CodeSnippets.GetAttributeProvider(generator)));
+            CustomStructMarshallingCodeSnippets customStructMarshallingCodeSnippets = new(
+                new CodeSnippets.Bidirectional(CodeSnippets.GetAttributeProvider(generator))
+            );
             yield return new object[]
             {
                 ID(),
@@ -510,8 +511,9 @@ namespace ComInterfaceGenerator.Unit.Tests
         {
             // Marshallers with only support for their expected places in the signatures in
             // UnmanagedToManaged marshal modes.
-            CustomStructMarshallingCodeSnippets customStructMarshallingCodeSnippets =
-                new(new CodeSnippets.Bidirectional(CodeSnippets.GetAttributeProvider(generator)));
+            CustomStructMarshallingCodeSnippets customStructMarshallingCodeSnippets = new(
+                new CodeSnippets.Bidirectional(CodeSnippets.GetAttributeProvider(generator))
+            );
 
             yield return new[]
             {
@@ -547,12 +549,11 @@ namespace ComInterfaceGenerator.Unit.Tests
         )
         {
             _ = id;
-            VerifyComInterfaceGenerator.Test test =
-                new(referenceAncillaryInterop: false)
-                {
-                    TestCode = source,
-                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                };
+            VerifyComInterfaceGenerator.Test test = new(referenceAncillaryInterop: false)
+            {
+                TestCode = source,
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+            };
             test.ExpectedDiagnostics.AddRange(expectedDiagnostics);
             await test.RunAsync();
         }

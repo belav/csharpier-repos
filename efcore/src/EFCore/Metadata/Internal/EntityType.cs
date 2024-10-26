@@ -20,22 +20,26 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
 
     private readonly SortedSet<ForeignKey> _foreignKeys = new(ForeignKeyComparer.Instance);
 
-    private readonly SortedDictionary<string, Navigation> _navigations =
-        new(StringComparer.Ordinal);
+    private readonly SortedDictionary<string, Navigation> _navigations = new(
+        StringComparer.Ordinal
+    );
 
-    private readonly SortedDictionary<string, SkipNavigation> _skipNavigations =
-        new(StringComparer.Ordinal);
+    private readonly SortedDictionary<string, SkipNavigation> _skipNavigations = new(
+        StringComparer.Ordinal
+    );
 
-    private readonly SortedDictionary<string, ServiceProperty> _serviceProperties =
-        new(StringComparer.Ordinal);
+    private readonly SortedDictionary<string, ServiceProperty> _serviceProperties = new(
+        StringComparer.Ordinal
+    );
 
     private readonly SortedDictionary<IReadOnlyList<IReadOnlyProperty>, Index> _unnamedIndexes =
         new(PropertyListComparer.Instance);
 
     private readonly SortedDictionary<string, Index> _namedIndexes = new(StringComparer.Ordinal);
 
-    private readonly SortedDictionary<IReadOnlyList<IReadOnlyProperty>, Key> _keys =
-        new(PropertyListComparer.Instance);
+    private readonly SortedDictionary<IReadOnlyList<IReadOnlyProperty>, Key> _keys = new(
+        PropertyListComparer.Instance
+    );
 
     private readonly SortedDictionary<string, Trigger> _triggers = new(StringComparer.Ordinal);
 

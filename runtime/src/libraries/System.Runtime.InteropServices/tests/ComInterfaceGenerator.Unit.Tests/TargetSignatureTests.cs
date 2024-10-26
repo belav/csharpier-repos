@@ -407,12 +407,15 @@ namespace ComInterfaceGenerator.Unit.Tests
             Action<Compilation, IMethodSymbol> signatureValidator
         )
         {
-            VirtualMethodIndexTargetSignatureTest test =
-                new(interfaceName, methodName, signatureValidator)
-                {
-                    TestCode = source,
-                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                };
+            VirtualMethodIndexTargetSignatureTest test = new(
+                interfaceName,
+                methodName,
+                signatureValidator
+            )
+            {
+                TestCode = source,
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+            };
 
             await test.RunAsync();
         }
@@ -424,12 +427,15 @@ namespace ComInterfaceGenerator.Unit.Tests
             Action<Compilation, IMethodSymbol> signatureValidator
         )
         {
-            ComInterfaceTargetSignatureTest test =
-                new(interfaceName, methodName, signatureValidator)
-                {
-                    TestCode = source,
-                    TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
-                };
+            ComInterfaceTargetSignatureTest test = new(
+                interfaceName,
+                methodName,
+                signatureValidator
+            )
+            {
+                TestCode = source,
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
+            };
 
             await test.RunAsync();
         }

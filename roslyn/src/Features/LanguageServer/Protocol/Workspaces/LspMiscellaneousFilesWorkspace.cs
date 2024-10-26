@@ -30,22 +30,25 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     /// </summary>
     internal sealed class LspMiscellaneousFilesWorkspace : Workspace, ILspService, ILspWorkspace
     {
-        private static readonly LanguageInformation s_csharpLanguageInformation =
-            new(LanguageNames.CSharp, ".csx");
-        private static readonly LanguageInformation s_vbLanguageInformation =
-            new(LanguageNames.VisualBasic, ".vbx");
+        private static readonly LanguageInformation s_csharpLanguageInformation = new(
+            LanguageNames.CSharp,
+            ".csx"
+        );
+        private static readonly LanguageInformation s_vbLanguageInformation = new(
+            LanguageNames.VisualBasic,
+            ".vbx"
+        );
 
         private static readonly Dictionary<
             string,
             LanguageInformation
-        > s_extensionToLanguageInformation =
-            new()
-            {
-                { ".cs", s_csharpLanguageInformation },
-                { ".csx", s_csharpLanguageInformation },
-                { ".vb", s_vbLanguageInformation },
-                { ".vbx", s_vbLanguageInformation },
-            };
+        > s_extensionToLanguageInformation = new()
+        {
+            { ".cs", s_csharpLanguageInformation },
+            { ".csx", s_csharpLanguageInformation },
+            { ".vb", s_vbLanguageInformation },
+            { ".vbx", s_vbLanguageInformation },
+        };
 
         public LspMiscellaneousFilesWorkspace(HostServices hostServices)
             : base(hostServices, WorkspaceKind.MiscellaneousFiles) { }

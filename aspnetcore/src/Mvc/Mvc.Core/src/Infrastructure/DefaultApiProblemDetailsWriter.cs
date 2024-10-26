@@ -14,8 +14,11 @@ internal sealed class DefaultApiProblemDetailsWriter : IProblemDetailsWriter
     private readonly ProblemDetailsFactory _problemDetailsFactory;
     private readonly ApiBehaviorOptions _apiBehaviorOptions;
 
-    private static readonly MediaTypeCollection _problemContentTypes =
-        new() { "application/problem+json", "application/problem+xml" };
+    private static readonly MediaTypeCollection _problemContentTypes = new()
+    {
+        "application/problem+json",
+        "application/problem+xml",
+    };
 
     public DefaultApiProblemDetailsWriter(
         OutputFormatterSelector formatterSelector,

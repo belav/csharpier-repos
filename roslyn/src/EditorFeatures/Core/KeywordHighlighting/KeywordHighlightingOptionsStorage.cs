@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.KeywordHighlighting
 {
     internal static class KeywordHighlightingOptionsStorage
     {
-        public static readonly PerLanguageOption2<bool> KeywordHighlighting =
-            new("dotnet_highlight_keywords", defaultValue: true);
+        public static readonly PerLanguageOption2<bool> KeywordHighlighting = new(
+            "dotnet_highlight_keywords",
+            defaultValue: true
+        );
     }
 }

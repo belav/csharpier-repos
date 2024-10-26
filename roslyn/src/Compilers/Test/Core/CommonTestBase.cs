@@ -53,13 +53,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         public static readonly Verification Skipped = new() { Status = VerificationStatus.Skipped };
         public static readonly Verification Passes = new() { Status = VerificationStatus.Passes };
-        public static readonly Verification FailsPEVerify =
-            new() { Status = VerificationStatus.FailsPEVerify };
-        public static readonly Verification FailsILVerify =
-            new() { Status = VerificationStatus.FailsILVerify };
+        public static readonly Verification FailsPEVerify = new()
+        {
+            Status = VerificationStatus.FailsPEVerify,
+        };
+        public static readonly Verification FailsILVerify = new()
+        {
+            Status = VerificationStatus.FailsILVerify,
+        };
         public static readonly Verification Fails = new() { Status = VerificationStatus.Fails };
-        public static readonly Verification PassesOrFailFast =
-            new() { Status = VerificationStatus.PassesOrFailFast };
+        public static readonly Verification PassesOrFailFast = new()
+        {
+            Status = VerificationStatus.PassesOrFailFast,
+        };
     }
 
 #nullable disable

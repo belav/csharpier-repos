@@ -32,8 +32,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 {
     internal sealed class CommitManager : IAsyncCompletionCommitManager
     {
-        private static readonly AsyncCompletionData.CommitResult CommitResultUnhandled =
-            new(isHandled: false, AsyncCompletionData.CommitBehavior.None);
+        private static readonly AsyncCompletionData.CommitResult CommitResultUnhandled = new(
+            isHandled: false,
+            AsyncCompletionData.CommitBehavior.None
+        );
 
         private readonly RecentItemsManager _recentItemsManager;
         private readonly ITextView _textView;

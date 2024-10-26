@@ -170,8 +170,9 @@ namespace System.Speech.Recognition
                         IntPtr buffer = gc.AddrOfPinnedObject();
                         for (int i = 0; i < countOfElements; i++)
                         {
-                            IntPtr elementBuffer =
-                                new((long)buffer + elementsOffset + i * sizeofPhraseElement);
+                            IntPtr elementBuffer = new(
+                                (long)buffer + elementsOffset + i * sizeofPhraseElement
+                            );
                             SPSERIALIZEDPHRASEELEMENT element =
                                 Marshal.PtrToStructure<SPSERIALIZEDPHRASEELEMENT>(elementBuffer);
 
@@ -180,21 +181,24 @@ namespace System.Speech.Recognition
                                 pronunciation = null;
                             if (element.pszDisplayTextOffset != 0)
                             {
-                                IntPtr displayFormBuffer =
-                                    new((long)buffer + (int)element.pszDisplayTextOffset);
+                                IntPtr displayFormBuffer = new(
+                                    (long)buffer + (int)element.pszDisplayTextOffset
+                                );
                                 displayForm = Marshal.PtrToStringUni(displayFormBuffer);
                             }
                             if (element.pszLexicalFormOffset != 0)
                             {
-                                IntPtr lexicalFormBuffer =
-                                    new((long)buffer + (int)element.pszLexicalFormOffset);
+                                IntPtr lexicalFormBuffer = new(
+                                    (long)buffer + (int)element.pszLexicalFormOffset
+                                );
                                 lexicalForm = Marshal.PtrToStringUni(lexicalFormBuffer);
                             }
 
                             if (element.pszPronunciationOffset != 0)
                             {
-                                IntPtr pronunciationBuffer =
-                                    new((long)buffer + (int)element.pszPronunciationOffset);
+                                IntPtr pronunciationBuffer = new(
+                                    (long)buffer + (int)element.pszPronunciationOffset
+                                );
                                 pronunciation = Marshal.PtrToStringUni(pronunciationBuffer);
                                 if (!_hasIPAPronunciation)
                                 {
@@ -915,8 +919,9 @@ namespace System.Speech.Recognition
             {
                 if (property.SpVariantSubset >= 0)
                 {
-                    IntPtr valueBuffer =
-                        new((long)phraseBuffer + +semanticsOffset + SpVariantSubsetOffset);
+                    IntPtr valueBuffer = new(
+                        (long)phraseBuffer + +semanticsOffset + SpVariantSubsetOffset
+                    );
 #pragma warning disable 0618 // VarEnum is obsolete
                     switch ((VarEnum)property.vValue)
                     {
@@ -983,14 +988,13 @@ namespace System.Speech.Recognition
             {
                 grammar = ruleRef;
             }
-            RuleNode node =
-                new(
-                    grammar,
-                    name,
-                    rule.SREngineConfidence,
-                    rule.ulFirstElement,
-                    rule.ulCountOfElements
-                );
+            RuleNode node = new(
+                grammar,
+                name,
+                rule.SREngineConfidence,
+                rule.ulFirstElement,
+                rule.ulCountOfElements
+            );
 
             if (rule.NextSiblingOffset > 0)
             {

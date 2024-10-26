@@ -12,10 +12,14 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow.OptionsPages
 {
     internal sealed class ForceLowMemoryMode
     {
-        public static readonly Option2<bool> Enabled =
-            new("ForceLowMemoryMode_Enabled", defaultValue: false);
-        public static readonly Option2<int> SizeInMegabytes =
-            new("ForceLowMemoryMode_Enabled", defaultValue: 500);
+        public static readonly Option2<bool> Enabled = new(
+            "ForceLowMemoryMode_Enabled",
+            defaultValue: false
+        );
+        public static readonly Option2<int> SizeInMegabytes = new(
+            "ForceLowMemoryMode_Enabled",
+            defaultValue: 500
+        );
 
         private readonly IGlobalOptionService _globalOptions;
         private MemoryHogger? _hogger;

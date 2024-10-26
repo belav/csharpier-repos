@@ -11,25 +11,41 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
 {
     internal static class FormattingOperations
     {
-        private static readonly AdjustNewLinesOperation s_preserveZeroLine =
-            new(0, AdjustNewLinesOption.PreserveLines);
-        private static readonly AdjustNewLinesOperation s_preserveOneLine =
-            new(1, AdjustNewLinesOption.PreserveLines);
-        private static readonly AdjustNewLinesOperation s_forceOneLine =
-            new(1, AdjustNewLinesOption.ForceLines);
-        private static readonly AdjustNewLinesOperation s_forceIfSameLine =
-            new(1, AdjustNewLinesOption.ForceLinesIfOnSingleLine);
+        private static readonly AdjustNewLinesOperation s_preserveZeroLine = new(
+            0,
+            AdjustNewLinesOption.PreserveLines
+        );
+        private static readonly AdjustNewLinesOperation s_preserveOneLine = new(
+            1,
+            AdjustNewLinesOption.PreserveLines
+        );
+        private static readonly AdjustNewLinesOperation s_forceOneLine = new(
+            1,
+            AdjustNewLinesOption.ForceLines
+        );
+        private static readonly AdjustNewLinesOperation s_forceIfSameLine = new(
+            1,
+            AdjustNewLinesOption.ForceLinesIfOnSingleLine
+        );
 
-        private static readonly AdjustSpacesOperation s_defaultOneSpaceIfOnSingleLine =
-            new(1, AdjustSpacesOption.DefaultSpacesIfOnSingleLine);
-        private static readonly AdjustSpacesOperation s_forceOneSpaceIfOnSingleLine =
-            new(1, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
-        private static readonly AdjustSpacesOperation s_forceZeroSpaceIfOnSingleLine =
-            new(0, AdjustSpacesOption.ForceSpacesIfOnSingleLine);
+        private static readonly AdjustSpacesOperation s_defaultOneSpaceIfOnSingleLine = new(
+            1,
+            AdjustSpacesOption.DefaultSpacesIfOnSingleLine
+        );
+        private static readonly AdjustSpacesOperation s_forceOneSpaceIfOnSingleLine = new(
+            1,
+            AdjustSpacesOption.ForceSpacesIfOnSingleLine
+        );
+        private static readonly AdjustSpacesOperation s_forceZeroSpaceIfOnSingleLine = new(
+            0,
+            AdjustSpacesOption.ForceSpacesIfOnSingleLine
+        );
 
         // As the name suggests, the line force operation is performed by force spacing
-        private static readonly AdjustSpacesOperation s_forceZeroLineUsingSpaceForce =
-            new(1, AdjustSpacesOption.ForceSpaces);
+        private static readonly AdjustSpacesOperation s_forceZeroLineUsingSpaceForce = new(
+            1,
+            AdjustSpacesOption.ForceSpaces
+        );
 
         /// <summary>
         /// create anchor indentation region around start and end token

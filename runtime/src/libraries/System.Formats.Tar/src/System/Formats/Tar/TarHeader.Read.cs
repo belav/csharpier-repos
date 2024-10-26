@@ -463,39 +463,34 @@ namespace System.Formats.Tar
             }
 
             // Continue with the rest of the fields that require no special checks
-            TarHeader header =
-                new(
-                    initialFormat,
-                    name: TarHelpers.GetTrimmedUtf8String(
-                        buffer.Slice(FieldLocations.Name, FieldLengths.Name)
+            TarHeader header = new(
+                initialFormat,
+                name: TarHelpers.GetTrimmedUtf8String(
+                    buffer.Slice(FieldLocations.Name, FieldLengths.Name)
+                ),
+                mode: (int)
+                    TarHelpers.ParseOctal<uint>(
+                        buffer.Slice(FieldLocations.Mode, FieldLengths.Mode)
                     ),
-                    mode: (int)
-                        TarHelpers.ParseOctal<uint>(
-                            buffer.Slice(FieldLocations.Mode, FieldLengths.Mode)
-                        ),
-                    mTime: TarHelpers.GetDateTimeOffsetFromSecondsSinceEpoch(
-                        (long)
-                            TarHelpers.ParseOctal<ulong>(
-                                buffer.Slice(FieldLocations.MTime, FieldLengths.MTime)
-                            )
-                    ),
-                    typeFlag: (TarEntryType)buffer[FieldLocations.TypeFlag]
-                )
-                {
-                    _checksum = checksum,
-                    _size = size,
-                    _uid = (int)
-                        TarHelpers.ParseOctal<uint>(
-                            buffer.Slice(FieldLocations.Uid, FieldLengths.Uid)
-                        ),
-                    _gid = (int)
-                        TarHelpers.ParseOctal<uint>(
-                            buffer.Slice(FieldLocations.Gid, FieldLengths.Gid)
-                        ),
-                    _linkName = TarHelpers.GetTrimmedUtf8String(
-                        buffer.Slice(FieldLocations.LinkName, FieldLengths.LinkName)
-                    ),
-                };
+                mTime: TarHelpers.GetDateTimeOffsetFromSecondsSinceEpoch(
+                    (long)
+                        TarHelpers.ParseOctal<ulong>(
+                            buffer.Slice(FieldLocations.MTime, FieldLengths.MTime)
+                        )
+                ),
+                typeFlag: (TarEntryType)buffer[FieldLocations.TypeFlag]
+            )
+            {
+                _checksum = checksum,
+                _size = size,
+                _uid = (int)
+                    TarHelpers.ParseOctal<uint>(buffer.Slice(FieldLocations.Uid, FieldLengths.Uid)),
+                _gid = (int)
+                    TarHelpers.ParseOctal<uint>(buffer.Slice(FieldLocations.Gid, FieldLengths.Gid)),
+                _linkName = TarHelpers.GetTrimmedUtf8String(
+                    buffer.Slice(FieldLocations.LinkName, FieldLengths.LinkName)
+                ),
+            };
 
             if (header._format == TarEntryFormat.Unknown)
             {

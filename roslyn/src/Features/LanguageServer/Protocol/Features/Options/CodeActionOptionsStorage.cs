@@ -18,8 +18,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
 {
     internal static class CodeActionOptionsStorage
     {
-        public static readonly PerLanguageOption2<int> WrappingColumn =
-            new("FormattingOptions_WrappingColumn", CodeActionOptions.DefaultWrappingColumn);
+        public static readonly PerLanguageOption2<int> WrappingColumn = new(
+            "FormattingOptions_WrappingColumn",
+            CodeActionOptions.DefaultWrappingColumn
+        );
 
         public static CodeActionOptions GetCodeActionOptions(
             this IGlobalOptionService globalOptions,
@@ -67,16 +69,14 @@ namespace Microsoft.CodeAnalysis.CodeActions
             );
         }
 
-        public static readonly PerLanguageOption2<int> ConditionalExpressionWrappingLength =
-            new(
-                "dotnet_conditional_expression_wrapping_length",
-                CodeActionOptions.DefaultConditionalExpressionWrappingLength
-            );
+        public static readonly PerLanguageOption2<int> ConditionalExpressionWrappingLength = new(
+            "dotnet_conditional_expression_wrapping_length",
+            CodeActionOptions.DefaultConditionalExpressionWrappingLength
+        );
 
-        public static readonly PerLanguageOption2<int> CollectionExpressionWrappingLength =
-            new(
-                "dotnet_collection_expression_wrapping_length",
-                CodeActionOptions.DefaultCollectionExpressionWrappingLength
-            );
+        public static readonly PerLanguageOption2<int> CollectionExpressionWrappingLength = new(
+            "dotnet_collection_expression_wrapping_length",
+            CodeActionOptions.DefaultCollectionExpressionWrappingLength
+        );
     }
 }

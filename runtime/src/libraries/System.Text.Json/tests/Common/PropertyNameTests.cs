@@ -552,16 +552,15 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task SpecialCharacters()
         {
-            ClassWithSpecialCharacters obj =
-                new()
-                {
-                    Baseline = 1,
-                    Schema = 2,
-                    SmtpId = 3,
-                    Emojies = 4,
-                    \uA000 = 5,
-                    YiIt_2 = 6,
-                };
+            ClassWithSpecialCharacters obj = new()
+            {
+                Baseline = 1,
+                Schema = 2,
+                SmtpId = 3,
+                Emojies = 4,
+                \uA000 = 5,
+                YiIt_2 = 6,
+            };
 
             string json = await Serializer.SerializeWrapper(obj);
             Assert.Equal(

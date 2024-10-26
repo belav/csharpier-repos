@@ -32,16 +32,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
     internal sealed class CrefCompletionProvider() : AbstractCrefCompletionProvider
     {
-        private static readonly SymbolDisplayFormat QualifiedCrefFormat =
-            new(
-                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
-                propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                parameterOptions: SymbolDisplayParameterOptions.None,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
-                    | SymbolDisplayMiscellaneousOptions.ExpandValueTuple
-            );
+        private static readonly SymbolDisplayFormat QualifiedCrefFormat = new(
+            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly,
+            propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+            parameterOptions: SymbolDisplayParameterOptions.None,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                | SymbolDisplayMiscellaneousOptions.ExpandValueTuple
+        );
 
         private static readonly SymbolDisplayFormat CrefFormat =
             QualifiedCrefFormat.AddMiscellaneousOptions(

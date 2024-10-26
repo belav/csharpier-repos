@@ -27,21 +27,20 @@ public static class NavigationManagerExtensions
     private static readonly Dictionary<
         Type,
         QueryParameterFormatter<object>
-    > _queryParameterFormatters =
-        new()
-        {
-            [typeof(string)] = value => Format((string)value)!,
-            [typeof(bool)] = value => Format((bool)value),
-            [typeof(DateTime)] = value => Format((DateTime)value),
-            [typeof(DateOnly)] = value => Format((DateOnly)value),
-            [typeof(TimeOnly)] = value => Format((TimeOnly)value),
-            [typeof(decimal)] = value => Format((decimal)value),
-            [typeof(double)] = value => Format((double)value),
-            [typeof(float)] = value => Format((float)value),
-            [typeof(Guid)] = value => Format((Guid)value),
-            [typeof(int)] = value => Format((int)value),
-            [typeof(long)] = value => Format((long)value),
-        };
+    > _queryParameterFormatters = new()
+    {
+        [typeof(string)] = value => Format((string)value)!,
+        [typeof(bool)] = value => Format((bool)value),
+        [typeof(DateTime)] = value => Format((DateTime)value),
+        [typeof(DateOnly)] = value => Format((DateOnly)value),
+        [typeof(TimeOnly)] = value => Format((TimeOnly)value),
+        [typeof(decimal)] = value => Format((decimal)value),
+        [typeof(double)] = value => Format((double)value),
+        [typeof(float)] = value => Format((float)value),
+        [typeof(Guid)] = value => Format((Guid)value),
+        [typeof(int)] = value => Format((int)value),
+        [typeof(long)] = value => Format((long)value),
+    };
 
     private static string? Format(string? value) => value;
 

@@ -22,24 +22,23 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
     private const string RuntimeParameterPrefix =
         QueryCompilationContext.QueryParameterPrefix + "entity_equality_";
 
-    private static readonly List<MethodInfo> SingleResultMethodInfos =
-        new()
-        {
-            QueryableMethods.FirstWithPredicate,
-            QueryableMethods.FirstWithoutPredicate,
-            QueryableMethods.FirstOrDefaultWithPredicate,
-            QueryableMethods.FirstOrDefaultWithoutPredicate,
-            QueryableMethods.SingleWithPredicate,
-            QueryableMethods.SingleWithoutPredicate,
-            QueryableMethods.SingleOrDefaultWithPredicate,
-            QueryableMethods.SingleOrDefaultWithoutPredicate,
-            QueryableMethods.LastWithPredicate,
-            QueryableMethods.LastWithoutPredicate,
-            QueryableMethods.LastOrDefaultWithPredicate,
-            QueryableMethods.LastOrDefaultWithoutPredicate,
-            QueryableMethods.ElementAt,
-            QueryableMethods.ElementAtOrDefault,
-        };
+    private static readonly List<MethodInfo> SingleResultMethodInfos = new()
+    {
+        QueryableMethods.FirstWithPredicate,
+        QueryableMethods.FirstWithoutPredicate,
+        QueryableMethods.FirstOrDefaultWithPredicate,
+        QueryableMethods.FirstOrDefaultWithoutPredicate,
+        QueryableMethods.SingleWithPredicate,
+        QueryableMethods.SingleWithoutPredicate,
+        QueryableMethods.SingleOrDefaultWithPredicate,
+        QueryableMethods.SingleOrDefaultWithoutPredicate,
+        QueryableMethods.LastWithPredicate,
+        QueryableMethods.LastWithoutPredicate,
+        QueryableMethods.LastOrDefaultWithPredicate,
+        QueryableMethods.LastOrDefaultWithoutPredicate,
+        QueryableMethods.ElementAt,
+        QueryableMethods.ElementAtOrDefault,
+    };
 
     private static readonly MethodInfo ParameterValueExtractorMethod =
         typeof(RelationalSqlTranslatingExpressionVisitor)

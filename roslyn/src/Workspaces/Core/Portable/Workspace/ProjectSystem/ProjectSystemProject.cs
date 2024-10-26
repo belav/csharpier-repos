@@ -140,8 +140,9 @@ namespace Microsoft.CodeAnalysis.Workspaces.ProjectSystem
         /// We use the same string comparer as in the <see cref="BatchingDocumentCollection"/> used by _sourceFiles, below, as these
         /// files are added to that collection too.
         /// </remarks>
-        private readonly Dictionary<string, string?> _dynamicFilePathMaps =
-            new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, string?> _dynamicFilePathMaps = new(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         private readonly BatchingDocumentCollection _sourceFiles;
         private readonly BatchingDocumentCollection _additionalFiles;

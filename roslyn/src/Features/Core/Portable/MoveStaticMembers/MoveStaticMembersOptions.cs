@@ -27,8 +27,12 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
 
         public ImmutableArray<ISymbol> SelectedMembers { get; }
 
-        public static MoveStaticMembersOptions Cancelled =
-            new(string.Empty, string.Empty, ImmutableArray<ISymbol>.Empty, isCancelled: true);
+        public static MoveStaticMembersOptions Cancelled = new(
+            string.Empty,
+            string.Empty,
+            ImmutableArray<ISymbol>.Empty,
+            isCancelled: true
+        );
 
         public MoveStaticMembersOptions(
             INamedTypeSymbol destination,

@@ -288,11 +288,10 @@ namespace System.Resources.Tests
             bool useEnumeratorEntry
         )
         {
-            ResourceManager manager =
-                new(
-                    "System.Resources.Tests.Resources.AToZResx",
-                    typeof(ResourceManagerTests).GetTypeInfo().Assembly
-                );
+            ResourceManager manager = new(
+                "System.Resources.Tests.Resources.AToZResx",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
 
             const int Threads = 10;
             using Barrier barrier = new(Threads);

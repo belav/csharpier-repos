@@ -72,11 +72,14 @@ namespace System.Threading
 
                 LowLevelLock threadAdjustmentLock = threadPoolInstance._threadAdjustmentLock;
                 var keepaliveToken = WebWorkerEventLoop.KeepalivePush();
-                SemaphoreWaitState state =
-                    new(threadPoolInstance, threadAdjustmentLock, keepaliveToken)
-                    {
-                        SpinWait = true,
-                    };
+                SemaphoreWaitState state = new(
+                    threadPoolInstance,
+                    threadAdjustmentLock,
+                    keepaliveToken
+                )
+                {
+                    SpinWait = true,
+                };
                 // set up the callbacks for semaphore waits, tell
                 // emscripten to keep the thread alive, and return to
                 // the JS event loop.

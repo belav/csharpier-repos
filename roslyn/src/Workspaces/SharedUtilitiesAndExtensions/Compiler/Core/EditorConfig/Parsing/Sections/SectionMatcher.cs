@@ -14,12 +14,18 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         private readonly ImmutableArray<(int minValue, int maxValue)> _numberRangePairs;
         private readonly string _headerText;
 
-        private static readonly Regex s_multiFileWithDotOutside =
-            new(@"\*\.\{(.*)\}", RegexOptions.Compiled);
-        private static readonly Regex s_multiFileWithDotInside =
-            new(@"\*\{(.*)\}", RegexOptions.Compiled);
-        private static readonly Regex s_fileExtensionMatcher =
-            new(@"([^,]+)", RegexOptions.Compiled);
+        private static readonly Regex s_multiFileWithDotOutside = new(
+            @"\*\.\{(.*)\}",
+            RegexOptions.Compiled
+        );
+        private static readonly Regex s_multiFileWithDotInside = new(
+            @"\*\{(.*)\}",
+            RegexOptions.Compiled
+        );
+        private static readonly Regex s_fileExtensionMatcher = new(
+            @"([^,]+)",
+            RegexOptions.Compiled
+        );
 
         private Regex Regex { get; }
 

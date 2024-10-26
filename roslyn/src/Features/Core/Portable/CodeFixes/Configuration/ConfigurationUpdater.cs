@@ -46,8 +46,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         //              "[*.{vb,cs}]"
         //              "[*]    ; Optional comment"
         //              "[ConsoleApp/Program.cs]"
-        private static readonly Regex s_headerPattern =
-            new(@"\[(\*|[^ #;\[\]]+\.({[^ #;{}\.\[\]]+}|[^ #;{}\.\[\]]+))\]\s*([#;].*)?");
+        private static readonly Regex s_headerPattern = new(
+            @"\[(\*|[^ #;\[\]]+\.({[^ #;{}\.\[\]]+}|[^ #;{}\.\[\]]+))\]\s*([#;].*)?"
+        );
 
         // Regular expression for .editorconfig code style option entry.
         // For example:
@@ -62,8 +63,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         //  2. Option value
         //  3. Optional severity suffix in option value, i.e. ':severity' suffix
         //  4. Optional comment suffix
-        private static readonly Regex s_optionEntryPattern =
-            new($@"(.*)=([\w, ]*)(:[\w]+)?([ ]*[;#].*)?");
+        private static readonly Regex s_optionEntryPattern = new(
+            $@"(.*)=([\w, ]*)(:[\w]+)?([ ]*[;#].*)?"
+        );
 
         private readonly string? _optionNameOpt;
         private readonly string? _newOptionValueOpt;

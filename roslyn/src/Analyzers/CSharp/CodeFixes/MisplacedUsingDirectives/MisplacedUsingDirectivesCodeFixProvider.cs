@@ -35,8 +35,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
     [Shared]
     internal sealed partial class MisplacedUsingDirectivesCodeFixProvider : CodeFixProvider
     {
-        private static readonly SyntaxAnnotation s_usingPlacementCodeFixAnnotation =
-            new(nameof(s_usingPlacementCodeFixAnnotation));
+        private static readonly SyntaxAnnotation s_usingPlacementCodeFixAnnotation = new(
+            nameof(s_usingPlacementCodeFixAnnotation)
+        );
 
         /// <summary>
         /// A blanket warning that this codefix may change code so that it does not compile.

@@ -40,13 +40,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 EditAndContinueCapabilities,
             }
 
-            private static readonly StrongBox<EnumType> s_ProjectAnalysisSummary =
-                new(EnumType.ProjectAnalysisSummary);
+            private static readonly StrongBox<EnumType> s_ProjectAnalysisSummary = new(
+                EnumType.ProjectAnalysisSummary
+            );
             private static readonly StrongBox<EnumType> s_RudeEditKind = new(EnumType.RudeEditKind);
-            private static readonly StrongBox<EnumType> s_ModuleUpdateStatus =
-                new(EnumType.ModuleUpdateStatus);
-            private static readonly StrongBox<EnumType> s_EditAndContinueCapabilities =
-                new(EnumType.EditAndContinueCapabilities);
+            private static readonly StrongBox<EnumType> s_ModuleUpdateStatus = new(
+                EnumType.ModuleUpdateStatus
+            );
+            private static readonly StrongBox<EnumType> s_EditAndContinueCapabilities = new(
+                EnumType.EditAndContinueCapabilities
+            );
 
             public readonly object? Object;
             public readonly int Int32;

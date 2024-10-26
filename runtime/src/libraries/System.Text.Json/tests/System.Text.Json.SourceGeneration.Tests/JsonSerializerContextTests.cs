@@ -257,8 +257,11 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             var options = new JsonSerializerOptions { IncludeFields = true };
 
-            GreetingCardWithFields card =
-                new() { @event = "Birthday", message = @"Happy Birthday!" };
+            GreetingCardWithFields card = new()
+            {
+                @event = "Birthday",
+                message = @"Happy Birthday!",
+            };
 
             byte[] utf8Json = JsonSerializer.SerializeToUtf8Bytes(
                 card,
@@ -724,38 +727,36 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public static void CombiningContextWithCustomResolver_ReplacePoco()
         {
-            TestResolver customResolver =
-                new(
-                    (type, options) =>
+            TestResolver customResolver = new(
+                (type, options) =>
+                {
+                    if (type != typeof(TestPoco))
+                        return null;
+
+                    JsonTypeInfo<TestPoco> typeInfo = JsonTypeInfo.CreateJsonTypeInfo<TestPoco>(
+                        options
+                    );
+                    typeInfo.CreateObject = () => new TestPoco();
+                    JsonPropertyInfo property = typeInfo.CreateJsonPropertyInfo(
+                        typeof(string),
+                        "test"
+                    );
+                    property.Get = (o) =>
+                        System
+                            .Runtime.CompilerServices.Unsafe.Unbox<TestPoco>(o)
+                            .IntProperty.ToString();
+                    property.Set = (o, val) =>
                     {
-                        if (type != typeof(TestPoco))
-                            return null;
+                        System.Runtime.CompilerServices.Unsafe.Unbox<TestPoco>(o).StringProperty =
+                            (string)val;
+                        System.Runtime.CompilerServices.Unsafe.Unbox<TestPoco>(o).IntProperty =
+                            int.Parse((string)val);
+                    };
 
-                        JsonTypeInfo<TestPoco> typeInfo = JsonTypeInfo.CreateJsonTypeInfo<TestPoco>(
-                            options
-                        );
-                        typeInfo.CreateObject = () => new TestPoco();
-                        JsonPropertyInfo property = typeInfo.CreateJsonPropertyInfo(
-                            typeof(string),
-                            "test"
-                        );
-                        property.Get = (o) =>
-                            System
-                                .Runtime.CompilerServices.Unsafe.Unbox<TestPoco>(o)
-                                .IntProperty.ToString();
-                        property.Set = (o, val) =>
-                        {
-                            System
-                                .Runtime.CompilerServices.Unsafe.Unbox<TestPoco>(o)
-                                .StringProperty = (string)val;
-                            System.Runtime.CompilerServices.Unsafe.Unbox<TestPoco>(o).IntProperty =
-                                int.Parse((string)val);
-                        };
-
-                        typeInfo.Properties.Add(property);
-                        return typeInfo;
-                    }
-                );
+                    typeInfo.Properties.Add(property);
+                    return typeInfo;
+                }
+            );
 
             JsonSerializerOptions o = new();
             o.TypeInfoResolver = JsonTypeInfoResolver.Combine(
@@ -769,23 +770,22 @@ namespace System.Text.Json.SourceGeneration.Tests
             );
             Assert.Throws<NotSupportedException>(() => JsonSerializer.Serialize((byte)1, o));
 
-            ClassWithPocoListDictionaryAndNullable obj =
-                new()
+            ClassWithPocoListDictionaryAndNullable obj = new()
+            {
+                UIntProperty = 13,
+                ListOfPocoProperty = new List<TestPoco>()
                 {
-                    UIntProperty = 13,
-                    ListOfPocoProperty = new List<TestPoco>()
-                    {
-                        new TestPoco() { IntProperty = 4 },
-                        new TestPoco() { IntProperty = 5 },
-                    },
-                    DictionaryPocoValueProperty = new Dictionary<char, TestPoco>()
-                    {
-                        ['c'] = new TestPoco() { IntProperty = 6 },
-                        ['d'] = new TestPoco() { IntProperty = 7 },
-                    },
-                    NullablePocoProperty = new TestPoco() { IntProperty = 8 },
-                    PocoProperty = new TestPoco() { IntProperty = 9 },
-                };
+                    new TestPoco() { IntProperty = 4 },
+                    new TestPoco() { IntProperty = 5 },
+                },
+                DictionaryPocoValueProperty = new Dictionary<char, TestPoco>()
+                {
+                    ['c'] = new TestPoco() { IntProperty = 6 },
+                    ['d'] = new TestPoco() { IntProperty = 7 },
+                },
+                NullablePocoProperty = new TestPoco() { IntProperty = 8 },
+                PocoProperty = new TestPoco() { IntProperty = 9 },
+            };
 
             string json = JsonSerializer.Serialize(obj, o);
             Assert.Equal(
@@ -944,8 +944,10 @@ namespace System.Text.Json.SourceGeneration.Tests
             // Regression test for https://github.com/dotnet/runtime/issues/74652
             JsonSerializerOptions options = ClassWithStringValuesContext.Default.Options;
 
-            ClassWithStringValues obj =
-                new() { StringValuesProperty = new(new[] { "abc", "def" }) };
+            ClassWithStringValues obj = new()
+            {
+                StringValuesProperty = new(new[] { "abc", "def" }),
+            };
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"StringValuesProperty":["abc","def"]}""", json);
@@ -957,8 +959,9 @@ namespace System.Text.Json.SourceGeneration.Tests
             // Regression test for https://github.com/dotnet/runtime/issues/61734
             JsonSerializerOptions options = ClassWithDictionaryPropertyContext.Default.Options;
 
-            ClassWithDictionaryProperty obj =
-                new(new Dictionary<string, object?>() { ["foo"] = "bar", ["test"] = "baz" });
+            ClassWithDictionaryProperty obj = new(
+                new Dictionary<string, object?>() { ["foo"] = "bar", ["test"] = "baz" }
+            );
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"DictionaryProperty":{"foo":"bar","test":"baz"}}""", json);

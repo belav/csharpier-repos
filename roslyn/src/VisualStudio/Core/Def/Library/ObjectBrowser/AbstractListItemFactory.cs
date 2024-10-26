@@ -22,45 +22,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 {
     internal abstract class AbstractListItemFactory
     {
-        private static readonly SymbolDisplayFormat s_searchFormat =
-            new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly);
+        private static readonly SymbolDisplayFormat s_searchFormat = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameOnly
+        );
 
-        private static readonly SymbolDisplayFormat s_simplePredefinedTypeDisplay =
-            new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes);
+        private static readonly SymbolDisplayFormat s_simplePredefinedTypeDisplay = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes
+        );
 
-        private static readonly SymbolDisplayFormat s_simpleNormalTypeDisplay =
-            new(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                    | SymbolDisplayGenericsOptions.IncludeVariance,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat s_simpleNormalTypeDisplay = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                | SymbolDisplayGenericsOptions.IncludeVariance,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
-        private static readonly SymbolDisplayFormat s_simplePredefinedTypeFullName =
-            new(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
-            );
+        private static readonly SymbolDisplayFormat s_simplePredefinedTypeFullName = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+        );
 
-        private static readonly SymbolDisplayFormat s_simpleNormalTypeFullName =
-            new(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                    | SymbolDisplayGenericsOptions.IncludeVariance,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat s_simpleNormalTypeFullName = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                | SymbolDisplayGenericsOptions.IncludeVariance,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
-        private static readonly SymbolDisplayFormat s_predefinedTypeDisplay =
-            new(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
-            );
+        private static readonly SymbolDisplayFormat s_predefinedTypeDisplay = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces
+        );
 
-        private static readonly SymbolDisplayFormat s_normalTypeDisplay =
-            new(
-                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
-                    | SymbolDisplayGenericsOptions.IncludeVariance,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
-            );
+        private static readonly SymbolDisplayFormat s_normalTypeDisplay = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters
+                | SymbolDisplayGenericsOptions.IncludeVariance,
+            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+        );
 
         protected static string GetSimpleDisplayText(INamedTypeSymbol namedTypeSymbol)
         {

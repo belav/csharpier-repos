@@ -11,8 +11,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 /// </remarks>
 public class GuidToBytesConverter : ValueConverter<Guid, byte[]>
 {
-    private static readonly ConverterMappingHints DefaultHints =
-        new(size: 16, valueGeneratorFactory: (_, _) => new SequentialGuidValueGenerator());
+    private static readonly ConverterMappingHints DefaultHints = new(
+        size: 16,
+        valueGeneratorFactory: (_, _) => new SequentialGuidValueGenerator()
+    );
 
     /// <summary>
     ///     Creates a new instance of this converter.

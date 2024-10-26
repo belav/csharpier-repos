@@ -47,10 +47,14 @@ namespace Roslyn.VisualStudio.IntegrationTests
                 .ToggleConsumeFirstCompletionMode;
             public const VSConstants.VSStd97CmdID Undo = VSConstants.VSStd97CmdID.Undo;
 
-            public static readonly CommandID GoToImplementation =
-                new(Guids.RoslynGroupId, ID.RoslynCommands.GoToImplementation);
-            public static readonly CommandID RemoveAndSort =
-                new(VSConstants.CMDSETID.CSharpGroup_guid, 6419);
+            public static readonly CommandID GoToImplementation = new(
+                Guids.RoslynGroupId,
+                ID.RoslynCommands.GoToImplementation
+            );
+            public static readonly CommandID RemoveAndSort = new(
+                VSConstants.CMDSETID.CSharpGroup_guid,
+                6419
+            );
 
             // These were never added to VSConstants, but are defined in CommandHandlerServiceAdapter
             public const VSConstants.VSStd2KCmdID NextHighlightedReference =
@@ -62,23 +66,26 @@ namespace Roslyn.VisualStudio.IntegrationTests
         public static class InteractiveConsole
         {
             /// <seealso cref="InteractiveShell.CommandIds.ClearScreen"/>
-            public static readonly CommandID ClearScreen =
-                new(InteractiveShell::Guids.InteractiveCommandSetId, 264);
+            public static readonly CommandID ClearScreen = new(
+                InteractiveShell::Guids.InteractiveCommandSetId,
+                264
+            );
 
             /// <seealso cref="InteractiveShell.CommandIds.ExecuteInInteractiveWindow"/>
-            public static readonly CommandID ExecuteInInteractive =
-                new(InteractiveShell::Guids.InteractiveCommandSetId, 268);
+            public static readonly CommandID ExecuteInInteractive = new(
+                InteractiveShell::Guids.InteractiveCommandSetId,
+                268
+            );
         }
 
         public static class ProjectandSolutionContextMenus
         {
             public static class Project
             {
-                public static readonly CommandID ResetCSharpInteractiveFromProject =
-                    new(
-                        ID.InteractiveCommands.CSharpInteractiveCommandSetId,
-                        ID.InteractiveCommands.ResetInteractiveFromProject
-                    );
+                public static readonly CommandID ResetCSharpInteractiveFromProject = new(
+                    ID.InteractiveCommands.CSharpInteractiveCommandSetId,
+                    ID.InteractiveCommands.ResetInteractiveFromProject
+                );
             }
         }
 

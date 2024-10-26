@@ -1490,18 +1490,17 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             set => Assert.Fail("Setter should not be used");
         }
 
-        private SomeClass _populatedWithChildren =
-            new()
+        private SomeClass _populatedWithChildren = new()
+        {
+            StringValue = "InitialForPopulate3",
+            ReplacedChild = new() { StringValue = "ShouldBeReplaced", IntValue = 123 },
+            PopulatedChild = new()
             {
-                StringValue = "InitialForPopulate3",
-                ReplacedChild = new() { StringValue = "ShouldBeReplaced", IntValue = 123 },
-                PopulatedChild = new()
-                {
-                    StringValue = "InitialForPopulate4",
-                    IntValue = 43,
-                    ReplacedChild = new() { StringValue = "ShouldBeReplaced" },
-                },
-            };
+                StringValue = "InitialForPopulate4",
+                IntValue = 43,
+                ReplacedChild = new() { StringValue = "ShouldBeReplaced" },
+            },
+        };
 
         [JsonObjectCreationHandling(JsonObjectCreationHandling.Populate)]
         public SomeClass PopulatedPropertyWithChildren

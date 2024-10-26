@@ -17,8 +17,10 @@ namespace Microsoft.CodeAnalysis.FindUsages
     /// </summary>
     internal readonly struct DefinitionsAndReferences
     {
-        public static readonly DefinitionsAndReferences Empty =
-            new(ImmutableArray<DefinitionItem>.Empty, ImmutableArray<SourceReferenceItem>.Empty);
+        public static readonly DefinitionsAndReferences Empty = new(
+            ImmutableArray<DefinitionItem>.Empty,
+            ImmutableArray<SourceReferenceItem>.Empty
+        );
 
         /// <summary>
         /// All the definitions to show.  Note: not all definitions may have references.

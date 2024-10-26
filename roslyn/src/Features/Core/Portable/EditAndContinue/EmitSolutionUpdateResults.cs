@@ -37,17 +37,16 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             public required DiagnosticData? SyntaxError { get; init; }
         }
 
-        public static readonly EmitSolutionUpdateResults Empty =
-            new()
-            {
-                ModuleUpdates = new ModuleUpdates(
-                    ModuleUpdateStatus.None,
-                    ImmutableArray<ManagedHotReloadUpdate>.Empty
-                ),
-                Diagnostics = ImmutableArray<ProjectDiagnostics>.Empty,
-                RudeEdits = ImmutableArray<(DocumentId, ImmutableArray<RudeEditDiagnostic>)>.Empty,
-                SyntaxError = null,
-            };
+        public static readonly EmitSolutionUpdateResults Empty = new()
+        {
+            ModuleUpdates = new ModuleUpdates(
+                ModuleUpdateStatus.None,
+                ImmutableArray<ManagedHotReloadUpdate>.Empty
+            ),
+            Diagnostics = ImmutableArray<ProjectDiagnostics>.Empty,
+            RudeEdits = ImmutableArray<(DocumentId, ImmutableArray<RudeEditDiagnostic>)>.Empty,
+            SyntaxError = null,
+        };
 
         public required ModuleUpdates ModuleUpdates { get; init; }
         public required ImmutableArray<ProjectDiagnostics> Diagnostics { get; init; }

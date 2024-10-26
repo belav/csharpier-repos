@@ -865,10 +865,16 @@ namespace Microsoft.CodeAnalysis
         [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
         public class SuppressorForErrorLogTest : DiagnosticSuppressor
         {
-            public static readonly SuppressionDescriptor Descriptor1 =
-                new("SPR0001", AnalyzerForErrorLogTest.Descriptor1.Id, "SuppressorJustification1");
-            public static readonly SuppressionDescriptor Descriptor2 =
-                new("SPR0002", AnalyzerForErrorLogTest.Descriptor2.Id, "SuppressorJustification2");
+            public static readonly SuppressionDescriptor Descriptor1 = new(
+                "SPR0001",
+                AnalyzerForErrorLogTest.Descriptor1.Id,
+                "SuppressorJustification1"
+            );
+            public static readonly SuppressionDescriptor Descriptor2 = new(
+                "SPR0002",
+                AnalyzerForErrorLogTest.Descriptor2.Id,
+                "SuppressorJustification2"
+            );
 
             public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
                 ImmutableArray.Create(Descriptor1, Descriptor2);
@@ -3800,15 +3806,14 @@ namespace Microsoft.CodeAnalysis
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
         public sealed class LocalNonLocalDiagnosticsAnalyzer : DiagnosticAnalyzer
         {
-            private static readonly DiagnosticDescriptor s_descriptor =
-                new(
-                    "ID0001",
-                    "Title",
-                    "{0}",
-                    "Category",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true
-                );
+            private static readonly DiagnosticDescriptor s_descriptor = new(
+                "ID0001",
+                "Title",
+                "{0}",
+                "Category",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
             private readonly ActionKind _actionKind;
 
             public enum ActionKind
@@ -4276,15 +4281,14 @@ namespace Microsoft.CodeAnalysis
         [DiagnosticAnalyzer(LanguageNames.CSharp)]
         public sealed class AllActionsAnalyzer : DiagnosticAnalyzer
         {
-            private static readonly DiagnosticDescriptor s_descriptor =
-                new(
-                    "ID0001",
-                    "Title",
-                    "Message",
-                    "Category",
-                    DiagnosticSeverity.Warning,
-                    isEnabledByDefault: true
-                );
+            private static readonly DiagnosticDescriptor s_descriptor = new(
+                "ID0001",
+                "Title",
+                "Message",
+                "Category",
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
             private readonly bool _testSyntaxTreeAction;
             private readonly bool _testSemanticModelAction;

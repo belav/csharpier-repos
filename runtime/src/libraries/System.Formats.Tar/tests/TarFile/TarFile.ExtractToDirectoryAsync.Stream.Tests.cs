@@ -449,8 +449,12 @@ namespace System.Formats.Tar.Tests
                 testFormat,
                 "many_small_files"
             );
-            await using WrappedStream sourceUnseekableArchiveStream =
-                new(sourceStream, canRead: true, canWrite: false, canSeek: false);
+            await using WrappedStream sourceUnseekableArchiveStream = new(
+                sourceStream,
+                canRead: true,
+                canWrite: false,
+                canSeek: false
+            );
 
             await TarFile.ExtractToDirectoryAsync(
                 sourceUnseekableArchiveStream,
@@ -459,8 +463,12 @@ namespace System.Formats.Tar.Tests
             );
 
             await using MemoryStream destinationStream = new();
-            await using WrappedStream destinationUnseekableArchiveStream =
-                new(destinationStream, canRead: true, canWrite: true, canSeek: false);
+            await using WrappedStream destinationUnseekableArchiveStream = new(
+                destinationStream,
+                canRead: true,
+                canWrite: true,
+                canSeek: false
+            );
             await TarFile.CreateFromDirectoryAsync(
                 root.Path,
                 destinationUnseekableArchiveStream,

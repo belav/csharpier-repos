@@ -193,8 +193,11 @@ namespace LibraryImportGenerator.UnitTests
             params DiagnosticResult[] diagnostics
         )
         {
-            CustomMarshallerAttributeFixerTest test =
-                new() { TestCode = source, FixedCode = fixedSource };
+            CustomMarshallerAttributeFixerTest test = new()
+            {
+                TestCode = source,
+                FixedCode = fixedSource,
+            };
 
             test.ExpectedDiagnostics.AddRange(diagnostics);
 

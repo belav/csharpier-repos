@@ -11,8 +11,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
     {
         private static readonly CountLogAggregator<ActionInfo> s_countLogAggregator = new();
         private static readonly StatisticLogAggregator<ActionInfo> s_statisticLogAggregator = new();
-        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator =
-            new(25, 500);
+        private static readonly HistogramLogAggregator<ActionInfo> s_histogramLogAggregator = new(
+            25,
+            500
+        );
 
         private enum ActionInfo
         {

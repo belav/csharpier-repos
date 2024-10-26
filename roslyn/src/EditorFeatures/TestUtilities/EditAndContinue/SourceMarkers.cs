@@ -16,27 +16,24 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests;
 
 internal static class SourceMarkers
 {
-    private static readonly Regex s_tags =
-        new(
-            "[<]  (?<IsEnd>/?)  (?<Name>(AS|ER|N|TS))[:]  (?<Id>[.0-9,]+)  (?<IsStartAndEnd>/?)  [>]",
-            RegexOptions.IgnorePatternWhitespace
-        );
+    private static readonly Regex s_tags = new(
+        "[<]  (?<IsEnd>/?)  (?<Name>(AS|ER|N|TS))[:]  (?<Id>[.0-9,]+)  (?<IsStartAndEnd>/?)  [>]",
+        RegexOptions.IgnorePatternWhitespace
+    );
 
-    public static readonly Regex ExceptionRegionPattern =
-        new(
-            @"[<]ER[:]      (?<Id>(?:[0-9]+[.][0-9]+[,]?)+)   [>]
+    public static readonly Regex ExceptionRegionPattern = new(
+        @"[<]ER[:]      (?<Id>(?:[0-9]+[.][0-9]+[,]?)+)   [>]
             (?<ExceptionRegion>.*)
           [<][/]ER[:]   (\k<Id>)                          [>]",
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
-        );
+        RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+    );
 
-    private static readonly Regex s_trackingStatementPattern =
-        new(
-            @"[<]TS[:]    (?<Id>[0-9,]+) [>]
+    private static readonly Regex s_trackingStatementPattern = new(
+        @"[<]TS[:]    (?<Id>[0-9,]+) [>]
             (?<TrackingStatement>.*)
           [<][/]TS[:] (\k<Id>)       [>]",
-            RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
-        );
+        RegexOptions.IgnorePatternWhitespace | RegexOptions.Singleline
+    );
 
     internal static string Clear(string source) =>
         s_tags.Replace(source, m => new string(' ', m.Length));

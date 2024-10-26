@@ -25,12 +25,14 @@ public class Model : ConventionAnnotatable, IMutableModel, IConventionModel, IRu
     [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
     public static readonly Type DefaultPropertyBagType = typeof(Dictionary<string, object>);
 
-    private readonly SortedDictionary<string, EntityType> _entityTypes =
-        new(StringComparer.Ordinal);
+    private readonly SortedDictionary<string, EntityType> _entityTypes = new(
+        StringComparer.Ordinal
+    );
     private readonly ConcurrentDictionary<Type, PropertyInfo?> _indexerPropertyInfoMap = new();
     private readonly ConcurrentDictionary<Type, string> _clrTypeNameMap = new();
-    private readonly Dictionary<string, ConfigurationSource> _ignoredTypeNames =
-        new(StringComparer.Ordinal);
+    private readonly Dictionary<string, ConfigurationSource> _ignoredTypeNames = new(
+        StringComparer.Ordinal
+    );
     private Dictionary<string, ConfigurationSource>? _ownedTypes;
     private Dictionary<Type, ConfigurationSource>? _configuredComplexTypes;
     private SortedDictionary<string, ComplexType>? _complexTypes;
@@ -39,17 +41,13 @@ public class Model : ConventionAnnotatable, IMutableModel, IConventionModel, IRu
     private readonly Dictionary<
         Type,
         (ConfigurationSource ConfigurationSource, SortedSet<EntityType> Types)
-    > _sharedTypes =
-        new()
+    > _sharedTypes = new()
+    {
         {
-            {
-                DefaultPropertyBagType,
-                (
-                    ConfigurationSource.Explicit,
-                    new SortedSet<EntityType>(TypeBaseNameComparer.Instance)
-                )
-            },
-        };
+            DefaultPropertyBagType,
+            (ConfigurationSource.Explicit, new SortedSet<EntityType>(TypeBaseNameComparer.Instance))
+        },
+    };
 
     private ConventionDispatcher? _conventionDispatcher;
     private IList<IModelFinalizedConvention>? _modelFinalizedConventions;

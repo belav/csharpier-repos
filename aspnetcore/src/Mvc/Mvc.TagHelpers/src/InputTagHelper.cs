@@ -23,48 +23,48 @@ public class InputTagHelper : TagHelper
     private const string FormatAttributeName = "asp-format";
 
     // Mapping from datatype names and data annotation hints to values for the <input/> element's "type" attribute.
-    private static readonly Dictionary<string, string> _defaultInputTypes =
-        new(StringComparer.OrdinalIgnoreCase)
-        {
-            { "HiddenInput", InputType.Hidden.ToString().ToLowerInvariant() },
-            { "Password", InputType.Password.ToString().ToLowerInvariant() },
-            { "Text", InputType.Text.ToString().ToLowerInvariant() },
-            { "PhoneNumber", "tel" },
-            { "Url", "url" },
-            { "EmailAddress", "email" },
-            { "Date", "date" },
-            { "DateTime", "datetime-local" },
-            { "DateTime-local", "datetime-local" },
-            { nameof(DateTimeOffset), "text" },
-            { "Time", "time" },
-            { "Week", "week" },
-            { "Month", "month" },
-            { nameof(Byte), "number" },
-            { nameof(SByte), "number" },
-            { nameof(Int16), "number" },
-            { nameof(UInt16), "number" },
-            { nameof(Int32), "number" },
-            { nameof(UInt32), "number" },
-            { nameof(Int64), "number" },
-            { nameof(UInt64), "number" },
-            { nameof(Single), InputType.Text.ToString().ToLowerInvariant() },
-            { nameof(Double), InputType.Text.ToString().ToLowerInvariant() },
-            { nameof(Boolean), InputType.CheckBox.ToString().ToLowerInvariant() },
-            { nameof(Decimal), InputType.Text.ToString().ToLowerInvariant() },
-            { nameof(String), InputType.Text.ToString().ToLowerInvariant() },
-            { nameof(IFormFile), "file" },
-            { TemplateRenderer.IEnumerableOfIFormFileName, "file" },
-        };
+    private static readonly Dictionary<string, string> _defaultInputTypes = new(
+        StringComparer.OrdinalIgnoreCase
+    )
+    {
+        { "HiddenInput", InputType.Hidden.ToString().ToLowerInvariant() },
+        { "Password", InputType.Password.ToString().ToLowerInvariant() },
+        { "Text", InputType.Text.ToString().ToLowerInvariant() },
+        { "PhoneNumber", "tel" },
+        { "Url", "url" },
+        { "EmailAddress", "email" },
+        { "Date", "date" },
+        { "DateTime", "datetime-local" },
+        { "DateTime-local", "datetime-local" },
+        { nameof(DateTimeOffset), "text" },
+        { "Time", "time" },
+        { "Week", "week" },
+        { "Month", "month" },
+        { nameof(Byte), "number" },
+        { nameof(SByte), "number" },
+        { nameof(Int16), "number" },
+        { nameof(UInt16), "number" },
+        { nameof(Int32), "number" },
+        { nameof(UInt32), "number" },
+        { nameof(Int64), "number" },
+        { nameof(UInt64), "number" },
+        { nameof(Single), InputType.Text.ToString().ToLowerInvariant() },
+        { nameof(Double), InputType.Text.ToString().ToLowerInvariant() },
+        { nameof(Boolean), InputType.CheckBox.ToString().ToLowerInvariant() },
+        { nameof(Decimal), InputType.Text.ToString().ToLowerInvariant() },
+        { nameof(String), InputType.Text.ToString().ToLowerInvariant() },
+        { nameof(IFormFile), "file" },
+        { TemplateRenderer.IEnumerableOfIFormFileName, "file" },
+    };
 
     // Mapping from <input/> element's type to RFC 3339 date and time formats.
-    private static readonly Dictionary<string, string> _rfc3339Formats =
-        new(StringComparer.Ordinal)
-        {
-            { "date", "{0:yyyy-MM-dd}" },
-            { "datetime", @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}" },
-            { "datetime-local", @"{0:yyyy-MM-ddTHH\:mm\:ss.fff}" },
-            { "time", @"{0:HH\:mm\:ss.fff}" },
-        };
+    private static readonly Dictionary<string, string> _rfc3339Formats = new(StringComparer.Ordinal)
+    {
+        { "date", "{0:yyyy-MM-dd}" },
+        { "datetime", @"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}" },
+        { "datetime-local", @"{0:yyyy-MM-ddTHH\:mm\:ss.fff}" },
+        { "time", @"{0:HH\:mm\:ss.fff}" },
+    };
 
     /// <summary>
     /// Creates a new <see cref="InputTagHelper"/>.

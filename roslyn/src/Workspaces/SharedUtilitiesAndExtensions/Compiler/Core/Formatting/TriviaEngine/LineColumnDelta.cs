@@ -6,8 +6,12 @@ namespace Microsoft.CodeAnalysis.Formatting
 {
     internal readonly struct LineColumnDelta(int lines, int spaces)
     {
-        public static LineColumnDelta Default =
-            new(lines: 0, spaces: 0, whitespaceOnly: true, forceUpdate: false);
+        public static LineColumnDelta Default = new(
+            lines: 0,
+            spaces: 0,
+            whitespaceOnly: true,
+            forceUpdate: false
+        );
 
         /// <summary>
         /// relative line number between calls

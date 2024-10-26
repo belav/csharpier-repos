@@ -47,14 +47,13 @@ internal sealed class JsonLanguageDetector(
     private const string JsonParameterName = "json";
     private const string ParseMethodName = "Parse";
 
-    private static readonly HashSet<string> s_typeNamesOfInterest =
-        new()
-        {
-            "Newtonsoft.Json.Linq.JToken",
-            "Newtonsoft.Json.Linq.JObject",
-            "Newtonsoft.Json.Linq.JArray",
-            "System.Text.Json.JsonDocument",
-        };
+    private static readonly HashSet<string> s_typeNamesOfInterest = new()
+    {
+        "Newtonsoft.Json.Linq.JToken",
+        "Newtonsoft.Json.Linq.JObject",
+        "Newtonsoft.Json.Linq.JArray",
+        "System.Text.Json.JsonDocument",
+    };
 
     private readonly ISet<INamedTypeSymbol> _typesOfInterest = typesOfInterest;
 

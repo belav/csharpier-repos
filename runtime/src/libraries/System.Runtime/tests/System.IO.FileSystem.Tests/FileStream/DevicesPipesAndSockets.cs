@@ -19,13 +19,12 @@ namespace System.IO.Tests
         [MemberData(nameof(DevicePath_FileOptions_TestData))]
         public void CharacterDevice_FileStream_Write(string devicePath, FileOptions fileOptions)
         {
-            FileStreamOptions options =
-                new()
-                {
-                    Options = fileOptions,
-                    Access = FileAccess.Write,
-                    Share = FileShare.Write,
-                };
+            FileStreamOptions options = new()
+            {
+                Options = fileOptions,
+                Access = FileAccess.Write,
+                Share = FileShare.Write,
+            };
             using FileStream fs = new(devicePath, options);
             fs.Write("foo"u8);
         }
@@ -37,13 +36,12 @@ namespace System.IO.Tests
             FileOptions fileOptions
         )
         {
-            FileStreamOptions options =
-                new()
-                {
-                    Options = fileOptions,
-                    Access = FileAccess.Write,
-                    Share = FileShare.Write,
-                };
+            FileStreamOptions options = new()
+            {
+                Options = fileOptions,
+                Access = FileAccess.Write,
+                Share = FileShare.Write,
+            };
             using FileStream fs = new(devicePath, options);
             await fs.WriteAsync("foo"u8.ToArray());
         }
@@ -248,8 +246,11 @@ namespace System.IO.Tests
         >(() =>
         {
             List<string> paths = new();
-            FileStreamOptions options =
-                new() { Access = FileAccess.Write, Share = FileShare.Write };
+            FileStreamOptions options = new()
+            {
+                Access = FileAccess.Write,
+                Share = FileShare.Write,
+            };
 
             foreach (
                 string devicePath in new[] { "/dev/tty", "/dev/console", "/dev/null", "/dev/zero" }

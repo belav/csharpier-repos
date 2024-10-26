@@ -161,14 +161,13 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task It_writes_suggestions_for_partial_option_and_subcommand_aliases_under_root_command_with_an_argument()
         {
-            CliRootCommand command =
-                new("parent")
-                {
-                    new CliCommand("child"),
-                    new CliOption<bool>("--option1"),
-                    new CliOption<bool>("--option2"),
-                    new CliArgument<string>("arg"),
-                };
+            CliRootCommand command = new("parent")
+            {
+                new CliCommand("child"),
+                new CliOption<bool>("--option1"),
+                new CliOption<bool>("--option2"),
+                new CliArgument<string>("arg"),
+            };
             CliConfiguration config = new(command) { Output = new StringWriter() };
 
             await config.InvokeAsync("[suggest:3] \"opt\"");

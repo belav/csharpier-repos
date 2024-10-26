@@ -19,8 +19,9 @@ public class ProxyFactory : IProxyFactory
     private static readonly Type ProxyLazyLoaderInterface = typeof(IProxyLazyLoader);
     private static readonly Type NotifyPropertyChangedInterface = typeof(INotifyPropertyChanged);
     private static readonly Type NotifyPropertyChangingInterface = typeof(INotifyPropertyChanging);
-    private static readonly ProxyGenerationOptions GenerationOptions =
-        new(new ClonelessProxyGenerationHook());
+    private static readonly ProxyGenerationOptions GenerationOptions = new(
+        new ClonelessProxyGenerationHook()
+    );
 
     private readonly ProxyGenerator _generator = new();
 

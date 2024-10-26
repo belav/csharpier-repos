@@ -18,8 +18,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics;
 [DataContract]
 internal sealed record class IdeAnalyzerOptions
 {
-    private static readonly CodeStyleOption2<bool> s_defaultPreferSystemHashCode =
-        new(value: true, notification: NotificationOption2.Suggestion);
+    private static readonly CodeStyleOption2<bool> s_defaultPreferSystemHashCode = new(
+        value: true,
+        notification: NotificationOption2.Suggestion
+    );
 
     public static readonly IdeAnalyzerOptions CommonDefault = new();
 

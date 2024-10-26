@@ -762,8 +762,10 @@ namespace System.Text.Json.SourceGeneration.Tests
         [Fact]
         public override void SerializeObjectArray_SimpleTypes_WithCustomOptions()
         {
-            JsonSerializerOptions options =
-                new() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase };
+            JsonSerializerOptions options = new()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
             ITestContext context = new SerializationContext(options);
 
             string json = JsonSerializer.Serialize(

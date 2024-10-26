@@ -7,29 +7,44 @@ public class OperatorsData : ISetSource
 {
     public static readonly OperatorsData Instance = new();
 
-    private readonly List<Expression<Func<string>>> _stringValues =
-        new() { () => "A", () => "B", () => "AB" };
+    private readonly List<Expression<Func<string>>> _stringValues = new()
+    {
+        () => "A",
+        () => "B",
+        () => "AB",
+    };
 
     private readonly List<Expression<Func<int>>> _intValues = new() { () => 1, () => 2, () => 8 };
 
-    private readonly List<Expression<Func<int?>>> _nullableIntValues =
-        new() { () => null, () => 2, () => 8 };
+    private readonly List<Expression<Func<int?>>> _nullableIntValues = new()
+    {
+        () => null,
+        () => 2,
+        () => 8,
+    };
 
-    private readonly List<Expression<Func<long>>> _longValues =
-        new() { () => 1L, () => 2L, () => 8L };
+    private readonly List<Expression<Func<long>>> _longValues = new()
+    {
+        () => 1L,
+        () => 2L,
+        () => 8L,
+    };
 
     private readonly List<Expression<Func<bool>>> _boolValues = new() { () => true, () => false };
 
-    private readonly List<Expression<Func<bool?>>> _nullableBoolValues =
-        new() { () => null, () => true, () => false };
+    private readonly List<Expression<Func<bool?>>> _nullableBoolValues = new()
+    {
+        () => null,
+        () => true,
+        () => false,
+    };
 
-    private readonly List<Expression<Func<DateTimeOffset>>> _dateTimeOffsetValues =
-        new()
-        {
-            () => new DateTimeOffset(new DateTime(2000, 1, 1, 11, 0, 0), new TimeSpan(5, 10, 0)),
-            () => new DateTimeOffset(new DateTime(2000, 1, 1, 10, 0, 0), new TimeSpan(-8, 0, 0)),
-            () => new DateTimeOffset(new DateTime(2000, 1, 1, 9, 0, 0), new TimeSpan(13, 0, 0)),
-        };
+    private readonly List<Expression<Func<DateTimeOffset>>> _dateTimeOffsetValues = new()
+    {
+        () => new DateTimeOffset(new DateTime(2000, 1, 1, 11, 0, 0), new TimeSpan(5, 10, 0)),
+        () => new DateTimeOffset(new DateTime(2000, 1, 1, 10, 0, 0), new TimeSpan(-8, 0, 0)),
+        () => new DateTimeOffset(new DateTime(2000, 1, 1, 9, 0, 0), new TimeSpan(13, 0, 0)),
+    };
 
     public IReadOnlyList<OperatorEntityString> OperatorEntitiesString { get; }
     public IReadOnlyList<OperatorEntityInt> OperatorEntitiesInt { get; }

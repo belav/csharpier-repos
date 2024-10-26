@@ -279,8 +279,10 @@ public class ValueConverterTest
         }
     }
 
-    private static readonly ValueConverter<int, string> _intToString =
-        new(v => v.ToString(), v => ConvertToInt(v));
+    private static readonly ValueConverter<int, string> _intToString = new(
+        v => v.ToString(),
+        v => ConvertToInt(v)
+    );
 
     private static int ConvertToInt(string v) => int.TryParse(v, out var result) ? result : 0;
 

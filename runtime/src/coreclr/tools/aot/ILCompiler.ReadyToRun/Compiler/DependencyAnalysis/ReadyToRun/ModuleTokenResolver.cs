@@ -185,8 +185,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             MetadataReader metadataReader = token.MetadataReader;
             TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(this, token.Module);
-            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder =
-                new(rentedProvider, metadataReader, this);
+            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder = new(
+                rentedProvider,
+                metadataReader,
+                this
+            );
 
             BlobReader signature = metadataReader.GetBlobReader(signatureHandle);
 
@@ -212,8 +215,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             MetadataReader metadataReader = token.MetadataReader;
             TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(this, token.Module);
-            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder =
-                new(rentedProvider, metadataReader, this);
+            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder = new(
+                rentedProvider,
+                metadataReader,
+                this
+            );
             BlobReader signature = metadataReader.GetBlobReader(signatureHandle);
 
             SignatureHeader header = signature.ReadSignatureHeader();
@@ -258,8 +264,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             MetadataReader metadataReader = token.MetadataReader;
             TokenResolverProvider rentedProvider = TokenResolverProvider.Rent(this, token.Module);
-            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder =
-                new(rentedProvider, metadataReader, this);
+            SignatureDecoder<DummyTypeInfo, ModuleTokenResolver> sigDecoder = new(
+                rentedProvider,
+                metadataReader,
+                this
+            );
 
             BlobReader signature = metadataReader.GetBlobReader(signatureHandle);
 

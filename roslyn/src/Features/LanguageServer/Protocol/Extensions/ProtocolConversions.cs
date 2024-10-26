@@ -39,8 +39,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         private const string InlineCodeFence = "`";
 
 #pragma warning disable RS0030 // Do not use banned APIs
-        private static readonly Uri s_sourceGeneratedDocumentBaseUri =
-            new(SourceGeneratedDocumentBaseUri, UriKind.Absolute);
+        private static readonly Uri s_sourceGeneratedDocumentBaseUri = new(
+            SourceGeneratedDocumentBaseUri,
+            UriKind.Absolute
+        );
 #pragma warning restore
 
         private static readonly char[] s_dirSeparators =
@@ -49,8 +51,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             PathUtilities.AltDirectorySeparatorChar,
         ];
 
-        private static readonly Regex s_markdownEscapeRegex =
-            new(@"([\\`\*_\{\}\[\]\(\)#+\-\.!])", RegexOptions.Compiled);
+        private static readonly Regex s_markdownEscapeRegex = new(
+            @"([\\`\*_\{\}\[\]\(\)#+\-\.!])",
+            RegexOptions.Compiled
+        );
 
         // NOTE: While the spec allows it, don't use Function and Method, as both VS and VS Code display them the same
         // way which can confuse users
