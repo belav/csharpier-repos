@@ -35,6 +35,8 @@
 /aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/WebApi-CSharp/Controllers/WeatherForecastController.cs
 /aspnetcore/src/ProjectTemplates/Web.ProjectTemplates/content/WebApi-CSharp/Program.MinimalAPIs.OrgOrIndividualB2CAuth.cs
 
+/aspnetcore/src/Components/Shared/src/WebRootComponentManager.cs
+
 # this may be real? the file is massive
 # /roslyn/src/Compilers/CSharp/Test/Emit/CodeGen/CodeGenDynamicTests.cs
 
